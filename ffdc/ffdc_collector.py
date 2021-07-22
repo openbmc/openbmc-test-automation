@@ -185,67 +185,37 @@ class FFDCCollector:
 
         self.logger.info("\n\t---- Start communicating with %s ----" % self.hostname)
         self.start_time = time.time()
-        working_protocol_list = []
-        if self.target_is_pingable():
-            working_protocol_list.append("SHELL")
 
-            for machine_type in self.ffdc_actions.keys():
-                if self.target_type != machine_type:
-                    continue
+        # Find the list of target and protocol supported.
+        check_protocol_list = []
+        config_dict = self.ffdc_actions
 
-                for k, v in self.ffdc_actions[machine_type].items():
+        for target_type in config_dict.keys():
+            if self.target_type != target_type:
+                continue
 
-                    # If config protocol is SSH or SCP
-                    if (self.ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'SSH'
-                       or self.ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'SCP') \
-                       and (self.remote_protocol == 'ALL'
-                            or self.remote_protocol == 'SSH' or self.remote_protocol == 'SCP'):
+            for k, v in config_dict[target_type].items():
+                if config_dict[target_type][k]['PROTOCOL'][0] not in check_protocol_list:
+                    check_protocol_list.append(config_dict[target_type][k]['PROTOCOL'][0])
 
-                        # Only check SSH/SCP once for both protocols
-                        if 'SSH' not in working_protocol_list \
-                           and 'SCP' not in working_protocol_list:
-                            if self.ssh_to_target_system():
-                                working_protocol_list.append("SSH")
-                                working_protocol_list.append("SCP")
+        self.logger.info("\n\t %s protocol type: %s" % (self.target_type, check_protocol_list))
 
-                    # If config protocol is TELNET
-                    if (self.ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'TELNET') \
-                       and (self.remote_protocol == 'ALL' or self.remote_protocol == 'TELNET'):
-                        if self.telnet_to_target_system():
-                            working_protocol_list.append("TELNET")
+        verified_working_protocol = self.verify_protocol(check_protocol_list)
 
-                    # If config protocol is REDFISH
-                    if (self.ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'REDFISH') \
-                       and (self.remote_protocol == 'ALL' or self.remote_protocol == 'REDFISH'):
-                        if self.verify_redfish():
-                            working_protocol_list.append("REDFISH")
-                            self.logger.info("\n\t[Check] %s Redfish Service.\t\t [OK]" % self.hostname)
-                        else:
-                            self.logger.info(
-                                "\n\t[Check] %s Redfish Service.\t\t [NOT AVAILABLE]" % self.hostname)
-
-                    # If config protocol is IPMI
-                    if (self.ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'IPMI') \
-                       and (self.remote_protocol == 'ALL' or self.remote_protocol == 'IPMI'):
-                        if self.verify_ipmi():
-                            working_protocol_list.append("IPMI")
-                            self.logger.info("\n\t[Check] %s IPMI LAN Service.\t\t [OK]" % self.hostname)
-                        else:
-                            self.logger.info(
-                                "\n\t[Check] %s IPMI LAN Service.\t\t [NOT AVAILABLE]" % self.hostname)
-
-            # Verify top level directory exists for storage
-            self.validate_local_store(self.location)
+        if verified_working_protocol:
             self.logger.info("\n\t---- Completed protocol pre-requisite check ----\n")
 
-            if ((self.remote_protocol not in working_protocol_list) and (self.remote_protocol != 'ALL')):
-                self.logger.info("\n\tWorking protocol list: %s" % working_protocol_list)
-                self.logger.error(
-                    '\tERROR: Requested protocol %s is not in working protocol list.\n'
-                    % self.remote_protocol)
-                sys.exit(-1)
-            else:
-                self.generate_ffdc(working_protocol_list)
+        # Verify top level directory exists for storage
+        self.validate_local_store(self.location)
+
+        if ((self.remote_protocol not in verified_working_protocol) and (self.remote_protocol != 'ALL')):
+            self.logger.info("\n\tWorking protocol list: %s" % verified_working_protocol)
+            self.logger.error(
+                '\tERROR: Requested protocol %s is not in working protocol list.\n'
+                % self.remote_protocol)
+            sys.exit(-1)
+        else:
+            self.generate_ffdc(verified_working_protocol)
 
     def ssh_to_target_system(self):
         r"""
@@ -294,49 +264,51 @@ class FFDCCollector:
         self.logger.info("\n\t---- Executing commands on " + self.hostname + " ----")
         self.logger.info("\n\tWorking protocol list: %s" % working_protocol_list)
 
-        ffdc_actions = self.ffdc_actions
-
-        for machine_type in ffdc_actions.keys():
-            if self.target_type != machine_type:
+        config_dict = self.ffdc_actions
+        for target_type in config_dict.keys():
+            if self.target_type != target_type:
                 continue
 
             self.logger.info("\n\tFFDC Path: %s " % self.ffdc_dir_path)
-            self.logger.info("\tSystem Type: %s" % machine_type)
-            for k, v in ffdc_actions[machine_type].items():
+            self.logger.info("\tSystem Type: %s" % target_type)
+            for k, v in config_dict[target_type].items():
 
-                if self.remote_protocol != ffdc_actions[machine_type][k]['PROTOCOL'][0] \
+                if self.remote_protocol not in working_protocol_list \
                         and self.remote_protocol != 'ALL':
                     continue
 
-                if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'SSH' \
-                   or ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'SCP':
-                    if 'SSH' in working_protocol_list \
-                       or 'SCP' in working_protocol_list:
-                        self.protocol_ssh(ffdc_actions, machine_type, k)
+                protocol = config_dict[target_type][k]['PROTOCOL'][0]
+
+                if protocol not in working_protocol_list:
+                    continue
+
+                if protocol == 'SSH' or protocol == 'SCP':
+                    if 'SSH' in working_protocol_list or 'SCP' in working_protocol_list:
+                        self.protocol_ssh(target_type, k)
                     else:
                         self.logger.error("\n\tERROR: SSH or SCP is not available for %s." % self.hostname)
 
-                if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'TELNET':
-                    if 'TELNET' in working_protocol_list:
-                        self.protocol_telnet(ffdc_actions, machine_type, k)
+                if protocol == 'TELNET':
+                    if protocol in working_protocol_list:
+                        self.protocol_telnet(target_type, k)
                     else:
                         self.logger.error("\n\tERROR: TELNET is not available for %s." % self.hostname)
 
-                if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'REDFISH':
-                    if 'REDFISH' in working_protocol_list:
-                        self.protocol_redfish(ffdc_actions, machine_type, k)
+                if protocol == 'REDFISH':
+                    if protocol in working_protocol_list:
+                        self.protocol_redfish(target_type, k)
                     else:
                         self.logger.error("\n\tERROR: REDFISH is not available for %s." % self.hostname)
 
-                if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'IPMI':
-                    if 'IPMI' in working_protocol_list:
-                        self.protocol_ipmi(ffdc_actions, machine_type, k)
+                if protocol == 'IPMI':
+                    if protocol in working_protocol_list:
+                        self.protocol_ipmi(target_type, k)
                     else:
                         self.logger.error("\n\tERROR: IPMI is not available for %s." % self.hostname)
 
-                if ffdc_actions[machine_type][k]['PROTOCOL'][0] == 'SHELL':
-                    if 'SHELL' in working_protocol_list:
-                        self.protocol_shell_script(ffdc_actions, machine_type, k)
+                if protocol == 'SHELL':
+                    if protocol in working_protocol_list:
+                        self.protocol_shell_script(target_type, k)
                     else:
                         self.logger.error("\n\tERROR: can't execute SHELL script")
 
@@ -348,43 +320,39 @@ class FFDCCollector:
             self.telnet_remoteclient.tn_remoteclient_disconnect()
 
     def protocol_ssh(self,
-                     ffdc_actions,
-                     machine_type,
+                     target_type,
                      sub_type):
         r"""
         Perform actions using SSH and SCP protocols.
 
         Description of argument(s):
-        ffdc_actions        List of actions from ffdc_config.yaml.
-        machine_type        OS Type of remote host.
+        target_type         OS Type of remote host.
         sub_type            Group type of commands.
         """
 
         if sub_type == 'DUMP_LOGS':
-            self.group_copy(ffdc_actions[machine_type][sub_type])
+            self.group_copy(self.ffdc_actions[target_type][sub_type])
         else:
-            self.collect_and_copy_ffdc(ffdc_actions[machine_type][sub_type])
+            self.collect_and_copy_ffdc(self.ffdc_actions[target_type][sub_type])
 
     def protocol_telnet(self,
-                        ffdc_actions,
-                        machine_type,
+                        target_type,
                         sub_type):
         r"""
         Perform actions using telnet protocol.
         Description of argument(s):
-        ffdc_actions        List of actions from ffdc_config.yaml.
-        machine_type        OS Type of remote host.
+        target_type          OS Type of remote host.
         """
         self.logger.info("\n\t[Run] Executing commands on %s using %s" % (self.hostname, 'TELNET'))
         telnet_files_saved = []
         progress_counter = 0
-        list_of_commands = ffdc_actions[machine_type][sub_type]['COMMANDS']
+        list_of_commands = self.ffdc_actions[target_type][sub_type]['COMMANDS']
         for index, each_cmd in enumerate(list_of_commands, start=0):
             command_txt, command_timeout = self.unpack_command(each_cmd)
             result = self.telnet_remoteclient.execute_command(command_txt, command_timeout)
             if result:
                 try:
-                    targ_file = ffdc_actions[machine_type][sub_type]['FILES'][index]
+                    targ_file = self.ffdc_actions[target_type][sub_type]['FILES'][index]
                 except IndexError:
                     targ_file = command_txt
                     self.logger.warning(
@@ -405,22 +373,20 @@ class FFDCCollector:
             self.logger.info("\n\t\tSuccessfully save file " + file + ".")
 
     def protocol_redfish(self,
-                         ffdc_actions,
-                         machine_type,
+                         target_type,
                          sub_type):
         r"""
         Perform actions using Redfish protocol.
 
         Description of argument(s):
-        ffdc_actions        List of actions from ffdc_config.yaml.
-        machine_type        OS Type of remote host.
+        target_type         OS Type of remote host.
         sub_type            Group type of commands.
         """
 
         self.logger.info("\n\t[Run] Executing commands to %s using %s" % (self.hostname, 'REDFISH'))
         redfish_files_saved = []
         progress_counter = 0
-        list_of_URL = ffdc_actions[machine_type][sub_type]['URL']
+        list_of_URL = self.ffdc_actions[target_type][sub_type]['URL']
         for index, each_url in enumerate(list_of_URL, start=0):
             redfish_parm = '-u ' + self.username + ' -p ' + self.password + ' -r ' \
                            + self.hostname + ' -S Always raw GET ' + each_url
@@ -428,7 +394,7 @@ class FFDCCollector:
             result = self.run_redfishtool(redfish_parm)
             if result:
                 try:
-                    targ_file = self.get_file_list(ffdc_actions[machine_type][sub_type])[index]
+                    targ_file = self.get_file_list(self.ffdc_actions[target_type][sub_type])[index]
                 except IndexError:
                     targ_file = each_url.split('/')[-1]
                     self.logger.warning(
@@ -454,22 +420,20 @@ class FFDCCollector:
             self.logger.info("\n\t\tSuccessfully save file " + file + ".")
 
     def protocol_ipmi(self,
-                      ffdc_actions,
-                      machine_type,
+                      target_type,
                       sub_type):
         r"""
         Perform actions using ipmitool over LAN protocol.
 
         Description of argument(s):
-        ffdc_actions        List of actions from ffdc_config.yaml.
-        machine_type        OS Type of remote host.
+        target_type         OS Type of remote host.
         sub_type            Group type of commands.
         """
 
         self.logger.info("\n\t[Run] Executing commands to %s using %s" % (self.hostname, 'IPMI'))
         ipmi_files_saved = []
         progress_counter = 0
-        list_of_cmd = self.get_command_list(ffdc_actions[machine_type][sub_type])
+        list_of_cmd = self.get_command_list(self.ffdc_actions[target_type][sub_type])
         for index, each_cmd in enumerate(list_of_cmd, start=0):
             ipmi_parm = '-U ' + self.username + ' -P ' + self.password + ' -H ' \
                 + self.hostname + ' -I lanplus ' + each_cmd
@@ -477,7 +441,7 @@ class FFDCCollector:
             result = self.run_ipmitool(ipmi_parm)
             if result:
                 try:
-                    targ_file = self.get_file_list(ffdc_actions[machine_type][sub_type])[index]
+                    targ_file = self.get_file_list(self.ffdc_actions[target_type][sub_type])[index]
                 except IndexError:
                     targ_file = each_cmd.split('/')[-1]
                     self.logger.warning("\n\t[WARN] Missing filename to store data from IPMI %s." % each_cmd)
@@ -502,18 +466,18 @@ class FFDCCollector:
             self.logger.info("\n\t\tSuccessfully save file " + file + ".")
 
     def collect_and_copy_ffdc(self,
-                              ffdc_actions_for_machine_type,
+                              ffdc_actions_for_target_type,
                               form_filename=False):
         r"""
         Send commands in ffdc_config file to targeted system.
 
         Description of argument(s):
-        ffdc_actions_for_machine_type    commands and files for the selected remote host type.
+        ffdc_actions_for_target_type     commands and files for the selected remote host type.
         form_filename                    if true, pre-pend self.target_type to filename
         """
 
         # Executing commands, if any
-        self.ssh_execute_ffdc_commands(ffdc_actions_for_machine_type,
+        self.ssh_execute_ffdc_commands(ffdc_actions_for_target_type,
                                        form_filename)
 
         # Copying files
@@ -521,35 +485,35 @@ class FFDCCollector:
             self.logger.info("\n\n\tCopying FFDC files from remote system %s.\n" % self.hostname)
 
             # Retrieving files from target system
-            list_of_files = self.get_file_list(ffdc_actions_for_machine_type)
+            list_of_files = self.get_file_list(ffdc_actions_for_target_type)
             self.scp_ffdc(self.ffdc_dir_path, self.ffdc_prefix, form_filename, list_of_files)
         else:
             self.logger.info("\n\n\tSkip copying FFDC files from remote system %s.\n" % self.hostname)
 
     def get_command_list(self,
-                         ffdc_actions_for_machine_type):
+                         ffdc_actions_for_target_type):
         r"""
         Fetch list of commands from configuration file
 
         Description of argument(s):
-        ffdc_actions_for_machine_type    commands and files for the selected remote host type.
+        ffdc_actions_for_target_type    commands and files for the selected remote host type.
         """
         try:
-            list_of_commands = ffdc_actions_for_machine_type['COMMANDS']
+            list_of_commands = ffdc_actions_for_target_type['COMMANDS']
         except KeyError:
             list_of_commands = []
         return list_of_commands
 
     def get_file_list(self,
-                      ffdc_actions_for_machine_type):
+                      ffdc_actions_for_target_type):
         r"""
         Fetch list of commands from configuration file
 
         Description of argument(s):
-        ffdc_actions_for_machine_type    commands and files for the selected remote host type.
+        ffdc_actions_for_target_type    commands and files for the selected remote host type.
         """
         try:
-            list_of_files = ffdc_actions_for_machine_type['FILES']
+            list_of_files = ffdc_actions_for_target_type['FILES']
         except KeyError:
             list_of_files = []
         return list_of_files
@@ -573,19 +537,19 @@ class FFDCCollector:
         return command_txt, command_timeout
 
     def ssh_execute_ffdc_commands(self,
-                                  ffdc_actions_for_machine_type,
+                                  ffdc_actions_for_target_type,
                                   form_filename=False):
         r"""
         Send commands in ffdc_config file to targeted system.
 
         Description of argument(s):
-        ffdc_actions_for_machine_type    commands and files for the selected remote host type.
+        ffdc_actions_for_target_type    commands and files for the selected remote host type.
         form_filename                    if true, pre-pend self.target_type to filename
         """
         self.logger.info("\n\t[Run] Executing commands on %s using %s"
-                         % (self.hostname, ffdc_actions_for_machine_type['PROTOCOL'][0]))
+                         % (self.hostname, ffdc_actions_for_target_type['PROTOCOL'][0]))
 
-        list_of_commands = self.get_command_list(ffdc_actions_for_machine_type)
+        list_of_commands = self.get_command_list(ffdc_actions_for_target_type)
         # If command list is empty, returns
         if not list_of_commands:
             return
@@ -611,18 +575,18 @@ class FFDCCollector:
         self.logger.info("\n\t[Run] Commands execution completed.\t\t [OK]")
 
     def group_copy(self,
-                   ffdc_actions_for_machine_type):
+                   ffdc_actions_for_target_type):
         r"""
         scp group of files (wild card) from remote host.
 
         Description of argument(s):
-        ffdc_actions_for_machine_type    commands and files for the selected remote host type.
+        fdc_actions_for_target_type    commands and files for the selected remote host type.
         """
 
         if self.ssh_remoteclient.scpclient:
             self.logger.info("\n\tCopying DUMP files from remote system %s.\n" % self.hostname)
 
-            list_of_commands = self.get_command_list(ffdc_actions_for_machine_type)
+            list_of_commands = self.get_command_list(ffdc_actions_for_target_type)
             # If command list is empty, returns
             if not list_of_commands:
                 return
@@ -831,28 +795,26 @@ class FFDCCollector:
         return result.stdout
 
     def protocol_shell_script(self,
-                              ffdc_actions,
-                              machine_type,
+                              target_type,
                               sub_type):
         r"""
         Perform SHELL script execution locally.
 
         Description of argument(s):
-        ffdc_actions        List of actions from ffdc_config.yaml.
-        machine_type        OS Type of remote host.
+        target_type         OS Type of remote host.
         sub_type            Group type of commands.
         """
 
         self.logger.info("\n\t[Run] Executing commands to %s using %s" % (self.hostname, 'SHELL'))
         shell_files_saved = []
         progress_counter = 0
-        list_of_cmd = self.get_command_list(ffdc_actions[machine_type][sub_type])
+        list_of_cmd = self.get_command_list(self.ffdc_actions[target_type][sub_type])
         for index, each_cmd in enumerate(list_of_cmd, start=0):
 
             result = self.run_shell_script(each_cmd)
             if result:
                 try:
-                    targ_file = self.get_file_list(ffdc_actions[machine_type][sub_type])[index]
+                    targ_file = self.get_file_list(self.ffdc_actions[target_type][sub_type])[index]
                 except IndexError:
                     targ_file = each_cmd.split('/')[-1]
                     self.logger.warning("\n\t[WARN] Missing filename to store data %s." % each_cmd)
@@ -875,3 +837,46 @@ class FFDCCollector:
 
         for file in shell_files_saved:
             self.logger.info("\n\t\tSuccessfully save file " + file + ".")
+
+    def verify_protocol(self, protocol_list):
+        r"""
+        Perform protocol working check.
+
+        Description of argument(s):
+        protocol_list        List of protocol.
+        """
+
+        tmp_list = []
+        if self.target_is_pingable():
+            tmp_list.append("SHELL")
+
+        for protocol in protocol_list:
+            if self.remote_protocol != 'ALL':
+                if self.remote_protocol != protocol:
+                    continue
+
+            # Only check SSH/SCP once for both protocols
+            if protocol == 'SSH' or protocol == 'SCP' and protocol not in tmp_list:
+                if self.ssh_to_target_system():
+                    tmp_list.append('SSH')
+                    tmp_list.append('SCP')
+
+            if protocol == 'TELNET':
+                if self.telnet_to_target_system():
+                    tmp_list.append(protocol)
+
+            if protocol == 'REDFISH':
+                if self.verify_redfish():
+                    tmp_list.append(protocol)
+                    self.logger.info("\n\t[Check] %s Redfish Service.\t\t [OK]" % self.hostname)
+                else:
+                    self.logger.info("\n\t[Check] %s Redfish Service.\t\t [NOT AVAILABLE]" % self.hostname)
+
+            if protocol == 'IPMI':
+                if self.verify_ipmi():
+                    tmp_list.append(protocol)
+                    self.logger.info("\n\t[Check] %s IPMI LAN Service.\t\t [OK]" % self.hostname)
+                else:
+                    self.logger.info("\n\t[Check] %s IPMI LAN Service.\t\t [NOT AVAILABLE]" % self.hostname)
+
+        return tmp_list
