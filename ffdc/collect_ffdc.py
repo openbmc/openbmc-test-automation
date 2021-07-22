@@ -22,27 +22,26 @@ from ffdc_collector import FFDCCollector
 
 
 @click.command(context_settings=dict(help_option_names=['-h', '--help']))
-@click.option('-r', '--remote', envvar='OPENBMC_HOST',
-              help="Name/IP of the remote (targeting) host. [default: OPENBMC_HOST]")
-@click.option('-u', '--username', envvar='OPENBMC_USERNAME',
-              help="User on the remote host with access to FFDC files.[default: OPENBMC_USERNAME]")
-@click.option('-p', '--password', envvar='OPENBMC_PASSWORD',
-              help="Password for user on remote host. [default: OPENBMC_PASSWORD]")
-@click.option('-c', '--ffdc_config', default=abs_path + "/ffdc_config.yaml",
-              show_default=True, help="YAML Configuration file listing commands and files for FFDC.")
+@click.option('-r', '--remote',
+              help="Hostname/IP of the remote host")
+@click.option('-u', '--username',
+              help="Username of the remote host.")
+@click.option('-p', '--password',
+              help="Password of the remote host.")
+@click.option('-c', '--config', default=abs_path + "/ffdc_config.yaml",
+              show_default=True, help="YAML Configuration file for log collection.")
 @click.option('-l', '--location', default="/tmp",
-              show_default=True, help="Location to store collected FFDC data")
-@click.option('-t', '--remote_type',
+              show_default=True, help="Location to save logs")
+@click.option('-t', '--type',
               help="OS type of the remote (targeting) host. OPENBMC, RHEL, UBUNTU, SLES, AIX")
-@click.option('-rp', '--remote_protocol', default="ALL",
+@click.option('-rp', '--protocol', default="ALL",
               show_default=True,
-              help="Select protocol (SSH, SCP, REDFISH) to communicate with remote host. \
-                    Default: all available.")
+              help="Select protocol to communicate with remote host.")
 @click.option('-e', '--env_vars', show_default=True,
-              help="Environment variables as dictionary e.g: {'var':value}")
+              help="Environment variables e.g: {'var':value}")
 @click.option('--log_level', default="INFO",
               show_default=True,
-              help="python logging level (CRITICAL, ERROR, WARNING, INFO, DEBUG)")
+              help="Log level (CRITICAL, ERROR, WARNING, INFO, DEBUG)")
 def cli_ffdc(remote, username, password,
              ffdc_config, location, remote_type,
              remote_protocol, env_vars, log_level):
