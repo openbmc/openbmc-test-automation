@@ -49,14 +49,14 @@ class TelnetRemoteclient:
                             timeout=self.read_timeout)
                     if n == 0 or n == 1:
                         logging.error(
-                            "\n>>>>>\tERROR: Telnet Authentication Failed.  Check userid and password.\n\n")
+                            "\n\tERROR: Telnet Authentication Failed.  Check userid and password.\n\n")
                         is_telnet = False
                     else:
                         # login successful
                         self.fifo = deque()
                 else:
                     # Anything else, telnet server is not running
-                    logging.error("\n>>>>>\tERROR: Telnet Connection Refused.\n\n")
+                    logging.error("\n\tERROR: Telnet Connection Refused.\n\n")
                     is_telnet = False
             else:
                 is_telnet = False

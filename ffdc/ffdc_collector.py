@@ -174,7 +174,7 @@ class FFDCCollector:
             return True
         else:
             self.logger.error(
-                "\n>>>>>\tERROR: %s is not ping-able. FFDC collection aborted.\n" % self.hostname)
+                "\n\tERROR: %s is not ping-able. FFDC collection aborted.\n" % self.hostname)
             sys.exit(-1)
 
     def collect_ffdc(self):
@@ -241,7 +241,7 @@ class FFDCCollector:
             if ((self.remote_protocol not in working_protocol_list) and (self.remote_protocol != 'ALL')):
                 self.logger.info("\n\tWorking protocol list: %s" % working_protocol_list)
                 self.logger.error(
-                    '>>>>>\tERROR: Requested protocol %s is not in working protocol list.\n'
+                    '\tERROR: Requested protocol %s is not in working protocol list.\n'
                     % self.remote_protocol)
                 sys.exit(-1)
             else:
@@ -724,10 +724,10 @@ class FFDCCollector:
                 # PermissionError
                 if e.errno == EPERM or e.errno == EACCES:
                     self.logger.error(
-                        '>>>>>\tERROR: os.makedirs %s failed with PermissionError.\n' % dir_path)
+                        '\tERROR: os.makedirs %s failed with PermissionError.\n' % dir_path)
                 else:
                     self.logger.error(
-                        '>>>>>\tERROR: os.makedirs %s failed with %s.\n' % (dir_path, e.strerror))
+                        '\tERROR: os.makedirs %s failed with %s.\n' % (dir_path, e.strerror))
                 sys.exit(-1)
 
     def print_progress(self, progress):
@@ -779,8 +779,8 @@ class FFDCCollector:
                                 universal_newlines=True)
 
         if result.stderr and not quiet:
-            self.logger.error('\n\t\tERROR with redfishtool ' + parms_string)
-            self.logger.error('\t\t' + result.stderr)
+            self.logger.error('\n\tERROR with redfishtool ' + parms_string)
+            self.logger.error('\n\t%s' % result.stderr.split('\n'))
 
         return result.stdout
 

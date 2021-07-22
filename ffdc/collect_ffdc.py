@@ -79,24 +79,24 @@ def input_options_ok(remote, username, password, ffdc_config, remote_type):
     if not remote:
         all_options_ok = False
         print("\
-        \n>>>>>\tERROR: Name/IP of the remote host is not specified in CLI options or env OPENBMC_HOST.")
+        \n\tERROR: Name/IP of the remote host is not specified in CLI options or env OPENBMC_HOST.")
     if not username:
         all_options_ok = False
         print("\
-        \n>>>>>\tERROR: User on the remote host is not specified in CLI options or env OPENBMC_USERNAME.")
+        \n\tERROR: User on the remote host is not specified in CLI options or env OPENBMC_USERNAME.")
     if not password:
         all_options_ok = False
         print("\
-        \n>>>>>\tERROR: Password for user on remote host is not specified in CLI options "
+        \n\tERROR: Password for user on remote host is not specified in CLI options "
               + "or env OPENBMC_PASSWORD.")
     if not remote_type:
         all_options_ok = False
         print("\
-        \n>>>>>\tERROR: Remote host os type is not specified in CLI options.")
+        \n\tERROR: Remote host os type is not specified in CLI options.")
     if not os.path.isfile(ffdc_config):
         all_options_ok = False
         print("\
-        \n>>>>>\tERROR: Config file %s is not found.  Please verify path and filename." % ffdc_config)
+        \n\tERROR: Config file %s is not found.  Please verify path and filename." % ffdc_config)
 
     return all_options_ok
 

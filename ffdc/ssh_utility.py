@@ -99,8 +99,8 @@ class SSHRemoteclient:
         except (paramiko.AuthenticationException, paramiko.SSHException,
                 paramiko.ChannelException, SocketTimeout) as e:
             # Log command with error. Return to caller for next command, if any.
-            logging.error("\n>>>>>\tERROR: Fail remote command %s %s" % (e.__class__, e))
-            logging.error(">>>>>\tCommand '%s' Elapsed Time %s" %
+            logging.error("\n\tERROR: Fail remote command %s %s" % (e.__class__, e))
+            logging.error("\tCommand '%s' Elapsed Time %s" %
                           (command, time.strftime("%H:%M:%S", time.gmtime(time.time() - cmd_start))))
             return 0, empty, empty
 
@@ -114,9 +114,9 @@ class SSHRemoteclient:
             logging.info("\n\t[Check] %s SCP transport established.\t [OK]" % self.hostname)
         except (SCPException, SocketTimeout, PipeTimeout) as e:
             self.scpclient = None
-            logging.error("\n>>>>>\tERROR: SCP get_transport has failed. %s %s" % (e.__class__, e))
-            logging.info(">>>>>\tScript continues generating FFDC on %s." % self.hostname)
-            logging.info(">>>>>\tCollected data will need to be manually offloaded.")
+            logging.error("\n\tERROR: SCP get_transport has failed. %s %s" % (e.__class__, e))
+            logging.info("\tScript continues generating FFDC on %s." % self.hostname)
+            logging.info("\tCollected data will need to be manually offloaded.")
 
     def scp_file_from_remote(self, remote_file, local_file):
 
@@ -136,7 +136,7 @@ class SSHRemoteclient:
         except (SCPException, SocketTimeout, PipeTimeout) as e:
             # Log command with error. Return to caller for next file, if any.
             logging.error(
-                "\n>>>>>\tERROR: Fail scp %s from remotehost %s %s\n\n" % (remote_file, e.__class__, e))
+                "\n\tERROR: Fail scp %s from remotehost %s %s\n\n" % (remote_file, e.__class__, e))
             return False
 
         # Return True for file accounting
