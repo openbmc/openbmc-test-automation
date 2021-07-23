@@ -39,12 +39,21 @@ from ffdc_collector import FFDCCollector
               help="Select protocol to communicate with remote host.")
 @click.option('-e', '--env_vars', show_default=True,
               help="Environment variables e.g: {'var':value}")
+@click.option('-ec', '--econfig', show_default=True,
+              help="Predefine environment variables, refer en_vars_template.yaml ")
 @click.option('--log_level', default="INFO",
               show_default=True,
               help="Log level (CRITICAL, ERROR, WARNING, INFO, DEBUG)")
-def cli_ffdc(remote, username, password,
-             config, location, type,
-             protocol, env_vars, log_level):
+def cli_ffdc(remote,
+             username,
+             password,
+             config,
+             location,
+             type,
+             protocol,
+             env_vars,
+             econfig,
+             log_level):
     r"""
     Stand alone CLI to generate and collect FFDC from the selected target.
     """
@@ -52,9 +61,16 @@ def cli_ffdc(remote, username, password,
     click.echo("\n********** FFDC (First Failure Data Collection) Starts **********")
 
     if input_options_ok(remote, username, password, config, type):
-        thisFFDC = FFDCCollector(remote, username, password,
-                                 config, location, type,
-                                 protocol, env_vars, log_level)
+        thisFFDC = FFDCCollector(remote,
+                                 username,
+                                 password,
+                                 config,
+                                 location,
+                                 type,
+                                 protocol,
+                                 env_vars,
+                                 econfig,
+                                 log_level)
         thisFFDC.collect_ffdc()
 
         if len(os.listdir(thisFFDC.ffdc_dir_path)) == 0:
@@ -78,16 +94,15 @@ def input_options_ok(remote, username, password, config, type):
     if not remote:
         all_options_ok = False
         print("\
-        \n\tERROR: Name/IP of the remote host is not specified in CLI options or env OPENBMC_HOST.")
+        \n\tERROR: Name/IP of the remote host is not specified in CLI options.")
     if not username:
         all_options_ok = False
         print("\
-        \n\tERROR: User on the remote host is not specified in CLI options or env OPENBMC_USERNAME.")
+        \n\tERROR: User of the remote host is not specified in CLI options.")
     if not password:
         all_options_ok = False
         print("\
-        \n\tERROR: Password for user on remote host is not specified in CLI options "
-              + "or env OPENBMC_PASSWORD.")
+        \n\tERROR: Password of the user remote host is not specified in CLI options.")
     if not type:
         all_options_ok = False
         print("\
