@@ -34,16 +34,20 @@ class FFDCCollector:
                  remote_type,
                  remote_protocol,
                  env_vars,
+                 econfig,
                  log_level):
         r"""
         Description of argument(s):
 
-        hostname                name/ip of the targeted (remote) system
-        username                user on the targeted system with access to FFDC files
-        password                password for user on targeted system
-        ffdc_config             configuration file listing commands and files for FFDC
-        location                where to store collected FFDC
-        remote_type             os type of the remote host
+        hostname            name/ip of the targeted (remote) system
+        username            user on the targeted system with access to FFDC files
+        password            password for user on targeted system
+        ffdc_config         configuration file listing commands and files for FFDC
+        location            where to store collected FFDC
+        remote_type         os type of the remote host
+        remote_protocol     Protocol to use to collect data
+        env_vars            User define CLI env vars '{"key : "value"}'
+        econfig             User define env vars YAML file
 
         """
 
@@ -106,6 +110,14 @@ class FFDCCollector:
                 # Export ENV vars default.
                 for key, value in self.env_dict.items():
                     os.environ[key] = value
+
+            if econfig:
+                with open(econfig, 'r') as file:
+                    env_config_dict = yaml.load(file, Loader=yaml.FullLoader)
+                # Export ENV vars.
+                for key, value in env_config_dict['env_params'].items():
+                    os.environ[key] = str(value)
+                    self.env_dict[key] = str(value)
 
         except json.decoder.JSONDecodeError as e:
             self.logger.error("\n\tERROR: %s " % e)
