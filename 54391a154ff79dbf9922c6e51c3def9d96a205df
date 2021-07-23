@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "05203d56_a0a7618a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-07-23T08:48:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2e597b8_d27eff0e",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 46
+      },
+      "revId": "54391a154ff79dbf9922c6e51c3def9d96a205df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "67fe32c0_f4c8a3b9",
         "filename": "openpower/service_account/test_service_user.robot",
         "patchSetId": 1
@@ -45,6 +69,30 @@
       "revId": "54391a154ff79dbf9922c6e51c3def9d96a205df",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d60cd618_ff03c9ef",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-07-23T08:48:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67fe32c0_f4c8a3b9",
+      "range": {
+        "startLine": 47,
+        "startChar": 22,
+        "endLine": 47,
+        "endChar": 63
+      },
+      "revId": "54391a154ff79dbf9922c6e51c3def9d96a205df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
