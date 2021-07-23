@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a7f8b517_589079a9",
+        "filename": "lib/redfish_request.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-23T13:30:33Z",
+      "side": 1,
+      "message": "These 2 values are from same URI and always be same as variable $session_resp is derived from Session_dict",
+      "range": {
+        "startLine": 98,
+        "startChar": 17,
+        "endLine": 99,
+        "endChar": 58
+      },
+      "revId": "9a0addb36696279c15bb956967ae3c864f632d90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
