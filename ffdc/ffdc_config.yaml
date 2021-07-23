@@ -37,6 +37,8 @@ OPENBMC:
             - '/usr/bin/timedatectl >> /tmp/OPENBMC_general.txt'
             - 'echo -e "\n++++++++++ /usr/bin/obmcutil state ++++++++++" >> /tmp/OPENBMC_general.txt'
             - '/usr/bin/obmcutil state >> /tmp/OPENBMC_general.txt'
+            - 'echo -e "\n++++++++++ bmcweb session data ++++++++++" >> /tmp/OPENBMC_general.txt'
+            - 'for f in `find /var/lib/bmcweb/ -name "*.json"`; do (echo $f; cat $f) done >> /tmp/OPENBMC_general.txt'
         FILES:
             - '/tmp/OPENBMC_general.txt'
         PROTOCOL:
@@ -165,44 +167,99 @@ LINUX:
 
 # Commands and Files to collect for Ubuntu Linux only
 UBUNTU:
-    UBUNTU_LOGS:
+    GENERAL:
         COMMANDS:
-            - '{ lsusb -t ; lsusb -v ; } >/tmp/OS_isub.txt'
-            - 'tail -n 50000 /var/log/kern.log >/tmp/OS_kern.txt'
-            - '{ cat /var/log/auth.log; cat /var/log/auth.log.1 ; } >/tmp/OS_authlog.txt'
-            - 'tail -n 200000 /var/log/syslog >/tmp/OS_syslog.txt'
-            - '{ uname -a; dpkg -s opal-prd; dpkg -s ipmitool ; } >/tmp/OS_info.txt'
-            - 'rm -rf /tmp/sosreport*FFDC*'
-            - {'sosreport --batch --tmp-dir /tmp --ticket-number FFDC >/tmp/OS_sosreport.txt': 1200}
+            - 'rm -rf /tmp/UBUNTU_general.txt'
+            - 'echo "++++++++++ UBUNTU Rleasae ++++++++++" > /tmp/UBUNTU_general.txt'
+            - 'cat /etc/os-release >> /tmp/UBUNTU_general.txt'
+            - 'echo "\n++++++++++ Time stamp ++++++++++" >> /tmp/UBUNTU_general.txt'
+            - 'date >> /tmp/UBUNTU_general.txt'
+            - 'echo  "\n++++++++++ uname -a ++++++++++" >> /tmp/UBUNTU_general.txt'
+            - 'uname -a >> /tmp/UBUNTU_general.txt'
+            - 'echo "\n++++++++++ uptime ++++++++++" >> /tmp/UBUNTU_general.txt'
+            - 'uptime >> /tmp/UBUNTU_general.txt'
         FILES:
-            - '/tmp/OS_isub.txt'
-            - '/tmp/OS_kern.txt'
-            - '/tmp/OS_authlog.txt'
-            - '/tmp/OS_syslog.txt'
-            - '/tmp/OS_info.txt'
-            - '/tmp/OS_sosreport.txt'
-            - '/tmp/sosreport*.tar.xz'
+            - '/tmp/UBUNTU_general.txt'
         PROTOCOL:
             - 'SSH'
+    UBUNTU_LOGS:
+        COMMANDS:
+            - '{ cat /etc/os-release; uname -a; rpm -qa ; } >/tmp/OS_info.txt'
+            - 'tail -n 200000 /var/log/messages >/tmp/OS_syslog.txt'
+            - 'rm -rf /tmp/sosreport*FFDC*'
+            - {'sosreport --batch --tmp-dir /tmp --label FFDC >/tmp/OS_sosreport.txt': 1200}
+            - 'tar -zcvf /tmp/crash.tar.gz /var/crash'
+        FILES:
+            - '/tmp/OS_info.txt'
+            - '/tmp/OS_syslog.txt'
+            - '/tmp/OS_sosreport.txt'
+            - '/tmp/sosreport*.tar.xz'
+            - '/tmp/crash.tar.gz'
+        PROTOCOL:
+            - 'SSH'
+    DUMP_LOGS:
+        COMMANDS:
+            - '/tmp/htx/htxerr'
+            - '/tmp/htx/htxmsg'
+        PROTOCOL:
+            - 'SCP'
 
 # Commands and Files to collect for RHE Linux only
 RHEL:
+    GENERAL:
+        COMMANDS:
+            - 'rm -rf /tmp/RHEL_general.txt'
+            - 'echo "++++++++++ RHEL Rleasae ++++++++++" > /tmp/RHEL_general.txt'
+            - 'cat /etc/os-release >> /tmp/RHEL_general.txt'
+            - 'echo -e "\n++++++++++ Time stamp ++++++++++" >> /tmp/RHEL_general.txt'
+            - 'date >> /tmp/RHEL_general.txt'
+            - 'echo -e "\n++++++++++ uname -a ++++++++++" >> /tmp/RHEL_general.txt'
+            - 'uname -a >> /tmp/RHEL_general.txt'
+            - 'echo -e "\n++++++++++ uptime ++++++++++" >> /tmp/RHEL_general.txt'
+            - 'uptime >> /tmp/RHEL_general.txt'
+        FILES:
+            - '/tmp/RHEL_general.txt'
+        PROTOCOL:
+            - 'SSH'
     RHEL_LOGS:
         COMMANDS:
             - '{ cat /etc/os-release; uname -a; rpm -qa ; } >/tmp/OS_info.txt'
             - 'tail -n 200000 /var/log/messages >/tmp/OS_syslog.txt'
             - 'rm -rf /tmp/sosreport*FFDC*'
             - {'sosreport --batch --tmp-dir /tmp --label FFDC >/tmp/OS_sosreport.txt': 1200}
+            - 'tar -zcvf /tmp/crash.tar.gz /var/crash'
         FILES:
             - '/tmp/OS_info.txt'
             - '/tmp/OS_syslog.txt'
             - '/tmp/OS_sosreport.txt'
             - '/tmp/sosreport*.tar.xz'
+            - '/tmp/crash.tar.gz'
         PROTOCOL:
             - 'SSH'
+    DUMP_LOGS:
+        COMMANDS:
+            - '/tmp/htx/htxerr'
+            - '/tmp/htx/htxmsg'
+        PROTOCOL:
+            - 'SCP'
 
 # Commands and Files to collect for SLES Linux only
 SLES:
+    GENERAL:
+        COMMANDS:
+            - 'rm -rf /tmp/SLES_general.txt'
+            - 'echo "++++++++++ SLES Rleasae ++++++++++" > /tmp/SLES_general.txt'
+            - 'cat /etc/os-release >> /tmp/SLES_general.txt'
+            - 'echo "\n++++++++++ Time stamp ++++++++++" >> /tmp/SLES_general.txt'
+            - 'date >> /tmp/SLES_general.txt'
+            - 'echo "\n++++++++++ uname -a ++++++++++" >> /tmp/SLES_general.txt'
+            - 'uname -a >> /tmp/SLES_general.txt'
+            - 'echo "\n++++++++++ uptime ++++++++++" >> /tmp/SLES_general.txt'
+            - 'uptime >> /tmp/SLES_general.txt'
+        FILES:
+            - '/tmp/SLES_general.txt'
+        PROTOCOL:
+            - 'SSH'
     SLES_LOGS:
         COMMANDS:
             - '{ cat /etc/os-release; uname -a; rpm -qa ; } >/tmp/OS_info.txt'
@@ -210,22 +267,56 @@ SLES:
             - 'rm -rf /tmp/scc*.txz.md5'
             - {'supportconfig >/tmp/OS_supportconfig.txt': 1200}
             - 'cp /var/log/scc*.txz.md5 /tmp/'
+            - 'tar -zcvf /tmp/crash.tar.gz /var/crash'
         FILES:
             - '/tmp/OS_info.txt'
             - '/tmp/OS_syslog.txt'
             - '/tmp/OS_supportconfig.txt'
             - '/tmp/scc*.txz.md5'
+            - '/tmp/crash.tar.gz'
         PROTOCOL:
             - 'SSH'
+    DUMP_LOGS:
+        COMMANDS:
+            - '/tmp/htx/htxerr'
+            - '/tmp/htx/htxmsg'
+        PROTOCOL:
+            - 'SCP'
 
 # Commands and Files to collect for AIX only
 AIX:
+    GENERAL:
+        COMMANDS:
+            - 'rm -rf /tmp/AIX_general.txt'
+            - 'echo "++++++++++ AIX Release ++++++++++" > /tmp/AIX_general.txt'
+            - 'cat /proc/version | tail -1 >> /tmp/AIX_general.txt'
+            - 'echo "\n++++++++++ Time stamp ++++++++++" >> /tmp/AIX_general.txt'
+            - 'date >> /tmp/AIX_general.txt'
+            - 'echo  "\n++++++++++ uname -a ++++++++++" >> /tmp/AIX_general.txt'
+            - 'uname -a >> /tmp/AIX_general.txt'
+            - 'echo "\n++++++++++ uptime ++++++++++" >> /tmp/AIX_general.txt'
+            - 'uptime >> /tmp/AIX_general.txt'
+            - 'echo "\n++++++++++ System Info ++++++++++" >> /tmp/AIX_general.txt'
+            - 'prtconf | head -15 >> /tmp/AIX_general.txt'
+        FILES:
+            - '/tmp/AIX_general.txt'
+        PROTOCOL:
+            - 'SSH'
     AIX_LOGS:
         COMMANDS:
-            - 'errpt >/tmp/OS_errpt.txt ; errclear 0;'
+            - 'errpt -a >/tmp/OS_errpt.txt ; errclear 0;'
             - 'bindprocessor -q >/tmp/OS_processors.txt'
         FILES:
             - '/tmp/OS_errpt.txt'
             - '/tmp/OS_processors.txt'
         PROTOCOL:
             - 'SSH'
+    DUMP_LOGS:
+        COMMANDS:
+            - 'ls -AX /tmp/htx/htxerr'
+            - 'ls -AX /tmp/htx/htxmsg'
+        FILES:
+            - '/tmp/htx/htxerr'
+            - '/tmp/htx/htxmsg'
+        PROTOCOL:
+            - 'SCP'
