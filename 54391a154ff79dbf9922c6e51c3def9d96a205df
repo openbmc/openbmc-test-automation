@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c2e597b8_d27eff0e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-23T08:32:58Z",
+      "side": 1,
+      "message": "Added automation testcase for service user",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 46
+      },
+      "revId": "54391a154ff79dbf9922c6e51c3def9d96a205df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67fe32c0_f4c8a3b9",
+        "filename": "openpower/service_account/test_service_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-23T08:32:58Z",
+      "side": 1,
+      "message": "Verify error while renaming service user via Redfish",
+      "range": {
+        "startLine": 47,
+        "startChar": 22,
+        "endLine": 47,
+        "endChar": 63
+      },
+      "revId": "54391a154ff79dbf9922c6e51c3def9d96a205df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
