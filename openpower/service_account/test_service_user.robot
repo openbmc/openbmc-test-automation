@@ -43,6 +43,14 @@ Verify Modifying Service User Password
      ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
 
+Verify Renaming Service User
+     [Documentation]  Verify error while renaming service user via Redfish.
+
+     ${payload}=  Create Dictionary  UserName=new_service
+     Redfish.Patch  /redfish/v1/AccountService/Accounts/service  body=&{payload}
+     ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+
 *** Keywords ***
 
 Suite Setup Execution
