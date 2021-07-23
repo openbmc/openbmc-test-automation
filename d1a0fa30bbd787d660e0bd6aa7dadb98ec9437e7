@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "45ea41ab_e1206e09",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-23T06:34:23Z",
+      "side": 1,
+      "message": "Set Suite Variable  ${ethernet_interface}  ${active_channel_config[\u0027${CHANNEL_NUMBER}\u0027][\u0027name\u0027]}",
+      "revId": "d1a0fa30bbd787d660e0bd6aa7dadb98ec9437e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
