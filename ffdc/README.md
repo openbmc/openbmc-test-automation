@@ -18,6 +18,8 @@ Options:
   -rp, --protocol TEXT  Select protocol to communicate with remote host.
                         [default: ALL]
   -e, --env_vars TEXT   Environment variables e.g: {'var':value}
+  -ec, --econfig TEXT   Predefine environment variables, refer
+                        en_vars_template.yaml
   --log_level TEXT      Log level (CRITICAL, ERROR, WARNING, INFO, DEBUG)
                         [default: INFO]
   -h, --help            Show this message and exit.
