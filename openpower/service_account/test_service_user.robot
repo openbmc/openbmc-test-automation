@@ -45,10 +45,18 @@ Verify Modifying Service User Password
 
 Verify Renaming Service User
      [Documentation]  Verify error while renaming service user via Redfish.
+     [Tags]  Verify_Renaming_Service_User
 
      ${payload}=  Create Dictionary  UserName=new_service
      Redfish.Patch  /redfish/v1/AccountService/Accounts/service  body=&{payload}
      ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+
+Verify Deleting Service User
+     [Documentation]  Verify error while deleting service user via Redfish.
+     [Tags]  Verify_Deleting_Service_User
+
+     Redfish.Delete  /redfish/v1/AccountService/Accounts/service  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
 
 *** Keywords ***
