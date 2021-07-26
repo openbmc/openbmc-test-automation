@@ -5,6 +5,7 @@ See class prolog below for details.
 """
 
 import os
+import re
 import sys
 import yaml
 import json
@@ -115,7 +116,17 @@ class FFDCCollector:
         self.env_dict['hostname'] = self.hostname
         self.env_dict['username'] = self.username
         self.env_dict['password'] = self.password
-        self.logger.info(json.dumps(self.env_dict, indent=8, sort_keys=True))
+        # This to mask the password from displaying on the console.
+        mask_dict = self.env_dict.copy()
+        for k, v in mask_dict.items():
+            if k.lower().find("password") != -1:
+                hidden_text = []
+                hidden_text.append(v)
+                password_regex = '(' +\
+                    '|'.join([re.escape(x) for x in hidden_text]) + ')'
+                mask_dict[k] = re.sub(password_regex, "********", v)
+        self.logger.info(json.dumps(mask_dict, indent=8, sort_keys=True))
+        sys.exit(-1)
 
     def verify_script_env(self):
 
