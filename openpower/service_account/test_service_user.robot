@@ -51,6 +51,13 @@ Verify Renaming Service User
      ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
 
+Verify Deleting Service User
+     [Documentation]  Verify error while deleting service user via Redfish.
+
+     Redfish.Delete  /redfish/v1/AccountService/Accounts/service
+     ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+
 *** Keywords ***
 
 Suite Setup Execution
