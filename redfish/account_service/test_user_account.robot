@@ -330,6 +330,13 @@ Verify Standard User Roles Defined By Redfish
     List Should Contain Sub List  ${resp.dict['AssignedPrivileges']}  ${roles_dict['readOnly_privileges']}
 
 
+Verify Error While Deleting Root User
+    [Documentation]  Verify error while deleting root user.
+    [Tags]  Verify_Error_While_Deleting_Root_User
+
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/root  valid_status_codes=[${HTTP_FORBIDDEN}]
+
+
 *** Keywords ***
 
 Test Teardown Execution
