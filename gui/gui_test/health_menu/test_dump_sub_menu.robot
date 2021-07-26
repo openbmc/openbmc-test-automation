@@ -15,7 +15,7 @@ ${xpath_initiate_dump_button}  //button[contains(text(),'Initiate dump')]
 ${xpath_select_dump_type}      //*[@id="selectDumpType"]
 ${xpath_dump_from_date}        //*[@id="input-from-date"]
 ${xpath_dump_to_date}          //*[@id="input-to-date"]
-${xpath_dump_search_global}    //*[@id="searchInput-264"]
+${xpath_dump_search_global}    //*[contains(@id,"searchInput")]
 
 
 *** Test Cases ***
