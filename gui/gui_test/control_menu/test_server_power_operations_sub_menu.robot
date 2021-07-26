@@ -170,6 +170,20 @@ Verify Host Orderly Reboot
     Wait Until Keyword Succeeds  10 min  15 sec  Element Should Contain  ${xpath_current_power_state}  On
 
 
+Verify shutdown operations with Enable one time boot and disable TPM policy settings
+    [Documentation]  Verify shutdown operations with Enable one time boot and disable TPM policy settings
+    [Setup]  Run Keywords  Redfish Power On  stack_mode=skip  AND  Launch Browser And Login GUI
+    ...  AND  Navigate to Server Power Operation Page
+
+    Wait Until Page Contains  Boot settings  timeout=5
+    Page Should Contain Element  ${xpath_tpm_policy_button} 
+    Click Element  ${xpath_enable_onetime_boot_checkbox}
+    Click Element  ${xpath_shutdown_button}
+    Wait Until Page Contains Element  ${xpath_confirm_button}  timeout=10
+    Click Element  ${xpath_confirm_button}
+    Wait Until Keyword Succeeds  3 min  15 sec  Element Should Contain  ${xpath_current_power_state}  Off
+
+
 *** Keywords ***
 
 Navigate to Server Power Operation Page
