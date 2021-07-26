@@ -85,5 +85,6 @@ Test Setup Execution
 
     Wait Until Page Contains Element  ${xpath_root_button_menu}
     Click Element  ${xpath_root_button_menu}
+    Wait Until Page Contains Element  ${xpath_profile_settings}
     Click Element  ${xpath_profile_settings}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  profile-settings
