@@ -102,6 +102,7 @@ Verify Event Under High Priority Events Section
     Redfish Purge Event Log
     Click Element  ${xpath_refresh_button}
     Generate Test Error Log
+    Click Element  ${xpath_refresh_button}
     Wait Until Page Contains  xyz.openbmc_project.Common.Error.InternalFailure  timeout=30s
 
 
