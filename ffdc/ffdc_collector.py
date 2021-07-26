@@ -880,8 +880,12 @@ class FFDCCollector:
             # Only check SSH/SCP once for both protocols
             if protocol == 'SSH' or protocol == 'SCP' and protocol not in tmp_list:
                 if self.ssh_to_target_system():
-                    tmp_list.append('SSH')
-                    tmp_list.append('SCP')
+                    # Add only what user asked.
+                    if self.remote_protocol != 'ALL':
+                        tmp_list.append(self.remote_protocol)
+                    else:
+                        tmp_list.append('SSH')
+                        tmp_list.append('SCP')
 
             if protocol == 'TELNET':
                 if self.telnet_to_target_system():
