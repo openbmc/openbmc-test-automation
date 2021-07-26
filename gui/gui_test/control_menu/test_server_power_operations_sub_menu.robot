@@ -170,6 +170,15 @@ Verify Host Orderly Reboot
     Wait Until Keyword Succeeds  10 min  15 sec  Element Should Contain  ${xpath_current_power_state}  On
 
 
+Verify Shutdown Button At Power On
+    [Documentation]  Verify shutdown button at power on.
+    [Tags]  Verify_Shutdown_Button_At_Power_On
+    [Setup]  Run Keywords  Redfish Power On  stack_mode=skip  AND  Launch Browser And Login GUI
+    ...  AND  Navigate to Server Power Operation Page
+
+    Wait Until Page Contains Element  ${xpath_shutdown_button}  timeout=10
+
+
 *** Keywords ***
 
 Navigate to Server Power Operation Page
