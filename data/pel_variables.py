@@ -22,7 +22,7 @@ CMD_FRU_CALLOUT = ERROR_LOG_CREATE_BASE_CMD + 'xyz.openbmc_project.Common.Error.
     xyz.openbmc_project.Logging.Entry.Level.Error 2 "TIMEOUT_IN_MSEC" "5" "CALLOUT_INVENTORY_PATH" \
     "/xyz/openbmc_project/inventory/system/chassis/motherboard"'
 
-CMD_PROCEDURAL_SYMBOLIC_FRU_CALLOUT = 'org.open_power.Logging.Error.TestError1 \
+CMD_PROCEDURAL_SYMBOLIC_FRU_CALLOUT = ERROR_LOG_CREATE_BASE_CMD + 'org.open_power.Logging.Error.TestError1 \
     xyz.openbmc_project.Logging.Entry.Level.Error 0'
 
 CMD_INFORMATIONAL_ERROR = ERROR_LOG_CREATE_BASE_CMD + 'xyz.openbmc_project.Common.Error.TestError2 \
