@@ -55,14 +55,6 @@ class FFDCCollector:
         self.hostname = hostname
         self.username = username
         self.password = password
-        # This is for the env vars a user can use in YAML to load it at runtime.
-        # Example YAML:
-        # -COMMANDS:
-        #    - my_command ${hostname}  ${username}   ${password}
-        os.environ['hostname'] = hostname
-        os.environ['username'] = username
-        os.environ['password'] = password
-
         self.ffdc_config = ffdc_config
         self.location = location + "/" + remote_type.upper()
         self.ssh_remoteclient = None
@@ -71,6 +63,8 @@ class FFDCCollector:
         self.ffdc_prefix = ""
         self.target_type = remote_type.upper()
         self.remote_protocol = remote_protocol.upper()
+        self.env_vars = env_vars
+        self.econfig = econfig
         self.start_time = 0
         self.elapsed_time = ''
         self.logger = None
@@ -103,41 +97,7 @@ class FFDCCollector:
         # Load ENV vars from user.
         self.logger.info("\n\tENV: User define input YAML variables")
         self.env_dict = {}
-
-        try:
-            if env_vars:
-                self.env_dict = json.loads(env_vars)
-
-                # Export ENV vars default.
-                for key, value in self.env_dict.items():
-                    os.environ[key] = value
-
-            if econfig:
-                with open(econfig, 'r') as file:
-                    env_config_dict = yaml.load(file, Loader=yaml.FullLoader)
-                # Export ENV vars.
-                for key, value in env_config_dict['env_params'].items():
-                    os.environ[key] = str(value)
-                    self.env_dict[key] = str(value)
-
-        except json.decoder.JSONDecodeError as e:
-            self.logger.error("\n\tERROR: %s " % e)
-            sys.exit(-1)
-
-        # Append default Env.
-        self.env_dict['hostname'] = self.hostname
-        self.env_dict['username'] = self.username
-        self.env_dict['password'] = self.password
-        # This to mask the password from displaying on the console.
-        mask_dict = self.env_dict.copy()
-        for k, v in mask_dict.items():
-            if k.lower().find("password") != -1:
-                hidden_text = []
-                hidden_text.append(v)
-                password_regex = '(' +\
-                    '|'.join([re.escape(x) for x in hidden_text]) + ')'
-                mask_dict[k] = re.sub(password_regex, "********", v)
-        self.logger.info(json.dumps(mask_dict, indent=8, sort_keys=True))
+        self. load_env()
 
     def verify_script_env(self):
 
@@ -754,3 +714,53 @@ class FFDCCollector:
                     self.logger.info("\n\t[Check] %s IPMI LAN Service.\t\t [NOT AVAILABLE]" % self.hostname)
 
         return tmp_list
+
+    def load_env(self):
+        r"""
+        Perform protocol working check.
+
+        """
+        # This is for the env vars a user can use in YAML to load it at runtime.
+        # Example YAML:
+        # -COMMANDS:
+        #    - my_command ${hostname}  ${username}   ${password}
+        os.environ['hostname'] = self.hostname
+        os.environ['username'] = self.username
+        os.environ['password'] = self.password
+
+        # Append default Env.
+        self.env_dict['hostname'] = self.hostname
+        self.env_dict['username'] = self.username
+        self.env_dict['password'] = self.password
+
+        try:
+            tmp_env_dict = {}
+            if self.env_vars:
+                tmp_env_dict = json.loads(self.env_vars)
+                # Export ENV vars default.
+                for key, value in tmp_env_dict.items():
+                    os.environ[key] = value
+                    self.env_dict[key] = str(value)
+
+            if self.econfig:
+                with open(self.econfig, 'r') as file:
+                    tmp_env_dict = yaml.load(file, Loader=yaml.FullLoader)
+                # Export ENV vars.
+                for key, value in tmp_env_dict['env_params'].items():
+                    os.environ[key] = str(value)
+                    self.env_dict[key] = str(value)
+        except json.decoder.JSONDecodeError as e:
+            self.logger.error("\n\tERROR: %s " % e)
+            sys.exit(-1)
+
+        # This to mask the password from displaying on the console.
+        mask_dict = self.env_dict.copy()
+        for k, v in mask_dict.items():
+            if k.lower().find("password") != -1:
+                hidden_text = []
+                hidden_text.append(v)
+                password_regex = '(' +\
+                    '|'.join([re.escape(x) for x in hidden_text]) + ')'
+                mask_dict[k] = re.sub(password_regex, "********", v)
+
+        self.logger.info(json.dumps(mask_dict, indent=8, sort_keys=False))
