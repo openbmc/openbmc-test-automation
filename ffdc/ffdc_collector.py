@@ -148,7 +148,7 @@ class FFDCCollector:
         run_env_ok = True
 
         redfishtool_version = self.run_redfishtool('-V').split(' ')[2].strip('\n')
-        ipmitool_version = self.run_ipmitool('-V').split(' ')[2]
+        ipmitool_version = self.run_ipmitool('ipmitool -V').split(' ')[2]
 
         self.logger.info("\n\t---- Script host environment ----")
         self.logger.info("\t{:<10}  {:<10}".format('Script hostname', os.uname()[1]))
@@ -457,10 +457,7 @@ class FFDCCollector:
         progress_counter = 0
         list_of_cmd = self.get_command_list(self.ffdc_actions[target_type][sub_type])
         for index, each_cmd in enumerate(list_of_cmd, start=0):
-            ipmi_parm = '-U ' + self.username + ' -P ' + self.password + ' -H ' \
-                + self.hostname + ' -I lanplus ' + each_cmd
-
-            result = self.run_ipmitool(ipmi_parm)
+            result = self.run_ipmitool(each_cmd)
             if result:
                 try:
                     targ_file = self.get_file_list(self.ffdc_actions[target_type][sub_type])[index]
@@ -743,8 +740,13 @@ class FFDCCollector:
         Verify remote host has IPMI LAN service active
 
         """
-        ipmi_parm = '-U ' + self.username + ' -P ' + self.password + ' -H ' \
-            + self.hostname + ' power status -I lanplus'
+        if self.target_type == 'OPENBMC':
+            ipmi_parm = 'ipmitool -I lanplus -C 17  -U ' + self.username + ' -P ' \
+                + self.password + ' -H ' + self.hostname + ' power status'
+        else:
+            ipmi_parm = 'ipmitool -I lanplus  -P ' \
+                + self.password + ' -H ' + self.hostname + ' power status'
+
         return(self.run_ipmitool(ipmi_parm, True))
 
     def run_redfishtool(self,
@@ -781,14 +783,14 @@ class FFDCCollector:
         quiet                do not print redfishtool error message if True
         """
 
-        result = subprocess.run(['ipmitool -I lanplus -C 17 ' + parms_string],
+        result = subprocess.run([parms_string],
                                 stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE,
                                 shell=True,
                                 universal_newlines=True)
 
         if result.stderr and not quiet:
-            self.logger.error('\n\t\tERROR with ipmitool -I lanplus -C 17 ' + parms_string)
+            self.logger.error('\n\t\tERROR with %s ' % parms_string)
             self.logger.error('\t\t' + result.stderr)
 
         return result.stdout

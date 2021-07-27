@@ -123,9 +123,9 @@ OPENBMC:
     # Commands and Files to collect for via out of band IPMI.
     IPMI_LOGS:
         COMMANDS:
-            - 'lan print'
-            - 'fru list'
-            - 'user list'
+            - ipmitool -I lanplus -C 17 -U ${username} -P ${password} -H ${hostname} lan print
+            - ipmitool -I lanplus -C 17 -U ${username} -P ${password} -H ${hostname} fru list
+            - ipmitool -I lanplus -C 17 -U ${username} -P ${password} -H ${hostname} user list
         FILES:
             - 'IPMI_LAN_print.txt'
             - 'IPMI_FRU_list.txt'
