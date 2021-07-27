@@ -304,35 +304,15 @@ class FFDCCollector:
                 if protocol not in working_protocol_list:
                     continue
 
-                if protocol == 'SSH' or protocol == 'SCP':
-                    if 'SSH' in working_protocol_list or 'SCP' in working_protocol_list:
+                if protocol in working_protocol_list:
+                    if protocol == 'SSH' or protocol == 'SCP':
                         self.protocol_ssh(target_type, k)
-                    else:
-                        self.logger.error("\n\tERROR: SSH or SCP is not available for %s." % self.hostname)
-
-                if protocol == 'TELNET':
-                    if protocol in working_protocol_list:
+                    elif protocol == 'TELNET':
                         self.protocol_telnet(target_type, k)
-                    else:
-                        self.logger.error("\n\tERROR: TELNET is not available for %s." % self.hostname)
-
-                if protocol == 'REDFISH':
-                    if protocol in working_protocol_list:
+                    elif protocol == 'REDFISH' or protocol == 'IPMI' or protocol == 'SHELL':
                         self.protocol_execute(protocol, target_type, k)
-                    else:
-                        self.logger.error("\n\tERROR: REDFISH is not available for %s." % self.hostname)
-
-                if protocol == 'IPMI':
-                    if protocol in working_protocol_list:
-                        self.protocol_execute(protocol, target_type, k)
-                    else:
-                        self.logger.error("\n\tERROR: IPMI is not available for %s." % self.hostname)
-
-                if protocol == 'SHELL':
-                    if protocol in working_protocol_list:
-                        self.protocol_execute(protocol, target_type, k)
-                    else:
-                        self.logger.error("\n\tERROR: can't execute SHELL script")
+                else:
+                    self.logger.error("\n\tERROR: %s is not available for %s." % (protocol,self.hostname))
 
         # Close network connection after collecting all files
         self.elapsed_time = time.strftime("%H:%M:%S", time.gmtime(time.time() - self.start_time))
