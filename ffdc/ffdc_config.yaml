@@ -102,13 +102,13 @@ OPENBMC:
     # File contains the data returned from 'redfishtool GET URL'
     REDFISH_LOGS:
         URL:
-            - '/xyz/openbmc_project/software/enumerate'
-            - '/xyz/openbmc_project/state/enumerate'
-            - '/org/open_power/enumerate'
-            - '/redfish/v1/AccountService/Accounts'
-            - '/redfish/v1/Managers/bmc/LogServices/Dump/Entries'
-            - '/redfish/v1/Systems/system/LogServices/Dump/Entries'
-            - '/redfish/v1/Systems/system/LogServices/EventLog/Entries'
+            - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always raw GET /xyz/openbmc_project/software/enumerate
+            - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always raw GET /xyz/openbmc_project/state/enumerate
+            - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always raw GET /org/open_power/enumerate
+            - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always raw GET /redfish/v1/AccountService/Accounts
+            - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always raw GET /redfish/v1/Managers/bmc/LogServices/Dump/Entries
+            - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always raw GET /redfish/v1/Systems/system/LogServices/Dump/Entries
+            - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always raw GET /redfish/v1/Systems/system/LogServices/EventLog/Entries
         FILES:
             - 'REDFISH_software.json'
             - 'REDFISH_bmc_state.json'
