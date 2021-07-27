@@ -266,7 +266,7 @@ class FFDCCollector:
 
                 if protocol in working_protocol_list:
                     if protocol == 'SSH' or protocol == 'SCP':
-                        self.protocol_ssh(target_type, k)
+                        self.protocol_ssh(protocol, target_type, k)
                     elif protocol == 'TELNET':
                         self.protocol_telnet(target_type, k)
                     elif protocol == 'REDFISH' or protocol == 'IPMI' or protocol == 'SHELL':
@@ -282,17 +282,19 @@ class FFDCCollector:
             self.telnet_remoteclient.tn_remoteclient_disconnect()
 
     def protocol_ssh(self,
+                     protocol,
                      target_type,
                      sub_type):
         r"""
         Perform actions using SSH and SCP protocols.
 
         Description of argument(s):
+        protocol            Protocol to execute.
         target_type         OS Type of remote host.
         sub_type            Group type of commands.
         """
 
-        if sub_type == 'DUMP_LOGS':
+        if protocol == 'SCP':
             self.group_copy(self.ffdc_actions[target_type][sub_type])
         else:
             self.collect_and_copy_ffdc(self.ffdc_actions[target_type][sub_type])
@@ -499,7 +501,7 @@ class FFDCCollector:
         """
 
         if self.ssh_remoteclient.scpclient:
-            self.logger.info("\n\tCopying DUMP files from remote system %s.\n" % self.hostname)
+            self.logger.info("\n\tCopying files from remote system %s via SCP.\n" % self.hostname)
 
             list_of_commands = self.get_command_list(ffdc_actions_for_target_type)
             # If command list is empty, returns
@@ -510,7 +512,7 @@ class FFDCCollector:
                 try:
                     filename = command.split(' ')[2]
                 except IndexError:
-                    self.logger.info("\t\tInvalid command %s for DUMP_LOGS block." % command)
+                    self.logger.info("\t\tInvalid command %s" % command)
                     continue
 
                 cmd_exit_code, err, response = \
