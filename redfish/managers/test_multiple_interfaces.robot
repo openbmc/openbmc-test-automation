@@ -115,7 +115,7 @@ Verify Both Interfaces Access Concurrently Via Redfish
 
 Able To Access Serial Console Via Both Network Interfaces
     [Documentation]  Able to access serial console via both network interfaces.
-    [Tags]  Able_To_Access_Serial_Console_Via_Both_Network Interfaces
+    [Tags]  Able_To_Access_Serial_Console_Via_Both_Network_Interfaces
 
     Open Connection And Log In  host=${OPENBMC_HOST}  port=2200
     Open Connection And Log In  host=${OPENBMC_HOST_1}  port=2200
