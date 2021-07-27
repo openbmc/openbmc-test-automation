@@ -26,9 +26,8 @@ Verify Existence Of All Sections In Firmware Page
     [Documentation]  Verify existence of all sections in firmware page.
     [Tags]  Verify_Existence_Of_All_Sections_In_Firmware_Page
 
-    Page Should Contain  Firmware on system
-    Page Should Contain  Change to backup image
-    Page Should Contain  Update code
+    Page Should Contain  BMC and server
+    Page Should Contain  Update firmware
 
 
 Verify Existence Of All Buttons In Firmware Page
