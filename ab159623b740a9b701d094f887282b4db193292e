@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7aa1e75e_534d0ac1",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-28T10:23:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "562f67dc_20e80a6e",
+      "range": {
+        "startLine": 210,
+        "startChar": 67,
+        "endLine": 210,
+        "endChar": 68
+      },
+      "revId": "ab159623b740a9b701d094f887282b4db193292e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "60cbd547_6386940a",
         "filename": "redfish/events/test_bmc_snmp_trap.robot",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2021-07-28T08:44:35Z",
       "side": 1,
       "message": "Where is this coming from.. Please add in the variable\n\n${out_of_range}    \u003c\u003e\n\nelse u have to explicitly check if this variable is empty or not before using it.. \n\nso either one of them should bet here",
+      "range": {
+        "startLine": 211,
+        "startChar": 51,
+        "endLine": 211,
+        "endChar": 66
+      },
+      "revId": "ab159623b740a9b701d094f887282b4db193292e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b91de393_dc4f4789",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-28T10:23:37Z",
+      "side": 1,
+      "message": "using existing varibale from Resource /lib/snmp/resource.robot",
+      "parentUuid": "60cbd547_6386940a",
       "range": {
         "startLine": 211,
         "startChar": 51,
@@ -68,6 +116,30 @@
       "revId": "ab159623b740a9b701d094f887282b4db193292e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d858d53b_8ec9b36b",
+        "filename": "redfish/events/test_bmc_snmp_trap.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-28T10:23:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31924467_64976a9f",
+      "range": {
+        "startLine": 223,
+        "startChar": 21,
+        "endLine": 223,
+        "endChar": 119
+      },
+      "revId": "ab159623b740a9b701d094f887282b4db193292e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
