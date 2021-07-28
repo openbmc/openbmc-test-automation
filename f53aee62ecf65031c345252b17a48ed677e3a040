@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "027cd66a_3cfe200d",
+        "filename": "gui/gui_test/server_config/test_obmc_gui_firmware_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-07-28T11:03:01Z",
+      "side": 1,
+      "message": "There is section - Backup image. Please include that.",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 30,
+        "endChar": 40
+      },
+      "revId": "f53aee62ecf65031c345252b17a48ed677e3a040",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
