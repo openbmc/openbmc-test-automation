@@ -10,6 +10,10 @@ Suite Teardown  Redfish.Logout
 Test Teardown   FFDC On Test Case Fail
 
 
+*** Variables ***
+${cmd_prefix}  ipmitool -I lanplus -C 17 -p 623 -U ${OPENBMC_USERNAME} -P ${OPENBMC_PASSWORD}
+
+
 *** Test Cases ***
 
 Verify SSH Is Enabled By Default
@@ -123,6 +127,38 @@ Verify Existing SSH Session Gets Closed On Disabling SSH
     ...  msg=Disabling SSH has not closed existing SSH sessions.
 
 
+Enable IPMI Protocol And Verify
+    [Documentation]  Enable IPMI protocol and verify.
+    [Tags]  Enable_IPMI_Protocol_And_Verify  ipmi
+    [Teardown]  Enable IPMI Protocol  ${False}
+
+    Enable IPMI Protocol  ${True}
+
+    # Check if IPMI is really enabled via Redfish.
+    Verify IPMI Protocol State  ${True}
+
+    # Check if IPMI commands starts working.
+    Verify IPMI Works  lan print
+
+
+Disable IPMI Protocol And Verify
+    [Documentation]  Disable IPMI protocol and verify.
+    [Tags]  Disable_IPMI_Protocol_And_Verify  ipmi
+
+    # Disable IPMI interface.
+    Enable IPMI Protocol  ${False}
+
+    # Check if IPMI is really disabled via Redfish.
+    Verify IPMI Protocol State  ${False}
+
+    # Check if IPMI commands fail.
+    ${status}=  Run Keyword And Return Status
+    ...  Verify IPMI Works  lan print
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=IPMI commands are working after disabling IPMI.
+
+
 *** Keywords ***
 
 Enable SSH Protocol
@@ -205,4 +241,46 @@ Verify SSH Protocol State
 
     ${resp}=  Redfish.Get  ${REDFISH_NW_PROTOCOL_URI}
     Should Be Equal As Strings  ${resp.dict['SSH']['ProtocolEnabled']}  ${state}
+    ...  msg=Protocol states are not matching.
+
+
+Enable IPMI Protocol
+    [Documentation]  Enable or disable IPMI protocol.
+    [Arguments]  ${enable_value}=${True}
+
+    # Description of argument(s}:
+    # enable_value  Enable or disable IPMI, e.g. (true, false).
+
+    ${ipmi_state}=  Create Dictionary  ProtocolEnabled=${enable_value}
+    ${data}=  Create Dictionary  IPMI=${ipmi_state}
+
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
+    ...  valid_status_codes=[${HTTP_NO_CONTENT}]
+
+    # Wait for timeout for new values to take effect.
+    Sleep  ${NETWORK_TIMEOUT}s
+
+
+Verify IPMI Works
+    [Documentation]  Run IPMI command and return status.
+    [Arguments]  ${sub_cmd}  ${host}=${OPENBMC_HOST}
+
+    # Description of argument(s):
+    # host         BMC host name or IP address.
+    # sub_cmd      The IPMI command string to be executed.
+
+    ${rc}=  Run And Return Rc  ${cmd_prefix} -H ${host} ${sub_cmd}
+    Should Be Equal As Strings  ${rc}  0
+    ...  msg=IPMI is not enabled and commands are failing.
+
+
+Verify IPMI Protocol State
+    [Documentation]  Verify IPMI protocol state.
+    [Arguments]  ${state}=${True}
+
+    # Description of argument(s}:
+    # state  Enable or disable IPMI, e.g. (true, false)
+
+    ${resp}=  Redfish.Get  ${REDFISH_NW_PROTOCOL_URI}
+    Should Be Equal As Strings  ${resp.dict['IPMI']['ProtocolEnabled']}  ${state}
     ...  msg=Protocol states are not matching.
