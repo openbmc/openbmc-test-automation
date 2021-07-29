@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c0d71a31_3ceb6a16",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-29T08:00:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "926d2815_3046b12c",
+      "revId": "6a8e33805c7ea0c8bc012c7b425df5df8d349e99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "15cafd2c_76055b23",
         "filename": "redfish/managers/test_bmc_protocol_settings.robot",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "6a8e33805c7ea0c8bc012c7b425df5df8d349e99",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41ee4be6_b726444f",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-29T08:00:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15cafd2c_76055b23",
+      "revId": "6a8e33805c7ea0c8bc012c7b425df5df8d349e99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "178dc901_4e893a58",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-29T08:00:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a234226a_6425defa",
+      "revId": "6a8e33805c7ea0c8bc012c7b425df5df8d349e99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8857f72c_3d5dd0b5",
         "filename": "redfish/managers/test_bmc_protocol_settings.robot",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2021-07-29T07:50:08Z",
       "side": 1,
       "message": "If possible, can we put a line to match error returned by command when ipmi is disabled, so that we can be sure cmd failure is only due to ipmi not enabled situation",
+      "revId": "6a8e33805c7ea0c8bc012c7b425df5df8d349e99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f8221db9_8cafe76e",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-07-29T08:00:15Z",
+      "side": 1,
+      "message": "Not required, if it does not work that is good enough.",
+      "parentUuid": "8857f72c_3d5dd0b5",
       "revId": "6a8e33805c7ea0c8bc012c7b425df5df8d349e99",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
