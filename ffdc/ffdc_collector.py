@@ -17,6 +17,44 @@ import subprocess
 from ssh_utility import SSHRemoteclient
 from telnet_utility import TelnetRemoteclient
 
+r"""
+User define plugins python functions.
+
+It will imports files from directory plugins
+
+plugins
+├── file1.py
+└── file2.py
+
+Example how to define in YAML:
+ - plugin:
+   - plugin_name: plugin.foo_func.foo_func_yaml
+     - plugin_args:
+       - arg1
+       - arg2
+"""
+plugin_dir = 'plugins'
+try:
+    for module in os.listdir(plugin_dir):
+        if module == '__init__.py' or module[-3:] != '.py':
+            continue
+        plugin_module = "plugins." + module[:-3]
+        # To access the module plugin.<module name>.<function>
+        # Example: plugin.foo_func.foo_func_yaml()
+        try:
+            plugin = __import__(plugin_module, globals(), locals(), [], 0)
+        except Exception as e:
+            print("PLUGIN: Module import failed: %s" % module)
+            pass
+except FileNotFoundError as e:
+    print("PLUGIN: %s" % e)
+    pass
+
+global global_plugin_func_dict
+global global_plugin_func_list
+global_plugin_func_dict = {}
+global_plugin_func_list = []
+
 
 class FFDCCollector:
 
@@ -354,10 +392,21 @@ class FFDCCollector:
         progress_counter = 0
         list_of_cmd = self.get_command_list(self.ffdc_actions[target_type][sub_type])
         for index, each_cmd in enumerate(list_of_cmd, start=0):
+            if isinstance(each_cmd, dict):
+                if 'plugin' in each_cmd:
+                    # call the plugin
+                    self.logger.info("\n\t[PLUGIN-START]")
+                    self.pack_plugin_eval_func(each_cmd['plugin'])
+                    self.logger.info("\n\t[PLUGIN-END]")
+                    continue
+
             result = self.run_tool_cmd(each_cmd)
             if result:
                 try:
                     targ_file = self.get_file_list(self.ffdc_actions[target_type][sub_type])[index]
+                    # If file is specified as None.
+                    if not targ_file:
+                        continue
                 except IndexError:
                     targ_file = each_cmd.split('/')[-1]
                     self.logger.warning(
@@ -766,3 +815,123 @@ class FFDCCollector:
                 mask_dict[k] = re.sub(password_regex, "********", v)
 
         self.logger.info(json.dumps(mask_dict, indent=8, sort_keys=False))
+
+    def run_eval(self, str_obj):
+        r"""
+        Perform protocol working check.
+
+        Description of argument(s):
+        str_obj        Execute the python object from YAML
+        """
+        try:
+            result = eval(str_obj)
+        except (ValueError, SyntaxError, NameError) as e:
+            self.logger.error(e)
+            return e
+
+        self.logger.info("\tCalling func: %s \n\treturn: %s\n" % (str_obj, result))
+        return result
+
+    def pack_plugin_eval_func(self, plugin_list_dicts):
+        r"""
+        Pack the plugin in the YAML to quailifed pythong str object.
+
+        Description of argument(s):
+        plugin_list_dict      Plugin format dict from YAML
+                              [{'plugin_name': 'plugin.foo_func.my_func'},
+                               {'plugin_args': [10]}]
+
+        Example:
+        - plugin:
+            - plugin_name: plugin.foo_func.my_func
+            - plugin_args:
+              - arg1_value
+              - arg2_string
+        """
+        try:
+            plugin_name = plugin_list_dicts[0]['plugin_name']
+            if ' = ' in plugin_name:
+                # Ex. ['version', 'plugin.ssh_execute.ssh_execute']
+                plugin_name_vars = plugin_name.split(' = ')
+                # plugin func return data.
+                for var in plugin_name_vars:
+                    if var == plugin_name_vars[-1]:
+                        plugin_name = var
+                    else:
+                        plugin_resp = var.split(',')
+                        # ['bmc_version,bmc_build']
+                        for x in plugin_resp:
+                            global_plugin_func_list.append(x)
+                            global_plugin_func_dict[x] = ""
+
+            plugin_args = plugin_list_dicts[1]['plugin_args']
+            # If the plugin argument is None.
+            if plugin_args:
+                plugin_args = self.yaml_vars_to_env(plugin_args)
+            else:
+                plugin_args = self.yaml_vars_to_env([])
+
+            # Pack the args arg1, arg2, .... argn
+            args_str = ''
+            for args in plugin_args:
+                if args:
+                    if isinstance(args, int):
+                        args_str += str(args)
+                    else:
+                        args_str += '"' + str(args) + '"'
+                # Skip last list element.
+                if args != plugin_args[-1]:
+                    args_str += ","
+        except Exception as e:
+            self.logger.info(e)
+            pass
+        if args_str:
+            plugin_func = plugin_name + '(' + args_str + ')'
+        else:
+            plugin_func = plugin_name + '()'
+
+        # Execute plugin function.
+        if global_plugin_func_dict:
+            resp = self.run_eval(plugin_func)
+            if isinstance(resp, list):
+                resp_list = [x.strip('\n\t') for x in resp]
+                for idx, item in enumerate(resp_list):
+                    # Find the index of the return func in the list and
+                    # update the global func return dictionary
+                    try:
+                        dict_idx = global_plugin_func_list[idx]
+                    except (IndexError, ValueError):
+                        pass
+                    global_plugin_func_dict[dict_idx] = item.strip('\t\n')
+        else:
+            self.run_eval(plugin_func)
+
+    def yaml_vars_to_env(self, yaml_var_data):
+        r"""
+        Decode ${MY_VAR} and load env data when read from YAML.
+
+        Description of argument(s):
+        yaml_var_data         string read from YAML
+        """
+
+        # Get the env loaded keys as list ['hostname', 'username', 'password'].
+        env_vars_list = list(self.env_dict)
+
+        if isinstance(yaml_var_data, list):
+            tmp_list = []
+            for var in yaml_var_data:
+                if isinstance(var, int):
+                    tmp_list.append(var)
+                    continue
+                # E.g ${hostname}, ${username}
+                if var.strip('${}') in env_vars_list:
+                    tmp_list.append(os.environ[var.strip('${}')])
+                    # Check if its in global response return variable list.
+                elif var in global_plugin_func_dict:
+                    # Update the var from the global dictionary of variables.
+                    tmp_list.append(global_plugin_func_dict[var])
+                else:
+                    tmp_list.append(var)
+
+            # return populated list.
+            return tmp_list
