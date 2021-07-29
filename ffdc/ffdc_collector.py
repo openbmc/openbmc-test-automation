@@ -17,6 +17,38 @@ import subprocess
 from ssh_utility import SSHRemoteclient
 from telnet_utility import TelnetRemoteclient
 
+r"""
+User define plugins python functions.
+
+It will imports files from directory plugins
+
+plugins
+├── file1.py
+└── file2.py
+
+Example how to define in YAML:
+ - plugin:
+   - plugin_name: plugin.foo_func.foo_func_yaml
+     - plugin_args:
+       - arg1
+       - arg2
+"""
+plugin_dir = 'plugins'
+try:
+    for module in os.listdir(plugin_dir):
+        if module == '__init__.py' or module[-3:] != '.py':
+            continue
+        plugin_module = "plugins." + module[:-3]
+        # To access the module plugin.<module name>.<function>
+        # Example: plugin.foo_func.foo_func_yaml()
+        try:
+            plugin = __import__(plugin_module, globals(), locals(), [], 0)
+        except:
+            print("PLUGIN: Module import failed: %s" % module)
+            pass
+except FileNotFoundError as e:
+    print("PLUGIN: %s" % e)
+    pass
 
 class FFDCCollector:
 
@@ -354,6 +386,12 @@ class FFDCCollector:
         progress_counter = 0
         list_of_cmd = self.get_command_list(self.ffdc_actions[target_type][sub_type])
         for index, each_cmd in enumerate(list_of_cmd, start=0):
+            if isinstance(each_cmd, dict):
+                if 'plugin' in each_cmd:
+                    #call the plugin
+                    self.pack_plugin_eval_func(each_cmd['plugin'])
+                    continue
+
             result = self.run_tool_cmd(each_cmd)
             if result:
                 try:
@@ -766,3 +804,62 @@ class FFDCCollector:
                 mask_dict[k] = re.sub(password_regex, "********", v)
 
         self.logger.info(json.dumps(mask_dict, indent=8, sort_keys=False))
+
+    def run_eval(self, str_obj):
+        r"""
+        Perform protocol working check.
+
+        Description of argument(s):
+        str_obj        Execute the python object from YAML
+        """
+        try:
+            result = eval(str_obj)
+        except (ValueError, SyntaxError, NameError) as e:
+            self.logger.error(e)
+            return e
+
+        self.logger.info("\n\t[PLUGIN]:\n \t%s \n\t%s" % (str_obj, result))
+        return result
+
+    def pack_plugin_eval_func(self, plugin_list_dicts):
+        r"""
+        Pack the plugin in the YAML to quailifed pythong str object.
+
+        Description of argument(s):
+        plugin_list_dict      Plugin format dict from YAML
+                              [{'plugin_name': 'plugin.foo_func.my_func'},
+                               {'plugin_args': [10]}]
+
+        Example:
+        - plugin:
+            - plugin_name: plugin.foo_func.my_func
+            - plugin_args:
+              - arg1_value
+              - arg2_string
+        """
+        try:
+            plugin_name = plugin_list_dicts[0]['plugin_name']
+            plugin_args = plugin_list_dicts[1]['plugin_args']
+
+            # Pack the args arg1, arg2, .... argn
+            args_str = ''
+            for args in plugin_args:
+                if args:
+                    #args_str += str(args)
+                    if isinstance(args, int):
+                        args_str += str(args)
+                    else:
+                        args_str += '"' + str(args) + '"'
+                 # Skip last list element.
+                if args != plugin_args[-1]:
+                    args_str += ","
+        except Exception as e:
+            self.logger.info(e)
+            pass
+        if args_str:
+           plugin_func = plugin_name + '(' + args_str + ')'
+        else:
+           plugin_func = plugin_name + '()'
+
+        # Execute plugin function.
+        self.run_eval(plugin_func)
