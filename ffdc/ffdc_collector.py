@@ -17,6 +17,68 @@ import subprocess
 from ssh_utility import SSHRemoteclient
 from telnet_utility import TelnetRemoteclient
 
+r"""
+User define plugins python functions.
+
+It will imports files from directory plugins
+
+plugins
+├── file1.py
+└── file2.py
+
+Example how to define in YAML:
+ - plugin:
+   - plugin_name: plugin.foo_func.foo_func_yaml
+     - plugin_args:
+       - arg1
+       - arg2
+"""
+plugin_dir = 'plugins'
+try:
+    for module in os.listdir(plugin_dir):
+        if module == '__init__.py' or module[-3:] != '.py':
+            continue
+        plugin_module = "plugins." + module[:-3]
+        # To access the module plugin.<module name>.<function>
+        # Example: plugin.foo_func.foo_func_yaml()
+        try:
+            plugin = __import__(plugin_module, globals(), locals(), [], 0)
+        except Exception as e:
+            print("PLUGIN: Module import failed: %s" % module)
+            pass
+except FileNotFoundError as e:
+    print("PLUGIN: %s" % e)
+    pass
+
+r"""
+This is for plugin functions returning data or responses to the caller
+in YAML plugin setup.
+
+Example:
+
+    - plugin:
+      - plugin_name: version = plugin.ssh_execution.ssh_execute_cmd
+      - plugin_args:
+        - ${hostname}
+        - ${username}
+        - ${password}
+        - "cat /etc/os-release | grep VERSION_ID | awk -F'=' '{print $2}'"
+     - plugin:
+        - plugin_name: plugin.print_vars.print_vars
+        - plugin_args:
+          - version
+
+where first plugin "version" var is used by another plugin in the YAML
+block or plugin
+
+"""
+global global_log_store_path
+global global_plugin_dict
+global global_plugin_list
+global_plugin_dict = {}
+global_plugin_list = []
+global_log_store_path = ''
+
 
 class FFDCCollector:
 
@@ -252,6 +314,7 @@ class FFDCCollector:
                 continue
 
             self.logger.info("\n\tFFDC Path: %s " % self.ffdc_dir_path)
+            global_plugin_dict['global_log_store_path'] = self.ffdc_dir_path
             self.logger.info("\tSystem Type: %s" % target_type)
             for k, v in config_dict[target_type].items():
 
@@ -354,10 +417,21 @@ class FFDCCollector:
         progress_counter = 0
         list_of_cmd = self.get_command_list(self.ffdc_actions[target_type][sub_type])
         for index, each_cmd in enumerate(list_of_cmd, start=0):
+            if isinstance(each_cmd, dict):
+                if 'plugin' in each_cmd:
+                    # call the plugin
+                    self.logger.info("\n\t[PLUGIN-START]")
+                    self.execute_plugin_block(each_cmd['plugin'])
+                    self.logger.info("\t[PLUGIN-END]\n")
+                    continue
+
             result = self.run_tool_cmd(each_cmd)
             if result:
                 try:
                     targ_file = self.get_file_list(self.ffdc_actions[target_type][sub_type])[index]
+                    # If file is specified as None.
+                    if not targ_file:
+                        continue
                 except IndexError:
                     targ_file = each_cmd.split('/')[-1]
                     self.logger.warning(
@@ -766,3 +840,228 @@ class FFDCCollector:
                 mask_dict[k] = re.sub(password_regex, "********", v)
 
         self.logger.info(json.dumps(mask_dict, indent=8, sort_keys=False))
+
+    def execute_python_eval(self, eval_string):
+        r"""
+        Execute qualified python function using eval.
+
+        Description of argument(s):
+        eval_string        Execute the python object.
+
+        Example:
+                eval(plugin.foo_func.foo_func(10))
+        """
+        try:
+            self.logger.info("\tCall func: %s" % eval_string)
+            result = eval(eval_string)
+            self.logger.info("\treturn: %s" % str(result))
+        except (ValueError, SyntaxError, NameError) as e:
+            self.logger.error("execute_python_eval: %s" % e)
+            pass
+
+        return result
+
+    def execute_plugin_block(self, plugin_cmd_list):
+        r"""
+        Pack the plugin command to quailifed python string object.
+
+        Description of argument(s):
+        plugin_list_dict      Plugin block read from YAML
+                              [{'plugin_name': 'plugin.foo_func.my_func'},
+                               {'plugin_args': [10]}]
+
+        Example:
+            - plugin:
+              - plugin_name: plugin.foo_func.my_func
+              - plugin_args:
+                - arg1
+                - arg2
+
+            - plugin:
+              - plugin_name: result = plugin.foo_func.my_func
+              - plugin_args:
+                - arg1
+                - arg2
+
+            - plugin:
+              - plugin_name: result1,result2 = plugin.foo_func.my_func
+              - plugin_args:
+                - arg1
+                - arg2
+        """
+        try:
+            plugin_name = plugin_cmd_list[0]['plugin_name']
+            # Equal separator means plugin function returns result.
+            if ' = ' in plugin_name:
+                # Ex. ['result', 'plugin.foo_func.my_func']
+                plugin_name_args = plugin_name.split(' = ')
+                # plugin func return data.
+                for arg in plugin_name_args:
+                    if arg == plugin_name_args[-1]:
+                        plugin_name = arg
+                    else:
+                        plugin_resp = arg.split(',')
+                        # ['result1','result2']
+                        for x in plugin_resp:
+                            global_plugin_list.append(x)
+                            global_plugin_dict[x] = ""
+
+            # Walk the plugin args ['arg1,'arg2']
+            # If the YAML plugin statement 'plugin_args' is not declared.
+            if any('plugin_args' in d for d in plugin_cmd_list):
+                plugin_args = plugin_cmd_list[1]['plugin_args']
+                plugin_args = self.yaml_args_populate(plugin_args)
+            else:
+                plugin_args = self.yaml_args_populate([])
+
+            # Pack the args arg1, arg2, .... argn into
+            # "arg1","arg2","argn"  string as params for function.
+            parm_args_str = self.yaml_args_string(plugin_args)
+            if parm_args_str:
+                plugin_func = plugin_name + '(' + parm_args_str + ')'
+            else:
+                plugin_func = plugin_name + '()'
+
+            # Execute plugin function.
+            if global_plugin_dict:
+                resp = self.execute_python_eval(plugin_func)
+                self.response_args_data(resp)
+            else:
+                self.execute_python_eval(plugin_func)
+        except Exception as e:
+            self.logger.error("execute_plugin_block-2: %s" % e)
+            pass
+
+    def response_args_data(self, plugin_resp):
+        r"""
+        Parse the plugin function response.
+
+        plugin_resp       Response data from plugin function.
+        """
+        resp_list = []
+        # There is nothing to update the plugin response.
+        if len(global_plugin_list) == 0 or plugin_resp == 'None':
+            return
+
+        # If there is only 1 var declared in YAML for function return,
+        # don't process it but accept as it is.
+        # - plugin_name: ret = plugin.foo_func.my_func
+        if len(global_plugin_list) == 1:
+            global_plugin_dict[global_plugin_list[0]] = plugin_resp
+            return
+
+        if isinstance(plugin_resp, tuple):
+            resp_list = list(plugin_resp)
+            resp_list = [x.strip('\r\n\t') for x in resp_list]
+        elif isinstance(plugin_resp, str):
+            resp_list.append(plugin_resp.strip('\r\n\t'))
+        elif isinstance(plugin_resp, int):
+            resp_list.append(plugin_resp)
+        elif isinstance(plugin_resp, list):
+            resp_list = [x.strip('\r\n\t') for x in plugin_resp]
+
+        for idx, item in enumerate(resp_list, start=0):
+            # Exit loop
+            if idx >= len(global_plugin_list):
+                break
+            # Find the index of the return func in the list and
+            # update the global func return dictionary.
+            try:
+                dict_idx = global_plugin_list[idx]
+                global_plugin_dict[dict_idx] = item
+            except (IndexError, ValueError) as e:
+                self.logger.warn("\tresponse_args_data: %s" % e)
+                pass
+
+        # Done updating plugin dict irrespective of pass or failed,
+        # clear all the list element.
+        global_plugin_list.clear()
+
+    def yaml_args_string(self, plugin_args):
+        r"""
+        Pack the args into string.
+
+        plugin_args            arg list ['arg1','arg2,'argn']
+        """
+        args_str = ''
+        for args in plugin_args:
+            if args:
+                if isinstance(args, int):
+                    args_str += str(args)
+                else:
+                    args_str += '"' + str(args.strip('\r\n\t')) + '"'
+            # Skip last list element.
+            if args != plugin_args[-1]:
+                args_str += ","
+        return args_str
+
+    def yaml_args_populate(self, yaml_arg_list):
+        r"""
+        Decode ${MY_VAR} and load env data when read from YAML.
+
+        Description of argument(s):
+        yaml_arg_list         arg list read from YAML
+
+        Example:
+          - plugin_args:
+            - arg1
+            - arg2
+
+                  yaml_arg_list:  [arg2, arg2]
+        """
+        # Get the env loaded keys as list ['hostname', 'username', 'password'].
+        env_vars_list = list(self.env_dict)
+
+        if isinstance(yaml_arg_list, list):
+            tmp_list = []
+            for arg in yaml_arg_list:
+                if isinstance(arg, int):
+                    tmp_list.append(arg)
+                    continue
+                elif isinstance(arg, str):
+                    arg_str = self.yaml_env_and_plugin_vars_populate(str(arg))
+                    tmp_list.append(arg_str)
+                else:
+                    tmp_list.append(arg)
+
+            # return populated list.
+            return tmp_list
+
+    def yaml_env_and_plugin_vars_populate(self, yaml_arg_str):
+        r"""
+        Update ${MY_VAR} and my_plugin_vars
+
+        Description of argument(s):
+        yaml_arg_str         arg string read from YAML
+
+        Example:
+            - cat ${MY_VAR}
+            - ls -AX my_plugin_var
+        """
+        # Parse the string for env vars.
+        try:
+            # Example, list of matching env vars ['username', 'password', 'hostname']
+            env_var_names_list = re.findall('\$\{([^\}]+)\}', yaml_arg_str)
+            for var in env_var_names_list:
+                env_var = os.environ[var]
+                env_replace = '${' + var + '}'
+                yaml_arg_str = yaml_arg_str.replace(env_replace, env_var)
+        except Exception as e:
+            self.logger.error("yaml_env_vars_populate: %s" % e)
+            pass
+
+        # Parse the string for plugin vars.
+        try:
+            # Example, list of plugin vars ['my_username', 'my_data']
+            plugin_var_name_list = global_plugin_dict.keys()
+            for var in plugin_var_name_list:
+                # If this plugin var exist but empty value in dict, don't replace.
+                # This is either a YAML plugin statement incorrecly used or
+                # user added a plugin var which is not populated.
+                if str(global_plugin_dict[var]):
+                    yaml_arg_str = yaml_arg_str.replace(str(var), str(global_plugin_dict[var]))
+        except (IndexError, ValueError) as e:
+            self.logger.error("yaml_plugin_vars_populate: %s" % e)
+            pass
+
+        return yaml_arg_str
