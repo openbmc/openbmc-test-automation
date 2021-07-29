@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "926d2815_3046b12c",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-07-29T07:50:08Z",
+      "side": 1,
+      "message": "please give a space here",
+      "revId": "6a8e33805c7ea0c8bc012c7b425df5df8d349e99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15cafd2c_76055b23",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-07-29T07:50:08Z",
+      "side": 1,
+      "message": "pls remove\u0027ipmi\u0027 from last",
+      "revId": "6a8e33805c7ea0c8bc012c7b425df5df8d349e99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a234226a_6425defa",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-07-29T07:50:08Z",
+      "side": 1,
+      "message": "pls remove\u0027ipmi\u0027 from last",
+      "revId": "6a8e33805c7ea0c8bc012c7b425df5df8d349e99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8857f72c_3d5dd0b5",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-07-29T07:50:08Z",
+      "side": 1,
+      "message": "If possible, can we put a line to match error returned by command when ipmi is disabled, so that we can be sure cmd failure is only due to ipmi not enabled situation",
+      "revId": "6a8e33805c7ea0c8bc012c7b425df5df8d349e99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
