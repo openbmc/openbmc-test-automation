@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a64e453_73c3de21",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-30T12:18:23Z",
+      "side": 1,
+      "message": "Better to change via Redfish and the refresh GUI in one comment like below. Do it for other test case also.\n\n\n# Turn Off the server LED via Redfish and refresh GUI.\n    Redfish.Patch  /redfish/v1/Systems/system  body\u003d{\"IndicatorLED\":\"Off\"}   valid_status_codes\u003d[200, 204]\n    Refresh GUI\n\n    # Turn ON the LED via GUI.\n    Click Element At Coordinates  ${xpath_led_button}  0  0",
+      "range": {
+        "startLine": 134,
+        "startChar": 6,
+        "endLine": 134,
+        "endChar": 49
+      },
+      "revId": "7153dabdee7b932f360308e6d1619b10393b04d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36fee48a_e5620b5a",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-30T12:18:23Z",
+      "side": 1,
+      "message": "Run Keyword is not required",
+      "range": {
+        "startLine": 135,
+        "startChar": 4,
+        "endLine": 135,
+        "endChar": 17
+      },
+      "revId": "7153dabdee7b932f360308e6d1619b10393b04d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "757bba5e_5342c4c9",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-30T12:18:23Z",
+      "side": 1,
+      "message": "ON",
+      "range": {
+        "startLine": 138,
+        "startChar": 34,
+        "endLine": 138,
+        "endChar": 36
+      },
+      "revId": "7153dabdee7b932f360308e6d1619b10393b04d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "436bdee2_c630ceee",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-07-30T12:18:23Z",
+      "side": 1,
+      "message": "Refresh GUI is enough",
+      "range": {
+        "startLine": 151,
+        "startChar": 4,
+        "endLine": 151,
+        "endChar": 28
+      },
+      "revId": "7153dabdee7b932f360308e6d1619b10393b04d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
