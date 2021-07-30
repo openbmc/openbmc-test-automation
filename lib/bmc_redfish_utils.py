@@ -292,7 +292,7 @@ class bmc_redfish_utils(object):
                 # Example: '/redfish/v1/JsonSchemas/' and sub resources.
                 #          '/redfish/v1/SessionService'
                 #          '/redfish/v1/Managers/bmc#/Oem'
-                if ('JsonSchemas' in resource) or ('SessionService' in resource)\
+                if ('JsonSchemas' in resource) \
                         or ('#' in resource):
                     continue
 
