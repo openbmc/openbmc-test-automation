@@ -25,6 +25,7 @@ plugins/
 ├── foo_func.py
 ├── ssh_execution.py
 └── telnet_execution.py
+
 ```
 
 ### Plugin Template Example
@@ -49,14 +50,36 @@ python3 plugins/foo_func.py
 
 ### YAML Syntax
 
+Plugin function without return statement.
 ```
     - plugin:
         - plugin_name: plugin.foo_func.print_vars
         - plugin_args:
                - "Hello plugin"
+```
+
+Plugin function with return statement.
+```
     - plugin:
         -plugin_name:  return_value = plugin.foo_func.return_vars
         - plugin_args:
+```
+
+when the return directive is used by implying "=" , the `return_value`
+can be accessed within the same block by another following plugins
+by using the variable name directly.
+
+Example:
+```
+    - plugin:
+        -plugin_name:  return_value = plugin.foo_func.print_vars
+        - plugin_args:
+             -  return_value
+```
+
+To accept multiple return values by using coma  "," separated statement
+```
+     -plugin_name:  return_value1,return_value2 = plugin.foo_func.print_vars
 ```
 
 ### Plugin execution output for sample
