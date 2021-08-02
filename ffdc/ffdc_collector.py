@@ -431,6 +431,7 @@ class FFDCCollector:
             if result:
                 try:
                     targ_file = self.get_file_list(self.ffdc_actions[target_type][sub_type])[index]
+                    targ_file = self.yaml_env_and_plugin_vars_populate(targ_file)
                     # If file is specified as None.
                     if not targ_file:
                         continue
