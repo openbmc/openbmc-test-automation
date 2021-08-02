@@ -586,9 +586,11 @@ class FFDCCollector:
 
             for command in list_of_commands:
                 try:
+                    command = self.yaml_env_and_plugin_vars_populate(command)
                     filename = command.split('ls -AX')[1]
+                    filename = self.yaml_env_and_plugin_vars_populate(filename)
                 except IndexError:
-                    self.logger.info("\t\tInvalid command %s" % command)
+                    self.logger.error("\t\tInvalid command %s" % command)
                     continue
 
                 cmd_exit_code, err, response = \
