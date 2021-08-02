@@ -944,29 +944,30 @@ class FFDCCollector:
         plugin_resp       Response data from plugin function.
         """
         resp_list = []
+        resp_data = ""
         # There is nothing to update the plugin response.
         if len(global_plugin_list) == 0 or plugin_resp == 'None':
             return
 
-        # If there is only 1 var declared in YAML for function return,
-        # don't process it but accept as it is.
-        # - plugin_name: ret = plugin.foo_func.my_func
-        if len(global_plugin_list) == 1:
-            if isinstance(plugin_resp, bytes):
-                resp_list = str(plugin_resp, 'UTF-8').strip('\r\n\t')
-            elif isinstance(plugin_resp, str):
-                resp_list.append(plugin_resp.strip('\r\n\t'))
-            elif isinstance(plugin_resp, int) or isinstance(plugin_resp, float):
+        if isinstance(plugin_resp, str):
+            resp_data = plugin_resp.strip('\r\n\t')
+            resp_list.append(resp_data)
+        elif isinstance(plugin_resp, bytes):
+            resp_data = str(plugin_resp, 'UTF-8').strip('\r\n\t')
+            resp_list.append(resp_data)
+        elif isinstance(plugin_resp, tuple):
+            if len(global_plugin_list) == 1:
                 resp_list.append(plugin_resp)
-
-            global_plugin_dict[global_plugin_list[0]] = plugin_resp
-            return
-
-        if isinstance(plugin_resp, tuple):
-            resp_list = list(plugin_resp)
-            resp_list = [x.strip('\r\n\t') for x in resp_list]
+            else:
+                resp_list = list(plugin_resp)
+                resp_list = [x.strip('\r\n\t') for x in resp_list]
         elif isinstance(plugin_resp, list):
-            resp_list = [x.strip('\r\n\t') for x in plugin_resp]
+            if len(global_plugin_list) == 1:
+                resp_list.append([x.strip('\r\n\t') for x in plugin_resp])
+            else:
+                resp_list = [x.strip('\r\n\t') for x in plugin_resp]
+        elif isinstance(plugin_resp, int) or isinstance(plugin_resp, float):
+            resp_list.append(plugin_resp)
 
         for idx, item in enumerate(resp_list, start=0):
             # Exit loop
