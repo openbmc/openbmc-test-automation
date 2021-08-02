@@ -51,6 +51,7 @@ class gui_variables():
     xpath_select_network_settings = "//*[@data-test-id='nav-item-network-settings']"
     xpath_date_time_settings_sub_menu = "//*[@data-test-id='nav-item-date-time-settings']"
     xpath_firmware_update_sub_menu = "//*[@data-test-id='nav-item-firmware']"
+    xpath_security_settings_sub_menu = "//*[@data-test-id='nav-item-security-settings']"
 
     # Access control menu
     xpath_access_control_menu = "//*[@data-test-id='nav-button-access-control']"
