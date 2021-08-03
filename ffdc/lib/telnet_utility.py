@@ -125,5 +125,5 @@ class TelnetRemoteclient:
 
             logging.error("\t\t ERROR %s " % msg)
 
-        # Return binary data.
-        return local_buffer
+        # Return ASCII string data with ending PROMPT stripped
+        return local_buffer.decode('ascii', 'ignore').replace('$ ', '\n')

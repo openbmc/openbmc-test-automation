@@ -389,7 +389,7 @@ class FFDCCollector:
                                        + self.ffdc_prefix
                                        + targ_file)
                 # Creates a new file
-                with open(targ_file_with_path, 'wb') as fp:
+                with open(targ_file_with_path, 'w') as fp:
                     fp.write(result)
                     fp.close
                     telnet_files_saved.append(targ_file)
