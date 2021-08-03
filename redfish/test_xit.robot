@@ -5,8 +5,7 @@ Resource        ../lib/resource.robot
 Resource        ../lib/bmc_redfish_resource.robot
 Resource        ../lib/openbmc_ffdc.robot
 
-Test Teardown   FFDC On Test Case Fail
-
+Test Teardown   Test Teardown Execution
 
 *** Variables ***
 
@@ -49,3 +48,14 @@ Check For REST Dumps
 
     Should Be Equal As Strings  ${rest_resp.status}  ${HTTP_NOT_FOUND}
     ...  msg=1 or more dumps exist.
+
+
+Test Teardown Execution
+    [Documentation]  Do test teardown operation.
+
+    FFDC On Test Case Fail
+    # Remove rm command  once the BMC dump APIs are working.
+    Run Keyword And Ignore Error  BMC Execute Command  rm -rf /var/lib/phosphor-debug-collector/dumps/
+    Run Keyword And Ignore Error  Delete All BMC Dump
+    Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
+    Run Keyword And Ignore Error  Redfish Delete All System Dumps
