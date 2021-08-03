@@ -94,7 +94,16 @@ class SSHRemoteclient:
                     break
                 time.sleep(1)
             cmd_exit_code = stdout.channel.recv_exit_status()
-            return cmd_exit_code, stderr.readlines(), stdout.readlines()
+
+            # Convert list of string to one string
+            err = ''
+            out = ''
+            for item in stderr.readlines():
+                err += item
+            for item in stdout.readlines():
+                out += item
+
+            return cmd_exit_code, err, out
 
         except (paramiko.AuthenticationException, paramiko.SSHException,
                 paramiko.ChannelException, SocketTimeout) as e:
