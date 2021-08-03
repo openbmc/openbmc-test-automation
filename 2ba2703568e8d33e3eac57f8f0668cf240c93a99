@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "406ded72_11f844a3",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-03T11:26:02Z",
+      "side": 1,
+      "message": "will let it be as it is for now, as test teardown execution may not be applicable in each testcase.",
+      "parentUuid": "0d543d85_97b886f2",
+      "revId": "2ba2703568e8d33e3eac57f8f0668cf240c93a99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "36308bef_0292a4c6",
         "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "2ba2703568e8d33e3eac57f8f0668cf240c93a99",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1b1b2bf_fb77d822",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-03T11:26:02Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "36308bef_0292a4c6",
+      "revId": "2ba2703568e8d33e3eac57f8f0668cf240c93a99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
