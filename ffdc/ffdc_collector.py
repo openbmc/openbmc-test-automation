@@ -417,23 +417,25 @@ class FFDCCollector:
         progress_counter = 0
         list_of_cmd = self.get_command_list(self.ffdc_actions[target_type][sub_type])
         for index, each_cmd in enumerate(list_of_cmd, start=0):
+            plugin_call = False
             if isinstance(each_cmd, dict):
                 if 'plugin' in each_cmd:
+                    plugin_call = True
                     # call the plugin
                     self.logger.info("\n\t[PLUGIN-START]")
-                    self.execute_plugin_block(each_cmd['plugin'])
+                    result = self.execute_plugin_block(each_cmd['plugin'])
                     self.logger.info("\t[PLUGIN-END]\n")
-                    continue
             else:
                 each_cmd = self.yaml_env_and_plugin_vars_populate(each_cmd)
 
-            result = self.run_tool_cmd(each_cmd)
+            if not plugin_call:
+                result = self.run_tool_cmd(each_cmd)
             if result:
                 try:
-                    targ_file = self.get_file_list(self.ffdc_actions[target_type][sub_type])[index]
-                    targ_file = self.yaml_env_and_plugin_vars_populate(targ_file)
+                    file_name = self.get_file_list(self.ffdc_actions[target_type][sub_type])[index]
+                    targ_file = self.yaml_env_and_plugin_vars_populate(file_name)
                     # If file is specified as None.
-                    if not targ_file:
+                    if targ_file == "None":
                         continue
                 except IndexError:
                     targ_file = each_cmd.split('/')[-1]
@@ -935,7 +937,8 @@ class FFDCCollector:
                 resp = self.execute_python_eval(plugin_func)
                 self.response_args_data(resp)
             else:
-                self.execute_python_eval(plugin_func)
+                resp = self.execute_python_eval(plugin_func)
+            return resp
         except Exception as e:
             self.logger.error("execute_plugin_block: %s" % e)
             pass
