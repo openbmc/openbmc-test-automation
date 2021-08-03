@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c224e335_6d1b7a07",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-08-03T06:31:08Z",
+      "side": 1,
+      "message": "Added testcases for Security settings page",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 1
+      },
+      "revId": "3a6062b83aea6693c72ba592ace9e2aee1bc8264",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58df10a1_cd1a7b21",
+        "filename": "gui/gui_test/server_config/test_security_settings.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-08-03T06:31:08Z",
+      "side": 1,
+      "message": "Please align the gap margin",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 45
+      },
+      "revId": "3a6062b83aea6693c72ba592ace9e2aee1bc8264",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "395f43c6_02fd7660",
+        "filename": "gui/gui_test/server_config/test_security_settings.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-08-03T06:31:08Z",
+      "side": 1,
+      "message": "Make documentation at least same as the test case name.",
+      "range": {
+        "startLine": 38,
+        "startChar": 21,
+        "endLine": 38,
+        "endChar": 53
+      },
+      "revId": "3a6062b83aea6693c72ba592ace9e2aee1bc8264",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "815e2a76_1e475b42",
+        "filename": "gui/gui_test/server_config/test_security_settings.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-08-03T06:31:08Z",
+      "side": 1,
+      "message": "PLease correct the Tags",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 1
+      },
+      "revId": "3a6062b83aea6693c72ba592ace9e2aee1bc8264",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
