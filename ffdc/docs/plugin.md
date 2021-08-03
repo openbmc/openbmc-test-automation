@@ -79,7 +79,7 @@ Example:
 
 To accept multiple return values by using coma  "," separated statement
 ```
-     -plugin_name:  return_value1,return_value2 = plugin.foo_func.print_vars
+     - plugin_name:  return_value1,return_value2 = plugin.foo_func.print_vars
 ```
 
 ### Plugin execution output for sample
@@ -96,4 +96,23 @@ To accept multiple return values by using coma  "," separated statement
         Call func: plugin.foo_func.return_vars()
         return: 1
         [PLUGIN-END]
+```
+
+### Plugin FILES Direcive
+
+Rules:
+
+If in the YAML with Plugin module called and corresponding file order
+
+plugin response if there is any will be written to named file, if
+
+```
+    FILES:
+        -'name_file.txt'
+```
+
+Else, plugin response will be skipped and not written to any file.
+```
+    FILES:
+        - None
 ```
