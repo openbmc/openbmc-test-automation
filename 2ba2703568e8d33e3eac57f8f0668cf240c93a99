@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d543d85_97b886f2",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2021-08-03T07:55:48Z",
+      "side": 1,
+      "message": "do u want to include Test Teardown Execution here?",
+      "revId": "2ba2703568e8d33e3eac57f8f0668cf240c93a99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36308bef_0292a4c6",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2021-08-03T07:55:48Z",
+      "side": 1,
+      "message": "suite",
+      "revId": "2ba2703568e8d33e3eac57f8f0668cf240c93a99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
