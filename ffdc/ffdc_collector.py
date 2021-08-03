@@ -425,7 +425,7 @@ class FFDCCollector:
                     self.logger.info("\t[PLUGIN-END]\n")
                     continue
             else:
-                self.yaml_env_and_plugin_vars_populate(each_cmd)
+                each_cmd = self.yaml_env_and_plugin_vars_populate(each_cmd)
 
             result = self.run_tool_cmd(each_cmd)
             if result:
