@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0eb8607_655f7d14",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-03T10:13:43Z",
+      "side": 1,
+      "message": "We need to make changes over here also",
+      "range": {
+        "startLine": 24,
+        "startChar": 37,
+        "endLine": 24,
+        "endChar": 45
+      },
+      "revId": "af736922951f9b0f358e39f23e153e6c1b661dc1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
