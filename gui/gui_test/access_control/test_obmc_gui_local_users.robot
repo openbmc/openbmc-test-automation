@@ -108,6 +108,20 @@ Verify User Access Privilege
     disabled_user   Administrator    ${False}
 
 
+Verify User Account And Properties Saved Through Reboots
+    [Documentation]  Verify that user account and properties saved through reboots.
+    [Tags]  Verify_User_Account_And_Properties_Saved_Through_Reboots
+
+    # Create an User account.
+    Create User And Verify  admin_user  Administrator  ${True}
+
+    # Reboot BMC.
+    Redfish OBMC Reboot (off)  stack_mode=normal
+
+    Click Element  ${xpath_refresh_button}
+    Wait Until Page Contains  admin_user  timeout=15
+
+
 *** Keywords ***
 
 Create User And Verify
