@@ -2,8 +2,10 @@
 
 Documentation       Test BMC dump functionality of OpenBMC.
 
-Resource            ../../lib/openbmc_ffdc.robot
+Resource            ../../lib/bmc_redfish_resource.robot
+Resource            ../../lib/boot_utils.robot
 Resource            ../../lib/dump_utils.robot
+Resource            ../../lib/openbmc_ffdc.robot
 
 Suite Setup         Redfish.Login
 Test Setup          Redfish Delete All BMC Dumps
@@ -87,7 +89,7 @@ Verify Dump Persistency On BMC Reset
     ${dump_entries_before}=  redfish_utils.get_member_list  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
 
     # Reset BMC.
-    OBMC Reboot (off)
+    OBMC Reboot (off)  stack_mode=skip
 
     ${dump_entries_after}=  redfish_utils.get_member_list  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
     Lists Should Be Equal  ${dump_entries_before}  ${dump_entries_after}
