@@ -95,9 +95,8 @@ Verify Installed HTTPS Certificate
     [Documentation]  Install HTTPS certificate via Redfish and verify it in GUI.
     [Tags]  Verify_Installed_HTTPS_Certificate
 
-    # Install HTTPS certificate.
-    ${file_data}=  Generate Certificate File Data  Server
-    Install Certificate File On BMC  ${REDFISH_HTTPS_CERTIFICATE_URI}  ok  data=${file_data}
+    # Replace HTTPS certificate.
+    Replace Certificate Via Redfish  Server   Valid Certificate Valid Privatekey  ok
 
     # Verify certificate is available in GUI.
     Wait Until Page Contains  HTTPS Certificate  timeout=10
@@ -150,3 +149,42 @@ Suite Setup Execution
 
     Launch Browser And Login GUI
     Create Directory  certificate_dir
+
+
+Replace Certificate Via Redfish
+    [Documentation]  Test 'replace certificate' operation in the BMC via Redfish.
+    [Arguments]  ${cert_type}  ${cert_format}  ${expected_status}
+
+    # Description of argument(s):
+    # cert_type           Certificate type (e.g. "Server").
+    # cert_format         Certificate file format
+    #                     (e.g. Valid_Certificate_Valid_Privatekey).
+    # expected_status     Expected status of certificate replace Redfish
+    #                     request (i.e. "ok" or "error").
+
+    ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}
+
+    ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+
+    ${certificate_uri}=  Set Variable If
+    ...  '${cert_type}' == 'Server'  ${REDFISH_HTTPS_CERTIFICATE_URI}/1
+
+    ${certificate_dict}=  Create Dictionary  @odata.id=${certificate_uri}
+    ${payload}=  Create Dictionary  CertificateString=${file_data}
+    ...  CertificateType=PEM  CertificateUri=${certificate_dict}
+
+    ${expected_resp}=  Set Variable If  '${expected_status}' == 'ok'  ${HTTP_OK}
+    ...  '${expected_status}' == 'error'  ${HTTP_NOT_FOUND}, ${HTTP_INTERNAL_SERVER_ERROR}
+    ${resp}=  redfish.Post  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
+    ...  body=${payload}  valid_status_codes=[${expected_resp}]
+
+    ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
+    ${bmc_cert_content}=  redfish_utils.Get Attribute  ${certificate_uri}  CertificateString
+
+    Run Keyword If  '${expected_status}' == 'ok'
+    ...    Should Contain  ${cert_file_content}  ${bmc_cert_content}
+    ...  ELSE
+    ...    Should Not Contain  ${cert_file_content}  ${bmc_cert_content}
+
+    [return]  ${file_data}
