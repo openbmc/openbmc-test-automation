@@ -95,9 +95,8 @@ Verify Installed HTTPS Certificate
     [Documentation]  Install HTTPS certificate via Redfish and verify it in GUI.
     [Tags]  Verify_Installed_HTTPS_Certificate
 
-    # Install HTTPS certificate.
-    ${file_data}=  Generate Certificate File Data  Server
-    Install Certificate File On BMC  ${REDFISH_HTTPS_CERTIFICATE_URI}  ok  data=${file_data}
+    # Replace HTTPS certificate.
+    Replace Certificate Via Redfish  Server   Valid Certificate Valid Privatekey  ok
 
     # Verify certificate is available in GUI.
     Wait Until Page Contains  HTTPS Certificate  timeout=10

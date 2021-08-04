@@ -190,3 +190,54 @@ Delete Certificate Via BMC CLI
     BMC Execute Command  systemctl daemon-reload
     Wait Until Keyword Succeeds  1 min  10 sec  Redfish.Get  ${certificate_uri}/1
     ...  valid_status_codes=[${HTTP_NOT_FOUND}, ${HTTP_INTERNAL_SERVER_ERROR}]
+
+
+Replace Certificate Via Redfish
+    [Documentation]  Test 'replace certificate' operation in the BMC via Redfish.
+    [Arguments]  ${cert_type}  ${cert_format}  ${expected_status}
+
+    # Description of argument(s):
+    # cert_type           Certificate type (e.g. "Server" or "Client").
+    # cert_format         Certificate file format
+    #                     (e.g. Valid_Certificate_Valid_Privatekey).
+    # expected_status     Expected status of certificate replace Redfish
+    #                     request (i.e. "ok" or "error").
+
+    # Install certificate before replacing client or CA certificate.
+    ${cert_id}=  Run Keyword If  '${cert_type}' == 'Client'
+    ...    Install And Verify Certificate Via Redfish  ${cert_type}  Valid Certificate Valid Privatekey  ok
+    ...  ELSE IF  '${cert_type}' == 'CA'
+    ...    Install And Verify Certificate Via Redfish  ${cert_type}  Valid Certificate  ok
+
+    ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}
+
+    ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
+    ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+
+    Run Keyword If  '${cert_format}' == 'Expired Certificate'
+    ...    Modify BMC Date  future
+    ...  ELSE IF  '${cert_format}' == 'Not Yet Valid Certificate'
+    ...    Modify BMC Date  old
+
+
+    ${certificate_uri}=  Set Variable If
+    ...  '${cert_type}' == 'Server'  ${REDFISH_HTTPS_CERTIFICATE_URI}/1
+    ...  '${cert_type}' == 'Client'  ${REDFISH_LDAP_CERTIFICATE_URI}/1
+    ...  '${cert_type}' == 'CA'  ${REDFISH_CA_CERTIFICATE_URI}/${cert_id}
+
+    ${certificate_dict}=  Create Dictionary  @odata.id=${certificate_uri}
+    ${payload}=  Create Dictionary  CertificateString=${file_data}
+    ...  CertificateType=PEM  CertificateUri=${certificate_dict}
+
+    ${expected_resp}=  Set Variable If  '${expected_status}' == 'ok'  ${HTTP_OK}
+    ...  '${expected_status}' == 'error'  ${HTTP_NOT_FOUND}, ${HTTP_INTERNAL_SERVER_ERROR}
+    ${resp}=  redfish.Post  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
+    ...  body=${payload}  valid_status_codes=[${expected_resp}]
+
+    ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
+    ${bmc_cert_content}=  redfish_utils.Get Attribute  ${certificate_uri}  CertificateString
+
+    Run Keyword If  '${expected_status}' == 'ok'
+    ...    Should Contain  ${cert_file_content}  ${bmc_cert_content}
+    ...  ELSE
+    ...    Should Not Contain  ${cert_file_content}  ${bmc_cert_content}
