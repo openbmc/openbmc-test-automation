@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "191b8f40_5b9bcaad",
+        "filename": "lib/redfish_request.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-04T11:47:37Z",
+      "side": 1,
+      "message": "Whre is this coming from ?",
+      "revId": "b0f70889f46ff3b86c83760e21a4d2073a3802ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff97ef89_0d940e70",
+        "filename": "lib/redfish_request.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-04T11:47:37Z",
+      "side": 1,
+      "message": "? what is this ? OEM client ?",
+      "range": {
+        "startLine": 89,
+        "startChar": 10,
+        "endLine": 89,
+        "endChar": 60
+      },
+      "revId": "b0f70889f46ff3b86c83760e21a4d2073a3802ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
