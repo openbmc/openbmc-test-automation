@@ -27,7 +27,7 @@ Verify User Initiated BMC Dump When Host Powered Off
     [Tags]  Verify_User_Initiated_BMC_Dump_When_Host_Powered_Off
 
     Redfish Power Off  stack_mode=skip
-    ${dump_id}=  Create User Initiated BMC Dump
+    ${dump_id}=  Create User Initiated BMC Dump Via Redfish
     ${dump_entries}=  Get BMC Dump Entries
     Length Should Be  ${dump_entries}  1
     List Should Contain Value  ${dump_entries}  ${dump_id}
@@ -38,7 +38,7 @@ Verify User Initiated BMC Dump When Host Booted
     [Tags]  Verify_User_Initiated_BMC_Dump_When_Host_Booted
 
     Redfish Power On  stack_mode=skip
-    ${dump_id}=  Create User Initiated BMC Dump
+    ${dump_id}=  Create User Initiated BMC Dump Via Redfish
     ${dump_entries}=  Get BMC Dump Entries
     Length Should Be  ${dump_entries}  1
     List Should Contain Value  ${dump_entries}  ${dump_id}
@@ -48,7 +48,7 @@ Verify User Initiated BMC Dump Size
     [Documentation]  Verify user initiated BMC dump size is under 200 KB.
     [Tags]  Verify_User_Initiated_BMC_Dump_Size
 
-    ${dump_id}=  Create User Initiated BMC Dump
+    ${dump_id}=  Create User Initiated BMC Dump Via Redfish
     ${resp}=  Redfish.Get Properties  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}
 
     # Example of response from above Redfish GET request.
@@ -70,7 +70,7 @@ Verify Dump Persistency On Dump Service Restart
     ...  persistency.
     [Tags]  Verify_Dump_Persistency_On_Dump_Service_Restart
 
-    Create User Initiated BMC Dump
+    Create User Initiated BMC Dump Via Redfish
     ${dump_entries_before}=  redfish_utils.get_member_list  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
 
     # Restart dump service.
@@ -85,7 +85,7 @@ Verify Dump Persistency On BMC Reset
     [Documentation]  Create user dump, reset BMC and verify dump persistency.
     [Tags]  Verify_Dump_Persistency_On_BMC_Reset
 
-    Create User Initiated BMC Dump
+    Create User Initiated BMC Dump Via Redfish
     ${dump_entries_before}=  redfish_utils.get_member_list  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
 
     # Reset BMC.
@@ -99,7 +99,7 @@ Delete User Initiated BMC Dump And Verify
     [Documentation]  Delete user initiated BMC dump and verify.
     [Tags]  Delete_User_Initiated_BMC_Dump_And_Verify
 
-    ${dump_id}=  Create User Initiated BMC Dump
+    ${dump_id}=  Create User Initiated BMC Dump Via Redfish
     Redfish Delete BMC Dump  ${dump_id}
 
     ${dump_entries}=  Get BMC Dump Entries
@@ -111,8 +111,8 @@ Delete All User Initiated BMC Dumps And Verify
     [Tags]  Delete_All_User_Initiated_BMC_Dumps_And_Verify
 
     # Create some BMC dump.
-    Create User Initiated BMC Dump
-    Create User Initiated BMC Dump
+    Create User Initiated BMC Dump Via Redfish
+    Create User Initiated BMC Dump Via Redfish
 
     Redfish Delete All BMC Dumps
     ${dump_entries}=  Get BMC Dump Entries
@@ -123,8 +123,8 @@ Create Two User Initiated BMC Dumps
     [Documentation]  Create two user initiated BMC dumps.
     [Tags]  Create_Two_User_Initiated_BMC_Dumps
 
-    ${dump_id1}=  Create User Initiated BMC Dump
-    ${dump_id2}=  Create User Initiated BMC Dump
+    ${dump_id1}=  Create User Initiated BMC Dump Via Redfish
+    ${dump_id2}=  Create User Initiated BMC Dump Via Redfish
 
     ${dump_entries}=  Get BMC Dump Entries
     Length Should Be  ${dump_entries}  2
@@ -136,8 +136,8 @@ Create Two User Initiated BMC Dumps And Delete One
     [Documentation]  Create two dumps and delete the first.
     [Tags]  Create_Two_User_Initiated_BMC_Dumps_And_Delete_One
 
-    ${dump_id1}=  Create User Initiated BMC Dump
-    ${dump_id2}=  Create User Initiated BMC Dump
+    ${dump_id1}=  Create User Initiated BMC Dump Via Redfish
+    ${dump_id2}=  Create User Initiated BMC Dump Via Redfish
 
     Redfish Delete BMC Dump  ${dump_id1}
 
@@ -151,7 +151,7 @@ Create And Delete User Initiated BMC Dump Multiple Times
     [Tags]  Create_And_Delete_User_Initiated_BMC_Dump_Multiple_Times
 
     FOR  ${INDEX}  IN  1  10
-      ${dump_id}=  Create User Initiated BMC Dump
+      ${dump_id}=  Create User Initiated BMC Dump Via Redfish
       Redfish Delete BMC Dump  ${dump_id}
     END
 
@@ -166,7 +166,7 @@ Verify Maximum BMC Dump Creation
     # iterations to run out of space.
 
     FOR  ${n}  IN RANGE  0  20
-      Create User Initiated BMC Dump
+      Create User Initiated BMC Dump Via Redfish
       ${dump_space}=  Get Disk Usage For Dumps
       Exit For Loop If  ${dump_space} >= (${BMC_DUMP_TOTAL_SIZE} - ${BMC_DUMP_MIN_SPACE_REQD})
     END
@@ -179,8 +179,8 @@ Verify Maximum BMC Dump Creation
 
 *** Keywords ***
 
-Create User Initiated BMC Dump
-    [Documentation]  Generate user initiated BMC dump and return the dump id number (e.g., "5").
+Create User Initiated BMC Dump Via Redfish
+    [Documentation]  Generate user initiated BMC dump via Redfish and return the dump id number (e.g., "5").
 
     ${payload}=  Create Dictionary  DiagnosticDataType=Manager
     ${resp}=  Redfish.Post  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
