@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23c78043_860b654b",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-04T11:32:36Z",
+      "side": 1,
+      "message": "dont set .. please pass by value to functions to keep it generic",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 31
+      },
+      "revId": "5b21fb0806d166bdae20ee7f23595ea12e60f630",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "56094fc2_4b079f99",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-04T11:32:36Z",
+      "side": 1,
+      "message": "Switch to back up and rebooting",
+      "range": {
+        "startLine": 69,
+        "startChar": 13,
+        "endLine": 69,
+        "endChar": 106
+      },
+      "revId": "5b21fb0806d166bdae20ee7f23595ea12e60f630",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa2b46f5_7a094bbe",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-04T11:32:36Z",
+      "side": 1,
+      "message": "Performing firmware update ${image_version}",
+      "range": {
+        "startLine": 72,
+        "startChar": 16,
+        "endLine": 72,
+        "endChar": 71
+      },
+      "revId": "5b21fb0806d166bdae20ee7f23595ea12e60f630",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
