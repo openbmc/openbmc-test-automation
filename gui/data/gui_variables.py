@@ -71,3 +71,4 @@ class gui_variables():
 
     # Common variables
     xpath_save_settings_button = "//button[contains(text(),'Save settings')]"
+    xpath_confirm_button = "//button[contains(text(),'Confirm')]"

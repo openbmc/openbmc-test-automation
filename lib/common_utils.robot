@@ -967,3 +967,11 @@ Verify Watchdog Enabled
     ${properties}=  Read Properties  /xyz/openbmc_project/watchdog/host0
     Should Be Equal As Strings  ${properties["Enabled"]}  ${True}
     Should Not Be Equal As Strings  ${properties["TimeRemaining"]}  0
+
+
+Is BMC Unpingable
+    [Documentation]  Check if BMC is unpingable.
+
+    ${RC}  ${output}=  Run and return RC and Output  ping -c 4 ${OPENBMC_HOST}
+    Log  RC: ${RC}\nOutput:\n${output}
+    Should be equal  ${RC}  ${1}
