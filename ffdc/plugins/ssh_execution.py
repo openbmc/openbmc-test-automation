@@ -23,7 +23,8 @@ def ssh_execute_cmd(hostname,
                     username,
                     password,
                     command,
-                    timeout=60):
+                    timeout=60,
+                    type=None):
     r"""
         Description of argument(s):
 
@@ -32,6 +33,7 @@ def ssh_execute_cmd(hostname,
         password        Password for user on remote host
         command         Command to run on remote host
         timeout         Time, in second, to wait for command completion
+        type            Data type return as list or others.
     """
     ssh_remoteclient = SSHRemoteclient(hostname,
                                        username,
@@ -54,4 +56,7 @@ def ssh_execute_cmd(hostname,
     if ssh_remoteclient:
         ssh_remoteclient.ssh_remoteclient_disconnect()
 
-    return response
+    if type == "list":
+        return response.split('\n')
+    else:
+        return response
