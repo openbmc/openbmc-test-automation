@@ -75,8 +75,13 @@ block or plugin
 global global_log_store_path
 global global_plugin_dict
 global global_plugin_list
+# Hold the plugin return values in dict and plugin return vars in list.
 global_plugin_dict = {}
 global_plugin_list = []
+# Hold the plugin return named declared if function returned values are list,dict.
+# Refer this name list to look up the plugin dict for eval() args function
+# Example [ 'version']
+global_plugin_type_list = []
 global_log_store_path = ''
 
 
@@ -433,10 +438,10 @@ class FFDCCollector:
             if result:
                 try:
                     file_name = self.get_file_list(self.ffdc_actions[target_type][sub_type])[index]
-                    targ_file = self.yaml_env_and_plugin_vars_populate(file_name)
                     # If file is specified as None.
-                    if targ_file == "None":
+                    if file_name == "None":
                         continue
+                    targ_file = self.yaml_env_and_plugin_vars_populate(file_name)
                 except IndexError:
                     targ_file = each_cmd.split('/')[-1]
                     self.logger.warning(
@@ -1001,8 +1006,10 @@ class FFDCCollector:
         args_str = ''
         for args in plugin_args:
             if args:
-                if isinstance(args, int):
+                if isinstance(args, (int, float)):
                     args_str += str(args)
+                elif args in global_plugin_type_list:
+                    args_str += str(global_plugin_dict[args])
                 else:
                     args_str += '"' + str(args.strip('\r\n\t')) + '"'
             # Skip last list element.
@@ -1030,7 +1037,7 @@ class FFDCCollector:
         if isinstance(yaml_arg_list, list):
             tmp_list = []
             for arg in yaml_arg_list:
-                if isinstance(arg, int):
+                if isinstance(arg, (int, float)):
                     tmp_list.append(arg)
                     continue
                 elif isinstance(arg, str):
@@ -1072,10 +1079,21 @@ class FFDCCollector:
             # Example, list of plugin vars ['my_username', 'my_data']
             plugin_var_name_list = global_plugin_dict.keys()
             for var in plugin_var_name_list:
+                # skip env var list already populated above block list.
+                if var in env_var_names_list:
+                    continue
                 # If this plugin var exist but empty value in dict, don't replace.
                 # This is either a YAML plugin statement incorrecly used or
                 # user added a plugin var which is not populated.
-                if str(global_plugin_dict[var]):
+                if yaml_arg_str in global_plugin_dict:
+                    if isinstance(global_plugin_dict[var], (list, dict)):
+                        # List data type or dict cant be replaced, use directly
+                        # in eval function call.
+                        global_plugin_type_list.append(var)
+                    else:
+                        yaml_arg_str = yaml_arg_str.replace(str(var), str(global_plugin_dict[var]))
+                # Just a string like filename or command.
+                else:
                     yaml_arg_str = yaml_arg_str.replace(str(var), str(global_plugin_dict[var]))
         except (IndexError, ValueError) as e:
             self.logger.error("yaml_plugin_vars_populate: %s" % e)
