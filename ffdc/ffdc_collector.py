@@ -595,8 +595,6 @@ class FFDCCollector:
             for command in list_of_commands:
                 try:
                     command = self.yaml_env_and_plugin_vars_populate(command)
-                    filename = command.split('ls -AX')[1]
-                    filename = self.yaml_env_and_plugin_vars_populate(filename)
                 except IndexError:
                     self.logger.error("\t\tInvalid command %s" % command)
                     continue
@@ -607,11 +605,13 @@ class FFDCCollector:
                 # If file does not exist, code take no action.
                 # cmd_exit_code is ignored for this scenario.
                 if response:
-                    scp_result = self.ssh_remoteclient.scp_file_from_remote(filename, self.ffdc_dir_path)
+                    scp_result = \
+                        self.ssh_remoteclient.scp_file_from_remote(response.split('\n'),
+                                                                   self.ffdc_dir_path)
                     if scp_result:
-                        self.logger.info("\t\tSuccessfully copied from " + self.hostname + ':' + filename)
+                        self.logger.info("\t\tSuccessfully copied from " + self.hostname + ':' + command)
                 else:
-                    self.logger.info("\t\tThere is no " + filename)
+                    self.logger.info("\t\t%s has no result" % command)
 
         else:
             self.logger.info("\n\n\tSkip copying files from remote system %s.\n" % self.hostname)
