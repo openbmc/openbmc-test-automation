@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0fb79b16_26f3703d",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-06T10:05:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23c78043_860b654b",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 31
+      },
+      "revId": "5b21fb0806d166bdae20ee7f23595ea12e60f630",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "56094fc2_4b079f99",
         "filename": "redfish/extended/redfish_bmc_code_update.robot",
         "patchSetId": 5
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "ae49c7c9_99312644",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-06T10:05:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56094fc2_4b079f99",
+      "range": {
+        "startLine": 69,
+        "startChar": 13,
+        "endLine": 69,
+        "endChar": 106
+      },
+      "revId": "5b21fb0806d166bdae20ee7f23595ea12e60f630",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fa2b46f5_7a094bbe",
         "filename": "redfish/extended/redfish_bmc_code_update.robot",
         "patchSetId": 5
@@ -68,6 +116,30 @@
       "revId": "5b21fb0806d166bdae20ee7f23595ea12e60f630",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a317d1b7_c90ed113",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-06T10:05:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa2b46f5_7a094bbe",
+      "range": {
+        "startLine": 72,
+        "startChar": 16,
+        "endLine": 72,
+        "endChar": 71
+      },
+      "revId": "5b21fb0806d166bdae20ee7f23595ea12e60f630",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
