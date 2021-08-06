@@ -84,11 +84,17 @@ global_plugin_list = []
 global_plugin_type_list = []
 global_log_store_path = ''
 
+# Plugin error state defaults.
+plugin_error_dict = {
+    'exit_on_error': False,
+    'continue_on_error': False,
+}
+
 
 class FFDCCollector:
 
     r"""
-    Sends commands from configuration file to the targeted system to collect log files.
+    Execute commands from configuration file to collect log files.
     Fetch and store generated files at the specified location.
 
     """
@@ -425,6 +431,15 @@ class FFDCCollector:
             plugin_call = False
             if isinstance(each_cmd, dict):
                 if 'plugin' in each_cmd:
+                    # If the error is set and plugin explicitly
+                    # requested to skip execution on error..
+                    if plugin_error_dict['exit_on_error'] and \
+                            self.plugin_error_check(each_cmd['plugin']):
+                        self.logger.info("\n\t[PLUGIN-ERROR] exit_on_error: %s" %
+                                         plugin_error_dict['exit_on_error'])
+                        self.logger.info("\t[PLUGIN-SKIP] %s" %
+                                         each_cmd['plugin'][0])
+                        continue
                     plugin_call = True
                     # call the plugin
                     self.logger.info("\n\t[PLUGIN-START]")
@@ -868,7 +883,9 @@ class FFDCCollector:
             result = eval(eval_string)
             self.logger.info("\treturn: %s" % str(result))
         except (ValueError, SyntaxError, NameError) as e:
-            self.logger.error("execute_python_eval: %s" % e)
+            self.logger.error("\tERROR: execute_python_eval: %s" % e)
+            # Set the plugin error state.
+            plugin_error_dict['exit_on_error'] = True
             pass
 
         return result
@@ -945,7 +962,9 @@ class FFDCCollector:
                 resp = self.execute_python_eval(plugin_func)
             return resp
         except Exception as e:
-            self.logger.error("execute_plugin_block: %s" % e)
+            # Set the plugin error state.
+            plugin_error_dict['exit_on_error'] = True
+            self.logger.error("\tERROR: execute_plugin_block: %s" % e)
             pass
 
     def response_args_data(self, plugin_resp):
@@ -990,7 +1009,7 @@ class FFDCCollector:
                 dict_idx = global_plugin_list[idx]
                 global_plugin_dict[dict_idx] = item
             except (IndexError, ValueError) as e:
-                self.logger.warn("\tresponse_args_data: %s" % e)
+                self.logger.warn("\tWARN: response_args_data: %s" % e)
                 pass
 
         # Done updating plugin dict irrespective of pass or failed,
@@ -1071,7 +1090,7 @@ class FFDCCollector:
                 env_replace = '${' + var + '}'
                 yaml_arg_str = yaml_arg_str.replace(env_replace, env_var)
         except Exception as e:
-            self.logger.error("yaml_env_vars_populate: %s" % e)
+            self.logger.error("\tERROR:yaml_env_vars_populate: %s" % e)
             pass
 
         # Parse the string for plugin vars.
@@ -1096,7 +1115,21 @@ class FFDCCollector:
                 else:
                     yaml_arg_str = yaml_arg_str.replace(str(var), str(global_plugin_dict[var]))
         except (IndexError, ValueError) as e:
-            self.logger.error("yaml_plugin_vars_populate: %s" % e)
+            self.logger.error("\tERROR: yaml_plugin_vars_populate: %s" % e)
             pass
 
         return yaml_arg_str
+
+    def plugin_error_check(self, plugin_dict):
+        r"""
+        Plugin error dict processing.
+
+        Description of argument(s):
+        plugin_dict        Dictionary of plugin error.
+        """
+        if any('plugin_error' in d for d in plugin_dict):
+            for d in plugin_dict:
+                if 'plugin_error' in d:
+                    value = d['plugin_error']
+                    # Reference if the error is set or not by plugin.
+                    return plugin_error_dict[value]
