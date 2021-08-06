@@ -84,35 +84,41 @@ class TelnetRemoteclient:
 
             Description of argument(s):
             cmd             Command to run on remote host
-            rtnpartial      Set to True to return command output even
-                            if we haven't read the command prompt
-            wait_cnt        Number of times to check for command output
-                            default is 5
             i_timeout       Timeout for command output
                             default is 300 seconds
         '''
 
-        # Execute the command and read the command output
+        # Gives the command 120 seconds to execute and fill buffer
+        # before reading output.
+        execution_time = 120
+
+        # Execute the command and read the command output.
         return_buffer = b''
         try:
 
-            # Do at least one non-blocking read
+            # Do at least one non-blocking read.
             #  to flush whatever data is in the read buffer.
             while self.tnclient.read_very_eager():
                 continue
 
             # Execute the command
             self.tnclient.write(cmd.encode('utf-8') + b'\n')
-            time.sleep(i_timeout)
+            time.sleep(execution_time)
 
+            start = time.time()
             local_buffer = b''
-            # Read the command output one block at a time.
-            return_buffer = self.tnclient.read_very_eager()
-            while return_buffer:
-                local_buffer = b''.join([local_buffer, return_buffer])
-                time.sleep(3)  # let the buffer fill up a bit
+            while time.time() - start < i_timeout:
+                # Read the command output one block at a time.
                 return_buffer = self.tnclient.read_very_eager()
-
+                while return_buffer:
+                    local_buffer = b''.join([local_buffer, return_buffer])
+                    time.sleep(3)  # let the buffer fill up a bit
+                    return_buffer = self.tnclient.read_very_eager()
+                else:
+                    # No more available data and last byte read is the prompt,
+                    #  done reading. Break out of i_timeout loop
+                    if local_buffer[-2:] == b'$ ':
+                        break
         except (socket.error, EOFError) as e:
             self.tn_remoteclient_disconnect()
 
