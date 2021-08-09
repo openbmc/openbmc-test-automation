@@ -90,6 +90,10 @@ ${RESET_PACKETS}           RST
 ${FIN_PACKETS}             FIN
 ${SYN_ACK_RESET}           SAR
 ${ALL_FLAGS}               ALL
+# Used to set BMC static IPv4 configuration.
+${STATIC_IP}            ${EMPTY}
+${NETMASK}              ${EMPTY}
+${GATEWAY}              ${EMPTY}
 
 # BMC debug tarball parameter
 ${DEBUG_TARBALL_PATH}  ${EMPTY}
