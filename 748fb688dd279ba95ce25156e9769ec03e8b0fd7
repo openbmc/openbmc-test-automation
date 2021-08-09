@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4240a1fa_12d9c460",
+        "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-09T09:38:01Z",
+      "side": 1,
+      "message": "Verify BMC Reboot Operation",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 41
+      },
+      "revId": "748fb688dd279ba95ce25156e9769ec03e8b0fd7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a1efadca_141f831a",
+        "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-09T09:38:01Z",
+      "side": 1,
+      "message": "Wait for BMC to become unpingable and then check if it becomes pingable. Later check if BMC has got into ready state.\n    \nFor below, you need to create a keyword to check if BMC is pingable.\n\nWait Until Keyword Succeed  Is BMC Unpingable  ${OPENBMC_HOST}  3 mins\nWait For Host To Ping  ${OPENBMC_HOST}  3 mins",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 58
+      },
+      "revId": "748fb688dd279ba95ce25156e9769ec03e8b0fd7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b67870eb_af5c7581",
+        "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-09T09:38:01Z",
+      "side": 1,
+      "message": "This keyword is already there in lib/common_utils.robot. No need to create a duplicate.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 84
+      },
+      "revId": "748fb688dd279ba95ce25156e9769ec03e8b0fd7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
