@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "11c75d20_6d352c0e",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-09T07:46:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a04f04c_52c44d84",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 42
+      },
+      "revId": "3284207d9047c987ab5cc7f50f46059235222a2a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cc61a3d0_e431627c",
         "filename": "redfish/update_service/test_firmware_inventory.robot",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "3284207d9047c987ab5cc7f50f46059235222a2a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e25ba504_f670eb5d",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-09T07:46:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc61a3d0_e431627c",
+      "range": {
+        "startLine": 254,
+        "startChar": 0,
+        "endLine": 256,
+        "endChar": 0
+      },
+      "revId": "3284207d9047c987ab5cc7f50f46059235222a2a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
