@@ -77,33 +77,37 @@ class TelnetRemoteclient:
             pass
 
     def execute_command(self, cmd,
-                        i_timeout=300):
+                        i_timeout=120):
 
         r'''
             Executes commands on the remote host
 
             Description of argument(s):
             cmd             Command to run on remote host
-            rtnpartial      Set to True to return command output even
-                            if we haven't read the command prompt
-            wait_cnt        Number of times to check for command output
-                            default is 5
             i_timeout       Timeout for command output
-                            default is 300 seconds
+                            default is 120 seconds
         '''
 
-        # Execute the command and read the command output
+        # Wait time for command execution before reading the output.
+        # Use user input wait time for command execution if one exists.
+        # Else use the default 120 sec,
+        if i_timeout != 120:
+            execution_time = i_timeout
+        else:
+            execution_time = 120
+
+        # Execute the command and read the command output.
         return_buffer = b''
         try:
 
-            # Do at least one non-blocking read
+            # Do at least one non-blocking read.
             #  to flush whatever data is in the read buffer.
             while self.tnclient.read_very_eager():
                 continue
 
             # Execute the command
             self.tnclient.write(cmd.encode('utf-8') + b'\n')
-            time.sleep(i_timeout)
+            time.sleep(execution_time)
 
             local_buffer = b''
             # Read the command output one block at a time.
@@ -112,7 +116,6 @@ class TelnetRemoteclient:
                 local_buffer = b''.join([local_buffer, return_buffer])
                 time.sleep(3)  # let the buffer fill up a bit
                 return_buffer = self.tnclient.read_very_eager()
-
         except (socket.error, EOFError) as e:
             self.tn_remoteclient_disconnect()
 
