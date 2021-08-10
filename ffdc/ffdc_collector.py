@@ -33,7 +33,8 @@ Example how to define in YAML:
        - arg1
        - arg2
 """
-plugin_dir = 'plugins'
+abs_path = os.path.abspath(os.path.dirname(sys.argv[0]))
+plugin_dir = abs_path + '/plugins'
 try:
     for module in os.listdir(plugin_dir):
         if module == '__init__.py' or module[-3:] != '.py':
