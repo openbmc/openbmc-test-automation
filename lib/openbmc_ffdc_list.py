@@ -57,6 +57,7 @@ FFDC_BMC_FILE = {
         'BMC_obmc_console1.txt': 'cat /var/log/obmc-console1.log >/tmp/BMC_obmc_console1.txt 2>&1',
         'PEL_logs_list.json': 'peltool -l >/tmp/PEL_logs_list.json 2>&1',
         'PEL_logs_display.json': 'peltool -a >/tmp/PEL_logs_display.json 2>&1',
+        'pldm_flight_recorder': 'killall -s SIGUSR1 pldmd; sleep 5;',
     },
 }
 # Add file name and corresponding command needed for all Linux distributions
