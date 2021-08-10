@@ -30,7 +30,7 @@ Verify Creating User With Service Username
     ${payload}=  Create Dictionary
     ...  UserName=service Password=TestPwd1  RoleId=Operator  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
-    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+    ...  valid_status_codes=[${HTTP_FORBIDDEN}]
 
 
 Verify Modifying Service User Password
@@ -40,7 +40,7 @@ Verify Modifying Service User Password
      ${payload}=  Create Dictionary  Password=NewTestPwd123
      # Modification of service user password is not allowed via Redfish API.
      Redfish.Patch  /redfish/v1/AccountService/Accounts/service  body=&{payload}
-     ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+     ...  valid_status_codes=[${HTTP_FORBIDDEN}]
 
 
 Verify Renaming Service User
@@ -49,14 +49,14 @@ Verify Renaming Service User
 
      ${payload}=  Create Dictionary  UserName=new_service
      Redfish.Patch  /redfish/v1/AccountService/Accounts/service  body=&{payload}
-     ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+     ...  valid_status_codes=[${HTTP_FORBIDDEN}]
 
 
 Verify Deleting Service User
      [Documentation]  Verify error while deleting service user via Redfish.
      [Tags]  Verify_Deleting_Service_User
 
-     Redfish.Delete  /redfish/v1/AccountService/Accounts/service  valid_status_codes=[${HTTP_BAD_REQUEST}]
+     Redfish.Delete  /redfish/v1/AccountService/Accounts/service  valid_status_codes=[${HTTP_FORBIDDEN}]
 
 
 *** Keywords ***
