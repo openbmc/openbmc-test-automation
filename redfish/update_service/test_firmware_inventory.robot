@@ -208,6 +208,26 @@ Verify Redfish Software Image And Firmware Inventory Are Same
     Should Be Equal  ${num_records_sw_image}  ${num_records_sw_inv}
 
 
+Check Redfish Active Software Image And Firmware Inventory Are Same
+    [Documentation]  Check the Redfish firmware inventory path is same as
+    ...  active software image of Redfish managers.
+    [Tags]  Check_Redfish_Active_Software_Image_And_Firmware_Inventory_Are_Same
+    [Template]  Verify Redfish Active Software Image And Firmware Inventory Are Same
+
+    # image
+    functional_image
+
+
+Check Redfish Backup Active Software Image And Firmware Inventory Are Same
+    [Documentation]  Check the Redfish backup image firmware inventory path is same as
+    ...  active software image of Redfish managers.
+    [Tags]  Check_Redfish_Backup_Active_Software_Image_And_Firmware_Inventory_Are_Same
+    [Template]  Verify Redfish Active Software Image And Firmware Inventory Are Same
+
+    # image
+    switch_backup_image
+
+
 Verify Redfish BIOS Version
     [Documentation]  Get host firmware version from system inventory.
     [Tags]  Verify_Redfish_BIOS_Version
@@ -233,7 +253,7 @@ Test Teardown Execution
 
 
 Verify Firmware Version Same In Firmware Inventory And Managers
-    [Documentation]  Verify the redfish firmware inventory path version is same as Redfish managers.
+    [Documentation]  Verify the Redfish firmware inventory path version is same as Redfish managers.
 
     # User defined state for software objects.
     # Note: "Functional" term refers to firmware which system is currently booted with.
@@ -258,7 +278,7 @@ Verify Firmware Version Same In Firmware Inventory And Managers
 
 
 Verify Firmware Version Is Not Same In Firmware Inventory And Managers
-    [Documentation]  Verify the redfish firmware inventory path version is not same as
+    [Documentation]  Verify the Redfish firmware inventory path version is not same as
     ...  Redfish managers for backup image.
 
     # User defined state for software objects.
@@ -313,3 +333,40 @@ Verify Redfish Functional Image Version Is Same
     ...    Set Backup Firmware Image As Functional  AND
     ...    Verify Firmware Version Same In Firmware Inventory And Managers
 
+
+Verify Active Software Image And Firmware Inventory Is Same
+    [Documentation]  Verify Redfish firmware inventory path and active software image is same.
+
+    # ActiveSoftwareImage
+    # /redfish/v1/UpdateService/FirmwareInventory/632c5114
+
+    ${firmware_inv_path}=  Redfish.Get Properties  ${REDFISH_BASE_URI}Managers/bmc
+    ${firmware_inv_path}=  Get From Dictionary  ${firmware_inv_path}  Links
+    ${active_sw_image}=  Get From Dictionary  ${firmware_inv_path}  ActiveSoftwareImage
+    ${active_sw_image}=  Get From Dictionary  ${active_sw_image}  @odata.id
+
+    ${sw_member_list}=  Redfish_Utils.Get Member List  /redfish/v1/UpdateService/FirmwareInventory
+    List Should Contain Value  ${sw_member_list}  ${active_sw_image}
+
+    ${sw_inv_dict}=  Get Functional Firmware  BMC image
+    ${sw_inv_dict}=  Get Non Functional Firmware  ${sw_inv_dict}  True
+
+    ${image_info}=  Redfish.Get Properties  ${active_sw_image}
+    Should Be Equal  ${sw_inv_dict['version']}  ${image_info["Version"]}
+
+
+Verify Redfish Active Software Image And Firmware Inventory Are Same
+    [Documentation]  Verify the Redfish firmware inventory path is same as
+    ...  in active software image of Redfish managers.
+    [Arguments]  ${image}
+
+    # Description of argument(s):
+    # image           Functional Image or Backup Image
+
+    Verify Active Software Image And Firmware Inventory Is Same
+
+    Run Keyword If  'switch_backup_image' == '${image}'
+    ...  Run Keywords  Set Backup Firmware Image As Functional  AND
+    ...    Verify Active Software Image And Firmware Inventory Is Same  AND
+    ...    Set Backup Firmware Image As Functional  AND
+    ...    Verify Active Software Image And Firmware Inventory Is Same
