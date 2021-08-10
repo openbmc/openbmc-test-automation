@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a10d5136_9f63b05a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-10T13:08:27Z",
+      "side": 1,
+      "message": "Corrected method of HTTPS certificate upload\n\nFor HTTPS certificate only replace is possible so replaced install certificate with replace certificate",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 93
+      },
+      "revId": "544b11806e12279380dd0e8668cce9154fcd8b0b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "959be972_5aa5c940",
+        "filename": "gui/gui_test/access_control_menu/test_ssl_certificates_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-10T13:08:27Z",
+      "side": 1,
+      "message": "This keyword is already there in redfish/managers/test_certificate.robot. I would say move it to lib/certificate_utils.robot so that both file can use it.",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 26
+      },
+      "revId": "544b11806e12279380dd0e8668cce9154fcd8b0b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
