@@ -116,3 +116,24 @@ Else, plugin response will be skipped and not written to any file.
     FILES:
         - None
 ```
+
+### Plugin ERROR dectective Direcive
+
+Error directive on plugin supported
+- exit_on_error       : If there was an error in a plugin stacked, the subsequent
+                        plugin would not be executed if this is declared.
+- continue_on_error   : If there was an error and user declare this directive,
+                        then the plugin block will continue to execute.
+
+Example:
+```
+    - plugin:
+        - plugin_name: plugin.foo_func.print_vars
+        - plugin_args:
+            - return_value
+        - plugin_error: exit_on_error
+```
+
+This error directive would come into force only if there is an error detected
+by the plugin during execution and not the error response returned from the plugin
+function in general.
