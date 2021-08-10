@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f6bc8bd1_f0cdb79a",
+        "filename": "gui/gui_test/access_control_menu/test_local_user_management_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-10T14:00:49Z",
+      "side": 1,
+      "message": "Please dont use API call in GUI as much as possible, use the GUI power on module call.. such kind of makes the GUI codes not independent",
+      "range": {
+        "startLine": 118,
+        "startChar": 1,
+        "endLine": 119,
+        "endChar": 48
+      },
+      "revId": "25a5b5fa06d2bc34343362c37749e40c18e3f35b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
