@@ -470,7 +470,10 @@ class FFDCCollector:
 
                 # Creates a new file
                 with open(targ_file_with_path, 'w') as fp:
-                    fp.write(result)
+                    if isinstance(result, dict):
+                        fp.write(json.dumps(result))
+                    else:
+                        fp.write(result)
                     fp.close
                     executed_files_saved.append(targ_file)
 
