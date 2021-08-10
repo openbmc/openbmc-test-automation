@@ -1,0 +1,327 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d9950a3b_f5d1098b",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-10T07:57:15Z",
+      "side": 1,
+      "message": "add more information.",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1dc10d0_926ed9ca",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-10T07:57:15Z",
+      "side": 1,
+      "message": "Align line no 5 to 14",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "de951372_7f229df9",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-10T07:57:15Z",
+      "side": 1,
+      "message": "Suggestion: you can define the data in below structure.\n\n\u0026{eth0_interface}  Address\u003d10.6.6.6 SubnetMask\u003d10.6.6.1 Gateway\u003d255.255.252.0",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5b74d43_c1271194",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-10T07:57:15Z",
+      "side": 1,
+      "message": "VMI",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "078f45a8_09a7a95b",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-10T07:57:15Z",
+      "side": 1,
+      "message": "Suggestion: line no. 50-59, Can you add this in keyword and then use it here.",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba620ddb_a9a6f5e9",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-10T07:57:15Z",
+      "side": 1,
+      "message": "add two line of space.",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43209885_751f8e82",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-10T07:57:15Z",
+      "side": 1,
+      "message": "Expected valid status code.By default set to ${HTTP_OK}.",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bd90c6fb_3f8ce5d5",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-10T07:57:15Z",
+      "side": 1,
+      "message": "add one line of space",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2228f7c8_1a6721d8",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-10T07:57:15Z",
+      "side": 1,
+      "message": "add one line of space",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24a7d7c7_ab10a8e4",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-10T07:57:15Z",
+      "side": 1,
+      "message": "add one line of space",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8fbc50f4_ea195afe",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-10T07:57:15Z",
+      "side": 1,
+      "message": "add two line of space",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d324042a_dbd515b3",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-10T07:57:15Z",
+      "side": 1,
+      "message": "same as line no. 66",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "06ac3632_d3f97b50",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-10T07:57:15Z",
+      "side": 1,
+      "message": "Suggestion: \n\n1.if you use suggestion line no.18, then you can pass all the address in single dictionary variable.\n\n2.If keywords say Set the VMI and Verify then Documentation should say that it verify the VMI after setting it.\n\n3.you can split the code into two section like Set VMI IP and verification, then\nKeyword name can be: Set VMI Static IPv4 Address, Verify VMI Static IPv4 Address Is Set",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2791e3b4_71cde669",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-10T07:57:15Z",
+      "side": 1,
+      "message": "Add two line of space",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "628e6550_66d07453",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-10T07:57:15Z",
+      "side": 1,
+      "message": "Suggestion: Same comments as line no 137 -\u003e (3)",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "39126247_21ebc9d9",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-10T07:57:15Z",
+      "side": 1,
+      "message": "add two line of space",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88b55e89_8617a776",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-10T07:57:15Z",
+      "side": 1,
+      "message": "add one line of space",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5a6fb9a_571d3667",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-10T07:57:15Z",
+      "side": 1,
+      "message": "line 197-204 , can you add in keyword.",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe374baa_c2b45ae2",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-10T07:57:15Z",
+      "side": 1,
+      "message": "add one line of space",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
