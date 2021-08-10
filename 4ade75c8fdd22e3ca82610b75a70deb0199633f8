@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6bc667c9_11fd0f4a",
+        "filename": "ipmi/test_ipmi_network_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-08-10T04:52:02Z",
+      "side": 1,
+      "message": "this looks good however if user does not provide IP, netmask \u0026 gateway then test case will fail.\nneed to define some default value for the same.",
+      "revId": "4ade75c8fdd22e3ca82610b75a70deb0199633f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
