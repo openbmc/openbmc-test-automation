@@ -22,6 +22,30 @@
       "revId": "a04ac692d50f34d8f5032e7d199d52e58077a805",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3dd6831a_059cc326",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-08-10T09:43:49Z",
+      "side": 1,
+      "message": "I\u0027ve looked into it.\nThis is not a full fledged ipmi testing so using customized way.\nIt has generic cipher suites, port \u0026 timers, in the next commit I\u0027ll use cipher suite, port \u0026 timers used in the ipmi resource file.\nthis can be tracked via: https://github.com/openbmc/openbmc-test-automation/issues/2121",
+      "parentUuid": "4c0847a7_9a7ad02f",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 0
+      },
+      "revId": "a04ac692d50f34d8f5032e7d199d52e58077a805",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
