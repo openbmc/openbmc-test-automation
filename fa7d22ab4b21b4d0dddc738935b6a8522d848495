@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0b02b7b_3f18d0a3",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-11T06:16:31Z",
+      "side": 1,
+      "message": "align",
+      "revId": "fa7d22ab4b21b4d0dddc738935b6a8522d848495",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e4e881d1_c0884b50",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-11T06:16:31Z",
+      "side": 1,
+      "message": "use either ${HTTP_OK} or HTTP_OK",
+      "revId": "fa7d22ab4b21b4d0dddc738935b6a8522d848495",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
