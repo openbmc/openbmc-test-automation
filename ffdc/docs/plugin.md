@@ -30,7 +30,7 @@ plugins/
 
 ### Plugin Template Example
 
-plugins/foo_func.py
+Stand-alone functions: plugins/foo_func.py
 ```
 # Sample for documentation plugin
 
@@ -40,6 +40,17 @@ def print_vars(var):
 def return_vars():
     return 1
 ```
+
+Class function(s): plugins/plugin_class.py
+```
+class  plugin_class:
+
+    @staticmethod
+    def plugin_print_msg(msg):
+        print(msg)
+```
+
+This is to avoid passing object self in plugin args YAML  when calling the class function(s).
 
 You can add your own plugin modules to extend further.
 
