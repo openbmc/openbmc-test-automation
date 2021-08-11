@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a0a7b8cf_4ef653f5",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-11T11:26:07Z",
+      "side": 1,
+      "message": "Yeah its same , but that is the test case.",
+      "parentUuid": "3077f1d5_d8438655",
+      "revId": "b2c8746af6a99df274b1c632fd48e586f33fc997",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1716069a_2643306d",
         "filename": "redfish/update_service/test_firmware_inventory.robot",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2021-08-11T11:03:09Z",
       "side": 1,
       "message": "suggestion-backup_image",
+      "revId": "b2c8746af6a99df274b1c632fd48e586f33fc997",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94e5d1eb_b9b6d887",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-11T11:26:07Z",
+      "side": 1,
+      "message": "Line no 178: Followed the same name convention.",
+      "parentUuid": "1716069a_2643306d",
       "revId": "b2c8746af6a99df274b1c632fd48e586f33fc997",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -50,6 +86,24 @@
       "revId": "b2c8746af6a99df274b1c632fd48e586f33fc997",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "258bd187_0cd427d4",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-11T11:26:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6492676d_a74cee8d",
+      "revId": "b2c8746af6a99df274b1c632fd48e586f33fc997",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
