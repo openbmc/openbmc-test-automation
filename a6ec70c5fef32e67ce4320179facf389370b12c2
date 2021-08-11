@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "efb9b357_076de347",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-11T05:40:21Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "d9950a3b_f5d1098b",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e1dc10d0_926ed9ca",
         "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5637e693_a73e9268",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-11T05:40:21Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "e1dc10d0_926ed9ca",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "ef259c16_50ee25d1",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-11T05:40:21Z",
+      "side": 1,
+      "message": "Need to test combination of it in upcoming testcase. So, passing as dictionary would not help. It would have been useful if I have to pass same variable as it is, each time.",
+      "parentUuid": "de951372_7f229df9",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e5b74d43_c1271194",
         "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
         "patchSetId": 2
@@ -67,6 +121,24 @@
       "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fd5436a_9f1843cf",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-11T05:40:21Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "e5b74d43_c1271194",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "58590572_27e78d6b",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-11T05:40:21Z",
+      "side": 1,
+      "message": "this is only place where it will be used and already using \"suite setup execution\" as keyword for suite setup So, a separate keyword seems not required.",
+      "parentUuid": "078f45a8_09a7a95b",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba620ddb_a9a6f5e9",
         "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
         "patchSetId": 2
@@ -101,6 +191,24 @@
       "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a81d523c_114461b0",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-11T05:40:21Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "ba620ddb_a9a6f5e9",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -121,6 +229,24 @@
     },
     {
       "key": {
+        "uuid": "2fa252b2_906e0661",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-11T05:40:21Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "43209885_751f8e82",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bd90c6fb_3f8ce5d5",
         "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
         "patchSetId": 2
@@ -135,6 +261,24 @@
       "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8d0ddc78_d422b68b",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-11T05:40:21Z",
+      "side": 1,
+      "message": "not needed in here.",
+      "parentUuid": "bd90c6fb_3f8ce5d5",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -155,6 +299,24 @@
     },
     {
       "key": {
+        "uuid": "5f0a4ec1_1f2cdf42",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-11T05:40:21Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "2228f7c8_1a6721d8",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24a7d7c7_ab10a8e4",
         "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
         "patchSetId": 2
@@ -169,6 +331,24 @@
       "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d19a48b0_555e37fb",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-11T05:40:21Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "24a7d7c7_ab10a8e4",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -189,6 +369,24 @@
     },
     {
       "key": {
+        "uuid": "17a070bf_b1ece590",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-11T05:40:21Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "8fbc50f4_ea195afe",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d324042a_dbd515b3",
         "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
         "patchSetId": 2
@@ -203,6 +401,24 @@
       "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b04e2ac8_1b8db4c9",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-11T05:40:21Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "d324042a_dbd515b3",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -223,6 +439,24 @@
     },
     {
       "key": {
+        "uuid": "88c27498_a642dd48",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-11T05:40:21Z",
+      "side": 1,
+      "message": "done change in documentation.",
+      "parentUuid": "06ac3632_d3f97b50",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2791e3b4_71cde669",
         "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
         "patchSetId": 2
@@ -237,6 +471,24 @@
       "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa111d65_7b370483",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-11T05:40:21Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "2791e3b4_71cde669",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -257,6 +509,24 @@
     },
     {
       "key": {
+        "uuid": "600d1c77_0d8b8732",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-11T05:40:21Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "628e6550_66d07453",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "39126247_21ebc9d9",
         "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
         "patchSetId": 2
@@ -271,6 +541,24 @@
       "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f53327d_c22bcbf9",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-11T05:40:21Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "39126247_21ebc9d9",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -291,6 +579,24 @@
     },
     {
       "key": {
+        "uuid": "2cbec6da_07d5feff",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-11T05:40:21Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "88b55e89_8617a776",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c5a6fb9a_571d3667",
         "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
         "patchSetId": 2
@@ -308,6 +614,24 @@
     },
     {
       "key": {
+        "uuid": "181753d8_4c13b338",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-11T05:40:21Z",
+      "side": 1,
+      "message": "same as line 50",
+      "parentUuid": "c5a6fb9a_571d3667",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fe374baa_c2b45ae2",
         "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
         "patchSetId": 2
@@ -322,6 +646,24 @@
       "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "720f0e12_62bf27e9",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-11T05:40:21Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "fe374baa_c2b45ae2",
+      "revId": "a6ec70c5fef32e67ce4320179facf389370b12c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
