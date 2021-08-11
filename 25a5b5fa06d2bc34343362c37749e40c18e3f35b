@@ -46,6 +46,30 @@
       "revId": "25a5b5fa06d2bc34343362c37749e40c18e3f35b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7b2068d1_4bdb08af",
+        "filename": "gui/gui_test/access_control_menu/test_local_user_management_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-11T06:45:07Z",
+      "side": 1,
+      "message": "Please open a github task to code GUI related Power on / off / reboot",
+      "parentUuid": "2167dc5e_76c813f6",
+      "range": {
+        "startLine": 118,
+        "startChar": 1,
+        "endLine": 119,
+        "endChar": 48
+      },
+      "revId": "25a5b5fa06d2bc34343362c37749e40c18e3f35b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
