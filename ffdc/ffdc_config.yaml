@@ -92,10 +92,6 @@ OPENBMC:
             - 'ls -AX /var/lib/systemd/coredump/core.*'
             - 'ls -AX /var/lib/phosphor-debug-collector/dumps/*/*.tar.xz'
             - 'ls -AX /var/lib/phosphor-debug-collector/hostbootdump/*/*.tar.gz'
-        FILES:
-            - '/var/lib/systemd/coredump/core.*'
-            - '/var/lib/phosphor-debug-collector/dumps/*/*.tar.xz'
-            - '/var/lib/phosphor-debug-collector/hostbootdump/*/*.tar.gz'
         PROTOCOL:
             - 'SCP'
 
@@ -326,8 +322,5 @@ AIX:
         COMMANDS:
             - 'ls -AX /tmp/htx/htxerr'
             - 'ls -AX /tmp/htx/htxmsg'
-        FILES:
-            - '/tmp/htx/htxerr'
-            - '/tmp/htx/htxmsg'
         PROTOCOL:
             - 'SCP'
