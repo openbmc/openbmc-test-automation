@@ -8,3 +8,7 @@ redfish
 click
 PyYAML>=5.1
 redfishtool
+robotframework-selenium2library
+webdrivermanager
+robotframework-angularjs
+robotframework-xvfb
