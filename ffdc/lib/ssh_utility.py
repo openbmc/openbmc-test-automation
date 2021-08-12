@@ -92,7 +92,7 @@ class SSHRemoteclient:
             while time.time() < start + default_timeout:
                 # Need to do read/write operation to trigger
                 # paramiko exec_command timeout mechanism.
-                xresults = stdout.readlines()
+                xresults = stderr.readlines()
                 results = ''.join(xresults)
                 if stdout.channel.exit_status_ready():
                     break
@@ -102,9 +102,9 @@ class SSHRemoteclient:
             # Convert list of string to one string
             err = ''
             out = ''
-            for item in stderr.readlines():
-                err += item
             for item in results:
+                err += item
+            for item in stdout.readlines():
                 out += item
 
             return cmd_exit_code, err, out
