@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "adba5f35_ee260a59",
+        "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-12T10:50:29Z",
+      "side": 1,
+      "message": "Sure George we can add the code to refresh the GUI and check element.. But we would need below code to check if reboot has actually happen on the system. Just refreshing GUI will not help. \n\n    # Checks host gets into Unpingable state and later becomes Pingable state.\n    Wait Until Keyword Succeeds  3 mins  5 sec  Is BMC Unpingable  ${OPENBMC_HOST}\n    Wait For Host To Ping  ${OPENBMC_HOST}  3 mins\n\n    # Checks BMC gets into ready state.\n    Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready",
+      "parentUuid": "e8f51cda_0db41a71",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 61
+      },
+      "revId": "70bbcc477912c29ab58307d24b495facaca76609",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "268ae0c4_03d5821d",
         "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
         "patchSetId": 3
