@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ebcd9452_304b35d2",
+        "filename": "gui/gui_test/access_control_menu/test_ssl_certificates_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-12T12:32:52Z",
+      "side": 1,
+      "message": "Can GUI this operation ?",
+      "range": {
+        "startLine": 99,
+        "startChar": 4,
+        "endLine": 99,
+        "endChar": 84
+      },
+      "revId": "72f480a1bfda3c48bed330e7c4ce39f593fe4741",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
