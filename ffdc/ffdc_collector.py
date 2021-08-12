@@ -943,7 +943,8 @@ class FFDCCollector:
             # Walk the plugin args ['arg1,'arg2']
             # If the YAML plugin statement 'plugin_args' is not declared.
             if any('plugin_args' in d for d in plugin_cmd_list):
-                plugin_args = plugin_cmd_list[1]['plugin_args']
+                idx = self.key_index_list_dict('plugin_args', plugin_cmd_list)
+                plugin_args = plugin_cmd_list[idx]['plugin_args']
                 if plugin_args:
                     plugin_args = self.yaml_args_populate(plugin_args)
                 else:
@@ -965,12 +966,29 @@ class FFDCCollector:
                 self.response_args_data(resp)
             else:
                 resp = self.execute_python_eval(plugin_func)
-            return resp
         except Exception as e:
             # Set the plugin error state.
             plugin_error_dict['exit_on_error'] = True
             self.logger.error("\tERROR: execute_plugin_block: %s" % e)
             pass
+
+        # Check if plugin_expects_return (int, string, list,dict etc)
+        if any('plugin_expects_return' in d for d in plugin_cmd_list):
+            idx = self.key_index_list_dict('plugin_expects_return', plugin_cmd_list)
+            plugin_expects = plugin_cmd_list[idx]['plugin_expects_return']
+            if plugin_expects:
+                if resp:
+                    if self.plugin_expect_type(plugin_expects, resp) == 'INVALID':
+                        self.logger.error("\tWARN: Plugin error check skipped")
+                    elif not self.plugin_expect_type(plugin_expects, resp):
+                        self.logger.error("\tERROR: Plugin expects return data: %s"
+                                          % plugin_expects)
+                        plugin_error_dict['exit_on_error'] = True
+                elif not resp:
+                    self.logger.error("\tERROR: Plugin func failed to return data")
+                    plugin_error_dict['exit_on_error'] = True
+
+        return resp
 
     def response_args_data(self, plugin_resp):
         r"""
@@ -1138,3 +1156,35 @@ class FFDCCollector:
                     value = d['plugin_error']
                     # Reference if the error is set or not by plugin.
                     return plugin_error_dict[value]
+
+    def key_index_list_dict(self, key, list_dict):
+        r"""
+        Iterate list of dictionary and return index if the key match is found.
+
+        Description of argument(s):
+        key           Valid Key in a dict.
+        list_dict     list of dictionary.
+        """
+        for i, d in enumerate(list_dict):
+            if key in d.keys():
+                return i
+
+    def plugin_expect_type(self, type, data):
+        r"""
+        Plugin expect directive type check.
+        """
+        if type == 'int':
+            return isinstance(data, int)
+        elif type == 'float':
+            return isinstance(data, float)
+        elif type == 'str':
+            return isinstance(data, str)
+        elif type == 'list':
+            return isinstance(data, list)
+        elif type == 'dict':
+            return isinstance(data, dict)
+        elif type == 'tuple':
+            return isinstance(data, tuple)
+        else:
+            self.logger.info("\tInvalid data type requested: %s" % type)
+            return 'INVALID'
