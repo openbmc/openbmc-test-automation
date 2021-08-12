@@ -883,7 +883,8 @@ class FFDCCollector:
                 eval(plugin.foo_func.foo_func(10))
         """
         try:
-            self.logger.info("\tCall func: %s" % eval_string)
+            self.logger.info("\tExecuting plugin func()")
+            self.logger.debug("\tCall func: %s" % eval_string)
             result = eval(eval_string)
             self.logger.info("\treturn: %s" % str(result))
         except (ValueError, SyntaxError, NameError) as e:
