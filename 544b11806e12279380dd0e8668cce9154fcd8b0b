@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "f32aba0b_3be8e137",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2021-08-12T11:00:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a10d5136_9f63b05a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 93
+      },
+      "revId": "544b11806e12279380dd0e8668cce9154fcd8b0b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "959be972_5aa5c940",
         "filename": "gui/gui_test/access_control_menu/test_ssl_certificates_sub_menu.robot",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "544b11806e12279380dd0e8668cce9154fcd8b0b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "85a0b8b2_d7601e0d",
+        "filename": "gui/gui_test/access_control_menu/test_ssl_certificates_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2021-08-12T11:00:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "959be972_5aa5c940",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 26
+      },
+      "revId": "544b11806e12279380dd0e8668cce9154fcd8b0b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
