@@ -46,6 +46,30 @@
       "revId": "f53eb35ed707125adac8f6b8cab31d7e2b5dcfba",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12e1c62e_5d03e851",
+        "filename": "requirements.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-12T05:37:14Z",
+      "side": 1,
+      "message": "Sure.. We should be fine with this. I tested it.",
+      "parentUuid": "21b5cd21_b86df52d",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 16
+      },
+      "revId": "f53eb35ed707125adac8f6b8cab31d7e2b5dcfba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
