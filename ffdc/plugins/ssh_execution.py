@@ -50,7 +50,7 @@ def ssh_execute_cmd(hostname,
         response: stdout from remote host
         """
         cmd_exit_code, err, response = \
-            ssh_remoteclient.execute_command(command, timeout)
+            ssh_remoteclient.execute_command(command, int(timeout))
 
     # Close ssh session
     if ssh_remoteclient:
