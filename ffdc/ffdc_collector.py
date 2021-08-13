@@ -76,13 +76,19 @@ block or plugin
 global global_log_store_path
 global global_plugin_dict
 global global_plugin_list
+
 # Hold the plugin return values in dict and plugin return vars in list.
+# Dict is to reference and update vars processing in parser where as
+# list is for current vars from the plugin block which needs processing.
 global_plugin_dict = {}
 global_plugin_list = []
+
 # Hold the plugin return named declared if function returned values are list,dict.
 # Refer this name list to look up the plugin dict for eval() args function
-# Example [ 'version']
+# Example ['version']
 global_plugin_type_list = []
+
+# Path where logs are to be stored or written.
 global_log_store_path = ''
 
 # Plugin error state defaults.
@@ -874,7 +880,7 @@ class FFDCCollector:
 
     def execute_python_eval(self, eval_string):
         r"""
-        Execute qualified python function using eval.
+        Execute qualified python function string using eval.
 
         Description of argument(s):
         eval_string        Execute the python object.
@@ -963,6 +969,7 @@ class FFDCCollector:
             # Execute plugin function.
             if global_plugin_dict:
                 resp = self.execute_python_eval(plugin_func)
+                # Update plugin vars dict if there is any.
                 self.response_args_data(resp)
             else:
                 resp = self.execute_python_eval(plugin_func)
@@ -992,12 +999,13 @@ class FFDCCollector:
 
     def response_args_data(self, plugin_resp):
         r"""
-        Parse the plugin function response.
+        Parse the plugin function response and update plugin return variable.
 
         plugin_resp       Response data from plugin function.
         """
         resp_list = []
         resp_data = ""
+
         # There is nothing to update the plugin response.
         if len(global_plugin_list) == 0 or plugin_resp == 'None':
             return
@@ -1022,8 +1030,9 @@ class FFDCCollector:
         elif isinstance(plugin_resp, int) or isinstance(plugin_resp, float):
             resp_list.append(plugin_resp)
 
+        # Iterate if there is a list of plugin return vars to update.
         for idx, item in enumerate(resp_list, start=0):
-            # Exit loop
+            # Exit loop, done required loop.
             if idx >= len(global_plugin_list):
                 break
             # Find the index of the return func in the list and
@@ -1036,7 +1045,7 @@ class FFDCCollector:
                 pass
 
         # Done updating plugin dict irrespective of pass or failed,
-        # clear all the list element.
+        # clear all the list element for next plugin block execute.
         global_plugin_list.clear()
 
     def yaml_args_string(self, plugin_args):
@@ -1061,7 +1070,7 @@ class FFDCCollector:
 
     def yaml_args_populate(self, yaml_arg_list):
         r"""
-        Decode ${MY_VAR} and load env data when read from YAML.
+        Decode env and plugin vars and populate.
 
         Description of argument(s):
         yaml_arg_list         arg list read from YAML
@@ -1093,16 +1102,16 @@ class FFDCCollector:
 
     def yaml_env_and_plugin_vars_populate(self, yaml_arg_str):
         r"""
-        Update ${MY_VAR} and my_plugin_vars
+        Update ${MY_VAR} and plugin vars.
 
         Description of argument(s):
-        yaml_arg_str         arg string read from YAML
+        yaml_arg_str         arg string read from YAML.
 
         Example:
             - cat ${MY_VAR}
             - ls -AX my_plugin_var
         """
-        # Parse the string for env vars.
+        # Parse the string for env vars ${env_vars}.
         try:
             # Example, list of matching env vars ['username', 'password', 'hostname']
             # Extra escape \ for special symbols. '\$\{([^\}]+)\}' works good.
@@ -1121,12 +1130,12 @@ class FFDCCollector:
             # Example, list of plugin vars ['my_username', 'my_data']
             plugin_var_name_list = global_plugin_dict.keys()
             for var in plugin_var_name_list:
-                # skip env var list already populated above block list.
+                # skip env var list already populated above code block list.
                 if var in env_var_names_list:
                     continue
-                # If this plugin var exist but empty value in dict, don't replace.
+                # If this plugin var exist but empty in dict, don't replace.
                 # This is either a YAML plugin statement incorrectly used or
-                # user added a plugin var which is not populated.
+                # user added a plugin var which is not going to be populated.
                 if yaml_arg_str in global_plugin_dict:
                     if isinstance(global_plugin_dict[var], (list, dict)):
                         # List data type or dict can't be replaced, use directly
