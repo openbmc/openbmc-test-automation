@@ -1,0 +1,51 @@
+# Template example on how you can create you own customize YAML to drive the
+# log collection for your system
+# Except for COMMAND, FILES and PROTOCOL, rest depends on how you want to
+# name the block, sub block, commands construct and file name.
+
+MY_BLOCK:
+    MY_LOGS:
+        COMMANDS:
+            - 'dmesg >/tmp/dmesg.txt'
+        FILES:
+            - '/tmp/dmesg.txt'
+        PROTOCOL:
+            - 'SSH'
+
+    REDFISH_LOGS:
+        COMMANDS:
+            - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always raw GET /redfish/v1/AccountService/Accounts
+        FILES:
+            - 'REDFISH_bmc_user_accounts.json'
+        PROTOCOL:
+            - 'REDFISH'
+
+    IPMI_LOGS:
+        COMMANDS:
+            - ipmitool -I lanplus -C 17 -U ${username} -P ${password} -H ${hostname} lan print
+        FILES:
+            - 'IPMI_LAN_print.txt'
+        PROTOCOL:
+            - 'IPMI'
+
+    SHELL_LOGS:
+        COMMANDS:
+            - plugin:
+              - plugin_name: plugin.ssh_execution.ssh_execute_cmd
+              - plugin_args:
+                - ${hostname}
+                - ${username}
+                - ${password}
+                - cat /etc/os-release
+                - 3
+              - plugin_error: exit_on_error
+        FILES:
+            - plugin_release.txt
+        PROTOCOL:
+            - 'SHELL'
+
+    DUMP_LOGS:
+        COMMANDS:
+            - 'ls -AX /var/lib/systemd/coredump/core.*'
+        PROTOCOL:
+            - 'SCP'
