@@ -42,6 +42,20 @@ def return_vars():
 ```
 
 Class function(s): plugins/plugin_class.py
+
+Example:
+```
+class  plugin_class:
+
+    def plugin_print_msg(msg):
+        print(msg)
+```
+
+In YAML plugin, you will need to pass self object as part of the arguments.
+
+Static Class function(s): plugins/plugin_class.py
+
+Example:
 ```
 class  plugin_class:
 
@@ -51,6 +65,8 @@ class  plugin_class:
 ```
 
 This is to avoid passing object self in plugin args YAML when calling the class function(s).
+However python class static method has its own limitation, do not use unless needed.
+
 
 You can add your own plugin modules to extend further.
 
@@ -93,6 +109,23 @@ To accept multiple return values by using coma  "," separated statement
      - plugin_name:  return_value1,return_value2 = plugin.foo_func.print_vars
 ```
 
+Accessing a class method:
+
+The rule remains same as other functions, however for a class object plugin syntax
+
+```
+        - plugin_name: plugin.<file_name>.<class_object>.<class_method>
+```
+
+Example: (from the class example previously mentioned)
+```
+    - plugin:
+        - plugin_name: plugin.plugin_class.plugin_class.plugin_print_msg
+        - plugin_args:
+            - self
+            - "Hello Plugin call"
+```
+
 ### Plugin execution output for sample
 
 
@@ -128,7 +161,7 @@ Else, plugin response will be skipped and not written to any file.
         - None
 ```
 
-### Plugin ERROR directive Direcive
+### Plugin ERROR Direcive
 
 Error directive on plugin supported
 - exit_on_error       : If there was an error in a plugin stacked, the subsequent
