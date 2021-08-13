@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dede1bd3_8cad4a7c",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-08-13T05:24:15Z",
+      "side": 1,
+      "message": "can this be moved to library?",
+      "revId": "41c21dd268fa5e489b4df15883d2caa23fc15685",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "086e2830_ead72f4d",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-08-13T05:24:15Z",
+      "side": 1,
+      "message": "is it not going to be used by other test files?",
+      "revId": "41c21dd268fa5e489b4df15883d2caa23fc15685",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
