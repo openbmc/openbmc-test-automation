@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9f6a8a0c_e51206de",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interface.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-08-13T05:57:42Z",
+      "side": 1,
+      "message": "can you reuse existing vmi code?",
+      "revId": "8ed149edf649cbc9e63ed675f298ecfdba891f92",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
