@@ -165,7 +165,11 @@ class FFDCCollector:
         if self.verify_script_env():
             # Load default or user define YAML configuration file.
             with open(self.ffdc_config, 'r') as file:
-                self.ffdc_actions = yaml.load(file, Loader=yaml.FullLoader)
+                try:
+                    self.ffdc_actions = yaml.load(file, Loader=yaml.FullLoader)
+                except yaml.YAMLError as e:
+                    self.logger.error(e)
+                    sys.exit(-1)
 
             if self.target_type not in self.ffdc_actions.keys():
                 self.logger.error(
@@ -857,7 +861,11 @@ class FFDCCollector:
 
             if self.econfig:
                 with open(self.econfig, 'r') as file:
-                    tmp_env_dict = yaml.load(file, Loader=yaml.FullLoader)
+                    try:
+                        tmp_env_dict = yaml.load(file, Loader=yaml.FullLoader)
+                    except yaml.YAMLError as e:
+                        self.logger.error(e)
+                        sys.exit(-1)
                 # Export ENV vars.
                 for key, value in tmp_env_dict['env_params'].items():
                     os.environ[key] = str(value)
@@ -930,7 +938,8 @@ class FFDCCollector:
                 - arg2
         """
         try:
-            plugin_name = plugin_cmd_list[0]['plugin_name']
+            idx = self.key_index_list_dict('plugin_name', plugin_cmd_list)
+            plugin_name = plugin_cmd_list[idx]['plugin_name']
             # Equal separator means plugin function returns result.
             if ' = ' in plugin_name:
                 # Ex. ['result', 'plugin.foo_func.my_func']
