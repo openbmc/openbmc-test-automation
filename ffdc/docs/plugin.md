@@ -148,3 +148,33 @@ Example:
 This error directive would come into force only if there is an error detected
 by the plugin during execution and not the error response returned from the plugin
 function in general.
+
+To go further, there is another directive for plugin to check if the plugin function
+returned a valid data or not.
+
+The directive statement is
+```
+    - plugin_expects_return: <data type>
+```
+
+Example:
+```
+    - plugin:
+    - plugin:
+      - plugin_name: plugin.ssh_execution.ssh_execute_cmd
+      - plugin_args:
+        - ${hostname}
+        - ${username}
+        - ${password}
+        - cat /etc/os-release
+        - 3
+      - plugin_expects_return: str
+```
+
+The above example states that, the plugin function is expecting a return data of type
+string. If the plugin function does not return data or the returned data is not of type
+string, then it would throw an error and sets the plugin_error flag exit_on_error as True.
+
+This directive helps in validating plugin return data to handle different plugin blocks
+stacked together which are depending on the success of the previous plugin execution to do
+further processing correctly.
