@@ -22,6 +22,30 @@
       "revId": "72f480a1bfda3c48bed330e7c4ce39f593fe4741",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2912ca08_c15c67c7",
+        "filename": "gui/gui_test/access_control_menu/test_ssl_certificates_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-13T05:55:49Z",
+      "side": 1,
+      "message": "The intention of this test case is to very if the HTTP certificate appears on the GUI certificate page. Uploading certificate via GUI is a complex piece which we would do while automating test case to upload certificate via GUI",
+      "parentUuid": "ebcd9452_304b35d2",
+      "range": {
+        "startLine": 99,
+        "startChar": 4,
+        "endLine": 99,
+        "endChar": 84
+      },
+      "revId": "72f480a1bfda3c48bed330e7c4ce39f593fe4741",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
