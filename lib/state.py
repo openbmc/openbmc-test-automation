@@ -222,7 +222,8 @@ else:
     default_state = DotDict([('redfish', '1'),
                              ('chassis', 'On'),
                              ('bmc', 'Enabled'),
-                             ('boot_progress', 'SystemHardwareInitializationComplete|OSRunning'),
+                             ('boot_progress',
+                              'SystemHardwareInitializationComplete|OSBootStarted|OSRunning'),
                              ('host', 'Enabled'),
                              ('os_ping', '1'),
                              ('os_login', '1'),
@@ -239,7 +240,7 @@ else:
     os_running_match_state = DotDict([('chassis', '^On$'),
                                       ('bmc', '^Enabled$'),
                                       ('boot_progress',
-                                       'SystemHardwareInitializationComplete|OSRunning'),
+                                       'SystemHardwareInitializationComplete|OSBootStarted|OSRunning'),
                                       ('host', '^Enabled$'),
                                       ('os_ping', '^1$'),
                                       ('os_login', '^1$'),
@@ -249,7 +250,7 @@ else:
     master_os_up_match = DotDict([('chassis', '^On$'),
                                   ('bmc', '^Enabled$'),
                                   ('boot_progress',
-                                   'SystemHardwareInitializationComplete|OSRunning'),
+                                   'SystemHardwareInitializationComplete|OSBootStarted|OSRunning'),
                                   ('host', '^Enabled$')])
 
     invalid_state_match = DotDict([('redfish', '^$'),
