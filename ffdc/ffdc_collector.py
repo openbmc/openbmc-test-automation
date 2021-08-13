@@ -901,11 +901,16 @@ class FFDCCollector:
             self.logger.debug("\tCall func: %s" % eval_string)
             result = eval(eval_string)
             self.logger.info("\treturn: %s" % str(result))
-        except (ValueError, SyntaxError, NameError) as e:
+        except (ValueError,
+                SyntaxError,
+                NameError,
+                AttributeError,
+                TypeError) as e:
             self.logger.error("\tERROR: execute_python_eval: %s" % e)
             # Set the plugin error state.
             plugin_error_dict['exit_on_error'] = True
-            pass
+            self.logger.info("\treturn: PLUGIN_EVAL_ERROR")
+            return 'PLUGIN_EVAL_ERROR'
 
         return result
 
@@ -979,7 +984,8 @@ class FFDCCollector:
             if global_plugin_dict:
                 resp = self.execute_python_eval(plugin_func)
                 # Update plugin vars dict if there is any.
-                self.response_args_data(resp)
+                if resp != 'PLUGIN_EVAL_ERROR':
+                    self.response_args_data(resp)
             else:
                 resp = self.execute_python_eval(plugin_func)
         except Exception as e:
@@ -987,6 +993,10 @@ class FFDCCollector:
             plugin_error_dict['exit_on_error'] = True
             self.logger.error("\tERROR: execute_plugin_block: %s" % e)
             pass
+
+        # There is a real error executing the plugin function.
+        if resp == 'PLUGIN_EVAL_ERROR':
+            return resp
 
         # Check if plugin_expects_return (int, string, list,dict etc)
         if any('plugin_expects_return' in d for d in plugin_cmd_list):
