@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "218c7f60_f697fef6",
+        "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-16T05:49:06Z",
+      "side": 1,
+      "message": "Reboot operation is one which are testing via GUI. So we need to trigger it via GUI only. We can not use Backend function for this.",
+      "parentUuid": "a5e70cab_81dd45f0",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 61
+      },
+      "revId": "70bbcc477912c29ab58307d24b495facaca76609",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "268ae0c4_03d5821d",
         "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
         "patchSetId": 3
