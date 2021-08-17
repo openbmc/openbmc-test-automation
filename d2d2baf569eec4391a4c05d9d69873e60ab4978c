@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12f0c792_6b5b9e8d",
+        "filename": "lib/external_intf/vmi_utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-17T10:31:02Z",
+      "side": 1,
+      "message": "can u shorten this like \n${data}\u003d  Set Variable\n    ...  {\"IPv4StaticAddresses\": \n\t...   [{\"Address\": \"${ip}\",\n\t...     \"SubnetMask\":\"${netmask}\",\n\t...     \"Gateway\": \"${gateway}\"}\n\t...   ]}",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 107
+      },
+      "revId": "d2d2baf569eec4391a4c05d9d69873e60ab4978c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba39ef62_db1bd39b",
+        "filename": "lib/external_intf/vmi_utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-17T10:31:02Z",
+      "side": 1,
+      "message": "+ lib/external_intf/vmi_utils.robot\nW: 86, 110: Line is too long (exceeds 110 characters) (LineTooLong)",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 0
+      },
+      "revId": "d2d2baf569eec4391a4c05d9d69873e60ab4978c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
