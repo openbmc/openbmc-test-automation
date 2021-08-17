@@ -176,6 +176,7 @@ Suite Setup Execution
     Click Element  ${xpath_access_control_menu}
     Click Element  ${xpath_ldap_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  ldap
+    Sleep 10s
     Element Should Be Enabled   ${xpath_enable_ldap_checkbox}
 
     Valid Value  LDAP_TYPE  valid_values=["ActiveDirectory", "LDAP"]
@@ -214,7 +215,6 @@ Create LDAP Configuration
     Wait Until Page Contains Element  ${xpath_ldap_url}
     Run Keyword If  '${ldap_mode}' == 'secure'
     ...   Click Element At Coordinates  ${xpath_secure_ldap_checkbox}  0  0
-    ...  ELSE  Unselect Checkbox  ${xpath_secure_ldap_checkbox}
 
     Input Text  ${xpath_ldap_url}  ${ldap_server_uri}
     Input Text  ${xpath_ldap_bind_dn}  ${ldap_bind_dn}
