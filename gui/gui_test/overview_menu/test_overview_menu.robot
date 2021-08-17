@@ -167,6 +167,15 @@ Verify BMC Time In Overview Page
     Page Should Contain  ${converted_date}
 
 
+Verify BMC Information Should Display At OBMC Power Off State
+    [Documentation]  Verify BMC information should display at OBMC power off state.
+    [Tags]  Verify_BMC_Information_Should_Display_At_OBMC_Power_Off_State
+
+    Redfish Power Off  stack_mode=skip
+    ${firmware_version}=  Redfish Get BMC Version
+    Page Should Contain  ${firmware_version}
+
+
 *** Keywords ***
 
 Test Setup Execution
