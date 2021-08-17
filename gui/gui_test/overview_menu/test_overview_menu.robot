@@ -167,6 +167,15 @@ Verify BMC Time In Overview Page
     Page Should Contain  ${converted_date}
 
 
+Verify BMC Information At Host Power Off State
+    [Documentation]  Verify that BMC information is displayed at host power off state.
+    [Tags]  Verify_BMC_Information_At_Host_Power_Off_State
+
+    Redfish Power Off  stack_mode=skip
+    ${firmware_version}=  Redfish Get BMC Version
+    Page Should Contain  ${firmware_version}
+
+
 *** Keywords ***
 
 Test Setup Execution
