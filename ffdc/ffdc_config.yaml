@@ -100,9 +100,6 @@ OPENBMC:
     # File contains the data returned from 'redfishtool GET URL'
     REDFISH_LOGS:
         COMMANDS:
-            - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always raw GET /xyz/openbmc_project/software/enumerate
-            - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always raw GET /xyz/openbmc_project/state/enumerate
-            - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always raw GET /org/open_power/enumerate
             - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always raw GET /redfish/v1/AccountService/Accounts
             - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always raw GET /redfish/v1/Managers/bmc/LogServices/Dump/Entries
             - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always raw GET /redfish/v1/Systems/system/LogServices/Dump/Entries
@@ -116,9 +113,6 @@ OPENBMC:
                 - /redfish/v1/
                 - json
         FILES:
-            - 'REDFISH_software.json'
-            - 'REDFISH_bmc_state.json'
-            - 'REDFISH_openpower_control_occ_state.json'
             - 'REDFISH_bmc_user_accounts.json'
             - 'REDFISH_bmc_dump_entries.json'
             - 'REDFISH_system_dumps_entries.json'
