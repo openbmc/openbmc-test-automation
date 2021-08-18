@@ -6,6 +6,8 @@ Resource         ../lib/openbmc_ffdc.robot
 Resource         ../lib/boot_utils.robot
 Library          ../lib/ipmi_utils.py
 
+Suite Setup      Redfish.Login
+Suite Teardown   Redfish.Logout
 Test Teardown    FFDC On Test Case Fail
 
 *** Test Cases ***
