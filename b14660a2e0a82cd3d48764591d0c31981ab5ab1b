@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a343f0a_35612e38",
+        "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-18T13:27:53Z",
+      "side": 1,
+      "message": "if BMC doesnt reboot in 30 seconds its a problem.. so at max do 1 minute",
+      "range": {
+        "startLine": 61,
+        "startChar": 33,
+        "endLine": 61,
+        "endChar": 39
+      },
+      "revId": "b14660a2e0a82cd3d48764591d0c31981ab5ab1b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0357b3cf_e2484d44",
+        "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-18T13:27:53Z",
+      "side": 1,
+      "message": "This is a very long timeout.. since the ping above would ensure the BMC is already booting.. if a BMC doesnt reach by 3 minutes it really bad with the BMC ...  at max do for 5 minutes",
+      "range": {
+        "startLine": 65,
+        "startChar": 33,
+        "endLine": 65,
+        "endChar": 40
+      },
+      "revId": "b14660a2e0a82cd3d48764591d0c31981ab5ab1b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "575e72d6_d39e7794",
+        "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-18T13:27:53Z",
+      "side": 1,
+      "message": "fix this",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 4
+      },
+      "revId": "b14660a2e0a82cd3d48764591d0c31981ab5ab1b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
