@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "1340d393_8c302102",
+        "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2021-08-18T07:34:17Z",
+      "side": 1,
+      "message": "Added Refresh and wait statement for the element to be visible.",
+      "parentUuid": "218c7f60_f697fef6",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 61
+      },
+      "revId": "70bbcc477912c29ab58307d24b495facaca76609",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "268ae0c4_03d5821d",
         "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
         "patchSetId": 3
@@ -120,6 +144,30 @@
     },
     {
       "key": {
+        "uuid": "59c89e15_7390e811",
+        "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2021-08-18T07:34:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "268ae0c4_03d5821d",
+      "range": {
+        "startLine": 79,
+        "startChar": 45,
+        "endLine": 79,
+        "endChar": 71
+      },
+      "revId": "70bbcc477912c29ab58307d24b495facaca76609",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ae7a3f09_5e2bfe97",
         "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
         "patchSetId": 3
@@ -140,6 +188,30 @@
       "revId": "70bbcc477912c29ab58307d24b495facaca76609",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "edf2f97a_64a794ff",
+        "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2021-08-18T07:34:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae7a3f09_5e2bfe97",
+      "range": {
+        "startLine": 88,
+        "startChar": 19,
+        "endLine": 88,
+        "endChar": 24
+      },
+      "revId": "70bbcc477912c29ab58307d24b495facaca76609",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
