@@ -3,6 +3,7 @@
 Documentation    Module to test IPMI chassis functionality.
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
+Resource         ../lib/boot_utils.robot
 Library          ../lib/ipmi_utils.py
 
 Test Teardown    FFDC On Test Case Fail

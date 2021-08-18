@@ -4,6 +4,7 @@ Documentation          Module to test IPMI network functionality.
 Resource               ../lib/ipmi_client.robot
 Resource               ../lib/openbmc_ffdc.robot
 Resource               ../lib/bmc_network_utils.robot
+Resource               ../lib/boot_utils.robot
 Library                ../lib/ipmi_utils.py
 Library                ../lib/gen_robot_valid.py
 Library                ../lib/var_funcs.py
