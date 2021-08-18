@@ -3,6 +3,7 @@ Documentation  Validate IPMI sensor IDs using Redfish.
 
 Resource          ../lib/ipmi_client.robot
 Resource          ../lib/openbmc_ffdc.robot
+Resource          ../lib/boot_utils.robot
 Library           ../lib/ipmi_utils.py
 Variables         ../data/ipmi_raw_cmd_table.py
 
