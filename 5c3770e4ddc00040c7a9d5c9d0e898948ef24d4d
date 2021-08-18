@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b1e9e46_c95f243d",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-18T16:15:50Z",
+      "side": 1,
+      "message": "Version",
+      "range": {
+        "startLine": 170,
+        "startChar": 11,
+        "endLine": 170,
+        "endChar": 23
+      },
+      "revId": "5c3770e4ddc00040c7a9d5c9d0e898948ef24d4d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0c30771_78205477",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-18T16:15:50Z",
+      "side": 1,
+      "message": "You dont need this at all.. its just login and check.. dont add extra time here powering off",
+      "range": {
+        "startLine": 174,
+        "startChar": 4,
+        "endLine": 174,
+        "endChar": 38
+      },
+      "revId": "5c3770e4ddc00040c7a9d5c9d0e898948ef24d4d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
