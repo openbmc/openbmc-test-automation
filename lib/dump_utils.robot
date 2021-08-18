@@ -264,7 +264,7 @@ Auto Generate BMC Dump
     [Documentation]  Auto generate BMC dump.
 
     ${cmd}=  Catenate  busctl --verbose call xyz.openbmc_project.Dump.Manager
-    ...  /xyz/openbmc_project/dump/bmc xyz.openbmc_project.Dump.Create CreateDump a{ss} 0
+    ...  /xyz/openbmc_project/dump/bmc xyz.openbmc_project.Dump.Create CreateDump a{sv} 0
     ${stdout}  ${stderr}  ${rc}=
     ...  BMC Execute Command  ${cmd}
     [Return]  ${stdout}  ${stderr}  ${rc}
