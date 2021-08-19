@@ -46,6 +46,30 @@
       "revId": "a1375f74fc447cb05c076e989854cc444b107a61",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7eebe514_e1b9e0a6",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-19T05:36:54Z",
+      "side": 1,
+      "message": "I am fine with the changes. As discussed this command just trigger BMC dump without returning task and other info. This is required for Event notification. So look good to me.",
+      "parentUuid": "2c73a8a4_76f38c2b",
+      "range": {
+        "startLine": 263,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 41
+      },
+      "revId": "a1375f74fc447cb05c076e989854cc444b107a61",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
