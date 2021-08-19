@@ -23,10 +23,10 @@ ${FORBIDDEN_MESSAGE}        Forbidden
 ${ERROR_MESSAGE}            Error while creating the file
 ${RESOURCE_NOT_FOUND}       Resource Not Found
 
-${content-1}    Set Test Variable Sample Content to test partition file upload
+${content-1}    Sample Content to test partition file upload
 ...  Sample Content to test partition file upload
 ...  Sample Content to test partition file upload
-${content-2}    Set Test Variable Sample Content to test partition file upload after reboot
+${content-2}    Sample Content to test partition file upload after reboot
 ...  Sample Content to test partition file upload after reboot
 ...  Sample Content to test partition file upload after reboot
 
@@ -280,11 +280,8 @@ Delete BMC Partition File
       ${resp}=  Delete Request  openbmc  /ibm/v1/Host/ConfigFiles/${conf_file}  &{data}
       Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
-      Run Keyword If  ${resp.status_code} == ${HTTP_FORBIDDEN}
-      ...    Should Be Equal As Strings  ${resp.text}  ${expected_message}
-      ${description}=  Run Keyword If  ${resp.status_code} == ${HTTP_OK}
-      ...  Return Description Of Response  ${resp.text}
-      Run Keyword If  '${description}' != 'None'
+      ${description}=  Return Description Of Response  ${resp.text}
+      Run Keyword If  ${resp.status_code} == ${status_code}
       ...  Should Be Equal As Strings  ${description}  ${expected_message}
     END
 
@@ -317,6 +314,8 @@ Return Description Of Response
     #    "Description": "File Created"
     # }
 
+    ${status}=  Run Keyword And Return Status  Evaluate  type(${resp_text})
+    Return From Keyword If  '${status}' == 'False'  ${resp_text}
     ${message}=  Evaluate  json.loads('''${resp_text}''')  json
 
     [Return]  ${message["Description"]}
@@ -343,11 +342,8 @@ Upload Partition File To BMC
       ${resp}=  Put Request  openbmc  /ibm/v1/Host/ConfigFiles/${conf_file}  &{kwargs}  timeout=10
       Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
-      Run Keyword If  ${resp.status_code} == ${HTTP_FORBIDDEN}
-      ...    Should Be Equal As Strings  ${resp.text}  ${expected_message}
-      ${description}=  Run Keyword If  ${resp.status_code} == ${HTTP_OK}
-      ...  Return Description Of Response  ${resp.text}
-      Run Keyword If  '${description}' != 'None'
+      ${description}=  Return Description Of Response  ${resp.text}
+      Run Keyword If  ${resp.status_code} == ${status_code}
       ...  Should Be Equal As Strings  ${description}  ${expected_message}
     END
 
