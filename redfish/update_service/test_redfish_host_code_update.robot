@@ -66,8 +66,8 @@ Suite Setup Execution
 
     Valid File Path  IMAGE_FILE_PATH
     Redfish.Login
-    Redfish Delete All BMC Dumps
-    Redfish Purge Event Log
+    Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
+    Run Keyword And Ignore Error  Redfish Purge Event Log
     Redfish Power On  stack_mode=skip
 
 
