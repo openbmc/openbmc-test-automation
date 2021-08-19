@@ -22,6 +22,30 @@
       "revId": "a1375f74fc447cb05c076e989854cc444b107a61",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2c73a8a4_76f38c2b",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-08-19T05:04:47Z",
+      "side": 1,
+      "message": "It is used in downstream test case. Redfish method is the user initiated dump and this command is used for auto generated one.",
+      "parentUuid": "d8927656_8ad7b4a0",
+      "range": {
+        "startLine": 263,
+        "startChar": 0,
+        "endLine": 270,
+        "endChar": 41
+      },
+      "revId": "a1375f74fc447cb05c076e989854cc444b107a61",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
