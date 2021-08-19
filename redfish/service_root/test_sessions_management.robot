@@ -166,20 +166,6 @@ Verify Session Persistency After BMC Reboot
 
     List Should Contain Value  ${sessions}  ${payload}
 
-
-REST Logging Interface Read Should Be A SUCCESS For Authorized Users
-    [Documentation]  REST logging interface read should be a success for authorized users.
-    [Tags]    REST_Logging_Interface_Read_Should_Be_A_SUCCESS_For_Authorized_Users
-
-    ${resp}=  Redfish.Get  /xyz/openbmc_project/logging
-
-    ${resp_output}=  evaluate  json.loads('''${resp.text}''')  json
-    ${log_count}=  Get Length  ${resp_output["data"]}
-
-    # Max 200 error logs are allowed in OpenBmc.
-    Run Keyword Unless   ${-1} < ${log_count} < ${201}  Fail
-
-
 *** Keywords ***
 
 Create Session And Verify Response Code
