@@ -68,7 +68,7 @@ Suite Setup Execution
     Redfish.Login
     Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
     Run Keyword And Ignore Error  Redfish Purge Event Log
-    Redfish Power On  stack_mode=skip
+    Redfish Power Off  stack_mode=skip
 
 
 Redfish Update Firmware
