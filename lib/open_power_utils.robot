@@ -26,14 +26,21 @@ Get OCC Objects
 
 Get OCC Active State
     [Documentation]  Get the OCC "OccActive" and return the attribute value.
-    [Arguments]  ${occ_object}
+    [Arguments]  ${value}
 
     # Description of argument(s):
-    # occ_object   OCC object path.
-    #             (e.g. "/org/open_power/control/occ0").
+    # value       CPU position (e.g. "0, 1, 2").
 
-    ${occ_attribute}=  Read Attribute  ${occ_object}  OccActive
-    [Return]  ${occ_attribute}
+    ${cmd}=  Catenate  busctl get-property org.open_power.OCC.Control
+    ...   /org/open_power/control/occ${value} org.open_power.OCC.Status OccActive
+
+    ${cmd_output}  ${stderr}  ${rc} =  BMC Execute Command  ${cmd}
+    ...  print_out=1  print_err=1  ignore_err=1
+
+    # The command returns format  'b true'
+    Return From Keyword If  '${cmd_output.split(' ')[-1]}' == 'true'  ${1}
+
+    [Return]  ${0}
 
 
 Count Object Entries
@@ -85,7 +92,7 @@ Verify OCC State
        Continue For Loop If  '${cpu_status['Health']}' != 'OK' or '${cpu_status['State']}' != 'Enabled'
        Log To Console  ${cpu_status}
        ${num}=  Set Variable  ${endpoint_path[-1]}
-       ${occ_active}=  Get OCC Active State  ${OPENPOWER_CONTROL}occ${num}
+       ${occ_active}=  Get OCC Active State  ${num}
        Should Be Equal  ${occ_active}  ${expected_occ_active}
        ...  msg=OCC not in right state
     END
