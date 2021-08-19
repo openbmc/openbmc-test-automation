@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e2d2b418_0b3c97cf",
+        "filename": "lib/open_power_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000238
+      },
+      "writtenOn": "2021-08-19T22:09:44Z",
+      "side": 1,
+      "message": "Does this get the list of present procs or possible procs?  If \"possible\", then the OCC status for the non-present procs will fail.  I think thats what is happening on SW528682.",
+      "revId": "1f98ce713657bd8506684f60135af7b628bf3496",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
