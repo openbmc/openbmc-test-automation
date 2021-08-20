@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "0733b5da_5dcd7755",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-20T07:30:36Z",
+      "side": 1,
+      "message": "Here I am checking the active software image Line no 340. checking firmware version is extra which I have added.",
+      "parentUuid": "2410ba2a_f046eed8",
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "16bde696_ddd5dc44",
         "filename": "redfish/update_service/test_firmware_inventory.robot",
         "patchSetId": 4
@@ -184,6 +202,30 @@
     },
     {
       "key": {
+        "uuid": "40dc9452_526247b8",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-20T07:30:36Z",
+      "side": 1,
+      "message": "If user doesn\u0027t want to switch the Image then he can skip this test case.",
+      "parentUuid": "333165df_ac481c8d",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 23
+      },
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4325c037_0f1aeb7a",
         "filename": "redfish/update_service/test_firmware_inventory.robot",
         "patchSetId": 4
@@ -231,6 +273,24 @@
       "side": 1,
       "message": "Why we need to switch here?\nWe just need to check the image is same in redifsh \u0026 firmware invenotry, right?\n\nAnd also to restore original image, one should include the code in teardown.",
       "parentUuid": "9cde7d1a_14c18ba5",
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a66e7bc3_c402a370",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-20T07:30:36Z",
+      "side": 1,
+      "message": "This test case purpose is when user switch back to backup image then redfish active software image should show the latest entry.",
+      "parentUuid": "2ef78ea0_0adcc4af",
       "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
