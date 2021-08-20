@@ -21,6 +21,7 @@ Test Teardown    FFDC On Test Case Fail
 
 *** Variables ***
 
+${acf_file}           service.acf
 ${acf_dir}            /etc/acf
 
 *** Test Cases ***
@@ -42,12 +43,21 @@ Verify Service User Login Without ACF file
     ...  Redfish.Login  service  ${SERVICE_USER_PASSWORD}
 
 
+Verify Service User Login Fails With Expired ACF
+    [Documentation]  Verify service user login fails with expired ACF.
+    
+    Remove Existing ACF
+    Upload Expired ACF
+    Verify Service Login Fails
+
+
 *** Keywords ***
 
 Suite Setup Execution
     [Documentation]  Do suite setup tasks.
 
     # Upload production key in BMC because it is not part of OpenBMC build yet.
+    Run Keywords  Open Connection for SCP
     scp.Put File  ${PRODUCTION_KEY_FILE_PATH}  ${acf_dir}
 
 
@@ -62,3 +72,20 @@ Upload Valid ACF
 
     Run Keywords  Open Connection for SCP
     scp.Put File  ${SERVICE_FILE_PATH}  ${acf_dir}
+
+
+Upload Expired ACF
+    [Documentation]  Upload expired ACF.
+
+    Run Keywords  Open Connection for SCP
+    scp.Put File  ${EXPIRED_SERVICE_FILE_PATH}  ${acf_dir}
+    ${acf_file_expired}=  Fetch From Right  ${EXPIRED_SERVICE_FILE_PATH}  /\
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  mv ${acf_dir}/${acf_file_expired} ${acf_dir}/${acf_file}
+    Should Be True  ${rc} == ${0}
+
+
+Verify Service Login Fails
+    [Documentation]  Verify service user login fails.
+
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  service  ${SERVICE_PASSWORD}
