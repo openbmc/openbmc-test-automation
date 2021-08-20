@@ -17,23 +17,19 @@ ${wait_time}              10s
 Set Static IPv4 Address To VMI And Verify
     [Documentation]  Set static IPv4 address to VMI.
     [Arguments]  ${ip}  ${gateway}  ${netmask}  ${valid_status_code}=${HTTP_ACCEPTED}
+    ...  ${interface}=eth0
 
     # Description of argument(s):
     # ip                 VMI IPv4 address.
     # gateway            Gateway for VMI IP.
     # netmask            Subnetmask for VMI IP.
     # valid_status_code  Expected valid status code from GET request. Default is HTTP_ACCEPTED.
+    # interface          VMI interface (eg. eth0 or eth1).
 
-    ${data}=  Set Variable
-    ...  {"IPv4StaticAddresses":
-    ...   [{"Address": "${ip}",
-    ...     "SubnetMask":"${netmask}",
-    ...     "Gateway": "${gateway}"}
-    ...   ]}
-
-    ${resp}=  Redfish.Patch
-    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${ethernet_interface}
-    ...  body=${data}  valid_status_codes=[${valid_status_code}]
+    ${ip_details}=  Create dictionary  Address=${ip}  SubnetMask=${netmask}  Gateway=${gateway}
+    ${ip_data}=  Create List  ${ip_details}
+    ${resp}=  Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+    ...  body={'IPv4StaticAddresses':${ip_data}}  valid_status_codes=[${valid_status_code}]
 
     # Wait few seconds for new configuration to get populated on runtime.
     Sleep  ${wait_time}
@@ -41,21 +37,22 @@ Set Static IPv4 Address To VMI And Verify
     Return From Keyword If  ${valid_status_code} != ${HTTP_ACCEPTED}
     ${host_power_state}  ${host_state}=   Redfish Get Host State
     Run Keyword If  '${host_power_state}' == 'On' and '${host_state}' == 'Enabled'
-    ...  Verify VMI Network Interface Details  ${ip}  Static  ${gateway}  ${netmask}
+    ...  Verify VMI Network Interface Details  ${ip}  Static  ${gateway}  ${netmask}  ${interface}
 
 Verify VMI Network Interface Details
     [Documentation]  Verify VMI network interface details.
     [Arguments]  ${ip}  ${origin}  ${gateway}  ${netmask}
-    ...  ${valid_status_code}=${HTTP_OK}
+    ...  ${interface}=eth0  ${valid_status_code}=${HTTP_OK}
 
     # Description of argument(s):
     # ip                 VMI IPv4 address.
     # origin             Origin of IPv4 address eg. Static or DHCP.
     # gateway            Gateway for VMI IP.
     # netmask            Subnetmask for VMI IP.
+    # interface          VMI interface (eg. eth0 or eth1).
     # valid_status_code  Expected valid status code from GET request. Default is HTTP_OK.
 
-    ${vmi_ip}=  Get VMI Network Interface Details  ${valid_status_code}
+    ${vmi_ip}=  Get VMI Network Interface Details  ${interface}  ${valid_status_code}
     Should Be Equal As Strings  ${origin}  ${vmi_ip["IPv4_AddressOrigin"]}
     Should Be Equal As Strings  ${gateway}  ${vmi_ip["IPv4_Gateway"]}
     Should Be Equal As Strings  ${netmask}  ${vmi_ip["IPv4_SubnetMask"]}
@@ -64,51 +61,56 @@ Verify VMI Network Interface Details
 Delete VMI IPv4 Address
     [Documentation]  Delete VMI IPv4 address.
     [Arguments]  ${delete_param}=IPv4StaticAddresses  ${valid_status_code}=${HTTP_ACCEPTED}
+    ...  ${interface}=eth0
 
     # Description of argument(s):
     # delete_param       Parameter to be deleted eg. IPv4StaticAddresses or IPv4Addresses.
     #                    Default is IPv4StaticAddresses.
     # valid_status_code  Expected valid status code from PATCH request. Default is HTTP_OK.
+    # interface          VMI interface (eg. eth0 or eth1).
 
     ${data}=  Set Variable  {"${delete_param}": [${Null}]}
     ${resp}=  Redfish.Patch
-    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${ethernet_interface}
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
     ...  body=${data}  valid_status_codes=[${valid_status_code}]
 
     Return From Keyword If  ${valid_status_code} != ${HTTP_ACCEPTED}
-    ${vmi_ip}=  Get VMI Network Interface Details
+    ${vmi_ip}=  Get VMI Network Interface Details  ${interface}
     Should Be Empty  ${vmi_ip["IPv4_Address"]}
 
 Set VMI IPv4 Origin
     [Documentation]  Set VMI IPv4 origin.
     [Arguments]  ${dhcp_enabled}=${False}  ${valid_status_code}=${HTTP_ACCEPTED}
+    ...  ${interface}=eth0
 
     # Description of argument(s):
     # dhcp_enabled       True if user wants to enable DHCP. Default is Static, hence value is set to False.
     # valid_status_code  Expected valid status code from PATCH request. Default is HTTP_OK.
+    # interface          VMI interface (eg. eth0 or eth1).
 
     ${data}=  Set Variable If  ${dhcp_enabled} == ${False}  ${DISABLE_DHCP}  ${ENABLE_DHCP}
     ${resp}=  Redfish.Patch
-    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${ethernet_interface}
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
     ...  body=${data}  valid_status_codes=[${valid_status_code}]
 
     Sleep  ${wait_time}
     Return From Keyword If  ${valid_status_code} != ${HTTP_ACCEPTED}
     ${resp}=  Redfish.Get
-    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${ethernet_interface}
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
     Should Be Equal  ${resp.dict["DHCPv4"]["DHCPEnabled"]}  ${dhcp_enabled}
 
 Get VMI Network Interface Details
     [Documentation]  Get VMI network interface details.
-    [Arguments]  ${valid_status_code}=${HTTP_OK}
+    [Arguments]  ${interface}=eth0  ${valid_status_code}=${HTTP_OK}
 
     # Description of argument(s):
+    # interface          VMI interface (eg. eth0 or eth1).
     # valid_status_code  Expected valid status code from GET request.
 
     # Note: It returns a dictionary of VMI ethernet interface parameters.
 
     ${resp}=  Redfish.Get
-    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${ethernet_interface}
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
     ...  valid_status_codes=[${valid_status_code}]
 
     ${ip_resp}=  Evaluate  json.loads(r'''${resp.text}''')  json
@@ -131,6 +133,30 @@ Get VMI Network Interface Details
     ...  InterfaceEnabled=${${ip_resp["InterfaceEnabled"]}}
 
     [Return]  &{vmi_ip}
+
+
+Get VMI Interfaces
+    [Documentation]  Get VMI network interface.
+    [Arguments]  ${valid_status_code}=${HTTP_OK}
+
+    # Description of argument(s):
+    # valid_status_code  Expected valid status code from GET request.
+    #                    By default set to ${HTTP_OK}.
+
+    ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces
+    ...  valid_status_codes=[${valid_status_code}]
+
+    ${resp}=  Evaluate  json.loads(r'''${resp.text}''')  json
+    ${interfaces_uri}=  Set Variable  ${resp["Members"]}
+    ${interface_list}=  Create List
+    ${number_of_interfaces}=  Get Length  ${interfaces_uri}
+    FOR  ${interface}  IN RANGE  ${number_of_interfaces}
+        ${_}  ${interface_value}=  Split String From Right  ${interfaces_uri[${interface}]}[@odata.id]  /  1
+        Append To List  ${interface_list}  ${interface_value}
+    END
+
+   [Return]  @{interface_list}
+
 
 Verify VMI EthernetInterfaces
     [Documentation]  Verify VMI ethernet interfaces.
