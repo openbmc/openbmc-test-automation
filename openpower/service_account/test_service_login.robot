@@ -42,12 +42,24 @@ Verify Service User Login Without ACF file
     ...  Redfish.Login  service  ${SERVICE_USER_PASSWORD}
 
 
+Verify Service Login Failure With Incorrect Password
+    [Documentation]  Verify service login failure with incorrect password.
+    [Tags]  Verify_Service_Login_Failure_With_Incorrect_Password
+
+    Remove Existing ACF
+    Upload Valid ACF
+    ${incorrect_service_password} =  Catenate  SEPARATOR=  ${SERVICE_PASSWORD}  123
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  service  ${incorrect_service_password}
+
+
 *** Keywords ***
 
 Suite Setup Execution
     [Documentation]  Do suite setup tasks.
 
     # Upload production key in BMC because it is not part of OpenBMC build yet.
+    Run Keywords  Open Connection for SCP
     scp.Put File  ${PRODUCTION_KEY_FILE_PATH}  ${acf_dir}
 
 
@@ -55,7 +67,6 @@ Remove Existing ACF
     [Documentation]  Remove existing ACF.
 
     BMC Execute Command  rm -f ${acf_dir}/*.acf
-
 
 Upload Valid ACF
     [Documentation]  Upload valid ACF.
