@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "edc3b4e6_9e7461c8",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-20T06:53:03Z",
+      "side": 1,
+      "message": "Check Redfish Active Software Image And Firmware Inventory Are Same - Is current name doesn\u0027t convey the objective of test case ?",
+      "parentUuid": "04ffc3ef_019ffcb5",
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "16bde696_ddd5dc44",
         "filename": "redfish/update_service/test_firmware_inventory.robot",
         "patchSetId": 4
@@ -59,6 +77,24 @@
     },
     {
       "key": {
+        "uuid": "39123779_a8765c92",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-20T06:53:03Z",
+      "side": 1,
+      "message": "Line No: 228",
+      "parentUuid": "72dabcbc_507f7513",
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "14a298c8_1753d856",
         "filename": "redfish/update_service/test_firmware_inventory.robot",
         "patchSetId": 4
@@ -82,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "884c49df_228cc239",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-20T06:53:03Z",
+      "side": 1,
+      "message": "this is designed as per the previous comment , Line no 178.\n\nthis should be kept separate, where functional image is getting switched.",
+      "parentUuid": "14a298c8_1753d856",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 23
+      },
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4325c037_0f1aeb7a",
         "filename": "redfish/update_service/test_firmware_inventory.robot",
         "patchSetId": 4
@@ -93,6 +153,24 @@
       "writtenOn": "2021-08-20T06:02:03Z",
       "side": 1,
       "message": "whats the difference one running on line 366, 370 \u0026 372?",
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cde7d1a_14c18ba5",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-20T06:53:03Z",
+      "side": 1,
+      "message": "Here I am checking Firmware Inventory and Redfish Active Software image are same for functional \nImage , will perform the same check when switch to back up image. \n\nBut to continue the execution with right image, I am again switching back to original image form where the test case got started.\n\nBelow I have explain with the details steps.\n\nStep 1 : Consider Image A is Functional\nStep 2 : Verify Active Software Image And Firmware Inventory Is Same\nStep 3 : Switch to Backup Image Consider Image B and now B is functional\nStep 4 : Verify Active Software Image And Firmware Inventory Is Same\nStep 5 : Switch to Backup Image Consider Image A and now A is functional\nStep 6 : Verify Active Software Image And Firmware Inventory Is Same",
+      "parentUuid": "4325c037_0f1aeb7a",
       "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
