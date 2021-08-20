@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "04ffc3ef_019ffcb5",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-08-20T06:02:03Z",
+      "side": 1,
+      "message": "Check If Firmware Image Is Same In Firmware Inventory And Redfish Read Operation",
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "16bde696_ddd5dc44",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-08-20T06:02:03Z",
+      "side": 1,
+      "message": "change like above",
+      "range": {
+        "startLine": 213,
+        "startChar": 34,
+        "endLine": 213,
+        "endChar": 50
+      },
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "72dabcbc_507f7513",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-08-20T06:02:03Z",
+      "side": 1,
+      "message": "Add:     switch_backup_image",
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14a298c8_1753d856",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-08-20T06:02:03Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 23
+      },
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4325c037_0f1aeb7a",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-08-20T06:02:03Z",
+      "side": 1,
+      "message": "whats the difference one running on line 366, 370 \u0026 372?",
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
