@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "2410ba2a_f046eed8",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-08-20T07:08:36Z",
+      "side": 1,
+      "message": "firmware or s/w image is not related with redfish or firmware inventory.\nU can get fw versions using different means, that is what we are doing here.",
+      "parentUuid": "edc3b4e6_9e7461c8",
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "16bde696_ddd5dc44",
         "filename": "redfish/update_service/test_firmware_inventory.robot",
         "patchSetId": 4
@@ -142,6 +160,30 @@
     },
     {
       "key": {
+        "uuid": "333165df_ac481c8d",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-08-20T07:08:36Z",
+      "side": 1,
+      "message": "how does it make it better by calling same keyword here rather than in previous test case?",
+      "parentUuid": "884c49df_228cc239",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 23
+      },
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4325c037_0f1aeb7a",
         "filename": "redfish/update_service/test_firmware_inventory.robot",
         "patchSetId": 4
@@ -171,6 +213,24 @@
       "side": 1,
       "message": "Here I am checking Firmware Inventory and Redfish Active Software image are same for functional \nImage , will perform the same check when switch to back up image. \n\nBut to continue the execution with right image, I am again switching back to original image form where the test case got started.\n\nBelow I have explain with the details steps.\n\nStep 1 : Consider Image A is Functional\nStep 2 : Verify Active Software Image And Firmware Inventory Is Same\nStep 3 : Switch to Backup Image Consider Image B and now B is functional\nStep 4 : Verify Active Software Image And Firmware Inventory Is Same\nStep 5 : Switch to Backup Image Consider Image A and now A is functional\nStep 6 : Verify Active Software Image And Firmware Inventory Is Same",
       "parentUuid": "4325c037_0f1aeb7a",
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ef78ea0_0adcc4af",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-08-20T07:08:36Z",
+      "side": 1,
+      "message": "Why we need to switch here?\nWe just need to check the image is same in redifsh \u0026 firmware invenotry, right?\n\nAnd also to restore original image, one should include the code in teardown.",
+      "parentUuid": "9cde7d1a_14c18ba5",
       "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
