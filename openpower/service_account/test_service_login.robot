@@ -51,7 +51,18 @@ Verify Service Login Failure With Expired ACF
     Open Connection for SCP
     scp.Put File  ${EXPIRED_SERVICE_FILE_PATH}  ${acf_dir}
     Run Keyword And Expect Error  InvalidCredentialsError*
-    ...  Redfish.Login  service  ${SERVICE_PASSWORD}
+    ...  Redfish.Login  service  ${SERVICE_USER_PASSWORD}
+
+
+Verify Service Login Failure With Incorrect Password
+    [Documentation]  Verify service login failure with incorrect password.
+    [Tags]  Verify_Service_Login_Failure_With_Incorrect_Password
+
+    Remove Existing ACF
+    Upload Valid ACF
+    ${incorrect_service_password} =  Catenate  SEPARATOR=  ${SERVICE_USER_PASSWORD}  123
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  service  ${incorrect_service_password}
 
 
 *** Keywords ***
@@ -68,7 +79,6 @@ Remove Existing ACF
     [Documentation]  Remove existing ACF.
 
     BMC Execute Command  rm -f ${acf_dir}/*.acf
-
 
 Upload Valid ACF
     [Documentation]  Upload valid ACF.
