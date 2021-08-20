@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "4bdbd5d2_56523e80",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-20T06:09:49Z",
+      "side": 1,
+      "message": "can please indent lines  26 to 31 according as lines above it",
+      "revId": "3152f17d031a77be4e04c008750bc9f27db583e9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ce591109_ed453abf",
         "filename": "openpower/ext_interfaces/test_savearea_management.robot",
         "patchSetId": 3
@@ -13,6 +30,23 @@
       "writtenOn": "2021-08-20T04:44:12Z",
       "side": 1,
       "message": "remove\n281 is taking care of it",
+      "revId": "3152f17d031a77be4e04c008750bc9f27db583e9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b86060f5_1325fccc",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-20T06:09:49Z",
+      "side": 1,
+      "message": "suggestion to check dict type-${status}\u003d  Evaluate  isinstance(${resp_text}, dict)",
       "revId": "3152f17d031a77be4e04c008750bc9f27db583e9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
