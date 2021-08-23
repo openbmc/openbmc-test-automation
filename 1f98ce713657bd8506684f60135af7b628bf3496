@@ -16,6 +16,24 @@
       "revId": "1f98ce713657bd8506684f60135af7b628bf3496",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "98cf7417_7398e5a2",
+        "filename": "lib/open_power_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-23T17:19:05Z",
+      "side": 1,
+      "message": "Yeap.. we can discuss bit more on it, how to handle it on different commit.  This one is to handle REST off migration work..",
+      "parentUuid": "e2d2b418_0b3c97cf",
+      "revId": "1f98ce713657bd8506684f60135af7b628bf3496",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
