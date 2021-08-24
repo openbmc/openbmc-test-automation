@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation  Test OpenBMC GUI "Manage power usage" sub-menu of "Server control".
+Documentation  Test OpenBMC GUI "Power" sub-menu of "Resource Management".
 
 Resource        ../../lib/gui_resource.robot
 
@@ -11,32 +11,32 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
-${xpath_manage_power_heading}      //h1[text()="Manage power usage"]
-${xpath_power_ops_checkbox}        //*[@data-test-id='managePowerUsage-checkbox-togglePowerCapField']
-${xpath_cap_input_button}          //*[@data-test-id='managePowerUsage-input-powerCapValue']
-${xpath_submit_button}             //*[@data-test-id='managePowerUsage-button-savePowerCapValue']
+${xpath_power_heading}             //h1[text()="Power"]
+${xpath_power_ops_checkbox}        //*[@data-test-id='power-checkbox-togglePowerCapField']
+${xpath_cap_input_button}          //*[@data-test-id='power-input-powerCapValue']
+${xpath_submit_button}             //*[@data-test-id='power-button-savePowerCapValue']
 
 *** Test Cases ***
 
-Verify Navigation To Manage Power Usage Page
-    [Documentation]  Verify navigation to manage power usage page.
-    [Tags]  Verify_Navigation_To_Manage_Power_Usage_Page
+Verify Navigation To Power Page
+    [Documentation]  Verify navigation to power page.
+    [Tags]  Verify_Navigation_To_Power_Page
 
-    Page Should Contain Element  ${xpath_manage_power_heading}
+    Page Should Contain Element  ${xpath_power_heading}
 
 
-Verify Existence Of All Sections In Manage Power Usage Page
-    [Documentation]  Verify existence of all sections in Manage Power Usage page.
-    [Tags]  Verify_Existence_Of_All_Sections_In_Manage_Power_Usage_Page
+Verify Existence Of All Sections In Power Page
+    [Documentation]  Verify existence of all sections in power page.
+    [Tags]  Verify_Existence_Of_All_Sections_In_Power_Page
 
     Page Should Contain  Current power consumption
     Page Should Contain  Power cap setting
     Page Should Contain  Power cap value
 
 
-Verify Existence Of All Buttons In Manage Power Usage Page
-    [Documentation]  Verify existence of all buttons in manage power usage page.
-    [Tags]  Verify_Existence_Of_All_Buttons_In_Manage_Power_Usage_Page
+Verify Existence Of All Buttons In Power Page
+    [Documentation]  Verify existence of all buttons in power page.
+    [Tags]  Verify_Existence_Of_All_Buttons_In_Power_Page
 
     Page Should Contain Element  ${xpath_power_ops_checkbox}
     Page Should Contain Element  ${xpath_cap_input_button}
@@ -141,6 +141,6 @@ Get Power Cap Value
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
-    Click Element  ${xpath_control_menu}
-    Click Element  ${xpath_manage_power_usage_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  manage-power-usage
+    Click Element  ${xpath_resource-management_menu}
+    Click Element  ${xpath_power_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  power

@@ -10,10 +10,10 @@ Test Teardown   FFDC On Test Case Fail
 
 *** Variables ***
 
-${bmc_url}             https://${OPENBMC_HOST}
-${bmc_url_1}           https://${OPENBMC_HOST_1}
-${LDAP_FILE_PATH}      ${EMPTY}
-${CA_FILE_PATH}        ${EMPTY}
+${bmc_url}                     https://${OPENBMC_HOST}
+${bmc_url_1}                   https://${OPENBMC_HOST_1}
+${LDAP_FILE_PATH}              ${EMPTY}
+${CA_FILE_PATH}                ${EMPTY}
 
 ${xpath_add_new_certificate}   //*[contains(text(), ' Add new certificate ')]
 ${xpath_certificate_type}      //*[@id="certificate-type"]
@@ -105,7 +105,7 @@ Load Certificates On BMC Via GUI
 Navigate To SSL Certificate Page
     [Documentation]  Navigate to SSL Certificate page.
 
-    Click Element  ${xpath_access_control_menu}
-    Click Element  ${xpath_ssl_certificates_sub_menu}
-    Page Should Contain  SSL certificates
+    Click Element  ${xpath_secuity_and_accesss_menu}
+    Click Element  ${xpath_certificates_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  certificates
 

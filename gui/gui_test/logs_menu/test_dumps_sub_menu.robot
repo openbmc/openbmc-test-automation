@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation   Test OpenBMC GUI "Dumps" sub-menu of "Health" menu.
+Documentation   Test OpenBMC GUI "Dumps" sub-menu of "Logs" menu.
 
 Resource        ../../lib/gui_resource.robot
 
@@ -57,6 +57,6 @@ Suite Setup Execution
     [Documentation]  Do test suite setup tasks.
 
     Launch Browser And Login GUI
-    Click Element  ${xpath_health_menu}
+    Click Element  ${xpath_logs_menu}
     Click Element  ${xpath_dumps_sub_menu}
     Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  dumps
