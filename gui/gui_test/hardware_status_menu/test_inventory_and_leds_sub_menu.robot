@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation   Test OpenBMC GUI "Hardware Status" sub-menu of "Health" menu.
+Documentation   Test OpenBMC GUI "Inventory and LEDs" sub-menu of "Hardware status" menu.
 
 Resource        ../../lib/gui_resource.robot
 
@@ -11,20 +11,20 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
-${xpath_hardware_status_heading}  //h1[text()="Hardware status"]
+${xpath_inventory_and_leds_heading}  //h1[text()="Inventory and LEDs"]
 
 *** Test Cases ***
 
-Verify Navigation To Hardware Status Page
-    [Documentation]  Verify navigation to hardware status page.
-    [Tags]  Verify_Navigation_To_Hardware_Status_Page
+Verify Navigation To Inventory And LEDs Page
+    [Documentation]  Verify navigation to inventory page.
+    [Tags]  Verify_Navigation_To_Inventory_And_LEDs_Page
 
-    Page Should Contain Element  ${xpath_hardware_status_heading}
+    Page Should Contain Element  ${xpath_inventory_and_leds_heading}
 
 
-Verify Components On Hardware Status Page
-    [Documentation]  Verify whether required components are displayed hardware status page.
-    [Tags]  Verify_Components_On_Hardware_Status_Page
+Verify Components On Inventory And LEDs Page
+    [Documentation]  Verify whether required components are displayed under inventory and LEDs page.
+    [Tags]  Verify_Components_On_Inventory_And_LEDs_Page
 
     Page Should Contain  System
     Page Should Contain  BMC manager
@@ -34,11 +34,12 @@ Verify Components On Hardware Status Page
     Page Should Contain  Power supplies
     Page Should Contain  Processors
 
+
 *** Keywords ***
 
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
-    Click Element  ${xpath_health_menu}
-    Click Element  ${xpath_hardware_status_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  hardware-status
+    Click Element  ${xpath_hardware_status_menu}
+    Click Element  ${xpath_inventory_and_leds_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  inventory
