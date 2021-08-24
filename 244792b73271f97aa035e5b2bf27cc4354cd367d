@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0d309b05_b4752e76",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-24T06:38:01Z",
+      "side": 1,
+      "message": "did you meant ${MAXIMUM_FILE_MESSAGE} and ${UNSUPPORTED_FILE_MESSAGE} above",
+      "revId": "244792b73271f97aa035e5b2bf27cc4354cd367d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d1032100_d4fcaee3",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-24T06:38:01Z",
+      "side": 1,
+      "message": "Upload multiple partition ,otherwise looks same as above testcase",
+      "revId": "244792b73271f97aa035e5b2bf27cc4354cd367d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4c8300a_2fa7c131",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-24T06:38:01Z",
+      "side": 1,
+      "message": "Small",
+      "revId": "244792b73271f97aa035e5b2bf27cc4354cd367d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb88f795_3bc6a01d",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-24T06:38:01Z",
+      "side": 1,
+      "message": "suggestion ${file_size}\u003dignore",
+      "revId": "244792b73271f97aa035e5b2bf27cc4354cd367d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6446c17a_fb3efffe",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-24T06:38:01Z",
+      "side": 1,
+      "message": "Small",
+      "revId": "244792b73271f97aa035e5b2bf27cc4354cd367d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
