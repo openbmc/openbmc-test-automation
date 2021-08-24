@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation  Test OpenBMC Firmware Update" sub menu of "Configuration".
+Documentation  Test OpenBMC Firmware Update" sub menu of "Operations".
 
 Resource        ../../lib/gui_resource.robot
 
@@ -44,6 +44,6 @@ Suite Setup Execution
    [Documentation]  Do test case setup tasks.
 
     Launch Browser And Login GUI
-    Click Element  ${xpath_server_configuration}
+    Click Element  ${xpath_operations_menu}
     Click Element  ${xpath_firmware_update_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  firmware
