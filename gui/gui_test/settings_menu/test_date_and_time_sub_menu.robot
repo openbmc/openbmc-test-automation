@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation   Test OpenBMC GUI "Date and time settings" sub-menu of "Configuration".
+Documentation   Test OpenBMC GUI "Date and time" sub-menu of "Settings".
 
 Resource        ../../lib/gui_resource.robot
 
@@ -10,7 +10,7 @@ Suite Teardown  Close Browser
 
 *** Variables ***
 
-${xpath_date_time_heading}     //h1[text()="Date and time settings"]
+${xpath_date_time_heading}     //h1[text()="Date and time"]
 ${xpath_select_manual}         //*[@data-test-id="dateTimeSettings-radio-configureManual"]
 ${xpath_select_ntp}            //*[@data-test-id="dateTimeSettings-radio-configureNTP"]
 ${xpath_manual_date}           //input[@data-test-id="dateTimeSettings-input-manualDate"]
@@ -119,6 +119,6 @@ Suite Setup Execution
 Navigate To Date and Time Page
     [Documentation]  Navigate to the date and time page from main menu.
 
-    Click Element  ${xpath_server_configuration}
-    Click Element  ${xpath_date_time_settings_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  date-time-settings
+    Click Element  ${xpath_settings_menu}
+    Click Element  ${xpath_date_time_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  date-time
