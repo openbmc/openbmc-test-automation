@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation  Test OpenBMC GUI "Event logs" sub-menu.
+Documentation  Test OpenBMC GUI "Event logs" sub-menu of "Logs" menu.
 
 Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/logging_utils.robot
@@ -138,7 +138,7 @@ Suite Teardown Execution
 Navigate To Event Logs Page
     [Documentation]  Navigate to the event logs page from main menu.
 
-    Click Element  ${xpath_health_menu}
+    Click Element  ${xpath_logs_menu}
     Click Element  ${xpath_event_logs_sub_menu}
     Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  event-logs
 
