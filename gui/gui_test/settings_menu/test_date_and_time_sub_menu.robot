@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation   Test OpenBMC GUI "Date and time settings" sub-menu of "Configuration".
+Documentation   Test OpenBMC GUI "Date and time" sub-menu of "Settings".
 
 Resource        ../../lib/gui_resource.robot
 
@@ -10,45 +10,45 @@ Suite Teardown  Close Browser
 
 *** Variables ***
 
-${xpath_date_time_heading}     //h1[text()="Date and time settings"]
-${xpath_select_manual}         //*[@data-test-id="dateTimeSettings-radio-configureManual"]
-${xpath_select_ntp}            //*[@data-test-id="dateTimeSettings-radio-configureNTP"]
-${xpath_manual_date}           //input[@data-test-id="dateTimeSettings-input-manualDate"]
-${xpath_manual_time}           //input[@data-test-id="dateTimeSettings-input-manualTime"]
-${xpath_ntp_server1}           //input[@data-test-id="dateTimeSettings-input-ntpServer1"]
-${xpath_ntp_server2}           //input[@data-test-id="dateTimeSettings-input-ntpServer2"]
-${xpath_ntp_server3}           //input[@data-test-id="dateTimeSettings-input-ntpServer3"]
-${xpath_select_save_settings}  //button[@data-test-id="dateTimeSettings-button-saveSettings"]
+${xpath_date_time_heading}     //h1[text()="Date and time"]
+${xpath_select_manual}         //*[@data-test-id="dateTime-radio-configureManual"]
+${xpath_select_ntp}            //*[@data-test-id="dateTime-radio-configureNTP"]
+${xpath_manual_date}           //input[@data-test-id="dateTime-input-manualDate"]
+${xpath_manual_time}           //input[@data-test-id="dateTime-input-manualTime"]
+${xpath_ntp_server1}           //input[@data-test-id="dateTime-input-ntpServer1"]
+${xpath_ntp_server2}           //input[@data-test-id="dateTime-input-ntpServer2"]
+${xpath_ntp_server3}           //input[@data-test-id="dateTime-input-ntpServer3"]
+${xpath_select_save_settings}  //button[@data-test-id="dateTime-button-saveSettings"]
 
 
 *** Test Cases ***
 
-Verify Navigation To Date And Time Settings Page
-    [Documentation]  Verify navigation to date and time settings page.
-    [Tags]  Verify_Navigation_To_Date_And_Time_Settings_Page
+Verify Navigation To Date And Time Page
+    [Documentation]  Verify navigation to date and time page.
+    [Tags]  Verify_Navigation_To_Date_And_Time_Page
 
     Page Should Contain Element  ${xpath_date_time_heading}
 
 
-Verify Existence Of All Sections In Date And Time Settings Page
-    [Documentation]  Verify existence of all sections in date and time settings page.
-    [Tags]  Verify_Existence_Of_All_Sections_In_Date_And_Time_Settings_Page
+Verify Existence Of All Sections In Date And Time Page
+    [Documentation]  Verify existence of all sections in date and time page.
+    [Tags]  Verify_Existence_Of_All_Sections_In_Date_And_Time__Page
 
     Page Should Contain  Configure settings
 
 
-Verify Existence Of All Buttons In Date And Time Settings Page
+Verify Existence Of All Buttons In Date And Time Page
     [Documentation]  Verify existence of all buttons in date and time settings page.
-    [Tags]  Verify_Existence_Of_All_Buttons_In_Date_And_Time_Settings_Page
+    [Tags]  Verify_Existence_Of_All_Buttons_In_Date_And_Time_Page
 
     Page Should Contain Element  ${xpath_select_manual}
     Page Should Contain Element  ${xpath_select_ntp}
     Page Should Contain Element  ${xpath_select_save_settings}
 
 
-Verify Existence Of All Input Boxes In Date And Time Settings Page
-    [Documentation]  Verify existence of all input boxes in date time settings page.
-    [Tags]  Verify_Existence_Of_All_Input_Boxes_In_Date_And_Time_Settings_Page
+Verify Existence Of All Input Boxes In Date And Time Page
+    [Documentation]  Verify existence of all input boxes in date time page.
+    [Tags]  Verify_Existence_Of_All_Input_Boxes_In_Date_And_Time_Page
 
     Click Element At Coordinates  ${xpath_select_manual}  0  0
     Page Should Contain Element  ${xpath_manual_date}
@@ -119,6 +119,6 @@ Suite Setup Execution
 Navigate To Date and Time Page
     [Documentation]  Navigate to the date and time page from main menu.
 
-    Click Element  ${xpath_server_configuration}
-    Click Element  ${xpath_date_time_settings_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  date-time-settings
+    Click Element  ${xpath_settings_menu}
+    Click Element  ${xpath_date_time_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  date-time
