@@ -1,7 +1,6 @@
 *** Settings ***
 
-Documentation   Test OpenBMC GUI "Network settings" sub-menu of
-...             "Server configuration".
+Documentation   Test OpenBMC GUI "Network" sub-menu of "Settings".
 
 Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/bmc_network_utils.robot
@@ -11,25 +10,25 @@ Suite Teardown  Close Browser
 
 *** Variables ***
 
-${xpath_network_setting_heading}  //h1[text()="Network settings"]
+${xpath_network_heading}          //h1[text()="Network"]
 ${xpath_interface}                //h2[text()="Interface"]
 ${xpath_system}                   //h2[text()="System"]
 ${xpath_static_ipv4}              //h2[text()="IPV4"]
 ${xpath_static_dns}               //h2[text()="Static DNS"]
-${xpath_hostname_input}           //*[@data-test-id="networkSettings-input-hostname"]
-${xpath_network_save_settings}    //button[@data-test-id="networkSettings-button-saveNetworkSettings"]
-${xpath_default_gateway_input}    //*[@data-test-id="networkSettings-input-gateway"]
-${xpath_mac_address_input}        //*[@data-test-id="networkSettings-input-macAddress"]
-${xpath_static_input_ip0}         //*[@data-test-id="networkSettings-input-staticIpv4-0"]
-${xpath_static_input_ip1}         //*[@data-test-id="networkSettings-input-staticIpv4-1"]
+${xpath_hostname_input}           //*[@data-test-id="network-input-hostname"]
+${xpath_network_save_settings}    //button[@data-test-id="network-button-saveNetworkSettings"]
+${xpath_default_gateway_input}    //*[@data-test-id="network-input-gateway"]
+${xpath_mac_address_input}        //*[@data-test-id="network-input-macAddress"]
+${xpath_static_input_ip0}         //*[@data-test-id="network-input-staticIpv4-0"]
+${xpath_static_input_ip1}         //*[@data-test-id="network-input-staticIpv4-1"]
 ${xpath_add_static_ip}            //button[contains(text(),"Add static IP")]
 ${xpath_setting_success}          //*[contains(text(),"Successfully saved network settings.")]
 ${xpath_add_dns_server}           //button[contains(text(),"Add DNS server")]
-${xpath_network_interface}        //*[@data-test-id="networkSettings-select-interface"]
-${xpath_input_netmask_addr0}      //*[@data-test-id="networkSettings-input-subnetMask-0"]
-${xpath_input_netmask_addr1}      //*[@data-test-id="networkSettings-input-subnetMask-1"]
+${xpath_network_interface}        //*[@data-test-id="network-select-interface"]
+${xpath_input_netmask_addr0}      //*[@data-test-id="network-input-subnetMask-0"]
+${xpath_input_netmask_addr1}      //*[@data-test-id="network-input-subnetMask-1"]
 ${xpath_delete_static_ip}         //*[@title="Delete IPv4 row"]
-${xpath_input_dns_server}         //*[@data-test-id="networkSettings-input-dnsAddress-0"]
+${xpath_input_dns_server}         //*[@data-test-id="network-input-dnsAddress-0"]
 ${xpath_delete_dns_server}        //*[@title="Delete DNS row"]
 ${xpath_delete_static_ip}         //*[@title="Delete IPv4 row"]
 
@@ -54,16 +53,16 @@ ${test_hostname}                  openbmc
 
 *** Test Cases ***
 
-Verify Navigation To Network Settings Page
-    [Documentation]  Verify navigation to network settings page.
-    [Tags]  Verify_Navigation_To_Network_Settings_Page
+Verify Navigation To Network Page
+    [Documentation]  Verify navigation to network page.
+    [Tags]  Verify_Navigation_To_Network_Page
 
-    Page Should Contain Element  ${xpath_network_setting_heading}
+    Page Should Contain Element  ${xpath_network_heading}
 
 
-Verify Existence Of All Sections In Network Settings Page
+Verify Existence Of All Sections In Network Page
     [Documentation]  Verify existence of all sections in network settings page.
-    [Tags]  Verify_Existence_Of_All_Sections_In_Network_Settings_Page
+    [Tags]  Verify_Existence_Of_All_Sections_In_Network_Page
 
     Page Should Contain Element  ${xpath_interface}
     Page Should Contain Element  ${xpath_system}
@@ -72,18 +71,18 @@ Verify Existence Of All Sections In Network Settings Page
     Page Should Contain Button   ${xpath_delete_static_ip}
 
 
-Verify Existence Of All Buttons In Network Settings Page
-    [Documentation]  Verify existence of all buttons in network settings page.
-    [Tags]  Verify_Existence_Of_All_Buttons_In_Network_Settings_Page
+Verify Existence Of All Buttons In Network Page
+    [Documentation]  Verify existence of all buttons in network page.
+    [Tags]  Verify_Existence_Of_All_Buttons_In_Network_Page
 
     Page Should Contain Element  ${xpath_add_static_ip}
     Page Should Contain Element  ${xpath_add_dns_server}
 
 
-Verify Network Settings From Server Configuration
-    [Documentation]  Verify ability to select "Network Settings" sub-menu option
-    ...  of "Server Configuration".
-    [Tags]  Verify_Network_Settings_From_Server_Configuration
+Verify Network From Server Configuration
+    [Documentation]  Verify ability to select "Network" sub-menu option
+    ...  of "Settings".
+    [Tags]  Verify_Network_From_Server_Configuration
 
     Page Should Contain  IP address
 
@@ -274,9 +273,9 @@ Suite Setup Execution
    [Documentation]  Do test case setup tasks.
 
     Launch Browser And Login GUI
-    Click Element  ${xpath_server_configuration}
-    Click Element  ${xpath_select_network_settings}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network-settings
+    Click Element  ${xpath_settings_menu}
+    Click Element  ${xpath_network_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network
     ${host_name}  ${BMC_IP}=  Get Host Name IP  host=${OPENBMC_HOST}
     Set Suite Variable  ${BMC_IP}
 
@@ -313,7 +312,7 @@ Add DNS Server And Verify
     ${length}=  Get Length   ${static_name_servers}
     FOR  ${i}  IN RANGE  ${length}
       Click Button  ${xpath_add_dns_server}
-      Input Text  //*[@data-test-id="networkSettings-input-dnsAddress-${i}"]
+      Input Text  //*[@data-test-id="network-input-dnsAddress-${i}"]
       ...  ${static_name_servers}[${i}]
     END
 
@@ -382,8 +381,8 @@ Verify Static Name Server Details On GUI
 
     ${length}=  Get Length  ${static_name_servers}
     FOR  ${i}  IN RANGE  ${length}
-       Page Should Contain Element  //*[@data-test-id="networkSettings-input-dnsAddress-${i}"]
-       Textfield Value Should Be   //*[@data-test-id="networkSettings-input-dnsAddress-${i}"]
+       Page Should Contain Element  //*[@data-test-id="network-input-dnsAddress-${i}"]
+       Textfield Value Should Be   //*[@data-test-id="network-input-dnsAddress-${i}"]
        ...  ${static_name_servers}[${i}]
     END
 
@@ -407,9 +406,9 @@ Add Static IP Address And Verify
     Click Button  ${xpath_add_static_ip}
 
     Input Text
-    ...  //*[@data-test-id="networkSettings-input-staticIpv4-${location}"]  ${ip_address}
+    ...  //*[@data-test-id="network-input-staticIpv4-${location}"]  ${ip_address}
     Input Text
-    ...  //*[@data-test-id="networkSettings-input-subnetMask-${location}"]  ${subnet_mask}
+    ...  //*[@data-test-id="network-input-subnetMask-${location}"]  ${subnet_mask}
 
     Click Button  ${xpath_network_save_settings}
     Run keyword if  '${expected_status}' != 'Valid format'
@@ -434,7 +433,7 @@ Delete And Verify Static IP Address On BMC
 
     ${delete_ip_buttons}=  Get WebElements  ${xpath_delete_static_ip}
     FOR  ${location}  IN RANGE  len(${ip_addresses})
-       ${gui_ip}=  Get Value  //*[@data-test-id="networkSettings-input-staticIpv4-${location}"]
+       ${gui_ip}=  Get Value  //*[@data-test-id="networ-input-staticIpv4-${location}"]
        Run Keyword If  '${gui_ip}' == '${ip_address}' and '${gui_ip}' != '${BMC_IP}'
        ...  Run Keywords  Click Element  ${delete_ip_buttons}[${location}]
        ...  AND  Exit For Loop
@@ -460,12 +459,12 @@ Update IP Address And Verify
     Should Contain  ${ip_addresses}  ${ip}  msg=${ip} does not exist on BMC
 
     FOR  ${location}  IN RANGE  len(${ip_addresses})
-       ${gui_ip}=  Get Value  //*[@data-test-id="networkSettings-input-staticIpv4-${location}"]
+       ${gui_ip}=  Get Value  //*[@data-test-id="network-input-staticIpv4-${location}"]
        Run Keyword If  '${gui_ip}' == '${ip}'
        ...  Run Keywords
-       ...  Clear Element Text  //*[@data-test-id="networkSettings-input-staticIpv4-${location}"]
+       ...  Clear Element Text  //*[@data-test-id="network-input-staticIpv4-${location}"]
        ...  AND  Input Text
-       ...  //*[@data-test-id="networkSettings-input-staticIpv4-${location}"]  ${new_ip}
+       ...  //*[@data-test-id="network-input-staticIpv4-${location}"]  ${new_ip}
        ...  AND  Exit For Loop
     END
     Click Button  ${xpath_network_save_settings}
@@ -484,7 +483,7 @@ Get Static IPv4 Addresses From GUI
     ${static_ipv4_addresses}=  Create List
 
     FOR   ${locator}   IN RANGE  len(${availble_ip_addresses})
-       ${ip_address}=  Get value  //*[@data-test-id="networkSettings-input-staticIpv4-${locator}"]
+       ${ip_address}=  Get value  //*[@data-test-id="network-input-staticIpv4-${locator}"]
        Append To List  ${static_ipv4_addresses}  ${ip_address}
     END
 

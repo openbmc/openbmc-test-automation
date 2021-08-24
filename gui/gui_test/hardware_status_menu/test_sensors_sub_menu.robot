@@ -120,6 +120,6 @@ Verify Filter By Severity Button OK
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
-    Click Element  ${xpath_health_menu}
+    Click Element  ${xpath_hardware_status_menu}
     Click Element  ${xpath_sensor_sub_menu}
     Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  sensors
