@@ -15,25 +15,37 @@ Suite Teardown    Suite Teardown Execution
 
 *** Variables ***
 
-${MAXIMUM_SIZE_MESSAGE}     File size exceeds maximum allowed size[500KB]
-${FILE_UPLOAD_MESSAGE}      File Created
-${FILE_DELETED_MESSAGE}     File Deleted
-${FILE_UPDATED}             File Updated
-${FORBIDDEN_MESSAGE}        Forbidden
-${ERROR_MESSAGE}            Error while creating the file
-${RESOURCE_NOT_FOUND}       Resource Not Found
+${MAXIMUM_SIZE_MESSAGE}             File size exceeds maximum allowed size[500KB]
+${FILE_UPLOAD_MESSAGE}              File Created
+${FILE_DELETED_MESSAGE}             File Deleted
+${FILE_UPDATED_MESSAGE}             File Updated
+${FORBIDDEN_MESSAGE}                Forbidden
+${ERROR_MESSAGE}                    Error while creating the file
+${RESOURCE_NOT_FOUND_MESSAGE}       Resource Not Found
+${MINIMUM_FILE_SIZE_MESSAGE}        File size is less than minimum allowed size[100B]
+${MAXIMUM_FILE_NAME_MESSAGE}        Filename must be maximum 20 characters
+${UNSUPPORTED_FILE_NAME_MESSAGE}    Unsupported character in filename
 
-${content-1}                Sample Content to test partition file upload
+${content-1}                        Sample Content to test partition file upload
 ...  Sample Content to test partition file upload
 ...  Sample Content to test partition file upload
-${content-2}                Sample Content to test partition file upload after reboot
+${content-2}                        Sample Content to test partition file upload after reboot
 ...  Sample Content to test partition file upload after reboot
 ...  Sample Content to test partition file upload after reboot
 
 *** Test Cases ***
 
+Redfish Upload Lower Limit Partition File To BMC
+    [Documentation]  Upload lower limit of allowed partition file to BMC using Redfish.
+    [Tags]  Redfish_Upload_Lower_Limit_Partition_File_To_BMC
+    [Template]  Redfish Upload Partition File
+
+    # file_name        file_size
+    100bytes-file      small_file_size
+
+
 Redfish Upload Partition File To BMC
-    [Documentation]  Upload partition file to BMC using redfish.
+    [Documentation]  Upload partition file to BMC using Redfish.
     [Tags]  Redfish_Upload_Partition_File_To_BMC
     [Template]  Redfish Upload Partition File
 
@@ -42,7 +54,7 @@ Redfish Upload Partition File To BMC
 
 
 Redfish Fail To Upload Partition File To BMC
-    [Documentation]  Fail to upload partition file to BMC using redfish.
+    [Documentation]  Fail to upload partition file to BMC using Redfish.
     [Tags]  Redfish_Fail_To_Upload_Partition_File_To_BMC
     [Template]  Redfish Fail To Upload Partition File
 
@@ -51,7 +63,7 @@ Redfish Fail To Upload Partition File To BMC
 
 
 Redfish Upload Multiple Partition File To BMC
-    [Documentation]  Upload multiple partition file to BMC using redfish.
+    [Documentation]  Upload multiple partition file to BMC using Redfish.
     [Tags]  Redfish_Upload_Multiple_Partition_File_To_BMC
     [Template]  Redfish Upload Partition File
 
@@ -60,7 +72,7 @@ Redfish Upload Multiple Partition File To BMC
 
 
 Redfish Fail To Upload Multiple Partition File To BMC
-    [Documentation]  Fail to upload multiple partition file to BMC using redfish.
+    [Documentation]  Fail to upload multiple partition file to BMC using Redfish.
     [Tags]  Redfish_Fail_To_Upload_Multiple_Partition_File_To_BMC
     [Template]  Redfish Fail To Upload Partition File
 
@@ -69,7 +81,7 @@ Redfish Fail To Upload Multiple Partition File To BMC
 
 
 Redfish Upload Same Partition File To BMC In Loop
-    [Documentation]  Upload same partition file to BMC using redfish in loop.
+    [Documentation]  Upload same partition file to BMC using Redfish in loop.
     [Tags]  Redfish_Upload_Same_Partition_File_To_BMC_In_Loop
     [Template]  Redfish Upload Partition File In Loop
 
@@ -78,7 +90,7 @@ Redfish Upload Same Partition File To BMC In Loop
 
 
 Redfish Upload And Delete Same Partition File To BMC In Loop
-    [Documentation]  Upload same partition file to BMC using redfish in loop.
+    [Documentation]  Upload same partition file to BMC using Redfish in loop.
     [Tags]  Redfish_Upload_And_Delete_Same_Partition_File_To_BMC_In_Loop
     [Template]  Redfish Upload And Delete Partition File In Loop
 
@@ -87,7 +99,7 @@ Redfish Upload And Delete Same Partition File To BMC In Loop
 
 
 Redfish Partition File Upload Post BMC Reboot
-    [Documentation]  Upload partition file to BMC using redfish, after the BMC reboot.
+    [Documentation]  Upload partition file to BMC using Redfish, after the BMC reboot.
     [Tags]  Redfish_Partition_File_Upload_Post_BMC_Reboot
     [Template]  Verify Partition File Upload Post BMC Reboot
 
@@ -96,7 +108,7 @@ Redfish Partition File Upload Post BMC Reboot
 
 
 Redfish Partition File Persistency On BMC Reboot
-    [Documentation]  Upload partition file to BMC using redfish and is same after reboot.
+    [Documentation]  Upload partition file to BMC using Redfish and is same after reboot.
     [Tags]  Redfish_Partition_File_Persistency_On_BMC_Reboot
     [Template]  Redfish Partition File Persistency
 
@@ -105,7 +117,7 @@ Redfish Partition File Persistency On BMC Reboot
 
 
 Redfish Multiple Partition File Persistency On BMC Reboot
-    [Documentation]  Upload partition file to BMC using redfish and is same after reboot.
+    [Documentation]  Upload multiple partition file to BMC using Redfish and is same after reboot.
     [Tags]  Redfish_Multiple_Partition_File_Persistency_On_BMC_Reboot
     [Template]  Redfish Partition File Persistency
 
@@ -114,7 +126,7 @@ Redfish Multiple Partition File Persistency On BMC Reboot
 
 
 Redfish Read Partition File On BMC
-    [Documentation]  Upload partition file to BMC using redfish and verify the content.
+    [Documentation]  Upload partition file to BMC using Redfish and verify the content.
     [Tags]  Redfish_Read_Partition_File_On_BMC
     [Template]  Redfish Read Partition File
 
@@ -124,7 +136,7 @@ Redfish Read Partition File On BMC
 
 
 Redfish Read Partition File On BMC Reboot
-    [Documentation]  Upload partition file to BMC using redfish and verify the content after reboot.
+    [Documentation]  Upload partition file to BMC using Redfish and verify the content after reboot.
     [Tags]  Check_Redfish_Read_Partition_File_On_BMC_Reboot
     [Template]  Redfish Read Partition File
 
@@ -134,7 +146,7 @@ Redfish Read Partition File On BMC Reboot
 
 
 Redfish Update Partition File On BMC
-    [Documentation]  Upload partition file to BMC using redfish and verify the content.
+    [Documentation]  Upload partition file to BMC using Redfish and verify the content.
     [Tags]  Redfish_Update_Partition_File_On_BMC
     [Template]  Redfish Update Partition File With Different Content
 
@@ -143,7 +155,7 @@ Redfish Update Partition File On BMC
 
 
 Redfish Update Partition File On BMC Reboot
-    [Documentation]  Upload partition file to BMC using redfish and verify the content after the reboot.
+    [Documentation]  Upload partition file to BMC using Redfish and verify the content after the reboot.
     [Tags]  Redfish_Update_Partition_File_On_BMC_Reboot
     [Template]  Redfish Update Partition File With Different Content
 
@@ -152,7 +164,7 @@ Redfish Update Partition File On BMC Reboot
 
 
 Redfish Persistency Update Partition File On BMC
-    [Documentation]  Upload partition file to BMC using redfish and verify the content.
+    [Documentation]  Upload partition file to BMC using Redfish and verify the content.
     [Tags]  Redfish_Persistency_Update_Partition_File_On_BMC
     [Template]  Redfish Update Partition File With Same Content
 
@@ -161,7 +173,7 @@ Redfish Persistency Update Partition File On BMC
 
 
 Redfish Persistency Update Partition File On BMC Reboot
-    [Documentation]  Upload partition file to BMC using redfish and verify the content after the reboot.
+    [Documentation]  Upload partition file to BMC using Redfish and verify the content after the reboot.
     [Tags]  Redfish_Persistency_Update_Partition_File_On_BMC_Reboot
     [Template]  Redfish Update Partition File With Same Content
 
@@ -206,7 +218,7 @@ Non Admin User Delete Non Existence Of Partition File
 
 
 Redfish Update Wrong Partition File To BMC
-    [Documentation]  Upload partition file to BMC by wrong URI using redfish.
+    [Documentation]  Upload partition file to BMC by wrong URI using Redfish.
     [Tags]  Redfish_Update_Wrong_Partition_File_To_BMC
     [Template]  Verify Update Wrong Partition File To BMC
 
@@ -263,8 +275,25 @@ Create Partition File
     END
 
 
+Create Small Size Partition File
+    [Documentation]  Create small size Partition file.
+    [Arguments]  ${file_name}
+
+    # Description of argument(s):
+    # file_name    Partition file name.
+
+    Delete Local Partition File  ${file_name}
+
+    FOR  ${conf_file}  IN  @{file_name}
+      @{words}=  Split String  ${conf_file}  -
+      ${matches}=  Get Regexp Matches  ${words}[0]  (.*[0-9])
+      Run  dd if=/dev/zero of=${conf_file} bs=${matches}[0] count=1
+      OperatingSystem.File Should Exist  ${conf_file}
+    END
+
+
 Delete BMC Partition File
-    [Documentation]  Delete single partition file on BMC via redfish.
+    [Documentation]  Delete single partition file on BMC via Redfish.
     [Arguments]  ${file_name}  ${status_code}  ${expected_message}
 
     # Description of argument(s):
@@ -286,7 +315,7 @@ Delete BMC Partition File
 
 
 Delete All BMC Partition File
-    [Documentation]  Delete multiple partition file on BMC via redfish.
+    [Documentation]  Delete multiple partition file on BMC via Redfish.
     [Arguments]  ${status_code}
 
     # Description of argument(s):
@@ -363,14 +392,22 @@ Verify Partition File On BMC
 
 Redfish Upload Partition File
     [Documentation]  Upload the partition file.
-    [Arguments]  ${file_name}
+    [Arguments]  ${file_name}  ${file_size}=${EMPTY}
 
     # Description of argument(s):
     # file_name    Partition file name.
+    # file_size    By Default is set to EMPTY,
+    #              if user pass small_file_size the create file with small
+    #              size keyword gets executed.
 
     @{Partition_file_list} =  Split String  ${file_name}  ,
     ${num_records}=  Get Length  ${Partition_file_list}
-    Create Partition File  ${Partition_file_list}
+
+    Run Keyword If  '${file_size}' == 'small_file_size'
+    ...  Create Small Size Partition File  ${Partition_file_list}
+    ...    ELSE
+    ...  Create Partition File  ${Partition_file_list}
+
     Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPLOAD_MESSAGE}
     Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
     Run Keyword If  ${num_records} == ${1}
@@ -391,7 +428,7 @@ Redfish Fail To Upload Partition File
     Create Partition File  ${Partition_file_list}
     Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_BAD_REQUEST}  ${MAXIMUM_SIZE_MESSAGE}
     Verify Partition File On BMC  ${Partition_file_list}  Partition_status=0
-    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_NOT_FOUND}  ${RESOURCE_NOT_FOUND}
+    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_NOT_FOUND}  ${RESOURCE_NOT_FOUND_MESSAGE}
     Delete Local Partition File  ${Partition_file_list}
 
 
@@ -409,7 +446,7 @@ Redfish Upload Partition File In Loop
     Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
 
     FOR  ${count}  IN RANGE  1  11
-      Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPDATED}
+      Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPDATED_MESSAGE}
       Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
     END
 
@@ -575,7 +612,7 @@ Redfish Update Partition File With Same Content
     ...  Initialize OpenBMC
 
     ${content_dict}=  Add Content To Files  ${Partition_file_list}  ${0}
-    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPDATED}
+    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPDATED_MESSAGE}
     Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
     Verify Redfish Partition File Content  ${Partition_file_list}  ${content_dict}  ${HTTP_OK}
 
@@ -607,7 +644,7 @@ Redfish Update Partition File With Different Content
     ...  Initialize OpenBMC
 
     ${content_dict}=  Add Content To Files  ${Partition_file_list}  ${1}
-    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPDATED}
+    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPDATED_MESSAGE}
     Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
     Verify Redfish Partition File Content  ${Partition_file_list}  ${content_dict}  ${HTTP_OK}
 
@@ -654,7 +691,7 @@ Redfish Delete Non Existence Partition File
     # file_name    Partition file name.
 
     @{Partition_file_list} =  Split String  ${file_name}  ,
-    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_NOT_FOUND}  ${RESOURCE_NOT_FOUND}
+    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_NOT_FOUND}  ${RESOURCE_NOT_FOUND_MESSAGE}
 
 
 Non Admin User To Upload Partition File
