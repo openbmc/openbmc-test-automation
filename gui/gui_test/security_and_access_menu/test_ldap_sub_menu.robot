@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation  Test OpenBMC GUI "LDAP" sub-menu of "Access control".
+Documentation  Test OpenBMC GUI "LDAP" sub-menu of "Security and access".
 
 Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/bmc_ldap_utils.robot
@@ -172,8 +172,8 @@ Suite Setup Execution
 
     Launch Browser And Login GUI
 
-    # Navigate to https://xx.xx.xx.xx/#/access-control/ldap  LDAP page.
-    Click Element  ${xpath_access_control_menu}
+    # Navigate to https://xx.xx.xx.xx/#/security-and-access/ldap  LDAP page.
+    Click Element  ${xpath_secuity_and_accesss_menu}
     Click Element  ${xpath_ldap_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  ldap
     Element Should Be Enabled   ${xpath_enable_ldap_checkbox}
@@ -314,8 +314,8 @@ Login BMC And Navigate To LDAP Page
     # password  The password to be used for login.
 
     Login GUI  ${username}  ${password}
-    # Navigate to https://xx.xx.xx.xx/#/access-control/ldap  LDAP page.
-    Click Element  ${xpath_access_control_menu}
+    # Navigate to https://xx.xx.xx.xx/#/security-and-access/ldap  LDAP page.
+    Click Element  ${xpath_secuity_and_accesss_menu}
     Click Element  ${xpath_ldap_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  ldap
 

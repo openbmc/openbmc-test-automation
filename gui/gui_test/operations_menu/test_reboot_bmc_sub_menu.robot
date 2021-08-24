@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation  Test OpenBMC GUI "Reboot BMC" sub-menu of "Server control".
+Documentation  Test OpenBMC GUI "Reboot BMC" sub-menu of "Operation" menu.
 
 Resource        ../../lib/gui_resource.robot
 
@@ -52,6 +52,6 @@ Verify Canceling Operation On BMC Reboot Operation
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
-    Click Element  ${xpath_control_menu}
+    Click Element  ${xpath_operations_menu}
     Click Element  ${xpath_reboot_bmc_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  reboot-bmc

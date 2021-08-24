@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation  Test OpenBMC GUI "SSL Certificates" sub-menu of "Access control".
+Documentation  Test OpenBMC GUI "Certificates" sub-menu of "Security and access".
 
 Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/certificate_utils.robot
@@ -12,9 +12,9 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
-${xpath_certificate_heading}       //h1[text()="SSL certificates"]
+${xpath_certificate_heading}       //h1[text()="Certificates"]
 ${xpath_add_certificate_button}    //button[contains(text(),"Add new certificate")]
-${xpath_generate_csr_button}       //*[@data-test-id='sslCertificates-button-generateCsr']
+${xpath_generate_csr_button}       //*[@data-test-id='certificates-button-generateCsr']
 ${xpath_generate_csr_heading}      //h5[contains(text(), "Generate a Certificate Signing Request")]
 ${xpath_select_certificate_type}   //*[@data-test-id='modalGenerateCsr-select-certificateType']
 ${xpath_select_country}            //*[@data-test-id='modalGenerateCsr-select-country']
@@ -33,9 +33,9 @@ ${xpath_select_algorithm_button}   //*[@data-test-id='modalGenerateCsr-select-ke
 
 *** Test Cases ***
 
-Verify Navigation To SSL Certificate Page
-    [Documentation]  Verify navigation to SSL certificate page.
-    [Tags]  Verify_Navigation_To_SSL_Certificate_Page
+Verify Navigation To Certificate Page
+    [Documentation]  Verify navigation to certificate page.
+    [Tags]  Verify_Navigation_To_Certificate_Page
 
     Page Should Contain Element  ${xpath_certificate_heading}
 
@@ -139,9 +139,9 @@ Generate Certificate File Data
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
-    Click Element  ${xpath_access_control_menu}
-    Click Element  ${xpath_ssl_certificates_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  ssl-certificates
+    Click Element  ${xpath_secuity_and_accesss_menu}
+    Click Element  ${xpath_certificates_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  certificates
 
 
 Suite Setup Execution

@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation  Test OpenBMC GUI "Power restore policy" sub-menu of "Server control" menu.
+Documentation  Test OpenBMC GUI "Power restore policy" sub-menu of "Settings" menu.
 
 Resource        ../../lib/gui_resource.robot
 
@@ -49,6 +49,6 @@ Verify Existence Of All Buttons In Power Restore Policy Page
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
-    Click Element  ${xpath_control_menu}
+    Click Element  ${xpath_settings_menu}
     Click Element  ${xpath_power_restore_policy_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  power-restore-policy
