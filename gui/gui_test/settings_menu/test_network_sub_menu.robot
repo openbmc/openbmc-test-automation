@@ -1,7 +1,6 @@
 *** Settings ***
 
-Documentation   Test OpenBMC GUI "Network settings" sub-menu of
-...             "Server configuration".
+Documentation   Test OpenBMC GUI "Network" sub-menu of "Settings".
 
 Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/bmc_network_utils.robot
@@ -274,9 +273,9 @@ Suite Setup Execution
    [Documentation]  Do test case setup tasks.
 
     Launch Browser And Login GUI
-    Click Element  ${xpath_server_configuration}
-    Click Element  ${xpath_select_network_settings}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network-settings
+    Click Element  ${xpath_settings_menu}
+    Click Element  ${xpath_network_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network
     ${host_name}  ${BMC_IP}=  Get Host Name IP  host=${OPENBMC_HOST}
     Set Suite Variable  ${BMC_IP}
 

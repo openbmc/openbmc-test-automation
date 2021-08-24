@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation   Test OpenBMC GUI "Client sessions" sub-menu of "Access Control" menu.
+Documentation   Test OpenBMC GUI "Sessions" sub-menu of "Security and access" menu.
 
 Resource        ../../lib/gui_resource.robot
 
@@ -11,16 +11,16 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
-${xpath_client_sessions_heading}  //h1[text()="Client sessions"]
+${xpath_sessions_heading}  //h1[text()="Sessions"]
 
 
 *** Test Cases ***
 
-Verify Navigation To Client Sessions Page
-    [Documentation]  Verify navigation to client sessions page.
-    [Tags]  Verify_Navigation_To_Client_Sessions_Page
+Verify Navigation To Sessions Page
+    [Documentation]  Verify navigation to sessions page.
+    [Tags]  Verify_Navigation_To_Sessions_Page
 
-    Page Should Contain Element  ${xpath_client_sessions_heading}
+    Page Should Contain Element  ${xpath_sessions_heading}
 
 
 *** Keywords ***
@@ -28,6 +28,6 @@ Verify Navigation To Client Sessions Page
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
-    Click Element  ${xpath_access_control_menu}
-    Click Element  ${xpath_client_sessions_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  client-sessions
+    Click Element  ${xpath_secuity_and_accesss_menu}
+    Click Element  ${xpath_sessions_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  sessions

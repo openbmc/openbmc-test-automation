@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation  Test OpenBMC GUI "Serial over LAN Console" sub-menu of "Control".
+Documentation  Test OpenBMC GUI "Serial over LAN Console" sub-menu of "Operations".
 
 Resource        ../../lib/gui_resource.robot
 
@@ -42,6 +42,6 @@ Verify Existence Of All Buttons In SOL Console Page
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
-    Click Element  ${xpath_control_menu}
+    Click Element  ${xpath_operations_menu}
     Click Element  ${xpath_sol_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  serial-over-lan
