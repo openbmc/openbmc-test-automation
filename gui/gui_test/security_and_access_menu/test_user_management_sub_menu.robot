@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation  Test OpenBMC GUI "Local user management" sub-menu of "Access control".
+Documentation  Test OpenBMC GUI "User management" sub-menu of "Security and access".
 
 Resource        ../../lib/gui_resource.robot
 
@@ -10,53 +10,53 @@ Test Setup      Test Setup Execution
 
 
 *** Variables ***
-${xpath_local_user_management_heading }  //h1[text()="Local user management"]
+${xpath_user_management_heading}         //h1[text()="User management"]
 ${xpath_select_user}                     //input[contains(@class,"custom-control-input")]
 ${xpath_account_policy}                  //button[contains(text(),'Account policy settings')]
 ${xpath_add_user}                        //button[contains(text(),'Add user')]
-${xpath_edit_user}                       //*[@data-test-id='localUserManagement-tableRowAction-edit-0']
-${xpath_delete_user}                     //*[@data-test-id='localUserManagement-tableRowAction-delete-1']
-${xpath_account_status_enabled_button}   //*[@data-test-id='localUserManagement-radioButton-statusEnabled']
-${xpath_account_status_disabled_button}  //*[@data-test-id='localUserManagement-radioButton-statusDisabled']
-${xpath_username_input_button}           //*[@data-test-id='localUserManagement-input-username']
-${xpath_privilege_list_button}           //*[@data-test-id='localUserManagement-select-privilege']
-${xpath_password_input_button}           //*[@data-test-id='localUserManagement-input-password']
-${xpath_password_confirm_button}         //*[@data-test-id='localUserManagement-input-passwordConfirmation']
-${xpath_cancel_button}                   //*[@data-test-id='localUserManagement-button-cancel']
-${xpath_submit_button}                   //*[@data-test-id='localUserManagement-button-submit']
+${xpath_edit_user}                       //*[@data-test-id='userManagement-tableRowAction-edit-0']
+${xpath_delete_user}                     //*[@data-test-id='userManagement-tableRowAction-delete-1']
+${xpath_account_status_enabled_button}   //*[@data-test-id='userManagement-radioButton-statusEnabled']
+${xpath_account_status_disabled_button}  //*[@data-test-id='userManagement-radioButton-statusDisabled']
+${xpath_username_input_button}           //*[@data-test-id='userManagement-input-username']
+${xpath_privilege_list_button}           //*[@data-test-id='userManagement-select-privilege']
+${xpath_password_input_button}           //*[@data-test-id='userManagement-input-password']
+${xpath_password_confirm_button}         //*[@data-test-id='userManagement-input-passwordConfirmation']
+${xpath_cancel_button}                   //*[@data-test-id='userManagement-button-cancel']
+${xpath_submit_button}                   //*[@data-test-id='userManagement-button-submit']
 ${xpath_add_user_heading}                //h5[contains(text(),'Add user')]
 ${xpath_policy_settings_header}          //*[text()="Account policy settings"]
-${xpath_auto_unlock}                     //*[@data-test-id='localUserManagement-radio-automaticUnlock']
-${xpath_manual_unlock}                   //*[@data-test-id='localUserManagement-radio-manualUnlock']
-${xpath_max_failed_login}                //*[@data-test-id='localUserManagement-input-lockoutThreshold']
+${xpath_auto_unlock}                     //*[@data-test-id='userManagement-radio-automaticUnlock']
+${xpath_manual_unlock}                   //*[@data-test-id='userManagement-radio-manualUnlock']
+${xpath_max_failed_login}                //*[@data-test-id='userManagement-input-lockoutThreshold']
 ${test_user_password}                    TestPwd1
 
 *** Test Cases ***
 
-Verify Navigation To Local User Management Page
-    [Documentation]  Verify navigation to local user management page.
-    [Tags]  Verify_Navigation_To_Local_User_Management_Page
+Verify Navigation To User Management Page
+    [Documentation]  Verify navigation to user management page.
+    [Tags]  Verify_Navigation_To_User_Management_Page
 
-    Page Should Contain Element  ${xpath_local_user_management_heading}
+    Page Should Contain Element  ${xpath_user_management_heading}
 
 
-Verify Existence Of All Sections In Local User Management Page
-    [Documentation]  Verify existence of all sections in local user management page.
-    [Tags]  Verify_Existence_Of_All_Sections_In_Local_User_Management_Page
+Verify Existence Of All Sections In User Management Page
+    [Documentation]  Verify existence of all sections in user management page.
+    [Tags]  Verify_Existence_Of_All_Sections_In_User_Management_Page
 
     Page should contain  View privilege role descriptions
 
 
-Verify Existence Of All Input Boxes In Local User Management Page
-    [Documentation]  Verify existence of all sections in Manage Power Usage page.
-    [Tags]  Verify_Existence_Of_All_Input_Boxes_In_Local_User_Management_Page
+Verify Existence Of All Input Boxes In User Management Page
+    [Documentation]  Verify existence of all sections in user managemnet page.
+    [Tags]  Verify_Existence_Of_All_Input_Boxes_In_User_Management_Page
 
     Page Should Contain Checkbox  ${xpath_select_user}
 
 
-Verify Existence Of All Buttons In Local User Management Page
-    [Documentation]  Verify existence of all buttons in local user management page.
-    [Tags]  Verify_Existence_Of_All_Buttons_In_Local_User_Management_Page
+Verify Existence Of All Buttons In User Management Page
+    [Documentation]  Verify existence of all buttons in user management page.
+    [Tags]  Verify_Existence_Of_All_Buttons_In_User_Management_Page
 
     Page should contain Button  ${xpath_account_policy}
     Page should contain Button  ${xpath_add_user}
@@ -175,8 +175,8 @@ Create User And Verify
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
-    # Navigate to https://xx.xx.xx.xx/#/access-control/local-user-management  Local users page.
+    # Navigate to https://xx.xx.xx.xx/#/access-control/user-management  user management page.
 
-    Click Element  ${xpath_access_control_menu}
-    Click Element  ${xpath_local_user_management_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  local-user-managemen
+    Click Element  ${xpath_secuity_and_accesss_menu}
+    Click Element  ${xpath_user_management_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  user-managemen
