@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "173dc0bd_3f4eed6f",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-24T07:54:06Z",
+      "side": 1,
+      "message": "Please club them as suggested in the function",
+      "range": {
+        "startLine": 66,
+        "startChar": 2,
+        "endLine": 68,
+        "endChar": 72
+      },
+      "revId": "1b14715f44c25c0f4c349cc78fd3d7bb2c939155",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
