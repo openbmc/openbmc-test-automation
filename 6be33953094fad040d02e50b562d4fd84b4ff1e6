@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1506f3c6_e38b480d",
+        "filename": "lib/external_intf/vmi_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-24T06:46:53Z",
+      "side": 1,
+      "message": "Example please",
+      "range": {
+        "startLine": 27,
+        "startChar": 24,
+        "endLine": 27,
+        "endChar": 39
+      },
+      "revId": "6be33953094fad040d02e50b562d4fd84b4ff1e6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
