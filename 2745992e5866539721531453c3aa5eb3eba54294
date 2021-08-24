@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cf2b6e98_5cd7c9e5",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-24T04:29:50Z",
+      "side": 1,
+      "message": "This has no significance now right ?",
+      "range": {
+        "startLine": 64,
+        "startChar": 3,
+        "endLine": 64,
+        "endChar": 39
+      },
+      "revId": "2745992e5866539721531453c3aa5eb3eba54294",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99c46e58_032d4850",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-24T04:29:50Z",
+      "side": 1,
+      "message": "Why do u need this here now ?",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 50
+      },
+      "revId": "2745992e5866539721531453c3aa5eb3eba54294",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef6ff788_77bea3d4",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-24T04:29:50Z",
+      "side": 1,
+      "message": "is backup image is now Functional.",
+      "range": {
+        "startLine": 211,
+        "startChar": 50,
+        "endLine": 211,
+        "endChar": 66
+      },
+      "revId": "2745992e5866539721531453c3aa5eb3eba54294",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
