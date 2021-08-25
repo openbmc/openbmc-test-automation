@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "d80afa28_14be3139",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-08-25T07:31:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b45bca5d_d84127aa",
+      "range": {
+        "startLine": 2,
+        "startChar": 72,
+        "endLine": 2,
+        "endChar": 93
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b49ed76f_6881dd5a",
         "filename": "openpower/service_account/test_service_login.robot",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ead8a9fd_dea67a81",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-08-25T07:31:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b49ed76f_6881dd5a",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 37
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "60dec6aa_ef5a8b3f",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-08-25T07:31:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cd104c3_115e6125",
+      "range": {
+        "startLine": 24,
+        "startChar": 21,
+        "endLine": 24,
+        "endChar": 48
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "180661f4_2bbd6d14",
         "filename": "openpower/service_account/test_service_login.robot",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43efab08_09103d15",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-08-25T07:31:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "180661f4_2bbd6d14",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 55
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "bfdbde89_269af99f",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-08-25T07:31:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9553f7af_6c643c0c",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 17
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "84e9ece9_604c699b",
         "filename": "openpower/service_account/test_service_login.robot",
         "patchSetId": 2
@@ -140,6 +260,30 @@
     },
     {
       "key": {
+        "uuid": "a4d4b21b_14a9ba9d",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-08-25T07:31:14Z",
+      "side": 1,
+      "message": "It will not do anything without an error / fail as per my test.",
+      "parentUuid": "84e9ece9_604c699b",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 33
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b2e7e539_c61791af",
         "filename": "openpower/service_account/test_service_login.robot",
         "patchSetId": 2
@@ -151,6 +295,30 @@
       "writtenOn": "2021-08-25T04:57:44Z",
       "side": 1,
       "message": "This I believe is required for most of the test case so it should go in suite setup.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 16
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0af9c6ec_ee6a839e",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-08-25T07:31:14Z",
+      "side": 1,
+      "message": "In this suite, every test is performed with a different ACF - expired ACF, corrupt ACF, correct ACF, invalid signature ACF etc. So, ACF uploading is required in each TC so that different ACF is copied.",
+      "parentUuid": "b2e7e539_c61791af",
       "range": {
         "startLine": 45,
         "startChar": 0,
@@ -209,6 +377,30 @@
     },
     {
       "key": {
+        "uuid": "e8822a3d_d6524f0a",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-08-25T07:31:14Z",
+      "side": 1,
+      "message": "Correct service password is generated and sent externally, unknown to the test script. Our intent is to make an incorrect one by adding something to correct password. This ensures password is different from correct and so incorrect.In a rare case, declaring incorrect password may be same as correct one.",
+      "parentUuid": "aa65db3b_ea0e2084",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 83
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6d70549b_947cd1c8",
         "filename": "openpower/service_account/test_service_login.robot",
         "patchSetId": 2
@@ -229,6 +421,30 @@
       "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "568c6cfa_726843d6",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-08-25T07:31:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d70549b_947cd1c8",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 49
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
