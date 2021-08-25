@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2cbcd610_74a85281",
+        "filename": "lib/external_intf/vmi_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-08-25T06:14:28Z",
+      "side": 1,
+      "message": "this value is not visible to this file as it is defined in test file, probably you can make default\u003deth0",
+      "range": {
+        "startLine": 20,
+        "startChar": 24,
+        "endLine": 20,
+        "endChar": 43
+      },
+      "revId": "4e8e7a74d34d9efcac02f38ebe75b6df0d0fbbc1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
