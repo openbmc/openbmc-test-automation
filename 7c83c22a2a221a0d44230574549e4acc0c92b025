@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "97051e39_baf340a5",
+        "filename": "gui/gui_test/access_control_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T11:37:33Z",
+      "side": 1,
+      "message": "Above commit is merged. Now you can work on this commit. There are some xpath changes you might need in this suite due to navigation xpath changes. See changes in ldap file for these changes - https://gerrit.openbmc-project.xyz/c/openbmc/openbmc-test-automation/+/46135",
+      "parentUuid": "73e6f585_3064ae2f",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 61
+      },
+      "revId": "7c83c22a2a221a0d44230574549e4acc0c92b025",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e3d12202_1786488f",
         "filename": "gui/gui_test/access_control_menu/test_ldap_sub_menu.robot",
         "patchSetId": 4
