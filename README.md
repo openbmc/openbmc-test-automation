@@ -134,7 +134,9 @@ classified as follows:
 
 `xcat/`: Contains test cases for XCAT automation.
 
-`gui/`: Contains test cases for web UI and security scanning tool automation.
+`gui/`: Contains test cases for testing web-based interface built on AngularJS.
+
+`gui/gui_test/`: Contains test cases for testing web-based user interface built on Vue.js.
 
 `pldm/`: Contains test cases for platform management subsystem (base, bios, fru, platform, OEM).
 
