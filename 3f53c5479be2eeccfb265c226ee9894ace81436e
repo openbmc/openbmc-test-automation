@@ -22,6 +22,30 @@
       "revId": "3f53c5479be2eeccfb265c226ee9894ace81436e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f2f253ae_d365623d",
+        "filename": "gui/gui_test/access_control_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T11:42:31Z",
+      "side": 1,
+      "message": "I believe this sleep is added for this page to load fully.. Cant we wait until for last element of LDAP page is visible/enabled here?",
+      "parentUuid": "3d26c11e_403e4424",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 179,
+        "endChar": 14
+      },
+      "revId": "3f53c5479be2eeccfb265c226ee9894ace81436e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
