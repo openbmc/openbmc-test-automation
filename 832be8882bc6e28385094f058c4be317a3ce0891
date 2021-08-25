@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4555e861_2fb1ead8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-08-25T09:01:45Z",
+      "side": 1,
+      "message": "This is major change but commit message is too small and trivial. Keeping existing comment  message unchanged,add with elaboration about :\n\n1. Why this change is required\n2. What modules are covered and process followed\n3. Any other significant necessity of this change",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 1
+      },
+      "revId": "832be8882bc6e28385094f058c4be317a3ce0891",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
