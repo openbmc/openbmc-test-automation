@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bbf584d2_71e3f254",
+        "filename": "lib/external_intf/vmi_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-25T11:49:08Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "4c4328ff_a4501ef2",
+      "range": {
+        "startLine": 30,
+        "startChar": 43,
+        "endLine": 30,
+        "endChar": 44
+      },
+      "revId": "8a88d97f2bbe388317817c5a30bcbb57a14db830",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "eb0f204a_d047429e",
         "filename": "lib/external_intf/vmi_utils.robot",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "8a88d97f2bbe388317817c5a30bcbb57a14db830",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "00ffb713_efb6b8d1",
+        "filename": "lib/external_intf/vmi_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-25T11:49:08Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "eb0f204a_d047429e",
+      "range": {
+        "startLine": 70,
+        "startChar": 58,
+        "endLine": 70,
+        "endChar": 74
+      },
+      "revId": "8a88d97f2bbe388317817c5a30bcbb57a14db830",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
