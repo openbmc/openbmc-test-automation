@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a26e9f4_1593ebae",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T11:33:54Z",
+      "side": 1,
+      "message": "My comments on below commit are also applicable for this commit. So please make required changes.\n\nhttps://gerrit.openbmc-project.xyz/c/openbmc/openbmc-test-automation/+/46092",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 0
+      },
+      "revId": "4675af6cf78fcc067002cc95506ad1ec77265e50",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cec2985_7fae2860",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T11:33:54Z",
+      "side": 1,
+      "message": "We should have two test cases for this like below:\n\n- Verify Service User Login With Valid ACF file\n- Verify Service User Login Without ACF file\n\nAlso add tags for these test cases.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 33
+      },
+      "revId": "4675af6cf78fcc067002cc95506ad1ec77265e50",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
