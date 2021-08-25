@@ -256,7 +256,7 @@ Verify SDR
     ${component_name}=  Replace String  ${component_name}  /  _
     ${presence_ipmi}=  Get SDR Presence Via IPMI  ${component_name}${SPACE}
 
-    Run Keyword If  '${presence_ipmi}' == 'Disabled'
+    Run Keyword If  '${presence_ipmi}' == 'Disabled' or '${presence_ipmi}' == ''
     ...    Should Be True  ${presence_rest} == ${0} and ${functional_rest} == ${0}
     ...  ELSE IF  '${presence_ipmi}' == 'Presence Detected' or '${presence_ipmi}' == 'Presence detected'
     ...    Should Be True  ${presence_rest} == ${1} and ${functional_rest} == ${1}
