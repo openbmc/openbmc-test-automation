@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc62ccd8_7a2bfc40",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T09:20:41Z",
+      "side": 1,
+      "message": "Not required",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 31
+      },
+      "revId": "77ba9320da3b1abf9a8bc1fc86b42dfcd4d241f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fca94cba_7d835ca8",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T09:20:41Z",
+      "side": 1,
+      "message": "This file I guess need to be supplied while running the test. If yes, Then make it a global variable and mention in the doc, command to run this suite.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 33
+      },
+      "revId": "77ba9320da3b1abf9a8bc1fc86b42dfcd4d241f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84bde0bb_e9469a2f",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T09:20:41Z",
+      "side": 1,
+      "message": "Same comment as above for acf_file",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 37
+      },
+      "revId": "77ba9320da3b1abf9a8bc1fc86b42dfcd4d241f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d94386cd_49ef0c7e",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T09:20:41Z",
+      "side": 1,
+      "message": "Not required. See below suggestion",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 83
+      },
+      "revId": "77ba9320da3b1abf9a8bc1fc86b42dfcd4d241f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bf8866c5_08c57a65",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T09:20:41Z",
+      "side": 1,
+      "message": "As login is not done move this logout also",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 18
+      },
+      "revId": "77ba9320da3b1abf9a8bc1fc86b42dfcd4d241f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "131dbeca_0df67d48",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T09:20:41Z",
+      "side": 1,
+      "message": "Here we can also just use - ${service_password}123\n\nAlso service_password is a global variable keep it all caps. Also add in documentation of the suite to provide this variable value while running the suite.",
+      "range": {
+        "startLine": 31,
+        "startChar": 33,
+        "endLine": 31,
+        "endChar": 62
+      },
+      "revId": "77ba9320da3b1abf9a8bc1fc86b42dfcd4d241f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95a03baf_06e994fa",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T09:20:41Z",
+      "side": 1,
+      "message": "access control file(ACF).",
+      "range": {
+        "startLine": 37,
+        "startChar": 37,
+        "endLine": 37,
+        "endChar": 56
+      },
+      "revId": "77ba9320da3b1abf9a8bc1fc86b42dfcd4d241f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}

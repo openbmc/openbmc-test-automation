@@ -284,6 +284,30 @@
     },
     {
       "key": {
+        "uuid": "9bc35652_a19f343d",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T09:20:41Z",
+      "side": 1,
+      "message": "If that the case can we just use -\n\nBMC Execute Command  rm -f ${acf_dir}/${acf_file}",
+      "parentUuid": "a4d4b21b_14a9ba9d",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 33
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b2e7e539_c61791af",
         "filename": "openpower/service_account/test_service_login.robot",
         "patchSetId": 2
