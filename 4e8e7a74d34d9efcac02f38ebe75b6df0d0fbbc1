@@ -22,6 +22,30 @@
       "revId": "4e8e7a74d34d9efcac02f38ebe75b6df0d0fbbc1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea9b74f2_34200a3d",
+        "filename": "lib/external_intf/vmi_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-25T09:42:56Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "2cbcd610_74a85281",
+      "range": {
+        "startLine": 20,
+        "startChar": 24,
+        "endLine": 20,
+        "endChar": 43
+      },
+      "revId": "4e8e7a74d34d9efcac02f38ebe75b6df0d0fbbc1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
