@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b45bca5d_d84127aa",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T04:57:44Z",
+      "side": 1,
+      "message": "This is not required. If you still want to keep it, put the full form of the ACF.",
+      "range": {
+        "startLine": 2,
+        "startChar": 72,
+        "endLine": 2,
+        "endChar": 93
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b49ed76f_6881dd5a",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T04:57:44Z",
+      "side": 1,
+      "message": "All local variable should be lower case.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 37
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5cd104c3_115e6125",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T04:57:44Z",
+      "side": 1,
+      "message": "Correct this.",
+      "range": {
+        "startLine": 24,
+        "startChar": 21,
+        "endLine": 24,
+        "endChar": 48
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "180661f4_2bbd6d14",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T04:57:44Z",
+      "side": 1,
+      "message": "Calling another keyword for for incorrect password does not make sense. Cant we have all the code here itself. I also added tags here.\n\nVerify Service Login Fails Using Incorrect Password\n    [Documentation]  Verify service login fails using incorrect password.\n    [Tags]  Verify Service Login Fails Using Incorrect Password\n\n    Run Keyword And Expect Error  InvalidCredentialsError*\n    ...  Redfish.Login  service  ${incorrect_service_password}",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 55
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9553f7af_6c643c0c",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T04:57:44Z",
+      "side": 1,
+      "message": "Dont see a value in adding this.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 17
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "84e9ece9_604c699b",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T04:57:44Z",
+      "side": 1,
+      "message": "What if the file is not there.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 33
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b2e7e539_c61791af",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T04:57:44Z",
+      "side": 1,
+      "message": "This I believe is required for most of the test case so it should go in suite setup.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 16
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b97ab01d_2e892ee5",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T04:57:44Z",
+      "side": 1,
+      "message": "Mention full form if it not mention any where in this suite.",
+      "range": {
+        "startLine": 46,
+        "startChar": 34,
+        "endLine": 46,
+        "endChar": 37
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa65db3b_ea0e2084",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T04:57:44Z",
+      "side": 1,
+      "message": "Cant we directly declare incorrect password fro it in variable section and use it?",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 83
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d70549b_947cd1c8",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-25T04:57:44Z",
+      "side": 1,
+      "message": "Not required",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 49
+      },
+      "revId": "618dd9884bc90d5ff02838e8f5cf10ea11fc4f4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
