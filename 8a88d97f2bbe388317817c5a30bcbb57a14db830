@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4c4328ff_a4501ef2",
+        "filename": "lib/external_intf/vmi_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-08-25T11:24:14Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 30,
+        "startChar": 43,
+        "endLine": 30,
+        "endChar": 44
+      },
+      "revId": "8a88d97f2bbe388317817c5a30bcbb57a14db830",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "eb0f204a_d047429e",
+        "filename": "lib/external_intf/vmi_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-08-25T11:24:14Z",
+      "side": 1,
+      "message": "remove, not required.",
+      "range": {
+        "startLine": 70,
+        "startChar": 58,
+        "endLine": 70,
+        "endChar": 74
+      },
+      "revId": "8a88d97f2bbe388317817c5a30bcbb57a14db830",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
