@@ -392,7 +392,8 @@ Verify Redfish Session Deleted
     ${sessions}=  Redfish.Get Properties  /redfish/v1/SessionService/Sessions
 
     FOR  ${session}  IN  @{sessions['Members']}
-      Should Not Be Equal As Strings  session  ['/redfish/v1/SessionService/Sessions/${session_info["SessionIDs"]}']
+      Should Not Be Equal As Strings
+      ...  session  ['/redfish/v1/SessionService/Sessions/${session_info["SessionIDs"]}']
     END
 
 
@@ -429,7 +430,8 @@ Redfish Post Acquire Lock
     # status_code    HTTP status code.
 
     ${lock_dict_param}=  Form Data To Acquire Lock  ${lock_type}
-    ${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${lock_dict_param}
+    ${resp}=  Redfish Post Request
+    ...  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${lock_dict_param}
     Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
     Run Keyword If  ${status_code} == ${HTTP_BAD_REQUEST}
@@ -449,7 +451,8 @@ Redfish Post Acquire List Lock
     # status_code    HTTP status code.
 
     ${lock_dict_param}=  Create Data To Acquire List Of Lock  ${lock_type}
-    ${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${lock_dict_param}
+    ${resp}=  Redfish Post Request
+    ...  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${lock_dict_param}
     Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
     [Return]  ${resp}
@@ -465,7 +468,8 @@ Redfish Post Acquire Invalid Lock
     # status_code    HTTP status code.
 
     ${lock_dict_param}=  Form Data To Acquire Invalid Lock  ${lock_type}
-    ${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${lock_dict_param}
+    ${resp}=  Redfish Post Request
+    ...  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${lock_dict_param}
     Should Be Equal As Strings  ${resp.status_code}  ${status_code}
     Run Keyword If  '${message}' != '${EMPTY}'
     ...  Valid Value  message  ['${resp.content}']
@@ -481,8 +485,10 @@ Redfish Post Acquire Invalid Lock With Invalid Data Type Of Resource ID
     # lock_type      Read lock or Write lock.
     # status_code    HTTP status code.
 
-    ${lock_dict_param}=  Form Data To Acquire Invalid Lock With Invalid Data Type Of Resource ID  ${lock_type}
-    ${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${lock_dict_param}
+    ${lock_dict_param}=
+    ...  Form Data To Acquire Invalid Lock With Invalid Data Type Of Resource ID  ${lock_type}
+    ${resp}=  Redfish Post Request
+    ...  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${lock_dict_param}
     Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
     [Return]  ${resp}
@@ -610,20 +616,22 @@ Acquire Lock On Resource
     # reboot_flag  Flag is used to run reboot the BMC code.
     #               (e.g. True or False).
 
+    ${trans_id_emptylist}=  Create List
     ${trans_id_list}=  Create List
+
     ${session_info}=  Create Redfish Session With ClientID  ${client_id}
     ${trans_id}=  Redfish Post Acquire Lock  ${lock_type}
     Append To List  ${trans_id_list}  ${trans_id}
+
     Verify Lock On Resource  ${session_info}  ${trans_id_list}
 
     ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
 
     Run Keyword If  '${reboot_flag}' == 'True'
-    ...  Run Keywords  Redfish OBMC Reboot (off)  AND
-    ...  Redfish Login  AND
+    ...  Run Keywords  Redfish BMC Reset Operation  AND
     ...  Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}  AND
-    ...  Verify Lock On Resource  ${session_info}  ${trans_id_list}  AND
-    ...  Release Locks On Resource  ${session_info}  ${trans_id_list}  Transaction  ${HTTP_OK}
+    ...  Is BMC Standby  AND
+    ...  Verify Lock On Resource  ${session_info}  ${trans_id_emptylist}
 
     Run Keyword If  '${reboot_flag}' == 'False'
     ...  Release Locks On Resource  ${session_info}  ${trans_id_list}  Transaction  ${HTTP_OK}
@@ -651,7 +659,8 @@ Form Data To Release Lock
 
 Release Locks On Resource
     [Documentation]  Redfish request to release a lock.
-    [Arguments]  ${session_info}  ${trans_id_list}  ${release_lock_type}=Transaction  ${status_code}=${HTTP_OK}
+    [Arguments]  ${session_info}  ${trans_id_list}  ${release_lock_type}=Transaction
+    ...  ${status_code}=${HTTP_OK}
 
     # Description of argument(s):
     # session_info        Session information in dict.
@@ -1092,7 +1101,8 @@ Verify Fail To Acquire Lock For Invalid Lock Data
     # message      Return message from URI.
 
     ${session_info}=  Create Redfish Session With ClientID  ${client_id}
-    ${trans_id}=  Redfish Post Acquire Invalid Lock  ${lock_type}  message=${message}  status_code=${HTTP_BAD_REQUEST}
+    ${trans_id}=  Redfish Post Acquire Invalid Lock
+    ...  ${lock_type}  message=${message}  status_code=${HTTP_BAD_REQUEST}
     Redfish Delete Session  ${session_info}
 
 
@@ -1159,7 +1169,8 @@ Verify List Of Session Lock On Resource
     ${lock_list_resp}=  Get Locks List On Resource With Session List  ${session_id_list}
     ${lock_list}=  Set Variable  ${lock_list_resp['Records']}
 
-    FOR  ${session_id}  ${tran_id}  ${lock_record}  IN ZIP  ${session_dict_info}  ${transaction_id_list}  ${lock_list}
+    FOR  ${session_id}  ${tran_id}  ${lock_record}  IN ZIP
+    ...  ${session_dict_info}  ${transaction_id_list}  ${lock_list}
       Valid Value  session_id['SessionIDs']  ['${lock_record['SessionID']}']
       Should Be Equal As Integers  ${tran_id['TransactionID']}  ${lock_record['TransactionID']}
     END
