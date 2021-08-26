@@ -15,7 +15,7 @@ Suite Teardown    Suite Teardown Execution
 
 *** Variables ***
 
-${MAXIMUM_SIZE_MESSAGE}             File size exceeds maximum allowed size[500KB]
+${MAXIMUM_FILE_SIZE_MESSAGE}        File size exceeds maximum allowed size[500KB]
 ${FILE_UPLOAD_MESSAGE}              File Created
 ${FILE_DELETED_MESSAGE}             File Deleted
 ${FILE_UPDATED_MESSAGE}             File Updated
@@ -40,8 +40,8 @@ Redfish Upload Lower Limit Partition File To BMC
     [Tags]  Redfish_Upload_Lower_Limit_Partition_File_To_BMC
     [Template]  Redfish Upload Partition File
 
-    # file_name        file_size
-    100bytes-file      small_file_size
+    # file_name
+    100-file
 
 
 Redfish Upload Partition File To BMC
@@ -53,13 +53,23 @@ Redfish Upload Partition File To BMC
     500KB-file
 
 
+Test Upload Lower Limit Partition File To BMC And Expect Failure
+    [Documentation]  Fail to upload partition file to BMC with file size
+    ...  below the lower limit of allowed partition file size using Redfish.
+    [Tags]  Test_Upload_Lower_Limit_Partition_File_To_BMC_And_Expect_Failure
+    [Template]  Redfish Fail To Upload Partition File
+
+    # file_name       response_message
+    99-file           ${MINIMUM_FILE_SIZE_MESSAGE}
+
+
 Redfish Fail To Upload Partition File To BMC
     [Documentation]  Fail to upload partition file to BMC using Redfish.
     [Tags]  Redfish_Fail_To_Upload_Partition_File_To_BMC
     [Template]  Redfish Fail To Upload Partition File
 
-    # file_name
-    501KB-file
+    # file_name       response_message
+    501KB-file        ${MAXIMUM_FILE_SIZE_MESSAGE}
 
 
 Redfish Upload Multiple Partition File To BMC
@@ -76,8 +86,8 @@ Redfish Fail To Upload Multiple Partition File To BMC
     [Tags]  Redfish_Fail_To_Upload_Multiple_Partition_File_To_BMC
     [Template]  Redfish Fail To Upload Partition File
 
-    # file_name
-    650KB-file,501KB-file
+    # file_name                 response_message
+    650KB-file,501KB-file       ${MAXIMUM_FILE_SIZE_MESSAGE}
 
 
 Redfish Upload Same Partition File To BMC In Loop
@@ -270,24 +280,7 @@ Create Partition File
 
     FOR  ${conf_file}  IN  @{file_name}
       @{words}=  Split String  ${conf_file}  -
-      Run  dd if=/dev/zero of=${conf_file} bs=1 count=0 seek=${words}[-0]
-      OperatingSystem.File Should Exist  ${conf_file}
-    END
-
-
-Create Small Size Partition File
-    [Documentation]  Create small size Partition file.
-    [Arguments]  ${file_name}
-
-    # Description of argument(s):
-    # file_name    Partition file name.
-
-    Delete Local Partition File  ${file_name}
-
-    FOR  ${conf_file}  IN  @{file_name}
-      @{words}=  Split String  ${conf_file}  -
-      ${matches}=  Get Regexp Matches  ${words}[0]  (.*[0-9])
-      Run  dd if=/dev/zero of=${conf_file} bs=${matches}[0] count=1
+      Run  dd if=/dev/zero of=${conf_file} bs=${words}[-0] count=1
       OperatingSystem.File Should Exist  ${conf_file}
     END
 
@@ -403,10 +396,7 @@ Redfish Upload Partition File
     @{Partition_file_list} =  Split String  ${file_name}  ,
     ${num_records}=  Get Length  ${Partition_file_list}
 
-    Run Keyword If  '${file_size}' == 'small_file_size'
-    ...  Create Small Size Partition File  ${Partition_file_list}
-    ...    ELSE
-    ...  Create Partition File  ${Partition_file_list}
+    Create Partition File  ${Partition_file_list}
 
     Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPLOAD_MESSAGE}
     Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
@@ -419,14 +409,19 @@ Redfish Upload Partition File
 
 Redfish Fail To Upload Partition File
     [Documentation]  Fail to upload the partition file.
-    [Arguments]  ${file_name}
+    [Arguments]  ${file_name}  ${response_message}=${EMPTY}
 
     # Description of argument(s):
-    # file_name    Partition file name.
+    # file_name           Partition file name.
+    # response_message    By default is set to EMPTY,
+    #                     else user provide the information when user upload the partition with file size 
+    #                     below lower linit of allowed partition or more than of large allowed partition.
 
     @{Partition_file_list} =  Split String  ${file_name}  ,
+
     Create Partition File  ${Partition_file_list}
-    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_BAD_REQUEST}  ${MAXIMUM_SIZE_MESSAGE}
+    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_BAD_REQUEST}  ${response_message}
+
     Verify Partition File On BMC  ${Partition_file_list}  Partition_status=0
     Delete BMC Partition File  ${Partition_file_list}  ${HTTP_NOT_FOUND}  ${RESOURCE_NOT_FOUND_MESSAGE}
     Delete Local Partition File  ${Partition_file_list}
