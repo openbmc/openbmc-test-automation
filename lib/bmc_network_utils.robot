@@ -238,7 +238,7 @@ Get First Non Pingable IP From Subnet
     #       (e.g. "machine1" or "9.xx.xx.31").
 
     # Non-pingable IP is unused IP address in the subnet.
-    ${host_name}  ${ip_addr}=  Get Host Name IP
+    ${host_name}  ${ip_addr}=  Get Host Name IP  ${host}
 
     # Split IP address into network part and host part.
     # IP address will have 4 octets xx.xx.xx.xx.
@@ -443,10 +443,14 @@ Get Network Configuration
     #    "VLANEnable": false,
     #    "VLANId": 0
     #  }
+    [Arguments]  ${network_active_channel}=${CHANNEL_NUMBER}
 
-
+    # Description of argument(s):
+    # network_active_channel   Ethernet channel number (eg. 1 or 2)
+    
     ${active_channel_config}=  Get Active Channel Config
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${resp}=  Redfish.Get
+    ...  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${network_active_channel}']['name']}
 
     @{network_configurations}=  Get From Dictionary  ${resp.dict}  IPv4StaticAddresses
     [Return]  @{network_configurations}
