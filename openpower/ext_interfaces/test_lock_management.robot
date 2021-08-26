@@ -599,6 +599,68 @@ Verify Lock On Resource
     END
 
 
+Check File Path
+    [Documentation]  Check file path existance.
+    [Arguments]  ${file_status}
+
+    # Description of argument(s):
+    # file_status    File status  e.g. True or False.
+
+    Set Test Variable  ${file_path}  /var/lib/bmcweb/ibm-management-console/locks/ibm_mc_persistent_lock_data.json
+    ${status}  ${stderr}  ${rc}=  BMC Execute Command  if [ -f ${file_path} ] ; then echo "True" ; else echo "False" ; fi
+
+    Run Keyword If  '${status}' == 'True'  Print Timen  File Found: ${file_path}
+    ...  ELSE
+    ...    Print Timen  File Not Found: ${file_path}
+
+    Should Be Equal As Strings  ${status}  ${file_status}
+
+    [Return]  ${status}
+
+
+Read BMC Lock Record File
+    [Documentation]  Read BMC lock records file.
+    [Arguments]  ${data_status}
+
+    # Description of argument(s):
+    # data_status    Data status e.g. True or False.
+
+    ${resp_text}  ${stderr}  ${rc}=  BMC Execute Command  cat ${file_path}
+    ${status}=  Run Keyword And Return Status  Evaluate  isinstance(${resp_text}, dict)
+
+    Return From Keyword If  '${status}' == 'False'  ${status}
+
+    ${message}=  Evaluate  json.loads('''${resp_text}''')  json
+
+    [Return]  ${message}
+
+
+Verify Lock On Resource Records From BMC File
+    [Documentation]  Verify lock records on resource from BMC file.
+    [Arguments]  ${session_info}  ${transaction_id}  ${expected_status}
+
+    # Description of argument(s):
+    # session_info       Session information in dict.
+    # transaction_id     Transaction id in list stored in dict.
+    # expected_status    Expected file status e.g. True or False
+ 
+    ${file_status}=  Check File Path  ${expected_status}
+    Should Be Equal As Strings  ${file_status}  ${expected_status}
+
+    Return From Keyword If  '${file_status}' == '${expected_status}'  Print Timen  No lock records are found on BMC.
+
+    ${bmc_lock_record}=  Read BMC Lock Record File  ${expected_status}
+
+    FOR  ${session}  ${trans_id}  IN ZIP  ${session_info}  ${transaction_id}
+      ${value}=  Get From Dictionary  ${trans_id}  TransactionID
+      ${value}=  Convert To String  ${value}
+      ${bmc_rec}=  Get From Dictionary  ${bmc_lock_record}  ${value}
+
+      Valid Value  session_info['ClientID']  ['${bmc_rec}[0][1]']
+      Valid Value  session_info['SessionIDs']  ['${bmc_rec}[0][0]']
+    END
+
+
 Acquire Lock On Resource
     [Documentation]  Acquire lock on resource.
     [Arguments]  ${client_id}  ${lock_type}  ${reboot_flag}=False
@@ -610,20 +672,24 @@ Acquire Lock On Resource
     # reboot_flag  Flag is used to run reboot the BMC code.
     #               (e.g. True or False).
 
+    ${trans_id_emptylist}=  Create List
     ${trans_id_list}=  Create List
+
     ${session_info}=  Create Redfish Session With ClientID  ${client_id}
     ${trans_id}=  Redfish Post Acquire Lock  ${lock_type}
     Append To List  ${trans_id_list}  ${trans_id}
+
     Verify Lock On Resource  ${session_info}  ${trans_id_list}
+    Verify Lock On Resource Records From BMC File  ${session_info}  ${trans_id_list}  True
 
     ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
 
     Run Keyword If  '${reboot_flag}' == 'True'
-    ...  Run Keywords  Redfish OBMC Reboot (off)  AND
-    ...  Redfish Login  AND
+    ...  Run Keywords  Redfish BMC Reset Operation  AND
     ...  Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}  AND
-    ...  Verify Lock On Resource  ${session_info}  ${trans_id_list}  AND
-    ...  Release Locks On Resource  ${session_info}  ${trans_id_list}  Transaction  ${HTTP_OK}
+    ...  Is BMC Standby  AND
+    ...  Verify Lock On Resource  ${session_info}  ${trans_id_emptylist}  AND
+    ...  Verify Lock On Resource Records From BMC File  ${session_info}  ${trans_id_list}  False
 
     Run Keyword If  '${reboot_flag}' == 'False'
     ...  Release Locks On Resource  ${session_info}  ${trans_id_list}  Transaction  ${HTTP_OK}
