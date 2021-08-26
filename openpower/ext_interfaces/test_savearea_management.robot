@@ -15,7 +15,7 @@ Suite Teardown    Suite Teardown Execution
 
 *** Variables ***
 
-${MAXIMUM_SIZE_MESSAGE}             File size exceeds maximum allowed size[500KB]
+${MAXIMUM_FILE_SIZE_MESSAGE}        File size exceeds maximum allowed size[500KB]
 ${FILE_UPLOAD_MESSAGE}              File Created
 ${FILE_DELETED_MESSAGE}             File Deleted
 ${FILE_UPDATED_MESSAGE}             File Updated
@@ -51,6 +51,16 @@ Redfish Upload Partition File To BMC
 
     # file_name
     500KB-file
+
+
+Test Upload Lower Limit Partition File To BMC And Expect Failure
+    [Documentation]  Fail to upload partition file to BMC with file size
+    ...  below the lower limit of allowed partition file size using Redfish.
+    [Tags]  Test_Upload_Lower_Limit_Partition_File_To_BMC_And_Expect_Failure
+    [Template]  Redfish Fail To Upload Partition File
+
+    # file_name       file_size
+    99bytes-file      small_file_size
 
 
 Redfish Fail To Upload Partition File To BMC
@@ -419,14 +429,25 @@ Redfish Upload Partition File
 
 Redfish Fail To Upload Partition File
     [Documentation]  Fail to upload the partition file.
-    [Arguments]  ${file_name}
+    [Arguments]  ${file_name}  ${file_size}=${EMPTY}
 
     # Description of argument(s):
     # file_name    Partition file name.
+    # file_size    By default is set to EMPTY,
+    #              if user pass small_file_size the create file with small
+    #              size keyword gets executed else
+    #              if its empty or not passed any arguments then
+    #              create partition file keyword is executed.
 
     @{Partition_file_list} =  Split String  ${file_name}  ,
-    Create Partition File  ${Partition_file_list}
-    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_BAD_REQUEST}  ${MAXIMUM_SIZE_MESSAGE}
+
+    Run Keyword If  '${file_size}' == 'small_file_size'
+    ...  Run Keywords  Create Small Size Partition File  ${Partition_file_list}  AND
+    ...    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_BAD_REQUEST}  ${MINIMUM_FILE_SIZE_MESSAGE}
+    ...    ELSE
+    ...  Run Keywords  Create Partition File  ${Partition_file_list}  AND
+    ...    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_BAD_REQUEST}  ${MAXIMUM_FILE_SIZE_MESSAGE}
+
     Verify Partition File On BMC  ${Partition_file_list}  Partition_status=0
     Delete BMC Partition File  ${Partition_file_list}  ${HTTP_NOT_FOUND}  ${RESOURCE_NOT_FOUND_MESSAGE}
     Delete Local Partition File  ${Partition_file_list}
