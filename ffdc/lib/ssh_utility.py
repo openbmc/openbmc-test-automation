@@ -53,6 +53,8 @@ class SSHRemoteclient:
             self.sshclient.connect(hostname=self.hostname,
                                    username=self.username,
                                    password=self.password,
+                                   banner_timeout=120,
+                                   timeout=60,
                                    look_for_keys=False)
 
         except (BadHostKeyException, AuthenticationException,
