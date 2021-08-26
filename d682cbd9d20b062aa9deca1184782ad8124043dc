@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "954a28e7_daa7fc07",
+        "filename": "gui/gui_test/logs_menu/test_progress_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-08-26T13:21:36Z",
+      "side": 1,
+      "message": "align after the space",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 37
+      },
+      "revId": "d682cbd9d20b062aa9deca1184782ad8124043dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7c5c5f92_e7f7b5e3",
+        "filename": "gui/gui_test/logs_menu/test_progress_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-08-26T13:21:36Z",
+      "side": 1,
+      "message": "Please add one lie gap",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 61
+      },
+      "revId": "d682cbd9d20b062aa9deca1184782ad8124043dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
