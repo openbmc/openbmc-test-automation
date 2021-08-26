@@ -6,6 +6,7 @@ Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/bmc_redfish_utils.robot
 Resource         ../../lib/state_manager.robot
+Resource         ../../lib/bmc_network_utils.robot
 Library          ../../lib/bmc_network_utils.py
 
 *** Variables ***
@@ -177,3 +178,23 @@ Verify VMI EthernetInterfaces
         ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth${i}
     END
     Should Be Equal  ${resp["Members@odata.count"]}  ${number_of_interfaces}
+
+Get And Set Static VMI IP
+    [Documentation]  Get a suitable VMI IP and set it.
+    [Arguments]   ${host}=${OPENBMC_HOST}  ${network_active_channel}=${CHANNEL_NUMBER}
+    ...  ${interface}=eth0  ${valid_status_code}=${HTTP_ACCEPTED}
+     
+    # Description of argument(s):
+    # host                    BMC host name or IP address.
+    # network_active_channel  Ethernet channel number (e.g.1 or 2).
+    # interface               VMI interface (eg. eth0 or eth1).
+    # valid_status_code       Expected valid status code from PATCH request. Default is HTTP_ACCEPTED.
+
+
+    ${vmi_ip}=  Get First Non Pingable IP From Subnet  ${host}
+    ${bmc_ip_data}=  Get Network Configuration  ${network_active_channel}
+
+    Set Static IPv4 Address To VMI And Verify  ${vmi_ip}  ${bmc_ip_data[0]['Gateway']}
+    ...  ${bmc_ip_data[0]['SubnetMask']}  ${valid_status_code}  ${interface}
+
+    [Return]   ${vmi_ip}
