@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b7a20624_3997547d",
+        "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2021-08-27T13:18:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a343f0a_35612e38",
+      "range": {
+        "startLine": 61,
+        "startChar": 33,
+        "endLine": 61,
+        "endChar": 39
+      },
+      "revId": "b14660a2e0a82cd3d48764591d0c31981ab5ab1b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0357b3cf_e2484d44",
         "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "8da02480_32038475",
+        "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2021-08-27T13:18:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0357b3cf_e2484d44",
+      "range": {
+        "startLine": 65,
+        "startChar": 33,
+        "endLine": 65,
+        "endChar": 40
+      },
+      "revId": "b14660a2e0a82cd3d48764591d0c31981ab5ab1b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "575e72d6_d39e7794",
         "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
         "patchSetId": 4
@@ -68,6 +116,30 @@
       "revId": "b14660a2e0a82cd3d48764591d0c31981ab5ab1b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "14e12d98_43d09f5d",
+        "filename": "gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2021-08-27T13:18:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "575e72d6_d39e7794",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 4
+      },
+      "revId": "b14660a2e0a82cd3d48764591d0c31981ab5ab1b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
