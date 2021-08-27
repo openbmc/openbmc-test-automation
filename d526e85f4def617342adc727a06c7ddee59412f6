@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66f2f815_48489ed7",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-27T03:55:59Z",
+      "side": 1,
+      "message": "Open Connection for SCP",
+      "range": {
+        "startLine": 43,
+        "startChar": 18,
+        "endLine": 43,
+        "endChar": 40
+      },
+      "revId": "d526e85f4def617342adc727a06c7ddee59412f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}

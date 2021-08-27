@@ -96,6 +96,30 @@
     },
     {
       "key": {
+        "uuid": "0a1b74e8_a0dadcee",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-27T03:55:59Z",
+      "side": 1,
+      "message": "As discussed, please use global variable to provide ACF file and production keys while running the robot test case.",
+      "parentUuid": "6c438434_1b49c581",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 33
+      },
+      "revId": "77ba9320da3b1abf9a8bc1fc86b42dfcd4d241f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "84bde0bb_e9469a2f",
         "filename": "openpower/service_account/test_service_login.robot",
         "patchSetId": 3
@@ -178,6 +202,30 @@
       "side": 1,
       "message": "I would prefer this one and tested. Just keeping together like \u0027${service_password}123\u0027 may not be reliable always.",
       "parentUuid": "d94386cd_49ef0c7e",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 83
+      },
+      "revId": "77ba9320da3b1abf9a8bc1fc86b42dfcd4d241f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8019b6a5_fa1b0fc5",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-27T03:55:59Z",
+      "side": 1,
+      "message": "${service_password}123 is also a reliable way.. Anyways not a big concern so good with this one also.",
+      "parentUuid": "76a58fe8_a3674410",
       "range": {
         "startLine": 28,
         "startChar": 0,
