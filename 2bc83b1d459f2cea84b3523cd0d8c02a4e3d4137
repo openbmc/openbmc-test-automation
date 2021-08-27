@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "864b510c_654751bb",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-27T13:16:37Z",
+      "side": 1,
+      "message": "*** Settings ***\nDocumentation    This suite is to test service user login functionality.\n...              This test expects SERVICE_FILE_PATH, PRODUCTION_KEY_FILE_PATH and\n...              SERVICE_USER_PASSWORD to be provided.\n...\n...              Execution Method :\n...              python -m robot -v OPENBMC_HOST:\u003chostname\u003e -v SERVICE_FILE_PATH:\u003cservice file path\u003e\n...              -v PRODUCTION_KEY_FILE_PATH:\u003cproduction key file path\u003e\n...              -v SERVICE_USER_PASSWORD:\u003cservice user password\u003e\n...              openpower/service_account/test_service_login.robot",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 40
+      },
+      "revId": "2bc83b1d459f2cea84b3523cd0d8c02a4e3d4137",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05095d67_3bc6b518",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-27T13:16:37Z",
+      "side": 1,
+      "message": "Not required.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 31
+      },
+      "revId": "2bc83b1d459f2cea84b3523cd0d8c02a4e3d4137",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8161f2fe_df0915e8",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-27T13:16:37Z",
+      "side": 1,
+      "message": "Better to take this file directly from user. So not required.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 33
+      },
+      "revId": "2bc83b1d459f2cea84b3523cd0d8c02a4e3d4137",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a43cdaf_cb2fe912",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-27T13:16:37Z",
+      "side": 1,
+      "message": "Tags need to be added in both test cases.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 67
+      },
+      "revId": "2bc83b1d459f2cea84b3523cd0d8c02a4e3d4137",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5480de3b_b1db7849",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-27T13:16:37Z",
+      "side": 1,
+      "message": "Setup not required here",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 32
+      },
+      "revId": "2bc83b1d459f2cea84b3523cd0d8c02a4e3d4137",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "875893c6_01fdbafe",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-27T13:16:37Z",
+      "side": 1,
+      "message": "This is also need to be supplied while running robot test. So need to be all capital. \n\nSERVICE_USER_PASSWORD",
+      "range": {
+        "startLine": 31,
+        "startChar": 30,
+        "endLine": 31,
+        "endChar": 46
+      },
+      "revId": "2bc83b1d459f2cea84b3523cd0d8c02a4e3d4137",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca818c12_d2abcdb3",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-27T13:16:37Z",
+      "side": 1,
+      "message": "[Setup]  Upload Valid ACF\n\n    Remove Existing ACF\n    Run Keyword And Expect Error  InvalidCredentialsError*\n    ...  Redfish.Login  service  ${service_password}",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 52
+      },
+      "revId": "2bc83b1d459f2cea84b3523cd0d8c02a4e3d4137",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "caa152d0_d740f97a",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-27T13:16:37Z",
+      "side": 1,
+      "message": "See if we can use it like below to avoid our dependancy on service file name.\n\nrm -f ${acf_dir}/*.acf",
+      "range": {
+        "startLine": 47,
+        "startChar": 31,
+        "endLine": 47,
+        "endChar": 53
+      },
+      "revId": "2bc83b1d459f2cea84b3523cd0d8c02a4e3d4137",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1c80dd0c_c041b74b",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-27T13:16:37Z",
+      "side": 1,
+      "message": "SERVICE_FILE_PATH",
+      "range": {
+        "startLine": 54,
+        "startChar": 20,
+        "endLine": 54,
+        "endChar": 41
+      },
+      "revId": "2bc83b1d459f2cea84b3523cd0d8c02a4e3d4137",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "badfea96_047fa0ea",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-27T13:16:37Z",
+      "side": 1,
+      "message": "PRODUCTION_KEY_FILE_PATH\n\nAlso do we need to upload two files i.e. ACF file and production key. If that the case you might need to change the name of the keyword.",
+      "range": {
+        "startLine": 55,
+        "startChar": 20,
+        "endLine": 55,
+        "endChar": 48
+      },
+      "revId": "2bc83b1d459f2cea84b3523cd0d8c02a4e3d4137",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
