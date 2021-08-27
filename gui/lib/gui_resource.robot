@@ -128,3 +128,22 @@ Refresh GUI
     Click Element  ${xpath_refresh_button}
     # Added delay for page to load fully after refresh.
     Sleep  5s
+
+
+Refresh GUI And Verify Element Value
+    [Documentation]  Refresh GUI using refresh button and verify that given element contains expected value.
+    [Arguments]  ${element}  ${expected_value}
+
+    # Description of argument(s):
+    # element         Element whose value need to be checked.
+    # expected_value  Expected value of for the given element.
+
+    # Refresh GUI.
+
+    Click Element  ${xpath_refresh_button}
+
+    # Check element value and verify that it contains expected value.
+    ${element_value}=  Get Text  ${element}
+    Log  ${element_value}
+    Should Contain  ${element_value}  ${expected_value}
+
