@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93615ee8_921a3c4f",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-31T09:24:48Z",
+      "side": 1,
+      "message": "suggestion to modify documentation. may b\nFail to upload partition file to BMC with size below allowed lower limit",
+      "revId": "c2fca282dcf897b9fce3dd2eca662a16106cb357",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
