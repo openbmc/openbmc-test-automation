@@ -25,6 +25,9 @@ ${ipmi_setaccess_cmd}   channel setaccess
               ...       20=0penBmc10penBmc2Bmc3  21=0penBmc10penBmc2Bmc34
               ...       7=0penBmc  8=0penBmc0
 
+# User defined count.
+${USER_LOOP_COUNT}      20
+
 
 *** Test Cases ***
 
@@ -461,6 +464,18 @@ Verify Minimum Password Length For IPMI User
     8                  16               ${True}
     7                  20               ${False}
     8                  20               ${True}
+
+
+Verify Continuous IPMI Command Execution
+    [Documentation]  Verify that continuous IPMI command execution runs fine.
+    [Tags]  Verify_Continuous_IPMI_Command_Execution
+
+    FOR  ${i}  IN RANGE  ${USER_LOOP_COUNT}
+        Run IPMI Standard Command  lan print
+        Run IPMI Standard Command  power status
+        Run IPMI Standard Command  fru list
+        Run IPMI Standard Command  sel list
+    END
 
 
 *** Keywords ***
