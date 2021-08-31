@@ -16,6 +16,24 @@
       "revId": "c2fca282dcf897b9fce3dd2eca662a16106cb357",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43b23a34_fbdb1ba1",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-08-31T10:10:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93615ee8_921a3c4f",
+      "revId": "c2fca282dcf897b9fce3dd2eca662a16106cb357",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
