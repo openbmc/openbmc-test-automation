@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c6de8cd_7c73d8e8",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-31T10:51:05Z",
+      "side": 1,
+      "message": "Test Upload Lower Limit Partition File To BMC And Expect Failure",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 56
+      },
+      "revId": "48b114c7fa332658a5f7213b767f671048014bce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a32a909_7bb7ce0e",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-31T10:51:05Z",
+      "side": 1,
+      "message": "align",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 0
+      },
+      "revId": "48b114c7fa332658a5f7213b767f671048014bce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "62417604_63039f79",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-31T10:51:05Z",
+      "side": 1,
+      "message": "what does empty means there ? file can be 0 bytes but not empty",
+      "range": {
+        "startLine": 432,
+        "startChar": 46,
+        "endLine": 432,
+        "endChar": 51
+      },
+      "revId": "48b114c7fa332658a5f7213b767f671048014bce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "451e9e1d_6b6a9036",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-08-31T10:51:05Z",
+      "side": 1,
+      "message": "Create Small Size Partition File  ${Partition_file_list}  \n\nUpload Partition File To BMC  ${Partition_file_list}  ${HTTP_BAD_REQUEST}  ${file_size}",
+      "range": {
+        "startLine": 441,
+        "startChar": 0,
+        "endLine": 447,
+        "endChar": 114
+      },
+      "revId": "48b114c7fa332658a5f7213b767f671048014bce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
