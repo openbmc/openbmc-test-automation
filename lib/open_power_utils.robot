@@ -5,6 +5,10 @@ Variables      ../data/variables.py
 Resource       ../lib/utils.robot
 Resource       ../lib/connection_client.robot
 
+*** Variables ***
+${functional_cpu_count}       ${0}
+${active_occ_count}           ${0}
+
 *** Keywords ***
 
 Get OCC Objects
@@ -72,6 +76,49 @@ Read Object Attribute
     Return From Keyword If  ${resp.status_code} != ${HTTP_OK}
     ${content}=  To JSON  ${resp.content}
     [Return]  ${content["data"]}
+
+
+Get Functional Processor Count
+    [Documentation]  Get functional processor count.
+
+    ${cpu_list}=  Redfish.Get Members List  /redfish/v1/Systems/system/Processors/  *cpu*
+
+    FOR  ${endpoint_path}  IN  @{cpu_list}
+       # {'Health': 'OK', 'State': 'Enabled'} get only matching status good.
+       ${cpu_status}=  Redfish.Get Attribute  ${endpoint_path}  Status
+       Continue For Loop If  '${cpu_status['Health']}' != 'OK' or '${cpu_status['State']}' != 'Enabled'
+       ${functional_cpu_count} =  Evaluate   ${functional_cpu_count} + 1
+    END
+
+    [Return]  ${functional_cpu_count}
+
+
+Get Active OCC State Count
+    [Documentation]  Get active OCC state count.
+
+    ${cpu_list}=  Redfish.Get Members List  /redfish/v1/Systems/system/Processors/  *cpu*
+
+    FOR  ${endpoint_path}  IN  @{cpu_list}
+       ${num}=  Set Variable  ${endpoint_path[-1]}
+       ${cmd}=  Catenate  busctl get-property org.open_power.OCC.Control
+       ...   /org/open_power/control/occ${num} org.open_power.OCC.Status OccActive
+
+       ${cmd_output}  ${stderr}  ${rc} =  BMC Execute Command  ${cmd}
+       ...  print_out=1  print_err=1  ignore_err=1
+
+       # The command returns format  'b true'
+       Continue For Loop If   '${cmd_output.split(' ')[-1]}' != 'true'
+       ${active_occ_count} =  Evaluate   ${active_occ_count} + 1
+    END
+
+    [Return]  ${active_occ_count}
+
+
+Match OCC And CPU State Count
+    ${cpu_count}=  Get Functional Processor Count
+    ${occ_count}=  Get Active OCC State Count
+    Should Be Equal  ${occ_count}  ${cpu_count}
+    ...  msg=OCC count ${occ_count} and CPU Count ${cpu_count} mismatched.
 
 
 Verify OCC State
