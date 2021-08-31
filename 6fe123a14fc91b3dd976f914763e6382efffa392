@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05318351_98b4ba7d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-31T06:20:32Z",
+      "side": 1,
+      "message": "Added service user login tests\n\nTest cases added: \n   - \u003ctest case name 1\u003e\n   - \u003ctest case name 2\u003e",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 43
+      },
+      "revId": "6fe123a14fc91b3dd976f914763e6382efffa392",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c334863_3a4fe758",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-08-31T06:20:32Z",
+      "side": 1,
+      "message": "# Upload production key in BMC because it is not part of OpenBMC build yet.",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 50,
+        "endChar": 95
+      },
+      "revId": "6fe123a14fc91b3dd976f914763e6382efffa392",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
