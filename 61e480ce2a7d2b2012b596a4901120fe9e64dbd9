@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0645353e_71252306",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-31T09:41:44Z",
+      "side": 1,
+      "message": "can please elaborate argument little more, which/what file status",
+      "revId": "61e480ce2a7d2b2012b596a4901120fe9e64dbd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7442ae54_5480ff1a",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-31T09:41:44Z",
+      "side": 1,
+      "message": "more than 2 spaces before  Print Timen  .please recheck",
+      "revId": "61e480ce2a7d2b2012b596a4901120fe9e64dbd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af231aea_53ac134d",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-31T09:41:44Z",
+      "side": 1,
+      "message": "similar comment as line 614",
+      "revId": "61e480ce2a7d2b2012b596a4901120fe9e64dbd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4cabee1_84fda7f8",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-08-31T09:41:44Z",
+      "side": 1,
+      "message": "suggestion variable name as ${bmc_resource_record} instead of ${bmc_rec}",
+      "revId": "61e480ce2a7d2b2012b596a4901120fe9e64dbd9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
