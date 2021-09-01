@@ -233,6 +233,24 @@
     },
     {
       "key": {
+        "uuid": "bddc4e55_0f566da9",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-09-01T11:50:49Z",
+      "side": 1,
+      "message": "I was suggesting to add next test case here as it is a template test case.",
+      "parentUuid": "2509f89f_612ee968",
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "14a298c8_1753d856",
         "filename": "redfish/update_service/test_firmware_inventory.robot",
         "patchSetId": 4
@@ -364,6 +382,30 @@
       "side": 1,
       "message": "User can skip the test case by using include parameter.",
       "parentUuid": "a80ef6de_e9871d81",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 23
+      },
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "551a9d26_930cd5e6",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-09-01T11:50:49Z",
+      "side": 1,
+      "message": "We\u0027ve used template test cases in many places, why same logic is not used there.\nIn very rare cases, user may want to skip but there are many ways to skip so its better to use template test cases only once not multiple times in same file.",
+      "parentUuid": "3369c17f_f71051ad",
       "range": {
         "startLine": 220,
         "startChar": 0,
