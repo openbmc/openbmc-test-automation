@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "91c3fa50_6d45e47c",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-09-01T06:02:20Z",
+      "side": 1,
+      "message": "the test case is checking firmware version shown in Redfish get operation \u0026 firmware inventory are same.\n`Check Redfish Active software...` does not convey what test case is doing.",
+      "parentUuid": "0733b5da_5dcd7755",
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "16bde696_ddd5dc44",
         "filename": "redfish/update_service/test_firmware_inventory.robot",
         "patchSetId": 4
@@ -84,6 +102,30 @@
       "writtenOn": "2021-08-20T06:02:03Z",
       "side": 1,
       "message": "change like above",
+      "range": {
+        "startLine": 213,
+        "startChar": 34,
+        "endLine": 213,
+        "endChar": 50
+      },
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abf49100_168b60f4",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-09-01T06:02:20Z",
+      "side": 1,
+      "message": "??",
+      "parentUuid": "16bde696_ddd5dc44",
       "range": {
         "startLine": 213,
         "startChar": 34,
@@ -226,6 +268,30 @@
     },
     {
       "key": {
+        "uuid": "a80ef6de_e9871d81",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-09-01T06:02:20Z",
+      "side": 1,
+      "message": "Not convinced, not sure how he can skip when running suite.\nIf you add this line there in previos test case he can at least skip by commenting it out.\nAnd also it is completely defeating purpose of template function.",
+      "parentUuid": "40dc9452_526247b8",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 23
+      },
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4325c037_0f1aeb7a",
         "filename": "redfish/update_service/test_firmware_inventory.robot",
         "patchSetId": 4
@@ -291,6 +357,24 @@
       "side": 1,
       "message": "This test case purpose is when user switch back to backup image then redfish active software image should show the latest entry.",
       "parentUuid": "2ef78ea0_0adcc4af",
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4fb9d384_04dea286",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-09-01T06:02:20Z",
+      "side": 1,
+      "message": "The keyword name here is `Verify Redfish Active Software Image And Firmware Inventory Are Same`\nthe name of the keyword and actions in the keyword are not matching.",
+      "parentUuid": "a66e7bc3_c402a370",
       "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
