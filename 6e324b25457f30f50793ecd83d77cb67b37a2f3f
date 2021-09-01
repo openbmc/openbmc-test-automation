@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "acec8c4f_c6e49c81",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-09-01T11:17:36Z",
+      "side": 1,
+      "message": "changed the name as per your suggestion",
+      "parentUuid": "91c3fa50_6d45e47c",
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "16bde696_ddd5dc44",
         "filename": "redfish/update_service/test_firmware_inventory.robot",
         "patchSetId": 4
@@ -138,6 +156,30 @@
     },
     {
       "key": {
+        "uuid": "5f3c971b_e827fa2d",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-09-01T11:17:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abf49100_168b60f4",
+      "range": {
+        "startLine": 213,
+        "startChar": 34,
+        "endLine": 213,
+        "endChar": 50
+      },
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "72dabcbc_507f7513",
         "filename": "redfish/update_service/test_firmware_inventory.robot",
         "patchSetId": 4
@@ -167,6 +209,24 @@
       "side": 1,
       "message": "Line No: 228",
       "parentUuid": "72dabcbc_507f7513",
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2509f89f_612ee968",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-09-01T11:17:36Z",
+      "side": 1,
+      "message": "Line No:228",
+      "parentUuid": "39123779_a8765c92",
       "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -292,6 +352,30 @@
     },
     {
       "key": {
+        "uuid": "3369c17f_f71051ad",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-09-01T11:17:36Z",
+      "side": 1,
+      "message": "User can skip the test case by using include parameter.",
+      "parentUuid": "a80ef6de_e9871d81",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 23
+      },
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4325c037_0f1aeb7a",
         "filename": "redfish/update_service/test_firmware_inventory.robot",
         "patchSetId": 4
@@ -375,6 +459,24 @@
       "side": 1,
       "message": "The keyword name here is `Verify Redfish Active Software Image And Firmware Inventory Are Same`\nthe name of the keyword and actions in the keyword are not matching.",
       "parentUuid": "a66e7bc3_c402a370",
+      "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d134c23_48853672",
+        "filename": "redfish/update_service/test_firmware_inventory.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-09-01T11:17:36Z",
+      "side": 1,
+      "message": "Added more information from line 366",
+      "parentUuid": "4fb9d384_04dea286",
       "revId": "6e324b25457f30f50793ecd83d77cb67b37a2f3f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
