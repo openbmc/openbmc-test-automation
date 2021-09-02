@@ -4,9 +4,8 @@ Documentation  Test OpenBMC GUI "Power" sub-menu of "Resource Management".
 
 Resource        ../../lib/gui_resource.robot
 
-Suite Setup     Launch Browser And Login GUI
+Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
-Test Setup      Test Setup Execution
 
 
 *** Variables ***
@@ -138,9 +137,10 @@ Get Power Cap Value
     [return]  ${redfish_power['PowerControl'][0]['PowerLimit']['LimitInWatts']}
 
 
-Test Setup Execution
-    [Documentation]  Do test case setup tasks.
+Suite Setup Execution
+    [Documentation]  Do suite setup tasks.
 
+    Launch Browser And Login GUI
     Click Element  ${xpath_resource_management_menu}
     Click Element  ${xpath_power_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  power
