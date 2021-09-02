@@ -433,7 +433,7 @@ Delete And Verify Static IP Address On BMC
 
     ${delete_ip_buttons}=  Get WebElements  ${xpath_delete_static_ip}
     FOR  ${location}  IN RANGE  len(${ip_addresses})
-       ${gui_ip}=  Get Value  //*[@data-test-id="networ-input-staticIpv4-${location}"]
+       ${gui_ip}=  Get Value  //*[@data-test-id="network-input-staticIpv4-${location}"]
        Run Keyword If  '${gui_ip}' == '${ip_address}' and '${gui_ip}' != '${BMC_IP}'
        ...  Run Keywords  Click Element  ${delete_ip_buttons}[${location}]
        ...  AND  Exit For Loop
