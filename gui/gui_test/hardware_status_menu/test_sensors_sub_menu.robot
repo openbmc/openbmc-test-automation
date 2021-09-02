@@ -3,9 +3,8 @@
 Documentation   Test OpenBMC GUI "Sensors" sub-menu.
 Resource        ../../lib/gui_resource.robot
 
-Suite Setup     Launch Browser And Login GUI
+Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
-Test Setup      Test Setup Execution
 
 
 *** Variables ***
@@ -117,9 +116,10 @@ Verify Filter By Severity Button OK
 
 *** Keywords ***
 
-Test Setup Execution
-    [Documentation]  Do test case setup tasks.
+Suite Setup Execution
+    [Documentation]  Do suite setup tasks.
 
+    Launch Browser And Login GUI
     Click Element  ${xpath_hardware_status_menu}
     Click Element  ${xpath_sensor_sub_menu}
     Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  sensors
