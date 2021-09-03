@@ -87,7 +87,7 @@ FFDC_OS_UBUNTU_FILE = {
     'OS FILES':
     {
         # File Name         Command
-        'OS_isusb.txt': '{ lsusb -t ; lsusb -v ; } >/tmp/OS_isub.txt 2>&1',
+        'OS_isusb.txt': '{ lsusb -t ; lsusb -v ; } >/tmp/OS_isusb.txt 2>&1',
         'OS_kern.txt': 'tail -n 50000 /var/log/kern.log >/tmp/OS_kern.txt 2>&1',
         'OS_authlog.txt': '{ cat /var/log/auth.log; cat /var/log/auth.log.1 ; } '
         + '>/tmp/OS_authlog.txt 2>&1',
