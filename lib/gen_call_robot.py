@@ -359,7 +359,7 @@ def process_robot_output_files(robot_cmd_buf=None,
     # It TMP_ROBOT_DIR_PATH is set, it means the caller wanted the robot output initially directed to
     # TMP_ROBOT_DIR_PATH but later moved to FFDC_DIR_PATH.  Otherwise, we're done.
 
-    if os.environ.get("TMP_ROBOT_DIR_PATH", "") is "":
+    if os.environ.get("TMP_ROBOT_DIR_PATH", "") == "":
         return
 
     # We're directing these to the FFDC dir path so that they'll be subjected to FFDC cleanup.
