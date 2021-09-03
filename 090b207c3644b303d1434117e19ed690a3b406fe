@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "93d3b5e1_acf7d436",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-03T10:07:07Z",
+      "side": 1,
+      "message": "Keep space and end comment with a period \".\"\n\n    # Disable SSH via Redfish.",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 12
+      },
+      "revId": "090b207c3644b303d1434117e19ed690a3b406fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c423bf97_0455ad38",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-03T10:07:07Z",
+      "side": 1,
+      "message": "As we are running loop for 15 times and we have a timeout of 30, this loop will go for 450 seconds. This seem to be quite long. Better to keep this loop for max 2 min\n\n    # Wait for max 2 mins for GUI to reflect changed SSH status.\n    FOR  ${i}  IN RANGE  ${8}\n        Click Element  ${xpath_refresh_button}\n        Wait Until Element Contain  ${xpath_bmc_ssh_value}  Enabled  timeout\u003d10",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 30
+      },
+      "revId": "090b207c3644b303d1434117e19ed690a3b406fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10df2cc6_41f32c17",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-03T10:07:07Z",
+      "side": 1,
+      "message": "Better to check if element contains enable status.\nWait Until Element Contain  ${xpath_bmc_ssh_value}  Enabled  timeout\u003d10",
+      "range": {
+        "startLine": 55,
+        "startChar": 8,
+        "endLine": 55,
+        "endChar": 88
+      },
+      "revId": "090b207c3644b303d1434117e19ed690a3b406fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27405edc_baf20385",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-03T10:07:07Z",
+      "side": 1,
+      "message": "# Enable SSH via GUI.",
+      "range": {
+        "startLine": 58,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 23
+      },
+      "revId": "090b207c3644b303d1434117e19ed690a3b406fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "558b1f70_ef3bf46e",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-03T10:07:07Z",
+      "side": 1,
+      "message": "We can try like this xpath and avoid using \"Click Element At Coordinates\" keyword.\n\nClick Element  ${xpath_bmc_ssh_toggle}\n\n*** Variables ***\n${xpath_bmc_ssh_toggle}       //*[@data-test-id\u003d\u0027policies-toggle-bmcShell\u0027]//following-sibling::label",
+      "range": {
+        "startLine": 59,
+        "startChar": 4,
+        "endLine": 59,
+        "endChar": 63
+      },
+      "revId": "090b207c3644b303d1434117e19ed690a3b406fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ee6ecb22_15e38ca7",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-03T10:07:07Z",
+      "side": 1,
+      "message": "Missed observing last time. As we want to make sure that SSH login happens we can just try like this and skip creating new keyword - Verify SSH Login.\n\nWait Until Keyword Succeeds  1 min  5 sec  Open Connection And Login",
+      "range": {
+        "startLine": 60,
+        "startChar": 15,
+        "endLine": 60,
+        "endChar": 23
+      },
+      "revId": "090b207c3644b303d1434117e19ed690a3b406fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
