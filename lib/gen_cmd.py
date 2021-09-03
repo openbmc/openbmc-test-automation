@@ -353,11 +353,10 @@ def shell_cmd(command_string,
     func_out_history_buf = ""
     for attempt_num in range(1, max_attempts + 1):
         sub_proc = subprocess.Popen(command_string,
-                                    preexec_fn=os.setsid,
                                     bufsize=1,
-                                    shell=True,
                                     universal_newlines=True,
                                     executable='/bin/bash',
+                                    stdin=subprocess.PIPE,
                                     stdout=subprocess.PIPE,
                                     stderr=stderr)
         if fork:
