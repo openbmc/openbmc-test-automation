@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 r"""
 This module provides functions which are useful to plug-in call point programs.
