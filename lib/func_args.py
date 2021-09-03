@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 r"""
 This module provides argument manipulation functions like pop_arg.

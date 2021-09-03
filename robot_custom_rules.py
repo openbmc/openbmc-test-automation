@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Custom rules file for robotframework-lint.
 # Example usage: python -m rflint -rA robot_standards -R robot_custom_rules.py .
 import re
