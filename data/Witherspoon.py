@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#!/usr/bin/python3
 
 # System states
 # state can change to next state in 2 ways:

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 r"""
 This module contains file functions such as file_diff.

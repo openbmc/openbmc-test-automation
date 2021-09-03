@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 r"""
 This module contains functions having to do with date time filter.

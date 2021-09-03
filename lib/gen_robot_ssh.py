@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 r"""
 This module provides many valuable ssh functions such as sprint_connection, execute_ssh_command, etc.

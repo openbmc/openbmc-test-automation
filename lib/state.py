@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 r"""
 This module contains functions having to do with machine state: get_state,
@@ -571,12 +571,12 @@ def get_state(openbmc_host="",
         if os_host is None:
             os_host = ""
 
-    if os_username is "":
+    if os_username == "":
         os_username = BuiltIn().get_variable_value("${OS_USERNAME}")
         if os_username is None:
             os_username = ""
 
-    if os_password is "":
+    if os_password == "":
         os_password = BuiltIn().get_variable_value("${OS_PASSWORD}")
         if os_password is None:
             os_password = ""

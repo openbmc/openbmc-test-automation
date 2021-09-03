@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 r"""
 Contains xpaths and related string constants applicable for new Vue based OpenBMC GUI.

@@ -1,4 +1,4 @@
-#!/usr/bin/python -u
+#!/usr/bin/python3 -u
 import sys
 from robot.libraries.BuiltIn import BuiltIn
 import imp

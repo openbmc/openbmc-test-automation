@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 r"""
 #    @file     openbmc_ffdc_list.py
 #    @brief    List for FFDC ( First failure data capture )

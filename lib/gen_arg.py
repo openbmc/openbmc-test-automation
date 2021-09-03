@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 r"""
 This module provides valuable argument processing functions like gen_get_options and sprint_args.

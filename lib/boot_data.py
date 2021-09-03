@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 r"""
 This module has functions to support various data structures such as the boot_table, valid_boot_list and

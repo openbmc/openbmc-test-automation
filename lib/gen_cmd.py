@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 r"""
 This module provides command execution functions such as cmd_fnc and cmd_fnc_u.
@@ -83,6 +83,7 @@ def cmd_fnc(cmd_buf,
     sub_proc = subprocess.Popen(cmd_buf,
                                 bufsize=1,
                                 shell=True,
+                                universal_newlines=True,
                                 executable='/bin/bash',
                                 stdout=subprocess.PIPE,
                                 stderr=stderr)
@@ -353,11 +354,11 @@ def shell_cmd(command_string,
     func_out_history_buf = ""
     for attempt_num in range(1, max_attempts + 1):
         sub_proc = subprocess.Popen(command_string,
-                                    preexec_fn=os.setsid,
                                     bufsize=1,
                                     shell=True,
                                     universal_newlines=True,
                                     executable='/bin/bash',
+                                    stdin=subprocess.PIPE,
                                     stdout=subprocess.PIPE,
                                     stderr=stderr)
         if fork:

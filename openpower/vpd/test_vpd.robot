@@ -3,7 +3,7 @@ Documentation   This suite tests Vital Product Data (VPD) via busctl command.
 ...             Before running this suite, create a data/vpd_data.py file with
 ...             all VPD data to verify from system.
 ...
-...             #!/usr/bin/python
+...             #!/usr/bin/python3
 ...             VPD_DETAILS = {
 ...                 "/system/chassis/motherboard": {
 ...                     "DR": "SYSTEM BACKPLANE",

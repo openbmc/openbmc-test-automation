@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 r"""
 This program will get the system serial number from an OBMC machine and print it to stdout.

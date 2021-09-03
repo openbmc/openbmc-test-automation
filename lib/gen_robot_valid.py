@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 r"""
 This module provides validation functions like valid_value(), valid_integer(), etc. for robot programs.
