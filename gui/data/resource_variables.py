@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 r"""
 Contains xpaths and related string constants applicable to all openBMC GUI

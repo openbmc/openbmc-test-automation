@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 r"""
 Generate an inventory variable file containing a list of properties
 fields from the YAML phosphor-dbus-interfaces repository.
