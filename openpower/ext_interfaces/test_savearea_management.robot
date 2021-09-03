@@ -235,6 +235,17 @@ Redfish Update Wrong Partition File To BMC
     # file_name
     500KB-file
 
+
+Test Redfish Upload Partition File Name With Limit To BMC
+    [Documentation]  Upload partition file to BMC with file name char allowed limit
+    ...  and above allowed limit  using redfish.
+    [Tags]  Test_Redfish_Upload_Partition_File_Name_With_Limit_To_BMC
+    [Template]  Check Redfish Upload Partition File Name With Limit To BMC
+
+    # file_name
+    50KB-testfilesavfile
+    50KB-testsaveareafile
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -739,3 +750,27 @@ Verify Update Wrong Partition File To BMC
     ${resp}=  Run Keyword And Return Status
     ...  Redfish.Put  /ibm/v1/Host/ConfigFiles/../../../../../etc/resolv.conf  body={"data": "test string"}
     Should Be Equal As Strings  ${resp}  False
+
+
+Check Redfish Upload Partition File Name With Limit To BMC
+    [Documentation]  Upload the partition file to BMC with file name char limit.
+    [Arguments]  ${file_name}
+
+    # Description of argument(s):
+    # file_name    Partition file name.
+
+    @{Partition_file_list} =  Split String  ${file_name}  ,
+    ${num_records}=  Get Length  ${Partition_file_list}
+    Create Partition File  ${Partition_file_list}
+
+    ${file_name_lenght}=  Get Length  ${Partition_file_list}[0]
+
+    Run Keyword If  ${file_name_lenght} == 20
+    ...  Run Keywords
+    ...    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPLOAD_MESSAGE}  AND
+    ...    Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1  AND
+    ...    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
+    ...  ELSE
+    ...    Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_BAD_REQUEST}  ${MAXIMUM_FILE_NAME_MESSAGE}
+
+    Delete Local Partition File  ${Partition_file_list}
