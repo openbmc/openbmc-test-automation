@@ -70,6 +70,29 @@
       "revId": "3f53c5479be2eeccfb265c226ee9894ace81436e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b57958a1_3bc64b1e",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-03T10:21:07Z",
+      "side": 1,
+      "message": "I see that we have removed radio_buttons. This will lead to failures.",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 73
+      },
+      "revId": "3f53c5479be2eeccfb265c226ee9894ace81436e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
