@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "e804dda7_55b4bbaa",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-03T10:10:45Z",
+      "side": 1,
+      "message": "Correction:\n\nBetter to check if element contains disabled SSH status.\nWait Until Element Contain  ${xpath_bmc_ssh_value}  Disabled  timeout\u003d10",
+      "parentUuid": "10df2cc6_41f32c17",
+      "range": {
+        "startLine": 55,
+        "startChar": 8,
+        "endLine": 55,
+        "endChar": 88
+      },
+      "revId": "090b207c3644b303d1434117e19ed690a3b406fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "27405edc_baf20385",
         "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
         "patchSetId": 2
