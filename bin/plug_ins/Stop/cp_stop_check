@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 r"""
 Check for stop conditions.  Return code of 2 if stop conditions are found.

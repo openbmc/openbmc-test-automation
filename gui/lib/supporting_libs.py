@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 r"""
 This is an extended user library to support Robot Selenium code.

@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#!/usr/bin/env python3
 
 HOME_PATH = './'
 CACHE_PATH = '/var/cache/obmc/'

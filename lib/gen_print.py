@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 r"""
 This module provides many print functions such as sprint_var, sprint_time, sprint_error, sprint_call_stack.
