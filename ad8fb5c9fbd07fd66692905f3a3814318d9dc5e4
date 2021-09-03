@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da4a0b67_ff45b574",
+        "filename": "gui/gui_test/operations_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-03T06:22:00Z",
+      "side": 1,
+      "message": "This seem to a generic xpath. So move it to gui/data/gui_variables.py\n \nMake the name also genric like below.\n${xpath_confirm_button}",
+      "range": {
+        "startLine": 18,
+        "startChar": 2,
+        "endLine": 18,
+        "endChar": 29
+      },
+      "revId": "ad8fb5c9fbd07fd66692905f3a3814318d9dc5e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f8cb549_a21e29f1",
+        "filename": "gui/gui_test/operations_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-03T06:22:00Z",
+      "side": 1,
+      "message": "# Checks BMC gets into unpingable state and later becomes pingable.",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 78
+      },
+      "revId": "ad8fb5c9fbd07fd66692905f3a3814318d9dc5e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e8b34c2_372a9475",
+        "filename": "gui/gui_test/operations_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-03T06:22:00Z",
+      "side": 1,
+      "message": "Move this keyword in lib/common_utils.robot so that it can be used by others also.",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 17
+      },
+      "revId": "ad8fb5c9fbd07fd66692905f3a3814318d9dc5e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f0984f6d_eb5fd58d",
+        "filename": "gui/gui_test/operations_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-03T06:22:00Z",
+      "side": 1,
+      "message": "argument not required here. Directly use OPENBMC_HOST in this keyword. Also change the documentation.\n\n    [Documentation]  Checks if BMC is unpingable.",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 27
+      },
+      "revId": "ad8fb5c9fbd07fd66692905f3a3814318d9dc5e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ae33cba2_676a86c4",
+        "filename": "gui/gui_test/operations_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-03T06:22:00Z",
+      "side": 1,
+      "message": "This is not required",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 54
+      },
+      "revId": "ad8fb5c9fbd07fd66692905f3a3814318d9dc5e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1560c1ee_ad504a15",
+        "filename": "gui/gui_test/operations_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-03T06:22:00Z",
+      "side": 1,
+      "message": "${rc}  ${output}\u003d  Run And Return RC And Output  ping -c 4 ${OPENBMC_HOST}",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 70
+      },
+      "revId": "ad8fb5c9fbd07fd66692905f3a3814318d9dc5e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
