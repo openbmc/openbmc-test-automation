@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bed17552_e4176dd9",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-09-06T13:14:42Z",
+      "side": 1,
+      "message": "This should be either part of the teardown or suite teardown. \n\nThe idea behind is if the disable via redfish succeeded but the verification failed, the SSH would be blocked on the system and subsequent any SSH related would be blocked including FFDC data over SSH",
+      "range": {
+        "startLine": 56,
+        "startChar": 1,
+        "endLine": 59,
+        "endChar": 0
+      },
+      "revId": "7b64c5e25ae82ece18fb62a9118b636d72ed41a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
