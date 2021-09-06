@@ -17,6 +17,7 @@ Test Teardown        FFDC On Test Case Fail
 *** Variables ***
 
 ${BAD_REQUEST}       Bad Request
+&{trans_id_var}          TransactionID=${1}
 
 *** Test Cases ***
 
@@ -47,6 +48,17 @@ Verify Lock Is Not Persistent On BMC Reboot
     HMCID-01       WriteCase1    True
     HMCID-01       WriteCase2    True
     HMCID-01       WriteCase3    True
+
+
+Check After Reboot Transaction ID Set To Default
+    [Documentation]  After reboot, the trasaction id starts with default i.e. 1,
+    ...  if any lock is aquired.
+    [Tags]  Check_After_Reboot_Transaction_ID_Set_To_Default
+    [Template]  Verify Acquire And Release Lock In Loop
+
+    # client_id    lock_type     reboot_flag
+    HMCID-01       ReadCase1     True
+    HMCID-01       WriteCase1    True
 
 
 Acquire Read Lock On Read Lock
@@ -818,14 +830,36 @@ Verify Acquire Multiple Lock Request At CEC Level
     Release locks And Delete Session  ${session_info}  ${trans_id_list}
 
 
+Post Reboot Acuire Lock
+    [Documentation]  Post reboot acquire lock and verify the transaction id is 1.
+    [Arguments]  ${session_info}  ${lock_type}
+
+    # Description of argument(s):
+    # session_info     Session information.
+    # lock_type        Read lock or Write lock.
+
+    ${trans_id_list}=  Create List
+    ${trans_id_list_var}=  Create List
+    ${trans_id}=  Redfish Post Acquire Lock  ${lock_type}
+    Append To List  ${trans_id_list}  ${trans_id}
+    Append To List  ${trans_id_list_var}  ${trans_id_var}
+    Verify Lock On Resource  ${session_info}  ${trans_id_list}
+    Verify Lock On Resource  ${session_info}  ${trans_id_list_var}
+    Release Locks On Resource  ${session_info}  ${trans_id_list}  Transaction  ${HTTP_OK}
+    ${trans_id_emptylist}=  Create List
+    Verify Lock On Resource  ${session_info}  ${trans_id_emptylist}
+
+
 Verify Acquire And Release Lock In Loop
     [Documentation]  Acquire lock in loop.
-    [Arguments]  ${client_id}  ${lock_type}
+    [Arguments]  ${client_id}  ${lock_type}  ${reboot_flag}=False
 
     # Description of argument(s):
     # client_id    This client id can contain string value
     #              (e.g. 12345, "HMCID").
     # lock_type    Read lock or Write lock.
+    # reboot_flag  Flag is used to run reboot the BMC code.
+    #               (e.g. True or False).
 
     FOR  ${count}  IN RANGE  1  11
       ${trans_id_list}=  Create List
@@ -836,8 +870,17 @@ Verify Acquire And Release Lock In Loop
       Release Locks On Resource  ${session_info}  ${trans_id_list}  Transaction  ${HTTP_OK}
       ${trans_id_emptylist}=  Create List
       Verify Lock On Resource  ${session_info}  ${trans_id_emptylist}
+      Redfish Delete Session  ${session_info}
     END
 
+    ${session_info}=  Create Redfish Session With ClientID  ${client_id}
+    ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
+
+    Run Keyword If  '${reboot_flag}' == 'True'
+    ...  Run Keywords  Redfish OBMC Reboot (off)  AND
+    ...  Redfish Login  AND
+    ...  Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}  AND
+    ...  Post Reboot Acuire Lock  ${session_info}  ${lock_type}
     Redfish Delete Session  ${session_info}
 
 
