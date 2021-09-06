@@ -34,9 +34,10 @@ Acquire Read Write Lock
     HMCID-01       WriteCase3    False
 
 
-Check Lock Persistency On BMC Reboot
-    [Documentation]  Acquire lock and check after reboot it remain same.
-    [Tags]  Check_Lock_Persistency_On_BMC_Reboot
+Check No Lock Persistency On BMC Reboot
+    [Documentation]  Acquire lock and after reboot the locks are removed as no persistency
+    ...  maintained.
+    [Tags]  Check_No_Lock_Persistency_On_BMC_Reboot
     [Template]  Acquire Lock On Resource
 
     # client_id    lock_type     reboot_flag
