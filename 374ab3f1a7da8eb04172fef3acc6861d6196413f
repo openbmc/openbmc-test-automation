@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "779fa4d6_d5658381",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-09-06T07:35:06Z",
+      "side": 1,
+      "message": "suggestion -Redfish Upload Partition File Name With Character Limit To BMC.\nplease modify tags accordingly",
+      "revId": "374ab3f1a7da8eb04172fef3acc6861d6196413f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "48b42d74_d3d5e703",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-09-06T07:35:06Z",
+      "side": 1,
+      "message": "suggestion to use character instead of char throughout",
+      "revId": "374ab3f1a7da8eb04172fef3acc6861d6196413f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "879a1767_d20cec9b",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-09-06T07:35:06Z",
+      "side": 1,
+      "message": "if modify as per comment 755,modify here too",
+      "revId": "374ab3f1a7da8eb04172fef3acc6861d6196413f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ef658dc_d2612e4e",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-09-06T07:35:06Z",
+      "side": 1,
+      "message": "#file_name   #status_code  #expected_message..\nthis is with respect to comment in line 774",
+      "revId": "374ab3f1a7da8eb04172fef3acc6861d6196413f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5c5b007_c116cac3",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-09-06T07:35:06Z",
+      "side": 1,
+      "message": "character limit",
+      "revId": "374ab3f1a7da8eb04172fef3acc6861d6196413f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6deefbdf_38803f9a",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-09-06T07:35:06Z",
+      "side": 1,
+      "message": "[Arguments]   {file_name}  ${status_code}  ${expected_message}",
+      "revId": "374ab3f1a7da8eb04172fef3acc6861d6196413f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "37c0744d_7a44d6b2",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-09-06T07:35:06Z",
+      "side": 1,
+      "message": "if use as comment in 757.\nthen can directly use- Upload Partition File To BMC  ${Partition_file_list}}  ${status_code}  ${expected_message} in for general all cases\n\nRun Keyword If ${status_code} \u003d\u003d  ${HTTP_OK}\n  ...  Run Keywords\n    ...    Verify Partition File On BMC  ${Partition_file_list}  Partition_status\u003d1  AND\n    ...    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}",
+      "range": {
+        "startLine": 766,
+        "startChar": 2,
+        "endLine": 774,
+        "endChar": 114
+      },
+      "revId": "374ab3f1a7da8eb04172fef3acc6861d6196413f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
