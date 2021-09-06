@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e53c1a8f_808b7afe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-06T08:21:42Z",
+      "side": 1,
+      "message": "Added service user automation testcase\n\nTestcase added:\n    - Verify service login failure with incorrect password",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 56
+      },
+      "revId": "c6e6a17ca4430424f32e441f83bbd458b360d81f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "17255be6_bd03931b",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-06T08:21:42Z",
+      "side": 1,
+      "message": "Verify Service Login Failure With Incorrect Password",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 51
+      },
+      "revId": "c6e6a17ca4430424f32e441f83bbd458b360d81f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8b06db1_040ea9a2",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-06T08:21:42Z",
+      "side": 1,
+      "message": "Verify service login failure with incorrect password.",
+      "range": {
+        "startLine": 46,
+        "startChar": 21,
+        "endLine": 46,
+        "endChar": 72
+      },
+      "revId": "c6e6a17ca4430424f32e441f83bbd458b360d81f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e14ff49c_de96852c",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-06T08:21:42Z",
+      "side": 1,
+      "message": "Tags missing",
+      "range": {
+        "startLine": 46,
+        "startChar": 5,
+        "endLine": 46,
+        "endChar": 19
+      },
+      "revId": "c6e6a17ca4430424f32e441f83bbd458b360d81f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
