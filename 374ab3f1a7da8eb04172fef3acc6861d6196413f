@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7b37a529_3aee7521",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-09-06T08:00:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "779fa4d6_d5658381",
+      "revId": "374ab3f1a7da8eb04172fef3acc6861d6196413f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "48b42d74_d3d5e703",
         "filename": "openpower/ext_interfaces/test_savearea_management.robot",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "18b40ac3_f1cb4d05",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-09-06T08:00:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48b42d74_d3d5e703",
+      "revId": "374ab3f1a7da8eb04172fef3acc6861d6196413f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "879a1767_d20cec9b",
         "filename": "openpower/ext_interfaces/test_savearea_management.robot",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2021-09-06T07:35:06Z",
       "side": 1,
       "message": "if modify as per comment 755,modify here too",
+      "revId": "374ab3f1a7da8eb04172fef3acc6861d6196413f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5699d5b6_e4550932",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-09-06T08:00:37Z",
+      "side": 1,
+      "message": "Line 744",
+      "parentUuid": "879a1767_d20cec9b",
       "revId": "374ab3f1a7da8eb04172fef3acc6861d6196413f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -70,6 +124,24 @@
     },
     {
       "key": {
+        "uuid": "48ad33d1_7af9dd8f",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-09-06T08:00:37Z",
+      "side": 1,
+      "message": "line 744",
+      "parentUuid": "8ef658dc_d2612e4e",
+      "revId": "374ab3f1a7da8eb04172fef3acc6861d6196413f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e5c5b007_c116cac3",
         "filename": "openpower/ext_interfaces/test_savearea_management.robot",
         "patchSetId": 1
@@ -84,6 +156,24 @@
       "revId": "374ab3f1a7da8eb04172fef3acc6861d6196413f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb46f9c0_78a47421",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-09-06T08:00:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5c5b007_c116cac3",
+      "revId": "374ab3f1a7da8eb04172fef3acc6861d6196413f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -104,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "840531ba_16d037fe",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-09-06T08:00:37Z",
+      "side": 1,
+      "message": "line 744",
+      "parentUuid": "6deefbdf_38803f9a",
+      "revId": "374ab3f1a7da8eb04172fef3acc6861d6196413f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "37c0744d_7a44d6b2",
         "filename": "openpower/ext_interfaces/test_savearea_management.robot",
         "patchSetId": 1
@@ -115,6 +223,30 @@
       "writtenOn": "2021-09-06T07:35:06Z",
       "side": 1,
       "message": "if use as comment in 757.\nthen can directly use- Upload Partition File To BMC  ${Partition_file_list}}  ${status_code}  ${expected_message} in for general all cases\n\nRun Keyword If ${status_code} \u003d\u003d  ${HTTP_OK}\n  ...  Run Keywords\n    ...    Verify Partition File On BMC  ${Partition_file_list}  Partition_status\u003d1  AND\n    ...    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}",
+      "range": {
+        "startLine": 766,
+        "startChar": 2,
+        "endLine": 774,
+        "endChar": 114
+      },
+      "revId": "374ab3f1a7da8eb04172fef3acc6861d6196413f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9fa20cef_e0bd6d9e",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-09-06T08:00:37Z",
+      "side": 1,
+      "message": "Using this method I need to pass 3 extra params which I want to avoid as its not needed here.\n\nas in my scenario when the file name is 20(character) \u0026 above, which I address in this test case.\nand when file name is less than 20 (character) this scenario already handled in other test case.",
+      "parentUuid": "37c0744d_7a44d6b2",
       "range": {
         "startLine": 766,
         "startChar": 2,
