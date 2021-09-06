@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "39a9532d_471bb56f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-06T08:35:43Z",
+      "side": 1,
+      "message": "Testcase added:\n    - Verify service user login failure with expired ACF",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 54
+      },
+      "revId": "079ce97fca0bd7f71c3126507cb4dc7443cae8ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44485c35_ffa2056f",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-06T08:35:43Z",
+      "side": 1,
+      "message": "Verify Service Login Failure With Expired ACF",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 48
+      },
+      "revId": "079ce97fca0bd7f71c3126507cb4dc7443cae8ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6182125c_8be9b4e8",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-06T08:35:43Z",
+      "side": 1,
+      "message": "[Setup]  Valid Value EXPIRED_SERVICE_FILE_PATH",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 70
+      },
+      "revId": "079ce97fca0bd7f71c3126507cb4dc7443cae8ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b209067_66fdb1b0",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-06T08:35:43Z",
+      "side": 1,
+      "message": "Test case tag missing",
+      "range": {
+        "startLine": 47,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 19
+      },
+      "revId": "079ce97fca0bd7f71c3126507cb4dc7443cae8ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fd417ec2_2ec3ae92",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-06T08:35:43Z",
+      "side": 1,
+      "message": "failure",
+      "range": {
+        "startLine": 47,
+        "startChar": 47,
+        "endLine": 47,
+        "endChar": 52
+      },
+      "revId": "079ce97fca0bd7f71c3126507cb4dc7443cae8ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c4d0e8d3_ad6f3111",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-06T08:35:43Z",
+      "side": 1,
+      "message": "No need to create new keyword for uploading expire ACF. Just use:\n\n    Open Connection for SCP\n    scp.Put File  ${EXPIRED_SERVICE_FILE_PATH}  ${acf_dir}\n    Run Keyword And Expect Error  InvalidCredentialsError*\n    ...  Redfish.Login  service  ${SERVICE_PASSWORD}",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 30
+      },
+      "revId": "079ce97fca0bd7f71c3126507cb4dc7443cae8ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9ced28e_eacfeae8",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-06T08:35:43Z",
+      "side": 1,
+      "message": "Open Connection for SCP",
+      "range": {
+        "startLine": 60,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 16
+      },
+      "revId": "079ce97fca0bd7f71c3126507cb4dc7443cae8ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
