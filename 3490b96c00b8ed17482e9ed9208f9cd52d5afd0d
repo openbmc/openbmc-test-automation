@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af32e5d3_14713db6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-06T08:10:41Z",
+      "side": 1,
+      "message": "Added test to continuous check IPMI command execution",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 10
+      },
+      "revId": "3490b96c00b8ed17482e9ed9208f9cd52d5afd0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7aac0639_ce29ae46",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-06T08:10:41Z",
+      "side": 1,
+      "message": "Align with above variable",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 22
+      },
+      "revId": "3490b96c00b8ed17482e9ed9208f9cd52d5afd0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff1be34d_51488c85",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-06T08:10:41Z",
+      "side": 1,
+      "message": "Verify Continuous IPMI Command Execution",
+      "range": {
+        "startLine": 469,
+        "startChar": 0,
+        "endLine": 469,
+        "endChar": 42
+      },
+      "revId": "3490b96c00b8ed17482e9ed9208f9cd52d5afd0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "590b1cd2_42f80b49",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-06T08:10:41Z",
+      "side": 1,
+      "message": "Verify that continuous IPMI command execution runs fine.",
+      "range": {
+        "startLine": 470,
+        "startChar": 21,
+        "endLine": 470,
+        "endChar": 63
+      },
+      "revId": "3490b96c00b8ed17482e9ed9208f9cd52d5afd0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
