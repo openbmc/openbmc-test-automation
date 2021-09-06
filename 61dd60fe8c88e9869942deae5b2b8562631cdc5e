@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef125863_64945f9c",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-09-06T11:47:25Z",
+      "side": 1,
+      "message": "Verify Lock Is Not Persistent On BMC Reboot",
+      "revId": "61dd60fe8c88e9869942deae5b2b8562631cdc5e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
