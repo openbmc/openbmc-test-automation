@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "414be65f_8b97654b",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 766,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-09-07T05:39:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b03acb9_88d8744f",
+      "revId": "83608c60f221a91b6a89cef9be4d4cf47099c890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "79d6a55c_b99eb694",
         "filename": "openpower/ext_interfaces/test_savearea_management.robot",
         "patchSetId": 2
@@ -33,6 +51,24 @@
       "revId": "83608c60f221a91b6a89cef9be4d4cf47099c890",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a67fe35f_fd78b81f",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-09-07T05:39:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79d6a55c_b99eb694",
+      "revId": "83608c60f221a91b6a89cef9be4d4cf47099c890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
