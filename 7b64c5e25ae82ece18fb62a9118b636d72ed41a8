@@ -22,6 +22,30 @@
       "revId": "7b64c5e25ae82ece18fb62a9118b636d72ed41a8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e76f788e_ac02d234",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-07T05:49:19Z",
+      "side": 1,
+      "message": "Make sense. We can add something like below in teardown\n\n    [Teardown]  Run Keywords  Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol\n    ...  body\u003d{\"SSH\":{\"ProtocolEnabled\":True}}  valid_status_codes\u003d[200, 204]  AND\n    ...  Wait Until Keyword Succeeds  1 min  5 sec  Open Connection And Login",
+      "parentUuid": "bed17552_e4176dd9",
+      "range": {
+        "startLine": 56,
+        "startChar": 1,
+        "endLine": 59,
+        "endChar": 0
+      },
+      "revId": "7b64c5e25ae82ece18fb62a9118b636d72ed41a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
