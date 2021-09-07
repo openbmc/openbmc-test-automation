@@ -22,39 +22,6 @@ ${allowed_power_diff}=  ${10}
 
 *** Test Cases ***
 
-Verify Chassis Identify via IPMI
-    [Documentation]  Verify "chassis identify" using IPMI command.
-    [Tags]  Verify_Chassis_Identify_via_IPMI
-
-    # Set to default "chassis identify" and verify that LED blinks for 15s.
-    Run IPMI Standard Command  chassis identify
-    Verify Identify LED State  ${1}
-
-    Sleep  18s
-    Verify Identify LED State  ${0}
-
-    # Set "chassis identify" to 10s and verify that the LED blinks for 10s.
-    Run IPMI Standard Command  chassis identify 10
-    Verify Identify LED State  ${1}
-
-    Sleep  12s
-    Verify Identify LED State  ${0}
-
-
-Verify Chassis Identify Off And Force Identify On via IPMI
-    [Documentation]  Verify "chassis identify" off
-    ...  and "force identify on" via IPMI.
-    [Tags]  Verify_Chassis_Identify_Off_And_Force_Identify_On_via_IPMI
-
-    # Set the LED to "Force Identify On".
-    Run IPMI Standard Command  chassis identify force
-    Verify Identify LED State  ${1}
-
-    # Set "chassis identify" to 0 and verify that the LED turns off.
-    Run IPMI Standard Command  chassis identify 0
-    Verify Identify LED State  ${0}
-
-
 Test Watchdog Reset Via IPMI And Verify Using REST
     [Documentation]  Test watchdog reset via IPMI and verify using REST.
     [Tags]  Test_Watchdog_Reset_Via_IPMI_And_Verify_Using_REST
