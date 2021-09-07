@@ -6,7 +6,7 @@ Library         ../../lib/vpd_utils.py
 
 Suite Setup     Redfish.Login
 Suite Teardown  Redfish.Logout
-Test Teardown   FFDC On Test Case Fail
+#Test Teardown   FFDC On Test Case Fail
 
 
 *** Test Cases ***
@@ -51,6 +51,20 @@ Verify CPU VPD Data Via Redfish
     CPU          Location
 
 
+Verify DIMM VPD Data Via Redfish
+    [Documentation]  Verify DIMM VPD details via Redfish output.
+    [Tags]  Verify_DIMM_VPD_Data_Via_Redfish
+    [Template]  Verify Redfish VPD Data
+
+    # Checking only location info because support for other fields is not there for DIMM.
+    # Component  Field
+    #DIMM        Model
+    #DIMM        PartNumber
+    #DIMM        SerialNumber
+    #DIMM        SparePartNumber
+    DIMM         Location
+
+
 *** Keywords ***
 
 Verify Redfish VPD Data
@@ -64,6 +78,7 @@ Verify Redfish VPD Data
     ...  '${component}' == 'BMC'  /redfish/v1/Managers/bmc
     ...  '${component}' == 'Chassis'  /redfish/v1/Chassis/chassis
     ...  '${component}' == 'CPU'  /redfish/v1/Systems/system/Processors/cpu0
+    ...  '${component}' == 'DIMM'  /redfish/v1/Systems/system/Memory/dimm0
 
     ${resp}=  Redfish.Get Properties  ${component_uri}
     ${vpd_field}=  Set Variable If
@@ -74,9 +89,10 @@ Verify Redfish VPD Data
     ...  '${field}' == 'Location'  LocationCode
 
     ${vpd_component}=  Set Variable If
-    ...  '${component}' == 'CPU'  /system/chassis/motherboard/cpu0
+    ...  '${component}' == 'CPU'  /system/chassis/motherboard/dcm0/cpu0
     ...  '${component}' == 'Chassis'  /system/chassis
     ...  '${component}' == 'BMC'  /system/chassis/motherboard/ebmc_card_bmc
+    ...  '${component}' == 'DIMM'  /system/chassis/motherboard/dimm0
 
     ${vpd_records}=  Vpdtool  -o -O ${vpd_component}
 
