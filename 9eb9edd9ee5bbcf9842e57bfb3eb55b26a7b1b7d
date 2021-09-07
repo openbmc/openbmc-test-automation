@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40bd953f_6f2c3c35",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-09-07T09:31:02Z",
+      "side": 1,
+      "message": "make it something like:\nEnable SSH Via GUI And Verify",
+      "revId": "9eb9edd9ee5bbcf9842e57bfb3eb55b26a7b1b7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "126a0978_585cfe5c",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-09-07T09:31:02Z",
+      "side": 1,
+      "message": "waiting for 1 minute is too long a time",
+      "range": {
+        "startLine": 49,
+        "startChar": 38,
+        "endLine": 49,
+        "endChar": 43
+      },
+      "revId": "9eb9edd9ee5bbcf9842e57bfb3eb55b26a7b1b7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "817d975c_053eba26",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-09-07T09:31:02Z",
+      "side": 1,
+      "message": "remove this code",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 80
+      },
+      "revId": "9eb9edd9ee5bbcf9842e57bfb3eb55b26a7b1b7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c78f97fb_738cb2da",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-09-07T09:31:02Z",
+      "side": 1,
+      "message": "use Select Checkbox",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 42
+      },
+      "revId": "9eb9edd9ee5bbcf9842e57bfb3eb55b26a7b1b7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "44e107e0_5fde8238",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-09-07T09:31:02Z",
+      "side": 1,
+      "message": "1 min?",
+      "range": {
+        "startLine": 61,
+        "startChar": 33,
+        "endLine": 61,
+        "endChar": 39
+      },
+      "revId": "9eb9edd9ee5bbcf9842e57bfb3eb55b26a7b1b7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
