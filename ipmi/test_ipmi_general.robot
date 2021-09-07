@@ -204,6 +204,43 @@ Verify Close Session via IPMI
     Should Contain  ${cmd_output}  Closed Session
 
 
+Verify Chassis Identify via IPMI
+    [Documentation]  Verify "chassis identify" using IPMI and Redfish.
+    [Tags]  Verify_Chassis_Identify_via_IPMI_And_Verify_Using_Redfish
+    [Teardown]  Redfish.logout
+
+    # Set to default "chassis identify" and verify that LED blinks for 15s.
+    Run IPMI Standard Command  chassis identify
+    Redfish.Login
+    Verify Identify LED State Via Redfish  Lit
+
+    Sleep  18s
+    Verify Identify LED State Via Redfish  Off 
+
+    # Set "chassis identify" to 10s and verify that the LED blinks for 10s.
+    Run IPMI Standard Command  chassis identify 10
+    Verify Identify LED State Via Redfish  Lit
+
+    Sleep  12s
+    Verify Identify LED State Via Redfish  Off
+
+
+Verify Chassis Identify Off And Force Identify On via IPMI
+    [Documentation]  Verify "chassis identify" off
+    ...  and "force identify on" via IPMI and Redfish.
+    [Tags]  Verify_Chassis_Identify_Off_And_Force_Identify_On_via_IPMI_And_Verify_Using_Redfish
+    [Teardown]  Redfish.logout
+
+    # Set the LED to "Force Identify On".
+    Run IPMI Standard Command  chassis identify force
+    Redfish.Login
+    Verify Identify LED State Via Redfish  Lit
+
+    # Set "chassis identify" to 0 and verify that the LED turns off.
+    Run IPMI Standard Command  chassis identify 0
+    Verify Identify LED State Via Redfish  Off
+
+
 *** Keywords ***
 
 Set Session Privilege Level And Verify
@@ -229,3 +266,13 @@ Set Invalid Session Privilege Level And Verify
     ${msg}=  Run Keyword And Expect Error  *  Run External IPMI Raw Command
     ...  0x06 0x3b ${privilege_level}
     Should Contain  ${msg}  Unknown  rsp=0x81
+
+
+Verify Identify LED State Via Redfish
+    [Documentation]  Verify that the identify state of the LED via Redfish.
+    [Arguments]  ${expected_state}
+    # Description of argument(s):
+    # expected_led_status  Expected value of Identify LED.
+
+    ${LED_Value}=  Redfish.Get Attribute  /redfish/v1/Systems/system  IndicatorLED
+    Should Be True  '${LED_Value}' == '${expected_state}'
