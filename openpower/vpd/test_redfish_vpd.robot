@@ -74,7 +74,7 @@ Verify Redfish VPD Data
     ...  '${field}' == 'Location'  LocationCode
 
     ${vpd_component}=  Set Variable If
-    ...  '${component}' == 'CPU'  /system/chassis/motherboard/cpu0
+    ...  '${component}' == 'CPU'  /system/chassis/motherboard/dcm0/cpu0
     ...  '${component}' == 'Chassis'  /system/chassis
     ...  '${component}' == 'BMC'  /system/chassis/motherboard/ebmc_card_bmc
 
