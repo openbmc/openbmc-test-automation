@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "904c7140_9f32e84e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-08T14:45:02Z",
+      "side": 1,
+      "message": "Added test cases to test Timed Power ON",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 59
+      },
+      "revId": "6b35449f864a3caa23cc7fc8008d759c2de3e6eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d05badf0_0bbc27d6",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-08T14:45:02Z",
+      "side": 1,
+      "message": "This suite tests timed power On feature of OpenBMC.",
+      "range": {
+        "startLine": 2,
+        "startChar": 16,
+        "endLine": 2,
+        "endChar": 63
+      },
+      "revId": "6b35449f864a3caa23cc7fc8008d759c2de3e6eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10bc5ee3_7466d594",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-08T14:45:02Z",
+      "side": 1,
+      "message": "One of them I guess is not required here.",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 42
+      },
+      "revId": "6b35449f864a3caa23cc7fc8008d759c2de3e6eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53dbb814_dd0c4788",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-08T14:45:02Z",
+      "side": 1,
+      "message": "Better to do for each test case setup. Also Add FFDC collection in teardown.\n\nTest Setup      Test Setup Execution\nTest Teardown   Run keywords  Close All Connections  AND  FFDC On Test Case Fail",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 37
+      },
+      "revId": "6b35449f864a3caa23cc7fc8008d759c2de3e6eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1dcf58c1_2b7b324e",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-08T14:45:02Z",
+      "side": 1,
+      "message": "Not required this comment",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 21
+      },
+      "revId": "6b35449f864a3caa23cc7fc8008d759c2de3e6eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4efc9b1c_0cfe93db",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-08T14:45:02Z",
+      "side": 1,
+      "message": "Set Time For Power ON\n    [Documentation]  Set time for power ON using busctl command and verify.\n    [Tags]  Set_Time_For_Power_ON\n\n    Set Timer For Power ON  ${TIMER_POWER_ON}\n\n    ${tpo_value}\u003d  Get Time Power ON Value\n    Should Not Be Equal  ${tpo_value}  0",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 40
+      },
+      "revId": "6b35449f864a3caa23cc7fc8008d759c2de3e6eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a67d004e_fa6ba6a6",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-08T14:45:02Z",
+      "side": 1,
+      "message": "Verify System Power On After TPO\n    [Documentation]  Verify system power on after TPO.\n    [Tags]  Verify_System_Power_On_After_TPO\n\n\n    Set Timer For Power ON  ${TIMER_POWER_ON}\n\n    \u003cAdded code to check if chassis is not ON for ${TIMER_POWER_ON} duration\n\n    Wait Until Keyword Succeeds  1 min  15 sec  Is Chassis On",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 61
+      },
+      "revId": "6b35449f864a3caa23cc7fc8008d759c2de3e6eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "539d4285_1544b301",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-08T14:45:02Z",
+      "side": 1,
+      "message": "Better to do this for each test case.\n\nTest Setup Execution\n    [Documentation]  Do test case setup tasks.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 46
+      },
+      "revId": "6b35449f864a3caa23cc7fc8008d759c2de3e6eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f953ae0_5e4bb123",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-08T14:45:02Z",
+      "side": 1,
+      "message": "Set Timer For Power ON",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 13
+      },
+      "revId": "6b35449f864a3caa23cc7fc8008d759c2de3e6eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "df87755b_fc14670a",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-08T14:45:02Z",
+      "side": 1,
+      "message": "[Documentation]  Set the time for power ON with given value .\n    [Argument]  ${time}\n    # Describtion of argument(s):\n    # time  Time duration for setting TPO.",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 46
+      },
+      "revId": "6b35449f864a3caa23cc7fc8008d759c2de3e6eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "946a35ba_d52ff3e8",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-08T14:45:02Z",
+      "side": 1,
+      "message": "current_bmc_time",
+      "range": {
+        "startLine": 56,
+        "startChar": 6,
+        "endLine": 56,
+        "endChar": 22
+      },
+      "revId": "6b35449f864a3caa23cc7fc8008d759c2de3e6eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24b2c399_490fffcc",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-08T14:45:02Z",
+      "side": 1,
+      "message": "Get Time Power ON Value\n    [Documentation]  Returns time power ON value.\n\n    ${timer_value}\u003d  BMC Execute Command  ${CMD_TPO_TIME}\n    # BMC command returns two parameters splitting it and returning the integer value. \n\n    [return]  ${timer_value[1]}",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 32
+      },
+      "revId": "6b35449f864a3caa23cc7fc8008d759c2de3e6eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
