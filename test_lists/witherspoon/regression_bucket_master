@@ -4,7 +4,6 @@
 -i Redfish Power Off
 -i Redfish_BMC_Manager_GracefulRestart_When_Host_Booted
 # Redfish interface.
--i GET_Redfish_Hypermedia_Without_Login
 -i Redfish_Login_Via_SessionService
 -i Verify_Redfish_Invalid_URL_Response_Code
 -i Redfish_Login_Using_Unsecured_HTTP
