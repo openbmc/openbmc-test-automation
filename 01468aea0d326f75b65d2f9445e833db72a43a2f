@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d9cc607_d9f76987",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-08T14:53:15Z",
+      "side": 1,
+      "message": "MAC address modification test are pretty destructive. Please move this as part of separate bucket which is not run as part CT.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 30
+      },
+      "revId": "01468aea0d326f75b65d2f9445e833db72a43a2f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
