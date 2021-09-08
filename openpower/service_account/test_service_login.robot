@@ -22,6 +22,7 @@ Test Teardown    FFDC On Test Case Fail
 *** Variables ***
 
 ${acf_dir}            /etc/acf
+${new_mac}            AA:E2:84:14:28:79
 
 *** Test Cases ***
 
@@ -63,6 +64,44 @@ Verify Service Login Failure With Incorrect Password
     ${incorrect_service_password} =  Catenate  SEPARATOR=  ${SERVICE_USER_PASSWORD}  123
     Run Keyword And Expect Error  InvalidCredentialsError*
     ...  Redfish.Login  service  ${incorrect_service_password}
+
+
+Verify Updating MAC Address By Service User With Redfish
+    [Documentation]  Verify updating MAC addresses with service user using Redfish
+    [Tags]  Verify_Updating_MAC_Address_By_Service_User_With_Redfish 
+
+    Remove Existing ACF
+    Upload Valid ACF
+
+    # First save existing mac address
+    ${origial_mac}=  Get BMC MAC Address
+    # Now modify the mac address with new mac address and verify.
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    Redfish.Login  service  ${SERVICE_USER_PASSWORD}
+    ${payload}=  Create Dictionary  MACAddress=${new_mac}
+
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{payload}
+    ...  valid_status_codes=[200,400,500]
+
+    # After any modification on network interface, BMC restarts network
+    # Note: Network restart takes around 15-18s after patch request processing.
+    Sleep  ${NETWORK_TIMEOUT}s
+
+    Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+
+    # Verify whether new MAC address is populated on BMC system.
+    # It should not allow to configure invalid settings.
+    ${status}=  Run Keyword And Return Status
+    ...  Validate MAC On BMC  ${new_mac}
+    Should Be Equal  ${status}  ${True}
+
+    # Revert to original mac address.
+    ${payload}=  Create Dictionary  MACAddress=${origial_mac}
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{payload}
+    ...  valid_status_codes=[200,400,500]
+    Sleep  ${NETWORK_TIMEOUT}s
 
 
 *** Keywords ***
