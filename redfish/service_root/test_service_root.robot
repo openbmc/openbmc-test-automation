@@ -26,7 +26,6 @@ GET Redfish Hypermedia Without Login
     [Template]  GET And Verify Redfish Response
 
     # Expect status      Resource URL Path
-    ${HTTP_OK}           /
     ${HTTP_OK}           /redfish
     ${HTTP_OK}           /redfish/v1
 
