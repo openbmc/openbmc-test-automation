@@ -2,6 +2,57 @@
   "comments": [
     {
       "key": {
+        "uuid": "4453331a_294c8ab3",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2021-09-09T10:17:01Z",
+      "side": 1,
+      "message": "can this be part of the test setup execution?\nalong with suite setup you can add Test Setup Execution and add this line?",
+      "revId": "01468aea0d326f75b65d2f9445e833db72a43a2f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7d569cb_515e1ea3",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2021-09-09T10:17:01Z",
+      "side": 1,
+      "message": "original_mac",
+      "revId": "01468aea0d326f75b65d2f9445e833db72a43a2f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a71eede6_700f23f3",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2021-09-09T10:17:01Z",
+      "side": 1,
+      "message": "original_mac",
+      "revId": "01468aea0d326f75b65d2f9445e833db72a43a2f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3d9cc607_d9f76987",
         "filename": "openpower/service_account/test_service_login.robot",
         "patchSetId": 3
