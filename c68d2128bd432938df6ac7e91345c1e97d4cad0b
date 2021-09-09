@@ -46,6 +46,30 @@
       "revId": "c68d2128bd432938df6ac7e91345c1e97d4cad0b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cd2e366e_81acd76f",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2021-09-09T13:38:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84592ba7_82886f17",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 46
+      },
+      "revId": "c68d2128bd432938df6ac7e91345c1e97d4cad0b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
