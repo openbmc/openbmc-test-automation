@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "40c3f948_76975293",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2021-09-09T11:11:29Z",
+      "side": 1,
+      "message": "Single space",
+      "revId": "5cfa2be83b489887f233eeafb594e406ade452ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
