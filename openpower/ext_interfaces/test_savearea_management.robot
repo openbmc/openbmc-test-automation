@@ -246,6 +246,18 @@ Test Redfish Upload Partition File Name With Character Limit To BMC
     50KB-testfilesavfile     ${HTTP_OK}             ${FILE_UPLOAD_MESSAGE}
     50KB-testsaveareafile    ${HTTP_BAD_REQUEST}    ${MAXIMUM_FILE_NAME_MESSAGE}
 
+
+Test Redfish Fail To Upload Partition File Name With Special Character To BMC
+    [Documentation]  Upload partition file to BMC with special character file name and
+    ...  Redfish through an error.
+    [Tags]  Test_Redfish_Fail_To_Upload_Partition_File_Name_With_Special_Character_To_BMC
+    [Template]  Check Redfish Fail To Upload Partition File Name With Special Character To BMC
+
+    # file_name      status_code            message
+    1KB-*filename    ${HTTP_BAD_REQUEST}    ${UNSUPPORTED_FILE_NAME_MESSAGE}
+    1KB-!filename    ${HTTP_BAD_REQUEST}    ${UNSUPPORTED_FILE_NAME_MESSAGE}
+    1KB-@filename    ${HTTP_BAD_REQUEST}    ${UNSUPPORTED_FILE_NAME_MESSAGE}
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -775,4 +787,26 @@ Check Redfish Upload Partition File Name With Character Limit To BMC
     ...  ELSE
     ...    Upload Partition File To BMC  ${Partition_file_list}  ${status_code}  ${message}
 
+    Delete Local Partition File  ${Partition_file_list}
+
+
+Check Redfish Fail To Upload Partition File Name With Special Character To BMC
+    [Documentation]  Upload the partition file to BMC with special character file name.
+    [Arguments]  ${file_name}  ${status_code}  ${message}
+
+    # Description of argument(s):
+    # file_name       Partition file name.
+    # status_code     HTTPS status code.
+    # message         Expected message of from upload partition file URI.
+
+    @{Partition_file_list} =  Split String  ${file_name}  ,
+    ${num_records}=  Get Length  ${Partition_file_list}
+    Create Partition File  ${Partition_file_list}
+
+    Upload Partition File To BMC  ${Partition_file_list}  ${status_code}  ${message}
+    ${status}=  Run Keyword And Return Status
+    ...  Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
+    Run Keyword If  ${status} == True
+    ...  Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
+    Should Be Equal As Strings  ${status}  False
     Delete Local Partition File  ${Partition_file_list}
