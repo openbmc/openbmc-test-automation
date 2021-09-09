@@ -41,29 +41,33 @@ Verify Existence Of All Buttons In Policies Page
     Page Should Contain Element  ${xpath_network_ipmi_toggle}
 
 
-Enable SSH Via GUI And Verify
-    [Documentation]  Verify that SSH to BMC starts working after enabling SSH.
-    [Tags]  Enable_SSH_Via_GUI_And_Verify
+Disable SSH Via GUI And Verify
+    [Documentation]  Verify that SSH to BMC stops working after disabling SSH.
+    [Tags]  Disable_SSH_Via_GUI_And_Verify
     [Teardown]  Run Keywords  Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol
     ...  body={"SSH":{"ProtocolEnabled":True}}  valid_status_codes=[200, 204]  AND
     ...  Wait Until Keyword Succeeds  30 sec  5 sec  Open Connection And Login
 
-    # Disable ssh via Redfish.
-    Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol  body={"SSH":{"ProtocolEnabled":False}}
+    # Enable ssh via Redfish.
+    Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol  body={"SSH":{"ProtocolEnabled":True}}
     ...   valid_status_codes=[200, 204]
-
-    # Wait for GUI to reflect disable SSH status.
-    Wait Until Keyword Succeeds  30 sec  10 sec
-    ...  Refresh GUI And Verify Element Value  ${xpath_bmc_ssh_toggle}  Disabled
-
-    # Enable ssh via GUI.
-    Click Element  ${xpath_bmc_ssh_toggle}
 
     # Wait for GUI to reflect enable SSH status.
     Wait Until Keyword Succeeds  30 sec  10 sec
     ...  Refresh GUI And Verify Element Value  ${xpath_bmc_ssh_toggle}  Enabled
 
-    Wait Until Keyword Succeeds  10 sec  5 sec  Open Connection And Login
+    # Disable ssh via GUI.
+    Click Element  ${xpath_bmc_ssh_toggle}
+
+    # Wait for GUI to reflect disable SSH status.
+    Wait Until Keyword Succeeds  1 Min  5 sec
+    ...  Refresh GUI And Verify Element Value  ${xpath_bmc_ssh_toggle}  Disabled
+
+    ${status}=  Run Keyword And Return Status
+    ...  Wait Until Keyword Succeeds  10 sec  5 sec  Open Connection And Login
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=SSH Login and commands are working after disabling SSH.
 
 
 *** Keywords ***
