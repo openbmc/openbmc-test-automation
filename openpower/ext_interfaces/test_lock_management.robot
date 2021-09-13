@@ -795,10 +795,11 @@ Verify Acquire Lock After Reboot
 
     ${trans_id_list}=  Create List
     ${session_info}=  Create Session With ClientID  ${client_id}
+
     ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
-    Redfish OBMC Reboot (off)
-    Redfish Login
+    Redfish BMC Reset Operation
     Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}
+    Is BMC Standby
 
     ${trans_id}=  Redfish Post Acquire Lock  ${lock_type}
     Append To List  ${trans_id_list}  ${trans_id}
