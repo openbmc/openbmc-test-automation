@@ -126,6 +126,32 @@ Disable IPMI Via GUI And Verify
     ...  msg=IPMI command is working after disabling IPMI.
 
 
+Enable IPMI Via GUI And Verify
+    [Documentation]  Verify that IPMI command works after enabling IPMI.
+    [Tags]  Enable_IPMI_Via_GUI_And_Verify
+    [Teardown]  Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol
+    ...  body={"IPMI":{"ProtocolEnabled":True}}  valid_status_codes=[200, 204]
+
+    # Due to github issue 2125 we are using click element instead of select checkbox.
+    # https://github.com/openbmc/openbmc-test-automation/issues/2125.
+    # Disable ipmi via Redfish.
+    Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol  body={"IPMI":{"ProtocolEnabled":False}}
+    ...   valid_status_codes=[200, 204]
+
+    # Wait for GUI to reflect disable IPMI status.
+    Wait Until Keyword Succeeds  30 sec  10 sec
+    ...  Refresh GUI And Verify Element Value  ${xpath_network_ipmi_toggle}  Disabled
+
+    # Enable ipmi via GUI.
+    Click Element  ${xpath_network_ipmi_toggle}
+
+    # Wait for GUI to reflect enable IPMI status.
+    Wait Until Keyword Succeeds  30 sec  10 sec
+    ...  Refresh GUI And Verify Element Value  ${xpath_network_ipmi_toggle}  Enabled
+
+    Wait Until Keyword Succeeds  10 sec  5 sec  Run IPMI Standard Command  sel info
+
+
 *** Keywords ***
 
 Test Setup Execution
