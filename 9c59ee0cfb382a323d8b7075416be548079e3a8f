@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2954e7b9_eadcefd1",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-09-14T12:34:51Z",
+      "side": 1,
+      "message": "Use Select Checkbox and remove unwanted code.\nIt is mixing redfish with GUI and creating unwanted dependency on redfish.",
+      "revId": "9c59ee0cfb382a323d8b7075416be548079e3a8f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
