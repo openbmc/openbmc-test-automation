@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "46902ab0_8c95d30b",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-15T09:44:49Z",
+      "side": 1,
+      "message": "This is not required",
+      "range": {
+        "startLine": 92,
+        "startChar": 9,
+        "endLine": 92,
+        "endChar": 53
+      },
+      "revId": "120c62d72e9c400f6934eac264b1c57fb1b02a7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8797cf39_c2f03e59",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-15T09:44:49Z",
+      "side": 1,
+      "message": "SSH login still working after disabling SSH.",
+      "range": {
+        "startLine": 95,
+        "startChar": 13,
+        "endLine": 95,
+        "endChar": 68
+      },
+      "revId": "120c62d72e9c400f6934eac264b1c57fb1b02a7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
