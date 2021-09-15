@@ -16,6 +16,24 @@
       "revId": "9c59ee0cfb382a323d8b7075416be548079e3a8f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6890c52_16a8f31b",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-15T06:23:54Z",
+      "side": 1,
+      "message": "Prasant\nAs discussed in our last meeting, we see problem in using select checkbox keyword in our automation. To solve this one out, we need to understand \"Click Element\" and \"Select Checkbox\" implementation in Robot automation. See if we can propose anything to Robot community to make changes with these keywords. As decided in our last meeting, please open a Github issue for it. If you are looking for a speedy answer open up github issue in Robot farmwork repo. Until then please let\u0027s not hold our team in using this alternate way to automate.",
+      "parentUuid": "2954e7b9_eadcefd1",
+      "revId": "9c59ee0cfb382a323d8b7075416be548079e3a8f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
