@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4344ddc2_08222890",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-15T05:56:12Z",
+      "side": 1,
+      "message": "Is",
+      "range": {
+        "startLine": 178,
+        "startChar": 23,
+        "endLine": 178,
+        "endChar": 25
+      },
+      "revId": "8c54d5837bb2195076136b6f5bf89787be4a54d0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a93d1a9_873b2fac",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-15T05:56:12Z",
+      "side": 1,
+      "message": "Also make sure that the navigation happen to LDAP page using \"Location Should Contain\" like below\n\n    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  ldap\n    Wait Until Element Is Enabled  ${xpath_enable_ldap_checkbox}  timeout\u003d10s",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 77
+      },
+      "revId": "8c54d5837bb2195076136b6f5bf89787be4a54d0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "015022b5_f07d843a",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-15T05:56:12Z",
+      "side": 1,
+      "message": "Avoid sleep. You can use \"Refresh GUI And Verify Element Value\" keyword like below:\n\n    # Wait for GUI to reflect LDAP disabled status.\n    Wait Until Keyword Succeeds  30 sec  10 sec\n    ...  Refresh GUI And Verify Element Value  ${xpath_enable_ldap_checkbox}  Disabled",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 48
+      },
+      "revId": "8c54d5837bb2195076136b6f5bf89787be4a54d0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e43de35_c5f78b2e",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-15T05:56:12Z",
+      "side": 1,
+      "message": "2 spaces please\n\n${radio_buttons}\u003d  Get WebElements  ${xpath_service_radio_button}",
+      "range": {
+        "startLine": 213,
+        "startChar": 4,
+        "endLine": 213,
+        "endChar": 73
+      },
+      "revId": "8c54d5837bb2195076136b6f5bf89787be4a54d0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
