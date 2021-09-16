@@ -165,16 +165,40 @@ def parse_output_xml(xml_file_path, csv_dir_path, version_id, platform, level,
                                     (e.g. "Master").
     """
 
+    # Initialize tallies
+    total_critical_tc = 0
+    total_critical_passed = 0
+    total_critical_failed = 0
+    total_tc = 0
+    total_tc_passed = 0
+    total_tc_failed = 0
+
     result = ExecutionResult(xml_file_path)
     result.configure(stat_config={'suite_stat_level': 2,
                                   'tag_stat_combine': 'tagANDanother'})
 
     stats = result.statistics
     print("--------------------------------------")
-    total_tc = stats.total.critical.passed + stats.total.critical.failed
+    try:
+        total_critical_tc = stats.total.critical.passed + stats.total.critical.failed
+        total_critical_passed = stats.total.critical.passed
+        total_critical_failed = stats.total.critical.failed
+    except AttributeError:
+        pass
+
+    try:
+        total_tc = stats.total.passed + stats.total.failed
+        total_tc_passed = stats.total.passed
+        total_tc_failed = stats.total.failed
+    except AttributeError:
+        pass
+
     print("Total Test Count:\t %d" % total_tc)
-    print("Total Test Failed:\t %d" % stats.total.critical.failed)
-    print("Total Test Passed:\t %d" % stats.total.critical.passed)
+    print("Total Test Failed:\t %d" % total_tc_failed)
+    print("Total Test Passed:\t %d" % total_tc_passed)
+    print("Total Critical Test Count:\t %d" % total_critical_tc)
+    print("Total Critical Test Failed:\t %d" % total_critical_failed)
+    print("Total Critical Test Passed:\t %d" % total_critical_passed)
     print("Test Start Time:\t %s" % result.suite.starttime)
     print("Test End Time:\t\t %s" % result.suite.endtime)
     print("--------------------------------------")
