@@ -52,6 +52,24 @@
       "revId": "9c59ee0cfb382a323d8b7075416be548079e3a8f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d54445fb_f50d8176",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-09-16T09:44:54Z",
+      "side": 1,
+      "message": "Rahul, do you have any other \"server pages\" where \"select checkbox\" is not working.\nI think that BMC has to implement checkbox in a way robot/python/java/selenium detect checkbox and support checkbox operations.\nIf you think other way, then you can open issue against robot/python/java and selenium.",
+      "parentUuid": "b8acdb61_2ee15206",
+      "revId": "9c59ee0cfb382a323d8b7075416be548079e3a8f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
