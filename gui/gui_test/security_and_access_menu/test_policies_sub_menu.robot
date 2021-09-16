@@ -3,6 +3,7 @@
 Documentation    Test OpenBMC GUI "Policies" sub-menu of "Security and Access" menu.
 
 Resource         ../../lib/gui_resource.robot
+Resource         ../lib/ipmi_client.robot
 Suite Setup      Launch Browser And Login GUI
 Suite Teardown   Close Browser
 Test Setup       Test Setup Execution
@@ -12,7 +13,7 @@ Test Setup       Test Setup Execution
 
 ${xpath_policies_heading}       //h1[text()="Policies"]
 ${xpath_bmc_ssh_toggle}         //*[@data-test-id='policies-toggle-bmcShell']/following-sibling::label
-${xpath_network_ipmi_toggle}    //*[@data-test-id='polices-toggle-networkIpmi']
+${xpath_network_ipmi_toggle}    //*[@data-test-id='polices-toggle-networkIpmi']/following-sibling::label
 
 
 *** Test Cases ***
@@ -93,6 +94,36 @@ Disable SSH Via GUI And Verify
 
     Should Be Equal As Strings  ${status}  False
     ...  msg=SSH login still working after disabling SSH.
+
+
+Disable IPMI Via GUI And Verify
+    [Documentation]  Verify that IPMI command doesnot work after disabling IPMI.
+    [Tags]  Disable_IPMI_Via_GUI_And_Verify
+    [Teardown]  Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol
+    ...  body={"IPMI":{"ProtocolEnabled":True}}  valid_status_codes=[200, 204]
+
+    # Due to github issue 2125 we are using click element instead of select checkbox.
+    # https://github.com/openbmc/openbmc-test-automation/issues/2125.
+    # Enable IPMI via Redfish.
+    Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol  body={"IPMI":{"ProtocolEnabled":True}}
+    ...   valid_status_codes=[200, 204]
+
+    # Wait for GUI to reflect enable IPMI status.
+    Wait Until Keyword Succeeds  30 sec  10 sec
+    ...  Refresh GUI And Verify Element Value  ${xpath_network_ipmi_toggle}  Enabled
+
+    # Disable IPMI via GUI.
+    Click Element  ${xpath_network_ipmi_toggle}
+
+    # Wait for GUI to reflect disable IPMI status.
+    Wait Until Keyword Succeeds  30 sec  10 sec
+    ...  Refresh GUI And Verify Element Value  ${xpath_network_ipmi_toggle}  Disabled
+
+    ${status}=  Run Keyword And Return Status
+    ...  Wait Until Keyword Succeeds  10 sec  5 sec  Run IPMI Standard Command  sel info
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=IPMI command is working after disabling IPMI.
 
 
 *** Keywords ***
