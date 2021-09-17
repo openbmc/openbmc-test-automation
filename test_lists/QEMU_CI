@@ -1,19 +1,22 @@
 #Verify SSH and IPMI interfaces
--i Test_SSH_and_IPMI_Connections
-#Clear error logs for upcoming tests
--i Clear_All_Error_Logs
-#REST SSL connection test.
--i Test_SSL_Connection
+-i Test_SSH_And_IPMI_Connections
 #Check for apps failures.
 -i Check_For_Application_Failures
-#Additional REST API tests
--i REST_Login_Session_To_BMC
--i Verify_REST_Get_Message_JSON_Compliant
--i REST_Put_Message_JSON_Format_Compliance_Test
--i Verify_REST_JSON_Data_On_Success
--i Verify_REST_JSON_Data_On_Failure
--i Multiple_Requests_On_BMC_Using_Single_REST_Session
--i REST_Delete_All_Sessions_And_Expect_Error
--i REST_Logout_Session_To_BMC
-#Verify no error logs generated
--i Verify_Error_Log_Is_Clear
+#Redfish tests cases.
+-i Redfish_Login_And_Logout
+-i GET_Redfish_Resources_With_Login
+-i GET_Redfish_SessionService_Without_Login
+-i Redfish_Login_Using_Invalid_Token
+-i Delete_Redfish_Session_Using_Valid_Login
+-i Redfish_Login_With_Invalid_Credentials
+-i Redfish_Login_Using_Unsecured_HTTP
+-i Verify_Update_Service_Enabled
+-i Verify_Redfish_Software_Inventory_Collection
+-i Redfish_Software_Inventory_Status_Check
+#IPMI tests.
+-i Enable_IPMI_User_And_Verify
+-i Verify_IPMI_User_Deletion
+#Local user tests.
+-i Verify_AccountService_Available
+#Check for BMC dump.
+-i Verify_No_BMC_Dump_And_Application_Failures_In_BMC
