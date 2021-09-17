@@ -4,6 +4,7 @@ Documentation    Test OpenBMC GUI "Policies" sub-menu of "Security and Access" m
 
 Resource         ../../lib/gui_resource.robot
 Resource         ../lib/ipmi_client.robot
+Resource         ../../../lib/common_utils.robot
 Suite Setup      Launch Browser And Login GUI
 Suite Teardown   Close Browser
 Test Setup       Test Setup Execution
@@ -14,6 +15,8 @@ Test Setup       Test Setup Execution
 ${xpath_policies_heading}       //h1[text()="Policies"]
 ${xpath_bmc_ssh_toggle}         //*[@data-test-id='policies-toggle-bmcShell']/following-sibling::label
 ${xpath_network_ipmi_toggle}    //*[@data-test-id='polices-toggle-networkIpmi']/following-sibling::label
+${xpath_rebootbmc_button}       //*[@data-test-id='rebootBmc-button-reboot']
+${xpath_confirm_bmc_reboot}     //*[@class='btn btn-primary']
 
 
 *** Test Cases ***
@@ -126,6 +129,29 @@ Disable IPMI Via GUI And Verify
     ...  msg=IPMI command is working after disabling IPMI.
 
 
+Enable SSH Via GUI And Verify Persistency On BMC Reboot
+    [Documentation]  Enable SSH Via GUI And Verify Persistency of SSH Connection On BMC Reboot.
+    [Tags]  Enable_SSH_Via_GUI_And_Verify_Persistency_On_BMC_Reboot
+    [Teardown]  Run Keywords  Enable SSH via Redfish  AND
+    ...  Wait Until Keyword Succeeds  30 sec  5 sec  Open Connection And Login
+
+    Disable ssh via Redfish
+
+    Wait Until Keyword Succeeds  30 sec  10 sec
+    ...  Refresh GUI And Verify Element Value  ${xpath_bmc_ssh_toggle}  Disabled
+
+    # Enable ssh via GUI.
+    Click Element  ${xpath_bmc_ssh_toggle}
+
+    # Wait for GUI to reflect enable SSH status.
+    Wait Until Keyword Succeeds  30 sec  10 sec
+    ...  Refresh GUI And Verify Element Value  ${xpath_bmc_ssh_toggle}  Enabled
+
+    Reboot BMC via GUI
+
+    Open Connection And Login
+
+
 *** Keywords ***
 
 Test Setup Execution
@@ -134,4 +160,26 @@ Test Setup Execution
     Click Element  ${xpath_policies_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  policies
 
+
+Reboot BMC via GUI
+    [Documentation]  Rebooting the OBMC system.
+    Click Element  ${xpath_operations_menu}
+    Click Element  ${xpath_reboot_bmc_sub_menu}
+    Click Button  ${xpath_rebootbmc_button}
+    Click Button  ${xpath_confirm_bmc_reboot}
+    Wait Until Keyword Succeeds  2 min  10 sec  Is BMC Unpingable
+    Wait For Host To Ping  ${OPENBMC_HOST}  1 min
+    Wait Until Keyword Succeeds  5 min  10 sec  Is BMC Ready
+
+
+Disable SSH via Redfish
+    [Documentation]  Disable SSH via GUI.
+    Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol  body={"SSH":{"ProtocolEnabled":False}}
+    ...   valid_status_codes=[200, 204]
+
+
+Enable SSH via Redfish
+    [Documentation]  Enable SSH via GUI.
+    Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol  body={"SSH":{"ProtocolEnabled":True}}
+    ...   valid_status_codes=[200, 204]
 
