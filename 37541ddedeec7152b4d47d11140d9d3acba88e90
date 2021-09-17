@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6bb2dae6_333f555b",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-17T10:06:58Z",
+      "side": 1,
+      "message": "I would say better to check SSH and IPMI status via GUI and later verify SSH state persistency after BMC reboot.",
+      "range": {
+        "startLine": 132,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 29
+      },
+      "revId": "37541ddedeec7152b4d47d11140d9d3acba88e90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "abf07ebf_75789017",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-17T10:06:58Z",
+      "side": 1,
+      "message": "Reboot BMC via GUI.",
+      "range": {
+        "startLine": 169,
+        "startChar": 20,
+        "endLine": 169,
+        "endChar": 47
+      },
+      "revId": "37541ddedeec7152b4d47d11140d9d3acba88e90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc394571_7eb50e12",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-17T10:06:58Z",
+      "side": 1,
+      "message": "This should go into library so that others can also use",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 15
+      },
+      "revId": "37541ddedeec7152b4d47d11140d9d3acba88e90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "926e28d7_bc74e1e7",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-17T10:06:58Z",
+      "side": 1,
+      "message": "Refresh GUI should not be there in this keyword.",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 15
+      },
+      "revId": "37541ddedeec7152b4d47d11140d9d3acba88e90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
