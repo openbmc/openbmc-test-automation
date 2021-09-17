@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e7df0946_3325f2fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-17T09:56:16Z",
+      "side": 1,
+      "message": "Added IPMI chassis identify testcases with verification via Redfish",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 59
+      },
+      "revId": "a5e6baf39b0db1df70cafd3c00348bacbb160dbf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d5f19d88_91cad7d8",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-17T09:56:16Z",
+      "side": 1,
+      "message": "Set chassis identify using IPMI and verify.",
+      "range": {
+        "startLine": 208,
+        "startChar": 21,
+        "endLine": 208,
+        "endChar": 69
+      },
+      "revId": "a5e6baf39b0db1df70cafd3c00348bacbb160dbf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "195caa98_cc833f0a",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-17T09:56:16Z",
+      "side": 1,
+      "message": "Add setup\n\n    [Setup]  Redfish.Login",
+      "range": {
+        "startLine": 210,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 30
+      },
+      "revId": "a5e6baf39b0db1df70cafd3c00348bacbb160dbf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3d4f6ae_74089e62",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-17T09:56:16Z",
+      "side": 1,
+      "message": "Set \"chassis identify\" to default and verify that LED blinks for 15s.",
+      "range": {
+        "startLine": 212,
+        "startChar": 6,
+        "endLine": 212,
+        "endChar": 75
+      },
+      "revId": "a5e6baf39b0db1df70cafd3c00348bacbb160dbf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7467c26a_2a39fe8d",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-17T09:56:16Z",
+      "side": 1,
+      "message": "remove whitespace",
+      "range": {
+        "startLine": 218,
+        "startChar": 46,
+        "endLine": 218,
+        "endChar": 47
+      },
+      "revId": "a5e6baf39b0db1df70cafd3c00348bacbb160dbf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b65447ef_e807919a",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-17T09:56:16Z",
+      "side": 1,
+      "message": "Set chassis identify to \"off\" and \"force\" using IPMI and verify.",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 230,
+        "endChar": 54
+      },
+      "revId": "a5e6baf39b0db1df70cafd3c00348bacbb160dbf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05814d21_40fe8112",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-17T09:56:16Z",
+      "side": 1,
+      "message": "Fix this",
+      "range": {
+        "startLine": 231,
+        "startChar": 12,
+        "endLine": 231,
+        "endChar": 95
+      },
+      "revId": "a5e6baf39b0db1df70cafd3c00348bacbb160dbf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c12a170_28b44bfe",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-17T09:56:16Z",
+      "side": 1,
+      "message": "Verify that Redfish identify LED system with given state.",
+      "range": {
+        "startLine": 272,
+        "startChar": 21,
+        "endLine": 272,
+        "endChar": 74
+      },
+      "revId": "a5e6baf39b0db1df70cafd3c00348bacbb160dbf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8bb20ced_566a6641",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-17T09:56:16Z",
+      "side": 1,
+      "message": "led_value",
+      "range": {
+        "startLine": 277,
+        "startChar": 6,
+        "endLine": 277,
+        "endChar": 15
+      },
+      "revId": "a5e6baf39b0db1df70cafd3c00348bacbb160dbf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
