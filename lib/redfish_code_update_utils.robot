@@ -173,8 +173,10 @@ Redfish Upload Image And Check Progress State
     ${image_id}=  Get Latest Image ID
     Rprint Vars  image_id
 
-    Wait Until Keyword Succeeds  1 min  01 sec
-    ...  Check Image Update Progress State  match_state='Disabled', 'Updating'  image_id=${image_id}
+    # We have noticed firmware inventory state Enabled quickly as soon the image
+    # is uploaded via redfish.
+    Wait Until Keyword Succeeds  1 min  03 sec
+    ...  Check Image Update Progress State  match_state='Disabled', 'Updating', 'Enabled'  image_id=${image_id}
 
     Wait Until Keyword Succeeds  8 min  10 sec
     ...  Check Image Update Progress State
