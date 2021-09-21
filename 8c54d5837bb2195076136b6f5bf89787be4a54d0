@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "279e6343_32e3e93f",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2021-09-21T13:40:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4344ddc2_08222890",
+      "range": {
+        "startLine": 178,
+        "startChar": 23,
+        "endLine": 178,
+        "endChar": 25
+      },
+      "revId": "8c54d5837bb2195076136b6f5bf89787be4a54d0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b9600bf6_911d5787",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2021-09-21T13:40:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a93d1a9_873b2fac",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 77
+      },
+      "revId": "8c54d5837bb2195076136b6f5bf89787be4a54d0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "015022b5_f07d843a",
         "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
         "patchSetId": 7
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "51671db3_8963658c",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2021-09-21T13:40:55Z",
+      "side": 1,
+      "message": "Using Refresh GUI instead of Refresh GUI And Verify Element Value as Disabled is not found.",
+      "parentUuid": "015022b5_f07d843a",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 48
+      },
+      "revId": "8c54d5837bb2195076136b6f5bf89787be4a54d0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5e43de35_c5f78b2e",
         "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
         "patchSetId": 7
@@ -91,6 +163,30 @@
       "revId": "8c54d5837bb2195076136b6f5bf89787be4a54d0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6e7c030_14eb56bd",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2021-09-21T13:40:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e43de35_c5f78b2e",
+      "range": {
+        "startLine": 213,
+        "startChar": 4,
+        "endLine": 213,
+        "endChar": 73
+      },
+      "revId": "8c54d5837bb2195076136b6f5bf89787be4a54d0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
