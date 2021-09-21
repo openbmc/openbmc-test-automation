@@ -11,7 +11,7 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
-${xpath_sessions_heading}  //h1[text()="Sessions"]
+${xpath_sessions_heading}  //h1[text()="HMC and user sessions"]
 
 
 *** Test Cases ***
