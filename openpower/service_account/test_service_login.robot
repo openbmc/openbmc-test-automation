@@ -65,6 +65,32 @@ Verify Service Login Failure With Incorrect Password
     ...  Redfish.Login  service  ${incorrect_service_password}
 
 
+Verify SSH Login Access With Service User And Admin User
+    [Documentation]  Verify SSH Login Access With Service User And Admin User.
+    [Tags]  Verify_SSH_Login_Access_With_Service_User_And_Admin_User
+
+    Remove Existing ACF
+    Upload Valid ACF
+
+    # Attempt SSH login with service user
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    ${status}=   Run Keyword And Return Status  SSHLibrary.Login  service  ${SERVICE_USER_PASSWORD}
+    Should Be Equal  ${status}  ${True}
+
+    # Create a Admin User
+    ${payload}=  Create Dictionary
+    ...  UserName=new_admin  Password=TestPwd1  RoleId=Administrator  Enabled=${True}
+    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}
+
+    # Attempt SSH login with admin user
+    ${status}=   Run Keyword And Return Status  SSHLibrary.Login  new_admin  TestPwd1
+    Should Be Equal  ${status}  ${False}
+
+    # Delete created user.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/new_admin
+
+
 *** Keywords ***
 
 Suite Setup Execution
