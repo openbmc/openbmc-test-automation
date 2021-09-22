@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f7a75b0_68e27fdd",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-22T05:41:52Z",
+      "side": 1,
+      "message": "I would say let have only service user related test here. Let\u0027s have admin user related test in some other bucket. Remove verification for admin user.",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 56
+      },
+      "revId": "acd58321c34f0e73d7908a39a6a941920035753d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e62b2c6_e5346c34",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-22T05:41:52Z",
+      "side": 1,
+      "message": "Verify SSH login access with service user.",
+      "range": {
+        "startLine": 69,
+        "startChar": 21,
+        "endLine": 69,
+        "endChar": 77
+      },
+      "revId": "acd58321c34f0e73d7908a39a6a941920035753d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c16f329a_a5cae0c4",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-22T05:41:52Z",
+      "side": 1,
+      "message": "This should go in test setup.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 20
+      },
+      "revId": "acd58321c34f0e73d7908a39a6a941920035753d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "76ab560e_0d4375fc",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-22T05:41:52Z",
+      "side": 1,
+      "message": "end with a period \".\"",
+      "range": {
+        "startLine": 75,
+        "startChar": 6,
+        "endLine": 75,
+        "endChar": 41
+      },
+      "revId": "acd58321c34f0e73d7908a39a6a941920035753d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "15466868_eb8c3f85",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-22T05:41:52Z",
+      "side": 1,
+      "message": "Remove this as suggested above.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 65
+      },
+      "revId": "acd58321c34f0e73d7908a39a6a941920035753d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
