@@ -73,7 +73,7 @@ Verify User Cannot Delete ReadOnly Property IPv4Addresses
     ${curr_origin}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
     Run Keyword If  ${curr_origin} == ${True}  Set VMI IPv4 Origin  ${False}  ${HTTP_ACCEPTED}
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
-    Delete VMI IPv4 Address  IPv4Addresses  valid_status_code=${HTTP_BAD_REQUEST}
+    Delete VMI IPv4 Address  IPv4Addresses  valid_status_code=${HTTP_FORBIDDEN}
 
 
 Assign Valid And Invalid Static IPv4 Address To VMI
@@ -154,7 +154,7 @@ Delete VMI Static IP Address And Verify
 Verify Successful VMI IP Static Configuration On HOST Boot After Session Delete
     [Documentation]  Verify VMI IP static Configuration On HOST Boot After session deleted.
     [Tags]  Verify_Successful_VMI_IP_Static_Configuration_On_HOST_Boot_After_Session_Delete
-    [Teardown]  Run keywords  Delete VMI IPv4 Address  IPv4Addresses  AND  Test Teardown Execution
+    [Teardown]  Run keywords  Delete VMI IPv4 Address  AND  Test Teardown Execution
 
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
 
@@ -247,7 +247,7 @@ Verify User Cannot Delete VMI DHCP IP Address
     [Setup]  Set VMI IPv4 Origin  ${True}
     [Teardown]  Test Teardown Execution
 
-    Delete VMI IPv4 Address  IPv4Addresses  valid_status_code=${HTTP_BAD_REQUEST}
+    Delete VMI IPv4 Address  IPv4Addresses  valid_status_code=${HTTP_FORBIDDEN}
     ${resp}=  Redfish.Get
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${ethernet_interface}
     Should Not Be Empty  ${resp.dict["IPv4Addresses"]}
@@ -474,7 +474,6 @@ Delete VMI Static IP Address Using Different Users
 
     Redfish.Login  ${username}  ${password}
     Delete VMI IPv4 Address  delete_param=IPv4StaticAddresses  valid_status_code=${valid_status_code}
-    Redfish.Logout
 
 
 Config VMI Static IP Address Using Different Users
@@ -493,7 +492,6 @@ Config VMI Static IP Address Using Different Users
 
     Redfish.Login  ${username}  ${password}
     Set Static IPv4 Address To VMI And Verify  ${ip}  ${gateway}  ${netmask}  ${valid_status_code}
-    Redfish.Logout
 
 
 Read VMI Static IP Address Using Different Users
@@ -509,7 +507,6 @@ Read VMI Static IP Address Using Different Users
     Redfish.Get
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${ethernet_interface}
     ...  valid_status_codes=[${valid_status_code}]
-    Redfish.Logout
 
 
 Delete BMC Users Using Redfish
@@ -532,7 +529,6 @@ Update User Role And Set VMI IPv4 Origin
 
     Redfish.Login  ${username}  ${password}
     Set VMI IPv4 Origin  ${dhcp_enabled}  ${valid_status_code}
-    Redfish.Logout
 
 
 Suite Teardown Execution
@@ -541,4 +537,5 @@ Suite Teardown Execution
     Run Keyword If  ${vmi_network_conf} != ${None}
     ...  Set Static IPv4 Address To VMI And Verify  ${vmi_network_conf["IPv4_Address"]}
     ...  ${vmi_network_conf["IPv4_Gateway"]}  ${vmi_network_conf["IPv4_SubnetMask"]}
+    Delete All Redfish Sessions
     Redfish.Logout
