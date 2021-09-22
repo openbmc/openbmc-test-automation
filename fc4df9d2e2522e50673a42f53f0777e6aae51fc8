@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "96948c76_7aa28420",
+        "filename": "lib/protocol_setting_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-09-22T11:22:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ce7303f_0acec5f1",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 41
+      },
+      "revId": "fc4df9d2e2522e50673a42f53f0777e6aae51fc8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5c412594_d2ac5243",
         "filename": "lib/protocol_setting_utils.robot",
         "patchSetId": 2
@@ -36,6 +60,24 @@
       "writtenOn": "2021-09-22T09:41:42Z",
       "side": 1,
       "message": "may need to add here\nResource     ../../lib/bmc_redfish_resource.robot  \nand can remove the same from test file then",
+      "revId": "fc4df9d2e2522e50673a42f53f0777e6aae51fc8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "384d9816_27170b48",
+        "filename": "lib/protocol_setting_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-09-22T11:22:55Z",
+      "side": 1,
+      "message": "it works, not needed here.",
+      "parentUuid": "5c412594_d2ac5243",
       "revId": "fc4df9d2e2522e50673a42f53f0777e6aae51fc8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -56,6 +98,24 @@
       "revId": "fc4df9d2e2522e50673a42f53f0777e6aae51fc8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f68811c1_c60b7990",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-09-22T11:22:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef86a1a4_495b7b75",
+      "revId": "fc4df9d2e2522e50673a42f53f0777e6aae51fc8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
