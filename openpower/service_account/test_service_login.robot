@@ -76,6 +76,18 @@ Verify SSH Login Access With Service User
     Should Be Equal  ${status}  ${True}
 
 
+Verify SSH Login Failure With Incorrect Service User Password
+    [Documentation]  Verify SSH login failure with incorrect service user password.
+    [Tags]  Verify_SSH_Login_Failure_With_Incorrect_Service_User_Password
+    [Setup]  Remove Existing ACF  AND  Upload Valid ACF
+
+    # Attempt SSH login with service user.
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    # Attempt login with invalid password
+    ${status}=   Run Keyword And Return Status  SSHLibrary.Login  service  ${SERVICE_USER_PASSWORD}123
+    Should Be Equal  ${status}  ${False}
+
+
 *** Keywords ***
 
 Suite Setup Execution
