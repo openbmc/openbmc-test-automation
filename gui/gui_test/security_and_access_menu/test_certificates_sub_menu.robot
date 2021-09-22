@@ -87,7 +87,8 @@ Verify Installed CA Certificate
     ${file_data}=  Generate Certificate File Data  CA
     Install Certificate File On BMC  ${REDFISH_CA_CERTIFICATE_URI}  ok  data=${file_data}
 
-    # Verify CA certificate availability in GUI.
+    # Refresh GUI and verify CA certificate availability in GUI.
+    Refresh GUI
     Wait Until Page Contains  CA Certificate  timeout=10
 
 
@@ -112,7 +113,8 @@ Verify Installed LDAP Certificate
     ${file_data}=  Generate Certificate File Data  Client
     Install Certificate File On BMC  ${REDFISH_LDAP_CERTIFICATE_URI}  ok  data=${file_data}
 
-    # Verify certificate is available in GUI.
+    # Refresh GUI and verify certificate is available in GUI.
+    Refresh GUI
     Wait Until Page Contains  LDAP Certificate  timeout=10
 
 
