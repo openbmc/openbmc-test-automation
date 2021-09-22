@@ -65,6 +65,18 @@ Verify Service Login Failure With Incorrect Password
     ...  Redfish.Login  service  ${incorrect_service_password}
 
 
+Verify SSH Login Access With Incorrect Service User Password
+    [Documentation]  Verify SSH login access fails with incorrect service user password.
+    [Tags]  Verify_SSH_Login_Access_With_Incorrect_Service_User_Password
+    [Setup]  Remove Existing ACF  AND  Upload Valid ACF
+
+    # Attempt SSH login with service user.
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    ${incorrect_service_password} =  Catenate  SEPARATOR=  ${SERVICE_USER_PASSWORD}  123
+    ${status}=   Run Keyword And Return Status  SSHLibrary.Login  service  ${incorrect_service_password}
+    Should Be Equal  ${status}  ${False}
+
+
 *** Keywords ***
 
 Suite Setup Execution
