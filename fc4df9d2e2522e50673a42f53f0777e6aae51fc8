@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5c412594_d2ac5243",
+        "filename": "lib/protocol_setting_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-09-22T09:41:42Z",
+      "side": 1,
+      "message": "may need to add here\nResource     ../../lib/bmc_redfish_resource.robot  \nand can remove the same from test file then",
+      "revId": "fc4df9d2e2522e50673a42f53f0777e6aae51fc8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef86a1a4_495b7b75",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-09-22T09:41:42Z",
+      "side": 1,
+      "message": "line 4 can be removed as already present in library",
+      "revId": "fc4df9d2e2522e50673a42f53f0777e6aae51fc8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
