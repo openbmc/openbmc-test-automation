@@ -22,6 +22,30 @@
       "revId": "319d9953df224e7dacf97c4c65a33bc149f6bc55",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88665910_a3a8aac8",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2021-09-22T13:12:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b85144b_f49cac0e",
+      "range": {
+        "startLine": 14,
+        "startChar": 32,
+        "endLine": 14,
+        "endChar": 62
+      },
+      "revId": "319d9953df224e7dacf97c4c65a33bc149f6bc55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
