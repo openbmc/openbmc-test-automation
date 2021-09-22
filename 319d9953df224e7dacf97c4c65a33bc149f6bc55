@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b85144b_f49cac0e",
+        "filename": "gui/gui_test/security_and_access_menu/test_sessions_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-22T05:46:05Z",
+      "side": 1,
+      "message": "We should have a downstream code for GUI to have this. But for time being, you can use xpath like below:\n\n//h1[contains(text(),\u0027sessions\u0027)]",
+      "range": {
+        "startLine": 14,
+        "startChar": 32,
+        "endLine": 14,
+        "endChar": 62
+      },
+      "revId": "319d9953df224e7dacf97c4c65a33bc149f6bc55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
