@@ -6,6 +6,8 @@ Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/bmc_redfish_utils.robot
 
+Library          SSHLibrary
+
 Test Setup       Redfish.Login
 Test Teardown    Test Teardown Execution
 
@@ -335,6 +337,19 @@ Verify Error While Deleting Root User
     [Tags]  Verify_Error_While_Deleting_Root_User
 
     Redfish.Delete  /redfish/v1/AccountService/Accounts/root  valid_status_codes=[${HTTP_FORBIDDEN}]
+
+
+Verify SSH Login Access With Admin User
+    [Documentation]  Verify that admin user does not have SSH login access.
+    [Tags]  Verify_SSH_Login_Access_With_Admin_User
+
+    # Create an admin User.
+    Redfish Create User  new_admin  TestPwd1  Administrator  ${True}
+
+    # Attempt SSH login with admin user.
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    ${status}=  Run Keyword And Return Status  SSHLibrary.Login  new_admin  TestPwd1
+    Should Be Equal  ${status}  ${False}
 
 
 *** Keywords ***
