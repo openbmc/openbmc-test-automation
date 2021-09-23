@@ -52,7 +52,7 @@ Verify Lock Is Not Persistent On BMC Reboot
 
 Check After Reboot Transaction ID Set To Default
     [Documentation]  After reboot, the transaction id starts with default i.e. 1,
-    ...  if any lock is aquired.
+    ...  if any lock is acquired.
     [Tags]  Check_After_Reboot_Transaction_ID_Set_To_Default
     [Template]  Verify Acquire And Release Lock In Loop
 
