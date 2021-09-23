@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "514040e6_dbe789b8",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-09-23T08:38:30Z",
+      "side": 1,
+      "message": "Planning to do in another file other than redfish/managers/test_bmc_network_mac.robot as \nthis would need ACF file upload code also.",
+      "parentUuid": "9f20551c_25cbfe66",
+      "revId": "01468aea0d326f75b65d2f9445e833db72a43a2f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4453331a_294c8ab3",
         "filename": "openpower/service_account/test_service_login.robot",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "1dcedd79_7efaae79",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-09-23T08:38:30Z",
+      "side": 1,
+      "message": "will be considered.",
+      "parentUuid": "4453331a_294c8ab3",
+      "revId": "01468aea0d326f75b65d2f9445e833db72a43a2f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c7d569cb_515e1ea3",
         "filename": "openpower/service_account/test_service_login.robot",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2021-09-09T10:17:01Z",
       "side": 1,
       "message": "original_mac",
+      "revId": "01468aea0d326f75b65d2f9445e833db72a43a2f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "723b4532_4a4fb8ed",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-09-23T08:38:30Z",
+      "side": 1,
+      "message": "will be done",
+      "parentUuid": "c7d569cb_515e1ea3",
       "revId": "01468aea0d326f75b65d2f9445e833db72a43a2f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -81,6 +135,30 @@
       "writtenOn": "2021-09-08T14:53:15Z",
       "side": 1,
       "message": "MAC address modification test are pretty destructive. Please move this as part of separate bucket which is not run as part CT.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 30
+      },
+      "revId": "01468aea0d326f75b65d2f9445e833db72a43a2f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e43442e_fa55fb75",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-09-23T08:38:30Z",
+      "side": 1,
+      "message": "will create another file inside same folder structure",
+      "parentUuid": "3d9cc607_d9f76987",
       "range": {
         "startLine": 69,
         "startChar": 0,
