@@ -76,9 +76,9 @@ Fail To Acquire Lock On Another Lock
     [Template]  Verify Acquire Lock Fails On Another Lock
 
     # client_id    lock_type
-    HMCID-01       ReadCase2,WriteCase2
-    HMCID-01       WriteCase2,WriteCase2
-    HMCID-01       WriteCase2,ReadCase2
+    HMCID-01       ReadCase7,WriteCase6
+    HMCID-01       WriteCase6,WriteCase6
+    HMCID-01       WriteCase6,ReadCase7
 
 
 Acquire Lock After Reboot
