@@ -11,6 +11,12 @@ Library          ../../lib/bmc_network_utils.py
 
 *** Variables ***
 
+&{DHCP_ENABLED}           DHCPEnabled=${True}
+&{DHCP_DISABLED}          DHCPEnabled=${False}
+
+&{ENABLE_DHCP}            DHCPv4=&{DHCP_ENABLED}
+&{DISABLE_DHCP}           DHCPv4=&{DHCP_DISABLED}
+
 ${wait_time}              10s
 
 *** Keywords ***

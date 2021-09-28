@@ -57,6 +57,35 @@ Configure VMI Both Interfaces In Dynamic And Verify
     Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
     Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}  ${interface_list}[1]
 
+Configure VMI First Interface In Static And Second In Dynamic And Verify
+    [Documentation]  Configure VMI first interface in static mode and second interface in dynamic mode
+    ...  and verify first gets static ip details and second gets dynamic ip details.
+    [Tags]  Configure_VMI_First_Interface_In_Static_And_Second_In_Dynamic_And_Verify
+    [Teardown]   Run keywords  Delete VMI IPv4 Address  AND
+    ...  Set VMI IPv4 Origin  ${False}  ${HTTP_ACCEPTED}  ${interface_list}[1]
+    ...  AND  Test Teardown
+
+    Set Static IPv4 Address To VMI And Verify  ${test_ipv4_1}  ${test_gateway_1}
+    ...  ${test_netmask_1}
+    Set VMI IPv4 Origin  ${True}  ${HTTP_ACCEPTED}  ${interface_list}[1]
+    ${default}=  Set Variable  0.0.0.0
+    Verify VMI Network Interface Details  ${test_ipv4_1}  Static  ${test_gateway_1}  ${test_netmask_1}
+    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}  ${interface_list}[1]
+
+Configure VMI First Interface In Dynamic And Second In Static And Verify
+    [Documentation]  Configure VMI first interface in dynamic mode and second interface in static mode
+    ...  and verify first gets dynamic ip details and second gets static ip details.
+    [Tags]  Configure_VMI_First_Interface_In_Dynamic_And_Second_In_Static_And_Verify
+    [Teardown]   Run keywords  Set VMI IPv4 Origin  ${False}  AND
+    ...  Delete VMI IPv4 Address  IPv4StaticAddresses  ${HTTP_ACCEPTED}  ${interface_list}[1]
+    ...  AND  Test Teardown
+
+    Set VMI IPv4 Origin  ${True}
+    ${default}=  Set Variable  0.0.0.0
+    Set Static IPv4 Address To VMI And Verify  ${test_ipv4_1}  ${test_gateway_1}
+    ...  ${test_netmask_1}  ${HTTP_ACCEPTED}  ${interface_list}[1]
+    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
+
 *** Keywords ***
 
 Suite Setup Execution
