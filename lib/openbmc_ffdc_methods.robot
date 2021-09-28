@@ -294,6 +294,31 @@ Log FFDC Get Requests
 
     [Return]  ${ffdc_file_list}
 
+
+Log FFDC Get Redfish Requests
+    [Documentation]  Run the get requests associated with the key and return a
+    ...              list of generated files.
+    [Arguments]  ${key_index}
+
+    # Note: Output will be in JSON pretty_print format.
+
+    # Description of argument(s):
+    # key_index  The key to the FFDC_GET_REDFISH_REQUEST dictionary that contains the
+    #            get requests that are to be run.
+
+    @{ffdc_file_list}=  Create List
+    @{cmd_list}=  Get FFDC Get Redfish Request  ${key_index}
+
+    FOR  ${cmd}  IN  @{cmd_list}
+      ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
+      ${resp}=  Redfish.Get  ${cmd[1]}
+      Write Data To File  ${\n}${resp}${\n}  ${logpath}
+      Append To List  ${ffdc_file_list}  ${logpath}
+    END
+
+    [Return]  ${ffdc_file_list}
+
+
 BMC FFDC Get Requests
     [Documentation]  Iterate over get request list and return a list of
     ...              generated files.
@@ -311,6 +336,26 @@ BMC FFDC Get Requests
     END
 
     [Return]  ${ffdc_file_list}
+
+
+BMC FFDC Get Redfish Requests
+    [Documentation]  Iterate over get request list and return a list of
+    ...              generated files.
+
+    @{ffdc_file_list}=  Create List
+
+    @{entries}=  Get ffdc get redfish request index
+    # Example of entries:
+    # entries:
+    #  entries[0]:  GET REQUESTS
+
+    FOR  ${index}  IN  @{entries}
+      ${ffdc_file_sub_list}=  Log FFDC Get Redfish Requests  ${index}
+      ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}  ${ffdc_file_sub_list}
+    END
+
+    [Return]  ${ffdc_file_list}
+
 
 Log OS All distros FFDC
     [Documentation]  Run commands from FFDC_OS_ALL_DISTROS_FILE to create FFDC

@@ -157,6 +157,19 @@ FFDC_GET_REQUEST = {
         'BMC_USER.txt': ENUMERATE_USER,
     },
 }
+
+REDFISH_BASE = '/redfish/v1/'
+REDFISH_ELOG = REDFISH_BASE + 'Systems/system/LogServices/EventLog/Entries'
+
+# Add file name and corresponding Get Request
+FFDC_GET_REDFISH_REQUEST = {
+    'GET REQUESTS':
+    {
+        # File Name         Command
+        'BMC_redfish_elog.txt': REDFISH_ELOG,
+    },
+}
+
 # Define your keywords in method/utils and call here
 FFDC_METHOD_CALL = {
     'BMC LOGS':
@@ -165,6 +178,7 @@ FFDC_METHOD_CALL = {
         'FFDC Generic Report': 'BMC FFDC Manifest',
         'BMC Specific Files': 'BMC FFDC Files',
         'Get Request FFDC': 'BMC FFDC Get Requests',
+        'Get Redfish Request FFDC': 'BMC FFDC Get Redfish Requests',
         'OS FFDC': 'OS FFDC Files',
         'Core Files': 'SCP Coredump Files',
         'SEL Log': 'Collect eSEL Log',
@@ -225,6 +239,16 @@ class openbmc_ffdc_list():
         """
         return FFDC_GET_REQUEST[i_type].items()
 
+    def get_ffdc_get_redfish_request(self, i_type):
+        r"""
+        #######################################################################
+        #   @brief    This method returns the list from the dictionary for scp
+        #   @param    i_type: @type string: string index lookup
+        #   @return   List of key pair from the dictionary
+        #######################################################################
+        """
+        return FFDC_GET_REDFISH_REQUEST[i_type].items()
+
     def get_ffdc_cmd_index(self):
         r"""
         #######################################################################
@@ -242,6 +266,15 @@ class openbmc_ffdc_list():
         #######################################################################
         """
         return FFDC_GET_REQUEST.keys()
+
+    def get_ffdc_get_redfish_request_index(self):
+        r"""
+        #######################################################################
+        #   @brief    This method returns the list index from dictionary
+        #   @return   List of index to the dictionary
+        #######################################################################
+        """
+        return FFDC_GET_REDFISH_REQUEST.keys()
 
     def get_ffdc_file_index(self):
         r"""
