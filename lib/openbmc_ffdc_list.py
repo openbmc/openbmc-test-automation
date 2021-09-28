@@ -59,6 +59,10 @@ FFDC_BMC_FILE = {
         'PEL_logs_display.json': 'peltool -a >/tmp/PEL_logs_display.json 2>&1',
         'BMC_pldm_flight_recorder.txt': 'rm -rf /tmp/pldm_flight_recorder; killall -s SIGUSR1 pldmd;'
         + ' sleep 5; cat /tmp/pldm_flight_recorder > /tmp/BMC_pldm_flight_recorder.txt 2>&1;',
+        'OCC_state.txt': 'for i in {0..3};'
+        + ' do (echo /org/open_power/control/occ$i;'
+        + ' busctl get-property org.open_power.OCC.Control /org/open_power/control/occ$i'
+        + ' org.open_power.OCC.Status OccActive) done > /tmp/OCC_state.txt 2>&1',
     },
 }
 # Add file name and corresponding command needed for all Linux distributions
