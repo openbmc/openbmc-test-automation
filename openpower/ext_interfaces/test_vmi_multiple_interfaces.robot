@@ -44,6 +44,32 @@ Configure VMI Both Interfaces In Different Subnet And Verify
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4_2}  ${test_gateway_2}
     ...  ${test_netmask_2}  ${HTTP_ACCEPTED}  ${interface_list}[1]
 
+Configure VMI First Interface In Static And Second In Dynamic And Verify
+    [Documentation]  Configure VMI first interface in static second in dynamic mode and verify.
+    [Tags]  Configure_VMI_First_Interface_In_Static_And_Second_In_Dynamic_And_Verify
+    [Teardown]   Run keywords  Delete VMI IPv4 Address  AND
+    ...  Set VMI IPv4 Origin  ${False}  ${HTTP_ACCEPTED}  ${interface_list}[1]
+    ...  AND  Test Teardown
+
+    Set Static IPv4 Address To VMI And Verify  ${test_ipv4_1}  ${test_gateway_1}
+    ...  ${test_netmask_1}
+    Set VMI IPv4 Origin  ${True}  ${HTTP_ACCEPTED}  ${interface_list}[1]
+    ${default}=  Set Variable  0.0.0.0
+    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}  ${interface_list}[1]
+
+Configure VMI First Interface In Dynamic And Second In Static And Verify
+    [Documentation]  Configure VMI first interface in dynamic second in static mode and verify.
+    [Tags]  Configure_VMI_First_Interface_In_Dynamic_And_Second_In_Static_And_Verify
+    [Teardown]   Run keywords  Set VMI IPv4 Origin  ${False}  AND
+    ...  Delete VMI IPv4 Address  IPv4StaticAddresses  ${HTTP_ACCEPTED}  ${interface_list}[1]
+    ...  AND  Test Teardown
+
+    Set VMI IPv4 Origin  ${True}
+    ${default}=  Set Variable  0.0.0.0
+    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
+    Set Static IPv4 Address To VMI And Verify  ${test_ipv4_1}  ${test_gateway_1}
+    ...  ${test_netmask_1}  ${HTTP_ACCEPTED}  ${interface_list}[1]
+
 *** Keywords ***
 
 Suite Setup Execution
