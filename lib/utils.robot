@@ -7,6 +7,7 @@ Resource                ../lib/rest_client.robot
 Resource                ../lib/connection_client.robot
 Resource                ../lib/boot_utils.robot
 Resource                ../lib/common_utils.robot
+Resource                ../lib/serial_connection/serial_console_client.robot
 Library                 String
 Library                 DateTime
 Library                 Process
@@ -944,3 +945,17 @@ Match State
 
     ${current_state}=  Redfish Get States
     Dictionaries Should Be Equal  ${match_state}  ${current_state}
+
+
+Set Watchdog Interval Using Busctl
+    [Documentation]  Set Watchdog time interval.
+    [Arguments]  ${milliseconds}
+
+    # Description of argument(s):
+    # miliseconds      Time interval for watchdog timer
+
+    ${cmd}=  Set Variable  busctl set-property xyz.openbmc_project.Watchdog
+    ...                    ${HOST_WATCHDOG_URI}
+    ...                    xyz.openbmc_project.State.Watchdog Interval t ${milliseconds}
+    Execute Command On Serial Console  ${cmd}
+

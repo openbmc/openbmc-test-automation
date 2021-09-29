@@ -94,6 +94,7 @@ Verify Watchdog URL When Host Is On And Off
     ${resp}=  OpenBMC Get Request  ${HOST_WATCHDOG_URI}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -144,3 +145,18 @@ Watchdog Object Should Exist
 
     ${resp}=  OpenBMC Get Request  ${WATCHDOG_URI}host0
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
+
+Redfish Initiate Auto Reboot
+    [Documentation]  Initiate an auto reboot.
+    [Arguments]  ${interval}=2000
+
+    # Description of argument(s):
+    # interval  Value in milliseconds to set Watchdog interval
+
+    # Set auto reboot policy
+    Redfish Set Auto Reboot  RetryAttempts
+
+    # Set watchdog timer
+    Set Watchdog Interval Using Busctl  ${interval}
+
