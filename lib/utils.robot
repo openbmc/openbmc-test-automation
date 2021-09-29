@@ -944,3 +944,32 @@ Match State
 
     ${current_state}=  Redfish Get States
     Dictionaries Should Be Equal  ${match_state}  ${current_state}
+
+
+Redfish Initiate Auto Reboot
+    [Documentation]  Initiate an auto reboot.
+    [Arguments]  ${interval}=2000
+
+    # Description of argument(s):
+    # interval  Value in milliseconds to set Watchdog interval
+
+    # Set auto reboot policy
+    Redfish Set Auto Reboot  RetryAttempts
+
+    # Set watchdog timer
+    Set Watchdog Interval Using Busctl  ${interval}
+
+
+
+Set Watchdog Interval Using Busctl
+    [Documentation]  Set Watchdog time interval.
+    [Arguments]  ${milliseconds}=1000
+
+    # Description of argument(s):
+    # miliseconds      Time interval for watchdog timer
+
+    ${cmd}=  Set Variable  busctl set-property xyz.openbmc_project.Watchdog
+    ...                    ${HOST_WATCHDOG_URI}
+    ...                    xyz.openbmc_project.State.Watchdog Interval t ${milliseconds}
+    BMC Execute Command  ${cmd}
+

@@ -94,6 +94,7 @@ Verify Watchdog URL When Host Is On And Off
     ${resp}=  OpenBMC Get Request  ${HOST_WATCHDOG_URI}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
 
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -144,3 +145,4 @@ Watchdog Object Should Exist
 
     ${resp}=  OpenBMC Get Request  ${WATCHDOG_URI}host0
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+
