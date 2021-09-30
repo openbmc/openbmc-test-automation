@@ -956,6 +956,9 @@ Redfish Initiate Auto Reboot
     # Set auto reboot policy
     Redfish Set Auto Reboot  RetryAttempts
 
+    Redfish Power Operation  On
+    Sleep  30s
+
     # Set watchdog timer
     Set Watchdog Interval Using Busctl  ${interval}
 
@@ -968,8 +971,8 @@ Set Watchdog Interval Using Busctl
     # Description of argument(s):
     # miliseconds      Time interval for watchdog timer
 
-    ${cmd}=  Set Variable  busctl set-property xyz.openbmc_project.Watchdog
-    ...                    ${HOST_WATCHDOG_URI}
-    ...                    xyz.openbmc_project.State.Watchdog Interval t ${milliseconds}
+    ${cmd}=  Catenate  busctl set-property xyz.openbmc_project.Watchdog
+    ...                /xyz/openbmc_project/watchdog/host0
+    ...                xyz.openbmc_project.State.Watchdog Interval t ${milliseconds}
     BMC Execute Command  ${cmd}
 
