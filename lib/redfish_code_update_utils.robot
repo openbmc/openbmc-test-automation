@@ -175,7 +175,7 @@ Redfish Upload Image And Check Progress State
 
     # We have noticed firmware inventory state Enabled quickly as soon the image
     # is uploaded via redfish.
-    Wait Until Keyword Succeeds  1 min  03 sec
+    Wait Until Keyword Succeeds  2 min  05 sec
     ...  Check Image Update Progress State  match_state='Disabled', 'Updating', 'Enabled'  image_id=${image_id}
 
     Wait Until Keyword Succeeds  8 min  10 sec
