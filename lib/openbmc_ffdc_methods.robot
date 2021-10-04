@@ -590,7 +590,8 @@ Collect PEL Log
 Enumerate Redfish Resources
     [Documentation]  Enumerate /redfish/v1 resources and properties to
     ...              a file. Return a list which contains the file name.
-    [Arguments]  ${log_prefix_path}=${LOG_PREFIX}
+    [Arguments]  ${log_prefix_path}=${LOG_PREFIX}  ${enum_uri}=/redfish/v1
+    ...          ${file_enum_name}=redfish_resource_properties.txt
 
     # Description of argument(s):
     # log_prefix_path    The location specifying where to create FFDC file(s).
@@ -601,7 +602,7 @@ Enumerate Redfish Resources
     Return From Keyword If   ${status} == ${False}
 
     # Get the Redfish resources and properties.
-    ${json_data}=  redfish_utils.Enumerate Request  /redfish/v1
+    ${json_data}=  redfish_utils.Enumerate Request  ${enum_uri}
     # Typical output:
     # {
     #  "@odata.id": "/redfish/v1",
@@ -620,8 +621,7 @@ Enumerate Redfish Resources
     # }
 
     @{ffdc_file_list}=  Create List
-    ${logpath}=  Catenate  SEPARATOR=  ${log_prefix_path}
-    ...  redfish_resource_properties.txt
+    ${logpath}=  Catenate  SEPARATOR=  ${log_prefix_path}  ${file_enum_name}
     Create File  ${logpath}
     Write Data To File  "${\n}${json_data}${\n}"  ${logpath}
 

@@ -160,6 +160,7 @@ FFDC_GET_REQUEST = {
 
 REDFISH_BASE = '/redfish/v1/'
 REDFISH_ELOG = REDFISH_BASE + 'Systems/system/LogServices/EventLog/Entries'
+REDFISH_FIRMWARE = REDFISH_BASE + 'UpdateService/FirmwareInventory'
 
 # Add file name and corresponding Get Request
 FFDC_GET_REDFISH_REQUEST = {
@@ -188,6 +189,9 @@ FFDC_METHOD_CALL = {
         'Dump HB Files': 'SCP Dump HB Files',
         'PEL Files': 'Collect PEL Log',
         'Redfish Log': 'Enumerate Redfish Resources',
+        'Firmware Log': 'Enumerate Redfish Resources  '
+        + ' enum_uri=/redfish/v1/UpdateService/FirmwareInventory  '
+        + ' file_enum_name=redfish_FIRMWARE_list.txt',
         'Redfish OEM Log': 'Enumerate Redfish OEM Resources',
     },
 }
