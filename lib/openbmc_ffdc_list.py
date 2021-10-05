@@ -127,6 +127,12 @@ FFDC_OS_AIX_FILE = {
     },
 }
 
+try:
+    redfish_support_trans_state = os.environ.get('REDFISH_SUPPORT_TRANS_STATE', 0) or \
+        int(BuiltIn().get_variable_value("${REDFISH_SUPPORT_TRANS_STATE}", default=0))
+except RobotNotRunningError:
+    pass
+
 OPENBMC_BASE = '/xyz/openbmc_project/'
 OPENPOWER_BASE = '/org/open_power/'
 ENUMERATE_SENSORS = OPENBMC_BASE + 'sensors/enumerate'
@@ -157,6 +163,11 @@ FFDC_GET_REQUEST = {
         'BMC_USER.txt': ENUMERATE_USER,
     },
 }
+
+# Remove the REST dictionary elements.
+if redfish_support_trans_state == 1:
+    for key in list(FFDC_GET_REQUEST):
+        del FFDC_GET_REQUEST[key]
 
 REDFISH_BASE = '/redfish/v1/'
 REDFISH_ELOG = REDFISH_BASE + 'Systems/system/LogServices/EventLog/Entries'
