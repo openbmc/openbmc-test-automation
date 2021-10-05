@@ -76,6 +76,11 @@ Installing tox:
     $ pip install -U tox
 ```
 
+Installing expect:
+```
+    $ sudo apt-get install expect (Ubuntu example)
+```
+
 ## OpenBMC Test Development ##
 
 These documents contain details on developing OpenBMC test code and debugging.
