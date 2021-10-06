@@ -90,6 +90,8 @@ Suite Setup Execution
     # Checking for file existence.
     Valid File Path  IMAGE_FILE_PATH
 
+    Redfish Power Off  stack_mode=skip
+
 
 Redfish Firmware Update In Loop
     [Documentation]  Update the firmware in loop.
