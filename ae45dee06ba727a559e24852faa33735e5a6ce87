@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "983957bd_ed485d9a",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-10-06T07:47:14Z",
+      "side": 1,
+      "message": "Remove the white space",
+      "range": {
+        "startLine": 18,
+        "startChar": 26,
+        "endLine": 18,
+        "endChar": 27
+      },
+      "revId": "ae45dee06ba727a559e24852faa33735e5a6ce87",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89a850c2_f8491fb9",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-10-06T07:47:14Z",
+      "side": 1,
+      "message": "This logic is not good. Make changes as suggested below\n    # Verify that chassis does not power ON during time power on time.\n    ${random_time}\u003d  Evaluate  random.randint(1, ${TIMER_POWER_ON})  modules\u003drandom\n    Sleep  ${random_time}\n\n    ${status}\u003d  Run Keyword And Return status  Is Chassis On\n    Should Be Equal  \u0027${status}\u0027 \u003d\u003d \u0027${False}\u0027\n\n    # Verify that chassis becomes ON after some time.\n    Wait Until Keyword Succeeds  2 min  15 sec  Is Chassis On",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 49
+      },
+      "revId": "ae45dee06ba727a559e24852faa33735e5a6ce87",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9c605c1_e16abb4c",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-10-06T07:47:14Z",
+      "side": 1,
+      "message": "[Return]",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 12
+      },
+      "revId": "ae45dee06ba727a559e24852faa33735e5a6ce87",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
