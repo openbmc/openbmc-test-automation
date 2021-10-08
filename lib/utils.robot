@@ -977,3 +977,12 @@ Set Watchdog Interval Using Busctl
     ...                xyz.openbmc_project.State.Watchdog Interval t ${milliseconds}
     BMC Execute Command  ${cmd}
 
+
+Stop PLDM Service And Wait
+    [Documentation]  Stop PLDM service and wait for Host to initiate reset.
+
+    BMC Execute Command  systemctl stop pldmd.service
+
+    # Check if BMC is still online.
+    Wait Until Keyword Succeeds  3 min  10 sec  Is BMC Unpingable
+    Wait For Host To Ping  ${OPENBMC_HOST}  2 min
