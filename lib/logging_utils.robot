@@ -260,6 +260,19 @@ Get Event Logs
     [Return]  ${members}
 
 
+Get Redfish Event Logs
+    [Documentation]  Pack the list of all available EventLog entries in dictionary.
+
+    ${packed_dict}=  Create Dictionary
+    ${error_logs}=  Get Event Logs
+
+    :FOR  ${idx}   IN  @{error_logs}
+       Set To Dictionary  ${packed_dict}    ${idx['@odata.id']}=${idx}
+    END
+
+    [Return]  &{packed_dict}
+
+
 Get Event Logs Not Ok
     [Documentation]  Get all event logs where the 'Severity' is not 'OK'.
 
