@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60b5ebf2_2d8fc52f",
+        "filename": "lib/utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-10-08T18:22:18Z",
+      "side": 1,
+      "message": "Suggestion: Host Initiate Reset When PLDM Service Stops",
+      "revId": "89bd229fbd783e9b69f5e9190656dcc8b8eb7de4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
