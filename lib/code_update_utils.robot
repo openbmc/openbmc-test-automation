@@ -582,10 +582,85 @@ Get Image Update Progress State
     #              "HealthRollup": "OK",
     #              "State": "Enabled"
     #            },
+
     ${status}=  Redfish.Get Attribute  /redfish/v1/UpdateService/FirmwareInventory/${image_id}  Status
     Rprint Vars  status
 
     [Return]  ${status["State"]}
+
+
+Get All Task
+    [Documentation]  Get all the active tasks.
+
+    #Redfish.Login
+    ${task_list}=  Redfish.Get Members List  /redfish/v1/TaskService/Tasks
+    Reverse List  ${task_list}
+    Log  ${task_list}
+    [Return]  ${task_list}
+
+
+Check For Target Uri
+    [Documentation]  Check all the task to filter update service target URI.
+    [Arguments]  ${task_list}
+
+    # Description of argument(s):
+    # task_list  List of all active task.
+
+    FOR  ${task}  IN  @{task_list}
+      ${status}=  Redfish.Get Attribute  ${task}  Payload
+      ${task_state}=  Redfish.Get Attribute  ${task}  TaskState
+      Return From Keyword If  '/redfish/v1/UpdateService' == '${status['TargetUri']}' and '${task_state}' != 'Completed'  ${task}
+    END
+
+    [Return]  None
+
+
+Get Target Uri Task
+    [Documentation]  Get the active task which has update service target URI.
+
+    ${task_list}=  Get All Task
+    ${num_records}=  Get Length  ${task_list}
+    ${updateservice_task}=  Check For TargetUri  ${task_list}
+    Log  ${updateservice_task}
+    [Return]  ${updateservice_task}
+
+
+Get Task Progress State
+    [Documentation]  Get the active task progress state.
+    [Arguments]  ${target_uri}
+
+    # Description of argument(s):
+    # target_uri   Active task which has update service tasrget uri.
+
+    &{tmp_dict}=  Create Dictionary
+
+    ${task_state}=  Redfish.Get Attribute  ${target_uri}  TaskState
+    Rprint Vars  task_state
+    Set To Dictionary  ${tmp_dict}  TaskState  ${task_state}
+
+    ${task_status}=  Redfish.Get Attribute  ${targeturi}  TaskStatus
+    Rprint Vars  task_status
+    Set To Dictionary  ${tmp_dict}  TaskStatus  ${task_status}
+
+    [Return]  ${tmp_dict}
+
+
+Check Task Progress State
+    [Documentation]  Check that the task update progress state matches the specified state.
+    [Arguments]  ${targeturi}  ${match_status}  ${match_state}
+
+    # Description of argument(s):
+    # target_uri    Active task which has update service tasrget uri.
+    # match_status  The expected state. This may be one or more comma-separated values
+    #               (e.g. Running, Completed). If the actual state matches
+    #                any of the states named in this argument, this keyword passes.
+    # match_state   The expected state. The value is (e.g. OK). If the actual state matches
+    #                any of the states named in this argument, this keyword passes.
+
+    ${task_info_dict}=  Get Task Progress State  targeturi=${target_uri}
+
+    Valid Value  task_info_dict['TaskStatus']  valid_values=[${match_status}]
+    Valid Value  task_info_dict['TaskState']  valid_values=[${match_state}]
 
 
 Get Firmware Image Version
