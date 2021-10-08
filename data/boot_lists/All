@@ -60,6 +60,8 @@ IPMI Power Reset
 IPMI Power Reset (mfg)
 Auto Reboot
 Auto Reboot (mfg)
+Host initd Reset
+Host initd Reset (mfg)
 Host Reboot
 Host Reboot (mfg)
 RF SYS GracefulRestart
