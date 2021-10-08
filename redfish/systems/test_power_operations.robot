@@ -38,7 +38,10 @@ Verify Redfish BMC PowerOn
 
     Redfish Power On
 
-    Run Keyword If  ${additional_power_check} == ${1}  Additional OCC And Power Check
+    Run Keyword If  ${additional_power_check} == ${1}
+    ...  Wait Until Keyword Succeeds  3 mins  30 secs  Match OCC And CPU State Count
+
+    Run Keyword If  ${additional_power_check} == ${1}  Power Check
 
 
 Verify Redfish BMC GracefulRestart
@@ -78,11 +81,8 @@ Test Teardown Execution
     Redfish.Logout
 
 
-Additional OCC And Power Check
-    [Documentation]  Verify OCC state and PowerConsumedWatts property.
-
-    # TODO: Replace OCC state check with redfish property when available.
-    Verify OCC State
+Power Check
+    [Documentation]  Verify PowerConsumedWatts property.
 
     ${power_uri_list}=  redfish_utils.Get Members URI  /redfish/v1/Chassis/  PowerControl
     Log List  ${power_uri_list}
