@@ -57,6 +57,8 @@ IPMI Power Cycle (mfg)
 IPMI Power Reset
 IPMI Power Reset (mfg)
 Auto Reboot
+Host initd Reset
+Host initd Reset (mfg)
 Auto Reboot (mfg)
 Host Reboot
 Host Reboot (mfg)
