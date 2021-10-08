@@ -25,6 +25,144 @@
     },
     {
       "key": {
+        "uuid": "efe57c8c_0e9fbd97",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-10-08T11:03:46Z",
+      "side": 1,
+      "message": "CMD_SET_TPO_TIME",
+      "range": {
+        "startLine": 12,
+        "startChar": 2,
+        "endLine": 12,
+        "endChar": 19
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc1ed3dd_29d5a30d",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-10-08T11:03:46Z",
+      "side": 1,
+      "message": "CMD_GET_TPO_TIME",
+      "range": {
+        "startLine": 15,
+        "startChar": 2,
+        "endLine": 15,
+        "endChar": 14
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d83cf20_8eac156b",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-10-08T11:03:46Z",
+      "side": 1,
+      "message": "This should be equal to the value of TIMER_POWER_ON right?",
+      "range": {
+        "startLine": 30,
+        "startChar": 4,
+        "endLine": 30,
+        "endChar": 40
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f44a3fe5_eb60fcc9",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-10-08T11:03:46Z",
+      "side": 1,
+      "message": "This can be moved to the setup if it is common across.",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 45
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "546e3926_1063fef8",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-10-08T11:03:46Z",
+      "side": 1,
+      "message": "I think its better to wait till timer set to make sure chassis doesnt turn on before that.",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 83
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e30e998_d37e5143",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-10-08T11:03:46Z",
+      "side": 1,
+      "message": "turns",
+      "range": {
+        "startLine": 46,
+        "startChar": 26,
+        "endLine": 46,
+        "endChar": 34
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1e584b53_03b7ddc5",
         "filename": "openpower/test_timed_power_on.robot",
         "patchSetId": 4
@@ -41,6 +179,29 @@
         "startChar": 4,
         "endLine": 56,
         "endChar": 51
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18ceeb5e_b3f35f8e",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-10-08T11:03:46Z",
+      "side": 1,
+      "message": "Add a new line after this.",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 24
       },
       "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
