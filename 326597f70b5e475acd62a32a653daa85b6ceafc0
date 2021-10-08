@@ -94,6 +94,29 @@
     },
     {
       "key": {
+        "uuid": "99f17b34_0e6450bd",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-10-08T11:39:06Z",
+      "side": 1,
+      "message": "Better use full words here.",
+      "range": {
+        "startLine": 34,
+        "startChar": 50,
+        "endLine": 34,
+        "endChar": 53
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f44a3fe5_eb60fcc9",
         "filename": "openpower/test_timed_power_on.robot",
         "patchSetId": 4
@@ -225,6 +248,29 @@
         "startChar": 3,
         "endLine": 64,
         "endChar": 42
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f813507f_08ab682f",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-10-08T11:39:06Z",
+      "side": 1,
+      "message": "Unable to understand. Probably, \u0027BMC command returns two parameters splitting it\u0027 is for above command ?  \u0027returning the integer value\u0027 talks about below ? Please simplify the documentation accordingly.",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 86
       },
       "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
