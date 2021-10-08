@@ -48,6 +48,7 @@ HOST_WATCHDOG_URI = OPENBMC_BASE_URI + 'watchdog/host0/'
 # Logging URI variables
 BMC_LOGGING_URI = OPENBMC_BASE_URI + 'logging/'
 BMC_LOGGING_ENTRY = BMC_LOGGING_URI + 'entry/'
+REDFISH_BMC_LOGGING_ENTRY = '/redfish/v1/Systems/system/LogServices/EventLog/Entries/'
 
 # Software manager version
 SOFTWARE_VERSION_URI = OPENBMC_BASE_URI + 'software/'

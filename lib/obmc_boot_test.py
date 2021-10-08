@@ -974,11 +974,16 @@ def test_loop_body():
             soft_errors = 1
             gpu.save_plug_in_value(soft_errors, pgm_name)
 
-    if delete_errlogs:
+    #if delete_errlogs:
+    if True:
         # print error logs before delete
-        status, error_logs = grk.run_key_u("Get Error Logs")
+        if redfish_support_trans_state:
+            status, error_logs = grk.run_key_u("Get Redfish Event Logs")
+            log.print_error_logs(error_logs, "AdditionalDataURI Message Severity")
+        else:
+            status, error_logs = grk.run_key_u("Get Error Logs")
+            log.print_error_logs(error_logs, "AdditionalData Message Severity")
         pels = pel.peltool("-l", ignore_err=1)
-        log.print_error_logs(error_logs, "AdditionalData Message Severity")
         gp.qprint_var(pels)
 
         # We need to purge error logs between boots or they build up.
@@ -1166,9 +1171,13 @@ def obmc_boot_test_py(loc_boot_stack=None,
 
     if delete_errlogs:
         # print error logs before delete
-        status, error_logs = grk.run_key_u("Get Error Logs")
+        if redfish_support_trans_state:
+            status, error_logs = grk.run_key_u("Get Redfish Event Logs")
+            log.print_error_logs(error_logs, "AdditionalDataURI Message Severity")
+        else:
+            status, error_logs = grk.run_key_u("Get Error Logs")
+            log.print_error_logs(error_logs, "AdditionalData Message Severity")
         pels = pel.peltool("-l", ignore_err=1)
-        log.print_error_logs(error_logs, "AdditionalData Message Severity")
         gp.qprint_var(pels)
 
         # Delete errlogs prior to doing any boot tests.
