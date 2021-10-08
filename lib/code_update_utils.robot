@@ -582,10 +582,115 @@ Get Image Update Progress State
     #              "HealthRollup": "OK",
     #              "State": "Enabled"
     #            },
+
     ${status}=  Redfish.Get Attribute  /redfish/v1/UpdateService/FirmwareInventory/${image_id}  Status
     Rprint Vars  status
 
     [Return]  ${status["State"]}
+
+
+Get All Task
+    [Documentation]  Get all the active tasks.
+    [Arguments]  ${target_uri}  ${match_status}  ${match_state}
+
+    # Description of argument(s):
+    # target_uri      Target URI.
+    # match_status    The expected state. The value is (e.g. OK). If the actual state matches
+    #                 any of the states named in this argument, this keyword passes.
+    # match_state     The expected state. This may be one or more comma-separated values
+    #                 (e.g. Running, Completed). If the actual state matches
+    #                 any of the states named in this argument, this keyword passes.
+
+    ${task_list}=  Redfish.Get Members List  /redfish/v1/TaskService/Tasks
+
+    ${task_dict}=  Get Task Objects  ${task_list}
+
+    ${task_inventory}=  Check Task Inventory  ${target_uri}  ${match_status}  ${match_state}  ${task_dict}
+
+    ${num_records}=  Get Length  ${task_inventory}
+    Return From Keyword If  ${num_records} == ${0}  ${EMPTY}
+
+    [Return]  ${task_inventory}
+
+
+Get Task Objects
+    [Documentation]  Check all the task to filter update service target URI.
+    [Arguments]  ${task_list}
+
+    # Description of argument(s):
+    # task_list  List of all active task.
+
+    &{task_inv_dict}=  Create Dictionary
+
+    FOR  ${task_id}  IN  @{task_list}
+      &{tmp_dict}=  Create Dictionary
+      ${task_payload}=  Redfish.Get Attribute  ${task_id}  Payload
+      Set To Dictionary  ${tmp_dict}  TargetUri  ${task_payload['TargetUri']}
+
+      ${task_state}=  Redfish.Get Attribute  ${task_id}  TaskState
+      Set To Dictionary  ${tmp_dict}  TaskState  ${task_state}
+
+      ${task_status}=  Redfish.Get Attribute  ${task_id}  TaskStatus
+      Set To Dictionary  ${tmp_dict}  TaskStatus  ${task_status}
+      Set To Dictionary  ${task_inv_dict}  ${task_id.split("/")[-1]}  ${tmp_dict}
+    END
+
+    [Return]  ${task_inv_dict}
+
+
+Check Task Inventory
+    [Documentation]  Get the active task progress state.
+    [Arguments]  ${target_uri}  ${match_status}  ${match_state}  ${task_dict}
+
+    # Description of argument(s):
+    # target_uri      Active task which has update service tasrget uri.
+    # match_status    The expected state. The value is (e.g. OK). If the actual state matches
+    #                 any of the states named in this argument, this keyword passes.
+    # match_state     The expected state. This may be one or more comma-separated values
+    #                 (e.g. Running, Completed). If the actual state matches
+    #                 any of the states named in this argument, this keyword passes.
+    # task_dict       Task inventory.
+
+    Return From Keyword If  ${target_uri} == '' or ${target_uri} == None  ${task_dict}
+    Return From Keyword If  ${match_state} == '' or ${match_state} == None  ${task_dict}
+
+     &{tmp_dict}=  Create Dictionary
+
+     ${task_dict_items}=  Get Dictionary Items   ${task_dict}
+
+     FOR  ${task_id}  ${task_inv}  IN  @{task_dict_items}
+       &{tmp_dict}=  Create Dictionary
+       Set To Dictionary  ${tmp_dict}  ${task_id}  ${task_inv}
+       Return From Keyword If  ${target_uri} == '${task_inv['TargetUri']}' and ${match_state} == '${task_inv['TaskState']}'  ${tmp_dict}
+     END
+
+    [Return]  ${task_dict}
+
+
+Check Task Progress State
+    [Documentation]  Check that the task update progress state matches the specified state.
+    [Arguments]  ${task_inv_dict}  ${match_status}  ${match_state}
+
+    # Description of argument(s):
+    # task_inv_dict    Task inventory dictionary.
+    # match_status     The expected state. The value is (e.g. OK). If the actual state matches
+    #                  any of the states named in this argument, this keyword passes.
+    # match_state      The expected state. This may be one or more comma-separated values
+    #                  (e.g. Running, Completed). If the actual state matches
+    #                  any of the states named in this argument, this keyword passes.
+
+    ${task_inv_dict_items}=  Get Dictionary Items   ${task_inv_dict}
+
+    FOR  ${task_id}  ${task_inv}  IN  @{task_inv_dict_items}
+      ${task_state}=  Redfish.Get Attribute  /redfish/v1/TaskService/Tasks/${task_id}  TaskState
+      ${task_status}=  Redfish.Get Attribute  /redfish/v1/TaskService/Tasks/${task_id}  TaskStatus
+
+      Rprint Vars  task_state
+      Rprint Vars  task_status
+
+      Valid Value  task_state  valid_values=[${match_state}]
+      Valid Value  task_status  valid_values=[${match_status}]
+    END
 
 
 Get Firmware Image Version
