@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56d26ac3_1b61e832",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-10-08T07:46:58Z",
+      "side": 1,
+      "message": "Create new keyword here \n\nTest Teardown Execution\n    [Documentation]  Do the test teardown\n    FFDC On Test Case Fail\n    Close All Connections",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 80
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e584b53_03b7ddc5",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-10-08T07:46:58Z",
+      "side": 1,
+      "message": "Dont use this \n\nRedfish Power Off",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 51
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "66238efc_12eafbbd",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-10-08T07:46:58Z",
+      "side": 1,
+      "message": "Add time in seconds / millisecond ?",
+      "range": {
+        "startLine": 64,
+        "startChar": 3,
+        "endLine": 64,
+        "endChar": 42
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
