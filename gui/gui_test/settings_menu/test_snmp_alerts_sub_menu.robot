@@ -70,9 +70,21 @@ Configure SNMP Settings On BMC With NON Default Port Via GUI And Verify
 
     Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
 
-    Wait Until Element Is Visible  ${xpath_delete_button}  timeout=30s
+    Wait Until Page Contains  ${SNMP_MGR1_IP}  timeout=30s
 
     Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
+
+
+Configure SNMP Settings On BMC Via GUI And Verify
+    [Documentation]  Configure SNMP settings on BMC via GUI and verify.
+    [Tags]  Configure_SNMP_Settings_On_BMC_Via_GUI_And_Verify
+    [Teardown]  Delete SNMP Manager Via GUI
+
+    Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+
+    Wait Until Page Contains  ${SNMP_MGR1_IP}  timeout=30s
+
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
 
 
 *** Keywords ***
@@ -110,4 +122,5 @@ Delete SNMP Manager Via GUI
     Wait Until Keyword Succeeds  30 sec  5 sec  Click Element  ${xpath_delete_button}
     Wait Until Page Contains  Delete SNMP alert destination
     Click Element  ${xpath_delete_destination}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  snmp-alerts
+    Wait Until Keyword Succeeds  30 sec  10 sec  Refresh GUI And Verify Element Value
+    ...  ${xpath_snmp_alerts_heading}  SNMP Alerts
