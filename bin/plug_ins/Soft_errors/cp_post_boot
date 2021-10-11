@@ -71,6 +71,23 @@ def main():
     lib_file_path += ":" + init_robot_file_path("lib/gen_robot_print.py")
     set_mod_global(lib_file_path)
 
+    REDFISH_SUPPORT_TRANS_STATE = int(os.environ.get('REDFISH_SUPPORT_TRANS_STATE', 0))
+    if not REDFISH_SUPPORT_TRANS_STATE:
+        try:
+            from robot.libraries.BuiltIn import BuiltIn
+            REDFISH_SUPPORT_TRANS_STATE = int(BuiltIn().get_variable_value("${REDFISH_SUPPORT_TRANS_STATE}", default=0))
+        except:
+            pass
+
+    keyword_redfish_strings = \
+        [
+            "${error_logs}=  Get Redfish Event Logs  &{filter_low_severity_errlogs}",
+            "${num_error_logs}=  Get Length  ${error_logs}",
+            "Rprint Vars  num_error_logs",
+            "${json_string}=  Evaluate  json.dumps($error_logs, indent=4)  modules=json",
+            "Append To File  " + high_sev_elogs_file_path + "  ${json_string}"
+        ]
+
     keyword_strings = \
         [
             "${error_logs}=  Get Error Logs  &{filter_low_severity_errlogs}",
@@ -79,8 +96,12 @@ def main():
             "${json_string}=  Evaluate  json.dumps($error_logs, indent=4)  modules=json",
             "Append To File  " + high_sev_elogs_file_path + "  ${json_string}"
         ]
+        
+    if REDFISH_SUPPORT_TRANS_STATE:
+        keyword_string = ' ; '.join(keyword_redfish_strings)
+    else:
+        keyword_string = ' ; '.join(keyword_strings)
 
-    keyword_string = ' ; '.join(keyword_strings)
     set_mod_global(keyword_string)
     cmd_buf = create_robot_cmd_string("extended/run_keyword.robot", OPENBMC_HOST, SSH_PORT, HTTPS_PORT,
                                       REST_USERNAME, REST_PASSWORD, OPENBMC_USERNAME, OPENBMC_PASSWORD,
