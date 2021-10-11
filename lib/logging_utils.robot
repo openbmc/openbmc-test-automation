@@ -9,7 +9,7 @@ Variables       ../data/pel_variables.py
 
 
 # Define variables for use by callers of 'Get Error Logs'.
-${low_severity_errlog_regex}  \\.(Informational|Notice|Debug)$
+${low_severity_errlog_regex}  \\.(Informational|Notice|Debug|OK)$
 &{low_severity_errlog_filter}  Severity=${low_severity_errlog_regex}
 &{low_severity_errlog_filter_args}  filter_dict=${low_severity_errlog_filter}  regex=${True}  invert=${True}
 # The following is equivalent to &{low_severity_errlog_filter_args} but the name may be more intuitive for
@@ -262,6 +262,13 @@ Get Event Logs
 
 Get Redfish Event Logs
     [Documentation]  Pack the list of all available EventLog entries in dictionary.
+    [Arguments]   ${quiet}=1  &{filter_struct_args}
+
+    # Description of argument(s):
+    # quiet                  Indicates whether this keyword should run without any output to the
+    #                        console, 0 = verbose, 1 = quiet.
+    # filter_struct_args     filter_struct args (e.g. filter_dict, regex, etc.) to be passed
+    #                        directly to the Filter Struct keyword.  See its prolog for details.
 
     ${packed_dict}=  Create Dictionary
     ${error_logs}=  Get Event Logs
@@ -270,7 +277,11 @@ Get Redfish Event Logs
        Set To Dictionary  ${packed_dict}    ${idx['@odata.id']}=${idx}
     END
 
-    [Return]  &{packed_dict}
+    ${num_filter_struct_args}=  Get Length  ${filter_struct_args}
+    Return From Keyword If  '${num_filter_struct_args}' == '${0}'  &{packed_dict}
+    ${filtered_error_logs}=  Filter Struct  ${packed_dict}  &{filter_struct_args}
+
+    [Return]  ${filtered_error_logs}
 
 
 Get Event Logs Not Ok
