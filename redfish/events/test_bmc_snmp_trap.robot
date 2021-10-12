@@ -214,6 +214,35 @@ Verify Persistency Of SNMP Manager And Trap On BMC Reboot
     ...  ${CMD_INTERNAL_FAILURE}  ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
 
 
+Configure SNMP Manager With Less Octet IP And Verify
+    [Documentation]  Configure SNMP manager on BMC with less octet IP and expect an error.
+    [Tags]  Configure_SNMP_Manager_With_Less_Octet_IP_And_Verify
+    [Teardown]  Delete SNMP Manager Via Redfish  ${less_octet_ip}  ${SNMP_DEFAULT_PORT}
+
+    Configure SNMP Manager Via Redfish  ${less_octet_ip}  ${SNMP_DEFAULT_PORT}  ${HTTP_BAD_REQUEST}
+
+    ${status}=  Run Keyword And Return Status
+    ...  Verify SNMP Manager Configured On BMC  ${less_octet_ip}  ${SNMP_DEFAULT_PORT}
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=BMC is allowing to configure less octet IP.
+
+
+Configure SNMP Manager On BMC With Negative Port And Verify
+    [Documentation]  Configure SNMP Manager On BMC with negative port and verify.
+    [Tags]  Configure_SNMP_Manager_On_BMC_With_Negative_Port_And_Verify
+
+    [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${negative_port}
+
+    Configure SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${negative_port}  ${HTTP_BAD_REQUEST}
+
+    ${status}=  Run Keyword And Return Status
+    ...  Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${negative_port}
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=BMC is allowing to configure negative port.
+
+
 *** Keywords ***
 
 Suite Setup Execution
