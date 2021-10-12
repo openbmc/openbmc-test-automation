@@ -3,21 +3,27 @@
 Documentation   Test OpenBMC GUI "SNMP Alerts" sub-menu of "Settings".
 
 Resource        ../../lib/gui_resource.robot
+Resource        ../../lib/snmp/resource.robot
+Resource        ../../lib/snmp/redfish_snmp_utils.robot
+
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
 
 
 *** Variables ***
 
-${xpath_snmp_alerts_sub_menu}              //*[@data-test-id='nav-item-snmp-alerts']
-${xpath_snmp_alerts_heading}               //h1[text()="SNMP Alerts"]
-${xpath_select_user}                       //*[@data-test-id='snmpAlerts-checkbox-selectAll']
-${xpath_add_destination}                   //button[contains(text(),'Add destination')]
-${xpath_snmp_alert_destination_heading}    //h5[contains(text(),'Add SNMP alert destination')]
-${xpath_ip_address_input_button}           //*[@data-test-id='snmpAlerts-input-ipAddress']
-${xpath_port_optional_input_button}        //*[@data-test-id='snmpAlerts-input-port']
-${xpath_snmp_add_destination_button}       //*[@data-test-id='snmpAlerts-button-ok']
-${xpath_cancel_button}                     //button[contains(text(),'Cancel')]
+${xpath_snmp_alerts_sub_menu}                     //*[@data-test-id='nav-item-snmp-alerts']
+${xpath_snmp_alerts_heading}                      //h1[text()="SNMP Alerts"]
+${xpath_select_user}                              //*[@data-test-id='snmpAlerts-checkbox-selectAll']
+${xpath_add_destination}                          //button[contains(text(),'Add destination')]
+${xpath_snmp_alert_destination_heading}           //h5[contains(text(),'Add SNMP alert destination')]
+${xpath_ip_address_input_button}                  //*[@data-test-id='snmpAlerts-input-ipAddress']
+${xpath_port_optional_input_button}               //*[@data-test-id='snmpAlerts-input-port']
+${xpath_snmp_add_destination_button}              //*[@data-test-id='snmpAlerts-button-ok']
+${xpath_cancel_button}                            //button[contains(text(),'Cancel')]
+${xpath_delete_button}                            //*[@data-test-id='snmpAlerts-button-deleteRow-undefined']
+${xpath_delete_snmp_alert_destination_heading}    //h5[contains(text(),'Delete SNMP alert destination')]
+${xpath_delete_destination}                       //button[contains(text(),'Delete destination')]
 
 
 *** Test Cases ***
@@ -46,7 +52,9 @@ Verify Existence Of All Buttons In SNMP Alerts Page
 Verify Existence Of All Fields In Add Destination
     [Documentation]  Verify existence of all buttons and fields in add destination page.
     [Tags]  Verify_Existence_Of_All_Button_And_Fields_In_Add_Destination
-    [Teardown]  Click Element  ${xpath_cancel_button}
+    [Teardown]  Run Keywords  Click Button  ${xpath_cancel_button}  AND
+    ...  Wait Until Keyword Succeeds  10 sec  5 sec
+    ...  Refresh GUI And Verify Element Value  ${xpath_snmp_alerts_heading}  SNMP Alerts
 
     Click Element  ${xpath_add_destination}
     Wait Until Page Contains Element  ${xpath_snmp_alert_destination_heading}
@@ -54,6 +62,16 @@ Verify Existence Of All Fields In Add Destination
     Page Should Contain Element  ${xpath_port_optional_input_button}
     Page Should Contain Element  ${xpath_cancel_button}
     Page Should Contain Element  ${xpath_snmp_add_destination_button}
+
+
+Configure SNMP Settings On BMC With NON Default Port Via GUI And Verify
+    [Documentation]  Configure SNMP settings on BMC with non default port via GUI and verify.
+    [Tags]  Configure_SNMP_Settings_On_BMC_With_Non_Default_Port_Via_GUI_And_Verify
+    [Teardown]  Delete SNMP Manager Via GUI
+
+    Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
+
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
 
 
 *** Keywords ***
@@ -65,4 +83,32 @@ Suite Setup Execution
 
     Click Element  ${xpath_settings_menu}
     Click Element  ${xpath_snmp_alerts_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  snmp-alerts
+
+
+Configure SNMP Manager Via GUI
+    [Documentation]  Configure SNMP manager via GUI.
+    [Arguments]  ${snmp_ip}  ${port}
+
+    # Description of argument(s):
+    # snmp_ip  SNMP manager IP address
+    # port     SNMP manager port
+
+    Click Element  ${xpath_add_destination}
+    Wait Until Page Contains Element  ${xpath_snmp_alert_destination_heading}
+    Input Text  ${xpath_ip_address_input_button}  ${snmp_ip}
+    Wait Until Keyword Succeeds  30 sec  5 sec  Get Value  ${xpath_ip_address_input_button}
+    Input Text  ${xpath_port_optional_input_button}  ${port}
+    Click Element  ${xpath_snmp_add_destination_button}
+    Wait Until Page Contains Element  ${xpath_add_destination}
+
+
+Delete SNMP Manager Via GUI
+    [Documentation]  Delete SNMP manager via GUI.
+
+    Click Element At Coordinates  ${xpath_select_user}  0  0
+    Sleep  5s
+    Click Element  ${xpath_delete_button}
+    Wait Until Page Contains Element  ${xpath_delete_snmp_alert_destination_heading}
+    Click Element  ${xpath_delete_destination}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  snmp-alerts
