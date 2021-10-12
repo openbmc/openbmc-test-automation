@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "84a74b36_28dc0030",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-10-12T09:41:40Z",
+      "side": 1,
+      "message": "Added test to configure SNMP manager on BMC via GUI \u0026 verify",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 60
+      },
+      "revId": "7e8b41e1bbf7d20d70e7f3fa8dcc697e1c29eecf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d433f57_f423d2d8",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-10-12T09:41:40Z",
+      "side": 1,
+      "message": "Configure SNMP Settings On BMC Via GUI And Verify",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 48
+      },
+      "revId": "7e8b41e1bbf7d20d70e7f3fa8dcc697e1c29eecf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aec7f115_1fb92059",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-10-12T09:41:40Z",
+      "side": 1,
+      "message": "Configure SNMP settings on BMC via GUI and verify",
+      "range": {
+        "startLine": 64,
+        "startChar": 21,
+        "endLine": 64,
+        "endChar": 69
+      },
+      "revId": "7e8b41e1bbf7d20d70e7f3fa8dcc697e1c29eecf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87f4df92_066b783f",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-10-12T09:41:40Z",
+      "side": 1,
+      "message": "Via",
+      "range": {
+        "startLine": 84,
+        "startChar": 23,
+        "endLine": 84,
+        "endChar": 26
+      },
+      "revId": "7e8b41e1bbf7d20d70e7f3fa8dcc697e1c29eecf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbcdf0ae_a6240bef",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-10-12T09:41:40Z",
+      "side": 1,
+      "message": "GUI",
+      "range": {
+        "startLine": 85,
+        "startChar": 48,
+        "endLine": 85,
+        "endChar": 51
+      },
+      "revId": "7e8b41e1bbf7d20d70e7f3fa8dcc697e1c29eecf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca03845f_f7fdd13e",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-10-12T09:41:40Z",
+      "side": 1,
+      "message": "description of argument missing",
+      "range": {
+        "startLine": 86,
+        "startChar": 4,
+        "endLine": 86,
+        "endChar": 36
+      },
+      "revId": "7e8b41e1bbf7d20d70e7f3fa8dcc697e1c29eecf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "78b15310_6436dcbf",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-10-12T09:41:40Z",
+      "side": 1,
+      "message": "Why this is required?",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 77
+      },
+      "revId": "7e8b41e1bbf7d20d70e7f3fa8dcc697e1c29eecf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "262bd6ed_b8bc4251",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-10-12T09:41:40Z",
+      "side": 1,
+      "message": "why this is required",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 91
+      },
+      "revId": "7e8b41e1bbf7d20d70e7f3fa8dcc697e1c29eecf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aa749d74_d57f7ff2",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-10-12T09:41:40Z",
+      "side": 1,
+      "message": "Same comment as above. Why this is required?",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 62
+      },
+      "revId": "7e8b41e1bbf7d20d70e7f3fa8dcc697e1c29eecf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
