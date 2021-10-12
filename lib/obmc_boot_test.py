@@ -63,9 +63,14 @@ base_tool_dir_path = os.path.normpath(os.environ.get(
 
 ffdc_dir_path = os.path.normpath(os.environ.get('FFDC_DIR_PATH', '')) + os.sep
 boot_success = 0
-status_dir_path = os.environ.get('STATUS_DIR_PATH', "")
+
+status_dir_path = os.environ.get('STATUS_DIR_PATH', "") or \
+    BuiltIn().get_variable_value("${STATUS_DIR_PATH}", default="")
 if status_dir_path != "":
     status_dir_path = os.path.normpath(status_dir_path) + os.sep
+    # For plugin expecting env gen_call_robot.py
+    os.environ['STATUS_DIR_PATH'] = status_dir_path
+
 redfish_support_trans_state = int(os.environ.get('REDFISH_SUPPORT_TRANS_STATE', 0)) or \
     int(BuiltIn().get_variable_value("${REDFISH_SUPPORT_TRANS_STATE}", default=0))
 redfish_supported = BuiltIn().get_variable_value("${REDFISH_SUPPORTED}", default=False)
