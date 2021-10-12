@@ -3,6 +3,9 @@
 Documentation   Test OpenBMC GUI "SNMP Alerts" sub-menu of "Settings".
 
 Resource        ../../lib/gui_resource.robot
+Resource        ../../lib/snmp/resource.robot
+Resource        ../../lib/snmp/redfish_snmp_utils.robot
+
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
 
@@ -46,7 +49,8 @@ Verify Existence Of All Buttons In SNMP Alerts Page
 Verify Existence Of All Fields In Add Destination
     [Documentation]  Verify existence of all buttons and fields in add destination page.
     [Tags]  Verify_Existence_Of_All_Button_And_Fields_In_Add_Destination
-    [Teardown]  Click Element  ${xpath_cancel_button}
+    [Teardown]  Run Keywords  Click Button  ${xpath_cancel_button}  AND
+    ...  Wait Until Keyword Succeeds  10 sec  5 sec  Refresh GUI
 
     Click Element  ${xpath_add_destination}
     Wait Until Page Contains Element  ${xpath_snmp_alert_destination_heading}
@@ -54,6 +58,15 @@ Verify Existence Of All Fields In Add Destination
     Page Should Contain Element  ${xpath_port_optional_input_button}
     Page Should Contain Element  ${xpath_cancel_button}
     Page Should Contain Element  ${xpath_snmp_add_destination_button}
+
+
+Configure SNMP Manager On BMC With Non Default Port via GUI And Verify
+    [Documentation]  Configure SNMP Manager on BMC with non default port via GUI And Verify.
+    [Tags]  Configure_SNMP_Manager_On_BMC_With_Non_Default_Port_via_GUI_And_Verify
+
+    Configure SNMP Manager via GUI  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
+
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
 
 
 *** Keywords ***
@@ -66,3 +79,16 @@ Suite Setup Execution
     Click Element  ${xpath_settings_menu}
     Click Element  ${xpath_snmp_alerts_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  snmp-alerts
+
+
+Configure SNMP Manager via GUI
+    [Documentation]  Configure SNMP manager via gui.
+    [Arguments]  ${snmp_ip}  ${port}
+
+    Click Element  ${xpath_add_destination}
+    Wait Until Page Contains Element  ${xpath_snmp_alert_destination_heading}
+    Input Text  ${xpath_ip_address_input_button}  ${snmp_ip}
+    Wait Until Keyword Succeeds  30 sec  5 sec  Get Value  ${xpath_ip_address_input_button}
+    Input Text  ${xpath_port_optional_input_button}  ${port}
+    Click Element  ${xpath_snmp_add_destination_button}
+    Wait Until Page Contains Element  ${xpath_add_destination}
