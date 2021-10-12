@@ -32,6 +32,7 @@ ${REST_USERNAME}       root
 ${REST_PASSWORD}       0penBmc
 
 ${CHASSIS_ID}  chassis
+${COMPONENT_NAME_OF_POWER_SUPPLY}  powersupply
 
 # MTLS_ENABLED indicates whether mTLS is enabled.
 ${MTLS_ENABLED}        False

@@ -21,11 +21,11 @@ Test FRU Info Of Power Supplies
     [Tags]  Test_FRU_Info_Of_Power_Supplies
 
     # IPMI FRU info.
-    ${ipmi_fru_component_info}=  Get Component FRU Info  powersupply
+    ${ipmi_fru_component_info}=  Get Component FRU Info  ${COMPONENT_NAME_OF_POWER_SUPPLY}
     ...  ${fru_objs}
 
     # Redfish FRU info.
-    ${redfish_power_details}=  Redfish.Get Properties  /redfish/v1/Chassis/chassis/Power
+    ${redfish_power_details}=  Redfish.Get Properties  /redfish/v1/Chassis/${CHASSIS_ID}/Power
     ${redfish_power_supply_reading}=  Set Variable  ${redfish_power_details['PowerSupplies']}
 
     Verify IPMI and Redfish subcomponents  ${redfish_power_supply_reading}
