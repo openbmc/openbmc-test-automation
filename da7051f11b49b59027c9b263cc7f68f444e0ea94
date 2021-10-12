@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "ad3aa4f8_34229616",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-10-12T10:12:15Z",
+      "side": 1,
+      "message": "add code to clean snmp manager and keep bmc in same state as it was before adding this snmp manager",
+      "revId": "da7051f11b49b59027c9b263cc7f68f444e0ea94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f3c7d4d7_7fc226b1",
         "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
         "patchSetId": 1
