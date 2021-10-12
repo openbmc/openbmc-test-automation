@@ -44,6 +44,19 @@ Configure VMI Both Interfaces In Different Subnet And Verify
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4_2}  ${test_gateway_2}
     ...  ${test_netmask_2}  ${HTTP_ACCEPTED}  ${interface_list}[1]
 
+Configure VMI Both Interfaces In Dynamic And Verify
+    [Documentation]  Configure VMI both interfaces in dynamic And Verify.
+    [Tags]  Configure_VMI_Both_Interfaces_In_Dynamic_And_Verify
+    [Teardown]   Run keywords  Set VMI IPv4 Origin  ${False}
+    ...  AND  Set VMI IPv4 Origin  ${False}  ${HTTP_ACCEPTED}  ${interface_list}[1]
+    ...  AND  Test Teardown
+
+    Set VMI IPv4 Origin  ${True}
+    ${default}=  Set Variable  0.0.0.0
+    Set VMI IPv4 Origin  ${True}  ${HTTP_ACCEPTED}  ${interface_list}[1]
+    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
+    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}  ${interface_list}[1]
+
 *** Keywords ***
 
 Suite Setup Execution
