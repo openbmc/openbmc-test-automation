@@ -16,6 +16,24 @@
       "revId": "0adc76c58e5baedb39334d9efbacdf6711c2aa93",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "262e8330_d1790982",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-10-13T06:09:36Z",
+      "side": 1,
+      "message": "done.\nadded line 58 to verify again as here verification cant be ignored due to single keyword.",
+      "parentUuid": "c896d8a4_f7763b93",
+      "revId": "0adc76c58e5baedb39334d9efbacdf6711c2aa93",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
