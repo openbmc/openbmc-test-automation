@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ad091021_5e8d8d07",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2021-10-14T07:52:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad3aa4f8_34229616",
+      "revId": "da7051f11b49b59027c9b263cc7f68f444e0ea94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f3c7d4d7_7fc226b1",
         "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
         "patchSetId": 1
@@ -30,6 +48,30 @@
       "writtenOn": "2021-10-12T09:54:10Z",
       "side": 1,
       "message": "Instead on taking this value from user, I believe it\u0027s better to take random value from supported all port numbers except Default Port.",
+      "range": {
+        "startLine": 69,
+        "startChar": 62,
+        "endLine": 69,
+        "endChar": 79
+      },
+      "revId": "da7051f11b49b59027c9b263cc7f68f444e0ea94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c43bcb6b_a4e314dc",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2021-10-14T07:52:09Z",
+      "side": 1,
+      "message": "Here I am using using existing library code //github.com/openbmc/openbmc-test-automation/blob/8381f7358fadf9ef4e5b0b78d874497bda2da842/lib/snmp/resource.robot",
+      "parentUuid": "f3c7d4d7_7fc226b1",
       "range": {
         "startLine": 69,
         "startChar": 62,
@@ -62,6 +104,30 @@
       "revId": "da7051f11b49b59027c9b263cc7f68f444e0ea94",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0f549a8_9b954a97",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2021-10-14T07:52:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b75d36e_0d86a12a",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 62
+      },
+      "revId": "da7051f11b49b59027c9b263cc7f68f444e0ea94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
