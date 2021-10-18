@@ -12,13 +12,14 @@ Library          ../../lib/bmc_network_utils.py
 *** Variables ***
 
 ${wait_time}              10s
+${default_interface}      eth0
 
 *** Keywords ***
 
 Set Static IPv4 Address To VMI And Verify
     [Documentation]  Set static IPv4 address to VMI.
     [Arguments]  ${ip}  ${gateway}  ${netmask}  ${valid_status_code}=${HTTP_ACCEPTED}
-    ...  ${interface}=eth0
+    ...  ${interface}=${default_interface}
 
     # Description of argument(s):
     # ip                 VMI IPv4 address.
@@ -43,7 +44,7 @@ Set Static IPv4 Address To VMI And Verify
 Verify VMI Network Interface Details
     [Documentation]  Verify VMI network interface details.
     [Arguments]  ${ip}  ${origin}  ${gateway}  ${netmask}
-    ...  ${interface}=eth0  ${valid_status_code}=${HTTP_OK}
+    ...  ${interface}=${default_interface}  ${valid_status_code}=${HTTP_OK}
 
     # Description of argument(s):
     # ip                 VMI IPv4 address.
@@ -62,7 +63,7 @@ Verify VMI Network Interface Details
 Delete VMI IPv4 Address
     [Documentation]  Delete VMI IPv4 address.
     [Arguments]  ${delete_param}=IPv4StaticAddresses  ${valid_status_code}=${HTTP_ACCEPTED}
-    ...  ${interface}=eth0
+    ...  ${interface}=${default_interface}
 
     # Description of argument(s):
     # delete_param       Parameter to be deleted eg. IPv4StaticAddresses or IPv4Addresses.
@@ -82,7 +83,7 @@ Delete VMI IPv4 Address
 Set VMI IPv4 Origin
     [Documentation]  Set VMI IPv4 origin.
     [Arguments]  ${dhcp_enabled}=${False}  ${valid_status_code}=${HTTP_ACCEPTED}
-    ...  ${interface}=eth0
+    ...  ${interface}=${default_interface}
 
     # Description of argument(s):
     # dhcp_enabled       True if user wants to enable DHCP. Default is Static, hence value is set to False.
@@ -102,7 +103,7 @@ Set VMI IPv4 Origin
 
 Get VMI Network Interface Details
     [Documentation]  Get VMI network interface details.
-    [Arguments]  ${interface}=eth0  ${valid_status_code}=${HTTP_OK}
+    [Arguments]  ${interface}=${default_interface}  ${valid_status_code}=${HTTP_OK}
 
     # Description of argument(s):
     # interface          VMI interface (eg. eth0 or eth1).

@@ -405,6 +405,7 @@ Suite Setup Execution
     ${active_channel_config}=  Get Active Channel Config
     Set Suite Variable   ${active_channel_config}
     Set Suite Variable  ${ethernet_interface}  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Set Suite Variable  ${default_interface}  ${ethernet_interface}
     ${resp}=  Redfish.Get
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${ethernet_interface}
     ${ip_resp}=  Evaluate  json.loads(r'''${resp.text}''')  json
