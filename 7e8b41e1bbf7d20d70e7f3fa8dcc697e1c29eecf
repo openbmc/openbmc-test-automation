@@ -469,6 +469,30 @@
       "revId": "7e8b41e1bbf7d20d70e7f3fa8dcc697e1c29eecf",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cf5ff803_f0031c07",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-10-18T06:21:27Z",
+      "side": 1,
+      "message": "Can you please address it?",
+      "parentUuid": "46096f0b_859f2953",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 62
+      },
+      "revId": "7e8b41e1bbf7d20d70e7f3fa8dcc697e1c29eecf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
