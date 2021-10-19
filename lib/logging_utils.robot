@@ -274,7 +274,7 @@ Get Redfish Event Logs
     ${packed_dict}=  Create Dictionary
     ${error_logs}=  Get Event Logs
 
-    :FOR  ${idx}   IN  @{error_logs}
+    FOR  ${idx}   IN  @{error_logs}
        Set To Dictionary  ${packed_dict}    ${idx['@odata.id']}=${idx}
     END
 
