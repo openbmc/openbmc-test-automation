@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "4bc88dd6_e4d3e7b6",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2021-10-20T04:23:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef7de07f_3998b543",
+      "range": {
+        "startLine": 15,
+        "startChar": 41,
+        "endLine": 15,
+        "endChar": 42
+      },
+      "revId": "5d1770c51dfc9e4c76a4d7f096c09d828a1f19d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f7d3e2a_b3e7c55f",
         "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
         "patchSetId": 3
@@ -45,6 +69,30 @@
       "revId": "5d1770c51dfc9e4c76a4d7f096c09d828a1f19d3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "23add70b_d243438b",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2021-10-20T04:23:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f7d3e2a_b3e7c55f",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 32
+      },
+      "revId": "5d1770c51dfc9e4c76a4d7f096c09d828a1f19d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -94,6 +142,54 @@
     },
     {
       "key": {
+        "uuid": "b98afc06_3d10948d",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2021-10-20T04:23:30Z",
+      "side": 1,
+      "message": "As select checkbox is not working I have used this keyword",
+      "parentUuid": "5ddd4b7d_54dc7887",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 60
+      },
+      "revId": "5d1770c51dfc9e4c76a4d7f096c09d828a1f19d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77b6ca6c_117abc70",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2021-10-20T04:23:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d5bfe14_dd081fa4",
+      "range": {
+        "startLine": 109,
+        "startChar": 36,
+        "endLine": 109,
+        "endChar": 53
+      },
+      "revId": "5d1770c51dfc9e4c76a4d7f096c09d828a1f19d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b4a04a21_18e9cef8",
         "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
         "patchSetId": 3
@@ -114,6 +210,30 @@
       "revId": "5d1770c51dfc9e4c76a4d7f096c09d828a1f19d3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "979e7ca9_d336c86d",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2021-10-20T04:23:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4a04a21_18e9cef8",
+      "range": {
+        "startLine": 110,
+        "startChar": 4,
+        "endLine": 110,
+        "endChar": 13
+      },
+      "revId": "5d1770c51dfc9e4c76a4d7f096c09d828a1f19d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
