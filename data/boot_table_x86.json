@@ -1,7 +1,4 @@
 {
-    # Power on boot types:
-
-    # Initiate a power on using the Redfish API interface.
     "Redfish Power On": {
         "start": {
             "redfish": "^1$",
@@ -21,7 +18,6 @@
         "method": "Redfish Power Operation  On",
         "lib_file_path": "bmc_redfish_utils.robot"
     },
-    # Initiate a power on using the IPMI interface.
     "IPMI Power On": {
         "start": {
             "redfish": "^1$",
@@ -42,9 +38,6 @@
         "lib_file_path": "ipmi_client.robot"
     },
 
-    # Power off boot types:
-
-    # Initiate a power off using the Redfish API interface.
     "Redfish Power Off": {
         "start": {
             "redfish": "^1$",
@@ -63,7 +56,6 @@
         "method": "Redfish Power Operation  GracefulShutdown",
         "lib_file_path": "bmc_redfish_utils.robot"
     },
-    # Initiate a hard power off using the Redfish API interface.
     "Redfish Hard Power Off": {
         "start": {
             "redfish": "^1$",
@@ -82,7 +74,6 @@
         "method": "Redfish Power Operation  ForceOff",
         "lib_file_path": "bmc_redfish_utils.robot"
     },
-    # Initiate a power off using the IPMI interface.
     "IPMI Power Off": {
         "start": {
             "redfish": "^1$",
@@ -101,7 +92,6 @@
         "method": "Run External IPMI Standard Command  power off -N 10 -R 1",
         "lib_file_path": "ipmi_client.robot"
     },
-    # Initiate a power soft using the IPMI interface.
     "IPMI Power Soft": {
         "start": {
             "redfish": "^1$",
@@ -120,7 +110,6 @@
         "method": "Run External IPMI Standard Command  power soft -N 10 -R 1",
         "lib_file_path": "ipmi_client.robot"
     },
-    # Run a "shutdown" command on the OS_HOST.
     "Host Power Off": {
         "start": {
             "redfish": "^1$",
@@ -144,10 +133,6 @@
         "lib_file_path": "utils.robot"
     },
 
-    # OBMC re-boot boot types:
-
-    # APOR - Auto Power On Restart - Note that this is functionally equivalent
-    # to 'PDU AC Cycle (run)'.
     "APOR": {
         "start": {
             "redfish": "^1$",
@@ -170,7 +155,6 @@
         "method": "Set Global Variable  ${PDU_TYPE}  pdu ; Set Global Variable  ${PDU_IP}  ${PDU_HOST} ; PDU Power Cycle",
         "lib_file_path": "pdu/pdu.robot:pdu/synaccess.robot"
     },
-    # Run a "reboot" on the OBMC while host is running.
     "OBMC Reboot (run)": {
         "start": {
             "redfish": "^1$",
@@ -192,7 +176,6 @@
         "method_type": "keyword",
         "method": "BMC Execute Command  /sbin/reboot  fork=${1}"
     },
-    # Run a Redfish "reboot" on the OBMC while host is running.
     "Redfish OBMC Reboot (run)": {
         "start": {
             "redfish": "^1$",
@@ -215,7 +198,6 @@
         "method": "Redfish BMC Reset Operation",
         "lib_file_path": "bmc_redfish_utils.robot"
     },
-    # Run a "reboot" on the OBMC while host is off.
     "OBMC Reboot (off)": {
         "start": {
             "redfish": "^1$",
@@ -230,7 +212,6 @@
         "method_type": "keyword",
         "method": "BMC Execute Command  /sbin/reboot  fork=${1}"
     },
-    # Run a "reboot" on the OBMC while host is off.
     "Redfish OBMC Reboot (off)": {
         "start": {
             "redfish": "^1$",
@@ -246,7 +227,6 @@
         "method": "Redfish BMC Reset Operation",
         "lib_file_path": "bmc_redfish_utils.robot"
     },
-    # Cycle AC via the PDU while host is off.
     "PDU AC Cycle (run)": {
         "start": {
             "redfish": "^1$",
@@ -269,7 +249,6 @@
         "method": "Set Global Variable  ${PDU_TYPE}  pdu ; Set Global Variable  ${PDU_IP}  ${PDU_HOST} ; PDU Power Cycle",
         "lib_file_path": "pdu/pdu.robot:pdu/synaccess.robot"
     },
-    # Cycle AC via the PDU while host is off.
     "PDU AC Cycle (off)": {
         "start": {
             "redfish": "^1$",
@@ -285,8 +264,6 @@
         "method": "Set Global Variable  ${PDU_TYPE}  pdu ; Set Global Variable  ${PDU_IP}  ${PDU_HOST} ; PDU Power Cycle",
         "lib_file_path": "pdu/pdu.robot:pdu/synaccess.robot"
     },
-    # Initiate an mc reset warm using the IPMI interface while chassis is
-    # powered on.
     "IPMI MC Reset Warm (run)": {
         "start": {
             "redfish": "^1$",
@@ -309,8 +286,6 @@
         "method": "Run External IPMI Standard Command  mc reset warm -N 10 -R 1 ; Printn",
         "lib_file_path": "ipmi_client.robot:gen_print.py"
     },
-    # Initiate an mc reset warm using the IPMI interface while chassis is
-    # powered off.
     "IPMI MC Reset Warm (off)": {
         "start": {
             "redfish": "^1$",
@@ -326,8 +301,6 @@
         "method": "Run External IPMI Standard Command  mc reset warm -N 10 -R 1 ; Printn",
         "lib_file_path": "ipmi_client.robot:gen_print.py"
     },
-    # Initiate an mc reset cold using the IPMI interface while chassis is
-    # powered on.
     "IPMI MC Reset Cold (run)": {
         "start": {
             "redfish": "^1$",
@@ -350,8 +323,6 @@
         "method": "Run External IPMI Standard Command  mc reset cold -N 10 -R 1 ; Printn",
         "lib_file_path": "ipmi_client.robot:gen_print.py"
     },
-    # Initiate an mc reset cold using the IPMI interface while chassis is
-    # powered off.
     "IPMI MC Reset Cold (off)": {
         "start": {
             "redfish": "^1$",
@@ -367,8 +338,6 @@
         "method": "Run External IPMI Standard Command  mc reset cold -N 10 -R 1 ; Printn",
         "lib_file_path": "ipmi_client.robot:gen_print.py"
     },
-    # Initiate an mc reset warm using the IPMI standard interface while chassis
-    # is powered on.
     "IPMI Std MC Reset Warm (run)": {
         "start": {
             "redfish": "^1$",
@@ -391,8 +360,6 @@
         "method": "Run IPMI Standard Command  mc reset warm -N 10 -R 1 ; Printn",
         "lib_file_path": "ipmi_client.robot:gen_print.py"
     },
-    # Initiate an mc reset warm using the IPMI standard interface while chassis
-    # is powered off.
     "IPMI Std MC Reset Warm (off)": {
         "start": {
             "redfish": "^1$",
@@ -408,8 +375,6 @@
         "method": "Run IPMI Standard Command  mc reset warm -N 10 -R 1 ; Printn",
         "lib_file_path": "ipmi_client.robot:gen_print.py"
     },
-    # Initiate an mc reset cold using the IPMI standard interface while chassis
-    # is powered on.
     "IPMI Std MC Reset Cold (run)": {
         "start": {
             "redfish": "^1$",
@@ -432,8 +397,6 @@
         "method": "Run IPMI Standard Command  mc reset cold -N 10 -R 1 ; Printn",
         "lib_file_path": "ipmi_client.robot:gen_print.py"
     },
-    # Initiate an mc reset cold using the IPMI standard interface while chassis
-    # is powered off.
     "IPMI Std MC Reset Cold (off)": {
         "start": {
             "redfish": "^1$",
@@ -449,10 +412,6 @@
         "method": "Run IPMI Standard Command  mc reset cold -N 10 -R 1 ; Printn",
         "lib_file_path": "ipmi_client.robot:gen_print.py"
     },
-
-    # Host OS re-boot boot types:
-
-    # Initiate a power cycle using the IPMI interface (equivalent to off/on).
     "IPMI Power Cycle": {
         "start": {
             "redfish": "^1$",
@@ -475,8 +434,6 @@
         "method": "Run External IPMI Standard Command  power cycle -N 10 -R 1",
         "lib_file_path": "ipmi_client.robot"
     },
-    # Initiate a power reset using the IPMI interface (equivalent to off/on).
-    # Functionally equivalent to "IPMI Power Cycle".
     "IPMI Power Reset": {
         "start": {
             "redfish": "^1$",
@@ -499,7 +456,6 @@
         "method": "Run External IPMI Standard Command  power reset -N 10 -R 1",
         "lib_file_path": "ipmi_client.robot"
     },
-    # Do an auto reboot by setting auto reboot to "yes" and going to quiesce state.
     "Auto Reboot": {
         "start": {
             "redfish": "^1$",
@@ -522,7 +478,6 @@
         "method": "utils.Initiate Auto Reboot  1000",
         "lib_file_path": "utils.robot"
     },
-    # Run a "reboot" command on the OS_HOST.
     "Host Reboot": {
         "start": {
             "redfish": "^1$",
@@ -545,7 +500,6 @@
         "method": "utils.Initiate OS Host Reboot",
         "lib_file_path": "utils.robot"
     },
-    # Initiate host reboot using the Redfish API interface (GracefulRestart).
     "RF SYS GracefulRestart": {
         "start": {
             "redfish": "^1$",
@@ -568,7 +522,6 @@
         "method": "Redfish Power Operation  GracefulRestart",
         "lib_file_path": "bmc_redfish_utils.robot"
     },
-    # Initiate host reboot using the Redfish API interface (ForceRestart).
     "RF SYS ForceRestart": {
         "start": {
             "redfish": "^1$",
@@ -591,7 +544,6 @@
         "method": "Redfish Power Operation  ForceRestart",
         "lib_file_path": "bmc_redfish_utils.robot"
     },
-    # OPAL Terminate Immediate.
     "OPAL TI": {
         "start": {
             "redfish": "^1$",
