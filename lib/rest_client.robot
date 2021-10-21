@@ -365,7 +365,9 @@ Upload Image To BMC
     Set To Dictionary  ${kwargs}  headers  ${headers}
     Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post
     ...  base_uri=${base_uri}  args=&{kwargs}
+    Log To Console  DEBUG: Before POST upload  ${base_uri}
     ${ret}=  Post Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
+    Log To Console  DEBUG: AFTER POST upload  ${base_uri}
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
     Valid Value  ret.status_code  ${valid_status_codes}
     Delete All Sessions

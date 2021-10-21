@@ -171,9 +171,11 @@ Redfish Upload Image
     # image_file_path     The path to the image tarball.
 
     ${image_data}=  OperatingSystem.Get Binary File  ${image_file_path}
-
+    Log To Console  DEBUG: ${image_data}
+    Log To Console  DEBUG: Calling upload loop
     Wait Until Keyword Succeeds  2 times  240 sec
     ...  Upload Image To BMC  ${uri}  timeout=${240}  data=${image_data}
+    Log To Console  DEBUG: DONE upload loop
 
 
 Redfish Verify BMC Version
