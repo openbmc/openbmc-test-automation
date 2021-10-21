@@ -9,7 +9,6 @@
 -i Redfish_Login_Using_Invalid_Token
 -i Delete_Redfish_Session_Using_Valid_Login
 -i Redfish_Login_With_Invalid_Credentials
--i Redfish_Login_Using_Unsecured_HTTP
 -i Verify_Update_Service_Enabled
 -i Verify_Redfish_Software_Inventory_Collection
 -i Redfish_Software_Inventory_Status_Check
