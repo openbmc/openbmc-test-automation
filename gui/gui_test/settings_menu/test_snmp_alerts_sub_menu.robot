@@ -87,6 +87,33 @@ Configure SNMP Settings On BMC Via GUI And Verify
     Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
 
 
+Configure SNMP Settings On BMC With Empty Port Via GUI And Verify
+    [Documentation]  Configure SNMP settings on BMC with empty port via GUI and verify.
+    [Tags]  Configure_SNMP_Settings_On_BMC_With_Empty_Port_Via_GUI_And_Verify
+    [Teardown]  Delete SNMP Manager Via GUI
+
+    Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${empty_port}
+
+    Wait Until Page Contains  ${SNMP_MGR1_IP}  timeout=30s
+
+    # SNMP Manager IP is set with default port number when no port number is provided.
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+
+
+Configure Invalid SNMP Settings On BMC Via GUI And Verify
+
+    [Documentation]  Configure invalid SNMP settings on BMC via GUI and verify.
+    [Tags]  Configure_Invalid_SNMP_Settings_On_BMC_Via_GUI_And_Verify
+    [Template]  Configure SNMP Manager On BMC With Invalid Setting Via GUI And Verify
+
+    # snmp_manager      port_value               Expected status
+    ${SNMP_MGR1_IP}     ${out_of_range_port}     Value must be between 0 – 65535
+    ${SNMP_MGR1_IP}     ${alpha_port}            Value must be between 0 – 65535
+    ${SNMP_MGR1_IP}     ${negative_port}         Value must be between 0 – 65535
+    ${out_of_range_ip}  ${NON_DEFAULT_PORT1}     Invalid format
+    ${alpha_ip}         ${NON_DEFAULT_PORT1}     Invalid format
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -124,3 +151,24 @@ Delete SNMP Manager Via GUI
     Click Element  ${xpath_delete_destination}
     Wait Until Keyword Succeeds  30 sec  10 sec  Refresh GUI And Verify Element Value
     ...  ${xpath_snmp_alerts_heading}  SNMP Alerts
+
+
+Configure SNMP Manager On BMC With Invalid Setting Via GUI And Verify
+
+    [Documentation]  Configure SNMP Manager on BMC with invalid setting via GUI and verify.
+    [Arguments]  ${snmp_manager}  ${port_value}  ${expected_error}
+    [Teardown]  Click Element  ${xpath_cancel_button}
+
+    # Description of argument(s):
+    # ${snmp_manager}    SNMP manager IP address.
+    # ${port_value}      SNMP manager port.
+    # ${expected_error}  Expected error optionally provided in testcase
+    # ....               (e.g. Invalid format / Value must be between 0 – 65535).
+
+    Configure SNMP Manager Via GUI  ${snmp_manager}  ${port_value}
+    Wait Until Page Contains   ${expected_error}
+    ${status}=  Run Keyword And Return Status
+    ...  Verify SNMP Manager Configured On BMC  ${snmp_manager}  ${port_value}
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=BMC is allowing to configure with invalid data.
+
