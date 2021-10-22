@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c47e14a1_7adf0c62",
+        "filename": "data/boot_lists/All",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000068
+      },
+      "writtenOn": "2021-10-22T19:34:53Z",
+      "side": 1,
+      "message": "Should these new boot tests be added after Auto Reboot (mfg)?  That way we keep the two Auto Reboot boot tests together.",
+      "revId": "5ad74bd3cb65af3c65ab2dace1486f558d0f1047",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
