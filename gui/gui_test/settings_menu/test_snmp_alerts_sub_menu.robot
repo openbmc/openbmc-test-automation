@@ -87,6 +87,98 @@ Configure SNMP Settings On BMC Via GUI And Verify
     Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
 
 
+Configure SNMP Settings On BMC With Empty Port Via GUI And Verify
+    [Documentation]  Configure SNMP settings on BMC with empty port via GUI and verify.
+    [Tags]  Configure_SNMP_Settings_On_BMC_With_Empty_Port_Via_GUI_And_Verify
+    [Teardown]  Delete SNMP Manager Via GUI
+
+    Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${empty_port}
+
+    Wait Until Page Contains  ${SNMP_MGR1_IP}  timeout=30s
+
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+
+
+Configure SNMP Settings On BMC With Out Of Range Port Via GUI And Verify
+    [Documentation]  Configure SNMP settings on BMC with out of range port via GUI and verify.
+    [Tags]  Configure_SNMP_Settings_On_BMC_With_Out_Of_Range_Port_Via_GUI_And_Verify
+    [Teardown]  Click Element  ${xpath_cancel_button}
+
+    Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${out_of_range_port}
+
+    Wait Until Page Contains   Value must be between 0 – 65535
+
+    ${status}=  Run Keyword And Return Status
+    ...  Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${out_of_range_port}
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=BMC is allowing to configure out of range port.
+
+
+Configure SNMP Settings On BMC With Alpha Port Via GUI And Verify
+    [Documentation]  Configure SNMP settings on BMC with alpha port via GUI and verify.
+    [Tags]  Configure_SNMP_Settings_On_BMC_With_Negative_Port_Via_GUI_And_Verify
+    [Teardown]  Click Element  ${xpath_cancel_button}
+
+    Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${alpha_port}
+
+    Wait Until Page Contains   Value must be between 0 – 65535
+
+    ${status}=  Run Keyword And Return Status
+    ...  Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${alpha_port}
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=BMC is allowing to configure alpha port.
+
+
+Configure SNMP Settings On BMC With Negative Port Via GUI And Verify
+    [Documentation]  Configure SNMP settings on BMC with negative port via GUI and verify.
+    [Tags]  Configure_SNMP_Settings_On_BMC_With_Negative_Port_Via_GUI_And_Verify
+    [Teardown]  Click Element  ${xpath_cancel_button}
+
+    Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${negative_port}
+
+    Wait Until Page Contains   Value must be between 0 – 65535
+
+    ${status}=  Run Keyword And Return Status
+    ...  Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${negative_port}
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=BMC is allowing to configure negative port.
+
+
+Configure SNMP Settings On BMC With Out Of Range IP Via GUI And Verify
+    [Documentation]  Configure SNMP settings on BMC with out of range ip via GUI and verify.
+    [Tags]  Configure_SNMP_Settings_On_BMC_With_Out_Of_Range_IP_Via_GUI_And_Verify
+    [Teardown]  Click Element  ${xpath_cancel_button}
+
+    Configure SNMP Manager Via GUI  ${out_of_range_ip}  ${NON_DEFAULT_PORT1}
+
+    Wait Until Page Contains  Invalid format
+
+    ${status}=  Run Keyword And Return Status
+    ...  Verify SNMP Manager Configured On BMC  ${out_of_range_ip}  ${NON_DEFAULT_PORT1}
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=BMC is allowing to configure out of range ip.
+
+
+Configure SNMP Settings On BMC With Invalid IP Via GUI And Verify
+    [Documentation]  Configure SNMP settings on BMC with invalid ip via GUI and verify.
+    [Tags]  Configure_SNMP_Settings_On_BMC_With_Invalid_IP_Via_GUI_And_Verify
+    [Teardown]  Click Element  ${xpath_cancel_button}
+
+    Configure SNMP Manager Via GUI  ${alpha_ip}  ${NON_DEFAULT_PORT1}
+
+    Wait Until Page Contains   Invalid format
+
+    ${status}=  Run Keyword And Return Status
+    ...  Verify SNMP Manager Configured On BMC  ${alpha_ip}  ${NON_DEFAULT_PORT1}
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=BMC is allowing to configure invalid ip.
+
+
 *** Keywords ***
 
 Suite Setup Execution
