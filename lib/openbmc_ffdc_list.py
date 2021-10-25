@@ -65,6 +65,8 @@ FFDC_BMC_FILE = {
         + ' do (echo /org/open_power/control/occ$i;'
         + ' busctl get-property org.open_power.OCC.Control /org/open_power/control/occ$i'
         + ' org.open_power.OCC.Status OccActive) done > /tmp/OCC_state.txt 2>&1',
+        'bmcweb_persistent_data.json': 'cat /home/root/bmcweb_persistent_data.json > '
+        + ' /tmp/bmcweb_persistent_data.json',
     },
 }
 # Add file name and corresponding command needed for all Linux distributions
