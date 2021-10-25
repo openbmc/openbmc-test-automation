@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "96aa44fe_5118d82d",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-10-25T10:16:38Z",
+      "side": 1,
+      "message": "Lot of duplicate code. Please use templet format for these test cases.",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 179,
+        "endChar": 53
+      },
+      "revId": "10b6e959c59b4996cc8df4e9ff0956ec1e164526",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
