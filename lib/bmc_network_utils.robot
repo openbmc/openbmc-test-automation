@@ -162,8 +162,11 @@ Get FW_Env MAC Address
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
-    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  /sbin/fw_printenv | grep ${ethernet_interface} 
+    ${ethernet_interface}=  Set Variable If
+    ...  "${ethernet_interface}"=="eth0"  ethaddr
+    ...  "${ethernet_interface}"=="eth1"  eth1addr
+
+    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  /sbin/fw_printenv | grep ${ethernet_interface}
 
     # Split the line and return MAC address.
     # Split list data:
