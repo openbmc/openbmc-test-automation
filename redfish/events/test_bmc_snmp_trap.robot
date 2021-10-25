@@ -243,6 +243,46 @@ Configure SNMP Manager On BMC With Negative Port And Verify
     ...  msg=BMC is allowing to configure negative port.
 
 
+Configure Multiple SNMP Managers On BMC And Verify Persistency On BMC Reboot
+    [Documentation]  Configure multiple SNMP Managers on BMC and verify persistency on BMC reboot.
+    [Tags]  Configure_Multiple_SNMP_Managers_On_BMC_And_Verify_Persistency_On_BMC_Reboot
+    [Teardown]  Run Keywords
+    ...  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    ...  AND
+    ...  Delete SNMP Manager Via Redfish  ${SNMP_MGR2_IP}  ${SNMP_DEFAULT_PORT}
+
+    Configure SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    Configure SNMP Manager Via Redfish  ${SNMP_MGR2_IP}  ${SNMP_DEFAULT_PORT}
+
+    # Reboot BMC and check persistency SNMP manager.
+    OBMC Reboot (off)
+
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR2_IP}  ${SNMP_DEFAULT_PORT}
+
+
+Configure Multiple SNMP Managers On BMC And Check Trap On BMC Reboot
+    [Documentation]  Configure multiple SNMP Managers on BMC and check trap on BMC reboot.
+    [Tags]  Configure_Multiple_SNMP_Managers_On_BMC_And_Check_Trap_On_BMC_Reboot
+    [Teardown]  Run Keywords
+    ...  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    ...  AND
+    ...  Delete SNMP Manager Via Redfish  ${SNMP_MGR2_IP}  ${SNMP_DEFAULT_PORT}
+
+    Configure SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    Configure SNMP Manager Via Redfish  ${SNMP_MGR2_IP}  ${SNMP_DEFAULT_PORT}
+
+    # Reboot BMC and check persistency SNMP manager.
+    OBMC Reboot (off)
+
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR2_IP}  ${SNMP_DEFAULT_PORT}
+
+    # Check if trap is generated and sent to SNMP managers after reboot.
+    Generate Error On BMC And Verify Trap
+    ...  ${CMD_INTERNAL_FAILURE}  ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+
+
 *** Keywords ***
 
 Suite Setup Execution
