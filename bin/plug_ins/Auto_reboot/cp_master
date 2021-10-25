@@ -6,7 +6,6 @@ Set the auto_boot policy according to the caller's wishes.
 
 import os
 import sys
-import time
 
 save_dir_path = sys.path.pop(0)
 
@@ -34,6 +33,7 @@ stock_list = [("test_mode", get_plug_default("test_mode", 0)),
               ("debug", get_plug_default("debug", 0))]
 
 AUTO_REBOOT_DISABLE = "1"
+
 
 def validate_parms():
 
@@ -67,14 +67,6 @@ def main():
 
     lib_file_path = init_robot_file_path("lib/utils.robot")
 
-    REDFISH_SUPPORT_TRANS_STATE = int(os.environ.get('REDFISH_SUPPORT_TRANS_STATE', 0))
-    if not REDFISH_SUPPORT_TRANS_STATE:
-        try:
-            from robot.libraries.BuiltIn import BuiltIn
-            REDFISH_SUPPORT_TRANS_STATE = int(BuiltIn().get_variable_value("${REDFISH_SUPPORT_TRANS_STATE}", default=0))
-        except:
-            pass
-
     enable_auto_reboot = 1 - AUTO_REBOOT_DISABLE
     print_var(enable_auto_reboot)
     keyword_string = "Set Auto Reboot Setting  ${%i}" % enable_auto_reboot
@@ -84,14 +76,9 @@ def main():
                                       REDFISH_SUPPORT_TRANS_STATE, keyword_string, lib_file_path, quiet,
                                       test_mode, debug, outputdir, output, log, report)
 
-    retry_count = 3
-    while not robot_cmd_fnc(cmd_buf):
-        retry_count -= 1
-        if retry_count == 0:
-            print_error_report("Robot command execution failed.")
-            exit(1)
-        time.sleep(30)
-    return
+    if not robot_cmd_fnc(cmd_buf):
+        print_error_report("Robot command execution failed.")
+        exit(1)
 
 
 main()
