@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6012fada_7723e4dc",
+        "filename": "data/boot_lists/All",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000068
+      },
+      "writtenOn": "2021-10-27T15:02:59Z",
+      "side": 1,
+      "message": "Change from \"istep\" to \"Istep Power On\" and move to after line 6 to keep all the \"power on\" type boot tests grouped together.",
+      "revId": "46c43ab4bda6ea979000979961293de2c213632f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
