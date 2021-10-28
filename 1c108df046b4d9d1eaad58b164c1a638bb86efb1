@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1f79ac9b_543987d7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-10-28T14:16:53Z",
+      "side": 1,
+      "message": "alerts",
+      "range": {
+        "startLine": 7,
+        "startChar": 29,
+        "endLine": 7,
+        "endChar": 35
+      },
+      "revId": "1c108df046b4d9d1eaad58b164c1a638bb86efb1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "961f933b_ac253c6b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-10-28T14:16:53Z",
+      "side": 1,
+      "message": "Testcase added:",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 7
+      },
+      "revId": "1c108df046b4d9d1eaad58b164c1a638bb86efb1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5c4fc7a2_ab062935",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-10-28T14:16:53Z",
+      "side": 1,
+      "message": "Add a comment saying that SNMP IP is set with default port number when no port number is provided.",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 80
+      },
+      "revId": "1c108df046b4d9d1eaad58b164c1a638bb86efb1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0c157ee4_22c84425",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-10-28T14:16:53Z",
+      "side": 1,
+      "message": "Configure Invalid SNMP Settings On BMC Via GUI And Verify Error.\n    [Documentation]  Configure invalid SNMP settings on BMC via GUI and verify error.\n    [Tags]  Configure_SNMP_Settings_On_BMC_And_Verify\n    [Template]  Configure Invalid SNMP Manager On BMC Via GUI And Verify\n\n    # snmp_manager      port_value.              Expected result\n    ${SNMP_MGR1_IP}     ${out_of_range_port}     Value must be between 0 – 65535   \n    ${SNMP_MGR1_IP}     ${alpha_port}            Value must be between 0 – 65535 \n    ${SNMP_MGR1_IP}     ${negative_port}         Value must be between 0 – 65535 \n    ${out_of_range_ip}  ${NON_DEFAULT_PORT1}     Invalid format\n    ${alpha_ip}         ${NON_DEFAULT_PORT1}     Invalid format",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 44
+      },
+      "revId": "1c108df046b4d9d1eaad58b164c1a638bb86efb1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1d3eb6e7_5b4cfcd9",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-10-28T14:16:53Z",
+      "side": 1,
+      "message": "Have only one keyword for these two like\n\nConfigure SNMP Manager On BMC With Invalid Setting Via GUI And Verify\n    [Documentation]  Configure SNMP Manager on BMC with invalid setting via GUI and verify.\n    [Arguments]  ${snmp_manager}  ${port_value}  ${expected_error}\n    [Teardown]  Click Element  ${xpath_cancel_button}\n\n    # Description of Argument(s)\n    #\n    #\n\n    Configure SNMP Manager Via GUI  ${snmp_manager}  ${port_value}\n\n    Wait Until Page Contains   ${expected_error}\n\n    ${status}\u003d  Run Keyword And Return Status\n    ...  Verify SNMP Manager Configured On BMC  ${snmp_manager}  ${port_value}\n\n    Should Be Equal As Strings  ${status}  False\n    ...  msg\u003dBMC is allowing to configure invalid ip.",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 53
+      },
+      "revId": "1c108df046b4d9d1eaad58b164c1a638bb86efb1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
