@@ -231,8 +231,8 @@ Test Setup Execution
     Printn
     Rprint Vars  bmc_version
 
-    ${pnor_version}=  Get Host Software Objects Details
-    Rprint Vars  pnor_version
+    ${fw_version}=  Get BMC Version
+    Rprint Vars  fw_version
 
     ${is_redfish}=  Run Keyword And Return Status  Redfish.Login
     ${rest_keyword}=  Set Variable If  ${is_redfish}  Redfish  REST
@@ -242,10 +242,11 @@ Test Setup Execution
     Run Keyword  ${rest_keyword} Power On  stack_mode=skip
 
     Run Key U  Sleep \ 15s
-    Delete All Error Logs
+    Run Keyword And Ignore Error  Delete All Error Logs
+    Run Keyword And Ignore Error  Redfish Purge Event Log
     Tool Exist  htxcmdline
 
-    ${os_release_info}=  utils_os.Get OS Release Info
+    ${os_release_info}=  utils_os.Get OS Release Info  uname
     Rprint Vars  os_release_info  fmt=1
 
     # Shutdown if HTX is running.

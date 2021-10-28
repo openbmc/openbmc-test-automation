@@ -13,7 +13,7 @@ import bmc_ssh_utils
 import var_funcs
 
 
-def get_os_release_info():
+def get_os_release_info(default_cmd="cat /etc/os-release"):
     r"""
 
     Get os-release info and return it as a dictionary.
@@ -58,9 +58,14 @@ def get_os_release_info():
       [redhat_bugzilla_product_version]:  7.5
       [redhat_support_product]:           Red Hat Enterprise Linux
       [redhat_support_product_version]:   7.5 Beta
+
+
+.   Description of argument(s):
+    default_cmd    A string command to be executed (e.g cat /etc/os-release).
+
     """
 
     stdout, stderr, rc =\
-        bmc_ssh_utils.os_execute_command("cat /etc/os-release")
+        bmc_ssh_utils.os_execute_command(default_cmd)
 
     return var_funcs.key_value_outbuf_to_dict(stdout, delim="=", strip='"')
