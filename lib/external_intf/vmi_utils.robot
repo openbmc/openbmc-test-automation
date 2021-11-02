@@ -76,6 +76,9 @@ Delete VMI IPv4 Address
     ...  body=${data}  valid_status_codes=[${valid_status_code}]
 
     Return From Keyword If  ${valid_status_code} != ${HTTP_ACCEPTED}
+
+    # Wait few seconds for configuration to get effective.
+    Sleep  ${wait_time}
     ${vmi_ip}=  Get VMI Network Interface Details  ${interface}
     Should Be Empty  ${vmi_ip["IPv4_Address"]}
 
