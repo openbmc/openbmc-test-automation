@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9dc3ccfb_af64714e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-02T07:18:57Z",
+      "side": 1,
+      "message": "Commit name is coming long. So leave one blank line gap after this line.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "8b36433f214d4f177be3413fc32cc0c1575dcbc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cced2f0b_be5f5d6d",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-02T07:18:57Z",
+      "side": 1,
+      "message": "manager",
+      "range": {
+        "startLine": 158,
+        "startChar": 36,
+        "endLine": 158,
+        "endChar": 43
+      },
+      "revId": "8b36433f214d4f177be3413fc32cc0c1575dcbc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b851a2c6_d5d9b020",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-02T07:18:57Z",
+      "side": 1,
+      "message": "# snmp_manager       SNMP manager IP address.\n    # port_value         SNMP manager port.\n    # expected_error     Expected error optionally provided in testcase\n    # ....               (e.g. Invalid format / Value must be between 0 – 65535).",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 81
+      },
+      "revId": "8b36433f214d4f177be3413fc32cc0c1575dcbc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "52a6003c_dd9111f2",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-02T07:18:57Z",
+      "side": 1,
+      "message": "snmp_manager_port",
+      "range": {
+        "startLine": 168,
+        "startChar": 55,
+        "endLine": 168,
+        "endChar": 65
+      },
+      "revId": "8b36433f214d4f177be3413fc32cc0c1575dcbc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4c814383_0b3ed84d",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-02T07:18:57Z",
+      "side": 1,
+      "message": "snmp_manager_ip",
+      "range": {
+        "startLine": 168,
+        "startChar": 38,
+        "endLine": 168,
+        "endChar": 50
+      },
+      "revId": "8b36433f214d4f177be3413fc32cc0c1575dcbc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1986be6_f745465f",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-02T07:18:57Z",
+      "side": 1,
+      "message": "SNMP settings.",
+      "range": {
+        "startLine": 173,
+        "startChar": 55,
+        "endLine": 173,
+        "endChar": 59
+      },
+      "revId": "8b36433f214d4f177be3413fc32cc0c1575dcbc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
