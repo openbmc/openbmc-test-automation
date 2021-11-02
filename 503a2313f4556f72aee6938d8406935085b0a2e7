@@ -16,6 +16,24 @@
       "revId": "503a2313f4556f72aee6938d8406935085b0a2e7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bb002e2a_418dfee2",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-11-02T11:34:45Z",
+      "side": 1,
+      "message": "So that the Suite(using library keywords) runs on interface based on channel number provided by user.",
+      "parentUuid": "9de3999f_9199f30a",
+      "revId": "503a2313f4556f72aee6938d8406935085b0a2e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
