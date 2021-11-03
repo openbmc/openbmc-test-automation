@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "964b8b57_21ed4446",
+        "filename": "lib/external_intf/vmi_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-03T16:21:49Z",
+      "side": 1,
+      "message": "why double ${${}}  ???",
+      "range": {
+        "startLine": 14,
+        "startChar": 38,
+        "endLine": 14,
+        "endChar": 48
+      },
+      "revId": "4b90775d225a7bb08ce785dada04266eddbf3784",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5656036_c4f64375",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interfaces.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-03T16:21:49Z",
+      "side": 1,
+      "message": "can u reword it and fix the sentence construct to read it meaningful, the test case name and doc are same here",
+      "range": {
+        "startLine": 61,
+        "startChar": 21,
+        "endLine": 61,
+        "endChar": 95
+      },
+      "revId": "4b90775d225a7bb08ce785dada04266eddbf3784",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "55dbbf8b_3a565e12",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interfaces.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-03T16:21:49Z",
+      "side": 1,
+      "message": "Same comment as above on documentation",
+      "range": {
+        "startLine": 75,
+        "startChar": 21,
+        "endLine": 75,
+        "endChar": 95
+      },
+      "revId": "4b90775d225a7bb08ce785dada04266eddbf3784",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
