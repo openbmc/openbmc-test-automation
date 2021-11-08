@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "87e2fb86_d2b9b3e8",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-11-08T08:20:57Z",
+      "side": 1,
+      "message": "although above looks correct: ideally it should be like this:\n${partition_status} \u003d\u003d 0",
+      "revId": "95166430f5c8178ac8d3bcf526c117ef9b6610eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
