@@ -22,6 +22,30 @@
       "revId": "741b95058fa0d4cf09212d69d9c00c18792886d3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41d15f78_fd697010",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-11-08T17:57:51Z",
+      "side": 1,
+      "message": "Before uploading the partition file. its gets created as a local copy which needs to be deleted from local space.",
+      "parentUuid": "8d33ee18_f702408f",
+      "range": {
+        "startLine": 303,
+        "startChar": 0,
+        "endLine": 305,
+        "endChar": 65
+      },
+      "revId": "741b95058fa0d4cf09212d69d9c00c18792886d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
