@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8d33ee18_f702408f",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-08T15:09:57Z",
+      "side": 1,
+      "message": "Typo there.. and what actually we are trying to achieve here ?",
+      "range": {
+        "startLine": 303,
+        "startChar": 0,
+        "endLine": 305,
+        "endChar": 65
+      },
+      "revId": "741b95058fa0d4cf09212d69d9c00c18792886d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
