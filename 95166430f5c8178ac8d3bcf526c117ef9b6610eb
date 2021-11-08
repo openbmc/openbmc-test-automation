@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "9fa7e6c1_d5eaf5ff",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-08T08:43:16Z",
+      "side": 1,
+      "message": "Can we be bit more descriptive to tell what the test does and expect ?",
+      "range": {
+        "startLine": 304,
+        "startChar": 21,
+        "endLine": 304,
+        "endChar": 49
+      },
+      "revId": "95166430f5c8178ac8d3bcf526c117ef9b6610eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "87e2fb86_d2b9b3e8",
         "filename": "openpower/ext_interfaces/test_savearea_management.robot",
         "patchSetId": 5
