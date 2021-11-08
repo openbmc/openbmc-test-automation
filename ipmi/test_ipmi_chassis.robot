@@ -51,7 +51,7 @@ Verify Host PowerOn Via IPMI
 
 Verify Soft Shutdown
     [Documentation]  Verify host OS shutdown softly via IPMI command.
-    [Tags]  Verify_Soft_Stutdown
+    [Tags]  Verify_Soft_Shutdown
 
     Redfish Power On  stack_mode=skip
     Run IPMI Standard Command  chassis power soft
