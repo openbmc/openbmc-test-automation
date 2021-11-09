@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0e7b6d62_b93bdfe8",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-11-09T08:15:33Z",
+      "side": 1,
+      "message": "Managers",
+      "range": {
+        "startLine": 117,
+        "startChar": 24,
+        "endLine": 117,
+        "endChar": 32
+      },
+      "revId": "379cc92c6ac8216213aae61c1ff0337c27178c20",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5d6aaa1_7c482f34",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-11-09T08:15:33Z",
+      "side": 1,
+      "message": "snmp_port",
+      "range": {
+        "startLine": 122,
+        "startChar": 25,
+        "endLine": 122,
+        "endChar": 41
+      },
+      "revId": "379cc92c6ac8216213aae61c1ff0337c27178c20",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "891a33cf_15b2241b",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-11-09T08:15:33Z",
+      "side": 1,
+      "message": "snmp_manager_ip",
+      "range": {
+        "startLine": 122,
+        "startChar": 6,
+        "endLine": 122,
+        "endChar": 19
+      },
+      "revId": "379cc92c6ac8216213aae61c1ff0337c27178c20",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
