@@ -114,6 +114,37 @@ Configure Invalid SNMP Settings On BMC Via GUI And Verify
     ${alpha_ip}         ${NON_DEFAULT_PORT1}     Invalid format
 
 
+Configure Multiple SNMP Managers On BMC Via GUI And Verify
+    [Documentation]  Configure multiple SNMP managers on BMC via GUI and verify.
+    [Tags]  Configure_Multiple_SNMP_Managerss_With_Default_Port_Via_GUI_And_Verify
+    [Template]  Configure Multiple SNMP Managers On BMC With Valid Port Via GUI And Verify
+
+    # snmp_manager_ip      snmp_port
+    ${SNMP_MGR1_IP}     ${SNMP_DEFAULT_PORT}
+    ${SNMP_MGR2_IP}     ${SNMP_DEFAULT_PORT}
+
+
+Configure Multiple SNMP Managers With Non Default Port Via GUI And Verify
+    [Documentation]  Configure multiple SNMP managers with non-default port via GUI and verify.
+    [Tags]  Configure_Multiple_SNMP_Managers_With_Non_Default_Port_Via_GUI_And_Verify
+    [Template]  Configure Multiple SNMP Managers On BMC With Valid Port Via GUI And Verify
+
+    # snmp_manager_ip      snmp_port
+    ${SNMP_MGR1_IP}     ${NON_DEFAULT_PORT1}
+    ${SNMP_MGR2_IP}     ${NON_DEFAULT_PORT1}
+
+
+Configure Multiple SNMP Managers With Different Ports Via GUI And Verify
+    [Documentation]  Configure multiple SNMP managers with different ports via GUI and verify.
+    [Tags]  Configure_Multiple_SNMP_Managers_With_Different_Ports_Via_GUI_And_Verify
+    [Template]  Configure Multiple SNMP Managers On BMC With Valid Port Via GUI And Verify
+
+    # snmp_manager_ip      snmp_port
+    ${SNMP_MGR1_IP}     ${NON_DEFAULT_PORT1}
+    ${SNMP_MGR2_IP}     ${SNMP_DEFAULT_PORT}
+    ${SNMP_MGR3_IP}     ${NON_DEFAULT_PORT2}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -171,3 +202,16 @@ Configure SNMP Manager On BMC With Invalid Setting Via GUI And Verify
     ...  Verify SNMP Manager Configured On BMC  ${snmp_manager_ip}  ${snmp_manager_port}
     Should Be Equal As Strings  ${status}  False
     ...  msg=BMC is allowing to configure with invalid SNMP settings.
+
+
+Configure Multiple SNMP Managers On BMC With Valid Port Via GUI And Verify
+    [Documentation]  Configure multiple SNMP managers on BMC with valid port value via GUI and verify.
+    [Arguments]  ${snmp_ip_value}  ${snmp_port_value}
+    [Teardown]  Delete SNMP Manager Via GUI
+
+    # Description of argument(s):
+    # snmp_ip_value     SNMP manager IP address.
+    # snmp_port_value   SNMP manager port.
+
+    Configure SNMP Manager Via GUI  ${snmp_ip_value}  ${snmp_port_value}
+    Verify SNMP Manager Configured On BMC  ${snmp_ip_value}  ${snmp_port_value}
