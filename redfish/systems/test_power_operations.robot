@@ -12,6 +12,7 @@ Test Teardown    Test Teardown Execution
 
 # Extended code to check OCC state, power metric and others.
 ${additional_power_check}      ${1}
+${additional_occ_check}        ${1}
 
 *** Test Cases ***
 
@@ -38,7 +39,7 @@ Verify Redfish BMC PowerOn
 
     Redfish Power On
 
-    Run Keyword If  ${additional_power_check} == ${1}
+    Run Keyword If  ${additional_occ_check} == ${1}
     ...  Wait Until Keyword Succeeds  3 mins  30 secs  Match OCC And CPU State Count
 
     Run Keyword If  ${additional_power_check} == ${1}  Power Check
