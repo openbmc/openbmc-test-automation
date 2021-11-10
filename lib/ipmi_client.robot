@@ -306,7 +306,7 @@ Copy ipmitool
     scp.Open connection     ${OPENBMC_HOST}     username=${OPENBMC_USERNAME}      password=${OPENBMC_PASSWORD}
     scp.Put File    tools/ipmitool   /tmp
     SSHLibrary.Open Connection     ${OPENBMC_HOST}
-    Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}
+    SSHLibrary.Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}
     Execute Command     chmod +x /tmp/ipmitool
 
 
