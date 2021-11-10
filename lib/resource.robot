@@ -30,6 +30,8 @@ ${OPENBMC_USERNAME}    root
 ${OPENBMC_PASSWORD}    0penBmc
 ${REST_USERNAME}       root
 ${REST_PASSWORD}       0penBmc
+${OPENBMC_ADMIN_PASSWORD}  0penBmc
+${SERVICE_USER_PASSWORD}   0penBmc
 
 ${CHASSIS_ID}  chassis
 ${COMPONENT_NAME_OF_POWER_SUPPLY}  powersupply
