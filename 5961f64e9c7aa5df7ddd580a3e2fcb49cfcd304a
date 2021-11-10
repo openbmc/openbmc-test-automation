@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce9009ad_889878c7",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-10T15:11:21Z",
+      "side": 1,
+      "message": "Please combine all these in one like below\n\nConfigure Multiple SNMP Managers On BMC Via GUI And Verify\n    [Documentation]  Configure multiple SNMP managers on BMC via GUI and verify.\n    [Tags]  Configure_Multiple_SNMP_Managers_On_BMC_Via_GUI_And_Verify\n    [Template]  Configure Multiple SNMP Managers On BMC With Different Port Via GUI And Verify\n\n    # List of snmp_manager_ip, snmp_port\n    [${SNMP_MGR1_IP}, ${SNMP_DEFAULT_PORT}], [${SNMP_MGR2_IP}, ${SNMP_DEFAULT_PORT}]\n    [${SNMP_MGR1_IP}, ${NON_DEFAULT_PORT1}], [${SNMP_MGR2_IP}, ${NON_DEFAULT_PORT1}]\n    [${SNMP_MGR1_IP}, ${NON_DEFAULT_PORT1}], [${SNMP_MGR2_IP}, ${SNMP_DEFAULT_PORT}], [${SNMP_MGR3_IP}, ${NON_DEFAULT_PORT2}]",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 44
+      },
+      "revId": "5961f64e9c7aa5df7ddd580a3e2fcb49cfcd304a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c8eb2f5f_31f64d38",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-10T15:11:21Z",
+      "side": 1,
+      "message": "Here you need to have one variable to take up list entry like  - ${snmp_ip_port_value}",
+      "range": {
+        "startLine": 209,
+        "startChar": 17,
+        "endLine": 209,
+        "endChar": 53
+      },
+      "revId": "5961f64e9c7aa5df7ddd580a3e2fcb49cfcd304a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7369740a_14595c78",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-10T15:11:21Z",
+      "side": 1,
+      "message": "Here we need to add all the SNMP managers and port together from the list and then verify if those are saved correctly in BMC.",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 79
+      },
+      "revId": "5961f64e9c7aa5df7ddd580a3e2fcb49cfcd304a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
