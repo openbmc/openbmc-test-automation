@@ -88,6 +88,18 @@ Verify SSH Login Failure With Incorrect Service User Password
     Should Be Equal  ${status}  ${False}
 
 
+Verify Service User Sets Admin Password
+    [Documentation]  Verify if service user can reset admin password.
+    [Tags]  Verify_Service_User_Sets_Admin_Password
+    [Teardown]  Restore Admin Password
+
+    Redfish.Login  service  ${SERVICE_USER_PASSWORD}
+
+    # Update admin user password using Redfish.
+    ${payload}=  Create Dictionary  Password=NewTestPwd123
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/admin  body=&{payload}
+    ...  valid_status_codes=[${HTTP_OK}]
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -108,3 +120,11 @@ Upload Valid ACF
 
     Run Keywords  Open Connection for SCP
     scp.Put File  ${SERVICE_FILE_PATH}  ${acf_dir}
+
+
+Restore Admin Password
+    [Documentation]  Restore original password of admin user.
+
+    ${payload}=  Create Dictionary  Password=0penBmc
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/admin  body=&{payload}
+    ...  valid_status_codes=[${HTTP_OK}]
