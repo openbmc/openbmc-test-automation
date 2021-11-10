@@ -88,6 +88,18 @@ Verify SSH Login Failure With Incorrect Service User Password
     Should Be Equal  ${status}  ${False}
 
 
+Verify Service User Resets Admin Password 
+    [Documentation]  Verify if service user can reset admin password.
+    [Tags]  Verify_Service_User_Resets_Admin_Password 
+
+    Redfish.Logout
+    Redfish.Login  service  ${SERVICE_USER_PASSWORD}
+
+    # Update admin user password using Redfish.
+    ${payload}=  Create Dictionary  Password=NewTestPwd123
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/admin  body=&{payload}
+    ...  valid_status_codes=[${HTTP_OK}]
+
 *** Keywords ***
 
 Suite Setup Execution
