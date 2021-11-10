@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e9a458dc_494c1c16",
+        "filename": "data/boot_table_redfish.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1000068
+      },
+      "writtenOn": "2021-11-10T16:12:25Z",
+      "side": 1,
+      "message": "shouldn\u0027t bmc_reboot \u003d 1?",
+      "revId": "febd5dab590323069c5e7ef5a1b3f9e1c1fbb060",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
