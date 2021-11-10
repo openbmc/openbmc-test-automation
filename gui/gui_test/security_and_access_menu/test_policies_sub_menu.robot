@@ -97,7 +97,7 @@ Disable SSH Via GUI And Verify
 
 
 Disable IPMI Via GUI And Verify
-    [Documentation]  Verify that IPMI command doesnot work after disabling IPMI.
+    [Documentation]  Verify that IPMI command does not work after disabling IPMI.
     [Tags]  Disable_IPMI_Via_GUI_And_Verify
     [Teardown]  Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol
     ...  body={"IPMI":{"ProtocolEnabled":True}}  valid_status_codes=[200, 204]

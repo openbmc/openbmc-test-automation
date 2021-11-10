@@ -970,7 +970,7 @@ Set Watchdog Interval Using Busctl
     [Arguments]  ${milliseconds}=1000
 
     # Description of argument(s):
-    # miliseconds      Time interval for watchdog timer
+    # milliseconds     Time interval for watchdog timer
 
     ${cmd}=  Catenate  busctl set-property xyz.openbmc_project.Watchdog
     ...                /xyz/openbmc_project/watchdog/host0

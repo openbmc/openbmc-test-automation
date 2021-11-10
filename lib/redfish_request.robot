@@ -3,7 +3,7 @@
 Documentation     Redfish request library which provide keywords for creating session,
 ...               sending POST, PUT, DELETE, PATCH, GET etc. request using redfish_request.py
 ...               library file. It also contain other keywords which uses redfish_request.py
-...               libarary infrastructure.
+...               library infrastructure.
 
 Resource          openbmc_ffdc.robot
 Resource          bmc_redfish_resource.robot
