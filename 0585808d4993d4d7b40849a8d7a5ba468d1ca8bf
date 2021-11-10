@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "772c1302_8587ecf2",
+        "filename": "data/variables.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-10T19:18:10Z",
+      "side": 1,
+      "message": "Please remove this from here and put the same in the suite.. Refer the comment in the suite",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 107
+      },
+      "revId": "0585808d4993d4d7b40849a8d7a5ba468d1ca8bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d236b4a5_af4557d0",
+        "filename": "redfish/systems/test_powersubsystem_settings.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-10T19:18:10Z",
+      "side": 1,
+      "message": "REDFISH_CHASSIS_POWERSUBSYSTEM_SUPPLIES_URI \u003d ${REDFISH_CHASSIS_URI}/${CHASSIS_ID}/PowerSubsystem/PowerSupplies\n\n\nThe reason being by default the Chassis is /redfish/v1/Chassis/chassis\n\nHowever in community or vendor cans have their own chassis naming\n\n/redfish/v1/Chassis/Transformer\n\n/redfish/v1/Chassis/IcallMyself\n\nby default CHASSIS_ID is set to chassis , so it will take care of your code.. and community can do\n\n-v CHASSIS_ID:Transformer   \n\nand run the test",
+      "revId": "0585808d4993d4d7b40849a8d7a5ba468d1ca8bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c61cdadd_47edb4bf",
+        "filename": "redfish/systems/test_powersubsystem_settings.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-10T19:18:10Z",
+      "side": 1,
+      "message": "Can u fix up a bit those spacing\n\n    \n    # \"PowerMode@Redfish.AllowableValues\": [\n    #    \"Static\",\n    #    \"MaximumPerformance\",\n    #    \"PowerSaving\"\n    # ],",
+      "range": {
+        "startLine": 31,
+        "startChar": 1,
+        "endLine": 35,
+        "endChar": 5
+      },
+      "revId": "0585808d4993d4d7b40849a8d7a5ba468d1ca8bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
