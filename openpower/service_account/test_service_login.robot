@@ -42,6 +42,15 @@ Verify Service User Login Without ACF file
     ...  Redfish.Login  service  ${SERVICE_USER_PASSWORD}
 
 
+Verify Service User SSH Login Without ACF file
+    [Documentation]  Verify service user ssh login failure without ACF file.
+    [Tags]  Verify_Service_User_SSH_Login_Without_ACF_file
+
+    Remove Existing ACF
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    ${status}=   Run Keyword And Return Status  SSHLibrary.Login  service  ${SERVICE_USER_PASSWORD}
+    Should Be Equal  ${status}  ${False}
+
 Verify Service Login Failure With Expired ACF
     [Documentation]  Verify service user login failure with expired ACF.
     [Tags]  Verify_Service_Login_Failure_With_Expired_ACF
