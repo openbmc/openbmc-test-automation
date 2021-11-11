@@ -122,6 +122,13 @@ Verify User Account And Properties Saved Through Reboots
     Wait Until Page Contains  my_admin_user  timeout=15
 
 
+Verify Service User Availability
+    [Documentation]  Verify availability of service user in user magement page.
+    [Tags]  Verify_Service_User_Availability
+
+    Wait Until Page Contains  service  timeout=15
+
+
 *** Keywords ***
 
 Create User And Verify
