@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ceffdfa7_5059f535",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-11T08:03:47Z",
+      "side": 1,
+      "message": "Please reword the documentation.. instead of reset use the term update or modify and word it accordingly",
+      "range": {
+        "startLine": 92,
+        "startChar": 3,
+        "endLine": 92,
+        "endChar": 69
+      },
+      "revId": "d47285fba370bbd8fe65ed9a4e133ccc99c4c124",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
