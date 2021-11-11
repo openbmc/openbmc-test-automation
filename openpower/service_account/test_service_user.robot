@@ -59,6 +59,15 @@ Verify Deleting Service User
      Redfish.Delete  /redfish/v1/AccountService/Accounts/service  valid_status_codes=[${HTTP_FORBIDDEN}]
 
 
+Verify Modifying Service User Role
+     [Documentation]  Verify error while modifyig service user role via Redfish.
+     [Tags]  Verify_Modifying_Service_User_Role
+
+     ${payload}=  Create Dictionary  RoleId=Operator
+     Redfish.Patch  /redfish/v1/AccountService/Accounts/service  body=&{payload}
+     ...  valid_status_codes=[${HTTP_FORBIDDEN}]
+
+
 *** Keywords ***
 
 Suite Setup Execution
