@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e4106d6_b8ca037c",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-11T10:18:24Z",
+      "side": 1,
+      "message": "We should have a seperate variable for Admin password which we can use while running automation(like -v OPENBMC_ADMIN_PASSWORD:0penBmc).  That variable we should provide here like ${OPENBMC_ADMIN_PASSWORD}.",
+      "range": {
+        "startLine": 128,
+        "startChar": 45,
+        "endLine": 128,
+        "endChar": 52
+      },
+      "revId": "b8edc1c3f246898e7289c6fdfd345d3840636cbc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
