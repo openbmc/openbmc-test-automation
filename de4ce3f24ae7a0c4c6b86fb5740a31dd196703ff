@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e6148e01_8760c46a",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-11T11:22:07Z",
+      "side": 1,
+      "message": "SERVICE_USER_PASSWORD  where are we setting default ?\n\nuser input it I get it..but have a default example in this test suite variable\n\n\n*** Variables ***\n\n${SERVICE_USER_PASSWORD}        0penBmc\n\n${OPENBMC_ADMIN_PASSWORD}       0penBmc1234",
+      "range": {
+        "startLine": 96,
+        "startChar": 30,
+        "endLine": 96,
+        "endChar": 51
+      },
+      "revId": "de4ce3f24ae7a0c4c6b86fb5740a31dd196703ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5903df98_1f490026",
+        "filename": "openpower/service_account/test_service_login.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-11T11:22:07Z",
+      "side": 1,
+      "message": "OPENBMC_ADMIN_PASSWORD  \n\nwhere is this coming from ?",
+      "range": {
+        "startLine": 128,
+        "startChar": 47,
+        "endLine": 128,
+        "endChar": 69
+      },
+      "revId": "de4ce3f24ae7a0c4c6b86fb5740a31dd196703ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
