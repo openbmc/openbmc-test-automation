@@ -160,5 +160,101 @@ Disable IPMI Protocol And Verify
     ...  msg=IPMI commands are working after disabling IPMI.
 
 
+Enable IPMI Protocol And Check Persistency On BMC Reboot
+    [Documentation]  Enable IPMI protocol and verify persistency.
+    [Tags]  Enable_IPMI_Protocol_And_Check_Persistency_On_BMC_Reboot
+
+    Enable IPMI Protocol  ${True}
+
+    # Reboot BMC and verify persistency.
+    OBMC Reboot (off)
+
+    # Check if IPMI is really enabled via Redfish.
+    Verify IPMI Protocol State  ${True}
+
+    # Check if IPMI commands starts working.
+    Verify IPMI Works  lan print
+
+
+Disable IPMI Protocol And Check Persistency On BMC Reboot
+    [Documentation]  Disable IPMI protocol and verify persistency.
+    [Tags]  Disable_IPMI_Protocol_And_Check_Persistency_On_BMC_Reboot
+
+    # Disable IPMI interface.
+    Enable IPMI Protocol  ${False}
+
+    # Reboot BMC and verify persistency.
+    OBMC Reboot (off)
+
+    # Check if IPMI is really disabled via Redfish.
+    Verify IPMI Protocol State  ${False}
+
+    # Check if IPMI commands fail.
+    ${status}=  Run Keyword And Return Status
+    ...  Verify IPMI Works  lan print
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=IPMI commands are working after disabling IPMI.
+
+
+Enable SSH And IPMI Protocol And Verify
+    [Documentation]  Enable SSH and IPMI protocol and verify SSH and IPMI commands work.
+    [Tags]  Enable_SSH_And_IPMI_Protocol_And_Verify
+
+    Enable SSH Protocol  ${True}
+    Verify SSH Protocol State  ${True}
+
+    Enable IPMI Protocol  ${True}
+    Verify IPMI Protocol State  ${True}
+
+    Verify SSH Login And Commands Work
+    Verify IPMI Works  lan print
+
+
+Disable SSH And IPMI Protocol And Verify
+    [Documentation]  Disable SSH and IPMI protocol and verify SSH and IPMI commands stop working.
+    [Tags]  Disable_SSH_And_IPMI_Protocol_And_Verify
+    [Teardown]  Enable SSH Protocol  ${True}
+
+    Enable SSH Protocol  ${False}
+    Verify SSH Protocol State  ${False}
+
+    # Check if SSH login and commands fail.
+    ${status}=  Run Keyword And Return Status
+    ...  Verify SSH Login And Commands Work
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=SSH Login and commands are working after disabling SSH.
+
+    Enable IPMI Protocol  ${False}
+    Verify IPMI Protocol State  ${False}
+
+    # Check if IPMI commands fail.
+    ${status}=  Run Keyword And Return Status
+    ...  Verify IPMI Works  lan print
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=IPMI commands are working after disabling IPMI.
+
+
+Enable SSH And Disable IPMI And Verify
+    [Documentation]  Enable SSH and Disable IPMI and verify SSH command works & IPMI command stop working.
+    [Tags]  Enable_SSH_And_Disable_IPMI_And_Verify
+
+    Enable SSH Protocol  ${True}
+    Verify SSH Protocol State  ${True}
+    Verify SSH Login And Commands Work
+
+    Enable IPMI Protocol  ${False}
+    Verify IPMI Protocol State  ${False}
+
+    # Check if IPMI commands fail.
+    ${status}=  Run Keyword And Return Status
+    ...  Verify IPMI Works  lan print
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=IPMI commands are working after disabling IPMI.
+
+
 *** Keywords ***
 
