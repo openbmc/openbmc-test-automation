@@ -116,7 +116,7 @@ def main():
     num_error_logs = int(result['num_error_logs'])
     save_plug_in_value(num_error_logs)
     if num_error_logs > 0:
-        qprint_timen("Adding the name of the high severity error logs FFDC file to the file list.")
+        qprint_timen("Adding the name of our high severity error logs FFDC file to the appropriate file list.")
         shell_cmd("echo " + high_sev_elogs_file_path + " > " + AUTOBOOT_FFDC_LIST_FILE_PATH)
     else:
         os.remove(high_sev_elogs_file_path)

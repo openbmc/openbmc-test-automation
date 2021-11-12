@@ -32,3 +32,5 @@ IPMI Std MC Reset Cold (off)
 IPMI Std MC Reset Cold (off) (mfg)
 IPMI Std MC Reset Cold (run)
 IPMI Std MC Reset Cold (run) (mfg)
+Host initd Reset
+Host initd Reset (mfg)
