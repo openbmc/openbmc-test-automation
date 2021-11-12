@@ -4,6 +4,8 @@ Redfish Power On
 Redfish Power On (mfg)
 IPMI Power On
 IPMI Power On (mfg)
+Istep Power On
+Istep Power On (mfg)
 REST Power Off
 REST Power Off (mfg)
 Redfish Power Off
@@ -67,4 +69,3 @@ pflash
 Out of Band Code Update
 OS Code Update
 OPAL TI
-Istep Power On
