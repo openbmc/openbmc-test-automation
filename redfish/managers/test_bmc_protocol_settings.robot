@@ -12,7 +12,7 @@ Test Teardown   FFDC On Test Case Fail
 
 *** Variables ***
 
-${cmd_prefix}  ipmitool -I lanplus -C 17 -p 623 -U ${OPENBMC_USERNAME} -P ${OPENBMC_PASSWORD}
+${cmd_prefix}  ipmitool -I lanplus -C 17 -p 623 -U ${IPMI_USERNAME} -P ${IPMI_PASSWORD}
 
 
 *** Test Cases ***
@@ -196,6 +196,60 @@ Disable IPMI Protocol And Check Persistency On BMC Reboot
     ...  msg=IPMI commands are working after disabling IPMI.
 
 
+Enable SSH And IPMI Protocol And Verify
+    [Documentation]  Set the SSH and IPMI protocol attributes to True, and verify
+    ...              that the setting persists.
+    [Tags]  Enable_SSH_And_IPMI_Protocol_And_Verify
+
+    Set SSH And IPMI Protocol  ${True}
+
+    Verify SSH Protocol State  ${True}
+    Verify IPMI Protocol State  ${True}
+
+    Verify SSH Login And Commands Work
+    Verify IPMI Works  lan print
+
+
+Disable SSH And IPMI Protocol And Verify
+    [Documentation]  Set the SSH and IPMI protocol attributes to False, and verify
+    ...              that the setting persists.
+    [Tags]  Disable_SSH_And_IPMI_Protocol_And_Verify
+    [Teardown]  Enable SSH Protocol  ${True}
+
+    Set SSH And IPMI Protocol  ${False}
+
+    # Check if SSH login and commands fail.
+    ${status}=  Run Keyword And Return Status
+    ...  Verify SSH Login And Commands Work
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=SSH Login and commands are working after disabling SSH.
+
+    # Check if IPMI commands fail.
+    ${status}=  Run Keyword And Return Status
+    ...  Verify IPMI Works  lan print
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=IPMI commands are working after disabling IPMI.
+
+
+Enable SSH And Disable IPMI And Verify
+    [Documentation]   Set the SSH protocol attribute to True and IPMI protocol attribute to False, and verify
+    ...              that the setting persists.
+    [Tags]  Enable_SSH_And_Disable_IPMI_And_Verify
+
+    Run Keywords  Enable SSH Protocol  ${True}  AND  Enable IPMI Protocol  ${False}
+
+    Verify SSH Login And Commands Work
+
+    # Check if IPMI commands fail.
+    ${status}=  Run Keyword And Return Status
+    ...  Verify IPMI Works  lan print
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=IPMI commands are working after disabling IPMI.
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -227,3 +281,19 @@ Redfish BMC Reboot
     # Wait for BMC real reboot and Redfish API ready
     Wait Until Keyword Succeeds  3 min  10 sec  Is BMC LastResetTime Changed  ${last_reset_time}
 
+
+Set SSH And IPMI Protocol
+    [Documentation]  Set SSH and IPMI protocol state.
+    [Arguments]  ${state}
+
+    # Description of argument(s):
+    # state    state to be set(e.g. True, False).
+
+    ${protocol_state}=  Create Dictionary  ProtocolEnabled=${state}
+    ${data}=  Create Dictionary  SSH=${protocol_state}  IPMI=${protocol_state}
+
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
+    ...  valid_status_codes=[${HTTP_NO_CONTENT}]
+
+    # Wait for timeout for new values to take effect.
+    Sleep  ${NETWORK_TIMEOUT}s
