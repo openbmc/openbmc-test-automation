@@ -75,16 +75,16 @@ Redfish Signed Firmware Update
     # IMAGE_FILE_PATH  The path to the image file.
 
     Field Mode Should Be Enabled
-    ${image_version}=  Get Version Tar  ${image_file_path}
-    ${state}=  Get Pre Reboot State
-    Rprint Vars  state
-    Set ApplyTime  policy=Immediate
+    Set ApplyTime  policy=OnReset
     Redfish Upload Image And Check Progress State
-    ${image_info}=  Get Software Inventory State By Version  ${image_version}
-    Run Keyword If  'BMC update' == '${image_info["image_type"]}'
-    ...    Reboot BMC And Verify BMC Image  Immediate  start_boot_seconds=${state['epoch_seconds']}
-    ...  ELSE
-    ...    Poweron Host And Verify Host Image
+
+    ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
+    Redfish BMC Reset Operation
+    Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}
+
+    Is BMC Standby
+    Redfish.Login
+    Redfish Verify BMC Version  ${IMAGE_FILE_PATH} 
 
 
 Redfish Unsigned Firmware Update
@@ -95,7 +95,7 @@ Redfish Unsigned Firmware Update
     # IMAGE_FILE_PATH  The path to the image file.
 
     Field Mode Should Be Enabled
-    Set ApplyTime  policy=Immediate
+    Set ApplyTime  policy=OnReset
     Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${image_file_path}
     ${image_id}=  Get Latest Image ID
     Rprint Vars  image_id
