@@ -135,7 +135,7 @@ Login To OS Host
     # ${os_username}  OS Host Login user name.
     # ${os_password}  OS Host Login passwrd.
 
-    REST Power On  stack_mode=skip  quiet=1
+    Redfish Power On  stack_mode=skip  quiet=1
 
     SSHLibrary.Open Connection  ${os_host}
     ${resp}=  SSHLibrary.Login  ${os_username}  ${os_password}
