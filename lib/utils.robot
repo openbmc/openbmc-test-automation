@@ -933,7 +933,7 @@ Is BMC Standby
 
     Wait Until Keyword Succeeds  3 min  10 sec  Redfish Get States
 
-    Wait Until Keyword Succeeds  1 min  10 sec  Match State  ${standby_states}
+    Wait Until Keyword Succeeds  2 min  10 sec  Match State  ${standby_states}
 
 
 Match State
