@@ -44,12 +44,17 @@ Verify Add SEL Entry
     Run IPMI Standard Command  sel clear
     Sleep  5s
 
-    Create SEL
+    # The IPMI raw command to generate Temp sensor  error is no longer working.
+    # Our aim is to check if the SEL command is listed in IPMI or not.
+    # Original keyword "Create SEL" for reference
+    Create Test PEL Log
+
     # Get last SEL entry.
     ${resp}=  Run IPMI Standard Command  sel elist last 1
-    Run Keywords  Should Contain  ${resp}  Temperature #${sensor_number}  AND
-    ...  Should Contain  ${resp}  Asserted
-    ...  msg=Add SEL Entry failed.
+    #  output:
+    #  1 | 11/17/2021 | 07:49:20 | System Event #0x01 | Undetermined system hardware failure | Asserted
+    Run Keywords  Should Contain  ${resp}  system hardware failure  AND
+    ...  Should Contain  ${resp}  Asserted  msg=Add SEL Entry failed.
 
 
 Verify Reserve SEL
