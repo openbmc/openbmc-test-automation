@@ -42,10 +42,12 @@ Redfish BMC Code Update
     [Documentation]  Update the firmware image.
     [Tags]  Redfish_BMC_Code_Update
 
-    ${image_version}=  Get Version Tar  ${IMAGE_FILE_PATH}
+    # Python module:  get_version_tar(tar_file_path)
+    ${image_version}=  code_update_utils.Get Version Tar  ${IMAGE_FILE_PATH}
     Rprint Vars  image_version
 
-    ${bmc_release_info}=  Get BMC Release Info
+    # Python module: get_bmc_release_info()
+    ${bmc_release_info}=  utils.Get BMC Release Info
     ${functional_version}=  Set Variable  ${bmc_release_info['version_id']}
     Rprint Vars  functional_version
 
