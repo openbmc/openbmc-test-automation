@@ -35,6 +35,8 @@ ${content-2}                        Sample Content to test partition file upload
 ...  Sample Content to test partition file upload after reboot
 ...  Sample Content to test partition file upload after reboot
 
+${LOOP_COUNT}                       10
+
 *** Test Cases ***
 
 Redfish Upload Lower Limit Partition File To BMC
@@ -266,6 +268,21 @@ Test Redfish Fail To Upload Partition File Name With Special Character To BMC
     1KB-!filename    ${HTTP_BAD_REQUEST}    ${UNSUPPORTED_FILE_NAME_MESSAGE}
     1KB-@filename    ${HTTP_BAD_REQUEST}    ${UNSUPPORTED_FILE_NAME_MESSAGE}
 
+
+Redfish Upload Validated Partition File From Path To BMC
+   [Documentation]  Upload valid partition file to BMC from file path define by user in loop.
+   ...  By default loop count values is 10 times.
+   [Tags]  Redfish_Upload_Validated_Partition_File_From_Path_To_BMC
+
+   Log To Console  ${EMPTY}
+   FOR  ${count}  IN RANGE  1  ${LOOP_COUNT} + 1
+     Log To Console  **************************************
+     Log To Console  * The Current Loop Count is ${count} of ${LOOP_COUNT} *
+     Log To Console  **************************************
+
+     Redfish Upload Partition File From Path  ${PARTITION_FILE_PATH}
+   END
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -392,18 +409,19 @@ Return Description Of Response
 
 Upload Partition File To BMC
     [Documentation]  Upload partition file to BMC.
-    [Arguments]  ${file_name}  ${status_code}  ${expected_message}  ${flag}=${True}
+    [Arguments]  ${file_name}  ${status_code}  ${expected_message}  ${flag}=${True}  ${path}=${EMPTY}
 
     # Description of argument(s):
     # file_name           Partition file name.
     # status_code         HTTPS status code.
     # expected_message    Expected message of URI.
     # flag                If True run part of program, else skip.
+    # path                Partition file path.
 
     Run Keyword If  '${flag}' == '${True}'  Initialize OpenBMC
     FOR  ${conf_file}  IN  @{file_name}
       # Get the content of the file and upload to BMC.
-      ${image_data}=  OperatingSystem.Get Binary File  ${conf_file}
+      ${image_data}=  OperatingSystem.Get Binary File  ${path}${conf_file}
       ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}  Content-Type=application/octet-stream
 
       ${kwargs}=  Create Dictionary  data=${image_data}
@@ -844,3 +862,25 @@ Check Redfish Fail To Upload Partition File Name With Special Character To BMC
     Should Be Equal As Strings  ${status}  False
 
     Delete Local Partition File  ${Partition_file_list}
+
+
+Redfish Upload Partition File From Path
+    [Documentation]  Upload the partition file to BMC from file path.
+    [Arguments]  ${PARTITION_FILE_PATH}
+
+    # Description of argument(s):
+    # PARTITION_FILE_PATH    Partition file path.
+
+    ${file_list} =  OperatingSystem.List Files In Directory  ${PARTITION_FILE_PATH}
+
+    ${num_records}=  Get Length  ${file_list}
+    Should Not Be Equal As Integers  ${num_records}  0
+
+    FOR  ${file_name}  IN  @{file_list}
+      @{Partition_file_list} =  Split String  ${file_name}  ,
+      ${num_records}=  Get Length  ${Partition_file_list}
+      Upload Partition File To BMC  file_name=${Partition_file_list}  status_code=${HTTP_OK}  expected_message=${FILE_UPLOAD_MESSAGE}  path=${PARTITION_FILE_PATH}
+      Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
+      Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
+    END
+
