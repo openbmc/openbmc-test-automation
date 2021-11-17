@@ -127,7 +127,7 @@ Verify SOL During Boot
     [Documentation]  Verify SOL during boot.
     [Tags]  Verify_SOL_During_Boot
 
-    Redfish Hard Power Off  stack_mode=skip
+    IPMI Power Off  stack_mode=skip
     Activate SOL Via IPMI
     Initiate Host Boot Via External IPMI  wait=${0}
 
@@ -137,7 +137,7 @@ Verify SOL During Boot
     Wait Until Keyword Succeeds  3 mins  15 secs
     ...  Check IPMI SOL Output Content  ISTEP
 
-    Redfish Hard Power Off
+    IPMI Power Off
 
 
 Verify Deactivate Non Existing SOL
@@ -200,11 +200,11 @@ Verify Continuous Activation And Deactivation Of SOL
 
 Check IPMI SOL Output Content
     [Documentation]  Check if SOL has given content.
-    [Arguments]  ${data}  ${file_path}=/tmp/sol_${OPENBMC_HOST}
+    [Arguments]  ${data}  ${file_path}=${IPMI_SOL_LOG_FILE}
     # Description of argument(s):
     # data       Content which need to be checked(e.g. Petitboot, ISTEP).
     # file_path  The file path on the local machine to check SOL content.
-    #            By default it check SOL content from /tmp/sol_<BMC_IP>.
+    #            By default it check SOL content from log/sol_<BMC_IP>.
 
     ${output}=  OperatingSystem.Get File  ${file_path}  encoding_errors=ignore
     Should Contain  ${output}  ${data}  case_insensitive=True
@@ -249,7 +249,7 @@ Verify SOL Setting
 
     Should Be Equal  '${setting_value}'  '${expected_value}'
 
-    Redfish Hard Power Off  stack_mode=skip
+    IPMI Power Off  stack_mode=skip
 
     Initiate Host Boot Via External IPMI  wait=${0}
 
