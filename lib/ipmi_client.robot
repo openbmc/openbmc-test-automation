@@ -187,13 +187,13 @@ Check If IPMI Tool Exist
 
 Activate SOL Via IPMI
     [Documentation]  Start SOL using IPMI and route output to a file.
-    [Arguments]  ${file_path}=/tmp/sol_${OPENBMC_HOST}
+    [Arguments]  ${file_path}=${IPMI_SOL_LOG_FILE}
 
     # Description of argument(s):
     # file_path                     The file path on the local machine (vs.
     #                               OBMC) to collect SOL output. By default
     #                               SOL output is collected at
-    #                               /tmp/sol_<BMC_IP> else user input location.
+    #                               logs/sol_<BMC_IP> else user input location.
 
     ${ipmi_cmd}=  Create IPMI Ext Command String  sol activate usesolkeepalive
     Qprint Issuing  ${ipmi_cmd}
@@ -203,13 +203,13 @@ Activate SOL Via IPMI
 
 Deactivate SOL Via IPMI
     [Documentation]  Stop SOL using IPMI and return SOL output.
-    [Arguments]  ${file_path}=/tmp/sol_${OPENBMC_HOST}
+    [Arguments]  ${file_path}=${IPMI_SOL_LOG_FILE}
 
     # Description of argument(s):
     # file_path                     The file path on the local machine to copy
     #                               SOL output collected by above "Activate
     #                               SOL Via IPMI" keyword.  By default it
-    #                               copies log from /tmp/sol_<BMC_IP>.
+    #                               copies log from logs/sol_<BMC_IP>.
 
     ${ipmi_cmd}=  Create IPMI Ext Command String  sol deactivate
     Qprint Issuing  ${ipmi_cmd}
