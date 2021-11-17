@@ -10,6 +10,7 @@ Resource        bmc_redfish_resource.robot
 Redfish Power Operation
     [Documentation]  Do Redfish host power operation.
     [Arguments]      ${reset_type}
+
     # Description of arguments:
     # reset_type     Type of power operation.
     #                (e.g. On/ForceOff/GracefulRestart/GracefulShutdown)
@@ -38,21 +39,19 @@ Redfish Power Operation
 
 Redfish BMC Reset Operation
     [Documentation]  Do Redfish BMC reset operation.
-
+    [Arguments]  ${reset_type}=GracefulRestart
     # Example:
     # "Actions": {
     # "#Manager.Reset": {
     #  "ResetType@Redfish.AllowableValues": [
-    #    "GracefulRestart"
+    #    "GracefulRestart",
+    #    "ForceRestart"
     #  ],
     #  "target": "/redfish/v1/Managers/bmc/Actions/Manager.Reset"
     # }
 
-    ${session_info}=  Redfish.Get Session Info
-    Log  ${session_info}
-
     ${target}=  redfish_utils.Get Target Actions  /redfish/v1/Managers/bmc/  Manager.Reset
-    ${payload}=  Create Dictionary  ResetType=GracefulRestart
+    ${payload}=  Create Dictionary  ResetType=${reset_type}
     Redfish.Post  ${target}  body=&{payload}
 
 
