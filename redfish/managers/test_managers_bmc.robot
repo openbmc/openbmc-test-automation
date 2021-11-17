@@ -106,7 +106,8 @@ Redfish BMC Manager GracefulRestart When Host Off
     # "Actions": {
     # "#Manager.Reset": {
     #  "ResetType@Redfish.AllowableValues": [
-    #    "GracefulRestart"
+    #    "GracefulRestart",
+    #    "ForceRestart"
     #  ],
     #  "target": "/redfish/v1/Managers/bmc/Actions/Manager.Reset"
     # }
@@ -114,7 +115,44 @@ Redfish BMC Manager GracefulRestart When Host Off
     ${test_file_path}=  Set Variable  /tmp/before_bmcreboot
     BMC Execute Command  touch ${test_file_path}
 
-    Redfish OBMC Reboot (off)
+    Redfish Power Off  stack_mode=skip
+
+    ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
+    Redfish BMC Reset Operation  reset_type=GracefulRestart
+    Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}
+
+    Is BMC Standby
+
+    BMC Execute Command  if [ -f ${test_file_path} ] ; then false ; fi
+    Verify BMC RTC And UTC Time Drift
+
+    # Check for journald persistency post reboot.
+    Check For Regex In Journald  ${REBOOT_REGEX}  error_check=${1}
+
+
+Redfish BMC Manager ForceRestart When Host Off
+    [Documentation]  BMC graceful restart when host is powered off.
+    [Tags]  Redfish_BMC_Manager_ForceRestart_When_Host_Off
+
+    # "Actions": {
+    # "#Manager.Reset": {
+    #  "ResetType@Redfish.AllowableValues": [
+    #    "GracefulRestart",
+    #    "ForceRestart"
+    #  ],
+    #  "target": "/redfish/v1/Managers/bmc/Actions/Manager.Reset"
+    # }
+
+    ${test_file_path}=  Set Variable  /tmp/before_bmcreboot
+    BMC Execute Command  touch ${test_file_path}
+
+    Redfish Power Off  stack_mode=skip
+
+    ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
+    Redfish BMC Reset Operation  reset_type=ForceRestart
+    Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}
+
+    Is BMC Standby
 
     BMC Execute Command  if [ -f ${test_file_path} ] ; then false ; fi
     Verify BMC RTC And UTC Time Drift
