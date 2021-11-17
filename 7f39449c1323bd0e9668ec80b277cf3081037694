@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dd16dd3c_2b042b56",
+        "filename": "redfish/managers/test_managers_bmc.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-17T12:59:55Z",
+      "side": 1,
+      "message": "why need Global.. cant we use test scope ?",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 122,
+        "endChar": 23
+      },
+      "revId": "7f39449c1323bd0e9668ec80b277cf3081037694",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59640342_e2dbac9b",
+        "filename": "redfish/managers/test_managers_bmc.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-17T12:59:55Z",
+      "side": 1,
+      "message": "force",
+      "range": {
+        "startLine": 134,
+        "startChar": 25,
+        "endLine": 134,
+        "endChar": 34
+      },
+      "revId": "7f39449c1323bd0e9668ec80b277cf3081037694",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9b64fe7_b81a1142",
+        "filename": "redfish/managers/test_managers_bmc.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-17T12:59:55Z",
+      "side": 1,
+      "message": "Why do we need this? cant we just the \n\n${saved_xauth_token}\u003d  Set Test Variable  ${XAUTH_TOKEN}\n\nand remove this line and replace the above for line 151. You wont need two times setting",
+      "range": {
+        "startLine": 153,
+        "startChar": 4,
+        "endLine": 153,
+        "endChar": 69
+      },
+      "revId": "7f39449c1323bd0e9668ec80b277cf3081037694",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
