@@ -67,6 +67,8 @@ Host Reboot (mfg)
 RF SYS GracefulRestart
 RF SYS GracefulRestart (mfg)
 RF SYS ForceRestart
+Tool Initd MP Reboot
+Tool Initd MP Reboot (mfg)
 pflash
 Out of Band Code Update
 OS Code Update
