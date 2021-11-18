@@ -171,6 +171,64 @@ Test Stability On Large Number Of Wrong Login Attempts To GUI
     ${fail_count}=  Count Values In List  ${status_list}  False
     Run Keyword If  ${fail_count} > ${0}  FAIL  Could not open BMC GUI ${fail_count} times
 
+Test Stability On Large Number Of Wrong Login Attempts To Redfish Session
+    [Documentation]  Test stability on large number of wrong login attempts to Redfish session.
+    [Tags]   Test_Stability_On_Large_Number_Of_Wrong_Login_Attempts_To_Redfish_Session
+
+    @{status_list}=  Create List
+
+    FOR  ${i}  IN RANGE  ${1}  ${iterations}
+        Log To Console  ${i}th login
+        Run Keyword And Ignore Error  Redfish.Login   ${OPENBMC_USERNAME}  incorrect_password
+
+        # Every 100th iteration, check Redfish is responsive.
+        ${status}=  Run Keyword If  ${i} % 100 == 0  Run Keyword And Return Status
+        ...  Redfish.Login
+        Append To List  ${status_list}  ${status}
+        Redfish.Logout
+    END
+
+    ${fail_count}=  Count Values In List  ${status_list}  False
+    Run Keyword If  ${fail_count} > ${0}  FAIL  Could not Login Redfish session ${fail_count} times
+
+Test Delete Without Auth Token Fails
+    [Documentation]  Send delete method without auth token and verify it throws an error.
+    [Tags]   Test_Delete_Without_Auth_Token_Fails
+
+    Redfish.Logout
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
+    ...  valid_status_codes=[${HTTP_UNAUTHORIZED}]
+
+Test Put Without Auth Token Fails
+    [Documentation]  Send put method without auth token and verify it throws an error.
+    [Tags]   Test_Put_Without_Auth_Token_Fails
+
+    Redfish.Logout
+    Redfish.Put  /ibm/v1/Host/ConfigFiles/../../../../../etc/resolv.conf  body={"data": "test string"}
+    ...  valid_status_codes=[${HTTP_UNAUTHORIZED}]
+
+Flood Delete Without Auth Token And Check Stability Of BMC
+    [Documentation]  Flood delete method without auth token and check BMC stability.
+    [Tags]  Flood_Delete_Without_Auth_Token_And_Check_Stability_Of_BMC
+
+    Redfish.Logout
+    @{status_list}=  Create List
+
+    FOR  ${i}  IN RANGE  ${1}  ${iterations}
+        Log To Console  ${i}th iteration
+        Run Keyword And Ignore Error
+        ...  Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
+
+        # Every 100th iteration, check BMC allows delete with auth token.
+        ${status}=  Run Keyword If  ${i} % 100 == 0  Run Keyword And Return Status
+        ...  Login And Create User
+        Run Keyword If  ${status} == False  Append To List  ${status_list}  ${status}
+    END
+    ${verify_count}=  Evaluate  ${iterations}/100
+    ${fail_count}=  Get Length  ${status_list}
+
+    Should Be Equal  ${fail_count}  ${0}
+    ...  msg=Post and delete operation failed ${fail_count} times in ${verify_count} attempts
 
 *** Keywords ***
 
@@ -188,14 +246,15 @@ Login And Configure Hostname
 Login And Create User
     [Documentation]  Login and create user
 
-    [Teardown]  Redfish.Logout
+    [Teardown]  Run Keywords   Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
+    ...  AND  Redfish.Logout
 
     Redfish.Login
 
     ${user_info}=  Create Dictionary
     ...  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{user_info}
-    ...  valid_status_codes=[${HTTP_OK}]
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_CREATED}]
 
 
 Set Account Lockout Threshold
