@@ -206,6 +206,46 @@ Test BMC GUI Stability On Continuous Refresh Of GUI Home Page
     ${fail_count}=  Get Length  ${failed_list}
     Run Keyword If  ${fail_count} > ${0}  FAIL  Could not open BMC GUI ${fail_count} times
 
+Test Bmcweb Stability On Continuous Invalid Credentials Login Attempts To Redfish
+    [Documentation]  Make invalid credentials login attempts to Redish continuously and
+    ...  verify bmcweb stability by login to Redfish with valid credentials.
+    [Tags]  Test_Bmcweb_Stability_On_Continuous_Invalid_Credentials_Login_Attempts_To_Redfish
+
+    Continuous Invalid Credentials Login Attempts To Redfish
+
+Test Delete Object Without Session Token Should Fail
+    [Documentation]  Try to delete an object without valid session token and verifies it throws
+    ...  an unauthorised error.
+    [Tags]   Test_Delete_Object_Without_Session_Token_Should_Fail
+    [Setup]  Redfish.Logout
+
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
+    ...  valid_status_codes=[${HTTP_UNAUTHORIZED}]
+
+
+Test Bmcweb Stability On Continuous Redfish Delete Object Request Without Session Token
+    [Documentation]  Send delete object request without valid session token continuously and
+    ...  verify bmcweb stability by sending delete request with valid session token.
+    [Tags]  Test_Bmcweb_Stability_On_Continuous_Redfish_Delete_Object_Request_Without_Session_Token
+
+    @{failed_iter_list}=  Create List
+
+    FOR  ${iter}  IN RANGE  ${iterations}
+        Log To Console  ${iter}th Redfish Delete Object Request without valid session token
+
+        Run Keyword And Ignore Error
+        ...  Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
+        Continue For Loop If   ${iter}%100 != 0
+
+        # Every 100th iteration, check delete operation with valid session token.
+        ${status}=  Run Keyword And Return Status
+        ...  Login And Delete User
+        Run Keyword If  '${status}' == 'False'  Append To List  ${failed_iter_list}  ${iter}
+    END
+    Log  ${failed_iter_list}
+    ${fail_count}=  Get Length  ${failed_iter_list}
+    Run Keyword If  ${fail_count} > ${0}  FAIL  Could not do Redfish delete operation ${fail_count} times
+
 *** Keywords ***
 
 Login And Configure Hostname
@@ -222,6 +262,19 @@ Login And Configure Hostname
 Login And Create User
     [Documentation]  Login and create user
 
+    [Teardown]  Run Keywords   Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
+    ...  AND  Redfish.Logout
+
+    Redfish.Login
+
+    ${user_info}=  Create Dictionary
+    ...  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
+    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{user_info}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_CREATED}]
+
+Login And Delete User
+    [Documentation]  Login create and delete user
+
     [Teardown]  Redfish.Logout
 
     Redfish.Login
@@ -229,8 +282,8 @@ Login And Create User
     ${user_info}=  Create Dictionary
     ...  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{user_info}
-    ...  valid_status_codes=[${HTTP_OK}]
-
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_CREATED}]
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
 
 Set Account Lockout Threshold
    [Documentation]  Set user account lockout threshold.
@@ -247,3 +300,29 @@ Login to GUI With Incorrect Credentials
     Input Text  ${xpath_textbox_username}  root
     Input Password  ${xpath_textbox_password}  incorrect_password
     Click Button  ${xpath_login_button}
+
+Continuous Invalid Credentials Login Attempts To Redfish
+    [Documentation]  Continuous invalid credentials login attempts to Redish and
+    ...  login to Redfish with valid credentials at times and get failed login attempts.
+    [Arguments]  ${login_username}=${OPENBMC_USERNAME}  ${login_password}=${OPENBMC_PASSWORD}
+
+    # Description of argument(s):
+    # login_username   username for login user.
+    # login_password   password for login user.
+
+    @{failed_iter_list}=  Create List
+
+    FOR  ${iter}  IN RANGE  ${iterations}
+        Log To Console  ${iter}th Redfish login with invalid credentials
+        Run Keyword And Ignore Error  Redfish.Login   ${login_username}  incorrect_password
+        Continue For Loop If   ${iter}%100 != 0
+
+        # Every 100th iteration, check Redfish is responsive.
+        ${status}=  Run Keyword And Return Status
+        ...  Redfish.Login  ${login_username}   ${login_password}
+        Run Keyword If  '${status}' == 'False'  Append To List  ${failed_iter_list}  ${iter}
+        Redfish.Logout
+    END
+    Log  ${failed_iter_list}
+    ${fail_count}=  Get Length  ${failed_iter_list}
+    Run Keyword If  ${fail_count} > ${0}  FAIL  Could not Login to Redfish ${fail_count} times
