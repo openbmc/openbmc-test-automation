@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c30b390_b8872dc5",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-18T12:18:09Z",
+      "side": 1,
+      "message": "failed_iter_list",
+      "range": {
+        "startLine": 178,
+        "startChar": 6,
+        "endLine": 178,
+        "endChar": 17
+      },
+      "revId": "c8c83dbf42f32f03678470dca73bae394ab98ad6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ece7246b_fcf601f0",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-18T12:18:09Z",
+      "side": 1,
+      "message": "FOR  ${i}  IN RANGE  ${1}  ${iterations}\n\ninstead\n\nFOR  ${iter}  IN RANGE  ${iterations}   // 0,1,2,...",
+      "range": {
+        "startLine": 180,
+        "startChar": 4,
+        "endLine": 180,
+        "endChar": 44
+      },
+      "revId": "c8c83dbf42f32f03678470dca73bae394ab98ad6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e560e129_959ac354",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-18T12:18:09Z",
+      "side": 1,
+      "message": "Log To Console  ${iter}th Redfish login with valid credentials",
+      "range": {
+        "startLine": 181,
+        "startChar": 8,
+        "endLine": 181,
+        "endChar": 36
+      },
+      "revId": "c8c83dbf42f32f03678470dca73bae394ab98ad6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "625d9ef1_aae3dad0",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-18T12:18:09Z",
+      "side": 1,
+      "message": "Continue For Loop If ${iter}%100\n   \n   # Every 100th iteration, check Redfish is responsive.\n   ${status}\u003d  Run Keyword And Return Status   Redfish.Login",
+      "range": {
+        "startLine": 184,
+        "startChar": 6,
+        "endLine": 186,
+        "endChar": 26
+      },
+      "revId": "c8c83dbf42f32f03678470dca73bae394ab98ad6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1736f29f_ab87f7f3",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-18T12:18:09Z",
+      "side": 1,
+      "message": "instead of this use,   ${iter}  \n\nsince which iteration failed is more important the status, since we know what would be the status already",
+      "range": {
+        "startLine": 187,
+        "startChar": 42,
+        "endLine": 187,
+        "endChar": 48
+      },
+      "revId": "c8c83dbf42f32f03678470dca73bae394ab98ad6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "644263d0_51dd78a2",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-18T12:18:09Z",
+      "side": 1,
+      "message": "patch",
+      "range": {
+        "startLine": 202,
+        "startChar": 5,
+        "endLine": 202,
+        "endChar": 9
+      },
+      "revId": "c8c83dbf42f32f03678470dca73bae394ab98ad6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
