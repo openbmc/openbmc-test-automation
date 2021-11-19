@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "442e0f20_10c7653e",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-11-19T07:57:54Z",
+      "side": 1,
+      "message": "keyword name is changed.",
+      "parentUuid": "9fb7a223_83b7f30f",
+      "revId": "6c6042de5a2886b830e2269ccbf94651b5a1ee9a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "918641f6_426805bc",
         "filename": "openpower/ext_interfaces/test_savearea_management.robot",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "57689ee3_65906813",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 881,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-11-19T07:57:54Z",
+      "side": 1,
+      "message": "documentation is also changed.",
+      "parentUuid": "918641f6_426805bc",
+      "revId": "6c6042de5a2886b830e2269ccbf94651b5a1ee9a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "fe7a4c34_81778ad1",
         "filename": "openpower/ext_interfaces/test_savearea_management.robot",
         "patchSetId": 1
@@ -47,6 +83,30 @@
       "writtenOn": "2021-11-19T05:19:05Z",
       "side": 1,
       "message": "why 11?\nIf user wants to run it for 20 times?",
+      "range": {
+        "startLine": 887,
+        "startChar": 39,
+        "endLine": 887,
+        "endChar": 41
+      },
+      "revId": "6c6042de5a2886b830e2269ccbf94651b5a1ee9a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "324c9388_b7b6a1e8",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 887,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-11-19T07:57:54Z",
+      "side": 1,
+      "message": "This test case requirement is for 10 times as define by design team. there is another test case where 1000 times partition file gets uploaded.",
+      "parentUuid": "fe7a4c34_81778ad1",
       "range": {
         "startLine": 887,
         "startChar": 39,
