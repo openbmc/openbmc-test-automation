@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9fb7a223_83b7f30f",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-11-19T05:19:05Z",
+      "side": 1,
+      "message": "delete this\nThis should be a test case",
+      "revId": "6c6042de5a2886b830e2269ccbf94651b5a1ee9a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "918641f6_426805bc",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 881,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-11-19T05:19:05Z",
+      "side": 1,
+      "message": "samesentence here and on line 860?\nwhats thedifference between these 2 fns?",
+      "revId": "6c6042de5a2886b830e2269ccbf94651b5a1ee9a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fe7a4c34_81778ad1",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 887,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-11-19T05:19:05Z",
+      "side": 1,
+      "message": "why 11?\nIf user wants to run it for 20 times?",
+      "range": {
+        "startLine": 887,
+        "startChar": 39,
+        "endLine": 887,
+        "endChar": 41
+      },
+      "revId": "6c6042de5a2886b830e2269ccbf94651b5a1ee9a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
