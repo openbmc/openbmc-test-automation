@@ -18,7 +18,7 @@ for root, dirs, files in os.walk(full_path):
     for found_dir in dirs:
         sys.path.append(os.path.join(root, found_dir))
 
-from ffdc_collector import FFDCCollector
+from ffdc_collector import ffdc_collector
 
 
 @click.command(context_settings=dict(help_option_names=['-h', '--help']))
@@ -61,7 +61,7 @@ def cli_ffdc(remote,
     click.echo("\n********** FFDC (First Failure Data Collection) Starts **********")
 
     if input_options_ok(remote, username, password, config, type):
-        thisFFDC = FFDCCollector(remote,
+        thisFFDC = ffdc_collector(remote,
                                  username,
                                  password,
                                  config,

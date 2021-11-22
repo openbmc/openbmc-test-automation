@@ -14,8 +14,12 @@ import logging
 import platform
 from errno import EACCES, EPERM
 import subprocess
+
+sys.path.extend([f'./{name[0]}' for name in os.walk(".") if os.path.isdir(name[0])])
 from ssh_utility import SSHRemoteclient
 from telnet_utility import TelnetRemoteclient
+
+from robot.libraries.BuiltIn import BuiltIn as robotBuildIn
 
 r"""
 User define plugins python functions.
@@ -33,8 +37,7 @@ Example how to define in YAML:
        - arg1
        - arg2
 """
-abs_path = os.path.abspath(os.path.dirname(sys.argv[0]))
-plugin_dir = abs_path + '/plugins'
+plugin_dir = __file__.split(__file__.split("/")[-1])[0] + '/plugins'
 try:
     for module in os.listdir(plugin_dir):
         if module == '__init__.py' or module[-3:] != '.py':
@@ -98,7 +101,7 @@ plugin_error_dict = {
 }
 
 
-class FFDCCollector:
+class ffdc_collector:
 
     r"""
     Execute commands from configuration file to collect log files.
@@ -107,16 +110,17 @@ class FFDCCollector:
     """
 
     def __init__(self,
-                 hostname,
-                 username,
-                 password,
-                 ffdc_config,
-                 location,
-                 remote_type,
-                 remote_protocol,
-                 env_vars,
-                 econfig,
-                 log_level):
+                 hostname = None,
+                 username = None,
+                 password = None,
+                 ffdc_config = None,
+                 location = "/tmp",
+                 remote_type = "OPENBMC",
+                 remote_protocol = "ALL",
+                 env_vars = None,
+                 econfig = None,
+                 log_level = "INFO"):
+
         r"""
         Description of argument(s):
 
@@ -132,10 +136,37 @@ class FFDCCollector:
 
         """
 
-        self.hostname = hostname
-        self.username = username
-        self.password = password
-        self.ffdc_config = ffdc_config
+
+        # When getting parms from environment variables,
+        # setting both class and local variables.
+        if not hostname:
+            self.hostname = os.getenv("OPENBMC_HOST", None) or \
+                            robotBuildIn().get_variable_value("${OPENBMC_HOST}", default=None)
+            hostname = self.hostname
+        else:
+            self.hostname = hostname
+
+        if not username:
+            self.username = os.getenv("OPENBMC_USERNAME", None) or \
+                            robotBuildIn().get_variable_value("${OPENBMC_USERNAME}", default=None)
+            username = self.username
+        else:
+            self.username = username
+
+        if not password:
+            self.password = os.getenv("OPENBMC_PASSWORD", None) or \
+                            robotBuildIn().get_variable_value("${OPENBMC_PASSWORD}", default=None)
+            password = self.password
+        else:
+            self.password = password
+
+        if not ffdc_config:
+            script_path = os.path.dirname(os.path.abspath(__file__))
+            self.ffdc_config = script_path + '/ffdc_config.yaml'
+            ffdc_config = self.ffdc_config
+        else:
+            self.ffdc_config = ffdc_config
+
         self.location = location + "/" + remote_type.upper()
         self.ssh_remoteclient = None
         self.telnet_remoteclient = None
@@ -154,9 +185,9 @@ class FFDCCollector:
         # to be sure that all files for this run will have same timestamps
         # and they will be saved in the same directory.
         # self.location == local system for now
-        self.set_ffdc_defaults()
+        self.set_ffdc_default_store_path()
 
-        # Logger for this run.  Need to be after set_ffdc_defaults()
+        # Logger for this run.  Need to be after set_ffdc_default_store_path()
         self.script_logging(getattr(logging, log_level.upper()))
 
         # Verify top level directory exists for storage
@@ -181,7 +212,7 @@ class FFDCCollector:
         # Load ENV vars from user.
         self.logger.info("\n\tENV: User define input YAML variables")
         self.env_dict = {}
-        self. load_env()
+        self.load_env()
 
     def verify_script_env(self):
 
@@ -686,7 +717,7 @@ class FFDCCollector:
                 progress_counter += 1
                 self.print_progress(progress_counter)
 
-    def set_ffdc_defaults(self):
+    def set_ffdc_default_store_path(self):
         r"""
         Set a default value for self.ffdc_dir_path and self.ffdc_prefix.
         Collected ffdc file will be stored in dir /self.location/hostname_timestr/.
@@ -916,7 +947,7 @@ class FFDCCollector:
 
     def execute_plugin_block(self, plugin_cmd_list):
         r"""
-        Pack the plugin command to quailifed python string object.
+        Pack the plugin command to qualifed python string object.
 
         Description of argument(s):
         plugin_list_dict      Plugin block read from YAML

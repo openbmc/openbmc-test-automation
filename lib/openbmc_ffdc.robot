@@ -33,6 +33,7 @@ Resource           openbmc_ffdc_methods.robot
 Resource           openbmc_ffdc_utils.robot
 Resource           dump_utils.robot
 Library            openbmc_ffdc.py
+Library            ../ffdc/ffdc_collector.py
 
 *** Keywords ***
 
@@ -55,10 +56,17 @@ FFDC On Test Case Fail
     ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}=  Convert To Integer  ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}
     Return From Keyword If  ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}
 
-    Run Keyword If  '${TEST_STATUS}' == 'FAIL'  FFDC
+    Run Keyword If  '${TEST_STATUS}' == 'FAIL'  Launch FFDC
 
     Log Test Case Status
 
     # Clean up error logs and BMC dumps.
     Run Keyword If  '${TEST_STATUS}' == 'FAIL' and ${clean_up}
     ...  Run Keywords  Delete All Error Logs  AND  Delete All Dumps
+
+Launch FFDC
+    [Documentation]  Call point to call FFDC robot or FFDC script.
+    [Arguments]   ${FFDC_DEFAULT}=${1}
+
+    Run Keyword If  ${FFDC_DEFAULT} == ${1}  FFDC
+    ...    ELSE  collect_ffdc
