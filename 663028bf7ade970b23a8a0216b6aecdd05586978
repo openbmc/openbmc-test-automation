@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ac5573a_bfa6519e",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-22T10:35:14Z",
+      "side": 1,
+      "message": "Test Delete Object Without Session Token Should Fail",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 46
+      },
+      "revId": "663028bf7ade970b23a8a0216b6aecdd05586978",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
