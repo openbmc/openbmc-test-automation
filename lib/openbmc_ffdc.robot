@@ -46,10 +46,6 @@ FFDC On Test Case Fail
     ...                  EX: 20160822041250932049:Test:Test case 1:PASS
     ...                      20160822041250969913:Test:Test case 2:FAIL
     ...               3. Delete error logs and BMC dumps post FFDC collection.
-    [Arguments]  ${clean_up}=${TRUE}
-    # Description of argument(s):
-    # clean_up     Boolean value indicating whether error logs and dumps should be deleted
-    #              on test failure after FFDC collection.
 
     ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}=  Get Environment Variable  OVERRIDE_FFDC_ON_TEST_CASE_FAIL  0
     ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}=  Convert To Integer  ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}
@@ -58,7 +54,3 @@ FFDC On Test Case Fail
     Run Keyword If  '${TEST_STATUS}' == 'FAIL'  FFDC
 
     Log Test Case Status
-
-    # Clean up error logs and BMC dumps.
-    Run Keyword If  '${TEST_STATUS}' == 'FAIL' and ${clean_up}
-    ...  Run Keywords  Delete All Error Logs  AND  Delete All Dumps
