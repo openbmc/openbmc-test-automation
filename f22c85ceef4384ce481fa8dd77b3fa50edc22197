@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e0bc6172_e0029a43",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-11-23T05:53:29Z",
+      "side": 1,
+      "message": "Run keywords  Enable SSH  and  Enable IPMI",
+      "revId": "f22c85ceef4384ce481fa8dd77b3fa50edc22197",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a5f2db3_3bf50c4b",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-11-23T05:53:29Z",
+      "side": 1,
+      "message": "remove this",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 33
+      },
+      "revId": "f22c85ceef4384ce481fa8dd77b3fa50edc22197",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a25a772_278372af",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-11-23T05:53:29Z",
+      "side": 1,
+      "message": "disable both ssh \u0026 ipmi first then do verfication as suggested",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 34
+      },
+      "revId": "f22c85ceef4384ce481fa8dd77b3fa50edc22197",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
