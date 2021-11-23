@@ -22,6 +22,30 @@
       "revId": "663028bf7ade970b23a8a0216b6aecdd05586978",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9364dd02_df22d558",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-11-23T06:26:39Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "4ac5573a_bfa6519e",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 46
+      },
+      "revId": "663028bf7ade970b23a8a0216b6aecdd05586978",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
