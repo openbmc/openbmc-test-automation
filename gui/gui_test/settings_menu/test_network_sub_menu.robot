@@ -93,11 +93,11 @@ Verify Hostname Text Configuration
     [Tags]  Verify_Hostname_Text_Configuration
 
     Wait Until Element Is Enabled  ${xpath_hostname_input}
-    Input Text  ${xpath_hostname_input}  witherspoon1
+    Input Text  ${xpath_hostname_input}  ${test_hostname}
     Click Button  ${xpath_network_save_settings}
     Wait Until Page Contains Element  ${xpath_setting_success}  timeout=10
     Wait Until Keyword Succeeds  15 sec  5 sec  Textfield Should Contain  ${xpath_hostname_input}
-    ...  witherspoon1
+    ...  ${test_hostname}
 
 
 Verify Default Gateway Editable
