@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f3969f4b_b1750b2e",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-11-26T11:03:48Z",
+      "side": 1,
+      "message": "That sounds like a better suggestion. \n\n# File name: code_update_utils.py\n# Module name: get_version_tar(tar_file_path)\n\nmaybe this would be better",
+      "parentUuid": "4ebd4fc6_b7bcafd4",
+      "revId": "f22cb7ba5c031839627ce537af8ceda3608faca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a5762383_095ac842",
         "filename": "redfish/extended/redfish_bmc_code_update.robot",
         "patchSetId": 1
