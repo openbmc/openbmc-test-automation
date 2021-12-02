@@ -16,6 +16,24 @@
       "revId": "3d73de48a9fb7af7e74ad963874f715fe3a51d04",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b52cf1c_c54f5801",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 881,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2021-12-02T15:10:19Z",
+      "side": 1,
+      "message": "This test case requirement is for 10 times only, I have another test case where it uploads 1000 times. plus I am printing additional information on terminal so user is aware about the loop count.",
+      "parentUuid": "7534009d_60a9395e",
+      "revId": "3d73de48a9fb7af7e74ad963874f715fe3a51d04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
