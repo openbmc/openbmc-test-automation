@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7534009d_60a9395e",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 881,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-12-02T13:01:24Z",
+      "side": 1,
+      "message": "This code is not required. Delete this.\nIn the test case just call above keyword n times.\nWhere n can 10, 1000 or any user defined.",
+      "revId": "3d73de48a9fb7af7e74ad963874f715fe3a51d04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
