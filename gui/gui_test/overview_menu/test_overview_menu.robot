@@ -17,8 +17,8 @@ Test Setup      Test Setup Execution
 *** Variables ***
 
 ${xpath_overview_page_header}          //h1[contains(text(), "Overview")]
-${xpath_edit_network_settings_button}  //*[@data-test-id='overviewQuickLinks-button-networkSettings']
-${view_all_event_logs}                 //*[@data-test-id='overviewEvents-button-eventLogs']
+${xpath_edit_network_settings_button}  (//*[text()="View more"])[3]
+${view_all_event_logs}                 (//*[text()="View more"])[5]
 ${xpath_launch_serial_over_lan}        //*[@data-test-id='overviewQuickLinks-button-solConsole']
 ${xpath_led_button}                    //*[@data-test-id='overviewQuickLinks-checkbox-serverLed']
 
