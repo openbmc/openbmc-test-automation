@@ -29,12 +29,13 @@ Verify Existence Of All Sections In Overview Page
     [Documentation]  Verify existence of all sections in Overview page.
     [Tags]  Verify_Existence_Of_All_Sections_In_Overview_Page
 
-    Page Should Contain  BMC information
+    Page Should Contain  BMC time
+    Page Should Contain  firmware information
     Page Should Contain  Server information
     Page Should Contain  Network information
-    Page Should Contain  Power consumption
-    Page Should Contain  High priority events
-
+    Page Should Contain  Power information
+    Page Should Contain  Event logs
+    Page Should Contain  Inventory and LEDs
 
 Verify Network Information In Overview Page
     [Documentation]  Verify values under network information section.
