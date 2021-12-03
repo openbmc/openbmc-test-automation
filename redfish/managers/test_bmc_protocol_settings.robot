@@ -79,7 +79,8 @@ Disable SSH Protocol And Check Persistency On BMC Reboot
     Enable SSH Protocol  ${False}
 
     # Reboot BMC and verify persistency.
-    OBMC Reboot (off)
+    Redfish BMC Reset Operation
+    Sleep  60s
 
     # Check if SSH is really disabled via Redfish.
     Verify SSH Protocol State  ${False}
