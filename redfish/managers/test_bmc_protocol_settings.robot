@@ -79,7 +79,7 @@ Disable SSH Protocol And Check Persistency On BMC Reboot
     Enable SSH Protocol  ${False}
 
     # Reboot BMC and verify persistency.
-    OBMC Reboot (off)
+    Redfish BMC Reboot
 
     # Check if SSH is really disabled via Redfish.
     Verify SSH Protocol State  ${False}
@@ -161,4 +161,24 @@ Disable IPMI Protocol And Verify
 
 
 *** Keywords ***
+
+BMC LastResetTime Is Changed
+    [Documentation]  return fail if BMC last reset time is not changed
+    [Arguments]  ${reset_time}
+
+    ${last_reset_time}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  LastResetTime
+    Should Not Be Equal  ${last_reset_time}  ${reset_time}
+
+
+Redfish BMC Reboot
+    [Documentation]  Use Redfish API reboot BMC and wait for BMC ready
+
+    #  Get BMC last reset time for compare
+    ${last_reset_time}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  LastResetTime
+
+    # Reboot BMC by Redfish API
+    Redfish BMC Reset Operation
+
+    # Wait for BMC real reboot and Redfish API ready
+    Wait Until Keyword Succeeds  3 min  10 sec  BMC LastResetTime Is Changed  ${last_reset_time}
 
