@@ -61,7 +61,7 @@ OPENBMC:
             - 'cat /var/log/obmc-console.log >/tmp/BMC_obmc_console.txt'
             - 'cat /var/log/obmc-console1.log >/tmp/BMC_obmc_console1.txt'
             - 'peltool -l >/tmp/PEL_logs_list.json'
-            - 'peltool -a >/tmp/PEL_logs_display.json'
+            - {'peltool -a >/tmp/PEL_logs_display.json':240}
             - 'killall -s SIGUSR1 pldmd; sleep 5'
         FILES:
             - '/tmp/BMC_flash_side.txt'

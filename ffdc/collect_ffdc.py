@@ -18,7 +18,7 @@ for root, dirs, files in os.walk(full_path):
     for found_dir in dirs:
         sys.path.append(os.path.join(root, found_dir))
 
-from ffdc_collector import FFDCCollector
+from ffdc_collector import ffdc_collector
 
 
 @click.command(context_settings=dict(help_option_names=['-h', '--help']))
@@ -61,26 +61,26 @@ def cli_ffdc(remote,
     click.echo("\n********** FFDC (First Failure Data Collection) Starts **********")
 
     if input_options_ok(remote, username, password, config, type):
-        thisFFDC = FFDCCollector(remote,
-                                 username,
-                                 password,
-                                 config,
-                                 location,
-                                 type,
-                                 protocol,
-                                 env_vars,
-                                 econfig,
-                                 log_level)
-        thisFFDC.collect_ffdc()
+        this_ffdc = ffdc_collector(remote,
+                                   username,
+                                   password,
+                                   config,
+                                   location,
+                                   type,
+                                   protocol,
+                                   env_vars,
+                                   econfig,
+                                   log_level)
+        this_ffdc.collect_ffdc()
 
-        if len(os.listdir(thisFFDC.ffdc_dir_path)) == 0:
+        if len(os.listdir(this_ffdc.ffdc_dir_path)) == 0:
             click.echo("\n\tFFDC Collection from " + remote + " has failed.\n\n")
         else:
-            click.echo(str("\n\t" + str(len(os.listdir(thisFFDC.ffdc_dir_path)))
+            click.echo(str("\n\t" + str(len(os.listdir(this_ffdc.ffdc_dir_path)))
                            + " files were retrieved from " + remote))
-            click.echo("\tFiles are stored in " + thisFFDC.ffdc_dir_path)
+            click.echo("\tFiles are stored in " + this_ffdc.ffdc_dir_path)
 
-        click.echo("\tTotal elapsed time " + thisFFDC.elapsed_time + "\n\n")
+        click.echo("\tTotal elapsed time " + this_ffdc.elapsed_time + "\n\n")
     click.echo("\n********** FFDC Finishes **********\n\n")
 
 

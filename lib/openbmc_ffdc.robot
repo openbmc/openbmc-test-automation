@@ -33,6 +33,7 @@ Resource           openbmc_ffdc_methods.robot
 Resource           openbmc_ffdc_utils.robot
 Resource           dump_utils.robot
 Library            openbmc_ffdc.py
+Library            ffdc_cli_robot_script.py
 
 *** Keywords ***
 
@@ -51,6 +52,17 @@ FFDC On Test Case Fail
     ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}=  Convert To Integer  ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}
     Return From Keyword If  ${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}
 
-    Run Keyword If  '${TEST_STATUS}' == 'FAIL'  FFDC
+    Run Keyword If  '${TEST_STATUS}' == 'FAIL'  Launch FFDC
 
     Log Test Case Status
+
+
+Launch FFDC
+    [Documentation]  Call point to call FFDC robot or FFDC script.
+    ...              FFDC_DEFAULT set to 1, by default, in resource.robot
+    ...              FFDC_DEFAULT:1  use legacy ffdc collector
+    ...              FFDC_DEFAULT:0  use new ffdc collector.
+
+    Run Keyword If  ${FFDC_DEFAULT} == ${1}  FFDC
+    ...    ELSE  ffdc_robot_script_cli
+
