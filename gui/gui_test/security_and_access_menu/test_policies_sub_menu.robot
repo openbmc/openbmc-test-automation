@@ -32,7 +32,7 @@ Verify Existence Of All Sections In Policies Page
     Page Should Contain  Network services
     Page Should Contain  BMC shell (via SSH)
     Page Should Contain  Network IPMI (out-of-band IPMI)
-
+    Page Should Contain  Host TPM
 
 Verify Existence Of All Buttons In Policies Page
     [Documentation]  Verify existence of All Buttons in policies page.
