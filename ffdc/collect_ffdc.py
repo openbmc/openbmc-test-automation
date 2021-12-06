@@ -18,7 +18,7 @@ for root, dirs, files in os.walk(full_path):
     for found_dir in dirs:
         sys.path.append(os.path.join(root, found_dir))
 
-from ffdc_collector import FFDCCollector
+from ffdc_collector import ffdc_collector
 
 
 @click.command(context_settings=dict(help_option_names=['-h', '--help']))
@@ -30,7 +30,7 @@ from ffdc_collector import FFDCCollector
               help="Password of the remote host.")
 @click.option('-c', '--config', default=abs_path + "/ffdc_config.yaml",
               show_default=True, help="YAML Configuration file for log collection.")
-@click.option('-l', '--location', default="/tmp",
+@click.option('-l', '--location', default=None,
               show_default=True, help="Location to save logs")
 @click.option('-t', '--type',
               help="OS type of the remote (targeting) host. OPENBMC, RHEL, UBUNTU, SLES, AIX")
@@ -60,17 +60,20 @@ def cli_ffdc(remote,
 
     click.echo("\n********** FFDC (First Failure Data Collection) Starts **********")
 
+    if not location:
+        location = os.getcwd() + '/logs'
+
     if input_options_ok(remote, username, password, config, type):
-        thisFFDC = FFDCCollector(remote,
-                                 username,
-                                 password,
-                                 config,
-                                 location,
-                                 type,
-                                 protocol,
-                                 env_vars,
-                                 econfig,
-                                 log_level)
+        thisFFDC = ffdc_collector(remote,
+                                  username,
+                                  password,
+                                  config,
+                                  location,
+                                  type,
+                                  protocol,
+                                  env_vars,
+                                  econfig,
+                                  log_level)
         thisFFDC.collect_ffdc()
 
         if len(os.listdir(thisFFDC.ffdc_dir_path)) == 0:
