@@ -32,7 +32,7 @@ Verify Components On Inventory And LEDs Page
     Page Should Contain  Fans
     Page Should Contain  Power supplies
     Page Should Contain  Processors
-
+    Page Should Contain  Assemblies
 
 *** Keywords ***
 
