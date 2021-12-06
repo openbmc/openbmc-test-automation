@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "60ed5ad5_fbaa9584",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-12-06T09:56:28Z",
+      "side": 1,
+      "message": "This documentation doesn\u0027t say any what is persistent ?  if you are referring to the policy setting of the redfish protocol for IPMI, please mention explicitly which URI and property its been used either in the test code or here in the documentation..\n\nand same for the other test cases as well",
+      "range": {
+        "startLine": 164,
+        "startChar": 21,
+        "endLine": 164,
+        "endChar": 64
+      },
+      "revId": "376cba27409734acb60e5f15a952bb22d41a2374",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
