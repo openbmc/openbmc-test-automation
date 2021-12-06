@@ -42,5 +42,6 @@ My FFDC Logs
 ** Keywords ***
 
 Gather FFDC
-    [Documentation]  Collect FFDC.
-    Run Keyword And Ignore Error   FFDC
+    [Documentation]  Call point to call FFDC robot or FFDC script..
+    Run Keyword If  ${FFDC_DEFAULT} == ${1}  FFDC
+    ...    ELSE  ffdc_robot_script_cli
