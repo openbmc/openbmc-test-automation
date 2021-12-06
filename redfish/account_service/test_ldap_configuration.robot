@@ -16,7 +16,7 @@ Test Teardown    FFDC On Test Case Fail
 Force Tags       LDAP_Test
 
 *** Variables ***
-${old_ldap_privilege}   ${EMPTY}
+${old_ldap_privilege}   Administrator
 &{old_account_service}  &{EMPTY}
 &{old_ldap_config}      &{EMPTY}
 ${hostname}             ${EMPTY}
@@ -550,8 +550,9 @@ Update LDAP Config And Verify Set Host Name
     [Documentation]  Update LDAP config and verify by attempting to set host name.
     [Arguments]  ${group_name}  ${group_privilege}=Administrator
     ...  ${valid_status_codes}=[${HTTP_OK}]
-    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
-
+    [Teardown]  Run Keyword If  '${group_privilege}'=='NoAccess'  Redfish.Login
+                ...  ELSE  Run Keywords  Redfish.Logout  AND  Redfish.Login
+    
     # Description of argument(s):
     # group_name                    The group name of user.
     # group_privilege               The group privilege ("Administrator",
@@ -562,12 +563,21 @@ Update LDAP Config And Verify Set Host Name
     #                               method in redfish_plut.py for details.
     Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
     ...  ${group_privilege}  ${group_name}
+
+    Run Keyword If  '${group_privilege}'=='NoAccess'
+    ...  Run Keyword And Return  Verify redfish Login for LDAP userRole NoAccess
+
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     # Verify that the LDAP user in ${group_name} with the given privilege is
     # allowed to change the hostname.
     Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body={'HostName': '${hostname}'}
     ...  valid_status_codes=${valid_status_codes}
 
+Verify redfish Login for LDAP userRole NoAccess
+    [Documentation]  Verify redfish Login should not login for LDAP userRole NoAccess.
+
+    ${status}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Valid Value  status  [${False}]
 
 Disable Other LDAP
     [Documentation]  Disable other LDAP configuration.
@@ -632,7 +642,6 @@ Suite Setup Execution
     Redfish.Login
     # Call 'Get LDAP Configuration' to verify that LDAP configuration exists.
     Get LDAP Configuration  ${LDAP_TYPE}
-    ${old_ldap_privilege}=  Get LDAP Privilege
     Set Suite Variable  ${old_ldap_privilege}
     Disable Other LDAP
     Create LDAP Configuration
@@ -715,7 +724,8 @@ Get LDAP Privilege
 
 Restore LDAP Privilege
     [Documentation]  Restore the LDAP privilege to its original value.
-
+    
+    Redfish.Login
     Return From Keyword If  '${old_ldap_privilege}' == '${EMPTY}' or '${old_ldap_privilege}' == '[]'
     # Log back in to restore the original privilege.
     Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
@@ -723,6 +733,15 @@ Restore LDAP Privilege
 
     Sleep  18s
 
+Verify Host Power Status
+    [Documentation]  Verify the Host power status and do host power on/off respectively.
+    [Arguments]  ${expected_power_status}
+
+    ${power_status}=  Redfish.Get Attribute  /redfish/v1/Chassis/${CHASSIS_ID}  PowerState
+    Return From Keyword If  '${power_status}' == '${expected_power_status}'
+
+    Run Keyword If  '${power_status}' == 'Off'  Redfish Power On
+    ...  ELSE  Redfish Power Off
 
 Update LDAP User Role And Host Poweroff
     [Documentation]  Update LDAP user role and do host poweroff.
@@ -735,6 +754,9 @@ Update LDAP User Role And Host Poweroff
     # group_name         The group name of user.
     # valid_status_code  The expected valid status code.
 
+    # check Host state and do the power on/off if needed.
+    Verify Host Power Status  On
+    
     Update LDAP Configuration with LDAP User Role And Group  ${ldap_type}
     ...  ${group_privilege}  ${group_name}
 
@@ -742,7 +764,6 @@ Update LDAP User Role And Host Poweroff
 
     Redfish.Post  ${REDFISH_POWER_URI}
     ...  body={'ResetType': 'ForceOff'}   valid_status_codes=[${valid_status_code}]
-
 
 Update LDAP User Role And Host Poweron
     [Documentation]  Update LDAP user role and do host poweron.
@@ -754,6 +775,9 @@ Update LDAP User Role And Host Poweron
     # group_privilege    The group privilege ("Administrator", "Operator", "ReadOnly" or "NoAccess").
     # group_name         The group name of user.
     # valid_status_code  The expected valid status code.
+
+    # check Host state and do the power on/off if needed.
+    Verify Host Power Status  Off
 
     Update LDAP Configuration with LDAP User Role And Group  ${ldap_type}
     ...  ${group_privilege}  ${group_name}
