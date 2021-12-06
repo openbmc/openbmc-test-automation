@@ -145,6 +145,9 @@ ${LDAP_SEARCH_SCOPE}        ${EMPTY}
 ${LDAP_TYPE}                ${EMPTY}
 ${LDAP_USER}                ${EMPTY}
 ${LDAP_USER_PASSWORD}       ${EMPTY}
+${GROUP_PRIVILEGE}          ${EMPTY}
+${GROUP_NAME}               ${EMPTY}
+${LDAP_SERVER_URI}          ldap://${LDAP_SERVER_HOST}
 
 # General tool variables
 # FFDC_DEFAULT == 1; use Default FFDC methods
