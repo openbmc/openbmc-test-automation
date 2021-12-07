@@ -115,10 +115,27 @@ Get Active OCC State Count
 
 
 Match OCC And CPU State Count
+    [Documentation]  Get CPU functional count and verify OCC count active matches.
+
     ${cpu_count}=  Get Functional Processor Count
-    ${occ_count}=  Get Active OCC State Count
-    Should Be Equal  ${occ_count}  ${cpu_count}
-    ...  msg=OCC count ${occ_count} and CPU Count ${cpu_count} mismatched.
+    Log To Console  Functional Processor count: ${cpu_count}
+
+    FOR  ${num}  IN RANGE  ${0}  ${cpu_count}
+       ${cmd}=  Catenate  busctl get-property org.open_power.OCC.Control
+       ...   /org/open_power/control/occ${num} org.open_power.OCC.Status OccActive
+
+       ${cmd_output}  ${stderr}  ${rc} =  BMC Execute Command  ${cmd}
+       ...  print_out=1  print_err=1  ignore_err=1
+
+       # The command returns format  'b true'
+       Continue For Loop If   '${cmd_output.split(' ')[-1]}' != 'true'
+       ${active_occ_count} =  Evaluate   ${active_occ_count} + 1
+    END
+
+    Log To Console  OCC Active count: ${active_occ_count}
+
+    Should Be Equal  ${active_occ_count}  ${cpu_count}
+    ...  msg=OCC count ${active_occ_count} and CPU Count ${cpu_count} mismatched.
 
 
 Verify OCC State
