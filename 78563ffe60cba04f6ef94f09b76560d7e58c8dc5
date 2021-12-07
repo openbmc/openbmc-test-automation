@@ -52,6 +52,24 @@
       "revId": "78563ffe60cba04f6ef94f09b76560d7e58c8dc5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8981caa7_40cdb84c",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-12-07T12:23:24Z",
+      "side": 1,
+      "message": "OK.\nThat should be done as part of `Redfish BMC Reset Operation`, not in the test case.\n`Wait Until Keyword Succeeds  1 min  10 sec  Is BMC Standby` should go into the keyword.",
+      "parentUuid": "071deb34_5781414c",
+      "revId": "78563ffe60cba04f6ef94f09b76560d7e58c8dc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
