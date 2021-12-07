@@ -34,6 +34,24 @@
       "revId": "78563ffe60cba04f6ef94f09b76560d7e58c8dc5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "071deb34_5781414c",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-12-07T07:20:31Z",
+      "side": 1,
+      "message": "https://github.com/openbmc/openbmc-test-automation/blob/f5fec0d29370f8905aeccfee128c76abeef94231/lib/utils.robot#L925\n\nmaybe something like this ?. just a thought \n\n\nWait Until Keyword Succeeds  1 min  10 sec  Is BMC Standby",
+      "parentUuid": "c27b909a_569b8a6f",
+      "revId": "78563ffe60cba04f6ef94f09b76560d7e58c8dc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
