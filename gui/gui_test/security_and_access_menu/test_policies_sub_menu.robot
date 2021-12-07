@@ -4,6 +4,8 @@ Documentation    Test OpenBMC GUI "Policies" sub-menu of "Security and Access" m
 
 Resource         ../../lib/gui_resource.robot
 Resource         ../lib/ipmi_client.robot
+Resource         ../lib/protocol_setting_utils.robot
+Resource         ../lib/common_utils.robot
 Suite Setup      Launch Browser And Login GUI
 Suite Teardown   Close Browser
 Test Setup       Test Setup Execution
@@ -14,6 +16,9 @@ Test Setup       Test Setup Execution
 ${xpath_policies_heading}       //h1[text()="Policies"]
 ${xpath_bmc_ssh_toggle}         //*[@data-test-id='policies-toggle-bmcShell']/following-sibling::label
 ${xpath_network_ipmi_toggle}    //*[@data-test-id='polices-toggle-networkIpmi']/following-sibling::label
+${xpath_reboot_bmc_heading}     //h1[text()="Reboot BMC"]
+${xpath_rebootbmc_button}       //*[@data-test-id='rebootBmc-button-reboot']
+${xpath_confirm_bmc_reboot}     //*[@class='btn btn-primary']
 
 
 *** Test Cases ***
@@ -45,24 +50,8 @@ Verify Existence Of All Buttons In Policies Page
 Enable SSH Via GUI And Verify
     [Documentation]  Verify that SSH to BMC starts working after enabling SSH.
     [Tags]  Enable_SSH_Via_GUI_And_Verify
-    [Teardown]  Run Keywords  Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol
-    ...  body={"SSH":{"ProtocolEnabled":True}}  valid_status_codes=[200, 204]  AND
-    ...  Wait Until Keyword Succeeds  30 sec  5 sec  Open Connection And Login
 
-    # Disable ssh via Redfish.
-    Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol  body={"SSH":{"ProtocolEnabled":False}}
-    ...   valid_status_codes=[200, 204]
-
-    # Wait for GUI to reflect disable SSH status.
-    Wait Until Keyword Succeeds  30 sec  10 sec
-    ...  Refresh GUI And Verify Element Value  ${xpath_bmc_ssh_toggle}  Disabled
-
-    # Enable ssh via GUI.
-    Click Element  ${xpath_bmc_ssh_toggle}
-
-    # Wait for GUI to reflect enable SSH status.
-    Wait Until Keyword Succeeds  30 sec  10 sec
-    ...  Refresh GUI And Verify Element Value  ${xpath_bmc_ssh_toggle}  Enabled
+    Enable SSH Via GUI
 
     Wait Until Keyword Succeeds  10 sec  5 sec  Open Connection And Login
 
@@ -70,24 +59,10 @@ Enable SSH Via GUI And Verify
 Disable SSH Via GUI And Verify
     [Documentation]  Verify that SSH to BMC stops working after disabling SSH.
     [Tags]  Disable_SSH_Via_GUI_And_Verify
-    [Teardown]  Run Keywords  Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol
-    ...  body={"SSH":{"ProtocolEnabled":True}}  valid_status_codes=[200, 204]  AND
-    ...  Wait Until Keyword Succeeds  30 sec  5 sec  Open Connection And Login
+    [Teardown]  Run Keywords  Enable SSH Protocol  ${True}  AND
+    ...  Wait Until Keyword Succeeds  30 sec  10 sec  Open Connection And Login
 
-    # Enable ssh via Redfish.
-    Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol  body={"SSH":{"ProtocolEnabled":True}}
-    ...   valid_status_codes=[200, 204]
-
-    # Wait for GUI to reflect enable SSH status.
-    Wait Until Keyword Succeeds  30 sec  10 sec
-    ...  Refresh GUI And Verify Element Value  ${xpath_bmc_ssh_toggle}  Enabled
-
-    # Disable ssh via GUI.
-    Click Element  ${xpath_bmc_ssh_toggle}
-
-    # Wait for GUI to reflect disable SSH status.
-    Wait Until Keyword Succeeds  30 sec  10 sec
-    ...  Refresh GUI And Verify Element Value  ${xpath_bmc_ssh_toggle}  Disabled
+    Disable SSH Via GUI
 
     ${status}=  Run Keyword And Return Status
     ...  Open Connection And Login
@@ -97,27 +72,10 @@ Disable SSH Via GUI And Verify
 
 
 Disable IPMI Via GUI And Verify
-    [Documentation]  Verify that IPMI command does not work after disabling IPMI.
+    [Documentation]  Verify that IPMI command doesnot work after disabling IPMI.
     [Tags]  Disable_IPMI_Via_GUI_And_Verify
-    [Teardown]  Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol
-    ...  body={"IPMI":{"ProtocolEnabled":True}}  valid_status_codes=[200, 204]
 
-    # Due to github issue 2125 we are using click element instead of select checkbox.
-    # https://github.com/openbmc/openbmc-test-automation/issues/2125.
-    # Enable IPMI via Redfish.
-    Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol  body={"IPMI":{"ProtocolEnabled":True}}
-    ...   valid_status_codes=[200, 204]
-
-    # Wait for GUI to reflect enable IPMI status.
-    Wait Until Keyword Succeeds  30 sec  10 sec
-    ...  Refresh GUI And Verify Element Value  ${xpath_network_ipmi_toggle}  Enabled
-
-    # Disable IPMI via GUI.
-    Click Element  ${xpath_network_ipmi_toggle}
-
-    # Wait for GUI to reflect disable IPMI status.
-    Wait Until Keyword Succeeds  30 sec  10 sec
-    ...  Refresh GUI And Verify Element Value  ${xpath_network_ipmi_toggle}  Disabled
+    Disable IPMI Via GUI
 
     ${status}=  Run Keyword And Return Status
     ...  Wait Until Keyword Succeeds  10 sec  5 sec  Run IPMI Standard Command  sel info
@@ -129,27 +87,32 @@ Disable IPMI Via GUI And Verify
 Enable IPMI Via GUI And Verify
     [Documentation]  Verify that IPMI command works after enabling IPMI.
     [Tags]  Enable_IPMI_Via_GUI_And_Verify
-    [Teardown]  Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol
-    ...  body={"IPMI":{"ProtocolEnabled":True}}  valid_status_codes=[200, 204]
 
-    # Due to github issue 2125 we are using click element instead of select checkbox.
-    # https://github.com/openbmc/openbmc-test-automation/issues/2125.
-    # Disable ipmi via Redfish.
-    Redfish.Patch  /redfish/v1/Managers/bmc/NetworkProtocol  body={"IPMI":{"ProtocolEnabled":False}}
-    ...   valid_status_codes=[200, 204]
-
-    # Wait for GUI to reflect disable IPMI status.
-    Wait Until Keyword Succeeds  30 sec  10 sec
-    ...  Refresh GUI And Verify Element Value  ${xpath_network_ipmi_toggle}  Disabled
-
-    # Enable ipmi via GUI.
-    Click Element  ${xpath_network_ipmi_toggle}
-
-    # Wait for GUI to reflect enable IPMI status.
-    Wait Until Keyword Succeeds  30 sec  10 sec
-    ...  Refresh GUI And Verify Element Value  ${xpath_network_ipmi_toggle}  Enabled
+    Enable IPMI Via GUI
 
     Wait Until Keyword Succeeds  10 sec  5 sec  Run IPMI Standard Command  sel info
+
+
+Enable SSH Via GUI And Verify Persistency On BMC Reboot
+    [Documentation]  Enable SSH via GUI and verify persistency of SSH connection on BMC reboot.
+    [Tags]  Enable_SSH_Via_GUI_And_Verify_Persistency_On_BMC_Reboot
+
+    Enable SSH Via GUI
+
+    Reboot BMC via GUI
+
+    Wait Until Keyword Succeeds  2 min  30 sec  Open Connection And Login
+
+
+Enable IPMI Via GUI And Verify Persistency On BMC Reboot
+    [Documentation]  Enable IPMI via GUI and verify persistency of IPMI command work on BMC reboot.
+    [Tags]  Enable_IPMI_Via_GUI_And_Verify_Persistency_On_BMC_Reboot
+
+    Enable IPMI Via GUI
+
+    Reboot BMC via GUI
+
+    Wait Until Keyword Succeeds  2 min  30 sec  Run IPMI Standard Command  sel info
 
 
 *** Keywords ***
@@ -161,3 +124,87 @@ Test Setup Execution
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  policies
 
 
+Reboot BMC via GUI
+    [Documentation]  Reboot BMC via GUI.
+    [Teardown]  Test Setup Execution
+
+    Click Element  ${xpath_operations_menu}
+    Click Element  ${xpath_reboot_bmc_sub_menu}
+    Click Button  ${xpath_rebootbmc_button}
+    Click Button  ${xpath_confirm_bmc_reboot}
+    Wait Until Keyword Succeeds  2 min  10 sec  Is BMC Unpingable
+    Wait For Host To Ping  ${OPENBMC_HOST}  1 min
+
+
+Enable SSH Via GUI
+   [Documentation]  Enable SSH via GUI.
+
+    # Disable ssh via Redfish.
+    Enable SSH Protocol  ${False}
+
+    # Wait for GUI to reflect disable SSH status.
+    Wait Until Keyword Succeeds  1 min  10 sec
+    ...  Refresh GUI And Verify Element Value  ${xpath_bmc_ssh_toggle}  Disabled
+
+    # Enable ssh via GUI.
+    Click Element  ${xpath_bmc_ssh_toggle}
+
+    # Wait for GUI to reflect enable SSH status.
+    Wait Until Keyword Succeeds  1 min  10 sec
+    ...  Refresh GUI And Verify Element Value  ${xpath_bmc_ssh_toggle}  Enabled
+
+
+Disable SSH Via GUI
+    [Documentation]  Disable SSH via GUI.
+
+    # Enable ssh via Redfish.
+    Enable SSH Protocol  ${True}
+
+    # Wait for GUI to reflect enable SSH status.
+    Wait Until Keyword Succeeds  1 min  10 sec
+    ...  Refresh GUI And Verify Element Value  ${xpath_bmc_ssh_toggle}  Enabled
+
+    # Disable ssh via GUI.
+    Click Element  ${xpath_bmc_ssh_toggle}
+
+    # Wait for GUI to reflect disable SSH status.
+    Wait Until Keyword Succeeds  1 min  10 sec
+    ...  Refresh GUI And Verify Element Value  ${xpath_bmc_ssh_toggle}  Disabled
+
+
+Enable IPMI Via GUI
+    [Documentation]  Enable IPMI via GUI.
+
+    # Due to github issue 2125 we are using click element instead of select checkbox.
+    # https://github.com/openbmc/openbmc-test-automation/issues/2125.
+    # Disable ipmi via Redfish.
+
+    Enable IPMI Protocol  ${False}
+
+    # Wait for GUI to reflect disable IPMI status.
+    Wait Until Keyword Succeeds  1 min  10 sec
+    ...  Refresh GUI And Verify Element Value  ${xpath_network_ipmi_toggle}  Disabled
+
+    # Enable ipmi via GUI.
+    Click Element  ${xpath_network_ipmi_toggle}
+
+    # Wait for GUI to reflect enable IPMI status.
+    Wait Until Keyword Succeeds  1 min  10 sec
+    ...  Refresh GUI And Verify Element Value  ${xpath_network_ipmi_toggle}  Enabled
+
+
+Disable IPMI Via GUI
+    [Documentation]  Disable IPMI via GUI.
+
+    Enable IPMI Protocol  ${True}
+
+    # Wait for GUI to reflect enable IPMI status.
+    Wait Until Keyword Succeeds  1 min  10 sec
+    ...  Refresh GUI And Verify Element Value  ${xpath_network_ipmi_toggle}  Enabled
+
+    # Disable IPMI via GUI.
+    Click Element  ${xpath_network_ipmi_toggle}
+
+    # Wait for GUI to reflect disable IPMI status.
+    Wait Until Keyword Succeeds  1 min  10 sec
+    ...  Refresh GUI And Verify Element Value  ${xpath_network_ipmi_toggle}  Disabled
