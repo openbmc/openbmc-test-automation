@@ -16,6 +16,24 @@
       "revId": "78563ffe60cba04f6ef94f09b76560d7e58c8dc5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c27b909a_569b8a6f",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000899
+      },
+      "writtenOn": "2021-12-07T06:10:17Z",
+      "side": 1,
+      "message": "We need sometime to wait for BMC reboot, then redfish.Get will try to connect BMC and get ssh protocol state",
+      "parentUuid": "c2470bc3_54add5ee",
+      "revId": "78563ffe60cba04f6ef94f09b76560d7e58c8dc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
