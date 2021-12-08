@@ -70,6 +70,24 @@
       "revId": "78563ffe60cba04f6ef94f09b76560d7e58c8dc5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f937565c_80b46880",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000899
+      },
+      "writtenOn": "2021-12-08T03:39:09Z",
+      "side": 1,
+      "message": "Due to possible following issues, I choose create new keyword instead of use \"Is BMC Standby\"\n1. Is BMC Standby Match State with host state as off, but we may not sure currently host state.\n2. Reboot BMC need some time, we may get the BMC state before BMC real reboot.\n\nSo I use the BMC last reset time to check BMC is rebooted.",
+      "parentUuid": "8981caa7_40cdb84c",
+      "revId": "78563ffe60cba04f6ef94f09b76560d7e58c8dc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
