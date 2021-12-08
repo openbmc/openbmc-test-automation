@@ -12,6 +12,7 @@ Test Teardown       Test Teardown Execution
 
 ${invalid_username}     user%
 ${invalid_password}     abc123
+${new_username}         newuser
 ${root_userid}          1
 ${operator_level_priv}  0x3
 ${user_priv}            2
@@ -476,6 +477,44 @@ Verify Continuous IPMI Command Execution
         Run IPMI Standard Command  fru list
         Run IPMI Standard Command  sel list
     END
+
+
+Modify IPMI User
+    [Documentation]  Verify modified IPMI user is communicating via IPMI.
+    [Tags]  Modify_IPMI_User
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Delete Created User    ${random_userid}
+
+    ${random_userid}  ${random_username}=  Create Random IPMI User
+    Set Test Variable  ${random_userid}
+    Run IPMI Standard Command
+    ...  user set password ${random_userid} ${valid_password}
+
+    # Set admin privilege and enable IPMI messaging for newly created user.
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${admin_level_priv}
+
+    # Delay added for user privilege to get set.
+    Sleep  5s
+
+    Enable IPMI User And Verify  ${random_userid}
+
+    # Verify that user is able to run administrator level IPMI command.
+    Run Keyword If              '${CHANNEL_NUMBER}' == '1'
+    ...     Verify IPMI Command  ${random_username}  ${valid_password}  Administrator  1
+    ...  ELSE
+    ...     Verify IPMI Command  ${random_username}  ${valid_password}  Administrator  2
+
+    Sleep   5s
+
+    # Set different username for same IPMI user.
+    Run IPMI Standard Command
+    ...  user set name ${random_userid} ${new_username}
+
+    # Verify that user is able to run administrator level IPMI command.
+    Run Keyword If              '${CHANNEL_NUMBER}' == '1'
+    ...     Verify IPMI Command  ${new_username}  ${valid_password}  Administrator  1
+    ...  ELSE
+    ...     Verify IPMI Command  ${new_username}  ${valid_password}  Administrator  2
 
 
 *** Keywords ***
