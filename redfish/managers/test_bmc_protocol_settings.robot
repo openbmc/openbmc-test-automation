@@ -5,8 +5,8 @@ Resource   ../../lib/bmc_redfish_resource.robot
 Resource   ../../lib/openbmc_ffdc.robot
 Resource   ../../lib/protocol_setting_utils.robot
 
-Suite Setup     Redfish.Login
-Suite Teardown  Redfish.Logout
+Suite Setup     Suite Setup Execution
+Suite Teardown  Suite Teardown Execution
 Test Teardown   FFDC On Test Case Fail
 
 
@@ -131,7 +131,6 @@ Verify Existing SSH Session Gets Closed On Disabling SSH
 Enable IPMI Protocol And Verify
     [Documentation]  Enable IPMI protocol and verify.
     [Tags]  Enable_IPMI_Protocol_And_Verify
-    [Teardown]  Enable IPMI Protocol  ${False}
 
     Enable IPMI Protocol  ${True}
 
@@ -161,6 +160,30 @@ Disable IPMI Protocol And Verify
 
 
 *** Keywords ***
+
+Suite Setup Execution
+    [Documentation]  Do suite setup tasks.
+
+    Redfish.Login
+
+    # Get IPMI protocol default enabled value
+    ${resp}=  Redfish.Get  ${REDFISH_NW_PROTOCOL_URI}
+    # Only set IPMI default state when it's valid
+    ${valid}=  Run Keyword and Return Status  Valid Value
+    ...  resp.dict['IPMI']['ProtocolEnabled']  valid_values=[${True}, ${False}]
+    ${default_ipmi_state}=  Set Variable If  '${valid}' == '${True}'
+    ...  ${resp.dict['IPMI']['ProtocolEnabled']}  ${False}
+    Set Suite Variable  ${default_ipmi_state}
+
+
+Suite Teardown Execution
+    [Documentation]  Do suite teardown tasks.
+
+    # Restore IPMI defualt setting
+    Enable IPMI Protocol  ${default_ipmi_state}
+
+    Redfish.Logout
+
 
 Is BMC LastResetTime Changed
     [Documentation]  return fail if BMC last reset time is not changed
