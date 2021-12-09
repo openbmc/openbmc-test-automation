@@ -131,7 +131,6 @@ Verify Existing SSH Session Gets Closed On Disabling SSH
 Enable IPMI Protocol And Verify
     [Documentation]  Enable IPMI protocol and verify.
     [Tags]  Enable_IPMI_Protocol_And_Verify
-    [Teardown]  Enable IPMI Protocol  ${False}
 
     Enable IPMI Protocol  ${True}
 
@@ -145,6 +144,7 @@ Enable IPMI Protocol And Verify
 Disable IPMI Protocol And Verify
     [Documentation]  Disable IPMI protocol and verify.
     [Tags]  Disable_IPMI_Protocol_And_Verify
+    [Teardown]  Enable IPMI Protocol  ${True}
 
     # Disable IPMI interface.
     Enable IPMI Protocol  ${False}
