@@ -48,6 +48,54 @@
     },
     {
       "key": {
+        "uuid": "1ea22da5_5ccbc09a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-12-09T18:43:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff6a15fb_faff60a2",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 21
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "15352eb0_3a631c53",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-12-09T18:43:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c14d8005_170e2886",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 54
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fdb52d40_56369b23",
         "filename": "ffdc/collect_ffdc.py",
         "patchSetId": 2
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "d1c0c7c7_fc00055e",
+        "filename": "ffdc/collect_ffdc.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-12-09T18:43:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdb52d40_56369b23",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 17
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "11202363_89978ff1",
         "filename": "ffdc/ffdc_collector.py",
         "patchSetId": 2
@@ -91,6 +163,30 @@
       "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8cf5e072_f4fe8aa7",
+        "filename": "ffdc/ffdc_collector.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-12-09T18:43:54Z",
+      "side": 1,
+      "message": "Yes! When this ffdc utility is invoked from robot, we need to verify that we can access/create ffdc storage location *prior* to instantiate the object. We use class method to do the verification.",
+      "parentUuid": "11202363_89978ff1",
+      "range": {
+        "startLine": 709,
+        "startChar": 4,
+        "endLine": 710,
+        "endChar": 44
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -140,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "32f6826f_83a3425f",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-12-09T18:43:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1277bf7e_be016e64",
+      "range": {
+        "startLine": 11,
+        "startChar": 2,
+        "endLine": 11,
+        "endChar": 26
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "741f2f0f_898a381c",
         "filename": "lib/ffdc_cli_robot_script.py",
         "patchSetId": 2
@@ -160,6 +280,30 @@
       "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4e97c091_f7955a19",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-12-09T18:43:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "741f2f0f_898a381c",
+      "range": {
+        "startLine": 15,
+        "startChar": 1,
+        "endLine": 20,
+        "endChar": 19
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -209,6 +353,30 @@
     },
     {
       "key": {
+        "uuid": "e774e02a_cc301075",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-12-09T18:43:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c5dff69_95657282",
+      "range": {
+        "startLine": 23,
+        "startChar": 26,
+        "endLine": 23,
+        "endChar": 34
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bdff9c79_6e902845",
         "filename": "lib/ffdc_cli_robot_script.py",
         "patchSetId": 2
@@ -232,6 +400,30 @@
     },
     {
       "key": {
+        "uuid": "15b1b1a8_f4a58dde",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-12-09T18:43:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdff9c79_6e902845",
+      "range": {
+        "startLine": 27,
+        "startChar": 41,
+        "endLine": 27,
+        "endChar": 45
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "54999e2d_c5b7b1cd",
         "filename": "lib/ffdc_cli_robot_script.py",
         "patchSetId": 2
@@ -252,6 +444,30 @@
       "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "88aee380_75b618d7",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-12-09T18:43:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54999e2d_c5b7b1cd",
+      "range": {
+        "startLine": 48,
+        "startChar": 23,
+        "endLine": 48,
+        "endChar": 35
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -301,6 +517,30 @@
     },
     {
       "key": {
+        "uuid": "0ff2f64f_032637c7",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-12-09T18:43:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d46f0ad3_2e24c19b",
+      "range": {
+        "startLine": 86,
+        "startChar": 61,
+        "endLine": 86,
+        "endChar": 67
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "73903b33_859f64eb",
         "filename": "lib/ffdc_cli_robot_script.py",
         "patchSetId": 2
@@ -321,6 +561,30 @@
       "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0d3df3a_57702af0",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-12-09T18:43:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73903b33_859f64eb",
+      "range": {
+        "startLine": 87,
+        "startChar": 4,
+        "endLine": 107,
+        "endChar": 26
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -347,6 +611,30 @@
     },
     {
       "key": {
+        "uuid": "67cb4ab2_8bd704a2",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-12-09T18:43:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27c51d1e_9494d507",
+      "range": {
+        "startLine": 110,
+        "startChar": 45,
+        "endLine": 110,
+        "endChar": 49
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d00a8227_86c95b76",
         "filename": "lib/ffdc_cli_robot_script.py",
         "patchSetId": 2
@@ -367,6 +655,30 @@
       "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "470f5785_8dd30458",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-12-09T18:43:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d00a8227_86c95b76",
+      "range": {
+        "startLine": 112,
+        "startChar": 8,
+        "endLine": 112,
+        "endChar": 17
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     },
     {
       "key": {
@@ -393,6 +705,30 @@
     },
     {
       "key": {
+        "uuid": "4e800ed6_4eed4986",
+        "filename": "lib/openbmc_ffdc.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-12-09T18:43:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35a31180_fa600185",
+      "range": {
+        "startLine": 63,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 49
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2b7f1688_2150c01b",
         "filename": "lib/openbmc_ffdc.robot",
         "patchSetId": 2
@@ -416,6 +752,30 @@
     },
     {
       "key": {
+        "uuid": "4e4a2bda_66852b60",
+        "filename": "lib/openbmc_ffdc.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-12-09T18:43:54Z",
+      "side": 1,
+      "message": "Not sure I can insert python comment (#) in robot script file",
+      "parentUuid": "2b7f1688_2150c01b",
+      "range": {
+        "startLine": 64,
+        "startChar": 11,
+        "endLine": 64,
+        "endChar": 38
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b0c21222_373bd01f",
         "filename": "tools/myffdc.robot",
         "patchSetId": 2
@@ -427,6 +787,30 @@
       "writtenOn": "2021-12-09T15:42:29Z",
       "side": 1,
       "message": "Remove",
+      "range": {
+        "startLine": 45,
+        "startChar": 66,
+        "endLine": 45,
+        "endChar": 67
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af4f5727_b0843355",
+        "filename": "tools/myffdc.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2021-12-09T18:43:54Z",
+      "side": 1,
+      "message": "Leave it in since it is different from the Test Case Document",
+      "parentUuid": "b0c21222_373bd01f",
       "range": {
         "startLine": 45,
         "startChar": 66,
