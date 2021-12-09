@@ -162,23 +162,3 @@ Disable IPMI Protocol And Verify
 
 *** Keywords ***
 
-Is BMC LastResetTime Changed
-    [Documentation]  return fail if BMC last reset time is not changed
-    [Arguments]  ${reset_time}
-
-    ${last_reset_time}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  LastResetTime
-    Should Not Be Equal  ${last_reset_time}  ${reset_time}
-
-
-Redfish BMC Reboot
-    [Documentation]  Use Redfish API reboot BMC and wait for BMC ready
-
-    #  Get BMC last reset time for compare
-    ${last_reset_time}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  LastResetTime
-
-    # Reboot BMC by Redfish API
-    Redfish BMC Reset Operation
-
-    # Wait for BMC real reboot and Redfish API ready
-    Wait Until Keyword Succeeds  3 min  10 sec  Is BMC LastResetTime Changed  ${last_reset_time}
-
