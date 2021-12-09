@@ -34,16 +34,13 @@ Verify Subscribe An Event
 
     Should Be Empty  ${subscription_list}
 
-    ${HttpHeaders_dict}=  Create Dictionary  Content=application/json
-    ${HttpHeaders_list}=  Create List  ${HttpHeaders_dict}
     ${RegistryPrefixes_list}=  Create List  Base  OpenBMC  TaskEvent
     ${ResourceTypes_list}=  Create List  Task
 
     ${payload}=  Create Dictionary
     ...  Context=Test_Context  Destination=https://${REMOTE_SERVER_IP}:${HTTPS_PORT}/
-    ...  EventFormatType=Event  Protocol=Redfish  HttpHeaders=${HttpHeaders_list}
-    ...  SubscriptionType=RedfishEvent  RegistryPrefixes=${RegistryPrefixes_list}
-    ...  ResourceTypes=${ResourceTypes_list}
+    ...  EventFormatType=Event  Protocol=Redfish  SubscriptionType=RedfishEvent
+    ...  RegistryPrefixes=${RegistryPrefixes_list}  ResourceTypes=${ResourceTypes_list}
 
     Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
     ...  valid_status_codes=[${HTTP_CREATED}]
