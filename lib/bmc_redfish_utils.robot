@@ -331,3 +331,34 @@ Verify User Password Expired Using Redfish
     ${resp}=  Redfish.Get  /redfish/v1/AccountService/Accounts/${username}
     Should Be Equal  ${resp.dict["PasswordChangeRequired"]}  ${expected_result}
 
+
+Is BMC LastResetTime Changed
+    [Documentation]  Return fail if BMC last reset time is not changed.
+    [Arguments]  ${reset_time}
+
+    # Description of argument(s):
+    # reset_time  Last BMC reset time.
+
+    ${last_reset_time}=  Get BMC Last Reset Time
+    Should Not Be Equal  ${last_reset_time}  ${reset_time}
+
+
+Redfish BMC Reboot
+    [Documentation]  Use Redfish API reboot BMC and wait for BMC ready.
+
+    #  Get BMC last reset time for compare
+    ${last_reset_time}=  Get BMC Last Reset Time
+
+    # Reboot BMC by Redfish API
+    Redfish BMC Reset Operation
+
+    # Wait for BMC real reboot and Redfish API ready
+    Wait Until Keyword Succeeds  3 min  10 sec  Is BMC LastResetTime Changed  ${last_reset_time}
+
+
+Get BMC Last Reset Time
+    [Documentation]  Return BMC LastResetTime.
+
+    ${last_reset_time}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  LastResetTime
+
+    [Return]  ${last_reset_time}
