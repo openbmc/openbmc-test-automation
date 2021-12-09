@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b5aae9e9_bb8a8300",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-12-09T07:29:10Z",
+      "side": 1,
+      "message": "By default IPMI function should be disabled.\nSo we are keeping it in disabled state.",
+      "revId": "ebe8a9214145ba37da2d328916301697e24dc497",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
