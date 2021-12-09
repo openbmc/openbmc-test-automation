@@ -34,6 +34,24 @@
       "revId": "ebe8a9214145ba37da2d328916301697e24dc497",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "150c0a37_7c35e27f",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-12-09T08:12:54Z",
+      "side": 1,
+      "message": "This should not be enabled by default.\nIf user wants to use IPMI, he has to use this enable/disable function and enable and use it.",
+      "parentUuid": "ca88c749_8f9ae2f7",
+      "revId": "ebe8a9214145ba37da2d328916301697e24dc497",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
