@@ -1,0 +1,464 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c14d8005_170e2886",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "Can you please highlight the changes done in this commit?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 54
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ff6a15fb_faff60a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "FFDC",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 21
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fdb52d40_56369b23",
+        "filename": "ffdc/collect_ffdc.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "Better to name this as this_ffdc so that all variables are in snake case.",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 17
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "11202363_89978ff1",
+        "filename": "ffdc/ffdc_collector.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "Any particular reason why this is changed to a class method?",
+      "range": {
+        "startLine": 709,
+        "startChar": 4,
+        "endLine": 710,
+        "endChar": 44
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce4cbf83_34434705",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "Please document the purpose of this script",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 22
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1277bf7e_be016e64",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "Please specify the keys for which dictionary. I know it is for the kwargs mentioned below but pls document that.",
+      "range": {
+        "startLine": 11,
+        "startChar": 2,
+        "endLine": 11,
+        "endChar": 26
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "741f2f0f_898a381c",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "Can you pls document what these parameters are for?",
+      "range": {
+        "startLine": 15,
+        "startChar": 1,
+        "endLine": 20,
+        "endChar": 19
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9b5a9580_35ce68fb",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "Pls document the method\u0027s functionality",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 25
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9c5dff69_95657282",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "Please provide a description for this with an example. Also the purpose. Will this collect the FFDC for the given server? Elaborating on that will help.",
+      "range": {
+        "startLine": 23,
+        "startChar": 26,
+        "endLine": 23,
+        "endChar": 34
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdff9c79_6e902845",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "parameter",
+      "range": {
+        "startLine": 27,
+        "startChar": 41,
+        "endLine": 27,
+        "endChar": 45
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54999e2d_c5b7b1cd",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "Pls document the method\u0027s functionality and describe the arguments.",
+      "range": {
+        "startLine": 48,
+        "startChar": 23,
+        "endLine": 48,
+        "endChar": 35
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c77367a7_eccb6648",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "parameters",
+      "range": {
+        "startLine": 85,
+        "startChar": 30,
+        "endLine": 85,
+        "endChar": 35
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d46f0ad3_2e24c19b",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "End with a period",
+      "range": {
+        "startLine": 86,
+        "startChar": 61,
+        "endLine": 86,
+        "endChar": 67
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "73903b33_859f64eb",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "Include these default values when describing the arguments for the method",
+      "range": {
+        "startLine": 87,
+        "startChar": 4,
+        "endLine": 107,
+        "endChar": 26
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "27c51d1e_9494d507",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "This is remote_type right?",
+      "range": {
+        "startLine": 110,
+        "startChar": 45,
+        "endLine": 110,
+        "endChar": 49
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d00a8227_86c95b76",
+        "filename": "lib/ffdc_cli_robot_script.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "this_ffdc",
+      "range": {
+        "startLine": 112,
+        "startChar": 8,
+        "endLine": 112,
+        "endChar": 17
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "35a31180_fa600185",
+        "filename": "lib/openbmc_ffdc.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "Can you document what this variable signifies and what it does when set to 1 and also how to set it?",
+      "range": {
+        "startLine": 63,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 49
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2b7f1688_2150c01b",
+        "filename": "lib/openbmc_ffdc.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "Add a comment like this\n# Python module:  get_version_tar(tar_file_path)",
+      "range": {
+        "startLine": 64,
+        "startChar": 11,
+        "endLine": 64,
+        "endChar": 38
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0c21222_373bd01f",
+        "filename": "tools/myffdc.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "Remove",
+      "range": {
+        "startLine": 45,
+        "startChar": 66,
+        "endLine": 45,
+        "endChar": 67
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc00d9f1_b613c388",
+        "filename": "tools/myffdc.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2021-12-09T15:42:29Z",
+      "side": 1,
+      "message": "Document from where this method is imported\neg: # Python module:  get_version_tar(tar_file_path)",
+      "range": {
+        "startLine": 47,
+        "startChar": 5,
+        "endLine": 47,
+        "endChar": 38
+      },
+      "revId": "38749ce5c555e5b71e4c488f0d723d302c3965fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
