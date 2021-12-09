@@ -76,6 +76,7 @@ def parse_nping_output(output):
       Source IP:37577 SA ttl=49 id=0 iplen=44  seq=1078301364 win=5840 <mss 1380>
     Max rtt: 193.010ms | Min rtt: 193.010ms | Avg rtt: 193.010ms
     Raw packets sent: 2 (80B) | Rcvd: 1 (46B) | Lost: 1 (50.00%)
+    TCP connection attempts: 5 | Successful connections: 5 | Failed: 0 (0.00%)
     Nping done: 1 IP address pinged in 0.43 seconds
 
     Example of data returned by this function:
@@ -88,6 +89,10 @@ def parse_nping_output(output):
       [rcvd]:                    1 (46B)
       [lost]:                    1 (50.00%)
       [percent_lost]:            50.00
+      [tcp_connection_attempts]: 5
+      [successful_connections]:  5
+      [failed]:                  0 (0.00%)
+      [percent_failed]:          0.00
 
     Description of argument(s):
     output                          The output obtained by running an nping
@@ -96,16 +101,20 @@ def parse_nping_output(output):
 
     lines = output.split("\n")
     # Obtain only the lines of interest.
-    lines = list(filter(lambda x: re.match(r"(Max rtt|Raw packets)", x),
+    lines = list(filter(lambda x: re.match(r"(Max rtt|Raw packets|TCP connection)", x),
                         lines))
 
     key_value_list = []
     for line in lines:
         key_value_list += line.split("|")
     nping_result = vf.key_value_list_to_dict(key_value_list)
-    # Extract percent_lost value from lost field.
-    nping_result['percent_lost'] = \
-        float(nping_result['lost'].split(" ")[-1].strip("()%"))
+    # Extract percent_lost/percent_failed value from lost/failed field.
+    if 'lost' in nping_result:
+        nping_result['percent_lost'] = \
+            float(nping_result['lost'].split(" ")[-1].strip("()%"))
+    else:
+        nping_result['percent_failed'] = \
+            float(nping_result['failed'].split(" ")[-1].strip("()%"))
     return nping_result
 
 
