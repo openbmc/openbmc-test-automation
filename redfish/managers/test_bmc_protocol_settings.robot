@@ -5,8 +5,8 @@ Resource   ../../lib/bmc_redfish_resource.robot
 Resource   ../../lib/openbmc_ffdc.robot
 Resource   ../../lib/protocol_setting_utils.robot
 
-Suite Setup     Redfish.Login
-Suite Teardown  Redfish.Logout
+Suite Setup     Suite Setup Execution
+Suite Teardown  Run Keywords  Enable IPMI Protocol  ${initial_ipmi_state}  AND  Redfish.Logout
 Test Teardown   FFDC On Test Case Fail
 
 
@@ -131,7 +131,6 @@ Verify Existing SSH Session Gets Closed On Disabling SSH
 Enable IPMI Protocol And Verify
     [Documentation]  Enable IPMI protocol and verify.
     [Tags]  Enable_IPMI_Protocol_And_Verify
-    [Teardown]  Enable IPMI Protocol  ${False}
 
     Enable IPMI Protocol  ${True}
 
@@ -161,6 +160,15 @@ Disable IPMI Protocol And Verify
 
 
 *** Keywords ***
+
+Suite Setup Execution
+    [Documentation]  Do suite setup tasks.
+
+    Redfish.Login
+
+    ${state}=  Run Keyword And Return Status  Verify IPMI Protocol State
+    Set Suite Variable  ${initial_ipmi_state}  ${state}
+
 
 Is BMC LastResetTime Changed
     [Documentation]  return fail if BMC last reset time is not changed
