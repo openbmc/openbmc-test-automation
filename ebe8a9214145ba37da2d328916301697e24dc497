@@ -70,6 +70,24 @@
       "revId": "ebe8a9214145ba37da2d328916301697e24dc497",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3b06c5d7_acc83730",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-12-10T04:40:52Z",
+      "side": 1,
+      "message": "Prashanth, Brian, \n\nThere is no hard rule if the IPMI needs to be disabled or enabled, that is entirely up to the type of system and how the community configures it. \n\nThe code should be smart enough to identify if it is enabled or disabled and flip accordingly to the need of the test. \n\nHaving said that. It would be wise to enable back IPMI at the end of the suite by default.",
+      "parentUuid": "93c49628_4261ea15",
+      "revId": "ebe8a9214145ba37da2d328916301697e24dc497",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
