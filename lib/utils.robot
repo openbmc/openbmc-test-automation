@@ -486,8 +486,8 @@ Create OS Console File Path
     ...  ${TEST_NAME}
 
     ${default_file_path}=  Set Variable If  ${status} == ${TRUE}
-    ...  /tmp/${OPENBMC_HOST}_${TEST_NAME.replace(' ', '')}_os_console.txt
-    ...  /tmp/${OPENBMC_HOST}_os_console.txt
+    ...  ${EXECDIR}${/}tmp${/}${OPENBMC_HOST}_${TEST_NAME.replace(' ', '')}_os_console.txt
+    ...  ${EXECDIR}${/}tmp${/}${OPENBMC_HOST}_os_console.txt
 
     ${log_file_path}=  Set Variable If  '${log_file_path}' == '${EMPTY}'
     ...  ${default_file_path}  ${log_file_path}
