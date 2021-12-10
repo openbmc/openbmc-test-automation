@@ -8,6 +8,7 @@ Resource                ../lib/connection_client.robot
 Resource                ../lib/boot_utils.robot
 Resource                ../lib/common_utils.robot
 Resource                ../lib/bmc_redfish_utils.robot
+Resource                ../lib/ipmi_client.robot
 Library                 String
 Library                 DateTime
 Library                 Process
@@ -375,7 +376,6 @@ Redfish Get Power Restore Policy
     ${power_restore_policy}=  Redfish.Get Attribute  /redfish/v1/Systems/system  PowerRestorePolicy
     [Return]  ${power_restore_policy}
 
-
 Get Auto Reboot
     [Documentation]  Returns auto reboot setting.
     ${setting}=  Read Attribute  ${CONTROL_HOST_URI}/auto_reboot  AutoReboot
@@ -692,6 +692,21 @@ Redfish Set Power Restore Policy
 
     Redfish.Patch  /redfish/v1/Systems/system  body={"PowerRestorePolicy": "${power_restore_policy}"}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+
+IPMI Set Power Restore Policy
+    [Documentation]   Set the BMC power restore policy using IPMI.
+    [Arguments]   ${power_restore_policy}=always-off
+
+    # Description of argument(s):
+    # power_restore_policy    Power restore policies
+    #                         always-on   : turn on when power is restored
+    #                         previous    : return to previous state when power is restored
+    #                         always-off  : stay off after power is restored
+
+    ${resp}=  Run IPMI Standard Command  chassis policy ${power_restore_policy}
+    # Example:  Set chassis power restore policy to always-off
+    Should Contain  ${resp}  ${power_restore_policy}
 
 
 Set Auto Reboot Setting
