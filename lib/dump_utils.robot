@@ -243,7 +243,7 @@ Trigger Core Dump
     ...  msg=BMC execute command return code is not zero.
 
 Create User Initiated BMC Dump Using Redfish
-    [Documentation]  Trigger user initiated BMC dump via Redfish and return task id.
+    [Documentation]  Generate user initiated BMC dump via Redfish and return the dump id number (e.g., "5").
 
     ${payload}=  Create Dictionary  DiagnosticDataType=Manager
     ${resp}=  Redfish.Post
@@ -257,8 +257,27 @@ Create User Initiated BMC Dump Using Redfish
     # "TaskState": "Running",
     # "TaskStatus": "OK"
 
+    Wait Until Keyword Succeeds  5 min  15 sec  Check Task Completion  ${resp.dict['Id']}
     ${task_id}=  Set Variable  ${resp.dict['Id']}
-    [Return]  ${task_id}
+
+    ${task_dict}=  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
+
+    # Example of HttpHeaders field of task details.
+    # "Payload": {
+    #   "HttpHeaders": [
+    #     "Host: <BMC_IP>",
+    #      "Accept-Encoding: identity",
+    #      "Connection: Keep-Alive",
+    #      "Accept: */*",
+    #      "Content-Length: 33",
+    #      "Location: /redfish/v1/Managers/bmc/LogServices/Dump/Entries/2"]
+    #    ],
+    #    "HttpOperation": "POST",
+    #    "JsonBody": "{\"DiagnosticDataType\":\"Manager\"}",
+    #     "TargetUri": "/redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData"
+    # }
+
+    [Return]  ${task_dict["Payload"]["HttpHeaders"][-1].split("/")[-1]}
 
 Auto Generate BMC Dump
     [Documentation]  Auto generate BMC dump.
@@ -340,10 +359,8 @@ Check Task Completion
     # Description of argument(s):
     # task_id        Task ID.
 
-    ${status}=  Get Task Status  ${task_id}
-    Run Keyword Unless  '${status}' == 'Cancelled' or '${status}' == 'Completed'
-    ...  Fail  Task is still running.
-    [Return]  ${status}
+    ${task_dict}=  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
+    Should Be Equal As Strings  ${task_dict['TaskState']}  Completed
 
 Get Dump ID And Status
     [Documentation]  Return dump ID and status.
