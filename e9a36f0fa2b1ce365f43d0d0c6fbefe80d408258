@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cffd25df_15470724",
+        "filename": "ffdc/collect_ffdc.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-12-10T03:40:33Z",
+      "side": 1,
+      "message": "Lets not add check in the generic log collector to accommodate robot test, can we add the logic in \n\nffdc_cli_robot_script.py  which is specially for the robot",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 40
+      },
+      "revId": "e9a36f0fa2b1ce365f43d0d0c6fbefe80d408258",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
