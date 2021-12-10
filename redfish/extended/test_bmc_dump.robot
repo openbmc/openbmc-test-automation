@@ -67,7 +67,7 @@ Verify Download BMC Dump
     [Documentation]  Verify that a BMC dump can be downloaded to the local machine.
     [Tags]  Verify_Download_BMC_Dump
 
-    ${dump_id}=  Create User Initiated Dump
+    ${dump_id}=  Create User Initiated BMC Dump Via Redfish
     ${dump_dict}=  Get Dump Dict
     ${bmc_dump_name}=  Fetch From Right  ${dump_dict['${dump_id}']}  /
     ${bmc_dump_checksum}  ${stderr}  ${rc}=  BMC Execute Command
