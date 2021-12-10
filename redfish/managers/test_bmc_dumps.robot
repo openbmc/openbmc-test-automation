@@ -179,43 +179,6 @@ Verify Maximum BMC Dump Creation
 
 *** Keywords ***
 
-Create User Initiated BMC Dump Via Redfish
-    [Documentation]  Generate user initiated BMC dump via Redfish and return the dump id number (e.g., "5").
-
-    ${payload}=  Create Dictionary  DiagnosticDataType=Manager
-    ${resp}=  Redfish.Post  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
-    ...  body=${payload}  valid_status_codes=[${HTTP_ACCEPTED}]
-
-    # Example of response from above Redfish POST request.
-    # "@odata.id": "/redfish/v1/TaskService/Tasks/0",
-    # "@odata.type": "#Task.v1_4_3.Task",
-    # "Id": "0",
-    # "TaskState": "Running",
-    # "TaskStatus": "OK"
-
-    Wait Until Keyword Succeeds  5 min  15 sec  Is Task Completed  ${resp.dict['Id']}
-    ${task_id}=  Set Variable  ${resp.dict['Id']}
-
-    ${task_dict}=  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
-
-    # Example of HttpHeaders field of task details.
-    # "Payload": {
-    #   "HttpHeaders": [
-    #     "Host: <BMC_IP>",
-    #      "Accept-Encoding: identity",
-    #      "Connection: Keep-Alive",
-    #      "Accept: */*",
-    #      "Content-Length: 33",
-    #      "Location: /redfish/v1/Managers/bmc/LogServices/Dump/Entries/2"]
-    #    ],
-    #    "HttpOperation": "POST",
-    #    "JsonBody": "{\"DiagnosticDataType\":\"Manager\"}",
-    #     "TargetUri": "/redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData"
-    # }
-
-    [Return]  ${task_dict["Payload"]["HttpHeaders"][-1].split("/")[-1]}
-
-
 Get BMC Dump Entries
     [Documentation]  Return BMC dump ids list.
 
@@ -243,17 +206,6 @@ Get Disk Usage For Dumps
     ${usage_output}=  Convert To Integer  ${usage_output}
 
     [return]  ${usage_output}
-
-
-Is Task Completed
-    [Documentation]  Verify if the given task is completed.
-    [Arguments]   ${task_id}
-
-    # Description of argument(s):
-    # task_id        Id of task which needs to be checked.
-
-    ${task_dict}=  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
-    Should Be Equal As Strings  ${task_dict['TaskState']}  Completed
 
 
 Test Teardown Execution
