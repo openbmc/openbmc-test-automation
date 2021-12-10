@@ -52,6 +52,24 @@
       "revId": "ebe8a9214145ba37da2d328916301697e24dc497",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "93c49628_4261ea15",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000899
+      },
+      "writtenOn": "2021-12-10T00:51:44Z",
+      "side": 1,
+      "message": "May I get the reason why IPMI should be disable as default?\nDoes there any specification or guide I missed?",
+      "parentUuid": "150c0a37_7c35e27f",
+      "revId": "ebe8a9214145ba37da2d328916301697e24dc497",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
