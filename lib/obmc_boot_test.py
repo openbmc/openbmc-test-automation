@@ -446,7 +446,7 @@ def setup():
 
     gp.qprint_pgm_header()
 
-    grk.run_key_u(default_set_power_policy)
+    grk.run_key_u(default_set_power_policy, ignore=1)
 
     initial_plug_in_setup()
 
