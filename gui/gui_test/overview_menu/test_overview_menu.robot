@@ -30,9 +30,9 @@ Verify Existence Of All Sections In Overview Page
     [Tags]  Verify_Existence_Of_All_Sections_In_Overview_Page
 
     Page Should Contain  BMC time
-    Page Should Contain  firmware information
+    Page Should Contain  Firmware information
     Page Should Contain  Server information
-    Page Should Contain  Network information
+    Wait Until Page Contains  Network information  timeout=10
     Page Should Contain  Power information
     Page Should Contain  Event logs
     Page Should Contain  Inventory and LEDs
