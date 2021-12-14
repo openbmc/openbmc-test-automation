@@ -585,6 +585,8 @@ Collect PEL Log
     Create Directory  ${FFDC_DIR_PATH}${/}pel_files/
     scp.Get File  /var/lib/phosphor-logging/extensions/pels/logs/
     ...  ${FFDC_DIR_PATH}${/}pel_files  recursive=True
+    scp.Get File  /var/lib/phosphor-logging/extensions/pels/badPEL
+    ...  ${FFDC_DIR_PATH}${/}pel_files  recursive=False
 
 
 Enumerate Redfish Resources
