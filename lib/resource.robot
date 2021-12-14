@@ -96,6 +96,7 @@ ${RESET_PACKETS}           RST
 ${FIN_PACKETS}             FIN
 ${SYN_ACK_RESET}           SAR
 ${ALL_FLAGS}               ALL
+${TCP_CONNECT}             tcp-connect
 # Used to set BMC static IPv4 configuration.
 ${STATIC_IP}            10.10.10.10
 ${NETMASK}              255.255.255.0
