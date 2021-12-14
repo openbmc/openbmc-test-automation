@@ -89,9 +89,10 @@ Redfish Upload Multiple Partition File To BMC
     250KB-file,500KB-file
 
 
-Redfish Fail To Upload Multiple Partition File To BMC
-    [Documentation]  Fail to upload multiple partition file to BMC using Redfish.
-    [Tags]  Redfish_Fail_To_Upload_Multiple_Partition_File_To_BMC
+Test Upload Partition File When BMC Space Reach Max And Expect Failure
+    [Documentation]  Fail to upload multiple partition file to BMC
+    ...  as BMC directory reach to upper limit using Redfish.
+    [Tags]  Test_Upload_Partition_File_When_BMC_Space_Reach_Max_And_Expect_Failure
     [Template]  Redfish Fail To Upload Partition File
 
     # file_name     status_code            partition_status    response_message
