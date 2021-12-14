@@ -30,7 +30,7 @@ Verify Existence Of All Sections In Overview Page
     [Tags]  Verify_Existence_Of_All_Sections_In_Overview_Page
 
     Page Should Contain  BMC time
-    Page Should Contain  firmware information
+    Page Should Contain  Firmware information
     Page Should Contain  Server information
     Page Should Contain  Network information
     Page Should Contain  Power information
@@ -184,3 +184,4 @@ Test Setup Execution
 
     Click Element  ${xpath_overview_menu}
     Wait Until Page Contains Element  ${xpath_overview_page_header}
+    Wait Until Page Contains  Network information
