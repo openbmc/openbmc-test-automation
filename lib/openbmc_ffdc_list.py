@@ -59,6 +59,7 @@ FFDC_BMC_FILE = {
         'PEL_logs_complete_list.json': 'peltool -l -a -f >/tmp/PEL_logs_complete_list.json 2>&1',
         'PEL_logs_display.json': 'peltool -a >/tmp/PEL_logs_display.json 2>&1',
         'PEL_logs_complete_display.json': 'peltool -a -f -h>/tmp/PEL_logs_complete_display.json 2>&1',
+        'PEL_logs_badPEL.txt': 'hexdump -C /var/lib/phosphor-logging/extensions/pels/badPEL>/tmp/PEL_logs_badPEL.txt 2>&1',
         'BMC_pldm_flight_recorder.txt': 'rm -rf /tmp/pldm_flight_recorder; killall -s SIGUSR1 pldmd;'
         + ' sleep 5; cat /tmp/pldm_flight_recorder > /tmp/BMC_pldm_flight_recorder.txt 2>&1;',
         'OCC_state.txt': 'for i in {0..3};'
