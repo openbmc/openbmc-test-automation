@@ -70,9 +70,10 @@ Test Upload Lower Limit Partition File To BMC And Expect Failure
     99-file        ${HTTP_BAD_REQUEST}    0                   ${MINIMUM_FILE_SIZE_MESSAGE}
 
 
-Redfish Fail To Upload Partition File To BMC
-    [Documentation]  Fail to upload partition file to BMC using Redfish.
-    [Tags]  Redfish_Fail_To_Upload_Partition_File_To_BMC
+Test Upload Upper Limit Partition File To BMC And Expect Failure
+    [Documentation]  Fail to upload partition file to BMC with file size
+    ...  more than upper limit of allowed partition file size using Redfish.
+    [Tags]  Test_Upload_Upper_Limit_Partition_File_To_BMC_And_Expect_Failure
     [Template]  Redfish Fail To Upload Partition File
 
     # file_name     status_code            partition_status    response_message
