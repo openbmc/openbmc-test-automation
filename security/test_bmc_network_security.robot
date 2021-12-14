@@ -113,6 +113,41 @@ Flood Redfish Interface With Packets With Flags And Check Stability
     ${OPENBMC_HOST}  ${iterations}   ${REDFISH_INTERFACE}   ${ALL_FLAGS}
 
 
+Send Large Number Of Connections To Redfish Interface And Check Stability
+    [Documentation]  Establish large number of TCP connections to Redfish interface
+    ...  and check stability.
+    [Tags]  Send_Large_Number_Of_Connections_To_Redfish_Interface_And_Check_Stability  new
+
+    # Establish large number of tcp connections to Redfish interface.
+    ${connection_loss}=  Establish TCP Connections And Get Connection Failures
+    ...  ${OPENBMC_HOST}  ${iterations}  ${TCP_CONNECTION}  ${REDFISH_INTERFACE}
+
+    # Check if Redfish interface is functional.
+    Redfish.Login
+    Redfish.Logout
+
+    # Check if connections drop.
+    Should Be Equal As Numbers  ${connection_loss}  0.0
+    ...  msg=FAILURE: BMC is dropping some connections.
+
+
+Send Large Number Of Connections To IPMI Interface And Check Stability
+    [Documentation]  Establish large number of TCP connections to IPMI interface
+    ...  and check stability.
+    [Tags]  Send_Large_Number_Of_Connections_To_IPMI_Interface_And_Check_Stability  new
+
+    # Establish large number of tcp connections to IPMI interface.
+    ${connection_loss}=  Establish TCP Connections And Get Connection Failures
+    ...  ${OPENBMC_HOST}  ${iterations}  ${TCP_CONNECTION}  ${IPMI_PORT}
+
+    # Check if IPMI interface is functional.
+    Verify IPMI Works
+
+    # Check if connections drop.
+    Should Be Equal As Numbers  ${connection_loss}  0.0
+    ...  msg=FAILURE: BMC is dropping some connections
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -187,3 +222,24 @@ Verify Interface Stability
     ...  Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  port=${HOST_SOL_PORT}
     ...  ELSE
     ...  Redfish.Login
+
+
+Establish TCP Connections And Get Connection Failures
+    [Documentation]  Establish TCP connections and get connection failures.
+    [Arguments]  ${host}  ${num}=${count}  ${packet_type}=${TCP_CONNECTION}
+    ...          ${port}=80
+
+    # Description of argument(s):
+    # host         The host name or IP address of the target system.
+    # packet_type  The type of packets to be sent ("tcp, "udp", "icmp").
+    # port         Network port.
+    # num          Number of connections to be sent.
+
+    # This keyword expects host, port, type and number of connections to be sent
+    # and rate at which connectionss to be sent, should be given in command line.
+    # By default it sends 4 TCP connections at 1 connection/second.
+
+    ${cmd_buf}=  Set Variable  --delay ${delay} ${host} -c ${num} --${packet_type} -p ${port}
+
+    ${nping_result}=  Nping  ${cmd_buf}
+    [Return]   ${nping_result['percent_failed']}
