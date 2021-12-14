@@ -56,14 +56,15 @@ Verify Network Information In Overview Page
     Page Should Contain  ${macaddr}
 
 
-Verify Message In High Priority Events Section For No Events
-    [Documentation]  Verify message under high priority events section in case of no events.
-    [Tags]  Verify_Message_In_High_Priority_Events_Section_For_No_Events
+Verify Message In Event log Section For No Events
+    [Documentation]  Verify message under event logs section in case of no events.
+    [Tags]  Verify_Message_In_Event_Logs_Section_For_No_Events
 
     Redfish Purge Event Log
     Click Element  ${xpath_refresh_button}
-    Wait Until Page Contains  no high priority events to display  timeout=10
-
+    Click Element  ${view_all_event_logs}
+    Wait Until Page Contains Element  ${xpath_event_header}  timeout=30
+    Wait Until Page Contains  No items available  timeout=10
 
 Verify Server Information Section
     [Documentation]  Verify values under server information section in overview page.
