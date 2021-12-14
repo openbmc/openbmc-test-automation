@@ -70,7 +70,7 @@ Configure SNMP Settings On BMC With NON Default Port Via GUI And Verify
 
     Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
 
-    Wait Until Page Contains  ${SNMP_MGR1_IP}  timeout=30s
+    Wait Until Page Contains  ${SNMP_MGR1_IP}  timeout=45s
 
     Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
 
@@ -82,7 +82,7 @@ Configure SNMP Settings On BMC Via GUI And Verify
 
     Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
 
-    Wait Until Page Contains  ${SNMP_MGR1_IP}  timeout=30s
+    Wait Until Page Contains  ${SNMP_MGR1_IP}  timeout=45s
 
     Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
 
@@ -94,7 +94,7 @@ Configure SNMP Settings On BMC With Empty Port Via GUI And Verify
 
     Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${empty_port}
 
-    Wait Until Page Contains  ${SNMP_MGR1_IP}  timeout=30s
+    Wait Until Page Contains  ${SNMP_MGR1_IP}  timeout=45s
 
     # SNMP Manager IP is set with default port number when no port number is provided.
     Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
@@ -149,6 +149,7 @@ Delete SNMP Manager Via GUI
     Wait Until Keyword Succeeds  30 sec  5 sec  Click Element  ${xpath_delete_button}
     Wait Until Page Contains  Delete SNMP alert destination
     Click Element  ${xpath_delete_destination}
+    Wait Until Page Contains  Successfully deleted SNMP alert destination  timeout=45s
     Wait Until Keyword Succeeds  30 sec  10 sec  Refresh GUI And Verify Element Value
     ...  ${xpath_snmp_alerts_heading}  SNMP Alerts
 
