@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7ba3ed14_d18132d4",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-14T10:54:34Z",
+      "side": 1,
+      "message": "Earlier test was more to check high priority events in Overview page. This new test check page navigation  after clicking on view all events.\n\nWe have below test to check page navigation from error log section already.\n\nVerify View All Event Logs Button",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 60
+      },
+      "revId": "85b240caec46fe025b6070fbf4b46690d8dd6814",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
