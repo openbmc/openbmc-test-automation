@@ -147,9 +147,9 @@ Redfish Multiple Partition File Persistency On BMC Reboot
     250KB-file,500KB-file
 
 
-Redfish Read Partition File On BMC
+Redfish Read Partition File From BMC
     [Documentation]  Upload partition file to BMC using Redfish and verify the content.
-    [Tags]  Redfish_Read_Partition_File_On_BMC
+    [Tags]  Redfish_Read_Partition_File_From_BMC
     [Template]  Redfish Read Partition File
 
     # file_name                      reboot_flag
@@ -157,9 +157,9 @@ Redfish Read Partition File On BMC
     testfile01-file,testfile02-file  False
 
 
-Redfish Read Partition File On BMC Reboot
+Redfish Read Partition File Post BMC Reboot
     [Documentation]  Upload partition file to BMC using Redfish and verify the content after reboot.
-    [Tags]  Check_Redfish_Read_Partition_File_On_BMC_Reboot
+    [Tags]  Redfish_Read_Partition_File_Post_BMC_Reboot
     [Template]  Redfish Read Partition File
 
     # file_name                      reboot_flag
