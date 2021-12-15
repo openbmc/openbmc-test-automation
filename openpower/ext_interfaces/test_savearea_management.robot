@@ -194,9 +194,9 @@ Redfish Persistency Update Partition File On BMC
     testfile01-file             False
 
 
-Redfish Persistency Update Partition File On BMC Reboot
+Redfish Persistency Update Partition File Post BMC Reboot
     [Documentation]  Upload partition file to BMC using Redfish and verify the content after the reboot.
-    [Tags]  Redfish_Persistency_Update_Partition_File_On_BMC_Reboot
+    [Tags]  Redfish_Persistency_Update_Partition_File_Post_BMC_Reboot
     [Template]  Redfish Update Partition File With Same Content
 
     # file_name                 reboot_flag
