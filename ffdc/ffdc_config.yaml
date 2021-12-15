@@ -62,6 +62,8 @@ OPENBMC:
             - 'cat /var/log/obmc-console1.log >/tmp/BMC_obmc_console1.txt'
             - 'peltool -l >/tmp/PEL_logs_list.json'
             - 'peltool -a >/tmp/PEL_logs_display.json'
+            - 'hexdump -C /var/lib/phosphor-logging/extensions/pels/badPEL >/tmp/PEL_logs_badPEL.txt'
+            - 'guard -l >/tmp/GUARD_list.txt'
             - 'killall -s SIGUSR1 pldmd; sleep 5'
         FILES:
             - '/tmp/BMC_flash_side.txt'
@@ -80,6 +82,8 @@ OPENBMC:
             - '/tmp/BMC_obmc_console1.txt'
             - '/tmp/PEL_logs_list.json'
             - '/tmp/PEL_logs_display.json'
+            - '/tmp/PEL_logs_badPEL.txt'
+            - '/tmp/GUARD_list.txt'
             - '/tmp/pldm_flight_recorder'
         PROTOCOL:
             - 'SSH'
