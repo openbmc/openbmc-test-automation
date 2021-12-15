@@ -294,6 +294,7 @@ class bmc_redfish_utils(object):
                 #          '/redfish/v1/Managers/bmc#/Oem'
                 if ('JsonSchemas' in resource) or ('SessionService' in resource)\
                         or ('PostCodes' in resource) or ('Registries' in resource)\
+                        or ('Journal' in resource)\
                         or ('#' in resource):
                     continue
 
