@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "a7e45c4e_eab57a56",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000899
+      },
+      "writtenOn": "2021-12-15T01:59:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0f3d5ed6_9227c748",
+      "revId": "ac1bf885e3355ece0562f3ed18ebf02904fb06e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "455d1c7d_03ca05f1",
         "filename": "redfish/managers/test_bmc_protocol_settings.robot",
         "patchSetId": 2
@@ -30,6 +48,30 @@
       "writtenOn": "2021-12-13T08:27:32Z",
       "side": 1,
       "message": "${state}\u003d  Run Keyword And Return Status  Verify IPMI Protocol State\nSet Suite Variable  ${initial_ipmi_state}  ${state}",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 0
+      },
+      "revId": "ac1bf885e3355ece0562f3ed18ebf02904fb06e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87682de1_b0a64c1b",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000899
+      },
+      "writtenOn": "2021-12-15T01:59:31Z",
+      "side": 1,
+      "message": "The reason I made the setup complex is I\u0027d like no effect SSH protocol tests when sometimes ipmi protocol get some fails. If the suite setup fail, all the test cases failed.",
+      "parentUuid": "455d1c7d_03ca05f1",
       "range": {
         "startLine": 169,
         "startChar": 0,
