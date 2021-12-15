@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "253706fa_be74a600",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-15T09:52:05Z",
+      "side": 1,
+      "message": "As discussed give it a try like this \n\nWait Until Page Contains     Successfully deleted SNMP  timeout\u003d1min",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 50
+      },
+      "revId": "078b667e37c13551d422658dde07e35956e1dd59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
