@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f46bef39_aaa24aa7",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-12-15T10:11:50Z",
+      "side": 1,
+      "message": "Send Continuous TCP Connection Request To Redfish Interface And Check Stability",
+      "revId": "542d742da14a0b90ee58105106ec3e31923fe5f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ed6f822_c658297b",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-12-15T10:11:50Z",
+      "side": 1,
+      "message": "Make tcp connection attempts to Redfish interface continuously and verify bmcweb stability by login to Redfish.",
+      "revId": "542d742da14a0b90ee58105106ec3e31923fe5f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "77667893_5385690f",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-12-15T10:11:50Z",
+      "side": 1,
+      "message": "Similar suggestion to modify name and documentation as suggested in line 116,117",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 28
+      },
+      "revId": "542d742da14a0b90ee58105106ec3e31923fe5f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4ea1befc_85a4cb6a",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-12-15T10:11:50Z",
+      "side": 1,
+      "message": "please remove \u0027new\"",
+      "revId": "542d742da14a0b90ee58105106ec3e31923fe5f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b57f0331_74db0b82",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-12-15T10:11:50Z",
+      "side": 1,
+      "message": "suggestion to use something like ${probe_mode} or ${connection_mode}\u003d${TCP_CONNECTION}",
+      "revId": "542d742da14a0b90ee58105106ec3e31923fe5f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd680bb6_65547d45",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2021-12-15T10:11:50Z",
+      "side": 1,
+      "message": "Please modify the description if changes as per comment in  229",
+      "revId": "542d742da14a0b90ee58105106ec3e31923fe5f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
