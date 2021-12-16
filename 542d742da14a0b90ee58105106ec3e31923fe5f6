@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "913ea2d1_96dfb537",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-12-16T07:11:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f46bef39_aaa24aa7",
+      "revId": "542d742da14a0b90ee58105106ec3e31923fe5f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2ed6f822_c658297b",
         "filename": "security/test_bmc_network_security.robot",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2021-12-15T10:11:50Z",
       "side": 1,
       "message": "Make tcp connection attempts to Redfish interface continuously and verify bmcweb stability by login to Redfish.",
+      "revId": "542d742da14a0b90ee58105106ec3e31923fe5f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "05d18c1d_0bf9c6da",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-12-16T07:11:18Z",
+      "side": 1,
+      "message": "we are actually establishing connections, so it is more meaningful than attempt.",
+      "parentUuid": "2ed6f822_c658297b",
       "revId": "542d742da14a0b90ee58105106ec3e31923fe5f6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -59,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "a8c963e4_6e18d3a7",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-12-16T07:11:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77667893_5385690f",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 28
+      },
+      "revId": "542d742da14a0b90ee58105106ec3e31923fe5f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4ea1befc_85a4cb6a",
         "filename": "security/test_bmc_network_security.robot",
         "patchSetId": 1
@@ -70,6 +130,24 @@
       "writtenOn": "2021-12-15T10:11:50Z",
       "side": 1,
       "message": "please remove \u0027new\"",
+      "revId": "542d742da14a0b90ee58105106ec3e31923fe5f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "19991c68_67d50ab0",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-12-16T07:11:18Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "4ea1befc_85a4cb6a",
       "revId": "542d742da14a0b90ee58105106ec3e31923fe5f6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
@@ -93,6 +171,24 @@
     },
     {
       "key": {
+        "uuid": "6bf120f3_dde178d0",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-12-16T07:11:18Z",
+      "side": 1,
+      "message": "connection is also type of traffic or packet.",
+      "parentUuid": "b57f0331_74db0b82",
+      "revId": "542d742da14a0b90ee58105106ec3e31923fe5f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dd680bb6_65547d45",
         "filename": "security/test_bmc_network_security.robot",
         "patchSetId": 1
@@ -107,6 +203,24 @@
       "revId": "542d742da14a0b90ee58105106ec3e31923fe5f6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "34318e0f_72090e91",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2021-12-16T07:11:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd680bb6_65547d45",
+      "revId": "542d742da14a0b90ee58105106ec3e31923fe5f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
