@@ -82,7 +82,7 @@ def enumerate_request(hostname, username, password, url, return_json="json"):
             response = execute_redfish_cmd(parms + resource)
             # Enumeration is done for available resources ignoring the
             # ones for which response is not obtained.
-            if 'Response Error' in response:
+            if 'Error getting response' in response:
                 continue
 
             walk_nested_dict(response, url=resource)
