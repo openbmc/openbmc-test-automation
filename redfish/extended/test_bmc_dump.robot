@@ -20,7 +20,7 @@ Verify Core Dump Size
     [Documentation]  Verify BMC core dump size is under 200k.
     [Tags]  Verify_Core_Dump_Size
 
-    Delete All Dumps
+    Redfish Delete All BMC Dumps
     Trigger Core Dump
     Wait Until Keyword Succeeds  2 min  10 sec  Get Dump Entries
 
@@ -37,7 +37,7 @@ Verify Dump After Host Watchdog Error Injection
 
     Redfish Power On
 
-    Run Keyword And Ignore Error  Delete All Dumps
+    Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
 
     # Enable auto reboot
     Set Auto Reboot  ${1}
