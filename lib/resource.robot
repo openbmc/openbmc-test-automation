@@ -142,6 +142,10 @@ ${LDAP_TYPE}                ${EMPTY}
 ${LDAP_USER}                ${EMPTY}
 ${LDAP_USER_PASSWORD}       ${EMPTY}
 
+# General tool variables
+# FFDC_DEFAULT == 1; use Default FFDC methods
+${FFDC_DEFAULT}            ${1}
+
 *** Keywords ***
 Get Inventory Schema
     [Documentation]  Get inventory schema.
