@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a0919d0e_1c834514",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-17T06:50:51Z",
+      "side": 1,
+      "message": "Added GUI automation test cases for new network sub menu\n\nTest cases added:\n    - \u003cTest case 1 tag\u003e\n    - \u003cTest case 2 tag\u003e\n    ..\n    ..",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 59
+      },
+      "revId": "ee522f89135efcbf06c5d739563569d276487083",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f9cf49e0_7458a454",
+        "filename": "gui/gui_test/settings_menu/test_network_new_submenu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-17T06:50:51Z",
+      "side": 1,
+      "message": "Align with above",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 30
+      },
+      "revId": "ee522f89135efcbf06c5d739563569d276487083",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93f90060_1160b22c",
+        "filename": "gui/gui_test/settings_menu/test_network_new_submenu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-17T06:50:51Z",
+      "side": 1,
+      "message": "xpath_domain_name_toggle",
+      "range": {
+        "startLine": 19,
+        "startChar": 2,
+        "endLine": 19,
+        "endChar": 19
+      },
+      "revId": "ee522f89135efcbf06c5d739563569d276487083",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e083663_dbd9b8d4",
+        "filename": "gui/gui_test/settings_menu/test_network_new_submenu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-17T06:50:51Z",
+      "side": 1,
+      "message": "Keep every thing small in xpath\n\nxpath_dns_servers_toggle",
+      "range": {
+        "startLine": 20,
+        "startChar": 2,
+        "endLine": 20,
+        "endChar": 19
+      },
+      "revId": "ee522f89135efcbf06c5d739563569d276487083",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5392e1f1_6d04096a",
+        "filename": "gui/gui_test/settings_menu/test_network_new_submenu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-17T06:50:51Z",
+      "side": 1,
+      "message": "xpath_ntp_servers_toggle",
+      "range": {
+        "startLine": 21,
+        "startChar": 2,
+        "endLine": 21,
+        "endChar": 19
+      },
+      "revId": "ee522f89135efcbf06c5d739563569d276487083",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fff72ce_1b2e9637",
+        "filename": "gui/gui_test/settings_menu/test_network_new_submenu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-17T06:50:51Z",
+      "side": 1,
+      "message": "xpath_add_static_ipv4_address_button",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 31
+      },
+      "revId": "ee522f89135efcbf06c5d739563569d276487083",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a39882c4_1206a005",
+        "filename": "gui/gui_test/settings_menu/test_network_new_submenu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-17T06:50:51Z",
+      "side": 1,
+      "message": "xpath_add_dns_ip_address_button",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 23,
+        "endChar": 26
+      },
+      "revId": "ee522f89135efcbf06c5d739563569d276487083",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c5f173a2_f14da765",
+        "filename": "gui/gui_test/settings_menu/test_network_new_submenu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-17T06:50:51Z",
+      "side": 1,
+      "message": "This test is not required because we already cover it as part of `Verify Navigation To Network Page` test",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 53
+      },
+      "revId": "ee522f89135efcbf06c5d739563569d276487083",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fd47b80_e165a346",
+        "filename": "gui/gui_test/settings_menu/test_network_new_submenu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-17T06:50:51Z",
+      "side": 1,
+      "message": "after moving below buttons we left checking page text - hostname. So I would say you can take this test case out.",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 51
+      },
+      "revId": "ee522f89135efcbf06c5d739563569d276487083",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "65e0e9ea_5eb28e39",
+        "filename": "gui/gui_test/settings_menu/test_network_new_submenu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-17T06:50:51Z",
+      "side": 1,
+      "message": "All these are buttons so should be added as part of `Verify Existence Of All Buttons In Network Page` test.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 53
+      },
+      "revId": "ee522f89135efcbf06c5d739563569d276487083",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e99ba056_698ba486",
+        "filename": "gui/gui_test/settings_menu/test_network_new_submenu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-17T06:50:51Z",
+      "side": 1,
+      "message": "Add one more space",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 3
+      },
+      "revId": "ee522f89135efcbf06c5d739563569d276487083",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "94fb27ef_f942331f",
+        "filename": "gui/gui_test/settings_menu/test_network_new_submenu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-17T06:50:51Z",
+      "side": 1,
+      "message": "Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network",
+      "range": {
+        "startLine": 79,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 51
+      },
+      "revId": "ee522f89135efcbf06c5d739563569d276487083",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
