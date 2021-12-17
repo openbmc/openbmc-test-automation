@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b51bc40_5ceddb5d",
+        "filename": "gui/gui_test/settings_menu/test_network_new_submenu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-12-17T09:23:09Z",
+      "side": 1,
+      "message": "Login to GUI and navigate to the settings sub-menu network page.",
+      "range": {
+        "startLine": 29,
+        "startChar": 21,
+        "endLine": 29,
+        "endChar": 55
+      },
+      "revId": "a58dbbda86fec0401e5c6708463f235347f79f8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "539ac3c2_4978976b",
+        "filename": "gui/gui_test/settings_menu/test_network_new_submenu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-12-17T09:23:09Z",
+      "side": 1,
+      "message": "Login to GUI and navigate to the settings sub-menu network page and confirm the page contains sections that should be accessible.",
+      "range": {
+        "startLine": 36,
+        "startChar": 21,
+        "endLine": 36,
+        "endChar": 79
+      },
+      "revId": "a58dbbda86fec0401e5c6708463f235347f79f8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "246ebdf0_6066d9b9",
+        "filename": "gui/gui_test/settings_menu/test_network_new_submenu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-12-17T09:23:09Z",
+      "side": 1,
+      "message": "Login to GUI and navigate to the settings sub-menu network page and confirm the page contains basic features button that should be accessible.",
+      "range": {
+        "startLine": 46,
+        "startChar": 21,
+        "endLine": 46,
+        "endChar": 68
+      },
+      "revId": "a58dbbda86fec0401e5c6708463f235347f79f8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
