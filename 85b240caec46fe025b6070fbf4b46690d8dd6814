@@ -22,6 +22,30 @@
       "revId": "85b240caec46fe025b6070fbf4b46690d8dd6814",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ced8f5c_dfccfeed",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-20T09:48:55Z",
+      "side": 1,
+      "message": "Let keep this test case on hold. We need data-test-id for this test case to target event log count.",
+      "parentUuid": "7ba3ed14_d18132d4",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 60
+      },
+      "revId": "85b240caec46fe025b6070fbf4b46690d8dd6814",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
