@@ -42,5 +42,8 @@ My FFDC Logs
 ** Keywords ***
 
 Gather FFDC
-    [Documentation]  Collect FFDC.
-    Run Keyword And Ignore Error   FFDC
+    [Documentation]  Call point to call FFDC robot or FFDC script..
+    Run Keyword If  ${FFDC_DEFAULT} == ${1}  FFDC    # Keyword from openbmc_ffdc.py
+    ...    ELSE  ffdc_robot_script_cli               # Keyword from ffdc_cli_robot_script.py
+
+
