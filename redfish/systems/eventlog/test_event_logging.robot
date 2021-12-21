@@ -88,6 +88,7 @@ Test Event Entry Numbering Reset On Restart
     [Documentation]  Restart logging service and verify event logs entry starts
     ...  from entry "Id" 1.
     [Tags]  Test_Event_Entry_Numbering_Reset_On_Restart
+    [Setup]  Redfish Power Off  stack_mode=skip
 
     #{
     #  "@odata.context": "/redfish/v1/$metadata#LogEntryCollection.LogEntryCollection",
@@ -111,8 +112,8 @@ Test Event Entry Numbering Reset On Restart
     #  "Name": "System Event Log Entries"
     #}
 
-    Create Test Error Log
-    Create Test Error Log
+    Create Test PEL Log
+    Create Test PEL Log
     Event Log Should Exist
 
     Redfish Purge Event Log
@@ -122,9 +123,9 @@ Test Event Entry Numbering Reset On Restart
     ...  systemctl restart xyz.openbmc_project.Logging.service
     Sleep  10s  reason=Wait for logging service to restart properly.
 
-    Create Test Error Log
+    Create Test PEL Log
     ${elogs}=  Get Event Logs
-    Should Be Equal  ${elogs[0]["Id"]}  1  msg=Event log entry is not 1.
+    Should Be Equal  ${elogs[0]["Id"]}  1  msg=Event log entry is not 1
 
 
 Test Event Log Persistency On Reboot
