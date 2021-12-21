@@ -3,8 +3,8 @@
 Documentation   Test OpenBMC GUI "SNMP Alerts" sub-menu of "Settings".
 
 Resource        ../../lib/gui_resource.robot
-Resource        ../../lib/snmp/resource.robot
-Resource        ../../lib/snmp/redfish_snmp_utils.robot
+Resource        ../../../lib/snmp/resource.robot
+Resource        ../../../lib/snmp/redfish_snmp_utils.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
