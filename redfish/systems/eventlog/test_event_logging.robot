@@ -326,18 +326,20 @@ Create Multiple Test Event Logs And Delete All
     Event Log Should Not Exist
 
 
-# TODO: openbmc/openbmc-test-automation#1789
 Create Two Test Event Logs And Delete One
     [Documentation]  Create two event logs and delete the first entry.
     [Tags]  Create_Two_Test_Event_Logs_And_Delete_One
+    [Setup]  Redfish Power Off  stack_mode=skip
 
     Redfish Purge Event Log
-    Create Test Error Log
-    ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
-    Create Test Error Log
-    Delete Error log Entry  ${elog_entry[0]}
-    ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
+    Create Test PEL Log
+    Create Test PEL Log
+    ${error_entries_before}=  Get Redfish Error Entries
+    Redfish.Delete  /redfish/v1/Systems/system/LogServices/EventLog/Entries/${error_entries_before[0]}
+
+    ${error_entries_after}=  Get Redfish Error Entries
+    Should Not Contain  ${error_entries_after}  ${error_entries_before[0]}
+    Should Contain  ${error_entries_after}  ${error_entries_before[1]}
 
 
 Verify Watchdog Timedout Event
