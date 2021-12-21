@@ -173,7 +173,7 @@ def tee_func(command_string, status_file_path):
     cmd_buf = "set -o pipefail ; " + command_string + " 2>&1 | tee -a " \
         + status_file_path
     qprint_issuing(cmd_buf)
-    sub_proc = subprocess.Popen(cmd_buf, shell=True)
+    sub_proc = subprocess.Popen(cmd_buf, shell=True, executable='/bin/bash')
     sub_proc.communicate()
     shell_rc = sub_proc.returncode
 
