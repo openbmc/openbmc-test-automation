@@ -22,6 +22,30 @@
       "revId": "f04ba5360e2bff4bf0bfc1dacc719aa6ad85fc23",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d307da66_66fc9962",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-12-21T06:37:59Z",
+      "side": 1,
+      "message": "Actually, this is a check for Redfish error log\u0027s message field. Not required to be checked this is PEL test case. I did nor remove it as this check was there. If you want I can take this out.",
+      "parentUuid": "5dec52d1_9aeada8a",
+      "range": {
+        "startLine": 395,
+        "startChar": 26,
+        "endLine": 395,
+        "endChar": 36
+      },
+      "revId": "f04ba5360e2bff4bf0bfc1dacc719aa6ad85fc23",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
     }
   ]
 }
