@@ -392,7 +392,8 @@ Verify PEL Log Entry For Event Log
 
     # Verify that both Redfish event and PEL has log entry for internal error with same time stamp.
     Should Contain Any  ${pel_records['${id}']['Message']}  internal failure  ignore_case=True
-    Should Contain Any  ${elog_entry[0]['Message']}  InternalFailure  ignore_case=True
+    Should Contain Any  ${elog_entry[0]['Message']}
+    ...  ${pel_records['${id}']['SRC']} event in subsystem: BMC Firmware  ignore_case=True
 
     Should Be Equal  ${redfish_log_time}  ${pel_log_time}
 
