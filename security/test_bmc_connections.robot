@@ -7,6 +7,7 @@ Resource  ../lib/openbmc_ffdc.robot
 Resource  ../lib/resource.robot
 Resource  ../lib/utils.robot
 Resource  ../lib/connection_client.robot
+Resource  ../gui/lib/gui_resource.robot
 Library   ../lib/bmc_network_utils.py
 
 Library   SSHLibrary
@@ -171,6 +172,36 @@ Test Stability On Large Number Of Wrong Login Attempts To GUI
     ${fail_count}=  Count Values In List  ${status_list}  False
     Run Keyword If  ${fail_count} > ${0}  FAIL  Could not open BMC GUI ${fail_count} times
 
+Test BMC GUI Stability On Continuous Refresh Of GUI Home Page
+    [Documentation]  Login to BMC GUI and keep refreshing home page and verify stability
+        ...  by login at times in another browser.
+    [Tags]  Test_BMC_GUI_Stability_On_Continuous_Refresh_Of_GUI_Home_Page
+    [Teardown]  Close All Browsers
+
+    @{failed_list}=  Create List
+
+    # Open headless browser.
+    Start Virtual Display
+    ${browser_ID}=  Open Browser  ${bmc_url}  alias=browser1
+    Set Window Size  1920  1080
+    Login GUI
+
+    FOR  ${iter}  IN RANGE  ${iterations}
+        Log To Console  ${iter}th Refresh of home page
+
+        Refresh GUI
+        Continue For Loop If   ${iter}%100 != 0
+
+        # Every 100th iteration, check BMC GUI is responsive.
+        ${status}=  Run Keyword And Return Status
+        ...  Run Keywords  Launch Browser And Login GUI  AND  Logout GUI
+        Run Keyword If  '${status}' == 'False'  Append To List  ${failed_list}  ${iter}
+        ...  ELSE IF  '${status}' == 'True'
+        ...  Run Keywords  Close Browser  AND  Switch Browser  browser1
+    END
+    Log   ${failed_list}
+    ${fail_count}=  Get Length  ${failed_list}
+    Run Keyword If  ${fail_count} > ${0}  FAIL  Could not open BMC GUI ${fail_count} times
 
 *** Keywords ***
 
