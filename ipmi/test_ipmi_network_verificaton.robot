@@ -51,6 +51,7 @@ Test Valid IPMI Channels Supported
     [Tags]  Test_Valid_IPMI_Channels_Supported
 
     ${channel_count}=  Get Physical Network Interface Count
+    ${channel_count}=  Evaluate  ${channel_count} + 1
 
     # Note: IPMI network channel logically starts from 1.
     FOR  ${channel_number}  IN RANGE  1  ${channel_count}
