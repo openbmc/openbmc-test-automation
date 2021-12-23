@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4ddc6cfc_d47f3814",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2021-12-23T12:22:36Z",
+      "side": 1,
+      "message": "We shouldnt be doing this ... either a single channel support it should detect and work accordingly.. \n\nExample:\n\ncheck how many channel it supports. if 1, do for 1 channel,  if 2, do for 2 channel.",
+      "range": {
+        "startLine": 385,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 140
+      },
+      "revId": "f86d4cc80ead812685b0565af430a8627afebc38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": true
+    }
+  ]
+}
