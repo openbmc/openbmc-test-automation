@@ -378,12 +378,17 @@ Verify Administrator And No Access Privilege For Different Channels
     Set Channel Access  ${random_userid}  ipmi=on privilege=${no_access_priv}  2
 
     Enable IPMI User And Verify  ${random_userid}
-
+  
     # Verify that user is able to run administrator level IPMI command with channel 1.
     Verify IPMI Command  ${random_username}  ${valid_password}  Administrator  1
 
     # Verify that user is unable to run IPMI command with channel 2.
-    Run IPMI Standard Command  sel info 2  expected_rc=${1}  U=${random_username}  P=${valid_password}
+    ${active_status}=  Run Keyword And Return Status
+    ...  Ping Host  ${OPENBMC_HOST_1}
+    
+    Run Keyword If  '${active_status}' == '${True}'
+    ...  Run IPMI Standard Command  sel info 2  expected_rc=${1}  H=${OPENBMC_HOST_1}  U=${random_username}  P=${valid_password}  L=Administrator
+    ...  ELSE IF  '${active_status}'== '${False}'  Pass Execution  Supported with one channel
 
 
 Verify Operator And User Privilege For Different Channels
@@ -406,10 +411,15 @@ Verify Operator And User Privilege For Different Channels
     Enable IPMI User And Verify  ${random_userid}
 
     # Verify that user is able to run operator level IPMI command with channel 1.
-    Verify IPMI Command  ${random_username}  ${valid_password}  Operator  1
+    Run IPMI Standard Command  power on 1  expected_rc=${0}  U=${random_username}  P=${valid_password}  L=Operator
 
-    # Verify that user is able to run user level IPMI command with channel 2.
-    Verify IPMI Command  ${random_username}  ${valid_password}  User  2
+    # Verify that user is unable to run IPMI command with channel 2.
+    ${active_status}=  Run Keyword And Return Status
+     ...  Ping Host  ${OPENBMC_HOST_1}
+
+    Run Keyword If  '${active_status}' == '${True}'
+    ...  Run IPMI Standard Command  power off 2  expected_rc=${1}  H=${OPENBMC_HOST_1}  U=${random_username}  P=${valid_password}  L=Operator
+    ...  ELSE IF  '${active_status}'== '${False}'  Pass Execution  Supported with one channel
 
 
 Verify Setting IPMI User With Max Password Length
