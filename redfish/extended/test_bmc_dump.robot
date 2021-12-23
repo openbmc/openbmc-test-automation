@@ -42,7 +42,7 @@ Verify Dump After Host Watchdog Error Injection
     # Enable auto reboot
     Set Auto Reboot  ${1}
 
-    Trigger Host Watchdog Error  2000  30
+    Set Watchdog Interval Using Busctl
 
     Wait Until Keyword Succeeds  300 sec  20 sec  Is Host Rebooted
 
