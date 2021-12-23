@@ -37,8 +37,6 @@ Verify Dump After Host Watchdog Error Injection
 
     Redfish Power On
 
-    Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
-
     # Enable auto reboot
     Set Auto Reboot  ${1}
 
