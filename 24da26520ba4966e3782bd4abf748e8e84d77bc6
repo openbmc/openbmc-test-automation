@@ -22,6 +22,30 @@
       "revId": "24da26520ba4966e3782bd4abf748e8e84d77bc6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b6896c5a_81568a81",
+        "filename": "redfish/extended/test_bmc_dump.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000294
+      },
+      "writtenOn": "2021-12-24T01:23:38Z",
+      "side": 0,
+      "message": "Thanks your reviewing and suggestion.\nI have modified to add \"Trigger Core Dump\" after \"Redfish Delete All BMC Dumps\".\nPlease help me to review this change whether is reasonable.",
+      "parentUuid": "27990544_03d2613b",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 1
+      },
+      "revId": "24da26520ba4966e3782bd4abf748e8e84d77bc6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
