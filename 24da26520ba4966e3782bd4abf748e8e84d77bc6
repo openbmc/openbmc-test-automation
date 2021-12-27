@@ -70,6 +70,30 @@
       "revId": "24da26520ba4966e3782bd4abf748e8e84d77bc6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6f2ed747_fc5546e9",
+        "filename": "redfish/extended/test_bmc_dump.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000294
+      },
+      "writtenOn": "2021-12-27T09:12:22Z",
+      "side": 0,
+      "message": "Hi Manash,\nYes, you are right. I already added back \"Run Keyword And Ignore Error  Redfish Delete All BMC Dumps\" and add additional \"Trigger Core Dump\". Thanks.",
+      "parentUuid": "512d5397_1796a092",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 1
+      },
+      "revId": "24da26520ba4966e3782bd4abf748e8e84d77bc6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
+      "unresolved": false
     }
   ]
 }
