@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d3eacf7_711023aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2021-12-29T07:12:30Z",
+      "side": 1,
+      "message": "\u003e Patch Set 2:\n\u003e \n\u003e \u003e Patch Set 2:\n\u003e \u003e \n\u003e \u003e \u003e Patch Set 2:\n\u003e \u003e \u003e \n\u003e \u003e \u003e Hi Manash,\n\u003e \u003e \u003e Thanks your suggestion, I have provided the latest patch.\n\u003e \u003e \u003e Please help me to review it again. Thank you.\n\u003e \u003e \u003e \n\u003e \u003e \u003e Sincerely,\n\u003e \u003e \u003e Tim\n\u003e \u003e \n\u003e \u003e Lee, please provide me snippet of the output of this testcase execution.\n\u003e \n\u003e Hi Sarma,\n\u003e Here is the snippet about this test item. For you refer it. Thank you.\n\u003e \n\u003e TEST Verify Dump After Host Watchdog Error Injection\n\u003e Full Name:\tTest Bmc Dump.Verify Dump After Host Watchdog Error Injection\n\u003e Documentation:\t\n\u003e Inject host watchdog error and verify whether dump is generated.\n\u003e \n\u003e Tags:\tVerify_Dump_After_Host_Watchdog_Error_Injection\n\u003e Start / End / Elapsed:\t20211228 16:08:03.038 / 20211228 16:12:50.834 / 00:04:47.796\n\u003e Status:\tPASS\n\u003e SETUP connection_client . Open Connection And Log In\n\u003e KEYWORD boot_utils . Redfish Power On\n\u003e KEYWORD BuiltIn . Run Keyword And Ignore Error Redfish Delete All BMC Dumps\n\u003e KEYWORD dump_utils . Trigger Core Dump\n\u003e KEYWORD utils . Set Auto Reboot ${1}\n\u003e KEYWORD utils . Trigger Host Watchdog Error 2000, 30\n\u003e KEYWORD BuiltIn . Wait Until Keyword Succeeds 300 sec, 20 sec, Is Chassis PowerCycled\n\u003e KEYWORD @{dump_entry_list} \u003d rest_client . Read Properties ${DUMP_ENTRY_URI}\n\u003e KEYWORD ${length} \u003d BuiltIn . Get Length ${dump_entry_list}\n\u003e KEYWORD BuiltIn . Should Be Equal As Integers ${length}, ${1}\n\u003e KEYWORD ${value} \u003d Collections . Get From List ${dump_entry_list}, 0\n\u003e KEYWORD @{split_value} \u003d String . Split String ${value}, /\n\u003e KEYWORD ${dump_id} \u003d Collections . Get From List ${split_value}, -1\n\u003e KEYWORD ${dump_size} \u003d rest_client . Read Attribute ${DUMP_ENTRY_URI}${dump_id}, Size\n\u003e KEYWORD BuiltIn . Should Be True 0 \u003c ${dump_size} \u003c 204800\n\u003e TEARDOWN Test Teardown Execution\n\u003e \n\u003e ------------------------------------------------------------------------------\n\u003e Test Bmc Dump :: Test dump functionality of OpenBMC.                  | PASS |\n\u003e 1 test, 1 passed, 0 failed\n\u003e \u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\u003e Output:  /home/cs20/single-Test-Automation/reports/156/redfish/extended/test_bmc_dump.robot/output.xml\n\u003e Log:     /home/cs20/single-Test-Automation/reports/156/redfish/extended/test_bmc_dump.robot/log.html\n\u003e Report:  /home/cs20/single-Test-Automation/reports/156/redfish/extended/test_bmc_dump.robot/report.html\n\n",
+      "revId": "6dbdad4f207db5aaeb11d88701bed39c966dbcf2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
