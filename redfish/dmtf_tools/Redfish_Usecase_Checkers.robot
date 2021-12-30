@@ -57,20 +57,11 @@ Test BMC Redfish Account Management
     Should Be Empty  ${failed_tc_list}  Failed test cases are ${failed_tc_list}
 
 
-Test BMC Redfish Boot Host And ForceOff
-    [Documentation]  Boot host and ForceOff.
-    [Tags]  Test_BMC_Redfish_Boot_Host_And_ForceOff
+Test BMC Redfish Power Control Usecase
+    [Documentation]  Power Control Usecase Test.
+    [Tags]  Test_BMC_Redfish_Power_Control_Usecases
 
-    DMTF Power On
-    DMTF Hard Power Off
-
-
-Test BMC Redfish Boot Host And GracefulShutdown
-    [Documentation]  Boot host and issue GracefulShutdown.
-    [Tags]  Test_BMC_Redfish_Boot_Host_And_GracefulShutdown
-
-    DMTF Power On
-    DMTF Power Off
+    DMTF Power
 
 
 *** Keywords ***
@@ -81,11 +72,6 @@ Test Setup Execution
     Printn
     Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}
 
-    ${status}  ${state}=  Run Keyword And Ignore Error
-    ...  Check State  standby_match_state
-    Return From Keyword If  '${status}' == 'PASS'
-    DMTF Power Off
-
 
 Test Teardown Execution
     [Documentation]  Do the post-test teardown.
@@ -94,43 +80,11 @@ Test Teardown Execution
     FFDC On Test Case Fail
 
 
-DMTF Power On
+DMTF Power
     [Documentation]  Power the BMC machine on via DMTF tools.
 
-    Print Timen  Doing "DMTF Power On".
+    Print Timen  Doing "DMTF Power".
 
-    ${state}=  Get State
-    ${match_state}=  Anchor State  ${state}
-    Run DMTF Tool  ${rsv_dir_path}  ${command_power_control} On
-    ${state}=  Wait State  ${match_state}  wait_time=${state_change_timeout}  interval=10 seconds  invert=1
-    ${state}=  Wait State  os_running_match_state  wait_time=${power_on_timeout}  interval=10 seconds
-
-    [Return]  ${state}
+    Run DMTF Tool  ${rsv_dir_path}  ${command_power_control}
 
 
-DMTF Power Off
-    [Documentation]  Power the BMC machine off via DMTF tools.
-
-    Print Timen  Doing "DMTF Hard Power Off".
-
-    ${state}=  Get State
-    ${match_state}=  Anchor State  ${state}
-    Run DMTF Tool  ${rsv_dir_path}  ${command_power_control} GracefulShutdown
-    ${state}=  Wait State  ${match_state}  wait_time=${state_change_timeout}  interval=10 seconds  invert=1
-    ${state}=  Wait State  standby_match_state  wait_time=${power_off_timeout}  interval=10 seconds
-
-    [Return]  ${state}
-
-
-DMTF Hard Power Off
-    [Documentation]  Power the BMC machine off via DMTF tools.
-
-    Print Timen  Doing "DMTF Hard Power Off".
-
-    ${state}=  Get State
-    ${match_state}=  Anchor State  ${state}
-    Run DMTF Tool  ${rsv_dir_path}  ${command_power_control} ForceOff
-    ${state}=  Wait State  ${match_state}  wait_time=${state_change_timeout}  interval=10 seconds  invert=1
-    ${state}=  Wait State  standby_match_state  wait_time=${power_off_timeout}  interval=10 seconds
-
-    [Return]  ${state}
