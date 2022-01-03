@@ -39,6 +39,30 @@
       },
       "revId": "6dbdad4f207db5aaeb11d88701bed39c966dbcf2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c04477b_d3c197cf",
+        "filename": "redfish/extended/test_bmc_dump.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000294
+      },
+      "writtenOn": "2022-01-03T08:19:14Z",
+      "side": 1,
+      "message": "\"Trigger Host Watchdog Error\" keyword just trigger host watchdog reset.\nThis keyword will not generate dump log.\n\nOnly \"Verify Core Dump Size\" this test case will use \"Trigger Core Dump\" to create dump log. And this \"Verify Dump After Host Watchdog Error Injection\" test case seems will according previous test case to check dump log.\n\nThat\u0027s why I remove this line \"Run Keyword And Ignore Error  Redfish Delete All BMC Dumps\" in previous patch.\n\nTrigger Host Watchdog Error\n    [Documentation]  Inject host watchdog timeout error via REST.\n    [Arguments]  ${milliseconds}\u003d1000  ${sleep_time}\u003d5s\n\n    # Description of argument(s):\n    # milliseconds  The time watchdog timer value in milliseconds (e.g. 1000 \u003d\n    #               1 second).\n    # sleep_time    Time delay for host watchdog error to get injected.\n    #               Default is 5 seconds.\n\n    ${data}\u003d  Create Dictionary\n    ...  data\u003dxyz.openbmc_project.State.Watchdog.Action.PowerCycle\n    ${status}  ${result}\u003d  Run Keyword And Ignore Error\n    ...  Read Attribute  ${HOST_WATCHDOG_URI}  ExpireAction\n    Run Keyword If  \u0027${status}\u0027 \u003d\u003d \u0027PASS\u0027\n    ...  Write Attribute  ${HOST_WATCHDOG_URI}  ExpireAction  data\u003d${data}",
+      "parentUuid": "f6b4c2b8_6564cc41",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 18
+      },
+      "revId": "6dbdad4f207db5aaeb11d88701bed39c966dbcf2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
