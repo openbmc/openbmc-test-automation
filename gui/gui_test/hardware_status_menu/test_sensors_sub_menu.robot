@@ -123,3 +123,5 @@ Suite Setup Execution
     Click Element  ${xpath_hardware_status_menu}
     Click Element  ${xpath_sensor_sub_menu}
     Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  sensors
+    # Added delay for sensor page to load completely.
+    Sleep  100s
