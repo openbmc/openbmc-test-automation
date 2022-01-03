@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e567a74_5e0051d2",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-01-03T12:09:29Z",
+      "side": 1,
+      "message": "Hacked sleep are always time consuming.. Having said that, since this is a sensor page, probably this should be ok i guess,,",
+      "range": {
+        "startLine": 126,
+        "startChar": 3,
+        "endLine": 127,
+        "endChar": 15
+      },
+      "revId": "993f4a00c7cd7ec5abf82c71837f3678f57e0a40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
