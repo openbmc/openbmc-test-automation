@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c288240_9d170981",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000294
+      },
+      "writtenOn": "2022-01-04T09:01:19Z",
+      "side": 1,
+      "message": "Hi Rahul, Manash,\n\nAccording our investigation and test result. These two test items\n\"Verify Core Dump Size\" and \"Verify Dump After Host Watchdog Error Injection\"\nseems have dependence.\n\nI think that remove \"Run Keyword And Ignore Error  Redfish Delete All BMC Dumps\" this line\nmight be better change to fix this test item failed symptom.\n\nI found that another issue if I add \"Trigger Core Dump\" in \"Verify Dump After Host Watchdog Error Injection\"\nthis test item. That will cause \"2 !\u003d 1\" fail symptom.\n\nDue to test_bmc_dump.robot this test robot will execute these two test items sequentially.\n\"Trigger Core Dump\" be exectued in \"Verify Core Dump Size\", the first dump entry log will be created.\n\nHowever, if \"Trigger Core Dump\" be exectued again in \"Verify Dump After Host Watchdog Error Injection\"\nthat will cause the second dump entry log be created.\n\nBut, \"Verify Dump After Host Watchdog Error Injection\" test item will check there is only one dump entry.\nThus, we will got length \"2 !\u003d 1\" fail symptom when we run test_bmc_dump.robot.\n\n    # Verifying that there is only one dump\n    ${length}\u003d  Get length  ${dump_entry_list}\n    Should Be Equal As Integers  ${length}  ${1}\n\nIf there is any misunderstanding from my point of view.\nPlease share your suggestions to me. Thank you.\n\nSincerely,\nTim",
+      "revId": "6dbdad4f207db5aaeb11d88701bed39c966dbcf2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6b4c2b8_6564cc41",
