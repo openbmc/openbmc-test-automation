@@ -87,6 +87,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c033856b_8751e002",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-01-05T10:18:54Z",
+      "side": 1,
+      "message": "Tim\nI tried to run \"Verify Dump After Host Watchdog Error Injection\" test case on our system without any of your changes and I don\u0027t see any problem. Test is passing.\n\nVerify Dump After Host Watchdog Error Injection :: Inject host wat... | PASS |\n------------------------------------------------------------------------------\nTest Bmc Dump :: Test dump functionality of OpenBMC.                  | PASS |\n1 critical test, 1 passed, 0 failed\n1 test total, 1 passed, 0 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\nSo please check why dump is not getting created on your system after injecting \nHost Watchdog Error. Better to run the steps manually and check if dump is getting created. If not, then better to check with Dev.\n\nAnother thing both Verify_Dump_After_Host_Watchdog_Error_Injection and Verify_Core_Dump_Size test cases are unrelated. So we should not mix them up. And each test case needs to independent of other test execution.\n\nThanks\n\n\n",
+      "revId": "6dbdad4f207db5aaeb11d88701bed39c966dbcf2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6b4c2b8_6564cc41",
