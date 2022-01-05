@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1743fb5c_6c47bea9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2022-01-05T13:05:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b2956f9_395b8440",
+      "revId": "3c38cc44a90544b416346f5b97569cac3b95951d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e72b5d5b_1d7aeb1d",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-01-04T14:36:28Z",
       "side": 1,
       "message": "our commit development history is in the gerrit review\n\ninstead this should be how the use case tests cover similar function and any changes in coverage.",
+      "revId": "3c38cc44a90544b416346f5b97569cac3b95951d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6035baba_e6fb70ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2022-01-05T13:05:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e72b5d5b_1d7aeb1d",
       "revId": "3c38cc44a90544b416346f5b97569cac3b95951d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
