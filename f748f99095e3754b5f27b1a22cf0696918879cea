@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "124e3b31_c147c7ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-01-05T04:46:06Z",
+      "side": 1,
+      "message": "cant we have a different suite for gui here ? just to have a different aspect of context CLI over web UI  \n\nlike test_bmc_gui_connections.robot",
+      "revId": "f748f99095e3754b5f27b1a22cf0696918879cea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
