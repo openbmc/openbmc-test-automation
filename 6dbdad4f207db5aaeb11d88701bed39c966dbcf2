@@ -52,6 +52,41 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65ff96f1_4d4e6d28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000294
+      },
+      "writtenOn": "2022-01-05T02:46:27Z",
+      "side": 1,
+      "message": "Thanks your help to review this test case.",
+      "parentUuid": "e6df52f8_2152e22b",
+      "revId": "6dbdad4f207db5aaeb11d88701bed39c966dbcf2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd3a3254_19678eb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000294
+      },
+      "writtenOn": "2022-01-05T02:46:27Z",
+      "side": 1,
+      "message": "Hi Rahul,\nThanks your help to review this test case.\nAnother thing need your help to confirm it.\n\nIn \"Test Teardown Execution\" that will execute \"Delete All BMC Dump\".\nHowever, when first test item finish the dump entry log will be deleted.\nThus, the second test item will got failed due to there is no more dump entry log.\n\nThus, the \"Delete All BMC Dump\" should be moved from \"Test Teardown Execution\"\nto \"Suite Teardown Execution\". \n\nSuite Teardown      Suite Teardown Execution\nSuite Teardown Execution\n    [Documentation]  Do the post-suite teardown.\n\n    Delete All BMC Dump",
+      "revId": "6dbdad4f207db5aaeb11d88701bed39c966dbcf2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6b4c2b8_6564cc41",
