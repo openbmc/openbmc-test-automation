@@ -6,6 +6,7 @@ Check for stop conditions.  Return code of 2 if stop conditions are found.
 
 import sys
 import subprocess
+import os
 
 from gen_print import *
 from gen_valid import *
@@ -90,26 +91,33 @@ def rest_fail():
     if not STOP_REST_FAIL:
         return
 
-    print_timen("Checking to see whether REST commands are working.")
+    REDFISH_SUPPORT_TRANS_STATE = int(os.environ.get('REDFISH_SUPPORT_TRANS_STATE', 0)) or \
+        int(os.environ.get('AUTOBOOT_REDFISH_SUPPORT_TRANS_STATE', 0))
+
+    if REDFISH_SUPPORT_TRANS_STATE:
+        interface = "redfish"
+    else:
+        interface = "rest"
+
+    print_timen("Checking to see whether %s commands are working." % interface)
     init_robot_out_parms(get_plug_in_package_name() + "." + pgm_name + ".")
-    lib_file_path = init_robot_file_path("lib/state.py") + ":" \
+    lib_file_path = init_robot_file_path("lib/utils.robot") + ":" \
         + init_robot_file_path("lib/gen_robot_print.py")
     set_mod_global(lib_file_path)
     timeout = '0 seconds'
     interval = '1 second'
-    keyword_string = "${match_state}=  Create Dictionary  rest=1 ;" +\
+    keyword_string = "${match_state}=  Create Dictionary  %s=1 ;" % interface +\
         " ${state}=  Wait State  ${match_state}  " + timeout + "  " +\
         interval + "  quiet=${1} ; Rpvar  state"
     set_mod_global(keyword_string)
-
     cmd_buf = create_robot_cmd_string("extended/run_keyword.robot", OPENBMC_HOST, SSH_PORT, HTTPS_PORT,
                                       REST_USERNAME, REST_PASSWORD, OPENBMC_USERNAME, OPENBMC_PASSWORD,
-                                      keyword_string, lib_file_path, quiet,
+                                      REDFISH_SUPPORT_TRANS_STATE, keyword_string, lib_file_path, quiet,
                                       test_mode, debug, outputdir, output, log, report, loglevel)
     if not robot_cmd_fnc(cmd_buf):
-        print_timen("The caller wishes to stop test execution if REST commands are failing.")
+        print_timen("The caller wishes to stop test execution if %s commands are failing." % interface)
         stop_check()
-    print_timen("REST commands are working so no reason as of yet to stop the test.")
+    print_timen("%s commands are working so no reason as of yet to stop the test." % interface)
 
 
 def esel_stop_check():
