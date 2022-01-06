@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55d3d753_ccc4c901",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-01-06T05:36:47Z",
+      "side": 1,
+      "message": "These xpath are already there in gui/gui_test/control_menu/test_reboot_bmc_sub_menu.robot. Better to move these into gui/data/gui_variables.py do that they can be called.\n\n${xpath_reboot_bmc_heading}      //h1[text()\u003d\"Reboot BMC\"]\n${xpath_reboot_bmc_button}       //button[contains(text(),\u0027Reboot BMC\u0027)]\n${xpath_reboot_cancel_button}    //button[contains(text(),\u0027Cancel\u0027)]",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 61
+      },
+      "revId": "1ae227b36ee81245dfca9d7acfc097f91694e4a7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87df4444_57c0a30d",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-01-06T05:36:47Z",
+      "side": 1,
+      "message": "This is a use full keyword. Better to move this up in gui/lib/gui_resource.robot so that other suite can also use it.",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 18
+      },
+      "revId": "1ae227b36ee81245dfca9d7acfc097f91694e4a7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f0b369e_ff5e82c9",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-01-06T05:36:47Z",
+      "side": 1,
+      "message": "Move this up in test case.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 36
+      },
+      "revId": "1ae227b36ee81245dfca9d7acfc097f91694e4a7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbcd42e8_d2e0746b",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-01-06T05:36:47Z",
+      "side": 1,
+      "message": "xpath_reboot_bmc_button",
+      "range": {
+        "startLine": 133,
+        "startChar": 20,
+        "endLine": 133,
+        "endChar": 42
+      },
+      "revId": "1ae227b36ee81245dfca9d7acfc097f91694e4a7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ae51f1f_422379fc",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-01-06T05:36:47Z",
+      "side": 1,
+      "message": "Lot of redundant code. We can have just one keyword like below and call it just by using: Set Policy Via GUI  SSH  Enable\n\n\nSet Policy Via GUI\n   [Documentation]  Set Policy Via GUI.\n   [Arguments]  ${policy}  ${state}",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 85
+      },
+      "revId": "1ae227b36ee81245dfca9d7acfc097f91694e4a7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
