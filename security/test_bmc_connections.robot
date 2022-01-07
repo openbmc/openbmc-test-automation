@@ -66,7 +66,7 @@ Flood Patch Without Auth Token And Check Stability Of BMC
     ...  msg=Patch operation failed ${fail_count} times in ${verify_count} attempts
 
 
-Verify Uer Cannot Login After 5 Non-Logged In Sessions
+Verify User Cannot Login After 5 Non-Logged In Sessions
     [Documentation]  User should not be able to login when there
     ...  are 5 non-logged in sessions.
     [Tags]  Verify_User_Cannot_Login_After_5_Non-Logged_In_Sessions
