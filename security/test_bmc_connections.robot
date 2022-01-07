@@ -17,6 +17,9 @@ Library   Selenium2Library  120  120
 Library   Telnet  30 Seconds
 Library   Screenshot
 
+
+Suite Setup   Redfish.Logout
+
 Variables  ../gui/data/gui_variables.py
 
 *** Variables ***
