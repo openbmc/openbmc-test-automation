@@ -17,6 +17,9 @@ Library   Selenium2Library  120  120
 Library   Telnet  30 Seconds
 Library   Screenshot
 
+
+Suite Setup   Redfish.Logout
+
 Variables  ../gui/data/gui_variables.py
 
 *** Variables ***
@@ -85,7 +88,7 @@ Verify User Cannot Login After 5 Non-Logged In Sessions
 Test Post Without Auth Token Fails
     [Documentation]  Send post method without auth token and verify it throws an error.
     [Tags]   Test_Post_Without_Auth_Token_Fails
-
+    
     ${user_info}=  Create Dictionary
     ...  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{user_info}
