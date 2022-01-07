@@ -104,6 +104,41 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b4d18c8_2b1aea6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000294
+      },
+      "writtenOn": "2022-01-07T09:29:14Z",
+      "side": 1,
+      "message": "Thanks. Rahul. I will keep check different between our systems.",
+      "revId": "6dbdad4f207db5aaeb11d88701bed39c966dbcf2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "226286eb_61af3b91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000294
+      },
+      "writtenOn": "2022-01-07T09:29:14Z",
+      "side": 1,
+      "message": "Hello Rahul,\nThanks your great support to check this commit.\nI also try to run \"Verify Dump After Host Watchdog Error Injection\" test case on our system without my changes again. The test result is still fail.\n\nThere is no any dump log be created in below folders in BMC:\n/var/lib/phosphor-debug-collector/dumps or /var/lib/systemd/coredump\n\nI try to steps manually to run the test case, but no dump log be created.\nMy BMC environment console result as below:\nroot@olympus-nuvoton:/var/lib/phosphor-debug-collector/dumps# ls\nroot@olympus-nuvoton:/var/lib/phosphor-debug-collector/dumps#\nroot@olympus-nuvoton:/var/lib/systemd/coredump# ls\nroot@olympus-nuvoton:/var/lib/systemd/coredump#\n\nI will check \"Trigger Host Watchdog Error\" this keyword to get more detail about this action: \"xyz.openbmc_project.State.Watchdog.Action.PowerCycle\" of phosphor-watchdog package. I think that might be your system will create dump log when receiving this action. If you have any finding or clues, welcome to let me know.\n\nThanks.",
+      "parentUuid": "c033856b_8751e002",
+      "revId": "6dbdad4f207db5aaeb11d88701bed39c966dbcf2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6b4c2b8_6564cc41",
