@@ -33,6 +33,7 @@ ${bmc_url}            https://${OPENBMC_HOST}
 Test Patch Without Auth Token Fails
     [Documentation]  Send patch method without auth token and verify it throws an error.
     [Tags]   Test_Patch_Without_Auth_Token_Fails
+    [Setup]  Redfish.Logout
 
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
@@ -85,7 +86,8 @@ Verify User Cannot Login After 5 Non-Logged In Sessions
 Test Post Without Auth Token Fails
     [Documentation]  Send post method without auth token and verify it throws an error.
     [Tags]   Test_Post_Without_Auth_Token_Fails
-
+    [Setup]  Redfish.Logout
+    
     ${user_info}=  Create Dictionary
     ...  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{user_info}
