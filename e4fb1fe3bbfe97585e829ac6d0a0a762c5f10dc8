@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb337319_7547efd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-01-10T07:30:52Z",
+      "side": 1,
+      "message": "As per new GUI_Overview page change this testcase going to remove.",
+      "revId": "e4fb1fe3bbfe97585e829ac6d0a0a762c5f10dc8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
