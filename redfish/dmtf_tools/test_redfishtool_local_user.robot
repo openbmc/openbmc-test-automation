@@ -19,7 +19,7 @@ Suite Setup       Suite Setup Execution
 *** Variables ***
 
 ${root_cmd_args} =  SEPARATOR=
-...  redfishtool raw -r ${OPENBMC_HOST} -u ${OPENBMC_USERNAME} -p ${OPENBMC_PASSWORD} -S Always
+...  redfishtool raw -r ${OPENBMC_HOST}:${HTTPS_PORT} -u ${OPENBMC_USERNAME} -p ${OPENBMC_PASSWORD} -S Always
 
 
 *** Test Cases ***
