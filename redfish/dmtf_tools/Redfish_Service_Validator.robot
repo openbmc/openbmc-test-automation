@@ -63,7 +63,7 @@ Create User And Run Service Validator
     Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}
 
     ${cmd}=  Catenate  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}RedfishServiceValidator.py
-    ...  --ip ${OPENBMC_HOST}:${HTTPS_PORT} --nochkcert --authtype=Session -u ${username}
+    ...  --ip https://${OPENBMC_HOST}:${HTTPS_PORT} --nochkcert --authtype=Session -u ${username}
     ...  -p ${password} --logdir ${EXECDIR}${/}logs_${username}${/} --debug_logging
 
     Rprint Vars  cmd

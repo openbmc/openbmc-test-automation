@@ -16,7 +16,7 @@ ${rsv_github_url}         https://github.com/DMTF/Redfish-Reference-Checker.git
 ${rsv_dir_path}           Redfish-Reference-Checker
 
 ${command_string}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}RedfishReferenceTool.py
-...                --nochkcert 'https://${OPENBMC_HOST}:443/redfish/v1/$metadata'
+...                --nochkcert 'https://${OPENBMC_HOST}:${HTTPS_PORT}/redfish/v1/$metadata'
 
 *** Test Case ***
 
