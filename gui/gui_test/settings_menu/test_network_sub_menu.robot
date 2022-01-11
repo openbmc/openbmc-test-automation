@@ -29,6 +29,10 @@ ${xpath_input_subnetmask}                //*[@id="subnetMask"]
 ${xpath_input_static_dns}                //*[@id="staticDns"]
 ${xpath_cancel_button}                   //button[contains(text(),'Cancel')]
 ${xpath_add_button}                      //button[contains(text(),'Add')]
+${xpath_delete_dns_server}               //*[@title="Delete DNS address"]
+${xpath_add_dns_server}                  //button[normalize-space(text())='Add']
+
+${dns_server}                            10.10.10.10
 
 
 *** Test Cases ***
@@ -110,6 +114,15 @@ Verify Existence Of All Fields In Static DNS
     Page Should Contain Button  ${xpath_add_button}
 
 
+Configure And Verify DNS Server Via GUI
+    [Documentation]  Login to GUI Network page, add DNS server IP
+    ...  and verify that the page reflects server IP.
+    [Tags]  Configure_And_Verify_DNS_Server_Via_GUI
+    [Teardown]  Delete DNS Servers And Verify
+
+    Add DNS Servers And Verify  ${dns_server}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -119,3 +132,44 @@ Suite Setup Execution
     Click Element  ${xpath_settings_menu}
     Click Element  ${xpath_network_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network
+
+
+Add DNS Servers And Verify
+    [Documentation]  Login to GUI Network page,add DNS server on BMC
+    ...  and verify it via BMC CLI.
+    [Arguments]  ${dns_server}   ${expected_status}=Valid format
+
+    # Description of the argument(s):
+    # dns_server           A list of static name server IPs to be
+    #                      configured on the BMC.
+    # expected_status      Expected status while adding DNS server address
+    # ...                  (e.g. Invalid format / Field required).
+
+    Wait Until Page Contains Element  ${xpath_add_dns_ip_address_button}  timeout=15sec
+
+    Click Button  ${xpath_add_dns_ip_address_button}
+    Input Text  ${xpath_input_static_dns}  ${dns_server}
+    Click Button  ${xpath_add_dns_server}
+    Run keyword if  '${expected_status}' != 'Valid format'
+    ...  Run keywords  Page Should Contain  ${expected_status}  AND  Return From Keyword
+
+    Wait Until Page Contains Element  ${xpath_add_dns_ip_address_button}  timeout=10sec
+    Wait Until Page Contains  ${dns_server}  timeout=40sec
+
+    # Check if newly added DNS server is configured on BMC.
+    ${cli_name_servers}=  CLI Get Nameservers
+    ${cmd_status}=  Run Keyword And Return Status
+    ...  List Should Contain Sub List  ${cli_name_servers}  ${dns_server}
+
+
+Delete DNS Servers And Verify
+    [Documentation]  Login to GUI Network page,delete static name servers
+    ...  and verify that page doesnot reflects static name servers.
+
+    Page Should Contain Element  ${xpath_delete_dns_server}
+    Wait Until Element Is Enabled  ${xpath_delete_dns_server}
+    Click Button  ${xpath_delete_dns_server}
+    Wait Until Page Contains Element  ${xpath_add_dns_ip_address_button}  timeout=15
+    # Check if all name servers deleted on BMC.
+    ${nameservers}=  CLI Get Nameservers
+    Should Be Empty  ${nameservers}
