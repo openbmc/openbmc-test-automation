@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f179e196_05625c98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-01-11T12:46:03Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1:\n\u003e \n\u003e \u003e Patch Set 1:\n\u003e \u003e \n\u003e \u003e \u003e Patch Set 1:\n\u003e \u003e \u003e \n\u003e \u003e \u003e \u003e Patch Set 1:\n\u003e \u003e \u003e \u003e \n\u003e \u003e \u003e \u003e \u003e Patch Set 1: Code-Review-1\n\u003e \u003e \u003e \u003e \u003e \n\u003e \u003e \u003e \u003e \u003e I believe we shouldn\u0027t add it in the lib, it was cater to the specific test case.  Use the Redfish Reboot if needed in general.\n\u003e \u003e \u003e \u003e \n\u003e \u003e \u003e \u003e Ohh OK, I thought that `Redfish reboot` is not there.\n\u003e \u003e \u003e \u003e Why are we not using that here??\n\u003e \u003e \u003e \u003e https://gerrit.openbmc-project.xyz/c/openbmc/openbmc-test-automation/+/49280/4/redfish/managers/test_bmc_protocol_settings.robot\n\u003e \u003e \u003e \n\u003e \u003e \u003e This is also a good technic of doing the real reset check. Good to have a different flavour here but inside the suite.\n\u003e \u003e \n\u003e \u003e We have persistency check in multiple suites, instead of adding it in each suite it is better to move it in library at one place.\n\u003e \n\u003e Any update on this??\n\u003e Just triggering reset will not ensure successful reset/reboot.\n\u003e We\u0027ve many test cases \u0026 suites where we use reboot function so this code is needed in library.\n\nany update or clarification to above question??",
+      "revId": "44401333a757d6329f39b5ea2eb23459dcbbd7f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
