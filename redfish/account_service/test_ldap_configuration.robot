@@ -181,16 +181,28 @@ Verify LDAP User With Operator Privilege Able To Do Host Poweroff
     Redfish.Login
 
 
-Verify AccountLockout Attributes Set To Zero
+Verify AccountLockout Attributes Set To Zero By LDAP User
     [Documentation]  Verify that attribute AccountLockoutDuration and
-    ...  AccountLockoutThreshold are set to 0.
+    ...  AccountLockoutThreshold are set to 0 by LDAP user.
     [Teardown]  Run Keywords  Restore AccountLockout Attributes  AND
     ...  FFDC On Test Case Fail
-    [Tags]  Verify_AccountLockout_Attributes_Set_To_Zero
+    [Tags]  Verify_AccountLockout_Attributes_Set_To_Zero_By_LDAP_User
 
     ${old_account_service}=  Redfish.Get Properties
     ...  ${REDFISH_BASE_URI}AccountService
     Rprint Vars  old_account_service
+
+    # Create LDAP user and create session using LDAP user.
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...  Administrator  ${GROUP_NAME}
+
+    # Clear existing Redfish sessions.
+    Redfish.Logout
+
+    # Login using LDAP user.
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+
+    # Set Account Lockout attributes using LDAP user.
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body=[('AccountLockoutDuration', 0)]
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
