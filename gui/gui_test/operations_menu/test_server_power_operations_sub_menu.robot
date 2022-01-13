@@ -106,10 +106,8 @@ Verify System State At Power On
     [Setup]  Run Keywords  Redfish Power On  stack_mode=skip  AND  Launch Browser And Login GUI
     ...  AND  Navigate to Server Power Operation Page
 
-    Page Should Contain Element  ${xpath_current_power_state}
-    Element Should Contain   ${xpath_current_power_state}  On
-
-
+    Wait Until Keyword Succeeds  15 sec  5 sec   Element Should Contain   ${xpath_current_power_state}  On
+   
 Verify PowerOn Button Should Present At Power Off
     [Documentation]  Verify existence of poweron button at power off.
     [Tags]  Verify_PowerOn_Button_Should_Present_At_Power_Off
