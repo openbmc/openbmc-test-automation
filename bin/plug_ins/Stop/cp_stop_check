@@ -7,6 +7,7 @@ Check for stop conditions.  Return code of 2 if stop conditions are found.
 import sys
 import subprocess
 import os
+import re
 
 from gen_print import *
 from gen_valid import *
@@ -136,6 +137,58 @@ def esel_stop_check():
         stop_check()
 
 
+def pel_stop_check():
+    r"""
+    Determine whether any PEL entries found warrant stopping the test
+    run.
+    """
+
+    if STOP_PEL_STOP_FILE_PATH == "":
+        return
+
+    pel_txt_file_path = os.environ.get("AUTOBOOT_FFDC_DIR_PATH", "") + \
+     os.environ.get("AUTOBOOT_FFDC_PREFIX", "") + "PEL_logs_list.json"
+
+    if not os.path.isfile(pel_txt_file_path):
+        qprint_timen("The following file was not present so no further" +
+                     " action will be taken.")
+        qprint_var(pel_txt_file_path)
+        return
+
+    default_stop_dir_path = "/afs/rchland.ibm.com/projects/esw/dvt/"
+
+    # If pel_stop_file_path is unqualified and cannot be found, pre-pend
+    # default_stop_dir_path for the user.
+    pel_stop_file_path = os.environ.get("STOP_PEL_STOP_FILE_PATH", "")
+    if not os.path.isfile(pel_stop_file_path) and \
+       os.path.isfile(default_stop_dir_path + pel_stop_file_path):
+        pel_stop_file_path = default_stop_dir_path + pel_stop_file_path
+        qprint_timen("Using default stop file path.")
+        qprint_var(pel_stop_file_path)
+
+    # First, read the file in and convert it to a list.
+    pel_stop_list = file_to_list(pel_stop_file_path, newlines=0, comments=0)
+
+    if len(pel_stop_list) == 0:
+        print_timen("There are no records to process in " +
+                    pel_stop_file_path + ".")
+        return
+
+    pel_all_list = file_to_list(pel_txt_file_path, newlines=0, comments=0)
+
+    if len(pel_all_list) == 0:
+        print_timen("There are no records to process in " +
+                    pel_txt_file_path + ".")
+        return
+
+    for stop_pel in pel_stop_list:
+        for pel_all in pel_all_list:
+            pel_match = re.search(".*SRC.*" + stop_pel + ".*", pel_all)
+            if pel_match:
+                print_timen("The caller wishes to stop test execution based on the presence of certain PEL entries.")
+                stop_check()
+
+
 def main():
 
     gen_setup()
@@ -158,6 +211,8 @@ def main():
     rest_fail()
 
     esel_stop_check()
+
+    pel_stop_check()
 
     if STOP_VERIFY_HARDWARE_FAIL:
         hardware_error_found = restore_plug_in_value(0, 'Verify_hardware')
