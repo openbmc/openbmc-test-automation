@@ -139,6 +139,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d3e2387_a634abb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000294
+      },
+      "writtenOn": "2022-01-13T06:07:50Z",
+      "side": 1,
+      "message": "Hi Rahul,\nI have checked phosphor-watchdog and phosphor-debug-collector then found\nwhy dump is not getting created on my system after injecting Host Watchdog Error.\n\nFirst, we found that our phosphor-watchdog will apply intel patch from their github.\nhttps://github.com/Intel-BMC/openbmc/tree/intel/meta-openbmc-mods/meta-common/recipes-phosphor/watchdog/phosphor-watchdog\n0001-Customize-phosphor-watchdog-for-Intel-platforms.patch\nDue to our system is intel x86 platform, thus we apply this match for customerizing our system.\n\nSecond, I have removed this patch and make phosphor-watchdog as original from openbmc github.\nThen run \"Verify_Dump_After_Host_Watchdog_Error_Injection\" test and result is PASS as yours.\nBTW, The test case is using original automation test without my changes.\n\nFrom the log, we found that seems the dump report be created in /var/lib/phosphor-debug-collector/dumps/1 folder.\nphosphor-dump-manager[840]: Thu Jan 13 03:36:44 UTC 2022 Report is available in /var/lib/phosphor-debug-collector/dumps/1\n\nBut, we didn\u0027t found any dump entry log 1 in /var/lib/phosphor-debug-collector/dumps/\nor /var/lib/systemd/coredump folder.\n\nThe dump list will show \"/xyz/openbmc_project/dump/bmc/entry/1\" data as below:\nhttps://10.103.152.249/xyz/openbmc_project/dump/bmc/entry/list\n{\n\"data\": [\n\"/xyz/openbmc_project/dump/bmc/entry/1\"\n],\n\"message\": \"200 OK\",\n\"status\": \"ok\"\n}\n\nBut, there is no any dump data in \"/xyz/openbmc_project/dump/bmc/entry/1\".\nThe content of \"data\" is empty.\nhttps://10.103.152.249/xyz/openbmc_project/dump/bmc/entry/1\n{\n\"data\": {},\n\"message\": \"200 OK\",\n\"status\": \"ok\"\n}\n\nThen I check the journal log and found that \"watchdog: Failed to start unit\" this line as below:\nphosphor-watchdog[2219]: watchdog: Failed to start unit\n\nFrom phosphor-watchdog/watchdog.cpp, we found that there is \"commit\u003cInternalFailure\u003e()\" be called\nthat cause phosphor-watchdog/elog_watch.cpp call create() to generate dump entry log path.\n\ncatch (const sdbusplus::exception::exception\u0026 e)\n{\n\tlog\u003clevel::ERR\u003e(\"watchdog: Failed to start unit\",\n\t\t\t\t\tentry(\"TARGET\u003d%s\", target-\u003esecond.c_str()),\n\t\t\t\t\tentry(\"ERROR\u003d%s\", e.what()));\n\tcommit\u003cInternalFailure\u003e();\n}\n\nI think that\u0027s why dump is getting created on your system after injecting Host Watchdog Error.\nBut the content of dump is empty seems not our expectation.\nWe should create a real dump to run this test.\nThe keyword \"Verify Dump After Host Watchdog Error Injection\" will not create a real bmc dump.\nThus, I think that the keyword \"Trigger Core Dump\" is good method to create a real dump.\n\nPlease help us to review this and provide some suggestions to make this test case more robust.\n\nBest regards,\nTim",
+      "revId": "6dbdad4f207db5aaeb11d88701bed39c966dbcf2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6b4c2b8_6564cc41",
