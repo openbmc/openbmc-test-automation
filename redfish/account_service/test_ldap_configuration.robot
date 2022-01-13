@@ -264,7 +264,7 @@ Verify LDAP BindDN Update And LDAP Login
 Verify LDAP BindDN Password Update And LDAP Login
     [Documentation]  Update LDAP BindDN password of LDAP configuration and
     ...  verify that LDAP login works.
-    [Tags]  Verify_LDAP_BindDN_Passsword_Update_And_LDAP_Login
+    [Tags]  Verify_LDAP_BindDN_Password_Update_And_LDAP_Login
 
 
     ${body}=  Catenate  {'${LDAP_TYPE}': { 'Authentication':

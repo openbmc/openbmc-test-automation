@@ -24,7 +24,7 @@ Test Teardown    FFDC On Test Case Fail
 
 Create Session And Verify Response Code Using Different Credentials
     [Documentation]  Create session and verify response code using different credentials.
-    [Tags]  Create_Session_And_Verify_Response_Code_Using_Different_Credentails
+    [Tags]  Create_Session_And_Verify_Response_Code_Using_Different_Credentials
     [Template]  Create Session And Verify Response Code
 
     # username           password             valid_status_code

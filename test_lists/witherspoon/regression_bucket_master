@@ -61,7 +61,7 @@
 -i Verify_All_Configured_IP_And_Netmask
 -i Get_Hostname_And_Verify
 -i Configure_Hostname_And_Verify
--i Add_Valid_IPv4_Addres_And_Verify
+-i Add_Valid_IPv4_Address_And_Verify
 -i Configure_DNS_Server_And_Verify
 -i Configure_Valid_MAC_And_Verify
 # Remote Logging

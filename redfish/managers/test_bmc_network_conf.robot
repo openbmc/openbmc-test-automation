@@ -120,7 +120,7 @@ Configure Hostname And Verify
 
 Add Valid IPv4 Address And Verify
     [Documentation]  Add IPv4 Address via Redfish and verify.
-    [Tags]  Add_Valid_IPv4_Addres_And_Verify
+    [Tags]  Add_Valid_IPv4_Address_And_Verify
     [Teardown]   Run Keywords
     ...  Delete IP Address  ${test_ipv4_addr}  AND  Test Teardown Execution
 
@@ -128,7 +128,7 @@ Add Valid IPv4 Address And Verify
 
 Add Invalid IPv4 Address And Verify
     [Documentation]  Add Invalid IPv4 Address via Redfish and verify.
-    [Tags]  Add_Invalid_IPv4_Addres_And_Verify
+    [Tags]  Add_Invalid_IPv4_Address_And_Verify
 
     Add IP Address  ${test_ipv4_invalid_addr}  ${test_subnet_mask}
     ...  ${test_gateway}  valid_status_codes=${HTTP_BAD_REQUEST}
@@ -170,7 +170,7 @@ Configure Loopback IP
 
 Add Valid IPv4 Address And Check Persistency
     [Documentation]  Add IPv4 address and check peristency.
-    [Tags]  Add_Valid_IPv4_Addres_And_Check_Persistency
+    [Tags]  Add_Valid_IPv4_Address_And_Check_Persistency
 
     Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
 
@@ -477,7 +477,7 @@ Configure String Value For DNS Server
 
 Modify IPv4 Address And Verify
     [Documentation]  Modify IP address via Redfish and verify.
-    [Tags]  Modify_IPv4_Addres_And_Verify
+    [Tags]  Modify_IPv4_Address_And_Verify
     [Teardown]  Run Keywords
     ...  Delete IP Address  ${test_ipv4_addr2}  AND  Test Teardown Execution
 
@@ -542,7 +542,7 @@ Configure Multiple Static IPv4 Addresses And Check Persistency
 
 Configure And Verify Multiple IPv4 Addresses
     [Documentation]  Configure multiple IPv4 addresses and verify.
-    [Tags]  Configure_And_Verify_Multiple_IPv4_Addresse
+    [Tags]  Configure_And_Verify_Multiple_IPv4_Addresses
     [Teardown]  Run Keywords
     ...  Delete IP Address  ${test_ipv4_addr}  AND  Delete IP Address  ${test_ipv4_addr2}
     ...  AND  Test Teardown Execution
