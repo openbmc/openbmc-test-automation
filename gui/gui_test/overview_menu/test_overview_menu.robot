@@ -36,6 +36,7 @@ Verify Existence Of All Sections In Overview Page
     Page Should Contain  Power information
     Page Should Contain  Event logs
     Page Should Contain  Inventory and LEDs
+    Page Should Contain  Dumps
 
 Verify Network Information In Overview Page
     [Documentation]  Verify values under network information section.
