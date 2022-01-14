@@ -999,5 +999,5 @@ Stop PLDM Service And Wait
     BMC Execute Command  systemctl stop pldmd.service
 
     # Check if BMC is still online.
-    Wait Until Keyword Succeeds  3 min  10 sec  Is BMC Unpingable
-    Wait For Host To Ping  ${OPENBMC_HOST}  2 min
+    Wait Until Keyword Succeeds  5 min  10 sec  Is BMC Unpingable
+    Wait For Host To Ping  ${OPENBMC_HOST}  3 min
