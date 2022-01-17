@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aabbcdb1_09d220d1",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-01-17T08:28:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55d3d753_ccc4c901",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 61
+      },
+      "revId": "1ae227b36ee81245dfca9d7acfc097f91694e4a7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87df4444_57c0a30d",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-01-06T05:36:47Z",
       "side": 1,
       "message": "This is a use full keyword. Better to move this up in gui/lib/gui_resource.robot so that other suite can also use it.",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 18
+      },
+      "revId": "1ae227b36ee81245dfca9d7acfc097f91694e4a7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b43fe438_92e793a5",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-01-17T08:28:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87df4444_57c0a30d",
       "range": {
         "startLine": 127,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c85aa04_78e34d09",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-01-17T08:28:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f0b369e_ff5e82c9",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 36
+      },
+      "revId": "1ae227b36ee81245dfca9d7acfc097f91694e4a7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bbcd42e8_d2e0746b",
@@ -93,6 +165,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96bb4f27_378818f3",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-01-17T08:28:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbcd42e8_d2e0746b",
+      "range": {
+        "startLine": 133,
+        "startChar": 20,
+        "endLine": 133,
+        "endChar": 42
+      },
+      "revId": "1ae227b36ee81245dfca9d7acfc097f91694e4a7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ae51f1f_422379fc",
@@ -106,6 +202,30 @@
       "writtenOn": "2022-01-06T05:36:47Z",
       "side": 1,
       "message": "Lot of redundant code. We can have just one keyword like below and call it just by using: Set Policy Via GUI  SSH  Enable\n\n\nSet Policy Via GUI\n   [Documentation]  Set Policy Via GUI.\n   [Arguments]  ${policy}  ${state}",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 85
+      },
+      "revId": "1ae227b36ee81245dfca9d7acfc097f91694e4a7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61f9f97c_4e7ccacc",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-01-17T08:28:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ae51f1f_422379fc",
       "range": {
         "startLine": 139,
         "startChar": 0,
