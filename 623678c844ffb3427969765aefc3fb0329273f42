@@ -88,6 +88,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47c45d8f_4beb5b81",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-01-19T08:56:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "690fddf6_bb73141c",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 59
+      },
+      "revId": "623678c844ffb3427969765aefc3fb0329273f42",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43f226ef_1662ba06",
