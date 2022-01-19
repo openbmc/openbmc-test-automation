@@ -156,6 +156,41 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09b8dcd8_f3e40ec9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-01-19T09:09:09Z",
+      "side": 1,
+      "message": "George\nAs per him Host Watchdog Error injection is not effective and we should use core dump. Need you suggestion.",
+      "parentUuid": "5d3e2387_a634abb2",
+      "revId": "6dbdad4f207db5aaeb11d88701bed39c966dbcf2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b5d986e_27f44d0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-01-19T09:09:09Z",
+      "side": 1,
+      "message": "\"Verify Dump After Host Watchdog Error Injection\" test also checks if dump size in between 0 and 204800 using below code. So if this test is passing then dump should have some content. Please cross check without any patches and code changes with your system.\n\nShould Be True  0 \u003c ${dump_size} \u003c 204800\n",
+      "revId": "6dbdad4f207db5aaeb11d88701bed39c966dbcf2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6b4c2b8_6564cc41",
