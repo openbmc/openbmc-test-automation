@@ -27,6 +27,7 @@ class gui_variables():
     # Logs menu
     xpath_logs_menu = "//*[@data-test-id='nav-button-logs']"
     xpath_dumps_sub_menu = "//*[@data-test-id='nav-item-dumps']"
+    xpath_dumps_header = "//h1[text()='Dumps']"
     xpath_event_logs_sub_menu = "//*[@data-test-id='nav-item-event-logs']"
     xpath_event_header = "//h1[text()='Event logs']"
     xpath_progress_logs_sub_menu = "//*[@data-test-id='nav-item-post-code-logs']"
