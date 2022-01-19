@@ -21,7 +21,8 @@ ${xpath_edit_network_settings_button}  (//*[text()="View more"])[3]
 ${view_all_event_logs}                 (//*[text()="View more"])[5]
 ${xpath_launch_serial_over_lan}        //*[@data-test-id='overviewQuickLinks-button-solConsole']
 ${xpath_led_button}                    //*[@data-test-id='overviewInventory-checkbox-identifyLed']
-
+${view_all_Dumps}                      (//*[text()="View more"])[7]
+${xpath_dumps_header}                  //h1[text()="Dumps"]
 
 *** Test Cases ***
 
@@ -168,6 +169,12 @@ Verify BMC Information At Host Power Off State
     ${firmware_version}=  Redfish Get BMC Version
     Page Should Contain  ${firmware_version}
 
+Verify View More Button For Dumps
+    [Documentation]  Verify view more button for Dumps button in overview page.
+    [Tags]  Verify_View_More_Button_For_Dumps
+    Wait Until Page Contains Element  ${view_all_Dumps}  timeout=30
+    Click Element  ${view_all_Dumps}
+    Wait Until Page Contains Element  ${xpath_dumps_header}   timeout=30
 
 *** Keywords ***
 
