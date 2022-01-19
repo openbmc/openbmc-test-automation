@@ -191,6 +191,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcffd034_1ab63ac0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000294
+      },
+      "writtenOn": "2022-01-19T09:20:13Z",
+      "side": 1,
+      "message": "Thanks. I will check the dump size without any patches and code changes in my system.\n\nCould you please also help to double check whether is there any dump files in /var/lib/phosphor-debug-collector/dumps/ or /var/lib/systemd/coredump?",
+      "parentUuid": "4b5d986e_27f44d0f",
+      "revId": "6dbdad4f207db5aaeb11d88701bed39c966dbcf2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6b4c2b8_6564cc41",
