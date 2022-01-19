@@ -144,5 +144,17 @@ IPMI_RAW_CMD = {
             "When the payload is activated, the first four bytes are the session ID,"
             "otherwise it should be 00."
         ]
+    },
+    'BIOS_POST_Code':
+    {
+        'Get':
+        [
+            # raw command, expected output, comment
+            "0x30 0xe9",
+            "",
+            "Response bytes will vary in length depending on state of system",
+            "0x89",
+            "error response byte when host is powered off"
+        ]
     }
 }
