@@ -488,8 +488,12 @@ def validate_parms():
     global openbmc_model
     if openbmc_model == "":
         status, ret_values =\
-            grk.run_key_u("Get BMC System Model")
-        openbmc_model = ret_values
+            grk.run_key_u("Get BMC System Model", ignore=1)
+        # Set the model to default "OPENBMC" if getting it from BMC fails.
+        if status == 'FAIL':
+            openbmc_model = 'OPENBMC'
+        else:
+            openbmc_model = ret_values
         BuiltIn().set_global_variable("${openbmc_model}", openbmc_model)
     gv.set_exit_on_error(True)
     gv.valid_value(openbmc_host)
