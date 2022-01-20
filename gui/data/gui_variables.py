@@ -34,6 +34,7 @@ class gui_variables():
     # Hardware status menu
     xpath_hardware_status_menu = "//*[@data-test-id='nav-button-hardware-status']"
     xpath_inventory_and_leds_sub_menu = "//*[@data-test-id='nav-item-inventory']"
+    xpath_inventory_and_leds_header = "//*[contains(text(),'Inventory and LEDs')]"
     xpath_sensor_sub_menu = "//*[@data-test-id='nav-item-sensors']"
 
     # Operations menu
@@ -44,6 +45,7 @@ class gui_variables():
     xpath_sol_sub_menu = "//*[@data-test-id='nav-item-serial-over-lan']"
     xpath_server_power_operations_sub_menu = "//*[@data-test-id='nav-item-server-power-operations']"
     xpath_sol_console_heading = "//h1[text()='Serial over LAN (SOL) console']"
+    xpath_firmware_information_header = "//*[contains(text(),'Firmware')]"
 
     # Settings menu
     xpath_settings_menu = "//*[@data-test-id='nav-button-settings']"
@@ -51,6 +53,7 @@ class gui_variables():
     xpath_date_time_sub_menu = "//*[@data-test-id='nav-item-date-time']"
     xpath_network_sub_menu = "//*[@data-test-id='nav-item-network']"
     xpath_power_restore_policy_sub_menu = "//*[@data-test-id='nav-item-power-restore-policy']"
+    xpath_network_information_header = "//*[contains(text(),'Network')]"
 
     # Security and access menu
     xpath_secuity_and_accesss_menu = "//*[@data-test-id='nav-button-security-and-access']"
@@ -63,6 +66,7 @@ class gui_variables():
     # Resource management menu
     xpath_resource_management_menu = "//*[@data-test-id='nav-button-resource-management']"
     xpath_power_sub_menu = "//*[@data-test-id='nav-item-power']"
+    xpath_power_information_header = "//*[contains(text(),'Power')]"
 
     # Profile settings
     xpath_default_UTC = "//*[@data-test-id='profileSettings-radio-defaultUTC']"
