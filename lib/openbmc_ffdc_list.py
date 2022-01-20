@@ -70,6 +70,7 @@ FFDC_BMC_FILE = {
         'bmcweb_persistent_data.json': 'cat /home/root/bmcweb_persistent_data.json'
         + ' > /tmp/bmcweb_persistent_data.json',
         'GUARD_list.txt': 'guard -l > /tmp/GUARD_list.txt 2>&1',
+        'fan_control_dump.json': 'fanctl dump 2>&1',
     },
 }
 # Add file name and corresponding command needed for all Linux distributions
