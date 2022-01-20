@@ -65,6 +65,7 @@ OPENBMC:
             - 'hexdump -C /var/lib/phosphor-logging/extensions/pels/badPEL >/tmp/PEL_logs_badPEL.txt'
             - 'guard -l >/tmp/GUARD_list.txt'
             - 'killall -s SIGUSR1 pldmd; sleep 5'
+            - 'fanctl dump'
         FILES:
             - '/tmp/BMC_flash_side.txt'
             - '/tmp/BMC_hwmon.txt'
@@ -85,6 +86,7 @@ OPENBMC:
             - '/tmp/PEL_logs_badPEL.txt'
             - '/tmp/GUARD_list.txt'
             - '/tmp/pldm_flight_recorder'
+            - '/tmp/fan_control_dump.json'
         PROTOCOL:
             - 'SSH'
 
