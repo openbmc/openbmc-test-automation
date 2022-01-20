@@ -21,7 +21,7 @@ ${xpath_edit_network_settings_button}  (//*[text()="View more"])[3]
 ${view_all_event_logs}                 (//*[text()="View more"])[5]
 ${xpath_launch_serial_over_lan}        //*[@data-test-id='overviewQuickLinks-button-solConsole']
 ${xpath_led_button}                    //*[@data-test-id='overviewInventory-checkbox-identifyLed']
-
+${view_more_inventory_and_leds}        (//*[text()="View more"])[6]
 
 *** Test Cases ***
 
@@ -167,6 +167,15 @@ Verify BMC Information At Host Power Off State
     Redfish Power Off  stack_mode=skip
     ${firmware_version}=  Redfish Get BMC Version
     Page Should Contain  ${firmware_version}
+
+
+Verify View More Button For Inventory and LEDs
+    [Documentation]  Verify view more button for Inventory and LEDs in overview page.
+    [Tags]  Verify_View_More_Button_For_Inventory_And_LEDs
+
+    Wait Until Page Contains Element  ${view_more_inventory_and_leds}  timeout=30
+    Click Element  ${view_more_inventory_and_leds}
+    Wait Until Page Contains Element  ${xpath_inventory_and_leds_header}  timeout=30
 
 
 *** Keywords ***

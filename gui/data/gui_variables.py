@@ -34,6 +34,7 @@ class gui_variables():
     # Hardware status menu
     xpath_hardware_status_menu = "//*[@data-test-id='nav-button-hardware-status']"
     xpath_inventory_and_leds_sub_menu = "//*[@data-test-id='nav-item-inventory']"
+    xpath_inventory_and_leds_header = "//*[contains(text(),'Inventory and LEDs')]"
     xpath_sensor_sub_menu = "//*[@data-test-id='nav-item-sensors']"
 
     # Operations menu
