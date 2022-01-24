@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3b71c73_357c786d",
+        "filename": "gui/data/gui_variables.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-01-24T10:13:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a469585_12b75c6d",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 30
+      },
+      "revId": "6cd7154b9044f1a8f89db8fe65227b510dec8d08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41a84517_0c652636",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf5ff13d_d97cd5de",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-01-24T10:13:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41a84517_0c652636",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 80
+      },
+      "revId": "6cd7154b9044f1a8f89db8fe65227b510dec8d08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49887802_ba654739",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-01-20T06:39:16Z",
       "side": 1,
       "message": "Where we are setting policy state.",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 28
+      },
+      "revId": "6cd7154b9044f1a8f89db8fe65227b510dec8d08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54d6e11c_44d9eb86",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-01-24T10:13:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49887802_ba654739",
       "range": {
         "startLine": 175,
         "startChar": 0,
