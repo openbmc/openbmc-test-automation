@@ -227,6 +227,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79937c96_8f497e26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000294
+      },
+      "writtenOn": "2022-01-25T08:50:19Z",
+      "side": 1,
+      "message": "I have run the test without any patches and code changes in my system.\nThe test result is PASS, but this is not reasonable.\n\nDue to the data in empty in https://10.103.152.249/xyz/openbmc_project/dump/bmc/entry/1\n{\n\"data\": {},\n\"message\": \"200 OK\",\n\"status\": \"ok\"\n}\n\nHowever, why the test result is PASS? seems I found that \"dump_size\" have vaule \"29396\". Thus, the test result is PASS. But the \"data\" is empty and \"Size\" property is not exist. There is no any dump entry log file in /var/lib/phosphor-debug-collector/dumps/ or /var/lib/systemd/coredump folder.\n\nSnippet in test log.html:\nKEYWORD BuiltIn . Run Keyword If \u0027${expected_value}\u0027 !\u003d \u0027${EMPTY}\u0027,\nShould Be Equal As Strings, ${expected_value}, ${content[\"data\"]}\n11:18:18.017\tINFO\t${dump_size} \u003d 29396\n\nThen I run another test \"Verify Core Dump Size\" the test result is PASS.\nHowever, the \"data\" is valid and \"Size\" property is exist with \"8788\" value.\nThere is dump entry log file in /var/lib/phosphor-debug-collector/dumps/\nor /var/lib/systemd/coredump folder.\n\nhttps://10.103.152.249/xyz/openbmc_project/dump/bmc/entry/1\n{\n\"data\": {\n\"CompletedTime\": 1642744415,\n\"Elapsed\": 1642744415,\n\"OffloadUri\": \"\",\n\"Offloaded\": false,\n\"Size\": 8788,\n\"StartTime\": 1642744415,\n\"Status\": \"xyz.openbmc_project.Common.Progress.OperationStatus.Completed\"\n},\n\"message\": \"200 OK\",\n\"status\": \"ok\"\n}\n\nhttps://10.103.152.249/xyz/openbmc_project/dump/bmc/entry/1/attr/Size\n{\n\"data\": 8788,\n\"message\": \"200 OK\",\n\"status\": \"ok\"\n}\n\nAccording our test result, the keyword \"Trigger Core Dump\" will create real\ndump entry log file and exist in dump folder. Seems those test cases\nneed to use this keyword to verify bmc dump entry log functionality.",
+      "parentUuid": "0f0610b0_4a2d35d9",
+      "revId": "6dbdad4f207db5aaeb11d88701bed39c966dbcf2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6b4c2b8_6564cc41",
