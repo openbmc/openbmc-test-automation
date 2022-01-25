@@ -206,9 +206,9 @@ class ffdc_collector:
         self.logger.info("\t{:<10}  {:>9}".format('redfishtool', redfishtool_version))
         self.logger.info("\t{:<10}  {:>12}".format('ipmitool', ipmitool_version))
 
-        if eval(yaml.__version__.replace('.', ',')) < (5, 4, 1):
+        if eval(yaml.__version__.replace('.', ',')) < (5, 3, 0):
             self.logger.error("\n\tERROR: Python or python packages do not meet minimum version requirement.")
-            self.logger.error("\tERROR: PyYAML version 5.4.1 or higher is needed.\n")
+            self.logger.error("\tERROR: PyYAML version 5.3.0 or higher is needed.\n")
             run_env_ok = False
 
         self.logger.info("\t---- End script host environment ----")
