@@ -116,6 +116,38 @@ Enable IPMI Via GUI And Verify Persistency On BMC Reboot
     Wait Until Keyword Succeeds  2 min  30 sec  Run IPMI Standard Command  sel info
 
 
+Disable SSH Via GUI And Verify Persistency On BMC Reboot
+    [Documentation]  Login to GUI Policies page,disable SSH and
+    ...  verify that SSH to BMC stops working after disabling SSH on BMC reboot.
+    [Tags]  Disable_SSH_Via_GUI_And_Verify_Persistency_On_BMC_Reboot
+
+    Set Policy Via GUI  SSH  Disabled
+
+    Reboot BMC via GUI
+
+    ${status}=  Run Keyword And Return Status
+    ...  Wait Until Keyword Succeeds  10 sec  5 sec  Open Connection And Login
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=SSH login still working after disabling SSH.
+
+
+Disable IPMI Via GUI And Verify Persistency On BMC Reboot
+    [Documentation]  Login to GUI Policies page,disable IPMI and
+    ...  verify persistency of IPMI command doesnot work on BMC reboot.
+    [Tags]  Disable_IPMI_Via_GUI_And_Verify_Persistency_On_BMC_Reboot
+
+    Set Policy Via GUI  IPMI  Disabled
+
+    Reboot BMC via GUI
+
+    ${status}=  Run Keyword And Return Status
+    ...  Wait Until Keyword Succeeds  10 sec  5 sec  Run IPMI Standard Command  sel info
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=IPMI command is working after disabling IPMI.
+
+
 *** Keywords ***
 
 Test Setup Execution
