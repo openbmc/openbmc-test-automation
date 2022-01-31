@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e7ca94c_ce88cf6d",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-01-31T11:31:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c065171_722225c8",
+      "range": {
+        "startLine": 137,
+        "startChar": 8,
+        "endLine": 137,
+        "endChar": 15
+      },
+      "revId": "e0693b7f050fd1f138adcc4f10fe3dd5019744ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0336f3da_33688a2b",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-01-13T12:41:12Z",
       "side": 1,
       "message": "use dns server or name server for uniformity",
+      "range": {
+        "startLine": 140,
+        "startChar": 17,
+        "endLine": 140,
+        "endChar": 39
+      },
+      "revId": "e0693b7f050fd1f138adcc4f10fe3dd5019744ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33236daa_384cf4d9",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-01-31T11:31:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0336f3da_33688a2b",
       "range": {
         "startLine": 140,
         "startChar": 17,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a68c0548_8ab62226",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-01-31T11:31:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b443deb_2b24d472",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 7
+      },
+      "revId": "e0693b7f050fd1f138adcc4f10fe3dd5019744ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d00f25a0_bfc270f8",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-01-13T12:41:12Z",
       "side": 1,
       "message": "even for error scenarios, need to check whether it has configured that in backend",
+      "range": {
+        "startLine": 158,
+        "startChar": 69,
+        "endLine": 158,
+        "endChar": 88
+      },
+      "revId": "e0693b7f050fd1f138adcc4f10fe3dd5019744ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06900850_1e3545eb",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-01-31T11:31:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d00f25a0_bfc270f8",
       "range": {
         "startLine": 158,
         "startChar": 69,
@@ -133,6 +229,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0de0d903_4fe71965",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-01-31T11:31:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a23b2ca_ebdf9531",
+      "range": {
+        "startLine": 168,
+        "startChar": 7,
+        "endLine": 168,
+        "endChar": 17
+      },
+      "revId": "e0693b7f050fd1f138adcc4f10fe3dd5019744ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31a9e9cb_c7b32747",
@@ -146,6 +266,30 @@
       "writtenOn": "2022-01-13T12:41:12Z",
       "side": 1,
       "message": "deleted??",
+      "range": {
+        "startLine": 175,
+        "startChar": 27,
+        "endLine": 175,
+        "endChar": 37
+      },
+      "revId": "e0693b7f050fd1f138adcc4f10fe3dd5019744ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ca46787_d7dba6ea",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-01-31T11:31:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31a9e9cb_c7b32747",
       "range": {
         "startLine": 175,
         "startChar": 27,
@@ -179,6 +323,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc7f01fe_2f11d6ef",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-01-31T11:31:35Z",
+      "side": 1,
+      "message": "Modified keyword.",
+      "parentUuid": "da2d5581_9b2e7cd1",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 7
+      },
+      "revId": "e0693b7f050fd1f138adcc4f10fe3dd5019744ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd48ec87_b511d9ef",
@@ -192,6 +360,30 @@
       "writtenOn": "2022-01-13T12:41:12Z",
       "side": 1,
       "message": "??",
+      "range": {
+        "startLine": 190,
+        "startChar": 1,
+        "endLine": 190,
+        "endChar": 35
+      },
+      "revId": "e0693b7f050fd1f138adcc4f10fe3dd5019744ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bfa0a14_a127740b",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-01-31T11:31:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd48ec87_b511d9ef",
       "range": {
         "startLine": 190,
         "startChar": 1,
