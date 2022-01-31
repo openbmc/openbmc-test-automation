@@ -33,6 +33,9 @@ ${REST_PASSWORD}       0penBmc
 ${OPENBMC_ADMIN_PASSWORD}  0penBmc
 ${SERVICE_USER_PASSWORD}   0penBmc
 
+# For users priviledge admin or sudo.
+${USER_TYPE}          ${EMPTY}
+
 ${CHASSIS_ID}  chassis
 ${COMPONENT_NAME_OF_POWER_SUPPLY}  powersupply
 
