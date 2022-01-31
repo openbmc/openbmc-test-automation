@@ -75,7 +75,7 @@ Verify Existence Of All Sections In Server Power Operations Page
 
 Verify Existence Of All Input Boxes In Host Os Boot Settings
     [Documentation]  Verify existence of all input boxes in host os boot settings.
-    [Tags]  Verify_Existence_Of_Input_Boxes_In_Host_Os_Boot_Settings
+    [Tags]  Verify_Existence_Of_All_Input_Boxes_In_Host_Os_Boot_Settings
 
     # Added a delay for the page to load boot settings section.
     Wait Until Page Contains  Boot settings  timeout=5
@@ -107,7 +107,7 @@ Verify System State At Power On
     ...  AND  Navigate to Server Power Operation Page
 
     Wait Until Keyword Succeeds  15 sec  5 sec   Element Should Contain   ${xpath_current_power_state}  On
-   
+
 Verify PowerOn Button Should Present At Power Off
     [Documentation]  Verify existence of poweron button at power off.
     [Tags]  Verify_PowerOn_Button_Should_Present_At_Power_Off

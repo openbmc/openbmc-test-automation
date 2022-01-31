@@ -21,7 +21,7 @@ ${xpath_profile_settings_save_button}  //*[@data-test-id='profileSettings-button
 
 Verify Navigation To Profile Settings Page
     [Documentation]  Verify navigation to profile settings page.
-    [Tags]  Verify_Navigation_To_Profile_Settings_page
+    [Tags]  Verify_Navigation_To_Profile_Settings_Page
 
     Page Should Contain  Profile settings
 

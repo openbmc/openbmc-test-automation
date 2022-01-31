@@ -28,7 +28,7 @@ Verify Navigation To Sensors Page
 
 Verify Existence Of All Sections In Sensor Page
     [Documentation]  Verify existence of all sections in sensor page.
-    [Tags]  Verify_Existence_Of_All_Sections_In_Event_Logs_Page
+    [Tags]  Verify_Existence_Of_All_Sections_In_Sensor_Page
 
     Page Should Contain  Sensors
 

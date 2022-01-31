@@ -50,7 +50,7 @@ Verify Existence Of All Buttons In SNMP Alerts Page
 
 Verify Existence Of All Fields In Add Destination
     [Documentation]  Verify existence of all buttons and fields in add destination page.
-    [Tags]  Verify_Existence_Of_All_Button_And_Fields_In_Add_Destination
+    [Tags]  Verify_Existence_Of_All_Fields_In_Add_Destination
     [Teardown]  Run Keywords  Click Button  ${xpath_cancel_button}  AND
     ...  Wait Until Keyword Succeeds  10 sec  5 sec
     ...  Refresh GUI And Verify Element Value  ${xpath_snmp_alerts_heading}  SNMP Alerts
@@ -63,7 +63,7 @@ Verify Existence Of All Fields In Add Destination
     Page Should Contain Element  ${xpath_snmp_add_destination_button}
 
 
-Configure SNMP Settings On BMC With NON Default Port Via GUI And Verify
+Configure SNMP Settings On BMC With Non Default Port Via GUI And Verify
     [Documentation]  Configure SNMP settings on BMC with non default port via GUI and verify.
     [Tags]  Configure_SNMP_Settings_On_BMC_With_Non_Default_Port_Via_GUI_And_Verify
     [Teardown]  Delete SNMP Manager Via GUI
@@ -116,7 +116,7 @@ Configure Invalid SNMP Settings On BMC Via GUI And Verify
 
 Configure Multiple SNMP Managers On BMC Via GUI And Verify
     [Documentation]  Configure multiple SNMP managers on BMC via GUI and verify.
-    [Tags]  Configure_Multiple_SNMP_Managerss_With_Default_Port_Via_GUI_And_Verify
+    [Tags]  Configure_Multiple_SNMP_Managers_On_BMC_Via_GUI_And_Verify
     [Template]  Configure Multiple SNMP Managers On BMC With Valid Port Via GUI And Verify
 
     # snmp_manager_ip      snmp_port

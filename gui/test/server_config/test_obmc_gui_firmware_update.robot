@@ -61,7 +61,7 @@ Verify Host Firmware Download
     ${PNOR_IMAGE_FILE_PATH}
     [Template]  Upload Firmware using TFTP Server
     [Documentation]  Verify Host image is download from TFTP server.
-    [Tags]  Verify_HOST_Firmware_Download
+    [Tags]  Verify_Host_Firmware_Download
 
 
 *** Keywords ***

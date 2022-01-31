@@ -32,7 +32,7 @@ Verify Navigation To Date And Time Page
 
 Verify Existence Of All Sections In Date And Time Page
     [Documentation]  Verify existence of all sections in date and time page.
-    [Tags]  Verify_Existence_Of_All_Sections_In_Date_And_Time__Page
+    [Tags]  Verify_Existence_Of_All_Sections_In_Date_And_Time_Page
 
     Page Should Contain  Configure settings
 
@@ -72,9 +72,9 @@ Verify Date And Time From Configuration Section
     Should contain  ${cli_date_time}  ${manual_date}  ${manual_time}
 
 
-Verify Display Of Date and Time In GUI Page
+Verify Display Of Date And Time In GUI Page
      [Documentation]  Get date and time from Redfish and verify it via GUI date and time page.
-     [Tags]  Verify_Display_Of_Date_And_Time_In_Gui_Page
+     [Tags]  Verify_Display_Of_Date_And_Time_In_GUI_Page
 
     # Set Default timezone in profile settings page.
     Set Timezone In Profile Settings Page  Default

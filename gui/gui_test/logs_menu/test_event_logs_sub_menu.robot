@@ -46,7 +46,7 @@ Verify Existence Of All Buttons In Event Logs Page
     Page Should Contain Element  ${xpath_event_severity_critical}  limit=1
 
 
-Verify Existence Of All Input boxes In Event Logs Page
+Verify Existence Of All Input Boxes In Event Logs Page
     [Documentation]  Verify existence of all input boxes in Event Logs page.
     [Tags]  Verify_Existence_Of_All_Input_Boxes_In_Event_Logs_Page
 
