@@ -631,8 +631,8 @@ def get_state(openbmc_host="",
     if 'uptime' in req_states:
         # Sometimes reading uptime results in a blank value. Call with
         # wait_until_keyword_succeeds to ensure a non-blank value is obtained.
-        remote_cmd_buf = "read uptime filler 2>/dev/null < /proc/uptime" +\
-            " && [ ! -z \"${uptime}\" ] && echo ${uptime}"
+        remote_cmd_buf = "bash -c 'read uptime filler 2>/dev/null < /proc/uptime" +\
+            " && [ ! -z \"${uptime}\" ] && echo ${uptime}'"
         cmd_buf = ["BMC Execute Command",
                    re.sub('\\$', '\\$', remote_cmd_buf), 'quiet=1',
                    'test_mode=0', 'time_out=5']
