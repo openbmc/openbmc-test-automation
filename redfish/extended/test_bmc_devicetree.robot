@@ -87,7 +87,7 @@ Check BMC FSI Compatible Property Is Set
    gpio-fsi/compatible
 
 
-Check BMC GPIO-FSI Name Property Is Set
+Check BMC GPIO FSI Name Property Is Set
    [Documentation]  Verify if the BMC GPIO-FSI name property is populated.
    [Tags]  Check_BMC_GPIO_FSI_Name_Property_Is_Set
    [Template]  Template Check Property
@@ -96,7 +96,7 @@ Check BMC GPIO-FSI Name Property Is Set
    gpio-fsi/name
 
 
-Check BMC GPIO-FSI Compatible Property Is Set
+Check BMC GPIO FSI Compatible Property Is Set
    [Documentation]  Verify if the BMC GPIO-FSI compatible property is populated.
    [Tags]  Check_BMC_GPIO_FSI_Compatible_Property_Is_Set
    [Template]  Template Check Property
@@ -105,20 +105,20 @@ Check BMC GPIO-FSI Compatible Property Is Set
    gpio-fsi/compatible
 
 
-Check BMC GPIO-keys Name Property Is Set
+Check BMC GPIO Keys Name Property Is Set
    [Documentation]  Verify if the BMC GPIO-keys name property is
    ...  populated.
-   [Tags]  Check_BMC_GPIO_keys_Name_Property_Is_Set
+   [Tags]  Check_BMC_GPIO_Keys_Name_Property_Is_Set
    [Template]  Template Check Property
 
    #Property
    gpio-keys/name
 
 
-Check BMC GPIO-keys Compatible Property Is Set
+Check BMC GPIO Keys Compatible Property Is Set
    [Documentation]  Verify if the BMC GPIO-keys compatible property is
    ...  populated.
-   [Tags]  Check_BMC_GPIO_keys_Compatible_Property_Is_Set
+   [Tags]  Check_BMC_GPIO_Keys_Compatible_Property_Is_Set
    [Template]  Template Check Property
 
    #Property

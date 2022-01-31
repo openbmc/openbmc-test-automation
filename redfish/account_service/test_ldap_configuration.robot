@@ -89,7 +89,7 @@ Verify LDAP Login With Correct AuthenticationType
 
 Verify LDAP Config Update With Incorrect AuthenticationType
     [Documentation]  Verify that invalid AuthenticationType is not updated.
-    [Tags]  Verify_LDAP_Update_With_Incorrect_AuthenticationType
+    [Tags]  Verify_LDAP_Config_Update_With_Incorrect_AuthenticationType
 
     ${body}=  Catenate  {'${ldap_type}': {'Authentication': {'AuthenticationType':'KerberosKeytab'}}}
 
@@ -299,7 +299,7 @@ Verify LDAP Type Update And LDAP Login
     Redfish Verify LDAP Login
 
 
-Verify Authorization With Null Privilege
+Verify LDAP Authorization With Null Privilege
     [Documentation]  Verify the failure of LDAP authorization with empty
     ...  privilege.
     [Tags]  Verify_LDAP_Authorization_With_Null_Privilege
@@ -309,7 +309,7 @@ Verify Authorization With Null Privilege
     ...  [${HTTP_FORBIDDEN}]
 
 
-Verify Authorization With Invalid Privilege
+Verify LDAP Authorization With Invalid Privilege
     [Documentation]  Verify that LDAP user authorization with wrong privilege
     ...  fails.
     [Tags]  Verify_LDAP_Authorization_With_Invalid_Privilege
@@ -512,7 +512,7 @@ Delete IP Address Via Different User Roles And Verify
 
 Read Network Configuration Via Different User Roles And Verify
     [Documentation]  Read network configuration via different user roles and verify.
-    [Tags]  Read_Network_configuration_Via_Different_User_Roles_And_Verify
+    [Tags]  Read_Network_Configuration_Via_Different_User_Roles_And_Verify
     [Teardown]  Restore LDAP Privilege
 
     [Template]  Update LDAP User Role And Read Network Configuration

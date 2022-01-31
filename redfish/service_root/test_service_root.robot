@@ -79,7 +79,7 @@ Verify Redfish Invalid URL Response Code
     Redfish.Logout
 
 
-Delete Redfish Session Using Valid login
+Delete Redfish Session Using Valid Login
     [Documentation]  Delete a session using valid login.
     [Tags]  Delete_Redfish_Session_Using_Valid_Login
 

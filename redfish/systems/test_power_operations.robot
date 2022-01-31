@@ -33,7 +33,7 @@ Verify Redfish BMC PowerOn With OCC State
     Verify OCC State
 
 
-Verify Redfish BMC PowerOn
+Verify Redfish Host PowerOn
     [Documentation]  Verify Redfish host power on operation.
     [Tags]  Verify_Redfish_Host_PowerOn
 
@@ -45,14 +45,14 @@ Verify Redfish BMC PowerOn
     Run Keyword If  ${additional_power_check} == ${1}  Power Check
 
 
-Verify Redfish BMC GracefulRestart
+Verify Redfish Host GracefulRestart
     [Documentation]  Verify Redfish host graceful restart operation.
     [Tags]  Verify_Redfish_Host_GracefulRestart
 
     RF SYS GracefulRestart
 
 
-Verify Redfish BMC PowerOff
+Verify Redfish Host PowerOff
     [Documentation]  Verify Redfish host power off operation.
     [Tags]  Verify_Redfish_Host_PowerOff
 

@@ -34,7 +34,7 @@ ${zero_power}           0
 
 Escale Base Test Inactive Monitoring
     [Documentation]  Run base power tests with DCMI power monitoring off.
-    [Tags]  Escale_Base_Test_Deactive_Monitoring
+    [Tags]  Escale_Base_Test_Inactive_Monitoring
 
     Deactivate DCMI Power And Verify
     Verify Power Limits
