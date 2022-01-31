@@ -4,6 +4,7 @@ r"""
 This module provides many valuable bmc ssh functions such as bmc_execute_command.
 """
 
+import os
 import gen_valid as gv
 import gen_robot_ssh as grs
 from robot.libraries.BuiltIn import BuiltIn
@@ -62,6 +63,10 @@ def bmc_execute_command(cmd_buf,
                             'timeout': '25.0', 'prompt': '# ', 'port': ssh_port}
     login_args = {'username': openbmc_username, 'password': openbmc_password}
 
+    openbmc_user_type = os.environ.get('USER_TYPE', "") or \
+        BuiltIn().get_variable_value("${USER_TYPE}", default="")
+    if openbmc_user_type == 'sudo':
+        cmd_buf = 'sudo ' + cmd_buf
     return grs.execute_ssh_command(cmd_buf, open_connection_args, login_args,
                                    print_out, print_err, ignore_err, fork,
                                    quiet, test_mode, time_out)
@@ -78,7 +83,6 @@ def os_execute_command(cmd_buf,
                        os_host="",
                        os_username="",
                        os_password=""):
-
     r"""
     Run the given command in an OS SSH session and return the stdout, stderr and the return code.
 
