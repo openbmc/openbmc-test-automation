@@ -286,7 +286,7 @@ Configure Less Byte Netmask
 
 Configure Threshold Netmask And Verify
     [Documentation]  Configure threshold netmask and verify.
-    [Tags]  Configure_Threshold_Netmask_And_verify
+    [Tags]  Configure_Threshold_Netmask_And_Verify
     [Teardown]  Run Keywords
     ...   Delete IP Address  ${test_ipv4_addr}  AND  Test Teardown Execution
 
@@ -294,7 +294,7 @@ Configure Threshold Netmask And Verify
 
 Configure Lowest Netmask And Verify
     [Documentation]  Configure lowest netmask and verify.
-    [Tags]  Configure_Lowest_Netmask_And_verify
+    [Tags]  Configure_Lowest_Netmask_And_Verify
     [Teardown]  Run Keywords
     ...   Delete IP Address  ${test_ipv4_addr}  AND  Test Teardown Execution
 
@@ -488,7 +488,7 @@ Modify IPv4 Address And Verify
 
 Configure Invalid Values For DNS Server
     [Documentation]  Configure invalid values for DNS server and expect an error.
-    [Tags]  Configure_Invalid_Value_For_DNS_Server
+    [Tags]  Configure_Invalid_Values_For_DNS_Server
     [Setup]  DNS Test Setup Execution
     [Template]  Configure Static Name Servers
     [Teardown]  Run Keywords

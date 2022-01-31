@@ -14,7 +14,7 @@ Test Teardown    Test Teardown Execution
 
 Verify Redfish Update Service Enabled
     [Documentation]  Verify "ServiceEnabled" is enabled.
-    [Tags]  Verify_Update_Service_Enabled
+    [Tags]  Verify_Redfish_Update_Service_Enabled
 
     # Example:
     # "HttpPushUri": "/redfish/v1/UpdateService",

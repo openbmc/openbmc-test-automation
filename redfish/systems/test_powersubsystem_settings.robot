@@ -50,7 +50,7 @@ Verify Allowable Power Mode Settings
     Valid List  allowed_power_modes  valid_values=${VALID_POWER_MODES}
 
 
-Verify Allowable Power Mode Settings Switch
+Verify Allowable Power Mode Settings Switch At Runtime
     [Documentation]  Check the allowable power modes are set successfully at runtime.
     [Tags]  Verify_Allowable_Power_Mode_Settings_Switch_At_Runtime
     [Template]  Set and Verify Power Mode Switches
@@ -83,7 +83,7 @@ Verify State Of PowerSubsystem PowerSupplies
 
 Verify PowerSubsystem Efficiency Percent For All PowerSupplies
     [Documentation]  Verify the efficiency percent for all powersupplies.
-    [Tags]  Verify_PowerSubsystem_Efficiency_Percent_For_PowerSupplies
+    [Tags]  Verify_PowerSubsystem_Efficiency_Percent_For_All_PowerSupplies
 
     ${total_num_supplies}=  Get Total Number Of PowerSupplies
     Rprint Vars  total_num_supplies

@@ -215,7 +215,7 @@ Verify Admin User Privilege
 
 Verify Operator User Privilege
     [Documentation]  Verify operator user privilege.
-    [Tags]  Verify_operator_User_Privilege
+    [Tags]  Verify_Operator_User_Privilege
 
     Redfish Create User  admin_user  TestPwd123  Administrator  ${True}
     Redfish Create User  operator_user  TestPwd123  Operator  ${True}

@@ -129,7 +129,7 @@ Verify Error While Uploading Same CA Certificate Via Redfishtool
 
 Install Server Certificate Using Redfishtool And Verify Via OpenSSL
     [Documentation]  Install server certificate using Redfishtool and verify via OpenSSL.
-    [Tags]  Install_Server_Certificate_Using_Redfishtool_And_Verify_Via_OpenSSL.
+    [Tags]  Install_Server_Certificate_Using_Redfishtool_And_Verify_Via_OpenSSL
 
     ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate Valid Privatekey
     ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}

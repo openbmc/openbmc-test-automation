@@ -27,7 +27,7 @@ Configure SNMP Manager On BMC And Verify
     Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
 
 
-Configure SNMP Manager On BMC With Non-default Port And Verify
+Configure SNMP Manager On BMC With Non Default Port And Verify
     [Documentation]  Configure SNMP Manager On BMC And Verify.
     [Tags]  Configure_SNMP_Manager_On_BMC_With_Non_Default_Port_And_Verify
     [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
@@ -144,7 +144,7 @@ Verify SNMP SysUpTime On BMC Reboot
     Should Be True  ${uptime} <= 1  msg=SNMP SysUpTime is not reset on reboot
 
 
-Configure Multiple SNMP Managers With Non-default Port And Verify
+Configure Multiple SNMP Managers With Non Default Port And Verify
     [Documentation]  Configure multiple SNMP Managers with non-default port And Verify.
     [Tags]  Configure_Multiple_SNMP_Managers_With_Non_Default_Port_And_Verify
     [Teardown]  Run Keywords

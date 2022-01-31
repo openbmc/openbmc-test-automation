@@ -38,7 +38,7 @@ ${image_id}            ${EMPTY}
 
 *** Test Cases ***
 
-Redfish Failure to Upload BMC Image With Bad Manifest
+Redfish Failure To Upload BMC Image With Bad Manifest
     [Documentation]  Upload a BMC firmware with a bad MANFIEST file.
     [Tags]  Redfish_Failure_To_Upload_BMC_Image_With_Bad_Manifest
     [Template]  Redfish Bad Firmware Update
@@ -47,7 +47,7 @@ Redfish Failure to Upload BMC Image With Bad Manifest
     bmc_bad_manifest.ubi.mtd.tar
 
 
-Redfish Failure to Upload Empty BMC Image
+Redfish Failure To Upload Empty BMC Image
     [Documentation]  Upload a BMC firmware with no kernel image.
     [Tags]  Redfish_Failure_To_Upload_Empty_BMC_Image
     [Template]  Redfish Bad Firmware Update
@@ -56,7 +56,7 @@ Redfish Failure to Upload Empty BMC Image
     bmc_nokernel_image.ubi.mtd.tar
 
 
-Redfish Failure to Upload Host Image With Bad Manifest
+Redfish Failure To Upload Host Image With Bad Manifest
     [Documentation]  Upload a PNOR firmware with a bad MANIFEST file.
     [Tags]  Redfish_Failure_To_Upload_Host_Image_With_Bad_Manifest
     [Template]  Redfish Bad Firmware Update
@@ -65,7 +65,7 @@ Redfish Failure to Upload Host Image With Bad Manifest
     pnor_bad_manifest.pnor.squashfs.tar
 
 
-Redfish Failure to Upload Empty Host Image
+Redfish Failure To Upload Empty Host Image
     [Documentation]  Upload a PNOR firmware with no kernel Image.
     [Tags]  Redfish_Failure_To_Upload_Empty_Host_Image
     [Template]  Redfish Bad Firmware Update
@@ -74,7 +74,7 @@ Redfish Failure to Upload Empty Host Image
     pnor_nokernel_image.pnor.squashfs.tar
 
 
-Redfish TFTP Failure to Upload BMC Image With Bad Manifest
+Redfish TFTP Failure To Upload BMC Image With Bad Manifest
     [Documentation]  Upload a BMC firmware with a bad MANFIEST file via TFTP.
     [Tags]  Redfish_TFTP_Failure_To_Upload_BMC_Image_With_Bad_Manifest
     [Template]  Redfish TFTP Bad Firmware Update
@@ -83,7 +83,7 @@ Redfish TFTP Failure to Upload BMC Image With Bad Manifest
     bmc_bad_manifest.ubi.mtd.tar
 
 
-Redfish TFTP Failure to Upload Empty BMC Image
+Redfish TFTP Failure To Upload Empty BMC Image
     [Documentation]  Upload a BMC firmware with no kernel image via TFTP.
     [Tags]  Redfish_TFTP_Failure_To_Upload_Empty_BMC_Image
     [Template]  Redfish TFTP Bad Firmware Update
@@ -92,7 +92,7 @@ Redfish TFTP Failure to Upload Empty BMC Image
     bmc_nokernel_image.ubi.mtd.tar
 
 
-Redfish TFTP Failure to Upload Host Image With Bad Manifest
+Redfish TFTP Failure To Upload Host Image With Bad Manifest
     [Documentation]  Upload a PNOR firmware with a bad MANIFEST file via TFTP.
     [Tags]  Redfish_TFTP_Failure_To_Upload_Host_Image_With_Bad_Manifest
     [Template]  Redfish TFTP Bad Firmware Update
@@ -101,7 +101,7 @@ Redfish TFTP Failure to Upload Host Image With Bad Manifest
     pnor_bad_manifest.pnor.squashfs.tar
 
 
-Redfish TFTP Failure to Upload Empty Host Image
+Redfish TFTP Failure To Upload Empty Host Image
     [Documentation]  Upload a PNOR firmware with no kernel Image via TFTP.
     [Tags]  Redfish_TFTP_Failure_To_Upload_Empty_Host_Image
     [Template]  Redfish TFTP Bad Firmware Update
