@@ -53,7 +53,7 @@ Power Off Via XCAT And Validate
 
 Add Nodes To Group List
     [Documentation]  Add BMC nodes into group.
-    [Tags]  Move_Added_Nodes_To_Group
+    [Tags]  Add_Nodes_To_Group_List
 
     # Add BMC nodes to group and validate.
     FOR  ${bmc}  IN  @{BMC_LIST}
@@ -110,7 +110,7 @@ Power Off Group And Validate
 Continuous Node Power Status
     [Documentation]  Continuously get the power status.
     # This keyword verifies the REST connectivity between XCAT and the BMC node.
-    [Tags]  Continuos_Node_Power_Status
+    [Tags]  Continuous_Node_Power_Status
 
     # Performing this operation only on one BMC node.
 
@@ -150,7 +150,7 @@ Get Temperature Reading Via XCAT
     END
 
 
-Get Fanspeed Via XCAT
+Get Fanspeed Reading Via XCAT
     [Documentation]  Get fanspeed via XCAT.
     [Tags]  Get_Fanspeed_Reading_Via_XCAT
 
@@ -171,7 +171,7 @@ Get Fanspeed Via XCAT
 
 Get Voltage Reading Via XCAT
     [Documentation]  Get voltage via XCAT.
-    [Tags]  Get_Voltage_Via_XCAT
+    [Tags]  Get_Voltage_Reading_Via_XCAT
 
     # Sample output of the keyword:
     # node1: No attributes returned from the BMC.

@@ -20,7 +20,7 @@ Force Tags             IPMI_Network_Verify
 
 Retrieve IP Address Via IPMI And Verify Using Redfish
     [Documentation]  Retrieve IP address using IPMI and verify using Redfish.
-    [Tags]  Retrieve_IP_Address_Via_IPMI_And_Verify_Using_Redish
+    [Tags]  Retrieve_IP_Address_Via_IPMI_And_Verify_Using_Redfish
 
     ${active_channel_config}=  Get Active Channel Config
     FOR  ${channel_number}  IN  @{active_channel_config.keys()}

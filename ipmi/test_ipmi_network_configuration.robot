@@ -50,7 +50,7 @@ Verify IPMI Inband Network Configuration
 
 Disable VLAN Via IPMI When Multiple VLAN Exist On BMC
     [Documentation]  Disable  VLAN Via IPMI When Multiple VLAN Exist On BMC.
-    [Tags]   Disable_VLAN_Via_IPMI_When_LAN_And_VLAN_Exist_On_BMC
+    [Tags]   Disable_VLAN_Via_IPMI_When_Multiple_VLAN_Exist_On_BMC
 
     FOR  ${vlan_id}  IN  @{vlan_ids}
       Create VLAN  ${vlan_id}

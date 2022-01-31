@@ -42,7 +42,7 @@ Verify Software Field Mode
 Attempt To Disable Field Mode Via REST And Verify
     [Documentation]  Attempt to disable field mode with REST and verify that
     ...              it remains enabled.
-    [Tags]  Attempt_To_Disable_Field_Mode_Via_REST
+    [Tags]  Attempt_To_Disable_Field_Mode_Via_REST_And_Verify
 
     # This test case doesn't actually disable field mode. It attempts to, but
     # verifies that the FieldModeEnabled property keeps its value of '1'

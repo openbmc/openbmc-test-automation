@@ -19,7 +19,7 @@ ${HOST_SW_PATH}  ${HOST_INVENTORY_URI}system/chassis
 Verify Software Purposes
     [Documentation]  Verify that all software objects have a valid 'Purpose'
     ...              field.
-    [Tags]  Verify_Software_Purpose
+    [Tags]  Verify_Software_Purposes
 
     ${object_uris}=  Read Properties  ${SOFTWARE_VERSION_URI}list
 
@@ -106,7 +106,7 @@ Host Software Path
 Host Software RequestedActivation
     [Documentation]  Veriify host images have valid 'RequestedActivation'
     ...  properties.
-    [Tags]  BMC_Software_RequestedActivation
+    [Tags]  Host_Software_RequestedActivation
     [Template]  Verify Software RequestedActivation
 
     # Software Purpose

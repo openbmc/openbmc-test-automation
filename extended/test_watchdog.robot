@@ -71,7 +71,7 @@ Modify And Verify Watchdog Timer Interval
     Should Be Equal As Strings  ${modified_time_interval}  ${random_int}
 
 
-Modify and verify Watchdog TimeRemaining
+Modify And Verify Watchdog TimeRemaining
     [Documentation]  Modify and verify watchdog 'TimeRemaining'.
     [Tags]  Modify_And_Verify_Watchdog_TimeRemaining
 

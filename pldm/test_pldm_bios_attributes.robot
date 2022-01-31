@@ -170,7 +170,7 @@ Verify Set BIOS Enumeration Attribute Type
     [Documentation]  Verify set BIOS enumeration attribute type for various BIOS
     ...              attribute handle with random values with in the range of
     ...              default optional values.
-    [Tags]  Verify_BIOS_Enumeration_Attribute_Type
+    [Tags]  Verify_Set_BIOS_Enumeration_Attribute_Type
 
     ${attr_val_data}=  GetBIOSEnumAttributeOptionalValues  ${attr_table_data}
 

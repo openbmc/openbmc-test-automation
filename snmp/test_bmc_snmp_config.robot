@@ -43,7 +43,7 @@ Configure SNMP Manager On BMC And Verify
 
     Delete SNMP Manager And Object  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
 
-Configure SNMP Manager On BMC With Non-default Port And Verify
+Configure SNMP Manager On BMC With Non Default Port And Verify
     [Documentation]  Configure SNMP Manager On BMC And Verify.
     [Tags]  Configure_SNMP_Manager_On_BMC_With_Non_Default_Port_And_Verify
 
@@ -104,7 +104,7 @@ Configure Multiple SNMP Managers And Verify
     Delete SNMP Manager And Object  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
     Delete SNMP Manager And Object  ${SNMP_MGR2_IP}  ${SNMP_DEFAULT_PORT}
 
-Configure Multiple SNMP Managers With Non-default Port And Verify
+Configure Multiple SNMP Managers With Non Default Port And Verify
     [Documentation]  Configure multiple SNMP Managers with non-default port And Verify.
     [Tags]  Configure_Multiple_SNMP_Managers_With_Non_Default_Port_And_Verify
 

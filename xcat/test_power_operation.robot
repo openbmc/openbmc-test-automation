@@ -30,7 +30,7 @@ Verify Power Off Via XCAT
     Wait Until Keyword Succeeds  6 min  10 sec  Is Host Off
 
 
-Verify BMC State via XCAT
+Verify BMC State Via XCAT
     [Documentation]  Verify BMC state using REST and XCAT.
     [Tags]  Verify_BMC_State_Via_XCAT
 

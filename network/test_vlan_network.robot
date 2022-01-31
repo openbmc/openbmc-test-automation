@@ -156,7 +156,7 @@ Add Multiple VLANs Via REST And Verify
 
 Delete Multiple IPs On VLAN And Verify
     [Documentation]  Delete multiple IPs on VLAN and verify each via REST and IPMI.
-    [Tags]  Delete_Multiple_IP_On_VLAN_Via_REST
+    [Tags]  Delete_Multiple_IPs_On_VLAN_And_Verify
     [Setup]  Run Keywords  Test Setup Execution  AND  Create VLAN  ${vlan_id}
     [Teardown]  Delete VLANs  [${vlan_id}]
 

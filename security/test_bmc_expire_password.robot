@@ -48,7 +48,7 @@ Expire Root Password And Check SSH Access Fails
 
 Expire And Change Root User Password And Access Via SSH
     [Documentation]   Expire and change root user password and access via SSH.
-    [Tags]  Expire_Root_User_Password_And_Access_Via_SSH
+    [Tags]  Expire_And_Change_Root_User_Password_And_Access_Via_SSH
     [Teardown]  Run Keywords  Wait Until Keyword Succeeds  1 min  10 sec
     ...  Restore Default Password For Root User  AND  FFDC On Test Case Fail
 

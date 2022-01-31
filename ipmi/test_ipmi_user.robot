@@ -87,7 +87,7 @@ Verify IPMI User List
 
 Verify IPMI User Creation With Valid Name And ID
     [Documentation]  Create user via IPMI and verify.
-    [Tags]  Test_IPMI_User_Creation_With_Valid_Name_And_ID
+    [Tags]  Verify_IPMI_User_Creation_With_Valid_Name_And_ID
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
     ...  Delete Created User  ${random_userid}
 
