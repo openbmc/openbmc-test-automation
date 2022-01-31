@@ -62,6 +62,10 @@ def bmc_execute_command(cmd_buf,
                             'timeout': '25.0', 'prompt': '# ', 'port': ssh_port}
     login_args = {'username': openbmc_username, 'password': openbmc_password}
 
+    openbmc_user_type = BuiltIn().get_variable_value("${USER_TYPE}",
+                                                    default="")
+    if openbmc_user_type.islower() == "sudo":
+        cmd_buf = 'sudo ' + cmd_buf
     return grs.execute_ssh_command(cmd_buf, open_connection_args, login_args,
                                    print_out, print_err, ignore_err, fork,
                                    quiet, test_mode, time_out)
