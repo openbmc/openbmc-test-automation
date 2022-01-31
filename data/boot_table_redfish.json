@@ -59,7 +59,7 @@
         },
         "bmc_reboot": 0,
         "method_type": "keyword",
-        "method": "BMC Execute Command  export PDBG_DTB=/var/lib/phosphor-software-manager/pnor/rw/DEVTREE;/usr/bin/istep  fork=${1}"
+        "method": "BMC Execute Command  bash -c 'export PDBG_DTB=/var/lib/phosphor-software-manager/pnor/rw/DEVTREE;/usr/bin/istep'  fork=${1}"
     },
     "Redfish Power Off": {
         "start": {
