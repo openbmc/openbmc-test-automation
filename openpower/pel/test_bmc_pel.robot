@@ -509,7 +509,7 @@ Verify Error Logging Rotation Policy
 
 Verify Error Logging Rotation Policy With All Types Of Errors
     [Documentation]  Verify error logging rotation policy with all types of errors.
-    [Tags]  Verify_Error_Logging_Rotation_Policy_With_All_Types_Errors
+    [Tags]  Verify_Error_Logging_Rotation_Policy_With_All_Types_Of_Errors
     [Template]  Error Logging Rotation Policy
 
     # Error logs to be created                                           % of total logging space when error
@@ -580,7 +580,7 @@ Verify Old Logs Are Deleted When Count Crosses Max
 
 Verify Reverse Order Of PEL Logs
     [Documentation]  Verify PEL command to output PEL logs in reverse order.
-    [Tags]  Verify_Reverse_PEL_Logs
+    [Tags]  Verify_Reverse_Order_Of_PEL_Logs
 
     Redfish Purge Event Log
 

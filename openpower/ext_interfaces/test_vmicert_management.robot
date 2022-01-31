@@ -46,9 +46,9 @@ Get CSR Request Signed By VMI And Verify
     noaccess_user        TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
 
 
-Get Root Certificate Using Different Privilege Users Roles
+Get Root Certificate Using Different Privilege Users Role
     [Documentation]  Get root certificate using different users.
-    [Tags]  Get_Root_Certificate_Using_Different_Users
+    [Tags]  Get_Root_Certificate_Using_Different_Privilege_Users_Role
     [Template]  Get Root Certificate
 
     # username     password    force_create  valid_csr  valid_status_code
@@ -67,7 +67,7 @@ Get Root Certificate Using Different Privilege Users Roles
 
 Send CSR Request When VMI Is Off And Verify
     [Documentation]  Send CSR signing request to VMI when it is off and expect an error.
-    [Tags]  Get_CSR_Request_When_VMI_Is_Off_And_verify
+    [Tags]  Send_CSR_Request_When_VMI_Is_Off_And_Verify
     [Setup]  Redfish Power Off
     [Teardown]  Run keywords  Redfish Power On  stack_mode=skip  AND  FFDC On Test Case Fail
     [Template]  Get Certificate Signed By VMI

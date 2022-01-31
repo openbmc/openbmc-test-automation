@@ -110,7 +110,7 @@ Redfish Verify Set BIOS Enumeration Attribute Type
 
     [Documentation]  Validate get and update BIOS attribute optional values
     ...              and set back to original BIOS attribute values using Redfish.
-    [Tags]  Redfish_Verify_BIOS_Enumeration_Attribute_Type
+    [Tags]  Redfish_Verify_Set_BIOS_Enumeration_Attribute_Type
 
 
     # Fetch BIOS attribute optional values from pldmtool getbiostable.

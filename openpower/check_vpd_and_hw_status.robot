@@ -17,7 +17,7 @@ ${QUIET}  ${1}
 
 Collect VPD And Hardware Status
     [Documentation]  Collect VPD and hardware status using Redfish.
-    [Tags]  collect_vpd
+    [Tags]  Collect_VPD_And_Hardware_Status
     [Setup]  Redfish.Login
     [Teardown]  Redfish Test Teardown Execution
 
@@ -31,7 +31,7 @@ Collect VPD And Hardware Status
 
 Run VPD Tool
     [Documentation]  Run vpd-tool -i.
-    [Tags]  run_vpd_tool
+    [Tags]  Run_VPD_Tool
 
     BMC Execute Command  vpd-tool -i  print_out=${1}
 

@@ -298,7 +298,7 @@ Verify Pdbg Recoverable Callout Handling For CoreFIR With Threshold 5
 Verify Pdbg Recoverable Callout Handling For CoreFIR With Threshold 1
     [Documentation]  Verify recoverable callout handling for CoreFIR
     ...              with threshold 1 using pdbg tool.
-    [Tags]  Verify_Pdbg_Recoverable_Callout_CoreFIR_Handling_For_With_Threshold_1
+    [Tags]  Verify_Pdbg_Recoverable_Callout_Handling_For_CoreFIR_With_Threshold_1
 
     ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  COREFIR_RECV1
     ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX

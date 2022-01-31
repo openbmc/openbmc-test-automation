@@ -19,7 +19,7 @@ Force Tags          Reboot_RAS
 *** Test Cases ***
 Verify Host Unrecoverable Callout Handling At Reboot
     [Documentation]  Verify host unrecoverable callout handling at reboot.
-    [Tags]  Verify_Unrecoverable_Callout_Handling_At_Reboot
+    [Tags]  Verify_Host_Unrecoverable_Callout_Handling_At_Reboot
 
     ${value}=  Get From Dictionary  ${ERROR_INJECT_DICT}  L2FIR_UE
     ${translated_fir}=  Fetch FIR Address Translation Value  ${value[0]}  EX

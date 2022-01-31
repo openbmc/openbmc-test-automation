@@ -17,7 +17,7 @@ ${QUIET}                       ${1}
 
 Collect Error Logs
     [Documentation]  Check error logs with Redfish.
-    [Tags]  check_errors
+    [Tags]  Collect_Error_Logs
     [Setup]  Redfish.Login
     [Teardown]  Redfish Test Teardown Execution
 

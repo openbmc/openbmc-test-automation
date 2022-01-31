@@ -187,7 +187,7 @@ Verify Persistency Of VMI DHCP IP Configuration After Multiple HOST Reboots
 
 Enable DHCP When Static IP Configured And Verify Static IP
     [Documentation]  Enable DHCP when static ip configured and verify static ip
-    [Tags]  Enable_DHCP_when_Static_IP_Configured_And_Verify_Static_IP
+    [Tags]  Enable_DHCP_When_Static_IP_Configured_And_Verify_Static_IP
     [Setup]  Redfish Power On
     [Teardown]  Test Teardown Execution
 
@@ -293,7 +293,7 @@ Verify To Delete VMI Static IP Address With Different User Roles
 
 Verify To Update VMI Static IP Address With Different User Roles
     [Documentation]  Verify to update vmi static IP address with different user roles.
-    [Tags]  Verify_To_Update_VMI_Static_IP_Address_With_Different_User_Roles_And_Verify
+    [Tags]  Verify_To_Update_VMI_Static_IP_Address_With_Different_User_Roles
     [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
     [Template]  Config VMI Static IP Address Using Different Users
     [Teardown]  Delete BMC Users Using Redfish
@@ -307,7 +307,7 @@ Verify To Update VMI Static IP Address With Different User Roles
 
 Verify To Read VMI Network Configuration With Different User Roles
     [Documentation]  Verify to read vmi network configuration with different user roles.
-    [Tags]  Verify_To_Read_VMI_Network_Configuration_Via_Different_User_Roles
+    [Tags]  Verify_To_Read_VMI_Network_Configuration_With_Different_User_Roles
     [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
     [Template]  Read VMI Static IP Address Using Different Users
     [Teardown]  Delete BMC Users Using Redfish
@@ -347,7 +347,7 @@ Disable DHCP On VMI Network Via Different Users Roles And Verify
 
 Enable And Disable DHCP And Verify
     [Documentation]  verify enable DHCP and disable DHCP.
-    [Tags]  Enabled_And_Disabled_DHCP_Verify
+    [Tags]  Enable_And_Disable_DHCP_And_Verify
 
     Set VMI IPv4 Origin  ${True}
     ${default}=  Set Variable  0.0.0.0
