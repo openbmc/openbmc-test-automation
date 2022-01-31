@@ -76,8 +76,9 @@ def main():
 
     cmd_buf = create_robot_cmd_string("extended/run_keyword.robot", OPENBMC_HOST, SSH_PORT, HTTPS_PORT,
                                       REST_USERNAME, REST_PASSWORD, OPENBMC_USERNAME, OPENBMC_PASSWORD,
-                                      REDFISH_SUPPORT_TRANS_STATE, keyword_string, lib_file_path, quiet,
-                                      test_mode, debug, outputdir, output, log, report)
+                                      IPMI_USERNAME, IPMI_PASSWORD, REDFISH_SUPPORT_TRANS_STATE,
+                                      keyword_string, lib_file_path, quiet, test_mode, debug, outputdir,
+                                      output, log, report)
 
     retry_count = 3
     while not robot_cmd_fnc(cmd_buf):
