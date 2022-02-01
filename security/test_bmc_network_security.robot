@@ -1,6 +1,9 @@
 *** Settings ***
 Documentation  Network stack stress tests using "nping" tool.
 
+# This Suite has few testcases which uses nping with ICMP.
+# ICMP creates a raw socket, which requires root privilege/sudo to run tests.
+
 Resource                ../lib/resource.robot
 Resource                ../lib/bmc_redfish_resource.robot
 Resource                ../lib/ipmi_client.robot
@@ -43,6 +46,16 @@ Send ICMP Netmask Request
     ...  ${OPENBMC_HOST}  ${count}  ${ICMP_PACKETS}  ${NETWORK_PORT}  ${ICMP_NETMASK_REQUEST}
     Should Be Equal As Numbers  ${packet_loss}  100.00
     ...  msg=FAILURE: BMC is not dropping netmask request messages.
+
+Send Continuous ICMP Echo Request To BMC And Verify No Packet Loss
+    [Documentation]  Send ICMP packet type 8 continuously and check no packets are dropped from BMC
+    [Tags]  Send_Continuous_ICMP_Echo_Request_To_BMC_And_Verify_No_Packet_Loss
+
+    # Send ICMP packet type 8 to BMC and check packet loss.
+    ${packet_loss}=  Send Network Packets And Get Packet Loss
+    ...  ${OPENBMC_HOST}  ${iterations}  ${ICMP_PACKETS}  ${NETWORK_PORT}  ${ICMP_ECHO_REQUEST}
+    Should Be Equal As Numbers  ${packet_loss}  0.0
+    ...  msg=FAILURE: BMC is dropping packets.
 
 Send Network Packets Continuously To Redfish Interface
     [Documentation]  Send network packets continuously to Redfish interface and verify stability.
@@ -88,6 +101,26 @@ Send Network Packets Continuously To SSH Port
     SSHLibrary.Open Connection  ${OPENBMC_HOST}
     Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
 
+Test VMI Interface Stability On Sending Continuous Network Packets To A VMI Port
+    [Documentation]  Send network packets continuously to a VMI port and verify bmcweb stability
+    ...  by checking VMI get details.
+    [Tags]  Test_VMI_Interface_Stability_On_Sending_Continuous_Network_Packets_To_A_VMI_Port
+
+    # Send Continuous Network packets to VMI port.
+    ${packet_loss}=  Send Network Packets And Get Packet Loss
+    ...  ${OPENBMC_HOST}  ${iterations}  ${TCP_PACKETS}  ${VMI_Port_1}
+    Should Be Equal As Numbers  ${packet_loss}  0.0
+    ...  msg=FAILURE: BMC is dropping packets.
+
+    # Check if bmcweb VMI Get response is functional.
+
+    Redfish.Login
+
+    ${resp}=  Redfish.Get
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/eth0
+    ...  valid_status_codes=[${HTTP_OK}]
+
+    Redfish.Logout
 
 Flood Redfish Interface With Packets With Flags And Check Stability
     [Documentation]  Send large number of packets with flags to Redfish interface
