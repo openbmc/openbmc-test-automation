@@ -33,7 +33,7 @@ ${REST_PASSWORD}       0penBmc
 ${OPENBMC_ADMIN_PASSWORD}  0penBmc
 ${SERVICE_USER_PASSWORD}   0penBmc
 
-# For users priviledge admin or sudo.
+# For users privilege admin or sudo.
 ${USER_TYPE}          ${EMPTY}
 
 ${CHASSIS_ID}  chassis
