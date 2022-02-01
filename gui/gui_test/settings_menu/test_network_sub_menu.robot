@@ -30,6 +30,13 @@ ${xpath_input_static_dns}                //*[@id="staticDns"]
 ${xpath_cancel_button}                   //button[contains(text(),'Cancel')]
 ${xpath_add_button}                      //button[contains(text(),'Add')]
 
+${test_ipv4_addr}                        10.7.7.7
+${test_subnet_mask}                      255.255.0.0
+${alpha_netmask}                         ff.ff.ff.ff
+${out_of_range_netmask}                  255.256.255.0
+${more_byte_netmask}                     255.255.255.0.0
+${lowest_netmask}                        128.0.0.0
+
 
 *** Test Cases ***
 
@@ -110,6 +117,19 @@ Verify Existence Of All Fields In Static DNS
     Page Should Contain Button  ${xpath_add_button}
 
 
+Configure Netmask Via GUI And Verify
+    [Documentation]  Login to GUI Network page, configure and verify netmask.
+    [Tags]  Configure_Netmask_Via_GUI_And_Verify
+    [Template]  Add Static IP Address And Verify
+
+    # ip_addresses      subnet_masks             expected_status
+    ${test_ipv4_addr}   ${lowest_netmask}        Valid format
+    ${test_ipv4_addr}   ${more_byte_netmask}     Invalid format
+    ${test_ipv4_addr}   ${alpha_netmask}         Invalid format
+    ${test_ipv4_addr}   ${out_of_range_netmask}  Invalid format
+    ${test_ipv4_addr}   ${test_subnet_mask}      Valid format
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -119,3 +139,32 @@ Suite Setup Execution
     Click Element  ${xpath_settings_menu}
     Click Element  ${xpath_network_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network
+
+
+Add Static IP Address And Verify
+    [Documentation]  Login to GUI Network page,add static ip address
+    ...  and verify.
+    [Arguments]  ${ip_address}  ${subnet_mask}  ${expected_status}=Valid format
+
+    # Description of argument(s):
+    # ip_address          IP address to be added (e.g. 10.7.7.7).
+    # subnet_mask         Subnet mask for the IP to be added (e.g. 255.255.0.0).
+    # expected_status     Expected status while adding static ipv4 address
+    # ....                (e.g. Invalid format / Field required).
+
+    Wait Until Keyword Succeeds  30 sec  10 sec  Click Element  ${xpath_add_static_ipv4_address_button}
+
+    Input Text  ${xpath_input_ip_address}  ${ip_address}
+    Input Text  ${xpath_input_subnetmask}  ${subnet_mask}
+
+    Click Element  ${xpath_add_dns_server}
+    Run keyword IF  '${expected_status}' == 'Valid format'
+    #...  Click Element  ${xpath_add_dns_server}
+    ...  Wait Until Page Contains  ${ip_address}  timeout=40sec
+
+    ...  ELSE IF  '${expected_status}' == 'Invalid format'
+    ...  Click Button  ${xpath_cancel_button}
+
+    Wait Until Page Contains Element  ${xpath_add_static_ipv4_address_button}  timeout=10sec
+
+    Validate Network Config On BMC
