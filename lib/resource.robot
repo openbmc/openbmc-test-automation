@@ -73,6 +73,7 @@ ${SSH_PORT}         22
 ${HTTPS_PORT}       443
 ${IPMI_PORT}        623
 ${HOST_SOL_PORT}    2200
+${VMI_Port_1}       30001
 ${OPENBMC_SERIAL_HOST}      ${EMPTY}
 ${OPENBMC_SERIAL_PORT}      ${EMPTY}
 
