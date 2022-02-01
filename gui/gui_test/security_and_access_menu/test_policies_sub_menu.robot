@@ -71,7 +71,7 @@ Disable SSH Via GUI And Verify
 
 Disable IPMI Via GUI And Verify
     [Documentation]  Login to GUI Policies page,disable IPMI and
-    ...  verify that IPMI command doesnot work after disabling IPMI.
+    ...  verify that IPMI command does not work after disabling IPMI.
     [Tags]  Disable_IPMI_Via_GUI_And_Verify
 
     Set Policy Via GUI  IPMI  Disabled
