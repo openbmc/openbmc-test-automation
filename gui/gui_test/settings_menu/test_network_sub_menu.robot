@@ -31,8 +31,16 @@ ${xpath_cancel_button}                   //button[contains(text(),'Cancel')]
 ${xpath_add_button}                      //button[contains(text(),'Add')]
 ${xpath_delete_dns_server}               //*[@title="Delete DNS address"]
 ${xpath_add_dns_server}                  //button[normalize-space(text())='Add']
+${xpath_add_ip_address_button}           //button[normalize-space(text())='Add']
 
 ${dns_server}                            10.10.10.10
+${test_ipv4_addr}                        10.7.7.7
+${test_subnet_mask}                      255.255.0.0
+${alpha_netmask}                         ff.ff.ff.ff
+${out_of_range_netmask}                  255.256.255.0
+${more_byte_netmask}                     255.255.255.0.0
+${lowest_netmask}                        128.0.0.0
+${test_gateway}                          10.7.7.1
 
 
 *** Test Cases ***
@@ -123,6 +131,19 @@ Configure And Verify DNS Server Via GUI
     Add DNS Servers And Verify  ${dns_server}
 
 
+Configure Static IPv4 Netmask Via GUI And Verify
+    [Documentation]  Login to GUI Network page, configure static IPv4 netmask and verify.
+    [Tags]  Configure_Static_IPv4_Netmask_Via_GUI_And_Verify
+    [Template]  Add Static IP Address And Verify
+
+    # ip_addresses      subnet_masks             expected_status
+    ${test_ipv4_addr}   ${lowest_netmask}        ${test_gateway}  Success
+    ${test_ipv4_addr}   ${more_byte_netmask}     ${test_gateway}  Invalid format
+    ${test_ipv4_addr}   ${alpha_netmask}         ${test_gateway}  Invalid format
+    ${test_ipv4_addr}   ${out_of_range_netmask}  ${test_gateway}  Invalid format
+    ${test_ipv4_addr}   ${test_subnet_mask}      ${test_gateway}  Success
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -173,3 +194,33 @@ Delete DNS Servers And Verify
     # Check if all name servers deleted on BMC.
     ${nameservers}=  CLI Get Nameservers
     Should Be Empty  ${nameservers}
+
+
+Add Static IP Address And Verify
+    [Documentation]  Login to GUI Network page,add static IP address,subnet mask and
+    ...  gateway and verify.
+    [Arguments]  ${ip_address}  ${subnet_mask}  ${gateway_address}  ${expected_status}=error
+
+    # Description of argument(s):
+    # ip_address          IP address to be added (e.g. 10.7.7.7).
+    # subnet_mask         Subnet mask for the IP to be added (e.g. 255.255.0.0).
+    # gateway_address     Gateway address for the IP to be added (e.g. 10.7.7.1).
+    # expected_status     Expected status while adding static ipv4 address
+    # ....                (e.g. Invalid format / Field required).
+
+    Wait Until Keyword Succeeds  30 sec  10 sec  Click Element  ${xpath_add_static_ipv4_address_button}
+
+    Input Text  ${xpath_input_ip_address}  ${ip_address}
+    Input Text  ${xpath_input_subnetmask}  ${subnet_mask}
+    Input Text  ${xpath_input_gateway}  ${gateway_address}
+
+    Click Element  ${xpath_add_ip_address_button}
+    Run Keyword If  '${expected_status}' == 'Valid format'
+    ...  Wait Until Page Contains  ${ip_address}  timeout=40sec
+
+    ...  ELSE IF  '${expected_status}' == 'Invalid format'
+    ...  Click Button  ${xpath_cancel_button}
+
+    Wait Until Page Contains Element  ${xpath_add_static_ipv4_address_button}  timeout=10sec
+
+    Validate Network Config On BMC
