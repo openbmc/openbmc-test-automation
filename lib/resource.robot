@@ -22,6 +22,7 @@ ${REDFISH_DELETE_SESSIONS}        ${1}
 
 ${OPENBMC_MODEL}  ${EMPTY}
 ${OPENBMC_HOST}   ${EMPTY}
+${VMI_IP}         ${EMPTY}
 ${DBUS_PREFIX}    ${EMPTY}
 ${PORT}           ${EMPTY}
 # AUTH_SUFFIX here is derived from variables.py
@@ -73,6 +74,7 @@ ${SSH_PORT}         22
 ${HTTPS_PORT}       443
 ${IPMI_PORT}        623
 ${HOST_SOL_PORT}    2200
+${VMI_Port_1}       30001
 ${OPENBMC_SERIAL_HOST}      ${EMPTY}
 ${OPENBMC_SERIAL_PORT}      ${EMPTY}
 
