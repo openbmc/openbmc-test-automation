@@ -15,7 +15,13 @@ import platform
 from errno import EACCES, EPERM
 import subprocess
 
-sys.path.extend([f'./{name[0]}' for name in os.walk(".") if os.path.isdir(name[0])])
+script_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(script_dir)
+# Walk path and append to sys.path
+for root, dirs, files in os.walk(script_dir):
+    for dir in dirs:
+        sys.path.append(os.path.join(root, dir))
+
 from ssh_utility import SSHRemoteclient
 from telnet_utility import TelnetRemoteclient
 
@@ -206,9 +212,9 @@ class ffdc_collector:
         self.logger.info("\t{:<10}  {:>9}".format('redfishtool', redfishtool_version))
         self.logger.info("\t{:<10}  {:>12}".format('ipmitool', ipmitool_version))
 
-        if eval(yaml.__version__.replace('.', ',')) < (5, 4, 1):
+        if eval(yaml.__version__.replace('.', ',')) < (5, 3, 0):
             self.logger.error("\n\tERROR: Python or python packages do not meet minimum version requirement.")
-            self.logger.error("\tERROR: PyYAML version 5.4.1 or higher is needed.\n")
+            self.logger.error("\tERROR: PyYAML version 5.3.0 or higher is needed.\n")
             run_env_ok = False
 
         self.logger.info("\t---- End script host environment ----")
