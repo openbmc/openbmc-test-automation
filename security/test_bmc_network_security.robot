@@ -1,6 +1,9 @@
 *** Settings ***
 Documentation  Network stack stress tests using "nping" tool.
 
+# This Suite has few testcases which uses nping with ICMP.
+# ICMP creates a raw socket, which requires root privilege/sudo to run tests.
+
 Resource                ../lib/resource.robot
 Resource                ../lib/bmc_redfish_resource.robot
 Resource                ../lib/ipmi_client.robot
@@ -43,6 +46,16 @@ Send ICMP Netmask Request
     ...  ${OPENBMC_HOST}  ${count}  ${ICMP_PACKETS}  ${NETWORK_PORT}  ${ICMP_NETMASK_REQUEST}
     Should Be Equal As Numbers  ${packet_loss}  100.00
     ...  msg=FAILURE: BMC is not dropping netmask request messages.
+
+Send Continuous ICMP Echo Request To BMC And Verify No Packet Loss
+    [Documentation]  Send ICMP packet type 8 continuously and check no packets are dropped from BMC
+    [Tags]  Send_Continuous_ICMP_Echo_Request_To_BMC_And_Verify_No_Packet_Loss
+
+    # Send ICMP packet type 8 to BMC and check packet loss.
+    ${packet_loss}=  Send Network Packets And Get Packet Loss
+    ...  ${OPENBMC_HOST}  ${iterations}  ${ICMP_PACKETS}
+    Should Be Equal As Numbers  ${packet_loss}  0.0
+    ...  msg=FAILURE: BMC is dropping packets.
 
 Send Network Packets Continuously To Redfish Interface
     [Documentation]  Send network packets continuously to Redfish interface and verify stability.
