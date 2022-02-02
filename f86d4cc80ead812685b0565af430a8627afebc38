@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "4ddc6cfc_d47f3814",
         "filename": "ipmi/test_ipmi_user.robot",
@@ -20,8 +21,31 @@
         "endChar": 140
       },
       "revId": "f86d4cc80ead812685b0565af430a8627afebc38",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "086218cd_4d81ac29",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-02-02T13:23:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ddc6cfc_d47f3814",
+      "range": {
+        "startLine": 385,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 140
+      },
+      "revId": "f86d4cc80ead812685b0565af430a8627afebc38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
