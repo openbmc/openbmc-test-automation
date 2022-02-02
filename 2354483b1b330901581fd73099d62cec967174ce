@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec913379_6c30020a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-02T15:33:09Z",
+      "side": 1,
+      "message": "Fix these\n\ngeorge@FindingAustin:~/openbmc-test-automation$ python3 -m rflint -rA robot_standards -R robot_custom_rules.py ipmi/test_get_bios_post_code.robot\n+ ipmi/test_get_bios_post_code.robot\nW: 21, 0: Line has trailing whitespace (TrailingWhitespace)\nW: 29, 0: Line has trailing whitespace (TrailingWhitespace)\nW: 49, 0: Line has trailing whitespace (TrailingWhitespace)\nW: 50, 0: Line has trailing whitespace (TrailingWhitespace)\nW: 69, 0: Line has trailing whitespace (TrailingWhitespace)\nW: 74, 0: Line has trailing whitespace (TrailingWhitespace)\nE: 25, 0: space not allowed in tag name: \u0027Test Get_BIOS_POST_Code_via_IPMI_Raw_Command\u0027 (TagWithSpaces)\nE: 45, 0: space not allowed in tag name: \u0027Test Get_BIOS_POST_Code_via_IPMI_Raw_Command_After_Power_Cycle\u0027 (TagWithSpaces)\nE: 65, 0: space not allowed in tag name: \u0027Test Get_BIOS_POST_Code_via_IPMI_Raw_Command_With_Host_Powered_Off\u0027 (TagWithSpaces)\ngeorge@FindingAustin:~/openbmc-test-automation$\n\n\n\n",
+      "revId": "2354483b1b330901581fd73099d62cec967174ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
