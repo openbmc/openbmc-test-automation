@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bfbfdb6_2697d391",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-02T13:28:40Z",
+      "side": 1,
+      "message": "Add a check here \n\nShould Not Be Empty   ${OPENBMC_HOST}\nShould Not Be Empty   ${OPENBMC_HOST_1}",
+      "revId": "78d48136d81f42090472907d841a027ebf792ab5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
