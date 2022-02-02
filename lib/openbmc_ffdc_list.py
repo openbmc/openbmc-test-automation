@@ -72,6 +72,8 @@ FFDC_BMC_FILE = {
         'GUARD_list.txt': 'guard -l > /tmp/GUARD_list.txt 2>&1',
         'fan_control_dump.json': 'fanctl dump; cat /tmp/fan_control_dump.json'
         + ' /tmp/fan_control_dump.json 2>&1',
+        'DEVTREE': 'cp /var/lib/phosphor-software-manager/pnor/rw/DEVTREE'
+        + ' /tmp/DEVTREE 2>&1',
     },
 }
 # Add file name and corresponding command needed for all Linux distributions
