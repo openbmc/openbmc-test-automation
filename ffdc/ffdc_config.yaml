@@ -63,7 +63,8 @@ OPENBMC:
             - 'peltool -l >/tmp/PEL_logs_list.json'
             - {'peltool -a >/tmp/PEL_logs_display.json':240}
             - 'hexdump -C /var/lib/phosphor-logging/extensions/pels/badPEL >/tmp/PEL_logs_badPEL.txt'
-            - 'guard -l >/tmp/GUARD_list.txt'
+            - 'export PDBG_DTB=/var/lib/phosphor-software-manager/pnor/rw/DEVTREE; guard -l >/tmp/GUARD_list.txt'
+            - 'pldmtool fru getfrurecordtable>/tmp/PLDM_fru_record.txt'
             - 'killall -s SIGUSR1 pldmd; sleep 5'
             - 'fanctl dump'
             - 'cp /var/lib/phosphor-software-manager/pnor/rw/DEVTREE /tmp/DEVTREE'
@@ -86,6 +87,7 @@ OPENBMC:
             - '/tmp/PEL_logs_display.json'
             - '/tmp/PEL_logs_badPEL.txt'
             - '/tmp/GUARD_list.txt'
+            - '/tmp/PLDM_fru_record.txt'
             - '/tmp/pldm_flight_recorder'
             - '/tmp/fan_control_dump.json'
             - '/tmp/DEVTREE'
