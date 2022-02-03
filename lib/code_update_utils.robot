@@ -615,14 +615,14 @@ Check Task Attribute
     #                 any of the states named in this argument, this keyword passes.
     # task_dict       Task inventory.
 
-    Return From Keyword If  ${target_uri} == '' or ${target_uri} == None  ${task_dict}
-    Return From Keyword If  ${match_state} == '' or ${match_state} == None  ${task_dict}
+    Return From Keyword If  '${target_uri}' == '${EMPTY}' or '${target_uri}' == 'None'  ${task_dict}
+    Return From Keyword If  '${match_state}' == '${EMPTY}' or '${match_state}' == 'None'  ${task_dict}
 
     FOR  ${task_ins}  IN  @{task_dict.items()}
       &{tmp_dict}=  Create Dictionary
       Set To Dictionary  ${tmp_dict}  ${task_ins[0]}  ${task_ins[1]}
       Return From Keyword If
-      ...  ${target_uri} == '${task_ins[1]['TargetUri']}' and ${match_state} == '${task_ins[1]['TaskState']}'
+      ...  '${target_uri}' == '${task_ins[1]['TargetUri']}' and '${match_state}' == '${task_ins[1]['TaskState']}'
       ...  ${tmp_dict}
     END
 
@@ -650,8 +650,11 @@ Check Task Progress State
       Rprint Vars  task_status
       Rprint Vars  task_payload['TargetUri']
 
-      Valid Value  task_state  valid_values=[${match_state}]
-      Valid Value  task_status  valid_values=[${match_status}]
+      #Valid Value  ${match_state}  valid_values=[${task_state}]
+      #Valid Value  ${match_status}  valid_values=[${task_status}]
+
+      Valid Value  task_state  valid_values=['${match_state}']
+      Valid Value  task_status  valid_values=['${match_status}']
     END
 
 

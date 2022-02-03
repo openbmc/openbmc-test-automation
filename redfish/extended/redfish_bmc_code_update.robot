@@ -220,7 +220,17 @@ Redfish Update Firmware
     ${state}=  Get Pre Reboot State
     Rprint Vars  state
     Run Keyword And Ignore Error  Set ApplyTime  policy=OnReset
-    Redfish Upload Image And Check Progress State
+    #Redfish Upload Image And Check Progress State
+ 
+    Log To Console   Start uploading image to BMC.
+    Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${IMAGE_FILE_PATH}
+    Log To Console   Completed image upload to BMC.
+
+    ${list_task}=  Get All Task  /redfish/v1/UpdateService  OK  Running
+
+    Wait Until Keyword Succeeds  2 min  05 sec
+    ...  Check Task Progress State  ${list_task}  OK  Completed
+
     ${tar_version}=  Get Version Tar  ${IMAGE_FILE_PATH}
     ${image_info}=  Get Software Inventory State By Version  ${tar_version}
     Run Key  ${post_code_update_actions['${image_info["image_type"]}']['OnReset']}
