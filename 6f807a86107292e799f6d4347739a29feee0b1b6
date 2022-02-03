@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bb25a27_ce599cf6",
+        "filename": "ipmi/test_get_bios_post_code.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-03T08:36:00Z",
+      "side": 1,
+      "message": "why is this running from BMC shell? are you copying the ipmitool binary to BMC or its inbuilt in your firmware?\n\n\nYou can do out of band like this\n\n${resp}\u003d  Run IPMI Standard Command     chassis power status",
+      "range": {
+        "startLine": 21,
+        "startChar": 3,
+        "endLine": 22,
+        "endChar": 38
+      },
+      "revId": "6f807a86107292e799f6d4347739a29feee0b1b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb6bc394_294f1881",
+        "filename": "ipmi/test_get_bios_post_code.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-03T08:36:00Z",
+      "side": 1,
+      "message": "The best would be to write like this the test case\n\n\nVerify Host PowerOn Via IPMI\n${resp}\u003d  Run IPMI Standard Command     chassis power status\nShould Be Equal As String  \u0027${resp}[0]\u0027 \"Chassis power is on\"",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 23,
+        "endChar": 89
+      },
+      "revId": "6f807a86107292e799f6d4347739a29feee0b1b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10bf7ff0_3d75d2a7",
+        "filename": "ipmi/test_get_bios_post_code.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-03T08:36:00Z",
+      "side": 1,
+      "message": "${resp}\u003d  Run IPMI Standard Command      raw ${IPMI_RAW_CMD[\u0027BIOS_POST_Code\u0027][\u0027Get\u0027][0]}\n\n\nand same for others too.",
+      "range": {
+        "startLine": 29,
+        "startChar": 5,
+        "endLine": 30,
+        "endChar": 65
+      },
+      "revId": "6f807a86107292e799f6d4347739a29feee0b1b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf4e3ee5_a379d5d2",
+        "filename": "ipmi/test_get_bios_post_code.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-03T08:36:00Z",
+      "side": 1,
+      "message": "It\u0027s best to use IPMI here \n\nIPMI Power On  stack_mode\u003dskip  quiet\u003d1",
+      "range": {
+        "startLine": 84,
+        "startChar": 4,
+        "endLine": 84,
+        "endChar": 46
+      },
+      "revId": "6f807a86107292e799f6d4347739a29feee0b1b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
