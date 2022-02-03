@@ -36,6 +36,8 @@ Force Tags               BMC_Code_Update
 ${FORCE_UPDATE}          ${0}
 ${LOOP_COUNT}            20
 
+${ACTIVATION_WAIT_TIMEOUT}     8 min
+
 *** Test Cases ***
 
 Redfish BMC Code Update
@@ -220,9 +222,31 @@ Redfish Update Firmware
     ${state}=  Get Pre Reboot State
     Rprint Vars  state
     Run Keyword And Ignore Error  Set ApplyTime  policy=OnReset
-    Redfish Upload Image And Check Progress State
-    ${tar_version}=  Get Version Tar  ${IMAGE_FILE_PATH}
+
+    # Python module:  get_member_list(resource_path)
+    ${before_inv_list}=  redfish_utils.Get Member List  /redfish/v1/UpdateService/FirmwareInventory
+    Log To Console   Current images on the BMC before upload: ${before_inv_list}
+
+    Log To Console   Start uploading image to BMC.
+    Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${IMAGE_FILE_PATH}
+    Log To Console   Completed image upload to BMC.
+
+    # Python module:  get_member_list(resource_path)
+    ${after_inv_list}=  redfish_utils.Get Member List  /redfish/v1/UpdateService/FirmwareInventory
+    Log To Console  Current images on the BMC after upload: ${after_inv_list}
+
+    ${image_id}=  Evaluate  set(${after_inv_list}) - set(${before_inv_list})
+    Should Not Be Empty    ${image_id}
+    ${image_id}=  Evaluate  list(${image_id})[0].split('/')[-1]
+    Log To Console  Image install in progress: ${image_id}
+
+    Wait Until Keyword Succeeds  ${ACTIVATION_WAIT_TIMEOUT}  10 sec
+    ...  Check Image Update Progress State  match_state='Enabled'  image_id=${image_id}
+
+    # Python module:  get_version_tar(tar_file_path)
+    ${tar_version}=  code_update_utils.Get Version Tar  ${IMAGE_FILE_PATH}
     ${image_info}=  Get Software Inventory State By Version  ${tar_version}
+
     Run Key  ${post_code_update_actions['${image_info["image_type"]}']['OnReset']}
     Redfish.Login
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
