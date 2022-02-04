@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "01f07124_5d66a618",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-02-04T07:06:50Z",
+      "side": 1,
+      "message": "Better to have the URI here directly instead of variable.",
+      "range": {
+        "startLine": 231,
+        "startChar": 26,
+        "endLine": 231,
+        "endChar": 45
+      },
+      "revId": "e6b6ab80b37d1433b8467b3b51b28d41c19e1a93",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "594cf4df_cb502446",
         "filename": "redfish/extended/redfish_bmc_code_update.robot",
         "patchSetId": 3
