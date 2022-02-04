@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0518959_8f0fc13e",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-04T08:12:26Z",
+      "side": 1,
+      "message": "I believe the current is the correct messaging here.",
+      "parentUuid": "156f8639_24cf6d68",
+      "revId": "e6b6ab80b37d1433b8467b3b51b28d41c19e1a93",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "01f07124_5d66a618",
         "filename": "redfish/extended/redfish_bmc_code_update.robot",
         "patchSetId": 3
@@ -101,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a9e7f1ae_c631dd44",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-04T08:12:26Z",
+      "side": 1,
+      "message": "same as above.",
+      "parentUuid": "594cf4df_cb502446",
+      "revId": "e6b6ab80b37d1433b8467b3b51b28d41c19e1a93",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64d6c1d6_824b0fa9",
         "filename": "redfish/extended/redfish_bmc_code_update.robot",
         "patchSetId": 3
@@ -112,6 +148,24 @@
       "writtenOn": "2022-02-04T05:53:49Z",
       "side": 1,
       "message": "Suggestion: Log To Console  Firmware image installation in-progress with image id: ${image_id}",
+      "revId": "e6b6ab80b37d1433b8467b3b51b28d41c19e1a93",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9cda2f5_01639228",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-04T08:12:26Z",
+      "side": 1,
+      "message": "Done but \n\nFirmware installation in progress with image id:",
+      "parentUuid": "64d6c1d6_824b0fa9",
       "revId": "e6b6ab80b37d1433b8467b3b51b28d41c19e1a93",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
