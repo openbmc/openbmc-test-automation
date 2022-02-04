@@ -16,6 +16,24 @@
       "message": "Suggestion: retain the old variable i.e. ${REDFISH_BASE_URI}.",
       "revId": "2e078ae075bdab521f061b1b333cf74fce3d3fc2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6abdc48a_0ecbafa4",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-04T12:45:43Z",
+      "side": 1,
+      "message": "This make sense for this one. Anusha also recommended it and updated",
+      "parentUuid": "a74b36c6_a03ab30a",
+      "revId": "2e078ae075bdab521f061b1b333cf74fce3d3fc2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
