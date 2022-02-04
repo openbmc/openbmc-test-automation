@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1dbc25b7_acf4c029",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-04T08:14:06Z",
+      "side": 1,
+      "message": "There is just wait we do, not the activation time out by firmware service.. so this messaging is correct",
+      "parentUuid": "28192d9f_549d10a8",
+      "revId": "e6b6ab80b37d1433b8467b3b51b28d41c19e1a93",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "156f8639_24cf6d68",
         "filename": "redfish/extended/redfish_bmc_code_update.robot",
         "patchSetId": 3
