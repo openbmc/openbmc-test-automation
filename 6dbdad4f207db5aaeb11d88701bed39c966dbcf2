@@ -262,6 +262,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53168ff9_14efbf3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-02-08T10:20:02Z",
+      "side": 1,
+      "message": "Again I tried to run this test on our system today and found that dump is getting created in below path. \n\nroot@witherspoon:/var/lib/phosphor-debug-collector/dumps/3# pwd\n/var/lib/phosphor-debug-collector/dumps/3\nroot@witherspoon:/var/lib/phosphor-debug-collector/dumps/3# ls\nobmcdump_3_1644314701.tar.xz\nroot@witherspoon:/var/lib/phosphor-debug-collector/dumps/3# \n\nAs far as the size is concerned it has a decent size:\n\nhttps://\u003cBMC_IP\u003e/xyz/openbmc_project/dump/entry/3\n{\n    \"data\": {\n        \"Elapsed\": 1644314701,\n        \"Size\": 180024\n    },\n    \"message\": \"200 OK\",\n    \"status\": \"ok\"\n}\n\nIf you want to test core dump thing then I would say test using \"Verify Core Dump Size\" test case and skip this test from your run using -i option (-i Verify_Dump_After_Host_Watchdog_Error_Injection).",
+      "parentUuid": "79937c96_8f497e26",
+      "revId": "6dbdad4f207db5aaeb11d88701bed39c966dbcf2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6b4c2b8_6564cc41",
