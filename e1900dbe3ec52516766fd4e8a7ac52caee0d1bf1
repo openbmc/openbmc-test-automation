@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c674d1d3_c03e4f7a",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-02-08T06:31:13Z",
+      "side": 1,
+      "message": "can you make it part of keyword\nsame logic is used in multiple places",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 94
+      },
+      "revId": "e1900dbe3ec52516766fd4e8a7ac52caee0d1bf1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
