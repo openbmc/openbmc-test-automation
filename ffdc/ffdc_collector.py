@@ -15,7 +15,13 @@ import platform
 from errno import EACCES, EPERM
 import subprocess
 
-sys.path.extend([f'./{name[0]}' for name in os.walk(".") if os.path.isdir(name[0])])
+script_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(script_dir)
+# Walk path and append to sys.path
+for root, dirs, files in os.walk(script_dir):
+    for dir in dirs:
+        sys.path.append(os.path.join(root, dir))
+
 from ssh_utility import SSHRemoteclient
 from telnet_utility import TelnetRemoteclient
 
