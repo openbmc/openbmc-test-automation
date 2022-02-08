@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "9de3999f_9199f30a",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "why tis is required?",
       "revId": "503a2313f4556f72aee6938d8406935085b0a2e7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "bb002e2a_418dfee2",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
@@ -32,10 +33,10 @@
       "message": "So that the Suite(using library keywords) runs on interface based on channel number provided by user.",
       "parentUuid": "9de3999f_9199f30a",
       "revId": "503a2313f4556f72aee6938d8406935085b0a2e7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "7a92d943_61f2a6d5",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
@@ -50,10 +51,10 @@
       "message": "I\u0027m not getting assigning suite variable to another suite variable???",
       "parentUuid": "bb002e2a_418dfee2",
       "revId": "503a2313f4556f72aee6938d8406935085b0a2e7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "d5d63e0a_4e894042",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
@@ -68,8 +69,25 @@
       "message": "existing suite variable ethernet_interface is in use already at multiple places in Suite..so,wont be able to remove it.\n\nnew suite variable default interface is required to set  vmi library different keywords \u0027interface\u0027 argument with requested channel number interface name(eth0 or eth1).",
       "parentUuid": "7a92d943_61f2a6d5",
       "revId": "503a2313f4556f72aee6938d8406935085b0a2e7",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bb78b02_b232e791",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-02-08T06:29:06Z",
+      "side": 1,
+      "message": "can\u0027t we use ethernet_interface here??\ndefault_interface \u0026 ethernet_interface will be same right??",
+      "parentUuid": "d5d63e0a_4e894042",
+      "revId": "503a2313f4556f72aee6938d8406935085b0a2e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
