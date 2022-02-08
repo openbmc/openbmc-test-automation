@@ -159,6 +159,41 @@ Disable IPMI Protocol And Verify
     ...  msg=IPMI commands are working after disabling IPMI.
 
 
+Enable IPMI Protocol And Check Persistency On BMC Reboot
+    [Documentation]  Set the IPMI protocol attribute to True, reset BMC, and verify that the setting persists.
+    [Tags]  Enable_IPMI_Protocol_And_Check_Persistency_On_BMC_Reboot
+
+    Enable IPMI Protocol  ${True}
+
+    Redfish OBMC Reboot (off)  stack_mode=skip
+
+    # Check if the IPMI enabled is set.
+    Verify IPMI Protocol State  ${True}
+
+    # Confirm that IPMI commands to access BMC work.
+    Verify IPMI Works  lan print
+
+
+Disable IPMI Protocol And Check Persistency On BMC Reboot
+    [Documentation]  Set the IPMI protocol attribute to False, reset BMC, and verify that the setting persists.
+    [Tags]  Disable_IPMI_Protocol_And_Check_Persistency_On_BMC_Reboot
+
+    # Disable IPMI interface.
+    Enable IPMI Protocol  ${False}
+
+    Redfish OBMC Reboot (off)  stack_mode=skip
+
+    # Check if the IPMI disabled is set.
+    Verify IPMI Protocol State  ${False}
+
+    # Confirm that IPMI connection request fails.
+    ${status}=  Run Keyword And Return Status
+    ...  Verify IPMI Works  lan print
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=IPMI commands are working after disabling IPMI.
+
+
 *** Keywords ***
 
 Suite Setup Execution
