@@ -34,6 +34,23 @@
       "parentUuid": "04a04f25_db3e9ac9",
       "revId": "66a9e715a6ef740e527969c5f1acfa6653c81e50",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "462ff18a_3f7fcb30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-09T15:57:20Z",
+      "side": 1,
+      "message": "Suggestion.. best to code like this for such series of similar test grouping.\n\n\n*** Test Case ***\n\nTest IPMI Watchdog Timer Enable And Disable\n[Documentation]  Execute out of band IPMI raw set command for watchdog timer \n... and verify response data.\n[Tags]  Test_IPMI_Watchdog_Timer_Enable_And_Disable\n[Template]  Execute IPMI Raw Command And Verify Response Data\n\n# Test action    set_raw_cmd                             get_raw_cmd                              resp_expect\nEnable           ${IPMI_RAW_CMD[\u0027Watchdog\u0027][\u0027Set\u0027][0]}   ${IPMI_RAW_CMD[\u0027Watchdog\u0027][\u0027Get\u0027][0]}    ${IPMI_RAW_CMD[\u0027Watchdog\u0027][\u0027Get\u0027][1]}\nDisabled         ${IPMI_RAW_CMD[\u0027Watchdog\u0027][\u0027Set\u0027][3]}   ${IPMI_RAW_CMD[\u0027Watchdog\u0027][\u0027Get\u0027][0]}    ${IPMI_RAW_CMD[\u0027Watchdog\u0027][\u0027Get\u0027][3]}\n\n\nTest IPMI Watchdog Timer Stop Bit\n[Documentation]  Execute out of band IPMI raw set command for watchdog timer \n... and verify response data.\n[Tags]  Test_IPMI_Watchdog_Timer_Enable_And_Disable\n[Template]  Execute IPMI Raw Command And Verify Response Data\n\n# Test action    set_raw_cmd                             get_raw_cmd                              resp_expect\nStop             ${IPMI_RAW_CMD[\u0027Watchdog\u0027][\u0027Set\u0027][6]}   ${IPMI_RAW_CMD[\u0027Watchdog\u0027][\u0027Get\u0027][0]}    ${IPMI_RAW_CMD[\u0027Watchdog\u0027][\u0027Get\u0027][5]}\nResume           ${IPMI_RAW_CMD[\u0027Watchdog\u0027][\u0027Set\u0027][9]}   ${IPMI_RAW_CMD[\u0027Watchdog\u0027][\u0027Get\u0027][0]}    ${IPMI_RAW_CMD[\u0027Watchdog\u0027][\u0027Get\u0027][7]}\n    \n\n*** Keywords ***\n\nExecute IPMI Raw Command And Verify Response Data\n    [Documentation]  Execute out of band IPMI raw command and verify response data.\n    [Arguments]   ${set_raw_cmd}  ${get_raw_cmd}  ${resp_expect}\n\n    ${resp}\u003d  Run IPMI Standard Command  raw  ${set_raw_cmd} \n    ${resp}\u003d  Run IPMI Standard Command  raw  ${get_raw_cmd}\n    Should Contain  ${resp}  ${resp_expect}   msg\u003dExpecting ${resp_expect} but got ${resp}.\n\t",
+      "revId": "66a9e715a6ef740e527969c5f1acfa6653c81e50",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
