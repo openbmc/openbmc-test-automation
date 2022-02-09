@@ -280,6 +280,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86d60d4a_19b30adf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000294
+      },
+      "writtenOn": "2022-02-09T06:03:27Z",
+      "side": 1,
+      "message": "Rahul, Thanks your update.\nIs your above test result is from \"Verify Core Dump Size\" or \"Verify Dump After Host Watchdog Error Injection\"?\n\nDue to I also can get core dump file when I using \"Verify Core Dump Size\", but there is no core dump file be generated when I using \"Verify Dump After Host Watchdog Error Injection\".\n\nMy test steps as below:\n1. Run single test item redfish/extended/test_bmc_dump.robot \"Verify Core Dump Size\" \u003d\u003e Dump file be generated and path exist.\n\n2. Reboot BMC and clear all dump files to make sure the test environment is clean.\n\n3. Run single test item redfish/extended/test_bmc_dump.robot \"Verify Dump After Host Watchdog Error Injection\" \u003d\u003e Dump file didn\u0027t be generated, but path still exist.",
+      "parentUuid": "53168ff9_14efbf3b",
+      "revId": "6dbdad4f207db5aaeb11d88701bed39c966dbcf2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6b4c2b8_6564cc41",
