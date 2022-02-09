@@ -361,6 +361,29 @@
       },
       "revId": "6dbdad4f207db5aaeb11d88701bed39c966dbcf2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9ddbb36_39a60c60",
+        "filename": "redfish/extended/test_bmc_dump.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-02-09T09:17:32Z",
+      "side": 1,
+      "message": "We found that this keyword does not work with latest upstream code.\n\nSo please call newer \"Set Watchdog Interval Using Busctl\"(https://github.com/openbmc/openbmc-test-automation/blob/30108bd18301d5dbf5f0979b941aff6a9d8782a8/lib/utils.robot#L983) here instead on this. This will call below busctl command to force watchdog time out when host is running.\n\nExample:\nbusctl set-property xyz.openbmc_project.Watchdog /xyz/openbmc_project/watchdog/host0 xyz.openbmc_project.State.Watchdog Interval t 1000\n\nThis will generate dump in /var/lib/phosphor-debug-collector/dumps. We have verified with the upstream build on our witherspoon system.\n\nAnd remove the above trigger core dump code from this test case.",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 41
+      },
+      "revId": "6dbdad4f207db5aaeb11d88701bed39c966dbcf2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
