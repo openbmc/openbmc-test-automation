@@ -16,6 +16,29 @@
       "message": "Redfish Host Code Update :: Update the firmware image.                | PASS |\nThe existing IBM-witherspoon-ibm-OP9-v2.4.1-4.37-prod firmware is already functional.\n------------------------------------------------------------------------------\n#(CST) 2022/02/09 01:17:06.198551 -    0.449532 - Executing: delete(\u0027/redfish/v1/SessionService/Sessions/zx6u2IqOvY\u0027)\nRedfish Host Code Update :: Update the BMC code on a target BMC vi... | PASS |\n1 critical test, 1 passed, 0 failed\n1 test total, 1 passed, 0 failed",
       "revId": "7d625a1a2ca8b45ad779d354f272c0ba7a6ee158",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48b5786e_e8404458",
+        "filename": "redfish/extended/redfish_host_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-09T07:52:37Z",
+      "side": 1,
+      "message": "Pass Execution If  ${functional_sw_inv[\u0027version\u0027]} \u003d\u003d \u0027${image_version}\u0027\n    ...  The existing ${image_version} firmware is already functional.",
+      "range": {
+        "startLine": 46,
+        "startChar": 41,
+        "endLine": 46,
+        "endChar": 111
+      },
+      "revId": "7d625a1a2ca8b45ad779d354f272c0ba7a6ee158",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
