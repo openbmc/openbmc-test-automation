@@ -39,18 +39,16 @@ Redfish Host Code Update
     Rprint Vars  image_version
 
     ${sw_inv}=  Get Functional Firmware  Host image
-    ${nonfunctional_sw_inv}=  Get Non Functional Firmware  ${sw_inv}  True
+    ${functional_sw_inv}=  Get Non Functional Firmware  ${sw_inv}  True
 
-    ${functional_version}=  Set Variable  ${nonfunctional_sw_inv['version']}
-    Rprint Vars  functional_version
+    ${num_records}=  Get Length  ${functional_sw_inv}
+
+    Run Keyword If  ${num_records} != 0  Pass Execution If  '${functional_sw_inv['version']}' == '${image_version}'
+    ...  The existing ${image_version} firmware is already functional.
 
     ${post_code_update_actions}=  Get Post Boot Action
     ${state}=  Get Pre Reboot State
     Rprint Vars  state
-
-    # Check if the existing firmware is functional.
-    Pass Execution If  '${functional_version}' == '${image_version}'
-    ...  The existing ${image_version} firmware is already functional.
 
    Print Timen  Performing firmware update ${image_version}.
 
