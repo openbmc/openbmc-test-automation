@@ -298,6 +298,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2ad040b_9ba237fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-02-09T08:18:19Z",
+      "side": 1,
+      "message": "Hi Tim\nI have tested \"Verify Dump After Host Watchdog Error Injection\" only. And I can see the dump getting created with this test on our system.\n\nThanks",
+      "parentUuid": "86d60d4a_19b30adf",
+      "revId": "6dbdad4f207db5aaeb11d88701bed39c966dbcf2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6b4c2b8_6564cc41",
