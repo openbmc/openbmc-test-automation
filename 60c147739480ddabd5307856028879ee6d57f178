@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db359375_69d872eb",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2022-02-09T07:28:27Z",
+      "side": 1,
+      "message": "yes it is not meant for port. removed optional arguments to remove confusion.\n \"Send Network Packets And Get Packet Loss\" keyword here takes care of what we have in \"https://github.com/openbmc/openbmc-test-automation/blob/8381f7358fadf9ef4e5b0b78d874497bda2da842/network/test_network_nping.robot\"",
+      "parentUuid": "8a6568c5_58cf76e4",
+      "range": {
+        "startLine": 56,
+        "startChar": 1,
+        "endLine": 56,
+        "endChar": 95
+      },
+      "revId": "60c147739480ddabd5307856028879ee6d57f178",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83212ea4_0c3e5bf2",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-02-08T12:25:08Z",
       "side": 1,
       "message": "This will not have any impact on vmi.\nBetter send CSR request to check whether vmi responds or not.",
+      "revId": "60c147739480ddabd5307856028879ee6d57f178",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "316dfcfb_0543c5e7",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2022-02-09T07:28:27Z",
+      "side": 1,
+      "message": "OK. So, in that case would like to put these vmi ones in downstream bucket so that can test with client connection and its system state stability there. Are we ok with it?",
+      "parentUuid": "83212ea4_0c3e5bf2",
       "revId": "60c147739480ddabd5307856028879ee6d57f178",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
