@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04a04f25_db3e9ac9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-09T04:14:46Z",
+      "side": 1,
+      "message": "Hi,\n\nhttps://drive.google.com/drive/folders/12CXCpXKHZSRzm0S8G2Td9YNkSabX1JY5\n\nwhich one is your name in the CLA listed in the above link?  If not listed, please work with your CLA manager to get approval which is required for code merge approval ahead. Thanks  ",
+      "revId": "66a9e715a6ef740e527969c5f1acfa6653c81e50",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
