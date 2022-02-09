@@ -39,18 +39,19 @@ Redfish Host Code Update
     Rprint Vars  image_version
 
     ${sw_inv}=  Get Functional Firmware  Host image
-    ${nonfunctional_sw_inv}=  Get Non Functional Firmware  ${sw_inv}  True
+    ${functional_sw_inv}=  Get Non Functional Firmware  ${sw_inv}  True
 
-    ${functional_version}=  Set Variable  ${nonfunctional_sw_inv['version']}
-    Rprint Vars  functional_version
+    ${num_records}=  Get Length  ${functional_sw_inv}
+
+    Run Keyword If  ${num_records} != 0  Redfish Firmware Is PreInstall  ${functional_sw_inv}  ${image_version}
 
     ${post_code_update_actions}=  Get Post Boot Action
     ${state}=  Get Pre Reboot State
     Rprint Vars  state
 
     # Check if the existing firmware is functional.
-    Pass Execution If  '${functional_version}' == '${image_version}'
-    ...  The existing ${image_version} firmware is already functional.
+    #Pass Execution If  '${functional_version}' == '${image_version}'
+    #...  The existing ${image_version} firmware is already functional.
 
    Print Timen  Performing firmware update ${image_version}.
 
@@ -68,6 +69,21 @@ Suite Setup Execution
     Run Keyword And Ignore Error  Redfish Purge Event Log
     # Checking for file existence.
     Valid File Path  IMAGE_FILE_PATH
+
+
+Redfish Firmware Is PreInstall
+    [Documentation]  Check fimrware is pre-install.
+    [Arguments]  ${functional_sw_inv}  ${image_version}
+
+    # Description of argument(s):
+    # functional_sw_inv    Functional host inventory.
+    # image_version        New firmware version.
+
+    ${functional_version}=  Set Variable  ${functional_sw_inv['version']}
+    Rprint Vars  functional_version
+
+    Pass Execution If  '${functional_version}' == '${image_version}'
+    ...  The existing ${image_version} firmware is already functional.
 
 
 Redfish Update Firmware
