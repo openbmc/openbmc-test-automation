@@ -168,6 +168,24 @@ Configure Multiple SNMP Managers On BMC Via GUI And Verify Persistency On BMC Re
     Verify SNMP Manager Configured On BMC  ${SNMP_MGR2_IP}  ${SNMP_DEFAULT_PORT}
 
 
+Configure SNMP Manager Via GUI And Generate Error On BMC And Verify SNMP Trap
+    [Documentation]  Login GUI SNMP alerts page and add SNMP manager via GUI
+    ...  and generate error on BMC and verify trap and its fields.
+    [Tags]  Configure_SNMP_Manager_Via_GUI_And_Generate_Error_On_BMC_And_Verify_SNMP_Trap
+    [Template]  Create Error On BMC And Verify Trap On Default Port
+
+    # event_log                 expected_error
+
+    # Generate internal failure error.
+    ${CMD_INTERNAL_FAILURE}     ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+
+    # Generate timeout error.
+    ${CMD_FRU_CALLOUT}          ${SNMP_TRAP_BMC_CALLOUT_ERROR}
+
+    # Generate informational error.
+    ${CMD_INFORMATIONAL_ERROR}  ${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -245,3 +263,34 @@ Configure Multiple SNMP Managers On BMC With Valid Port Via GUI And Verify
 
     Configure SNMP Manager Via GUI  ${snmp_ip_value}  ${snmp_port_value}
     Verify SNMP Manager Configured On BMC  ${snmp_ip_value}  ${snmp_port_value}
+
+
+Create Error On BMC And Verify Trap On Default Port
+    [Documentation]  Generate error on BMC and verify if trap is sent to default port.
+    [Arguments]  ${event_log}=${CMD_INTERNAL_FAILURE}  ${expected_error}=${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+    [Teardown]  Delete SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+
+    # Description of argument(s):
+    # event_log       Event logs to be created.
+    # expected_error  Expected error on SNMP.
+
+    Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+
+    Start SNMP Manager
+
+    # Generate error log.
+    BMC Execute Command  ${event_log}
+
+    SSHLibrary.Switch Connection  snmp_server
+    ${SNMP_LISTEN_OUT}=  Read  delay=1s
+
+    # Stop SNMP manager process.
+    SSHLibrary.Execute Command  sudo killall snmptrapd
+
+    ${lines}=  Split To Lines  ${SNMP_LISTEN_OUT}
+    ${trap_info}=  Get From List  ${lines}  -1
+    ${snmp_trap}=  Split String  ${trap_info}  \t
+
+    Verify SNMP Trap  ${snmp_trap}  ${expected_error}
+
+    [Return]  ${snmp_trap}
