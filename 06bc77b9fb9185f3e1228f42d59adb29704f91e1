@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdf443d0_0e73d8a8",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-02-09T07:52:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c07a3186_6df7a899",
+      "range": {
+        "startLine": 127,
+        "startChar": 49,
+        "endLine": 127,
+        "endChar": 61
+      },
+      "revId": "06bc77b9fb9185f3e1228f42d59adb29704f91e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afc69e42_2149671f",
@@ -64,6 +88,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8153456c_2201addd",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-02-09T07:52:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afc69e42_2149671f",
+      "range": {
+        "startLine": 146,
+        "startChar": 58,
+        "endLine": 146,
+        "endChar": 60
+      },
+      "revId": "06bc77b9fb9185f3e1228f42d59adb29704f91e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "487fbe37_27911e91",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-02-09T07:01:39Z",
       "side": 1,
       "message": "error",
+      "range": {
+        "startLine": 148,
+        "startChar": 67,
+        "endLine": 148,
+        "endChar": 79
+      },
+      "revId": "06bc77b9fb9185f3e1228f42d59adb29704f91e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "599d1a47_31012229",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-02-09T07:52:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "487fbe37_27911e91",
       "range": {
         "startLine": 148,
         "startChar": 67,
