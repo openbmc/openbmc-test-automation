@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "175a63a0_35384674",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-02-09T08:09:49Z",
+      "side": 1,
+      "message": "Redfish Host Code Update :: Update the firmware image.                | PASS |\nThe existing Firmware_Image-v2.4 firmware is already functional.\n------------------------------------------------------------------------------\n#(CST) 2022/02/09 02:07:19.475784 -    0.369723 - Executing: delete(\u0027/redfish/v1/SessionService/Sessions/IwgvNeJO3i\u0027)\nRedfish Host Code Update :: Update the BMC code on a target BMC vi... | PASS |\n1 critical test, 1 passed, 0 failed\n1 test total, 1 passed, 0 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d",
+      "revId": "726f1d7864b277531258190bdae2459a0e58324c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
