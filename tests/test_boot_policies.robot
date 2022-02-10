@@ -70,7 +70,7 @@ Set Boot Policy To PERMANENT via IPMITOOL
 Test Boot Order via REST
     [Documentation]   Set boot policy to PERMANENT and boot device to CDROM
     ...               and verify that the order doesn't change post power on.
-    [Tags]  chassisboot  Test_Boot_Order_via_REST
+    [Tags]  Test_Boot_Order_via_REST
 
 
     Set Boot Policy  ${PERMANENT}
@@ -85,7 +85,7 @@ Test Boot Order via REST
 Persist ONETIME Boot Policy After Reset
     [Documentation]   Verify ONETIME boot policy order does not change
     ...               on warm reset.
-    [Tags]  chassisboot   Persist_ONETIME_Boot_Policy_After_Reset
+    [Tags]  Persist_ONETIME_Boot_Policy_After_Reset
 
     Set Boot Policy  ${ONETIME}
     Set Boot Source  ${BOOT_SOURCE_NETWORK}
@@ -101,7 +101,7 @@ Persist ONETIME Boot Policy After Reset
 Persist PERMANENT Boot Policy After Reset
     [Documentation]   Verify PERMANENT boot policy order does not change
     ...               on warm reset.
-    [Tags]  chassisboot    Persist_PERMANENT_Boot_Policy_After_Reset
+    [Tags]  Persist_PERMANENT_Boot_Policy_After_Reset
 
     Set Boot Policy  ${PERMANENT}
     Set Boot Source  ${BOOT_SOURCE_CDROM}

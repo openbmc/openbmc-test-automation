@@ -225,7 +225,7 @@ Set Host Time With BMC And Manual
 Set Host Time With BMC Owner NTP
     [Documentation]  Set host time when time owner is BMC and time mode is
     ...              NTP.
-    [Tags]  Set_Host_Time_With_BMC_And_NTP
+    [Tags]  Set_Host_Time_With_BMC_Owner_NTP
     [Template]  Set Time Using REST
     [Teardown]  Run Keywords  Set Time Owner  ${BMC_OWNER}  AND  Post Test Case Execution
 

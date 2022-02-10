@@ -214,7 +214,7 @@ Verify REST Bad Request Post Message JSON Compliant
 Check Response Codes HTTP_UNSUPPORTED_MEDIA_TYPE
     [Documentation]  REST "Post" response status test for
     ...              HTTP_UNSUPPORTED_MEDIA_TYPE.
-    [Tags]  Check_Response_Codes_415
+    [Tags]  Check_Response_Codes_HTTP_UNSUPPORTED_MEDIA_TYPE
 
     # Example:
     # Response code:415, Content:{
@@ -303,7 +303,7 @@ Put Data Validation
 Post Response Code
     [Documentation]  REST Post request url and expect the
     ...              REST response code pre define.
-    [Tags]  Post_Response_Codes
+    [Tags]  Post_Response_Code
     [Template]  Execute Post And Check Response
 
     # Expect status                 URL Path
@@ -316,7 +316,7 @@ Post Response Code
 Delete Response Code
     [Documentation]  REST "Delete" request url and expect the
     ...              REST response code pre define.
-    [Tags]  Delete_Response_Codes
+    [Tags]  Delete_Response_Code
     [Template]  Execute Delete And Check Response
 
     # Expect status                 URL Path
@@ -352,7 +352,7 @@ Verify All REST Objects Are Accessible
 
 Verify REST Put Message JSON Compliant
     [Documentation]  Verify REST "PUT" message is JSON format compliant.
-    [Tags]  REST_Put_Message_JSON_Format_Compliance_Test
+    [Tags]  Verify_REST_Put_Message_JSON_Compliant
     # Example:
     # Response code:200, Content:{
     #  "data": null,

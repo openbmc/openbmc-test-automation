@@ -34,7 +34,7 @@ Verify System Ambient Temperature
 
 Verify Fan Sensors Attributes
    [Documentation]  Check fan attributes.
-   [Tags]  Verify_Fan_Sensor_Attributes
+   [Tags]  Verify_Fan_Sensors_Attributes
 
    # Example:
    # "/xyz/openbmc_project/sensors/fan_tach/fan0_0",
@@ -71,7 +71,7 @@ Verify Fan Sensors Attributes
 
 Verify PCIE Sensors Attributes
    [Documentation]  Probe PCIE attributes.
-   [Tags]  Verify_PCIE_Sensor_Attributes
+   [Tags]  Verify_PCIE_Sensors_Attributes
    # Example:
    # /xyz/openbmc_project/sensors/temperature/pcie
    ${temp_pcie}=  Get Endpoint Paths  /xyz/openbmc_project/sensors/  pcie
@@ -95,7 +95,7 @@ Verify PCIE Sensors Attributes
 
 Verify Rail Voltage Sensors Attributes
    [Documentation]  Check rail voltage attributes.
-   [Tags]  Verify_Rail_Voltage_Sensor_Attributes
+   [Tags]  Verify_Rail_Voltage_Sensors_Attributes
    # Example of one of the entries returned by 'Get Endpoint Paths':
    # /xyz/openbmc_project/sensors/voltage/rail_1_voltage
    # /xyz/openbmc_project/sensors/voltage/rail_2_voltage
@@ -216,7 +216,7 @@ Verify VDDR Temperature Sensors Attributes
 
 Verify Power Sensors Attributes
    [Documentation]  Check power sensor attributes.
-   [Tags]  Verify_Power_Sensor_Attributes
+   [Tags]  Verify_Power_Sensors_Attributes
    # Example:
    # /xyz/openbmc_project/sensors/power/power_1
    # /xyz/openbmc_project/sensors/power/power_2
@@ -246,7 +246,7 @@ Verify Power Sensors Attributes
 
 Verify Voltage Sensors Attributes
    [Documentation]  Check voltage sensors attributes.
-   [Tags]  Verify_Voltage_Sensor_Attributes
+   [Tags]  Verify_Voltage_Sensors_Attributes
 
    # Example:
    # "/xyz/openbmc_project/sensors/voltage/voltage0",
@@ -278,7 +278,7 @@ Verify Voltage Sensors Attributes
 
 Verify Current Sensors Attributes
    [Documentation]  Check current sensors attributes.
-   [Tags]  Verify_Current_Sensor_Attributes
+   [Tags]  Verify_Current_Sensors_Attributes
 
    # Example:
    # "/xyz/openbmc_project/sensors/current/current0",
