@@ -16,6 +16,75 @@
       "message": "Utpal Patel,\n\n      **** I don\u0027t see your name in the CLA approved list, if not done, can you work on it to get it approved. Thanks ****\n\nFor approved list would be available here https://drive.google.com/drive/folders/1Ooi0RdTcaOWF1DWFJUAJDdN7tRKde7Nl \n\n",
       "revId": "f6f4e4aa6e852925a54349b7b0c1505c1ab214ab",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11d6b82c_ee7b94f6",
+        "filename": "ipmi/test_get_bios_post_code.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-02-10T08:02:55Z",
+      "side": 1,
+      "message": "End with a period",
+      "range": {
+        "startLine": 66,
+        "startChar": 21,
+        "endLine": 66,
+        "endChar": 67
+      },
+      "revId": "f6f4e4aa6e852925a54349b7b0c1505c1ab214ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d47be231_b48faf10",
+        "filename": "ipmi/test_get_bios_post_code.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-02-10T08:02:55Z",
+      "side": 1,
+      "message": "Add description of arguments",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 24
+      },
+      "revId": "f6f4e4aa6e852925a54349b7b0c1505c1ab214ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ddfb025_be704c1d",
+        "filename": "ipmi/test_get_bios_post_code.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-02-10T08:02:55Z",
+      "side": 1,
+      "message": "Can you give an example of ${resp} to understand the code better?",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 48
+      },
+      "revId": "f6f4e4aa6e852925a54349b7b0c1505c1ab214ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
