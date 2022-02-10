@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a73fc3e_01b5370e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-10T06:37:44Z",
+      "side": 1,
+      "message": "Fixed the following mismatch\n\n$ find | grep \u0027\\.robot$\u0027 | xargs awk -f check_robot_tags.awk\n --- ./tests/security/test_ssl.robot:\nTest Non-SSL Connection To Port 80\nTest_Non_SSL_Connection_To_Port_80\n\n --- ./tests/security/test_ssl.robot:\nTest Non-SSL Connection To Port 443\nTest_Non_SSL_Connection_To_Port_443\n\n --- ./tests/test_boot_policies.robot:\nTest Boot Order via REST\nchassisboot\n\n --- ./tests/test_boot_policies.robot:\nPersist ONETIME Boot Policy After Reset\nchassisboot\n\n --- ./tests/test_boot_policies.robot:\nPersist PERMANENT Boot Policy After Reset\nchassisboot\n\n --- ./tests/test_hardware_sensors.robot:\nVerify Fan Sensors Attributes\nVerify_Fan_Sensor_Attributes\n\n --- ./tests/test_hardware_sensors.robot:\nVerify PCIE Sensors Attributes\nVerify_PCIE_Sensor_Attributes\n\n --- ./tests/test_hardware_sensors.robot:\nVerify Rail Voltage Sensors Attributes\nVerify_Rail_Voltage_Sensor_Attributes\n\n --- ./tests/test_hardware_sensors.robot:\nVerify Power Sensors Attributes\nVerify_Power_Sensor_Attributes\n\n --- ./tests/test_hardware_sensors.robot:\nVerify Voltage Sensors Attributes\nVerify_Voltage_Sensor_Attributes\n\n --- ./tests/test_hardware_sensors.robot:\nVerify Current Sensors Attributes\nVerify_Current_Sensor_Attributes\n\n --- ./tests/test_rest_interfaces.robot:\nCheck Response Codes HTTP_UNSUPPORTED_MEDIA_TYPE\nCheck_Response_Codes_415\n\n --- ./tests/test_rest_interfaces.robot:\nPost Response Code\nPost_Response_Codes\n\n --- ./tests/test_rest_interfaces.robot:\nDelete Response Code\nDelete_Response_Codes\n\n --- ./tests/test_rest_interfaces.robot:\nVerify REST Put Message JSON Compliant\nREST_Put_Message_JSON_Format_Compliance_Test\n\n --- ./tests/test_time.robot:\nSet Host Time With BMC Owner NTP\nSet_Host_Time_With_BMC_And_NTP\n\n\n",
+      "revId": "ac8661ea33a7d0adbe4657fd76daa149a173c176",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
