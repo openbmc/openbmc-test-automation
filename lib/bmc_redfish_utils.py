@@ -351,7 +351,11 @@ class bmc_redfish_utils(object):
                     if isinstance(value, list):
                         for memberDict in value:
                             if isinstance(memberDict, str):
-                                self.__pending_enumeration.add(memberDict)
+                                if url in memberDict:
+                                    self.__pending_enumeration.add(memberDict)
+                                else:
+                                    BuiltIn.log("Dropped URI")
+                                    BuiltIn.log(memberDict)
                             else:
                                 self.__pending_enumeration.add(memberDict['@odata.id'])
 
@@ -361,8 +365,11 @@ class bmc_redfish_utils(object):
                     if value == url:
                         self.__result[url] = data
                     # Data still needs to be looked up,
-                    else:
+                    elif url in value:
                         self.__pending_enumeration.add(value)
+                    else:
+                        BuiltIn.log("Dropped URI")
+                        BuiltIn.log(memberDict)
 
     def get_key_value_nested_dict(self, data, key):
         r"""
