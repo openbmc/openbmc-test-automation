@@ -225,7 +225,7 @@ Create File and Write Data
     FOR  ${cmd}  IN  @{cmd_list}
       ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
       ${ffdc_file_sub_list}=  Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}  ${logpath}
-      Run Key U  scp.Get File \ /tmp/${cmd[0]} \ ${LOG_PREFIX}${cmd[0]}
+      Run Key U  scp.Get File \ /tmp/${cmd[0]} \ ${LOG_PREFIX}${cmd[0]}  ignore=1
       ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}  ${ffdc_file_sub_list}
     END
 
@@ -373,7 +373,7 @@ Log OS All distros FFDC
       ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
       ${ffdc_file_sub_list}=  Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}  ${logpath}  target=OS
       # scp it to the LOG_PREFIX ffdc directory.
-      Run Key U  scp.Get File \ /tmp/${cmd[0]} \ ${LOG_PREFIX}${cmd[0]}
+      Run Key U  scp.Get File \ /tmp/${cmd[0]} \ ${LOG_PREFIX}${cmd[0]}  ignore=1
       ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}  ${ffdc_file_sub_list}
     END
 
@@ -398,7 +398,7 @@ Log OS SPECIFIC DISTRO FFDC
     FOR  ${cmd}  IN  @{cmd_list}
       ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
       ${ffdc_file_sub_list}=  Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}  ${logpath}  target=OS
-      Run Key U  scp.Get File \ /tmp/${cmd[0]} \ ${LOG_PREFIX}${cmd[0]}
+      Run Key U  scp.Get File \ /tmp/${cmd[0]} \ ${LOG_PREFIX}${cmd[0]}  ignore=1
       ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}  ${ffdc_file_sub_list}
     END
 
@@ -421,7 +421,7 @@ Log OS SPECIFIC DISTRO FFDC
     OS Execute Command  chmod 644 ${sosreport_file_path}
 
     # SCP the sosreport file from the OS.
-    Run Key U  scp.Get File \ ${sosreport_file_path} \ ${local_sosreport_file_path}
+    Run Key U  scp.Get File \ ${sosreport_file_path} \ ${local_sosreport_file_path}  ignore=1
 
     # Add the file location to the ffdc_file_list.
     Append To List  ${ffdc_file_list}  ${local_sosreport_file_path}
