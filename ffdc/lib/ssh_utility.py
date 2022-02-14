@@ -148,11 +148,14 @@ class SSHRemoteclient:
 
         try:
             self.scpclient.get(remote_file, local_file, recursive=True)
-        except (SCPException, SocketTimeout, PipeTimeout) as e:
+        except (SCPException, SocketTimeout, PipeTimeout, SSHException) as e:
             # Log command with error. Return to caller for next file, if any.
             logging.error(
                 "\n\tERROR: Fail scp %s from remotehost %s %s\n\n" % (remote_file, e.__class__, e))
+            # Pause for 2 seconds allowing Paramiko to finish error processing before next fetch.
+            # Without the delay after SCPException,
+            #    next fetch will get 'paramiko.ssh_exception.SSHException'> Channel closed Error.
+            time.sleep(2)
             return False
-
         # Return True for file accounting
         return True
