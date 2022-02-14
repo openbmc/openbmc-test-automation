@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56ac9871_8d21d1f4",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-02-14T05:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7798668a_ca17d9c8",
+      "range": {
+        "startLine": 163,
+        "startChar": 21,
+        "endLine": 163,
+        "endChar": 79
+      },
+      "revId": "56b6e59c32974205c3a0234804b600867a74c14e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2510e96d_437d8805",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-02-09T08:13:49Z",
       "side": 1,
       "message": "Remove this.. self explanatory keyword",
+      "range": {
+        "startLine": 168,
+        "startChar": 4,
+        "endLine": 168,
+        "endChar": 39
+      },
+      "revId": "56b6e59c32974205c3a0234804b600867a74c14e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "296e9855_0d7d15ae",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-02-14T05:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2510e96d_437d8805",
       "range": {
         "startLine": 168,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcf8d615_f077386e",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-02-14T05:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20843042_f6e1269d",
+      "range": {
+        "startLine": 169,
+        "startChar": 4,
+        "endLine": 169,
+        "endChar": 21
+      },
+      "revId": "56b6e59c32974205c3a0234804b600867a74c14e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "032cf9a8_dedfe059",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-02-09T08:13:49Z",
       "side": 1,
       "message": "Check if the IPMI enabled is set.",
+      "range": {
+        "startLine": 171,
+        "startChar": 6,
+        "endLine": 171,
+        "endChar": 50
+      },
+      "revId": "56b6e59c32974205c3a0234804b600867a74c14e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5445d3d6_d76dcf3d",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-02-14T05:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "032cf9a8_dedfe059",
       "range": {
         "startLine": 171,
         "startChar": 6,
@@ -116,6 +212,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b69f8f2_90773515",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-02-14T05:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0dff4aac_c28eeafc",
+      "range": {
+        "startLine": 174,
+        "startChar": 6,
+        "endLine": 174,
+        "endChar": 44
+      },
+      "revId": "56b6e59c32974205c3a0234804b600867a74c14e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8714e3d2_e088f913",
@@ -129,6 +249,30 @@
       "writtenOn": "2022-02-09T08:13:49Z",
       "side": 1,
       "message": "Set the IPMI protocol attribute to False, reset BMC, and verify that the setting persists.",
+      "range": {
+        "startLine": 179,
+        "startChar": 21,
+        "endLine": 179,
+        "endChar": 80
+      },
+      "revId": "56b6e59c32974205c3a0234804b600867a74c14e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fd24e77_c775ea14",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-02-14T05:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8714e3d2_e088f913",
       "range": {
         "startLine": 179,
         "startChar": 21,
@@ -162,6 +306,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b34415bf_42f19085",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-02-14T05:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68749a9d_c306a6c3",
+      "range": {
+        "startLine": 185,
+        "startChar": 4,
+        "endLine": 185,
+        "endChar": 40
+      },
+      "revId": "56b6e59c32974205c3a0234804b600867a74c14e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ecc6844_237a92d9",
@@ -185,6 +353,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21bc1046_9bd2a2e4",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-02-14T05:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ecc6844_237a92d9",
+      "range": {
+        "startLine": 186,
+        "startChar": 4,
+        "endLine": 186,
+        "endChar": 22
+      },
+      "revId": "56b6e59c32974205c3a0234804b600867a74c14e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81a922c0_1cda82a8",
@@ -198,6 +390,30 @@
       "writtenOn": "2022-02-09T08:13:49Z",
       "side": 1,
       "message": "Confirm that IPMI connection request fails.",
+      "range": {
+        "startLine": 191,
+        "startChar": 6,
+        "endLine": 191,
+        "endChar": 34
+      },
+      "revId": "56b6e59c32974205c3a0234804b600867a74c14e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb270ea6_7ff5c9e7",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-02-14T05:30:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81a922c0_1cda82a8",
       "range": {
         "startLine": 191,
         "startChar": 6,
