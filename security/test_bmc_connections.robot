@@ -14,7 +14,7 @@ Library   SSHLibrary
 Library   Collections
 Library   XvfbRobot
 Library   OperatingSystem
-Library   Selenium2Library  120  120
+Library   SeleniumLibrary  120  120
 Library   Telnet  30 Seconds
 Library   Screenshot
 
