@@ -16,6 +16,24 @@
       "message": "gw address is required here",
       "revId": "a82e5b63e23b081916b42e760ffec0d5f86719d1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2b03d09_b5cf7553",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-02-15T07:21:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcee0b89_09e31552",
+      "revId": "a82e5b63e23b081916b42e760ffec0d5f86719d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
