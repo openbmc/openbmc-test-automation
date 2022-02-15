@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0944f4c_17c12507",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-02-15T12:58:31Z",
+      "side": 1,
+      "message": "Added test to verify modified IPMI username\n\nTest cases added:\n    - Modify_IPMI_User",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 65
+      },
+      "revId": "df3c6d2055b803899b0f54ab2ee11743301c542f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47855423_81bcdeee",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-02-15T12:58:31Z",
+      "side": 1,
+      "message": "2 spaces please",
+      "range": {
+        "startLine": 486,
+        "startChar": 28,
+        "endLine": 486,
+        "endChar": 32
+      },
+      "revId": "df3c6d2055b803899b0f54ab2ee11743301c542f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5bfc328_9b1b1a93",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-02-15T12:58:31Z",
+      "side": 1,
+      "message": "We can just use below here\n\n# Verify that user is able to run IPMI command with newly created user.\nVerify IPMI Command  ${random_username}  ${valid_password}  Administrator ${CHANNEL_NUMBER}",
+      "range": {
+        "startLine": 501,
+        "startChar": 0,
+        "endLine": 505,
+        "endChar": 88
+      },
+      "revId": "df3c6d2055b803899b0f54ab2ee11743301c542f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9be804cb_9a47f731",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-02-15T12:58:31Z",
+      "side": 1,
+      "message": "Not required",
+      "range": {
+        "startLine": 507,
+        "startChar": 0,
+        "endLine": 507,
+        "endChar": 14
+      },
+      "revId": "df3c6d2055b803899b0f54ab2ee11743301c542f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "164e7065_fff7cc3f",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-02-15T12:58:31Z",
+      "side": 1,
+      "message": "We can just use below here\n\n# Verify that user is able to run IPMI command with new modified username.\nVerify IPMI Command  ${new_username}  ${valid_password}  Administrator \n ${CHANNEL_NUMBER}",
+      "range": {
+        "startLine": 513,
+        "startChar": 0,
+        "endLine": 517,
+        "endChar": 85
+      },
+      "revId": "df3c6d2055b803899b0f54ab2ee11743301c542f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
