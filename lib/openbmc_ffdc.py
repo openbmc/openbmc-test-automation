@@ -55,16 +55,17 @@ def ffdc(ffdc_dir_path=None,
         state = st.get_state(req_states=['ping', 'uptime', interface])
         gp.qprint_var(state)
         if not int(state['ping']):
-            gp.print_error("BMC is not ping-able.  Terminating FFDC collection.\n")
-            return ffdc_file_list
+            gp.print_error("BMC is not ping-able.\n")
 
         if not int(state[interface]):
-            gp.print_error("%s commands to the BMC are failing." % interface
-                           + "  Terminating FFDC collection.\n")
-            return ffdc_file_list
+            gp.print_error("%s commands to the BMC are failing." % interface)
 
         if state['uptime'] == "":
-            gp.print_error("BMC is not communicating via ssh.  Terminating FFDC"
+            gp.print_error("BMC is not communicating via ssh.\n")
+
+        # If none of the Ping, SSH and Redfish connection works, abort.
+        if not int(state['ping']) and  not int(state[interface]) and state['uptime'] == "":
+            gp.print_error("BMC is not communicating via ssh or Redfish.  Terminating FFDC"
                            + " collection.\n")
             return ffdc_file_list
 
