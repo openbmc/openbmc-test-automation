@@ -59,12 +59,14 @@ def ffdc(ffdc_dir_path=None,
             return ffdc_file_list
 
         if not int(state[interface]):
-            gp.print_error("%s commands to the BMC are failing." % interface
-                           + "  Terminating FFDC collection.\n")
-            return ffdc_file_list
+            gp.print_error("%s commands to the BMC are failing." % interface)
 
         if state['uptime'] == "":
-            gp.print_error("BMC is not communicating via ssh.  Terminating FFDC"
+            gp.print_error("BMC is not communicating via ssh.\n")
+
+        # If SSH and Redfish connection doesn't works, abort.
+        if not int(state[interface]) and state['uptime'] == "":
+            gp.print_error("BMC is not communicating via ssh or Redfish.  Terminating FFDC"
                            + " collection.\n")
             return ffdc_file_list
 
