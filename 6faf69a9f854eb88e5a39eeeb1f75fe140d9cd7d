@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ced70c4_2e78447e",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-02-15T06:25:42Z",
+      "side": 1,
+      "message": "can you re-use code from library??",
+      "revId": "6faf69a9f854eb88e5a39eeeb1f75fe140d9cd7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
