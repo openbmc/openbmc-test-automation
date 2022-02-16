@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57523bab_234d8c65",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-02-16T05:22:13Z",
+      "side": 1,
+      "message": "IP address, subnet and gateway",
+      "range": {
+        "startLine": 200,
+        "startChar": 47,
+        "endLine": 200,
+        "endChar": 68
+      },
+      "revId": "e83c8e09196ff21c441d173e3a24547f5765909b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca6bc8db_f3e640f2",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-02-16T05:22:13Z",
+      "side": 1,
+      "message": "Run Keyword If",
+      "range": {
+        "startLine": 218,
+        "startChar": 4,
+        "endLine": 218,
+        "endChar": 18
+      },
+      "revId": "e83c8e09196ff21c441d173e3a24547f5765909b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
