@@ -8,7 +8,7 @@ Variables        ../data/ipmi_raw_cmd_table.py
 
 *** Variables ***
 ${power_state_change}  10
-${host_reboot_time}  240
+${host_reboot_time}  360
 
 *** Test Cases ***
 
@@ -35,6 +35,13 @@ Test Get BIOS POST Code via IPMI Raw Command After Power Cycle
     [Documentation]  Get BIOS POST Code via IPMI raw command after power cycle.
     [Tags]  Test_Get_BIOS_POST_Code_via_IPMI_Raw_Command_After_Power_Cycle
 
+    ${resp}=  Run IPMI Standard Command  chassis power cycle
+    Sleep  ${power_state_change}
+    Should Contain  ${resp}  Chassis Power Control: Cycle
+    sleep  ${host_reboot_time}
+    ${ipmi_state}=  Get Host State Via External IPMI
+    Valid Value  ipmi_state  ['on']
+
     ${resp}=  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['BIOS_POST_Code']['Get'][0]}
     Sleep  ${host_reboot_time}
 
@@ -50,6 +57,12 @@ Test Get BIOS POST Code via IPMI Raw Command With Host Powered Off
 
     ${resp}=  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['BIOS_POST_Code']['Get'][0]}
     Should Contain  ${resp}  ${IPMI_RAW_CMD['BIOS_POST_Code']['Get'][3]}
+
+    # Turn host back on.
+    IPMI Power On  stack_mode=skip  quiet=1
+    Verify Host PowerOn Via IPMI
+    ${resp}=  Run IPMI Standard Command  chassis power status
+    Should Be Equal As Strings  '${resp}'  'Chassis Power is on'
 
 *** Keywords ***
 
