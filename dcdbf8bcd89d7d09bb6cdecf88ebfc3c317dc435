@@ -33,6 +33,24 @@
       "message": "You need to push the code changes. I only see the commit message and reply to my comment.",
       "revId": "dcdbf8bcd89d7d09bb6cdecf88ebfc3c317dc435",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db3d689b_b7456932",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-02-16T11:40:19Z",
+      "side": 1,
+      "message": "Pushed my changes",
+      "parentUuid": "937c9cf8_ed608294",
+      "revId": "dcdbf8bcd89d7d09bb6cdecf88ebfc3c317dc435",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
