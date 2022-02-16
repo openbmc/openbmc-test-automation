@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98d93db7_c183deeb",
+        "filename": "gui/data/gui_variables.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-02-16T09:48:03Z",
+      "side": 1,
+      "message": "Take out information from here and all other header xpath like below\n\nxpath_firmware_header",
+      "range": {
+        "startLine": 48,
+        "startChar": 4,
+        "endLine": 48,
+        "endChar": 37
+      },
+      "revId": "9893e438914479565bb5968c99070e640c493dd8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96076bc5_76677578",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-02-16T09:48:03Z",
+      "side": 1,
+      "message": "use under section. Apply to all other tests\n\nVerify View More Button Under Server information Section\n    [Documentation]  Verify view more button under server information section in overview page",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 92
+      },
+      "revId": "9893e438914479565bb5968c99070e640c493dd8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "051043d8_ef11c9ea",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-02-16T09:48:03Z",
+      "side": 1,
+      "message": "Move this as part of test setup execution so that it is not required for all these test.",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 179,
+        "endChar": 77
+      },
+      "revId": "9893e438914479565bb5968c99070e640c493dd8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
