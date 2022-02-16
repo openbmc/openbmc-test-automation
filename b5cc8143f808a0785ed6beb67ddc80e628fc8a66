@@ -72,6 +72,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51d40d07_5fe3fed1",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-02-16T07:38:41Z",
+      "side": 1,
+      "message": "yes i have added as per page..as in GUI Network page once after clicking add static ip address button, we can enter ip address, gateway \u0026 submnet mask..so i have used keyword related to that button.",
+      "parentUuid": "28451813_10490f1d",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 199,
+        "endChar": 32
+      },
+      "revId": "b5cc8143f808a0785ed6beb67ddc80e628fc8a66",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c74d0225_ee6bbf5e",
