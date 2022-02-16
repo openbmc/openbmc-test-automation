@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e848506e_7e9bb45d",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-02-16T05:46:44Z",
+      "side": 1,
+      "message": "This too needs a change?\nAs we are adding IP address, subnet and gateway in this keyword.",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 199,
+        "endChar": 32
+      },
+      "revId": "b5cc8143f808a0785ed6beb67ddc80e628fc8a66",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c74d0225_ee6bbf5e",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-02-16T05:46:44Z",
+      "side": 1,
+      "message": "Run Keyword If",
+      "range": {
+        "startLine": 218,
+        "startChar": 4,
+        "endLine": 218,
+        "endChar": 19
+      },
+      "revId": "b5cc8143f808a0785ed6beb67ddc80e628fc8a66",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
