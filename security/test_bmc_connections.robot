@@ -14,7 +14,7 @@ Library   SSHLibrary
 Library   Collections
 Library   XvfbRobot
 Library   OperatingSystem
-Library   Selenium2Library  120  120
+Library   SeleniumLibrary  120  120
 Library   Telnet  30 Seconds
 Library   Screenshot
 
@@ -169,7 +169,8 @@ Test Stability On Large Number Of Wrong Login Attempts To GUI
         ${status}=  Run Keyword If  ${i} % 100 == 0  Run Keyword And Return Status
         ...  Open Browser  ${bmc_url}
         Append To List  ${status_list}  ${status}
-        Run Keyword If  '${status}' == 'True'  Run Keywords  Close Browser  AND  Switch Browser  browser1
+        Run Keyword If  '${status}' == 'True'
+        ...  Run Keywords  Close Browser  AND  Switch Browser  browser1
     END
 
     ${fail_count}=  Count Values In List  ${status_list}  False
