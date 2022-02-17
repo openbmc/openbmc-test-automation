@@ -31,7 +31,7 @@ CMD_INFORMATIONAL_ERROR = ERROR_LOG_CREATE_BASE_CMD + 'xyz.openbmc_project.Commo
 CMD_INVENTORY_PREFIX = 'busctl get-property xyz.openbmc_project.Inventory.Manager \
     /xyz/openbmc_project/inventory/system/chassis/motherboard'
 
-CMD_UNRECOVERABLE_ERROR = ERROR_LOG_CREATE_BASE_CMD + 'xyz.openbmc_project.Common.Error.InternalFailure \
+CMD_UNRECOVERABLE_ERROR = ERROR_LOG_CREATE_BASE_CMD + 'org.open_power.Logging.Error.TestError1 \
     xyz.openbmc_project.Logging.Entry.Level.Error 0'
 
 CMD_PREDICTIVE_ERROR = ERROR_LOG_CREATE_BASE_CMD + 'xyz.openbmc_project.Common.Error.InternalFailure \
