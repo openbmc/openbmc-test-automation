@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ac69f33_b14ee9f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-02-17T16:10:51Z",
+      "side": 1,
+      "message": "Redfish BMC Code Update :: Update the firmware image.                 | PASS |\n------------------------------------------------------------------------------\n#(CST) 2022/02/17 10:05:43.238267 -    0.088333 - Executing: delete(\u0027/redfish/v1/SessionService/Sessions/LBFtGsk0b0\u0027)\nRedfish Bmc Code Update :: Update the BMC code on a target BMC via... | PASS |\n1 critical test, 1 passed, 0 failed\n1 test total, 1 passed, 0 failed\n\n\nCurrent images on the BMC before upload: [\u0027/redfish/v1/UpdateService/FirmwareInventory/937067e2\u0027, \u0027/redfish/v1/UpdateService/FirmwareInventory/d377962b\u0027, \u0027/redfish/v1/UpdateService/FirmwareInventory/daa5d59b\u0027]\n",
+      "revId": "2f961626c7f0addf85f63e58bdab35bc18c6b3c3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
