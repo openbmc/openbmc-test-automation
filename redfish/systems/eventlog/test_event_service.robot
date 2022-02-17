@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    Test Redfish event service.
+Documentation    Test Redfish event service subscription function.
 
 Resource         ../../../lib/resource.robot
 Resource         ../../../lib/bmc_redfish_resource.robot
@@ -13,21 +13,14 @@ Suite teardown   Run Keyword And Ignore Error  Delete All Redfish Sessions
 
 ***Variables***
 
-${REMOTE_SERVER_IP}
+# override this default using -v REMOTE_SERVER_IP:<IP> from CLI
+${REMOTE_SERVER_IP}    10.7.7.7
 
 ** Test Cases **
 
-Verify Event Service Available
-    [Documentation]  Verify Redfish event service is available.
-    [Tags]  Verify_Event_Service_Available
-
-    ${resp} =  Redfish_utils.Get Attribute  /redfish/v1/EventService  ServiceEnabled
-    Should Be Equal As Strings  ${resp}  ${True}
-
-
-Verify Subscribe An Event
-    [Documentation]  Subscribe to an event and verify.
-    [Tags]  Verify_Subscribe_An_Event
+Verify Add Subscribe Server For Event Notification
+    [Documentation]  Subscribe a remote server and verify if added successful.
+    [Tags]  Verify_Add_Subscribe_Server_For_Event_Notification
 
     ${subscription_list}=  Redfish_Utils.Get Member List
     ...  /redfish/v1/EventService/Subscriptions
@@ -71,6 +64,10 @@ Test Setup Execution
     ...  /redfish/v1/EventService/Subscriptions
 
     Delete All Subscriptions  ${subscription_list}
+
+    # Verify Redfish event service attribute ServiceEnabled is set to True.
+    ${resp} =  Redfish_utils.Get Attribute  /redfish/v1/EventService  ServiceEnabled
+    Should Be Equal As Strings  ${resp}  ${True}
 
 
 Test Teardown Execution
