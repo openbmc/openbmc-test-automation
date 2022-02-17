@@ -14,7 +14,7 @@ Library   SSHLibrary
 Library   Collections
 Library   XvfbRobot
 Library   OperatingSystem
-Library   Selenium2Library  120  120
+Library   SeleniumLibrary  120  120
 Library   Telnet  30 Seconds
 Library   Screenshot
 
@@ -179,7 +179,7 @@ Test BMC GUI Stability On Continuous Refresh Of GUI Home Page
     [Documentation]  Login to BMC GUI and keep refreshing home page and verify stability
         ...  by login at times in another browser.
     [Tags]  Test_BMC_GUI_Stability_On_Continuous_Refresh_Of_GUI_Home_Page
-    [Teardown]  Close All Browsers
+    [Teardown]  SeleniumLibrary.Close All Browsers
 
     @{failed_list}=  Create List
 
