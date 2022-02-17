@@ -10,11 +10,14 @@ from robot.libraries.BuiltIn import BuiltIn
 import gen_print as gp
 
 MTLS_ENABLED = BuiltIn().get_variable_value("${MTLS_ENABLED}")
-
+pending_enumeration = set()
+enumerated_resources = set()
+result = {}
 
 class bmc_redfish_utils(object):
 
     ROBOT_LIBRARY_SCOPE = 'TEST SUITE'
+    
 
     def __init__(self):
         r"""
@@ -245,7 +248,7 @@ class bmc_redfish_utils(object):
                 continue
             self.walk_nested_dict(self._rest_response_.dict)
         return list(sorted(self.__pending_enumeration))
-
+    @classmethod
     def enumerate_request(self, resource_path, return_json=1,
                           include_dead_resources=False):
         r"""
@@ -260,6 +263,7 @@ class bmc_redfish_utils(object):
         include_dead_resources      Check and return a list of dead/broken URI
                                     resources.
         """
+        #return resource_path
 
         gp.qprint_executing(style=gp.func_line_style_short)
 
@@ -269,16 +273,16 @@ class bmc_redfish_utils(object):
         quiet = 1
 
         # Variable to hold enumerated data.
-        self.__result = {}
+        #self.__result = {}
 
         # Variable to hold the pending list of resources for which enumeration.
         # is yet to be obtained.
-        self.__pending_enumeration = set()
+        #pending_enumeration = set()
 
-        self.__pending_enumeration.add(resource_path)
+        pending_enumeration.add(resource_path)
 
         # Variable having resources for which enumeration is completed.
-        enumerated_resources = set()
+        #enumerated_resources = set()
 
         if include_dead_resources:
             dead_resources = {}
@@ -286,6 +290,8 @@ class bmc_redfish_utils(object):
         resources_to_be_enumerated = (resource_path,)
 
         while resources_to_be_enumerated:
+            print(resources_to_be_enumerated)
+            print("stepinside")
             for resource in resources_to_be_enumerated:
                 # JsonSchemas, SessionService or URLs containing # are not
                 # required in enumeration.
@@ -297,7 +303,7 @@ class bmc_redfish_utils(object):
                         or ('Journal' in resource)\
                         or ('#' in resource):
                     continue
-
+                self._redfish_ = BuiltIn().get_library_instance('redfish')
                 self._rest_response_ = \
                     self._redfish_.get(resource, valid_status_codes=[200, 404, 405, 500])
                 # Enumeration is done for available resources ignoring the
@@ -316,22 +322,23 @@ class bmc_redfish_utils(object):
 
             enumerated_resources.update(set(resources_to_be_enumerated))
             resources_to_be_enumerated = \
-                tuple(self.__pending_enumeration - enumerated_resources)
+                tuple(pending_enumeration - enumerated_resources)
+        #return self.__result
 
         if return_json:
             if include_dead_resources:
-                return json.dumps(self.__result, sort_keys=True,
+                return json.dumps(result, sort_keys=True,
                                   indent=4, separators=(',', ': ')), dead_resources
             else:
-                return json.dumps(self.__result, sort_keys=True,
+                return json.dumps(result, sort_keys=True,
                                   indent=4, separators=(',', ': '))
         else:
             if include_dead_resources:
-                return self.__result, dead_resources
+                return result, dead_resources
             else:
-                return self.__result
+                return result
 
-    def walk_nested_dict(self, data, url=''):
+    def walk_nested_dict(self, data={}, url=''):
         r"""
         Parse through the nested dictionary and get the resource id paths.
         Description of argument(s):
@@ -341,28 +348,31 @@ class bmc_redfish_utils(object):
         url = url.rstrip('/')
 
         for key, value in data.items():
-
+            print(key)
+            print(value)
+            print("key")
             # Recursion if nested dictionary found.
             if isinstance(value, dict):
-                self.walk_nested_dict(value)
+                self.walk_nested_dict(data=value)
             else:
                 # Value contains a list of dictionaries having member data.
                 if 'Members' == key:
                     if isinstance(value, list):
                         for memberDict in value:
                             if isinstance(memberDict, str):
-                                self.__pending_enumeration.add(memberDict)
+                                pending_enumeration.add(memberDict)
                             else:
-                                self.__pending_enumeration.add(memberDict['@odata.id'])
+                                pending_enumeration.add(memberDict['@odata.id'])
 
                 if '@odata.id' == key:
                     value = value.rstrip('/')
                     # Data for the given url.
                     if value == url:
-                        self.__result[url] = data
+                        result[url] = data
                     # Data still needs to be looked up,
                     else:
-                        self.__pending_enumeration.add(value)
+                        pending_enumeration.add(value)
+
 
     def get_key_value_nested_dict(self, data, key):
         r"""
@@ -379,3 +389,80 @@ class bmc_redfish_utils(object):
 
             if k == key:
                 target_list.append(v)
+                
+
+
+
+
+    def enumerate_multi_proc_request(self, resource_path, return_json=1,
+                          include_dead_resources=False):
+        r"""
+        Perform a GET enumerate request using multi processing and return available 
+        resource paths.
+
+        Description of argument(s):
+        resource_path               URI resource absolute path (e.g.
+                                    "/redfish/v1/SessionService/Sessions").
+        return_json                 Indicates whether the result should be
+                                    returned as a json string or as a
+                                    dictionary.
+        include_dead_resources      Check and return a list of dead/broken URI
+                                    resources.
+        """
+        from multiprocessing import Pool
+        
+        gp.qprint_executing(style=gp.func_line_style_short)
+
+        return_json = int(return_json)
+
+        # Set quiet variable to keep subordinate get() calls quiet.
+        quiet = 1
+
+        # Variable to hold enumerated data.
+        #self.__result = {}
+        #self.__pending_enumeration = set()
+        ''''
+        if ('JsonSchemas' in resource_path) or ('SessionService' in resource_path)\
+                        or ('PostCodes' in resource_path) or \
+                        ('Registries' in resource_path)\
+                        or ('Journal' in resource_path)\
+                        or ('#' in resource_path):
+            gp.print_issuing("Do not find a valid resource to start with. Quitting....")
+            return self.__result
+        '''
+            
+        self._rest_response_ = \
+            self._redfish_.get(resource_path, valid_status_codes=[200, 404, 405, 500])
+        # Enumeration is done for available resources ignoring the
+        # ones for which response is not obtained.
+        if self._rest_response_.status != 200:
+            if include_dead_resources:
+                try:
+                    dead_resources[self._rest_response_.status].append(
+                        resource_path)
+                except KeyError:
+                    dead_resources[self._rest_response_.status] = \
+                        [resource_path]
+        
+        self.walk_nested_dict(self._rest_response_.dict, resource_path)
+        print(pending_enumeration)
+        
+        pool_resources = list(pending_enumeration)
+        print(pool_resources)
+        print("step0")
+        pool = Pool(1)
+        print("step1")
+        pool_result = pool.map(bmc_redfish_utils.enumerate_request, pool_resources)
+        pool.close()
+        pool.join()
+        print("Done")
+        print(pool_result)
+        #return json.dumps(result[0], sort_keys=True,
+        #                          indent=4, separators=(',', ': '))
+        return pool_result[0]
+        
+                       
+
+            
+            
+            

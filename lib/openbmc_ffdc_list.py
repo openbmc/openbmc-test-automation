@@ -200,23 +200,7 @@ FFDC_METHOD_CALL = {
     'BMC LOGS':
     {
         # Description               Keyword name
-        'FFDC Generic Report': 'BMC FFDC Manifest',
-        'BMC Specific Files': 'BMC FFDC Files',
-        'Get Request FFDC': 'BMC FFDC Get Requests',
-        'Get Redfish Request FFDC': 'BMC FFDC Get Redfish Requests',
-        'OS FFDC': 'OS FFDC Files',
-        'Core Files': 'SCP Coredump Files',
-        'SEL Log': 'Collect eSEL Log',
-        'Sys Inventory Files': 'System Inventory Files',
-        'Dump Log': 'Collect Dump Log',
-        'Dump Files': 'SCP Dump Files',
-        'Dump HB Files': 'SCP Dump HB Files',
-        'PEL Files': 'Collect PEL Log',
-        'Redfish Log': 'Enumerate Redfish Resources',
-        'Firmware Log': 'Enumerate Redfish Resources  '
-        + ' enum_uri=/redfish/v1/UpdateService/FirmwareInventory  '
-        + ' file_enum_name=redfish_FIRMWARE_list.txt',
-        'Redfish OEM Log': 'Enumerate Redfish OEM Resources',
+        'Redfish Log': 'Enumerate Redfish Resources'
     },
 }
 
