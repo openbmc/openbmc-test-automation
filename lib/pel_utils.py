@@ -7,8 +7,14 @@ PEL functions.
 import func_args as fa
 import bmc_ssh_utils as bsu
 import json
-import pel_variables
+import os
+import sys
+from robot.libraries.BuiltIn import BuiltIn
 
+base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(base_path + "/data/")
+
+import pel_variables
 
 class peltool_exception(Exception):
     r"""
