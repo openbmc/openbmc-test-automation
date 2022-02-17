@@ -153,7 +153,7 @@ Clear Existing Error Logs
 
 Create Test PEL Log
     [Documentation]  Generate test PEL log.
-    [Arguments]  ${pel_type}=Internal Failure
+    [Arguments]  ${pel_type}=Unrecoverable Error
 
     # Description of argument(s):
     # pel_type      The PEL type (e.g. Internal Failure, FRU Callout, Procedural Callout).
@@ -178,6 +178,8 @@ Create Test PEL Log
     ...   BMC Execute Command  ${CMD_FRU_CALLOUT}
     ...  ELSE IF  '${pel_type}' == 'Procedure And Symbolic FRU Callout'
     ...   BMC Execute Command  ${CMD_PROCEDURAL_SYMBOLIC_FRU_CALLOUT}
+    ...  ELSE IF  '${pel_type}' == 'Unrecoverable Error'
+    ...   BMC Execute Command  ${CMD_UNRECOVERABLE_ERROR}
 
 
 Create Test Error Log
