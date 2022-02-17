@@ -662,3 +662,55 @@ Validate Hostname On BMC
     ${sys_hostname}=  Get BMC Hostname
     Should Be Equal  ${sys_hostname}  ${hostname}
     ...  ignore_case=True  msg=Hostname does not exist.
+
+Get Channel Number For All Interface
+    [Documentation]  Gets the Interface name and returns the channel number for the given interface
+
+    ${valid_channel_number_interface_names}=  Get Channel Config
+
+    ${valid_channel_number_interface_names}=  Convert To Dictionary  ${valid_channel_number_interface_names}
+
+    [Return]  ${valid_channel_number_interface_names}
+
+Get Valid Channel Number
+    [Documentation]  Get Valid Channel Number
+    [Arguments]  ${valid_channel_number_interface_names}
+
+    # Description
+    # will create dictionary based 'is_valid' parameter if it was true details will be appended to dictionary
+
+    &{valid_channel_number_interface_name}=  Create Dictionary
+
+    FOR  ${key}  ${values}  IN  &{valid_channel_number_interface_names}
+      Run Keyword If  '${values['is_valid']}' == 'True'
+      ...  Set To Dictionary  ${valid_channel_number_interface_name}  ${key}  ${values}
+    END
+
+    [Return]  ${valid_channel_number_interface_name}
+
+Get Channel Number For Valid Ethernet Interface
+    [Documentation]  Get channel number for all ethernet interface
+    [Arguments]  ${valid_channel_number_interface_name}
+
+    &{channel_number_ethernet_interface_name}=  Create Dictionary
+    @{channel_number_list}=  Create List
+
+    FOR  ${channel_number}  ${values}  IN  &{valid_channel_number_interface_name}
+      Run Keyword If  '${values['channel_info']['medium_type']}' == 'lan-802.3'
+      ...  Run Keywords  Set To Dictionary  ${channel_number_ethernet_interface_name}  ${channel_number}}  ${values['name']}
+      ...  AND  Append To List  ${channel_number_list}  ${channel_number}
+    END
+
+    [Return]  ${channel_number_ethernet_interface_name}  ${channel_number_list}
+
+Get Active Ethernet Channel List
+    [Documentation]  Get Available Channel
+
+    ${valid_channel_number_interface_names}=  Get Channel Number For All Interface
+
+    ${valid_channel_number_interface_name}=  Get Valid Channel Number  ${valid_channel_number_interface_names}
+
+    ${channel_number_ethernet_interface_name}  ${channel_number_list}=  Get Channel Number For Valid Ethernet Interface
+    ...  ${valid_channel_number_interface_name}
+
+    [Return]  ${channel_number_list}

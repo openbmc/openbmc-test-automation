@@ -3,6 +3,7 @@ Documentation       Test suite for OpenBMC IPMI user management.
 
 Resource            ../lib/ipmi_client.robot
 Resource            ../lib/openbmc_ffdc.robot
+Resource            ../lib/bmc_network_utils.robot
 Library             ../lib/ipmi_utils.py
 Test Setup          Printn
 
@@ -28,7 +29,6 @@ ${ipmi_setaccess_cmd}   channel setaccess
 
 # User defined count.
 ${USER_LOOP_COUNT}      20
-
 
 *** Test Cases ***
 
@@ -364,6 +364,7 @@ Verify IPMI Root User Password Change
 Verify Administrator And No Access Privilege For Different Channels
     [Documentation]  Set administrator and no access privilege for different channels and verify.
     [Tags]  Verify_Administrator_And_No_Access_Privilege_For_Different_Channels
+    [Setup]  Check Active Ethernet Channels
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
     ...  Delete Created User  ${random_userid}
 
@@ -373,23 +374,24 @@ Verify Administrator And No Access Privilege For Different Channels
     ...  user set password ${random_userid} ${valid_password}
 
     # Set admin privilege for newly created user with channel 1.
-    Set Channel Access  ${random_userid}  ipmi=on privilege=${admin_level_priv}  1
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${admin_level_priv}  ${CHANNEL_NUMBER}
 
     # Set no access privilege for newly created user with channel 2.
-    Set Channel Access  ${random_userid}  ipmi=on privilege=${no_access_priv}  2
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${no_access_priv}  ${SECONDARY_CHANNEL_NUMBER}
 
     Enable IPMI User And Verify  ${random_userid}
 
     # Verify that user is able to run administrator level IPMI command with channel 1.
-    Verify IPMI Command  ${random_username}  ${valid_password}  Administrator  1
+    Verify IPMI Command  ${random_username}  ${valid_password}  Administrator  ${CHANNEL_NUMBER}
 
     # Verify that user is unable to run IPMI command with channel 2.
-    Run IPMI Standard Command  sel info 2  expected_rc=${1}  U=${random_username}  P=${valid_password}
+    Run IPMI Standard Command  sel info ${SECONDARY_CHANNEL_NUMBER}  expected_rc=${1}  U=${random_username}  P=${valid_password}
 
 
 Verify Operator And User Privilege For Different Channels
     [Documentation]  Set operator and user privilege for different channels and verify.
     [Tags]  Verify_Operator_And_User_Privilege_For_Different_Channels
+    [Setup]  Check Active Ethernet Channels
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
     ...  Delete Created User  ${random_userid}
 
@@ -399,18 +401,18 @@ Verify Operator And User Privilege For Different Channels
     ...  user set password ${random_userid} ${valid_password}
 
     # Set operator privilege for newly created user with channel 1.
-    Set Channel Access  ${random_userid}  ipmi=on privilege=${operator_priv}  1
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${operator_priv}  ${CHANNEL_NUMBER}
 
     # Set user privilege for newly created user with channel 2.
-    Set Channel Access  ${random_userid}  ipmi=on privilege=${user_priv}  2
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${user_priv}  ${SECONDARY_CHANNEL_NUMBER}
 
     Enable IPMI User And Verify  ${random_userid}
 
     # Verify that user is able to run operator level IPMI command with channel 1.
-    Verify IPMI Command  ${random_username}  ${valid_password}  Operator  1
+    Verify IPMI Command  ${random_username}  ${valid_password}  Operator  ${CHANNEL_NUMBER}
 
     # Verify that user is able to run user level IPMI command with channel 2.
-    Verify IPMI Command  ${random_username}  ${valid_password}  User  2
+    Verify IPMI Command  ${random_username}  ${valid_password}  User  ${SECONDARY_CHANNEL_NUMBER}
 
 
 Verify Setting IPMI User With Max Password Length
@@ -653,3 +655,18 @@ Delete Created User
 
     Run IPMI Standard Command  user set name ${userid} ""
     Sleep  5s
+
+
+Check Active Ethernet Channels
+    [Documentation]  Check active ethernet channels and set suite variables.
+
+    ${channel_number_list}=  Get Active Ethernet Channel List
+    ${channel_length}=  Get Length  ${channel_number_list}
+    Skip If  '${channel_length}' == '1'
+    ...  msg= Skips this test case as only one channel was in active.
+
+    FOR  ${channel_num}  IN  @{channel_number_list}
+        ${secondary_channel_number}=  Set Variable If  ${channel_num} != ${CHANNEL_NUMBER}  ${channel_num}
+    END
+
+    Set Suite Variable  ${secondary_channel_number}
