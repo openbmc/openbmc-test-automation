@@ -144,6 +144,13 @@ Configure Static IPv4 Netmask Via GUI And Verify
     ${test_ipv4_addr}   ${test_subnet_mask}      ${test_gateway}  Success
 
 
+Configure And Verify Static IP Address
+    [Documentation]  Login to GUI Network page, configure static ip address and verify.
+    [Tags]  Configure_And_Verify_Static_IP_Address
+
+    Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}  Success
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -215,7 +222,7 @@ Add Static IP Address And Verify
     Input Text  ${xpath_input_gateway}  ${gateway_address}
 
     Click Element  ${xpath_add_ip_address_button}
-    Run Keyword If  '${expected_status}' == 'Valid format'
+    Run Keyword If  '${expected_status}' == 'Success'
     ...  Run Keywords  Wait Until Page Contains  ${ip_address}  timeout=40sec
     ...  AND  Validate Network Config On BMC
 
