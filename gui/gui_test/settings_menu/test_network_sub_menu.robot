@@ -156,6 +156,14 @@ Configure Hostname Via GUI And Verify
     Should Be Equal As Strings  ${bmc_hostname}  ${test_hostname}
 
 
+Configure And Verify Static IP Address
+    [Documentation]  Login to GUI Network page, configure static ip address and verify.
+    [Tags]  Configure_And_Verify_Static_IP_Address
+
+    ${default_gateway}=  Get BMC Default Gateway
+    Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${defaut_gateway}  Success
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -227,7 +235,7 @@ Add Static IP Address And Verify
     Input Text  ${xpath_input_gateway}  ${gateway_address}
 
     Click Element  ${xpath_add_button}
-    Run Keyword If  '${expected_status}' == 'Valid format'
+    Run Keyword If  '${expected_status}' == 'Success'
     ...  Run Keywords  Wait Until Page Contains  ${ip_address}  timeout=40sec
     ...  AND  Validate Network Config On BMC
 
