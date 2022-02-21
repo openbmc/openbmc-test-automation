@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8201c3e1_49cd3169",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-21T10:17:47Z",
+      "side": 1,
+      "message": "https://gerrit.openbmc-project.xyz/c/openbmc/openbmc-test-automation/+/51321\n\n\nMay be abandon ur commit.. The above changes is already in",
+      "revId": "101814853e197e576b2d7a7798cf278220be72ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
