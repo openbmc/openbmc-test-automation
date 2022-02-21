@@ -61,7 +61,9 @@ OPENBMC:
             - 'cat /var/log/obmc-console.log >/tmp/BMC_obmc_console.txt'
             - 'cat /var/log/obmc-console1.log >/tmp/BMC_obmc_console1.txt'
             - 'peltool -l >/tmp/PEL_logs_list.json'
-            - {'peltool -a >/tmp/PEL_logs_display.json':240}
+            - {'peltool -a >/tmp/PEL_logs_display.json':600}
+            - {'peltool  -l -a -f >/tmp/PEL_logs_complete_list.json 2>&1':1200}
+            - {'peltool -a -f -h>/tmp/PEL_logs_complete_display.json 2>&1':1200}
             - 'hexdump -C /var/lib/phosphor-logging/extensions/pels/badPEL >/tmp/PEL_logs_badPEL.txt'
             - 'export PDBG_DTB=/var/lib/phosphor-software-manager/pnor/rw/DEVTREE; guard -l >/tmp/GUARD_list.txt'
             - 'pldmtool fru getfrurecordtable>/tmp/PLDM_fru_record.txt'
@@ -84,6 +86,8 @@ OPENBMC:
             - '/tmp/BMC_obmc_console.txt'
             - '/tmp/BMC_obmc_console1.txt'
             - '/tmp/PEL_logs_list.json'
+            - '/tmp/PEL_logs_complete_list.json'
+            - '/tmp/PEL_logs_complete_display.json'
             - '/tmp/PEL_logs_display.json'
             - '/tmp/PEL_logs_badPEL.txt'
             - '/tmp/GUARD_list.txt'

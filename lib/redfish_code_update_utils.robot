@@ -16,8 +16,10 @@ Get Software Functional State
     # Description of argument(s):
     # image_id   The image ID (e.g. "acc9e073").
 
-    ${image_info}=  Redfish.Get Properties  /redfish/v1/UpdateService/FirmwareInventory/${image_id}
-
+    ${resp}=  Redfish.Get  /redfish/v1/UpdateService/FirmwareInventory/${image_id}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_INTERNAL_SERVER_ERROR}]
+    ${image_info}  Set Variable  ${resp.dict}
+ 
     ${sw_functional}=  Run Keyword If
     ...   '${image_info["Description"]}' == 'BMC image' or '${image_info["Description"]}' == 'BMC update'
     ...    Redfish.Get Attribute  /redfish/v1/Managers/bmc  FirmwareVersion
@@ -63,10 +65,15 @@ Get Software Inventory State
 
     FOR  ${uri_path}  IN  @{sw_member_list}
         &{tmp_dict}=  Create Dictionary
-        ${image_info}=  Redfish.Get Properties  ${uri_path}
+
+        ${resp}=  Redfish.Get  ${uri_path}  valid_status_codes=[${HTTP_OK}, ${HTTP_INTERNAL_SERVER_ERROR}]
+        ${image_info}  Set Variable  ${resp.dict}
+
         Set To Dictionary  ${tmp_dict}  image_type  ${image_info["Description"]}
         Set To Dictionary  ${tmp_dict}  image_id  ${uri_path.split("/")[-1]}
+
         ${functional}=  Get Software Functional State  ${uri_path.split("/")[-1]}
+
         Set To Dictionary  ${tmp_dict}  functional  ${functional}
         Set To Dictionary  ${tmp_dict}  version  ${image_info["Version"]}
         Set To Dictionary  ${sw_inv_dict}  ${uri_path.split("/")[-1]}  ${tmp_dict}
