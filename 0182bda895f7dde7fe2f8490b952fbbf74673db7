@@ -3,6 +3,98 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f6f2697_f77fce08",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-21T10:06:57Z",
+      "side": 1,
+      "message": "Test BMCweb Stability On Continuous Redfish Login Attempts With Invalid Credentials",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 81
+      },
+      "revId": "0182bda895f7dde7fe2f8490b952fbbf74673db7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "973e10e0_b7849107",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-21T10:06:57Z",
+      "side": 1,
+      "message": "Make invalid credentials Refish login attempts continuously",
+      "range": {
+        "startLine": 210,
+        "startChar": 21,
+        "endLine": 210,
+        "endChar": 83
+      },
+      "revId": "0182bda895f7dde7fe2f8490b952fbbf74673db7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f2350f2_a2efac2f",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-21T10:06:57Z",
+      "side": 1,
+      "message": "Test User Delete Operation Without Session Token And Expect Failure",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 52
+      },
+      "revId": "0182bda895f7dde7fe2f8490b952fbbf74673db7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aad67302_b864e980",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-21T10:06:57Z",
+      "side": 1,
+      "message": "Test BMCweb Stability On Continuous Redfish Delete Operation Request Without Session Token",
+      "range": {
+        "startLine": 226,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 87
+      },
+      "revId": "0182bda895f7dde7fe2f8490b952fbbf74673db7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ab7cb54_5fd312e7",
         "filename": "security/test_bmc_connections.robot",
         "patchSetId": 5
@@ -78,6 +170,75 @@
         "startChar": 0,
         "endLine": 247,
         "endChar": 105
+      },
+      "revId": "0182bda895f7dde7fe2f8490b952fbbf74673db7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30500219_5a7676e0",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-21T10:06:57Z",
+      "side": 1,
+      "message": "Invalid Credentials Redfish Login Attempts",
+      "range": {
+        "startLine": 304,
+        "startChar": 0,
+        "endLine": 304,
+        "endChar": 56
+      },
+      "revId": "0182bda895f7dde7fe2f8490b952fbbf74673db7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfca1c18_7c69796e",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-21T10:06:57Z",
+      "side": 1,
+      "message": "Can u add a note in the documentation of why this is done?",
+      "range": {
+        "startLine": 318,
+        "startChar": 8,
+        "endLine": 318,
+        "endChar": 47
+      },
+      "revId": "0182bda895f7dde7fe2f8490b952fbbf74673db7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "659e2659_07035fb1",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-02-21T10:06:57Z",
+      "side": 1,
+      "message": "I dont understand this , if the login is obviously going to fail, why check at all",
+      "range": {
+        "startLine": 326,
+        "startChar": 0,
+        "endLine": 328,
+        "endChar": 94
       },
       "revId": "0182bda895f7dde7fe2f8490b952fbbf74673db7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
