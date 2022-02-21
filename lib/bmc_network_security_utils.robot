@@ -6,7 +6,7 @@ Resource                ../lib/resource.robot
 Resource                ../lib/bmc_redfish_resource.robot
 
 Send Network Packets And Get Packet Loss
-    [Documentation]  Send TCP, UDP or ICMP packets to any network device.
+    [Documentation]  Send TCP, UDP or ICMP packets to any network device and return packet loss.
     [Arguments]  ${host}  ${num}=${count}  ${packet_type}=${ICMP_PACKETS}
     ...          ${port}=80  ${icmp_type}=${ICMP_ECHO_REQUEST}
 

@@ -7,6 +7,7 @@ Documentation  Network stack stress tests using "nping" tool.
 Resource                ../lib/resource.robot
 Resource                ../lib/bmc_redfish_resource.robot
 Resource                ../lib/ipmi_client.robot
+Resource                ../lib/bmc_network_security_utils.robot
 
 Library                 OperatingSystem
 Library                 String
