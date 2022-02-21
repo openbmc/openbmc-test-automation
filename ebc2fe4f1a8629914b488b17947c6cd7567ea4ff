@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f157ca35_cb1f1347",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2022-02-21T11:53:29Z",
+      "side": 1,
+      "message": "Resource            ../lib/bmc_network_security_utils.robot",
+      "revId": "ebc2fe4f1a8629914b488b17947c6cd7567ea4ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
