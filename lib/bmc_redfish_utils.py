@@ -141,7 +141,7 @@ class bmc_redfish_utils(object):
         end_point_list = self.list_request(resource_path)
 
         # Regex to match entries ending in "/prefix" with optional underscore.
-        regex = ".*/" + end_point_prefix + "[_]?[0-9]*?"
+        regex = ".*/" + end_point_prefix + "[_]?[0-9]*$"
         return [x for x in end_point_list if re.match(regex, x, re.IGNORECASE)]
 
     def get_target_actions(self, resource_path, target_attribute):
