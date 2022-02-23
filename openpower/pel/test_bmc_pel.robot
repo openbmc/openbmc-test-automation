@@ -742,7 +742,7 @@ Get Disk Usage For Error Logs
 
     ${usage_output}=  Fetch From Left  ${usage_output}  \/
 
-    # Covert disk usage unit from KB to MB.
+    # Convert disk usage unit from KB to MB.
     ${usage_output}=  Evaluate  ${usage_output} / 1024
 
     # Logging disk capacity limit is set to 20MB. So calculating the log usage percentage.
