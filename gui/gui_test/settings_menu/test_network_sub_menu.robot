@@ -185,7 +185,7 @@ Add DNS Servers And Verify
 
 Delete DNS Servers And Verify
     [Documentation]  Login to GUI Network page,delete static name servers
-    ...  and verify that page doesnot reflects static name servers.
+    ...  and verify that page does not reflects static name servers.
 
     Page Should Contain Element  ${xpath_delete_dns_server}
     Wait Until Element Is Enabled  ${xpath_delete_dns_server}
