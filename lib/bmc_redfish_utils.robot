@@ -277,13 +277,14 @@ Expire And Update New Password Via Redfish
     # Expire admin password using ssh.
     Open Connection And Log In  ${username}  ${password}
     ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${username}
-    Should Contain  ${output}  password expiry information changed
+    Should Contain Any  ${output}  password expiry information changed
+    ...  password changed
 
     # Verify user password expired using Redfish
     Verify User Password Expired Using Redfish  ${username}  ${password}
 
     # Change user password.
-    Redfish.Patch  /redfish/v1/AccountService/Accounts/admin_user
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/${username}
     ...  body={'Password': '${new_password}'}
     Redfish.Logout
 
