@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41dbf501_8a86dbc4",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-02-24T10:29:04Z",
+      "side": 1,
+      "message": "does\u0027nt look like a correct message, as here just password is expired and password is not yet changed here.\nI leave it to Joseph to comment.",
+      "range": {
+        "startLine": 280,
+        "startChar": 31,
+        "endLine": 280,
+        "endChar": 47
+      },
+      "revId": "cc0744aff1ce8c59081bf6b15aa30d4f21bbcb0a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
