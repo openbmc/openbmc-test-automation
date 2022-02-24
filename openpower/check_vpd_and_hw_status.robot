@@ -24,7 +24,11 @@ Collect VPD And Hardware Status
     ${system_properties}=  Redfish_Utils.Get Properties  ${SYSTEM_BASE_URI}
     ${system_memory_info}=  Redfish_Utils.Enumerate Request  ${SYSTEM_BASE_URI}/Memory
     ${system_processors_info}=  Redfish_Utils.Enumerate Request  ${SYSTEM_BASE_URI}/Processors
-    ${system_fans_info}=  Redfish_Utils.Get Attribute  ${REDFISH_CHASSIS_THERMAL_URI}  Fans
+
+    # Python module:  get_endpoint_path_list(resource_path, end_point_prefix)
+    ${fans_uri}=  redfish_utils.Get Endpoint Path List  ${REDFISH_CHASSIS_URI}  Thermal
+    ${system_fans_info}=  Redfish_Utils.Get Attribute  ${fans_uri[0]}  Fans
+
     ${collected_values}=  gen_robot_print.Sprint Vars
     ...  system_properties  system_memory_info  system_processors_info  system_fans_info
     Log To Console  ${\n}${collected_values}${\n}
@@ -48,4 +52,4 @@ Redfish Test Teardown Execution
     [Documentation]  Do the post test teardown for redfish.
 
     Redfish.Logout
-    FFDC On Test Case Fail  clean_up=${FALSE}
+    FFDC On Test Case Fail
