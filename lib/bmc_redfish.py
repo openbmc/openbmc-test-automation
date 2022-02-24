@@ -9,6 +9,8 @@ import re
 import json
 from redfish_plus import redfish_plus
 from robot.libraries.BuiltIn import BuiltIn
+from json.decoder import JSONDecodeError
+from redfish.rest.v1 import InvalidCredentialsError
 
 import func_args as fa
 import gen_print as gp
@@ -82,8 +84,36 @@ class bmc_redfish(redfish_plus):
         password, args, kwargs = fa.pop_arg(openbmc_password, *args, **kwargs)
         auth, args, kwargs = fa.pop_arg('session', *args, **kwargs)
 
-        super(bmc_redfish, self).login(username, password, auth,
-                                       *args, **kwargs)
+        try:
+            super(bmc_redfish, self).login(username, password, auth,
+                                           *args, **kwargs)
+        # Handle InvalidCredentialsError.
+        # (raise redfish.rest.v1.InvalidCredentialsError if not [200, 201, 202, 204])
+        except InvalidCredentialsError:
+            except_type, except_value, except_traceback = sys.exc_info()
+            BuiltIn().log_to_console(str(except_type))
+            BuiltIn().log_to_console(str(except_value))
+            e_message = "Re-try login due to exception and "
+            e_message += "it is likely error response from server side."
+            BuiltIn().log_to_console(e_message)
+            super(bmc_redfish, self).login(username, password, auth,
+                                           *args, **kwargs)
+        # Handle JSONDecodeError and others.
+        except JSONDecodeError:
+            except_type, except_value, except_traceback = sys.exc_info()
+            BuiltIn().log_to_console(str(except_type))
+            BuiltIn().log_to_console(str(except_value))
+            e_message = "Re-try login due to JSONDecodeError exception and "
+            e_message += "it is likely error response from server side."
+            BuiltIn().log_to_console(e_message)
+            super(bmc_redfish, self).login(username, password, auth,
+                                           *args, **kwargs)
+        except ValueError:
+            except_type, except_value, except_traceback = sys.exc_info()
+            BuiltIn().log_to_console(str(except_type))
+            BuiltIn().log_to_console(str(except_value))
+            e_message = "Unexpected exception."
+            BuiltIn().log_to_console(e_message)
 
     def logout(self):
 
