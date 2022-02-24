@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "513b1707_e347b0fe",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2022-02-24T09:38:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f6f2697_f77fce08",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 209,
+        "endChar": 81
+      },
+      "revId": "0182bda895f7dde7fe2f8490b952fbbf74673db7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "973e10e0_b7849107",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-02-21T10:06:57Z",
       "side": 1,
       "message": "Make invalid credentials Refish login attempts continuously",
+      "range": {
+        "startLine": 210,
+        "startChar": 21,
+        "endLine": 210,
+        "endChar": 83
+      },
+      "revId": "0182bda895f7dde7fe2f8490b952fbbf74673db7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb9402ee_72805076",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2022-02-24T09:38:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "973e10e0_b7849107",
       "range": {
         "startLine": 210,
         "startChar": 21,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "910b12f8_c1002b4e",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2022-02-24T09:38:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f2350f2_a2efac2f",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 52
+      },
+      "revId": "0182bda895f7dde7fe2f8490b952fbbf74673db7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aad67302_b864e980",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-02-21T10:06:57Z",
       "side": 1,
       "message": "Test BMCweb Stability On Continuous Redfish Delete Operation Request Without Session Token",
+      "range": {
+        "startLine": 226,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 87
+      },
+      "revId": "0182bda895f7dde7fe2f8490b952fbbf74673db7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3283d459_084a831c",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2022-02-24T09:38:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aad67302_b864e980",
       "range": {
         "startLine": 226,
         "startChar": 0,
@@ -198,6 +294,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a853af8_35390c8e",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2022-02-24T09:38:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30500219_5a7676e0",
+      "range": {
+        "startLine": 304,
+        "startChar": 0,
+        "endLine": 304,
+        "endChar": 56
+      },
+      "revId": "0182bda895f7dde7fe2f8490b952fbbf74673db7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfca1c18_7c69796e",
@@ -221,6 +341,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e559fc7_8dc00caa",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2022-02-24T09:38:18Z",
+      "side": 1,
+      "message": "already there",
+      "parentUuid": "cfca1c18_7c69796e",
+      "range": {
+        "startLine": 318,
+        "startChar": 8,
+        "endLine": 318,
+        "endChar": 47
+      },
+      "revId": "0182bda895f7dde7fe2f8490b952fbbf74673db7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "659e2659_07035fb1",
@@ -234,6 +378,30 @@
       "writtenOn": "2022-02-21T10:06:57Z",
       "side": 1,
       "message": "I dont understand this , if the login is obviously going to fail, why check at all",
+      "range": {
+        "startLine": 326,
+        "startChar": 0,
+        "endLine": 328,
+        "endChar": 94
+      },
+      "revId": "0182bda895f7dde7fe2f8490b952fbbf74673db7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bba46105_26f716e0",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2022-02-24T09:38:18Z",
+      "side": 1,
+      "message": "we are checking on number of failed attempts if login with correct credentials at every 100th iteration",
+      "parentUuid": "659e2659_07035fb1",
       "range": {
         "startLine": 326,
         "startChar": 0,
