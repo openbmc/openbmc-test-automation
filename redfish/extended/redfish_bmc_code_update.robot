@@ -34,7 +34,8 @@ Force Tags               BMC_Code_Update
 *** Variables ***
 
 ${FORCE_UPDATE}          ${0}
-${LOOP_COUNT}            20
+${LOOP_COUNT}            ${20}
+${DELETE_ERRLOGS}        ${1}
 
 ${ACTIVATION_WAIT_TIMEOUT}     8 min
 
@@ -90,7 +91,8 @@ Suite Setup Execution
     Redfish.Login
     # Delete BMC dump and Error logs.
     Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
-    Run Keyword And Ignore Error  Redfish Purge Event Log
+    Run Keyword If  ${DELETE_ERRLOGS} == ${1}
+    ...   Run Keyword And Ignore Error  Redfish Purge Event Log
     # Checking for file existence.
     Valid File Path  IMAGE_FILE_PATH
 
