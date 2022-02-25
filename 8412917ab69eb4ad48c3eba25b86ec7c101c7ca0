@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d47e4fbd_43b4e537",
+        "filename": "lib/bmc_redfish.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-02-25T06:54:07Z",
+      "side": 1,
+      "message": "This exception is not caught.",
+      "range": {
+        "startLine": 97,
+        "startChar": 12,
+        "endLine": 98,
+        "endChar": 59
+      },
+      "revId": "8412917ab69eb4ad48c3eba25b86ec7c101c7ca0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad8cd5a4_838c93a7",
+        "filename": "lib/bmc_redfish.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-02-25T06:54:07Z",
+      "side": 1,
+      "message": "Both exception handles are doing the same. Can\u0027t they be handled once together?",
+      "range": {
+        "startLine": 89,
+        "startChar": 1,
+        "endLine": 110,
+        "endChar": 0
+      },
+      "revId": "8412917ab69eb4ad48c3eba25b86ec7c101c7ca0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
