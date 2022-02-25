@@ -212,7 +212,7 @@ FFDC_METHOD_CALL = {
         'Dump Files': 'SCP Dump Files',
         'Dump HB Files': 'SCP Dump HB Files',
         'PEL Files': 'Collect PEL Log',
-        'Redfish Log': 'Enumerate Redfish Resources',
+        #'Redfish Log': 'Enumerate Redfish Resources',
         'Firmware Log': 'Enumerate Redfish Resources  '
         + ' enum_uri=/redfish/v1/UpdateService/FirmwareInventory  '
         + ' file_enum_name=redfish_FIRMWARE_list.txt',
