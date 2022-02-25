@@ -70,8 +70,7 @@ FFDC_BMC_FILE = {
         + ' org.open_power.OCC.Status OccActive) done > /tmp/OCC_state.txt 2>&1',
         'bmcweb_persistent_data.json': 'cat /home/root/bmcweb_persistent_data.json'
         + ' > /tmp/bmcweb_persistent_data.json',
-        'GUARD_list.txt': 'export PDBG_DTB=/var/lib/phosphor-software-manager/pnor/rw/DEVTREE;'
-        + 'guard -l > /tmp/GUARD_list.txt 2>&1',
+        'GUARD_list.txt': 'guard -l > /tmp/GUARD_list.txt 2>&1',
         'fan_control_dump.json': 'fanctl dump; cat /tmp/fan_control_dump.json'
         + ' /tmp/fan_control_dump.json 2>&1',
         'DEVTREE': 'cp /var/lib/phosphor-software-manager/pnor/rw/DEVTREE'
@@ -213,7 +212,7 @@ FFDC_METHOD_CALL = {
         'Dump Files': 'SCP Dump Files',
         'Dump HB Files': 'SCP Dump HB Files',
         'PEL Files': 'Collect PEL Log',
-        'Redfish Log': 'Enumerate Redfish Resources',
+        # 'Redfish Log': 'Enumerate Redfish Resources',
         'Firmware Log': 'Enumerate Redfish Resources  '
         + ' enum_uri=/redfish/v1/UpdateService/FirmwareInventory  '
         + ' file_enum_name=redfish_FIRMWARE_list.txt',
