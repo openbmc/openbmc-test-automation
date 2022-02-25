@@ -273,7 +273,7 @@ FFDC_METHOD_CALL = {
         "Sys Inventory Files": "System Inventory Files",
         "Dump Files": "SCP Dump Files",
         "PEL Files": "Collect PEL Log",
-        "Redfish Log": "Enumerate Redfish Resources",
+        # "Redfish Log": "Enumerate Redfish Resources",
         "Firmware Log": (
             "Enumerate Redfish Resources  "
             + " enum_uri=/redfish/v1/UpdateService/FirmwareInventory  "
