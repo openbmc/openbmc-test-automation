@@ -132,6 +132,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5888f6af_905835d3",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-03-01T17:11:44Z",
+      "side": 1,
+      "message": "Brian/Joseph,\n\nMaybe we can do something like this to handle both old and new in one liner\n\nReference: https://robotframework.org/robotframework/latest/libraries/BuiltIn.html#Should%20Contain%20Any\n\n# Handle both old and new messaging \nShould Contain Any\t${output} \tpassword changed \tpassword expiry information changed",
+      "parentUuid": "3252e611_016b6369",
+      "range": {
+        "startLine": 280,
+        "startChar": 31,
+        "endLine": 280,
+        "endChar": 47
+      },
+      "revId": "cc0744aff1ce8c59081bf6b15aa30d4f21bbcb0a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ca6f35f_61deb43d",
         "filename": "lib/bmc_redfish_utils.robot",
         "patchSetId": 1
