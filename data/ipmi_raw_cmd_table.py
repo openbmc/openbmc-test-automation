@@ -80,7 +80,28 @@ IPMI_RAW_CMD = {
             "0x0a 0x42",
             "27 00",
             "27 is Reservation ID, LSB, 00 Reservation ID, MSB ",
-        ]
+        ],
+        'Get_SEL_Time':
+        [
+            # raw command, expected output(s), comment
+            '0x0a 0x48',
+        ],
+        'Set_SEL_Time':
+        [
+            # raw command, expected output(s), comment
+            '0x0a 0x49',
+            'rsp=0xd5',
+            'not supported in present state',
+            'rsp=0xc7',
+            'Request data length invalid',
+
+        ],
+        'Create_SEL':
+        [
+            # raw command, expected output, comment
+            "0x0a 0x44 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x00 0x00 0x04",
+            "0x00 0xa0 0x04 0x07",
+        ],
     },
     'Self_Test_Results':
     {
