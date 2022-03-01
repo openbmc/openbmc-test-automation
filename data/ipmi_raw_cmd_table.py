@@ -156,5 +156,30 @@ IPMI_RAW_CMD = {
             "0x89",
             "error response byte when host is powered off"
         ]
-    }
+    },
+    'Device_ID':
+    {
+        # Command action type
+        'Get':
+        [
+            # raw command, expected output(s), comment
+            '0x06 0x01',
+            'Error: Unable to establish IPMI v2 / RMCP+ session',
+            '0xc7',
+        ],
+    },
+    'Resets':
+    {
+        'cold':
+        [
+            # raw command, expected output(s), comment
+            '0x06 0x02',
+        ],
+        'cold_extra':
+        [
+            # raw command, expected output(s), comment
+            '0x06 0x02 0x00',
+            'Unable to send RAW command (channel=0x0 netfn=0x6 lun=0x0 cmd=0x2 rsp=0xc7): Request data length invalid',
+        ],
+    },
 }
