@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f51cd0c1_345e5ef7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2022-03-01T14:30:59Z",
+      "side": 1,
+      "message": "Thanks for handling this.",
+      "revId": "cc0744aff1ce8c59081bf6b15aa30d4f21bbcb0a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41dbf501_8a86dbc4",
@@ -91,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3252e611_016b6369",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2022-03-01T14:30:59Z",
+      "side": 1,
+      "message": "I see it now.  https://github.com/shadow-maint/shadow/issues/441\nIn the shadow-maint/shadow suite version 4.11, the message changed.\nThanks for explaining.\n\nI retract my previous comment; this change is needed.\n\nCan we help OpenBMC users adapt to this behavior change?  I worry that some user will have the old message, and some will have the new message.  To adapt, can we change the Robot code to handle both old and new messages?  For example, if the output contains either \"password expiry information changed\" or \"password changed\" then pass the test.",
+      "parentUuid": "fd39238c_89d71011",
+      "range": {
+        "startLine": 280,
+        "startChar": 31,
+        "endLine": 280,
+        "endChar": 47
+      },
+      "revId": "cc0744aff1ce8c59081bf6b15aa30d4f21bbcb0a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ca6f35f_61deb43d",
         "filename": "lib/bmc_redfish_utils.robot",
         "patchSetId": 1
@@ -126,6 +167,30 @@
       "side": 1,
       "message": "I think use ${username} is correct. If you accept the message change, I will update it in this patch.",
       "parentUuid": "0ca6f35f_61deb43d",
+      "range": {
+        "startLine": 286,
+        "startChar": 55,
+        "endLine": 286,
+        "endChar": 65
+      },
+      "revId": "cc0744aff1ce8c59081bf6b15aa30d4f21bbcb0a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0015d65f_8e9f7122",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2022-03-01T14:30:59Z",
+      "side": 1,
+      "message": "Looks good.",
+      "parentUuid": "4d833e49_55f93cce",
       "range": {
         "startLine": 286,
         "startChar": 55,
