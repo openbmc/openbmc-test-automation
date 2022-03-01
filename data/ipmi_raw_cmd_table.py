@@ -376,5 +376,14 @@ IPMI_RAW_CMD = {
             "none",
             "Reset watchdog timer without initialized watchdog",
         ]
+    },
+    'SOL':
+    {
+        'Set_SOL':
+        [
+            # raw command, expected output(s), comment
+            'Invalid value',
+            'Valid values are serial, 9.6 19.2, 38.4, 57.6 and 115.2',
+        ],
     }
 }
