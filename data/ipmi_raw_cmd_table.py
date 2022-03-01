@@ -406,5 +406,14 @@ IPMI_RAW_CMD = {
             'Invalid value',
             'Valid values are serial, 9.6 19.2, 38.4, 57.6 and 115.2',
         ],
+    },
+    'Get':
+    {
+        'POH_Counter':
+        [
+            # raw command, error response
+            '0x00 0x0f',
+            'Error: Unable to establish IPMI v2 / RMCP+ session'
+        ]
     }
 }
