@@ -715,3 +715,28 @@ def get_channel_auth_capabilities(channel_number=1):
     result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
 
     return result
+
+
+def identify_threshold(thresh, thresholds):
+    r"""
+    Gets threshold values and threshold levels from sensor list. Modify the values and returns updated threshold.
+    For example :
+        If the thresholds are [ 1, 2, 3, 4] then the new thresholds are [ 101, 102, 103, 104 ].
+        If the threshold has 'na' the same will be appended to new list.
+    Thresholds are - Higher and Lower of critical and non-critical values.
+    The list will be zipped to dictionary with threshold levels,
+    Example : { 'lcr': 101, 'lnc': 102, 'unc': 103, 'ucr': 104 }
+    """
+
+    n = 100
+    newthresh = []
+    for th in thresh:
+        th = th.strip()
+        if th == 'na':
+            newthresh.append('na')
+        else:
+            x = int(float(th)) + n
+            newthresh.append(x)
+            n = n + 100
+    dict_thresh = dict(zip(thresholds, newthresh))
+    return newthresh, dict_thresh
