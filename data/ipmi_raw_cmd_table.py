@@ -156,5 +156,16 @@ IPMI_RAW_CMD = {
             "0x89",
             "error response byte when host is powered off"
         ]
-    }
+    },
+    'Device_ID':
+    {
+        # Command action type
+        'Get':
+        [
+            # raw command, expected output(s), comment
+            '0x06 0x01',
+            'Error: Unable to establish IPMI v2 / RMCP+ session',
+            '0xc7',
+        ],
+    },
 }
