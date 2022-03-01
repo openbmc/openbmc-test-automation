@@ -759,3 +759,34 @@ def prefix_bytes(listx):
         item = "0x" + item
         listy.append(item)
     return listy
+
+
+def identify_threshold(old_threshold, threshold_list):
+    r"""
+    Gets threshold values and threshold levels from sensor list.
+    Modify the values and returns updated threshold.
+    Description of argument(s):
+
+        old_threshold              List of thresold values of sensor,
+        threshold_list             List of higher and lower of critical and non-critical values.
+
+    For example :
+        If old_threshold list is [ 1, 2, 3, 4] then the newthreshold_list will be [ 101, 102, 103, 104 ].
+        If old_threshold has 'na' the same will be appended to new list.
+
+    The newthreshold_list will be zipped to dictionary with threshold_list levels,
+    Example : threshold_dict = { 'lcr': 101, 'lnc': 102, 'unc': 103, 'ucr': 104 }
+    """
+
+    n = 100
+    newthreshold_list = []
+    for th in old_threshold:
+        th = th.strip()
+        if th == 'na':
+            newthreshold_list.append('na')
+        else:
+            x = int(float(th)) + n
+            newthreshold_list.append(x)
+            n = n + 100
+    threshold_dict = dict(zip(threshold_list, newthreshold_list))
+    return newthreshold_list, threshold_dict
