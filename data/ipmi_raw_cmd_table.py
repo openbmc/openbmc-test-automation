@@ -88,19 +88,40 @@ IPMI_RAW_CMD = {
         ],
         'Set_SEL_Time':
         [
-            # raw command, expected output(s), comment
+            # raw command, expected output(s)
             '0x0a 0x49',
             'rsp=0xd5',
             'not supported in present state',
             'rsp=0xc7',
             'Request data length invalid',
-
+        ],
+        'Clear_SEL':
+        [
+            # raw command, expected output(s)
+            "0x0a 0x47",
+            "0x43 0x4c 0x52 0xaa",
+            "sel clear",
+            "Clearing SEL",
+            "rsp=0xc5",
+            "Reservation cancelled or invalid",
+            "0x43 0x4c 0x52 0x00",
+        ],
+        'SEL_info':
+        [
+            # raw command
+            "0x0a 0x40"
         ],
         'Create_SEL':
         [
             # raw command
             "0x0a 0x44 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x00 0x00 0x04",
             "0x00 0xa0 0x04 0x07",
+        ],
+        'Get_SEL_Entry':
+        [
+            # raw command
+            "0x0a 0x43 0x00 0x00",
+            "0x00 0xff",
         ],
     },
     'Self_Test_Results':
