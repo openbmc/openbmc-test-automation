@@ -313,3 +313,12 @@ Power Off Request
 Wait For BMC Ready
     [Documentation]  Check BMC state and wait for BMC Ready.
     Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
+
+
+Get Host State Via Redfish
+    [Documentation]  Return the state of the host Via Redfish as a string.
+
+    ${powerstate}=
+    ...  Redfish.Get Attribute  ${REDFISH_CHASSIS_URI}/${CHASSIS_ID}  PowerState
+
+    [Return]  ${powerstate}

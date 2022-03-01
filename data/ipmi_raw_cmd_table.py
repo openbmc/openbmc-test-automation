@@ -156,5 +156,15 @@ IPMI_RAW_CMD = {
             "0x89",
             "error response byte when host is powered off"
         ]
-    }
+    },
+    'Get':
+    {
+        'POH_Counter':
+        [
+            # raw command, expected output(s), comment
+            '0x00 0x0f',
+            'Error: Unable to establish IPMI v2 / RMCP+ session',
+            'rsp=0xc7',
+        ],
+    },
 }
