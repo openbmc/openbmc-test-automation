@@ -16,6 +16,11 @@ Force Tags          SOL_Test
 
 *** Variables ***
 
+@{valid_bit_rates}    ${9.6}  ${19.2}  ${38.4}  ${57.6}  ${115.2}
+@{setinprogress}      set-complete  set-in-progress  commit-write
+${invalid_bit_rate}   7.5
+
+
 *** Test Cases ***
 
 Set SOL Enabled
@@ -193,6 +198,108 @@ Verify Continuous Activation And Deactivation Of SOL
     FOR  ${iter}  IN RANGE  ${iteration_count}
         Activate SOL Via IPMI
         Deactivate SOL Via IPMI
+    END
+
+
+Verify SOL Payload Channel
+    [Documentation]  Verify SOL Payload Channel from SOL info
+    [Tags]  Verify_SOL_Payload_Channel
+
+    # Get Channel number from SOL Info
+    ${data}=  Run Keyword  Run IPMI Standard Command
+    ...  sol info | grep "Payload Channel"
+    ${payload_channel}=  Fetch Payload  ${data}
+    Should Not Be Empty  ${payload_channel}
+
+
+Verify SOL Payload Port
+    [Documentation]  Verify SOL Payload Port from SOL info
+    [Tags]  Verify_SOL_Payload_Port
+
+    # Get Payload Port from SOL Info
+    ${data}=  Run Keyword  Run IPMI Standard Command
+    ...  sol info | grep "Payload Port"
+    ${payload_port}=  Fetch Payload  ${data}
+    Should Be Equal  ${IPMI_PORT}  ${payload_port}
+
+
+Set Valid SOL Non Volatile Bit Rate
+    [Documentation]  Verify Ability to set valid SOL non-volatile bit rate
+    [Tags]  Set_Valid_SOL_Non_Volatile_Bit_Rate
+
+    FOR  ${bit_rate}  IN  @{valid_bit_rates}
+
+      # Set non-volatile-bit-rate from SOL Info
+      ${resp} =  Run Keyword  Run IPMI Standard Command
+      ...  sol set non-volatile-bit-rate ${bit_rate}
+
+      ${non_volatile}=  Grep SOL Info Parameter Value  Non-Volatile Bit Rate
+      Should Be Equal  ${bit_rate}  ${non_volatile}
+
+      #Reboot BMC and verify value
+      Initiate BMC Reboot
+      ${non_volatile_bitrate_after_reboot}=  Grep SOL Info Parameter Value  Non-Volatile Bit Rate
+      Should Be Equal  ${bit_rate}  ${non_volatile_bitrate_after_reboot}
+
+    END
+
+
+Set Invalid SOL Non Volatile Bit Rate
+    [Documentation]  Verify Ability to set Invalid SOL non-volatile bit rate
+    [Tags]  Set_Invalid_SOL_Non_Volatile_Bit_Rate
+
+    # Set Invalid non-volatile-bit-rate from SOL Info
+    ${resp} =  Run Keyword and Expect Error  *${IPMI_RAW_CMD['SOL']['Set_SOL'][0]}*
+    ...  Run IPMI Standard Command  sol set non-volatile-bit-rate ${invalid_bit_rate}
+
+    Should Contain  ${resp}  ${IPMI_RAW_CMD['SOL']['Set_SOL'][1]}
+
+
+Set Valid SOL Volatile Bit Rate
+    [Documentation]  Verify Ability to set valid SOL volatile bit rate
+    [Tags]  Set_Valid_SOL_Volatile_Bit_Rate
+
+    FOR  ${bit_rate}  IN  @{valid_bit_rates}
+
+      # Set volatile-bit-rate from SOL Info
+      ${resp} =  Run Keyword  Run IPMI Standard Command
+      ...  sol set volatile-bit-rate ${bit_rate}
+
+      ${volatile}=  Grep SOL Info Parameter Value  Volatile Bit Rate
+      Should Be Equal  ${bit_rate}  ${volatile}
+
+      #Reboot BMC and verify the sol info parameter value
+      Initiate BMC Reboot
+      ${volatile_bitrate_after_reboot}=  Grep SOL Info Parameter Value  Volatile Bit Rate
+      Should Not Be Equal  ${bit_rate}  ${volatile_bitrate_after_reboot}
+
+    END
+
+
+Set Invalid SOL Volatile Bit Rate
+    [Documentation]  Verify Ability to set Invalid SOL volatile bit rate
+    [Tags]  Set_Invalid_SOL_Volatile_Bit_Rate
+
+    # Set volatile-bit-rate from SOL Info
+    ${resp} =  Run Keyword and Expect Error  *${IPMI_RAW_CMD['SOL']['Set_SOL'][0]}*
+    ...  Run IPMI Standard Command  sol set volatile-bit-rate ${invalid_bit_rate}
+
+    Should Contain  ${resp}  ${IPMI_RAW_CMD['SOL']['Set_SOL'][1]}
+
+
+Verify SOL Set In Progress
+    [Documentation]  Verify Ability to set the Set In Progress data for SOL
+    [Tags]  Verify_SOL_Set_In_Progress
+    [Teardown]  Run Keywords  Set SOL Setting  set-in-progress  set-complete
+    ...         AND  Test Teardown Execution
+
+    # Set the param 0 - set-in-progress from SOL Info
+    FOR  ${prog}  IN  @{setinprogress}
+       ${resp} =  Run Keyword  Run IPMI Standard Command  sol set set-in-progress ${prog}
+       # Get the param 0 - set-in-progress from SOL Info and verify
+       ${data}=  Run Keyword  Run IPMI Standard Command  sol info | grep "Set in progress"
+       ${state}=  Fetch Payload  ${data}
+       Should Be Equal  ${prog}  ${state}
     END
 
 
