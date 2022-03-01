@@ -3,6 +3,7 @@ Library           Collections
 Library           String
 Library           RequestsLibrary.RequestsKeywords
 Library           OperatingSystem
+Library           functions.py
 Variables         ../data/variables.py
 
 *** Variables ***

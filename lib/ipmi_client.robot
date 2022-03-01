@@ -434,3 +434,89 @@ Delete All Non Root IPMI User
         Run IPMI Standard Command   user set name ${user_record['user_id']} ""
         Sleep  5s
     END
+
+
+Create SEL
+    [Documentation]  Create a SEL.
+    [Arguments]  ${sensor_type}  ${SENSOR}=${sensor_number}
+
+    # Create a SEL.
+    # Example:
+    # a | 02/14/2020 | 01:16:58 | Sensor_type #0x17 |  | Asserted
+    ${resp}=  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['SEL_entry']['Create_SEL'][0]} 0x${sensor_type} 0x${SENSOR} ${IPMI_RAW_CMD['SEL_entry']['Create_SEL'][1]}
+
+    [Return]  ${resp}
+
+
+Fetch Any Sensor From Sensor List
+    [Documentation]  Find any sensor name randomly from Sensor list.
+
+    ${resp}=  Run IPMI Standard Command  sensor
+
+    ${data}=  Split To Lines  ${resp}
+    ${length}=  Get Length  ${data}
+
+    ${sensor_index}=  Evaluate  random.randint(1, ${length})  modules=random
+    ${sensor_data}=  Set Variable  ${data[${sensor_index}-1]}
+    ${sensor}=  Split String  ${sensor_data}  |
+
+    # Sensor Name
+    ${sensor_name}=  Set Variable  ${sensor[0]}
+    ${sensor_name}=  Remove Whitespace  ${sensor_name}
+
+    [Return]  ${sensor_name}
+
+
+Fetch Sensor Details From SDR
+    [Documentation]  Identify the sensors from sdr get and fetch sensor details required.
+    [Arguments]  ${sensor_name}  ${setting}
+
+    ${resp}=  Run IPMI Standard Command  sdr get "${sensor_name}"
+
+    ${setting_line}=  Get Lines Containing String  ${resp}  ${setting}
+    ...  case-insensitive
+    ${setting_status}=  Fetch From Right  ${setting_line}  :${SPACE}
+
+    [Return]  ${setting_status}
+
+
+Get Data And Byte From SDR Sensor
+    [Documentation]  Fetch the Field Data and hexadecimal values from given details.
+    [Arguments]  ${sensor_detail}
+
+    ${sensor_detail}=  Split String  ${sensor_detail}  (0x
+    ${field_data}=  Set Variable  ${sensor_detail[0]}
+    ${field_data}=  Remove Whitespace  ${field_data}
+    ${sensor_hex}=  Replace String  ${sensor_detail[1]}  )  ${EMPTY}
+    ${sensor_hex}=  Zfill Data  ${sensor_hex}  2
+
+    [Return]  ${field_data}  ${sensor_hex}
+
+
+Get SEL Info Via IPMI
+    [Documentation]  Get the SEL Info via IPMI raw command
+
+    ${resp}=  Run IPMI Standard Command
+    ...  raw ${IPMI_RAW_CMD['SEL_entry']['SEL_info'][0]}
+    ${resp}=  Split String  ${resp}
+
+    [Return]  ${resp}
+
+
+Get Current Date from BMC
+    [Documentation]  Runs the date command from BMC and returns current date and time
+
+    # Get Current Date from BMC
+    ${date}  ${stderr}  ${rc}=  BMC Execute Command   date
+
+    # Split the string and remove first and 2nd last value from the list and join to form %d %b %H:%M:%S %Y date format
+    ${date}=  Split String  ${date}
+    Remove From List  ${date}  0
+    Remove From List  ${date}  -2
+    ${date}=  Evaluate  " ".join(${date})
+
+    # Convert the date format to %m/%d/%Y %H:%M:%S
+    ${date}=  Convert Date  ${date}  date_format=%b %d %H:%M:%S %Y  result_format=%m/%d/%Y %H:%M:%S  exclude_millis=True
+
+    [Return]   ${date}
