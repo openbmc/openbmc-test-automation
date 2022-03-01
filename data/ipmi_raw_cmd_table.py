@@ -162,7 +162,8 @@ IPMI_RAW_CMD = {
         'Get':
         [
             # raw command
-            "0x06 0x01"
+            "0x06 0x01",
+            'Error: Unable to establish IPMI v2 / RMCP+ session',
         ]
     },
     'Cold Reset':
