@@ -434,3 +434,104 @@ Delete All Non Root IPMI User
         Run IPMI Standard Command   user set name ${user_record['user_id']} ""
         Sleep  5s
     END
+
+
+Create SEL
+    [Documentation]  Create a SEL.
+    [Arguments]  ${sensor_type}  ${sensor_number}
+
+    # Create a SEL.
+    # Example:
+    # a | 02/14/2020 | 01:16:58 | Sensor_type #0x17 |  | Asserted
+
+    # Description of argument(s):
+    #    ${sensor_type}            Type of the sensor used in hexadecimal (can be fan, temp etc.,),
+    #                              obtained from Sensor Type field in - ipmitool sdr get "sensor_name".
+    #                              Example: Sensor Type (Threshold) : Fan (0x04), here 0xHH is sensor type.
+
+    #    ${sensor_number}          Sensor number of the sensor in hexadecimal.
+    #                              obtained from Sensor ID field in - ipmitool sdr get "sensor_name".
+    #                              Example: Sensor ID : SENSOR_1 (0xHH), here 0xHH is sensor number.
+
+    ${resp}=  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['SEL_entry']['Create_SEL'][0]} 0x${sensor_type} 0x${sensor_number} ${IPMI_RAW_CMD['SEL_entry']['Create_SEL'][1]}
+
+    [Return]  ${resp}
+
+
+Fetch Any Sensor From Sensor List
+    [Documentation]  Find any sensor name randomly from Sensor list.
+
+    ${resp}=  Run IPMI Standard Command  sensor
+
+    # Find total number of sensor.
+    ${data}=  Split To Lines  ${resp}
+    ${length}=  Get Length  ${data}
+
+    # Identify any one sensor.
+    ${sensor_index}=  Evaluate  random.randint(1, ${length})  modules=random
+    ${sensor_data}=  Set Variable  ${data[${sensor_index}-1]}
+    ${sensor}=  Split String  ${sensor_data}  |
+
+    # Retrieve Sensor Name and return.
+    ${sensor_name}=  Set Variable  ${sensor[0]}
+    ${sensor_name}=  Remove Whitespace  ${sensor_name}
+
+    [Return]  ${sensor_name}
+
+
+Fetch Sensor Details From SDR
+    [Documentation]  Identify the sensors from sdr get and fetch sensor details required.
+    [Arguments]  ${sensor_name}  ${setting}
+
+    # Description of argument(s):
+    #    ${sensor_number}        Sensor number of the sensor in hexadecimal.
+    #                            obtained sensor name from - 'ipmitool sensor' command.
+    #                            Example: a | 02/14/2020 | 01:16:58 | Sensor_type #0x17 |  | Asserted
+    #                            here, a is the sensor name.
+
+    #    ${setting}              Field to fetch data. Example : Sensor ID, Sensor Type (Threshold), etc,.
+
+    ${resp}=  Run IPMI Standard Command  sdr get "${sensor_name}"
+
+    ${setting_line}=  Get Lines Containing String  ${resp}  ${setting}
+    ...  case-insensitive
+    ${setting_status}=  Fetch From Right  ${setting_line}  :${SPACE}
+
+    [Return]  ${setting_status}
+
+
+Get Data And Byte From SDR Sensor
+    [Documentation]  Fetch the Field Data and hexadecimal values from given details.
+    [Arguments]  ${sensor_detail}
+
+    # Description of argument(s):
+    #    ${sensor_detail}      Requested field and the value from the sdr get ipmi command.
+    #                          Example : if Sensor ID is the requesting setting, then,
+    #                          ${sensor_detail} will be "Sensor ID : SENSOR_1 (0xHH)"
+
+    ${sensor_detail}=  Split String  ${sensor_detail}  (0x
+    ${field_data}=  Set Variable  ${sensor_detail[0]}
+    ${field_data}=  Remove Whitespace  ${field_data}
+    ${sensor_hex}=  Replace String  ${sensor_detail[1]}  )  ${EMPTY}
+    ${sensor_hex}=  Zfill Data  ${sensor_hex}  2
+
+    [Return]  ${field_data}  ${sensor_hex}
+
+
+Get Current Date from BMC
+    [Documentation]  Runs the date command from BMC and returns current date and time
+
+    # Get Current Date from BMC
+    ${date}  ${stderr}  ${rc}=  BMC Execute Command   date
+
+    # Split the string and remove first and 2nd last value from the list and join to form %d %b %H:%M:%S %Y date format
+    ${date}=  Split String  ${date}
+    Remove From List  ${date}  0
+    Remove From List  ${date}  -2
+    ${date}=  Evaluate  " ".join(${date})
+
+    # Convert the date format to %m/%d/%Y %H:%M:%S
+    ${date}=  Convert Date  ${date}  date_format=%b %d %H:%M:%S %Y  result_format=%m/%d/%Y %H:%M:%S  exclude_millis=True
+
+    [Return]   ${date}
