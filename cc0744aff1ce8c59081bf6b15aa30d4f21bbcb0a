@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd39238c_89d71011",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000899
+      },
+      "writtenOn": "2022-03-01T01:25:55Z",
+      "side": 1,
+      "message": "The openbmc use shawdow 4.11.1 now, \nhttps://github.com/openbmc/openbmc/blob/master/poky/meta/recipes-extended/shadow\nAnd you can refer the v4.11 shadow code to check the message is changed.\nhttps://github.com/shadow-maint/shadow/blob/v4.11/src/passwd.c#L1076",
+      "parentUuid": "ba8639f6_5ecd4c37",
+      "range": {
+        "startLine": 280,
+        "startChar": 31,
+        "endLine": 280,
+        "endChar": 47
+      },
+      "revId": "cc0744aff1ce8c59081bf6b15aa30d4f21bbcb0a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ca6f35f_61deb43d",
         "filename": "lib/bmc_redfish_utils.robot",
         "patchSetId": 1
@@ -78,6 +102,30 @@
       "writtenOn": "2022-02-24T17:47:07Z",
       "side": 1,
       "message": "Should admin_user be changed to ${username}?",
+      "range": {
+        "startLine": 286,
+        "startChar": 55,
+        "endLine": 286,
+        "endChar": 65
+      },
+      "revId": "cc0744aff1ce8c59081bf6b15aa30d4f21bbcb0a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d833e49_55f93cce",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000899
+      },
+      "writtenOn": "2022-03-01T01:25:55Z",
+      "side": 1,
+      "message": "I think use ${username} is correct. If you accept the message change, I will update it in this patch.",
+      "parentUuid": "0ca6f35f_61deb43d",
       "range": {
         "startLine": 286,
         "startChar": 55,
