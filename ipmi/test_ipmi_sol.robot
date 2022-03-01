@@ -16,6 +16,11 @@ Force Tags          SOL_Test
 
 *** Variables ***
 
+@{valid_bit_rates}    ${9.6}  ${19.2}  ${38.4}  ${57.6}  ${115.2}
+@{setinprogress}      set-complete  set-in-progress  commit-write
+${invalid_bit_rate}   7.5
+
+
 *** Test Cases ***
 
 Set SOL Enabled
@@ -193,6 +198,91 @@ Verify Continuous Activation And Deactivation Of SOL
     FOR  ${iter}  IN RANGE  ${iteration_count}
         Activate SOL Via IPMI
         Deactivate SOL Via IPMI
+    END
+
+
+Verify SOL Payload Channel
+    [Documentation]  Verify SOL payload channel from SOL info.
+    [Tags]  Verify_SOL_Payload_Channel
+
+    # Get channel number from SOL Info and verify it is not empty.
+    ${payload_channel}=  Get SOL Setting  Payload Channel
+    Should Not Be Empty  ${payload_channel}
+
+
+Verify SOL Payload Port
+    [Documentation]  Verify SOL payload port from SOL info.
+    [Tags]  Verify_SOL_Payload_Port
+
+    # Get Payload Port from SOL Info and verify it equal with ipmi port.
+    ${payload_port}=  Get SOL Setting  Payload Port
+    Should Be Equal  ${IPMI_PORT}  ${payload_port}
+
+
+Set Valid SOL Non Volatile Bit Rate
+    [Documentation]  Verify ability to set valid SOL non-volatile bit rate.
+    [Tags]  Set_Valid_SOL_Non_Volatile_Bit_Rate
+
+    FOR  ${bit_rate}  IN  @{valid_bit_rates}
+
+      # Set valid non-volatile-bit-rate from SOL Info.
+      Run Keyword And Expect Error  *Parameter not supported*
+      ...  Run IPMI Standard Command
+      ...  sol set non-volatile-bit-rate ${bit_rate}
+
+    END
+
+
+Set Invalid SOL Non Volatile Bit Rate
+    [Documentation]  Verify ability to set invalid SOL non-volatile bit rate.
+    [Tags]  Set_Invalid_SOL_Non_Volatile_Bit_Rate
+
+    # Set Invalid non-volatile-bit-rate from SOL Info.
+    ${resp} =  Run Keyword and Expect Error  *${IPMI_RAW_CMD['SOL']['Set_SOL'][0]}*
+    ...  Run IPMI Standard Command  sol set non-volatile-bit-rate ${invalid_bit_rate}
+
+    # Compares whether valid values are displayed.
+    Should Contain  ${resp}  ${IPMI_RAW_CMD['SOL']['Set_SOL'][1]}  ignore_case=True
+
+
+Set Valid SOL Volatile Bit Rate
+    [Documentation]  Verify ability to set valid SOL volatile bit rate.
+    [Tags]  Set_Valid_SOL_Volatile_Bit_Rate
+
+    FOR  ${bit_rate}  IN  @{valid_bit_rates}
+
+      # Set valid volatile-bit-rate from SOL Info.
+      Run Keyword and Expect Error  *Parameter not supported*
+      ...  Run IPMI Standard Command
+      ...  sol set volatile-bit-rate ${bit_rate}
+
+    END
+
+
+Set Invalid SOL Volatile Bit Rate
+    [Documentation]  Verify ability to set invalid SOL volatile bit rate.
+    [Tags]  Set_Invalid_SOL_Volatile_Bit_Rate
+
+    # Set invalid volatile-bit-rate from SOL Info.
+    ${resp} =  Run Keyword and Expect Error  *${IPMI_RAW_CMD['SOL']['Set_SOL'][0]}*
+    ...  Run IPMI Standard Command  sol set volatile-bit-rate ${invalid_bit_rate}
+
+    # Compares whether valid values are displayed.
+    Should Contain  ${resp}  ${IPMI_RAW_CMD['SOL']['Set_SOL'][1]}  ignore_case=True
+
+
+Verify SOL Set In Progress
+    [Documentation]  Verify ability to set the set in-progress data for SOL.
+    [Tags]  Verify_SOL_Set_In_Progress
+    [Teardown]  Run Keywords  Set SOL Setting  set-in-progress  set-complete
+    ...         AND  Test Teardown Execution
+
+    # Set the param 0 - set-in-progress from SOL Info.
+    FOR  ${prog}  IN  @{setinprogress}
+       Run Keyword  Run IPMI Standard Command  sol set set-in-progress ${prog}
+       # Get the param 0 - set-in-progress from SOL Info and verify.
+       ${set_inprogress_state}=  Get SOL Setting  Set in progress
+       Should Be Equal  ${prog}  ${set_inprogress_state}
     END
 
 
