@@ -411,3 +411,44 @@ def ecmd(option_string, **bsu_options):
 
     stdout, stderr, rc = bsu.bmc_execute_command(option_string, **bsu_options)
     return stdout
+
+
+def split_string_with_index(stri, n):
+    r"""
+    To split every n characters and forms an element for every nth index
+
+    Example : Given ${stri} = "abcdef", then the function call,
+    ${data}=  Split List With Index  ${stri}  2
+    then, result will be data = ['ab', 'cd', 'ef']
+    """
+
+    n = int(n)
+    data = [stri[index: index + n] for index in range(0, len(stri), n)]
+    return data
+
+
+def remove_whitespace(instring):
+    r"""
+    Removes the white spaces around the string
+
+    Example: instring = "  xxx  ", then returns instring = "xxx"
+    """
+
+    return instring.strip()
+
+
+def zfill_data(data, num):
+    r"""
+    zfill() method adds zeros (0) at the beginning of the string, until it reaches the specified length.
+
+    Usage : ${anystr}=  Zfill Data  ${data}  num
+
+    Example : Binary of one Byte has 8 bits - xxxx xxxx
+
+    Consider ${binary} has only 3 bits after converting from Hexadecimal/decimal to Binary
+    Say ${binary} = 110 then,
+    ${binary}=  Zfill Data  ${binary}  8
+    Now ${binary} will be 0000 0110
+    """
+
+    return data.zfill(int(num))

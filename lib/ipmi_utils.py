@@ -715,3 +715,47 @@ def get_channel_auth_capabilities(channel_number=1):
     result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
 
     return result
+
+
+def fetch_date(date):
+    r"""
+    Removes prefix 0 in a date in given date
+
+    Example : 08/12/2021 then returns 8/12/2021
+    """
+
+    date = date.lstrip("0")
+    return date
+
+
+def fetch_added_sel_date(entry):
+    r"""
+    Split sel entry string with with | and join only the date with space
+
+    Example : If entry given is, "a | 02/14/2020 | 01:16:58 | Sensor_type #0x17 |  | Asserted"
+    Then the result will be "02/14/2020 01:16:58"
+    """
+
+    temp = entry.split(" | ")
+    date = temp[1] + " " + temp[2]
+    print(date)
+    return date
+
+
+def prefix_bytes(listx):
+    r"""
+    prefixes byte strings in list
+
+    Example:
+    ${listx} = ['01', '02', '03']
+    ${listx}=  Prefix Bytes  ${listx}
+    then,
+    ${listx}= ['0x01', '0x02', '0x03']
+
+    """
+
+    listy = []
+    for item in listx:
+        item = "0x" + item
+        listy.append(item)
+    return listy
