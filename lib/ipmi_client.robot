@@ -456,6 +456,8 @@ Create SEL
     ${resp}=  Run IPMI Command
     ...  ${IPMI_RAW_CMD['SEL_entry']['Create_SEL'][0]} 0x${sensor_type} 0x${sensor_number} ${IPMI_RAW_CMD['SEL_entry']['Create_SEL'][1]}
 
+    Should Not Contain  ${resp}  00 00  msg=SEL not created.
+
     [Return]  ${resp}
 
 
@@ -535,3 +537,24 @@ Get Current Date from BMC
     ${date}=  Convert Date  ${date}  date_format=%b %d %H:%M:%S %Y  result_format=%m/%d/%Y %H:%M:%S  exclude_millis=True
 
     [Return]   ${date}
+
+
+Get SEL Info Via IPMI
+    [Documentation]  Get the SEL Info via IPMI raw command
+
+    # Get SEL Info response consist of 14 bytes of hexadecimal data.
+
+    # Byte 1 - SEL Version,
+    # Byte 2 & 3 - Entry bytes - LSB MSB,
+    # Byte 4 & 5 - Free Space in bytes, LS Byte first.
+    # Byte 6 - 9 - Most recent addition timestamp,
+    # Byte 10-13 - Most recent erase timestamp,
+    # Byte 14 - Operation Support
+
+    # Example: ${resp} will be "51 XX XX XX XX ff ff ff ff ff ff ff ff XX"
+
+    ${resp}=  Run IPMI Standard Command
+    ...  raw ${IPMI_RAW_CMD['SEL_entry']['SEL_info'][0]}
+    ${resp}=  Split String  ${resp}
+
+    [Return]  ${resp}
