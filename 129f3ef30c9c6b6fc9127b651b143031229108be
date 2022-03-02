@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2238f922_a3297dba",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-03-02T16:49:31Z",
+      "side": 1,
+      "message": "As this is a generic test path, better to name it as xpath_add_button and move it to common variable file which we have",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 80
+      },
+      "revId": "129f3ef30c9c6b6fc9127b651b143031229108be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58ce7a37_39388fb4",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-03-02T16:49:31Z",
+      "side": 1,
+      "message": "You can use below code directly which is more easier to understand.\n\n    # Add new hostname via GUI.\n    Click Element  ${xpath_hostname}\n    Input Text  ${xpath_hostname_input}  ${test_hostname}\n    Click Button  ${xpath_add_nw_settings_button}",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 50
+      },
+      "revId": "129f3ef30c9c6b6fc9127b651b143031229108be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26c545f5_5c60bb01",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-03-02T16:49:31Z",
+      "side": 1,
+      "message": "Passing these two xpath is confusing.. This keyword is not generic enough. Better to use the code as mention above.",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 249,
+        "endChar": 76
+      },
+      "revId": "129f3ef30c9c6b6fc9127b651b143031229108be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea73df33_7663d041",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-03-02T16:49:31Z",
+      "side": 1,
+      "message": "Mac would not be an editable field soon. GUI team is fixing this.",
+      "range": {
+        "startLine": 250,
+        "startChar": 36,
+        "endLine": 250,
+        "endChar": 52
+      },
+      "revId": "129f3ef30c9c6b6fc9127b651b143031229108be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
