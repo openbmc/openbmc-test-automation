@@ -28,10 +28,7 @@ ${xpath_input_gateway}                   //*[@id="gateway"]
 ${xpath_input_subnetmask}                //*[@id="subnetMask"]
 ${xpath_input_static_dns}                //*[@id="staticDns"]
 ${xpath_cancel_button}                   //button[contains(text(),'Cancel')]
-${xpath_add_button}                      //button[contains(text(),'Add')]
 ${xpath_delete_dns_server}               //*[@title="Delete DNS address"]
-${xpath_add_dns_server}                  //button[normalize-space(text())='Add']
-${xpath_add_ip_address_button}           //button[normalize-space(text())='Add']
 
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
@@ -41,6 +38,7 @@ ${out_of_range_netmask}                  255.256.255.0
 ${more_byte_netmask}                     255.255.255.0.0
 ${lowest_netmask}                        128.0.0.0
 ${test_gateway}                          10.7.7.1
+${test_hostname}                         openbmc
 
 
 *** Test Cases ***
@@ -144,6 +142,20 @@ Configure Static IPv4 Netmask Via GUI And Verify
     ${test_ipv4_addr}   ${test_subnet_mask}      ${test_gateway}  Success
 
 
+Configure Hostname Via GUI And Verify
+    [Documentation]  Login to GUI Network page, configure hostname and verify.
+    [Tags]  Configure_Hostname_Via_GUI_And_Verify
+    [Teardown]  Configure And Verify Network Settings Via GUI
+    ...  ${xpath_hostname}  ${xpath_hostname_input}  ${hostname}
+
+    ${hostname}=  Get BMC Hostname
+    Configure And Verify Network Settings Via GUI  ${xpath_hostname}
+    ...  ${xpath_hostname_input}  ${test_hostname}
+
+    ${bmc_hostname}=  Get BMC Hostname
+    Should Be Equal As Strings  ${bmc_hostname}  ${test_hostname}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -170,7 +182,7 @@ Add DNS Servers And Verify
 
     Click Button  ${xpath_add_dns_ip_address_button}
     Input Text  ${xpath_input_static_dns}  ${dns_server}
-    Click Button  ${xpath_add_dns_server}
+    Click Button  ${xpath_add_button}
     Run keyword if  '${expected_status}' != 'Valid format'
     ...  Run keywords  Page Should Contain  ${expected_status}  AND  Return From Keyword
 
@@ -214,7 +226,7 @@ Add Static IP Address And Verify
     Input Text  ${xpath_input_subnetmask}  ${subnet_mask}
     Input Text  ${xpath_input_gateway}  ${gateway_address}
 
-    Click Element  ${xpath_add_ip_address_button}
+    Click Element  ${xpath_add_button}
     Run Keyword If  '${expected_status}' == 'Valid format'
     ...  Run Keywords  Wait Until Page Contains  ${ip_address}  timeout=40sec
     ...  AND  Validate Network Config On BMC
@@ -222,3 +234,18 @@ Add Static IP Address And Verify
     ...  ELSE IF  '${expected_status}' == 'Invalid format'
     ...  Run Keywords  Page Should Contain  Invalid format  AND
     ...  Click Button  ${xpath_cancel_button}
+
+
+Configure And Verify Network Settings Via GUI
+    [Documentation]  Configure and verify network settings via GUI.
+    [Arguments]  ${xpath_nw_settings}  ${xpath_nw_settings_input_field}  ${input_value}
+
+    # Description of argument(s):
+    # xpath_nw_settings               xpath of the network settings.
+    # xpath_nw_settings_input_field   xpath of the network setting's input field.
+    # input_value                     Input value for configuration. E.g. hostname, IP etc.
+
+    Wait Until Keyword Succeeds  30 sec  10 sec  Click Element  ${xpath_nw_settings}
+    Input Text  ${xpath_nw_settings_input_field}  ${input_value}
+    Click Button  ${xpath_add_button}
+    Wait Until Page Contains  ${input_value}  timeout=30sec
