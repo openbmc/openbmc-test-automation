@@ -32,6 +32,7 @@ ${xpath_add_button}                      //button[contains(text(),'Add')]
 ${xpath_delete_dns_server}               //*[@title="Delete DNS address"]
 ${xpath_add_dns_server}                  //button[normalize-space(text())='Add']
 ${xpath_add_ip_address_button}           //button[normalize-space(text())='Add']
+${xpath_add_nw_settings_button}          //button[normalize-space(text())='Add']
 
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
@@ -41,6 +42,7 @@ ${out_of_range_netmask}                  255.256.255.0
 ${more_byte_netmask}                     255.255.255.0.0
 ${lowest_netmask}                        128.0.0.0
 ${test_gateway}                          10.7.7.1
+${test_hostname}                         openbmc
 
 
 *** Test Cases ***
@@ -144,6 +146,20 @@ Configure Static IPv4 Netmask Via GUI And Verify
     ${test_ipv4_addr}   ${test_subnet_mask}      ${test_gateway}  Success
 
 
+Configure Hostname Via GUI And Verify
+    [Documentation]  Login to GUI Network page, configure hostname and verify.
+    [Tags]  Configure_Hostname_Via_GUI_And_Verify
+    [Teardown]  Configure And Verify Network Settings Via GUI
+    ...  ${xpath_hostname}  ${xpath_hostname_input}  ${hostname}
+
+    ${hostname}=  Get BMC Hostname
+    Configure And Verify Network Settings Via GUI  ${xpath_hostname}
+    ...  ${xpath_hostname_input}  ${test_hostname}
+
+    ${bmc_hostname}=  Get BMC Hostname
+    Should Be Equal As Strings  ${bmc_hostname}  ${test_hostname}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -222,3 +238,18 @@ Add Static IP Address And Verify
     ...  ELSE IF  '${expected_status}' == 'Invalid format'
     ...  Run Keywords  Page Should Contain  Invalid format  AND
     ...  Click Button  ${xpath_cancel_button}
+
+
+Configure And Verify Network Settings Via GUI
+    [Documentation]  Configure and verify network settings via GUI.
+    [Arguments]  ${xpath}  ${xpath_nw_settings_textfield}  ${nw_settings_input}
+
+    # Description of argument(s):
+    # xpath                         xpath of the network settings.
+    # xpath_nw_settings_textfield   xpath of the network settings textfield.
+    # nw_settings_input             The mac address, hostname etc.
+
+    Wait Until Keyword Succeeds  30 sec  10 sec  Click Element  ${xpath}
+    Input Text  ${xpath_nw_settings_textfield}  ${nw_settings_input}
+    Click Button  ${xpath_add_nw_settings_button}
+    Wait Until Page Contains  ${nw_settings_input}  timeout=30sec
