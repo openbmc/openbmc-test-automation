@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b960113_90284730",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-03-02T12:59:57Z",
+      "side": 1,
+      "message": "End the documentation with a period \".\" and keep only required tex with capital letter. This is applicable to all other test case in this and other commits.\n\nVerify SOL payload channel from SOL info.",
+      "range": {
+        "startLine": 205,
+        "startChar": 21,
+        "endLine": 205,
+        "endChar": 61
+      },
+      "revId": "dfbd3811e1de058d0fd65366697a21331390cf5d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfa18b28_b6ba246b",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-03-02T12:59:57Z",
+      "side": 1,
+      "message": "End the comment message with the period also keep only the required text with capital like below. This is applicable to all other test case in this and other commits.\n\n# Get channel number from SOL info and verify that it is not empty.",
+      "range": {
+        "startLine": 208,
+        "startChar": 6,
+        "endLine": 208,
+        "endChar": 38
+      },
+      "revId": "dfbd3811e1de058d0fd65366697a21331390cf5d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3fcc754_573b87f1",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-03-02T12:59:57Z",
+      "side": 1,
+      "message": "Please make use of existing get_sol_info keyword from lib/ipmi_utils.py like below. This is applicable to all other test case in this commit.\n\n    ${sol_info_dict}\u003d  Get SOL Info\n    ${payload_channel}\u003d  Get From Dictionary\n    ...  ${sol_info_dict}  Payload Channel",
+      "range": {
+        "startLine": 209,
+        "startChar": 0,
+        "endLine": 211,
+        "endChar": 47
+      },
+      "revId": "dfbd3811e1de058d0fd65366697a21331390cf5d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab5a468d_021f7472",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-03-02T12:59:57Z",
+      "side": 1,
+      "message": "*${IPMI_RAW_CMD[\u0027SOL\u0027][\u0027Set_SOL\u0027][0]}* Not required.\n\nWe could just keep it something like below\n\n    ${msg}\u003d  Run Keyword And Expect Error  *  Run IPMI Standard Command\n    ...  sol set non-volatile-bit-rate  ${invalid_bit_rate}\n    Should Contain  ${msg}  Invalid value  ignore_case\u003dTrue",
+      "range": {
+        "startLine": 252,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 65
+      },
+      "revId": "dfbd3811e1de058d0fd65366697a21331390cf5d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a31689eb_74cd7174",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-03-02T12:59:57Z",
+      "side": 1,
+      "message": "not required.",
+      "range": {
+        "startLine": 265,
+        "startChar": 6,
+        "endLine": 265,
+        "endChar": 17
+      },
+      "revId": "dfbd3811e1de058d0fd65366697a21331390cf5d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c186e9cd_3a4a7bb6",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-03-02T12:59:57Z",
+      "side": 1,
+      "message": "use `Get SOL Info` instead as pointe above.",
+      "range": {
+        "startLine": 268,
+        "startChar": 20,
+        "endLine": 268,
+        "endChar": 49
+      },
+      "revId": "dfbd3811e1de058d0fd65366697a21331390cf5d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "191adfe8_45a71efd",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-03-02T12:59:57Z",
+      "side": 1,
+      "message": "This would not make sure that BMC is in Ready state. So have a check for it before going ahead.",
+      "range": {
+        "startLine": 272,
+        "startChar": 6,
+        "endLine": 272,
+        "endChar": 25
+      },
+      "revId": "dfbd3811e1de058d0fd65366697a21331390cf5d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afdc47b3_a4d2146f",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-03-02T12:59:57Z",
+      "side": 1,
+      "message": "After reboot is it suppose to not match?",
+      "range": {
+        "startLine": 274,
+        "startChar": 6,
+        "endLine": 274,
+        "endChar": 72
+      },
+      "revId": "dfbd3811e1de058d0fd65366697a21331390cf5d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fadcf80f_8d5a199b",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-03-02T12:59:57Z",
+      "side": 1,
+      "message": "Same comment as above",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 287,
+        "endChar": 65
+      },
+      "revId": "dfbd3811e1de058d0fd65366697a21331390cf5d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b5f423f_98c8914f",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-03-02T12:59:57Z",
+      "side": 1,
+      "message": "use Get SOL Info",
+      "range": {
+        "startLine": 300,
+        "startChar": 30,
+        "endLine": 300,
+        "endChar": 90
+      },
+      "revId": "dfbd3811e1de058d0fd65366697a21331390cf5d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
