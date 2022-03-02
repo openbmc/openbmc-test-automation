@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b239293b_7d973aa1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-03-02T05:23:04Z",
+      "side": 1,
+      "message": "Lee\nAt preset we don\u0027t see any review comments as resolved. If you have resolved all the comments with your last commit, please reply to all the comments with the action which you have taken.",
+      "revId": "865391fd2e30e7d64b621b83a6f45033e5866073",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
