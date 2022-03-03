@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "000bb752_a6bbe3f1",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-03-03T07:27:27Z",
+      "side": 1,
+      "message": "Keyword name was changed from \"Check Number Of Active Ethernet Channels\" to \"Check Active Ethernet Channels\"",
+      "parentUuid": "72015e9b_992858cd",
+      "range": {
+        "startLine": 659,
+        "startChar": 0,
+        "endLine": 660,
+        "endChar": 40
+      },
+      "revId": "d1195267c2ab844fbfb30a2c9275b7f19358b9f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b5ec8223_47498960",
         "filename": "ipmi/test_ipmi_user.robot",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2022-03-02T16:34:09Z",
       "side": 1,
       "message": "Check active ethernet channels and set suite variables.",
+      "range": {
+        "startLine": 661,
+        "startChar": 21,
+        "endLine": 661,
+        "endChar": 51
+      },
+      "revId": "d1195267c2ab844fbfb30a2c9275b7f19358b9f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d77e1115_86d74b98",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-03-03T07:27:27Z",
+      "side": 1,
+      "message": "Documentation was updated as per comments",
+      "parentUuid": "b5ec8223_47498960",
       "range": {
         "startLine": 661,
         "startChar": 21,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3717922a_43bcdc45",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-03-03T07:27:27Z",
+      "side": 1,
+      "message": "Changed the local variables to lower letters.",
+      "parentUuid": "9cf0e7ad_2a939c72",
+      "range": {
+        "startLine": 665,
+        "startChar": 11,
+        "endLine": 665,
+        "endChar": 21
+      },
+      "revId": "d1195267c2ab844fbfb30a2c9275b7f19358b9f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72630da5_3c93eaf0",
         "filename": "ipmi/test_ipmi_user.robot",
         "patchSetId": 1
@@ -83,6 +155,30 @@
       "writtenOn": "2022-03-02T16:34:09Z",
       "side": 1,
       "message": "${secondary_channel_number}\u003d  Set Variable If  ${channel_num} !\u003d ${CHANNEL_NUMBER}  ${channel_num}",
+      "range": {
+        "startLine": 666,
+        "startChar": 8,
+        "endLine": 666,
+        "endChar": 104
+      },
+      "revId": "d1195267c2ab844fbfb30a2c9275b7f19358b9f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e061345a_be09a369",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-03-03T07:27:27Z",
+      "side": 1,
+      "message": "changed the local variables to lower letters.",
+      "parentUuid": "72630da5_3c93eaf0",
       "range": {
         "startLine": 666,
         "startChar": 8,
@@ -118,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0af9d62d_25caf45a",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-03-03T07:27:27Z",
+      "side": 1,
+      "message": "changed the local variables to lower letters.",
+      "parentUuid": "ccd97113_887dd86a",
+      "range": {
+        "startLine": 669,
+        "startChar": 26,
+        "endLine": 669,
+        "endChar": 50
+      },
+      "revId": "d1195267c2ab844fbfb30a2c9275b7f19358b9f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "375ff95c_5c8f7633",
         "filename": "ipmi/test_ipmi_user.robot",
         "patchSetId": 1
@@ -129,6 +249,30 @@
       "writtenOn": "2022-03-02T16:34:09Z",
       "side": 1,
       "message": "move this to line 664",
+      "range": {
+        "startLine": 671,
+        "startChar": 0,
+        "endLine": 674,
+        "endChar": 69
+      },
+      "revId": "d1195267c2ab844fbfb30a2c9275b7f19358b9f7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb6a40ff_0c4ba94a",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-03-03T07:27:27Z",
+      "side": 1,
+      "message": "As per comments, line was moved to line number 664.",
+      "parentUuid": "375ff95c_5c8f7633",
       "range": {
         "startLine": 671,
         "startChar": 0,
