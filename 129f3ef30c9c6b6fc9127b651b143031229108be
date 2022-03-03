@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "522c7bae_e406204d",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-03-03T11:18:23Z",
+      "side": 1,
+      "message": "Had a word with Megha and understand the this keyword is required to be run in teardown also. So suggested her to make below changes to make is more meaningful.\n\n    # xpath_nw_settings               xpath of the network settings.\n    # xpath_nw_settings_input_field   xpath of the network setting\u0027s input field.\n    # input_value                     Input value for configuration. E.g. hostname, IP etc.",
+      "parentUuid": "26c545f5_5c60bb01",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 249,
+        "endChar": 76
+      },
+      "revId": "129f3ef30c9c6b6fc9127b651b143031229108be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ea73df33_7663d041",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 3
