@@ -17,7 +17,7 @@ OPENBMC:
     # Filename is <OS>_general.txt, where <OS> is in [OPENBMC, RHEL, UBUNTU]
     GENERAL:
         COMMANDS:
-            - 'rm -rf /tmp/OPENBMC_general.txt'
+            - 'rm -rf /tmp/*BMC_* /tmp/PEL_* /tmp/pldm* /tmp/PLDM* /tmp/GUARD* /tmp/fan_* /tmp/DEVTREE'
             - 'echo "++++++++++ cat /etc/os-release ++++++++++" >> /tmp/OPENBMC_general.txt'
             - 'cat /etc/os-release >> /tmp/OPENBMC_general.txt'
             - 'echo -e "\n++++++++++ cat /etc/timestamp ++++++++++" >> /tmp/OPENBMC_general.txt'
@@ -64,6 +64,7 @@ OPENBMC:
             - {'peltool -a >/tmp/PEL_logs_display.json':600}
             - {'peltool  -l -a -f >/tmp/PEL_logs_complete_list.json 2>&1':1200}
             - {'peltool -a -f -h>/tmp/PEL_logs_complete_display.json 2>&1':1200}
+            - {'strace -p $(pidof pldmd) -o /tmp/pldmd_strace.txt & sleep 300 ; kill $!':600}
             - 'hexdump -C /var/lib/phosphor-logging/extensions/pels/badPEL >/tmp/PEL_logs_badPEL.txt'
             - 'export PDBG_DTB=/var/lib/phosphor-software-manager/pnor/rw/DEVTREE; guard -l >/tmp/GUARD_list.txt'
             - 'pldmtool fru getfrurecordtable>/tmp/PLDM_fru_record.txt'
@@ -89,6 +90,7 @@ OPENBMC:
             - '/tmp/PEL_logs_complete_list.json'
             - '/tmp/PEL_logs_complete_display.json'
             - '/tmp/PEL_logs_display.json'
+            - '/tmp/pldmd_strace.txt'
             - '/tmp/PEL_logs_badPEL.txt'
             - '/tmp/GUARD_list.txt'
             - '/tmp/PLDM_fru_record.txt'
