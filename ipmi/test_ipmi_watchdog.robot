@@ -21,7 +21,7 @@ Test IPMI Watchdog Timer Don't Log Bit
     [Tags]  Test_IPMI_Watchdog_Timer_Don't_Log_Bit
     [Template]  Execute IPMI Raw Command And Verify Response Data
 
-    # don't log bit set_raw_cmd  get_raw_cmd  resp_expect
+    # set_raw_cmd  get_raw_cmd  resp_expect
     ${IPMI_RAW_CMD['Watchdog']['Set'][0]}  ${IPMI_RAW_CMD['Watchdog']['Get'][0]}
     ...  ${IPMI_RAW_CMD['Watchdog']['Get'][1]}
     ${IPMI_RAW_CMD['Watchdog']['Set'][3]}  ${IPMI_RAW_CMD['Watchdog']['Get'][0]}

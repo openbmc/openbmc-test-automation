@@ -168,3 +168,38 @@ openssl s_client -connect <BMC_IP>:443 -showcerts
 ```
 
 Refer to the [OpenSSL manual](https://www.openssl.org/docs/manmaster/man1/req.html) for more details.
+
+## peltool: ##
+peltool is an open-source platform event log(PEL) tool generally used to view and delete pel logs that are generated on the BMC system. Also, provides various pel related operations as mentioned in the 'peltool --help'.
+
+```
+ peltool -h
+OpenBMC PEL Tool
+Usage: peltool [OPTIONS]
+
+Options:
+  --help                      Print this help message and exit
+  --file TEXT                 Display a PEL using its Raw PEL file
+  -i,--id TEXT                Display a PEL based on its ID
+  --bmc-id TEXT               Display a PEL based on its BMC Event ID
+  -a                          Display all PELs
+  -l                          List PELs
+  -n                          Show number of PELs
+  -r                          Reverse order of output
+  -h                          Include hidden PELs
+  -f,--info                   Include informational PELs
+  -t,--termination            List only critical system terminating PELs
+  -d,--delete TEXT            Delete a PEL based on its ID
+  -D,--delete-all             Delete all PELs
+  -s,--scrub TEXT             File containing SRC regular expressions to ignore
+  -x                          Display PEL(s) in hexdump instead of JSON
+  --archive                   List or display archived PELs
+```
+
+## guard tool: ##
+guard tool on BMC provides an option to create, view and delete the faulty units.
+Refer to [README](https://github.com/open-power/guard#readme)
+
+## pldmtool: ##
+pldmtool is an open-source client tool that acts as a PLDM requester which runs on the BMC. pldmtool supports the subcommands for PLDM types such as base, platform, bios, fru, and oem-ibm as mentioned in the 'pldmtool --help'.
+Refer to [README](https://github.com/openbmc/pldm/tree/master/pldmtool#README.md)

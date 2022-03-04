@@ -488,7 +488,7 @@ Configure IP Address Via Different User Roles And Verify
     ${LDAP_TYPE}  NoAccess         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
 
     # Verify LDAP user with Operator privilege is able to configure IP address.
-    ${LDAP_TYPE}  Operator         ${GROUP_NAME}  ${HTTP_OK}
+    ${LDAP_TYPE}  Operator         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
 
 
 Delete IP Address Via Different User Roles And Verify
@@ -507,7 +507,7 @@ Delete IP Address Via Different User Roles And Verify
     ${LDAP_TYPE}  NoAccess         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
 
     # Verify LDAP user with Operator privilege is able to delete IP address.
-    ${LDAP_TYPE}  Operator         ${GROUP_NAME}  ${HTTP_OK}
+    ${LDAP_TYPE}  Operator         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
 
 
 Read Network Configuration Via Different User Roles And Verify

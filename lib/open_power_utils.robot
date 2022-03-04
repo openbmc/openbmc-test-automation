@@ -8,6 +8,7 @@ Resource       ../lib/connection_client.robot
 *** Variables ***
 ${functional_cpu_count}       ${0}
 ${active_occ_count}           ${0}
+${OCC_WAIT_TIMEOUT}           2 min
 
 *** Keywords ***
 
@@ -268,3 +269,34 @@ Inject OPAL TI
     # Clean up the repo once done.
     ${cmd_buf}=  Catenate  rm -rf ${repo_dir_path}${/}${value}
     Shell Cmd  ${cmd_buf}
+
+
+Trigger OCC Reset
+    [Documentation]  Trigger OCC reset request on an active OCC.
+    [Arguments]  ${occ_target}=${0}
+
+    # Description of Argument(s):
+    # occ_target   Target a valid given OCC number 0,1, etc.
+
+    Log To Console   OCC Reset Triggered on OCC ${occ_target}
+
+    ${cmd}=  Catenate  busctl call org.open_power.OCC.Control
+    ...  /org/open_power/control/occ${occ_target} org.open_power.OCC.PassThrough
+    ...  Send ai 8 64 0 5 20 82 83 84 0
+
+    ${cmd_output}  ${stderr}  ${rc} =  BMC Execute Command  ${cmd}  print_out=1  print_err=1
+
+    Sleep  5s
+
+    ${occ_active}=  Get OCC Active State  ${occ_target}
+    Should Be Equal  ${occ_active}  ${0}
+    Log To Console  Target OCC ${occ_target} state is ${occ_active}.
+
+
+Trigger OCC Reset And Wait For OCC Active State
+    [Documentation]  Trigger OCC reset request and wait for OCC to reset back to active state.
+
+    Trigger OCC Reset
+
+    Log To Console  OCC wait check for active state.
+    Wait Until Keyword Succeeds  ${OCC_WAIT_TIMEOUT}  20 sec   Match OCC And CPU State Count
