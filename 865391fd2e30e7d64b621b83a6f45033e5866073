@@ -35,6 +35,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "705178f7_d548a656",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Sorry for the misunderstanding about my review comments.  I did not realize that review comments in draft mode have to published via pressing the A key.  ",
+      "revId": "865391fd2e30e7d64b621b83a6f45033e5866073",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8a86d51_6e8e043f",
@@ -48,6 +65,30 @@
       "writtenOn": "2022-03-02T07:05:59Z",
       "side": 1,
       "message": "Remove.Enough to specify only the required fields for the template being used.",
+      "range": {
+        "startLine": 24,
+        "startChar": 6,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "865391fd2e30e7d64b621b83a6f45033e5866073",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3d62132_c3379f6f",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Removed all template fields not used in the template keyword.  This is done for all of the templates.",
+      "parentUuid": "c8a86d51_6e8e043f",
       "range": {
         "startLine": 24,
         "startChar": 6,
@@ -81,6 +122,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "260a3688_0055d092",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Changed to Verify Timer Actions For State Change",
+      "parentUuid": "3c28a190_8e196ec0",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 27
+      },
+      "revId": "865391fd2e30e7d64b621b83a6f45033e5866073",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "300f5e0e_ce64605f",
@@ -94,6 +159,30 @@
       "writtenOn": "2022-03-02T07:05:59Z",
       "side": 1,
       "message": "Change as per the test title",
+      "range": {
+        "startLine": 104,
+        "startChar": 12,
+        "endLine": 104,
+        "endChar": 42
+      },
+      "revId": "865391fd2e30e7d64b621b83a6f45033e5866073",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8137ab1f_1d1ed48c",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "All of these types have been corrected",
+      "parentUuid": "300f5e0e_ce64605f",
       "range": {
         "startLine": 104,
         "startChar": 12,
@@ -127,6 +216,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bb7e19d_90dde9b0",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Corrected the typo",
+      "parentUuid": "2e9468d5_be1dda37",
+      "range": {
+        "startLine": 108,
+        "startChar": 71,
+        "endLine": 108,
+        "endChar": 75
+      },
+      "revId": "865391fd2e30e7d64b621b83a6f45033e5866073",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b74ac626_762311f8",
@@ -140,6 +253,30 @@
       "writtenOn": "2022-03-02T07:05:59Z",
       "side": 1,
       "message": "I suggested like this. Remove the loop and replace these 3 lines with just\n\nLog Many  @{start_timer_value}",
+      "range": {
+        "startLine": 129,
+        "startChar": 1,
+        "endLine": 131,
+        "endChar": 7
+      },
+      "revId": "865391fd2e30e7d64b621b83a6f45033e5866073",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b362d382_e126fbc2",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "This loop has been removed",
+      "parentUuid": "b74ac626_762311f8",
       "range": {
         "startLine": 129,
         "startChar": 1,
@@ -173,6 +310,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b816eda4_fab860e2",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Tab has been removed",
+      "parentUuid": "9f229b51_f5c432a9",
+      "range": {
+        "startLine": 141,
+        "startChar": 49,
+        "endLine": 141,
+        "endChar": 50
+      },
+      "revId": "865391fd2e30e7d64b621b83a6f45033e5866073",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6bf96a6_c0506a1c",
@@ -186,6 +347,30 @@
       "writtenOn": "2022-03-02T07:05:59Z",
       "side": 1,
       "message": "Add 2 spaces",
+      "range": {
+        "startLine": 166,
+        "startChar": 24,
+        "endLine": 166,
+        "endChar": 33
+      },
+      "revId": "865391fd2e30e7d64b621b83a6f45033e5866073",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04aa63c1_628d5299",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Spacing is changed since interval field has been removed",
+      "parentUuid": "a6bf96a6_c0506a1c",
       "range": {
         "startLine": 166,
         "startChar": 24,
@@ -219,6 +404,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e3f85a2_6454d88a",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Text greater than is now used",
+      "parentUuid": "41eaa98f_57b2202b",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 55
+      },
+      "revId": "865391fd2e30e7d64b621b83a6f45033e5866073",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43419e8a_183ea779",
@@ -232,6 +441,30 @@
       "writtenOn": "2022-03-02T07:05:59Z",
       "side": 1,
       "message": "Change it as per the title",
+      "range": {
+        "startLine": 173,
+        "startChar": 12,
+        "endLine": 173,
+        "endChar": 37
+      },
+      "revId": "865391fd2e30e7d64b621b83a6f45033e5866073",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "690c20e2_bc427473",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Title has been fixed",
+      "parentUuid": "43419e8a_183ea779",
       "range": {
         "startLine": 173,
         "startChar": 12,
@@ -265,6 +498,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2ef93fa_12a8da16",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Unused template arguments have been removed",
+      "parentUuid": "e5dbdf32_392e986e",
+      "range": {
+        "startLine": 212,
+        "startChar": 1,
+        "endLine": 212,
+        "endChar": 55
+      },
+      "revId": "865391fd2e30e7d64b621b83a6f45033e5866073",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb547325_a9a9bb6b",
@@ -278,6 +535,30 @@
       "writtenOn": "2022-03-02T07:05:59Z",
       "side": 1,
       "message": "Align the descriptions in one column.",
+      "range": {
+        "startLine": 226,
+        "startChar": 20,
+        "endLine": 229,
+        "endChar": 55
+      },
+      "revId": "865391fd2e30e7d64b621b83a6f45033e5866073",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31eea00b_826df2fb",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Descriptions have been aligned",
+      "parentUuid": "bb547325_a9a9bb6b",
       "range": {
         "startLine": 226,
         "startChar": 20,
@@ -311,6 +592,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90093162_52974c13",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Argument name has been corrected",
+      "parentUuid": "28355f7f_b7828a35",
+      "range": {
+        "startLine": 255,
+        "startChar": 4,
+        "endLine": 255,
+        "endChar": 62
+      },
+      "revId": "865391fd2e30e7d64b621b83a6f45033e5866073",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "342240ee_71696771",
@@ -324,6 +629,30 @@
       "writtenOn": "2022-03-02T07:05:59Z",
       "side": 1,
       "message": "same comment as above",
+      "range": {
+        "startLine": 265,
+        "startChar": 6,
+        "endLine": 265,
+        "endChar": 18
+      },
+      "revId": "865391fd2e30e7d64b621b83a6f45033e5866073",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "daf308b4_29fff489",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Argument name has been fixed",
+      "parentUuid": "342240ee_71696771",
       "range": {
         "startLine": 265,
         "startChar": 6,
@@ -357,6 +686,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d927e483_74cfce18",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Descriptions are now aligned",
+      "parentUuid": "b3783535_302fa3aa",
+      "range": {
+        "startLine": 283,
+        "startChar": 4,
+        "endLine": 284,
+        "endChar": 71
+      },
+      "revId": "865391fd2e30e7d64b621b83a6f45033e5866073",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5f88e6f_007aeb9b",
@@ -380,6 +733,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5f82b2c_1aa0867b",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Argument description has been added",
+      "parentUuid": "c5f88e6f_007aeb9b",
+      "range": {
+        "startLine": 291,
+        "startChar": 4,
+        "endLine": 291,
+        "endChar": 65
+      },
+      "revId": "865391fd2e30e7d64b621b83a6f45033e5866073",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da0add4b_b46a245e",
@@ -393,6 +770,30 @@
       "writtenOn": "2022-03-02T07:05:59Z",
       "side": 1,
       "message": "Take out the loop",
+      "range": {
+        "startLine": 307,
+        "startChar": 4,
+        "endLine": 309,
+        "endChar": 7
+      },
+      "revId": "865391fd2e30e7d64b621b83a6f45033e5866073",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19e5b6ab_6756f4d1",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Loop has been removed",
+      "parentUuid": "da0add4b_b46a245e",
       "range": {
         "startLine": 307,
         "startChar": 4,

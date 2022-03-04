@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26519dba_175b7248",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "999981fd_b156fc02",
+      "range": {
+        "startLine": 23,
+        "startChar": 20,
+        "endLine": 23,
+        "endChar": 81
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3504d296_7eef6000",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-02-15T16:14:00Z",
       "side": 1,
       "message": "2 spaces should be enough here. Also please don\u0027t go beyond 110 characters in a line.Change throughout the script.",
+      "range": {
+        "startLine": 27,
+        "startChar": 1,
+        "endLine": 29,
+        "endChar": 132
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c82fe145_2035e03d",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3504d296_7eef6000",
       "range": {
         "startLine": 27,
         "startChar": 1,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d38924f2_921de873",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8db594e4_a1e590bc",
+      "range": {
+        "startLine": 86,
+        "startChar": 21,
+        "endLine": 86,
+        "endChar": 89
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b88e140a_f85e2589",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-02-15T16:14:00Z",
       "side": 1,
       "message": "Should be part of test setup. Pls change wherever applicable.",
+      "range": {
+        "startLine": 89,
+        "startChar": 4,
+        "endLine": 94,
+        "endChar": 0
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de4e14ef_f09e73a8",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "I will include these as a separate keyword, as a test setup is for all tests in the suite, and these are only used for these timer actions tests.\n\nUpdate: I have created a template for these common timer action test keywords.",
+      "parentUuid": "b88e140a_f85e2589",
       "range": {
         "startLine": 89,
         "startChar": 4,
@@ -139,6 +235,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e846c8d_9ead3526",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Setting the watchdog to a value does not start the timer.  Reset Watchdog Timer starts the timer and countdown begins with value entered with the Set Watchdog Timer command",
+      "parentUuid": "27e98e1b_42ea1c58",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 84
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d219c70c_3ce3c246",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "965bd443_ccabccec",
+      "range": {
+        "startLine": 96,
+        "startChar": 2,
+        "endLine": 99,
+        "endChar": 13
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "febead9d_f4499bc6",
@@ -162,6 +306,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a20dd61a_39ee7b7e",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "I will do a separate keyword for these, since a template is used for a complete test case that does not have other keywords.  These timer action tests have different keywords depending on the action desired.\n\nUpdate:  I have created a template for these common timer action test case keywords.",
+      "parentUuid": "febead9d_f4499bc6",
+      "range": {
+        "startLine": 95,
+        "startChar": 3,
+        "endLine": 104,
+        "endChar": 45
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6f00674_04104dd2",
@@ -175,6 +343,30 @@
       "writtenOn": "2022-02-15T16:14:00Z",
       "side": 1,
       "message": "Is this loop just to log the values present in the list? You can use Log Many to do that.",
+      "range": {
+        "startLine": 187,
+        "startChar": 3,
+        "endLine": 191,
+        "endChar": 0
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "551ad64f_ac35a295",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6f00674_04104dd2",
       "range": {
         "startLine": 187,
         "startChar": 3,
@@ -231,6 +423,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "baf11126_1b2e405a",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Example has been included as comments",
+      "parentUuid": "ca5e333f_8f3e0882",
+      "range": {
+        "startLine": 192,
+        "startChar": 4,
+        "endLine": 196,
+        "endChar": 75
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52e72270_1b0b36c1",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a79addc_9b92d2dd",
+      "range": {
+        "startLine": 196,
+        "startChar": 49,
+        "endLine": 196,
+        "endChar": 50
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4778a4f9_8ad4ca1e",
@@ -244,6 +484,30 @@
       "writtenOn": "2022-02-15T16:14:00Z",
       "side": 1,
       "message": "${resp} not used anywhere. Please remove.",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 214,
+        "endChar": 84
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "218ee045_cbc25815",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4778a4f9_8ad4ca1e",
       "range": {
         "startLine": 206,
         "startChar": 0,
@@ -277,6 +541,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37ca4f69_ecdf664f",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9eb4e79_d90f33a2",
+      "range": {
+        "startLine": 205,
+        "startChar": 4,
+        "endLine": 225,
+        "endChar": 0
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ead8a54f_cad98eaf",
@@ -290,6 +578,30 @@
       "writtenOn": "2022-02-15T16:14:00Z",
       "side": 1,
       "message": "Use a template",
+      "range": {
+        "startLine": 231,
+        "startChar": 1,
+        "endLine": 246,
+        "endChar": 0
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f3ee015_dbf5b94c",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ead8a54f_cad98eaf",
       "range": {
         "startLine": 231,
         "startChar": 1,
@@ -323,6 +635,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3e6eb1a_4ebdb735",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2e17aaa_7caeffb9",
+      "range": {
+        "startLine": 251,
+        "startChar": 4,
+        "endLine": 251,
+        "endChar": 9
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cca928f2_769e8725",
@@ -336,6 +672,30 @@
       "writtenOn": "2022-02-15T16:14:00Z",
       "side": 1,
       "message": "Use a template",
+      "range": {
+        "startLine": 251,
+        "startChar": 3,
+        "endLine": 261,
+        "endChar": 78
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "444c9367_0e0b2ddc",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cca928f2_769e8725",
       "range": {
         "startLine": 251,
         "startChar": 3,
@@ -369,6 +729,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2af79966_06250aa7",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "210682e7_697825e7",
+      "range": {
+        "startLine": 272,
+        "startChar": 4,
+        "endLine": 272,
+        "endChar": 31
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0aee4084_ed077be6",
@@ -382,6 +766,30 @@
       "writtenOn": "2022-02-15T16:14:00Z",
       "side": 1,
       "message": "Not required.",
+      "range": {
+        "startLine": 291,
+        "startChar": 4,
+        "endLine": 291,
+        "endChar": 11
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f20e262_4d65aa85",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0aee4084_ed077be6",
       "range": {
         "startLine": 291,
         "startChar": 4,
@@ -415,6 +823,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d706c48_48cb0cd4",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79038ecd_adea09f7",
+      "range": {
+        "startLine": 297,
+        "startChar": 4,
+        "endLine": 297,
+        "endChar": 32
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8192a1e0_12929a4c",
@@ -428,6 +860,30 @@
       "writtenOn": "2022-02-15T16:14:00Z",
       "side": 1,
       "message": "This method is verifying 2 things. It is better to breakdown this to 2 methods. One to verify Host power state (method name should indicate this), second to verify the SEL as per expectation.",
+      "range": {
+        "startLine": 295,
+        "startChar": 0,
+        "endLine": 308,
+        "endChar": 52
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b51cbed_66ae7a59",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8192a1e0_12929a4c",
       "range": {
         "startLine": 295,
         "startChar": 0,
@@ -461,6 +917,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84ea657c_5c25a881",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d1c37d5_f4b6c20c",
+      "range": {
+        "startLine": 310,
+        "startChar": 0,
+        "endLine": 310,
+        "endChar": 17
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27637d61_f00b2221",
@@ -474,6 +954,30 @@
       "writtenOn": "2022-02-15T16:14:00Z",
       "side": 1,
       "message": "Use Log Many",
+      "range": {
+        "startLine": 330,
+        "startChar": 4,
+        "endLine": 333,
+        "endChar": 0
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "470b6b30_79862fd1",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27637d61_f00b2221",
       "range": {
         "startLine": 330,
         "startChar": 4,
@@ -507,6 +1011,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "697afae5_0e866199",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9917ce7b_2e7fe67f",
+      "range": {
+        "startLine": 338,
+        "startChar": 4,
+        "endLine": 338,
+        "endChar": 71
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32a155e5_664ed170",
@@ -520,6 +1048,30 @@
       "writtenOn": "2022-02-15T16:14:00Z",
       "side": 1,
       "message": "Can we have a method to do this conversion and use it? Saw this code in 2 places.",
+      "range": {
+        "startLine": 334,
+        "startChar": 1,
+        "endLine": 339,
+        "endChar": 70
+      },
+      "revId": "41a7cc00072ad6dd5986112e0950846287185619",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "485001cf_185bfe30",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-04T16:53:51Z",
+      "side": 1,
+      "message": "I have made a keyword for this, however, it is needed in the first instance since the initial start value has to be sliced from the response value and converted to an integer in order for the succeeding calls to this keyword.  This is why there are two instances - one is the inital conversion to get the start values, and the second is the keyword that compares the current timer value to the initial start value.",
+      "parentUuid": "32a155e5_664ed170",
       "range": {
         "startLine": 334,
         "startChar": 1,
