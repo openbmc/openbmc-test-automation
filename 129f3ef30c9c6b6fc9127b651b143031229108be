@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02f2035b_b3030cf0",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-03-07T05:13:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2238f922_a3297dba",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 80
+      },
+      "revId": "129f3ef30c9c6b6fc9127b651b143031229108be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58ce7a37_39388fb4",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-03-02T16:49:31Z",
       "side": 1,
       "message": "You can use below code directly which is more easier to understand.\n\n    # Add new hostname via GUI.\n    Click Element  ${xpath_hostname}\n    Input Text  ${xpath_hostname_input}  ${test_hostname}\n    Click Button  ${xpath_add_nw_settings_button}",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 50
+      },
+      "revId": "129f3ef30c9c6b6fc9127b651b143031229108be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ad59384_b3427e00",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-03-07T05:13:41Z",
+      "side": 1,
+      "message": "I have used keyword here.",
+      "parentUuid": "58ce7a37_39388fb4",
       "range": {
         "startLine": 156,
         "startChar": 0,
@@ -94,6 +142,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5636e0a8_f8f94d26",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-03-07T05:13:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "522c7bae_e406204d",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 249,
+        "endChar": 76
+      },
+      "revId": "129f3ef30c9c6b6fc9127b651b143031229108be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea73df33_7663d041",
@@ -107,6 +179,30 @@
       "writtenOn": "2022-03-02T16:49:31Z",
       "side": 1,
       "message": "Mac would not be an editable field soon. GUI team is fixing this.",
+      "range": {
+        "startLine": 250,
+        "startChar": 36,
+        "endLine": 250,
+        "endChar": 52
+      },
+      "revId": "129f3ef30c9c6b6fc9127b651b143031229108be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69facda1_02496695",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-03-07T05:13:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea73df33_7663d041",
       "range": {
         "startLine": 250,
         "startChar": 36,
