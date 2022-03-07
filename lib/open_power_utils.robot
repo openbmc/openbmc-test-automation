@@ -286,10 +286,20 @@ Trigger OCC Reset
 
     ${cmd_output}  ${stderr}  ${rc} =  BMC Execute Command  ${cmd}  print_out=1  print_err=1
 
-    Sleep  5s
+    Log To Console  OCC wait check for disabled state.
+    Wait Until Keyword Succeeds  5 sec  30 sec  Verify OCC Target State  ${occ_target}
+
+
+Verify OCC Target State
+    [Documentation]  Verify that the user given state matches th current OCC state.
+    [Arguments]  ${occ_target}=${0}  ${expected_state}=${0}
+
+    # Description of Argument(s):
+    # occ_target       Target a valid given OCC number 0,1, etc.
+    # expected_state   For OCC either 0 or 1. Default is 0.
 
     ${occ_active}=  Get OCC Active State  ${occ_target}
-    Should Be Equal  ${occ_active}  ${0}
+    Should Be Equal  ${occ_active}  ${expected_state}
     Log To Console  Target OCC ${occ_target} state is ${occ_active}.
 
 
