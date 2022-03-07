@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2208ca0_87cf21f8",
+        "filename": "lib/open_power_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000068
+      },
+      "writtenOn": "2022-03-07T20:07:17Z",
+      "side": 1,
+      "message": "The values are backwards.  It should be \u003cmax timeout\u003e then \u003cinterval time\u003e.",
+      "revId": "dbf2c2c5bc7afbd976b391deac708ce9a34451c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
