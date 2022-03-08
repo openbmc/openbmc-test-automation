@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation    This suite is to test service user functionality via Redfish.
 
-Resource         ../../lib/connection_client.robot 
+Resource         ../../lib/connection_client.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/bmc_redfish_utils.robot
 

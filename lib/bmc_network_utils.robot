@@ -452,7 +452,7 @@ Get Network Configuration
 
     # Description of argument(s):
     # network_active_channel   Ethernet channel number (eg. 1 or 2)
-    
+
     ${active_channel_config}=  Get Active Channel Config
     ${resp}=  Redfish.Get
     ...  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${network_active_channel}']['name']}

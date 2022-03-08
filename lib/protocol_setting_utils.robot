@@ -130,5 +130,3 @@ Verify IPMI Protocol State
     ${resp}=  Redfish.Get  ${REDFISH_NW_PROTOCOL_URI}
     Should Be Equal As Strings  ${resp.dict['IPMI']['ProtocolEnabled']}  ${state}
     ...  msg=Protocol states are not matching.
-
-

@@ -160,7 +160,8 @@ Disable IPMI Protocol And Verify
 
 
 Enable IPMI Protocol And Check Persistency On BMC Reboot
-    [Documentation]  Set the IPMI protocol attribute to True, reset BMC, and verify that the setting persists.
+    [Documentation]  Set the IPMI protocol attribute to True, reset BMC, and verify
+    ...              that the setting persists.
     [Tags]  Enable_IPMI_Protocol_And_Check_Persistency_On_BMC_Reboot
 
     Enable IPMI Protocol  ${True}
@@ -175,7 +176,8 @@ Enable IPMI Protocol And Check Persistency On BMC Reboot
 
 
 Disable IPMI Protocol And Check Persistency On BMC Reboot
-    [Documentation]  Set the IPMI protocol attribute to False, reset BMC, and verify that the setting persists.
+    [Documentation]  Set the IPMI protocol attribute to False, reset BMC, and verify
+    ...              that the setting persists.
     [Tags]  Disable_IPMI_Protocol_And_Check_Persistency_On_BMC_Reboot
 
     # Disable IPMI interface.
