@@ -16,6 +16,29 @@
       "message": "need to replace test_gateway with default_gw\nwe can\u0027t use any ip in gw field, it\u0027ll make system unusable.",
       "revId": "83662de7610fbf158dd661575bfb8ad3209a8b7f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "559d39c7_86b07624",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-03-08T08:42:09Z",
+      "side": 1,
+      "message": "We should also verify that the IP is set correctly either via GUI or Redfish",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 104
+      },
+      "revId": "83662de7610fbf158dd661575bfb8ad3209a8b7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
