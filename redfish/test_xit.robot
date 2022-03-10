@@ -11,6 +11,7 @@ Test Teardown   Test Teardown Execution
 
 # Error strings to check from journald.
 ${ERROR_REGEX}     SEGV|core-dump|FAILURE|Failed to start
+${SKIP_ERROR}      ${EMPTY}
 
 
 *** Test Cases ***
@@ -33,7 +34,7 @@ Verify No BMC Dump And Application Failures In BMC
     ${rest_resp}=  Run Keyword If  '${resp.status}' == '${HTTP_NOT_FOUND}'
     ...  Check For REST Dumps
 
-    Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b
+    Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b  filter_string=${SKIP_ERROR}
 
 
 *** Keywords ***
