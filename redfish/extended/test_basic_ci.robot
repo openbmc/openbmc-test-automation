@@ -18,6 +18,8 @@ Test Teardown       FFDC On Test Case Fail
 ${ERROR_REGEX}     SEGV|core-dump|FAILURE|Failed to start
 ${STANDBY_REGEX}   Startup finished in
 
+${SKIP_ERROR}      ${EMPTY}
+
 # 3 minutes standby boot time.
 ${startup_time_threshold}  180
 
@@ -58,7 +60,7 @@ Check For Application Failures
     [Documentation]  Parse the journal log and check for failures.
     [Tags]  Check_For_Application_Failures
 
-    Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b
+    Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b  filter_string=${SKIP_ERROR}
 
 
 Verify Uptime Average Against Threshold
