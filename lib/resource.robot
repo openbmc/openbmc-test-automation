@@ -146,6 +146,20 @@ ${LDAP_TYPE}                ${EMPTY}
 ${LDAP_USER}                ${EMPTY}
 ${LDAP_USER_PASSWORD}       ${EMPTY}
 
+# Active Directory related variables.
+${AD_BASE_DN}               ${EMPTY}
+${AD_BIND_DN}               ${EMPTY}
+${AD_SERVER_HOST}           ${EMPTY}
+${AD_SECURE_MODE}           ${EMPTY}
+${AD_BIND_DN_PASSWORD}      ${EMPTY}
+${AD_SEARCH_SCOPE}          ${EMPTY}
+${AD_TYPE}                  ${EMPTY}
+${AD_USER}                  ${EMPTY}
+${AD_USER_PASSWORD}         ${EMPTY}
+${AD_GROUP_PRIVILEGE}       ${EMPTY}
+${AD_GROUP_NAME}            ${EMPTY}
+${AD_SERVER_URI}            ldap://${AD_SERVER_HOST}
+
 # General tool variables
 # FFDC_DEFAULT == 1; use Default FFDC methods
 ${FFDC_DEFAULT}            ${1}
