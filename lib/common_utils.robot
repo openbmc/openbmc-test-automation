@@ -932,15 +932,22 @@ Remove Journald Logs
 Check For Regex In Journald
     [Documentation]  Parse the journal log and check for regex string.
     [Arguments]  ${regex}=${ERROR_REGEX}  ${error_check}=${0}  ${boot}=${EMPTY}
+    ...          ${filter_string}=${EMPTY}
 
     # Description of argument(s):
     # regex            Strings to be filter.
     # error_check      Check for errors.
     # boot             Argument to check current or persistent full boot log
     #                  (e.g. "-b").
+    # filter_string    String to be stripped out.
 
-    ${journal_log}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  journalctl --no-pager ${boot} | egrep '${regex}'  ignore_err=1
+
+    ${cmd} =  Run Keyword If   '${filter_string}' == '${EMPTY}'
+    ...      Catenate  journalctl --no-pager ${boot} | egrep '${regex}'
+    ...   ELSE
+    ...      Catenate  journalctl --no-pager ${boot} | egrep '${regex}' |  sed '/${filter_string}/d'
+
+    ${journal_log}  ${stderr}  ${rc}=  BMC Execute Command   ${cmd}  ignore_err=1
 
     Run Keyword If  ${error_check} == ${0}
     ...    Should Be Empty  ${journal_log}
