@@ -16,6 +16,24 @@
       "message": "We do not need new suite for active directory.\nexisting code will handle, just need to pass AD specific parameters while running test suite.",
       "revId": "c755254477b34e7eaa23bf12cf5c212c65936adb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9a327fa_c6521b89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-03-11T04:51:57Z",
+      "side": 1,
+      "message": "Suppose if we run whole Redfish Directory, then at that time we need to have separate script for LDAP and AD right? so that only i have created a new script for Active Directory.",
+      "parentUuid": "88f86440_37abbb2b",
+      "revId": "c755254477b34e7eaa23bf12cf5c212c65936adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
