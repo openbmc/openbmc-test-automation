@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afbe9a0a_d7c07e88",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-03-11T13:02:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f5a1d68_22b3ec15",
+      "range": {
+        "startLine": 576,
+        "startChar": 0,
+        "endLine": 576,
+        "endChar": 47
+      },
+      "revId": "e531f41ca83c04abc9c0887ad4e7ba9918a1d6d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3c5c1ff_29e7a690",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-03-11T10:47:03Z",
       "side": 1,
       "message": "Suggestion:\nVerify Redfish login should not be able to login for LDAP Userrole NoAccess.",
+      "range": {
+        "startLine": 577,
+        "startChar": 21,
+        "endLine": 577,
+        "endChar": 86
+      },
+      "revId": "e531f41ca83c04abc9c0887ad4e7ba9918a1d6d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "916bc1fd_2d5de021",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-03-11T13:02:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3c5c1ff_29e7a690",
       "range": {
         "startLine": 577,
         "startChar": 21,
