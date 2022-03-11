@@ -114,6 +114,9 @@ Create VLAN When LAN And VLAN Exist With IP Address Configured
    [Tags]  Create_VLAN_When_LAN_And_VLAN_Exist_With_IP_Address_Configured
    [Setup]  Run Keywords  Create VLAN  ${vlan_id_for_rest}  AND  Configure Network Settings On VLAN
    ...  ${vlan_id_for_rest}  ${ip}  ${netmask}  ${gateway}
+   [Setup]  Run Keywords  Create VLAN  ${vlan_id_for_rest}  interface=${interface}
+   ...  AND  Configure Network Settings On VLAN  ${vlan_id_for_rest}  ${ip}
+   ...  ${netmask}  ${gateway}  interface=${interface}
 
    Create VLAN Via IPMI   ${vlan_id_for_ipmi}
 
