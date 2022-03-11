@@ -123,15 +123,15 @@ Verify Server LED Turn On
     [Tags]  Verify_Server_LED_Turn_On
 
     # Turn Off the server LED via Redfish and refresh GUI.
-    Redfish.Patch  /redfish/v1/Systems/system  body={"IndicatorLED":"Off"}   valid_status_codes=[200, 204]
+    Set IndicatorLED State  Off
+
     Refresh GUI
 
     # Turn ON the LED via GUI.
     Click Element At Coordinates  ${xpath_led_button}  0  0
 
     # Cross check that server LED ON state via Redfish.
-    ${led_status}=  Redfish.Get Attribute  /redfish/v1/Systems/system  IndicatorLED
-    Should Be True  '${led_status}' == 'Lit'
+    Verify Identify LED State Via Redfish  Lit
 
 
 Verify Server LED Turn Off
@@ -139,15 +139,14 @@ Verify Server LED Turn Off
     [Tags]  Verify_Server_LED_Turn_Off
 
     # Turn On the server LED via Redfish and refresh GUI.
-    Redfish.Patch  /redfish/v1/Systems/system  body={"IndicatorLED":"Lit"}   valid_status_codes=[200, 204]
+    Set IndicatorLED State  Lit
     Refresh GUI
 
     # Turn OFF the LED via GUI.
     Click Element At Coordinates  ${xpath_led_button}  0  0
 
     # Cross check that server LED off state via Redfish.
-    ${led_status}=  Redfish.Get Attribute  /redfish/v1/Systems/system  IndicatorLED
-    Should Be True  '${led_status}' == 'Off'
+    Verify Identify LED State Via Redfish  Off
 
 
 Verify BMC Time In Overview Page
@@ -184,3 +183,31 @@ Test Setup Execution
 
     Click Element  ${xpath_overview_menu}
     Wait Until Page Contains Element  ${xpath_overview_page_header}
+
+
+Verify Identify LED State Via Redfish
+    [Documentation]  Verify that Redfish identify LED system with given state.
+    [Arguments]  ${expected_state}
+    # Description of argument(s):
+    # expected_led_status  Expected value of Identify LED.
+
+    # Python module:  get_member_list(resource_path)
+    ${systems}=  Redfish_Utils.Get Member List  /redfish/v1/Systems
+    FOR  ${system}  IN  @{systems}
+        ${led_value}=  Redfish.Get Attribute  ${system}  IndicatorLED
+        Should Be True  '${led_value}' == '${expected_state}'
+    END
+
+
+Set IndicatorLED State
+    [Documentation]  Performe redfish PATCH operation.
+    [Arguments]  ${led_state}  ${expect_resp_code}=[200, 204]
+    # Description of argument(s):
+    # led_state            IndicatorLED state to "off", "Lit" etc.
+    # expect_resp_code     Expected HTTPS response code. Default [200, 204]
+
+    # Python module:  get_member_list(resource_path)
+    ${systems}=  Redfish_Utils.Get Member List  /redfish/v1/Systems
+    FOR  ${system}  IN  @{systems}
+        Redfish.Patch  ${system}  body={"IndicatorLED":${led_state}}   valid_status_codes=${expect_resp_code}
+    END
