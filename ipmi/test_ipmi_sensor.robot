@@ -395,7 +395,10 @@ Enable Present Bit Via IPMI and Verify Using Redfish
     #    "State": "Enabled"
     #}
 
-    ${redfish_value}=  Redfish.Get Properties  /redfish/v1/Systems/system/Processors/${component}
+    # Python module:  get_endpoint_path_list(resource_path, end_point_prefix)
+    ${processor_list}=  redfish_utils.Get Endpoint Path List   /redfish/v1/Systems/  Processors
+
+    ${redfish_value}=  Redfish.Get Properties  ${processor_list[0]}/${component}
     Should Be True  '${redfish_value['Status']['State']}' == 'Enabled'
 
 
@@ -420,7 +423,10 @@ Disable Present Bit Via IPMI and Verify Using Redfish
     #    "State": "Absent"
     #}
 
-    ${redfish_value}=  Redfish.Get Properties  /redfish/v1/Systems/system/Processors/${component}
+    # Python module:  get_endpoint_path_list(resource_path, end_point_prefix)
+    ${processor_list}=  redfish_utils.Get Endpoint Path List   /redfish/v1/Systems/  Processors
+
+    ${redfish_value}=  Redfish.Get Properties  ${processor_list[0]}/${component}
     Should Be True  '${redfish_value['Status']['State']}' == 'Absent'
 
 
