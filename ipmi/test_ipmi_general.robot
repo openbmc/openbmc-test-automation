@@ -277,5 +277,8 @@ Verify Identify LED State Via Redfish
     # Description of argument(s):
     # expected_led_status  Expected value of Identify LED.
 
-    ${led_value}=  Redfish.Get Attribute  /redfish/v1/Systems/system  IndicatorLED
-    Should Be True  '${led_value}' == '${expected_state}'
+    ${systems}=  Redfish_Utils.Get Member List  /redfish/v1/Systems
+    FOR  ${system}  IN  @{systems}
+        ${led_value}=  Redfish.Get Attribute  ${system}  IndicatorLED
+        Should Be True  '${led_value}' == '${expected_state}'
+    END
