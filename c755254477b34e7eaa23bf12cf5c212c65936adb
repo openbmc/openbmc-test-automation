@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88f86440_37abbb2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-03-11T04:30:22Z",
+      "side": 1,
+      "message": "We do not need new suite for active directory.\nexisting code will handle, just need to pass AD specific parameters while running test suite.",
+      "revId": "c755254477b34e7eaa23bf12cf5c212c65936adb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
