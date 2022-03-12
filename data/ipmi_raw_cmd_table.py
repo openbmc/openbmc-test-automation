@@ -407,6 +407,20 @@ IPMI_RAW_CMD = {
             # raw command, expected output(s), comment
             'Invalid value',
             'Valid values are serial, 9.6 19.2, 38.4, 57.6 and 115.2',
+        ]
+    },
+    'Get SDR':
+    {
+        'Get':
+        [
+            # Get SDR raw command without Reservation ID.
+            "0x0a 0x23 0x00 0x00 0x00 0x00 0x00 0xff",
+            # Netfunction and cmd.
+            "0x0a 0x23",
+            # Record ID offset and bytes to read.
+            "0x00 0x00 0x01 0x0f",
+            #  Raw command To Get SDR Partial without Reservation ID.
+            "0x0a 0x23 0x00 0x00 0x00 0x00 0x01 0x0f"
         ],
     },
     'Get':
@@ -416,6 +430,37 @@ IPMI_RAW_CMD = {
             # raw command, error response
             '0x00 0x0f',
             'Error: Unable to establish IPMI v2 / RMCP+ session'
+        ]
+    },
+    'Device_SDR':
+    {
+        'Get_Info':
+        [
+            # raw command, expected output(s), comment
+            "0x04 0x20 0x00",
+            "0x04 0x20 0x01",
+            "rsp=0xc7",
+            "Request data length invalid",
+            "rsp=0xd4",
+            "Insufficient privilege level",
+        ],
+        'Get':
+        [
+            # raw command, expected output(s), comment
+            "0x04 0x21",
+            "0x00 0x00 0x00 0xff",
+            "rsp=0xc7",
+            "Request data length invalid",
+        ],
+        'Reserve_Repository':
+        [
+            # raw command, expected output(s), comment
+            "0x04 0x22",
+            "rsp=0xc7",
+            "Request data length invalid",
+            "rsp=0xd4",
+            "Insufficient privilege level",
+            "Reservation cancelled or invalid",
         ]
     }
 }
