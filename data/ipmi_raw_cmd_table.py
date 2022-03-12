@@ -376,5 +376,50 @@ IPMI_RAW_CMD = {
             "none",
             "Reset watchdog timer without initialized watchdog",
         ]
+    },
+    'Get SDR':
+    {
+        'Get':
+        [
+            # Get sdr raw command without Reservation ID.
+            "0x0a 0x23 0x00 0x00 0x00 0x00 0x00 0xff",
+            # Netfunction and cmd.
+            "0x0a 0x23",
+            # Record ID offset and bytes to read.
+            "0x00 0x00 0x01 0x0f",
+            #  Raw command To Get SDR Partial without reservation id.
+            "0x0a 0x23 0x00 0x00 0x00 0x00 0x01 0x0f"
+        ],
+    },
+    'Device_SDR':
+    {
+        'Get_Info':
+        [
+            # raw command, expected output(s), comment
+            "0x04 0x20 0x00",
+            "0x04 0x20 0x01",
+            "rsp=0xc7",
+            "Request data length invalid",
+            "rsp=0xd4",
+            "Insufficient privilege level",
+        ],
+        'Get':
+        [
+            # raw command, expected output(s), comment
+            "0x04 0x21",
+            "0x00 0x00 0x00 0xff",
+            "rsp=0xc7",
+            "Request data length invalid",
+        ],
+        'Reserve_Repository':
+        [
+            # raw command, expected output(s), comment
+            "0x04 0x22",
+            "rsp=0xc7",
+            "Request data length invalid",
+            "rsp=0xd4",
+            "Insufficient privilege level",
+            "Reservation cancelled or invalid",
+        ],
     }
 }
