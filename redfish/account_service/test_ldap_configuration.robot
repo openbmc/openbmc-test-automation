@@ -552,7 +552,7 @@ Update LDAP Config And Verify Set Host Name
     ...  ${valid_status_codes}=[${HTTP_OK}]
     [Teardown]  Run Keyword If  '${group_privilege}'=='NoAccess'  Redfish.Login
                 ...  ELSE  Run Keywords  Redfish.Logout  AND  Redfish.Login
-    
+
     # Description of argument(s):
     # group_name                    The group name of user.
     # group_privilege               The group privilege ("Administrator",
@@ -724,7 +724,7 @@ Get LDAP Privilege
 
 Restore LDAP Privilege
     [Documentation]  Restore the LDAP privilege to its original value.
-    
+
     Redfish.Login
     Return From Keyword If  '${old_ldap_privilege}' == '${EMPTY}' or '${old_ldap_privilege}' == '[]'
     # Log back in to restore the original privilege.

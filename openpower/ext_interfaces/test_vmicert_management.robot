@@ -625,8 +625,10 @@ Get Subject
     # file_name          Name of CSR or signed CERT file.
     # is_csr_file        A True value means a CSR while a False is for signed CERT file.
 
-    ${subject}=  Run Keyword If  ${is_csr_file}  Run  openssl req -in ${file_name} -text -noout | grep Subject:
-    ...   ELSE  Run  openssl x509 -in ${file_name} -text -noout | grep Subject:
+    ${subject}=  Run Keyword If  ${is_csr_file}
+    ...     Run  openssl req -in ${file_name} -text -noout | grep Subject:
+    ...   ELSE
+    ...     Run  openssl x509 -in ${file_name} -text -noout | grep Subject:
 
     [Return]  ${subject}
 

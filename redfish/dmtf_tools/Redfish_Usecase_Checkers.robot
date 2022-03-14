@@ -86,5 +86,3 @@ DMTF Power
     Print Timen  Doing "DMTF Power".
 
     Run DMTF Tool  ${rsv_dir_path}  ${command_power_control}
-
-
