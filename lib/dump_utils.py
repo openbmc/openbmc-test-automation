@@ -48,7 +48,7 @@ def get_dump_dict(quiet=None):
     """
 
     quiet = int(gp.get_var_value(quiet, 1))
-    cmd_buf = "dump_dir_path=" + var.DUMP_DIR_PATH + " ; " \
+    cmd_buf = "bash -c;dump_dir_path=" + var.DUMP_DIR_PATH + " ; " \
               + "for dump_id in $(ls ${dump_dir_path} | sort -n) ; do " \
               + "file_path=$(ls ${dump_dir_path}${dump_id}/* 2>/dev/null)" \
               + " || continue ; echo ${dump_id}:${file_path} ; done"
@@ -157,7 +157,7 @@ def get_dump_hb_dict(quiet=None):
     """
 
     quiet = int(gp.get_var_value(quiet, 1))
-    cmd_buf = "dump_hb_dir_path=" + var.DUMP_HB_DIR_PATH + " ; " \
+    cmd_buf = "bash-c;dump_hb_dir_path=" + var.DUMP_HB_DIR_PATH + " ; " \
               + "for dump_id in $(ls ${dump_hb_dir_path} | sort -n) ; do " \
               + "file_path=$(ls ${dump_hb_dir_path}${dump_id}/* 2>/dev/null)" \
               + " || continue ; echo ${dump_id}:${file_path} ; done"
