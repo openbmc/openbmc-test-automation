@@ -156,5 +156,63 @@ IPMI_RAW_CMD = {
             "0x89",
             "error response byte when host is powered off"
         ]
-    }
+    },
+    'Device ID':
+    {
+        'Get':
+        [
+            # raw command
+            "0x06 0x01"
+        ]
+    },
+    'Cold Reset':
+    {
+        'reset':
+        [
+            # raw command
+            "0x06 0x02"
+        ]
+    },
+    'lan_parameters':
+    {
+        'get_ip':
+        [
+            # raw command
+            "0x0c 0x02 0x01 0x03 0 0"
+        ],
+        'get_ip_src':
+        [
+            # raw command
+            "0x0c 0x02 0x01 0x04 0 0"
+        ],
+        'get_dot1q':
+        [
+            # raw command
+            "0x0c 0x02 0x01 0x14 0 0"
+        ]
+    },
+    'SDR_Info':
+    {
+        'get':
+        [
+            # raw command
+            "0x04 0x20 1"
+        ]
+    },
+    'Chassis_status':
+    {
+        'get':
+        [
+            # raw command
+            "0x00 0x01"
+        ]
+    },
+    'SEL_Info':
+    {
+        'get':
+        [
+            # raw command
+            "0x0a 0x40"
+        ]
+    },
 }
