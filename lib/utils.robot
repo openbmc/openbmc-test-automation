@@ -1011,3 +1011,9 @@ Get BIOS Attribute
     ${bios_attr_dict}=  Redfish.Get Attribute  ${systems[0]}/Bios  Attributes
 
     [Return]  ${bios_attr_dict}
+
+Is BMC Operational
+    [Documentation]  Check if BMC is enabled.
+
+    ${bmc_status} =  Redfish Get BMC State
+    Should Be Equal  ${bmc_status}  Enabled
