@@ -1001,3 +1001,13 @@ Stop PLDM Service And Wait
     # Check if BMC is still online.
     Wait Until Keyword Succeeds  5 min  10 sec  Is BMC Unpingable
     Wait For Host To Ping  ${OPENBMC_HOST}  3 min
+
+
+Get BIOS Attribute
+    [Documentation]  Get the BIOS attribute for /redfish/v1/Systems/system/Bios.
+
+    # Python module:  get_member_list(resource_path)
+    ${systems}=  Redfish_Utils.Get Member List  /redfish/v1/Systems
+    ${bios_attr_dict}=  Redfish.Get Attribute  ${systems[0]}/Bios  Attributes
+
+    [Return]  ${bios_attr_dict}
