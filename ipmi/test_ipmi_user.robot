@@ -6,6 +6,7 @@ Resource            ../lib/openbmc_ffdc.robot
 Library             ../lib/ipmi_utils.py
 Test Setup          Printn
 
+Suite Setup         Suite Setup Execution
 Test Teardown       Test Teardown Execution
 
 *** Variables ***
@@ -36,23 +37,19 @@ Verify IPMI User Summary
     [Documentation]  Verify IPMI maximum supported IPMI user ID and
     ...  enabled user form user summary
     [Tags]  Verify_IPMI_User_Summary
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Delete Created User  ${random_userid}
-    # Delete all non-root IPMI (i.e. except userid 1)
-    Delete All Non Root IPMI User
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Delete Created User  ${random_userid}
 
+    # Create random user
     ${random_userid}  ${random_username}=  Create Random IPMI User
     Set Test Variable  ${random_userid}
     Run IPMI Standard Command  user enable ${random_userid}
 
-    # Verify maximum user count IPMI local user can have. Also verify
-    # currently enabled users.
-    ${resp}=  Wait Until Keyword Succeeds  15 sec  5 sec  Run IPMI Standard Command
-    ...  user summary ${CHANNEL_NUMBER}
-    ${enabled_user_count}=
-    ...  Get Lines Containing String  ${resp}  Enabled User Count
-    ${maximum_ids}=  Get Lines Containing String  ${resp}  Maximum IDs
-    Should Contain  ${enabled_user_count}  2
+    ${output}=  Run IPMI Standard Command  user summary ${CHANNEL_NUMBER}
+    # TODO: Verification of enabled IPMI user needs to be done.
+    # https://github.com/openbmc/openbmc-test-automation/issues/2189
+
+    ${maximum_ids}=  Get Lines Containing String  ${output}  Maximum IDs
+
     Should Contain  ${maximum_ids}  15
 
 
@@ -653,3 +650,15 @@ Delete Created User
 
     Run IPMI Standard Command  user set name ${userid} ""
     Sleep  5s
+
+
+Suite Setup Execution
+    [Documentation]  Check for the enabled user.
+
+    # Check for the enabled user count
+    ${resp}=  Run IPMI Standard Command  user summary ${CHANNEL_NUMBER}
+    ${enabled_user_count}=
+    ...  Get Lines Containing String  ${resp}  Enabled User Count
+
+    Should not contain  ${enabled_user_count}  15
+    ...  msg=IPMI have reached maximum user count
