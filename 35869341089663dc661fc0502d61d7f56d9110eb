@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51cbdb4c_b1870edd",
+        "filename": "ipmi/test_ipmi_network_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-03-16T10:25:22Z",
+      "side": 1,
+      "message": "This needs to be deleted right?\nThe new piece is a replacement to this as per my understanding.",
+      "range": {
+        "startLine": 115,
+        "startChar": 3,
+        "endLine": 116,
+        "endChar": 58
+      },
+      "revId": "35869341089663dc661fc0502d61d7f56d9110eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
