@@ -46,8 +46,8 @@ ${VALID_CERT}          ${EMPTY}
 # Path of mTLS certificates directory.
 ${CERT_DIR_PATH}       ${EMPTY}
 
-${IPMI_USERNAME}       root
-${IPMI_PASSWORD}       0penBmc
+${IPMI_USERNAME}       admin
+${IPMI_PASSWORD}       0penBmc1
 ${MACHINE_TYPE}    palmetto
 ${DBUS_POLL_INTERVAL}      15s
 ${OPENBMC_REBOOT_TIMEOUT}   ${10}

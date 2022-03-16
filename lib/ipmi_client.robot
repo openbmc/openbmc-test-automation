@@ -420,15 +420,15 @@ Set Channel Access
     Run IPMI Standard Command  ${ipmi_cmd}
 
 
-Delete All Non Root IPMI User
-    [Documentation]  Delete all non-root IPMI user.
+Delete All IPMI User Expect Admin User
+    [Documentation]  Delete all IPMI user expect admin user
 
     # Get complete list of user info records.
     ${user_info}=  Get User Info  ${EMPTY}
     # Remove header record.
     ${user_info}=  Filter Struct  ${user_info}  [('user_name', None)]  invert=1
     ${non_empty_user_info}=  Filter Struct  ${user_info}  [('user_name', '')]  invert=1
-    ${non_root_user_info}=  Filter Struct  ${non_empty_user_info}  [('user_name', 'root')]  invert=1
+    ${non_root_user_info}=  Filter Struct  ${non_empty_user_info}  [('user_name', 'admin')]  invert=1
 
     FOR  ${user_record}  IN  @{non_root_user_info}
         Run IPMI Standard Command   user set name ${user_record['user_id']} ""

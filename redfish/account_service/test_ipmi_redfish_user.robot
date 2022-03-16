@@ -17,7 +17,7 @@ ${valid_password}       0penBmc1
 ${valid_password2}      0penBmc2
 ${admin_level_priv}     4
 ${operator_level_priv}  3
-${max_num_users}        ${17}
+${max_num_users}        ${15}
 
 ** Test Cases **
 
@@ -196,7 +196,7 @@ Delete User Via IPMI And Verify Using Redfish
 Verify Failure To Exceed Max Number Of Users
     [Documentation]  Verify failure attempting to exceed the max number of user accounts.
     [Tags]  Verify_Failure_To_Exceed_Max_Number_Of_Users
-    [Teardown]  Run Keywords  Test Teardown Execution  AND  Delete All Non Root IPMI User
+    [Teardown]  Run Keywords  Test Teardown Execution  AND  Delete All IPMI User Expect Admin User
 
     # Get existing user count.
     ${resp}=  Redfish.Get  /redfish/v1/AccountService/Accounts/
@@ -213,7 +213,7 @@ Verify Failure To Exceed Max Number Of Users
       ...  valid_status_codes=[${HTTP_CREATED}]
     END
 
-    # Verify error while creating 18th user.
+    # Verify error while creating 16th user.
     ${random_username}=  Generate Random String  8  [LETTERS]
     Set To Dictionary  ${payload}  UserName  ${random_username}
     Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}

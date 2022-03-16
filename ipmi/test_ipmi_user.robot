@@ -38,8 +38,9 @@ Verify IPMI User Summary
     [Tags]  Verify_IPMI_User_Summary
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
     ...  Delete Created User  ${random_userid}
-    # Delete all non-root IPMI (i.e. except userid 1)
-    Delete All Non Root IPMI User
+    
+    # Delete all IPMI user(i.e. except userid 1)
+    Delete All IPMI User Expect Admin User
 
     ${random_userid}  ${random_username}=  Create Random IPMI User
     Set Test Variable  ${random_userid}
@@ -52,6 +53,7 @@ Verify IPMI User Summary
     ${enabled_user_count}=
     ...  Get Lines Containing String  ${resp}  Enabled User Count
     ${maximum_ids}=  Get Lines Containing String  ${resp}  Maximum IDs
+
     Should Contain  ${enabled_user_count}  2
     Should Contain  ${maximum_ids}  15
 
