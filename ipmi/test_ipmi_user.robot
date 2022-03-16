@@ -38,21 +38,22 @@ Verify IPMI User Summary
     [Tags]  Verify_IPMI_User_Summary
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
     ...  Delete Created User  ${random_userid}
-    # Delete all non-root IPMI (i.e. except userid 1)
-    Delete All Non Root IPMI User
+
+    # Check for the enabled user count
+    ${resp}=  Wait Until Keyword Succeeds  15 sec  5 sec  Run IPMI Standard Command
+    ...  user summary ${CHANNEL_NUMBER}
+    ${enabled_user_count}=
+    ...  Get Lines Containing String  ${resp}  Enabled User Count
+
+    Should not contain  ${enabled_user_count}  15
+    ...  msg=IPMI have reached maximum user count
 
     ${random_userid}  ${random_username}=  Create Random IPMI User
     Set Test Variable  ${random_userid}
     Run IPMI Standard Command  user enable ${random_userid}
 
-    # Verify maximum user count IPMI local user can have. Also verify
-    # currently enabled users.
-    ${resp}=  Wait Until Keyword Succeeds  15 sec  5 sec  Run IPMI Standard Command
-    ...  user summary ${CHANNEL_NUMBER}
-    ${enabled_user_count}=
-    ...  Get Lines Containing String  ${resp}  Enabled User Count
     ${maximum_ids}=  Get Lines Containing String  ${resp}  Maximum IDs
-    Should Contain  ${enabled_user_count}  2
+
     Should Contain  ${maximum_ids}  15
 
 
