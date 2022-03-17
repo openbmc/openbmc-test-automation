@@ -200,7 +200,7 @@ Verify Identify LED State Via Redfish
 
 
 Set IndicatorLED State
-    [Documentation]  Performe redfish PATCH operation.
+    [Documentation]  Perform redfish PATCH operation.
     [Arguments]  ${led_state}  ${expect_resp_code}=[200, 204]
     # Description of argument(s):
     # led_state            IndicatorLED state to "off", "Lit" etc.

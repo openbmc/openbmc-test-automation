@@ -55,7 +55,7 @@ Verify BMC Information Should Display At OBMC Power Off State
     Select Server Overview Menu
     Verify Display Content  ${string_BMC_info}
 
-Verify POWER Consumption Should Display At OBMC Power Off State
+Verify Power Consumption Should Display At OBMC Power Off State
     [Documentation]  Verify existence of text "Power Consumption".
     [Tags]  Verify_Power_Consumption_Should_Display_At_OBMC_Power_Off_State
     ...  OBMC_PowerOff_State

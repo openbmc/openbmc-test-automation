@@ -59,7 +59,7 @@ Test BMC Redfish Account Management
 
 Test BMC Redfish Power Control Usecase
     [Documentation]  Power Control Usecase Test.
-    [Tags]  Test_BMC_Redfish_Power_Control_Usecases
+    [Tags]  Test_BMC_Redfish_Power_Control_Usecase
 
     DMTF Power
 
