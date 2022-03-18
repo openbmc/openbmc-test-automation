@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ae67ff8_c7128848",
+        "filename": "ipmi/test_ipmi_kcs_overnight_run.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-03-18T12:18:29Z",
+      "side": 1,
+      "message": "Please merge the two test suite into 1 to this test_ipmi_kcs.robot  \n\nSet the \n\n${LOOP_COUNT}          ${1}\n\nand if user wants to run overnight, they can do simply by\n\n-v LOOP_COUNT:1000",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 30
+      },
+      "revId": "68430068caffd8d895a2ee3bc1c017117da203a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
