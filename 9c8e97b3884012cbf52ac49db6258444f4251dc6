@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a0a703ed_2de2a78e",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-03-18T10:53:33Z",
+      "side": 1,
+      "message": "Removed this.. and applied new logic",
+      "parentUuid": "c5307313_5fe3f84f",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 48
+      },
+      "revId": "9c8e97b3884012cbf52ac49db6258444f4251dc6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f15f14ca_40e26b8c",
         "filename": "lib/ipmi_client.robot",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2022-03-16T05:00:11Z",
       "side": 1,
       "message": "For up stream this fix should be is fine. For downstream command we should not try removing service user. George any thoughts?",
+      "range": {
+        "startLine": 431,
+        "startChar": 0,
+        "endLine": 431,
+        "endChar": 101
+      },
+      "revId": "9c8e97b3884012cbf52ac49db6258444f4251dc6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93da8e51_53eaf01d",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-03-18T10:53:33Z",
+      "side": 1,
+      "message": "Removed this.. and applied new logic",
+      "parentUuid": "f15f14ca_40e26b8c",
       "range": {
         "startLine": 431,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "122603dd_3a1a5cf1",
+        "filename": "lib/resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-03-18T10:53:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28942e46_d5363ba6",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 31
+      },
+      "revId": "9c8e97b3884012cbf52ac49db6258444f4251dc6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c03a8502_8a36a09c",
@@ -93,6 +165,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84bee6c4_a44fc15d",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-03-18T10:53:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c03a8502_8a36a09c",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 29
+      },
+      "revId": "9c8e97b3884012cbf52ac49db6258444f4251dc6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5e806f6_e0139392",
@@ -106,6 +202,30 @@
       "writtenOn": "2022-03-16T05:00:11Z",
       "side": 1,
       "message": "Push this as a separate fix.",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 49
+      },
+      "revId": "9c8e97b3884012cbf52ac49db6258444f4251dc6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d099172b_fbe300e8",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-03-18T10:53:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5e806f6_e0139392",
       "range": {
         "startLine": 215,
         "startChar": 0,
