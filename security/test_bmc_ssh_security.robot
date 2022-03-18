@@ -50,6 +50,6 @@ Verify BMC SSH Weak Cipher And Algorithm
 
     Printn
     ${ssh_cmd_buf}=  Catenate  ssh -o NumberOfPasswordPrompts=0 UserKnownHostsFile=/dev/null
-    ...  StrictHostKeyChecking=no -vv ${OPENBMC_HOST} 2>&1
+    ...  -o StrictHostKeyChecking=no -vv ${OPENBMC_HOST} 2>&1
     Shell Cmd  ! ${ssh_cmd_buf} | egrep -- "${weak_key_regex}"
     Shell Cmd  ! ${ssh_cmd_buf} | egrep -- "${mac_key_regex}"
