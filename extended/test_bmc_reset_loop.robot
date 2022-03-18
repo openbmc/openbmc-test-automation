@@ -92,7 +92,7 @@ BMC Redfish Reset Cycle
 BMC Redfish Reset Runtime Cycle
     [Documentation]  Reset BMC via Redfish and verify required states.
 
-    Redfish OBMC Reboot (run)
+    Redfish OBMC Reboot (run)  stack_mode=skip
 
     ${bmc_version}=  Get BMC Version
     Valid Value  bmc_version  valid_values=['${initial_bmc_version}']
