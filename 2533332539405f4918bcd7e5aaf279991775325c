@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60fe9aa2_d76e372c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-03-21T19:41:51Z",
+      "side": 1,
+      "message": "This change has the review comment changes and fixed the merge conflict by merging the latest from master",
+      "revId": "2533332539405f4918bcd7e5aaf279991775325c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
