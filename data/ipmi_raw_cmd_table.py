@@ -417,5 +417,99 @@ IPMI_RAW_CMD = {
             '0x00 0x0f',
             'Error: Unable to establish IPMI v2 / RMCP+ session'
         ]
+    },
+    'System_Info':
+    {
+        'param0_Set_In_Progress':
+        {
+            'Get':
+            [
+                # raw command, expected output(s)
+                "0x06 0x59 0x00 0x00 0x00 0x00",
+                "Request data length invalid",
+            ],
+            'Set':
+            [
+                # raw command, expected output(s)
+                "0x06 0x58 0x00 0x00",
+                "Request data length invalid",
+                "Invalid data field in request",
+            ],
+        },
+        'param1_System_Firmware_Version':
+        {
+            'Get':
+            [
+                # raw command, expected output(s)
+                "0x06 0x59 0x00 0x01 0x00 0x00",
+                "Request data length invalid",
+            ],
+            'Set':
+            [
+                # raw command, expected output(s)
+                "0x06 0x58 0x01 0x00 0x00 0x0e",
+                "Invalid data field in request",
+            ],
+        },
+        'param2_System_Name':
+        {
+            'Get':
+            [
+                # raw command, expected output(s)
+                "0x06 0x59 0x00 0x02 0x00 0x00",
+                "Request data length invalid",
+            ],
+            'Set':
+            [
+                # raw command, expected output(s)
+                "0x06 0x58 0x02 0x00 0x00 0x0e",
+                "Invalid data field in request",
+            ],
+        },
+        'param3_Primary_Operating_System_Name':
+        {
+            'Get':
+            [
+                # raw command, expected output(s)
+                "0x06 0x59 0x00 0x03 0x00 0x00",
+                "Request data length invalid",
+            ],
+            'Set':
+            [
+                # raw command, expected output(s)
+                "0x06 0x58 0x03 0x00 0x00 0x0e",
+                "Invalid data field in request",
+            ],
+        },
+        'param4_Operating_System_Name':
+        {
+            'Get':
+            [
+                # raw command, expected output(s)
+                "0x06 0x59 0x00 0x04 0x00 0x00",
+                "Request data length invalid",
+            ],
+            'Set':
+            [
+                # raw command, expected output(s)
+                "0x06 0x58 0x04 0x00 0x00 0x0e",
+                "Invalid data field in request",
+            ],
+        },
+        'param5_Present_OS_Version_number':
+        {
+            'Get':
+            [
+                # raw command, expected output(s)
+                "0x06 0x59 0x00 0x05 0x00 0x00",
+                "Request data length invalid",
+            ],
+            'Set':
+            [
+                # raw command, expected output(s)
+                "0x06 0x58 0x05 0x00 0x00 0x0e",
+                "Invalid data field in request",
+            ]
+        }
     }
 }
