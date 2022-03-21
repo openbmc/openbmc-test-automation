@@ -105,7 +105,10 @@ Verify Get Channel Info via IPMI
     ${channel_volatile_data_config}=  Get Channel Access Config  /run/ipmi/channel_access_volatile.json
     ${channel_nv_data_config}=  Get Channel Access Config  /var/lib/ipmi/channel_access_nv.json
 
-    Rprint Vars  channel_info_ipmi  active_channel_config  channel_volatile_data_config  channel_nv_data_config
+    Rprint Vars  channel_info_ipmi
+    Rprint Vars  active_channel_config
+    Rprint Vars  channel_volatile_data_config
+    Rprint Vars  channel_nv_data_config
 
     Valid Value  medium_type_ipmi_conf_map['${channel_info_ipmi['channel_0x${CHANNEL_NUMBER}_info']['channel_medium_type']}']
     ...  ['${active_channel_config['${CHANNEL_NUMBER}']['channel_info']['medium_type']}']
@@ -248,7 +251,8 @@ Set Session Privilege Level And Verify
     [Arguments]  ${privilege_level}  ${expected_level}
     # Description of argument(s):
     # privilege_level    Requested Privilege Level.
-    # expected_level     New Privilege Level (or present level if ‘return present privilege level’ was selected).
+    # expected_level     New Privilege Level (or present level if ‘return present privilege level’
+    #                    was selected).
 
     ${resp}=  Run External IPMI Raw Command
     ...  0x06 0x3b ${privilege_level}
@@ -273,5 +277,9 @@ Verify Identify LED State Via Redfish
     # Description of argument(s):
     # expected_led_status  Expected value of Identify LED.
 
-    ${led_value}=  Redfish.Get Attribute  /redfish/v1/Systems/system  IndicatorLED
-    Should Be True  '${led_value}' == '${expected_state}'
+    # Python module:  get_member_list(resource_path)
+    ${systems}=  Redfish_Utils.Get Member List  /redfish/v1/Systems
+    FOR  ${system}  IN  @{systems}
+        ${led_value}=  Redfish.Get Attribute  ${system}  IndicatorLED
+        Should Be True  '${led_value}' == '${expected_state}'
+    END

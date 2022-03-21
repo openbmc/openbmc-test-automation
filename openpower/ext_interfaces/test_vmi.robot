@@ -180,8 +180,8 @@ Verify Persistency Of VMI DHCP IP Configuration After Multiple HOST Reboots
     FOR  ${i}  IN RANGE  ${2}
         Redfish Power Off
         Redfish Power On
-        Verify VMI Network Interface Details  ${vmi_ip_config["IPv4_Address"]}  DHCP  ${vmi_ip_config["IPv4_Gateway"]}
-    ...  ${vmi_ip_config["IPv4_SubnetMask"]}
+        Verify VMI Network Interface Details  ${vmi_ip_config["IPv4_Address"]}
+        ...  DHCP  ${vmi_ip_config["IPv4_Gateway"]}  ${vmi_ip_config["IPv4_SubnetMask"]}
     END
 
 
@@ -238,8 +238,8 @@ Enable DHCP When No Static IP Configured And Verify DHCP IP
     ${curr_origin}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
     Run Keyword If  ${curr_origin} == ${False}  Set VMI IPv4 Origin  ${True}  ${HTTP_ACCEPTED}
     ${vmi_ip_config}=  Get VMI Network Interface Details
-    Verify VMI Network Interface Details  ${vmi_ip_config["IPv4_Address"]}  DHCP  ${vmi_ip_config["IPv4_Gateway"]}
-    ...  ${vmi_ip_config["IPv4_SubnetMask"]}
+    Verify VMI Network Interface Details  ${vmi_ip_config["IPv4_Address"]}
+    ...  DHCP  ${vmi_ip_config["IPv4_Gateway"]}  ${vmi_ip_config["IPv4_SubnetMask"]}
 
 Verify User Cannot Delete VMI DHCP IP Address
     [Documentation]  Verify user cannot delete VMI DHCP IP Address

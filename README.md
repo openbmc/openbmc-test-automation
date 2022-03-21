@@ -139,7 +139,7 @@ classified as follows:
 
 `xcat/`: Contains test cases for XCAT automation.
 
-`gui/`: Contains test cases for testing web-based interface built on AngularJS.
+`gui/test/`: Contains test cases for testing web-based interface built on AngularJS.
 
 `gui/gui_test/`: Contains test cases for testing web-based user interface built on Vue.js.
 

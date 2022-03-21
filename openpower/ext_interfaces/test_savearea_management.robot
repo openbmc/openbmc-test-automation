@@ -881,7 +881,8 @@ Redfish Upload Partition File From Path
     FOR  ${file_name}  IN  @{file_list}
       @{Partition_file_list} =  Split String  ${file_name}  ,
       ${num_records}=  Get Length  ${Partition_file_list}
-      Upload Partition File To BMC  file_name=${Partition_file_list}  status_code=${HTTP_OK}  expected_message=${FILE_UPLOAD_MESSAGE}  path=${PARTITION_FILE_PATH}
+      Upload Partition File To BMC  file_name=${Partition_file_list}
+      ...  status_code=${HTTP_OK}  expected_message=${FILE_UPLOAD_MESSAGE}  path=${PARTITION_FILE_PATH}
       Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
       Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
     END

@@ -12,6 +12,9 @@ Resource        ../lib/bmc_redfish_resource.robot
 Test Redfish Setup
     [Documentation]  Verify Redfish works.
 
+    Skip If  ${REDFISH_SUPPORT_TRANS_STATE} == ${0}
+    ...  Skipping Redfish check, user explicitly requested for REST.
+
     Redfish.Login
     Redfish.Get  /redfish/v1/
     Redfish.Logout
@@ -19,6 +22,9 @@ Test Redfish Setup
 
 Test REST Setup
     [Documentation]  Verify REST works.
+
+    Skip If  ${REDFISH_SUPPORT_TRANS_STATE} == ${1}
+    ...  Skipping REST check, user explicitly requested for Redfish.
 
     # REST Connection and request.
     Initialize OpenBMC

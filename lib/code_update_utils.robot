@@ -14,6 +14,9 @@ Resource        openbmc_ffdc.robot
 *** Variables ***
 ${ignore_err}    ${0}
 
+# Time in minutes.
+${IMAGE_UPLOAD_WAIT_TIMEOUT}     4
+
 *** Keywords ***
 
 Get Software Objects
@@ -172,7 +175,8 @@ Redfish Upload Image
 
     ${image_data}=  OperatingSystem.Get Binary File  ${image_file_path}
 
-    Wait Until Keyword Succeeds  2 times  240 sec
+    # Force time out for image file upload if failed to complete on time.
+    Wait Until Keyword Succeeds  1 times  ${IMAGE_UPLOAD_WAIT_TIMEOUT} min
     ...  Upload Image To BMC  ${uri}  timeout=${240}  data=${image_data}
 
 

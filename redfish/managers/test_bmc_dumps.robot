@@ -45,7 +45,7 @@ Verify User Initiated BMC Dump When Host Booted
 
 
 Verify User Initiated BMC Dump Size
-    [Documentation]  Verify user initiated BMC dump size is under 200 KB.
+    [Documentation]  Verify user initiated BMC dump size is under 20 MB.
     [Tags]  Verify_User_Initiated_BMC_Dump_Size
 
     ${dump_id}=  Create User Initiated BMC Dump Via Redfish
@@ -61,8 +61,8 @@ Verify User Initiated BMC Dump Size
     # "Id": "9",
     # "Name": "BMC Dump Entry"
 
-    # Max size for dump is 200 KB = 200x1024 Byte.
-    Should Be True  0 < ${resp["AdditionalDataSizeBytes"]} < 204800
+    # Max size for dump is 20 MB = 20x1024x1024 Byte.
+    Should Be True  0 < ${resp["AdditionalDataSizeBytes"]} < 20971520
 
 
 Verify Dump Persistency On Dump Service Restart

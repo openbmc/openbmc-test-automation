@@ -75,6 +75,7 @@ class gui_variables():
     xpath_save_settings_button = "//button[contains(text(),'Save settings')]"
     xpath_confirm_button = "//button[contains(text(),'Confirm')]"
     xpath_cancel_button = "//button[contains(text(),'Cancel')]"
+    xpath_add_button = "//button[normalize-space(text())='Add']"
 
     # Reboot sub meanu
     xpath_reboot_bmc_heading = "//h1[text()='Reboot BMC']"

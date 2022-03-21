@@ -121,10 +121,7 @@ Get Motherboard Serial And Verify Populated
     [Documentation]  Check that the Motherboard SerialNumber is non-blank.
     [Tags]  Get_Motherboard_Serial_And_Verify_Populated
 
-    # Python module:  get_endpoint_path_list(resource_path, end_point_prefix)
-    ${motherboard_list}=  redfish_utils.Get Endpoint Path List  ${REDFISH_CHASSIS_URI}  motherboard
-
-    ${serial_number}=  Redfish.Get Attribute  ${motherboard_list[0]}  SerialNumber
+    ${serial_number}=  Redfish.Get Attribute  ${REDFISH_CHASSIS_URI}${CHASSIS_ID}  SerialNumber
     Valid Value  serial_number
     Rprint Vars  serial_number
 
@@ -133,10 +130,7 @@ Verify Motherboard Manufacturer Field Value Populated
     [Documentation]  Check that the Motherboard manufacturer is non-blank.
     [Tags]  Verify_Motherboard_Manufacturer_Field_Value_Populated
 
-    # Python module:  get_endpoint_path_list(resource_path, end_point_prefix)
-    ${motherboard_list}=  redfish_utils.Get Endpoint Path List  ${REDFISH_CHASSIS_URI}  motherboard
-
-    ${motherboard_manufacturer}=  Redfish.Get Attribute  ${motherboard_list[0]}  Manufacturer
+    ${motherboard_manufacturer}=  Redfish.Get Attribute  ${REDFISH_CHASSIS_URI}${CHASSIS_ID}  Manufacturer
     Valid Value  motherboard_manufacturer
     Rprint Vars  motherboard_manufacturer
 
@@ -145,10 +139,7 @@ Verify Motherboard Partnumber Field Value Populated
     [Documentation]  Check that the Motherboard partnumber is non-blank.
     [Tags]  Verify_Motherboard_Partnumber_Field_Value_Populated
 
-    # Python module:  get_endpoint_path_list(resource_path, end_point_prefix)
-    ${motherboard_list}=  redfish_utils.Get Endpoint Path List  ${REDFISH_CHASSIS_URI}  motherboard
-
-    ${motherboard_part_number}=  Redfish.Get Attribute  ${motherboard_list[0]}  PartNumber
+    ${motherboard_part_number}=  Redfish.Get Attribute  ${REDFISH_CHASSIS_URI}${CHASSIS_ID}  PartNumber
     Valid Value  motherboard_part_number
     Rprint Vars  motherboard_part_number
 

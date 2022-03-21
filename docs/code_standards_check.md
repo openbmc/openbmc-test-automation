@@ -35,3 +35,18 @@ Example:
 ```
 
 You can refer a script with example as well [custom rules](https://github.com/openbmc/openbmc-test-automation/blob/master/robot_custom_rules.py)
+
+### 3. robot tags check
+
+Project [check_robot_tags](https://github.com/generatz/check_robot_tags) Checks that Tags are equivalent to test case names or task names.
+
+Example:
+```
+    $ git clone https://github.com/generatz/check_robot_tags
+    $ cd check_robot_tags/
+
+    $ awk -f check_robot_tags.awk ~/openbmc-test-automation/redfish/test_xit.robot
+     --- /home/openbmc-test-automation/redfish/test_xit.robot:
+     Verify No BMC Dump And Application Failures In BMC
+     Iam_different_here
+```

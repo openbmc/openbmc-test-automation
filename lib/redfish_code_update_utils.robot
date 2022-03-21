@@ -19,7 +19,7 @@ Get Software Functional State
     ${resp}=  Redfish.Get  /redfish/v1/UpdateService/FirmwareInventory/${image_id}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_INTERNAL_SERVER_ERROR}]
     ${image_info}  Set Variable  ${resp.dict}
- 
+
     ${sw_functional}=  Run Keyword If
     ...   '${image_info["Description"]}' == 'BMC image' or '${image_info["Description"]}' == 'BMC update'
     ...    Redfish.Get Attribute  /redfish/v1/Managers/bmc  FirmwareVersion

@@ -50,6 +50,15 @@ Verify BMC SSH Weak Cipher And Algorithm
 
     Printn
     ${ssh_cmd_buf}=  Catenate  ssh -o NumberOfPasswordPrompts=0 UserKnownHostsFile=/dev/null
-    ...  StrictHostKeyChecking=no -vv ${OPENBMC_HOST} 2>&1
+    ...  -o StrictHostKeyChecking=no -vv ${OPENBMC_HOST} 2>&1
+
+    ${rc}  ${std_err}=  Shell Cmd  ! ${ssh_cmd_buf}
+    Log  std_err=${std_err}  console=yes
+    Log  rc=${rc} console=yes
+
+    ${has_it}=  Run Keyword And Return Status  Should Contain  ${std_err}  Permission denied
+    Skip If  not ${has_it}
+    ...  Skipping test case since response is not as expected
+
     Shell Cmd  ! ${ssh_cmd_buf} | egrep -- "${weak_key_regex}"
     Shell Cmd  ! ${ssh_cmd_buf} | egrep -- "${mac_key_regex}"

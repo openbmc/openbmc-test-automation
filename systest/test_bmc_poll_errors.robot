@@ -40,7 +40,7 @@ Poll BMC For Errors
 Enumerate Sensors And Check For Errors
     [Documentation]  Enumerate and check if there is any error reported.
 
-    Redfish.Get  /redfish/v1/Chassis/chassis/Sensors
+    Redfish.Get  /redfish/v1/Chassis/${CHASSIS_ID}/Sensors
 
     Check For Error Logs  ${ESEL_IGNORE_LIST}
 
