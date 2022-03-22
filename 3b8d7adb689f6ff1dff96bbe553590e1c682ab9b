@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12789c74_b969404e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-03-22T14:10:07Z",
+      "side": 1,
+      "message": "\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nTest Ipmi Kcs :: To Verify KCS interface.\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nVerify KCS interface :: Verify KCS interface.                         | FAIL |\nResolving variable \u0027${IPMI_RAW_CMD[\u0027Device ID\u0027][\u0027Get\u0027][0]}\u0027 failed: KeyError: \u0027Device ID\u0027\n------------------------------------------------------------------------------\nVerify KCS Raw IPMI Multiple Times :: Verify KCS interface raw ipm... | FAIL |\nResolving variable \u0027${IPMI_RAW_CMD[\u0027Device ID\u0027][\u0027Get\u0027][0]}\u0027 failed: KeyError: \u0027Device ID\u0027\n------------------------------------------------------------------------------\nTest Ipmi Kcs :: To Verify KCS interface.                             | FAIL |\n2 tests, 0 passed, 2 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\n\nlooks like the https://github.com/openbmc/openbmc-test-automation/blob/master/data/ipmi_raw_cmd_table.py  doesnt have the Device ID\" entry yet. \n\nmissed adding it ?",
+      "revId": "3b8d7adb689f6ff1dff96bbe553590e1c682ab9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
