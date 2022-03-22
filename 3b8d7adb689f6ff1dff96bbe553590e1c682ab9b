@@ -34,6 +34,24 @@
       "parentUuid": "12789c74_b969404e",
       "revId": "3b8d7adb689f6ff1dff96bbe553590e1c682ab9b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b612d2_162a4934",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-03-22T17:19:28Z",
+      "side": 1,
+      "message": "That is a bigger code and may take sometime to get it cleared. If u can bring ONLY  the ipmi_raw_cmd_table.py  for device ID here, perhaps, we can merge this and continue on that commit. \n\njust a thought..",
+      "parentUuid": "6901aa18_ab3ba20b",
+      "revId": "3b8d7adb689f6ff1dff96bbe553590e1c682ab9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
