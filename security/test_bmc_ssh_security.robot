@@ -49,7 +49,7 @@ Verify BMC SSH Weak Cipher And Algorithm
     # - KEX: diffie-hellman-group1(any) , (any) SHA1
 
     Printn
-    ${ssh_cmd_buf}=  Catenate  ssh -o NumberOfPasswordPrompts=0 UserKnownHostsFile=/dev/null
+    ${ssh_cmd_buf}=  Catenate  ssh -o NumberOfPasswordPrompts=0 -o UserKnownHostsFile=/dev/null
     ...  -o StrictHostKeyChecking=no -vv ${OPENBMC_HOST} 2>&1
 
     ${rc}  ${std_err}=  Shell Cmd  ! ${ssh_cmd_buf}
