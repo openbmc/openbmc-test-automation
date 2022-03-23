@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa3b6590_2d682e89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-03-23T13:17:05Z",
+      "side": 1,
+      "message": "Since this file not only specific to IPMI KCS, so i have changed file name from ipmi_commands.robot to ipmi_utils.robot. . And modified Documentation.",
+      "parentUuid": "67fd4c7d_776155ff",
+      "revId": "f0cd1e228e631417a868a1c4b7af240702736816",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "115c5f34_e22386c0",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6dd46c9_c6d1ba8f",
+        "filename": "lib/ipmi_commands.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-03-23T13:17:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "115c5f34_e22386c0",
+      "revId": "f0cd1e228e631417a868a1c4b7af240702736816",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad60c001_58c39e9b",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-03-23T11:25:28Z",
       "side": 1,
       "message": "can u improve the documentation.\n\nIt is doing KCS commands verification but what overall this keyword would result into just a brief would be great for user to understand this set of commands executed.",
+      "revId": "f0cd1e228e631417a868a1c4b7af240702736816",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56c4f95b_5bf5f9b6",
+        "filename": "lib/ipmi_commands.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-03-23T13:17:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad60c001_58c39e9b",
       "revId": "f0cd1e228e631417a868a1c4b7af240702736816",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
