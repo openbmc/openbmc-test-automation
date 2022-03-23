@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67fd4c7d_776155ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-03-23T11:25:28Z",
+      "side": 1,
+      "message": "Couple comments and I\u0027m good from my end once those are addressed. Thanks",
+      "revId": "f0cd1e228e631417a868a1c4b7af240702736816",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "115c5f34_e22386c0",
+        "filename": "lib/ipmi_commands.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-03-23T11:25:28Z",
+      "side": 1,
+      "message": "Since this is KCS specific,  and if you plan to add more in near future.. best to rename as \n\nlib/ipmi_kcs_utils.robot\n\nor\n\nlib/ipmi_utils.robot",
+      "revId": "f0cd1e228e631417a868a1c4b7af240702736816",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad60c001_58c39e9b",
+        "filename": "lib/ipmi_commands.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-03-23T11:25:28Z",
+      "side": 1,
+      "message": "can u improve the documentation.\n\nIt is doing KCS commands verification but what overall this keyword would result into just a brief would be great for user to understand this set of commands executed.",
+      "revId": "f0cd1e228e631417a868a1c4b7af240702736816",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
