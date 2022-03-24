@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "942a83b0_f5f9f7ef",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-03-24T08:37:18Z",
+      "side": 1,
+      "message": "End with period of documentation \".\" and do for others here",
+      "range": {
+        "startLine": 667,
+        "startChar": 90,
+        "endLine": 667,
+        "endChar": 99
+      },
+      "revId": "b423d9f47c10d751536f0dd749a696169abc19b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e44def34_3e205774",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-03-24T08:37:18Z",
+      "side": 1,
+      "message": "# Description of argument(s):\n\nvalid_channel_number_interface_names   Contains channel names in dict.",
+      "range": {
+        "startLine": 679,
+        "startChar": 4,
+        "endLine": 679,
+        "endChar": 17
+      },
+      "revId": "b423d9f47c10d751536f0dd749a696169abc19b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f93718c8_02b3ee7c",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-03-24T08:37:18Z",
+      "side": 1,
+      "message": "# Description of argument(s):\n# valid_channel_number_interface_name     this and that",
+      "revId": "b423d9f47c10d751536f0dd749a696169abc19b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccbee028_9992496f",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-03-24T08:37:18Z",
+      "side": 1,
+      "message": "This  ${channel_number_ethernet_interface_name}  one not needed. not used or returned",
+      "range": {
+        "startLine": 713,
+        "startChar": 4,
+        "endLine": 713,
+        "endChar": 45
+      },
+      "revId": "b423d9f47c10d751536f0dd749a696169abc19b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
