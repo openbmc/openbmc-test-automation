@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f72235c_a2529149",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-03-24T13:53:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9dedcdc5_b51f3f5c",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 49
+      },
+      "revId": "20bef5b5d4a1057510ab9148e53f4277d9257034",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83a5a43c_0d708aaa",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-03-18T12:11:43Z",
       "side": 1,
       "message": "Remove this.. since it is unrelated to this changes",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 54
+      },
+      "revId": "20bef5b5d4a1057510ab9148e53f4277d9257034",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a7af13c_63324fa4",
+        "filename": "lib/resource.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-03-24T13:53:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83a5a43c_0d708aaa",
       "range": {
         "startLine": 148,
         "startChar": 0,
