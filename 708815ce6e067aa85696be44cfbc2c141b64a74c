@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8521c25_c21f2972",
+        "filename": "lib/ipmi_commands.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-03-24T06:54:18Z",
+      "side": 1,
+      "message": "add in the lib/ipmi_utils.robot",
+      "revId": "708815ce6e067aa85696be44cfbc2c141b64a74c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eff5fdd_21c664bf",
+        "filename": "lib/ipmi_commands.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-03-24T06:54:18Z",
+      "side": 1,
+      "message": "Similar last commit comment. please elaborate a brief what this keyword would actually do overall",
+      "range": {
+        "startLine": 16,
+        "startChar": 21,
+        "endLine": 16,
+        "endChar": 55
+      },
+      "revId": "708815ce6e067aa85696be44cfbc2c141b64a74c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
