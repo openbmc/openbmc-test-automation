@@ -2,10 +2,11 @@
 Documentation             Test BMC using https://github.com/DMTF/Redfish-Usecase-Checkers
 ...                       DMTF tool.
 
-Library                   OperatingSystem
-Library                   ../../lib/state.py
+Resource                  ../../lib/resource.robot
 Resource                  ../../lib/dmtf_tools_utils.robot
 Resource                  ../../lib/openbmc_ffdc.robot
+Library                   OperatingSystem
+Library                   ../../lib/state.py
 
 Test Setup                Test Setup Execution
 Test Teardown             Test Teardown Execution
@@ -83,6 +84,32 @@ Test Teardown Execution
 DMTF Power
     [Documentation]  Power the BMC machine on via DMTF tools.
 
-    Print Timen  Doing "DMTF Power".
+    Print Timen  Running "DMTF Power".
+    ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${command_power_control}  check_error=1
+    Log  ${output}
 
-    Run DMTF Tool  ${rsv_dir_path}  ${command_power_control}
+    ${json}=  OperatingSystem.Get File    ${EXECDIR}${/}logs${/}results.json
+
+    ${object}=  Evaluate  json.loads('''${json}''')  json
+
+    ${result_list}=  Set Variable  ${object["TestResults"]}
+    Log To Console  result: ${result_list}
+
+    @{failed_tc_list}=    Create List
+    @{error_messages}=    Create List
+
+    FOR  ${result}  IN  @{result_list}
+       ${rc}=    evaluate    'ErrorMessages'=='${result}'
+       ${num}=  Run Keyword If  ${rc} == False  Set Variable  ${result_list["${result}"]["fail"]}
+       Run Keyword If  ${num} != None and ${num} > 0  Append To List  ${failed_tc_list}   ${result}
+       Run Keyword If  ${rc} == True   Set Variable
+       ...  Append To List  ${error_messages}  ${result_list["ErrorMessages"]}
+    END
+
+    Log Many            ErrorMessages:   @{error_messages}
+    Log To Console      ErrorMessages:
+    FOR   ${msg}  IN  @{error_messages}
+       Log To Console   ${msg}
+    END
+
+    Should Be Empty  ${error_messages}   DMTF Power keyword failed.
