@@ -8,7 +8,7 @@ Resource       ../lib/connection_client.robot
 *** Variables ***
 ${functional_cpu_count}       ${0}
 ${active_occ_count}           ${0}
-${OCC_WAIT_TIMEOUT}           2 min
+${OCC_WAIT_TIMEOUT}           4 min
 
 *** Keywords ***
 
