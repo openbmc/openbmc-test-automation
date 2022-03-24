@@ -41,7 +41,7 @@ Verify Supported Ciphers Via Lan Print
 
 
 Verify Supported Cipher Via Getciphers
-    [Documentation]  Verify supported chipers via IPMI getciphers command.
+    [Documentation]  Verify supported ciphers via IPMI getciphers command.
     [Tags]  Verify_Supported_Cipher_Via_Getciphers
 
     # Example output from 'Channel Getciphers IPMI':
