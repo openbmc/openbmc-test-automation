@@ -36,7 +36,7 @@ Run DMTF Tool
 
     ${rc}  ${output}=  Shell Cmd  ${command_string}  ignore_err=${check_error}
     Log  ${output}
-    [Return]  ${output}
+    [Return]  ${rc}  ${output}
 
 
 Redfish Service Validator Result
