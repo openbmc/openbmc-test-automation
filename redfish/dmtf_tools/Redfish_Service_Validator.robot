@@ -25,9 +25,10 @@ Test BMC Redfish Using Redfish Service Validator
 
     Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}
 
-    ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${cmd_str_master}
+    ${rc}  ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${cmd_str_master}  check_error=1
 
     Redfish Service Validator Result  ${output}
+    Run Keyword If  ${rc} != 0  Fail  Redfish-Service-Validator Failed.
 
 
 Run Redfish Service Validator With Additional Roles
@@ -63,14 +64,15 @@ Create User And Run Service Validator
     Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}
 
     ${cmd}=  Catenate  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}RedfishServiceValidator.py
-    ...  --ip https://${OPENBMC_HOST}:${HTTPS_PORT} --nochkcert --authtype=Session -u ${username}
-    ...  -p ${password} --logdir ${EXECDIR}${/}logs_${username}${/} --debug_logging
+    ...  --ip https://${OPENBMC_HOST}:${HTTPS_PORT} --authtype=Session -u ${username}
+    ...  -p ${password} --logdir ${EXECDIR}${/}logs_${username}${/} --debugging
 
     Rprint Vars  cmd
 
-    ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${cmd}
+    ${rc}  ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${cmd}  check_error=1
 
     Redfish Service Validator Result  ${output}
+    Run Keyword If  ${rc} != 0  Fail
 
 
 Delete User Created
