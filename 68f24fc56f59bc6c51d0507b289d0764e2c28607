@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc2fa032_7a7f4b67",
+        "filename": "redfish/managers/test_bmc_network_mac.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-03-28T12:23:40Z",
+      "side": 1,
+      "message": "It\u0027s failing here, please check.",
+      "range": {
+        "startLine": 207,
+        "startChar": 3,
+        "endLine": 209,
+        "endChar": 0
+      },
+      "revId": "68f24fc56f59bc6c51d0507b289d0764e2c28607",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
