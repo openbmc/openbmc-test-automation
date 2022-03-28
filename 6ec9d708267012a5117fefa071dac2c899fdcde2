@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6637813_186d6de4",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-03-28T13:10:24Z",
+      "side": 0,
+      "message": "enabled_user_count also we need to verify. You can have the code like below. \n\n    ${resp}\u003d  Wait Until Keyword Succeeds  15 sec  5 sec  Run IPMI Standard Command\n    ...  user summary ${CHANNEL_NUMBER}\n    ${enabled_user_count_before}\u003d\n    ...  Get Lines Containing String  ${resp}  Enabled User Count\n\n    # Create random user\n    ${random_userid}  ${random_username}\u003d  Create Random IPMI User\n    Set Test Variable  ${random_userid}\n    Run IPMI Standard Command  user enable ${random_userid}\n\n    ${resp}\u003d  Wait Until Keyword Succeeds  15 sec  5 sec  Run IPMI Standard Command\n    ...  user summary ${CHANNEL_NUMBER}\n    ${enabled_user_count_after}\u003d\n    ...  Get Lines Containing String  ${resp}  Enabled User Count\n\n    Should Be Equal  ${enabled_user_count_before}+1  ${enabled_user_count_after}\n\n    ${output}\u003d  Run IPMI Standard Command  user summary ${CHANNEL_NUMBER}\n    ${maximum_ids}\u003d  Get Lines Containing String  ${output}  Maximum IDs\n    Should Contain  ${maximum_ids}  15",
+      "range": {
+        "startLine": 55,
+        "startChar": 22,
+        "endLine": 55,
+        "endChar": 40
+      },
+      "revId": "6ec9d708267012a5117fefa071dac2c899fdcde2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
