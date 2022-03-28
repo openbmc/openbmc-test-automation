@@ -1012,6 +1012,19 @@ Get BIOS Attribute
 
     [Return]  ${bios_attr_dict}
 
+
+Set BIOS Attribute
+    [Documentation]  PATCH the BIOS attribute for /redfish/v1/Systems/system/Bios.
+    [Arguments]  ${attribute}
+
+    # Description of argument(s):
+    # attribute     Any valid BIOS attribute.
+
+    # Python module:  get_member_list(resource_path)
+    ${systems}=  Redfish_Utils.Get Member List  /redfish/v1/Systems
+    Redfish.Patch  ${systems[0]}/Bios/Settings  body={'Attributes': attribute}
+
+
 Is BMC Operational
     [Documentation]  Check if BMC is enabled.
 
