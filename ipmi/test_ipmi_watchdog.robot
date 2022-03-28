@@ -101,7 +101,7 @@ Test IPMI Watchdog Timer Timeout Flag Bits
 
 Verify Timer Action For State Change
     [Documentation]  Set Watchdog via IPMI raw command and verify timer actions.
-    [Tags]  Verify Timer Action For State Change
+    [Tags]  Verify_Timer_Action_For_State_Change
     [Template]  Validate Watchdog Timer Actions And SEL Events
 
     # set action command                  power state  SEL event

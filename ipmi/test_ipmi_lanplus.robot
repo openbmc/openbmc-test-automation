@@ -22,7 +22,7 @@ Verify Lanplus Raw IPMI Commands Multiple Times
 
 Verify Lanplus Interface
     [Documentation]  Verify Lanplus interface.
-    [Tags]  verify_lanplus_interface
+    [Tags]  Verify_Lanplus_Interface
 
     Verify Lanplus Interface Commands
 
