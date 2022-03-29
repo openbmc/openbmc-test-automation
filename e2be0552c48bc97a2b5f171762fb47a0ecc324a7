@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d025f80_0e0df9d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-03-29T14:53:45Z",
+      "side": 1,
+      "message": "They are needed based on the role of this suite. Two test cases in this suite\n\n\n1. Test BMC Redfish Using Redfish Service Validator\n2. Run Redfish Service Validator With Additional Roles\n\n1. For test case:  Test BMC Redfish Using Redfish Service Validator\n\nthe default directory is logs/  \n\n(Note: this will be eventually logs_${OPENBMC_USERNAME} to align the suite here, however, the upstream Hardware CI Jenkins jobs runs this test case and look at default logs/ directory so I\u0027ll need to make changes there as well when this path is updated )\n\nExample (when the above note is done):\n    logs_admin/\n    logs_root/\n\n\n2. For test case:  Run Redfish Service Validator With Additional Roles\n\nthe default directory is  logs_${username}\n\nExample:\n   logs_operator_user/\n   logs_readonly_user/\n\nso these codes are in place to handle those.",
+      "parentUuid": "e8d24d06_7fc6c18e",
+      "revId": "e2be0552c48bc97a2b5f171762fb47a0ecc324a7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f507cd93_7f05a764",
