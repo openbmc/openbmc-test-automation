@@ -21,6 +21,8 @@ Library                logging_utils.py
 *** Variables ***
 
 ${FFDC_CMD_TIMEOUT}    240
+${FFDC_BMC_FILES_CLEANUP}  rm -rf /tmp/BMC_* /tmp/PEL_* /tmp/PLDM_*
+...                        /tmp/OCC_* /tmp/fan_* /tmp/GUARD_* /tmp/DEVTREE
 
 *** Keywords ***
 
@@ -123,6 +125,14 @@ Execute Keyword Method
 
     ${status}  ${ffdc_file_list}=  Run Key  ${keyword_name}  ignore=1
     [Return]  ${ffdc_file_list}
+
+
+BMC FFDC Cleanup
+    [Documentation]  Run the ssh commands from FFDC_BMC_FILES_CLEANUP.
+
+    Log To Console  BMC FFDC Files clean up: ${FFDC_BMC_FILES_CLEANUP}
+    BMC Execute Command   ${FFDC_BMC_FILES_CLEANUP}  ignore_err=1
+
 
 # Method : BMC FFDC Manifest                                   #
 #          Execute command on BMC and write to ffdc_report.txt #
