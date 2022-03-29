@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "591d075f_60bcd46a",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-03-29T10:57:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "942a83b0_f5f9f7ef",
+      "range": {
+        "startLine": 667,
+        "startChar": 90,
+        "endLine": 667,
+        "endChar": 99
+      },
+      "revId": "b423d9f47c10d751536f0dd749a696169abc19b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e44def34_3e205774",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-03-24T08:37:18Z",
       "side": 1,
       "message": "# Description of argument(s):\n\nvalid_channel_number_interface_names   Contains channel names in dict.",
+      "range": {
+        "startLine": 679,
+        "startChar": 4,
+        "endLine": 679,
+        "endChar": 17
+      },
+      "revId": "b423d9f47c10d751536f0dd749a696169abc19b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a25dee5e_98d7eed3",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-03-29T10:57:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e44def34_3e205774",
       "range": {
         "startLine": 679,
         "startChar": 4,
@@ -64,6 +112,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "311d3c6a_cb91fde3",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-03-29T10:57:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f93718c8_02b3ee7c",
+      "revId": "b423d9f47c10d751536f0dd749a696169abc19b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccbee028_9992496f",
@@ -77,6 +143,30 @@
       "writtenOn": "2022-03-24T08:37:18Z",
       "side": 1,
       "message": "This  ${channel_number_ethernet_interface_name}  one not needed. not used or returned",
+      "range": {
+        "startLine": 713,
+        "startChar": 4,
+        "endLine": 713,
+        "endChar": 45
+      },
+      "revId": "b423d9f47c10d751536f0dd749a696169abc19b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3c40a82_2e9f9bbe",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-03-29T10:57:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccbee028_9992496f",
       "range": {
         "startLine": 713,
         "startChar": 4,
