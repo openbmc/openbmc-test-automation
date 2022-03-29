@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a73828b5_554c3d53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-03-29T14:20:08Z",
+      "side": 1,
+      "message": "We have thought about this earlier and recent also to avoid conformance overwriting it.\n\n1. The root or admin user will be stored at default logs/ directory which will also be eventually logs_${username} \n\n2. The other users logs_${username}   \n\nplus this code is use in Hardware CI upstream run. I don\u0027t think this required the changes pushed here.. unless there is a requirement which is a MUST and required this changes.",
+      "revId": "e2be0552c48bc97a2b5f171762fb47a0ecc324a7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f507cd93_7f05a764",
+        "filename": "redfish/dmtf_tools/Redfish_Service_Validator.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-03-29T14:20:08Z",
+      "side": 1,
+      "message": "--logdir ${EXECDIR}${/}logs_${username}${/}  \n\nthe line 73 takes care of it..",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 20
+      },
+      "revId": "e2be0552c48bc97a2b5f171762fb47a0ecc324a7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
