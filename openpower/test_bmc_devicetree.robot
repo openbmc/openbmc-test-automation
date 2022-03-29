@@ -1,9 +1,9 @@
 *** Settings ***
 Documentation       This suite is for Verifying BMC device tree.
 
-Resource            ../../lib/utils.robot
-Resource            ../../lib/openbmc_ffdc.robot
-Resource            ../../lib/ipmi_client.robot
+Resource            ../lib/utils.robot
+Resource            ../lib/openbmc_ffdc.robot
+Resource            ../lib/ipmi_client.robot
 Library             String
 
 Suite Setup         Open Connection And Log In
