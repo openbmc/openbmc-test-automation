@@ -1,12 +1,12 @@
 *** Settings ***
 Documentation   Suite to test OCC power module.
 
-Resource         ../../lib/bmc_redfish_resource.robot
-Resource        ../../lib/open_power_utils.robot
-Resource        ../../lib/boot_utils.robot
-Resource        ../../lib/state_manager.robot
-Resource        ../../lib/openbmc_ffdc.robot
-Resource        ../../lib/utils.robot
+Resource        ../lib/bmc_redfish_resource.robot
+Resource        ../lib/open_power_utils.robot
+Resource        ../lib/boot_utils.robot
+Resource        ../lib/state_manager.robot
+Resource        ../lib/openbmc_ffdc.robot
+Resource        ../lib/utils.robot
 
 Suite Setup     Suite Setup Execution
 Test Teardown   Test Teardown Execution
