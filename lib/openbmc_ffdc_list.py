@@ -200,6 +200,7 @@ FFDC_METHOD_CALL = {
     'BMC LOGS':
     {
         # Description               Keyword name
+        'Start ffdc cleanup': 'BMC FFDC Cleanup',
         'FFDC Generic Report': 'BMC FFDC Manifest',
         'BMC Specific Files': 'BMC FFDC Files',
         'Get Request FFDC': 'BMC FFDC Get Requests',
@@ -217,6 +218,7 @@ FFDC_METHOD_CALL = {
         + ' enum_uri=/redfish/v1/UpdateService/FirmwareInventory  '
         + ' file_enum_name=redfish_FIRMWARE_list.txt',
         'Redfish OEM Log': 'Enumerate Redfish OEM Resources',
+        'End ffdc cleanup': 'BMC FFDC Cleanup',
     },
 }
 
