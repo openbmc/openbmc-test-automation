@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8d24d06_7fc6c18e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-03-29T14:42:52Z",
+      "side": 1,
+      "message": "ok. are you suggesting changes which we made for creating log directory based on UserRole are not needed? \n\nWhat about the password change in line 48 \u0026 49 for creating operator and readonly user?",
+      "parentUuid": "a73828b5_554c3d53",
+      "revId": "e2be0552c48bc97a2b5f171762fb47a0ecc324a7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f507cd93_7f05a764",
