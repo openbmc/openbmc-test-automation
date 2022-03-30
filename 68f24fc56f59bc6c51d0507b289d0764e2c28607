@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2964e05c_15fd0678",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-03-30T07:45:32Z",
+      "side": 1,
+      "message": "Github issue:\nhttps://github.com/openbmc/openbmc-test-automation/issues/2136",
+      "revId": "68f24fc56f59bc6c51d0507b289d0764e2c28607",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc2fa032_7a7f4b67",
@@ -14,6 +31,30 @@
       "writtenOn": "2022-03-28T12:23:40Z",
       "side": 1,
       "message": "It\u0027s failing here, please check.",
+      "range": {
+        "startLine": 207,
+        "startChar": 3,
+        "endLine": 209,
+        "endChar": 0
+      },
+      "revId": "68f24fc56f59bc6c51d0507b289d0764e2c28607",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab86644d_8e416f17",
+        "filename": "redfish/managers/test_bmc_network_mac.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-03-30T07:45:32Z",
+      "side": 1,
+      "message": "it is passing now.",
+      "parentUuid": "bc2fa032_7a7f4b67",
       "range": {
         "startLine": 207,
         "startChar": 3,
