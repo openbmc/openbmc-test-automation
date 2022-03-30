@@ -22,6 +22,30 @@
       },
       "revId": "6ec9d708267012a5117fefa071dac2c899fdcde2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b884eeb_8f0eb0de",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-03-30T13:57:09Z",
+      "side": 0,
+      "message": "modified to verify enabled user count with  redfish user count",
+      "parentUuid": "c6637813_186d6de4",
+      "range": {
+        "startLine": 55,
+        "startChar": 22,
+        "endLine": 55,
+        "endChar": 40
+      },
+      "revId": "6ec9d708267012a5117fefa071dac2c899fdcde2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
