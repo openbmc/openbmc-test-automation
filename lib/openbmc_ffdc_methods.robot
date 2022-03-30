@@ -574,6 +574,8 @@ Collect Dump Log
     [Documentation]  Collect dumps from dump entry.
     [Arguments]  ${log_prefix_path}=${LOG_PREFIX}
 
+    Return From Keyword If  ${REDFISH_SUPPORT_TRANS_STATE} == ${1}
+
     ${resp}=  OpenBMC Get Request  ${DUMP_URI}
     Run Keyword If  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
     ...  Set Test Variable  ${DUMP_ENTRY_URI}  /xyz/openbmc_project/dump/entry/
