@@ -106,8 +106,8 @@ OPENBMC:
     DUMP_LOGS:
         COMMANDS:
             - 'ls -AX /var/lib/systemd/coredump/core.*'
-            - 'ls -AX /var/lib/phosphor-debug-collector/dumps/*/*.tar.xz'
-            - 'ls -AX /var/lib/phosphor-debug-collector/hostbootdump/*/*.tar.gz'
+            - 'ls -AX /var/lib/phosphor-debug-collector/dumps/*/*'
+            - 'ls -AX /var/lib/phosphor-debug-collector/hostbootdump/*/*'
         PROTOCOL:
             - 'SCP'
 
