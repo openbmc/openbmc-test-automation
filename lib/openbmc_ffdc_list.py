@@ -211,7 +211,6 @@ FFDC_METHOD_CALL = {
         'Sys Inventory Files': 'System Inventory Files',
         'Dump Log': 'Collect Dump Log',
         'Dump Files': 'SCP Dump Files',
-        'Dump HB Files': 'SCP Dump HB Files',
         'PEL Files': 'Collect PEL Log',
         'Redfish Log': 'Enumerate Redfish Resources',
         'Firmware Log': 'Enumerate Redfish Resources  '
