@@ -9,6 +9,10 @@ Documentation         Test upload image with invalid images.
 ...                       pnor_nokernel_image.pnor.squashfs.tar
 ...                       pnor_invalid_key.pnor.squashfs.tar
 
+# Refer below document to generate bad firmware image for testing.
+# openbmc/openbmc-test-automation/blob/master/docs/code_update.md
+# generating-bad-firmware-image-for-testing
+
 # Test Parameters:
 # OPENBMC_HOST         The BMC host name or IP address.
 # OPENBMC_USERNAME     The OS login userid.
