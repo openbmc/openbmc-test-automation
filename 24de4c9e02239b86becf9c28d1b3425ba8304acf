@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2490403_c06554e6",
+        "filename": "redfish/update_service/test_redfish_image_upload.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-01T11:29:38Z",
+      "side": 1,
+      "message": "images",
+      "range": {
+        "startLine": 12,
+        "startChar": 48,
+        "endLine": 12,
+        "endChar": 54
+      },
+      "revId": "24de4c9e02239b86becf9c28d1b3425ba8304acf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1d7e7c6_7b03e507",
+        "filename": "redfish/update_service/test_redfish_image_upload.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-01T11:29:38Z",
+      "side": 1,
+      "message": "# Refer:  openbmc-test-automation/blob/master/docs/code_update.md#generating-bad-firmware-image-for-testing",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 43
+      },
+      "revId": "24de4c9e02239b86becf9c28d1b3425ba8304acf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
