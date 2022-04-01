@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "088d4b97_12fbfd3d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-04-01T09:53:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0be0b2c_5ea2e52c",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 18
+      },
+      "revId": "de440d31c6311482edbb39b4c7f8007518533e3b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cb94232_2a15e4a4",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-04-01T08:38:54Z",
       "side": 1,
       "message": "Test Teardown     Test Teardown Execution\n\n\nand remove the others in test case",
+      "revId": "de440d31c6311482edbb39b4c7f8007518533e3b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e53210f8_c4c8b323",
+        "filename": "redfish/update_service/test_redfish_image_upload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-04-01T09:53:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cb94232_2a15e4a4",
       "revId": "de440d31c6311482edbb39b4c7f8007518533e3b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
