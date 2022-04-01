@@ -3,6 +3,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7ada9b5_79a80839",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-01T08:35:47Z",
+      "side": 1,
+      "message": "Instruction to generate bad firmware image for testing\n\nChanges:\n      - Added documented step in code_update.md file",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 32
+      },
+      "revId": "b1df03a538547b69a1360e1edab6e790618fb080",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afc7bf81_8de21cb2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-01T08:35:47Z",
+      "side": 1,
+      "message": "Resolves   openbmc/openbmc-test-automation#2163",
+      "revId": "b1df03a538547b69a1360e1edab6e790618fb080",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc6b8dac_f0307bdc",
         "filename": "docs/code_update.md",
         "patchSetId": 1
