@@ -28,6 +28,7 @@ Library                ../../lib/gen_robot_valid.py
 Suite Setup            Suite Setup Execution
 Suite Teardown         Redfish.Logout
 Test Setup             Printn
+Test Teardown          Test Teardown Execution
 
 Force Tags  Upload_Test
 
@@ -115,6 +116,11 @@ Redfish TFTP Failure To Upload Empty Host Image
 Suite Setup Execution
     [Documentation]  Do the suite setup.
 
+    Valid Value  OPENBMC_HOST
+    Valid Value  OPENBMC_USERNAME
+    Valid Value  OPENBMC_PASSWORD
+    Valid Value  BAD_IMAGES_DIR_PATH
+    Valid Value  TFTP_SERVER
     Redfish.Login
     Redfish Delete All BMC Dumps
     Redfish Purge Event Log
@@ -123,7 +129,6 @@ Suite Setup Execution
 Redfish Bad Firmware Update
     [Documentation]  Redfish firmware update.
     [Arguments]  ${image_file_name}
-    [Teardown]  Test Teardown Execution
 
     # Description of argument(s):
     # image_file_name  The file name of the image.
@@ -151,7 +156,6 @@ Redfish Bad Firmware Update
 Redfish TFTP Bad Firmware Update
     [Documentation]  Redfish bad firmware update via TFTP.
     [Arguments]  ${image_file_name}
-    [Teardown]  Test Teardown Execution
 
     # Description of argument(s):
     # image_file_name  The file name of the image.
