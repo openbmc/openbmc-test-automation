@@ -84,3 +84,128 @@ For code update information, please refer to [code-update.md](https://github.com
     $ cd extended/
     $ robot -v OPENBMC_HOST:x.x.x.x -v PNOR_IMAGE_PATH:<image path>/zaius.pnor test_bios_update.robot
     ```
+
+#### Bad Firmware File ####
+
+Below procedure is to create bad firmware file for bmc and similar steps applicable for pnor.
+
+*   Bad manifest file
+
+    ```
+    Below command to list the tart files.
+
+    tar -tvf obmc-phosphor-image-witherspoon-20210516025203.ubi.mtd.tar
+    -rw-r--r-- jenkins-op/jenkins-op 306804 2021-05-15 22:00 image-u-boot
+    -rw-r--r-- jenkins-op/jenkins-op 3039300 2021-05-12 03:32 image-kernel
+    -rw-r--r-- jenkins-op/jenkins-op 19861504 2021-05-15 22:00 image-rofs
+    -rw-r--r-- jenkins-op/jenkins-op   850304 2021-05-15 22:00 image-rwfs
+    -rw-r--r-- jenkins-op/jenkins-op      176 2021-05-15 22:00 MANIFEST
+    -rw-r--r-- jenkins-op/jenkins-op      272 2021-05-15 22:00 publickey
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-u-boot.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-kernel.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-rofs.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-rwfs.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 MANIFEST.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 publickey.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-full.sig
+
+    Below command to delete particular file.
+
+    tar --delete -vf obmc-phosphor-image-witherspoon-20210516025203.ubi.mtd.tar MANIFEST
+
+    tar -tvf obmc-phosphor-image-witherspoon-20210516025203.ubi.mtd.tar
+    -rw-r--r-- jenkins-op/jenkins-op 306804 2021-05-15 22:00 image-u-boot
+    -rw-r--r-- jenkins-op/jenkins-op 3039300 2021-05-12 03:32 image-kernel
+    -rw-r--r-- jenkins-op/jenkins-op 19861504 2021-05-15 22:00 image-rofs
+    -rw-r--r-- jenkins-op/jenkins-op   850304 2021-05-15 22:00 image-rwfs
+    -rw-r--r-- jenkins-op/jenkins-op      272 2021-05-15 22:00 publickey
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-u-boot.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-kernel.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-rofs.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-rwfs.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 MANIFEST.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 publickey.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-full.sig
+
+    Below command to change the file name.
+
+    mv obmc-phosphor-image-witherspoon-20210516025203.ubi.mtd.tar bmc_bad_manifest.ubi.mtd.tar
+    ```
+
+*   Nokernel image
+
+    ```
+    Below command to list the tart files.
+
+    tar -tvf obmc-phosphor-image-witherspoon-20210516025203.ubi.mtd.tar
+    -rw-r--r-- jenkins-op/jenkins-op 306804 2021-05-15 22:00 image-u-boot
+    -rw-r--r-- jenkins-op/jenkins-op 3039300 2021-05-12 03:32 image-kernel
+    -rw-r--r-- jenkins-op/jenkins-op 19861504 2021-05-15 22:00 image-rofs
+    -rw-r--r-- jenkins-op/jenkins-op   850304 2021-05-15 22:00 image-rwfs
+    -rw-r--r-- jenkins-op/jenkins-op      176 2021-05-15 22:00 MANIFEST
+    -rw-r--r-- jenkins-op/jenkins-op      272 2021-05-15 22:00 publickey
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-u-boot.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-kernel.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-rofs.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-rwfs.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 MANIFEST.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 publickey.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-full.sig
+
+    Below command to delete particular file.
+
+    tar --delete -vf obmc-phosphor-image-witherspoon-20210516025203.ubi.mtd.tar image-kernel
+
+    tar -tvf obmc-phosphor-image-witherspoon-20210516025203.ubi.mtd.tar
+    -rw-r--r-- jenkins-op/jenkins-op 306804 2021-05-15 22:00 image-u-boot
+    -rw-r--r-- jenkins-op/jenkins-op 19861504 2021-05-15 22:00 image-rofs
+    -rw-r--r-- jenkins-op/jenkins-op   850304 2021-05-15 22:00 image-rwfs
+    -rw-r--r-- jenkins-op/jenkins-op      176 2021-05-15 22:00 MANIFEST
+    -rw-r--r-- jenkins-op/jenkins-op      272 2021-05-15 22:00 publickey
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-u-boot.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-kernel.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-rofs.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-rwfs.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 MANIFEST.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 publickey.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-full.sig
+
+    Below command to change the file name.
+
+    mv obmc-phosphor-image-witherspoon-20210516025203.ubi.mtd.tar bmc_nokernel_image.ubi.mtd.tar
+    ```
+
+*   Invalid key image
+
+    ```
+    Untar the firmware image.
+
+    tar -xvf obmc-phosphor-image-witherspoon-20210516025203.ubi.mtd.tar -C /directory_path/untar_files/
+    image-u-boot
+    image-kernel
+    image-rofs
+    image-rwfs
+    MANIFEST
+    publickey
+    image-u-boot.sig
+    image-kernel.sig
+    image-rofs.sig
+    image-rwfs.sig
+    MANIFEST.sig
+    publickey.sig
+    image-full.sig
+
+    Change few random characters in public key like in below example replace first few characters to openbmc.
+
+    cat publickey
+    -----BEGIN PUBLIC KEY-----
+    openbmcbmcCSqGSIb3DQEBAQUAA4GNADCBiQKBgQD70gy7urJZD9YK4j2nkFy/crA+
+    vSfx42wQiENET33lgW++VEtbUU4zz9FG/ArR/BMVX/IhdbpbGQO/AcyIwWGVafac
+    g+i26Wf4Y1e6yB+nUzYaFaXQPhfC85kO3MoRxvJdiTL3bp8Bdrl+ZA+Fg3GbfyEy
+    mTUDWrz7ZiMg+R6a3QIDAQCD
+    -----END PUBLIC KEY-----
+
+    tar the firmware image files.
+
+    tar -cvf bmc_invalid_key.ubi.mtd.tar *
+    ```
