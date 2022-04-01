@@ -84,3 +84,120 @@ For code update information, please refer to [code-update.md](https://github.com
     $ cd extended/
     $ robot -v OPENBMC_HOST:x.x.x.x -v PNOR_IMAGE_PATH:<image path>/zaius.pnor test_bios_update.robot
     ```
+
+#### Generating Bad Firmware Image for testing ####
+
+Procedure is to create bad firmware image for BMC and same steps applicable for Host image.
+
+*   No MANIFEST file
+
+    ```
+    Command to list the content of the firmware image.
+
+    tar -tvf obmc-phosphor-image-witherspoon-20210516025203.ubi.mtd.tar
+    -rw-r--r-- jenkins-op/jenkins-op 306804 2021-05-15 22:00 image-u-boot
+    -rw-r--r-- jenkins-op/jenkins-op 3039300 2021-05-12 03:32 image-kernel
+    -rw-r--r-- jenkins-op/jenkins-op 19861504 2021-05-15 22:00 image-rofs
+    -rw-r--r-- jenkins-op/jenkins-op   850304 2021-05-15 22:00 image-rwfs
+    -rw-r--r-- jenkins-op/jenkins-op      176 2021-05-15 22:00 MANIFEST
+    -rw-r--r-- jenkins-op/jenkins-op      272 2021-05-15 22:00 publickey
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-u-boot.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-kernel.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-rofs.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-rwfs.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 MANIFEST.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 publickey.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-full.sig
+
+    Delete MANIFEST file from the tar firmware image.
+
+    tar --delete -vf obmc-phosphor-image-witherspoon-20210516025203.ubi.mtd.tar MANIFEST
+
+    tar -tvf obmc-phosphor-image-witherspoon-20210516025203.ubi.mtd.tar
+    -rw-r--r-- jenkins-op/jenkins-op 306804 2021-05-15 22:00 image-u-boot
+    -rw-r--r-- jenkins-op/jenkins-op 3039300 2021-05-12 03:32 image-kernel
+    -rw-r--r-- jenkins-op/jenkins-op 19861504 2021-05-15 22:00 image-rofs
+    -rw-r--r-- jenkins-op/jenkins-op   850304 2021-05-15 22:00 image-rwfs
+    -rw-r--r-- jenkins-op/jenkins-op      272 2021-05-15 22:00 publickey
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-u-boot.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-kernel.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-rofs.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-rwfs.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 MANIFEST.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 publickey.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-full.sig
+
+    Command to re-name tar firmware image.
+
+    mv obmc-phosphor-image-witherspoon-20210516025203.ubi.mtd.tar bmc_bad_manifest.ubi.mtd.tar
+    ```
+
+*   No kernel image
+
+    ```
+    Command to list the content of the firmware image.
+
+    tar -tvf obmc-phosphor-image-witherspoon-20210516025203.ubi.mtd.tar
+    -rw-r--r-- jenkins-op/jenkins-op 306804 2021-05-15 22:00 image-u-boot
+    -rw-r--r-- jenkins-op/jenkins-op 3039300 2021-05-12 03:32 image-kernel
+    -rw-r--r-- jenkins-op/jenkins-op 19861504 2021-05-15 22:00 image-rofs
+    -rw-r--r-- jenkins-op/jenkins-op   850304 2021-05-15 22:00 image-rwfs
+    -rw-r--r-- jenkins-op/jenkins-op      176 2021-05-15 22:00 MANIFEST
+    -rw-r--r-- jenkins-op/jenkins-op      272 2021-05-15 22:00 publickey
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-u-boot.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-kernel.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-rofs.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-rwfs.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 MANIFEST.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 publickey.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-full.sig
+
+    Delete image-kernel file from the tar firmware image.
+
+    tar --delete -vf obmc-phosphor-image-witherspoon-20210516025203.ubi.mtd.tar image-kernel
+
+    tar -tvf obmc-phosphor-image-witherspoon-20210516025203.ubi.mtd.tar
+    -rw-r--r-- jenkins-op/jenkins-op 306804 2021-05-15 22:00 image-u-boot
+    -rw-r--r-- jenkins-op/jenkins-op 19861504 2021-05-15 22:00 image-rofs
+    -rw-r--r-- jenkins-op/jenkins-op   850304 2021-05-15 22:00 image-rwfs
+    -rw-r--r-- jenkins-op/jenkins-op      176 2021-05-15 22:00 MANIFEST
+    -rw-r--r-- jenkins-op/jenkins-op      272 2021-05-15 22:00 publickey
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-u-boot.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-kernel.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-rofs.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-rwfs.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 MANIFEST.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 publickey.sig
+    -rw-r--r-- jenkins-op/jenkins-op      128 2021-05-15 22:00 image-full.sig
+
+    Command to re-name tar firmware image.
+
+    mv obmc-phosphor-image-witherspoon-20210516025203.ubi.mtd.tar bmc_nokernel_image.ubi.mtd.tar
+    ```
+
+*   Invalid key image
+
+    ```
+    Command to untar the firmware image.
+
+    tar -xvf obmc-phosphor-image-witherspoon-20210516025203.ubi.mtd.tar -C /directory_path/untar_files/
+    image-u-boot
+    image-kernel
+    image-rofs
+    image-rwfs
+    MANIFEST
+    publickey
+    image-u-boot.sig
+    image-kernel.sig
+    image-rofs.sig
+    image-rwfs.sig
+    MANIFEST.sig
+    publickey.sig
+    image-full.sig
+
+    Change few random characters in public key file that in turn corrupts the public key file.
+
+    Command to tar the firmware image files.
+
+    tar -cvf bmc_invalid_key.ubi.mtd.tar *
+    ```
