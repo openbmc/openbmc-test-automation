@@ -37,8 +37,6 @@ OPENBMC:
             - '/usr/bin/timedatectl >> /tmp/OPENBMC_general.txt'
             - 'echo -e "\n++++++++++ /usr/bin/obmcutil state ++++++++++" >> /tmp/OPENBMC_general.txt'
             - '/usr/bin/obmcutil state >> /tmp/OPENBMC_general.txt'
-            - 'echo -e "\n++++++++++ bmcweb session data ++++++++++" >> /tmp/OPENBMC_general.txt'
-            - 'for f in `find /var/lib/bmcweb/ -name "*.json"`; do (echo $f; cat $f) done >> /tmp/OPENBMC_general.txt'
         FILES:
             - '/tmp/OPENBMC_general.txt'
         PROTOCOL:
