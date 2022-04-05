@@ -153,6 +153,10 @@ ${LDAP_SERVER_URI}          ldap://${LDAP_SERVER_HOST}
 # FFDC_DEFAULT == 1; use Default FFDC methods
 ${FFDC_DEFAULT}            ${1}
 
+# SOL Console Output Content
+${SOL_BIOS_OUTPUT}          ${EMPTY}
+${SOL_LOGIN_OUTPUT}         ${EMPTY}
+
 *** Keywords ***
 Get Inventory Schema
     [Documentation]  Get inventory schema.
