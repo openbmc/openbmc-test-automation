@@ -1,9 +1,10 @@
 *** Settings ***
-
 Documentation  Network security utility file.
 
 Resource                ../lib/resource.robot
 Resource                ../lib/bmc_redfish_resource.robot
+
+*** Keywords ***
 
 Send Network Packets And Get Packet Loss
     [Documentation]  Send TCP, UDP or ICMP packets to any network device and return packet loss.
