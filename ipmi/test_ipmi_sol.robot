@@ -124,20 +124,31 @@ Set Invalid SOL Character Send Threshold
 
 
 Verify SOL During Boot
-    [Documentation]  Verify SOL during boot.
+    [Documentation]  Verify SOL activate console output during boot.
     [Tags]  Verify_SOL_During_Boot
 
     IPMI Power Off  stack_mode=skip
     Activate SOL Via IPMI
     Initiate Host Boot Via External IPMI  wait=${0}
 
-    Wait Until Keyword Succeeds  3 mins  15 secs
-    ...  Check IPMI SOL Output Content  Welcome to Hostboot
+    Should Not Be Empty  ${SOL_BIOS_OUTPUT}
+    Should Not Be Empty  ${SOL_LOGIN_OUTPUT}
 
-    Wait Until Keyword Succeeds  3 mins  15 secs
-    ...  Check IPMI SOL Output Content  ISTEP
+    # Content takes maximum of 10 minutes to display in SOL console
+    # SOL_BIOS_OUTPUT - BIOS SOL console output
+    ${status}=  Run Keyword And Return Status  Wait Until Keyword Succeeds  10 mins  15 secs
+    ...  Check IPMI SOL Output Content  ${SOL_BIOS_OUTPUT}
 
-    IPMI Power Off
+    Run Keyword If  '${status}' == 'False'
+    ...  Run Keywords  IPMI Power Off  AND  FAIL  msg=BIOS not loaded.
+
+    # SOL_LOGIN_OUTPUT - SOL output login prompt
+    # Once host reboot completes, SOL console may take maximum of 15 minutes to get the login prompt.
+    ${status}=  Run Keyword And Return Status  Wait Until Keyword Succeeds  15 mins  15 secs
+    ...  Check IPMI SOL Output Content  ${SOL_LOGIN_OUTPUT}
+
+    Run Keyword If  '${status}' == 'False'
+    ...  IPMI Power Off
 
 
 Verify Deactivate Non Existing SOL
