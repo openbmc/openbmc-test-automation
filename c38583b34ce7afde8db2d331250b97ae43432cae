@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b80defbe_c0beed23",
+        "filename": "lib/resource.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-05T12:54:53Z",
+      "side": 1,
+      "message": "still needs a default path, something like this.\n\n${SOL_BIOS_OUTPUT}       ${EXECDIR}${/}logs${/}sol_bios_${OPENBMC_HOST}\n${SOL_LOGIN_OUTPUT}      ${EXECDIR}${/}logs${/}sol_login_${OPENBMC_HOST}\n\nso that user doesn\u0027t need to key in the path by default.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 0
+      },
+      "revId": "c38583b34ce7afde8db2d331250b97ae43432cae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
