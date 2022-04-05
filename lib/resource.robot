@@ -62,6 +62,10 @@ ${IPMI_TIMEOUT}       ${3}
 # Log default path for IPMI SOL.
 ${IPMI_SOL_LOG_FILE}    ${EXECDIR}${/}logs${/}sol_${OPENBMC_HOST}
 
+# IPMI SOL console output to verify.
+${SOL_BIOS_OUTPUT}          ${EMPTY}
+${SOL_LOGIN_OUTPUT}         ${EMPTY}
+
 # PDU related parameters
 ${PDU_TYPE}         ${EMPTY}
 ${PDU_IP}           ${EMPTY}
