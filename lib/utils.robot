@@ -1000,7 +1000,6 @@ Stop PLDM Service And Wait
 
     # Check if BMC is still online.
     Wait Until Keyword Succeeds  5 min  10 sec  Is BMC Unpingable
-    Wait For Host To Ping  ${OPENBMC_HOST}  3 min
 
 
 Get BIOS Attribute
