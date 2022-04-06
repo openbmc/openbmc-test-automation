@@ -17,7 +17,7 @@ OPENBMC:
     # Filename is <OS>_general.txt, where <OS> is in [OPENBMC, RHEL, UBUNTU]
     GENERAL:
         COMMANDS:
-            - 'rm -rf /tmp/*BMC_* /tmp/PEL_* /tmp/pldm* /tmp/PLDM* /tmp/GUARD* /tmp/fan_* /tmp/DEVTREE'
+            - 'rm -rf /tmp/*BMC_* /tmp/PEL_* /tmp/pldm* /tmp/PLDM* /tmp/GUARD* /tmp/fan_* /tmp/DEVTREE /tmp/bmcweb_*'
             - 'echo "++++++++++ cat /etc/os-release ++++++++++" >> /tmp/OPENBMC_general.txt'
             - 'cat /etc/os-release >> /tmp/OPENBMC_general.txt'
             - 'echo -e "\n++++++++++ cat /etc/timestamp ++++++++++" >> /tmp/OPENBMC_general.txt'
@@ -69,6 +69,7 @@ OPENBMC:
             - 'killall -s SIGUSR1 pldmd; sleep 5'
             - 'fanctl dump'
             - 'cat /var/lib/phosphor-software-manager/pnor/rw/DEVTREE > /tmp/DEVTREE'
+            - 'cat /home/root/bmcweb_persistent_data.json > /tmp/bmcweb_persistent_data.json'
         FILES:
             - '/tmp/BMC_flash_side.txt'
             - '/tmp/BMC_hwmon.txt'
@@ -95,6 +96,7 @@ OPENBMC:
             - '/tmp/pldm_flight_recorder'
             - '/tmp/fan_control_dump.json'
             - '/tmp/DEVTREE'
+            - '/tmp/bmcweb_persistent_data.json'
         PROTOCOL:
             - 'SSH'
 
