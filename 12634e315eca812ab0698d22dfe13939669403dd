@@ -16,6 +16,24 @@
       "message": "Add a check that SOL_BIOS_OUTPUT and SOL_LOGIN_OUTPUT  should not be empty since the default is EMPTY",
       "revId": "12634e315eca812ab0698d22dfe13939669403dd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79776e03_1ee7c4a8",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-04-06T12:18:44Z",
+      "side": 1,
+      "message": "Ok sure. Added check to verify the defined variable are not empty.",
+      "parentUuid": "3faded5f_dc3653e1",
+      "revId": "12634e315eca812ab0698d22dfe13939669403dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
