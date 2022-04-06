@@ -22,6 +22,30 @@
       },
       "revId": "c38583b34ce7afde8db2d331250b97ae43432cae",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b15d915f_bc05e31a",
+        "filename": "lib/resource.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-04-06T09:03:14Z",
+      "side": 1,
+      "message": "it is not file path. User needs to provide the text they need to find in the console file. The console file path is given in ${IPMI_SOL_LOG_FILE}. The keyword - Check IPMI SOL Output Content - opens the console file path and checks whether the given texts under SOL_BIOS_OUTPUT and SOL_LOGIN_OUTPUT are identified from the console output.",
+      "parentUuid": "b80defbe_c0beed23",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 0
+      },
+      "revId": "c38583b34ce7afde8db2d331250b97ae43432cae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
