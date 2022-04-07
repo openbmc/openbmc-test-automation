@@ -998,9 +998,6 @@ Stop PLDM Service And Wait
 
     BMC Execute Command  systemctl stop pldmd.service
 
-    # Check if BMC is still online.
-    Wait Until Keyword Succeeds  5 min  10 sec  Is BMC Unpingable
-
 
 Get BIOS Attribute
     [Documentation]  Get the BIOS attribute for /redfish/v1/Systems/system/Bios.
