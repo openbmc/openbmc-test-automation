@@ -27,7 +27,7 @@ Variables  ../gui/data/gui_variables.py
 
 ${iterations}         10000
 ${loop_iteration}     ${1000}
-${hostname}           test_hostname
+${hostname}           testhostname
 ${MAX_UNAUTH_PER_IP}  ${5}
 ${bmc_url}            https://${OPENBMC_HOST}
 
@@ -48,26 +48,28 @@ Test Patch Without Auth Token Fails
 Flood Patch Without Auth Token And Check Stability Of BMC
     [Documentation]  Flood patch method without auth token and check BMC stability.
     [Tags]  Flood_Patch_Without_Auth_Token_And_Check_Stability_Of_BMC
-    @{status_list}=  Create List
+
+    @{fail_list}=  Create List
 
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
-    FOR  ${i}  IN RANGE  ${1}  ${iterations}
-        Log To Console  ${i}th iteration
-        Run Keyword And Ignore Error
-        ...  Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body={'HostName': '${hostname}'}
+    FOR  ${iter}  IN RANGE  ${1}  ${iterations} + 1
+        Log To Console  ${iter}th iteration Patch Request without valid session token
+        # Expected valid fail status response code.
+        Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body={'HostName': '${hostname}'}
+        ...  valid_status_codes=[${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
 
         # Every 100th iteration, check BMC allows patch with auth token.
-        ${status}=  Run Keyword If  ${i} % 100 == 0  Run Keyword And Return Status
-        ...  Login And Configure Hostname
-        Run Keyword If  ${status} == False  Append To List  ${status_list}  ${status}
+        ${status}=  Run Keyword If  ${iter} % 100 == 0  Run Keyword And Return Status
+        ...  Login And Configure Hostname  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+        Run Keyword If  ${status} == False  Append To List  ${fail_list}  ${iter}
     END
     ${verify_count}=  Evaluate  ${iterations}/100
-    ${fail_count}=  Get Length  ${status_list}
+    ${fail_count}=  Get Length  ${fail_list}
 
-    Should Be Equal  ${fail_count}  0
-    ...  msg=Patch operation failed ${fail_count} times in ${verify_count} attempts
+    Should Be Equal As Integers  ${fail_count}  ${0}
+    ...  msg=Patch operation failed ${fail_count} times in ${verify_count} attempts; fails at iterations ${fail_list}
 
 
 Verify User Cannot Login After 5 Non-Logged In Sessions
@@ -75,7 +77,7 @@ Verify User Cannot Login After 5 Non-Logged In Sessions
     ...  are 5 non-logged in sessions.
     [Tags]  Verify_User_Cannot_Login_After_5_Non-Logged_In_Sessions
 
-    FOR  ${i}  IN RANGE  ${0}  ${MAX_UNAUTH_PER_IP}
+    FOR  ${iter}  IN RANGE  ${0}  ${MAX_UNAUTH_PER_IP}
        SSHLibrary.Open Connection  ${OPENBMC_HOST}
        Start Process  ssh ${OPENBMC_USERNAME}@${OPENBMC_HOST}  shell=True
     END
@@ -100,25 +102,27 @@ Flood Post Without Auth Token And Check Stability Of BMC
     [Documentation]  Flood post method without auth token and check BMC stability.
     [Tags]  Flood_Post_Without_Auth_Token_And_Check_Stability_Of_BMC
 
-    @{status_list}=  Create List
+    @{fail_list}=  Create List
+
     ${user_info}=  Create Dictionary
     ...  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
 
-    FOR  ${i}  IN RANGE  ${1}  ${iterations}
-        Log To Console  ${i}th iteration
-        Run Keyword And Ignore Error
-        ...  Redfish.Post   /redfish/v1/AccountService/Accounts/  body=&{user_info}
+    FOR  ${iter}  IN RANGE  ${1}  ${iterations} + 1
+        Log To Console  ${iter}th iteration Post Request without valid session token
+        # Expected valid fail status response code.
+        Redfish.Post   /redfish/v1/AccountService/Accounts/  body=&{user_info}
+        ...  valid_status_codes=[${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
 
         # Every 100th iteration, check BMC allows post with auth token.
-        ${status}=  Run Keyword If  ${i} % 100 == 0  Run Keyword And Return Status
+        ${status}=  Run Keyword If  ${iter} % 100 == 0  Run Keyword And Return Status
         ...  Login And Create User
-        Run Keyword If  ${status} == False  Append To List  ${status_list}  ${status}
+        Run Keyword If  ${status} == False  Append To List  ${fail_list}  ${iter}
     END
     ${verify_count}=  Evaluate  ${iterations}/100
-    ${fail_count}=  Get Length  ${status_list}
+    ${fail_count}=  Get Length  ${fail_list}
 
-    Should Be Equal  ${fail_count}  0
-    ...  msg=Post operation failed ${fail_count} times in ${verify_count} attempts
+    Should Be Equal As Integers  ${fail_count}  ${0}
+    ...  msg=Post operation failed ${fail_count} times in ${verify_count} attempts; fails at iterations ${fail_list}
 
 
 Make Large Number Of Wrong SSH Login Attempts And Check Stability
@@ -129,14 +133,14 @@ Make Large Number Of Wrong SSH Login Attempts And Check Stability
 
     SSHLibrary.Open Connection  ${OPENBMC_HOST}
     @{ssh_status_list}=  Create List
-    FOR  ${i}  IN RANGE  ${loop_iteration}
-      Log To Console  ${i}th iteration
-      ${invalid_password}=   Catenate  ${OPENBMC_PASSWORD}${i}
+    FOR  ${iter}  IN RANGE  ${loop_iteration}
+      Log To Console  ${iter}th iteration
+      ${invalid_password}=   Catenate  ${OPENBMC_PASSWORD}${iter}
       Run Keyword and Ignore Error
       ...  Open Connection And Log In  ${OPENBMC_USERNAME}  ${invalid_password}
 
       # Every 100th iteration Login with correct credentials
-      ${status}=   Run keyword If  ${i} % ${100} == ${0}  Run Keyword And Return Status
+      ${status}=   Run keyword If  ${iter} % ${100} == ${0}  Run Keyword And Return Status
       ...  Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
       Run Keyword If  ${status} == ${False}  Append To List  ${ssh_status_list}  ${status}
       SSHLibrary.Close Connection
@@ -161,12 +165,12 @@ Test Stability On Large Number Of Wrong Login Attempts To GUI
 
     Go To  ${bmc_url}
 
-    FOR  ${i}  IN RANGE  ${1}  ${iterations}
-        Log To Console  ${i}th login
+    FOR  ${iter}  IN RANGE  ${1}  ${iterations} + 1
+        Log To Console  ${iter}th login
         Run Keyword And Ignore Error  Login to GUI With Wrong Credentials
 
         # Every 100th iteration, check BMC GUI is responsive.
-        ${status}=  Run Keyword If  ${i} % 100 == 0  Run Keyword And Return Status
+        ${status}=  Run Keyword If  ${iter} % 100 == 0  Run Keyword And Return Status
         ...  Open Browser  ${bmc_url}
         Append To List  ${status_list}  ${status}
         Run Keyword If  '${status}' == 'True'
@@ -251,12 +255,15 @@ Test Bmcweb Stability On Continuous Redfish Delete Operation Request Without Ses
 
 Login And Configure Hostname
     [Documentation]  Login and configure hostname
-
+    [Arguments]  ${ethernet_interface_uri}
     [Teardown]  Redfish.Logout
+
+    # Description of argument(s):
+    # ethernet_interface_uri   Network interface URI path.
 
     Redfish.Login
 
-    Redfish.patch  ${REDFISH_NW_PROTOCOL_URI}  body={'HostName': '${hostname}'}
+    Redfish.Patch  ${ethernet_interface_uri}  body={'HostName': '${hostname}'}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
 
