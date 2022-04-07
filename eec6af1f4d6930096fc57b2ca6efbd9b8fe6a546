@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "796ef8e9_7ac0a980",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-07T13:17:08Z",
+      "side": 1,
+      "message": "Append To List  ${username_list} \n  /redfish/v1/AccountService/Accounts/${random_username}",
+      "range": {
+        "startLine": 215,
+        "startChar": 40,
+        "endLine": 215,
+        "endChar": 58
+      },
+      "revId": "eec6af1f4d6930096fc57b2ca6efbd9b8fe6a546",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2274d374_137c5edf",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-07T13:17:08Z",
+      "side": 1,
+      "message": "fix the space",
+      "revId": "eec6af1f4d6930096fc57b2ca6efbd9b8fe6a546",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45e16150_110268e3",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-07T13:17:08Z",
+      "side": 1,
+      "message": "${saved_user_list}",
+      "range": {
+        "startLine": 226,
+        "startChar": 9,
+        "endLine": 226,
+        "endChar": 17
+      },
+      "revId": "eec6af1f4d6930096fc57b2ca6efbd9b8fe6a546",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cefd21b9_22ae6ca7",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-07T13:17:08Z",
+      "side": 1,
+      "message": "Redfish.Delete  ${saved_user_list}",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 30
+      },
+      "revId": "eec6af1f4d6930096fc57b2ca6efbd9b8fe6a546",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
