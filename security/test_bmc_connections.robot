@@ -48,26 +48,28 @@ Test Patch Without Auth Token Fails
 Flood Patch Without Auth Token And Check Stability Of BMC
     [Documentation]  Flood patch method without auth token and check BMC stability.
     [Tags]  Flood_Patch_Without_Auth_Token_And_Check_Stability_Of_BMC
-    @{status_list}=  Create List
+
+    @{fail_list}=  Create List
 
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
-    FOR  ${i}  IN RANGE  ${1}  ${iterations}
+    FOR  ${i}  IN RANGE  ${1}  ${iterations} + 1
         Log To Console  ${i}th iteration
-        Run Keyword And Ignore Error
-        ...  Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body={'HostName': '${hostname}'}
+        # Expected valid fail status response code.
+        Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body={'HostName': '${hostname}'}
+        ...  valid_status_codes=[${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
 
         # Every 100th iteration, check BMC allows patch with auth token.
         ${status}=  Run Keyword If  ${i} % 100 == 0  Run Keyword And Return Status
         ...  Login And Configure Hostname
-        Run Keyword If  ${status} == False  Append To List  ${status_list}  ${status}
+        Run Keyword If  ${status} == False  Append To List  ${fail_list}  ${i}
     END
     ${verify_count}=  Evaluate  ${iterations}/100
-    ${fail_count}=  Get Length  ${status_list}
+    ${fail_count}=  Get Length  ${fail_list}
 
-    Should Be Equal  ${fail_count}  0
-    ...  msg=Patch operation failed ${fail_count} times in ${verify_count} attempts
+    Should Be Equal As Integers  ${fail_count}  ${0}
+    ...  msg=Patch operation failed ${fail_count} times in ${verify_count} attempts; fails at iterations ${fail_list}
 
 
 Verify User Cannot Login After 5 Non-Logged In Sessions
@@ -100,25 +102,27 @@ Flood Post Without Auth Token And Check Stability Of BMC
     [Documentation]  Flood post method without auth token and check BMC stability.
     [Tags]  Flood_Post_Without_Auth_Token_And_Check_Stability_Of_BMC
 
-    @{status_list}=  Create List
+    @{fail_list}=  Create List
+
     ${user_info}=  Create Dictionary
     ...  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
 
-    FOR  ${i}  IN RANGE  ${1}  ${iterations}
+    FOR  ${i}  IN RANGE  ${1}  ${iterations} + 1
         Log To Console  ${i}th iteration
-        Run Keyword And Ignore Error
-        ...  Redfish.Post   /redfish/v1/AccountService/Accounts/  body=&{user_info}
+        # Expected valid fail status response code.
+        Redfish.Post   /redfish/v1/AccountService/Accounts/  body=&{user_info}
+        ...  valid_status_codes=[${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
 
         # Every 100th iteration, check BMC allows post with auth token.
         ${status}=  Run Keyword If  ${i} % 100 == 0  Run Keyword And Return Status
         ...  Login And Create User
-        Run Keyword If  ${status} == False  Append To List  ${status_list}  ${status}
+        Run Keyword If  ${status} == False  Append To List  ${fail_list}  ${i}
     END
     ${verify_count}=  Evaluate  ${iterations}/100
-    ${fail_count}=  Get Length  ${status_list}
+    ${fail_count}=  Get Length  ${fail_list}
 
-    Should Be Equal  ${fail_count}  0
-    ...  msg=Post operation failed ${fail_count} times in ${verify_count} attempts
+    Should Be Equal As Integers  ${fail_count}  ${0}
+    ...  msg=Post operation failed ${fail_count} times in ${verify_count} attempts; fails at iterations ${fail_list}
 
 
 Make Large Number Of Wrong SSH Login Attempts And Check Stability
@@ -161,7 +165,7 @@ Test Stability On Large Number Of Wrong Login Attempts To GUI
 
     Go To  ${bmc_url}
 
-    FOR  ${i}  IN RANGE  ${1}  ${iterations}
+    FOR  ${i}  IN RANGE  ${1}  ${iterations} + 1
         Log To Console  ${i}th login
         Run Keyword And Ignore Error  Login to GUI With Wrong Credentials
 
@@ -252,12 +256,12 @@ Test Bmcweb Stability On Continuous Redfish Delete Operation Request Without Ses
 Login And Configure Hostname
     [Documentation]  Login and configure hostname
 
-    [Teardown]  Redfish.Logout
-
     Redfish.Login
 
     Redfish.patch  ${REDFISH_NW_PROTOCOL_URI}  body={'HostName': '${hostname}'}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    Redfish.Logout
 
 
 Login And Create User
