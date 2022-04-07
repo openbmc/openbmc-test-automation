@@ -999,7 +999,7 @@ Stop PLDM Service And Wait
     BMC Execute Command  systemctl stop pldmd.service
 
     # Check if BMC is still online.
-    Wait Until Keyword Succeeds  5 min  10 sec  Is BMC Unpingable
+    Wait Until Keyword Succeeds  5 min  2 sec  Is BMC Unpingable
 
 
 Get BIOS Attribute
