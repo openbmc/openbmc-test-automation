@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0883888c_b9a0e7e4",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2022-04-08T07:06:45Z",
+      "side": 1,
+      "message": "FOR  ${iter}  IN RANGE  ${iterations} + 1",
+      "revId": "ab9a7f37c5db16b9534c68242ee15de5c84cdc91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5c84fb5_74a18d12",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2022-04-08T07:06:45Z",
+      "side": 1,
+      "message": "Log To Console  ${iter}th Redfish Patch Request without valid session token",
+      "revId": "ab9a7f37c5db16b9534c68242ee15de5c84cdc91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fad4c49_bd5985d5",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2022-04-08T07:06:45Z",
+      "side": 1,
+      "message": "${iter}",
+      "revId": "ab9a7f37c5db16b9534c68242ee15de5c84cdc91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2d5bb70_888a6597",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2022-04-08T07:06:45Z",
+      "side": 1,
+      "message": "Run Keyword If  \u0027${status}\u0027 \u003d\u003d \u0027False\u0027 Append To List  ${fail_list}  ${iter}",
+      "revId": "ab9a7f37c5db16b9534c68242ee15de5c84cdc91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49c15559_1e879b1a",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2022-04-08T07:06:45Z",
+      "side": 1,
+      "message": "FOR  ${iter}  IN RANGE  ${iterations} + 1",
+      "revId": "ab9a7f37c5db16b9534c68242ee15de5c84cdc91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a27f401_1284e3c8",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2022-04-08T07:06:45Z",
+      "side": 1,
+      "message": "Log To Console  ${iter}th Redfish Post Request without valid session token",
+      "revId": "ab9a7f37c5db16b9534c68242ee15de5c84cdc91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1a84edc_746e60e9",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000886
+      },
+      "writtenOn": "2022-04-08T07:06:45Z",
+      "side": 1,
+      "message": "Run Keyword If  \u0027${status}\u0027 \u003d\u003d \u0027False\u0027 Append To List  ${fail_list}  ${iter}",
+      "revId": "ab9a7f37c5db16b9534c68242ee15de5c84cdc91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
