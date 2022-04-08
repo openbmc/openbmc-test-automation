@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a17ed2de_b693dfff",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-08T07:39:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "796ef8e9_7ac0a980",
+      "range": {
+        "startLine": 215,
+        "startChar": 40,
+        "endLine": 215,
+        "endChar": 58
+      },
+      "revId": "eec6af1f4d6930096fc57b2ca6efbd9b8fe6a546",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2274d374_137c5edf",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-04-07T13:17:08Z",
       "side": 1,
       "message": "fix the space",
+      "revId": "eec6af1f4d6930096fc57b2ca6efbd9b8fe6a546",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18117fd5_d3539389",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-08T07:39:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2274d374_137c5edf",
       "revId": "eec6af1f4d6930096fc57b2ca6efbd9b8fe6a546",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -64,6 +106,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55e04d7f_479a179c",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-08T07:39:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45e16150_110268e3",
+      "range": {
+        "startLine": 226,
+        "startChar": 9,
+        "endLine": 226,
+        "endChar": 17
+      },
+      "revId": "eec6af1f4d6930096fc57b2ca6efbd9b8fe6a546",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cefd21b9_22ae6ca7",
@@ -77,6 +143,30 @@
       "writtenOn": "2022-04-07T13:17:08Z",
       "side": 1,
       "message": "Redfish.Delete  ${saved_user_list}",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 30
+      },
+      "revId": "eec6af1f4d6930096fc57b2ca6efbd9b8fe6a546",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0af03b5_ae0fe505",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-08T07:39:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cefd21b9_22ae6ca7",
       "range": {
         "startLine": 227,
         "startChar": 0,
