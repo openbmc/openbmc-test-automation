@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65fff1e0_50dc3a8e",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-04-08T06:33:54Z",
+      "side": 1,
+      "message": "I believe the intention here to do a Power on is to leave the system in earlier state (assuming it was ON before the test did a power off)\n\nSince the system is already powered on, is it necessary to do a power off @line 150? \nGeorge/Rahul, can you please take a look at this and comment?",
+      "range": {
+        "startLine": 129,
+        "startChar": 60,
+        "endLine": 129,
+        "endChar": 73
+      },
+      "revId": "70fca2474883d837ead8c517b6f4b32da78a9af2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
