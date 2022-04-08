@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53e99b3e_c944f70c",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-08T07:30:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0883888c_b9a0e7e4",
+      "revId": "ab9a7f37c5db16b9534c68242ee15de5c84cdc91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5c84fb5_74a18d12",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-04-08T07:06:45Z",
       "side": 1,
       "message": "Log To Console  ${iter}th Redfish Patch Request without valid session token",
+      "revId": "ab9a7f37c5db16b9534c68242ee15de5c84cdc91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bec96c18_179377bb",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-08T07:30:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5c84fb5_74a18d12",
       "revId": "ab9a7f37c5db16b9534c68242ee15de5c84cdc91",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6ab1deb_022df7f8",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-08T07:30:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fad4c49_bd5985d5",
+      "revId": "ab9a7f37c5db16b9534c68242ee15de5c84cdc91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2d5bb70_888a6597",
@@ -65,6 +119,24 @@
       "writtenOn": "2022-04-08T07:06:45Z",
       "side": 1,
       "message": "Run Keyword If  \u0027${status}\u0027 \u003d\u003d \u0027False\u0027 Append To List  ${fail_list}  ${iter}",
+      "revId": "ab9a7f37c5db16b9534c68242ee15de5c84cdc91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d45900a0_ee74f1e9",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-08T07:30:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c2d5bb70_888a6597",
       "revId": "ab9a7f37c5db16b9534c68242ee15de5c84cdc91",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -86,6 +158,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b54f619_46e92fe0",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-08T07:30:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49c15559_1e879b1a",
+      "revId": "ab9a7f37c5db16b9534c68242ee15de5c84cdc91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a27f401_1284e3c8",
@@ -103,6 +193,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea26366f_7e8af77e",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-08T07:30:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a27f401_1284e3c8",
+      "revId": "ab9a7f37c5db16b9534c68242ee15de5c84cdc91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1a84edc_746e60e9",
@@ -116,6 +224,24 @@
       "writtenOn": "2022-04-08T07:06:45Z",
       "side": 1,
       "message": "Run Keyword If  \u0027${status}\u0027 \u003d\u003d \u0027False\u0027 Append To List  ${fail_list}  ${iter}",
+      "revId": "ab9a7f37c5db16b9534c68242ee15de5c84cdc91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de7f9b55_d39a8c07",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-08T07:30:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1a84edc_746e60e9",
       "revId": "ab9a7f37c5db16b9534c68242ee15de5c84cdc91",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
