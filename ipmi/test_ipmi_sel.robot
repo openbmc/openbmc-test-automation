@@ -26,9 +26,18 @@ Verify IPMI SEL Version
 
 
 Verify Empty SEL
-    [Documentation]  Verify empty SEL list.
+    [Documentation]  Verify IPMI sel clear command clears the SEL entry.
     [Tags]  Verify_Empty_SEL
 
+    # Generate an error log and verify there is one atleast.
+    Create Test PEL Log
+    ${resp}=  Run IPMI Standard Command  sel elist last 1
+    Log To Console  ${resp}
+
+    Should Contain Any  ${resp}  system hardware failure   Asserted
+    ...  msg=Add SEL Entry failed.
+
+    # Send SEL clear command and verify if it really clears up the SEL entry.
     Run IPMI Standard Command  sel clear
     Sleep  5s
 
