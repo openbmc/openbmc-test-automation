@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d104cf0a_cd5db28d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-08T14:06:44Z",
+      "side": 1,
+      "message": "\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nTest Ipmi Sel :: Module to test IPMI SEL functionality.\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nVerify Empty SEL :: Verify IPMI sel clear clears the SEL(s).          #(CDT) 2022/04/08 08:59:41.335657 -    0.718039 - Issuing: busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging     xyz.openbmc_project.Logging.Create Create ssa{ss} org.open_power.Logging.Error.TestError1     xyz.openbmc_project.Logging.Entry.Level.Error 0\n.#(CDT) 2022/04/08 08:59:42.761024 -    0.018824 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U root -P xxxxxxxx -H xx.xx.xx.xx sel elist last 1\n.   1 | 04/08/2022 | 14:00:13 | System Event #0x01 | Undetermined system hardware failure | Asserted\n..#(CDT) 2022/04/08 08:59:50.315956 -    7.554932 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U root -P xxxxxxxx -H xx.xx.xx.xx sel clear\n..#(CDT) 2022/04/08 08:59:55.686636 -    5.370680 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U root -P xxxxxxxx -H xx.xx.xx.xx sel list\nVerify Empty SEL :: Verify IPMI sel clear clears the SEL(s).          | PASS |\n------------------------------------------------------------------------------\nTest Ipmi Sel :: Module to test IPMI SEL functionality.               | PASS |\n1 test, 1 passed, 0 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n",
+      "revId": "d3498670191a786277884ca0241b062944be836c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
