@@ -167,7 +167,7 @@ Test Stability On Large Number Of Wrong Login Attempts To GUI
 
     FOR  ${iter}  IN RANGE  ${1}  ${iterations} + 1
         Log To Console  ${iter}th login
-        Run Keyword And Ignore Error  Login to GUI With Wrong Credentials
+        Run Keyword And Ignore Error  Login to GUI With Incorrect Credentials
 
         # Every 100th iteration, check BMC GUI is responsive.
         ${status}=  Run Keyword If  ${iter} % 100 == 0  Run Keyword And Return Status
@@ -303,7 +303,7 @@ Set Account Lockout Threshold
 
 
 Login to GUI With Incorrect Credentials
-    [Documentation]  Login to GUI With Wrong Credentials.
+    [Documentation]  Login to GUI with wrong credentials.
 
     Input Text  ${xpath_textbox_username}  root
     Input Password  ${xpath_textbox_password}  incorrect_password
