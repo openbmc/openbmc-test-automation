@@ -303,7 +303,7 @@ Set Account Lockout Threshold
 
 
 Login to GUI With Incorrect Credentials
-    [Documentation]  Login to GUI with wrong credentials.
+    [Documentation]  Attempt to login to GUI as root, providing incorrect password argument.
 
     Input Text  ${xpath_textbox_username}  root
     Input Password  ${xpath_textbox_password}  incorrect_password
