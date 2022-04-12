@@ -45,6 +45,9 @@ HOST_STATE_URI = OPENBMC_BASE_URI + 'state/host0/'
 CHASSIS_STATE_URI = OPENBMC_BASE_URI + 'state/chassis0/'
 HOST_WATCHDOG_URI = OPENBMC_BASE_URI + 'watchdog/host0/'
 
+# OS state for x86 architecture
+OS_STATE_URI = OPENBMC_BASE_URI + 'state/os/'
+
 # Logging URI variables
 BMC_LOGGING_URI = OPENBMC_BASE_URI + 'logging/'
 BMC_LOGGING_ENTRY = BMC_LOGGING_URI + 'entry/'
