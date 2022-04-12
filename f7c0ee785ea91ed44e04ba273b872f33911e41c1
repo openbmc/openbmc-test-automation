@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03362239_d703f574",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000294
+      },
+      "writtenOn": "2022-04-12T04:53:18Z",
+      "side": 1,
+      "message": "Hi George,\nCould you help to review this commit? Thanks a lot.\n\nSincerely,\nTim",
+      "revId": "f7c0ee785ea91ed44e04ba273b872f33911e41c1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
