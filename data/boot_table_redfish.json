@@ -320,6 +320,7 @@
         },
         "end": {
             "redfish": "^1$",
+            "bmc": "^Enabled$",
             "chassis": "^On$",
             "boot_progress": "^SystemHardwareInitializationComplete|OSBootStarted|OSRunning$",
             "host": "^Enabled$",
@@ -339,6 +340,7 @@
         },
         "end": {
             "redfish": "^1$",
+            "bmc": "^Enabled$",
             "chassis": "^Off$",
             "boot_progress": "^None$",
             "host": "^Disabled$"
@@ -360,6 +362,7 @@
         },
         "end": {
             "redfish": "^1$",
+            "bmc": "^Enabled$",
             "chassis": "^On$",
             "boot_progress": "^SystemHardwareInitializationComplete|OSBootStarted|OSRunning$",
             "host": "^Enabled$",
@@ -379,6 +382,7 @@
         },
         "end": {
             "redfish": "^1$",
+            "bmc": "^Enabled$",
             "chassis": "^Off$",
             "boot_progress": "^None$",
             "host": "^Disabled$"
