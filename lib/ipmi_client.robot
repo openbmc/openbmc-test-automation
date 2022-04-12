@@ -94,7 +94,7 @@ Run Dbus IPMI Standard Command
 
 Run Inband IPMI Raw Command
     [Documentation]  Run the raw IPMI command in-band.
-    [Arguments]  ${command}  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
+    [Arguments]  ${command}  ${fail_on_err}=${1}  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
     ...          ${os_password}=${OS_PASSWORD}
 
     # Description of argument(s):
@@ -110,6 +110,7 @@ Run Inband IPMI Raw Command
     ${ipmi_cmd}=  Catenate  ${IPMI_INBAND_CMD}  ${RAW}  ${command}
     Qprint Issuing  ${ipmi_cmd}
     ${stdout}  ${stderr}=  Execute Command  ${ipmi_cmd}  return_stderr=True
+    Return From Keyword If  ${fail_on_err} == ${0}  ${stderr}
     Should Be Empty  ${stderr}  msg=${stdout}
     [Return]  ${stdout}
 

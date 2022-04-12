@@ -132,7 +132,15 @@ IPMI_RAW_CMD = {
             "0x0c 0x02",
             "11 02",
             "11 is Parameter revision, 02 is Configuration parameter data e.g. Cipher Suite Entry count",
-        ]
+        ],
+        'Set':
+        [
+            # raw command, expected output, error response
+            "0x0c 0x01",
+            "11 00",
+            "Unknown (0x82)",
+            "Invalid data field in request",
+        ],
     },
     'Payload':
     {
