@@ -16,6 +16,29 @@
       "message": "Hi George,\nCould you help to review this commit? Thanks a lot.\n\nSincerely,\nTim",
       "revId": "f7c0ee785ea91ed44e04ba273b872f33911e41c1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad5216e8_7f807606",
+        "filename": "data/variables.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-12T07:48:01Z",
+      "side": 1,
+      "message": "Can u add a note here for reference\n\n# OS state for x86 arch.  something like that.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 45
+      },
+      "revId": "f7c0ee785ea91ed44e04ba273b872f33911e41c1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
