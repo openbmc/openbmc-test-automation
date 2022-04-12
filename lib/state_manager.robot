@@ -113,6 +113,9 @@ Get Host State Attribute
     # host_attribute   Host attribute name.
     # quiet            Suppress REST output logging to console.
 
+    ${HOST_STATE_URI}=  Set Variable If  '${PLATFORM_ARCH_TYPE}' == 'x86' and '${host_attribute}' == 'OperatingSystemState'
+    ...  ${OS_STATE_URI}  ${HOST_STATE_URI}
+
     ${state}=
     ...  Read Attribute  ${HOST_STATE_URI}  ${host_attribute}  quiet=${quiet}
     [Return]  ${state}
