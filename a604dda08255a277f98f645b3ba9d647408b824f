@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0033e15a_180de345",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-12T15:55:38Z",
+      "side": 1,
+      "message": "for each",
+      "range": {
+        "startLine": 152,
+        "startChar": 36,
+        "endLine": 152,
+        "endChar": 44
+      },
+      "revId": "a604dda08255a277f98f645b3ba9d647408b824f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c73cad11_4d5d3292",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-12T15:55:38Z",
+      "side": 1,
+      "message": "total record count",
+      "range": {
+        "startLine": 155,
+        "startChar": 15,
+        "endLine": 155,
+        "endChar": 33
+      },
+      "revId": "a604dda08255a277f98f645b3ba9d647408b824f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25fc2368_8a3a8303",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-12T15:55:38Z",
+      "side": 1,
+      "message": "end with period \".\" and do same for the others comments one",
+      "range": {
+        "startLine": 163,
+        "startChar": 18,
+        "endLine": 163,
+        "endChar": 25
+      },
+      "revId": "a604dda08255a277f98f645b3ba9d647408b824f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3485c84e_56d2915d",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-12T15:55:38Z",
+      "side": 1,
+      "message": "Very good explanation documentation. Thank you,",
+      "range": {
+        "startLine": 168,
+        "startChar": 6,
+        "endLine": 172,
+        "endChar": 55
+      },
+      "revId": "a604dda08255a277f98f645b3ba9d647408b824f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46409c43_553f2d36",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-12T15:55:38Z",
+      "side": 1,
+      "message": "Remove extra spaces",
+      "range": {
+        "startLine": 197,
+        "startChar": 7,
+        "endLine": 197,
+        "endChar": 10
+      },
+      "revId": "a604dda08255a277f98f645b3ba9d647408b824f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32599fe1_17967072",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-12T15:55:38Z",
+      "side": 1,
+      "message": "Can u fix these statement. remove those caps for each words here. Thanks",
+      "range": {
+        "startLine": 201,
+        "startChar": 19,
+        "endLine": 201,
+        "endChar": 89
+      },
+      "revId": "a604dda08255a277f98f645b3ba9d647408b824f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71be8db2_235f30fa",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-12T15:55:38Z",
+      "side": 1,
+      "message": "end with period for statement in comment please \".\"  and for the others too in the comment here in new code",
+      "range": {
+        "startLine": 204,
+        "startChar": 61,
+        "endLine": 204,
+        "endChar": 70
+      },
+      "revId": "a604dda08255a277f98f645b3ba9d647408b824f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26d07eba_4cf11b5c",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-12T15:55:38Z",
+      "side": 1,
+      "message": "remove extra spaces",
+      "range": {
+        "startLine": 234,
+        "startChar": 55,
+        "endLine": 234,
+        "endChar": 56
+      },
+      "revId": "a604dda08255a277f98f645b3ba9d647408b824f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca6ec78e_49826e8d",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-12T15:55:38Z",
+      "side": 1,
+      "message": "Is this statement correct ? via KCS",
+      "range": {
+        "startLine": 235,
+        "startChar": 61,
+        "endLine": 235,
+        "endChar": 78
+      },
+      "revId": "a604dda08255a277f98f645b3ba9d647408b824f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
