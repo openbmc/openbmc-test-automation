@@ -111,7 +111,15 @@ IPMI_RAW_CMD = {
             "0x0c 0x02",
             "11 02",
             "11 is Parameter revision, 02 is Configuration parameter data e.g. Cipher Suite Entry count",
-        ]
+        ],
+        'Set':
+        [
+            # raw command, expected output, Invalid response for set in Authentication Type and invalid data response for Mac address
+            "0x0c 0x01",
+            "11 00",
+            "Unable to send RAW command (channel=0x0 netfn=0xc lun=0x0 cmd=0x1 rsp=0x82): Unknown (0x82)",
+            "Unable to send RAW command (channel=0x0 netfn=0xc lun=0x0 cmd=0x1 rsp=0xcc): Invalid data field in request",
+        ],
     },
     'Payload':
     {
