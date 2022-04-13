@@ -973,11 +973,23 @@ Redfish Initiate Auto Reboot
     Redfish Set Auto Reboot  RetryAttempts
 
     Redfish Power Operation  On
-    Sleep  30s
+
+    Wait Until Keyword Succeeds  2 min  5 sec  Is Boot Progress Changed
 
     # Set watchdog timer
     Set Watchdog Interval Using Busctl  ${interval}
 
+
+Is Boot Progress Changed
+    [Documentation]  Get BootProgress state and expect boot state mismatch.
+    [Arguments]  ${boot_state}=None
+
+    # Description of argument(s):
+    # boot_state   Value of the BootProgress state to match against.
+
+    ${boot_progress}  ${host_state}=  Redfish Get Boot Progress
+
+    Should Not Be Equal  ${boot_progress}   ${boot_state}
 
 
 Set Watchdog Interval Using Busctl
