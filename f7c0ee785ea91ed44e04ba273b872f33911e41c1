@@ -39,6 +39,30 @@
       },
       "revId": "f7c0ee785ea91ed44e04ba273b872f33911e41c1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "000c14ff_56a349d3",
+        "filename": "data/variables.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000294
+      },
+      "writtenOn": "2022-04-13T01:31:26Z",
+      "side": 1,
+      "message": "George, Thanks your review and suggestion. I\u0027ve modified it. Thank you",
+      "parentUuid": "ad5216e8_7f807606",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 45
+      },
+      "revId": "f7c0ee785ea91ed44e04ba273b872f33911e41c1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
