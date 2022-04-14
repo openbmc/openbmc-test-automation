@@ -1,7 +1,7 @@
 *** Settings ***
 Library           Collections
 Library           String
-Library           RequestsLibrary.RequestsKeywords
+Library           RequestsLibrary
 Library           OperatingSystem
 Resource          resource.robot
 Library           disable_warning_urllib.py

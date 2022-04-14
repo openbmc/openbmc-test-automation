@@ -2,7 +2,7 @@
 Documentation           Synaccess Protocol Distribution Unit (PDU) library
 
 Resource        ../../lib/pdu/pdu.robot
-Library         RequestsLibrary.RequestsKeywords
+Library         RequestsLibrary
 
 *** Keywords ***
 Connect and Login
