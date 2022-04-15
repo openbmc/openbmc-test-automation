@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fb3ecef_8dc6e905",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000294
+      },
+      "writtenOn": "2022-04-15T03:06:45Z",
+      "side": 1,
+      "message": "Hi George,\nAlso need your help to review commit. Thanks a lot.\n\nBest regards,\nTim",
+      "revId": "3ec266fd6f4e79b785ca81d7511a43fd1f53a873",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
