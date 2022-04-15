@@ -311,3 +311,9 @@ Redfish Purge Event Log
     Redfish.Post  ${target_action}  body={'target': '${target_action}'}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
+
+Event Log Should Not Exist
+    [Documentation]  Event log entries should not exist.
+
+    ${elogs}=  Get Event Logs
+    Should Be Empty  ${elogs}  msg=System event log entry is not empty.

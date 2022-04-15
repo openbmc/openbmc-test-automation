@@ -61,7 +61,7 @@ Get Thermal Records and Verify
     ...  Rprint Vars  num_invalid_records  invalid_records
     Valid Value   num_invalid_records  valid_values=[0]
 
-    Error Logs Should Not Exist
+    Event Log Should Not Exist
 
 
 Suite Teardown Execution
