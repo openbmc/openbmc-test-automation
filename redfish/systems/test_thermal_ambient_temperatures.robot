@@ -31,7 +31,10 @@ Reboot And Check Ambient Temperature Records Are Valid
     [Tags]  Reboot_And_Check_Ambient_Temperature_Records_Are_Valid
 
     Redfish OBMC Reboot (run)
+
+    # Clear errors if there are any.
     Redfish.Login
+    Redfish Purge Event Log
 
     Get Thermal Records and Verify  Temperatures  ReadingCelsius
 
