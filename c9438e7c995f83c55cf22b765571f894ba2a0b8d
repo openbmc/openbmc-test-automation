@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "591d6c65_dcd82463",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000294
+      },
+      "writtenOn": "2022-04-18T09:09:26Z",
+      "side": 1,
+      "message": "Hi George,\nWhen we running full automation test yesterday, we found this symptom and provide our suggestion.\nPlease help us to review it again. Thanks in advance.\n\nBest regards,\nTim",
+      "revId": "c9438e7c995f83c55cf22b765571f894ba2a0b8d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
