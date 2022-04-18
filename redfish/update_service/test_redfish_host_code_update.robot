@@ -72,7 +72,7 @@ Suite Setup Execution
 
 
 Redfish Update Firmware
-    [Documentation]  Update the BMC firmware via redfish interface.
+    [Documentation]  Update the Host firmware via redfish interface.
     [Arguments]  ${apply_time}
 
     # Description of argument(s):
