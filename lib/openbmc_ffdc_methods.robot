@@ -17,6 +17,7 @@ Library                gen_cmd.py
 Library                gen_robot_keyword.py
 Library                dump_utils.py
 Library                logging_utils.py
+Library                ffdc_class.py
 
 *** Variables ***
 
@@ -605,7 +606,7 @@ Enumerate Redfish Resources
     Return From Keyword If   ${status} == ${False}
 
     # Get the Redfish resources and properties.
-    ${json_data}=  redfish_utils.Enumerate Request  ${enum_uri}
+    ${json_data}=  ffdc_class.Enumerate Multi Proc Request  ${enum_uri}
     # Typical output:
     # {
     #  "@odata.id": "/redfish/v1",
