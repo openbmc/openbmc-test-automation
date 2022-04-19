@@ -376,5 +376,13 @@ IPMI_RAW_CMD = {
             "none",
             "Reset watchdog timer without initialized watchdog",
         ]
-    }
+    },
+    'Get Channel Auth Cap':
+    {
+        'get':
+        [
+            # raw command
+            "0x06 0x38",
+        ]
+    },
 }
