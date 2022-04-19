@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2ff6328_340af00d",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-19T14:23:59Z",
+      "side": 1,
+      "message": "u should separate them in to two test cases\n\n1. IPMI\n2. SSH \n\ndo for other test cases newly added",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 32
+      },
+      "revId": "40ce284cb43fc4d3d530947c6c0bf2b6af692e89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "264ca81b_f91a93a1",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-19T14:23:59Z",
+      "side": 1,
+      "message": "persist term we use if we effect something that could cause change like reboot/AC cycle..  so  use\n\nsetting attribute value is boolean False.",
+      "range": {
+        "startLine": 215,
+        "startChar": 38,
+        "endLine": 215,
+        "endChar": 46
+      },
+      "revId": "40ce284cb43fc4d3d530947c6c0bf2b6af692e89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
