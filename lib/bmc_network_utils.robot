@@ -688,6 +688,22 @@ Get Valid Channel Number
 
     [Return]  ${valid_channel_number_interface_name}
 
+Get Invalid Channel Number
+	[Documentation]  Get Invalid Channel and return as list.
+
+	${available_channels}=  Get Channel Number For All Interface
+	## Get the channel which medium_type = reserved and append it to a list.
+	@{invlaid_channel_number_list}=  Create List
+
+	FOR  ${channel_number}  ${values}  IN  &{available_channels}
+
+	Run Keyword If  '${values['channel_info']['medium_type']}' == 'reserved'
+	...  Append To List  ${invlaid_channel_number_list}  ${channel_number}
+	END
+
+	[Return]  ${invlaid_channel_number_list}
+
+
 Get Channel Number For Valid Ethernet Interface
     [Documentation]  Get channel number for all ethernet interface.
     [Arguments]  ${valid_channel_number_interface_name}
@@ -704,8 +720,22 @@ Get Channel Number For Valid Ethernet Interface
 
     [Return]  ${channel_number_list}
 
+
+Get Current Channel Name
+    [Documentation]  Get Current Channel name and append it to active channel list.
+    [Arguments]  ${channel_list}  ${channel_config_json}
+
+    FOR  ${channel_number}  ${values}  IN  &{channel_config_json}
+        Run Keyword If  '${values['name']}' == 'SELF'
+        ...  Run Keyword  Append To List  ${channel_list}  ${channel_number}
+    END
+
+    [Return]  ${channel_list}
+
+
 Get Active Ethernet Channel List
     [Documentation]  Get Available Channel.
+    [Arguments]  ${current_channel}=${0}
 
     ${valid_channel_number_interface_names}=  Get Channel Number For All Interface
 
@@ -713,5 +743,8 @@ Get Active Ethernet Channel List
 
     ${channel_number_list}=  Get Channel Number For Valid Ethernet Interface
     ...  ${valid_channel_number_interface_name}
+
+    Return From Keyword If  ${current_channel} == 0  ${channel_number_list}
+    ${channel_number_list}=  Get Current Channel Name  ${channel_number_list}  ${valid_channel_number_interface_names}
 
     [Return]  ${channel_number_list}
