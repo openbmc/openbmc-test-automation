@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20a7f83a_a34c82d7",
+        "filename": "systest/htx_softbootme_test.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2022-04-19T16:58:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f07700c9_75ae04d5",
+      "range": {
+        "startLine": 57,
+        "startChar": 16,
+        "endLine": 57,
+        "endChar": 20
+      },
+      "revId": "58165642bf5c45115bf0452542adb8803927d028",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e544a5d5_f988ffbf",
