@@ -594,4 +594,16 @@ IPMI_RAW_CMD = {
             "0x06 0x38",
         ]
     },
+    'Cipher Suite':
+    {
+        'get':
+        [
+            # raw command, supported algorithm
+            "0x06 0x54",
+            "03 44 81",
+            # 03 - HMAC-SHA256
+            # 44 - sha256_128
+            # 81 - aes_cbc_128
+        ]
+    },
 }

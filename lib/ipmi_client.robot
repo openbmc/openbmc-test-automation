@@ -560,3 +560,16 @@ Get SEL Info Via IPMI
     ${resp}=  Split String  ${resp}
 
     [Return]  ${resp}
+
+
+Verify Invalid IPMI Command
+    [Documentation]  Execute invalid IPMI command and verify with given response code.
+    [Arguments]  ${ipmi_cmd}  ${error_code}=0xc9
+
+    #  Description Of Arguments.
+    #  ${ipmi_cmd}   - IPMI raw cmd with invalid data length.
+    #  ${error_code} - Expected error code e.g 0xc7, 0xcc.
+
+    ${resp}=  Run External IPMI Raw Command  ${ipmi_cmd}  fail_on_err=0
+
+    Should Contain  ${resp}  rsp=${error_code}
