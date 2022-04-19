@@ -250,3 +250,18 @@ def min_list_value(value_list):
     Returns the element from the list with minimum value.
     """
     return min(value_list)
+
+
+def convert_lsb_to_msb(string):
+    datalist = string.split(" ")
+    new_list = datalist[::-1]
+    new_string = "".join([str(element) for element in new_list])
+    return int(new_string, 16)
+
+
+def add_prefix_to_string(string, prefix):
+    prefix_string = ''
+    data_list = string.strip().split(" ")
+    for item in data_list:
+        prefix_string += prefix + item + ' '
+    return prefix_string.strip()

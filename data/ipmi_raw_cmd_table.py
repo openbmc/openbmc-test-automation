@@ -585,5 +585,44 @@ IPMI_RAW_CMD = {
                 "Invalid data field in request",
             ]
         }
-    }
+    },
+    'SDR':
+    {
+        'Get':
+        [
+            # Get sdr raw command without Reservation ID.
+            "0x0a 0x23 0x00 0x00 0x00 0x00 0x00 0xff",
+            # Netfunction and cmd.
+            "0x0a 0x23",
+            # Record ID offset and bytes to read.
+            "0x00 0x00 0x01 0x0f",
+            #  Raw command To Get SDR Partial without reservation id.
+            "0x0a 0x23 0x00 0x00 0x00 0x00 0x01 0x0f"
+        ],
+        'Reserve SDR Repository':
+        [
+            # raw command, expected output(s), comment
+            "0x0a 0x22",
+        ],
+        'SDR Repository Info':
+        [
+            # raw command.
+            "0x0a 0x20",
+        ],
+        'Get SDR allocation Info':
+        [
+            # raw command.
+            "0x0a 0x21"
+        ],
+        'Delete SDR':
+        [
+            # raw command.
+            "0x0a 0x26"
+        ],
+        'Partially Add SDR':
+        [
+            # raw command.
+            "0x0a 0x25"
+        ]
+    },
 }
