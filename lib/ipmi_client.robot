@@ -559,3 +559,12 @@ Get SEL Info Via IPMI
     ${resp}=  Split String  ${resp}
 
     [Return]  ${resp}
+
+
+Verify Invalid IPMI cmd
+    [Documentation]  Execute invalid ipmi cmd and expects given response code.
+    [Arguments]  ${ipmi_cmd}  ${error_code}=0xc9
+
+    ${resp}=  Run External IPMI Raw Command  ${ipmi_cmd}  fail_on_err=0
+
+    Should Contain  ${resp}  rsp=${error_code}
