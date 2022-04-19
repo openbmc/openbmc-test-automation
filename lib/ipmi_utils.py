@@ -691,7 +691,7 @@ def get_user_access_ipmi(channel_number=1):
     return vf.outbuf_to_report(stdout)
 
 
-def get_channel_auth_capabilities(channel_number=1):
+def get_channel_auth_capabilities(channel_number=1, privilege_level=4):
     r"""
     Get the channel authentication capabilities and return as a dictionary.
 
@@ -711,7 +711,8 @@ def get_channel_auth_capabilities(channel_number=1):
     """
 
     status, ret_values = \
-        grk.run_key_u("Run IPMI Standard Command  channel authcap " + str(channel_number) + " 4")
+        grk.run_key_u("Run IPMI Standard Command  channel authcap " + str(channel_number) + " "
+                + str(privilege_level))
     result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
 
     return result
