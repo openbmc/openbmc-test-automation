@@ -585,5 +585,13 @@ IPMI_RAW_CMD = {
                 "Invalid data field in request",
             ]
         }
-    }
+    },
+    'Get Channel Auth Cap':
+    {
+        'get':
+        [
+            # raw command
+            "0x06 0x38",
+        ]
+    },
 }
