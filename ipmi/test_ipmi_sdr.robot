@@ -7,6 +7,8 @@ Resource               ../lib/openbmc_ffdc.robot
 Resource               ../lib/boot_utils.robot
 Resource               ../lib/bmc_redfish_resource.robot
 Library                ../lib/ipmi_utils.py
+Library                ../lib/utilities.py
+Variables              ../data/ipmi_raw_cmd_table.py
 
 Suite setup             Suite Setup Execution
 Suite Teardown          Redfish.Logout
@@ -33,6 +35,16 @@ Verify SDR Info
     # Reserve SDR repository supported    : no
     # SDR Repository Alloc info supported : no
 
+    # Check delete, partially add, reserve sdr and get sdr alloc info cmd are supported or not.
+    ${support_delete_sdr}=  Check IPMI Command Support
+    ...  ${IPMI_RAW_CMD['SDR']['Delete SDR'][0]}
+    ${support_partial_add}=  Check IPMI Command Support
+    ...  ${IPMI_RAW_CMD['SDR']['Partially Add SDR'][0]}
+    ${support_reserve_sdr_repository}=  Check IPMI Command Support
+    ...  ${IPMI_RAW_CMD['SDR']['Reserve SDR Repository'][0]}
+    ${support_sdr_repository_alloc_info}=  Check IPMI Command Support
+    ...  ${IPMI_RAW_CMD['SDR']['Get SDR allocation Info'][0]}
+
     ${sdr_info}=  Get SDR Info
     Should Be Equal  ${sdr_info['sdr_version']}  0x51
 
@@ -42,14 +54,14 @@ Verify SDR Info
     ...  ${sdr_info['record_count']}  ${sensor_count}
 
     Should Be Equal  ${sdr_info['free_space']}  unspecified
-    Should Be Equal  ${sdr_info['most_recent_addition']}  ${EMPTY}
-    Should Be Equal  ${sdr_info['most_recent_erase']}  ${EMPTY}
-    Should Be Equal  ${sdr_info['sdr_overflow']}  no
+    Should Not Be Equal  ${sdr_info['most_recent_addition']}  ${EMPTY}
+    Should Not Be Equal  ${sdr_info['most_recent_erase']}  ${EMPTY}
+    Should Be Equal  ${sdr_info['sdr_overflow']}  yes
     Should Be Equal  ${sdr_info['sdr_repository_update_support']}  unspecified
-    Should Be Equal  ${sdr_info['delete_sdr_supported']}  no
-    Should Be Equal  ${sdr_info['partial_add_sdr_supported']}  no
-    Should Be Equal  ${sdr_info['reserve_sdr_repository_supported']}  no
-    Should Be Equal  ${sdr_info['sdr_repository_alloc_info_supported']}  no
+    Should Be Equal  ${sdr_info['delete_sdr_supported']}  ${support_delete_sdr}
+    Should Be Equal  ${sdr_info['partial_add_sdr_supported']}  ${support_partial_add}
+    Should Be Equal  ${sdr_info['reserve_sdr_repository_supported']}  ${support_reserve_sdr_repository}
+    Should Be Equal  ${sdr_info['sdr_repository_alloc_info_supported']}  ${support_sdr_repository_alloc_info}
 
 
 Test CPU Core SDR Info At Power On
@@ -146,8 +158,89 @@ Test TPM Enable SDR Info
     ...  ELSE IF  '${state_ipmi}' == 'State Asserted'
     ...    Should Be True  ${state_rest} == ${1}
 
+Test Reserve SDR Respository
+    [Documentation]  Verify Reserve SDR Respository IPMI cmd.
+    [Tags]  Test_Reserve_SDR_Respository
+
+    ${reservation_id}=  Get Reservation ID  convert_lsb_to_msb=True
+
+    ## Getting another Reservation Id and verify it is different from previous Reservation ID.
+    ${new_reservation_id}=  Get Reservation ID  convert_lsb_to_msb=True
+
+    Should Not Be Equal  ${reservation_id}  ${new_reservation_id}
+
+Test Get SDR Using Reservation ID
+   [Documentation]  Verify Get SDR command using Reservation ID got from Reserve SDR Repository.
+   [Tags]  Test_Get_SDR_Using_Reservation_ID
+
+   ${reservation_id}=  Get Reservation ID  add_prefix=True
+
+   ## Get SDR full without using Reservation ID.
+   Run External IPMI Raw Command  ${IPMI_RAW_CMD['SDR']['Get'][0]}
+
+   ## Get SDR Partially using Reservation ID.
+   ${get_sdr_raw_cmd}=  Catenate
+   ...  ${IPMI_RAW_CMD['SDR']['Get'][1]} ${reservation_id} ${IPMI_RAW_CMD['SDR']['Get'][2]}
+   Run External IPMI Raw Command  ${get_sdr_raw_cmd}
+
+   ## Get SRD Partially without using Reservation ID and expect Error.
+   Verify Invalid IPMI cmd  ${IPMI_RAW_CMD['SDR']['Get'][3]}  0xc5
+
+
+Test Get SDR Using Invalid Reservation ID
+    [Documentation]  Verify Get SDR command using Invalid Reservation ID.
+    [Tags]  Test_Get_SDR_Using_Invalid_Reservation_ID
+
+    ## Generate two reservation ID and veriy the Get SDR partial using the old reservation ID.
+    ${first_reservation_id}=  Get Reservation ID  add_prefix=True
+    ${second_reservation_id}=  Get Reservation ID  add_prefix=True
+
+    ## Creating the raw cmd with First reservation ID.
+    ${get_sdr_raw_cmd}=  Catenate
+    ...  ${IPMI_RAW_CMD['SDR']['Get'][1]} ${first_reservation_id} ${IPMI_RAW_CMD['SDR']['Get'][2]}
+
+    Verify Invalid IPMI cmd  ${get_sdr_raw_cmd}  0xc5
+
+Test Reserve SDR Repository After BMC Reboot
+    [Documentation]  verify reserve SDR repository resevation id after BMC Reboot.
+    [Tags]  Test_Reserve_SDR_Repository_After_BMC_Reboot
+
+    ##  Get Reservation Id before reboot.
+    ${reservation_id_before_reboot}=  Get Reservation ID  add_prefix=True
+
+    Run External IPMI Raw Command  ${IPMI_RAW_CMD['Cold Reset']['reset'][0]}
+    Wait Until Keyword Succeeds  2 min  5 sec  Is BMC Unpingable
+    Wait Until Keyword Succeeds  3 min  10 sec  Is BMC Operational
+
+    ## Create Get SDR Partially command using reservation ID which got before reboot.
+    ${get_sdr_raw_cmd}=  Catenate
+    ...  ${IPMI_RAW_CMD['SDR']['Get'][1]} ${reservation_id_before_reboot} ${IPMI_RAW_CMD['SDR']['Get'][2]}
+
+    Verify Invalid IPMI cmd  ${get_sdr_raw_cmd}  0xc5
+
+    ##  Verify Get SDR Partially with new reservation ID after Reboot.
+    ${reservation_id_after_reboot}=  Get Reservation ID  add_prefix=True
+    ${get_sdr_raw_cmd}=  Catenate
+    ...  ${IPMI_RAW_CMD['SDR']['Get'][1]} ${reservation_id_after_reboot} ${IPMI_RAW_CMD['SDR']['Get'][2]}
+    Run External IPMI Raw Command  ${get_sdr_raw_cmd}
+
 
 *** Keywords ***
+
+Get Reservation ID
+    [Documentation]  Get Reservation Id using Reserve SDR Repository.
+    [Arguments]  ${add_prefix}=False  ${convert_lsb_to_msb}=False
+
+    ${reservation_id}=  Run External IPMI Raw Command
+    ...  ${IPMI_RAW_CMD['SDR']['Reserve SDR Repository'][0]}
+
+    ${reservation_id}=  Run Keyword If  ${add_prefix}
+    ...  Add Prefix To String  ${reservation_id}  0x
+    ...  ELSE IF  ${convert_lsb_to_msb}
+    ...  Convert LSB To MSB  ${reservation_id}
+
+    [Return]  ${reservation_id}
+
 
 Get Sensor Count
     [Documentation]  Get sensors count using "sdr elist all" command.
@@ -281,6 +374,18 @@ Test SDR Info
       Log To Console  ${component_name}
       Verify SDR  ${component_name}
     END
+
+Check IPMI Command Support
+    [Documentation]  Check given ipmi command supported or not and return yes if cmd is supported
+    ...  else it will return no.
+    [Arguments]  ${ipmi_cmd}
+
+    ${resp}=  Run External IPMI Raw Command  ${ipmi_cmd}  fail_on_err=0
+    ${resp_code_match}=  Get Regexp Matches  ${resp}  rsp=0xc1
+
+    ${cmd_support}=  Set Variable If  ${resp_code_match} != []  no  yes
+
+    [Return]  ${cmd_support}
 
 
 Suite Setup Execution
