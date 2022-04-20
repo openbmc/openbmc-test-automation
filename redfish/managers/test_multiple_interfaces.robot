@@ -3,8 +3,6 @@ Documentation   Test BMC multiple network interface functionalities.
 
 # User input BMC IP for the eth1.
 # Use can input as  -v OPENBMC_HOST_1:xx.xxx.xx from command line.
-Library         ../../lib/bmc_redfish.py  https://${OPENBMC_HOST_1}:${HTTPS_PORT}
-...             ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  WITH NAME  Redfish1
 
 Resource        ../../lib/resource.robot
 Resource        ../../lib/common_utils.robot
@@ -143,6 +141,16 @@ Verify Able To Load Certificates Via Eth1 IP Address
     # cert_type  cert_format                         expected_status
     CA           Valid Certificate                   ok
     Client       Valid Certificate Valid Privatekey  ok
+
+Create Redfish User On Eth0 And Verify On Eth1
+    [Documentation]  Create Redfish User On Eth0 And Verify On Eth1
+    [Tags]  Create_Redfish_User_On_Eth0_And_Verify_On_Eth1
+
+    # Create Redfish users and check on eth1
+
+    Redfish Create User             admin_user     TestPwd123  Administrator   ${True}
+    Redfish Verify User Via Eth1    admin_user     TestPwd123  Administrator   ${True}
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
 
 *** Keywords ***
 
