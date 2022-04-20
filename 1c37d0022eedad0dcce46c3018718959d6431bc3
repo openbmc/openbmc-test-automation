@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0e85f50_5a7830e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2022-04-20T12:53:37Z",
+      "side": 1,
+      "message": "Nice code. Has it been tested to see if ffdc performance has improved?",
+      "revId": "1c37d0022eedad0dcce46c3018718959d6431bc3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d12c466e_00c0ab6f",
+        "filename": "lib/ffdc_class.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001133
+      },
+      "writtenOn": "2022-04-20T12:53:37Z",
+      "side": 1,
+      "message": "Queue: I do not see Queue object used in code. Please remove if it is not used.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 4
+      },
+      "revId": "1c37d0022eedad0dcce46c3018718959d6431bc3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
