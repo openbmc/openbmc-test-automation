@@ -38,6 +38,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb428344_185981a7",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-04-20T05:43:22Z",
+      "side": 1,
+      "message": "Add comments in this test case for better understanding.",
+      "range": {
+        "startLine": 205,
+        "startChar": 4,
+        "endLine": 205,
+        "endChar": 6
+      },
+      "revId": "da4e56f011fab984fdba83e500f5da869fcd39fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f99ba463_ddd3b136",
         "filename": "redfish/managers/test_bmc_protocol_settings.robot",
         "patchSetId": 4
