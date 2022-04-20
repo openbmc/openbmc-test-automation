@@ -40,7 +40,7 @@ Set Session Timeout And Verify Response Code
     [Documentation]  Set Session Timeout And Verify Response Code.
     [Tags]  Set_Session_Timeout_And_Verify_Response_Code
     [Template]  Set Session Timeout And Verify
-    [Teardown]  Set Session Timeout And Verify  ${3600}  ${HTTP_OK}
+    [Teardown]  Set Session Timeout And Verify  ${Default_Timeout_Value}  ${HTTP_OK}
 
     # The minimum & maximum allowed values for session timeout are 30
     # seconds and 86400 seconds respectively as per the session service
@@ -55,6 +55,32 @@ Set Session Timeout And Verify Response Code
     ${86500}            ${HTTP_BAD_REQUEST}
 
 
+Set Session Timeout And Verify Session After Timeout
+    [Documentation]  Set timeout for session service And Verify Session is deleted after timeout.
+    [Tags]  Set_Session_Timeout_And_Verify_Session_After_Timeout
+    [Teardown]  Set Session Timeout And Verify   ${Default_Timeout_Value}  ${HTTP_OK}
+    [Template]  Set Session Timeout And Verify Session Deleted After Timeout
+
+    #timeout Value
+    ${30}
+    ${300}
+
+
+Verify Session Login And Logout For Newly Created User
+    [Documentation]  Verify Session created for new user have the access.
+    [Tags]  Verify_Session_Login_And_Logout_For_Newly_Created_User
+    [Teardown]  Redfish.Login
+
+    ## Logout already created redfish session.
+    Redfish.Logout
+    Redfish.Login  ${ADMIN}[0]  ${ADMIN}[1]
+    ${systems}=  Redfish.Get Properties  /redfish/v1/Systems
+    Rprint Vars  systems
+    Redfish.Logout
+    ${systems}=  Redfish.Get  /redfish/v1/Systems
+    ...  valid_status_codes=[${HTTP_UNAUTHORIZED}]
+
+
 Verify SessionService Defaults
     [Documentation]  Verify SessionService default property values.
     [Tags]  Verify_SessionService_Defaults
@@ -67,7 +93,7 @@ Verify SessionService Defaults
     Valid Value  session_service['Id']  ['SessionService']
     Valid Value  session_service['Name']  ['Session Service']
     Valid Value  session_service['ServiceEnabled']  [True]
-    Valid Value  session_service['SessionTimeout']  [3600]
+    Valid Value  session_service['SessionTimeout']  [${Default_Timeout_Value}]
     Valid Value  session_service['Sessions']['@odata.id']  ['/redfish/v1/SessionService/Sessions']
 
 
@@ -83,6 +109,25 @@ Verify Sessions Defaults
     Valid Value  sessions['Description']  ['Session Collection']
     Valid Value  sessions['Name']  ['Session Collection']
     Valid Value  sessions['Members@odata.count']  [${sessions_count}]
+
+    ## Disable ServiceEnabled and try to create session.
+    ${resp_patch}=  Redfish.Patch  /redfish/v1/SessionService
+    ...  body={'ServiceEnabled':'False'}  valid_status_codes=[${HTTP_CREATED}, ${HTTP_NO_CONTENT}]
+
+    ${session_service}=  Redfish.Get Properties  /redfish/v1/SessionService
+    Rprint Vars  session_service
+    Valid Value  session_service['ServiceEnabled']  [${False}]
+
+    ${resp_post}=  Redfish.Post  /redfish/v1/SessionService/Sessions
+    ...  body={'UserName':'admin_user', 'Password': 'TestPwd123'}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+    ${resp_patch}=  Redfish.Patch  /redfish/v1/SessionService/Sessions
+    ...  body={'ServiceEnabled':'True'}  valid_status_codes=[${HTTP_CREATED}, ${HTTP_NO_CONTENT}]
+
+    ${session_service}=  Redfish.Get Properties  /redfish/v1/SessionService
+    Rprint Vars  session_service
+    Valid Value  session_service['ServiceEnabled']  [${True}]
 
 
 Verify Current Session Defaults
@@ -203,11 +248,46 @@ Set Session Timeout And Verify
     ...  Valid Value  session_timeout  [${value}]
 
 
+Create Session And Check Session Timeout
+    [Documentation]  Create session and check session timeout
+    [Arguments]  ${value}
+
+    ${resp}=  Redfish.Post  /redfish/v1/SessionService/Sessions
+    ...  body={'UserName':'${OPENBMC_USERNAME}', 'Password': '${OPENBMC_PASSWORD}'}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+    ${session_id}=  Set Variable  ${resp.dict['@odata.id']}
+    Sleep  ${value}s
+
+    ## Since sessions will deleted so logging again.
+    Redfish.login
+    ${session_list}=  Redfish.Get Members List  /redfish/v1/SessionService/Sessions
+    Log  ${session_list}
+    List Should Not Contain Value  ${session_list}  ${session_id}
+
+
+Set Session Timeout And Verify Session Deleted After Timeout
+    [Documentation]  Set timeout for session service and verify session is deleted after timeout.
+    [Arguments]  ${timeout_value}
+
+    ${data}=  Create Dictionary  SessionTimeout=${timeout_value}
+    Log  ${data}
+    ${resp_patch}=  Redfish.Patch  /redfish/v1/SessionService
+    ...  body=&{data}  valid_status_codes=[${HTTP_OK}]
+    Create Session And Check Session Timeout  ${timeout_value}
+
+Get Default Timeout Value
+    [Documentation]  Get default session timeout value and set as suite variable.
+
+    ${Default_Timeout_Value}=  Redfish.Get Attribute  /redfish/v1/SessionService  SessionTimeout
+    Set Suite Variable   ${Default_Timeout_Value}
+
+
 Suite Setup Execution
     [Documentation]  Suite Setup Execution.
 
     Redfish.Login
     Create Users With Different Roles  users=${USERS}  force=${True}
+    Get Default Timeout Value
 
 
 Suite Teardown Execution
