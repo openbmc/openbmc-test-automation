@@ -225,6 +225,78 @@ Redfish Create User
     ...  valid_status_codes=[${HTTP_CREATED}]
 
 
+Redfish Verify User Via Eth1
+    [Documentation]  Redfish user verification using eth1.
+    [Arguments]   ${username}  ${password}  ${role_id}  ${enabled}
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # role_id             The role ID of the user to be created
+    #                     (e.g. "Administrator", "Operator", etc.).
+    # enabled             Indicates whether the username being created
+    #                     should be enabled (${True}, ${False}).
+
+    ${status}=  Verify Redfish User Login using eth1  ${username}  ${password}
+    # Doing a check of the returned status.
+    Should Be Equal  ${status}  ${enabled}
+
+    # Validate Role Id of user.
+    ${role_config}=  Redfish_Utils.Get Attribute
+    ...  /redfish/v1/AccountService/Accounts/${username}  RoleId
+    Should Be Equal  ${role_id}  ${role_config}
+
+
+Verify Redfish User Login using eth1
+    [Documentation]  Verify Redfish login with given user id with eth1.
+    [Teardown]  Run Keywords  Run Keyword And Ignore Error  Redfish1.Logout  AND  Redfish1.Login
+    [Arguments]   ${username}  ${password}
+
+    # Description of argument(s):
+    # username            Login username.
+    # password            Login password.
+
+    # Logout from current Redfish session.
+    # We don't really care if the current session is flushed out since we are going to login
+    # with new credential in next.
+
+    Run Keyword And Ignore Error  Redfish1.Logout
+
+    ${status}=  Run Keyword And Return Status  Redfish1.Login  ${username}  ${password}
+    [Return]  ${status}
+
+
+Redfish Create User Via Eth1
+    [Documentation]  Redfish create user via eth1.
+    [Arguments]   ${user_name}  ${password}  ${role_id}  ${enabled}  ${force}=${False}
+
+    # Description of argument(s):
+    # user_name           The user name to be created.
+    # password            The password to be assigned.
+    # role_id             The role ID of the user to be created.
+    #                     (e.g. "Administrator", "Operator", etc.).
+    # enabled             Indicates whether the username being created.
+    #                     should be enabled (${True}, ${False}).
+    # force               Delete user account and re-create if force is True.
+
+    ${curr_role}=  Run Keyword And Ignore Error  Get User Role  ${user_name}
+    # Ex: ${curr_role} = ('PASS', 'Administrator')
+
+    ${user_exists}=  Run Keyword And Return Status  Should Be Equal As Strings  ${curr_role}[0]  PASS
+
+    # Delete user account when force is True.
+    Run Keyword If  ${force} == ${True}  Redfish1.Delete  ${REDFISH_ACCOUNTS_URI}${user_name}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    # Create specified user when force is True or User does not exist.
+    ${payload}=  Create Dictionary
+    ...  UserName=${user_name}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
+
+    Run Keyword If  ${force} == ${True} or ${user_exists} == ${False}
+    ...  Redfish1.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+
 Get User Role
     [Documentation]  Get User Role.
     [Arguments]  ${user_name}
