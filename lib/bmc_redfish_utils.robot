@@ -4,6 +4,10 @@ Documentation   BMC and host redfish utility keywords.
 Resource        resource.robot
 Resource        bmc_redfish_resource.robot
 
+*** Variables ***
+
+${ethernet_interface}  eth0
+
 
 *** Keywords ***
 
@@ -221,8 +225,32 @@ Redfish Create User
     ...  UserName=${user_name}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
 
     Run Keyword If  ${force} == ${True} or ${user_exists} == ${False}
-    ...  Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
+    ...  ${Redfish_cmd}.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
     ...  valid_status_codes=[${HTTP_CREATED}]
+
+
+Redfish Verify User Via Eth1
+    [Documentation]  Redfish user verification using eth1.
+    [Arguments]   ${username}  ${password}  ${role_id}  ${enabled}
+
+    # Description of argument(s):
+    # username            The username to be created.
+    # password            The password to be assigned.
+    # role_id             The role ID of the user to be created
+    #                     (e.g. "Administrator", "Operator", etc.).
+    # enabled             Indicates whether the username being created
+    #                     should be enabled (${True}, ${False}).
+
+    ${status}=  Run Keyword And Return Status  Redfish1.Login  ${username}  ${password}
+    [Return]  ${status}
+
+    # Doing a check of the returned status.
+    Should Be Equal  ${status}  ${enabled}
+
+    # Validate Role Id of user.
+    ${role_config}=  Redfish_Utils.Get Attribute
+    ...  /redfish/v1/AccountService/Accounts/${username}  RoleId
+    Should Be Equal  ${role_id}  ${role_config}
 
 
 Get User Role
