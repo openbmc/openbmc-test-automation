@@ -121,9 +121,37 @@ Delete All Redfish Sessions
     # Remove the current login session from the list.
     Remove Values From List  ${resp_list}  ${saved_session_info["location"]}
 
+    # Remove session with client_id populated from the list.
+    ${client_id_list}=  Get Session With Client Id  ${resp_list}
+    Remove Values From List  ${resp_list}  ${client_id_list}
+
     FOR  ${session}  IN  @{resp_list}
         Run Keyword And Ignore Error  Redfish.Delete  ${session}
     END
+
+
+Get Session With Client Id
+    [Documentation]  Iterate through the active sessions and return sessions populated with client id.
+    [Arguments]  ${session_list}
+
+    # Description of argument(s):
+    # session_list   Active session list from SessionService.
+
+    #  "Oem": {
+    #    "OpenBMC": {
+    #        "@odata.type": "#OemSession.v1_0_0.Session",
+    #        "ClientID": "MYID=Vd57f62*2811504"
+    #    }
+
+    ${client_id}=  Create List
+
+    FOR  ${session}  IN  @{session_list}
+        ${resp}=  Redfish.Get  ${session}   valid_status_codes=[200,404]
+        Run Keyword If  '${resp.dict["Oem"]["OpenBMC"]["ClientID"]}' != '${EMPTY}'
+        ...    Append To List  ${client_id}  ${session}
+    END
+
+    [Return]  ${client_id}
 
 
 Get Valid FRUs
