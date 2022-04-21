@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec6e68d5_e2728ad5",
+        "filename": "redfish/service_root/test_service_root_security.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-04-21T07:09:37Z",
+      "side": 1,
+      "message": "our systems still sending plugin-types\ncan you share any reference for this change?",
+      "range": {
+        "startLine": 19,
+        "startChar": 212,
+        "endLine": 19,
+        "endChar": 223
+      },
+      "revId": "f49286c761f3d12fdf782897f64fd3ba0f8b7134",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
