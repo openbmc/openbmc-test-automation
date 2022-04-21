@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a62ce81_84165f05",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-04-21T16:22:38Z",
+      "side": 1,
+      "message": "Pasted mistakenly. Now replaced with actual testcase to be added. Kindly check",
+      "parentUuid": "28005e8d_27d4f5b5",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 0
+      },
+      "revId": "99a418a91f14669857e62380ae38c1a4e8273295",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e240616a_12130bc3",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-04-12T15:47:03Z",
       "side": 1,
       "message": "Where is this being use ?",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 29
+      },
+      "revId": "99a418a91f14669857e62380ae38c1a4e8273295",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9c15caf_9c1b6857",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-04-21T16:22:38Z",
+      "side": 1,
+      "message": "Added required testcase where the keyword is used.",
+      "parentUuid": "e240616a_12130bc3",
       "range": {
         "startLine": 125,
         "startChar": 0,
