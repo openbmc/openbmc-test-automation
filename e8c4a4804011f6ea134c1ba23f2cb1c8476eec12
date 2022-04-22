@@ -22,6 +22,30 @@
       },
       "revId": "e8c4a4804011f6ea134c1ba23f2cb1c8476eec12",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d227a9de_a7307688",
+        "filename": "redfish/service_root/test_sessions_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-04-22T05:16:52Z",
+      "side": 1,
+      "message": "As per redfish schema http://redfish.dmtf.org/schemas/DSP2046_2021.4#sessionservice-118 . \"ServiceEnabled\" property is Read-Write. so i\u0027m trying to disable it, once it got disabled we should not able to create session.\n\nAs of now While Patching {\u0027ServiceEnabled\u0027:\u0027False\u0027} we getting 400 bad request code. This is firmware issue right?",
+      "parentUuid": "69e3302d_2ad497d4",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 0
+      },
+      "revId": "e8c4a4804011f6ea134c1ba23f2cb1c8476eec12",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
