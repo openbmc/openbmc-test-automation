@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "728952ca_9f322af0",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-04-22T13:16:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0033e15a_180de345",
+      "range": {
+        "startLine": 152,
+        "startChar": 36,
+        "endLine": 152,
+        "endChar": 44
+      },
+      "revId": "a604dda08255a277f98f645b3ba9d647408b824f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c73cad11_4d5d3292",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-04-12T15:55:38Z",
       "side": 1,
       "message": "total record count",
+      "range": {
+        "startLine": 155,
+        "startChar": 15,
+        "endLine": 155,
+        "endChar": 33
+      },
+      "revId": "a604dda08255a277f98f645b3ba9d647408b824f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f79d507_3f4858be",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-04-22T13:16:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c73cad11_4d5d3292",
       "range": {
         "startLine": 155,
         "startChar": 15,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6b70144_11e7c1ac",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-04-22T13:16:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25fc2368_8a3a8303",
+      "range": {
+        "startLine": 163,
+        "startChar": 18,
+        "endLine": 163,
+        "endChar": 25
+      },
+      "revId": "a604dda08255a277f98f645b3ba9d647408b824f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3485c84e_56d2915d",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-04-12T15:55:38Z",
       "side": 1,
       "message": "Very good explanation documentation. Thank you,",
+      "range": {
+        "startLine": 168,
+        "startChar": 6,
+        "endLine": 172,
+        "endChar": 55
+      },
+      "revId": "a604dda08255a277f98f645b3ba9d647408b824f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18281e00_1f1e7a8d",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-04-22T13:16:40Z",
+      "side": 1,
+      "message": "Thank you for the appreciation.",
+      "parentUuid": "3485c84e_56d2915d",
       "range": {
         "startLine": 168,
         "startChar": 6,
@@ -116,6 +212,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3622337e_6c7aec93",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-04-22T13:16:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46409c43_553f2d36",
+      "range": {
+        "startLine": 197,
+        "startChar": 7,
+        "endLine": 197,
+        "endChar": 10
+      },
+      "revId": "a604dda08255a277f98f645b3ba9d647408b824f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32599fe1_17967072",
@@ -129,6 +249,30 @@
       "writtenOn": "2022-04-12T15:55:38Z",
       "side": 1,
       "message": "Can u fix these statement. remove those caps for each words here. Thanks",
+      "range": {
+        "startLine": 201,
+        "startChar": 19,
+        "endLine": 201,
+        "endChar": 89
+      },
+      "revId": "a604dda08255a277f98f645b3ba9d647408b824f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eb60d3b_631b9c11",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-04-22T13:16:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32599fe1_17967072",
       "range": {
         "startLine": 201,
         "startChar": 19,
@@ -162,6 +306,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d98003b2_441f4956",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-04-22T13:16:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71be8db2_235f30fa",
+      "range": {
+        "startLine": 204,
+        "startChar": 61,
+        "endLine": 204,
+        "endChar": 70
+      },
+      "revId": "a604dda08255a277f98f645b3ba9d647408b824f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26d07eba_4cf11b5c",
@@ -185,6 +353,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e740d046_d2441813",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-04-22T13:16:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26d07eba_4cf11b5c",
+      "range": {
+        "startLine": 234,
+        "startChar": 55,
+        "endLine": 234,
+        "endChar": 56
+      },
+      "revId": "a604dda08255a277f98f645b3ba9d647408b824f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca6ec78e_49826e8d",
@@ -198,6 +390,30 @@
       "writtenOn": "2022-04-12T15:55:38Z",
       "side": 1,
       "message": "Is this statement correct ? via KCS",
+      "range": {
+        "startLine": 235,
+        "startChar": 61,
+        "endLine": 235,
+        "endChar": 78
+      },
+      "revId": "a604dda08255a277f98f645b3ba9d647408b824f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccdcc627_bb5b508d",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-04-22T13:16:40Z",
+      "side": 1,
+      "message": "Replaced \"KCS Interface\" with \"inband\" for all occurances.",
+      "parentUuid": "ca6ec78e_49826e8d",
       "range": {
         "startLine": 235,
         "startChar": 61,
