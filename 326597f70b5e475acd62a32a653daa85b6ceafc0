@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "56d26ac3_1b61e832",
         "filename": "openpower/test_timed_power_on.robot",
@@ -20,10 +21,34 @@
         "endChar": 80
       },
       "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9daece61_58fa4e9b",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-22T12:36:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56d26ac3_1b61e832",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 80
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "efe57c8c_0e9fbd97",
         "filename": "openpower/test_timed_power_on.robot",
@@ -43,10 +68,34 @@
         "endChar": 19
       },
       "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "386397f6_386ada30",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-22T12:36:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efe57c8c_0e9fbd97",
+      "range": {
+        "startLine": 12,
+        "startChar": 2,
+        "endLine": 12,
+        "endChar": 19
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "dc1ed3dd_29d5a30d",
         "filename": "openpower/test_timed_power_on.robot",
@@ -66,10 +115,34 @@
         "endChar": 14
       },
       "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fed5ef7b_a0218c91",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-22T12:36:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc1ed3dd_29d5a30d",
+      "range": {
+        "startLine": 15,
+        "startChar": 2,
+        "endLine": 15,
+        "endChar": 14
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "3d83cf20_8eac156b",
         "filename": "openpower/test_timed_power_on.robot",
@@ -89,10 +162,34 @@
         "endChar": 40
       },
       "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ce5af62_85c4bddd",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-22T12:36:58Z",
+      "side": 1,
+      "message": "TIMER_POWER_ON is user defined we are adding this value with system time and setting the timer",
+      "parentUuid": "3d83cf20_8eac156b",
+      "range": {
+        "startLine": 30,
+        "startChar": 4,
+        "endLine": 30,
+        "endChar": 40
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "99f17b34_0e6450bd",
         "filename": "openpower/test_timed_power_on.robot",
@@ -112,10 +209,34 @@
         "endChar": 53
       },
       "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58a3783a_ea3bbc93",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-22T12:36:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99f17b34_0e6450bd",
+      "range": {
+        "startLine": 34,
+        "startChar": 50,
+        "endLine": 34,
+        "endChar": 53
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "f44a3fe5_eb60fcc9",
         "filename": "openpower/test_timed_power_on.robot",
@@ -135,10 +256,34 @@
         "endChar": 45
       },
       "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "900d9bfc_99de9f08",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-22T12:36:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f44a3fe5_eb60fcc9",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 45
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "546e3926_1063fef8",
         "filename": "openpower/test_timed_power_on.robot",
@@ -158,10 +303,34 @@
         "endChar": 83
       },
       "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "639c62fc_6bc57b02",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-22T12:36:58Z",
+      "side": 1,
+      "message": "removed this testcase",
+      "parentUuid": "546e3926_1063fef8",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 83
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "1e30e998_d37e5143",
         "filename": "openpower/test_timed_power_on.robot",
@@ -181,10 +350,34 @@
         "endChar": 34
       },
       "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "854983d6_47295f8b",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-22T12:36:58Z",
+      "side": 1,
+      "message": "removed this testcase",
+      "parentUuid": "1e30e998_d37e5143",
+      "range": {
+        "startLine": 46,
+        "startChar": 26,
+        "endLine": 46,
+        "endChar": 34
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "1e584b53_03b7ddc5",
         "filename": "openpower/test_timed_power_on.robot",
@@ -204,10 +397,34 @@
         "endChar": 51
       },
       "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d90f595a_749a7496",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-22T12:36:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e584b53_03b7ddc5",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 51
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "18ceeb5e_b3f35f8e",
         "filename": "openpower/test_timed_power_on.robot",
@@ -227,10 +444,34 @@
         "endChar": 24
       },
       "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30aaf8ff_13827518",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-22T12:36:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18ceeb5e_b3f35f8e",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 24
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "66238efc_12eafbbd",
         "filename": "openpower/test_timed_power_on.robot",
@@ -250,10 +491,34 @@
         "endChar": 42
       },
       "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be564b4f_21140c94",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-22T12:36:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66238efc_12eafbbd",
+      "range": {
+        "startLine": 64,
+        "startChar": 3,
+        "endLine": 64,
+        "endChar": 42
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "f813507f_08ab682f",
         "filename": "openpower/test_timed_power_on.robot",
@@ -273,8 +538,31 @@
         "endChar": 86
       },
       "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66909f55_4c3ce63b",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-22T12:36:58Z",
+      "side": 1,
+      "message": "Simplified the comment",
+      "parentUuid": "f813507f_08ab682f",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 86
+      },
+      "revId": "326597f70b5e475acd62a32a653daa85b6ceafc0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
