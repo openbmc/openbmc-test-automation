@@ -354,14 +354,15 @@ Verify PEL Log Entry For Event Log
     [Tags]  Verify_PEL_Log_Entry_For_Event_Log
 
     Redfish Purge Event Log
-    # Create an internal failure error log.
-    BMC Execute Command  ${CMD_INTERNAL_FAILURE}
+
+    # Create an unrecoverable error log.
+    Create Test PEL Log  Unrecoverable Error
 
     ${elog_entry}=  Get Event Logs
     # Example of Redfish event logs:
     # elog_entry:
     #  [0]:
-    #    [Message]:                             xyz.openbmc_project.Common.Error.InternalFailure
+    #    [Message]:                             BD802003 event in subsystem: Platform Firmware
     #    [Created]:                             2020-04-20T01:55:22+00:00
     #    [Id]:                                  1
     #    [@odata.id]:                           /redfish/v1/Systems/system/LogServices/EventLog/Entries/1
@@ -376,13 +377,13 @@ Verify PEL Log Entry For Event Log
     # Example output from 'Peltool  -l':
     # pel_records:
     # [0x50000023]:
-    #   [SRC]:                                   BD8D1002
+    #   [SRC]:                                   BD802003
     #   [CreatorID]:                             BMC
-    #   [Message]:                               An application had an internal failure
-    #   [CompID]:                                0x1000
-    #   [PLID]:                                  0x50000023
+    #   [Message]:                               This is a test error
+    #   [CompID]:                                0x2000
+    #   [PLID]:                                  0x500053D9
     #   [Commit Time]:                           04/20/2020 01:55:22
-    #   [Subsystem]:                             BMC Firmware
+    #   [Subsystem]:                             Platform Firmware
     #   [Sev]:                                   Unrecoverable Error
 
     ${ids}=  Get Dictionary Keys  ${pel_records}
@@ -391,9 +392,9 @@ Verify PEL Log Entry For Event Log
     ...  date_format=%m/%d/%Y %H:%M:%S
 
     # Verify that both Redfish event and PEL has log entry for internal error with same time stamp.
-    Should Contain Any  ${pel_records['${id}']['Message']}  internal failure  ignore_case=True
+    Should Contain Any  ${pel_records['${id}']['Message']}  test error  ignore_case=True
     Should Contain  ${elog_entry[0]['Message']}
-    ...  ${pel_records['${id}']['SRC']} event in subsystem: BMC Firmware  ignore_case=True
+    ...  ${pel_records['${id}']['SRC']}  ignore_case=True
 
     Should Be Equal  ${redfish_log_time}  ${pel_log_time}
 
