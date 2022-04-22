@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5483fc6_2a5b7877",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-04-22T04:46:51Z",
+      "side": 1,
+      "message": "single command, pass both params in same command",
+      "revId": "aae68a2197fa67769fdea118c157450f0c1ad6e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
