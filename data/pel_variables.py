@@ -7,8 +7,8 @@ Contains PEL related constants.
 PEL_DETAILS = {
     'CreatorID': 'BMC',
     'CompID': '0x1000',
-    'Subsystem': 'BMC Firmware',
-    'Message': 'An application had an internal failure',
+    'Subsystem': 'Platform Firmware',
+    'Message': 'This is a test error',
     'SRC': 'BD8D1002',
     'Sev': 'Unrecoverable Error'}
 
