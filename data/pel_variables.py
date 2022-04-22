@@ -34,7 +34,8 @@ CMD_INVENTORY_PREFIX = 'busctl get-property xyz.openbmc_project.Inventory.Manage
 CMD_UNRECOVERABLE_ERROR = ERROR_LOG_CREATE_BASE_CMD + 'org.open_power.Logging.Error.TestError1 \
     xyz.openbmc_project.Logging.Entry.Level.Error 0'
 
-CMD_PREDICTIVE_ERROR = ERROR_LOG_CREATE_BASE_CMD + 'xyz.openbmc_project.Common.Error.InternalFailure \
+CMD_PREDICTIVE_ERROR = ERROR_LOG_CREATE_BASE_CMD + \
+    'xyz.openbmc_project.Sensor.Threshold.Error.TemperatureWarningLow \
     xyz.openbmc_project.Logging.Entry.Level.Warning 0'
 
 CMD_UNRECOVERABLE_HOST_ERROR = ERROR_LOG_CREATE_BASE_CMD + 'xyz.openbmc_project.Host.Error.Event \
