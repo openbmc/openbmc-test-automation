@@ -52,7 +52,7 @@ Verify CA Certificate Replace
     [Template]  Replace Certificate Via Redfish
 
     # cert_type  cert_format        expected_status
-    CA           Valid Certificate  ok
+    #CA           Valid Certificate  ok
     CA           Empty Certificate  error
 
 
@@ -253,47 +253,6 @@ Verify Certificates Location Via Redfish
 
 
 *** Keywords ***
-
-Install And Verify Certificate Via Redfish
-    [Documentation]  Install and verify certificate using Redfish.
-    [Arguments]  ${cert_type}  ${cert_format}  ${expected_status}  ${delete_cert}=${True}
-
-    # Description of argument(s):
-    # cert_type           Certificate type (e.g. "Client" or "CA").
-    # cert_format         Certificate file format
-    #                     (e.g. "Valid_Certificate_Valid_Privatekey").
-    # expected_status     Expected status of certificate replace Redfish
-    #                     request (i.e. "ok" or "error").
-    # delete_cert         Certificate will be deleted before installing if this True.
-
-    Run Keyword If  '${cert_type}' == 'CA' and '${delete_cert}' == '${True}'
-    ...  Delete All CA Certificate Via Redfish
-    ...  ELSE IF  '${cert_type}' == 'Client' and '${delete_cert}' == '${True}'
-    ...  Delete Certificate Via BMC CLI  ${cert_type}
-
-    ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}
-    ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
-    ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
-
-    ${certificate_uri}=  Set Variable If
-    ...  '${cert_type}' == 'Client'  ${REDFISH_LDAP_CERTIFICATE_URI}
-    ...  '${cert_type}' == 'CA'  ${REDFISH_CA_CERTIFICATE_URI}
-
-    Run Keyword If  '${cert_format}' == 'Expired Certificate'  Modify BMC Date  future
-    ...  ELSE IF  '${cert_format}' == 'Not Yet Valid Certificate'  Modify BMC Date  old
-
-    ${cert_id}=  Install Certificate File On BMC  ${certificate_uri}  ${expected_status}  data=${file_data}
-    Logging  Installed certificate id: ${cert_id}
-
-    # Adding delay after certificate installation.
-    Sleep  30s
-
-    ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
-    ${bmc_cert_content}=  Run Keyword If  '${expected_status}' == 'ok'  redfish_utils.Get Attribute
-    ...  ${certificate_uri}/${cert_id}  CertificateString
-
-    Run Keyword If  '${expected_status}' == 'ok'  Should Contain  ${cert_file_content}  ${bmc_cert_content}
-    [Return]  ${cert_id}
 
 Modify BMC Date
     [Documentation]  Modify date in BMC.
