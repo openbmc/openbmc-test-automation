@@ -1,0 +1,50 @@
+# OWNERS
+# ------
+#
+# The OWNERS file maintains the list of individuals responsible for various
+# parts of this repository, including code review and approval.  We use the
+# Gerrit 'owners' plugin, which consumes this file, along with some extra
+# keywords for our own purposes and tooling.
+#
+# For details on the configuration used by 'owners' see:
+#  https://gerrit.googlesource.com/plugins/owners/+/refs/heads/master/owners/src/main/resources/Documentation/config.md
+#
+# An OWNERS file must be in the root of a repository but may also be present
+# in any subdirectory.  The contents of the subdirectory OWNERS file are
+# combined with parent directories unless 'inherit: false' is set.
+#
+# The owners file is YAML and has [up to] 4 top-level keywords.
+#   * owners: A list of individuals who have approval authority on the
+#     repository.
+#
+#   * reviewers: A list of individuals who have requested review notification
+#     on the repository.
+#
+#   * matchers: A list of specific file/path matches for granular 'owners' and
+#     'reviewers'.  See 'owners' plugin documentation.
+#
+#   * openbmc: A list of openbmc-specific meta-data about owners and reviewers.
+#     - name: preferred name of the individual.
+#     - email: preferred email address of the individual.
+#     - discord: Discord nickname of the individual.
+#
+# It is expected that these 4 sections will be listed in the order above and
+# data within them will be kept sorted.
+
+owners:
+- gkeishin@in.ibm.com
+- micwalsh@us.ibm.com
+
+reviewers:
+- sivas.srr@in.ibm.com
+
+matchers:
+
+openbmc:
+- name: George Keishing
+  email: gkeishin@in.ibm.com
+  discord: gkeishin
+- name: Michael Walsh
+  email: micwalsh@us.ibm.com
+- name: Sivas SRR
+  email: sivas.srr@in.ibm.com
