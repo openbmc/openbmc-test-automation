@@ -25,13 +25,13 @@ Verify AccountService Available
     ${resp} =  Redfish_utils.Get Attribute  /redfish/v1/AccountService  ServiceEnabled
     Should Be Equal As Strings  ${resp}  ${True}
 
+
 Verify Redfish User Persistence After Reboot
     [Documentation]  Verify Redfish user persistence after reboot.
     [Tags]  Verify_Redfish_User_Persistence_After_Reboot
 
     # Create Redfish users.
     Redfish Create User  admin_user     TestPwd123  Administrator   ${True}
-    Redfish Create User  operator_user  TestPwd123  Operator        ${True}
     Redfish Create User  readonly_user  TestPwd123  ReadOnly        ${True}
 
     # Reboot BMC.
@@ -39,13 +39,29 @@ Verify Redfish User Persistence After Reboot
 
     # Verify users after reboot.
     Redfish Verify User  admin_user     TestPwd123  Administrator   ${True}
-    Redfish Verify User  operator_user  TestPwd123  Operator        ${True}
     Redfish Verify User  readonly_user  TestPwd123  ReadOnly        ${True}
 
     # Delete created users.
     Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
     Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
+
+
+Verify Redfish Operator User Persistence After Reboot
+    [Documentation]  Verify Redfish operator user persistence after reboot.
+    [Tags]  Verify_Redfish_Operator_User_Persistence_After_Reboot
+
+    # Create Redfish users.
+    Redfish Create User  operator_user  TestPwd123  Operator        ${True}
+
+    # Reboot BMC.
+    Redfish OBMC Reboot (off)  stack_mode=normal
+
+    # Verify users after reboot.
+    Redfish Verify User  operator_user  TestPwd123  Operator        ${True}
+
+    # Delete created users.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
+
 
 Redfish Create and Verify Users
     [Documentation]  Create Redfish users with various roles.
@@ -54,8 +70,17 @@ Redfish Create and Verify Users
 
     #username      password    role_id         enabled
     admin_user     TestPwd123  Administrator   ${True}
-    operator_user  TestPwd123  Operator        ${True}
     readonly_user  TestPwd123  ReadOnly        ${True}
+
+
+Redfish Create and Verify Operator Users
+    [Documentation]  Create Redfish operator users with various roles.
+    [Tags]  Redfish_Create_and_Verify_Operator_Users
+    [Template]  Redfish Create And Verify User
+
+    #username      password    role_id         enabled
+    operator_user  TestPwd123  Operator        ${True}
+
 
 Verify Redfish User with Wrong Password
     [Documentation]  Verify Redfish User with Wrong Password.
@@ -64,8 +89,17 @@ Verify Redfish User with Wrong Password
 
     #username      password    role_id         enabled  wrong_password
     admin_user     TestPwd123  Administrator   ${True}  alskjhfwurh
-    operator_user  TestPwd123  Operator        ${True}  12j8a8uakjhdaosiruf024
     readonly_user  TestPwd123  ReadOnly        ${True}  12
+
+
+Verify Redfish Operator User with Wrong Password
+    [Documentation]  Verify Redfish operator user with wrong password.
+    [Tags]  Verify_Redfish_Operator_User_with_Wrong_Password
+    [Template]  Verify Redfish User with Wrong Password
+
+    #username      password    role_id         enabled  wrong_password
+    operator_user  TestPwd123  Operator        ${True}  12j8a8uakjhdaosiruf024
+
 
 Verify Login with Deleted Redfish Users
     [Documentation]  Verify login with deleted Redfish Users.
@@ -74,8 +108,17 @@ Verify Login with Deleted Redfish Users
 
     #username     password    role_id         enabled
     admin_user     TestPwd123  Administrator   ${True}
-    operator_user  TestPwd123  Operator        ${True}
     readonly_user  TestPwd123  ReadOnly        ${True}
+
+
+Verify Login with Deleted Redfish Operator Users
+    [Documentation]  Verify login with deleted Redfish operator users.
+    [Tags]  Verify_Login_with_Deleted_Redfish_Operator_Users
+    [Template]  Verify Login with Deleted Redfish User
+
+    #username     password    role_id         enabled
+    operator_user  TestPwd123  Operator        ${True}
+
 
 Verify User Creation Without Enabling It
     [Documentation]  Verify User Creation Without Enabling it.
@@ -84,8 +127,17 @@ Verify User Creation Without Enabling It
 
     #username      password    role_id         enabled
     admin_user     TestPwd123  Administrator   ${False}
-    operator_user  TestPwd123  Operator        ${False}
     readonly_user  TestPwd123  ReadOnly        ${False}
+
+
+Verify Operator User Creation Without Enabling It
+    [Documentation]  Verify operator user creation without enabling it.
+    [Tags]  Verify_Operator_User_Creation_Without_Enabling_It
+    [Template]  Verify Create User Without Enabling
+
+    #username      password    role_id         enabled
+    operator_user  TestPwd123  Operator        ${False}
+
 
 Verify User Creation With Invalid Role Id
     [Documentation]  Verify user creation with invalid role ID.
