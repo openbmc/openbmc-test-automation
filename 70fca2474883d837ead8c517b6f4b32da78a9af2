@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5aaf1fc1_69d5c8d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-04-25T13:55:10Z",
+      "side": 1,
+      "message": "Minor comment",
+      "revId": "70fca2474883d837ead8c517b6f4b32da78a9af2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65fff1e0_50dc3a8e",
@@ -36,6 +53,53 @@
         "startChar": 60,
         "endLine": 129,
         "endChar": 73
+      },
+      "revId": "70fca2474883d837ead8c517b6f4b32da78a9af2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f125ab8f_d97d26eb",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-04-25T13:55:10Z",
+      "side": 1,
+      "message": "I dont see a point to power on system using IPMI in the teardown. Any particular reason to add it? If done by mistake, please remove this test case teardown.",
+      "parentUuid": "65fff1e0_50dc3a8e",
+      "range": {
+        "startLine": 129,
+        "startChar": 60,
+        "endLine": 129,
+        "endChar": 73
+      },
+      "revId": "70fca2474883d837ead8c517b6f4b32da78a9af2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bd0b866_c46837d5",
+        "filename": "lib/resource.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-04-25T13:55:10Z",
+      "side": 1,
+      "message": "# IPMI SOL console output to verify.",
+      "range": {
+        "startLine": 65,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 52
       },
       "revId": "70fca2474883d837ead8c517b6f4b32da78a9af2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
