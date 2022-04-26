@@ -108,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dfefbdb9_cac49212",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-04-26T14:30:14Z",
+      "side": 1,
+      "message": "Rahul, this brings back my old question whether the Power off at line 150 is necessary or it can be removed.",
+      "parentUuid": "8c319534_1b9f3390",
+      "range": {
+        "startLine": 129,
+        "startChar": 60,
+        "endLine": 129,
+        "endChar": 73
+      },
+      "revId": "70fca2474883d837ead8c517b6f4b32da78a9af2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5bd0b866_c46837d5",
         "filename": "lib/resource.robot",
         "patchSetId": 4
