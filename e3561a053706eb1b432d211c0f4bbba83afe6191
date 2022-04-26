@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77af9b23_080344ea",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-04-26T08:04:33Z",
+      "side": 1,
+      "message": "I think the best way to do is\n\nWait Until Keyword Succeeds   1 min   10 sec    Match State  ${runtime_states}\n\nhttps://github.com/openbmc/openbmc-test-automation/blob/aea98e10f9b8fb1ef0c0501a9bc28153b4bc1984/lib/utils.robot#L954\n\n\nExample usage: https://github.com/openbmc/openbmc-test-automation/blob/master/lib/utils.robot#L940",
+      "range": {
+        "startLine": 362,
+        "startChar": 4,
+        "endLine": 362,
+        "endChar": 56
+      },
+      "revId": "e3561a053706eb1b432d211c0f4bbba83afe6191",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
