@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54ee81a6_1bde5555",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-04-26T08:23:34Z",
+      "side": 1,
+      "message": "Can you please elaborate a bit more abt the time power ON feature?",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 67
+      },
+      "revId": "776f7a2096a1a0c636d0c5474efe631577ad9368",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "925d7ac8_828521ec",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-04-26T08:23:34Z",
+      "side": 1,
+      "message": "Timed Power On",
+      "range": {
+        "startLine": 2,
+        "startChar": 33,
+        "endLine": 2,
+        "endChar": 48
+      },
+      "revId": "776f7a2096a1a0c636d0c5474efe631577ad9368",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fab8c45e_2fd20451",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-04-26T08:23:34Z",
+      "side": 1,
+      "message": "Change this to integer since ${too_value} is an integer.",
+      "range": {
+        "startLine": 31,
+        "startChar": 39,
+        "endLine": 31,
+        "endChar": 40
+      },
+      "revId": "776f7a2096a1a0c636d0c5474efe631577ad9368",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b54d7829_c989b25b",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-04-26T08:23:34Z",
+      "side": 1,
+      "message": "Redfish login and logout should be done at suite level. I don\u0027t see it being done anywhere in the suite.",
+      "range": {
+        "startLine": 40,
+        "startChar": 4,
+        "endLine": 40,
+        "endChar": 21
+      },
+      "revId": "776f7a2096a1a0c636d0c5474efe631577ad9368",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
