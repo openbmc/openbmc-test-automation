@@ -359,6 +359,13 @@ Verify Watchdog Timedout Event
     Wait Until Keyword Succeeds  2 min  30 sec
     ...  Verify Watchdog EventLog Content
 
+    ${running_states}=  Create Dictionary
+    ...  bmc=Enabled
+    ...  chassis=On
+    ...  host=Enabled
+    ...  boot_progress=OSBootStarted
+
+    Wait Until Keyword Succeeds  1 min  10 sec  Match State  ${running_states}
 
 Verify Event Logs Capping
     [Documentation]  Verify event logs capping.
