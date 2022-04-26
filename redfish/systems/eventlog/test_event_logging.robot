@@ -359,6 +359,7 @@ Verify Watchdog Timedout Event
     Wait Until Keyword Succeeds  2 min  30 sec
     ...  Verify Watchdog EventLog Content
 
+    Sleep  30s  reason=Wait for Host be booted properly.
 
 Verify Event Logs Capping
     [Documentation]  Verify event logs capping.
