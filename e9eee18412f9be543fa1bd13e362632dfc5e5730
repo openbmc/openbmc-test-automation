@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0292df6_3167c9c2",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-27T07:43:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b12737e7_4c5ebdba",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 58
+      },
+      "revId": "e9eee18412f9be543fa1bd13e362632dfc5e5730",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04f99511_20945ef8",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef31e28d_cdf715f8",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-27T07:43:45Z",
+      "side": 1,
+      "message": "For validating the behavior is taken care in second testcase, which will be in the next commit",
+      "parentUuid": "04f99511_20945ef8",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 43
+      },
+      "revId": "e9eee18412f9be543fa1bd13e362632dfc5e5730",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c14e287_8f28a984",
         "filename": "openpower/test_timed_power_on.robot",
         "patchSetId": 6
@@ -60,6 +108,30 @@
       "writtenOn": "2022-04-26T12:33:25Z",
       "side": 1,
       "message": "Pls move this and line#52 to Suite setup and teardown.",
+      "range": {
+        "startLine": 41,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 17
+      },
+      "revId": "e9eee18412f9be543fa1bd13e362632dfc5e5730",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "906e41ed_175bedc5",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-27T07:43:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c14e287_8f28a984",
       "range": {
         "startLine": 41,
         "startChar": 4,
