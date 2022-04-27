@@ -132,6 +132,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a14d2002_b8b50f4e",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-04-27T07:08:11Z",
+      "side": 1,
+      "message": "Chirtha\nIdeally all our tests should be designed to run in any order and need not dependent on previous state. As we are not making a note of system state at the start of the test case, we should be fine leaving the system in any stable state at the end of the test case. So I would suggest to add \"IPMI Power Off\" instead in the teardown so that other test cases does not get effect by the booting state of the test case. And you can remove IPMI power off from line 150.",
+      "parentUuid": "dfefbdb9_cac49212",
+      "range": {
+        "startLine": 129,
+        "startChar": 60,
+        "endLine": 129,
+        "endChar": 73
+      },
+      "revId": "70fca2474883d837ead8c517b6f4b32da78a9af2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5bd0b866_c46837d5",
         "filename": "lib/resource.robot",
         "patchSetId": 4
