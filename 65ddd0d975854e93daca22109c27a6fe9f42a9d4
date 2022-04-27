@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9809fda9_5f0ec039",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-04-27T07:59:11Z",
+      "side": 1,
+      "message": "Looking for something similar on below lines.\n\nSystem can be scheduled to Power ON at a specified time by using this feature.",
+      "range": {
+        "startLine": 5,
+        "startChar": 1,
+        "endLine": 9,
+        "endChar": 0
+      },
+      "revId": "65ddd0d975854e93daca22109c27a6fe9f42a9d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64760f86_99da8d3b",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-04-27T07:59:11Z",
+      "side": 1,
+      "message": "Pls add Redfish.Login and logout to suite setup. Do not want to run it for every test.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 74
+      },
+      "revId": "65ddd0d975854e93daca22109c27a6fe9f42a9d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
