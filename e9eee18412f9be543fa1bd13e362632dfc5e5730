@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90c00d6d_32c24b5a",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-04-27T10:00:59Z",
+      "side": 1,
+      "message": "We also need to validate set value else this test does not make any sense. You can modify the test case like below to cover it.\n\nSet Time For Power ON\n    [Documentation]  Set time for power ON using busctl command and verify.\n    [Tags]  Set_Time_For_Power_ON\n    \n    ${current_bmc_time}\u003d  BMC Execute Command  date +%s\n    ${time_set}\u003d  Evaluate  ${current_bmc_time[0]} + ${TIMER_POWER_ON}\n    BMC Execute Command  ${CMD_SET_TPO_TIME} ${time_set}\n    \n    ${new_tpo_value}\u003d  Get Time Power ON Value\n    Should Be Equal  ${time_set}  ${new_tpo_value}",
+      "parentUuid": "ef31e28d_cdf715f8",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 43
+      },
+      "revId": "e9eee18412f9be543fa1bd13e362632dfc5e5730",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c14e287_8f28a984",
         "filename": "openpower/test_timed_power_on.robot",
         "patchSetId": 6
