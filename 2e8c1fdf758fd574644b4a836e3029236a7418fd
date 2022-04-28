@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53203504_400b05e0",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-04-28T06:04:29Z",
+      "side": 1,
+      "message": "Redfish1.Login  ${username}  ${password}",
+      "revId": "2e8c1fdf758fd574644b4a836e3029236a7418fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba96d6c1_8d5f09a1",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-04-28T06:04:29Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "2e8c1fdf758fd574644b4a836e3029236a7418fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ebe23cf_1656496f",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-04-28T06:04:29Z",
+      "side": 1,
+      "message": "can you reuse code on line 197 by fine-tuning it to handle both??",
+      "revId": "2e8c1fdf758fd574644b4a836e3029236a7418fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
