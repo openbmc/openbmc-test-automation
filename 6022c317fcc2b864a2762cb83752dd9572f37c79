@@ -22,6 +22,30 @@
       },
       "revId": "6022c317fcc2b864a2762cb83752dd9572f37c79",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0555d94_93da5be3",
+        "filename": "openpower/test_timed_power_on.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001032
+      },
+      "writtenOn": "2022-04-28T03:19:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09960849_f2f9e2ba",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 43
+      },
+      "revId": "6022c317fcc2b864a2762cb83752dd9572f37c79",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
