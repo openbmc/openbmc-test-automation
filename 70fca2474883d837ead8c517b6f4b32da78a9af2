@@ -154,6 +154,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3d73ede_54e452ab",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-04-28T12:35:25Z",
+      "side": 1,
+      "message": "I have modified the testcase considering the system state and if the host doesn\u0027t boot, the system will be powered off. Hence suggesting this change. \n\n    # ***Removed IPMI power on from teardown.\n\n    ${status}\u003d  Run Keyword And Return Status  Wait Until Keyword Succeeds  10 mins  15 secs\n    ...  Check IPMI SOL Output Content  ${SOL_BIOS_OUTPUT}\n\n    Run Keyword If  \u0027${status}\u0027 \u003d\u003d \u0027False\u0027\n    ...  Run Keywords  IPMI Power Off  AND  FAIL  msg\u003dBIOS not loaded.\n\n    ${status}\u003d  Run Keyword And Return Status  Wait Until Keyword Succeeds  15 mins  15 secs\n    ...  Check IPMI SOL Output Content  ${SOL_LOGIN_OUTPUT}\n\n    Run Keyword If  \u0027${status}\u0027 \u003d\u003d \u0027False\u0027\n    ...  IPMI Power Off\n\nPlease take a look at the change and share your thoughts.",
+      "parentUuid": "a14d2002_b8b50f4e",
+      "range": {
+        "startLine": 129,
+        "startChar": 60,
+        "endLine": 129,
+        "endChar": 73
+      },
+      "revId": "70fca2474883d837ead8c517b6f4b32da78a9af2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5bd0b866_c46837d5",
