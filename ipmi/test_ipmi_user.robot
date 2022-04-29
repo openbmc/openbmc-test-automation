@@ -305,6 +305,7 @@ Enable IPMI User And Verify
     Sleep  5s
 
     Enable IPMI User And Verify  ${random_userid}
+    Wait and Confirm New Username And Password  ${random_username}  ${valid_password}
 
     # Verify that enabled IPMI  user is able to run IPMI command.
     Verify IPMI Username And Password  ${random_username}  ${valid_password}
@@ -503,6 +504,7 @@ Modify IPMI User
     # Set different username for same IPMI user.
     Run IPMI Standard Command
     ...  user set name ${random_userid} ${new_username}
+    Wait and Confirm New Username And Password  ${new_username}  ${valid_password}
 
     # Verify that user is able to run administrator level IPMI command.
     Verify IPMI Command  ${new_username}  ${valid_password}  Administrator  ${CHANNEL_NUMBER}
@@ -679,3 +681,15 @@ Suite Setup Execution
 
     Should not contain  ${enabled_user_count}  15
     ...  msg=IPMI have reached maximum user count
+
+
+Wait and Confirm New Username And Password
+    [Documentation]  Wait in loop trying to to confirm Username And Password.
+    [Arguments]  ${username}  ${password}
+
+    # Give time for previous command to complete.
+    Sleep  5s
+
+    # Looping verify that root user is able to run IPMI command using new password.
+    Wait Until Keyword Succeeds  15 sec  5 sec  Verify IPMI Username And Password
+    ...  ${username}  ${password}
