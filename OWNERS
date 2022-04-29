@@ -36,7 +36,7 @@ owners:
 - micwalsh@us.ibm.com
 
 reviewers:
-- sivas.srr@in.ibm.com
+- adathatr@in.ibm.com
 
 matchers:
 
@@ -46,5 +46,5 @@ openbmc:
   discord: gkeishin
 - name: Michael Walsh
   email: micwalsh@us.ibm.com
-- name: Sivas SRR
-  email: sivas.srr@in.ibm.com
+- name: Anusha Dathatri
+  email: adathatr@in.ibm.com
