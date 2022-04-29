@@ -1,74 +1,74 @@
 # https://github.com/openbmc/openbmc-test-automation/issues/822
--e Verify_Minimal_Memory_Buffer_Inventory
--e Verify_Minimal_Main_Planar_Inventory
--e Verify_Minimal_System_Inventory
+--exclude Verify_Minimal_Memory_Buffer_Inventory
+--exclude Verify_Minimal_Main_Planar_Inventory
+--exclude Verify_Minimal_System_Inventory
 # NA test case for Witherspoon
--e io_board_Present
--e io_board_Fault
+--exclude io_board_Present
+--exclude io_board_Fault
 # System LED test cases which are NA for Witherspoon system.
--e Test_Heartbeat_LED_And_Verify_Via_REST
--e Test_Beep_LED_And_Verify_Via_REST
--e Test_Identify_LED_And_Verify_Via_REST
+--exclude Test_Heartbeat_LED_And_Verify_Via_REST
+--exclude Test_Beep_LED_And_Verify_Via_REST
+--exclude Test_Identify_LED_And_Verify_Via_REST
 # NXDMAENG UE error injection is not available in latest p9dd1ffdcv104.xlsm
--e Verify_Unrecoverable_Callout_Handling_For_NXDMAENG
+--exclude Verify_Unrecoverable_Callout_Handling_For_NXDMAENG
 # NA test case with nginx support.
--e Test_Non_SSL_Connection_To_Port_80
--e Test_Non_SSL_Connection_To_Port_443
+--exclude Test_Non_SSL_Connection_To_Port_80
+--exclude Test_Non_SSL_Connection_To_Port_443
 # MRW changes required for this to work.
--e Test_GPU_SDR_Info_At_Power_On
+--exclude Test_GPU_SDR_Info_At_Power_On
 # Core dump is disabled.
--e Verify_Core_Dump_Size
+--exclude Verify_Core_Dump_Size
 # Skip org code update.
--e Initiate_Code_Update_BMC
--e BIOS_Code_Update
--e Upload_Test
--e BMC_Code_Update
--e Host_Code_Update
--e BMC_Update_Recoverable_Error
--e Host_Update_Recoverable_Error
--e BMC_Multi_Code_Update
--e Host_Multi_Code_Update
--e Verify_IPMI_Disable_Policy_Post_BMC_Code_Update
+--exclude Initiate_Code_Update_BMC
+--exclude BIOS_Code_Update
+--exclude Upload_Test
+--exclude BMC_Code_Update
+--exclude Host_Code_Update
+--exclude BMC_Update_Recoverable_Error
+--exclude Host_Update_Recoverable_Error
+--exclude BMC_Multi_Code_Update
+--exclude Host_Multi_Code_Update
+--exclude Verify_IPMI_Disable_Policy_Post_BMC_Code_Update
 # Others NA tests.
--e Run_Keyword_Pgm
+--exclude Run_Keyword_Pgm
 # Factory reset must not run in CT.
--e Factory_Reset
--e Full_Suite_Regression
--e AC_Cycles
--e Network_Nping
+--exclude Factory_Reset
+--exclude Full_Suite_Regression
+--exclude AC_Cycles
+--exclude Network_Nping
 # Multiple runs only needed for stability.
--e Run_Multiple_Power_Cycle
--e Run_Multiple_BMC_Reset_Via_REST
--e Run_Multiple_BMC_Reset_Via_Reboot
--e General_boot_testing
--e SLP_Service_Test
--e Check_Network_Latency
+--exclude Run_Multiple_Power_Cycle
+--exclude Run_Multiple_BMC_Reset_Via_REST
+--exclude Run_Multiple_BMC_Reset_Via_Reboot
+--exclude General_boot_testing
+--exclude SLP_Service_Test
+--exclude Check_Network_Latency
 # Configure invalid IP address use cases.
--e Configure_Broadcast_IP
--e Configure_Multicast_IP
--e Configure_Loopback_IP
--e Configure_Network_ID
+--exclude Configure_Broadcast_IP
+--exclude Configure_Multicast_IP
+--exclude Configure_Loopback_IP
+--exclude Configure_Network_ID
 # Invalid gateway address configuration.
--e Configure_Broadcast_IP_For_Gateway
--e Configure_Loopback_IP_For_Gateway
--e Configure_Multicast_IP_For_Gateway
--e Configure_Network_ID_For_Gateway
--e Verify_Network_Interface_Recovery
+--exclude Configure_Broadcast_IP_For_Gateway
+--exclude Configure_Loopback_IP_For_Gateway
+--exclude Configure_Multicast_IP_For_Gateway
+--exclude Configure_Network_ID_For_Gateway
+--exclude Verify_Network_Interface_Recovery
 # Skipping RAS test cases
--e Host_RAS
+--exclude Host_RAS
 # Skip multi threading test causing XML parser failure.
--e Stress_BMC_REST_Server
--e Stress_BMC_SSH_Server
--e Stress_BMC_IPMI_Server
+--exclude Stress_BMC_REST_Server
+--exclude Stress_BMC_SSH_Server
+--exclude Stress_BMC_IPMI_Server
 # Applicable only for master build.
--e Verify_eSEL_Description_And_EntryID_Using_REST
+--exclude Verify_eSEL_Description_And_EntryID_Using_REST
 # Needs fix and improvement.
--e Test_SBE_Side_Switch
+--exclude Test_SBE_Side_Switch
 # IPMI disable and enable use cases.
--e Verify_Disabling_And_Enabling_IPMI_Via_Host
--e Verify_Disabling_IPMI_Via_OOB_IPMI
--e Verify_IPMI_Disable_Persistency_After_BMC_Reboot
+--exclude Verify_Disabling_And_Enabling_IPMI_Via_Host
+--exclude Verify_Disabling_IPMI_Via_OOB_IPMI
+--exclude Verify_IPMI_Disable_Persistency_After_BMC_Reboot
 # Remote logging
--e Verify_BMC_Journald_Contains_No_Credential_Data
+--exclude Verify_BMC_Journald_Contains_No_Credential_Data
 # Non bmcweb certificate.
--e Certificate_Test
+--exclude Certificate_Test
