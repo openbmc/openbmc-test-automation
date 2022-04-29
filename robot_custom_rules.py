@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # Custom rules file for robotframework-lint.
-# Example usage: python -m rflint -rA robot_standards -R robot_custom_rules.py .
+# Installation : pip3 install --upgrade robotframework-lint
+# Example usage: python3 -m rflint -rA robot_standards -R robot_custom_rules.py .
 import re
 from rflint.common import SuiteRule, ERROR
 

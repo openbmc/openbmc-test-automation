@@ -29,7 +29,7 @@ Verify Empty SEL
     [Documentation]  Verify IPMI sel clear command clears the SEL entry.
     [Tags]  Verify_Empty_SEL
 
-    # Generate an error log and verify there is one atleast.
+    # Generate an error log and verify there is one at least.
     Create Test PEL Log
     ${resp}=  Run IPMI Standard Command  sel elist last 1
     Log To Console  ${resp}
