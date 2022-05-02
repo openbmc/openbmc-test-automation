@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "055e8a71_88786fc2",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T12:31:58Z",
+      "side": 1,
+      "message": "Set Invalid SOL Volatile Bit Rate :: Verify ability to set invalid... | FAIL |\nResolving variable \u0027${IPMI_RAW_CMD[\u0027SOL\u0027][\u0027Set_SOL\u0027][0]}\u0027 failed: Variable \u0027${IPMI_RAW_CMD}\u0027 not found.",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 85
+      },
+      "revId": "8f226a7c7721c36377ccb1760504a23dc8f65b57",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82d01ff2_24b3d938",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T12:31:58Z",
+      "side": 1,
+      "message": "Set Invalid SOL Non Volatile Bit Rate :: Verify ability to set inv... | FAIL |\nResolving variable \u0027${IPMI_RAW_CMD[\u0027SOL\u0027][\u0027Set_SOL\u0027][0]}\u0027 failed: Variable \u0027${IPMI_RAW_CMD}\u0027 not found.",
+      "range": {
+        "startLine": 267,
+        "startChar": 45,
+        "endLine": 267,
+        "endChar": 83
+      },
+      "revId": "8f226a7c7721c36377ccb1760504a23dc8f65b57",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
