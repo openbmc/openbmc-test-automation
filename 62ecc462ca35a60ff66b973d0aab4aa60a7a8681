@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e041761_fdac5a5a",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T09:05:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af175442_d01f41ae",
+      "range": {
+        "startLine": 127,
+        "startChar": 16,
+        "endLine": 127,
+        "endChar": 44
+      },
+      "revId": "62ecc462ca35a60ff66b973d0aab4aa60a7a8681",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4f91b8f_d413298e",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eaa8974a_ad3b9bd0",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T09:05:36Z",
+      "side": 1,
+      "message": "Removed the comment.",
+      "parentUuid": "c4f91b8f_d413298e",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 0
+      },
+      "revId": "62ecc462ca35a60ff66b973d0aab4aa60a7a8681",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7dfa90d9_85d0f2ed",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-05-02T07:48:54Z",
       "side": 1,
       "message": "IPMI SOL console output types/parameters to verify",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 36
+      },
+      "revId": "62ecc462ca35a60ff66b973d0aab4aa60a7a8681",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "569e5256_8ef1d2c8",
+        "filename": "lib/resource.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T09:05:36Z",
+      "side": 1,
+      "message": "Modified",
+      "parentUuid": "7dfa90d9_85d0f2ed",
       "range": {
         "startLine": 65,
         "startChar": 0,
