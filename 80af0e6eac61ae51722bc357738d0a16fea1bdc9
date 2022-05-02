@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eccfd54a_977ea68f",
+        "filename": "data/ipmi_raw_cmd_table.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T10:51:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2957f775_2cb6a676",
+      "range": {
+        "startLine": 384,
+        "startChar": 18,
+        "endLine": 384,
+        "endChar": 21
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da912f7c_c826d6b5",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-02T08:34:24Z",
       "side": 1,
       "message": "Remove the space",
+      "range": {
+        "startLine": 343,
+        "startChar": 58,
+        "endLine": 343,
+        "endChar": 59
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c67edfc2_1fee2e6b",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T10:51:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da912f7c_c826d6b5",
       "range": {
         "startLine": 343,
         "startChar": 58,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3934957c_ffa02f0e",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T10:51:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5309e727_7b90bbdf",
+      "range": {
+        "startLine": 605,
+        "startChar": 0,
+        "endLine": 605,
+        "endChar": 39
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8008087d_420828d4",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-05-02T08:34:24Z",
       "side": 1,
       "message": "Based on the [Documentation] and [Return] title should be \"Get SDR Count From SDR Info\"",
+      "range": {
+        "startLine": 619,
+        "startChar": 0,
+        "endLine": 619,
+        "endChar": 36
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "684db3ca_da6e08c1",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T10:51:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8008087d_420828d4",
       "range": {
         "startLine": 619,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c909560_3d0782f9",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T10:51:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6883595_37965292",
+      "range": {
+        "startLine": 660,
+        "startChar": 0,
+        "endLine": 660,
+        "endChar": 34
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47635eb8_2f30471b",
@@ -129,6 +249,30 @@
       "writtenOn": "2022-05-02T08:34:24Z",
       "side": 1,
       "message": "Get Reserve Device SDR Repository\n\nAlso,\n\n[Documentation]  Get Reserve Device SDR Repository Via Inband IPMI.",
+      "range": {
+        "startLine": 671,
+        "startChar": 0,
+        "endLine": 671,
+        "endChar": 29
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caeb6cd9_779b7ac3",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T10:51:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47635eb8_2f30471b",
       "range": {
         "startLine": 671,
         "startChar": 0,
@@ -162,6 +306,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa54cd8c_e71ad891",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T10:51:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5692c51a_9a64fdba",
+      "range": {
+        "startLine": 681,
+        "startChar": 0,
+        "endLine": 681,
+        "endChar": 17
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d830bdce_47c64cd8",
@@ -175,6 +343,30 @@
       "writtenOn": "2022-05-02T08:34:24Z",
       "side": 1,
       "message": "As it returns both record count \u0026 last SDR record.. need to rename the keyword may be like \"Get Record Count And Last Record From SDR\"",
+      "range": {
+        "startLine": 710,
+        "startChar": 0,
+        "endLine": 710,
+        "endChar": 30
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7dde48f_7b7132bb",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T10:51:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d830bdce_47c64cd8",
       "range": {
         "startLine": 710,
         "startChar": 0,
@@ -208,6 +400,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4afe8e0_7c11c835",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T10:51:51Z",
+      "side": 1,
+      "message": "57 (in decimal) - then hexadecimal will be 39h",
+      "parentUuid": "0457a3b6_fe19b441",
+      "range": {
+        "startLine": 718,
+        "startChar": 33,
+        "endLine": 718,
+        "endChar": 42
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fcba2cd3_77107b96",
@@ -221,6 +437,30 @@
       "writtenOn": "2022-05-02T08:34:24Z",
       "side": 1,
       "message": "mention what is done in initial setup",
+      "range": {
+        "startLine": 725,
+        "startChar": 21,
+        "endLine": 725,
+        "endChar": 47
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caa770e0_e9d2c68d",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T10:51:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcba2cd3_77107b96",
       "range": {
         "startLine": 725,
         "startChar": 21,
