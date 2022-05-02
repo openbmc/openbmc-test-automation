@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af175442_d01f41ae",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-02T07:48:54Z",
+      "side": 1,
+      "message": "can u please mention what verification are u trying to do?",
+      "range": {
+        "startLine": 127,
+        "startChar": 16,
+        "endLine": 127,
+        "endChar": 44
+      },
+      "revId": "62ecc462ca35a60ff66b973d0aab4aa60a7a8681",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4f91b8f_d413298e",
+        "filename": "ipmi/test_ipmi_sol.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-02T07:48:54Z",
+      "side": 1,
+      "message": "not required to mention",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 0
+      },
+      "revId": "62ecc462ca35a60ff66b973d0aab4aa60a7a8681",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dfa90d9_85d0f2ed",
+        "filename": "lib/resource.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-02T07:48:54Z",
+      "side": 1,
+      "message": "IPMI SOL console output types/parameters to verify",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 36
+      },
+      "revId": "62ecc462ca35a60ff66b973d0aab4aa60a7a8681",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
