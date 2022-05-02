@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ca6a092_74e7373e",
+        "filename": "ipmi/test_ipmi_poh_counter.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T15:20:37Z",
+      "side": 1,
+      "message": "any specific reason we need to wait out for 1 hour ?",
+      "range": {
+        "startLine": 68,
+        "startChar": 2,
+        "endLine": 69,
+        "endChar": 23
+      },
+      "revId": "115264cae56541fab102d969257064c0a484083e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "124d7dae_96dcb647",
+        "filename": "ipmi/test_ipmi_poh_counter.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T15:20:37Z",
+      "side": 1,
+      "message": "IPMI Power Off",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 17
+      },
+      "revId": "115264cae56541fab102d969257064c0a484083e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1e7e8a4_516d3ee0",
+        "filename": "ipmi/test_ipmi_poh_counter.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T15:20:37Z",
+      "side": 1,
+      "message": "IPMI Power On",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 17
+      },
+      "revId": "115264cae56541fab102d969257064c0a484083e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19b183d1_67cf828e",
+        "filename": "ipmi/test_ipmi_poh_counter.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T15:20:37Z",
+      "side": 1,
+      "message": "IPMI Power On",
+      "range": {
+        "startLine": 169,
+        "startChar": 9,
+        "endLine": 169,
+        "endChar": 22
+      },
+      "revId": "115264cae56541fab102d969257064c0a484083e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8049db50_2c5cd4af",
+        "filename": "ipmi/test_ipmi_poh_counter.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T15:20:37Z",
+      "side": 1,
+      "message": "IPMI Power On",
+      "range": {
+        "startLine": 175,
+        "startChar": 4,
+        "endLine": 175,
+        "endChar": 17
+      },
+      "revId": "115264cae56541fab102d969257064c0a484083e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
