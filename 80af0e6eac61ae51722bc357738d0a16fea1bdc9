@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2957f775_2cb6a676",
+        "filename": "data/ipmi_raw_cmd_table.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-02T08:34:24Z",
+      "side": 1,
+      "message": "SDR..\n@390 Have same format \u0027Reservation ID\u0027 format",
+      "range": {
+        "startLine": 384,
+        "startChar": 18,
+        "endLine": 384,
+        "endChar": 21
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da912f7c_c826d6b5",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-02T08:34:24Z",
+      "side": 1,
+      "message": "Remove the space",
+      "range": {
+        "startLine": 343,
+        "startChar": 58,
+        "endLine": 343,
+        "endChar": 59
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5309e727_7b90bbdf",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-02T08:34:24Z",
+      "side": 1,
+      "message": "Can it be simply mentioned as \"Get Sensor Count From SDR Info\" ?",
+      "range": {
+        "startLine": 605,
+        "startChar": 0,
+        "endLine": 605,
+        "endChar": 39
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8008087d_420828d4",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-02T08:34:24Z",
+      "side": 1,
+      "message": "Based on the [Documentation] and [Return] title should be \"Get SDR Count From SDR Info\"",
+      "range": {
+        "startLine": 619,
+        "startChar": 0,
+        "endLine": 619,
+        "endChar": 36
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6883595_37965292",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-02T08:34:24Z",
+      "side": 1,
+      "message": "As u are fetching count for sensor and SDR Elist so can it be mentioned as \n\n\"Get Count for Sensor And SDR Elist All\"",
+      "range": {
+        "startLine": 660,
+        "startChar": 0,
+        "endLine": 660,
+        "endChar": 34
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47635eb8_2f30471b",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-02T08:34:24Z",
+      "side": 1,
+      "message": "Get Reserve Device SDR Repository\n\nAlso,\n\n[Documentation]  Get Reserve Device SDR Repository Via Inband IPMI.",
+      "range": {
+        "startLine": 671,
+        "startChar": 0,
+        "endLine": 671,
+        "endChar": 29
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5692c51a_9a64fdba",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-02T08:34:24Z",
+      "side": 1,
+      "message": "\"Get IPMI SDR Status\" or \"Get IPMI SDR Status info\"\n\n@699 # Get SDR Info via IPMI command.",
+      "range": {
+        "startLine": 681,
+        "startChar": 0,
+        "endLine": 681,
+        "endChar": 17
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d830bdce_47c64cd8",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-02T08:34:24Z",
+      "side": 1,
+      "message": "As it returns both record count \u0026 last SDR record.. need to rename the keyword may be like \"Get Record Count And Last Record From SDR\"",
+      "range": {
+        "startLine": 710,
+        "startChar": 0,
+        "endLine": 710,
+        "endChar": 30
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0457a3b6_fe19b441",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-02T08:34:24Z",
+      "side": 1,
+      "message": "57(39h) ??",
+      "range": {
+        "startLine": 718,
+        "startChar": 33,
+        "endLine": 718,
+        "endChar": 42
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcba2cd3_77107b96",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-02T08:34:24Z",
+      "side": 1,
+      "message": "mention what is done in initial setup",
+      "range": {
+        "startLine": 725,
+        "startChar": 21,
+        "endLine": 725,
+        "endChar": 47
+      },
+      "revId": "80af0e6eac61ae51722bc357738d0a16fea1bdc9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
