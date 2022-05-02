@@ -203,6 +203,13 @@ class bmc_redfish(redfish_plus):
 
         return self.get_session_key(), self.get_session_location()
 
+    def get_session_response(self):
+        r"""
+        Return session response dictionary data.
+        """
+
+        return self.__dict__
+
     def enumerate(
         self, resource_path, return_json=1, include_dead_resources=False
     ):
