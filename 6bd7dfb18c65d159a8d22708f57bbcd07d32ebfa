@@ -1,0 +1,349 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7be7422_fa1221fe",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T14:42:52Z",
+      "side": 1,
+      "message": "remove this",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 41
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8766e679_2376b100",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T14:42:52Z",
+      "side": 1,
+      "message": "Any reason to use curl commands instead of  Redfish functions?",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 231
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc172cce_1f87e705",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T14:42:52Z",
+      "side": 1,
+      "message": "and",
+      "range": {
+        "startLine": 117,
+        "startChar": 45,
+        "endLine": 117,
+        "endChar": 48
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70a1f18f_577ddcba",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T14:42:52Z",
+      "side": 1,
+      "message": "and",
+      "range": {
+        "startLine": 142,
+        "startChar": 50,
+        "endLine": 142,
+        "endChar": 53
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ee045d1_12ddb11d",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T14:42:52Z",
+      "side": 1,
+      "message": "up to",
+      "range": {
+        "startLine": 246,
+        "startChar": 56,
+        "endLine": 246,
+        "endChar": 61
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a649321_49d4b2c2",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T14:42:52Z",
+      "side": 1,
+      "message": "and",
+      "range": {
+        "startLine": 267,
+        "startChar": 46,
+        "endLine": 267,
+        "endChar": 49
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a53c9a3_b9734696",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T14:42:52Z",
+      "side": 1,
+      "message": "up to",
+      "range": {
+        "startLine": 297,
+        "startChar": 56,
+        "endLine": 297,
+        "endChar": 61
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec73c84f_99435c97",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T14:42:52Z",
+      "side": 1,
+      "message": "and",
+      "range": {
+        "startLine": 320,
+        "startChar": 50,
+        "endLine": 320,
+        "endChar": 53
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c10436dc_dc07e584",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T14:42:52Z",
+      "side": 1,
+      "message": "up to",
+      "range": {
+        "startLine": 348,
+        "startChar": 60,
+        "endLine": 348,
+        "endChar": 65
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b611132_ab957273",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T14:42:52Z",
+      "side": 1,
+      "message": "up to",
+      "range": {
+        "startLine": 393,
+        "startChar": 58,
+        "endLine": 393,
+        "endChar": 63
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d7ddd03_26c076c1",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T14:42:52Z",
+      "side": 1,
+      "message": "value",
+      "range": {
+        "startLine": 405,
+        "startChar": 20,
+        "endLine": 405,
+        "endChar": 31
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffa77f96_11fa142e",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T14:42:52Z",
+      "side": 1,
+      "message": "align and change to value",
+      "range": {
+        "startLine": 408,
+        "startChar": 6,
+        "endLine": 408,
+        "endChar": 23
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74b49b71_7c99bc8a",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T14:42:52Z",
+      "side": 1,
+      "message": "remove space",
+      "range": {
+        "startLine": 455,
+        "startChar": 52,
+        "endLine": 455,
+        "endChar": 53
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ac43710_e54a990d",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T14:42:52Z",
+      "side": 1,
+      "message": "separated",
+      "range": {
+        "startLine": 523,
+        "startChar": 65,
+        "endLine": 523,
+        "endChar": 74
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc44e4ae_cfc9a493",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-02T14:42:52Z",
+      "side": 1,
+      "message": "date_time",
+      "range": {
+        "startLine": 592,
+        "startChar": 19,
+        "endLine": 592,
+        "endChar": 30
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
