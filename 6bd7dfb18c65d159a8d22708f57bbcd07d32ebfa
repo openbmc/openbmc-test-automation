@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6b7beaa_ebf8cae6",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T15:14:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7be7422_fa1221fe",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 41
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8766e679_2376b100",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-02T14:42:52Z",
       "side": 1,
       "message": "Any reason to use curl commands instead of  Redfish functions?",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 231
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5975e810_3610db1d",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T15:14:56Z",
+      "side": 1,
+      "message": "Previously used rest call. Now changed back to redfish. Added Redfish.Login and Redfish.Logout functions. Removed export commands.",
+      "parentUuid": "8766e679_2376b100",
       "range": {
         "startLine": 41,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92720664_3bab9fed",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T15:14:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc172cce_1f87e705",
+      "range": {
+        "startLine": 117,
+        "startChar": 45,
+        "endLine": 117,
+        "endChar": 48
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70a1f18f_577ddcba",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-05-02T14:42:52Z",
       "side": 1,
       "message": "and",
+      "range": {
+        "startLine": 142,
+        "startChar": 50,
+        "endLine": 142,
+        "endChar": 53
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "611dbaff_700352d9",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T15:14:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70a1f18f_577ddcba",
       "range": {
         "startLine": 142,
         "startChar": 50,
@@ -116,6 +212,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e043deae_5b94ef1d",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T15:14:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee045d1_12ddb11d",
+      "range": {
+        "startLine": 246,
+        "startChar": 56,
+        "endLine": 246,
+        "endChar": 61
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a649321_49d4b2c2",
@@ -129,6 +249,30 @@
       "writtenOn": "2022-05-02T14:42:52Z",
       "side": 1,
       "message": "and",
+      "range": {
+        "startLine": 267,
+        "startChar": 46,
+        "endLine": 267,
+        "endChar": 49
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a5c280f_ac3a0c8d",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T15:14:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a649321_49d4b2c2",
       "range": {
         "startLine": 267,
         "startChar": 46,
@@ -162,6 +306,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5bbba04_621695c9",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T15:14:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a53c9a3_b9734696",
+      "range": {
+        "startLine": 297,
+        "startChar": 56,
+        "endLine": 297,
+        "endChar": 61
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec73c84f_99435c97",
@@ -175,6 +343,30 @@
       "writtenOn": "2022-05-02T14:42:52Z",
       "side": 1,
       "message": "and",
+      "range": {
+        "startLine": 320,
+        "startChar": 50,
+        "endLine": 320,
+        "endChar": 53
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed0e2781_7317b050",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T15:14:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec73c84f_99435c97",
       "range": {
         "startLine": 320,
         "startChar": 50,
@@ -208,6 +400,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c818ffd3_3d9b74a3",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T15:14:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c10436dc_dc07e584",
+      "range": {
+        "startLine": 348,
+        "startChar": 60,
+        "endLine": 348,
+        "endChar": 65
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b611132_ab957273",
@@ -221,6 +437,30 @@
       "writtenOn": "2022-05-02T14:42:52Z",
       "side": 1,
       "message": "up to",
+      "range": {
+        "startLine": 393,
+        "startChar": 58,
+        "endLine": 393,
+        "endChar": 63
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19f5f57f_dbb20839",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T15:14:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b611132_ab957273",
       "range": {
         "startLine": 393,
         "startChar": 58,
@@ -254,6 +494,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "888e50cc_d7cb937c",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T15:14:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d7ddd03_26c076c1",
+      "range": {
+        "startLine": 405,
+        "startChar": 20,
+        "endLine": 405,
+        "endChar": 31
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffa77f96_11fa142e",
@@ -267,6 +531,30 @@
       "writtenOn": "2022-05-02T14:42:52Z",
       "side": 1,
       "message": "align and change to value",
+      "range": {
+        "startLine": 408,
+        "startChar": 6,
+        "endLine": 408,
+        "endChar": 23
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e616df8a_95523a09",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T15:14:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffa77f96_11fa142e",
       "range": {
         "startLine": 408,
         "startChar": 6,
@@ -300,6 +588,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc306b9f_d2e768c3",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T15:14:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74b49b71_7c99bc8a",
+      "range": {
+        "startLine": 455,
+        "startChar": 52,
+        "endLine": 455,
+        "endChar": 53
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ac43710_e54a990d",
@@ -323,6 +635,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29946c98_630dd413",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T15:14:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ac43710_e54a990d",
+      "range": {
+        "startLine": 523,
+        "startChar": 65,
+        "endLine": 523,
+        "endChar": 74
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc44e4ae_cfc9a493",
@@ -336,6 +672,30 @@
       "writtenOn": "2022-05-02T14:42:52Z",
       "side": 1,
       "message": "date_time",
+      "range": {
+        "startLine": 592,
+        "startChar": 19,
+        "endLine": 592,
+        "endChar": 30
+      },
+      "revId": "6bd7dfb18c65d159a8d22708f57bbcd07d32ebfa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f204fee1_f013a38b",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-02T15:14:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc44e4ae_cfc9a493",
       "range": {
         "startLine": 592,
         "startChar": 19,
