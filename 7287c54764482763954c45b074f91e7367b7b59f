@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8e1fa4c_5da7f344",
+        "filename": "ipmi/test_ipmi_device_id.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T18:33:36Z",
+      "side": 1,
+      "message": "Since version consists of \"major_version.minor_version.aux_version\" (eg,    # As per BMC, VERSION\u003d\"2.9.1-2719\", ${version} - [\"2\", \"9\" ,\"1-2719\"]), should be separating the versions, hence modified,\n${version}\u003d  Get Version Details From BMC OS Release  ${os_release[\u0027version\u0027]}",
+      "parentUuid": "495ff007_c626a6e1",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 72,
+        "endChar": 71
+      },
+      "revId": "7287c54764482763954c45b074f91e7367b7b59f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc6a8871_188f5acb",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-05-04T15:54:19Z",
       "side": 1,
       "message": "Where is this being used ? i dont see it being called.. Please remove if not used",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 24
+      },
+      "revId": "7287c54764482763954c45b074f91e7367b7b59f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "965145c8_aeb23058",
+        "filename": "ipmi/test_ipmi_device_id.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T18:33:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc6a8871_188f5acb",
       "range": {
         "startLine": 119,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4107ba6e_88baab96",
+        "filename": "ipmi/test_ipmi_device_id.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T18:33:36Z",
+      "side": 1,
+      "message": "Since version consists of \"major_version.minor_version.aux_version\" (eg,    # As per BMC, VERSION\u003d\"2.9.1-2719\", ${version} - [\"2\", \"9\" ,\"1-2719\"]), should be separating the versions, hence modified,\n\nGet Version Details From BMC OS Release\n    [Documentation]  To get the Version details from bmc etc/os-release,\n    ... and returns list consists of major, minor and auxiliary version.\n    [Arguments]  ${version}\n\n    # As per BMC, VERSION\u003d\"X.Y.Z-ZZZZ\"\n    # ${version} - [\"X\", \"Y\" ,\"Z-ZZZZ\"]\n    # here, X - major version, Y - minor version,\n    # Z-ZZZZ - auxiliary version.\n    ${version}\u003d  Split String  ${version}  .\n\n    [Return]  ${version}",
+      "parentUuid": "6ae61699_8102142b",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 0
+      },
+      "revId": "7287c54764482763954c45b074f91e7367b7b59f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12e32492_b41dce7f",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-05-04T15:54:19Z",
       "side": 1,
       "message": "${version}\u003d  Split String  ${os_release[\u0027version\u0027]}",
+      "range": {
+        "startLine": 156,
+        "startChar": 4,
+        "endLine": 156,
+        "endChar": 71
+      },
+      "revId": "7287c54764482763954c45b074f91e7367b7b59f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22416578_c3a870f6",
+        "filename": "ipmi/test_ipmi_device_id.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T18:33:36Z",
+      "side": 1,
+      "message": "Replaced with the following line,\n  ${version}\u003d  Get Version Details From BMC OS Release  ${os_release[\u0027version\u0027]}",
+      "parentUuid": "12e32492_b41dce7f",
       "range": {
         "startLine": 156,
         "startChar": 4,
@@ -133,6 +229,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "469420ff_0da1bb34",
+        "filename": "ipmi/test_ipmi_device_id.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T18:33:36Z",
+      "side": 1,
+      "message": "The response comes as tuple(\u0027{..json..}\u0027, \u0027\u0027, 0) so converting it to list and taking the first index value (json) and converting it to dictionary from json, is what the keyword does. We should be keeping the keyword as it is.",
+      "parentUuid": "c3750388_b883fca5",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 0
+      },
+      "revId": "7287c54764482763954c45b074f91e7367b7b59f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6e1543b_b6cd90b4",
@@ -146,6 +266,24 @@
       "writtenOn": "2022-05-04T15:54:19Z",
       "side": 1,
       "message": "Can you add this here too \n\nhttps://github.com/openbmc/openbmc-test-automation/blob/master/lib/utils.py#L310\n\nSample : \n    Description of argument(s):\n    json_str                        The string containing the JSON data.",
+      "revId": "7287c54764482763954c45b074f91e7367b7b59f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9fd4e7a_b4238c42",
+        "filename": "lib/utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T18:33:36Z",
+      "side": 1,
+      "message": "Already committed the keyword in - https://gerrit.openbmc-project.xyz/c/openbmc/openbmc-test-automation/+/51641, removing here.",
+      "parentUuid": "d6e1543b_b6cd90b4",
       "revId": "7287c54764482763954c45b074f91e7367b7b59f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
