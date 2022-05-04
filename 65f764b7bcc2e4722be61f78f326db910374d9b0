@@ -1,0 +1,228 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca5b2b83_2eeb131b",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-04T06:50:09Z",
+      "side": 1,
+      "message": "can we add FFDC for it, so that debug logs are collected on test failure. Thanks\n\nExample:  \n\nhttps://github.com/openbmc/openbmc-test-automation/blob/master/ipmi/test_ipmi_sol.robot#L385",
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11120c25_82aa4305",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-04T06:50:09Z",
+      "side": 1,
+      "message": "Is this a sample version valid string ? if so, change the variable name. \n\n${valid_os_version_name}",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 39
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8654e1f_2caf2643",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-04T06:50:09Z",
+      "side": 1,
+      "message": "${invalid_os_version_name}      ${valid_os_version_name}${6789}",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 43
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2af7791_b2fe7d55",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-04T06:50:09Z",
+      "side": 1,
+      "message": "Can u update the test documentation with more info to tell what is being testing and purpose of it and the expected result of this test. \n\ncan u do for all the test in this suite please\n\nExample:\n\nSet so and so, and expect so and so.",
+      "range": {
+        "startLine": 21,
+        "startChar": 21,
+        "endLine": 21,
+        "endChar": 78
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81ac31ca_af67270c",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-04T06:50:09Z",
+      "side": 1,
+      "message": "can you add the output sample example of the ${resp} so that we know what the test is indexing to.  and do the same for the suite wherever it is indexing",
+      "range": {
+        "startLine": 31,
+        "startChar": 1,
+        "endLine": 31,
+        "endChar": 42
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cdd65a3_8e8cdfff",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-04T06:50:09Z",
+      "side": 1,
+      "message": "can we use this directly in the code https://github.com/openbmc/openbmc-test-automation/blob/master/data/boot_table_redfish.json#L459\n\n\nIPMI Std MC Reset Cold (off)\n\ninstead of this ?",
+      "range": {
+        "startLine": 60,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 29
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5d052c7_9d9c2c51",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-04T06:50:09Z",
+      "side": 1,
+      "message": "Can u elaborate a bit.. like what this test does and what does it expect and do for all in this suite test case documentation.\n\nSample Example:\nSet system info with invalid data and expect error xyz etc.",
+      "range": {
+        "startLine": 183,
+        "startChar": 21,
+        "endLine": 183,
+        "endChar": 96
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b29dc99_83094bd3",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-04T06:50:09Z",
+      "side": 1,
+      "message": "end with period for comments or document.  \".\"  \n\ncan u do that for all in this suite. Thanks",
+      "range": {
+        "startLine": 205,
+        "startChar": 67,
+        "endLine": 205,
+        "endChar": 71
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b8c1be7_decc4521",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-04T06:50:09Z",
+      "side": 1,
+      "message": "The above note says param 0\n# Set In Progress - param 0\n\nbut we are indexing 1 here from ${resp}  \n\ncan u add a note why we are doing that",
+      "range": {
+        "startLine": 555,
+        "startChar": 4,
+        "endLine": 555,
+        "endChar": 49
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ec9846b_89b9d9f1",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-04T06:50:09Z",
+      "side": 1,
+      "message": "can u add what is being restored in documentation.. just a brief else the keyword and document says the exactly same thing. Its best that we add more info in the documentation",
+      "range": {
+        "startLine": 606,
+        "startChar": 21,
+        "endLine": 606,
+        "endChar": 52
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
