@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6d188a6_a94c0cdb",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-04T18:13:27Z",
+      "side": 1,
+      "message": "1) No keyword with name \u0027Prefix Bytes\u0027 found.\n\n\ncan you bring in the code which has this changes ? so that we merge with it in this commit.",
+      "range": {
+        "startLine": 611,
+        "startChar": 4,
+        "endLine": 611,
+        "endChar": 42
+      },
+      "revId": "01b8ac45eaf7c7f375ff364c0e0da82ff6d73fe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
