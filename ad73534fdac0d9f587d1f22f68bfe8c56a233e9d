@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d440f097_9d128ae5",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T13:17:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "242ef8f8_7f42c18a",
+      "revId": "ad73534fdac0d9f587d1f22f68bfe8c56a233e9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42f450d9_fc340eb7",
@@ -41,6 +59,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94c89df0_4e0ab157",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T13:17:20Z",
+      "side": 1,
+      "message": "The Get device sdr info timestamp will be updated as per the system reboot time. For example, if system rebooted at 12:30 pm. Once completed, get device sdr info will have the updated or incremented each time the sensor population changes timestamp, i,e same 12:30 pm. \n\nMy current bmc time will be approx. 12:35 to 12:36 pm after reboot. To verify the time difference, I have taken current time and timestamp in get device sdr info timestamp to find the difference so that the timestamp inline with current time.\n\nIf we consider before and after sdr timestamp, consider running only this particular testcase, system would have been rebooted long time ago, so the timestamp will be difficult to compare.",
+      "parentUuid": "42f450d9_fc340eb7",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 20
+      },
+      "revId": "ad73534fdac0d9f587d1f22f68bfe8c56a233e9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7af1be18_1a150a82",
@@ -54,6 +96,30 @@
       "writtenOn": "2022-05-04T09:01:47Z",
       "side": 1,
       "message": "END ?  not required remove it",
+      "range": {
+        "startLine": 737,
+        "startChar": 1,
+        "endLine": 737,
+        "endChar": 7
+      },
+      "revId": "ad73534fdac0d9f587d1f22f68bfe8c56a233e9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc7d3640_af96f08a",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T13:17:20Z",
+      "side": 1,
+      "message": "Removed the change since separate script is added instead of default script.",
+      "parentUuid": "7af1be18_1a150a82",
       "range": {
         "startLine": 737,
         "startChar": 1,
