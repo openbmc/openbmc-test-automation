@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1a40c69_34410ee9",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-04T09:28:51Z",
+      "side": 1,
+      "message": "Verify Cold Reset Impact On Sensor Threshold Via IPMI :: Modify se... | FAIL |\nSeveral failures occurred:\n\n1) No keyword with name \u0027Remove Whitespace\u0027 found.\n\n2) No keyword with name \u0027Remove Whitespace\u0027 found.\n\n3) No keyword with name \u0027Remove Whitespace\u0027 found.",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 54
+      },
+      "revId": "78a89e00cd2c9849c5290f9a3ef92049f6c4ece6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54649331_554296d5",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-04T09:28:51Z",
+      "side": 1,
+      "message": "Retrieves",
+      "range": {
+        "startLine": 169,
+        "startChar": 6,
+        "endLine": 169,
+        "endChar": 15
+      },
+      "revId": "78a89e00cd2c9849c5290f9a3ef92049f6c4ece6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
