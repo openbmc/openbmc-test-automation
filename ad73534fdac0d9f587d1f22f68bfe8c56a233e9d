@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "242ef8f8_7f42c18a",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-04T09:01:47Z",
+      "side": 1,
+      "message": "Can u create new suite ipmi/test_ipmi_inband_sdr.robot\n and push all your new inband test cases in the suite to avoid mix and match inband and out of band code handling in future.",
+      "revId": "ad73534fdac0d9f587d1f22f68bfe8c56a233e9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42f450d9_fc340eb7",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-04T09:01:47Z",
+      "side": 1,
+      "message": "Why do we need this? \n- if not required remove it\n\n- if needed, shouldn\u0027t we need to check before and after sdr timestamp and validate.",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 20
+      },
+      "revId": "ad73534fdac0d9f587d1f22f68bfe8c56a233e9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7af1be18_1a150a82",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-04T09:01:47Z",
+      "side": 1,
+      "message": "END ?  not required remove it",
+      "range": {
+        "startLine": 737,
+        "startChar": 1,
+        "endLine": 737,
+        "endChar": 7
+      },
+      "revId": "ad73534fdac0d9f587d1f22f68bfe8c56a233e9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
