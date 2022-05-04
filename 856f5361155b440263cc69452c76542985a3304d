@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a141bbc_d2429a8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-04T09:25:33Z",
+      "side": 1,
+      "message": "[ ERROR ] Error in file \u0027/home/george/openbmc-test-automation/ipmi/test_ipmi_poh_counter.robot\u0027 on line 29: Processing variable file \u0027/home/george/openbmc-test-automation/data/ipmi_raw_cmd_table.py\u0027 failed: Importing variable file \u0027/home/george/openbmc-test-automation/data/ipmi_raw_cmd_table.py\u0027 failed: SyntaxError: invalid syntax (ipmi_raw_cmd_table.py, line 389)",
+      "revId": "856f5361155b440263cc69452c76542985a3304d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
