@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecb5a89d_40523e27",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T15:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbf7949c_76efefa2",
+      "range": {
+        "startLine": 3,
+        "startChar": 20,
+        "endLine": 3,
+        "endChar": 77
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca5b2b83_2eeb131b",
@@ -41,6 +65,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f0cfbf5_4cc96128",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T15:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca5b2b83_2eeb131b",
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11120c25_82aa4305",
@@ -54,6 +96,30 @@
       "writtenOn": "2022-05-04T06:50:09Z",
       "side": 1,
       "message": "Is this a sample version valid string ? if so, change the variable name. \n\n${valid_os_version_name}",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 39
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ec8f980_d08ea4da",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T15:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11120c25_82aa4305",
       "range": {
         "startLine": 16,
         "startChar": 0,
@@ -87,6 +153,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fb797ba_ce6773b1",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T15:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8654e1f_2caf2643",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 43
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2af7791_b2fe7d55",
@@ -100,6 +190,30 @@
       "writtenOn": "2022-05-04T06:50:09Z",
       "side": 1,
       "message": "Can u update the test documentation with more info to tell what is being testing and purpose of it and the expected result of this test. \n\ncan u do for all the test in this suite please\n\nExample:\n\nSet so and so, and expect so and so.",
+      "range": {
+        "startLine": 21,
+        "startChar": 21,
+        "endLine": 21,
+        "endChar": 78
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eef3820e_3dcce814",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T15:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2af7791_b2fe7d55",
       "range": {
         "startLine": 21,
         "startChar": 21,
@@ -133,6 +247,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18899390_ab2f5968",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T15:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81ac31ca_af67270c",
+      "range": {
+        "startLine": 31,
+        "startChar": 1,
+        "endLine": 31,
+        "endChar": 42
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cdd65a3_8e8cdfff",
@@ -146,6 +284,30 @@
       "writtenOn": "2022-05-04T06:50:09Z",
       "side": 1,
       "message": "can we use this directly in the code https://github.com/openbmc/openbmc-test-automation/blob/master/data/boot_table_redfish.json#L459\n\n\nIPMI Std MC Reset Cold (off)\n\ninstead of this ?",
+      "range": {
+        "startLine": 60,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 29
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3094acb0_a00cd6a8",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T15:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cdd65a3_8e8cdfff",
       "range": {
         "startLine": 60,
         "startChar": 4,
@@ -179,6 +341,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fa7cdca_8540dc20",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T15:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97491c3d_36d7d728",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 64
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98c21d51_c688b5c3",
@@ -192,6 +378,30 @@
       "writtenOn": "2022-05-04T14:07:33Z",
       "side": 1,
       "message": "Also here.. It should be \u0027Invalid Data length\u0027",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 73
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a551c3e_69573da5",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T15:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98c21d51_c688b5c3",
       "range": {
         "startLine": 121,
         "startChar": 0,
@@ -225,6 +435,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e677c67e_65815f29",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T15:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "396349f9_70afabd2",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 0
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5d052c7_9d9c2c51",
@@ -238,6 +472,30 @@
       "writtenOn": "2022-05-04T06:50:09Z",
       "side": 1,
       "message": "Can u elaborate a bit.. like what this test does and what does it expect and do for all in this suite test case documentation.\n\nSample Example:\nSet system info with invalid data and expect error xyz etc.",
+      "range": {
+        "startLine": 183,
+        "startChar": 21,
+        "endLine": 183,
+        "endChar": 96
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36d59cf7_53a738e6",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T15:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5d052c7_9d9c2c51",
       "range": {
         "startLine": 183,
         "startChar": 21,
@@ -271,6 +529,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cd77fed_49ee3097",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T15:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b29dc99_83094bd3",
+      "range": {
+        "startLine": 205,
+        "startChar": 67,
+        "endLine": 205,
+        "endChar": 71
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1075036_19d40025",
@@ -284,6 +566,30 @@
       "writtenOn": "2022-05-04T14:07:33Z",
       "side": 1,
       "message": "Test case title containing \u0027Operating System\u0027 can be changed to \u0027OS\u0027 for simplicity..\n\nI have seen in other testcase title ur using \u0027OS\u0027 .. lets have it same through out",
+      "range": {
+        "startLine": 218,
+        "startChar": 27,
+        "endLine": 218,
+        "endChar": 43
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7370a434_0317a0aa",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T15:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1075036_19d40025",
       "range": {
         "startLine": 218,
         "startChar": 27,
@@ -317,6 +623,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6437ecaa_cb879f8e",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T15:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61b94768_af826afc",
+      "range": {
+        "startLine": 392,
+        "startChar": 4,
+        "endLine": 392,
+        "endChar": 73
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25df539d_aee2ad24",
@@ -330,6 +660,30 @@
       "writtenOn": "2022-05-04T14:07:33Z",
       "side": 1,
       "message": "mention about what parameter is returned",
+      "range": {
+        "startLine": 538,
+        "startChar": 2,
+        "endLine": 538,
+        "endChar": 81
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56079fa0_0d507d1f",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T15:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25df539d_aee2ad24",
       "range": {
         "startLine": 538,
         "startChar": 2,
@@ -363,6 +717,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b09eb9a_7419c556",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T15:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "504b77aa_32d19997",
+      "range": {
+        "startLine": 549,
+        "startChar": 20,
+        "endLine": 549,
+        "endChar": 31
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b8c1be7_decc4521",
@@ -386,6 +764,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3c45066_8423a727",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T15:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b8c1be7_decc4521",
+      "range": {
+        "startLine": 555,
+        "startChar": 4,
+        "endLine": 555,
+        "endChar": 49
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ec9846b_89b9d9f1",
@@ -399,6 +801,30 @@
       "writtenOn": "2022-05-04T06:50:09Z",
       "side": 1,
       "message": "can u add what is being restored in documentation.. just a brief else the keyword and document says the exactly same thing. Its best that we add more info in the documentation",
+      "range": {
+        "startLine": 606,
+        "startChar": 21,
+        "endLine": 606,
+        "endChar": 52
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "120f3296_b45b5b3e",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T15:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ec9846b_89b9d9f1",
       "range": {
         "startLine": 606,
         "startChar": 21,
