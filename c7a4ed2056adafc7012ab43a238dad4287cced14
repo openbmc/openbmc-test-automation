@@ -39,6 +39,30 @@
       },
       "revId": "c7a4ed2056adafc7012ab43a238dad4287cced14",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5283b515_4b86dc74",
+        "filename": "data/ipmi_raw_cmd_table.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T18:37:25Z",
+      "side": 1,
+      "message": "This doesnt have expected output(s), comment. I have removed those and committed.",
+      "parentUuid": "f802e732_3e07a4ae",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 24
+      },
+      "revId": "c7a4ed2056adafc7012ab43a238dad4287cced14",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
