@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d39a239b_71cc8a9d",
+        "filename": "ipmi/test_ipmi_inband_sdr.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T18:41:54Z",
+      "side": 1,
+      "message": "It is on the following commit under lib/ipmi_client.robot,\nhttps://gerrit.openbmc-project.xyz/c/openbmc/openbmc-test-automation/+/51641",
+      "parentUuid": "31c97e5a_9a4da66d",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 43
+      },
+      "revId": "f0f18b1cd75316c8dc4b4620deb287d232e4f4f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7f1c7da_18b7a78d",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-04T18:08:49Z",
       "side": 1,
       "message": "1) No keyword with name \u0027Zfill Data\u0027 found.\n\nI think we will need the commit which has this changes",
+      "range": {
+        "startLine": 428,
+        "startChar": 4,
+        "endLine": 428,
+        "endChar": 46
+      },
+      "revId": "f0f18b1cd75316c8dc4b4620deb287d232e4f4f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "695a314b_f8acaaa8",
+        "filename": "ipmi/test_ipmi_inband_sdr.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T18:41:54Z",
+      "side": 1,
+      "message": "It is on the following commit under lib/utils.robot,\nhttps://gerrit.openbmc-project.xyz/c/openbmc/openbmc-test-automation/+/51641",
+      "parentUuid": "a7f1c7da_18b7a78d",
       "range": {
         "startLine": 428,
         "startChar": 4,
