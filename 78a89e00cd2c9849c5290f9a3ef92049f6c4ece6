@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12f77d37_9730bb64",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T11:30:32Z",
+      "side": 1,
+      "message": "Already committed the \u0027Remove Whitespace\u0027 function in the following commit under lib/utils.py,\nhttps://gerrit.openbmc-project.xyz/c/openbmc/openbmc-test-automation/+/51641",
+      "parentUuid": "b1a40c69_34410ee9",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 54
+      },
+      "revId": "78a89e00cd2c9849c5290f9a3ef92049f6c4ece6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54649331_554296d5",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-04T09:28:51Z",
       "side": 1,
       "message": "Retrieves",
+      "range": {
+        "startLine": 169,
+        "startChar": 6,
+        "endLine": 169,
+        "endChar": 15
+      },
+      "revId": "78a89e00cd2c9849c5290f9a3ef92049f6c4ece6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08dec1e5_6c3dd845",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T11:30:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54649331_554296d5",
       "range": {
         "startLine": 169,
         "startChar": 6,
