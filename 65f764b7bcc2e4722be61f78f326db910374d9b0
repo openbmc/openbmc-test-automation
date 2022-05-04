@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cbf7949c_76efefa2",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-04T14:07:33Z",
+      "side": 1,
+      "message": "I think in doc section u can mention the parameters info.. because we are mainly having TCs with respect to IPMI system info parameters ...like\n\nFollowing IPMI system info parameters are verified in this test suite.\n\n1. Set In Progress - param 0\n2. System Firmware Version - param 1\n3. System Name - param 2\n4. Primary Operating System Name - param 3\n5. Operating System Name - param 4\n6. Present OS Version Number - param 5",
+      "range": {
+        "startLine": 3,
+        "startChar": 20,
+        "endLine": 3,
+        "endChar": 77
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca5b2b83_2eeb131b",
         "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
         "patchSetId": 3
@@ -135,6 +158,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97491c3d_36d7d728",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-04T14:07:33Z",
+      "side": 1,
+      "message": "Test case title \n\n Verify Get System Info Set In Progress With Invalid Data Request\n Verify Set System Info Set In Progress With Invalid Data Request\n\nAs we are giving invalid data length.. can testcase title simply have **** Invalid Data length ?",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 64
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98c21d51_c688b5c3",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-04T14:07:33Z",
+      "side": 1,
+      "message": "Also here.. It should be \u0027Invalid Data length\u0027",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 73
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "396349f9_70afabd2",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-04T14:07:33Z",
+      "side": 1,
+      "message": "this should be \u0027Invalid Data Length\u0027",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 0
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a5d052c7_9d9c2c51",
         "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
         "patchSetId": 3
@@ -174,6 +266,98 @@
         "startChar": 67,
         "endLine": 205,
         "endChar": 71
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1075036_19d40025",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-04T14:07:33Z",
+      "side": 1,
+      "message": "Test case title containing \u0027Operating System\u0027 can be changed to \u0027OS\u0027 for simplicity..\n\nI have seen in other testcase title ur using \u0027OS\u0027 .. lets have it same through out",
+      "range": {
+        "startLine": 218,
+        "startChar": 27,
+        "endLine": 218,
+        "endChar": 43
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61b94768_af826afc",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-04T14:07:33Z",
+      "side": 1,
+      "message": "@392: ur keyword title is bit confusing with doc sentence.. please frame it accordingly. Also, mention what parameters are returned\n\n@393: provide documentation for argument and example for it\n\n# Description of argument(s):\n# Ver     \u003cwhat is it? give example\u003e\n\n@422: Do the similar documentation for argument\n@471: Do the similar documentation for argument\n@509: Do the similar documentation for argument\n@528: Do the similar documentation for argument\n@539: Do the similar documentation for argument",
+      "range": {
+        "startLine": 392,
+        "startChar": 4,
+        "endLine": 392,
+        "endChar": 73
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25df539d_aee2ad24",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-04T14:07:33Z",
+      "side": 1,
+      "message": "mention about what parameter is returned",
+      "range": {
+        "startLine": 538,
+        "startChar": 2,
+        "endLine": 538,
+        "endChar": 81
+      },
+      "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "504b77aa_32d19997",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-04T14:07:33Z",
+      "side": 1,
+      "message": "mention like.. Fetch default values for all the params and set it as suite variables. \n\n\u003e\u003e just tough to read the code.. to see what ur doing",
+      "range": {
+        "startLine": 549,
+        "startChar": 20,
+        "endLine": 549,
+        "endChar": 31
       },
       "revId": "65f764b7bcc2e4722be61f78f326db910374d9b0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
