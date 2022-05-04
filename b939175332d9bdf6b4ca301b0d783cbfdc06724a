@@ -22,6 +22,30 @@
       },
       "revId": "b939175332d9bdf6b4ca301b0d783cbfdc06724a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "544e7370_69df11c0",
+        "filename": "data/ipmi_raw_cmd_table.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T19:11:07Z",
+      "side": 1,
+      "message": "As discussed, it is a continuous one single command, broken for customizing sensor type and sensor id in-between them while creating the sel.",
+      "parentUuid": "0094a5fe_1a442310",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 34
+      },
+      "revId": "b939175332d9bdf6b4ca301b0d783cbfdc06724a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
