@@ -63,6 +63,30 @@
       },
       "revId": "c7a4ed2056adafc7012ab43a238dad4287cced14",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a1bb8f5_2b23a373",
+        "filename": "data/ipmi_raw_cmd_table.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-04T18:43:12Z",
+      "side": 1,
+      "message": "ipmitool -I lanplus -C 17 -N 3 -p 623 -U root -P 0penBmc -H xx.xx.xx raw 0x0a 0x48\n\nexample returns example\n\n 99 c8 72 62\n\nso add that too and comment what that hex data refers too",
+      "parentUuid": "5283b515_4b86dc74",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 24
+      },
+      "revId": "c7a4ed2056adafc7012ab43a238dad4287cced14",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
