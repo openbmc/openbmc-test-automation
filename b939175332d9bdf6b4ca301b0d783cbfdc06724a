@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0094a5fe_1a442310",
+        "filename": "data/ipmi_raw_cmd_table.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-04T18:58:13Z",
+      "side": 1,
+      "message": "is this a full string we need ? if so, use string \"+\", to continue to next line if crossing 80 chars.  but not separate them by coma \",\"",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 34
+      },
+      "revId": "b939175332d9bdf6b4ca301b0d783cbfdc06724a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
