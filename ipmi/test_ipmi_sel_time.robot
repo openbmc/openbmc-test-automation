@@ -51,9 +51,9 @@ Verify Default Get SEL Time
     Should Not Be Empty  ${resp}
 
 
-Set SEL Time On NTP Mode
+Verify Set SEL Time On NTP Mode
     [Documentation]   IPMI Set SEL Time without NTP
-    [Tags]  Verify_SEL_Set_Time_On_NTP_Mode
+    [Tags]  Verify_Set_SEL_Time_On_NTP_Mode
     [Setup]  Printn
     [Teardown]  printn
 
@@ -298,7 +298,7 @@ Verify SEL Time In SEL Entry For Future Date and Time
 
 Verify SEL Time In SEL Entry For Past Date And Time
     [Documentation]  Verify configured SEL Time (Past Date & Time) in added SEL Entry.
-    [Tags]  Verify_SEL_Time_In_SEL_Entry_For_Past_Date_And_Tine
+    [Tags]  Verify_SEL_Time_In_SEL_Entry_For_Past_Date_And_Time
 
     Clear The SEL
 
