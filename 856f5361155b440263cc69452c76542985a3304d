@@ -16,6 +16,24 @@
       "message": "[ ERROR ] Error in file \u0027/home/george/openbmc-test-automation/ipmi/test_ipmi_poh_counter.robot\u0027 on line 29: Processing variable file \u0027/home/george/openbmc-test-automation/data/ipmi_raw_cmd_table.py\u0027 failed: Importing variable file \u0027/home/george/openbmc-test-automation/data/ipmi_raw_cmd_table.py\u0027 failed: SyntaxError: invalid syntax (ipmi_raw_cmd_table.py, line 389)",
       "revId": "856f5361155b440263cc69452c76542985a3304d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2214af14_5516bdb9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-04T11:21:50Z",
+      "side": 1,
+      "message": "comma missing. Updated and committed. Please check.",
+      "parentUuid": "6a141bbc_d2429a8b",
+      "revId": "856f5361155b440263cc69452c76542985a3304d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
