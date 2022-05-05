@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aea33931_c3d85f7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-05T08:03:18Z",
+      "side": 1,
+      "message": "very minor comments",
+      "revId": "da55d4e1d9b3b9414562339470ae2e7e026591e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b67810d_50153b48",
@@ -19,6 +36,52 @@
         "startChar": 50,
         "endLine": 116,
         "endChar": 54
+      },
+      "revId": "da55d4e1d9b3b9414562339470ae2e7e026591e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1630b818_3db2bd30",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-05T08:03:18Z",
+      "side": 1,
+      "message": "need to add more info ?",
+      "range": {
+        "startLine": 201,
+        "startChar": 5,
+        "endLine": 201,
+        "endChar": 40
+      },
+      "revId": "da55d4e1d9b3b9414562339470ae2e7e026591e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "005a1a2d_8d91a4de",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-05T08:03:18Z",
+      "side": 1,
+      "message": "documentation of args missing",
+      "range": {
+        "startLine": 253,
+        "startChar": 2,
+        "endLine": 253,
+        "endChar": 39
       },
       "revId": "da55d4e1d9b3b9414562339470ae2e7e026591e4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
