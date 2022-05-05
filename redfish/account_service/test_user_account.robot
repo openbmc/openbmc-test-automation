@@ -100,15 +100,6 @@ Verify Redfish Readonly User With Wrong Password
     readonly_user  TestPwd123  ReadOnly        ${True}  12
 
 
-Verify Redfish Operator User with Wrong Password
-    [Documentation]  Verify Redfish operator user with wrong password.
-    [Tags]  Verify_Redfish_Operator_User_with_Wrong_Password
-    [Template]  Verify Redfish User with Wrong Password
-
-    #username      password    role_id         enabled  wrong_password
-    operator_user  TestPwd123  Operator        ${True}  12j8a8uakjhdaosiruf024
-
-
 Verify Login with Deleted Redfish Admin User
     [Documentation]  Verify login with deleted Redfish admin user.
     [Tags]  Verify_Login_with_Deleted_Redfish_Admin_User
