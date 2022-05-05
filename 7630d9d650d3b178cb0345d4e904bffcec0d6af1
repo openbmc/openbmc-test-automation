@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad33f656_16fc98c1",
+        "filename": "lib/ipmi_utils.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-05T05:43:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad29bf9a_5f5de63e",
+      "range": {
+        "startLine": 764,
+        "startChar": 22,
+        "endLine": 764,
+        "endChar": 42
+      },
+      "revId": "7630d9d650d3b178cb0345d4e904bffcec0d6af1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "498eebdf_e12ab5d5",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-05-05T04:26:05Z",
       "side": 1,
       "message": "Description of argument(s):\n    thresh                 So and so the args.\n    thresholds             So and so the args.",
+      "revId": "7630d9d650d3b178cb0345d4e904bffcec0d6af1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28de5395_d1813164",
+        "filename": "lib/ipmi_utils.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-05T05:43:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "498eebdf_e12ab5d5",
       "revId": "7630d9d650d3b178cb0345d4e904bffcec0d6af1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
