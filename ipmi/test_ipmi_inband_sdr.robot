@@ -190,7 +190,7 @@ Verify Reserve Device SDR Repository For Invalid Data Request
 
 Verify Reserve Device SDR Repository Info Via IPMI Lanplus
     [Documentation]  Verify whether Reserve Device SDR Repository command is accessible via lanplus.
-    [Tags]  Verify_Reserve_Device_SDR_Repository_Via_IPMI_Lanplus
+    [Tags]  Verify_Reserve_Device_SDR_Repository_Info_Via_IPMI_Lanplus
 
     # Reserve Device SDR Repository via lanplus.
     ${resp}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Reserve_Repository'][4]}*

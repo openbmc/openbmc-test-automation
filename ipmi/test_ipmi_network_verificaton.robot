@@ -210,9 +210,9 @@ Verify Invalid Set MAC Address Via IPMI
     Should Contain  ${ipmi_set_output}  ${IPMI_RAW_CMD['LAN_Config_Params']['Set'][3]}
 
 
-Verify Get and Set MAC Address Via IPMI
+Verify Get And Set MAC Address Via IPMI
     [Documentation]  Verify Get and Set MAC address via IPMI.
-    [Tags]  Verify_GET_And_Set_MAC_Address_Via_IPMI
+    [Tags]  Verify_Get_And_Set_MAC_Address_Via_IPMI
     [Setup]  Fetch The Default Mac Address
     [Teardown]  Set Default Mac And Verify  ${ipmi_default_mac_split}
 
