@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be0a12c6_709c6310",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-05T10:37:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b67810d_50153b48",
+      "range": {
+        "startLine": 116,
+        "startChar": 50,
+        "endLine": 116,
+        "endChar": 54
+      },
+      "revId": "da55d4e1d9b3b9414562339470ae2e7e026591e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "020f5b02_dd9c690a",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-05-05T08:07:48Z",
       "side": 1,
       "message": "Verify IPMI SEL Most Recent Erase Timestamp :: Verify Most Recent ... #(IST) 2022/05/05 13:33:36.422092 -    3.867909 - Issuing: date\nVerify IPMI SEL Most Recent Erase Timestamp :: Verify Most Recent ... | FAIL |\nValueError: time data \u002705/05/2022 08:03:41\u0027 does not match format \u0027%b %d %H:%M:%S %Y\u0027",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 43
+      },
+      "revId": "da55d4e1d9b3b9414562339470ae2e7e026591e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a22b516_40b0048f",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-05T10:37:34Z",
+      "side": 1,
+      "message": "Removed the line since already same line added in \"Get Current Date from BMC\" keyword.",
+      "parentUuid": "020f5b02_dd9c690a",
       "range": {
         "startLine": 158,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f8ef810_f23a7895",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-05T10:37:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1630b818_3db2bd30",
+      "range": {
+        "startLine": 201,
+        "startChar": 5,
+        "endLine": 201,
+        "endChar": 40
+      },
+      "revId": "da55d4e1d9b3b9414562339470ae2e7e026591e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "005a1a2d_8d91a4de",
@@ -110,6 +182,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1dfd873_94ea55da",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-05T10:37:34Z",
+      "side": 1,
+      "message": "Added. Please check",
+      "parentUuid": "005a1a2d_8d91a4de",
+      "range": {
+        "startLine": 253,
+        "startChar": 2,
+        "endLine": 253,
+        "endChar": 39
+      },
+      "revId": "da55d4e1d9b3b9414562339470ae2e7e026591e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ebd4224_ffaaa921",
@@ -123,6 +219,30 @@
       "writtenOn": "2022-05-05T07:51:18Z",
       "side": 1,
       "message": "Verify IPMI SEL Most Recent Addition Timestamp :: Verify Most Rece... | FAIL |\nNo keyword with name \u0027Fetch Added SEL Date\u0027 found.\n------------------------------------------------------------------------------",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 298,
+        "endChar": 53
+      },
+      "revId": "da55d4e1d9b3b9414562339470ae2e7e026591e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26fe1680_2b9100f3",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-05T10:37:34Z",
+      "side": 1,
+      "message": "imported the library to fix this issue,\nLibrary    ../lib/ipmi_utils.py",
+      "parentUuid": "2ebd4224_ffaaa921",
       "range": {
         "startLine": 298,
         "startChar": 0,
