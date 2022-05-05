@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b67810d_50153b48",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-05T07:53:05Z",
+      "side": 1,
+      "message": "end with period. \".\" for all comments and documentation please",
+      "range": {
+        "startLine": 116,
+        "startChar": 50,
+        "endLine": 116,
+        "endChar": 54
+      },
+      "revId": "da55d4e1d9b3b9414562339470ae2e7e026591e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ebd4224_ffaaa921",
         "filename": "ipmi/test_ipmi_sel.robot",
         "patchSetId": 7
