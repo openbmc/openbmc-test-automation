@@ -11,12 +11,6 @@ Documentation       This suite tests IPMI Cold Reset in OpenBMC.
 ...                 -  Cold_Reset_With_Invalid_Data_Request_Via_IPMI
 ...                 -  Verify_Cold_Reset_Impact_On_Sensor_Threshold_Via_IPMI
 ...
-...                 Request data for cold reset present under data/ipmi_raw_cmd_table.py
-...
-...                 Python basic operations under new file lib/functions.py like
-...                 threshold value calculation and striping extra characters
-...                 across the strings.
-...
 ...                 The script verifies command execution for cold reset,
 ...                 invalid data request verification of cold reset and
 ...                 impact on sensor threshold value change with cold reset.
@@ -24,6 +18,8 @@ Documentation       This suite tests IPMI Cold Reset in OpenBMC.
 ...                 The script changes sensor threshold value for Fan sensor,
 ...                 executes cold reset IPMI command,
 ...                 compares sensor threshold values of initial and reading after cold reset.
+...
+...                 Request data for cold reset present under data/ipmi_raw_cmd_table.py
 
 Library             Collections
 Library             ../lib/ipmi_utils.py
@@ -31,7 +27,7 @@ Resource            ../lib/ipmi_client.robot
 Resource            ../lib/openbmc_ffdc.robot
 Variables           ../data/ipmi_raw_cmd_table.py
 
-#Test Teardown       FFDC On Test Case Fail
+Test Teardown       FFDC On Test Case Fail
 
 
 *** Variables ***
@@ -77,7 +73,7 @@ Verify Cold Reset Impact On Sensor Threshold Via IPMI
     ${Sensor_list}=  Get Sensor List
 
     # Get initial sensor threshold readings.
-    ${initial_sensor_threshold}  ${sensor_name}=  Get The Sensor Threshold For Sensor  ${sensor_list}
+    ${initial_sensor_threshold}  ${sensor_name}=  Get The Sensor Name And Threshold  ${sensor_list}
 
     # Identify sensor threshold values to modify.
     ${threshold_dict}=  Identify Sensor Threshold Values   ${initial_sensor_threshold}
@@ -96,7 +92,7 @@ Verify Cold Reset Impact On Sensor Threshold Via IPMI
     ...  Run IPMI Standard Command   sensor | grep -i RPM | grep "${sensor_name}"
 
     # Get sensor threshold readings after BMC restarts.
-    ${sensor_threshold_after_reset}  ${sensor_name_after_reset}=  Get The Sensor Threshold For Sensor  ${data_after_coldreset}
+    ${sensor_threshold_after_reset}  ${sensor_name_after_reset}=  Get The Sensor Name And Threshold  ${data_after_coldreset}
 
     # Compare with initial sensor threshold values.
     Should Be Equal  ${sensor_threshold_after_reset}  ${initial_sensor_threshold}
@@ -114,25 +110,29 @@ Get Sensor List
     [Return]  ${data}
 
 Identify Sensor
-    [Documentation]  To identify the sensor via IPMI sensor list.
+    [Documentation]  To fetch first sensor listed from sensor list IPMI command and return the sensor.
     [Arguments]  ${data}
 
-    # Find Sensor detail of sensor list first entry.
     # Description of Argument(s):
-    #    ${data}     All the sensors listed with ipmi sensor list command.
+    # ${data}     All the sensors listed with ipmi sensor list command.
+
+    # Find Sensor detail of sensor list first entry.
+
     ${data}=  Split To Lines  ${data}
     ${data}=  Set Variable  ${data[0]}
 
     [Return]  ${data}
 
 
-Get Sensor Readings For The Sensor
+Get The Sensor Reading And Name
     [Documentation]  To get the sensor reading of the given sensor using IPMI.
     [Arguments]  ${Sensors_all}
 
-    # Split Sensor details in a list.
     # Description of Argument(s):
-    #    ${Sensors_all}     All the sensors listed with ipmi sensor list command.
+    # ${Sensors_all}     All the sensors listed with ipmi sensor list command.
+
+    # Split Sensor details in a list.
+
     ${sensor}=  Identify Sensor  ${Sensors_all}
     ${data}=  Split String  ${sensor}  |
 
@@ -144,7 +144,7 @@ Get Sensor Readings For The Sensor
     [Return]  ${data}  ${sensor_name}
 
 
-Get The Sensor Threshold For Sensor
+Get The Sensor Name And Threshold
     [Documentation]  To get the sensor threshold for given sensor using IPMI.
     [Arguments]  ${Sensor_list}
 
@@ -152,7 +152,7 @@ Get The Sensor Threshold For Sensor
     #    ${Sensor_list}    All the sensors listed with ipmi sensor list command.
 
     # Gets the sensor data and sensor name for the required sensor.
-    ${data}  ${sensor_name}=  Get Sensor Readings For The Sensor  ${Sensor_list}
+    ${data}  ${sensor_name}=  Get The Sensor Reading And Name  ${Sensor_list}
     # Gets the threshold values in a list.
     ${threshold}=  Set Variable  ${data[5:9]}
 
@@ -167,18 +167,20 @@ Identify Sensor Threshold Values
     #    ${old_threshold}   original threshold values list of the given sensor.
 
     # Retrieves modified threshold values of the original threshold value.
-    ${threshold_dict}=  Identify Threshold  ${old_threshold}  ${thresholds_list}
+    ${threshold_dict}=  Modify And Fetch Threshold  ${old_threshold}  ${thresholds_list}
 
     [Return]  ${threshold_dict}
 
 
 Set Sensor Threshold For given Sensor
-    [Documentation]  Set Sensor Threshold for given sensor with given Upper and Lower critical and non-critical values Via IPMI
+    [Documentation]  Set Sensor Threshold for given sensor with given Upper and Lower critical and non-critical values Via IPMI.
     [Arguments]  ${threshold_list}  ${sensor}
 
     # Description of Argument(s):
-    #    ${threshold_list}    New thresholds to be set.
-    #    ${sensor}            Sensor name.
+    #    ${threshold_list}    New thresholds to be set, eg: [ na, 101, 102, 103 ]
+    #    ${sensor}            Sensor name, eg: SENSOR_1, FAN_1
+
+    # The return data will be newly set threhold value for the given sensor.
 
     # Set critical and non-critical values for the given sensor.
     FOR  ${criticals}  IN  @{threshold_list}
@@ -195,6 +197,6 @@ Set Sensor Threshold For given Sensor
     ...  Run IPMI Standard Command   sensor | grep -i RPM | grep "${sensor}"
 
     # Get new threshold value set from sensor list.
-    ${threshold_new}  ${sensor_name}=  Get The Sensor Threshold For Sensor  ${data}
+    ${threshold_new}  ${sensor_name}=  Get The Sensor Name And Threshold  ${data}
 
     [Return]  ${threshold_new}
