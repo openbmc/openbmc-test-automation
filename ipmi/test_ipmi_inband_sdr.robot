@@ -201,7 +201,8 @@ Verify Reserve Device SDR Repository Info Via IPMI Lanplus
 
 
 Verify Reserve Device SDR Repository For Partial Record
-    [Documentation]  Verify whether reservation ID of Reserve Device SDR Repository is accessible to fetch partial record from Get Device SDR.
+    [Documentation]  Verify whether reservation ID of Reserve Device SDR Repository is accessible
+    ...              to fetch partial record from Get Device SDR.
     [Tags]  Verify_Reserve_Device_SDR_Repository_For_Partial_Record
 
     # Get Reservation ID.

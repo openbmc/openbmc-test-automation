@@ -61,7 +61,8 @@ Verify Soft Shutdown
 
 
 Verify Chassis Power Cycle And Check Chassis Status Via IPMI
-    [Documentation]   Verify chassis power Cycle operation and check the Chassis Power Status using external IPMI command.
+    [Documentation]   Verify chassis power Cycle operation and check the Chassis
+    ...               Power Status using external IPMI command.
     [Tags]  Verify_Chassis_Power_Cycle_And_Check_Chassis_Status_Via_IPMI
 
     # Chassis power cycle command via IPMI
@@ -71,7 +72,8 @@ Verify Chassis Power Cycle And Check Chassis Status Via IPMI
 
 
 Verify Chassis Power Reset And Check Chassis Status Via IPMI
-    [Documentation]   Verify chassis power Reset operation and check the Chassis Power Status using external IPMI command.
+    [Documentation]   Verify chassis power Reset operation and check the Chassis
+    ...               Power Status using external IPMI command.
     [Tags]  Verify_Chassis_Power_Reset_And_Check_Chassis_Status_Via_IPMI
 
     # Chassis power reset command via IPMI

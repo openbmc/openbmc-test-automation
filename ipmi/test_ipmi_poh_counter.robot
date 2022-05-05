@@ -2,7 +2,8 @@
 Documentation       This suite tests IPMI POH Counter Support in OpenBMC.
 ...                 Feature: IPMI POH Counter Support
 ...
-...                 POH (Power-On Hours) counter is the incremental count of power ON hours in the system.
+...                 POH (Power-On Hours) counter is the incremental count of power ON
+...                 hours in the system.
 ...
 ...                 Request and Response data defined under data/ipmi_raw_cmd_table.py
 ...
@@ -17,9 +18,11 @@ Documentation       This suite tests IPMI POH Counter Support in OpenBMC.
 ...
 ...                 Minutes per count usually 60 minutes.
 ...
-...                 Wait Time given - 1 hour, 1 hour 30minutes when Host power OFF, 1 hour after Host Power ON
+...                 Wait Time given - 1 hour, 1 hour 30minutes when Host power OFF, 1 hour
+...                 after Host Power ON
 ...
-...                 Comparison between Initial POH Counter reading and reading after wait time / Power operation.
+...                 Comparison between Initial POH Counter reading and reading after wait
+...                 time / Power operation.
 
 
 Library             Collections

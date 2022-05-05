@@ -383,7 +383,8 @@ Verify Administrator And No Access Privilege For Different Channels
     Verify IPMI Command  ${random_username}  ${valid_password}  Administrator  ${CHANNEL_NUMBER}
 
     # Verify that user is unable to run IPMI command with channel 2.
-    Run IPMI Standard Command  sel info ${secondary_channel_number}  expected_rc=${1}  U=${random_username}  P=${valid_password}
+    Run IPMI Standard Command
+    ...  sel info ${secondary_channel_number}  expected_rc=${1}  U=${random_username}  P=${valid_password}
 
 
 Verify Operator And User Privilege For Different Channels

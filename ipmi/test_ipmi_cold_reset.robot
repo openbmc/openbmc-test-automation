@@ -92,7 +92,8 @@ Verify Cold Reset Impact On Sensor Threshold Via IPMI
     ...  Run IPMI Standard Command   sensor | grep -i RPM | grep "${sensor_name}"
 
     # Get sensor threshold readings after BMC restarts.
-    ${sensor_threshold_after_reset}  ${sensor_name_after_reset}=  Get The Sensor Name And Threshold  ${data_after_coldreset}
+    ${sensor_threshold_after_reset}  ${sensor_name_after_reset}=
+    ...  Get The Sensor Name And Threshold  ${data_after_coldreset}
 
     # Compare with initial sensor threshold values.
     Should Be Equal  ${sensor_threshold_after_reset}  ${initial_sensor_threshold}
@@ -173,7 +174,8 @@ Identify Sensor Threshold Values
 
 
 Set Sensor Threshold For given Sensor
-    [Documentation]  Set Sensor Threshold for given sensor with given Upper and Lower critical and non-critical values Via IPMI.
+    [Documentation]  Set Sensor Threshold for given sensor with given Upper and Lower critical
+    ...              and non-critical values Via IPMI.
     [Arguments]  ${threshold_list}  ${sensor}
 
     # Description of Argument(s):

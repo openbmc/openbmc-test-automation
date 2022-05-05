@@ -1,18 +1,24 @@
 *** Settings ***
 
 Documentation    Module to test IPMI SEL Time functionality.
-...              Pre-requisite Condition : Client Machine and BMC should be in Same TimeZone (example : UST)
+...              Pre-requisite Condition : Client Machine and BMC should be in
+...              Same TimeZone (example : UST)
 ...
-...              IPMI Raw command variables are defined under ../data/ipmi_raw_command_table.py
-...              Python basic functionalities are defined under ../lib/functions.py imported under ../lib/resource.robot
+...              IPMI Raw command variables are defined under
+...              ../data/ipmi_raw_command_table.py
+...              Python basic functionalities are defined under
+...              ../lib/functions.py imported under ../lib/resource.robot
 ...
-...              Test the Set/Get SEL Time functionality and compare the result against BMC Native command (date).
+...              Test the Set/Get SEL Time functionality and compare the result against
+...              BMC Native command (date).
 ...
 ...              Set the Time Sync Mode from NTP to Manual to Set SEL Time.
 ...              Time Sync Mode change performed via REDFISH URI.
-...              Performs the change in Time Sync Mode with Test Setup and Teardown Execution with default NETWORK_TIMEOUT provided under ../lib/resource.robot.
+...              Performs the change in Time Sync Mode with Test Setup and Teardown Execution
+...              with default NETWORK_TIMEOUT provided under ../lib/resource.robot.
 ...
-...              NETWORK_RESTART_TIME added for Set SEL Time and Add SEL Entry as the corresponding command takes approx 5 seconds for the operation to reflect.
+...              NETWORK_RESTART_TIME added for Set SEL Time and Add SEL Entry as the corresponding
+...              command takes approx 5 seconds for the operation to reflect.
 ...
 ...              Current SEL time identified via BMC Native command (date) and perform SEL Time operations.
 ...
@@ -183,7 +189,8 @@ Verify SEL Set Time For Incomplete Data Request
     ${sel_date_raw}=  Evaluate  " ".join(${sel_date_raw})
 
     # Set incomplete SEL Time with one less request byte.
-    ${Set_seltime_incomplete}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][4]}*
+    ${Set_seltime_incomplete}=
+    ...  Run Keyword and Expect Error  *${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][4]}*
     ...  Run IPMI Command  ${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][0]} ${sel_date_raw}
     Should Contain  ${Set_seltime_incomplete}  ${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][3]}
 
