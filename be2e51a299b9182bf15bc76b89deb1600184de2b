@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0a27549_4de3ffe6",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-05T09:17:39Z",
+      "side": 1,
+      "message": "Removed it.",
+      "parentUuid": "4b5bdd75_fdada778",
+      "range": {
+        "startLine": 16,
+        "startChar": 59,
+        "endLine": 16,
+        "endChar": 75
+      },
+      "revId": "be2e51a299b9182bf15bc76b89deb1600184de2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6799b1a0_94b03973",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-05T07:14:43Z",
       "side": 1,
       "message": "I think u should places @20 to @26 after @13.. re-arrange",
+      "range": {
+        "startLine": 20,
+        "startChar": 19,
+        "endLine": 26,
+        "endChar": 93
+      },
+      "revId": "be2e51a299b9182bf15bc76b89deb1600184de2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8103451a_c4aadd8f",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-05T09:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6799b1a0_94b03973",
       "range": {
         "startLine": 20,
         "startChar": 19,
@@ -64,6 +112,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96716dd3_8a8e34c9",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-05T09:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "277fb5af_11a5e8a4",
+      "revId": "be2e51a299b9182bf15bc76b89deb1600184de2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa44f20b_9947f573",
@@ -77,6 +143,30 @@
       "writtenOn": "2022-05-05T07:14:43Z",
       "side": 1,
       "message": "what are u returning?\nidentifying and fetching ??",
+      "range": {
+        "startLine": 117,
+        "startChar": 4,
+        "endLine": 117,
+        "endChar": 65
+      },
+      "revId": "be2e51a299b9182bf15bc76b89deb1600184de2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "740432f2_5d73bc45",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-05T09:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa44f20b_9947f573",
       "range": {
         "startLine": 117,
         "startChar": 4,
@@ -110,6 +200,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddc71f3c_6e002546",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-05T09:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9387f924_6d3df753",
+      "range": {
+        "startLine": 122,
+        "startChar": 5,
+        "endLine": 122,
+        "endChar": 9
+      },
+      "revId": "be2e51a299b9182bf15bc76b89deb1600184de2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "913d74e7_a390dee6",
@@ -123,6 +237,30 @@
       "writtenOn": "2022-05-05T07:14:43Z",
       "side": 1,
       "message": "Get the sensor reading and name",
+      "range": {
+        "startLine": 130,
+        "startChar": 21,
+        "endLine": 130,
+        "endChar": 77
+      },
+      "revId": "be2e51a299b9182bf15bc76b89deb1600184de2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bacdf31_14dcc142",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-05T09:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "913d74e7_a390dee6",
       "range": {
         "startLine": 130,
         "startChar": 21,
@@ -156,6 +294,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9440c305_6cc45c66",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-05T09:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a87c686_198424ee",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 35
+      },
+      "revId": "be2e51a299b9182bf15bc76b89deb1600184de2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "063e8f01_59985f07",
@@ -179,6 +341,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40e4d6fe_82a65a6e",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-05T09:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "063e8f01_59985f07",
+      "range": {
+        "startLine": 176,
+        "startChar": 2,
+        "endLine": 176,
+        "endChar": 127
+      },
+      "revId": "be2e51a299b9182bf15bc76b89deb1600184de2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d7f5c36_4a46093e",
@@ -192,6 +378,30 @@
       "writtenOn": "2022-05-05T07:14:43Z",
       "side": 1,
       "message": "@764: Based on ur function behavior .. ur func name should be \"modify_and_fetch_threshold\"\n\n@771: threshold_list containing list of characters ?? can u give e.g.?\n\n@775: with \u0027na\u0027 e.g: [ 101, 102, 103, 104, \u0027na\u0027]\n\n@767: 1. mention with what are u modifying values\n      2. returns the list of new threshold and the dict of threshold levels,\n\n@770 threshold (spelling)\n\n@781: n \u003d 100 ?? can u mention why are u taking it as n \u003d 100",
+      "range": {
+        "startLine": 770,
+        "startChar": 43,
+        "endLine": 770,
+        "endChar": 51
+      },
+      "revId": "be2e51a299b9182bf15bc76b89deb1600184de2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15a71cf7_97a06705",
+        "filename": "lib/ipmi_utils.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1001307
+      },
+      "writtenOn": "2022-05-05T09:17:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d7f5c36_4a46093e",
       "range": {
         "startLine": 770,
         "startChar": 43,
