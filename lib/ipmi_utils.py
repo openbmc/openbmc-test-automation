@@ -761,23 +761,29 @@ def prefix_bytes(listx):
     return listy
 
 
-def identify_threshold(old_threshold, threshold_list):
+def modify_and_fetch_threshold(old_threshold, threshold_list):
     r"""
-    Gets threshold values and threshold levels from sensor list.
-    Modify the values and returns updated threshold.
     Description of argument(s):
 
-        old_threshold              List of thresold values of sensor,
+        old_threshold              List of threshold values of sensor,
         threshold_list             List of higher and lower of critical and non-critical values.
+                                   i,e [ "lcr", "lnc", "unc", "ucr" ]
+
+    Gets old threshold values from sensor and threshold levels,
+    then returns the list of new threshold and the dict of threshold levels
 
     For example :
-        If old_threshold list is [ 1, 2, 3, 4] then the newthreshold_list will be [ 101, 102, 103, 104 ].
-        If old_threshold has 'na' the same will be appended to new list.
+    1. If old_threshold list is [ 1, 2, 3, 4] then the newthreshold_list will be [ 101, 102, 103, 104 ].
+       If old_threshold has 'na' the same will be appended to new list, eg: [ 101, 102, 103, 104, 'na'].
 
-    The newthreshold_list will be zipped to dictionary with threshold_list levels,
-    Example : threshold_dict = { 'lcr': 101, 'lnc': 102, 'unc': 103, 'ucr': 104 }
+    2. The newthreshold_list will be zipped to dictionary with threshold_list levels,
+       Example : threshold_dict = { 'lcr': 101, 'lnc': 102, 'unc': 103, 'ucr': 104 }
+
     """
 
+    # Adding the difference of 100 as less than this value,
+    # may not have greater impact as the sensor considered is a fan sensor.
+    # The set threshold may round off for certain values below 100.
     n = 100
     newthreshold_list = []
     for th in old_threshold:
