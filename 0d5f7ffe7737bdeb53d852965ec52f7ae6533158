@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35a9389a_6a52aa25",
+        "filename": "data/ipmi_raw_cmd_table.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-05T07:03:02Z",
+      "side": 1,
+      "message": "# raw command, expected output,error response",
+      "range": {
+        "startLine": 117,
+        "startChar": 12,
+        "endLine": 117,
+        "endChar": 61
+      },
+      "revId": "0d5f7ffe7737bdeb53d852965ec52f7ae6533158",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
