@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed72b8d6_f4a238b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-05T11:16:03Z",
+      "side": 1,
+      "message": "Verify_Add_SEL_Entry\n\nVerify_IPMI_SEL_Most_Recent_Addition_Timestamp\n\n\nnot creating SEL for it. and noticed this too as well\n\n\nVerify IPMI SEL Most Recent Addition Timestamp :: Verify Most Rece... | FAIL |\nIndexError: list index out of range",
+      "revId": "ed2c247c29b66a84308140c5c1cd6c18e7584cf0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
