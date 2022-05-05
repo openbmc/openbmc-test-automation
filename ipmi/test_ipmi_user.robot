@@ -27,6 +27,9 @@ ${ipmi_setaccess_cmd}   channel setaccess
 &{password_values}      16=0penBmc10penBmc2  17=0penBmc10penBmc2B
               ...       20=0penBmc10penBmc2Bmc3  21=0penBmc10penBmc2Bmc34
               ...       7=0penBmc  8=0penBmc0
+${expected_max_ids}     15
+${root_pattern}         ^.*\\sroot\\s.*ADMINISTRATOR.*$
+${empty_name_pattern}   ^User Name\\s.*\\s:\\s$
 
 # User defined count.
 ${USER_LOOP_COUNT}      20
@@ -35,22 +38,29 @@ ${USER_LOOP_COUNT}      20
 
 Verify IPMI User Summary
     [Documentation]  Verify IPMI maximum supported IPMI user ID and
-    ...  enabled user form user summary
+    ...  enabled user from user summary.
     [Tags]  Verify_IPMI_User_Summary
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Delete Created User  ${random_userid}
+    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Delete Created User  ${random_userid}
 
-    # Create random user
+    # Delete all non-administrative users
+    Delete All Non Admin IPMI User
+    ${admin_user_count}  ${maximum_ids}=  Get Enabled User Count
+    Run Keyword If  ${admin_user_count} == ${expected_max_ids}
+    ...  Fail  msg= ${admin_user_count} admin users is unexpected!
+
     ${random_userid}  ${random_username}=  Create Random IPMI User
+    Wait And Confirm New User Entry  ${random_username}
     Set Test Variable  ${random_userid}
     Run IPMI Standard Command  user enable ${random_userid}
 
-    ${output}=  Run IPMI Standard Command  user summary ${CHANNEL_NUMBER}
-    # TODO: Verification of enabled IPMI user needs to be done.
-    # https://github.com/openbmc/openbmc-test-automation/issues/2189
+    # Verify number of currently enabled users.
+    ${current_user_count}  ${maximum_ids}=  Get Enabled User Count
+    ${calculated_count}=  Evaluate  ${admin_user_count} + 1
+    Should Be Equal As Integers  ${current_user_count}   ${calculated_count}
 
-    ${maximum_ids}=  Get Lines Containing String  ${output}  Maximum IDs
-
-    Should Contain  ${maximum_ids}  15
+    # Verify maximum user count IPMI local user can have.
+    Should Be Equal As Integers  ${maximum_ids}  ${expected_max_ids}
 
 
 Verify IPMI User List
@@ -95,10 +105,10 @@ Verify IPMI User Creation With Valid Name And ID
 
 Verify IPMI User Creation With Invalid Name
     [Documentation]  Verify error while creating IPMI user with invalid
-    ...  name(e.g. user name with special characters).
+    ...  name (e.g. user name with special characters).
     [Tags]  Verify_IPMI_User_Creation_With_Invalid_Name
 
-    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    ${random_userid}=  Find Available Non Admin User Id
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
     ...  user set name ${random_userid} ${invalid_username}
     Should Contain  ${msg}  Invalid data
@@ -199,14 +209,14 @@ Verify IPMI User Creation With Same Name
     [Documentation]  Verify error while creating two IPMI user with same name.
     [Tags]  Verify_IPMI_User_Creation_With_Same_Name
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Delete Created User  2
+    ...  Delete Created User  ${random_userid}
 
-    ${random_username}=  Generate Random String  8  [LETTERS]
-    IPMI Create User  2  ${random_username}
+    ${random_userid}  ${random_username}=  Create Random IPMI User
 
     # Set same username for another IPMI user.
+    ${rand_userid_two}=  Find Free User Id
     ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
-    ...  user set name 3 ${random_username}
+    ...  user set name ${rand_userid_two} ${random_username}
     Should Contain  ${msg}  Invalid data field in request
 
 
@@ -276,7 +286,7 @@ Test IPMI Administrator Privilege Level
 
 
 Test IPMI No Access Privilege Level
-    [Documentation]  Verify IPMI user with no access privilege can not run only any level command.
+    [Documentation]  Verify IPMI user with no access privilege can not run command at any level.
     [Tags]  Test_IPMI_No_Access_Privilege_Level
     [Template]  Test IPMI User Privilege
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
@@ -516,7 +526,7 @@ Create Random IPMI User
     [Documentation]  Create IPMI user with random username and userid and return those fields.
 
     ${random_username}=  Generate Random String  8  [LETTERS]
-    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    ${random_userid}=  Find Available Non Admin User Id
     IPMI Create User  ${random_userid}  ${random_username}
     [Return]  ${random_userid}  ${random_username}
 
@@ -672,15 +682,77 @@ Check Active Ethernet Channels
 
 
 Suite Setup Execution
-    [Documentation]  Check for the enabled user.
+    [Documentation]  Make sure the enabled user count is below maximum,
+    ...  and prepares administrative user list suite variables.
+
+    Check Enabled User Count
+    Set Admin User ID List
+
+
+Check Enabled User Count
+    [Documentation]  Ensure that there are available user IDs.
 
     # Check for the enabled user count
     ${resp}=  Run IPMI Standard Command  user summary ${CHANNEL_NUMBER}
     ${enabled_user_count}=
     ...  Get Lines Containing String  ${resp}  Enabled User Count
 
-    Should not contain  ${enabled_user_count}  15
+    Should not contain  ${enabled_user_count}  ${expected_max_ids}
     ...  msg=IPMI have reached maximum user count
+
+
+Set Admin User ID List
+    [Documentation]  Generates list of User IDs that have ADMINISTRATOR privileges
+    ...  and determines which one is root; sets generated values as suite variables.
+
+    ${resp}=  Wait Until Keyword Succeeds  15 sec  1 sec  Run IPMI Standard Command
+    ...  user list
+    @{lines}=  Split To Lines  ${resp}
+
+    ${root_userid}=  Set Variable  ${-1}
+    ${id_index}=     Set Variable  ${1}
+    ${count}=        Set Variable  ${0}
+    ${admin_ids}=  Create List
+    FOR  ${line}  IN  @{lines}
+        ${admin}=  Get Lines Containing String  ${line}  ADMINISTRATOR
+        ${count}=  Set Variable If  '${admin}' != '${EMPTY}'
+        ...  ${count+1}
+        ...  ${count}
+        Run Keyword If  '${admin}' != '${EMPTY}'
+        ...  Collections.Append To List  ${admin_ids}  ${id_index}
+
+        ${root_found}=  Get Lines Matching Regexp  ${line}  ${root_pattern}
+        ${root_userid}=  Set Variable If  '${root_found}' != '${EMPTY}'
+        ...  ${id_index}
+        ...  ${root_userid}
+
+        ${hdr_found}=  Get Lines Containing String  ${line}  Channel Priv Limit
+        ${id_index}=  Set Variable If  '${hdr_found}' == '${EMPTY}'
+        ...  ${id_index+1}
+        ...  ${id_index}
+    END
+    ${num_admins}=  Set Variable  ${count}
+    Set Suite Variable  ${num_admins}
+    Set Suite Variable  ${admin_ids}
+    Set Suite Variable  ${root_userid}
+
+    Log To Console  There are ${num_admins} administrative IPMI user IDs.
+    Log To Console  There list of administrative user IDs: ${admin_ids}.
+    Log To Console  The root user ID is ${root_userid}.
+    Run Keyword If  ${root_userid} < ${1}  Fail  msg= Did not identify root user ID.
+    Run Keyword If  ${num_admins} < ${1}   Fail  msg= Did not identify administrator user ID.
+
+
+Find Available Non Admin User Id
+    [Documentation]  Find a userid that does not conflict with existing administrative userid.
+    FOR    ${jj}    IN RANGE    300
+        ${random_userid}=  Evaluate  random.randint(1, ${expected_max_ids})  modules=random
+        ${is_id_unique}=  Run Keyword And Return Status  List Should Not Contain Value
+        ...  ${admin_ids}  ${random_userid}
+        Exit For Loop If  ${is_id_unique} == ${True}
+    END
+    Run Keyword If  ${is_id_unique} == ${False}  Fail  msg= Could not find free user_ID.
+    [Return]  ${random_userid}
 
 
 Wait And Confirm New Username And Password
@@ -693,3 +765,71 @@ Wait And Confirm New Username And Password
     # Looping verify that root user is able to run IPMI command using new password.
     Wait Until Keyword Succeeds  15 sec  5 sec  Verify IPMI Username And Password
     ...  ${username}  ${password}
+
+
+Get Enabled User Count
+    [Documentation]  Return as integers: current number of enabled users and
+    ...  Maximum number of Ids.
+
+    # Isolate 'Enabled User Count' value and convert to integer
+    ${resp}=  Wait Until Keyword Succeeds  15 sec  1 sec  Run IPMI Standard Command
+    ...  user summary ${CHANNEL_NUMBER}
+    ${user_count_line}=  Get Lines Containing String  ${resp}  Enabled User Count
+    ${count}=  Fetch From Right  ${user_count_line}  \:
+    ${int_user_count}=  Convert To Integer  ${count}
+
+    # Isolate 'Maximum IDs' value and convert to integer
+    ${maximum_ids}=  Get Lines Containing String  ${resp}  Maximum IDs
+    ${max_ids}=  Fetch From Right  ${maximum_ids}  \:
+    ${int_maximum_ids_count}=  Convert To Integer  ${max_ids}
+
+    [Return]  ${int_user_count}  ${int_maximum_ids_count}
+
+
+Wait And Confirm New User Entry
+    [Documentation]  Wait in loop until new user appears with given username.
+    [Arguments]  ${username}
+
+    Wait Until Keyword Succeeds  45 sec  1 sec  Verify IPMI Username Visible
+    ...  ${username}
+
+
+Verify IPMI Username Visible
+    [Documentation]  Confirm that username  is present in user list.
+    [Arguments]  ${username}
+
+    ${resp}=  Run IPMI Standard Command  user list
+    Should Contain  ${resp}  ${username}
+
+
+Delete All Non Admin IPMI User
+    [Documentation]  Delete all non-root IPMI user.
+
+    # Get complete list of user info records.
+    ${user_info}=  Get User Info  ${EMPTY}
+    # Remove header record.
+    ${user_info}=  Filter Struct  ${user_info}  [('user_name', None)]  invert=1
+    ${non_empty_user_info}=  Filter Struct  ${user_info}  [('user_name', '')]  invert=1
+    ${non_admin_user_info}=  Filter Struct
+    ...  ${non_empty_user_info}  [('privilege_level', 'ADMINISTRATOR')]  invert=1
+
+    FOR  ${user_record}  IN  @{non_admin_user_info}
+        Run IPMI Standard Command   user set name ${user_record['user_id']} ""
+        Sleep  5s
+    END
+
+
+Find Free User Id
+    [Documentation]  Find a userid that is not being used.
+    FOR    ${jj}    IN RANGE    300
+        ${random_userid}=  Evaluate  random.randint(1, ${expected_max_ids})  modules=random
+        ${access}=  Run IPMI Standard Command  channel getaccess 1 ${random_userid}
+
+        ${name_line}=  Get Lines Containing String  ${access}  User Name
+        Log To Console  For ID ${random_userid}: ${name_line}
+        ${is_empty}=  Run Keyword And Return Status
+        ...  Should Match Regexp  ${name_line}  ${empty_name_pattern}
+
+        Exit For Loop If  ${is_empty} == ${True}
+    END
+    [Return]  ${random_userid}
