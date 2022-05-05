@@ -43,6 +43,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "020f5b02_dd9c690a",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-05T08:07:48Z",
+      "side": 1,
+      "message": "Verify IPMI SEL Most Recent Erase Timestamp :: Verify Most Recent ... #(IST) 2022/05/05 13:33:36.422092 -    3.867909 - Issuing: date\nVerify IPMI SEL Most Recent Erase Timestamp :: Verify Most Recent ... | FAIL |\nValueError: time data \u002705/05/2022 08:03:41\u0027 does not match format \u0027%b %d %H:%M:%S %Y\u0027",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 43
+      },
+      "revId": "da55d4e1d9b3b9414562339470ae2e7e026591e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1630b818_3db2bd30",
         "filename": "ipmi/test_ipmi_sel.robot",
         "patchSetId": 7
