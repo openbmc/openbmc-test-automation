@@ -8,7 +8,7 @@ Variables              ../data/ipmi_raw_cmd_table.py
 Library                ../lib/ipmi_utils.py
 
 
-Suite Setup     Test Setup Execution
+Suite Setup     Suite Setup Execution
 
 
 *** Variables ***
@@ -33,7 +33,7 @@ Verify KCS Raw IPMI Multiple Times
 
 *** Keywords ***
 
-Test Setup Execution
+Suite Setup Execution
    [Documentation]  Do suite setup tasks.
 
     Should Not Be Empty  ${OS_HOST}  msg=Please provide required parameter OS_HOST

@@ -12,7 +12,7 @@ Resource               ../lib/boot_utils.robot
 Library                ../lib/ipmi_utils.py
 Variables              ../data/ipmi_raw_cmd_table.py
 
-Suite setup            Redfish.Login
+Suite setup            Suite Setup Execution
 Suite Teardown         Redfish.Logout
 Test Teardown          FFDC On Test Case Fail
 
@@ -493,3 +493,13 @@ Get Record Count And Last Record From SDR
     ${last_record}=  Evaluate  ${record_count} - 1
 
     [Return]  ${record_count}  ${last_record}
+
+
+Suite Setup Execution
+   [Documentation]  Do suite setup tasks.
+
+    Redfish.Login
+    Should Not Be Empty  ${OS_HOST}  msg=Please provide required parameter OS_HOST
+    Should Not Be Empty  ${OS_USERNAME}  msg=Please provide required parameter OS_USERNAME
+    Should Not Be Empty  ${OS_PASSWORD}  msg=Please provide required parameter OS_PASSWORD
+
