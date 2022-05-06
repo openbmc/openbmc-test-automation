@@ -76,10 +76,11 @@ Verify Cold Reset Impact On Sensor Threshold Via IPMI
     ${initial_sensor_threshold}  ${sensor_name}=  Get The Sensor Name And Threshold  ${sensor_list}
 
     # Identify sensor threshold values to modify.
-    ${threshold_dict}=  Identify Sensor Threshold Values   ${initial_sensor_threshold}
+    ${threshold_list}  ${threshold_dict}=  Identify Sensor Threshold Values   ${initial_sensor_threshold}
 
     # Set sensor threshold for given sensor and compare with initial reading.
-    ${set_sensor_threshold}=  Set Sensor Threshold For given Sensor  ${threshold_dict}  ${sensor_name}
+    ${set_sensor_threshold}=  Set Sensor Threshold For given Sensor
+    ...  ${threshold_dict}  ${sensor_name}
     Should Not Be Equal  ${set_sensor_threshold}  ${initial_sensor_threshold}
 
     # Execute cold reset command via IPMI and check status.
@@ -168,28 +169,29 @@ Identify Sensor Threshold Values
     #    ${old_threshold}   original threshold values list of the given sensor.
 
     # Retrieves modified threshold values of the original threshold value.
-    ${threshold_dict}=  Modify And Fetch Threshold  ${old_threshold}  ${thresholds_list}
+    ${threshold_list}  ${threshold_dict}=  Modify And Fetch Threshold  ${old_threshold}  ${thresholds_list}
 
-    [Return]  ${threshold_dict}
+    [Return]  ${threshold_list}  ${threshold_dict}
 
 
 Set Sensor Threshold For given Sensor
     [Documentation]  Set Sensor Threshold for given sensor with given Upper and Lower critical
     ...              and non-critical values Via IPMI.
-    [Arguments]  ${threshold_list}  ${sensor}
+    [Arguments]  ${threshold_dict}  ${sensor}
 
     # Description of Argument(s):
-    #    ${threshold_list}    New thresholds to be set, eg: [ na, 101, 102, 103 ]
+    #    ${threshold_dict}    New thresholds dictionary to be set
+    #                         E.g. {'lcr': 2600, 'lnc': 'na', 'unc': 'na', 'ucr': 12200}
     #    ${sensor}            Sensor name, eg: SENSOR_1, FAN_1
 
     # The return data will be newly set threshold value for the given sensor.
 
     # Set critical and non-critical values for the given sensor.
-    FOR  ${criticals}  IN  @{threshold_list}
+    FOR  ${criticals}  IN  @{threshold_dict}
         # Set Lower/Upper critical and non-critical values if a threshold is available.
-        Run keyword if  '${threshold_list['${criticals}']}' != 'na'
+        Run keyword if  '${threshold_dict['${criticals}']}' != 'na'
         ...  Run IPMI Standard Command
-        ...  sensor thresh "${sensor}" ${criticals} ${threshold_list['${criticals}']}
+        ...  sensor thresh "${sensor}" ${criticals} ${threshold_dict['${criticals}']}
         # Allow Network restart sleep time for the readings to get reflected.
         Sleep  ${NETWORK_RESTART_TIME}
     END
