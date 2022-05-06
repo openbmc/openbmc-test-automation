@@ -18,6 +18,7 @@ ${valid_password2}      0penBmc2
 ${admin_level_priv}     4
 ${operator_level_priv}  3
 ${max_num_users}        ${15}
+${empty_name_pattern}   ^User Name\\s.*\\s:\\s$
 
 ** Test Cases **
 
@@ -253,7 +254,7 @@ IPMI Create Random User Plus Password And Privilege
     ${random_username}=  Generate Random String  8  [LETTERS]
     Set Suite Variable  ${random_username}
 
-    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    ${random_userid}=  Find Free User Id
     IPMI Create User  ${random_userid}  ${random_username}
 
     # Set given password for newly created user.
@@ -285,3 +286,20 @@ Test Teardown Execution
     ...  Redfish.Delete  /redfish/v1/AccountService/Accounts/${random_username}
 
     Redfish.Logout
+
+
+Find Free User Id
+    [Documentation]  Find a userid that is not being used.
+    FOR    ${jj}    IN RANGE    300
+        ${random_userid}=  Evaluate  random.randint(1, ${max_num_users})  modules=random
+        ${access}=  Run IPMI Standard Command  channel getaccess 1 ${random_userid}
+
+        ${name_line}=  Get Lines Containing String  ${access}  User Name
+        Log To Console  For ID ${random_userid}: ${name_line}
+        ${is_empty}=  Run Keyword And Return Status
+        ...  Should Match Regexp  ${name_line}  ${empty_name_pattern}
+
+        Exit For Loop If  ${is_empty} == ${True}
+    END
+    Run Keyword If  '${jj}' == '299'  Fail  msg=A free user ID could not be found.
+    [Return]  ${random_userid}
