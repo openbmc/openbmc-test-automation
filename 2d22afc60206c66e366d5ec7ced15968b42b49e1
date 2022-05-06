@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f08fb39c_fc594720",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-06T04:48:54Z",
+      "side": 1,
+      "message": "Rename suite to test_privilege_registry.robot \n\nPlease",
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7756372d_e9e17729",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-06T04:48:54Z",
+      "side": 1,
+      "message": "[ WARN ] Multiple tests with name \u0027Login Redfish Default Admin User\u0027 executed in suite \u0027Redfish Privilege Registry\u0027.\nLogin Redfish Default Admin User\n\nDelete one of them",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 17
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
