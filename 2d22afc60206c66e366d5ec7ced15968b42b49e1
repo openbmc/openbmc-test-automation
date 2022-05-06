@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d45e1542_0b99eac5",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-06T04:54:54Z",
+      "side": 1,
+      "message": "W: 128, 110: Line is too long (exceeds 110 characters) (LineTooLong)\nW: 129, 110: Line is too long (exceeds 110 characters) (LineTooLong)\nW: 130, 110: Line is too long (exceeds 110 characters) (LineTooLong)\nW: 131, 110: Line is too long (exceeds 110 characters) (LineTooLong)",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 113
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7756372d_e9e17729",
         "filename": "redfish/account_service/redfish_privilege_registry.robot",
         "patchSetId": 1
@@ -36,6 +59,29 @@
         "startChar": 0,
         "endLine": 155,
         "endChar": 17
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cd13532_eec00276",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-06T04:54:54Z",
+      "side": 1,
+      "message": "Is is available upstream. I dont seem to see this one. Can you point me to a commit which has this changes",
+      "range": {
+        "startLine": 302,
+        "startChar": 9,
+        "endLine": 302,
+        "endChar": 50
       },
       "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
