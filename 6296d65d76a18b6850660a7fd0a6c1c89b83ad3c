@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "335fd40c_0ddbd6c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-06T14:29:20Z",
+      "side": 1,
+      "message": "```\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nTest Ipmi Cold Reset :: This suite tests IPMI Cold Reset in OpenBMC.\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nVerify Cold Reset Impact On Sensor Threshold Via IPMI :: Modify se... #(CDT) 2022/05/06 09:18:19.769113 -    1.860551 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U root -P xxxxxxxxx -H xx.xx.xx.xx sensor | grep -i RPM\n...#(CDT) 2022/05/06 09:18:31.180840 -   11.411727 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U root -P xxxxxxxxx -H xx.xx.xx.xx sensor thresh \"fan0_0\" lcr 2600\n#(CDT) 2022/05/06 09:20:06.750507 -   95.569667 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U root -P xxxxxxxxx -H xx.xx.xx.xx sensor thresh \"fan0_0\" ucr 12200\n#(CDT) 2022/05/06 09:20:42.524433 -   35.773927 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U root -P xxxxxxxxx -H xx.xx.xx.xx sensor | grep -i RPM | grep \"fan0_0\"\n..#(CDT) 2022/05/06 09:20:54.117982 -   11.593548 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U root -P xxxxxxxxx -H xx.xx.xx.xx raw 0x06 0x02\n..#(CDT) 2022/05/06 09:21:33.802074 -   39.684092 - Executing: get(\u0027/redfish/v1/Managers/bmc\u0027)\n#(CDT) 2022/05/06 09:23:13.532871 -   99.730798 - Executing: get(\u0027/redfish/v1/Managers/bmc\u0027)\n#(CDT) 2022/05/06 09:23:25.620913 -   12.088042 - Executing: get(\u0027/redfish/v1/Managers/bmc\u0027)\n.#(CDT) 2022/05/06 09:23:27.031519 -    1.410606 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U root -P xxxxxxxxx -H xx.xx.xx.xx sensor | grep -i RPM | grep \"fan0_0\"\nVerify Cold Reset Impact On Sensor Threshold Via IPMI :: Modify se... | PASS |\n------------------------------------------------------------------------------\nTest Ipmi Cold Reset :: This suite tests IPMI Cold Reset in OpenBMC.  | PASS |\n1 test, 1 passed, 0 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n```\n",
+      "revId": "6296d65d76a18b6850660a7fd0a6c1c89b83ad3c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
