@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "60d07d28_ff637ee0",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-06T07:16:45Z",
+      "side": 1,
+      "message": "can u please mention what is Redfish privilege Registry and brief on what is this test script for?",
+      "range": {
+        "startLine": 2,
+        "startChar": 16,
+        "endLine": 2,
+        "endChar": 58
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f08fb39c_fc594720",
         "filename": "redfish/account_service/redfish_privilege_registry.robot",
         "patchSetId": 1
@@ -14,6 +37,75 @@
       "writtenOn": "2022-05-06T04:48:54Z",
       "side": 1,
       "message": "Rename suite to test_privilege_registry.robot \n\nPlease",
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce529eb3_766633ca",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-06T07:16:45Z",
+      "side": 1,
+      "message": "Redfish Test Teardown Execution\n    [Documentation]  Do the post test teardown.\n\n    FFDC On Test Case Fail\n\n\nso u can just mention like below.. I dont think u need a separate keyword\n\nTest Teardown    FFDC On Test Case Fail",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 9,
+        "endChar": 48
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dd60ec2_6993002e",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-06T07:16:45Z",
+      "side": 1,
+      "message": "Too big test title.. Simply can it be \u0027Verify Redfish Privilege Registry Mappings For Account Service\u0027\n\n[Documentation]  Verify Privilege Registry Account Service Mappings resource properties using Redfish",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 81
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b1c5a69_bab361ba",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-06T07:16:45Z",
+      "side": 1,
+      "message": "mention e.g. For Redfish Privilege Registry Mapping Properties \n\nand can u minimize the json format like below.. Too many lines\n\n\n  #    {\n    #        \"Entity\": \"AccountService\",\n    #        \"OperationMap\": {\n    #            \"GET\": [{\n    #                    \"Privilege\": [\n    #                        \"Login\"\n    #                    ]}],\n    #            \"HEAD\": [{\n    #                    \"Privilege\": [\n    #                        \"Login\"\n    #                    ]}],\n    #            \"PATCH\": [{\n    #                    \"Privilege\": [\n    #                        \"ConfigureUsers\"\n    #                    ]}], \n    #            \"PUT\": [{\n    #                    \"Privilege\": [\n    #                        \"ConfigureUsers\"\n    #                    ]}],\n    #            \"DELETE\": [{\n    #                    \"Privilege\": [\n    #                        \"ConfigureUsers\"\n    #                    ]}],\n    #            \"POST\": [\n    #                {\n    #                    \"Privilege\": [\n    #                        \"ConfigureUsers\"\n    #                    ]}]}\n    #    },",
+      "range": {
+        "startLine": 63,
+        "startChar": 2,
+        "endLine": 63,
+        "endChar": 19
+      },
       "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -36,6 +128,75 @@
         "startChar": 0,
         "endLine": 131,
         "endChar": 113
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bb13f12_5f2705c2",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-06T07:16:45Z",
+      "side": 1,
+      "message": "Create Redfish Privilege Test User\n\n[Documentation]  Creates a Redfish Privilege test user.",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 46
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc7bfb5d_5c4b642b",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-06T07:16:45Z",
+      "side": 1,
+      "message": "Verify Redfish Privilege Test User",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 46
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b63aa7b9_55387739",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-06T07:16:45Z",
+      "side": 1,
+      "message": "why u need this test?\n\nAre u making sure u logged in with Redfish user.. here just logout is called",
+      "range": {
+        "startLine": 145,
+        "startChar": 1,
+        "endLine": 149,
+        "endChar": 18
       },
       "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
@@ -66,6 +227,214 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6bf539bc_9992e52d",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-06T07:16:45Z",
+      "side": 1,
+      "message": "yes many redundant TCs\n\n@151 Login Redfish Default Admin User\n@169 Logout Of Redfish Admin\n@275 Login Redfish Default Admin User",
+      "parentUuid": "7756372d_e9e17729",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 17
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "067cdca1_df49a848",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-06T07:16:45Z",
+      "side": 1,
+      "message": "There is no keyword for Redfish login with Admin.. are just simply logging out ?? or else have this \u0027Redfish.Logout\u0027 called in @163 testcase",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 18
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f01038f_ee310a15",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-06T07:16:45Z",
+      "side": 1,
+      "message": "Is this a good practise to have \u0027/\u0027 in test title?\n\nAccording to doc.. can the test title be \u0027Verify Admin user privileges via Redfish.\u0027",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 35
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a964b49_28e40f51",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-06T07:16:45Z",
+      "side": 1,
+      "message": "can we have Redfish.Login in \u0027Test Setup\u0027 ?",
+      "range": {
+        "startLine": 199,
+        "startChar": 3,
+        "endLine": 199,
+        "endChar": 17
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a80345cb_7bdc8655",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-06T07:16:45Z",
+      "side": 1,
+      "message": "Revisit the testcase that is created for Logout verification with various user types.. No good just to see Redfish.Logout keyword.. how does this behaves if just Logout_Of_Redfish_Operator_User is executed?",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 0
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55afb10e_178aabcf",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-06T07:16:45Z",
+      "side": 1,
+      "message": "@235 Create Redfish ReadOnly\n@242 Verify Redfish ReadOnly\n@269 Logout Redfish ReadOnly User\n\ncan u club this both TCs to \u0027Create And Verify ReadOnly User\u0027",
+      "range": {
+        "startLine": 235,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 23
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05976f2d_fe28f57c",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-06T07:16:45Z",
+      "side": 1,
+      "message": "Verify Redfish ReadOnly Privileges",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 38
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b3ceea9_ef01443d",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-06T07:16:45Z",
+      "side": 1,
+      "message": "Redundant testcase.. look at the comment in @235",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 273,
+        "endChar": 18
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ff25fba_63001711",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-06T07:16:45Z",
+      "side": 1,
+      "message": "Get Redfish Privilege Registry json URL",
+      "range": {
+        "startLine": 296,
+        "startChar": 0,
+        "endLine": 296,
+        "endChar": 34
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0cd13532_eec00276",
         "filename": "redfish/account_service/redfish_privilege_registry.robot",
         "patchSetId": 1
@@ -82,6 +451,29 @@
         "startChar": 9,
         "endLine": 302,
         "endChar": 50
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3926b6a7_a5872fa5",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-06T07:16:45Z",
+      "side": 1,
+      "message": "@313 Verify Redfish user with given credentials.\n\n@322 e.g True/False",
+      "range": {
+        "startLine": 322,
+        "startChar": 44,
+        "endLine": 322,
+        "endChar": 63
       },
       "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
