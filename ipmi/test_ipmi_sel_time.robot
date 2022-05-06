@@ -408,7 +408,7 @@ Time Sync Mode Change Through Redfish
     [Arguments]   ${value}
 
     # Description of argument(s):
-    #    ${value}    can be either ${FALSE} or ${TRUE}
+    # ${value}    can be either ${FALSE} or ${TRUE}
 
     # May be changed to WebView.
 
@@ -421,7 +421,7 @@ Change Time Sync Mode Via Redfish
     [Arguments]   ${value}
 
     # Description of argument(s):
-    #    ${value}    can be either ${FALSE} or ${TRUE}
+    # ${value}    can be either ${FALSE} or ${TRUE}
 
     # Creates request body for Redfish url.
     ${mode}=  Create Dictionary  ProtocolEnabled=${value}
@@ -451,12 +451,12 @@ Set SEL Time Entry Via Raw Command
     [Arguments]  ${sel_date_raw}
 
     # Description of argument(s):
-    #    ${sel_date_raw}     Time to set in hexadecimal bytes.
-    #    Example:
-    #       If date is 1st January 2022 12:30:00 PM,
-    #       the hexadecimal timestamp is, 61D04948.
-    #    then the request bytes are,
-    #    ${sel_date_raw}     0x48 0x49 0xd0 0x61
+    # ${sel_date_raw}     Time to set in hexadecimal bytes.
+    # Example:
+    #    If date is 1st January 2022 12:30:00 PM,
+    #    the hexadecimal timestamp is, 61D04948.
+    # then the request bytes are,
+    # ${sel_date_raw}     0x48 0x49 0xd0 0x61
 
     Run IPMI Command  ${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][0]} ${sel_date_raw}
     Sleep  ${NETWORK_RESTART_TIME}
@@ -476,8 +476,8 @@ Verify Last SEL Added
     [Arguments]  ${sensor_type}  ${sensor_name}
 
     # Description of argument(s):
-    #    ${sensor_type}         Type of the sensor (say Fan, Temp, etc.,).
-    #    ${sensor_name}         Name of the sensor.
+    # ${sensor_type}         Type of the sensor (say Fan, Temp, etc.,).
+    # ${sensor_name}         Name of the sensor.
 
     ${resp}=  Run IPMI Standard Command  sel elist last 1
     Run Keywords  Should Contain  ${resp}  ${sensor_type} ${sensor_name}  AND
@@ -499,13 +499,14 @@ Get Specific Sel Date
     [Arguments]  ${year}
 
     # Description of argument(s):
-    #    ${year}             Can be any number of years (say 5 year).
+    # ${year}             Can be any number of years (say 5 year).
 
     ${current_date}=  Get Current Date from BMC
 
     # Converting given years to days by multiplying with 365days and adding the days to current date.
     ${days}=  Evaluate  365*${year}+1
-    ${date} =  Add Time To Date  ${current_date}  ${days}d  result_format=%m/%d/%Y %H:%M:%S  date_format=%m/%d/%Y %H:%M:%S
+    ${date}=  Add Time To Date
+    ...  ${current_date}  ${days}d  result_format=%m/%d/%Y %H:%M:%S  date_format=%m/%d/%Y %H:%M:%S
 
     [Return]   ${date}
 
@@ -515,7 +516,7 @@ Converting Date to HexaDecimal
     [Arguments]  ${date}
 
     # Description of argument(s):
-    #    ${date}             Can be any date in format %m/%d/%Y %H:%M:%S.
+    # ${date}             Can be any date in format %m/%d/%Y %H:%M:%S.
 
     ${epoch_date}=  Convert Date  ${date}  epoch  exclude_millis=yes  date_format=%m/%d/%Y %H:%M:%S
     ${date}=  Convert To Hex  ${epoch_date}  lowercase=yes
@@ -540,8 +541,8 @@ Get Time Difference
     [Arguments]  ${date1}  ${date2}
 
     # Description of argument(s):
-    #    ${date1}             Can be any date in format %m/%d/%Y %H:%M:%S.
-    #    ${date2}             Can be any date in format %m/%d/%Y %H:%M:%S.
+    # ${date1}             Can be any date in format %m/%d/%Y %H:%M:%S.
+    # ${date2}             Can be any date in format %m/%d/%Y %H:%M:%S.
 
     ${epoch_date1}=  Convert Date  ${date1}  epoch  exclude_millis=yes  date_format=%m/%d/%Y %H:%M:%S
     ${epoch_date2}=  Convert Date  ${date2}  epoch  exclude_millis=yes  date_format=%m/%d/%Y %H:%M:%S
@@ -556,12 +557,13 @@ Identify SEL Time Future DateTime
     [Arguments]  ${time}
 
     # Description of argument(s):
-    #    ${time}             Can be any number of hours or minutes in format %H:%M:%S.
+    # ${time}             Can be any number of hours or minutes in format %H:%M:%S.
 
     # Gets BMC current date via date command.
     ${current_date}=  Get Current Date from BMC
 
-    ${datetime} =  Add Time To Date  ${current_date}  ${time}  result_format=%m/%d/%Y %H:%M:%S  date_format=%m/%d/%Y %H:%M:%S
+    ${datetime} =  Add Time To Date
+    ...  ${current_date}  ${time}  result_format=%m/%d/%Y %H:%M:%S  date_format=%m/%d/%Y %H:%M:%S
 
     #Set SEL Time.
     ${quoted_date}=  Fetch Date  ${datetime}
@@ -574,12 +576,13 @@ Identify SEL Time DateTime Delay
     [Arguments]  ${days}
 
     # Description of argument(s):
-    #    ${days}             Can be any days (say 3d).
+    # ${days}             Can be any days (say 3d).
 
     # Gets BMC current date via date command.
     ${current_date}=  Get Current Date from BMC
 
-    ${datetime} =  Subtract Time From Date  ${current_date}  ${days}  result_format=%m/%d/%Y %H:%M:%S  date_format=%m/%d/%Y %H:%M:%S
+    ${datetime}=  Subtract Time From Date
+    ...  ${current_date}  ${days}  result_format=%m/%d/%Y %H:%M:%S  date_format=%m/%d/%Y %H:%M:%S
 
     # Format the sel time.
     # function call from lib/utils.py.
@@ -593,7 +596,7 @@ Set SEL Time Via IPMI
     [Arguments]  ${date_time}
 
     # Description of argument(s):
-    #    ${date_time}       Can be any date in format %m/%d/%Y %H:%M:%S.
+    # ${date_time}       Can be any date in format %m/%d/%Y %H:%M:%S.
 
     ${resp}=  Run IPMI Standard Command  sel time set "${date_time}"
     Should Not Contain  ${resp}  Unspecified error
