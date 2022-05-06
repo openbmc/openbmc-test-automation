@@ -133,7 +133,7 @@ Make Large Number Of Wrong SSH Login Attempts And Check Stability
 
     SSHLibrary.Open Connection  ${OPENBMC_HOST}
     @{ssh_status_list}=  Create List
-    FOR  ${iter}  IN RANGE  ${1}  ${loop_iterations} + 1
+    FOR  ${iter}  IN RANGE  ${1}  ${loop_iteration} + 1
       Log To Console  ${iter}th iteration
       ${invalid_password}=   Catenate  ${OPENBMC_PASSWORD}${iter}
       Run Keyword and Ignore Error
