@@ -36,6 +36,6 @@ Verify KCS Raw IPMI Multiple Times
 Test Setup Execution
    [Documentation]  Do suite setup tasks.
 
-    Should Not Be Empty  ${OS_HOST}
-    Should Not Be Empty  ${OS_USERNAME}
-    Should Not Be Empty  ${OS_PASSWORD}
+    Should Not Be Empty  ${OS_HOST}  msg=Please provide required parameter OS_HOST
+    Should Not Be Empty  ${OS_USERNAME}  msg=Please provide required parameter OS_USERNAME
+    Should Not Be Empty  ${OS_PASSWORD}  msg=Please provide required parameter OS_PASSWORD
