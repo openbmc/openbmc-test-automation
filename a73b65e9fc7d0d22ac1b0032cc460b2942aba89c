@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5d2dda5_79fcdd65",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-09T06:54:00Z",
+      "side": 1,
+      "message": "complete the sentence. Add SEL entry and verify for any given random sensor",
+      "range": {
+        "startLine": 71,
+        "startChar": 21,
+        "endLine": 71,
+        "endChar": 41
+      },
+      "revId": "a73b65e9fc7d0d22ac1b0032cc460b2942aba89c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df7ea3d1_ca9922c4",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-09T06:54:00Z",
+      "side": 1,
+      "message": "Recent",
+      "range": {
+        "startLine": 141,
+        "startChar": 15,
+        "endLine": 141,
+        "endChar": 22
+      },
+      "revId": "a73b65e9fc7d0d22ac1b0032cc460b2942aba89c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0020205e_8de15290",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-09T06:54:00Z",
+      "side": 1,
+      "message": "add - with current BMC epoch timestamp.",
+      "range": {
+        "startLine": 184,
+        "startChar": 22,
+        "endLine": 184,
+        "endChar": 68
+      },
+      "revId": "a73b65e9fc7d0d22ac1b0032cc460b2942aba89c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c7e0ade_0b39706e",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-09T06:54:00Z",
+      "side": 1,
+      "message": "I dont think ur using ${resp} else where in this testcase",
+      "range": {
+        "startLine": 214,
+        "startChar": 4,
+        "endLine": 216,
+        "endChar": 55
+      },
+      "revId": "a73b65e9fc7d0d22ac1b0032cc460b2942aba89c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edc6f59a_64f26b51",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-09T06:54:00Z",
+      "side": 1,
+      "message": "use ID through out",
+      "range": {
+        "startLine": 260,
+        "startChar": 56,
+        "endLine": 260,
+        "endChar": 58
+      },
+      "revId": "a73b65e9fc7d0d22ac1b0032cc460b2942aba89c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e48debc_5fe58631",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-09T06:54:00Z",
+      "side": 1,
+      "message": "Add proper doc",
+      "range": {
+        "startLine": 287,
+        "startChar": 21,
+        "endLine": 287,
+        "endChar": 34
+      },
+      "revId": "a73b65e9fc7d0d22ac1b0032cc460b2942aba89c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b2f172b_60a86d7c",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-09T06:54:00Z",
+      "side": 1,
+      "message": "IPMI",
+      "range": {
+        "startLine": 304,
+        "startChar": 56,
+        "endLine": 304,
+        "endChar": 60
+      },
+      "revId": "a73b65e9fc7d0d22ac1b0032cc460b2942aba89c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
