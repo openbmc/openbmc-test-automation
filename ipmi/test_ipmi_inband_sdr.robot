@@ -202,7 +202,7 @@ Verify Reserve Device SDR Repository Info Via IPMI Lanplus
 
 Verify Reserve Device SDR Repository For Partial Record
     [Documentation]  Verify whether reservation ID of Reserve Device SDR Repository is accessible
-    ...              to fetch partial record from Get Device SDR.
+    ...  to fetch partial record from Get Device SDR.
     [Tags]  Verify_Reserve_Device_SDR_Repository_For_Partial_Record
 
     # Get Reservation ID.
@@ -210,7 +210,7 @@ Verify Reserve Device SDR Repository For Partial Record
     ${reserve_id}=  Split String  ${resp}
 
     # Check whether the response for Get device SDR command is obtained with the given Reservation ID.
-    ${resp}=  Run IPMI Standard Command
+    ${resp}=  Run Inband IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x${reserve_id[0]} 0x${reserve_id[1]} 0x00 0x00 0x00 0x0f
     ${resp}=  Split String  ${resp}
     # Record data starts from ${resp[2]}.
@@ -229,19 +229,17 @@ Verify Reserve Device SDR Repository For Partial Record After BMC Reboot
     ${reserve_id}=  Split String  ${resp}
 
     # Check whether the response for Get device SDR command is obtained with the given Reservation ID.
-    ${resp1}=  Run IPMI Standard Command
+    ${resp1}=  Run Inband IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x${reserve_id[0]} 0x${reserve_id[1]} 0x00 0x00 0x00 0x0f
 
     # Reboot bmc.
-    Run IPMI Standard Command  raw ${IPMI_RAW_CMD['Resets']['cold'][0]}
-    Wait Until Keyword Succeeds  3 min  10 sec  Is BMC Unpingable
-    Wait Until Keyword Succeeds  3 min  10 sec  Is BMC Operational
+    IPMI MC Reset Cold (run)
 
     # Check whether the response for Get device SDR command is obtained with the given Reservation ID.
     # Reserve IDs are volatile so once bmc is rebooted, new Reserve ID should be generated.
     ${resp2}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Reserve_Repository'][5]}*
-    ...  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} ${reserve_id[0]} ${reserve_id[1]} 0x00 0x00 0x00 0x0f
+    ...  Run Inband IPMI Standard Command
+    ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x${reserve_id[0]} 0x${reserve_id[1]} 0x00 0x00 0x00 0x0f
 
 
 Verify Reserve Device SDR Repository Invalid Reservation ID For Partial Record
@@ -259,12 +257,12 @@ Verify Reserve Device SDR Repository Invalid Reservation ID For Partial Record
     # Check whether response for Gner device SDR command is obtained with Reservation ID 1.
     # Once Reservation ID is overwritten, old Reservation ID will be invalid.
     ${resp1}=   Run Keyword and Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Reserve_Repository'][5]}*
-    ...  Run IPMI Standard Command
+    ...  Run Inband IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x${reserve_id[0]} 0x${reserve_id[1]} 0x00 0x00 0x00 0x0f
 
 
 Verify Get Device SDR For Maximum Record Via IPMI
-    [Documentation]  Verify Get Device SDR for each and every Record Via IPMI lanplus.
+    [Documentation]  Verify Get Device SDR for each and every Record Via IPMI Inband.
     [Tags]  Verify_Get_Device_SDR_For_Maximum_Record_Via_IPMI
 
     # Gets the Total Record Count from SDR Info and the last Record entry number.
@@ -275,8 +273,8 @@ Verify Get Device SDR For Maximum Record Via IPMI
         # Convert number to hexadecimal record ID.
         ${recordhex}=  Convert To Hex  ${record}  length=2  lowercase=yes
 
-        # Get SDR command.
-        ${resp}=  Run IPMI Standard Command
+        # Get Device SDR command.
+        ${resp}=  Run Inband IPMI Standard Command
         ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x00 0x00 0x${recordhex} 0x00 0x00 0xff
         ${get_dev_SDR}=  Split String  ${resp}
 
@@ -320,7 +318,7 @@ Verify Get Device SDR For Invalid Data Request Via IPMI
 
     # Get SDR command with extra bytes.
     ${resp}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Get'][3]}*
-    ...  Run IPMI Standard Command
+    ...  Run Inband IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x00 0x00 ${IPMI_RAW_CMD['Device_SDR']['Get'][1]} 0x00
     # Proper error code should be returned.
     Should Contain  ${resp}  ${IPMI_RAW_CMD['Device_SDR']['Get'][2]}
@@ -351,7 +349,7 @@ Get IPMI Sensor Count
     # bmc              | 00h | ns  |  6.1 | Logical FRU @3Ch
     # ethernet         | 00h | ns  |  1.1 | Logical FRU @46h
 
-    ${output}=  Run IPMI Standard Command  SDR elist all
+    ${output}=  Run IPMI Standard Command  sdr elist all
     ${sensor_list}=  Split String  ${output}  \n
     ${sensor_count}=  Get Length  ${sensor_list}
     [Return]  ${sensor_count}
@@ -471,7 +469,7 @@ Get IPMI SDR Status Info
     # SDR Repository Alloc info supported : yes
 
     # Get SDR Info IPMI command.
-    ${resp}=  Run IPMI Standard Command  SDR info
+    ${resp}=  Run IPMI Standard Command  sdr info
 
     # Return lines for given IPMI SDR Info.
     ${setting_line}=  Get Lines Containing String  ${resp}  ${setting}
@@ -497,9 +495,7 @@ Get Record Count And Last Record From SDR
 
 Suite Setup Execution
    [Documentation]  Do suite setup tasks.
-
     Redfish.Login
     Should Not Be Empty  ${OS_HOST}  msg=Please provide required parameter OS_HOST
     Should Not Be Empty  ${OS_USERNAME}  msg=Please provide required parameter OS_USERNAME
     Should Not Be Empty  ${OS_PASSWORD}  msg=Please provide required parameter OS_PASSWORD
-
