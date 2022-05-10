@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2787d3e0_71eabe70",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-10T06:14:26Z",
+      "side": 1,
+      "message": "runtime\n\n@13: can result in several test failure.\n\n@15: \u0027Set Admin User ID List\u0027\n\n@18: what is \u0027correctly avoided\u0027",
+      "range": {
+        "startLine": 9,
+        "startChar": 3,
+        "endLine": 9,
+        "endChar": 11
+      },
+      "revId": "cbf46b4f2a8026e055fe88efd1af5ade07ca17a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c509c72_cb34ebd2",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-10T06:14:26Z",
+      "side": 1,
+      "message": "instead of ${jj} mention as {num}\n\n@747: userid --\u003e user ID\n\nGive one line space after [Documentation] .. make sure for through out this file",
+      "range": {
+        "startLine": 748,
+        "startChar": 2,
+        "endLine": 748,
+        "endChar": 35
+      },
+      "revId": "cbf46b4f2a8026e055fe88efd1af5ade07ca17a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cee4e8f_af9632c8",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-10T06:14:26Z",
+      "side": 1,
+      "message": "as it already mentioned that the returned parameters are int do not suffix in the parameter name.. let it be ${user_count} , ${max_ids_count}",
+      "range": {
+        "startLine": 779,
+        "startChar": 3,
+        "endLine": 779,
+        "endChar": 21
+      },
+      "revId": "cbf46b4f2a8026e055fe88efd1af5ade07ca17a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "286aa684_b9fc54a0",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-10T06:14:26Z",
+      "side": 1,
+      "message": "@791 : description of arguments are missing\n@797 : Verify IPMI Username Present\n@799  : description of arguments are missing",
+      "range": {
+        "startLine": 791,
+        "startChar": 1,
+        "endLine": 791,
+        "endChar": 28
+      },
+      "revId": "cbf46b4f2a8026e055fe88efd1af5ade07ca17a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86bc8abb_2c11e1bd",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 806,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-10T06:14:26Z",
+      "side": 1,
+      "message": "non admin.. to be precise",
+      "range": {
+        "startLine": 806,
+        "startChar": 32,
+        "endLine": 806,
+        "endChar": 40
+      },
+      "revId": "cbf46b4f2a8026e055fe88efd1af5ade07ca17a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c06421d8_12a89cc5",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-10T06:14:26Z",
+      "side": 1,
+      "message": "one line space after [Documentation]",
+      "range": {
+        "startLine": 823,
+        "startChar": 2,
+        "endLine": 823,
+        "endChar": 57
+      },
+      "revId": "cbf46b4f2a8026e055fe88efd1af5ade07ca17a6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
