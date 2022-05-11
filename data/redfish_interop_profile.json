@@ -1,0 +1,9 @@
+{
+    "SchemaDefinition": "RedfishInteroperabilityProfile.v1_0_0",
+    "ProfileName": "OpenBMC_Profile",
+    "ProfileVersion": "1.0.0",
+    "Purpose": "A minimally viable profile describes the requirements for openBMC.",
+    "OwningEntity": "OpenBMC",
+    "ContactInfo": "openbmc@lists.ozlabs.org",
+    "Resources": {}
+}
