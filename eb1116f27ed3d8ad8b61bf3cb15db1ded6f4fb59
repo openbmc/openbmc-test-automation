@@ -46,6 +46,30 @@
       },
       "revId": "eb1116f27ed3d8ad8b61bf3cb15db1ded6f4fb59",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0953821d_881bc902",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-11T13:03:37Z",
+      "side": 1,
+      "message": "Yeah, This the keyword i have used this script.\nThanks George.",
+      "parentUuid": "f9aed609_bade7575",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 22
+      },
+      "revId": "eb1116f27ed3d8ad8b61bf3cb15db1ded6f4fb59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
