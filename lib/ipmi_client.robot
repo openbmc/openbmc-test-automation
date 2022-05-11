@@ -462,26 +462,27 @@ Create SEL
     [Return]  ${resp}
 
 
-Fetch Any Sensor From Sensor List
-    [Documentation]  Find any sensor name randomly from Sensor list.
+Fetch One Threshold Sensor From Sensor List
+    [Documentation]  Fetch one threshold sensor randomly from Sensor list.
+
+    @{sensor_name_list}=  Create List
 
     ${resp}=  Run IPMI Standard Command  sensor
+    @{sensor_list}=  Split To Lines  ${resp}
 
-    # Find total number of sensor.
-    ${data}=  Split To Lines  ${resp}
-    ${length}=  Get Length  ${data}
+    # Omit the discrete sensor and create an threshold sensor name list
+    FOR  ${sensor}  IN  @{sensor_list}
+      ${discrete_sensor_status}=  Run Keyword And Return Status  Should Contain  ${sensor}  discrete
+      Continue For Loop If  '${discrete_sensor_status}' == 'True'
+      ${sensor_details}=  Split String  ${sensor}  |
+      ${get_sensor_name}=  Get From List  ${sensor_details}  0
+      ${sensor_name}=  Set Variable  ${get_sensor_name.strip()}
+      Append To List  ${sensor_name_list}  ${sensor_name}
+    END
 
-    # Identify any one sensor.
-    ${sensor_index}=  Evaluate  random.randint(1, ${length})  modules=random
-    ${sensor_data}=  Set Variable  ${data[${sensor_index}-1]}
-    ${sensor}=  Split String  ${sensor_data}  |
+    ${random_sensor_name}=  Evaluate  random.choice(${sensor_name_list})  random
 
-    # Retrieve Sensor Name and return.
-    ${sensor_name}=  Set Variable  ${sensor[0]}
-    ${sensor_name}=  Remove Whitespace  ${sensor_name}
-
-    [Return]  ${sensor_name}
-
+    [Return]  ${random_sensor_name}
 
 Fetch Sensor Details From SDR
     [Documentation]  Identify the sensors from sdr get and fetch sensor details required.
