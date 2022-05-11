@@ -48,6 +48,15 @@ Redfish Service Validator Result
     Should Not Contain  ${tool_output}  Validation has failed
 
 
+Redfish Interop Validator Result
+    [Documentation]  Check tool output for errors.
+    [Arguments]      ${tool_output}
+
+    # Example:
+    # Validation has failed: 9 problems found
+    Should Not Contain  ${tool_output}  Validation has failed
+
+
 Redfish JsonSchema ResponseValidator Result
     [Documentation]  Check tool output for errors.
     [Arguments]      ${tool_output}
@@ -55,4 +64,3 @@ Redfish JsonSchema ResponseValidator Result
     # Example:
     # 0 errors
     Should Contain  ${tool_output}  0 errors
-
