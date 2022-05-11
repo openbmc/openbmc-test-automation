@@ -9,11 +9,6 @@ Variables        ../data/ipmi_raw_cmd_table.py
 Test Setup       Test Setup Execution
 Test Teardown    FFDC On Test Case Fail
 
-*** Variables ***
-
-${sensor_number}      0x17
-
-
 *** Test Cases ***
 
 Verify IPMI SEL Version
@@ -260,10 +255,7 @@ Verify Clear SEL After Cold Reset
     ${reserve_id}=  Split String  ${resp}
 
     # Run Cold Reset.
-    ${resp}=  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['Cold Reset']['reset'][0]}
-    Wait Until Keyword Succeeds  3 min  10 sec  Is BMC Unpingable
-    Wait Until Keyword Succeeds  3 min  10 sec  Is BMC Operational
+    IPMI MC Reset Cold (run)
 
     ${cmd}=  Catenate  ${IPMI_RAW_CMD['SEL_entry']['Clear_SEL'][0]} 0x${reserve_id[0]}
     ...  0x${reserve_id[1]} ${IPMI_RAW_CMD['SEL_entry']['Clear_SEL'][1]}
