@@ -22,6 +22,30 @@
       },
       "revId": "eb1116f27ed3d8ad8b61bf3cb15db1ded6f4fb59",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9aed609_bade7575",
+        "filename": "ipmi/test_ipmi_systeminfo_parameters.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-11T08:00:39Z",
+      "side": 1,
+      "message": "https://github.com/openbmc/openbmc-test-automation/blob/master/data/boot_table_redfish.json#L353\n\nThis one Sridevi",
+      "parentUuid": "195305e5_33b91916",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 22
+      },
+      "revId": "eb1116f27ed3d8ad8b61bf3cb15db1ded6f4fb59",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
