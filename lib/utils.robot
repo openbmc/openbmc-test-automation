@@ -1037,5 +1037,7 @@ Set BIOS Attribute
 Is BMC Operational
     [Documentation]  Check if BMC is enabled.
 
-    ${bmc_status} =  Redfish Get BMC State
-    Should Be Equal  ${bmc_status}  Enabled
+    Wait Until Keyword Succeeds  5 min  5 sec  Ping Host  ${OPENBMC_HOST}
+    Redfish.login
+    ${bmc_status}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  Status
+    Should Be Equal  ${bmc_status["State"]}  Enabled
