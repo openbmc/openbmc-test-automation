@@ -32,9 +32,7 @@ Test Teardown       FFDC On Test Case Fail
 
 *** Variables ***
 
-${NETWORK_RESTART_TIME}    30s
-@{thresholds_list}         lcr   lnc   unc   ucr
-
+${threshold_set_sleep}    10s
 
 *** Test Cases ***
 
@@ -70,35 +68,41 @@ Verify Cold Reset Impact On Sensor Threshold Via IPMI
     [Tags]  Verify_Cold_Reset_Impact_On_Sensor_Threshold_Via_IPMI
 
     # Get sensor list.
-    ${Sensor_list}=  Get Sensor List
+    ${sensor_list}=  Get Sensor List
 
     # Get initial sensor threshold readings.
-    ${initial_sensor_threshold}  ${sensor_name}=  Get The Sensor Name And Threshold  ${sensor_list}
+    ${sensor_name}  ${sensor_threshold}=  Get The Sensor Name And Threshold  ${sensor_list}
 
-    # Identify sensor threshold values to modify.
-    ${threshold_list}  ${threshold_dict}=  Identify Sensor Threshold Values   ${initial_sensor_threshold}
+    ${threshold_key_list}=  Get Dictionary Keys  ${sensor_threshold}
+    ${random_threshold_key}=  Evaluate  random.choice(${threshold_key_list})  random
 
-    # Set sensor threshold for given sensor and compare with initial reading.
-    ${set_sensor_threshold}=  Set Sensor Threshold For given Sensor
-    ...  ${threshold_dict}  ${sensor_name}
-    Should Not Be Equal  ${set_sensor_threshold}  ${initial_sensor_threshold}
+    ${old_threshold_value}=  Get From Dictionary  ${sensor_threshold}  ${random_threshold_key}
 
-    # Execute cold reset command via IPMI and check status.
+    # Modify Default Threshold Value For An Sensor To Set An New Threshold Value
+    ${new_settable_threshold_value}=  Modify Default Sensor Threshold Value  ${old_threshold_value}
+
+    # Set/Get sensor threshold for given sensor and compare with initial reading.
+    ${new_threshold_value}=  Set And Get Sensor Threshold For given Sensor  ${sensor_name}  ${random_threshold_key}
+    ...  ${new_settable_threshold_value}
+
+    Should Not Be Equal  ${new_threshold_value}  ${old_threshold_value}
+
+    # Cold Reset Via IPMI raw command.
     Run External IPMI Raw Command  ${IPMI_RAW_CMD['Cold Reset']['reset'][0]}
+
+    # Get the BMC Status.
     Wait Until Keyword Succeeds  3 min  10 sec  Is BMC Unpingable
-    Wait Until Keyword Succeeds  3 min  10 sec  Is BMC Operational
+    Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Operational
 
     # Get sensor data for the sensor identified.
     ${data_after_coldreset}=  Wait Until Keyword Succeeds  2 min  30 sec
-    ...  Run IPMI Standard Command   sensor | grep -i RPM | grep "${sensor_name}"
+    ...  Run IPMI Standard Command  sensor | grep -i "${sensor_name}"
 
     # Get sensor threshold readings after BMC restarts.
-    ${sensor_threshold_after_reset}  ${sensor_name_after_reset}=
-    ...  Get The Sensor Name And Threshold  ${data_after_coldreset}
+    ${threshold_value_after_reset}=  Getting Sensor Threshold Value Based On Threshold Key  ${random_threshold_key}  ${sensor_name}
 
     # Compare with initial sensor threshold values.
-    Should Be Equal  ${sensor_threshold_after_reset}  ${initial_sensor_threshold}
-
+    Should Be Equal  ${threshold_value_after_reset}  ${old_threshold_value}
 
 *** Keywords ***
 
@@ -107,100 +111,135 @@ Get Sensor List
 
     # BMC may take time to populate all the sensors once BMC Cold reset completes.
     ${data}=  Wait Until Keyword Succeeds  2 min  30 sec
-    ...  Run IPMI Standard Command   sensor | grep -i RPM
+    ...  Run IPMI Standard Command   sensor
 
     [Return]  ${data}
-
-Identify Sensor
-    [Documentation]  To fetch first sensor listed from sensor list IPMI command and return the sensor.
-    [Arguments]  ${data}
-
-    # Description of Argument(s):
-    # ${data}     All the sensors listed with ipmi sensor list command.
-
-    # Find Sensor detail of sensor list first entry.
-
-    ${data}=  Split To Lines  ${data}
-    ${data}=  Set Variable  ${data[0]}
-
-    [Return]  ${data}
-
-
-Get The Sensor Reading And Name
-    [Documentation]  To get the sensor reading of the given sensor using IPMI.
-    [Arguments]  ${Sensors_all}
-
-    # Description of Argument(s):
-    # ${Sensors_all}     All the sensors listed with ipmi sensor list command.
-
-    # Split Sensor details in a list.
-
-    ${sensor}=  Identify Sensor  ${Sensors_all}
-    ${data}=  Split String  ${sensor}  |
-
-    # Locate the sensor name.
-    ${sensor_name}=  Set Variable  ${data[0]}
-    # Function defined in lib/utils.py.
-    ${sensor_name}=  Remove Whitespace  ${sensor_name}
-
-    [Return]  ${data}  ${sensor_name}
-
 
 Get The Sensor Name And Threshold
     [Documentation]  To get the sensor threshold for given sensor using IPMI.
-    [Arguments]  ${Sensor_list}
+    [Arguments]  ${sensor_list}
 
     # Description of Argument(s):
-    #    ${Sensor_list}    All the sensors listed with ipmi sensor list command.
+    #    ${sensor_list}    All the sensors listed with ipmi sensor list command.
 
-    # Gets the sensor data and sensor name for the required sensor.
-    ${data}  ${sensor_name}=  Get The Sensor Reading And Name  ${Sensor_list}
-    # Gets the threshold values in a list.
-    ${threshold}=  Set Variable  ${data[5:9]}
+    @{tmp_list}=  Create List
 
-    [Return]  ${threshold}  ${sensor_name}
+    @{sensor_list_lines}=  Split To Lines  ${sensor_list}
 
-
-Identify Sensor Threshold Values
-    [Documentation]  Identify New Sensor Threshold Values with adding 100 to old threshold values.
-    [Arguments]  ${old_threshold}
-
-    # Description of Argument(s):
-    #    ${old_threshold}   original threshold values list of the given sensor.
-
-    # Retrieves modified threshold values of the original threshold value.
-    ${threshold_list}  ${threshold_dict}=  Modify And Fetch Threshold  ${old_threshold}  ${thresholds_list}
-
-    [Return]  ${threshold_list}  ${threshold_dict}
-
-
-Set Sensor Threshold For given Sensor
-    [Documentation]  Set Sensor Threshold for given sensor with given Upper and Lower critical
-    ...              and non-critical values Via IPMI.
-    [Arguments]  ${threshold_dict}  ${sensor}
-
-    # Description of Argument(s):
-    #    ${threshold_dict}    New thresholds dictionary to be set
-    #                         E.g. {'lcr': 2600, 'lnc': 'na', 'unc': 'na', 'ucr': 12200}
-    #    ${sensor}            Sensor name, eg: SENSOR_1, FAN_1
-
-    # The return data will be newly set threshold value for the given sensor.
-
-    # Set critical and non-critical values for the given sensor.
-    FOR  ${criticals}  IN  @{threshold_dict}
-        # Set Lower/Upper critical and non-critical values if a threshold is available.
-        Run keyword if  '${threshold_dict['${criticals}']}' != 'na'
-        ...  Run IPMI Standard Command
-        ...  sensor thresh "${sensor}" ${criticals} ${threshold_dict['${criticals}']}
-        # Allow Network restart sleep time for the readings to get reflected.
-        Sleep  ${NETWORK_RESTART_TIME}
+    # Omit the discrete sensor and create an threshold sensor name list
+    FOR  ${sensor}  IN  @{sensor_list_lines}
+      ${discrete_sensor_status}=  Run Keyword And Return Status  Should Contain  ${sensor}  discrete
+      Continue For Loop If  '${discrete_sensor_status}' == 'True'
+      ${sensor_details}=  Split String  ${sensor}  |
+      ${get_sensor_name}=  Get From List  ${sensor_details}  0
+      ${sensor_name}=  Set Variable  ${get_sensor_name.strip()}
+      Append To List  ${tmp_list}  ${sensor_name}
     END
 
-    # Get sensor list for the sensor name identified.
-    ${data}=  Wait Until Keyword Succeeds  2 min  30 sec
-    ...  Run IPMI Standard Command   sensor | grep -i RPM | grep "${sensor}"
+    ${sensor_count}=  Get Length  ${tmp_list}
 
-    # Get new threshold value set from sensor list.
-    ${threshold_new}  ${sensor_name}=  Get The Sensor Name And Threshold  ${data}
+    FOR  ${RANGE}  IN RANGE  0  ${sensor_count}
+      ${random_sensor}  ${sensor_threshold}=  Selecting Random Sensor Name And Threshold Value  ${tmp_list}  ${sensor_list}
+      ${threshold_dict_count}=  Get Length  ${sensor_threshold}
+      Exit For Loop If  '${threshold_dict_count}' != '0'
+      Remove Values From List  ${tmp_list}  ${random_sensor}
+    END
 
-    [Return]  ${threshold_new}
+    [Return]  ${random_sensor}  ${sensor_threshold}
+
+Selecting Random Sensor Name And Threshold Value
+    [Documentation]  Select Random Sensor Name And Threshold Values.
+    [Arguments]  ${tmp_list}  ${sensor_list}
+
+    # Selecting random sensors from sensor list
+    ${random_sensor_name}=  Evaluate  random.choice(${tmp_list})  random
+
+    # Create Dictionary For Threshold Key With Threshold Values
+    &{tmp_dict}=  Create Dictionary
+    ${sensor_threshold}=  Get Lines Containing String  ${sensor_list}  ${random_sensor_name}
+    @{ipmi_sensor}=  Split String  ${sensor_threshold}  |
+    ${get_ipmi_lower_non_recoverable_threshold}=  Get From List  ${ipmi_sensor}  4
+    ${ipmi_lower_non_recoverable_threshold}=  Set Variable  ${get_ipmi_lower_non_recoverable_threshold.strip()}
+    ${lower_non_recoverable_threshold_status}=  Run Keyword And Return Status  Should Not Contain
+    ...  ${ipmi_lower_non_recoverable_threshold}  na
+    Run Keyword If  '${lower_non_recoverable_threshold_status}' == 'True'
+    ...  Set To Dictionary  ${tmp_dict}  lnr  ${ipmi_lower_non_recoverable_threshold}
+
+    ${get_ipmi_lower_critical_threshold}=  Get From List  ${ipmi_sensor}  5
+    ${ipmi_lower_critical_threshold}=  Set Variable  ${get_ipmi_lower_critical_threshold.strip()}
+    ${lower_critical_threshold_status}=  Run Keyword And Return Status  Should Not Contain
+    ...  ${ipmi_lower_critical_threshold}  na
+    Run Keyword If  '${lower_critical_threshold_status}' == 'True'
+    ...  Set To Dictionary  ${tmp_dict}  lcr  ${ipmi_lower_critical_threshold}
+
+    ${get_ipmi_lower_non_critical_threshold}=  Get From List  ${ipmi_sensor}  6
+    ${ipmi_lower_non_critical_threshold}=  Set Variable  ${get_ipmi_lower_non_critical_threshold.strip()}
+    ${lower_non_critical_threshold_status}=  Run Keyword And Return Status  Should Not Contain
+    ...  ${ipmi_lower_non_critical_threshold}  na
+    Run Keyword If  '${lower_non_critical_threshold_status}' == 'True'
+    ...  Set To Dictionary  ${tmp_dict}  lnc  ${ipmi_lower_non_critical_threshold}
+
+    ${get_ipmi_upper_non_critical_threshold}=  Get From List  ${ipmi_sensor}  7
+    ${ipmi_upper_non_critical_threshold}=  Set Variable  ${get_ipmi_upper_non_critical_threshold.strip()}
+    ${upper_non_critical_threshold_status}=  Run Keyword And Return Status  Should Not Contain
+    ...  ${ipmi_upper_non_critical_threshold}  na
+    Run Keyword If  '${upper_non_critical_threshold_status}' == 'True'
+    ...  Set To Dictionary  ${tmp_dict}  unc  ${ipmi_upper_non_critical_threshold}
+
+    ${get_ipmi_upper_critical_threshold}=  Get From List  ${ipmi_sensor}  8
+    ${ipmi_upper_critical_threshold}=  Set Variable  ${get_ipmi_upper_critical_threshold.strip()}
+    ${upper_critical_threshold_status}=  Run Keyword And Return Status  Should Not Contain
+    ...  ${ipmi_upper_critical_threshold}  na
+    Run Keyword If  '${upper_critical_threshold_status}' == 'True'
+    ...  Set To Dictionary  ${tmp_dict}  ucr  ${ipmi_upper_critical_threshold}
+
+    ${get_ipmi_upper_non_recoverable_threshold}=  Get From List  ${ipmi_sensor}  9
+    ${ipmi_upper_non_recoverable_threshold}=  Set Variable  ${get_ipmi_upper_non_recoverable_threshold.strip()}
+    ${upper_non_recoverable_threshold_status}=  Run Keyword And Return Status  Should Not Contain
+    ...  ${ipmi_upper_non_recoverable_threshold}  na
+    Run Keyword If  '${upper_non_recoverable_threshold_status}' == 'True'
+    ...  Set To Dictionary  ${tmp_dict}  unr  ${ipmi_upper_non_recoverable_threshold}
+
+    [Return]  ${random_sensor_name}  ${tmp_dict}
+
+Modify Default Sensor Threshold Value
+    [Documentation]  Modify Default Sensor Threshold Value with adding 100 to old threshold values.
+    [Arguments]  ${old_threshold}
+
+    ${new_threshold}=  Evaluate  ${old_threshold} + 100
+
+    [Return]  ${new_threshold}
+
+Set And Get Sensor Threshold For given Sensor
+    [Documentation]  Set/Get Sensor Threshold for given sensor Via IPMI.
+    [Arguments]  ${sensor_name}  ${random_threshold_key}  ${new_settable_threshold_value}
+
+    # Set New Threshold Value To The Randomly Selected Sensor.
+    Run IPMI Standard Command  sensor thresh "${sensor_name}" ${random_threshold_key} ${new_settable_threshold_value}
+
+    Sleep  ${threshold_set_sleep}
+
+    ${sensor_new_threshold_value}=  Getting Sensor Threshold Value Based On Threshold Key  ${random_threshold_key}  ${sensor_name}
+
+    [Return]  ${sensor_new_threshold_value}
+
+Getting Sensor Threshold Value Based On Threshold Key
+    [Documentation]  Getting Particular Sensor Threshold Value Based On Sensor Name And Threshold Key.
+    [Arguments]  ${threshold_key}  ${sensor_name}
+
+    # After Setting Threshold Value, Get New Sensor Threshold Value.
+    ${new_data}=  Run IPMI Standard Command  sensor | grep -i "${sensor_name}"
+    ${new_sensor_details}=  Split String  ${new_data}  |
+
+    ${index_value}=  Set Variable If
+    ...  '${threshold_key}' == 'lnr'  ${4}
+    ...  '${threshold_key}' == 'lcr'  ${5}
+    ...  '${threshold_key}' == 'lnc'  ${6}
+    ...  '${threshold_key}' == 'unc'  ${7}
+    ...  '${threshold_key}' == 'ucr'  ${8}
+    ...  '${threshold_key}' == 'unr'  ${9}
+
+    ${get_sensor_new_threshold_value}=  Get From List  ${new_sensor_details}  ${index_value}
+    ${sensor_new_threshold_value}=  Set Variable  ${get_sensor_new_threshold_value.strip()}
+
+    [Return]  ${sensor_new_threshold_value}
