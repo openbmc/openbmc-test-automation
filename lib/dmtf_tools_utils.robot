@@ -55,4 +55,3 @@ Redfish JsonSchema ResponseValidator Result
     # Example:
     # 0 errors
     Should Contain  ${tool_output}  0 errors
-
