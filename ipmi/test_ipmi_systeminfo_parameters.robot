@@ -17,9 +17,7 @@ Library             ../lib/ipmi_utils.py
 Variables           ../data/ipmi_raw_cmd_table.py
 
 Suite Setup         Suite Setup Execution
-Suite Teardown      FFDC On Test Case Fail
-
-Test Teardown       Restore Default Configuration
+Test Teardown       Run Keywords  Restore Default Configuration  AND  FFDC On Test Case Fail
 
 
 *** Variables ***
@@ -68,7 +66,6 @@ Verify System Info Set In Progress After BMC Reboot
 
     # Set the parameter 0 - Set_In_Progress to set in progress state.
     Set System Info Set In Progress  0x01
-
     # Get System Info Parameter for param 0 - Set In Progress.
     # Check if set-in-progress set to set in progress.
     ${inprogress}=  Get System Info Set In Progress
@@ -78,7 +75,7 @@ Verify System Info Set In Progress After BMC Reboot
     Should Be Equal  ${inprogress[1]}  01
 
     # Reboot BMC.
-    IPMI Std MC Reset Cold (off)
+    IPMI MC Reset Cold (run)
 
     # Since the param 0 - Set In Progress is volatile,
     # Default value should be updated after BMC reboot.
@@ -279,7 +276,7 @@ Verify System Info Primary OS Name After BMC Reboot
     Should Be Equal  ${pr_os[4:]}  ${os_hex_data}
 
     # Cold Reset Via IPMI
-    IPMI Std MC Reset Cold (off)
+    IPMI MC Reset Cold (run)
 
     # Since Primary OS Name is non-volatile,
     # compare with response data of Get Primary OS Name,
@@ -297,9 +294,9 @@ Verify Get System Info Primary OS Name With Invalid Data Length
 
     # Check if the Get System Info Parameter for param 3 - Primary OS Name throws
     # error for invalid request data.
-    Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param3_Primary_OS_Name']['Get'][1]}*
+    Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Get'][1]}*
     ...  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param3_Primary_OS_Name']['Get'][0]} 0x00
+    ...  raw ${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Get'][0]} 0x00
 
 
 Verify Set System Info Primary OS Name With Invalid Data Length
@@ -318,9 +315,9 @@ Verify Set System Info Primary OS Name With Invalid Data Length
 
     # Check if the Set System Info Parameter for param 3 - Primary OS Name throws error
     # for invalid data request.
-    Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param3_Primary_OS_Name']['Set'][1]}*
+    Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Set'][1]}*
     ...  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param3_Primary_OS_Name']['Set'][0]} ${os_name}
+    ...  raw ${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Set'][0]} ${os_name}
 
 
 Verify System Info OS Name
@@ -359,7 +356,7 @@ Verify System Info OS Name After BMC Reboot
     Should Be Equal  ${sysos[4:]}  ${os_hex_data}
 
     # Cold Reset via IPMI
-    IPMI Std MC Reset Cold (off)
+    IPMI MC Reset Cold (run)
 
     # Since OS Name is volatile,
     # compare with response data of Get OS Name,
@@ -375,9 +372,9 @@ Verify Get System Info OS Name With Invalid Data Length
     [Tags]  Verify_Get_System_Info_OS_Name_With_Invalid_Data_Length
 
     # Check if the Get System Info Parameter for param 4 - OS Name throws error for invalid request data.
-    Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param4_OS_Name']['Get'][1]}*
+    Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Get'][1]}*
     ...  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param4_OS_Name']['Get'][0]} 0x00
+    ...  raw ${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Get'][0]} 0x00
 
 
 Verify Set System Info OS Name With Invalid Data Length
@@ -395,9 +392,9 @@ Verify Set System Info OS Name With Invalid Data Length
     ${os_name}  ${name_hex_data}=  Identify Request Data  ${invalid_os_version}
 
     # Check if the Set System Info Parameter for param 4 - OS Name throws error for invalid request data.
-    Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param4_OS_Name']['Set'][1]}*
+    Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Set'][1]}*
     ...  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param4_OS_Name']['Set'][0]} ${os_name}
+    ...  raw ${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Set'][0]} ${os_name}
 
 
 Verify System Info Present OS Version Number
@@ -553,7 +550,7 @@ Get Primary OS Name
 
     # Get System Info Parameter for param 3 - Primary OS Name.
     ${resp}=  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param3_Primary_OS_Name']['Get'][0]}
+    ...  raw ${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Get'][0]}
     ${resp}=  Split String  ${resp}
 
     [Return]  ${resp}
@@ -566,7 +563,7 @@ Set Primary OS Name
     # Set System Info Parameter for param 3 - Primary OS Name.
     # ${os_name} can be any 14 byte data.
     Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param3_Primary_OS_Name']['Set'][0]} ${os_name}
+    ...  raw ${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Set'][0]} ${os_name}
 
 
 Get OS Name
@@ -574,7 +571,7 @@ Get OS Name
 
     # Get System Info Parameter for param 4 - OS Name.
     ${resp}=  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param4_OS_Name']['Get'][0]}
+    ...  raw ${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Get'][0]}
     ${resp}=  Split String  ${resp}
 
     [Return]  ${resp}
@@ -587,7 +584,7 @@ Set OS Name
     # Set System Info Parameter for param 4 - OS Name.
     # ${os_name} can be any 14 byte data.
     Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param4_OS_Name']['Set'][0]} ${os_name}
+    ...  raw ${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Set'][0]} ${os_name}
 
 
 Get Present OS Version Number
@@ -717,5 +714,3 @@ Restore Default Configuration
 
     # Present OS Version Number - param 5.
     Run IPMI Standard Command  raw 0x06 0x58 0x05 0x00 ${present_os_num_hex}
-
-    FFDC On Test Case Fail
