@@ -142,6 +142,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "450e120d_181d3d27",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-11T08:01:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f1ffd09_ad7ba682",
+      "range": {
+        "startLine": 157,
+        "startChar": 1,
+        "endLine": 179,
+        "endChar": 34
+      },
+      "revId": "5f4dd8be19f286f11ebba84c0f2bc78bf25e661d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf924b8f_f25bdb7a",
@@ -236,6 +260,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be7b1714_b6574358",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-11T08:01:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05a1bfe5_5fc72b94",
+      "range": {
+        "startLine": 195,
+        "startChar": 4,
+        "endLine": 195,
+        "endChar": 52
+      },
+      "revId": "5f4dd8be19f286f11ebba84c0f2bc78bf25e661d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b99fcc2b_d19e2db5",
@@ -283,6 +331,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dec7fb88_ae2957e9",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-11T08:01:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3772ca6_ac06dad0",
+      "range": {
+        "startLine": 216,
+        "startChar": 4,
+        "endLine": 216,
+        "endChar": 11
+      },
+      "revId": "5f4dd8be19f286f11ebba84c0f2bc78bf25e661d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bea7ec8_d40baaab",
@@ -320,6 +392,30 @@
       "side": 1,
       "message": "Reserve Sel command - 2.",
       "parentUuid": "0bea7ec8_d40baaab",
+      "range": {
+        "startLine": 216,
+        "startChar": 4,
+        "endLine": 217,
+        "endChar": 55
+      },
+      "revId": "5f4dd8be19f286f11ebba84c0f2bc78bf25e661d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff39109b_9f6a072b",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-11T08:01:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "586a700a_fe386f64",
       "range": {
         "startLine": 216,
         "startChar": 4,
@@ -471,6 +567,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6431274e_b738872c",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-11T08:01:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c821c6d2_e6a68486",
+      "range": {
+        "startLine": 234,
+        "startChar": 4,
+        "endLine": 236,
+        "endChar": 41
+      },
+      "revId": "5f4dd8be19f286f11ebba84c0f2bc78bf25e661d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7763e9c_790e977f",
@@ -518,6 +638,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bb176aa_6e480b0c",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-11T08:01:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb5f265e_c91a31d0",
+      "range": {
+        "startLine": 238,
+        "startChar": 1,
+        "endLine": 243,
+        "endChar": 42
+      },
+      "revId": "5f4dd8be19f286f11ebba84c0f2bc78bf25e661d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b68c2290_cf857e2f",
@@ -555,6 +699,30 @@
       "side": 1,
       "message": "The test is above clear sel functions",
       "parentUuid": "b68c2290_cf857e2f",
+      "range": {
+        "startLine": 246,
+        "startChar": 4,
+        "endLine": 254,
+        "endChar": 52
+      },
+      "revId": "5f4dd8be19f286f11ebba84c0f2bc78bf25e661d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "911fd0d1_3747b4ec",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-11T08:01:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed8b58df_6729d38c",
       "range": {
         "startLine": 246,
         "startChar": 4,
