@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2ade670_ddc67024",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-11T14:31:57Z",
+      "side": 1,
+      "message": "Redfish BMC Code Update Current And Alternate Side With Same Image... | PASS |\n------------------------------------------------------------------------------\n#(CDT) 2022/05/11 09:25:37.553443 -    0.083025 - Executing: delete(\u0027/redfish/v1/SessionService/Sessions/aByG1KqOaL\u0027)\nRedfish Bmc Code Update :: Update the BMC code on a target BMC via... | PASS |\n1 test, 1 passed, 0 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n",
+      "revId": "81ade8d827384f3ebed1d35f440d099951dda556",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
