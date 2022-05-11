@@ -75,6 +75,30 @@ Redfish BMC Code Update
     Redfish Update Firmware
 
 
+Redfish BMC Code Update Running And Backup Image With Same Firmware
+    [Documentation]  Perform the firmware update with same image back to back, so that
+    ...              the running (functional Image) and backup image (alternate image)
+    ...              with same firmware.
+    [Tags]  Redfish_BMC_Code_Update_Running_And_Backup_Image_With_Same_Firmware
+
+    # Python module:  get_version_tar(tar_file_path)
+    ${image_version}=  code_update_utils.Get Version Tar  ${IMAGE_FILE_PATH}
+    Rprint Vars  image_version
+
+    # Python module: get_bmc_release_info()
+    ${bmc_release_info}=  utils.Get BMC Release Info
+    ${functional_version}=  Set Variable  ${bmc_release_info['version_id']}
+    Rprint Vars  functional_version
+
+    # First update.
+    Print Timen  Performing firmware update ${image_version}.
+    Redfish Update Firmware
+
+    # Second update.
+    Print Timen  Performing firmware update ${image_version}.
+    Redfish Update Firmware
+
+
 Redfish Firmware Update Loop
     [Documentation]  Update the firmware image in loop.
     [Tags]  Redfish_Firmware_Update_Loop
@@ -229,9 +253,9 @@ Redfish Update Firmware
     ${before_inv_list}=  redfish_utils.Get Member List  /redfish/v1/UpdateService/FirmwareInventory
     Log To Console   Current images on the BMC before upload: ${before_inv_list}
 
-    Log To Console   Start uploading image to BMC.
+    Print Timen  Start uploading image to BMC.
     Redfish Upload Image  /redfish/v1/UpdateService  ${IMAGE_FILE_PATH}
-    Log To Console   Completed image upload to BMC.
+    Print Timen  Completed image upload to BMC.
 
     # Python module:  get_member_list(resource_path)
     ${after_inv_list}=  redfish_utils.Get Member List  /redfish/v1/UpdateService/FirmwareInventory
