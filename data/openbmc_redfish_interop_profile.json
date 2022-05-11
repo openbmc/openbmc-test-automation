@@ -1,0 +1,34 @@
+{
+    "SchemaDefinition": "RedfishInteroperabilityProfile.v1_0_0",
+    "ProfileName": "OpenBMC_Redfish_interop_profile",
+    "ProfileVersion": "0.0.1",
+    "Purpose": "A minimally viable profile describes the requirements for openBMC.",
+    "OwningEntity": "OpenBMC",
+    "ContactInfo": "openbmc@lists.ozlabs.org",
+    "Resources": {
+        "ChassisCollection": {
+            "Purpose": "Every implementation must have at least 1 chassis.",
+            "PropertyRequirements": {
+                "Members": {
+                    "MinCount": 1
+                }
+            }
+        },
+        "ComputerSystemCollection": {
+            "Purpose": "Every implementation must have at least 1 computer system.",
+            "PropertyRequirements": {
+                "Members": {
+                    "MinCount": 1
+                }
+            }
+        },
+        "ComputerSystem": {
+            "MinVersion": "1.1.0",
+            "Purpose": "Computer system with basic properties.",
+            "PropertyRequirements": {
+                "Memory": {},
+                "Processors": {}
+            }
+        }
+    }
+}
