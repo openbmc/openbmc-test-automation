@@ -48,7 +48,7 @@ Verify Redfish User Persistence After Reboot
 
 Redfish Create and Verify Admin User
     [Documentation]  Create a Redfish user with administrator role and verify.
-    [Tags]  Redfish_Create_and_Verify_Users
+    [Tags]  Redfish_Create_and_Verify_Admin_User
     [Template]  Redfish Create And Verify User
 
     #username      password    role_id         enabled

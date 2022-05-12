@@ -31,7 +31,7 @@ ${TIMER_POWER_ON}      100
 
 Set And Return Timer For Power ON
     [Documentation]  Set time for power ON using busctl command and verify.
-    [Tags]  Set_Time_For_Power_ON
+    [Tags]  Set_And_Return_Timer_For_Power_ON
 
     ${tpo_set_value}=  Set Timer For Power ON
     ${new_tpo_value}=  Get Time Power ON Value
