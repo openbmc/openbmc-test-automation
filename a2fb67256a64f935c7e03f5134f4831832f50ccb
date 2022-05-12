@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5346ea9e_22098803",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T09:36:01Z",
+      "side": 1,
+      "message": "Add a comment  # Input channel   Privilege Level",
+      "range": {
+        "startLine": 163,
+        "startChar": 11,
+        "endLine": 163,
+        "endChar": 36
+      },
+      "revId": "a2fb67256a64f935c7e03f5134f4831832f50ccb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64f0770a_f82511ff",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T09:36:01Z",
+      "side": 1,
+      "message": "Command\n\n@168 [Documentation]   Verify",
+      "range": {
+        "startLine": 167,
+        "startChar": 50,
+        "endLine": 167,
+        "endChar": 53
+      },
+      "revId": "a2fb67256a64f935c7e03f5134f4831832f50ccb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6adacafc_c14a1a5d",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T09:36:01Z",
+      "side": 1,
+      "message": "# Input Channel info.\n\nSo that is understood that it is input arg for the template",
+      "revId": "a2fb67256a64f935c7e03f5134f4831832f50ccb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e824b153_9f5884c2",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T09:36:01Z",
+      "side": 1,
+      "message": "Verify Get Channel Authentication Capabilities IPMI Command With Invalid Data Length",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 95
+      },
+      "revId": "a2fb67256a64f935c7e03f5134f4831832f50ccb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63300ea4_0d12b65d",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T09:36:01Z",
+      "side": 1,
+      "message": "IMPI General Test Suite Setup",
+      "range": {
+        "startLine": 263,
+        "startChar": 0,
+        "endLine": 264,
+        "endChar": 21
+      },
+      "revId": "a2fb67256a64f935c7e03f5134f4831832f50ccb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a7addce_fcfd0042",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T09:36:01Z",
+      "side": 1,
+      "message": "verify get channel auth capabilites and privilege level for invalid channel.\nplease provide description of arguments(s):",
+      "range": {
+        "startLine": 316,
+        "startChar": 20,
+        "endLine": 316,
+        "endChar": 85
+      },
+      "revId": "a2fb67256a64f935c7e03f5134f4831832f50ccb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5000ce46_9192c844",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T09:36:01Z",
+      "side": 1,
+      "message": "Verify get channel Auth cap for invalid channels.\n\nplease provide description of arguments(s):",
+      "range": {
+        "startLine": 333,
+        "startChar": 3,
+        "endLine": 333,
+        "endChar": 70
+      },
+      "revId": "a2fb67256a64f935c7e03f5134f4831832f50ccb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31b4b087_3f4aaa78",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T09:36:01Z",
+      "side": 1,
+      "message": "maintain consistency wither Auth or Authentication\n\n@341: Verify Channel Auth Command For Invalid Data Length \n\nplease provide description of arguments(s):",
+      "range": {
+        "startLine": 341,
+        "startChar": 15,
+        "endLine": 341,
+        "endChar": 29
+      },
+      "revId": "a2fb67256a64f935c7e03f5134f4831832f50ccb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
