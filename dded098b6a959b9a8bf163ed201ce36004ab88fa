@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "214fd922_37ba0318",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-12T13:38:29Z",
+      "side": 1,
+      "message": "Wait Until Keyword Succeeds  5 min  5 sec  Ping Host  ${OPENBMC_HOST}\nWait Until Keyword Succeeds  10 min  10 sec  Is BMC Operational",
+      "range": {
+        "startLine": 95,
+        "startChar": 4,
+        "endLine": 95,
+        "endChar": 67
+      },
+      "revId": "dded098b6a959b9a8bf163ed201ce36004ab88fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18294de3_1dd98ce7",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-12T13:38:29Z",
+      "side": 1,
+      "message": "end with period for comments and documentation \".\"",
+      "range": {
+        "startLine": 129,
+        "startChar": 67,
+        "endLine": 129,
+        "endChar": 71
+      },
+      "revId": "dded098b6a959b9a8bf163ed201ce36004ab88fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d964643f_ab234427",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-12T13:38:29Z",
+      "side": 1,
+      "message": "are these the known threshold , if its not there in this listed here. whats the default we are going to set for index_value here",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 0
+      },
+      "revId": "dded098b6a959b9a8bf163ed201ce36004ab88fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e327b04_04b01ee9",
+        "filename": "lib/utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-12T13:38:29Z",
+      "side": 1,
+      "message": "Remove this one.. let it just assume when we call this keyword, BMC is pinging and the BMC is boot and bmcweb is up and responding. \n\nput the wait login in the test",
+      "range": {
+        "startLine": 1040,
+        "startChar": 4,
+        "endLine": 1040,
+        "endChar": 73
+      },
+      "revId": "dded098b6a959b9a8bf163ed201ce36004ab88fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
