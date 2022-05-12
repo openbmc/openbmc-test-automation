@@ -22,6 +22,30 @@
       },
       "revId": "ab7a5fa44bb0eb6b12ae77017645dbdc5ab54f5e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c37a15a_d3f76278",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-12T06:43:52Z",
+      "side": 1,
+      "message": "Discrete sensor - sensor which are not having reading/threshold values like watchdog, sel, etc. In ipmi sensor command for discrete sensor it will show as discrete in sensor type.\n\nKeyword name, documentation and list name were changed.",
+      "parentUuid": "f0978262_4173dece",
+      "range": {
+        "startLine": 472,
+        "startChar": 0,
+        "endLine": 472,
+        "endChar": 4
+      },
+      "revId": "ab7a5fa44bb0eb6b12ae77017645dbdc5ab54f5e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
