@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c7a4751_70f1b628",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T05:25:36Z",
+      "side": 1,
+      "message": "And",
+      "range": {
+        "startLine": 81,
+        "startChar": 20,
+        "endLine": 81,
+        "endChar": 23
+      },
+      "revId": "f390afabfd50b6dd23852ff9ba492a6535d1f00a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a6866a0_a3884669",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T05:25:36Z",
+      "side": 1,
+      "message": "Verify Get Cipher Suite Raw Command With Invalid Data Length\n\n I think when we say \u0027Data length\u0027 it is understood as request data",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 68
+      },
+      "revId": "f390afabfd50b6dd23852ff9ba492a6535d1f00a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d81c3d43_ffc76655",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T05:25:36Z",
+      "side": 1,
+      "message": "To be precise - IPMI Cipher Suite Setup\n\n@120 - Mention what are u achieving in suite setup\n@122 list - spelling , set as a suite variable.\n@126 - set as a suite variable.",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 21
+      },
+      "revId": "f390afabfd50b6dd23852ff9ba492a6535d1f00a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c1b1706_084dcb8a",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T05:25:36Z",
+      "side": 1,
+      "message": "Documentation is missing for keywords. please do it for the other keywords too.\n\nAdd e.g. for the arguments if it is simpler.",
+      "range": {
+        "startLine": 132,
+        "startChar": 2,
+        "endLine": 132,
+        "endChar": 48
+      },
+      "revId": "f390afabfd50b6dd23852ff9ba492a6535d1f00a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deb30a59_d23356e5",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T05:25:36Z",
+      "side": 1,
+      "message": "Verify Algorithm By Cipher Suite For Channel",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 32
+      },
+      "revId": "f390afabfd50b6dd23852ff9ba492a6535d1f00a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bef04b8e_4614a3bd",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T05:25:36Z",
+      "side": 1,
+      "message": "Verify Supported Algorithm For Channel",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 26
+      },
+      "revId": "f390afabfd50b6dd23852ff9ba492a6535d1f00a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac3d3a73_6bf7293a",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T05:25:36Z",
+      "side": 1,
+      "message": "Verify Cipher ID And Supported Algorithm For Channel",
+      "revId": "f390afabfd50b6dd23852ff9ba492a6535d1f00a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0903485d_0fead7c3",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T05:25:36Z",
+      "side": 1,
+      "message": "Verify Cipher Suite For Invalid Channel",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 35
+      },
+      "revId": "f390afabfd50b6dd23852ff9ba492a6535d1f00a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d40aeb0e_eb4ae16e",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T05:25:36Z",
+      "side": 1,
+      "message": "Verify Cipher Suite Command For Invalid Data Length",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 59
+      },
+      "revId": "f390afabfd50b6dd23852ff9ba492a6535d1f00a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

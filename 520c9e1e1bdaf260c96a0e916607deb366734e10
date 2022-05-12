@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8556a0eb_620d6cb9",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T05:25:36Z",
+      "side": 1,
+      "message": "invalid - spelling\n\n@691 - Get Invalid Channel Number List ??\n\n@695 - Get the channel with medium_type as \u0027reserved\u0027 and append it to a list.",
+      "range": {
+        "startLine": 696,
+        "startChar": 3,
+        "endLine": 696,
+        "endChar": 31
+      },
+      "revId": "520c9e1e1bdaf260c96a0e916607deb366734e10",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6c257ab_6af2dc71",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T05:25:36Z",
+      "side": 1,
+      "message": "Description of arguments(s):  --- missing\n\n@724 just like @736 - Can u rename  - Get Current Channel Name List",
+      "range": {
+        "startLine": 726,
+        "startChar": 4,
+        "endLine": 726,
+        "endChar": 56
+      },
+      "revId": "520c9e1e1bdaf260c96a0e916607deb366734e10",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64d07ef1_3fe4a803",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T05:25:36Z",
+      "side": 1,
+      "message": "more info please\n\nAdd documentation",
+      "range": {
+        "startLine": 737,
+        "startChar": 3,
+        "endLine": 737,
+        "endChar": 43
+      },
+      "revId": "520c9e1e1bdaf260c96a0e916607deb366734e10",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
