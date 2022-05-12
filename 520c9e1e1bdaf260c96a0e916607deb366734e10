@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e87747f_d2f992e8",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-12T09:29:57Z",
+      "side": 1,
+      "message": "Thanks",
+      "parentUuid": "4416f43d_e50f9966",
+      "range": {
+        "startLine": 84,
+        "startChar": 3,
+        "endLine": 84,
+        "endChar": 56
+      },
+      "revId": "520c9e1e1bdaf260c96a0e916607deb366734e10",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8556a0eb_620d6cb9",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-12T05:25:36Z",
       "side": 1,
       "message": "invalid - spelling\n\n@691 - Get Invalid Channel Number List ??\n\n@695 - Get the channel with medium_type as \u0027reserved\u0027 and append it to a list.",
+      "range": {
+        "startLine": 696,
+        "startChar": 3,
+        "endLine": 696,
+        "endChar": 31
+      },
+      "revId": "520c9e1e1bdaf260c96a0e916607deb366734e10",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "957766f1_4328d136",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-12T09:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8556a0eb_620d6cb9",
       "range": {
         "startLine": 696,
         "startChar": 3,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbbbb1b0_957b3f31",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-12T09:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6c257ab_6af2dc71",
+      "range": {
+        "startLine": 726,
+        "startChar": 4,
+        "endLine": 726,
+        "endChar": 56
+      },
+      "revId": "520c9e1e1bdaf260c96a0e916607deb366734e10",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64d07ef1_3fe4a803",
@@ -93,6 +165,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62aec61c_a42632ef",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-12T09:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64d07ef1_3fe4a803",
+      "range": {
+        "startLine": 737,
+        "startChar": 3,
+        "endLine": 737,
+        "endChar": 43
+      },
+      "revId": "520c9e1e1bdaf260c96a0e916607deb366734e10",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "453e6577_a80143a3",
@@ -106,6 +202,24 @@
       "writtenOn": "2022-05-12T05:35:12Z",
       "side": 1,
       "message": "Verify Invalid IPMI Command\n\n@565 - Execute invalid IPMI command and verify with given response code.\n\n@566 - Documentation missing",
+      "revId": "520c9e1e1bdaf260c96a0e916607deb366734e10",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e94fea5_bbb27792",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-12T09:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "453e6577_a80143a3",
       "revId": "520c9e1e1bdaf260c96a0e916607deb366734e10",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

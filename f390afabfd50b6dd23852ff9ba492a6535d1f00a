@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d78ad79_1a359b4e",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-12T09:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c7a4751_70f1b628",
+      "range": {
+        "startLine": 81,
+        "startChar": 20,
+        "endLine": 81,
+        "endChar": 23
+      },
+      "revId": "f390afabfd50b6dd23852ff9ba492a6535d1f00a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a6866a0_a3884669",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-12T05:25:36Z",
       "side": 1,
       "message": "Verify Get Cipher Suite Raw Command With Invalid Data Length\n\n I think when we say \u0027Data length\u0027 it is understood as request data",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 68
+      },
+      "revId": "f390afabfd50b6dd23852ff9ba492a6535d1f00a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a652290f_08d1fbb5",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-12T09:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a6866a0_a3884669",
       "range": {
         "startLine": 107,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a040c2a_28ceeba6",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-12T09:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d81c3d43_ffc76655",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 21
+      },
+      "revId": "f390afabfd50b6dd23852ff9ba492a6535d1f00a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c1b1706_084dcb8a",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-05-12T05:25:36Z",
       "side": 1,
       "message": "Documentation is missing for keywords. please do it for the other keywords too.\n\nAdd e.g. for the arguments if it is simpler.",
+      "range": {
+        "startLine": 132,
+        "startChar": 2,
+        "endLine": 132,
+        "endChar": 48
+      },
+      "revId": "f390afabfd50b6dd23852ff9ba492a6535d1f00a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02acd200_9ea5afd1",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-12T09:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c1b1706_084dcb8a",
       "range": {
         "startLine": 132,
         "startChar": 2,
@@ -116,6 +212,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01f87df5_c9169103",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-12T09:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "deb30a59_d23356e5",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 32
+      },
+      "revId": "f390afabfd50b6dd23852ff9ba492a6535d1f00a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bef04b8e_4614a3bd",
@@ -129,6 +249,30 @@
       "writtenOn": "2022-05-12T05:25:36Z",
       "side": 1,
       "message": "Verify Supported Algorithm For Channel",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 26
+      },
+      "revId": "f390afabfd50b6dd23852ff9ba492a6535d1f00a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc41d4e4_4db2243d",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-12T09:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bef04b8e_4614a3bd",
       "range": {
         "startLine": 153,
         "startChar": 0,
@@ -156,6 +300,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe96baf5_fa7c3eb5",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-12T09:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac3d3a73_6bf7293a",
+      "revId": "f390afabfd50b6dd23852ff9ba492a6535d1f00a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0903485d_0fead7c3",
@@ -179,6 +341,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9732240c_4b89ba49",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-12T09:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0903485d_0fead7c3",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 35
+      },
+      "revId": "f390afabfd50b6dd23852ff9ba492a6535d1f00a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d40aeb0e_eb4ae16e",
@@ -192,6 +378,30 @@
       "writtenOn": "2022-05-12T05:25:36Z",
       "side": 1,
       "message": "Verify Cipher Suite Command For Invalid Data Length",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 59
+      },
+      "revId": "f390afabfd50b6dd23852ff9ba492a6535d1f00a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb4ac89d_4d828c00",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-12T09:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d40aeb0e_eb4ae16e",
       "range": {
         "startLine": 190,
         "startChar": 0,
