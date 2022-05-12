@@ -47,6 +47,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf9e08bc_084497bb",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-12T14:30:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18294de3_1dd98ce7",
+      "range": {
+        "startLine": 129,
+        "startChar": 67,
+        "endLine": 129,
+        "endChar": 71
+      },
+      "revId": "dded098b6a959b9a8bf163ed201ce36004ab88fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d964643f_ab234427",
@@ -60,6 +84,30 @@
       "writtenOn": "2022-05-12T13:38:29Z",
       "side": 1,
       "message": "are these the known threshold , if its not there in this listed here. whats the default we are going to set for index_value here",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 0
+      },
+      "revId": "dded098b6a959b9a8bf163ed201ce36004ab88fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "238254bf_50a4653c",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-12T14:30:41Z",
+      "side": 1,
+      "message": "yes, those are known threshold.\nwhile selecting random sensor we were selecting only threshold sensor not an discrete sensor, hence for threshold sensor atleast one threshold value will be present.",
+      "parentUuid": "d964643f_ab234427",
       "range": {
         "startLine": 234,
         "startChar": 0,
