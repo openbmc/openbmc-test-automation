@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5305b60b_97999cf5",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-12T14:40:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2e24106_7b37a6a6",
+      "revId": "81ade8d827384f3ebed1d35f440d099951dda556",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b4678be_eae678bd",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-05-12T13:47:29Z",
       "side": 1,
       "message": "Suggestion to use Running \u0026 Backup image term and in comment or in description, we can add information about which one is functional or alternate image.",
+      "revId": "81ade8d827384f3ebed1d35f440d099951dda556",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2b0a079_9241abf7",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-12T14:40:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b4678be_eae678bd",
       "revId": "81ade8d827384f3ebed1d35f440d099951dda556",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
