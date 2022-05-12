@@ -16,6 +16,40 @@
       "message": "Redfish BMC Code Update Current And Alternate Side With Same Image... | PASS |\n------------------------------------------------------------------------------\n#(CDT) 2022/05/11 09:25:37.553443 -    0.083025 - Executing: delete(\u0027/redfish/v1/SessionService/Sessions/aByG1KqOaL\u0027)\nRedfish Bmc Code Update :: Update the BMC code on a target BMC via... | PASS |\n1 test, 1 passed, 0 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n",
       "revId": "81ade8d827384f3ebed1d35f440d099951dda556",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2e24106_7b37a6a6",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-05-12T13:47:29Z",
+      "side": 1,
+      "message": "Suggestion: Redfish BMC Code Update Running And Backup Image With Same Firmware",
+      "revId": "81ade8d827384f3ebed1d35f440d099951dda556",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b4678be_eae678bd",
+        "filename": "redfish/extended/redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-05-12T13:47:29Z",
+      "side": 1,
+      "message": "Suggestion to use Running \u0026 Backup image term and in comment or in description, we can add information about which one is functional or alternate image.",
+      "revId": "81ade8d827384f3ebed1d35f440d099951dda556",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
