@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4416f43d_e50f9966",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T05:35:12Z",
+      "side": 1,
+      "message": "I really liked the template implementation, providing arguments in a for loop..",
+      "range": {
+        "startLine": 84,
+        "startChar": 3,
+        "endLine": 84,
+        "endChar": 56
+      },
+      "revId": "520c9e1e1bdaf260c96a0e916607deb366734e10",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8556a0eb_620d6cb9",
         "filename": "lib/bmc_network_utils.robot",
         "patchSetId": 4
@@ -66,6 +89,23 @@
         "endLine": 737,
         "endChar": 43
       },
+      "revId": "520c9e1e1bdaf260c96a0e916607deb366734e10",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "453e6577_a80143a3",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T05:35:12Z",
+      "side": 1,
+      "message": "Verify Invalid IPMI Command\n\n@565 - Execute invalid IPMI command and verify with given response code.\n\n@566 - Documentation missing",
       "revId": "520c9e1e1bdaf260c96a0e916607deb366734e10",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
