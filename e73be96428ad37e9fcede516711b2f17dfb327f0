@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5660e23c_95be9b72",
+        "filename": "data/ipmi_raw_cmd_table.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T10:24:19Z",
+      "side": 1,
+      "message": "command.. this file commonly use \u0027command\u0027",
+      "range": {
+        "startLine": 595,
+        "startChar": 30,
+        "endLine": 595,
+        "endChar": 33
+      },
+      "revId": "e73be96428ad37e9fcede516711b2f17dfb327f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ceef7e2_e90da601",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T10:24:19Z",
+      "side": 1,
+      "message": "Check if\n\nchange this to be consistent through out the file\n\nsdr - SDR\ncmd - Command\nid/Id - ID",
+      "range": {
+        "startLine": 38,
+        "startChar": 6,
+        "endLine": 38,
+        "endChar": 12
+      },
+      "revId": "e73be96428ad37e9fcede516711b2f17dfb327f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "020f1ed2_d18bd3e6",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T10:24:19Z",
+      "side": 1,
+      "message": "According to your test behavior - Test SDR Reservation ID or something else?\n\nThis test we are comparing the before and after reservation ID.\n\nNext to this test we are getting reservation ID with different criteria.. can we club these two testcase?",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 28
+      },
+      "revId": "e73be96428ad37e9fcede516711b2f17dfb327f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfc1371f_500ccb4b",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T10:24:19Z",
+      "side": 1,
+      "message": "obtained",
+      "range": {
+        "startLine": 173,
+        "startChar": 64,
+        "endLine": 173,
+        "endChar": 67
+      },
+      "revId": "e73be96428ad37e9fcede516711b2f17dfb327f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8fd9ffe_ff475a05",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T10:24:19Z",
+      "side": 1,
+      "message": "SDR",
+      "range": {
+        "startLine": 186,
+        "startChar": 10,
+        "endLine": 186,
+        "endChar": 13
+      },
+      "revId": "e73be96428ad37e9fcede516711b2f17dfb327f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c7e30cd_4e3ca5eb",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T10:24:19Z",
+      "side": 1,
+      "message": "please provide the documentation for arguments",
+      "range": {
+        "startLine": 232,
+        "startChar": 4,
+        "endLine": 232,
+        "endChar": 65
+      },
+      "revId": "e73be96428ad37e9fcede516711b2f17dfb327f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7356add0_e6efe2b8",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T10:24:19Z",
+      "side": 1,
+      "message": "Fetch IPMI Command Support Status\n\nInstead of yes/no .. It is standard to return 0/1 or True/False\n\nAdd description of args",
+      "range": {
+        "startLine": 378,
+        "startChar": 0,
+        "endLine": 378,
+        "endChar": 5
+      },
+      "revId": "e73be96428ad37e9fcede516711b2f17dfb327f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
