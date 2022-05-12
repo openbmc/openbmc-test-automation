@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88faab41_b8c85c9b",
+        "filename": "data/redfish_interop_profile.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T06:28:38Z",
+      "side": 1,
+      "message": "which is it OpenBMC_Profile when we are referring to RedfishInteroperabilityProfile should it be BMC_Redfish_Interop_Validator_Profile ?\n\n@5 purpose: change to appropriate purpose",
+      "range": {
+        "startLine": 3,
+        "startChar": 5,
+        "endLine": 3,
+        "endChar": 36
+      },
+      "revId": "96988a58277c3b7610f9a0fa32ea44701f3370fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbc510ba_ad26f86c",
+        "filename": "lib/dmtf_tools_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T06:28:38Z",
+      "side": 1,
+      "message": "@52: Get the result of redfish interop validator for the given tool output.\n\ne.g. For tool output with errors.\n\n@53: \n\n\u0027\u0027\u0027\n# Description of arguments(s):\n# tool_output     \u003c---give right info\u003e.\n\n\u0027\u0027",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 14
+      },
+      "revId": "96988a58277c3b7610f9a0fa32ea44701f3370fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1c19927_92392696",
+        "filename": "redfish/dmtf_tools/Redfish_Interop_Validator.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T06:28:38Z",
+      "side": 1,
+      "message": "Test BMC Redfish conformance using  https://github.com/DMTF/Redfish-Interop-Validator DMTF tool.\nThis Redfish-Interop-Validator validate the Redfish service\nbased on an interoperability profile given to it.\n\nVerify nice info given in commit message.. we can use some of it in the documentation for the more understandability.",
+      "range": {
+        "startLine": 2,
+        "startChar": 19,
+        "endLine": 3,
+        "endChar": 29
+      },
+      "revId": "96988a58277c3b7610f9a0fa32ea44701f3370fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02e3690d_d682c3c9",
+        "filename": "redfish/dmtf_tools/Redfish_Interop_Validator.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T06:28:38Z",
+      "side": 1,
+      "message": "Test BMC Redfish conformance based on an interoperability profile.\n\nCan u mention in comments what URL and path your are providing for validator",
+      "range": {
+        "startLine": 20,
+        "startChar": 21,
+        "endLine": 20,
+        "endChar": 74
+      },
+      "revId": "96988a58277c3b7610f9a0fa32ea44701f3370fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b047ed0_8b6aa49f",
+        "filename": "redfish/dmtf_tools/Redfish_Interop_Validator.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-12T06:28:38Z",
+      "side": 1,
+      "message": "should this check come after @25 ?",
+      "range": {
+        "startLine": 28,
+        "startChar": 3,
+        "endLine": 28,
+        "endChar": 24
+      },
+      "revId": "96988a58277c3b7610f9a0fa32ea44701f3370fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
