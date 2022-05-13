@@ -109,9 +109,10 @@ Verify BMC Information
     Verify Display Content  ${version}
 
     ${iplist}=  Get BMC IP Info
-    :FOR  ${ip}  IN  @{iplist}
-    \  ${ip}=  Fetch From Left  ${ip}  /
-    \  Verify Display Content  ${ip}
+    FOR  ${ip}  IN  @{iplist}
+      ${ip}=  Fetch From Left  ${ip}  /
+      Verify Display Content  ${ip}
+    END
 
     ${mac}=  Get BMC MAC Address
     Verify Display Content  ${mac}
