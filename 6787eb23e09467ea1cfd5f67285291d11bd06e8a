@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0da4c3d2_4f14ed7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-13T11:53:32Z",
+      "side": 1,
+      "message": "minor fix please",
+      "revId": "6787eb23e09467ea1cfd5f67285291d11bd06e8a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e490f1c_f3d1fc4c",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-13T11:53:32Z",
+      "side": 1,
+      "message": "Documentation please\n\nTherer no need of ${}  identifier for the parameter in the documentation of arg\n\nDescription of Arguments.\n# response_data       \u003c\u003e",
+      "revId": "6787eb23e09467ea1cfd5f67285291d11bd06e8a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfd58145_7d9b045b",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-13T11:53:32Z",
+      "side": 1,
+      "message": "Description of Arguments.",
+      "revId": "6787eb23e09467ea1cfd5f67285291d11bd06e8a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb89ebfa_4dc4a8ab",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-13T11:53:32Z",
+      "side": 1,
+      "message": "Description of Arguments.",
+      "revId": "6787eb23e09467ea1cfd5f67285291d11bd06e8a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
