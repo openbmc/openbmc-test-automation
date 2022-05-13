@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e7c9ce6_34286177",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-13T10:24:05Z",
+      "side": 1,
+      "message": "_And_",
+      "range": {
+        "startLine": 82,
+        "startChar": 32,
+        "endLine": 82,
+        "endChar": 35
+      },
+      "revId": "2df08adf72dee93d2caec3168327a9c365539d3d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9105f9b7_ac5e3b7a",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-13T10:24:05Z",
+      "side": 1,
+      "message": "Fix the tag mismatch",
+      "revId": "2df08adf72dee93d2caec3168327a9c365539d3d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9d618b6_3b2d00bb",
+        "filename": "ipmi/test_ipmi_cipher.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-13T10:24:05Z",
+      "side": 1,
+      "message": "W: 183, 110: Line is too long (exceeds 110 characters) (LineTooLong)\n\ndo something like this\n\n    ${cmd}\u003d  Catenate   ${IPMI_RAW_CMD[\u0027Cipher Suite\u0027][\u0027get\u0027][0]}\n...  ${channel_num} ${payload_type} ${index_value}",
+      "range": {
+        "startLine": 183,
+        "startChar": 1,
+        "endLine": 183,
+        "endChar": 111
+      },
+      "revId": "2df08adf72dee93d2caec3168327a9c365539d3d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c284248e_51b9c20e",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-13T10:24:05Z",
+      "side": 1,
+      "message": "Fix the tabs .. I think u need this for another commit out there",
+      "range": {
+        "startLine": 690,
+        "startChar": 0,
+        "endLine": 705,
+        "endChar": 0
+      },
+      "revId": "2df08adf72dee93d2caec3168327a9c365539d3d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
