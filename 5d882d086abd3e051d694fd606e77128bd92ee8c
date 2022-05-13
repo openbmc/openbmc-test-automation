@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22917ab2_d8ee74a1",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-13T07:32:42Z",
+      "side": 1,
+      "message": "Repository",
+      "range": {
+        "startLine": 161,
+        "startChar": 17,
+        "endLine": 161,
+        "endChar": 28
+      },
+      "revId": "5d882d086abd3e051d694fd606e77128bd92ee8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "342c13af_4a819dfa",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-13T07:32:42Z",
+      "side": 1,
+      "message": "Repository",
+      "range": {
+        "startLine": 162,
+        "startChar": 40,
+        "endLine": 162,
+        "endChar": 52
+      },
+      "revId": "5d882d086abd3e051d694fd606e77128bd92ee8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15488d34_0afb6f55",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-13T07:32:42Z",
+      "side": 1,
+      "message": "Repository",
+      "range": {
+        "startLine": 163,
+        "startChar": 29,
+        "endLine": 163,
+        "endChar": 40
+      },
+      "revId": "5d882d086abd3e051d694fd606e77128bd92ee8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6268261b_1013c91e",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-13T07:32:42Z",
+      "side": 1,
+      "message": "It doesnt matter but use single # for comment just for similarity and formatting accross",
+      "range": {
+        "startLine": 167,
+        "startChar": 4,
+        "endLine": 167,
+        "endChar": 7
+      },
+      "revId": "5d882d086abd3e051d694fd606e77128bd92ee8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "703d7757_e71ba490",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-13T07:32:42Z",
+      "side": 1,
+      "message": "Its always good practice to add message for it. \n\nShould Not Be Equal  ${reservation_id}  ${new_reservation_id}    msg\u003dso and so msg.",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 65
+      },
+      "revId": "5d882d086abd3e051d694fd606e77128bd92ee8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16a4fb14_42d27d9d",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-13T07:32:42Z",
+      "side": 1,
+      "message": "will",
+      "range": {
+        "startLine": 239,
+        "startChar": 54,
+        "endLine": 239,
+        "endChar": 58
+      },
+      "revId": "5d882d086abd3e051d694fd606e77128bd92ee8c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
