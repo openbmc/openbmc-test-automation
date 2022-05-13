@@ -47,6 +47,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "08fb5307_7cac07c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001439
+      },
+      "writtenOn": "2022-05-13T06:20:42Z",
+      "side": 1,
+      "message": "Sure, I just added some very basic requirements. Could you see if that is reasonable? (I\u0027m not familiar with BMC implementation)",
+      "parentUuid": "7c9c6bb7_7786789f",
+      "range": {
+        "startLine": 13,
+        "startChar": 9,
+        "endLine": 13,
+        "endChar": 26
+      },
+      "revId": "96988a58277c3b7610f9a0fa32ea44701f3370fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4ad8d633_1a8826df",
@@ -87,6 +111,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3187e0c6_3cb8f087",
+        "filename": "data/redfish_interop_profile.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001439
+      },
+      "writtenOn": "2022-05-13T06:20:42Z",
+      "side": 1,
+      "message": "Hmm the RedfishInteroperabilityProfile.v1_0_0 should be the schema definition of this profile, that means we could use the syntax defined in that schema (more details could refer to https://www.dmtf.org/sites/default/files/standards/documents/DSP0272_1.5.0.pdf). The ProfileName attribute define the name of this profile, which also shows in the validation result (For the advanced usage, we could obtain multiple profiles per validation. So if the validation fails, the failed requirement would show the associated profile name).\n\nI changed it into `OpenBMC_Redfish_interop_profile` which is the same with the file name.",
+      "parentUuid": "88faab41_b8c85c9b",
+      "range": {
+        "startLine": 3,
+        "startChar": 5,
+        "endLine": 3,
+        "endChar": 36
+      },
+      "revId": "96988a58277c3b7610f9a0fa32ea44701f3370fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1d3e277_f60aa584",
@@ -100,6 +148,30 @@
       "writtenOn": "2022-05-12T13:17:19Z",
       "side": 1,
       "message": "Should this be a \"0.x.x\" profile, since it doesn\u0027t yet include a reasonable set of minimal OpenBMC requirements?",
+      "range": {
+        "startLine": 4,
+        "startChar": 23,
+        "endLine": 4,
+        "endChar": 28
+      },
+      "revId": "96988a58277c3b7610f9a0fa32ea44701f3370fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54234e6a_29cbb2f8",
+        "filename": "data/redfish_interop_profile.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1001439
+      },
+      "writtenOn": "2022-05-13T06:20:42Z",
+      "side": 1,
+      "message": "Yeah, I just modified it into 0.0.1.",
+      "parentUuid": "e1d3e277_f60aa584",
       "range": {
         "startLine": 4,
         "startChar": 23,
@@ -133,6 +205,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a506b2c8_06b2fc98",
+        "filename": "lib/dmtf_tools_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001439
+      },
+      "writtenOn": "2022-05-13T06:20:42Z",
+      "side": 1,
+      "message": "I found that we don\u0027t need this one to help we realize the validation result. The return code should be sufficient (Reference: https://github.com/DMTF/Redfish-Interop-Validator/blob/master/RedfishInteropValidator.py#L294-L300). So I just remove `Redfish Interop Validator Result`.",
+      "parentUuid": "fbc510ba_ad26f86c",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 14
+      },
+      "revId": "96988a58277c3b7610f9a0fa32ea44701f3370fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1c19927_92392696",
@@ -146,6 +242,30 @@
       "writtenOn": "2022-05-12T06:28:38Z",
       "side": 1,
       "message": "Test BMC Redfish conformance using  https://github.com/DMTF/Redfish-Interop-Validator DMTF tool.\nThis Redfish-Interop-Validator validate the Redfish service\nbased on an interoperability profile given to it.\n\nVerify nice info given in commit message.. we can use some of it in the documentation for the more understandability.",
+      "range": {
+        "startLine": 2,
+        "startChar": 19,
+        "endLine": 3,
+        "endChar": 29
+      },
+      "revId": "96988a58277c3b7610f9a0fa32ea44701f3370fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03c1d358_240907ce",
+        "filename": "redfish/dmtf_tools/Redfish_Interop_Validator.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001439
+      },
+      "writtenOn": "2022-05-13T06:20:42Z",
+      "side": 1,
+      "message": "Thanks for the suggestion, done.",
+      "parentUuid": "a1c19927_92392696",
       "range": {
         "startLine": 2,
         "startChar": 19,
@@ -179,6 +299,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ae4a257_9c765c44",
+        "filename": "redfish/dmtf_tools/Redfish_Interop_Validator.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1001439
+      },
+      "writtenOn": "2022-05-13T06:20:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02e3690d_d682c3c9",
+      "range": {
+        "startLine": 20,
+        "startChar": 21,
+        "endLine": 20,
+        "endChar": 74
+      },
+      "revId": "96988a58277c3b7610f9a0fa32ea44701f3370fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b047ed0_8b6aa49f",
@@ -192,6 +336,30 @@
       "writtenOn": "2022-05-12T06:28:38Z",
       "side": 1,
       "message": "should this check come after @25 ?",
+      "range": {
+        "startLine": 28,
+        "startChar": 3,
+        "endLine": 28,
+        "endChar": 24
+      },
+      "revId": "96988a58277c3b7610f9a0fa32ea44701f3370fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fbaa345_63b5be10",
+        "filename": "redfish/dmtf_tools/Redfish_Interop_Validator.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001439
+      },
+      "writtenOn": "2022-05-13T06:20:42Z",
+      "side": 1,
+      "message": "Done, please also see https://gerrit.openbmc-project.xyz/c/openbmc/openbmc-test-automation/+/53675/3..5/lib/dmtf_tools_utils.robot#b55.",
+      "parentUuid": "6b047ed0_8b6aa49f",
       "range": {
         "startLine": 28,
         "startChar": 3,
