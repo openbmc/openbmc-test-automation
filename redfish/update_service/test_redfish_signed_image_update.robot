@@ -18,11 +18,17 @@ Resource                 ../../lib/code_update_utils.robot
 Resource                 ../../lib/redfish_code_update_utils.robot
 Library                  ../../lib/gen_robot_valid.py
 Library                  ../../lib/var_funcs.py
+Library                  ../../lib/gen_robot_keyword.py
 
 Suite Setup              Suite Setup Execution
 Suite Teardown           Redfish.Logout
 Test Setup               Printn
 Test Teardown            FFDC On Test Case Fail
+
+
+*** Variables ***
+
+${ACTIVATION_WAIT_TIMEOUT}     8 min
 
 *** Test Cases ***
 
@@ -76,15 +82,38 @@ Redfish Signed Firmware Update
 
     Field Mode Should Be Enabled
     ${image_version}=  Get Version Tar  ${image_file_path}
+
+    ${post_code_update_actions}=  Get Post Boot Action
     ${state}=  Get Pre Reboot State
     Rprint Vars  state
-    Set ApplyTime  policy=Immediate
-    Redfish Upload Image And Check Progress State
-    ${image_info}=  Get Software Inventory State By Version  ${image_version}
-    Run Keyword If  'BMC update' == '${image_info["image_type"]}'
-    ...    Reboot BMC And Verify BMC Image  Immediate  start_boot_seconds=${state['epoch_seconds']}
-    ...  ELSE
-    ...    Poweron Host And Verify Host Image
+
+    Run Keyword And Ignore Error  Set ApplyTime  policy=OnReset
+
+    # Python module:  get_member_list(resource_path)
+    ${before_inv_list}=  redfish_utils.Get Member List  /redfish/v1/UpdateService/FirmwareInventory
+    Log To Console   Current images on the BMC before upload: ${before_inv_list}
+
+    Redfish Upload Image  /redfish/v1/UpdateService  ${IMAGE_FILE_PATH}
+
+    # Python module:  get_member_list(resource_path)
+    ${after_inv_list}=  redfish_utils.Get Member List  /redfish/v1/UpdateService/FirmwareInventory
+    Log To Console  Current images on the BMC after upload: ${after_inv_list}
+
+    ${image_id}=  Evaluate  set(${after_inv_list}) - set(${before_inv_list})
+    Should Not Be Empty    ${image_id}
+    ${image_id}=  Evaluate  list(${image_id})[0].split('/')[-1]
+    Log To Console  Firmware installation in progress with image id:: ${image_id}
+
+    Wait Until Keyword Succeeds  ${ACTIVATION_WAIT_TIMEOUT}  10 sec
+    ...  Check Image Update Progress State  match_state='Enabled'  image_id=${image_id}
+
+    # Python module:  get_version_tar(tar_file_path)
+    ${tar_version}=  code_update_utils.Get Version Tar  ${IMAGE_FILE_PATH}
+    ${image_info}=  Get Software Inventory State By Version  ${tar_version}
+
+    Run Key  ${post_code_update_actions['${image_info["image_type"]}']['OnReset']}
+    Redfish.Login
+    Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
 
 
 Redfish Unsigned Firmware Update
