@@ -254,32 +254,6 @@ Verify Certificates Location Via Redfish
 
 *** Keywords ***
 
-Modify BMC Date
-    [Documentation]  Modify date in BMC.
-    [Arguments]  ${date_set_type}=current
-
-    # Description of argument(s):
-    # date_set_type    Set BMC date to a current, future, old date by 375 days.
-    #                  current - Sets date to local system date.
-    #                  future - Sets to a future date from current date.
-    #                  old - Sets to a old date from current date.
-
-    Redfish Power Off  stack_mode=skip
-    ${current_date_time}=  Get Current Date
-    ${new_time}=  Run Keyword If  '${date_set_type}' == 'current'  Set Variable  ${current_date_time}
-    ...  ELSE IF  '${date_set_type}' == 'future'
-    ...  Add Time To Date  ${current_date_time}  375 days
-    ...  ELSE IF  '${date_set_type}' == 'old'
-    ...  Subtract Time From Date  ${current_date_time}  375 days
-
-    # Enable manual mode.
-    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
-    ...  body={'NTP':{'ProtocolEnabled': ${False}}}
-    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
-    Sleep  2s
-    Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${new_time}'}
-    ...  valid_status_codes=[${HTTP_OK}]
-
 Get Current BMC Date
     [Documentation]  Get current BMC date.
 
