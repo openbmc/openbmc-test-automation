@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a7e770d_5bda094e",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-13T06:09:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "214fd922_37ba0318",
+      "range": {
+        "startLine": 95,
+        "startChar": 4,
+        "endLine": 95,
+        "endChar": 67
+      },
+      "revId": "dded098b6a959b9a8bf163ed201ce36004ab88fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18294de3_1dd98ce7",
@@ -131,6 +155,30 @@
       "writtenOn": "2022-05-12T13:38:29Z",
       "side": 1,
       "message": "Remove this one.. let it just assume when we call this keyword, BMC is pinging and the BMC is boot and bmcweb is up and responding. \n\nput the wait login in the test",
+      "range": {
+        "startLine": 1040,
+        "startChar": 4,
+        "endLine": 1040,
+        "endChar": 73
+      },
+      "revId": "dded098b6a959b9a8bf163ed201ce36004ab88fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43c59d88_c34c4125",
+        "filename": "lib/utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-13T06:09:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e327b04_04b01ee9",
       "range": {
         "startLine": 1040,
         "startChar": 4,
