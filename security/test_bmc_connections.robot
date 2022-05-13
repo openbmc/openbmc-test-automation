@@ -76,6 +76,9 @@ Verify User Cannot Login After 5 Non-Logged In Sessions
     [Documentation]  User should not be able to login when there
     ...  are 5 non-logged in sessions.
     [Tags]  Verify_User_Cannot_Login_After_5_Non-Logged_In_Sessions
+    [Setup]  Confirm Ability to Connect Then Close All Connections
+    [Teardown]  Run Keywords  Process.Terminate All Processes  AND
+    ...  SSHLibrary.Close All Connections  AND  FFDC On Test Case Fail
 
     FOR  ${iter}  IN RANGE  ${0}  ${MAX_UNAUTH_PER_IP}
        SSHLibrary.Open Connection  ${OPENBMC_HOST}
@@ -334,3 +337,15 @@ Invalid Credentials Redfish Login Attempts
     Log  ${failed_iter_list}
     ${fail_count}=  Get Length  ${failed_iter_list}
     Run Keyword If  ${fail_count} > ${0}  FAIL  Could not Login to Redfish ${fail_count} times
+
+
+Confirm Ability to Connect Then Close All Connections
+    [Documentation]  Confirm that SSH login works, otherwise, skip this test.
+    ...  If login succeeds, close all SSH connections to BMC to prepare for test.
+
+    SSHLibrary.Close All Connections
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    ${status}=   Run Keyword And Return Status
+    ...  SSHLibrary.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    Skip If  ${status} == ${False}  msg= SSH Login failed: test will be skipped
+    SSHLibrary.Close All Connections
