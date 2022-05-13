@@ -51,6 +51,52 @@
       "parentUuid": "ea96bbd8_7fb4d084",
       "revId": "6e29b0664009f809411f61a1a8dffe34e32a2af6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9083cae7_7c113362",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-05-13T05:23:21Z",
+      "side": 1,
+      "message": "This keyword does more than just getting the user ID of root user. Please change it to \u0027Determine Admin Users\u0027 or anything else which you find appropriate.",
+      "range": {
+        "startLine": 702,
+        "startChar": 0,
+        "endLine": 702,
+        "endChar": 22
+      },
+      "revId": "6e29b0664009f809411f61a1a8dffe34e32a2af6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32cbd24c_98c6816f",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-05-13T05:23:21Z",
+      "side": 1,
+      "message": "This will loop unnecessarily 300 times if there are already 15 users and no user id is free. Also this keyword should error out in such a scenario and that should be handled by the caller.",
+      "range": {
+        "startLine": 814,
+        "startChar": 1,
+        "endLine": 826,
+        "endChar": 0
+      },
+      "revId": "6e29b0664009f809411f61a1a8dffe34e32a2af6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
