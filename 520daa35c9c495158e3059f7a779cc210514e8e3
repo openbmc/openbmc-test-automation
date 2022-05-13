@@ -22,6 +22,30 @@
       },
       "revId": "520daa35c9c495158e3059f7a779cc210514e8e3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "729e75f0_ed37469f",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-13T10:27:17Z",
+      "side": 1,
+      "message": "That keyword commited in below MR.\nhttps://gerrit.openbmc-project.xyz/c/openbmc/openbmc-test-automation/+/53084/5",
+      "parentUuid": "fe60ff8f_0b797569",
+      "range": {
+        "startLine": 274,
+        "startChar": 3,
+        "endLine": 275,
+        "endChar": 57
+      },
+      "revId": "520daa35c9c495158e3059f7a779cc210514e8e3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
