@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41a7c2e2_aedaffaf",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-13T07:39:22Z",
+      "side": 1,
+      "message": "IPMI",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 5
+      },
+      "revId": "7500f6871e46c14b5a390e9ba3969a2813487493",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35e2c62e_75ec7e15",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-13T07:39:22Z",
+      "side": 1,
+      "message": "keep single # across just for similarity and common commenting. Thanks",
+      "range": {
+        "startLine": 270,
+        "startChar": 4,
+        "endLine": 270,
+        "endChar": 6
+      },
+      "revId": "7500f6871e46c14b5a390e9ba3969a2813487493",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc02f8fb_a4dfad24",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-13T07:39:22Z",
+      "side": 1,
+      "message": "Capabilities",
+      "range": {
+        "startLine": 319,
+        "startChar": 20,
+        "endLine": 319,
+        "endChar": 32
+      },
+      "revId": "7500f6871e46c14b5a390e9ba3969a2813487493",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d07c76bd_74c1e345",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-13T07:39:22Z",
+      "side": 1,
+      "message": "Verify",
+      "range": {
+        "startLine": 320,
+        "startChar": 21,
+        "endLine": 320,
+        "endChar": 28
+      },
+      "revId": "7500f6871e46c14b5a390e9ba3969a2813487493",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "335c79a4_afb8e076",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-13T07:39:22Z",
+      "side": 1,
+      "message": "# Description of argument(s):",
+      "range": {
+        "startLine": 323,
+        "startChar": 4,
+        "endLine": 323,
+        "endChar": 30
+      },
+      "revId": "7500f6871e46c14b5a390e9ba3969a2813487493",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfe9a34e_f641b59b",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-13T07:39:22Z",
+      "side": 1,
+      "message": "interface",
+      "range": {
+        "startLine": 348,
+        "startChar": 19,
+        "endLine": 348,
+        "endChar": 29
+      },
+      "revId": "7500f6871e46c14b5a390e9ba3969a2813487493",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0307d90a_10b865cb",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-13T07:39:22Z",
+      "side": 1,
+      "message": "# Description of argument(s):",
+      "range": {
+        "startLine": 360,
+        "startChar": 3,
+        "endLine": 360,
+        "endChar": 29
+      },
+      "revId": "7500f6871e46c14b5a390e9ba3969a2813487493",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
