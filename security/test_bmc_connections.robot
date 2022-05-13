@@ -76,6 +76,15 @@ Verify User Cannot Login After 5 Non-Logged In Sessions
     [Documentation]  User should not be able to login when there
     ...  are 5 non-logged in sessions.
     [Tags]  Verify_User_Cannot_Login_After_5_Non-Logged_In_Sessions
+    [Teardown]  Run Keywords  Process.Terminate All Processes  AND
+    ...  SSHLibrary.Close All Connections
+
+    # First confirm that login can succeed
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    ${status}=   Run Keyword And Return Status
+    ...  SSHLibrary.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    Skip If  ${status} == ${False}
+    SSHLibrary.Close All Connections
 
     FOR  ${iter}  IN RANGE  ${0}  ${MAX_UNAUTH_PER_IP}
        SSHLibrary.Open Connection  ${OPENBMC_HOST}
