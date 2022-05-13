@@ -148,7 +148,7 @@ Verify Interface Stability
     ...  ELSE IF  ${port} == ${SSH_PORT}
     ...  Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
     ...  ELSE IF  ${port} == ${IPMI_PORT}
-    ...  Run External IPMI Standard Command lan print
+    ...  Run External IPMI Standard Command  lan print
     ...  ELSE IF  ${port} == ${HOST_SOL_PORT}
     ...  Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  port=${HOST_SOL_PORT}
     ...  ELSE
