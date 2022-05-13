@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dea176fb_5731cef9",
+        "filename": "lib/dmtf_tools_utils.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-13T07:05:10Z",
+      "side": 0,
+      "message": "If no changes.. please remove the file from the commit",
+      "revId": "c46f79440b00880a4b931514c118c88a74ca3472",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

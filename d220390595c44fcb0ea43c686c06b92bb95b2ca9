@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c89790d_03744572",
+        "filename": "data/openbmc_redfish_interop_profile.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-13T07:05:10Z",
+      "side": 1,
+      "message": "ComputerSystem -- computer system ?",
+      "range": {
+        "startLine": 18,
+        "startChar": 66,
+        "endLine": 18,
+        "endChar": 80
+      },
+      "revId": "d220390595c44fcb0ea43c686c06b92bb95b2ca9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "222030b9_23731494",
+        "filename": "data/openbmc_redfish_interop_profile.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-13T07:05:10Z",
+      "side": 1,
+      "message": "Computer system with basic properties.",
+      "range": {
+        "startLine": 27,
+        "startChar": 24,
+        "endLine": 27,
+        "endChar": 61
+      },
+      "revId": "d220390595c44fcb0ea43c686c06b92bb95b2ca9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
