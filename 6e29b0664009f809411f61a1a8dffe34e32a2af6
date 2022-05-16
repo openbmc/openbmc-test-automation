@@ -76,6 +76,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9befc9d1_e1a9ab4e",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-16T13:48:12Z",
+      "side": 1,
+      "message": "Yes, I had needed it to do more in an earlier implementation. Now I only need to identify the root user. So I have removed the excess code and kept the name the same.",
+      "parentUuid": "9083cae7_7c113362",
+      "range": {
+        "startLine": 702,
+        "startChar": 0,
+        "endLine": 702,
+        "endChar": 22
+      },
+      "revId": "6e29b0664009f809411f61a1a8dffe34e32a2af6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32cbd24c_98c6816f",
@@ -89,6 +113,30 @@
       "writtenOn": "2022-05-13T05:23:21Z",
       "side": 1,
       "message": "This will loop unnecessarily 300 times if there are already 15 users and no user id is free. Also this keyword should error out in such a scenario and that should be handled by the caller.",
+      "range": {
+        "startLine": 814,
+        "startChar": 1,
+        "endLine": 826,
+        "endChar": 0
+      },
+      "revId": "6e29b0664009f809411f61a1a8dffe34e32a2af6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1816c8dd_bba4081b",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-16T13:48:12Z",
+      "side": 1,
+      "message": "Indeed. The suite setup does call \u0027Check Enabled User Count\u0027 which precludes this problem at the outset of the suite. But another test could create more users.\nI inserted \u0027Check Enabled User Count\u0027 at the start of the keyword.",
+      "parentUuid": "32cbd24c_98c6816f",
       "range": {
         "startLine": 814,
         "startChar": 1,
