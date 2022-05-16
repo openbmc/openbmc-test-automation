@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "45bc5623_61819bd5",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-05-16T10:59:49Z",
+      "side": 1,
+      "message": "I see that FFDC is not collected on Test case fail.Actually this needs to be added for all the tests.",
+      "range": {
+        "startLine": 79,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 41
+      },
+      "revId": "658d9644c4f568b78ef43e6f3eb60c59b72080e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "971d5825_e8d5fbdc",
         "filename": "security/test_bmc_connections.robot",
         "patchSetId": 1
