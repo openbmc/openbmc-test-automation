@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f8df4cc_156add48",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-16T12:56:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45bc5623_61819bd5",
+      "range": {
+        "startLine": 79,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 41
+      },
+      "revId": "658d9644c4f568b78ef43e6f3eb60c59b72080e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "971d5825_e8d5fbdc",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-05-16T09:20:40Z",
       "side": 1,
       "message": "right place for this wud be test setup.\nPls move this code under test setup.",
+      "revId": "658d9644c4f568b78ef43e6f3eb60c59b72080e5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5b4a08f_c09a5295",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-16T12:56:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "971d5825_e8d5fbdc",
       "revId": "658d9644c4f568b78ef43e6f3eb60c59b72080e5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
