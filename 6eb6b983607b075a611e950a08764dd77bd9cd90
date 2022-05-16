@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe9b9cbe_47839793",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-05-16T11:35:07Z",
+      "side": 1,
+      "message": "Where is this keyword defined?",
+      "range": {
+        "startLine": 188,
+        "startChar": 3,
+        "endLine": 188,
+        "endChar": 31
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ab77b0a_1ca200b1",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-05-16T11:35:07Z",
+      "side": 1,
+      "message": "ID",
+      "range": {
+        "startLine": 206,
+        "startChar": 63,
+        "endLine": 206,
+        "endChar": 65
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb4e0ac5_16e7bbba",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-05-16T11:35:07Z",
+      "side": 1,
+      "message": "Verify",
+      "range": {
+        "startLine": 206,
+        "startChar": 21,
+        "endLine": 206,
+        "endChar": 27
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48d0a064_9fa5acd0",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-05-16T11:35:07Z",
+      "side": 1,
+      "message": "Align the descriptions like below.\n\n    # Description of argument(s):\n    # command                       The IPMI command string to be executed\n    #                               (e.g. \"power status\").  Note that if\n    #                               ${IPMI_USER_OPTIONS} has a value (e.g.\n    #                               \"-vvv\"), it will be pre-pended to this\n    #                               command string.\n    # fail_on_err                   Fail if the IPMI command execution fails.",
+      "range": {
+        "startLine": 235,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 64
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a9c62fe_fa511277",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-05-16T11:35:07Z",
+      "side": 1,
+      "message": "responses.",
+      "range": {
+        "startLine": 241,
+        "startChar": 54,
+        "endLine": 241,
+        "endChar": 64
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b40addbc_b44a06c8",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-05-16T11:35:07Z",
+      "side": 1,
+      "message": "If both are false then reservation_id will be empty.",
+      "range": {
+        "startLine": 246,
+        "startChar": 1,
+        "endLine": 249,
+        "endChar": 46
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66d652e9_0ff83794",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-05-16T11:35:07Z",
+      "side": 1,
+      "message": "Return True if IPMI command is supported.",
+      "range": {
+        "startLine": 388,
+        "startChar": 21,
+        "endLine": 389,
+        "endChar": 32
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5c77767_e3aefca8",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-05-16T11:35:07Z",
+      "side": 1,
+      "message": "IPMI command.",
+      "range": {
+        "startLine": 393,
+        "startChar": 18,
+        "endLine": 393,
+        "endChar": 73
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4531f6fa_4319fd73",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-05-16T11:35:07Z",
+      "side": 1,
+      "message": "Please return either True or False",
+      "range": {
+        "startLine": 398,
+        "startChar": 64,
+        "endLine": 398,
+        "endChar": 71
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eb8fb1d_4e5d0528",
+        "filename": "lib/utilities.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-05-16T11:35:07Z",
+      "side": 1,
+      "message": "Add documentation for both the methods. Also please give examples to understand the code.",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 41
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
