@@ -6,6 +6,7 @@ Resource        ../lib/resource.robot
 Resource        ../lib/connection_client.robot
 Resource        ../lib/utils.robot
 Resource        ../lib/state_manager.robot
+Library         ../lib/bmc_ssh_utils.py
 
 Library         String
 Library         var_funcs.py
@@ -86,7 +87,7 @@ Run Dbus IPMI Standard Command
     [Arguments]    ${command}
     Copy ipmitool
     ${stdout}    ${stderr}    ${output}=  Execute Command
-    ...    /tmp/ipmitool -I dbus ${command}    return_stdout=True
+    ...    ${IPMITOOL_LOCATION} -I dbus ${command}    return_stdout=True
     ...    return_stderr= True    return_rc=True
     Should Be Equal    ${output}    ${0}    msg=${stderr}
     [Return]    ${stdout}
@@ -301,14 +302,23 @@ Copy ipmitool
     ...  It is not part of the automation code by default. You must manually copy or link the correct openbmc
     ...  version of the tool in to the tools directory in order to run this test suite.
 
-    OperatingSystem.File Should Exist  tools/ipmitool  msg=${ipmitool_error}
+    ${response}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  which ipmitool  ignore_err=${1}
+    ${installed}=  Get Regexp Matches  ${response}  ipmitool
+    Run Keyword If  ${installed} == ['ipmitool']
+    ...  Run Keywords  Set Suite Variable  ${IPMITOOL_LOCATION}  ${response}
+    ...  AND  SSHLibrary.Open Connection     ${OPENBMC_HOST}
+    ...  AND  SSHLibrary.Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}
+    ...  AND  Return From Keyword
 
+    OperatingSystem.File Should Exist  tools/ipmitool  msg=${ipmitool_error}
     Import Library      SCPLibrary      WITH NAME       scp
     scp.Open connection     ${OPENBMC_HOST}     username=${OPENBMC_USERNAME}      password=${OPENBMC_PASSWORD}
     scp.Put File    tools/ipmitool   /tmp
     SSHLibrary.Open Connection     ${OPENBMC_HOST}
     SSHLibrary.Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}
     Execute Command     chmod +x /tmp/ipmitool
+    Set Suite Variable  ${IPMITOOL_LOCATION}  /tmp/ipmitool
 
 
 Initiate Host Boot Via External IPMI
