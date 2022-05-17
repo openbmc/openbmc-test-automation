@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64351a69_b951945c",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-05-17T13:45:09Z",
+      "side": 1,
+      "message": "Should break out of this loop once root is found",
+      "range": {
+        "startLine": 713,
+        "startChar": 8,
+        "endLine": 715,
+        "endChar": 27
+      },
+      "revId": "d27d938adfb5015c514718d1beb5a9e2a3be3f5a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "154e7cfd_c207844c",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-05-17T13:45:09Z",
+      "side": 1,
+      "message": "The logic becomes simpler if you can loop using IN RANGE from 1 to length(lines). That way can avoid additional variable ${id_index} and also the condition check for header line.",
+      "range": {
+        "startLine": 710,
+        "startChar": 1,
+        "endLine": 722,
+        "endChar": 7
+      },
+      "revId": "d27d938adfb5015c514718d1beb5a9e2a3be3f5a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
