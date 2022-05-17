@@ -1,0 +1,372 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38bcc08e_401c5a99",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-17T13:59:55Z",
+      "side": 1,
+      "message": "\"A Sensor\"",
+      "range": {
+        "startLine": 81,
+        "startChar": 42,
+        "endLine": 81,
+        "endChar": 43
+      },
+      "revId": "8e90f669ee0b1fe8625f8f071cf458a1a59f01b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "982c8af6_58dfa2de",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-17T13:59:55Z",
+      "side": 1,
+      "message": "I\u0027m confused as to why this is all capitalized. As a result, I am distracted by it, though I have no objection. If it is unintentional, you might consider reviewing all such instances.",
+      "range": {
+        "startLine": 81,
+        "startChar": 6,
+        "endLine": 81,
+        "endChar": 80
+      },
+      "revId": "8e90f669ee0b1fe8625f8f071cf458a1a59f01b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3f09cf7_638fcdb8",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-17T13:59:55Z",
+      "side": 1,
+      "message": "\u0027Wait to see that the BMC has first shutdown, then has fully rebooted.\u0027\nor similar.",
+      "range": {
+        "startLine": 93,
+        "startChar": 6,
+        "endLine": 93,
+        "endChar": 24
+      },
+      "revId": "8e90f669ee0b1fe8625f8f071cf458a1a59f01b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "880172cb_680e4c74",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-17T13:59:55Z",
+      "side": 1,
+      "message": "I\u0027m no robot expert, but I would not have thought that this would work. How is this possible?",
+      "range": {
+        "startLine": 99,
+        "startChar": 42,
+        "endLine": 99,
+        "endChar": 69
+      },
+      "revId": "8e90f669ee0b1fe8625f8f071cf458a1a59f01b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75f7e1f8_a67eacae",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-17T13:59:55Z",
+      "side": 1,
+      "message": "Get",
+      "range": {
+        "startLine": 119,
+        "startChar": 21,
+        "endLine": 119,
+        "endChar": 27
+      },
+      "revId": "8e90f669ee0b1fe8625f8f071cf458a1a59f01b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64407dc2_fed2c180",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-17T13:59:55Z",
+      "side": 1,
+      "message": "Remove",
+      "range": {
+        "startLine": 150,
+        "startChar": 6,
+        "endLine": 150,
+        "endChar": 9
+      },
+      "revId": "8e90f669ee0b1fe8625f8f071cf458a1a59f01b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc61d51c_2297ebb4",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-17T13:59:55Z",
+      "side": 1,
+      "message": "We already get this from the name. Please give at least a little more detail. For example, indicate where the name comes from or how it is specific.\n\nRemove all but the first capital letter.",
+      "range": {
+        "startLine": 151,
+        "startChar": 21,
+        "endLine": 151,
+        "endChar": 67
+      },
+      "revId": "8e90f669ee0b1fe8625f8f071cf458a1a59f01b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5f54541_54a41d9c",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-17T13:59:55Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 164,
+        "startChar": 54,
+        "endLine": 164,
+        "endChar": 57
+      },
+      "revId": "8e90f669ee0b1fe8625f8f071cf458a1a59f01b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4cf2881_4def4f0b",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-17T13:59:55Z",
+      "side": 1,
+      "message": "\u0027Modify the default sensor threshold by adding 100 to the old threshold.\u0027 or similar. Otherwise it looks like the keyword is described by itself.",
+      "range": {
+        "startLine": 210,
+        "startChar": 28,
+        "endLine": 210,
+        "endChar": 58
+      },
+      "revId": "8e90f669ee0b1fe8625f8f071cf458a1a59f01b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e0d3ef5_116ce5e5",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-17T13:59:55Z",
+      "side": 1,
+      "message": "Given",
+      "range": {
+        "startLine": 220,
+        "startChar": 33,
+        "endLine": 220,
+        "endChar": 38
+      },
+      "revId": "8e90f669ee0b1fe8625f8f071cf458a1a59f01b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "776e890f_f94052ef",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-17T13:59:55Z",
+      "side": 1,
+      "message": "But the keyword also requires sensor_name. So just remove this.",
+      "range": {
+        "startLine": 238,
+        "startChar": 31,
+        "endLine": 238,
+        "endChar": 53
+      },
+      "revId": "8e90f669ee0b1fe8625f8f071cf458a1a59f01b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fefa613a_fba6c598",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-17T13:59:55Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 238,
+        "startChar": 3,
+        "endLine": 238,
+        "endChar": 7
+      },
+      "revId": "8e90f669ee0b1fe8625f8f071cf458a1a59f01b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "573debd7_81ddadf7",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-17T13:59:55Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 239,
+        "startChar": 24,
+        "endLine": 239,
+        "endChar": 28
+      },
+      "revId": "8e90f669ee0b1fe8625f8f071cf458a1a59f01b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a14217e8_3b625de1",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-17T13:59:55Z",
+      "side": 1,
+      "message": "Replace with \"Get\"",
+      "range": {
+        "startLine": 246,
+        "startChar": 6,
+        "endLine": 246,
+        "endChar": 44
+      },
+      "revId": "8e90f669ee0b1fe8625f8f071cf458a1a59f01b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f0d4af3_4dc05883",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-17T13:59:55Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 248,
+        "startChar": 53,
+        "endLine": 248,
+        "endChar": 56
+      },
+      "revId": "8e90f669ee0b1fe8625f8f071cf458a1a59f01b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa0765ee_37de32db",
+        "filename": "lib/utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-17T13:59:55Z",
+      "side": 1,
+      "message": "I\u0027ve no objection, but I wonder whether Ping Host is the best choice, since many computers can be pinged early in the boot process. I\u0027m concerned that Redfish.login might fail. Alternatively, consider whether perhaps \u0027Redfish.Login\u0027 should also be in a relatively short Wait Until Keyword Succeeds?",
+      "range": {
+        "startLine": 1040,
+        "startChar": 4,
+        "endLine": 1041,
+        "endChar": 17
+      },
+      "revId": "8e90f669ee0b1fe8625f8f071cf458a1a59f01b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
