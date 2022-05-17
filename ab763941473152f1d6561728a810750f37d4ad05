@@ -16,6 +16,75 @@
       "message": "done",
       "revId": "ab763941473152f1d6561728a810750f37d4ad05",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acfe1958_049fdbc5",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-17T06:41:01Z",
+      "side": 1,
+      "message": "1. Give apt [Documentation] info please\n\n2. Add - Description of arguments\nplease remove ${} identifier in the arguments mentioned in description\n\n3. This keyword is huge.. can u mention few more comments in the body. so, that it is  easier to read.",
+      "range": {
+        "startLine": 152,
+        "startChar": 6,
+        "endLine": 152,
+        "endChar": 44
+      },
+      "revId": "ab763941473152f1d6561728a810750f37d4ad05",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daba7fa9_88dfe397",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-17T06:41:01Z",
+      "side": 1,
+      "message": "description",
+      "range": {
+        "startLine": 215,
+        "startChar": 2,
+        "endLine": 215,
+        "endChar": 89
+      },
+      "revId": "ab763941473152f1d6561728a810750f37d4ad05",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e08b7019_ad53ed99",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-17T06:41:01Z",
+      "side": 1,
+      "message": "Get\n\nAdd description of arguments",
+      "range": {
+        "startLine": 226,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 7
+      },
+      "revId": "ab763941473152f1d6561728a810750f37d4ad05",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
