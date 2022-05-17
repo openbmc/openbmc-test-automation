@@ -240,8 +240,6 @@ def execute_ssh_command(cmd_buf,
         try:
             if fork:
                 sshlib.start_command(cmd_buf)
-                ssh_log_out = sshlib.read_command_output()
-                BuiltIn().log_to_console(ssh_log_out)
             else:
                 if open_connection_args['alias'] == "device_connection":
                     stdout = sshlib.write(cmd_buf)
