@@ -400,6 +400,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b25a5b3_b41df8da",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T07:07:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "493449fb_7d4d726a",
+      "range": {
+        "startLine": 357,
+        "startChar": 35,
+        "endLine": 357,
+        "endChar": 47
+      },
+      "revId": "d92544bdc188958399770c5480fe67c96c25e740",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a8a5cbd_0494852d",
@@ -413,6 +437,30 @@
       "writtenOn": "2022-05-16T12:09:50Z",
       "side": 1,
       "message": "Explain how the args make a difference and mention these as expected values. Recommend to use -- High or Low",
+      "range": {
+        "startLine": 361,
+        "startChar": 19,
+        "endLine": 361,
+        "endChar": 32
+      },
+      "revId": "d92544bdc188958399770c5480fe67c96c25e740",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb3f08f8_8dc81af3",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T07:07:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a8a5cbd_0494852d",
       "range": {
         "startLine": 361,
         "startChar": 19,
