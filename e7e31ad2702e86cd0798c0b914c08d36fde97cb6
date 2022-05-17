@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4f77bce_7dd6b947",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-05-17T11:32:58Z",
+      "side": 1,
+      "message": "On our system this is coming as empty so it would start failing.",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 67
+      },
+      "revId": "e7e31ad2702e86cd0798c0b914c08d36fde97cb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cebe841e_dc1598b2",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-05-17T11:32:58Z",
+      "side": 1,
+      "message": "This is also coming as no on our system.",
+      "range": {
+        "startLine": 59,
+        "startChar": 1,
+        "endLine": 59,
+        "endChar": 53
+      },
+      "revId": "e7e31ad2702e86cd0798c0b914c08d36fde97cb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5217ada_feb3153c",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-05-17T11:32:58Z",
+      "side": 1,
+      "message": "George ... We need to run this on our system to see if this works",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 109
+      },
+      "revId": "e7e31ad2702e86cd0798c0b914c08d36fde97cb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
