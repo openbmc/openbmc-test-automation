@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c102dd94_44754762",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-05-17T14:28:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53203504_400b05e0",
+      "revId": "2e8c1fdf758fd574644b4a836e3029236a7418fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba96d6c1_8d5f09a1",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98ce6837_b27fb2a3",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-05-17T14:28:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba96d6c1_8d5f09a1",
+      "revId": "2e8c1fdf758fd574644b4a836e3029236a7418fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ebe23cf_1656496f",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-04-28T06:04:29Z",
       "side": 1,
       "message": "can you reuse code on line 197 by fine-tuning it to handle both??",
+      "revId": "2e8c1fdf758fd574644b4a836e3029236a7418fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d4c5457_a99c6407",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-05-17T14:28:23Z",
+      "side": 1,
+      "message": "Removing this as I am not using this keyword in this test case. Will make the changes and push in the next commit.",
+      "parentUuid": "7ebe23cf_1656496f",
       "revId": "2e8c1fdf758fd574644b4a836e3029236a7418fd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
