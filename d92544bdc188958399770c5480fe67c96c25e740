@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aa49fa2_9325fef1",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T07:06:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1377cbb_d989247e",
+      "range": {
+        "startLine": 157,
+        "startChar": 21,
+        "endLine": 157,
+        "endChar": 75
+      },
+      "revId": "d92544bdc188958399770c5480fe67c96c25e740",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20b343f6_61a149a9",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-16T12:09:50Z",
       "side": 1,
       "message": "It is not for invalid channels right?\nVerify authentication capabilities for given channel and privilege",
+      "range": {
+        "startLine": 320,
+        "startChar": 21,
+        "endLine": 320,
+        "endChar": 97
+      },
+      "revId": "d92544bdc188958399770c5480fe67c96c25e740",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b41ff7fe_f1d30516",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T07:06:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20b343f6_61a149a9",
       "range": {
         "startLine": 320,
         "startChar": 21,
@@ -93,6 +141,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc1a21e6_c0179248",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T07:06:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b2d7b6c_1d917dd1",
+      "range": {
+        "startLine": 324,
+        "startChar": 2,
+        "endLine": 327,
+        "endChar": 34
+      },
+      "revId": "d92544bdc188958399770c5480fe67c96c25e740",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "781bd993_4f4e3799",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T07:06:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "224a1e04_25e97189",
+      "range": {
+        "startLine": 325,
+        "startChar": 24,
+        "endLine": 327,
+        "endChar": 34
+      },
+      "revId": "d92544bdc188958399770c5480fe67c96c25e740",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70ad7053_c5f4e396",
@@ -116,6 +212,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d753c90_8d7a6578",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T07:06:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70ad7053_c5f4e396",
+      "range": {
+        "startLine": 329,
+        "startChar": 4,
+        "endLine": 329,
+        "endChar": 87
+      },
+      "revId": "d92544bdc188958399770c5480fe67c96c25e740",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "101c87a1_17efb528",
@@ -129,6 +249,30 @@
       "writtenOn": "2022-05-16T12:09:50Z",
       "side": 1,
       "message": "Verify authentication capabilities of invalid channels",
+      "range": {
+        "startLine": 344,
+        "startChar": 21,
+        "endLine": 344,
+        "endChar": 70
+      },
+      "revId": "d92544bdc188958399770c5480fe67c96c25e740",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bb5336a_c4fd564e",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T07:06:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "101c87a1_17efb528",
       "range": {
         "startLine": 344,
         "startChar": 21,
@@ -175,6 +319,54 @@
       "writtenOn": "2022-05-16T12:09:50Z",
       "side": 1,
       "message": "Interface",
+      "range": {
+        "startLine": 348,
+        "startChar": 16,
+        "endLine": 348,
+        "endChar": 25
+      },
+      "revId": "d92544bdc188958399770c5480fe67c96c25e740",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50ec04c9_f2fd06ec",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T07:06:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc04e139_ce9f3247",
+      "range": {
+        "startLine": 348,
+        "startChar": 16,
+        "endLine": 348,
+        "endChar": 40
+      },
+      "revId": "d92544bdc188958399770c5480fe67c96c25e740",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad8d0a83_4fb8f252",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T07:06:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c067d58c_1fd3cf8b",
       "range": {
         "startLine": 348,
         "startChar": 16,
