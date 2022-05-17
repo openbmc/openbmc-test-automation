@@ -10,6 +10,7 @@ Resource        ../lib/state_manager.robot
 Library         String
 Library         var_funcs.py
 Library         ipmi_client.py
+Library         ../lib/bmc_ssh_utils.py
 
 *** Variables ***
 ${dbusHostIpmicmd1}=   dbus-send --system  ${OPENBMC_BASE_URI}HostIpmi/1
@@ -21,6 +22,7 @@ ${IPMI_USER_OPTIONS}   ${EMPTY}
 ${IPMI_INBAND_CMD}=    ipmitool -C ${IPMI_CIPHER_LEVEL} -N ${IPMI_TIMEOUT} -p ${IPMI_PORT}
 ${HOST}=               -H
 ${RAW}=                raw
+${IPMITOOL_PATH}  /tmp/ipmitool
 
 *** Keywords ***
 
@@ -86,7 +88,7 @@ Run Dbus IPMI Standard Command
     [Arguments]    ${command}
     Copy ipmitool
     ${stdout}    ${stderr}    ${output}=  Execute Command
-    ...    /tmp/ipmitool -I dbus ${command}    return_stdout=True
+    ...    ${IPMITOOL_PATH} -I dbus ${command}    return_stdout=True
     ...    return_stderr= True    return_rc=True
     Should Be Equal    ${output}    ${0}    msg=${stderr}
     [Return]    ${stdout}
@@ -301,14 +303,22 @@ Copy ipmitool
     ...  It is not part of the automation code by default. You must manually copy or link the correct openbmc
     ...  version of the tool in to the tools directory in order to run this test suite.
 
-    OperatingSystem.File Should Exist  tools/ipmitool  msg=${ipmitool_error}
+    ${response}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  which ipmitool  ignore_err=${1}
+    ${installed}=  Get Regexp Matches  ${response}  ipmitool
+    Run Keyword If  ${installed} == ['ipmitool']
+    ...  Run Keywords  Set Suite Variable  ${IPMITOOL_PATH}  ${response}
+    ...  AND  SSHLibrary.Open Connection     ${OPENBMC_HOST}
+    ...  AND  SSHLibrary.Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}
+    ...  AND  Return From Keyword
 
+    OperatingSystem.File Should Exist  tools/ipmitool  msg=${ipmitool_error}
     Import Library      SCPLibrary      WITH NAME       scp
     scp.Open connection     ${OPENBMC_HOST}     username=${OPENBMC_USERNAME}      password=${OPENBMC_PASSWORD}
     scp.Put File    tools/ipmitool   /tmp
     SSHLibrary.Open Connection     ${OPENBMC_HOST}
     SSHLibrary.Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}
-    Execute Command     chmod +x /tmp/ipmitool
+    Execute Command     chmod +x ${IPMITOOL_PATH}
 
 
 Initiate Host Boot Via External IPMI
@@ -468,6 +478,20 @@ Delete All Non Root IPMI User
     END
 
 
+Verify If IPMI Command Is Invalid
+    [Documentation]  Execute IPMI command and verify the response code.
+    [Arguments]  ${ipmi_cmd}  ${error_code}=0xc9
+
+    # Description of argument(s):
+    # ipmi_cmd                       The raw IPMI command to run.
+    # error_code                     The error response code for the IPMI command.
+
+
+    ${resp}=  Run External IPMI Raw Command  ${ipmi_cmd}  fail_on_err=0
+
+    Should Contain  ${resp}  rsp=${error_code}
+
+
 Create SEL
     [Documentation]  Create a SEL.
     [Arguments]  ${sensor_type}  ${sensor_number}
@@ -475,7 +499,6 @@ Create SEL
     # Create a SEL.
     # Example:
     # a | 02/14/2020 | 01:16:58 | Sensor_type #0x17 |  | Asserted
-
     # Description of argument(s):
     #    ${sensor_type}            Type of the sensor used in hexadecimal (can be fan, temp etc.,),
     #                              obtained from Sensor Type field in - ipmitool sdr get "sensor_name".
@@ -493,25 +516,25 @@ Create SEL
     [Return]  ${resp}
 
 
-Fetch One Threshold Sensor From Sensor List
-    [Documentation]  Fetch one threshold sensor randomly from Sensor list.
+Fetch Any Sensor From Sensor List
+    [Documentation]  Fetch any sensor name randomly from Sensor list.
 
-    @{sensor_name_list}=  Create List
+    @{tmp_list}=  Create List
 
     ${resp}=  Run IPMI Standard Command  sensor
-    @{sensor_list}=  Split To Lines  ${resp}
+    @{sensor_list_lines}=  Split To Lines  ${resp}
 
     # Omit the discrete sensor and create an threshold sensor name list
-    FOR  ${sensor}  IN  @{sensor_list}
+    FOR  ${sensor}  IN  @{sensor_list_lines}
       ${discrete_sensor_status}=  Run Keyword And Return Status  Should Contain  ${sensor}  discrete
       Continue For Loop If  '${discrete_sensor_status}' == 'True'
       ${sensor_details}=  Split String  ${sensor}  |
       ${get_sensor_name}=  Get From List  ${sensor_details}  0
       ${sensor_name}=  Set Variable  ${get_sensor_name.strip()}
-      Append To List  ${sensor_name_list}  ${sensor_name}
+      Append To List  ${tmp_list}  ${sensor_name}
     END
 
-    ${random_sensor_name}=  Evaluate  random.choice(${sensor_name_list})  random
+    ${random_sensor_name}=  Evaluate  random.choice(${tmp_list})  random
 
     [Return]  ${random_sensor_name}
 
