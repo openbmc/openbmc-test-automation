@@ -23,6 +23,7 @@ Library                 utils.py
 Library                 var_funcs.py
 Library                 SCPLibrary  WITH NAME  scp
 Library                 gen_robot_valid.py
+Library                 pldm_utils.py
 
 
 *** Variables ***
@@ -1039,3 +1040,41 @@ Is BMC Operational
 
     ${bmc_status} =  Redfish Get BMC State
     Should Be Equal  ${bmc_status}  Enabled
+
+
+PLDM Set BIOS Attribute
+    [Documentation]  Set the BIOS attribute via pldmtool and verify the attribute is set.
+    ...              Defaulted for fw_boot_side for boot test usage caller.
+    [Arguments]  ${attribute_name}=fw_boot_side  ${attribute_value}=Temp
+
+    # Description of argument(s):
+    # attribute_name      Valid BIOS attribute name e.g ("fw_boot_side")
+    # attribute_value     Valid BIOS attribute value for fw_boot_side.
+
+    # PLDM response output example:
+    # {
+    #    "Response": "SUCCESS"
+    # }
+
+    ${resp}=  pldmtool  bios SetBIOSAttributeCurrentValue -a ${attribute_name} -d ${attribute_value}
+    Should Be Equal As Strings  ${resp["Response"]}  SUCCESS
+
+    # PLDM GET output example:
+    # {
+    #    "CurrentValue": "Temp"
+    # }
+
+    ${pldm_output}=  PLDM Get BIOS Attribute  fw_boot_side
+    Should Be Equal As Strings  ${pldm_output["CurrentValue"]}  ${attribute_value}
+    ...  msg=Expecting ${attribute_value} but got ${pldm_output["CurrentValue"]}
+
+
+PLDM Get BIOS Attribute
+    [Documentation]  Get the BIOS attribute via pldmtool for a given attribute and return value.
+    [Arguments]  ${attribute_name}
+
+    # Description of argument(s):
+    # attribute_name     Valid BIOS attribute name e.g ("fw_boot_side")
+
+    ${pldm_output}=  pldmtool  bios GetBIOSAttributeCurrentValueByHandle -a ${attribute_name}
+    [Return]  ${pldm_output}
