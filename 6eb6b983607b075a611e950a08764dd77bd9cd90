@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71189d21_99d53668",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T05:32:30Z",
+      "side": 1,
+      "message": "That keyword commited in below MR.\nhttps://gerrit.openbmc-project.xyz/c/openbmc/openbmc-test-automation/+/53084",
+      "parentUuid": "fe9b9cbe_47839793",
+      "range": {
+        "startLine": 188,
+        "startChar": 3,
+        "endLine": 188,
+        "endChar": 31
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ab77b0a_1ca200b1",
@@ -60,6 +84,54 @@
       "writtenOn": "2022-05-16T11:35:07Z",
       "side": 1,
       "message": "Verify",
+      "range": {
+        "startLine": 206,
+        "startChar": 21,
+        "endLine": 206,
+        "endChar": 27
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30618237_227faefe",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T05:32:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ab77b0a_1ca200b1",
+      "range": {
+        "startLine": 206,
+        "startChar": 63,
+        "endLine": 206,
+        "endChar": 65
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04d05df0_bb5e5b22",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T05:32:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb4e0ac5_16e7bbba",
       "range": {
         "startLine": 206,
         "startChar": 21,
@@ -116,6 +188,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cf3ba5c_fd0b5f84",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T05:32:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a9c62fe_fa511277",
+      "range": {
+        "startLine": 241,
+        "startChar": 54,
+        "endLine": 241,
+        "endChar": 64
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82074fb7_9be24c87",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T05:32:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48d0a064_9fa5acd0",
+      "range": {
+        "startLine": 235,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 64
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b40addbc_b44a06c8",
@@ -129,6 +249,30 @@
       "writtenOn": "2022-05-16T11:35:07Z",
       "side": 1,
       "message": "If both are false then reservation_id will be empty.",
+      "range": {
+        "startLine": 246,
+        "startChar": 1,
+        "endLine": 249,
+        "endChar": 46
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10fdbc84_9b01c934",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T05:32:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b40addbc_b44a06c8",
       "range": {
         "startLine": 246,
         "startChar": 1,
@@ -162,6 +306,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0da8aad8_601c7ab0",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T05:32:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66d652e9_0ff83794",
+      "range": {
+        "startLine": 388,
+        "startChar": 21,
+        "endLine": 389,
+        "endChar": 32
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5c77767_e3aefca8",
@@ -175,6 +343,30 @@
       "writtenOn": "2022-05-16T11:35:07Z",
       "side": 1,
       "message": "IPMI command.",
+      "range": {
+        "startLine": 393,
+        "startChar": 18,
+        "endLine": 393,
+        "endChar": 73
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80c3f403_5fbabbd8",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T05:32:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5c77767_e3aefca8",
       "range": {
         "startLine": 393,
         "startChar": 18,
@@ -208,6 +400,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24db3d08_d766b3b5",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T05:32:30Z",
+      "side": 1,
+      "message": "For \"sdr info\" ipmi command we will get response like below\n\nSDR Version                         : 0x51\nRecord Count                        : 6\nFree Space                          : unspecified\nMost recent Addition                : NA\nMost recent Erase                   : NA\nSDR overflow                        : yes\nSDR Repository Update Support       : unspecified\nDelete SDR supported                : no\nPartial Add SDR supported           : no\nReserve SDR repository supported    : yes\nSDR Repository Alloc info supported : yes\n\n\nSo that only i returned yes or no for comamnd status to compare the response of  sdr info command",
+      "parentUuid": "4531f6fa_4319fd73",
+      "range": {
+        "startLine": 398,
+        "startChar": 64,
+        "endLine": 398,
+        "endChar": 71
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4eb8fb1d_4e5d0528",
@@ -221,6 +437,30 @@
       "writtenOn": "2022-05-16T11:35:07Z",
       "side": 1,
       "message": "Add documentation for both the methods. Also please give examples to understand the code.",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 41
+      },
+      "revId": "6eb6b983607b075a611e950a08764dd77bd9cd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65c85b6e_df5f8e92",
+        "filename": "lib/utilities.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-17T05:32:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb8fb1d_4e5d0528",
       "range": {
         "startLine": 255,
         "startChar": 0,
