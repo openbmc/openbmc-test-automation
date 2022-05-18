@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3de02403_5b18ee10",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-18T13:24:15Z",
+      "side": 1,
+      "message": "please re-frame the commit message..\n\ne.g.\n\nNew Script for Verifying Redfish Privilege Registry properties.\n\n- Verifies administrator, operator, and read- \n  only user privileges Via Redfish.\n- verification of Post, Patch, Get, and Delete methods with new \n  user Via Redfish.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 3
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "dc5b3078_291accb2",
@@ -14,6 +37,253 @@
       "writtenOn": "2022-05-18T12:37:25Z",
       "side": 1,
       "message": "File was removed in patchset 3",
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb81d186_e61984aa",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-18T13:24:15Z",
+      "side": 1,
+      "message": "This test suite verifies Redfish Privilege Registry properties for Administrator, Operator, ReadOnly users.\n\nThis much or more info is appreciated.",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 58
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d0bc66a_6329972b",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-18T13:24:15Z",
+      "side": 1,
+      "message": "cut down the TC title\n\ne.g. Verify Redfish Privilege Registry Mappings Properties For Account Service",
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cb994c6_069e0217",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-18T13:24:15Z",
+      "side": 1,
+      "message": "Put a sentence ..\n\n# e.g. For Redfish Privilege Registry Mappings Property Populated For \n# Account Service.",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 19
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87f59826_084136e0",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-18T13:24:15Z",
+      "side": 1,
+      "message": "Club TCs @120, @126, @132 to\n\nCreate And Verify Redfish Administrator User",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 28
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4794ec63_efda8fb5",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-18T13:24:15Z",
+      "side": 1,
+      "message": "Are u not logging out in this TC ?",
+      "range": {
+        "startLine": 142,
+        "startChar": 3,
+        "endLine": 142,
+        "endChar": 53
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "854a1642_f95f449c",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-18T13:24:15Z",
+      "side": 1,
+      "message": "Club TC @158 and @165\n\n-- Create And Verify Redfish Operator User",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 23
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f1e0888_b2c1d8a0",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-18T13:24:15Z",
+      "side": 1,
+      "message": "Club the Test cases @194 and @201  \n\n-- Create And Verify Redfish ReadOnly User",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 23
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ba65d61_a6495ab3",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-18T13:24:15Z",
+      "side": 1,
+      "message": "why do we need this TC?",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 17
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6ef50f7_18c18cd2",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-18T13:24:15Z",
+      "side": 1,
+      "message": "except default admin\n\nshould be a part of the \u0027Suite Teardown\u0027 for cleanup",
+      "range": {
+        "startLine": 237,
+        "startChar": 45,
+        "endLine": 237,
+        "endChar": 51
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78d941b0_49ef0fdf",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-18T13:24:15Z",
+      "side": 1,
+      "message": "Get Redfish Privilege Registry Json URL",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 251,
+        "endChar": 35
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff46f700_07053c44",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-18T13:24:15Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 263,
+        "startChar": 41,
+        "endLine": 263,
+        "endChar": 53
+      },
       "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
