@@ -16,6 +16,41 @@
       "message": "You ll probably need to git remove the file which is no longer needed\n\ngit rm  redfish/account_service/redfish_privilege_registry.robot\n\n",
       "revId": "077e13efcf17b15ea0bbd0c448db8f8072d3467f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3faf43ad_a2b61b94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-18T04:50:11Z",
+      "side": 1,
+      "message": "Resolved per comments except two, that were not understood.... Those two comments were vague and not made specific.",
+      "revId": "077e13efcf17b15ea0bbd0c448db8f8072d3467f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e14b8b7b_ef237a86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-18T04:50:11Z",
+      "side": 1,
+      "message": "I removed that file from my local branch.  Will git rm still work?",
+      "parentUuid": "7547e589_941d6404",
+      "revId": "077e13efcf17b15ea0bbd0c448db8f8072d3467f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
