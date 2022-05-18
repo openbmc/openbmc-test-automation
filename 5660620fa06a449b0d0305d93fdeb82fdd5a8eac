@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26fde94f_12c00da7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-18T13:27:30Z",
+      "side": 1,
+      "message": "I am bit unconvinced for not removing ${} identifier in \u0027Description of argument(s):\u0027 section\n\nOtherwise it is +1 from me",
+      "revId": "5660620fa06a449b0d0305d93fdeb82fdd5a8eac",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d2c68d5_eaa934d3",
