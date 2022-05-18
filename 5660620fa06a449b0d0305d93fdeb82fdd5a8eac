@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ad565a6_65aa6dc5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-18T13:20:14Z",
+      "side": 1,
+      "message": "Great, thanks - I learned one can pipe to grep, etc.",
+      "revId": "5660620fa06a449b0d0305d93fdeb82fdd5a8eac",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d2c68d5_eaa934d3",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-18T13:20:14Z",
+      "side": 1,
+      "message": "Remove.",
+      "range": {
+        "startLine": 119,
+        "startChar": 21,
+        "endLine": 119,
+        "endChar": 24
+      },
+      "revId": "5660620fa06a449b0d0305d93fdeb82fdd5a8eac",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
