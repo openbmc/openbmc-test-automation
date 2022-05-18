@@ -51,6 +51,24 @@
       "parentUuid": "7547e589_941d6404",
       "revId": "077e13efcf17b15ea0bbd0c448db8f8072d3467f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4e6173d_ce5f222c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-18T12:37:25Z",
+      "side": 1,
+      "message": "File removed in patchset 3",
+      "parentUuid": "e14b8b7b_ef237a86",
+      "revId": "077e13efcf17b15ea0bbd0c448db8f8072d3467f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
