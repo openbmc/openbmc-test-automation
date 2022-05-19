@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a809a24_39a2ee59",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1001322
+      },
+      "writtenOn": "2022-05-19T10:51:20Z",
+      "side": 1,
+      "message": "don\u0027t we need a tested section in the commit message. How did you make sure its working?",
+      "revId": "1cdfb8e75f026e7e4c646d150826cc667d0282fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe368690_e3ad4643",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001322
+      },
+      "writtenOn": "2022-05-19T10:51:20Z",
+      "side": 1,
+      "message": "don\u0027t we need a tested section in the commit message. How did you make sure its working?",
+      "revId": "1cdfb8e75f026e7e4c646d150826cc667d0282fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
