@@ -585,5 +585,25 @@ IPMI_RAW_CMD = {
                 "Invalid data field in request",
             ]
         }
+    },
+    'FRU':
+    {
+        'Inventory_Area_Info':
+        [
+            # raw command, expected output(s), comment
+            "0x0a 0x10",
+            "Invalid data field in request",
+            "Request data length invalid"
+        ],
+        'Read':
+        [
+            # raw command
+            "0x0a 0x11",
+        ],
+        'Write':
+        [
+            # raw command
+            "0x0a 0x12",
+        ],
     }
 }

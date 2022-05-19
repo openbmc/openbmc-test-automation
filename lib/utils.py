@@ -452,3 +452,19 @@ def zfill_data(data, num):
     """
 
     return data.zfill(int(num))
+
+
+def get_subsequent_value_from_list(list, value):
+    index = [list.index(i) for i in list if value in i]
+    return index
+
+
+def create_dict_with_value(dict, key, value):
+    dict[key] = value
+    return dict
+
+
+def remove_unicode_characters(inp1):
+    encoded_string= inp1.encode('ascii', 'ignore')
+    decoded_string= encoded_string.decode()
+    return decoded_string
