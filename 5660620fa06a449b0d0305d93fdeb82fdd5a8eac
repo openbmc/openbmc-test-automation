@@ -35,6 +35,41 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "075ae42c_43f0a82a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-19T04:46:03Z",
+      "side": 1,
+      "message": "Done",
+      "revId": "5660620fa06a449b0d0305d93fdeb82fdd5a8eac",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "790f806a_9acca939",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-19T04:46:03Z",
+      "side": 1,
+      "message": "Sorry, just now i saw that ${} identifier was not removed. now i removed.",
+      "parentUuid": "26fde94f_12c00da7",
+      "revId": "5660620fa06a449b0d0305d93fdeb82fdd5a8eac",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d2c68d5_eaa934d3",
@@ -48,6 +83,30 @@
       "writtenOn": "2022-05-18T13:20:14Z",
       "side": 1,
       "message": "Remove.",
+      "range": {
+        "startLine": 119,
+        "startChar": 21,
+        "endLine": 119,
+        "endChar": 24
+      },
+      "revId": "5660620fa06a449b0d0305d93fdeb82fdd5a8eac",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3725da13_58bcb25e",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-19T04:46:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d2c68d5_eaa934d3",
       "range": {
         "startLine": 119,
         "startChar": 21,
