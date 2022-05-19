@@ -93,6 +93,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecb262a8_af8e4e2d",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-19T11:03:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ef03439_0ace8620",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 4
+      },
+      "revId": "5660620fa06a449b0d0305d93fdeb82fdd5a8eac",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d2c68d5_eaa934d3",
@@ -163,6 +187,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f191afe_a24ab856",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-19T11:03:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c65ce8f_20ad96e1",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 4
+      },
+      "revId": "5660620fa06a449b0d0305d93fdeb82fdd5a8eac",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42d6e5a6_d0dadb2b",
@@ -176,6 +224,30 @@
       "writtenOn": "2022-05-19T10:54:58Z",
       "side": 1,
       "message": "can this be renamed to default_threshold for better readability?",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 4
+      },
+      "revId": "5660620fa06a449b0d0305d93fdeb82fdd5a8eac",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f79b1a00_e084b049",
+        "filename": "ipmi/test_ipmi_cold_reset.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-19T11:03:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42d6e5a6_d0dadb2b",
       "range": {
         "startLine": 215,
         "startChar": 0,
