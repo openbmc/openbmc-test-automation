@@ -613,3 +613,34 @@ Verify Invalid IPMI Command
     ${resp}=  Run External IPMI Raw Command  ${ipmi_cmd}  fail_on_err=0
 
     Should Contain  ${resp}  rsp=${error_code}
+
+
+Identify Request Data
+    [Documentation]  Convert text from variable declared to request data.
+    [Arguments]  ${string}
+
+    # Convert string to hexadecimal data for each character.
+    # Return the hex data with prefix of 0x as string and list of hex data.
+    # Description of argument(s):
+    #    string             Any string to be converted to hex.
+
+    # Given a string, convert to hexadecimal and prefix with 0x
+    ${hex1}=  Create List
+    ${hex2}=  Create List
+    ${resp_data}=  Split String With Index  ${string}  1
+    FOR  ${data}  IN  @{resp_data}
+        # prefixes 0x by default
+        ${hex_value}=  Evaluate  hex(ord("${data}"))
+        # prefixes string with bytes prefixed 0x by default
+        Append To List  ${hex1}  ${hex_value}
+        # provides only hexadecimal bytes
+        ${hex}=  Evaluate  hex(ord("${data}"))[2:]
+        # provides string with only hexadecimal bytes
+        Append To List  ${hex2}  ${hex}
+    END
+    ${hex1}=  Evaluate  " ".join(${hex1})
+
+    # ${hex1} will contains the data to write for fru in list.
+    # ${hex2} will contains the data to verify fru after write operation completed.
+
+    [Return]  ${hex1}  ${hex2}
