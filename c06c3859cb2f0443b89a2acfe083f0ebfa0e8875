@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bf7913d_46feba8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001322
+      },
+      "writtenOn": "2022-05-19T10:54:58Z",
+      "side": 1,
+      "message": "is old_threshold_value the value before reset? In that case can it be renamed to threshold_value_before_reset? Or instead of old some other meaningful name.",
+      "revId": "c06c3859cb2f0443b89a2acfe083f0ebfa0e8875",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
