@@ -68,6 +68,30 @@
       },
       "revId": "e7e31ad2702e86cd0798c0b914c08d36fde97cb6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffce5c8a_939f2bad",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-05-19T08:39:05Z",
+      "side": 1,
+      "message": "For this one, Rahul would need to re-work the suite setup portion of it.  Yes, those few new checks will not work but those should be populated. So it\u0027s okay with me for now.",
+      "parentUuid": "e5217ada_feb3153c",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 109
+      },
+      "revId": "e7e31ad2702e86cd0798c0b914c08d36fde97cb6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
