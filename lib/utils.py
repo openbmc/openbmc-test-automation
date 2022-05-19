@@ -452,3 +452,22 @@ def zfill_data(data, num):
     """
 
     return data.zfill(int(num))
+
+
+def get_subsequent_value_from_list(list, value):
+    r"""
+    returns first index of the element occurrence.
+    """
+
+    index = [list.index(i) for i in list if value in i]
+    return index
+
+
+def return_decoded_string(input):
+    r"""
+    returns decoded string of encoded byte.
+    """
+
+    encoded_string = input.encode('ascii', 'ignore')
+    decoded_string = encoded_string.decode()
+    return decoded_string
