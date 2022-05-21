@@ -81,7 +81,7 @@ Verify Redfishtool Admin User Privilege
 
     Redfishtool Create User  "UserT100"  "TestPwd123"  "Administrator"  true
 
-    # Verify if an user can be added by admin
+    # Verify if a user can be added by admin
     Redfishtool Create User  "UserT101"  "TestPwd123"  "Operator"  true  "UserT100"  "TestPwd123"
 
 
@@ -128,7 +128,8 @@ Verify Minimum Password Length For Redfish User
 
 
 Verify Create User Without Enabling
-    [Documentation]  Create an user without enabling it and verify that it does not have access.
+    [Documentation]  Create a user without enabling it and verify that it does not have access.
+    [Tags]  Verify_Create_User_Without_Enabling
     [Teardown]  Redfishtool Delete User  "UserT100"
 
     Redfishtool Create User  "UserT100"  "TestPwd123"  "Operator"  false
@@ -165,13 +166,13 @@ Redfishtool Access Resource
 
 Redfishtool Create User
     [Documentation]  Create new user.
-    [Arguments]  ${user_name}  ${password}  ${roleID}  ${enable}  ${login_user}=""  ${login_pasword}=""
+    [Arguments]  ${user_name}  ${password}  ${roleId}  ${enable}  ${login_user}=""  ${login_pasword}=""
     ...  ${expected_error}=200
 
     # Description of argument(s):
     # user_name      The user name (e.g. "test", "robert", etc.).
     # password       The user password (e.g. "0penBmc", "0penBmc1", etc.).
-    # roleID         The role of user (e.g. "Administrator", "Operator", etc.).
+    # roleId         The role of user (e.g. "Administrator", "Operator", etc.).
     # enable         Enabled attribute of (e.g. true or false).
     # expected_error Expected error optionally provided in testcase (e.g. 401 /
     #                authentication error, etc. )
@@ -210,7 +211,7 @@ Redfishtool Update User Role
 
 
 Redfishtool Delete User
-    [Documentation]  Delete an user.
+    [Documentation]  Delete a user.
     [Arguments]  ${user_name}  ${expected_error}=200
 
     # Description of argument(s):
