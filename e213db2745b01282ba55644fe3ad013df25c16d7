@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53383f35_740ae71f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-23T15:49:40Z",
+      "side": 1,
+      "message": "This commit should have gone to https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/53531\nI\u0027m trying to figure out how to rectify.",
+      "revId": "e213db2745b01282ba55644fe3ad013df25c16d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
