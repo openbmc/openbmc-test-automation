@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f906c0ef_c4d6ef3b",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-23T14:25:06Z",
+      "side": 1,
+      "message": "Good catch, thanks.",
+      "parentUuid": "64351a69_b951945c",
+      "range": {
+        "startLine": 713,
+        "startChar": 8,
+        "endLine": 715,
+        "endChar": 27
+      },
+      "revId": "d27d938adfb5015c514718d1beb5a9e2a3be3f5a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "154e7cfd_c207844c",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-17T13:45:09Z",
       "side": 1,
       "message": "The logic becomes simpler if you can loop using IN RANGE from 1 to length(lines). That way can avoid additional variable ${id_index} and also the condition check for header line.",
+      "range": {
+        "startLine": 710,
+        "startChar": 1,
+        "endLine": 722,
+        "endChar": 7
+      },
+      "revId": "d27d938adfb5015c514718d1beb5a9e2a3be3f5a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eac29780_b8f61058",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-23T14:25:06Z",
+      "side": 1,
+      "message": "Nice.",
+      "parentUuid": "154e7cfd_c207844c",
       "range": {
         "startLine": 710,
         "startChar": 1,
