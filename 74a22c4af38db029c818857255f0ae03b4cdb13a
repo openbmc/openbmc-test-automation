@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4625ee8_c4a636ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-23T17:24:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5d05997_a87e9c69",
+      "range": {
+        "startLine": 7,
+        "startChar": 19,
+        "endLine": 7,
+        "endChar": 27
+      },
+      "revId": "74a22c4af38db029c818857255f0ae03b4cdb13a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "357a62bd_bdbf90f5",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1803ec8d_d9d6d93b",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-23T17:24:30Z",
+      "side": 1,
+      "message": "Those lines of code are needed due to the following:\n\n    ...  AND  SSHLibrary.Open Connection     ${OPENBMC_HOST}\n    ...  AND  SSHLibrary.Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD} -\nNeed to open SSH connection for Run Dbus IPMI Standard Command which\nuses this keyword; Run Dbus IPMI Standard Command uses SSH connection to BMC\nin order to run the command via Dbus from BMC command line\n\n    ...  AND  Return From Keyword - need to return since ipmitool is already\ninstalled on the BMC and do not want to re-install.",
+      "parentUuid": "357a62bd_bdbf90f5",
+      "range": {
+        "startLine": 310,
+        "startChar": 0,
+        "endLine": 312,
+        "endChar": 33
+      },
+      "revId": "74a22c4af38db029c818857255f0ae03b4cdb13a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a385ed6_0d790bc7",
@@ -60,6 +108,24 @@
       "writtenOn": "2022-05-18T12:30:11Z",
       "side": 1,
       "message": "1. can this ${IPMITOOL_TEMP_PATH} instead of ${IPMITOOL_LOCATION} ??\n\n2. why don\u0027t u mention ${IPMITOOL_LOCATION} in  *** variables *** section ?\n\ninstead of using using /tmp/ipmitool u can use ${IPMITOOL_LOCATION} in @320",
+      "revId": "74a22c4af38db029c818857255f0ae03b4cdb13a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c69da47_fadb075f",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-23T17:24:30Z",
+      "side": 1,
+      "message": "Variable name changed and used in line 320",
+      "parentUuid": "4a385ed6_0d790bc7",
       "revId": "74a22c4af38db029c818857255f0ae03b4cdb13a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
