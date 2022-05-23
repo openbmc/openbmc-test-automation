@@ -169,7 +169,7 @@ Test Get Channel Authentication Capabilities via IPMI
 Test Get Channel Authentication Capabilities IPMI Command For Invalid Channel
     [Documentation]  Verify get channel authentication capabilities for invalid channel.
     [Tags]  Test_Get_Channel_Authentication_Capabilities_IPMI_Command_For_Invalid_Channel
-    [Template]  Verify Channel Auth Capabilites For Invalid Channel
+    [Template]  Verify Channel Auth Capabilities For Invalid Channel
 
     FOR  ${channel}  IN  @{inactive_channel_list}
         # Input Channel
@@ -177,9 +177,9 @@ Test Get Channel Authentication Capabilities IPMI Command For Invalid Channel
     END
 
 
-Verify Get Channel Authentication Capablities IPMI Raw Command With Invalid Data Length
-    [Documentation]  Verify get channel authentication capablities IPMI raw command with invalid data length.
-    [Tags]  Verify_Get_Channel_Authentication_Capablities_IPMI_Raw_Command_With_Invalid_Data_Length
+Verify Get Channel Authentication Capabilities IPMI Raw Command With Invalid Data Length
+    [Documentation]  Verify get channel authentication capabilities IPMI raw command with invalid data length.
+    [Tags]  Verify_Get_Channel_Authentication_Capabilities_IPMI_Raw_Command_With_Invalid_Data_Length
     [Template]  Verify Channel Auth Command For Invalid Data Length
 
     # Bytes
@@ -322,7 +322,7 @@ Verify Channel Auth Capabilities
 
     # Description of argument(s):
     # channel           Interface channel number.
-    # privilege_level   User Privelege level (e.g. 4-Administator, 3-Operator, 2-Readonly).
+    # privilege_level   User Privilege level (e.g. 4-Administator, 3-Operator, 2-Readonly).
 
     # Python module:  get_channel_auth_capabilities(channel_number, privilege_level)
     ${channel_auth_cap}=  Get Channel Auth Capabilities  ${channel}  ${privilege_level}
@@ -339,7 +339,7 @@ Verify Channel Auth Capabilities
     Valid Value  channel_auth_cap['channel_supports_ipmi_v2.0']  ['yes']
 
 
-Verify Channel Auth Capabilites For Invalid Channel
+Verify Channel Auth Capabilities For Invalid Channel
     [Documentation]  Verify authentication capabilities of invalid channels.
     [Arguments]  ${channel}
 
