@@ -707,18 +707,14 @@ Determine Root User Id
     @{lines}=  Split To Lines  ${resp}
 
     ${root_userid}=  Set Variable  ${-1}
-    ${id_index}=     Set Variable  ${1}
-    FOR  ${line}  IN  @{lines}
+    ${line_count}=  Get Length  ${lines}
+    FOR  ${id_index}  IN RANGE  1  ${line_count}
+        ${line}=  Get From List  ${lines}  ${id_index}
         ${root_found}=  Get Lines Matching Regexp  ${line}  ${root_pattern}
-        ${root_userid}=  Set Variable If  '${root_found}' != '${EMPTY}'
-        ...  ${id_index}
-        ...  ${root_userid}
-
-        # Increment id_index if line is not the header line
-        ${hdr_found}=  Get Lines Containing String  ${line}  Channel Priv Limit
-        ${id_index}=  Set Variable If  '${hdr_found}' == '${EMPTY}'
-        ...  ${id_index+1}
-        ...  ${id_index}
+        IF  '${root_found}' != '${EMPTY}'
+            ${root_userid}=  Set Variable  ${id_index}
+            BREAK
+        END
     END
     Set Suite Variable  ${root_userid}
 
