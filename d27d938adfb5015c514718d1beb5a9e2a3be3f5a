@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e081ead_f702f9db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-23T14:58:04Z",
+      "side": 1,
+      "message": "Sorry. I committed without --amend. I\u0027ll try to figure out how to rectify this.",
+      "revId": "d27d938adfb5015c514718d1beb5a9e2a3be3f5a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64351a69_b951945c",
