@@ -26,6 +26,155 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d1d1ad7d_68245105",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T15:34:20Z",
+      "side": 1,
+      "message": "Verify",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 4
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf3897e5_7f822760",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T15:34:20Z",
+      "side": 1,
+      "message": "give some one line space.. tough to read",
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d01ece71_eeef19e1",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T15:34:20Z",
+      "side": 1,
+      "message": "Get IPMI FRU Devices Data",
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94dfbd39_7cb8f6fe",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T15:34:20Z",
+      "side": 1,
+      "message": "For FRU",
+      "range": {
+        "startLine": 208,
+        "startChar": 20,
+        "endLine": 208,
+        "endChar": 26
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5febb94c_323611ff",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T15:34:20Z",
+      "side": 1,
+      "message": "FRU",
+      "range": {
+        "startLine": 250,
+        "startChar": 13,
+        "endLine": 250,
+        "endChar": 16
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9a6dcfe_6cb8fd2d",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T15:34:20Z",
+      "side": 1,
+      "message": "mention the same doc and remove this line.",
+      "range": {
+        "startLine": 298,
+        "startChar": 10,
+        "endLine": 298,
+        "endChar": 84
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "734ca150_1c539385",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T15:34:20Z",
+      "side": 1,
+      "message": "@305: Read FRU Data Via IPMI\n@306: Read FRU data using IPMI raw command.\n\n@317: Write FRU Data Via IPMI\n@319: Write FRU data using IPMI raw command.",
+      "range": {
+        "startLine": 305,
+        "startChar": 5,
+        "endLine": 305,
+        "endChar": 8
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c78ea81_25fd6240",
         "filename": "lib/bmc_dbus.robot",
         "patchSetId": 4
