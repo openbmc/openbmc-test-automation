@@ -16,6 +16,69 @@
       "message": "Uploaded patchset 2 with changes",
       "revId": "7bb50d68d618f1f836c472242e8fe812c30acbf5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb8283f8_e54cfd1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T08:11:30Z",
+      "side": 1,
+      "message": "Few changes to make.",
+      "revId": "7bb50d68d618f1f836c472242e8fe812c30acbf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d7d829d_87c6bdc7",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T08:11:30Z",
+      "side": 1,
+      "message": "Verify If IPMI Command Is Invalid\n\n@451: Execute IPMI command and verify the response code.\n@452: Add description of argument(s):",
+      "range": {
+        "startLine": 450,
+        "startChar": 0,
+        "endLine": 450,
+        "endChar": 23
+      },
+      "revId": "7bb50d68d618f1f836c472242e8fe812c30acbf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bf5c9ea_6fffa29b",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T08:11:30Z",
+      "side": 1,
+      "message": "Fetch",
+      "range": {
+        "startLine": 484,
+        "startChar": 21,
+        "endLine": 484,
+        "endChar": 25
+      },
+      "revId": "7bb50d68d618f1f836c472242e8fe812c30acbf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
