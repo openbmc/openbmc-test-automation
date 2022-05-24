@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a15b72cc_541c44d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-24T13:54:52Z",
+      "side": 1,
+      "message": "Will push new commit message",
+      "revId": "fb23f7e7fdca4a6eed8e97804ee2220737925b49",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

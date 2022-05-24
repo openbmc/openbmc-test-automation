@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "857ffae6_4fcc75df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-24T13:54:52Z",
+      "side": 1,
+      "message": "Will push new commit message",
+      "parentUuid": "e07f336b_cd2a4183",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 3
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "dc5b3078_291accb2",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
