@@ -58,6 +58,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20065783_39a14f3d",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-24T14:43:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1783217_9ec2952d",
+      "range": {
+        "startLine": 310,
+        "startChar": 45,
+        "endLine": 310,
+        "endChar": 63
+      },
+      "revId": "7bb50d68d618f1f836c472242e8fe812c30acbf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d7d829d_87c6bdc7",
@@ -81,6 +105,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "867fd5e5_822dbda3",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-24T14:43:29Z",
+      "side": 1,
+      "message": "I added this even though this code was pushed by someone else.  This is an existing script that I only added to.",
+      "parentUuid": "7d7d829d_87c6bdc7",
+      "range": {
+        "startLine": 450,
+        "startChar": 0,
+        "endLine": 450,
+        "endChar": 23
+      },
+      "revId": "7bb50d68d618f1f836c472242e8fe812c30acbf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5bf5c9ea_6fffa29b",
@@ -94,6 +142,30 @@
       "writtenOn": "2022-05-24T08:11:30Z",
       "side": 1,
       "message": "Fetch",
+      "range": {
+        "startLine": 484,
+        "startChar": 21,
+        "endLine": 484,
+        "endChar": 25
+      },
+      "revId": "7bb50d68d618f1f836c472242e8fe812c30acbf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "495c608a_f541d3f0",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-24T14:43:29Z",
+      "side": 1,
+      "message": "Fixed even though this is not part of my code changes.",
+      "parentUuid": "5bf5c9ea_6fffa29b",
       "range": {
         "startLine": 484,
         "startChar": 21,
