@@ -859,6 +859,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29ffbf06_ba18c8ec",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-24T13:49:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a13cc531_6b0a3397",
+      "range": {
+        "startLine": 296,
+        "startChar": 0,
+        "endLine": 296,
+        "endChar": 34
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cd13532_eec00276",
@@ -943,6 +967,30 @@
       "side": 1,
       "message": "Do not understand this comment?",
       "parentUuid": "3926b6a7_a5872fa5",
+      "range": {
+        "startLine": 322,
+        "startChar": 44,
+        "endLine": 322,
+        "endChar": 63
+      },
+      "revId": "2d22afc60206c66e366d5ec7ced15968b42b49e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a807cfb_d8e001e8",
+        "filename": "redfish/account_service/redfish_privilege_registry.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-24T13:49:47Z",
+      "side": 1,
+      "message": "The enabled argument has been removed as it is not needed",
+      "parentUuid": "5dca9e13_7d8bcb9e",
       "range": {
         "startLine": 322,
         "startChar": 44,

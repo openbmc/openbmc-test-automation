@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e07f336b_cd2a4183",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-24T13:49:47Z",
+      "side": 1,
+      "message": "I think I might have forgotten this one",
+      "parentUuid": "3de02403_5b18ee10",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 3
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "dc5b3078_291accb2",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -64,6 +88,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61d03484_d9e46063",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-24T13:49:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb81d186_e61984aa",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 58
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d0bc66a_6329972b",
@@ -81,6 +129,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79a743ff_eb789a04",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-24T13:49:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d0bc66a_6329972b",
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1cb994c6_069e0217",
@@ -94,6 +160,30 @@
       "writtenOn": "2022-05-18T13:24:15Z",
       "side": 1,
       "message": "Put a sentence ..\n\n# e.g. For Redfish Privilege Registry Mappings Property Populated For \n# Account Service.",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 19
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5007532b_037761aa",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-24T13:49:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cb994c6_069e0217",
       "range": {
         "startLine": 62,
         "startChar": 0,
@@ -127,6 +217,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02fd014f_3e959c25",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-24T13:49:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87f59826_084136e0",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 28
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4794ec63_efda8fb5",
@@ -140,6 +254,30 @@
       "writtenOn": "2022-05-18T13:24:15Z",
       "side": 1,
       "message": "Are u not logging out in this TC ?",
+      "range": {
+        "startLine": 142,
+        "startChar": 3,
+        "endLine": 142,
+        "endChar": 53
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "212e3fb5_4ecb83bb",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-24T13:49:47Z",
+      "side": 1,
+      "message": "Logging in with the new user with admin privileges",
+      "parentUuid": "4794ec63_efda8fb5",
       "range": {
         "startLine": 142,
         "startChar": 3,
@@ -173,6 +311,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4546790b_1b55430c",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-24T13:49:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "854a1642_f95f449c",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 23
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f1e0888_b2c1d8a0",
@@ -186,6 +348,30 @@
       "writtenOn": "2022-05-18T13:24:15Z",
       "side": 1,
       "message": "Club the Test cases @194 and @201  \n\n-- Create And Verify Redfish ReadOnly User",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 23
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b14386a_01df75ca",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-24T13:49:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f1e0888_b2c1d8a0",
       "range": {
         "startLine": 194,
         "startChar": 0,
@@ -219,6 +405,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ba1bfd0_6a5b4339",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-24T13:49:47Z",
+      "side": 1,
+      "message": "This is now Suite Teardown.  Need to login as admin in order to delete all of the created users for testing",
+      "parentUuid": "0ba65d61_a6495ab3",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 17
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6ef50f7_18c18cd2",
@@ -232,6 +442,30 @@
       "writtenOn": "2022-05-18T13:24:15Z",
       "side": 1,
       "message": "except default admin\n\nshould be a part of the \u0027Suite Teardown\u0027 for cleanup",
+      "range": {
+        "startLine": 237,
+        "startChar": 45,
+        "endLine": 237,
+        "endChar": 51
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5d09bb5_751d6a43",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-24T13:49:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6ef50f7_18c18cd2",
       "range": {
         "startLine": 237,
         "startChar": 45,
@@ -265,6 +499,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b68070d5_ad1e4f19",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-24T13:49:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78d941b0_49ef0fdf",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 251,
+        "endChar": 35
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff46f700_07053c44",
@@ -278,6 +536,30 @@
       "writtenOn": "2022-05-18T13:24:15Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 263,
+        "startChar": 41,
+        "endLine": 263,
+        "endChar": 53
+      },
+      "revId": "18900e2375d175b8aafdb287d059e39020a637ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47a13fa1_60f1fe0d",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-05-24T13:49:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff46f700_07053c44",
       "range": {
         "startLine": 263,
         "startChar": 41,
