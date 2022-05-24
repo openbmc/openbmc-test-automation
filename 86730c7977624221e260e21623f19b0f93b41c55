@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eba1b5a_66cc0038",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-05-24T12:56:49Z",
+      "side": 1,
+      "message": "Please wait for next patch.",
+      "revId": "86730c7977624221e260e21623f19b0f93b41c55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
