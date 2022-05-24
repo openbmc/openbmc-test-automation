@@ -226,7 +226,7 @@ Verify SEL Time In SEL Entry
     Should Be True  0<=${difference}<=6
 
     # Get any Sensor available from Sensor list.
-    ${sensor_name}=  Fetch Any Sensor From Sensor List
+    ${sensor_name}=  Fetch One Threshold Sensor From Sensor List
 
     # Get Sensor ID from SDR Get "sensor".
     ${sensor_data1}=  Fetch Sensor Details From SDR  ${sensor_name}  Sensor ID
@@ -277,7 +277,7 @@ Verify SEL Time In SEL Entry For Future Date and Time
     Should Be True  0<=${difference}<=2
 
     # Get any Sensor available from Sensor list.
-    ${sensor_name}=  Fetch Any Sensor From Sensor List
+    ${sensor_name}=  Fetch One Threshold Sensor From Sensor List
 
     # Get Sensor ID from SDR Get "sensor".
     ${sensor_data1}=  Fetch Sensor Details From SDR  ${sensor_name}  Sensor ID
@@ -329,7 +329,7 @@ Verify SEL Time In SEL Entry For Past Date And Time
         Should Be True  0<=${difference}<=2
 
         # Get any Sensor available from Sensor list.
-        ${sensor_name}=  Fetch Any Sensor From Sensor List
+        ${sensor_name}=  Fetch One Threshold Sensor From Sensor List
         # Get Sensor ID from SDR Get "sensor".
         ${sensor_data1}=  Fetch Sensor Details From SDR  ${sensor_name}  Sensor ID
         ${name_sensor}  ${sensor_number}=  Get Data And Byte From SDR Sensor  ${sensor_data1}
@@ -373,7 +373,7 @@ Verify Multiple Set SEL Time With Multiple Add SEL Entry
       Clear The SEL
 
       # Get any Sensor available from Sensor list.
-      ${sensor_name}=  Fetch Any Sensor From Sensor List
+      ${sensor_name}=  Fetch One Threshold Sensor From Sensor List
 
       # Get Sensor ID from SDR Get "sensor" and Identify Sensor ID.
       ${sensor_data1}=  Fetch Sensor Details From SDR  ${sensor_name}  Sensor ID
