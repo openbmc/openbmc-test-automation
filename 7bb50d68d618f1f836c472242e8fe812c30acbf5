@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f1783217_9ec2952d",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-05-24T11:41:23Z",
+      "side": 1,
+      "message": "This variable should be renamed as it doesn\u0027t always refer to /tmp",
+      "range": {
+        "startLine": 310,
+        "startChar": 45,
+        "endLine": 310,
+        "endChar": 63
+      },
+      "revId": "7bb50d68d618f1f836c472242e8fe812c30acbf5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7d7d829d_87c6bdc7",
         "filename": "lib/ipmi_client.robot",
         "patchSetId": 2
