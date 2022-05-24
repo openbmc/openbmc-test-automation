@@ -1,0 +1,268 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51668fce_e1e68370",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T15:21:32Z",
+      "side": 1,
+      "message": "Keywords do not have description of argument(s): please add it",
+      "range": {
+        "startLine": 2,
+        "startChar": 19,
+        "endLine": 2,
+        "endChar": 20
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c78ea81_25fd6240",
+        "filename": "lib/bmc_dbus.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T15:21:32Z",
+      "side": 1,
+      "message": "Implemented keywords to execute DBUS related commands on BMC.",
+      "range": {
+        "startLine": 2,
+        "startChar": 19,
+        "endLine": 2,
+        "endChar": 44
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c8defb3_c66b1a57",
+        "filename": "lib/bmc_dbus.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T15:21:32Z",
+      "side": 1,
+      "message": "Get DBUS URI List From BMC\n\n@17: please mention that ur getting from device tree",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 17
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1f66b19_287fcdca",
+        "filename": "lib/bmc_dbus.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T15:21:32Z",
+      "side": 1,
+      "message": "provide one line space before a comment for readability.\n\nsame @35\n\nAlso, uri and url which are mentioned can be capitalized.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 4
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bcc5722_3d22ea1e",
+        "filename": "lib/bmc_dbus.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T15:21:32Z",
+      "side": 1,
+      "message": "${dbus_uri_list} is already taken as an input argument. It doesnt make sense if u mention \u0027Generate DBUS URI List\u0027\n\nMay be it should be \"Fetch DBUS URI List Without Unicode\"",
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd23614c_6e71154f",
+        "filename": "lib/bmc_dbus.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T15:21:32Z",
+      "side": 1,
+      "message": "reduce the space",
+      "range": {
+        "startLine": 56,
+        "startChar": 20,
+        "endLine": 56,
+        "endChar": 29
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d7be670_3e16da08",
+        "filename": "lib/bmc_dbus.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T15:21:32Z",
+      "side": 1,
+      "message": "we have dbus properties like get/set-property, tree.. etc.. Seems ur doing introspect by default.\n\nSo @69: Excute DBUS Introspect Command\n\n@70: Change documentation accordingly",
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73d4a70f_19313e31",
+        "filename": "lib/bmc_dbus.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T15:21:32Z",
+      "side": 1,
+      "message": "Reduce the space and align it",
+      "range": {
+        "startLine": 75,
+        "startChar": 23,
+        "endLine": 75,
+        "endChar": 31
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3ef2728_613a36c5",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T15:21:32Z",
+      "side": 1,
+      "message": "your returning two parameters one in string and other in list format?\n\ne.g.: Convert and Fetch Request Data ??? please change the title and doc accordingly\n\n@585 remove ${} identifier for the arg.\n\nAlso give example for ${hex1} and ${hex2}",
+      "range": {
+        "startLine": 578,
+        "startChar": 0,
+        "endLine": 578,
+        "endChar": 21
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b4f2634_dcba158f",
+        "filename": "lib/utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T15:21:32Z",
+      "side": 1,
+      "message": "Instead of value ur getting index element.. need change of function name\n\n```\ndef get_subsequent_value_from_list(list, value):\n    index \u003d [list.index(i) for i in list if value in i]\n    return index\n\n\nlist \u003d [\u00271\u0027, \u00272\u0027, \u00271\u0027, \u00273\u0027, \u00272\u0027, \u00274\u0027, \u00272\u0027,\u00271\u0027]\nvalue \u003d \u00272\u0027\nprint(get_subsequent_value_from_list(list, value))\n\n\no/p:\n[1, 1, 1]\n\nThis function will always get first index of the element occurrence.. \n\nplease correct me here .. how ru using this ?",
+      "range": {
+        "startLine": 457,
+        "startChar": 0,
+        "endLine": 460,
+        "endChar": 0
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ddd422c_77dc280f",
+        "filename": "lib/utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T15:21:32Z",
+      "side": 1,
+      "message": "why u need this ?? can utilize robot method to create dict\n\ne.g.\n${names} \u003d\tCreate Dictionary\t0\u003dFirst Name\t2\u003dEmail",
+      "range": {
+        "startLine": 462,
+        "startChar": 1,
+        "endLine": 464,
+        "endChar": 15
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "707e0cde_49d73ac5",
+        "filename": "lib/utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-24T15:21:32Z",
+      "side": 1,
+      "message": "inp1 as input\n\nbased on ur function it should be \u0027return_decoded_string(input)\u0027",
+      "range": {
+        "startLine": 467,
+        "startChar": 30,
+        "endLine": 467,
+        "endChar": 34
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
