@@ -193,7 +193,17 @@ IPMI_RAW_CMD = {
             "00 00 00 00 00 00 00 00 00 00 00 00",
             "When the payload is activated, the first four bytes are the session ID,"
             "otherwise it should be 00."
-        ]
+        ],
+        'Get_User_Access_Payload':
+        [
+            # raw command,
+            "0x06 0x4d"
+        ],
+        'Set_User_Access_Payload':
+        [
+            # raw command,
+            "0x06 0x4c"
+        ],
     },
     'BIOS_POST_Code':
     {

@@ -521,27 +521,6 @@ Modify IPMI User
 
 *** Keywords ***
 
-Create Random IPMI User
-    [Documentation]  Create IPMI user with random username and userid and return those fields.
-
-    ${random_username}=  Generate Random String  8  [LETTERS]
-    ${random_userid}=  Find Free User Id
-    IPMI Create User  ${random_userid}  ${random_username}
-    [Return]  ${random_userid}  ${random_username}
-
-
-Enable IPMI User And Verify
-    [Documentation]  Enable the userid and verify that it has been enabled.
-    [Arguments]  ${userid}
-
-    # Description of argument(s):
-    # userid   A numeric userid (e.g. "4").
-
-    Run IPMI Standard Command  user enable ${userid}
-    ${user_info}=  Get User Info  ${userid}
-    Valid Value  user_info['enable_status']  ['enabled']
-
-
 Set Default Password For IPMI Root User
     [Documentation]  Set default password for IPMI root user (i.e. 0penBmc).
     # Set default password for root user.
@@ -653,16 +632,6 @@ Test Teardown Execution
     [Documentation]  Do the test teardown execution.
 
     FFDC On Test Case Fail
-
-
-Delete Created User
-    [Documentation]  Delete created IPMI user.
-    [Arguments]  ${userid}
-    # Description of argument(s):
-    # userid  The user ID (e.g. "1", "2", etc.).
-
-    Run IPMI Standard Command  user set name ${userid} ""
-    Sleep  5s
 
 
 Check Active Ethernet Channels
