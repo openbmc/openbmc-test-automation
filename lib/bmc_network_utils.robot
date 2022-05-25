@@ -725,7 +725,7 @@ Get Current Channel Name List
     [Arguments]  ${channel_list}  ${channel_config_json}
 
     # Description of Arguments
-    # ${channel_list}  -  list Contains all availabe active channels.
+    # ${channel_list}        - list Contains all available active channels.
     # ${channel_config_json} - output of /usr/share/ipmi-providers/channel_config.json file.
 
     FOR  ${channel_number}  ${values}  IN  &{channel_config_json}
