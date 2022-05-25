@@ -404,6 +404,37 @@ IPMI Create User
     Should Be Equal  ${user_info['user_name']}  ${username}
 
 
+Enable IPMI User And Verify
+    [Documentation]  Enable the userid and verify that it has been enabled.
+    [Arguments]  ${userid}
+
+    # Description of argument(s):
+    # userid   A numeric userid (e.g. "4").
+
+    Run IPMI Standard Command  user enable ${userid}
+    ${user_info}=  Get User Info  ${userid}
+    Valid Value  user_info['enable_status']  ['enabled']
+
+
+Create Random IPMI User
+    [Documentation]  Create IPMI user with random username and userid and return those fields.
+
+    ${random_username}=  Generate Random String  8  [LETTERS]
+    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    IPMI Create User  ${random_userid}  ${random_username}
+    [Return]  ${random_userid}  ${random_username}
+
+
+Delete Created User
+    [Documentation]  Delete created IPMI user.
+    [Arguments]  ${userid}
+    # Description of argument(s):
+    # userid  The user ID (e.g. "1", "2", etc.).
+
+    Run IPMI Standard Command  user set name ${userid} ""
+    Sleep  5s
+
+
 Set Channel Access
     [Documentation]  Verify that user is able to run IPMI command
     ...  with given username and password.
