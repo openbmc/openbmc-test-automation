@@ -714,7 +714,7 @@ Determine Root User Id
         ${root_found}=  Get Lines Matching Regexp  ${line}  ${root_pattern}
         IF  '${root_found}' != '${EMPTY}'
             ${root_userid}=  Set Variable  ${id_index}
-            BREAK
+            Exit For Loop
         END
     END
     Set Suite Variable  ${root_userid}
