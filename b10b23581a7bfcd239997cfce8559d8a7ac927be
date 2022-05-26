@@ -89,6 +89,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b94954ec_9604ae36",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-26T10:53:18Z",
+      "side": 1,
+      "message": "where are u getting this ${user_id}? should it be ${userid} mentioned in @87?\n\n@88  ${user_id_in_hex_with_prefix} \u003d\u003d\u003e  you mentioned prefix\u003d0x in the keyword.. can the variable name be - ${userid_in_hex_format}",
+      "range": {
+        "startLine": 87,
+        "startChar": 42,
+        "endLine": 87,
+        "endChar": 49
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "230e4703_7019b43b",
         "filename": "ipmi/test_ipmi_payload.robot",
         "patchSetId": 1
@@ -204,6 +227,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25616831_48973702",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-26T10:53:18Z",
+      "side": 1,
+      "message": "Privilege @163 and @165",
+      "range": {
+        "startLine": 163,
+        "startChar": 34,
+        "endLine": 163,
+        "endChar": 43
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52c49cfa_89911ea8",
         "filename": "ipmi/test_ipmi_payload.robot",
         "patchSetId": 1
@@ -312,6 +358,92 @@
         "startChar": 23,
         "endLine": 230,
         "endChar": 39
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a27103b8_02c7eb7b",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-26T10:53:18Z",
+      "side": 1,
+      "message": "should this be - Verify Sol Activate Disabled ?",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 31
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f188f9b_4cd0a385",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-26T10:53:18Z",
+      "side": 1,
+      "message": "return the response.",
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cd41367_92706bc5",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-26T10:53:18Z",
+      "side": 1,
+      "message": "user_id\n\n@260: paylaad- payload",
+      "range": {
+        "startLine": 257,
+        "startChar": 6,
+        "endLine": 257,
+        "endChar": 12
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8af85d2e_ed45a973",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-26T10:53:18Z",
+      "side": 1,
+      "message": "above @263: add - Procedure to get the raw command based on operation mode.\n\n@263: If operation mode is disabled 2nd byte of raw command is 4${user_id}.\n\n@264 as --\u003e is\n\nabove @265: add - Procedure to determine payload",
+      "range": {
+        "startLine": 263,
+        "startChar": 55,
+        "endLine": 263,
+        "endChar": 58
       },
       "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
