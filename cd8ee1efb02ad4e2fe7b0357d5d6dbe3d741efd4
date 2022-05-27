@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5375921_4f12ae64",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-27T09:01:57Z",
+      "side": 1,
+      "message": "Automate BMC firmware update in loop",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 27
+      },
+      "revId": "cd8ee1efb02ad4e2fe7b0357d5d6dbe3d741efd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2141fe6e_b15b41f0",
+        "filename": "redfish/extended/redfish_bmc_loop_code_update.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-27T09:01:57Z",
+      "side": 1,
+      "message": "Nice info",
+      "revId": "cd8ee1efb02ad4e2fe7b0357d5d6dbe3d741efd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80c9ca3b_6c7a8407",
+        "filename": "redfish/extended/redfish_bmc_loop_code_update.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-27T09:01:57Z",
+      "side": 1,
+      "message": "And check for image file existence.",
+      "range": {
+        "startLine": 59,
+        "startChar": 21,
+        "endLine": 59,
+        "endChar": 39
+      },
+      "revId": "cd8ee1efb02ad4e2fe7b0357d5d6dbe3d741efd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e15ac3d4_ebc26dc4",
+        "filename": "redfish/extended/redfish_bmc_loop_code_update.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-27T09:01:57Z",
+      "side": 1,
+      "message": "should it be ${FIRST_IMAGE_FILE_PATH} same @68 and @70",
+      "range": {
+        "startLine": 69,
+        "startChar": 21,
+        "endLine": 69,
+        "endChar": 43
+      },
+      "revId": "cd8ee1efb02ad4e2fe7b0357d5d6dbe3d741efd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f48379b_2948cb7e",
+        "filename": "redfish/extended/redfish_bmc_loop_code_update.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-27T09:01:57Z",
+      "side": 1,
+      "message": "Is the host dump stored or just displayed on console?",
+      "range": {
+        "startLine": 96,
+        "startChar": 20,
+        "endLine": 96,
+        "endChar": 53
+      },
+      "revId": "cd8ee1efb02ad4e2fe7b0357d5d6dbe3d741efd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eb91c99_175594ff",
+        "filename": "redfish/extended/redfish_bmc_loop_code_update.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-27T09:01:57Z",
+      "side": 1,
+      "message": "Multiple Firmware Update Via Redfish\n\n@149: Multiple BMC firmware update via redfish.",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 148,
+        "endChar": 32
+      },
+      "revId": "cd8ee1efb02ad4e2fe7b0357d5d6dbe3d741efd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
