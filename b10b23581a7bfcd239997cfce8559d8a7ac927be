@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84ae6b1c_0ac33e4a",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-27T05:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84216aec_1a5ecba5",
+      "range": {
+        "startLine": 16,
+        "startChar": 2,
+        "endLine": 16,
+        "endChar": 18
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d93113f4_6baf055c",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-05-26T10:20:58Z",
       "side": 1,
       "message": "Disable standard payload for SOL and verify IPMI sol activate command does not work.",
+      "range": {
+        "startLine": 81,
+        "startChar": 21,
+        "endLine": 81,
+        "endChar": 106
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ea301c2_094a435a",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-27T05:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d93113f4_6baf055c",
       "range": {
         "startLine": 81,
         "startChar": 21,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "633565b3_243350f1",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-27T05:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83cd1e6d_0bc8739d",
+      "range": {
+        "startLine": 83,
+        "startChar": 4,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b94954ec_9604ae36",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-05-26T10:53:18Z",
       "side": 1,
       "message": "where are u getting this ${user_id}? should it be ${userid} mentioned in @87?\n\n@88  ${user_id_in_hex_with_prefix} \u003d\u003d\u003e  you mentioned prefix\u003d0x in the keyword.. can the variable name be - ${userid_in_hex_format}",
+      "range": {
+        "startLine": 87,
+        "startChar": 42,
+        "endLine": 87,
+        "endChar": 49
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fb5b69e_b6349d6e",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-27T05:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b94954ec_9604ae36",
       "range": {
         "startLine": 87,
         "startChar": 42,
@@ -133,6 +229,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7b0cd35_10f6390f",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-27T05:03:17Z",
+      "side": 1,
+      "message": "From lib/resource.robot",
+      "parentUuid": "230e4703_7019b43b",
+      "range": {
+        "startLine": 147,
+        "startChar": 49,
+        "endLine": 147,
+        "endChar": 63
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec5ca5bc_9d987c9d",
@@ -156,6 +276,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67295d83_51a8912b",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-27T05:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec5ca5bc_9d987c9d",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 116
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c5f0f50_e66e2ca4",
@@ -169,6 +313,30 @@
       "writtenOn": "2022-05-26T10:20:58Z",
       "side": 1,
       "message": "Create And Verify IPMI User",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 16
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4934a26_ec6fbc5e",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-27T05:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c5f0f50_e66e2ca4",
       "range": {
         "startLine": 158,
         "startChar": 0,
@@ -225,6 +393,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc76a3af_673ac55d",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-27T05:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9377a42_11472e66",
+      "range": {
+        "startLine": 159,
+        "startChar": 28,
+        "endLine": 159,
+        "endChar": 32
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9404768_1f0e496d",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-27T05:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b274ebde_6edb82dd",
+      "range": {
+        "startLine": 159,
+        "startChar": 56,
+        "endLine": 159,
+        "endChar": 58
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25616831_48973702",
@@ -238,6 +454,30 @@
       "writtenOn": "2022-05-26T10:53:18Z",
       "side": 1,
       "message": "Privilege @163 and @165",
+      "range": {
+        "startLine": 163,
+        "startChar": 34,
+        "endLine": 163,
+        "endChar": 43
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ea4400e_de1d7ee8",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-27T05:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25616831_48973702",
       "range": {
         "startLine": 163,
         "startChar": 34,
@@ -271,6 +511,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d1450a5_48861061",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-27T05:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52c49cfa_89911ea8",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 25
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3df9eef3_51bdf11f",
@@ -284,6 +548,30 @@
       "writtenOn": "2022-05-26T10:20:58Z",
       "side": 1,
       "message": "Pls mention the examples in hex",
+      "range": {
+        "startLine": 194,
+        "startChar": 30,
+        "endLine": 194,
+        "endChar": 47
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "786557cd_e1f32462",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-27T05:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3df9eef3_51bdf11f",
       "range": {
         "startLine": 194,
         "startChar": 30,
@@ -317,6 +605,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e3ab516_cbc611e4",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-27T05:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52452076_a0021d98",
+      "range": {
+        "startLine": 214,
+        "startChar": 4,
+        "endLine": 214,
+        "endChar": 14
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6d70ac0_f0a5abf4",
@@ -330,6 +642,30 @@
       "writtenOn": "2022-05-26T10:20:58Z",
       "side": 1,
       "message": "is",
+      "range": {
+        "startLine": 219,
+        "startChar": 44,
+        "endLine": 219,
+        "endChar": 45
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1551dc78_43ae4980",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-27T05:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6d70ac0_f0a5abf4",
       "range": {
         "startLine": 219,
         "startChar": 44,
@@ -363,6 +699,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e96405a_a0d3061a",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-27T05:03:17Z",
+      "side": 1,
+      "message": "From Keyword Argument. By default it will take Enabled.",
+      "parentUuid": "eec2bc19_d2c92136",
+      "range": {
+        "startLine": 230,
+        "startChar": 23,
+        "endLine": 230,
+        "endChar": 39
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a27103b8_02c7eb7b",
@@ -376,6 +736,30 @@
       "writtenOn": "2022-05-26T10:53:18Z",
       "side": 1,
       "message": "should this be - Verify Sol Activate Disabled ?",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 31
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0971a71_92d8e5e4",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-27T05:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a27103b8_02c7eb7b",
       "range": {
         "startLine": 239,
         "startChar": 0,
@@ -403,6 +787,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f3a17fe_c9eb828e",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-27T05:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f188f9b_4cd0a385",
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1cd41367_92706bc5",
@@ -426,6 +828,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7890ae29_f8a6b6bf",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-27T05:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cd41367_92706bc5",
+      "range": {
+        "startLine": 257,
+        "startChar": 6,
+        "endLine": 257,
+        "endChar": 12
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8af85d2e_ed45a973",
@@ -439,6 +865,30 @@
       "writtenOn": "2022-05-26T10:53:18Z",
       "side": 1,
       "message": "above @263: add - Procedure to get the raw command based on operation mode.\n\n@263: If operation mode is disabled 2nd byte of raw command is 4${user_id}.\n\n@264 as --\u003e is\n\nabove @265: add - Procedure to determine payload",
+      "range": {
+        "startLine": 263,
+        "startChar": 55,
+        "endLine": 263,
+        "endChar": 58
+      },
+      "revId": "b10b23581a7bfcd239997cfce8559d8a7ac927be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0e9e3ec_78f8381a",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-05-27T05:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8af85d2e_ed45a973",
       "range": {
         "startLine": 263,
         "startChar": 55,
