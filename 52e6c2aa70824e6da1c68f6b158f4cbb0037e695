@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9fccb6a_06b2a463",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-05-30T06:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51668fce_e1e68370",
+      "range": {
+        "startLine": 2,
+        "startChar": 19,
+        "endLine": 2,
+        "endChar": 20
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1d1ad7d_68245105",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-24T15:34:20Z",
       "side": 1,
       "message": "Verify",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 4
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f458083_6ce4ca7a",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-05-30T06:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1d1ad7d_68245105",
       "range": {
         "startLine": 22,
         "startChar": 0,
@@ -64,6 +112,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50c44a6f_ea418bf9",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-05-30T06:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf3897e5_7f822760",
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d01ece71_eeef19e1",
@@ -81,6 +147,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "460efb59_97e61667",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-05-30T06:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d01ece71_eeef19e1",
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94dfbd39_7cb8f6fe",
@@ -94,6 +178,30 @@
       "writtenOn": "2022-05-24T15:34:20Z",
       "side": 1,
       "message": "For FRU",
+      "range": {
+        "startLine": 208,
+        "startChar": 20,
+        "endLine": 208,
+        "endChar": 26
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55f160ad_2a968e12",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-05-30T06:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94dfbd39_7cb8f6fe",
       "range": {
         "startLine": 208,
         "startChar": 20,
@@ -127,6 +235,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "839d8e0d_a934bafd",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-05-30T06:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5febb94c_323611ff",
+      "range": {
+        "startLine": 250,
+        "startChar": 13,
+        "endLine": 250,
+        "endChar": 16
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9a6dcfe_6cb8fd2d",
@@ -140,6 +272,30 @@
       "writtenOn": "2022-05-24T15:34:20Z",
       "side": 1,
       "message": "mention the same doc and remove this line.",
+      "range": {
+        "startLine": 298,
+        "startChar": 10,
+        "endLine": 298,
+        "endChar": 84
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1e21293_688d8604",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-05-30T06:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9a6dcfe_6cb8fd2d",
       "range": {
         "startLine": 298,
         "startChar": 10,
@@ -173,6 +329,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "570eed39_6eba19cd",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-05-30T06:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "734ca150_1c539385",
+      "range": {
+        "startLine": 305,
+        "startChar": 5,
+        "endLine": 305,
+        "endChar": 8
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c78ea81_25fd6240",
@@ -186,6 +366,30 @@
       "writtenOn": "2022-05-24T15:21:32Z",
       "side": 1,
       "message": "Implemented keywords to execute DBUS related commands on BMC.",
+      "range": {
+        "startLine": 2,
+        "startChar": 19,
+        "endLine": 2,
+        "endChar": 44
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e297bbf9_4a6ddfc4",
+        "filename": "lib/bmc_dbus.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-05-30T06:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c78ea81_25fd6240",
       "range": {
         "startLine": 2,
         "startChar": 19,
@@ -219,6 +423,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b204730_547e0671",
+        "filename": "lib/bmc_dbus.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-05-30T06:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c8defb3_c66b1a57",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 17
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1f66b19_287fcdca",
@@ -232,6 +460,30 @@
       "writtenOn": "2022-05-24T15:21:32Z",
       "side": 1,
       "message": "provide one line space before a comment for readability.\n\nsame @35\n\nAlso, uri and url which are mentioned can be capitalized.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 4
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db3b668f_d1fefe89",
+        "filename": "lib/bmc_dbus.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-05-30T06:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1f66b19_287fcdca",
       "range": {
         "startLine": 32,
         "startChar": 0,
@@ -259,6 +511,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90175462_1731d783",
+        "filename": "lib/bmc_dbus.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-05-30T06:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bcc5722_3d22ea1e",
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd23614c_6e71154f",
@@ -272,6 +542,30 @@
       "writtenOn": "2022-05-24T15:21:32Z",
       "side": 1,
       "message": "reduce the space",
+      "range": {
+        "startLine": 56,
+        "startChar": 20,
+        "endLine": 56,
+        "endChar": 29
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9729d1f_5ca239f0",
+        "filename": "lib/bmc_dbus.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-05-30T06:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd23614c_6e71154f",
       "range": {
         "startLine": 56,
         "startChar": 20,
@@ -299,6 +593,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f714b531_b7b36c32",
+        "filename": "lib/bmc_dbus.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-05-30T06:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d7be670_3e16da08",
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73d4a70f_19313e31",
@@ -312,6 +624,30 @@
       "writtenOn": "2022-05-24T15:21:32Z",
       "side": 1,
       "message": "Reduce the space and align it",
+      "range": {
+        "startLine": 75,
+        "startChar": 23,
+        "endLine": 75,
+        "endChar": 31
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3710ad8_d57ba3d5",
+        "filename": "lib/bmc_dbus.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-05-30T06:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73d4a70f_19313e31",
       "range": {
         "startLine": 75,
         "startChar": 23,
@@ -345,6 +681,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fdd750b_a86c24da",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-05-30T06:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3ef2728_613a36c5",
+      "range": {
+        "startLine": 578,
+        "startChar": 0,
+        "endLine": 578,
+        "endChar": 21
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b4f2634_dcba158f",
@@ -358,6 +718,30 @@
       "writtenOn": "2022-05-24T15:21:32Z",
       "side": 1,
       "message": "Instead of value ur getting index element.. need change of function name\n\n```\ndef get_subsequent_value_from_list(list, value):\n    index \u003d [list.index(i) for i in list if value in i]\n    return index\n\n\nlist \u003d [\u00271\u0027, \u00272\u0027, \u00271\u0027, \u00273\u0027, \u00272\u0027, \u00274\u0027, \u00272\u0027,\u00271\u0027]\nvalue \u003d \u00272\u0027\nprint(get_subsequent_value_from_list(list, value))\n\n\no/p:\n[1, 1, 1]\n\nThis function will always get first index of the element occurrence.. \n\nplease correct me here .. how ru using this ?",
+      "range": {
+        "startLine": 457,
+        "startChar": 0,
+        "endLine": 460,
+        "endChar": 0
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "013032e9_0f61c369",
+        "filename": "lib/utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-05-30T06:34:01Z",
+      "side": 1,
+      "message": "yes you are correct, it will give index of the first value from the list. but use case was different.\nFor example,\nIn fru, After getting \"busctl tree | less\" command response, we will convert the response as an list and from that list using service uri we will get the index value so using that index value we will get service uri with it\u0027s corresponding sub-tree uri\u0027s like below,\nService xyz.openbmc_project.FruDevice:\n└─/xyz\n  └─/xyz/openbmc_project\n    └─/xyz/openbmc_project/FruDevice\n      ├─/xyz/openbmc_project/FruDevice/10_85\n      ├─/xyz/openbmc_project/FruDevice/10_96",
+      "parentUuid": "0b4f2634_dcba158f",
       "range": {
         "startLine": 457,
         "startChar": 0,
@@ -391,6 +775,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7522881f_548cb1e3",
+        "filename": "lib/utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-05-30T06:34:01Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "4ddd422c_77dc280f",
+      "range": {
+        "startLine": 462,
+        "startChar": 1,
+        "endLine": 464,
+        "endChar": 15
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "707e0cde_49d73ac5",
@@ -404,6 +812,30 @@
       "writtenOn": "2022-05-24T15:21:32Z",
       "side": 1,
       "message": "inp1 as input\n\nbased on ur function it should be \u0027return_decoded_string(input)\u0027",
+      "range": {
+        "startLine": 467,
+        "startChar": 30,
+        "endLine": 467,
+        "endChar": 34
+      },
+      "revId": "52e6c2aa70824e6da1c68f6b158f4cbb0037e695",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7738de5f_57b3e615",
+        "filename": "lib/utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-05-30T06:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "707e0cde_49d73ac5",
       "range": {
         "startLine": 467,
         "startChar": 30,
