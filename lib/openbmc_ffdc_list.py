@@ -205,7 +205,6 @@ FFDC_METHOD_CALL = {
         'Core Files': 'SCP Coredump Files',
         'SEL Log': 'Collect eSEL Log',
         'Sys Inventory Files': 'System Inventory Files',
-        'Dump Log': 'Collect Dump Log',
         'Dump Files': 'SCP Dump Files',
         'PEL Files': 'Collect PEL Log',
         'Redfish Log': 'Enumerate Redfish Resources',
