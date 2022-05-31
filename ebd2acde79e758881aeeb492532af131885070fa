@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "987cc07d_e6f4b479",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-31T07:32:28Z",
+      "side": 1,
+      "message": "please fix the merge conflict \u0026 fix the minor review comments..",
+      "revId": "ebd2acde79e758881aeeb492532af131885070fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77f155ad_ff5721d4",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-31T07:32:28Z",
+      "side": 1,
+      "message": "Captial C - Configuration\n\nMany TC titles and keywords has mentioned as FRU instead of Fru. please change at required places\n\nAlso in [Documentation] -- mention as FRU instead of fru, URI instead of uri, IPMI instead of ipmi",
+      "range": {
+        "startLine": 22,
+        "startChar": 18,
+        "endLine": 22,
+        "endChar": 31
+      },
+      "revId": "ebd2acde79e758881aeeb492532af131885070fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af0f94b0_1f5526f2",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-31T07:32:28Z",
+      "side": 1,
+      "message": "one line space after example",
+      "range": {
+        "startLine": 221,
+        "startChar": 80,
+        "endLine": 221,
+        "endChar": 86
+      },
+      "revId": "ebd2acde79e758881aeeb492532af131885070fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6570c825_44553729",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-31T07:32:28Z",
+      "side": 1,
+      "message": "add - and return two variables as mentioned below",
+      "range": {
+        "startLine": 360,
+        "startChar": 6,
+        "endLine": 360,
+        "endChar": 8
+      },
+      "revId": "ebd2acde79e758881aeeb492532af131885070fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1721efa_e74c4fa7",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-31T07:32:28Z",
+      "side": 1,
+      "message": "I think there might be keyword for - \u0027IPMI BMC Cold Reset\u0027 .. please check to reuse",
+      "range": {
+        "startLine": 369,
+        "startChar": 1,
+        "endLine": 369,
+        "endChar": 15
+      },
+      "revId": "ebd2acde79e758881aeeb492532af131885070fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce604da9_61383c4d",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-05-31T07:32:28Z",
+      "side": 1,
+      "message": "Get Default FRU Data",
+      "range": {
+        "startLine": 379,
+        "startChar": 0,
+        "endLine": 379,
+        "endChar": 15
+      },
+      "revId": "ebd2acde79e758881aeeb492532af131885070fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
