@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e08365d4_c1b636ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2022-06-01T20:58:29Z",
+      "side": 1,
+      "message": "Thanks for writing a test case to check Redfish API access privileges.  That is a difficult problem in general, and this seems like a good start.\n\nI don\u0027t like seeing hard-coded privileges in the test case, but cannot offer any better ideas.  For example, a downstream user could modify their privilege registry and re-run https://github.com/openbmc/bmcweb/blob/master/scripts/parse_registries.py which generates source file https://github.com/openbmc/bmcweb/blob/master/redfish-core/include/registries/privilege_registry.hpp. and affects the actual privilege required.  Perhaps ideally this test case would use the privileges encoded in that file instead of having privilege values hard-coded in the test case.  (But I am not suggesting to do that.)",
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a305dad8_79e0b3a2",
@@ -54,6 +71,30 @@
       "writtenOn": "2022-06-01T11:34:27Z",
       "side": 1,
       "message": "Does order matter here?",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 80
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b8f58dc_b09576bb",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2022-06-01T20:58:29Z",
+      "side": 1,
+      "message": "Per the spec for PrivilegeRegistry.v*.yaml: This property shall be an array that contains the set of Redfish standard privileges used in building this mapping.\n\nSo ideally we would convert the list to a set, and compare as a set.  Otherwise this test case is tied to BMCWeb\u0027s implementation.",
+      "parentUuid": "d7955f53_64132f68",
       "range": {
         "startLine": 54,
         "startChar": 4,
