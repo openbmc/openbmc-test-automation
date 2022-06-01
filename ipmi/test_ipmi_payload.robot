@@ -8,6 +8,7 @@ Variables           ../data/ipmi_raw_cmd_table.py
 Library             ../lib/ipmi_utils.py
 
 
+Suite Setup         IPMI Payload Setup Execution
 Test Teardown       FFDC On Test Case Fail
 
 
@@ -114,7 +115,82 @@ Verify Set User Access Payload For Operator Privileged User
     ...  Run External IPMI Raw Command  ${payload_raw_cmd}  U=${userid}  P=${new_user_passwd}  L=Operator
 
 
+Verify Set User Access Payload For Invalid User
+    [Documentation]  Verify set user access payload IPMI command for invalid user.
+    [Tags]  Verify_Set_User_Access_Payload_For_Invalid_User
+
+    # Get Random invalid user ID.
+    ${invalid_userid}=  Get Invalid User ID
+
+    ${raw_cmd}=  Catenate   ${IPMI_RAW_CMD['Payload']['Set_User_Access_Payload'][0]}
+    ...  ${CHANNEL_NUMBER} ${invalid_userid} 0x02 0x00 0x00 0x00
+
+    Verify Invalid IPMI Command  ${raw_cmd}  0xcc
+
+
+Verify Set User Access Payload For Invalid Channel Number
+    [Documentation]  Verify set user access payload IPMI command for invalid channel number.
+    [Tags]  Verify_Set_User_Access_Payload_for_Invalid_Channel_Number
+    [Teardown]  Delete Created User  ${userid}
+
+    ${userid}  ${username}=  Create And Verify IPMI User
+
+    FOR  ${channel}  IN  @{inactive_channel_list}
+
+        Verify Set User Access Payload For Invalid Channel  ${userid}  ${channel}
+    END
+
+
+Verify Get User Access Payload For User Access privilege
+    [Documentation]   Verify get user access payload for user access(Read-only) privileged user.
+    [Tags]  Verify_Get_User_Access_Payload_For_User_Access_privilege
+    [Teardown]  Delete Created User  ${userid}
+
+    ${userid}  ${username}=  Create And Verify IPMI User  ${user_priv}  User
+
+    ${raw_command}=  Catenate  ${IPMI_RAW_CMD['Payload']['Get_User_Access_Payload'][0]}
+    ...  ${CHANNEL_NUMBER} ${user_id}
+
+    Run Keyword and Expect Error  *Unable to establish IPMI*
+    ...  Run External IPMI Raw Command  ${raw_command}  U=${userid}  P=${new_user_passwd}  L=User
+
+
+Verify Get User Access Payload For Invalid User
+    [Documentation]  Verify get user access payload IPMI command for invalid user.
+    [Tags]  Verify_Get_User_Access_Payload_For_Invalid_User
+
+    ${invalid_userid}=  Get Invalid User ID
+
+    Verify Get User Access Payload For Invalid User Or Invalid Channel  ${invalid_userid}  ${CHANNEL_NUMBER}
+
+
+Verify Get User Access Payload For Invalid Channel Number
+    [Documentation]  Verify get user access payload IPMI command for invalid channel number.
+    [Tags]  Verify_Get_User_Access_Payload_For_Invalid_Channel_Number
+    [Teardown]  Delete Created User  ${userid}
+
+    ${userid}  ${username}=  Create And Verify IPMI User
+    #${invalid_channels}=  Get Invalid Channel Number
+
+    FOR  ${channel}  IN  @{inactive_channel_list}
+        Verify Get User Access Payload For Invalid User Or Invalid Channel  ${userid}  ${channel}
+    END
+
+
 *** Keywords ***
+
+IPMI Payload Setup Execution
+    [Documentation]  Get active and inactive/invalid channels from channel_config.json file
+    ...              in list type and set it as suite variable.
+
+    # Get active channel list and set as a suite variable.
+    @{active_channel_list}=  Get Active Ethernet Channel List  current_channel=1
+    Set Suite Variable  @{active_channel_list}
+
+    # Get Inactive/Invalid channel list and set as a suite variable.
+    @{inactive_channel_list}=  Get Invalid Channel Number List
+    Set Suite Variable  @{inactive_channel_list}
+
 
 Get Payload Activation Status
     [Documentation]  Get payload activation status.
@@ -282,3 +358,51 @@ Set User Access Payload For Given User
     ${resp}=  Run IPMI Command  ${set_cmd}
 
     [Return]  ${resp}
+
+
+Get Invalid User ID
+    [Documentation]  Get random invalid user ID using "channel getaccess" IPMI standard command.
+
+    # Python module:  get_user_info(userid, channel_number=1)
+    ${user_info}=  Get User Info  ${EMPTY}
+    ${user_info}=  Filter Struct  ${user_info}  [('user_name', None)]  invert=1
+    ${empty_user_info}=  Filter Struct  ${user_info}  [('user_name', '')]
+    @{invalid_userid_list}=  Create List
+    FOR  ${user_record}  IN  @{empty_user_info}
+        Append To List  ${invalid_userid_list}  ${user_record['user_id']}
+    END
+    ${invalid_user_id}=  Evaluate  random.choice(${invalid_userid_list})  random
+
+    [Return]  ${invalid_user_id}
+
+
+Verify Set User Access Payload For Invalid Channel
+    [Documentation]  Verify set user payload command for invalid channels.
+    [Arguments]  ${user_id}  ${channel_number}
+
+    # Description of argument(s):
+    # user_id           The user ID (e.g. "1", "2", etc.).
+    # channel_number    Input channel number.
+
+    ${channel_number}=  Convert To Hex  ${channel_number}  prefix=0x
+    ${user_id}=  Convert To Hex  ${user_id}  prefix=0x
+    ${raw_cmd}=  Catenate   ${IPMI_RAW_CMD['Payload']['Set_User_Access_Payload'][0]}
+    ...  ${channel_number} ${user_id} 0x02 0x00 0x00 0x00
+
+    Verify Invalid IPMI Command  ${raw_cmd}  0xcc
+
+
+Verify Get User Access Payload For Invalid User Or Invalid Channel
+    [Documentation]  Verify get user payload command for invalid userid or invalid channels.
+    [Arguments]  ${user_id}  ${channel_number}
+
+    # Description of argument(s):
+    # user_id           The user ID (e.g. "1", "2", etc.).
+    # channel_number    Input channel number.
+
+    ${channel_number}=  Convert To Hex  ${channel_number}  prefix=0x
+    ${user_id}=  Convert To Hex  ${user_id}  prefix=0x
+    ${raw_cmd}=  Catenate  ${IPMI_RAW_CMD['Payload']['Get_User_Access_Payload'][0]}
+    ...  ${channel_number} ${user_id}
+
+    Verify Invalid IPMI Command  ${raw_cmd}  0xcc
