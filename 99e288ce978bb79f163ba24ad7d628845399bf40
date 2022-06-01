@@ -16,6 +16,190 @@
       "message": "Anusha/Sridevi please take a look",
       "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a305dad8_79e0b3a2",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-06-01T11:14:15Z",
+      "side": 1,
+      "message": "Should be part of suite setup. Applies to all test cases. The other user login can be done at test case level. Also please make sure that default user is the one who has logged in at the end of a test case.",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 17
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7f7f3cc_e831ea6f",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-06-01T11:14:15Z",
+      "side": 1,
+      "message": "Should be part of suite teardown",
+      "range": {
+        "startLine": 131,
+        "startChar": 4,
+        "endLine": 131,
+        "endChar": 18
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8eb66c9_dee7ab8d",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-06-01T11:14:15Z",
+      "side": 1,
+      "message": "I see that this test and other test assumes that there is a test_user.",
+      "range": {
+        "startLine": 153,
+        "startChar": 4,
+        "endLine": 155,
+        "endChar": 60
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59f32d3b_60686848",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-06-01T11:14:15Z",
+      "side": 1,
+      "message": "It is user name right?",
+      "range": {
+        "startLine": 157,
+        "startChar": 6,
+        "endLine": 157,
+        "endChar": 25
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "243a0a84_2f5f5f4e",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-06-01T11:14:15Z",
+      "side": 1,
+      "message": "Same comment as above. The users many not exist",
+      "range": {
+        "startLine": 183,
+        "startChar": 1,
+        "endLine": 192,
+        "endChar": 0
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9f319ec_186a0f28",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-06-01T11:14:15Z",
+      "side": 1,
+      "message": "Here and in many other places the actual value is passed instead of the variable ${readonly_password}",
+      "range": {
+        "startLine": 200,
+        "startChar": 46,
+        "endLine": 200,
+        "endChar": 62
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32a75310_88a1dc92",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-06-01T11:14:15Z",
+      "side": 1,
+      "message": "Same comments",
+      "range": {
+        "startLine": 215,
+        "startChar": 1,
+        "endLine": 223,
+        "endChar": 47
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca1345b0_22d14a03",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-06-01T11:14:15Z",
+      "side": 1,
+      "message": "If delete fails it should be ignored. I feel this should be part of test teardown. The test cases should be independent of each other. So a user should be created, tested and deleted at test case level.",
+      "range": {
+        "startLine": 264,
+        "startChar": 1,
+        "endLine": 271,
+        "endChar": 40
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
