@@ -55,7 +55,7 @@ Test Get BIOS POST Code via IPMI Raw Command With Host Powered Off
     Sleep  ${power_state_change}
     Should Contain  ${resp}  Chassis Power Control: Down/Off
 
-    ${resp}=  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['BIOS_POST_Code']['Get'][0]}
+    ${resp}=  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['BIOS_POST_Code']['Get'][0]}  fail_on_err=0
     Should Contain  ${resp}  ${IPMI_RAW_CMD['BIOS_POST_Code']['Get'][3]}
 
     # Turn host back on.
