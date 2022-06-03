@@ -478,20 +478,6 @@ Delete All Non Root IPMI User
     END
 
 
-Verify If IPMI Command Is Invalid
-    [Documentation]  Execute IPMI command and verify the response code.
-    [Arguments]  ${ipmi_cmd}  ${error_code}=0xc9
-
-    # Description of argument(s):
-    # ipmi_cmd                       The raw IPMI command to run.
-    # error_code                     The error response code for the IPMI command.
-
-
-    ${resp}=  Run External IPMI Raw Command  ${ipmi_cmd}  fail_on_err=0
-
-    Should Contain  ${resp}  rsp=${error_code}
-
-
 Create SEL
     [Documentation]  Create a SEL.
     [Arguments]  ${sensor_type}  ${sensor_number}
