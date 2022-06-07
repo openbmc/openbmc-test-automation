@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f358630_7cc17988",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-06-07T14:02:49Z",
+      "side": 1,
+      "message": "Adding fail_on_err\u003d0 argument to continue script when expecting error response",
+      "revId": "c272a19c4e3465784da398ff81c64d48f1385659",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
