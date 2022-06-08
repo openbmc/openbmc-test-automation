@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61d6838f_501edc27",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-08T06:45:41Z",
+      "side": 1,
+      "message": "need to change here - Verify Get User Access Payload For Invalid User Or Channel",
+      "range": {
+        "startLine": 164,
+        "startChar": 4,
+        "endLine": 164,
+        "endChar": 71
+      },
+      "revId": "a434ba9a6b8242a6ddcfaed8df065bcfef762d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e7fc921_487f00dc",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-08T06:45:41Z",
+      "side": 1,
+      "message": "Verify Get User Access Payload For Invalid User Or Channel",
+      "range": {
+        "startLine": 176,
+        "startChar": 7,
+        "endLine": 176,
+        "endChar": 97
+      },
+      "revId": "a434ba9a6b8242a6ddcfaed8df065bcfef762d46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
