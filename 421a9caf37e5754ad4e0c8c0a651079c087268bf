@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc29ddf2_43867027",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-08T05:23:18Z",
+      "side": 1,
+      "message": "looks very neat.. just a minor comment",
+      "revId": "421a9caf37e5754ad4e0c8c0a651079c087268bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba8878c2_2a48b092",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-08T05:23:18Z",
+      "side": 1,
+      "message": "Verify Get User Access Payload For Invalid User Or Channel",
+      "range": {
+        "startLine": 395,
+        "startChar": 51,
+        "endLine": 395,
+        "endChar": 58
+      },
+      "revId": "421a9caf37e5754ad4e0c8c0a651079c087268bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
