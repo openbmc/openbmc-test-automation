@@ -75,7 +75,7 @@ for inv_index in range(len(yaml_inventory_list)):
         # Get the yaml dictionary data
         print_timen("Loading " + yaml_file_path)
         f = open(yaml_file_path)
-        yaml_data = yaml.load(f)
+        yaml_data = yaml.safe_load(f)
         f.close()
         for item in range(0, len(yaml_data['properties'])):
             tmp_data = yaml_data['properties'][item]['name']
