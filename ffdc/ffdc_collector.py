@@ -174,7 +174,7 @@ class ffdc_collector:
             # Load default or user define YAML configuration file.
             with open(self.ffdc_config, 'r') as file:
                 try:
-                    self.ffdc_actions = yaml.load(file, Loader=yaml.FullLoader)
+                    self.ffdc_actions = yaml.load(file, Loader=yaml.SafeLoader)
                 except yaml.YAMLError as e:
                     self.logger.error(e)
                     sys.exit(-1)
@@ -874,7 +874,7 @@ class ffdc_collector:
             if self.econfig:
                 with open(self.econfig, 'r') as file:
                     try:
-                        tmp_env_dict = yaml.load(file, Loader=yaml.FullLoader)
+                        tmp_env_dict = yaml.load(file, Loader=yaml.SafeLoader)
                     except yaml.YAMLError as e:
                         self.logger.error(e)
                         sys.exit(-1)
