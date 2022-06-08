@@ -39,6 +39,30 @@
       },
       "revId": "421a9caf37e5754ad4e0c8c0a651079c087268bf",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8944b580_e2374819",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-06-08T06:16:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba8878c2_2a48b092",
+      "range": {
+        "startLine": 395,
+        "startChar": 51,
+        "endLine": 395,
+        "endChar": 58
+      },
+      "revId": "421a9caf37e5754ad4e0c8c0a651079c087268bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
