@@ -87,7 +87,8 @@ Delete VMI IPv4 Address
     # Wait few seconds for configuration to get effective.
     Sleep  ${wait_time}
     ${vmi_ip}=  Get VMI Network Interface Details  ${interface}
-    Should Be Empty  ${vmi_ip["IPv4_Address"]}
+    ${default}=  Set Variable  0.0.0.0
+    Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default}
 
 Set VMI IPv4 Origin
     [Documentation]  Set VMI IPv4 origin.
