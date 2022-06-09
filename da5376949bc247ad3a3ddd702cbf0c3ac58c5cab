@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95f729fb_057363b2",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-06-09T08:05:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "026f7f07_2d7e874a",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 1
+      },
+      "revId": "da5376949bc247ad3a3ddd702cbf0c3ac58c5cab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43d8558e_999f5ad3",
@@ -41,6 +65,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20db2220_e8f443d4",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-06-09T08:05:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43d8558e_999f5ad3",
+      "revId": "da5376949bc247ad3a3ddd702cbf0c3ac58c5cab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81089449_35bd4f8a",
@@ -54,6 +96,24 @@
       "writtenOn": "2022-06-09T06:27:16Z",
       "side": 1,
       "message": "remove no_access user",
+      "revId": "da5376949bc247ad3a3ddd702cbf0c3ac58c5cab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dedb8114_6ad4791f",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-06-09T08:05:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81089449_35bd4f8a",
       "revId": "da5376949bc247ad3a3ddd702cbf0c3ac58c5cab",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
