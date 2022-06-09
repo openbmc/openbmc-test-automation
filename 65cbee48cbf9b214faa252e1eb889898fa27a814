@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89624815_5f5797bc",
+        "filename": "ffdc/ffdc_collector.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000337
+      },
+      "writtenOn": "2022-06-09T17:28:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "731f3b24_470451aa",
+      "range": {
+        "startLine": 177,
+        "startChar": 20,
+        "endLine": 177,
+        "endChar": 24
+      },
+      "revId": "65cbee48cbf9b214faa252e1eb889898fa27a814",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce427582_fba26bf2",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-06-09T14:50:26Z",
       "side": 1,
       "message": "self.ffdc_actions \u003d yaml.safe_load(file, Loader\u003dyaml.FullLoader)\nTypeError: safe_load() got an unexpected keyword argument \u0027Loader\u0027\n\nShould be  self.ffdc_actions \u003d yaml.safe_load(file)",
+      "range": {
+        "startLine": 877,
+        "startChar": 0,
+        "endLine": 877,
+        "endChar": 36
+      },
+      "revId": "65cbee48cbf9b214faa252e1eb889898fa27a814",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4c3f96d_5b103e90",
+        "filename": "ffdc/ffdc_collector.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1000337
+      },
+      "writtenOn": "2022-06-09T17:28:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce427582_fba26bf2",
       "range": {
         "startLine": 877,
         "startChar": 0,
