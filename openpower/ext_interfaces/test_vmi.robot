@@ -1,8 +1,8 @@
 *** Settings ***
 
-Documentation    VMI static/dynamic IP config tests.
+Documentation     VMI static/dynamic IP config tests.
 
-Resource         ../../lib/external_intf/vmi_utils.robot
+Resource          ../../lib/external_intf/vmi_utils.robot
 
 Suite Setup       Suite Setup Execution
 Test Teardown     FFDC On Test Case Fail
@@ -14,9 +14,7 @@ Suite Teardown    Suite Teardown Execution
 @{ADMIN}          admin_user              TestPwd123
 @{OPERATOR}       operator_user           TestPwd123
 @{ReadOnly}       readonly_user           TestPwd123
-@{NoAccess}       noaccess_user           TestPwd123
-&{USERS}          Administrator=${ADMIN}  Operator=${OPERATOR}  ReadOnly=${ReadOnly}
-...               NoAccess=${NoAccess}
+&{USERS}          Administrator=${ADMIN}  ReadOnly=${ReadOnly}
 
 ${test_ipv4}              10.6.6.6
 ${test_gateway}           10.6.6.1
@@ -113,6 +111,7 @@ Modify IP Addresses On VMI Interface And Verify
     10.5.5.10   10.5.5.1     255.255.252.0    ${HTTP_ACCEPTED}
     10.5.5.11   10.5.5.1     255.255.252.0    ${HTTP_ACCEPTED}
 
+
 Switch Between IP Origins On VMI And Verify Details
     [Documentation]  Switch between IP origins on VMI and verify details.
     [Tags]  Switch_Between_IP_Origins_On_VMI_And_Verify_Details
@@ -146,9 +145,6 @@ Delete VMI Static IP Address And Verify
 
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
     Delete VMI IPv4 Address
-    ${resp}=  Redfish.Get
-    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${ethernet_interface}
-    Should Be Empty  ${resp.dict["IPv4Addresses"]}
 
 
 Verify Successful VMI IP Static Configuration On HOST Boot After Session Delete
@@ -208,6 +204,7 @@ Verify VMI Static IP Configuration Persist On BMC Reset Before Host Boot
     # Verifying the VMI static configuration
     Verify VMI Network Interface Details  ${test_ipv4}  Static   ${test_gateway}  ${test_netmask}
 
+
 Add Static IP When Host Poweroff And Verify On Poweron
     [Documentation]  Add Static IP When Host Poweroff And Verify on power on
     [Tags]   Add_Static_IP_When_Host_Poweroff_And_Verify_On_Poweron
@@ -217,6 +214,7 @@ Add Static IP When Host Poweroff And Verify On Poweron
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
     Redfish Power On
     Verify VMI Network Interface Details  ${test_ipv4}  Static  ${test_gateway}  ${test_netmask}
+
 
 Add VMI Static IP When Host Poweroff And Verify Static IP On BMC Reset
     [Documentation]  Add Static IP When Host Poweroff And Verify Static IP On BMC Reset.
@@ -228,6 +226,7 @@ Add VMI Static IP When Host Poweroff And Verify Static IP On BMC Reset
     OBMC Reboot (off)
     Redfish Power On
     Verify VMI Network Interface Details  ${test_ipv4}  Static  ${test_gateway}  ${test_netmask}
+
 
 Enable DHCP When No Static IP Configured And Verify DHCP IP
     [Documentation]  Enable DHCP when no static ip configured and verify dhcp ip
@@ -241,6 +240,7 @@ Enable DHCP When No Static IP Configured And Verify DHCP IP
     Verify VMI Network Interface Details  ${vmi_ip_config["IPv4_Address"]}
     ...  DHCP  ${vmi_ip_config["IPv4_Gateway"]}  ${vmi_ip_config["IPv4_SubnetMask"]}
 
+
 Verify User Cannot Delete VMI DHCP IP Address
     [Documentation]  Verify user cannot delete VMI DHCP IP Address
     [Tags]  Verify_User_Cannot_Delete_VMI_DHCP_IP_Address
@@ -251,6 +251,7 @@ Verify User Cannot Delete VMI DHCP IP Address
     ${resp}=  Redfish.Get
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${ethernet_interface}
     Should Not Be Empty  ${resp.dict["IPv4Addresses"]}
+
 
 Enable DHCP When Static IP Configured DHCP Server Unavailable And Verify IP
     [Documentation]  Enable DHCP When Static IP Configured And DHCP Server Unavailable And Verify No IP.
@@ -272,9 +273,18 @@ Verify To Configure VMI Static IP Address With Different User Roles
 
     # username     password    ip_address    gateway          nemask           valid_status_code
     admin_user     TestPwd123  ${test_ipv4}  ${test_gateway}  ${test_netmask}  ${HTTP_ACCEPTED}
-    operator_user  TestPwd123  ${test_ipv4}  ${test_gateway}  ${test_netmask}  ${HTTP_FORBIDDEN}
     readonly_user  TestPwd123  ${test_ipv4}  ${test_gateway}  ${test_netmask}  ${HTTP_FORBIDDEN}
-    noaccess_user  TestPwd123  ${test_ipv4}  ${test_gateway}  ${test_netmask}  ${HTTP_FORBIDDEN}
+
+
+Verify To Configure VMI Static IP Address With Operator User Role
+    [Documentation]  Verify to configure vmi static ip address with operator user role.
+    [Tags]  Verify_To_Configure_VMI_Static_IP_Address_With_Operator_User_Role
+    [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
+    [Template]  Config VMI Static IP Address Using Different Users
+    [Teardown]  Delete BMC Users Using Redfish
+
+    # username     password    ip_address    gateway          nemask           valid_status_code
+    operator_user  TestPwd123  ${test_ipv4}  ${test_gateway}  ${test_netmask}  ${HTTP_FORBIDDEN}
 
 
 Verify To Delete VMI Static IP Address With Different User Roles
@@ -286,9 +296,18 @@ Verify To Delete VMI Static IP Address With Different User Roles
 
     # username     password     valid_status_code
     admin_user     TestPwd123   ${HTTP_ACCEPTED}
-    operator_user  TestPwd123   ${HTTP_FORBIDDEN}
     readonly_user  TestPwd123   ${HTTP_FORBIDDEN}
-    noaccess_user  TestPwd123   ${HTTP_FORBIDDEN}
+
+
+Verify To Delete VMI Static IP Address With Operator User Role
+    [Documentation]  Verify to delete vmi static IP address with operator user role.
+    [Tags]  Verify_To_Delete_VMI_Static_IP_Address_With_Operator_User_Role
+    [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
+    [Template]  Delete VMI Static IP Address Using Different Users
+    [Teardown]  Delete BMC Users Using Redfish
+
+    # username     password     valid_status_code
+    operator_user     TestPwd123   ${HTTP_FORBIDDEN}
 
 
 Verify To Update VMI Static IP Address With Different User Roles
@@ -300,9 +319,18 @@ Verify To Update VMI Static IP Address With Different User Roles
 
     # username     password     ip_address  gateway    netmask       valid_status_code
     admin_user     TestPwd123   10.5.10.20  10.5.10.1  255.255.0.0  ${HTTP_ACCEPTED}
-    operator_user  TestPwd123   10.5.10.30  10.5.10.1  255.255.0.0  ${HTTP_FORBIDDEN}
     readonly_user  TestPwd123   10.5.20.40  10.5.20.1  255.255.0.0  ${HTTP_FORBIDDEN}
-    noaccess_user  TestPwd123   10.5.30.50  10.5.30.1  255.255.0.0  ${HTTP_FORBIDDEN}
+
+
+Verify To Update VMI Static IP Address With Operator User Role
+    [Documentation]  Verify to update vmi static IP address with operator user role.
+    [Tags]  Verify_To_Update_VMI_Static_IP_Address_With_Operator_User_Role
+    [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
+    [Template]  Config VMI Static IP Address Using Different Users
+    [Teardown]  Delete BMC Users Using Redfish
+
+    # username     password     ip_address  gateway    netmask       valid_status_code
+    operator_user  TestPwd123   10.5.10.30  10.5.10.1  255.255.0.0  ${HTTP_FORBIDDEN}
 
 
 Verify To Read VMI Network Configuration With Different User Roles
@@ -314,9 +342,19 @@ Verify To Read VMI Network Configuration With Different User Roles
 
     # username     password     valid_status_code
     admin_user     TestPwd123   ${HTTP_OK}
-    operator_user  TestPwd123   ${HTTP_OK}
     readonly_user  TestPwd123   ${HTTP_OK}
-    noaccess_user  TestPwd123   ${HTTP_FORBIDDEN}
+
+
+Verify To Read VMI Network Configuration With Operator User Role
+    [Documentation]  Verify to read vmi network configuration with operator user role.
+    [Tags]  Verify_To_Read_VMI_Network_Configuration_With_Operator_User_Role
+    [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
+    [Template]  Read VMI Static IP Address Using Different Users
+    [Teardown]  Delete BMC Users Using Redfish
+
+    # username     password     valid_status_code
+    operator_user  TestPwd123   ${HTTP_FORBIDDEN}
+
 
 Enable DHCP On VMI Network Via Different Users Roles And Verify
     [Documentation]  Enable DHCP On VMI Network Via Different Users Roles And Verify.
@@ -327,9 +365,19 @@ Enable DHCP On VMI Network Via Different Users Roles And Verify
 
     # username     password     dhcp_enabled   valid_status_code
     admin_user     TestPwd123   ${True}        ${HTTP_ACCEPTED}
-    operator_user  TestPwd123   ${True}        ${HTTP_FORBIDDEN}
     readonly_user  TestPwd123   ${True}        ${HTTP_FORBIDDEN}
-    noaccess_user  TestPwd123   ${True}        ${HTTP_FORBIDDEN}
+
+
+Enable DHCP On VMI Network Via Operator User Role And Verify
+    [Documentation]  Enable DHCP On VMI Network Via Operator User Role And Verify.
+    [Tags]  Enable_DHCP_On_VMI_Network_Via_Operator_User_Role_And_Verify
+    [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
+    [Template]  Update User Role And Set VMI IPv4 Origin
+    [Teardown]  Delete BMC Users Using Redfish
+
+    # username     password     dhcp_enabled   valid_status_code
+    operator_user  TestPwd123   ${True}        ${HTTP_FORBIDDEN}
+
 
 Disable DHCP On VMI Network Via Different Users Roles And Verify
     [Documentation]  Disable DHCP On VMI Network Via Different Users Roles And Verify.
@@ -340,9 +388,18 @@ Disable DHCP On VMI Network Via Different Users Roles And Verify
 
     # username     password     dhcp_enabled    valid_status_code
     admin_user     TestPwd123   ${False}        ${HTTP_ACCEPTED}
-    operator_user  TestPwd123   ${False}        ${HTTP_FORBIDDEN}
     readonly_user  TestPwd123   ${False}        ${HTTP_FORBIDDEN}
-    noaccess_user  TestPwd123   ${False}        ${HTTP_FORBIDDEN}
+
+
+Disable DHCP On VMI Network Via Operator User Role And Verify
+    [Documentation]  Disable DHCP On VMI Network Via Operator User Role And Verify.
+    [Tags]  Disable_DHCP_On_VMI_Network_Via_Operator_User_Role_And_Verify
+    [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
+    [Template]  Update User Role And Set VMI IPv4 Origin
+    [Teardown]  Delete BMC Users Using Redfish
+
+    # username     password     dhcp_enabled    valid_status_code
+    operator_user  TestPwd123   ${False}        ${HTTP_FORBIDDEN}
 
 
 Enable And Disable DHCP And Verify
@@ -353,8 +410,7 @@ Enable And Disable DHCP And Verify
     ${default}=  Set Variable  0.0.0.0
     Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
     Set VMI IPv4 Origin  ${False}
-    ${vmi_ip}=  Get VMI Network Interface Details
-    Should Be Empty  ${vmi_ip["IPv4_Address"]}
+    Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default}
 
 
 Multiple Times Enable And Disable DHCP And Verify
@@ -367,8 +423,7 @@ Multiple Times Enable And Disable DHCP And Verify
       Set VMI IPv4 Origin  ${True}
       Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
       Set VMI IPv4 Origin  ${False}
-      ${vmi_ip}=  Get VMI Network Interface Details
-      Should Be Empty  ${vmi_ip["IPv4_Address"]}
+      Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default}
     END
 
 
@@ -472,6 +527,8 @@ Delete VMI Static IP Address Using Different Users
     # password            The host password.
     # valid_status_code   The expected valid status code.
 
+    # TODO: operator_user role is not yet supported.
+    Skip If  '${username}' == 'operator_user'
     Redfish.Login  ${username}  ${password}
     Delete VMI IPv4 Address  delete_param=IPv4StaticAddresses  valid_status_code=${valid_status_code}
 
@@ -490,6 +547,8 @@ Config VMI Static IP Address Using Different Users
     # gateway             Gateway for the IP to be added (e.g. "10.7.7.1").
     # valid_status_code   The expected valid status code.
 
+    # TODO: operator_user role is not yet supported.
+    Skip If  '${username}' == 'operator_user'
     Redfish.Login  ${username}  ${password}
     Set Static IPv4 Address To VMI And Verify  ${ip}  ${gateway}  ${netmask}  ${valid_status_code}
 
@@ -503,6 +562,8 @@ Read VMI Static IP Address Using Different Users
     # password            The host password.
     # valid_status_code   The expected valid status code.
 
+    # TODO: operator_user role is not yet supported.
+    Skip If  '${username}' == 'operator_user'
     Redfish.Login  ${username}  ${password}
     Redfish.Get
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${ethernet_interface}
