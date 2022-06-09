@@ -5,18 +5,15 @@ Documentation    VMI static/dynamic IP config tests.
 Resource         ../../lib/external_intf/vmi_utils.robot
 
 Suite Setup       Suite Setup Execution
-Test Teardown     FFDC On Test Case Fail
-Suite Teardown    Suite Teardown Execution
+#Test Teardown     FFDC On Test Case Fail
+Suite Teardown     Suite Teardown Execution
 
 *** Variables ***
 
 # users           User Name               password
 @{ADMIN}          admin_user              TestPwd123
-@{OPERATOR}       operator_user           TestPwd123
 @{ReadOnly}       readonly_user           TestPwd123
-@{NoAccess}       noaccess_user           TestPwd123
-&{USERS}          Administrator=${ADMIN}  Operator=${OPERATOR}  ReadOnly=${ReadOnly}
-...               NoAccess=${NoAccess}
+&{USERS}          Administrator=${ADMIN}  ReadOnly=${ReadOnly}
 
 ${test_ipv4}              10.6.6.6
 ${test_gateway}           10.6.6.1
@@ -146,9 +143,6 @@ Delete VMI Static IP Address And Verify
 
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
     Delete VMI IPv4 Address
-    ${resp}=  Redfish.Get
-    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${ethernet_interface}
-    Should Be Empty  ${resp.dict["IPv4Addresses"]}
 
 
 Verify Successful VMI IP Static Configuration On HOST Boot After Session Delete
@@ -272,9 +266,9 @@ Verify To Configure VMI Static IP Address With Different User Roles
 
     # username     password    ip_address    gateway          nemask           valid_status_code
     admin_user     TestPwd123  ${test_ipv4}  ${test_gateway}  ${test_netmask}  ${HTTP_ACCEPTED}
-    operator_user  TestPwd123  ${test_ipv4}  ${test_gateway}  ${test_netmask}  ${HTTP_FORBIDDEN}
+    #operator_user  TestPwd123  ${test_ipv4}  ${test_gateway}  ${test_netmask}  ${HTTP_FORBIDDEN}
     readonly_user  TestPwd123  ${test_ipv4}  ${test_gateway}  ${test_netmask}  ${HTTP_FORBIDDEN}
-    noaccess_user  TestPwd123  ${test_ipv4}  ${test_gateway}  ${test_netmask}  ${HTTP_FORBIDDEN}
+    #noaccess_user  TestPwd123  ${test_ipv4}  ${test_gateway}  ${test_netmask}  ${HTTP_FORBIDDEN}
 
 
 Verify To Delete VMI Static IP Address With Different User Roles
@@ -286,9 +280,9 @@ Verify To Delete VMI Static IP Address With Different User Roles
 
     # username     password     valid_status_code
     admin_user     TestPwd123   ${HTTP_ACCEPTED}
-    operator_user  TestPwd123   ${HTTP_FORBIDDEN}
+    #operator_user  TestPwd123   ${HTTP_FORBIDDEN}
     readonly_user  TestPwd123   ${HTTP_FORBIDDEN}
-    noaccess_user  TestPwd123   ${HTTP_FORBIDDEN}
+    #noaccess_user  TestPwd123   ${HTTP_FORBIDDEN}
 
 
 Verify To Update VMI Static IP Address With Different User Roles
@@ -300,9 +294,9 @@ Verify To Update VMI Static IP Address With Different User Roles
 
     # username     password     ip_address  gateway    netmask       valid_status_code
     admin_user     TestPwd123   10.5.10.20  10.5.10.1  255.255.0.0  ${HTTP_ACCEPTED}
-    operator_user  TestPwd123   10.5.10.30  10.5.10.1  255.255.0.0  ${HTTP_FORBIDDEN}
+    #operator_user  TestPwd123   10.5.10.30  10.5.10.1  255.255.0.0  ${HTTP_FORBIDDEN}
     readonly_user  TestPwd123   10.5.20.40  10.5.20.1  255.255.0.0  ${HTTP_FORBIDDEN}
-    noaccess_user  TestPwd123   10.5.30.50  10.5.30.1  255.255.0.0  ${HTTP_FORBIDDEN}
+    #noaccess_user  TestPwd123   10.5.30.50  10.5.30.1  255.255.0.0  ${HTTP_FORBIDDEN}
 
 
 Verify To Read VMI Network Configuration With Different User Roles
@@ -314,9 +308,9 @@ Verify To Read VMI Network Configuration With Different User Roles
 
     # username     password     valid_status_code
     admin_user     TestPwd123   ${HTTP_OK}
-    operator_user  TestPwd123   ${HTTP_OK}
+    #operator_user  TestPwd123   ${HTTP_OK}
     readonly_user  TestPwd123   ${HTTP_OK}
-    noaccess_user  TestPwd123   ${HTTP_FORBIDDEN}
+    #noaccess_user  TestPwd123   ${HTTP_FORBIDDEN}
 
 Enable DHCP On VMI Network Via Different Users Roles And Verify
     [Documentation]  Enable DHCP On VMI Network Via Different Users Roles And Verify.
@@ -327,9 +321,9 @@ Enable DHCP On VMI Network Via Different Users Roles And Verify
 
     # username     password     dhcp_enabled   valid_status_code
     admin_user     TestPwd123   ${True}        ${HTTP_ACCEPTED}
-    operator_user  TestPwd123   ${True}        ${HTTP_FORBIDDEN}
+    #operator_user  TestPwd123   ${True}        ${HTTP_FORBIDDEN}
     readonly_user  TestPwd123   ${True}        ${HTTP_FORBIDDEN}
-    noaccess_user  TestPwd123   ${True}        ${HTTP_FORBIDDEN}
+    #noaccess_user  TestPwd123   ${True}        ${HTTP_FORBIDDEN}
 
 Disable DHCP On VMI Network Via Different Users Roles And Verify
     [Documentation]  Disable DHCP On VMI Network Via Different Users Roles And Verify.
@@ -340,9 +334,9 @@ Disable DHCP On VMI Network Via Different Users Roles And Verify
 
     # username     password     dhcp_enabled    valid_status_code
     admin_user     TestPwd123   ${False}        ${HTTP_ACCEPTED}
-    operator_user  TestPwd123   ${False}        ${HTTP_FORBIDDEN}
+    #operator_user  TestPwd123   ${False}        ${HTTP_FORBIDDEN}
     readonly_user  TestPwd123   ${False}        ${HTTP_FORBIDDEN}
-    noaccess_user  TestPwd123   ${False}        ${HTTP_FORBIDDEN}
+    #noaccess_user  TestPwd123   ${False}        ${HTTP_FORBIDDEN}
 
 
 Enable And Disable DHCP And Verify
@@ -353,8 +347,7 @@ Enable And Disable DHCP And Verify
     ${default}=  Set Variable  0.0.0.0
     Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
     Set VMI IPv4 Origin  ${False}
-    ${vmi_ip}=  Get VMI Network Interface Details
-    Should Be Empty  ${vmi_ip["IPv4_Address"]}
+    Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default}
 
 
 Multiple Times Enable And Disable DHCP And Verify
@@ -367,8 +360,7 @@ Multiple Times Enable And Disable DHCP And Verify
       Set VMI IPv4 Origin  ${True}
       Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
       Set VMI IPv4 Origin  ${False}
-      ${vmi_ip}=  Get VMI Network Interface Details
-      Should Be Empty  ${vmi_ip["IPv4_Address"]}
+      Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default}
     END
 
 
