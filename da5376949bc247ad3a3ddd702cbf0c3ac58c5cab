@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "026f7f07_2d7e874a",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-06-09T06:27:16Z",
+      "side": 1,
+      "message": "??",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 1
+      },
+      "revId": "da5376949bc247ad3a3ddd702cbf0c3ac58c5cab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43d8558e_999f5ad3",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-06-09T06:27:16Z",
+      "side": 1,
+      "message": "Add comment\n# Operator is not supported at the moment, will enable the code once we get support.",
+      "revId": "da5376949bc247ad3a3ddd702cbf0c3ac58c5cab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81089449_35bd4f8a",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-06-09T06:27:16Z",
+      "side": 1,
+      "message": "remove no_access user",
+      "revId": "da5376949bc247ad3a3ddd702cbf0c3ac58c5cab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
