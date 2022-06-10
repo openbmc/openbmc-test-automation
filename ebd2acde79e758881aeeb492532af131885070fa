@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12ba79c5_adfb249e",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-06-10T14:18:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77f155ad_ff5721d4",
+      "range": {
+        "startLine": 22,
+        "startChar": 18,
+        "endLine": 22,
+        "endChar": 31
+      },
+      "revId": "ebd2acde79e758881aeeb492532af131885070fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af0f94b0_1f5526f2",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-05-31T07:32:28Z",
       "side": 1,
       "message": "one line space after example",
+      "range": {
+        "startLine": 221,
+        "startChar": 80,
+        "endLine": 221,
+        "endChar": 86
+      },
+      "revId": "ebd2acde79e758881aeeb492532af131885070fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f06b6ee_a03850fe",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-06-10T14:18:12Z",
+      "side": 1,
+      "message": "In dictionary service dbus uri will be mapped in single space only. Hence in example also we have given only one space.",
+      "parentUuid": "af0f94b0_1f5526f2",
       "range": {
         "startLine": 221,
         "startChar": 80,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4e10409_f4a1fd4f",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-06-10T14:18:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6570c825_44553729",
+      "range": {
+        "startLine": 360,
+        "startChar": 6,
+        "endLine": 360,
+        "endChar": 8
+      },
+      "revId": "ebd2acde79e758881aeeb492532af131885070fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1721efa_e74c4fa7",
@@ -110,6 +182,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74ec162d_d1ae43f8",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-06-10T14:18:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1721efa_e74c4fa7",
+      "range": {
+        "startLine": 369,
+        "startChar": 1,
+        "endLine": 369,
+        "endChar": 15
+      },
+      "revId": "ebd2acde79e758881aeeb492532af131885070fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce604da9_61383c4d",
@@ -123,6 +219,30 @@
       "writtenOn": "2022-05-31T07:32:28Z",
       "side": 1,
       "message": "Get Default FRU Data",
+      "range": {
+        "startLine": 379,
+        "startChar": 0,
+        "endLine": 379,
+        "endChar": 15
+      },
+      "revId": "ebd2acde79e758881aeeb492532af131885070fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "636da400_ac0c4eaa",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-06-10T14:18:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce604da9_61383c4d",
       "range": {
         "startLine": 379,
         "startChar": 0,
