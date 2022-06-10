@@ -204,6 +204,16 @@ IPMI_RAW_CMD = {
             # raw command,
             "0x06 0x4c"
         ],
+        'Get_Channel_Payload_Version':
+        [
+            # raw command,
+            "0x06 0x4F"
+        ],
+        'Get_Channel_Payload_Support':
+        [
+            # raw command,
+            "0x06 0x4E"
+        ],
     },
     'BIOS_POST_Code':
     {
