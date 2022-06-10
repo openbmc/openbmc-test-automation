@@ -13,11 +13,20 @@ Test Teardown       FFDC On Test Case Fail
 
 
 *** Variables ***
-${user_priv}                    2
-${operator_priv}                3
-${admin_level_priv}             4
-${no_access_priv}               15
-${new_user_passwd}             0penBmc1
+${user_priv}                     2
+${operator_priv}                 3
+${admin_level_priv}              4
+${no_access_priv}                15
+${new_user_passwd}               0penBmc1
+${standard_payload_type_resp}    03 00
+${session_setup_payload_resp}    3f 00
+&{standard_payload_types}        ipmi_message=0  sol=1
+&{session_setup_payload_types}   RMCP+open_session_request=0x10
+                            ...  RMCP+open_session_response=0x11
+                            ...  RAKP_msg_1=0x12
+                            ...  RAKP_msg_2=0x13
+                            ...  RAKP_msg_3=0x14
+                            ...  RAKP_msg_4=0x15
 
 
 *** Test Cases ***
@@ -174,6 +183,52 @@ Verify Get User Access Payload For Invalid Channel Number
 
     FOR  ${channel}  IN  @{inactive_channel_list}
         Verify Get User Access Payload For Invalid User Or Channel  ${userid}  ${channel}
+    END
+
+
+Verify Get Channel Payload Version
+    [Documentation]  Verify payload version for all supported payload type in
+    ...              all active channels.
+    [Tags]  Verify_Get_Channel_Payload_Version
+    [Template]  Verify Supported Payload Version
+
+    FOR  ${channel}  IN  @{active_channel_list}
+        # Input Channel.
+        ${channel}
+    END
+
+
+Verify Get Channel Payload Version For Invalid Channel
+    [Documentation]  Verify get channel payload version IPMI command for invalid channel.
+    [Tags]  Verify_Get_Channel_Payload_Version_For_Invalid_Channel
+    [Template]  Verify Payload Version For Invalid Channel
+
+    FOR  ${invalid_channel_number}  IN  @{inactive_channel_list}
+        # channel number           payload types.
+        ${invalid_channel_number}   &{standard_payload_types}
+        ${invalid_channel_number}   &{session_setup_payload_types}
+    END
+
+
+Verify Get Channel Payload Support For Active Channel
+    [Documentation]  Verify get channel payload support IPMI command for active channels.
+    [Tags]  Verify_Get_Channel_Payload_Support
+    [Template]  Verify Payload Support Based On Channel
+
+    FOR  ${channel}  IN  @{active_channel_list}
+        # Input channel.
+        ${channel}
+    END
+
+
+Verify Get Channel Payload Support For Invalid Channel
+    [Documentation]  Verify get channel payload support IPMI command for invalid channels.
+    [Tags]  Verify_Get_Channel_Payload_Support_For_Invalid_Channel
+    [Template]  Verify Payload Support Based On Channel
+
+    FOR  ${channel}  IN  @{inactive_channel_list}
+       # Input channel.      Invalid channel intimation.
+       ${channel}            ${1}
     END
 
 
@@ -406,3 +461,79 @@ Verify Get User Access Payload For Invalid User Or Channel
     ...  ${channel_number} ${user_id}
 
     Verify Invalid IPMI Command  ${raw_cmd}  0xcc
+
+
+Verify Payload Type Version
+    [Documentation]  Verify supported payload version for type IPMI and SOL.
+    [Arguments]  ${channel_number}  &{payload_type_dict}
+
+    # Description of argument(s):
+    # channel_number     Input channel number.
+    # payload_type_dict  Supported payload type in dictionary type.
+    #                    standard_payload_types and session_setup_payload_types which we use
+    #                    in this keyword are defined in variable section.
+
+    FOR  ${payload_type_name}  ${payload_type_number}  IN  &{payload_type_dict}
+        ${get_cmd}=  Catenate  ${IPMI_RAW_CMD['Payload']['Get_Channel_Payload_Version'][0]}
+        ...  ${channel_number} ${payload_type_number}
+
+        ${resp}=  Run External IPMI Raw Command  ${get_cmd}
+        ${resp}=  Strip String  ${resp}
+        Should Be Equal  ${resp}  10
+    END
+
+
+Verify Payload Version For Invalid Channel
+    [Documentation]  Verify payload version for invalid channel.
+    [Arguments]  ${invalid_channel_num}  &{payload_type_dict}
+
+    # Description of argument(s):
+    # invalid_channel_num   Invalid channel number.
+    # payload_type_dict     Supported payload type in dictionary type.
+    #                       standard_payload_types and session_setup_payload_types which we use
+    #                       in this keyword are defined in variable section.
+
+     ${channel_number}=  Convert To Hex  ${channel_number}  prefix=0x
+     FOR  ${payload_type_name}  ${payload_type_number}  IN  &{payload_type_dict}
+        ${get_cmd}=  Catenate  ${IPMI_RAW_CMD['Payload']['Get_Channel_Payload_Version'][0]}
+        ...  ${channel_number} ${payload_type_number}
+
+        Verify Invalid IPMI Command  ${get_cmd}  0xcc
+     END
+
+
+Verify Supported Payload Version
+    [Documentation]  Verify supported payload version on given channel number.
+    [Arguments]  ${channel_number}
+
+    # Description of argument(s):
+    # channel_number     Input channel number.
+
+    Verify Payload Type Version  ${channel_number}  &{standard_payload_types}
+    Verify Payload Type Version  ${channel_number}  &{session_setup_payload_types}
+
+
+Verify Payload Support Based On Channel
+    [Documentation]  Verify payload support on given channel number.
+    [Arguments]  ${channel_number}  ${invalid_channel}=${0}
+
+    # Description of argument(s):
+    # channel_number     Input channel number.
+    # invalid_channel    This argument indicates whether we checking payload support command
+    #                    for Invalid channel or not.
+    #                    (e.g. 1 indicates checking for invalid channel, 0 indicates valid channel).
+
+    ${channel_number}=  Convert To Hex  ${channel_number}  prefix=0x
+    ${raw_cmd}=  Catenate
+    ...  ${IPMI_RAW_CMD['Payload']['Get_Channel_Payload_Support'][0]}  ${channel_number}
+
+    Run Keyword And Return If  '${invalid_channel}' == '${1}'
+    ...  Verify Invalid IPMI Command  ${raw_cmd}  0xcc
+
+    # will be executed only if invalid_channel == 0.
+    ${resp}=  Run External IPMI Raw Command  ${raw_cmd}
+
+    ${resp}=  Strip String  ${resp}
+    ${expected_resp}=  Catenate
+    ...  ${standard_payload_type_resp}  ${session_setup_payload_resp} 00 00 00 00
+    Should Be Equal  ${expected_resp}  ${resp}
