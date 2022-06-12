@@ -492,3 +492,23 @@ def remove_unicode_from_uri(uri):
     """
 
     return re.sub("`-|\\|-", "", uri)
+
+
+def convert_list_to_string(list):
+    r"""
+    returns list to string.
+    """
+
+    sensor_name = ""
+    for character in list:
+        sensor_name += character
+
+    return sensor_name
+
+
+def get_string_index(input, value):
+    r"""
+    returns index from the string.
+    """
+
+    return input.find(value)
