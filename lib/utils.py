@@ -452,3 +452,33 @@ def zfill_data(data, num):
     """
 
     return data.zfill(int(num))
+
+
+def split_string_create_list(value):
+    r"""
+    split the given value and return as an list.
+
+    For example, if input value was "temp sensor" then this function will return output as like below.
+    ["t", "e", "m", "p"," ", "s", "e", "n", "s", "o", "r"]
+    """
+
+    lst_string = []
+    for index in range(0, len(value), 1):
+        lst_string.append(value[index : index + 1])
+
+    return lst_string
+
+
+def convert_list_to_string(list):
+    r"""
+    join the values in list as an string.
+
+    For example, if input value was '["t", "e", "m", "p"," ", "s", "e", "n", "s", "o", "r"]' then this function
+    will return output as "temp sensor".
+    """
+
+    sensor_name = ""
+    for character in list:
+        sensor_name += character
+
+    return sensor_name
