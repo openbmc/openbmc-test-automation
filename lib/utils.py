@@ -484,3 +484,23 @@ def return_decoded_string(input):
     encoded_string = input.encode("ascii", "ignore")
     decoded_string = encoded_string.decode()
     return decoded_string
+
+
+def convert_list_to_string(list):
+    r"""
+    returns list to string.
+    """
+
+    sensor_name = ""
+    for character in list:
+        sensor_name += character
+
+    return sensor_name
+
+
+def get_string_index(input, value):
+    r"""
+    returns index from the string.
+    """
+
+    return input.find(value)
