@@ -13,7 +13,7 @@ Suite Teardown  Close Browser
 *** Variables ***
 
 ${xpath_snmp_alerts_sub_menu}                     //*[@data-test-id='nav-item-snmp-alerts']
-${xpath_snmp_alerts_heading}                      //h1[text()="SNMP Alerts"]
+${xpath_snmp_alerts_heading}                      //h1[text()="SNMP alerts"]
 ${xpath_select_all_snmp}                          //*[@data-test-id='snmpAlerts-checkbox-selectAll']
 ${xpath_add_destination}                          //button[contains(text(),'Add destination')]
 ${xpath_snmp_alert_destination_heading}           //h5[contains(text(),'Add SNMP alert destination')]
