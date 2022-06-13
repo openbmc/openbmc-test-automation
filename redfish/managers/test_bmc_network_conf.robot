@@ -117,6 +117,10 @@ Configure Hostname And Verify
     Configure Hostname  ${test_hostname}
     Validate Hostname On BMC  ${test_hostname}
 
+    # Verify configured hostname via redfish.
+    ${new_hostname}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+    Should Be Equal  ${new_hostname}  ${test_hostname}
+
 
 Add Valid IPv4 Address And Verify
     [Documentation]  Add IPv4 Address via Redfish and verify.
@@ -169,8 +173,10 @@ Configure Loopback IP
     ${loopback_ip}  ${test_subnet_mask}  ${test_gateway}  ${HTTP_BAD_REQUEST}
 
 Add Valid IPv4 Address And Check Persistency
-    [Documentation]  Add IPv4 address and check peristency.
+    [Documentation]  Add IPv4 address and check persistency.
     [Tags]  Add_Valid_IPv4_Address_And_Check_Persistency
+    [Teardown]  Run Keywords
+    ...  Delete IP Address  ${test_ipv4_addr}  AND  Test Teardown Execution
 
     Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
 
@@ -178,7 +184,8 @@ Add Valid IPv4 Address And Check Persistency
     OBMC Reboot (off)
     Redfish.Login
     Verify IP On BMC  ${test_ipv4_addr}
-    Delete IP Address  ${test_ipv4_addr}
+    Verify IP On Redfish URI  ${test_ipv4_addr}
+
 
 Add Fourth Octet Threshold IP And Verify
     [Documentation]  Add fourth octet threshold IP and verify.
@@ -537,6 +544,7 @@ Configure Multiple Static IPv4 Addresses And Check Persistency
     Redfish.Login
     FOR  ${ip}  IN  @{test_ipv4_addresses}
       Verify IP And Netmask On BMC  ${ip}  ${test_subnet_mask}
+      Verify IP On Redfish URI  ${ip}
     END
 
 
@@ -857,3 +865,20 @@ Verify Network Response On Specified Host State
     Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     Ping Host  ${OPENBMC_HOST}
 
+
+Verify IP On Redfish URI
+    [Documentation]  Verify given IP on redfish uri.
+    [Arguments]  ${ip_address}
+
+    ${network_configurations}=  Get Network Configuration
+    Log  ${network_configurations}
+
+    # Description of argument(s):
+    # ip_address   Configured IP address which need to verified.
+    FOR  ${network_configuration}  IN  @{network_configurations}
+        ${ip_found}=  Set Variable If  '${network_configuration['Address']}' == '${ip_address}'  ${True}
+        ...  ${False}
+        Exit For Loop If  ${ip_found}
+    END
+    Run Keyword If  '${ip_found}' == '${False}'
+    ...  Fail  msg=Configured IP address not found on EthernetInterface URI.
