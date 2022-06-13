@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73717045_3cbcc1c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-13T09:37:59Z",
+      "side": 1,
+      "message": "few minor comments",
+      "revId": "557c66607ab91002be47e6f0c8c20c08e7dd2aff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8b817c2_80110948",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-13T09:37:59Z",
+      "side": 1,
+      "message": "one line space",
+      "range": {
+        "startLine": 221,
+        "startChar": 81,
+        "endLine": 221,
+        "endChar": 82
+      },
+      "revId": "557c66607ab91002be47e6f0c8c20c08e7dd2aff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6642217c_5ce55bf0",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-13T09:37:59Z",
+      "side": 1,
+      "message": "can we move the comment part before the for loop @274",
+      "range": {
+        "startLine": 275,
+        "startChar": 8,
+        "endLine": 283,
+        "endChar": 97
+      },
+      "revId": "557c66607ab91002be47e6f0c8c20c08e7dd2aff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c3ca228_f07ece23",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-13T09:37:59Z",
+      "side": 1,
+      "message": "I guess this is not required.",
+      "range": {
+        "startLine": 366,
+        "startChar": 2,
+        "endLine": 367,
+        "endChar": 14
+      },
+      "revId": "557c66607ab91002be47e6f0c8c20c08e7dd2aff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b1df6e5_98ed3429",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-13T09:37:59Z",
+      "side": 1,
+      "message": "should this be \u0027Set Default FRU Data\u0027 ?",
+      "range": {
+        "startLine": 372,
+        "startChar": 0,
+        "endLine": 372,
+        "endChar": 3
+      },
+      "revId": "557c66607ab91002be47e6f0c8c20c08e7dd2aff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d67d4ed9_c50197d8",
+        "filename": "lib/bmc_dbus.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-13T09:37:59Z",
+      "side": 1,
+      "message": "remove the ${} identifier in arguments description... please check through out the file",
+      "range": {
+        "startLine": 57,
+        "startChar": 9,
+        "endLine": 57,
+        "endChar": 11
+      },
+      "revId": "557c66607ab91002be47e6f0c8c20c08e7dd2aff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78093b1d_982bc653",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-13T09:37:59Z",
+      "side": 1,
+      "message": "mention what is returned ${hex1} and ${hex2}",
+      "range": {
+        "startLine": 619,
+        "startChar": 21,
+        "endLine": 619,
+        "endChar": 73
+      },
+      "revId": "557c66607ab91002be47e6f0c8c20c08e7dd2aff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
