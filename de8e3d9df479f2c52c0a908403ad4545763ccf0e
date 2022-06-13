@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "576af00d_64d488e3",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-13T09:58:11Z",
+      "side": 1,
+      "message": "align according to @23",
+      "range": {
+        "startLine": 24,
+        "startChar": 32,
+        "endLine": 24,
+        "endChar": 33
+      },
+      "revId": "de8e3d9df479f2c52c0a908403ad4545763ccf0e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60311ed1_15ac291b",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-13T09:58:11Z",
+      "side": 1,
+      "message": "... alignment",
+      "range": {
+        "startLine": 191,
+        "startChar": 5,
+        "endLine": 191,
+        "endChar": 15
+      },
+      "revId": "de8e3d9df479f2c52c0a908403ad4545763ccf0e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29072520_e991c61d",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-13T09:58:11Z",
+      "side": 1,
+      "message": "Verify Get Channel Payload Support For Active Channel ??",
+      "range": {
+        "startLine": 211,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 34
+      },
+      "revId": "de8e3d9df479f2c52c0a908403ad4545763ccf0e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16272450_e413f0a6",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-13T09:58:11Z",
+      "side": 1,
+      "message": "alignment",
+      "revId": "de8e3d9df479f2c52c0a908403ad4545763ccf0e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dd921f5_ff0b1376",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-13T09:58:11Z",
+      "side": 1,
+      "message": "Verify Payload Type Version and Verify Payload Version looks confusing..\n\nchange the documentation @465.. what is a payload type?",
+      "range": {
+        "startLine": 464,
+        "startChar": 0,
+        "endLine": 464,
+        "endChar": 27
+      },
+      "revId": "de8e3d9df479f2c52c0a908403ad4545763ccf0e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df43f7ed_e48d1971",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-13T09:58:11Z",
+      "side": 1,
+      "message": "${invalid_channel_num}\n\nChange it in desc also",
+      "range": {
+        "startLine": 486,
+        "startChar": 16,
+        "endLine": 486,
+        "endChar": 34
+      },
+      "revId": "de8e3d9df479f2c52c0a908403ad4545763ccf0e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2c49dfd_9d83f8c5",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-13T09:58:11Z",
+      "side": 1,
+      "message": "Verify Payload Support Based On Channel",
+      "range": {
+        "startLine": 514,
+        "startChar": 0,
+        "endLine": 514,
+        "endChar": 22
+      },
+      "revId": "de8e3d9df479f2c52c0a908403ad4545763ccf0e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
