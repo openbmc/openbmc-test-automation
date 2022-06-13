@@ -29,7 +29,7 @@ Verify Existence Of All Sections In Overview Page
     [Documentation]  Verify existence of all sections in Overview page.
     [Tags]  Verify_Existence_Of_All_Sections_In_Overview_Page
 
-    Page Should Contain  BMC time
+    Page Should Contain  BMC date and time
     Page Should Contain  Firmware information
     Page Should Contain  Server information
     Wait Until Page Contains  Network information  timeout=10
