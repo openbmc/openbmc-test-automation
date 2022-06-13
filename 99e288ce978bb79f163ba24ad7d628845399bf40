@@ -52,6 +52,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dda52485_ec69df28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-06-13T22:34:19Z",
+      "side": 1,
+      "message": "Resolved comments for patchset 5",
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a305dad8_79e0b3a2",
@@ -65,6 +82,30 @@
       "writtenOn": "2022-06-01T11:14:15Z",
       "side": 1,
       "message": "Should be part of suite setup. Applies to all test cases. The other user login can be done at test case level. Also please make sure that default user is the one who has logged in at the end of a test case.",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 17
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00f2a4c6_e0dad9c8",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-06-13T22:34:19Z",
+      "side": 1,
+      "message": "Admin login is moved to Suite Setup which creates/verifies the users involved for testing.  Only required user for testing is logged in for each test case.",
+      "parentUuid": "a305dad8_79e0b3a2",
       "range": {
         "startLine": 33,
         "startChar": 4,
@@ -122,6 +163,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1337a7c1_fa9b3659",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-06-13T22:34:19Z",
+      "side": 1,
+      "message": "1. Order does not matter... This is just the order in the JSON response body\n2. This test case is for the BMC Web implementation",
+      "parentUuid": "7b8f58dc_b09576bb",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 80
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b0c30d7_42f5ee5a",
@@ -135,6 +200,30 @@
       "writtenOn": "2022-06-02T12:43:27Z",
       "side": 1,
       "message": "This confused me for a bit. Please clarify. Here are some ideas rolled together:\n\n    # | ROLE NAME     | ASSIGNED PRIVILEGES\n    # |---------------|--------------------\n    # | Administrator | Login, ConfigureManager, ConfigureUsers, ConfigureComponents, ConfigureSelf.\n    # | Operator      | Login, ConfigureComponents, ConfigureSelf.\n    # | ReadOnly      | Login, ConfigureSelf.",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 40
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e29ea654_9e3874c4",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-06-13T22:34:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b0c30d7_42f5ee5a",
       "range": {
         "startLine": 99,
         "startChar": 0,
@@ -168,6 +257,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4608a122_9f7d7bcc",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-06-13T22:34:19Z",
+      "side": 1,
+      "message": "User creation and verification is now part of Suite Setup.",
+      "parentUuid": "d7f7f3cc_e831ea6f",
+      "range": {
+        "startLine": 131,
+        "startChar": 4,
+        "endLine": 131,
+        "endChar": 18
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8eb66c9_dee7ab8d",
@@ -181,6 +294,30 @@
       "writtenOn": "2022-06-01T11:14:15Z",
       "side": 1,
       "message": "I see that this test and other test assumes that there is a test_user.",
+      "range": {
+        "startLine": 153,
+        "startChar": 4,
+        "endLine": 155,
+        "endChar": 60
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cfb4ea1_6436747d",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-06-13T22:34:19Z",
+      "side": 1,
+      "message": "Again, these users are created in the variables section:\n${test_user}           testuser\n${test_password}       testpassword\n${patched_user}        patchuser",
+      "parentUuid": "b8eb66c9_dee7ab8d",
       "range": {
         "startLine": 153,
         "startChar": 4,
@@ -214,6 +351,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db6f7f56_6cc62c1c",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-06-13T22:34:19Z",
+      "side": 1,
+      "message": "Correct.  After patching ${test_user} account with username of \n${patch_user}, which is patchuser, the attributes (UserName key) will be the same.",
+      "parentUuid": "59f32d3b_60686848",
+      "range": {
+        "startLine": 157,
+        "startChar": 6,
+        "endLine": 157,
+        "endChar": 25
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "243a0a84_2f5f5f4e",
@@ -227,6 +388,30 @@
       "writtenOn": "2022-06-01T11:14:15Z",
       "side": 1,
       "message": "Same comment as above. The users many not exist",
+      "range": {
+        "startLine": 183,
+        "startChar": 1,
+        "endLine": 192,
+        "endChar": 0
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2db9410e_2f63df19",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-06-13T22:34:19Z",
+      "side": 1,
+      "message": "The users exist as they are created and verified Suite Setup.",
+      "parentUuid": "243a0a84_2f5f5f4e",
       "range": {
         "startLine": 183,
         "startChar": 1,
@@ -260,6 +445,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9d34d3c_d25bae03",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-06-13T22:34:19Z",
+      "side": 1,
+      "message": "The variables are assigned in the variables section and passed in the keywords:\n${readonly_user}       testreadonly\n${readonly_password}   readonlypassword",
+      "parentUuid": "d9f319ec_186a0f28",
+      "range": {
+        "startLine": 200,
+        "startChar": 46,
+        "endLine": 200,
+        "endChar": 62
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32a75310_88a1dc92",
@@ -283,6 +492,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8c10290_43ea9b97",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-06-13T22:34:19Z",
+      "side": 1,
+      "message": "Patching with read-only privileges is not allowed.  Same user accounts are used except doing the patching with the readonly user logged in.",
+      "parentUuid": "32a75310_88a1dc92",
+      "range": {
+        "startLine": 215,
+        "startChar": 1,
+        "endLine": 223,
+        "endChar": 47
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca1345b0_22d14a03",
@@ -296,6 +529,30 @@
       "writtenOn": "2022-06-01T11:14:15Z",
       "side": 1,
       "message": "If delete fails it should be ignored. I feel this should be part of test teardown. The test cases should be independent of each other. So a user should be created, tested and deleted at test case level.",
+      "range": {
+        "startLine": 264,
+        "startChar": 1,
+        "endLine": 271,
+        "endChar": 40
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39b12787_db9586b8",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-06-13T22:34:19Z",
+      "side": 1,
+      "message": "User deletion is Suite Teardown and now will be ignored if deletion fails.",
+      "parentUuid": "ca1345b0_22d14a03",
       "range": {
         "startLine": 264,
         "startChar": 1,
