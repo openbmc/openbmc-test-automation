@@ -10,8 +10,8 @@ Suite Teardown  Close Browser
 
 *** Variables ***
 
-${xpath_inventory_and_leds_heading}  //h1[text()="Inventory and LEDs"]
-
+${xpath_inventory_and_leds_heading}         //h1[text()="Inventory and LEDs"]
+${xpath_page_loading_progress_ba}           //*[@aria-label='Page loading progress bar']
 *** Test Cases ***
 
 Verify Navigation To Inventory And LEDs Page
@@ -43,3 +43,4 @@ Suite Setup Execution
     Click Element  ${xpath_hardware_status_menu}
     Click Element  ${xpath_inventory_and_leds_sub_menu}
     Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  inventory
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
