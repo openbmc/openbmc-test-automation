@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30e02af3_319ee4d1",
+        "filename": "gui/gui_test/gui_header/test_profile_settings_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-06-14T12:20:49Z",
+      "side": 0,
+      "message": "These are there with admin user. These seem to be failing in CT because we are running GUI CT via service user. We need to make change in CT options.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 40
+      },
+      "revId": "60784a43ff5afff1011824d04fdf1c0f47310aa3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80afdb25_6de03ac0",
+        "filename": "gui/gui_test/gui_header/test_profile_settings_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-06-14T12:20:49Z",
+      "side": 0,
+      "message": "same comment as above",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 58
+      },
+      "revId": "60784a43ff5afff1011824d04fdf1c0f47310aa3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
