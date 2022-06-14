@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e21049b_8d935713",
+        "filename": "gui/gui_test/hardware_status_menu/test_inventory_and_leds_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-06-14T12:37:08Z",
+      "side": 1,
+      "message": "I believe this is failing because BMC manage is not loading up in the GUI when we are checking it. Best is to wait for some 10 seconds for the whole page to load fully in the suite setup.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 58
+      },
+      "revId": "428584b2c3d4322a6f142e53173606b39c4f2b6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
