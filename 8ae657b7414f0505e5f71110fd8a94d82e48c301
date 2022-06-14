@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6d7fcf0_38ff582b",
+        "filename": "redfish/service_root/test_sessions_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-06-14T13:15:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b05807c_73d47ff9",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 52
+      },
+      "revId": "8ae657b7414f0505e5f71110fd8a94d82e48c301",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "972382b4_29f640e3",
@@ -64,6 +88,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b3341a1_b8f17dc6",
+        "filename": "redfish/service_root/test_sessions_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-06-14T13:15:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "972382b4_29f640e3",
+      "range": {
+        "startLine": 69,
+        "startChar": 36,
+        "endLine": 69,
+        "endChar": 54
+      },
+      "revId": "8ae657b7414f0505e5f71110fd8a94d82e48c301",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49e12b49_0631e090",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-06-14T09:12:28Z",
       "side": 1,
       "message": "u can mention this in [Setup]  Redfish.Logout ?",
+      "range": {
+        "startLine": 74,
+        "startChar": 3,
+        "endLine": 75,
+        "endChar": 18
+      },
+      "revId": "8ae657b7414f0505e5f71110fd8a94d82e48c301",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca749638_6f519336",
+        "filename": "redfish/service_root/test_sessions_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-06-14T13:15:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49e12b49_0631e090",
       "range": {
         "startLine": 74,
         "startChar": 3,
