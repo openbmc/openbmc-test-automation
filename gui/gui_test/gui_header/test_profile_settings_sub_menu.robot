@@ -31,7 +31,6 @@ Verify Existence Of All Sections In Profile Settings Page
     [Tags]  Verify_Existence_Of_All_Sections_In_Profile_Settings_Page
 
     Page Should Contain  Profile information
-    Page Should Contain  Change password
     Page Should Contain  Timezone display preference
 
 
@@ -41,7 +40,6 @@ Verify Existence Of All Buttons And Input Boxes In Profile Settings Page
 
     # Input Boxes in profile settings page.
     Page Should Contain Element  ${xpath_new_password}
-    Page Should Contain Element  ${xpath_confirm_password}
 
     # Buttons in profile settings page.
     Page Should Contain Element  ${xpath_save_settings_button}
