@@ -12,7 +12,7 @@ Suite Teardown  Close Browser
 
 ${xpath_power_heading}             //h1[text()="Power"]
 ${xpath_power_ops_checkbox}        //*[@data-test-id='power-checkbox-togglePowerCapField']
-${xpath_cap_input_button}          //*[@data-test-id='power-input-powerCapValue']
+${xpath_cap_input_button}          //*[@data-test-id='power-input-powerCap']
 ${xpath_submit_button}             //*[@data-test-id='power-button-savePowerCapValue']
 
 *** Test Cases ***
