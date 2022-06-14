@@ -26,7 +26,7 @@ Verify Components On Inventory And LEDs Page
     [Tags]  Verify_Components_On_Inventory_And_LEDs_Page
 
     Page Should Contain  System
-    Page Should Contain  BMC manager
+    Wait Until Page Contains  BMC manager  timeout=10
     Page Should Contain  Chassis
     Page Should Contain  DIMM slot
     Page Should Contain  Fans
