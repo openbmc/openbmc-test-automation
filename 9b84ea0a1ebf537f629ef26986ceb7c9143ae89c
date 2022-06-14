@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bd8af14_12e130e6",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-06-14T12:48:58Z",
+      "side": 1,
+      "message": "Dont comment like this.. You add a check in the Keyword \nRead VMI Static IP Address Using Different Users\n\nUsing Skip If   ${username} \u003d\u003d \u0027operater_user\u0027\n\nusage: https://robotframework.org/robotframework/latest/libraries/BuiltIn.html#Skip%20If",
+      "revId": "9b84ea0a1ebf537f629ef26986ceb7c9143ae89c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
