@@ -11,7 +11,7 @@ Suite Teardown  Close Browser
 *** Variables ***
 
 ${xpath_inventory_and_leds_heading}  //h1[text()="Inventory and LEDs"]
-
+${xpath_bmc_manager}                 //h2[text()="BMC manager"]
 *** Test Cases ***
 
 Verify Navigation To Inventory And LEDs Page
@@ -26,7 +26,7 @@ Verify Components On Inventory And LEDs Page
     [Tags]  Verify_Components_On_Inventory_And_LEDs_Page
 
     Page Should Contain  System
-    Page Should Contain  BMC manager
+    Wait Until Page Contains Element  ${xpath_bmc_manager}
     Page Should Contain  Chassis
     Page Should Contain  DIMM slot
     Page Should Contain  Fans
