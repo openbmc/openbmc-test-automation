@@ -15,8 +15,6 @@ ${xpath_progress_logs_heading}   //h1[text()="Progress logs"]
 ${xpath_search_logs_input}       //*[contains(@id,"searchInput")]
 ${xpath_from_date_input}         //*[@id="input-from-date"]
 ${xpath_to_date_input}           //*[@id="input-to-date"]
-${xpath_select_all_checkbox}     //*[@data-test-id="postCode-checkbox-selectAll"]
-${xpath_progress_action_export}  //*[contains(text(),"Export all")]
 
 
 *** Test Cases ***
@@ -26,14 +24,6 @@ Verify Navigation To Progress Logs Page
     [Tags]  Verify_Navigation_To_Progress_Logs_Page
 
     Page Should Contain Element  ${xpath_progress_logs_heading}
-
-
-Verify Existence Of All Buttons In Progress Logs Page
-    [Documentation]  Verify existence of all buttons in progress logs page.
-    [Tags]  Verify_Existence_Of_All_Buttons_In_Progress_Logs_Page
-
-    Page Should Contain Element  ${xpath_select_all_checkbox}  limit=1
-    Page Should Contain Element  ${xpath_progress_action_export}  limit=1
 
 
 Verify Existence Of All Input Boxes In Progress Logs Page
