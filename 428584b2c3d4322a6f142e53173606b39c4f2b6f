@@ -22,6 +22,30 @@
       },
       "revId": "428584b2c3d4322a6f142e53173606b39c4f2b6f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0684350_7bbeb565",
+        "filename": "gui/gui_test/hardware_status_menu/test_inventory_and_leds_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-06-15T06:14:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e21049b_8d935713",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 58
+      },
+      "revId": "428584b2c3d4322a6f142e53173606b39c4f2b6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
