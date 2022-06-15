@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84ba9a37_0ab11384",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-06-15T10:22:54Z",
+      "side": 1,
+      "message": "minor suggestion",
+      "revId": "915652c9de403b1695f1e8c170592383d9996f4c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32b1732f_9436f7ad",
+        "filename": "gui/gui_test/hardware_status_menu/test_inventory_and_leds_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-06-15T10:22:54Z",
+      "side": 1,
+      "message": "Just keep it  - xpath_page_loading_progress_bar",
+      "range": {
+        "startLine": 46,
+        "startChar": 42,
+        "endLine": 46,
+        "endChar": 78
+      },
+      "revId": "915652c9de403b1695f1e8c170592383d9996f4c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
