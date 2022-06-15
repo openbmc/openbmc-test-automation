@@ -745,11 +745,12 @@ Configure Static Name Servers
 Delete Static Name Servers
     [Documentation]  Delete static name servers.
 
+    DNS Test Setup Execution
     Configure Static Name Servers  static_name_servers=@{EMPTY}
 
     # Check if all name servers deleted on BMC.
     ${nameservers}=  CLI Get Nameservers
-    Should Be Empty  ${nameservers}
+    Should Not Contain  ${nameservers}  ${original_nameservers}
 
 DNS Test Setup Execution
     [Documentation]  Do DNS test setup execution.
