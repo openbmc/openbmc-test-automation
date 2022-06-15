@@ -96,7 +96,7 @@ Verify All Configured IP And Netmask
     FOR  ${network_configuration}  IN  @{network_configurations}
       Verify IP And Netmask On BMC  ${network_configuration['Address']}
       ...  ${network_configuration['SubnetMask']}
-    END
+    
 
 Get Hostname And Verify
     [Documentation]  Get hostname via Redfish and verify.
@@ -745,11 +745,17 @@ Configure Static Name Servers
 Delete Static Name Servers
     [Documentation]  Delete static name servers.
 
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    ${redfish_nameservers}=  Redfish.Get Attribute
+    ...  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  StaticNameServers
+
     Configure Static Name Servers  static_name_servers=@{EMPTY}
 
     # Check if all name servers deleted on BMC.
     ${nameservers}=  CLI Get Nameservers
-    Should Be Empty  ${nameservers}
+    Should Not Contain  ${nameservers}  ${redfish_nameservers}
 
 DNS Test Setup Execution
     [Documentation]  Do DNS test setup execution.
