@@ -16,6 +16,24 @@
       "message": "Dont comment like this.. You add a check in the Keyword \nRead VMI Static IP Address Using Different Users\n\nUsing Skip If   ${username} \u003d\u003d \u0027operater_user\u0027\n\nusage: https://robotframework.org/robotframework/latest/libraries/BuiltIn.html#Skip%20If",
       "revId": "9b84ea0a1ebf537f629ef26986ceb7c9143ae89c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48d6e256_16f5845e",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-06-15T19:45:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bd8af14_12e130e6",
+      "revId": "9b84ea0a1ebf537f629ef26986ceb7c9143ae89c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
