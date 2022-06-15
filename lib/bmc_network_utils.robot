@@ -412,7 +412,9 @@ CLI Get Nameservers
     # nameserver x.x.x.x
     # nameserver y.y.y.y
 
-    ${stdout}  ${stderr}  ${rc}=  BMC Execute Command  egrep nameserver /etc/resolv.conf | cut -f2- -d ' '
+    ${stdout}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  egrep nameserver /etc/resolv.conf | cut -f1- -d '.' -s
+    Log  ${stdout}
     ${nameservers}=  Split String  ${stdout}
 
     [Return]  ${nameservers}
