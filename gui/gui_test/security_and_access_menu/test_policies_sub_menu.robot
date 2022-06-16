@@ -31,9 +31,14 @@ Verify Existence Of All Sections In Policies Page
     [Documentation]  Verify existence of all sections in policies page.
     [Tags]  Verify_Existence_Of_All_Sections_In_Policies_Page
 
-    Page Should Contain  Network services
     Page Should Contain  BMC shell (via SSH)
     Page Should Contain  Network IPMI (out-of-band IPMI)
+    Page Should Contain  Host TPM
+    Page Should Contain  VirtualTPM
+    Page Should Contain  RTAD
+    Page Should Contain  USB firmware update policy
+    Page Should Contain  Secure version lock-in
+    Page Should Contain  Host USB enablement
 
 
 Verify Existence Of All Buttons In Policies Page
