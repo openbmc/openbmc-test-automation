@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92c2fcdb_7ccca8b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-06-16T13:33:19Z",
+      "side": 1,
+      "message": "Sagar/Rahul,  Please review this code. Thakns",
+      "revId": "109f8b71f0002a6070773722db01a8be06382235",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
