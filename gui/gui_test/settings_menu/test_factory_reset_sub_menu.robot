@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation   Test suite for OpenBMC GUI "Factory reset" sub-menu of "Operation" menu.
+Documentation   Test suite for OpenBMC GUI "Factory reset" sub-menu of "Settings" menu.
 
 Resource        ../../lib/gui_resource.robot
 
@@ -53,6 +53,7 @@ Suite Setup Execution
     [Documentation]  Do test suite setup tasks.
 
     Launch Browser And Login GUI
-    Click Element  ${xpath_operations_menu}
+    Click Element  ${xpath_settings_menu}
     Click Element  ${xpath_factory_reset_sub_menu}
     Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  factory-reset
+
