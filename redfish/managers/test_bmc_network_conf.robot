@@ -8,9 +8,10 @@ Resource       ../../lib/openbmc_ffdc.robot
 Library        ../../lib/bmc_network_utils.py
 Library        Collections
 
-Test Setup     Test Setup Execution
-Test Teardown  Test Teardown Execution
-Suite Setup    Suite Setup Execution
+Suite Setup     Suite Setup Execution
+Suite Teardown  Suite Teardown Execution
+Test Setup      Test Setup Execution
+Test Teardown   Test Teardown Execution
 
 Force Tags     Network_Conf_Test
 
@@ -766,11 +767,28 @@ DNS Test Setup Execution
     # Set suite variables to trigger restoration during teardown.
     Set Suite Variable  ${original_nameservers}
 
+
 Suite Setup Execution
     [Documentation]  Do suite setup execution.
 
+    ${DHCPEnabled}=  Get IPV4 DHCPEnabled Status
+    Set Suite Variable  ${DHCPEnabled}
+    ${ip_addr}  ${gateway}  ${subnetmask}=  Get DHCP IP Info
+    Add IP Address  ${ip_addr}  ${subnetmask}  ${gateway}
+    Set Suite Variable  ${ip_addr}
+
     ${test_gateway}=  Get BMC Default Gateway
     Set Suite Variable  ${test_gateway}
+
+
+Suite Teardown Execution
+    [Documentation]  Do suite teardown execution.
+
+    Run Keyword If  ${DHCPEnabled}==True
+    ...  Run Keywords   Enable DHCPv4  AND
+    ...  Verify IP On BMC  ${ip_addr}  AND
+    ...  Validate Network Config On BMC
+
 
 Update IP Address
     [Documentation]  Update IP address of BMC.
@@ -882,3 +900,49 @@ Verify IP On Redfish URI
     END
     Run Keyword If  '${ip_found}' == '${False}'
     ...  Fail  msg=Configured IP address not found on EthernetInterface URI.
+
+
+Enable DHCPv4
+    [Documentation]  Set IPv4 DHCP enabled status true/false in redfish URI.
+    [Arguments]  ${status}=${True}
+
+    # Description of argument(s):
+    # status   IPv4 DHCPEnabled status which needs to be set.
+    #          (e.g. True or False)
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${DHCPv4}=  Create Dictionary  DHCPEnabled=${status}
+
+    ${payload}=  Create Dictionary
+    ...  DHCPv4=${DHCPv4}
+    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body=&{payload}  valid_status_codes=[${HTTP_NO_CONTENT}, ${HTTP_OK}]
+
+    Sleep  ${NETWORK_TIMEOUT}s
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+
+Get IPV4 DHCPEnabled Status
+    [Documentation]  Return IPv4 DHCP enabled status from redfish URI.
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${resp}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  DHCPv4
+    ${status}=  Set Variable  ${resp['DHCPEnabled']}
+    Return From Keyword  ${status}
+
+
+Get DHCP IP Info
+    [Documentation]  Return IP address, gateway and subnetmask from redfish URI.
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${resp_list}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  IPv4Addresses
+    FOR  ${resp}  IN  @{resp_list}
+        Continue For Loop If  '${resp['AddressOrigin']}' != 'DHCP'
+        ${ip_addr}=  Set Variable  ${resp['Address']}
+        ${gateway}=  Set Variable  ${resp['Gateway']}
+        ${subnetmask}=  Set Variable  ${resp['SubnetMask']}
+        Return From Keyword  ${ip_addr}  ${gateway}  ${subnetmask}
+    END
