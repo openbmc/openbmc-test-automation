@@ -157,6 +157,7 @@ Verify Enable NTP
     # The following patch command should set the ["NTP"]["ProtocolEnabled"] property to "True".
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'ProtocolEnabled': ${True}}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    Verify System Time Sync Status  ${True}
     ${ntp}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  NTP
     Rprint Vars  ntp
     Valid Value  ntp["ProtocolEnabled"]  valid_values=[True]
@@ -174,6 +175,19 @@ Verify Immediate Consumption Of BMC Date
     # host_state
     on
     off
+
+
+Verify Set DateTime With NTP Enabled
+    [Documentation]  Verify whether set managers dateTime is restricted with NTP enabled.
+    [Tags]  Verify_Set_DateTime_With_NTP_Enabled
+
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'ProtocolEnabled': ${True}}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    ${ntp}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  NTP
+    Valid Value  ntp["ProtocolEnabled"]  valid_values=[True]
+    ${local_system_time}=  Get Current Date
+    Redfish Set DateTime  ${local_system_time}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}, ${HTTP_INTERNAL_SERVER_ERROR}]
 
 
 *** Keywords ***
@@ -293,3 +307,21 @@ Set BMC Date And Verify
     ${current_value}=  Redfish Get DateTime
     ${time_diff}=  Subtract Date From Date  ${current_value}  ${new_value}
     Should Be True  '${time_diff}'<='3'
+
+
+Verify System Time Sync Status
+    [Documentation]  Verify the status of service systemd-timesyncd matches the NTP protocol enabled state.
+    [Arguments]  ${expected_sync_status}=${True}
+
+    # Description of argument(s):
+    # expected_sync_status  expected status at which NTP protocol enabled will be updated for verification
+    #                       (eg. True, False).
+
+    ${resp}=  BMC Execute Command
+    ...  sh --login -c "systemctl status systemd-timesyncd"
+    ...  ignore_err=${1}
+    ${sync_status}=  Get Lines Matching Regexp  ${resp[0]}  .*Active.*
+    Run Keyword If  ${expected_sync_status}==${True}
+    ...  Should Contain  ${sync_status}  active (running)
+    Run Keyword If  ${expected_sync_status}==${False}
+    ...  Should Contain  ${sync_status}  inactive (dead)
