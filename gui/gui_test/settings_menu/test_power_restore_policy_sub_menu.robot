@@ -38,7 +38,7 @@ Verify Existence Of All Buttons In Power Restore Policy Page
     [Documentation]  Verify existence of All Buttons.
     [Tags]  Verify_Existence_Of_All_Buttons_In_Power_Restore_Policy_Page
 
-    Page Should Contain Element  ${xpath_AlwaysOn_radio}
+    Wait Until Page Contains Element   ${xpath_AlwaysOn_radio}
     Page Should Contain Element  ${xpath_AlwaysOff_radio}
     Page Should Contain Element  ${xpath_LastState_radio}
     Page Should Contain Element  ${xpath_save_settings_button}
