@@ -16,7 +16,7 @@ ${xpath_AlwaysOn_radio}                //input[@value='AlwaysOn']
 ${xpath_AlwaysOff_radio}               //input[@value='AlwaysOff']
 ${xpath_LastState_radio}               //input[@value='LastState']
 ${xpath_save_settings_button}          //button[contains(text(),'Save settings')]
-
+${xpath_page_loading_progress_ba}      //*[@aria-label='Page loading progress bar']
 
 *** Test Cases ***
 
@@ -52,3 +52,4 @@ Test Setup Execution
     Click Element  ${xpath_settings_menu}
     Click Element  ${xpath_power_restore_policy_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  power-restore-policy
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
