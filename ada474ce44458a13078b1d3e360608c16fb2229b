@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f41c6ff_6bb9d8f5",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-06-17T12:09:15Z",
+      "side": 1,
+      "message": "Setting DHCP mode to false , the current IP address leased from DHCP will still be used as static IP address, so network connection lost is not happening in this case.",
+      "parentUuid": "94375fbc_8a1d6621",
+      "range": {
+        "startLine": 776,
+        "startChar": 4,
+        "endLine": 776,
+        "endChar": 65
+      },
+      "revId": "ada474ce44458a13078b1d3e360608c16fb2229b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d79ce973_499584ca",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-06-16T14:45:51Z",
       "side": 1,
       "message": "This is not required as if the system is not connected to a DHCP server we might loose the connection to the system right?",
+      "range": {
+        "startLine": 784,
+        "startChar": 4,
+        "endLine": 784,
+        "endChar": 55
+      },
+      "revId": "ada474ce44458a13078b1d3e360608c16fb2229b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5239aeb5_f3aa553b",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-06-17T12:09:15Z",
+      "side": 1,
+      "message": "In teardown, the system IPv4 DHCP is enabled only if the IPAddressSource was initially in DHCP in SuiteSetup.",
+      "parentUuid": "d79ce973_499584ca",
       "range": {
         "startLine": 784,
         "startChar": 4,
