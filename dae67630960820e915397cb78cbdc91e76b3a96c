@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca1791ec_823c6cb1",
+        "filename": "gui/gui_test/settings_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-06-17T05:27:14Z",
+      "side": 1,
+      "message": "I would say add  logic to see if the progress bar completes in the suite setup. This would make sure that all the elements are there on the page and test would not fail",
+      "range": {
+        "startLine": 41,
+        "startChar": 3,
+        "endLine": 41,
+        "endChar": 62
+      },
+      "revId": "dae67630960820e915397cb78cbdc91e76b3a96c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
