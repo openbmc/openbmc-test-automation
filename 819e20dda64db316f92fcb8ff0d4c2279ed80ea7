@@ -69,6 +69,30 @@
       },
       "revId": "819e20dda64db316f92fcb8ff0d4c2279ed80ea7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cddeb63_44355282",
+        "filename": "gui/gui_test/settings_menu/test_power_restore_policy_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-06-20T06:39:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "266af555_ab92fcfb",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 83
+      },
+      "revId": "819e20dda64db316f92fcb8ff0d4c2279ed80ea7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
