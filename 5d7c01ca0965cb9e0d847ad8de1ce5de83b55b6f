@@ -69,6 +69,30 @@
       },
       "revId": "5d7c01ca0965cb9e0d847ad8de1ce5de83b55b6f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b488af8f_ad882d7e",
+        "filename": "gui/gui_test/operations_menu/test_host_console_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-06-20T06:23:23Z",
+      "side": 1,
+      "message": "Done,Removed test",
+      "parentUuid": "c77032f1_84d5eea5",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 95
+      },
+      "revId": "5d7c01ca0965cb9e0d847ad8de1ce5de83b55b6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
