@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d88e627_7d3d884c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-06-21T05:28:09Z",
+      "side": 1,
+      "message": "This is a good idea to run this suite on dhcp enabled BMC and restore BMC into original state/mode after execution.\nBut this code will bring system into non reachable state as soon as dhcp is disabled, if it is in DHCP mode. (If your BMC uses dynamic IP despite disabling DHCP you need to have defect)\nThese test cases are designed in such way that, primary IP address of BMC is untouched through out execution as to keep connectivity intact.\nSo same technique to be used here as well.\nIn suite setup:\n1. check if it is dhcp enabled\n2. If enabled, note down the IP \u0026 mode. Don\u0027t disable it.\n3. Configure Static IP on BMC, this IP should be the same IP that is noted down in step 2\n4. In suite teardown restore the mode.",
+      "revId": "ada474ce44458a13078b1d3e360608c16fb2229b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94375fbc_8a1d6621",
