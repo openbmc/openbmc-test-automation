@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6939576_13bd7d48",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-06-22T06:04:55Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 99,
+        "startChar": 7,
+        "endLine": 99,
+        "endChar": 11
+      },
+      "revId": "ecf7089a779aa6f0e4155ba667f5a84d126852ba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9b822f6_5d7e2545",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 752,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-06-22T06:04:55Z",
+      "side": 1,
+      "message": "remove this code and re-use DNS test setup execution",
+      "range": {
+        "startLine": 748,
+        "startChar": 0,
+        "endLine": 752,
+        "endChar": 72
+      },
+      "revId": "ecf7089a779aa6f0e4155ba667f5a84d126852ba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
