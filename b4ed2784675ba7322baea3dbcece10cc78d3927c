@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7a9b46d_39beced8",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-06-23T06:10:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1301aa39_5e75452e",
+      "range": {
+        "startLine": 99,
+        "startChar": 7,
+        "endLine": 99,
+        "endChar": 8
+      },
+      "revId": "b4ed2784675ba7322baea3dbcece10cc78d3927c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a598210a_090a0770",
@@ -41,6 +65,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c14e2e7_b47deb8e",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-06-23T06:10:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a598210a_090a0770",
+      "revId": "b4ed2784675ba7322baea3dbcece10cc78d3927c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6219822_0b150685",
@@ -54,6 +96,24 @@
       "writtenOn": "2022-06-23T05:43:28Z",
       "side": 1,
       "message": "also check that StaticName Servers in redfish GET is empty",
+      "revId": "b4ed2784675ba7322baea3dbcece10cc78d3927c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c3d136e_27d98265",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-06-23T06:10:10Z",
+      "side": 1,
+      "message": "I\u0027m checking ${nameservers} (on BMC) with ${original_nameservers} which is the redfish GET output from DNS Test Setup Execution.",
+      "parentUuid": "d6219822_0b150685",
       "revId": "b4ed2784675ba7322baea3dbcece10cc78d3927c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
