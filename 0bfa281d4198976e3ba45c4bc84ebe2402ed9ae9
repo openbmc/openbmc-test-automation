@@ -63,6 +63,30 @@
       },
       "revId": "0bfa281d4198976e3ba45c4bc84ebe2402ed9ae9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95224f9b_df458b29",
+        "filename": "lib/sensor_info_record.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-06-23T08:48:46Z",
+      "side": 1,
+      "message": "Removed following keywords from lib/sensor_info_record.robot\nValidate Two Threshold Values\nValidate Three Threshold Values\nValidate Four Threshold Values\nValidate Five Threshold Values\nValidate Six Threshold Values\n\nAnd added \"Validate Threshold Values\" keyword to validate threshold values of an sensor.\n\nChanges has been done and uploaded in patch set 5. kindly check it.",
+      "parentUuid": "ad2d82ef_14ee4499",
+      "range": {
+        "startLine": 323,
+        "startChar": 0,
+        "endLine": 323,
+        "endChar": 29
+      },
+      "revId": "0bfa281d4198976e3ba45c4bc84ebe2402ed9ae9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
