@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b86a5166_17b2a26a",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-06-24T07:28:13Z",
+      "side": 1,
+      "message": "use same keyword to get static name servers and it should be empty.",
+      "revId": "48447c0c65bf3207d7bad54c9634a637a21ef095",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "250f9d7c_fd72e7e6",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-06-24T07:28:13Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 762,
+        "startChar": 0,
+        "endLine": 762,
+        "endChar": 4
+      },
+      "revId": "48447c0c65bf3207d7bad54c9634a637a21ef095",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
