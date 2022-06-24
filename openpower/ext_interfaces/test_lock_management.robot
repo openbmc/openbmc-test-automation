@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation           Test lock management feature of management console on BMC.
+Documentation           Test lock management features of management console on BMC.
 
 Resource                ../../lib/resource.robot
 Resource                ../../lib/openbmc_ffdc.robot
