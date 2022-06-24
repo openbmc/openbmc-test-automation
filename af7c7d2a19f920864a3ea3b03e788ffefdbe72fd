@@ -33,6 +33,24 @@
       "message": "Suggestion : change features to feature.",
       "revId": "af7c7d2a19f920864a3ea3b03e788ffefdbe72fd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7febe2b0_371bd77f",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001509
+      },
+      "writtenOn": "2022-06-24T11:46:30Z",
+      "side": 1,
+      "message": "Address your comments",
+      "parentUuid": "dfc294b7_12291b72",
+      "revId": "af7c7d2a19f920864a3ea3b03e788ffefdbe72fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
