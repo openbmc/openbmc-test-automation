@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02d140a1_ece5e5fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-06-27T09:28:28Z",
+      "side": 1,
+      "message": "I am done reviewing the scripts.",
+      "revId": "87f27712cbf38f8eb1c91daba39493daf9c4a943",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "413c84ee_e39c80d6",
@@ -266,6 +283,190 @@
         "startChar": 6,
         "endLine": 130,
         "endChar": 16
+      },
+      "revId": "87f27712cbf38f8eb1c91daba39493daf9c4a943",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2ef5ba0_99e46cff",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-06-27T09:28:28Z",
+      "side": 1,
+      "message": "Get response from IPMI FRU command and format data\n...  with Board or Product serial as key and corresponding data as value.",
+      "range": {
+        "startLine": 140,
+        "startChar": 21,
+        "endLine": 141,
+        "endChar": 77
+      },
+      "revId": "87f27712cbf38f8eb1c91daba39493daf9c4a943",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd436842_4800de6d",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-06-27T09:28:28Z",
+      "side": 1,
+      "message": "FRU. Please change throughout the script",
+      "range": {
+        "startLine": 145,
+        "startChar": 60,
+        "endLine": 145,
+        "endChar": 63
+      },
+      "revId": "87f27712cbf38f8eb1c91daba39493daf9c4a943",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "575d42b3_263cbe7c",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-06-27T09:28:28Z",
+      "side": 1,
+      "message": "A default value should be given for this variable in case it is not set in FOR loop.",
+      "range": {
+        "startLine": 180,
+        "startChar": 30,
+        "endLine": 180,
+        "endChar": 51
+      },
+      "revId": "87f27712cbf38f8eb1c91daba39493daf9c4a943",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2dde653_f265efb2",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-06-27T09:28:28Z",
+      "side": 1,
+      "message": "${ent1}\u003d  Set Variable  ${entry[0].strip()}",
+      "range": {
+        "startLine": 195,
+        "startChar": 1,
+        "endLine": 198,
+        "endChar": 53
+      },
+      "revId": "87f27712cbf38f8eb1c91daba39493daf9c4a943",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b430d68_8ac36f9a",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-06-27T09:28:28Z",
+      "side": 1,
+      "message": "Is this required? The FOR loop would continue anyway right?",
+      "range": {
+        "startLine": 229,
+        "startChar": 10,
+        "endLine": 230,
+        "endChar": 32
+      },
+      "revId": "87f27712cbf38f8eb1c91daba39493daf9c4a943",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b989a6a_38d3d64f",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-06-27T09:28:28Z",
+      "side": 1,
+      "message": "BMC",
+      "range": {
+        "startLine": 239,
+        "startChar": 47,
+        "endLine": 239,
+        "endChar": 50
+      },
+      "revId": "87f27712cbf38f8eb1c91daba39493daf9c4a943",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bb83f50_3c28f45d",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-06-27T09:28:28Z",
+      "side": 1,
+      "message": "IPMI change everywhere",
+      "range": {
+        "startLine": 240,
+        "startChar": 24,
+        "endLine": 240,
+        "endChar": 28
+      },
+      "revId": "87f27712cbf38f8eb1c91daba39493daf9c4a943",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c638fe_bae2aea5",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-06-27T09:28:28Z",
+      "side": 1,
+      "message": "Change the name of this variable to something more descriptive to denote which value it holds. Modify the description to be concise.",
+      "range": {
+        "startLine": 241,
+        "startChar": 6,
+        "endLine": 241,
+        "endChar": 12
       },
       "revId": "87f27712cbf38f8eb1c91daba39493daf9c4a943",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
