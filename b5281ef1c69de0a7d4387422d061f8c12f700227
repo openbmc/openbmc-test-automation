@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d99e8b12_87327b16",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-06-28T17:19:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b8f3a12_3749fb25",
+      "range": {
+        "startLine": 2,
+        "startChar": 16,
+        "endLine": 2,
+        "endChar": 59
+      },
+      "revId": "b5281ef1c69de0a7d4387422d061f8c12f700227",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca3b1a3e_30482277",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-06-28T06:54:25Z",
       "side": 1,
       "message": "json --\u003e Json",
+      "range": {
+        "startLine": 187,
+        "startChar": 31,
+        "endLine": 187,
+        "endChar": 35
+      },
+      "revId": "b5281ef1c69de0a7d4387422d061f8c12f700227",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e792c86d_18feb7f6",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-06-28T17:19:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca3b1a3e_30482277",
       "range": {
         "startLine": 187,
         "startChar": 31,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3644cb1c_95688baa",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-06-28T17:19:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "058a977d_7df6e1da",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 199,
+        "endChar": 36
+      },
+      "revId": "b5281ef1c69de0a7d4387422d061f8c12f700227",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37527772_2b81c4ac",
@@ -93,6 +165,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62adc510_4e25bf3c",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-06-28T17:19:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37527772_2b81c4ac",
+      "range": {
+        "startLine": 232,
+        "startChar": 21,
+        "endLine": 232,
+        "endChar": 51
+      },
+      "revId": "b5281ef1c69de0a7d4387422d061f8c12f700227",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e2d3954_1f4a6d2d",
@@ -106,6 +202,30 @@
       "writtenOn": "2022-06-28T06:54:25Z",
       "side": 1,
       "message": "No need of separate keyword\n\nIn setting just mention as -\u003e Test Teardown    Redfish.Logout",
+      "range": {
+        "startLine": 247,
+        "startChar": 1,
+        "endLine": 248,
+        "endChar": 24
+      },
+      "revId": "b5281ef1c69de0a7d4387422d061f8c12f700227",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a73da8e_4008d3b4",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-06-28T17:19:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e2d3954_1f4a6d2d",
       "range": {
         "startLine": 247,
         "startChar": 1,
