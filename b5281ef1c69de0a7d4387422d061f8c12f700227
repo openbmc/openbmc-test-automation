@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b8f3a12_3749fb25",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-28T06:54:25Z",
+      "side": 1,
+      "message": "also mention for various users such as test, admin, operator, readonly, patched.\n\nplease add it",
+      "range": {
+        "startLine": 2,
+        "startChar": 16,
+        "endLine": 2,
+        "endChar": 59
+      },
+      "revId": "b5281ef1c69de0a7d4387422d061f8c12f700227",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca3b1a3e_30482277",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-28T06:54:25Z",
+      "side": 1,
+      "message": "json --\u003e Json",
+      "range": {
+        "startLine": 187,
+        "startChar": 31,
+        "endLine": 187,
+        "endChar": 35
+      },
+      "revId": "b5281ef1c69de0a7d4387422d061f8c12f700227",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "058a977d_7df6e1da",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-28T06:54:25Z",
+      "side": 1,
+      "message": "Create And Verify Various Privilege Users",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 199,
+        "endChar": 36
+      },
+      "revId": "b5281ef1c69de0a7d4387422d061f8c12f700227",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37527772_2b81c4ac",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-28T06:54:25Z",
+      "side": 1,
+      "message": "provide full info in doc",
+      "range": {
+        "startLine": 232,
+        "startChar": 21,
+        "endLine": 232,
+        "endChar": 51
+      },
+      "revId": "b5281ef1c69de0a7d4387422d061f8c12f700227",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e2d3954_1f4a6d2d",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-06-28T06:54:25Z",
+      "side": 1,
+      "message": "No need of separate keyword\n\nIn setting just mention as -\u003e Test Teardown    Redfish.Logout",
+      "range": {
+        "startLine": 247,
+        "startChar": 1,
+        "endLine": 248,
+        "endChar": 24
+      },
+      "revId": "b5281ef1c69de0a7d4387422d061f8c12f700227",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
