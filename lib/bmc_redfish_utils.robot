@@ -250,8 +250,7 @@ Redfish Create User
     ${payload}=  Create Dictionary
     ...  UserName=${user_name}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
 
-    Run Keyword If  ${force} == ${True} or ${user_exists} == ${False}
-    ...  Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
+    Run Keyword If  ${force} == ${True}  Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
     ...  valid_status_codes=[${HTTP_CREATED}]
 
 
