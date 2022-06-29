@@ -18,7 +18,7 @@ Test Teardown    Test Teardown Execution
 ${SYSTEM_SHUTDOWN_TIME}    ${5}
 
 # Strings to check from journald.
-${REBOOT_REGEX}    ^\-- Boot
+${REBOOT_REGEX}    ^\-- Boot | Startup finished*
 
 *** Test Cases ***
 
@@ -125,7 +125,8 @@ Redfish BMC Manager GracefulRestart When Host Off
     Verify BMC RTC And UTC Time Drift
 
     # Check for journald persistency post reboot.
-    Check For Regex In Journald  ${REBOOT_REGEX}  error_check=${1}
+    Wait Until Keyword Succeeds  3 min  10 sec
+    ...  Check For Regex In Journald  ${REBOOT_REGEX}  error_check=${1}
 
 
 Redfish BMC Manager ForceRestart When Host Off
@@ -154,7 +155,8 @@ Redfish BMC Manager ForceRestart When Host Off
     Verify BMC RTC And UTC Time Drift
 
     # Check for journald persistency post reboot.
-    Check For Regex In Journald  ${REBOOT_REGEX}  error_check=${1}
+    Wait Until Keyword Succeeds  3 min  10 sec
+    ...  Check For Regex In Journald  ${REBOOT_REGEX}  error_check=${1}
 
 
 Verify Boot Count After BMC Reboot
