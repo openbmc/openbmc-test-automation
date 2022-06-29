@@ -84,6 +84,24 @@ Verify Sessions Defaults
     Valid Value  sessions['Name']  ['Session Collection']
     Valid Value  sessions['Members@odata.count']  [${sessions_count}]
 
+    # Disable ServiceEnabled and try to create session.
+    ${resp_patch}=  Redfish.Patch  /redfish/v1/SessionService
+    ...  body={'ServiceEnabled':'False'}  valid_status_codes=[${HTTP_CREATED}, ${HTTP_NO_CONTENT}]
+
+    ${session_service}=  Redfish.Get Properties  /redfish/v1/SessionService
+    Rprint Vars  session_service
+    Valid Value  session_service['ServiceEnabled']  [${False}]
+
+    ${resp_post}=  Redfish.Post  /redfish/v1/SessionService/Sessions
+    ...  body={'UserName':'admin_user', 'Password': 'TestPwd123'}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+    ${resp_patch}=  Redfish.Patch  /redfish/v1/SessionService/Sessions
+    ...  body={'ServiceEnabled':'True'}  valid_status_codes=[${HTTP_CREATED}, ${HTTP_NO_CONTENT}]
+    ${session_service}=  Redfish.Get Properties  /redfish/v1/SessionService
+    Rprint Vars  session_service
+    Valid Value  session_service['ServiceEnabled']  [${True}]
+
 
 Verify Current Session Defaults
     [Documentation]  Verify Current session default property values.
