@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14dec5f7_38faa346",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-06-29T15:34:23Z",
+      "side": 1,
+      "message": "Why are we deleting this ? it say we already have.. but why this is left at first place. If its old code leave as it is. ",
+      "revId": "7fd46455a54ba35ad117760dd1a3228b6dfafc69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
