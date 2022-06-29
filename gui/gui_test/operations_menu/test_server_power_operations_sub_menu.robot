@@ -67,10 +67,10 @@ Verify Existence Of All Sections In Server Power Operations Page
     [Tags]  Verify_Existence_Of_All_Sections_In_Server_Power_Operations_Page
 
     # Added a delay for the page to load boot settings section.
-    Wait Until Page Contains  Boot settings  timeout=5
+    Wait Until Page Contains  Server power operations  timeout=5
     Page Should Contain  Current status
-    Page Should Contain  Boot settings
     Page Should Contain  Operations
+    Page Should Contain  Settings
 
 
 Verify Existence Of All Input Boxes In Host Os Boot Settings
