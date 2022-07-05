@@ -693,6 +693,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c2f9314_8a28256f",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-07-05T14:49:23Z",
+      "side": 1,
+      "message": "Yes. You are right. My bad.",
+      "parentUuid": "96e2f372_ac57835a",
+      "range": {
+        "startLine": 180,
+        "startChar": 30,
+        "endLine": 180,
+        "endChar": 51
+      },
+      "revId": "87f27712cbf38f8eb1c91daba39493daf9c4a943",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2dde653_f265efb2",

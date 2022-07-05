@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "962ca2e2_a514f12f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-07-05T14:49:23Z",
+      "side": 1,
+      "message": "Minor one.",
+      "revId": "6486180d6daba6d30bf3a1003496a3efa4b3053e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "103dfab4_f0bfd591",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 14
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-07-05T14:49:23Z",
+      "side": 1,
+      "message": "parameter_name",
+      "range": {
+        "startLine": 282,
+        "startChar": 14,
+        "endLine": 282,
+        "endChar": 27
+      },
+      "revId": "6486180d6daba6d30bf3a1003496a3efa4b3053e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
