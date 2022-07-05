@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b9d931a_e3bb5639",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-05T14:53:50Z",
+      "side": 1,
+      "message": "Mention in points what are u doing in the suite",
+      "range": {
+        "startLine": 771,
+        "startChar": 21,
+        "endLine": 772,
+        "endChar": 46
+      },
+      "revId": "9fe0d53b49e6935be91a76a686384c3233daba2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d1055e8_6fc0a989",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-05T14:53:50Z",
+      "side": 1,
+      "message": "one line space after @775",
+      "range": {
+        "startLine": 775,
+        "startChar": 2,
+        "endLine": 775,
+        "endChar": 38
+      },
+      "revId": "9fe0d53b49e6935be91a76a686384c3233daba2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71255d41_06bde57e",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-05T14:53:50Z",
+      "side": 1,
+      "message": "Mention in points what are u doing in the suite teardown",
+      "range": {
+        "startLine": 785,
+        "startChar": 21,
+        "endLine": 785,
+        "endChar": 49
+      },
+      "revId": "9fe0d53b49e6935be91a76a686384c3233daba2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ec14a3a_9cfb8a12",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-05T14:53:50Z",
+      "side": 1,
+      "message": "Enable IPv4 DHCP Settings",
+      "range": {
+        "startLine": 905,
+        "startChar": 0,
+        "endLine": 905,
+        "endChar": 13
+      },
+      "revId": "9fe0d53b49e6935be91a76a686384c3233daba2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47ccea33_1f4d327f",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-05T14:53:50Z",
+      "side": 1,
+      "message": "add it in the same line @917",
+      "range": {
+        "startLine": 918,
+        "startChar": 2,
+        "endLine": 918,
+        "endChar": 25
+      },
+      "revId": "9fe0d53b49e6935be91a76a686384c3233daba2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c619539c_1259e230",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 926,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-05T14:53:50Z",
+      "side": 1,
+      "message": "DHCP Enabled",
+      "range": {
+        "startLine": 926,
+        "startChar": 9,
+        "endLine": 926,
+        "endChar": 20
+      },
+      "revId": "9fe0d53b49e6935be91a76a686384c3233daba2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3979e8d_236313d6",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-05T14:53:50Z",
+      "side": 1,
+      "message": "Return DHCP",
+      "range": {
+        "startLine": 937,
+        "startChar": 27,
+        "endLine": 937,
+        "endChar": 28
+      },
+      "revId": "9fe0d53b49e6935be91a76a686384c3233daba2c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
