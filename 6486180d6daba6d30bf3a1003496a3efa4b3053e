@@ -39,6 +39,30 @@
       },
       "revId": "6486180d6daba6d30bf3a1003496a3efa4b3053e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c02f7da0_3e325366",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 14
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-07-06T06:14:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "103dfab4_f0bfd591",
+      "range": {
+        "startLine": 282,
+        "startChar": 14,
+        "endLine": 282,
+        "endChar": 27
+      },
+      "revId": "6486180d6daba6d30bf3a1003496a3efa4b3053e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
