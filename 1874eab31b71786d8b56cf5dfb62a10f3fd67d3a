@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "026baac3_c49bbaa6",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-06T08:33:51Z",
+      "side": 1,
+      "message": "not checked it recently, hope you are able to configure same IP??",
+      "range": {
+        "startLine": 785,
+        "startChar": 0,
+        "endLine": 785,
+        "endChar": 23
+      },
+      "revId": "1874eab31b71786d8b56cf5dfb62a10f3fd67d3a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f34aff4a_9e1c7922",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-06T08:33:51Z",
+      "side": 1,
+      "message": "this is not required, same IP is not guaranteed.",
+      "range": {
+        "startLine": 801,
+        "startChar": 0,
+        "endLine": 802,
+        "endChar": 39
+      },
+      "revId": "1874eab31b71786d8b56cf5dfb62a10f3fd67d3a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
