@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3db6fb7_d8a81d28",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-06T10:09:52Z",
+      "side": 1,
+      "message": "Any reason for removing the test case there ?\n\nTest FRU Device Name",
+      "revId": "1f87c8511c464ccdbe31f8507e96cb4089d324b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
