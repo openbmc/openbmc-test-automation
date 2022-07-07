@@ -654,7 +654,8 @@ Suite Setup Execution
     ...  and prepares administrative user list suite variables.
 
     Check Enabled User Count
-    Determine Root User Id
+    # Skip root user checking if user decides not to use root user as default.
+    Run Keyword If  '${IPMI_USERNAME}' == 'root'  Determine Root User Id
 
 
 Check Enabled User Count
