@@ -307,6 +307,8 @@ Modify BMC Date
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
     ...  body={'NTP':{'ProtocolEnabled': ${False}}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
-    Sleep  2s
-    Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${new_time}'}
+
+    # NTP network takes few seconds to restart.
+    Wait Until Keyword Succeeds  30 sec  10 sec
+    ...  Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${new_time}'}
     ...  valid_status_codes=[${HTTP_OK}]
