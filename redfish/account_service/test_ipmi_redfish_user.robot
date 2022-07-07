@@ -20,6 +20,7 @@ ${operator_level_priv}  3
 # Refer:  #openbmc/phosphor-user-manager/blob/master/user_mgr.cpp
 # ipmiMaxUsers = 15;    <-- IPMI
 # maxSystemUsers = 30;  <-- Max system redfish account users allowed
+${ipmi_max_num_users}   ${15}
 ${max_num_users}        ${30}
 ${empty_name_pattern}   ^User Name\\s.*\\s:\\s$
 
@@ -210,7 +211,7 @@ Verify Failure To Exceed Max Number Of Users
 
     @{username_list}=  Create List
 
-    # Create users to reach maximum users count (i.e. 15 users).
+    # Create users to reach maximum users count (i.e. 30 users).
     FOR  ${INDEX}  IN RANGE  ${current_user_count}  ${max_num_users}
       ${random_username}=  Generate Random String  8  [LETTERS]
       Set To Dictionary  ${payload}  UserName  ${random_username}
@@ -294,7 +295,8 @@ Test Teardown Execution
 Find Free User Id
     [Documentation]  Find a userid that is not being used.
     FOR    ${jj}    IN RANGE    300
-        ${random_userid}=  Evaluate  random.randint(1, ${max_num_users})  modules=random
+        # IPMI maximum users count (i.e. 15 users).
+        ${random_userid}=  Evaluate  random.randint(1, ${ipmi_max_num_users})  modules=random
         ${access}=  Run IPMI Standard Command  channel getaccess 1 ${random_userid}
 
         ${name_line}=  Get Lines Containing String  ${access}  User Name
