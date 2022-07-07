@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97c0fdfa_ea17c557",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-07T16:07:09Z",
+      "side": 1,
+      "message": "static constexpr size_t ipmiMaxUsers \u003d 15;\nstatic constexpr size_t maxSystemUsers \u003d 30;\n\nTypo in the commit message.. correct one is this",
+      "revId": "48d998e9d6dd6a85c988e0325646b80515f62c36",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
