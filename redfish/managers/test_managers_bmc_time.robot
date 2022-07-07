@@ -20,8 +20,8 @@ ${max_time_diff_in_seconds}  6
 ${date_time_with_offset}     2019-04-25T26:24:46+00:00
 ${expected_date_time}        2019-04-26T02:24:46+00:00
 ${invalid_datetime}          "2019-04-251T12:24:46+00:00"
-${ntp_server_1}              "9.9.9.9"
-${ntp_server_2}              "2.2.3.3"
+${ntp_server_1}              9.9.9.9
+${ntp_server_2}              2.2.3.3
 &{original_ntp}              &{EMPTY}
 
 *** Test Cases ***
@@ -105,18 +105,16 @@ Verify DateTime Persists After Reboot
 
 
 Verify NTP Server Set
-    [Documentation]  Verify NTP server set.
+    [Documentation]  Patch NTP servers and verify NTP servers is set.
     [Tags]  Verify_NTP_Server_Set
+    [Setup]  Set NTP state  ${True}
 
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
     ...  body={'NTP':{'NTPServers': ['${ntp_server_1}', '${ntp_server_2}']}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
-    ${network_protocol}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
-    Should Contain  ${network_protocol["NTP"]["NTPServers"]}  ${ntp_server_1}
-    ...  msg=NTP server value ${ntp_server_1} not stored.
-    Should Contain  ${network_protocol["NTP"]["NTPServers"]}  ${ntp_server_2}
-    ...  msg=NTP server value ${ntp_server_2} not stored.
 
+    # NTP network take few seconds to reload.
+    Wait Until Keyword Succeeds  30 sec  10 sec  Verify NTP Servers Are Populated
 
 Verify NTP Server Value Not Duplicated
     [Documentation]  Verify NTP servers value not same for both primary and secondary server.
@@ -133,17 +131,16 @@ Verify NTP Server Value Not Duplicated
 Verify NTP Server Setting Persist After BMC Reboot
     [Documentation]  Verify NTP server setting persist after BMC reboot.
     [Tags]  Verify_NTP_Server_Setting_Persist_After_BMC_Reboot
+    [Setup]  Set NTP state  ${True}
 
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
     ...  body={'NTP':{'NTPServers': ['${ntp_server_1}', '${ntp_server_2}']}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
     Redfish OBMC Reboot (off)
     Redfish.Login
-    ${network_protocol}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
-    Should Contain  ${network_protocol["NTP"]["NTPServers"]}  ${ntp_server_1}
-    ...  msg=NTP server value ${ntp_server_1} not stored.
-    Should Contain  ${network_protocol["NTP"]["NTPServers"]}  ${ntp_server_2}
-    ...  msg=NTP server value ${ntp_server_2} not stored.
+
+    # NTP network take few seconds to reload.
+    Wait Until Keyword Succeeds  30 sec  10 sec  Verify NTP Servers Are Populated
 
 
 Verify Enable NTP
@@ -293,3 +290,14 @@ Set BMC Date And Verify
     ${current_value}=  Redfish Get DateTime
     ${time_diff}=  Subtract Date From Date  ${current_value}  ${new_value}
     Should Be True  '${time_diff}'<='3'
+
+Verify NTP Servers Are Populated
+    [Documentation]  Redfish GET request /redfish/v1/Managers/bmc/NetworkProtocol response
+    ...              and verify if NTP servers are populated.
+
+    ${network_protocol}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
+    Should Contain  ${network_protocol["NTP"]["NTPServers"]}  ${ntp_server_1}
+    ...  msg=NTP server value ${ntp_server_1} not stored.
+    Should Contain  ${network_protocol["NTP"]["NTPServers"]}  ${ntp_server_2}
+    ...  msg=NTP server value ${ntp_server_2} not stored.
+
