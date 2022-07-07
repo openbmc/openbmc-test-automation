@@ -18,8 +18,8 @@ ${valid_password2}      0penBmc2
 ${admin_level_priv}     4
 ${operator_level_priv}  3
 # Refer:  #openbmc/phosphor-user-manager/blob/master/user_mgr.cpp
-# ipmiMaxUserNameLen = 16;    <-- IPMI
-# systemMaxUserNameLen = 30;  <-- Redfish account users
+# ipmiMaxUsers = 15;    <-- IPMI
+# maxSystemUsers = 30;  <-- Max system redfish account users allowed
 ${max_num_users}        ${30}
 ${empty_name_pattern}   ^User Name\\s.*\\s:\\s$
 
