@@ -317,7 +317,7 @@ Verify Identify LED State Via Redfish
     ${systems}=  Redfish_Utils.Get Member List  /redfish/v1/Systems
     FOR  ${system}  IN  @{systems}
         ${led_value}=  Redfish.Get Attribute  ${system}  IndicatorLED
-        # Get attribute return None if IndicatorLED doesnt exist in the URI.
+        # Get attribute return None if IndicatorLED does not exist in the URI.
         Continue For Loop If  '${led_value}' == 'None'
         Should Be True  '${led_value}' == '${expected_state}'
     END

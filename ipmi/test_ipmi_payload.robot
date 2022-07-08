@@ -130,7 +130,7 @@ Verify Set User Access Payload For Invalid User
 
 Verify Set User Access Payload For Invalid Channel Number
     [Documentation]  Verify set user access payload IPMI command for invalid channel number.
-    [Tags]  Verify_Set_User_Access_Payload_for_Invalid_Channel_Number
+    [Tags]  Verify_Set_User_Access_Payload_For_Invalid_Channel_Number
     [Teardown]  Delete Created User  ${userid}
 
     ${userid}  ${username}=  Create And Verify IPMI User
