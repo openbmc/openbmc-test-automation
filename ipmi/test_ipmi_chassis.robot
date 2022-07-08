@@ -11,6 +11,10 @@ Suite Setup      Redfish.Login
 Suite Teardown   Redfish.Logout
 Test Teardown    Test Teardown Execution
 
+*** Variables ***
+
+# Timeout value in minutes. Default 3 minutes.
+${IPMI_POWEROFF_WAIT_TIMEOUT}    3
 
 *** Test Cases ***
 
@@ -57,7 +61,7 @@ Verify Soft Shutdown
 
     Redfish Power On  stack_mode=skip
     Run IPMI Standard Command  chassis power soft
-    Wait Until Keyword Succeeds  3 min  10 sec  Is Host Off Via IPMI
+    Wait Until Keyword Succeeds  ${IPMI_POWEROFF_WAIT_TIMEOUT} min  10 sec  Is Host Off Via IPMI
 
 
 Verify Chassis Power Cycle And Check Chassis Status Via IPMI
