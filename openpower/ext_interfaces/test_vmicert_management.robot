@@ -21,8 +21,8 @@ Suite Teardown    Suite Teardown Execution
 @{OPERATOR}       operator_user           TestPwd123
 @{ReadOnly}       readonly_user           TestPwd123
 @{NoAccess}       noaccess_user           TestPwd123
-&{USERS}          Administrator=${ADMIN}  Operator=${OPERATOR}  ReadOnly=${ReadOnly}
-...               NoAccess=${NoAccess}
+# Removing Operator, need to add it back once support is given.
+&{USERS}          Administrator=${ADMIN}  ReadOnly=${ReadOnly}
 ${VMI_BASE_URI}   /ibm/v1/
 
 
@@ -36,14 +36,8 @@ Get CSR Request Signed By VMI And Verify
     # username           password             force_create  valid_csr  valid_status_code
     ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  ${True}       ${True}    ${HTTP_OK}
 
-    # Send CSR request from operator user.
-    operator_user        TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
-
     # Send CSR request from ReadOnly user.
     readonly_user        TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
-
-    # Send CSR request from NoAccess user.
-    noaccess_user        TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
 
 
 Get Root Certificate Using Different Privilege Users Role
@@ -55,14 +49,8 @@ Get Root Certificate Using Different Privilege Users Role
     # Request root certificate from admin user.
     admin_user     TestPwd123  ${True}       ${True}    ${HTTP_OK}
 
-    # Request root certificate from operator user.
-    operator_user  TestPwd123  ${False}      ${True}    ${HTTP_FORBIDDEN}
-
     # Request root certificate from ReadOnly user.
     readonly_user  TestPwd123  ${False}      ${True}    ${HTTP_FORBIDDEN}
-
-    # Request root certificate from NoAccess user.
-    noaccess_user  TestPwd123  ${False}      ${True}    ${HTTP_FORBIDDEN}
 
 
 Send CSR Request When VMI Is Off And Verify
@@ -75,31 +63,21 @@ Send CSR Request When VMI Is Off And Verify
     # username           password             force_create  valid_csr  valid_status_code         read_timeout
     ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  ${True}       ${True}    ${HTTP_SERVICE_UNAVAILABLE}   60
 
-    # Send CSR request from operator user.
-    operator_user        TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
-
     # Send CSR request from ReadOnly user.
     readonly_user        TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
 
-    # Send CSR request from NoAccess user.
-    noaccess_user        TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
 
 Get Corrupted CSR Request Signed By VMI And Verify
     [Documentation]  Send corrupted CSR for signing and expect an error.
     [Tags]  Get_Corrupted_CSR_Request_Signed_By_VMI_And_Verify
     [Template]  Get Certificate Signed By VMI
 
-    # username           password             force_create  valid_csr   valid_status_code        read_timeout
-    ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  ${True}       ${False}    ${HTTP_SERVICE_UNAVAILABLE}    60
-
-    # Send CSR request from operator user.
-    operator_user        TestPwd123           ${False}      ${False}    ${HTTP_FORBIDDEN}
+    # username           password             force_create  valid_csr   valid_status_code    read_timeout
+    ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  ${True}       ${False}    ${HTTP_BAD_REQUEST}  60
 
     # Send CSR request from ReadOnly user.
     readonly_user        TestPwd123           ${False}      ${False}    ${HTTP_FORBIDDEN}
 
-    # Send CSR request from NoAccess user.
-    noaccess_user        TestPwd123           ${False}      ${False}    ${HTTP_FORBIDDEN}
 
 Get Root Certificate When VMI Is Off And Verify
     [Documentation]  Get root certificate when vmi is off and verify.
@@ -111,14 +89,8 @@ Get Root Certificate When VMI Is Off And Verify
     # username           password             force_create  valid_csr  valid_status_code
     ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  ${True}       ${True}    ${HTTP_OK}
 
-    # Request root certificate from operator user.
-    operator_user        TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
-
     # Request root certificate from ReadOnly user.
     readonly_user        TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
-
-    # Request root certificate from NoAccess user.
-    noaccess_user        TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
 
 
 Get Root Certificate After BMC Reboot And Verify
@@ -130,14 +102,9 @@ Get Root Certificate After BMC Reboot And Verify
     # username            password             force_create  valid_csr  valid_status_code
     ${OPENBMC_USERNAME}   ${OPENBMC_PASSWORD}  ${True}       ${True}    ${HTTP_OK}
 
-    # Request root certificate from operator user.
-    operator_user         TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
-
     # Request root certificate from ReadOnly user.
     readonly_user         TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
 
-    # Request root certificate from NoAccess user.
-    noaccess_user         TestPwd123           ${False}      ${True}    ${HTTP_FORBIDDEN}
 
 Get Concurrent Root Certificate Requests From Multiple Admin Users
     [Documentation]  Get multiple concurrent root certificate requests from multiple admins
@@ -153,6 +120,7 @@ Get Concurrent Root Certificate Requests From Multiple Admin Users
         ...  msg=One or more operations has failed.
     END
 
+
 Get Concurrent CSR Requests From Multiple Admin Users
     [Documentation]  Get multiple concurrent csr requests from multiple admins and verify no errors.
     [Tags]  Get_Concurrent_CSR_Requests_From_Multiple_Admin_Users
@@ -167,18 +135,22 @@ Get Concurrent CSR Requests From Multiple Admin Users
         ...  msg=One or more operations has failed.
     END
 
+
 Get Concurrent Corrupted CSR Requests From Multiple Admin Users
     [Documentation]  Get multiple concurrent corrupted csr requests from multiple admins and verify no errors.
     [Tags]  Get_Concurrent_Corrupted_CSR_Requests_From_Multiple_Admin_Users
 
     FOR  ${i}  IN RANGE  ${5}
         ${dict}=  Execute Process Multi Keyword  ${5}
-        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_INTERNAL_SERVER_ERROR}
-        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_INTERNAL_SERVER_ERROR}
-        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_INTERNAL_SERVER_ERROR}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_BAD_REQUEST}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_BAD_REQUEST}
+        ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_BAD_REQUEST}
         Dictionary Should Not Contain Value  ${dict}  False
         ...  msg=One or more operations has failed.
     END
+
+
+*** Comment ***
 
 Get Concurrent Root Certificate Request From Operator Users
     [Documentation]  Get multiple concurrent root certificate from non admin users and verify no errors.
@@ -193,6 +165,9 @@ Get Concurrent Root Certificate Request From Operator Users
         ...  msg=One or more operations has failed.
     END
 
+
+*** Test Cases ***
+
 Get Concurrent Root Certificate Request From Admin And Non Admin Users
     [Documentation]  Get multiple concurrent root certificate from admin and non admin users
     ...  and verify no errors.
@@ -201,11 +176,13 @@ Get Concurrent Root Certificate Request From Admin And Non Admin Users
     FOR  ${i}  IN RANGE  ${5}
         ${dict}=  Execute Process Multi Keyword  ${5}
         ...  Get Root Certificate ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
-        ...  Get Root Certificate operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
         ...  Get Root Certificate readonly_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
         Dictionary Should Not Contain Value  ${dict}  False
         ...  msg=One or more operations has failed.
     END
+
+
+*** Comment ***
 
 Get Concurrent Root Certificate Request From Different Non Admin Users
     [Documentation]  Get multiple concurrent root certificate from different non admin users
@@ -221,6 +198,7 @@ Get Concurrent Root Certificate Request From Different Non Admin Users
         ...  msg=One or more operations has failed.
     END
 
+
 Get Concurrent CSR Request From Operator Users
     [Documentation]  Get multiple concurrent csr request from non admin users and verify no errors.
     [Tags]  Get_Concurrent_CSR_Request_From_Operator_Users
@@ -233,6 +211,9 @@ Get Concurrent CSR Request From Operator Users
         Dictionary Should Not Contain Value  ${dict}  False
         ...  msg=One or more operations has failed.
     END
+
+
+*** Test Cases ***
 
 Get Root Certificate And Send CSR Request Concurrently And Verify
     [Documentation]  Get root certificate and send csr request concurrently and
@@ -247,6 +228,7 @@ Get Root Certificate And Send CSR Request Concurrently And Verify
         ...  msg=One or more operations has failed.
     END
 
+
 Get Concurrent Root Certificate And Send CSR Request And Verify
     [Documentation]  Get concurrent root certificate and send csr request
     ...  and verify gets root certificate and signed certificate.
@@ -260,6 +242,7 @@ Get Concurrent Root Certificate And Send CSR Request And Verify
         Dictionary Should Not Contain Value  ${dict}  False
         ...  msg=One or more operations has failed.
     END
+
 
 Get Root Certificate And Send Multiple CSR Requests Concurrently And Verify
     [Documentation]  Get root certificate and send multiple csr requests concurrently and
@@ -277,6 +260,7 @@ Get Root Certificate And Send Multiple CSR Requests Concurrently And Verify
         ...  msg=One or more operations has failed.
     END
 
+
 Get Root Certificate And Send Multiple Corrupted CSR Requests Concurrently And Verify
     [Documentation]  Get root certificate and send multiple corrupted csr requests concurrently and
     ...  verify gets root certificate and error for corrupted csr requests.
@@ -291,6 +275,7 @@ Get Root Certificate And Send Multiple Corrupted CSR Requests Concurrently And V
         Dictionary Should Not Contain Value  ${dict}  False
         ...  msg=One or more operations has failed.
     END
+
 
 Send Concurrent CSR Request And Corrupted CSR Request And Verify
     [Documentation]  Send concurrent csr request and corrupted csr request
@@ -307,6 +292,7 @@ Send Concurrent CSR Request And Corrupted CSR Request And Verify
         ...  msg=One or more operations has failed.
     END
 
+
 Get Root Certificate Send CSR And Corrupted CSR Request Concurrently And Verify
     [Documentation]  Get root certificate send csr and corrupted csr requests concurrently and
     ...  verify gets root certificate and certificate for valid csr and error for corrupted csr.
@@ -322,6 +308,7 @@ Get Root Certificate Send CSR And Corrupted CSR Request Concurrently And Verify
         ...  msg=One or more operations has failed.
     END
 
+
 Send Concurrent CSR Request From Admin And Non Admin Users And Verify
     [Documentation]  Send concurrent csr requests from admin and non-admin users and verify
     ...  admin gets certificate and non-admin gets error.
@@ -330,11 +317,13 @@ Send Concurrent CSR Request From Admin And Non Admin Users And Verify
     FOR  ${i}  IN RANGE  ${5}
         ${dict}=  Execute Process Multi Keyword  ${5}
         ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
-        ...  Get Certificate Signed By VMI operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
         ...  Get Certificate Signed By VMI readonly_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
         Dictionary Should Not Contain Value  ${dict}  False
         ...  msg=One or more operations has failed.
     END
+
+
+*** Comment ***
 
 Send Concurrent CSR Request From Non Admin Users And Verify
     [Documentation]  Send concurrent csr request from non admin users
@@ -349,6 +338,7 @@ Send Concurrent CSR Request From Non Admin Users And Verify
         Dictionary Should Not Contain Value  ${dict}  False
         ...  msg=One or more operations has failed.
     END
+
 
 Get Root Certificate And Send Corrupted CSR From Admin CSR Request From Operator Concurrently
     [Documentation]  Get root certificate and send corrupted csr request from admin and
@@ -365,6 +355,7 @@ Get Root Certificate And Send Corrupted CSR From Admin CSR Request From Operator
         Dictionary Should Not Contain Value  ${dict}  False
         ...  msg=One or more operations has failed.
     END
+
 
 Get Root Certificate From Operator And Send Corrupted CSR Request And CSR Request From Admin Concurrently
     [Documentation]  Get root certificate from operator and send corrupted csr request
@@ -398,6 +389,7 @@ Get Root Certificate From Operator And Admin Send CSR Request From Admin Concurr
         ...  msg=One or more operations has failed.
     END
 
+
 Send CSR Request From Admin And Operator And Corrupted CSR From Admin Concurrently And Verify
     [Documentation]  Send csr request from admin and operator and corrupted
     ...  csr request from admin and verify gets signed certificate for valid csr for admin
@@ -412,6 +404,7 @@ Send CSR Request From Admin And Operator And Corrupted CSR From Admin Concurrent
         Dictionary Should Not Contain Value  ${dict}  False
         ...  msg=One or more operations has failed.
     END
+
 
 Send Corrupted CSR Requests From Admin And Operator And CSR Request From Admin Concurrently And Verify
     [Documentation]  Send corrupted csr request from admin and operator and csr request
@@ -428,6 +421,7 @@ Send Corrupted CSR Requests From Admin And Operator And CSR Request From Admin C
         ...  msg=One or more operations has failed.
     END
 
+
 Send Corrupted CSR Requests From Admin And Operator User Concurrently And Verify
     [Documentation]  Send corrupted csr requests from admin and operator and
     ...  verify gets error.
@@ -442,6 +436,9 @@ Send Corrupted CSR Requests From Admin And Operator User Concurrently And Verify
         ...  msg=One or more operations has failed.
     END
 
+
+*** Test Cases ***
+
 Get Root Certificate From Admin And Send CSR Requests From Non Admin Concurrently And Verify
     [Documentation]  Get root certificate from admin and csr requests from
     ...  non admin users concurrently and verify gets root certificate for admin and
@@ -451,11 +448,11 @@ Get Root Certificate From Admin And Send CSR Requests From Non Admin Concurrentl
     FOR  ${i}  IN RANGE  ${5}
         ${dict}=  Execute Process Multi Keyword  ${5}
         ...  Get Root Certificate ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${True} ${HTTP_OK}
-        ...  Get Certificate Signed By VMI operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
         ...  Get Certificate Signed By VMI readonly_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
         Dictionary Should Not Contain Value  ${dict}  False
         ...  msg=One or more operations has failed.
     END
+
 
 Get Root Certificate And Send CSR Requests From Non Admin Users Concurrently And Verify
     [Documentation]  Get root certificate and send csr requests from non admin
@@ -464,13 +461,12 @@ Get Root Certificate And Send CSR Requests From Non Admin Users Concurrently And
 
     FOR  ${i}  IN RANGE  ${5}
         ${dict}=  Execute Process Multi Keyword  ${5}
-        ...  Get Root Certificate operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
         ...  Get Root Certificate readonly_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
         ...  Get Certificate Signed By VMI readonly_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
-        ...  Get Certificate Signed By VMI noaccess_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
         Dictionary Should Not Contain Value  ${dict}  False
         ...  msg=One or more operations has failed.
     END
+
 
 Send Corrupted CSR Request From Admin And CSR Requests From Non Admin Concurrently And Verify
     [Documentation]  Send corrupted csr request from admin and csr request from non admin
@@ -480,11 +476,11 @@ Send Corrupted CSR Request From Admin And CSR Requests From Non Admin Concurrent
     FOR  ${i}  IN RANGE  ${5}
         ${dict}=  Execute Process Multi Keyword  ${5}
         ...  Get Certificate Signed By VMI ${OPENBMC_USERNAME} ${OPENBMC_PASSWORD} ${True} ${False} ${HTTP_INTERNAL_SERVER_ERROR}
-        ...  Get Certificate Signed By VMI operator_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
         ...  Get Certificate Signed By VMI readonly_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
         Dictionary Should Not Contain Value  ${dict}  False
         ...  msg=One or more operations has failed.
     END
+
 
 Send CSR Request And Corrupted CSR Requests From Non Admin Users Concurrently And Verify
     [Documentation]  Send csr and corrupted csr request from non admin users
@@ -493,13 +489,14 @@ Send CSR Request And Corrupted CSR Requests From Non Admin Users Concurrently An
 
     FOR  ${i}  IN RANGE  ${5}
         ${dict}=  Execute Process Multi Keyword  ${5}
-        ...  Get Certificate Signed By VMI operator_user TestPwd123 ${True} ${False} ${HTTP_FORBIDDEN}
         ...  Get Certificate Signed By VMI readonly_user TestPwd123 ${True} ${False} ${HTTP_FORBIDDEN}
-        ...  Get Certificate Signed By VMI noaccess_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
         ...  Get Certificate Signed By VMI readonly_user TestPwd123 ${True} ${True} ${HTTP_FORBIDDEN}
         Dictionary Should Not Contain Value  ${dict}  False
         ...  msg=One or more operations has failed.
     END
+
+
+*** Comment ***
 
 Get Root Certificate And Send CSR Requests From Admin And Operator Concurrently And Verify
     [Documentation]  Get root certificate from admin and send csr requests
@@ -531,6 +528,7 @@ Get Root Certificate And Send Corrupted CSR Requests From Admin And Operator Con
         Dictionary Should Not Contain Value  ${dict}  False
         ...  msg=One or more operations has failed.
     END
+
 
 *** Keywords ***
 
