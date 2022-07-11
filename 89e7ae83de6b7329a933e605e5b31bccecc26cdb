@@ -33,6 +33,41 @@
       "message": "${devices} \u003d FRU Device Description : dimm32 (ID 33) Device not present (Unspecified error)\n\n\n\n15:44:19.805\tFAIL\tIndexError: Given index 1 is out of the range 0-0.\n\n\nIt doesnt need to work for all FRUs but can we handle the exception.",
       "revId": "89e7ae83de6b7329a933e605e5b31bccecc26cdb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fff9ab1_2d051f0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-07-11T11:31:23Z",
+      "side": 1,
+      "message": "Actually An fru device should show either product number or serial number in ipmi fru command response. An Dictionary will be created based on mapping either serial number / part number got from ipmi fru command response as an key and its corresponding fru device response as an value.",
+      "revId": "89e7ae83de6b7329a933e605e5b31bccecc26cdb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c55d6e87_37e0c633",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-07-11T11:31:23Z",
+      "side": 1,
+      "message": "Actually An fru device should show either product number or serial number in ipmi fru command response. An Dictionary will be created based on mapping either serial number / part number got from ipmi fru command response as an key and its corresponding fru device response as an value.",
+      "parentUuid": "436944f5_d250288d",
+      "revId": "89e7ae83de6b7329a933e605e5b31bccecc26cdb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
