@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88c5790b_c99f6aab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-07-11T07:09:39Z",
+      "side": 1,
+      "message": "Due to some misunderstanding this test case was removed. Now again i added this test case back in the script.",
+      "revId": "89e7ae83de6b7329a933e605e5b31bccecc26cdb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

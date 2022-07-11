@@ -16,6 +16,24 @@
       "message": "Any reason for removing the test case there ?\n\nTest FRU Device Name",
       "revId": "1f87c8511c464ccdbe31f8507e96cb4089d324b9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8e5a18c_9ced1249",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-07-11T07:09:39Z",
+      "side": 1,
+      "message": "Due to some misunderstanding this test case was removed. Now again i added this test case back in the script.",
+      "parentUuid": "a3db6fb7_d8a81d28",
+      "revId": "1f87c8511c464ccdbe31f8507e96cb4089d324b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
