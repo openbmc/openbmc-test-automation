@@ -16,6 +16,23 @@
       "message": "Due to some misunderstanding this test case was removed. Now again i added this test case back in the script.",
       "revId": "89e7ae83de6b7329a933e605e5b31bccecc26cdb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "436944f5_d250288d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-11T10:20:41Z",
+      "side": 1,
+      "message": "${devices} \u003d FRU Device Description : dimm32 (ID 33) Device not present (Unspecified error)\n\n\n\n15:44:19.805\tFAIL\tIndexError: Given index 1 is out of the range 0-0.\n\n\nIt doesnt need to work for all FRUs but can we handle the exception.",
+      "revId": "89e7ae83de6b7329a933e605e5b31bccecc26cdb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
