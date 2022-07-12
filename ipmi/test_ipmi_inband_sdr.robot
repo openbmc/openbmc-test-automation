@@ -211,7 +211,7 @@ Verify Reserve Device SDR Repository For Partial Record
 
     # Check whether the response for Get device SDR command is obtained with the given Reservation ID.
     ${resp}=  Run Inband IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x${reserve_id[0]} 0x${reserve_id[1]} 0x00 0x00 0x00 0x0f
+    ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x${reserve_id[0]} 0x${reserve_id[1]} 0x00 0x00 0x01 0x0f
     ${resp}=  Split String  ${resp}
     # Record data starts from ${resp[2]}.
     ${resp}=  Set Variable  ${resp[2:]}
@@ -230,7 +230,7 @@ Verify Reserve Device SDR Repository For Partial Record After BMC Reboot
 
     # Check whether the response for Get device SDR command is obtained with the given Reservation ID.
     ${resp1}=  Run Inband IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x${reserve_id[0]} 0x${reserve_id[1]} 0x00 0x00 0x00 0x0f
+    ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x${reserve_id[0]} 0x${reserve_id[1]} 0x00 0x00 0x01 0x0f
 
     # Reboot bmc.
     IPMI MC Reset Cold (run)
@@ -239,7 +239,7 @@ Verify Reserve Device SDR Repository For Partial Record After BMC Reboot
     # Reserve IDs are volatile so once bmc is rebooted, new Reserve ID should be generated.
     ${resp2}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Reserve_Repository'][5]}*
     ...  Run Inband IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x${reserve_id[0]} 0x${reserve_id[1]} 0x00 0x00 0x00 0x0f
+    ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x${reserve_id[0]} 0x${reserve_id[1]} 0x00 0x00 0x01 0x0f
 
 
 Verify Reserve Device SDR Repository Invalid Reservation ID For Partial Record
@@ -258,7 +258,7 @@ Verify Reserve Device SDR Repository Invalid Reservation ID For Partial Record
     # Once Reservation ID is overwritten, old Reservation ID will be invalid.
     ${resp1}=   Run Keyword and Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Reserve_Repository'][5]}*
     ...  Run Inband IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x${reserve_id[0]} 0x${reserve_id[1]} 0x00 0x00 0x00 0x0f
+    ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x${reserve_id[0]} 0x${reserve_id[1]} 0x00 0x00 0x01 0x0f
 
 
 Verify Get Device SDR For Maximum Record Via IPMI
