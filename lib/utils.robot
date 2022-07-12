@@ -1085,3 +1085,22 @@ PLDM Get BIOS Attribute
     Redfish.login
     ${bmc_status}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  Status
     Should Be Equal  ${bmc_status["State"]}  Enabled
+
+
+Verify Host Power State
+    [Documentation]  Get the Host Power state and compare it with the expected state.
+    [Arguments]  ${expected_power_state}
+
+    # Description of argument(s):
+    # expected_power_state   State of Host e.g. Off or On.
+
+    ${power_state}  ${health_status}=  Redfish Get Host State
+    Should Be Equal  ${power_state}  ${expected_power_state}
+
+
+Verify Host Is Up
+    [Documentation]  Verify Host is Up.
+
+    Wait Until Keyword Succeeds  3 min  30 sec  Verify Host Power State  On
+    # Python module:  os_execute(cmd)
+    Wait Until Keyword Succeeds  10 min  30 sec  OS Execute Command  uptime
