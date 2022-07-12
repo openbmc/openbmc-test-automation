@@ -158,6 +158,7 @@ Test TPM Enable SDR Info
     ...  ELSE IF  '${state_ipmi}' == 'State Asserted'
     ...    Should Be True  ${state_rest} == ${1}
 
+
 Test Reserve SDR Repository
     [Documentation]  Verify Reserve SDR Repository IPMI command.
     [Tags]  Test_Reserve_SDR_Repository
@@ -168,7 +169,8 @@ Test Reserve SDR Repository
     ${new_reservation_id}=  Get Reservation ID  convert_lsb_to_msb=True
 
     Should Not Be Equal  ${reservation_id}  ${new_reservation_id}
-    ...  msg=Getting same reseravtion ID for second time, reservation ID must be different.
+    ...  msg=Getting same reservation ID for second time, reservation ID must be different.
+
 
 Test Get SDR Using Reservation ID
    [Documentation]  Verify get SDR command using reservation ID obtained from Reserve SDR repository.
@@ -181,7 +183,8 @@ Test Get SDR Using Reservation ID
 
    # Get SDR Partially using Reservation ID.
    ${get_sdr_raw_cmd}=  Catenate
-   ...  ${IPMI_RAW_CMD['SDR']['Get'][1]} ${reservation_id} ${IPMI_RAW_CMD['SDR']['Get'][2]}
+   ...  ${IPMI_RAW_CMD['Get SDR']['Get'][1]} ${reservation_id} 0x${record_id} 0x00
+   ...  ${IPMI_RAW_CMD['Get SDR']['Get'][2]}
    Run External IPMI Raw Command  ${get_sdr_raw_cmd}
 
    # Get SDR partially without using reservation ID and expect error.
@@ -196,11 +199,11 @@ Test Get SDR Using Invalid Reservation ID
     ${first_reservation_id}=  Get Reservation ID  add_prefix=True
     ${second_reservation_id}=  Get Reservation ID  add_prefix=True
 
-    # Creating raw command with First reservation ID.
+    # Creating the raw cmd with First reservation ID.
     ${get_sdr_raw_cmd}=  Catenate
-    ...  ${IPMI_RAW_CMD['SDR']['Get'][1]} ${first_reservation_id} ${IPMI_RAW_CMD['SDR']['Get'][2]}
+    ...  ${IPMI_RAW_CMD['Get SDR']['Get'][1]} ${first_reservation_id} 0x${record_id} 0x00
+    ...  ${IPMI_RAW_CMD['Get SDR']['Get'][2]}
 
-    Verify Invalid IPMI Command  ${get_sdr_raw_cmd}  0xc5
 
 Test Reserve SDR Repository After BMC Reboot
     [Documentation]  Verify reserve SDR repository reservation ID after BMC Reboot.
@@ -212,16 +215,21 @@ Test Reserve SDR Repository After BMC Reboot
     # Cold reset BMC
     IPMI MC Reset Cold (run)
 
+    # Waiting to for sdr to populate.
+    Sleep  10s
+
     # Create Get SDR Partially command using reservation ID which got before reboot.
     ${get_sdr_raw_cmd}=  Catenate
-    ...  ${IPMI_RAW_CMD['SDR']['Get'][1]} ${reservation_id_before_reboot} ${IPMI_RAW_CMD['SDR']['Get'][2]}
+    ...  ${IPMI_RAW_CMD['Get SDR']['Get'][1]} ${reservation_id_before_reboot} 0x${record_id} 0x00
+    ...  ${IPMI_RAW_CMD['Get SDR']['Get'][2]}
 
     Verify Invalid IPMI Command  ${get_sdr_raw_cmd}  0xc5
 
     #  Verify get SDR partially with new reservation ID after reboot.
     ${reservation_id_after_reboot}=  Get Reservation ID  add_prefix=True
     ${get_sdr_raw_cmd}=  Catenate
-    ...  ${IPMI_RAW_CMD['SDR']['Get'][1]} ${reservation_id_after_reboot} ${IPMI_RAW_CMD['SDR']['Get'][2]}
+    ...  ${IPMI_RAW_CMD['Get SDR']['Get'][1]} ${reservation_id_after_reboot} 0x${record_id} 0x00
+    ...  ${IPMI_RAW_CMD['Get SDR']['Get'][2]}
     Run External IPMI Raw Command  ${get_sdr_raw_cmd}
 
 
@@ -401,11 +409,23 @@ Fetch IPMI Command Support Status
     [Return]  ${cmd_support}
 
 
+Get SDR Record ID
+    [Documentation]  Fetch one record ID from SDR elist IPMI cmd response.
+
+    ${resp}=  Run External IPMI Standard Command  sdr elist
+    ${record_id}=  Get Regexp Matches  ${resp}  \\|\\s+([0-9]+)h\\s+\\|  1
+
+    [Return]  ${record_id[0]}
+
+
 Suite Setup Execution
     [Documentation]  Do the initial suite setup.
 
     Redfish.Login
     Redfish Power On  stack_mode=skip  quiet=1
+
+    ${record_id}=  Get SDR Record ID
+    Set Suite Variable  ${record_id}
 
     ${uri_list}=  Read Properties  ${OPENBMC_BASE_URI}list
     Set Suite Variable  ${SYSTEM_URI}  ${uri_list}

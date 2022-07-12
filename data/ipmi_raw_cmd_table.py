@@ -467,7 +467,7 @@ IPMI_RAW_CMD = {
             # Netfunction and cmd.
             "0x0a 0x23",
             # Record ID offset and bytes to read.
-            "0x00 0x00 0x01 0x0f",
+            "0x01 0x0f",
             #  Raw command To Get SDR Partial without Reservation ID.
             "0x0a 0x23 0x00 0x00 0x00 0x00 0x01 0x0f"
         ],
