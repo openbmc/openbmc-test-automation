@@ -18,24 +18,45 @@ Test Teardown   Test Teardown Execution
 
 *** Variables ****
 
+${CMD_ENABLE_TPO}      busctl set-property xyz.openbmc_project.State.ScheduledHostTransition
+...   /xyz/openbmc_project/state/host0 xyz.openbmc_project.State.ScheduledHostTransition
+...   ScheduledTransition s "xyz.openbmc_project.State.Host.Transition.On"
+
 ${CMD_SET_TPO_TIME}    busctl set-property xyz.openbmc_project.State.ScheduledHostTransition
 ...  /xyz/openbmc_project/state/host0 xyz.openbmc_project.State.ScheduledHostTransition ScheduledTime t
 
 ${CMD_GET_TPO_TIME}    busctl get-property xyz.openbmc_project.State.ScheduledHostTransition
 ...  /xyz/openbmc_project/state/host0 xyz.openbmc_project.State.ScheduledHostTransition ScheduledTime
 
+# Time in seconds.
 ${TIMER_POWER_ON}      100
 
 
 *** Test Cases ***
 
-Set And Return Timer For Power ON
-    [Documentation]  Set time for power ON using busctl command and verify.
-    [Tags]  Set_And_Return_Timer_For_Power_ON
+Test Timed Powered On Via BMC
+    [Documentation]  Set time to power on host attribute ScheduledTime and expect
+    ...              the system to boot on scheduled time.
+    [Tags]  Test_Timed_Powered_On_Via_BMC
+
+    # Make sure the host is powered off.
+    Redfish Power Off  stack_mode=skip
+
+    # Set Host transition to ON to enable TPO.
+    BMC Execute Command  ${CMD_ENABLE_TPO}
 
     ${tpo_set_value}=  Set Timer For Power ON
     ${new_tpo_value}=  Get Time Power ON Value
+
     Should Be Equal  ${new_tpo_value}  ${tpo_set_value}
+    ...  msg=TPO time set mismatched.
+
+    # Check if the system BootProgress state changed. If changed, it implies the
+    # system is powering on. Though we have set system to power on in 120 seconds
+    # since, the system boot sometime to change.
+    Wait Until Keyword Succeeds  10 min  20 sec  Is Boot Progress Changed
+
+    Log To Console   Scheduled Time Power on success
 
 
 *** Keywords ***
@@ -43,15 +64,13 @@ Set And Return Timer For Power ON
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
-    Open Connection And Login
-    Redfish Power Off
+    Redfish.Login
 
 
 Test Teardown Execution
     [Documentation]  Do the test teardown
 
     FFDC On Test Case Fail
-    Close All Connections
 
 
 Set Timer For Power ON
