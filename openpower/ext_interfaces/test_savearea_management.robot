@@ -15,9 +15,9 @@ Suite Teardown    Suite Teardown Execution
 
 *** Variables ***
 
-${MAXIMUM_FILE_SIZE_MESSAGE}        File size exceeds maximum allowed size[10MB]
+${MAXIMUM_FILE_SIZE_MESSAGE}        File size exceeds maximum allowed size[25MB]
 ${MAXIMUM_DIR_SIZE_MESSAGE}
-...   File size does not fit in the savearea directory maximum allowed size[10MB]
+...   File size does not fit in the savearea directory maximum allowed size[25MB]
 ${FILE_UPLOAD_MESSAGE}              File Created
 ${FILE_DELETED_MESSAGE}             File Deleted
 ${FILE_UPDATED_MESSAGE}             File Updated
@@ -55,9 +55,9 @@ Redfish Upload Partition File To BMC
 
     # file_name
     500KB-file
-    501KB-file
-    550KB-file
+    2000KB-file
     10000KB-file
+    25000KB-file
 
 
 Test Upload Lower Limit Partition File To BMC And Expect Failure
@@ -77,7 +77,7 @@ Test Upload Upper Limit Partition File To BMC And Expect Failure
     [Template]  Redfish Fail To Upload Partition File
 
     # file_name     status_code            partition_status    response_message
-    10001KB-file    ${HTTP_BAD_REQUEST}    0                   ${MAXIMUM_FILE_SIZE_MESSAGE}
+    25001KB-file    ${HTTP_BAD_REQUEST}    0                   ${MAXIMUM_FILE_SIZE_MESSAGE}
 
 
 Redfish Upload Multiple Partition File To BMC
@@ -96,9 +96,9 @@ Test Upload Partition File When BMC Space Reach Max And Expect Failure
     [Template]  Redfish Fail To Upload Partition File
 
     # file_name     status_code            partition_status    response_message
-    5000KB-file     ${HTTP_OK}             1                   ${FILE_UPLOAD_MESSAGE}
-    6000KB-file     ${HTTP_BAD_REQUEST}    0                   ${MAXIMUM_DIR_SIZE_MESSAGE}
-    10000KB-file    ${HTTP_OK}             1                   ${FILE_UPLOAD_MESSAGE}
+    15000KB-file    ${HTTP_OK}             1                   ${FILE_UPLOAD_MESSAGE}
+    16000KB-file    ${HTTP_BAD_REQUEST}    0                   ${MAXIMUM_DIR_SIZE_MESSAGE}
+    25000KB-file    ${HTTP_OK}             1                   ${FILE_UPLOAD_MESSAGE}
     100-file        ${HTTP_BAD_REQUEST}    0                   ${MAXIMUM_DIR_SIZE_MESSAGE}
 
 
