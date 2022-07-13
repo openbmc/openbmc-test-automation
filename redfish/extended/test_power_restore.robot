@@ -11,6 +11,7 @@ Resource        ../../lib/state_manager.robot
 Resource        ../../lib/boot_utils.robot
 Resource        ../../lib/bmc_redfish_resource.robot
 Resource        ../../lib/bmc_redfish_utils.robot
+Resource        ../../lib/pdu/pdu.robot
 Library         ../../lib/state_map.py
 
 Test Teardown   Test Teardown Execution
@@ -120,7 +121,7 @@ Verify Restore Policy
 
     Redfish Set Power Restore Policy  ${policy}
 
-    Redfish BMC Reset Operation
+    PDU Power Cycle
     Sleep  20s
     Wait For BMC Online
 
