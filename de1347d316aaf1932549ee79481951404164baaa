@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "688dd108_8f775ccd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-07-13T07:57:48Z",
+      "side": 1,
+      "message": "\n\nRedfish Upload Validated Partition File From Path To BMC :: Upload... | PASS |\n------------------------------------------------------------------------------\nTest Savearea Management :: Test Save Area feature of Management C... | FAIL |\n25 critical tests, 23 passed, 2 failed\n25 tests total, 23 passed, 2 failed\n\n\nAbove 2 failure is for non-admin user. they are not related to save area directory limit.\n\n",
+      "revId": "de1347d316aaf1932549ee79481951404164baaa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
