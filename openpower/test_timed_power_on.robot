@@ -31,6 +31,15 @@ ${CMD_GET_TPO_TIME}    busctl get-property xyz.openbmc_project.State.ScheduledHo
 # Time in seconds.
 ${TIMER_POWER_ON}      100
 
+# All current versions of the following distributions:
+#  - Red Hat Enterprise Linux
+#  - SUSE Linux Enterprise Server
+# Tested on RHEL 8.4.
+
+# Shut down the system and schedule it to restart in 1 hour.
+# User can input -v HOST_TIMER_POWER_ON:h24  ( e.g. 24 hours )
+${HOST_TIMER_POWER_ON}            h1
+${HOST_TIMED_POWER_ON_REQUEST}    set_poweron_time -d ${HOST_TIMER_POWER_ON} -s
 
 *** Test Cases ***
 
@@ -56,7 +65,42 @@ Test Timed Powered On Via BMC
     # since, the system boot sometime to change.
     Wait Until Keyword Succeeds  10 min  20 sec  Is Boot Progress Changed
 
-    Log To Console   Scheduled Time Power on success
+    Log To Console   BMC Scheduled Time Power on success.
+
+
+Test Timed Powered On Via Host OS
+    [Documentation]  Set time to power on host via service aids tool set_poweron_time
+    ...              and expect the system to boot on scheduled time.
+    [Tags]  Test_Timed_Powered_On_Via_Host_OS
+
+    # Make sure the host is powered on and booted to host OS partition.
+    Redfish Power On
+
+    ${stdout}  ${stderr}  ${rc}=  OS Execute Command  which set_poweron_time  ignore_err=${0}
+    # Skip the test if the tool does not exist or error getting the tool.
+    Skip If  ${rc} != ${0}  INFO: ${stdout} Skip the test since the tool does not. Install and re-run.
+
+    # Set Host transition to ON to enable TPO.
+    ${stdout}  ${stderr}  ${rc}=  OS Execute Command  ${HOST_TIMED_POWER_ON_REQUEST}  ignore_err=${0}
+
+    # Wait for host to Power off.
+    Wait Until Keyword Succeeds  45 min  30 sec  Is BMC Standby
+
+    Log To Console  Power Off completed.
+
+    # Note: The verifaction could more precise by checking date and set time.
+
+    # Check if the system BootProgress state changed. If changed, it implies the
+    # system is powering on after user timer set and delta time to update BootProgress
+    # state by the state manager.
+    # ${HOST_TIMER_POWER_ON} is in <m/h/d/><time> format
+    # Example:  h1 , logic to convert  x[1:] -> 1 and x[:1] ->h  to robot format 1 h.
+
+    Log To Console  Waiting for system to power on.
+    Wait Until Keyword Succeeds  ${HOST_TIMER_POWER_ON[1:]} ${HOST_TIMER_POWER_ON[:1]}  30 sec
+    ...  Is Boot Progress Changed
+
+    Log To Console   Host Scheduled Time Power on success.
 
 
 *** Keywords ***
