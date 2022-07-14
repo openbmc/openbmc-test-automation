@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce954be6_c7d49fb2",
+        "filename": "redfish/managers/test_managers_bmc_time.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-14T12:06:57Z",
+      "side": 1,
+      "message": "can you let know any specific reason to run sh??\nif you remove sh --login -c, it\u0027ll run properly.",
+      "range": {
+        "startLine": 328,
+        "startChar": 9,
+        "endLine": 328,
+        "endChar": 23
+      },
+      "revId": "acb0a8b1db19da642ad9ba8c869e124f1c513242",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
