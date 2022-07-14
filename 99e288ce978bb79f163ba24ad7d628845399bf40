@@ -140,6 +140,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4eaf9a1_b09996a6",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-07-14T19:33:18Z",
+      "side": 1,
+      "message": "Login is done within the lower level Redfish python method.  The keyword in Suite Setup creates/verifies the various users.... The Redfish login is at a lower level so this comment is completed.",
+      "parentUuid": "cb5eb033_04a12c20",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 17
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7955f53_64132f68",
@@ -225,6 +249,30 @@
       "side": 1,
       "message": "Can you remove the order check here ie verifying based on the index? The purpose is to verify whether a specific privilege is available right?",
       "parentUuid": "1337a7c1_fa9b3659",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 80
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29491eb4_d707eead",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-07-14T19:33:18Z",
+      "side": 1,
+      "message": "I cannot remove the order check because the JSON body is specific in the privileges stored in the array.  The array index is static for this resource URI.",
+      "parentUuid": "ebf51d7c_3aa9922b",
       "range": {
         "startLine": 54,
         "startChar": 4,
@@ -447,6 +495,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9782535_de1098ab",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-07-14T19:33:18Z",
+      "side": 1,
+      "message": "Variable name has been changed.",
+      "parentUuid": "702a7526_9a8a0aca",
+      "range": {
+        "startLine": 157,
+        "startChar": 6,
+        "endLine": 157,
+        "endChar": 25
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "243a0a84_2f5f5f4e",
@@ -555,6 +627,30 @@
       "side": 1,
       "message": "Isn\u0027t this ${readonly_password} the variable instead of ${readonlypassword}?",
       "parentUuid": "e9d34d3c_d25bae03",
+      "range": {
+        "startLine": 200,
+        "startChar": 46,
+        "endLine": 200,
+        "endChar": 62
+      },
+      "revId": "99e288ce978bb79f163ba24ad7d628845399bf40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fccb8a02_9d3fcf5d",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1001308
+      },
+      "writtenOn": "2022-07-14T19:33:18Z",
+      "side": 1,
+      "message": "Variable name has been fixed.",
+      "parentUuid": "5c4891a6_7f8b8e16",
       "range": {
         "startLine": 200,
         "startChar": 46,
