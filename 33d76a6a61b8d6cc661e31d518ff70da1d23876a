@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71706ab1_85aeb3ff",
+        "filename": "lib/pdu/apc.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-14T09:58:57Z",
+      "side": 1,
+      "message": "what is APC here?",
+      "range": {
+        "startLine": 2,
+        "startChar": 24,
+        "endLine": 2,
+        "endChar": 27
+      },
+      "revId": "33d76a6a61b8d6cc661e31d518ff70da1d23876a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c061681_6b04fe82",
+        "filename": "lib/pdu/apc.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-14T09:58:57Z",
+      "side": 1,
+      "message": "Login To APC PDU Via SSH\n\nThis is specific to APC PDU login right.. It is better to have a precise keyword name.. because similar keyword name is available in /lib/pdu/cyber.robot",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 25
+      },
+      "revId": "33d76a6a61b8d6cc661e31d518ff70da1d23876a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "953c0d44_29e6a29a",
+        "filename": "lib/pdu/apc.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-14T09:58:57Z",
+      "side": 1,
+      "message": "Login To APC PDU Via Telnet",
+      "range": {
+        "startLine": 19,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 28
+      },
+      "revId": "33d76a6a61b8d6cc661e31d518ff70da1d23876a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4baa2e3a_5792dfed",
+        "filename": "lib/pdu/apc.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-14T09:58:57Z",
+      "side": 1,
+      "message": "Perform APC PDU Power Cycle",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 11
+      },
+      "revId": "33d76a6a61b8d6cc661e31d518ff70da1d23876a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39d0f9dd_dbe640a8",
+        "filename": "lib/pdu/apc.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-14T09:58:57Z",
+      "side": 1,
+      "message": "what is the commented content.. please give a headline.\nAlso, Start the comment lines with space limit matching to [Documentation]",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 29
+      },
+      "revId": "33d76a6a61b8d6cc661e31d518ff70da1d23876a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a03d5701_c06684a7",
+        "filename": "lib/pdu/cyber.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-14T09:58:57Z",
+      "side": 1,
+      "message": "Login To Cyber PDU Via SSH\n\nBe specific... as u have similar case in apc.robot\n\nAlso please add cyber PDU in [Documentation]",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 25
+      },
+      "revId": "33d76a6a61b8d6cc661e31d518ff70da1d23876a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d294ac4_d985338e",
+        "filename": "lib/pdu/cyber.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-14T09:58:57Z",
+      "side": 1,
+      "message": "Login To Cyber PDU Via Telnet",
+      "range": {
+        "startLine": 19,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 28
+      },
+      "revId": "33d76a6a61b8d6cc661e31d518ff70da1d23876a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e763e9d_615ec133",
+        "filename": "lib/pdu/cyber.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-14T09:58:57Z",
+      "side": 1,
+      "message": "Perform Cyber PDU Cycle",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 11
+      },
+      "revId": "33d76a6a61b8d6cc661e31d518ff70da1d23876a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
