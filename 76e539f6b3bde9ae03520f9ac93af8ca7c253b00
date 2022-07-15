@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "271c2860_8b60405f",
+        "filename": "lib/pdu/cyber.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-07-15T14:34:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4631117c_af946436",
+      "range": {
+        "startLine": 57,
+        "startChar": 51,
+        "endLine": 57,
+        "endChar": 128
+      },
+      "revId": "76e539f6b3bde9ae03520f9ac93af8ca7c253b00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34ee5bcb_0f0db498",
@@ -64,6 +88,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "931e39e7_f264592e",
+        "filename": "lib/pdu/cyber.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-07-15T14:34:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34ee5bcb_0f0db498",
+      "range": {
+        "startLine": 69,
+        "startChar": 15,
+        "endLine": 69,
+        "endChar": 27
+      },
+      "revId": "76e539f6b3bde9ae03520f9ac93af8ca7c253b00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41592632_b72b14c9",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-07-15T11:48:01Z",
       "side": 1,
       "message": "typo",
+      "range": {
+        "startLine": 103,
+        "startChar": 16,
+        "endLine": 103,
+        "endChar": 25
+      },
+      "revId": "76e539f6b3bde9ae03520f9ac93af8ca7c253b00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9f04784_717701be",
+        "filename": "lib/pdu/cyber.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-07-15T14:34:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41592632_b72b14c9",
       "range": {
         "startLine": 103,
         "startChar": 16,
