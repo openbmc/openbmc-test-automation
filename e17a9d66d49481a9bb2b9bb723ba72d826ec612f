@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e03ee8c7_d87bdab6",
+        "filename": "redfish/service_root/test_sessions_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-07-15T09:09:14Z",
+      "side": 1,
+      "message": "Yes,I\u0027m checking that session ID is there or not in SessionService/Sessions members list in line no 249.",
+      "parentUuid": "19dcedae_4be6d2e9",
+      "revId": "e17a9d66d49481a9bb2b9bb723ba72d826ec612f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98270b5b_d2d25b58",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-07-15T06:22:16Z",
       "side": 1,
       "message": "run GET operation n expect to fail it??",
+      "revId": "e17a9d66d49481a9bb2b9bb723ba72d826ec612f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9ee3a18_feacd989",
+        "filename": "redfish/service_root/test_sessions_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-07-15T09:09:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98270b5b_d2d25b58",
       "revId": "e17a9d66d49481a9bb2b9bb723ba72d826ec612f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa1ab918_c049dc3c",
+        "filename": "redfish/service_root/test_sessions_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-07-15T09:09:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c414625_e23b7318",
+      "revId": "e17a9d66d49481a9bb2b9bb723ba72d826ec612f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c26cd71_025507e9",
@@ -65,6 +119,24 @@
       "writtenOn": "2022-07-15T06:22:16Z",
       "side": 1,
       "message": "remove",
+      "revId": "e17a9d66d49481a9bb2b9bb723ba72d826ec612f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56f12ae4_c09e0a77",
+        "filename": "redfish/service_root/test_sessions_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-07-15T09:09:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c26cd71_025507e9",
       "revId": "e17a9d66d49481a9bb2b9bb723ba72d826ec612f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
