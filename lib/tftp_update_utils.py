@@ -26,7 +26,7 @@ def get_pre_reboot_state():
     return state
 
 
-def wait_for_reboot(start_boot_seconds):
+def wait_for_reboot(start_boot_seconds, wait_state_check=True):
     r"""
     Wait for the BMC to complete a previously initiated reboot.
 
@@ -41,10 +41,12 @@ def wait_for_reboot(start_boot_seconds):
                         by the caller prior to initiating a reboot.  It can be
                         obtained as follows:
                         state = st.get_state(req_states=['epoch_seconds'])
+    wait_state_check    By default check the state, ignore if set to False.
 
     """
 
     st.wait_for_comm_cycle(int(start_boot_seconds))
 
     gp.qprintn()
-    st.wait_state(st.standby_match_state, wait_time="10 mins", interval="10 seconds")
+    if wait_state_check:
+        st.wait_state(st.standby_match_state, wait_time="10 mins", interval="10 seconds")
