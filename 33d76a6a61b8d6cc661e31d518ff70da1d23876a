@@ -399,6 +399,30 @@
       },
       "revId": "33d76a6a61b8d6cc661e31d518ff70da1d23876a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32937222_b5c37c09",
+        "filename": "lib/pdu/cyber.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-07-15T07:06:31Z",
+      "side": 1,
+      "message": "In ./redfish/extended/test_power_restore.robot, we call \"PDU Power Cycle\" from ./lib/pdu/pdu.robot. And ./lib/pdu/pdu.robot imports resources from the PDU library files dynamically at run time (either schneider.robot, cyber.robot) based on model type set in Resource.robot and calls \"Power Cycle\" from any of the PDU model type.\n\nSay If we change the \"Power Cycle\" keyword name to \"Perform Cyber PDU Cycle\" in ./lib/pdu/pdu.robot. Then the test script \"./redfish/extended/test_power_restore.robot\" shall FAIL incase server is connected to schneider PDU types. So inorder to have it work for any PDU type. The test script will call \"PDU Power Cycle\" only from ./lib/pdu/pdu.robot. And pdu.robot takes care of which PDU library file to import resources from and use the \"Power Cyle\" keyword.",
+      "parentUuid": "67581938_d704fc97",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 11
+      },
+      "revId": "33d76a6a61b8d6cc661e31d518ff70da1d23876a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
