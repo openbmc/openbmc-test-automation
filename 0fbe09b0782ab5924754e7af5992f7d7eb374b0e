@@ -16,6 +16,29 @@
       "message": "Latest comments done.",
       "revId": "0fbe09b0782ab5924754e7af5992f7d7eb374b0e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50d8c911_77b8da63",
+        "filename": "redfish/account_service/test_redfish_privilege_registry.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-15T11:41:42Z",
+      "side": 1,
+      "message": "ry.robot\n[ ERROR ] Error in file \u0027/home/george/openbmc-test-automation/redfish/account_service/test_redfish_privilege_registry.robot\u0027 on line 3: Non-existing setting \u0027... such as test, admin, operator, readonly, patched.\u0027.",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 53
+      },
+      "revId": "0fbe09b0782ab5924754e7af5992f7d7eb374b0e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
