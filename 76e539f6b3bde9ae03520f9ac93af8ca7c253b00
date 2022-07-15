@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4e84e20_b9528551",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-15T11:48:01Z",
+      "side": 1,
+      "message": "Pretty neat code documentation there.. Thanks ",
+      "revId": "76e539f6b3bde9ae03520f9ac93af8ca7c253b00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4631117c_af946436",
+        "filename": "lib/pdu/cyber.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-15T11:48:01Z",
+      "side": 1,
+      "message": "Push this to next line please",
+      "range": {
+        "startLine": 57,
+        "startChar": 51,
+        "endLine": 57,
+        "endChar": 128
+      },
+      "revId": "76e539f6b3bde9ae03520f9ac93af8ca7c253b00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34ee5bcb_0f0db498",
+        "filename": "lib/pdu/cyber.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-15T11:48:01Z",
+      "side": 1,
+      "message": "Information",
+      "range": {
+        "startLine": 69,
+        "startChar": 15,
+        "endLine": 69,
+        "endChar": 27
+      },
+      "revId": "76e539f6b3bde9ae03520f9ac93af8ca7c253b00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41592632_b72b14c9",
+        "filename": "lib/pdu/cyber.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-15T11:48:01Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 103,
+        "startChar": 16,
+        "endLine": 103,
+        "endChar": 25
+      },
+      "revId": "76e539f6b3bde9ae03520f9ac93af8ca7c253b00",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
