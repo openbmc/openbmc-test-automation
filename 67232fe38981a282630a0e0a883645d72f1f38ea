@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2981f964_fd68489a",
+        "filename": "redfish/managers/test_managers_bmc_time.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-15T09:34:01Z",
+      "side": 1,
+      "message": "Verify Enable NTP :: Verify NTP protocol mode can be enabled.         | FAIL |\n\u0027     Active: inactive (dead)\u0027 does not contain \u0027active (running)\u0027\n------------------------------------------------------------------------------\n\n    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body\u003d{\u0027NTP\u0027:{\u0027ProtocolEnabled\u0027: ${True}}}\n    ...  valid_status_codes\u003d[${HTTP_OK}, ${HTTP_NO_CONTENT}]\n    \n    # DEBUGGING TESTING / Take few seconds to restart the NTP services \n    Sleep  5s\n    \n    Verify System Time Sync Status  ${True}\n\t\n\t\nVerify Enable NTP :: Verify NTP protocol mode can be enabled.         | PASS |\n------------------------------------------------------------------------------\n\n\nsleep is not really a good to sync sometime when the service is restarted.\n\n\nRecommendation:\n\n   # NTP network takes few seconds to restart.\n    Wait Until Keyword Succeeds  10 sec  5 sec  Verify System Time Sync Status  ${True}",
+      "range": {
+        "startLine": 157,
+        "startChar": 4,
+        "endLine": 157,
+        "endChar": 43
+      },
+      "revId": "67232fe38981a282630a0e0a883645d72f1f38ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
