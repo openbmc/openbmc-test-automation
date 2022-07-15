@@ -375,6 +375,30 @@
       },
       "revId": "33d76a6a61b8d6cc661e31d518ff70da1d23876a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67581938_d704fc97",
+        "filename": "lib/pdu/cyber.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-15T05:28:44Z",
+      "side": 1,
+      "message": "In that case u can change the \u0027Power Cycle\u0027 Keyword in other places too right... It will be a cleanup e.g ./redfish/extended/test_power_restore.robot",
+      "parentUuid": "7b18de10_9ccf847e",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 11
+      },
+      "revId": "33d76a6a61b8d6cc661e31d518ff70da1d23876a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
