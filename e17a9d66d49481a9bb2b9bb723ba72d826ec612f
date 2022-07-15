@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19dcedae_4be6d2e9",
+        "filename": "redfish/service_root/test_sessions_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-15T06:22:16Z",
+      "side": 1,
+      "message": "is it required??",
+      "revId": "e17a9d66d49481a9bb2b9bb723ba72d826ec612f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98270b5b_d2d25b58",
+        "filename": "redfish/service_root/test_sessions_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-15T06:22:16Z",
+      "side": 1,
+      "message": "run GET operation n expect to fail it??",
+      "revId": "e17a9d66d49481a9bb2b9bb723ba72d826ec612f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c414625_e23b7318",
+        "filename": "redfish/service_root/test_sessions_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-15T06:22:16Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "e17a9d66d49481a9bb2b9bb723ba72d826ec612f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c26cd71_025507e9",
+        "filename": "redfish/service_root/test_sessions_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-15T06:22:16Z",
+      "side": 1,
+      "message": "remove",
+      "revId": "e17a9d66d49481a9bb2b9bb723ba72d826ec612f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
