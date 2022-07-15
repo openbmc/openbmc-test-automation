@@ -46,6 +46,30 @@
       },
       "revId": "67232fe38981a282630a0e0a883645d72f1f38ea",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1acff750_2fcfaf74",
+        "filename": "redfish/managers/test_managers_bmc_time.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-07-15T12:29:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baed0d0f_39ceddeb",
+      "range": {
+        "startLine": 157,
+        "startChar": 4,
+        "endLine": 157,
+        "endChar": 43
+      },
+      "revId": "67232fe38981a282630a0e0a883645d72f1f38ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
