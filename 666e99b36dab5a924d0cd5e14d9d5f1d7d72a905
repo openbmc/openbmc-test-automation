@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffc4fb76_eaaac75a",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-18T10:12:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e79c70c_89344784",
+      "range": {
+        "startLine": 76,
+        "startChar": 74,
+        "endLine": 76,
+        "endChar": 98
+      },
+      "revId": "666e99b36dab5a924d0cd5e14d9d5f1d7d72a905",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f706614_2f39bb18",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-07-18T10:03:50Z",
       "side": 1,
       "message": "replace ${HTTP_INTERNAL_SERVER_ERROR} by ${HTTP_BAD_REQUEST}",
+      "range": {
+        "startLine": 145,
+        "startChar": 102,
+        "endLine": 145,
+        "endChar": 128
+      },
+      "revId": "666e99b36dab5a924d0cd5e14d9d5f1d7d72a905",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19b6e1b4_d0f4a0a2",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-18T10:12:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f706614_2f39bb18",
       "range": {
         "startLine": 145,
         "startChar": 102,
