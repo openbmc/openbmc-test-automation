@@ -16,6 +16,52 @@
       "message": "I did cherry pick \u0026 ran the suite. \n\nTest Vmi :: VMI certificate exchange tests.                           | FAIL |\n21 critical tests, 11 passed, 10 failed\n21 tests total, 11 passed, 10 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nOutput:  /gsa/ausgsa-p10/03/indiateam04/meghagn/meghagn/cert_ct/openpower/ext_interfaces/output.xml\n",
       "revId": "666e99b36dab5a924d0cd5e14d9d5f1d7d72a905",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e79c70c_89344784",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-07-18T10:03:50Z",
+      "side": 1,
+      "message": "Replace ${HTTP_SERVICE_UNAVAILABLE} with {HTTP_BAD_REQUEST}",
+      "range": {
+        "startLine": 76,
+        "startChar": 74,
+        "endLine": 76,
+        "endChar": 98
+      },
+      "revId": "666e99b36dab5a924d0cd5e14d9d5f1d7d72a905",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f706614_2f39bb18",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-07-18T10:03:50Z",
+      "side": 1,
+      "message": "replace ${HTTP_INTERNAL_SERVER_ERROR} by ${HTTP_BAD_REQUEST}",
+      "range": {
+        "startLine": 145,
+        "startChar": 102,
+        "endLine": 145,
+        "endChar": 128
+      },
+      "revId": "666e99b36dab5a924d0cd5e14d9d5f1d7d72a905",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
