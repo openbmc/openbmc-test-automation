@@ -31,18 +31,18 @@ Poll BMC For Errors
     [Tags]  Poll_BMC_For_Errors
 
     Redfish.Login
-    Repeat Keyword  ${POLL_DURATION}
-    ...  Run Keywords  Enumerate Sensors And Check For Errors
-    ...  AND  Sleep  ${POLL_INTERVAL}
+    Repeat Keyword  ${POLL_DURATION}  Perform GET Request And Check For Errors
+
 
 *** Keywords ***
 
-Enumerate Sensors And Check For Errors
-    [Documentation]  Enumerate and check if there is any error reported.
+Perform GET Request And Check For Errors
+    [Documentation]  Check if there is any error reported.
 
     Redfish.Get  /redfish/v1/Chassis/${CHASSIS_ID}/Sensors
 
-    Check For Error Logs  ${ESEL_IGNORE_LIST}
+    Event Log Should Not Exist
+    Sleep  ${POLL_INTERVAL}
 
 
 Suite Setup Execution
@@ -56,10 +56,9 @@ Suite Setup Execution
     ...  ${OS_PASSWORD}  msg=You must provide OS host user password.
 
     Redfish Power On  stack_mode=skip
-    Redfish.Login
 
-    Delete Error Logs
-    Error Logs Should Not Exist
+    Run Keyword And Ignore Error  Redfish Purge Event Log
+    Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
 
 
 Post Test Case Execution
