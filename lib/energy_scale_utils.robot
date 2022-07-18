@@ -7,8 +7,27 @@ Resource          ../lib/boot_utils.robot
 Resource          ../lib/ipmi_client.robot
 Library           ../lib/var_funcs.py
 
+*** Variables ***
+
+${power_cap_uri}    /redfish/v1/Chassis/${CHASSIS_ID}/EnvironmentMetrics
 
 *** Keywords ***
+
+Get System Power Cap Limit
+    [Documentation]  Get the allowed MAX and MIN power limit of the chassis.
+
+    # GET request of /redfish/v1/Chassis/chassis/EnvironmentMetrics  | grep -A5 Power
+    #   "PowerLimitWatts": {
+    #       "AllowableMax": 2488,
+    #       "AllowableMin": 1778,
+    #       "ControlMode": "Disabled",
+    #       "SetPoint": 2488
+    # }
+
+    ${power_limit_watts}=  Redfish.Get Attribute  ${power_cap_uri}   PowerLimitWatts
+
+    [return]  ${power_limit_watts}
+
 
 DCMI Power Get Limits
     [Documentation]  Run dcmi power get_limit and return values as a
