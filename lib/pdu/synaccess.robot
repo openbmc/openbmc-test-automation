@@ -15,7 +15,8 @@ Connect and Login
 Power Cycle
     [Documentation]  Perform PDU power cycle.
     Connect and Login
-    ${ret}=    Get Request    pdu    /cmd.cgi?$A4 ${PDU_SLOT_NO}
+    ${resp}=    Get Request    pdu    /cmd.cgi?$A4 ${PDU_SLOT_NO}
+
     ${error_message}=  Catenate  Power cycle of slot ${PDU_SLOT_NO} failed.
-    ...  PDU returned RC=${ret}.
-    Should Be Equal As Strings  ${ret}  ${HTTP_OK}  msg=${error_message}
+    ...  PDU returned RC=${resp}.
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}  msg=${error_message}
