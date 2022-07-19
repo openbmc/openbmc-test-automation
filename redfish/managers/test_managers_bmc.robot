@@ -121,7 +121,7 @@ Redfish BMC Manager GracefulRestart When Host Off
 
     Is BMC Standby
 
-    BMC Execute Command  if [ -f ${test_file_path} ] ; then false ; fi
+    ${stdout}  ${stderr}  ${rc}=  BMC Execute Command  test ! -f ${test_file_path}  print_out=1
     Verify BMC RTC And UTC Time Drift
 
     # Check for journald persistency post reboot.
@@ -151,7 +151,7 @@ Redfish BMC Manager ForceRestart When Host Off
 
     Is BMC Standby
 
-    BMC Execute Command  if [ -f ${test_file_path} ] ; then false ; fi
+    ${stdout}  ${stderr}  ${rc}=  BMC Execute Command  test ! -f ${test_file_path}  print_out=1
     Verify BMC RTC And UTC Time Drift
 
     # Check for journald persistency post reboot.
@@ -176,7 +176,7 @@ Redfish BMC Manager GracefulRestart When Host Booted
     Redfish OBMC Reboot (run)
 
     # TODO: Replace OCC state check with redfish property when available.
-    Verify OCC State
+    Wait Until Keyword Succeeds  10 min  30 sec  Verify OCC State
 
 
 *** Keywords ***
