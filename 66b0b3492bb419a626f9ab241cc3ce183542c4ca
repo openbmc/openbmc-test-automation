@@ -39,6 +39,30 @@
       },
       "revId": "66b0b3492bb419a626f9ab241cc3ce183542c4ca",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a847db2_13a081f4",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-19T11:10:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1a2cb1f_3e020623",
+      "range": {
+        "startLine": 129,
+        "startChar": 43,
+        "endLine": 129,
+        "endChar": 44
+      },
+      "revId": "66b0b3492bb419a626f9ab241cc3ce183542c4ca",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
