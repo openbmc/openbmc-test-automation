@@ -43,6 +43,7 @@ Get PrefixLength And Verify
 
 Get IPv6 Default Gateway And Verify
     [Documentation]  Get IPv6 default gateway and verify.
+    [Tags]  Get_IPv6_Default_Gateway_And_Verify
 
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     ${ipv6_gateway}=  Get From Dictionary  ${resp.dict}  IPv6DefaultGateway
