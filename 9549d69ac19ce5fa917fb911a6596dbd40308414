@@ -16,6 +16,24 @@
       "message": "Sweta/Prashanth ? any more input on this commit ?",
       "revId": "9549d69ac19ce5fa917fb911a6596dbd40308414",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fc5fe2b_522d3b2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-19T15:19:26Z",
+      "side": 1,
+      "message": "For now I\u0027ve one minor comment, which owner can fix it.\nI\u0027m almost done with review, just checking overlapping of redfish login \u0026 ldap login. Need one more day, will do by tomorrow.",
+      "parentUuid": "3cce1986_70e40e44",
+      "revId": "9549d69ac19ce5fa917fb911a6596dbd40308414",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
