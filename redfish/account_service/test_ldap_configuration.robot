@@ -400,7 +400,7 @@ Verify Group Name And Group Privilege Able To Modify
     ...  modify.
     [Tags]  Verify_Group_Name_And_Group_Privilege_Able_To_Modify
     [Setup]  Update LDAP Configuration with LDAP User Role And Group
-    ...  ${LDAP_TYPE}  Operator  ${GROUP_NAME}
+    ...  ${LDAP_TYPE}  ReadOnly  ${GROUP_NAME}
 
     Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
     ...  Administrator  ${GROUP_NAME}
