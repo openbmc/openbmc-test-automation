@@ -275,7 +275,8 @@ Install And Verify Certificate Via Redfish
     Logging  Installed certificate id: ${cert_id}
 
     # Adding delay after certificate installation.
-    Sleep  30s
+    # Lesser wait timing causes bmcweb to restart quickly and breaks the web services.
+    Sleep  60s
 
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
     ${bmc_cert_content}=  Run Keyword If  '${expected_status}' == 'ok'  redfish_utils.Get Attribute
