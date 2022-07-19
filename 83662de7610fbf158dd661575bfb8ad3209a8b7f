@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fa38bc65_f7eddb87",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-19T07:20:00Z",
+      "side": 1,
+      "message": "Added new testcase to Network sub menu\n\nChanges:\n    - Test to configure a static IP address and verify\n\nTested:\n     Ran test gui_test/settings_menu/test_network_sub_menu.robot",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 44
+      },
+      "revId": "83662de7610fbf158dd661575bfb8ad3209a8b7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63611201_9a5b928b",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 2
