@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dd89210_7a0e90fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-19T19:39:52Z",
+      "side": 1,
+      "message": "Verify Certificates Location Via Redfish :: Verify the location of... | PASS |\n------------------------------------------------------------------------------\n#(IST) 2022/07/20 01:09:29.636669 -    0.431114 - Executing: delete(\u0027/redfish/v1/SessionService/Sessions/N3KPNb1fG6\u0027)\nTest Certificate :: Test certificate in OpenBMC.                      | PASS |\n17 tests, 17 passed, 0 failed",
+      "revId": "2dc2864c5ff6b895aeb983eab9e69eac5f61ae1b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
