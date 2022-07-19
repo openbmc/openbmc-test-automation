@@ -32,17 +32,6 @@ Verify User Initiated BMC Dump When Host Powered Off
     Length Should Be  ${dump_entries}  1
     List Should Contain Value  ${dump_entries}  ${dump_id}
 
-Verify User Initiated BMC Dump When Host Booted
-    [Documentation]  Create user initiated BMC dump at host booted state and
-    ...  verify dump entry for it.
-    [Tags]  Verify_User_Initiated_BMC_Dump_When_Host_Booted
-
-    Redfish Power On  stack_mode=skip
-    ${dump_id}=  Create User Initiated BMC Dump Via Redfish
-    ${dump_entries}=  Get BMC Dump Entries
-    Length Should Be  ${dump_entries}  1
-    List Should Contain Value  ${dump_entries}  ${dump_id}
-
 
 Verify User Initiated BMC Dump Size
     [Documentation]  Verify user initiated BMC dump size is under 20 MB.
@@ -63,6 +52,18 @@ Verify User Initiated BMC Dump Size
 
     # Max size for dump is 20 MB = 20x1024x1024 Byte.
     Should Be True  0 < ${resp["AdditionalDataSizeBytes"]} < 20971520
+
+
+Verify User Initiated BMC Dump When Host Booted
+    [Documentation]  Create user initiated BMC dump at host booted state and
+    ...  verify dump entry for it.
+    [Tags]  Verify_User_Initiated_BMC_Dump_When_Host_Booted
+
+    Redfish Power On  stack_mode=skip
+    ${dump_id}=  Create User Initiated BMC Dump Via Redfish
+    ${dump_entries}=  Get BMC Dump Entries
+    Length Should Be  ${dump_entries}  1
+    List Should Contain Value  ${dump_entries}  ${dump_id}
 
 
 Verify Dump Persistency On Dump Service Restart
