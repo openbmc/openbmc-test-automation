@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63b74c25_70ee5e4e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-07-19T07:23:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa38bc65_f7eddb87",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 44
+      },
+      "revId": "83662de7610fbf158dd661575bfb8ad3209a8b7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63611201_9a5b928b",
@@ -96,6 +120,30 @@
       "side": 1,
       "message": "yes that has been done in keyword which is used here \"Add Static IP Address And \nVerify",
       "parentUuid": "559d39c7_86b07624",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 104
+      },
+      "revId": "83662de7610fbf158dd661575bfb8ad3209a8b7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f12e52ec_276b9009",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-07-19T07:23:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbd402aa_a95e74a6",
       "range": {
         "startLine": 164,
         "startChar": 0,
