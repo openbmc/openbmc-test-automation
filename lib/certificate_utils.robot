@@ -5,6 +5,10 @@ Library        OperatingSystem
 Resource       rest_client.robot
 Resource       resource.robot
 
+*** Variables ***
+
+# Default wait sync time for certificate install and restart services.
+${wait_time}    30
 
 *** Keywords ***
 
@@ -275,7 +279,9 @@ Install And Verify Certificate Via Redfish
     Logging  Installed certificate id: ${cert_id}
 
     # Adding delay after certificate installation.
-    Sleep  30s
+    # Lesser wait timing causes bmcweb to restart quickly and breaks the web services.
+    Log To Console  Wait Time started in seconds ${wait_time}
+    Sleep  ${wait_time}s
 
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
     ${bmc_cert_content}=  Run Keyword If  '${expected_status}' == 'ok'  redfish_utils.Get Attribute
