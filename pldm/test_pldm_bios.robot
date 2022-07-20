@@ -11,12 +11,11 @@ Resource         ../lib/openbmc_ffdc.robot
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
 Suite Setup      PLDM BIOS Suite Setup
-Suite Teardown   PLDM BIOS Suite Cleanup
+Suite Teardown   Run Keyword And Ignore Error  PLDM BIOS Suite Cleanup
 
 *** Test Cases ***
 
 Verify GetDateTime
-
     [Documentation]  Verify host date & time.
     [Tags]  Verify_GetDateTime
 
@@ -41,7 +40,6 @@ Verify GetDateTime
 
 
 Verify SetDateTime
-
     [Documentation]  Verify set date & time for the host.
     [Tags]  Verify_SetDateTime
 
@@ -71,7 +69,6 @@ Verify SetDateTime
 
 
 Verify GetBIOSTable For AttributeValueTable
-
     [Documentation]  Verify if attribute value table content exist for
     ...              GetBIOSTable with table type attribute value table.
     [Tags]  Verify_GetBIOSTable_For_AttributeValueTable
@@ -91,7 +88,6 @@ Verify GetBIOSTable For AttributeValueTable
 
 
 Verify GetBIOSAttributeCurrentValueByHandle
-
     [Documentation]  Verify GetBIOSAttributeCurrentValueByHandle with the
     ...              various BIOS attribute handle and its values.
     [Tags]  Verify_GetBIOSAttributeCurrentValueByHandle
@@ -116,7 +112,6 @@ Verify GetBIOSAttributeCurrentValueByHandle
 *** Keywords ***
 
 PLDM BIOS Suite Setup
-
     [Documentation]  Perform PLDM BIOS suite setup.
 
     ${pldm_output}=  Pldmtool  bios GetBIOSTable --type AttributeTable
@@ -124,7 +119,6 @@ PLDM BIOS Suite Setup
 
 
 PLDM BIOS Suite Cleanup
-
     [Documentation]  Perform PLDM BIOS suite cleanup.
 
     ${result}=  Get Current Date  UTC  exclude_millis=True
