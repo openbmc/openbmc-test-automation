@@ -18,6 +18,7 @@ ${BMC_DUMP_TOTAL_SIZE}       ${1024}
 
 # Minimum space required for one bmc dump in kilo bytes
 ${BMC_DUMP_MIN_SPACE_REQD}   ${20}
+${MAX_DUMP_COUNT}            ${20}
 
 *** Test Cases ***
 
@@ -165,8 +166,8 @@ Verify Maximum BMC Dump Creation
     # Maximum allowed space for dump is 1024 KB. BMC typically hold 8-14 dumps
     # before running out of this dump space. So trying to create dumps in 20
     # iterations to run out of space.
-
-    FOR  ${n}  IN RANGE  0  20
+    # User can key in the Maximum allowed space for bmc dump and how many iteration.
+    FOR  ${n}  IN RANGE  0  ${MAX_DUMP_COUNT}
       Create User Initiated BMC Dump Via Redfish
       ${dump_space}=  Get Disk Usage For Dumps
       Exit For Loop If  ${dump_space} >= (${BMC_DUMP_TOTAL_SIZE} - ${BMC_DUMP_MIN_SPACE_REQD})
