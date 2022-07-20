@@ -107,9 +107,9 @@ Configure Multiple SNMP Managers And Verify
     Verify SNMP Manager Configured On BMC  ${SNMP_MGR2_IP}  ${SNMP_DEFAULT_PORT}
 
 
-Generate Error On BMC And Verify SNMP Trap Is Sent To Non-Default Port
+Generate Error On BMC And Verify SNMP Trap Is Sent To Non Default Port
     [Documentation]  Generate error on BMC and verify trap and its fields.
-    [Tags]  Generate_Error_On_BMC_And_Verify_SNMP_Trap_Is_Sent_To_Non-Default_Port
+    [Tags]  Generate_Error_On_BMC_And_Verify_SNMP_Trap_Is_Sent_To_Non_Default_Port
     [Template]  Create Error On BMC And Verify Trap On Non-Default Port
 
     # event_log                 expected_error
