@@ -167,6 +167,8 @@ Delete All CA Certificate Via Redfish
     ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/bmc/Truststore/Certificates
     FOR  ${cert}  IN  @{cert_list}
       Redfish.Delete  ${cert}  valid_status_codes=[${HTTP_NO_CONTENT}]
+      Log To Console  Wait Time started in seconds ${wait_time}
+      Sleep  ${wait_time}s
     END
 
 
