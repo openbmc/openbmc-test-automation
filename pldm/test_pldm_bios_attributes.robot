@@ -17,13 +17,12 @@ Suite Teardown   PLDM BIOS Attribute Suite Cleanup
 *** Variables ***
 
 ${bios_original_data}       ${EMPTY}
-${attr_table_data}     ${EMPTY}
+${attr_table_data}          ${EMPTY}
 
 
 *** Test Cases ***
 
 Verify Get BIOS Attribute With Invalid Attribute Name
-
     [Documentation]  Verify get BIOS attribute with invalid attribute name.
     [Tags]  Verify_Get_BIOS_Attribute_With_Invalid_Attribute_Name
 
@@ -40,7 +39,6 @@ Verify Get BIOS Attribute With Invalid Attribute Name
 
 
 Verify Set BIOS Attribute With Invalid Attribute Name
-
     [Documentation]  Verify set BIOS attribute with invalid attribute name.
     [Tags]  Verify_Set_BIOS_Attribute_With_Invalid_Attribute_Name
 
@@ -57,7 +55,6 @@ Verify Set BIOS Attribute With Invalid Attribute Name
 
 
 Verify Set Invalid Optional Value For BIOS Enumeration Attribute Type
-
     [Documentation]  Verify set invalid optional value for BIOS enumeration attribute type.
     [Tags]  Verify_Set_Invalid_Optional_Value_For_BIOS_Enumeration_Attribute_Type
 
@@ -76,7 +73,6 @@ Verify Set Invalid Optional Value For BIOS Enumeration Attribute Type
 
 
 Verify Set Out Of Range Integer Value For BIOS Integer Attribute Type
-
     [Documentation]  Verify set out of range integer value for BIOS integer attribute type.
     [Tags]  Verify_Set_Out_Of_Range_Integer_Value_For_BIOS_Integer_Attribute_Type
 
@@ -96,7 +92,6 @@ Verify Set Out Of Range Integer Value For BIOS Integer Attribute Type
 
 
 Verify Set Out Of Range String Value For BIOS String Attribute Type
-
     [Documentation]  Verify set out of range string value for BIOS string attribute type.
     [Tags]  Verify_Set_Out_Of_Range_String_Value_For_BIOS_String_Attribute_Type
 
@@ -117,7 +112,6 @@ Verify Set Out Of Range String Value For BIOS String Attribute Type
 
 
 Verify Set BIOS String Attribute Type
-
     [Documentation]  Verify set BIOS string attribute type for various BIOS
     ...              attribute handle with random values with in the range.
     [Tags]  Verify_Set_BIOS_String_Attribute_Type
@@ -141,7 +135,6 @@ Verify Set BIOS String Attribute Type
 
 
 Verify Set BIOS Integer Attribute Type
-
     [Documentation]  Verify set BIOS integer attribute type for various BIOS
     ...              attribute handle with random values with in the range.
     [Tags]  Verify_Set_BIOS_Integer_Attribute_Type
@@ -166,7 +159,6 @@ Verify Set BIOS Integer Attribute Type
 
 
 Verify Set BIOS Enumeration Attribute Type
-
     [Documentation]  Verify set BIOS enumeration attribute type for various BIOS
     ...              attribute handle with random values with in the range of
     ...              default optional values.
@@ -189,7 +181,6 @@ Verify Set BIOS Enumeration Attribute Type
 
 
 Verify Restore BIOS Attribute Values
-
     [Documentation]  Restore all BIOS attribute values with its default values and verify.
     [Tags]  Verify_Restore_BIOS_Attribute_Values
 
@@ -200,7 +191,6 @@ Verify Restore BIOS Attribute Values
 *** Keywords ***
 
 PLDM BIOS Attribute Suite Setup
-
     [Documentation]  Perform PLDM BIOS attribute suite setup.
 
     ${pldm_output}=  Pldmtool  bios GetBIOSTable --type AttributeTable
@@ -211,14 +201,13 @@ PLDM BIOS Attribute Suite Setup
 
 
 PLDM BIOS Attribute Suite Cleanup
-
     [Documentation]  Perform PLDM BIOS attribute suite cleanup.
 
-    Validate Set All BIOS Attributes Values  ${bios_original_data}
+    Run Keyword And Ignore Error
+    ...  Validate Set All BIOS Attributes Values  ${bios_original_data}
 
 
 Validate Set BIOS Attributes With Optional Values
-
     [Documentation]  Set BIOS attribute with the available attribute handle
     ...              values and revert back to original attribute handle value.
     [Arguments]      ${attr_handle}  @{attr_val_list}
@@ -243,7 +232,6 @@ Validate Set BIOS Attributes With Optional Values
 
 
 Validate Set All BIOS Attributes Values
-
     [Documentation]  Validate Set BIOS Attributes Values.
     [Arguments]      ${bios_attr_data}
 
