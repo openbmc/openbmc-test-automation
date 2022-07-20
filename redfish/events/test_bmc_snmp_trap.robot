@@ -11,8 +11,9 @@ Resource      ../../lib/openbmc_ffdc.robot
 Resource      ../../lib/logging_utils.robot
 
 
-Test Teardown  FFDC On Test Case Fail
-Suite Setup    Suite Setup Execution
+Test Teardown     FFDC On Test Case Fail
+Suite Setup       Suite Setup Execution
+Suite Teardown    Suite Teardown Execution
 
 
 *** Test Cases ***
@@ -293,6 +294,13 @@ Suite Setup Execution
     # Check for SNMP configurations.
     Valid Value  SNMP_MGR1_IP
     Valid Value  SNMP_DEFAULT_PORT
+
+
+Suite Teardown Execution
+    [Documentation]  Do suite Teardown execution.
+
+    Run Keyword And Ignore Error  Redfish Purge Event Log
+    Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
 
 
 Generate Error And Verify System Up Time
