@@ -257,7 +257,7 @@ Start SNMP Manager
     SSHLibrary.write  ${SNMP_TRAPD_CMD} &
 
 
-Create Error On BMC And Verify Trap On Non-Default Port
+Create Error On BMC And Verify Trap On Non Default Port
     [Documentation]  Generate error on BMC and verify if trap is sent to non default port.
     [Arguments]  ${event_log}=${CMD_INTERNAL_FAILURE}  ${expected_error}=${SNMP_TRAP_BMC_INTERNAL_FAILURE}
 
