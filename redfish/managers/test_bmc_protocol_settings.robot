@@ -40,6 +40,7 @@ Enable SSH Protocol And Verify
 
 Disable SSH Protocol And Verify
     [Documentation]  Disable SSH protocol and verify.
+    [Tags]  Disable_SSH_Protocol_And_Verify
     [Teardown]  Enable SSH Protocol  ${True}
 
     # Disable SSH interface.
@@ -58,6 +59,7 @@ Disable SSH Protocol And Verify
 
 Enable SSH Protocol And Check Persistency On BMC Reboot
     [Documentation]  Enable SSH protocol and verify persistency.
+    [Tags]  Enable_SSH_Protocol_And_Check_Persistency_On_BMC_Reboot
 
     Enable SSH Protocol  ${True}
 
@@ -73,6 +75,7 @@ Enable SSH Protocol And Check Persistency On BMC Reboot
 
 Disable SSH Protocol And Check Persistency On BMC Reboot
     [Documentation]  Disable SSH protocol and verify persistency.
+    [Tags]  Disable_SSH_Protocol_And_Check_Persistency_On_BMC_Reboot
     [Teardown]  Enable SSH Protocol  ${True}
 
     # Disable SSH interface.
