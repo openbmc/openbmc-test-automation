@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d8ec832_96f9b5b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-07-21T10:59:39Z",
+      "side": 1,
+      "message": "Test Client Identifier :: Test client identifier feature on BMC.      | PASS |\n5 critical tests, 5 passed, 0 failed\n5 tests total, 5 passed, 0 failed",
+      "revId": "a6fbc3dfb9f5118193d919ce3623b7156c8b1d49",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
