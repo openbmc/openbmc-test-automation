@@ -781,6 +781,7 @@ Suite Setup Execution
     #   - Get DHCP IPv4 settings - ip address, gateway, subnetmask
     #   - And set the same as static IP address
 
+    Redfish.Login
     ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status
     Set Suite Variable  ${DHCPEnabled}
 
