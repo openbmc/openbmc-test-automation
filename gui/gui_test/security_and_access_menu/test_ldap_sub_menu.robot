@@ -4,9 +4,13 @@ Documentation  Test OpenBMC GUI "LDAP" sub-menu of "Security and access".
 
 Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/bmc_ldap_utils.robot
+#Resource        ../../../lib/bmc_redfish_resource.robot
+#Resource         ../../../lib/bmc_redfish_utils.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
+Suite Teardown  Run Keywords  Restore LDAP Privilege  AND  Redfish.Logout
+
 
 
 *** Variables ***
@@ -30,6 +34,8 @@ ${xpath_delete_button}                  //button[text()="Delete"]
 
 
 ${incorrect_ip}     1.2.3.4
+${Invalid_port_number}  9.126.172.69:132
+
 
 *** Test Cases ***
 
@@ -165,7 +171,39 @@ Read Network Configuration Via Different User Roles And Verify Using GUI
     ${GROUP_NAME}    NoAccess       ${HTTP_FORBIDDEN}
 
 
+Verify LDAP Config Update With Invalid Port Number In LDAP URL
+    [Documentation]  Verify that LDAP login fails with incorrect LDAP URL.
+    [Tags]  Verify_LDAP_Config_Update_With_Invalid_Port_Number_In_LDAP_URL
+    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
+
+    Create LDAP Configuration  ${Invalid_port_number}   ${LDAP_TYPE}  ${LDAP_BIND_DN}
+    ...  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}  ${LDAP_MODE}
+
+    Get LDAP Configuration  ${LDAP_TYPE}
+    Redfish.Logout
+
+    ${resp}=  Run Keyword And Return Status
+    ...  Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Should Be Equal  ${resp}  ${False}
+    ...  msg=LDAP user was able to login though the incorrect LDAP URL.
+
+
 *** Keywords ***
+Verify LDAP Config Update With Valid Port Number In LDAP URL
+    [Documentation]  Verify that LDAP login fails with incorrect LDAP URL.
+    [Tags]  Verify_LDAP_Config_Update_With_Valid_Port_Number_In_LDAP_URL
+    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
+
+    Create LDAP Configuration  ${valid_port_number}   ${LDAP_TYPE}  ${LDAP_BIND_DN}
+    ...  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}  ${LDAP_MODE}
+
+    Get LDAP Configuration  ${LDAP_TYPE}
+    Redfish.Logout
+
+    ${resp}=  Run Keyword And Return Status
+    ...  Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Should Be Equal  ${resp}  ${True}
+    ...  msg=LDAP user was able to login though the incorrect LDAP URL.
 
 Suite Setup Execution
     [Documentation]  Do test case setup tasks.
