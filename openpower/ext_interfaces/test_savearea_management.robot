@@ -221,6 +221,8 @@ Verify One Thousand Partitions File Upload
     1000
 
 
+*** Comments ***
+
 Non Admin Users Fail To Upload Partition File
     [Documentation]  Non admin user will fail to upload the partition file.
     [Tags]  Non_Admin_Users_Fail_To_Upload_Partition_File
@@ -238,6 +240,8 @@ Non Admin User Delete Non Existence Of Partition File
     # file_name    username         password       role_id
     500KB-file     operator_user    TestPwd123     Operator
 
+
+*** Test Cases ***
 
 Redfish Update Wrong Partition File To BMC
     [Documentation]  Upload partition file to BMC by wrong URI using Redfish.
@@ -284,6 +288,7 @@ Redfish Upload Validated Partition File From Path To BMC
 
      Redfish Upload Partition File From Path  ${PARTITION_FILE_PATH}
    END
+
 
 *** Keywords ***
 
