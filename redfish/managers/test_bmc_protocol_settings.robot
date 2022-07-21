@@ -64,7 +64,7 @@ Enable SSH Protocol And Check Persistency On BMC Reboot
     Enable SSH Protocol  ${True}
 
     # Reboot BMC and verify persistency.
-    OBMC Reboot (off)
+    Redfish OBMC Reboot (off)  stack_mode=skip
 
     # Check if SSH is really enabled via Redfish.
     Verify SSH Protocol State  ${True}
@@ -82,7 +82,7 @@ Disable SSH Protocol And Check Persistency On BMC Reboot
     Enable SSH Protocol  ${False}
 
     # Reboot BMC and verify persistency.
-    Redfish BMC Reboot
+    Redfish OBMC Reboot (off)  stack_mode=skip
 
     # Check if SSH is really disabled via Redfish.
     Verify SSH Protocol State  ${False}
@@ -208,6 +208,7 @@ Enable SSH And IPMI Protocol And Verify
 
     # Check if SSH and IPMI enabled is set.
     Verify SSH Protocol State  ${True}
+    Sleep  ${NETWORK_TIMEOUT}s
     Verify IPMI Protocol State  ${True}
 
     # Check if SSH login and IPMI commands work.
