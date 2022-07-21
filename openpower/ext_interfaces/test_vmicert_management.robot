@@ -13,6 +13,8 @@ Suite Setup       Suite Setup Execution
 Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Suite Teardown Execution
 
+Force Tags        vmi_certificate_test
+
 
 *** Variables ***
 

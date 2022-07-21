@@ -8,6 +8,8 @@ Suite Setup       Suite Setup Execution
 Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Suite Teardown Execution
 
+Force Tags        vmi_interface_test
+
 *** Variables ***
 
 # users           User Name               password

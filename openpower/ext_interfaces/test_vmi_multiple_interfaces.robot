@@ -11,6 +11,8 @@ Suite Setup       Suite Setup Execution
 Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Suite Teardown Execution
 
+Force Tags        vmi_multi_interface_test
+
 *** Variables ***
 
 ${test_ipv4_1}              10.6.6.6
