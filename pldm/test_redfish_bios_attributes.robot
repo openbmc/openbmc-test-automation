@@ -12,7 +12,7 @@ Variables        ../data/pldm_variables.py
 Test Teardown    FFDC On Test Case Fail
 
 Suite Setup      Redfish BIOS Suite Setup
-Suite Teardown   Redfish BIOS Suite Cleanup
+Suite Teardown   Run Keyword And Ignore Error  Redfish BIOS Suite Cleanup
 
 *** Variables ***
 
