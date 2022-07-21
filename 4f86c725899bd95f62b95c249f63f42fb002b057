@@ -16,6 +16,24 @@
       "message": "why is this required here??",
       "revId": "4f86c725899bd95f62b95c249f63f42fb002b057",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70b76d1f_11dca8cc",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-07-21T08:35:53Z",
+      "side": 1,
+      "message": "it takes some time to set the state of IPMI either to true or false after executing Reboot tc.so i have added sleep time here.",
+      "parentUuid": "f5180e41_08731141",
+      "revId": "4f86c725899bd95f62b95c249f63f42fb002b057",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
