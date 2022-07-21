@@ -201,7 +201,7 @@ Verify VMI Static IP Configuration Persist On BMC Reset Before Host Boot
     [Teardown]  Run keywords  Delete VMI IPv4 Address  AND  FFDC On Test Case Fail
 
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
-    OBMC Reboot (off)
+    Redfish OBMC Reboot (off)  stack_mode=skip
     Redfish Power On
     # Verifying the VMI static configuration
     Verify VMI Network Interface Details  ${test_ipv4}  Static   ${test_gateway}  ${test_netmask}
@@ -225,7 +225,7 @@ Add VMI Static IP When Host Poweroff And Verify Static IP On BMC Reset
     [Teardown]  Run keywords  Delete VMI IPv4 Address  AND  FFDC On Test Case Fail
 
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
-    OBMC Reboot (off)
+    Redfish OBMC Reboot (off)  stack_mode=skip
     Redfish Power On
     Verify VMI Network Interface Details  ${test_ipv4}  Static  ${test_gateway}  ${test_netmask}
 
@@ -590,6 +590,8 @@ Update User Role And Set VMI IPv4 Origin
     #                     (${True}, ${False}).
     # valid_status_code   The expected valid status code.
 
+    # TODO: operator_user role is not yet supported.
+    Skip If  '${username}' == 'operator_user'
     Redfish.Login  ${username}  ${password}
     Set VMI IPv4 Origin  ${dhcp_enabled}  ${valid_status_code}
 
