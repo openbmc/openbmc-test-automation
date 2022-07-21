@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd3bb73f_e9373d27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-21T14:59:28Z",
+      "side": 1,
+      "message": "Thinking.. I dont think we need to comment it out. We can always use the tag facility to skip",
+      "revId": "104cf7c322ab0a370b330d58ea61f339d09f96e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
