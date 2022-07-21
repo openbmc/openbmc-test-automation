@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5180e41_08731141",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-21T08:30:46Z",
+      "side": 1,
+      "message": "why is this required here??",
+      "revId": "4f86c725899bd95f62b95c249f63f42fb002b057",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
