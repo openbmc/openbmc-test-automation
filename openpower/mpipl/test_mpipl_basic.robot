@@ -1,5 +1,9 @@
 *** Settings ***
-Documentation    Test MPIPL.
+Documentation    Test MPIPL (Memory preserving IPL).
+
+#------------------------------------------------------------------
+# This boot path will generated a BMC dump followed by system dump.
+#------------------------------------------------------------------
 
 Resource         ../../lib/resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
@@ -7,50 +11,76 @@ Resource         ../../lib/bmc_redfish_utils.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/boot_utils.robot
 
+Suite Setup      Redfish.Login
+Test Setup       Test SetupExecution
 Test Teardown    Test Teardown Execution
+Suite Teardown   Suite Teardown Execution
 
 *** Variables ***
 
-${user_initated_mpipl}  systemctl start obmc-host-crash@0.target
+# By default 1 iteration, user can key in nth number of iteration to control
+# how many time it needs MPIPL test runs.
+${MPIPL_LOOP_COUNT}     ${1}
+
 
 ** Test Cases **
 
-Trigger And Verify User Initiated Dump Using Diagnostic Mode Target
-    [Documentation]  Trigger And Verify user initiated dump using diagnostic mode target
-    [Tags]  Trigger_And_Verify_User_Initiated_Dump_Using_Diagnostic_Mode_Target
+Trigger User Tool Initiated MPIPL
+    [Documentation]  Trigger And Verify user tool initiated dump using
+    ...              obmc-host-crash target.
+    [Tags]  Trigger_User_Tool_Initiated_MPIPL
 
-    Redfish.Login
+    FOR  ${count}  IN RANGE  0  ${MPIPL_LOOP_COUNT}
+        Log To Console   MPIPL LOOP_COUNT:${count} execution.
+        Tool Initd MP Reboot
+        Required Dumps Should Exist
+    END
 
-    # Power off
-    Redfish Power Off
 
-    # Power on
-    Redfish Power On
+Trigger User Initiated MPIPL Using Redfish
+    [Documentation]  Verify redfish triggered MPIPL flow using diagnostic
+    ...              mode target.
+    [Tags]  Trigger_User_Initiated_MPIPL_Using_Redfish
 
-    # Trigger MPIPL
-    BMC Execute Command  ${user_initated_mpipl}
-    Sleep  240
+    FOR  ${count}  IN RANGE  0  ${MPIPL_LOOP_COUNT}
+        Log To Console   MPIPL LOOP_COUNT:${count} execution.
+        Redfish Initiated MPIPL
+        Required Dumps Should Exist
+    END
 
-    # Confirm boot after MPIPL
-    ${res}  ${stderr}  ${rc} =  BMC Execute Command  obmcutil state
-    Should Contain  ${res}  OSStatus.Standby
 
-    ${p0_cfam}  ${stderr}  ${rc} =  BMC Execute Command  pdbg -p0 getcfam 0x2809
-    Should Contain  ${p0_cfam}  0x854
-    Printn  ${p0_cfam}
+*** Keywords ***
 
-    ${p1_cfam}  ${stderr}  ${rc} =  BMC Execute Command  pdbg -p1 getcfam 0x2809
-    Should Contain  ${p1_cfam}  0x854
-    Printn  ${p1_cfam}
 
-Trigger And Verify User Initiated Dump Using Redfish
-    [Documentation]  Verify redfish triggered MPIPL flow
-    [Tags]  Trigger_And_Verify_User_Initiated_Dump_Using_Redfish
+Test Setup Execution
+    [Documentation]  Do the post test setup cleanup.
 
-    Redfish.Login
+    Test System Cleanup
 
-    # Power off
-    Redfish Power Off
+
+Test Teardown Execution
+    [Documentation]  Do the post test teardown.
+
+    FFDC On Test Case Fail
+
+
+Suite Teardown Execution
+    [Documentation]  Do the post suite teardown.
+
+    Test System Cleanup
+    Run Keyword And Ignore Error  Delete All Redfish Sessions
+
+
+Test System Cleanup
+    [Documentation]  Cleanup errors before exiting.
+
+    Run Keyword And Ignore Error  Redfish Purge Event Log
+    Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
+    Run Keyword And Ignore Error  Redfish Delete All System Dumps
+
+
+Redfish Initiated MPIPL
+    [Documentation]  Trigger redfish triggered MPIPL flow.
 
     # Power on
     Redfish Power On
@@ -58,23 +88,41 @@ Trigger And Verify User Initiated Dump Using Redfish
     # Trigger MPIPL
     ${payload} =  Create Dictionary
     ...  DiagnosticDataType=OEM  OEMDiagnosticDataType=System
-    Redfish.Post  ${DUMP_URI}/Dump/Actions/LogService.CollectDiagnosticData  body=&{payload}
+    Redfish.Post  ${DUMP_URI}/Actions/LogService.CollectDiagnosticData  body=&{payload}
     ...  valid_status_codes=[${HTTP_ACCEPTED}]
 
-    ${p0_cfam}  ${stderr}  ${rc} =  BMC Execute Command  pdbg -p0 getcfam 0x2809
-    Should Contain  ${p0_cfam}  0x854
-    Printn  ${p0_cfam}
 
-    ${p1_cfam}  ${stderr}  ${rc} =  BMC Execute Command  pdbg -p1 getcfam 0x2809
-    Should Contain  ${p1_cfam}  0x854
-    Printn  ${p1_cfam}
+Required Dumps Should Exist
+    [Documentation]  Check for BMC and system dump.
 
+    #   {
+    #       "@odata.id": "/redfish/v1/Managers/bmc/LogServices/Dump/Entries/4",
+    #       "@odata.type": "#LogEntry.v1_8_0.LogEntry",
+    #       "AdditionalDataSizeBytes": 914254,
+    #       "AdditionalDataURI": "/redfish/v1/Managers/bmc/LogServices/Dump/Entries/4/attachment",
+    #       "Created": "2022-07-22T03:36:23+00:00",
+    #       "DiagnosticDataType": "Manager",
+    #       "EntryType": "Event",
+    #       "Id": "4",
+    #       "Name": "BMC Dump Entry"
+    #   }
+    ${bmc_dump}=  Redfish.Get Properties  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
+    Log To Console  BMC dumps generated: ${bmc_dump['Members@odata.count']}
+    Should Be True  ${bmc_dump['Members@odata.count']} >= 1  msg=No BMC dump generated.
 
-*** Keywords ***
-
-Test Teardown Execution
-    [Documentation]  Do the post test teardown.
-
-    Run Keyword And Ignore Error  Redfish.Logout
-    FFDC On Test Case Fail
-
+    #"Members": [
+    #   {
+    #       "@odata.id": "/redfish/v1/Systems/system/LogServices/Dump/Entries/System_1",
+    #       "@odata.type": "#LogEntry.v1_8_0.LogEntry",
+    #       "AdditionalDataSizeBytes": 2363839216,
+    #       "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/Dump/Entries/System_1/attachment",
+    #       "Created": "2022-07-22T03:38:58+00:00",
+    #       "DiagnosticDataType": "OEM",
+    #       "EntryType": "Event",
+    #       "Id": "System_1",
+    #       "Name": "System Dump Entry",
+    #       "OEMDiagnosticDataType": "System"
+    #   }
+    ${sys_dump}=  Redfish.Get Properties  /redfish/v1/Systems/system/LogServices/Dump/Entries
+    Log To Console  System dump generated: ${sys_dump['Members@odata.count']}
+    Should Be True  ${sys_dump['Members@odata.count']} == 1  msg=No system dump generated.
