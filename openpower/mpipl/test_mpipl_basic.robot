@@ -56,6 +56,7 @@ Test Setup Execution
     [Documentation]  Do the post test setup cleanup.
 
     Test System Cleanup
+    Run Keyword And Ignore Error  Clear All Subscriptions
 
 
 Test Teardown Execution
@@ -86,13 +87,16 @@ Redfish Initiated MPIPL
     Redfish Power On
 
     # Trigger MPIPL
+    Log To Console  Trigger System dump
     ${payload} =  Create Dictionary
     ...  DiagnosticDataType=OEM  OEMDiagnosticDataType=System
     Redfish.Post  ${DUMP_URI}/Actions/LogService.CollectDiagnosticData  body=&{payload}
     ...  valid_status_codes=[${HTTP_ACCEPTED}]
 
+    Sleep  10s
+
     Log To Console  Wait for system to transition DiagnosticMode
-    Wait Until Keyword Succeeds  2 min  5 sec  Is Boot Progress Changed
+    Wait Until Keyword Succeeds  2 min  3 sec  Is Boot Progress Changed
 
     Log To Console  Wait for system to transition path DiagnosticMode to Runtime.
     Wait Until Keyword Succeeds  10 min  20 sec  Is Boot Progress Runtime Matched
