@@ -10,6 +10,8 @@ Library          ../../lib/gen_robot_valid.py
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
+Force Tags     Firmware_Inventory
+
 *** Test Cases ***
 
 Verify Redfish Update Service Enabled

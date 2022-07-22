@@ -25,6 +25,7 @@ Suite Teardown           Redfish.Logout
 Test Setup               Printn
 Test Teardown            FFDC On Test Case Fail
 
+Force Tags   Signed_Upload_Test
 
 *** Variables ***
 

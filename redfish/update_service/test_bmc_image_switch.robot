@@ -11,6 +11,8 @@ Suite Setup              Suite Setup Execution
 Suite Teardown           Redfish.Logout
 Test Teardown            FFDC On Test Case Fail
 
+Force Tags    Test_BMC_Image_Switch
+
 *** Variables ***
 
 # Switch iteration count. By default it does only 2 switch.
