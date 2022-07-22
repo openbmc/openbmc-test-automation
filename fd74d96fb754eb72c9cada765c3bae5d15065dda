@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce3793fc_b6f6d8b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-22T14:57:52Z",
+      "side": 1,
+      "message": "Sridevi/Anusha/Vinay,  can u take a look at this ?",
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
