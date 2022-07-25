@@ -272,15 +272,42 @@ Get System Firmware Details
 
 
 Switch Backup Firmware Image To Functional
-   [Documentation]  Switch the backup firmware image to make functional.
+    [Documentation]  Switch the backup firmware image to make functional.
 
-   ${sw_inv}=  Get Functional Firmware  BMC image
-   ${nonfunctional_sw_inv}=  Get Non Functional Firmware  ${sw_inv}  False
+    ${sw_inv}=  Get Functional Firmware  BMC image
+    ${nonfunctional_sw_inv}=  Get Non Functional Firmware  ${sw_inv}  False
 
-   ${firmware_inv_path}=
-   ...  Set Variable  /redfish/v1/UpdateService/FirmwareInventory/${nonfunctional_sw_inv['image_id']}
+    ${firmware_inv_path}=
+    ...  Set Variable  /redfish/v1/UpdateService/FirmwareInventory/${nonfunctional_sw_inv['image_id']}
 
-   # Below URI, change to backup image and reset the BMC.
-   Redfish.Patch  /redfish/v1/Managers/bmc
-   ...  body={'Links': {'ActiveSoftwareImage': {'@odata.id': '${firmware_inv_path}'}}}
+    # Below URI, change to backup image and reset the BMC.
+    Redfish.Patch  /redfish/v1/Managers/bmc
+    ...  body={'Links': {'ActiveSoftwareImage': {'@odata.id': '${firmware_inv_path}'}}}
+
+
+Get And Match Task Progress State
+    [Documentation]
+    [Arguments]  ${task_inv}  ${task_state_dict}
+
+    Wait Until Keyword Succeeds  5 min  20 sec
+    ...  Verify Task Progress State  ${task_inv}  ${task_state_dict}
+    ${task_payload}=  Redfish.Get Properties  ${task_inv['TaskIdURI']}
+
+    ${task_state_inv}=  Create Dictionary
+    Set To Dictionary  ${task_state_inv}  TaskIdURI  ${task_payload['@odata.id']}
+    Set To Dictionary  ${task_state_inv}  TaskState  ${task_payload['TaskState']}
+    Set To Dictionary  ${task_state_inv}  TaskStatus  ${task_payload['TaskStatus']}
+
+    [Return]  ${task_state_inv}
+
+
+Verify Task Progress State
+    [Documentation]
+    [Arguments]  ${task_inv}  ${task_state_dict}
+
+    ${temp_task_state_dict}=  Create Dictionary
+    ${task_payload}=  Redfish.Get Properties   ${task_inv['TaskIdURI']}
+
+    Should Be Equal As Strings  ${task_state_dict['TaskState']}  ${task_payload['TaskState']}
+    Should Be Equal As Strings  ${task_state_dict['TaskStatus']}  ${task_payload['TaskStatus']}
 

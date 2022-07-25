@@ -100,6 +100,7 @@ Verify If The Modified Admin Credential Is Valid Post Update
     Redfish.Login  admin_user  0penBmc123
     Redfish.Logout
 
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -122,11 +123,30 @@ Redfish Update Firmware
     ${state}=  Get Pre Reboot State
     Rprint Vars  state
     Set ApplyTime  policy=${apply_Time}
-    Redfish Upload Image And Check Progress State
+    #Redfish Upload Image And Check Progress State
+    #Run Key  ${post_code_update_actions['BMC image']['${apply_time}']}
+    #Redfish.Login
+    #Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
+    #Verify Get ApplyTime  ${apply_time}
+
+    Log To Console   Start uploading image to BMC.
+    ${resp}=  Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${IMAGE_FILE_PATH}
+    Log To Console   Completed image upload to BMC.
+
+    #${list_task}=  Get All Task  /redfish/v1/UpdateService  OK  Running
+
+    #Wait Until Keyword Succeeds  2 min  05 sec
+    #...  Check Task Progress State  ${list_task}  OK  Completed
+
+    ${task_completed}=  Create Dictionary
+    Set To Dictionary  ${task_completed}  TaskState  Completed
+    Set To Dictionary  ${task_completed}  TaskStatus  OK
+    Log  ${resp}
+    ${task_state_inv}=  Get And Match Task Progress State  ${resp}  ${task_completed}
     Run Key  ${post_code_update_actions['BMC image']['${apply_time}']}
     Redfish.Login
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
-    Verify Get ApplyTime  ${apply_time}
+    Verify Get ApplyTime  ${apply_time} 
 
 
 Redfish Multiple Upload Image And Check Progress State
