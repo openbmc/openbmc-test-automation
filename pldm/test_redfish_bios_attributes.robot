@@ -23,7 +23,6 @@ ${attr_table_data}          ${EMPTY}
 *** Test Cases ***
 
 Redfish Verify Set BIOS Attribute With Invalid Attribute Name
-
     [Documentation]  Verify set BIOS attribute with invalid attribute name using
     ...              Redfish.
     [Tags]  Redfish_Verify_Set_BIOS_Attribute_With_Invalid_Attribute_Name
@@ -34,7 +33,6 @@ Redfish Verify Set BIOS Attribute With Invalid Attribute Name
 
 
 Redfish Verify Set Invalid Optional Value For BIOS Enumeration Attribute Type
-
     [Documentation]  Verify set invalid optional value for BIOS enumeration attribute type
     ...              using Redfish.
     [Tags]  Redfish_Verify_Set_Invalid_Optional_Value_For_BIOS_Enumeration_Attribute_Type
@@ -48,7 +46,6 @@ Redfish Verify Set Invalid Optional Value For BIOS Enumeration Attribute Type
 
 
 Redfish Verify Set Out Of Range Integer Value For BIOS Integer Attribute Type
-
     [Documentation]  Verify set out of range integer value for BIOS integer attribute type
     ...              using Redfish.
     [Tags]  Redfish_Verify_Set_Out_Of_Range_Integer_Value_For_BIOS_Integer_Attribute_Type
@@ -79,35 +76,49 @@ Redfish Verify Set Out Of Range String Value For BIOS String Attribute Type
 
 
 Redfish Verify Set BIOS String Attribute Type
-
     [Documentation]  Verify set BIOS string attribute type for various BIOS
     ...              attribute handle with random values with in the range using Redfish.
     [Tags]  Redfish_Verify_Set_BIOS_String_Attribute_Type
+
+    @{failed_attr_list}=  Create List
 
     ${attr_val_data}=  GetBIOSStrAndIntAttributeHandles  BIOSString  ${attr_table_data}
     @{attr_handles}=  Get Dictionary Keys  ${attr_val_data}
     FOR  ${i}  IN  @{attr_handles}
         ${random_value}=  GetRandomBIOSIntAndStrValues  ${i}  ${attr_val_data['${i}']["MaximumStringLength"]}
-        Set BIOS Attribute Value And Verify  ${i}  ${random_value}
+        ${status}=  Run Keyword And Return Status
+        ...  Set BIOS Attribute Value And Verify  ${i}  ${random_value}
+        Run Keyword If  ${status} == ${False}  Append To List  ${failed_attr_list}  ${i}
     END
+
+    ${fail_count}=  Get Length  ${failed_attr_list}
+    Should Be Equal  ${fail_count}  ${0}
+    ...  msg= BIOS write Failed ${fail_count} list: ${failed_attr_list}
+
 
 
 Redfish Verify Set BIOS Integer Attribute Type
-
     [Documentation]  Verify set BIOS integer attribute type for various BIOS
     ...              attribute handle with random values with in the range using Redfish.
     [Tags]  Redfish_Verify_Set_BIOS_Integer_Attribute_Type
+
+    @{failed_attr_list}=  Create List
 
     ${attr_val_data}=  GetBIOSStrAndIntAttributeHandles  BIOSInteger  ${attr_table_data}
     @{attr_handles}=  Get Dictionary Keys  ${attr_val_data}
     FOR  ${i}  IN  @{attr_handles}
         ${random_value}=  GetRandomBIOSIntAndStrValues  ${i}  ${attr_val_data['${i}']["UpperBound"]}
-        Set BIOS Attribute Value And Verify  ${i}  ${random_value}
+        ${status}=  Run Keyword And Return Status
+        ...  Set BIOS Attribute Value And Verify  ${i}  ${random_value}
+        Run Keyword If  ${status} == ${False}  Append To List  ${failed_attr_list}  ${i}
     END
+
+    ${fail_count}=  Get Length  ${failed_attr_list}
+    Should Be Equal  ${fail_count}  ${0}
+    ...  msg= BIOS write Failed ${fail_count} list: ${failed_attr_list}
 
 
 Redfish Verify Set BIOS Enumeration Attribute Type
-
     [Documentation]  Validate get and update BIOS attribute optional values
     ...              and set back to original BIOS attribute values using Redfish.
     [Tags]  Redfish_Verify_Set_BIOS_Enumeration_Attribute_Type
@@ -128,7 +139,6 @@ Redfish Verify Set BIOS Enumeration Attribute Type
 
 
 Redfish Verify Restore BIOS Attribute Values
-
     [Documentation]  Restore all BIOS attribute values with its default values and verify
     ...              using Redfish.
     [Tags]  Redfish_Verify_Restore_BIOS_Attribute_Values
@@ -144,7 +154,6 @@ Redfish Verify Restore BIOS Attribute Values
 *** Keywords ***
 
 Redfish BIOS Suite Setup
-
     [Documentation]  Perform Redfish BIOS suite setup.
 
     Redfish.Login
@@ -156,7 +165,6 @@ Redfish BIOS Suite Setup
 
 
 Redfish BIOS Suite Cleanup
-
     [Documentation]  Perform Redfish BIOS suite cleanup.
 
     @{attr_handles}=  Get Dictionary Keys  ${bios_original_data}
