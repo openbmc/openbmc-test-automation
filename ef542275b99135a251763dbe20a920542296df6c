@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc729b04_7aca8d28",
+        "filename": "openpower/ext_interfaces/test_savearea_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-25T06:13:21Z",
+      "side": 1,
+      "message": "Can u please mention in the notes why these is commented?\n\nCan u also move this comments section testcase ending so that u will not need *** Test Cases *** section twice",
+      "revId": "ef542275b99135a251763dbe20a920542296df6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
