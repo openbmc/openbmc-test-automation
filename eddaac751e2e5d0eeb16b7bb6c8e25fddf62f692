@@ -49,6 +49,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d4951e7_11a2a19a",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-07-25T11:45:35Z",
+      "side": 1,
+      "message": "${invalid_port_number}",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 22
+      },
+      "revId": "eddaac751e2e5d0eeb16b7bb6c8e25fddf62f692",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c7604d1_189211bc",
         "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
         "patchSetId": 1
@@ -62,6 +85,29 @@
       "message": "these are duplicate codes",
       "range": {
         "startLine": 174,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 71
+      },
+      "revId": "eddaac751e2e5d0eeb16b7bb6c8e25fddf62f692",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f09ed58c_b73c01f4",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-07-25T11:45:35Z",
+      "side": 1,
+      "message": "If this is a test case, should be in the \"Test cases\" section. \nor if it is a keyword where are you calling this keyword in this script?",
+      "range": {
+        "startLine": 192,
         "startChar": 0,
         "endLine": 206,
         "endChar": 71
