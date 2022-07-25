@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2dc78a4_a6b1fbb9",
+        "filename": "lib/utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2022-07-25T06:55:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "368d215c_e0ffed29",
+      "range": {
+        "startLine": 1091,
+        "startChar": 58,
+        "endLine": 1091,
+        "endChar": 62
+      },
+      "revId": "237dcb52e8c8817c03d3923eecb418a44d6ec397",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31a2e511_5c52d6d6",
