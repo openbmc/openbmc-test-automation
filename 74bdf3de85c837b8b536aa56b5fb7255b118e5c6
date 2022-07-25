@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "faec413c_69e1f4b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-25T17:38:45Z",
+      "side": 1,
+      "message": "Test Redfish Bios Attributes :: This suite test various BIOS attri... | PASS |\n2 tests, 2 passed, 0 failed",
+      "revId": "74bdf3de85c837b8b536aa56b5fb7255b118e5c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
