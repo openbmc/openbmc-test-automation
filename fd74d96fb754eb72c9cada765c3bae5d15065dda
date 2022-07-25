@@ -89,6 +89,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10ac50b9_67bc2bcc",
+        "filename": "lib/sensor_info_record.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2022-07-25T08:32:27Z",
+      "side": 1,
+      "message": "Please rename the function: Create A Dictionary With Sensor Name And Service Path URI",
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "39d8bf36_d8c10f16",
         "filename": "lib/sensor_info_record.robot",
         "patchSetId": 1
@@ -158,6 +175,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d81b7432_c6da09f9",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2022-07-25T08:32:27Z",
+      "side": 1,
+      "message": "is",
+      "range": {
+        "startLine": 28,
+        "startChar": 32,
+        "endLine": 28,
+        "endChar": 35
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd8d2e36_6883bd75",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2022-07-25T08:32:27Z",
+      "side": 1,
+      "message": "just a thought, instead of \u0027As\u0027  \u0027if\u0027 or \u0027is\u0027 is more appropriate",
+      "range": {
+        "startLine": 32,
+        "startChar": 28,
+        "endLine": 32,
+        "endChar": 30
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be7311ab_9f5b7e82",
         "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
         "patchSetId": 1
@@ -173,6 +236,167 @@
         "startLine": 33,
         "startChar": 41,
         "endLine": 33,
+        "endChar": 44
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6696fcd_622ecdd2",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2022-07-25T08:32:27Z",
+      "side": 1,
+      "message": "same comment as above",
+      "range": {
+        "startLine": 34,
+        "startChar": 12,
+        "endLine": 34,
+        "endChar": 50
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03ceff75_6242216c",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2022-07-25T08:32:27Z",
+      "side": 1,
+      "message": "are",
+      "range": {
+        "startLine": 36,
+        "startChar": 31,
+        "endLine": 36,
+        "endChar": 34
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c7b4daa_7d515209",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2022-07-25T08:32:27Z",
+      "side": 1,
+      "message": "is",
+      "range": {
+        "startLine": 47,
+        "startChar": 47,
+        "endLine": 47,
+        "endChar": 50
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2f324a7_cb93025b",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2022-07-25T08:32:27Z",
+      "side": 1,
+      "message": "is",
+      "range": {
+        "startLine": 52,
+        "startChar": 77,
+        "endLine": 52,
+        "endChar": 80
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfcdf300_b2922c70",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2022-07-25T08:32:27Z",
+      "side": 1,
+      "message": "which are not",
+      "range": {
+        "startLine": 54,
+        "startChar": 27,
+        "endLine": 54,
+        "endChar": 28
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54a843d9_c52d74bf",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2022-07-25T08:32:27Z",
+      "side": 1,
+      "message": "same as previous comment.",
+      "range": {
+        "startLine": 55,
+        "startChar": 46,
+        "endLine": 55,
+        "endChar": 49
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8519570_422c90fc",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2022-07-25T08:32:27Z",
+      "side": 1,
+      "message": "are",
+      "range": {
+        "startLine": 80,
+        "startChar": 41,
+        "endLine": 80,
         "endChar": 44
       },
       "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
@@ -296,6 +520,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95815e22_2592ee0f",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2022-07-25T08:32:27Z",
+      "side": 1,
+      "message": "lets re-name the dictionary to more meaningful name.",
+      "range": {
+        "startLine": 198,
+        "startChar": 30,
+        "endLine": 198,
+        "endChar": 39
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0843636b_185195cf",
         "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
         "patchSetId": 1
@@ -307,6 +554,30 @@
       "writtenOn": "2022-07-25T06:07:49Z",
       "side": 1,
       "message": "I didn\u0027t get the purpose of this dictionary. Also how does this value sync with the values that you are putting to the same dict below. Can you add few comments and give examples to explain.",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 63
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "683ded97_f141c1e4",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2022-07-25T08:32:27Z",
+      "side": 1,
+      "message": "As Anusha mentioned, please add sample examples to elaborate the purpose of this dictionary.",
+      "parentUuid": "0843636b_185195cf",
       "range": {
         "startLine": 190,
         "startChar": 0,
@@ -335,6 +606,75 @@
         "startChar": 4,
         "endLine": 210,
         "endChar": 58
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4959af0d_2275019e",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2022-07-25T08:32:27Z",
+      "side": 1,
+      "message": "please rename the dictionary.",
+      "range": {
+        "startLine": 259,
+        "startChar": 32,
+        "endLine": 259,
+        "endChar": 41
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e283309c_4532481b",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2022-07-25T08:32:27Z",
+      "side": 1,
+      "message": "if or is",
+      "range": {
+        "startLine": 293,
+        "startChar": 31,
+        "endLine": 293,
+        "endChar": 33
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47a22cdd_99c6a4e9",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2022-07-25T08:32:27Z",
+      "side": 1,
+      "message": "if or is",
+      "range": {
+        "startLine": 294,
+        "startChar": 47,
+        "endLine": 294,
+        "endChar": 50
       },
       "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
@@ -474,6 +814,23 @@
         "endLine": 479,
         "endChar": 25
       },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a304ea9b_598348e9",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2022-07-25T08:32:27Z",
+      "side": 1,
+      "message": "can we club the Health state and reading values into a single function?",
       "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
