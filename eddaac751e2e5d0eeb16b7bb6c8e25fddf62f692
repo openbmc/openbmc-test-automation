@@ -22,6 +22,52 @@
       },
       "revId": "eddaac751e2e5d0eeb16b7bb6c8e25fddf62f692",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83eb7d8d_fba558e6",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-25T11:34:55Z",
+      "side": 1,
+      "message": "??",
+      "range": {
+        "startLine": 37,
+        "startChar": 24,
+        "endLine": 37,
+        "endChar": 40
+      },
+      "revId": "eddaac751e2e5d0eeb16b7bb6c8e25fddf62f692",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c7604d1_189211bc",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-25T11:34:55Z",
+      "side": 1,
+      "message": "these are duplicate codes",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 71
+      },
+      "revId": "eddaac751e2e5d0eeb16b7bb6c8e25fddf62f692",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
