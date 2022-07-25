@@ -338,6 +338,144 @@
       },
       "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ded6daa_7b19bece",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-25T07:23:34Z",
+      "side": 1,
+      "message": "Validate Redfish Reading And Threshold Value And Sensor State",
+      "range": {
+        "startLine": 321,
+        "startChar": 0,
+        "endLine": 321,
+        "endChar": 94
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd1bb0f6_90545ac6",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-25T07:23:34Z",
+      "side": 1,
+      "message": "can u please mention these info in [Documentation] and just have the keyword name  as \u0027Validate Sensor State For Lower Threshold Values\u0027",
+      "range": {
+        "startLine": 363,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 111
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ed831ee_d530bea2",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-25T07:23:34Z",
+      "side": 1,
+      "message": "can u please mention these info in [Documentation] and just have the keyword name  as \u0027Validate Sensor State For Upper Threshold Values\u0027",
+      "range": {
+        "startLine": 385,
+        "startChar": 0,
+        "endLine": 385,
+        "endChar": 111
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "859af0d4_ee5f2f7a",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-25T07:23:34Z",
+      "side": 1,
+      "message": "Validate Redfish Sensor Status",
+      "range": {
+        "startLine": 407,
+        "startChar": 0,
+        "endLine": 407,
+        "endChar": 49
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c915cba_976d5e2a",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-25T07:23:34Z",
+      "side": 1,
+      "message": "Can u please combined \u0027Get Sensor Unit\u0027, \u0027Get Sensor ID\u0027 and \u0027Get Redfish Sensor Reading Value\u0027 keywords.\n\nLets make generic keywords.\n\nwhere ${required_field} can be \u0027ReadingUnits\u0027 or \u0027Reading\u0027 or \u0027Id\u0027\n\nGet Required Redfish Sensor Reading\n\n[Arguments]  ${sensor_uri}  ${required_field}\n\n${sensor_properties}\u003d  Redfish.Get Properties  ${sensor_uri}\n[Return]  ${sensor_properties[${required_field}]}",
+      "range": {
+        "startLine": 459,
+        "startChar": 0,
+        "endLine": 459,
+        "endChar": 15
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3926ec5b_bd128883",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-25T07:23:34Z",
+      "side": 1,
+      "message": "Can u please combined \u0027Get Redfish Sensor Status\u0027 and \u0027Get Redfish Sensor Health State\u0027 keywords together? So that it can be generic.\n\nwhere  ${required_field} is \u0027State\u0027 or \u0027Health\u0027\n \nGet Redfish Sensor Status\n\n [Arguments]  ${sensor_uri}   ${required_field}\n \n ${sensor_properties}\u003d  Redfish.Get Properties  ${sensor_uri}\n [Return]  ${sensor_properties[\u0027Status\u0027][${required_field}]}",
+      "range": {
+        "startLine": 479,
+        "startChar": 0,
+        "endLine": 479,
+        "endChar": 25
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
