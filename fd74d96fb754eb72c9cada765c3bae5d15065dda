@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b353180d_70b9aa11",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-07-25T06:07:49Z",
+      "side": 1,
+      "message": "Remove the tabs please.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 91
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ce3793fc_b6f6d8b8",
@@ -14,6 +37,305 @@
       "writtenOn": "2022-07-22T14:57:52Z",
       "side": 1,
       "message": "Sridevi/Anusha/Vinay,  can u take a look at this ?",
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f31d0735_d711df35",
+        "filename": "lib/sensor_info_record.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-07-25T06:07:49Z",
+      "side": 1,
+      "message": "A",
+      "range": {
+        "startLine": 19,
+        "startChar": 7,
+        "endLine": 19,
+        "endChar": 9
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d594d933_51fb3faa",
+        "filename": "lib/sensor_info_record.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-07-25T06:07:49Z",
+      "side": 1,
+      "message": "a",
+      "range": {
+        "startLine": 20,
+        "startChar": 28,
+        "endLine": 20,
+        "endChar": 30
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39d8bf36_d8c10f16",
+        "filename": "lib/sensor_info_record.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-07-25T06:07:49Z",
+      "side": 1,
+      "message": "I didn\u0027t see any value being updated for this list.",
+      "range": {
+        "startLine": 42,
+        "startChar": 49,
+        "endLine": 42,
+        "endChar": 94
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b2eb7b9_b20e76ff",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-07-25T06:07:49Z",
+      "side": 1,
+      "message": "Check Sensor Reading Value Is Available In Redfish",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 45
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9427025f_1f7a7b04",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-07-25T06:07:49Z",
+      "side": 1,
+      "message": "is",
+      "range": {
+        "startLine": 27,
+        "startChar": 48,
+        "endLine": 27,
+        "endChar": 51
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be7311ab_9f5b7e82",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-07-25T06:07:49Z",
+      "side": 1,
+      "message": "is",
+      "range": {
+        "startLine": 33,
+        "startChar": 41,
+        "endLine": 33,
+        "endChar": 44
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30182207_4d0d7739",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-07-25T06:07:49Z",
+      "side": 1,
+      "message": "Need Redfish login for this suite.",
+      "range": {
+        "startLine": 93,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 38
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c8c235e_74ddcfbd",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-07-25T06:07:49Z",
+      "side": 1,
+      "message": "Please create separate keywords based on the individual functionality for these and call them here.",
+      "range": {
+        "startLine": 97,
+        "startChar": 1,
+        "endLine": 135,
+        "endChar": 1
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2736c87a_6e426a75",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-07-25T06:07:49Z",
+      "side": 1,
+      "message": "Are",
+      "range": {
+        "startLine": 139,
+        "startChar": 27,
+        "endLine": 139,
+        "endChar": 30
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15cdc52e_d071249c",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-07-25T06:07:49Z",
+      "side": 1,
+      "message": "Description of Arguments required. Add wherever applicable.",
+      "range": {
+        "startLine": 175,
+        "startChar": 4,
+        "endLine": 175,
+        "endChar": 53
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a5e6026_e1bf3d54",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-07-25T06:07:49Z",
+      "side": 1,
+      "message": "Is this for future use?",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 55
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0843636b_185195cf",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-07-25T06:07:49Z",
+      "side": 1,
+      "message": "I didn\u0027t get the purpose of this dictionary. Also how does this value sync with the values that you are putting to the same dict below. Can you add few comments and give examples to explain.",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 63
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d62fa4b_aad956ac",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-07-25T06:07:49Z",
+      "side": 1,
+      "message": "FOR    ${key}    ${value}    IN    \u0026{DICT}",
+      "range": {
+        "startLine": 210,
+        "startChar": 4,
+        "endLine": 210,
+        "endChar": 58
+      },
       "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
