@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d00608a_811ec919",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-07-26T15:26:50Z",
+      "side": 1,
+      "message": "This Keyword can be used in other place also in future where Task is getting created.",
+      "parentUuid": "0711ddb4_bab8aafd",
+      "range": {
+        "startLine": 288,
+        "startChar": 0,
+        "endLine": 288,
+        "endChar": 4
+      },
+      "revId": "80253058dd6bd8c5eb418a961c0eb95ee281b51f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "39bedb41_32216759",
         "filename": "lib/redfish_code_update_utils.robot",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-26T14:25:53Z",
       "side": 1,
       "message": "is matched with",
+      "range": {
+        "startLine": 304,
+        "startChar": 49,
+        "endLine": 304,
+        "endChar": 67
+      },
+      "revId": "80253058dd6bd8c5eb418a961c0eb95ee281b51f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78b7ddc9_51e08604",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-07-26T15:26:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39bedb41_32216759",
       "range": {
         "startLine": 304,
         "startChar": 49,
@@ -60,6 +108,30 @@
       "writtenOn": "2022-07-26T14:25:53Z",
       "side": 1,
       "message": "Rename the arguments\n\n${task_inv} \u003d\u003d\u003d\u003e ${task_dict_info}\n${task_state_dict}  \u003d\u003d\u003d\u003e ${input_task_dict_info}\n\nor something more apt.\n\nAlso put the apt description for task_state_dict after renaming",
+      "range": {
+        "startLine": 305,
+        "startChar": 19,
+        "endLine": 305,
+        "endChar": 27
+      },
+      "revId": "80253058dd6bd8c5eb418a961c0eb95ee281b51f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3df9e463_3c9964e0",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-07-26T15:26:50Z",
+      "side": 1,
+      "message": "I have added more information in keyword. task_inv - keeping same as the same name will be consumed many place. task_state - changed and description is added from where user is fetching the values.",
+      "parentUuid": "6d7a7daf_4adb34aa",
       "range": {
         "startLine": 305,
         "startChar": 19,
