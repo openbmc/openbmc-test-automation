@@ -1,0 +1,14 @@
+{
+	"TaskRunning": {
+		"TaskState": "Running",
+		"TaskStatus": "OK"
+	},
+	"TaskCompleted": {
+		"TaskState": "Completed",
+		"TaskStatus": "OK"
+	},
+	"TaskException": {
+		"TaskState": "Exception",
+		"TaskStatus": "Warning"
+	}
+}
