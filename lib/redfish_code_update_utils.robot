@@ -284,3 +284,48 @@ Switch Backup Firmware Image To Functional
    Redfish.Patch  /redfish/v1/Managers/bmc
    ...  body={'Links': {'ActiveSoftwareImage': {'@odata.id': '${firmware_inv_path}'}}}
 
+
+Form Initiated Task State Dict
+    [Documentation]  Create task state dictionary.
+    [Arguments]  ${task_obj}
+
+    # Description of argument(s):
+    # task_obj    Task object to contain information about initiated task.
+
+    # task_inv
+    # TaskIdURI     /redfish/v1/TaskService/Tasks/0
+    # TaskState     Starting
+    # TaskStatus    OK
+
+    ${task_inv}=  Create Dictionary
+    Set To Dictionary  ${task_inv}  TaskIdURI  ${task_obj['@odata.id']}
+    Set To Dictionary  ${task_inv}  TaskState  ${task_obj['TaskState']}
+    Set To Dictionary  ${task_inv}  TaskStatus  ${task_obj['TaskStatus']}
+
+    [Return]  ${task_inv}
+
+
+Verify Task Progress State
+    [Documentation]  Verify the task progress is getting matched by user input task state.
+    [Arguments]  ${task_inv}  ${task_state_dict}
+
+    # Description of argument(s):
+    # task_inv           Initiated task dict information.
+    # task_state_dict    Match task state dict which is taken from data/task_state.json.
+
+    # task_inv
+    # TaskIdURI     /redfish/v1/TaskService/Tasks/0
+    # TaskState     Starting
+    # TaskStatus    OK
+
+    ${task_payload}=  Redfish.Get Properties   ${task_inv['TaskIdURI']}
+
+    ${temp_task_inv}=  Create Dictionary
+    Set To Dictionary  ${temp_task_inv}  TaskState  ${task_payload['TaskState']}
+    Set To Dictionary  ${temp_task_inv}  TaskStatus  ${task_payload['TaskStatus']}
+
+    Rprint Vars  temp_task_inv
+
+    Should Be Equal As Strings  ${task_state_dict['TaskState']}  ${task_payload['TaskState']}
+    Should Be Equal As Strings  ${task_state_dict['TaskStatus']}  ${task_payload['TaskStatus']}
+
