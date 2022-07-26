@@ -832,6 +832,34 @@ Get Post Boot Action
     [Return]  ${post_code_update_actions}
 
 
+Get Task State Inventory
+    [Documentation]  Get task state object.
+
+    # Task State
+    #
+    # {
+    #	"TaskRunning": {
+    #		"TaskState": "Running",
+    #		"TaskStatus": "OK"
+    #	},
+    #	"TaskCompleted": {
+    #		"TaskState": "Completed",
+    #		"TaskStatus": "OK"
+    #	},
+    #	"TaskException": {
+    #		"TaskState": "Exception",
+    #		"TaskStatus": "Warning"
+    #	}
+    # }
+
+    ${code_base_dir_path}=  Get Code Base Dir Path
+    ${task_state_inventory}=  Evaluate
+    ...  json.load(open('${code_base_dir_path}data/task_state.json'))  modules=json
+    Rprint Vars  task_state_inventory
+
+    [Return]  ${task_state_inventory}
+
+
 Redfish Set Boot Default
     [Documentation]  Set and Verify Boot source override
     [Arguments]      ${override_enabled}  ${override_target}  ${override_mode}=UEFI
