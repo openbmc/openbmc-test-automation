@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d627d99e_07ae108a",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-26T05:10:42Z",
+      "side": 1,
+      "message": "[Teardown]  Enable SSH Protocol  ${True}\n    ...  AND  Wait Until Keyword Succeeds  2 min  30 sec  Open Connection And Login",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 82
+      },
+      "revId": "d192b8b76fcd34e4dbad5456ceca7d0bb0be8644",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48c9e0b2_2b31fa6b",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-07-26T05:10:42Z",
+      "side": 1,
+      "message": "[Teardown]  Enable IPMI Protocol  ${True}\n    ...  AND  Wait Until Keyword Succeeds  2 mins  30 sec  Run IPMI Standard Command  sel info",
+      "revId": "d192b8b76fcd34e4dbad5456ceca7d0bb0be8644",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
