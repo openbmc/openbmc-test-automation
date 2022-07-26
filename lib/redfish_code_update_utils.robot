@@ -284,3 +284,101 @@ Switch Backup Firmware Image To Functional
    Redfish.Patch  /redfish/v1/Managers/bmc
    ...  body={'Links': {'ActiveSoftwareImage': {'@odata.id': '${firmware_inv_path}'}}}
 
+
+
+Create List Of Task
+    [Documentation]  Create list of task from task dict list.
+    [Arguments]  ${task_dict_list}
+
+    # Description of argument(s):
+    # task_dict_list    Task id dict list.
+
+    ${task_list}=  Create List 
+
+    FOR  ${task_dict}  IN  @{task_dict_list}
+      Log  ${task_dict}
+      Append To List  ${task_list}  ${task_dict['@odata.id']}
+    END
+
+    [Return]  ${task_list}
+
+
+Create Initiated Task State Dict
+    [Documentation]  Create task state dictionary.
+    [Arguments]  ${task_obj}
+
+    # Description of argument(s):
+    # task_obj    Task dict which contain information about initiated task.
+
+    # task_inv
+    # TargetUri     /redfish/v1/UpdateService
+    # TaskIdURI     /redfish/v1/TaskService/Tasks/0
+    # TaskState     Starting
+    # TaskStatus    OK 
+
+    ${task_inv}=  Create Dictionary
+    Set To Dictionary  ${task_inv}  TargetUri  ${task_obj['Payload']['TargetUri']}
+    Set To Dictionary  ${task_inv}  TaskIdURI  ${task_obj['@odata.id']}
+    Set To Dictionary  ${task_inv}  TaskState  ${task_obj['TaskState']}
+    Set To Dictionary  ${task_inv}  TaskStatus  ${task_obj['TaskStatus']}
+
+    [Return]  ${task_inv}
+
+
+Match Target URI
+    [Documentation]  Match target uri from task list.
+    [Arguments]  ${task_list}  ${target_uri}
+
+    # Description of argument(s):
+    # task_list    Task id list.
+    # target_uri
+
+    FOR  ${task_id}  IN  @{task_list}
+      ${task_payload}=  Redfish.Get Properties  ${task_id}
+      Run Keyword And Return If  '${task_payload['Payload']['TargetUri']}' == '${target_uri}'  Create Initiated Task State Dict  ${task_payload}
+    END
+
+
+Check Task With Match TargetUri
+    [Documentation]  Create task state dictionary.
+    [Arguments]  ${target_uri}
+
+    # Description of argument(s):
+    # task_obj    Task dict which contain information about initiated task.
+
+    Set Test Variable  ${task_uri}  /redfish/v1/TaskService/Tasks
+
+    ${task_dict_list}=  Redfish.Get Attribute  ${task_uri}  Members
+
+    ${task_list}=  Create List Of Task  ${task_dict_list}
+
+    ${task_inv}=  Match Target URI  ${task_list}  ${target_uri}
+
+    [Return]  ${task_inv}
+
+
+Verify Task Progress State
+    [Documentation]  Verify task progress matches the user expected task state.
+    [Arguments]  ${task_inv}  ${task_state}
+
+    # Description of argument(s):
+    # task_inv      Initiated task inventory dict information.
+    # task_state    Expected task state, user reference from data/task_state.json.
+
+    # task_inv
+    # TaskIdURI     /redfish/v1/TaskService/Tasks/0
+    # TaskState     Starting
+    # TaskStatus    OK
+
+    ${task_payload}=  Redfish.Get Properties   ${task_inv['TaskIdURI']}
+    Log  ${task_payload}
+
+    ${temp_task_inv}=  Create Dictionary
+    Set To Dictionary  ${temp_task_inv}  TaskState  ${task_payload['TaskState']}
+    Set To Dictionary  ${temp_task_inv}  TaskStatus  ${task_payload['TaskStatus']}
+
+    Rprint Vars  temp_task_inv
+
+    Should Be Equal As Strings  ${task_state['TaskState']}  ${task_payload['TaskState']}
+    Should Be Equal As Strings  ${task_state['TaskStatus']}  ${task_payload['TaskStatus']}
+
