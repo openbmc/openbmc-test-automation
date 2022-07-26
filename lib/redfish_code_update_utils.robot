@@ -284,3 +284,25 @@ Switch Backup Firmware Image To Functional
    Redfish.Patch  /redfish/v1/Managers/bmc
    ...  body={'Links': {'ActiveSoftwareImage': {'@odata.id': '${firmware_inv_path}'}}}
 
+
+Form Task State Dict
+    [Documentation]
+    [Arguments]  ${task_obj}
+
+    ${task_dict}=  Create Dictionary
+    Set To Dictionary  ${task_dict}  TaskIdURI  ${task_obj['@odata.id']}
+    Set To Dictionary  ${task_dict}  TaskState  ${task_obj['TaskState']}
+    Set To Dictionary  ${task_dict}  TaskStatus  ${task_obj['TaskStatus']}
+
+    [Return]  ${task_dict}
+
+
+Verify Task Progress State
+    [Documentation]  Verify the task progress is getting mtached by user input task state.
+    [Arguments]  ${task_inv}  ${task_state_dict}
+
+    ${task_payload}=  Redfish.Get Properties   ${task_inv['TaskIdURI']}
+
+    Should Be Equal As Strings  ${task_state_dict['TaskState']}  ${task_payload['TaskState']}
+    Should Be Equal As Strings  ${task_state_dict['TaskStatus']}  ${task_payload['TaskStatus']}
+
