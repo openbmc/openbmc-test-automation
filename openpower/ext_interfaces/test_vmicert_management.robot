@@ -11,7 +11,7 @@ Resource         ../../lib/utils.robot
 
 Suite Setup       Suite Setup Execution
 Test Teardown     FFDC On Test Case Fail
-Suite Teardown    Suite Teardown Execution
+Suite Teardown    Run Keyword And Ignore Error  Suite Teardown Execution
 
 Force Tags        vmi_certificate_test
 
