@@ -24,8 +24,8 @@ ${OPENBMC_MODEL}  ${EMPTY}
 ${OPENBMC_HOST}   ${EMPTY}
 ${DBUS_PREFIX}    ${EMPTY}
 ${PORT}           ${EMPTY}
-# AUTH_SUFFIX here is derived from variables.py
-${AUTH_URI}       https://${OPENBMC_HOST}${AUTH_SUFFIX}
+# AUTH_SUFFIX & SCHEME here are derived from variables.py
+${AUTH_URI}       ${SCHEME}://${OPENBMC_HOST}${AUTH_SUFFIX}
 ${OPENBMC_USERNAME}    root
 ${OPENBMC_PASSWORD}    0penBmc
 ${REST_USERNAME}       root
@@ -75,11 +75,13 @@ ${PDU_SLOT_NO}      ${EMPTY}
 
 # User define input SSH and HTTPS related parameters
 ${SSH_PORT}         22
+${HTTP_PORT}        80
 ${HTTPS_PORT}       443
 ${IPMI_PORT}        623
 ${HOST_SOL_PORT}    2200
 ${OPENBMC_SERIAL_HOST}      ${EMPTY}
 ${OPENBMC_SERIAL_PORT}      ${EMPTY}
+${HTTPS_ENABLED}    True
 
 # OS related parameters.
 ${OS_HOST}          ${EMPTY}

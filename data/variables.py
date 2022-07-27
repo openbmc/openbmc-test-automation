@@ -209,16 +209,40 @@ DUMP_URI = SYSTEM_BASE_URI + 'LogServices/Dump/'
 BIOS_ATTR_URI = SYSTEM_BASE_URI + 'Bios'
 BIOS_ATTR_SETTINGS_URI = BIOS_ATTR_URI + '/Settings'
 
-'''
-  QEMU HTTPS variable:
+# Here are variables get from lib/resource.robot
+RESOURCE_VARIABLES = {
+    "HTTP_PORT": BuiltIn().get_variable_value("${HTTP_PORT}"),
+    "HTTPS_PORT": BuiltIn().get_variable_value("${HTTPS_PORT}"),
+    "HTTPS_ENABLED": BuiltIn().get_variable_value("${HTTPS_ENABLED}"),
+    "OPENBMC_HOST": BuiltIn().get_variable_value("${OPENBMC_HOST}")
+}
 
-  By default lib/resource.robot AUTH URI construct is as
-  ${AUTH_URI}   https://${OPENBMC_HOST}${AUTH_SUFFIX}
-  ${AUTH_SUFFIX} is populated here by default EMPTY else
-  the port from the OS environment
 '''
+  HTTPS/HTTP variables:
+  Here can switch variables between http and https with HTTPS_ENABLED
+  By default lib/resource.robot HTTPS_ENABLED is True
+  SCHEME will be https,AUTH_SUFFIX will be HTTPS_PORT
+  If HTTPS_ENABLED set False SCHEME will be http
+  AUTH_SUFFIX will be HTTP_PORT
+'''
+if RESOURCE_VARIABLES.get("HTTPS_ENABLED") == "True":
+    AUTH_SUFFIX = ":" + RESOURCE_VARIABLES.get("HTTPS_PORT")
+    SCHEME = "https"
+else:
+    AUTH_SUFFIX = ":" + RESOURCE_VARIABLES.get("HTTP_PORT")
+    SCHEME = "http"
 
-AUTH_SUFFIX = ":" + BuiltIn().get_variable_value("${HTTPS_PORT}", os.getenv('HTTPS_PORT', '443'))
+'''
+  Redfish host variable:
+  If OPENBMC_HOST is IPV6
+  REDFISH_HOST is OPENBMC_HOST wrapped with brackets
+  If OPENBMC_HOST is IPV4
+  REDFISH_HOST is OPENBMC_HOST
+'''
+if RESOURCE_VARIABLES.get("OPENBMC_HOST").count(":") > 2:
+    REDFISH_HOST = "[" + RESOURCE_VARIABLES.get("OPENBMC_HOST") + "]"
+else:
+    REDFISH_HOST = RESOURCE_VARIABLES.get("OPENBMC_HOST")
 
 # Here contains a list of valid Properties bases on fru_type after a boot.
 INVENTORY_ITEMS = {

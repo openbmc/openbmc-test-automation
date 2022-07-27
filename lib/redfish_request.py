@@ -37,12 +37,22 @@ class redfish_request(object):
         Description of argument(s):
         url        Url passed by user e.g. /redfish/v1/Systems/system.
         """
+        https_enabled = \
+            BuiltIn().get_variable_value("${HTTPS_ENABLED}", default="True")
+
+        if https_enabled == "True":
+            port = \
+                BuiltIn().get_variable_value("${HTTPS_PORT}", default="443")
+        else:
+            port = \
+                BuiltIn().get_variable_value("${HTTP_PORT}", default="80")
+
+        scheme = BuiltIn().get_variable_value("${SCHEME}", default="https")
 
         openbmc_host = \
             BuiltIn().get_variable_value("${OPENBMC_HOST}", default="")
-        https_port = BuiltIn().get_variable_value("${HTTPS_PORT}", default="")
-        form_url = \
-            "https://" + str(openbmc_host) + ":" + str(https_port) + str(url)
+
+        form_url = f"{scheme}://{openbmc_host}:{port}{url}"
 
         return form_url
 
