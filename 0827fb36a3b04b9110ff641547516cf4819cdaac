@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd29bc2a_3291e187",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-27T17:38:55Z",
+      "side": 1,
+      "message": "Please fix the tag name.. match the test case",
+      "range": {
+        "startLine": 55,
+        "startChar": 12,
+        "endLine": 55,
+        "endChar": 47
+      },
+      "revId": "0827fb36a3b04b9110ff641547516cf4819cdaac",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb47b8fb_1dfc8a98",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-27T17:38:55Z",
+      "side": 1,
+      "message": "Remove this just \n\n\nVerify IPv6 And Prefix Length",
+      "range": {
+        "startLine": 186,
+        "startChar": 28,
+        "endLine": 186,
+        "endChar": 35
+      },
+      "revId": "0827fb36a3b04b9110ff641547516cf4819cdaac",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
