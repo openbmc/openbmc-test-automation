@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90c79ae5_80ceda78",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-07-27T14:01:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c7a85dc_b4b16fd8",
+      "range": {
+        "startLine": 288,
+        "startChar": 0,
+        "endLine": 288,
+        "endChar": 4
+      },
+      "revId": "b0c031112bb1a5fabb0eeb9a89fcd2f30ce3ae02",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98f092be_874c21c9",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-07-27T05:29:11Z",
       "side": 1,
       "message": "You are expecting a dictionary only. So please mention that.",
+      "range": {
+        "startLine": 293,
+        "startChar": 18,
+        "endLine": 293,
+        "endChar": 74
+      },
+      "revId": "b0c031112bb1a5fabb0eeb9a89fcd2f30ce3ae02",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1de919db_eded7970",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-07-27T14:01:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98f092be_874c21c9",
       "range": {
         "startLine": 293,
         "startChar": 18,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1cd3cb8c_081c54f0",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-07-27T14:01:39Z",
+      "side": 1,
+      "message": "task_obj - this contains lot of other Attributes which is not needed so, carrying which is necessary plus removed @odata.id this key and assigning user readable key.",
+      "parentUuid": "236f8fa9_e1218073",
+      "range": {
+        "startLine": 295,
+        "startChar": 3,
+        "endLine": 303,
+        "endChar": 73
+      },
+      "revId": "b0c031112bb1a5fabb0eeb9a89fcd2f30ce3ae02",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0ca89c4_edb7528a",
         "filename": "lib/redfish_code_update_utils.robot",
         "patchSetId": 5
@@ -83,6 +155,30 @@
       "writtenOn": "2022-07-27T05:29:11Z",
       "side": 1,
       "message": "Verify task progress matches expected task state",
+      "range": {
+        "startLine": 309,
+        "startChar": 21,
+        "endLine": 309,
+        "endChar": 89
+      },
+      "revId": "b0c031112bb1a5fabb0eeb9a89fcd2f30ce3ae02",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dedb36f_fa5657ad",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-07-27T14:01:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0ca89c4_edb7528a",
       "range": {
         "startLine": 309,
         "startChar": 21,
@@ -118,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d29c8c2b_bacedff1",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-07-27T14:01:39Z",
+      "side": 1,
+      "message": "yes",
+      "parentUuid": "51dfebca_ab8cd958",
+      "range": {
+        "startLine": 313,
+        "startChar": 6,
+        "endLine": 313,
+        "endChar": 14
+      },
+      "revId": "b0c031112bb1a5fabb0eeb9a89fcd2f30ce3ae02",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5bb78d4d_43281f99",
         "filename": "lib/redfish_code_update_utils.robot",
         "patchSetId": 5
@@ -129,6 +249,30 @@
       "writtenOn": "2022-07-27T05:29:11Z",
       "side": 1,
       "message": "Expected task state.",
+      "range": {
+        "startLine": 314,
+        "startChar": 20,
+        "endLine": 314,
+        "endChar": 86
+      },
+      "revId": "b0c031112bb1a5fabb0eeb9a89fcd2f30ce3ae02",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c7a5c5e_8160acdb",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-07-27T14:01:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bb78d4d_43281f99",
       "range": {
         "startLine": 314,
         "startChar": 20,
@@ -152,6 +296,30 @@
       "writtenOn": "2022-07-27T05:29:11Z",
       "side": 1,
       "message": "Not necessary to create this variable. You can print task_payload directly.",
+      "range": {
+        "startLine": 323,
+        "startChar": 4,
+        "endLine": 328,
+        "endChar": 0
+      },
+      "revId": "b0c031112bb1a5fabb0eeb9a89fcd2f30ce3ae02",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53f857a3_2f0511a9",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-07-27T14:01:39Z",
+      "side": 1,
+      "message": "task_pyload has lot of other attributes which is not needed so, I am filtering.",
+      "parentUuid": "941f441c_375f6109",
       "range": {
         "startLine": 323,
         "startChar": 4,
@@ -235,6 +403,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "057a717e_f66499f7",
+        "filename": "lib/rest_client.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-07-27T14:01:39Z",
+      "side": 1,
+      "message": "It won\u0027t affect. I am returning response from URI which this keyword executed.",
+      "parentUuid": "cd38d04f_34c1f264",
+      "range": {
+        "startLine": 373,
+        "startChar": 4,
+        "endLine": 373,
+        "endChar": 20
+      },
+      "revId": "b0c031112bb1a5fabb0eeb9a89fcd2f30ce3ae02",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7d56d0c_336c0cbf",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 5
@@ -246,6 +438,30 @@
       "writtenOn": "2022-07-27T05:29:11Z",
       "side": 1,
       "message": "Wait for task completion/wait for the task to complete.",
+      "range": {
+        "startLine": 140,
+        "startChar": 20,
+        "endLine": 140,
+        "endChar": 46
+      },
+      "revId": "b0c031112bb1a5fabb0eeb9a89fcd2f30ce3ae02",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e166275_57528170",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-07-27T14:01:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7d56d0c_336c0cbf",
       "range": {
         "startLine": 140,
         "startChar": 20,
