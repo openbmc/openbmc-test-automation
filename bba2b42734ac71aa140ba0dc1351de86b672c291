@@ -16,6 +16,24 @@
       "message": "Can u move this to \n\nlib/event_subscriptions_utils.robot",
       "revId": "bba2b42734ac71aa140ba0dc1351de86b672c291",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2adad92_3a2038a7",
+        "filename": "lib/external_intf/event_notification_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-28T14:48:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ac50f40f_60bc4027",
+      "revId": "bba2b42734ac71aa140ba0dc1351de86b672c291",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
