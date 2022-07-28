@@ -347,17 +347,30 @@ Verify Watchdog Timedout Event
     [Documentation]  Trigger watchdog timed out and verify event log generated.
     [Tags]  Verify_Watchdog_Timedout_Event
 
-    Redfish Power On
+    Redfish Power Off  stack_mode=skip
 
     # Clear errors if there are any.
     Redfish.Login
     Redfish Purge Event Log
 
-    Trigger Host Watchdog Error
+    # Refernce: [Old legacy REST code] Trigger Host Watchdog Error
+    # Currently, no known redfish interface to set to trigger watchdog timer/
+
+    # Set auto reboot policy and power on request the system to boot up.
+    Redfish Set Auto Reboot  RetryAttempts
+    Redfish Power Operation  On
+
+    # Make sure, the system is booting just right for the watchdog to get enabled
+    # but system not yet reached to runtime.
+
+    Wait Until Keyword Succeeds  2 min  20 sec  Is Boot Or Host State Changed
+
+    # Set watchdog timer, value in milliseconds. This should set off the Host
+    # watchdog timed out event, triggering host state manager to request reboot.
+    Set Watchdog Interval Using Busctl  ${2000}
 
     # Logging takes time to generate the timeout error.
-    Wait Until Keyword Succeeds  2 min  30 sec
-    ...  Verify Watchdog EventLog Content
+    Wait Until Keyword Succeeds  2 min  10 sec  Verify Watchdog EventLog Content
 
     ${running_states}=  Create Dictionary
     ...  bmc=Enabled
@@ -365,7 +378,7 @@ Verify Watchdog Timedout Event
     ...  host=Enabled
     ...  boot_progress=OSBootStarted
 
-    Wait Until Keyword Succeeds  1 min  10 sec  Match State  ${running_states}
+    Wait Until Keyword Succeeds  5 min  20 sec  Match State  ${running_states}
 
 Verify Event Logs Capping
     [Documentation]  Verify event logs capping.
@@ -515,3 +528,27 @@ Verify Watchdog EventLog Content
     Should Be Equal As Strings
     ...  ${elog[0]["Severity"]}  Critical
     ...  msg=Watchdog timeout severity unexpected value.
+
+    Log To Console  ${elog}
+
+
+Is Boot Or Host State Changed
+    [Documentation]  Get BootProgress and host state and expect boot state mismatch.
+    [Arguments]  ${boot_state}=None  ${host_state}=Disabled
+
+    # Description of argument(s):
+    # boot_state   Value of the BootProgress state to match against.
+    # host_state   Value of the host state to match against.
+
+    ${boot_progress}  ${host_progress}=  Redfish Get Boot Progress
+
+    Log To Console  Current -> [ boot progress ]: ${boot_progress} [ Host state ]: ${host_progress}
+
+    Run Keyword If  "${boot_progress}" != "${boot_state}" or "${host_progress}" != "${host_state}"
+    ...      Log To Console  State changed detected.
+    ...  ELSE
+    ...      Fail  State changed not yet detected.
+
+    # Give few seconds to go bit further in boot processs.
+    # Need to check better solution. WIP
+    Sleep  30s
