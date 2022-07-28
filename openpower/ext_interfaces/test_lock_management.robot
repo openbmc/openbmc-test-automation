@@ -16,6 +16,7 @@ Test Teardown            FFDC On Test Case Fail
 
 *** Variables ***
 
+${CONFLICT_RQUEST}       Conflict
 ${BAD_REQUEST}           Bad Request
 &{default_trans_id}      TransactionID=${1}
 
@@ -114,9 +115,19 @@ Fail To Acquire Read And Write In Single Request
     [Tags]  Fail_To_Acquire_Read_And_Write_In_Single_Request
     [Template]  Verify Fail To Acquire Read And Write In Single Request
 
+    # client_id    lock_type               status_code
+    HMCID-01       ReadCase1,WriteCase1    ${HTTP_CONFLICT}
+    HMCID-01       WriteCase1,ReadCase1    ${HTTP_CONFLICT}
+    HMCID-01       WriteCase1,WriteCase1   ${HTTP_CONFLICT}
+
+
+Acquire Read In Single Request
+    [Documentation]  Acquire read in single request.
+    [Tags]  Acquire_Read_In_Single_Request
+    [Template]  Verify Acquire Read In Single Request
+
     # client_id    lock_type
-    HMCID-01       ReadCase1,WriteCase1
-    HMCID-01       WriteCase1,ReadCase1
+    HMCID-01       ReadCase1,ReadCase1
 
 
 Acquire Multiple Lock Request At CEC Level
@@ -468,6 +479,11 @@ Redfish Post Acquire List Lock
     ...  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${lock_dict_param}
     Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
+    Run Keyword If  ${status_code} == ${HTTP_CONFLICT}
+    ...    Should Be Equal As Strings  ${CONFLICT_RQUEST}  ${resp.content}
+    ...  ELSE
+    ...    Run Keyword And Return  Return Description Of Response  ${resp.content}
+
     [Return]  ${resp}
 
 
@@ -724,6 +740,23 @@ Acquire Lock On Another Lock
 
 Verify Fail To Acquire Read And Write In Single Request
     [Documentation]  Verify fail to acquire read and write lock passed in single request.
+    [Arguments]  ${client_id}  ${lock_type}  ${status_code}
+
+    # Description of argument(s):
+    # client_id     This client id can contain string value
+    #               (e.g. 12345, "HMCID").
+    # lock_type     Read lock or Write lock.
+    # status_code   HTTP status code
+
+    ${lock_type_list}=  Split String  ${lock_type}  ,
+
+    ${session_info}=  Create Redfish Session With ClientID  ${client_id}
+    ${trans_id}=  Redfish Post Acquire List Lock  ${lock_type_list}  status_code=${status_code}
+    Redfish Delete Session  ${session_info}
+
+
+Verify Acquire Read In Single Request
+    [Documentation]  Verify acquire read in single request.
     [Arguments]  ${client_id}  ${lock_type}
 
     # Description of argument(s):
@@ -731,10 +764,18 @@ Verify Fail To Acquire Read And Write In Single Request
     #              (e.g. 12345, "HMCID").
     # lock_type    Read lock or Write lock.
 
+    ${trans_id_list}=  Create List
     ${lock_type_list}=  Split String  ${lock_type}  ,
 
     ${session_info}=  Create Redfish Session With ClientID  ${client_id}
-    ${trans_id}=  Redfish Post Acquire List Lock  ${lock_type_list}  status_code=${HTTP_BAD_REQUEST}
+    ${trans_id}=  Redfish Post Acquire List Lock  ${lock_type_list}
+    Append To List  ${trans_id_list}  ${trans_id}
+    Append To List  ${trans_id_list}  ${trans_id}
+
+    Verify Lock On Resource  ${session_info}  ${trans_id_list}
+    Remove From List  ${trans_id_list}  1
+    Release Locks On Resource  ${session_info}  ${trans_id_list}
+
     Redfish Delete Session  ${session_info}
 
 
@@ -1112,7 +1153,7 @@ Verify Fail To Release Lock For Another Session
     Verify Lock On Resource  ${session_info2}  ${trans_id_list2}
 
     Release Locks On Resource
-    ...  ${session_info1}  ${trans_id_list1}  Transaction  status_code=${HTTP_UNAUTHORIZED}
+    ...  ${session_info1}  ${trans_id_list1}  Transaction  status_code=${HTTP_BAD_REQUEST}
     Verify Lock On Resource  ${session_info1}  ${trans_id_list1}
     Release Locks On Resource  ${session_info1}  ${trans_id_list1}  release_lock_type=Session
     Release Locks On Resource  ${session_info2}  ${trans_id_list2}  release_lock_type=Session
