@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "268569df_8f533c96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-28T16:58:24Z",
+      "side": 1,
+      "message": "Testing in progress.. changes not fully working due to timing of trigger during boot",
+      "revId": "0648a5ddb00f099e13954577dcb79784090d911d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
