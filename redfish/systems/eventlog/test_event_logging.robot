@@ -346,26 +346,22 @@ Create Two Test Event Logs And Delete One
 Verify Watchdog Timedout Event
     [Documentation]  Trigger watchdog timed out and verify event log generated.
     [Tags]  Verify_Watchdog_Timedout_Event
+    [Teardown]  Run Keywords  Test Teardown Execution  AND  Redfish Power Off  stack_mode=skip
 
-    Redfish Power On
+    Redfish Power Off  stack_mode=skip
 
     # Clear errors if there are any.
     Redfish.Login
     Redfish Purge Event Log
 
-    Trigger Host Watchdog Error
+    # Reference: [Old legacy REST code] Trigger Host Watchdog Error
+    # Currently, no known redfish interface to set to trigger watchdog timer.
+
+    Redfish Initiate Auto Reboot  1000
 
     # Logging takes time to generate the timeout error.
-    Wait Until Keyword Succeeds  2 min  30 sec
-    ...  Verify Watchdog EventLog Content
+    Wait Until Keyword Succeeds  3 min  20 sec  Verify Watchdog EventLog Content
 
-    ${running_states}=  Create Dictionary
-    ...  bmc=Enabled
-    ...  chassis=On
-    ...  host=Enabled
-    ...  boot_progress=OSBootStarted
-
-    Wait Until Keyword Succeeds  1 min  10 sec  Match State  ${running_states}
 
 Verify Event Logs Capping
     [Documentation]  Verify event logs capping.
@@ -508,10 +504,28 @@ Verify Watchdog EventLog Content
     #    "Severity": "Critical"
     # }
 
-    ${elog}=  Get Event Logs
-    Should Be Equal As Strings
-    ...  ${elog[0]["Message"]}  org.open_power.Host.Boot.Error.WatchdogTimedOut
+    ${elog_list}=  Get Event Logs
+
+    Rprint Vars  elog_list
+
+    FOR  ${entry}  IN  @{elog_list}
+        ${found_match}=  Run Keyword And Return Status  Is Watchdog Error Found  ${entry}
+        Exit For Loop If  '${found_match}' == 'True'
+    END
+
+    Run Keyword If  '${found_match}' == 'False'  Fail  msg=No watchdog error logged.
+
+
+Is Watchdog Error Found
+    [Documentation]  Check if the give log entry matches specific watchdog error.
+    [Arguments]  ${elog}
+
+    # Description of argument(s):
+    # elog   Error log entry dictionary data.
+
+    Should Contain Any
+    ...  ${elog["Message"]}  org.open_power.Host.Boot.Error.WatchdogTimedOut
+    ...  CEC Hardware - Hostboot-Service Processor Interface
     ...  msg=Watchdog timeout event log was not found.
-    Should Be Equal As Strings
-    ...  ${elog[0]["Severity"]}  Critical
-    ...  msg=Watchdog timeout severity unexpected value.
+
+    Log To Console  Matched Found: ${elog}
