@@ -82,6 +82,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebb1f960_e30133c6",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-29T09:51:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f4ec3d8_55b603d8",
+      "range": {
+        "startLine": 57,
+        "startChar": 11,
+        "endLine": 57,
+        "endChar": 37
+      },
+      "revId": "831751d12b29466e045927789c55f658c4ec1c6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41010b44_af25c1bc",
@@ -119,6 +143,30 @@
       "side": 1,
       "message": "I think existing name is better, it says what we are doing \u0026 what we are verifying.",
       "parentUuid": "41010b44_af25c1bc",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 33
+      },
+      "revId": "831751d12b29466e045927789c55f658c4ec1c6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f729116b_f1c5a76f",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-29T09:51:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b37d66e_3419cd4c",
       "range": {
         "startLine": 63,
         "startChar": 0,
@@ -176,6 +224,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cb5bf6b_fee30b45",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-29T09:51:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3af1047_60f210a2",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 34
+      },
+      "revId": "831751d12b29466e045927789c55f658c4ec1c6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b48510c2_c1d267d8",
@@ -207,6 +279,24 @@
       "side": 1,
       "message": "OK, I\u0027ll make it ipv6_addr",
       "parentUuid": "b48510c2_c1d267d8",
+      "revId": "831751d12b29466e045927789c55f658c4ec1c6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5536bdb9_234dc824",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-29T09:51:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fa241f3_b2f1e773",
       "revId": "831751d12b29466e045927789c55f658c4ec1c6d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -248,6 +338,30 @@
       "side": 1,
       "message": "Will make it ipv6_addr.\nto be added is needed.",
       "parentUuid": "e51d75f7_2c056e89",
+      "range": {
+        "startLine": 211,
+        "startChar": 6,
+        "endLine": 211,
+        "endChar": 11
+      },
+      "revId": "831751d12b29466e045927789c55f658c4ec1c6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae45987a_7502b96d",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-29T09:51:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4254a8ec_dc16cc48",
       "range": {
         "startLine": 211,
         "startChar": 6,
@@ -305,6 +419,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff8c1e03_267fd8f4",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-29T09:51:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44621234_c93ebef3",
+      "range": {
+        "startLine": 221,
+        "startChar": 6,
+        "endLine": 221,
+        "endChar": 16
+      },
+      "revId": "831751d12b29466e045927789c55f658c4ec1c6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dfab87f6_cfb5e489",
@@ -342,6 +480,30 @@
       "side": 1,
       "message": "ok.",
       "parentUuid": "dfab87f6_cfb5e489",
+      "range": {
+        "startLine": 223,
+        "startChar": 5,
+        "endLine": 223,
+        "endChar": 6
+      },
+      "revId": "831751d12b29466e045927789c55f658c4ec1c6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0269f34f_d819bbe1",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-29T09:51:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84e9aba7_dfeae3c3",
       "range": {
         "startLine": 223,
         "startChar": 5,
@@ -399,6 +561,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0794568_f197207c",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-29T09:51:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a22202a_f1465975",
+      "range": {
+        "startLine": 253,
+        "startChar": 6,
+        "endLine": 253,
+        "endChar": 13
+      },
+      "revId": "831751d12b29466e045927789c55f658c4ec1c6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfd630ab_327d316e",
@@ -436,6 +622,30 @@
       "side": 1,
       "message": "for better understanding we\u0027ll have the same.",
       "parentUuid": "cfd630ab_327d316e",
+      "range": {
+        "startLine": 266,
+        "startChar": 11,
+        "endLine": 266,
+        "endChar": 37
+      },
+      "revId": "831751d12b29466e045927789c55f658c4ec1c6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c90b3fbd_01f02f86",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-07-29T09:51:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adc0003c_892fc565",
       "range": {
         "startLine": 266,
         "startChar": 11,
