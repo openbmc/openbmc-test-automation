@@ -201,6 +201,8 @@ Delete User Via IPMI And Verify Using Redfish
 Verify Failure To Exceed Max Number Of Users
     [Documentation]  Verify failure attempting to exceed the max number of user accounts.
     [Tags]  Verify_Failure_To_Exceed_Max_Number_Of_Users
+    [Teardown]  Run Keywords  Test Teardown Execution
+    ...         AND  Delete Created User  ${username_list}
 
     # Get existing user count.
     ${resp}=  Redfish.Get  /redfish/v1/AccountService/Accounts/
@@ -225,10 +227,6 @@ Verify Failure To Exceed Max Number Of Users
     Set To Dictionary  ${payload}  UserName  ${random_username}
     Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
     ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
-
-    FOR  ${saved_user_list}  IN  @{username_list}
-      Redfish.Delete  ${saved_user_list}
-    END
 
 
 Create IPMI User Without Any Privilege And Verify Via Redfish
@@ -273,6 +271,22 @@ IPMI Create Random User Plus Password And Privilege
     ...  Set Channel Access  ${random_userid}  ipmi=on privilege=${privilege}
 
     [Return]  ${random_username}  ${random_userid}
+
+
+Delete Created User
+    [Documentation]  Delete the user via redfish.
+    [Arguments]  ${user_list}
+
+    # Description of argument(s):
+    # user_list    List of user which are to be deleted.
+
+    Redfish.Login
+
+    FOR  ${saved_user_list}  IN  @{user_list}
+      Redfish.Delete  ${saved_user_list}
+    END
+
+    Redfish.Logout
 
 
 Test Setup Execution
