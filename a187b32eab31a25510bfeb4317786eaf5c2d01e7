@@ -59,6 +59,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51abb6f5_d9c52e52",
+        "filename": "data/variables.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1001568
+      },
+      "writtenOn": "2022-07-29T03:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1819b600_b382d1e9",
+      "range": {
+        "startLine": 212,
+        "startChar": 2,
+        "endLine": 212,
+        "endChar": 25
+      },
+      "revId": "a187b32eab31a25510bfeb4317786eaf5c2d01e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ad2146b_4154ec4c",
@@ -82,6 +106,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f76fddc5_67657266",
+        "filename": "data/variables.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1001568
+      },
+      "writtenOn": "2022-07-29T03:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ad2146b_4154ec4c",
+      "range": {
+        "startLine": 222,
+        "startChar": 2,
+        "endLine": 223,
+        "endChar": 53
+      },
+      "revId": "a187b32eab31a25510bfeb4317786eaf5c2d01e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f34a3a58_579dc011",
@@ -95,6 +143,30 @@
       "writtenOn": "2022-07-28T11:19:57Z",
       "side": 1,
       "message": "If HTTPS_ENABLED is True then SCHEME is https \u0026 AUTH_SUFFIX is HTTPS_PORT\nelse SCHEME is http \u0026 AUTH_SUFFIX is HTTP_PORT.",
+      "range": {
+        "startLine": 224,
+        "startChar": 2,
+        "endLine": 226,
+        "endChar": 31
+      },
+      "revId": "a187b32eab31a25510bfeb4317786eaf5c2d01e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f98eca3_c571c07f",
+        "filename": "data/variables.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1001568
+      },
+      "writtenOn": "2022-07-29T03:15:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f34a3a58_579dc011",
       "range": {
         "startLine": 224,
         "startChar": 2,
