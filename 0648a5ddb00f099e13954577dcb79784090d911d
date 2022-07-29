@@ -16,6 +16,138 @@
       "message": "Testing in progress.. changes not fully working due to timing of trigger during boot",
       "revId": "0648a5ddb00f099e13954577dcb79784090d911d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4e5e71c_7920f520",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-29T10:25:48Z",
+      "side": 1,
+      "message": "Few comments",
+      "revId": "0648a5ddb00f099e13954577dcb79784090d911d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee5b745c_223c2b13",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-29T10:25:48Z",
+      "side": 1,
+      "message": "\u0027/\u0027 is it required?",
+      "range": {
+        "startLine": 357,
+        "startChar": 76,
+        "endLine": 357,
+        "endChar": 77
+      },
+      "revId": "0648a5ddb00f099e13954577dcb79784090d911d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14ee49ee_0442e5ad",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-29T10:25:48Z",
+      "side": 1,
+      "message": "I guess this is not required",
+      "range": {
+        "startLine": 359,
+        "startChar": 43,
+        "endLine": 359,
+        "endChar": 71
+      },
+      "revId": "0648a5ddb00f099e13954577dcb79784090d911d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2f53e28_bdf43108",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-29T10:25:48Z",
+      "side": 1,
+      "message": "can u give examples for boot_state and host_state arguments",
+      "range": {
+        "startLine": 540,
+        "startChar": 19,
+        "endLine": 540,
+        "endChar": 68
+      },
+      "revId": "0648a5ddb00f099e13954577dcb79784090d911d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3372c4e_89b157f4",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-29T10:25:48Z",
+      "side": 1,
+      "message": "BootProgress or Host state changed detected\n\nsimilary\n\nBootProgress or Host state changed not yet detected",
+      "range": {
+        "startLine": 548,
+        "startChar": 29,
+        "endLine": 548,
+        "endChar": 51
+      },
+      "revId": "0648a5ddb00f099e13954577dcb79784090d911d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4229856b_0e0d2d73",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-07-29T10:25:48Z",
+      "side": 1,
+      "message": "Wait for BootProgress or Host state to progress.",
+      "range": {
+        "startLine": 552,
+        "startChar": 6,
+        "endLine": 552,
+        "endChar": 58
+      },
+      "revId": "0648a5ddb00f099e13954577dcb79784090d911d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
