@@ -216,6 +216,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b287305_832772cd",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-29T12:39:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c29c0c8_2e874d91",
+      "range": {
+        "startLine": 548,
+        "startChar": 29,
+        "endLine": 548,
+        "endChar": 51
+      },
+      "revId": "0648a5ddb00f099e13954577dcb79784090d911d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4229856b_0e0d2d73",
@@ -253,6 +277,30 @@
       "side": 1,
       "message": "This hard sleep I ll be removing.",
       "parentUuid": "4229856b_0e0d2d73",
+      "range": {
+        "startLine": 552,
+        "startChar": 6,
+        "endLine": 552,
+        "endChar": 58
+      },
+      "revId": "0648a5ddb00f099e13954577dcb79784090d911d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "befbe411_c14bcea2",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-07-29T12:39:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71daa25a_bda74747",
       "range": {
         "startLine": 552,
         "startChar": 6,
