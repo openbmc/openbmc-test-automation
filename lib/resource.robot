@@ -1,7 +1,7 @@
 *** Settings ***
 Library           Collections
 Library           String
-Library           RequestsLibrary.RequestsKeywords
+Library           RequestsLibrary
 Library           OperatingSystem
 Variables         ../data/variables.py
 
