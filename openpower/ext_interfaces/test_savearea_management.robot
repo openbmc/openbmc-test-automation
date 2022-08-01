@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation     Test Save Area feature of Management Console on BMC.
+Documentation     Test Save Area feature of  console on BMC.
 
 Resource          ../../lib/rest_client.robot
 Resource          ../../lib/openbmc_ffdc.robot
