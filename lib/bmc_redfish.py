@@ -56,7 +56,7 @@ class bmc_redfish(redfish_plus):
             if not result:
                 gp.lprint_var(except_type)
                 gp.lprint_varx("except_value", str(except_value))
-                raise(get_exception)
+                raise (get_exception)
         BuiltIn().set_global_variable("${REDFISH_SUPPORTED}", self.__inited__)
         BuiltIn().set_global_variable("${REDFISH_REST_SUPPORTED}", True)
 

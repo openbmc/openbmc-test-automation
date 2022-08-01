@@ -758,7 +758,7 @@ class ffdc_collector:
         """
         redfish_parm = 'redfishtool -r ' \
                        + self.hostname + ' -S Always raw GET /redfish/v1/'
-        return(self.run_tool_cmd(redfish_parm, True))
+        return (self.run_tool_cmd(redfish_parm, True))
 
     def verify_ipmi(self):
         r"""
@@ -772,7 +772,7 @@ class ffdc_collector:
             ipmi_parm = 'ipmitool -I lanplus  -P ' \
                 + self.password + ' -H ' + self.hostname + ' power status'
 
-        return(self.run_tool_cmd(ipmi_parm, True))
+        return (self.run_tool_cmd(ipmi_parm, True))
 
     def run_tool_cmd(self,
                      parms_string,

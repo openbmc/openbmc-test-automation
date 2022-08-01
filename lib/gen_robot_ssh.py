@@ -142,7 +142,7 @@ def login_ssh(login_args={},
         return
 
     # If we get to this point, the login has failed on all attempts so the exception will be raised again.
-    raise(except_value)
+    raise (except_value)
 
 
 def execute_ssh_command(cmd_buf,
@@ -305,7 +305,7 @@ def execute_ssh_command(cmd_buf,
             # We do not handle any other RuntimeErrors so we will raise the exception again.
             sshlib.close_all_connections()
             gp.lprintn(traceback.format_exc())
-            raise(except_value)
+            raise (except_value)
 
         # If we get to this point, the command was executed.
         break

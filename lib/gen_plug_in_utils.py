@@ -288,7 +288,7 @@ def get_plug_default(var_name,
     default_value = os.environ.get(package_var_name, None)
     if default_value is not None:
         # A package-name version of the variable was found so return its value.
-        return(default_value)
+        return (default_value)
 
     plug_var_name = PLUG_VAR_PREFIX + "_OVERRIDE_" + var_name
     default_value = os.environ.get(plug_var_name, None)
