@@ -64,8 +64,9 @@ Redfish Login Using Invalid Token
     ${headers}=  Create Dictionary  Content-Type=application/json
     ...  X-Auth-Token=deadbeef
 
-    ${resp}=  Get Request
+    ${resp}=  GET On Session
     ...  openbmc  /redfish/v1/SessionService/Sessions  headers=${headers}
+    ...  expected_status=${HTTP_UNAUTHORIZED}
 
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_UNAUTHORIZED}
 
@@ -106,15 +107,14 @@ Redfish Login Via SessionService
 
     Create Session  openbmc  https://${OPENBMC_HOST}
     ${headers}=  Create Dictionary  Content-Type=application/json
-    ${data}=  Create Dictionary  UserName=${OPENBMC_USERNAME}  Password=${OPENBMC_PASSWORD}
+    ${data}=  Set Variable  {"UserName":"${OPENBMC_USERNAME}", "Password":"${OPENBMC_PASSWORD}"}
 
-    ${resp}=  Post Request  openbmc  /redfish/v1/SessionService/Sessions  data=${data}  headers=${headers}
+    ${resp}=  POST On Session  openbmc  /redfish/v1/SessionService/Sessions  data=${data}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_CREATED}
 
-    ${content}=  To JSON  ${resp.content}
     ${headers}=  Create Dictionary   Content-Type=application/json
     ...  X-Auth-Token=${resp.headers["X-Auth-Token"]}
-    ${resp}=  Delete Request  openbmc  ${REDFISH_SESSION}${/}${content["Id"]}  headers=${headers}
+    ${resp}=  DELETE On Session  openbmc  ${REDFISH_SESSION}${/}${resp.json()["Id"]}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 

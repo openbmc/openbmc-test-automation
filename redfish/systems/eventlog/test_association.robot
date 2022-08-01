@@ -45,10 +45,9 @@ Create Test Error Callout And Verify AdditionalData
     Create Test Error With Callout
     ${elog_entry}=  Get Elog URL List
     ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
-    ${jsondata}=  To JSON  ${resp.content}
     List Should Contain Value
-    ...  ${jsondata["data"]["AdditionalData"]}  CALLOUT_DEVICE_PATH_TEST=${target_device_path}
-    List Should Contain Value  ${jsondata["data"]["AdditionalData"]}  DEV_ADDR=0x0DEADEAD
+    ...  ${resp.json()["data"]["AdditionalData"]}  CALLOUT_DEVICE_PATH_TEST=${target_device_path}
+    List Should Contain Value  ${resp.json()["data"]["AdditionalData"]}  DEV_ADDR=0x0DEADEAD
 
 
 Create Test Error Callout And Verify Associations
@@ -67,11 +66,10 @@ Create Test Error Callout And Verify Associations
     Create Test Error With Callout
     ${elog_entry}=  Get Elog URL List
     ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
-    ${jsondata}=  To JSON  ${resp.content}
-    List Should Contain Value  ${jsondata["data"]["Associations"][0]}  callout
-    List Should Contain Value  ${jsondata["data"]["Associations"][0]}  fault
+    List Should Contain Value  ${resp.json()["data"]["Associations"][0]}  callout
+    List Should Contain Value  ${resp.json()["data"]["Associations"][0]}  fault
     List Should Contain Value
-    ...  ${jsondata["data"]["Associations"][0]}
+    ...  ${resp.json()["data"]["Associations"][0]}
     ...  /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0
 
 
@@ -200,8 +198,7 @@ Set Resolved Field And Verify Callout Deletion
     Create Test Error With Callout
     ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
     ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
-    ${jsondata}=  To JSON  ${resp.content}
-    Should Contain  ${jsondata["data"]["Associations"][0]}  callout
+    Should Contain  ${resp.json()["data"]["Associations"][0]}  callout
 
     # Set the error log field "Resolved".
     # By doing so, the callout object should get deleted automatically.
@@ -260,12 +257,11 @@ Verify Test Error Log And Callout
     [Documentation]  Verify test error log entries.
     ${elog_entry}=  Get Elog URL List
     ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
-    ${json}=  To JSON  ${resp.content}
 
-    Should Be Equal  ${json["data"]["Message"]}
+    Should Be Equal  ${resp.json()["data"]["Message"]}
     ...  example.xyz.openbmc_project.Example.Elog.TestCallout
 
-    Should Be Equal  ${json["data"]["Severity"]}
+    Should Be Equal  ${resp.json()["data"]["Severity"]}
     ...  xyz.openbmc_project.Logging.Entry.Level.Error
 
     ${content}=  Read Attribute  ${elog_entry[0]}/callout  endpoints
