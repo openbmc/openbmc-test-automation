@@ -64,7 +64,7 @@ Redfish Login Using Invalid Token
     ${headers}=  Create Dictionary  Content-Type=application/json
     ...  X-Auth-Token=deadbeef
 
-    ${resp}=  Get Request
+    ${resp}=  GET On Session
     ...  openbmc  /redfish/v1/SessionService/Sessions  headers=${headers}
 
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_UNAUTHORIZED}
@@ -108,7 +108,7 @@ Redfish Login Via SessionService
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${data}=  Create Dictionary  UserName=${OPENBMC_USERNAME}  Password=${OPENBMC_PASSWORD}
 
-    ${resp}=  Post Request  openbmc  /redfish/v1/SessionService/Sessions  data=${data}  headers=${headers}
+    ${resp}=  POST On Session  openbmc  /redfish/v1/SessionService/Sessions  data=${data}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_CREATED}
 
     ${content}=  To JSON  ${resp.content}

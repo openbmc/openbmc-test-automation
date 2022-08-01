@@ -110,8 +110,7 @@ Get Target Speed Of Fans
     ${paths}=  Get Endpoint Paths  ${SENSORS_URI}fan_tach/  0
     FOR  ${path}  IN  @{paths}
         ${response}=  OpenBMC Get Request  ${path}
-        ${json}=  To JSON  ${response.content}
-        ${target_speed}=  Set Variable  ${json["data"]["Target"]}
+        ${target_speed}=  Set Variable  ${response.json()}["data"]["Target"]
         ${max_target}=  Run Keyword If  ${target_speed} > ${max_target}
         ...  Set Variable  ${target_speed}  ELSE  Set Variable  ${max_target}
     END
@@ -132,15 +131,13 @@ Get Target And Blade Speeds
     # Get the fan target speed and the clockwise blade speed.
     ${path}=  Catenate  ${SENSORS_URI}fan_tach/${fan_name}_0
     ${response}=  OpenBMC Get Request  ${path}
-    ${json}=  To JSON  ${response.content}
-    ${fan_clockwise_speed}=  Set Variable  ${json["data"]["Value"]}
+    ${fan_clockwise_speed}=  Set Variable  ${response.json()}["data"]["Value"]
     ${target_speed}=  Set Variable  ${json["data"]["Target"]}
 
     # Get the counter-clockwise blade speed.
     ${path}=  Catenate  ${SENSORS_URI}fan_tach/${fan_name}_1
     ${response}=  OpenBMC Get Request  ${path}
-    ${json}=  To JSON  ${response.content}
-    ${fan_counterclockwise_speed}=  Set Variable  ${json["data"]["Value"]}
+    ${fan_counterclockwise_speed}=  Set Variable  ${response.json()}["data"]["Value"]
 
     [Return]  ${target_speed}  ${fan_clockwise_speed}
     ...  ${fan_counterclockwise_speed}
