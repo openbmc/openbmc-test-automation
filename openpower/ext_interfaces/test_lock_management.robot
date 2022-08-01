@@ -8,6 +8,7 @@ Resource                ../../lib/bmc_redfish_utils.robot
 Resource                ../../lib/external_intf/management_console_utils.robot
 Resource                ../../lib/rest_response_code.robot
 Library                 ../../lib/bmc_network_utils.py
+Library                 JSONLibrary
 
 Suite Setup              Run Keyword And Ignore Error  Delete All Redfish Sessions
 Suite Teardown           Run Keyword And Ignore Error  Delete All Redfish Sessions
@@ -454,8 +455,10 @@ Redfish Post Acquire Lock
     # status_code    HTTP status code.
 
     ${lock_dict_param}=  Form Data To Acquire Lock  ${lock_type}
+    ${lock_dict_param}=  Convert JSON To String  ${lock_dict_param}
     ${resp}=  Redfish Post Request
     ...  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${lock_dict_param}
+    ...  expected_status=any
     Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
     Run Keyword If  ${status_code} == ${HTTP_BAD_REQUEST}
@@ -475,8 +478,10 @@ Redfish Post Acquire List Lock
     # status_code    HTTP status code.
 
     ${lock_dict_param}=  Create Data To Acquire List Of Lock  ${lock_type}
+    ${lock_dict_param}=  Convert JSON To String  ${lock_dict_param}
     ${resp}=  Redfish Post Request
     ...  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${lock_dict_param}
+    ...   expected_status=any
     Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
     Run Keyword If  ${status_code} == ${HTTP_CONFLICT}
@@ -497,6 +502,7 @@ Redfish Post Acquire Invalid Lock
     # status_code    HTTP status code.
 
     ${lock_dict_param}=  Form Data To Acquire Invalid Lock  ${lock_type}
+    ${lock_dict_param}=  Convert JSON To String  ${lock_dict_param}
     ${resp}=  Redfish Post Request
     ...  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${lock_dict_param}
     Should Be Equal As Strings  ${resp.status_code}  ${status_code}
@@ -516,6 +522,7 @@ Redfish Post Acquire Invalid Lock With Invalid Data Type Of Resource ID
 
     ${lock_dict_param}=
     ...  Form Data To Acquire Invalid Lock With Invalid Data Type Of Resource ID  ${lock_type}
+    ${lock_dict_param}=  Convert JSON To String  ${lock_dict_param}
     ${resp}=  Redfish Post Request
     ...  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${lock_dict_param}
     Should Be Equal As Strings  ${resp.status_code}  ${status_code}
@@ -1236,7 +1243,7 @@ Get Locks List On Resource With Session List
     # exp_status_code    Expected HTTP status code.
 
     ${resp}=  Redfish Post Request  /ibm/v1/HMC/LockService/Actions/LockService.GetLockList
-    ...  data={"SessionIDs": ${session_id_list}}
+    ...  data={"SessionIDs":${session_id_list}}  expected_status=any
     Should Be Equal As Strings  ${resp.status_code}  ${exp_status_code}
     ${locks}=  Evaluate  json.loads('''${resp.text}''')  json
 

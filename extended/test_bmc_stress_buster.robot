@@ -23,6 +23,8 @@ ${IPMI_BUSTER_MAX}    ${5}
 Stress BMC REST Server
     [Documentation]  Execute maximum allowed REST operation.
     [Tags]  Stress_BMC_REST_Server
+
+    Log To Console  REST call request burst ${REST_BUSTER_MAX}
     ${dict}=  Execute Process
     ...  ${REST_BUSTER_MAX}  REST Enumerate Request On BMC
     Dictionary Should Not Contain Value  ${dict}  False
@@ -32,6 +34,7 @@ Stress BMC REST Server
 Stress BMC SSH Server
     [Documentation]  Execute maximum allowed SSH operation.
     [Tags]  Stress_BMC_SSH_Server
+    Log To Console  SSH call request burst ${SSH_BUSTER_MAX}
     ${dict}=  Execute Process
     ...  ${SSH_BUSTER_MAX}  SSH Connect And Execute Command
     Dictionary Should Not Contain Value  ${dict}  False
@@ -41,6 +44,7 @@ Stress BMC SSH Server
 Stress BMC IPMI Server
     [Documentation]  Execute maximum allowed IPMI operation.
     [Tags]  Stress_BMC_IPMI_Server
+    Log To Console  IPMI call request burst ${IPMI_BUSTER_MAX}
     ${dict}=  Execute Process  ${IPMI_BUSTER_MAX}  IPMI Check Status
     Dictionary Should Not Contain Value  ${dict}  False
     ...  msg=One or more IPMI operations has failed.
@@ -53,13 +57,14 @@ REST Enumerate Request On BMC
     # Create REST session.
     Create Session  openbmc  ${AUTH_URI}
     ${headers}=  Create Dictionary  Content-Type=application/json
-    @{credentials}=  Create List  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    @{credentials}=  Create List  ${rest_username}  ${rest_password}
     ${data}=  Create Dictionary  data=@{credentials}
-    ${resp}=  Post Request  openbmc  /login  data=${data}  headers=${headers}
+    ${resp}=  POST On Session  openbmc  /login  json=${data}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
     # Trigger GET REST enumeration.
-    ${resp}=  Get Request  openbmc  /xyz/openbmc_project/software/enumerate
+    ${resp}=  GET On Session  openbmc  /redfish/v1/Managers/bmc  expected_status=any
+    Log To Console  GET Request /redfish/v1/Managers/bmc
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     Delete All Sessions
 
