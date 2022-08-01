@@ -51,9 +51,8 @@ Get The Dump Id
     #        The "data" field conveys the id number of the created dump.
 
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ${json}=  To JSON  ${resp.content}
 
-    Run Keyword If  ${json["data"]} == ${None}
+    Run Keyword If  ${resp.json()["data"]} == ${None}
     ...  Fail  Dump id returned null.
 
     ${dump_id}=  Set Variable  ${json["data"]}
@@ -84,8 +83,7 @@ Check For Too Many Dumps
     Run Keyword If  '${resp.status_code}' == '${HTTP_OK}'
     ...  Run Keyword And Return  Get The Dump Id  ${resp}
 
-    ${json}=  To JSON   ${resp.content}
-    ${exception}=  Set Variable  ${json["message"]}
+    ${exception}=  Set Variable  ${resp.json()["message"]}
     ${at_capacity}=  Set Variable  Dump not captured due to a cap
     ${too_many_dumps}=  Evaluate  $at_capacity in $exception
     Printn
