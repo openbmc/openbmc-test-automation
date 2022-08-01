@@ -297,8 +297,7 @@ Log FFDC Get Requests
       ${resp}=  OpenBMC Get Request  ${cmd[1]}  quiet=${1}  timeout=${30}
       ${status}=  Run Keyword and Return Status  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
       Run Keyword If  '${status}' == '${False}'  Continue For Loop
-      ${jsondata}=  to json  ${resp.content}  pretty_print=True
-      Write Data To File  ${\n}${jsondata}${\n}  ${logpath}
+      Write Data To File  ${\n}${resp.json()}${\n}  ${logpath}
       Append To List  ${ffdc_file_list}  ${logpath}
     END
 
