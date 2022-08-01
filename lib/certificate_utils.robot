@@ -31,8 +31,7 @@ Install Certificate File On BMC
     Set To Dictionary  ${kwargs}  headers  ${headers}
 
     ${ret}=  Post Request  openbmc  ${uri}  &{kwargs}
-    ${content_json}=  To JSON  ${ret.content}
-    ${cert_id}=  Set Variable If  '${ret.status_code}' == '${HTTP_OK}'  ${content_json["Id"]}  -1
+    ${cert_id}=  Set Variable If  '${ret.status_code}' == '${HTTP_OK}'  ${ret.json()}["Id"]  -1
 
     Run Keyword If  '${status}' == 'ok'
     ...  Should Be Equal As Strings  ${ret.status_code}  ${HTTP_OK}
