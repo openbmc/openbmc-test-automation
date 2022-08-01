@@ -223,7 +223,7 @@ class func_timer_class:
             # exception.
             gp.lprint_timen("Encountered exception in user's function.")
             self.cleanup()
-            raise(func_exception)
+            raise (func_exception)
         gp.lprint_timen("Returned from the user's function.")
 
         self.cleanup()
