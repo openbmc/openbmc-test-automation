@@ -592,7 +592,7 @@ Verify Redfish Partition File Content
     # status_code     HTTPS status code.
 
     FOR  ${conf_file}  IN  @{file_name}
-      ${resp}=  Get Request  openbmc  /ibm/v1/Host/ConfigFiles/${conf_file}
+      ${resp}=  GET On Session  openbmc  /ibm/v1/Host/ConfigFiles/${conf_file}
       Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
       ${Partition_file_data}=  Remove String  ${resp.text}  \\n

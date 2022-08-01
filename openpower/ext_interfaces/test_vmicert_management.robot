@@ -614,7 +614,8 @@ Send CSR To VMI And Get Signed
     ${csr_data}=  Create Dictionary  CsrString  ${csr}
     Set To Dictionary  ${data}  data  ${csr_data}
 
-    ${resp}=  Post Request  openbmc  ${cert_uri}  &{data}  headers=${headers}  timeout=${read_timeout}
+    ${resp}=  POST On Session  openbmc  ${cert_uri}  &{data}  headers=${headers}
+    ...  timeout=${read_timeout}  expected_status=any
     Log to console  ${resp.content}
 
     [Return]  ${resp}
@@ -643,7 +644,7 @@ Get Root Certificate
 
     ${cert_uri}=  Set Variable  ${VMI_BASE_URI}Host/Certificate/root
 
-    ${resp}=  Get Request  openbmc  ${cert_uri}  &{data}  headers=${headers}
+    ${resp}=  GET On Session  openbmc  ${cert_uri}  &{data}  headers=${headers}
 
     Should Be Equal As Strings  ${resp.status_code}  ${valid_status_code}
     Return From Keyword If  ${resp.status_code} != ${HTTP_OK}
