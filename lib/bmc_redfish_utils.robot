@@ -122,11 +122,11 @@ Delete All Redfish Sessions
     Remove Values From List  ${resp_list}  ${saved_session_info["location"]}
 
     # Remove session with client_id populated from the list.
-    ${client_id_list}=  Get Session With Client Id  ${resp_list}
-    Log To Console  Client sessions skip list: ${client_id_list}
-    FOR  ${client_session}  IN  @{client_id_list}
-        Remove Values From List  ${resp_list}  ${client_session}
-    END
+    #${client_id_list}=  Get Session With Client Id  ${resp_list}
+    #Log To Console  Client sessions skip list: ${client_id_list}
+    #FOR  ${client_session}  IN  @{client_id_list}
+    #    Remove Values From List  ${resp_list}  ${client_session}
+    #END
 
     FOR  ${session}  IN  @{resp_list}
         Run Keyword And Ignore Error  Redfish.Delete  ${session}
