@@ -45,7 +45,7 @@ Verify Root Password Update
     # REST Login to BMC with new "root" password.
     Initialize OpenBMC  rest_password=${test_password}
 
-    ${resp}=  Get Request  openbmc  ${BMC_USER_URI}enumerate
+    ${resp}=  GET On Session  openbmc  ${BMC_USER_URI}enumerate
     Valid Value  resp.status_code  [${HTTP_OK}]
 
 
