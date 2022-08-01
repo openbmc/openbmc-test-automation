@@ -421,9 +421,8 @@ Get Power State
     ${resp}=  Call Method  ${OPENBMC_BASE_URI}control/chassis0/  getPowerState
     ...        data=${args}  quiet=${quiet}
     Should be equal as strings  ${resp.status_code}  ${HTTP_OK}
-    ${content}=  to json  ${resp.content}
 
-    [Return]  ${content["data"]}
+    [Return]  ${resp.json()["data"]}
 
 
 Clear BMC Gard Record
@@ -567,9 +566,9 @@ Delete Error Logs
 Delete All Error Logs
     [Documentation]  Delete all error log entries using "DeleteAll" interface.
 
-    ${data}=  Create Dictionary  data=@{EMPTY}
+    ${args}=  Set Variable   {"data": []}
     ${resp}=  Openbmc Post Request  ${BMC_LOGGING_URI}action/DeleteAll
-    ...  data=${data}
+    ...  data=${args}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 
@@ -803,7 +802,7 @@ Update Root Password
     ${data}=  Create Dictionary  data=@{password}
 
     ${headers}=  Create Dictionary  Content-Type=application/json  X-Auth-Token=${XAUTH_TOKEN}
-    ${resp}=  Post Request  openbmc  ${BMC_USER_URI}root/action/SetPassword
+    ${resp}=  POST On Session  openbmc  ${BMC_USER_URI}root/action/SetPassword
     ...  data=${data}  headers=${headers}
     Valid Value  resp.status_code  [${HTTP_OK}]
 
