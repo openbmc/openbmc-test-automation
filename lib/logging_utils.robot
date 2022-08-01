@@ -26,9 +26,9 @@ Get Logging Entry List
     ${entry_list}=  Create List
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}list  quiet=${1}
     Return From Keyword If  ${resp.status_code} == ${HTTP_NOT_FOUND}
-    ${jsondata}=  To JSON  ${resp.content}
+    #${jsondata}=  To JSON  ${resp.content}
 
-    FOR  ${entry}  IN  @{jsondata["data"]}
+    FOR  ${entry}  IN  @{resp.json()["data"]}
         Continue For Loop If  '${entry.rsplit('/', 1)[1]}' == 'callout'
         Append To List  ${entry_list}  ${entry}
     END
@@ -202,8 +202,7 @@ Count Error Entries
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ...  msg=Failed to get error logs.
-    ${jsondata}=  To JSON  ${resp.content}
-    ${count}=  Get Length  ${jsondata["data"]}
+    ${count}=  Get Length  ${resp.json()["data"]}
     [Return]  ${count}
 
 Verify Test Error Log

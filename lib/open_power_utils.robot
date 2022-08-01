@@ -75,8 +75,8 @@ Read Object Attribute
     ${resp}=  OpenBMC Get Request
     ...  ${object_base_uri_path}/attr/${attribute_name}  quiet=${1}
     Return From Keyword If  ${resp.status_code} != ${HTTP_OK}
-    ${content}=  To JSON  ${resp.content}
-    [Return]  ${content["data"]}
+    #${content}=  To JSON  ${resp.content}
+    [Return]  ${resp.json()}["data"]
 
 
 Get Functional Processor Count
@@ -225,12 +225,12 @@ Get Sensors Aggregation URL List
     # ]
 
     ${resp}=  OpenBMC Get Request  ${object_base_uri_path}list  quiet=${1}
-    ${content}=  To JSON  ${resp.content}
+    #${content}=  To JSON  ${resp.content}
 
     ${power_supply_avg_list}=  Create List
     ${power_supply_max_list}=  Create List
 
-    FOR  ${entry}  IN  @{content["data"]}
+    FOR  ${entry}  IN  @{resp.json()}["data"]
         Run Keyword If  'average' in '${entry}'  Append To List  ${power_supply_avg_list}  ${entry}
         Run Keyword If  'maximum' in '${entry}'  Append To List  ${power_supply_max_list}  ${entry}
     END
