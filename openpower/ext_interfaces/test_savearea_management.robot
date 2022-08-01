@@ -366,7 +366,8 @@ Delete BMC Partition File
       ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}
       Set To Dictionary  ${data}  headers  ${headers}
 
-      ${resp}=  Delete Request  openbmc  /ibm/v1/Host/ConfigFiles/${conf_file}  &{data}
+      ${resp}=  DELETE On Session  openbmc  /ibm/v1/Host/ConfigFiles/${conf_file}  &{data}
+      ...  expected_status=any
       Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
       ${description}=  Return Description Of Response  ${resp.text}
@@ -386,7 +387,8 @@ Delete All BMC Partition File
     ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}
     Set To Dictionary  ${data}  headers  ${headers}
 
-    ${resp}=  Post Request  openbmc  /ibm/v1/Host/ConfigFiles/Actions/IBMConfigFiles.DeleteAll  &{data}
+    ${resp}=  POST On Session  openbmc  /ibm/v1/Host/ConfigFiles/Actions/IBMConfigFiles.DeleteAll  &{data}
+    ...  expected_status=any
     Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
 
@@ -428,7 +430,8 @@ Upload Partition File To BMC
 
       ${kwargs}=  Create Dictionary  data=${image_data}
       Set To Dictionary  ${kwargs}  headers  ${headers}
-      ${resp}=  Put Request  openbmc  /ibm/v1/Host/ConfigFiles/${conf_file}  &{kwargs}  timeout=10
+      ${resp}=  PUT On Session  openbmc  /ibm/v1/Host/ConfigFiles/${conf_file}  &{kwargs}  timeout=10
+      ...  expected_status=any
       Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
       ${description}=  Return Description Of Response  ${resp.text}
@@ -592,7 +595,8 @@ Verify Redfish Partition File Content
     # status_code     HTTPS status code.
 
     FOR  ${conf_file}  IN  @{file_name}
-      ${resp}=  Get Request  openbmc  /ibm/v1/Host/ConfigFiles/${conf_file}
+      ${resp}=  GET On Session  openbmc  /ibm/v1/Host/ConfigFiles/${conf_file}
+      ...  expected_status=any
       Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
       ${Partition_file_data}=  Remove String  ${resp.text}  \\n
