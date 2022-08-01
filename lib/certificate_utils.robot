@@ -30,14 +30,13 @@ Install Certificate File On BMC
     ...  X-Auth-Token=${XAUTH_TOKEN}
     Set To Dictionary  ${kwargs}  headers  ${headers}
 
-    ${ret}=  Post Request  openbmc  ${uri}  &{kwargs}
-    ${content_json}=  To JSON  ${ret.content}
-    ${cert_id}=  Set Variable If  '${ret.status_code}' == '${HTTP_OK}'  ${content_json["Id"]}  -1
+    ${resp}=  POST On Session  openbmc  ${uri}  &{kwargs}  expected_status=any
+    ${cert_id}=  Set Variable If  '${resp.status_code}' == '${HTTP_OK}'  ${resp.json()["Id"]}  -1
 
     Run Keyword If  '${status}' == 'ok'
-    ...  Should Be Equal As Strings  ${ret.status_code}  ${HTTP_OK}
+    ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ...  ELSE IF  '${status}' == 'error'
-    ...  Should Be Equal As Strings  ${ret.status_code}  ${HTTP_INTERNAL_SERVER_ERROR}
+    ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_INTERNAL_SERVER_ERROR}
 
     Delete All Sessions
 

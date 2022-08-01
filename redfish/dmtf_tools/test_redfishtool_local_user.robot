@@ -249,24 +249,6 @@ Redfishtool Verify User Name Exists
     [return]  ${status}
 
 
-Redfishtool GetAttribute
-    [Documentation]  Execute redfishtool for GET operation.
-    [Arguments]  ${uri}  ${Attribute}  ${cmd_args}=${root_cmd_args}  ${expected_error}=""
-
-    # Description of argument(s):
-    # uri             URI for GET operation (e.g. /redfish/v1/AccountService/Accounts/).
-    # Attribute       The specific attribute to be retrieved with the URI.
-    # cmd_args        Commandline arguments.
-    # expected_error  Expected error optionally provided in testcase (e.g. 401 /
-    #                 authentication error, etc. ).
-
-    ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd_args} GET ${uri}
-    Run Keyword If  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
-    ${json_object}=  To JSON  ${cmd_output}
-
-    [Return]  ${json_object["${Attribute}"]}
-
-
 Suite Setup Execution
     [Documentation]  Do suite setup execution.
 

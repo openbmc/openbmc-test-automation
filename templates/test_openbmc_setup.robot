@@ -29,10 +29,9 @@ Test REST Setup
     # REST Connection and request.
     Initialize OpenBMC
     # Raw GET REST operation to verify session is established.
-    ${resp}=  Get Request  openbmc  /xyz/openbmc_project/
+    ${resp}=  GET On Session  openbmc  /xyz/openbmc_project/  expected_status=any
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ${content}=  To JSON  ${resp.content}  pretty_print=True
-    Log To Console  \n ${content}
+    Log To Console  \n ${resp.json()}
 
 
 Test SSH Setup
