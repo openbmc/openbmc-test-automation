@@ -333,7 +333,7 @@ Redfishtool Install Certificate File On BMC
     ...  X-Auth-Token=${XAUTH_TOKEN}
     Set To Dictionary  ${kwargs}  headers  ${headers}
 
-    ${ret}=  Post Request  openbmc  ${uri}  &{kwargs}
+    ${ret}=  POST On Session  openbmc  ${uri}  &{kwargs}
     ${content_json}=  To JSON  ${ret.content}
     ${cert_id}=  Set Variable If  '${ret.status_code}' == '${HTTP_OK}'  ${content_json["Id"]}  -1
 
