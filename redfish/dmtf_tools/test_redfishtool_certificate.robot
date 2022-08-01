@@ -6,6 +6,7 @@ Documentation     Suite to test certificate via DMTF redfishtool.
 Library           OperatingSystem
 Library           String
 Library           Collections
+Library           JSONLibrary
 
 Resource          ../../lib/resource.robot
 Resource          ../../lib/bmc_redfish_resource.robot
@@ -284,8 +285,8 @@ Delete All CA Certificate Via Redfisthtool
     [Documentation]  Delete all CA certificate via Redfish.
 
     ${cmd_output}=  Redfishtool Get  /redfish/v1/Managers/bmc/Truststore/Certificates
-    ${json_object}=  To JSON  ${cmd_output}
-    ${cert_list}=  Set Variable  ${json_object["Members"]}
+    ${cmd_output}=  Convert String to JSON  ${cmd_output}
+    ${cert_list}=  Set Variable  ${cmd_output["Members"]}
     FOR  ${cert}  IN  @{cert_list}
       Redfishtool Delete  ${cert["@odata.id"]}  ${root_cmd_args}
     END
@@ -333,14 +334,13 @@ Redfishtool Install Certificate File On BMC
     ...  X-Auth-Token=${XAUTH_TOKEN}
     Set To Dictionary  ${kwargs}  headers  ${headers}
 
-    ${ret}=  Post Request  openbmc  ${uri}  &{kwargs}
-    ${content_json}=  To JSON  ${ret.content}
-    ${cert_id}=  Set Variable If  '${ret.status_code}' == '${HTTP_OK}'  ${content_json["Id"]}  -1
+    ${resp}=  POST On Session  openbmc  ${uri}  &{kwargs}
+    ${cert_id}=  Set Variable If  '${resp.status_code}' == '${HTTP_OK}'  ${resp.json()["Id"]}  -1
 
     Run Keyword If  '${status}' == 'ok'
-    ...  Should Be Equal As Strings  ${ret.status_code}  ${HTTP_OK}
+    ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ...  ELSE IF  '${status}' == 'error'
-    ...  Should Be Equal As Strings  ${ret.status_code}  ${HTTP_INTERNAL_SERVER_ERROR}
+    ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_INTERNAL_SERVER_ERROR}
 
     Delete All Sessions
 
@@ -409,9 +409,10 @@ Redfishtool GetAttribute
 
     ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd_args} GET ${uri}
     Run Keyword If  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
-    ${json_object}=  To JSON  ${cmd_output}
 
-    [Return]  ${json_object["CertificateString"]}
+    ${cmd_output}=  Convert String to JSON  ${cmd_output}
+
+    [Return]  ${cmd_output["CertificateString"]}
 
 
 Suite Setup Execution

@@ -104,7 +104,6 @@ Check eSEL AdditionalData
     ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
     ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ${jsondata}=  To JSON  ${resp.content}
     # "/xyz/openbmc_project/logging/entry/1": {
     #    "Timestamp": 1487743771812,
     #    "AdditionalData": [],
@@ -112,7 +111,7 @@ Check eSEL AdditionalData
     #    "Id": 1,
     #    "Severity": "xyz.openbmc_project.Logging.Entry.Level.Emergency"
     # }
-    Should Not Be Empty  ${jsondata["data"]["AdditionalData"]}
+    Should Not Be Empty  ${resp.json()["data"]["AdditionalData"]}
 
 
 Test Wrong Reservation_ID

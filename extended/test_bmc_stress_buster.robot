@@ -59,7 +59,7 @@ REST Enumerate Request On BMC
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
     # Trigger GET REST enumeration.
-    ${resp}=  Get Request  openbmc  /xyz/openbmc_project/software/enumerate
+    ${resp}=  GET On Session  openbmc  /xyz/openbmc_project/software/enumerate
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     Delete All Sessions
 
