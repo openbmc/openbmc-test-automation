@@ -142,7 +142,7 @@ def login_ssh(login_args={},
         return
 
     # If we get to this point, the login has failed on all attempts so the exception will be raised again.
-    raise (except_value)
+    raise(except_value)
 
 
 def execute_ssh_command(cmd_buf,
@@ -154,7 +154,9 @@ def execute_ssh_command(cmd_buf,
                         fork=0,
                         quiet=None,
                         test_mode=None,
-                        time_out=None):
+                        time_out=None,
+                        sudo=False,
+                        sudo_pwd=None):
     r"""
     Run the given command in an SSH session and return the stdout, stderr and the return code.
 
@@ -189,6 +191,8 @@ def execute_ssh_command(cmd_buf,
                                     This defaults to the global test_mode value.
     time_out                        The amount of time to allow for the execution of cmd_buf.  A value of
                                     None means that there is no limit to how long the command may take.
+    sudo                            Sudo access.
+    sudo_pwd                        Password for sudo access.
     """
 
     gp.lprint_executing()
@@ -246,14 +250,24 @@ def execute_ssh_command(cmd_buf,
                     stderr = ""
                     rc = 0
                 else:
-                    stdout, stderr, rc = \
-                        func_timer.run(sshlib.execute_command,
-                                       cmd_buf,
-                                       return_stdout=True,
-                                       return_stderr=True,
-                                       return_rc=True,
-                                       time_out=time_out)
-                    BuiltIn().log_to_console(stdout)
+                    if sudo:
+                        stdout, stderr, rc = \
+                            func_timer.run(sshlib.execute_command,
+                                           cmd_buf,
+                                           return_stdout=True,
+                                           return_stderr=True,
+                                           return_rc=True,
+                                           time_out=time_out,
+                                           sudo=True,
+                                           sudo_password=sudo_pwd)
+                    else:
+                        stdout, stderr, rc = \
+                            func_timer.run(sshlib.execute_command,
+                                           cmd_buf,
+                                           return_stdout=True,
+                                           return_stderr=True,
+                                           return_rc=True,
+                                           time_out=time_out)
         except Exception:
             except_type, except_value, except_traceback = sys.exc_info()
             gp.lprint_var(except_type)
@@ -305,7 +319,7 @@ def execute_ssh_command(cmd_buf,
             # We do not handle any other RuntimeErrors so we will raise the exception again.
             sshlib.close_all_connections()
             gp.lprintn(traceback.format_exc())
-            raise (except_value)
+            raise(except_value)
 
         # If we get to this point, the command was executed.
         break
