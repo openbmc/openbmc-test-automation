@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "018382ae_2d63dccf",
+        "filename": "lib/gen_robot_ssh.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-01T08:08:47Z",
+      "side": 0,
+      "message": "dont we need this anymore?",
+      "range": {
+        "startLine": 256,
+        "startChar": 20,
+        "endLine": 256,
+        "endChar": 52
+      },
+      "revId": "c1d2daa67cfa2c8942062c57840c2bc40e0ecab7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
