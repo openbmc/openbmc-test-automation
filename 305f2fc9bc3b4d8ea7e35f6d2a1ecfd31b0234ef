@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "658d3daf_7d6d1833",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-08-01T06:33:51Z",
+      "side": 1,
+      "message": "Reverse the order. FFDC collection and then clean up",
+      "range": {
+        "startLine": 204,
+        "startChar": 4,
+        "endLine": 205,
+        "endChar": 44
+      },
+      "revId": "305f2fc9bc3b4d8ea7e35f6d2a1ecfd31b0234ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
