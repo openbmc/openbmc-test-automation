@@ -60,8 +60,7 @@ Read Software Attribute
     ${resp}=  OpenBMC Get Request  ${software_object}/attr/${attribute_name}
     ...  quiet=${1}
     Return From Keyword If  ${resp.status_code} != ${HTTP_OK}
-    ${content}=  To JSON  ${resp.content}
-    [Return]  ${content["data"]}
+    [Return]  ${resp.json()["data"]}
 
 
 Get Software Objects Id
@@ -103,8 +102,7 @@ Get Host Software Objects Details
     ${pnor_details}=  Get Software Objects  ${VERSION_PURPOSE_HOST}
     FOR  ${pnor}  IN  @{pnor_details}
         ${resp}=  OpenBMC Get Request  ${pnor}  quiet=${1}
-        ${json}=  To JSON  ${resp.content}
-        Append To List  ${software}  ${json["data"]}
+        Append To List  ${software}  ${resp.json()["data"]}
     END
     [Return]  ${software}
 
@@ -338,8 +336,7 @@ Delete Software Object
     # Description of argument(s):
     # software_object  The URI to the software image to delete.
 
-    ${arglist}=  Create List
-    ${args}=  Create Dictionary  data=${arglist}
+    ${args}=  Set Variable   {"data": []}
     ${resp}=  OpenBMC Post Request  ${software_object}/action/Delete
     ...  data=${args}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
@@ -497,8 +494,7 @@ Get List of Images
 
     FOR  ${uri}  IN  @{installed_images}
       ${resp}=  OpenBMC Get Request  ${uri}
-      ${json}=  To JSON  ${resp.content}
-      Log  ${json["data"]}
+      Log  ${resp.json()["data"]}
     END
 
 
