@@ -46,7 +46,7 @@ Redfish Login Using Unsecured HTTP
     ${headers}=  Create Dictionary  Content-Type=application/json
 
     Run Keyword And Expect Error  *Connection refused*
-    ...  Post Request  openbmc  /redfish/v1/SessionService/Sessions
+    ...  POST On Session  openbmc  /redfish/v1/SessionService/Sessions
     ...  data=${data}  headers=${headers}
 
 
@@ -61,7 +61,7 @@ Redfish Login Using HTTPS Wrong Port 80 Protocol
     ${headers}=  Create Dictionary  Content-Type=application/json
 
     Run Keyword And Expect Error  *Connection refused*
-    ...  Post Request  openbmc  /redfish/v1/SessionService/Sessions
+    ...  POST On Session  openbmc  /redfish/v1/SessionService/Sessions
     ...  data=${data}  headers=${headers}
 
 

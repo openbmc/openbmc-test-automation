@@ -2,7 +2,7 @@
 Documentation           Synaccess Protocol Distribution Unit (PDU) library
 
 Resource        ../../lib/pdu/pdu.robot
-Library         RequestsLibrary.RequestsKeywords
+Library         RequestsLibrary
 
 *** Keywords ***
 Connect and Login
@@ -15,7 +15,7 @@ Connect and Login
 Power Cycle
     [Documentation]  Perform PDU power cycle.
     Connect and Login
-    ${resp}=    Get Request    pdu    /cmd.cgi?$A4 ${PDU_SLOT_NO}
+    ${resp}=  GET On Session  pdu  /cmd.cgi?$A4 ${PDU_SLOT_NO}
 
     ${error_message}=  Catenate  Power cycle of slot ${PDU_SLOT_NO} failed.
     ...  PDU returned RC=${resp}.
