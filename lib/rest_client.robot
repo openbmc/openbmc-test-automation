@@ -1,7 +1,7 @@
 *** Settings ***
 Library           Collections
 Library           String
-Library           RequestsLibrary.RequestsKeywords
+Library           RequestsLibrary
 Library           OperatingSystem
 Resource          resource.robot
 Library           disable_warning_urllib.py
@@ -47,10 +47,10 @@ OpenBMC Get Request
     Set To Dictionary  ${kwargs}  headers  ${headers}
     Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Get
     ...  base_uri=${base_uri}  args=&{kwargs}
-    ${ret}=  Get Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
-    Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
+    ${resp}=  GET On Session  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
+    Run Keyword If  '${quiet}' == '${0}'  Log Response  ${resp}
     Delete All Sessions
-    [Return]    ${ret}
+    [Return]    ${resp}
 
 OpenBMC Post Request
     [Documentation]  Do REST POST request and return the result.
@@ -74,7 +74,7 @@ OpenBMC Post Request
     set to dictionary   ${kwargs}       headers     ${headers}
     Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post
     ...  base_uri=${base_uri}  args=&{kwargs}
-    ${ret}=  Post Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
+    ${ret}=  POST On Session  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
     Delete All Sessions
     [Return]    ${ret}
@@ -93,15 +93,14 @@ OpenBMC Put Request
     #          ${kwargs}=  Create Dictionary  allow_redirect=${True}.
 
     Initialize OpenBMC    ${timeout}
-    ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
-    ${headers}=     Create Dictionary   Content-Type=application/json
+    ${base_uri}=   Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
+    ${headers}=  Create Dictionary   Content-Type=application/json
     ...  X-Auth-Token=${XAUTH_TOKEN}
-    set to dictionary   ${kwargs}       headers     ${headers}
-    Log Request    method=Put    base_uri=${base_uri}    args=&{kwargs}
-    ${ret}=  Put Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
-    Log Response    ${ret}
+    Log Request  method=Put  base_uri=${base_uri}  args=&{kwargs}
+    ${resp}=  PUT On Session  openbmc  ${base_uri}  json=${kwargs["data"]}  headers=${headers}
+    Log Response    ${resp}
     Delete All Sessions
-    [Return]    ${ret}
+    [Return]    ${resp}
 
 OpenBMC Delete Request
     [Documentation]  Do REST request to delete the resource identified by the
@@ -167,7 +166,7 @@ BMC Web Login Request
     ${headers}=  Create Dictionary  Content-Type=application/json
     @{credentials}=  Create List  ${rest_username}  ${rest_password}
     ${data}=  Create Dictionary  data=@{credentials}
-    ${resp}=  Post Request  openbmc  /login  data=${data}  headers=${headers}
+    ${resp}=  POST On Session  openbmc  /login  json=${data}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
     ${processed_token_data}=
@@ -197,7 +196,7 @@ Post Login Request
     ${headers}=  Create Dictionary  Content-Type=application/json
     @{credentials}=  Create List  ${rest_username}  ${rest_password}
     ${data}=  create dictionary   data=@{credentials}
-    ${status}  ${resp}=  Run Keyword And Ignore Error  Post Request  openbmc
+    ${status}  ${resp}=  Run Keyword And Ignore Error  POST On Session  openbmc
     ...  /login  data=${data}  headers=${headers}
 
     Should Be Equal  ${status}  PASS  msg=${resp}
@@ -213,7 +212,7 @@ Log Out OpenBMC
 
     # If there is no active sesion it will throw the following exception
     # "Non-existing index or alias 'openbmc'"
-    ${resp}=  Post Request  openbmc
+    ${resp}=  POST On Session  openbmc
     ...  /logout  data=${data}  headers=${headers}
 
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
@@ -260,10 +259,9 @@ Read Attribute
     ${resp}=  OpenBMC Get Request  ${uri}attr/${attr}  timeout=${timeout}
     ...  quiet=${quiet}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ${content}=     To Json    ${resp.content}
     Run Keyword If  '${expected_value}' != '${EMPTY}'
-    ...  Should Be Equal As Strings  ${expected_value}  ${content["data"]}
-    [Return]    ${content["data"]}
+    ...  Should Be Equal As Strings  ${expected_value}  ${resp.json()["data"]}
+    [Return]    ${resp.json()["data"]}
 
 
 Write Attribute
@@ -319,9 +317,8 @@ Read Properties
 
     ${resp}=  OpenBMC Get Request  ${uri}  timeout=${timeout}  quiet=${quiet}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ${content}=  To Json Ordered  ${resp.content}
 
-    [Return]  ${content["data"]}
+    [Return]  ${resp.json()["data"]}
 
 Call Method
     [Documentation]  Invoke the specific REST service method.
@@ -365,7 +362,7 @@ Upload Image To BMC
     Set To Dictionary  ${kwargs}  headers  ${headers}
     Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post
     ...  base_uri=${base_uri}  args=&{kwargs}
-    ${ret}=  Post Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
+    ${ret}=  POST On Session  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
     Valid Value  ret.status_code  ${valid_status_codes}
     Delete All Sessions
@@ -393,15 +390,13 @@ Redfish Login
     ...    {"UserName":"${rest_username}", "Password":"${rest_password}"}
     ...    {"UserName":"${rest_username}", "Password":"${rest_password}", ${kwargs}}
 
-    ${resp}=  Post Request  redfish  /redfish/v1/SessionService/Sessions
+    ${resp}=  POST On Session  redfish  /redfish/v1/SessionService/Sessions
     ...  data=${data}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_CREATED}
 
-    ${content}=  To JSON  ${resp.content}
-
     Set Global Variable  ${XAUTH_TOKEN}  ${resp.headers["X-Auth-Token"]}
 
-    [Return]  ${content}
+    [Return]  ${resp.json()}
 
 
 Redfish Get Request
@@ -422,7 +417,7 @@ Redfish Get Request
     ${headers}=  Create Dictionary  Content-Type=application/json  X-Auth-Token=${XAUTH_TOKEN}
     Set To Dictionary   ${kwargs}  headers  ${headers}
     Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post  base_uri=${base_uri}  args=&{kwargs}
-    ${resp}=  Get Request  redfish  ${base_uri}  &{kwargs}  timeout=${timeout}
+    ${resp}=  GET On Session  redfish  ${base_uri}  &{kwargs}  timeout=${timeout}
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${resp}
 
     [Return]  ${resp}
@@ -446,7 +441,7 @@ Redfish Post Request
     ${headers}=  Create Dictionary  Content-Type=application/json  X-Auth-Token=${XAUTH_TOKEN}
     Set To Dictionary   ${kwargs}  headers  ${headers}
     Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post  base_uri=${base_uri}  args=&{kwargs}
-    ${resp}=  Post Request  redfish  ${base_uri}  &{kwargs}  timeout=${timeout}
+    ${resp}=  POST On Session  redfish  ${base_uri}  &{kwargs}  timeout=${timeout}
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${resp}
 
     [Return]  ${resp}
