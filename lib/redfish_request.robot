@@ -47,9 +47,8 @@ Redfish Generic Session Request
     Set To Dictionary  ${session_dict}  headers  ${auth_token}
     Set To Dictionary  ${session_dict}  Location  ${session_resp.headers['Location']}
 
-    ${content}=  To JSON  ${session_resp.content}
 
-    Set To Dictionary  ${session_dict}  Content  ${content}
+    Set To Dictionary  ${session_dict}  Content  ${session_resp.content}
 
     Set Global Variable  ${active_session_info}  ${session_dict}
     Append To List  ${session_dict_list}  ${session_dict}
