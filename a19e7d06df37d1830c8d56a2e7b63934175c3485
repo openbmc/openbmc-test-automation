@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b050a4cc_b2d800e6",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-02T07:41:08Z",
+      "side": 1,
+      "message": "As this keyword uses Redfish for delete operation, so better to name it as \"Delete Users Via Redfish\"",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 276,
+        "endChar": 19
+      },
+      "revId": "a19e7d06df37d1830c8d56a2e7b63934175c3485",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78d3a44f_1430d1a6",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-02T07:41:08Z",
+      "side": 1,
+      "message": "[Documentation]  Delete all the users via Redfish from given list.",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 277,
+        "endChar": 49
+      },
+      "revId": "a19e7d06df37d1830c8d56a2e7b63934175c3485",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f88ef51_19db03cf",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-02T07:41:08Z",
+      "side": 1,
+      "message": "FOR  ${user}  IN  @{user_list}\n      Redfish.Delete  ${user}",
+      "range": {
+        "startLine": 285,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 40
+      },
+      "revId": "a19e7d06df37d1830c8d56a2e7b63934175c3485",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
