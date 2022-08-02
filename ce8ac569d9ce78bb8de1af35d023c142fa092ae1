@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b142146_8568dcd9",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-02T07:04:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1205199_4895eace",
+      "range": {
+        "startLine": 345,
+        "startChar": 4,
+        "endLine": 345,
+        "endChar": 75
+      },
+      "revId": "ce8ac569d9ce78bb8de1af35d023c142fa092ae1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51f2999a_e0f4ddd1",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94f53a12_e2ad2c6b",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-02T07:04:30Z",
+      "side": 1,
+      "message": "Yes I agree its complicated. In my previous code I was trying to take the task id from URI response but it was affecting other code with my changes so, I have to take the long path to get the right task.",
+      "parentUuid": "51f2999a_e0f4ddd1",
+      "range": {
+        "startLine": 288,
+        "startChar": 0,
+        "endLine": 355,
+        "endChar": 25
+      },
+      "revId": "ce8ac569d9ce78bb8de1af35d023c142fa092ae1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ed518608_e94304ac",
         "filename": "lib/redfish_code_update_utils.robot",
         "patchSetId": 13
@@ -60,6 +108,30 @@
       "writtenOn": "2022-08-02T06:31:11Z",
       "side": 1,
       "message": "Why is it required to list all tasks and then get the details of interested task? for eg. if target_uri is /redfish/v1/TaskService/Tasks/0 we can get its details just by doing a get on /redfish/v1/TaskService/Tasks/0 isn\u0027t it?",
+      "range": {
+        "startLine": 340,
+        "startChar": 0,
+        "endLine": 357,
+        "endChar": 0
+      },
+      "revId": "ce8ac569d9ce78bb8de1af35d023c142fa092ae1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a161308c_bde6a8ed",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-02T07:04:30Z",
+      "side": 1,
+      "message": "/redfish/v1/TaskService/Tasks/0 in this URI last part is task id and task id can be 0 or 1 . So, I am collecting all the task.",
+      "parentUuid": "ed518608_e94304ac",
       "range": {
         "startLine": 340,
         "startChar": 0,
