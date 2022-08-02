@@ -30,6 +30,7 @@ ${xpath_delete_button}                  //button[text()="Delete"]
 
 
 ${incorrect_ip}     1.2.3.4
+${invalid_port_number}  134
 
 *** Test Cases ***
 
@@ -163,6 +164,25 @@ Read Network Configuration Via Different User Roles And Verify Using GUI
     ${GROUP_NAME}    Operator       ${HTTP_OK}
     ${GROUP_NAME}    ReadOnly       ${HTTP_OK}
     ${GROUP_NAME}    NoAccess       ${HTTP_FORBIDDEN}
+
+
+Verify LDAP Config Update With Invalid Port Number In LDAP URL
+    [Documentation]  Verify that LDAP login fails with incorrect LDAP URL.
+    [Tags]  Verify_LDAP_Config_Update_With_Invalid_Port_Number_In_LDAP_URL
+    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
+
+
+    ${invalid_port_number}=  Catenate  SEPARATOR=:  ${LDAP_SERVER_URI}  ${invalid_port_number}
+    Create LDAP Configuration  ${invalid_port_number}  ${LDAP_TYPE}  ${LDAP_BIND_DN}
+    ...  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}  ${LDAP_MODE}
+
+    Get LDAP Configuration  ${LDAP_TYPE}
+    Redfish.Logout
+
+    ${resp}=  Run Keyword And Return Status
+    ...  Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Should Be Equal  ${resp}  ${False}
+    ...  msg=LDAP user was able to login though the incorrect LDAP URL.
 
 
 *** Keywords ***
