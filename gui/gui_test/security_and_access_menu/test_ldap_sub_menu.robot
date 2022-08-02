@@ -167,7 +167,7 @@ Read Network Configuration Via Different User Roles And Verify Using GUI
 
 
 Verify LDAP Config Update With Invalid Port Number In LDAP URL
-    [Documentation]  Verify that LDAP login fails with incorrect LDAP URL.
+    [Documentation]  Verify that LDAP login with Invalid Port Number.
     [Tags]  Verify_LDAP_Config_Update_With_Invalid_Port_Number_In_LDAP_URL
     [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
 
@@ -182,7 +182,7 @@ Verify LDAP Config Update With Invalid Port Number In LDAP URL
     ${resp}=  Run Keyword And Return Status
     ...  Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Should Be Equal  ${resp}  ${False}
-    ...  msg=LDAP user was able to login though the incorrect LDAP URL.
+    ...  msg=LDAP user was able to login though the invalid Port Number in LDAP URL.
 
 
 *** Keywords ***
