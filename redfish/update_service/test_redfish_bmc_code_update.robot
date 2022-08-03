@@ -122,7 +122,22 @@ Redfish Update Firmware
     ${state}=  Get Pre Reboot State
     Rprint Vars  state
     Set ApplyTime  policy=${apply_Time}
-    Redfish Upload Image And Check Progress State
+
+    ${task_inv_dict}=  Get Task State from File
+
+    ${file_bin_data}=  OperatingSystem.Get Binary File  ${image_file_path}
+
+    Log To Console   Start uploading image to BMC.
+    Upload Image To BMC  ${REDFISH_BASE_URI}UpdateService  timeout=${600}  data=${file_bin_data}
+    Log To Console   Completed image upload to BMC.
+
+    ${task_inv}=  Check Task With Match TargetUri  /redfish/v1/UpdateService
+
+    Rprint Vars  task_inv
+
+    Wait Until Keyword Succeeds  5 min  10 sec
+    ...  Verify Task Progress State  ${task_inv}  ${task_inv_dict['TaskCompleted']}
+
     Run Key  ${post_code_update_actions['BMC image']['${apply_time}']}
     Redfish.Login
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
