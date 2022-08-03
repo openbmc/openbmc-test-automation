@@ -94,6 +94,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b56fb9bc_52a83dd6",
+        "filename": "gui/gui_test/resource_management_menu/test_memory_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-08-03T18:00:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b347598_95992db9",
+      "range": {
+        "startLine": 24,
+        "startChar": 21,
+        "endLine": 24,
+        "endChar": 68
+      },
+      "revId": "417d531f328a1586f11f94cb30933d83ba29bd32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d7d29db_09b9f12b",
