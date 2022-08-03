@@ -1,0 +1,15 @@
+{
+        "comment": "This is a generic possible redfish standard task states.",
+        "TaskRunning": {
+                "TaskState": "Running",
+                "TaskStatus": "OK"
+        },
+        "TaskCompleted": {
+                "TaskState": "Completed",
+                "TaskStatus": "OK"
+        },
+        "TaskException": {
+                "TaskState": "Exception",
+                "TaskStatus": "Warning"
+        }
+}
