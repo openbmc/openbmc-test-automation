@@ -84,6 +84,75 @@
       "message": "Done",
       "revId": "70874833e3cd3d17272d8ad1621cc1df5ef17ae5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4befba3c_08f76c6a",
+        "filename": "gui/gui_test/resource_management_menu/test_memory_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-03T18:09:02Z",
+      "side": 1,
+      "message": "Documentation",
+      "range": {
+        "startLine": 18,
+        "startChar": 5,
+        "endLine": 18,
+        "endChar": 20
+      },
+      "revId": "70874833e3cd3d17272d8ad1621cc1df5ef17ae5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8827235_bd851d4c",
+        "filename": "gui/gui_test/resource_management_menu/test_memory_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-03T18:09:02Z",
+      "side": 1,
+      "message": "Too long. break into two lines",
+      "range": {
+        "startLine": 18,
+        "startChar": 23,
+        "endLine": 18,
+        "endChar": 112
+      },
+      "revId": "70874833e3cd3d17272d8ad1621cc1df5ef17ae5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f53cca2e_8ced45fb",
+        "filename": "gui/gui_test/resource_management_menu/test_memory_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-03T18:09:02Z",
+      "side": 1,
+      "message": "Remove",
+      "range": {
+        "startLine": 26,
+        "startChar": 71,
+        "endLine": 26,
+        "endChar": 72
+      },
+      "revId": "70874833e3cd3d17272d8ad1621cc1df5ef17ae5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
