@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ecc992e_91b7c329",
+        "filename": "gui/gui_test/resource_management_menu/test_memory_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-03T17:50:05Z",
+      "side": 1,
+      "message": "add new line before it",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 18
+      },
+      "revId": "417d531f328a1586f11f94cb30933d83ba29bd32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf0f9a1b_43369b09",
+        "filename": "gui/gui_test/resource_management_menu/test_memory_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-03T17:50:05Z",
+      "side": 1,
+      "message": "Login to GUI and perform page navigation to memory page and verify it loads successfully.",
+      "range": {
+        "startLine": 17,
+        "startChar": 23,
+        "endLine": 17,
+        "endChar": 53
+      },
+      "revId": "417d531f328a1586f11f94cb30933d83ba29bd32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b347598_95992db9",
+        "filename": "gui/gui_test/resource_management_menu/test_memory_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-03T17:50:05Z",
+      "side": 1,
+      "message": "Login to GUI and perform page navigation to memory page and check if all visible sections is actually loaded successfully.",
+      "range": {
+        "startLine": 24,
+        "startChar": 21,
+        "endLine": 24,
+        "endChar": 68
+      },
+      "revId": "417d531f328a1586f11f94cb30933d83ba29bd32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d7d29db_09b9f12b",
+        "filename": "gui/gui_test/resource_management_menu/test_memory_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-03T17:50:05Z",
+      "side": 1,
+      "message": "Add new line after this",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 16
+      },
+      "revId": "417d531f328a1586f11f94cb30933d83ba29bd32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
