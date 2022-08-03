@@ -832,6 +832,35 @@ Get Post Boot Action
     [Return]  ${post_code_update_actions}
 
 
+Get Task State From File
+    [Documentation]  Get task states from pre-define data/task_state.json file.
+
+    # Example:  Task state JSON format.
+    #
+    # {
+    #   "TaskRunning": {
+    #           "TaskState": "Running",
+    #           "TaskStatus": "OK"
+    #   },
+    #   "TaskCompleted": {
+    #           "TaskState": "Completed",
+    #           "TaskStatus": "OK"
+    #   },
+    #   "TaskException": {
+    #           "TaskState": "Exception",
+    #           "TaskStatus": "Warning"
+    #   }
+    # }
+
+    # Python module: get_code_base_dir_path()
+    ${code_base_dir_path}=  Get Code Base Dir Path
+    ${task_state}=  Evaluate
+    ...  json.load(open('${code_base_dir_path}data/task_state.json'))  modules=json
+    Rprint Vars  task_state
+
+    [Return]  ${task_state}
+
+
 Redfish Set Boot Default
     [Documentation]  Set and Verify Boot source override
     [Arguments]      ${override_enabled}  ${override_target}  ${override_mode}=UEFI
