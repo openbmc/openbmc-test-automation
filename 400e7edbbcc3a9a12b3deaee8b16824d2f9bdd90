@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e608ae3_20cdf420",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-08-03T07:21:46Z",
+      "side": 1,
+      "message": "Change to Invalid Port Number",
+      "range": {
+        "startLine": 170,
+        "startChar": 44,
+        "endLine": 170,
+        "endChar": 74
+      },
+      "revId": "400e7edbbcc3a9a12b3deaee8b16824d2f9bdd90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
