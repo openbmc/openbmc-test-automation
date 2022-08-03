@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a99207f_5ca3f606",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-08-03T15:05:44Z",
+      "side": 1,
+      "message": "Don\u0027t find a suitable alternative for the code which is being reviewed. Hence +1 from my side. I am fine with the code once CI issue is resolved.",
+      "revId": "b028743339cfab04782c81f85d06701ff3c4b231",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
