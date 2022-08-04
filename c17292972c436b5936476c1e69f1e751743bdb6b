@@ -63,6 +63,30 @@
       },
       "revId": "c17292972c436b5936476c1e69f1e751743bdb6b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e555bbff_a8c3ebf2",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-08-04T13:29:58Z",
+      "side": 1,
+      "message": "use variable in line 27",
+      "parentUuid": "7e1c4a20_6ed0ac5b",
+      "range": {
+        "startLine": 218,
+        "startChar": 39,
+        "endLine": 218,
+        "endChar": 43
+      },
+      "revId": "c17292972c436b5936476c1e69f1e751743bdb6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
