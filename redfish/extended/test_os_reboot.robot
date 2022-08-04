@@ -6,6 +6,7 @@ Resource        ../../lib/openbmc_ffdc.robot
 Resource        ../../lib/boot_utils.robot
 
 Suite Setup     Run Key  Start SOL Console Logging
+Test Setup      Redfish.Login
 Test Teardown   Test Teardown Execution
 
 *** Variables ***
