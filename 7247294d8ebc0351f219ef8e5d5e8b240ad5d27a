@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7727cd6_9a1b3e23",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-04T07:54:39Z",
+      "side": 1,
+      "message": "Replacing Reboot with Redfish Equivalent\n\nChanges:\n   - Use the keyword \"Redfish OBMC Reboot\"\n\nTested:\n    Ran test redfish/managers/test_bmc_network_conf.robot",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 40
+      },
+      "revId": "7247294d8ebc0351f219ef8e5d5e8b240ad5d27a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
