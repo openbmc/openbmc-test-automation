@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74cc5594_936572c0",
+        "filename": "data/task_state.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f662c937_593d3412",
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d67c21b0_4e16fab8",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-08-04T07:50:32Z",
       "side": 1,
       "message": "Return list of id(s) from provided list of dictionary.",
+      "range": {
+        "startLine": 289,
+        "startChar": 21,
+        "endLine": 289,
+        "endChar": 61
+      },
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9903e9a6_aa56678c",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d67c21b0_4e16fab8",
       "range": {
         "startLine": 289,
         "startChar": 21,
@@ -87,6 +129,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aeb2302_7bdc4b8d",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01f8e179_ba274267",
+      "range": {
+        "startLine": 293,
+        "startChar": 6,
+        "endLine": 293,
+        "endChar": 24
+      },
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d4b4383_82aae0f4",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3f0760b_6ed0f38c",
+      "range": {
+        "startLine": 293,
+        "startChar": 32,
+        "endLine": 293,
+        "endChar": 37
+      },
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ce2db14_0fd4f47b",
@@ -100,6 +190,30 @@
       "writtenOn": "2022-08-04T07:50:32Z",
       "side": 1,
       "message": "What do u mean by initiated ?  and also add brief description",
+      "range": {
+        "startLine": 304,
+        "startChar": 7,
+        "endLine": 304,
+        "endChar": 17
+      },
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c8714ab_87d8655c",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ce2db14_0fd4f47b",
       "range": {
         "startLine": 304,
         "startChar": 7,
@@ -133,6 +247,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13b2118f_cda1ad33",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77cdcdba_407272e6",
+      "range": {
+        "startLine": 332,
+        "startChar": 4,
+        "endLine": 332,
+        "endChar": 47
+      },
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "caead505_502936fb",
@@ -146,6 +284,30 @@
       "writtenOn": "2022-08-04T07:50:32Z",
       "side": 1,
       "message": "${target_uri}\u003d/redfish/v1/TaskService/Tasks",
+      "range": {
+        "startLine": 342,
+        "startChar": 17,
+        "endLine": 342,
+        "endChar": 30
+      },
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51c4c6df_f4280dd7",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "caead505_502936fb",
       "range": {
         "startLine": 342,
         "startChar": 17,
@@ -179,6 +341,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cebb2696_2f0c9585",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be7f7946_6011725d",
+      "range": {
+        "startLine": 347,
+        "startChar": 4,
+        "endLine": 347,
+        "endChar": 65
+      },
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c40ea11_4d4e49b0",
@@ -196,6 +382,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "893bd0fb_7ec27ba3",
+        "filename": "lib/redfish_code_update_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c40ea11_4d4e49b0",
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c14bf2fe_01ffd96e",
@@ -209,6 +413,30 @@
       "writtenOn": "2022-08-04T07:50:32Z",
       "side": 1,
       "message": "Get Task State from File",
+      "range": {
+        "startLine": 835,
+        "startChar": 0,
+        "endLine": 835,
+        "endChar": 24
+      },
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c6d6dba_5657ce74",
+        "filename": "lib/utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c14bf2fe_01ffd96e",
       "range": {
         "startLine": 835,
         "startChar": 0,
@@ -242,6 +470,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7279bc6f_b0634fe7",
+        "filename": "lib/utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5accfa2_076b4013",
+      "range": {
+        "startLine": 836,
+        "startChar": 21,
+        "endLine": 836,
+        "endChar": 43
+      },
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c56ae31_51c13a4d",
@@ -255,6 +507,30 @@
       "writtenOn": "2022-08-04T07:50:32Z",
       "side": 1,
       "message": "# Example:  Task state JSON format.",
+      "range": {
+        "startLine": 838,
+        "startChar": 4,
+        "endLine": 838,
+        "endChar": 16
+      },
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b615363e_7150bb0c",
+        "filename": "lib/utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c56ae31_51c13a4d",
       "range": {
         "startLine": 838,
         "startChar": 4,
@@ -282,6 +558,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9710ee4b_aaf75c5d",
+        "filename": "lib/utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7dd20ccb_4c22ee08",
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "983ef692_fe4d5701",
@@ -295,6 +589,30 @@
       "writtenOn": "2022-08-04T07:50:32Z",
       "side": 1,
       "message": "task_state",
+      "range": {
+        "startLine": 856,
+        "startChar": 6,
+        "endLine": 856,
+        "endChar": 26
+      },
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a37947bc_4ffcc3df",
+        "filename": "lib/utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "983ef692_fe4d5701",
       "range": {
         "startLine": 856,
         "startChar": 6,
@@ -328,6 +646,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26a025c0_f307fb27",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "badfb91d_dba006e9",
+      "range": {
+        "startLine": 126,
+        "startChar": 6,
+        "endLine": 126,
+        "endChar": 19
+      },
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed829b52_882c8c8a",
@@ -341,6 +683,30 @@
       "writtenOn": "2022-08-04T07:50:32Z",
       "side": 1,
       "message": "file_bin_data",
+      "range": {
+        "startLine": 128,
+        "startChar": 6,
+        "endLine": 128,
+        "endChar": 16
+      },
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88b279e4_b1a4a172",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed829b52_882c8c8a",
       "range": {
         "startLine": 128,
         "startChar": 6,
@@ -374,6 +740,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66082c95_6716f374",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f753716_b9a7dc5b",
+      "range": {
+        "startLine": 134,
+        "startChar": 0,
+        "endLine": 134,
+        "endChar": 63
+      },
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9344a8b4_01c1861b",
@@ -387,6 +777,30 @@
       "writtenOn": "2022-08-04T07:50:32Z",
       "side": 1,
       "message": "/redfish/v1/UpdateService",
+      "range": {
+        "startLine": 135,
+        "startChar": 51,
+        "endLine": 135,
+        "endChar": 64
+      },
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5e0740b_29d7d15d",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9344a8b4_01c1861b",
       "range": {
         "startLine": 135,
         "startChar": 51,
@@ -420,6 +834,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f57c7221_ec2afdbd",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "254c9bc2_caae0e48",
+      "range": {
+        "startLine": 137,
+        "startChar": 4,
+        "endLine": 137,
+        "endChar": 42
+      },
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46cb6d5c_b9eeee61",
@@ -443,6 +881,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "890909fe_294e5738",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46cb6d5c_b9eeee61",
+      "range": {
+        "startLine": 140,
+        "startChar": 1,
+        "endLine": 140,
+        "endChar": 45
+      },
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53153577_f9808c1b",
@@ -456,6 +918,30 @@
       "writtenOn": "2022-08-04T07:50:32Z",
       "side": 1,
       "message": "5 min  10 sec",
+      "range": {
+        "startLine": 141,
+        "startChar": 33,
+        "endLine": 141,
+        "endChar": 46
+      },
+      "revId": "27950a68a820165937c5c0f8e961e65ba6f748ec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4aba226_c246250e",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-08-04T11:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53153577_f9808c1b",
       "range": {
         "startLine": 141,
         "startChar": 33,
