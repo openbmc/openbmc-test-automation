@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fc7138a_d9378c07",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-08-04T11:08:51Z",
+      "side": 1,
+      "message": "This is used in multiple places, use as a varibale by defining it",
+      "range": {
+        "startLine": 56,
+        "startChar": 77,
+        "endLine": 56,
+        "endChar": 88
+      },
+      "revId": "b447ba345e21964a620741e44108ab767be2fcfb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b1e1336_b317c68d",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-08-04T11:08:51Z",
+      "side": 1,
+      "message": "in future this value may change, better define in one place.\ndefine it as invalid_port_error",
+      "range": {
+        "startLine": 110,
+        "startChar": 49,
+        "endLine": 110,
+        "endChar": 80
+      },
+      "revId": "b447ba345e21964a620741e44108ab767be2fcfb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3286d284_8835acec",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-08-04T11:08:51Z",
+      "side": 1,
+      "message": "define it something like invalid_destination_error",
+      "range": {
+        "startLine": 113,
+        "startChar": 49,
+        "endLine": 113,
+        "endChar": 87
+      },
+      "revId": "b447ba345e21964a620741e44108ab767be2fcfb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d85ced61_1ac751aa",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-08-04T11:08:51Z",
+      "side": 1,
+      "message": "If existing code was working on earlier builds, better use ignore case",
+      "revId": "b447ba345e21964a620741e44108ab767be2fcfb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
