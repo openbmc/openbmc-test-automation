@@ -525,7 +525,7 @@ IPMI_RAW_CMD = {
             'Set':
             [
                 # raw command, expected output(s)
-                "0x06 0x58 0x00 0x00",
+                "0x06 0x58 0x00",
                 "Request data length invalid",
                 "Invalid data field in request",
             ],
