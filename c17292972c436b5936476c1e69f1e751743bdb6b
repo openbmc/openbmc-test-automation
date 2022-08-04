@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a421cee8_2a81c591",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-08-04T11:37:47Z",
+      "side": 1,
+      "message": "Here the text of snmp alerts heading is changed from SNMP Alerts to SNMP alerts.",
+      "revId": "c17292972c436b5936476c1e69f1e751743bdb6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e9d36aa_248410aa",
