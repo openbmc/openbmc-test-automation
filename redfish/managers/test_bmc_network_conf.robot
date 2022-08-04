@@ -182,7 +182,7 @@ Add Valid IPv4 Address And Check Persistency
     Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
 
     # Reboot BMC and verify persistency.
-    OBMC Reboot (off)
+    Redfish OBMC Reboot (off)  stack_mode=skip
     Redfish.Login
     Verify IP On BMC  ${test_ipv4_addr}
     Verify IP On Redfish URI  ${test_ipv4_addr}
@@ -416,7 +416,7 @@ Configure DNS Server And Check Persistency
 
     Configure Static Name Servers  ${static_name_servers}
     # Reboot BMC and verify persistency.
-    OBMC Reboot (off)
+    Redfish OBMC Reboot (off)  stack_mode=skip
     Redfish.Login
     Verify CLI and Redfish Nameservers
 
@@ -541,7 +541,7 @@ Configure Multiple Static IPv4 Addresses And Check Persistency
     Configure Multiple Static IPv4 Addresses  ${test_ipv4_addresses}  ${test_subnet_mask}  ${test_gateway}
 
     # Reboot BMC and verify persistency.
-    OBMC Reboot (off)
+    Redfish OBMC Reboot (off)  stack_mode=skip
     Redfish.Login
     FOR  ${ip}  IN  @{test_ipv4_addresses}
       Verify IP And Netmask On BMC  ${ip}  ${test_subnet_mask}
@@ -596,7 +596,7 @@ Config Multiple DNS Servers And Check Persistency
     Configure Static Name Servers  ${list_name_servers}
 
     # Reboot BMC and verify persistency.
-    OBMC Reboot (off)
+    Redfish OBMC Reboot (off)  stack_mode=skip
     Redfish.Login
     Verify CLI and Redfish Nameservers
 
