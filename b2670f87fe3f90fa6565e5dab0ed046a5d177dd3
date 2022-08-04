@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74a76e3b_1f9a452a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-04T10:48:38Z",
+      "side": 1,
+      "message": "$ python3 -m rflint -rA robot_standards -R robot_custom_rules.py redfish/extended/test_service_restart_policy.robot\n+ redfish/extended/test_service_restart_policy.robot\nW: 97, 110: Line is too long (exceeds 110 characters) (LineTooLong)\nW: 100, 110: Line is too long (exceeds 110 characters) (LineTooLong)\nW: 102, 110: Line is too long (exceeds 110 characters) (LineTooLong)\nW: 137, 110: Line is too long (exceeds 110 characters) (LineTooLong)\nW: 139, 110: Line is too long (exceeds 110 characters) (LineTooLong)\nW: 66, 0: Line has trailing whitespace (TrailingWhitespace)",
+      "revId": "b2670f87fe3f90fa6565e5dab0ed046a5d177dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14f05db4_6df7aefb",
