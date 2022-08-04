@@ -1,7 +1,6 @@
 *** Settings ***
 
 Documentation   Test OpenBMC GUI "SNMP Alerts" sub-menu of "Settings".
-
 Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/snmp/resource.robot
 Resource        ../../../lib/snmp/redfish_snmp_utils.robot
@@ -30,21 +29,18 @@ ${xpath_delete_destination}                       //button[contains(text(),'Dele
 Verify Navigation To SNMP Alerts Page
     [Documentation]  Verify navigation to SNMP alerts page.
     [Tags]  Verify_Navigation_To_SNMP_Alerts_Page
-
     Page Should Contain Element  ${xpath_snmp_alerts_heading}
 
 
 Verify Existence Of All Input Boxes In SNMP Alerts Page
     [Documentation]  Verify existence of all sections in SNMP alerts page.
     [Tags]  Verify_Existence_Of_All_Input_Boxes_In_SNMP_Alerts_Page
-
     Page Should Contain Checkbox  ${xpath_select_all_snmp}
 
 
 Verify Existence Of All Buttons In SNMP Alerts Page
     [Documentation]  Verify existence of all buttons in SNMP alerts page.
     [Tags]  Verify_Existence_Of_All_Buttons_In_SNMP_Alerts_Page
-
     Page should Contain Button  ${xpath_add_destination}
 
 
@@ -53,7 +49,7 @@ Verify Existence Of All Fields In Add Destination
     [Tags]  Verify_Existence_Of_All_Fields_In_Add_Destination
     [Teardown]  Run Keywords  Click Button  ${xpath_cancel_button}  AND
     ...  Wait Until Keyword Succeeds  10 sec  5 sec
-    ...  Refresh GUI And Verify Element Value  ${xpath_snmp_alerts_heading}  SNMP Alerts
+    ...  Refresh GUI And Verify Element Value  ${xpath_snmp_alerts_heading}  SNMP alerts
 
     Click Element  ${xpath_add_destination}
     Wait Until Page Contains Element  ${xpath_snmp_alert_destination_heading}
@@ -110,8 +106,8 @@ Configure Invalid SNMP Settings On BMC Via GUI And Verify
     ${SNMP_MGR1_IP}     ${out_of_range_port}     Value must be between 0 – 65535
     ${SNMP_MGR1_IP}     ${alpha_port}            Value must be between 0 – 65535
     ${SNMP_MGR1_IP}     ${negative_port}         Value must be between 0 – 65535
-    ${out_of_range_ip}  ${NON_DEFAULT_PORT1}     Invalid format
-    ${alpha_ip}         ${NON_DEFAULT_PORT1}     Invalid format
+    ${out_of_range_ip}  ${NON_DEFAULT_PORT1}     Error in adding SNMP alert destination
+    ${alpha_ip}         ${NON_DEFAULT_PORT1}     Error in adding SNMP alert destination
 
 
 Configure Multiple SNMP Managers On BMC Via GUI And Verify
@@ -162,7 +158,7 @@ Configure Multiple SNMP Managers On BMC Via GUI And Verify Persistency On BMC Re
     Reboot BMC via GUI
 
     Suite Setup Execution
-    Wait Until Page Contains  SNMP Alerts  timeout=1min
+    Wait Until Page Contains  SNMP alerts  timeout=1min
 
     Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
     Verify SNMP Manager Configured On BMC  ${SNMP_MGR2_IP}  ${SNMP_DEFAULT_PORT}
@@ -172,7 +168,6 @@ Configure Multiple SNMP Managers On BMC Via GUI And Verify Persistency On BMC Re
 
 Suite Setup Execution
     [Documentation]  Do test case setup tasks.
-
     Launch Browser And Login GUI
 
     Click Element  ${xpath_settings_menu}
@@ -211,14 +206,15 @@ Delete SNMP Manager Via GUI
     Click Element  ${xpath_delete_destination}
     Wait Until Page Contains  Successfully deleted SNMP alert destination  timeout=45s
     Wait Until Keyword Succeeds  30 sec  10 sec  Refresh GUI And Verify Element Value
-    ...  ${xpath_snmp_alerts_heading}  SNMP Alerts
+    ...  ${xpath_snmp_alerts_heading}  SNMP alerts
 
 
 Configure SNMP Manager On BMC With Invalid Setting Via GUI And Verify
 
     [Documentation]  Configure SNMP manager on BMC with invalid setting via GUI and verify.
     [Arguments]  ${snmp_manager_ip}  ${snmp_manager_port}  ${expected_error}
-    [Teardown]  Click Element  ${xpath_cancel_button}
+    [Teardown]  Run Keyword If  '${expected_error}' == 'Value must be between 0 – 65535'
+    ...             Click Element  ${xpath_cancel_button}
 
     # Description of argument(s):
     # snmp_manager_ip     SNMP manager IP address.
