@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9038a4dd_0d1711bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-04T08:26:14Z",
+      "side": 1,
+      "message": "Source: request_upgrade/openpower/ext_interfaces\nStart / End / Elapsed:\t20220804 12:42:28.882 / 20220804 13:09:25.801 / 00:26:56.919\nStatus:\t41 tests total, 41 passed, 0 failed, 0 skipped",
+      "revId": "aa0be462ec4bab8e78d3f99a0ca0adbf09c71024",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
