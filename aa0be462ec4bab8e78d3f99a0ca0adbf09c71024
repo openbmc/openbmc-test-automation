@@ -33,6 +33,23 @@
       "message": "Configure More Byte MAC And Verify :: Configure more byte MAC via ... | PASS |\n------------------------------------------------------------------------------\nManagers.Test Bmc Network Mac :: Test BMC network interface functi... | PASS |\n9 tests, 9 passed, 0 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nManagers                                                              | PASS |\n55 tests, 55 passed, 0 failed",
       "revId": "aa0be462ec4bab8e78d3f99a0ca0adbf09c71024",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d01ff7b_0c4e6dcc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-04T08:52:30Z",
+      "side": 1,
+      "message": "REST Host Code Update :: Do a PNOR code update by uploading image ... | PASS |\n------------------------------------------------------------------------------\nHost Code Update :: Update the PNOR code on a target BMC. Executio... | PASS |\n1 test, 1 passed, 0 failed",
+      "revId": "aa0be462ec4bab8e78d3f99a0ca0adbf09c71024",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
