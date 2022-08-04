@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dd8a676_18d0fbcf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-08-04T12:31:25Z",
+      "side": 1,
+      "message": "Please put the commit msg in this format.\n\nHeadline \n\nChanges:\n     - \u003cBrief\u003e\n\nTested:\n     - \u003cInformation about what was tested\u003e",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 64
+      },
+      "revId": "b2670f87fe3f90fa6565e5dab0ed046a5d177dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "74a76e3b_1f9a452a",
@@ -14,6 +37,29 @@
       "writtenOn": "2022-08-04T10:48:38Z",
       "side": 1,
       "message": "$ python3 -m rflint -rA robot_standards -R robot_custom_rules.py redfish/extended/test_service_restart_policy.robot\n+ redfish/extended/test_service_restart_policy.robot\nW: 97, 110: Line is too long (exceeds 110 characters) (LineTooLong)\nW: 100, 110: Line is too long (exceeds 110 characters) (LineTooLong)\nW: 102, 110: Line is too long (exceeds 110 characters) (LineTooLong)\nW: 137, 110: Line is too long (exceeds 110 characters) (LineTooLong)\nW: 139, 110: Line is too long (exceeds 110 characters) (LineTooLong)\nW: 66, 0: Line has trailing whitespace (TrailingWhitespace)",
+      "revId": "b2670f87fe3f90fa6565e5dab0ed046a5d177dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aefd855d_b0cf54bb",
+        "filename": "redfish/extended/test_service_restart_policy.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-08-04T12:31:25Z",
+      "side": 1,
+      "message": "get",
+      "range": {
+        "startLine": 63,
+        "startChar": 71,
+        "endLine": 63,
+        "endChar": 75
+      },
       "revId": "b2670f87fe3f90fa6565e5dab0ed046a5d177dd3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -36,6 +82,190 @@
         "startChar": 71,
         "endLine": 66,
         "endChar": 72
+      },
+      "revId": "b2670f87fe3f90fa6565e5dab0ed046a5d177dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcbb7abb_2743f811",
+        "filename": "redfish/extended/test_service_restart_policy.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-08-04T12:31:25Z",
+      "side": 1,
+      "message": "a",
+      "range": {
+        "startLine": 66,
+        "startChar": 13,
+        "endLine": 66,
+        "endChar": 15
+      },
+      "revId": "b2670f87fe3f90fa6565e5dab0ed046a5d177dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60b10ed0_2e029a02",
+        "filename": "redfish/extended/test_service_restart_policy.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-08-04T12:31:25Z",
+      "side": 1,
+      "message": "a\nModify throughout the file",
+      "range": {
+        "startLine": 68,
+        "startChar": 26,
+        "endLine": 68,
+        "endChar": 28
+      },
+      "revId": "b2670f87fe3f90fa6565e5dab0ed046a5d177dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c40c8b9e_16a40157",
+        "filename": "redfish/extended/test_service_restart_policy.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-08-04T12:31:25Z",
+      "side": 1,
+      "message": "have",
+      "range": {
+        "startLine": 99,
+        "startChar": 44,
+        "endLine": 99,
+        "endChar": 47
+      },
+      "revId": "b2670f87fe3f90fa6565e5dab0ed046a5d177dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68a7cae7_b16f57ef",
+        "filename": "redfish/extended/test_service_restart_policy.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-08-04T12:31:25Z",
+      "side": 1,
+      "message": "get",
+      "range": {
+        "startLine": 105,
+        "startChar": 94,
+        "endLine": 105,
+        "endChar": 98
+      },
+      "revId": "b2670f87fe3f90fa6565e5dab0ed046a5d177dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12cdcf3f_19ca4b73",
+        "filename": "redfish/extended/test_service_restart_policy.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-08-04T12:31:25Z",
+      "side": 1,
+      "message": "Only services with process ID and in active state get killed and checked whether\nthey automatically restart and put into active state.",
+      "range": {
+        "startLine": 107,
+        "startChar": 6,
+        "endLine": 108,
+        "endChar": 79
+      },
+      "revId": "b2670f87fe3f90fa6565e5dab0ed046a5d177dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e70f5d3f_1e2d9950",
+        "filename": "redfish/extended/test_service_restart_policy.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-08-04T12:31:25Z",
+      "side": 1,
+      "message": "Run Keywords  Append To List  ${service_not_started}  ${service}  AND  Continue For Loop",
+      "range": {
+        "startLine": 116,
+        "startChar": 3,
+        "endLine": 118,
+        "endChar": 0
+      },
+      "revId": "b2670f87fe3f90fa6565e5dab0ed046a5d177dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6bfc5de_40a17bf6",
+        "filename": "redfish/extended/test_service_restart_policy.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-08-04T12:31:25Z",
+      "side": 1,
+      "message": "Old process ID is mapped to ${service} service after service restart.",
+      "range": {
+        "startLine": 126,
+        "startChar": 15,
+        "endLine": 126,
+        "endChar": 98
+      },
+      "revId": "b2670f87fe3f90fa6565e5dab0ed046a5d177dd3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcd6edad_f6f06e35",
+        "filename": "redfish/extended/test_service_restart_policy.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-08-04T12:31:25Z",
+      "side": 1,
+      "message": "The msg in both if and else mean the same thing.",
+      "range": {
+        "startLine": 136,
+        "startChar": 4,
+        "endLine": 140,
+        "endChar": 0
       },
       "revId": "b2670f87fe3f90fa6565e5dab0ed046a5d177dd3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
