@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "893d853a_d9489871",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-05T16:12:55Z",
+      "side": 1,
+      "message": "Added new testcases to policies sub-menu\n\nChanges:\n    - Disable SSH Via GUI And Verify Persistency On BMC Reboot\n    - Disable IPMI Via GUI And Verify Persistency On BMC Reboot\n\nTested:\n    Ran so and so test cases from test suite.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "d192b8b76fcd34e4dbad5456ceca7d0bb0be8644",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d627d99e_07ae108a",
         "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
         "patchSetId": 2
