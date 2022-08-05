@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8d2317a_19b34bfc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-08-05T07:03:12Z",
+      "side": 1,
+      "message": "Change the message like below and pls make sure there are no tabs.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 107
+      },
+      "revId": "daed9472ff330e30e275a7a47158cad76b940b5f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be3c4937_4510fe53",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-08-05T07:03:12Z",
+      "side": 1,
+      "message": "Added test to kill and restart service\n\nChanges:\n      - Kill the list of services and expect killed services restart\n      - Test case added to test_service_restart_policy.robot suite\n\nTested:\n      - Tested redfish/extended/test_service_restart_policy.robot",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 131
+      },
+      "revId": "daed9472ff330e30e275a7a47158cad76b940b5f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dabe89a9_14a79c11",
         "filename": "data/platform_variables_import.py",
         "patchSetId": 6
