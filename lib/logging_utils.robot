@@ -132,12 +132,10 @@ Verify Watchdog Errorlog Content
 
 Logging Test Binary Exist
     [Documentation]  Verify existence of prerequisite logging-test.
-    Open Connection And Log In
-    ${out}  ${stderr}=  Execute Command
-    ...  which /tmp/tarball/bin/logging-test  return_stderr=True
+    ${stdout}  ${stderr}  ${rc}=
+    ...  BMC Execute Command  test -f /tmp/tarball/bin/logging-test  print_out=1
     Should Be Empty  ${stderr}  msg=Logging Test stderr is non-empty.
-    Should Contain  ${out}  logging-test
-    ...  msg=Logging test returned unexpected result.
+
 
 Clear Existing Error Logs
     [Documentation]  If error log isn't empty, reboot the BMC to clear the log.
