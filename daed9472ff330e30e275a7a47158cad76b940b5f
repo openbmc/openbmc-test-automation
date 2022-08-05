@@ -110,6 +110,24 @@
       "message": "Best put here https://github.com/openbmc/openbmc-test-automation/blob/master/lib/utilities.py",
       "revId": "daed9472ff330e30e275a7a47158cad76b940b5f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3bc12de_787a96f1",
+        "filename": "data/platform_variables_import.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-05T09:30:38Z",
+      "side": 1,
+      "message": "As per 05/08/22 discussion via discord with george he has confirmed that this file is not required to move to lib/ directory and as per his suggestion file was renamed as suggested.",
+      "parentUuid": "dabe89a9_14a79c11",
+      "revId": "daed9472ff330e30e275a7a47158cad76b940b5f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
