@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2645b2aa_008f71e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-05T09:14:17Z",
+      "side": 1,
+      "message": "Please add the Tested:  section for all your commits",
+      "revId": "5aaa8a21a074e89c98f9395b93a5a28a2ad88198",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
