@@ -10,10 +10,12 @@ Suite Teardown  Close Browser
 
 *** Variables ***
 
-${xpath_power_heading}             //h1[text()="Power"]
-${xpath_power_ops_checkbox}        //*[@data-test-id='power-checkbox-togglePowerCapField']
-${xpath_cap_input_button}          //*[@data-test-id='power-input-powerCap']
-${xpath_submit_button}             //*[@data-test-id='power-button-savePowerCapValue']
+${xpath_power_heading}                //h1[text()="Power"]
+${xpath_power_ops_checkbox}           //*[@data-test-id='power-checkbox-togglePowerCapField']
+${xpath_cap_input_button}             //*[@data-test-id='power-input-powerCap']
+${xpath_submit_button}                //*[@data-test-id='power-button-savePowerCapValue']
+${xpath_ideal_power_saver_heading}    //h2[text()="Idle power saver"]
+${xpath_power_and_performance_mode}   //h2[text()="Power and performance mode"]
 
 *** Test Cases ***
 
@@ -31,7 +33,8 @@ Verify Existence Of All Sections In Power Page
     Page Should Contain  Current power consumption
     Page Should Contain  Power cap setting
     Page Should Contain  Power cap value
-
+    Page Should Contain  Power and performance mode
+    Page Should Contain  Idle power saver
 
 Verify Existence Of All Buttons In Power Page
     [Documentation]  Verify existence of all buttons in power page.
@@ -80,6 +83,22 @@ Verify Server Power Cap Setting Is Off
     Click Element  ${xpath_submit_button}
     ${power_cap}=  Get Power Cap Value
     Should Not Be True  ${power_cap} == 499
+
+
+Verify Navigation To Ideal Power Saver
+    [Documentation]  Login to GUI and navigate to power page 
+    ...  and verify ideal power saver loaded in the page.
+    [Tags]  Verify_Navigation_To_Ideal_Power_Saver
+
+    Page Should Contain Element  ${xpath_ideal_power_saver_heading}
+
+
+Verify Navigation To Power And Powerformance Mode
+    [Documentation]  Login to GUI and navigate to power page 
+    ...  and verify power performance mode options are loaded.
+    [Tags]  Verify_Navigation_To_Power_And_Powerformance_Mode
+
+    Page Should Contain Element  ${xpath_power_and_performance_mode}
 
 
 *** Keywords ***
