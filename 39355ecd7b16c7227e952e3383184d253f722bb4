@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2461bfb_d8a19f84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-05T16:11:19Z",
+      "side": 1,
+      "message": "Heading\n\nChanges:\n    - I did this and that changes\n    - I fixed this and that\n\nTested:\n    Ran so and so test case from the test suite.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 42
+      },
+      "revId": "39355ecd7b16c7227e952e3383184d253f722bb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
