@@ -35,6 +35,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2ace9e1_4743a881",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-08-05T09:21:05Z",
+      "side": 1,
+      "message": "Done",
+      "revId": "5aaa8a21a074e89c98f9395b93a5a28a2ad88198",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00b97e04_e7197418",
@@ -71,6 +88,30 @@
       "writtenOn": "2022-08-05T09:16:17Z",
       "side": 1,
       "message": "Login to GUI and navigate to power page and verify power performance mode options are loaded.",
+      "range": {
+        "startLine": 96,
+        "startChar": 21,
+        "endLine": 96,
+        "endChar": 68
+      },
+      "revId": "5aaa8a21a074e89c98f9395b93a5a28a2ad88198",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a83baf7_68f3b293",
+        "filename": "gui/gui_test/resource_management_menu/test_power_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-08-05T09:21:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c968be2d_125120f1",
       "range": {
         "startLine": 96,
         "startChar": 21,
