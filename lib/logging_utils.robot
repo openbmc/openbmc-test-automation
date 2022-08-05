@@ -315,3 +315,39 @@ Event Log Should Not Exist
 
     ${elogs}=  Get Event Logs
     Should Be Empty  ${elogs}  msg=System event log entry is not empty.
+
+
+Redfish Clear PostCodes
+    [Documentation]  Do Redfish PostCodes purge from system.
+
+    ${target_action}=  redfish_utils.Get Target Actions
+    ...  /redfish/v1/Systems/system/LogServices/PostCodes/  LogService.ClearLog
+    Redfish.Post  ${target_action}  body={'target': '${target_action}'}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+
+Redfish Get PostCodes
+    [Documentation]  Perform Redfish GET request and return the PostCodes entries as a list of dictionaries.
+
+    # Formatted example output from Rprint vars  members
+    # members:
+    #  [0]:
+    #    [@odata.id]:               /redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-1
+    #    [@odata.type]:             #LogEntry.v1_8_0.LogEntry
+    #    [AdditionalDataURI]:       /redfish/v1/Systems/system/LogServices/PostCodes/Entries/B1-1/attachment
+    #    [Created]:                 2022-08-06T04:38:10+00:00
+    #    [EntryType]:               Event
+    #    [Id]:                      B1-1
+    #    [Message]:                 Message": "Boot Count: 4: TS Offset: 0.0033; POST Code: 0x43
+    #    [MessageArgs]:
+    #      [0]:                    4
+    #      [1]:                    0.0033
+    #      [2]:                    0x43
+    #    [MessageId]:              OpenBMC.0.2.BIOSPOSTCodeASCII
+    #    [Name]:                   POST Code Log Entry
+    #    [Severity]:               OK
+
+    ${members}=  Redfish.Get Attribute  /redfish/v1/Systems/system/LogServices/PostCodes/Entries  Members
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    [Return]  ${members}
