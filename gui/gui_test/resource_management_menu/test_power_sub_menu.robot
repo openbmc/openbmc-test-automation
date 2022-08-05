@@ -10,10 +10,10 @@ Suite Teardown  Close Browser
 
 *** Variables ***
 
-${xpath_power_heading}             //h1[text()="Power"]
-${xpath_power_ops_checkbox}        //*[@data-test-id='power-checkbox-togglePowerCapField']
-${xpath_cap_input_button}          //*[@data-test-id='power-input-powerCap']
-${xpath_submit_button}             //*[@data-test-id='power-button-savePowerCapValue']
+${xpath_power_heading}                //h1[text()="Power"]
+${xpath_power_ops_checkbox}           //*[@data-test-id='power-checkbox-togglePowerCapField']
+${xpath_cap_input_button}             //*[@data-test-id='power-input-powerCap']
+${xpath_submit_button}                //*[@data-test-id='power-button-savePowerCapValue']
 
 *** Test Cases ***
 
@@ -31,7 +31,8 @@ Verify Existence Of All Sections In Power Page
     Page Should Contain  Current power consumption
     Page Should Contain  Power cap setting
     Page Should Contain  Power cap value
-
+    Page Should Contain  Power and performance mode
+    Page Should Contain  Idle power saver
 
 Verify Existence Of All Buttons In Power Page
     [Documentation]  Verify existence of all buttons in power page.
