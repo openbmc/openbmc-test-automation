@@ -315,3 +315,21 @@ Event Log Should Not Exist
 
     ${elogs}=  Get Event Logs
     Should Be Empty  ${elogs}  msg=System event log entry is not empty.
+
+
+Redfish Clear PostCodes
+    [Documentation]  Do Redfish PostCodes purge from system.
+
+    ${target_action}=  redfish_utils.Get Target Actions
+    ...  /redfish/v1/Systems/system/LogServices/PostCodes/  LogService.ClearLog
+    Redfish.Post  ${target_action}  body={'target': '${target_action}'}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+
+Redfish Get PostCodes
+    [Documentation]  Perform Redfish GET request and return the PostCodes entries in dictionary.
+
+    ${members}=  Redfish.Get Attribute  /redfish/v1/Systems/system/LogServices/PostCodes/Entries  Members
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    [Return]  ${members}
