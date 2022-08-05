@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08f0bec5_7800f657",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-05T16:13:56Z",
+      "side": 1,
+      "message": "    [Name]:                                       POST Code Log Entry\n    [Severity]:                                   OK\n.#(CDT) 2022/08/05 10:32:33.612033 -    0.254204 - Executing: get(\u0027/redfish/v1/Systems/system/LogServices/PostCodes/Entries\u0027)\n.BIOS POST Codes count: 324\nTest PostCodes When Host Boots :: Boot the system and verify PostC... | PASS |\n------------------------------------------------------------------------------\n#(CDT) 2022/08/05 10:32:33.783513 -    0.171480 - Executing: get(\u0027/redfish/v1/Managers/bmc/LogServices/Dump/Entries\u0027)\n#(CDT) 2022/08/05 10:32:33.813786 -    0.030273 - Executing: get(\u0027/redfish/v1/Systems/system/LogServices/EventLog/\u0027)\n#(CDT) 2022/08/05 10:32:33.835824 -    0.022038 - Executing: post(\u0027/redfish/v1/Systems/system/LogServices/EventLog/Actions/LogService.ClearLog\u0027, body\u003d\"{\u0027target\u0027...\n#(CDT) 2022/08/05 10:32:33.952106 -    0.116282 - Executing: get(\u0027/redfish/v1/SessionService/Sessions\u0027)\n#(CDT) 2022/08/05 10:32:33.977061 -    0.024955 - Executing: get(\u0027/redfish/v1/SessionService/Sessions/hPOZd2CZV6\u0027, valid_status_codes\u003d\u0027[200,404]\u0027)\nClient sessions skip list: []\n#(CDT) 2022/08/05 10:32:34.037745 -    0.060685 - Executing: delete(\u0027/redfish/v1/SessionService/Sessions/hPOZd2CZV6\u0027)\nTest Post Codes :: Test suite to verify BIOS POST code log entries.   | PASS |\n1 test, 1 passed, 0 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d",
+      "revId": "35f296e0ab8e0188926f0dab54c47c1360de42c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
