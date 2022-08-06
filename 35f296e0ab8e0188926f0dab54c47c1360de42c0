@@ -16,6 +16,121 @@
       "message": "    [Name]:                                       POST Code Log Entry\n    [Severity]:                                   OK\n.#(CDT) 2022/08/05 10:32:33.612033 -    0.254204 - Executing: get(\u0027/redfish/v1/Systems/system/LogServices/PostCodes/Entries\u0027)\n.BIOS POST Codes count: 324\nTest PostCodes When Host Boots :: Boot the system and verify PostC... | PASS |\n------------------------------------------------------------------------------\n#(CDT) 2022/08/05 10:32:33.783513 -    0.171480 - Executing: get(\u0027/redfish/v1/Managers/bmc/LogServices/Dump/Entries\u0027)\n#(CDT) 2022/08/05 10:32:33.813786 -    0.030273 - Executing: get(\u0027/redfish/v1/Systems/system/LogServices/EventLog/\u0027)\n#(CDT) 2022/08/05 10:32:33.835824 -    0.022038 - Executing: post(\u0027/redfish/v1/Systems/system/LogServices/EventLog/Actions/LogService.ClearLog\u0027, body\u003d\"{\u0027target\u0027...\n#(CDT) 2022/08/05 10:32:33.952106 -    0.116282 - Executing: get(\u0027/redfish/v1/SessionService/Sessions\u0027)\n#(CDT) 2022/08/05 10:32:33.977061 -    0.024955 - Executing: get(\u0027/redfish/v1/SessionService/Sessions/hPOZd2CZV6\u0027, valid_status_codes\u003d\u0027[200,404]\u0027)\nClient sessions skip list: []\n#(CDT) 2022/08/05 10:32:34.037745 -    0.060685 - Executing: delete(\u0027/redfish/v1/SessionService/Sessions/hPOZd2CZV6\u0027)\nTest Post Codes :: Test suite to verify BIOS POST code log entries.   | PASS |\n1 test, 1 passed, 0 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d",
       "revId": "35f296e0ab8e0188926f0dab54c47c1360de42c0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3123594f_6c4e2425",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-06T11:35:55Z",
+      "side": 1,
+      "message": "should this be \u0027Redfish Get PostCodes\u0027",
+      "range": {
+        "startLine": 331,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 13
+      },
+      "revId": "35f296e0ab8e0188926f0dab54c47c1360de42c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a97cdf6_df8acc61",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-06T11:35:55Z",
+      "side": 1,
+      "message": "unused.. should we remove it?",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 0
+      },
+      "revId": "35f296e0ab8e0188926f0dab54c47c1360de42c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6176f23f_7eca9782",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-06T11:35:55Z",
+      "side": 1,
+      "message": "should this be .. Verify instead of Test ?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 4
+      },
+      "revId": "35f296e0ab8e0188926f0dab54c47c1360de42c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19b7eac3_f840bb05",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-06T11:35:55Z",
+      "side": 1,
+      "message": "Codes are",
+      "range": {
+        "startLine": 30,
+        "startChar": 80,
+        "endLine": 30,
+        "endChar": 85
+      },
+      "revId": "35f296e0ab8e0188926f0dab54c47c1360de42c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60fb143e_7f046dac",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-06T11:35:55Z",
+      "side": 1,
+      "message": "this is repeated in \u0027Suite Teardown Execution\u0027\n\nso can we create a keyword\n\nPerform Post Code Cleanup\n\n    Run Keyword And Ignore Error  Redfish Delete All BMC Dumps\n    Run Keyword And Ignore Error  Redfish Purge Event Log\n    Run Keyword And Ignore Error  Delete All Redfish Sessions\n    \n so that we can remove \u0027Suite Teardown Execution\u0027 and directly call \u0027Perform Post Code Cleanup\u0027 in Settings \u0027Suite Teardown\u0027",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 61
+      },
+      "revId": "35f296e0ab8e0188926f0dab54c47c1360de42c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
