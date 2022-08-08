@@ -14,6 +14,12 @@ ${xpath_power_heading}                //h1[text()="Power"]
 ${xpath_power_ops_checkbox}           //*[@data-test-id='power-checkbox-togglePowerCapField']
 ${xpath_cap_input_button}             //*[@data-test-id='power-input-powerCap']
 ${xpath_submit_button}                //*[@data-test-id='power-button-savePowerCapValue']
+${xpath_select_static}                //*[@id="power-save-modes_BV_option_0"]
+${xpath_select_powersaving}           //*[@id="power-save-modes_BV_option_1"]
+${xpath_select_maximum_performance}   //*[@id="power-save-modes_BV_option_2"]
+${xpath_update_power_save_mode}       //button[contains(text(),'Update power saver mode')]
+${xpath_page_loading_progress_bar}    //*[@aria-label='Page loading progress bar']
+
 
 *** Test Cases ***
 
@@ -83,6 +89,17 @@ Verify Server Power Cap Setting Is Off
     Should Not Be True  ${power_cap} == 499
 
 
+Verify Existence Of All Buttons In Power And Performance Page
+    [Documentation]  Login to GUI and perform page navigation to power page and
+    ...  check if all visible sections is actually loaded successfully.
+    [Tags]  Verify_Existence_Of_All_Buttons_In_Power_And_Performance_Page
+
+    Page Should Contain Element  ${xpath_select_static}
+    Page Should Contain Element  ${xpath_select_powersaving}
+    Page Should Contain Element  ${xpath_select_maximum_performance}
+    Page Should Contain Element  ${xpath_update_power_save_mode}
+
+
 *** Keywords ***
 
 Is Power Cap Value Set
@@ -145,3 +162,4 @@ Suite Setup Execution
     Click Element  ${xpath_resource_management_menu}
     Click Element  ${xpath_power_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  power
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=3
