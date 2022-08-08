@@ -22,6 +22,30 @@
       },
       "revId": "e802f796366d08942e4f8ab92f268341e58025f2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d048e5b_4ffb4221",
+        "filename": "gui/gui_test/security_and_access_menu/test_ldap_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1001509
+      },
+      "writtenOn": "2022-08-08T12:55:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72072919_10eb49c2",
+      "range": {
+        "startLine": 175,
+        "startChar": 31,
+        "endLine": 175,
+        "endChar": 49
+      },
+      "revId": "e802f796366d08942e4f8ab92f268341e58025f2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
