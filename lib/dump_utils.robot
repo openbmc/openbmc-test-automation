@@ -368,7 +368,6 @@ Get Dump ID And Status
     # Description of argument(s):
     # task_id        Task ID.
 
-    ${task_status}=  Wait Until Keyword Succeeds  10 min  15 sec  Check Task Completion  ${task_id}
-    ${dump_id}=  Run Keyword If  '${task_status}' == 'Completed'  Get Dump ID  ${task_id}
-    ...  ELSE  Set Variable  None
-    [Return]  ${dump_id}  ${task_status}
+    Wait Until Keyword Succeeds  10 min  15 sec  Check Task Completion  ${task_id}
+    ${dump_id}=  Get Dump ID  ${task_id}
+    [Return]  ${dump_id}  Completed
