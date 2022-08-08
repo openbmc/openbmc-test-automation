@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f3c0011_ad21143f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-08T08:49:38Z",
+      "side": 1,
+      "message": "Added a test case to verify existence of all buttons in power page",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 25
+      },
+      "revId": "c8f49c1ab2c88839feb5d991fa085d58c75ef4a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "078f7153_36edb3c8",
+        "filename": "gui/gui_test/resource_management_menu/test_power_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-08T08:49:38Z",
+      "side": 1,
+      "message": "Please dont use id or aria-label in xpath. Use data-test-id or test of the button to locate it.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 77
+      },
+      "revId": "c8f49c1ab2c88839feb5d991fa085d58c75ef4a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d88b7506_1b9c3328",
+        "filename": "gui/gui_test/resource_management_menu/test_power_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-08T08:49:38Z",
+      "side": 1,
+      "message": "Power Page",
+      "range": {
+        "startLine": 92,
+        "startChar": 34,
+        "endLine": 92,
+        "endChar": 61
+      },
+      "revId": "c8f49c1ab2c88839feb5d991fa085d58c75ef4a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a20317e_ce537515",
+        "filename": "gui/gui_test/resource_management_menu/test_power_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-08T08:49:38Z",
+      "side": 1,
+      "message": "[Documentation] Login to GUI and check if all visible buttons are available on Power page.",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 71
+      },
+      "revId": "c8f49c1ab2c88839feb5d991fa085d58c75ef4a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04c8e73d_9067b047",
+        "filename": "gui/gui_test/resource_management_menu/test_power_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-08T08:49:38Z",
+      "side": 1,
+      "message": "Keep the timeout for 10 seconds at-least",
+      "range": {
+        "startLine": 165,
+        "startChar": 76,
+        "endLine": 165,
+        "endChar": 85
+      },
+      "revId": "c8f49c1ab2c88839feb5d991fa085d58c75ef4a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
