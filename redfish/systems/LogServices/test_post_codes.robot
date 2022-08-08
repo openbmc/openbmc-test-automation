@@ -27,6 +27,34 @@ Test PostCodes When Host Boots
     Should Be True  ${post_codes['Members@odata.count']} >= 1  msg=No BIOS POST Codes populated.
 
 
+Test PostCodes When Host Reboot
+    [Documentation]  Initiate Host reboot the system and verify PostCodes from host are logged.
+    [Tags]  Test_PostCodes_When_Host_Reboot
+
+    RF SYS GracefulRestart
+    ${post_code_list}=  Redfish Get PostCodes
+    Rprint Vars  post_code_list
+
+    ${post_codes}=  Redfish.Get Properties
+    ...  /redfish/v1/Systems/system/LogServices/PostCodes/Entries
+    Log To Console  BIOS POST Codes count: ${post_codes['Members@odata.count']}
+    Should Be True  ${post_codes['Members@odata.count']} >= 1  msg=No BIOS POST Codes populated.
+
+
+Test PostCodes When Host Powered Off
+    [Documentation]  Power off the system and verify PostCodes from host are logged.
+    [Tags]  Test_PostCodes_When_Host_Powered Off
+
+    Redfish Power Off
+    ${post_code_list}=  Redfish Get PostCodes
+    Rprint Vars  post_code_list
+
+    ${post_codes}=  Redfish.Get Properties
+    ...  /redfish/v1/Systems/system/LogServices/PostCodes/Entries
+    Log To Console  BIOS POST Codes count: ${post_codes['Members@odata.count']}
+    Should Be True  ${post_codes['Members@odata.count']} >= 1  msg=No BIOS POST Codes populated.
+
+
 *** Keywords ***
 
 Test Setup Execution
