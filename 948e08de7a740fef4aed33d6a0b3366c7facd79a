@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5366a087_8c241d5b",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-08T06:27:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10f28989_be9f05a6",
+      "range": {
+        "startLine": 330,
+        "startChar": 4,
+        "endLine": 330,
+        "endChar": 96
+      },
+      "revId": "948e08de7a740fef4aed33d6a0b3366c7facd79a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aabbc767_b157a8a9",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-08T04:32:40Z",
       "side": 1,
       "message": "maybe Can we have a sample response above this line?",
+      "range": {
+        "startLine": 332,
+        "startChar": 3,
+        "endLine": 332,
+        "endChar": 105
+      },
+      "revId": "948e08de7a740fef4aed33d6a0b3366c7facd79a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9ac1dd3_ab8d7ce7",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-08T06:27:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aabbc767_b157a8a9",
       "range": {
         "startLine": 332,
         "startChar": 3,
