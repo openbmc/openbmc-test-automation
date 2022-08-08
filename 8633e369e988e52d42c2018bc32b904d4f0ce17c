@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c34b8d8_d2b03f86",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000869
+      },
+      "writtenOn": "2022-08-08T14:57:53Z",
+      "side": 1,
+      "message": "When host is powered off, already logged postcodes are verified in this testcase.\n\nIs my above understanding correct ?",
+      "range": {
+        "startLine": 49,
+        "startChar": 21,
+        "endLine": 49,
+        "endChar": 83
+      },
+      "revId": "8633e369e988e52d42c2018bc32b904d4f0ce17c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f038c05_5a8320c6",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000869
+      },
+      "writtenOn": "2022-08-08T14:57:53Z",
+      "side": 1,
+      "message": "Could you please clarify this.\nAfter clearing the postcodes, entries will be empty. \nWhen the host is powered off, will the postcodes be logged in redfish ?",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 27
+      },
+      "revId": "8633e369e988e52d42c2018bc32b904d4f0ce17c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
