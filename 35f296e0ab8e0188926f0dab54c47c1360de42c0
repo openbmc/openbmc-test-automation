@@ -159,6 +159,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a171575b_181cd3ba",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-08T03:18:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e0d504d5_6b249aa5",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 4
+      },
+      "revId": "35f296e0ab8e0188926f0dab54c47c1360de42c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19b7eac3_f840bb05",
@@ -243,6 +267,30 @@
       "side": 1,
       "message": "This just a standard clean up, I don\u0027t think we may need to add another keyword for this.",
       "parentUuid": "60fb143e_7f046dac",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 61
+      },
+      "revId": "35f296e0ab8e0188926f0dab54c47c1360de42c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cccf3ab_40c00fdc",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-08T03:18:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "eab4e061_78ebb4f5",
       "range": {
         "startLine": 54,
         "startChar": 0,
