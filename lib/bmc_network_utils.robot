@@ -643,10 +643,13 @@ Get BMC Default Gateway
     ${route_info}=  Get BMC Route Info
 
     ${lines}=  Get Lines Containing String  ${route_info}  default via
-    @{gateway_list}=  Split To Lines  ${lines}
+    #@{gateway_list}=  Split To Lines  ${lines}
 
-    # Extract first default gateway and return.
-    @{default_gw}=  Split String  ${gateway_list[0]}
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    ${default_gw_line}=  Get Lines Containing String  @${lines}  ${ethernet_interface}
+    ${default_gw}=  Split String  ${default_gw_line}
 
     [Return]  ${default_gw[2]}
 
