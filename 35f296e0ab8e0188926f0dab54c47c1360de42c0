@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8f452a0_39008c42",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-08T03:17:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3123594f_6c4e2425",
+      "range": {
+        "startLine": 331,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 13
+      },
+      "revId": "35f296e0ab8e0188926f0dab54c47c1360de42c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a97cdf6_df8acc61",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-08-06T11:35:55Z",
       "side": 1,
       "message": "unused.. should we remove it?",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 0
+      },
+      "revId": "35f296e0ab8e0188926f0dab54c47c1360de42c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f98ed546_978f5ccb",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-08T03:17:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a97cdf6_df8acc61",
       "range": {
         "startLine": 14,
         "startChar": 0,
@@ -89,6 +137,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e0d504d5_6b249aa5",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-08T03:17:12Z",
+      "side": 1,
+      "message": "we are not actually verifying the post code entries, so it\u0027s best this test name stays like this.",
+      "parentUuid": "6176f23f_7eca9782",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 4
+      },
+      "revId": "35f296e0ab8e0188926f0dab54c47c1360de42c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19b7eac3_f840bb05",
         "filename": "redfish/systems/LogServices/test_post_codes.robot",
         "patchSetId": 4
@@ -100,6 +172,30 @@
       "writtenOn": "2022-08-06T11:35:55Z",
       "side": 1,
       "message": "Codes are",
+      "range": {
+        "startLine": 30,
+        "startChar": 80,
+        "endLine": 30,
+        "endChar": 85
+      },
+      "revId": "35f296e0ab8e0188926f0dab54c47c1360de42c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb3b9893_924814c7",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-08T03:17:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19b7eac3_f840bb05",
       "range": {
         "startLine": 30,
         "startChar": 80,
@@ -123,6 +219,30 @@
       "writtenOn": "2022-08-06T11:35:55Z",
       "side": 1,
       "message": "this is repeated in \u0027Suite Teardown Execution\u0027\n\nso can we create a keyword\n\nPerform Post Code Cleanup\n\n    Run Keyword And Ignore Error  Redfish Delete All BMC Dumps\n    Run Keyword And Ignore Error  Redfish Purge Event Log\n    Run Keyword And Ignore Error  Delete All Redfish Sessions\n    \n so that we can remove \u0027Suite Teardown Execution\u0027 and directly call \u0027Perform Post Code Cleanup\u0027 in Settings \u0027Suite Teardown\u0027",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 61
+      },
+      "revId": "35f296e0ab8e0188926f0dab54c47c1360de42c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eab4e061_78ebb4f5",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-08T03:17:12Z",
+      "side": 1,
+      "message": "This just a standard clean up, I don\u0027t think we may need to add another keyword for this.",
+      "parentUuid": "60fb143e_7f046dac",
       "range": {
         "startLine": 54,
         "startChar": 0,
