@@ -256,6 +256,47 @@ Enable SSH And Disable IPMI And Verify
     ...  msg=IPMI commands are working after disabling IPMI.
 
 
+Enable SSH And IPMI Protocol And Check Persistency On BMC Reboot
+    [Documentation]  Set the SSH and IPMI protocol attributes to True, and verify
+    ...              that the setting attribute value is boolean True after BMC reboot.
+    [Tags]  Enable_SSH_And_IPMI_Protocol_And_Check_Persistency_On_BMC_Reboot
+
+    Set SSH And IPMI Protocol  ${True}  ${True}
+
+    # Check if SSH and IPMI enabled is set.
+    Verify SSH Protocol State  ${True}
+    Sleep  ${NETWORK_TIMEOUT}s
+    Verify IPMI Protocol State  ${True}
+
+    Redfish OBMC Reboot (off)  stack_mode=skip
+
+    # Check if SSH login and IPMI commands work.
+    Verify SSH Login And Commands Work
+    Verify IPMI Works  lan print
+
+
+Disable SSH And Enable IPMI And Verify
+    [Documentation]   Set the SSH protocol attribute to False and IPMI protocol attribute to True, and verify
+    ...               that SSH login doesnot work and IPMI command works.
+    [Tags]  Disable_SSH_And_Enable_IPMI_And_Verify
+    [Teardown]  Enable SSH Protocol  ${True}
+
+    Set SSH And IPMI Protocol  ${False}  ${True}
+
+    # Check if SSH login and commands fail.
+    ${status}=  Run Keyword And Return Status
+    ...  Verify SSH Login And Commands Work
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=SSH Login and commands are working after disabling SSH.
+
+    # Check if the IPMI enabled is set.
+    Verify IPMI Protocol State  ${True}
+
+    # Confirm that IPMI commands to access BMC work.
+    Verify IPMI Works  lan print
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -265,7 +306,7 @@ Suite Setup Execution
 
     ${state}=  Run Keyword And Return Status  Verify IPMI Protocol State
     Set Suite Variable  ${initial_ipmi_state}  ${state}
-
+    Sleep  ${NETWORK_TIMEOUT}s
 
 Is BMC LastResetTime Changed
     [Documentation]  return fail if BMC last reset time is not changed
