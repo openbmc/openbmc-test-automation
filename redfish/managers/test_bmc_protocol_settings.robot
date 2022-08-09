@@ -199,10 +199,10 @@ Disable IPMI Protocol And Check Persistency On BMC Reboot
     ...  msg=IPMI commands are working after disabling IPMI.
 
 
-Enable SSH And IPMI Protocol And Verify
+Enable SSH And IPMI Protocol And Check Persistency On BMC Reboot
     [Documentation]  Set the SSH and IPMI protocol attributes to True, and verify
-    ...              that the setting attribute value is boolean True.
-    [Tags]  Enable_SSH_And_IPMI_Protocol_And_Verify
+    ...              that the setting attribute value is boolean True after BMC reboot.
+    [Tags]  Enable_SSH_And_IPMI_Protocol_And_Check_Persistency_On_BMC_Reboot
 
     Set SSH And IPMI Protocol  ${True}  ${True}
 
@@ -211,49 +211,24 @@ Enable SSH And IPMI Protocol And Verify
     Sleep  ${NETWORK_TIMEOUT}s
     Verify IPMI Protocol State  ${True}
 
+    Redfish OBMC Reboot (off)  stack_mode=skip
+
     # Check if SSH login and IPMI commands work.
     Verify SSH Login And Commands Work
     Verify IPMI Works  lan print
 
 
-Disable SSH And IPMI Protocol And Verify
-    [Documentation]  Set the SSH and IPMI protocol attributes to False, and verify
-    ...              that both SSH login and IPMI commands does not work.
-    [Tags]  Disable_SSH_And_IPMI_Protocol_And_Verify
+Configure SSH And IPMI Settings And Verify
+    [Documentation]  Set the SSH and IPMI protocol attribute to True/False, and verify.
+    [Tags]  Configure_SSH_And_IPMI_Settings_And_Verify
+    [Template]  Set SSH And IPMI Protocol
     [Teardown]  Enable SSH Protocol  ${True}
 
-    Set SSH And IPMI Protocol  ${False}  ${False}
-
-    # Check if SSH login and commands fail.
-    ${status}=  Run Keyword And Return Status
-    ...  Verify SSH Login And Commands Work
-
-    Should Be Equal As Strings  ${status}  False
-    ...  msg=SSH Login and commands are working after disabling SSH.
-
-    # Check if IPMI commands fail.
-    ${status}=  Run Keyword And Return Status
-    ...  Verify IPMI Works  lan print
-
-    Should Be Equal As Strings  ${status}  False
-    ...  msg=IPMI commands are working after disabling IPMI.
-
-
-Enable SSH And Disable IPMI And Verify
-    [Documentation]   Set the SSH protocol attribute to True and IPMI protocol attribute to False, and verify
-    ...               that SSH login works and IPMI command does not work.
-    [Tags]  Enable_SSH_And_Disable_IPMI_And_Verify
-
-    Set SSH And IPMI Protocol  ${True}  ${False}
-
-    Verify SSH Login And Commands Work
-
-    # Check if IPMI commands fail.
-    ${status}=  Run Keyword And Return Status
-    ...  Verify IPMI Works  lan print
-
-    Should Be Equal As Strings  ${status}  False
-    ...  msg=IPMI commands are working after disabling IPMI.
+    # ssh_state  ipmi_state
+    ${True}      ${False}
+    ${True}      ${True}
+    ${False}     ${True}
+    ${False}     ${False}
 
 
 *** Keywords ***
@@ -265,7 +240,7 @@ Suite Setup Execution
 
     ${state}=  Run Keyword And Return Status  Verify IPMI Protocol State
     Set Suite Variable  ${initial_ipmi_state}  ${state}
-
+    Sleep  ${NETWORK_TIMEOUT}s
 
 Is BMC LastResetTime Changed
     [Documentation]  return fail if BMC last reset time is not changed
@@ -305,3 +280,28 @@ Set SSH And IPMI Protocol
 
     # Wait for timeout for new values to take effect.
     Sleep  ${NETWORK_TIMEOUT}s
+
+    Verify Protocol State  ${ssh_state}  ${ipmi_state}
+
+
+Verify Protocol State
+    [Arguments]  ${ssh_state}  ${ipmi_state}
+
+    # Description of argument(s):
+    # ssh_state     state of SSH to be verified(e.g. True, False).
+    # ipmi_state    state of IPMI to be verified(e.g. True, False).
+
+    # Verify SSH state value.
+    ${status}=  Run Keyword And Return Status
+    ...  Verify SSH Login And Commands Work
+    Should Be Equal As Strings  ${status}  ${ssh_state}
+    ...  msg=SSH states are not matching.
+
+    Sleep  ${NETWORK_TIMEOUT}s
+
+    # Verify IPMI state value.
+    ${status}=  Run Keyword And Return Status
+    ...  Verify IPMI Works  lan print
+
+    Should Be Equal As Strings  ${status}  ${ipmi_state}
+    ...  msg=IPMI states are not matching.
