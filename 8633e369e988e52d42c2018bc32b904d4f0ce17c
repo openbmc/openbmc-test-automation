@@ -141,6 +141,30 @@
       },
       "revId": "8633e369e988e52d42c2018bc32b904d4f0ce17c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42816917_8d2bb908",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-09T07:28:21Z",
+      "side": 1,
+      "message": "That\u0027s correct when the host is off it should be 0 however the test here is to check when the host is booted, and if we request power down, there would still be Postcode due to the power off operation requested when the host was up and running. That\u0027s my understanding.  @manoj can u also confirm",
+      "parentUuid": "4714299a_1dc00cfb",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 27
+      },
+      "revId": "8633e369e988e52d42c2018bc32b904d4f0ce17c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
