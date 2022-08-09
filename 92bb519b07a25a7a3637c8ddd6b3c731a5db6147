@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7b16292_2cea0265",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-08-09T06:00:15Z",
+      "side": 1,
+      "message": "Configure SSH And IPMI Settings And Verify\n    [Documentation]\n    [Tags]\n    [Template]  Set SSH And IPMI Protocols\n    \n    # ssh_state  ipmi_state\n    ${True}      ${True}\n    ${True}      ${False}\n    ${False}     ${True}\n    ${False}     ${False}",
+      "revId": "92bb519b07a25a7a3637c8ddd6b3c731a5db6147",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34b679d5_d1ecec32",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-08-09T06:00:15Z",
+      "side": 1,
+      "message": "move verification code into another keyword",
+      "revId": "92bb519b07a25a7a3637c8ddd6b3c731a5db6147",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
