@@ -213,6 +213,30 @@
       },
       "revId": "8633e369e988e52d42c2018bc32b904d4f0ce17c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e547cb47_3a04fab7",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-10T08:33:00Z",
+      "side": 1,
+      "message": "Case 1: if the post codes are generated during power off ( which it is as per Manoj at least on IBM systems ), then this current code in place is correct\n\nCase 2: Say for some systems, if it was generated after the host is powered off, then this would fail, if there is such a system that does like that, I\u0027ll need input on how long we need to wait to check for the postcodes post power off. ( based on it we can amend the code to handle it) \n\nSo either case, we should be good for now. I\u0027ll wait for the input on 2) before going ahead for the merge.",
+      "parentUuid": "06ca448c_aeb911db",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 27
+      },
+      "revId": "8633e369e988e52d42c2018bc32b904d4f0ce17c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
