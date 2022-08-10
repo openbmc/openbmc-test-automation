@@ -46,6 +46,30 @@
       },
       "revId": "d5fd74e9601bd3c6629142e375acb793392db363",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ee31c3d_60a2a66b",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-08-10T09:00:34Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "9fece8f2_2c3ad373",
+      "range": {
+        "startLine": 654,
+        "startChar": 0,
+        "endLine": 660,
+        "endChar": 19
+      },
+      "revId": "d5fd74e9601bd3c6629142e375acb793392db363",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
