@@ -6,6 +6,7 @@ import sys
 
 sys.path.append(__file__.split(__file__.split("/")[-1])[0] + "../ffdc")
 from ffdc_collector import ffdc_collector
+from ssh_utility import SSHRemoteclient
 
 from robot.libraries.BuiltIn import BuiltIn as robotBuildIn
 
@@ -186,3 +187,65 @@ def run_ffdc_collector(dict_of_parm):
                                    econfig,
                                    log_level)
         this_ffdc.collect_ffdc()
+
+        # If original ffdc request is for BMC,
+        #  attempt to also collect ffdc for HOST_OS if possible.
+        if remote_type.upper() == 'OPENBMC':
+            os_host = \
+                robotBuildIn().get_variable_value("${OS_HOST}", default=None)
+            os_username = \
+                robotBuildIn().get_variable_value("${OS_USERNAME}", default=None)
+            os_password =  \
+                robotBuildIn().get_variable_value("${OS_PASSWORD}", default=None)
+
+            if os_host and os_username and os_password:
+                os_type = get_os_type(os_host, os_username, os_password)
+                if os_type:
+                    os_ffdc = ffdc_collector(os_host,
+                                             os_username,
+                                             os_password,
+                                             config,
+                                             location,
+                                             os_type,
+                                             protocol,
+                                             env_vars,
+                                             econfig,
+                                             log_level)
+                    os_ffdc.collect_ffdc()
+
+
+def get_os_type(os_host, os_username, os_password):
+
+    os_type = None
+
+    # If HOST_OS is pingable
+    if os.system("ping -c 1 " + os_host) == 0:
+        r"""
+            Open a ssh connection to targeted system.
+        """
+        ssh_remoteclient = SSHRemoteclient(os_host,
+                                           os_username,
+                                           os_password)
+
+        if ssh_remoteclient.ssh_remoteclient_login():
+
+            # Find OS_TYPE
+            cmd_exit_code, err, response = \
+                ssh_remoteclient.execute_command('uname')
+            os_type = response.strip()
+
+            # If HOST_OS is linux, expands os_type to one of
+            # the 2 linux distros that have more details in ffdc_config.yaml
+            if os_type.upper() == 'LINUX':
+                cmd_exit_code, err, response = \
+                    ssh_remoteclient.execute_command('cat /etc/os-release')
+                linux_distro = response
+                if 'redhat' in linux_distro:
+                    os_type = 'RHEL'
+                elif 'ubuntu' in linux_distro:
+                    os_type = 'UBUNTU'
+
+        if ssh_remoteclient:
+            ssh_remoteclient.ssh_remoteclient_disconnect()
+
+    return os_type
