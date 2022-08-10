@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f75a3411_2a72c14b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-10T08:35:12Z",
+      "side": 1,
+      "message": "Please fix the commit.\n\nTemplate\n\n\nHeading \n\nChanges:\n\nTested:\n\nplease add those",
+      "revId": "e09a1adeb82d5d2be5e4d597b2d29d7206d9c3cb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17ed275e_f2ab25b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-10T08:35:12Z",
+      "side": 1,
+      "message": "and also please respond to the comments for all",
+      "revId": "e09a1adeb82d5d2be5e4d597b2d29d7206d9c3cb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
