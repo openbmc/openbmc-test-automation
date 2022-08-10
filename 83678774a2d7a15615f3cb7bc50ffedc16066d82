@@ -46,6 +46,30 @@
       },
       "revId": "83678774a2d7a15615f3cb7bc50ffedc16066d82",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b11a572_6df98065",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-10T03:17:14Z",
+      "side": 1,
+      "message": "Rprint vars    default_gw\n\nRUn with this code and it would print the output. so you can just put the output of it as comment there",
+      "parentUuid": "34317853_6464b81a",
+      "range": {
+        "startLine": 653,
+        "startChar": 4,
+        "endLine": 653,
+        "endChar": 30
+      },
+      "revId": "83678774a2d7a15615f3cb7bc50ffedc16066d82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
