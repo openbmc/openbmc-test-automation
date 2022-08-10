@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b667f91b_2629c795",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-08-10T08:02:11Z",
+      "side": 1,
+      "message": "Better place an output for default_gw_line on line# 651.\nRemove this",
+      "range": {
+        "startLine": 654,
+        "startChar": 0,
+        "endLine": 660,
+        "endChar": 19
+      },
+      "revId": "d5fd74e9601bd3c6629142e375acb793392db363",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
