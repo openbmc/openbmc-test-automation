@@ -5,8 +5,6 @@ Library          ../../lib/gen_robot_valid.py
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
-Resource         ../../lib/utils.robot
-Library          ../../lib/gen_robot_valid.py
 Resource         ../../lib/bmc_network_utils.robot
 Resource         ../../lib/bmc_ldap_utils.robot
 
@@ -299,8 +297,7 @@ Verify LDAP Authorization With Null Privilege
     [Tags]  Verify_LDAP_Authorization_With_Null_Privilege
     [Teardown]  Restore LDAP Privilege
 
-    Update LDAP Config And Verify Set Host Name  ${GROUP_NAME}  ${EMPTY}
-    ...  [${HTTP_FORBIDDEN}]
+    Update LDAP Config And Verify Set Host Name  ${GROUP_NAME}  ${EMPTY}  ${HTTP_INTERNAL_SERVER_ERROR}
 
 
 Verify LDAP Authorization With Invalid Privilege
@@ -545,11 +542,11 @@ Redfish Verify LDAP Login
     Redfish.Logout
     Redfish.Login
 
-
 Update LDAP Config And Verify Set Host Name
     [Documentation]  Update LDAP config and verify by attempting to set host name.
     [Arguments]  ${group_name}  ${group_privilege}=Administrator
-    ...  ${valid_status_codes}=[${HTTP_OK}]
+    ...  ${valid_status_codes}=${HTTP_OK}
+
     [Teardown]  Run Keyword If  '${group_privilege}'=='NoAccess'  Redfish.Login
                 ...  ELSE  Run Keywords  Redfish.Logout  AND  Redfish.Login
 
@@ -561,8 +558,10 @@ Update LDAP Config And Verify Set Host Name
     #                               operation (e.g. "200") used to update
     #                               HostName.  See prolog of rest_request
     #                               method in redfish_plus.py for details.
+    Log To Console  ${valid_status_codes}
+    Log  ${valid_status_codes}
     Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
-    ...  ${group_privilege}  ${group_name}
+    ...  ${group_privilege}  ${group_name}  ${valid_status_codes}
 
     Run Keyword If  '${group_privilege}'=='NoAccess'
     ...  Run Keyword And Return  Verify Redfish Login for LDAP Userrole NoAccess
@@ -570,8 +569,11 @@ Update LDAP Config And Verify Set Host Name
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     # Verify that the LDAP user in ${group_name} with the given privilege is
     # allowed to change the hostname.
+    # If response code is 500, ignore restoring
+    Return From Keyword If  ${valid_status_codes}==${HTTP_INTERNAL_SERVER_ERROR}
+    Log  ${valid_status_codes}
     Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body={'HostName': '${hostname}'}
-    ...  valid_status_codes=${valid_status_codes}
+    ...  valid_status_codes=[${valid_status_codes}]
 
 Verify Redfish Login for LDAP Userrole NoAccess
     [Documentation]  Verify Redfish login should not be able to login for LDAP Userrole NoAccess.
@@ -704,18 +706,21 @@ Get LDAP Configuration
 
 Update LDAP Configuration with LDAP User Role And Group
     [Documentation]  Update LDAP configuration update with LDAP user Role and group.
-    [Arguments]   ${ldap_type}  ${group_privilege}  ${group_name}
+    [Arguments]   ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_codes}=${HTTP_OK}
 
     # Description of argument(s):
     # ldap_type        The LDAP type ("ActiveDirectory" or "LDAP").
     # group_privilege  The group privilege ("Administrator", "Operator", "User" or "Callback").
     # group_name       The group name of user.
 
+    Log  ${valid_status_codes}
     ${local_role_remote_group}=  Create Dictionary  LocalRole=${group_privilege}  RemoteGroup=${group_name}
     ${remote_role_mapping}=  Create List  ${local_role_remote_group}
     ${ldap_data}=  Create Dictionary  RemoteRoleMapping=${remote_role_mapping}
     ${payload}=  Create Dictionary  ${ldap_type}=${ldap_data}
-    Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=&{payload}
+    Log  ${valid_status_codes}
+    Log To Console  ${payload}
+    ${resp}=  Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=&{payload}  valid_status_codes=[${valid_status_codes}]
     # Provide adequate time for LDAP daemon to restart after the update.
     Sleep  15s
 
