@@ -129,6 +129,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4213456_770622ef",
+        "filename": "gui/gui_test/notices_menu/test_notices_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-08-10T10:58:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89f0f7f3_dc200367",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 8
+      },
+      "revId": "1ae7e684f96b833dc0c938c7cc7c52c79f77574c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "debaf697_78691639",
