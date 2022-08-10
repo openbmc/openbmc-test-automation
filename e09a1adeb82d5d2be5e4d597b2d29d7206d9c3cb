@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98de6c26_9d6ea3d0",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-08-10T10:16:41Z",
+      "side": 1,
+      "message": "Getting 500 internal error on giving Null privilege\nhttps://w3.rchland.ibm.com/projects/bestquest/?defect\u003dSW549459\nThis is Working as per Design as per this defect.",
+      "parentUuid": "09da6b51_bf297017",
+      "range": {
+        "startLine": 300,
+        "startChar": 74,
+        "endLine": 300,
+        "endChar": 103
+      },
+      "revId": "e09a1adeb82d5d2be5e4d597b2d29d7206d9c3cb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d79226e8_598b30f0",
         "filename": "redfish/account_service/test_ldap_configuration.robot",
         "patchSetId": 2
@@ -71,6 +95,24 @@
       "writtenOn": "2022-08-10T08:43:27Z",
       "side": 1,
       "message": "remove",
+      "revId": "e09a1adeb82d5d2be5e4d597b2d29d7206d9c3cb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c78d4e93_b0b24ad1",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-08-10T10:16:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d79226e8_598b30f0",
       "revId": "e09a1adeb82d5d2be5e4d597b2d29d7206d9c3cb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -94,6 +136,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8167f176_05f704a6",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-08-10T10:16:41Z",
+      "side": 1,
+      "message": "This is for 500 response",
+      "parentUuid": "596c86a6_d6f8c173",
+      "revId": "e09a1adeb82d5d2be5e4d597b2d29d7206d9c3cb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "71bbeead_0c690811",
         "filename": "redfish/account_service/test_ldap_configuration.robot",
         "patchSetId": 2
@@ -105,6 +165,24 @@
       "writtenOn": "2022-08-10T08:43:27Z",
       "side": 1,
       "message": "remove",
+      "revId": "e09a1adeb82d5d2be5e4d597b2d29d7206d9c3cb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "348b6747_cacb1097",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-08-10T10:16:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71bbeead_0c690811",
       "revId": "e09a1adeb82d5d2be5e4d597b2d29d7206d9c3cb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -122,6 +200,24 @@
       "writtenOn": "2022-08-10T08:43:27Z",
       "side": 1,
       "message": "??",
+      "revId": "e09a1adeb82d5d2be5e4d597b2d29d7206d9c3cb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a18c7202_3b113f07",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-08-10T10:16:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a40613dd_afbc8117",
       "revId": "e09a1adeb82d5d2be5e4d597b2d29d7206d9c3cb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

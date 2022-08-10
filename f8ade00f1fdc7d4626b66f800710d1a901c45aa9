@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeb01cc9_6753d2ef",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-08-10T10:16:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fce2bd00_15d94ee2",
+      "range": {
+        "startLine": 531,
+        "startChar": 0,
+        "endLine": 531,
+        "endChar": 30
+      },
+      "revId": "f8ade00f1fdc7d4626b66f800710d1a901c45aa9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99179f4d_d0444bd5",
