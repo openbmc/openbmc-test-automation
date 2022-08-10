@@ -189,6 +189,30 @@
       },
       "revId": "8633e369e988e52d42c2018bc32b904d4f0ce17c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06ca448c_aeb911db",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000869
+      },
+      "writtenOn": "2022-08-10T06:26:46Z",
+      "side": 1,
+      "message": "If postcode is generated after host is off in some systems, then can we change the condition as greater than or equal to 0 ?\n\nShould Be True  ${post_codes[\u0027Members@odata.count\u0027]} \u003e\u003d 0  msg\u003dNo BIOS POST Codes populated.",
+      "parentUuid": "f3d3fbdd_53a713b0",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 27
+      },
+      "revId": "8633e369e988e52d42c2018bc32b904d4f0ce17c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
