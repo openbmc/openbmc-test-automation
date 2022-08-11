@@ -8,6 +8,10 @@ Submitting changes via Gerrit server
 -   Reference [OpenBMC CLA](https://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#submitting-changes-via-gerrit-server-to-openbmc)
 -   Reference [OpenBMC docs](https://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#submitting-changes-via-gerrit-server)
 
+Commit Message Guidelines
+-------------------------
+-   Reference [Formatting Commit Messages](https://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#formatting-commit-messages)
+
 Links
 -----
 
