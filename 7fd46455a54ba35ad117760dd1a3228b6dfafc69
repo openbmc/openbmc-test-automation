@@ -16,6 +16,23 @@
       "message": "Why are we deleting this ? it say we already have.. but why this is left at first place. If its old code leave as it is. ",
       "revId": "7fd46455a54ba35ad117760dd1a3228b6dfafc69",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7cfa6c7_ac2a6968",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-08-11T09:35:56Z",
+      "side": 1,
+      "message": "We already pushed the code for test_host_console_sub_menu.robot it has all changes of test_sol_console_sub_menu.robot, and that code also merged. now we can use test_host_console_sub_menu.robot instead off test_sol_console_sub_menu.robot",
+      "revId": "7fd46455a54ba35ad117760dd1a3228b6dfafc69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
