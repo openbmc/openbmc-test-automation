@@ -11,7 +11,8 @@ Suite Teardown  Close Browser
 *** Variables ***
 
 ${xpath_inventory_and_leds_heading}         //h1[text()="Inventory and LEDs"]
-${xpath_page_loading_progress_ba}           //*[@aria-label='Page loading progress bar']
+${xpath_page_loading_progress_bar}          //*[@aria-label='Page loading progress bar']
+
 *** Test Cases ***
 
 Verify Navigation To Inventory And LEDs Page
