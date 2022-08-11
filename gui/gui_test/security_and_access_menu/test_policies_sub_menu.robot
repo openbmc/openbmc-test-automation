@@ -12,11 +12,16 @@ Test Setup       Test Setup Execution
 
 
 *** Variables ***
-
-${xpath_policies_heading}       //h1[text()="Policies"]
-${xpath_bmc_ssh_toggle}         //*[@data-test-id='policies-toggle-bmcShell']/following-sibling::label
-${xpath_network_ipmi_toggle}    //*[@data-test-id='polices-toggle-networkIpmi']/following-sibling::label
-
+ 
+${xpath_policies_heading}            //h1[text()="Policies"]
+${xpath_bmc_ssh_toggle}              //*[@data-test-id='policies-toggle-bmcShell']/following-sibling::label
+${xpath_network_ipmi_toggle}         //*[@data-test-id='polices-toggle-networkIpmi']/following-sibling::label
+${xpath_host_tpm}                    //input[@id='host-tpm-policy']
+${xpath_virtual_tpm}                 //*[@data-test-id='policies-toggle-vtpm']
+${xpath_rtad}                        //*[@data-test-id='policies-toggle-rtad']
+${xpath_usb_firmware_update_policy}  //*[@data-test-id='policies-toggle-usbFirmwareUpdatePolicy']
+${xpath_secure_version_lockin}       //*[@data-test-id='policies-toggle-svle']
+${xpath_host_usb_enablement}         //*[@data-test-id='policies-toggle-hostUsb']
 
 *** Test Cases ***
 
@@ -47,7 +52,12 @@ Verify Existence Of All Buttons In Policies Page
 
     Page Should Contain Element  ${xpath_bmc_ssh_toggle}
     Page Should Contain Element  ${xpath_network_ipmi_toggle}
-
+    Page Should Contain Element  ${xpath_host_tpm}
+    Page Should Contain Element  ${xpath_virtual_tpm}
+    Page Should Contain Element  ${xpath_rtad}
+    Page Should Contain Element  ${xpath_usb_firmware_update_policy}
+    Page Should Contain Element  ${xpath_secure_version_lockin}
+    Page Should Contain Element  ${xpath_host_usb_enablement}
 
 Enable SSH Via GUI And Verify
     [Documentation]  Login to GUI Policies page,enable SSH toggle and
