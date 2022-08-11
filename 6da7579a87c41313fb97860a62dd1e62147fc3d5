@@ -22,6 +22,29 @@
       },
       "revId": "6da7579a87c41313fb97860a62dd1e62147fc3d5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0693c9d0_45a39d62",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-08-11T06:06:44Z",
+      "side": 1,
+      "message": "mention use cases or test suite that are run",
+      "range": {
+        "startLine": 11,
+        "startChar": 1,
+        "endLine": 11,
+        "endChar": 50
+      },
+      "revId": "6da7579a87c41313fb97860a62dd1e62147fc3d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
