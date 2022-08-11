@@ -19,7 +19,7 @@ Test Setup      Test Setup Execution
 ${xpath_overview_page_header}          //h1[contains(text(), "Overview")]
 ${xpath_edit_network_settings_button}  (//*[text()="View more"])[3]
 ${view_all_event_logs}                 (//*[text()="View more"])[5]
-${xpath_launch_serial_over_lan}        //*[@data-test-id='overviewQuickLinks-button-solConsole']
+${xpath_launch_host_console}           //*[@data-test-id='overviewQuickLinks-button-solConsole']
 ${xpath_led_button}                    //*[@data-test-id='overviewInventory-checkbox-identifyLed']
 ${view_all_Dumps}                      (//*[text()="View more"])[7]
 
@@ -110,12 +110,12 @@ Verify View All Event Logs Button
     Wait Until Page Contains Element  ${xpath_event_header}  timeout=30
 
 
-Verify Serial Over LAN Console Button In Overview Page
-    [Documentation]  Click serial over LAN button and verify page navigation to serial over LAN page.
-    [Tags]  Verify_Serial_Over_LAN_Console_Button_In_Overview_Page
+Verify Host Console Button In Overview Page
+    [Documentation]  Click host console button and verify page navigation to host console page.
+    [Tags]  Verify_Host_Console_Button_In_Overview_Page
 
-    Click Element  ${xpath_launch_serial_over_lan}
-    Wait Until Page Contains Element  ${xpath_sol_console_heading}
+    Click Element  ${xpath_launch_host_console}
+    Wait Until Page Contains Element  ${xpath_host_console_heading}
 
 
 Verify Server LED Turn On
