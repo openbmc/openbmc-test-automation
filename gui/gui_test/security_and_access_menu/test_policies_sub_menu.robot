@@ -12,11 +12,18 @@ Test Setup       Test Setup Execution
 
 
 *** Variables ***
-
-${xpath_policies_heading}       //h1[text()="Policies"]
-${xpath_bmc_ssh_toggle}         //*[@data-test-id='policies-toggle-bmcShell']/following-sibling::label
-${xpath_network_ipmi_toggle}    //*[@data-test-id='polices-toggle-networkIpmi']/following-sibling::label
-
+ 
+${xpath_policies_heading}                     //h1[text()="Policies"]
+${xpath_bmc_ssh_toggle}                       //*[@data-test-id='policies-toggle-bmcShell']
+...  /following-sibling::label
+${xpath_network_ipmi_toggle}                  //*[@data-test-id='polices-toggle-networkIpmi']
+...  /following-sibling::label
+${xpath_host_tpm_toggle}                      //input[@id='host-tpm-policy']
+${xpath_virtual_tpm_toggle}                   //*[@data-test-id='policies-toggle-vtpm']
+${xpath_rtad_toggle}                          //*[@data-test-id='policies-toggle-rtad']
+${xpath_usb_firmware_update_policy_toggle}    //*[@data-test-id='policies-toggle-usbFirmwareUpdatePolicy']
+${xpath_secure_version_lockin_toggle}         //*[@data-test-id='policies-toggle-svle']
+${xpath_host_usb_enablement_toggle}           //*[@data-test-id='policies-toggle-hostUsb']
 
 *** Test Cases ***
 
@@ -25,7 +32,6 @@ Verify Navigation To Policies Page
     [Tags]  Verify_Navigation_To_Policies_Page
 
     Page Should Contain Element  ${xpath_policies_heading}
-
 
 Verify Existence Of All Sections In Policies Page
     [Documentation]  Verify existence of all sections in policies page.
@@ -47,6 +53,12 @@ Verify Existence Of All Buttons In Policies Page
 
     Page Should Contain Element  ${xpath_bmc_ssh_toggle}
     Page Should Contain Element  ${xpath_network_ipmi_toggle}
+    Page Should Contain Element  ${xpath_host_tpm_toggle}
+    Page Should Contain Element  ${xpath_virtual_tpm_toggle}
+    Page Should Contain Element  ${xpath_rtad_toggle}
+    Page Should Contain Element  ${xpath_usb_firmware_update_policy_toggle}
+    Page Should Contain Element  ${xpath_secure_version_lockin_toggle}
+    Page Should Contain Element  ${xpath_host_usb_enablement_toggle}
 
 
 Enable SSH Via GUI And Verify
@@ -168,7 +180,6 @@ Test Setup Execution
 
 
 Set Policy Via GUI
-
     [Documentation]  Login to GUI Policies page and set policy.
     [Arguments]  ${policy}  ${state}
 
