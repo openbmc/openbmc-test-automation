@@ -8,6 +8,30 @@ Submitting changes via Gerrit server
 -   Reference [OpenBMC CLA](https://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#submitting-changes-via-gerrit-server-to-openbmc)
 -   Reference [OpenBMC docs](https://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#submitting-changes-via-gerrit-server)
 
+Commit Message Guidelines
+-------------------------
+
+Each commit is expected to be tested. The expectation of testing may vary, but will typically include running applicable automated tests or if modifying existing test python library or robot resource keywords, including running all applicable test cases or suites that could be impacted.
+
+***Template***
+- ***Heading message:*** Keep it short and to the point of what the commit is about.
+- ***Changes:*** Sub bullet or number them explaining briefly about the changes made and achieved with it.
+- ***Tested:*** Ran test suite my_test.robot or I ran manually a particular test in the suite.
+
+Example:
+   ```
+   Test suite to test Redfish PostCode LogServices
+
+   Changes:
+      - 3 test cases are added to test PostCode when the host is powered on,
+        powered off, and on warm reboot
+      - Added new resource keywords to get and clear LogServices PostCode logs
+
+   Tested:
+      I ran the test suite redfish/systems/LogServices/test_post_codes.robot
+      and all passed.
+   ```
+
 Links
 -----
 
