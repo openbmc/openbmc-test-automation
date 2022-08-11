@@ -46,6 +46,30 @@
       },
       "revId": "8630352a1aa1650546e1fbbeec3ee33bc6baf9d9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c23969d3_ef44a69b",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-08-11T14:05:29Z",
+      "side": 1,
+      "message": "I got your point, lets leave it to user to run with proper privilege level",
+      "parentUuid": "b388b1f7_bc899e67",
+      "range": {
+        "startLine": 256,
+        "startChar": 32,
+        "endLine": 256,
+        "endChar": 54
+      },
+      "revId": "8630352a1aa1650546e1fbbeec3ee33bc6baf9d9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
