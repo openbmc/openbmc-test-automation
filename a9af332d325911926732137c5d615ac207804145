@@ -16,6 +16,41 @@
       "message": "Please fix the commit message",
       "revId": "a9af332d325911926732137c5d615ac207804145",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f343c9a_ca8b3936",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-08-11T10:06:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f4044ba_cfa31c1d",
+      "revId": "a9af332d325911926732137c5d615ac207804145",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "070c6e20_69de4cbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-08-11T10:06:37Z",
+      "side": 1,
+      "message": "Corrected XPath variable name ",
+      "revId": "a9af332d325911926732137c5d615ac207804145",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
