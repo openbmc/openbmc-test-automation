@@ -252,6 +252,9 @@ Start SNMP Manager
     Open Connection And Log In  ${SNMP_MGR1_USERNAME}  ${SNMP_MGR1_PASSWORD}
     ...  alias=snmp_server  host=${SNMP_MGR1_IP}
 
+    # Clean SNMP managers running in the background.
+    SSHLibrary.Execute Command  killall snmptrapd
+
     # The execution of the SNMP_TRAPD_CMD is necessary to cause SNMP to begin
     # listening to SNMP messages.
     SSHLibrary.write  ${SNMP_TRAPD_CMD} &
