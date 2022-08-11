@@ -8,7 +8,7 @@ Resource                 ../../lib/redfish_code_update_utils.robot
 Library                  ../../lib/tftp_update_utils.py
 
 Suite Setup              Suite Setup Execution
-Suite Teardown           Redfish.Logout
+Suite Teardown           Run Keyword And Ignore Error  Redfish.Logout
 Test Teardown            FFDC On Test Case Fail
 
 Force Tags    Test_BMC_Image_Switch
