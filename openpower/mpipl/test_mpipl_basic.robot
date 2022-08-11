@@ -12,7 +12,7 @@ Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/boot_utils.robot
 
 Suite Setup      Redfish.Login
-Test Setup       Test SetupExecution
+Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 Suite Teardown   Suite Teardown Execution
 
