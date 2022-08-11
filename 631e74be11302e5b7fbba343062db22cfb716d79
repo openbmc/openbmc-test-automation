@@ -33,6 +33,46 @@
       "message": "fixed all comment messages. ",
       "revId": "631e74be11302e5b7fbba343062db22cfb716d79",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83f1d6c7_296b734f",
+        "filename": "gui/gui_test/notices_menu/test_notices_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-11T02:47:17Z",
+      "side": 1,
+      "message": "Delete this new line",
+      "revId": "631e74be11302e5b7fbba343062db22cfb716d79",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2eda70d_bd34d5fb",
+        "filename": "gui/gui_test/notices_menu/test_notices_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-11T02:47:17Z",
+      "side": 1,
+      "message": "remove extra period",
+      "range": {
+        "startLine": 28,
+        "startChar": 80,
+        "endLine": 28,
+        "endChar": 81
+      },
+      "revId": "631e74be11302e5b7fbba343062db22cfb716d79",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
