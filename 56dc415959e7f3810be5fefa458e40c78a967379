@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db37e311_0911dcaa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-08-12T04:15:48Z",
+      "side": 1,
+      "message": "Why sentence is changed after comment??\n\"Expire admin password using root privileged user\", will implicitly tell that it is logged in \u0026 make sentence small \u0026 more meaningful.",
+      "revId": "56dc415959e7f3810be5fefa458e40c78a967379",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
