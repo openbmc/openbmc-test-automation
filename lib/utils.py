@@ -5,18 +5,18 @@ Companion file to utils.robot.
 """
 
 import os
+import json
+import collections
 import gen_print as gp
 import gen_robot_keyword as grk
 import bmc_ssh_utils as bsu
 import var_funcs as vf
 from robot.libraries.BuiltIn import BuiltIn
 from robot.libraries import DateTime
-import json
 try:
     from robot.utils import DotDict
 except ImportError:
     pass
-import collections
 
 
 # The code base directory will be one level up from the directory containing this module.
@@ -329,13 +329,13 @@ def get_bmc_release_info():
     Output:
 
     release_info:
-      [id]:                                           openbmc-phosphor
-      [name]:                                         Phosphor OpenBMC (Phosphor OpenBMC Project Reference...
-      [version]:                                      2.8.0-dev
-      [version_id]:                                   2.8.0-dev-1083-g8954c3505
-      [pretty_name]:                                  Phosphor OpenBMC (Phosphor OpenBMC Project Reference...
-      [build_id]:                                     2.8.0-dev
-      [openbmc_target_machine]:                       witherspoon
+      [id]:                           openbmc-phosphor
+      [name]:                         Phosphor OpenBMC (Phosphor OpenBMC Project Reference...
+      [version]:                      2.8.0-dev
+      [version_id]:                   2.8.0-dev-1083-g8954c3505
+      [pretty_name]:                  Phosphor OpenBMC (Phosphor OpenBMC Project Reference...
+      [build_id]:                     2.8.0-dev
+      [openbmc_target_machine]:       witherspoon
     """
 
     out_buf, stderr, rc = bsu.bmc_execute_command('cat /etc/os-release')
@@ -380,9 +380,9 @@ def pdbg(option_string, **bsu_options):
     Run pdbg on the BMC with the caller's option string and return the output.
 
     Description of argument(s):
-    option_string                   A string of options which are to be processed by the pdbg command.
-    bsu_options                     Options to be passed directly to bmc_execute_command.  See its prolog for
-                                    details.
+    option_string    A string of options which are to be processed by the pdbg command.
+    bsu_options      Options to be passed directly to bmc_execute_command.  See its prolog for
+                     details.
     """
 
     # Default print_out to 1.
@@ -398,11 +398,11 @@ def ecmd(option_string, **bsu_options):
     Run ecmd command on the BMC with the caller's option string and return the output.
 
     Description of argument(s):
-    option_string                   A string of options which are to be executed on BMC.
-                                    (e.g. getscom pu 20010a40 -all,
-                                          putscom pu 20010a40 4000000000000000 -p0).
-    bsu_options                     Options to be passed directly to bmc_execute_command.  See its prolog for
-                                    details.
+    option_string    A string of options which are to be executed on BMC.
+                     (e.g. getscom pu 20010a40 -all,
+                     putscom pu 20010a40 4000000000000000 -p0).
+    bsu_options      Options to be passed directly to bmc_execute_command.  See its prolog for
+                     details.
     """
 
     # Default print_out to 1.
@@ -439,7 +439,8 @@ def remove_whitespace(instring):
 
 def zfill_data(data, num):
     r"""
-    zfill() method adds zeros (0) at the beginning of the string, until it reaches the specified length.
+    zfill() method adds zeros (0) at the beginning of the string, until it
+    reaches the specified length.
 
     Usage : ${anystr}=  Zfill Data  ${data}  num
 
