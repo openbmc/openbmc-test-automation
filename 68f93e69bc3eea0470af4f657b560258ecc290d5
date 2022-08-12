@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b091ed5_27fb17c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-12T14:14:54Z",
+      "side": 1,
+      "message": "Fixed the following\n\n$ python3 -m pylint lib/utils.py\n************* Module utils\nlib/utils.py:333:0: C0301: Line too long (109/100) (line-too-long)\nlib/utils.py:336:0: C0301: Line too long (109/100) (line-too-long)\nlib/utils.py:383:0: C0301: Line too long (102/100) (line-too-long)\nlib/utils.py:384:0: C0301: Line too long (109/100) (line-too-long)\nlib/utils.py:404:0: C0301: Line too long (109/100) (line-too-long)\nlib/utils.py:442:0: C0301: Line too long (104/100) (line-too-long)\nlib/utils.py:14:0: C0411: standard import \"import json\" should be placed before \"import gen_print as gp\" (wrong-import-order)\nlib/utils.py:19:0: C0411: standard import \"import collections\" should be placed before \"import gen_print as gp\" (wrong-import-order)\n",
+      "revId": "68f93e69bc3eea0470af4f657b560258ecc290d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
