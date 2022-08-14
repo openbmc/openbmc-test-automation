@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1833dc25_d48cfe09",
+        "filename": "lib/bmc_redfish_resource.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-08-14T07:45:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e0e54ce_335dc5d3",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 56
+      },
+      "revId": "8f6a97c5f34e43ab5d1a089e3585a1a5a700ba09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18162bd8_12d282d6",
@@ -60,6 +84,30 @@
       "writtenOn": "2022-05-17T15:55:39Z",
       "side": 1,
       "message": "users are not dependent on interfaces.. so this test cases is not correct.",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 46
+      },
+      "revId": "8f6a97c5f34e43ab5d1a089e3585a1a5a700ba09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "318e6170_34ae5cfe",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-08-14T07:45:11Z",
+      "side": 1,
+      "message": "Abandoning this.",
+      "parentUuid": "7c04145a_e12102ad",
       "range": {
         "startLine": 145,
         "startChar": 0,
