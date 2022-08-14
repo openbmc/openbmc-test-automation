@@ -108,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "171d8b48_af9de422",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-08-14T08:00:40Z",
+      "side": 1,
+      "message": "Changing it to Forbidden.",
+      "parentUuid": "29fbc916_5ee81e8f",
+      "range": {
+        "startLine": 300,
+        "startChar": 74,
+        "endLine": 300,
+        "endChar": 103
+      },
+      "revId": "e09a1adeb82d5d2be5e4d597b2d29d7206d9c3cb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d79226e8_598b30f0",
         "filename": "redfish/account_service/test_ldap_configuration.robot",
         "patchSetId": 2
@@ -190,6 +214,24 @@
       "side": 1,
       "message": "We should ideally not get 500.\nCan you test and confirm",
       "parentUuid": "8167f176_05f704a6",
+      "revId": "e09a1adeb82d5d2be5e4d597b2d29d7206d9c3cb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d32089d3_c9e7979f",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-08-14T08:00:40Z",
+      "side": 1,
+      "message": "Changing 500 to Forbidden.",
+      "parentUuid": "b5d9baf3_4fff65e2",
       "revId": "e09a1adeb82d5d2be5e4d597b2d29d7206d9c3cb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
