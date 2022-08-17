@@ -485,3 +485,69 @@ Verify Power Supply Sensor Threshold
         Run keyword if  '${data}[MemberId]' == 'ps0_input_voltage'
         ...  Should Be Equal As Numbers  ${data['${redfish_threshold_id}']}  ${ipmi_threshold_reading}
     END
+
+
+Get Available Sensors
+    [Documentation]  Get all the available sensors for the required component.
+    ...  Returns a list of available sensors.
+    [Arguments]  ${sensor_component}
+
+    # Description of argument(s):
+    # sensor_component     sensor component name.(e.g.:cpu)
+
+    ${resp}=  Run IPMI Standard Command  sdr elist
+    ${sensor_list}=  Create List
+    ${sensors}=  Get Lines Containing String  ${resp}  ${sensor_component}
+    ${sensors}=  Split To Lines  ${sensors}
+
+    # Example of IPMI sdr elist command.
+
+    # dcm0_cpu0        | 41h | ok  |  3.1 | Presence detected
+    # dcm0_cpu1        | 42h | ok  |  3.2 | Presence detected, Disabled
+    # dcm1_cpu0        | 43h | ok  |  3.3 | Presence detected
+    # dcm1_cpu1        | 44h | ok  |  3.4 | Presence detected, Disabled
+    # dcm2_cpu0        | 45h | ns  |  3.5 | Disabled
+    # dcm2_cpu1        | 46h | ns  |  3.6 | Disabled
+    # dcm3_cpu0        | 47h | ns  |  3.7 | Disabled
+    # dcm3_cpu1        | 48h | ns  |  3.8 | Disabled
+
+    FOR  ${line}  IN  @{sensors}
+        ${sensor_name}=  Set Variable  ${line.split('|')[0].strip()}
+
+        # Adding sensors to the list whose presence is detected.
+        ${contains}=  Evaluate  "Presence detected" in "${line}"
+        Run Keyword IF  "${contains}" == "True"
+        ...  Append To List  ${sensor_list}  ${sensor_name}
+    END
+
+    # Example of output for ${sensor_list}
+    # ['dcm0_cpu0', 'dcm0_cpu1', 'dcm1_cpu0', 'dcm1_cpu1']
+
+    [RETURN]  ${sensor_list}
+
+
+Get Sensor Id For Sensor
+    [Documentation]  Returns the sensor ID value for the given sensor.
+    [Arguments]  ${sensor_name}
+
+    # Description of argument(s):
+    # sensor_name     Name of sensor whose ID is required(e.g.: dcm0_cpu0, dcm0_cpu1 etc).
+
+    ${get_resp}=  Run IPMI Standard Command  sensor get ${sensor_name}
+
+    # Example of sensor get command.
+
+    # Locating sensor record...
+    # Sensor ID              : dcm0_cpu0 (0x41)
+    # Entity ID             : 3.1
+    # Sensor Type (Discrete): Processor
+    # States Asserted       : Processor
+    #                  [Presence detected]
+
+    ${line}=  Get Lines Containing String  ${get_resp}  Sensor ID
+    ${sensor_id}=  Set Variable  ${line[-5:-1]}
+
+    # Example of output for ${sensor_id} is 0x41.
+
+    [RETURN]  ${sensor_id}
+
