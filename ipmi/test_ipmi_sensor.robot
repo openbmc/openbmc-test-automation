@@ -485,3 +485,64 @@ Verify Power Supply Sensor Threshold
         Run keyword if  '${data}[MemberId]' == 'ps0_input_voltage'
         ...  Should Be Equal As Numbers  ${data['${redfish_threshold_id}']}  ${ipmi_threshold_reading}
     END
+
+
+Get Available Sensors
+    [Documentation]    Get all the available sensors for the required component.
+    ...                Returns a list of available sensors(e.g.:['dcm0_cpu0', 'dcm0_cpu1', 'dcm1_cpu0', 'dcm1_cpu1']).
+    [Arguments]        ${sensor_component}
+
+    # Description of argument(s):
+    # sensor_component     component of required sensors.(e.g.:cpu)
+
+    ${data}=  Run IPMI Standard Command  sensor
+    ${sensor_list}=  Create List
+    ${sensors}=  Get Lines Containing String  ${data}  ${sensor_component}
+    ${sensors}=  Split To Lines  ${sensors}
+
+    FOR  ${line}  IN  @{sensors}
+        ${sensor_name}=  Set Variable  ${line.split('|')[0].strip()}
+        ${sensor_value}=  Set Variable  ${line.split('|')[1].strip()}
+        ${contains}=  Evaluate  """na""" in "${sensor_value}"
+        Run Keyword IF  "${contains}" != """True"""
+        ...  Append To List  ${sensor_list}  ${sensor_name}
+    END
+
+    [RETURN]  ${sensor_list}
+
+
+Get Sensor Id For Sensor Name
+    [Documentation]    Returns the sensor ID value for the given sensor name.
+    ...  e.g.: id_value = 0x42.
+    [Arguments]        ${sensor_name}
+
+    # Description of argument(s):
+    # sensor_name     Name of sensor whose ID is required(e.g.: dcm0_cpu0, dcm0_cpu1 etc).
+
+    ${get_data}=  Run IPMI Standard Command  sensor get ${sensor_name}
+    ${id_data}=  Get Lines Containing String  ${get_data}  Sensor ID
+    ${id_value}=  Set Variable  ${id_data[-5:-1]}
+
+    [RETURN]  ${id_value}
+
+
+Get IPMI Sensor ID Dict
+    [Documentation]    Returns a dictionary of sensor names and their IDs for required sensor component.
+    ...  (example:{'dcm0_cpu0': '0x41', 'dcm0_cpu1': '0x42', 'dcm1_cpu0': '0x43',
+    ...  'dcm1_cpu1': '0x44', 'dcm2_cpu0': '0x45', 'dcm2_cpu1': '0x46')
+    [Arguments]       ${sensor_component}
+
+    # Description of argument(s):
+    # sensor_component     component of required sensors.(e.g.:cpu)
+
+    ${sensor_list}=  Get Available Sensors  ${sensor_component}
+    ${sensor_dict}=  Create Dictionary
+
+    FOR  ${sensor_name}  IN  @{sensor_list}
+        ${sensor_id}=  Run Keyword And Continue On Failure  Get Sensor Id For Sensor Name  ${sensor_name}
+        Run Keyword IF  ${sensor_id} != None
+        ...  Set To Dictionary  ${sensor_dict}  ${sensor_id}  ${sensor_name}
+    END
+
+    [RETURN]  ${sensor_dict}
+
