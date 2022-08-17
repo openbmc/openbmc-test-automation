@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "701724bc_b631b9be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-08-17T07:24:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "893d853a_d9489871",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "d192b8b76fcd34e4dbad5456ceca7d0bb0be8644",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d627d99e_07ae108a",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d6836b7_15893b06",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-08-17T07:24:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d627d99e_07ae108a",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 82
+      },
+      "revId": "d192b8b76fcd34e4dbad5456ceca7d0bb0be8644",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48c9e0b2_2b31fa6b",
@@ -60,6 +108,24 @@
       "writtenOn": "2022-07-26T05:10:42Z",
       "side": 1,
       "message": "[Teardown]  Enable IPMI Protocol  ${True}\n    ...  AND  Wait Until Keyword Succeeds  2 mins  30 sec  Run IPMI Standard Command  sel info",
+      "revId": "d192b8b76fcd34e4dbad5456ceca7d0bb0be8644",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c15abfe3_2523a354",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-08-17T07:24:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48c9e0b2_2b31fa6b",
       "revId": "d192b8b76fcd34e4dbad5456ceca7d0bb0be8644",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
