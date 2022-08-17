@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48bcee50_6f908016",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-17T04:50:27Z",
+      "side": 1,
+      "message": "Why is this changed to ReadOnly ? the test is about a privilege like operator to operate on it",
+      "range": {
+        "startLine": 403,
+        "startChar": 23,
+        "endLine": 403,
+        "endChar": 33
+      },
+      "revId": "377e1a03a30329724a7b94e2c703a406eade62cf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
