@@ -485,3 +485,69 @@ Verify Power Supply Sensor Threshold
         Run keyword if  '${data}[MemberId]' == 'ps0_input_voltage'
         ...  Should Be Equal As Numbers  ${data['${redfish_threshold_id}']}  ${ipmi_threshold_reading}
     END
+
+
+Get Available Sensors
+    [Documentation]  Get all the available sensors for the required component.
+    ...  Returns a list of available sensors.
+    [Arguments]  ${sensor_component}
+
+    # Description of argument(s):
+    # sensor_component     sensor component name.(e.g.:cpu)
+
+    # e.g.: ipmitool -I lanplus -C 17 -N 3 -p 623 -U <user_name> -H <system_name> sensor
+    ${resp}=  Run IPMI Standard Command  sensor
+    ${sensor_list}=  Create List
+    ${sensors}=  Get Lines Containing String  ${resp}  ${sensor_component}
+    ${sensors}=  Split To Lines  ${sensors}
+
+    # e.g. of sensors
+
+    #dcm0_cpu0        | 0x0        | discrete   | 0x8000| na        | na        | na        | na        | na        | na
+    #dcm0_cpu1        | 0x0        | discrete   | 0x8001| na        | na        | na        | na        | na        | na
+    #dcm1_cpu0        | 0x0        | discrete   | 0x8000| na        | na        | na        | na        | na        | na
+    #dcm1_cpu1        | 0x0        | discrete   | 0x8000| na        | na        | na        | na        | na        | na
+    #dcm2_cpu0        | 0x0        | discrete   | 0x8000| na        | na        | na        | na        | na        | na
+    #dcm2_cpu1        | 0x0        | discrete   | 0x8000| na        | na        | na        | na        | na        | na
+    #dcm3_cpu0        | 0x0        | discrete   | 0x8000| na        | na        | na        | na        | na        | na
+    #dcm3_cpu1        | 0x0        | discrete   | 0x8000| na        | na        | na        | na        | na        | na
+
+    FOR  ${line}  IN  @{sensors}
+        ${sensor_name}=  Set Variable  ${line.split('|')[0].strip()}
+        ${sensor_value}=  Set Variable  ${line.split('|')[1].strip()}
+        ${contains}=  Evaluate  """na""" in "${sensor_value}"
+        Run Keyword IF  "${contains}" != """True"""
+        ...  Append To List  ${sensor_list}  ${sensor_name}
+    END
+
+    # e.g.: output for ${sensor_list}
+    # ['dcm0_cpu0', 'dcm0_cpu1', 'dcm1_cpu0', 'dcm1_cpu1']
+
+    [RETURN]  ${sensor_list}
+
+
+Get Sensor Id For Sensor
+    [Documentation]  Returns the sensor ID value for the given sensor.
+    [Arguments]  ${sensor_name}
+
+    # Description of argument(s):
+    # sensor_name     Name of sensor whose ID is required(e.g.: dcm0_cpu0, dcm0_cpu1 etc).
+
+    # e.g.: ipmitool -I lanplus -C 17 -N 3 -p 623 -U <user_name> -H <system_name> sensor get <sensor_name>
+    ${get_resp}=  Run IPMI Standard Command  sensor get ${sensor_name}
+
+    # e.g.: of the get_resp
+    #Locating sensor record...
+    Sensor ID              : dcm0_cpu0 (0x41)
+    #Entity ID             : 3.1
+    #Sensor Type (Discrete): Processor
+    #States Asserted       : Processor
+                         [Presence detected]
+
+    ${line}=  Get Lines Containing String  ${get_resp}  Sensor ID
+    ${sensor_id}=  Set Variable  ${line[-5:-1]}
+
+    # e.g.: output for ${sensor_id} is 0x41.
+
+    [RETURN]  ${sensor_id}
+
