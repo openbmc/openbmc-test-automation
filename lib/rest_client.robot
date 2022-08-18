@@ -195,9 +195,9 @@ Post Login Request
 
     ${headers}=  Create Dictionary  Content-Type=application/json
     @{credentials}=  Create List  ${rest_username}  ${rest_password}
-    ${data}=  create dictionary   data=@{credentials}
+    ${data}=  Create Dictionary   data=@{credentials}
     ${status}  ${resp}=  Run Keyword And Ignore Error  POST On Session  openbmc
-    ...  /login  data=${data}  headers=${headers}
+    ...  /login  json=${data}  headers=${headers}
 
     Should Be Equal  ${status}  PASS  msg=${resp}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
@@ -213,7 +213,7 @@ Log Out OpenBMC
     # If there is no active sesion it will throw the following exception
     # "Non-existing index or alias 'openbmc'"
     ${resp}=  POST On Session  openbmc
-    ...  /logout  data=${data}  headers=${headers}
+    ...  /logout  json=${data}  headers=${headers}
 
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ...  msg=${resp}
