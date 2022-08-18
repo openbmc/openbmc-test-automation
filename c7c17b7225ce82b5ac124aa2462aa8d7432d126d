@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f20569c_b2dc45af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-08-18T08:25:41Z",
+      "side": 1,
+      "message": "Can you please update the commit msg as per the new format?\n\nPls add changes and the script/component that is affected in the heading.\n\nChange from \"Updated the command to generated FRU callout\" to \"Updated the command to generate FRU callout\"",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 0
+      },
+      "revId": "c7c17b7225ce82b5ac124aa2462aa8d7432d126d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
