@@ -146,17 +146,17 @@ Verify Redfish VPD Data
     ...  ELSE IF  '${component}' == 'CPU'
     ...    Set Variable  /redfish/v1/Systems/system/Processors/cpu0  Processor
     ...  ELSE IF  '${component}' == 'TPM'
-    ...    Set Variable  /redfish/v1/Chassis/chassis/Assembly  tpm_wilson
+    ...    Set Variable  /redfish/v1/Chassis/chassis/Assembly  TPM Card
     ...  ELSE IF  '${component}' == 'TOD Battery'
-    ...    Set Variable  /redfish/v1/Chassis/chassis/Assembly  tod_battery
+    ...    Set Variable  /redfish/v1/Chassis/chassis/Assembly  Time Of Day Battery
     ...  ELSE IF  '${component}' == 'VRM'
-    ...    Set Variable  /redfish/v1/Chassis/chassis/Assembly  vdd_vrm0
+    ...    Set Variable  /redfish/v1/Chassis/chassis/Assembly  Voltage Regulator Module
     ...  ELSE IF  '${component}' == 'OP Panel'
-    ...    Set Variable  /redfish/v1/Chassis/chassis/Assembly  base_op_panel_blyth
+    ...    Set Variable  /redfish/v1/Chassis/chassis/Assembly  Operator Panel Base
     ...  ELSE IF  '${component}' == 'OP Panel LCD'
-    ...    Set Variable  /redfish/v1/Chassis/chassis/Assembly  lcd_op_panel_hill
+    ...    Set Variable  /redfish/v1/Chassis/chassis/Assembly  Operator Panel LCD
     ...  ELSE IF  '${component}' == 'Disk Backplane'
-    ...    Set Variable  /redfish/v1/Chassis/chassis/Assembly  disk_backplane0
+    ...    Set Variable  /redfish/v1/Chassis/chassis/Assembly  NVMe Backplane
 
     ${resp}=  Run Keyword If  '${redfish_component_uri}' == '/redfish/v1/Chassis/chassis/Assembly'
     ...  Get Assembly Component VPD  ${redfish_component_name}
@@ -172,13 +172,13 @@ Verify Redfish VPD Data
     ${vpd_component}=  Set Variable If
     ...  '${component}' == 'CPU'  /system/chassis/motherboard/dcm0/cpu0
     ...  '${component}' == 'Chassis'  /system/chassis
-    ...  '${component}' == 'BMC'  /system/chassis/motherboard/ebmc_card_bmc
-    ...  '${component}' == 'TPM'  /system/chassis/motherboard/tpm_wilson
-    ...  '${component}' == 'TOD Battery'  /system/chassis/motherboard/tod_battery
-    ...  '${component}' == 'VRM'  /system/chassis/motherboard/vdd_vrm0
-    ...  '${component}' == 'OP Panel'  /system/chassis/motherboard/base_op_panel_blyth
-    ...  '${component}' == 'OP Panel LCD'  /system/chassis/motherboard/lcd_op_panel_hill
-    ...  '${component}' == 'Disk Backplane'  /system/chassis/motherboard/disk_backplane0
+    ...  '${component}' == 'BMC'  /system/chassis/motherboard/bmc
+    ...  '${component}' == 'TPM'  /system/chassis/motherboard/tpm
+    ...  '${component}' == 'TOD Battery'  /system/chassis/motherboard/bmc/tod_battery
+    ...  '${component}' == 'VRM'  /system/chassis/motherboard/vrm0
+    ...  '${component}' == 'OP Panel'  /system/chassis/motherboard/dasd_backplane/panel0
+    ...  '${component}' == 'OP Panel LCD'  /system/chassis/motherboard/dasd_backplane/panel1
+    ...  '${component}' == 'Disk Backplane'  /system/chassis/motherboard/dasd_backplane
 
     ${vpd_records}=  Vpdtool  -o -O ${vpd_component}
 
