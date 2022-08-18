@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1dd6921_c3954bb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-08-18T06:30:16Z",
+      "side": 1,
+      "message": "if i use template then i can\u0027t use that verification code keyword, so i have written this code.",
+      "revId": "92bb519b07a25a7a3637c8ddd6b3c731a5db6147",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7b16292_2cea0265",
