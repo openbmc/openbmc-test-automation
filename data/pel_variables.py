@@ -18,7 +18,7 @@ ERROR_LOG_CREATE_BASE_CMD = 'busctl call xyz.openbmc_project.Logging /xyz/openbm
 CMD_INTERNAL_FAILURE = ERROR_LOG_CREATE_BASE_CMD + 'xyz.openbmc_project.Common.Error.InternalFailure \
     xyz.openbmc_project.Logging.Entry.Level.Error 0'
 
-CMD_FRU_CALLOUT = ERROR_LOG_CREATE_BASE_CMD + 'xyz.openbmc_project.Common.Error.Timeout \
+CMD_FRU_CALLOUT = ERROR_LOG_CREATE_BASE_CMD + 'xyz.openbmc_project.Sensor.Device.Error.ReadFailure \
     xyz.openbmc_project.Logging.Entry.Level.Error 2 "TIMEOUT_IN_MSEC" "5" "CALLOUT_INVENTORY_PATH" \
     "/xyz/openbmc_project/inventory/system/chassis/motherboard"'
 
