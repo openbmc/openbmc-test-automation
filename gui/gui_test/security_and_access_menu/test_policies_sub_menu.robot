@@ -14,7 +14,10 @@ Test Setup       Test Setup Execution
 *** Variables ***
  
 ${xpath_policies_heading}                     //h1[text()="Policies"]
-${xpath_bmc_ssh_toggle}                       //*[@data-test-id='policies-toggle-bmcShell']/following-sibling::label
+${xpath_bmc_ssh_toggle}                       //*[@data-test-id='policies-toggle-bmcShell']
+...  /following-sibling::label
+${xpath_network_ipmi_toggle}                  //*[@data-test-id='polices-toggle-networkIpmi']
+...  /following-sibling::label
 ${xpath_network_ipmi_toggle}                  //*[@data-test-id='polices-toggle-networkIpmi']/following-sibling::label
 ${xpath_host_tpm_toggle}                      //input[@id='host-tpm-policy']
 ${xpath_virtual_tpm_toggle}                   //*[@data-test-id='policies-toggle-vtpm']
@@ -61,7 +64,6 @@ Verify Existence Of All Buttons In Policies Page
 
 
 Enable SSH Via GUI And Verify
-
     [Documentation]  Login to GUI Policies page,enable SSH toggle and
     ...  verify that SSH to BMC starts working after enabling SSH.
     [Tags]  Enable_SSH_Via_GUI_And_Verify
