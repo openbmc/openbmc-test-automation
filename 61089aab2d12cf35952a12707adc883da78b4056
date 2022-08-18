@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fd48687_240aa673",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-08-18T09:23:32Z",
+      "side": 1,
+      "message": "why this sleep is needed??\nIf it is taking 15 seconds to run IPMI commands after SSH, Pls open a defect.",
+      "revId": "61089aab2d12cf35952a12707adc883da78b4056",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
