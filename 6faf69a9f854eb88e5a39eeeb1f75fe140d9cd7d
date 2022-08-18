@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09ebaff4_75fce66b",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-08-18T08:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a126e1c1_38622e11",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 89
+      },
+      "revId": "6faf69a9f854eb88e5a39eeeb1f75fe140d9cd7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c06cae6_cd40b5fe",
@@ -71,6 +95,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2cecb0e_52f8eb1f",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-08-18T08:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c06cae6_cd40b5fe",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 68
+      },
+      "revId": "6faf69a9f854eb88e5a39eeeb1f75fe140d9cd7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23c9ffe8_b35c74df",
@@ -84,6 +132,30 @@
       "writtenOn": "2022-02-16T09:25:44Z",
       "side": 1,
       "message": "Move this as part of test case teardown",
+      "range": {
+        "startLine": 271,
+        "startChar": 0,
+        "endLine": 271,
+        "endChar": 82
+      },
+      "revId": "6faf69a9f854eb88e5a39eeeb1f75fe140d9cd7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2e3ef35_48bc9970",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-08-18T08:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23c9ffe8_b35c74df",
       "range": {
         "startLine": 271,
         "startChar": 0,
@@ -141,6 +213,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65f3d5ca_ca32a09c",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-08-18T08:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e8f032a_83e8b498",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 277,
+        "endChar": 73
+      },
+      "revId": "6faf69a9f854eb88e5a39eeeb1f75fe140d9cd7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ced70c4_2e78447e",
@@ -154,6 +250,24 @@
       "writtenOn": "2022-02-15T06:25:42Z",
       "side": 1,
       "message": "can you re-use code from library??",
+      "revId": "6faf69a9f854eb88e5a39eeeb1f75fe140d9cd7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a55db5b_fe0fd245",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-08-18T08:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ced70c4_2e78447e",
       "revId": "6faf69a9f854eb88e5a39eeeb1f75fe140d9cd7d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -205,6 +319,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99ee20d7_3e7c8ecd",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-08-18T08:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4873eea6_3b233434",
+      "range": {
+        "startLine": 282,
+        "startChar": 4,
+        "endLine": 282,
+        "endChar": 37
+      },
+      "revId": "6faf69a9f854eb88e5a39eeeb1f75fe140d9cd7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0458d33_e3a41892",
@@ -218,6 +356,30 @@
       "writtenOn": "2022-02-16T09:25:44Z",
       "side": 1,
       "message": "1s delay is quite less. Make it 5s",
+      "range": {
+        "startLine": 285,
+        "startChar": 31,
+        "endLine": 285,
+        "endChar": 39
+      },
+      "revId": "6faf69a9f854eb88e5a39eeeb1f75fe140d9cd7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65f7b05c_75d32042",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-08-18T08:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0458d33_e3a41892",
       "range": {
         "startLine": 285,
         "startChar": 31,
@@ -275,6 +437,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b11bf295_197ee418",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-08-18T08:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e805129e_941bd27a",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 290,
+        "endChar": 49
+      },
+      "revId": "6faf69a9f854eb88e5a39eeeb1f75fe140d9cd7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c63e1a0_58024a20",
@@ -312,6 +498,30 @@
       "side": 1,
       "message": "Agree, this is not required.",
       "parentUuid": "9c63e1a0_58024a20",
+      "range": {
+        "startLine": 296,
+        "startChar": 0,
+        "endLine": 296,
+        "endChar": 26
+      },
+      "revId": "6faf69a9f854eb88e5a39eeeb1f75fe140d9cd7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b6e1eea_ea544e4e",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-08-18T08:43:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38cb5e0f_528bf1e5",
       "range": {
         "startLine": 296,
         "startChar": 0,
