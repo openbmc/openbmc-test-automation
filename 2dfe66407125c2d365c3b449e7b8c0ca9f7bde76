@@ -45,6 +45,30 @@
       },
       "revId": "2dfe66407125c2d365c3b449e7b8c0ca9f7bde76",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27c14b3d_f4be5983",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1001187
+      },
+      "writtenOn": "2022-08-18T08:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72edf149_13e2ffbe",
+      "range": {
+        "startLine": 300,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 30
+      },
+      "revId": "2dfe66407125c2d365c3b449e7b8c0ca9f7bde76",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
