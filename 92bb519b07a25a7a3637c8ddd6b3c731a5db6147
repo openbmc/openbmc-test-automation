@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d9e2a50_236a651b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-08-18T06:33:07Z",
+      "side": 1,
+      "message": "Can you try this code:\n\nConfigure SSH And IPMI Settings And Verify\n    [Documentation]\n    [Tags]\n    [Template]  Set SSH And IPMI Protocols\n    \n    # ssh_state  ipmi_state\n    ${True}      ${True}\n    ${True}      ${False}\n    ${False}     ${True}\n    ${False}     ${False}\n\n\nSet SSH And IPMI Protocol\n    [Documentation]  Set SSH and IPMI protocol state.\n    [Arguments]  ${ssh_state}  ${ipmi_state}\n\n    # Description of argument(s):\n    # ssh_state     state of SSH to be set(e.g. True, False).\n    # ipmi_state    state of IPMI to be set(e.g. True, False).\n\n    ${ssh_protocol_state}\u003d  Create Dictionary  ProtocolEnabled\u003d${ssh_state}\n    ${ipmi_protocol_state}\u003d  Create Dictionary  ProtocolEnabled\u003d${ipmi_state}\n    ${data}\u003d  Create Dictionary  SSH\u003d${ssh_protocol_state}  IPMI\u003d${ipmi_protocol_state}\n\n    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body\u003d\u0026{data}\n    ...  valid_status_codes\u003d[${HTTP_NO_CONTENT}]\n\n    # Wait for timeout for new values to take effect.\n    Sleep  ${NETWORK_TIMEOUT}s\n\n    Verify Protocol States  ${ssh_state}  ${ipmi_state}\n\n\nVerify Protocol State\n    [Arguments]  ${ssh_state}  ${ipmi_state}\n    \n    # Description of argument(s):\n    # ssh_state     state of SSH to be verified(e.g. True, False).\n    # ipmi_state    state of IPMI to be verified(e.g. True, False).\n\n    # Verify SSH state value.\n    ${status}\u003d  Run Keyword And Return Status\n    ...  Verify SSH Login And Commands Work\n\n    Should Be Equal As Strings  ${status}  ${ssh_state}\n    ...  msg\u003dSSH states are not matching.\n\n    # Verify IPMI state value.\n    Verify IPMI Protocol State  ${ipmi_state}\n",
+      "revId": "92bb519b07a25a7a3637c8ddd6b3c731a5db6147",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7b16292_2cea0265",
