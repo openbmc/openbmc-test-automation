@@ -59,7 +59,7 @@ Kill Services And Expect Service Restart
     Should Be Equal  active  ${ActiveState}
     ...  msg=Logging service not in active state.
 
-Kill The List Of Services And Expect Killed Service Get Restarted
+Kill The List Of Services And Expect Killed Service Gets Restarted
     [Documentation]  Kill the given services and expect again services get restarted automatically.
     [Tags]  Kill_The_List_Of_Services_And_Expect_Killed_Service_Gets_Restarted
 

@@ -256,7 +256,7 @@ def convert_lsb_to_msb(string):
     r"""
     Reverse given string (From LSB first to MSB first) and converts to HEX.
 
-    Input stirng     0a 00
+    Input string     0a 00
     Return string    0a
     """
     datalist = string.split(" ")
