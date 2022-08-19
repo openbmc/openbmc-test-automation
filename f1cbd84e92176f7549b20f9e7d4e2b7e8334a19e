@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0e74390_e5472e28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-08-19T04:33:37Z",
+      "side": 1,
+      "message": "$ python3 -m pylint lib/utilities.py\n************* Module utilities\nlib/utilities.py:1:0: C0114: Missing module docstring (missing-module-docstring)\n\nlib/utilities.py:9:0: C0411: standard import \"import imp\" should be placed before \"from robot.libraries.BuiltIn import BuiltIn\" (wrong-import-order)\nlib/utilities.py:10:0: C0411: standard import \"import string\" should be placed before \"from robot.libraries.BuiltIn import BuiltIn\" (wrong-import-order)\nlib/utilities.py:11:0: C0411: standard import \"import random\" should be placed before \"from robot.libraries.BuiltIn import BuiltIn\" (wrong-import-order)\nlib/utilities.py:12:0: C0411: standard import \"import subprocess\" should be placed before \"from robot.libraries.BuiltIn import BuiltIn\" (wrong-import-order)\nlib/utilities.py:7:0: W0611: Unused import sys (unused-import)\n\nlib/utilities.py:32:0: C0116: Missing function or method docstring (missing-function-docstring)\nlib/utilities.py:43:0: C0116: Missing function or method docstring (missing-function-docstring)\nlib/utilities.py:64:0: C0116: Missing function or method docstring (missing-function-docstring)\nlib/utilities.py:85:0: C0116: Missing function or method docstring (missing-function-docstring)\nlib/utilities.py:105:0: C0116: Missing function or method docstring (missing-function-docstring)\nlib/utilities.py:119:0: C0116: Missing function or method docstring (missing-function-docstring)\nlib/utilities.py:123:0: C0116: Missing function or method docstring (missing-function-docstring)",
+      "revId": "f1cbd84e92176f7549b20f9e7d4e2b7e8334a19e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
