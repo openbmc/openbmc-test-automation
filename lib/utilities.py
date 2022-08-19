@@ -1,10 +1,13 @@
 #!/usr/bin/env python3 -u
-import sys
-from robot.libraries.BuiltIn import BuiltIn
+
+r"""
+Generic utility functions.
+"""
 import imp
 import string
 import random
 import subprocess
+from robot.libraries.BuiltIn import BuiltIn
 from robot.utils import DotDict
 
 
@@ -27,6 +30,9 @@ def random_ip():
 
 
 def get_sensor(module_name, value):
+    r"""
+    Return sensor matched ID name.
+    """
     m = imp.load_source('module.name', module_name)
 
     for i in m.ID_LOOKUP['SENSOR']:
@@ -38,6 +44,9 @@ def get_sensor(module_name, value):
 
 
 def get_inventory_sensor(module_name, value):
+    r"""
+    Return sensor matched ID name from inventory.
+    """
     m = imp.load_source('module.name', module_name)
 
     value = string.replace(value, m.INVENTORY_ROOT, '<inventory_root>')
@@ -55,10 +64,13 @@ def get_inventory_sensor(module_name, value):
 #
 #  i.e.  get_inventory_list('../data/Palmetto.py')
 #
-#  [/org/openbmc/inventory//system/chassis/motherboard/cpu0/core0,
+#  [/org/openbmc/inventory/system/chassis/motherboard/cpu0/core0,
 #   /org/openbmc/inventory/system/chassis/motherboard/dimm0]
 ################################################################
 def get_inventory_list(module_name):
+    r"""
+    Return all FRU URI(s) list available from inventory.
+    """
 
     inventory_list = []
     m = imp.load_source('module.name', module_name)
@@ -76,10 +88,13 @@ def get_inventory_list(module_name):
 #
 #  i.e.  get_inventory_fru_type_list('../data/Witherspoon.py', 'CPU')
 #
-#  [/org/openbmc/inventory//system/chassis/motherboard/cpu0,
-#   /org/openbmc/inventory//system/chassis/motherboard/cpu1]
+#  [/org/openbmc/inventory/system/chassis/motherboard/cpu0,
+#   /org/openbmc/inventory/system/chassis/motherboard/cpu1]
 ################################################################
 def get_inventory_fru_type_list(module_name, fru):
+    r"""
+    Return FRU URI(s) list of a given type from inventory.
+    """
     inventory_list = []
     m = imp.load_source('module.name', module_name)
 
@@ -100,6 +115,9 @@ def get_inventory_fru_type_list(module_name, fru):
 #   /org/openbmc/inventory/system/chassis/motherboard/dimm1]
 ################################################################
 def get_vpd_inventory_list(module_name, fru):
+    r"""
+    Return VPD URI(s) list of a FRU type from inventory.
+    """
     inventory_list = []
     m = imp.load_source('module.name', module_name)
 
@@ -114,10 +132,16 @@ def get_vpd_inventory_list(module_name, fru):
 
 
 def call_keyword(keyword):
+    r"""
+    Return result of the execute robot keyword.
+    """
     return BuiltIn().run_keyword(keyword)
 
 
 def main():
+    r"""
+    Python main func call.
+    """
     print(get_vpd_inventory_list('../data/Palmetto.py', 'DIMM'))
 
 
