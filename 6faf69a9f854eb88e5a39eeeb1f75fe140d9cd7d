@@ -72,6 +72,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b814185_c64c8b0d",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-22T04:57:46Z",
+      "side": 1,
+      "message": "Documentation is still not fixed.",
+      "parentUuid": "09ebaff4_75fce66b",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 89
+      },
+      "revId": "6faf69a9f854eb88e5a39eeeb1f75fe140d9cd7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c06cae6_cd40b5fe",
@@ -109,6 +133,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "1c06cae6_cd40b5fe",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 68
+      },
+      "revId": "6faf69a9f854eb88e5a39eeeb1f75fe140d9cd7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "624e090b_ea031ad4",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-22T04:57:46Z",
+      "side": 1,
+      "message": "We should not be passing whole command as argument to a keyword. So please change it.",
+      "parentUuid": "e2cecb0e_52f8eb1f",
       "range": {
         "startLine": 179,
         "startChar": 0,
@@ -227,6 +275,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "0e8f032a_83e8b498",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 277,
+        "endChar": 73
+      },
+      "revId": "6faf69a9f854eb88e5a39eeeb1f75fe140d9cd7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a1d09e3_d46a6bf5",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-22T04:57:46Z",
+      "side": 1,
+      "message": "What I am suggesting is move this as part of test case. Else it would be called each time \"Create Error On BMC And Verify Trap On Default Port\" keyword is called in template\n\nConfigure SNMP Manager Via GUI And Verify SNMP Trap\n    [Documentation]  Generate error on BMC and verify trap and its fields.\n    [Tags]  Configure_SNMP_Manager_Via_GUI_And_Verify_SNMP_Trap\n    [Template]  Create Error On BMC And Verify Trap On Default Port\n    [Setup]  Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}\n    [Teardown]  Delete SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}",
+      "parentUuid": "65f3d5ca_ca32a09c",
       "range": {
         "startLine": 277,
         "startChar": 0,
@@ -380,6 +452,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "a0458d33_e3a41892",
+      "range": {
+        "startLine": 285,
+        "startChar": 31,
+        "endLine": 285,
+        "endChar": 39
+      },
+      "revId": "6faf69a9f854eb88e5a39eeeb1f75fe140d9cd7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0f1e93c_513fe84e",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-22T04:57:46Z",
+      "side": 1,
+      "message": "Not resolved",
+      "parentUuid": "65f7b05c_75d32042",
       "range": {
         "startLine": 285,
         "startChar": 31,
