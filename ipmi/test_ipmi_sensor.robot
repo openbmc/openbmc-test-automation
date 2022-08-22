@@ -293,7 +293,7 @@ Get Temperature Reading From Redfish
     # Description of argument(s):
     # member_id    Member id of temperature.
 
-    @{redfish_readings}=  Redfish.Get Attribute  /redfish/v1/Chassis/chassis/Thermal  Temperatures
+    @{redfish_readings}=  Redfish.Get Attribute  /redfish/v1/Chassis/${CHASSIS_ID}/Thermal  Temperatures
     FOR  ${data}  IN  @{redfish_readings}
         ${redfish_value}=  Set Variable If  '${data}[MemberId]' == '${member_id}'
         ...  ${data}[ReadingCelsius]
@@ -364,7 +364,7 @@ Verify Power Reading Via Raw Command
     #  "Name": "Chassis Power Control",
     #  "PowerConsumedWatts": 145.0,
 
-    ${power}=  Redfish.Get Properties  /redfish/v1/Chassis/chassis/Power
+    ${power}=  Redfish.Get Properties  /redfish/v1/Chassis/${CHASSIS_ID}/Power
     ${redfish_reading}=  Set Variable  ${power['PowerControl'][0]['PowerConsumedWatts']}
 
     ${ipmi_redfish_power_diff}=
@@ -480,7 +480,7 @@ Verify Power Supply Sensor Threshold
     # "UpperThresholdCritical": 300.0,
     # "UpperThresholdNonCritical": 290.0
 
-    @{redfish_readings}=  Redfish.Get Attribute  /redfish/v1/Chassis/chassis/Power  Voltages
+    @{redfish_readings}=  Redfish.Get Attribute  /redfish/v1/Chassis/${CHASSIS_ID}/Power  Voltages
     FOR  ${data}  IN  @{redfish_readings}
         Run keyword if  '${data}[MemberId]' == 'ps0_input_voltage'
         ...  Should Be Equal As Numbers  ${data['${redfish_threshold_id}']}  ${ipmi_threshold_reading}
