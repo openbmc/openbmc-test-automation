@@ -309,6 +309,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58e649b5_a25561aa",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-08-22T06:12:59Z",
+      "side": 1,
+      "message": "When trying with multiple SNMP managers \u0026 multiple different ports: this code in keyword makes more sense.",
+      "parentUuid": "5a1d09e3_d46a6bf5",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 277,
+        "endChar": 73
+      },
+      "revId": "6faf69a9f854eb88e5a39eeeb1f75fe140d9cd7d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ced70c4_2e78447e",
