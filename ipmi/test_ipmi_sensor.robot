@@ -191,8 +191,8 @@ Verify CPU Present
     [Tags]  Verify_CPU_Present
     [Template]  Enable Present Bit Via IPMI and Verify Using Redfish
 
-    # sensor_id  component
-    0x5a         cpu0
+    # component
+    cpu
 
 
 Verify CPU Not Present
@@ -200,8 +200,8 @@ Verify CPU Not Present
     [Tags]  Verify_CPU_Not_Present
     [Template]  Disable Present Bit Via IPMI and Verify Using Redfish
 
-    # sensor_id  component
-    0x5a         cpu0
+    # component
+    cpu
 
 
 Verify GPU Present
@@ -376,58 +376,70 @@ Verify Power Reading Via Raw Command
 
 Enable Present Bit Via IPMI and Verify Using Redfish
     [Documentation]  Enable present bit of sensor via IPMI and verify using Redfish.
-    [Arguments]  ${sensor_id}  ${component}
+    [Arguments]  ${component}
 
     # Description of argument(s):
-    # sensor_id    The sensor id of IPMI sensor.
     # component    The Redfish component of IPMI sensor.
 
-    Run IPMI Command
-    ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x80 0x00 0x00 0x00 0x00 0x20 0x00
+    ${sensor_dict}=  Get IPMI Sensor ID Dict  ${component}
 
-    #  Example of CPU state via Redfish
+    FOR    ${sensor_id}    IN    @{sensor_dict}
+        ${sensor_name}=  Get From Dictionary  ${sensor_dict}  ${sensor_id}
 
-    #"Name": "Processor",
-    #"ProcessorArchitecture": "Power",
-    #"ProcessorType": "CPU",
-    #"Status": {
-    #    "Health": "OK",
-    #    "State": "Enabled"
-    #}
+        Run IPMI Command
+        ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x80 0x00 0x00 0x00 0x00 0x20 0x00
 
-    # Python module:  get_endpoint_path_list(resource_path, end_point_prefix)
-    ${processor_list}=  redfish_utils.Get Endpoint Path List   /redfish/v1/Systems/  Processors
+        #  Example of CPU state via Redfish
 
-    ${redfish_value}=  Redfish.Get Properties  ${processor_list[0]}/${component}
-    Should Be True  '${redfish_value['Status']['State']}' == 'Enabled'
+        #"ProcessorType": "CPU",
+        #"SerialNumber": "YA1936422499",
+        #"Socket": "",
+        #"SparePartNumber": "F210110",
+        #"Status": {
+        #"Health": "OK",
+        #"State": "Enabled"
+        #}
+
+        # Redfish cpu components have "-" instead of "_" (e.g.: dcm0-cpu0).
+        ${redfish_component}=  Replace String  ${sensor_name}  _  -
+        ${sensor_properties}=  Redfish.Get Properties  /redfish/v1/Systems/system/Processors/${redfish_component}
+
+        Should Be True  '${sensor_properties['Status']['State']}' == 'Enabled'
+    END
 
 
 Disable Present Bit Via IPMI and Verify Using Redfish
     [Documentation]  Disable present bit of sensor via IPMI and verify using Redfish.
-    [Arguments]  ${sensor_id}  ${component}
+    [Arguments]  ${component}
 
     # Description of argument(s):
-    # sensor_id    The sensor id of IPMI sensor.
     # component    The Redfish component of IPMI sensor.
 
-    Run IPMI Command
-    ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x00 0x00 0x80 0x00 0x00 0x20 0x00
+    ${sensor_dict}=  Get IPMI Sensor ID Dict  ${component}
 
-    #  Example of CPU state via Redfish
+    FOR    ${sensor_id}    IN    @{sensor_dict}
+        ${sensor_name}=  Get From Dictionary  ${sensor_dict}  ${sensor_id}
 
-    #"Name": "Processor",
-    #"ProcessorArchitecture": "Power",
-    #"ProcessorType": "CPU",
-    #"Status": {
-    #    "Health": "OK",
-    #    "State": "Absent"
-    #}
+        Run IPMI Command
+        ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x00 0x00 0x80 0x00 0x00 0x20 0x00
 
-    # Python module:  get_endpoint_path_list(resource_path, end_point_prefix)
-    ${processor_list}=  redfish_utils.Get Endpoint Path List   /redfish/v1/Systems/  Processors
+        #  Example of CPU state via Redfish
 
-    ${redfish_value}=  Redfish.Get Properties  ${processor_list[0]}/${component}
-    Should Be True  '${redfish_value['Status']['State']}' == 'Absent'
+        #"ProcessorType": "CPU",
+        #"SerialNumber": "YA1936422499",
+        #"Socket": "",
+        #"SparePartNumber": "F210110",
+        #"Status": {
+        #"Health": "OK",
+        #"State": "Absent"
+        #}
+
+        # Redfish cpu components have "-" instead of "_" (e.g.: dcm0-cpu0).
+        ${redfish_component}=  Replace String  ${sensor_name}  _  -
+        ${sensor_properties}=  Redfish.Get Properties  /redfish/v1/Systems/system/Processors/${redfish_component}
+
+        Should Be True  '${sensor_properties['Status']['State']}' == 'Absent'
+    END
 
 
 Verify Power Supply Sensor Threshold
