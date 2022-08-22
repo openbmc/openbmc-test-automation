@@ -189,19 +189,19 @@ Test Power Reading Via IPMI Raw Command
 Verify CPU Present
     [Documentation]  Verify the IPMI sensor for CPU present using Redfish.
     [Tags]  Verify_CPU_Present
-    [Template]  Enable Present Bit Via IPMI and Verify Using Redfish
+    [Template]  Set Present Bit Via IPMI and Verify Using Redfish
 
-    # sensor_id  component
-    0x5a         cpu0
+    # component  state
+    cpu          Enabled
 
 
 Verify CPU Not Present
     [Documentation]  Verify the IPMI sensor for CPU not present using Redfish.
     [Tags]  Verify_CPU_Not_Present
-    [Template]  Disable Present Bit Via IPMI and Verify Using Redfish
+    [Template]  Set Present Bit Via IPMI and Verify Using Redfish
 
-    # sensor_id  component
-    0x5a         cpu0
+    # component  state
+    cpu          Absent
 
 
 Verify GPU Present
@@ -374,60 +374,41 @@ Verify Power Reading Via Raw Command
     ...  msg=Power reading above allowed threshold ${allowed_power_diff}.
 
 
-Enable Present Bit Via IPMI and Verify Using Redfish
-    [Documentation]  Enable present bit of sensor via IPMI and verify using Redfish.
-    [Arguments]  ${sensor_id}  ${component}
+Set Present Bit Via IPMI and Verify Using Redfish
+    [Documentation]  Set present bit of sensor via IPMI and verify using Redfish.
+    [Arguments]  ${component}  ${status}
 
     # Description of argument(s):
-    # sensor_id    The sensor id of IPMI sensor.
     # component    The Redfish component of IPMI sensor.
+    # status  Status of the bit to be set(e.g. Absent, Present).
 
-    Run IPMI Command
-    ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x80 0x00 0x00 0x00 0x00 0x20 0x00
+    ${sensor_list}=  Get Available Sensors  ${component}
+    ${sensor_name}=  Set Variable  ${sensor_list[0]}
+    ${sensor_id}=  Get Sensor Id For Sensor  ${sensor_name}
 
-    #  Example of CPU state via Redfish
+     Run Keyword If  '${status}' == 'Absent'
+     ...  Run IPMI Command
+     ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x00 0x00 0x80 0x00 0x00 0x20 0x00
+     ...  ELSE IF  '${status}' == 'Enabled'
+     ...  Run IPMI Command
+     ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x80 0x00 0x00 0x00 0x00 0x20 0x00
 
-    #"Name": "Processor",
-    #"ProcessorArchitecture": "Power",
-    #"ProcessorType": "CPU",
-    #"Status": {
-    #    "Health": "OK",
-    #    "State": "Enabled"
-    #}
+     # Redfish cpu components have "-" instead of "_" (e.g.: dcm0-cpu0).
+     ${cpu_name}=  Replace String  ${sensor_name}  _  -
+     ${sensor_properties}=  Redfish.Get Properties  /redfish/v1/Systems/system/Processors/${cpu_name}
 
-    # Python module:  get_endpoint_path_list(resource_path, end_point_prefix)
-    ${processor_list}=  redfish_utils.Get Endpoint Path List   /redfish/v1/Systems/  Processors
+     #  Example of CPU state via Redfish
 
-    ${redfish_value}=  Redfish.Get Properties  ${processor_list[0]}/${component}
-    Should Be True  '${redfish_value['Status']['State']}' == 'Enabled'
+     # "ProcessorType": "CPU",
+     # "SerialNumber": "YA1936422499",
+     # "Socket": "",
+     # "SparePartNumber": "F210110",
+     # "Status": {
+     # "Health": "OK",
+     # "State": "Absent"
+     # }
 
-
-Disable Present Bit Via IPMI and Verify Using Redfish
-    [Documentation]  Disable present bit of sensor via IPMI and verify using Redfish.
-    [Arguments]  ${sensor_id}  ${component}
-
-    # Description of argument(s):
-    # sensor_id    The sensor id of IPMI sensor.
-    # component    The Redfish component of IPMI sensor.
-
-    Run IPMI Command
-    ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x00 0x00 0x80 0x00 0x00 0x20 0x00
-
-    #  Example of CPU state via Redfish
-
-    #"Name": "Processor",
-    #"ProcessorArchitecture": "Power",
-    #"ProcessorType": "CPU",
-    #"Status": {
-    #    "Health": "OK",
-    #    "State": "Absent"
-    #}
-
-    # Python module:  get_endpoint_path_list(resource_path, end_point_prefix)
-    ${processor_list}=  redfish_utils.Get Endpoint Path List   /redfish/v1/Systems/  Processors
-
-    ${redfish_value}=  Redfish.Get Properties  ${processor_list[0]}/${component}
-    Should Be True  '${redfish_value['Status']['State']}' == 'Absent'
+     Should Be True  '${sensor_properties['Status']['State']}' == '${status}'
 
 
 Verify Power Supply Sensor Threshold
