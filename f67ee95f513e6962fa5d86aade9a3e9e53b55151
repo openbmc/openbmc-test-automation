@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9998804_de46e906",
+        "filename": "data/variables.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1001184
+      },
+      "writtenOn": "2022-08-22T08:23:28Z",
+      "side": 1,
+      "message": "This is in global scope. IIRC, it will run only at the first time when the py file is loaded. Since it is indeterminate, is it guaranteed that those variables are ready when the file is loaded?",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 67
+      },
+      "revId": "f67ee95f513e6962fa5d86aade9a3e9e53b55151",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cc03557_95f3b446",
+        "filename": "data/variables.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1001184
+      },
+      "writtenOn": "2022-08-22T08:23:28Z",
+      "side": 1,
+      "message": "Is there any reason to use `str` here instead of a regular comment (starts with `#`)?\n\nSame as \"Redfish host variable:\" in line#236 below.",
+      "range": {
+        "startLine": 221,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 0
+      },
+      "revId": "f67ee95f513e6962fa5d86aade9a3e9e53b55151",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eefa32e_dca960f6",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001184
+      },
+      "writtenOn": "2022-08-22T08:23:28Z",
+      "side": 1,
+      "message": "nit: \n```\nif https_enabled.lower() in (\"true\", \"t\"):\n```",
+      "range": {
+        "startLine": 43,
+        "startChar": 8,
+        "endLine": 43,
+        "endChar": 35
+      },
+      "revId": "f67ee95f513e6962fa5d86aade9a3e9e53b55151",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52577a97_22753676",
+        "filename": "lib/redfish_request.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001184
+      },
+      "writtenOn": "2022-08-22T08:23:28Z",
+      "side": 1,
+      "message": "nit: redundant variable",
+      "range": {
+        "startLine": 55,
+        "startChar": 8,
+        "endLine": 55,
+        "endChar": 16
+      },
+      "revId": "f67ee95f513e6962fa5d86aade9a3e9e53b55151",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
