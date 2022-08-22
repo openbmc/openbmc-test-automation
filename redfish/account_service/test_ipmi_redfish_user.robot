@@ -17,6 +17,7 @@ ${valid_password}       0penBmc1
 ${valid_password2}      0penBmc2
 ${admin_level_priv}     4
 ${operator_level_priv}  3
+${readonly_level_priv}  2
 # Refer:  #openbmc/phosphor-user-manager/blob/master/user_mgr.cpp
 # ipmiMaxUsers = 15;    <-- IPMI
 # maxSystemUsers = 30;  <-- Max system redfish account users allowed
@@ -172,14 +173,14 @@ Update User Privilege Via IPMI And Verify Using Redfish
     ${username}  ${userid}=  IPMI Create Random User Plus Password And Privilege
     ...  ${valid_password}  ${admin_level_priv}
 
-    # Change user privilege to opetrator using IPMI.
+    # Change user privilege to readonly using IPMI.
     Run IPMI Standard Command
-    ...  user priv ${userid} ${operator_level_priv} ${CHANNEL_NUMBER}
+    ...  user priv ${userid} ${readonly_level_priv} ${CHANNEL_NUMBER}
 
     # Verify new user privilege level via Redfish.
     ${privilege}=  Redfish_Utils.Get Attribute
     ...  /redfish/v1/AccountService/Accounts/${username}  RoleId
-    Should Be Equal  ${privilege}  Operator
+    Should Be Equal  ${privilege}  ReadOnly
 
 
 Delete User Via IPMI And Verify Using Redfish
