@@ -1109,10 +1109,6 @@ PLDM Get BIOS Attribute
 
     ${pldm_output}=  pldmtool  bios GetBIOSAttributeCurrentValueByHandle -a ${attribute_name}
     [Return]  ${pldm_output}
-    Wait Until Keyword Succeeds  5 min  5 sec  Ping Host  ${OPENBMC_HOST}
-    Redfish.login
-    ${bmc_status}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  Status
-    Should Be Equal  ${bmc_status["State"]}  Enabled
 
 
 Verify Host Power State
