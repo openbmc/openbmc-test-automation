@@ -11,32 +11,20 @@ Documentation  Stress the system using HTX exerciser - bootme option.
 # HTX_LOOP            The number of times to loop HTX.
 
 
-Resource        ../syslib/utils_os.robot
-Resource        ../lib/openbmc_ffdc_utils.robot
-Resource        ../lib/logging_utils.robot
-Resource        ../lib/code_update_utils.robot
-Resource        ../lib/esel_utils.robot
 Resource        ../syslib/resource.robot
+Resource        ../syslib/utils_os.robot
 Library         ../syslib/utils_keywords.py
-Library         ../lib/utils_files.py
-Library         ../lib/logging_utils.py
+Resource        ../lib/openbmc_ffdc_utils.robot
 Library         ../syslib/utils_os.py
 Library         DateTime
 
-Suite Setup     Run Keyword  Start SOL Console Logging
+Suite Setup     Start SOL Console Logging
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 
-
 *** Variables ****
 
-${stack_mode}       skip
 ${rest_keyword}     REST
-
-# Error log Severities to ignore when checking Error Logs.
-@{ESEL_IGNORE_LIST}
-...  xyz.openbmc_project.Logging.Entry.Level.Informational
-
 
 *** Test Cases ***
 
@@ -73,6 +61,14 @@ Run HTX Soft Bootme Exerciser
     ...  Create Default MDT Profile
 
     Run MDT Profile
+
+    # **********************************
+    # HTX bootme_period:
+    #        1 - every 20 minutes
+    #        2 - every 30 minutes
+    #        3 - every hour
+    #        4 - every midnight
+    # **********************************
     Run Soft Bootme  ${BOOTME_PERIOD}
 
     FOR    ${index}    IN RANGE    999999
@@ -113,8 +109,11 @@ Run HTX Soft Bootme Exerciser
 
     Wait Until Keyword Succeeds
     ...   15 min   30 sec   Verify Ping and REST Authentication
+
     Shutdown Bootme
-    Shutdown HTX Exerciser
+
+    # If user needs to keep the HTX running to debug on failure or post processing.
+    Run Keyword If  ${HTX_KEEP_RUNNING} == ${0}  Shutdown HTX Exerciser
 
 
 Test Setup Execution
