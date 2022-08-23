@@ -182,12 +182,13 @@ Verify Error Upon Creating Same Users With Different Privileges
 
     Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
 
+
 Verify Modifying User Attributes
     [Documentation]  Verify modifying user attributes.
     [Tags]  Verify_Modifying_User_Attributes
+
     # Create Redfish users.
     Redfish Create User  admin_user     TestPwd123  Administrator   ${True}
-    Redfish Create User  operator_user  TestPwd123  Operator        ${True}
     Redfish Create User  readonly_user  TestPwd123  ReadOnly        ${True}
 
     # Make sure the new user account does not already exist.
@@ -198,23 +199,34 @@ Verify Modifying User Attributes
     ${payload}=  Create Dictionary  UserName=newadmin_user
     Redfish.Patch  /redfish/v1/AccountService/Accounts/admin_user  body=&{payload}
 
-    # Update operator_user password using Redfish.
-    ${payload}=  Create Dictionary  Password=NewTestPwd123
-    Redfish.Patch  /redfish/v1/AccountService/Accounts/operator_user  body=&{payload}
-
     # Update readonly_user role using Redfish.
-    ${payload}=  Create Dictionary  RoleId=Operator
+    ${payload}=  Create Dictionary  RoleId=Administrator
     Redfish.Patch  /redfish/v1/AccountService/Accounts/readonly_user  body=&{payload}
 
     # Verify users after updating
     Redfish Verify User  newadmin_user  TestPwd123     Administrator   ${True}
-    Redfish Verify User  operator_user  NewTestPwd123  Operator        ${True}
-    Redfish Verify User  readonly_user  TestPwd123     Operator        ${True}
+    Redfish Verify User  readonly_user  TestPwd123     Administrator   ${True}
 
     # Delete created users.
     Redfish.Delete  /redfish/v1/AccountService/Accounts/newadmin_user
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
     Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
+
+
+Verify Modifying Operator User Attributes
+    [Documentation]  Verify modifying operator user attributes.
+    [Tags]  Verify_Modifying_Operator_User_Attributes
+    [Setup]  Run Keywords  Redfish.Login  AND
+    ...  Redfish Create User  operator_user  TestPwd123  Operator  ${True}
+    [Teardown]  Run Keywords  Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
+    ...  AND  Test Teardown Execution
+
+    # Update operator_user password using Redfish.
+    ${payload}=  Create Dictionary  Password=NewTestPwd123
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/operator_user  body=&{payload}
+
+    # Verify users after updating
+    Redfish Verify User  operator_user  NewTestPwd123  Operator        ${True}
+
 
 Verify User Account Locked
     [Documentation]  Verify user account locked upon trying with invalid password.
