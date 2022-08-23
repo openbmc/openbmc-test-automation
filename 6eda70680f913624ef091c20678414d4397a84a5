@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9dd5ac7_5bcd71a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-23T07:42:08Z",
+      "side": 1,
+      "message": "Take this one out",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 35
+      },
+      "revId": "6eda70680f913624ef091c20678414d4397a84a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a744053_efc2d6ac",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-23T07:42:08Z",
+      "side": 1,
+      "message": "Not required",
+      "range": {
+        "startLine": 498,
+        "startChar": 0,
+        "endLine": 498,
+        "endChar": 88
+      },
+      "revId": "6eda70680f913624ef091c20678414d4397a84a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5032643_50621977",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-23T07:42:08Z",
+      "side": 1,
+      "message": "# Example of IPMI sensor command.",
+      "range": {
+        "startLine": 504,
+        "startChar": 6,
+        "endLine": 504,
+        "endChar": 21
+      },
+      "revId": "6eda70680f913624ef091c20678414d4397a84a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcf3de70_085f78d6",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-23T07:42:08Z",
+      "side": 1,
+      "message": "These are not required",
+      "range": {
+        "startLine": 517,
+        "startChar": 0,
+        "endLine": 519,
+        "endChar": 51
+      },
+      "revId": "6eda70680f913624ef091c20678414d4397a84a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b914d0da_fa929284",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-23T07:42:08Z",
+      "side": 1,
+      "message": "not required",
+      "range": {
+        "startLine": 535,
+        "startChar": 0,
+        "endLine": 536,
+        "endChar": 106
+      },
+      "revId": "6eda70680f913624ef091c20678414d4397a84a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99126cb5_3fbcc71c",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-23T07:42:08Z",
+      "side": 1,
+      "message": "# Example of sensor get command.",
+      "range": {
+        "startLine": 539,
+        "startChar": 0,
+        "endLine": 539,
+        "endChar": 27
+      },
+      "revId": "6eda70680f913624ef091c20678414d4397a84a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c927471b_ce6cbf3b",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-23T07:42:08Z",
+      "side": 1,
+      "message": "One space after #. Also align the text like below\n    # Locating sensor record...\n    # Sensor ID              : dcm0_cpu0 (0x41)\n    # Entity ID              : 3.1\n    # Sensor Type (Discrete) : Processor\n    # States Asserted        : Processor\n    #                          [Presence detected]\n    #                          [Disabled]\n\n    ${line}\u003d  Get Lines Containing String  ${get_resp}  Sensor ID\n    ${sensor_id}\u003d  Set Variable  ${line[-5:-1]}",
+      "range": {
+        "startLine": 540,
+        "startChar": 0,
+        "endLine": 545,
+        "endChar": 44
+      },
+      "revId": "6eda70680f913624ef091c20678414d4397a84a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ec96a12_4adffda3",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-23T07:42:08Z",
+      "side": 1,
+      "message": "# Example of output for ${sensor_id} is 0x41.",
+      "range": {
+        "startLine": 550,
+        "startChar": 0,
+        "endLine": 550,
+        "endChar": 44
+      },
+      "revId": "6eda70680f913624ef091c20678414d4397a84a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
