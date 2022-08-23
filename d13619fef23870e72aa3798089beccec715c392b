@@ -22,6 +22,30 @@
       },
       "revId": "d13619fef23870e72aa3798089beccec715c392b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d056460_39acce2e",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-08-23T09:07:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe3cace1_9cd6331d",
+      "range": {
+        "startLine": 384,
+        "startChar": 0,
+        "endLine": 401,
+        "endChar": 10
+      },
+      "revId": "d13619fef23870e72aa3798089beccec715c392b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
