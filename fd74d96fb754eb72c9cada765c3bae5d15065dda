@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a93a91f0_12e4e551",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b353180d_70b9aa11",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 91
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ce3793fc_b6f6d8b8",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -64,6 +88,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb600594_ef08aec6",
+        "filename": "lib/sensor_info_record.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f31d0735_d711df35",
+      "range": {
+        "startLine": 19,
+        "startChar": 7,
+        "endLine": 19,
+        "endChar": 9
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d594d933_51fb3faa",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-07-25T06:07:49Z",
       "side": 1,
       "message": "a",
+      "range": {
+        "startLine": 20,
+        "startChar": 28,
+        "endLine": 20,
+        "endChar": 30
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d91417d_2020c6c9",
+        "filename": "lib/sensor_info_record.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d594d933_51fb3faa",
       "range": {
         "startLine": 20,
         "startChar": 28,
@@ -104,6 +176,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fded42c_5113f523",
+        "filename": "lib/sensor_info_record.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10ac50b9_67bc2bcc",
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39d8bf36_d8c10f16",
@@ -117,6 +207,30 @@
       "writtenOn": "2022-07-25T06:07:49Z",
       "side": 1,
       "message": "I didn\u0027t see any value being updated for this list.",
+      "range": {
+        "startLine": 42,
+        "startChar": 49,
+        "endLine": 42,
+        "endChar": 94
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "389c952a_36e27eed",
+        "filename": "lib/sensor_info_record.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "sometimes some sensors dbus uri won\u0027t be under sensor tree and we also don\u0027t know that whether that sensor should gets listed in that subtree only or it should gets listed under sensor tree. so if any sensor which was not showing under sensor tree will be appended to that list.",
+      "parentUuid": "39d8bf36_d8c10f16",
       "range": {
         "startLine": 42,
         "startChar": 49,
@@ -150,6 +264,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f0f2d65_eb61f35b",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b2eb7b9_b20e76ff",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 45
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9427025f_1f7a7b04",
@@ -163,6 +301,30 @@
       "writtenOn": "2022-07-25T06:07:49Z",
       "side": 1,
       "message": "is",
+      "range": {
+        "startLine": 27,
+        "startChar": 48,
+        "endLine": 27,
+        "endChar": 51
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18c1b8b6_e32d98d7",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9427025f_1f7a7b04",
       "range": {
         "startLine": 27,
         "startChar": 48,
@@ -196,6 +358,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0282344d_7886eda7",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d81b7432_c6da09f9",
+      "range": {
+        "startLine": 28,
+        "startChar": 32,
+        "endLine": 28,
+        "endChar": 35
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd8d2e36_6883bd75",
@@ -209,6 +395,30 @@
       "writtenOn": "2022-07-25T08:32:27Z",
       "side": 1,
       "message": "just a thought, instead of \u0027As\u0027  \u0027if\u0027 or \u0027is\u0027 is more appropriate",
+      "range": {
+        "startLine": 32,
+        "startChar": 28,
+        "endLine": 32,
+        "endChar": 30
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5eaffec_92b72794",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd8d2e36_6883bd75",
       "range": {
         "startLine": 32,
         "startChar": 28,
@@ -242,6 +452,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7103dce_b5c6fdfa",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be7311ab_9f5b7e82",
+      "range": {
+        "startLine": 33,
+        "startChar": 41,
+        "endLine": 33,
+        "endChar": 44
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6696fcd_622ecdd2",
@@ -255,6 +489,30 @@
       "writtenOn": "2022-07-25T08:32:27Z",
       "side": 1,
       "message": "same comment as above",
+      "range": {
+        "startLine": 34,
+        "startChar": 12,
+        "endLine": 34,
+        "endChar": 50
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ebdd5b3_d13b523c",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6696fcd_622ecdd2",
       "range": {
         "startLine": 34,
         "startChar": 12,
@@ -288,6 +546,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb88439e_c99b657a",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03ceff75_6242216c",
+      "range": {
+        "startLine": 36,
+        "startChar": 31,
+        "endLine": 36,
+        "endChar": 34
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c7b4daa_7d515209",
@@ -301,6 +583,30 @@
       "writtenOn": "2022-07-25T08:32:27Z",
       "side": 1,
       "message": "is",
+      "range": {
+        "startLine": 47,
+        "startChar": 47,
+        "endLine": 47,
+        "endChar": 50
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ac834ae_dc3a0e50",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c7b4daa_7d515209",
       "range": {
         "startLine": 47,
         "startChar": 47,
@@ -334,6 +640,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5963689e_c4361b40",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2f324a7_cb93025b",
+      "range": {
+        "startLine": 52,
+        "startChar": 77,
+        "endLine": 52,
+        "endChar": 80
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfcdf300_b2922c70",
@@ -347,6 +677,30 @@
       "writtenOn": "2022-07-25T08:32:27Z",
       "side": 1,
       "message": "which are not",
+      "range": {
+        "startLine": 54,
+        "startChar": 27,
+        "endLine": 54,
+        "endChar": 28
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcd87521_a34df9e8",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfcdf300_b2922c70",
       "range": {
         "startLine": 54,
         "startChar": 27,
@@ -380,6 +734,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b3b0e1c_04263cb4",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54a843d9_c52d74bf",
+      "range": {
+        "startLine": 55,
+        "startChar": 46,
+        "endLine": 55,
+        "endChar": 49
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8519570_422c90fc",
@@ -393,6 +771,30 @@
       "writtenOn": "2022-07-25T08:32:27Z",
       "side": 1,
       "message": "are",
+      "range": {
+        "startLine": 80,
+        "startChar": 41,
+        "endLine": 80,
+        "endChar": 44
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ca17a13_47a04eb8",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8519570_422c90fc",
       "range": {
         "startLine": 80,
         "startChar": 41,
@@ -426,6 +828,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8a2dffc_169f91df",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30182207_4d0d7739",
+      "range": {
+        "startLine": 93,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 38
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c8c235e_74ddcfbd",
@@ -439,6 +865,30 @@
       "writtenOn": "2022-07-25T06:07:49Z",
       "side": 1,
       "message": "Please create separate keywords based on the individual functionality for these and call them here.",
+      "range": {
+        "startLine": 97,
+        "startChar": 1,
+        "endLine": 135,
+        "endChar": 1
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf9699ae_addf02d4",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c8c235e_74ddcfbd",
       "range": {
         "startLine": 97,
         "startChar": 1,
@@ -472,6 +922,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d68cc79_8a213be4",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2736c87a_6e426a75",
+      "range": {
+        "startLine": 139,
+        "startChar": 27,
+        "endLine": 139,
+        "endChar": 30
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15cdc52e_d071249c",
@@ -485,6 +959,30 @@
       "writtenOn": "2022-07-25T06:07:49Z",
       "side": 1,
       "message": "Description of Arguments required. Add wherever applicable.",
+      "range": {
+        "startLine": 175,
+        "startChar": 4,
+        "endLine": 175,
+        "endChar": 53
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2810ddb2_f5a88d3f",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15cdc52e_d071249c",
       "range": {
         "startLine": 175,
         "startChar": 4,
@@ -518,6 +1016,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4625b161_9356ccf0",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "No, It\u0027s the function which will create an dictionary which has sensor name as key and inside that threshold key(LowerCritical, LowerFatal,..etc) as key and respective threshold value as value.\n\nFor example,\n${redfish_sensor_id_threshold_mapping} \u003d {\"sensor_1\" : {\u0027UpperCaution\u0027: 100.0, \u0027UpperCritical\u0027: 122.0}}",
+      "parentUuid": "8a5e6026_e1bf3d54",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 55
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95815e22_2592ee0f",
@@ -531,6 +1053,30 @@
       "writtenOn": "2022-07-25T08:32:27Z",
       "side": 1,
       "message": "lets re-name the dictionary to more meaningful name.",
+      "range": {
+        "startLine": 198,
+        "startChar": 30,
+        "endLine": 198,
+        "endChar": 39
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b484fb8f_66f53477",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95815e22_2592ee0f",
       "range": {
         "startLine": 198,
         "startChar": 30,
@@ -588,6 +1134,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1a1f7ab_e6558d6b",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "683ded97_f141c1e4",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 63
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d62fa4b_aad956ac",
@@ -601,6 +1171,30 @@
       "writtenOn": "2022-07-25T06:07:49Z",
       "side": 1,
       "message": "FOR    ${key}    ${value}    IN    \u0026{DICT}",
+      "range": {
+        "startLine": 210,
+        "startChar": 4,
+        "endLine": 210,
+        "endChar": 58
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cff4d72d_a3707f40",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d62fa4b_aad956ac",
       "range": {
         "startLine": 210,
         "startChar": 4,
@@ -634,6 +1228,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18271dc6_d9e56d42",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4959af0d_2275019e",
+      "range": {
+        "startLine": 259,
+        "startChar": 32,
+        "endLine": 259,
+        "endChar": 41
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e283309c_4532481b",
@@ -647,6 +1265,30 @@
       "writtenOn": "2022-07-25T08:32:27Z",
       "side": 1,
       "message": "if or is",
+      "range": {
+        "startLine": 293,
+        "startChar": 31,
+        "endLine": 293,
+        "endChar": 33
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a974cb32_7f6c5a48",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e283309c_4532481b",
       "range": {
         "startLine": 293,
         "startChar": 31,
@@ -680,6 +1322,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "799d9704_6d6d335a",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47a22cdd_99c6a4e9",
+      "range": {
+        "startLine": 294,
+        "startChar": 47,
+        "endLine": 294,
+        "endChar": 50
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ded6daa_7b19bece",
@@ -693,6 +1359,30 @@
       "writtenOn": "2022-07-25T07:23:34Z",
       "side": 1,
       "message": "Validate Redfish Reading And Threshold Value And Sensor State",
+      "range": {
+        "startLine": 321,
+        "startChar": 0,
+        "endLine": 321,
+        "endChar": 94
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c4bd1da_faf2db3e",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ded6daa_7b19bece",
       "range": {
         "startLine": 321,
         "startChar": 0,
@@ -726,6 +1416,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac53f2ae_66838f32",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd1bb0f6_90545ac6",
+      "range": {
+        "startLine": 363,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 111
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ed831ee_d530bea2",
@@ -739,6 +1453,30 @@
       "writtenOn": "2022-07-25T07:23:34Z",
       "side": 1,
       "message": "can u please mention these info in [Documentation] and just have the keyword name  as \u0027Validate Sensor State For Upper Threshold Values\u0027",
+      "range": {
+        "startLine": 385,
+        "startChar": 0,
+        "endLine": 385,
+        "endChar": 111
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02382e40_b3aee96d",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ed831ee_d530bea2",
       "range": {
         "startLine": 385,
         "startChar": 0,
@@ -772,6 +1510,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd6f25c4_27e57e45",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "859af0d4_ee5f2f7a",
+      "range": {
+        "startLine": 407,
+        "startChar": 0,
+        "endLine": 407,
+        "endChar": 49
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c915cba_976d5e2a",
@@ -785,6 +1547,30 @@
       "writtenOn": "2022-07-25T07:23:34Z",
       "side": 1,
       "message": "Can u please combined \u0027Get Sensor Unit\u0027, \u0027Get Sensor ID\u0027 and \u0027Get Redfish Sensor Reading Value\u0027 keywords.\n\nLets make generic keywords.\n\nwhere ${required_field} can be \u0027ReadingUnits\u0027 or \u0027Reading\u0027 or \u0027Id\u0027\n\nGet Required Redfish Sensor Reading\n\n[Arguments]  ${sensor_uri}  ${required_field}\n\n${sensor_properties}\u003d  Redfish.Get Properties  ${sensor_uri}\n[Return]  ${sensor_properties[${required_field}]}",
+      "range": {
+        "startLine": 459,
+        "startChar": 0,
+        "endLine": 459,
+        "endChar": 15
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55cd4ee5_90cf7018",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c915cba_976d5e2a",
       "range": {
         "startLine": 459,
         "startChar": 0,
@@ -818,6 +1604,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f642384d_ec2aa8ad",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3926ec5b_bd128883",
+      "range": {
+        "startLine": 479,
+        "startChar": 0,
+        "endLine": 479,
+        "endChar": 25
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a304ea9b_598348e9",
@@ -831,6 +1641,24 @@
       "writtenOn": "2022-07-25T08:32:27Z",
       "side": 1,
       "message": "can we club the Health state and reading values into a single function?",
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8e0fa44_e01d58d5",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-08-23T13:38:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a304ea9b_598348e9",
       "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
