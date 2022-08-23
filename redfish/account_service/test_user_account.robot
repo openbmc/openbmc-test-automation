@@ -276,8 +276,30 @@ Verify Admin User Privilege
     [Tags]  Verify_Admin_User_Privilege
 
     Redfish Create User  admin_user  TestPwd123  Administrator  ${True}
-    Redfish Create User  operator_user  TestPwd123  Operator  ${True}
     Redfish Create User  readonly_user  TestPwd123  ReadOnly  ${True}
+
+    Redfish.Logout
+
+    Redfish.Login  admin_user  TestPwd123
+
+    # Change password of 'readonly' user with admin user.
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/readonly_user  body={'Password': 'NewTestPwd123'}
+
+    # Verify modified user.
+    Redfish Verify User  readonly_user  NewTestPwd123  ReadOnly  ${True}
+
+    # Note: Delete user would work here because a root login is
+    # performed as part of "Redfish Verify User" keyword's teardown.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
+
+
+Verify Operator User Role Change Using Admin Privilege User
+    [Documentation]  Verify operator user role change using admin privilege user
+    [Tags]  Verify_Operator_User_Role_Change_Using_Admin_Privilege_User
+
+    Redfish Create User  admin_user  TestPwd123  Administrator  ${True}
+    Redfish Create User  operator_user  TestPwd123  Operator  ${True}
 
     Redfish.Logout
 
@@ -291,18 +313,9 @@ Verify Admin User Privilege
     # Verify modified user.
     Redfish Verify User  operator_user  TestPwd123  Administrator  ${True}
 
-    Redfish.Logout
-    Redfish.Login  admin_user  TestPwd123
-
-    # Change password of 'user' user with admin user.
-    Redfish.Patch  /redfish/v1/AccountService/Accounts/readonly_user  body={'Password': 'NewTestPwd123'}
-
-    # Verify modified user.
-    Redfish Verify User  readonly_user  NewTestPwd123  ReadOnly  ${True}
-
     Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
     Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
+
 
 Verify Operator User Privilege
     [Documentation]  Verify operator user privilege.
