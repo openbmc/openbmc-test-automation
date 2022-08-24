@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4a7b880_8420d939",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-08-24T13:22:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea819efb_2b0dc96d",
+      "range": {
+        "startLine": 391,
+        "startChar": 0,
+        "endLine": 400,
+        "endChar": 7
+      },
+      "revId": "329f0f7a369c92973ee3170531cb5d716db7c9c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f9057db_5fb9742b",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-08-24T12:11:07Z",
       "side": 1,
       "message": "Move this at line 437",
+      "range": {
+        "startLine": 423,
+        "startChar": 0,
+        "endLine": 432,
+        "endChar": 8
+      },
+      "revId": "329f0f7a369c92973ee3170531cb5d716db7c9c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1e0bd01_18e6bcfc",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-08-24T13:22:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f9057db_5fb9742b",
       "range": {
         "startLine": 423,
         "startChar": 0,
