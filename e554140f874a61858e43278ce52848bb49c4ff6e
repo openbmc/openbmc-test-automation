@@ -110,6 +110,30 @@
       },
       "revId": "e554140f874a61858e43278ce52848bb49c4ff6e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "613e65dc_c193098a",
+        "filename": "redfish/dmtf_tools/test_redfishtool_local_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-24T10:49:00Z",
+      "side": 1,
+      "message": "I still sees it in latest commit. Please address it.",
+      "parentUuid": "72ca2420_cbffc6a1",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 267,
+        "endChar": 44
+      },
+      "revId": "e554140f874a61858e43278ce52848bb49c4ff6e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
