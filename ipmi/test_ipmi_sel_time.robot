@@ -6,8 +6,6 @@ Documentation    Module to test IPMI SEL Time functionality.
 ...
 ...              IPMI Raw command variables are defined under
 ...              ../data/ipmi_raw_command_table.py
-...              Python basic functionalities are defined under
-...              ../lib/functions.py imported under ../lib/resource.robot
 ...
 ...              Test the Set/Get SEL Time functionality and compare the result against
 ...              BMC Native command (date).
@@ -42,7 +40,13 @@ Test Teardown    Test Teardown Execution
 *** Variables ***
 
 ${NETWORK_RESTART_TIME}   5s
+@{time_difference_list}  +8760:153:25  -87600:453:120  +175200:40:15  -43800:10:05  +20:35:12  -8760:00:00
 
+# Based on 13th byte of add sel entry command as per ipmi spec 
+# event_dir and event_type variable value needs to be given.
+${sel_no_entry_msg}  SEL has no entries
+${event_type}        Lower Non-critical going low
+${event_dir}         Asserted
 
 *** Test Cases ***
 
@@ -108,7 +112,7 @@ Verify Set SEL Time With Future Date And Time
     [Tags]  Verify_Set_SEL_Time_With_Future_Date_And_Time
 
     # Gets BMC Current Time and Adds 15 minutes and sets the SEL Time.
-    ${sel_time}  ${set_sel_time}=  Identify SEL Time Future DateTime   06:15:00
+    ${sel_time}  ${set_sel_time}=  Identify SEL Time  +06:15:00
 
     # Set SEL Time via IPMI command.
     Set SEL Time Via IPMI  ${sel_time}
@@ -131,7 +135,7 @@ Verify Set SEL Time With Past Date And Time
     [Tags]  Verify_Set_SEL_Time_With_Past_Date_And_Time
 
     # Gets BMC current time and subtracts 1 day and sets the SEL Time.
-    ${sel_time}  ${set_sel_time}=  Identify SEL Time DateTime Delay  1d
+    ${sel_time}  ${set_sel_time}=  Identify SEL Time  -24:00:00
 
     ${status}=  Run Keyword And Return Status  Should Not Contain  ${sel_time}  1969
     ...  msg=Date cannot be less than 1970.
@@ -230,17 +234,17 @@ Verify SEL Time In SEL Entry
 
     # Get Sensor ID from SDR Get "sensor".
     ${sensor_data1}=  Fetch Sensor Details From SDR  ${sensor_name}  Sensor ID
-    ${name_sensor}  ${sensor_number}=  Get Data And Byte From SDR Sensor  ${sensor_data1}
+    ${sensor_number}=  Get Data And Byte From SDR Sensor  ${sensor_data1}
 
     # Get Sensor Type from SDR Get "sensor".
     ${sensor_data2}=  Fetch Sensor Details From SDR  ${sensor_name}  Sensor Type (Threshold)
-    ${sensor_type}  ${sensor_type_id}=  Get Data And Byte From SDR Sensor  ${sensor_data2}
+    ${sensor_type_id}=  Get Data And Byte From SDR Sensor  ${sensor_data2}
 
     # Add SEL Entry.
     ${sel_create_resp}=  Create SEL  ${sensor_type_id}  ${sensor_number}
 
     # Finds the last added sel entry.
-    ${resp}=  Verify Last SEL Added  ${sensor_type}  ${sensor_name}
+    ${resp}=  Verify SEL Added  ${sensor_name}
 
     # Fetches the date of the last added SEL Entry.
     ${sel_entry_date}=  Fetch Added SEL Date  ${resp}
@@ -259,7 +263,7 @@ Verify SEL Time In SEL Entry For Future Date and Time
     Clear The SEL
 
     # Gets BMC Current Time and Adds 15 minutes and sets the SEL Time.
-    ${sel_time}  ${set_sel_time}=  Identify SEL Time Future DateTime   06:15:00
+    ${sel_time}  ${set_sel_time}=  Identify SEL Time  +06:15:00
 
     # Set SEL Time via IPMI command.
     Set SEL Time Via IPMI  ${sel_time}
@@ -281,17 +285,17 @@ Verify SEL Time In SEL Entry For Future Date and Time
 
     # Get Sensor ID from SDR Get "sensor".
     ${sensor_data1}=  Fetch Sensor Details From SDR  ${sensor_name}  Sensor ID
-    ${name_sensor}  ${sensor_number}=  Get Data And Byte From SDR Sensor  ${sensor_data1}
+    ${sensor_number}=  Get Data And Byte From SDR Sensor  ${sensor_data1}
 
     # Get Sensor Type from SDR Get "sensor".
     ${sensor_data2}=  Fetch Sensor Details From SDR  ${sensor_name}  Sensor Type (Threshold)
-    ${sensor_type}  ${sensor_type_id}=  Get Data And Byte From SDR Sensor  ${sensor_data2}
+    ${sensor_type_id}=  Get Data And Byte From SDR Sensor  ${sensor_data2}
 
     # Add SEL Entry.
     ${sel_create_resp}=  Create SEL  ${sensor_type_id}  ${sensor_number}
 
     # Finds the last added sel entry.
-    ${resp}=  Verify Last SEL Added  ${sensor_type}  ${sensor_name}
+    ${resp}=  Verify SEL Added  ${sensor_name}
 
     # Fetches the date of the last added SEL Entry.
     ${sel_entry_date}=  Fetch Added SEL Date  ${resp}
@@ -310,7 +314,7 @@ Verify SEL Time In SEL Entry For Past Date And Time
     Clear The SEL
 
     # Gets BMC Current Time and subtracts 1 day and sets the SEL Time.
-    ${sel_time}  ${set_sel_time}=  Identify SEL Time DateTime Delay  1d
+    ${sel_time}  ${set_sel_time}=  Identify SEL Time  -24:00:00
 
     ${status}=  Run Keyword And Return Status  Should Not Contain  ${sel_time}  1969
     ...  msg=Date cannot be less than 1970
@@ -332,17 +336,17 @@ Verify SEL Time In SEL Entry For Past Date And Time
         ${sensor_name}=  Fetch One Threshold Sensor From Sensor List
         # Get Sensor ID from SDR Get "sensor".
         ${sensor_data1}=  Fetch Sensor Details From SDR  ${sensor_name}  Sensor ID
-        ${name_sensor}  ${sensor_number}=  Get Data And Byte From SDR Sensor  ${sensor_data1}
+        ${sensor_number}=  Get Data And Byte From SDR Sensor  ${sensor_data1}
 
         # Get Sensor Type from SDR Get "sensor".
         ${sensor_data2}=  Fetch Sensor Details From SDR  ${sensor_name}  Sensor Type (Threshold)
-        ${sensor_type}  ${sensor_type_id}=  Get Data And Byte From SDR Sensor  ${sensor_data2}
+        ${sensor_type_id}=  Get Data And Byte From SDR Sensor  ${sensor_data2}
 
         # Add SEL Entry.
         ${sel_create_resp}=  Create SEL  ${sensor_type_id}  ${sensor_number}
 
         # Finds the last added sel entry.
-        ${resp}=  Verify Last SEL Added  ${sensor_type}  ${sensor_name}
+        ${resp}=  Verify SEL Added  ${sensor_name}
 
         # Fetches the date of the last added SEL Entry.
         ${sel_entry_date}=  Fetch Added SEL Date  ${resp}
@@ -361,10 +365,9 @@ Verify Multiple Set SEL Time With Multiple Add SEL Entry
     [Documentation]  Verify SEL time in multiple addition Of SEL entry.
     [Tags]  Verify_Multiple_Set_SEL_Time_With_Multiple_Add_SEL_Entry
 
-    # Gets BMC Current Time and Adds 15 minutes and sets the SEL Time.
-    ${sel_time}  ${set_sel_time}=  Identify SEL Time Future DateTime   06:15:00
+    FOR  ${i}  IN RANGE  6
 
-    FOR  ${i}  IN RANGE  1  6
+      ${sel_time}  ${set_sel_time}=  Identify SEL Time  ${time_difference_list[${i}]}
 
       # Set SEL Time via IPMI command.
       Set SEL Time Via IPMI  ${sel_time}
@@ -377,17 +380,17 @@ Verify Multiple Set SEL Time With Multiple Add SEL Entry
 
       # Get Sensor ID from SDR Get "sensor" and Identify Sensor ID.
       ${sensor_data1}=  Fetch Sensor Details From SDR  ${sensor_name}  Sensor ID
-      ${name_sensor}  ${sensor_number}=  Get Data And Byte From SDR Sensor  ${sensor_data1}
+      ${sensor_number}=  Get Data And Byte From SDR Sensor  ${sensor_data1}
 
       # Get Sensor Type from SDR Get "sensor" and identify Sensor Type.
       ${sensor_data2}=  Fetch Sensor Details From SDR  ${sensor_name}  Sensor Type (Threshold)
-      ${sensor_type}  ${sensor_type_id}=  Get Data And Byte From SDR Sensor  ${sensor_data2}
+      ${sensor_type_id}=  Get Data And Byte From SDR Sensor  ${sensor_data2}
 
       # Add SEL Entry.
       ${sel_create_resp}=  Create SEL  ${sensor_type_id}  ${sensor_number}
 
       # Finds the last added sel entry.
-      ${resp}=  Verify Last SEL Added  ${sensor_type}  ${sensor_name}
+      ${resp}=  Verify SEL Added  ${sensor_name}
 
       # Fetches the date of the last added SEL Entry.
       ${sel_entry_date}=  Fetch Added SEL Date  ${resp}
@@ -471,20 +474,20 @@ Clear The SEL
     Sleep  2s
 
 
-Verify Last SEL Added
-    [Documentation]  Verify last SEL added.
-    [Arguments]  ${sensor_type}  ${sensor_name}
+Verify SEL Added
+    [Documentation]  Verify Added SEL.
+    [Arguments]  ${sensor_name}
 
     # Description of argument(s):
-    # ${sensor_type}         Type of the sensor (say Fan, Temp, etc.,).
-    # ${sensor_name}         Name of the sensor.
+    # sensor_name         Name of the sensor.
 
-    ${resp}=  Run IPMI Standard Command  sel elist last 1
-    Run Keywords  Should Contain  ${resp}  ${sensor_type} ${sensor_name}  AND
-    ...  Should Contain  ${resp}  Asserted  msg=Add SEL Entry failed.
-    Should Not Contain  ${resp}  reset/cleared
+    ${resp}=  Run IPMI Standard Command  sel elist
+    Should Not Contain  ${resp}  ${sel_no_entry_msg}
+    ${get_sel_entry}=  Get Lines Containing String  ${resp}  ${sensor_name}
+    ${sel_entry}=  Get Lines Containing String  ${get_sel_entry}  ${event_type}
+    Should Contain  ${sel_entry}  ${event_dir}  msg=Add SEL Entry failed.
 
-    [Return]  ${resp}
+    [Return]  ${sel_entry}
 
 
 Check Current Date Time Via IPMI
@@ -552,40 +555,30 @@ Get Time Difference
     [Return]  ${diff}
 
 
-Identify SEL Time Future DateTime
-    [Documentation]  Identify SEL Time Future DateTime.
+Identify SEL Time
+    [Documentation]  Modify SEL Time From BMC For Set Sel Time Command.
     [Arguments]  ${time}
 
     # Description of argument(s):
-    # ${time}             Can be any number of hours or minutes in format %H:%M:%S.
+    # time             Can be any number of hours or minutes in format %H:%M:%S.
 
     # Gets BMC current date via date command.
     ${current_date}=  Get Current Date from BMC
 
-    ${datetime} =  Add Time To Date
-    ...  ${current_date}  ${time}  result_format=%m/%d/%Y %H:%M:%S  date_format=%m/%d/%Y %H:%M:%S
+    ${modifying_date_status}=  Run Keyword And Return Status  Should Contain  ${time}  +
+
+    ${date_time}=  Set Variable IF
+    ...  ${modifying_date_status} == True  ${time.split("+")[-1]}
+    ...  ${modifying_date_status} == False  ${time.split("-")[-1]}
+
+    ${datetime} =  Run Keyword IF  ${modifying_date_status} == True
+    ...    Add Time To Date
+    ...    ${current_date}  ${date_time}  result_format=%m/%d/%Y %H:%M:%S  date_format=%m/%d/%Y %H:%M:%S
+    ...  ELSE IF  ${modifying_date_status} == False
+    ...    Subtract Time From Date
+    ...    ${current_date}  ${date_time}  result_format=%m/%d/%Y %H:%M:%S  date_format=%m/%d/%Y %H:%M:%S
 
     #Set SEL Time.
-    ${quoted_date}=  Fetch Date  ${datetime}
-
-    [Return]  ${quoted_date}  ${datetime}
-
-
-Identify SEL Time DateTime Delay
-    [Documentation]  Identify SEL Time DateTime Delay by subtracting given date.
-    [Arguments]  ${days}
-
-    # Description of argument(s):
-    # ${days}             Can be any days (say 3d).
-
-    # Gets BMC current date via date command.
-    ${current_date}=  Get Current Date from BMC
-
-    ${datetime}=  Subtract Time From Date
-    ...  ${current_date}  ${days}  result_format=%m/%d/%Y %H:%M:%S  date_format=%m/%d/%Y %H:%M:%S
-
-    # Format the sel time.
-    # function call from lib/utils.py.
     ${quoted_date}=  Fetch Date  ${datetime}
 
     [Return]  ${quoted_date}  ${datetime}
