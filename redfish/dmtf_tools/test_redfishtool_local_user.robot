@@ -29,8 +29,8 @@ Verify Redfishtool Create Users
     [Tags]  Verify_Redfishtool_Create_Users
     [Teardown]  Redfishtool Delete User  "UserT100"
 
-    Redfishtool Create User  "UserT100"  "TestPwd123"  "Operator"  true
-    Redfishtool Verify User  "UserT100"  "Operator"
+    Redfishtool Create User  "UserT100"  "TestPwd123"  "ReadOnly"  true
+    Redfishtool Verify User  "UserT100"  "ReadOnly"
 
 
 Verify Redfishtool Modify Users
@@ -38,7 +38,7 @@ Verify Redfishtool Modify Users
     [Tags]  Verify_Redfishtool_Modify_Users
     [Teardown]  Redfishtool Delete User  "UserT100"
 
-    Redfishtool Create User  "UserT100"  "TestPwd123"  "Operator"  true
+    Redfishtool Create User  "UserT100"  "TestPwd123"  "ReadOnly"  true
     Redfishtool Update User Role  "UserT100"  "Administrator"
     Redfishtool Verify User  "UserT100"  "Administrator"
 
@@ -47,7 +47,7 @@ Verify Redfishtool Delete Users
     [Documentation]  Delete user via Redfishtool and verify.
     [Tags]  Verify_Redfishtool_Delete_Users
 
-    Redfishtool Create User  "UserT100"  "TestPwd123"  "Operator"  true
+    Redfishtool Create User  "UserT100"  "TestPwd123"  "ReadOnly"  true
     Redfishtool Delete User  "UserT100"
     ${status}=  Redfishtool Verify User Name Exists  "UserT100"
     Should Be True  ${status} == False
@@ -57,7 +57,7 @@ Verify Redfishtool Login With Deleted Redfish Users
     [Documentation]  Verify login with deleted user via Redfishtool.
     [Tags]  Verify_Redfishtool_Login_With_Deleted_Redfish_Users
 
-    Redfishtool Create User  "UserT100"  "TestPwd123"  "Operator"  true
+    Redfishtool Create User  "UserT100"  "TestPwd123"  "ReadOnly"  true
     Redfishtool Delete User  "UserT100"
     Redfishtool Access Resource  /redfish/v1/AccountService/Accounts  "UserT100"  "TestPwd123"
     ...  ${HTTP_UNAUTHORIZED}
@@ -68,7 +68,7 @@ Verify Redfishtool Error Upon Creating Same Users With Different Privileges
     [Tags]  Verify_Redfishtool_Error_Upon_Creating_Same_Users_With_Different_Privileges
     [Teardown]  Redfishtool Delete User  "UserT100"
 
-    Redfishtool Create User  "UserT100"  "TestPwd123"  "Operator"  true
+    Redfishtool Create User  "UserT100"  "TestPwd123"  "ReadOnly"  true
     Redfishtool Create User  "UserT100"  "TestPwd123"  "Administrator"  true
     ...  expected_error=${HTTP_BAD_REQUEST}
 
@@ -82,7 +82,7 @@ Verify Redfishtool Admin User Privilege
     Redfishtool Create User  "UserT100"  "TestPwd123"  "Administrator"  true
 
     # Verify if a user can be added by admin
-    Redfishtool Create User  "UserT101"  "TestPwd123"  "Operator"  true  "UserT100"  "TestPwd123"
+    Redfishtool Create User  "UserT101"  "TestPwd123"  "ReadOnly"  true  "UserT100"  "TestPwd123"
 
 
 Verify Redfishtool ReadOnly User Privilege
@@ -123,8 +123,8 @@ Verify Minimum Password Length For Redfish User
     [Tags]  Verify_Minimum_Password_Length_For_Redfish_User
     [Teardown]  Redfishtool Delete User  "UserT100"
 
-    Redfishtool Create User  "UserT100"  "TestPwd"  "Operator"  true  expected_error=${HTTP_BAD_REQUEST}
-    Redfishtool Create User  "UserT100"  "TestPwd1"  "Operator"  true
+    Redfishtool Create User  "UserT100"  "TestPwd"  "ReadOnly"  true  expected_error=${HTTP_BAD_REQUEST}
+    Redfishtool Create User  "UserT100"  "TestPwd1"  "ReadOnly"  true
 
 
 Verify Create User Without Enabling
@@ -132,7 +132,7 @@ Verify Create User Without Enabling
     [Tags]  Verify_Create_User_Without_Enabling
     [Teardown]  Redfishtool Delete User  "UserT100"
 
-    Redfishtool Create User  "UserT100"  "TestPwd123"  "Operator"  false
+    Redfishtool Create User  "UserT100"  "TestPwd123"  "ReadOnly"  false
     Redfishtool Access Resource  /redfish/v1/AccountService/Accounts  "UserT100"  "TestPwd123"
     ...  ${HTTP_UNAUTHORIZED}
 
@@ -247,6 +247,24 @@ Redfishtool Verify User Name Exists
     ...  /redfish/v1/AccountService/Accounts/${user_name}
 
     [return]  ${status}
+
+
+Redfishtool GetAttribute
+    [Documentation]  Execute redfishtool for GET operation.
+    [Arguments]  ${uri}  ${Attribute}  ${cmd_args}=${root_cmd_args}  ${expected_error}=""
+
+    # Description of argument(s):
+    # uri             URI for GET operation (e.g. /redfish/v1/AccountService/Accounts/).
+    # Attribute       The specific attribute to be retrieved with the URI.
+    # cmd_args        Commandline arguments.
+    # expected_error  Expected error optionally provided in testcase (e.g. 401 /
+    #                 authentication error, etc. ).
+
+    ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd_args} GET ${uri}
+    Run Keyword If  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
+    ${json_object}=  To JSON  ${cmd_output}
+
+    [Return]  ${json_object["${Attribute}"]}
 
 
 Suite Setup Execution
