@@ -560,7 +560,7 @@ Get Data And Byte From SDR Sensor
     ${sensor_hex}=  Replace String  ${sensor_detail[1]}  )  ${EMPTY}
     ${sensor_hex}=  Zfill Data  ${sensor_hex}  2
 
-    [Return]  ${field_data}  ${sensor_hex}
+    [Return]  ${sensor_hex}
 
 
 Get Current Date from BMC
