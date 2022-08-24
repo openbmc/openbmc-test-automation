@@ -22,6 +22,30 @@
       },
       "revId": "4c45020416d0a7b5425d4847e1b34cd91cfbd1a4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7854c42_f02b8551",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-24T08:30:52Z",
+      "side": 1,
+      "message": "Actually we do Redfish logout at the end of \"Redfish Verify User\" keyword. And that the reason we dont face any issue while executing this test.",
+      "parentUuid": "f0c83165_3402bab3",
+      "range": {
+        "startLine": 291,
+        "startChar": 4,
+        "endLine": 292,
+        "endChar": 69
+      },
+      "revId": "4c45020416d0a7b5425d4847e1b34cd91cfbd1a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
