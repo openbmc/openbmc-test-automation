@@ -16,6 +16,24 @@
       "message": "why are we skipping the sensors, if an sensor is not having reading value.",
       "revId": "399f5478916d4e618bf057ee9aa09d2103a98ce0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fbae23e_2438c399",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-08-24T09:31:23Z",
+      "side": 1,
+      "message": "Now making use of \"Presence detected\" in sdr elist command to get the available sensors instead of reading value.\nThank you.",
+      "parentUuid": "17b19c50_78890841",
+      "revId": "399f5478916d4e618bf057ee9aa09d2103a98ce0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
