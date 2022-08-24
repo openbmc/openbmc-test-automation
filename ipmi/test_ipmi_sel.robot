@@ -9,6 +9,14 @@ Variables        ../data/ipmi_raw_cmd_table.py
 Test Setup       Test Setup Execution
 Test Teardown    FFDC On Test Case Fail
 
+*** Variables ***
+
+# Based on 13th byte of add SEL entry command as per IPMI spec
+# event_dir and event_type variable value needs to be given.
+${sel_no_entry_msg}  SEL has no entries
+${event_type}        Lower Non-critical going low
+${event_dir}         Asserted
+
 *** Test Cases ***
 
 Verify IPMI SEL Version
@@ -70,11 +78,11 @@ Verify Add SEL Entry For Any Random Sensor
 
     # Get Sensor ID from SDR get "sensor".
     ${sensor_data1}=  Fetch Sensor Details From SDR  ${sensor_name}  Sensor ID
-    ${name_sensor}  ${sensor_number}=  Get Data And Byte From SDR Sensor  ${sensor_data1}
+    ${sensor_number}=  Get Bytes From SDR Sensor  ${sensor_data1}
 
     # Get Sensor Type from SDR get "sensor".
     ${sensor_data2}=  Fetch Sensor Details From SDR  ${sensor_name}  Sensor Type (Threshold)
-    ${sensor_type}  ${sensor_type_id}=  Get Data And Byte From SDR Sensor  ${sensor_data2}
+    ${sensor_type_id}=  Get Bytes From SDR Sensor  ${sensor_data2}
 
     # Add SEL Entry.
     # ${sel_entry_id} is the Record ID for added record (LSB First).
@@ -82,15 +90,17 @@ Verify Add SEL Entry For Any Random Sensor
     ${sel_entry_id}=  Split String  ${sel_create_resp}
 
     # Get last SEL entry.
-    ${resp}=  Run IPMI Standard Command  sel elist last 1
+    ${resp}=  Run IPMI Standard Command  sel elist
+    Should Not Contain  ${resp}  ${sel_no_entry_msg}
 
-    # Output of the Sel elist last 1.
+    # Output of the Sel elist.
     # Below example is a continuous line statement.
     #    N | MM/DD/YYYY | HH:MM:SS | Sensor_Type Sensor_Name |
     #    Lower Non-critical going low  | Asserted | Reading 0.
 
-    Run Keywords  Should Contain  ${resp}  ${sensor_type} ${sensor_name}  AND
-    ...  Should Contain  ${resp}  Asserted  msg=Add SEL Entry failed.
+    ${get_sel_entry}=  Get Lines Containing String  ${resp}  ${sensor_name}
+    ${sel_entry}=  Get Lines Containing String  ${get_sel_entry}  ${event_type}
+    Should Contain  ${sel_entry}  ${event_dir}  msg=Add SEL Entry failed.
 
     # Get SEL Entry IPMI Raw Command.
     ${entry}=  Get SEL Entry Via IPMI  ${sel_entry_id[0]}  ${sel_entry_id[1]}
@@ -148,11 +158,11 @@ Verify IPMI SEL Most Recent Addition Timestamp
 
         # Get Sensor ID from SDR Get "sensor" and Identify Sensor ID.
         ${sensor_data1}=  Fetch Sensor Details From SDR  ${sensor_name}  Sensor ID
-        ${name_sensor}  ${sensor_number}=  Get Data And Byte From SDR Sensor  ${sensor_data1}
+        ${sensor_number}=  Get Bytes From SDR Sensor  ${sensor_data1}
 
         # Get Sensor Type from SDR Get "sensor" and Identify Sensor Type.
         ${sensor_data2}=  Fetch Sensor Details From SDR  ${sensor_name}  Sensor Type (Threshold)
-        ${sensor_type}  ${sensor_type_id}=  Get Data And Byte From SDR Sensor  ${sensor_data2}
+        ${sensor_type_id}=  Get Bytes From SDR Sensor  ${sensor_data2}
 
         # Add SEL Entry.
         ${sel_create_resp}=  Create SEL  ${sensor_type_id}  ${sensor_number}

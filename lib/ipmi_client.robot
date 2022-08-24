@@ -545,7 +545,7 @@ Fetch Sensor Details From SDR
     [Return]  ${setting_status}
 
 
-Get Data And Byte From SDR Sensor
+Get Bytes From SDR Sensor
     [Documentation]  Fetch the Field Data and hexadecimal values from given details.
     [Arguments]  ${sensor_detail}
 
@@ -555,12 +555,10 @@ Get Data And Byte From SDR Sensor
     #                          ${sensor_detail} will be "Sensor ID : SENSOR_1 (0xHH)"
 
     ${sensor_detail}=  Split String  ${sensor_detail}  (0x
-    ${field_data}=  Set Variable  ${sensor_detail[0]}
-    ${field_data}=  Remove Whitespace  ${field_data}
     ${sensor_hex}=  Replace String  ${sensor_detail[1]}  )  ${EMPTY}
     ${sensor_hex}=  Zfill Data  ${sensor_hex}  2
 
-    [Return]  ${field_data}  ${sensor_hex}
+    [Return]  ${sensor_hex}
 
 
 Get Current Date from BMC
