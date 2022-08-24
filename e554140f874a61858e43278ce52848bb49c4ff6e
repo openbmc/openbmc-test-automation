@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c950a9ae_9b4260cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-24T06:42:37Z",
+      "side": 1,
+      "message": "Update commit message with latest format for commit message. Example - https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/51071",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 39
+      },
+      "revId": "e554140f874a61858e43278ce52848bb49c4ff6e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4a8a381_18f3b174",
+        "filename": "redfish/dmtf_tools/test_redfishtool_local_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-24T06:42:37Z",
+      "side": 1,
+      "message": "I dont see that this keyword has been used any place above. If it is required for upcoming changes, please push it as a separate commit.",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 267,
+        "endChar": 44
+      },
+      "revId": "e554140f874a61858e43278ce52848bb49c4ff6e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
