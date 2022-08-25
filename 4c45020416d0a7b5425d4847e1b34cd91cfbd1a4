@@ -46,6 +46,30 @@
       },
       "revId": "4c45020416d0a7b5425d4847e1b34cd91cfbd1a4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bfb49be_61170edb",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-25T12:37:33Z",
+      "side": 1,
+      "message": "I see that we have two keyword with the same name. The one used here has the logout in the teardown. Please refer below. I have added a note for the same.\n\nVerify Redfish User Login\n    [Documentation]  Verify Redfish login with given user id.\n    [Teardown]  Run Keywords  Run Keyword And Ignore Error  Redfish.Logout  AND  Redfish.Login\n    [Arguments]   ${username}  ${password}",
+      "parentUuid": "b7854c42_f02b8551",
+      "range": {
+        "startLine": 291,
+        "startChar": 4,
+        "endLine": 292,
+        "endChar": 69
+      },
+      "revId": "4c45020416d0a7b5425d4847e1b34cd91cfbd1a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
