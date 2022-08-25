@@ -34,6 +34,24 @@
       "parentUuid": "17b19c50_78890841",
       "revId": "399f5478916d4e618bf057ee9aa09d2103a98ce0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6646eb56_2aef8c55",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-08-25T09:27:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7fbae23e_2438c399",
+      "revId": "399f5478916d4e618bf057ee9aa09d2103a98ce0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
