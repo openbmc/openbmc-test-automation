@@ -6,7 +6,7 @@ Resource         ../../lib/gui_resource.robot
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/protocol_setting_utils.robot
 Resource         ../lib/common_utils.robot
-Suite Setup      Launch Browser And Login GUI
+Suite Setup      Run Keywords  Launch Browser And Login GUI  AND  Redfish.Login
 Suite Teardown   Close Browser
 Test Setup       Test Setup Execution
 
@@ -68,7 +68,7 @@ Enable SSH Via GUI And Verify
     [Tags]  Enable_SSH_Via_GUI_And_Verify
 
     Set Policy Via GUI  SSH  Enabled
-    Wait Until Keyword Succeeds  10 sec  5 sec  Open Connection And Login
+    Wait Until Keyword Succeeds  18 sec  3 sec  Open Connection And Login
 
 
 Disable SSH Via GUI And Verify
@@ -76,7 +76,7 @@ Disable SSH Via GUI And Verify
     ...  verify that SSH to BMC stops working after disabling SSH.
     [Tags]  Disable_SSH_Via_GUI_And_Verify
     [Teardown]  Run Keywords  Enable SSH Protocol  ${True}  AND
-    ...  Wait Until Keyword Succeeds  30 sec  10 sec  Open Connection And Login
+    ...  Wait Until Keyword Succeeds  30 sec  15 sec  Open Connection And Login
 
     Set Policy Via GUI  SSH  Disabled
 
@@ -95,7 +95,7 @@ Disable IPMI Via GUI And Verify
     Set Policy Via GUI  IPMI  Disabled
 
     ${status}=  Run Keyword And Return Status
-    ...  Wait Until Keyword Succeeds  10 sec  5 sec  Run IPMI Standard Command  sel info
+    ...  Wait Until Keyword Succeeds  18 sec  3 sec  Run IPMI Standard Command  sel info
 
     Should Be Equal As Strings  ${status}  False
     ...  msg=IPMI command is working after disabling IPMI.
@@ -107,7 +107,7 @@ Enable IPMI Via GUI And Verify
     [Tags]  Enable_IPMI_Via_GUI_And_Verify
 
     Set Policy Via GUI  IPMI  Enabled
-    Wait Until Keyword Succeeds  10 sec  5 sec  Run IPMI Standard Command  sel info
+    Wait Until Keyword Succeeds  18 sec  3 sec  Run IPMI Standard Command  sel info
 
 
 Enable SSH Via GUI And Verify Persistency On BMC Reboot
@@ -146,7 +146,7 @@ Disable SSH Via GUI And Verify Persistency On BMC Reboot
     Reboot BMC via GUI
 
     ${status}=  Run Keyword And Return Status
-    ...  Wait Until Keyword Succeeds  10 sec  5 sec  Open Connection And Login
+    ...  Wait Until Keyword Succeeds  18 sec  3 sec  Open Connection And Login
 
     Should Be Equal As Strings  ${status}  False
     ...  msg=SSH login still working after disabling SSH.
@@ -164,7 +164,7 @@ Disable IPMI Via GUI And Verify Persistency On BMC Reboot
     Reboot BMC via GUI
 
     ${status}=  Run Keyword And Return Status
-    ...  Wait Until Keyword Succeeds  10 sec  5 sec  Run IPMI Standard Command  sel info
+    ...  Wait Until Keyword Succeeds  18 sec  3 sec  Run IPMI Standard Command  sel info
 
     Should Be Equal As Strings  ${status}  False
     ...  msg=IPMI command is working after disabling IPMI.
@@ -177,7 +177,7 @@ Test Setup Execution
 
     Click Element  ${xpath_secuity_and_accesss_menu}
     Click Element  ${xpath_policies_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  policies
+    Wait Until Keyword Succeeds  30 sec  15 sec  Location Should Contain  policies
 
 
 Set Policy Via GUI
