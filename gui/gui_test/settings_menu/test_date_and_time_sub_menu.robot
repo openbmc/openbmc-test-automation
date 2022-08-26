@@ -122,3 +122,5 @@ Navigate To Date and Time Page
     Click Element  ${xpath_settings_menu}
     Click Element  ${xpath_date_time_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  date-time
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+
