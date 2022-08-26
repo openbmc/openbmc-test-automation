@@ -76,7 +76,7 @@ class gui_variables():
     xpath_confirm_button = "//button[contains(text(),'Confirm')]"
     xpath_cancel_button = "//button[contains(text(),'Cancel')]"
     xpath_add_button = "//button[normalize-space(text())='Add']"
-    xpath_page_loading_progress_ba = "//*[@aria-label='Page loading progress bar']"
+    xpath_page_loading_progress_bar = "//*[@aria-label='Page loading progress bar']"
     # Reboot sub meanu
     xpath_reboot_bmc_heading = "//h1[text()='Reboot BMC']"
     xpath_reboot_bmc_button = "//button[contains(text(),'Reboot BMC')]"
