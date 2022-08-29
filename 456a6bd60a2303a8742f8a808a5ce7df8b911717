@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e01b0ed1_dd2a09ff",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1001509
+      },
+      "writtenOn": "2022-08-29T12:22:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d141efb4_f1e438ca",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 1
+      },
+      "revId": "456a6bd60a2303a8742f8a808a5ce7df8b911717",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3bee8ad0_1ebee797",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-08-29T12:01:40Z",
       "side": 1,
       "message": "Use from lib/resurce.robot. Replace 18 \u0026 3 with those values.\n${NETWORK_RETRY_TIME}      \n${NETWORK_TIMEOUT}",
+      "revId": "456a6bd60a2303a8742f8a808a5ce7df8b911717",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "538073ac_980774b7",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1001509
+      },
+      "writtenOn": "2022-08-29T12:22:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3bee8ad0_1ebee797",
       "revId": "456a6bd60a2303a8742f8a808a5ce7df8b911717",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
