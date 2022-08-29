@@ -1,0 +1,532 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49334392_8d15caca",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "Test suite for IPMI default threshold sensor validation.",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 58
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "098cb90b_ab25101f",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "Should this be  - Default_Sensor_Validation",
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95b446c9_e596812b",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "One line or two line space after *** Test Case *** section",
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f669a6e_762697bf",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "Check Reading Value Available in IPMI",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 41
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a9216fa_13f55b9d",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "Check if reading value is not NA for IPMI sensor command.",
+      "range": {
+        "startLine": 54,
+        "startChar": 21,
+        "endLine": 54,
+        "endChar": 86
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62b30be2_d6581f60",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "Compare IPMI Sensor And D-Bus Threshold Values ?",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 54
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7be70e5f_fd09dbd1",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "Simply -- Validate sensor health state in IPMI sensor command.",
+      "range": {
+        "startLine": 67,
+        "startChar": 21,
+        "endLine": 67,
+        "endChar": 92
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52758b97_6b11a10b",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "such a long keyword of length 91\n\nplease cut it down\n\nCompare IPMI Reading And Threshold Values And Validate Sensor State",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 95
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a737249_47389d80",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "which are",
+      "range": {
+        "startLine": 74,
+        "startChar": 40,
+        "endLine": 74,
+        "endChar": 49
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38220180_325d01b6",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "Check Default Threshold Values Alignment As Per IPMI Spec\n\ncorrect alligned-- aligned",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 52
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccb2252e_6000a4da",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "Simplify keyword title as - Validate Default Threshold Values Alignment As Per IPMI Spec\n\nand create [Template] for the keyword and assign the values in the test body.",
+      "range": {
+        "startLine": 97,
+        "startChar": 4,
+        "endLine": 97,
+        "endChar": 68
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74241169_97f2f363",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "one line space after *** Keyword ***",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 16
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ace84402_c82872b6",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "Create a dbus URI dictionary, sensor list which are not mapped in sensor tree and a list containing threshold with sensor name.",
+      "range": {
+        "startLine": 101,
+        "startChar": 20,
+        "endLine": 101,
+        "endChar": 99
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ef8f873_2b5ac105",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "Can u please provide some comments in the keyword body tough to understand the flow",
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20ccd53a_8e4ae1c7",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "Add doc as per the keyword title",
+      "range": {
+        "startLine": 171,
+        "startChar": 20,
+        "endLine": 171,
+        "endChar": 41
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ab224b9_b6019eef",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "can u mention how are sensor threshold values are returned like list or dict..\n\n-- In variable names can u mention threshold as th ? reduce the variable name length?\n\n-- similarly recoverable can u mention recov ?\n\n-- Can u give example output for the dict that is generated from this keyword",
+      "range": {
+        "startLine": 187,
+        "startChar": 21,
+        "endLine": 187,
+        "endChar": 49
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a412dd8_d7c15532",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "mention the dict is returned",
+      "range": {
+        "startLine": 240,
+        "startChar": 21,
+        "endLine": 240,
+        "endChar": 51
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6735afce_ab4eb907",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "please change the doc as per the keyword title",
+      "range": {
+        "startLine": 285,
+        "startChar": 20,
+        "endLine": 285,
+        "endChar": 90
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b15fc8a0_3ef88895",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "dont use was or were.. just say are\n\nmessage\u003dThreshold values are displayed wrong",
+      "range": {
+        "startLine": 298,
+        "startChar": 34,
+        "endLine": 298,
+        "endChar": 37
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc1757d1_241968f4",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "Can not relate keyword title with doc",
+      "range": {
+        "startLine": 300,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 36
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c60e6df_1eb5bc32",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "for Nvme and volt",
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7f33b0a_f71bf653",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "message\u003dThreshold values are displayed wrong",
+      "range": {
+        "startLine": 330,
+        "startChar": 18,
+        "endLine": 330,
+        "endChar": 53
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df5c2c75_1940ad15",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "what is other sensor threshold values ?",
+      "range": {
+        "startLine": 332,
+        "startChar": 0,
+        "endLine": 332,
+        "endChar": 37
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8089b4b0_0e9577f2",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T11:03:56Z",
+      "side": 1,
+      "message": "Get the list of the sensors IDs which are do not have single threshold value.",
+      "range": {
+        "startLine": 441,
+        "startChar": 21,
+        "endLine": 441,
+        "endChar": 28
+      },
+      "revId": "7b0d6bbe8058a8ff317195e98c4f1e42e9f418bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
