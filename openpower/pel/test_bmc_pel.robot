@@ -675,6 +675,8 @@ Error Logging Rotation Policy
     #                                     log type when maximum count/log size is reached.
     #                                     The maximum error log count is 3000.
 
+    Redfish.Login
+
     # Initially remove all logs. Purging is done to ensure that, only specific logs are present
     # in BMC during the test.
     Redfish Purge Event Log
