@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "971bc677_313e3d4c",
+        "filename": "data/sensor_details.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T12:34:38Z",
+      "side": 1,
+      "message": "Simply \n\nOpen BMC server model should be declared in resource.robot",
+      "range": {
+        "startLine": 5,
+        "startChar": 19,
+        "endLine": 5,
+        "endChar": 101
+      },
+      "revId": "deb40c8030cdd9670c31def0cb132340f06a393c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "399d97ac_780db9b6",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T12:34:38Z",
+      "side": 1,
+      "message": "description is not present for all the api\u0027s in this lib file.. please add it.",
+      "range": {
+        "startLine": 8,
+        "startChar": 30,
+        "endLine": 8,
+        "endChar": 64
+      },
+      "revId": "deb40c8030cdd9670c31def0cb132340f06a393c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "394f648c_4b640ed4",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T12:34:38Z",
+      "side": 1,
+      "message": "As mentioned below,",
+      "range": {
+        "startLine": 13,
+        "startChar": 3,
+        "endLine": 13,
+        "endChar": 28
+      },
+      "revId": "deb40c8030cdd9670c31def0cb132340f06a393c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3acb800d_b1954512",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T12:34:38Z",
+      "side": 1,
+      "message": "Instead of saying dot can we say decimal format?\n\nReading value is in decimal format.\ne.g: 10.34\n\nValue before dot is considered as an integer reading value and after dot is considered as fractional reading value.",
+      "range": {
+        "startLine": 34,
+        "startChar": 21,
+        "endLine": 34,
+        "endChar": 24
+      },
+      "revId": "deb40c8030cdd9670c31def0cb132340f06a393c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56cc2683_93c5aee0",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T12:34:38Z",
+      "side": 1,
+      "message": "please change to \u0027is\u0027 @50, @55",
+      "range": {
+        "startLine": 50,
+        "startChar": 86,
+        "endLine": 50,
+        "endChar": 90
+      },
+      "revId": "deb40c8030cdd9670c31def0cb132340f06a393c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "534b5f9b_cf2c6126",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T12:34:38Z",
+      "side": 1,
+      "message": "is of size\n\nchange 16bytes to 16 bytes.. where ever applicable",
+      "range": {
+        "startLine": 65,
+        "startChar": 68,
+        "endLine": 65,
+        "endChar": 71
+      },
+      "revId": "deb40c8030cdd9670c31def0cb132340f06a393c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30c07e9d_7901dbda",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-08-29T12:34:38Z",
+      "side": 1,
+      "message": "If sensor name is more than 16 bytes then truncate sensor name to 16 bytes  and return decoded sensor name else return the decoded sensor name as it is.",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 95
+      },
+      "revId": "deb40c8030cdd9670c31def0cb132340f06a393c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
