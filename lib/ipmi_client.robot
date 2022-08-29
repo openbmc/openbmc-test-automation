@@ -502,25 +502,25 @@ Create SEL
     [Return]  ${resp}
 
 
-Fetch Any Sensor From Sensor List
-    [Documentation]  Fetch any sensor name randomly from Sensor list.
+Fetch One Threshold Sensor From Sensor List
+    [Documentation]  Fetch one threshold sensor randomly from Sensor list.
 
-    @{tmp_list}=  Create List
+    @{sensor_name_list}=  Create List
 
     ${resp}=  Run IPMI Standard Command  sensor
-    @{sensor_list_lines}=  Split To Lines  ${resp}
+    @{sensor_list}=  Split To Lines  ${resp}
 
     # Omit the discrete sensor and create an threshold sensor name list
-    FOR  ${sensor}  IN  @{sensor_list_lines}
+    FOR  ${sensor}  IN  @{sensor_list}
       ${discrete_sensor_status}=  Run Keyword And Return Status  Should Contain  ${sensor}  discrete
       Continue For Loop If  '${discrete_sensor_status}' == 'True'
       ${sensor_details}=  Split String  ${sensor}  |
       ${get_sensor_name}=  Get From List  ${sensor_details}  0
       ${sensor_name}=  Set Variable  ${get_sensor_name.strip()}
-      Append To List  ${tmp_list}  ${sensor_name}
+      Append To List  ${sensor_name_list}  ${sensor_name}
     END
 
-    ${random_sensor_name}=  Evaluate  random.choice(${tmp_list})  random
+    ${random_sensor_name}=  Evaluate  random.choice(${sensor_name_list})  random
 
     [Return]  ${random_sensor_name}
 
