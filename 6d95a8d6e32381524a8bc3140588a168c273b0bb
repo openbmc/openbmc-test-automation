@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9521eb2d_41cba840",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001509
+      },
+      "writtenOn": "2022-08-29T13:42:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fba0720e_95ef0fe0",
+      "range": {
+        "startLine": 14,
+        "startChar": 17,
+        "endLine": 14,
+        "endChar": 18
+      },
+      "revId": "6d95a8d6e32381524a8bc3140588a168c273b0bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7230c991_fd4f5f0f",
@@ -61,6 +85,30 @@
       "writtenOn": "2022-08-29T12:38:24Z",
       "side": 1,
       "message": "replace all places where 18s \u0026 3s are used",
+      "range": {
+        "startLine": 97,
+        "startChar": 38,
+        "endLine": 97,
+        "endChar": 40
+      },
+      "revId": "6d95a8d6e32381524a8bc3140588a168c273b0bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ab4d46f_4c16e002",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1001509
+      },
+      "writtenOn": "2022-08-29T13:42:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7230c991_fd4f5f0f",
       "range": {
         "startLine": 97,
         "startChar": 38,
