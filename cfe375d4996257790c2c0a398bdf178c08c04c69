@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b4f0751_af49855c",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-29T11:40:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d0c3268_a8b7733c",
+      "range": {
+        "startLine": 8,
+        "startChar": 15,
+        "endLine": 8,
+        "endChar": 16
+      },
+      "revId": "cfe375d4996257790c2c0a398bdf178c08c04c69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f02defd_a94b6bd7",
@@ -43,6 +67,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b83ba725_0cbe323b",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-29T11:40:53Z",
+      "side": 1,
+      "message": "here we are creating IPMI user without any privilege. So it\u0027s fine.",
+      "parentUuid": "7f02defd_a94b6bd7",
+      "revId": "cfe375d4996257790c2c0a398bdf178c08c04c69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6a6ae83_3279d645",
         "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
         "patchSetId": 1
@@ -54,6 +96,30 @@
       "writtenOn": "2022-08-29T11:31:33Z",
       "side": 1,
       "message": "as of now we have only single TC\n\ncan we make this as Test Setup ?",
+      "range": {
+        "startLine": 13,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 26
+      },
+      "revId": "cfe375d4996257790c2c0a398bdf178c08c04c69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da8fb386_42ef079f",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-29T11:40:53Z",
+      "side": 1,
+      "message": "We will move this under Test Setup as and when the need arise. As of now we only have one test case so did not created it.",
+      "parentUuid": "f6a6ae83_3279d645",
       "range": {
         "startLine": 13,
         "startChar": 4,
