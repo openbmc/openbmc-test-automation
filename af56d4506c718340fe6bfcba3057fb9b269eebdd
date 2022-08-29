@@ -16,6 +16,24 @@
       "message": "# User-driven input parameter to skip operator user.\n# -v SKIP_OPERATOR_USER:1  to skip from CLI.\n${SKIP_OPERATOR_USER}    ${0}",
       "revId": "af56d4506c718340fe6bfcba3057fb9b269eebdd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a745a9d_c292d8fc",
+        "filename": "redfish/service_root/test_sessions_management.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-08-29T11:30:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6fb63a5_47ce0b6b",
+      "revId": "af56d4506c718340fe6bfcba3057fb9b269eebdd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
