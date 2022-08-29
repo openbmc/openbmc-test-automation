@@ -17,7 +17,9 @@ Test Teardown    FFDC On Test Case Fail
 
 @{ADMIN}       admin_user  TestPwd123
 @{OPERATOR}    operator_user  TestPwd123
-&{USERS}       Administrator=${ADMIN}  Operator=${OPERATOR}
+# User-driven input parameter to skip operator user.
+# -v SKIP_OPERATOR_USER:1  to skip from CLI.
+${SKIP_OPERATOR_USER}    ${0}
 
 
 *** Test Cases ***
@@ -275,6 +277,14 @@ Suite Setup Execution
     [Documentation]  Suite Setup Execution.
 
     Redfish.Login
+
+    # Skip operator user if SKIP_OPERATOR_USER is 1.
+    Run Keyword If
+    ...  ${SKIP_OPERATOR_USER} == ${1}
+    ...  Set Suite Variable  &{USERS}  Administrator=${ADMIN}
+    ...  ELSE
+    ...  Set Suite Variable  &{USERS}  Administrator=${ADMIN}  Operator=${OPERATOR}
+
     Create Users With Different Roles  users=${USERS}  force=${True}
     Get Default Timeout Value
 
