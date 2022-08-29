@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0d79515_1e9c46d2",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-08-29T09:48:13Z",
+      "side": 1,
+      "message": "CPU",
+      "range": {
+        "startLine": 391,
+        "startChar": 14,
+        "endLine": 391,
+        "endChar": 17
+      },
+      "revId": "4603739c3886002cd29f0b0be4e6f8121c349633",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b5b04c7_abc2955e",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-08-29T09:48:13Z",
+      "side": 1,
+      "message": "Suggest you to create a template for this and the next test as the sequence of steps seems to be same",
+      "range": {
+        "startLine": 384,
+        "startChar": 2,
+        "endLine": 406,
+        "endChar": 74
+      },
+      "revId": "4603739c3886002cd29f0b0be4e6f8121c349633",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
