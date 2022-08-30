@@ -41,21 +41,6 @@ Verify Redfish Admin User Persistence After Reboot
     Redfish Verify User  admin_user     TestPwd123  Administrator   ${True}
 
 
-Verify Redfish Operator User Persistence After Reboot
-    [Documentation]  Verify Redfish operator user persistence after reboot.
-    [Tags]  Verify_Redfish_Operator_User_Persistence_After_Reboot
-    [Setup]  Run Keywords  Redfish.Login  AND
-    ...  Redfish Create User  operator_user  TestPwd123  Operator  ${True}
-    [Teardown]  Run Keywords  Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
-    ...  AND  Test Teardown Execution
-
-    # Reboot BMC.
-    Redfish OBMC Reboot (off)  stack_mode=normal
-
-    # Verify users after reboot.
-    Redfish Verify User  operator_user  TestPwd123  Operator        ${True}
-
-
 Verify Redfish Readonly User Persistence After Reboot
     [Documentation]  Verify Redfish readonly user persistence after reboot.
     [Tags]  Verify_Redfish_Readonly_User_Persistence_After_Reboot
@@ -80,15 +65,6 @@ Redfish Create and Verify Admin User
     admin_user     TestPwd123  Administrator   ${True}
 
 
-Redfish Create and Verify Operator User
-    [Documentation]  Create a Redfish user with operator role and verify.
-    [Tags]  Redfish_Create_and_Verify_Operator_User
-    [Template]  Redfish Create And Verify User
-
-    #username      password    role_id         enabled
-    operator_user  TestPwd123  Operator        ${True}
-
-
 Redfish Create and Verify Readonly User
     [Documentation]  Create a Redfish user with readonly role and verify.
     [Tags]  Redfish_Create_and_Verify_Readonly_User
@@ -105,15 +81,6 @@ Verify Redfish Admin User With Wrong Password
 
     #username      password    role_id         enabled  wrong_password
     admin_user     TestPwd123  Administrator   ${True}  alskjhfwurh
-
-
-Verify Redfish Operator User with Wrong Password
-    [Documentation]  Verify Redfish operator user with wrong password.
-    [Tags]  Verify_Redfish_Operator_User_with_Wrong_Password
-    [Template]  Verify Redfish User with Wrong Password
-
-    #username      password    role_id         enabled  wrong_password
-    operator_user  TestPwd123  Operator        ${True}  12j8a8uakjhdaosiruf024
 
 
 Verify Redfish Readonly User With Wrong Password
@@ -134,15 +101,6 @@ Verify Login with Deleted Redfish Admin User
     admin_user     TestPwd123  Administrator   ${True}
 
 
-Verify Login with Deleted Redfish Operator User
-    [Documentation]  Verify login with deleted Redfish operator user.
-    [Tags]  Verify_Login_with_Deleted_Redfish_Operator_User
-    [Template]  Verify Login with Deleted Redfish User
-
-    #username     password    role_id         enabled
-    operator_user  TestPwd123  Operator        ${True}
-
-
 Verify Login with Deleted Redfish Readonly User
     [Documentation]  Verify login with deleted Redfish readonly user.
     [Tags]  Verify_Login_with_Deleted_Redfish_Readonly_User
@@ -159,15 +117,6 @@ Verify Admin User Creation Without Enabling It
 
     #username      password    role_id         enabled
     admin_user     TestPwd123  Administrator   ${False}
-
-
-Verify Operator User Creation Without Enabling It
-    [Documentation]  Verify operator user creation without enabling it.
-    [Tags]  Verify_Operator_User_Creation_Without_Enabling_It
-    [Template]  Verify Create User Without Enabling
-
-    #username      password    role_id         enabled
-    operator_user  TestPwd123  Operator        ${False}
 
 
 Verify Readonly User Creation Without Enabling It
@@ -237,22 +186,6 @@ Verify Modifying User Attributes
     Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
 
 
-Verify Modifying Operator User Attributes
-    [Documentation]  Verify modifying operator user attributes.
-    [Tags]  Verify_Modifying_Operator_User_Attributes
-    [Setup]  Run Keywords  Redfish.Login  AND
-    ...  Redfish Create User  operator_user  TestPwd123  Operator  ${True}
-    [Teardown]  Run Keywords  Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
-    ...  AND  Test Teardown Execution
-
-    # Update operator_user password using Redfish.
-    ${payload}=  Create Dictionary  Password=NewTestPwd123
-    Redfish.Patch  /redfish/v1/AccountService/Accounts/operator_user  body=&{payload}
-
-    # Verify users after updating
-    Redfish Verify User  operator_user  NewTestPwd123  Operator        ${True}
-
-
 Verify User Account Locked
     [Documentation]  Verify user account locked upon trying with invalid password.
     [Tags]  Verify_User_Account_Locked
@@ -304,55 +237,6 @@ Verify Admin User Privilege
     # performed as part of "Redfish Verify User" keyword's teardown.
     Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
     Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
-
-
-Verify Operator User Role Change Using Admin Privilege User
-    [Documentation]  Verify operator user role change using admin privilege user
-    [Tags]  Verify_Operator_User_Role_Change_Using_Admin_Privilege_User
-
-    Redfish Create User  admin_user  TestPwd123  Administrator  ${True}
-    Redfish Create User  operator_user  TestPwd123  Operator  ${True}
-
-    Redfish.Logout
-
-    # Change role ID of operator user with admin user.
-    # Login with admin user.
-    Redfish.Login  admin_user  TestPwd123
-
-    # Modify Role ID of Operator user.
-    Redfish.Patch  /redfish/v1/AccountService/Accounts/operator_user  body={'RoleId': 'Administrator'}
-
-    # Verify modified user.
-    Redfish Verify User  operator_user  TestPwd123  Administrator  ${True}
-
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
-
-
-Verify Operator User Privilege
-    [Documentation]  Verify operator user privilege.
-    [Tags]  Verify_Operator_User_Privilege
-
-    Redfish Create User  admin_user  TestPwd123  Administrator  ${True}
-    Redfish Create User  operator_user  TestPwd123  Operator  ${True}
-
-    Redfish.Logout
-    # Login with operator user.
-    Redfish.Login  operator_user  TestPwd123
-
-    # Verify BMC reset.
-    Run Keyword And Expect Error  ValueError*  Redfish BMC Reset Operation
-
-    # Attempt to change password of admin user with operator user.
-    Redfish.Patch  /redfish/v1/AccountService/Accounts/admin_user  body={'Password': 'NewTestPwd123'}
-    ...  valid_status_codes=[${HTTP_FORBIDDEN}]
-
-    Redfish.Logout
-
-    Redfish.Login
-
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
 
 
 Verify ReadOnly User Privilege
