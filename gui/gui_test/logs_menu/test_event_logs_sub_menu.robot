@@ -24,6 +24,8 @@ ${xpath_event_action_export}      //*[contains(text(),"Export")]
 ${xpath_event_action_cancel}      //button[contains(text(),"Cancel")]
 ${xpath_delete_first_row}         //*[@data-test-id="eventLogs-button-deleteRow-0"][2]
 ${xpath_confirm_delete}           //button[@class="btn btn-primary"]
+${xpath_event_status_resolved}    //*[@data-test-id="tableFilter-checkbox-Resolved"]
+${xpath_event_status_unresolved}  //*[@data-test-id="tableFilter-checkbox-Unresolved"]
 
 *** Test Cases ***
 
@@ -45,6 +47,9 @@ Verify Existence Of All Buttons In Event Logs Page
     Page Should Contain Element  ${xpath_event_severity_warning}  limit=1
     Page Should Contain Element  ${xpath_event_severity_critical}  limit=1
 
+    # Types of event status: Resolved, Unresolved.
+    Page Should Contain Element  ${xpath_event_status_resolved}  limit=1
+    Page Should Contain Element  ${xpath_event_status_unresolved}  limit=1
 
 Verify Existence Of All Input Boxes In Event Logs Page
     [Documentation]  Verify existence of all input boxes in Event Logs page.
@@ -128,6 +133,7 @@ Suite Setup Execution
     Launch Browser And Login GUI
     Navigate To Event Logs Page
     Redfish.Login
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
 
 Suite Teardown Execution
     [Documentation]  Suite teardown tasks.
