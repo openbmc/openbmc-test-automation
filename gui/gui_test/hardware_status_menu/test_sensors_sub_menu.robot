@@ -50,6 +50,7 @@ Verify Search Text Entered
 
     Wait Until Page Contains Element  ${xpath_sensors_search}
     Input Text  ${xpath_sensors_search}  ambi
+    Sleep  100s
     Wait Until Page Contains  Ambient  timeout=15
 
 
