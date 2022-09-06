@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72e57cd4_2874917d",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-06T09:29:53Z",
+      "side": 1,
+      "message": "Instead of adding sleep, increase the timeout here for 120 seconds",
+      "range": {
+        "startLine": 54,
+        "startChar": 39,
+        "endLine": 54,
+        "endChar": 49
+      },
+      "revId": "3efe9168dbb459d9d341c1e66c509fd76209c266",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
