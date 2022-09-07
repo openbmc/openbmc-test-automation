@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1b343f1_4f4802e8",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-09-07T02:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0d79515_1e9c46d2",
+      "range": {
+        "startLine": 391,
+        "startChar": 14,
+        "endLine": 391,
+        "endChar": 17
+      },
+      "revId": "4603739c3886002cd29f0b0be4e6f8121c349633",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d47eca6b_0ac45119",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-29T09:51:14Z",
       "side": 1,
       "message": "Make a separate keyword for this. This code (of \u0027Enable Present Bit Via IPMI and Verify Using Redfish\u0027 ) is common with that of  \u0027Disable Present Bit Via IPMI and Verify Using Redfish\u0027. Then call the keyword from both the test cases.",
+      "range": {
+        "startLine": 391,
+        "startChar": 1,
+        "endLine": 393,
+        "endChar": 109
+      },
+      "revId": "4603739c3886002cd29f0b0be4e6f8121c349633",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58be1669_e732a4d9",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-09-07T02:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d47eca6b_0ac45119",
       "range": {
         "startLine": 391,
         "startChar": 1,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73234e6a_c01d2ef4",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-09-07T02:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b5b04c7_abc2955e",
+      "range": {
+        "startLine": 384,
+        "startChar": 2,
+        "endLine": 406,
+        "endChar": 74
+      },
+      "revId": "4603739c3886002cd29f0b0be4e6f8121c349633",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55e7a7de_2e1dbd8b",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-08-29T09:49:17Z",
       "side": 1,
       "message": "cpu_name",
+      "range": {
+        "startLine": 424,
+        "startChar": 7,
+        "endLine": 424,
+        "endChar": 24
+      },
+      "revId": "4603739c3886002cd29f0b0be4e6f8121c349633",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4a134c5_f50e1902",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-09-07T02:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55e7a7de_2e1dbd8b",
       "range": {
         "startLine": 424,
         "startChar": 7,
