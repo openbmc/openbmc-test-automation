@@ -80,6 +80,7 @@ ${IPMI_PORT}        623
 ${HOST_SOL_PORT}    2200
 ${OPENBMC_SERIAL_HOST}      ${EMPTY}
 ${OPENBMC_SERIAL_PORT}      ${EMPTY}
+${OPENBMC_CONSOLE_CLIENT}   ${EMPTY}
 
 # OS related parameters.
 ${OS_HOST}          ${EMPTY}
