@@ -52,6 +52,24 @@
       "parentUuid": "f9a3990e_a1a6bb6d",
       "revId": "846cf275b4575758448270a4eb5c088da1640035",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8bc237d_f3fb0608",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-09-12T10:49:22Z",
+      "side": 1,
+      "message": "This is checking the PATCH operation only. We are checking this only for the Forbidden case.",
+      "parentUuid": "39eda86d_6587c1e3",
+      "revId": "846cf275b4575758448270a4eb5c088da1640035",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
