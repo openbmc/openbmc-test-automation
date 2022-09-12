@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc70cbf9_9d997086",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-09-12T12:56:21Z",
+      "side": 1,
+      "message": "intention is not to test function, ignore error or success overwhelm the resource and check if valid login works or not.",
+      "revId": "7e703b9cd822954e7fc696e0914144f67a2e6e77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
