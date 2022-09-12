@@ -25,11 +25,12 @@ Variables  ../gui/data/gui_variables.py
 
 *** Variables ***
 
-${iterations}         10000
-${loop_iteration}     ${1000}
-${hostname}           testhostname
-${MAX_UNAUTH_PER_IP}  ${5}
-${bmc_url}            https://${OPENBMC_HOST}
+${iterations}                 10000
+${loop_iteration}             ${1000}
+${hostname}                   testhostname
+${MAX_UNAUTH_PER_IP}          ${5}
+${bmc_url}                    https://${OPENBMC_HOST}
+${invalid_password_alert}     Invalid username or password
 
 
 *** Test Cases ***
@@ -170,7 +171,7 @@ Test Stability On Large Number Of Wrong Login Attempts To GUI
 
     FOR  ${iter}  IN RANGE  ${1}  ${iterations} + 1
         Log To Console  ${iter}th login
-        Run Keyword And Ignore Error  Login to GUI With Incorrect Credentials
+        Login to GUI With Incorrect Credentials
 
         # Every 100th iteration, check BMC GUI is responsive.
         ${status}=  Run Keyword If  ${iter} % 100 == 0  Run Keyword And Return Status
@@ -311,6 +312,8 @@ Login to GUI With Incorrect Credentials
     Input Text  ${xpath_textbox_username}  root
     Input Password  ${xpath_textbox_password}  incorrect_password
     Click Button  ${xpath_login_button}
+    # Ensure whether the login with incorrect credentials is actually failing
+    Wait Until Page Contains  ${invalid_password_alert}  timeout=10
 
 Invalid Credentials Redfish Login Attempts
     [Documentation]  Continuous invalid credentials login attempts to Redfish and
