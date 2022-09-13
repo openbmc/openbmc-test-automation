@@ -16,6 +16,24 @@
       "message": "intention is not to test function, ignore error or success overwhelm the resource and check if valid login works or not.",
       "revId": "7e703b9cd822954e7fc696e0914144f67a2e6e77",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0a00efa_075863f9",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-09-13T06:54:06Z",
+      "side": 1,
+      "message": "If login gets success with invalid login , current code will not check its behavior, then the objective of this testcase will not be met . that is, every 100th iteration checking with valid credential among continuous invalid login , instead it will check valid login on every 100th iteration along with other iteration which actually gets success.",
+      "parentUuid": "dc70cbf9_9d997086",
+      "revId": "7e703b9cd822954e7fc696e0914144f67a2e6e77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
