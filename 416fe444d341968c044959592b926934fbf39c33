@@ -22,6 +22,30 @@
       },
       "revId": "416fe444d341968c044959592b926934fbf39c33",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd77f7ed_6ba47cf3",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-13T10:45:50Z",
+      "side": 1,
+      "message": "As discussed, we would move login and logout to suite setup when the need arise. At present, I have added Radfish logout in the teardown.",
+      "parentUuid": "a52af45f_25cbe8cf",
+      "range": {
+        "startLine": 14,
+        "startChar": 4,
+        "endLine": 16,
+        "endChar": 0
+      },
+      "revId": "416fe444d341968c044959592b926934fbf39c33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
