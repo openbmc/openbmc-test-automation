@@ -34,6 +34,24 @@
       "parentUuid": "dc70cbf9_9d997086",
       "revId": "7e703b9cd822954e7fc696e0914144f67a2e6e77",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "809c40da_7f9b78f4",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-09-13T15:50:07Z",
+      "side": 1,
+      "message": "That does not matter, intention is to check stability of authentication module and whether genuine logins are honored when it is flooded with bad/invalid requests.",
+      "parentUuid": "f0a00efa_075863f9",
+      "revId": "7e703b9cd822954e7fc696e0914144f67a2e6e77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
