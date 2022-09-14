@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f8cb4d3_2e5105e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-09-14T09:30:28Z",
+      "side": 1,
+      "message": "looks like it fails for this test with this changes \n\nhttps://github.com/openbmc/openbmc-test-automation/blob/master/redfish/systems/test_power_operations.robot\n\nExample\n\n\n\tSetup failed:\nKeyword \u0027Get SOL Console Pid\u0027 failed after retrying for 10 seconds. The last error was: #(IST) 2022/09/14 14:54:12.469335 -    0.040171 - **ERROR** Invalid variable value:\nos_con_pid:                                       \u003cblank\u003e \u003cstr\u003e\n\nIt must NOT be any of the following values:\n\ninvalid_values: \u003clist\u003e\n  [0]:                                            \u003cblank\u003e \u003cstr\u003e\n  [1]:                                            None \u003cNoneType\u003e\n\n",
+      "revId": "21fd9cf8262d4309d8f1370cd194e78cea3b48d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
