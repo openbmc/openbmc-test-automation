@@ -22,6 +22,30 @@
       },
       "revId": "70f94eecfc1ad504cfe52b937d209f5992bdb78b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e830e0bf_52b28831",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-14T11:25:26Z",
+      "side": 1,
+      "message": "As discussed, test case name is already long. I have modified test documentation to add more details.",
+      "parentUuid": "f949f047_e7433cee",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 19
+      },
+      "revId": "70f94eecfc1ad504cfe52b937d209f5992bdb78b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
