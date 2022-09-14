@@ -46,6 +46,30 @@
       },
       "revId": "70f94eecfc1ad504cfe52b937d209f5992bdb78b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9473a3f_63fe84a4",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-14T11:26:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e830e0bf_52b28831",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 19
+      },
+      "revId": "70f94eecfc1ad504cfe52b937d209f5992bdb78b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

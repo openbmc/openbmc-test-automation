@@ -83,6 +83,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06d4b78c_b5caa8db",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-14T11:26:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b83ba725_0cbe323b",
+      "revId": "cfe375d4996257790c2c0a398bdf178c08c04c69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6a6ae83_3279d645",
@@ -120,6 +138,30 @@
       "side": 1,
       "message": "We will move this under Test Setup as and when the need arise. As of now we only have one test case so did not created it.",
       "parentUuid": "f6a6ae83_3279d645",
+      "range": {
+        "startLine": 13,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 26
+      },
+      "revId": "cfe375d4996257790c2c0a398bdf178c08c04c69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1654c102_b0663225",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-14T11:26:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da8fb386_42ef079f",
       "range": {
         "startLine": 13,
         "startChar": 4,
