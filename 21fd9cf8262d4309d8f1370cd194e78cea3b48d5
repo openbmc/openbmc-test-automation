@@ -33,6 +33,24 @@
       "message": "Can you provide more information, the \u0027Get SOL Console PID\u0027 https://github.com/openbmc/openbmc-test-automation/blob/140351fce6a777d55149e8d714dce80dac4c41a4/lib/common_utils.robot#L311\nis just the output of a ps command, so it should match unless the ssh is not running, and that can be another problem.",
       "revId": "21fd9cf8262d4309d8f1370cd194e78cea3b48d5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "285f4340_519b1a6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-09-15T06:04:43Z",
+      "side": 1,
+      "message": "If you give this test a run with your changes, probably you ll also see there\n\nrobot -v OPENBMC_HOST:xx.xx.xx.xx --include Verify_Redfish_Host_GracefulShutdown redfish/systems/test_power_operations.robot",
+      "parentUuid": "1b703319_8031b920",
+      "revId": "21fd9cf8262d4309d8f1370cd194e78cea3b48d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
