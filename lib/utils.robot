@@ -966,6 +966,17 @@ Redfish Get States
     [Return]  ${states}
 
 
+Redfish BMC Match States
+    [Documentation]  Verify the BMC match state.
+    [Arguments]  ${match_state}
+
+    # Description of argument(s):
+    # match_state    Match the state of BMC.
+
+    ${bmc_state}=  Redfish Get BMC State
+    Should Be Equal As Strings  ${match_state}  ${bmc_state}
+
+
 Is BMC Standby
     [Documentation]  Check if BMC is ready and host at standby.
 
