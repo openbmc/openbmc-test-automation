@@ -124,3 +124,15 @@ Get Lock Resource Information
     Rprint Vars  resource_lock_json
 
     [Return]  ${resource_lock_json}
+
+
+Redfish BMC Match States
+    [Documentation]  Verify the BMC match state.
+    [Arguments]  ${match_state}
+
+    # Description of argument(s):
+    # match_state    Match the state of BMC.
+
+    ${bmc_state}=  Redfish Get BMC State
+    Should Be Equal As Strings  ${match_state}  ${bmc_state}
+
