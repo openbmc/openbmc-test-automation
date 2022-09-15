@@ -966,6 +966,27 @@ Redfish Get States
     [Return]  ${states}
 
 
+Check BMC Match States
+    [Documentation]  Verify the BMC match state.
+    [Arguments]  ${match_state}
+
+    # Description of argument(s):
+    # match_state    Match the state of BMC.
+
+    ${bmc_state}=  Redfish Get BMC State
+    Should Be Equal As Strings  ${match_state}  '${bmc_state}'
+
+
+Redfish BMC Match States
+    [Documentation]  Check the BMC match state.
+    [Arguments]  ${match_state}
+
+    # Description of argument(s):
+    # match_state    Match the state of BMC.
+
+    Wait Until Keyword Succeeds  3 min  10 sec  Check BMC Match States  match_state='Enabled'
+
+
 Is BMC Standby
     [Documentation]  Check if BMC is ready and host at standby.
 
@@ -977,6 +998,8 @@ Is BMC Standby
 
     Run Keyword If  '${PLATFORM_ARCH_TYPE}' == 'x86'
     ...  Set To Dictionary  ${standby_states}  boot_progress=NA
+
+    #Wait Until Keyword Succeeds  3 min  Redfish BMC Match States  match_state='Enabled'  bmc_standby_states=${standby_states['bmc']}
 
     Wait Until Keyword Succeeds  3 min  10 sec  Redfish Get States
 
