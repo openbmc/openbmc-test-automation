@@ -16,6 +16,29 @@
       "message": "Verify Lock Is Not Persistent On BMC Reboot :: Acquire lock and af... | PASS |\n------------------------------------------------------------------------------\nTest Lock Management :: Test lock management feature of management... | PASS |\n1 critical test, 1 passed, 0 failed\n1 test total, 1 passed, 0 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d",
       "revId": "e769a79d31431f4b1075eda7afe70fce561a6d7b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "357f2a4a_20d7c334",
+        "filename": "lib/utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 987,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-09-16T05:36:51Z",
+      "side": 1,
+      "message": "both keywords looks redundant and also better use it directly in your test suite.",
+      "range": {
+        "startLine": 969,
+        "startChar": 0,
+        "endLine": 987,
+        "endChar": 85
+      },
+      "revId": "e769a79d31431f4b1075eda7afe70fce561a6d7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
