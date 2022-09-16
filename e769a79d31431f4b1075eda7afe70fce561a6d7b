@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e289ca1_29751721",
+        "filename": "lib/utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-09-16T15:41:04Z",
+      "side": 1,
+      "message": "new code drop . can you re-review.",
+      "parentUuid": "fa6c8f56_602b7c99",
+      "range": {
+        "startLine": 969,
+        "startChar": 0,
+        "endLine": 969,
+        "endChar": 22
+      },
+      "revId": "e769a79d31431f4b1075eda7afe70fce561a6d7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e067a29_64f19ebf",
         "filename": "lib/utils.robot",
         "patchSetId": 3
@@ -54,6 +78,30 @@
       "writtenOn": "2022-09-16T06:36:05Z",
       "side": 1,
       "message": "Get BMC current state and compare it with expected BMC state",
+      "range": {
+        "startLine": 970,
+        "startChar": 4,
+        "endLine": 970,
+        "endChar": 48
+      },
+      "revId": "e769a79d31431f4b1075eda7afe70fce561a6d7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdc3a925_2e9e5776",
+        "filename": "lib/utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 970,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-09-16T15:41:04Z",
+      "side": 1,
+      "message": "new code drop . can you re-review.",
+      "parentUuid": "6e067a29_64f19ebf",
       "range": {
         "startLine": 970,
         "startChar": 4,
@@ -89,6 +137,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6a6bb1c_d64bee30",
+        "filename": "lib/utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-09-16T15:41:04Z",
+      "side": 1,
+      "message": "I am using same variables which is used in other keywords.",
+      "parentUuid": "d30f9c76_5f96a336",
+      "range": {
+        "startLine": 971,
+        "startChar": 19,
+        "endLine": 971,
+        "endChar": 30
+      },
+      "revId": "e769a79d31431f4b1075eda7afe70fce561a6d7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "357f2a4a_20d7c334",
         "filename": "lib/utils.robot",
         "patchSetId": 3
@@ -100,6 +172,30 @@
       "writtenOn": "2022-09-16T05:36:51Z",
       "side": 1,
       "message": "both keywords looks redundant and also better use it directly in your test suite.",
+      "range": {
+        "startLine": 969,
+        "startChar": 0,
+        "endLine": 987,
+        "endChar": 85
+      },
+      "revId": "e769a79d31431f4b1075eda7afe70fce561a6d7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b565ecb2_5db491e2",
+        "filename": "lib/utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 987,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-09-16T15:41:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "357f2a4a_20d7c334",
       "range": {
         "startLine": 969,
         "startChar": 0,
