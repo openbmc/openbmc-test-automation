@@ -127,6 +127,4 @@ Pldmtool Platform Suite Cleanup
     [Documentation]    Reset BMC at suite cleanup.
 
     Redfish.Login
-    Redfish Hard Power Off
-    Redfish Power On
-    Redfish.Logout
+    Redfish OBMC Reboot (off)
