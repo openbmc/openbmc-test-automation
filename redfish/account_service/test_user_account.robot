@@ -467,6 +467,9 @@ Verify SSH Login Access With Admin User
     ${status}=  Run Keyword And Return Status  SSHLibrary.Login  new_admin  TestPwd1
     Should Be Equal  ${status}  ${False}
 
+    Redfish.Login
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/new_admin
+
 
 *** Keywords ***
 
