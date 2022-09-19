@@ -1,0 +1,170 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "375db0c0_cd3e6aa8",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-09-19T08:59:13Z",
+      "side": 1,
+      "message": "Suggestion:\n\nCreate Admin User Via Redfish And Verify Login Via IPMI\n\nalso in documentation\n\ncreate admin user via redfish .....",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 25
+      },
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f838d882_02d3eefb",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-09-19T08:59:13Z",
+      "side": 1,
+      "message": "Add delay for a new admin user password to set.",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 59
+      },
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d25f6944_1606da0d",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-09-19T08:59:13Z",
+      "side": 1,
+      "message": "since ur returning ${random_username}  ${random_userid} please change the title accordinglu\n\nGet IPMI Random User with Password And Privilege",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 51
+      },
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3a358b5_d284c208",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-09-19T08:59:13Z",
+      "side": 1,
+      "message": "Through",
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2936bff4_fdffa0f0",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-09-19T08:59:13Z",
+      "side": 1,
+      "message": "Also u returning the user ID\n\nSo the title should can be - Find And Return Free User Id\n\nplease the same info in documentation too",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 17
+      },
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b082308f_4fa7ba64",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-09-19T08:59:13Z",
+      "side": 1,
+      "message": "One line space after documentation",
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a660efe_c70719f5",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-09-19T08:59:13Z",
+      "side": 1,
+      "message": "please mention appropriate variable name",
+      "range": {
+        "startLine": 168,
+        "startChar": 11,
+        "endLine": 168,
+        "endChar": 16
+      },
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53d4c672_97cfa000",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-09-19T08:59:13Z",
+      "side": 1,
+      "message": "this is the output ur capturing\n\n${access_output} or ${get_access_output}",
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
