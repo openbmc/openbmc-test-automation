@@ -4,6 +4,10 @@ from robot.libraries.BuiltIn import BuiltIn
 OPENBMC_BASE_URI = '/xyz/openbmc_project/'
 OPENBMC_BASE_DBUS = 'xyz.openbmc_project.'
 
+# Generic Dbus commands.
+OPENBMC_DBUS_GET_PROPERTY = "busctl get-property "
+OPENBMC_DBUS_SET_PROPERTY = "busctl set-property "
+
 # org open power base URI.
 OPENPOWER_BASE_URI = '/org/open_power/'
 OPENPOWER_CONTROL = OPENPOWER_BASE_URI + 'control/'
@@ -118,6 +122,7 @@ OS_BOOT_SECPCI = STATE_DBUS_BASE + \
 OS_BOOT_MEM = STATE_DBUS_BASE + 'Boot.Progress.ProgressStages.MemoryInit'
 OS_BOOT_MOTHERBOARD = STATE_DBUS_BASE + \
     'Boot.Progress.ProgressStages.MotherboardInit'
+OPENBMC_DBUS_BMC_STATE = STATE_DBUS_BASE + "BMC"
 
 # OperatingSystem status variables.
 OS_BOOT_COMPLETE = STATE_DBUS_BASE + \
