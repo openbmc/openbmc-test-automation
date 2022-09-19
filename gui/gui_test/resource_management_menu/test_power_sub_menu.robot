@@ -46,6 +46,10 @@ Verify Existence Of All Buttons In Power Page
     Page Should Contain Element  ${xpath_power_ops_checkbox}
     Page Should Contain Element  ${xpath_cap_input_button}
     Page Should Contain Element  ${xpath_submit_button}
+    Page Should Contain Element  ${xpath_select_static}
+    Page Should Contain Element  ${xpath_select_powersaving}
+    Page Should Contain Element  ${xpath_select_maximum_performance}
+    Page Should Contain Element  ${xpath_update_power_save_mode}
 
 
 Verify Server Power Cap Setting Is On
@@ -86,17 +90,6 @@ Verify Server Power Cap Setting Is Off
     Click Element  ${xpath_submit_button}
     ${power_cap}=  Get Power Cap Value
     Should Not Be True  ${power_cap} == 499
-
-
-Verify Existence Of All Buttons In Power Page
-    [Documentation] Login to GUI and check if all visible
-    ...  buttons are available on Power page.
-    [Tags]  Verify_Existence_Of_All_Buttons_In_Power_Page
-
-    Page Should Contain Element  ${xpath_select_static}
-    Page Should Contain Element  ${xpath_select_powersaving}
-    Page Should Contain Element  ${xpath_select_maximum_performance}
-    Page Should Contain Element  ${xpath_update_power_save_mode}
 
 
 *** Keywords ***
