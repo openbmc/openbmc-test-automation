@@ -56,7 +56,7 @@ Redfish Verify Set Out Of Range Integer Value For BIOS Integer Attribute Type
     ${count}=  Evaluate  ${attr_val_data['${int_attr}']["UpperBound"]} + 5
 
     Redfish.Patch  ${BIOS_ATTR_SETTINGS_URI}  body={"Attributes":{"${int_attr}": ${count}}}
-    ...  valid_status_codes=[${HTTP_INTERNAL_SERVER_ERROR}]
+    ...  valid_status_codes=[${HTTP_INTERNAL_SERVER_ERROR},${HTTP_BAD_REQUEST}]
 
 
 Redfish Verify Set Out Of Range String Value For BIOS String Attribute Type
@@ -72,7 +72,7 @@ Redfish Verify Set Out Of Range String Value For BIOS String Attribute Type
     ${random_value}=  Generate Random String  ${count}  [LETTERS][NUMBERS]
 
     Redfish.Patch  ${BIOS_ATTR_SETTINGS_URI}  body={"Attributes":{"${str_attr}": '${random_value}'}}
-    ...  valid_status_codes=[${HTTP_INTERNAL_SERVER_ERROR}]
+    ...  valid_status_codes=[${HTTP_INTERNAL_SERVER_ERROR},${HTTP_BAD_REQUEST}]
 
 
 Redfish Verify Set BIOS String Attribute Type
