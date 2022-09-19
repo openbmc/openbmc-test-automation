@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffdf1442_a29e381c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-09-19T13:57:43Z",
+      "side": 1,
+      "message": "Start / End / Elapsed:\t20220919 18:45:24.627 / 20220919 18:45:24.665 / 00:00:00.038\n18:45:24.635\tINFO\tAttempt 1 of /redfish/v1/Systems/system/Bios/Settings\t\n18:45:24.658\tINFO\tResponse Time for PATCH to /redfish/v1/Systems/system/Bios/Settings: 0.023419536068104208 seconds.\t\n18:45:24.665\tFAIL\tValueError: The HTTP status code was not valid:\nstatus:                                           400\nvalid_status_codes:\n  [0]:                                            500",
+      "revId": "1e1f1c6292acf7f20119b4319e341da8b6222257",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
