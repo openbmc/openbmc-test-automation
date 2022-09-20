@@ -666,6 +666,7 @@ Acquire Lock On Resource
     Run Keyword If  '${reboot_flag}' == 'True'
     ...  Run Keywords  Redfish BMC Reset Operation  AND
     ...  Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}  AND
+    ...  Wait Until Keyword Succeeds  3 min  10 sec  Redfish BMC Match States  match_state=Enabled  AND
     ...  Is BMC Standby  AND
     ...  Verify Lock On Resource  ${session_info}  ${trans_id_emptylist}
 
@@ -847,6 +848,7 @@ Verify Acquire Lock After Reboot
     ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
     Redfish BMC Reset Operation
     Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}
+    Wait Until Keyword Succeeds  3 min  10 sec  Redfish BMC Match States  match_state=Enabled
     Is BMC Standby
 
     ${trans_id}=  Redfish Post Acquire Lock  ${lock_type}
@@ -928,6 +930,7 @@ Verify Acquire And Release Lock In Loop
     Run Keyword If  '${reboot_flag}' == 'True'
     ...  Run Keywords  Redfish BMC Reset Operation  AND
     ...  Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}  AND
+    ...  Wait Until Keyword Succeeds  3 min  10 sec  Redfish BMC Match States  match_state=Enabled  AND
     ...  Is BMC Standby  AND
     ...  Post Reboot Acquire Lock  ${session_info}  ${lock_type}
     Redfish Delete Session  ${session_info}
