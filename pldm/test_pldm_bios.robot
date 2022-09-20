@@ -135,5 +135,6 @@ PLDM BIOS Suite Cleanup
 Set Time To Manual Mode
     [Documentation]  Set date time to manual mode via Redfish.
 
+    Redfish.Login
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'ProtocolEnabled': ${False}}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
