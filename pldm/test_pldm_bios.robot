@@ -117,6 +117,8 @@ PLDM BIOS Suite Setup
     ${pldm_output}=  Pldmtool  bios GetBIOSTable --type AttributeTable
     Set Global Variable  ${attr_table_data}  ${pldm_output}
 
+    Set Time To Manual Mode
+
 
 PLDM BIOS Suite Cleanup
     [Documentation]  Perform PLDM BIOS suite cleanup.
@@ -126,3 +128,11 @@ PLDM BIOS Suite Cleanup
     ${cmd_set_date_time}=  Evaluate  $CMD_SETDATETIME % '${current_date_time}'
     ${pldm_output}=  Pldmtool  ${cmd_set_date_time}
     Valid Value  pldm_output['Response']  ['SUCCESS']
+
+
+Set Time To Manual Mode                                                                                                                             [Documentation]  Set date time to manual mode via Redfish.
+
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'ProtocolEnabled': ${False}}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    Sleep  10s
