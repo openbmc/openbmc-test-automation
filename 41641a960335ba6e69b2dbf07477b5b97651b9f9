@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25b6b5d4_6c885d4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-09-20T14:32:39Z",
+      "side": 1,
+      "message": "Test Lock Management :: Test lock management feature of management... | PASS |\n27 critical tests, 27 passed, 0 failed\n27 tests total, 27 passed, 0 failed",
+      "revId": "41641a960335ba6e69b2dbf07477b5b97651b9f9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
