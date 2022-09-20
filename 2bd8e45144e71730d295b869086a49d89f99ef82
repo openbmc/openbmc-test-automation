@@ -49,6 +49,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a0b337c_7db7b5fa",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-20T03:33:41Z",
+      "side": 1,
+      "message": "Update password after enabling user. So you can modify text like below.\n\n    # Enable IPMI privilege for new user and set new password using Redfish.\n    Enable IPMI Access To User From Redfish  ${random_username}\n    ${payload}\u003d  Create Dictionary  Password\u003d${valid_password2}\n    Redfish.Patch  /redfish/v1/AccountService/Accounts/${user_name}  body\u003d\u0026{payload}",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 63
+      },
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f8f212d_f80d0bfa",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-20T03:33:41Z",
+      "side": 1,
+      "message": "Same comment as above.",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 63
+      },
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d25f6944_1606da0d",
         "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
         "patchSetId": 4
@@ -72,6 +118,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "424de517_5a6c42c1",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-20T03:33:41Z",
+      "side": 1,
+      "message": "As we are creating IPMI user, better to use create instead of get like below\n\nCreate IPMI Random User With Password And Privilege",
+      "parentUuid": "d25f6944_1606da0d",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 51
+      },
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e3a358b5_d284c208",
         "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
         "patchSetId": 4
@@ -83,6 +153,47 @@
       "writtenOn": "2022-09-19T08:59:13Z",
       "side": 1,
       "message": "Through",
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8d15e91_1aa8ddda",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-20T03:33:41Z",
+      "side": 1,
+      "message": "Enable IPMI Access To User Using Redfish",
+      "parentUuid": "e3a358b5_d284c208",
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8ccc5b8_a616fe93",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-20T03:33:41Z",
+      "side": 1,
+      "message": "Move this out to test case as suggested above.",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 84
+      },
       "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
