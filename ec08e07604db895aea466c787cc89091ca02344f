@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "036eda3c_ac3b3ff8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-09-20T13:31:45Z",
+      "side": 1,
+      "message": "Redfish Upload Validated Partition File From Path To BMC :: Upload... | PASS |\n------------------------------------------------------------------------------\nTest Savearea Management :: Test Save Area feature of Management C... | PASS |\n23 critical tests, 23 passed, 0 failed\n23 tests total, 23 passed, 0 failed",
+      "revId": "ec08e07604db895aea466c787cc89091ca02344f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
