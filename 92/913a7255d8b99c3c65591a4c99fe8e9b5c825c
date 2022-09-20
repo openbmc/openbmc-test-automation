@@ -1,0 +1,8 @@
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Ok-To-Test+1: George Keishing <gkeishin@gmail.com>
+Code-Review+2: George Keishing <gkeishin@gmail.com>
+Submitted-by: George Keishing <gkeishin@gmail.com>
+Submitted-at: Tue, 20 Sep 2022 06:16:44 +0000
+Reviewed-on: https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/57219
+Project: openbmc/openbmc-test-automation
+Branch: refs/heads/master
