@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ce2acc8_b645d846",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-09-21T07:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "375db0c0_cd3e6aa8",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 25
+      },
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f838d882_02d3eefb",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-09-19T08:59:13Z",
       "side": 1,
       "message": "Add delay for a new admin user password to set.",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 59
+      },
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6867a105_bd0b0c75",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-09-21T07:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f838d882_02d3eefb",
       "range": {
         "startLine": 54,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f52f347d_7a47abab",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-09-21T07:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a0b337c_7db7b5fa",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 63
+      },
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f8f212d_f80d0bfa",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-09-20T03:33:41Z",
       "side": 1,
       "message": "Same comment as above.",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 63
+      },
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79d8a21e_479d7190",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-09-21T07:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f8f212d_f80d0bfa",
       "range": {
         "startLine": 75,
         "startChar": 0,
@@ -140,6 +236,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f9ec87f_ff15fe0e",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-09-21T07:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "424de517_5a6c42c1",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 51
+      },
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3a358b5_d284c208",
@@ -175,6 +295,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "574fc39b_62f2998d",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-09-21T07:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8d15e91_1aa8ddda",
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8ccc5b8_a616fe93",
@@ -188,6 +326,30 @@
       "writtenOn": "2022-09-20T03:33:41Z",
       "side": 1,
       "message": "Move this out to test case as suggested above.",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 146,
+        "endChar": 84
+      },
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e92a65b_dc6d4797",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-09-21T07:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8ccc5b8_a616fe93",
       "range": {
         "startLine": 144,
         "startChar": 0,
@@ -221,6 +383,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc2c8fee_3d689b2b",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-09-21T07:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2936bff4_fdffa0f0",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 17
+      },
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b082308f_4fa7ba64",
@@ -234,6 +420,24 @@
       "writtenOn": "2022-09-19T08:59:13Z",
       "side": 1,
       "message": "One line space after documentation",
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b4eb0e3_7d7f6511",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-09-21T07:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b082308f_4fa7ba64",
       "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -261,6 +465,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "645fc11a_f9e208a6",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-09-21T07:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a660efe_c70719f5",
+      "range": {
+        "startLine": 168,
+        "startChar": 11,
+        "endLine": 168,
+        "endChar": 16
+      },
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53d4c672_97cfa000",
@@ -274,6 +502,24 @@
       "writtenOn": "2022-09-19T08:59:13Z",
       "side": 1,
       "message": "this is the output ur capturing\n\n${access_output} or ${get_access_output}",
+      "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efb5b6d7_9df011b3",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-09-21T07:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53d4c672_97cfa000",
       "revId": "2bd8e45144e71730d295b869086a49d89f99ef82",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
