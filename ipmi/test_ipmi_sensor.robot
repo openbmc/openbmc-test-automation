@@ -126,55 +126,38 @@ Test Baseboard Temperature Via IPMI
 
     # Example of IPMI dcmi get_temp_reading output:
     #        Entity ID                       Entity Instance    Temp. Readings
-    # Inlet air temperature(40h)                      1               +19 C
-    # CPU temperature sensors(41h)                    5               +51 C
-    # CPU temperature sensors(41h)                    6               +50 C
-    # CPU temperature sensors(41h)                    7               +50 C
-    # CPU temperature sensors(41h)                    8               +50 C
-    # CPU temperature sensors(41h)                    9               +50 C
-    # CPU temperature sensors(41h)                    10              +48 C
-    # CPU temperature sensors(41h)                    11              +49 C
-    # CPU temperature sensors(41h)                    12              +47 C
-    # CPU temperature sensors(41h)                    8               +50 C
-    # CPU temperature sensors(41h)                    16              +51 C
-    # CPU temperature sensors(41h)                    24              +50 C
-    # CPU temperature sensors(41h)                    32              +43 C
-    # CPU temperature sensors(41h)                    40              +43 C
-    # Baseboard temperature sensors(42h)              1               +35 C
+    # Inlet air temperature(40h)                      1               +22 C
+    # Inlet air temperature(40h)                      2               +23 C
+    # Inlet air temperature(40h)                      3               +22 C
+    # CPU temperature sensors(41h)                    0               +0 C
+    # Baseboard temperature sensors(42h)              1               +26 C
+    # Baseboard temperature sensors(42h)              2               +27 C
 
     ${temp_reading}=  Run IPMI Standard Command  dcmi get_temp_reading -N 10
     Should Contain  ${temp_reading}  Baseboard temperature sensors
     ...  msg="Unable to get baseboard temperature via DCMI".
-    ${baseboard_temp_line}=
+    ${baseboard_temp_lines}=
     ...  Get Lines Containing String  ${temp_reading}
     ...  Baseboard temperature  case-insensitive=True
+    ${lines}=  Split To Lines  ${baseboard_temp_lines}
 
-    ${baseboard_temp_ipmi}=  Set Variable  ${baseboard_temp_line.split('+')[1].strip(' C')}
+    ${ipmi_temp_list}=  Create List
+    FOR  ${line}  IN  @{lines}
+        ${baseboard_temp_ipmi}=  Set Variable  ${line.split('+')[1].strip(' C')}
+        Append To List  ${ipmi_temp_list}  ${baseboard_temp_ipmi} 
+    END
+    ${list_length}=  Get Length  ${ipmi_temp_list}
 
-    # Example of Baseboard temperature via Redfish
+    # Getting temperature readings from Redfish.
+    ${baseboard_temp_redfish}=  Get Temperature Reading From Redfish  PCIE
+    ${baseboard_temp_redfish}=  Get Dictionary Values  ${baseboard_temp_redfish}  sort_keys=True
 
-    #"@odata.id": "/redfish/v1/Chassis/chassis/Thermal#/Temperatures/9",
-    #"@odata.type": "#Thermal.v1_3_0.Temperature",
-    #"LowerThresholdCritical": 0.0,
-    #"LowerThresholdNonCritical": 0.0,
-    #"MaxReadingRangeTemp": 0.0,
-    #"MemberId": "pcie",
-    #"MinReadingRangeTemp": 0.0,
-    #"Name": "pcie",
-    #"ReadingCelsius": 28.687,
-    #"Status": {
-          #"Health": "OK",
-          #"State": "Enabled"
-    #},
-    #"UpperThresholdCritical": 70.0,
-    #"UpperThresholdNonCritical": 60.0
-
-    ${baseboard_temp_redfish}=  Get Temperature Reading From Redfish  pcie
-
-    Should Be True
-    ...  ${baseboard_temp_redfish} - ${baseboard_temp_ipmi} <= ${allowed_temp_diff}
-    ...  msg=Baseboard temperature above allowed threshold ${allowed_temp_diff}.
-
+    FOR  ${index}  IN RANGE  ${list_length}
+        ${baseboard_temp_diff}=  Evaluate  abs(${baseboard_temp_redfish[${index}]} - ${ipmi_temp_list[${index}]})
+        Should Be True
+        ...  ${baseboard_temp_diff} <= ${allowed_temp_diff}
+        ...  msg=Baseboard temperature above allowed threshold ${allowed_temp_diff}.
+    END
 
 Test Power Reading Via IPMI Raw Command
     [Documentation]  Test power reading via IPMI raw command and verify
@@ -293,13 +276,25 @@ Get Temperature Reading From Redfish
     # Description of argument(s):
     # member_id    Member id of temperature.
 
-    @{redfish_readings}=  Redfish.Get Attribute  /redfish/v1/Chassis/${CHASSIS_ID}/Thermal  Temperatures
+    @{redfish_readings}=  Redfish.Get Attribute  /redfish/v1/Chassis/chassis/ThermalSubsystem/ThermalMetrics  TemperatureReadingsCelsius
+
+    # Example of Baseboard temperature via Redfish
+
+    # data.id": "/redfish/v1/Chassis/chassis/Sensors/PCIE_0_Temp",
+    # "DataSourceUri": "/redfish/v1/Chassis/chassis/Sensors/PCIE_0_Temp",
+    # "DeviceName": "PCIE_0_Temp",
+    # "Reading": 26.5
+    # },
+
+    ${redfish_value_dict}=  Create Dictionary
     FOR  ${data}  IN  @{redfish_readings}
-        ${redfish_value}=  Set Variable If  '${data}[MemberId]' == '${member_id}'
-        ...  ${data}[ReadingCelsius]
-        Exit For Loop If  '${data}[MemberId]' == '${member_id}'
+        ${contains}=  Evaluate  "${member_id}" in """${data}[DeviceName]"""
+        ${reading}=  Set Variable  ${data}[Reading]
+        Run Keyword IF  "${contains}" == "True"
+        ...  Set To Dictionary  ${redfish_value_dict}  ${data}[DeviceName]  ${reading}
     END
-    [Return]  ${redfish_value}
+
+    [Return]  ${redfish_value_dict}
 
 
 Verify Power Reading Using IPMI And Redfish
