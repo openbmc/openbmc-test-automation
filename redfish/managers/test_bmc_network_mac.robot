@@ -19,12 +19,14 @@ ${valid_mac}         AA:E2:84:14:28:79
 ${zero_mac}          00:00:00:00:00:00
 ${broadcast_mac}     FF:FF:FF:FF:FF:FF
 ${out_of_range_mac}  AA:FF:FF:FF:FF:100
+${out_of_range_op}   AA:FF:FF:FF:FF:10
 
 # There will be 6 bytes in MAC address (e.g. xx.xx.xx.xx.xx.xx).
 # Here trying to configure xx.xx.xx.xx.xx
 ${less_byte_mac}     AA:AA:AA:AA:BB
 # Here trying to configure xx.xx.xx.xx.xx.xx.xx
 ${more_byte_mac}     AA:AA:AA:AA:AA:AA:BB
+${more_byte_op}     AA:AA:AA:AA:AA:AA
 
 # MAC address with special characters.
 ${special_char_mac}  &A:$A:AA:AA:AA:^^
@@ -105,10 +107,11 @@ Configure Out Of Range MAC And Verify
     [Documentation]  Configure out of range MAC via Redfish and verify.
     [Tags]  Configure_Out_Of_Range_MAC_And_Verify
 
-    Configure MAC Settings  ${out_of_range_mac}  error
+    Configure MAC Settings  ${out_of_range_mac}  valid
+    Validate MAC On BMC  ${out_of_range_op}
 
     # Verify whether new MAC is configured on FW_Env.
-    Verify MAC Address Via FW_Env  ${out_of_range_mac}  error
+    Verify MAC Address Via FW_Env  ${out_of_range_op}  valid
 
 Configure Less Byte MAC And Verify
     [Documentation]  Configure less byte MAC via Redfish and verify.
@@ -123,8 +126,10 @@ Configure More Byte MAC And Verify
     [Tags]  Configure_More_Byte_MAC_And_Verify
 
     Configure MAC Settings  ${more_byte_mac}  valid
+    Validate MAC On BMC  ${more_byte_op}
+
     # Verify whether new MAC is configured on FW_Env.
-    Verify MAC Address Via FW_Env  ${more_byte_mac}  valid
+    Verify MAC Address Via FW_Env  ${more_byte_op}  valid
 
 
 *** Keywords ***
