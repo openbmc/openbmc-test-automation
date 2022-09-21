@@ -27,6 +27,9 @@ SNMP_MANAGER_URI = NETWORK_MANAGER + 'snmp/manager/'
 SENSORS_URI = OPENBMC_BASE_URI + 'sensors/'
 # Thermal Control base variables
 THERMAL_CONTROL_URI = CONTROL_URI + 'thermal/0'
+THERMAL_METRICS = 'ThermalSubsystem/ThermalMetrics'
+
+COMPONENT_NAME_OF_POWER_SUPPLY = 'powersupply'
 
 # State Manager base variables
 BMC_REBOOT_TRANS = 'xyz.openbmc_project.State.BMC.Transition.Reboot'
