@@ -828,6 +828,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "280e37fb_44dffd0c",
+        "filename": "redfish/chassis/test_redfish_default_sensor_validation.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-09-21T11:23:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "436e7729_2335f151",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 21
+      },
+      "revId": "fd74d96fb754eb72c9cada765c3bae5d15065dda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30182207_4d0d7739",
