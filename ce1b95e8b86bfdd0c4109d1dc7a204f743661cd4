@@ -22,6 +22,30 @@
       },
       "revId": "ce1b95e8b86bfdd0c4109d1dc7a204f743661cd4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05cc7258_f92cb364",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-09-21T10:43:53Z",
+      "side": 0,
+      "message": "lib/functions.py file is not using those functions were moved to lib/utils.py file.\nhttps://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/51641/4..10/lib/functions.py#b2",
+      "parentUuid": "2d9e94de_b69d15af",
+      "range": {
+        "startLine": 9,
+        "startChar": 17,
+        "endLine": 10,
+        "endChar": 73
+      },
+      "revId": "ce1b95e8b86bfdd0c4109d1dc7a204f743661cd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
