@@ -35,6 +35,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02cfe037_7fcbabb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-09-22T07:03:38Z",
+      "side": 1,
+      "message": "Done",
+      "revId": "c78dd8b7d64ec80e45f8a7a6e9220d648931fd0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55d378ad_63fefa02",
@@ -58,6 +75,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94ef3738_2b9dff1f",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-09-22T07:03:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55d378ad_63fefa02",
+      "range": {
+        "startLine": 368,
+        "startChar": 25,
+        "endLine": 368,
+        "endChar": 26
+      },
+      "revId": "c78dd8b7d64ec80e45f8a7a6e9220d648931fd0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01318b85_1de0634a",
@@ -71,6 +112,30 @@
       "writtenOn": "2022-09-22T06:15:30Z",
       "side": 1,
       "message": "Now with recent change ur not returning ${field_data}\nI think u should change the title name and documentation accordingly",
+      "range": {
+        "startLine": 548,
+        "startChar": 0,
+        "endLine": 548,
+        "endChar": 33
+      },
+      "revId": "c78dd8b7d64ec80e45f8a7a6e9220d648931fd0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86fe8de1_cbd7c0b6",
+        "filename": "lib/ipmi_client.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-09-22T07:03:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01318b85_1de0634a",
       "range": {
         "startLine": 548,
         "startChar": 0,
