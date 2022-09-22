@@ -30,9 +30,9 @@ Redfish Login With Invalid Credentials
     # Expect status            Username               Password
     InvalidCredentialsError*   ${OPENBMC_USERNAME}    deadpassword
     InvalidCredentialsError*   groot                  ${OPENBMC_PASSWORD}
-    InvalidCredentialsError*   ${EMPTY}               ${OPENBMC_PASSWORD}
-    InvalidCredentialsError*   ${OPENBMC_USERNAME}    ${EMPTY}
-    InvalidCredentialsError*   ${EMPTY}               ${EMPTY}
+    SessionCreationError*      ${EMPTY}               ${OPENBMC_PASSWORD}
+    SessionCreationError*      ${OPENBMC_USERNAME}    ${EMPTY}
+    SessionCreationError*      ${EMPTY}               ${EMPTY}
 
 
 Redfish Login Using Unsecured HTTP

@@ -5,7 +5,7 @@ robotframework-jsonlibrary
 paramiko>=2.5.0
 robotframework-sshlibrary
 robotframework-scplibrary
-redfish
+redfish>=3.1.7
 click
 PyYAML>=5.1
 redfishtool
