@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0710cc70_5ea2ba07",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-09-22T13:08:47Z",
+      "side": 1,
+      "message": "This logic wont work for community using different chassis id",
+      "range": {
+        "startLine": 279,
+        "startChar": 0,
+        "endLine": 279,
+        "endChar": 136
+      },
+      "revId": "de9e8f4077b53c0b05802e1deb0dea2333552d41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
