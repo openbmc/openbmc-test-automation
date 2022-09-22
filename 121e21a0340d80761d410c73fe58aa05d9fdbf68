@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7413b7dc_c9914d9f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-09-22T10:43:57Z",
+      "side": 1,
+      "message": "accept",
+      "range": {
+        "startLine": 11,
+        "startChar": 18,
+        "endLine": 11,
+        "endChar": 24
+      },
+      "revId": "121e21a0340d80761d410c73fe58aa05d9fdbf68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88aa2e9c_eb2ec4ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-09-22T10:43:57Z",
+      "side": 1,
+      "message": "Tested",
+      "range": {
+        "startLine": 13,
+        "startChar": 11,
+        "endLine": 13,
+        "endChar": 18
+      },
+      "revId": "121e21a0340d80761d410c73fe58aa05d9fdbf68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "92c9eb5e_9a792255",
@@ -14,6 +60,52 @@
       "writtenOn": "2022-09-22T10:34:48Z",
       "side": 1,
       "message": "pip3 list  | grep redfish\nredfish                         3.1.6\n\n\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nTest Service Root Security :: Test Redfish service root login security.\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nRedfish Login With Invalid Credentials :: Login to BMC web using i...\n.\u003cclass \u0027redfish.rest.v1.InvalidCredentialsError\u0027\u003e\n0\nRe-try login due to exception and it is likely error response from server side.\n.\u003cclass \u0027redfish.rest.v1.InvalidCredentialsError\u0027\u003e\n0\nRe-try login due to exception and it is likely error response from server side.\n.\u003cclass \u0027redfish.rest.v1.InvalidCredentialsError\u0027\u003e\n0\nRe-try login due to exception and it is likely error response from server side.\n.\u003cclass \u0027redfish.rest.v1.InvalidCredentialsError\u0027\u003e\n0\nRe-try login due to exception and it is likely error response from server side.\n.\u003cclass \u0027redfish.rest.v1.InvalidCredentialsError\u0027\u003e\n0\nRe-try login due to exception and it is likely error response from server side.\nRedfish Login With Invalid Credentials :: Login to BMC web using i... | PASS |\n------------------------------------------------------------------------------\nTest Service Root Security :: Test Redfish service root login secu... | PASS |\n1 test, 1 passed, 0 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\n\n$ pip3 list  | grep redfish\nredfish                            3.1.7\n\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nTest Service Root Security :: Test Redfish service root login security.\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nRedfish Login With Invalid Credentials :: Login to BMC web using i...\n.\u003cclass \u0027redfish.rest.v1.InvalidCredentialsError\u0027\u003e\nHTTP 401 Unauthorized returned: Invalid credentials supplied\nRe-try login due to exception and it is likely error response from server side.\n.\u003cclass \u0027redfish.rest.v1.InvalidCredentialsError\u0027\u003e\nHTTP 401 Unauthorized returned: Invalid credentials supplied\nRe-try login due to exception and it is likely error response from server side.\nRedfish Login With Invalid Credentials :: Login to BMC web using i... | PASS |\n------------------------------------------------------------------------------\nTest Service Root Security :: Test Redfish service root login secu... | PASS |\n1 test, 1 passed, 0 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d",
+      "revId": "121e21a0340d80761d410c73fe58aa05d9fdbf68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98b7b449_01dc2f2b",
+        "filename": "redfish/service_root/test_service_root_security.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-09-22T10:43:57Z",
+      "side": 1,
+      "message": "Please align the last column - Password",
+      "range": {
+        "startLine": 33,
+        "startChar": 79,
+        "endLine": 35,
+        "endChar": 89
+      },
+      "revId": "121e21a0340d80761d410c73fe58aa05d9fdbf68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "433bc362_402d310d",
+        "filename": "redfish/service_root/test_service_root_security.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-09-22T10:43:57Z",
+      "side": 1,
+      "message": "REST?",
+      "range": {
+        "startLine": 157,
+        "startChar": 36,
+        "endLine": 157,
+        "endChar": 40
+      },
       "revId": "121e21a0340d80761d410c73fe58aa05d9fdbf68",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
