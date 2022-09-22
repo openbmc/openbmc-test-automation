@@ -51,6 +51,24 @@
       "message": "# Username\tPassword\tExpected status\nPass only new expected status there.\n\nIn keyword make default arg for old response",
       "revId": "ab886717e4618d3b57f4df7d35889c00a9e3b0be",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bc97fc7_844fe385",
+        "filename": "redfish/service_root/test_service_root_security.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-09-22T10:58:08Z",
+      "side": 1,
+      "message": "Both are valid based on the version of the redfish lib. We have a community using old and new as well",
+      "parentUuid": "40b6f098_56064edc",
+      "revId": "ab886717e4618d3b57f4df7d35889c00a9e3b0be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
