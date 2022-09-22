@@ -27,12 +27,12 @@ Redfish Login With Invalid Credentials
     [Tags]  Redfish_Login_With_Invalid_Credentials
     [Template]  Login And Verify Redfish Response
 
-    # Expect status            Username               Password
-    InvalidCredentialsError*   ${OPENBMC_USERNAME}    deadpassword
-    InvalidCredentialsError*   groot                  ${OPENBMC_PASSWORD}
-    InvalidCredentialsError*   ${EMPTY}               ${OPENBMC_PASSWORD}
-    InvalidCredentialsError*   ${OPENBMC_USERNAME}    ${EMPTY}
-    InvalidCredentialsError*   ${EMPTY}               ${EMPTY}
+    # Username                Password               Expect status
+    ${OPENBMC_USERNAME}       deadpassword           InvalidCredentialsError
+    groot                     ${OPENBMC_PASSWORD}    InvalidCredentialsError
+    ${EMPTY}                  ${OPENBMC_PASSWORD}    SessionCreationError
+    ${OPENBMC_USERNAME}       ${EMPTY}               SessionCreationError
+    ${EMPTY}                  ${EMPTY}               SessionCreationError
 
 
 Redfish Login Using Unsecured HTTP
@@ -151,12 +151,12 @@ Login And Verify HTTP Response Header
 
 Login And Verify Redfish Response
     [Documentation]  Login and verify redfish response.
-    [Arguments]  ${expected_response}  ${username}  ${password}
+    [Arguments]   ${username}  ${password}  ${expected_response}
 
     # Description of arguments:
-    # expected_response   Expected REST status.
-    # username            The username to be used to connect to the server.
-    # password            The password to be used to connect to the server.
+    # expected_response    Expected REST status.
+    # username             The username to be used to connect to the server.
+    # password             The password to be used to connect to the server.
 
     # The redfish object may preserve a valid username or password from the
     # last failed login attempt.  If we then try to login with a null username
@@ -167,8 +167,10 @@ Login And Verify Redfish Response
     Redfish.Set Username  ${EMPTY}
     Redfish.Set Password  ${EMPTY}
 
-    Run Keyword And Expect Error  ${expected_response}
-    ...  Redfish.Login  ${username}  ${password}
+    ${msg}=  Run Keyword And Expect Error  *  Redfish.Login  ${username}  ${password}
+
+    # redfish package version <=3.1.6 default response is InvalidCredentialsError.
+    Should Contain Any   ${msg}  InvalidCredentialsError  ${expected_response}
 
 
 Create New Login Session
