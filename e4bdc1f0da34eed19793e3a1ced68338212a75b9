@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33817607_96d5ca36",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-22T05:46:36Z",
+      "side": 1,
+      "message": "I see that we are not checking PCIE_1_Temp. Can you add a check for PCIE_1_Temp also?",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 80
+      },
+      "revId": "e4bdc1f0da34eed19793e3a1ced68338212a75b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
