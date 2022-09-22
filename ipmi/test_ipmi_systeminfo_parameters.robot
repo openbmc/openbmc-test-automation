@@ -257,36 +257,6 @@ Verify System Info Primary OS Name
     Should Be Equal  ${pr_os[4:]}  ${os_hex_data}
 
 
-Verify System Info Primary OS Name After BMC Reboot
-    [Documentation]  Verify setting valid os version name in Primary OS Name,
-    ...  of System Info Parameter and verify it retains after BMC Reboot via IPMI.
-    [Tags]  Verify_System_Info_Primary_OS_Name_After_BMC_Reboot
-
-    # os_version_name given in variable section which is a 14 byte data.
-    ${os_name}  ${os_hex_data}=  Identify Request Data  ${valid_os_version_name}
-
-    # Set Primary OS Name of System Info Parameter.
-    Set Primary OS Name  ${os_name}
-
-    # Get Primary OS Name of System Info Parameter.
-    # Compare with the assigned os version name data.
-    ${pr_os}=  Get Primary OS Name
-    # The response data will something be like,
-    # ${pr_os}= ["11","00","00","0e","56","65","72","73","69","6f","6e","32","2e","31","32","33"].
-    Should Be Equal  ${pr_os[4:]}  ${os_hex_data}
-
-    # Cold Reset Via IPMI
-    IPMI MC Reset Cold (run)
-
-    # Since Primary OS Name is non-volatile,
-    # compare with response data of Get Primary OS Name,
-    # with assigned OS version name.
-    ${pr_os}=  Get Primary OS Name
-    # The response data should be,
-    # ${pr_os}= ["11","00","00","0e","56","65","72","73","69","6f","6e","32","2e","31","32","33"].
-    Should Be Equal  ${pr_os[4:]}  ${os_hex_data}
-
-
 Verify Get System Info Primary OS Name With Invalid Data Length
     [Documentation]  Verify Get System Info Parameter Primary OS Name via IPMI with extra bytes,
     ...  and expect to get the error message for invalid length.
