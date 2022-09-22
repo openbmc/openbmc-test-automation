@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a3f1fa9_f2093674",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-09-22T10:12:39Z",
+      "side": 1,
+      "message": "For reference:\nhttps://github.com/openbmc/phosphor-networkd/issues/46\nfirst 48 bits are assigned as the MAC address.",
+      "revId": "ddb237765bd87e9a29437681f43f2e1df5745af0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d08c484_52d7f104",
@@ -20,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0e99b06_608d2814",
+        "filename": "redfish/managers/test_bmc_network_mac.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-09-22T10:12:39Z",
+      "side": 1,
+      "message": "https://github.com/openbmc/phosphor-networkd/issues/46\nfirst 48 bits are assigned as the MAC address.",
+      "parentUuid": "0d08c484_52d7f104",
+      "revId": "ddb237765bd87e9a29437681f43f2e1df5745af0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4eda1ef2_4586122c",
         "filename": "redfish/managers/test_bmc_network_mac.robot",
         "patchSetId": 2
@@ -31,6 +66,24 @@
       "writtenOn": "2022-09-22T04:31:13Z",
       "side": 1,
       "message": "same here?",
+      "revId": "ddb237765bd87e9a29437681f43f2e1df5745af0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9da11473_90db4eca",
+        "filename": "redfish/managers/test_bmc_network_mac.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-09-22T10:12:39Z",
+      "side": 1,
+      "message": "https://github.com/openbmc/phosphor-networkd/issues/46\nfirst 48 bits are assigned as the MAC address.",
+      "parentUuid": "4eda1ef2_4586122c",
       "revId": "ddb237765bd87e9a29437681f43f2e1df5745af0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
