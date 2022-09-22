@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d08c484_52d7f104",
+        "filename": "redfish/managers/test_bmc_network_mac.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-09-22T04:31:13Z",
+      "side": 1,
+      "message": "Why are you changing it?",
+      "revId": "ddb237765bd87e9a29437681f43f2e1df5745af0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eda1ef2_4586122c",
+        "filename": "redfish/managers/test_bmc_network_mac.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-09-22T04:31:13Z",
+      "side": 1,
+      "message": "same here?",
+      "revId": "ddb237765bd87e9a29437681f43f2e1df5745af0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
