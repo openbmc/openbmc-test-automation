@@ -16,6 +16,144 @@
       "message": "Done",
       "revId": "97891f60cfffdf1284e9468e4d154f9586f5ccda",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f139fb12_c8a61362",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-09-22T17:01:03Z",
+      "side": 1,
+      "message": "to reduce the variable length -- not_listed_sensor_count",
+      "range": {
+        "startLine": 41,
+        "startChar": 6,
+        "endLine": 41,
+        "endChar": 40
+      },
+      "revId": "97891f60cfffdf1284e9468e4d154f9586f5ccda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bcb84f6_5e0627c3",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-09-22T17:01:03Z",
+      "side": 1,
+      "message": "Check If Reading Value Available In IPMI",
+      "range": {
+        "startLine": 56,
+        "startChar": 1,
+        "endLine": 56,
+        "endChar": 37
+      },
+      "revId": "97891f60cfffdf1284e9468e4d154f9586f5ccda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "800c1c5e_e06a3f27",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-09-22T17:01:03Z",
+      "side": 1,
+      "message": "values via IPMI.",
+      "range": {
+        "startLine": 201,
+        "startChar": 42,
+        "endLine": 201,
+        "endChar": 49
+      },
+      "revId": "97891f60cfffdf1284e9468e4d154f9586f5ccda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e9a12a2_39c91aba",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-09-22T17:01:03Z",
+      "side": 1,
+      "message": "may be for the comment section u should mention as \u0027na\u0027 or NA to distinguish\n\nSame for all the comments that use na",
+      "range": {
+        "startLine": 205,
+        "startChar": 104,
+        "endLine": 205,
+        "endChar": 106
+      },
+      "revId": "97891f60cfffdf1284e9468e4d154f9586f5ccda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d893853_aa295323",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-09-22T17:01:03Z",
+      "side": 1,
+      "message": "when u say Get -- we expect to see something is returned.. instead ur setting it\n\nSo -- Set Sensor Threshold Values Via Dbus ?",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 36
+      },
+      "revId": "97891f60cfffdf1284e9468e4d154f9586f5ccda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3114bead_7a2a8bbd",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-09-22T17:01:03Z",
+      "side": 1,
+      "message": "Instead of Get.. Use Set",
+      "range": {
+        "startLine": 463,
+        "startChar": 0,
+        "endLine": 463,
+        "endChar": 3
+      },
+      "revId": "97891f60cfffdf1284e9468e4d154f9586f5ccda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
