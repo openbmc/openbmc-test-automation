@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8da8e57c_8eb88dbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-23T08:12:22Z",
+      "side": 1,
+      "message": "Minor comment need to be corrected",
+      "revId": "b41a96f5d999aebf4af32d7ba3968d3c103733e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cef2d43_62ef3584",
+        "filename": "openpower/localuser/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-23T08:12:22Z",
+      "side": 1,
+      "message": "readonly",
+      "range": {
+        "startLine": 141,
+        "startChar": 31,
+        "endLine": 141,
+        "endChar": 39
+      },
+      "revId": "b41a96f5d999aebf4af32d7ba3968d3c103733e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
