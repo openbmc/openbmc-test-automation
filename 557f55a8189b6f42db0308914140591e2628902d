@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86eb09b0_caf5e868",
+        "filename": "lib/resource.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-09-23T14:48:07Z",
+      "side": 1,
+      "message": "https://github.com/openbmc/openbmc-test-automation/blob/master/data/variables.py#L216  \n\nadd it here",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 46
+      },
+      "revId": "557f55a8189b6f42db0308914140591e2628902d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
