@@ -45,21 +45,12 @@ Test Ambient Temperature Via IPMI
 
     # Example of IPMI dcmi get_temp_reading output:
     #        Entity ID                       Entity Instance    Temp. Readings
-    # Inlet air temperature(40h)                      1               +19 C
-    # CPU temperature sensors(41h)                    5               +51 C
-    # CPU temperature sensors(41h)                    6               +50 C
-    # CPU temperature sensors(41h)                    7               +50 C
-    # CPU temperature sensors(41h)                    8               +50 C
-    # CPU temperature sensors(41h)                    9               +50 C
-    # CPU temperature sensors(41h)                    10              +48 C
-    # CPU temperature sensors(41h)                    11              +49 C
-    # CPU temperature sensors(41h)                    12              +47 C
-    # CPU temperature sensors(41h)                    8               +50 C
-    # CPU temperature sensors(41h)                    16              +51 C
-    # CPU temperature sensors(41h)                    24              +50 C
-    # CPU temperature sensors(41h)                    32              +43 C
-    # CPU temperature sensors(41h)                    40              +43 C
-    # Baseboard temperature sensors(42h)              1               +35 C
+    # Inlet air temperature(40h)                      1               +22 C
+    # Inlet air temperature(40h)                      2               +23 C
+    # Inlet air temperature(40h)                      3               +22 C
+    # CPU temperature sensors(41h)                    0               +0 C
+    # Baseboard temperature sensors(42h)              1               +26 C
+    # Baseboard temperature sensors(42h)              2               +27 C
 
     ${temp_reading}=  Run IPMI Standard Command  dcmi get_temp_reading -N 10
     Should Contain  ${temp_reading}  Inlet air temperature
@@ -69,33 +60,24 @@ Test Ambient Temperature Via IPMI
     ...  Get Lines Containing String  ${temp_reading}
     ...  Inlet air temperature  case-insensitive
 
-    ${ambient_temp_ipmi}=  Set Variable  ${ambient_temp_line.split('+')[1].strip(' C')}
+    ${ambient_temp_line}=  Split To Lines  ${ambient_temp_line}
+    ${ipmi_temp_list}=  Create List
+    FOR  ${line}  IN  @{ambient_temp_line}
+        ${ambient_temp_ipmi}=  Set Variable  ${line.split('+')[1].strip(' C')}
+        Append To List  ${ipmi_temp_list}  ${ambient_temp_ipmi}
+    END
+    ${list_length}=  Get Length  ${ipmi_temp_list}
 
-    # Example of ambient temperature via Redfish
+    # Getting temperature readings from Redfish.
+    ${ambient_temp_redfish}=  Get Temperature Reading From Redfish  Ambient
+    ${ambient_temp_redfish}=  Get Dictionary Values  ${ambient_temp_redfish}  sort_keys=True
+    FOR  ${index}  IN RANGE  ${list_length}
+        ${ipmi_redfish_temp_diff}=
+        ...  Evaluate  abs(${ambient_temp_redfish[${index}]} - ${ipmi_temp_list[${index}]})
 
-    #"@odata.id": "/redfish/v1/Chassis/chassis/Thermal#/Temperatures/0",
-    #"@odata.type": "#Thermal.v1_3_0.Temperature",
-    #"LowerThresholdCritical": 0.0,
-    #"LowerThresholdNonCritical": 0.0,
-    #"MaxReadingRangeTemp": 0.0,
-    #"MemberId": "ambient",
-    #"MinReadingRangeTemp": 0.0,
-    #"Name": "ambient",
-    #"ReadingCelsius": 24.987000000000002,
-    #"Status": {
-          #"Health": "OK",
-          #"State": "Enabled"
-    #},
-    #"UpperThresholdCritical": 35.0,
-    #"UpperThresholdNonCritical": 25.0
-
-    ${ambient_temp_redfish}=  Get Temperature Reading From Redfish  ambient
-
-    ${ipmi_redfish_temp_diff}=
-    ...  Evaluate  abs(${ambient_temp_redfish} - ${ambient_temp_ipmi})
-
-    Should Be True  ${ipmi_redfish_temp_diff} <= ${allowed_temp_diff}
-    ...  msg=Ambient temperature above allowed threshold ${allowed_temp_diff}.
+        Should Be True  ${ipmi_redfish_temp_diff} <= ${allowed_temp_diff}
+        ...  msg=Ambient temperature above allowed threshold ${allowed_temp_diff}.
+    END
 
 
 Test Power Reading Via IPMI With Host Off
