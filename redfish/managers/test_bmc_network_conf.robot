@@ -493,6 +493,15 @@ Modify IPv4 Address And Verify
 
      Update IP Address  ${test_ipv4_addr}  ${test_ipv4_addr2}  ${test_subnet_mask}  ${test_gateway}
 
+Verify Modifying IP Address Multiple Times
+    [Documentation]  Verify modifying IP address multiple times.
+    [Tags]  Verify_Modifying_IP_Address_Multiple_Times
+    [Teardown]  Run Keywords
+    ...  Delete IP Address  ${test_ipv4_addr}  AND  Test Teardown Execution
+
+    Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+    Update IP Address  ${test_ipv4_addr}  ${test_ipv4_addr2}  ${test_subnet_mask}  ${test_gateway}
+    Update IP Address  ${test_ipv4_addr2}  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
 
 Configure Invalid Values For DNS Server
     [Documentation]  Configure invalid values for DNS server and expect an error.
