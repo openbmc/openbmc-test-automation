@@ -190,7 +190,7 @@ Verify CPU Not Present
 Verify GPU Present
     [Documentation]  Verify the IPMI sensor for GPU present using Redfish.
     [Tags]  Verify_GPU_Present
-    [Template]  Enable Present Bit Via IPMI and Verify Using Redfish
+    [Template]  Set Present Bit Via IPMI and Verify Using Redfish
 
     # sensor_id  component
     0xC5         gv100card0
@@ -199,7 +199,7 @@ Verify GPU Present
 Verify GPU Not Present
     [Documentation]  Verify the IPMI sensor for GPU not present using Redfish.
     [Tags]  Verify_GPU_Not_Present
-    [Template]  Disable Present Bit Via IPMI and Verify Using Redfish
+    [Template]  Set Present Bit Via IPMI and Verify Using Redfish
 
     # sensor_id  component
     0xC5         gv100card0
