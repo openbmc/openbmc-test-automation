@@ -493,6 +493,15 @@ Modify IPv4 Address And Verify
 
      Update IP Address  ${test_ipv4_addr}  ${test_ipv4_addr2}  ${test_subnet_mask}  ${test_gateway}
 
+Add IPv4 Address And Modify IPv4 Address And Modify Back
+    [Documentation]  Add IP via redfish and Modify IP and Modify it back.
+    [Tags]  Add_IPv4_Address_And_Modify_IPv4_Address_And_Modify_Back
+    [Teardown]  Run Keywords
+    ...  Delete IP Address  ${test_ipv4_addr}  AND  Test Teardown Execution
+
+    Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+    Update IP Address  ${test_ipv4_addr}  ${test_ipv4_addr2}  ${test_subnet_mask}  ${test_gateway}
+    Update IP Address  ${test_ipv4_addr2}  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
 
 Configure Invalid Values For DNS Server
     [Documentation]  Configure invalid values for DNS server and expect an error.
