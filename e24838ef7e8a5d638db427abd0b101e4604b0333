@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67fe9929_5d82bc47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-09-27T03:52:50Z",
+      "side": 1,
+      "message": "Verify GPU Present :: Verify the IPMI sensor for GPU present using... | FAIL |\nNo keyword with name \u0027Enable Present Bit Via IPMI and Verify Using Redfish\u0027 found. Did you mean:\n    Set Present Bit Via IPMI And Verify Using Redfish\n------------------------------------------------------------------------------\nVerify GPU Not Present :: Verify the IPMI sensor for GPU not prese... | FAIL |\nNo keyword with name \u0027Disable Present Bit Via IPMI and Verify Using Redfish\u0027 found. Did you mean:\n    Set Present Bit Via IPMI And Verify Using Redfish\n------------------------------------------------------------------------------",
+      "revId": "e24838ef7e8a5d638db427abd0b101e4604b0333",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
