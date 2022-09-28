@@ -17,7 +17,13 @@ Test Teardown    Test Teardown Execution
 
 ${valid_password}       0penBmc1
 ${valid_password2}      0penBmc2
-
+${admin_level_priv}     4
+# Refer:  #openbmc/phosphor-user-manager/blob/master/user_mgr.cpp
+# ipmiMaxUsers = 15;    <-- IPMI
+# maxSystemUsers = 30;  <-- Max system redfish account users allowed
+${ipmi_max_num_users}   ${15}
+${max_num_users}        ${30}
+${empty_name_pattern}   ^User Name\\s.*\\s:\\s$
 
 *** Test Cases ***
 
@@ -157,6 +163,43 @@ Update User Privilege Via Redfish And Verify Using IPMI
     ${user_info}=
     ...  Get Lines Containing String  ${resp}  ${random_username}
     Should Contain  ${user_info}  USER
+
+
+Create IPMI User And Verify Login Via Redfish
+    [Documentation]  Create user using IPMI and verify user login via Redfish.
+    [Tags]  Create_IPMI_User_And_Verify_Login_Via_Redfish
+
+    ${username}  ${userid}=  Create IPMI Random User With Password And Privilege
+    ...  ${valid_password}  ${admin_level_priv}
+
+    Redfish.Logout
+
+    # Verify user login using Redfish.
+    Redfish.Login  ${username}  ${valid_password}
+    Redfish.Logout
+
+    Redfish.Login
+
+
+Update User Password Via IPMI And Verify Using Redfish
+    [Documentation]  Update user password using IPMI and verify user
+    ...  login via Redfish.
+    [Tags]  Update_User_Password_Via_IPMI_And_Verify_Using_Redfish
+
+    ${username}  ${userid}=  Create IPMI Random User With Password And Privilege
+    ...  ${valid_password}  ${admin_level_priv}
+
+    # Update user password using IPMI.
+    Run IPMI Standard Command
+    ...  user set password ${userid} ${valid_password2}
+
+    Redfish.Logout
+
+    # Verify that user login works with new password using Redfish.
+    Redfish.Login  ${username}  ${valid_password2}
+    Redfish.Logout
+
+    Redfish.Login
 
 
 *** Keywords ***
