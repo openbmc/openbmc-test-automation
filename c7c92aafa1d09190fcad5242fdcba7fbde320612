@@ -16,6 +16,23 @@
       "message": "Done",
       "revId": "c7c92aafa1d09190fcad5242fdcba7fbde320612",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ff974c5_83ba9bcf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-09-28T02:40:32Z",
+      "side": 1,
+      "message": "Note from Discord:\n\n\nGanesan — Yesterday at 10:30 AM\n@GEORGE KEISHING \n\nhttps://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/57358\n\nActually in openbmc image itself system info parameter - 3, is not an non-volatile. \n\nwhen we checked in ipmi spec it was mentioned as\nChoice of system manufacturing defaults for non-volatile parameters is left to the system manufacturer unless otherwise specified.\n \n\nso it\u0027s upto system manufacturer for that parameter is to be non-volatile or not.\nhence we removed that particular test case from script.",
+      "revId": "c7c92aafa1d09190fcad5242fdcba7fbde320612",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
