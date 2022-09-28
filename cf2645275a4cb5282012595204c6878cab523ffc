@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28445813_3fd91a2c",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-09-28T05:43:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81a2b769_382c8406",
+      "range": {
+        "startLine": 73,
+        "startChar": 49,
+        "endLine": 73,
+        "endChar": 64
+      },
+      "revId": "cf2645275a4cb5282012595204c6878cab523ffc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a82c153_1236f7ab",
@@ -66,6 +90,48 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d712ad3_8e0056e8",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-09-28T05:43:22Z",
+      "side": 1,
+      "message": "\"Performing host reboot and verify boot count incremented in id value\" is the intended test case here. Moving it to test setup wont be valid. Kindly correct me incase I have got it wrong.",
+      "parentUuid": "3a82c153_1236f7ab",
+      "revId": "cf2645275a4cb5282012595204c6878cab523ffc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ae89264_076c69e4",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-09-28T05:43:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ca89e4c_4dee7a7a",
+      "range": {
+        "startLine": 85,
+        "startChar": 63,
+        "endLine": 85,
+        "endChar": 65
+      },
+      "revId": "cf2645275a4cb5282012595204c6878cab523ffc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3caa0a5d_e6e4939f",
         "filename": "redfish/systems/LogServices/test_post_codes.robot",
         "patchSetId": 1
@@ -77,6 +143,30 @@
       "writtenOn": "2022-09-27T07:55:19Z",
       "side": 1,
       "message": "end with period for all the sentence in the documentation",
+      "range": {
+        "startLine": 92,
+        "startChar": 72,
+        "endLine": 92,
+        "endChar": 78
+      },
+      "revId": "cf2645275a4cb5282012595204c6878cab523ffc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb5a63bb_0c607770",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-09-28T05:43:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3caa0a5d_e6e4939f",
       "range": {
         "startLine": 92,
         "startChar": 72,
@@ -110,6 +200,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1521f6b5_fde9b1e7",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-09-28T05:43:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be09f4a9_b3291995",
+      "range": {
+        "startLine": 127,
+        "startChar": 6,
+        "endLine": 127,
+        "endChar": 13
+      },
+      "revId": "cf2645275a4cb5282012595204c6878cab523ffc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7075a419_502966ad",
@@ -133,6 +247,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "522fa6cd_46f8a135",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-09-28T05:43:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7075a419_502966ad",
+      "range": {
+        "startLine": 166,
+        "startChar": 15,
+        "endLine": 166,
+        "endChar": 17
+      },
+      "revId": "cf2645275a4cb5282012595204c6878cab523ffc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5099fd56_43258ef4",
@@ -146,6 +284,30 @@
       "writtenOn": "2022-09-27T07:55:19Z",
       "side": 1,
       "message": "U can remove this in documentation mention as in the comment at 169",
+      "range": {
+        "startLine": 168,
+        "startChar": 2,
+        "endLine": 168,
+        "endChar": 19
+      },
+      "revId": "cf2645275a4cb5282012595204c6878cab523ffc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b897cc6_6d6915de",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-09-28T05:43:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5099fd56_43258ef4",
       "range": {
         "startLine": 168,
         "startChar": 2,
