@@ -16,6 +16,24 @@
       "message": "are you checking its side effect on the other interface??\nI found that, modifying multiple times on eth1 was making etho to get updated with eth1\u0027s old IP.\nWhere are you checking it??",
       "revId": "f6b049db0a4cfd6b027fa430fd9e37f8ac33ee03",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "953c6470_5ddd83c8",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-09-29T09:18:45Z",
+      "side": 1,
+      "message": "that test case I will add in the multiple interfaces bucket.\nThis is in the network bucket.",
+      "parentUuid": "3eeb6ba8_1df51a2c",
+      "revId": "f6b049db0a4cfd6b027fa430fd9e37f8ac33ee03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
