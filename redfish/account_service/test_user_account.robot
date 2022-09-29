@@ -283,6 +283,52 @@ Verify User Account Locked
 
     Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
 
+
+Verify User Account Unlock
+    [Documentation]  Verify manually unlocking the account before lockout time
+    [Tags]  Verify_User_Account_Unlock
+    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login  AND
+    ...  AND  Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
+    ...  AND  SSHLibrary.Close All Connections
+
+    Redfish Create User  test_user  TestPwd123  Administrator  ${True}
+
+    ${payload}=  Create Dictionary
+    ...  AccountLockoutThreshold=${account_lockout_threshold}
+    ...  AccountLockoutDuration=${account_lockout_duration}
+    Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}  body=${payload}
+
+    Redfish.Logout
+
+    # Make ${account_lockout_threshold} failed login attempts.
+    Repeat Keyword  ${account_lockout_threshold} times
+    ...  Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  test_user  abc123
+
+    # Ensure SSH Login with locked account gets failed
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    Run Keyword And Expect Error  Authentication failed*
+    ...  SSHLibrary.Login  test_user  TestPwd123
+
+    # Verify that legitimate login fails due to lockout.
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  test_user  TestPwd123
+
+    ${payload}=  Create Dictionary  Locked=${FALSE}
+
+    # Manually unlock the account before lockout threshold expires
+    Redfish.Login
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}test_user  body=${payload}
+    Redfish.Logout
+
+    # Try redfish login with the recently unlocked account
+    Redfish.Login  test_user  TestPwd123
+
+    # Try SSH login with the unlocked account
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    SSHLibrary.Login  test_user  TestPwd123
+
+
 Verify Admin User Privilege
     [Documentation]  Verify admin user privilege.
     [Tags]  Verify_Admin_User_Privilege
@@ -470,6 +516,15 @@ Verify SSH Login Access With Admin User
     Redfish.Login
     Redfish.Delete  /redfish/v1/AccountService/Accounts/new_admin
 
+
+Verify Configure BasicAuth Enable And Disable
+    [Documentation]  Verify configure basicauth enable and disable
+    [Tags]  Verify_Configure_BasicAuth_Enable_And_Disable
+    [Template]  Template For Configure Auth Methods
+
+    # auth_method
+    BasicAuth
+    XToken
 
 *** Keywords ***
 
@@ -672,3 +727,131 @@ Verify Create User Without Enabling
     # Delete newly created user.
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
 
+Template For Configure Auth Methods
+    [Documentation]  Template to configure auth methods.
+    [Arguments]  ${auth_method}
+    [Teardown]  Configure AuthMethods  ${auth_method}=${initial_value}
+
+    # Description of Argument(s):
+    # auth_method  BasicAuth, XToken.
+
+    Get AuthMethods Default Values  ${auth_method}
+
+    # Patch basicauth to TRUE
+    Configure AuthMethods  ${auth_method}=${TRUE}
+
+    Run Keyword IF  "${auth_method}" == "XToken"
+    ...    Check XToken Works Fine  ${HTTP_OK}
+    ...  ELSE
+    ...    Check BasicAuth Works Fine  ${HTTP_OK}
+
+    # Patch basicauth to FALSE
+    Configure AuthMethods  ${auth_method}=${FALSE}
+
+    Run Keyword IF  "${auth_method}" == "BasicAuth"
+    ...    Check BasicAuth Works Fine  ${HTTP_UNAUTHORIZED}
+    ...  ELSE
+    ...    Check XToken Works Fine  ${HTTP_UNAUTHORIZED}
+
+Configure AuthMethods
+    [Documentation]  Enable/disable authmethod types.
+    [Arguments]  &{authmethods}
+
+    # Description of argument(s):
+    # authmethods            The authmethod setting which needs to be
+    #                        set in account service URI.
+    # Usage Example          Configure AuthMethods  XToken=${TRUE}  BasicAuth=${TRUE}
+    #                        This will set the value of "XToken" and "BasicAuth"
+    #                        property in accountservice uri to TRUE.
+
+    ${openbmc}=  Create Dictionary  AuthMethods=${authmethods}
+    ${oem}=  Create Dictionary  OpenBMC=${openbmc}
+    ${payload}=  Create Dictionary  Oem=${oem}
+
+    # Setting authmethod properties using Redfish session based auth
+    ${status}=  Run Keyword And Return Status
+    ...  Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body=${payload}  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
+
+    # Setting authmethod properties using basic auth incase the former fails
+    IF  ${status}==${FALSE}
+        # Payload dictionary pre-process to match json formatting
+        ${payload}=  Convert To String  ${payload}
+        ${payload}=  Replace String  ${payload}  '  "
+        ${payload}=  Replace String  ${payload}  False  false
+        ${payload}=  Replace String  ${payload}  True  true
+
+        # Curl Command Framing for PATCH authmethod
+        ${cmd}=  Catenate  curl -k -i -u ${OPENBMC_USERNAME}:${OPENBMC_PASSWORD}
+        ...  -X PATCH '${AUTH_URI}${REDFISH_ACCOUNTS_SERVICE_URI}'
+        ...  -H 'content-type:application/json' -H 'If-Match:*'
+        ...  -d '${payload}'
+        ${rc}  ${out}=  Run And Return Rc And Output  ${cmd}
+
+        #  Check the response of curl command is 200 or 204
+        ${check_no_content}=
+        ...  Run Keyword and Return Status  Should Contain  ${out}  204
+        ${check_ok}=
+        ...  Run Keyword and Return Status  Should Contain  ${out}  200
+        Pass Execution If  ${check_no_content}==${TRUE}
+        ...  OR  ${check_ok}==${TRUE}
+    END
+
+
+Get AuthMethods Default Values
+    [Documentation]  Get enabled/disabled status of all authmethods
+    ...  from Redfish account service URI
+    [Arguments]  ${authmethod}
+
+    # Description of argument(s):
+    # authmethod            The authmethod property whose value needs to be
+    #                       retrieved from account service URI.
+    # Usage Example         Get AuthMethods Default Values  BasicAuth
+    #                       returns >> ${TRUE}
+    # Example:
+    # {
+    #     "@odata.id": "/redfish/v1/AccountService",
+    #     (...)
+    #     "Oem": {
+    #         "OpenBMC": {
+    #             "AuthMethods": {
+    #                 "BasicAuth": true,
+    #                 "Cookie": true,
+    #                 "SessionToken": true,
+    #                 "TLS": true,
+    #                 "XToken": true
+    #             }
+    #         }
+    #     }
+    # }
+
+    ${resp}=  Redfish.Get Attribute  ${REDFISH_ACCOUNTS_SERVICE_URI}  Oem
+    ${authmethods}=  Set Variable  ${resp['OpenBMC']['AuthMethods']}
+    ${initial_value}=  Get From Dictionary  ${authmethods}  ${authmethod}
+    Set Test Variable  ${initial_value}
+
+Check XToken Works Fine
+    [Documentation]  Verify Xtoken works fine.
+    [Arguments]  ${status_code}
+
+    # Description of Argument(s):
+    # status_code : 200, 401.
+
+    # Verify xtoken auth works for xtoken
+    Redfish.Get  ${REDFISH_ACCOUNTS_SERVICE_URI}
+    ...  valid_status_codes=[${status_code}]
+
+Check BasicAuth Works Fine
+    [Documentation]  Verify Basic Auth works fine.
+    [Arguments]  ${status_code}
+
+    # Description of Argument(s):
+    # status_code : 200, 401.
+
+    # Verify basic auth works based on basic auth.
+    ${cmd}=  Catenate  curl -k -i -u ${OPENBMC_USERNAME}:${OPENBMC_PASSWORD}
+    ...  ${AUTH_URI}/redfish/v1/AccountService
+    ${rc}  ${out}=  Run And Return Rc And Output  ${cmd}
+
+    #  Check the response of curl command is 200/401
+    Should Contain  ${out}  ${status_code}
