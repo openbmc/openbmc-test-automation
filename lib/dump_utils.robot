@@ -386,3 +386,53 @@ Get Dump ID And Status
     Wait Until Keyword Succeeds  10 min  15 sec  Check Task Completion  ${task_id}
     ${dump_id}=  Get Dump ID  ${task_id}
     [Return]  ${dump_id}  Completed
+
+
+Create BMC User Dump
+    [Documentation]  Generate user initiated BMC dump via Redfish and return
+    ...  the task instance Id and response object (e.g., "5").
+
+    ${payload}=  Create Dictionary  DiagnosticDataType=Manager
+    ${resp}=  Redfish.Post  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
+    ...  body=${payload}  valid_status_codes=[${HTTP_ACCEPTED}]
+
+    ${ip_resp}=  Evaluate  json.loads(r'''${resp.text}''')  json
+
+    Return From Keyword  ${ip_resp["Id"]}  ${resp}
+
+
+Wait For Task Completion
+    [Documentation]  Check whether the state of task instance matches any of the
+    ...  expected completion states before maximum number of retries exceeds and
+    ...  exit loop in case completion state is met.
+    [Arguments]  ${task_id}  ${expected_status}  ${retry_max_count}=300
+    ...  ${check_state}=${FALSE}
+
+    # Description of argument(s):
+    # task_id                     the task id for which completion is
+    #                             to be monitored.
+    # expected_status             the task state which is to be considered as the
+    #                             end of task life cycle.
+    # retry_max_count             the maximum number of retry count to wait for
+    #                             task to reach its completion state. Default
+    #                             value of retry_max_count is 300.
+    # check_state                 if set as TRUE, the task state will be
+    #                             monitored whether the task state value is
+    #                             valid throughout task life cycle until
+    #                             expected completion state is reached.
+    #                             Default value of check_state is FALSE.
+
+    FOR  ${retry}  IN RANGE  ${retry_max_count}
+        ${resp}=  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
+        ${current_task_state}=  Set Variable  ${resp["TaskState"]}
+        Rprint Vars  current_task_state
+
+        Run Keyword If  ${check_state} == ${TRUE}  Should Be True
+        ...  '${resp["TaskState"]}' in ${allowed_task_state}
+        ...  msg=Verify task state is valid
+
+        Exit For Loop If
+        ...  '${resp["TaskState"]}' in ${expected_status}
+
+        Sleep  5s
+    END
