@@ -1,15 +1,52 @@
 {
-        "comment": "This is a generic possible redfish standard task states.",
-        "TaskRunning": {
-                "TaskState": "Running",
-                "TaskStatus": "OK"
+    "comment": "This is a generic possible redfish standard task states.",
+    "TaskRunning": {
+        "TaskState": "Running",
+        "TaskStatus": "OK"
+    },
+    "TaskCompleted": {
+        "TaskState": "Completed",
+        "TaskStatus": "OK"
+    },
+    "TaskException": {
+        "TaskState": "Exception",
+        "TaskStatus": "Warning"
+    },
+    "TaskService": {
+        "CompletedTaskOverWritePolicy": {
+            "AllowedValues": [
+                "Manual",
+                "Oldest"
+            ]
         },
-        "TaskCompleted": {
-                "TaskState": "Completed",
-                "TaskStatus": "OK"
-        },
-        "TaskException": {
-                "TaskState": "Exception",
-                "TaskStatus": "Warning"
+        "Status": {
+            "Health": "OK",
+            "HealthRollup": "OK",
+            "State": "Enabled"
         }
+    },
+    "Task": {
+        "TaskState": {
+            "AllowedValues": [
+                "New",
+                "Starting",
+                "Running",
+                "Suspended",
+                "Interrupted",
+                "Pending",
+                "Stopping",
+                "Completed",
+                "Killed",
+                "Exception",
+                "Service",
+                "Cancelling",
+                "Cancelled"
+            ],
+            "AllowedCompletionTaskState": [
+                "Cancelled",
+                "Completed",
+                "Exception"
+            ]
+        }
+    }
 }
