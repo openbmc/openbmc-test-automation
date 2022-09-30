@@ -154,7 +154,7 @@ Verify Enable NTP
     # The following patch command should set the ["NTP"]["ProtocolEnabled"] property to "True".
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'ProtocolEnabled': ${True}}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
-    Wait Until Keyword Succeeds  30 sec  5 sec
+    Wait Until Keyword Succeeds  1 min  5 sec
     ...  Verify System Time Sync Status  ${True}
     ${ntp}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  NTP
     Rprint Vars  ntp
