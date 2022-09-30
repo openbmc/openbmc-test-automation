@@ -1,0 +1,35 @@
+{
+    "Description": "The following json file holds the allowable values for properties in task and task service uri",
+    "task_service": {
+        "completed_task_overwrite_policy": {
+            "allowed_values": [
+                "Manual",
+                "Oldest"
+            ]
+        }
+    },
+    "task": {
+        "task_state": {
+            "allowed_values": [
+                "New",
+                "Starting",
+                "Running",
+                "Suspended",
+                "Interrupted",
+                "Pending",
+                "Stopping",
+                "Completed",
+                "Killed",
+                "Exception",
+                "Service",
+                "Cancelling",
+                "Cancelled"
+            ],
+            "allowed_completion_task_state": [
+                "Cancelled",
+                "Completed",
+                "Exception"
+            ]
+        }
+    }
+}
