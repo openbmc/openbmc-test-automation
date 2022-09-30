@@ -386,3 +386,16 @@ Get Dump ID And Status
     Wait Until Keyword Succeeds  10 min  15 sec  Check Task Completion  ${task_id}
     ${dump_id}=  Get Dump ID  ${task_id}
     [Return]  ${dump_id}  Completed
+
+
+Create BMC User Dump And Return Task Id
+    [Documentation]  Generate user initiated BMC dump via Redfish and return
+    ...  the task instance Id and response object (e.g., "5").
+
+    ${payload}=  Create Dictionary  DiagnosticDataType=Manager
+    ${resp}=  Redfish.Post  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
+    ...  body=${payload}  valid_status_codes=[${HTTP_ACCEPTED}]
+
+    ${ip_resp}=  Evaluate  json.loads(r'''${resp.text}''')  json
+
+    Return From Keyword  ${ip_resp["Id"]}  ${resp}
