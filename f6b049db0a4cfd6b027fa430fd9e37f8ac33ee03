@@ -34,6 +34,24 @@
       "parentUuid": "3eeb6ba8_1df51a2c",
       "revId": "f6b049db0a4cfd6b027fa430fd9e37f8ac33ee03",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5041bca_f8b6bfaa",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-09-30T04:35:18Z",
+      "side": 1,
+      "message": "OK.\nPls create a github task, assign it to you and share it here.",
+      "parentUuid": "953c6470_5ddd83c8",
+      "revId": "f6b049db0a4cfd6b027fa430fd9e37f8ac33ee03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
