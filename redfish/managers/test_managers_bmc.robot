@@ -166,6 +166,9 @@ Redfish BMC Manager ForceRestart When Host Off
 Verify Boot Count After BMC Reboot
     [Documentation]  Verify boot count increments on BMC reboot.
     [Tags]  Verify_Boot_Count_After_BMC_Reboot
+    [Setup]  Run Keywords  Get NTP Initial Status  AND
+    ...  Set NTP state  ${TRUE}
+    [Teardown]  Restore NTP Status
 
     Set BMC Boot Count  ${0}
     Redfish OBMC Reboot (off)
@@ -196,3 +199,26 @@ Test Teardown Execution
 
     FFDC On Test Case Fail
     Run Keyword And Ignore Error  redfish.Logout
+
+
+Get NTP Initial Status
+    [Documentation]  Get NTP service Status.
+
+    ${original_ntp}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  NTP
+    Set Suite Variable  ${original_ntp}
+
+
+Set NTP state
+    [Documentation]  Set NTP service inactive.
+    [Arguments]  ${state}
+
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'ProtocolEnabled': ${state}}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+
+Restore NTP Status
+    [Documentation]  Restore NTP Status.
+
+    Run Keyword If  '${original_ntp["ProtocolEnabled"]}' == 'True'
+    ...    Set NTP state  ${TRUE}
+    ...  ELSE  Set NTP state  ${FALSE}
