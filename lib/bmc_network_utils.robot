@@ -512,6 +512,40 @@ Add IP Address
     Validate Network Config On BMC
 
 
+Update IP Address
+    [Documentation]  Update IP address of BMC.
+    [Arguments]  ${ip}  ${new_ip}  ${netmask}  ${gw_ip}
+    ...  ${valid_status_codes}=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Description of argument(s):
+    # ip                  IP address to be replaced (e.g. "10.7.7.7").
+    # new_ip              New IP address to be configured.
+    # netmask             Netmask value.
+    # gw_ip               Gateway IP address.
+    # valid_status_codes  Expected return code from patch operation
+    #                     (e.g. "200").  See prolog of rest_request
+    #                     method in redfish_plus.py for details.
+
+    ${empty_dict}=  Create Dictionary
+    ${patch_list}=  Create List
+    ${ip_data}=  Create Dictionary  Address=${new_ip}  SubnetMask=${netmask}  Gateway=${gw_ip}
+
+    # Find the position of IP address to be modified.
+    @{network_configurations}=  Get Network Configuration
+    FOR  ${network_configuration}  IN  @{network_configurations}
+      Run Keyword If  '${network_configuration['Address']}' == '${ip}'
+      ...  Append To List  ${patch_list}  ${ip_data}
+      ...  ELSE  Append To List  ${patch_list}  ${empty_dict}
+    END
+
+    ${ip_found}=  Run Keyword And Return Status  List Should Contain Value
+    ...  ${patch_list}  ${ip_data}  msg=${ip} does not exist on BMC
+    Pass Execution If  ${ip_found} == ${False}  ${ip} does not exist on BMC
+
+    # Run patch command only if given IP is found on BMC
+    ${data}=  Create Dictionary  IPv4StaticAddresses=${patch_list}
+
+
 Delete IP Address
     [Documentation]  Delete IP Address Of BMC.
     [Arguments]  ${ip}  ${valid_status_codes}=${HTTP_OK}
@@ -764,3 +798,31 @@ Get Active Ethernet Channel List
     ...  ${channel_number_list}  ${valid_channel_number_interface_names}
 
     [Return]  ${channel_number_list}
+
+
+Configure Multiple Static IPv4 Addresses
+    [Documentation]  Configure multiple static ipv4 address via Redfish and verify.
+    [Arguments]  ${ip_addreses}  ${subnet_mask}  ${gateway}
+
+    # Description of argument(s):
+    # ip_addreses         A list of IP addresses to be added (e.g.["10.7.7.7"]).
+    # subnet_mask         Subnet mask for the IP to be added (e.g. "255.255.0.0").
+    # gateway             Gateway for the IP to be added (e.g. "10.7.7.1").
+
+    FOR  ${ip}  IN   @{ip_addreses}
+       Add IP Address  ${ip}  ${subnet_mask}  ${gateway}
+    END
+    Validate Network Config On BMC
+
+
+Delete Multiple Static IPv4 Addresses
+    [Documentation]  Delete multiple static ipv4 address via Redfish.
+    [Arguments]  ${ip_addreses}
+
+    # Description of argument(s):
+    # ip_addreses         A list of IP addresses to be deleted (e.g.["10.7.7.7"]).
+
+    FOR  ${ip}  IN   @{ip_addreses}
+       Delete IP Address  ${ip}
+    END
+    Validate Network Config On BMC

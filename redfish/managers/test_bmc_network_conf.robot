@@ -851,32 +851,6 @@ Update IP Address
     Verify IP On BMC  ${new_ip}
     Validate Network Config On BMC
 
-Configure Multiple Static IPv4 Addresses
-    [Documentation]  Configure multiple static ipv4 address via Redfish and verify.
-    [Arguments]  ${ip_addreses}  ${subnet_mask}  ${gateway}
-
-    # Description of argument(s):
-    # ip_addreses         A list of IP addresses to be added (e.g.["10.7.7.7"]).
-    # subnet_mask         Subnet mask for the IP to be added (e.g. "255.255.0.0").
-    # gateway             Gateway for the IP to be added (e.g. "10.7.7.1").
-
-    FOR  ${ip}  IN   @{ip_addreses}
-       Add IP Address  ${ip}  ${subnet_mask}  ${gateway}
-    END
-    Validate Network Config On BMC
-
-
-Delete Multiple Static IPv4 Addresses
-    [Documentation]  Delete multiple static ipv4 address via Redfish.
-    [Arguments]  ${ip_addreses}
-
-    # Description of argument(s):
-    # ip_addreses         A list of IP addresses to be deleted (e.g.["10.7.7.7"]).
-
-    FOR  ${ip}  IN   @{ip_addreses}
-       Delete IP Address  ${ip}
-    END
-    Validate Network Config On BMC
 
 Verify Network Response On Specified Host State
     [Documentation]  Verifying the BMC network response when host is on and off.
