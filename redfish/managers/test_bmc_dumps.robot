@@ -87,6 +87,9 @@ Verify Dump Persistency On BMC Reset
     [Documentation]  Create user dump, reset BMC and verify dump persistency.
     [Tags]  Verify_Dump_Persistency_On_BMC_Reset
 
+    # Power off host so that dump is not offloaded to host OS.
+    Redfish Power Off  stack_mode=skip
+
     Create User Initiated BMC Dump Via Redfish
     ${dump_entries_before}=  redfish_utils.get_member_list  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
 
