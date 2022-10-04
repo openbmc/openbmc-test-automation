@@ -10,8 +10,7 @@ Suite Teardown  Close Browser
 
 *** Variables ***
 
-${xpath_header_text}       //*[contains(@class, "navbar-text")]
-
+${xpath_header_text}       //*[@data-test-id='appHeader-container-overview']
 
 *** Test Cases ***
 
@@ -20,7 +19,7 @@ Verify GUI Header Text
     [Tags]  Verify_GUI_Header_Text
 
     ${gui_header_text}=  Get Text  ${xpath_header_text}
-    Should Contain  ${gui_header_text}  BMC System Management
+    Should Contain  ${gui_header_text}  ASMI
 
 
 Verify Server Health Button
