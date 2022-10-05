@@ -49,3 +49,6 @@ echo "--variable LDAP_USER:$LDAP_USER" >> $ARG_FILE
 echo "--variable LDAP_USER_PASSWORD:$LDAP_USER_PASSWORD" >> $ARG_FILE
 echo "--variable GROUP_NAME:$GROUP_NAME" >> $ARG_FILE
 echo "--variable GROUP_PRIVILEGE:$GROUP_PRIVILEGE" >> $ARG_FILE
+
+# remove empty variables
+sed -ni '/:$/!p' $ARG_FILE
