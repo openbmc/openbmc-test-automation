@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05062826_e3329b77",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-07T09:20:04Z",
+      "side": 1,
+      "message": "Please use latest commit message format like below.\n\nFix for BMC dump persistence test case\n\nChanges:\n    - Added Host power off so that the dump is not offloaded to host OS. \n\nTested:\n    - Ran dump persistence test case from sandbox successfully.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 32
+      },
+      "revId": "7cf1a6542f78fa36839f73e09bda277040f7645b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
