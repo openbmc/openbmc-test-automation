@@ -14,6 +14,9 @@ Test Teardown    Test Teardown Execution
 ${additional_power_check}      ${1}
 ${additional_occ_check}        ${1}
 
+# By default disable SOL logging collection.
+${capture_sol}                 ${0}
+
 *** Test Cases ***
 
 Verify Redfish Host GracefulShutdown
@@ -64,7 +67,7 @@ Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
     Printn
-    Start SOL Console Logging
+    Run Keyword If  ${capture_sol} == ${1}  Start SOL Console Logging
     Redfish.Login
 
 
@@ -72,14 +75,20 @@ Test Teardown Execution
     [Documentation]  Collect FFDC and SOL log.
 
     FFDC On Test Case Fail
-    ${sol_log}=    Stop SOL Console Logging
-    Log   ${sol_log}
+    Run Keyword If  ${capture_sol} == ${1}  Stop SOL Capture
 
     Run Keyword If  ${REDFISH_SUPPORTED}
     ...    Redfish Set Auto Reboot  RetryAttempts
     ...  ELSE
     ...    Set Auto Reboot  ${1}
     Redfish.Logout
+
+
+Stop SOL Capture
+    [Documentation]  Stop SOL log collection.
+
+    ${sol_log}=    Stop SOL Console Logging
+    Log   ${sol_log}
 
 
 Power Check
