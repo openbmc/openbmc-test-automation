@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70680be1_531d1d36",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-10T08:01:44Z",
+      "side": 1,
+      "message": "represents",
+      "range": {
+        "startLine": 73,
+        "startChar": 54,
+        "endLine": 73,
+        "endChar": 63
+      },
+      "revId": "aa65da7d35fbf2a8a45cac336df39e71dbf78999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d40f3c1b_b18551d3",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-10T08:01:44Z",
+      "side": 1,
+      "message": "ID.. change wherever applicable",
+      "range": {
+        "startLine": 73,
+        "startChar": 32,
+        "endLine": 73,
+        "endChar": 34
+      },
+      "revId": "aa65da7d35fbf2a8a45cac336df39e71dbf78999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42877dd0_550bd7ba",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-10T08:01:44Z",
+      "side": 1,
+      "message": "Remove as Redfish login is already part of suite setup. Remove for all tests.",
+      "range": {
+        "startLine": 76,
+        "startChar": 13,
+        "endLine": 76,
+        "endChar": 26
+      },
+      "revId": "aa65da7d35fbf2a8a45cac336df39e71dbf78999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f928a51f_fe8e39d0",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-10T08:01:44Z",
+      "side": 1,
+      "message": "This should be part of test setup for all tests.",
+      "range": {
+        "startLine": 79,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 60
+      },
+      "revId": "aa65da7d35fbf2a8a45cac336df39e71dbf78999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8482cb9_efecce45",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-10T08:01:44Z",
+      "side": 1,
+      "message": "These lines repeat in IF.. ELSE.So keep it out of the condition.",
+      "range": {
+        "startLine": 210,
+        "startChar": 8,
+        "endLine": 212,
+        "endChar": 54
+      },
+      "revId": "aa65da7d35fbf2a8a45cac336df39e71dbf78999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d02f9d1_0d01d6dc",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-10T08:01:44Z",
+      "side": 1,
+      "message": "Redfish",
+      "range": {
+        "startLine": 218,
+        "startChar": 29,
+        "endLine": 218,
+        "endChar": 36
+      },
+      "revId": "aa65da7d35fbf2a8a45cac336df39e71dbf78999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
