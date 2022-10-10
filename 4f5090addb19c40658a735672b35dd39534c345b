@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0847538a_59e60179",
+        "filename": "redfish/managers/test_managers_bmc.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-10-10T06:44:49Z",
+      "side": 1,
+      "message": "Best practice when using the keyword GET is to return data\n\n[Return]  ${original_ntp}\n\nElse rename to some other keyword\n\nUpdate NTP Test Original Status\nor\n\nUpdate NTP Test Initial Status\n\nsomething in that line",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 204,
+        "endChar": 22
+      },
+      "revId": "4f5090addb19c40658a735672b35dd39534c345b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
