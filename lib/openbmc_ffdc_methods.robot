@@ -736,3 +736,16 @@ OS Distro Type
     ${stdout}  ${stderr}  ${rc}=  OS Execute Command  uname  ignore_err=${0}
 
    [Return]  ${stdout}
+
+
+Get OS Distro Release Info
+   [Documentation]  Get the host partition release info.
+    ${stdout}  ${stderr}  ${rc}=  OS Execute Command
+    ...  cat /etc/os-release  ignore_err=${1}
+
+    Return From Keyword If  ${rc} == ${0}  ${stdout}
+
+    # If linux distro doesn't have os-release, check for uname.
+    ${stdout}  ${stderr}  ${rc}=  OS Execute Command  uname  ignore_err=${0}
+
+   [Return]  ${stdout}
