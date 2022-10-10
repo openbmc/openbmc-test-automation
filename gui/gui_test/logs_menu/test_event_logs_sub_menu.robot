@@ -26,6 +26,7 @@ ${xpath_delete_first_row}         //*[@data-test-id="eventLogs-button-deleteRow-
 ${xpath_confirm_delete}           //button[@class="btn btn-primary"]
 ${xpath_event_status_resolved}    //*[@data-test-id="tableFilter-checkbox-Resolved"]
 ${xpath_event_status_unresolved}  //*[@data-test-id="tableFilter-checkbox-Unresolved"]
+${xpath_event_action_download}      //button[contains(text(),"Download")]
 
 *** Test Cases ***
 
@@ -84,10 +85,11 @@ Select All Error Logs And Verify Buttons
     Create Error Logs  ${2}
     Wait Until Element Is Visible  ${xpath_delete_first_row}
     Select All Events
-    Wait Until Element Is Visible  ${xpath_event_action_delete}
-    Element Should Be Visible  ${xpath_event_action_export}
-    Element Should Be Visible  ${xpath_event_action_cancel}
-
+    Page Should Contain Element  ${xpath_event_status_resolved}
+    Page Should Contain Element  ${xpath_event_status_unresolved}
+    Page Should Contain Element  ${xpath_event_action_download}
+    Page Should Contain Element  ${xpath_event_action_delete}
+    Page Should Contain Element  ${xpath_event_action_cancel}
 
 Select And Verify Default UTC Timezone For Events
     [Documentation]  Select and verify that default UTC timezone is displayed for an event.
