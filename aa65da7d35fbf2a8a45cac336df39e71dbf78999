@@ -47,6 +47,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d35ca25f_df60a844",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-10T17:22:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70680be1_531d1d36",
+      "range": {
+        "startLine": 73,
+        "startChar": 54,
+        "endLine": 73,
+        "endChar": 63
+      },
+      "revId": "aa65da7d35fbf2a8a45cac336df39e71dbf78999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "515ff1c0_5f8f4466",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-10T17:22:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d40f3c1b_b18551d3",
+      "range": {
+        "startLine": 73,
+        "startChar": 32,
+        "endLine": 73,
+        "endChar": 34
+      },
+      "revId": "aa65da7d35fbf2a8a45cac336df39e71dbf78999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42877dd0_550bd7ba",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-10-10T08:01:44Z",
       "side": 1,
       "message": "Remove as Redfish login is already part of suite setup. Remove for all tests.",
+      "range": {
+        "startLine": 76,
+        "startChar": 13,
+        "endLine": 76,
+        "endChar": 26
+      },
+      "revId": "aa65da7d35fbf2a8a45cac336df39e71dbf78999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a27bbcf_56255bec",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-10T17:22:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42877dd0_550bd7ba",
       "range": {
         "startLine": 76,
         "startChar": 13,
@@ -93,6 +165,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6af0bd02_1b1c0c5c",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-10T17:22:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f928a51f_fe8e39d0",
+      "range": {
+        "startLine": 79,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 60
+      },
+      "revId": "aa65da7d35fbf2a8a45cac336df39e71dbf78999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8482cb9_efecce45",
@@ -116,6 +212,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fec5502a_f84cecb0",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-10T17:22:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8482cb9_efecce45",
+      "range": {
+        "startLine": 210,
+        "startChar": 8,
+        "endLine": 212,
+        "endChar": 54
+      },
+      "revId": "aa65da7d35fbf2a8a45cac336df39e71dbf78999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d02f9d1_0d01d6dc",
@@ -129,6 +249,30 @@
       "writtenOn": "2022-10-10T08:01:44Z",
       "side": 1,
       "message": "Redfish",
+      "range": {
+        "startLine": 218,
+        "startChar": 29,
+        "endLine": 218,
+        "endChar": 36
+      },
+      "revId": "aa65da7d35fbf2a8a45cac336df39e71dbf78999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "526de35b_b13a8c0b",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-10T17:22:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d02f9d1_0d01d6dc",
       "range": {
         "startLine": 218,
         "startChar": 29,
