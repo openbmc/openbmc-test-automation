@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df18cb55_5e3c0dde",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000869
+      },
+      "writtenOn": "2022-10-11T11:01:44Z",
+      "side": 1,
+      "message": "BMC ?",
+      "range": {
+        "startLine": 90,
+        "startChar": 49,
+        "endLine": 90,
+        "endChar": 53
+      },
+      "revId": "b4a19cd89910b6142a3f4b50363b11e006266b4e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9f790983_98505328",
         "filename": "redfish/systems/LogServices/test_post_codes.robot",
         "patchSetId": 3
