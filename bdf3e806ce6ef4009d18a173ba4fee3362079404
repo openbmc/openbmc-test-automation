@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bd7cef4_407c3f17",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-10-11T18:09:50Z",
+      "side": 1,
+      "message": "OBMC Reboot (run)\n\nI believe this is what we need to do here..  BMC reset reload at Runtime. \n\nelse OBMC Reboot (off)  will cause to power off and then reset BMC adding extra Post code as part of the poweroff.",
+      "range": {
+        "startLine": 99,
+        "startChar": 4,
+        "endLine": 99,
+        "endChar": 21
+      },
+      "revId": "bdf3e806ce6ef4009d18a173ba4fee3362079404",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
