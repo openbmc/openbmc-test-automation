@@ -25,6 +25,9 @@ Suite Teardown  Run Keywords  Redfish1.Logout  AND  Redfish.Logout
 *** Variables ***
 
 ${cmd_prefix}  ipmitool -I lanplus -C 17 -p 623 -U ${OPENBMC_USERNAME} -P ${OPENBMC_PASSWORD}
+${test_ipv4_addr}     10.7.7.7
+${test_ipv4_addr2}    10.7.7.8
+${test_subnet_mask}   255.255.255.0
 
 *** Test Cases ***
 
@@ -131,6 +134,18 @@ Verify IPMI Works On Both Network Interfaces
     ${status2}=  Run IPMI  ${OPENBMC_HOST_1}  power status
     Should Be Equal  ${status1}  ${status2}
 
+Verify Modifying IP Address Multiple Times On Interface
+    [Documentation]  Verify modifying IP address multiple times on interface.
+    [Tags]  Verify_Modifying_IP_Address_Multiple_Times_On_Interface
+    [Teardown]  Run Keywords
+    ...  Delete IP Address  ${test_ipv4_addr}  AND  Test Teardown
+
+    ${test_gateway}=  Get BMC Default Gateway
+    Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+    Update IP Address  ${test_ipv4_addr}  ${test_ipv4_addr2}  ${test_subnet_mask}  ${test_gateway}
+    Update IP Address  ${test_ipv4_addr2}  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+    Run Keyword  Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+    Run Keyword  Wait For Host To Ping  ${OPENBMC_HOST_1}  ${NETWORK_TIMEOUT}
 
 Verify Able To Load Certificates Via Eth1 IP Address
     [Documentation]  Verify able to load certificates via eth1 IP address.
