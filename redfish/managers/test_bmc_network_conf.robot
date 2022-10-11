@@ -814,52 +814,6 @@ Suite Teardown Execution
     ...  Enable IPv4 DHCP Settings
 
 
-Update IP Address
-    [Documentation]  Update IP address of BMC.
-    [Arguments]  ${ip}  ${new_ip}  ${netmask}  ${gw_ip}
-    ...  ${valid_status_codes}=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
-
-    # Description of argument(s):
-    # ip                  IP address to be replaced (e.g. "10.7.7.7").
-    # new_ip              New IP address to be configured.
-    # netmask             Netmask value.
-    # gw_ip               Gateway IP address.
-    # valid_status_codes  Expected return code from patch operation
-    #                     (e.g. "200").  See prolog of rest_request
-    #                     method in redfish_plus.py for details.
-
-    ${empty_dict}=  Create Dictionary
-    ${patch_list}=  Create List
-    ${ip_data}=  Create Dictionary  Address=${new_ip}  SubnetMask=${netmask}  Gateway=${gw_ip}
-
-    # Find the position of IP address to be modified.
-    @{network_configurations}=  Get Network Configuration
-    FOR  ${network_configuration}  IN  @{network_configurations}
-      Run Keyword If  '${network_configuration['Address']}' == '${ip}'
-      ...  Append To List  ${patch_list}  ${ip_data}
-      ...  ELSE  Append To List  ${patch_list}  ${empty_dict}
-    END
-
-    ${ip_found}=  Run Keyword And Return Status  List Should Contain Value
-    ...  ${patch_list}  ${ip_data}  msg=${ip} does not exist on BMC
-    Pass Execution If  ${ip_found} == ${False}  ${ip} does not exist on BMC
-
-    # Run patch command only if given IP is found on BMC
-    ${data}=  Create Dictionary  IPv4StaticAddresses=${patch_list}
-
-    ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
-
-    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
-    ...  body=&{data}  valid_status_codes=${valid_status_codes}
-
-    # Note: Network restart takes around 15-18s after patch request processing.
-    Sleep  ${NETWORK_TIMEOUT}s
-    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
-
-    Verify IP On BMC  ${new_ip}
-    Validate Network Config On BMC
-
 Configure Multiple Static IPv4 Addresses
     [Documentation]  Configure multiple static ipv4 address via Redfish and verify.
     [Arguments]  ${ip_addreses}  ${subnet_mask}  ${gateway}
