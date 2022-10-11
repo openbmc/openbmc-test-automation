@@ -15,7 +15,7 @@ ${xpath_power_restore_policy_heading}  //h1[text()="Power restore policy"]
 ${xpath_AlwaysOn_radio}                //input[@value='AlwaysOn']
 ${xpath_AlwaysOff_radio}               //input[@value='AlwaysOff']
 ${xpath_LastState_radio}               //input[@value='LastState']
-${xpath_save_settings_button}          //button[contains(text(),'Save settings')]
+${xpath_save_settings_button}          //button[contains(text(),'Save')]
 
 *** Test Cases ***
 
