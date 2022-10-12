@@ -28,15 +28,14 @@ Verify GetDateTime
     @{date_time}=  Split String  ${pldm_output['Response']}  ${SPACE}
     @{time}=  Split String  ${date_time}[1]  :
 
-    # verify date & time.
-    ${utc}=  Get Current Date  UTC  exclude_millis=True
-    @{current_dmy}=  Split String  ${utc}  ${SPACE}
-    @{current_time}=  Split String  ${current_dmy[1]}  :
+    ${bmc_date}=  Get Current Date from BMC
+    # Date format example: 2022-10-12 16:31:17
+    Log To Console  BMC Date: ${bmc_date}
+    # Example : ['2022-10-12', '16:31:17']
+    @{current_time}=  Split String  ${bmc_date}  ${EMPTY}
 
-    # Example output:
-    # 2020-11-25 07:34:30
-
-    Should Contain  ${current_dmy[0]}  ${date_time[0]}
+    # verify date matching pldmtool vs BMC current time.
+    Should Contain  ${current_time}  ${date_time[0]}
 
 
 Verify SetDateTime
@@ -138,3 +137,23 @@ Set Time To Manual Mode
     Redfish.Login
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'ProtocolEnabled': ${False}}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+
+Get Current Date from BMC
+    [Documentation]  Runs the date command from BMC and returns current date and time.
+
+    # Get Current Date from BMC.
+    ${date}  ${stderr}  ${rc}=  BMC Execute Command   date
+
+    # Split the string and remove first and 2nd last value from the list and
+    # join to form %d %b %H:%M:%S %Y date format
+    ${date}=  Split String  ${date}
+    Remove From List  ${date}  0
+    Remove From List  ${date}  -2
+    ${date}=  Evaluate  " ".join(${date})
+
+    # Convert the date format to %Y/%m/%d %H:%M:%S
+    ${date}=  Convert Date  ${date}  date_format=%b %d %H:%M:%S %Y
+    ...  result_format=%Y-%m-%d %H:%M:%S  exclude_millis=True
+
+    [Return]   ${date}
