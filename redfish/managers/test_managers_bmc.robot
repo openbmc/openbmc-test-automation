@@ -204,6 +204,7 @@ Test Teardown Execution
 Update NTP Test Initial Status
     [Documentation]  Update the initial status of NTP.
 
+    Redfish.Login
     ${original_ntp}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  NTP
     Set Suite Variable  ${original_ntp}
 
@@ -212,6 +213,7 @@ Set NTP state
     [Documentation]  Set NTP service inactive.
     [Arguments]  ${state}
 
+    Redfish.Login
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'ProtocolEnabled': ${state}}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
