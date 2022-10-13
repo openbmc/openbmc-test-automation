@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2711c764_86fc1684",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-10-13T07:19:45Z",
+      "side": 1,
+      "message": "Fix the following in the suite:\n\n$ codespell redfish/task_service/test_tasks.robot\nredfish/task_service/test_tasks.robot:294: completetion \u003d\u003d\u003e completion\n\n\n$ python3 -m rflint -rA robot_standards -R robot_custom_rules.py redfish/task_service/test_tasks.robot\n+ redfish/task_service/test_tasks.robot\nW: 164, 110: Line is too long (exceeds 110 characters) (LineTooLong)\nE: 253, 0: No keyword documentation (RequireKeywordDocumentation)\n\n\n\n\n",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3f6b916_0550ec1e",
