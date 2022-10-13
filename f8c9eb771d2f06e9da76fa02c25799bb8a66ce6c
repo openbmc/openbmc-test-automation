@@ -1,0 +1,180 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3f6b916_0550ec1e",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-13T05:48:54Z",
+      "side": 1,
+      "message": "Can you change \u0026 to and.",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb193921_c82457d8",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-13T05:48:54Z",
+      "side": 1,
+      "message": "Line no 21 -24 , Can you add this is json file and store in data directory.",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d7ab45c_0f5d659d",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-13T05:48:54Z",
+      "side": 1,
+      "message": "Can you add . in end of documentation.",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c46622a_b4240935",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-13T05:48:54Z",
+      "side": 1,
+      "message": "Same as line no 30.",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc8a6350_573fb384",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-13T05:48:54Z",
+      "side": 1,
+      "message": "Same as line no 30.",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efef7a80_332914a5",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-13T05:48:54Z",
+      "side": 1,
+      "message": "Can you change to instance",
+      "range": {
+        "startLine": 95,
+        "startChar": 42,
+        "endLine": 95,
+        "endChar": 49
+      },
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6bc9e71_07eb5354",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-13T05:48:54Z",
+      "side": 1,
+      "message": "Same as line no 30.",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd52a36a_57c15152",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-13T05:48:54Z",
+      "side": 1,
+      "message": "Same as line no 30.",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "897da5bd_ede16245",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-13T05:48:54Z",
+      "side": 1,
+      "message": "Same as line no 30. Can you address this in all the places.",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cffb7ea_64e3fa1e",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-13T05:48:54Z",
+      "side": 1,
+      "message": "Can you add Documentation.",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
