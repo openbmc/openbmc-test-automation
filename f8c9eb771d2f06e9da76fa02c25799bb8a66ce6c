@@ -54,6 +54,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3781c4ad_feca51e5",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-13T10:32:12Z",
+      "side": 1,
+      "message": "Suggestion: Verify Redfish Task Service Attributes",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d7ab45c_0f5d659d",
         "filename": "redfish/task_service/test_tasks.robot",
         "patchSetId": 1
@@ -71,6 +88,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37d08ed3_414e074d",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-13T10:32:12Z",
+      "side": 1,
+      "message": "Can you merge the test case line no 78, 88,116, 132.",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac536362_b940715b",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-13T10:32:12Z",
+      "side": 1,
+      "message": "Suggestion: Test Validity Of Initiated Task Instance And Task State or Test Validity Of Generated Task Instance And Task State",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c46622a_b4240935",
         "filename": "redfish/task_service/test_tasks.robot",
         "patchSetId": 1
@@ -82,6 +133,29 @@
       "writtenOn": "2022-10-13T05:48:54Z",
       "side": 1,
       "message": "Same as line no 30.",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bce75daf_ce73f312",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-13T10:32:12Z",
+      "side": 1,
+      "message": "redfish should be used as Redfish. Can make correction in other places.",
+      "range": {
+        "startLine": 79,
+        "startChar": 31,
+        "endLine": 79,
+        "endChar": 38
+      },
       "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -179,6 +253,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b71293db_ad54fc80",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-13T10:32:12Z",
+      "side": 1,
+      "message": "Suggestion: task_type  \nDefault value for task_type is dump.\nwhen task_type parameter is dump then keyword initiate bmc user dump creation and returns task id.",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9cffb7ea_64e3fa1e",
         "filename": "redfish/task_service/test_tasks.robot",
         "patchSetId": 1
@@ -190,6 +281,23 @@
       "writtenOn": "2022-10-13T05:48:54Z",
       "side": 1,
       "message": "Can you add Documentation.",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15572f1e_f397f358",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-13T10:32:12Z",
+      "side": 1,
+      "message": "Suggestion: Can you make this keyword more generic.\ne.g. if user pass 0 - Get complete history of task instances\nin case 1 - Get first instance of task instance and so on.\nif user pass multiple instance like 1, 2 then return with list of task instance.",
       "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
