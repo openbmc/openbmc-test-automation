@@ -22,6 +22,30 @@
       },
       "revId": "bdf3e806ce6ef4009d18a173ba4fee3362079404",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8efd2530_a0f0ffc7",
+        "filename": "redfish/systems/LogServices/test_post_codes.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-14T16:17:02Z",
+      "side": 1,
+      "message": "Replaced \"OBMC Reboot (off)\" to \"OBMC Reboot (run)\" to perform BMC reset at runtime. \nAlso have added \"Redfish Power On\" before getting count of logs. \nThis is been done intentionally. \"OBMC Reboot (run)\" expects host state to be \u0027ON\u0027 before BMC reset. In case host is off, and  \"OBMC Reboot (run)\" triggers \"Redfish Power On\" which adds extra post code logs thereby causing a mismatch of log count before and after \"OBMC Reboot (run)\"",
+      "parentUuid": "7bd7cef4_407c3f17",
+      "range": {
+        "startLine": 99,
+        "startChar": 4,
+        "endLine": 99,
+        "endChar": 21
+      },
+      "revId": "bdf3e806ce6ef4009d18a173ba4fee3362079404",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
