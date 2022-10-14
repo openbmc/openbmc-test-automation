@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a856dd95_2e8818fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-10-14T09:23:52Z",
+      "side": 1,
+      "message": "Ran the test case on BMC environment.",
+      "range": {
+        "startLine": 15,
+        "startChar": 6,
+        "endLine": 15,
+        "endChar": 20
+      },
+      "revId": "00bc4ab44c78b3d23308fc68d9847fdaae38c7f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "844346c1_684ea373",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-10-14T09:23:52Z",
+      "side": 1,
+      "message": "Not only updating u are validating the IP address of BMC after update.\nSo mention about it.\n\nIdeally ur Keyword should be -- Update And Verify BMC IP Address",
+      "range": {
+        "startLine": 769,
+        "startChar": 19,
+        "endLine": 769,
+        "endChar": 46
+      },
+      "revId": "00bc4ab44c78b3d23308fc68d9847fdaae38c7f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73d460e9_da79ea04",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-10-14T09:23:52Z",
+      "side": 1,
+      "message": "make it two lines",
+      "range": {
+        "startLine": 784,
+        "startChar": 4,
+        "endLine": 784,
+        "endChar": 94
+      },
+      "revId": "00bc4ab44c78b3d23308fc68d9847fdaae38c7f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d9ed1e1_860dd099",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-10-14T09:23:52Z",
+      "side": 1,
+      "message": "what is this patch command? be precise?",
+      "range": {
+        "startLine": 798,
+        "startChar": 10,
+        "endLine": 798,
+        "endChar": 23
+      },
+      "revId": "00bc4ab44c78b3d23308fc68d9847fdaae38c7f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e72bed2a_fae79f67",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-10-14T09:23:52Z",
+      "side": 1,
+      "message": "Remove period from the test case title",
+      "range": {
+        "startLine": 137,
+        "startChar": 55,
+        "endLine": 137,
+        "endChar": 56
+      },
+      "revId": "00bc4ab44c78b3d23308fc68d9847fdaae38c7f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
