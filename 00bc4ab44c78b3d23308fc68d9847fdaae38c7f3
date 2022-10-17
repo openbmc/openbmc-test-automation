@@ -112,6 +112,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35327875_72e29cdb",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-10-17T06:49:58Z",
+      "side": 1,
+      "message": "Its the existing keyword which was approved earlier moved from another file to here. Otherwise test case name \u0026 keyword name will become same.\nIt is better to avoid changing already approved code.\nHere keep keyword name as is and just update documentation for better understanding thats good enough.",
+      "parentUuid": "263818cb_e4bda17e",
+      "range": {
+        "startLine": 769,
+        "startChar": 19,
+        "endLine": 769,
+        "endChar": 46
+      },
+      "revId": "00bc4ab44c78b3d23308fc68d9847fdaae38c7f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73d460e9_da79ea04",
@@ -196,6 +220,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "9d9ed1e1_860dd099",
+      "range": {
+        "startLine": 798,
+        "startChar": 10,
+        "endLine": 798,
+        "endChar": 23
+      },
+      "revId": "00bc4ab44c78b3d23308fc68d9847fdaae38c7f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53dadf05_142ee3d9",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-10-17T06:49:58Z",
+      "side": 1,
+      "message": "something like this and move it to #794:\nModify the IP address only if given IP is found",
+      "parentUuid": "6b62a68d_f9542935",
       "range": {
         "startLine": 798,
         "startChar": 10,
