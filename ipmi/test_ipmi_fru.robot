@@ -12,7 +12,7 @@ Test Teardown          Test Teardown Execution
 
 
 *** Variables ***
-&{ipmi_redfish_fru_field_map}  board_serial=SerialNumber  board_part_number=PartNumber
+&{ipmi_redfish_fru_field_map}  product_serial=SerialNumber  product_part_number=PartNumber
 
 *** Test Cases ***
 
@@ -25,10 +25,13 @@ Test FRU Info Of Power Supplies
     ...  ${fru_objs}
 
     # Redfish FRU info.
-    ${redfish_power_details}=  Redfish.Get Properties  /redfish/v1/Chassis/${CHASSIS_ID}/Power
-    ${redfish_power_supply_reading}=  Set Variable  ${redfish_power_details['PowerSupplies']}
-
-    Verify IPMI and Redfish subcomponents  ${redfish_power_supply_reading}
+    ${redfish_power_details}=  Redfish.Get Members List  /redfish/v1/Chassis/${CHASSIS_ID}/PowerSubsystem/PowerSupplies
+    ${redfish_power_dict}=  Create List
+    FOR  ${power_supply}  IN  @{redfish_power_details}
+        ${redfish_power_supply_reading}=  Redfish.Get Properties  ${power_supply}
+        Append To List  ${redfish_power_dict}  ${redfish_power_supply_reading}
+    END
+    Verify IPMI and Redfish subcomponents  ${redfish_power_dict}
     ...  ${ipmi_fru_component_info}
 
 *** Keywords ***
@@ -87,7 +90,8 @@ Compare IPMI And Redfish FRU Component
 Suite Setup Execution
     [Documentation]  Do test setup initialization.
 
-    ${fru_objs}=  Get Fru Info
+    ${status}  ${fru_objs}=  Run Keyword And Ignore Error  Get Fru Info
+    Log To Console  FRU: ${fru_objs}
     Set Suite Variable  ${fru_objs}
     Redfish.Login
 
