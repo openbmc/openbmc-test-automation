@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d7334eb_e76d78d7",
+        "filename": "data/properties.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-10-18T15:58:14Z",
+      "side": 1,
+      "message": "I think we should give the json file name more appropriately\n\ncan we put this data in to https://github.ibm.com/openbmc/openbmc-test-automation/blob/master/data/task_state.json ??\n\nAlso add \"comment\" field",
+      "revId": "253d8a0beb2e69ae7fb1ee626af7052787be6b97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "200ecd85_f3ef1b1b",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-10-18T15:58:14Z",
+      "side": 1,
+      "message": "Verify if CompletedTaskOverWritePolicy is a valid value.\n\nEnd with period for all the comments in the test script",
+      "range": {
+        "startLine": 49,
+        "startChar": 1,
+        "endLine": 49,
+        "endChar": 13
+      },
+      "revId": "253d8a0beb2e69ae7fb1ee626af7052787be6b97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6451000b_eb2429d1",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-10-18T15:58:14Z",
+      "side": 1,
+      "message": "Verify\n\nchange in [Tags] too",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 5
+      },
+      "revId": "253d8a0beb2e69ae7fb1ee626af7052787be6b97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e72f1c3_cfcca94b",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-10-18T15:58:14Z",
+      "side": 1,
+      "message": "Id",
+      "range": {
+        "startLine": 204,
+        "startChar": 27,
+        "endLine": 204,
+        "endChar": 33
+      },
+      "revId": "253d8a0beb2e69ae7fb1ee626af7052787be6b97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "426afc76_ffe862d3",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-10-18T15:58:14Z",
+      "side": 1,
+      "message": "expected_completion_state or expected_task_state",
+      "range": {
+        "startLine": 216,
+        "startChar": 31,
+        "endLine": 216,
+        "endChar": 50
+      },
+      "revId": "253d8a0beb2e69ae7fb1ee626af7052787be6b97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "793e87f3_fd5e0688",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-10-18T15:58:14Z",
+      "side": 1,
+      "message": "instead of having no/yes .. can u prefer True/False",
+      "range": {
+        "startLine": 217,
+        "startChar": 10,
+        "endLine": 217,
+        "endChar": 26
+      },
+      "revId": "253d8a0beb2e69ae7fb1ee626af7052787be6b97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4acad23_8a542c17",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-10-18T15:58:14Z",
+      "side": 1,
+      "message": "To be precise\n\nLoad Task State Properties Data",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 20
+      },
+      "revId": "253d8a0beb2e69ae7fb1ee626af7052787be6b97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
