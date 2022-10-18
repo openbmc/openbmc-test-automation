@@ -115,6 +115,9 @@ Delete All User Initiated BMC Dumps And Verify
     [Documentation]  Delete all user initiated BMC dumps and verify.
     [Tags]  Delete_All_User_Initiated_BMC_Dumps_And_Verify
 
+    # Power off host so that dump is not offloaded to host OS.
+    Redfish Power Off  stack_mode=skip
+
     # Create some BMC dump.
     Create User Initiated BMC Dump Via Redfish
     Create User Initiated BMC Dump Via Redfish
