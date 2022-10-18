@@ -16,6 +16,24 @@
       "message": "have it in one place, patch is run only once.\nKeep it either at 800 or 795. Not both.",
       "revId": "6364a3611660f945050e27c668bed516305649ff",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15a647c8_b1f87b32",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-10-18T09:38:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86296eb6_7c900cb0",
+      "revId": "6364a3611660f945050e27c668bed516305649ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
