@@ -15,7 +15,8 @@ Test Teardown   Run Keywords  Redfish.Logout  AND  FFDC On Test Case Fail
 *** Variables ***
 
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
-
+@{mandatory_Predictive_pel_fileds}   Private Header  User Header  Primary SRC
+...  Extended User Header  Failing MTMS  User Data
 
 *** Test Cases ***
 
@@ -659,6 +660,22 @@ Verify PEL Delete
     ${id}=  Get From List  ${pel_ids}  -1
     Peltool  -d ${id}  False
     Run Keyword and Expect Error  *PEL not found*  Peltool  -i ${id}
+
+
+Verify Mandatory Fields For Predictive Error
+    [Documentation]  Verify Mandatory Fields For Predictive Error
+    [Tags]  Verify_Mandatory_Fields_For_Predictive_Error
+
+    # Inject predictive error
+    BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${pel_id}=  Get From List  ${pel_ids}  -1
+    ${pel_output}=  Peltool  -i ${pel_id}
+    # Get all fields in predictive error log
+    ${pel_sections}=  Get Dictionary Keys  ${pel_output}
+
+    List Should Contain Sub List  ${pel_sections}  ${mandatory_Predictive_pel_fileds}
 
 
 *** Keywords ***
