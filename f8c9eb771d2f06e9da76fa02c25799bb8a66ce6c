@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fced5677_cf0ab757",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-18T06:39:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3f6b916_0550ec1e",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb193921_c82457d8",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-10-13T05:48:54Z",
       "side": 1,
       "message": "Line no 21 -24 , Can you add this is json file and store in data directory.",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "315b2776_fcf39b6e",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-18T06:39:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb193921_c82457d8",
       "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -69,6 +105,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34f1e066_11a3bcae",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-18T06:39:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3781c4ad_feca51e5",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d7ab45c_0f5d659d",
@@ -82,6 +136,24 @@
       "writtenOn": "2022-10-13T05:48:54Z",
       "side": 1,
       "message": "Can you add . in end of documentation.",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8e488f5_355e9e39",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-18T06:39:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d7ab45c_0f5d659d",
       "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -116,6 +188,42 @@
       "writtenOn": "2022-10-13T10:32:12Z",
       "side": 1,
       "message": "Suggestion: Test Validity Of Initiated Task Instance And Task State or Test Validity Of Generated Task Instance And Task State",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ed69783_2e5795ee",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-18T06:39:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37d08ed3_414e074d",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84c0e730_35ddeab2",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-18T06:39:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac536362_b940715b",
       "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -160,6 +268,48 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbd80ac9_063c8d1e",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-18T06:39:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bce75daf_ce73f312",
+      "range": {
+        "startLine": 79,
+        "startChar": 31,
+        "endLine": 79,
+        "endChar": 38
+      },
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91e4dd7f_ab7150e3",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-18T06:39:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c46622a_b4240935",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc8a6350_573fb384",
@@ -173,6 +323,24 @@
       "writtenOn": "2022-10-13T05:48:54Z",
       "side": 1,
       "message": "Same as line no 30.",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac1c3f9b_e2831f55",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-18T06:39:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc8a6350_573fb384",
       "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -200,6 +368,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16b50f3e_7d9e7937",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-18T06:39:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efef7a80_332914a5",
+      "range": {
+        "startLine": 95,
+        "startChar": 42,
+        "endLine": 95,
+        "endChar": 49
+      },
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6bc9e71_07eb5354",
@@ -213,6 +405,24 @@
       "writtenOn": "2022-10-13T05:48:54Z",
       "side": 1,
       "message": "Same as line no 30.",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7626748c_1fe335db",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-18T06:39:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6bc9e71_07eb5354",
       "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -234,6 +444,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aad62ca_4f0d17eb",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-18T06:39:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd52a36a_57c15152",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "897da5bd_ede16245",
@@ -247,6 +475,24 @@
       "writtenOn": "2022-10-13T05:48:54Z",
       "side": 1,
       "message": "Same as line no 30. Can you address this in all the places.",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c5f3c21_402e00c0",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-18T06:39:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "897da5bd_ede16245",
       "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -268,6 +514,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eae8368c_9663507d",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-18T06:39:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b71293db_ad54fc80",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9cffb7ea_64e3fa1e",
@@ -285,6 +549,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b40af06_21b25396",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-18T06:39:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cffb7ea_64e3fa1e",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15572f1e_f397f358",
@@ -298,6 +580,24 @@
       "writtenOn": "2022-10-13T10:32:12Z",
       "side": 1,
       "message": "Suggestion: Can you make this keyword more generic.\ne.g. if user pass 0 - Get complete history of task instances\nin case 1 - Get first instance of task instance and so on.\nif user pass multiple instance like 1, 2 then return with list of task instance.",
+      "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "121d7c17_bbdcdfd2",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-18T06:39:12Z",
+      "side": 1,
+      "message": "Kindly ignore the oversight. This keyword have not been used anywhere in test case. It was induced as a part of future enhancement. Since the keyword is not relevant right now, have removed the same.",
+      "parentUuid": "15572f1e_f397f358",
       "revId": "f8c9eb771d2f06e9da76fa02c25799bb8a66ce6c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
