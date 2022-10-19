@@ -13,7 +13,6 @@ Resource         ../../lib/bmc_ldap_utils.robot
 Suite Setup      Suite Setup Execution
 Suite Teardown   LDAP Suite Teardown Execution
 Test Teardown    Run Keywords  Redfish.Login  AND  FFDC On Test Case Fail
-
 Force Tags       LDAP_Test
 
 *** Variables ***
@@ -524,6 +523,29 @@ Read Network Configuration Via Different User Roles And Verify
 
     ${LDAP_TYPE}  Operator       ${GROUP_NAME}  ${HTTP_OK}
 
+Switch LDAP Type And Verify Login Fails
+    [Documentation]  Switch LDAP type and verify login fails.
+    [Tags]  Switch_LDAP_Type_And_Verify_Login_Fails
+
+    # Check Login with LDAP Type is working
+    Create LDAP Configuration
+    Redfish Verify LDAP Login
+    Redfish.Logout
+
+    # Disable the LDAP Type from OpenLDAP to ActiveDirectory or vice-versa
+    Redfish.Login
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${False}}}
+
+    # Enable the inverse LDAP type
+    ${inverse_ldap_type}=  Set Variable If  '${LDAP_TYPE}' == 'LDAP'  ActiveDirectory  LDAP
+    ${status}=  Redfish.Patch  ${REDFISH_BASE_URI}AccountService
+    ...  body={'${inverse_ldap_type}': {'ServiceEnabled': ${True}}}
+    Redfish.Logout
+
+    # Login using LDAP type must fail
+    Redfish Verify LDAP Login  ${False}
+    Redfish.Logout
 
 *** Keywords ***
 
