@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "337aafe0_c23e9097",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-10-19T11:15:48Z",
+      "side": 1,
+      "message": "why cant u use like I mentioned below.. \n\n Create LDAP Configuration\n Redfish Verify LDAP Login  ${True} \n Redfish.Logout",
+      "range": {
+        "startLine": 532,
+        "startChar": 4,
+        "endLine": 534,
+        "endChar": 0
+      },
+      "revId": "38767a86dfbf4de3921856994c57b473eb49c259",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79d9148a_9e8109b1",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-10-19T11:15:48Z",
+      "side": 1,
+      "message": "can we just define \n\nRedfish.Login at 536\n\nand  Redfish.Logout at 546\n\nand remove repeated use of  Redfish.Login and  Redfish.Logout ?",
+      "range": {
+        "startLine": 536,
+        "startChar": 3,
+        "endLine": 536,
+        "endChar": 17
+      },
+      "revId": "38767a86dfbf4de3921856994c57b473eb49c259",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
