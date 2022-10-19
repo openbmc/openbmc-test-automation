@@ -731,6 +731,7 @@ Create Error Log
     FOR  ${i}  IN RANGE  0  ${count}
         ${cmd}=  Set Variable If
         ...  '${error_severity}' == 'Informational' and '${error_creator}' == 'BMC'  ${CMD_INFORMATIONAL_ERROR}
+        ...  '${error_severity}' == 'Informational' and '${error_creator}' == 'HOST'  ${CMD_INFORMATIONAL_HOST_ERROR}
         ...  '${error_severity}' == 'Predictive' and '${error_creator}' == 'BMC'  ${CMD_PREDICTIVE_ERROR}
         ...  '${error_severity}' == 'Unrecoverable' and '${error_creator}' == 'BMC'  ${CMD_UNRECOVERABLE_ERROR}
         ...  '${error_severity}' == 'Unrecoverable' and '${error_creator}' == 'HOST'  ${CMD_UNRECOVERABLE_HOST_ERROR}
