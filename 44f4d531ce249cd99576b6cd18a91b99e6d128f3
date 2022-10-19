@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6d9ff75_ab51f5c8",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-19T11:26:50Z",
+      "side": 1,
+      "message": "This is exceeding 110 limit. Please bring into two lines",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 124
+      },
+      "revId": "44f4d531ce249cd99576b6cd18a91b99e6d128f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e7c2352_f04b64b1",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-19T11:26:50Z",
+      "side": 1,
+      "message": "give one blank like after this",
+      "range": {
+        "startLine": 666,
+        "startChar": 0,
+        "endLine": 666,
+        "endChar": 56
+      },
+      "revId": "44f4d531ce249cd99576b6cd18a91b99e6d128f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
