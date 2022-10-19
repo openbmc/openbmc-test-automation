@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36a31bac_3eba0f01",
+        "filename": "data/properties.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-19T08:31:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d7334eb_e76d78d7",
+      "revId": "253d8a0beb2e69ae7fb1ee626af7052787be6b97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "200ecd85_f3ef1b1b",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-10-18T15:58:14Z",
       "side": 1,
       "message": "Verify if CompletedTaskOverWritePolicy is a valid value.\n\nEnd with period for all the comments in the test script",
+      "range": {
+        "startLine": 49,
+        "startChar": 1,
+        "endLine": 49,
+        "endChar": 13
+      },
+      "revId": "253d8a0beb2e69ae7fb1ee626af7052787be6b97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a5a8e41_ea8868b0",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-19T08:31:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "200ecd85_f3ef1b1b",
       "range": {
         "startLine": 49,
         "startChar": 1,
@@ -64,6 +106,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78a04256_33755762",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-19T08:31:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6451000b_eb2429d1",
+      "range": {
+        "startLine": 157,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 5
+      },
+      "revId": "253d8a0beb2e69ae7fb1ee626af7052787be6b97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e72f1c3_cfcca94b",
@@ -77,6 +143,30 @@
       "writtenOn": "2022-10-18T15:58:14Z",
       "side": 1,
       "message": "Id",
+      "range": {
+        "startLine": 204,
+        "startChar": 27,
+        "endLine": 204,
+        "endChar": 33
+      },
+      "revId": "253d8a0beb2e69ae7fb1ee626af7052787be6b97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae4ae2f3_8a69fb23",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-19T08:31:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e72f1c3_cfcca94b",
       "range": {
         "startLine": 204,
         "startChar": 27,
@@ -110,6 +200,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0a123b5_a161b4b2",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-19T08:31:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "426afc76_ffe862d3",
+      "range": {
+        "startLine": 216,
+        "startChar": 31,
+        "endLine": 216,
+        "endChar": 50
+      },
+      "revId": "253d8a0beb2e69ae7fb1ee626af7052787be6b97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "793e87f3_fd5e0688",
@@ -133,6 +247,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfcf5669_66d62900",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-19T08:31:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "793e87f3_fd5e0688",
+      "range": {
+        "startLine": 217,
+        "startChar": 10,
+        "endLine": 217,
+        "endChar": 26
+      },
+      "revId": "253d8a0beb2e69ae7fb1ee626af7052787be6b97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4acad23_8a542c17",
@@ -146,6 +284,30 @@
       "writtenOn": "2022-10-18T15:58:14Z",
       "side": 1,
       "message": "To be precise\n\nLoad Task State Properties Data",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 20
+      },
+      "revId": "253d8a0beb2e69ae7fb1ee626af7052787be6b97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "359dcd59_360d34db",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-19T08:31:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4acad23_8a542c17",
       "range": {
         "startLine": 266,
         "startChar": 0,
