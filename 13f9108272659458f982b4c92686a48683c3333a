@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "358bea23_085d10c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-10-19T07:04:24Z",
+      "side": 1,
+      "message": "Commit message follow this :\n\nHeading \n\nChanges:\n    - Did so and so\n\nTested:\n    Ran xyz test suite\n\n",
+      "revId": "13f9108272659458f982b4c92686a48683c3333a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
