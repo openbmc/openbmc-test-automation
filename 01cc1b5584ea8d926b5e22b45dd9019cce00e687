@@ -87,6 +87,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b46f04f4_91462b01",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-10-20T08:12:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fe1a5d9_ce796037",
+      "range": {
+        "startLine": 669,
+        "startChar": 4,
+        "endLine": 669,
+        "endChar": 29
+      },
+      "revId": "01cc1b5584ea8d926b5e22b45dd9019cce00e687",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91c4583b_74bfd2ae",
@@ -100,6 +124,30 @@
       "writtenOn": "2022-10-20T06:30:37Z",
       "side": 1,
       "message": "Put a full stop (.) at the end of the sentence.",
+      "range": {
+        "startLine": 675,
+        "startChar": 0,
+        "endLine": 675,
+        "endChar": 14
+      },
+      "revId": "01cc1b5584ea8d926b5e22b45dd9019cce00e687",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5414052_aeb0698b",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-10-20T08:12:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91c4583b_74bfd2ae",
       "range": {
         "startLine": 675,
         "startChar": 0,
