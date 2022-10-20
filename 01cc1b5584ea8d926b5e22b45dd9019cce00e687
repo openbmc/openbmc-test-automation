@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "026976bc_3951dcdb",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-10-20T06:30:37Z",
+      "side": 1,
+      "message": "Do not just directly copy keyword name for documentation. you can write short english sentence like - \u0027Verify mandatory fields of predictive errors.\u0027. Do this for other documentations.",
+      "range": {
+        "startLine": 666,
+        "startChar": 3,
+        "endLine": 666,
+        "endChar": 65
+      },
+      "revId": "01cc1b5584ea8d926b5e22b45dd9019cce00e687",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0fe1a5d9_ce796037",
         "filename": "openpower/pel/test_bmc_pel.robot",
         "patchSetId": 3
@@ -42,6 +65,29 @@
         "startChar": 4,
         "endLine": 669,
         "endChar": 29
+      },
+      "revId": "01cc1b5584ea8d926b5e22b45dd9019cce00e687",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91c4583b_74bfd2ae",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-10-20T06:30:37Z",
+      "side": 1,
+      "message": "Put a full stop (.) at the end of the sentence.",
+      "range": {
+        "startLine": 675,
+        "startChar": 0,
+        "endLine": 675,
+        "endChar": 14
       },
       "revId": "01cc1b5584ea8d926b5e22b45dd9019cce00e687",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
