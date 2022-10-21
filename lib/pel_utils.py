@@ -65,6 +65,20 @@ def peltool(option_string, parse_json=True, **bsu_options):
     return out_buf
 
 
+def get_pel_data_from_bmc():
+    r"""
+    Returns PEL data from BMC else throws exception.
+    """
+    try:
+        pel_data = peltool(" -l")
+        if not pel_data:
+            print("No PEL data present in BMC ...")
+            return pel_data
+    except Exception as e:
+        raise peltool_exception("Failed to get PEL data from BMC : " + str(e))
+    return pel_data
+
+
 def fetch_all_pel_ids_for_src(src_id, severity):
     r"""
     Fetch all PEL IDs for the input SRC ID based on the severity type
