@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d1339f2_6de4689d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-21T12:14:13Z",
+      "side": 1,
+      "message": "Code is reviewed.",
+      "revId": "c708d46539d8cbc5a36d25f54a6de807e2bb8d05",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d5e28fb_c4c59dbf",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-21T12:14:13Z",
+      "side": 1,
+      "message": "Suggestion: \"Test Disabled LDAP With Enable ActiveDirectory\" or \"Credential Fail When Disabled LDAP With Enable ActiveDirectory\"",
+      "revId": "c708d46539d8cbc5a36d25f54a6de807e2bb8d05",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54a7abfb_63c32f92",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-21T12:14:13Z",
+      "side": 1,
+      "message": "Line no- 538 to 541 can be another keyword.\n\nor Enhance this keyword Disable Other LDAP",
+      "revId": "c708d46539d8cbc5a36d25f54a6de807e2bb8d05",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
