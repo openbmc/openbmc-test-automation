@@ -43,6 +43,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e805f96_7208c9ab",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-21T12:40:00Z",
+      "side": 1,
+      "message": "1.add one line of space\n2.taskservice should be task service (change this in other places.)",
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95df43ac_4e251929",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-21T12:40:00Z",
+      "side": 1,
+      "message": "1.add one line of space and value comparison start from line number 69 so can you place this comment just before line number 69\n2. Same comment applicable to other places.",
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a46119a7_8af1ed87",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-21T12:40:00Z",
+      "side": 1,
+      "message": "1.Can you change \u0027\u0026\u0027 to and\n2.End the print message with \u0027.\u0027\n3.Same comment applicable to other places.",
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c6e6e53c_f719a982",
         "filename": "redfish/task_service/test_tasks.robot",
         "patchSetId": 5
@@ -60,6 +111,23 @@
         "endLine": 118,
         "endChar": 58
       },
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebd54ecf_74399078",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-21T12:40:00Z",
+      "side": 1,
+      "message": "1.Can you change Diff. to difference\n2.End the print message with \u0027.\u0027",
       "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -152,6 +220,23 @@
         "endLine": 228,
         "endChar": 78
       },
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15ab612c_c6f2adb2",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-21T12:40:00Z",
+      "side": 1,
+      "message": "Can you compare exact value in If condition e.g. Exit For Loop If \u0027True\u0027 \u003d\u003d \u0027${out}\u0027",
       "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
