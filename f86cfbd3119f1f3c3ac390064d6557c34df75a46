@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d571cf06_5f030a1b",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-10-21T06:11:52Z",
+      "side": 1,
+      "message": "Just switching from openldap to active directory will throw 500 error unlike in GUI.\nSo first,\n- need to enable OpenLDAP\n- Check Login works\n- Disable OpenLDAP\n- Enable ActiveDirectory\n- Login with OpenLDAP credentials doesn\u0027t work",
+      "parentUuid": "b48aa974_99f09eb6",
+      "revId": "f86cfbd3119f1f3c3ac390064d6557c34df75a46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc107608_6568d81c",
         "filename": "redfish/account_service/test_ldap_configuration.robot",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2022-10-21T04:25:39Z",
       "side": 1,
       "message": "what is the objective of this?",
+      "revId": "f86cfbd3119f1f3c3ac390064d6557c34df75a46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b067ecbf_9783094c",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-10-21T06:11:52Z",
+      "side": 1,
+      "message": "Objective of this test case is that login fails using LDAP TYPE given in the test case(openldap/active directory) fails.\n\nUsing Redfish, to enable the other LDAP Type we first need to disable the existing LDAP type.\n\nThis test case covers the scenarios:\n1. OpenLDAP to ActiveDirectory\nLogin with OpenLDAP credentials doesn\u0027t work\n2. ActiveDirectory to OpenLDAP\nLogin with Activedirectory credentials doesn\u0027t work\n3. Secure OpenLDAP to ActiveDirectory\nLogin with OpenLDAP credentials doesn\u0027t work\n4. Secure ActiveDirectory to OpenLDAP\nLogin with Activedirectory credentials doesn\u0027t work",
+      "parentUuid": "cc107608_6568d81c",
       "revId": "f86cfbd3119f1f3c3ac390064d6557c34df75a46",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77181c23_861aa370",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-10-21T06:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10f99fb0_4850eddb",
+      "revId": "f86cfbd3119f1f3c3ac390064d6557c34df75a46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ddf7ed1_0d907baf",
@@ -65,6 +119,30 @@
       "writtenOn": "2022-10-21T04:25:39Z",
       "side": 1,
       "message": "Disable Other LDAP\n    [Documentation]  Enable/disable other LDAP configuration.\n    [Arguments]  ${service_state}\u003d${False}\n\n    # First disable other LDAP.\n    ${inverse_ldap_type}\u003d  Set Variable If  \u0027${LDAP_TYPE}\u0027 \u003d\u003d \u0027LDAP\u0027  ActiveDirectory  LDAP\n    Redfish.Patch  ${REDFISH_BASE_URI}AccountService\n    ...  body\u003d{\u0027${inverse_ldap_type}\u0027: {\u0027ServiceEnabled\u0027: ${service_state}}}\n    Sleep  15s",
+      "range": {
+        "startLine": 604,
+        "startChar": 0,
+        "endLine": 611,
+        "endChar": 14
+      },
+      "revId": "f86cfbd3119f1f3c3ac390064d6557c34df75a46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30858eac_aba08f11",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-10-21T06:11:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ddf7ed1_0d907baf",
       "range": {
         "startLine": 604,
         "startChar": 0,
