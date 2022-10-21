@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8627eae4_d2069e42",
+        "filename": "data/task_service_properties.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-21T06:46:39Z",
+      "side": 1,
+      "message": "There is an existing file for task related data --\u003edata/task_state.json.\nPlease check if these can be added to that file.",
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baba2c0d_fd93a4bd",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-21T06:46:39Z",
+      "side": 1,
+      "message": "Pls add it to data/task_state.json and verify the entire dictionary data from there for Status\n\neg: Expected values to be put in json file\n\n\"Task_service_status\":{\"Health\": \"OK\", \"HealthRollup\":.......}\n\nWhile verifying:\n\u0026{expected_status}\u003d  Evaluate\n    ...  json.load(open(\u0027${code_base_dir_path}/data/task_state.json\u0027))  modules\u003djson\n    Dictionaries Should Be Equal  ${expected_status}  ${resp[\"Status\"]}",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 0
+      },
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6e6e53c_f719a982",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-21T06:46:39Z",
+      "side": 1,
+      "message": "Since the following validations are specifically for BMC dump, is there any significance for this separate keyword --\u003e Generate Task Instance And Return Task Id?\nIf you want it to be general and work for other tasks too then that flexibility should be provided in validation too.. eg.@140 validation only works for bmc dump",
+      "range": {
+        "startLine": 118,
+        "startChar": 4,
+        "endLine": 118,
+        "endChar": 58
+      },
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6860813_fc354ce7",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-21T06:46:39Z",
+      "side": 1,
+      "message": "bmc_dump just to be specific as there are other dumps too",
+      "range": {
+        "startLine": 192,
+        "startChar": 30,
+        "endLine": 192,
+        "endChar": 34
+      },
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2535886e_8609764e",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-21T06:46:39Z",
+      "side": 1,
+      "message": "Can we move this to lib/dump_utils.robot?\n\nCreate User Initiated BMC Dump And Return Task Id",
+      "range": {
+        "startLine": 205,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 39
+      },
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0577e92_a8058b68",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-21T06:46:39Z",
+      "side": 1,
+      "message": "Can we move this to lib/dump_utils.robot?",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 24
+      },
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "464d1fb6_9f1f1d2e",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-21T06:46:39Z",
+      "side": 1,
+      "message": "at the",
+      "range": {
+        "startLine": 228,
+        "startChar": 75,
+        "endLine": 228,
+        "endChar": 78
+      },
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fe6a4e5_121a8c4a",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-21T06:46:39Z",
+      "side": 1,
+      "message": "bmc_dump",
+      "range": {
+        "startLine": 256,
+        "startChar": 30,
+        "endLine": 256,
+        "endChar": 34
+      },
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
