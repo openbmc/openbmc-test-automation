@@ -16,7 +16,7 @@ ${obmc_gui_url}              https://${OPENBMC_HOST}
 ${GUI_BROWSER}               ff
 ${GUI_MODE}                  headless
 
-${CMD_INTERNAL_FAILURE}      busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
+${CMD_INTERNAL_FAILURE}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
 ...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
 ...  xyz.openbmc_project.Logging.Entry.Level.Error 0
 
@@ -105,7 +105,7 @@ Logout GUI
 Generate Test Error Log
     [Documentation]  Generate test error log.
 
-    BMC Execute Command  ${CMD_INTERNAL_FAILURE}
+    BMC Execute Command  ${CMD_UNRECOVERABLE_ERROR}
 
 
 Set Timezone In Profile Settings Page
