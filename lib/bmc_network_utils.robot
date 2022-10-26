@@ -725,6 +725,8 @@ Get Channel Number For Valid Ethernet Interface
     @{channel_number_list}=  Create List
 
     FOR  ${channel_number}  ${values}  IN  &{valid_channel_number_interface_name}
+      ${usb_interface_status}=  Run Keyword And Return Status  Should Not Contain  ${values['name']}  usb
+      Continue For Loop IF  ${usb_interface_status} == False
       Run Keyword If  '${values['channel_info']['medium_type']}' == 'lan-802.3'
       ...  Append To List  ${channel_number_list}  ${channel_number}
     END
