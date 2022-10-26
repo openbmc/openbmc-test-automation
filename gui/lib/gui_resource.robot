@@ -17,9 +17,8 @@ ${GUI_BROWSER}               ff
 ${GUI_MODE}                  headless
 
 ${CMD_INTERNAL_FAILURE}      busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging
-...  xyz.openbmc_project.Logging.Create Create ssa{ss} xyz.openbmc_project.Common.Error.InternalFailure
-...  xyz.openbmc_project.Logging.Entry.Level.Error 0
-
+...  xyz.openbmc_project.Logging.Create Create ssa{ss} org.open_power.Logging.Error.TestError1
+...  xyz.openbmc_project.Logging.Entry.Level.Error
 
 *** Keywords ***
 
