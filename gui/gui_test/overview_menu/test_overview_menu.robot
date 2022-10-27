@@ -48,11 +48,9 @@ Verify Network Information In Overview Page
 
     # Get all IP addresses and prefix lengths on system.
 
-    ${ip_addr_list}=  Get BMC IP Info
-    FOR  ${ip_address}  IN  @{ip_addr_list}
-      ${ip}=  Fetch From Left  ${ip_address}  \/
-      Page Should Contain  ${ip}
-    END
+    ${resp}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc/EthernetInterfaces/eth0  IPv4StaticAddresses
+    ${ip_addr}=  Set Variable  ${resp[0]['Address']}
+    Page Should Contain  ${ip_addr}
 
 
 Verify Server Information Section
