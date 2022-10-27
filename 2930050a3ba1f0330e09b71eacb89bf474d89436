@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37ed30cd_176788b9",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-27T07:44:00Z",
+      "side": 0,
+      "message": "I guess we can use CMD_UNRECOVERABLE_ERROR from data/pel_variables.py. Please try that.",
+      "range": {
+        "startLine": 19,
+        "startChar": 2,
+        "endLine": 19,
+        "endChar": 22
+      },
+      "revId": "2930050a3ba1f0330e09b71eacb89bf474d89436",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
