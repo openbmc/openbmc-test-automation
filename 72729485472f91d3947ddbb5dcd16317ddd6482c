@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "288ad0c3_dd214992",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-10-27T09:44:18Z",
+      "side": 1,
+      "message": "why this is required?\nif no global IP on BMC, modified code will return null.",
+      "revId": "72729485472f91d3947ddbb5dcd16317ddd6482c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
