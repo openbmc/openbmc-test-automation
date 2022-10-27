@@ -38,6 +38,7 @@ Verify Existence Of All Sections In Overview Page
     Page Should Contain  Inventory and LEDs
     Page Should Contain  Dumps
 
+
 Verify Network Information In Overview Page
     [Documentation]  Verify values under network information section.
     [Tags]  Verify_Network_Information_In_Overview_Page
@@ -52,9 +53,6 @@ Verify Network Information In Overview Page
       ${ip}=  Fetch From Left  ${ip_address}  \/
       Page Should Contain  ${ip}
     END
-
-    ${macaddr}=  Get BMC MAC Address
-    Page Should Contain  ${macaddr}
 
 
 Verify Server Information Section
