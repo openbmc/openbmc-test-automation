@@ -53,9 +53,6 @@ Verify Network Information In Overview Page
       Page Should Contain  ${ip}
     END
 
-    ${macaddr}=  Get BMC MAC Address
-    Page Should Contain  ${macaddr}
-
 
 Verify Server Information Section
     [Documentation]  Verify values under server information section in overview page.
