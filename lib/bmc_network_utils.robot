@@ -64,7 +64,7 @@ Get BMC IP Info
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
     ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  /sbin/ip addr | grep ${ethernet_interface}
+    ...  /sbin/ip addr | grep ${ethernet_interface} | grep global
 
     # Get line having IP address details.
     ${lines}=  Get Lines Containing String  ${cmd_output}  inet
