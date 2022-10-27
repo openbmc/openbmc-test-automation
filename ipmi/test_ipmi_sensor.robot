@@ -25,8 +25,8 @@ Verify IPMI Temperature Readings using Redfish
     [Template]  Get Temperature Reading And Verify In Redfish
 
     # command_type  sensor_id  member_id
-    IPMI            pcie       pcie
-    IPMI            ambient    ambient
+    IPMI            PCIE       PCIE
+    IPMI            Ambient    Ambient
 
 
 Verify DCMI Temperature Readings using Redfish
@@ -35,8 +35,8 @@ Verify DCMI Temperature Readings using Redfish
     [Template]  Get Temperature Reading And Verify In Redfish
 
     # command_type  sensor_id  member_id
-    DCMI            pcie       pcie
-    DCMI            ambient    ambient
+    DCMI            PCIE       PCIE
+    DCMI            Ambient    Ambient
 
 
 Test Ambient Temperature Via IPMI
@@ -215,7 +215,13 @@ Get Temperature Reading And Verify In Redfish
 
     ${redfish_value}=  Get Temperature Reading From Redfish  ${member_id}
 
-    Valid Range  ${ipmi_value}  ${redfish_value-1.000}  ${redfish_value+1.000}
+    ${keys}=  Get Dictionary Keys  ${ipmi_value}
+    FOR  ${index}  IN  @{keys}
+        ${value_diff}=  Evaluate  abs(${redfish_value["${index}"]} - ${ipmi_value["${index}"]})
+        Should Be True
+        ...  ${value_diff} <= ${allowed_temp_diff}
+    END
+
 
 
 Get IPMI Sensor Reading
@@ -225,13 +231,21 @@ Get IPMI Sensor Reading
     # Description of argument(s):
     # sensor_id     Sensor id used to get reading in IPMI.
 
-    ${data}=  Run IPMI Standard Command  sensor reading ${sensor_id}
+    ${sensor_list}=  Get Available Sensors  ${sensor_id}
+    ${sensor_value_dict}=  Create Dictionary
 
-    # Example reading:
-    # pcie             | 28.500
+    FOR  ${ids}  IN  @{sensor_list}
+        ${data}=  Run IPMI Standard Command  sensor reading ${ids}
 
-    ${sensor_value}=  Set Variable  ${data.split('| ')[1].strip()}
-    [Return]  ${sensor_value}
+        # Example reading:
+        # PCIE_0_Temp      | 5Ch | ok  | 41.1 | 27 degrees C
+
+        ${sensor_key}=  Set Variable  ${data.split('| ')[0].strip()}
+        ${sensor_value}=  Set Variable  ${data.split('| ')[1].strip()}
+        Set To Dictionary  ${sensor_value_dict}  ${sensor_key}  ${sensor_value}
+    END
+
+    [Return]  ${sensor_value_dict}
 
 
 Get DCMI Sensor Reading
@@ -241,14 +255,27 @@ Get DCMI Sensor Reading
     # Description of argument(s):
     # sensor_id     Sensor id used to get reading in DCMI.
 
+
     ${data}=  Run IPMI Standard Command  dcmi sensors
     ${sensor_data}=  Get Lines Containing String  ${data}  ${sensor_id}
+    ${sensor_lines}=  Split To Lines  ${sensor_data}
 
     # Example reading:
-    # Record ID 0x00fd: pcie             | 28.50 degrees C   | ok
+    # Record ID 0x005c: PCIE_0_Temp      | 27 degrees C      | ok
 
-    ${sensor_value}=  Set Variable  ${sensor_data.split(' | ')[1].strip('degrees C').strip()}
-    [Return]  ${sensor_value}
+    ${sensor_value_dict}=  Create Dictionary
+
+    FOR  ${line}  IN  @{sensor_lines}
+        ${sensor_key}=  Set Variable  ${line.split(' | ')[0].strip()}
+        ${sensor_key}=  Set Variable  ${sensor_key.split(':')[1].strip()}
+        ${sensor_value}=  Set Variable  ${line.split('|')[1].strip()}
+        ${sensor_value}=  Set Variable  ${sensor_value.split()[0].strip()}
+        ${contains}=  Evaluate  """disabled""" in "${sensor_value}"
+
+        Run Keyword IF  "${contains}" != """True"""  Set To Dictionary  ${sensor_value_dict}  ${sensor_key}  ${sensor_value}
+    END
+
+    [Return]  ${sensor_value_dict}
 
 
 Get Temperature Reading From Redfish
@@ -480,7 +507,7 @@ Get Available Sensors
         ${sensor_name}=  Set Variable  ${line.split('|')[0].strip()}
 
         # Adding sensors to the list whose presence is detected.
-        ${contains}=  Evaluate  "Presence detected" in "${line}"
+        ${contains}=  Evaluate  "Presence detected" in "${line}" or "ok" in "${line}"
         Run Keyword IF  "${contains}" == "True"
         ...  Append To List  ${sensor_list}  ${sensor_name}
     END
