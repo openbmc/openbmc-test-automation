@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03b760c9_a48ac9d3",
+        "filename": "data/task_service_properties.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-27T17:35:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8627eae4_d2069e42",
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "baba2c0d_fd93a4bd",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-10-21T06:46:39Z",
       "side": 1,
       "message": "Pls add it to data/task_state.json and verify the entire dictionary data from there for Status\n\neg: Expected values to be put in json file\n\n\"Task_service_status\":{\"Health\": \"OK\", \"HealthRollup\":.......}\n\nWhile verifying:\n\u0026{expected_status}\u003d  Evaluate\n    ...  json.load(open(\u0027${code_base_dir_path}/data/task_state.json\u0027))  modules\u003djson\n    Dictionaries Should Be Equal  ${expected_status}  ${resp[\"Status\"]}",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 0
+      },
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adb5b59e_63cbfe18",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-27T17:35:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baba2c0d_fd93a4bd",
       "range": {
         "startLine": 57,
         "startChar": 4,
@@ -58,6 +100,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be93d194_890ab6ca",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-27T17:35:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e805f96_7208c9ab",
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95df43ac_4e251929",
@@ -75,6 +135,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da5273b1_3dc40515",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-27T17:35:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95df43ac_4e251929",
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a46119a7_8af1ed87",
@@ -88,6 +166,24 @@
       "writtenOn": "2022-10-21T12:40:00Z",
       "side": 1,
       "message": "1.Can you change \u0027\u0026\u0027 to and\n2.End the print message with \u0027.\u0027\n3.Same comment applicable to other places.",
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "534e119a_ebe304df",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-27T17:35:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a46119a7_8af1ed87",
       "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -115,6 +211,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2c8caa1_6457576a",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-27T17:35:55Z",
+      "side": 1,
+      "message": "Yes, the keyword has been named generically as \"Generate Task Instance And Return Task Id\" with the \"task_type\" being added as a parameter. So that any redfish action which generates task could be substituted in place. \nAs suggested, have modified the validation check for target URI property so that any task type can be validated.",
+      "parentUuid": "c6e6e53c_f719a982",
+      "range": {
+        "startLine": 118,
+        "startChar": 4,
+        "endLine": 118,
+        "endChar": 58
+      },
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebd54ecf_74399078",
@@ -132,6 +252,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75e03720_952bb0a1",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-27T17:35:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebd54ecf_74399078",
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6860813_fc354ce7",
@@ -145,6 +283,30 @@
       "writtenOn": "2022-10-21T06:46:39Z",
       "side": 1,
       "message": "bmc_dump just to be specific as there are other dumps too",
+      "range": {
+        "startLine": 192,
+        "startChar": 30,
+        "endLine": 192,
+        "endChar": 34
+      },
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bd34ade_05a800d7",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-27T17:35:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6860813_fc354ce7",
       "range": {
         "startLine": 192,
         "startChar": 30,
@@ -178,6 +340,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbc7a70a_81293d88",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-27T17:35:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2535886e_8609764e",
+      "range": {
+        "startLine": 205,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 39
+      },
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0577e92_a8058b68",
@@ -191,6 +377,30 @@
       "writtenOn": "2022-10-21T06:46:39Z",
       "side": 1,
       "message": "Can we move this to lib/dump_utils.robot?",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 24
+      },
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d03987a_b9165b16",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-27T17:35:55Z",
+      "side": 1,
+      "message": "\"Wait For Task Completion\" Keyword is applicable for any task type. So have placed in the keyword section of task test script itself.",
+      "parentUuid": "f0577e92_a8058b68",
       "range": {
         "startLine": 218,
         "startChar": 0,
@@ -224,6 +434,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f777b40a_3a659b3e",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-27T17:35:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "464d1fb6_9f1f1d2e",
+      "range": {
+        "startLine": 228,
+        "startChar": 75,
+        "endLine": 228,
+        "endChar": 78
+      },
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15ab612c_c6f2adb2",
@@ -241,6 +475,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b28fa56d_88358706",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-27T17:35:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15ab612c_c6f2adb2",
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fe6a4e5_121a8c4a",
@@ -254,6 +506,30 @@
       "writtenOn": "2022-10-21T06:46:39Z",
       "side": 1,
       "message": "bmc_dump",
+      "range": {
+        "startLine": 256,
+        "startChar": 30,
+        "endLine": 256,
+        "endChar": 34
+      },
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce343422_c94d0bb4",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-27T17:35:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4fe6a4e5_121a8c4a",
       "range": {
         "startLine": 256,
         "startChar": 30,
