@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01be86fb_286f0182",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-27T11:42:57Z",
+      "side": 1,
+      "message": "Here the SSH login is tried with the wrong password. Should it not be tried with the correct password? Since the account is already locked, I think trying it with the actual password adds weightage.",
+      "range": {
+        "startLine": 307,
+        "startChar": 2,
+        "endLine": 309,
+        "endChar": 44
+      },
+      "revId": "f0db5371f3e4b3b268763283b41156c54d6bf361",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45e63106_c504dd8b",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-27T11:42:57Z",
+      "side": 1,
+      "message": "Pls move Redfish.Logout, Login and deletion of the user to test teardown to make sure they always get executed even if there is a fail.",
+      "range": {
+        "startLine": 324,
+        "startChar": 4,
+        "endLine": 324,
+        "endChar": 18
+      },
+      "revId": "f0db5371f3e4b3b268763283b41156c54d6bf361",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df9aa894_918f7eae",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-27T11:42:57Z",
+      "side": 1,
+      "message": "Please create a template for it. To set the value and then verify.",
+      "range": {
+        "startLine": 529,
+        "startChar": 1,
+        "endLine": 546,
+        "endChar": 0
+      },
+      "revId": "f0db5371f3e4b3b268763283b41156c54d6bf361",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56d41162_1f92d43d",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-27T11:42:57Z",
+      "side": 1,
+      "message": "Create a template pls.",
+      "range": {
+        "startLine": 554,
+        "startChar": 1,
+        "endLine": 565,
+        "endChar": 50
+      },
+      "revId": "f0db5371f3e4b3b268763283b41156c54d6bf361",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "254c97e9_e3eaba54",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-27T11:42:57Z",
+      "side": 1,
+      "message": "Enable/disable authmethod types.",
+      "range": {
+        "startLine": 771,
+        "startChar": 21,
+        "endLine": 771,
+        "endChar": 56
+      },
+      "revId": "f0db5371f3e4b3b268763283b41156c54d6bf361",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "250f9223_42c9bcd8",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-27T11:42:57Z",
+      "side": 1,
+      "message": "URI.. everywhere",
+      "range": {
+        "startLine": 776,
+        "startChar": 52,
+        "endLine": 776,
+        "endChar": 55
+      },
+      "revId": "f0db5371f3e4b3b268763283b41156c54d6bf361",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c053ff7b_7d262207",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-27T11:42:57Z",
+      "side": 1,
+      "message": "Redfish -- everywhere",
+      "range": {
+        "startLine": 785,
+        "startChar": 42,
+        "endLine": 785,
+        "endChar": 49
+      },
+      "revId": "f0db5371f3e4b3b268763283b41156c54d6bf361",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5e2663b_6c8bad01",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-27T11:42:57Z",
+      "side": 1,
+      "message": "Redfish\n\nEnd all statements with a period everywhere.",
+      "range": {
+        "startLine": 817,
+        "startChar": 14,
+        "endLine": 817,
+        "endChar": 21
+      },
+      "revId": "f0db5371f3e4b3b268763283b41156c54d6bf361",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e6c4453_7fc26e1f",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-27T11:42:57Z",
+      "side": 1,
+      "message": "needs",
+      "range": {
+        "startLine": 821,
+        "startChar": 64,
+        "endLine": 821,
+        "endChar": 68
+      },
+      "revId": "f0db5371f3e4b3b268763283b41156c54d6bf361",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75e26326_804ed828",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-27T11:42:57Z",
+      "side": 1,
+      "message": "URI",
+      "range": {
+        "startLine": 822,
+        "startChar": 59,
+        "endLine": 822,
+        "endChar": 62
+      },
+      "revId": "f0db5371f3e4b3b268763283b41156c54d6bf361",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eca5a23a_6b331ba1",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-10-27T11:42:57Z",
+      "side": 1,
+      "message": "This method gets the value based on input arg - authmethod. Hence it is advisable to return the value alone.\nLet the caller make it a global variable depending on the need.\nAlso advisable to set this as a Test case variable instead of the wider suite scope.",
+      "range": {
+        "startLine": 845,
+        "startChar": 4,
+        "endLine": 845,
+        "endChar": 40
+      },
+      "revId": "f0db5371f3e4b3b268763283b41156c54d6bf361",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
