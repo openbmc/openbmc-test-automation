@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cc6ad92_40e88627",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-28T12:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42cafbec_27c79a37",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f18e302c_f11eec86",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-10-28T07:36:05Z",
       "side": 1,
       "message": "Suggestion:\n\nI was rethinking on current test case name and came with optimize test case name. let me know your comments.\nTest Generated Task Instance Validity And Task State",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7272ced5_1ce6f35a",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-28T12:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f18e302c_f11eec86",
       "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fd13a51_2a9768f3",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-28T12:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb61f44a_50a72537",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8bf2cc5_57ee4c2e",
@@ -65,6 +119,24 @@
       "writtenOn": "2022-10-28T07:36:05Z",
       "side": 1,
       "message": "Suggestion:\n\nI was rethinking on current test case name and came with optimize test case name. let me know your comments.\t\nVerify Task Persistency Post BMC Reboot",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34f60b91_5d554fe4",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-28T12:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8bf2cc5_57ee4c2e",
       "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -86,6 +158,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9676df6_ff97abf1",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-28T12:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5860d06_77fd803f",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90c88c5d_dea7d104",
@@ -99,6 +189,24 @@
       "writtenOn": "2022-10-28T07:36:05Z",
       "side": 1,
       "message": "Suggestion:\n\t\nGenerate Task Instance\n\nHere keyword name should be based on what action he is going to perform and keyword can skip what he returns in keyword name.",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dfb68ed_742fac39",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-28T12:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90c88c5d_dea7d104",
       "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -120,6 +228,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac617750_707080f5",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-28T12:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc34a51f_f2a99325",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9677fc96_8c1f0e78",
@@ -133,6 +259,24 @@
       "writtenOn": "2022-10-28T07:36:05Z",
       "side": 1,
       "message": "Documentation should come first.",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d85794bb_3c995412",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-28T12:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9677fc96_8c1f0e78",
       "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -154,6 +298,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b2a8d2e_f6eb712c",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-28T12:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb6a3227_5d700f5d",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f3dad0b_f183b4eb",
@@ -167,6 +329,24 @@
       "writtenOn": "2022-10-28T07:36:05Z",
       "side": 1,
       "message": "Suggestion:\n\nVerify Generate Task Instance Completion",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6a97792_3cb22534",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-28T12:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f3dad0b_f183b4eb",
       "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -188,6 +368,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "421888d1_39ebaef4",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-28T12:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7432eb8_0de5f798",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bdf702fd_842fff0f",
@@ -201,6 +399,24 @@
       "writtenOn": "2022-10-28T07:36:05Z",
       "side": 1,
       "message": "end statement with period \".\".",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa8549ec_3270ea29",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-28T12:23:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdf702fd_842fff0f",
       "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
