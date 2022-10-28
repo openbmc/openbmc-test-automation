@@ -16,6 +16,24 @@
       "message": "why this is required?\nif no global IP on BMC, modified code will return null.",
       "revId": "72729485472f91d3947ddbb5dcd16317ddd6482c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "840de6e2_9fba623e",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-28T05:14:05Z",
+      "side": 1,
+      "message": "We see global string for all the IPs except zero config IP(169.254.xx.xx). So to me this logic sound good. Is there any case where we can have assigned IP without global string with /sbin/ip addr command output?\n\n2: eth0: \u003cBROADCAST,MULTICAST,UP,LOWER_UP\u003e mtu 1500 qdisc pfifo_fast qlen 1000\n    inet 169.254.xx.xx/16 brd 169.254.255.255 scope link eth0\n    inet 9.41.xx.xx/24 brd 9.41.164.255 scope global eth0\n    inet 9.41.xx.xx/24 brd 9.41.164.255 scope global secondary eth0",
+      "parentUuid": "288ad0c3_dd214992",
+      "revId": "72729485472f91d3947ddbb5dcd16317ddd6482c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
