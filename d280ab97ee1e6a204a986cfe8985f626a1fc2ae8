@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42cafbec_27c79a37",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-28T07:36:05Z",
+      "side": 1,
+      "message": "Suggestion:\n\n\n${time_diff}\u003d  Subtract Date From Date  ${cur_time}  ${bmc_time[0]}\n...  date1_format\u003d%m/%d/%Y %H:%M:%S  date2_format\u003d%Y-%m-%dT%H:%M:%S\n\n# Compare system time and time displayed in task service URI.\n${time_diff}\u003d  Evaluate  ${time_diff} \u003c 5\n\nShould Be Equal  ${time_diff}  ${TRUE}\n...  Time Difference between BMC time and time displayed in task URI is higher.\n\n\nSame comment applicable to other places.",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f18e302c_f11eec86",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-28T07:36:05Z",
+      "side": 1,
+      "message": "Suggestion:\n\nI was rethinking on current test case name and came with optimize test case name. let me know your comments.\nTest Generated Task Instance Validity And Task State",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb61f44a_50a72537",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-28T07:36:05Z",
+      "side": 1,
+      "message": "Suggestion:\n\n1. Line number 127-134\n# Verify task start time is within 10s of current time.\n${resp}\u003d  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}\n\n${start_time}\u003d  Get Regexp Matches  ${resp[\"StartTime\"]}\n...  (.+)[\\\\-|\\\\+]\\\\d\\\\d\\\\:\\\\d\\\\d  1\n\n# Compare system time and time displayed in task service URI.\n${time_diff}\u003d  Subtract Date From Date  ${cur_time}  ${start_time[0]}\n...  date1_format\u003d%m/%d/%Y %H:%M:%S  date2_format\u003d%Y-%m-%dT%H:%M:%S\n\n${time_diff}\u003d  Evaluate  ${time_diff} \u003c 10\nShould Be Equal  ${time_diff}  ${TRUE}  Time difference greater than 10 seconds.\n\n2. Can you address above comments in other places.\n\n3. Can you add this regex \"(.+)[\\\\-|\\\\+]\\\\d\\\\d\\\\:\\\\d\\\\d\" I variable and add in robot variable section. then use the define variable in your code.",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8bf2cc5_57ee4c2e",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-28T07:36:05Z",
+      "side": 1,
+      "message": "Suggestion:\n\nI was rethinking on current test case name and came with optimize test case name. let me know your comments.\t\nVerify Task Persistency Post BMC Reboot",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5860d06_77fd803f",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-28T07:36:05Z",
+      "side": 1,
+      "message": "Suggestion:\n\nGenerate Task Instance And Wait For Completion\n\n${initial_task_count}\u003d  Redfish.Get Attribute  /redfish/v1/TaskService/Tasks\n...  Members@odata.count\n\nRedfish BMC Reset Operation  reset_type\u003dForceRestart\n\n${current_task_count}\u003d  Redfish.Get Attribute  /redfish/v1/TaskService/Tasks\n...  Members@odata.count\n\nShould Be Equal  ${initial_task_count}  ${current_task_count}",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90c88c5d_dea7d104",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-28T07:36:05Z",
+      "side": 1,
+      "message": "Suggestion:\n\t\nGenerate Task Instance\n\nHere keyword name should be based on what action he is going to perform and keyword can skip what he returns in keyword name.",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc34a51f_f2a99325",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-28T07:36:05Z",
+      "side": 1,
+      "message": "add one line space after 201",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9677fc96_8c1f0e78",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-28T07:36:05Z",
+      "side": 1,
+      "message": "Documentation should come first.",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb6a3227_5d700f5d",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-28T07:36:05Z",
+      "side": 1,
+      "message": "can you mention about default value.\n\nsame comment applicable to other places.",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f3dad0b_f183b4eb",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-28T07:36:05Z",
+      "side": 1,
+      "message": "Suggestion:\n\nVerify Generate Task Instance Completion",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7432eb8_0de5f798",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-28T07:36:05Z",
+      "side": 1,
+      "message": "Suggestion:\n\nCan you add a line by stating that default value for task_type is bmc_dump.",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdf702fd_842fff0f",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-10-28T07:36:05Z",
+      "side": 1,
+      "message": "end statement with period \".\".",
+      "revId": "d280ab97ee1e6a204a986cfe8985f626a1fc2ae8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
