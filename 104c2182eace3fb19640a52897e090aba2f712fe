@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39909b89_f695a0d5",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-28T18:14:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13cd3f0f_1716e64d",
+      "revId": "104c2182eace3fb19640a52897e090aba2f712fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7afa984c_b1ca1d05",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-10-28T16:30:51Z",
       "side": 1,
       "message": "variable time_regexp_pattern should be in capitals letters.",
+      "revId": "104c2182eace3fb19640a52897e090aba2f712fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "527933aa_781c8b79",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-28T18:14:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7afa984c_b1ca1d05",
       "revId": "104c2182eace3fb19640a52897e090aba2f712fe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b50e03a8_cbbf2350",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-28T18:14:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d34b525c_0a16ffe0",
+      "revId": "104c2182eace3fb19640a52897e090aba2f712fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e92b8f5_715a0154",
@@ -65,6 +119,24 @@
       "writtenOn": "2022-10-28T16:30:51Z",
       "side": 1,
       "message": "can you change this expected_completion_state to expected_status and same need to describe in Description of argument(s).",
+      "revId": "104c2182eace3fb19640a52897e090aba2f712fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a1050ea_e547e896",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-10-28T18:14:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e92b8f5_715a0154",
       "revId": "104c2182eace3fb19640a52897e090aba2f712fe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
