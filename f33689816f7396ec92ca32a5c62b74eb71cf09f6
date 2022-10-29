@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "869ab639_0ae9ce97",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-10-29T16:21:29Z",
+      "side": 1,
+      "message": "instead of making this change.. can we ignore upper/lower case n verify\n\nSo, in future if there is PCIe is given instead of PCIE then code will not break.",
+      "range": {
+        "startLine": 38,
+        "startChar": 21,
+        "endLine": 38,
+        "endChar": 35
+      },
+      "revId": "f33689816f7396ec92ca32a5c62b74eb71cf09f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d03c89d_c06f840f",
         "filename": "ipmi/test_ipmi_sensor.robot",
         "patchSetId": 1
@@ -19,6 +42,52 @@
         "startChar": 8,
         "endLine": 222,
         "endChar": 50
+      },
+      "revId": "f33689816f7396ec92ca32a5c62b74eb71cf09f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfda16ea_a89e48de",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-10-29T16:21:29Z",
+      "side": 1,
+      "message": "earlier value is returned.. now it is returning dictionary.. can u please mention in the doc",
+      "range": {
+        "startLine": 228,
+        "startChar": 5,
+        "endLine": 228,
+        "endChar": 66
+      },
+      "revId": "f33689816f7396ec92ca32a5c62b74eb71cf09f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ddc395c_1eafed59",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-10-29T16:21:29Z",
+      "side": 1,
+      "message": "earlier value is returned.. now it is returning dictionary.. can u please mention in the doc",
+      "range": {
+        "startLine": 252,
+        "startChar": 21,
+        "endLine": 252,
+        "endChar": 59
       },
       "revId": "f33689816f7396ec92ca32a5c62b74eb71cf09f6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
