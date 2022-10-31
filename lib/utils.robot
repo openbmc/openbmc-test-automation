@@ -38,6 +38,7 @@ ${HOST_SETTING}    ${SETTINGS_URI}host0
 ${boot_prog_method}               ${EMPTY}
 ${power_policy_setup}             ${0}
 ${bmc_power_policy_method}        ${EMPTY}
+@{BOOT_PROGRESS_STATES}           SystemHardwareInitializationComplete  OSBootStarted  OSRunning
 
 
 *** Keywords ***
@@ -1022,6 +1023,30 @@ Is Boot Progress Changed
     ${boot_progress}  ${host_state}=  Redfish Get Boot Progress
 
     Should Not Be Equal  ${boot_progress}   ${boot_state}
+
+
+Is Boot Progress At Required State
+    [Documentation]  Get BootProgress state and expect boot state to match.
+    [Arguments]  ${boot_state}=None
+
+    # Description of argument(s):
+    # boot_state   Value of the BootProgress state to match.
+
+    ${boot_progress}  ${host_state}=  Redfish Get Boot Progress
+
+    Should Be Equal  ${boot_progress}   ${boot_state}
+
+
+Is Boot Progress At Any State
+    [Documentation]  Get BootProgress state and expect boot state to match
+    ...              with any of the states mentioned in the list.
+    [Arguments]  ${boot_states}=@{BOOT_PROGRESS_STATES}
+
+    # Description of argument(s):
+    # boot_states   List of the BootProgress states to match.
+
+    ${boot_progress}  ${host_state}=  Redfish Get Boot Progress
+    Should Contain Any  ${boot_progress}  @{boot_states}
 
 
 Set Watchdog Interval Using Busctl
