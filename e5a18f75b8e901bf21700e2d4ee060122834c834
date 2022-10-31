@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b122cfa_77119b6a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-10-31T05:45:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b85b7622_ea797fc6",
+      "revId": "e5a18f75b8e901bf21700e2d4ee060122834c834",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51dcd7ba_005f3d74",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-10-27T08:46:05Z",
       "side": 1,
       "message": "Continue For Loop IF  ${values[\u0027name\u0027]} \u003d\u003d usb\n\nCan not we use like that directly ?",
+      "range": {
+        "startLine": 729,
+        "startChar": 6,
+        "endLine": 729,
+        "endChar": 60
+      },
+      "revId": "e5a18f75b8e901bf21700e2d4ee060122834c834",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b9de359_c7b01a96",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2022-10-31T05:45:06Z",
+      "side": 1,
+      "message": "Actually when we check usb interface name on bmc console or in /usr/share/ipmi-providers/channel_config.json file, name will be like usb0 or usb1. As the last value of usb name(usb0/usb1) is not fixed, prefix name \"USB\" is the only name that was not going to be changed. so here we will check whether that interface name contains usb or not and if it has then we will skip it to continue further.",
+      "parentUuid": "51dcd7ba_005f3d74",
       "range": {
         "startLine": 729,
         "startChar": 6,
