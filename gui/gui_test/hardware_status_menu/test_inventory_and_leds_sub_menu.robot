@@ -25,15 +25,22 @@ Verify Navigation To Inventory And LEDs Page
 Verify Components On Inventory And LEDs Page
     [Documentation]  Verify whether required components are displayed under inventory and LEDs page.
     [Tags]  Verify_Components_On_Inventory_And_LEDs_Page
+    [Template]  Page Should Contain
 
-    Page Should Contain  System
-    Page Should Contain  BMC manager
-    Page Should Contain  Chassis
-    Page Should Contain  DIMM slot
-    Page Should Contain  Fans
-    Page Should Contain  Power supplies
-    Page Should Contain  Processors
-    Page Should Contain  Assemblies
+    # Check all the hardware component are available.
+
+    System indicators
+    Chassis
+    System
+    BMC manager
+    DIMM slot
+    Fans
+    Power supplies
+    Processors
+    Assemblies
+    PCIe slots
+    Fabric Adapters
+
 
 *** Keywords ***
 
