@@ -63,9 +63,17 @@ Verify Server Power Cap Setting Is On
 
     # Now input a cap value and submit.
     Wait Until Element Is Enabled  ${xpath_cap_input_button}  timeout=10
-    Input Text  ${xpath_cap_input_button}  ${600}
+
+    # Get Maximum and Minimum values of power cap.
+    ${resp}=  Redfish.Get Properties  /redfish/v1/Chassis/${CHASSIS_ID}/EnvironmentMetrics
+
+    ${power_cap_value}=  Evaluate
+    ...  random.randint(${resp['PowerLimitWatts']['AllowableMin']},${resp['PowerLimitWatts']['AllowableMax']})
+    ...  modules=random
+
+    Input Text  ${xpath_cap_input_button}  ${power_cap_value}
     Click Element  ${xpath_submit_button}
-    Wait Until Keyword Succeeds  1 min  15 sec  Is Power Cap Value Set  600
+    Wait Until Keyword Succeeds  1 min  15 sec  Is Power Cap Value Set  ${power_cap_value}
 
 
 Verify Server Power Cap Setting Is Off
@@ -99,7 +107,7 @@ Is Power Cap Value Set
     [Arguments]  ${expected_value}
 
     ${cap}=  Get Power Cap Value
-    Should Be Equal  ${current_cap}  ${expected_value}
+    Should Be Equal  ${cap}  ${expected_value}
 
 
 Save Initial Power Cap State
@@ -121,30 +129,22 @@ Restore Initial Power Cap State
 Get Power Cap Value
     [Documentation]  Return the power cap value.
 
-    ${redfish_power}=  Redfish.Get Properties  /redfish/v1/Chassis/chassis/Power
+    ${redfish_power}=  Redfish.Get Properties  /redfish/v1/Chassis/chassis/EnvironmentMetrics
 
     # In Redfish version, LimitInWatts is for power cap. However, its stored NOT exactly in json
     # format so with additional steps in consequent steps string is converted to json formatted
     # so that a json object can be formed.
     #
-    # "PowerControl": [
-    #    {
-    #        "@odata.id": "/redfish/v1/Chassis/chassis/Power#/PowerControl/0",
-    #        "@odata.type": "#Power.v1_0_0.PowerControl",
-    #        "MemberId": "0",
-    #        "Name": "Chassis Power Control",
-    #        "PowerLimit": {
-    #            "LimitInWatts": 3000.0
-    #        },
-    #        "PowerMetrics": {
-    #            "AverageConsumedWatts": 16,
-    #            "IntervalInMin": 10,
-    #            "MaxConsumedWatts": 22
-    #        }
-    #    }
-    # ],
+    # "Id": "EnvironmentMetrics",
+    #   "Name": "Chassis Environment Metrics",
+    #   "PowerLimitWatts": {
+    #   "AllowableMax": 2488,
+    #   "AllowableMin": 1778,
+    #   "ControlMode": "Disabled",
+    #   "SetPoint": 2400,
 
-    [return]  ${redfish_power['PowerControl'][0]['PowerLimit']['LimitInWatts']}
+
+    [return]  ${redfish_power['PowerLimitWatts']['SetPoint']}
 
 
 Suite Setup Execution
