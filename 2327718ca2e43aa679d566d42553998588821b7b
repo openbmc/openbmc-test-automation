@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cad990bb_23cba43c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-10-31T12:35:52Z",
+      "side": 1,
+      "message": "added new keyword to get minimum and maximum value for \"power cap\" :- Get Max And Min Allowable Power Cap Values",
+      "revId": "2327718ca2e43aa679d566d42553998588821b7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
