@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a76cc537_6c3f20e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-11-02T09:16:54Z",
+      "side": 1,
+      "message": "https://ausgsa.ibm.com/gsa/ausgsa/projects/i/indiateam04/ramya14/1030/Automation_logs/hardware_component/hardware_component.html",
+      "parentUuid": "ea6183ff_12520092",
+      "revId": "d295837c50b7b47f1a06697046285b1f4667ddab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df90c425_c97363a7",
