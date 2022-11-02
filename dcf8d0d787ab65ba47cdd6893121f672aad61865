@@ -435,6 +435,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fbd5d21_0a35e7f7",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1001502
+      },
+      "writtenOn": "2022-11-02T17:15:19Z",
+      "side": 1,
+      "message": "Got it. Moved the keyword to lib/dump_utils.robot",
+      "parentUuid": "1406e366_e1f00cd8",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 24
+      },
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "464d1fb6_9f1f1d2e",
