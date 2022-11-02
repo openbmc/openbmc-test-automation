@@ -411,6 +411,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1406e366_e1f00cd8",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-11-02T06:22:28Z",
+      "side": 1,
+      "message": "It is a generic keyword. Keeping it in the test suite restricts other modules from using it. Moving it to lib/dump_utils.robot will make it open for all.",
+      "parentUuid": "8d03987a_b9165b16",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 24
+      },
+      "revId": "dcf8d0d787ab65ba47cdd6893121f672aad61865",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "464d1fb6_9f1f1d2e",

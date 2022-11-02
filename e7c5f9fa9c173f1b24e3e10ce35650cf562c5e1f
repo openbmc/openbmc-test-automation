@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16c3d647_23b01cc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-11-02T06:22:28Z",
+      "side": 1,
+      "message": "Minor comments",
+      "revId": "e7c5f9fa9c173f1b24e3e10ce35650cf562c5e1f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d1176ba_77ba771c",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-11-02T06:22:28Z",
+      "side": 1,
+      "message": "Can you please add an ELSE condition to this to raise error. If a value other than bmc_dump is passed, it will error out in the next line. But the failure doesn\u0027t give ample information right away. So adding an ELSE condition will flag the right error.",
+      "range": {
+        "startLine": 221,
+        "startChar": 4,
+        "endLine": 221,
+        "endChar": 7
+      },
+      "revId": "e7c5f9fa9c173f1b24e3e10ce35650cf562c5e1f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
