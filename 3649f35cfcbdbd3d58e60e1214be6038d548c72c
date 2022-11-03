@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bd0888a_d0e234f1",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-11-03T07:13:07Z",
+      "side": 1,
+      "message": "#Resource            ../../lib/ipmi_client.robot\n#Resource            ../../lib/rest_client.robot\n#Resource            ../../lib/code_update_utils.robot\n#Resource            ../../lib/common_utils.robot\n#Resource            ../../lib/utils.robot\n\n\nYou wont need these , can u remove them ?",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 41
+      },
+      "revId": "3649f35cfcbdbd3d58e60e1214be6038d548c72c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
