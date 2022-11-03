@@ -52,6 +52,24 @@
       "parentUuid": "840de6e2_9fba623e",
       "revId": "72729485472f91d3947ddbb5dcd16317ddd6482c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8948c98a_75d3a306",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-03T14:07:27Z",
+      "side": 1,
+      "message": "I had a discussion with Prashant on this. You can use ip address from /redfish/v1/Managers/bmc/EthernetInterfaces/eth0 to verify network information on GUI page. This would resolve our GUI failure.",
+      "parentUuid": "995b622d_d5b4fb18",
+      "revId": "72729485472f91d3947ddbb5dcd16317ddd6482c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
