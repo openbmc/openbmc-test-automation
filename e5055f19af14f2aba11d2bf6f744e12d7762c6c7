@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d7a1d2f_585dcce0",
+        "filename": "gui/gui_test/resource_management_menu/test_power_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-11-03T16:45:06Z",
+      "side": 1,
+      "message": "end with period \".\" for any statement comments",
+      "range": {
+        "startLine": 67,
+        "startChar": 46,
+        "endLine": 67,
+        "endChar": 49
+      },
+      "revId": "e5055f19af14f2aba11d2bf6f744e12d7762c6c7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1ef2b67_a1d668f8",
+        "filename": "gui/gui_test/resource_management_menu/test_power_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-11-03T16:45:06Z",
+      "side": 1,
+      "message": "/redfish/v1/Chassis/${CHASSIS_ID}/EnvironmentMetrics",
+      "range": {
+        "startLine": 68,
+        "startChar": 58,
+        "endLine": 68,
+        "endChar": 65
+      },
+      "revId": "e5055f19af14f2aba11d2bf6f744e12d7762c6c7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
