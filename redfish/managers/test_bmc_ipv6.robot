@@ -18,7 +18,7 @@ ${test_ipv6_addr}          2001:db8:3333:4444:5555:6666:7777:8888
 ${test_ipv6_invalid_addr}  2001:db8:3333:4444:5555:6666:7777:JJKK
 
 # Valid prefix length is a intiger ranges from 1 to 128.
-${test_prefix_lenght}     64
+${test_prefix_length}     64
 
 
 *** Test Cases ***
