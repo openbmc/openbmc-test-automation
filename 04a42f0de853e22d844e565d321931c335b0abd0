@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13c155ae_5b2696af",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-11-03T14:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abb81950_254f0201",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 89
+      },
+      "revId": "04a42f0de853e22d844e565d321931c335b0abd0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11e734d0_d79f1088",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "763948eb_b41c3253",
+        "filename": "gui/gui_test/resource_management_menu/test_power_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-11-03T14:17:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11e734d0_d79f1088",
+      "range": {
+        "startLine": 68,
+        "startChar": 6,
+        "endLine": 68,
+        "endChar": 16
+      },
+      "revId": "04a42f0de853e22d844e565d321931c335b0abd0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db79bf22_4bc6c925",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-11-03T13:51:48Z",
       "side": 1,
       "message": "Not required. Use ${properties[\u0027PowerLimitWatts\u0027][\u0027AllowableMax\u0027]} directly in below",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 85
+      },
+      "revId": "04a42f0de853e22d844e565d321931c335b0abd0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5268eb0_49cafd66",
+        "filename": "gui/gui_test/resource_management_menu/test_power_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-11-03T14:17:21Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "db79bf22_4bc6c925",
       "range": {
         "startLine": 69,
         "startChar": 0,
