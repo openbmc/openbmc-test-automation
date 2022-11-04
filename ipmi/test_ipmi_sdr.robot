@@ -109,22 +109,6 @@ Test DIMM SDR Info At Power Off
     Test SDR Info  dimm
 
 
-Test Turbo Allowed SDR Info
-    [Documentation]  Verify turbo allowed SDR info via IPMI and Redfish.
-    [Tags]  Test_Turbo_Allowed_SDR_Info
-
-    ${component_uri_list}=  Get Component URIs  turbo_allowed
-    ${component_uri}=  Get From List  ${component_uri_list}  0
-    ${state_rest}=  Read Attribute  ${component_uri}  TurboAllowed
-
-    ${state_ipmi}=  Get SDR Presence Via IPMI  turbo_allowed${SPACE}
-
-    Run Keyword If  '${state_ipmi}' == 'Disabled'
-    ...    Should Be True  ${state_rest} == ${0}
-    ...  ELSE IF  '${state_ipmi}' == 'State Asserted'
-    ...    Should Be True  ${state_rest} == ${1}
-
-
 Test Auto Reboot SDR Info
     [Documentation]  Verify auto reboot SDR info via IPMI and Redfish.
     [Tags]  Test_Auto_Reboot_SDR_Info
