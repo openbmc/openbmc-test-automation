@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89c46e4f_2eece7ab",
+        "filename": "gui/gui_test/resource_management_menu/test_power_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-11-04T06:19:39Z",
+      "side": 1,
+      "message": "\u0027Maximum\u0027 and \u0027Minimum\u0027 should not start with capital letter inside a sentence.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 1
+      },
+      "revId": "e51263aa3f48510a0e103153dfa171ecc7e08f1d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03cf7b25_28a9be11",
+        "filename": "gui/gui_test/resource_management_menu/test_power_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-11-04T06:19:39Z",
+      "side": 1,
+      "message": "Testing with random number within the range is fine. Please also test with :\n\n1. Max value\n2. Minimum value\n3. Out of range value.\n\nWe verified this way, when we did manulal tests",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 74,
+        "endChar": 61
+      },
+      "revId": "e51263aa3f48510a0e103153dfa171ecc7e08f1d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
