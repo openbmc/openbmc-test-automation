@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f720dfa_1c8fcf1f",
+        "filename": "gui/gui_test/resource_management_menu/test_power_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-11-04T05:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d7a1d2f_585dcce0",
+      "range": {
+        "startLine": 67,
+        "startChar": 46,
+        "endLine": 67,
+        "endChar": 49
+      },
+      "revId": "e5055f19af14f2aba11d2bf6f744e12d7762c6c7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1ef2b67_a1d668f8",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-03T16:45:06Z",
       "side": 1,
       "message": "/redfish/v1/Chassis/${CHASSIS_ID}/EnvironmentMetrics",
+      "range": {
+        "startLine": 68,
+        "startChar": 58,
+        "endLine": 68,
+        "endChar": 65
+      },
+      "revId": "e5055f19af14f2aba11d2bf6f744e12d7762c6c7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cda73841_ab571c38",
+        "filename": "gui/gui_test/resource_management_menu/test_power_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-11-04T05:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1ef2b67_a1d668f8",
       "range": {
         "startLine": 68,
         "startChar": 58,
