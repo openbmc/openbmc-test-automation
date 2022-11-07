@@ -17,6 +17,8 @@ Test Teardown   Run Keywords  Redfish.Logout  AND  FFDC On Test Case Fail
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
 @{mandatory_Predictive_pel_fileds}   Private Header  User Header  Primary SRC
 ...  Extended User Header  Failing MTMS  User Data
+@{Mandatory_Informational_Pel_Fileds}  Private Header  User Header  Primary SRC
+...  Extended User Header  User Data
 
 *** Test Cases ***
 
@@ -677,6 +679,26 @@ Verify Mandatory Fields For Predictive Error
 
     List Should Contain Sub List  ${pel_sections}  ${mandatory_Predictive_pel_fileds}
 
+
+Verify Mandatory Fields For Informational Error
+    [Documentation]  Verify mandatory fields of informational error from pel information.
+    [Tags]  Verify_Mandatory_Fields_For_Informational_Error
+
+    # Inject informational error.
+    BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
+    ${pel_records}=  Peltool  -lfh
+
+    ${ids}=  Get Dictionary Keys  ${pel_records}
+    ${pel_id}=  Get From List  ${ids}  -1
+    ${pel_output}=  Peltool  -i ${pel_id}
+
+    # Get all fields in the informational error log.
+    ${pel_sections}=  Get Dictionary Keys  ${pel_output}    
+    FOR  ${section}  IN  @{Mandatory_Informational_Pel_Fileds}
+        ${contains}=  Evaluate  "${section}" in "${pel_sections}"
+        Should Be True  ${contains}
+    END
+   
 
 *** Keywords ***
 
