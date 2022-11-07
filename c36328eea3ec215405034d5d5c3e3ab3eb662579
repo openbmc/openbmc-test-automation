@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77f1c020_16b8f184",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-11-07T11:44:35Z",
+      "side": 1,
+      "message": "In addition to my comment inside the code, please upload the result / log.html",
+      "revId": "c36328eea3ec215405034d5d5c3e3ab3eb662579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39785b6a_b11d5d30",
@@ -65,6 +82,29 @@
         "startChar": 0,
         "endLine": 685,
         "endChar": 59
+      },
+      "revId": "c36328eea3ec215405034d5d5c3e3ab3eb662579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be05a480_195faa88",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-11-07T11:44:35Z",
+      "side": 1,
+      "message": "Insert one line space in between these two lines",
+      "range": {
+        "startLine": 692,
+        "startChar": 4,
+        "endLine": 693,
+        "endChar": 52
       },
       "revId": "c36328eea3ec215405034d5d5c3e3ab3eb662579",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
