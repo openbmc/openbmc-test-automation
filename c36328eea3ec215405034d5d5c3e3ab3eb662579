@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39785b6a_b11d5d30",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-07T10:51:06Z",
+      "side": 1,
+      "message": "Failing MTMS is optional for information error log. Please take this one out.",
+      "range": {
+        "startLine": 21,
+        "startChar": 27,
+        "endLine": 21,
+        "endChar": 39
+      },
+      "revId": "c36328eea3ec215405034d5d5c3e3ab3eb662579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93d7002a_18e060a3",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-07T10:51:06Z",
+      "side": 1,
+      "message": "Just keep \"User Data\" because  User Data 0 and User Data 1 is not guarantee to come for information error log",
+      "range": {
+        "startLine": 21,
+        "startChar": 41,
+        "endLine": 21,
+        "endChar": 65
+      },
+      "revId": "c36328eea3ec215405034d5d5c3e3ab3eb662579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8945f47_6ecea9b7",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-07T10:51:06Z",
+      "side": 1,
+      "message": "leave one blank line after this.",
+      "range": {
+        "startLine": 685,
+        "startChar": 0,
+        "endLine": 685,
+        "endChar": 59
+      },
+      "revId": "c36328eea3ec215405034d5d5c3e3ab3eb662579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
