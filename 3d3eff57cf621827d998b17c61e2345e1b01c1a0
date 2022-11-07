@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df9de41e_87022d45",
+        "filename": "gui/data/gui_variables.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-11-07T11:49:42Z",
+      "side": 1,
+      "message": "please remove white space etc. if any here.",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 4
+      },
+      "revId": "3d3eff57cf621827d998b17c61e2345e1b01c1a0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
