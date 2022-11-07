@@ -72,7 +72,7 @@ class gui_variables():
     xpath_input_confirm_password = "//*[@data-test-id='profileSettings-input-confirmPassword']"
 
     # Common variables
-    xpath_save_settings_button = "//button[contains(text(),'Save settings')]"
+    xpath_save_settings_button = "//button[contains(text(),'Save')]"
     xpath_confirm_button = "//button[contains(text(),'Confirm')]"
     xpath_cancel_button = "//button[contains(text(),'Cancel')]"
     xpath_add_button = "//button[normalize-space(text())='Add']"
