@@ -193,6 +193,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a44874a2_4e1aeaf4",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-11-07T15:57:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70df4f0c_3bb946b6",
+      "range": {
+        "startLine": 540,
+        "startChar": 19,
+        "endLine": 540,
+        "endChar": 68
+      },
+      "revId": "0648a5ddb00f099e13954577dcb79784090d911d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3372c4e_89b157f4",
