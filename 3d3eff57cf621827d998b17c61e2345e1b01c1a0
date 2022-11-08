@@ -46,6 +46,30 @@
       },
       "revId": "3d3eff57cf621827d998b17c61e2345e1b01c1a0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e4fa6ce_44343504",
+        "filename": "gui/data/gui_variables.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-11-08T05:52:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18d46b90_a761ab69",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 4
+      },
+      "revId": "3d3eff57cf621827d998b17c61e2345e1b01c1a0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
