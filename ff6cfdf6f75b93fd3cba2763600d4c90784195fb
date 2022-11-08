@@ -65,6 +65,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62a5d9c6_039646a0",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-11-08T13:29:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "041b7fae_06628420",
+      "range": {
+        "startLine": 350,
+        "startChar": 4,
+        "endLine": 350,
+        "endChar": 38
+      },
+      "revId": "ff6cfdf6f75b93fd3cba2763600d4c90784195fb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "607c8e94_c80332af",
@@ -149,6 +173,30 @@
       "side": 1,
       "message": "yes, fixed in test teardown.",
       "parentUuid": "bcbd448b_d0513f2e",
+      "range": {
+        "startLine": 364,
+        "startChar": 4,
+        "endLine": 364,
+        "endChar": 38
+      },
+      "revId": "ff6cfdf6f75b93fd3cba2763600d4c90784195fb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "522a568d_e2c5204f",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-11-08T13:29:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66d3a798_d67ef163",
       "range": {
         "startLine": 364,
         "startChar": 4,
