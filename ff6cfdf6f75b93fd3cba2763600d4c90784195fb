@@ -16,6 +16,75 @@
       "message": "Verify Watchdog Timedout Event :: Trigger watchdog timed out and v... | PASS |\n------------------------------------------------------------------------------\n#(CST) 2022/11/07 09:19:44.869524 -    0.145475 - Executing: delete(\u0027/redfish/v1/SessionService/Sessions/wj4k035bhk\u0027)\nTest Event Logging :: Inventory of hardware resources under systems.  | PASS |\n1 test, 1 passed, 0 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d",
       "revId": "ff6cfdf6f75b93fd3cba2763600d4c90784195fb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6784b54e_c8be44f4",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-11-08T09:25:21Z",
+      "side": 1,
+      "message": "Pls move it after line 353",
+      "range": {
+        "startLine": 350,
+        "startChar": 4,
+        "endLine": 350,
+        "endChar": 38
+      },
+      "revId": "ff6cfdf6f75b93fd3cba2763600d4c90784195fb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "607c8e94_c80332af",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-11-08T09:25:21Z",
+      "side": 1,
+      "message": "Reference",
+      "range": {
+        "startLine": 356,
+        "startChar": 6,
+        "endLine": 356,
+        "endChar": 14
+      },
+      "revId": "ff6cfdf6f75b93fd3cba2763600d4c90784195fb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcbd448b_d0513f2e",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-11-08T09:25:21Z",
+      "side": 1,
+      "message": "Is it required to power off again? Should this be part of the teardown?",
+      "range": {
+        "startLine": 364,
+        "startChar": 4,
+        "endLine": 364,
+        "endChar": 38
+      },
+      "revId": "ff6cfdf6f75b93fd3cba2763600d4c90784195fb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
