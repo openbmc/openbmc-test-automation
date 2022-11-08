@@ -183,6 +183,9 @@ Test Setup Execution
     Wait Until Page Contains Element  ${xpath_overview_page_header}
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
 
+    Redfish.Login
+
+
 Verify Identify LED State Via Redfish
     [Documentation]  Verify that Redfish identify LED system with given state.
     [Arguments]  ${expected_state}
