@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "041b7fae_06628420",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-11-08T13:19:01Z",
+      "side": 1,
+      "message": "I kept just to make sure that after power off do the clean off, to prevent any logs that could be there post power off. so this place is correct",
+      "parentUuid": "6784b54e_c8be44f4",
+      "range": {
+        "startLine": 350,
+        "startChar": 4,
+        "endLine": 350,
+        "endChar": 38
+      },
+      "revId": "ff6cfdf6f75b93fd3cba2763600d4c90784195fb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "607c8e94_c80332af",
         "filename": "redfish/systems/eventlog/test_event_logging.robot",
         "patchSetId": 4
@@ -54,6 +78,30 @@
       "writtenOn": "2022-11-08T09:25:21Z",
       "side": 1,
       "message": "Reference",
+      "range": {
+        "startLine": 356,
+        "startChar": 6,
+        "endLine": 356,
+        "endChar": 14
+      },
+      "revId": "ff6cfdf6f75b93fd3cba2763600d4c90784195fb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64acdd86_6ee52e9c",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-11-08T13:19:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "607c8e94_c80332af",
       "range": {
         "startLine": 356,
         "startChar": 6,
@@ -77,6 +125,30 @@
       "writtenOn": "2022-11-08T09:25:21Z",
       "side": 1,
       "message": "Is it required to power off again? Should this be part of the teardown?",
+      "range": {
+        "startLine": 364,
+        "startChar": 4,
+        "endLine": 364,
+        "endChar": 38
+      },
+      "revId": "ff6cfdf6f75b93fd3cba2763600d4c90784195fb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66d3a798_d67ef163",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-11-08T13:19:01Z",
+      "side": 1,
+      "message": "yes, fixed in test teardown.",
+      "parentUuid": "bcbd448b_d0513f2e",
       "range": {
         "startLine": 364,
         "startChar": 4,
