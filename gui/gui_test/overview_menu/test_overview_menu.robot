@@ -9,8 +9,8 @@ Resource        ../../../lib/bmc_network_utils.robot
 
 Library         String
 
-Suite Setup     Launch Browser And Login GUI
-Suite Teardown  Close Browser
+Suite Setup     Run Keywords  Launch Browser And Login GUI  AND  Redfish.Login
+Suite Teardown  Run Keywords  Close Browser  AND  Redfish.Logout
 Test Setup      Test Setup Execution
 
 
@@ -182,6 +182,7 @@ Test Setup Execution
     Click Element  ${xpath_overview_menu}
     Wait Until Page Contains Element  ${xpath_overview_page_header}
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+
 
 Verify Identify LED State Via Redfish
     [Documentation]  Verify that Redfish identify LED system with given state.
