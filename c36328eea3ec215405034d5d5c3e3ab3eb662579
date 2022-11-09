@@ -64,6 +64,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d008b759_ef24aad7",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-11-09T13:06:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39785b6a_b11d5d30",
+      "range": {
+        "startLine": 21,
+        "startChar": 27,
+        "endLine": 21,
+        "endChar": 39
+      },
+      "revId": "c36328eea3ec215405034d5d5c3e3ab3eb662579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74ba102a_9dc402cc",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-11-09T13:06:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93d7002a_18e060a3",
+      "range": {
+        "startLine": 21,
+        "startChar": 41,
+        "endLine": 21,
+        "endChar": 65
+      },
+      "revId": "c36328eea3ec215405034d5d5c3e3ab3eb662579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8945f47_6ecea9b7",
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1008fc4f_158c35c6",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-11-09T13:06:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8945f47_6ecea9b7",
+      "range": {
+        "startLine": 685,
+        "startChar": 0,
+        "endLine": 685,
+        "endChar": 59
+      },
+      "revId": "c36328eea3ec215405034d5d5c3e3ab3eb662579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be05a480_195faa88",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-11-07T11:44:35Z",
       "side": 1,
       "message": "Insert one line space in between these two lines",
+      "range": {
+        "startLine": 692,
+        "startChar": 4,
+        "endLine": 693,
+        "endChar": 52
+      },
+      "revId": "c36328eea3ec215405034d5d5c3e3ab3eb662579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb43cdac_bd1a1c9e",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-11-09T13:06:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be05a480_195faa88",
       "range": {
         "startLine": 692,
         "startChar": 4,
