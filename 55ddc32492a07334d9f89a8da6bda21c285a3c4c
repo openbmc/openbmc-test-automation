@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b23cd854_0960db90",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-11-09T09:34:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0125242_b7908b1e",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 40
+      },
+      "revId": "55ddc32492a07334d9f89a8da6bda21c285a3c4c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bc8f36d_89c8ad0c",
@@ -84,6 +108,54 @@
       "side": 1,
       "message": "Yeah. Please add Redfish.Logout in suite teardown.",
       "parentUuid": "9bc3966c_7e2c543f",
+      "range": {
+        "startLine": 186,
+        "startChar": 4,
+        "endLine": 186,
+        "endChar": 17
+      },
+      "revId": "55ddc32492a07334d9f89a8da6bda21c285a3c4c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73dc1e66_57973aea",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-11-09T09:34:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f74d54e_b29ba2d1",
+      "range": {
+        "startLine": 186,
+        "startChar": 4,
+        "endLine": 186,
+        "endChar": 17
+      },
+      "revId": "55ddc32492a07334d9f89a8da6bda21c285a3c4c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aad4cae_17be7822",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-11-09T09:34:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bc8f36d_89c8ad0c",
       "range": {
         "startLine": 186,
         "startChar": 4,
