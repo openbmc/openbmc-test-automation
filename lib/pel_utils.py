@@ -91,7 +91,7 @@ def fetch_all_pel_ids_for_src(src_id, severity):
 
     try:
         src_pel_ids = []
-        pel_data = peltool(" -l")
+        pel_data = get_pel_data_from_bmc()
         pel_id_list = pel_data.keys()
         for pel_id in pel_id_list:
             # Check if required SRC ID with severity is present
@@ -173,7 +173,7 @@ def fetch_all_src():
     """
     try:
         src_id = []
-        pel_data = peltool(" -l")
+        pel_data = get_pel_data_from_bmc()
         if pel_data:
             pel_id_list = pel_data.keys()
             for pel_id in pel_id_list:
