@@ -22,6 +22,30 @@
       },
       "revId": "9e69fa63f891d3c88557877d26922aa16ea9560b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e3cd60a_c15ad24c",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-09T09:57:13Z",
+      "side": 1,
+      "message": "Its a same thing and would not make any sense.",
+      "parentUuid": "74bb3c61_668bfc17",
+      "range": {
+        "startLine": 12,
+        "startChar": 15,
+        "endLine": 12,
+        "endChar": 78
+      },
+      "revId": "9e69fa63f891d3c88557877d26922aa16ea9560b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
