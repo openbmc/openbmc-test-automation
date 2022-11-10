@@ -70,6 +70,24 @@
       "parentUuid": "995b622d_d5b4fb18",
       "revId": "72729485472f91d3947ddbb5dcd16317ddd6482c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37cece91_a5402458",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-11-10T15:06:22Z",
+      "side": 1,
+      "message": "yes as per above discussion using redfish way to get a static ip of system.",
+      "parentUuid": "8948c98a_75d3a306",
+      "revId": "72729485472f91d3947ddbb5dcd16317ddd6482c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
