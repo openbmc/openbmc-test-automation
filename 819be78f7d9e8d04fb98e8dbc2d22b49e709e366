@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b15ff22_af877926",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-10T07:11:13Z",
+      "side": 1,
+      "message": "as per our coding standards, keep it all small letter like mandatory_informational_pel_fields",
+      "range": {
+        "startLine": 20,
+        "startChar": 2,
+        "endLine": 20,
+        "endChar": 36
+      },
+      "revId": "819be78f7d9e8d04fb98e8dbc2d22b49e709e366",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
