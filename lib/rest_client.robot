@@ -131,8 +131,8 @@ OpenBMC Delete Request
 Initialize OpenBMC
     [Documentation]  Do a REST login connection within specified time.
     [Arguments]  ${timeout}=20  ${quiet}=${1}
-    ...  ${rest_username}=${REST_USERNAME}
-    ...  ${rest_password}=${REST_PASSWORD}
+    ...  ${rest_username}=${OPENBMC_USERNAME}
+    ...  ${rest_password}=${OPENBMC_PASSWORD}
 
     # Description of argument(s):
     # timeout        REST login attempt time out.
@@ -153,8 +153,8 @@ Initialize OpenBMC
 
 BMC Web Login Request
     [Documentation]  Do BMC web-based login.
-    [Arguments]  ${timeout}=20  ${rest_username}=${REST_USERNAME}
-    ...  ${rest_password}=${REST_PASSWORD}
+    [Arguments]  ${timeout}=20  ${rest_username}=${OPENBMC_USERNAME}
+    ...  ${rest_password}=${OPENBMC_PASSWORD}
 
     # Description of argument(s):
     # timeout        REST login attempt time out.
@@ -182,8 +182,8 @@ BMC Web Login Request
 Post Login Request
     [Documentation]  Do REST login request.
     [Arguments]  ${timeout}=20  ${quiet}=${1}
-    ...  ${rest_username}=${REST_USERNAME}
-    ...  ${rest_password}=${REST_PASSWORD}
+    ...  ${rest_username}=${OPENBMC_USERNAME}
+    ...  ${rest_password}=${OPENBMC_PASSWORD}
 
     # Description of argument(s):
     # timeout        REST login attempt time out.
@@ -205,7 +205,6 @@ Post Login Request
 
 Log Out OpenBMC
     [Documentation]  Log out of the openbmc REST session.
-
     ${headers}=  Create Dictionary  Content-Type=application/json
     ...  X-Auth-Token=${XAUTH_TOKEN}
     ${data}=  Create dictionary  data=@{EMPTY}
@@ -377,8 +376,8 @@ Upload Image To BMC
 
 Redfish Login
     [Documentation]  Do BMC web-based login.
-    [Arguments]  ${timeout}=20  ${rest_username}=${REST_USERNAME}
-    ...  ${rest_password}=${REST_PASSWORD}  ${kwargs}=${EMPTY}
+    [Arguments]  ${timeout}=20  ${rest_username}=${OPENBMC_USERNAME}
+    ...  ${rest_password}=${OPENBMC_PASSWORD}  ${kwargs}=${EMPTY}
 
     # Description of argument(s):
     # timeout        REST login attempt time out.
