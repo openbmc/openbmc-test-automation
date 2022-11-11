@@ -16,12 +16,16 @@ Test Setup      Test Setup Execution
 
 *** Variables ***
 
-${xpath_overview_page_header}          //h1[contains(text(), "Overview")]
-${xpath_edit_network_settings_button}  (//*[text()="View more"])[3]
-${view_all_event_logs}                 (//*[text()="View more"])[5]
-${xpath_launch_host_console}           //*[@data-test-id='overviewQuickLinks-button-solConsole']
-${xpath_led_button}                    //*[@data-test-id='overviewInventory-checkbox-identifyLed']
-${view_all_Dumps}                      (//*[text()="View more"])[7]
+${xpath_overview_page_header}                    //h1[contains(text(), "Overview")]
+${xpath_server_information_view_more_button}     (//*[text()="View more"])[1]
+${xpath_firmware_information_view_more_button}   (//*[text()="View more"])[2]
+${xpath_edit_network_settings_button}            (//*[text()="View more"])[3]
+${xpath_power_information_view_more_button}      (//*[text()="View more"])[4]
+${xpath_event_logs_view_more_button}             (//*[text()="View more"])[5]
+${xpath_inventory_and_leds_view_more_button}     (//*[text()="View more"])[6]
+${xpath_launch_host_console}                     //*[@data-test-id='overviewQuickLinks-button-solConsole']
+${xpath_led_button}                              //*[@data-test-id='overviewInventory-checkbox-identifyLed']
+${view_all_Dumps}                                (//*[text()="View more"])[7]
 
 *** Test Cases ***
 
@@ -105,7 +109,7 @@ Verify View All Event Logs Button
     Generate Test Error Log
     Page Should Contain Element  ${view_all_event_logs}  timeout=30
     Click Element  ${view_all_event_logs}
-    Wait Until Page Contains Element  ${xpath_event_header}  timeout=30
+    Wait Until Page Contains Element  ${xpath_event_logs_heading}  timeout=30
 
 
 Verify Host Console Button In Overview Page
@@ -172,7 +176,62 @@ Verify View More Button For Dumps
 
     Wait Until Page Contains Element  ${view_all_Dumps}  timeout=30
     Click Element  ${view_all_Dumps}
-    Wait Until Page Contains Element  ${xpath_dumps_header}   timeout=30
+    Wait Until Page Contains Element  ${xpath_dumps_header}  timeout=30
+
+
+Verify View More Button Under Server Information Section
+    [Documentation]  Verify view more button under server information section in overview page.
+    [Tags]  Verify_View_More_Button_Under_Server_Information_Section
+
+    Wait Until Page Contains Element  ${xpath_server_information}  timeout=30
+    Click Element   ${xpath_server_information}
+    Wait Until Page Contains Element  ${xpath_inventory_and_leds_heading}  timeout=30
+
+
+Verify View More Button Under Firmware Information Section
+    [Documentation]  Verify view more button under firmware information section in overview page.
+    [Tags]  Verify_View_More_Button_Under_Firmware_Information_Section
+
+    Wait Until Page Contains Element  ${xpath_firmware_information_view_more_button}  timeout=30
+    Click Element  ${xpath_firmware_information_view_more_button}
+    Wait Until Page Contains Element  ${xpath_firmware_heading}  timeout=30
+
+
+Verify View More Button Under Network Information Section
+    [Documentation]  Verify view more button under network information section in overview page.
+    [Tags]  Verify_View_More_Button_Under_Network_information_Section
+
+    Wait Until Page Contains Element  ${xpath_inventory_and_leds_view_more_button}  timeout=30
+    Click Element  ${xpath_inventory_and_leds_view_more_button}
+    Wait Until Page Contains Element  ${xpath_network_heading}  timeout=30
+
+
+Verify View More Button Under Power Information Section
+    [Documentation]  Verify view more button under power information section in overview page.
+    [Tags]  Verify_View_More_Button_Under_Power_information_Section
+
+    Wait Until Page Contains Element  ${xpath_power_information_view_more_button}  timeout=30
+    Click Element  ${xpath_power_information_view_more_button}
+    Wait Until Page Contains Element  ${xpath_power_heading}  timeout=30
+
+
+Verify View More Button Under Event Logs Section
+    [Documentation]  Verify view more button under event logs section in overview page.
+    [Tags]  Verify_View_More_Button_Under_Event_Logs_Section
+
+    Wait Until Page Contains Element  ${xpath_event_logs_view_more_button}  timeout=30
+    Click Element  ${xpath_event_logs_view_more_button}
+    Wait Until Page Contains Element  ${xpath_event_logs_heading}  timeout=30
+
+
+Verify View More Button Under Inventory And LEDs Section
+    [Documentation]  Verify view more button under inventory and leds section in overview page.
+    [Tags]  Verify_View_More_Button_Under_Inventory_And_LEDs_Section
+
+    Wait Until Page Contains Element  ${xpath_inventory_and_leds_view_more_button}  timeout=30
+    Click Element  ${xpath_inventory_and_leds_view_more_button}
+    Wait Until Page Contains Element  ${xpath_inventory_and_leds_heading}  timeout=30
+
 
 *** Keywords ***
 
