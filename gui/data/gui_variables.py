@@ -36,6 +36,7 @@ class gui_variables():
     xpath_hardware_status_menu = "//*[@data-test-id='nav-button-hardware-status']"
     xpath_inventory_and_leds_sub_menu = "//*[@data-test-id='nav-item-inventory']"
     xpath_sensor_sub_menu = "//*[@data-test-id='nav-item-sensors']"
+    xpath_inventory_and_leds_header = "//h1[text()='Inventory and LEDs']"
 
     # Operations menu
     xpath_operations_menu = "//*[@data-test-id='nav-button-operations']"
@@ -45,6 +46,7 @@ class gui_variables():
     xpath_host_console_sub_menu = "//*[@data-test-id='nav-item-host-console']"
     xpath_server_power_operations_sub_menu = "//*[@data-test-id='nav-item-server-power-operations']"
     xpath_host_console_heading = "//h1[text()='Host console']"
+    xpath_firmware_header = "//h1[text()='Firmware']"
 
     # Settings menu
     xpath_settings_menu = "//*[@data-test-id='nav-button-settings']"
@@ -64,6 +66,7 @@ class gui_variables():
     # Resource management menu
     xpath_resource_management_menu = "//*[@data-test-id='nav-button-resource-management']"
     xpath_power_sub_menu = "//*[@data-test-id='nav-item-power']"
+    xpath_power_header = "//h1[text()=Power']"
 
     # Profile settings
     xpath_default_UTC = "//*[@data-test-id='profileSettings-radio-defaultUTC']"
