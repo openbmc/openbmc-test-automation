@@ -275,7 +275,8 @@ Verify BMC Event Log ID
 Verify FRU Callout
     [Documentation]  Verify FRU callout entries from PEL log.
     [Tags]  Verify_FRU_Callout
-
+    
+    Redfish Purge Event Log
     Create Test PEL Log  FRU Callout
 
     ${pel_ids}=  Get PEL Log Via BMC CLI
