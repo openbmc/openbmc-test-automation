@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "043737c8_d1e04963",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001436
+      },
+      "writtenOn": "2022-11-11T16:58:10Z",
+      "side": 1,
+      "message": "I think the additional_power_check is not Power specific, but I\u0027m OK with this change.",
+      "revId": "af9da9e642003516b2b5a95f78a2f10e62058404",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
