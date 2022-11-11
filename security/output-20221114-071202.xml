@@ -1,0 +1,1930 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0 (Python 3.8.13 on linux)" generated="20221114 07:12:02.739" rpa="false" schemaversion="3">
+<suite id="s1" name="Test Bmc Connections" source="/gsa/ausgsa-p10/03/indiateam04/meghagn5/flood_put_001/security/test_bmc_connections.robot">
+<kw name="Logout" library="Redfish" type="SETUP">
+<doc>Logout of session. YOU MUST CALL THIS WHEN YOU ARE DONE TO FREE</doc>
+<msg timestamp="20221114 07:13:18.930" level="INFO">Attempt 1 of /redfish/v1/SessionService/Sessions/vG4nH3QkIj</msg>
+<msg timestamp="20221114 07:13:18.943" level="INFO">Response Time for DELETE to /redfish/v1/SessionService/Sessions/vG4nH3QkIj: 0.0127976150251925 seconds.</msg>
+<msg timestamp="20221114 07:13:18.943" level="INFO">User logged out: {
+  "@Message.ExtendedInfo": [
+    {
+      "@odata.type": "#Message.v1_1_1.Message",
+      "Message": "Successfully Completed Request",
+      "MessageArgs": [],
+      "MessageId": "Base.1.8.1.Success",
+      "MessageSeverity": "OK",
+      "Resolution": "None"
+    }
+  ]
+}</msg>
+<status status="PASS" starttime="20221114 07:13:18.894" endtime="20221114 07:13:18.946"/>
+</kw>
+<test id="s1-t1" name="Verify Flood Put Method Without Auth Token" line="262">
+<kw name="Logout" library="Redfish">
+<doc>Logout of session. YOU MUST CALL THIS WHEN YOU ARE DONE TO FREE</doc>
+<status status="PASS" starttime="20221114 07:13:18.950" endtime="20221114 07:13:18.950"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>@{status_list}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20221114 07:13:18.952" level="INFO">@{status_list} = [ ]</msg>
+<status status="PASS" starttime="20221114 07:13:18.951" endtime="20221114 07:13:18.952"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${i}</var>
+<value>${1}</value>
+<value>${iterations}</value>
+<iter>
+<var name="${i}">1</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:13:18.960" endtime="20221114 07:13:18.961"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:13:18.975" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:18.976" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:19.977" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:19.977" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:20.979" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:20.979" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:21.980" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:21.981" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:22.982" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:22.982" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:23.983" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:23.984" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:24.985" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:24.986" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:25.987" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:25.987" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:26.989" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:26.989" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:27.990" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:27.991" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:28.992" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:28.993" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:29.995" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:13:18.962" endtime="20221114 07:13:29.997"/>
+</kw>
+<status status="PASS" starttime="20221114 07:13:18.961" endtime="20221114 07:13:29.997"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:13:29.998" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:13:29.998" endtime="20221114 07:13:29.998"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:13:29.999" endtime="20221114 07:13:29.999"/>
+</kw>
+<status status="PASS" starttime="20221114 07:13:18.960" endtime="20221114 07:13:29.999"/>
+</iter>
+<iter>
+<var name="${i}">2</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:13:30.000" endtime="20221114 07:13:30.001"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:13:30.015" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:30.015" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:31.016" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:31.017" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:32.018" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:32.018" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:33.020" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:33.020" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:34.021" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:34.022" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:35.023" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:35.024" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:36.025" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:36.026" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:37.027" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:37.028" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:38.029" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:38.030" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:39.031" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:39.032" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:40.033" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:40.033" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:41.035" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:13:30.002" endtime="20221114 07:13:41.036"/>
+</kw>
+<status status="PASS" starttime="20221114 07:13:30.001" endtime="20221114 07:13:41.036"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:13:41.037" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:13:41.036" endtime="20221114 07:13:41.037"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:13:41.038" endtime="20221114 07:13:41.038"/>
+</kw>
+<status status="PASS" starttime="20221114 07:13:30.000" endtime="20221114 07:13:41.038"/>
+</iter>
+<iter>
+<var name="${i}">3</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:13:41.039" endtime="20221114 07:13:41.040"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:13:41.054" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:41.055" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:42.056" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:42.062" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:43.063" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:43.064" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:44.065" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:44.065" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:45.067" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:45.067" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:46.068" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:46.069" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:47.070" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:47.071" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:48.072" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:48.072" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:49.074" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:49.074" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:50.075" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:50.076" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:51.077" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:51.078" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:52.079" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:13:41.041" endtime="20221114 07:13:52.080"/>
+</kw>
+<status status="PASS" starttime="20221114 07:13:41.040" endtime="20221114 07:13:52.080"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:13:52.081" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:13:52.081" endtime="20221114 07:13:52.081"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:13:52.082" endtime="20221114 07:13:52.082"/>
+</kw>
+<status status="PASS" starttime="20221114 07:13:41.039" endtime="20221114 07:13:52.083"/>
+</iter>
+<iter>
+<var name="${i}">4</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:13:52.083" endtime="20221114 07:13:52.084"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:13:52.099" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:52.100" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:53.101" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:53.101" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:54.103" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:54.103" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:55.104" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:55.105" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:56.106" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:56.106" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:57.108" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:57.108" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:58.109" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:58.110" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:13:59.111" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:13:59.112" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:00.113" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:00.113" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:01.115" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:01.115" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:02.116" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:02.117" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:03.118" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:13:52.085" endtime="20221114 07:14:03.119"/>
+</kw>
+<status status="PASS" starttime="20221114 07:13:52.084" endtime="20221114 07:14:03.119"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:14:03.120" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:14:03.120" endtime="20221114 07:14:03.120"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:14:03.121" endtime="20221114 07:14:03.121"/>
+</kw>
+<status status="PASS" starttime="20221114 07:13:52.083" endtime="20221114 07:14:03.122"/>
+</iter>
+<iter>
+<var name="${i}">5</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:14:03.122" endtime="20221114 07:14:03.123"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:14:03.137" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:03.137" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:04.139" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:04.139" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:05.140" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:05.141" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:06.142" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:06.143" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:07.144" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:07.144" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:08.146" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:08.146" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:09.147" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:09.148" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:10.149" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:10.150" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:11.151" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:11.152" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:12.153" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:12.153" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:13.155" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:13.155" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:14.157" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:14:03.124" endtime="20221114 07:14:14.157"/>
+</kw>
+<status status="PASS" starttime="20221114 07:14:03.123" endtime="20221114 07:14:14.158"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:14:14.159" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:14:14.158" endtime="20221114 07:14:14.159"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:14:14.160" endtime="20221114 07:14:14.160"/>
+</kw>
+<status status="PASS" starttime="20221114 07:14:03.122" endtime="20221114 07:14:14.160"/>
+</iter>
+<iter>
+<var name="${i}">6</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:14:14.161" endtime="20221114 07:14:14.161"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:14:14.175" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:14.175" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:15.177" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:15.177" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:16.178" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:16.179" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:17.180" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:17.181" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:18.182" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:18.182" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:19.184" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:19.184" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:20.185" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:20.186" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:21.187" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:21.188" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:22.189" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:22.189" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:23.191" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:23.191" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:24.192" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:24.193" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:25.194" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:14:14.162" endtime="20221114 07:14:25.197"/>
+</kw>
+<status status="PASS" starttime="20221114 07:14:14.162" endtime="20221114 07:14:25.197"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:14:25.199" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:14:25.198" endtime="20221114 07:14:25.199"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:14:25.199" endtime="20221114 07:14:25.200"/>
+</kw>
+<status status="PASS" starttime="20221114 07:14:14.160" endtime="20221114 07:14:25.200"/>
+</iter>
+<iter>
+<var name="${i}">7</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:14:25.201" endtime="20221114 07:14:25.201"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:14:25.217" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:25.217" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:26.219" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:26.219" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:27.220" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:27.221" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:28.222" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:28.223" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:29.224" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:29.224" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:30.226" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:30.226" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:31.227" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:31.228" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:32.229" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:32.229" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:33.231" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:33.231" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:34.232" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:34.233" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:35.234" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:35.235" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:36.236" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:14:25.202" endtime="20221114 07:14:36.237"/>
+</kw>
+<status status="PASS" starttime="20221114 07:14:25.202" endtime="20221114 07:14:36.237"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:14:36.238" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:14:36.237" endtime="20221114 07:14:36.238"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:14:36.239" endtime="20221114 07:14:36.239"/>
+</kw>
+<status status="PASS" starttime="20221114 07:14:25.200" endtime="20221114 07:14:36.239"/>
+</iter>
+<iter>
+<var name="${i}">8</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:14:36.240" endtime="20221114 07:14:36.240"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:14:36.254" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:36.254" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:37.255" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:37.256" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:38.257" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:38.258" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:39.259" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:39.260" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:40.261" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:40.262" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:41.263" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:41.263" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:42.265" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:42.270" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:43.271" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:43.272" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:44.273" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:44.274" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:45.275" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:45.275" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:46.277" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:46.277" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:47.279" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:14:36.241" endtime="20221114 07:14:47.279"/>
+</kw>
+<status status="PASS" starttime="20221114 07:14:36.241" endtime="20221114 07:14:47.279"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:14:47.281" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:14:47.280" endtime="20221114 07:14:47.281"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:14:47.281" endtime="20221114 07:14:47.282"/>
+</kw>
+<status status="PASS" starttime="20221114 07:14:36.239" endtime="20221114 07:14:47.282"/>
+</iter>
+<iter>
+<var name="${i}">9</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:14:47.283" endtime="20221114 07:14:47.283"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:14:47.298" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:47.299" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:48.300" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:48.300" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:49.301" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:49.302" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:50.303" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:50.304" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:51.305" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:51.305" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:52.307" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:52.307" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:53.308" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:53.309" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:54.310" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:54.311" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:55.312" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:55.312" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:56.314" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:56.314" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:57.315" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:57.316" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:58.317" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:14:47.285" endtime="20221114 07:14:58.318"/>
+</kw>
+<status status="PASS" starttime="20221114 07:14:47.284" endtime="20221114 07:14:58.318"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:14:58.319" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:14:58.319" endtime="20221114 07:14:58.319"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:14:58.320" endtime="20221114 07:14:58.320"/>
+</kw>
+<status status="PASS" starttime="20221114 07:14:47.282" endtime="20221114 07:14:58.320"/>
+</iter>
+<iter>
+<var name="${i}">10</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:14:58.321" endtime="20221114 07:14:58.322"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:14:58.336" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:58.336" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:14:59.337" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:14:59.338" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:00.339" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:00.340" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:01.341" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:01.341" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:02.342" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:02.343" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:03.344" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:03.345" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:04.346" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:04.346" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:05.348" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:05.348" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:06.349" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:06.350" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:07.351" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:07.352" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:08.353" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:08.353" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:09.355" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:14:58.323" endtime="20221114 07:15:09.355"/>
+</kw>
+<status status="PASS" starttime="20221114 07:14:58.322" endtime="20221114 07:15:09.356"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:15:09.357" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:15:09.356" endtime="20221114 07:15:09.357"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:15:09.357" endtime="20221114 07:15:09.358"/>
+</kw>
+<status status="PASS" starttime="20221114 07:14:58.321" endtime="20221114 07:15:09.358"/>
+</iter>
+<iter>
+<var name="${i}">11</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:15:09.359" endtime="20221114 07:15:09.359"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:15:09.374" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:09.374" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:10.376" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:10.376" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:11.377" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:11.378" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:12.379" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:12.379" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:13.381" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:13.381" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:14.382" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:14.383" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:15.384" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:15.385" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:16.386" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:16.386" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:17.388" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:17.388" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:18.389" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:18.390" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:19.391" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:19.392" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:20.393" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:15:09.360" endtime="20221114 07:15:20.394"/>
+</kw>
+<status status="PASS" starttime="20221114 07:15:09.360" endtime="20221114 07:15:20.394"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:15:20.395" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:15:20.395" endtime="20221114 07:15:20.395"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:15:20.396" endtime="20221114 07:15:20.396"/>
+</kw>
+<status status="PASS" starttime="20221114 07:15:09.358" endtime="20221114 07:15:20.396"/>
+</iter>
+<iter>
+<var name="${i}">12</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:15:20.397" endtime="20221114 07:15:20.398"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:15:20.411" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:20.411" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:21.413" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:21.413" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:22.414" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:22.415" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:23.416" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:23.416" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:24.418" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:24.418" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:25.419" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:25.420" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:26.421" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:26.422" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:27.423" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:27.423" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:28.425" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:28.425" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:29.426" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:29.427" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:30.428" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:30.429" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:31.430" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:15:20.399" endtime="20221114 07:15:31.433"/>
+</kw>
+<status status="PASS" starttime="20221114 07:15:20.398" endtime="20221114 07:15:31.434"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:15:31.435" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:15:31.434" endtime="20221114 07:15:31.435"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:15:31.435" endtime="20221114 07:15:31.436"/>
+</kw>
+<status status="PASS" starttime="20221114 07:15:20.397" endtime="20221114 07:15:31.436"/>
+</iter>
+<iter>
+<var name="${i}">13</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:15:31.437" endtime="20221114 07:15:31.437"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:15:31.453" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:31.453" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:32.454" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:32.455" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:33.456" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:33.457" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:34.458" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:34.458" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:35.460" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:35.460" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:36.461" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:36.462" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:37.463" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:37.463" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:38.464" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:38.465" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:39.466" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:39.467" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:40.468" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:40.469" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:41.470" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:41.471" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:42.473" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:15:31.439" endtime="20221114 07:15:42.476"/>
+</kw>
+<status status="PASS" starttime="20221114 07:15:31.438" endtime="20221114 07:15:42.476"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:15:42.478" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:15:42.477" endtime="20221114 07:15:42.478"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:15:42.478" endtime="20221114 07:15:42.479"/>
+</kw>
+<status status="PASS" starttime="20221114 07:15:31.436" endtime="20221114 07:15:42.479"/>
+</iter>
+<iter>
+<var name="${i}">14</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:15:42.480" endtime="20221114 07:15:42.480"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:15:42.495" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:42.498" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:43.499" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:43.500" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:44.501" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:44.501" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:45.503" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:45.503" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:46.504" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:46.505" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:47.506" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:47.506" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:48.508" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:48.508" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:49.510" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:49.510" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:50.511" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:50.512" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:51.513" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:51.514" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:52.515" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:52.515" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:53.517" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:15:42.482" endtime="20221114 07:15:53.517"/>
+</kw>
+<status status="PASS" starttime="20221114 07:15:42.481" endtime="20221114 07:15:53.518"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:15:53.519" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:15:53.518" endtime="20221114 07:15:53.519"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:15:53.519" endtime="20221114 07:15:53.520"/>
+</kw>
+<status status="PASS" starttime="20221114 07:15:42.479" endtime="20221114 07:15:53.520"/>
+</iter>
+<iter>
+<var name="${i}">15</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:15:53.521" endtime="20221114 07:15:53.521"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:15:53.536" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:53.537" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:54.538" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:54.538" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:55.540" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:55.540" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:56.541" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:56.542" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:57.543" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:57.544" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:58.545" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:58.545" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:15:59.547" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:15:59.547" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:00.548" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:00.549" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:01.550" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:01.551" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:02.552" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:02.552" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:03.554" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:03.554" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:04.556" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:15:53.522" endtime="20221114 07:16:04.556"/>
+</kw>
+<status status="PASS" starttime="20221114 07:15:53.522" endtime="20221114 07:16:04.557"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:16:04.558" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:16:04.557" endtime="20221114 07:16:04.558"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:16:04.558" endtime="20221114 07:16:04.559"/>
+</kw>
+<status status="PASS" starttime="20221114 07:15:53.520" endtime="20221114 07:16:04.559"/>
+</iter>
+<iter>
+<var name="${i}">16</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:16:04.560" endtime="20221114 07:16:04.560"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:16:04.575" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:04.575" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:05.576" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:05.577" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:06.578" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:06.579" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:07.580" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:07.580" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:08.581" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:08.582" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:09.583" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:09.584" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:10.585" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:10.585" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:11.587" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:11.587" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:12.588" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:12.589" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:13.590" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:13.591" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:14.592" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:14.592" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:15.594" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:16:04.561" endtime="20221114 07:16:15.595"/>
+</kw>
+<status status="PASS" starttime="20221114 07:16:04.561" endtime="20221114 07:16:15.595"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:16:15.596" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:16:15.595" endtime="20221114 07:16:15.596"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:16:15.597" endtime="20221114 07:16:15.597"/>
+</kw>
+<status status="PASS" starttime="20221114 07:16:04.559" endtime="20221114 07:16:15.597"/>
+</iter>
+<iter>
+<var name="${i}">17</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:16:15.598" endtime="20221114 07:16:15.599"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:16:15.612" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:15.613" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:16.614" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:16.614" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:17.616" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:17.616" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:18.617" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:18.618" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:19.619" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:19.619" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:20.621" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:20.621" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:21.622" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:21.623" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:22.624" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:22.625" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:23.626" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:23.626" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:24.628" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:24.628" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:25.629" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:25.630" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:26.631" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:16:15.600" endtime="20221114 07:16:26.632"/>
+</kw>
+<status status="PASS" starttime="20221114 07:16:15.599" endtime="20221114 07:16:26.632"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:16:26.633" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:16:26.633" endtime="20221114 07:16:26.633"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:16:26.634" endtime="20221114 07:16:26.634"/>
+</kw>
+<status status="PASS" starttime="20221114 07:16:15.598" endtime="20221114 07:16:26.634"/>
+</iter>
+<iter>
+<var name="${i}">18</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:16:26.635" endtime="20221114 07:16:26.636"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:16:26.649" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:26.649" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:27.651" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:27.651" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:28.652" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:28.653" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:29.654" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:29.655" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:30.656" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:30.656" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:31.658" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:31.658" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:32.659" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:32.660" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:33.661" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:33.662" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:34.663" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:34.663" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:35.665" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:35.665" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:36.666" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:36.667" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:37.668" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:16:26.637" endtime="20221114 07:16:37.671"/>
+</kw>
+<status status="PASS" starttime="20221114 07:16:26.636" endtime="20221114 07:16:37.672"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:16:37.673" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:16:37.672" endtime="20221114 07:16:37.673"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:16:37.673" endtime="20221114 07:16:37.674"/>
+</kw>
+<status status="PASS" starttime="20221114 07:16:26.635" endtime="20221114 07:16:37.674"/>
+</iter>
+<iter>
+<var name="${i}">19</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:16:37.675" endtime="20221114 07:16:37.675"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:16:37.691" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:37.692" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:38.693" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:38.693" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:39.695" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:39.695" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:40.696" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:40.697" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:41.698" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:41.699" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:42.700" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:42.706" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:43.707" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:43.707" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:44.709" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:44.709" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:45.710" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:45.711" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:46.712" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:46.713" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:47.714" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:47.714" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:48.716" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:16:37.676" endtime="20221114 07:16:48.717"/>
+</kw>
+<status status="PASS" starttime="20221114 07:16:37.676" endtime="20221114 07:16:48.717"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:16:48.718" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:16:48.717" endtime="20221114 07:16:48.718"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:16:48.719" endtime="20221114 07:16:48.719"/>
+</kw>
+<status status="PASS" starttime="20221114 07:16:37.674" endtime="20221114 07:16:48.719"/>
+</iter>
+<iter>
+<var name="${i}">20</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:16:48.720" endtime="20221114 07:16:48.720"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:16:48.734" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:48.734" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:49.736" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:49.736" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:50.737" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:50.738" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:51.739" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:51.740" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:52.741" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:52.741" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:53.743" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:53.743" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:54.744" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:54.745" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:55.746" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:55.746" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:56.748" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:56.748" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:57.750" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:57.750" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:58.751" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:58.752" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:16:59.753" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:16:48.722" endtime="20221114 07:16:59.754"/>
+</kw>
+<status status="PASS" starttime="20221114 07:16:48.721" endtime="20221114 07:16:59.754"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:16:59.756" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:16:59.755" endtime="20221114 07:16:59.756"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:16:59.756" endtime="20221114 07:16:59.757"/>
+</kw>
+<status status="PASS" starttime="20221114 07:16:48.719" endtime="20221114 07:16:59.757"/>
+</iter>
+<iter>
+<var name="${i}">21</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:16:59.758" endtime="20221114 07:16:59.758"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:16:59.772" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:16:59.772" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:00.773" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:00.774" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:01.775" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:01.776" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:02.777" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:02.778" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:03.779" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:03.779" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:04.781" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:04.781" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:05.782" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:05.783" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:06.784" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:06.785" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:07.786" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:07.786" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:08.788" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:08.788" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:09.789" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:09.790" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:10.791" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:16:59.759" endtime="20221114 07:17:10.792"/>
+</kw>
+<status status="PASS" starttime="20221114 07:16:59.759" endtime="20221114 07:17:10.792"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:17:10.793" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:17:10.793" endtime="20221114 07:17:10.794"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:17:10.794" endtime="20221114 07:17:10.795"/>
+</kw>
+<status status="PASS" starttime="20221114 07:16:59.757" endtime="20221114 07:17:10.795"/>
+</iter>
+<iter>
+<var name="${i}">22</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:17:10.795" endtime="20221114 07:17:10.796"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:17:10.810" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:10.811" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:11.812" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:11.813" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:12.814" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:12.814" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:13.816" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:13.816" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:14.817" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:14.818" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:15.819" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:15.820" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:16.821" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:16.821" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:17.823" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:17.823" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:18.824" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:18.825" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:19.826" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:19.826" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:20.828" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:20.828" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:21.830" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:17:10.797" endtime="20221114 07:17:21.830"/>
+</kw>
+<status status="PASS" starttime="20221114 07:17:10.797" endtime="20221114 07:17:21.831"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:17:21.832" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:17:21.831" endtime="20221114 07:17:21.832"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:17:21.832" endtime="20221114 07:17:21.833"/>
+</kw>
+<status status="PASS" starttime="20221114 07:17:10.795" endtime="20221114 07:17:21.833"/>
+</iter>
+<iter>
+<var name="${i}">23</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:17:21.834" endtime="20221114 07:17:21.834"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:17:21.848" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:21.849" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:22.850" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:22.851" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:23.852" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:23.853" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:24.854" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:24.855" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:25.856" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:25.856" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:26.857" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:26.858" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:27.859" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:27.860" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:28.861" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:28.861" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:29.863" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:29.863" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:30.865" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:30.865" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:31.866" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:31.867" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:32.868" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:17:21.835" endtime="20221114 07:17:32.869"/>
+</kw>
+<status status="PASS" starttime="20221114 07:17:21.835" endtime="20221114 07:17:32.869"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:17:32.871" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:17:32.870" endtime="20221114 07:17:32.871"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:17:32.871" endtime="20221114 07:17:32.872"/>
+</kw>
+<status status="PASS" starttime="20221114 07:17:21.833" endtime="20221114 07:17:32.872"/>
+</iter>
+<iter>
+<var name="${i}">24</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:17:32.873" endtime="20221114 07:17:32.873"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:17:32.887" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:32.888" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:33.889" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:33.889" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:34.890" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:34.891" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:35.892" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:35.893" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:36.894" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:36.894" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:37.896" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:37.896" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:38.897" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:38.898" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:39.899" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:39.900" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:40.901" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:40.901" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:41.903" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:41.903" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:42.904" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:42.910" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:43.911" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:17:32.874" endtime="20221114 07:17:43.914"/>
+</kw>
+<status status="PASS" starttime="20221114 07:17:32.874" endtime="20221114 07:17:43.914"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:17:43.915" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:17:43.915" endtime="20221114 07:17:43.915"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:17:43.916" endtime="20221114 07:17:43.917"/>
+</kw>
+<status status="PASS" starttime="20221114 07:17:32.872" endtime="20221114 07:17:43.917"/>
+</iter>
+<iter>
+<var name="${i}">25</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:17:43.917" endtime="20221114 07:17:43.918"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:17:43.933" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:43.933" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:44.935" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:44.935" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:45.936" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:45.937" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:46.938" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:46.939" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:47.940" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:47.940" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:48.942" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:48.942" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:49.943" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:49.944" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:50.945" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:50.946" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:51.947" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:51.947" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:52.949" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:52.949" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:53.951" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:53.951" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:54.953" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:17:43.919" endtime="20221114 07:17:54.954"/>
+</kw>
+<status status="PASS" starttime="20221114 07:17:43.918" endtime="20221114 07:17:54.954"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:17:54.955" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:17:54.955" endtime="20221114 07:17:54.955"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:17:54.956" endtime="20221114 07:17:54.956"/>
+</kw>
+<status status="PASS" starttime="20221114 07:17:43.917" endtime="20221114 07:17:54.956"/>
+</iter>
+<iter>
+<var name="${i}">26</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:17:54.957" endtime="20221114 07:17:54.958"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:17:54.971" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:54.972" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:55.973" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:55.974" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:56.975" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:56.975" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:57.977" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:57.977" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:58.978" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:58.979" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:17:59.980" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:17:59.981" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:00.982" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:00.983" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:01.984" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:01.984" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:02.985" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:02.986" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:03.987" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:03.988" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:04.989" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:04.989" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:05.991" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:17:54.959" endtime="20221114 07:18:05.992"/>
+</kw>
+<status status="PASS" starttime="20221114 07:17:54.958" endtime="20221114 07:18:05.992"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:18:05.993" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:18:05.993" endtime="20221114 07:18:05.993"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:18:05.994" endtime="20221114 07:18:05.994"/>
+</kw>
+<status status="PASS" starttime="20221114 07:17:54.957" endtime="20221114 07:18:05.994"/>
+</iter>
+<iter>
+<var name="${i}">27</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:18:05.995" endtime="20221114 07:18:05.996"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:18:06.010" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:06.010" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:07.012" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:07.012" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:08.013" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:08.014" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:09.015" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:09.016" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:10.017" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:10.018" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:11.019" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:11.020" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:12.021" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:12.022" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:13.023" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:13.023" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:14.025" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:14.025" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:15.026" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:15.027" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:16.028" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:16.029" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:17.030" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:18:05.997" endtime="20221114 07:18:17.031"/>
+</kw>
+<status status="PASS" starttime="20221114 07:18:05.996" endtime="20221114 07:18:17.031"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:18:17.032" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:18:17.032" endtime="20221114 07:18:17.032"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:18:17.033" endtime="20221114 07:18:17.033"/>
+</kw>
+<status status="PASS" starttime="20221114 07:18:05.995" endtime="20221114 07:18:17.033"/>
+</iter>
+<iter>
+<var name="${i}">28</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:18:17.034" endtime="20221114 07:18:17.035"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:18:17.049" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:17.049" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:18.051" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:18.051" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:19.052" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:19.053" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:20.054" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:20.055" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:21.056" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:21.056" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:22.058" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:22.058" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:23.059" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:23.060" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:24.061" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:24.061" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:25.063" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:25.063" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:26.064" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:26.065" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:27.066" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:27.067" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:28.068" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:18:17.036" endtime="20221114 07:18:28.069"/>
+</kw>
+<status status="PASS" starttime="20221114 07:18:17.035" endtime="20221114 07:18:28.069"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:18:28.070" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:18:28.070" endtime="20221114 07:18:28.070"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:18:28.071" endtime="20221114 07:18:28.071"/>
+</kw>
+<status status="PASS" starttime="20221114 07:18:17.034" endtime="20221114 07:18:28.071"/>
+</iter>
+<iter>
+<var name="${i}">29</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:18:28.072" endtime="20221114 07:18:28.073"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:18:28.088" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:28.088" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:29.089" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:29.090" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:30.091" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:30.092" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:31.093" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:31.094" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:32.095" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:32.095" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:33.097" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:33.097" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:34.098" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:34.099" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:35.100" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:35.101" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:36.102" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:36.102" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:37.103" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:37.104" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:38.105" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:38.106" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:39.107" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:18:28.074" endtime="20221114 07:18:39.108"/>
+</kw>
+<status status="PASS" starttime="20221114 07:18:28.073" endtime="20221114 07:18:39.108"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:18:39.110" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:18:39.109" endtime="20221114 07:18:39.110"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:18:39.110" endtime="20221114 07:18:39.111"/>
+</kw>
+<status status="PASS" starttime="20221114 07:18:28.072" endtime="20221114 07:18:39.111"/>
+</iter>
+<iter>
+<var name="${i}">30</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:18:39.112" endtime="20221114 07:18:39.112"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:18:39.126" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:39.127" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:40.128" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:40.128" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:41.130" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:41.130" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:42.131" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:42.132" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:43.133" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:43.139" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:44.140" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:44.140" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:45.142" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:45.142" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:46.143" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:46.144" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:47.145" level="INFO">Attempt 9 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:47.146" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:48.147" level="INFO">Attempt 10 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:48.147" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:49.149" level="INFO">Attempt 11 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:49.149" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:50.151" level="FAIL">RetriesExhaustedError</msg>
+<status status="FAIL" starttime="20221114 07:18:39.113" endtime="20221114 07:18:50.154"/>
+</kw>
+<status status="PASS" starttime="20221114 07:18:39.113" endtime="20221114 07:18:50.154"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<msg timestamp="20221114 07:18:50.155" level="INFO">${status} = None</msg>
+<status status="PASS" starttime="20221114 07:18:50.155" endtime="20221114 07:18:50.155"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20221114 07:18:50.156" endtime="20221114 07:18:50.156"/>
+</kw>
+<status status="PASS" starttime="20221114 07:18:39.111" endtime="20221114 07:18:50.156"/>
+</iter>
+<iter>
+<var name="${i}">31</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${i}th iteration</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221114 07:18:50.157" endtime="20221114 07:18:50.158"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<arg>Redfish.Put</arg>
+<arg>{put_uri}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Put" library="Redfish">
+<arg>{put_uri}</arg>
+<doc>Perform a PUT request</doc>
+<msg timestamp="20221114 07:18:50.174" level="INFO">Attempt 1 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:50.174" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:51.175" level="INFO">Attempt 2 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:51.176" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:52.177" level="INFO">Attempt 3 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:52.178" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:53.179" level="INFO">Attempt 4 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:53.179" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:54.181" level="INFO">Attempt 5 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:54.181" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:55.182" level="INFO">Attempt 6 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:55.183" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:56.184" level="INFO">Attempt 7 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:56.184" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<msg timestamp="20221114 07:18:57.186" level="INFO">Attempt 8 of {put_uri}</msg>
+<msg timestamp="20221114 07:18:57.186" level="INFO">Retrying {put_uri} [Failed to parse: https://rain36bmc:443{put_uri}]</msg>
+<status status="FAIL" starttime="20221114 07:18:50.159" endtime="20221114 07:18:57.901"/>
+</kw>
+<status status="FAIL" starttime="20221114 07:18:50.158" endtime="20221114 07:18:57.901"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${status}</var>
+<arg>${i} % 100 == 0</arg>
+<arg>Run Keyword And Return Status</arg>
+<arg>Login And Upload Partition File To BMC</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20221114 07:18:57.902" endtime="20221114 07:18:57.902"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${status} == False</arg>
+<arg>Append To List</arg>
+<arg>${status_list}</arg>
+<arg>${status}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" starttime="20221114 07:18:57.903" endtime="20221114 07:18:57.903"/>
+</kw>
+<status status="FAIL" starttime="20221114 07:18:50.157" endtime="20221114 07:18:57.903"/>
+</iter>
+<status status="FAIL" starttime="20221114 07:13:18.952" endtime="20221114 07:18:57.903"/>
+</for>
+<kw name="Evaluate" library="BuiltIn">
+<var>${verify_count}</var>
+<arg>${iterations}/100</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" starttime="20221114 07:18:57.904" endtime="20221114 07:18:57.904"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${fail_count}</var>
+<arg>${status_list}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="NOT RUN" starttime="20221114 07:18:57.905" endtime="20221114 07:18:57.905"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${fail_count}</arg>
+<arg>${0}</arg>
+<arg>msg=Put operation failed ${fail_count} times in ${verify_count} attempts.</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="NOT RUN" starttime="20221114 07:18:57.905" endtime="20221114 07:18:57.905"/>
+</kw>
+<doc>Flood put method without auth token and check BMC stability.</doc>
+<tag>Verify_Flood_Put_Method_Without_Auth_Token</tag>
+<status status="FAIL" starttime="20221114 07:13:18.947" endtime="20221114 07:18:57.906">Execution terminated by signal</status>
+</test>
+<doc>Connections and authentication module stability tests.</doc>
+<status status="FAIL" starttime="20221114 07:12:02.741" endtime="20221114 07:18:57.908"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1" skip="0">Verify_Flood_Put_Method_Without_Auth_Token</stat>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Test Bmc Connections">Test Bmc Connections</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
