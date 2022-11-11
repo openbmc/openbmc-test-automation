@@ -205,7 +205,6 @@ Post Login Request
 
 Log Out OpenBMC
     [Documentation]  Log out of the openbmc REST session.
-
     ${headers}=  Create Dictionary  Content-Type=application/json
     ...  X-Auth-Token=${XAUTH_TOKEN}
     ${data}=  Create dictionary  data=@{EMPTY}
