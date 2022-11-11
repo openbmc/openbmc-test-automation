@@ -17,8 +17,12 @@ Test Setup      Test Setup Execution
 *** Variables ***
 
 ${xpath_overview_page_header}          //h1[contains(text(), "Overview")]
+${xpath_server_information}            (//*[text()="View more"])[1]
+${xpath_firmware_information}          (//*[text()="View more"])[2]
 ${xpath_edit_network_settings_button}  (//*[text()="View more"])[3]
+${view_more_Power_information}         (//*[text()="View more"])[4]
 ${view_all_event_logs}                 (//*[text()="View more"])[5]
+${view_more_inventory_and_leds}        (//*[text()="View more"])[6]
 ${xpath_launch_host_console}           //*[@data-test-id='overviewQuickLinks-button-solConsole']
 ${xpath_led_button}                    //*[@data-test-id='overviewInventory-checkbox-identifyLed']
 ${view_all_Dumps}                      (//*[text()="View more"])[7]
@@ -172,7 +176,62 @@ Verify View More Button For Dumps
 
     Wait Until Page Contains Element  ${view_all_Dumps}  timeout=30
     Click Element  ${view_all_Dumps}
-    Wait Until Page Contains Element  ${xpath_dumps_header}   timeout=30
+    Wait Until Page Contains Element  ${xpath_dumps_header}  timeout=30
+
+
+Verify View More Button Containing Server Information
+    [Documentation]  Verify view more button containing server information in overview page.
+    [Tags]  Verify_View_More_Button_Containing_Server_Information
+
+    Wait Until Page Contains Element  ${xpath_server_information}  timeout=30
+    Click Element   ${xpath_server_information}
+    Wait Until Page Contains Element  ${xpath_inventory_and_leds_heading}  timeout=30
+
+
+Verify View More Button Containing Firmware Information
+    [Documentation]  Verify view more button containing firmware information in overview page.
+    [Tags]  Verify_View_More_Button_Containing_Firmware_Information
+
+    Wait Until Page Contains Element  ${xpath_firmware_information}  timeout=30
+    Click Element  ${xpath_firmware_information}
+    Wait Until Page Contains Element  ${xpath_firmware_heading}  timeout=30
+
+
+Verify View More Button Containing Network Information
+    [Documentation]  Verify view more button containing network information in overview page.
+    [Tags]  Verify_View_More_Button_Containing_Network_information
+
+    Wait Until Page Contains Element  ${xpath_edit_network_settings_button}  timeout=30
+    Click Element  ${xpath_edit_network_settings_button}
+    Wait Until Page Contains Element  ${xpath_network_page_header}  timeout=30
+
+
+Verify View More Button Containing Power Information
+    [Documentation]  Verify view more button containing power information in overview page.
+    [Tags]  Verify_View_More_Button_Containing_Power_information
+
+    Wait Until Page Contains Element  ${view_more_Power_information}  timeout=30
+    Click Element  ${view_more_Power_information}
+    Wait Until Page Contains Element  ${xpath_power_heading}  timeout=30
+
+
+Verify View More Button Containing Event Logs
+    [Documentation]  Verify view more button containing event logs in overview page.
+    [Tags]  Verify_View_More_Button_Containing_Event_Logs
+
+    Wait Until Page Contains Element  ${view_all_event_logs}  timeout=30
+    Click Element  ${view_all_event_logs}
+    Wait Until Page Contains Element  ${xpath_event_header}  timeout=30
+
+
+Verify View More Button Containing Inventory And LEDs
+    [Documentation]  Verify view more button containing inventory and leds in overview page.
+    [Tags]  Verify_View_More_Button_Containing_Inventory_And_LEDs
+
+    Wait Until Page Contains Element  ${view_more_inventory_and_leds}  timeout=30
+    Click Element  ${view_more_inventory_and_leds}
+    Wait Until Page Contains Element  ${xpath_inventory_and_leds_heading}  timeout=30
+
 
 *** Keywords ***
 
