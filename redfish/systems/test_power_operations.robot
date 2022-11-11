@@ -11,8 +11,8 @@ Test Teardown    Test Teardown Execution
 *** Variables ***
 
 # Extended code to check OCC state, power metric and others.
-${additional_power_check}      ${1}
-${additional_occ_check}        ${1}
+${additional_power_check}      ${0}
+${additional_occ_check}        ${0}
 
 # By default disable SOL logging collection.
 ${capture_sol}                 ${0}
