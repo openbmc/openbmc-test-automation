@@ -275,7 +275,9 @@ Verify BMC Event Log ID
 Verify FRU Callout
     [Documentation]  Verify FRU callout entries from PEL log.
     [Tags]  Verify_FRU_Callout
-
+ 
+    # Power off the system to avoid unnecessary error logs during test.
+    Redfish Power Off  stack_mode=skip
     Create Test PEL Log  FRU Callout
 
     ${pel_ids}=  Get PEL Log Via BMC CLI
