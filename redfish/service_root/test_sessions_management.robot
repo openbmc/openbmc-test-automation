@@ -38,6 +38,16 @@ Create Session And Verify Response Code Using Different Credentials
     operator_user        TestPwd123           ${HTTP_CREATED}
 
 
+
+Create Session And Verify Response Code Using Operator Credentials
+    [Documentation]  Create session and verify response code using operator credentials.
+    [Tags]  Create_Session_And_Verify_Response_Code_Using_Operator_Credentials
+    [Template]  Create Session And Verify Response Code
+
+    # username           password             valid_status_code
+    operator_user        TestPwd123           ${HTTP_CREATED}
+
+
 Set Session Timeout And Verify Response Code
     [Documentation]  Set Session Timeout And Verify Response Code.
     [Tags]  Set_Session_Timeout_And_Verify_Response_Code
