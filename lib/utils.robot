@@ -8,7 +8,6 @@ Resource                ../lib/connection_client.robot
 Resource                ../lib/boot_utils.robot
 Resource                ../lib/common_utils.robot
 Resource                ../lib/bmc_redfish_utils.robot
-Resource                ../lib/ipmi_client.robot
 Library                 String
 Library                 DateTime
 Library                 Process
