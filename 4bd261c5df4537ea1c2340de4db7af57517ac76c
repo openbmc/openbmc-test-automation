@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c272bf3a_430d46b7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-11-11T10:38:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e103df26_e767a935",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 40
+      },
+      "revId": "4bd261c5df4537ea1c2340de4db7af57517ac76c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7d406d7_e9411054",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa96bc6b_510a2394",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-11-11T10:38:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7d406d7_e9411054",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 0
+      },
+      "revId": "4bd261c5df4537ea1c2340de4db7af57517ac76c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9a9977c_0c7b2f12",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-11-11T09:38:11Z",
       "side": 1,
       "message": "Add power off instead on this. That would make sure that no other error grts logged in system due to power on failure during power on. So add this instead.\n\n    # Power off the system to avoid unnecessary error logs during test.\n    Redfish Power Off  stack_mode\u003dskip",
+      "range": {
+        "startLine": 279,
+        "startChar": 0,
+        "endLine": 279,
+        "endChar": 27
+      },
+      "revId": "4bd261c5df4537ea1c2340de4db7af57517ac76c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75016f95_50a3eaca",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-11-11T10:38:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9a9977c_0c7b2f12",
       "range": {
         "startLine": 279,
         "startChar": 0,
