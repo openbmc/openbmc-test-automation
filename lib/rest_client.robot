@@ -1,4 +1,5 @@
 *** Settings ***
+
 Library           Collections
 Library           String
 Library           RequestsLibrary
@@ -11,12 +12,14 @@ Library           var_funcs.py
 Resource          rest_response_code.robot
 
 *** Variables ***
+
 # Assign default value to QUIET for programs which may not define it.
 ${QUIET}  ${0}
 
 ${XAUTH_TOKEN}  ${EMPTY}
 
 *** Keywords ***
+
 OpenBMC Get Request
     [Documentation]  Do REST GET request and return the result.
     # Example result data:
@@ -39,7 +42,6 @@ OpenBMC Get Request
     #          Get Request call. For example, the caller might
     #          set kwargs as follows:
     #          ${kwargs}=  Create Dictionary  allow_redirect=${True}.
-
     Initialize OpenBMC  ${timeout}  quiet=${quiet}
 
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
@@ -51,6 +53,7 @@ OpenBMC Get Request
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${resp}
     Delete All Sessions
     [Return]    ${resp}
+
 
 OpenBMC Post Request
     [Documentation]  Do REST POST request and return the result.
@@ -66,7 +69,6 @@ OpenBMC Post Request
     #          Post Request call. For example, the caller might
     #          set kwargs as follows:
     #          ${kwargs}=  Create Dictionary  allow_redirect=${True}.
-
     Initialize OpenBMC    ${timeout}  quiet=${quiet}
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     ${headers}=  Create Dictionary   Content-Type=application/json
@@ -74,10 +76,11 @@ OpenBMC Post Request
     Set To Dictionary  ${kwargs}  headers  ${headers}
     Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post
     ...  base_uri=${base_uri}  args=&{kwargs}
-    ${ret}=  POST On Session  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
+    ${ret}=  POST Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
     Delete All Sessions
     [Return]    ${ret}
+
 
 OpenBMC Put Request
     [Documentation]  Do REST PUT request on the resource identified by the URI.
@@ -101,6 +104,7 @@ OpenBMC Put Request
     Log Response    ${resp}
     Delete All Sessions
     [Return]    ${resp}
+
 
 OpenBMC Delete Request
     [Documentation]  Do REST request to delete the resource identified by the
@@ -128,11 +132,12 @@ OpenBMC Delete Request
     Delete All Sessions
     [Return]    ${ret}
 
+
 Initialize OpenBMC
     [Documentation]  Do a REST login connection within specified time.
     [Arguments]  ${timeout}=20  ${quiet}=${1}
-    ...  ${rest_username}=${REST_USERNAME}
-    ...  ${rest_password}=${REST_PASSWORD}
+    ...  ${rest_username}=${OPENBMC_USERNAME}
+    ...  ${rest_password}=${OPENBMC_PASSWORD}
 
     # Description of argument(s):
     # timeout        REST login attempt time out.
@@ -153,8 +158,8 @@ Initialize OpenBMC
 
 BMC Web Login Request
     [Documentation]  Do BMC web-based login.
-    [Arguments]  ${timeout}=20  ${rest_username}=${REST_USERNAME}
-    ...  ${rest_password}=${REST_PASSWORD}
+    [Arguments]  ${timeout}=20  ${rest_username}=${OPENBMC_USERNAME}
+    ...  ${rest_password}=${OPENBMC_PASSWORD}
 
     # Description of argument(s):
     # timeout        REST login attempt time out.
@@ -166,7 +171,7 @@ BMC Web Login Request
     ${headers}=  Create Dictionary  Content-Type=application/json
     @{credentials}=  Create List  ${rest_username}  ${rest_password}
     ${data}=  Create Dictionary  data=@{credentials}
-    ${resp}=  POST On Session  openbmc  /login  json=${data}  headers=${headers}
+    ${resp}=  POST Request  openbmc  /login  data=${data}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
     ${processed_token_data}=
@@ -182,8 +187,8 @@ BMC Web Login Request
 Post Login Request
     [Documentation]  Do REST login request.
     [Arguments]  ${timeout}=20  ${quiet}=${1}
-    ...  ${rest_username}=${REST_USERNAME}
-    ...  ${rest_password}=${REST_PASSWORD}
+    ...  ${rest_username}=${OPENBMC_USERNAME}
+    ...  ${rest_password}=${OPENBMC_PASSWORD}
 
     # Description of argument(s):
     # timeout        REST login attempt time out.
@@ -196,8 +201,8 @@ Post Login Request
     ${headers}=  Create Dictionary  Content-Type=application/json
     @{credentials}=  Create List  ${rest_username}  ${rest_password}
     ${data}=  Create Dictionary   data=@{credentials}
-    ${status}  ${resp}=  Run Keyword And Ignore Error  POST On Session  openbmc
-    ...  /login  json=${data}  headers=${headers}
+    ${status}  ${resp}=  Run Keyword And Ignore Error  POST Request  openbmc
+    ...  /login  data=${data}  headers=${headers}
 
     Should Be Equal  ${status}  PASS  msg=${resp}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
@@ -212,8 +217,8 @@ Log Out OpenBMC
 
     # If there is no active sesion it will throw the following exception
     # "Non-existing index or alias 'openbmc'"
-    ${resp}=  POST On Session  openbmc
-    ...  /logout  json=${data}  headers=${headers}
+    ${resp}=  POST Request  openbmc
+    ...  /logout  data=${data}  headers=${headers}
 
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ...  msg=${resp}
@@ -306,6 +311,7 @@ Write Attribute
     ${value}=  Read Attribute  ${uri}  ${attr}
     Should Be Equal  ${value}  ${expected_value}
 
+
 Read Properties
     [Documentation]  Read data part of the URI object and return result.
     # Example result data:
@@ -324,6 +330,7 @@ Read Properties
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
     [Return]  ${resp.json()["data"]}
+
 
 Call Method
     [Documentation]  Invoke the specific REST service method.
@@ -367,7 +374,7 @@ Upload Image To BMC
     Set To Dictionary  ${kwargs}  headers  ${headers}
     Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post
     ...  base_uri=${base_uri}  args=&{kwargs}
-    ${ret}=  POST On Session  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
+    ${ret}=  POST Request  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
     Valid Value  ret.status_code  ${valid_status_codes}
     Delete All Sessions
@@ -377,8 +384,8 @@ Upload Image To BMC
 
 Redfish Login
     [Documentation]  Do BMC web-based login.
-    [Arguments]  ${timeout}=20  ${rest_username}=${REST_USERNAME}
-    ...  ${rest_password}=${REST_PASSWORD}  ${kwargs}=${EMPTY}
+    [Arguments]  ${timeout}=20  ${rest_username}=${OPENBMC_USERNAME}
+    ...  ${rest_password}=${OPENBMC_PASSWORD}  ${kwargs}=${EMPTY}
 
     # Description of argument(s):
     # timeout        REST login attempt time out.
@@ -395,7 +402,7 @@ Redfish Login
     ...    {"UserName":"${rest_username}", "Password":"${rest_password}"}
     ...    {"UserName":"${rest_username}", "Password":"${rest_password}", ${kwargs}}
 
-    ${resp}=  POST On Session  redfish  /redfish/v1/SessionService/Sessions
+    ${resp}=  POST Request  redfish  /redfish/v1/SessionService/Sessions
     ...  data=${data}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_CREATED}
 
@@ -446,7 +453,7 @@ Redfish Post Request
     ${headers}=  Create Dictionary  Content-Type=application/json  X-Auth-Token=${XAUTH_TOKEN}
     Set To Dictionary   ${kwargs}  headers  ${headers}
     Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post  base_uri=${base_uri}  args=&{kwargs}
-    ${resp}=  POST On Session  redfish  ${base_uri}  &{kwargs}  timeout=${timeout}  expected_status=any
+    ${resp}=  POST Request  redfish  ${base_uri}  &{kwargs}  timeout=${timeout}  expected_status=any
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${resp}
 
     [Return]  ${resp}
