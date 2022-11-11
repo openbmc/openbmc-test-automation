@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63289e66_a3a3bfeb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-11-11T08:27:13Z",
+      "side": 1,
+      "message": "lib/rest_client.robot  dont change the code.. please upgrade the packages\n  pip3 install robotframework-requests -U\n  pip3 install robotframework-jsonlibrary -U",
+      "revId": "5b32b8697a0d2efd2c713b7cd609ffc9e517b0a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
