@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "934e51c6_3df1d40a",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-14T09:56:30Z",
+      "side": 1,
+      "message": "Verify Flood Put Method Without Auth Token\n\nu can mention about checking bmc stability in the [Documentation].\n\nchange in the [Tags] too",
+      "range": {
+        "startLine": 261,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 55
+      },
+      "revId": "d8da31b5e7429ffa7ea270e971fcc90008470a34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88f698f6_a43a7c94",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-14T09:56:30Z",
+      "side": 1,
+      "message": "why are logging out??\n\nwe are doing put operation @270 where is the login done for it?",
+      "range": {
+        "startLine": 265,
+        "startChar": 0,
+        "endLine": 265,
+        "endChar": 18
+      },
+      "revId": "d8da31b5e7429ffa7ea270e971fcc90008470a34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dca0acb_c0ed3f61",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-14T09:56:30Z",
+      "side": 1,
+      "message": "Can u mention in comment why the looping is done??\nhow many loops are done?",
+      "range": {
+        "startLine": 268,
+        "startChar": 4,
+        "endLine": 268,
+        "endChar": 44
+      },
+      "revId": "d8da31b5e7429ffa7ea270e971fcc90008470a34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8632539e_cff2cf6e",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-14T09:56:30Z",
+      "side": 1,
+      "message": "can u mention in it as separate variable?",
+      "range": {
+        "startLine": 271,
+        "startChar": 26,
+        "endLine": 271,
+        "endChar": 111
+      },
+      "revId": "d8da31b5e7429ffa7ea270e971fcc90008470a34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d37f2dc7_4a92df7a",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-14T09:56:30Z",
+      "side": 1,
+      "message": "end the msg with period",
+      "range": {
+        "startLine": 282,
+        "startChar": 9,
+        "endLine": 282,
+        "endChar": 17
+      },
+      "revId": "d8da31b5e7429ffa7ea270e971fcc90008470a34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
