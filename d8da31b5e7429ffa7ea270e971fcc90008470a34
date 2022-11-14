@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42542cf0_82854cc8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-11-14T14:16:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50994f9e_6f219ce8",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 40
+      },
+      "revId": "d8da31b5e7429ffa7ea270e971fcc90008470a34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d733e104_be2a0032",
@@ -41,6 +65,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01473b59_784dcb1a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-11-14T14:16:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d733e104_be2a0032",
+      "revId": "d8da31b5e7429ffa7ea270e971fcc90008470a34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "934e51c6_3df1d40a",
@@ -54,6 +96,30 @@
       "writtenOn": "2022-11-14T09:56:30Z",
       "side": 1,
       "message": "Verify Flood Put Method Without Auth Token\n\nu can mention about checking bmc stability in the [Documentation].\n\nchange in the [Tags] too",
+      "range": {
+        "startLine": 261,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 55
+      },
+      "revId": "d8da31b5e7429ffa7ea270e971fcc90008470a34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a1353b9_beaaac52",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-11-14T14:16:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "934e51c6_3df1d40a",
       "range": {
         "startLine": 261,
         "startChar": 0,
@@ -89,6 +155,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4138078f_b5bdf074",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-11-14T14:16:57Z",
+      "side": 1,
+      "message": "To clear the session. I mean as the test case says we need to try PUT without generating token. So to close all existing session, here am using this keyword.",
+      "parentUuid": "88f698f6_a43a7c94",
+      "range": {
+        "startLine": 265,
+        "startChar": 0,
+        "endLine": 265,
+        "endChar": 18
+      },
+      "revId": "d8da31b5e7429ffa7ea270e971fcc90008470a34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8dca0acb_c0ed3f61",
         "filename": "security/test_bmc_connections.robot",
         "patchSetId": 5
@@ -100,6 +190,30 @@
       "writtenOn": "2022-11-14T09:56:30Z",
       "side": 1,
       "message": "Can u mention in comment why the looping is done??\nhow many loops are done?",
+      "range": {
+        "startLine": 268,
+        "startChar": 4,
+        "endLine": 268,
+        "endChar": 44
+      },
+      "revId": "d8da31b5e7429ffa7ea270e971fcc90008470a34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ea7f898_59154443",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-11-14T14:16:57Z",
+      "side": 1,
+      "message": "As already we have added number of iterations to be executed in variable section.\ncomment has been done in 273 line",
+      "parentUuid": "8dca0acb_c0ed3f61",
       "range": {
         "startLine": 268,
         "startChar": 4,
@@ -135,6 +249,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a6415b55_04630aa1",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-11-14T14:16:57Z",
+      "side": 1,
+      "message": "As we are calling this PUT uri only once, i mean for single tc.Hope it is not necessary to call it in variable section.",
+      "parentUuid": "8632539e_cff2cf6e",
+      "range": {
+        "startLine": 271,
+        "startChar": 26,
+        "endLine": 271,
+        "endChar": 111
+      },
+      "revId": "d8da31b5e7429ffa7ea270e971fcc90008470a34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d37f2dc7_4a92df7a",
         "filename": "security/test_bmc_connections.robot",
         "patchSetId": 5
@@ -146,6 +284,30 @@
       "writtenOn": "2022-11-14T09:56:30Z",
       "side": 1,
       "message": "end the msg with period",
+      "range": {
+        "startLine": 282,
+        "startChar": 9,
+        "endLine": 282,
+        "endChar": 17
+      },
+      "revId": "d8da31b5e7429ffa7ea270e971fcc90008470a34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba0ea8ce_94ad352a",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-11-14T14:16:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d37f2dc7_4a92df7a",
       "range": {
         "startLine": 282,
         "startChar": 9,
