@@ -166,7 +166,7 @@ Verify Maximum BMC Dump Creation
     [Tags]  Verify_Maximum_BMC_Dump_Creation
     [Teardown]  Redfish Delete All BMC Dumps
 
-    # Wth a high value of itertations, BMC will run out of space.
+    # With a high value of itertations, BMC will run out of space.
     # Once reaching space exhaustion, it will come out of the loop.
     FOR  ${n}  IN RANGE  0  ${MAX_DUMP_COUNT}
       Create User Initiated BMC Dump Via Redfish
