@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c455a3b_6e3e66cb",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-14T09:38:27Z",
+      "side": 1,
+      "message": "I think better mention -- \u0027Containing\u0027 instead of \u0027Contains\u0027\n\nmake the change in the [Tags] too\n\nsimilar change required @191",
+      "range": {
+        "startLine": 182,
+        "startChar": 24,
+        "endLine": 182,
+        "endChar": 32
+      },
+      "revId": "0beafe7405aa2880780167d2554c1f3ec9d9f819",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e936f17_5224ad3b",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-14T09:38:27Z",
+      "side": 1,
+      "message": "information -- Information\n\nsimilarly make change in @209",
+      "range": {
+        "startLine": 200,
+        "startChar": 43,
+        "endLine": 200,
+        "endChar": 54
+      },
+      "revId": "0beafe7405aa2880780167d2554c1f3ec9d9f819",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fca0f7a_7388af44",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-14T09:38:27Z",
+      "side": 1,
+      "message": "And",
+      "range": {
+        "startLine": 227,
+        "startChar": 45,
+        "endLine": 227,
+        "endChar": 48
+      },
+      "revId": "0beafe7405aa2880780167d2554c1f3ec9d9f819",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
