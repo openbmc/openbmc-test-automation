@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ca590fa_7473ff60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-15T07:24:33Z",
+      "side": 1,
+      "message": "This change is not required. We can provide BMC_DUMP_TOTAL_SIZE and MAX_DUMP_COUNT while running our automation.",
+      "revId": "8a32cb1f1896b25bf9c7a46d869ebf7468010900",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f70a0a29_13d732ac",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-15T07:24:33Z",
+      "side": 1,
+      "message": "Older comment is good enough.",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 67
+      },
+      "revId": "8a32cb1f1896b25bf9c7a46d869ebf7468010900",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
