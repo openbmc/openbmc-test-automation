@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a05b32e9_87906008",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-15T11:20:13Z",
+      "side": 1,
+      "message": "also add test case name for firmware page",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 49
+      },
+      "revId": "44dca4af32a6a4dad62594783307b8941986f065",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d2d6f6e_7d246a54",
+        "filename": "gui/data/gui_variables.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-15T11:20:13Z",
+      "side": 1,
+      "message": "We have the same xpath it inventory suite - gui/gui_test/hardware_status_menu/test_inventory_and_leds_sub_menu.robot\n\nPlease remove it from there and just have below one here. \n\n${xpath_inventory_and_leds_heading}         //h1[text()\u003d\"Inventory and LEDs\"]",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 73
+      },
+      "revId": "44dca4af32a6a4dad62594783307b8941986f065",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1bf971d_b1564557",
+        "filename": "gui/data/gui_variables.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-15T11:20:13Z",
+      "side": 1,
+      "message": "Same comment as above",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 53
+      },
+      "revId": "44dca4af32a6a4dad62594783307b8941986f065",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de8c821e_9522b25b",
+        "filename": "gui/data/gui_variables.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-15T11:20:13Z",
+      "side": 1,
+      "message": "Same comment as above",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 46
+      },
+      "revId": "44dca4af32a6a4dad62594783307b8941986f065",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9daffe8_d5c9f16a",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-15T11:20:13Z",
+      "side": 1,
+      "message": "Change the xpath name like below to specify view more button\n\nxpath_server_information_view_more_button\nxpath_firmware_information_view_more_button\nxpath_power_information_view_more_button\nxpath_event_logs_view_more_button\nxpath_inventory_and_leds_view_more_button",
+      "range": {
+        "startLine": 20,
+        "startChar": 2,
+        "endLine": 20,
+        "endChar": 26
+      },
+      "revId": "44dca4af32a6a4dad62594783307b8941986f065",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "380288de_cb17f4b2",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-15T11:20:13Z",
+      "side": 1,
+      "message": "under server information section\n\nmake this change for all below new test case.",
+      "range": {
+        "startLine": 183,
+        "startChar": 45,
+        "endLine": 183,
+        "endChar": 74
+      },
+      "revId": "44dca4af32a6a4dad62594783307b8941986f065",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
