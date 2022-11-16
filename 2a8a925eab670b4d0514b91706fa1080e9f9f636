@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68eefa78_2ac0090a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-16T14:18:49Z",
+      "side": 1,
+      "message": "Please use new commit message format",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 61
+      },
+      "revId": "2a8a925eab670b4d0514b91706fa1080e9f9f636",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8ed31145_41231714",
         "filename": "redfish/managers/test_bmc_dumps.robot",
         "patchSetId": 1
@@ -26,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c60ad599_d7d334fb",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-16T14:18:49Z",
+      "side": 1,
+      "message": "Yeah we need to make it better. Just also keep space between NonExisting string like below.\n\nVerify Error When Non Existing BMC dump Is Deleted",
+      "parentUuid": "8ed31145_41231714",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 50
+      },
+      "revId": "2a8a925eab670b4d0514b91706fa1080e9f9f636",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da6284f0_1e267763",
         "filename": "redfish/managers/test_bmc_dumps.robot",
         "patchSetId": 1
@@ -37,6 +84,30 @@
       "writtenOn": "2022-11-16T14:10:35Z",
       "side": 1,
       "message": "and why do we need to create a dump and delete . then try delete it agin\n\nwhy can\u0027t it be just be like the bellow. it does the same\n\n    Run Keyword And Expect Error  ValueError: *  Redfish Delete BMC Dump  ${10000}",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 84
+      },
+      "revId": "2a8a925eab670b4d0514b91706fa1080e9f9f636",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df69ce1f_5e477153",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-16T14:18:49Z",
+      "side": 1,
+      "message": "Just giving any dump value is not a good way. Above is a much better logic.",
+      "parentUuid": "da6284f0_1e267763",
       "range": {
         "startLine": 28,
         "startChar": 0,
