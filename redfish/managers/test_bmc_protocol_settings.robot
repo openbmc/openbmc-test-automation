@@ -231,6 +231,21 @@ Configure SSH And IPMI Settings And Verify
     ${False}     ${False}
 
 
+Enable SSH And Disable IPMI Protocol And Check Persistency On BMC Reboot
+    [Documentation]  Set the SSH to True and IPMI protocol attributes to False, and verify
+    ...              the setting after BMC reboot.
+    [Tags]  Enable_SSH_And_Disable_IPMI_Protocol_And_Check_Persistency_On_BMC_Reboot
+
+    Set SSH And IPMI Protocol  ${True}  ${False}
+
+    Sleep  ${NETWORK_TIMEOUT}s
+
+    Redfish OBMC Reboot (off)  stack_mode=skip
+
+    # Check persistency of protocol state after BMC reboot.
+    Verify Protocol State  ${True}  ${False}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -243,7 +258,7 @@ Suite Setup Execution
     Sleep  ${NETWORK_TIMEOUT}s
 
 Is BMC LastResetTime Changed
-    [Documentation]  return fail if BMC last reset time is not changed
+    [Documentation]  return fail if BMC last reset time is not changed.
     [Arguments]  ${reset_time}
 
     ${last_reset_time}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  LastResetTime
@@ -251,7 +266,7 @@ Is BMC LastResetTime Changed
 
 
 Redfish BMC Reboot
-    [Documentation]  Use Redfish API reboot BMC and wait for BMC ready
+    [Documentation]  Use Redfish API reboot BMC and wait for BMC ready.
 
     #  Get BMC last reset time for compare
     ${last_reset_time}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  LastResetTime
