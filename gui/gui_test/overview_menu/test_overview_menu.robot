@@ -86,7 +86,7 @@ Verify Edit Network Setting Button
     [Tags]  Verify_Edit_Network_Setting_Button
 
     Click Element  ${xpath_edit_network_settings_button}
-    Wait Until Page Contains Element  ${xpath_network_page_header}
+    Wait Until Page Contains Element  ${xpath_network_heading}
 
 
 Verify Event Under High Priority Events Section
