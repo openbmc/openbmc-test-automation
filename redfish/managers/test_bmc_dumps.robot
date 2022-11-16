@@ -22,6 +22,15 @@ ${MAX_DUMP_COUNT}            ${20}
 
 *** Test Cases ***
 
+Verify Error When Non Existing BMC Dump Is Deleted
+    [Documentation]  Verify that deleting non existing BMC dump throws error.
+    [Tags]  Verify_Error_When_Non_Existing_ BMC_Dump_Is_Deleted
+
+    ${dump_id}=  Create User Initiated BMC Dump Via Redfish
+    Redfish Delete BMC Dump  ${dump_id}
+    Run Keyword And Expect Error  ValueError: *  Redfish Delete BMC Dump  ${dump_id}
+
+
 Verify User Initiated BMC Dump When Host Powered Off
     [Documentation]  Create user initiated BMC dump at host off state and
     ...  verify dump entry for it.
