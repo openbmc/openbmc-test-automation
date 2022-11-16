@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c26cc11_47f6e7f8",
+        "filename": "gui/data/gui_variables.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-16T14:08:40Z",
+      "side": 1,
+      "message": "We need to change with his xpath in all the places were we have used older xpath. Same comment applied to other xpath changes with this commit.",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 28
+      },
+      "revId": "b4c1b0ea9ac8603df51b9471b019fe21c10225a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
