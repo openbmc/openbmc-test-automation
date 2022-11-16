@@ -22,6 +22,30 @@
       },
       "revId": "b4c1b0ea9ac8603df51b9471b019fe21c10225a9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dd7fd62_33e9fa68",
+        "filename": "gui/data/gui_variables.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-11-16T14:56:55Z",
+      "side": 1,
+      "message": "yes Rahul. will follow one method like either Heading or header. \ni will take care of there places. \ngui/gui_test/logs_menu/test_event_logs_sub_menu.robot used ${xpath_event_logs_heading}       //h1[text()\u003d\"Event logs\"]\nso used same.",
+      "parentUuid": "9c26cc11_47f6e7f8",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 28
+      },
+      "revId": "b4c1b0ea9ac8603df51b9471b019fe21c10225a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
