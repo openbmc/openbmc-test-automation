@@ -29,7 +29,7 @@ Verify Server Health Button
 
     Wait Until Element Is Visible   ${xpath_server_health_header}
     Click Element  ${xpath_server_health_header}
-    Wait Until Page Contains Element  ${xpath_event_header}  timeout=15s
+    Wait Until Page Contains Element  ${xpath_event_logs_heading}  timeout=15s
 
 
 Verify Server Power Button
