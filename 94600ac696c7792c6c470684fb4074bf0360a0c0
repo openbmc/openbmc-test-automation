@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc650bc2_6d5cc5cd",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-11-16T07:36:48Z",
+      "side": 1,
+      "message": "Remove one full stop.",
+      "range": {
+        "startLine": 245,
+        "startChar": 59,
+        "endLine": 245,
+        "endChar": 60
+      },
+      "revId": "94600ac696c7792c6c470684fb4074bf0360a0c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa8a294e_e445d53d",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-11-16T07:36:48Z",
+      "side": 1,
+      "message": "Add full stop at the end of documentation.",
+      "range": {
+        "startLine": 261,
+        "startChar": 63,
+        "endLine": 261,
+        "endChar": 70
+      },
+      "revId": "94600ac696c7792c6c470684fb4074bf0360a0c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8342545_83402bea",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-11-16T07:36:48Z",
+      "side": 1,
+      "message": "Add full stop at the end of documentation.",
+      "range": {
+        "startLine": 269,
+        "startChar": 65,
+        "endLine": 269,
+        "endChar": 70
+      },
+      "revId": "94600ac696c7792c6c470684fb4074bf0360a0c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
