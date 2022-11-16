@@ -106,6 +106,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04e0746c_562edddc",
+        "filename": "gui/data/gui_variables.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-11-16T10:23:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d2d6f6e_7d246a54",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 73
+      },
+      "revId": "44dca4af32a6a4dad62594783307b8941986f065",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1bf971d_b1564557",
@@ -129,6 +153,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a4ebaa3_adefc704",
+        "filename": "gui/data/gui_variables.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-11-16T10:23:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1bf971d_b1564557",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 53
+      },
+      "revId": "44dca4af32a6a4dad62594783307b8941986f065",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de8c821e_9522b25b",
@@ -142,6 +190,30 @@
       "writtenOn": "2022-11-15T11:20:13Z",
       "side": 1,
       "message": "Same comment as above",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 46
+      },
+      "revId": "44dca4af32a6a4dad62594783307b8941986f065",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5cafee2_45e45d2f",
+        "filename": "gui/data/gui_variables.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-11-16T10:23:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de8c821e_9522b25b",
       "range": {
         "startLine": 69,
         "startChar": 0,
