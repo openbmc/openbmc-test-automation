@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55924360_865fcf70",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-11-16T14:43:03Z",
+      "side": 1,
+      "message": "I think we can tune keyword in line 281 \u0026 make this simpler.\nrefer my comment.",
+      "range": {
+        "startLine": 241,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 44
+      },
+      "revId": "241c02c87e9c1f2bd1e66e2663d3af6afad24144",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22062f97_b54da2a0",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-11-16T14:43:03Z",
+      "side": 1,
+      "message": "Set SSH And IPMI Protocol\n    [Documentation]  Set SSH and IPMI protocol state.\n    [Arguments]  ${ssh_state}  ${ipmi_state}  ${persistency_check}\u003d${False}\n\n    # Description of argument(s):\n    # ssh_state     State of SSH to be set (e.g. True, False).\n    # ipmi_state    State of IPMI to be set (e.g. True, False).\n\n    ${ssh_protocol_state}\u003d  Create Dictionary  ProtocolEnabled\u003d${ssh_state}\n    ${ipmi_protocol_state}\u003d  Create Dictionary  ProtocolEnabled\u003d${ipmi_state}\n    ${data}\u003d  Create Dictionary  SSH\u003d${ssh_protocol_state}  IPMI\u003d${ipmi_protocol_state}\n\n    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body\u003d\u0026{data}\n    ...  valid_status_codes\u003d[${HTTP_NO_CONTENT}]\n\n    # Wait for timeout for new values to take effect.\n    Sleep  ${NETWORK_TIMEOUT}s\n\n    Run Keyword if  ${persistency_check} \u003d\u003d ${True}  OBMC Redfish Reboot\n    Verify Protocol State  ${ssh_state}  ${ipmi_state}",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 0
+      },
+      "revId": "241c02c87e9c1f2bd1e66e2663d3af6afad24144",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
