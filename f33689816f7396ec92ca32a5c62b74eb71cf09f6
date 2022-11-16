@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "180dde5a_6f5beb37",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-11-16T11:41:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "869ab639_0ae9ce97",
+      "range": {
+        "startLine": 38,
+        "startChar": 21,
+        "endLine": 38,
+        "endChar": 35
+      },
+      "revId": "f33689816f7396ec92ca32a5c62b74eb71cf09f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d03c89d_c06f840f",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-28T11:59:52Z",
       "side": 1,
       "message": "Align it to the above line only",
+      "range": {
+        "startLine": 222,
+        "startChar": 8,
+        "endLine": 222,
+        "endChar": 50
+      },
+      "revId": "f33689816f7396ec92ca32a5c62b74eb71cf09f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c78e8c6e_57838261",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-11-16T11:41:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d03c89d_c06f840f",
       "range": {
         "startLine": 222,
         "startChar": 8,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34cca18c_bbff641b",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-11-16T11:41:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfda16ea_a89e48de",
+      "range": {
+        "startLine": 228,
+        "startChar": 5,
+        "endLine": 228,
+        "endChar": 66
+      },
+      "revId": "f33689816f7396ec92ca32a5c62b74eb71cf09f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ddc395c_1eafed59",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-10-29T16:21:29Z",
       "side": 1,
       "message": "earlier value is returned.. now it is returning dictionary.. can u please mention in the doc",
+      "range": {
+        "startLine": 252,
+        "startChar": 21,
+        "endLine": 252,
+        "endChar": 59
+      },
+      "revId": "f33689816f7396ec92ca32a5c62b74eb71cf09f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71cfbe4e_fa337bd4",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-11-16T11:41:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ddc395c_1eafed59",
       "range": {
         "startLine": 252,
         "startChar": 21,
@@ -110,6 +206,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33222d2c_04c43156",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-11-16T11:41:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf9298c6_9ca75e51",
+      "revId": "f33689816f7396ec92ca32a5c62b74eb71cf09f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f619107_5fcdc97a",
@@ -123,6 +237,30 @@
       "writtenOn": "2022-10-28T11:59:52Z",
       "side": 1,
       "message": "This is a common step to get both sensor_key and value. Can you split at once and pick the necessary index for each?",
+      "range": {
+        "startLine": 269,
+        "startChar": 24,
+        "endLine": 269,
+        "endChar": 69
+      },
+      "revId": "f33689816f7396ec92ca32a5c62b74eb71cf09f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6573500_06640118",
+        "filename": "ipmi/test_ipmi_sensor.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1001271
+      },
+      "writtenOn": "2022-11-16T11:41:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f619107_5fcdc97a",
       "range": {
         "startLine": 269,
         "startChar": 24,
