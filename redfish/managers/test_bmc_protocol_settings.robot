@@ -7,7 +7,7 @@ Resource   ../../lib/protocol_setting_utils.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Run Keywords  Enable IPMI Protocol  ${initial_ipmi_state}  AND  Redfish.Logout
-Test Teardown   FFDC On Test Case Fail
+#Test Teardown   FFDC On Test Case Fail
 
 
 *** Variables ***
@@ -229,6 +229,21 @@ Configure SSH And IPMI Settings And Verify
     ${True}      ${True}
     ${False}     ${True}
     ${False}     ${False}
+
+
+Enable SSH And Disable IPMI Protocol And Check Persistency On BMC Reboot
+    [Documentation]  Set the SSH to True and IPMI protocol attributes to False, and verify
+    ...              the setting after BMC reboot.
+    [Tags]  Enable_SSH_And_Disable_IPMI_Protocol_And_Check_Persistency_On_BMC_Reboot
+   
+    Set SSH And IPMI Protocol  ${True}  ${False}
+
+    Sleep  ${NETWORK_TIMEOUT}s
+    
+    Redfish OBMC Reboot (off)  stack_mode=skip
+
+    # Check persistency of protocol state after BMC reboot..
+    Verify Protocol State  ${True}  ${False}
 
 
 *** Keywords ***
