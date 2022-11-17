@@ -64,6 +64,19 @@ Verify User Initiated BMC Dump Size
     Should Be True  0 < ${resp["AdditionalDataSizeBytes"]} < 20971520
 
 
+Verify BMC Dump In Default Folder
+     35     [Documentation]  Verify that BMC dump are created in default folder.
+     36     [Tags]  Verify_BMC_Dump_In_Default_Folder
+     37 
+     38     ${dump_id}=  Create User Initiated BMC Dump Via Redfish
+     39     ${dafault_dump_folder}=  Set Variable  /var/lib/phosphor-debug-collector/dumps
+     40     ${dump_check_cmd}=  Set Variable  ls ${dafault_dump_folder}/${dump_id}
+     41     ${file_there}  ${stderr}  ${rc}=  BMC Execute Command  ${dump_check_cmd}
+     42 
+     43     Should Be True  ${rc} == 0
+     44     Should Start With  ${file_there}  BMCDUMP
+
+
 Verify User Initiated BMC Dump When Host Booted
     [Documentation]  Create user initiated BMC dump at host booted state and
     ...  verify dump entry for it.
