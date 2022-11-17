@@ -33,6 +33,24 @@
       "message": "Test case name is lil confusing, Verify is an operation \u0026 Delete is an operation. if you want keep the same name then remove \u0027Delete\u0027 from test case name or else go with my suggestion.\nVerify Error Response On Deleting Non Existing BMC Dump",
       "revId": "0f019e57024df2b9d4bcffc49240fea946a901e1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e89f7b19_fc9813e2",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-11-17T12:08:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7735cf0a_3bd7f9b3",
+      "revId": "0f019e57024df2b9d4bcffc49240fea946a901e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
