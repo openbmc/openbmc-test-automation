@@ -22,6 +22,19 @@ ${MAX_DUMP_COUNT}            ${20}
 
 *** Test Cases ***
 
+Verify BMC Dump In Default Folder
+    [Documentation]  Verify that BMC dump are created in default folder.
+    [Tags]  Verify_BMC_Dump_In_Default_Folder
+
+    ${dump_id}=  Create User Initiated BMC Dump Via Redfish
+    ${dafault_dump_folder}=  Set Variable  /var/lib/phosphor-debug-collector/dumps
+    ${dump_check_cmd}=  Set Variable  ls ${dafault_dump_folder}/${dump_id}
+    ${file_there}  ${stderr}  ${rc}=  BMC Execute Command  ${dump_check_cmd}
+
+    Should Be True  ${rc} == 0
+    Should Start With  ${file_there}  BMCDUMP
+
+
 Verify User Initiated BMC Dump When Host Powered Off
     [Documentation]  Create user initiated BMC dump at host off state and
     ...  verify dump entry for it.
