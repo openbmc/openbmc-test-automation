@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e94ec486_cae6462b",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-17T10:37:47Z",
+      "side": 1,
+      "message": "please put this in variable section\n\n${BMC_DUMP_COLLECTOR_PATH}       /var/lib/phosphor-debug-collector/dumps\n\nso that it can be commonly used in this test suite\n\nand please change it in this \u0027Get Disk Usage For Dumps\u0027 also",
+      "range": {
+        "startLine": 30,
+        "startChar": 43,
+        "endLine": 30,
+        "endChar": 82
+      },
+      "revId": "5d811105341026db198eaacd44941c0d99226809",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
