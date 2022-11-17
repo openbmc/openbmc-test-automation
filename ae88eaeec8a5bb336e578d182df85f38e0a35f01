@@ -22,6 +22,53 @@
       },
       "revId": "ae88eaeec8a5bb336e578d182df85f38e0a35f01",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f63d6a4_ecfcdb94",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-11-17T08:38:37Z",
+      "side": 1,
+      "message": "Verify Error Response On Deleting Non Existing BMC Dump",
+      "parentUuid": "8900871b_28679a37",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 50
+      },
+      "revId": "ae88eaeec8a5bb336e578d182df85f38e0a35f01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2da2e6fd_dc5f20ca",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-11-17T08:38:37Z",
+      "side": 1,
+      "message": "Delete non existing BMC dump and expect an error.",
+      "range": {
+        "startLine": 26,
+        "startChar": 21,
+        "endLine": 26,
+        "endChar": 76
+      },
+      "revId": "ae88eaeec8a5bb336e578d182df85f38e0a35f01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
