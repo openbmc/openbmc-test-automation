@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "60666fc9_69f997db",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-11-17T08:48:39Z",
+      "side": 1,
+      "message": "you mean u r able to add data into /etc/resolv.conf??",
+      "parentUuid": "d9f6ffc8_d503470e",
+      "revId": "511b6c96ed93288aaf4d316ca598a4e4421eaa6e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ed79d80_b6916077",
         "filename": "security/test_bmc_connections.robot",
         "patchSetId": 2
