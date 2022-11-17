@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8900871b_28679a37",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-11-17T08:26:42Z",
+      "side": 1,
+      "message": "Verify Error Response Of Delete Operation On A Recently Deleted Dump Id\n\nor \n\nVerify Delete Error Response For Already Deleted Dump Id",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 50
+      },
+      "revId": "ae88eaeec8a5bb336e578d182df85f38e0a35f01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
