@@ -19,6 +19,7 @@ ${BMC_DUMP_TOTAL_SIZE}       ${1024}
 # Minimum space required for one bmc dump in kilo bytes
 ${BMC_DUMP_MIN_SPACE_REQD}   ${20}
 ${MAX_DUMP_COUNT}            ${20}
+${BMC_DUMP_COLLECTOR_PATH}   /var/lib/phosphor-debug-collector/dumps
 
 *** Test Cases ***
 
@@ -73,6 +74,19 @@ Verify Multiple BMC Dump Creation
     FOR  ${INDEX}  IN  1  ${dump_count}
       Create User Initiated BMC Dump Via Redfish
     END
+
+
+Verify BMC Dump Default Location In BMC
+     [Documentation]  Verify that BMC dump is created in its default location of BMC.
+     [Tags]  Verify_BMC_Dump_In_Default_Folder
+
+     ${dump_id}=  Create User Initiated BMC Dump Via Redfish
+     ${dafault_dump_folder}=  Set Variable  ${BMC_DUMP_COLLECTOR_PATH}
+     ${dump_check_cmd}=  Set Variable  ls ${dafault_dump_folder}/${dump_id}
+     ${file_there}  ${stderr}  ${rc}=  BMC Execute Command  ${dump_check_cmd}
+
+     Should Be True  ${rc} == 0
+     Should Start With  ${file_there}  BMCDUMP
 
 
 Verify User Initiated BMC Dump When Host Booted
@@ -281,7 +295,7 @@ Is BMC Dump Available
 Get Disk Usage For Dumps
     [Documentation]  Return disk usage in kilobyte for BMC dumps.
 
-    ${usage_output}  ${stderr}  ${rc}=  BMC Execute Command  du -s /var/lib/phosphor-debug-collector/dumps
+    ${usage_output}  ${stderr}  ${rc}=  BMC Execute Command  du -s ${BMC_DUMP_COLLECTOR_PATH} 
 
     # Example of output from above BMC cli command.
     # $ du -s /var/lib/phosphor-debug-collector/dumps
