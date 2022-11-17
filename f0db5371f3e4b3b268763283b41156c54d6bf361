@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e2c5157_07d5a99e",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-11-17T08:58:51Z",
+      "side": 1,
+      "message": "yeah, this code can be removed.",
+      "parentUuid": "01be86fb_286f0182",
+      "range": {
+        "startLine": 307,
+        "startChar": 2,
+        "endLine": 309,
+        "endChar": 44
+      },
+      "revId": "f0db5371f3e4b3b268763283b41156c54d6bf361",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "45e63106_c504dd8b",
         "filename": "redfish/account_service/test_user_account.robot",
         "patchSetId": 1
@@ -42,6 +66,29 @@
         "startChar": 4,
         "endLine": 324,
         "endChar": 18
+      },
+      "revId": "f0db5371f3e4b3b268763283b41156c54d6bf361",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05996b35_5ea06534",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-11-17T08:58:51Z",
+      "side": 1,
+      "message": "fails??",
+      "range": {
+        "startLine": 543,
+        "startChar": 24,
+        "endLine": 543,
+        "endChar": 34
       },
       "revId": "f0db5371f3e4b3b268763283b41156c54d6bf361",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
