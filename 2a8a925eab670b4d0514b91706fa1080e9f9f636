@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9d22f78_4babbf08",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-11-17T06:26:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68eefa78_2ac0090a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 61
+      },
+      "revId": "2a8a925eab670b4d0514b91706fa1080e9f9f636",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ed31145_41231714",
@@ -71,6 +95,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ff6813a_6d7ca208",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-11-17T06:26:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c60ad599_d7d334fb",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 50
+      },
+      "revId": "2a8a925eab670b4d0514b91706fa1080e9f9f636",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da6284f0_1e267763",
@@ -108,6 +156,30 @@
       "side": 1,
       "message": "Just giving any dump value is not a good way. Above is a much better logic.",
       "parentUuid": "da6284f0_1e267763",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 84
+      },
+      "revId": "2a8a925eab670b4d0514b91706fa1080e9f9f636",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42e5be8e_b5e8ce3c",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-11-17T06:26:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df69ce1f_5e477153",
       "range": {
         "startLine": 28,
         "startChar": 0,
