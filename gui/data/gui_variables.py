@@ -29,14 +29,14 @@ class gui_variables():
     xpath_dumps_sub_menu = "//*[@data-test-id='nav-item-dumps']"
     xpath_dumps_header = "//h1[text()='Dumps']"
     xpath_event_logs_sub_menu = "//*[@data-test-id='nav-item-event-logs']"
-    xpath_event_logs_heading = "//h1[contains(text()='Event logs')]"
+    xpath_event_logs_heading = "//h1[contains(text(), 'Event logs')]"
     xpath_progress_logs_sub_menu = "//*[@data-test-id='nav-item-post-code-logs']"
 
     # Hardware status menu
     xpath_hardware_status_menu = "//*[@data-test-id='nav-button-hardware-status']"
     xpath_inventory_and_leds_sub_menu = "//*[@data-test-id='nav-item-inventory']"
     xpath_sensor_sub_menu = "//*[@data-test-id='nav-item-sensors']"
-    xpath_inventory_and_leds_heading = "//h1[contains(text()='Inventory and LEDs')]"
+    xpath_inventory_and_leds_heading = "//h1[contains(text(), 'Inventory and LEDs')]"
 
     # Operations menu
     xpath_operations_menu = "//*[@data-test-id='nav-button-operations']"
@@ -46,11 +46,11 @@ class gui_variables():
     xpath_host_console_sub_menu = "//*[@data-test-id='nav-item-host-console']"
     xpath_server_power_operations_sub_menu = "//*[@data-test-id='nav-item-server-power-operations']"
     xpath_host_console_heading = "//h1[text()='Host console']"
-    xpath_firmware_heading = "//h1[contains(text()='Firmware')]"
+    xpath_firmware_heading = "//h1[contains(text(), 'Firmware')]"
 
     # Settings menu
     xpath_settings_menu = "//*[@data-test-id='nav-button-settings']"
-    xpath_network_heading = "//h1[contains(text(), 'Network')]"
+    xpath_network_heading = "//h1[text()='Network']"
     xpath_date_time_sub_menu = "//*[@data-test-id='nav-item-date-time']"
     xpath_network_sub_menu = "//*[@data-test-id='nav-item-network']"
     xpath_power_restore_policy_sub_menu = "//*[@data-test-id='nav-item-power-restore-policy']"
@@ -66,7 +66,7 @@ class gui_variables():
     # Resource management menu
     xpath_resource_management_menu = "//*[@data-test-id='nav-button-resource-management']"
     xpath_power_sub_menu = "//*[@data-test-id='nav-item-power']"
-    xpath_power_heading = "//h1[contains(text()='Power')]"
+    xpath_power_heading = "//h1[contains(text(), 'Power')]"
 
     # Profile settings
     xpath_default_UTC = "//*[@data-test-id='profileSettings-radio-defaultUTC']"
