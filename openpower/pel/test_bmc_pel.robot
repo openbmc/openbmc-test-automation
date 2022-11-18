@@ -14,11 +14,12 @@ Test Teardown   Run Keywords  Redfish.Logout  AND  FFDC On Test Case Fail
 
 *** Variables ***
 
-@{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
-@{mandatory_Predictive_pel_fileds}   Private Header  User Header  Primary SRC
-...  Extended User Header  Failing MTMS  User Data
+@{mandatory_pel_fields}                Private Header  User Header  Primary SRC
+...                                    Extended User Header  Failing MTMS
+@{mandatory_Predictive_pel_fields}     Private Header  User Header  Primary SRC
+...                                    Extended User Header  Failing MTMS  User Data
 @{Mandatory_Informational_Pel_Fields}  Private Header  User Header  Primary SRC
-...  Extended User Header  User Data
+...                                    Extended User Header  User Data
 
 *** Test Cases ***
 
@@ -92,7 +93,7 @@ Verify Mandatory Sections Of Error Log PEL
     ${pel_output}=  Peltool  -i ${pel_id}
     ${pel_sections}=  Get Dictionary Keys  ${pel_output}
 
-    List Should Contain Sub List  ${pel_sections}  ${mandatory_pel_fileds}
+    List Should Contain Sub List  ${pel_sections}  ${mandatory_pel_fields}
 
 
 Verify PEL Log Persistence After BMC Reboot
@@ -679,7 +680,7 @@ Verify Mandatory Fields For Predictive Error
     # Get all fields in predictive error log.
     ${pel_sections}=  Get Dictionary Keys  ${pel_output}
 
-    List Should Contain Sub List  ${pel_sections}  ${mandatory_Predictive_pel_fileds}
+    List Should Contain Sub List  ${pel_sections}  ${mandatory_Predictive_pel_fields}
 
 
 Verify Mandatory Fields For Informational Error
@@ -700,6 +701,28 @@ Verify Mandatory Fields For Informational Error
         ${contains}=  Evaluate  "${section}" in "${pel_sections}"
         Should Be True  ${contains}
     END
+
+
+Verify PEL Log Not Offloaded To Host
+    [Documentation]  Verify host transmission state of not offloaded PEL logs.
+    [Tags]  Verify_PEL_Log_Not_Offloaded_To_Host
+    [Template]  Verify PEL Transmission To Host
+
+    # error_type            host_state      expected_transmission_state
+      informational_error   Off             Not Sent
+      unrecoverable_error   Off             Not Sent
+      predictive_error      Off             Not Sent
+
+
+Verify PEL Log Offloaded To Host
+    [Documentation]  Verify host transmission state of offloaded PEL logs.
+    [Tags]  Verify_PEL_Log_Offloaded_To_Host
+    [Template]  Verify PEL Transmission To Host
+
+    # error_type            host_state      expected_transmission_state
+      unrecoverable_error   On              Acked
+      predictive_error      On              Acked
+      informational_error   On              Acked
 
 
 *** Keywords ***
@@ -892,3 +915,55 @@ Get PEL Field Value
     ${pel_field_output}=  Get From Dictionary  ${pel_section_output}  ${pel_field}
 
     [Return]  ${pel_field_output}
+
+
+Verify PEL Transmission To Host
+    [Documentation]  Inject PEL log of given type and verify its host transmission state.
+    [Arguments]  ${error_type}  ${host_state}  ${expected_transmission_state}
+
+    # Description of argument(s):
+    # error_type                         Type of error log to be injected.
+    # host_state                         Host state which is required before error log injection.
+    # expected_transmission_state        Expected host transmission state of PEL log.
+
+    # Get system in required state.
+    Run Keyword If  '${host_state}' == 'Off'
+    ...  Redfish Power Off  stack_mode=skip
+    ...  ELSE IF  '${host_state}' == 'On'
+    ...  Redfish Power On  stack_mode=skip
+
+    # Inject required error log.
+    Run Keyword If  "${error_type}" == "informational_error"
+    ...  BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
+    ...  ELSE IF  "${error_type}" == "unrecoverable_error"
+    ...  BMC Execute Command  ${CMD_UNRECOVERABLE_ERROR}
+    ...  ELSE IF  "${error_type}" == "predictive_error"
+    ...  BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
+
+    # Check host transmission state for the cases where PEL is
+    # expected to be  offloaded to HOST.
+    Run Keyword If  "${expected_transmission_state}" == "Acked"
+    ...  Wait Until Keyword Succeeds  2 min  10 sec
+    ...  Check If PEL Transmission State Is Expected  Acked
+
+    # Adding delay before checking host transmission for the cases where PEL is
+    # not expected to be offloaded to HOST.
+    Run Keyword If  "${expected_transmission_state}" == "Not sent"
+    ...  Run Keywords  Sleep  120s AND
+    ...  Check If PEL Transmission State Is Expected  Not sent
+
+
+Check If PEL Transmission State Is Expected
+    [Documentation]  Check if PEL's host transmission state is matching expected state.
+    [Arguments]  ${expected_transmission_state}
+
+    # Description of argument(s):
+    # expected_transmission_state 	 Expected transmission state of PEL log.
+
+    ${pel_records}=  Get Pel Data From Bmc  True  True
+    ${ids}=  Get Dictionary Keys  ${pel_records}
+    ${pel_id}=  Get From List  ${ids}  -1
+
+    # Check the transmission details in the error log.
+    ${host_transmission}=  Get PEL Field Value  ${pel_id}  User Header  Host Transmission
+    Should Be Equal  ${host_transmission}  ${expected_transmission_state}
