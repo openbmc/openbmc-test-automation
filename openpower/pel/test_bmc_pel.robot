@@ -15,9 +15,9 @@ Test Teardown   Run Keywords  Redfish.Logout  AND  FFDC On Test Case Fail
 *** Variables ***
 
 @{mandatory_pel_fileds}   Private Header  User Header  Primary SRC  Extended User Header  Failing MTMS
-@{mandatory_Predictive_pel_fileds}   Private Header  User Header  Primary SRC
+@{mandatory_predictive_pel_fileds}   Private Header  User Header  Primary SRC
 ...  Extended User Header  Failing MTMS  User Data
-@{Mandatory_Informational_Pel_Fields}  Private Header  User Header  Primary SRC
+@{mandatory_informational_pel_fields}  Private Header  User Header  Primary SRC
 ...  Extended User Header  User Data
 
 *** Test Cases ***
@@ -679,7 +679,7 @@ Verify Mandatory Fields For Predictive Error
     # Get all fields in predictive error log.
     ${pel_sections}=  Get Dictionary Keys  ${pel_output}
 
-    List Should Contain Sub List  ${pel_sections}  ${mandatory_Predictive_pel_fileds}
+    List Should Contain Sub List  ${pel_sections}  ${mandatory_predictive_pel_fileds}
 
 
 Verify Mandatory Fields For Informational Error
@@ -696,10 +696,53 @@ Verify Mandatory Fields For Informational Error
 
     # Get all fields in the informational error log.
     ${pel_sections}=  Get Dictionary Keys  ${pel_output}
-    FOR  ${section}  IN  @{Mandatory_Informational_Pel_Fields}
+    FOR  ${section}  IN  @{mandatory_informational_pel_fields}
         ${contains}=  Evaluate  "${section}" in "${pel_sections}"
         Should Be True  ${contains}
     END
+
+
+Verify Informational Error Transmission To Host
+    [Documentation]  Verify informational error logs are correctly transmitted to the host.
+    [Tags]  Verify_Informational_Error_Transmission_To_Host
+    # Inject informational error.
+    BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
+    ${pel_records}=  Peltool  -lfh
+
+    ${ids}=  Get Dictionary Keys  ${pel_records}
+    ${pel_id}=  Get From List  ${ids}  -1
+
+    # Get transmission details in the informational error log.
+    ${host_transmission}=  Get PEL Field Value  ${pel_id}  User Header  Host Transmission
+    Should Be Equal  "${host_transmission}"  "Sent"
+
+
+Verify Unrecoverable Error Transmission To Host
+    [Documentation]  Verify unrecoverable error logs are correctly transmitted to the host.
+    [Tags]  Verify_Unrecoverable_Error_Transmission_To_Host
+    # Inject unrecoverable error.
+    BMC Execute Command  ${CMD_UNRECOVERABLE_ERROR}
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${pel_id}=  Get From List  ${pel_ids}  -1
+
+    # Get transmission details in the unrecoverablel error log.
+    ${host_transmission}=  Get PEL Field Value  ${pel_id}  User Header  Host Transmission
+    Should Be Equal  "${host_transmission}"  "Sent"
+
+
+Verify Predictive Error Transmission To Host
+    [Documentation]  Verify predictive error logs are correctly transmitted to the host.
+    [Tags]  Verify_Predictive_Error_Transmission_To_Host
+    # Inject predictive error.
+    BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${pel_id}=  Get From List  ${pel_ids}  -1
+
+    # Get transmission details in the predictive error log.
+    ${host_transmission}=  Get PEL Field Value  ${pel_id}  User Header  Host Transmission
+    Should Be Equal  "${host_transmission}"  "Sent"
 
 
 *** Keywords ***
