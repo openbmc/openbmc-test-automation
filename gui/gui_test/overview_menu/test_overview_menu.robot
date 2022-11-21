@@ -19,7 +19,7 @@ Test Setup      Test Setup Execution
 ${xpath_overview_page_header}                    //h1[contains(text(), "Overview")]
 ${xpath_server_information_view_more_button}     (//*[text()="View more"])[1]
 ${xpath_firmware_information_view_more_button}   (//*[text()="View more"])[2]
-${xpath_edit_network_settings_button}            (//*[text()="View more"])[3]
+${xpath_network_information_view_more_button}    (//*[text()="View more"])[3]
 ${xpath_power_information_view_more_button}      (//*[text()="View more"])[4]
 ${xpath_event_logs_view_more_button}             (//*[text()="View more"])[5]
 ${xpath_inventory_and_leds_view_more_button}     (//*[text()="View more"])[6]
@@ -85,7 +85,7 @@ Verify Edit Network Setting Button
     [Documentation]  Verify navigation to network setting page after clicking the button in overview page.
     [Tags]  Verify_Edit_Network_Setting_Button
 
-    Click Element  ${xpath_edit_network_settings_button}
+    Click Element  ${xpath_network_information_view_more_button}
     Wait Until Page Contains Element  ${xpath_network_heading}
 
 
@@ -100,13 +100,13 @@ Verify Event Under High Priority Events Section
     Wait Until Page Contains  xyz.openbmc_project.Common.Error.InternalFailure  timeout=30s
 
 
-Verify View All Event Logs Button
-    [Documentation]  Verify view all event log button in overview page.
-    [Tags]  Verify_View_All_Event_Logs_Button
+Verify View More Event Logs Button
+    [Documentation]  Verify view more event log button in overview page.
+    [Tags]  Verify_View_More_Event_Logs_Button
 
     Generate Test Error Log
-    Page Should Contain Element  ${view_all_event_logs}  timeout=30
-    Click Element  ${view_all_event_logs}
+    Page Should Contain Element  ${xpath_event_logs_view_more_button}  timeout=30
+    Click Element  ${xpath_event_logs_view_more_button}
     Wait Until Page Contains Element  ${xpath_event_logs_heading}  timeout=30
 
 
@@ -181,8 +181,8 @@ Verify View More Button Under Server Information Section
     [Documentation]  Verify view more button under server information section in overview page.
     [Tags]  Verify_View_More_Button_Under_Server_Information_Section
 
-    Wait Until Page Contains Element  ${xpath_server_information}  timeout=30
-    Click Element   ${xpath_server_information}
+    Wait Until Page Contains Element  ${xpath_server_information_view_more_button}  timeout=30
+    Click Element   ${xpath_server_information_view_more_button}
     Wait Until Page Contains Element  ${xpath_inventory_and_leds_heading}  timeout=30
 
 
@@ -199,8 +199,8 @@ Verify View More Button Under Network Information Section
     [Documentation]  Verify view more button under network information section in overview page.
     [Tags]  Verify_View_More_Button_Under_Network_information_Section
 
-    Wait Until Page Contains Element  ${xpath_edit_network_settings_button}  timeout=30
-    Click Element  ${xpath_edit_network_settings_button}
+    Wait Until Page Contains Element  ${xpath_network_information_view_more_button}  timeout=30
+    Click Element  ${xpath_network_information_view_more_button}
     Wait Until Page Contains Element  ${xpath_network_heading}  timeout=30
 
 
