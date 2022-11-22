@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "970ca94e_83bb75f2",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-11-22T07:53:24Z",
+      "side": 1,
+      "message": "we have a test case where we need to check 2 functions at a time. so I have written this.",
+      "parentUuid": "f35dec74_84cca446",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 179,
+        "endChar": 35
+      },
+      "revId": "30e3f36ac9861ac1fbaac20f511f73caf06fca51",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7925ca4a_ed0671f7",
         "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-22T07:28:22Z",
       "side": 1,
       "message": "Same comment as above",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 37
+      },
+      "revId": "30e3f36ac9861ac1fbaac20f511f73caf06fca51",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27293384_002a3701",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-11-22T07:53:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7925ca4a_ed0671f7",
       "range": {
         "startLine": 182,
         "startChar": 0,
@@ -60,6 +108,30 @@
       "writtenOn": "2022-11-22T07:28:22Z",
       "side": 1,
       "message": "Verify only one policy at a time using this keyword.",
+      "range": {
+        "startLine": 237,
+        "startChar": 0,
+        "endLine": 242,
+        "endChar": 75
+      },
+      "revId": "30e3f36ac9861ac1fbaac20f511f73caf06fca51",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffb9ea21_e3f4d258",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-11-22T07:53:24Z",
+      "side": 1,
+      "message": "as we are changing ssh \u0026 ipmi settings at a time I thought of checking its state together",
+      "parentUuid": "ae99a72b_776fa0e2",
       "range": {
         "startLine": 237,
         "startChar": 0,
