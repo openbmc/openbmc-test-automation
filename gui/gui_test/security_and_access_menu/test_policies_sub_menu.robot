@@ -169,12 +169,25 @@ Disable IPMI Via GUI And Verify Persistency On BMC Reboot
     ...  msg=IPMI command is working after disabling IPMI.
 
 
+Configure SSH And IPMI Settings Via GUI And Verify
+    [Documentation]  Login to GUI Policies page,set SSH and IPMI toggle and
+    ...  verify SSH & IPMI after the settings.
+    [Tags]  Configure_SSH_And_IPMI_Settings_Via_GUI_And_Verify
+    [Template]  Set SSH And IPMI State Via GUI
+    [Teardown]  Run Keywords  Enable SSH Protocol  ${True}  AND
+    ...  Enable IPMI Protocol  ${False}
+
+    # ssh_state     ipmi_state
+    Enabled         Enabled
+    Disabled        Disabled
+
+
 *** Keywords ***
 
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
-    Click Element  ${xpath_secuity_and_accesss_menu}
+    Wait Until Keyword Succeeds  30 sec  15 sec  Click Element  ${xpath_secuity_and_accesss_menu}
     Click Element  ${xpath_policies_sub_menu}
     Wait Until Keyword Succeeds  30 sec  15 sec  Location Should Contain  policies
 
@@ -210,3 +223,62 @@ Set Policy Via GUI
     # Wait for GUI to reflect policy status.
     Wait Until Keyword Succeeds  1 min  30 sec
     ...  Refresh GUI And Verify Element Value  ${policy_toggle_button}  ${state}
+
+
+Verify Policy State
+    [Documentation]  Login to GUI Policies page and set policy.
+    [Arguments]  ${ssh_policy_state}  ${ipmi_policy_state}
+    # Description of argument(s):
+    # ssh_policy_state     State of SSH to be verified (e.g. True, False).
+    # ipmi_policy_state    State of IPMI to be verified (e.g. True, False).
+
+    # Verify SSH state value.
+    ${status}=  Run Keyword And Return Status
+    ...  Open Connection And Login
+
+    ${new_status}=  Run Keyword If  '${status}' == 'True'
+    ...  Set Variable  Enabled
+    ...  ELSE IF  '${status}' == 'False'
+    ...  Set Variable  Disabled
+
+    Should Be Equal As Strings  ${new_status}  ${ssh_policy_state}
+    ...  msg=SSH states are not matching.
+
+    # Verify IPMI state value.
+    ${status}=  Run Keyword And Return Status
+    ...  Wait Until Keyword Succeeds  ${NETWORK_TIMEOUT}  ${NETWORK_RETRY_TIME}  Run IPMI Standard Command  sel info
+
+    ${new_status}=  Run Keyword If  '${status}' == 'True'
+    ...  Set Variable  Enabled
+    ...  ELSE IF  '${status}' == 'False'
+    ...  Set Variable  Disabled
+
+    Should Be Equal As Strings  ${new_status}  ${ipmi_policy_state}
+    ...  msg=IPMI policy states are not matching..
+
+
+Set SSH And IPMI State Via GUI
+    [Documentation]  Login to GUI Policies page and set SSH and IPMI.
+    [Arguments]  ${ssh_state}  ${ipmi_state}
+
+    # Description of argument(s):
+    # ssh_state     State of SSH to be set (e.g. Enabled, Disabled).
+    # ipmi_state    State of IPMI to be set (e.g. Enabled, Disbaled).
+
+    ${new_ssh_state}=  Get Text  ${xpath_bmc_ssh_toggle}
+
+    Run Keyword If  '${ssh_state}' == '${new_ssh_state}'
+    ...  Run Keywords  Click Element  ${xpath_bmc_ssh_toggle}
+    ...  AND  Click Element  ${xpath_bmc_ssh_toggle}
+    ...  ELSE IF  '${ssh_state}' != '${new_ssh_state}'
+    ...  Click Element  ${xpath_bmc_ssh_toggle}
+
+    ${new_ipmi_state}=  Get Text  ${xpath_network_ipmi_toggle}
+
+    Run Keyword If  '${ipmi_state}' == '${new_ipmi_state}'
+    ...  Run Keywords  Click Element  ${xpath_network_ipmi_toggle}
+    ...  AND  Click Element  ${xpath_network_ipmi_toggle}
+    ...  ELSE IF  '${ipmi_state}' != '${new_ipmi_state}'
+    ...  Click Element  ${xpath_network_ipmi_toggle}
+
+    Wait Until Keyword Succeeds  30 sec  15 sec  Verify Policy State  ${ssh_state}  ${ipmi_state}
