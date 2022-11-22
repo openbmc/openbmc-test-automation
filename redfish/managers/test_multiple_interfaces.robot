@@ -125,6 +125,16 @@ Able To Access Serial Console Via Both Network Interfaces
     Close All Connections
 
 
+Able To Access PHYP Console Via Both Network Interfaces
+    [Documentation]  Able to access PHYP console via both network interfaces.
+    [Tags]  Able_To_Access_PHYP_Console_Via_Both_Network_Interfaces
+
+    Redfish Power On  stack_mode=skip
+    Open Connection And Log In  host=${OPENBMC_HOST}  port=2201
+    Open Connection And Log In  host=${OPENBMC_HOST_1}  port=2201
+    Close All Connections
+
+
 Verify IPMI Works On Both Network Interfaces
     [Documentation]  Verify IPMI works on both network interfaces.
     [Tags]  Verify_IPMI_Works_On_Both_Network_Interfaces

@@ -501,7 +501,7 @@ Verify Modifying IP Address Multiple Times
 
     Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
     Update IP Address  ${test_ipv4_addr}  ${test_ipv4_addr2}  ${test_subnet_mask}  ${test_gateway}
-    Update IP Address  ${test_ipv4_addr}  ${test_ipv4_addr2}  ${test_subnet_mask}  ${test_gateway}
+    Update IP Address  ${test_ipv4_addr2}  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
 
 Configure Invalid Values For DNS Server
     [Documentation]  Configure invalid values for DNS server and expect an error.
@@ -689,7 +689,7 @@ Verify IP And Netmask On BMC
 Test Teardown Execution
     [Documentation]  Test teardown execution.
 
-    FFDC On Test Case Fail
+    #FFDC On Test Case Fail
     Redfish.Logout
 
 Clear IP Settings On Fail
