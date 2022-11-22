@@ -169,6 +169,28 @@ Disable IPMI Via GUI And Verify Persistency On BMC Reboot
     ...  msg=IPMI command is working after disabling IPMI.
 
 
+Enable SSH And IPMI Via GUI And Verify
+    [Documentation]  Login to GUI Policies page,enable SSH and IPMI toggle and
+    ...  verify SSH & IPMI after enabling the settings.
+    [Tags]  Enable_SSH_And_IPMI_Via_GUI_And_Verify
+
+    Set Policy Via GUI  SSH  Enabled
+    Set Policy Via GUI  IPMI  Enabled
+    Verify Policy State  True  True
+
+
+Disable SSH And IPMI Via GUI And Verify
+    [Documentation]  Login to GUI Policies page,disable SSH and IPMI and
+    ...  verify that SSH and IPMI after disabling settings.
+    [Tags]  Disable_SSH_And_IPMI_Via_GUI_And_Verify
+    [Teardown]  Run Keywords  Enable SSH Protocol  ${True}  AND
+    ...  Wait Until Keyword Succeeds  30 sec  15 sec  Open Connection And Login
+
+    Set Policy Via GUI  SSH  Disabled
+    Set Policy Via GUI  IPMI  Disabled
+    Verify Policy State  False  False
+
+
 *** Keywords ***
 
 Test Setup Execution
@@ -210,3 +232,25 @@ Set Policy Via GUI
     # Wait for GUI to reflect policy status.
     Wait Until Keyword Succeeds  1 min  30 sec
     ...  Refresh GUI And Verify Element Value  ${policy_toggle_button}  ${state}
+
+
+Verify Policy State
+    [Documentation]  Login to GUI Policies page and set policy.
+    [Arguments]  ${ssh_policy_state}  ${ipmi_policy_state}
+    # Description of argument(s):
+    # ssh_policy_state     State of SSH to be verified (e.g. True, False).
+    # ipmi_policy_state    State of IPMI to be verified (e.g. True, False).
+
+    # Verify SSH state value.
+    ${status}=  Run Keyword And Return Status
+    ...  Open Connection And Login
+    Should Be Equal As Strings  ${status}  ${ssh_policy_state}
+    ...  msg=SSH policy state are not matching.
+
+    # Verify IPMI state value.
+    ${status}=  Run Keyword And Return Status
+    ...  Wait Until Keyword Succeeds  ${NETWORK_TIMEOUT}
+    ...  ${NETWORK_RETRY_TIME}  Run IPMI Standard Command  sel info
+
+    Should Be Equal As Strings  ${status}  ${ipmi_policy_state}
+    ...  msg=IPMI policy state are not matching..
