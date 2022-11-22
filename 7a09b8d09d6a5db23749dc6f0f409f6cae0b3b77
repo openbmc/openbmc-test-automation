@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1334e2d_5f3ad49b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-11-22T05:34:23Z",
+      "side": 1,
+      "message": "Please mention briefly the GUI page / element you are adding this change",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 11
+      },
+      "revId": "7a09b8d09d6a5db23749dc6f0f409f6cae0b3b77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18746433_f35cba88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-11-22T05:34:23Z",
+      "side": 1,
+      "message": "minor comments",
+      "revId": "7a09b8d09d6a5db23749dc6f0f409f6cae0b3b77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a40e69bd_38a10485",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-11-22T05:34:23Z",
+      "side": 1,
+      "message": "First verify that xpath_network_information_view_more_button is available / contained in the page",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 88,
+        "endChar": 64
+      },
+      "revId": "7a09b8d09d6a5db23749dc6f0f409f6cae0b3b77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
