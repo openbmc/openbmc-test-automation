@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.6.12 on linux)" generated="20221117 03:15:24.146" rpa="false">
+<errors>
+<msg timestamp="20221117 03:15:28.195" level="ERROR">Error in file '/gsa/ausgsa-p10/03/indiateam04/swe12345/openbmc/sweta_gui_add_multiple/lib/bmc_redfish_resource.robot': Initializing test library 'bmc_redfish_utils' with no arguments failed: InvalidCredentialsError: 0
+Traceback (most recent call last):
+  File "/gsa/ausgsa-p10/03/indiateam04/swe12345/openbmc/sweta_gui_add_multiple/lib/bmc_redfish_utils.py", line 32, in __init__
+    self._redfish_.login()
+  File "/gsa/ausgsa-p10/03/indiateam04/swe12345/openbmc/sweta_gui_add_multiple/lib/bmc_redfish.py", line 100, in login
+    *args, **kwargs)
+  File "/opt/rh/rh-python36/root/usr/lib/python3.6/site-packages/redfish/rest/v1.py", line 936, in login
+    raise InvalidCredentialsError(delay)</msg>
+<msg timestamp="20221117 03:15:29.736" level="ERROR">Execution stopped by user.</msg>
+</errors>
+</robot>

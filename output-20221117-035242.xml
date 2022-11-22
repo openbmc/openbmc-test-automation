@@ -1,0 +1,1190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.1.2 (Python 3.6.12 on linux)" generated="20221117 03:52:42.205" rpa="false">
+<suite id="s1" name="Test Ldap Configuration" source="/gsa/ausgsa-p10/03/indiateam04/swe12345/openbmc/sweta_gui_add_multiple/redfish/account_service/test_ldap_configuration.robot">
+<kw name="Suite Setup Execution" type="setup">
+<doc>Do suite setup tasks.</doc>
+<kw name="Valid Value" library="gen_robot_valid">
+<doc>Fail if the variable named by var_name is invalid.</doc>
+<arguments>
+<arg>LDAP_TYPE</arg>
+<arg>valid_values=["ActiveDirectory", "LDAP"]</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:52:44.797" endtime="20221117 03:52:44.813"></status>
+</kw>
+<kw name="Valid Value" library="gen_robot_valid">
+<doc>Fail if the variable named by var_name is invalid.</doc>
+<arguments>
+<arg>LDAP_USER</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:52:44.814" endtime="20221117 03:52:44.826"></status>
+</kw>
+<kw name="Valid Value" library="gen_robot_valid">
+<doc>Fail if the variable named by var_name is invalid.</doc>
+<arguments>
+<arg>LDAP_USER_PASSWORD</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:52:44.826" endtime="20221117 03:52:44.838"></status>
+</kw>
+<kw name="Valid Value" library="gen_robot_valid">
+<doc>Fail if the variable named by var_name is invalid.</doc>
+<arguments>
+<arg>GROUP_PRIVILEGE</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:52:44.838" endtime="20221117 03:52:44.849"></status>
+</kw>
+<kw name="Valid Value" library="gen_robot_valid">
+<doc>Fail if the variable named by var_name is invalid.</doc>
+<arguments>
+<arg>GROUP_NAME</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:52:44.850" endtime="20221117 03:52:44.860"></status>
+</kw>
+<kw name="Valid Value" library="gen_robot_valid">
+<doc>Fail if the variable named by var_name is invalid.</doc>
+<arguments>
+<arg>LDAP_SERVER_URI</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:52:44.861" endtime="20221117 03:52:44.871"></status>
+</kw>
+<kw name="Valid Value" library="gen_robot_valid">
+<doc>Fail if the variable named by var_name is invalid.</doc>
+<arguments>
+<arg>LDAP_BIND_DN_PASSWORD</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:52:44.871" endtime="20221117 03:52:44.881"></status>
+</kw>
+<kw name="Valid Value" library="gen_robot_valid">
+<doc>Fail if the variable named by var_name is invalid.</doc>
+<arguments>
+<arg>LDAP_BIND_DN</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:52:44.881" endtime="20221117 03:52:44.891"></status>
+</kw>
+<kw name="Valid Value" library="gen_robot_valid">
+<doc>Fail if the variable named by var_name is invalid.</doc>
+<arguments>
+<arg>LDAP_BASE_DN</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:52:44.891" endtime="20221117 03:52:44.900"></status>
+</kw>
+<kw name="Login" library="Redfish">
+<doc>Assign BMC default values for username, password and auth arguments
+and call parent class login method.</doc>
+<msg timestamp="20221117 03:52:44.911" level="INFO">Attempt 1 of /redfish/v1/SessionService/Sessions</msg>
+<msg timestamp="20221117 03:52:44.967" level="INFO">Response Time to /redfish/v1/SessionService/Sessions: 0.055906849913299084 seconds.</msg>
+<msg timestamp="20221117 03:52:44.968" level="INFO">{'@odata.id': '/redfish/v1/SessionService/Sessions/jtNwjecSlk', '@odata.type': '#Session.v1_5_0.Session', 'ClientOriginIPAddress': '::ffff:9.3.84.152', 'Description': 'Manager User Session', 'Id': 'jtNwjecSlk', 'Name': 'User Session', 'Oem': {'OpenBMC': {'@odata.type': '#OemSession.v1_0_0.Session', 'ClientID': ''}}, 'UserName': 'service'}</msg>
+<msg timestamp="20221117 03:52:44.968" level="INFO">Login returned code 201: {
+  "@odata.id": "/redfish/v1/SessionService/Sessions/jtNwjecSlk",
+  "@odata.type": "#Session.v1_5_0.Session",
+  "ClientOriginIPAddress": "::ffff:9.3.84.152",
+  "Description": "Manager User Session",
+  "Id": "jtNwjecSlk",
+  "Name": "User Session",
+  "Oem": {
+    "OpenBMC": {
+      "@odata.type": "#OemSession.v1_0_0.Session",
+      "ClientID": ""
+    }
+  },
+  "UserName": "service"
+}</msg>
+<status status="PASS" starttime="20221117 03:52:44.901" endtime="20221117 03:52:44.968"></status>
+</kw>
+<kw name="Get LDAP Configuration">
+<doc>Retrieve LDAP Configuration.</doc>
+<arguments>
+<arg>${LDAP_TYPE}</arg>
+</arguments>
+<kw name="Get Properties" library="Redfish">
+<doc>Return dictionary of attributes for a given path.</doc>
+<arguments>
+<arg>${REDFISH_BASE_URI}AccountService</arg>
+</arguments>
+<assign>
+<var>${ldap_config}</var>
+</assign>
+<msg timestamp="20221117 03:52:45.004" level="INFO">Attempt 1 of /redfish/v1/AccountService</msg>
+<msg timestamp="20221117 03:52:45.020" level="INFO">Response Time to /redfish/v1/AccountService: 0.0154426209628582 seconds.</msg>
+<msg timestamp="20221117 03:52:45.021" level="INFO">${ldap_config} = {'@odata.id': '/redfish/v1/AccountService', '@odata.type': '#AccountService.v1_5_0.AccountService', 'AccountLockoutDuration': 50, 'AccountLockoutThreshold': 0, 'Accounts': {'@odata.id': '/redfish/v1/A...</msg>
+<status status="PASS" starttime="20221117 03:52:44.971" endtime="20221117 03:52:45.021"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:52:44.969" endtime="20221117 03:52:45.022"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${old_ldap_privilege}</arg>
+</arguments>
+<msg timestamp="20221117 03:52:45.024" level="INFO">${old_ldap_privilege} = Administrator</msg>
+<status status="PASS" starttime="20221117 03:52:45.023" endtime="20221117 03:52:45.024"></status>
+</kw>
+<kw name="Disable Other LDAP">
+<doc>Disable other LDAP configuration.</doc>
+<kw name="Set Variable If" library="BuiltIn">
+<doc>Sets variable based on the given condition.</doc>
+<arguments>
+<arg>'${LDAP_TYPE}' == 'LDAP'</arg>
+<arg>ActiveDirectory</arg>
+<arg>LDAP</arg>
+</arguments>
+<assign>
+<var>${inverse_ldap_type}</var>
+</assign>
+<msg timestamp="20221117 03:52:45.027" level="INFO">${inverse_ldap_type} = LDAP</msg>
+<status status="PASS" starttime="20221117 03:52:45.026" endtime="20221117 03:52:45.027"></status>
+</kw>
+<kw name="Patch" library="Redfish">
+<doc>Perform a PUT request</doc>
+<arguments>
+<arg>${REDFISH_BASE_URI}AccountService</arg>
+<arg>body={'${inverse_ldap_type}': {'ServiceEnabled': ${service_state}}}</arg>
+</arguments>
+<msg timestamp="20221117 03:52:45.043" level="INFO">Attempt 1 of /redfish/v1/AccountService</msg>
+<msg timestamp="20221117 03:52:45.056" level="INFO">Response Time to /redfish/v1/AccountService: 0.011836415156722069 seconds.</msg>
+<status status="PASS" starttime="20221117 03:52:45.027" endtime="20221117 03:52:45.056"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>15s</arg>
+</arguments>
+<msg timestamp="20221117 03:53:00.057" level="INFO">Slept 15 seconds</msg>
+<status status="PASS" starttime="20221117 03:52:45.057" endtime="20221117 03:53:00.058"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:52:45.024" endtime="20221117 03:53:00.058"></status>
+</kw>
+<kw name="Create LDAP Configuration" library="bmc_ldap_utils">
+<doc>Create LDAP configuration.</doc>
+<kw name="Catenate" library="BuiltIn">
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<arguments>
+<arg>{'${ldap_type}':</arg>
+<arg>{'ServiceEnabled': ${True},</arg>
+<arg>'ServiceAddresses': ['${ldap_server_uri}'],</arg>
+<arg>'Authentication':</arg>
+<arg>{'AuthenticationType': 'UsernameAndPassword',</arg>
+<arg>'Username':'${ldap_bind_dn}',</arg>
+<arg>'Password': '${ldap_bind_dn_password}'},</arg>
+<arg>'LDAPService':</arg>
+<arg>{'SearchSettings':</arg>
+<arg>{'BaseDistinguishedNames': ['${ldap_base_dn}']}}}}</arg>
+</arguments>
+<assign>
+<var>${body}</var>
+</assign>
+<msg timestamp="20221117 03:53:00.062" level="INFO">${body} = {'ActiveDirectory': {'ServiceEnabled': True, 'ServiceAddresses': ['ldap://9.194.251.141/'], 'Authentication': {'AuthenticationType': 'UsernameAndPassword', 'Username':'cn=dvtuser,cn=Users,dc=Corp,dc=i...</msg>
+<status status="PASS" starttime="20221117 03:53:00.060" endtime="20221117 03:53:00.062"></status>
+</kw>
+<kw name="Patch" library="Redfish">
+<doc>Perform a PUT request</doc>
+<arguments>
+<arg>${REDFISH_BASE_URI}AccountService</arg>
+<arg>body=${body}</arg>
+</arguments>
+<msg timestamp="20221117 03:53:00.077" level="INFO">Attempt 1 of /redfish/v1/AccountService</msg>
+<msg timestamp="20221117 03:53:00.122" level="INFO">Response Time to /redfish/v1/AccountService: 0.04370183032006025 seconds.</msg>
+<status status="PASS" starttime="20221117 03:53:00.062" endtime="20221117 03:53:00.122"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>15s</arg>
+</arguments>
+<msg timestamp="20221117 03:53:15.124" level="INFO">Slept 15 seconds</msg>
+<status status="PASS" starttime="20221117 03:53:00.123" endtime="20221117 03:53:15.125"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:53:00.059" endtime="20221117 03:53:15.125"></status>
+</kw>
+<kw name="Get Attribute" library="Redfish">
+<doc>Get and return the named attribute from the properties for a given
+path.</doc>
+<arguments>
+<arg>${REDFISH_NW_PROTOCOL_URI}</arg>
+<arg>HostName</arg>
+</arguments>
+<assign>
+<var>${hostname}</var>
+</assign>
+<msg timestamp="20221117 03:53:15.140" level="INFO">Attempt 1 of /redfish/v1/Managers/bmc/NetworkProtocol</msg>
+<msg timestamp="20221117 03:53:15.241" level="INFO">Response Time to /redfish/v1/Managers/bmc/NetworkProtocol: 0.10018094629049301 seconds.</msg>
+<msg timestamp="20221117 03:53:15.242" level="INFO">${hostname} = rain113bmc</msg>
+<status status="PASS" starttime="20221117 03:53:15.126" endtime="20221117 03:53:15.242"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:52:44.796" endtime="20221117 03:53:15.242"></status>
+</kw>
+<test id="s1-t1" name="Verify LDAP Service Disable">
+<kw name="Patch" library="Redfish">
+<doc>Perform a PUT request</doc>
+<arguments>
+<arg>${REDFISH_BASE_URI}AccountService</arg>
+<arg>body={'${LDAP_TYPE}': {'ServiceEnabled': ${False}}}</arg>
+</arguments>
+<msg timestamp="20221117 03:53:15.259" level="INFO">Attempt 1 of /redfish/v1/AccountService</msg>
+<msg timestamp="20221117 03:53:15.284" level="INFO">Response Time to /redfish/v1/AccountService: 0.023939309176057577 seconds.</msg>
+<status status="PASS" starttime="20221117 03:53:15.245" endtime="20221117 03:53:15.284"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>15s</arg>
+</arguments>
+<msg timestamp="20221117 03:53:30.285" level="INFO">Slept 15 seconds</msg>
+<status status="PASS" starttime="20221117 03:53:15.284" endtime="20221117 03:53:30.285"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>Redfish.Login</arg>
+<arg>${LDAP_USER}</arg>
+<arg>${LDAP_USER_PASSWORD}</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<kw name="Login" library="Redfish">
+<doc>Assign BMC default values for username, password and auth arguments
+and call parent class login method.</doc>
+<arguments>
+<arg>${LDAP_USER}</arg>
+<arg>${LDAP_USER_PASSWORD}</arg>
+</arguments>
+<msg timestamp="20221117 03:53:30.311" level="INFO">Attempt 1 of /redfish/v1/SessionService/Sessions</msg>
+<msg timestamp="20221117 03:53:32.593" level="INFO">Response Time to /redfish/v1/SessionService/Sessions: 2.281625189818442 seconds.</msg>
+<msg timestamp="20221117 03:53:32.594" level="INFO">{'error': {'@Message.ExtendedInfo': [{'@odata.type': '#Message.v1_1_1.Message', 'Message': 'While accessing the resource at /redfish/v1/SessionService/Sessions, the service received an authorization error Invalid username or password.', 'MessageArgs': ['/redfish/v1/SessionService/Sessions', 'Invalid username or password'], 'MessageId': 'Base.1.8.1.ResourceAtUriUnauthorized', 'MessageSeverity': 'Critical', 'Resolution': 'Ensure that the appropriate access is provided for the service in order for it to access the URI.'}], 'code': 'Base.1.8.1.ResourceAtUriUnauthorized', 'message': 'While accessing the resource at /redfish/v1/SessionService/Sessions, the service received an authorization error Invalid username or password.'}}</msg>
+<msg timestamp="20221117 03:53:32.594" level="INFO">Login returned code 401: {
+  "error": {
+    "@Message.ExtendedInfo": [
+      {
+        "@odata.type": "#Message.v1_1_1.Message",
+        "Message": "While accessing the resource at /redfish/v1/SessionService/Sessions, the service received an authorization error Invalid username or password.",
+        "MessageArgs": [
+          "/redfish/v1/SessionService/Sessions",
+          "Invalid username or password"
+        ],
+        "MessageId": "Base.1.8.1.ResourceAtUriUnauthorized",
+        "MessageSeverity": "Critical",
+        "Resolution": "Ensure that the appropriate access is provided for the service in order for it to access the URI."
+      }
+    ],
+    "code": "Base.1.8.1.ResourceAtUriUnauthorized",
+    "message": "While accessing the resource at /redfish/v1/SessionService/Sessions, the service received an authorization error Invalid username or password."
+  }
+}</msg>
+<msg timestamp="20221117 03:53:32.594" level="INFO">Attempt 1 of /redfish/v1/SessionService/Sessions</msg>
+<msg timestamp="20221117 03:53:34.280" level="INFO">Response Time to /redfish/v1/SessionService/Sessions: 1.6846893038600683 seconds.</msg>
+<msg timestamp="20221117 03:53:34.280" level="INFO">{'error': {'@Message.ExtendedInfo': [{'@odata.type': '#Message.v1_1_1.Message', 'Message': 'While accessing the resource at /redfish/v1/SessionService/Sessions, the service received an authorization error Invalid username or password.', 'MessageArgs': ['/redfish/v1/SessionService/Sessions', 'Invalid username or password'], 'MessageId': 'Base.1.8.1.ResourceAtUriUnauthorized', 'MessageSeverity': 'Critical', 'Resolution': 'Ensure that the appropriate access is provided for the service in order for it to access the URI.'}], 'code': 'Base.1.8.1.ResourceAtUriUnauthorized', 'message': 'While accessing the resource at /redfish/v1/SessionService/Sessions, the service received an authorization error Invalid username or password.'}}</msg>
+<msg timestamp="20221117 03:53:34.280" level="INFO">Login returned code 401: {
+  "error": {
+    "@Message.ExtendedInfo": [
+      {
+        "@odata.type": "#Message.v1_1_1.Message",
+        "Message": "While accessing the resource at /redfish/v1/SessionService/Sessions, the service received an authorization error Invalid username or password.",
+        "MessageArgs": [
+          "/redfish/v1/SessionService/Sessions",
+          "Invalid username or password"
+        ],
+        "MessageId": "Base.1.8.1.ResourceAtUriUnauthorized",
+        "MessageSeverity": "Critical",
+        "Resolution": "Ensure that the appropriate access is provided for the service in order for it to access the URI."
+      }
+    ],
+    "code": "Base.1.8.1.ResourceAtUriUnauthorized",
+    "message": "While accessing the resource at /redfish/v1/SessionService/Sessions, the service received an authorization error Invalid username or password."
+  }
+}</msg>
+<msg timestamp="20221117 03:53:34.281" level="FAIL">InvalidCredentialsError: 0</msg>
+<status status="FAIL" starttime="20221117 03:53:30.288" endtime="20221117 03:53:34.281"></status>
+</kw>
+<msg timestamp="20221117 03:53:34.282" level="INFO">${resp} = False</msg>
+<status status="PASS" starttime="20221117 03:53:30.286" endtime="20221117 03:53:34.282"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${resp}</arg>
+<arg>${False}</arg>
+<arg>msg=LDAP user was able to login even though the LDAP service was disabled.</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:53:34.283" endtime="20221117 03:53:34.284"></status>
+</kw>
+<kw name="Logout" library="Redfish">
+<doc>Logout of session. YOU MUST CALL THIS WHEN YOU ARE DONE TO FREE</doc>
+<status status="PASS" starttime="20221117 03:53:34.284" endtime="20221117 03:53:34.285"></status>
+</kw>
+<kw name="Login" library="Redfish">
+<doc>Assign BMC default values for username, password and auth arguments
+and call parent class login method.</doc>
+<msg timestamp="20221117 03:53:34.305" level="INFO">Attempt 1 of /redfish/v1/SessionService/Sessions</msg>
+<msg timestamp="20221117 03:53:34.348" level="INFO">Response Time to /redfish/v1/SessionService/Sessions: 0.04199512209743261 seconds.</msg>
+<msg timestamp="20221117 03:53:34.348" level="INFO">{'@odata.id': '/redfish/v1/SessionService/Sessions/Ekc54syZgP', '@odata.type': '#Session.v1_5_0.Session', 'ClientOriginIPAddress': '::ffff:9.3.84.152', 'Description': 'Manager User Session', 'Id': 'Ekc54syZgP', 'Name': 'User Session', 'Oem': {'OpenBMC': {'@odata.type': '#OemSession.v1_0_0.Session', 'ClientID': ''}}, 'UserName': 'service'}</msg>
+<msg timestamp="20221117 03:53:34.348" level="INFO">Login returned code 201: {
+  "@odata.id": "/redfish/v1/SessionService/Sessions/Ekc54syZgP",
+  "@odata.type": "#Session.v1_5_0.Session",
+  "ClientOriginIPAddress": "::ffff:9.3.84.152",
+  "Description": "Manager User Session",
+  "Id": "Ekc54syZgP",
+  "Name": "User Session",
+  "Oem": {
+    "OpenBMC": {
+      "@odata.type": "#OemSession.v1_0_0.Session",
+      "ClientID": ""
+    }
+  },
+  "UserName": "service"
+}</msg>
+<status status="PASS" starttime="20221117 03:53:34.285" endtime="20221117 03:53:34.349"></status>
+</kw>
+<kw name="Patch" library="Redfish">
+<doc>Perform a PUT request</doc>
+<arguments>
+<arg>${REDFISH_BASE_URI}AccountService</arg>
+<arg>body={'${LDAP_TYPE}': {'ServiceEnabled': ${True}}}</arg>
+</arguments>
+<msg timestamp="20221117 03:53:34.363" level="INFO">Attempt 1 of /redfish/v1/AccountService</msg>
+<msg timestamp="20221117 03:53:34.406" level="INFO">Response Time to /redfish/v1/AccountService: 0.0420048669911921 seconds.</msg>
+<status status="PASS" starttime="20221117 03:53:34.349" endtime="20221117 03:53:34.406"></status>
+</kw>
+<kw name="Logout" library="Redfish">
+<doc>Logout of session. YOU MUST CALL THIS WHEN YOU ARE DONE TO FREE</doc>
+<msg timestamp="20221117 03:53:34.420" level="INFO">Attempt 1 of /redfish/v1/SessionService/Sessions/Ekc54syZgP</msg>
+<msg timestamp="20221117 03:53:34.431" level="INFO">Response Time to /redfish/v1/SessionService/Sessions/Ekc54syZgP: 0.009799212217330933 seconds.</msg>
+<msg timestamp="20221117 03:53:34.431" level="INFO">User logged out: {
+  "@Message.ExtendedInfo": [
+    {
+      "@odata.type": "#Message.v1_1_1.Message",
+      "Message": "Successfully Completed Request",
+      "MessageArgs": [],
+      "MessageId": "Base.1.8.1.Success",
+      "MessageSeverity": "OK",
+      "Resolution": "None"
+    }
+  ]
+}</msg>
+<status status="PASS" starttime="20221117 03:53:34.407" endtime="20221117 03:53:34.431"></status>
+</kw>
+<kw name="Run Keywords" library="BuiltIn" type="teardown">
+<doc>Executes all the given keywords in a sequence.</doc>
+<arguments>
+<arg>Redfish.Login</arg>
+<arg>AND</arg>
+<arg>FFDC On Test Case Fail</arg>
+</arguments>
+<kw name="Login" library="Redfish">
+<doc>Assign BMC default values for username, password and auth arguments
+and call parent class login method.</doc>
+<msg timestamp="20221117 03:53:34.454" level="INFO">Attempt 1 of /redfish/v1/SessionService/Sessions</msg>
+<msg timestamp="20221117 03:53:34.506" level="INFO">Response Time to /redfish/v1/SessionService/Sessions: 0.05181081034243107 seconds.</msg>
+<msg timestamp="20221117 03:53:34.506" level="INFO">{'@odata.id': '/redfish/v1/SessionService/Sessions/GpNsPzhGca', '@odata.type': '#Session.v1_5_0.Session', 'ClientOriginIPAddress': '::ffff:9.3.84.152', 'Description': 'Manager User Session', 'Id': 'GpNsPzhGca', 'Name': 'User Session', 'Oem': {'OpenBMC': {'@odata.type': '#OemSession.v1_0_0.Session', 'ClientID': ''}}, 'UserName': 'service'}</msg>
+<msg timestamp="20221117 03:53:34.507" level="INFO">Login returned code 201: {
+  "@odata.id": "/redfish/v1/SessionService/Sessions/GpNsPzhGca",
+  "@odata.type": "#Session.v1_5_0.Session",
+  "ClientOriginIPAddress": "::ffff:9.3.84.152",
+  "Description": "Manager User Session",
+  "Id": "GpNsPzhGca",
+  "Name": "User Session",
+  "Oem": {
+    "OpenBMC": {
+      "@odata.type": "#OemSession.v1_0_0.Session",
+      "ClientID": ""
+    }
+  },
+  "UserName": "service"
+}</msg>
+<status status="PASS" starttime="20221117 03:53:34.433" endtime="20221117 03:53:34.507"></status>
+</kw>
+<kw name="FFDC On Test Case Fail" library="openbmc_ffdc">
+<doc>Generic FFDC entry point. Place holder to hook in
+other data collection methods
+1. Collect Logs if test fails or host reaches quiesced
+state.
+2. Added test execution history logging.
+By default this will log Test status PASS/FAIL format
+EX: 20160822041250932049:Test:Test case 1:PASS
+20160822041250969913:Test:Test case 2:FAIL
+3. Delete error logs and BMC dumps post FFDC collection.</doc>
+<kw name="Get Environment Variable" library="OperatingSystem">
+<doc>Returns the value of an environment variable with the given name.</doc>
+<arguments>
+<arg>OVERRIDE_FFDC_ON_TEST_CASE_FAIL</arg>
+<arg>0</arg>
+</arguments>
+<assign>
+<var>${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}</var>
+</assign>
+<msg timestamp="20221117 03:53:34.509" level="INFO">${OVERRIDE_FFDC_ON_TEST_CASE_FAIL} = 0</msg>
+<status status="PASS" starttime="20221117 03:53:34.509" endtime="20221117 03:53:34.510"></status>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<doc>Converts the given item to an integer number.</doc>
+<arguments>
+<arg>${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}</arg>
+</arguments>
+<assign>
+<var>${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}</var>
+</assign>
+<msg timestamp="20221117 03:53:34.511" level="INFO">${OVERRIDE_FFDC_ON_TEST_CASE_FAIL} = 0</msg>
+<status status="PASS" starttime="20221117 03:53:34.510" endtime="20221117 03:53:34.511"></status>
+</kw>
+<kw name="Return From Keyword If" library="BuiltIn">
+<doc>Returns from the enclosing user keyword if ``condition`` is true.</doc>
+<arguments>
+<arg>${OVERRIDE_FFDC_ON_TEST_CASE_FAIL}</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:53:34.512" endtime="20221117 03:53:34.512"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${TEST_STATUS}' == 'FAIL'</arg>
+<arg>Launch FFDC</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:53:34.513" endtime="20221117 03:53:34.514"></status>
+</kw>
+<kw name="Log Test Case Status" library="openbmc_ffdc_methods">
+<doc>Test case execution result history.
+Create once and append to this file
+logs/test_history.txt
+Format Date:Test suite:Test case:Status
+20160909214053719992:Test Warmreset:Test WarmReset via REST:FAIL</doc>
+<kw name="Get Variable Value" library="BuiltIn">
+<doc>Returns variable value or ``default`` if the variable does not exist.</doc>
+<arguments>
+<arg>${FFDC_DIR_PATH_STYLE}</arg>
+<arg>${EMPTY}</arg>
+</arguments>
+<assign>
+<var>${FFDC_DIR_PATH_STYLE}</var>
+</assign>
+<msg timestamp="20221117 03:53:34.516" level="INFO">${FFDC_DIR_PATH_STYLE} = </msg>
+<status status="PASS" starttime="20221117 03:53:34.516" endtime="20221117 03:53:34.516"></status>
+</kw>
+<kw name="Get Variable Value" library="BuiltIn">
+<doc>Returns variable value or ``default`` if the variable does not exist.</doc>
+<arguments>
+<arg>${FFDC_DIR_PATH}</arg>
+<arg>${EMPTY}</arg>
+</arguments>
+<assign>
+<var>${FFDC_DIR_PATH}</var>
+</assign>
+<msg timestamp="20221117 03:53:34.539" level="INFO">${FFDC_DIR_PATH} = </msg>
+<status status="PASS" starttime="20221117 03:53:34.517" endtime="20221117 03:53:34.539"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FFDC_DIR_PATH}' == '${EMPTY}'</arg>
+<arg>Set FFDC Defaults</arg>
+</arguments>
+<kw name="Set Ffdc Defaults" library="openbmc_ffdc">
+<doc>Set a default value for ffdc_dir_path and ffdc_prefix if they don't
+already have values.  Return both values.</doc>
+<kw name="Get Current Time Stamp" library="openbmc_ffdc_utils">
+<doc>Get the current time stamp data</doc>
+<kw name="Get Current Date" library="DateTime">
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<arguments>
+<arg>result_format=%Y-%m-%d %H:%M:%S:%f</arg>
+</arguments>
+<assign>
+<var>${cur_time}</var>
+</assign>
+<msg timestamp="20221117 03:53:34.552" level="INFO">${cur_time} = 2022-11-17 03:53:34:551514</msg>
+<status status="PASS" starttime="20221117 03:53:34.551" endtime="20221117 03:53:34.552"></status>
+</kw>
+<kw name="Get Strip String" library="openbmc_ffdc_list">
+<doc>#######################################################################
+#   @brief    Returns the stripped strings
+#   @param    i_str: @type string: string name
+#   @return   Remove all special chars and return the string
+#######################################################################</doc>
+<arguments>
+<arg>${cur_time}</arg>
+</arguments>
+<assign>
+<var>${cur_time}</var>
+</assign>
+<msg timestamp="20221117 03:53:34.553" level="INFO">${cur_time} = 20221117035334551514</msg>
+<status status="PASS" starttime="20221117 03:53:34.552" endtime="20221117 03:53:34.553"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:53:34.550" endtime="20221117 03:53:34.553"></status>
+</kw>
+<msg timestamp="20221117 03:53:34.562" level="INFO">${FFDC_TIME} = 20221117035334551514</msg>
+<kw name="Get Test Dir and Name" library="openbmc_ffdc_utils">
+<doc>SUITE_NAME and TEST_NAME are automatic variables
+and is populated dynamically by the robot framework
+during execution</doc>
+<kw name="Get Strip String" library="openbmc_ffdc_list">
+<doc>#######################################################################
+#   @brief    Returns the stripped strings
+#   @param    i_str: @type string: string name
+#   @return   Remove all special chars and return the string
+#######################################################################</doc>
+<arguments>
+<arg>${SUITE_NAME}</arg>
+</arguments>
+<assign>
+<var>${suite_name}</var>
+</assign>
+<msg timestamp="20221117 03:53:34.585" level="INFO">${suite_name} = TestLdapConfiguration</msg>
+<status status="PASS" starttime="20221117 03:53:34.584" endtime="20221117 03:53:34.585"></status>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<arguments>
+<arg>SEPARATOR=</arg>
+<arg>${FFDC_TIME}_</arg>
+<arg>${suite_name}</arg>
+</arguments>
+<assign>
+<var>${suite_name}</var>
+</assign>
+<msg timestamp="20221117 03:53:34.586" level="INFO">${suite_name} = 20221117035334551514_TestLdapConfiguration</msg>
+<status status="PASS" starttime="20221117 03:53:34.585" endtime="20221117 03:53:34.586"></status>
+</kw>
+<kw name="Get Strip String" library="openbmc_ffdc_list">
+<doc>#######################################################################
+#   @brief    Returns the stripped strings
+#   @param    i_str: @type string: string name
+#   @return   Remove all special chars and return the string
+#######################################################################</doc>
+<arguments>
+<arg>${TEST_NAME}</arg>
+</arguments>
+<assign>
+<var>${test_name}</var>
+</assign>
+<msg timestamp="20221117 03:53:34.587" level="INFO">${test_name} = VerifyLDAPServiceDisable</msg>
+<status status="PASS" starttime="20221117 03:53:34.586" endtime="20221117 03:53:34.587"></status>
+</kw>
+<kw name="Catenate" library="BuiltIn">
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<arguments>
+<arg>SEPARATOR=</arg>
+<arg>${FFDC_TIME}_</arg>
+<arg>${test_name}</arg>
+</arguments>
+<assign>
+<var>${test_name}</var>
+</assign>
+<msg timestamp="20221117 03:53:34.588" level="INFO">${test_name} = 20221117035334551514_VerifyLDAPServiceDisable</msg>
+<status status="PASS" starttime="20221117 03:53:34.587" endtime="20221117 03:53:34.588"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:53:34.584" endtime="20221117 03:53:34.588"></status>
+</kw>
+<msg timestamp="20221117 03:53:34.589" level="INFO">${FFDC_DIR_PATH} = /gsa/ausgsa-p10/03/indiateam04/swe12345/openbmc/sweta_gui_add_multiple/logs/20221117035334551514_TestLdapConfiguration/20221117035334551514_VerifyLDAPServiceDisable/</msg>
+<msg timestamp="20221117 03:53:34.596" level="INFO">${FFDC_PREFIX} = 20221117035334551514_</msg>
+<status status="PASS" starttime="20221117 03:53:34.540" endtime="20221117 03:53:34.596"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:53:34.539" endtime="20221117 03:53:34.597"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${FFDC_DIR_PATH_STYLE}' == '${1}'</arg>
+<arg>Run Keywords</arg>
+<arg>Set Global Variable</arg>
+<arg>${FFDC_LOG_PATH}</arg>
+<arg>${FFDC_DIR_PATH}</arg>
+<arg>AND</arg>
+<arg>Set Global Variable</arg>
+<arg>${TEST_HISTORY}</arg>
+<arg>${FFDC_DIR_PATH}test_history.txt</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:53:34.597" endtime="20221117 03:53:34.598"></status>
+</kw>
+<kw name="Create Directory" library="OperatingSystem">
+<doc>Creates the specified directory.</doc>
+<arguments>
+<arg>${FFDC_LOG_PATH}</arg>
+</arguments>
+<msg timestamp="20221117 03:53:34.599" level="INFO" html="yes">Directory '&lt;a href="file:///gsa/ausgsa-p10/03/indiateam04/swe12345/openbmc/sweta_gui_add_multiple/logs"&gt;/gsa/ausgsa-p10/03/indiateam04/swe12345/openbmc/sweta_gui_add_multiple/logs&lt;/a&gt;' already exists.</msg>
+<status status="PASS" starttime="20221117 03:53:34.598" endtime="20221117 03:53:34.599"></status>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<arguments>
+<arg>OperatingSystem.File Should Exist</arg>
+<arg>${TEST_HISTORY}</arg>
+</arguments>
+<assign>
+<var>${exist}</var>
+</assign>
+<kw name="File Should Exist" library="OperatingSystem">
+<doc>Fails unless the given ``path`` points to an existing file.</doc>
+<arguments>
+<arg>${TEST_HISTORY}</arg>
+</arguments>
+<msg timestamp="20221117 03:53:34.602" level="INFO" html="yes">File '&lt;a href="file:///gsa/ausgsa-p10/03/indiateam04/swe12345/openbmc/sweta_gui_add_multiple/logs/test_history.txt"&gt;/gsa/ausgsa-p10/03/indiateam04/swe12345/openbmc/sweta_gui_add_multiple/logs/test_history.txt&lt;/a&gt;' exists.</msg>
+<status status="PASS" starttime="20221117 03:53:34.600" endtime="20221117 03:53:34.603"></status>
+</kw>
+<msg timestamp="20221117 03:53:34.603" level="INFO">${exist} = True</msg>
+<status status="PASS" starttime="20221117 03:53:34.600" endtime="20221117 03:53:34.603"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${exist}' == '${False}'</arg>
+<arg>Create File</arg>
+<arg>${TEST_HISTORY}</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:53:34.603" endtime="20221117 03:53:34.604"></status>
+</kw>
+<kw name="Rpvars" library="gen_robot_print">
+<arguments>
+<arg>TEST_HISTORY</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:53:34.604" endtime="20221117 03:53:34.605"></status>
+</kw>
+<kw name="Get Current Time Stamp" library="openbmc_ffdc_utils">
+<doc>Get the current time stamp data</doc>
+<assign>
+<var>${cur_time}</var>
+</assign>
+<kw name="Get Current Date" library="DateTime">
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<arguments>
+<arg>result_format=%Y-%m-%d %H:%M:%S:%f</arg>
+</arguments>
+<assign>
+<var>${cur_time}</var>
+</assign>
+<msg timestamp="20221117 03:53:34.606" level="INFO">${cur_time} = 2022-11-17 03:53:34:606126</msg>
+<status status="PASS" starttime="20221117 03:53:34.606" endtime="20221117 03:53:34.606"></status>
+</kw>
+<kw name="Get Strip String" library="openbmc_ffdc_list">
+<doc>#######################################################################
+#   @brief    Returns the stripped strings
+#   @param    i_str: @type string: string name
+#   @return   Remove all special chars and return the string
+#######################################################################</doc>
+<arguments>
+<arg>${cur_time}</arg>
+</arguments>
+<assign>
+<var>${cur_time}</var>
+</assign>
+<msg timestamp="20221117 03:53:34.607" level="INFO">${cur_time} = 20221117035334606126</msg>
+<status status="PASS" starttime="20221117 03:53:34.607" endtime="20221117 03:53:34.607"></status>
+</kw>
+<msg timestamp="20221117 03:53:34.607" level="INFO">${cur_time} = 20221117035334606126</msg>
+<status status="PASS" starttime="20221117 03:53:34.605" endtime="20221117 03:53:34.607"></status>
+</kw>
+<kw name="Append To File" library="OperatingSystem">
+<doc>Appends the given content to the specified file.</doc>
+<arguments>
+<arg>${TEST_HISTORY}</arg>
+<arg>${cur_time}:${SUITE_NAME}:${TEST_NAME}:${TEST_STATUS}${\n}</arg>
+</arguments>
+<msg timestamp="20221117 03:53:34.612" level="INFO" html="yes">Appended to file '&lt;a href="file:///gsa/ausgsa-p10/03/indiateam04/swe12345/openbmc/sweta_gui_add_multiple/logs/test_history.txt"&gt;/gsa/ausgsa-p10/03/indiateam04/swe12345/openbmc/sweta_gui_add_multiple/logs/test_history.txt&lt;/a&gt;'.</msg>
+<status status="PASS" starttime="20221117 03:53:34.608" endtime="20221117 03:53:34.612"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:53:34.514" endtime="20221117 03:53:34.612"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:53:34.508" endtime="20221117 03:53:34.612"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:53:34.432" endtime="20221117 03:53:34.613"></status>
+</kw>
+<doc>Verify that LDAP is disabled and that LDAP user cannot
+login.</doc>
+<tags>
+<tag>LDAP_Test</tag>
+<tag>Verify_LDAP_Service_Disable</tag>
+</tags>
+<status status="PASS" starttime="20221117 03:53:15.242" endtime="20221117 03:53:34.613" critical="yes"></status>
+</test>
+<kw name="LDAP Suite Teardown Execution" type="teardown">
+<doc>Restore ldap configuration, delete unused redfish session.</doc>
+<kw name="Restore LDAP Privilege">
+<doc>Restore the LDAP privilege to its original value.</doc>
+<kw name="Login" library="Redfish">
+<doc>Assign BMC default values for username, password and auth arguments
+and call parent class login method.</doc>
+<msg timestamp="20221117 03:53:34.629" level="INFO">Attempt 1 of /redfish/v1/SessionService/Sessions</msg>
+<msg timestamp="20221117 03:53:34.678" level="INFO">Response Time to /redfish/v1/SessionService/Sessions: 0.04876590799540281 seconds.</msg>
+<msg timestamp="20221117 03:53:34.678" level="INFO">{'@odata.id': '/redfish/v1/SessionService/Sessions/7sqaAkXLy2', '@odata.type': '#Session.v1_5_0.Session', 'ClientOriginIPAddress': '::ffff:9.3.84.152', 'Description': 'Manager User Session', 'Id': '7sqaAkXLy2', 'Name': 'User Session', 'Oem': {'OpenBMC': {'@odata.type': '#OemSession.v1_0_0.Session', 'ClientID': ''}}, 'UserName': 'service'}</msg>
+<msg timestamp="20221117 03:53:34.678" level="INFO">Login returned code 201: {
+  "@odata.id": "/redfish/v1/SessionService/Sessions/7sqaAkXLy2",
+  "@odata.type": "#Session.v1_5_0.Session",
+  "ClientOriginIPAddress": "::ffff:9.3.84.152",
+  "Description": "Manager User Session",
+  "Id": "7sqaAkXLy2",
+  "Name": "User Session",
+  "Oem": {
+    "OpenBMC": {
+      "@odata.type": "#OemSession.v1_0_0.Session",
+      "ClientID": ""
+    }
+  },
+  "UserName": "service"
+}</msg>
+<status status="PASS" starttime="20221117 03:53:34.615" endtime="20221117 03:53:34.678"></status>
+</kw>
+<kw name="Return From Keyword If" library="BuiltIn">
+<doc>Returns from the enclosing user keyword if ``condition`` is true.</doc>
+<arguments>
+<arg>'${old_ldap_privilege}' == '${EMPTY}' or '${old_ldap_privilege}' == '[]'</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:53:34.679" endtime="20221117 03:53:34.680"></status>
+</kw>
+<kw name="Update LDAP Configuration with LDAP User Role And Group">
+<doc>Update LDAP configuration update with LDAP user Role and group.</doc>
+<arguments>
+<arg>${LDAP_TYPE}</arg>
+<arg>${old_ldap_privilege}</arg>
+<arg>${GROUP_NAME}</arg>
+</arguments>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>LocalRole=${group_privilege}</arg>
+<arg>RemoteGroup=${group_name}</arg>
+</arguments>
+<assign>
+<var>${local_role_remote_group}</var>
+</assign>
+<msg timestamp="20221117 03:53:34.682" level="INFO">${local_role_remote_group} = {'LocalRole': 'Administrator', 'RemoteGroup': 'Domain Admins'}</msg>
+<status status="PASS" starttime="20221117 03:53:34.681" endtime="20221117 03:53:34.682"></status>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<doc>Returns a list containing given items.</doc>
+<arguments>
+<arg>${local_role_remote_group}</arg>
+</arguments>
+<assign>
+<var>${remote_role_mapping}</var>
+</assign>
+<msg timestamp="20221117 03:53:34.683" level="INFO">${remote_role_mapping} = [{'LocalRole': 'Administrator', 'RemoteGroup': 'Domain Admins'}]</msg>
+<status status="PASS" starttime="20221117 03:53:34.682" endtime="20221117 03:53:34.683"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>RemoteRoleMapping=${remote_role_mapping}</arg>
+</arguments>
+<assign>
+<var>${ldap_data}</var>
+</assign>
+<msg timestamp="20221117 03:53:34.684" level="INFO">${ldap_data} = {'RemoteRoleMapping': [{'LocalRole': 'Administrator', 'RemoteGroup': 'Domain Admins'}]}</msg>
+<status status="PASS" starttime="20221117 03:53:34.683" endtime="20221117 03:53:34.684"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>${ldap_type}=${ldap_data}</arg>
+</arguments>
+<assign>
+<var>${payload}</var>
+</assign>
+<msg timestamp="20221117 03:53:34.685" level="INFO">${payload} = {'ActiveDirectory': {'RemoteRoleMapping': [{'LocalRole': 'Administrator', 'RemoteGroup': 'Domain Admins'}]}}</msg>
+<status status="PASS" starttime="20221117 03:53:34.684" endtime="20221117 03:53:34.685"></status>
+</kw>
+<kw name="Patch" library="Redfish">
+<doc>Perform a PUT request</doc>
+<arguments>
+<arg>${REDFISH_BASE_URI}AccountService</arg>
+<arg>body=&amp;{payload}</arg>
+</arguments>
+<msg timestamp="20221117 03:53:34.698" level="INFO">Attempt 1 of /redfish/v1/AccountService</msg>
+<msg timestamp="20221117 03:53:34.739" level="INFO">Response Time to /redfish/v1/AccountService: 0.04145330190658569 seconds.</msg>
+<status status="PASS" starttime="20221117 03:53:34.686" endtime="20221117 03:53:34.740"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>15s</arg>
+</arguments>
+<msg timestamp="20221117 03:53:49.742" level="INFO">Slept 15 seconds</msg>
+<status status="PASS" starttime="20221117 03:53:34.740" endtime="20221117 03:53:49.743"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:53:34.680" endtime="20221117 03:53:49.744"></status>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<doc>Pauses the test executed for the given time.</doc>
+<arguments>
+<arg>18s</arg>
+</arguments>
+<msg timestamp="20221117 03:54:07.748" level="INFO">Slept 18 seconds</msg>
+<status status="PASS" starttime="20221117 03:53:49.747" endtime="20221117 03:54:07.748"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:53:34.614" endtime="20221117 03:54:07.749"></status>
+</kw>
+<kw name="Logout" library="Redfish">
+<doc>Logout of session. YOU MUST CALL THIS WHEN YOU ARE DONE TO FREE</doc>
+<msg timestamp="20221117 03:54:07.776" level="INFO">Attempt 1 of /redfish/v1/SessionService/Sessions/7sqaAkXLy2</msg>
+<msg timestamp="20221117 03:54:07.779" level="INFO">Response Time to /redfish/v1/SessionService/Sessions/7sqaAkXLy2: 0.0019554891623556614 seconds.</msg>
+<msg timestamp="20221117 03:54:07.792" level="FAIL">ValueError: The HTTP status code was not valid:
+status:                                           401
+valid_status_codes:
+  [0]:                                            200
+</msg>
+<status status="FAIL" starttime="20221117 03:54:07.749" endtime="20221117 03:54:07.793"></status>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<arguments>
+<arg>Delete All Redfish Sessions</arg>
+</arguments>
+<kw name="Delete All Redfish Sessions" library="bmc_redfish_utils">
+<doc>Delete all active redfish sessions.</doc>
+<kw name="Get Redfish Session Info" library="redfish_utils">
+<doc>Returns redfish sessions info dictionary.</doc>
+<assign>
+<var>${saved_session_info}</var>
+</assign>
+<msg timestamp="20221117 03:54:07.901" level="INFO">${saved_session_info} = {'key': '9KyeXAaus9u5GkAKJie4', 'location': '/redfish/v1/SessionService/Sessions/E0iuX4mLCF'}</msg>
+<status status="PASS" starttime="20221117 03:54:07.796" endtime="20221117 03:54:07.901"></status>
+</kw>
+<kw name="Get Member List" library="redfish_utils">
+<doc>Perform a GET list request and return available members entries.</doc>
+<arguments>
+<arg>/redfish/v1/SessionService/Sessions</arg>
+</arguments>
+<assign>
+<var>${resp_list}</var>
+</assign>
+<msg timestamp="20221117 03:54:07.917" level="INFO">Attempt 1 of /redfish/v1/SessionService/Sessions</msg>
+<msg timestamp="20221117 03:54:07.927" level="INFO">Response Time to /redfish/v1/SessionService/Sessions: 0.010569437872618437 seconds.</msg>
+<msg timestamp="20221117 03:54:07.928" level="INFO">${resp_list} = ['/redfish/v1/SessionService/Sessions/E0iuX4mLCF', '/redfish/v1/SessionService/Sessions/TBNDWTMOXi', '/redfish/v1/SessionService/Sessions/rXq3J2jUbM', '/redfish/v1/SessionService/Sessions/2unZEYy84F',...</msg>
+<status status="PASS" starttime="20221117 03:54:07.902" endtime="20221117 03:54:07.928"></status>
+</kw>
+<kw name="Remove Values From List" library="Collections">
+<doc>Removes all occurrences of given ``values`` from ``list``.</doc>
+<arguments>
+<arg>${resp_list}</arg>
+<arg>${saved_session_info["location"]}</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:54:07.929" endtime="20221117 03:54:07.929"></status>
+</kw>
+<kw name="Get Session With Client Id" library="bmc_redfish_utils">
+<doc>Iterate through the active sessions and return sessions populated with client id.</doc>
+<arguments>
+<arg>${resp_list}</arg>
+</arguments>
+<assign>
+<var>${client_id_list}</var>
+</assign>
+<kw name="Create List" library="BuiltIn">
+<doc>Returns a list containing given items.</doc>
+<assign>
+<var>${client_id_sessions}</var>
+</assign>
+<msg timestamp="20221117 03:54:07.931" level="INFO">${client_id_sessions} = []</msg>
+<status status="PASS" starttime="20221117 03:54:07.931" endtime="20221117 03:54:07.931"></status>
+</kw>
+<kw name="${session} IN [ @{session_list} ]" type="for">
+<kw name="${session} = /redfish/v1/SessionService/Sessions/TBNDWTMOXi" type="foritem">
+<kw name="Get" library="Redfish">
+<doc>Perform a GET request</doc>
+<arguments>
+<arg>${session}</arg>
+<arg>valid_status_codes=[200,404]</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20221117 03:54:07.947" level="INFO">Attempt 1 of /redfish/v1/SessionService/Sessions/TBNDWTMOXi</msg>
+<msg timestamp="20221117 03:54:07.971" level="INFO">Response Time to /redfish/v1/SessionService/Sessions/TBNDWTMOXi: 0.023283908143639565 seconds.</msg>
+<msg timestamp="20221117 03:54:07.971" level="INFO">${resp} = 200
+Strict-Transport-Security max-age=31536000; includeSubdomains; preload
+X-Frame-Options DENY
+Pragma no-cache
+Cache-Control no-Store,no-Cache
+X-XSS-Protection 1; mode=block
+X-Content-Type-Options no...</msg>
+<status status="PASS" starttime="20221117 03:54:07.932" endtime="20221117 03:54:07.971"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${resp.dict["Oem"]["OpenBMC"]["ClientID"]}' != '${EMPTY}'</arg>
+<arg>Append To List</arg>
+<arg>${client_id_sessions}</arg>
+<arg>${session}</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:54:07.972" endtime="20221117 03:54:07.973"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:07.932" endtime="20221117 03:54:07.973"></status>
+</kw>
+<kw name="${session} = /redfish/v1/SessionService/Sessions/rXq3J2jUbM" type="foritem">
+<kw name="Get" library="Redfish">
+<doc>Perform a GET request</doc>
+<arguments>
+<arg>${session}</arg>
+<arg>valid_status_codes=[200,404]</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20221117 03:54:07.991" level="INFO">Attempt 1 of /redfish/v1/SessionService/Sessions/rXq3J2jUbM</msg>
+<msg timestamp="20221117 03:54:08.005" level="INFO">Response Time to /redfish/v1/SessionService/Sessions/rXq3J2jUbM: 0.01296401722356677 seconds.</msg>
+<msg timestamp="20221117 03:54:08.005" level="INFO">${resp} = 200
+Strict-Transport-Security max-age=31536000; includeSubdomains; preload
+X-Frame-Options DENY
+Pragma no-cache
+Cache-Control no-Store,no-Cache
+X-XSS-Protection 1; mode=block
+X-Content-Type-Options no...</msg>
+<status status="PASS" starttime="20221117 03:54:07.974" endtime="20221117 03:54:08.005"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${resp.dict["Oem"]["OpenBMC"]["ClientID"]}' != '${EMPTY}'</arg>
+<arg>Append To List</arg>
+<arg>${client_id_sessions}</arg>
+<arg>${session}</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:54:08.006" endtime="20221117 03:54:08.007"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:07.973" endtime="20221117 03:54:08.007"></status>
+</kw>
+<kw name="${session} = /redfish/v1/SessionService/Sessions/2unZEYy84F" type="foritem">
+<kw name="Get" library="Redfish">
+<doc>Perform a GET request</doc>
+<arguments>
+<arg>${session}</arg>
+<arg>valid_status_codes=[200,404]</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20221117 03:54:08.023" level="INFO">Attempt 1 of /redfish/v1/SessionService/Sessions/2unZEYy84F</msg>
+<msg timestamp="20221117 03:54:08.038" level="INFO">Response Time to /redfish/v1/SessionService/Sessions/2unZEYy84F: 0.014225783292204142 seconds.</msg>
+<msg timestamp="20221117 03:54:08.038" level="INFO">${resp} = 200
+Strict-Transport-Security max-age=31536000; includeSubdomains; preload
+X-Frame-Options DENY
+Pragma no-cache
+Cache-Control no-Store,no-Cache
+X-XSS-Protection 1; mode=block
+X-Content-Type-Options no...</msg>
+<status status="PASS" starttime="20221117 03:54:08.008" endtime="20221117 03:54:08.038"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${resp.dict["Oem"]["OpenBMC"]["ClientID"]}' != '${EMPTY}'</arg>
+<arg>Append To List</arg>
+<arg>${client_id_sessions}</arg>
+<arg>${session}</arg>
+</arguments>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${client_id_sessions}</arg>
+<arg>${session}</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:54:08.040" endtime="20221117 03:54:08.041"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:08.039" endtime="20221117 03:54:08.041"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:08.007" endtime="20221117 03:54:08.041"></status>
+</kw>
+<kw name="${session} = /redfish/v1/SessionService/Sessions/hrUctb73fg" type="foritem">
+<kw name="Get" library="Redfish">
+<doc>Perform a GET request</doc>
+<arguments>
+<arg>${session}</arg>
+<arg>valid_status_codes=[200,404]</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20221117 03:54:08.056" level="INFO">Attempt 1 of /redfish/v1/SessionService/Sessions/hrUctb73fg</msg>
+<msg timestamp="20221117 03:54:08.065" level="INFO">Response Time to /redfish/v1/SessionService/Sessions/hrUctb73fg: 0.009029048960655928 seconds.</msg>
+<msg timestamp="20221117 03:54:08.066" level="INFO">${resp} = 200
+Strict-Transport-Security max-age=31536000; includeSubdomains; preload
+X-Frame-Options DENY
+Pragma no-cache
+Cache-Control no-Store,no-Cache
+X-XSS-Protection 1; mode=block
+X-Content-Type-Options no...</msg>
+<status status="PASS" starttime="20221117 03:54:08.041" endtime="20221117 03:54:08.066"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${resp.dict["Oem"]["OpenBMC"]["ClientID"]}' != '${EMPTY}'</arg>
+<arg>Append To List</arg>
+<arg>${client_id_sessions}</arg>
+<arg>${session}</arg>
+</arguments>
+<kw name="Append To List" library="Collections">
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<arguments>
+<arg>${client_id_sessions}</arg>
+<arg>${session}</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:54:08.067" endtime="20221117 03:54:08.068"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:08.066" endtime="20221117 03:54:08.068"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:08.041" endtime="20221117 03:54:08.068"></status>
+</kw>
+<kw name="${session} = /redfish/v1/SessionService/Sessions/0LzfyFxk6K" type="foritem">
+<kw name="Get" library="Redfish">
+<doc>Perform a GET request</doc>
+<arguments>
+<arg>${session}</arg>
+<arg>valid_status_codes=[200,404]</arg>
+</arguments>
+<assign>
+<var>${resp}</var>
+</assign>
+<msg timestamp="20221117 03:54:08.082" level="INFO">Attempt 1 of /redfish/v1/SessionService/Sessions/0LzfyFxk6K</msg>
+<msg timestamp="20221117 03:54:08.096" level="INFO">Response Time to /redfish/v1/SessionService/Sessions/0LzfyFxk6K: 0.013429285027086735 seconds.</msg>
+<msg timestamp="20221117 03:54:08.096" level="INFO">${resp} = 200
+Strict-Transport-Security max-age=31536000; includeSubdomains; preload
+X-Frame-Options DENY
+Pragma no-cache
+Cache-Control no-Store,no-Cache
+X-XSS-Protection 1; mode=block
+X-Content-Type-Options no...</msg>
+<status status="PASS" starttime="20221117 03:54:08.069" endtime="20221117 03:54:08.096"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${resp.dict["Oem"]["OpenBMC"]["ClientID"]}' != '${EMPTY}'</arg>
+<arg>Append To List</arg>
+<arg>${client_id_sessions}</arg>
+<arg>${session}</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:54:08.097" endtime="20221117 03:54:08.097"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:08.068" endtime="20221117 03:54:08.097"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:07.931" endtime="20221117 03:54:08.097"></status>
+</kw>
+<msg timestamp="20221117 03:54:08.098" level="INFO">${client_id_list} = ['/redfish/v1/SessionService/Sessions/2unZEYy84F', '/redfish/v1/SessionService/Sessions/hrUctb73fg']</msg>
+<status status="PASS" starttime="20221117 03:54:07.930" endtime="20221117 03:54:08.098"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Client sessions skip list: ${client_id_list}</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:54:08.098" endtime="20221117 03:54:08.099"></status>
+</kw>
+<kw name="${client_session} IN [ @{client_id_list} ]" type="for">
+<kw name="${client_session} = /redfish/v1/SessionService/Sessions/2unZEYy84F" type="foritem">
+<kw name="Remove Values From List" library="Collections">
+<doc>Removes all occurrences of given ``values`` from ``list``.</doc>
+<arguments>
+<arg>${resp_list}</arg>
+<arg>${client_session}</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:54:08.100" endtime="20221117 03:54:08.100"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:08.099" endtime="20221117 03:54:08.100"></status>
+</kw>
+<kw name="${client_session} = /redfish/v1/SessionService/Sessions/hrUctb73fg" type="foritem">
+<kw name="Remove Values From List" library="Collections">
+<doc>Removes all occurrences of given ``values`` from ``list``.</doc>
+<arguments>
+<arg>${resp_list}</arg>
+<arg>${client_session}</arg>
+</arguments>
+<status status="PASS" starttime="20221117 03:54:08.101" endtime="20221117 03:54:08.101"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:08.100" endtime="20221117 03:54:08.101"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:08.099" endtime="20221117 03:54:08.101"></status>
+</kw>
+<kw name="${session} IN [ @{resp_list} ]" type="for">
+<kw name="${session} = /redfish/v1/SessionService/Sessions/TBNDWTMOXi" type="foritem">
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<arguments>
+<arg>Redfish.Delete</arg>
+<arg>${session}</arg>
+</arguments>
+<kw name="Delete" library="Redfish">
+<doc>Perform a DELETE request</doc>
+<arguments>
+<arg>${session}</arg>
+</arguments>
+<msg timestamp="20221117 03:54:08.118" level="INFO">Attempt 1 of /redfish/v1/SessionService/Sessions/TBNDWTMOXi</msg>
+<msg timestamp="20221117 03:54:08.221" level="INFO">Response Time to /redfish/v1/SessionService/Sessions/TBNDWTMOXi: 0.10278148390352726 seconds.</msg>
+<status status="PASS" starttime="20221117 03:54:08.103" endtime="20221117 03:54:08.222"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:08.102" endtime="20221117 03:54:08.222"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:08.102" endtime="20221117 03:54:08.222"></status>
+</kw>
+<kw name="${session} = /redfish/v1/SessionService/Sessions/rXq3J2jUbM" type="foritem">
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<arguments>
+<arg>Redfish.Delete</arg>
+<arg>${session}</arg>
+</arguments>
+<kw name="Delete" library="Redfish">
+<doc>Perform a DELETE request</doc>
+<arguments>
+<arg>${session}</arg>
+</arguments>
+<msg timestamp="20221117 03:54:08.243" level="INFO">Attempt 1 of /redfish/v1/SessionService/Sessions/rXq3J2jUbM</msg>
+<msg timestamp="20221117 03:54:08.280" level="INFO">Response Time to /redfish/v1/SessionService/Sessions/rXq3J2jUbM: 0.037168287206441164 seconds.</msg>
+<status status="PASS" starttime="20221117 03:54:08.224" endtime="20221117 03:54:08.281"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:08.223" endtime="20221117 03:54:08.281"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:08.222" endtime="20221117 03:54:08.281"></status>
+</kw>
+<kw name="${session} = /redfish/v1/SessionService/Sessions/0LzfyFxk6K" type="foritem">
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<arguments>
+<arg>Redfish.Delete</arg>
+<arg>${session}</arg>
+</arguments>
+<kw name="Delete" library="Redfish">
+<doc>Perform a DELETE request</doc>
+<arguments>
+<arg>${session}</arg>
+</arguments>
+<msg timestamp="20221117 03:54:08.301" level="INFO">Attempt 1 of /redfish/v1/SessionService/Sessions/0LzfyFxk6K</msg>
+<msg timestamp="20221117 03:54:08.481" level="INFO">Response Time to /redfish/v1/SessionService/Sessions/0LzfyFxk6K: 0.17935627838596702 seconds.</msg>
+<status status="PASS" starttime="20221117 03:54:08.283" endtime="20221117 03:54:08.481"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:08.282" endtime="20221117 03:54:08.481"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:08.281" endtime="20221117 03:54:08.481"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:08.101" endtime="20221117 03:54:08.481"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:07.794" endtime="20221117 03:54:08.482"></status>
+</kw>
+<status status="PASS" starttime="20221117 03:54:07.793" endtime="20221117 03:54:08.482"></status>
+</kw>
+<status status="FAIL" starttime="20221117 03:53:34.614" endtime="20221117 03:54:08.482">ValueError: The HTTP status code was not valid:
+status:                                           401
+valid_status_codes:
+  [0]:                                            200
+</status>
+</kw>
+<doc>Test Redfish LDAP user configuration.</doc>
+<status status="FAIL" starttime="20221117 03:52:42.206" endtime="20221117 03:54:08.483">Suite teardown failed:
+ValueError: The HTTP status code was not valid:
+status:                                           401
+valid_status_codes:
+  [0]:                                            200
+</status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1">Critical Tests</stat>
+<stat pass="0" fail="1">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1">LDAP_Test</stat>
+<stat pass="0" fail="1">Verify_LDAP_Service_Disable</stat>
+</tag>
+<suite>
+<stat pass="0" fail="1" id="s1" name="Test Ldap Configuration">Test Ldap Configuration</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
