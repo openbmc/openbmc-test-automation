@@ -32,6 +32,7 @@ ${xpath_delete_dns_server}               //*[@title="Delete DNS address"]
 
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
+${test_ipv4_addr_1}                      10.7.7.8
 ${test_subnet_mask}                      255.255.0.0
 ${alpha_netmask}                         ff.ff.ff.ff
 ${out_of_range_netmask}                  255.256.255.0
@@ -160,8 +161,15 @@ Configure And Verify Static IP Address
     [Documentation]  Login to GUI Network page, configure static ip address and verify.
     [Tags]  Configure_And_Verify_Static_IP_Address
 
-    ${default_gateway}=  Get BMC Default Gateway
-    Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${defaut_gateway}  Success
+    Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success
+
+
+Configure And Verify Multiple Static IP Address
+    [Documentation]  Login to GUI Network page, configure multiple static ip address and verify.
+    [Tags]  Configure_And_Verify_Multiple_Static_IP_Address
+
+    Add Static IP Address And Verify  ${test_ipv4_addr}    ${test_subnet_mask}  ${default_gateway}  Success
+    Add Static IP Address And Verify  ${test_ipv4_addr_1}  ${test_subnet_mask}  ${default_gateway}  Success
 
 
 *** Keywords ***
@@ -173,6 +181,8 @@ Suite Setup Execution
     Click Element  ${xpath_settings_menu}
     Click Element  ${xpath_network_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network
+    ${default_gateway}=  Get BMC Default Gateway
+    Set Suite Variable  ${default_gateway}
 
 
 Add DNS Servers And Verify
