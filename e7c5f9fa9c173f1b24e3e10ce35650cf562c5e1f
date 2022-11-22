@@ -63,6 +63,23 @@
       },
       "revId": "e7c5f9fa9c173f1b24e3e10ce35650cf562c5e1f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe4c7800_44354d37",
+        "filename": "redfish/task_service/test_tasks.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-11-22T16:06:03Z",
+      "side": 1,
+      "message": "no ewline at end of file.",
+      "revId": "e7c5f9fa9c173f1b24e3e10ce35650cf562c5e1f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
