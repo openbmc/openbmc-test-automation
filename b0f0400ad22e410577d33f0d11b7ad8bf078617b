@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9abd17df_eec07a9c",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-11-23T08:10:42Z",
+      "side": 1,
+      "message": "Here am just checking the state of settings. I mean this keyword will verify the state of SSH/IPMI which we have already set.",
+      "parentUuid": "bd9d4e44_a0512bad",
+      "range": {
+        "startLine": 237,
+        "startChar": 0,
+        "endLine": 237,
+        "endChar": 19
+      },
+      "revId": "b0f0400ad22e410577d33f0d11b7ad8bf078617b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "25af2418_1969faa3",
         "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-22T12:37:37Z",
       "side": 1,
       "message": "SSH policy",
+      "range": {
+        "startLine": 248,
+        "startChar": 13,
+        "endLine": 248,
+        "endChar": 23
+      },
+      "revId": "b0f0400ad22e410577d33f0d11b7ad8bf078617b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "439b3414_1fa72d7c",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-11-23T08:10:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25af2418_1969faa3",
       "range": {
         "startLine": 248,
         "startChar": 13,
@@ -64,6 +112,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1930b95d_e1c52454",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-11-23T08:10:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00b9da80_4153e0f6",
+      "revId": "b0f0400ad22e410577d33f0d11b7ad8bf078617b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c50ba98_2b277fae",
@@ -77,6 +143,30 @@
       "writtenOn": "2022-11-22T12:37:37Z",
       "side": 1,
       "message": "should the msg be -- IPMI policy state are not matching. ??",
+      "range": {
+        "startLine": 255,
+        "startChar": 13,
+        "endLine": 255,
+        "endChar": 58
+      },
+      "revId": "b0f0400ad22e410577d33f0d11b7ad8bf078617b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa19b676_67a424e7",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-11-23T08:10:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c50ba98_2b277fae",
       "range": {
         "startLine": 255,
         "startChar": 13,
