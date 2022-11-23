@@ -22,6 +22,30 @@
       },
       "revId": "5acdb9f9d008d2f0d952b66116e17f7829f859c4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5ab21e0_4ec469bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2022-11-23T09:00:28Z",
+      "side": 1,
+      "message": "now it is not required here. just because of that test failing . so removed",
+      "parentUuid": "d406af8d_b95b889a",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 8
+      },
+      "revId": "5acdb9f9d008d2f0d952b66116e17f7829f859c4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
