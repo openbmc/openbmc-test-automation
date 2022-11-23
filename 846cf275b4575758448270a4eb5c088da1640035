@@ -106,6 +106,24 @@
       "parentUuid": "7f0d9515_b111ba43",
       "revId": "846cf275b4575758448270a4eb5c088da1640035",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93cb22b3_0a15d8ef",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-11-23T14:51:33Z",
+      "side": 1,
+      "message": "if 403 code is doing nothing and return, its a no op here.\nwhat you are testing here??",
+      "parentUuid": "f63fcd29_2615e087",
+      "revId": "846cf275b4575758448270a4eb5c088da1640035",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
