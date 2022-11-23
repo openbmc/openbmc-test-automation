@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "973cda69_93b1411f",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-11-23T14:41:59Z",
+      "side": 1,
+      "message": "use same put operation thats used above, remove save area code",
+      "range": {
+        "startLine": 274,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 51
+      },
+      "revId": "88a9578999b4784ab5fe2e1fb6814ca179ec9e64",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e0d1759_6e5beff6",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-11-23T14:41:59Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 385,
+        "startChar": 0,
+        "endLine": 416,
+        "endChar": 47
+      },
+      "revId": "88a9578999b4784ab5fe2e1fb6814ca179ec9e64",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
