@@ -1,0 +1,60 @@
+{
+    "model_1": [
+        "/xyz/openbmc_project/sensors/humidity/Relative_Humidity",
+        "/xyz/openbmc_project/sensors/pressure/Station_Pressure",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_0_Temp",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_1_Temp",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_2_Temp",
+        "/xyz/openbmc_project/sensors/temperature/NVMe_JBOF_Card_C10_Local_Temp",
+        "/xyz/openbmc_project/sensors/temperature/NVMe_JBOF_Card_C10_Temp",
+        "/xyz/openbmc_project/sensors/temperature/PCIE_0_Temp",
+        "/xyz/openbmc_project/sensors/temperature/PCIE_1_Temp",
+        "/xyz/openbmc_project/sensors/voltage/Battery_Voltage",
+        "/xyz/openbmc_project/sensors/altitude/Altitude",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_Virtual_Temp"
+        ],
+    "model_2": [
+        "/xyz/openbmc_project/sensors/humidity/Relative_Humidity",
+        "/xyz/openbmc_project/sensors/pressure/Station_Pressure",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_0_Temp",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_1_Temp",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_2_Temp",
+        "/xyz/openbmc_project/sensors/temperature/NVMe_JBOF_Card_C10_Local_Temp",
+        "/xyz/openbmc_project/sensors/temperature/NVMe_JBOF_Card_C10_Temp",
+        "/xyz/openbmc_project/sensors/temperature/NVMe_JBOF_Card_C11_Local_Temp",
+        "/xyz/openbmc_project/sensors/temperature/NVMe_JBOF_Card_C11_Temp",
+        "/xyz/openbmc_project/sensors/temperature/PCIE_0_Temp",
+        "/xyz/openbmc_project/sensors/temperature/PCIE_1_Temp",
+        "/xyz/openbmc_project/sensors/voltage/Battery_Voltage",
+        "/xyz/openbmc_project/sensors/altitude/Altitude",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_Virtual_Temp"
+        ],
+    "model_3": [
+        "/xyz/openbmc_project/sensors/humidity/Relative_Humidity",
+        "/xyz/openbmc_project/sensors/pressure/Station_Pressure",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_0_Temp",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_1_Temp",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_2_Temp",
+        "/xyz/openbmc_project/sensors/temperature/PCIE_0_Temp",
+        "/xyz/openbmc_project/sensors/temperature/PCIE_1_Temp",
+        "/xyz/openbmc_project/sensors/voltage/Battery_Voltage",
+        "/xyz/openbmc_project/sensors/altitude/Altitude",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_Virtual_Temp"
+        ],
+    "model_4": [
+        "/xyz/openbmc_project/sensors/humidity/Relative_Humidity",
+        "/xyz/openbmc_project/sensors/pressure/Station_Pressure",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_0_Temp",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_1_Temp",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_2_Temp",
+        "/xyz/openbmc_project/sensors/temperature/PCIe_Cable_Card_C10_Local_Temp",
+        "/xyz/openbmc_project/sensors/temperature/PCIe_Cable_Card_C10_Temp",
+        "/xyz/openbmc_project/sensors/temperature/PCIe_Cable_Card_C7_Local_Temp",
+        "/xyz/openbmc_project/sensors/temperature/PCIe_Cable_Card_C7_Temp",
+        "/xyz/openbmc_project/sensors/temperature/PCIE_0_Temp",
+        "/xyz/openbmc_project/sensors/temperature/PCIE_1_Temp",
+        "/xyz/openbmc_project/sensors/voltage/Battery_Voltage",
+        "/xyz/openbmc_project/sensors/altitude/Altitude",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_Virtual_Temp"
+        ]
+}
