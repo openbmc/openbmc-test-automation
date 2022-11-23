@@ -324,36 +324,13 @@ Verify Power Reading Using IPMI And Redfish
     # Power reading state is:                        deactivated
 
     ${ipmi_reading}=  Get IPMI Power Reading
+    ${redfish_power_reading}=  redfish_utils.Get Attribute
+    ...  /redfish/v1/Chassis/chassis/Sensors/total_power  Reading
 
-    ${power_uri_list}=  redfish_utils.Get Members URI  /redfish/v1/Chassis/  PowerControl
-    Log List  ${power_uri_list}
-
-    # Power entries could be seen across different redfish path, remove the URI
-    # where the attribute is non-existent.
-    # Example:
-    #     ['/redfish/v1/Chassis/chassis/Power',
-    #      '/redfish/v1/Chassis/motherboard/Power']
-    FOR  ${idx}  IN  @{power_uri_list}
-        ${power}=  redfish_utils.Get Attribute  ${idx}  PowerControl
-        Log Dictionary  ${power[0]}
-
-        # Ensure the path does have the attribute else set to EMPTY as default to skip.
-        ${value}=  Get Variable Value  ${power[0]['PowerConsumedWatts']}  ${EMPTY}
-        Run Keyword If  "${value}" == "${EMPTY}"
-        ...  Remove Values From List  ${power_uri_list}  ${idx}
-
-        # Check the next available element in the list.
-        Continue For Loop If  "${value}" == "${EMPTY}"
-
-        ${ipmi_redfish_power_diff}=
-        ...  Evaluate  abs(${${power[0]['PowerConsumedWatts']}} - ${ipmi_reading['instantaneous_power_reading']})
-        Should Be True  ${ipmi_redfish_power_diff} <= ${allowed_power_diff}
-        ...  msg=Power reading above allowed threshold ${allowed_power_diff}.
-    END
-
-    # Double check, the validation has at least one valid path.
-    Should Not Be Empty  ${power_uri_list}
-    ...  msg=Should contain at least one element in the list.
+    ${ipmi_redfish_power_diff}=
+    ...  Evaluate  abs(${redfish_power_reading} - ${ipmi_reading['instantaneous_power_reading']})
+    Should Be True  ${ipmi_redfish_power_diff} <= ${allowed_power_diff}
+    ...  msg=Power reading above allowed threshold ${allowed_power_diff}.
 
 
 Verify Power Reading Via Raw Command
