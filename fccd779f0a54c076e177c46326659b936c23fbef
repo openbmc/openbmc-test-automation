@@ -46,6 +46,30 @@
       },
       "revId": "fccd779f0a54c076e177c46326659b936c23fbef",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dd0f6ac_befc146b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-11-23T10:54:06Z",
+      "side": 1,
+      "message": "I noticed 28 lines being removed. I do not understand why being removed. You can add a sentence on that.",
+      "parentUuid": "9ffc5307_8be7b397",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 21
+      },
+      "revId": "fccd779f0a54c076e177c46326659b936c23fbef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
