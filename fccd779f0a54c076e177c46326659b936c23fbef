@@ -22,6 +22,30 @@
       },
       "revId": "fccd779f0a54c076e177c46326659b936c23fbef",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ffc5307_8be7b397",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-23T10:12:07Z",
+      "side": 1,
+      "message": "Its a pretty straight forward fix. Dont want to add unnecessary message for this small fix. If you have some document text from your side, let me know.",
+      "parentUuid": "03439911_724fba53",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 21
+      },
+      "revId": "fccd779f0a54c076e177c46326659b936c23fbef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
