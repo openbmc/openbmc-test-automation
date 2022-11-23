@@ -1,0 +1,280 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55e65b69_a08720ed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-23T11:44:48Z",
+      "side": 1,
+      "message": "Use latest commit message format",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "94f2ac53d8454d68a82450bb7244b8c96e4f92a2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89ac07dc_4a6ebe66",
+        "filename": "redfish/managers/itc_test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-23T11:44:48Z",
+      "side": 1,
+      "message": "Let\u0027s not use ITC in the test suite name because ITC is internal to IBM.\n\nredfish/managers/itc_test_bmc_dumps.robot -\u003e redfish/managers/test_bmc_dumps.robot",
+      "range": {
+        "startLine": 3,
+        "startChar": 20,
+        "endLine": 3,
+        "endChar": 59
+      },
+      "revId": "94f2ac53d8454d68a82450bb7244b8c96e4f92a2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3c6febc_8c7dcc41",
+        "filename": "redfish/managers/itc_test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-23T11:44:48Z",
+      "side": 1,
+      "message": "Add the Redfish logout also.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 48
+      },
+      "revId": "94f2ac53d8454d68a82450bb7244b8c96e4f92a2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ab952b0_4b52aff3",
+        "filename": "redfish/managers/itc_test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-23T11:44:48Z",
+      "side": 1,
+      "message": "end all comments with period \".\"",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 38
+      },
+      "revId": "94f2ac53d8454d68a82450bb7244b8c96e4f92a2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2336da39_dc7436b1",
+        "filename": "redfish/managers/itc_test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-23T11:44:48Z",
+      "side": 1,
+      "message": "Remove white spaces",
+      "range": {
+        "startLine": 17,
+        "startChar": 42,
+        "endLine": 17,
+        "endChar": 43
+      },
+      "revId": "94f2ac53d8454d68a82450bb7244b8c96e4f92a2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ace3176_aab6f0c1",
+        "filename": "redfish/managers/itc_test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-23T11:44:48Z",
+      "side": 1,
+      "message": "Verify Continuous BMC Dump Generation",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 66
+      },
+      "revId": "94f2ac53d8454d68a82450bb7244b8c96e4f92a2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ef471c0_57788b59",
+        "filename": "redfish/managers/itc_test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-23T11:44:48Z",
+      "side": 1,
+      "message": "Verify BMC dump generation continuously for long period of time.",
+      "range": {
+        "startLine": 27,
+        "startChar": 21,
+        "endLine": 27,
+        "endChar": 87
+      },
+      "revId": "94f2ac53d8454d68a82450bb7244b8c96e4f92a2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d7df9eb_1fbb7188",
+        "filename": "redfish/managers/itc_test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-23T11:44:48Z",
+      "side": 1,
+      "message": "Move this in test setup",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 32
+      },
+      "revId": "94f2ac53d8454d68a82450bb7244b8c96e4f92a2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "053a6a68_a5b7267a",
+        "filename": "redfish/managers/itc_test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-23T11:44:48Z",
+      "side": 1,
+      "message": "# Create user initiated BMC dump until there is minimum \n      ...  disk space required for BMC dump.\n      Create User Initiated BMC Dump Via Redfish",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 63
+      },
+      "revId": "94f2ac53d8454d68a82450bb7244b8c96e4f92a2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a4693b0_725e47a3",
+        "filename": "redfish/managers/itc_test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-23T11:44:48Z",
+      "side": 1,
+      "message": "current_dump_space",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 18
+      },
+      "revId": "94f2ac53d8454d68a82450bb7244b8c96e4f92a2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f56665e6_94c7aa9e",
+        "filename": "redfish/managers/itc_test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-23T11:44:48Z",
+      "side": 1,
+      "message": "Do this as part of test case teardown",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 32
+      },
+      "revId": "94f2ac53d8454d68a82450bb7244b8c96e4f92a2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53956f7a_e773ec83",
+        "filename": "redfish/managers/itc_test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-23T11:44:48Z",
+      "side": 1,
+      "message": "This keyword is already there in redfish/managers/test_bmc_dumps.robot. Please use it to common library if you want to use it.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 29
+      },
+      "revId": "94f2ac53d8454d68a82450bb7244b8c96e4f92a2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
