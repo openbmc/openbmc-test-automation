@@ -1,0 +1,12 @@
+{
+    "model_1": [
+        "/xyz/openbmc_project/sensors/humidity/Relative_Humidity",
+        "/xyz/openbmc_project/sensors/pressure/Station_Pressure",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_0_Temp",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_1_Temp",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_2_Temp",
+        "/xyz/openbmc_project/sensors/voltage/Battery_Voltage",
+        "/xyz/openbmc_project/sensors/altitude/Altitude",
+        "/xyz/openbmc_project/sensors/temperature/Ambient_Virtual_Temp"
+        ]
+}

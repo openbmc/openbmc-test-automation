@@ -308,3 +308,96 @@ Trigger OCC Reset And Wait For OCC Active State
 
     Log To Console  OCC wait check for active state.
     Wait Until Keyword Succeeds  ${OCC_WAIT_TIMEOUT}  20 sec   Match OCC And CPU State Count
+
+
+Get Sensors Dbus Tree List
+    [Documentation]  Get the list dbus path of the given sensor object and
+    ...              return the populatedlist.
+
+    ${dbus_obj_var}=  Set Variable
+    ...  xyz.openbmc_project.HwmonTempSensor
+    ...  xyz.openbmc_project.ADCSensor
+    ...  xyz.openbmc_project.VirtualSensor
+
+    # Filter only the dbus paths service by the sensor obj.
+    ${sensors_dbus_tree_dict}=  Create Dictionary
+    FOR  ${dbus_obj}  IN  @{dbus_obj_var}
+        ${cmd}=  Catenate  busctl tree ${dbus_obj} --list | grep /sensors/
+        ${cmd_output}  ${stderr}  ${rc} =  BMC Execute Command  ${cmd}
+        ...  print_out=0  print_err=0  ignore_err=1
+        Set To Dictionary  ${sensors_dbus_tree_dict}  ${dbus_obj}  ${cmd_output.splitlines()}
+    END
+
+    Rprint Vars  sensors_dbus_tree_dict
+    # Key Pair: 'sensor obj":[list of obj URI]
+    # Example:
+    # sensors_dbus_tree_dict:
+    # [xyz.openbmc_project.HwmonTempSensor]:
+    #    [0]:     /xyz/openbmc_project/sensors/temperature/Ambient_0_Temp
+    #    [1]:     /xyz/openbmc_project/sensors/temperature/PCIE_0_Temp
+    # [xyz.openbmc_project.ADCSensor]:
+    #    [0]:     /xyz/openbmc_project/sensors/voltage/Battery_Voltage
+    # [xyz.openbmc_project.VirtualSensor]:
+    #    [0]:     /xyz/openbmc_project/sensors/temperature/Ambient_Virtual_Temp
+
+    [Return]  ${sensors_dbus_tree_dict}
+
+
+Get Populated Sensors Dbus List
+    [Documentation]  Perform GET operation on the attribute list and confirm it is
+    ...              populated and does not error out during GET request..
+
+    ${sensor_dict}=  Get Sensors Dbus Tree List
+
+    # Loop through the dictionary and iterate item entries.
+    ${valid_dbus_list}=  Create List
+    FOR  ${key}  IN  @{sensor_dict.keys()}
+        FOR  ${val}  IN  @{sensor_dict["${key}"]}
+           ${cmd}=  Catenate
+           ...  busctl get-property ${key} ${val} xyz.openbmc_project.Sensor.Value Value
+           ${cmd_output}  ${stderr}  ${rc} =  BMC Execute Command  ${cmd}
+           ...  print_out=0  print_err=0  ignore_err=1
+           # Skip failed to get property command on Dbus object.
+           Run Keyword If  ${rc} == 0   Append To List  ${valid_dbus_list}  ${val}
+        END
+    END
+
+    [Return]  ${valid_dbus_list}
+
+
+Verify Runtime Sensors Dbus List
+    [Documentation]  Load pre-defined sensor JSON Dbus data and validate against
+    ...              runtime sensor list generated.
+
+    # Default path data/sensor_dbus.json else takes
+    # user CLI input -v SENSOR_DBUS_JSON_FILE_PATH:<path>
+    ${SENSOR_DBUS_JSON_FILE_PATH}=
+    ...  Get Variable Value  ${SENSOR_DBUS_JSON_FILE_PATH}   data/sensor_dbus.json
+
+    ${json_data}=  OperatingSystem.Get File  ${SENSOR_DBUS_JSON_FILE_PATH}
+    ${json_sensor_data}=  Evaluate  json.loads('''${json_data}''')  json
+
+    ${runtime_sensor_list}=  Get Populated Sensors Dbus List
+
+    ${system_model}=  Get BMC System Model
+    Rprint Vars  system_model
+    Rprint Vars  runtime_sensor_list
+
+    ${status}=  Run Keyword And Return Status
+    ...  Dictionary Should Contain Value   ${json_sensor_data}  ${runtime_sensor_list}
+
+    Run Keyword If  ${status} == ${False}  Log And Fail  ${json_sensor_data}
+
+    Log To Console  Runtime Dbus sensor list matches.
+
+
+Log And Fail
+    [Documentation]  Log detailed failure log on the console.
+    [Arguments]  ${json_sensor_data}
+
+    # Description of Argument(s):
+    # json_sensor_data   Sensor JSON data from data/sensor_dbus.json.
+
+    Rprint Vars  json_sensor_data
+    Fail  Runtime generated Dbus sensors does not match
+
