@@ -71,7 +71,7 @@ Select Single Error Log And Delete
 
     Create Error Logs  ${2}
     ${number_of_events_before}=  Get Number Of Event Logs
-    Click Element At Coordinates  ${xpath_delete_first_row}  0  0
+    Click Element  ${xpath_delete_first_row}
     Wait Until Page Contains Element  ${xpath_confirm_delete}
     Click Button  ${xpath_confirm_delete}
     ${number_of_events_after}=  Get Number Of Event Logs
