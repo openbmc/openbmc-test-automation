@@ -16,6 +16,23 @@
       "message": "Good information on change through commit message !",
       "revId": "6df70557523cb419bb71cc9323df4e5054ff310c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad426a19_6adb75a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-11-23T14:14:18Z",
+      "side": 1,
+      "message": "Test Power Reading Via IPMI With Host Booted :: Test power reading... | PASS |\n------------------------------------------------------------------------------\nTest Ipmi Sensor :: Validate IPMI sensor IDs using Redfish.           | PASS |\n1 test, 1 passed, 0 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\nlooks clean",
+      "revId": "6df70557523cb419bb71cc9323df4e5054ff310c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
