@@ -197,7 +197,7 @@ Verify View More Button Under Firmware Information Section
 
 Verify View More Button Under Network Information Section
     [Documentation]  Verify view more button under network information section in overview page.
-    [Tags]  Verify_View_More_Button_Under_Network_information_Section
+    [Tags]  Verify_View_More_Button_Under_Network_Information_Section
 
     Wait Until Page Contains Element  ${xpath_network_information_view_more_button}  timeout=30
     Click Element  ${xpath_network_information_view_more_button}
@@ -206,7 +206,7 @@ Verify View More Button Under Network Information Section
 
 Verify View More Button Under Power Information Section
     [Documentation]  Verify view more button under power information section in overview page.
-    [Tags]  Verify_View_More_Button_Under_Power_information_Section
+    [Tags]  Verify_View_More_Button_Under_Power_Information_Section
 
     Wait Until Page Contains Element  ${xpath_power_information_view_more_button}  timeout=30
     Click Element  ${xpath_power_information_view_more_button}
