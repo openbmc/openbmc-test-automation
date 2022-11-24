@@ -178,8 +178,6 @@ def fetch_all_src():
             pel_id_list = pel_data.keys()
             for pel_id in pel_id_list:
                 src_id.append(pel_data[pel_id]["SRC"])
-        else:
-            raise peltool_exception("No PEL entry found ..")
     except Exception as e:
         raise peltool_exception("Failed to fetch all SRCs : " + str(e))
     return src_id
