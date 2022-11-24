@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5792f036_02cbf7d5",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-11-24T14:41:35Z",
+      "side": 1,
+      "message": "IP",
+      "range": {
+        "startLine": 168,
+        "startChar": 74,
+        "endLine": 168,
+        "endChar": 77
+      },
+      "revId": "cf39175b5ae15c3f061e69a483605dce3fb1ace1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb4aea85_2461bbc0",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 1
@@ -38,6 +61,30 @@
       "side": 1,
       "message": "Wanted to match with the next line and make it look symmetric.",
       "parentUuid": "cb4aea85_2461bbc0",
+      "range": {
+        "startLine": 171,
+        "startChar": 55,
+        "endLine": 171,
+        "endChar": 59
+      },
+      "revId": "cf39175b5ae15c3f061e69a483605dce3fb1ace1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63760534_48e7ea2b",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-11-24T14:41:35Z",
+      "side": 1,
+      "message": "follow coding guidelines",
+      "parentUuid": "da206dba_ee7c9a01",
       "range": {
         "startLine": 171,
         "startChar": 55,
