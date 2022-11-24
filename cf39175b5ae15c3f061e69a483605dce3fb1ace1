@@ -22,6 +22,30 @@
       },
       "revId": "cf39175b5ae15c3f061e69a483605dce3fb1ace1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da206dba_ee7c9a01",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-11-24T14:02:59Z",
+      "side": 1,
+      "message": "Wanted to match with the next line and make it look symmetric.",
+      "parentUuid": "cb4aea85_2461bbc0",
+      "range": {
+        "startLine": 171,
+        "startChar": 55,
+        "endLine": 171,
+        "endChar": 59
+      },
+      "revId": "cf39175b5ae15c3f061e69a483605dce3fb1ace1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
