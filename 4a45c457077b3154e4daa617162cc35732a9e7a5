@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8392f1a_ca5fa6b4",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-25T14:13:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df88ae7a_f9cc5e1b",
+      "range": {
+        "startLine": 181,
+        "startChar": 8,
+        "endLine": 182,
+        "endChar": 26
+      },
+      "revId": "4a45c457077b3154e4daa617162cc35732a9e7a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c39b63e6_6789afee",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-25T13:11:09Z",
       "side": 1,
       "message": "Just curious to know the use case for this. Usually we know which SRC to expect. Any other SRC that crops up is unexpected right? Isnt it better to pass in the expected list so that all others are unexpected?",
+      "range": {
+        "startLine": 187,
+        "startChar": 4,
+        "endLine": 187,
+        "endChar": 53
+      },
+      "revId": "4a45c457077b3154e4daa617162cc35732a9e7a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2820ce71_28ee6843",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-25T14:13:32Z",
+      "side": 1,
+      "message": "currently we dont have an API that separates out known SRC and unknown SRC..\n\nIt is a simple SRC validation, If we are aware list of the SRC Ids for which we generally raise defect when created after the test run.\n\nIt is CCI test req. where the tester is aware of list of SRC Ids that should not be present after the test.",
+      "parentUuid": "c39b63e6_6789afee",
       "range": {
         "startLine": 187,
         "startChar": 4,
@@ -166,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7e2c63f_cb78061e",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-25T14:13:32Z",
+      "side": 1,
+      "message": "hmm not that useful.. can be removed.",
+      "parentUuid": "72fe42c1_8ddcfe17",
+      "range": {
+        "startLine": 206,
+        "startChar": 12,
+        "endLine": 206,
+        "endChar": 90
+      },
+      "revId": "4a45c457077b3154e4daa617162cc35732a9e7a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "01c52ce0_058842f2",
         "filename": "lib/pel_utils.py",
         "patchSetId": 2
@@ -177,6 +249,30 @@
       "writtenOn": "2022-11-25T13:11:09Z",
       "side": 1,
       "message": "If there is an unexpected SRC then an exception is raised. Why is it required to return this when its value will always be 0? Isn\u0027t it enough to move on when there is no exception for the caller?",
+      "range": {
+        "startLine": 210,
+        "startChar": 4,
+        "endLine": 210,
+        "endChar": 28
+      },
+      "revId": "4a45c457077b3154e4daa617162cc35732a9e7a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f47566b8_205e5943",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-25T14:13:32Z",
+      "side": 1,
+      "message": "just in case if some one wants to look what is returned...",
+      "parentUuid": "01c52ce0_058842f2",
       "range": {
         "startLine": 210,
         "startChar": 4,
