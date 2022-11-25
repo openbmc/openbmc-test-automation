@@ -194,6 +194,20 @@ Verify Maximum BMC Dump Creation
     ...  body=${payload}  valid_status_codes=[${HTTP_INTERNAL_SERVER_ERROR}]
 
 
+Verify BMC Core Dump When Host Powered Off
+    [Documentation]  Verify BMC core dump after application crash at host powered off state.
+    [Tags]  Verify_BMC_Core_Dump_When_Host_Powered_Off
+
+    Redfish Power Off  stack_mode=skip
+
+    # Ensure all dumps are cleaned out.
+    Redfish Delete All BMC Dumps
+    Trigger Core Dump
+
+    # Verify that BMC dump is available.
+    Wait Until Keyword Succeeds  2 min  10 sec  Is BMC Dump Available
+
+
 *** Keywords ***
 
 Get BMC Dump Entries
@@ -208,6 +222,16 @@ Get BMC Dump Entries
     END
 
     [Return]  ${dump_ids}
+
+
+Is BMC Dump Available
+    [Documentation]  Verify if BMC dump is available.
+
+    ${dump_entries}=  Get BMC Dump Entries
+
+    # Verifying that there is only one dump
+    ${length}=  Get length  ${dump_entries}
+    Should Be True  0 < ${length}
 
 
 Get Disk Usage For Dumps
