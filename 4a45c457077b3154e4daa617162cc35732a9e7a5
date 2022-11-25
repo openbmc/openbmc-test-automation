@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ff06487_d83d4a64",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-11-25T12:45:04Z",
+      "side": 1,
+      "message": "expected and unexpected src terminologies is fine but dont use unknown SRC wording there in the code.  use instead\n\nunexpected_src_count",
+      "range": {
+        "startLine": 197,
+        "startChar": 8,
+        "endLine": 197,
+        "endChar": 26
+      },
+      "revId": "4a45c457077b3154e4daa617162cc35732a9e7a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
