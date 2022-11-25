@@ -22,6 +22,29 @@ ${MAX_DUMP_COUNT}            ${20}
 
 *** Test Cases ***
 
+Verify Core Initiated dump with application crash through CLI
+    [Documentation]  Verify Core Initiated dump with application crash through CLI
+    [Tags]  Verify Core Initiated dump with application crash through CLI
+
+    Redfish Power Off  stack_mode=skip
+    # Ensure all dumps are cleaned out.
+    Redfish Delete All BMC Dumps
+
+    # Find the pid of the active ipmid and kill it.
+    ${cmd_buf}=  Catenate  kill -s SEGV $(ps | egrep ' ipmid$' |
+    ...  egrep -v grep | \ cut -c1-6)
+    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd_buf}
+    Should Be Equal As Integers  ${rc}  ${0}
+
+    Sleep  20s  reason=Wait for core BMC dump to complete
+    ${dump_entries}=  Get BMC Dump Entries
+
+    # Verify that only one dump exists which is latest created core dump.
+    ${length}=  Get length  ${dump_entries}
+    Should Be Equal As Integers  ${length}  ${1}
+    Length Should Be  ${dump_entries}  1
+
+
 Verify Error Response For Already Deleted Dump Id
     [Documentation]  Delete non existing BMC dump and expect an error.
     [Tags]  Verify_Error_Response_For_Already_Deleted_Dump_Id
