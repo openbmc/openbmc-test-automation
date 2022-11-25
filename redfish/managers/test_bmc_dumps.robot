@@ -22,6 +22,20 @@ ${MAX_DUMP_COUNT}            ${20}
 
 *** Test Cases ***
 
+Verify BMC Core Dump When Host Powered Off
+    [Documentation]  Verify BMC core dump after application crash. 
+    [Tags]  Verify_BMC_Core_Dump_When_Host_Powered_Off 
+
+    Redfish Power Off  stack_mode=skip
+
+    # Ensure all dumps are cleaned out.
+    Redfish Delete All BMC Dumps
+    Trigger Core Dump
+
+    # Verify that BMC dump is available
+    Wait Until Keyword Succeeds  2 min  10 sec  Is BMC Dump Available
+
+
 Verify Error Response For Already Deleted Dump Id
     [Documentation]  Delete non existing BMC dump and expect an error.
     [Tags]  Verify_Error_Response_For_Already_Deleted_Dump_Id
@@ -208,6 +222,16 @@ Get BMC Dump Entries
     END
 
     [Return]  ${dump_ids}
+
+
+Is BMC Dump Available
+    [Documentation]  Verify if BMC dump is available.
+
+    ${dump_entries}=  Get BMC Dump Entries
+
+    # Verifying that there is only one dump
+    ${length}=  Get length  ${dump_entries}
+    Should Be True  0 < ${length}
 
 
 Get Disk Usage For Dumps
