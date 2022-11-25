@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "423e90ce_5b914d20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-11-25T11:02:38Z",
+      "side": 1,
+      "message": "It\u0027s getting failed in suite setup. Please do provide the proof of execution.\n\nParent suite setup failed:\nElementNotInteractableException: Message: Element \u003ca class\u003d\"nav-link\" href\u003d\"#/settings/network\"\u003e could not be scrolled into view",
+      "revId": "34ad97a108a37c1a8f4f123d4d9cbc04c38719c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
