@@ -178,6 +178,33 @@ def fetch_all_src():
             pel_id_list = pel_data.keys()
             for pel_id in pel_id_list:
                 src_id.append(pel_data[pel_id]["SRC"])
+        print("SRC IDs: " + str(src_id))
     except Exception as e:
         raise peltool_exception("Failed to fetch all SRCs : " + str(e))
     return src_id
+
+
+def check_for_unexpected_src(unexpected_src_list=[]):
+    r"""
+    From the given unexpected SRC list, check if any unexpected SRC created
+    on the BMC. Returns 0 if no SRC found else throws exception.
+
+    Description of arguments:
+    unexpected_src_list       Give unexpected SRCs in the list format.
+                              e.g.: ["BBXXYYYY", "AAXXYYYY"].
+    """
+    try:
+        unexpected_src_count = 0
+        if not unexpected_src_list:
+            print("Unexpected SRC list is empty.")
+        src_data = fetch_all_src()
+        for src in unexpected_src_list:
+            if src in src_data:
+                print("Found an unexpected SRC : " + src)
+                unexpected_src_count = unexpected_src_count + 1
+        if (unexpected_src_count >= 1):
+            raise peltool_exception("Unexpected SRC found.")
+
+    except Exception as e:
+        raise peltool_exception("Failed to verify unexpected SRC list : " + str(e))
+    return unexpected_src_count
