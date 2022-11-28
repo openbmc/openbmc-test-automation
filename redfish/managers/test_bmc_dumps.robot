@@ -22,6 +22,29 @@ ${MAX_DUMP_COUNT}            ${20}
 
 *** Test Cases ***
 
+Verify Size For User Core Dump Is Less Than Max Allowed Value
+    [Documentation]  Verify that size for user core dump is less then max allowed value.
+    [Tags]  Verify_Size_For_User_Core_Dump_Is_Less_Than_Max_Allowed_Value
+
+    Redfish Power Off  stack_mode=skip
+    # Ensure all dumps are cleaned out.
+    Redfish Delete All BMC Dumps
+
+    # Find the pid of the active ipmid and kill it.
+    ${cmd_buf}=  Catenate  kill -s SEGV $(ps | egrep ' ipmid$' |
+    ...  egrep -v grep | \ cut -c1-6)
+    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd_buf}
+    Should Be Equal As Integers  ${rc}  ${0}
+
+    Sleep  20s  reason=Wait for core BMC dump to complete
+    ${dump_entries}=  Get BMC Dump Entries
+
+    ${resp}=  Redfish.Get Properties  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_entries[0]}
+
+    # Max size for dump is 20 MB = 20x1024x1024 Byte.
+    Should Be True  0 < ${resp["AdditionalDataSizeBytes"]} < 20971520
+
+
 Verify Error Response For Already Deleted Dump Id
     [Documentation]  Delete non existing BMC dump and expect an error.
     [Tags]  Verify_Error_Response_For_Already_Deleted_Dump_Id
