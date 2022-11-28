@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5fa65c7_18d4ac3a",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-11-28T06:35:23Z",
+      "side": 1,
+      "message": "Please use \"Wait\" keyword instead of sleep.",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 13
+      },
+      "revId": "442ac752edfde0d5a73e720b0dc66a56205b758e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
