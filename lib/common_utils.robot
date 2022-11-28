@@ -982,3 +982,12 @@ Is BMC Unpingable
     ${RC}  ${output}=  Run and return RC and Output  ping -c 4 ${OPENBMC_HOST}
     Log  RC: ${RC}\nOutput:\n${output}
     Should be equal  ${RC}  ${1}
+
+Kernel Panic BMC Reset Operation
+    [Documentation]  Create kernel panic to reset BMC.
+
+    ${kernel_panic_cmd_file}=  Set Variable  /bin/sh -c "echo c > /proc/sysrq-trigger"
+    ${status}=  Run Keyword And Return Status  BMC Execute Command  ${kernel_panic_cmd_file}  time_out=120
+
+    [Return]  ${status}
+
