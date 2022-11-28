@@ -208,3 +208,19 @@ def check_for_unexpected_src(unexpected_src_list=[]):
     except Exception as e:
         raise peltool_exception("Failed to verify unexpected SRC list : " + str(e))
     return unexpected_src_count
+
+
+def get_unexpected_srcs(expected_srcs=None):
+    r"""
+    Return list of SRCs found in BMC after removing expected SRCs.
+    If expected_srcs is None then all SRCs found in system are returned.
+
+    Description of arguments:
+    expected_srcs       List of expected SRCs. E.g. ["BBXXYYYY", "AAXXYYYY"].
+    """
+
+    srcs_found = fetch_all_src()
+    if not(expected_srcs):
+        expected_srcs = []
+    print(expected_srcs)
+    return list(set(srcs_found) - set(expected_srcs))
