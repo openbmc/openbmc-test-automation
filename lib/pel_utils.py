@@ -65,12 +65,17 @@ def peltool(option_string, parse_json=True, **bsu_options):
     return out_buf
 
 
-def get_pel_data_from_bmc():
+def get_pel_data_from_bmc(include_hidden_pels=False):
     r"""
     Returns PEL data from BMC else throws exception.
+
+    include_hidden_pels   True/False.
     """
     try:
-        pel_data = peltool(" -l")
+        pel_cmd = " -l"
+        if include_hidden_pels:
+            pel_cmd = pel_cmd + " -h"
+        pel_data = peltool(pel_cmd)
         if not pel_data:
             print("No PEL data present in BMC ...")
     except Exception as e:
@@ -78,20 +83,21 @@ def get_pel_data_from_bmc():
     return pel_data
 
 
-def fetch_all_pel_ids_for_src(src_id, severity):
+def fetch_all_pel_ids_for_src(src_id, severity, include_hidden_pels=False):
     r"""
     Fetch all PEL IDs for the input SRC ID based on the severity type
     in the list format.
 
     Description of arguments:
-    src_id      SRC ID (e.g. BC20E504).
-    severity    PEL severity (e.g. "Predictive Error"
-                                   "Recovered Error").
+    src_id                SRC ID (e.g. BC20E504).
+    severity              PEL severity (e.g. "Predictive Error"
+                                             "Recovered Error").
+    include_hidden_pels   True/False.
     """
 
     try:
         src_pel_ids = []
-        pel_data = get_pel_data_from_bmc()
+        pel_data = get_pel_data_from_bmc(include_hidden_pels)
         pel_id_list = pel_data.keys()
         for pel_id in pel_id_list:
             # Check if required SRC ID with severity is present
@@ -167,13 +173,15 @@ def verify_src_signature_and_threshold(pel_id, attn_type, signature_desc, th_lim
     return True
 
 
-def fetch_all_src():
+def fetch_all_src(include_hidden_pels=False):
     r"""
     Fetch all SRC IDs from peltool in the list format.
+
+    include_hidden_pels   True/False.
     """
     try:
         src_id = []
-        pel_data = get_pel_data_from_bmc()
+        pel_data = get_pel_data_from_bmc(include_hidden_pels)
         if pel_data:
             pel_id_list = pel_data.keys()
             for pel_id in pel_id_list:
@@ -184,20 +192,22 @@ def fetch_all_src():
     return src_id
 
 
-def check_for_unexpected_src(unexpected_src_list=[]):
+def check_for_unexpected_src(unexpected_src_list=[], include_hidden_pels=False):
     r"""
     From the given unexpected SRC list, check if any unexpected SRC created
     on the BMC. Returns 0 if no SRC found else throws exception.
 
-    Description of arguments:
+    hidden_srcsDescription of arguments:
     unexpected_src_list       Give unexpected SRCs in the list format.
                               e.g.: ["BBXXYYYY", "AAXXYYYY"].
+
+    include_hidden_pels       True/False.
     """
     try:
         unexpected_src_count = 0
         if not unexpected_src_list:
             print("Unexpected SRC list is empty.")
-        src_data = fetch_all_src()
+        src_data = fetch_all_src(include_hidden_pels)
         for src in unexpected_src_list:
             if src in src_data:
                 print("Found an unexpected SRC : " + src)
