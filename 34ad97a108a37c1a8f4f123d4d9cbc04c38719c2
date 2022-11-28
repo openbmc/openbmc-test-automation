@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f9c41db7_478cd30c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-11-28T06:25:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4013423e_a43d03c4",
+      "revId": "34ad97a108a37c1a8f4f123d4d9cbc04c38719c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "423e90ce_5b914d20",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -48,6 +66,30 @@
       "writtenOn": "2022-11-25T12:03:38Z",
       "side": 1,
       "message": "make this as a template\n\n[Template]        Add Static IP Address And Verify\n\n\n${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success\n${test_ipv4_addr_1}  ${test_subnet_mask}  ${default_gateway}  Success\n\nplease do the same for TC @160",
+      "range": {
+        "startLine": 171,
+        "startChar": 4,
+        "endLine": 171,
+        "endChar": 36
+      },
+      "revId": "34ad97a108a37c1a8f4f123d4d9cbc04c38719c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f2fb9fa_b9871553",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-11-28T06:25:38Z",
+      "side": 1,
+      "message": "using template will run it as separate test cases, but in this case I\u0027m adding multiple IPs one after the other.",
+      "parentUuid": "eb80c7ee_3887c07d",
       "range": {
         "startLine": 171,
         "startChar": 4,
