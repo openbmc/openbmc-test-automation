@@ -208,6 +208,25 @@ Verify BMC Core Dump When Host Powered Off
     Wait Until Keyword Succeeds  2 min  10 sec  Is BMC Dump Available
 
 
+Verify Core Dump Size
+    [Documentation]  Verify BMC core dump size is under 20 MB.
+    [Tags]  Verify_Core_Dump_Size
+
+    Redfish Power Off  stack_mode=skip
+
+    # Ensure all dumps are cleaned out.
+    Redfish Delete All BMC Dumps
+    Trigger Core Dump
+
+    # Verify that BMC dump is available.
+    Wait Until Keyword Succeeds  2 min  10 sec  Is BMC Dump Available
+    ${resp}=  Redfish.Get Properties
+    ...  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_entries[0]}
+
+    # Max size for dump is 20 MB = 20x1024x1024 Byte.
+    Should Be True  0 < ${resp["AdditionalDataSizeBytes"]} < 20971520
+
+
 *** Keywords ***
 
 Get BMC Dump Entries
