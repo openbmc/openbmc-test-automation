@@ -16,6 +16,40 @@
       "message": "Looks good.",
       "revId": "e2b6a34a46ae1804fc7c1e38d4c3184281699e81",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5aa2cb05_ada2f277",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-11-29T07:20:41Z",
+      "side": 1,
+      "message": "Add --\u003e Description of arguments:",
+      "revId": "e2b6a34a46ae1804fc7c1e38d4c3184281699e81",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b5a1d6c_ce3f7f52",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-11-29T07:20:41Z",
+      "side": 1,
+      "message": "You don\u0027t want informational PELs? the one with -f option",
+      "revId": "e2b6a34a46ae1804fc7c1e38d4c3184281699e81",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
