@@ -199,25 +199,6 @@ Disable IPMI Protocol And Check Persistency On BMC Reboot
     ...  msg=IPMI commands are working after disabling IPMI.
 
 
-Enable SSH And IPMI Protocol And Check Persistency On BMC Reboot
-    [Documentation]  Set the SSH and IPMI protocol attributes to True, and verify
-    ...              that the setting attribute value is boolean True after BMC reboot.
-    [Tags]  Enable_SSH_And_IPMI_Protocol_And_Check_Persistency_On_BMC_Reboot
-
-    Set SSH And IPMI Protocol  ${True}  ${True}
-
-    # Check if SSH and IPMI enabled is set.
-    Verify SSH Protocol State  ${True}
-    Sleep  ${NETWORK_TIMEOUT}s
-    Verify IPMI Protocol State  ${True}
-
-    Redfish OBMC Reboot (off)  stack_mode=skip
-
-    # Check if SSH login and IPMI commands work.
-    Verify SSH Login And Commands Work
-    Verify IPMI Works  lan print
-
-
 Configure SSH And IPMI Settings And Verify
     [Documentation]  Set the SSH and IPMI protocol attribute to True/False, and verify.
     [Tags]  Configure_SSH_And_IPMI_Settings_And_Verify
@@ -231,12 +212,18 @@ Configure SSH And IPMI Settings And Verify
     ${False}     ${False}
 
 
-Enable SSH And Disable IPMI Protocol And Check Persistency On BMC Reboot
-    [Documentation]  Set the SSH to True and IPMI protocol attributes to False, and verify
-    ...              the setting after BMC reboot.
-    [Tags]  Enable_SSH_And_Disable_IPMI_Protocol_And_Check_Persistency_On_BMC_Reboot
+Configure SSH And IPMI Settings And Verify Persistency On BMC Reboot
+    [Documentation]  Set the SSH and IPMI protocol attribute to True/False, and verify
+    ...  it's persistency after BMC reboot.
+    [Tags]  Configure_SSH_And_IPMI_Settings_And_Verify_Persistency_On_BMC_Reboot
+    [Template]  Set SSH And IPMI Protocol
+    [Teardown]  Enable SSH Protocol  ${True}
 
-    Set SSH And IPMI Protocol  ${True}  ${False}  ${True}
+    # ssh_state  ipmi_state  persistency_check
+    ${True}      ${False}    ${True}
+    ${True}      ${True}     ${True}
+    ${False}     ${True}     ${True}
+    ${False}     ${False}    ${True}    
 
 
 *** Keywords ***
@@ -289,7 +276,8 @@ Set SSH And IPMI Protocol
     # Wait for timeout for new values to take effect.
     Sleep  ${NETWORK_TIMEOUT}s
 
-    Run Keyword if  ${persistency_check} == ${True}  Redfish OBMC Reboot (off)
+    Run Keyword if  ${persistency_check} == ${True}
+    ...  Redfish OBMC Reboot (off)  stack_mode=skip
     Verify Protocol State  ${ssh_state}  ${ipmi_state}
 
 
