@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b394d7da_e7a277d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-29T09:50:05Z",
+      "side": 1,
+      "message": "Minor comments",
+      "revId": "5f4939f24257968c7a4e81ae6b2ec47dba968442",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "802a9670_6089c561",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-29T09:50:05Z",
+      "side": 1,
+      "message": "Move core dump test case at the end of all test case.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 42
+      },
+      "revId": "5f4939f24257968c7a4e81ae6b2ec47dba968442",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7c54a65_23217b98",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-29T09:50:05Z",
+      "side": 1,
+      "message": "Remove the white spaces in the end of this and next line.",
+      "range": {
+        "startLine": 26,
+        "startChar": 66,
+        "endLine": 26,
+        "endChar": 67
+      },
+      "revId": "5f4939f24257968c7a4e81ae6b2ec47dba968442",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f160d18a_d523720e",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-29T09:50:05Z",
+      "side": 1,
+      "message": "Please end comment always with a period \".\"",
+      "range": {
+        "startLine": 35,
+        "startChar": 6,
+        "endLine": 35,
+        "endChar": 39
+      },
+      "revId": "5f4939f24257968c7a4e81ae6b2ec47dba968442",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caa04a5e_5051b7be",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-29T09:50:05Z",
+      "side": 1,
+      "message": "Please end comment always with a period \".\" Also reword it to something like below.\n\n    # Check if BMC dump is available.",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 232,
+        "endChar": 43
+      },
+      "revId": "5f4939f24257968c7a4e81ae6b2ec47dba968442",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
