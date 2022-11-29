@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "378af169_e9971794",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-29T04:36:26Z",
+      "side": 1,
+      "message": "Keep it shot and simple like below. \n\nAdded test case to verify BMC core dump creation\n\nChanges:\n    - Added a test case to verify BMC core dump creation\n      after an application crash\n      \nTested:\n    - Ran the test from sandbox successfully",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 48
+      },
+      "revId": "1c81129838e95b0985fd9649075222e3e3ca5813",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "931a290a_f7d790fe",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-29T04:36:26Z",
+      "side": 1,
+      "message": "Verify BMC Core Dump When Host Powered Off",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 61
+      },
+      "revId": "1c81129838e95b0985fd9649075222e3e3ca5813",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fb478f7_e5b0fe7e",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-29T04:36:26Z",
+      "side": 1,
+      "message": "End the document with the period \".\"\n\n    [Documentation]  Verify BMC core dump after application crash.",
+      "range": {
+        "startLine": 26,
+        "startChar": 20,
+        "endLine": 26,
+        "endChar": 82
+      },
+      "revId": "1c81129838e95b0985fd9649075222e3e3ca5813",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5b87a3e_d1643e07",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-29T04:36:26Z",
+      "side": 1,
+      "message": "use \"_\" instead of space. Like below\n\nVerify_BMC_Core_Dump_When_Host_Powered_Off",
+      "range": {
+        "startLine": 27,
+        "startChar": 12,
+        "endLine": 27,
+        "endChar": 73
+      },
+      "revId": "1c81129838e95b0985fd9649075222e3e3ca5813",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aea166c6_ff1fd8fd",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-29T04:36:26Z",
+      "side": 1,
+      "message": "Keep one blank line before adding any comment.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 39
+      },
+      "revId": "1c81129838e95b0985fd9649075222e3e3ca5813",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "610c2b28_3bfc5030",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-29T04:36:26Z",
+      "side": 1,
+      "message": "We already have a keyword for it - Trigger Core Dump\n\nPlease use that",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 44
+      },
+      "revId": "1c81129838e95b0985fd9649075222e3e3ca5813",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d3fc795_cea97158",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-29T04:36:26Z",
+      "side": 1,
+      "message": "Please don\u0027t use sleep. Use \"Wait Until Keyword Succeeds\" keyword instead like below.\n\n    Wait Until Keyword Succeeds  2 min  10 sec  Get Dump Entries\n    ${dump_entries}\u003d  Get BMC Dump Entries\n    ${length}\u003d  Get length  ${dump_entries}\n    Should Be Equal As Integers  ${length}  ${1}",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 40
+      },
+      "revId": "1c81129838e95b0985fd9649075222e3e3ca5813",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
