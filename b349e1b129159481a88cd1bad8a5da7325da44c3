@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8b989c0_5d14f8f5",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-29T10:52:17Z",
+      "side": 1,
+      "message": "to be specific can we give function name as\n\nget_bmc_event_log_id_for_pel_id(pel_id):\n\n@231 Return BMC event log ID for the given PEL ID.\n\n@234: mention E.g. 0x0000000.",
+      "revId": "b349e1b129159481a88cd1bad8a5da7325da44c3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
