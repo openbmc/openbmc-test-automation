@@ -436,3 +436,32 @@ Wait For Task Completion
 
         Sleep  5s
     END
+
+Get Dump Status In BMC
+    [Documentation]  Get dump status from BMC using busctl method. 
+    [Arguments]  ${dump_uri}
+
+    # Description of argument(s):
+    # dump_uri   Dump URI E.g: /xyz/openbmc_project/dump/bmc/entry/7.
+
+    ${cmd}=  Catenate  busctl get-property xyz.openbmc_project.Dump.Manager
+    ...  ${dump_uri} xyz.openbmc_project.Common.Progress Status
+
+    ${stdout}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
+    Log  ${stdout}
+    # Example output:
+    # s "xyz.openbmc_project.Common.Progress.OperationStatus.Completed".
+
+    ${status}=  Set Variable  ${stdout.split('.')[-1].strip('"')}
+    [Return]  ${status}
+
+Verify Dump Status In BMC
+    [Documentation]  Verify Dump Status in BMC.
+    [Arguments]  ${dump_uri}  ${expected_dump_status}
+
+    # Description of argument(s):
+    # dump_uri              Dump URI E.g: /xyz/openbmc_project/dump/bmc/entry/7.
+    # expected_dump_status  Expected Dump Status (Completed or Failed etc).
+
+    ${dump_status}=  Get Dump Status In BMC  ${dump_uri}
+    Should Be Equal  ${dump_status}  ${expected_dump_status}
