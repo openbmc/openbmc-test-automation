@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0802599c_4257864c",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-11-29T09:39:26Z",
+      "side": 1,
+      "message": "Remove spaces\n\nMay be you can cover the false scenarios first followed by True, so that you don\u0027t need to include the teardown.\n\n${False}     ${True}     ${True}\n${False}     ${False}    ${True}\n${True}      ${False}    ${True}\n${True}      ${True}     ${True}",
+      "range": {
+        "startLine": 226,
+        "startChar": 36,
+        "endLine": 226,
+        "endChar": 40
+      },
+      "revId": "24774193eaa5b57cfa254ce4e194139e1d8f9a2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
