@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea5229b6_099362f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-11-29T09:28:22Z",
+      "side": 1,
+      "message": "This commit message is not relevant to this commit as this is just for making dump util changes. So change the msg accordingly.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 0
+      },
+      "revId": "650a893a6d9d563e48a3398df7624ab16a3bb426",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a16fc6c3_e0d281aa",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-11-29T09:28:22Z",
+      "side": 1,
+      "message": "Align the descriptions",
+      "revId": "650a893a6d9d563e48a3398df7624ab16a3bb426",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd5a635c_7d20fd0e",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-11-29T09:28:22Z",
+      "side": 1,
+      "message": "Not required. output is captured in @line 455",
+      "range": {
+        "startLine": 469,
+        "startChar": 4,
+        "endLine": 469,
+        "endChar": 23
+      },
+      "revId": "650a893a6d9d563e48a3398df7624ab16a3bb426",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
