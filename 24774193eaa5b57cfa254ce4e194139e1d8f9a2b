@@ -22,6 +22,30 @@
       },
       "revId": "24774193eaa5b57cfa254ce4e194139e1d8f9a2b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7dfcabb_8f207cc8",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-11-29T09:50:12Z",
+      "side": 1,
+      "message": "I have added teardown because, here I have combined 4 tc by using template. If any one of the TC fails then it should not affect the system. So in teardown I have enabled ssh.",
+      "parentUuid": "0802599c_4257864c",
+      "range": {
+        "startLine": 226,
+        "startChar": 36,
+        "endLine": 226,
+        "endChar": 40
+      },
+      "revId": "24774193eaa5b57cfa254ce4e194139e1d8f9a2b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
