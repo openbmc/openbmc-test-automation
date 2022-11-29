@@ -104,6 +104,71 @@ def fetch_all_pel_ids_for_src(src_id, severity):
         raise peltool_exception("Failed to fetch PEL ID for required SRC : " + str(e))
     return src_pel_ids
 
+def verify_src_signature_and_callouts(pel_id, attn_type, target_desc, callouts_list, multi_signature):
+    r"""
+    Verifies SRC details for the given PEL ID based on the required
+    attention type, Target description, Callouts based on CCIN and Multi Signatures.
+
+    Description of arguments:
+
+    attn_type       Attention type (e.g. RECOVERABLE).
+    target_desc     Target description of the error inject (e.g. node 0 proc 1).
+    callouts_list   Callout in list form based on CCIN (e.g. ['XXXX', 'YYYY'].
+    multi_signature
+    """
+
+    try:
+        pel_cmd = " -i " + pel_id
+        src_data = peltool(pel_cmd)
+        src_dict = src_data["Primary SRC"]["SRC Details"]
+        src_callout_dict = src_data["Primary SRC"]["Callout Section"]
+        src_callout_count = src_callout_dict["Callout Count"]
+        user_data = src_data["User Data 2"]["Multi-Signature List"]
+        # Generate list of Callout CCINs from PEL
+        #
+        # "Callout Count":        "2",
+        # "Callouts": [{
+        #     "FRU Type":         "Normal Hardware FRU",
+        #     "Priority":         "Mandatory, replace all with this type as a unit",
+        #     "Location Code":    "U78D4.ND0.WZS0017-P0",
+        #     "Part Number":      "00L5676",
+        #     "CCIN":             "2E33",
+        #     "Serial Number":    "YW30UF156007"
+        itr=0
+        list_callout_actual=[]
+        while itr < int(src_callout_count):
+            list_callout_actual.append(src_callout_dict["Callouts"][itr]["CCIN"])
+            itr+=1
+        # Verify Callouts based on CCIN with expected CCIN list
+
+        for x in callouts_list:
+            if x not in list_callout_actual:
+                raise peltool_exception("Required Callout for CCIN " + x + "not found")
+        # Verify Target Description and Attention Type
+        #
+        # "SRC Details": {
+        #     "Target Desc": "node 0 proc 1",
+        #     "Signature": "clock error detected",
+        #      "Attn Type": "RECOVERABLE"
+        # }
+
+        if target_desc != src_dict["Target Desc"]:
+            raise peltool_exception("Required Target Desc " + target_desc + "not found")
+        if attn_type != src_dict["Attn Type"]:
+            raise peltool_exception("Required Attention type " + attn_type + " not found")
+        # Verify Multi Signature List
+        #
+        # "Multi-Signature List": {
+        #     "Count": 1,
+        #     "0x00050001 0x00ed0003": "RCS OSC error on clk0"
+        # }
+
+        if multi_signature not in user_data.values():
+            raise peltool_exception("Required Multi Signature " + multi_signature + " not found")
+
+    except Exception as e:
+        raise peltool_exception("Failed to verify SRC details : " + str(e))
+    return True
 
 def verify_src_signature_and_threshold(pel_id, attn_type, signature_desc, th_limit):
     r"""
