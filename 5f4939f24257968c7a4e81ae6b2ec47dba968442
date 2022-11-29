@@ -89,6 +89,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4970c7ff_db71cf44",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-29T09:55:01Z",
+      "side": 1,
+      "message": "Move this keyword in lib/dump_utils.robot so that it can also be used by others also.",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 21
+      },
+      "revId": "5f4939f24257968c7a4e81ae6b2ec47dba968442",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "caa04a5e_5051b7be",
         "filename": "redfish/managers/test_bmc_dumps.robot",
         "patchSetId": 2
