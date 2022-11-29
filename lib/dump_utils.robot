@@ -436,3 +436,35 @@ Wait For Task Completion
 
         Sleep  5s
     END
+
+Get Dump Status In BMC
+    [Documentation]  Get  Dump Status.
+    [Arguments]  ${dump_uri}
+
+    # Description of argument(s):
+    # dump_uri   Dump URI E.g: /xyz/openbmc_project/dump/bmc/entry/7.
+
+    ${cmd}=  Catenate  busctl get-property xyz.openbmc_project.Dump.Manager
+    ...  ${dump_uri} xyz.openbmc_project.Common.Progress Status
+
+    ${stdout}  ${stderr}  ${rc}=
+    ...  BMC Execute Command  ${cmd}
+    # Example output:
+    # s "xyz.openbmc_project.Common.Progress.OperationStatus.Completed".
+
+    Log  ${stdout}
+    ${str}=  String.Split String  ${stdout}  OperationStatus.
+    ${status}=  String.Split String  ${str}[1]  "
+    [Return]  ${status}[0]
+
+Verify Dump Status In BMC
+    [Documentation]  Verify Dump Status.
+    [Arguments]  ${dump_uri}  ${expected_dump_status}
+
+    # Description of argument(s):
+    # dump_uri    Dump URI E.g: /xyz/openbmc_project/dump/bmc/entry/7.
+    # expected_dump_status Expected Dump Status (Completed or Failed etc).
+
+    ${dump_status}=  Get Dump Status  ${dump_uri}
+    Log  ${dump_status}
+    Should Be Equal  ${dump_status}  ${expected_dump_status}
