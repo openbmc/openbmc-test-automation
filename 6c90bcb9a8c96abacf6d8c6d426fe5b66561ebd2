@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "031e426d_d14806af",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-11-29T08:50:06Z",
+      "side": 1,
+      "message": "you can use Template for these four test cases to check the persistency after reboot\n[Template]  Set SSH And IPMI Protocol\n\n${True}      ${True}   ${True}\n${False}     ${True}   ${True}\n${False}     ${True}   ${True}\n${False}     ${False}  ${True}",
+      "range": {
+        "startLine": 239,
+        "startChar": 4,
+        "endLine": 239,
+        "endChar": 29
+      },
+      "revId": "6c90bcb9a8c96abacf6d8c6d426fe5b66561ebd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
