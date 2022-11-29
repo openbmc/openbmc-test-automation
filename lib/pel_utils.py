@@ -224,3 +224,19 @@ def filter_unexpected_srcs(expected_srcs=None):
         expected_srcs = []
     print(expected_srcs)
     return list(set(srcs_found) - set(expected_srcs))
+
+
+def get_bmc_id_for_pel(pel_id):
+    r"""
+    TO DO
+    Return list of SRCs found in BMC after filtering expected SRCs.
+    If expected_srcs is None then all SRCs found in system are returned.
+
+    Description of arguments:
+    expected_srcs       List of expected SRCs. E.g. ["BBXXYYYY", "AAXXYYYY"].
+    """
+
+    pel_data = peltool("-i " + pel_id)
+    print(pel_data)
+    bmc_id_for_pel = pel_data["Private Header"]["BMC Event Log Id"]
+    return bmc_id_for_pel
