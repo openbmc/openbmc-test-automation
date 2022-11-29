@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93dfed8f_e6cc2357",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-29T05:32:10Z",
+      "side": 1,
+      "message": "Added test case to verify BMC core dump size\n\nChanges:\n    - Added a new test case to verify that the size\n      of BMC core dump is within the maximum size limit.\n\nTested:\n    - Ran the test successfully from sandbox.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 36
+      },
+      "revId": "8811559e04986ba3ff9453e53f9cf849a4d9e40e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99428f99_ecdd7518",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-29T05:32:10Z",
+      "side": 1,
+      "message": "Move core dump test at the end of this suite",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 61
+      },
+      "revId": "8811559e04986ba3ff9453e53f9cf849a4d9e40e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf2b9aef_e0c9149c",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-29T05:32:10Z",
+      "side": 1,
+      "message": "This test is already present in old dump file `redfish/extended/test_bmc_dump.robot`. So we need to also remove from it with this commit.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 73
+      },
+      "revId": "8811559e04986ba3ff9453e53f9cf849a4d9e40e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "681b4a20_6c9884a9",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-29T05:32:10Z",
+      "side": 1,
+      "message": "Verify Core Dump Size\n    [Documentation]  Verify BMC core dump size is under 200k.\n    [Tags]  Verify_Core_Dump_Size",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 73
+      },
+      "revId": "8811559e04986ba3ff9453e53f9cf849a4d9e40e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "799a540e_ddfbfaf2",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-29T05:32:10Z",
+      "side": 1,
+      "message": "Make changes as suggested in https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/58951 for this test case also.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 42
+      },
+      "revId": "8811559e04986ba3ff9453e53f9cf849a4d9e40e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
