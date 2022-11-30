@@ -2,6 +2,7 @@
 Documentation  This module provides general keywords for dump.
 
 Library         bmc_ssh_utils.py
+Variables       ../data/variables.py
 
 *** Variables ***
 
@@ -174,10 +175,26 @@ Redfish Delete All BMC Dumps
     Redfish.Post  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.ClearLog
 
 
+Get Redfish BMC Dump Log Entries
+     [Documentation]  Get the BMC dump log entries.
+
+     ${resp}=  Redfish.Get  ${REDFISH_DUMP_URI}
+
+     [Return]  ${resp.dict}
+
+
 Redfish Delete All System Dumps
     [Documentation]  Delete all system  dumps via Redfish.
 
     Redfish.Post  /redfish/v1/Systems/system/LogServices/Dump/Actions/LogService.ClearLog
+
+
+Redfish BMC Dump Should Not Exist
+     [Documentation]  Verify there is no dump exist at dump URI.
+
+     # Verify no dump exists.
+     ${dump_entries}=  Get Redfish BMC Dump Log Entries
+     Should Be Equal As Integers  0  ${dump_entries['Members@odata.count']}
 
 
 Delete All BMC Dump
@@ -438,7 +455,7 @@ Wait For Task Completion
     END
 
 Get Dump Status In BMC
-    [Documentation]  Get dump status from BMC using busctl method. 
+    [Documentation]  Get dump status from BMC using busctl method.
     [Arguments]  ${dump_uri}
 
     # Description of argument(s):
