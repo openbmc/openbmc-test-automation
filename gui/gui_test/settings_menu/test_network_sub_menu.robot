@@ -33,6 +33,10 @@ ${xpath_delete_dns_server}               //*[@title="Delete DNS address"]
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
 ${test_ipv4_addr_1}                      10.7.7.8
+${out_of_range_ip}                       10.7.7.256
+${string_ip}                             aa.bb.cc.dd
+${negative_ip}                           10.-7.-7.-7
+${less_octet_ip}                         10.3.36
 ${test_subnet_mask}                      255.255.0.0
 ${alpha_netmask}                         ff.ff.ff.ff
 ${out_of_range_netmask}                  255.256.255.0
@@ -171,6 +175,17 @@ Configure And Verify Multiple Static IP Address
     Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success
     Add Static IP Address And Verify  ${test_ipv4_addr_1}  ${test_subnet_mask}  ${default_gateway}  Success
 
+
+Configure Invalid Static IP Address
+    [Documentation]  Login to GUI Network page, configure invalid static ip address.
+    [Tags]  Configure_Invalid_Static_IP_Address
+    [Template]  Add Static IP Address And Verify
+
+    # ip                 subnet_mask          gateway             status
+    ${out_of_range_ip}   ${test_subnet_mask}  ${default_gateway}  Invalid format
+    ${less_octet_ip}     ${test_subnet_mask}  ${default_gateway}  Invalid format
+    ${string_ip}         ${test_subnet_mask}  ${default_gateway}  Invalid format
+    ${negative_ip}       ${test_subnet_mask}  ${default_gateway}  Invalid format
 
 *** Keywords ***
 
