@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ceb4a26_8e5ef0d4",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-11-30T07:29:48Z",
+      "side": 1,
+      "message": "you can remove ${out_of_range_ip}, ${less_octet_ip} from here. As it is already available in lib/snmp/resource.robot. You can use the same.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 48
+      },
+      "revId": "595515dbf4deb023739028daae3346e93574fcf3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
