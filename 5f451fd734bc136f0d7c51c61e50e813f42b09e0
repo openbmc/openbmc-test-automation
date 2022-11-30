@@ -16,6 +16,63 @@
       "message": "Please provide your valuable review comments,",
       "revId": "5f451fd734bc136f0d7c51c61e50e813f42b09e0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f78a661_7f3ebae5",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-30T05:11:25Z",
+      "side": 1,
+      "message": "As discussed we will split the callout verification part and src details verification part..",
+      "revId": "5f451fd734bc136f0d7c51c61e50e813f42b09e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aab0c18_18166836",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-30T05:11:25Z",
+      "side": 1,
+      "message": "ccin_list",
+      "range": {
+        "startLine": 116,
+        "startChar": 4,
+        "endLine": 116,
+        "endChar": 17
+      },
+      "revId": "5f451fd734bc136f0d7c51c61e50e813f42b09e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57b8b316_68e1f07f",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-30T05:11:25Z",
+      "side": 1,
+      "message": "lets make sure if Multi-Signature List is always in \"User Data 2\". as we can also find  it \"User Data 1\"",
+      "revId": "5f451fd734bc136f0d7c51c61e50e813f42b09e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
