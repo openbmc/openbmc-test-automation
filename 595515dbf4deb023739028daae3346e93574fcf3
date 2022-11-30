@@ -46,6 +46,30 @@
       },
       "revId": "595515dbf4deb023739028daae3346e93574fcf3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfad07c2_be5a8447",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-30T10:54:33Z",
+      "side": 1,
+      "message": "sweta.. I think u can import \u0027lib/snmp/resource.robot\u0027 file here.. because it is just a variable robot file\n\nand may be u can add up.. ${string_ip} and ${negative_ip} there??\n\nMay be prashanth can suggest better",
+      "parentUuid": "f9a543cf_279dd7e0",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 48
+      },
+      "revId": "595515dbf4deb023739028daae3346e93574fcf3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
