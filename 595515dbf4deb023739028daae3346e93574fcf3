@@ -70,6 +70,30 @@
       },
       "revId": "595515dbf4deb023739028daae3346e93574fcf3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30c0f4f3_f995e662",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-11-30T10:57:04Z",
+      "side": 1,
+      "message": "Creating a GitHub task for the same\nhttps://github.com/openbmc/openbmc-test-automation/issues/2197.",
+      "parentUuid": "f9a543cf_279dd7e0",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 48
+      },
+      "revId": "595515dbf4deb023739028daae3346e93574fcf3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
