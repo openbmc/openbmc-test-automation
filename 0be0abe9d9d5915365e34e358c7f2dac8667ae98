@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b593473a_cf874711",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-30T13:34:21Z",
+      "side": 1,
+      "message": "small comment",
+      "revId": "0be0abe9d9d5915365e34e358c7f2dac8667ae98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce3ff4cb_ddfaba92",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-30T13:34:21Z",
+      "side": 1,
+      "message": "is this is not host powered off",
+      "range": {
+        "startLine": 198,
+        "startChar": 47,
+        "endLine": 198,
+        "endChar": 66
+      },
+      "revId": "0be0abe9d9d5915365e34e358c7f2dac8667ae98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
