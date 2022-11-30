@@ -60,6 +60,7 @@ BMC_LOGGING_URI = OPENBMC_BASE_URI + 'logging/'
 BMC_LOGGING_ENTRY = BMC_LOGGING_URI + 'entry/'
 REDFISH_BMC_LOGGING_ENTRY = '/redfish/v1/Systems/system/LogServices/EventLog/Entries/'
 
+
 # Software manager version
 SOFTWARE_VERSION_URI = OPENBMC_BASE_URI + 'software/'
 ACTIVE = 'xyz.openbmc_project.Software.Activation.Activations.Active'
@@ -191,6 +192,7 @@ REDFISH_CHASSIS_POWER = 'chassis/Power/'
 REDFISH_CHASSIS_POWER_URI = REDFISH_CHASSIS_URI + REDFISH_CHASSIS_POWER
 REDFISH_CHASSIS_SENSORS = 'chassis/Sensors'
 REDFISH_CHASSIS_SENSORS_URI = REDFISH_CHASSIS_URI + REDFISH_CHASSIS_SENSORS
+REDFISH_DUMP_URI = REDFISH_BASE_URI  + 'Managers/bmc/LogServices/Dump/Entries'
 
 # Boot options and URI variables.
 POWER_ON = 'On'
