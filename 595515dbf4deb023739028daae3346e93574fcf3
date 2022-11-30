@@ -22,6 +22,30 @@
       },
       "revId": "595515dbf4deb023739028daae3346e93574fcf3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9a543cf_279dd7e0",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-11-30T09:23:13Z",
+      "side": 1,
+      "message": "These are used in redfish/managers/test_bmc_network_conf.robot as well.\n\nI think we should include all of them in\nlib/bmc_network_utils.robot and reuse it in \nSNMP, redfish, VMI and GUI bucket.\nAny suggestions?\n\nCan we take this a different commit?",
+      "parentUuid": "0ceb4a26_8e5ef0d4",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 48
+      },
+      "revId": "595515dbf4deb023739028daae3346e93574fcf3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
