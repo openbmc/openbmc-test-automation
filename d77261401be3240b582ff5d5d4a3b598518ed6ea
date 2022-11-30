@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "832389fe_33b64dcc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-11-30T07:19:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c2ba6b2_30a7de8c",
+      "range": {
+        "startLine": 7,
+        "startChar": 26,
+        "endLine": 7,
+        "endChar": 52
+      },
+      "revId": "d77261401be3240b582ff5d5d4a3b598518ed6ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56c51707_3b02f848",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-30T06:33:22Z",
       "side": 1,
       "message": "these are not testcases\n\n\"Configure Invalid Static IP Address\" is ur main testcase",
+      "range": {
+        "startLine": 11,
+        "startChar": 5,
+        "endLine": 14,
+        "endChar": 17
+      },
+      "revId": "d77261401be3240b582ff5d5d4a3b598518ed6ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ab3e241_50799aa0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-11-30T07:19:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56c51707_3b02f848",
       "range": {
         "startLine": 11,
         "startChar": 5,
@@ -64,6 +112,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e18729fd_ccabf2d8",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-11-30T07:19:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10607631_1943abaf",
+      "revId": "d77261401be3240b582ff5d5d4a3b598518ed6ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59c9b7a7_3f9e90c7",
@@ -77,6 +143,30 @@
       "writtenOn": "2022-11-30T06:33:22Z",
       "side": 1,
       "message": "IP address and verify.",
+      "range": {
+        "startLine": 180,
+        "startChar": 73,
+        "endLine": 180,
+        "endChar": 75
+      },
+      "revId": "d77261401be3240b582ff5d5d4a3b598518ed6ea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55ffdb5c_b9dbb22a",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-11-30T07:19:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59c9b7a7_3f9e90c7",
       "range": {
         "startLine": 180,
         "startChar": 73,
