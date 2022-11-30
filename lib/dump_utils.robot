@@ -174,10 +174,26 @@ Redfish Delete All BMC Dumps
     Redfish.Post  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.ClearLog
 
 
+Get Redfish BMC Dump Log Entries
+     [Documentation]  Get the BMC dump log entries.
+
+     ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
+
+     [Return]  ${resp.dict}
+
+
 Redfish Delete All System Dumps
     [Documentation]  Delete all system  dumps via Redfish.
 
     Redfish.Post  /redfish/v1/Systems/system/LogServices/Dump/Actions/LogService.ClearLog
+
+
+Redfish BMC Dump Should Not Exist
+     [Documentation]  Verify there is no dumps exist at dump URI.
+
+     # Verify no dump exists.
+     ${dump_entries}=  Get Redfish BMC Dump Log Entries
+     Should Be Equal As Integers  0  ${dump_entries['Members@odata.count']}
 
 
 Delete All BMC Dump
@@ -436,6 +452,7 @@ Wait For Task Completion
 
         Sleep  5s
     END
+<<<<<<< HEAD
 
 Get Dump Status In BMC
     [Documentation]  Get dump status from BMC using busctl method. 
@@ -465,3 +482,5 @@ Verify Dump Status In BMC
 
     ${dump_status}=  Get Dump Status In BMC  ${dump_uri}
     Should Be Equal  ${dump_status}  ${expected_dump_status}
+=======
+>>>>>>> dbb7e473... Code to get all dump and to check no dump exist
