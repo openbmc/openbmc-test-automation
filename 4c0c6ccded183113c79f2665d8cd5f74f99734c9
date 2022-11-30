@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d716213_9ef3be23",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-11-30T08:53:02Z",
+      "side": 1,
+      "message": "add ffdc on fail",
+      "revId": "4c0c6ccded183113c79f2665d8cd5f74f99734c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
