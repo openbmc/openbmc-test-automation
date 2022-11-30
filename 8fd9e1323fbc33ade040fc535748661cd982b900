@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f026a443_0b0ddb8d",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-30T05:33:03Z",
+      "side": 1,
+      "message": "more info?\n\nGet dump status from BMC using busctl method.",
+      "range": {
+        "startLine": 441,
+        "startChar": 21,
+        "endLine": 441,
+        "endChar": 37
+      },
+      "revId": "8fd9e1323fbc33ade040fc535748661cd982b900",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3a05946_6bf267ea",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-30T05:33:03Z",
+      "side": 1,
+      "message": "@451 can be add in the same line\n\n ${stdout}  ${stderr}  ${rc}\u003d  BMC Execute Command  ${cmd}",
+      "range": {
+        "startLine": 450,
+        "startChar": 0,
+        "endLine": 450,
+        "endChar": 32
+      },
+      "revId": "8fd9e1323fbc33ade040fc535748661cd982b900",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c57faf8_a640b8a5",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-11-30T05:33:03Z",
+      "side": 1,
+      "message": "can u please use evaluate method instead of multiple split\n\n\u003e\u003e\u003e x \u003d \u0027s \"xyz.openbmc_project.Common.Progress.OperationStatus.Completed\".\u0027\n\u003e\u003e\u003e (x.replace(\u0027\".\u0027, \u0027\u0027)).split(\u0027OperationStatus.\u0027)[-1]\n\u0027Completed\u0027\n\u003e\u003e\u003e\n\n\n${status}\u003d   Evaluate  ${stdout}.replace(\u0027\".\u0027, \u0027\u0027)).split(\u0027OperationStatus.\u0027)[-1]",
+      "range": {
+        "startLine": 457,
+        "startChar": 16,
+        "endLine": 457,
+        "endChar": 23
+      },
+      "revId": "8fd9e1323fbc33ade040fc535748661cd982b900",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
