@@ -56,6 +56,30 @@
       },
       "revId": "0be0abe9d9d5915365e34e358c7f2dac8667ae98",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8417d91_a1810aee",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-01T05:16:48Z",
+      "side": 1,
+      "message": "Here core dump is attempted by forcefully killing an application. So made the documentation like this. Hope it answers your query.",
+      "parentUuid": "ce3ff4cb_ddfaba92",
+      "range": {
+        "startLine": 198,
+        "startChar": 47,
+        "endLine": 198,
+        "endChar": 66
+      },
+      "revId": "0be0abe9d9d5915365e34e358c7f2dac8667ae98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
