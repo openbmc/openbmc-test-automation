@@ -230,6 +230,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db75d5e7_1f889824",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-01T07:07:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6aaf292a_9a54db34",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 21
+      },
+      "revId": "5f4939f24257968c7a4e81ae6b2ec47dba968442",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "caa04a5e_5051b7be",
