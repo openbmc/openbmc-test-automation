@@ -228,6 +228,19 @@ Configure SSH And IPMI Settings And Verify Persistency On BMC Reboot
     ${False}     ${False}    ${True}
 
 
+Verify Disabling SSH Port Does Not Disable PHYP Console Port
+    [Documentation]  Disable SSH protocol and check SSH to 2201 works.
+    [Tags]  Verify_Disabling_SSH_Port_Does_Not_Disable_PHYP_Console_Port
+    [Teardown]  Enable SSH Protocol  ${True}
+
+    # Disable SSH interface.
+    Enable SSH Protocol  ${False}
+
+    # Check able to establish connection with serial port console.
+    Open Connection And Log In  host=${OPENBMC_HOST}  port=2201
+    Close All Connections
+
+
 *** Keywords ***
 
 Suite Setup Execution
