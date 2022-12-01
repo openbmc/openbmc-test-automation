@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d887d7fe_3e2f2566",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-01T07:06:53Z",
+      "side": 1,
+      "message": "Incorporated Sridevi\u0027s last suggestion for documentation",
+      "revId": "7bd2c6d3a88660586aa285b52521e3c9b36d6ad0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
