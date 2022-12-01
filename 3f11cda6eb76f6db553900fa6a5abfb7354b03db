@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ab8c2b4d_803af481",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-01T07:24:55Z",
+      "side": 1,
+      "message": "I checked the files, many constant URI are not getting stored there. \nHere I will be using by directly accessing the URI.",
+      "parentUuid": "68befca3_d55c0ece",
+      "range": {
+        "startLine": 180,
+        "startChar": 28,
+        "endLine": 180,
+        "endChar": 77
+      },
+      "revId": "3f11cda6eb76f6db553900fa6a5abfb7354b03db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe2500b3_deb71125",
         "filename": "lib/dump_utils.robot",
         "patchSetId": 6
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-01T05:41:25Z",
       "side": 1,
       "message": "Verify there are no dumps existing in the dump URI.",
+      "range": {
+        "startLine": 193,
+        "startChar": 22,
+        "endLine": 193,
+        "endChar": 65
+      },
+      "revId": "3f11cda6eb76f6db553900fa6a5abfb7354b03db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11206fd6_6911a047",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-01T07:24:55Z",
+      "side": 1,
+      "message": "Both Are almost same. I will stick with current one.",
+      "parentUuid": "fe2500b3_deb71125",
       "range": {
         "startLine": 193,
         "startChar": 22,
