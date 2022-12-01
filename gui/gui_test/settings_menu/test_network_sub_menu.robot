@@ -37,6 +37,8 @@ ${out_of_range_ip}                       10.7.7.256
 ${string_ip}                             aa.bb.cc.dd
 ${negative_ip}                           10.-7.-7.-7
 ${less_octet_ip}                         10.3.36
+${hex_ip}                                0xa.0xb.0xc.0xd
+${spl_char_ip}                           @@@.%%.44.11
 ${test_subnet_mask}                      255.255.0.0
 ${alpha_netmask}                         ff.ff.ff.ff
 ${out_of_range_netmask}                  255.256.255.0
@@ -44,7 +46,6 @@ ${more_byte_netmask}                     255.255.255.0.0
 ${lowest_netmask}                        128.0.0.0
 ${test_gateway}                          10.7.7.1
 ${test_hostname}                         openbmc
-
 
 *** Test Cases ***
 
@@ -186,6 +187,8 @@ Configure And Verify Invalid Static IP Address
     ${less_octet_ip}     ${test_subnet_mask}  ${default_gateway}  Invalid format
     ${string_ip}         ${test_subnet_mask}  ${default_gateway}  Invalid format
     ${negative_ip}       ${test_subnet_mask}  ${default_gateway}  Invalid format
+    ${hex_ip}            ${test_subnet_mask}  ${default_gateway}  Invalid format
+    ${spl_char_ip}       ${test_subnet_mask}  ${default_gateway}  Invalid format
 
 *** Keywords ***
 
