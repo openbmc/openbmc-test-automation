@@ -73,6 +73,48 @@
       "message": "Here After opening of PHYP console, do you verify that any log is coming ? or it just verify the console able to open ?",
       "revId": "5d76ee3f659f6a050fbaddc05521f4f4474eb5d7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce759076_aba2aa79",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-12-02T15:33:10Z",
+      "side": 1,
+      "message": "if it is able to login is good enough",
+      "parentUuid": "bd3fdfd4_2e3b3b77",
+      "revId": "5d76ee3f659f6a050fbaddc05521f4f4474eb5d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0975a80d_bea10bcd",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-12-02T15:33:10Z",
+      "side": 1,
+      "message": "yeah, add it in test setup",
+      "parentUuid": "b33ba70b_f4108801",
+      "range": {
+        "startLine": 240,
+        "startChar": 4,
+        "endLine": 240,
+        "endChar": 63
+      },
+      "revId": "5d76ee3f659f6a050fbaddc05521f4f4474eb5d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
