@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22192a62_803ba1b6",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-12-02T14:56:18Z",
+      "side": 1,
+      "message": "Fix this.. clean up.. merge issues",
+      "range": {
+        "startLine": 455,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 12
+      },
+      "revId": "e78385cdd19800094b621d5d36756ab9d8dd2600",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bad7f2c3_540b893c",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-12-02T14:56:18Z",
+      "side": 1,
+      "message": "Remove it.. merge issues",
+      "range": {
+        "startLine": 485,
+        "startChar": 0,
+        "endLine": 486,
+        "endChar": 67
+      },
+      "revId": "e78385cdd19800094b621d5d36756ab9d8dd2600",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
