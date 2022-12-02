@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "89c37578_e7b05dc9",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-12-02T15:28:17Z",
+      "side": 1,
+      "message": "dump",
+      "range": {
+        "startLine": 192,
+        "startChar": 41,
+        "endLine": 192,
+        "endChar": 46
+      },
+      "revId": "e78385cdd19800094b621d5d36756ab9d8dd2600",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "22192a62_803ba1b6",
         "filename": "lib/dump_utils.robot",
         "patchSetId": 10
@@ -19,6 +42,29 @@
         "startChar": 0,
         "endLine": 455,
         "endChar": 12
+      },
+      "revId": "e78385cdd19800094b621d5d36756ab9d8dd2600",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5c833a1_395cb4a6",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-12-02T15:28:17Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 458,
+        "startChar": 66,
+        "endLine": 458,
+        "endChar": 67
       },
       "revId": "e78385cdd19800094b621d5d36756ab9d8dd2600",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
