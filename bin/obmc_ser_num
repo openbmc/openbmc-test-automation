@@ -22,9 +22,9 @@ logging.captureWarnings(True)
 
 parser = argparse.ArgumentParser(
     usage='%(prog)s [OPTIONS]',
-    description="%(prog)s will get the system serial number from an OBMC" +
-                " machine and print it to stdout as follows:\n\n" +
-                "mch_ser_num:<ser num>",
+    description="%(prog)s will get the system serial number from an OBMC"
+    + " machine and print it to stdout as follows:\n\n"
+    + "mch_ser_num:<ser num>",
     formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     prefix_chars='-+')
 
@@ -130,8 +130,8 @@ def main():
     try:
         mch_ser_num = json['data']['SerialNumber']
     except KeyError:
-        print_error_report("Failed to find 'SerialNumber' key in the" +
-                           " following data:\n" + sprint_var(json))
+        print_error_report("Failed to find 'SerialNumber' key in the"
+                           + " following data:\n" + sprint_var(json))
         return False
     print_var(mch_ser_num, 0, 0, 0)
 

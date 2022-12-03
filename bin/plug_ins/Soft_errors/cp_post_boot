@@ -17,9 +17,9 @@ ignore_err = 0
 parser = argparse.ArgumentParser(
     usage='%(prog)s [OPTIONS]',
     description="%(prog)s will calculate the value of num_err_logs and"
-        + " save it as a plug-in value for the benefit of the FFDC plug-in."
-        + "  The FFDC plug-in can use that data to decide whether to collect"
-        + " FFDC data.",
+    + " save it as a plug-in value for the benefit of the FFDC plug-in."
+    + "  The FFDC plug-in can use that data to decide whether to collect"
+    + " FFDC data.",
     formatter_class=argparse.ArgumentDefaultsHelpFormatter,
     prefix_chars='-+')
 
@@ -75,8 +75,9 @@ def main():
     if not REDFISH_SUPPORT_TRANS_STATE:
         try:
             from robot.libraries.BuiltIn import BuiltIn
-            REDFISH_SUPPORT_TRANS_STATE = int(BuiltIn().get_variable_value("${REDFISH_SUPPORT_TRANS_STATE}", default=0))
-        except:
+            REDFISH_SUPPORT_TRANS_STATE = \
+                int(BuiltIn().get_variable_value("${REDFISH_SUPPORT_TRANS_STATE}", default=0))
+        except Exception:
             pass
 
     keyword_redfish_strings = \
@@ -96,7 +97,7 @@ def main():
             "${json_string}=  Evaluate  json.dumps($error_logs, indent=4)  modules=json",
             "Append To File  " + high_sev_elogs_file_path + "  ${json_string}"
         ]
-        
+
     if REDFISH_SUPPORT_TRANS_STATE:
         keyword_string = ' ; '.join(keyword_redfish_strings)
     else:
@@ -116,7 +117,8 @@ def main():
     num_error_logs = int(result['num_error_logs'])
     save_plug_in_value(num_error_logs)
     if num_error_logs > 0:
-        qprint_timen("Adding the name of our high severity error logs FFDC file to the appropriate file list.")
+        qprint_timen("Adding the name of our high severity error logs FFDC file "
+                     + "to the appropriate file list.")
         shell_cmd("echo " + high_sev_elogs_file_path + " > " + AUTOBOOT_FFDC_LIST_FILE_PATH)
     else:
         os.remove(high_sev_elogs_file_path)

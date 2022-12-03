@@ -22,8 +22,7 @@ set_exit_on_error(True)
 
 parser = argparse.ArgumentParser(
     usage='%(prog)s [OPTIONS]',
-    description="%(prog)s will set the auto_boot policy according to the"
-        + " user's wishes.",
+    description="%(prog)s will set the auto_boot policy according to the user's wishes.",
     formatter_class=argparse.RawTextHelpFormatter,
     prefix_chars='-+')
 
@@ -34,6 +33,7 @@ stock_list = [("test_mode", get_plug_default("test_mode", 0)),
               ("debug", get_plug_default("debug", 0))]
 
 AUTO_REBOOT_DISABLE = "1"
+
 
 def validate_parms():
 
