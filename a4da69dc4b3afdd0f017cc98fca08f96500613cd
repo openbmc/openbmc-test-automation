@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c89ce9be_ea68f307",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-12-05T06:23:13Z",
+      "side": 1,
+      "message": "./data/variables.py:196:36: E221 multiple spaces before operator\nREDFISH_DUMP_URI \u003d REDFISH_BASE_URI  + REDFISH_BMC_DUMP",
+      "revId": "a4da69dc4b3afdd0f017cc98fca08f96500613cd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3132378f_d7924d64",
