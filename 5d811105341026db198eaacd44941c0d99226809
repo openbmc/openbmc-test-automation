@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f4bc922_b0fc152e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-05T08:01:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f180da0b_5fdab66d",
+      "range": {
+        "startLine": 10,
+        "startChar": 7,
+        "endLine": 10,
+        "endChar": 46
+      },
+      "revId": "5d811105341026db198eaacd44941c0d99226809",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f71470c6_739e522d",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "413fd4f2_f4f4332f",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-05T08:01:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f71470c6_739e522d",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 33
+      },
+      "revId": "5d811105341026db198eaacd44941c0d99226809",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e31cc901_9ac0cd31",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-11-18T06:28:44Z",
       "side": 1,
       "message": "Verify that BMC dump is created in its default location of BMC.",
+      "range": {
+        "startLine": 26,
+        "startChar": 21,
+        "endLine": 26,
+        "endChar": 71
+      },
+      "revId": "5d811105341026db198eaacd44941c0d99226809",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a096de39_5dc9fcc3",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-05T08:01:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e31cc901_9ac0cd31",
       "range": {
         "startLine": 26,
         "startChar": 21,
@@ -107,6 +179,30 @@
       "side": 1,
       "message": "Yeah please make this change",
       "parentUuid": "e94ec486_cae6462b",
+      "range": {
+        "startLine": 30,
+        "startChar": 43,
+        "endLine": 30,
+        "endChar": 82
+      },
+      "revId": "5d811105341026db198eaacd44941c0d99226809",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8116766_6ffbe9ec",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-05T08:01:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2c2aead_b968b9a8",
       "range": {
         "startLine": 30,
         "startChar": 43,
