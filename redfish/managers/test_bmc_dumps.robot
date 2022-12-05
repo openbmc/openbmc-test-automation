@@ -64,6 +64,16 @@ Verify User Initiated BMC Dump Size
     Should Be True  0 < ${resp["AdditionalDataSizeBytes"]} < 20971520
 
 
+Verify Multiple BMC Dump Creation
+    [Documentation]  Verify multiple BMC dumps creation.
+    [Tags]   Verify_Multiple_BMC_Dump_Creation
+
+    ${dump_count}=  Evaluate  random.randint(5, 10)  modules=random
+    FOR  ${INDEX}  IN  1  ${dump_count}
+      Create User Initiated BMC Dump Via Redfish
+    END
+
+
 Verify User Initiated BMC Dump When Host Booted
     [Documentation]  Create user initiated BMC dump at host booted state and
     ...  verify dump entry for it.
