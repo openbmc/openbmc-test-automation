@@ -24,6 +24,47 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "767a0bef_d3be8f27",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-05T06:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93dfed8f_e6cc2357",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 36
+      },
+      "revId": "8811559e04986ba3ff9453e53f9cf849a4d9e40e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2fbc851_a375d1b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-05T06:47:07Z",
+      "side": 1,
+      "message": "all done.",
+      "revId": "8811559e04986ba3ff9453e53f9cf849a4d9e40e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99428f99_ecdd7518",
@@ -37,6 +78,30 @@
       "writtenOn": "2022-11-29T05:32:10Z",
       "side": 1,
       "message": "Move core dump test at the end of this suite",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 61
+      },
+      "revId": "8811559e04986ba3ff9453e53f9cf849a4d9e40e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da4fc1a9_2dbef5e8",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-05T06:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99428f99_ecdd7518",
       "range": {
         "startLine": 25,
         "startChar": 0,
@@ -93,6 +158,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "045aa005_60e2e29a",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-05T06:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "681b4a20_6c9884a9",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 73
+      },
+      "revId": "8811559e04986ba3ff9453e53f9cf849a4d9e40e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "687b2e82_7591f771",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-05T06:47:07Z",
+      "side": 1,
+      "message": "needs to done though different commit (a PR)",
+      "parentUuid": "bf2b9aef_e0c9149c",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 73
+      },
+      "revId": "8811559e04986ba3ff9453e53f9cf849a4d9e40e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "799a540e_ddfbfaf2",
@@ -106,6 +219,30 @@
       "writtenOn": "2022-11-29T05:32:10Z",
       "side": 1,
       "message": "Make changes as suggested in https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/58951 for this test case also.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 42
+      },
+      "revId": "8811559e04986ba3ff9453e53f9cf849a4d9e40e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a3e6117_9fffa684",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-05T06:47:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "799a540e_ddfbfaf2",
       "range": {
         "startLine": 25,
         "startChar": 0,
