@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a3a21a6_62c53cd8",
+        "filename": "data/variables.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-05T06:09:18Z",
+      "side": 1,
+      "message": "REDFISH_BMC_DUMP",
+      "revId": "e70ef206dc209b380997c9a7ee47db2282018607",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d0fad4e_52f0837a",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-05T06:09:18Z",
+      "side": 1,
+      "message": "Verify that there is no BMC dump at dump URI.",
+      "revId": "e70ef206dc209b380997c9a7ee47db2282018607",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
