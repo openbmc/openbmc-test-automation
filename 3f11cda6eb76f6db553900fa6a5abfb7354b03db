@@ -72,6 +72,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "191b7b5d_85ab142e",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-05T04:22:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0ebf044_1f58cc46",
+      "range": {
+        "startLine": 180,
+        "startChar": 28,
+        "endLine": 180,
+        "endChar": 77
+      },
+      "revId": "3f11cda6eb76f6db553900fa6a5abfb7354b03db",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe2500b3_deb71125",

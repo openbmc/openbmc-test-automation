@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cb9e304_ce13f39c",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-05T04:22:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89c37578_e7b05dc9",
+      "range": {
+        "startLine": 192,
+        "startChar": 41,
+        "endLine": 192,
+        "endChar": 46
+      },
+      "revId": "e78385cdd19800094b621d5d36756ab9d8dd2600",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22192a62_803ba1b6",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-02T14:56:18Z",
       "side": 1,
       "message": "Fix this.. clean up.. merge issues",
+      "range": {
+        "startLine": 455,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 12
+      },
+      "revId": "e78385cdd19800094b621d5d36756ab9d8dd2600",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "894d2b23_a4f94ddf",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-05T04:22:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22192a62_803ba1b6",
       "range": {
         "startLine": 455,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be207eaa_ea1c9bd0",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-05T04:22:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5c833a1_395cb4a6",
+      "range": {
+        "startLine": 458,
+        "startChar": 66,
+        "endLine": 458,
+        "endChar": 67
+      },
+      "revId": "e78385cdd19800094b621d5d36756ab9d8dd2600",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bad7f2c3_540b893c",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-12-02T14:56:18Z",
       "side": 1,
       "message": "Remove it.. merge issues",
+      "range": {
+        "startLine": 485,
+        "startChar": 0,
+        "endLine": 486,
+        "endChar": 67
+      },
+      "revId": "e78385cdd19800094b621d5d36756ab9d8dd2600",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84bc2cef_ff6299fc",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-05T04:22:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bad7f2c3_540b893c",
       "range": {
         "startLine": 485,
         "startChar": 0,
