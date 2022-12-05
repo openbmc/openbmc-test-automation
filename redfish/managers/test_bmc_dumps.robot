@@ -64,6 +64,34 @@ Verify User Initiated BMC Dump Size
     Should Be True  0 < ${resp["AdditionalDataSizeBytes"]} < 20971520
 
 
+Verify Initiate Multiple BMC Dumps At A Time
+    [Documentation]  Verify Initiate multiple BMC dumps at a time.
+    [Tags]  Verify_Initiate_Multiple_BMC_Dumps_At_A_Time 
+
+    Redfish Delete All BMC Dumps
+
+    # Initiate a BMC dump request which is expected to be accepted by web server.
+    ${payload}=  Create Dictionary  DiagnosticDataType=Manager
+    Redfish.Post  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
+    ...  body=${payload}  valid_status_codes=[${HTTP_ACCEPTED}]
+
+    # Now continue to multiple initiate dump request which is not expected to be accepted
+    # till earlier BMC dump task is completed. A limit is set to avoid any risk of infinite loop.
+    WHILE  True  limit=1000
+        Redfish.Post  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
+        ...  body=${payload}  valid_status_codes=[${503}]
+        ${dump_entries}=  Get BMC Dump Entries
+        ${cnt}=    Get length    ${dump_entries}
+
+        # Come out of the loop if a BMC dump generation is completed.
+        IF  ${cnt} > 0  BREAK
+    END
+
+    # The next BMC dump request is expected to accepted.
+    Redfish.Post  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
+    ...  body=${payload}  valid_status_codes=[${HTTP_ACCEPTED}]
+
+
 Verify User Initiated BMC Dump When Host Booted
     [Documentation]  Create user initiated BMC dump at host booted state and
     ...  verify dump entry for it.
@@ -193,6 +221,14 @@ Verify Maximum BMC Dump Creation
     Redfish.Post  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
     ...  body=${payload}  valid_status_codes=[${HTTP_INTERNAL_SERVER_ERROR}]
 
+
+Initiate Multiple BMC dumps At A Time
+    [Documentation]   Initiate multiple BMC dumps at a time.
+    [Tags]  Initiate_Multiple_BMC_dumps_At_A_Time
+
+    # We need to check initiating multiple BMC dumps continuosly does not
+    # lead to any problem. Further BMC dump initiation may fail at times until last dump
+    # completes.
 
 *** Keywords ***
 
