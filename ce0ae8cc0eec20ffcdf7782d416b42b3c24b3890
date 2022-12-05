@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e90567d_a4bba802",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-12-05T07:41:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0de36a9e_7a8c2c50",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 56
+      },
+      "revId": "ce0ae8cc0eec20ffcdf7782d416b42b3c24b3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "709c7195_f33c41ee",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-21T06:32:46Z",
       "side": 1,
       "message": "Lot of repetition of code. Let\u0027s use template format for these tests like below.\n\nVerify Error Log Transmission To Host\n    [Documentation]  Verify that error logs are correctly transmitted to the host.\n    [Tags]  Verify_Error_Log_Transmission_To_Host\n    [Template]  Verify PEL Transmission Field\n    \n    # error_type            host_state      transmission_state\n    informational_error     off             not_sent\n    unrecoverabl_error      off             not_sent\n    predictive_error        off             not_sent\n    informational_error     on              sent\n    unrecoverabl_error      on              sent\n    predictive_error        on              sent\n    \n    \nVerify PEL Transmission To Host\n    [Documentation]  Verify PEL transmission state.\n    [Arguments]  ${error_type}  ${host_state}  ${transmission_state}\n    \n    # Description of argument(s):\n    # error_type  type of error log to be injected.\n    # ...\n    # ...\n    \n    # Get system in required state.\n    If host_state \u003d off\n       do Redfish power off\n       elif host_state \u003d off\n       do Redfish power off\n\n    # Inject required error log.\n    If error_type \u003d informational_error\n          do BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}\n        Else if  error_type \u003d unrecoverabl_error\n          do BMC Execute Command  ${unrecoverabl_error}\n        else if  error_type \u003d\u003d ${predictive_error}\n          do BMC Execute Command  ${predictive_error}  \n          \n    ${pel_records}\u003d  Peltool  -lfh\n    ${ids}\u003d  Get Dictionary Keys  ${pel_records}\n    ${pel_id}\u003d  Get From List  ${ids}  -1\n\n    # Check transmission details in the error log.\n    ${host_transmission}\u003d  Get PEL Field Value  ${pel_id}  User Header  Host Transmission\n    Should Be Equal  \"${host_transmission}\"  \"${transmission_state}\"",
+      "range": {
+        "startLine": 705,
+        "startChar": 0,
+        "endLine": 745,
+        "endChar": 51
+      },
+      "revId": "ce0ae8cc0eec20ffcdf7782d416b42b3c24b3890",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbd95c1f_658d6d22",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-12-05T07:41:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "709c7195_f33c41ee",
       "range": {
         "startLine": 705,
         "startChar": 0,
