@@ -42,7 +42,6 @@ lib/jobs_processing.py
 lib/obmc_boot_test.py
 lib/openbmc_ffdc.py
 lib/openbmc_ffdc_list.py
-lib/pel_utils.py
 lib/pldm_utils.py
 lib/pythonutil.py
 lib/redfish_request.py
