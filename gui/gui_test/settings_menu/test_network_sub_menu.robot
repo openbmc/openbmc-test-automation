@@ -197,7 +197,7 @@ Suite Setup Execution
 
     Launch Browser And Login GUI
     Wait Until Keyword Succeeds  1 min  15 sec
-    ..  Click Element  ${xpath_settings_menu}
+    ...  Click Element  ${xpath_settings_menu}
     Click Element  ${xpath_network_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network
     ${default_gateway}=  Get BMC Default Gateway
