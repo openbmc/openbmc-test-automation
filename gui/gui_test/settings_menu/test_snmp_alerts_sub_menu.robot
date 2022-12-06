@@ -115,8 +115,11 @@ Configure Invalid SNMP Settings On BMC Via GUI And Verify
     ${SNMP_MGR1_IP}     ${out_of_range_port}     ${invalid_port_error}
     ${SNMP_MGR1_IP}     ${alpha_port}            ${invalid_port_error}
     ${SNMP_MGR1_IP}     ${negative_port}         ${invalid_port_error}
+    ${SNMP_MGR1_IP}     ${alphanumeric_port}     ${invalid_port_error}
     ${out_of_range_ip}  ${NON_DEFAULT_PORT1}     ${invalid_destination_error}
     ${alpha_ip}         ${NON_DEFAULT_PORT1}     ${invalid_destination_error}
+    ${negative_ip}      ${NON_DEFAULT_PORT1}     ${invalid_destination_error}
+    ${empty_ip}         ${NON_DEFAULT_PORT1}     ${invalid_destination_error}
 
 
 Configure Multiple SNMP Managers On BMC Via GUI And Verify
