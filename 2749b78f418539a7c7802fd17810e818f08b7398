@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5e1c543_34fb11d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-06T10:53:49Z",
+      "side": 1,
+      "message": "I have modified the test case after discussion. So many of earlier comments does not arise.",
+      "revId": "2749b78f418539a7c7802fd17810e818f08b7398",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
