@@ -7,7 +7,7 @@ Resource        ../../../lib/snmp/resource.robot
 Resource        ../../../lib/snmp/redfish_snmp_utils.robot
 
 Suite Setup     Suite Setup Execution
-Suite Teardown  Close Browser
+Suite Teardown  Run Keywords  Close Browser  AND  Redfish.Logout
 
 
 *** Variables ***
@@ -71,6 +71,8 @@ Configure SNMP Settings On BMC With Non Default Port Via GUI And Verify
     [Documentation]  Configure SNMP settings on BMC with non default port via GUI and verify.
     [Tags]  Configure_SNMP_Settings_On_BMC_With_Non_Default_Port_Via_GUI_And_Verify
     [Teardown]  Delete SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
+
+    Redfish.Login
 
     Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
 
