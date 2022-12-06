@@ -11,7 +11,6 @@ from datetime import datetime
 
 import bmc_ssh_utils as bsu
 import func_args as fa
-from robot.libraries.BuiltIn import BuiltIn
 
 base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(base_path + "/data/")
@@ -304,3 +303,22 @@ def get_bmc_event_log_id_for_pel(pel_id):
     print(pel_data)
     bmc_id_for_pel = pel_data["Private Header"]["BMC Event Log Id"]
     return bmc_id_for_pel
+
+
+def get_pel_information_by_id(pel_id):
+    r"""
+    Return PEL information for given PEL ID.
+
+    Description of arguments:
+    pel_id       PEL ID. E.g. 0x50000021.
+    """
+    try:
+        pel_data = peltool("-i " + pel_id)
+        print(pel_data)
+
+        return pel_data
+
+    except Exception as e:
+        raise peltool_exception("Exception occured while getting "
+                                "PEL information : " + str(e))
+        return False
