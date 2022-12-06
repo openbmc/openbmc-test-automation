@@ -5,6 +5,8 @@ Resource        rest_client.robot
 Resource        bmc_redfish_utils.robot
 Variables       ../data/variables.py
 Variables       ../data/pel_variables.py
+Library         pel_utils.py
+
 
 *** Variables ***
 
@@ -13,10 +15,12 @@ Variables       ../data/pel_variables.py
 ${low_severity_errlog_regex}  \\.(Informational|Notice|Debug|OK)$
 &{low_severity_errlog_filter}  Severity=${low_severity_errlog_regex}
 &{low_severity_errlog_filter_args}  filter_dict=${low_severity_errlog_filter}  regex=${True}  invert=${True}
+
 # The following is equivalent to &{low_severity_errlog_filter_args} but the name may be more intuitive for
 # users. Example usage:
 # ${err_logs}=  Get Error Logs  &{filter_low_severity_errlogs}
 &{filter_low_severity_errlogs}  &{low_severity_errlog_filter_args}
+
 
 *** Keywords ***
 
@@ -220,6 +224,95 @@ Delete Error Logs And Verify
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}list  quiet=${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
     ...  msg=Error logs not deleted as expected.
+
+
+Get PEL Software Inventory
+     [Documentation]  Get PEL detail information.
+     [Arguments]  ${pel_src_data}
+
+     # Description of argument(s):
+     # pel_src_data    PEL instance record.
+
+     # PEL instance record
+     # "SRC":                  "XXXXXXXX",
+     # "PLID":                 "0xX0000XXX",
+     # "CreatorID":            "XXX",
+     # "Subsystem":            "System",
+     # "Commit Time":          "10/18/2022 06:52:10",
+     # "Sev":                  "Error text",
+     # "CompID":               "0xXXXX"
+
+     &{pel_sw_inv_dict}=  Create Dictionary
+
+     ${plid_value}=  Get From Dictionary  ${pel_src_data}  PLID
+
+     # Python module: pel_utils
+     ${pel_src_record}=  pel_utils.Peltool  -i ${plid_value}
+
+     Should Not Be Equal As Strings  'PEL not found'  '${pel_src_record}'
+
+     Set To Dictionary  ${pel_sw_inv_dict}  pel_data  ${pel_src_data}  pel_detail_data  ${pel_src_record}
+
+     [Return]  ${pel_sw_inv_dict}
+
+
+Get Event Entry By Event Log Id
+    [Documentation]  Get single event entry matched by event ID.
+    [Arguments]  ${event_log_id}  ${event_entries}
+
+    # Description of argument(s):
+    # event_log_id     Event ID.
+    # event_entries    List of event entries.
+
+    FOR  ${event_instance}  IN  @{event_entries}
+      @{event_list_str}=  Split String  ${event_instance}[@odata.id]  /
+      Return From Keyword If  ${event_log_id} == ${event_list_str}[-1]  ${event_instance}
+    END
+
+    Log  Event is not found with event id ${event_log_id}.
+
+    [Return]  False
+
+
+Verify PEL And Redfish Event Log Are Same
+     [Documentation]  Verify PEL log attributes like "SRC", "Created at" are same as
+     ...  Redfish event log attributes like "EventId", "Created".
+
+     # PEL Log attributes
+     # SRC        : XXXXXXXX
+     # Created at : 11/14/2022 12:38:04
+
+     # Event log attributes
+     # EventId : XXXXXXXX XXXXXXXX XXXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXX
+     # Created : 2022-11-14T12:38:04+00:00
+
+     # Python module: pel_utils
+     ${pel_records}=  pel_utils.Get Pel Data From Bmc
+     ${pel_records_length}=  Get Length  ${pel_records}
+
+     ${event_entries}=  Get Event Logs
+     ${event_entries_length}=  Get Length  ${event_entries}
+
+     Run Keyword And Return If  ${pel_records_length} == ${event_entries_length} == 0
+     ...  Log  No PEL log and event entries found.
+
+     Run Keyword If  ${pel_records_length} != ${event_entries_length}
+     ...  Fail  PEL log and event entries are not equal.
+
+     Log  ${pel_records}
+     Log  ${event_entries}
+
+     FOR  ${pel_key}  IN  @{pel_records}
+       ${pel_sw_inv}=  Get From Dictionary  ${pel_records}  ${pel_key}
+       ${pel_record}=  Get PEL Software Inventory  ${pel_sw_inv}
+       ${event_id}=  Set Variable  ${pel_record}[pel_detail_data][Private Header][BMC Event Log Id]
+       
+       ${event_record}=  Get Event Entry By Event Log Id  ${event_id}  ${event_entries}
+       Run Keyword If  ${event_record} == False  Fail  Event is not found.
+
+       # Python module: pel_utils
+       pel_utils.Compare Pel And Redfish Event Log  ${pel_record}  ${event_record}
+     END
 
 
 Install Tarball
