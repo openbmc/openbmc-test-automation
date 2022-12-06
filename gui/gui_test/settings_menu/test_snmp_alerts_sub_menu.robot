@@ -76,8 +76,9 @@ Configure SNMP Settings On BMC With Non Default Port Via GUI And Verify
 
     Wait Until Page Contains  ${SNMP_MGR1_IP}  timeout=45s
 
+    Redfish.Login
     Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
-
+    Redfish.Logout
 
 Configure SNMP Settings On BMC Via GUI And Verify
     [Documentation]  Configure SNMP settings on BMC via GUI and verify.
