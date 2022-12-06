@@ -28,6 +28,10 @@ ${snmp_page_heading}                              SNMP alerts
 ${invalid_port_error}                             Value must be between 0 – 65535
 ${invalid_destination_error}                      Error in adding SNMP alert destination
 
+${negative_ip}                                    -10.6.6.6
+${alphanumeric_port}                              abc123
+${empty_ip}                                       ${EMPTY}
+
 
 *** Test Cases ***
 
@@ -116,6 +120,9 @@ Configure Invalid SNMP Settings On BMC Via GUI And Verify
     ${SNMP_MGR1_IP}     ${negative_port}         ${invalid_port_error}
     ${out_of_range_ip}  ${NON_DEFAULT_PORT1}     ${invalid_destination_error}
     ${alpha_ip}         ${NON_DEFAULT_PORT1}     ${invalid_destination_error}
+    ${negative_ip}      ${NON_DEFAULT_PORT1}     ${invalid_destination_error}
+    ${SNMP_MGR1_IP}     ${alphanumeric_port}     ${invalid_port_error}
+    ${empty_ip}         ${NON_DEFAULT_PORT1}     ${invalid_destination_error}
 
 
 Configure Multiple SNMP Managers On BMC Via GUI And Verify
