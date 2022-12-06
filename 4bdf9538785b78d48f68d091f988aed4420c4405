@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "159ed604_1ab21ced",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-12-06T11:58:29Z",
+      "side": 1,
+      "message": "For now you can continue to define these in lib/snmp/resource.robot.",
+      "range": {
+        "startLine": 31,
+        "startChar": 1,
+        "endLine": 31,
+        "endChar": 17
+      },
+      "revId": "4bdf9538785b78d48f68d091f988aed4420c4405",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beae3903_f06767c0",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-12-06T11:58:29Z",
+      "side": 1,
+      "message": "Put all the invalid port errors test cases together.",
+      "range": {
+        "startLine": 124,
+        "startChar": 4,
+        "endLine": 124,
+        "endChar": 70
+      },
+      "revId": "4bdf9538785b78d48f68d091f988aed4420c4405",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
