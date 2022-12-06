@@ -3,6 +3,98 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07e8d823_9cc72e62",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-12-06T07:54:50Z",
+      "side": 1,
+      "message": "Remove space",
+      "range": {
+        "startLine": 69,
+        "startChar": 56,
+        "endLine": 69,
+        "endChar": 57
+      },
+      "revId": "7a7aab357a0f111986c96fdd9afb65f80999cecd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07c88e51_741d2464",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-12-06T07:54:50Z",
+      "side": 1,
+      "message": "continue to initiate multiple dump\n\n\nplease have 80 character limit",
+      "range": {
+        "startLine": 78,
+        "startChar": 10,
+        "endLine": 78,
+        "endChar": 30
+      },
+      "revId": "7a7aab357a0f111986c96fdd9afb65f80999cecd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da0d6477_91843d30",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-12-06T07:54:50Z",
+      "side": 1,
+      "message": "use this\n\n./lib/rest_response_code.robot:${HTTP_SERVICE_UNAVAILABLE}              503",
+      "range": {
+        "startLine": 82,
+        "startChar": 49,
+        "endLine": 82,
+        "endChar": 57
+      },
+      "revId": "7a7aab357a0f111986c96fdd9afb65f80999cecd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ebc8a81_efb64043",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2022-12-06T07:54:50Z",
+      "side": 1,
+      "message": "this is repeated thrice in same function. make it is a variable in\n\n***  Variables ***\n\n${BMCDUMP_URI_LOGSERVICES_ACTIONS}    /redfish/v1/Managers/bmc/LogServices/Dump/Actions\n\n${BMCDUMP_URI_COLLECT_DIAG_DATA}      ${BMC_DUMP_URI_LOGSERVICES_ACTIONS}/LogService.CollectDiagnosticData",
+      "range": {
+        "startLine": 91,
+        "startChar": 18,
+        "endLine": 91,
+        "endChar": 100
+      },
+      "revId": "7a7aab357a0f111986c96fdd9afb65f80999cecd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b5c1bcc4_553fa79b",
         "filename": "redfish/managers/test_bmc_dumps.robot",
         "patchSetId": 2
