@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5c1bcc4_553fa79b",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-06T07:14:52Z",
+      "side": 1,
+      "message": "For this test we dont need to create 1000 dumps. Just trigger 5-10 dumps at a time and check if they all get created without any problem. You can have code like below.\n\n{taskid_list}\u003d  Create List\n{dump_count}\u003d  Evaluate  random.randint(5, 10)  modules\u003drandom\n    WHILE  True  limit\u003d${dump_count}\n        ${task_id}\u003d  Create User Initiated BMC Dump Via Redfish\n        Append To List  {taskid_list}  {task_id}\n    END\n \n    FOR  ${task_id}  IN  @{taskid_list}\n        Wait Until Keyword Succeeds  5 min  15 sec  Check Task Completion  ${task_id}\n        ${task_dict}\u003d  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}\n        Set dump id to  ${task_dict[\"Payload\"][\"HttpHeaders\"][-1].split(\"/\")[-1]}\n        Now Check if dump exist  ${task_dict[\"Payload\"][\"HttpHeaders\"][-1].split(\"/\")[-1]}\n    END",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 63
+      },
+      "revId": "7a7aab357a0f111986c96fdd9afb65f80999cecd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
