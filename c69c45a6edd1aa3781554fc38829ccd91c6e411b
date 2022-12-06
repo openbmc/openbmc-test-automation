@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "630de143_93d23a7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-12-06T09:34:24Z",
+      "side": 1,
+      "message": "Trigger User Tool Initiated MPIPL :: Trigger And Verify user tool ... | FAIL |\nSetup failed:\nNo keyword with name \u0027Clear All Subscriptions\u0027 found.\n------------------------------------------------------------------------------\nTrigger User Initiated MPIPL Using Redfish :: Verify redfish trigg... | FAIL |\nSetup failed:\nNo keyword with name \u0027Clear All Subscriptions\u0027 found.",
+      "revId": "c69c45a6edd1aa3781554fc38829ccd91c6e411b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
