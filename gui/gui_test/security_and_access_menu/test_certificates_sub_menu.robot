@@ -6,7 +6,7 @@ Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/certificate_utils.robot
 
 Suite Setup     Suite Setup Execution
-Suite Teardown  Close Browser
+Suite Teardown  Run Keywords  Close Browser  AND  Redfish.Logout
 Test Setup      Test Setup Execution
 
 
@@ -95,6 +95,8 @@ Verify Installed CA Certificate
 Verify Installed HTTPS Certificate
     [Documentation]  Install HTTPS certificate via Redfish and verify it in GUI.
     [Tags]  Verify_Installed_HTTPS_Certificate
+    
+    Redfish.Login
 
     # Replace HTTPS certificate.
     Replace Certificate Via Redfish  Server   Valid Certificate Valid Privatekey  ok
