@@ -5,6 +5,8 @@ Resource        rest_client.robot
 Resource        bmc_redfish_utils.robot
 Variables       ../data/variables.py
 Variables       ../data/pel_variables.py
+Library         pel_utils.py
+
 
 *** Variables ***
 
@@ -13,10 +15,12 @@ Variables       ../data/pel_variables.py
 ${low_severity_errlog_regex}  \\.(Informational|Notice|Debug|OK)$
 &{low_severity_errlog_filter}  Severity=${low_severity_errlog_regex}
 &{low_severity_errlog_filter_args}  filter_dict=${low_severity_errlog_filter}  regex=${True}  invert=${True}
+
 # The following is equivalent to &{low_severity_errlog_filter_args} but the name may be more intuitive for
 # users. Example usage:
 # ${err_logs}=  Get Error Logs  &{filter_low_severity_errlogs}
 &{filter_low_severity_errlogs}  &{low_severity_errlog_filter_args}
+
 
 *** Keywords ***
 
@@ -220,6 +224,136 @@ Delete Error Logs And Verify
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}list  quiet=${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
     ...  msg=Error logs not deleted as expected.
+
+
+Compare PEL And Redfish Event Log
+     [Documentation]  Compare PEL log attributes like "SRC", "Created at" with Redfish
+     ...              event log attributes like "EventId", "Created".
+     ...              Return False if they do not match.
+     [Arguments]  ${pel_record}  ${event_record}
+
+     # Description of argument(s):
+     # pel_record     PEL record.
+     # event_record   Redfish event which is equivalent of PEL record.
+
+     # Below is format of PEL record and event record and following i.e. "SRC", "Created at" from
+     # PEL record is compared with "EventId", "Created" from event record.
+
+     # PEL Log attributes
+     # SRC        : XXXXXXXX
+     # Created at : 11/14/2022 12:38:04
+
+     # Event log attributes
+     # EventId : XXXXXXXX XXXXXXXX XXXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXX
+     # Created : 2022-11-14T12:38:04+00:00
+
+     Log  ${pel_record}
+     Log  ${event_record}
+
+     ${pel_created_time}=  Set Variable  ${pel_record}[pel_detail_data][Private Header][Created at]
+
+     @{event_ids}=  Split String  ${event_record['EventId']}  ${SPACE}
+     ${pel_created_time_status}=  Run Keyword And Return Status
+     ...  Should Be Equal As Strings  ${pel_record}[pel_data][SRC]  ${event_ids}[0]
+
+     @{event_time_format}=  Split String  ${event_record['Created']}  T
+     ${event_date}=  Set Variable  ${event_time_format}[0]
+     ${event_date}=  Convert Date  ${event_date}  result_format=%m/%d/%Y
+
+     @{event_sub_time_format}=  Split String  ${event_time_format}[1]  +
+     ${event_date_time}=  Catenate  ${event_date}  ${event_sub_time_format}[0]
+     ${event_created_time}=  Replace String  ${event_date_time}  -  /
+     ${event_created_time_status}=  Run Keyword And Return Status
+     ...  Should Be Equal As Strings  ${pel_created_time}  ${event_created_time}
+
+     Log  PEL Created Time : ${pel_created_time}
+     Log  Error Log Created Time : ${event_date_time}
+
+     Should Be Equal As Strings  '${pel_created_time_status}'  'True'
+     Should Be Equal As Strings  '${event_created_time_status}'  'True'
+
+
+Get PEL Software Inventory
+     [Documentation]  Get PEL detail information.
+     [Arguments]  ${pel_src_data}
+
+     # Description of argument(s):
+     # pel_src_data    PEL instance record.
+
+     # PEL instance record
+     # "SRC":                  "XXXXXXXX",
+     # "PLID":                 "0xX0000XXX",
+     # "CreatorID":            "XXX",
+     # "Subsystem":            "System",
+     # "Commit Time":          "10/18/2022 06:52:10",
+     # "Sev":                  "Error text",
+     # "CompID":               "0xXXXX"
+
+     &{pel_sw_inv_dict}=  Create Dictionary
+
+     ${plid_value}=  Get From Dictionary  ${pel_src_data}  PLID
+
+     # Python module: pel_utils
+     ${pel_src_record}=  pel_utils.Peltool  -i ${plid_value}
+
+     ${length}=  Get Length  ${pel_src_record}
+     Should Not Be Equal As Integers  0  ${length}
+
+     Set To Dictionary  ${pel_sw_inv_dict}  pel_data  ${pel_src_data}
+     Set To Dictionary  ${pel_sw_inv_dict}  pel_detail_data  ${pel_src_record}
+
+     [Return]  ${pel_sw_inv_dict}
+
+
+Get Event Entry By Event Log Id
+    [Documentation]  Get single event entry matched by event ID.
+    [Arguments]  ${event_log_id}  ${event_entries}
+
+    # Description of argument(s):
+    # event_log_id     Event ID.
+    # event_entries    List of event entries.
+
+    FOR  ${event_instance}  IN  @{event_entries}
+      @{event_list_str}=  Split String  ${event_instance}[@odata.id]  /
+      Continue For Loop If  ${event_log_id} != ${event_list_str}[-1]
+      Return From Keyword If  ${event_log_id} == ${event_list_str}[-1]  ${event_instance}
+    END
+
+    [Return]  False
+
+
+Verify PEL And Redfish Event Log Are Same
+     [Documentation]  Verify PEL log attributes like "SRC", "Created at" are same as
+     ...  Redfish event log attributes like "EventId", "Created".
+
+     # PEL Log attributes
+     # SRC        : XXXXXXXX
+     # Created at : 11/14/2022 12:38:04
+
+     # Event log attributes
+     # EventId : XXXXXXXX XXXXXXXX XXXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXX
+     # Created : 2022-11-14T12:38:04+00:00
+
+     # Python module: pel_utils
+     ${pel_records}=  pel_utils.get_pel_data_from_bmc
+
+     ${length}=  Get Length  ${pel_records}
+     Should Not Be Equal As Integers  0  ${length}
+
+     ${event_entries}=  Get Event Logs
+     ${length}=  Get Length  ${event_entries}
+     Should Not Be Equal As Integers  0  ${length}
+
+     Log  ${pel_records}
+     Log  ${event_entries}
+
+     FOR  ${pel_key}  IN  @{pel_records}
+       ${pel_sw_inv}=  Get From Dictionary  ${pel_records}  ${pel_key}
+       ${pel_record}=  Get PEL Software Inventory  ${pel_sw_inv}
+       ${event_id}=  Set Variable  ${pel_record}[pel_detail_data][Private Header][BMC Event Log Id]
+       ${event_record}=  Get Event Entry By Event Log Id  ${event_id}  ${event_entries}
+       ${status}=  Compare PEL And Redfish Event Log  ${pel_record}  ${event_record}
+     END
 
 
 Install Tarball
