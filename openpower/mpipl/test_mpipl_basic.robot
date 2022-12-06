@@ -144,3 +144,12 @@ Required Dumps Should Exist
     ${sys_dump}=  Redfish.Get Properties  /redfish/v1/Systems/system/LogServices/Dump/Entries
     Log To Console  System dump generated: ${sys_dump['Members@odata.count']}
     Should Be True  ${sys_dump['Members@odata.count']} == 1  msg=No system dump generated.
+
+
+Clear All Subscriptions
+    [Documentation]  Delete all subscriptions.
+
+    ${subscriptions}=  Redfish.Get Attribute  /redfish/v1/EventService/Subscriptions  Members
+    FOR  ${subscription}  IN  @{subscriptions}
+        Redfish.Delete  ${subscription['@odata.id']}
+    END
