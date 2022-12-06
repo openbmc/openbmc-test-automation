@@ -206,6 +206,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d853ee6f_df02dc32",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-06T06:23:18Z",
+      "side": 1,
+      "message": "With this commit you are moving REST test to Redfish in our repo. Community always prefer to use Redfish, so you can take the old test out. We have been doing the same from long.",
+      "parentUuid": "687b2e82_7591f771",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 73
+      },
+      "revId": "8811559e04986ba3ff9453e53f9cf849a4d9e40e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "799a540e_ddfbfaf2",
