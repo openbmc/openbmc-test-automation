@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "663b0f1b_3f17a997",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-06T14:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91a046ee_969205ab",
+      "range": {
+        "startLine": 230,
+        "startChar": 4,
+        "endLine": 231,
+        "endChar": 67
+      },
+      "revId": "829dd2c939cc25721a6b0acb882c9d00e3979228",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "923d0215_f240d912",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7a38a95_407c7786",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-06T14:27:01Z",
+      "side": 1,
+      "message": "its part to message format.",
+      "parentUuid": "923d0215_f240d912",
+      "range": {
+        "startLine": 252,
+        "startChar": 54,
+        "endLine": 252,
+        "endChar": 98
+      },
+      "revId": "829dd2c939cc25721a6b0acb882c9d00e3979228",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14304eed_e7850964",
         "filename": "lib/logging_utils.robot",
         "patchSetId": 10
@@ -60,6 +108,30 @@
       "writtenOn": "2022-12-06T13:46:50Z",
       "side": 1,
       "message": "why is this check needed??\n\nonce u get a valid PLID there will be a SRC record data. The dict is never empty.\n\nnot required to check.. directly proceed for next steps",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 50
+      },
+      "revId": "829dd2c939cc25721a6b0acb882c9d00e3979228",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f8be2db_e79305fd",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-06T14:27:01Z",
+      "side": 1,
+      "message": "Consider a scenario if I get zero pel logs then I will able to catch the issue even before processing PEL logs for other purpose.",
+      "parentUuid": "14304eed_e7850964",
       "range": {
         "startLine": 259,
         "startChar": 0,
@@ -118,6 +190,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "947bb3a9_dbc84bbd",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-06T14:27:01Z",
+      "side": 1,
+      "message": "its under 110 chars . it should be fine with current one.",
+      "parentUuid": "112c0ba1_605e367a",
+      "range": {
+        "startLine": 286,
+        "startChar": 7,
+        "endLine": 286,
+        "endChar": 104
+      },
+      "revId": "829dd2c939cc25721a6b0acb882c9d00e3979228",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d7d5bf85_fe7cb304",
         "filename": "lib/logging_utils.robot",
         "patchSetId": 10
@@ -135,6 +231,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d770c7f5_177b4e7b",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-06T14:27:01Z",
+      "side": 1,
+      "message": "Added extra code.",
+      "parentUuid": "d7d5bf85_fe7cb304",
+      "revId": "829dd2c939cc25721a6b0acb882c9d00e3979228",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bbd36820_58f7aefe",
         "filename": "lib/pel_utils.py",
         "patchSetId": 10
@@ -146,6 +260,30 @@
       "writtenOn": "2022-12-06T13:46:50Z",
       "side": 1,
       "message": "verify_no_pels_exists_on_bmc():",
+      "range": {
+        "startLine": 93,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 28
+      },
+      "revId": "829dd2c939cc25721a6b0acb882c9d00e3979228",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efa66d98_b55aaee7",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-06T14:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbd36820_58f7aefe",
       "range": {
         "startLine": 93,
         "startChar": 4,
@@ -179,6 +317,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69aa6fb6_746d129b",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-06T14:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "735f7e2a_9b381fb0",
+      "range": {
+        "startLine": 95,
+        "startChar": 38,
+        "endLine": 95,
+        "endChar": 40
+      },
+      "revId": "829dd2c939cc25721a6b0acb882c9d00e3979228",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfc95154_5c0e0096",
@@ -192,6 +354,30 @@
       "writtenOn": "2022-12-06T13:46:50Z",
       "side": 1,
       "message": "instead of pass return True.. Incase some one needs to capture the result.",
+      "range": {
+        "startLine": 101,
+        "startChar": 9,
+        "endLine": 101,
+        "endChar": 12
+      },
+      "revId": "829dd2c939cc25721a6b0acb882c9d00e3979228",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6b2bf3a_eb9ca82a",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-06T14:27:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfc95154_5c0e0096",
       "range": {
         "startLine": 101,
         "startChar": 9,
