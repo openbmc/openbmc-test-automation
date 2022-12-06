@@ -11,6 +11,8 @@ ${SNMP_MGR3_IP}       10.6.6.8
 ${out_of_range_ip}    10.6.6.256
 ${alpha_ip}           xx.xx.xx.xx
 ${less_octet_ip}      10.5.5
+${negative_ip}        -10.6.6.6
+${empty_ip}           ${EMPTY}
 
 # Valid and invalid IP and ports. Valid port range is 0-65535.
 # Default port is 162.
@@ -22,6 +24,7 @@ ${out_of_range_port}  ${65536}
 ${alpha_port}         ab
 ${negative_port}      ${-12}
 ${empty_port}         ${EMPTY}
+${alphanumeric_port}  abc123
 
 # User Name Password
 ${SNMP_MGR1_USERNAME}    ${EMPTY}
