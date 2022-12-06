@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "63a742e8_b5184bfa",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-06T11:17:16Z",
+      "side": 1,
+      "message": "This line is not my code.",
+      "parentUuid": "e5773fc9_ebfe2616",
+      "range": {
+        "startLine": 223,
+        "startChar": 4,
+        "endLine": 223,
+        "endChar": 25
+      },
+      "revId": "d0f9c69f6bdcc85ff0eb60d6545eb38b78b885b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e38e769a_da9f588c",
         "filename": "lib/logging_utils.robot",
         "patchSetId": 6
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-06T11:12:51Z",
       "side": 1,
       "message": "Remove.",
+      "range": {
+        "startLine": 286,
+        "startChar": 100,
+        "endLine": 286,
+        "endChar": 104
+      },
+      "revId": "d0f9c69f6bdcc85ff0eb60d6545eb38b78b885b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75b6b891_147d95a5",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-06T11:17:16Z",
+      "side": 1,
+      "message": "its part of code.",
+      "parentUuid": "e38e769a_da9f588c",
       "range": {
         "startLine": 286,
         "startChar": 100,
