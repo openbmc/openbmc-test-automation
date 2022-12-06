@@ -97,7 +97,9 @@ Verify Installed HTTPS Certificate
     [Tags]  Verify_Installed_HTTPS_Certificate
 
     # Replace HTTPS certificate.
+    Redfish.Login
     Replace Certificate Via Redfish  Server   Valid Certificate Valid Privatekey  ok
+    Redfish.Logout
 
     # Verify certificate is available in GUI.
     Wait Until Page Contains  HTTPS Certificate  timeout=10
