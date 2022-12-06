@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6ca1b79_d04bb2a8",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-06T17:31:19Z",
+      "side": 1,
+      "message": "Not required to split in two lines. This is under our max 110 limit for line.",
+      "parentUuid": "db2d4012_7ad827f2",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 102
+      },
+      "revId": "29afc0cff86b217a096e72fa164387be7b35ae6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1aa4881_55f7438d",
         "filename": "openpower/pel/test_bmc_pel.robot",
         "patchSetId": 2
@@ -49,6 +73,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1591f765_5e904f46",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-06T17:31:19Z",
+      "side": 1,
+      "message": "[Documentation]  Inject PEL log of given type and verify its host transmission state.",
+      "range": {
+        "startLine": 912,
+        "startChar": 0,
+        "endLine": 912,
+        "endChar": 81
+      },
+      "revId": "29afc0cff86b217a096e72fa164387be7b35ae6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec19e756_ba234dfe",
         "filename": "openpower/pel/test_bmc_pel.robot",
         "patchSetId": 2
@@ -60,6 +107,75 @@
       "writtenOn": "2022-12-05T11:16:52Z",
       "side": 1,
       "message": "give space and  align well",
+      "revId": "29afc0cff86b217a096e72fa164387be7b35ae6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "649543b5_59d18b71",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 924,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-06T17:31:19Z",
+      "side": 1,
+      "message": "Make use of else if\n    Run Keyword If  \u0027${host_state}\u0027 \u003d\u003d \u0027Off\u0027\n    ...    Redfish Power Off  stack_mode\u003dskip\n    ...  ELSE IF  \u0027${host_state}\u0027 \u003d\u003d \u0027On\u0027\n    ...    Redfish Power On  stack_mode\u003dskip",
+      "range": {
+        "startLine": 921,
+        "startChar": 0,
+        "endLine": 924,
+        "endChar": 42
+      },
+      "revId": "29afc0cff86b217a096e72fa164387be7b35ae6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2c0d719_13771efd",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 931,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-06T17:31:19Z",
+      "side": 1,
+      "message": "Align like below\n    Run Keyword IF  \"${error_type}\" \u003d\u003d \"informational_error\"\n    ...    BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}\n    ...  ELSE IF  \"${error_type}\" \u003d\u003d \"unrecoverable_error\"\n    ...    BMC Execute Command   ${CMD_UNRECOVERABLE_ERROR}\n    ...  ELSE IF  \"${error_type}\" \u003d\u003d \"predictive_error\"\n    ...    BMC Execute Command  ${CMD_PREDICTIVE_ERROR}",
+      "range": {
+        "startLine": 927,
+        "startChar": 0,
+        "endLine": 931,
+        "endChar": 59
+      },
+      "revId": "29afc0cff86b217a096e72fa164387be7b35ae6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cab51674_f25bff79",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-06T17:31:19Z",
+      "side": 1,
+      "message": "you can always use -lfh option to list all the error here. No need to check based on error type.\n\n    ${pel_records}\u003d  Run Keyword  Peltool  -lfh",
+      "range": {
+        "startLine": 936,
+        "startChar": 0,
+        "endLine": 938,
+        "endChar": 26
+      },
       "revId": "29afc0cff86b217a096e72fa164387be7b35ae6d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
