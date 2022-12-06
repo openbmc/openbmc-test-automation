@@ -90,6 +90,20 @@ def get_pel_data_from_bmc(include_hidden_pels=False,
     return pel_data
 
 
+def verify_no_pels_exists_on_bmc():
+    r"""
+    Verify if no PELs are present in BMC else raise an exception.
+    """
+
+    pel_data = get_pel_data_from_bmc()
+
+    if len(pel_data) == 0:
+        return True
+    else:
+        print("PEL data present. \n", pel_data)
+        raise peltool_exception("PEL data present in BMC")
+
+
 def fetch_all_pel_ids_for_src(src_id, severity, include_hidden_pels=False):
     r"""
     Fetch all PEL IDs for the input SRC ID based on the severity type
