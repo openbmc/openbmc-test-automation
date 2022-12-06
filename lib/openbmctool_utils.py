@@ -82,17 +82,18 @@ def openbmctool_execute_command(command_string, *args, **kwargs):
     # example, the user may have specified "fru status | head -n 2" which
     # would be broken into 2 list elements.  We will also break on ">"
     # (re-direct).
-    pipeline = list(
-        map(str.strip, re.split(r" ([\|>]) ", str(command_string)))
-    )
+
+    pipeline = 
+            list(map(str.strip, re.split(r" ([\|>]) ", str(command_string))))
+
     # The "tail" command below prevents a "egrep: write error: Broken pipe"
     # error if the user is piping the output to a sub-process.
     # Use "egrep -v" to get rid of editorial output from openbmctool.py.
-    pipeline.insert(
-        1,
-        "| tail -n +1 | egrep -v 'Attempting login|User [^ ]+"
-        " has been logged out'",
-    )
+
+    pipeline.
+        insert(1, 
+                "| tail -n +1 | egrep -v 'Attempting login|User [^ ]+ "
+                "has been logged out'",)
 
     command_string = (
         "set -o pipefail ; python3 $(which openbmctool.py) -H "
@@ -245,9 +246,10 @@ def get_fru_print(parse_json=True):
                                     parsed into a list of dictionaries.
     """
 
-    rc, output = openbmctool_execute_command(
-        "fru print", print_output=False, ignore_err=False
-    )
+    rc, output = openbmctool_execute_command("fru print",
+                                             print_output=False,
+                                             ignore_err=False)
+
     if parse_json:
         return gm.json_loads_multiple(output)
     else:
@@ -391,9 +393,12 @@ def get_sensors_list():
         [target]:                Active
     ...
     """
-    rc, output = openbmctool_execute_command(
-        "sensors list", print_output=False, ignore_err=False
-    )
+
+    rc, output = 
+            openbmctool_execute_command("sensors list",
+                                        print_output=False,
+                                        ignore_err=False)
+
     # Example value for output (partial):
     # sensor                 | type         | units     | value    | target
     # OCC0                   | Discrete     | N/A       | Active   | Active
@@ -615,9 +620,9 @@ def network(sub_command, **options):
     else:
         new_options = options
 
-    command_string = gc.create_command_string(
-        "network " + sub_command, new_options
-    )
-    return openbmctool_execute_command_json(
-        command_string, print_output=False, ignore_err=False
-    )
+    command_string = gc.create_command_string("network " + sub_command,
+                                              new_options)
+
+    return openbmctool_execute_command_json(command_string,
+                                            print_output=False,
+                                            ignore_err=False)
