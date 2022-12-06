@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fb5681a_90fface1",
+        "filename": "gui/gui_test/security_and_access_menu/test_certificates_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-06T16:53:59Z",
+      "side": 1,
+      "message": "remove whitespace",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 4
+      },
+      "revId": "6b3dc3558fefd5ef678eb47466eeba6a1da86a7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e3421d7_94bd4280",
+        "filename": "gui/gui_test/security_and_access_menu/test_certificates_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-06T16:53:59Z",
+      "side": 1,
+      "message": "Like I mention in the other commit, please add redfish login and logout in below manner. \n\n    # Replace HTTPS certificate.\n    Redfish.Login\n    Replace Certificate Via Redfish  Server   Valid Certificate Valid Privatekey  ok\n    Redfish.Logout",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 84
+      },
+      "revId": "6b3dc3558fefd5ef678eb47466eeba6a1da86a7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
