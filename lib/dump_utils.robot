@@ -276,10 +276,16 @@ Initiate BMC Dump Using Redfish And Return Task Id
 
 Create User Initiated BMC Dump Via Redfish
     [Documentation]  Generate user initiated BMC dump via Redfish and return the dump id number (e.g., "5").
+    [Arguments]  ${skip_dump_creation}=0
+
+    # Description of Argument(s):
+    # skip_dump_creation  Value 1 will make method to return immediately after initiating DUMP request.
 
     ${payload}=  Create Dictionary  DiagnosticDataType=Manager
     ${resp}=  Redfish.Post  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
     ...  body=${payload}  valid_status_codes=[${HTTP_ACCEPTED}]
+
+    Run Keyword If  ${skip_dump_creation} == 1  Return From Keyword  ${resp.dict['Id']}
 
     # Example of response from above Redfish POST request.
     # "@odata.id": "/redfish/v1/TaskService/Tasks/0",
