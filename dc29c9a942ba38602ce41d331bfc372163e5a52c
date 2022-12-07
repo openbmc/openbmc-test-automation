@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a3d5932_47254279",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-07T06:11:26Z",
+      "side": 1,
+      "message": "Check no PEL log exists and verify PEL logs",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 12
+      },
+      "revId": "dc29c9a942ba38602ce41d331bfc372163e5a52c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ead158b_8f69f7ba",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-07T06:11:26Z",
+      "side": 1,
+      "message": "Compare PEL log attributes like \"SRC\", \"Created at\" with Redfish event log attributes like \"EventId\", \"Created\". \nReturn False if they do not match.",
+      "range": {
+        "startLine": 230,
+        "startChar": 22,
+        "endLine": 232,
+        "endChar": 67
+      },
+      "revId": "dc29c9a942ba38602ce41d331bfc372163e5a52c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34728b87_c243fb24",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-07T06:11:26Z",
+      "side": 1,
+      "message": "This keyword is to compare the given pel_inv values with event_entries. Going back and validating whether the PEL exists in BMC should not be part of the keyword. This keyword should be called only when a PEL exists and needs to be compared. The caller needs to take care of it.",
+      "range": {
+        "startLine": 256,
+        "startChar": 1,
+        "endLine": 262,
+        "endChar": 50
+      },
+      "revId": "dc29c9a942ba38602ce41d331bfc372163e5a52c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70a6a892_1c323c3e",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-07T06:11:26Z",
+      "side": 1,
+      "message": "src_created_time",
+      "range": {
+        "startLine": 264,
+        "startChar": 7,
+        "endLine": 264,
+        "endChar": 29
+      },
+      "revId": "dc29c9a942ba38602ce41d331bfc372163e5a52c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7dfa66b_54148e9e",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-07T06:11:26Z",
+      "side": 1,
+      "message": "event_ids",
+      "range": {
+        "startLine": 268,
+        "startChar": 9,
+        "endLine": 268,
+        "endChar": 17
+      },
+      "revId": "dc29c9a942ba38602ce41d331bfc372163e5a52c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ba94307_33d2b3a0",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-07T06:11:26Z",
+      "side": 1,
+      "message": "exceeds 110 chars",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 269,
+        "endChar": 115
+      },
+      "revId": "dc29c9a942ba38602ce41d331bfc372163e5a52c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cd2539a_55c5d0d4",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-07T06:11:26Z",
+      "side": 1,
+      "message": "Why are we continuing the loop here?\nWhat is the expectation from the caller? Is it a 1-1 comparison between PEL and Redfish event log? If yes, then it is not required to continue for loop.\nIf not, then a comparison of the BMC ID present in PEL should be verified first to make sure we are looking at the correct Redfish event log before comparing the SRC and date time.",
+      "range": {
+        "startLine": 284,
+        "startChar": 7,
+        "endLine": 284,
+        "endChar": 98
+      },
+      "revId": "dc29c9a942ba38602ce41d331bfc372163e5a52c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2175db01_3c4a944c",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-07T06:11:26Z",
+      "side": 1,
+      "message": "Why is this an error scenario? \nThe validation should be to check that there are no PELs and no entry in Redfish event log too. Only if they do not match then you should fail here.",
+      "range": {
+        "startLine": 308,
+        "startChar": 5,
+        "endLine": 308,
+        "endChar": 50
+      },
+      "revId": "dc29c9a942ba38602ce41d331bfc372163e5a52c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "825d9f1b_13c5f148",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-07T06:11:26Z",
+      "side": 1,
+      "message": "verify_no_pel_exists_in_bmc",
+      "range": {
+        "startLine": 93,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 32
+      },
+      "revId": "dc29c9a942ba38602ce41d331bfc372163e5a52c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
