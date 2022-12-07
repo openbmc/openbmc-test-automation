@@ -228,6 +228,18 @@ Verify Core Dump Size
     Should Be True  0 < ${resp["AdditionalDataSizeBytes"]} < 20971520
 
 
+Verify Error While Initiating BMC Dump During Dumping State
+    [Documentation] Verify error while initiating BMC dump during dumping state.
+    [Tags]  Verify_Error_While_Initiating_BMC_Dump_During_Dumping_State
+
+    Create User Initiated BMC Dump Via Redfish  skip_dump_creation=1
+
+    # Check error while initiating BMC dump while dump in progress.
+    Redfish.Post
+    ...  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
+    ...  body=${payload}  valid_status_codes=[${HTTP_SERVICE_UNAVAILABLE}]
+
+
 *** Keywords ***
 
 Get BMC Dump Entries
