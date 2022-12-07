@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93f8b8a3_fdf637b6",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-12-07T13:47:18Z",
+      "side": 1,
+      "message": "Verify PEL Log Not Offloaded To Host\n    [Documentation]  Verify the PEL log of a given type and verify its host transmission state.\n    [Tags]  Verify_PEL_Log_Not_Offloaded_To_Host\n    [Template]  Verify PEL Transmission To Host\n\n    # error_type            host_state      transmission_state\n    informational_error     Off             Not Sent\n    unrecoverable_error     Off             Not Sent\n    predictive_error        Off             Not Sent\n      \n\nVerify PEL Log Offloaded To Host\n    [Documentation]  Verify the PEL log of a given type and verify its host transmission state.\n    [Tags]  Verify_PEL_Log_Offloaded_To_Host\n    # error_type            host_state      transmission_state\n    informational_error     On              Sent\n    unrecoverable_error     On              Sent\n    predictive_error        On              Sent",
+      "range": {
+        "startLine": 705,
+        "startChar": 0,
+        "endLine": 716,
+        "endChar": 50
+      },
+      "revId": "b1ffce724d3365a0cada8e865022389e4f4821bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43d323d4_32fbd7cf",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 934,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-12-07T13:47:18Z",
+      "side": 1,
+      "message": "If transmission is Not Sent  where do we verify ? and why we need sleep for that logic ?",
+      "revId": "b1ffce724d3365a0cada8e865022389e4f4821bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c26e62f1_79f03f6e",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-12-07T13:47:18Z",
+      "side": 1,
+      "message": "If",
+      "range": {
+        "startLine": 937,
+        "startChar": 33,
+        "endLine": 937,
+        "endChar": 37
+      },
+      "revId": "b1ffce724d3365a0cada8e865022389e4f4821bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
