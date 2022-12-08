@@ -61,15 +61,17 @@ def get_hard_disk_info(device="/dev/sdb"):
 
     """
 
-    cmd_buf = "hdparm -I " + device + " | egrep \":.+\" | sed -re" +\
-        " \"s/[ \t]+/ /g\""
+    cmd_buf = (
+        "hdparm -I " + device + ' | egrep ":.+" | sed -re' + ' "s/[ \t]+/ /g"'
+    )
     stdout, stderr, rc = bsu.os_execute_command(cmd_buf)
 
     firmware_dict = vf.key_value_outbuf_to_dict(stdout)
 
     cmd_buf = "lsblk -P " + device + " | sed -re 's/\" /\"\\n/g'"
     stdout, stderr, rc = bsu.os_execute_command(cmd_buf)
-    firmware_dict.update(vf.key_value_outbuf_to_dict(stdout, delim='=',
-                                                     strip=" \""))
+    firmware_dict.update(
+        vf.key_value_outbuf_to_dict(stdout, delim="=", strip=' "')
+    )
 
     return firmware_dict

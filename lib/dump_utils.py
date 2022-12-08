@@ -4,18 +4,21 @@ r"""
 This file contains functions which are useful for processing BMC dumps.
 """
 
-import gen_print as gp
-import gen_misc as gm
-import gen_robot_keyword as grk
-import bmc_ssh_utils as bsu
-import var_funcs as vf
-import os
-from robot.libraries.BuiltIn import BuiltIn
-import sys
-import os
 import imp
-base_path = os.path.dirname(os.path.dirname(
-                            imp.find_module("gen_robot_print")[1])) + os.sep
+import os
+import sys
+
+import bmc_ssh_utils as bsu
+import gen_misc as gm
+import gen_print as gp
+import gen_robot_keyword as grk
+import var_funcs as vf
+from robot.libraries.BuiltIn import BuiltIn
+
+base_path = (
+    os.path.dirname(os.path.dirname(imp.find_module("gen_robot_print")[1]))
+    + os.sep
+)
 sys.path.append(base_path + "data/")
 import variables as var
 
@@ -55,9 +58,7 @@ def get_dump_dict(quiet=None):
     return output.split("\n")
 
 
-def valid_dump(dump_id,
-               dump_dict=None,
-               quiet=None):
+def valid_dump(dump_id, dump_dict=None, quiet=None):
     r"""
     Verify that dump_id is a valid.  If it is not valid, issue robot failure
     message.
@@ -79,25 +80,26 @@ def valid_dump(dump_id,
         dump_dict = get_dump_dict(quiet=quiet)
 
     if dump_id not in dump_dict:
-        message = "The specified dump ID was not found among the existing" \
+        message = (
+            "The specified dump ID was not found among the existing"
             + " dumps:\n"
+        )
         message += gp.sprint_var(dump_id)
         message += gp.sprint_var(dump_dict)
         BuiltIn().fail(gp.sprint_error(message))
 
     if not dump_dict[dump_id].endswith("tar.xz"):
-        message = "There is no \"tar.xz\" file associated with the given" \
+        message = (
+            'There is no "tar.xz" file associated with the given'
             + " dump_id:\n"
+        )
         message += gp.sprint_var(dump_id)
         dump_file_path = dump_dict[dump_id]
         message += gp.sprint_var(dump_file_path)
         BuiltIn().fail(gp.sprint_error(message))
 
 
-def scp_dumps(targ_dir_path,
-              targ_file_prefix="",
-              dump_dict=None,
-              quiet=None):
+def scp_dumps(targ_dir_path, targ_file_prefix="", dump_dict=None, quiet=None):
     r"""
     SCP all dumps from the BMC to the indicated directory on the local system
     and return a list of the new files.
@@ -124,10 +126,12 @@ def scp_dumps(targ_dir_path,
 
     dump_file_list = []
     for file_path in dump_list:
-        targ_file_path = targ_dir_path + targ_file_prefix \
-            + os.path.basename(file_path)
-        status, ret_values = grk.run_key("scp.Get File  " + file_path
-                                         + "  " + targ_file_path, quiet=quiet)
+        targ_file_path = (
+            targ_dir_path + targ_file_prefix + os.path.basename(file_path)
+        )
+        status, ret_values = grk.run_key(
+            "scp.Get File  " + file_path + "  " + targ_file_path, quiet=quiet
+        )
         dump_file_list.append(targ_file_path)
 
     return dump_file_list

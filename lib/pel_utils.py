@@ -4,11 +4,12 @@ r"""
 PEL functions.
 """
 
-import func_args as fa
-import bmc_ssh_utils as bsu
 import json
 import os
 import sys
+
+import bmc_ssh_utils as bsu
+import func_args as fa
 from robot.libraries.BuiltIn import BuiltIn
 
 base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -56,7 +57,9 @@ def peltool(option_string, parse_json=True, **bsu_options):
     """
 
     bsu_options = fa.args_to_objects(bsu_options)
-    out_buf, stderr, rc = bsu.bmc_execute_command('peltool ' + option_string, **bsu_options)
+    out_buf, stderr, rc = bsu.bmc_execute_command(
+        "peltool " + option_string, **bsu_options
+    )
     if parse_json:
         try:
             return json.loads(out_buf)
@@ -65,8 +68,9 @@ def peltool(option_string, parse_json=True, **bsu_options):
     return out_buf
 
 
-def get_pel_data_from_bmc(include_hidden_pels=False,
-                          include_informational_pels=False):
+def get_pel_data_from_bmc(
+    include_hidden_pels=False, include_informational_pels=False
+):
     r"""
     Returns PEL data from BMC else throws exception.
 
@@ -109,13 +113,19 @@ def fetch_all_pel_ids_for_src(src_id, severity, include_hidden_pels=False):
         pel_id_list = pel_data.keys()
         for pel_id in pel_id_list:
             # Check if required SRC ID with severity is present
-            if ((pel_data[pel_id]["SRC"] == src_id) and (pel_data[pel_id]["Sev"] == severity)):
+            if (pel_data[pel_id]["SRC"] == src_id) and (
+                pel_data[pel_id]["Sev"] == severity
+            ):
                 src_pel_ids.append(pel_id)
 
         if not src_pel_ids:
-            raise peltool_exception(src_id + " with severity " + severity + " not present")
+            raise peltool_exception(
+                src_id + " with severity " + severity + " not present"
+            )
     except Exception as e:
-        raise peltool_exception("Failed to fetch PEL ID for required SRC : " + str(e))
+        raise peltool_exception(
+            "Failed to fetch PEL ID for required SRC : " + str(e)
+        )
     return src_pel_ids
 
 
@@ -139,7 +149,9 @@ def fetch_all_src(include_hidden_pels=False):
     return src_id
 
 
-def check_for_unexpected_src(unexpected_src_list=[], include_hidden_pels=False):
+def check_for_unexpected_src(
+    unexpected_src_list=[], include_hidden_pels=False
+):
     r"""
     From the given unexpected SRC list, check if any unexpected SRC created
     on the BMC. Returns 0 if no SRC found else throws exception.
@@ -160,11 +172,13 @@ def check_for_unexpected_src(unexpected_src_list=[], include_hidden_pels=False):
             if src in src_data:
                 print("Found an unexpected SRC : " + src)
                 unexpected_src_count = unexpected_src_count + 1
-        if (unexpected_src_count >= 1):
+        if unexpected_src_count >= 1:
             raise peltool_exception("Unexpected SRC found.")
 
     except Exception as e:
-        raise peltool_exception("Failed to verify unexpected SRC list : " + str(e))
+        raise peltool_exception(
+            "Failed to verify unexpected SRC list : " + str(e)
+        )
     return unexpected_src_count
 
 

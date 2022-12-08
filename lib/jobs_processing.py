@@ -6,11 +6,12 @@ execution of keywords where generic robot keywords don't support.
 
 """
 
-from robot.libraries.BuiltIn import BuiltIn
-from multiprocessing import Process, Manager
-import os
 import datetime
+import os
+from multiprocessing import Manager, Process
+
 import gen_print as gp
+from robot.libraries.BuiltIn import BuiltIn
 
 
 def execute_keyword(keyword_name, return_dict):
@@ -48,8 +49,9 @@ def execute_process(num_process, keyword_name):
 
     # Append user-defined times process needed to execute.
     for ix in range(int(num_process)):
-        task = Process(target=execute_keyword,
-                       args=(keyword_name, return_dict))
+        task = Process(
+            target=execute_keyword, args=(keyword_name, return_dict)
+        )
         process_list.append(task)
         task.start()
 
@@ -98,8 +100,10 @@ def execute_process_multi_keyword(number_args, *keyword_names):
     for keywords_data in keyword_names:
         keyword_args = tuple(keywords_data.split(" ")[-number_args:])
         keyword_name = " ".join(keywords_data.split(" ")[:-number_args])
-        task = Process(target=execute_keyword_args,
-                       args=(keyword_name, keyword_args, return_dict))
+        task = Process(
+            target=execute_keyword_args,
+            args=(keyword_name, keyword_args, return_dict),
+        )
         process_list.append(task)
         task.start()
 

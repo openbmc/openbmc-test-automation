@@ -5,32 +5,32 @@ A python companion file for ipmi_client.robot.
 """
 
 import collections
-import gen_print as gp
+
 import gen_cmd as gc
+import gen_print as gp
 from robot.libraries.BuiltIn import BuiltIn
 
-
 # Set default values for required IPMI options.
-ipmi_interface = 'lanplus'
-ipmi_cipher_suite = BuiltIn().get_variable_value("${IPMI_CIPHER_LEVEL}", '17')
-ipmi_timeout = BuiltIn().get_variable_value("${IPMI_TIMEOUT}", '3')
-ipmi_port = BuiltIn().get_variable_value("${IPMI_PORT}", '623')
+ipmi_interface = "lanplus"
+ipmi_cipher_suite = BuiltIn().get_variable_value("${IPMI_CIPHER_LEVEL}", "17")
+ipmi_timeout = BuiltIn().get_variable_value("${IPMI_TIMEOUT}", "3")
+ipmi_port = BuiltIn().get_variable_value("${IPMI_PORT}", "623")
 ipmi_username = BuiltIn().get_variable_value("${IPMI_USERNAME}", "root")
 ipmi_password = BuiltIn().get_variable_value("${IPMI_PASSWORD}", "0penBmc")
 ipmi_host = BuiltIn().get_variable_value("${OPENBMC_HOST}")
 
 # Create a list of the required IPMI options.
-ipmi_required_options = ['I', 'C', 'N', 'p', 'U', 'P', 'H']
+ipmi_required_options = ["I", "C", "N", "p", "U", "P", "H"]
 # The following dictionary maps the ipmitool option names (e.g. "I") to our
 # more descriptive names (e.g. "interface") for the required options.
 ipmi_option_name_map = {
-    'I': 'interface',
-    'C': 'cipher_suite',
-    'N': 'timeout',
-    'p': 'port',
-    'U': 'username',
-    'P': 'password',
-    'H': 'host',
+    "I": "interface",
+    "C": "cipher_suite",
+    "N": "timeout",
+    "p": "port",
+    "U": "username",
+    "P": "password",
+    "H": "host",
 }
 
 
@@ -78,7 +78,7 @@ def create_ipmi_ext_command_string(command, **options):
         else:
             # The caller hasn't specified this required option so specify it
             # for them using the global value.
-            var_name = 'ipmi_' + ipmi_option_name_map[option]
+            var_name = "ipmi_" + ipmi_option_name_map[option]
             value = eval(var_name)
             new_options[option] = value
     # Include the remainder of the caller's options in the new options
@@ -86,7 +86,7 @@ def create_ipmi_ext_command_string(command, **options):
     for key, value in options.items():
         new_options[key] = value
 
-    return gc.create_command_string('ipmitool', command, new_options)
+    return gc.create_command_string("ipmitool", command, new_options)
 
 
 def verify_ipmi_user_parm_accepted():
@@ -99,11 +99,10 @@ def verify_ipmi_user_parm_accepted():
     global ipmi_required_options
     print_output = 0
 
-    command_string = create_ipmi_ext_command_string('power status')
-    rc, stdout = gc.shell_cmd(command_string,
-                              print_output=print_output,
-                              show_err=0,
-                              ignore_err=1)
+    command_string = create_ipmi_ext_command_string("power status")
+    rc, stdout = gc.shell_cmd(
+        command_string, print_output=print_output, show_err=0, ignore_err=1
+    )
     gp.qprint_var(rc, 1)
     if rc == 0:
         # The OBMC accepts the ipmitool "-U" option so new further work needs
@@ -112,13 +111,12 @@ def verify_ipmi_user_parm_accepted():
 
     # Remove the "U" option from ipmi_required_options to allow us to create a
     # command string without the "U" option.
-    if 'U' in ipmi_required_options:
-        del ipmi_required_options[ipmi_required_options.index('U')]
-    command_string = create_ipmi_ext_command_string('power status')
-    rc, stdout = gc.shell_cmd(command_string,
-                              print_output=print_output,
-                              show_err=0,
-                              ignore_err=1)
+    if "U" in ipmi_required_options:
+        del ipmi_required_options[ipmi_required_options.index("U")]
+    command_string = create_ipmi_ext_command_string("power status")
+    rc, stdout = gc.shell_cmd(
+        command_string, print_output=print_output, show_err=0, ignore_err=1
+    )
     gp.qprint_var(rc, 1)
     if rc == 0:
         # The "U" option has been removed from the ipmi_required_options
@@ -130,7 +128,7 @@ def verify_ipmi_user_parm_accepted():
 
     # Revert to original ipmi_required_options by inserting 'U' right before
     # 'P'.
-    ipmi_required_options.insert(ipmi_required_options.index('P'), 'U')
+    ipmi_required_options.insert(ipmi_required_options.index("P"), "U")
 
 
 def ipmi_setup():
@@ -152,7 +150,9 @@ def process_ipmi_user_options(command):
     command                         An IPMI command (e.g. "power status").
     """
 
-    ipmi_user_options = BuiltIn().get_variable_value("${IPMI_USER_OPTIONS}", '')
+    ipmi_user_options = BuiltIn().get_variable_value(
+        "${IPMI_USER_OPTIONS}", ""
+    )
     if ipmi_user_options == "":
         return command
     return ipmi_user_options + " " + command

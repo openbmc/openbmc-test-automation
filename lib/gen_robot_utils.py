@@ -6,6 +6,7 @@ programs.
 """
 
 import re
+
 from robot.libraries.BuiltIn import BuiltIn
 
 
@@ -70,5 +71,6 @@ def my_import_resource(path):
         if key in pre_var_dict:
             if value != pre_var_dict[key]:
                 global_var_name = re.sub("[@&]", "$", key)
-                BuiltIn().set_global_variable(global_var_name,
-                                              pre_var_dict[key])
+                BuiltIn().set_global_variable(
+                    global_var_name, pre_var_dict[key]
+                )

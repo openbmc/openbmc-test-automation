@@ -22,8 +22,12 @@ set_exit_on_error(True)
 
 parser = argparse.ArgumentParser(
     usage="%(prog)s [OPTIONS]",
-    description="%(prog)s will print a colon-delimited list of all valid OBMC FFDC functions.\n\nExample:"
-    + "\n\n\nDump Log:FFDC Generic Report:Get Request FFDC:SEL Log:BMC Specific Files:Sys Inventory Files"
+    description=(
+        "%(prog)s will print a colon-delimited list of all valid OBMC FFDC"
+        " functions.\n\nExample:"
+    )
+    + "\n\n\nDump Log:FFDC Generic Report:Get Request FFDC:SEL Log:BMC"
+    " Specific Files:Sys Inventory Files"
     + ":Core Files:OS FFDC:Dump Files",
     formatter_class=argparse.RawDescriptionHelpFormatter,
     prefix_chars="-+",
@@ -68,7 +72,6 @@ def validate_parms():
 
 
 def main():
-
     gen_get_options(parser, stock_list)
 
     validate_parms()

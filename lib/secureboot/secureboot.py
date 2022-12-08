@@ -11,17 +11,14 @@ from robot.libraries.BuiltIn import BuiltIn
 
 # Define 'constant' functions.
 def secure_boot_mask():
-
     return 0x08000000
 
 
 def jumper_mask():
-
     return 0x04000000
 
 
 class secureboot(object):
-
     def get_secure_boot_info(self, quiet=None):
         r"""
         Get secure-boot information and return it as a tuple consisting of

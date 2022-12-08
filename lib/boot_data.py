@@ -5,36 +5,40 @@ This module has functions to support various data structures such as the boot_ta
 boot_results_table.
 """
 
+import glob
+import json
 import os
 import tempfile
-import json
-import glob
-from tally_sheet import *
 
 from robot.libraries.BuiltIn import BuiltIn
+from tally_sheet import *
+
 try:
     from robot.utils import DotDict
 except ImportError:
     import collections
 
+import gen_cmd as gc
+import gen_misc as gm
 import gen_print as gp
 import gen_valid as gv
-import gen_misc as gm
-import gen_cmd as gc
 import var_funcs as vf
 
 # The code base directory will be one level up from the directory containing this module.
 code_base_dir_path = os.path.dirname(os.path.dirname(__file__)) + os.sep
 
-redfish_support_trans_state = int(os.environ.get('REDFISH_SUPPORT_TRANS_STATE', 0)) or \
-    int(BuiltIn().get_variable_value("${REDFISH_SUPPORT_TRANS_STATE}", default=0))
+redfish_support_trans_state = int(
+    os.environ.get("REDFISH_SUPPORT_TRANS_STATE", 0)
+) or int(
+    BuiltIn().get_variable_value("${REDFISH_SUPPORT_TRANS_STATE}", default=0)
+)
 
-platform_arch_type = os.environ.get('PLATFORM_ARCH_TYPE', '') or \
-    BuiltIn().get_variable_value("${PLATFORM_ARCH_TYPE}", default="power")
+platform_arch_type = os.environ.get(
+    "PLATFORM_ARCH_TYPE", ""
+) or BuiltIn().get_variable_value("${PLATFORM_ARCH_TYPE}", default="power")
 
 
-def create_boot_table(file_path=None,
-                      os_host=""):
+def create_boot_table(file_path=None, os_host=""):
     r"""
     Read the boot table JSON file, convert it to an object and return it.
 
@@ -54,11 +58,17 @@ def create_boot_table(file_path=None,
     """
     if file_path is None:
         if redfish_support_trans_state and platform_arch_type != "x86":
-            file_path = os.environ.get('BOOT_TABLE_PATH', 'data/boot_table_redfish.json')
+            file_path = os.environ.get(
+                "BOOT_TABLE_PATH", "data/boot_table_redfish.json"
+            )
         elif platform_arch_type == "x86":
-            file_path = os.environ.get('BOOT_TABLE_PATH', 'data/boot_table_x86.json')
+            file_path = os.environ.get(
+                "BOOT_TABLE_PATH", "data/boot_table_x86.json"
+            )
         else:
-            file_path = os.environ.get('BOOT_TABLE_PATH', 'data/boot_table.json')
+            file_path = os.environ.get(
+                "BOOT_TABLE_PATH", "data/boot_table.json"
+            )
 
     if not file_path.startswith("/"):
         file_path = code_base_dir_path + file_path
@@ -77,7 +87,7 @@ def create_boot_table(file_path=None,
     # the boot entries.
     if os_host == "":
         for boot in boot_table:
-            state_keys = ['start', 'end']
+            state_keys = ["start", "end"]
             for state_key in state_keys:
                 for sub_state in list(boot_table[boot][state_key]):
                     if sub_state.startswith("os_"):
@@ -149,8 +159,7 @@ def read_boot_lists(dir_path="data/boot_lists/"):
     return boot_lists
 
 
-def valid_boot_list(boot_list,
-                    valid_boot_types):
+def valid_boot_list(boot_list, valid_boot_types):
     r"""
     Verify that each entry in boot_list is a supported boot test.
 
@@ -162,24 +171,21 @@ def valid_boot_list(boot_list,
 
     for boot_name in boot_list:
         boot_name = boot_name.strip(" ")
-        error_message = gv.valid_value(boot_name,
-                                       valid_values=valid_boot_types,
-                                       var_name="boot_name")
+        error_message = gv.valid_value(
+            boot_name, valid_values=valid_boot_types, var_name="boot_name"
+        )
         if error_message != "":
             BuiltIn().fail(gp.sprint_error(error_message))
 
 
 class boot_results:
-
     r"""
     This class defines a boot_results table.
     """
 
-    def __init__(self,
-                 boot_table,
-                 boot_pass=0,
-                 boot_fail=0,
-                 obj_name='boot_results'):
+    def __init__(
+        self, boot_table, boot_pass=0, boot_fail=0, obj_name="boot_results"
+    ):
         r"""
         Initialize the boot results object.
 
@@ -202,13 +208,13 @@ class boot_results:
         self.__initial_boot_fail = boot_fail
 
         # Create boot_results_fields for use in creating boot_results table.
-        boot_results_fields = DotDict([('total', 0), ('pass', 0), ('fail', 0)])
+        boot_results_fields = DotDict([("total", 0), ("pass", 0), ("fail", 0)])
         # Create boot_results table.
-        self.__boot_results = tally_sheet('boot type',
-                                          boot_results_fields,
-                                          'boot_test_results')
-        self.__boot_results.set_sum_fields(['total', 'pass', 'fail'])
-        self.__boot_results.set_calc_fields(['total=pass+fail'])
+        self.__boot_results = tally_sheet(
+            "boot type", boot_results_fields, "boot_test_results"
+        )
+        self.__boot_results.set_sum_fields(["total", "pass", "fail"])
+        self.__boot_results.set_calc_fields(["total=pass+fail"])
         # Create one row in the result table for each kind of boot test in the boot_table (i.e. for all
         # supported boot tests).
         for boot_name in list(boot_table.keys()):
@@ -230,12 +236,12 @@ class boot_results:
         """
 
         totals_line = self.__boot_results.calc()
-        return totals_line['pass'] + self.__initial_boot_pass,\
-            totals_line['fail'] + self.__initial_boot_fail
+        return (
+            totals_line["pass"] + self.__initial_boot_pass,
+            totals_line["fail"] + self.__initial_boot_fail,
+        )
 
-    def update(self,
-               boot_type,
-               boot_status):
+    def update(self, boot_type, boot_status):
         r"""
         Update our boot_results_table.  This includes:
         - Updating the record for the given boot_type by incrementing the pass or fail field.
@@ -250,8 +256,7 @@ class boot_results:
         self.__boot_results.inc_row_field(boot_type, boot_status.lower())
         self.__boot_results.calc()
 
-    def sprint_report(self,
-                      header_footer="\n"):
+    def sprint_report(self, header_footer="\n"):
         r"""
         String-print the formatted boot_resuls_table and return them.
 
@@ -268,9 +273,7 @@ class boot_results:
 
         return buffer
 
-    def print_report(self,
-                     header_footer="\n",
-                     quiet=None):
+    def print_report(self, header_footer="\n", quiet=None):
         r"""
         Print the formatted boot_resuls_table to the console.
 
@@ -280,7 +283,7 @@ class boot_results:
                                     stack to get the default value.
         """
 
-        quiet = int(gm.dft(quiet, gp.get_stack_var('quiet', 0)))
+        quiet = int(gm.dft(quiet, gp.get_stack_var("quiet", 0)))
 
         gp.qprint(self.sprint_report(header_footer))
 
@@ -307,9 +310,7 @@ class boot_results:
         gp.gp_print(self.sprint_obj())
 
 
-def create_boot_results_file_path(pgm_name,
-                                  openbmc_nickname,
-                                  master_pid):
+def create_boot_results_file_path(pgm_name, openbmc_nickname, master_pid):
     r"""
     Create a file path to be used to store a boot_results object.
 
@@ -318,7 +319,7 @@ def create_boot_results_file_path(pgm_name,
     openbmc_nickname                The name of the system.  This could be a nickname, a hostname, an IP,
                                     etc.  This will form part of the resulting file name.
     master_pid                      The master process id which will form part of the file name.
-   """
+    """
 
     USER = os.environ.get("USER", "")
     dir_path = "/tmp/" + USER + "/"
@@ -326,8 +327,9 @@ def create_boot_results_file_path(pgm_name,
         os.makedirs(dir_path)
 
     file_name_dict = vf.create_var_dict(pgm_name, openbmc_nickname, master_pid)
-    return vf.create_file_path(file_name_dict, dir_path=dir_path,
-                               file_suffix=":boot_results")
+    return vf.create_file_path(
+        file_name_dict, dir_path=dir_path, file_suffix=":boot_results"
+    )
 
 
 def cleanup_boot_results_file():
@@ -341,7 +343,7 @@ def cleanup_boot_results_file():
     for file_path in file_list:
         # Use parse_file_path to extract info from the file path.
         file_dict = vf.parse_file_path(file_path)
-        if gm.pid_active(file_dict['master_pid']):
+        if gm.pid_active(file_dict["master_pid"]):
             gp.qprint_timen("Preserving " + file_path + ".")
         else:
             gc.cmd_fnc("rm -f " + file_path)
@@ -363,7 +365,7 @@ def update_boot_history(boot_history, boot_start_message, max_boot_history=10):
     boot_history.append(boot_start_message)
 
     # Trim list to max number of entries.
-    del boot_history[:max(0, len(boot_history) - max_boot_history)]
+    del boot_history[: max(0, len(boot_history) - max_boot_history)]
 
 
 def print_boot_history(boot_history, quiet=None):
@@ -375,7 +377,7 @@ def print_boot_history(boot_history, quiet=None):
                                     stack to get the default value.
     """
 
-    quiet = int(gm.dft(quiet, gp.get_stack_var('quiet', 0)))
+    quiet = int(gm.dft(quiet, gp.get_stack_var("quiet", 0)))
 
     # indent 0, 90 chars wide, linefeed, char is "="
     gp.qprint_dashes(0, 90)
