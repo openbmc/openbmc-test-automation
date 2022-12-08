@@ -16,7 +16,7 @@ for root, dirs, files in os.walk(full_path):
         sys.path.append(os.path.join(root, found_dir))
 
 # ssh_utility is in ../lib
-from ssh_utility import SSHRemoteclient
+from ssh_utility import SSHRemoteclient  # NOQA
 
 
 def scp_remote_file(hostname,
