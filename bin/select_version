@@ -24,86 +24,86 @@ program_name="${0##*/}"
 program_uppercase_name=${program_name^^}
 
 
-function get_target_program_path {
-  local target_program_path_var="${1:-target_program_path}" ; shift
+function get_target_program_path() {
+    local target_program_path_var="${1:-target_program_path}" ; shift
 
-  # Get the full path to the "real" program and assign it to the variable named in target_program_path_var.
+    # Get the full path to the "real" program and assign it to the variable named in target_program_path_var.
 
-  # Description of argument(s):
-  # target_program_path_var         The name of the variable to receive the result.
+    # Description of argument(s):
+    # target_program_path_var         The name of the variable to receive the result.
 
-  # Example result:
+    # Example result:
 
-  # /usr/bin/python3
+    # /usr/bin/python3
 
-  local version_var_name
-  local alternate_program_name
-  local base_program_path
-  local base_program_name
-  local candidate
-  local candidates
-  local base_file_path
+    local version_var_name
+    local alternate_program_name
+    local base_program_path
+    local base_program_name
+    local candidate
+    local candidates
+    local base_file_path
 
-  # The typical use of this program would be to create a link to it like this:
-  # ln -s select_version python
-  # That being the case, get the name of this actual program (rather than the name of the link to it).
-  base_program_path=$(readlink -f "${0}")
-  base_program_name=${base_program_path##*/}
+    # The typical use of this program would be to create a link to it like this:
+    # ln -s select_version python
+    # That being the case, get the name of this actual program (rather than the name of the link to it).
+    base_program_path=$(readlink -f "${0}")
+    base_program_name=${base_program_path##*/}
 
-  if [ "${program_name}" == "${base_program_name}" ] ; then
-    {
-      echo -n "**ERROR** ${base_program_name} should never be called directly."
-      echo "  Only links to ${base_program_name} should be called."
-    } >&2
-    exit 1
-  fi
-
-  # Compose the version_var_name value (e.g. PYTHON_VERSION).
-  version_var_name=${program_uppercase_name}_VERSION
-  # Compose the alternate_program_name (e.g. python3).
-  alternate_program_name=${program_name}${!version_var_name}
-
-  # Now use the "type" built-in to search the PATH variable for a list of target program candidates.
-  candidates=$(type -ap ${alternate_program_name})
-
-  # Example candidates:
-  # /home/robot/openbmc-test-automation/bin/python
-  # /usr/bin/python
-
-  # In this example, the first candidate is actually a link to
-  # /home/robot/openbmc-test-automation/bin/select_version.  As such it will be rejected.
-
-  for candidate in ${candidates}
-  do
-    if [ -L "${candidate}" ] ; then
-      # The candidate is a link so we need to see if it's a link to this program file.
-      base_file_path=$(readlink "${candidate}")
-      [ "${base_file_path}" == "${base_program_name}" ] && continue
+    if [ "${program_name}" == "${base_program_name}" ] ; then
+        {
+            echo -n "**ERROR** ${base_program_name} should never be called directly."
+            echo "  Only links to ${base_program_name} should be called."
+        } >&2
+        exit 1
     fi
 
-    # The candidate is NOT a link so it qualifies as the desired target program path.
-    eval ${target_program_path_var}=\"\${candidate}\"
-    return
+    # Compose the version_var_name value (e.g. PYTHON_VERSION).
+    version_var_name=${program_uppercase_name}_VERSION
+    # Compose the alternate_program_name (e.g. python3).
+    alternate_program_name=${program_name}${!version_var_name}
 
-  done
+    # Now use the "type" built-in to search the PATH variable for a list of target program candidates.
+    candidates=$(type -ap ${alternate_program_name})
+
+    # Example candidates:
+    # /home/robot/openbmc-test-automation/bin/python
+    # /usr/bin/python
+
+    # In this example, the first candidate is actually a link to
+    # /home/robot/openbmc-test-automation/bin/select_version.  As such it will be rejected.
+
+    for candidate in ${candidates}
+    do
+        if [ -L "${candidate}" ] ; then
+            # The candidate is a link so we need to see if it's a link to this program file.
+            base_file_path=$(readlink "${candidate}")
+            [ "${base_file_path}" == "${base_program_name}" ] && continue
+        fi
+
+        # The candidate is NOT a link so it qualifies as the desired target program path.
+        eval ${target_program_path_var}=\"\${candidate}\"
+        return
+
+    done
 
 }
 
 
 # Main
 
-  get_target_program_path target_program_path
+get_target_program_path target_program_path
 
-  # Compose program path var name (e.g. PYTHON_PGM_PATH).
-  pgm_path_var_name=${program_uppercase_name}_PGM_PATH
-  # Set and export pgm_path_var_name (e.g. PYTHON_PGM_PATH=/usr/bin/python3).  This value can be used by
-  # child programs for debug.
-  eval export ${pgm_path_var_name}=${target_program_path}
+# Compose program path var name (e.g. PYTHON_PGM_PATH).
+pgm_path_var_name=${program_uppercase_name}_PGM_PATH
+# Set and export pgm_path_var_name (e.g. PYTHON_PGM_PATH=/usr/bin/python3).  This value can be used by
+# child programs for debug.
+eval export ${pgm_path_var_name}=${target_program_path}
 
-  if [ "${1}" == "--print_only" ] ; then
+if [ "${1}" == "--print_only" ] ; then
     echo "${target_program_path}"
-  else
+else
     # Use exec in order to replace this process with the target process.
     exec ${target_program_path} "${@}"
-  fi
+fi
 
