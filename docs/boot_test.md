@@ -1,15 +1,19 @@
 Boot test is one of the cornerstone of OpenBMC test infrastructure.
 
-The boot plugins are used in the test and as well can be use a stand-alone mechanism to test your system to run variety of supported boot sequences.
+The boot plugins are used in the test and as well can be use a stand-alone
+mechanism to test your system to run variety of supported boot sequences.
 
 **Boot test sequence example:**
 
 ```
 robot -v OPENBMC_HOST:xx.xx.xx.xx  -v 'boot_stack:<boot1>:<boot2>:<bootn>:' extended/obmc_boot_test.robot
 ```
-Where <bootx> is the supported boot type listed in the [data/boot_lists/All](https://github.com/openbmc/openbmc-test-automation/blob/master/data/boot_lists/All)
+
+Where <bootx> is the supported boot type listed in the
+[data/boot_lists/All](https://github.com/openbmc/openbmc-test-automation/blob/master/data/boot_lists/All)
 
 **Example:**
+
 ```
 robot -v OPENBMC_HOST:xx.xx.xx.xx  -v 'boot_stack:Redfish Power On:Redfish Power Off' extended/obmc_boot_test.robot
 ```

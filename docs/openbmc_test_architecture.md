@@ -22,8 +22,8 @@
 
 ```
 
-NOTE: Legacy REST will be deprecated at some point and therefore no longer supported.
-
+NOTE: Legacy REST will be deprecated at some point and therefore no longer
+supported.
 
 ### OpenBMC Test Method Supports
 

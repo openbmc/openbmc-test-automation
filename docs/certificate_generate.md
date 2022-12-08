@@ -10,22 +10,21 @@ C. Create CA signed server certificate using CSR request
 
 D. Install CA signed server certificate
 
-
 **Create your own SSL certificate authority**
 
 1. Create private key for certificate authority(CA).
 
+`openssl genrsa -des3 -out rootCA.key 2048`
 
-```openssl genrsa -des3 -out rootCA.key 2048```
-
-Note: You will be prompted to give a password for private key. This password will be used whenever the private key is used.
-
+Note: You will be prompted to give a password for private key. This password
+will be used whenever the private key is used.
 
 2. Create a root CA certificate using the private key created in step 1.
 
-```openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1024 -out rootCA.pem```
+`openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 1024 -out rootCA.pem`
 
-This will start an interactive script to enter information that will be incorporated into your certificate request.
+This will start an interactive script to enter information that will be
+incorporated into your certificate request.
 
 ```
 You are about to be asked to enter information that will be incorporated
@@ -64,6 +63,7 @@ Email Address []:none@none.com
 ```
 
 Example:
+
 ```
 {
     "City": "Austin",
@@ -115,14 +115,17 @@ D0XaLUyXAxgB76mcud004zu7swTJxDlM+c5+i0yqflWQiVWEAOW9HDeHvnYmShuT
 
 **Create CA signed server certificate using CSR request**
 
-1. Use BMC generated CSR request (device.csr) to generate CA signed certificate (device.crt).
+1. Use BMC generated CSR request (device.csr) to generate CA signed certificate
+   (device.crt).
+
 ```
 openssl x509 -req -in device.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out device.crt -days 500 -sha256
 ```
+
 Note: You will be prompted to give a password for private key.
 
-
-2. Create JSON file (certificate.json) with the device.crt file created in step 1.
+2. Create JSON file (certificate.json) with the device.crt file created in
+   step 1.
 
 ```
 $ cat certificate.json
@@ -136,10 +139,10 @@ $ cat certificate.json
 }
 ```
 
-
 **Install CA signed server certificate**
 
-Replace server certificate using JSON file (above) with CA signed certificate details (certificate.json).
+Replace server certificate using JSON file (above) with CA signed certificate
+details (certificate.json).
 
 ```
 $ curl -c cjar -b cjar -k -H "X-Auth-Token: $bmc_token" -X POST https://${BMC_IP}/redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate/ -d @certificate.json
