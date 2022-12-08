@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 
+from telnet_utility import TelnetRemoteclient
+
 import os
 import sys
 
@@ -14,8 +16,6 @@ sys.path.append(full_path)
 for root, dirs, files in os.walk(full_path):
     for found_dir in dirs:
         sys.path.append(os.path.join(root, found_dir))
-
-from telnet_utility import TelnetRemoteclient
 
 
 def telnet_execute_cmd(hostname,

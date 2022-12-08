@@ -4,6 +4,10 @@ r"""
 See help text for details.
 """
 
+from gen_print import *
+from gen_arg import *
+from gen_valid import *
+
 import json
 import sys
 import websocket
@@ -13,10 +17,6 @@ from retrying import retry
 
 save_path_0 = sys.path[0]
 del sys.path[0]
-
-from gen_print import *
-from gen_arg import *
-from gen_valid import *
 
 # Restore sys.path[0].
 sys.path.insert(0, save_path_0)
