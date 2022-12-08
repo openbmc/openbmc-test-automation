@@ -4,8 +4,6 @@ r"""
 CLI FFDC Collector.
 """
 
-from ffdc_collector import ffdc_collector
-
 import os
 import sys
 import click
@@ -14,12 +12,13 @@ import click
 # Absolute path to openbmc-test-automation/ffdc
 abs_path = os.path.abspath(os.path.dirname(sys.argv[0]))
 full_path = abs_path.split('ffdc')[0]
-
 sys.path.append(full_path)
 # Walk path and append to sys.path
 for root, dirs, files in os.walk(full_path):
     for found_dir in dirs:
         sys.path.append(os.path.join(root, found_dir))
+
+from ffdc_collector import ffdc_collector
 
 
 @click.command(context_settings=dict(help_option_names=['-h', '--help']))

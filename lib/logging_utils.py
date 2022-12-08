@@ -5,17 +5,15 @@ Provide useful error log utility keywords.
 """
 
 import gen_print as gp
-import variables as var
-import gen_robot_utils as gru
 import sys
 import os
 import imp
-
-from robot.libraries.BuiltIn import BuiltIn
-
 base_path = os.path.dirname(os.path.dirname(
                             imp.find_module("gen_robot_print")[1])) + os.sep
 sys.path.append(base_path + "data/")
+import variables as var
+from robot.libraries.BuiltIn import BuiltIn
+import gen_robot_utils as gru
 gru.my_import_resource("logging_utils.robot")
 
 

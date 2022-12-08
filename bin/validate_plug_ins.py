@@ -1,18 +1,12 @@
 #!/usr/bin/env python3
 
-
-from gen_print import *
-from gen_arg import *
-from gen_plug_in import *
-
 import sys
-import os
-
 try:
     import __builtin__
 except ImportError:
     import builtins as __builtin__
 
+import os
 
 # python puts the program's directory path in sys.path[0].  In other words, the user ordinarily has no way
 # to override python's choice of a module from its own dir.  We want to have that ability in our environment.
@@ -22,6 +16,10 @@ except ImportError:
 
 save_path_0 = sys.path[0]
 del sys.path[0]
+
+from gen_print import *
+from gen_arg import *
+from gen_plug_in import *
 
 # Restore sys.path[0].
 sys.path.insert(0, save_path_0)

@@ -10,16 +10,14 @@ import gen_robot_keyword as grk
 import bmc_ssh_utils as bsu
 import var_funcs as vf
 import os
+from robot.libraries.BuiltIn import BuiltIn
 import sys
 import os
 import imp
-import variables as var
-
-from robot.libraries.BuiltIn import BuiltIn
-
 base_path = os.path.dirname(os.path.dirname(
                             imp.find_module("gen_robot_print")[1])) + os.sep
 sys.path.append(base_path + "data/")
+import variables as var
 
 
 def get_dump_dict(quiet=None):

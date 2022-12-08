@@ -14,19 +14,18 @@ import robot.errors
 import re
 import stat
 import datetime
-
 from robot.api import ExecutionResult
 from robot.result.visitor import ResultVisitor
 from xml.etree import ElementTree
-
-from gen_arg import *
-from gen_print import *
-from gen_valid import *
 
 # Remove the python library path to restore with local project path later.
 save_path_0 = sys.path[0]
 del sys.path[0]
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../lib"))
+
+from gen_arg import *
+from gen_print import *
+from gen_valid import *
 
 # Restore sys.path[0].
 sys.path.insert(0, save_path_0)

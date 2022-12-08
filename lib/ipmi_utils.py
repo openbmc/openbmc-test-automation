@@ -14,10 +14,9 @@ import bmc_ssh_utils as bsu
 import var_funcs as vf
 import ipmi_client as ic
 import tempfile
-import json
-from robot.libraries.BuiltIn import BuiltIn
-
 gru.my_import_resource("ipmi_client.robot")
+from robot.libraries.BuiltIn import BuiltIn
+import json
 
 
 def get_sol_info():
