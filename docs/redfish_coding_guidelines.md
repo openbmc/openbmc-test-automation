@@ -65,7 +65,8 @@
       Redfish.Patch  ${REDFISH_BASE_URI}UpdateService  body={'ApplyTime' : 'Invalid'}  valid_status_codes=[${HTTP_BAD_REQUEST}]
       ```
 
-  - Login defaults for path, username and password are https://${OPENBMC_HOST},
+  - Login defaults for path, username and password are
+    https://${OPENBMC_HOST},
     ${OPENBMC_USERNAME}, ${OPENBMC_PASSWORD}.
   - Many utility functions are available. Examples:;
 

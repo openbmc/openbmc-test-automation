@@ -74,8 +74,8 @@ Pre-requisite: A Power Linux system is required.
 opal-prd is a tool used by the Energy Scale and RAS tests. It should be
 installed on the OS of the system under test before running those tests.
 
-opal-prd may be installed on Ubuntu with: ` apt install opal-prd ` and on RedHat
-with: ` yum install opal-prd `
+opal-prd may be installed on Ubuntu with: `apt install opal-prd` and on RedHat
+with: `yum install opal-prd`
 
 ## Obtain a copy of GitHub issues in CSV format:
 

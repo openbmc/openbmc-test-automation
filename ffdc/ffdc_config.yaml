@@ -77,8 +77,9 @@ OPENBMC:
                   "peltool -a -f -h>/tmp/PEL_logs_complete_display.json 2>&1": 1200,
               }
             - {
-                  "strace -p $(pidof pldmd) -o /tmp/pldmd_strace.txt & sleep 60
-                  ; kill $!": 70,
+                  ? "strace -p $(pidof pldmd) -o /tmp/pldmd_strace.txt & sleep
+                    60 ; kill $!"
+                  : 70,
               }
             - "hexdump -C /var/lib/phosphor-logging/extensions/pels/badPEL
               >/tmp/PEL_logs_badPEL.txt"
@@ -235,8 +236,9 @@ UBUNTU:
             - "tail -n 200000 /var/log/messages >/tmp/OS_syslog.txt"
             - "rm -rf /tmp/sosreport*FFDC*"
             - {
-                  "sosreport --batch --tmp-dir /tmp --label FFDC
-                  >/tmp/OS_sosreport.txt": 1200,
+                  ? "sosreport --batch --tmp-dir /tmp --label FFDC
+                    >/tmp/OS_sosreport.txt"
+                  : 1200,
               }
             - "tar -zcvf /tmp/crash.tar.gz /var/crash"
         FILES:
@@ -279,8 +281,9 @@ RHEL:
             - "tail -n 200000 /var/log/messages >/tmp/OS_syslog.txt"
             - "rm -rf /tmp/sosreport*FFDC*"
             - {
-                  "sosreport --batch --tmp-dir /tmp --label FFDC
-                  >/tmp/OS_sosreport.txt": 1200,
+                  ? "sosreport --batch --tmp-dir /tmp --label FFDC
+                    >/tmp/OS_sosreport.txt"
+                  : 1200,
               }
             - "tar -zcvf /tmp/crash.tar.gz /var/crash"
         FILES:
