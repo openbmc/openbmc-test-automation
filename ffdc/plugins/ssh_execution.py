@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 
+from ssh_utility import SSHRemoteclient
+
 import os
 import sys
 
@@ -16,7 +18,6 @@ for root, dirs, files in os.walk(full_path):
         sys.path.append(os.path.join(root, found_dir))
 
 # ssh_utility is in ../lib
-from ssh_utility import SSHRemoteclient
 
 
 def ssh_execute_cmd(hostname,

@@ -16,17 +16,17 @@ The result is that the following command will be run:
 my_program --test_mode=y --quiet=n file1 file2 file3
 """
 
-import sys
-import os
-
-save_path_0 = sys.path[0]
-del sys.path[0]
-
 from gen_arg import *
 from gen_print import *
 from gen_valid import *
 from gen_misc import *
 from gen_cmd import *
+
+import sys
+import os
+
+save_path_0 = sys.path[0]
+del sys.path[0]
 
 # Restore sys.path[0].
 sys.path.insert(0, save_path_0)

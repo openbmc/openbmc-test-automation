@@ -6,6 +6,10 @@ State Manager module:
    - Defines Valid states of the system
 
 """
+
+import gen_robot_keyword as keyword
+import variables as var
+
 import os
 import re
 import sys
@@ -16,8 +20,6 @@ robot_pgm_dir_path = os.path.dirname(__file__) + os.sep
 repo_data_dir_path = re.sub('/lib', '/data', robot_pgm_dir_path)
 sys.path.append(repo_data_dir_path)
 
-import gen_robot_keyword as keyword
-import variables as var
 
 BuiltIn().import_resource("state_manager.robot")
 BuiltIn().import_resource("rest_client.robot")
