@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
+from gen_arg import *
+from gen_call_robot import *
+from gen_cmd import *
+from gen_misc import *
+from gen_plug_in_utils import *
 from gen_print import *
 from gen_valid import *
-from gen_arg import *
-from gen_misc import *
-from gen_cmd import *
 from var_funcs import *
-from gen_plug_in_utils import *
-from gen_call_robot import *
 
 # Set exit_on_error for gen_valid functions.
 set_exit_on_error(True)
@@ -15,23 +15,25 @@ ignore_err = 0
 
 
 parser = argparse.ArgumentParser(
-    usage='%(prog)s [OPTIONS]',
+    usage="%(prog)s [OPTIONS]",
     description="%(prog)s will calculate the value of num_err_logs and"
     + " save it as a plug-in value for the benefit of the FFDC plug-in."
     + "  The FFDC plug-in can use that data to decide whether to collect"
     + " FFDC data.",
     formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-    prefix_chars='-+')
+    prefix_chars="-+",
+)
 
 # The stock_list will be passed to gen_get_options.  We populate it with the names of stock parm options we
 # want.  These stock parms are pre-defined by gen_get_options.
-stock_list = [("test_mode", 0),
-              ("quiet", get_plug_default("quiet", 0)),
-              ("debug", get_plug_default("debug", 0))]
+stock_list = [
+    ("test_mode", 0),
+    ("quiet", get_plug_default("quiet", 0)),
+    ("debug", get_plug_default("debug", 0)),
+]
 
 
-def exit_function(signal_number=0,
-                  frame=None):
+def exit_function(signal_number=0, frame=None):
     r"""
     Execute whenever the program ends normally or with the signals that we catch (i.e. TERM, INT).
 
@@ -53,73 +55,116 @@ def validate_parms():
     global AUTOSCRIPT_STATUS_FILE_PATH
     # AUTOSCRIPT_STATUS_FILE_PATH is set when we're called by autoscript.  For this program to work
     # correctly, it must be called with autoscript.
-    AUTOSCRIPT_STATUS_FILE_PATH = os.environ.get("AUTOSCRIPT_STATUS_FILE_PATH", "")
+    AUTOSCRIPT_STATUS_FILE_PATH = os.environ.get(
+        "AUTOSCRIPT_STATUS_FILE_PATH", ""
+    )
     valid_value(AUTOSCRIPT_STATUS_FILE_PATH)
     valid_value(AUTOBOOT_OPENBMC_HOST)
 
 
 def main():
-
     gen_setup()
 
     print_plug_in_header()
 
     # Get the number of error logs from the BMC.
     init_robot_out_parms(get_plug_in_package_name() + "." + pgm_name + ".")
-    high_sev_elogs_file_path = AUTOBOOT_FFDC_DIR_PATH + AUTOBOOT_FFDC_PREFIX + "high_severity_errorlog.json"
+    high_sev_elogs_file_path = (
+        AUTOBOOT_FFDC_DIR_PATH
+        + AUTOBOOT_FFDC_PREFIX
+        + "high_severity_errorlog.json"
+    )
     lib_file_path = init_robot_file_path("lib/logging_utils.robot")
     lib_file_path += ":" + init_robot_file_path("lib/gen_robot_print.py")
     set_mod_global(lib_file_path)
 
-    REDFISH_SUPPORT_TRANS_STATE = int(os.environ.get('REDFISH_SUPPORT_TRANS_STATE', 0))
+    REDFISH_SUPPORT_TRANS_STATE = int(
+        os.environ.get("REDFISH_SUPPORT_TRANS_STATE", 0)
+    )
     if not REDFISH_SUPPORT_TRANS_STATE:
         try:
             from robot.libraries.BuiltIn import BuiltIn
-            REDFISH_SUPPORT_TRANS_STATE = \
-                int(BuiltIn().get_variable_value("${REDFISH_SUPPORT_TRANS_STATE}", default=0))
+
+            REDFISH_SUPPORT_TRANS_STATE = int(
+                BuiltIn().get_variable_value(
+                    "${REDFISH_SUPPORT_TRANS_STATE}", default=0
+                )
+            )
         except Exception:
             pass
 
-    keyword_redfish_strings = \
-        [
-            "${error_logs}=  Get Redfish Event Logs  &{filter_low_severity_errlogs}",
-            "${num_error_logs}=  Get Length  ${error_logs}",
-            "Rprint Vars  num_error_logs",
-            "${json_string}=  Evaluate  json.dumps($error_logs, indent=4)  modules=json",
-            "Append To File  " + high_sev_elogs_file_path + "  ${json_string}"
-        ]
+    keyword_redfish_strings = [
+        (
+            "${error_logs}=  Get Redfish Event Logs "
+            " &{filter_low_severity_errlogs}"
+        ),
+        "${num_error_logs}=  Get Length  ${error_logs}",
+        "Rprint Vars  num_error_logs",
+        (
+            "${json_string}=  Evaluate  json.dumps($error_logs, indent=4) "
+            " modules=json"
+        ),
+        "Append To File  " + high_sev_elogs_file_path + "  ${json_string}",
+    ]
 
-    keyword_strings = \
-        [
-            "${error_logs}=  Get Error Logs  &{filter_low_severity_errlogs}",
-            "${num_error_logs}=  Get Length  ${error_logs}",
-            "Rprint Vars  num_error_logs",
-            "${json_string}=  Evaluate  json.dumps($error_logs, indent=4)  modules=json",
-            "Append To File  " + high_sev_elogs_file_path + "  ${json_string}"
-        ]
+    keyword_strings = [
+        "${error_logs}=  Get Error Logs  &{filter_low_severity_errlogs}",
+        "${num_error_logs}=  Get Length  ${error_logs}",
+        "Rprint Vars  num_error_logs",
+        (
+            "${json_string}=  Evaluate  json.dumps($error_logs, indent=4) "
+            " modules=json"
+        ),
+        "Append To File  " + high_sev_elogs_file_path + "  ${json_string}",
+    ]
 
     if REDFISH_SUPPORT_TRANS_STATE:
-        keyword_string = ' ; '.join(keyword_redfish_strings)
+        keyword_string = " ; ".join(keyword_redfish_strings)
     else:
-        keyword_string = ' ; '.join(keyword_strings)
+        keyword_string = " ; ".join(keyword_strings)
 
     set_mod_global(keyword_string)
-    cmd_buf = create_robot_cmd_string("extended/run_keyword.robot", OPENBMC_HOST, SSH_PORT, HTTPS_PORT,
-                                      REST_USERNAME, REST_PASSWORD, OPENBMC_USERNAME, OPENBMC_PASSWORD,
-                                      keyword_string, lib_file_path, quiet,
-                                      test_mode, debug, outputdir, output, log, report)
+    cmd_buf = create_robot_cmd_string(
+        "extended/run_keyword.robot",
+        OPENBMC_HOST,
+        SSH_PORT,
+        HTTPS_PORT,
+        REST_USERNAME,
+        REST_PASSWORD,
+        OPENBMC_USERNAME,
+        OPENBMC_PASSWORD,
+        keyword_string,
+        lib_file_path,
+        quiet,
+        test_mode,
+        debug,
+        outputdir,
+        output,
+        log,
+        report,
+    )
     if not robot_cmd_fnc(cmd_buf):
         exit(1)
     # The output contains the num_error_logs value which we will isolate with egrep.
-    rc, out_buf = shell_cmd("egrep '^num_error_logs:[ ]' " + AUTOSCRIPT_STATUS_FILE_PATH, quiet=1,
-                            print_output=0)
+    rc, out_buf = shell_cmd(
+        "egrep '^num_error_logs:[ ]' " + AUTOSCRIPT_STATUS_FILE_PATH,
+        quiet=1,
+        print_output=0,
+    )
     result = key_value_outbuf_to_dict(out_buf)
-    num_error_logs = int(result['num_error_logs'])
+    num_error_logs = int(result["num_error_logs"])
     save_plug_in_value(num_error_logs)
     if num_error_logs > 0:
-        qprint_timen("Adding the name of our high severity error logs FFDC file "
-                     + "to the appropriate file list.")
-        shell_cmd("echo " + high_sev_elogs_file_path + " > " + AUTOBOOT_FFDC_LIST_FILE_PATH)
+        qprint_timen(
+            "Adding the name of our high severity error logs FFDC file "
+            + "to the appropriate file list."
+        )
+        shell_cmd(
+            "echo "
+            + high_sev_elogs_file_path
+            + " > "
+            + AUTOBOOT_FFDC_LIST_FILE_PATH
+        )
     else:
         os.remove(high_sev_elogs_file_path)
 

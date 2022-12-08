@@ -4,28 +4,31 @@ r"""
 This module provides many print functions such as sprint_var, sprint_time, sprint_error, sprint_call_stack.
 """
 
-import sys
-import os
-import time
-import inspect
-import re
-import grp
-import socket
 import argparse
 import copy
+import grp
+import inspect
+import os
+import re
+import socket
+import sys
+import time
+
 try:
     import __builtin__
 except ImportError:
     import builtins as __builtin__
-import logging
+
 import collections
+import logging
+
 from wrap_utils import *
 
 try:
     robot_env = 1
-    from robot.utils import DotDict
-    from robot.utils import NormalizedDict
     from robot.libraries.BuiltIn import BuiltIn
+    from robot.utils import DotDict, NormalizedDict
+
     # Having access to the robot libraries alone does not indicate that we are in a robot environment.  The
     # following try block should confirm that.
     try:
@@ -40,8 +43,9 @@ import gen_arg as ga
 # Setting these variables for use both inside this module and by programs importing this module.
 pgm_file_path = sys.argv[0]
 pgm_name = os.path.basename(pgm_file_path)
-pgm_dir_path = os.path.normpath(re.sub("/" + pgm_name, "", pgm_file_path)) +\
-    os.path.sep
+pgm_dir_path = (
+    os.path.normpath(re.sub("/" + pgm_name, "", pgm_file_path)) + os.path.sep
+)
 
 
 # Some functions (e.g. sprint_pgm_header) have need of a program name value that looks more like a valid
@@ -55,12 +59,12 @@ dft_indent = 0
 # objective is to make the variable values line up nicely with the time stamps.
 dft_col1_width = 29
 
-NANOSECONDS = os.environ.get('NANOSECONDS', '1')
+NANOSECONDS = os.environ.get("NANOSECONDS", "1")
 
 if NANOSECONDS == "1":
     dft_col1_width = dft_col1_width + 7
 
-SHOW_ELAPSED_TIME = os.environ.get('SHOW_ELAPSED_TIME', '1')
+SHOW_ELAPSED_TIME = os.environ.get("SHOW_ELAPSED_TIME", "1")
 
 if SHOW_ELAPSED_TIME == "1":
     if NANOSECONDS == "1":
@@ -107,7 +111,7 @@ def lprint_last_seconds_ix():
 
 
 # The user can set environment variable "GEN_PRINT_DEBUG" to get debug output from this module.
-gen_print_debug = int(os.environ.get('GEN_PRINT_DEBUG', 0))
+gen_print_debug = int(os.environ.get("GEN_PRINT_DEBUG", 0))
 
 
 def sprint_func_name(stack_frame_ix=None):
@@ -156,14 +160,12 @@ def get_line_indent(line):
     Return the number of spaces at the beginning of the line.
     """
 
-    return len(line) - len(line.lstrip(' '))
+    return len(line) - len(line.lstrip(" "))
 
 
 # get_arg_name is not a print function per se.  It has been included in this module because it is used by
 # sprint_var which is defined in this module.
-def get_arg_name(var,
-                 arg_num=1,
-                 stack_frame_ix=1):
+def get_arg_name(var, arg_num=1, stack_frame_ix=1):
     r"""
     Return the "name" of an argument passed to a function.  This could be a literal or a variable name.
 
@@ -221,17 +223,22 @@ def get_arg_name(var,
     # sprint_var, valid_value, etc.).
 
     # The user can set environment variable "GET_ARG_NAME_DEBUG" to get debug output from this function.
-    local_debug = int(os.environ.get('GET_ARG_NAME_DEBUG', 0))
+    local_debug = int(os.environ.get("GET_ARG_NAME_DEBUG", 0))
     # In addition to GET_ARG_NAME_DEBUG, the user can set environment variable "GET_ARG_NAME_SHOW_SOURCE" to
     # have this function include source code in the debug output.
     local_debug_show_source = int(
-        os.environ.get('GET_ARG_NAME_SHOW_SOURCE', 0))
+        os.environ.get("GET_ARG_NAME_SHOW_SOURCE", 0)
+    )
 
     if stack_frame_ix < 1:
-        print_error("Programmer error - Variable \"stack_frame_ix\" has an"
-                    + " invalid value of \"" + str(stack_frame_ix) + "\".  The"
-                    + " value must be an integer that is greater than or equal"
-                    + " to 1.\n")
+        print_error(
+            'Programmer error - Variable "stack_frame_ix" has an'
+            + ' invalid value of "'
+            + str(stack_frame_ix)
+            + '".  The'
+            + " value must be an integer that is greater than or equal"
+            + " to 1.\n"
+        )
         return
 
     if local_debug:
@@ -248,15 +255,25 @@ def get_arg_name(var,
     work_around_inspect_stack_cwd_failure()
     for count in range(0, 2):
         try:
-            frame, filename, cur_line_no, function_name, lines, index = \
-                inspect.stack()[stack_frame_ix]
+            (
+                frame,
+                filename,
+                cur_line_no,
+                function_name,
+                lines,
+                index,
+            ) = inspect.stack()[stack_frame_ix]
         except IndexError:
-            print_error("Programmer error - The caller has asked for"
-                        + " information about the stack frame at index \""
-                        + str(stack_frame_ix) + "\".  However, the stack"
-                        + " only contains " + str(len(inspect.stack()))
-                        + " entries.  Therefore the stack frame index is out"
-                        + " of range.\n")
+            print_error(
+                "Programmer error - The caller has asked for"
+                + ' information about the stack frame at index "'
+                + str(stack_frame_ix)
+                + '".  However, the stack'
+                + " only contains "
+                + str(len(inspect.stack()))
+                + " entries.  Therefore the stack frame index is out"
+                + " of range.\n"
+            )
             return
         if filename != "<string>":
             break
@@ -275,12 +292,10 @@ def get_arg_name(var,
     # Though one would expect inspect.getsourcelines(frame) to get all module source lines if the frame is
     # "<module>", it doesn't do that.  Therefore, for this special case, do inspect.getsourcelines(module).
     if function_name == "<module>":
-        source_lines, source_line_num =\
-            inspect.getsourcelines(module)
+        source_lines, source_line_num = inspect.getsourcelines(module)
         line_ix = cur_line_no - source_line_num - 1
     else:
-        source_lines, source_line_num =\
-            inspect.getsourcelines(frame)
+        source_lines, source_line_num = inspect.getsourcelines(frame)
         line_ix = cur_line_no - source_line_num
 
     if local_debug:
@@ -295,8 +310,9 @@ def get_arg_name(var,
         print_varx("line_ix", line_ix, indent=debug_indent)
         if local_debug_show_source:
             print_varx("source_lines", source_lines, indent=debug_indent)
-        print_varx("real_called_func_name", real_called_func_name,
-                   indent=debug_indent)
+        print_varx(
+            "real_called_func_name", real_called_func_name, indent=debug_indent
+        )
 
     # Get a list of all functions defined for the module.  Note that this doesn't work consistently when
     # _run_exitfuncs is at the top of the stack (i.e. if we're running an exit function).  I've coded a
@@ -330,8 +346,9 @@ def get_arg_name(var,
     # The call to the function could be encased in a recast (e.g. int(func_name())).
     recast_regex = "([^ ]+\\([ ]*)?"
     import_name_regex = "([a-zA-Z0-9_]+\\.)?"
-    func_name_regex = recast_regex + import_name_regex + "(" +\
-        '|'.join(aliases) + ")"
+    func_name_regex = (
+        recast_regex + import_name_regex + "(" + "|".join(aliases) + ")"
+    )
     pre_args_regex = ".*" + func_name_regex + "[ ]*\\("
 
     # Search backward through source lines looking for the calling function name.
@@ -344,9 +361,12 @@ def get_arg_name(var,
             found = True
             break
     if not found:
-        print_error("Programmer error - Could not find the source line with"
-                    + " a reference to function \"" + real_called_func_name
-                    + "\".\n")
+        print_error(
+            "Programmer error - Could not find the source line with"
+            + ' a reference to function "'
+            + real_called_func_name
+            + '".\n'
+        )
         return
 
     # Search forward through the source lines looking for a line whose indentation is the same or less than
@@ -365,15 +385,18 @@ def get_arg_name(var,
         prior_line = source_lines[start_line_ix - 1]
         prior_line_stripped = re.sub(r"[ ]*\\([\r\n]$)", " \\1", prior_line)
         prior_line_indent = get_line_indent(prior_line)
-        if prior_line != prior_line_stripped and\
-           prior_line_indent < start_indent:
+        if (
+            prior_line != prior_line_stripped
+            and prior_line_indent < start_indent
+        ):
             start_line_ix -= 1
             # Remove the backslash (continuation char) from prior line.
             source_lines[start_line_ix] = prior_line_stripped
 
     # Join the start line through the end line into a composite line.
-    composite_line = ''.join(map(str.strip,
-                                 source_lines[start_line_ix:end_line_ix + 1]))
+    composite_line = "".join(
+        map(str.strip, source_lines[start_line_ix : end_line_ix + 1])
+    )
     # Insert one space after first "=" if there isn't one already.
     composite_line = re.sub("=[ ]*([^ ])", "= \\1", composite_line, 1)
 
@@ -393,8 +416,9 @@ def get_arg_name(var,
         lvalues[ix] = lvalue
         ix += 1
     lvalue_prefix_regex = "(.*=[ ]+)?"
-    called_func_name_regex = lvalue_prefix_regex + func_name_regex +\
-        "[ ]*\\(.*"
+    called_func_name_regex = (
+        lvalue_prefix_regex + func_name_regex + "[ ]*\\(.*"
+    )
     called_func_name = re.sub(called_func_name_regex, "\\4", composite_line)
     arg_list_etc = "(" + re.sub(pre_args_regex, "", composite_line)
     if local_debug:
@@ -408,8 +432,11 @@ def get_arg_name(var,
         print_varx("lvalue_regex", lvalue_regex, indent=debug_indent)
         print_varx("lvalue_string", lvalue_string, indent=debug_indent)
         print_varx("lvalues", lvalues, indent=debug_indent)
-        print_varx("called_func_name_regex", called_func_name_regex,
-                   indent=debug_indent)
+        print_varx(
+            "called_func_name_regex",
+            called_func_name_regex,
+            indent=debug_indent,
+        )
         print_varx("called_func_name", called_func_name, indent=debug_indent)
         print_varx("arg_list_etc", arg_list_etc, indent=debug_indent)
 
@@ -530,8 +557,11 @@ def sprint_time(buffer=""):
 
     if SHOW_ELAPSED_TIME == "1":
         cur_time_seconds = seconds
-        math_string = "%9.9f" % cur_time_seconds + " - " + "%9.9f" % \
-            sprint_time_last_seconds[last_seconds_ix]
+        math_string = (
+            "%9.9f" % cur_time_seconds
+            + " - "
+            + "%9.9f" % sprint_time_last_seconds[last_seconds_ix]
+        )
         elapsed_seconds = eval(math_string)
         if NANOSECONDS == "1":
             elapsed_seconds = "%11.6f" % elapsed_seconds
@@ -648,8 +678,9 @@ def get_req_num_hex_digits(number):
         return word_length_in_digits()
 
     num_length_in_bits = bit_length(working_number)
-    num_hex_digits, remainder = divmod(num_length_in_bits,
-                                       digit_length_in_bits())
+    num_hex_digits, remainder = divmod(
+        num_length_in_bits, digit_length_in_bits()
+    )
     if remainder > 0:
         # Example: the number 7 requires 3 bits.  The divmod above produces, 0 with remainder of 3.  So
         # because we have a remainder, we increment num_hex_digits from 0 to 1.
@@ -780,16 +811,17 @@ def valid_fmts():
     """
 
     return [
-        'hexa',
-        'octal',
-        'binary',
-        'blank',
-        'verbose',
-        'quote_keys',
-        'show_type',
-        'strip_brackets',
-        'no_header',
-        'quote_values']
+        "hexa",
+        "octal",
+        "binary",
+        "blank",
+        "verbose",
+        "quote_keys",
+        "show_type",
+        "strip_brackets",
+        "no_header",
+        "quote_values",
+    ]
 
 
 def create_fmt_definition():
@@ -960,14 +992,16 @@ def parse_fmt(fmt):
         return fmt, fmt
 
 
-def sprint_varx(var_name,
-                var_value,
-                fmt=0,
-                indent=dft_indent,
-                col1_width=dft_col1_width,
-                trailing_char="\n",
-                key_list=None,
-                delim=":"):
+def sprint_varx(
+    var_name,
+    var_value,
+    fmt=0,
+    indent=dft_indent,
+    col1_width=dft_col1_width,
+    trailing_char="\n",
+    key_list=None,
+    delim=":",
+):
     r"""
     Print the var name/value passed to it.  If the caller lets col1_width default, the printing lines up
     nicely with output generated by the print_time functions.
@@ -1071,8 +1105,9 @@ def sprint_varx(var_name,
         if type(var_value) in int_types:
             # Process format values pertaining to int types.
             if fmt & hexa():
-                num_hex_digits = max(dft_num_hex_digits(),
-                                     get_req_num_hex_digits(var_value))
+                num_hex_digits = max(
+                    dft_num_hex_digits(), get_req_num_hex_digits(var_value)
+                )
                 # Convert a negative number to its positive twos complement for proper printing.  For
                 # example, instead of printing -1 as "0x-000000000000001" it will be printed as
                 # "0xffffffffffffffff".
@@ -1081,13 +1116,14 @@ def sprint_varx(var_name,
             elif fmt & octal():
                 value_format = "0o%016o"
             elif fmt & binary():
-                num_digits, remainder = \
-                    divmod(max(bit_length(var_value), 1), 8)
+                num_digits, remainder = divmod(
+                    max(bit_length(var_value), 1), 8
+                )
                 num_digits *= 8
                 if remainder:
                     num_digits += 8
                 num_digits += 2
-                value_format = '#0' + str(num_digits) + 'b'
+                value_format = "#0" + str(num_digits) + "b"
                 var_value = format(var_value, value_format)
                 value_format = "%s"
         elif type(var_value) in string_types:
@@ -1097,8 +1133,9 @@ def sprint_varx(var_name,
                 var_value = "<blank>"
         elif type(var_value) is type:
             var_value = str(var_value).split("'")[1]
-        format_string = "%" + str(indent) + "s%-" + str(col1_width) + "s" \
-            + value_format
+        format_string = (
+            "%" + str(indent) + "s%-" + str(col1_width) + "s" + value_format
+        )
         if fmt & show_type():
             if var_value != "":
                 format_string += " "
@@ -1109,16 +1146,19 @@ def sprint_varx(var_name,
         if not (fmt & verbose()):
             # Strip everything leading up to the first left square brace.
             var_name = re.sub(r".*\[", "[", var_name)
-        if (fmt & strip_brackets()):
+        if fmt & strip_brackets():
             var_name = re.sub(r"[\[\]]", "", var_name)
         if value_format == "0x%08x":
-            return format_string % ("", str(var_name) + delim,
-                                    var_value & 0xffffffff)
+            return format_string % (
+                "",
+                str(var_name) + delim,
+                var_value & 0xFFFFFFFF,
+            )
         else:
             return format_string % ("", str(var_name) + delim, var_value)
     else:
         # The data type is complex in the sense that it has subordinate parts.
-        if (fmt & no_header()):
+        if fmt & no_header():
             buffer = ""
         else:
             # Create header line.
@@ -1127,7 +1167,7 @@ def sprint_varx(var_name,
                 loc_var_name = re.sub(r".*\[", "[", var_name)
             else:
                 loc_var_name = var_name
-            if (fmt & strip_brackets()):
+            if fmt & strip_brackets():
                 loc_var_name = re.sub(r"[\[\]]", "", loc_var_name)
             format_string = "%" + str(indent) + "s%s\n"
             buffer = format_string % ("", loc_var_name + ":")
@@ -1142,9 +1182,9 @@ def sprint_varx(var_name,
         loc_trailing_char = "\n"
         if is_dict(var_value):
             if type(child_fmt) is list:
-                child_quote_keys = (child_fmt[0] & quote_keys())
+                child_quote_keys = child_fmt[0] & quote_keys()
             else:
-                child_quote_keys = (child_fmt & quote_keys())
+                child_quote_keys = child_fmt & quote_keys()
             for key, value in var_value.items():
                 if key_list is not None:
                     key_list_regex = "^" + "|".join(key_list) + "$"
@@ -1156,39 +1196,65 @@ def sprint_varx(var_name,
                 if child_quote_keys:
                     key = "'" + key + "'"
                 key = "[" + str(key) + "]"
-                buffer += sprint_varx(var_name + key, value, child_fmt, indent,
-                                      col1_width, loc_trailing_char, key_list,
-                                      delim)
+                buffer += sprint_varx(
+                    var_name + key,
+                    value,
+                    child_fmt,
+                    indent,
+                    col1_width,
+                    loc_trailing_char,
+                    key_list,
+                    delim,
+                )
         elif type(var_value) in (list, tuple, set):
             for key, value in enumerate(var_value):
                 ix += 1
                 if ix == length:
                     loc_trailing_char = trailing_char
                 key = "[" + str(key) + "]"
-                buffer += sprint_varx(var_name + key, value, child_fmt, indent,
-                                      col1_width, loc_trailing_char, key_list,
-                                      delim)
+                buffer += sprint_varx(
+                    var_name + key,
+                    value,
+                    child_fmt,
+                    indent,
+                    col1_width,
+                    loc_trailing_char,
+                    key_list,
+                    delim,
+                )
         elif isinstance(var_value, argparse.Namespace):
             for key in var_value.__dict__:
                 ix += 1
                 if ix == length:
                     loc_trailing_char = trailing_char
-                cmd_buf = "buffer += sprint_varx(var_name + \".\" + str(key)" \
-                          + ", var_value." + key + ", child_fmt, indent," \
-                          + " col1_width, loc_trailing_char, key_list," \
-                          + " delim)"
+                cmd_buf = (
+                    'buffer += sprint_varx(var_name + "." + str(key)'
+                    + ", var_value."
+                    + key
+                    + ", child_fmt, indent,"
+                    + " col1_width, loc_trailing_char, key_list,"
+                    + " delim)"
+                )
                 exec(cmd_buf)
         else:
             var_type = type(var_value).__name__
             func_name = sys._getframe().f_code.co_name
-            var_value = "<" + var_type + " type not supported by " + \
-                        func_name + "()>"
+            var_value = (
+                "<" + var_type + " type not supported by " + func_name + "()>"
+            )
             value_format = "%s"
             indent -= 2
             # Adjust col1_width.
             col1_width = col1_width - indent
-            format_string = "%" + str(indent) + "s%-" \
-                + str(col1_width) + "s" + value_format + trailing_char
+            format_string = (
+                "%"
+                + str(indent)
+                + "s%-"
+                + str(col1_width)
+                + "s"
+                + value_format
+                + trailing_char
+            )
             return format_string % ("", str(var_name) + ":", var_value)
 
         return buffer
@@ -1239,10 +1305,7 @@ def sprint_vars(*args, **kwargs):
     return buffer
 
 
-def sprint_dashes(indent=dft_indent,
-                  width=80,
-                  line_feed=1,
-                  char="-"):
+def sprint_dashes(indent=dft_indent, width=80, line_feed=1, char="-"):
     r"""
     Return a string of dashes to the caller.
 
@@ -1261,8 +1324,7 @@ def sprint_dashes(indent=dft_indent,
     return buffer
 
 
-def sindent(text="",
-            indent=0):
+def sindent(text="", indent=0):
     r"""
     Pre-pend the specified number of characters to the text string (i.e. indent it) and return it.
 
@@ -1310,36 +1372,41 @@ def sprint_func_line(stack_frame, style=None, max_width=160):
 
     if func_name == "<module>":
         # If the func_name is the "main" program, we simply get the command line call string.
-        func_and_args = ' '.join(sys.argv)
+        func_and_args = " ".join(sys.argv)
     else:
         # Get the program arguments.
-        (args, varargs, keywords, locals) =\
-            inspect.getargvalues(stack_frame[0])
+        (args, varargs, keywords, locals) = inspect.getargvalues(
+            stack_frame[0]
+        )
 
         args_list = []
         for arg_name in filter(None, args + [varargs, keywords]):
             # Get the arg value from frame locals.
             arg_value = locals[arg_name]
-            if arg_name == 'self':
+            if arg_name == "self":
                 if style == func_line_style_short:
                     continue
                 # Manipulations to improve output for class methods.
                 func_name = arg_value.__class__.__name__ + "." + func_name
                 args_list.append(arg_name + " = <self>")
-            elif (style == func_line_style_short
-                  and arg_name == 'args'
-                  and type(arg_value) in (list, tuple)):
+            elif (
+                style == func_line_style_short
+                and arg_name == "args"
+                and type(arg_value) in (list, tuple)
+            ):
                 if len(arg_value) == 0:
                     continue
-                args_list.append(repr(', '.join(arg_value)))
-            elif (style == func_line_style_short
-                  and arg_name == 'kwargs'
-                  and type(arg_value) is dict):
+                args_list.append(repr(", ".join(arg_value)))
+            elif (
+                style == func_line_style_short
+                and arg_name == "kwargs"
+                and type(arg_value) is dict
+            ):
                 for key, value in arg_value.items():
                     args_list.append(key + "=" + repr(value))
             else:
                 args_list.append(arg_name + " = " + repr(arg_value))
-        args_str = "(" + ', '.join(map(str, args_list)) + ")"
+        args_str = "(" + ", ".join(map(str, args_list)) + ")"
 
         # Now we need to print this in a nicely-wrapped way.
         func_and_args = func_name + args_str
@@ -1349,9 +1416,7 @@ def sprint_func_line(stack_frame, style=None, max_width=160):
     return func_and_args
 
 
-def sprint_call_stack(indent=0,
-                      stack_frame_ix=0,
-                      style=None):
+def sprint_call_stack(indent=0, stack_frame_ix=0, style=None):
     r"""
     Return a call stack report for the given point in the program with line numbers, function names and
     function parameters and arguments.
@@ -1444,8 +1509,7 @@ def sprint_executing(stack_frame_ix=None, style=None, max_width=None):
     return sprint_time() + "Executing: " + func_and_args + "\n"
 
 
-def sprint_pgm_header(indent=0,
-                      linefeed=1):
+def sprint_pgm_header(indent=0, linefeed=1):
     r"""
     Return a standardized header that programs should print at the beginning of the run.  It includes useful
     information like command line, pid, userid, program parameters, etc.
@@ -1464,20 +1528,25 @@ def sprint_pgm_header(indent=0,
 
     if robot_env:
         suite_name = BuiltIn().get_variable_value("${suite_name}")
-        buffer += sindent(sprint_time("Running test suite \"" + suite_name
-                                      + "\".\n"), indent)
+        buffer += sindent(
+            sprint_time('Running test suite "' + suite_name + '".\n'), indent
+        )
 
     buffer += sindent(sprint_time() + "Running " + pgm_name + ".\n", indent)
-    buffer += sindent(sprint_time() + "Program parameter values, etc.:\n\n",
-                      indent)
-    buffer += sprint_varx("command_line", ' '.join(sys.argv), 0, indent,
-                          col1_width)
+    buffer += sindent(
+        sprint_time() + "Program parameter values, etc.:\n\n", indent
+    )
+    buffer += sprint_varx(
+        "command_line", " ".join(sys.argv), 0, indent, col1_width
+    )
     # We want the output to show a customized name for the pid and pgid but we want it to look like a valid
     # variable name.  Therefore, we'll use pgm_name_var_name which was set when this module was imported.
-    buffer += sprint_varx(pgm_name_var_name + "_pid", os.getpid(), 0, indent,
-                          col1_width)
-    buffer += sprint_varx(pgm_name_var_name + "_pgid", os.getpgrp(), 0, indent,
-                          col1_width)
+    buffer += sprint_varx(
+        pgm_name_var_name + "_pid", os.getpid(), 0, indent, col1_width
+    )
+    buffer += sprint_varx(
+        pgm_name_var_name + "_pgid", os.getpgrp(), 0, indent, col1_width
+    )
     userid_num = str(os.geteuid())
     try:
         username = os.getlogin()
@@ -1486,30 +1555,36 @@ def sprint_pgm_header(indent=0,
             username = "root"
         else:
             username = "?"
-    buffer += sprint_varx("uid", userid_num + " (" + username
-                          + ")", 0, indent, col1_width)
-    buffer += sprint_varx("gid", str(os.getgid()) + " ("
-                          + str(grp.getgrgid(os.getgid()).gr_name) + ")", 0,
-                          indent, col1_width)
-    buffer += sprint_varx("host_name", socket.gethostname(), 0, indent,
-                          col1_width)
+    buffer += sprint_varx(
+        "uid", userid_num + " (" + username + ")", 0, indent, col1_width
+    )
+    buffer += sprint_varx(
+        "gid",
+        str(os.getgid()) + " (" + str(grp.getgrgid(os.getgid()).gr_name) + ")",
+        0,
+        indent,
+        col1_width,
+    )
+    buffer += sprint_varx(
+        "host_name", socket.gethostname(), 0, indent, col1_width
+    )
     try:
-        DISPLAY = os.environ['DISPLAY']
+        DISPLAY = os.environ["DISPLAY"]
     except KeyError:
         DISPLAY = ""
     buffer += sprint_var(DISPLAY, 0, indent, col1_width)
-    PYTHON_VERSION = os.environ.get('PYTHON_VERSION', None)
+    PYTHON_VERSION = os.environ.get("PYTHON_VERSION", None)
     if PYTHON_VERSION is not None:
         buffer += sprint_var(PYTHON_VERSION, 0, indent, col1_width)
-    PYTHON_PGM_PATH = os.environ.get('PYTHON_PGM_PATH', None)
+    PYTHON_PGM_PATH = os.environ.get("PYTHON_PGM_PATH", None)
     if PYTHON_PGM_PATH is not None:
         buffer += sprint_var(PYTHON_PGM_PATH, 0, indent, col1_width)
     python_version = sys.version.replace("\n", "")
     buffer += sprint_var(python_version, 0, indent, col1_width)
-    ROBOT_VERSION = os.environ.get('ROBOT_VERSION', None)
+    ROBOT_VERSION = os.environ.get("ROBOT_VERSION", None)
     if ROBOT_VERSION is not None:
         buffer += sprint_var(ROBOT_VERSION, 0, indent, col1_width)
-    ROBOT_PGM_PATH = os.environ.get('ROBOT_PGM_PATH', None)
+    ROBOT_PGM_PATH = os.environ.get("ROBOT_PGM_PATH", None)
     if ROBOT_PGM_PATH is not None:
         buffer += sprint_var(ROBOT_PGM_PATH, 0, indent, col1_width)
 
@@ -1536,10 +1611,9 @@ def sprint_pgm_header(indent=0,
     return buffer
 
 
-def sprint_error_report(error_text="\n",
-                        indent=2,
-                        format=None,
-                        stack_frame_ix=None):
+def sprint_error_report(
+    error_text="\n", indent=2, format=None, stack_frame_ix=None
+):
     r"""
     Return a string with a standardized report which includes the caller's error text, the call stack and the
     program header.
@@ -1558,12 +1632,12 @@ def sprint_error_report(error_text="\n",
     indent = int(indent)
     if format is None:
         if robot_env:
-            format = 'short'
+            format = "short"
         else:
-            format = 'long'
-    error_text = error_text.rstrip('\n') + '\n'
+            format = "long"
+    error_text = error_text.rstrip("\n") + "\n"
 
-    if format == 'short':
+    if format == "short":
         return sprint_error(error_text)
 
     buffer = ""
@@ -1588,8 +1662,7 @@ def sprint_error_report(error_text="\n",
     return buffer
 
 
-def sprint_issuing(cmd_buf,
-                   test_mode=0):
+def sprint_issuing(cmd_buf, test_mode=0):
     r"""
     Return a line indicating a command that the program is about to execute.
 
@@ -1610,7 +1683,7 @@ def sprint_issuing(cmd_buf,
         buffer += "(test_mode) "
     if type(cmd_buf) is list:
         # Assume this is a robot command in the form of a list.
-        cmd_buf = '  '.join([str(element) for element in cmd_buf])
+        cmd_buf = "  ".join([str(element) for element in cmd_buf])
     buffer += "Issuing: " + cmd_buf + "\n"
 
     return buffer
@@ -1641,7 +1714,7 @@ def sprint_file(file_path):
     file_path                       The path to a file (e.g. "/tmp/file1").
     """
 
-    with open(file_path, 'r') as file:
+    with open(file_path, "r") as file:
         buffer = file.read()
     return buffer
 
@@ -1678,8 +1751,7 @@ def sprintn(buffer=""):
     return buffer
 
 
-def gp_print(buffer,
-             stream='stdout'):
+def gp_print(buffer, stream="stdout"):
     r"""
     Print the buffer using either sys.stdout.write or BuiltIn().log_to_console depending on whether we are
     running in a robot environment.
@@ -1735,9 +1807,7 @@ def gp_debug_print(buffer):
     gp_print(buffer)
 
 
-def get_var_value(var_value=None,
-                  default=1,
-                  var_name=None):
+def get_var_value(var_value=None, default=1, var_name=None):
     r"""
     Return either var_value, the corresponding global value or default.
 
@@ -1787,17 +1857,16 @@ def get_var_value(var_value=None,
         var_name = get_arg_name(None, 1, 2)
 
     if robot_env:
-        var_value = BuiltIn().get_variable_value("${" + var_name + "}",
-                                                 default)
+        var_value = BuiltIn().get_variable_value(
+            "${" + var_name + "}", default
+        )
     else:
         var_value = getattr(__builtin__, var_name, default)
 
     return var_value
 
 
-def get_stack_var(var_name,
-                  default="",
-                  init_stack_ix=2):
+def get_stack_var(var_name, default="", init_stack_ix=2):
     r"""
     Starting with the caller's stack level, search upward in the call stack for a variable named var_name and
     return its value.  If the variable cannot be found in the stack, attempt to get the global value.  If the
@@ -1825,9 +1894,14 @@ def get_stack_var(var_name,
 
     work_around_inspect_stack_cwd_failure()
     default = get_var_value(var_name=var_name, default=default)
-    return next((frame[0].f_locals[var_name]
-                 for frame in inspect.stack()[init_stack_ix:]
-                 if var_name in frame[0].f_locals), default)
+    return next(
+        (
+            frame[0].f_locals[var_name]
+            for frame in inspect.stack()[init_stack_ix:]
+            if var_name in frame[0].f_locals
+        ),
+        default,
+    )
 
 
 # hidden_text is a list of passwords which are to be replaced with asterisks by print functions defined in
@@ -1861,8 +1935,9 @@ def register_passwords(*args):
         # Place the password into the hidden_text list.
         hidden_text.append(password)
         # Create a corresponding password regular expression.  Escape regex special characters too.
-        password_regex = '(' +\
-            '|'.join([re.escape(x) for x in hidden_text]) + ')'
+        password_regex = (
+            "(" + "|".join([re.escape(x) for x in hidden_text]) + ")"
+        )
 
 
 def replace_passwords(buffer):
@@ -1886,10 +1961,9 @@ def replace_passwords(buffer):
     return re.sub(password_regex, "********", buffer)
 
 
-def create_print_wrapper_funcs(func_names,
-                               stderr_func_names,
-                               replace_dict,
-                               func_prefix=""):
+def create_print_wrapper_funcs(
+    func_names, stderr_func_names, replace_dict, func_prefix=""
+):
     r"""
     Generate code for print wrapper functions and return the generated code as a string.
 
@@ -1919,9 +1993,9 @@ def create_print_wrapper_funcs(func_names,
 
     for func_name in func_names:
         if func_name in stderr_func_names:
-            replace_dict['output_stream'] = "stderr"
+            replace_dict["output_stream"] = "stderr"
         else:
-            replace_dict['output_stream'] = "stdout"
+            replace_dict["output_stream"] = "stdout"
 
         s_func_name = "s" + func_name
         q_func_name = "q" + func_name
@@ -1929,32 +2003,48 @@ def create_print_wrapper_funcs(func_names,
 
         # We don't want to try to redefine the "print" function, thus the following if statement.
         if func_name != "print":
-            func_def = create_func_def_string(s_func_name,
-                                              func_prefix + func_name,
-                                              print_func_template,
-                                              replace_dict)
+            func_def = create_func_def_string(
+                s_func_name,
+                func_prefix + func_name,
+                print_func_template,
+                replace_dict,
+            )
             buffer += func_def
 
-        func_def = create_func_def_string(s_func_name,
-                                          func_prefix + "q" + func_name,
-                                          qprint_func_template, replace_dict)
+        func_def = create_func_def_string(
+            s_func_name,
+            func_prefix + "q" + func_name,
+            qprint_func_template,
+            replace_dict,
+        )
         buffer += func_def
 
-        func_def = create_func_def_string(s_func_name,
-                                          func_prefix + "d" + func_name,
-                                          dprint_func_template, replace_dict)
+        func_def = create_func_def_string(
+            s_func_name,
+            func_prefix + "d" + func_name,
+            dprint_func_template,
+            replace_dict,
+        )
         buffer += func_def
 
-        func_def = create_func_def_string(s_func_name,
-                                          func_prefix + "l" + func_name,
-                                          lprint_func_template, replace_dict)
+        func_def = create_func_def_string(
+            s_func_name,
+            func_prefix + "l" + func_name,
+            lprint_func_template,
+            replace_dict,
+        )
         buffer += func_def
 
         # Create abbreviated aliases (e.g. spvar is an alias for sprint_var).
         alias = re.sub("print_", "p", func_name)
         alias = re.sub("print", "p", alias)
-        prefixes = [func_prefix + "", "s", func_prefix + "q",
-                    func_prefix + "d", func_prefix + "l"]
+        prefixes = [
+            func_prefix + "",
+            "s",
+            func_prefix + "q",
+            func_prefix + "d",
+            func_prefix + "l",
+        ]
         for prefix in prefixes:
             if alias == "p":
                 continue
@@ -1984,49 +2074,61 @@ def create_print_wrapper_funcs(func_names,
 # means use of the logging module.  For robot programs it means use of the BuiltIn().log() function.
 
 # Templates for the various print wrapper functions.
-print_func_template = \
-    [
-        "    <mod_qualifier>gp_print(<mod_qualifier>replace_passwords("
-        + "<call_line>), stream='<output_stream>')"
-    ]
+print_func_template = [
+    "    <mod_qualifier>gp_print(<mod_qualifier>replace_passwords("
+    + "<call_line>), stream='<output_stream>')"
+]
 
-qprint_func_template = \
-    [
-        "    quiet = <mod_qualifier>get_stack_var(\"quiet\", 0)",
-        "    if int(quiet): return"
-    ] + print_func_template
+qprint_func_template = [
+    '    quiet = <mod_qualifier>get_stack_var("quiet", 0)',
+    "    if int(quiet): return",
+] + print_func_template
 
-dprint_func_template = \
-    [
-        "    debug = <mod_qualifier>get_stack_var(\"debug\", 0)",
-        "    if not int(debug): return"
-    ] + print_func_template
+dprint_func_template = [
+    '    debug = <mod_qualifier>get_stack_var("debug", 0)',
+    "    if not int(debug): return",
+] + print_func_template
 
-lprint_func_template = \
-    [
-        "    <mod_qualifier>set_last_seconds_ix(<mod_qualifier>"
-        + "lprint_last_seconds_ix())",
-        "    <mod_qualifier>gp_log(<mod_qualifier>replace_passwords"
-        + "(<call_line>))",
-        "    <mod_qualifier>set_last_seconds_ix(<mod_qualifier>"
-        + "standard_print_last_seconds_ix())"
-    ]
+lprint_func_template = [
+    "    <mod_qualifier>set_last_seconds_ix(<mod_qualifier>"
+    + "lprint_last_seconds_ix())",
+    "    <mod_qualifier>gp_log(<mod_qualifier>replace_passwords"
+    + "(<call_line>))",
+    "    <mod_qualifier>set_last_seconds_ix(<mod_qualifier>"
+    + "standard_print_last_seconds_ix())",
+]
 
-replace_dict = {'output_stream': 'stdout', 'mod_qualifier': ''}
+replace_dict = {"output_stream": "stdout", "mod_qualifier": ""}
 
 gp_debug_print("robot_env: " + str(robot_env) + "\n")
 
 # func_names contains a list of all print functions which should be created from their sprint counterparts.
-func_names = ['print_time', 'print_timen', 'print_error', 'print_varx',
-              'print_var', 'print_vars', 'print_dashes', 'indent',
-              'print_call_stack', 'print_func_name', 'print_executing',
-              'print_pgm_header', 'print_issuing', 'print_pgm_footer',
-              'print_file', 'print_error_report', 'print', 'printn']
+func_names = [
+    "print_time",
+    "print_timen",
+    "print_error",
+    "print_varx",
+    "print_var",
+    "print_vars",
+    "print_dashes",
+    "indent",
+    "print_call_stack",
+    "print_func_name",
+    "print_executing",
+    "print_pgm_header",
+    "print_issuing",
+    "print_pgm_footer",
+    "print_file",
+    "print_error_report",
+    "print",
+    "printn",
+]
 
 # stderr_func_names is a list of functions whose output should go to stderr rather than stdout.
-stderr_func_names = ['print_error', 'print_error_report']
+stderr_func_names = ["print_error", "print_error_report"]
 
-func_defs = create_print_wrapper_funcs(func_names, stderr_func_names,
-                                       replace_dict)
+func_defs = create_print_wrapper_funcs(
+    func_names, stderr_func_names, replace_dict
+)
 gp_debug_print(func_defs)
 exec(func_defs)

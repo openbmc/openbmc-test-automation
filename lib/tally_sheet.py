@@ -4,10 +4,10 @@ r"""
 Define the tally_sheet class.
 """
 
-import sys
 import collections
 import copy
 import re
+import sys
 
 try:
     from robot.utils import DotDict
@@ -18,7 +18,6 @@ import gen_print as gp
 
 
 class tally_sheet:
-
     r"""
     This class is the implementation of a tally sheet.  The sheet can be viewed as rows and columns.  Each
     row has a unique key field.
@@ -63,10 +62,12 @@ class tally_sheet:
 
     """
 
-    def __init__(self,
-                 row_key_field_name='Description',
-                 init_fields_dict=dict(),
-                 obj_name='tally_sheet'):
+    def __init__(
+        self,
+        row_key_field_name="Description",
+        init_fields_dict=dict(),
+        obj_name="tally_sheet",
+    ):
         r"""
         Create a tally sheet object.
 
@@ -92,13 +93,12 @@ class tally_sheet:
         self.__sum_fields = []
         self.__calc_fields = []
 
-    def init(self,
-             row_key_field_name,
-             init_fields_dict,
-             obj_name='tally_sheet'):
-        self.__init__(row_key_field_name,
-                      init_fields_dict,
-                      obj_name='tally_sheet')
+    def init(
+        self, row_key_field_name, init_fields_dict, obj_name="tally_sheet"
+    ):
+        self.__init__(
+            row_key_field_name, init_fields_dict, obj_name="tally_sheet"
+        )
 
     def set_sum_fields(self, sum_fields):
         r"""
@@ -137,7 +137,7 @@ class tally_sheet:
 
         if row_key in self.__table:
             # If we allow this, the row values get re-initialized.
-            message = "An entry for \"" + row_key + "\" already exists in"
+            message = 'An entry for "' + row_key + '" already exists in'
             message += " tally sheet."
             raise ValueError(message)
         if init_fields_dict is None:
@@ -193,7 +193,7 @@ class tally_sheet:
         for row_key, value in self.__table.items():
             # Walk through the calc fields and process them.
             for calc_field in self.__calc_fields:
-                tokens = [i for i in re.split(r'(\d+|\W+)', calc_field) if i]
+                tokens = [i for i in re.split(r"(\d+|\W+)", calc_field) if i]
                 cmd_buf = ""
                 for token in tokens:
                     if token in ("=", "+", "-", "*", "/"):
@@ -201,9 +201,15 @@ class tally_sheet:
                     else:
                         # Note: Using "mangled" name for the sake of the exec
                         # statement (below).
-                        cmd_buf += "self._" + self.__class__.__name__ +\
-                                   "__table['" + row_key + "']['" +\
-                                   token + "'] "
+                        cmd_buf += (
+                            "self._"
+                            + self.__class__.__name__
+                            + "__table['"
+                            + row_key
+                            + "']['"
+                            + token
+                            + "'] "
+                        )
                 exec(cmd_buf)
 
             for field_key, sub_value in value.items():
@@ -248,8 +254,8 @@ class tally_sheet:
         col_names = [self.__row_key_field_name.title()]
         report_width = 40
         key_width = 40
-        format_string = '{0:<' + str(key_width) + '}'
-        dash_format_string = '{0:-<' + str(key_width) + '}'
+        format_string = "{0:<" + str(key_width) + "}"
+        dash_format_string = "{0:-<" + str(key_width) + "}"
         field_num = 0
 
         try:
@@ -257,28 +263,31 @@ class tally_sheet:
             for row_key, value in first_rec[1].items():
                 field_num += 1
                 if isinstance(value, int):
-                    align = ':>'
+                    align = ":>"
                 else:
-                    align = ':<'
-                format_string += ' {' + str(field_num) + align +\
-                                 str(len(row_key)) + '}'
-                dash_format_string += ' {' + str(field_num) + ':->' +\
-                                      str(len(row_key)) + '}'
+                    align = ":<"
+                format_string += (
+                    " {" + str(field_num) + align + str(len(row_key)) + "}"
+                )
+                dash_format_string += (
+                    " {" + str(field_num) + ":->" + str(len(row_key)) + "}"
+                )
                 report_width += 1 + len(row_key)
                 col_names.append(row_key.title())
         except StopIteration:
             pass
         num_fields = field_num + 1
-        totals_line_fmt = '{0:=<' + str(report_width) + '}'
+        totals_line_fmt = "{0:=<" + str(report_width) + "}"
 
         buffer += format_string.format(*col_names) + "\n"
-        buffer += dash_format_string.format(*([''] * num_fields)) + "\n"
+        buffer += dash_format_string.format(*([""] * num_fields)) + "\n"
         for row_key, value in self.__table.items():
             buffer += format_string.format(row_key, *value.values()) + "\n"
 
-        buffer += totals_line_fmt.format('') + "\n"
-        buffer += format_string.format('Totals',
-                                       *self.__totals_line.values()) + "\n"
+        buffer += totals_line_fmt.format("") + "\n"
+        buffer += (
+            format_string.format("Totals", *self.__totals_line.values()) + "\n"
+        )
 
         return buffer
 

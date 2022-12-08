@@ -4,13 +4,13 @@ r"""
 This program will get the system serial number from an OBMC machine and print it to stdout.
 """
 
+import os
+import sys
+
+import requests
 from gen_arg import *
 from gen_print import *
 from gen_valid import *
-
-import sys
-import os
-import requests
 
 save_path_0 = sys.path[0]
 del sys.path[0]
@@ -21,33 +21,35 @@ sys.path.insert(0, save_path_0)
 logging.captureWarnings(True)
 
 parser = argparse.ArgumentParser(
-    usage='%(prog)s [OPTIONS]',
+    usage="%(prog)s [OPTIONS]",
     description="%(prog)s will get the system serial number from an OBMC"
     + " machine and print it to stdout as follows:\n\n"
     + "mch_ser_num:<ser num>",
     formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-    prefix_chars='-+')
+    prefix_chars="-+",
+)
 
 parser.add_argument(
-    '--openbmc_username',
+    "--openbmc_username",
     default="root",
-    help='The username for communicating with the OpenBMC machine.')
+    help="The username for communicating with the OpenBMC machine.",
+)
 
 parser.add_argument(
-    '--openbmc_password',
+    "--openbmc_password",
     default="0penBmc",
-    help='The password for communicating with the OpenBMC machine.')
+    help="The password for communicating with the OpenBMC machine.",
+)
 
 parser.add_argument(
-    'openbmc_host',
-    help='The host name or IP address of the OpenBMC machine.')
+    "openbmc_host", help="The host name or IP address of the OpenBMC machine."
+)
 
 # Populate stock_list with options we want.
 stock_list = [("test_mode", 0), ("quiet", 1)]
 
 
-def exit_function(signal_number=0,
-                  frame=None):
+def exit_function(signal_number=0, frame=None):
     r"""
     Execute whenever the program ends normally or with the signals that we catch (i.e. TERM, INT).
     """
@@ -58,8 +60,7 @@ def exit_function(signal_number=0,
     qprint_pgm_footer()
 
 
-def signal_handler(signal_number,
-                   frame):
+def signal_handler(signal_number, frame):
     r"""
     Handle signals.  Without a function to catch a SIGTERM or SIGINT, our program would terminate immediately
     with return code 143 and without calling our exit_function.
@@ -96,7 +97,6 @@ def create_http_prefix(host):
 
 
 def main():
-
     if not gen_get_options(parser, stock_list):
         return False
 
@@ -109,12 +109,14 @@ def main():
 
     http_prefix = create_http_prefix(openbmc_host)
 
-    command = http_prefix + 'login'
+    command = http_prefix + "login"
     qprint_issuing(command)
-    resp = session.post(command,
-                        json={'data': [openbmc_username, openbmc_password]},
-                        verify=False)
-    if resp.json()['status'] != 'ok':
+    resp = session.post(
+        command,
+        json={"data": [openbmc_username, openbmc_password]},
+        verify=False,
+    )
+    if resp.json()["status"] != "ok":
         json = resp.json()
         print_error_report("http request failed:\n" + sprint_var(command))
         raise Exception("Login failed.\n")
@@ -123,15 +125,18 @@ def main():
     qprint_issuing(command)
     resp = session.get(command, verify=False)
     json = resp.json()
-    if json['status'] != 'ok':
+    if json["status"] != "ok":
         print_error_report("http request failed:\n" + sprint_var(command))
         raise Exception("http request failed.\n")
 
     try:
-        mch_ser_num = json['data']['SerialNumber']
+        mch_ser_num = json["data"]["SerialNumber"]
     except KeyError:
-        print_error_report("Failed to find 'SerialNumber' key in the"
-                           + " following data:\n" + sprint_var(json))
+        print_error_report(
+            "Failed to find 'SerialNumber' key in the"
+            + " following data:\n"
+            + sprint_var(json)
+        )
         return False
     print_var(mch_ser_num, 0, 0, 0)
 

@@ -25,5 +25,5 @@ VPD_DETAILS = {
     },
     "/system/chassis/motherboard/vdd_vrm1": {
         "type": "xyz.openbmc_project.Inventory.Item.Vrm"
-    }
+    },
 }

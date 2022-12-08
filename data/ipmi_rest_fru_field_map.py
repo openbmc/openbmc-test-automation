@@ -13,42 +13,40 @@ ipmi_rest_fru_field_map = {
         "board_mfg": "Manufacturer",
         "board_product": "PrettyName",
         "board_serial": "SerialNumber",
-        "board_part_number": "PartNumber"
+        "board_part_number": "PartNumber",
     },
     "system": {
         "chassis_part_number": "Model",
-        "chassis_serial": "SerialNumber"
+        "chassis_serial": "SerialNumber",
     },
     "motherboard": {
         "board_mfg": "Manufacturer",
         "board_product": "PrettyName",
         "board_serial": "SerialNumber",
-        "board_part_number": "PartNumber"
+        "board_part_number": "PartNumber",
     },
     "dimm": {
         "product_manufacturer": "Manufacturer",
         "product_name": "PrettyName",
         "product_part_number": "Model",
         "product_version": "Version",
-        "product_serial": "SerialNumber"
+        "product_serial": "SerialNumber",
     },
-    "fan": {
-        "product_name": "PrettyName"
-    },
+    "fan": {"product_name": "PrettyName"},
     "bmc": {
         # "board_mfg_date": "BuildDate",
         "board_mfg": "Manufacturer",
         "board_product": "PrettyName",
         "board_serial": "SerialNumber",
-        "board_part_number": "PartNumber"
+        "board_part_number": "PartNumber",
     },
     "powersupply": {
         # "board_mfg_date": "BuildDate",
         "board_product": "PrettyName",
         "board_serial": "SerialNumber",
-        "board_part_number": "PartNumber"
+        "board_part_number": "PartNumber",
     },
     "gv100card": {
         # "board_mfg_date": "BuildDate",
-    }
+    },
 }

@@ -16,14 +16,14 @@ The result is that the following command will be run:
 my_program --test_mode=y --quiet=n file1 file2 file3
 """
 
+import os
+import sys
+
 from gen_arg import *
+from gen_cmd import *
+from gen_misc import *
 from gen_print import *
 from gen_valid import *
-from gen_misc import *
-from gen_cmd import *
-
-import sys
-import os
 
 save_path_0 = sys.path[0]
 del sys.path[0]
@@ -33,39 +33,39 @@ sys.path.insert(0, save_path_0)
 
 
 parser = argparse.ArgumentParser(
-    usage='%(prog)s [OPTIONS]',
+    usage="%(prog)s [OPTIONS]",
     description="%(prog)s will call a program using parameters retrieved"
     + " from the given properties file.",
     formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-    prefix_chars='-+')
+    prefix_chars="-+",
+)
 
 parser.add_argument(
-    '--prop_dir_path',
+    "--prop_dir_path",
     default=os.environ.get("PROP_DIR_PATH", os.getcwd()),
-    help='The path to the directory that contains the properties file.'
+    help="The path to the directory that contains the properties file."
     + '  The default value is environment variable "PROP_DIR_PATH", if'
-    + ' set.  Otherwise, it is the current working directory.')
+    + " set.  Otherwise, it is the current working directory.",
+)
 
 parser.add_argument(
-    '--prop_file_name',
-    help='The path to a properties file that contains the parameters to'
+    "--prop_file_name",
+    help="The path to a properties file that contains the parameters to"
     + ' pass to the program.  If the properties file has a ".properties"'
-    + ' extension, the caller need not specify the extension.  The format'
-    + ' of each line in the properties file should be as follows:'
-    + ' <parm_name=parm_value>.  Do not quote the parm value.  To specify'
+    + " extension, the caller need not specify the extension.  The format"
+    + " of each line in the properties file should be as follows:"
+    + " <parm_name=parm_value>.  Do not quote the parm value.  To specify"
     + ' positional parms, use a parm name of "pos".  For example: pos=this'
-    ' value')
+    " value",
+)
 
-parser.add_argument(
-    'program_name',
-    help='The name of the program to be run.')
+parser.add_argument("program_name", help="The name of the program to be run.")
 
 # Populate stock_list with options we want.
 stock_list = [("test_mode", 0), ("quiet", 1), ("debug", 0)]
 
 
-def exit_function(signal_number=0,
-                  frame=None):
+def exit_function(signal_number=0, frame=None):
     r"""
     Execute whenever the program ends normally or with the signals that we catch (i.e. TERM, INT).
     """
@@ -76,8 +76,7 @@ def exit_function(signal_number=0,
     qprint_pgm_footer()
 
 
-def signal_handler(signal_number,
-                   frame):
+def signal_handler(signal_number, frame):
     r"""
     Handle signals.  Without a function to catch a SIGTERM or SIGINT, our program would terminate immediately
     with return code 143 and without calling our exit_function.
@@ -127,7 +126,6 @@ def validate_parms():
 
 
 def main():
-
     if not gen_get_options(parser, stock_list):
         return False
 
