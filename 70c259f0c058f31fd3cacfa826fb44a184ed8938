@@ -1,0 +1,176 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfa6a653_e2c748b0",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 23
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-08T12:31:52Z",
+      "side": 1,
+      "message": "Get PEL Inventory",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 276,
+        "endChar": 26
+      },
+      "revId": "70c259f0c058f31fd3cacfa826fb44a184ed8938",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "562470b5_26e37fc9",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 23
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-08T12:31:52Z",
+      "side": 1,
+      "message": "pel_inventory",
+      "revId": "70c259f0c058f31fd3cacfa826fb44a184ed8938",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da17f03c_b9f3530f",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 23
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-08T12:31:52Z",
+      "side": 1,
+      "message": "You will get the value \u0027PEL not found\u0027 if you try to do a peltool -i on non existing PEL. So modify you below check accordingly.",
+      "revId": "70c259f0c058f31fd3cacfa826fb44a184ed8938",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f321919f_be8f5f51",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 23
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-08T12:31:52Z",
+      "side": 1,
+      "message": "You can set using \nSet To Dictionary  ${pel_sw_inv_dict}  pel_data  ${pel_src_data}\n...  pel_detail_data  ${pel_src_record}",
+      "range": {
+        "startLine": 302,
+        "startChar": 4,
+        "endLine": 303,
+        "endChar": 78
+      },
+      "revId": "70c259f0c058f31fd3cacfa826fb44a184ed8938",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2cce85e_bef29a19",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 23
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-08T12:31:52Z",
+      "side": 1,
+      "message": "event",
+      "range": {
+        "startLine": 316,
+        "startChar": 11,
+        "endLine": 316,
+        "endChar": 25
+      },
+      "revId": "70c259f0c058f31fd3cacfa826fb44a184ed8938",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08349195_2d463f39",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 23
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-08T12:31:52Z",
+      "side": 1,
+      "message": "${pel_records}\u003d  pel_utils.Get Pel Data From Bmc",
+      "range": {
+        "startLine": 338,
+        "startChar": 5,
+        "endLine": 338,
+        "endChar": 53
+      },
+      "revId": "70c259f0c058f31fd3cacfa826fb44a184ed8938",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87cb692a_2a5945ad",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 23
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-08T12:31:52Z",
+      "side": 1,
+      "message": "instead of line 341 and 345, you can fail if pel_length(line 340) !\u003d event_length(line 344)",
+      "range": {
+        "startLine": 345,
+        "startChar": 5,
+        "endLine": 345,
+        "endChar": 50
+      },
+      "revId": "70c259f0c058f31fd3cacfa826fb44a184ed8938",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20022d9f_7b5329df",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 23
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-08T12:31:52Z",
+      "side": 1,
+      "message": "pel_inv",
+      "range": {
+        "startLine": 351,
+        "startChar": 9,
+        "endLine": 351,
+        "endChar": 19
+      },
+      "revId": "70c259f0c058f31fd3cacfa826fb44a184ed8938",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
