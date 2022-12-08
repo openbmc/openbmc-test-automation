@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ab187bc_64c96781",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-08T10:15:09Z",
+      "side": 1,
+      "message": "Can you club both the test case 172, 181.\n\nTest SSH And IPMI Setting\n\nunder the test case pass the variables like Enabled, Disabled, True, False.",
+      "revId": "64b2a7a99c959de0aec6d3fcf67d335a98bb2953",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d706d658_0dcbdcb0",
         "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
         "patchSetId": 5
