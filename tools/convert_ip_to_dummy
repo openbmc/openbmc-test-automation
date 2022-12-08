@@ -14,15 +14,15 @@ file_path="${1}" ; shift
 
 # Validate arguments.
 if [ -z "${ip_addr}" ] ; then
-  echo "**ERROR** You must provide an IP address as the first positional" \
-       "parameter." >&2
-  exit 1
+    echo "**ERROR** You must provide an IP address as the first positional" \
+        "parameter." >&2
+    exit 1
 fi
 
 if [ -z "${file_path}" ] ; then
-  echo "**ERROR** You must provide a file path as the second positional" \
-       "parameter." >&2
-  exit 1
+    echo "**ERROR** You must provide a file path as the second positional" \
+        "parameter." >&2
+    exit 1
 fi
 
 ip_addr_regex=`echo ${ip_addr} | sed 's/\(\.\)/\\\./g'`

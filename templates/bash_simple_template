@@ -8,56 +8,56 @@
 # parm1                             Bla, bla, bla (e.g. "example data").
 
 
-function get_parms {
+function get_parms() {
 
-  # Get program parms.
+    # Get program parms.
 
-  parm1="${1}" ; shift
+    parm1="${1}" ; shift
 
-  return 0
-
-}
-
-
-function exit_function {
-
-  return
-
-}
-
-function validate_parms {
-
-  # Validate program parameters.
-
-  # Your validation code here.
-
-  if [ -z "${parm1}" ] ; then
-    echo "**ERROR** You must provide..." >&2
-    return 1
-  fi
-
-  trap "exit_function $signal \$?" EXIT
-
-  return 0
+    return 0
 
 }
 
 
-function mainf {
+function exit_function() {
 
-  get_parms "$@" || return 1
+    return
 
-  validate_parms || return 1
+}
 
-  # Your code here...
+function validate_parms() {
 
-  return 0
+    # Validate program parameters.
+
+    # Your validation code here.
+
+    if [ -z "${parm1}" ] ; then
+        echo "**ERROR** You must provide..." >&2
+        return 1
+    fi
+
+    trap "exit_function $signal \$?" EXIT
+
+    return 0
+
+}
+
+
+function mainf() {
+
+    get_parms "$@" || return 1
+
+    validate_parms || return 1
+
+    # Your code here...
+
+    return 0
 
 }
 
 
 # Main
 
-  mainf "${@}"
-  rc="${?}"
-  exit "${rc}"
+mainf "${@}"
+rc="${?}"
+exit "${rc}"
