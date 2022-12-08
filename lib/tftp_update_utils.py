@@ -4,10 +4,9 @@ r"""
 This module contains functions for tftp update.
 """
 
-from robot.libraries.BuiltIn import BuiltIn
-
-import state as st
 import gen_print as gp
+import state as st
+from robot.libraries.BuiltIn import BuiltIn
 
 
 def get_pre_reboot_state():
@@ -18,7 +17,7 @@ def get_pre_reboot_state():
 
     global state
 
-    req_states = ['epoch_seconds'] + st.default_req_states
+    req_states = ["epoch_seconds"] + st.default_req_states
 
     gp.qprint_timen("Get system state.")
     state = st.get_state(req_states=req_states, quiet=0)
@@ -49,4 +48,6 @@ def wait_for_reboot(start_boot_seconds, wait_state_check=True):
 
     gp.qprintn()
     if wait_state_check:
-        st.wait_state(st.standby_match_state, wait_time="10 mins", interval="10 seconds")
+        st.wait_state(
+            st.standby_match_state, wait_time="10 mins", interval="10 seconds"
+        )

@@ -4,9 +4,9 @@ r"""
 Define the var_stack class.
 """
 
-import sys
 import collections
 import copy
+import sys
 
 try:
     from robot.utils import DotDict
@@ -17,7 +17,6 @@ import gen_print as gp
 
 
 class var_stack:
-
     r"""
     Define the variable stack class.
 
@@ -65,8 +64,7 @@ class var_stack:
           [var1][0]:  mike
     """
 
-    def __init__(self,
-                 obj_name='var_stack'):
+    def __init__(self, obj_name="var_stack"):
         r"""
         Initialize a new object of this class type.
 
@@ -90,7 +88,7 @@ class var_stack:
 
         buffer += self.__obj_name + ":\n"
         indent = 2
-        buffer += gp.sprint_varx('stack_dict', self.__stack_dict, indent)
+        buffer += gp.sprint_varx("stack_dict", self.__stack_dict, indent)
 
         return buffer
 
@@ -101,9 +99,7 @@ class var_stack:
 
         sys.stdout.write(self.sprint_obj())
 
-    def push(self,
-             var_value,
-             var_name=""):
+    def push(self, var_value, var_name=""):
         r"""
         push the var_name/var_value pair onto the stack.
 
@@ -124,8 +120,7 @@ class var_stack:
         else:
             self.__stack_dict[var_name] = copy.deepcopy([var_value])
 
-    def pop(self,
-            var_name=""):
+    def pop(self, var_name=""):
         r"""
         Pop the value for the given var_name from the stack and return it.
 

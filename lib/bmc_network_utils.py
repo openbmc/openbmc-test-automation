@@ -5,18 +5,19 @@ Network generic functions.
 
 """
 
-import gen_print as gp
+import collections
+import ipaddress
+import json
+import re
+import socket
+import subprocess
+
+import bmc_ssh_utils as bsu
 import gen_cmd as gc
 import gen_misc as gm
+import gen_print as gp
 import var_funcs as vf
-import collections
-import re
-import ipaddress
-import subprocess
-import socket
 from robot.libraries.BuiltIn import BuiltIn
-import json
-import bmc_ssh_utils as bsu
 
 ip_regex = r"\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}"
 
@@ -28,7 +29,7 @@ def get_running_system_ip():
     """
 
     ip_list = list()
-    stdout = subprocess.check_output(['hostname', '--all-fqdns'], shell=True)
+    stdout = subprocess.check_output(["hostname", "--all-fqdns"], shell=True)
     host_fqdns = stdout.decode("utf-8").strip()
     ip_address = socket.gethostbyname(str(host_fqdns))
     ip_list.append(ip_address)
@@ -46,7 +47,7 @@ def netmask_prefix_length(netmask):
     """
 
     # IP address netmask format: '0.0.0.0/255.255.252.0'
-    return ipaddress.ip_network('0.0.0.0/' + netmask).prefixlen
+    return ipaddress.ip_network("0.0.0.0/" + netmask).prefixlen
 
 
 def get_netmask_address(prefix_len):
@@ -58,7 +59,7 @@ def get_netmask_address(prefix_len):
     """
 
     # IP address netmask format: '0.0.0.0/24'
-    return ipaddress.ip_network('0.0.0.0/' + prefix_len).netmask
+    return ipaddress.ip_network("0.0.0.0/" + prefix_len).netmask
 
 
 def parse_nping_output(output):
@@ -101,20 +102,26 @@ def parse_nping_output(output):
 
     lines = output.split("\n")
     # Obtain only the lines of interest.
-    lines = list(filter(lambda x: re.match(r"(Max rtt|Raw packets|TCP connection)", x),
-                        lines))
+    lines = list(
+        filter(
+            lambda x: re.match(r"(Max rtt|Raw packets|TCP connection)", x),
+            lines,
+        )
+    )
 
     key_value_list = []
     for line in lines:
         key_value_list += line.split("|")
     nping_result = vf.key_value_list_to_dict(key_value_list)
     # Extract percent_lost/percent_failed value from lost/failed field.
-    if 'lost' in nping_result:
-        nping_result['percent_lost'] = \
-            float(nping_result['lost'].split(" ")[-1].strip("()%"))
+    if "lost" in nping_result:
+        nping_result["percent_lost"] = float(
+            nping_result["lost"].split(" ")[-1].strip("()%")
+        )
     else:
-        nping_result['percent_failed'] = \
-            float(nping_result['failed'].split(" ")[-1].strip("()%"))
+        nping_result["percent_failed"] = float(
+            nping_result["failed"].split(" ")[-1].strip("()%")
+        )
     return nping_result
 
 
@@ -158,7 +165,7 @@ def nping(host=openbmc_host, parse_results=1, **options):
                                     command.  Do a 'man nping' for details.
     """
 
-    command_string = gc.create_command_string('nping', host, options)
+    command_string = gc.create_command_string("nping", host, options)
     rc, output = gc.shell_cmd(command_string, print_output=0, ignore_err=0)
     if parse_results:
         return parse_nping_output(output)
@@ -205,7 +212,9 @@ def get_channel_config():
     (etc.)
     """
 
-    stdout, stderr, rc = bsu.bmc_execute_command("cat /usr/share/ipmi-providers/channel_config.json")
+    stdout, stderr, rc = bsu.bmc_execute_command(
+        "cat /usr/share/ipmi-providers/channel_config.json"
+    )
     return json.loads(stdout)
 
 
@@ -215,7 +224,11 @@ def get_active_channel_config():
      this function.
     """
 
-    return vf.filter_struct(get_channel_config(), "[('medium_type', 'other-lan|lan-802.3')]", regex=1)
+    return vf.filter_struct(
+        get_channel_config(),
+        "[('medium_type', 'other-lan|lan-802.3')]",
+        regex=1,
+    )
 
 
 def get_channel_access_config(file_name):

@@ -5,21 +5,22 @@ This module provides functions which are useful to plug-ins call-point programs 
 robot program calls.
 """
 
-import sys
-import os
-import subprocess
-import re
-import time
 import imp
+import os
+import re
+import subprocess
+import sys
+import time
 
+import gen_cmd as gc
+import gen_misc as gm
 import gen_print as gp
 import gen_valid as gv
-import gen_misc as gm
-import gen_cmd as gc
 
-base_path = \
-    os.path.dirname(os.path.dirname(imp.find_module("gen_robot_print")[1])) +\
-    os.sep
+base_path = (
+    os.path.dirname(os.path.dirname(imp.find_module("gen_robot_print")[1]))
+    + os.sep
+)
 
 
 def init_robot_out_parms(extra_prefix=""):
@@ -44,17 +45,19 @@ def init_robot_out_parms(extra_prefix=""):
     # Environment variable TMP_ROBOT_DIR_PATH can be set by the user to indicate that robot-generated output
     # should initially be written to the specified temporary directory and then moved to the normal output
     # location after completion.
-    outputdir =\
-        os.environ.get("TMP_ROBOT_DIR_PATH",
-                       os.environ.get("STATUS_DIR_PATH",
-                                      os.environ.get("HOME", ".")
-                                      + "/status"))
+    outputdir = os.environ.get(
+        "TMP_ROBOT_DIR_PATH",
+        os.environ.get(
+            "STATUS_DIR_PATH", os.environ.get("HOME", ".") + "/status"
+        ),
+    )
     outputdir = gm.add_trailing_slash(outputdir)
     seconds = time.time()
     loc_time = time.localtime(seconds)
     time_string = time.strftime("%y%m%d.%H%M%S", loc_time)
-    file_prefix = AUTOBOOT_OPENBMC_NICKNAME + "." + extra_prefix +\
-        time_string + "."
+    file_prefix = (
+        AUTOBOOT_OPENBMC_NICKNAME + "." + extra_prefix + time_string + "."
+    )
     # Environment variable SAVE_STATUS_POLICY governs when robot-generated output files (e.g. the log.html)
     # will be moved from TMP_ROBOT_DIR_PATH to FFDC_DIR_PATH.  Valid values are "ALWAYS", "NEVER" and "FAIL".
     SAVE_STATUS_POLICY = os.environ.get("SAVE_STATUS_POLICY", "ALWAYS")
@@ -67,8 +70,8 @@ def init_robot_out_parms(extra_prefix=""):
         log = file_prefix + "log.html"
         report = file_prefix + "report.html"
     loglevel = "TRACE"
-    consolecolors = 'off'
-    consolemarkers = 'off'
+    consolecolors = "off"
+    consolemarkers = "off"
 
     # Make create_robot_cmd_string values global.
     gm.set_mod_global(outputdir)
@@ -79,7 +82,15 @@ def init_robot_out_parms(extra_prefix=""):
     gm.set_mod_global(consolecolors)
     gm.set_mod_global(consolemarkers)
 
-    return outputdir, output, log, report, loglevel, consolecolors, consolemarkers
+    return (
+        outputdir,
+        output,
+        log,
+        report,
+        loglevel,
+        consolecolors,
+        consolemarkers,
+    )
 
 
 def init_robot_test_base_dir_path():
@@ -100,12 +111,13 @@ def init_robot_test_base_dir_path():
     # - Not in user sandbox:
     #   ROBOT_TEST_BASE_DIR_PATH will be set to <program dir path>/git/openbmc-test-automation/
 
-    ROBOT_TEST_BASE_DIR_PATH = os.environ.get('ROBOT_TEST_BASE_DIR_PATH', "")
-    ROBOT_TEST_RUNNING_FROM_SB = \
-        int(os.environ.get('ROBOT_TEST_RUNNING_FROM_SB', "0"))
+    ROBOT_TEST_BASE_DIR_PATH = os.environ.get("ROBOT_TEST_BASE_DIR_PATH", "")
+    ROBOT_TEST_RUNNING_FROM_SB = int(
+        os.environ.get("ROBOT_TEST_RUNNING_FROM_SB", "0")
+    )
     if ROBOT_TEST_BASE_DIR_PATH == "":
         # ROBOT_TEST_BASE_DIR_PATH was not set by user/caller.
-        AUTOIPL_VERSION = os.environ.get('AUTOIPL_VERSION', '')
+        AUTOIPL_VERSION = os.environ.get("AUTOIPL_VERSION", "")
         if AUTOIPL_VERSION == "":
             ROBOT_TEST_BASE_DIR_PATH = base_path
         else:
@@ -113,17 +125,26 @@ def init_robot_test_base_dir_path():
 
             # Determine whether we're running out of a developer sandbox or simply out of an apolloxxx/bin
             # path.
-            shell_rc, out_buf = gc.shell_cmd('dirname $(which gen_print.py)',
-                                             quiet=(not debug), print_output=0)
+            shell_rc, out_buf = gc.shell_cmd(
+                "dirname $(which gen_print.py)",
+                quiet=(not debug),
+                print_output=0,
+            )
             executable_base_dir_path = os.path.realpath(out_buf.rstrip()) + "/"
-            apollo_dir_path = os.environ['AUTO_BASE_PATH'] + AUTOIPL_VERSION +\
-                "/bin/"
-            developer_home_dir_path = re.sub('/sandbox.*', '',
-                                             executable_base_dir_path)
-            developer_home_dir_path = \
-                gm.add_trailing_slash(developer_home_dir_path)
-            gp.dprint_vars(executable_base_dir_path, developer_home_dir_path,
-                           apollo_dir_path)
+            apollo_dir_path = (
+                os.environ["AUTO_BASE_PATH"] + AUTOIPL_VERSION + "/bin/"
+            )
+            developer_home_dir_path = re.sub(
+                "/sandbox.*", "", executable_base_dir_path
+            )
+            developer_home_dir_path = gm.add_trailing_slash(
+                developer_home_dir_path
+            )
+            gp.dprint_vars(
+                executable_base_dir_path,
+                developer_home_dir_path,
+                apollo_dir_path,
+            )
 
             ROBOT_TEST_RUNNING_FROM_SB = 0
             if executable_base_dir_path != apollo_dir_path:
@@ -131,46 +152,61 @@ def init_robot_test_base_dir_path():
                 gp.dprint_vars(ROBOT_TEST_RUNNING_FROM_SB)
                 ROBOT_TEST_BASE_DIR_PATH = developer_home_dir_path + suffix
                 if not os.path.isdir(ROBOT_TEST_BASE_DIR_PATH):
-                    gp.dprint_timen("NOTE: Sandbox directory "
-                                    + ROBOT_TEST_BASE_DIR_PATH + " does not"
-                                    + " exist.")
+                    gp.dprint_timen(
+                        "NOTE: Sandbox directory "
+                        + ROBOT_TEST_BASE_DIR_PATH
+                        + " does not"
+                        + " exist."
+                    )
                     # Fall back to the apollo dir path.
                     ROBOT_TEST_BASE_DIR_PATH = apollo_dir_path + suffix
             else:
                 # Use to the apollo dir path.
                 ROBOT_TEST_BASE_DIR_PATH = apollo_dir_path + suffix
 
-    OBMC_TOOLS_BASE_DIR_PATH = \
-        os.path.dirname(ROBOT_TEST_BASE_DIR_PATH.rstrip("/")) \
+    OBMC_TOOLS_BASE_DIR_PATH = (
+        os.path.dirname(ROBOT_TEST_BASE_DIR_PATH.rstrip("/"))
         + "/openbmc-tools/"
+    )
     OPENBMCTOOL_DIR_PATH = OBMC_TOOLS_BASE_DIR_PATH + "openbmctool/"
-    JSON_CHECKER_TOOLS_DIR_PATH = OBMC_TOOLS_BASE_DIR_PATH + "expectedJsonChecker/"
+    JSON_CHECKER_TOOLS_DIR_PATH = (
+        OBMC_TOOLS_BASE_DIR_PATH + "expectedJsonChecker/"
+    )
 
     gv.valid_value(ROBOT_TEST_BASE_DIR_PATH)
-    gp.dprint_vars(ROBOT_TEST_RUNNING_FROM_SB, ROBOT_TEST_BASE_DIR_PATH, OBMC_TOOLS_BASE_DIR_PATH,
-                   OPENBMCTOOL_DIR_PATH, JSON_CHECKER_TOOLS_DIR_PATH)
+    gp.dprint_vars(
+        ROBOT_TEST_RUNNING_FROM_SB,
+        ROBOT_TEST_BASE_DIR_PATH,
+        OBMC_TOOLS_BASE_DIR_PATH,
+        OPENBMCTOOL_DIR_PATH,
+        JSON_CHECKER_TOOLS_DIR_PATH,
+    )
     gv.valid_dir_path(ROBOT_TEST_BASE_DIR_PATH)
 
     ROBOT_TEST_BASE_DIR_PATH = gm.add_trailing_slash(ROBOT_TEST_BASE_DIR_PATH)
     gm.set_mod_global(ROBOT_TEST_BASE_DIR_PATH)
-    os.environ['ROBOT_TEST_BASE_DIR_PATH'] = ROBOT_TEST_BASE_DIR_PATH
+    os.environ["ROBOT_TEST_BASE_DIR_PATH"] = ROBOT_TEST_BASE_DIR_PATH
 
     gm.set_mod_global(ROBOT_TEST_RUNNING_FROM_SB)
-    os.environ['ROBOT_TEST_RUNNING_FROM_SB'] = str(ROBOT_TEST_RUNNING_FROM_SB)
+    os.environ["ROBOT_TEST_RUNNING_FROM_SB"] = str(ROBOT_TEST_RUNNING_FROM_SB)
 
     gm.set_mod_global(OBMC_TOOLS_BASE_DIR_PATH)
-    os.environ['OBMC_TOOLS_BASE_DIR_PATH'] = str(OBMC_TOOLS_BASE_DIR_PATH)
+    os.environ["OBMC_TOOLS_BASE_DIR_PATH"] = str(OBMC_TOOLS_BASE_DIR_PATH)
 
     gm.set_mod_global(OPENBMCTOOL_DIR_PATH)
-    os.environ['OPENBMCTOOL_DIR_PATH'] = str(OPENBMCTOOL_DIR_PATH)
+    os.environ["OPENBMCTOOL_DIR_PATH"] = str(OPENBMCTOOL_DIR_PATH)
 
     gm.set_mod_global(JSON_CHECKER_TOOLS_DIR_PATH)
-    os.environ['JSON_CHECKER_TOOLS_DIR_PATH'] = str(JSON_CHECKER_TOOLS_DIR_PATH)
+    os.environ["JSON_CHECKER_TOOLS_DIR_PATH"] = str(
+        JSON_CHECKER_TOOLS_DIR_PATH
+    )
 
 
-raw_robot_file_search_path = "${ROBOT_TEST_BASE_DIR_PATH}:" +\
-    "${ROBOT_TEST_BASE_DIR_PATH}tests:${ROBOT_TEST_BASE_DIR_PATH}extended:" +\
-    "${ROBOT_TEST_BASE_DIR_PATH}scratch:${PATH}"
+raw_robot_file_search_path = (
+    "${ROBOT_TEST_BASE_DIR_PATH}:"
+    + "${ROBOT_TEST_BASE_DIR_PATH}tests:${ROBOT_TEST_BASE_DIR_PATH}extended:"
+    + "${ROBOT_TEST_BASE_DIR_PATH}scratch:${PATH}"
+)
 
 
 def init_robot_file_path(robot_file_path):
@@ -206,12 +242,13 @@ def init_robot_file_path(robot_file_path):
     gp.dprint_vars(abs_path, robot_file_path)
 
     if not abs_path:
-        cmd_buf = "echo -n \"" + raw_robot_file_search_path + "\""
-        shell_rc, out_buf = gc.shell_cmd(cmd_buf, quiet=(not debug),
-                                         print_output=0)
+        cmd_buf = 'echo -n "' + raw_robot_file_search_path + '"'
+        shell_rc, out_buf = gc.shell_cmd(
+            cmd_buf, quiet=(not debug), print_output=0
+        )
         robot_file_search_paths = out_buf
         gp.dprint_var(robot_file_search_paths)
-        robot_file_search_paths_list = robot_file_search_paths.split(':')
+        robot_file_search_paths_list = robot_file_search_paths.split(":")
         for search_path in robot_file_search_paths_list:
             search_path = gm.add_trailing_slash(search_path)
             candidate_file_path = search_path + robot_file_path
@@ -233,9 +270,11 @@ def get_robot_parm_names():
     Double dashes are not included in the names returned.
     """
 
-    cmd_buf = "robot -h | egrep " +\
-        "'^([ ]\\-[a-zA-Z0-9])?[ ]+--[a-zA-Z0-9]+[ ]+' | sed -re" +\
-        " s'/.*\\-\\-//g' -e s'/ .*//g' | sort -u"
+    cmd_buf = (
+        "robot -h | egrep "
+        + "'^([ ]\\-[a-zA-Z0-9])?[ ]+--[a-zA-Z0-9]+[ ]+' | sed -re"
+        + " s'/.*\\-\\-//g' -e s'/ .*//g' | sort -u"
+    )
     shell_rc, out_buf = gc.shell_cmd(cmd_buf, quiet=1, print_output=0)
 
     return out_buf.split("\n")
@@ -285,8 +324,9 @@ def create_robot_cmd_string(robot_file_path, *parms):
             robot_parm_list.append(p_string)
         ix += 1
 
-    robot_cmd_buf = "robot " + ' '.join(robot_parm_list) + " " +\
-        robot_file_path
+    robot_cmd_buf = (
+        "robot " + " ".join(robot_parm_list) + " " + robot_file_path
+    )
 
     return robot_cmd_buf
 
@@ -296,9 +336,7 @@ gcr_last_robot_cmd_buf = ""
 gcr_last_robot_rc = 0
 
 
-def process_robot_output_files(robot_cmd_buf=None,
-                               robot_rc=None,
-                               gzip=None):
+def process_robot_output_files(robot_cmd_buf=None, robot_rc=None, gzip=None):
     r"""
     Process robot output files which can involve several operations:
     - If the files are in a temporary location, using SAVE_STATUS_POLICY to decide whether to move them to a
@@ -329,25 +367,36 @@ def process_robot_output_files(robot_cmd_buf=None,
 
     # Compose file_list based on robot command buffer passed in.
     robot_cmd_buf_dict = gc.parse_command_string(robot_cmd_buf)
-    outputdir = robot_cmd_buf_dict['outputdir']
+    outputdir = robot_cmd_buf_dict["outputdir"]
     outputdir = gm.add_trailing_slash(outputdir)
-    file_list = outputdir + robot_cmd_buf_dict['output'] + " " + outputdir\
-        + robot_cmd_buf_dict['log'] + " " + outputdir\
-        + robot_cmd_buf_dict['report']
+    file_list = (
+        outputdir
+        + robot_cmd_buf_dict["output"]
+        + " "
+        + outputdir
+        + robot_cmd_buf_dict["log"]
+        + " "
+        + outputdir
+        + robot_cmd_buf_dict["report"]
+    )
 
     # Double checking that files are present.
-    shell_rc, out_buf = gc.shell_cmd("ls -1 " + file_list + " 2>/dev/null",
-                                     show_err=0)
+    shell_rc, out_buf = gc.shell_cmd(
+        "ls -1 " + file_list + " 2>/dev/null", show_err=0
+    )
     file_list = re.sub("\n", " ", out_buf.rstrip("\n"))
 
     if file_list == "":
-        gp.qprint_timen("No robot output files were found in " + outputdir
-                        + ".")
+        gp.qprint_timen(
+            "No robot output files were found in " + outputdir + "."
+        )
         return
     gp.qprint_var(robot_rc, gp.hexa())
     if SAVE_STATUS_POLICY == "FAIL" and robot_rc == 0:
-        gp.qprint_timen("The call to robot produced no failures."
-                        + "  Deleting robot output files.")
+        gp.qprint_timen(
+            "The call to robot produced no failures."
+            + "  Deleting robot output files."
+        )
         gc.shell_cmd("rm -rf " + file_list)
         return
 
@@ -363,23 +412,29 @@ def process_robot_output_files(robot_cmd_buf=None,
         return
 
     # We're directing these to the FFDC dir path so that they'll be subjected to FFDC cleanup.
-    target_dir_path = os.environ.get("FFDC_DIR_PATH",
-                                     os.environ.get("HOME", ".")
-                                     + "/ffdc")
+    target_dir_path = os.environ.get(
+        "FFDC_DIR_PATH", os.environ.get("HOME", ".") + "/ffdc"
+    )
     target_dir_path = gm.add_trailing_slash(target_dir_path)
 
-    targ_file_list = [re.sub(".*/", target_dir_path, x)
-                      for x in file_list.split(" ")]
+    targ_file_list = [
+        re.sub(".*/", target_dir_path, x) for x in file_list.split(" ")
+    ]
 
-    gc.shell_cmd("mv " + file_list + " " + target_dir_path + " >/dev/null",
-                 time_out=600)
+    gc.shell_cmd(
+        "mv " + file_list + " " + target_dir_path + " >/dev/null", time_out=600
+    )
 
     gp.qprint_timen("New robot log file locations:")
-    gp.qprintn('\n'.join(targ_file_list))
+    gp.qprintn("\n".join(targ_file_list))
 
 
-def robot_cmd_fnc(robot_cmd_buf,
-                  robot_jail=os.environ.get('ROBOT_JAIL', ''), quiet=None, test_mode=0):
+def robot_cmd_fnc(
+    robot_cmd_buf,
+    robot_jail=os.environ.get("ROBOT_JAIL", ""),
+    quiet=None,
+    test_mode=0,
+):
     r"""
     Run the robot command string.
 
@@ -393,7 +448,7 @@ def robot_cmd_fnc(robot_cmd_buf,
     test_mode                       If test_mode is set, this function will not actually run the command.
     """
 
-    quiet = int(gm.dft(quiet, gp.get_stack_var('quiet', 0)))
+    quiet = int(gm.dft(quiet, gp.get_stack_var("quiet", 0)))
     gv.valid_value(robot_cmd_buf)
 
     # Set global variables to aid in cleanup with process_robot_output_files.
@@ -409,7 +464,9 @@ def robot_cmd_fnc(robot_cmd_buf,
         init_robot_test_base_dir_path()
         ROBOT_TEST_BASE_DIR_PATH = getattr(module, "ROBOT_TEST_BASE_DIR_PATH")
 
-    ROBOT_TEST_RUNNING_FROM_SB = gm.get_mod_global("ROBOT_TEST_RUNNING_FROM_SB")
+    ROBOT_TEST_RUNNING_FROM_SB = gm.get_mod_global(
+        "ROBOT_TEST_RUNNING_FROM_SB"
+    )
     OPENBMCTOOL_DIR_PATH = gm.get_mod_global("OPENBMCTOOL_DIR_PATH")
 
     if robot_jail == "":
@@ -419,9 +476,13 @@ def robot_cmd_fnc(robot_cmd_buf,
             robot_jail = 1
 
     robot_jail = int(robot_jail)
-    ROBOT_JAIL = os.environ.get('ROBOT_JAIL', '')
-    gp.dprint_vars(ROBOT_TEST_BASE_DIR_PATH, ROBOT_TEST_RUNNING_FROM_SB,
-                   ROBOT_JAIL, robot_jail)
+    ROBOT_JAIL = os.environ.get("ROBOT_JAIL", "")
+    gp.dprint_vars(
+        ROBOT_TEST_BASE_DIR_PATH,
+        ROBOT_TEST_RUNNING_FROM_SB,
+        ROBOT_JAIL,
+        robot_jail,
+    )
 
     # Save PATH and PYTHONPATH to be restored later.
     os.environ["SAVED_PYTHONPATH"] = os.environ.get("PYTHONPATH", "")
@@ -433,28 +494,50 @@ def robot_cmd_fnc(robot_cmd_buf,
         # It is expected that there will be a "python" program in the tool base bin path which is really a
         # link to select_version.  Ditto for "robot".  Call each with the --print_only option to get the
         # paths to the "real" programs.
-        cmd_buf = "for program in " + required_programs \
+        cmd_buf = (
+            "for program in "
+            + required_programs
             + " ; do dirname $(${program} --print_only) ; done 2>/dev/null"
+        )
         rc, out_buf = gc.shell_cmd(cmd_buf, quiet=1, print_output=0)
         PYTHONPATH = ROBOT_TEST_BASE_DIR_PATH + "lib"
         NEW_PATH_LIST = [ROBOT_TEST_BASE_DIR_PATH + "bin"]
         NEW_PATH_LIST.extend(list(set(out_buf.rstrip("\n").split("\n"))))
-        NEW_PATH_LIST.extend(["/usr/local/sbin", "/usr/local/bin", "/usr/sbin",
-                              "/usr/bin", "/sbin", "/bin",
-                              OPENBMCTOOL_DIR_PATH.rstrip('/')])
+        NEW_PATH_LIST.extend(
+            [
+                "/usr/local/sbin",
+                "/usr/local/bin",
+                "/usr/sbin",
+                "/usr/bin",
+                "/sbin",
+                "/bin",
+                OPENBMCTOOL_DIR_PATH.rstrip("/"),
+            ]
+        )
         PATH = ":".join(NEW_PATH_LIST)
     else:
-        PYTHONPATH = os.environ.get('PYTHONPATH', '') + ":" +\
-            ROBOT_TEST_BASE_DIR_PATH + "lib"
-        PATH = os.environ.get('PATH', '') + ":" + ROBOT_TEST_BASE_DIR_PATH +\
-            "bin" + ":" + OPENBMCTOOL_DIR_PATH.rstrip('/')
+        PYTHONPATH = (
+            os.environ.get("PYTHONPATH", "")
+            + ":"
+            + ROBOT_TEST_BASE_DIR_PATH
+            + "lib"
+        )
+        PATH = (
+            os.environ.get("PATH", "")
+            + ":"
+            + ROBOT_TEST_BASE_DIR_PATH
+            + "bin"
+            + ":"
+            + OPENBMCTOOL_DIR_PATH.rstrip("/")
+        )
 
-    os.environ['PYTHONPATH'] = PYTHONPATH
-    os.environ['PATH'] = PATH
+    os.environ["PYTHONPATH"] = PYTHONPATH
+    os.environ["PATH"] = PATH
     gp.dprint_vars(PATH, PYTHONPATH)
 
-    os.environ['FFDC_DIR_PATH_STYLE'] = os.environ.get('FFDC_DIR_PATH_STYLE',
-                                                       '1')
+    os.environ["FFDC_DIR_PATH_STYLE"] = os.environ.get(
+        "FFDC_DIR_PATH_STYLE", "1"
+    )
     gp.qpissuing(robot_cmd_buf, test_mode)
     if test_mode:
         os.environ["PATH"] = os.environ.get("SAVED_PATH", "")
@@ -462,7 +545,7 @@ def robot_cmd_fnc(robot_cmd_buf,
         return True
 
     if quiet:
-        DEVNULL = open(os.devnull, 'wb')
+        DEVNULL = open(os.devnull, "wb")
         stdout = DEVNULL
     else:
         stdout = None

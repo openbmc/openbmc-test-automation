@@ -4,9 +4,10 @@ r"""
 Generic utility functions.
 """
 import imp
-import string
 import random
+import string
 import subprocess
+
 from robot.libraries.BuiltIn import BuiltIn
 from robot.utils import DotDict
 
@@ -16,8 +17,12 @@ def random_mac():
     Return random mac address in the following format.
     Example: 00:01:6C:80:02:78
     """
-    return ":".join(map(lambda x: "%02x" % x, (random.randint(0x00, 0xff)
-                                               for _ in range(6))))
+    return ":".join(
+        map(
+            lambda x: "%02x" % x,
+            (random.randint(0x00, 0xFF) for _ in range(6)),
+        )
+    )
 
 
 def random_ip():
@@ -25,19 +30,17 @@ def random_ip():
     Return random ip address in the following format.
     Example: 9.3.128.100
     """
-    return ".".join(map(str, (random.randint(0, 255)
-                              for _ in range(4))))
+    return ".".join(map(str, (random.randint(0, 255) for _ in range(4))))
 
 
 def get_sensor(module_name, value):
     r"""
     Return sensor matched ID name.
     """
-    m = imp.load_source('module.name', module_name)
+    m = imp.load_source("module.name", module_name)
 
-    for i in m.ID_LOOKUP['SENSOR']:
-
-        if m.ID_LOOKUP['SENSOR'][i] == value:
+    for i in m.ID_LOOKUP["SENSOR"]:
+        if m.ID_LOOKUP["SENSOR"][i] == value:
             return i
 
     return 0xFF
@@ -47,13 +50,12 @@ def get_inventory_sensor(module_name, value):
     r"""
     Return sensor matched ID name from inventory.
     """
-    m = imp.load_source('module.name', module_name)
+    m = imp.load_source("module.name", module_name)
 
-    value = string.replace(value, m.INVENTORY_ROOT, '<inventory_root>')
+    value = string.replace(value, m.INVENTORY_ROOT, "<inventory_root>")
 
-    for i in m.ID_LOOKUP['SENSOR']:
-
-        if m.ID_LOOKUP['SENSOR'][i] == value:
+    for i in m.ID_LOOKUP["SENSOR"]:
+        if m.ID_LOOKUP["SENSOR"][i] == value:
             return i
 
     return 0xFF
@@ -73,11 +75,11 @@ def get_inventory_list(module_name):
     """
 
     inventory_list = []
-    m = imp.load_source('module.name', module_name)
+    m = imp.load_source("module.name", module_name)
 
-    for i in m.ID_LOOKUP['FRU']:
-        s = m.ID_LOOKUP['FRU'][i]
-        s = s.replace('<inventory_root>', m.INVENTORY_ROOT)
+    for i in m.ID_LOOKUP["FRU"]:
+        s = m.ID_LOOKUP["FRU"][i]
+        s = s.replace("<inventory_root>", m.INVENTORY_ROOT)
         inventory_list.append(s)
 
     return inventory_list
@@ -96,11 +98,11 @@ def get_inventory_fru_type_list(module_name, fru):
     Return FRU URI(s) list of a given type from inventory.
     """
     inventory_list = []
-    m = imp.load_source('module.name', module_name)
+    m = imp.load_source("module.name", module_name)
 
     for i in m.FRU_INSTANCES.keys():
-        if m.FRU_INSTANCES[i]['fru_type'] == fru:
-            s = i.replace('<inventory_root>', m.INVENTORY_ROOT)
+        if m.FRU_INSTANCES[i]["fru_type"] == fru:
+            s = i.replace("<inventory_root>", m.INVENTORY_ROOT)
             inventory_list.append(s)
 
     return inventory_list
@@ -119,13 +121,13 @@ def get_vpd_inventory_list(module_name, fru):
     Return VPD URI(s) list of a FRU type from inventory.
     """
     inventory_list = []
-    m = imp.load_source('module.name', module_name)
+    m = imp.load_source("module.name", module_name)
 
-    for i in m.ID_LOOKUP['FRU_STR']:
-        x = m.ID_LOOKUP['FRU_STR'][i]
+    for i in m.ID_LOOKUP["FRU_STR"]:
+        x = m.ID_LOOKUP["FRU_STR"][i]
 
-        if m.FRU_INSTANCES[x]['fru_type'] == fru:
-            s = x.replace('<inventory_root>', m.INVENTORY_ROOT)
+        if m.FRU_INSTANCES[x]["fru_type"] == fru:
+            s = x.replace("<inventory_root>", m.INVENTORY_ROOT)
             inventory_list.append(s)
 
     return inventory_list
@@ -142,7 +144,7 @@ def main():
     r"""
     Python main func call.
     """
-    print(get_vpd_inventory_list('../data/Palmetto.py', 'DIMM'))
+    print(get_vpd_inventory_list("../data/Palmetto.py", "DIMM"))
 
 
 if __name__ == "__main__":
@@ -187,15 +189,19 @@ def get_mtr_report(host=""):
 
     # Run the mtr command.  Exclude the header line.  Trim leading space from
     # each line.  Change all multiple spaces delims to single space delims.
-    cmd_buf = "mtr --report " + host +\
-        " | tail -n +2 | sed -r -e 's/^[ ]+//g' -e 's/[ ]+/ /g'"
-    sub_proc = subprocess.Popen(cmd_buf, shell=True, stdout=subprocess.PIPE,
-                                stderr=subprocess.STDOUT)
+    cmd_buf = (
+        "mtr --report "
+        + host
+        + " | tail -n +2 | sed -r -e 's/^[ ]+//g' -e 's/[ ]+/ /g'"
+    )
+    sub_proc = subprocess.Popen(
+        cmd_buf, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+    )
     out_buf, err_buf = sub_proc.communicate()
     shell_rc = sub_proc.returncode
 
     # Split the output by line.
-    rows = out_buf.rstrip('\n').split("\n")
+    rows = out_buf.rstrip("\n").split("\n")
 
     # Initialize report dictionary.
     report = DotDict()
@@ -205,16 +211,16 @@ def get_mtr_report(host=""):
         row_list = row.split(" ")
         # Create dictionary for the row.
         row = DotDict()
-        row['row_num'] = row_list[0].rstrip('.')
-        row['host'] = row_list[1]
-        row['loss'] = row_list[2].rstrip('%')
-        row['snt'] = row_list[3]
-        row['last'] = row_list[4]
-        row['avg'] = row_list[5]
-        row['best'] = row_list[6]
-        row['wrst'] = row_list[7]
-        row['stdev'] = row_list[8]
-        report[row['host']] = row
+        row["row_num"] = row_list[0].rstrip(".")
+        row["host"] = row_list[1]
+        row["loss"] = row_list[2].rstrip("%")
+        row["snt"] = row_list[3]
+        row["last"] = row_list[4]
+        row["avg"] = row_list[5]
+        row["best"] = row_list[6]
+        row["wrst"] = row_list[7]
+        row["stdev"] = row_list[8]
+        report[row["host"]] = row
 
     # Return the full report as dictionary of dictionaries.
     return report
@@ -296,8 +302,8 @@ def add_prefix_to_string(string, prefix):
     Input string      0a 01
     Return string     0x0a 0x01
     """
-    prefix_string = ''
+    prefix_string = ""
     data_list = string.strip().split(" ")
     for item in data_list:
-        prefix_string += prefix + item + ' '
+        prefix_string += prefix + item + " "
     return prefix_string.strip()

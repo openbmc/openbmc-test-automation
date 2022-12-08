@@ -4,19 +4,18 @@ r"""
 This module provides functions which are useful for running plug-ins from a robot program.
 """
 
-import sys
-import subprocess
-from robot.libraries.BuiltIn import BuiltIn
 import os
+import subprocess
+import sys
 import tempfile
 
-import gen_print as gp
-import gen_misc as gm
 import gen_cmd as gc
+import gen_misc as gm
+import gen_print as gp
+from robot.libraries.BuiltIn import BuiltIn
 
 
-def rvalidate_plug_ins(plug_in_dir_paths,
-                       quiet=1):
+def rvalidate_plug_ins(plug_in_dir_paths, quiet=1):
     r"""
     Call the external validate_plug_ins.py program which validates the plug-in dir paths given to it.  Return
     a list containing a normalized path for each plug-in selected.
@@ -27,11 +26,15 @@ def rvalidate_plug_ins(plug_in_dir_paths,
                                     stdout.
     """
 
-    cmd_buf = "validate_plug_ins.py \"" + plug_in_dir_paths + "\""
+    cmd_buf = 'validate_plug_ins.py "' + plug_in_dir_paths + '"'
     rc, out_buf = gc.shell_cmd(cmd_buf, print_output=0)
     if rc != 0:
-        BuiltIn().fail(gp.sprint_error("Validate plug ins call failed.  See"
-                                       + " stderr text for details.\n"))
+        BuiltIn().fail(
+            gp.sprint_error(
+                "Validate plug ins call failed.  See"
+                + " stderr text for details.\n"
+            )
+        )
 
     # plug_in_packages_list = out_buf.split("\n")
     plug_in_packages_list = list(filter(None, out_buf.split("\n")))
@@ -41,15 +44,17 @@ def rvalidate_plug_ins(plug_in_dir_paths,
     return plug_in_packages_list
 
 
-def rprocess_plug_in_packages(plug_in_packages_list=None,
-                              call_point="setup",
-                              shell_rc="0x00000000",
-                              stop_on_plug_in_failure=1,
-                              stop_on_non_zero_rc=0,
-                              release_type="obmc",
-                              quiet=None,
-                              debug=None,
-                              return_history=False):
+def rprocess_plug_in_packages(
+    plug_in_packages_list=None,
+    call_point="setup",
+    shell_rc="0x00000000",
+    stop_on_plug_in_failure=1,
+    stop_on_non_zero_rc=0,
+    release_type="obmc",
+    quiet=None,
+    debug=None,
+    return_history=False,
+):
     r"""
     Call the external process_plug_in_packages.py to process the plug-in packages.  Return the following:
     rc                              The return code - 0 = PASS, 1 = FAIL.
@@ -110,7 +115,7 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
     debug = int(gp.get_var_value(debug, 0))
 
     # Create string from list.
-    plug_in_dir_paths = ':'.join(plug_in_packages_list)
+    plug_in_dir_paths = ":".join(plug_in_packages_list)
 
     temp = tempfile.NamedTemporaryFile()
     temp_file_path = temp.name
@@ -125,23 +130,37 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
 
     loc_shell_rc = 0
 
-    sub_cmd_buf = "process_plug_in_packages.py" + debug_string +\
-                  " --call_point=" + call_point + " --allow_shell_rc=" +\
-                  str(shell_rc) + " --stop_on_plug_in_failure=" +\
-                  str(stop_on_plug_in_failure) + " --stop_on_non_zero_rc=" +\
-                  str(stop_on_non_zero_rc) + " " + plug_in_dir_paths
+    sub_cmd_buf = (
+        "process_plug_in_packages.py"
+        + debug_string
+        + " --call_point="
+        + call_point
+        + " --allow_shell_rc="
+        + str(shell_rc)
+        + " --stop_on_plug_in_failure="
+        + str(stop_on_plug_in_failure)
+        + " --stop_on_non_zero_rc="
+        + str(stop_on_non_zero_rc)
+        + " "
+        + plug_in_dir_paths
+    )
     if quiet:
         cmd_buf = sub_cmd_buf + " > " + temp_file_path + " 2>&1"
     else:
-        cmd_buf = "set -o pipefail ; " + sub_cmd_buf + " 2>&1 | tee " +\
-                  temp_file_path
+        cmd_buf = (
+            "set -o pipefail ; "
+            + sub_cmd_buf
+            + " 2>&1 | tee "
+            + temp_file_path
+        )
         if debug:
             gp.print_issuing(cmd_buf)
         else:
-            gp.print_timen("Processing " + call_point
-                           + " call point programs.")
+            gp.print_timen(
+                "Processing " + call_point + " call point programs."
+            )
 
-    sub_proc = subprocess.Popen(cmd_buf, shell=True, executable='/bin/bash')
+    sub_proc = subprocess.Popen(cmd_buf, shell=True, executable="/bin/bash")
     sub_proc.communicate()
     proc_plug_pkg_rc = sub_proc.returncode
 
@@ -149,8 +168,13 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
         # Get the "Running" statements from the output.
         regex = " Running [^/]+/cp_"
         cmd_buf = "egrep '" + regex + "' " + temp_file_path
-        _, history = gc.shell_cmd(cmd_buf, quiet=(not debug), print_output=0,
-                                  show_err=0, ignore_err=1)
+        _, history = gc.shell_cmd(
+            cmd_buf,
+            quiet=(not debug),
+            print_output=0,
+            show_err=0,
+            ignore_err=1,
+        )
         history = [x + "\n" for x in filter(None, history.split("\n"))]
     else:
         history = []
@@ -167,8 +191,14 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
     # - Zero or more spaces
     bash_var_regex = "[_[:alpha:]][_[:alnum:]]*"
     regex = "^" + bash_var_regex + ":[ ]*"
-    cmd_buf = "egrep '" + regex + "' " + temp_file_path + " > " +\
-              temp_properties_file_path
+    cmd_buf = (
+        "egrep '"
+        + regex
+        + "' "
+        + temp_file_path
+        + " > "
+        + temp_properties_file_path
+    )
     gp.dprint_issuing(cmd_buf)
     grep_rc = os.system(cmd_buf)
 
@@ -176,8 +206,8 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
     properties = gm.my_parm_file(temp_properties_file_path)
 
     # Finally, we access the 2 values that we need.
-    shell_rc = int(properties.get('shell_rc', '0x0000000000000000'), 16)
-    failed_plug_in_name = properties.get('failed_plug_in_name', '')
+    shell_rc = int(properties.get("shell_rc", "0x0000000000000000"), 16)
+    failed_plug_in_name = properties.get("failed_plug_in_name", "")
 
     if proc_plug_pkg_rc != 0:
         if quiet:
@@ -186,9 +216,13 @@ def rprocess_plug_in_packages(plug_in_packages_list=None,
             gp.print_var(grep_rc, gp.hexa())
         gp.print_var(proc_plug_pkg_rc, gp.hexa())
         gp.print_timen("Re-cap of plug-in failures:")
-        gc.cmd_fnc_u("egrep -A 1 '^failed_plug_in_name:[ ]+' "
-                     + temp_properties_file_path + " | egrep -v '^\\--'",
-                     quiet=1, show_err=0)
+        gc.cmd_fnc_u(
+            "egrep -A 1 '^failed_plug_in_name:[ ]+' "
+            + temp_properties_file_path
+            + " | egrep -v '^\\--'",
+            quiet=1,
+            show_err=0,
+        )
         rc = 1
 
     if return_history:
