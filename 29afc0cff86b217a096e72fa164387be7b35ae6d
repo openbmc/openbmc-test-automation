@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3f9af6e_b51354c4",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-12-08T07:28:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6ca1b79_d04bb2a8",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 102
+      },
+      "revId": "29afc0cff86b217a096e72fa164387be7b35ae6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1aa4881_55f7438d",
@@ -61,6 +85,30 @@
       "writtenOn": "2022-12-05T11:16:52Z",
       "side": 1,
       "message": "Verify PEL Log Transmission To Host",
+      "range": {
+        "startLine": 705,
+        "startChar": 6,
+        "endLine": 705,
+        "endChar": 17
+      },
+      "revId": "29afc0cff86b217a096e72fa164387be7b35ae6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b316c456_9de7d272",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-12-08T07:28:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1aa4881_55f7438d",
       "range": {
         "startLine": 705,
         "startChar": 6,
@@ -94,6 +142,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "875552ef_ec73369b",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-12-08T07:28:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1591f765_5e904f46",
+      "range": {
+        "startLine": 912,
+        "startChar": 0,
+        "endLine": 912,
+        "endChar": 81
+      },
+      "revId": "29afc0cff86b217a096e72fa164387be7b35ae6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec19e756_ba234dfe",
@@ -111,6 +183,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28b2dec5_4669f49e",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-12-08T07:28:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec19e756_ba234dfe",
+      "revId": "29afc0cff86b217a096e72fa164387be7b35ae6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "649543b5_59d18b71",
@@ -124,6 +214,30 @@
       "writtenOn": "2022-12-06T17:31:19Z",
       "side": 1,
       "message": "Make use of else if\n    Run Keyword If  \u0027${host_state}\u0027 \u003d\u003d \u0027Off\u0027\n    ...    Redfish Power Off  stack_mode\u003dskip\n    ...  ELSE IF  \u0027${host_state}\u0027 \u003d\u003d \u0027On\u0027\n    ...    Redfish Power On  stack_mode\u003dskip",
+      "range": {
+        "startLine": 921,
+        "startChar": 0,
+        "endLine": 924,
+        "endChar": 42
+      },
+      "revId": "29afc0cff86b217a096e72fa164387be7b35ae6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71973cba_1b885c2c",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 924,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-12-08T07:28:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "649543b5_59d18b71",
       "range": {
         "startLine": 921,
         "startChar": 0,
@@ -157,6 +271,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f7940dc_f22e0e93",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 931,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-12-08T07:28:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2c0d719_13771efd",
+      "range": {
+        "startLine": 927,
+        "startChar": 0,
+        "endLine": 931,
+        "endChar": 59
+      },
+      "revId": "29afc0cff86b217a096e72fa164387be7b35ae6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cab51674_f25bff79",
@@ -180,6 +318,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c037f7c_0947d13a",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-12-08T07:28:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cab51674_f25bff79",
+      "range": {
+        "startLine": 936,
+        "startChar": 0,
+        "endLine": 938,
+        "endChar": 26
+      },
+      "revId": "29afc0cff86b217a096e72fa164387be7b35ae6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05008e48_1f3b1a8a",
@@ -193,6 +355,30 @@
       "writtenOn": "2022-12-05T11:16:52Z",
       "side": 1,
       "message": "use the latest keyword for \u0027Peltool -l\u0027; \u0027Peltool  -lfh\u0027\n\nget_pel_data_from_bmc()\n\nget_pel_data_from_bmc(include_hidden_pels\u003dFalse,\n                          include_informational_pels\u003dFalse):",
+      "range": {
+        "startLine": 935,
+        "startChar": 0,
+        "endLine": 939,
+        "endChar": 48
+      },
+      "revId": "29afc0cff86b217a096e72fa164387be7b35ae6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94c7886d_cea4276d",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-12-08T07:28:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05008e48_1f3b1a8a",
       "range": {
         "startLine": 935,
         "startChar": 0,
