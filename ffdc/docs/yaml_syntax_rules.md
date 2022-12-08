@@ -1,13 +1,14 @@
 ### YAML Configuration
 
-YAML is a human friendly data serialization standard for all programming languages.
+YAML is a human friendly data serialization standard for all programming
+languages.
 
 Refer: https://yaml.org/
 
 YAML is the main orchestrator in terms of how the user arranges the data to be
 collected in this log collection tool. The better context and syntax usage would
-improve the execution, parsing and data collection feeds to the collector engine.
-
+improve the execution, parsing and data collection feeds to the collector
+engine.
 
 ### YAML Rules
 
@@ -30,8 +31,8 @@ successfully.
 
 COMMANDS, FILES, PROTOCOL is mandatory for all YAML block.
 
-Note: The FILES directive is not needed for protocol using SCP (Refer YAML Block Example)
-
+Note: The FILES directive is not needed for protocol using SCP (Refer YAML Block
+Example)
 
 ### YAML Block Examples
 

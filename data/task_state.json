@@ -14,10 +14,7 @@
     },
     "TaskService": {
         "CompletedTaskOverWritePolicy": {
-            "AllowedValues": [
-                "Manual",
-                "Oldest"
-            ]
+            "AllowedValues": ["Manual", "Oldest"]
         },
         "Status": {
             "Health": "OK",
