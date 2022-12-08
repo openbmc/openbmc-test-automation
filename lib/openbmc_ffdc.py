@@ -7,24 +7,20 @@ This module is the python counterpart to openbmc_ffdc.robot..
 import os
 
 import gen_print as gp
-import gen_robot_keyword as grk
 import gen_valid as gv
+import gen_robot_keyword as grk
 import state as st
+
 from robot.libraries.BuiltIn import BuiltIn
 
-redfish_support_trans_state = int(
-    os.environ.get("REDFISH_SUPPORT_TRANS_STATE", 0)
-) or int(
-    BuiltIn().get_variable_value("${REDFISH_SUPPORT_TRANS_STATE}", default=0)
-)
+redfish_support_trans_state = int(os.environ.get('REDFISH_SUPPORT_TRANS_STATE', 0)) or \
+    int(BuiltIn().get_variable_value("${REDFISH_SUPPORT_TRANS_STATE}", default=0))
 
 
-def ffdc(
-    ffdc_dir_path=None,
-    ffdc_prefix=None,
-    ffdc_function_list="",
-    comm_check=True,
-):
+def ffdc(ffdc_dir_path=None,
+         ffdc_prefix=None,
+         ffdc_function_list="",
+         comm_check=True):
     r"""
     Gather First Failure Data Capture (FFDC).
 
@@ -52,31 +48,26 @@ def ffdc(
 
     if comm_check:
         if not redfish_support_trans_state:
-            interface = "rest"
+            interface = 'rest'
         else:
-            interface = "redfish"
+            interface = 'redfish'
 
-        state = st.get_state(req_states=["ping", "uptime", interface])
+        state = st.get_state(req_states=['ping', 'uptime', interface])
         gp.qprint_var(state)
-        if not int(state["ping"]):
-            gp.print_error(
-                "BMC is not ping-able.  Terminating FFDC collection.\n"
-            )
+        if not int(state['ping']):
+            gp.print_error("BMC is not ping-able.  Terminating FFDC collection.\n")
             return ffdc_file_list
 
         if not int(state[interface]):
             gp.print_error("%s commands to the BMC are failing." % interface)
 
-        if state["uptime"] == "":
+        if state['uptime'] == "":
             gp.print_error("BMC is not communicating via ssh.\n")
 
         # If SSH and Redfish connection doesn't works, abort.
-        if not int(state[interface]) and state["uptime"] == "":
-            gp.print_error(
-                "BMC is not communicating via ssh or Redfish.  Terminating"
-                " FFDC"
-                + " collection.\n"
-            )
+        if not int(state[interface]) and state['uptime'] == "":
+            gp.print_error("BMC is not communicating via ssh or Redfish.  Terminating FFDC"
+                           + " collection.\n")
             return ffdc_file_list
 
     gp.qprint_timen("Collecting FFDC.")
@@ -94,12 +85,9 @@ def ffdc(
     gp.qprint_issuing(cmd_buf)
     status, output = BuiltIn().run_keyword_and_ignore_error(*cmd_buf)
     if status != "PASS":
-        error_message = gp.sprint_error_report(
-            "Create Directory failed"
-            + " with the following"
-            + " error:\n"
-            + output
-        )
+        error_message = gp.sprint_error_report("Create Directory failed"
+                                               + " with the following"
+                                               + " error:\n" + output)
         BuiltIn().fail(error_message)
 
     # FFDC_FILE_PATH is used by Header Message.
@@ -107,9 +95,9 @@ def ffdc(
     BuiltIn().set_global_variable("${FFDC_FILE_PATH}", FFDC_FILE_PATH)
 
     status, ffdc_file_list = grk.run_key_u("Header Message")
-    status, ffdc_file_sub_list = grk.run_key_u(
-        "Call FFDC Methods  ffdc_function_list=" + ffdc_function_list
-    )
+    status, ffdc_file_sub_list = \
+        grk.run_key_u("Call FFDC Methods  ffdc_function_list="
+                      + ffdc_function_list)
 
     # Combine lists, remove duplicates and sort.
     ffdc_file_list = sorted(set(ffdc_file_list + ffdc_file_sub_list))
@@ -119,7 +107,8 @@ def ffdc(
     return ffdc_file_list
 
 
-def set_ffdc_defaults(ffdc_dir_path=None, ffdc_prefix=None):
+def set_ffdc_defaults(ffdc_dir_path=None,
+                      ffdc_prefix=None):
     r"""
     Set a default value for ffdc_dir_path and ffdc_prefix if they don't
     already have values.  Return both values.
@@ -141,34 +130,24 @@ def set_ffdc_defaults(ffdc_dir_path=None, ffdc_prefix=None):
     BuiltIn().set_global_variable("${FFDC_TIME}", FFDC_TIME)
 
     ffdc_dir_path_style = BuiltIn().get_variable_value(
-        "${ffdc_dir_path_style}"
-    )
+        "${ffdc_dir_path_style}")
 
     if ffdc_dir_path is None:
         if ffdc_dir_path_style:
             try:
-                ffdc_dir_path = os.environ["FFDC_DIR_PATH"]
+                ffdc_dir_path = os.environ['FFDC_DIR_PATH']
             except KeyError:
-                ffdc_dir_path = (
-                    os.path.dirname(
-                        BuiltIn().get_variable_value("${LOG_FILE}")
-                    )
-                    + "/"
-                )
+                ffdc_dir_path = os.path.dirname(
+                    BuiltIn().get_variable_value("${LOG_FILE}")) + "/"
         else:
             FFDC_LOG_PATH = os.getcwd() + "/logs/"
             if FFDC_LOG_PATH is None:
                 FFDC_LOG_PATH = ""
             if FFDC_LOG_PATH == "":
-                FFDC_LOG_PATH = (
-                    os.path.dirname(
-                        BuiltIn().get_variable_value("${LOG_FILE}")
-                    )
-                    + "/"
-                )
-            error_message = gv.valid_value(
-                FFDC_LOG_PATH, var_name="FFDC_LOG_PATH"
-            )
+                FFDC_LOG_PATH = os.path.dirname(
+                    BuiltIn().get_variable_value("${LOG_FILE}")) + "/"
+            error_message = gv.valid_value(FFDC_LOG_PATH,
+                                           var_name="FFDC_LOG_PATH")
             if error_message != "":
                 error_message = gp.sprint_error_report(error_message)
                 BuiltIn().fail(error_message)
@@ -189,16 +168,9 @@ def set_ffdc_defaults(ffdc_dir_path=None, ffdc_prefix=None):
             if ffdc_dir_path_style:
                 OPENBMC_HOST = BuiltIn().get_variable_value("${OPENBMC_HOST}")
                 OPENBMC_NICKNAME = BuiltIn().get_variable_value(
-                    "${OPENBMC_NICKNAME}", default=OPENBMC_HOST
-                )
-                ffdc_prefix = (
-                    OPENBMC_NICKNAME
-                    + "."
-                    + FFDC_TIME[2:8]
-                    + "."
-                    + FFDC_TIME[8:14]
-                    + "."
-                )
+                    "${OPENBMC_NICKNAME}", default=OPENBMC_HOST)
+                ffdc_prefix = OPENBMC_NICKNAME + "." + FFDC_TIME[2:8] + "." +\
+                    FFDC_TIME[8:14] + "."
             else:
                 ffdc_prefix = FFDC_TIME + "_"
 

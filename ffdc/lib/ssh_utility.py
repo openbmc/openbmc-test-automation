@@ -1,19 +1,16 @@
 #!/usr/bin/env python3
 
-import logging
-import socket
-import time
-from socket import timeout as SocketTimeout
-
 import paramiko
+from paramiko.ssh_exception import AuthenticationException
+from paramiko.ssh_exception import NoValidConnectionsError
+from paramiko.ssh_exception import SSHException
+from paramiko.ssh_exception import BadHostKeyException
 from paramiko.buffered_pipe import PipeTimeout as PipeTimeout
-from paramiko.ssh_exception import (
-    AuthenticationException,
-    BadHostKeyException,
-    NoValidConnectionsError,
-    SSHException,
-)
 from scp import SCPClient, SCPException
+import time
+import socket
+import logging
+from socket import timeout as SocketTimeout
 
 
 class SSHRemoteclient:
@@ -23,6 +20,7 @@ class SSHRemoteclient:
     """
 
     def __init__(self, hostname, username, password):
+
         r"""
         Description of argument(s):
 
@@ -40,6 +38,7 @@ class SSHRemoteclient:
         self.password = password
 
     def ssh_remoteclient_login(self):
+
         r"""
         Method to create a ssh connection to remote host.
         """
@@ -49,31 +48,23 @@ class SSHRemoteclient:
             # SSHClient to make connections to the remote server
             self.sshclient = paramiko.SSHClient()
             # setting set_missing_host_key_policy() to allow any host
-            self.sshclient.set_missing_host_key_policy(
-                paramiko.AutoAddPolicy()
-            )
+            self.sshclient.set_missing_host_key_policy(paramiko.AutoAddPolicy())
             # Connect to the server
-            self.sshclient.connect(
-                hostname=self.hostname,
-                username=self.username,
-                password=self.password,
-                banner_timeout=120,
-                timeout=60,
-                look_for_keys=False,
-            )
+            self.sshclient.connect(hostname=self.hostname,
+                                   username=self.username,
+                                   password=self.password,
+                                   banner_timeout=120,
+                                   timeout=60,
+                                   look_for_keys=False)
 
-        except (
-            BadHostKeyException,
-            AuthenticationException,
-            SSHException,
-            NoValidConnectionsError,
-            socket.error,
-        ) as e:
+        except (BadHostKeyException, AuthenticationException,
+                SSHException, NoValidConnectionsError, socket.error) as e:
             is_ssh_login = False
 
         return is_ssh_login
 
     def ssh_remoteclient_disconnect(self):
+
         r"""
         Clean up.
         """
@@ -84,7 +75,8 @@ class SSHRemoteclient:
         if self.scpclient:
             self.scpclient.close()
 
-    def execute_command(self, command, default_timeout=60):
+    def execute_command(self, command,
+                        default_timeout=60):
         """
         Execute command on the remote host.
 
@@ -93,26 +85,25 @@ class SSHRemoteclient:
 
         """
 
-        empty = ""
+        empty = ''
         cmd_start = time.time()
         try:
-            stdin, stdout, stderr = self.sshclient.exec_command(
-                command, timeout=default_timeout
-            )
+            stdin, stdout, stderr = \
+                self.sshclient.exec_command(command, timeout=default_timeout)
             start = time.time()
             while time.time() < start + default_timeout:
                 # Need to do read/write operation to trigger
                 # paramiko exec_command timeout mechanism.
                 xresults = stderr.readlines()
-                results = "".join(xresults)
+                results = ''.join(xresults)
                 time.sleep(1)
                 if stdout.channel.exit_status_ready():
                     break
             cmd_exit_code = stdout.channel.recv_exit_status()
 
             # Convert list of string to one string
-            err = ""
-            out = ""
+            err = ''
+            out = ''
             for item in results:
                 err += item
             for item in stdout.readlines():
@@ -120,53 +111,30 @@ class SSHRemoteclient:
 
             return cmd_exit_code, err, out
 
-        except (
-            paramiko.AuthenticationException,
-            paramiko.SSHException,
-            paramiko.ChannelException,
-            SocketTimeout,
-        ) as e:
+        except (paramiko.AuthenticationException, paramiko.SSHException,
+                paramiko.ChannelException, SocketTimeout) as e:
             # Log command with error. Return to caller for next command, if any.
-            logging.error(
-                "\n\tERROR: Fail remote command %s %s" % (e.__class__, e)
-            )
-            logging.error(
-                "\tCommand '%s' Elapsed Time %s"
-                % (
-                    command,
-                    time.strftime(
-                        "%H:%M:%S", time.gmtime(time.time() - cmd_start)
-                    ),
-                )
-            )
+            logging.error("\n\tERROR: Fail remote command %s %s" % (e.__class__, e))
+            logging.error("\tCommand '%s' Elapsed Time %s" %
+                          (command, time.strftime("%H:%M:%S", time.gmtime(time.time() - cmd_start))))
             return 0, empty, empty
 
     def scp_connection(self):
+
         r"""
         Create a scp connection for file transfer.
         """
         try:
-            self.scpclient = SCPClient(
-                self.sshclient.get_transport(), sanitize=lambda x: x
-            )
-            logging.info(
-                "\n\t[Check] %s SCP transport established.\t [OK]"
-                % self.hostname
-            )
+            self.scpclient = SCPClient(self.sshclient.get_transport(), sanitize=lambda x: x)
+            logging.info("\n\t[Check] %s SCP transport established.\t [OK]" % self.hostname)
         except (SCPException, SocketTimeout, PipeTimeout) as e:
             self.scpclient = None
-            logging.error(
-                "\n\tERROR: SCP get_transport has failed. %s %s"
-                % (e.__class__, e)
-            )
-            logging.info(
-                "\tScript continues generating FFDC on %s." % self.hostname
-            )
-            logging.info(
-                "\tCollected data will need to be manually offloaded."
-            )
+            logging.error("\n\tERROR: SCP get_transport has failed. %s %s" % (e.__class__, e))
+            logging.info("\tScript continues generating FFDC on %s." % self.hostname)
+            logging.info("\tCollected data will need to be manually offloaded.")
 
     def scp_file_from_remote(self, remote_file, local_file):
+
         r"""
         scp file in remote system to local with date-prefixed filename.
 
@@ -183,9 +151,7 @@ class SSHRemoteclient:
         except (SCPException, SocketTimeout, PipeTimeout, SSHException) as e:
             # Log command with error. Return to caller for next file, if any.
             logging.error(
-                "\n\tERROR: Fail scp %s from remotehost %s %s\n\n"
-                % (remote_file, e.__class__, e)
-            )
+                "\n\tERROR: Fail scp %s from remotehost %s %s\n\n" % (remote_file, e.__class__, e))
             # Pause for 2 seconds allowing Paramiko to finish error processing before next fetch.
             # Without the delay after SCPException,
             #    next fetch will get 'paramiko.ssh_exception.SSHException'> Channel closed Error.

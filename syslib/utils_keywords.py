@@ -6,15 +6,18 @@ functions and use in test where generic robot keywords don't support.
 """
 
 try:
-    from robot.libraries import DateTime
     from robot.libraries.BuiltIn import BuiltIn
+    from robot.libraries import DateTime
 except ImportError:
     pass
-import os
 import time
+import os
 
 
-def run_until_keyword_fails(retry, retry_interval, name, *args):
+def run_until_keyword_fails(retry,
+                            retry_interval,
+                            name,
+                            *args):
     r"""
     Execute a robot keyword repeatedly until it either fails or the timeout
     value is exceeded.

@@ -4,14 +4,15 @@ r"""
 This file contains functions useful for printing to stdout from robot programs.
 """
 
-import os
 import re
+import os
 
-import func_args as fa
 import gen_print as gp
+import func_args as fa
+
 from robot.libraries.BuiltIn import BuiltIn
 
-gen_robot_print_debug = int(os.environ.get("GEN_ROBOT_PRINT_DEBUG", "0"))
+gen_robot_print_debug = int(os.environ.get('GEN_ROBOT_PRINT_DEBUG', '0'))
 
 
 def sprint_vars(*args, **kwargs):
@@ -27,14 +28,15 @@ def sprint_vars(*args, **kwargs):
     kwargs                          See sprint_varx in gen_print.py for descriptions of all other arguments.
     """
 
-    if "fmt" in kwargs:
+    if 'fmt' in kwargs:
         # Find format option names in kwargs['fmt'] and wrap them with "gp." and "()" to make them into
         # function calls.  For example, verbose would be converted to "gp.verbose()".  This allows the user
         # to simply specify "fmt=verbose" (vs. fmt=gp.verbose()).
         # Note "terse" has been explicitly added for backward compatibility.  Once the repo has been purged
         # of its use, this code can return to its original form.
         regex = "(" + "|".join(gp.valid_fmts()) + "|terse)"
-        kwargs["fmt"] = re.sub(regex, "gp.\\1()", kwargs["fmt"])
+        kwargs['fmt'] = \
+            re.sub(regex, "gp.\\1()", kwargs['fmt'])
     kwargs = fa.args_to_objects(kwargs)
     buffer = ""
     for var_name in args:
@@ -59,32 +61,15 @@ def sprint_auto_vars(headers=0):
         buffer += gp.sprint_dashes()
         buffer += "Automatic Variables:"
 
-    buffer += sprint_vars(
-        "TEST_NAME",
-        "TEST_TAGS",
-        "TEST_DOCUMENTATION",
-        "TEST_STATUS",
-        "TEST_DOCUMENTATION",
-        "TEST_STATUS",
-        "TEST_MESSAGE",
-        "PREV_TEST_NAME",
-        "PREV_TEST_STATUS",
-        "PREV_TEST_MESSAGE",
-        "SUITE_NAME",
-        "SUITE_SOURCE",
-        "SUITE_DOCUMENTATION",
-        "SUITE_METADATA",
-        "SUITE_STATUS",
-        "SUITE_MESSAGE",
-        "KEYWORD_STATUS",
-        "KEYWORD_MESSAGE",
-        "LOG_LEVEL",
-        "OUTPUT_FILE",
-        "LOG_FILE",
-        "REPORT_FILE",
-        "DEBUG_FILE",
-        "OUTPUT_DIR",
-    )
+    buffer += \
+        sprint_vars(
+            "TEST_NAME", "TEST_TAGS", "TEST_DOCUMENTATION", "TEST_STATUS",
+            "TEST_DOCUMENTATION", "TEST_STATUS", "TEST_MESSAGE",
+            "PREV_TEST_NAME", "PREV_TEST_STATUS", "PREV_TEST_MESSAGE",
+            "SUITE_NAME", "SUITE_SOURCE", "SUITE_DOCUMENTATION",
+            "SUITE_METADATA", "SUITE_STATUS", "SUITE_MESSAGE",
+            "KEYWORD_STATUS", "KEYWORD_MESSAGE", "LOG_LEVEL", "OUTPUT_FILE",
+            "LOG_FILE", "REPORT_FILE", "DEBUG_FILE", "OUTPUT_DIR")
 
     if int(headers) == 1:
         buffer += gp.sprint_dashes()
@@ -135,19 +120,20 @@ def gp_debug_print(buffer):
 # full names.
 # Rprint Vars (instead of Rpvars)
 
-replace_dict = {"output_stream": "stdout", "mod_qualifier": "gp."}
+replace_dict = {'output_stream': 'stdout', 'mod_qualifier': 'gp.'}
 
 gp_debug_print("gp.robot_env: " + str(gp.robot_env) + "\n")
 
 # func_names contains a list of all rprint functions which should be created from their sprint counterparts.
-func_names = ["print_vars", "print_auto_vars"]
+func_names = [
+    'print_vars', 'print_auto_vars'
+]
 
 # stderr_func_names is a list of functions whose output should go to stderr rather than stdout.
 stderr_func_names = []
 
-func_defs = gp.create_print_wrapper_funcs(
-    func_names, stderr_func_names, replace_dict, "r"
-)
+func_defs = gp.create_print_wrapper_funcs(func_names, stderr_func_names,
+                                          replace_dict, "r")
 gp_debug_print(func_defs)
 exec(func_defs)
 

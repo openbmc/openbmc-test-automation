@@ -4,16 +4,16 @@ r"""
 This module provides functions which are useful to plug-in call point programs.
 """
 
-import collections
+import sys
 import os
 import re
-import sys
+import collections
 
-import func_args as fa
-import gen_cmd as gc
-import gen_misc as gm
 import gen_print as gp
 import gen_valid as gv
+import gen_misc as gm
+import gen_cmd as gc
+import func_args as fa
 
 PLUG_VAR_PREFIX = os.environ.get("PLUG_VAR_PREFIX", "AUTOBOOT")
 
@@ -36,7 +36,9 @@ def get_plug_in_package_name(case=None):
         return plug_in_package_name
 
 
-def return_plug_vars(general=True, custom=True, plug_in_package_name=None):
+def return_plug_vars(general=True,
+                     custom=True,
+                     plug_in_package_name=None):
     r"""
     Return an OrderedDict which is sorted by key and which contains all of the plug-in environment variables.
 
@@ -80,9 +82,7 @@ def return_plug_vars(general=True, custom=True, plug_in_package_name=None):
     regex_list = []
     if not (general or custom):
         return collections.OrderedDict()
-    plug_in_package_name = gm.dft(
-        plug_in_package_name, get_plug_in_package_name()
-    )
+    plug_in_package_name = gm.dft(plug_in_package_name, get_plug_in_package_name())
     if general:
         regex_list = [PLUG_VAR_PREFIX, "AUTOGUI"]
     if custom:
@@ -92,23 +92,17 @@ def return_plug_vars(general=True, custom=True, plug_in_package_name=None):
 
     # Set a default for nickname.
     if os.environ.get("AUTOBOOT_OPENBMC_NICKNAME", "") == "":
-        os.environ["AUTOBOOT_OPENBMC_NICKNAME"] = os.environ.get(
-            "AUTOBOOT_OPENBMC_HOST", ""
-        )
+        os.environ['AUTOBOOT_OPENBMC_NICKNAME'] = \
+            os.environ.get("AUTOBOOT_OPENBMC_HOST", "")
 
     if os.environ.get("AUTOIPL_FSP1_NICKNAME", "") == "":
-        os.environ["AUTOIPL_FSP1_NICKNAME"] = os.environ.get(
-            "AUTOIPL_FSP1_NAME", ""
-        ).split(".")[0]
+        os.environ['AUTOIPL_FSP1_NICKNAME'] = \
+            os.environ.get("AUTOIPL_FSP1_NAME", "").split(".")[0]
 
     # For all variables specified in the parm_def file, we want them to default to "" rather than being unset.
     # Process the parm_def file if it exists.
-    parm_def_file_path = (
-        os.path.dirname(gp.pgm_dir_path.rstrip("/"))
-        + "/"
-        + plug_in_package_name
+    parm_def_file_path = os.path.dirname(gp.pgm_dir_path.rstrip("/")) + "/" + plug_in_package_name \
         + "/parm_def"
-    )
     if os.path.exists(parm_def_file_path):
         parm_defs = gm.my_parm_file(parm_def_file_path)
     else:
@@ -121,10 +115,8 @@ def return_plug_vars(general=True, custom=True, plug_in_package_name=None):
 
     # Create a list of plug-in environment variables by pre-pending <all caps plug-in package name>_<all
     # caps var name>
-    plug_in_parm_names = [
-        plug_in_package_name.upper() + "_" + x
-        for x in map(str.upper, parm_defs.keys())
-    ]
+    plug_in_parm_names = [plug_in_package_name.upper() + "_" + x for x in
+                          map(str.upper, parm_defs.keys())]
     # Example plug_in_parm_names:
     # plug_in_parm_names:
     #  plug_in_parm_names[0]: STOP_REST_FAIL
@@ -145,20 +137,13 @@ def return_plug_vars(general=True, custom=True, plug_in_package_name=None):
         if os.environ[var_name] == "":
             os.environ[var_name] = str(default_value)
 
-    plug_var_dict = collections.OrderedDict(
-        sorted(
-            {
-                k: v for (k, v) in os.environ.items() if re.match(regex, k)
-            }.items()
-        )
-    )
+    plug_var_dict = \
+        collections.OrderedDict(sorted({k: v for (k, v) in
+                                        os.environ.items()
+                                        if re.match(regex, k)}.items()))
     # Restore the types of any variables where the caller had defined default values.
     for key, value in non_string_defaults.items():
-        cmd_buf = (
-            "plug_var_dict[key] = "
-            + str(value).split("'")[1]
-            + "(plug_var_dict[key]"
-        )
+        cmd_buf = "plug_var_dict[key] = " + str(value).split("'")[1] + "(plug_var_dict[key]"
         if value is int:
             # Use int base argument of 0 to allow it to interpret hex strings.
             cmd_buf += ", 0)"
@@ -167,11 +152,8 @@ def return_plug_vars(general=True, custom=True, plug_in_package_name=None):
         exec(cmd_buf) in globals(), locals()
     # Register password values to prevent printing them out.  Any plug var whose name ends in PASSWORD will
     # be registered.
-    password_vals = {
-        k: v
-        for (k, v) in plug_var_dict.items()
-        if re.match(r".*_PASSWORD$", k)
-    }.values()
+    password_vals = {k: v for (k, v) in plug_var_dict.items()
+                     if re.match(r".*_PASSWORD$", k)}.values()
     map(gp.register_passwords, password_vals)
 
     return plug_var_dict
@@ -249,7 +231,8 @@ def get_plug_vars(mod_name="__main__", **kwargs):
         setattr(module, re.sub("^" + PLUG_VAR_PREFIX + "_", "", key), value)
 
 
-def get_plug_default(var_name, default=None):
+def get_plug_default(var_name,
+                     default=None):
     r"""
     Derive and return a default value for the given parm variable.
 
@@ -305,7 +288,7 @@ def get_plug_default(var_name, default=None):
     default_value = os.environ.get(package_var_name, None)
     if default_value is not None:
         # A package-name version of the variable was found so return its value.
-        return default_value
+        return (default_value)
 
     plug_var_name = PLUG_VAR_PREFIX + "_OVERRIDE_" + var_name
     default_value = os.environ.get(plug_var_name, None)
@@ -322,7 +305,8 @@ def get_plug_default(var_name, default=None):
     return default
 
 
-def required_plug_in(required_plug_in_names, plug_in_dir_paths=None):
+def required_plug_in(required_plug_in_names,
+                     plug_in_dir_paths=None):
     r"""
     Determine whether the required_plug_in_names are in plug_in_dir_paths, construct an error_message and
     call gv.process_error_message(error_message).
@@ -343,22 +327,15 @@ def required_plug_in(required_plug_in_names, plug_in_dir_paths=None):
     """
 
     # Calculate default value for plug_in_dir_paths.
-    plug_in_dir_paths = gm.dft(
-        plug_in_dir_paths,
-        os.environ.get(
-            "AUTOGUI_PLUG_IN_DIR_PATHS",
-            os.environ.get(PLUG_VAR_PREFIX + "_PLUG_IN_DIR_PATHS", ""),
-        ),
-    )
+    plug_in_dir_paths = gm.dft(plug_in_dir_paths,
+                               os.environ.get('AUTOGUI_PLUG_IN_DIR_PATHS',
+                                              os.environ.get(PLUG_VAR_PREFIX + "_PLUG_IN_DIR_PATHS", "")))
 
     # Convert plug_in_dir_paths to a list of base names.
-    plug_in_dir_paths = list(
-        filter(None, map(os.path.basename, plug_in_dir_paths.split(":")))
-    )
+    plug_in_dir_paths = \
+        list(filter(None, map(os.path.basename, plug_in_dir_paths.split(":"))))
 
-    error_message = gv.valid_list(
-        plug_in_dir_paths, required_values=required_plug_in_names
-    )
+    error_message = gv.valid_list(plug_in_dir_paths, required_values=required_plug_in_names)
     if error_message:
         return gv.process_error_message(error_message)
 
@@ -379,31 +356,20 @@ def compose_plug_in_save_dir_path(plug_in_package_name=None):
                                     to retrieve data saved by another plug-in package.
     """
 
-    plug_in_package_name = gm.dft(
-        plug_in_package_name, get_plug_in_package_name()
-    )
+    plug_in_package_name = gm.dft(plug_in_package_name,
+                                  get_plug_in_package_name())
 
-    BASE_TOOL_DIR_PATH = gm.add_trailing_slash(
-        os.environ.get(PLUG_VAR_PREFIX + "_BASE_TOOL_DIR_PATH", "/tmp/")
-    )
+    BASE_TOOL_DIR_PATH = \
+        gm.add_trailing_slash(os.environ.get(PLUG_VAR_PREFIX
+                                             + "_BASE_TOOL_DIR_PATH",
+                                             "/tmp/"))
     NICKNAME = os.environ.get("AUTOBOOT_OPENBMC_NICKNAME", "")
     if NICKNAME == "":
         NICKNAME = os.environ["AUTOIPL_FSP1_NICKNAME"]
     MASTER_PID = os.environ[PLUG_VAR_PREFIX + "_MASTER_PID"]
-    gp.dprint_vars(
-        BASE_TOOL_DIR_PATH, NICKNAME, plug_in_package_name, MASTER_PID
-    )
-    return (
-        BASE_TOOL_DIR_PATH
-        + gm.username()
-        + "/"
-        + NICKNAME
-        + "/"
-        + plug_in_package_name
-        + "/"
-        + str(MASTER_PID)
-        + "/"
-    )
+    gp.dprint_vars(BASE_TOOL_DIR_PATH, NICKNAME, plug_in_package_name, MASTER_PID)
+    return BASE_TOOL_DIR_PATH + gm.username() + "/" + NICKNAME + "/" +\
+        plug_in_package_name + "/" + str(MASTER_PID) + "/"
 
 
 def create_plug_in_save_dir(plug_in_package_name=None):
@@ -431,9 +397,8 @@ def delete_plug_in_save_dir(plug_in_package_name=None):
     plug_in_package_name            See compose_plug_in_save_dir_path for details.
     """
 
-    gc.shell_cmd(
-        "rm -rf " + compose_plug_in_save_dir_path(plug_in_package_name)
-    )
+    gc.shell_cmd("rm -rf "
+                 + compose_plug_in_save_dir_path(plug_in_package_name))
 
 
 def save_plug_in_value(var_value=None, plug_in_package_name=None, **kwargs):
@@ -474,7 +439,7 @@ def save_plug_in_value(var_value=None, plug_in_package_name=None, **kwargs):
         var_name = gp.get_arg_name(0, 1, stack_frame_ix=2)
     plug_in_save_dir_path = create_plug_in_save_dir(plug_in_package_name)
     save_file_path = plug_in_save_dir_path + var_name
-    gp.qprint_timen('Saving "' + var_name + '" value.')
+    gp.qprint_timen("Saving \"" + var_name + "\" value.")
     gp.qprint_varx(var_name, var_value)
     gc.shell_cmd("echo '" + str(var_value) + "' > " + save_file_path)
 
@@ -520,32 +485,22 @@ def restore_plug_in_value(*args, **kwargs):
     default, args, kwargs = fa.pop_arg("", *args, **kwargs)
     plug_in_package_name, args, kwargs = fa.pop_arg(None, *args, **kwargs)
     if args or kwargs:
-        error_message = (
-            "Programmer error - Too many arguments passed for this function."
-        )
+        error_message = "Programmer error - Too many arguments passed for this function."
         raise ValueError(error_message)
     plug_in_save_dir_path = create_plug_in_save_dir(plug_in_package_name)
     save_file_path = plug_in_save_dir_path + var_name
     if os.path.isfile(save_file_path):
-        gp.qprint_timen(
-            "Restoring " + var_name + " value from " + save_file_path + "."
-        )
-        var_value = gm.file_to_list(
-            save_file_path, newlines=0, comments=0, trim=1
-        )[0]
+        gp.qprint_timen("Restoring " + var_name + " value from " + save_file_path + ".")
+        var_value = gm.file_to_list(save_file_path, newlines=0, comments=0, trim=1)[0]
         if type(default) is bool:
             # Convert from string to bool.
-            var_value = var_value == "True"
+            var_value = (var_value == 'True')
         if type(default) is int:
             # Convert from string to int.
             var_value = int(var_value)
     else:
         var_value = default
-        gp.qprint_timen(
-            "Save file "
-            + save_file_path
-            + " does not exist so returning default value."
-        )
+        gp.qprint_timen("Save file " + save_file_path + " does not exist so returning default value.")
 
     gp.qprint_varx(var_name, var_value)
     return var_value
@@ -572,14 +527,9 @@ def exit_not_master():
     AUTOBOOT_PROGRAM_PID = gm.get_mod_global("AUTOBOOT_PROGRAM_PID")
 
     if AUTOBOOT_MASTER_PID != AUTOBOOT_PROGRAM_PID:
-        message = (
-            get_plug_in_package_name()
-            + "/"
-            + gp.pgm_name
-            + " is not"
-            + " being called by the master program in the stack so no action"
+        message = get_plug_in_package_name() + "/" + gp.pgm_name + " is not" \
+            + " being called by the master program in the stack so no action" \
             + " will be taken."
-        )
         gp.qprint_timen(message)
         gp.qprint_vars(AUTOBOOT_MASTER_PID, AUTOBOOT_PROGRAM_PID)
         exit(0)
@@ -591,22 +541,13 @@ def add_tarball_tools_dir_to_path(quiet=0):
 
     The calling program is responsible for making sure that the tarball has been unpacked.
     """
-    AUTOBOOT_BASE_TOOL_DIR_PATH = gm.get_mod_global(
-        "AUTOBOOT_BASE_TOOL_DIR_PATH"
-    )
+    AUTOBOOT_BASE_TOOL_DIR_PATH = gm.get_mod_global("AUTOBOOT_BASE_TOOL_DIR_PATH")
     AUTOBOOT_OPENBMC_NICKNAME = gm.get_mod_global("AUTOBOOT_OPENBMC_NICKNAME")
 
-    tool_dir_path = (
-        AUTOBOOT_BASE_TOOL_DIR_PATH
-        + os.environ.get("USER")
-        + os.sep
-        + AUTOBOOT_OPENBMC_NICKNAME
-        + os.sep
-    )
-    tarball_tools_dir_path = tool_dir_path + "tarball/x86/bin"
-    os.environ["PATH"] = gm.add_path(
-        tarball_tools_dir_path, os.environ.get("PATH", "")
-    )
+    tool_dir_path = AUTOBOOT_BASE_TOOL_DIR_PATH + os.environ.get('USER') + os.sep \
+        + AUTOBOOT_OPENBMC_NICKNAME + os.sep
+    tarball_tools_dir_path = tool_dir_path + 'tarball/x86/bin'
+    os.environ['PATH'] = gm.add_path(tarball_tools_dir_path, os.environ.get('PATH', ''))
 
 
 def stop_test_rc():
@@ -632,15 +573,14 @@ def dump_ffdc_rc():
 
 # Create print wrapper functions for all sprint functions defined above.
 # func_names contains a list of all print functions which should be created from their sprint counterparts.
-func_names = ["print_plug_vars"]
+func_names = ['print_plug_vars']
 
 # stderr_func_names is a list of functions whose output should go to stderr rather than stdout.
 stderr_func_names = []
 
 replace_dict = dict(gp.replace_dict)
-replace_dict["mod_qualifier"] = "gp."
-func_defs = gp.create_print_wrapper_funcs(
-    func_names, stderr_func_names, replace_dict
-)
+replace_dict['mod_qualifier'] = 'gp.'
+func_defs = gp.create_print_wrapper_funcs(func_names, stderr_func_names,
+                                          replace_dict)
 gp.gp_debug_print(func_defs)
 exec(func_defs)

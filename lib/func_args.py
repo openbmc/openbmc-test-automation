@@ -4,9 +4,8 @@ r"""
 This module provides argument manipulation functions like pop_arg.
 """
 
-import collections
-
 import gen_print as gp
+import collections
 
 
 def pop_arg(pop_arg_default=None, *args, **kwargs):

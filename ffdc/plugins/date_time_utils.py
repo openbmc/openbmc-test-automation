@@ -22,11 +22,7 @@ def convert_string_dateime(date_str, date_format, desired_format):
     if isinstance(date_str, list):
         tmp_date = []
         for date in date_str:
-            tmp_date.append(
-                datetime.strptime(date, date_format).strftime(desired_format)
-            )
+            tmp_date.append(datetime.strptime(date, date_format).strftime(desired_format))
         return tmp_date
     else:
-        return datetime.strptime(date_str, date_format).strftime(
-            desired_format
-        )
+        return datetime.strptime(date_str, date_format).strftime(desired_format)

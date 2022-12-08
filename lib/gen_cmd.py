@@ -4,19 +4,19 @@ r"""
 This module provides command execution functions such as cmd_fnc and cmd_fnc_u.
 """
 
-import collections
-import inspect
 import os
-import re
-import signal
-import subprocess
 import sys
+import subprocess
+import collections
+import signal
 import time
+import re
+import inspect
 
-import func_args as fa
-import gen_misc as gm
 import gen_print as gp
 import gen_valid as gv
+import gen_misc as gm
+import func_args as fa
 
 robot_env = gp.robot_env
 
@@ -26,16 +26,14 @@ if robot_env:
 
 # cmd_fnc and cmd_fnc_u should now be considered deprecated.  shell_cmd and t_shell_cmd should be used
 # instead.
-def cmd_fnc(
-    cmd_buf,
-    quiet=None,
-    test_mode=None,
-    debug=0,
-    print_output=1,
-    show_err=1,
-    return_stderr=0,
-    ignore_err=1,
-):
+def cmd_fnc(cmd_buf,
+            quiet=None,
+            test_mode=None,
+            debug=0,
+            print_output=1,
+            show_err=1,
+            return_stderr=0,
+            ignore_err=1):
     r"""
     Run the given command in a shell and return the shell return code and the output.
 
@@ -82,15 +80,13 @@ def cmd_fnc(
     else:
         stderr = subprocess.STDOUT
 
-    sub_proc = subprocess.Popen(
-        cmd_buf,
-        bufsize=1,
-        shell=True,
-        universal_newlines=True,
-        executable="/bin/bash",
-        stdout=subprocess.PIPE,
-        stderr=stderr,
-    )
+    sub_proc = subprocess.Popen(cmd_buf,
+                                bufsize=1,
+                                shell=True,
+                                universal_newlines=True,
+                                executable='/bin/bash',
+                                stdout=subprocess.PIPE,
+                                stderr=stderr)
     out_buf = ""
     if return_stderr:
         for line in sub_proc.stderr:
@@ -135,31 +131,22 @@ def cmd_fnc(
         return shell_rc, out_buf
 
 
-def cmd_fnc_u(
-    cmd_buf,
-    quiet=None,
-    debug=None,
-    print_output=1,
-    show_err=1,
-    return_stderr=0,
-    ignore_err=1,
-):
+def cmd_fnc_u(cmd_buf,
+              quiet=None,
+              debug=None,
+              print_output=1,
+              show_err=1,
+              return_stderr=0,
+              ignore_err=1):
     r"""
     Call cmd_fnc with test_mode=0.  See cmd_fnc (above) for details.
 
     Note the "u" in "cmd_fnc_u" stands for "unconditional".
     """
 
-    return cmd_fnc(
-        cmd_buf,
-        test_mode=0,
-        quiet=quiet,
-        debug=debug,
-        print_output=print_output,
-        show_err=show_err,
-        return_stderr=return_stderr,
-        ignore_err=ignore_err,
-    )
+    return cmd_fnc(cmd_buf, test_mode=0, quiet=quiet, debug=debug,
+                   print_output=print_output, show_err=show_err,
+                   return_stderr=return_stderr, ignore_err=ignore_err)
 
 
 def parse_command_string(command_string):
@@ -213,18 +200,16 @@ def parse_command_string(command_string):
 
     # We want the parms in the string broken down the way bash would do it, so we'll call upon bash to do
     # that by creating a simple inline bash function.
-    bash_func_def = (
-        'function parse { for parm in "${@}" ; do' + " echo $parm ; done ; }"
-    )
+    bash_func_def = "function parse { for parm in \"${@}\" ; do" +\
+        " echo $parm ; done ; }"
 
-    rc, outbuf = cmd_fnc_u(
-        bash_func_def + " ; parse " + command_string, quiet=1, print_output=0
-    )
+    rc, outbuf = cmd_fnc_u(bash_func_def + " ; parse " + command_string,
+                           quiet=1, print_output=0)
     command_string_list = outbuf.rstrip("\n").split("\n")
 
     command_string_dict = collections.OrderedDict()
     ix = 1
-    command_string_dict["command"] = command_string_list[0]
+    command_string_dict['command'] = command_string_list[0]
     while ix < len(command_string_list):
         if command_string_list[ix].startswith("--"):
             key, value = command_string_list[ix].split("=")
@@ -237,7 +222,7 @@ def parse_command_string(command_string):
             except IndexError:
                 value = ""
         else:
-            key = "positional"
+            key = 'positional'
             value = command_string_list[ix]
         if key in command_string_dict:
             if isinstance(command_string_dict[key], str):
@@ -254,7 +239,8 @@ def parse_command_string(command_string):
 original_sigalrm_handler = signal.getsignal(signal.SIGALRM)
 
 
-def shell_cmd_timed_out(signal_number, frame):
+def shell_cmd_timed_out(signal_number,
+                        frame):
     r"""
     Handle an alarm signal generated during the shell_cmd function.
     """
@@ -263,7 +249,7 @@ def shell_cmd_timed_out(signal_number, frame):
     global command_timed_out
     command_timed_out = True
     # Get subprocess pid from shell_cmd's call stack.
-    sub_proc = gp.get_stack_var("sub_proc", 0)
+    sub_proc = gp.get_stack_var('sub_proc', 0)
     pid = sub_proc.pid
     gp.dprint_var(pid)
     # Terminate the child process group.
@@ -274,21 +260,19 @@ def shell_cmd_timed_out(signal_number, frame):
     return
 
 
-def shell_cmd(
-    command_string,
-    quiet=None,
-    print_output=None,
-    show_err=1,
-    test_mode=0,
-    time_out=None,
-    max_attempts=1,
-    retry_sleep_time=5,
-    valid_rcs=[0],
-    ignore_err=None,
-    return_stderr=0,
-    fork=0,
-    error_regexes=None,
-):
+def shell_cmd(command_string,
+              quiet=None,
+              print_output=None,
+              show_err=1,
+              test_mode=0,
+              time_out=None,
+              max_attempts=1,
+              retry_sleep_time=5,
+              valid_rcs=[0],
+              ignore_err=None,
+              return_stderr=0,
+              fork=0,
+              error_regexes=None):
     r"""
     Run the given command string in a shell and return a tuple consisting of the shell return code and the
     output.
@@ -346,10 +330,10 @@ def shell_cmd(
         raise ValueError(err_msg)
 
     # Assign default values to some of the arguments to this function.
-    quiet = int(gm.dft(quiet, gp.get_stack_var("quiet", 0)))
+    quiet = int(gm.dft(quiet, gp.get_stack_var('quiet', 0)))
     print_output = int(gm.dft(print_output, not quiet))
     show_err = int(show_err)
-    ignore_err = int(gm.dft(ignore_err, gp.get_stack_var("ignore_err", 1)))
+    ignore_err = int(gm.dft(ignore_err, gp.get_stack_var('ignore_err', 1)))
 
     gp.qprint_issuing(command_string, test_mode)
     if test_mode:
@@ -369,16 +353,14 @@ def shell_cmd(
     command_timed_out = False
     func_out_history_buf = ""
     for attempt_num in range(1, max_attempts + 1):
-        sub_proc = subprocess.Popen(
-            command_string,
-            bufsize=1,
-            shell=True,
-            universal_newlines=True,
-            executable="/bin/bash",
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=stderr,
-        )
+        sub_proc = subprocess.Popen(command_string,
+                                    bufsize=1,
+                                    shell=True,
+                                    universal_newlines=True,
+                                    executable='/bin/bash',
+                                    stdin=subprocess.PIPE,
+                                    stdout=subprocess.PIPE,
+                                    stderr=stderr)
         if fork:
             return sub_proc
 
@@ -405,7 +387,7 @@ def shell_cmd(
         shell_rc = sub_proc.returncode
         if shell_rc in valid_rcs:
             # Check output for text indicating there is an error.
-            if error_regexes and re.match("|".join(error_regexes), stdout_buf):
+            if error_regexes and re.match('|'.join(error_regexes), stdout_buf):
                 shell_rc = -1
             else:
                 break
@@ -433,25 +415,21 @@ def shell_cmd(
         gp.gp_print(func_out_buf)
     else:
         if show_err:
-            gp.gp_print(func_out_history_buf, stream="stderr")
+            gp.gp_print(func_out_history_buf, stream='stderr')
         else:
             # There is no error information to show so just print output from last loop iteration.
             gp.gp_print(func_out_buf)
         if not ignore_err:
             # If the caller has already asked to show error info, avoid repeating that in the failure message.
-            err_msg = (
-                "The prior shell command failed.\n" if show_err else err_msg
-            )
+            err_msg = "The prior shell command failed.\n" if show_err \
+                else err_msg
             if robot_env:
                 BuiltIn().fail(err_msg)
             else:
                 raise ValueError(err_msg)
 
-    return (
-        (shell_rc, stdout_buf, stderr_buf)
-        if return_stderr
+    return (shell_rc, stdout_buf, stderr_buf) if return_stderr \
         else (shell_rc, stdout_buf)
-    )
 
 
 def t_shell_cmd(command_string, **kwargs):
@@ -462,16 +440,14 @@ def t_shell_cmd(command_string, **kwargs):
     See shell_cmd prolog for details on all arguments.
     """
 
-    if "test_mode" in kwargs:
-        error_message = (
-            "Programmer error - test_mode is not a valid"
-            + " argument to this function."
-        )
+    if 'test_mode' in kwargs:
+        error_message = "Programmer error - test_mode is not a valid" +\
+            " argument to this function."
         gp.print_error_report(error_message)
         exit(1)
 
-    test_mode = int(gp.get_stack_var("test_mode", 0))
-    kwargs["test_mode"] = test_mode
+    test_mode = int(gp.get_stack_var('test_mode', 0))
+    kwargs['test_mode'] = test_mode
 
     return shell_cmd(command_string, **kwargs)
 
@@ -545,9 +521,8 @@ def re_order_kwargs(stack_frame_ix, **kwargs):
     new_kwargs = collections.OrderedDict()
 
     # Get position number of first keyword on the calling line of code.
-    (args, varargs, keywords, locals) = inspect.getargvalues(
-        inspect.stack()[stack_frame_ix][0]
-    )
+    (args, varargs, keywords, locals) =\
+        inspect.getargvalues(inspect.stack()[stack_frame_ix][0])
     first_kwarg_pos = 1 + len(args)
     if varargs is not None:
         first_kwarg_pos += len(locals[varargs])
@@ -556,7 +531,7 @@ def re_order_kwargs(stack_frame_ix, **kwargs):
         arg_name = gp.get_arg_name(None, arg_num, stack_frame_ix + 2)
         # Continuing with the prior example, the following line will result
         # in key being set to 'arg1'.
-        key = arg_name.split("=")[0]
+        key = arg_name.split('=')[0]
         new_kwargs[key] = kwargs[key]
 
     return new_kwargs
@@ -709,7 +684,7 @@ def create_command_string(command, *pos_parms, **options):
         del pos_parms[-1]
     else:
         # Either get stack_frame_ix from the caller via options or set it to the default value.
-        stack_frame_ix = options.pop("_stack_frame_ix_", 1)
+        stack_frame_ix = options.pop('_stack_frame_ix_', 1)
         if gm.python_version < gm.ordered_dict_version:
             # Re-establish the original options order as specified on the original line of code.  This
             # function depends on correct order.
@@ -734,6 +709,6 @@ def create_command_string(command, *pos_parms, **options):
                 command_string += gm.quote_bash_parm(str(value))
     # Finally, append the pos_parms to the end of the command_string.  Use filter to eliminate blank pos
     # parms.
-    command_string = " ".join([command_string] + list(filter(None, pos_parms)))
+    command_string = ' '.join([command_string] + list(filter(None, pos_parms)))
 
     return command_string

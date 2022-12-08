@@ -4,18 +4,16 @@ r"""
 This module provides many valuable functions such as my_parm_file.
 """
 
-import collections
-import errno
-import inspect
-import json
-import os
-import random
-import shutil
-
 # sys and os are needed to get the program dir path and program name.
 import sys
+import errno
+import os
+import shutil
+import collections
+import json
 import time
-
+import inspect
+import random
 try:
     import ConfigParser
 except ImportError:
@@ -24,20 +22,17 @@ try:
     import StringIO
 except ImportError:
     import io
-
 import re
 import socket
 import tempfile
-
 try:
     import psutil
-
     psutil_imported = True
 except ImportError:
     psutil_imported = False
 
-import gen_cmd as gc
 import gen_print as gp
+import gen_cmd as gc
 
 robot_env = gp.robot_env
 if robot_env:
@@ -70,7 +65,7 @@ def makedirs(path, mode=0o777, quiet=None):
     mode                            The mode or permissions to be granted to the created directories.
     quiet                           Indicates whether this function should run the print_issuing() function.
     """
-    quiet = int(dft(quiet, gp.get_stack_var("quiet", 0)))
+    quiet = int(dft(quiet, gp.get_stack_var('quiet', 0)))
     gp.qprint_issuing("os.makedirs('" + path + "', mode=" + oct(mode) + ")")
     try:
         os.makedirs(path, mode)
@@ -89,11 +84,9 @@ def rmtree(path, ignore_errors=False, onerror=None, quiet=None):
     (All parms are passed directly to shutil.rmtree.  See its prolog for details)
     quiet                           Indicates whether this function should run the print_issuing() function.
     """
-    quiet = int(dft(quiet, gp.get_stack_var("quiet", 0)))
+    quiet = int(dft(quiet, gp.get_stack_var('quiet', 0)))
     print_string = gp.sprint_executing(max_width=2000)
-    print_string = re.sub(
-        r"Executing: ", "Issuing: shutil.", print_string.rstrip("\n")
-    )
+    print_string = re.sub(r"Executing: ", "Issuing: shutil.", print_string.rstrip("\n"))
     gp.qprintn(re.sub(r", quiet[ ]?=.*", ")", print_string))
     shutil.rmtree(path, ignore_errors, onerror)
 
@@ -109,7 +102,7 @@ def chdir(path, quiet=None):
     path                            The path of the directory to change to.
     quiet                           Indicates whether this function should run the print_issuing() function.
     """
-    quiet = int(dft(quiet, gp.get_stack_var("quiet", 0)))
+    quiet = int(dft(quiet, gp.get_stack_var('quiet', 0)))
     gp.qprint_issuing("os.chdir('" + path + "')")
     os.chdir(path)
 
@@ -124,13 +117,11 @@ def which(file_path):
     file_path                       The relative file path (e.g. "my_file" or "lib/my_file").
     """
 
-    shell_rc, out_buf = gc.cmd_fnc_u(
-        "which " + file_path, quiet=1, print_output=0, show_err=0
-    )
+    shell_rc, out_buf = gc.cmd_fnc_u("which " + file_path, quiet=1,
+                                     print_output=0, show_err=0)
     if shell_rc != 0:
-        error_message = (
-            'Failed to find complete path for file "' + file_path + '".\n'
-        )
+        error_message = "Failed to find complete path for file \"" +\
+                        file_path + "\".\n"
         error_message += gp.sprint_var(shell_rc, gp.hexa())
         error_message += out_buf
         if robot_env:
@@ -144,7 +135,9 @@ def which(file_path):
     return file_path
 
 
-def add_path(new_path, path, position=0):
+def add_path(new_path,
+             path,
+             position=0):
     r"""
     Add new_path to path, provided that path doesn't already contain new_path, and return the result.
 
@@ -190,7 +183,9 @@ def dft(value, default):
     return default if value is None else value
 
 
-def get_mod_global(var_name, default=None, mod_name="__main__"):
+def get_mod_global(var_name,
+                   default=None,
+                   mod_name="__main__"):
     r"""
     Get module global variable value and return it.
 
@@ -209,12 +204,10 @@ def get_mod_global(var_name, default=None, mod_name="__main__"):
     try:
         module = sys.modules[mod_name]
     except KeyError:
-        gp.print_error_report(
-            "Programmer error - The mod_name passed to"
-            + " this function is invalid:\n"
-            + gp.sprint_var(mod_name)
-        )
-        raise ValueError("Programmer error.")
+        gp.print_error_report("Programmer error - The mod_name passed to"
+                              + " this function is invalid:\n"
+                              + gp.sprint_var(mod_name))
+        raise ValueError('Programmer error.')
 
     if default is None:
         return getattr(module, var_name)
@@ -222,7 +215,8 @@ def get_mod_global(var_name, default=None, mod_name="__main__"):
         return getattr(module, var_name, default)
 
 
-def global_default(var_value, default=0):
+def global_default(var_value,
+                   default=0):
     r"""
     If var_value is not None, return it.  Otherwise, return the global
     variable of the same name, if it exists.  If not, return default.
@@ -245,7 +239,9 @@ def global_default(var_value, default=0):
     return dft(var_value, get_mod_global(var_name, 0))
 
 
-def set_mod_global(var_value, mod_name="__main__", var_name=None):
+def set_mod_global(var_value,
+                   mod_name="__main__",
+                   var_name=None):
     r"""
     Set a global variable for a given module.
 
@@ -259,12 +255,10 @@ def set_mod_global(var_value, mod_name="__main__", var_name=None):
     try:
         module = sys.modules[mod_name]
     except KeyError:
-        gp.print_error_report(
-            "Programmer error - The mod_name passed to"
-            + " this function is invalid:\n"
-            + gp.sprint_var(mod_name)
-        )
-        raise ValueError("Programmer error.")
+        gp.print_error_report("Programmer error - The mod_name passed to"
+                              + " this function is invalid:\n"
+                              + gp.sprint_var(mod_name))
+        raise ValueError('Programmer error.')
 
     if var_name is None:
         var_name = gp.get_arg_name(None, 1, 2)
@@ -298,7 +292,7 @@ def my_parm_file(prop_file_path):
         string_file = io.StringIO()
 
     # Write the dummy section header to the string file.
-    string_file.write("[dummysection]\n")
+    string_file.write('[dummysection]\n')
     # Write the entire contents of the properties file to the string file.
     string_file.write(open(prop_file_path).read())
     # Rewind the string file.
@@ -315,12 +309,15 @@ def my_parm_file(prop_file_path):
     config_parser.readfp(string_file)
     # Return the properties as a dictionary.
     if robot_env:
-        return DotDict(config_parser.items("dummysection"))
+        return DotDict(config_parser.items('dummysection'))
     else:
-        return collections.OrderedDict(config_parser.items("dummysection"))
+        return collections.OrderedDict(config_parser.items('dummysection'))
 
 
-def file_to_list(file_path, newlines=0, comments=1, trim=0):
+def file_to_list(file_path,
+                 newlines=0,
+                 comments=1,
+                 trim=0):
     r"""
     Return the contents of a file as a list.  Each element of the resulting
     list is one line from the file.
@@ -357,7 +354,7 @@ def file_to_str(*args, **kwargs):
     See file_to_list defined above for description of arguments.
     """
 
-    return "\n".join(file_to_list(*args, **kwargs))
+    return '\n'.join(file_to_list(*args, **kwargs))
 
 
 def append_file(file_path, buffer):
@@ -379,7 +376,7 @@ def return_path_list():
     the list will be normalized and have a trailing slash added.
     """
 
-    PATH_LIST = os.environ["PATH"].split(":")
+    PATH_LIST = os.environ['PATH'].split(":")
     PATH_LIST = [os.path.normpath(path) + os.sep for path in PATH_LIST]
 
     return PATH_LIST
@@ -405,7 +402,7 @@ def escape_bash_quotes(buffer):
     buffer                          The string whose quotes are to be escaped.
     """
 
-    return re.sub("'", "'\\''", buffer)
+    return re.sub("\'", "\'\\\'\'", buffer)
 
 
 def quote_bash_parm(parm):
@@ -427,18 +424,19 @@ def quote_bash_parm(parm):
     # Tilde expansion: ~
     # Piped commands: |
     # Bash re-direction: >, <
-    bash_special_chars = set(" '\"$*?[]+@!{}~|><")
+    bash_special_chars = set(' \'"$*?[]+@!{}~|><')
 
     if any((char in bash_special_chars) for char in parm):
         return "'" + escape_bash_quotes(parm) + "'"
 
-    if parm == "":
+    if parm == '':
         parm = "''"
 
     return parm
 
 
-def get_host_name_ip(host=None, short_name=0):
+def get_host_name_ip(host=None,
+                     short_name=0):
     r"""
     Get the host name and the IP address for the given host and return them as a tuple.
 
@@ -453,11 +451,8 @@ def get_host_name_ip(host=None, short_name=0):
     try:
         host_ip = socket.gethostbyname(host)
     except socket.gaierror as my_gaierror:
-        message = (
-            "Unable to obtain the host name for the following host:"
-            + "\n"
-            + gp.sprint_var(host)
-        )
+        message = "Unable to obtain the host name for the following host:" +\
+                  "\n" + gp.sprint_var(host)
         gp.print_error_report(message)
         raise my_gaierror
 
@@ -493,7 +488,8 @@ def pid_active(pid):
     return True
 
 
-def to_signed(number, bit_width=None):
+def to_signed(number,
+              bit_width=None):
     r"""
     Convert number to a signed number and return the result.
 
@@ -534,7 +530,7 @@ def to_signed(number, bit_width=None):
 
     if number < 0:
         return number
-    neg_bit_mask = 2 ** (bit_width - 1)
+    neg_bit_mask = 2**(bit_width - 1)
     if number & neg_bit_mask:
         return ((2**bit_width) - number) * -1
     else:
@@ -542,6 +538,7 @@ def to_signed(number, bit_width=None):
 
 
 def get_child_pids(quiet=1):
+
     r"""
     Get and return a list of pids representing all first-generation processes that are the children of the
     current process.
@@ -567,30 +564,24 @@ def get_child_pids(quiet=1):
         # Otherwise, find child pids using shell commands.
         print_output = not quiet
 
-        ps_cmd_buf = (
-            "ps --no-headers --ppid " + str(os.getpid()) + " -o pid,args"
-        )
+        ps_cmd_buf = "ps --no-headers --ppid " + str(os.getpid()) +\
+            " -o pid,args"
         # Route the output of ps to a temporary file for later grepping.  Avoid using " | grep" in the ps
         # command string because it creates yet another process which is of no interest to the caller.
         temp = tempfile.NamedTemporaryFile()
         temp_file_path = temp.name
-        gc.shell_cmd(
-            ps_cmd_buf + " > " + temp_file_path, print_output=print_output
-        )
+        gc.shell_cmd(ps_cmd_buf + " > " + temp_file_path,
+                     print_output=print_output)
         # Sample contents of the temporary file:
         # 30703 sleep 2
         # 30795 /bin/bash -c ps --no-headers --ppid 30672 -o pid,args > /tmp/tmpqqorWY
         # Use egrep to exclude the "ps" process itself from the results collected with the prior shell_cmd
         # invocation.  Only the other children are of interest to the caller.  Use cut on the grep results to
         # obtain only the pid column.
-        rc, output = gc.shell_cmd(
-            "egrep -v '"
-            + re.escape(ps_cmd_buf)
-            + "' "
-            + temp_file_path
-            + " | cut -c1-5",
-            print_output=print_output,
-        )
+        rc, output = \
+            gc.shell_cmd("egrep -v '" + re.escape(ps_cmd_buf) + "' "
+                         + temp_file_path + " | cut -c1-5",
+                         print_output=print_output)
         # Split the output buffer by line into a list.  Strip each element of extra spaces and convert each
         # element to an integer.
         return map(int, map(str.strip, filter(None, output.split("\n"))))
@@ -680,7 +671,8 @@ def get_python_version():
     return re.sub("[^0-9\\.]", "", sys_version)
 
 
-python_version = version_tuple(get_python_version())
+python_version = \
+    version_tuple(get_python_version())
 ordered_dict_version = version_tuple("3.6")
 
 
@@ -722,14 +714,11 @@ def create_temp_file_path(delim=":", suffix=""):
         pass
 
     callers_stack_frame = inspect.stack()[1]
-    file_name_elements = [
-        gp.pgm_name,
-        callers_stack_frame.function,
-        "line_" + str(callers_stack_frame.lineno),
-        "pid_" + str(os.getpid()),
-        str(random.randint(0, 1000000)),
-        suffix,
-    ]
+    file_name_elements = \
+        [
+            gp.pgm_name, callers_stack_frame.function, "line_" + str(callers_stack_frame.lineno),
+            "pid_" + str(os.getpid()), str(random.randint(0, 1000000)), suffix
+        ]
     temp_file_name = delim.join(file_name_elements)
 
     temp_file_path = temp_dir_path + temp_file_name

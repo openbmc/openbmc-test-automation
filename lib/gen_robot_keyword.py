@@ -8,7 +8,10 @@ import gen_print as gp
 from robot.libraries.BuiltIn import BuiltIn
 
 
-def run_key(keyword_buf, quiet=None, test_mode=None, ignore=0):
+def run_key(keyword_buf,
+            quiet=None,
+            test_mode=None,
+            ignore=0):
     r"""
     Run the given keyword, return the status and the keyword return values.
 
@@ -44,29 +47,28 @@ def run_key(keyword_buf, quiet=None, test_mode=None, ignore=0):
     ignore = int(ignore)
 
     # Convert the keyword_buf into a list split wherever 2 or more spaces are found.
-    keyword_list = keyword_buf.split("  ")
+    keyword_list = keyword_buf.split('  ')
     # Strip spaces from each argument to make the output look clean and uniform.
-    keyword_list = [item.strip(" ") for item in keyword_list]
+    keyword_list = [item.strip(' ') for item in keyword_list]
 
     if not quiet:
         # Join the list back into keyword_buf for the sake of output.
-        keyword_buf = "  ".join(keyword_list)
+        keyword_buf = '  '.join(keyword_list)
         gp.pissuing(keyword_buf, test_mode)
 
     if test_mode:
-        return "PASS", ""
+        return 'PASS', ""
 
     try:
-        status, ret_values = BuiltIn().run_keyword_and_ignore_error(
-            *keyword_list
-        )
+        status, ret_values = \
+            BuiltIn().run_keyword_and_ignore_error(*keyword_list)
     except Exception as my_assertion_error:
         status = "FAIL"
         ret_values = my_assertion_error.args[0]
 
-    if status != "PASS":
+    if status != 'PASS':
         # Output the error message to stderr.
-        BuiltIn().log_to_console(ret_values, stream="STDERR")
+        BuiltIn().log_to_console(ret_values, stream='STDERR')
         if not ignore:
             # Fail with the given error message.
             BuiltIn().fail(ret_values)
@@ -74,7 +76,9 @@ def run_key(keyword_buf, quiet=None, test_mode=None, ignore=0):
     return status, ret_values
 
 
-def run_key_u(keyword_buf, quiet=None, ignore=0):
+def run_key_u(keyword_buf,
+              quiet=None,
+              ignore=0):
     r"""
     Run keyword unconditionally (i.e. without regard to global test_mode setting).
 

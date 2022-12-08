@@ -4,17 +4,15 @@ r"""
 Companion file to utils.robot.
 """
 
-import collections
-import json
 import os
-
-import bmc_ssh_utils as bsu
+import json
+import collections
 import gen_print as gp
 import gen_robot_keyword as grk
+import bmc_ssh_utils as bsu
 import var_funcs as vf
-from robot.libraries import DateTime
 from robot.libraries.BuiltIn import BuiltIn
-
+from robot.libraries import DateTime
 try:
     from robot.utils import DotDict
 except ImportError:
@@ -49,12 +47,12 @@ def set_power_policy_method():
     """
 
     # Retrieve global variables.
-    power_policy_setup = int(
-        BuiltIn().get_variable_value("${power_policy_setup}", default=0)
-    )
-    bmc_power_policy_method = BuiltIn().get_variable_value(
-        "${bmc_power_policy_method}", default=0
-    )
+    power_policy_setup = \
+        int(BuiltIn().get_variable_value("${power_policy_setup}",
+                                         default=0))
+    bmc_power_policy_method = \
+        BuiltIn().get_variable_value("${bmc_power_policy_method}",
+                                     default=0)
     gp.dpvar(power_policy_setup)
 
     # If this function has already been run once, we need not continue.
@@ -67,27 +65,25 @@ def set_power_policy_method():
     # determine what it should be.
     if bmc_power_policy_method == "":
         status, ret_values = grk.run_key_u("New Get Power Policy", ignore=1)
-        if status == "PASS":
-            bmc_power_policy_method = "New"
+        if status == 'PASS':
+            bmc_power_policy_method = 'New'
         else:
-            bmc_power_policy_method = "Old"
+            bmc_power_policy_method = 'Old'
 
     gp.qpvar(bmc_power_policy_method)
     # For old style, we will rewrite these global variable settings to old
     # values.
     if bmc_power_policy_method == "Old":
-        BuiltIn().set_global_variable(
-            "${RESTORE_LAST_STATE}", "RESTORE_LAST_STATE"
-        )
-        BuiltIn().set_global_variable("${ALWAYS_POWER_ON}", "ALWAYS_POWER_ON")
-        BuiltIn().set_global_variable(
-            "${ALWAYS_POWER_OFF}", "ALWAYS_POWER_OFF"
-        )
+        BuiltIn().set_global_variable("${RESTORE_LAST_STATE}",
+                                      "RESTORE_LAST_STATE")
+        BuiltIn().set_global_variable("${ALWAYS_POWER_ON}",
+                                      "ALWAYS_POWER_ON")
+        BuiltIn().set_global_variable("${ALWAYS_POWER_OFF}",
+                                      "ALWAYS_POWER_OFF")
 
     # Set global variables to control subsequent calls to this function.
-    BuiltIn().set_global_variable(
-        "${bmc_power_policy_method}", bmc_power_policy_method
-    )
+    BuiltIn().set_global_variable("${bmc_power_policy_method}",
+                                  bmc_power_policy_method)
     BuiltIn().set_global_variable("${power_policy_setup}", 1)
 
 
@@ -107,16 +103,14 @@ def translate_power_policy_value(policy):
     method of storing the policy value.
     """
 
-    valid_power_policy_vars = BuiltIn().get_variable_value(
-        "${valid_power_policy_vars}"
-    )
+    valid_power_policy_vars = \
+        BuiltIn().get_variable_value("${valid_power_policy_vars}")
 
     if policy not in valid_power_policy_vars:
         return policy
 
-    status, ret_values = grk.run_key_u(
-        "Get Variable Value  ${" + policy + "}", quiet=1
-    )
+    status, ret_values = grk.run_key_u("Get Variable Value  ${" + policy + "}",
+                                       quiet=1)
     return ret_values
 
 
@@ -138,7 +132,7 @@ def get_bmc_date_time():
       [rtc_in_local_tz]:          no
     """
 
-    out_buf, stderr, rc = bsu.bmc_execute_command("timedatectl")
+    out_buf, stderr, rc = bsu.bmc_execute_command('timedatectl')
     # Example of output returned by call to timedatectl:
     #       Local time: Fri 2017-11-03 15:27:56 UTC
     #   Universal time: Fri 2017-11-03 15:27:56 UTC
@@ -163,41 +157,40 @@ def get_bmc_date_time():
         result_time_dict[key] = value
         if not key.endswith("_time"):
             continue
-        result_time_dict[key + "_seconds"] = int(
-            DateTime.convert_date(value, result_format="epoch")
-        )
+        result_time_dict[key + '_seconds'] = \
+            int(DateTime.convert_date(value, result_format='epoch'))
 
     return result_time_dict
 
 
 def get_bmc_df(df_parm_string=""):
     r"""
-        Get df report from BMC and return as a report "object".
+    Get df report from BMC and return as a report "object".
 
-        A df report object is a list where each entry is a dictionary whose keys
-        are the field names from the first entry in report_list.
+    A df report object is a list where each entry is a dictionary whose keys
+    are the field names from the first entry in report_list.
 
-        Example df report object:
+    Example df report object:
 
-        df_report:
-          df_report[0]:
-            [filesystem]:    dev
-            [1k-blocks]:     247120
-            [used]:          0
-            [available]:     247120
-            [use%]:          0%
-            [mounted]:       /dev
-          df_report[1]:
-            [filesystem]:    dev
-            [1k-blocks]:     247120
-            [used]:          0
-            [available]:     247120
-            [use%]:          0%
-            [mounted]:       /dev
+    df_report:
+      df_report[0]:
+        [filesystem]:    dev
+        [1k-blocks]:     247120
+        [used]:          0
+        [available]:     247120
+        [use%]:          0%
+        [mounted]:       /dev
+      df_report[1]:
+        [filesystem]:    dev
+        [1k-blocks]:     247120
+        [used]:          0
+        [available]:     247120
+        [use%]:          0%
+        [mounted]:       /dev
 
-    .   Description of argument(s):
-        df_parm_string  A string containing valid df command parms (e.g.
-                        "-h /var").
+.   Description of argument(s):
+    df_parm_string  A string containing valid df command parms (e.g.
+                    "-h /var").
     """
 
     out_buf, stderr, rc = bsu.bmc_execute_command("df " + df_parm_string)
@@ -217,11 +210,11 @@ def get_sbe():
 
 def compare_mac_address(sys_mac_addr, user_mac_addr):
     r"""
-        Return 1 if the MAC value matched, otherwise 0.
+    Return 1 if the MAC value matched, otherwise 0.
 
-    .   Description of argument(s):
-        sys_mac_addr   A valid system MAC string (e.g. "70:e2:84:14:2a:08")
-        user_mac_addr  A user provided MAC string (e.g. "70:e2:84:14:2a:08")
+.   Description of argument(s):
+    sys_mac_addr   A valid system MAC string (e.g. "70:e2:84:14:2a:08")
+    user_mac_addr  A user provided MAC string (e.g. "70:e2:84:14:2a:08")
     """
 
     index = 0
@@ -302,11 +295,8 @@ def get_os_ethtool(interface_name):
 
     # Using sed and tail to massage the data a bit before running
     # key_value_outbuf_to_dict.
-    cmd_buf = (
-        "ethtool "
-        + interface_name
-        + " | sed -re 's/(.* link modes:)(.*)/\\1\\n\\2/g' | tail -n +2"
-    )
+    cmd_buf = "ethtool " + interface_name +\
+        " | sed -re 's/(.* link modes:)(.*)/\\1\\n\\2/g' | tail -n +2"
     stdout, stderr, rc = bsu.os_execute_command(cmd_buf)
     result = vf.key_value_outbuf_to_dict(stdout, process_indent=1, strip=" \t")
 
@@ -348,7 +338,7 @@ def get_bmc_release_info():
       [openbmc_target_machine]:       witherspoon
     """
 
-    out_buf, stderr, rc = bsu.bmc_execute_command("cat /etc/os-release")
+    out_buf, stderr, rc = bsu.bmc_execute_command('cat /etc/os-release')
     return vf.key_value_outbuf_to_dict(out_buf, delim="=", strip='"')
 
 
@@ -381,7 +371,7 @@ def get_os_release_info():
       [redhat_support_product_version]:               7.6
     """
 
-    out_buf, stderr, rc = bsu.os_execute_command("cat /etc/os-release")
+    out_buf, stderr, rc = bsu.os_execute_command('cat /etc/os-release')
     return vf.key_value_outbuf_to_dict(out_buf, delim="=", strip='"')
 
 
@@ -396,12 +386,10 @@ def pdbg(option_string, **bsu_options):
     """
 
     # Default print_out to 1.
-    if "print_out" not in bsu_options:
-        bsu_options["print_out"] = 1
+    if 'print_out' not in bsu_options:
+        bsu_options['print_out'] = 1
 
-    stdout, stderr, rc = bsu.bmc_execute_command(
-        "pdbg " + option_string, **bsu_options
-    )
+    stdout, stderr, rc = bsu.bmc_execute_command('pdbg ' + option_string, **bsu_options)
     return stdout
 
 
@@ -418,8 +406,8 @@ def ecmd(option_string, **bsu_options):
     """
 
     # Default print_out to 1.
-    if "print_out" not in bsu_options:
-        bsu_options["print_out"] = 1
+    if 'print_out' not in bsu_options:
+        bsu_options['print_out'] = 1
 
     stdout, stderr, rc = bsu.bmc_execute_command(option_string, **bsu_options)
     return stdout
@@ -435,7 +423,7 @@ def split_string_with_index(stri, n):
     """
 
     n = int(n)
-    data = [stri[index : index + n] for index in range(0, len(stri), n)]
+    data = [stri[index: index + n] for index in range(0, len(stri), n)]
     return data
 
 
@@ -481,6 +469,6 @@ def return_decoded_string(input):
     returns decoded string of encoded byte.
     """
 
-    encoded_string = input.encode("ascii", "ignore")
+    encoded_string = input.encode('ascii', 'ignore')
     decoded_string = encoded_string.decode()
     return decoded_string

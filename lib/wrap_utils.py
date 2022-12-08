@@ -7,9 +7,10 @@ additional functionality over and above what the base function provides).
 """
 
 
-def create_func_def_string(
-    base_func_name, wrap_func_name, func_body_template, replace_dict
-):
+def create_func_def_string(base_func_name,
+                           wrap_func_name,
+                           func_body_template,
+                           replace_dict):
     r"""
     Create and return a complete function definition as a string.  The caller may run "exec" on the resulting
     string to create the desired function.
@@ -40,10 +41,10 @@ def create_func_def_string(
     func_def.insert(0, func_def_line)
     # Make sure the replace_dict has a 'call_line'/call_line pair so that any '<call_line>' text gets
     # replaced as intended.
-    replace_dict["call_line"] = call_line
+    replace_dict['call_line'] = call_line
 
     # Do the replacements.
     for key, value in replace_dict.items():
         func_def = [w.replace("<" + key + ">", value) for w in func_def]
 
-    return "\n".join(func_def) + "\n"
+    return '\n'.join(func_def) + "\n"

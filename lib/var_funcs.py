@@ -14,9 +14,9 @@ except ImportError:
 
 import collections
 
-import func_args as fa
-import gen_misc as gm
 import gen_print as gp
+import gen_misc as gm
+import func_args as fa
 
 
 def create_var_dict(*args):
@@ -57,15 +57,13 @@ def create_var_dict(*args):
     return result_dict
 
 
-default_record_delim = ":"
-default_key_val_delim = "."
+default_record_delim = ':'
+default_key_val_delim = '.'
 
 
-def join_dict(
-    dict,
-    record_delim=default_record_delim,
-    key_val_delim=default_key_val_delim,
-):
+def join_dict(dict,
+              record_delim=default_record_delim,
+              key_val_delim=default_key_val_delim):
     r"""
     Join a dictionary's keys and values into a string and return the string.
 
@@ -89,17 +87,14 @@ def join_dict(
     str1:                                             first_name.Steve:last_name.Smith
     """
 
-    format_str = "%s" + key_val_delim + "%s"
-    return record_delim.join(
-        [format_str % (key, value) for (key, value) in dict.items()]
-    )
+    format_str = '%s' + key_val_delim + '%s'
+    return record_delim.join([format_str % (key, value) for (key, value) in
+                              dict.items()])
 
 
-def split_to_dict(
-    string,
-    record_delim=default_record_delim,
-    key_val_delim=default_key_val_delim,
-):
+def split_to_dict(string,
+                  record_delim=default_record_delim,
+                  key_val_delim=default_key_val_delim):
     r"""
     Split a string into a dictionary and return it.
 
@@ -141,7 +136,9 @@ def split_to_dict(
     return result_dict
 
 
-def create_file_path(file_name_dict, dir_path="/tmp/", file_suffix=""):
+def create_file_path(file_name_dict,
+                     dir_path="/tmp/",
+                     file_suffix=""):
     r"""
     Create a file path using the given parameters and return it.
 
@@ -190,14 +187,18 @@ def parse_file_path(file_path):
     dir_path = os.path.dirname(file_path) + os.sep
     file_path = os.path.basename(file_path)
 
-    result_dict["dir_path"] = dir_path
+    result_dict['dir_path'] = dir_path
 
     result_dict.update(split_to_dict(file_path))
 
     return result_dict
 
 
-def parse_key_value(string, delim=":", strip=" ", to_lower=1, underscores=1):
+def parse_key_value(string,
+                    delim=":",
+                    strip=" ",
+                    to_lower=1,
+                    underscores=1):
     r"""
     Parse a key/value string and return as a key/value tuple.
 
@@ -251,7 +252,9 @@ def parse_key_value(string, delim=":", strip=" ", to_lower=1, underscores=1):
     return key, value
 
 
-def key_value_list_to_dict(key_value_list, process_indent=0, **args):
+def key_value_list_to_dict(key_value_list,
+                           process_indent=0,
+                           **args):
     r"""
     Convert a list containing key/value strings or tuples to a dictionary and return it.
 
@@ -368,9 +371,8 @@ def key_value_list_to_dict(key_value_list, process_indent=0, **args):
         if len(sub_list) > 0:
             if any(delim in word for word in sub_list):
                 # If delim is found anywhere in the sub_list, we'll process as a sub-dictionary.
-                result_dict[parent_key] = key_value_list_to_dict(
-                    sub_list, **args
-                )
+                result_dict[parent_key] = key_value_list_to_dict(sub_list,
+                                                                 **args)
             else:
                 result_dict[parent_key] = list(map(str.strip, sub_list))
             del sub_list[:]
@@ -392,7 +394,8 @@ def key_value_list_to_dict(key_value_list, process_indent=0, **args):
     return result_dict
 
 
-def key_value_outbuf_to_dict(out_buf, **args):
+def key_value_outbuf_to_dict(out_buf,
+                             **args):
     r"""
     Convert a buffer with a key/value string on each line to a dictionary and return it.
 
@@ -435,7 +438,8 @@ def key_value_outbuf_to_dict(out_buf, **args):
     return key_value_list_to_dict(key_var_list, **args)
 
 
-def key_value_outbuf_to_dicts(out_buf, **args):
+def key_value_outbuf_to_dicts(out_buf,
+                              **args):
     r"""
     Convert a buffer containing multiple sections with key/value strings on each line to a list of
     dictionaries and return it.
@@ -503,13 +507,11 @@ def key_value_outbuf_to_dicts(out_buf, **args):
     **args                          Arguments to be interpreted by parse_key_value.  (See docstring of
                                     parse_key_value function for details).
     """
-    return [
-        key_value_outbuf_to_dict(x, **args)
-        for x in re.split("\n[\n]+", out_buf)
-    ]
+    return [key_value_outbuf_to_dict(x, **args) for x in re.split('\n[\n]+', out_buf)]
 
 
 def create_field_desc_regex(line):
+
     r"""
     Create a field descriptor regular expression based on the input line and return it.
 
@@ -565,12 +567,14 @@ def create_field_desc_regex(line):
             regexes.append("(.{" + str(len(descriptor)) + "})")
 
     # Join the regexes list into a regex string.
-    field_desc_regex = " ".join(regexes)
+    field_desc_regex = ' '.join(regexes)
 
     return field_desc_regex
 
 
-def list_to_report(report_list, to_lower=1, field_delim=None):
+def list_to_report(report_list,
+                   to_lower=1,
+                   field_delim=None):
     r"""
     Convert a list containing report text lines to a report "object" and return it.
 
@@ -656,9 +660,8 @@ def list_to_report(report_list, to_lower=1, field_delim=None):
     else:
         # Pad the line with spaces on the right to facilitate processing with field_desc_regex.
         header_line = pad_format_string % header_line
-        columns = list(
-            map(str.strip, re.findall(field_desc_regex, header_line)[0])
-        )
+        columns = list(map(str.strip,
+                           re.findall(field_desc_regex, header_line)[0]))
 
     report_obj = []
     for report_line in report_list[1:]:
@@ -667,9 +670,8 @@ def list_to_report(report_list, to_lower=1, field_delim=None):
         else:
             # Pad the line with spaces on the right to facilitate processing with field_desc_regex.
             report_line = pad_format_string % report_line
-            line = list(
-                map(str.strip, re.findall(field_desc_regex, report_line)[0])
-            )
+            line = list(map(str.strip,
+                            re.findall(field_desc_regex, report_line)[0]))
         try:
             line_dict = collections.OrderedDict(zip(columns, line))
         except AttributeError:
@@ -679,7 +681,8 @@ def list_to_report(report_list, to_lower=1, field_delim=None):
     return report_obj
 
 
-def outbuf_to_report(out_buf, **args):
+def outbuf_to_report(out_buf,
+                     **args):
     r"""
     Convert a text buffer containing report lines to a report "object" and return it.
 
@@ -822,11 +825,8 @@ def match_struct(structure, match_dict, regex=False):
             if len(struct_key_values) == 0:
                 return False
             if regex:
-                matches = [
-                    x
-                    for x in struct_key_values
-                    if re.search(match_value, str(x))
-                ]
+                matches = [x for x in struct_key_values
+                           if re.search(match_value, str(x))]
                 if not matches:
                     return False
             elif match_value not in struct_key_values:

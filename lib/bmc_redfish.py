@@ -4,16 +4,17 @@ r"""
 See class prolog below for details.
 """
 
-import json
-import re
 import sys
+import re
+import json
+from redfish_plus import redfish_plus
+from robot.libraries.BuiltIn import BuiltIn
 from json.decoder import JSONDecodeError
+from redfish.rest.v1 import InvalidCredentialsError
 
 import func_args as fa
 import gen_print as gp
-from redfish.rest.v1 import InvalidCredentialsError
-from redfish_plus import redfish_plus
-from robot.libraries.BuiltIn import BuiltIn
+
 
 MTLS_ENABLED = BuiltIn().get_variable_value("${MTLS_ENABLED}")
 
@@ -43,7 +44,7 @@ class bmc_redfish(redfish_plus):
         """
         self.__inited__ = False
         try:
-            if MTLS_ENABLED == "True":
+            if MTLS_ENABLED == 'True':
                 self.__inited__ = True
             else:
                 super(bmc_redfish, self).__init__(*args, **kwargs)
@@ -69,7 +70,7 @@ class bmc_redfish(redfish_plus):
         kwargs                      See parent class method prolog for details.
         """
 
-        if MTLS_ENABLED == "True":
+        if MTLS_ENABLED == 'True':
             return None
         if not self.__inited__:
             message = "bmc_redfish.__init__() was never successfully run.  It "
@@ -81,12 +82,11 @@ class bmc_redfish(redfish_plus):
         openbmc_password = BuiltIn().get_variable_value("${OPENBMC_PASSWORD}")
         username, args, kwargs = fa.pop_arg(openbmc_username, *args, **kwargs)
         password, args, kwargs = fa.pop_arg(openbmc_password, *args, **kwargs)
-        auth, args, kwargs = fa.pop_arg("session", *args, **kwargs)
+        auth, args, kwargs = fa.pop_arg('session', *args, **kwargs)
 
         try:
-            super(bmc_redfish, self).login(
-                username, password, auth, *args, **kwargs
-            )
+            super(bmc_redfish, self).login(username, password, auth,
+                                           *args, **kwargs)
         # Handle InvalidCredentialsError.
         # (raise redfish.rest.v1.InvalidCredentialsError if not [200, 201, 202, 204])
         except InvalidCredentialsError:
@@ -96,9 +96,8 @@ class bmc_redfish(redfish_plus):
             e_message = "Re-try login due to exception and "
             e_message += "it is likely error response from server side."
             BuiltIn().log_to_console(e_message)
-            super(bmc_redfish, self).login(
-                username, password, auth, *args, **kwargs
-            )
+            super(bmc_redfish, self).login(username, password, auth,
+                                           *args, **kwargs)
         # Handle JSONDecodeError and others.
         except JSONDecodeError:
             except_type, except_value, except_traceback = sys.exc_info()
@@ -107,9 +106,8 @@ class bmc_redfish(redfish_plus):
             e_message = "Re-try login due to JSONDecodeError exception and "
             e_message += "it is likely error response from server side."
             BuiltIn().log_to_console(e_message)
-            super(bmc_redfish, self).login(
-                username, password, auth, *args, **kwargs
-            )
+            super(bmc_redfish, self).login(username, password, auth,
+                                           *args, **kwargs)
         except ValueError:
             except_type, except_value, except_traceback = sys.exc_info()
             BuiltIn().log_to_console(str(except_type))
@@ -118,7 +116,8 @@ class bmc_redfish(redfish_plus):
             BuiltIn().log_to_console(e_message)
 
     def logout(self):
-        if MTLS_ENABLED == "True":
+
+        if MTLS_ENABLED == 'True':
             return None
         else:
             super(bmc_redfish, self).logout()
@@ -151,7 +150,7 @@ class bmc_redfish(redfish_plus):
         """
 
         resp = self.get(*args, **kwargs)
-        return resp.dict if hasattr(resp, "dict") else {}
+        return resp.dict if hasattr(resp, 'dict') else {}
 
     def get_attribute(self, path, attribute, default=None, *args, **kwargs):
         r"""
@@ -184,9 +183,8 @@ class bmc_redfish(redfish_plus):
         kwargs                      See parent class get() prolog for details.
         """
 
-        return self.get_properties(path, *args, **kwargs).get(
-            attribute, default
-        )
+        return self.get_properties(path, *args, **kwargs).get(attribute,
+                                                              default)
 
     def get_session_info(self):
         r"""
@@ -196,9 +194,7 @@ class bmc_redfish(redfish_plus):
 
         return self.get_session_key(), self.get_session_location()
 
-    def enumerate(
-        self, resource_path, return_json=1, include_dead_resources=False
-    ):
+    def enumerate(self, resource_path, return_json=1, include_dead_resources=False):
         r"""
         Perform a GET enumerate request and return available resource paths.
 
@@ -228,61 +224,38 @@ class bmc_redfish(redfish_plus):
                 # Example: '/redfish/v1/JsonSchemas/' and sub resources.
                 #          '/redfish/v1/SessionService'
                 #          '/redfish/v1/Managers/bmc#/Oem'
-                if (
-                    ("JsonSchemas" in resource)
-                    or ("SessionService" in resource)
-                    or ("#" in resource)
-                ):
+                if ('JsonSchemas' in resource) or ('SessionService' in resource) or ('#' in resource):
                     continue
 
-                self._rest_response_ = self.get(
-                    resource, valid_status_codes=[200, 404, 500]
-                )
+                self._rest_response_ = self.get(resource, valid_status_codes=[200, 404, 500])
                 # Enumeration is done for available resources ignoring the ones for which response is not
                 # obtained.
                 if self._rest_response_.status != 200:
                     if include_dead_resources:
                         try:
-                            dead_resources[self._rest_response_.status].append(
-                                resource
-                            )
+                            dead_resources[self._rest_response_.status].append(resource)
                         except KeyError:
-                            dead_resources[self._rest_response_.status] = [
-                                resource
-                            ]
+                            dead_resources[self._rest_response_.status] = [resource]
                     continue
                 self.walk_nested_dict(self._rest_response_.dict, url=resource)
 
             enumerated_resources.update(set(resources_to_be_enumerated))
-            resources_to_be_enumerated = tuple(
-                self.__pending_enumeration - enumerated_resources
-            )
+            resources_to_be_enumerated = tuple(self.__pending_enumeration - enumerated_resources)
 
         if return_json:
             if include_dead_resources:
-                return (
-                    json.dumps(
-                        self.__result,
-                        sort_keys=True,
-                        indent=4,
-                        separators=(",", ": "),
-                    ),
-                    dead_resources,
-                )
+                return json.dumps(self.__result, sort_keys=True,
+                                  indent=4, separators=(',', ': ')), dead_resources
             else:
-                return json.dumps(
-                    self.__result,
-                    sort_keys=True,
-                    indent=4,
-                    separators=(",", ": "),
-                )
+                return json.dumps(self.__result, sort_keys=True,
+                                  indent=4, separators=(',', ': '))
         else:
             if include_dead_resources:
                 return self.__result, dead_resources
             else:
                 return self.__result
 
-    def walk_nested_dict(self, data, url=""):
+    def walk_nested_dict(self, data, url=''):
         r"""
         Parse through the nested dictionary and get the resource id paths.
 
@@ -290,22 +263,21 @@ class bmc_redfish(redfish_plus):
         data                        Nested dictionary data from response message.
         url                         Resource for which the response is obtained in data.
         """
-        url = url.rstrip("/")
+        url = url.rstrip('/')
 
         for key, value in data.items():
+
             # Recursion if nested dictionary found.
             if isinstance(value, dict):
                 self.walk_nested_dict(value)
             else:
                 # Value contains a list of dictionaries having member data.
-                if "Members" == key:
+                if 'Members' == key:
                     if isinstance(value, list):
                         for memberDict in value:
-                            self.__pending_enumeration.add(
-                                memberDict["@odata.id"]
-                            )
-                if "@odata.id" == key:
-                    value = value.rstrip("/")
+                            self.__pending_enumeration.add(memberDict['@odata.id'])
+                if '@odata.id' == key:
+                    value = value.rstrip('/')
                     # Data for the given url.
                     if value == url:
                         self.__result[url] = data
@@ -351,9 +323,7 @@ class bmc_redfish(redfish_plus):
         """
 
         member_list = []
-        self._rest_response_ = self.get(
-            resource_path, valid_status_codes=[200]
-        )
+        self._rest_response_ = self.get(resource_path, valid_status_codes=[200])
 
         try:
             for member in self._rest_response_.dict["Members"]:
@@ -364,7 +334,7 @@ class bmc_redfish(redfish_plus):
 
         # Filter elements in the list and return matched elements.
         if filter is not None:
-            regex = ".*/" + filter + "[^/]*$"
+            regex = '.*/' + filter + '[^/]*$'
             return [x for x in member_list if re.match(regex, x)]
 
         return member_list

@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import logging
 import warnings
-
 try:
     import httplib
 except ImportError:
@@ -15,6 +14,6 @@ requests_log.setLevel(logging.CRITICAL)
 requests_log.propagate = False
 
 
-class disable_warning_urllib:
+class disable_warning_urllib():
     def do_nothing():
         return

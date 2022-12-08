@@ -4,18 +4,17 @@ r"""
 Provide useful ipmi functions.
 """
 
-import json
 import re
-import tempfile
-
-import bmc_ssh_utils as bsu
-import gen_cmd as gc
-import gen_misc as gm
 import gen_print as gp
+import gen_misc as gm
+import gen_cmd as gc
 import gen_robot_keyword as grk
 import gen_robot_utils as gru
-import ipmi_client as ic
+import bmc_ssh_utils as bsu
 import var_funcs as vf
+import ipmi_client as ic
+import tempfile
+import json
 from robot.libraries.BuiltIn import BuiltIn
 
 gru.my_import_resource("ipmi_client.robot")
@@ -77,19 +76,17 @@ def set_sol_setting(setting_name, setting_value):
     # setting_value                 Value which needs to be set (e.g. "7").
     """
 
-    status, ret_values = grk.run_key_u(
-        "Run IPMI Standard Command  sol set "
-        + setting_name
-        + " "
-        + setting_value
-    )
+    status, ret_values = grk.run_key_u("Run IPMI Standard Command  sol set "
+                                       + setting_name + " " + setting_value)
 
     return status
 
 
-def execute_ipmi_cmd(
-    cmd_string, ipmi_cmd_type="inband", print_output=1, ignore_err=0, **options
-):
+def execute_ipmi_cmd(cmd_string,
+                     ipmi_cmd_type='inband',
+                     print_output=1,
+                     ignore_err=0,
+                     **options):
     r"""
     Run the given command string as an IPMI command and return the stdout,
     stderr and the return code.
@@ -110,25 +107,23 @@ def execute_ipmi_cmd(
                                     See that function's prolog for details.
     """
 
-    if ipmi_cmd_type == "inband":
+    if ipmi_cmd_type == 'inband':
         IPMI_INBAND_CMD = BuiltIn().get_variable_value("${IPMI_INBAND_CMD}")
         cmd_buf = IPMI_INBAND_CMD + " " + cmd_string
-        return bsu.os_execute_command(
-            cmd_buf, print_out=print_output, ignore_err=ignore_err
-        )
+        return bsu.os_execute_command(cmd_buf,
+                                      print_out=print_output,
+                                      ignore_err=ignore_err)
 
-    if ipmi_cmd_type == "external":
+    if ipmi_cmd_type == 'external':
         cmd_buf = ic.create_ipmi_ext_command_string(cmd_string, **options)
-        rc, stdout, stderr = gc.shell_cmd(
-            cmd_buf,
-            print_output=print_output,
-            ignore_err=ignore_err,
-            return_stderr=1,
-        )
+        rc, stdout, stderr = gc.shell_cmd(cmd_buf,
+                                          print_output=print_output,
+                                          ignore_err=ignore_err,
+                                          return_stderr=1)
         return stdout, stderr, rc
 
 
-def get_lan_print_dict(channel_number="", ipmi_cmd_type="external"):
+def get_lan_print_dict(channel_number='', ipmi_cmd_type='external'):
     r"""
     Get IPMI 'lan print' output and return it as a dictionary.
 
@@ -180,34 +175,26 @@ def get_lan_print_dict(channel_number="", ipmi_cmd_type="external"):
     # special processing.  We essentially want to isolate its data and remove
     # the 'Auth Type Enable' string so that key_value_outbuf_to_dict can
     # process it as a sub-dictionary.
-    cmd_buf = (
-        "lan print "
-        + channel_number
-        + " | grep -E '^(Auth Type Enable)"
-        + "?[ ]+: ' | sed -re 's/^(Auth Type Enable)?[ ]+: //g'"
-    )
-    stdout1, stderr, rc = execute_ipmi_cmd(
-        cmd_buf, ipmi_cmd_type, print_output=0
-    )
+    cmd_buf = "lan print " + channel_number + " | grep -E '^(Auth Type Enable)" +\
+        "?[ ]+: ' | sed -re 's/^(Auth Type Enable)?[ ]+: //g'"
+    stdout1, stderr, rc = execute_ipmi_cmd(cmd_buf, ipmi_cmd_type,
+                                           print_output=0)
 
     # Now get the remainder of the data and exclude the lines with no field
     # names (i.e. the 'Auth Type Enable' sub-fields).
     cmd_buf = "lan print " + channel_number + " | grep -E -v '^[ ]+: '"
-    stdout2, stderr, rc = execute_ipmi_cmd(
-        cmd_buf, ipmi_cmd_type, print_output=0
-    )
+    stdout2, stderr, rc = execute_ipmi_cmd(cmd_buf, ipmi_cmd_type,
+                                           print_output=0)
 
     # Make auth_type_enable_dict sub-dictionary...
-    auth_type_enable_dict = vf.key_value_outbuf_to_dict(
-        stdout1, to_lower=0, underscores=0
-    )
+    auth_type_enable_dict = vf.key_value_outbuf_to_dict(stdout1, to_lower=0,
+                                                        underscores=0)
 
     # Create the lan_print_dict...
-    lan_print_dict = vf.key_value_outbuf_to_dict(
-        stdout2, to_lower=0, underscores=0
-    )
+    lan_print_dict = vf.key_value_outbuf_to_dict(stdout2, to_lower=0,
+                                                 underscores=0)
     # Re-assign 'Auth Type Enable' to contain the auth_type_enable_dict.
-    lan_print_dict["Auth Type Enable"] = auth_type_enable_dict
+    lan_print_dict['Auth Type Enable'] = auth_type_enable_dict
 
     return lan_print_dict
 
@@ -243,13 +230,12 @@ def get_ipmi_power_reading(strip_watts=1):
                                     trailing " Watts" substring.
     """
 
-    status, ret_values = grk.run_key_u(
-        "Run IPMI Standard Command  dcmi power reading"
-    )
+    status, ret_values = \
+        grk.run_key_u("Run IPMI Standard Command  dcmi power reading")
     result = vf.key_value_outbuf_to_dict(ret_values)
 
     if strip_watts:
-        result.update((k, re.sub(" Watts$", "", v)) for k, v in result.items())
+        result.update((k, re.sub(' Watts$', '', v)) for k, v in result.items())
 
     return result
 
@@ -306,7 +292,8 @@ def get_mc_info():
         [aux_firmware_rev_info][3]:      0x00
     """
 
-    status, ret_values = grk.run_key_u("Run IPMI Standard Command  mc info")
+    status, ret_values = \
+        grk.run_key_u("Run IPMI Standard Command  mc info")
     result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
 
     return result
@@ -347,7 +334,8 @@ def get_sdr_info():
       [sdr_repository_alloc_info_supported]: no
     """
 
-    status, ret_values = grk.run_key_u("Run IPMI Standard Command  sdr info")
+    status, ret_values = \
+        grk.run_key_u("Run IPMI Standard Command  sdr info")
     result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
 
     return result
@@ -428,21 +416,19 @@ def get_fru_info():
         [board_part_number]:       02CY209
     """
 
-    status, ret_values = grk.run_key_u(
-        "Run IPMI Standard Command  fru print -N 50"
-    )
+    status, ret_values = \
+        grk.run_key_u("Run IPMI Standard Command  fru print -N 50")
 
     # Manipulate the "Device not present" line to create a "state" key.
-    ret_values = re.sub(
-        "Device not present", "state : Device not present", ret_values
-    )
+    ret_values = re.sub("Device not present", "state : Device not present",
+                        ret_values)
 
-    return [
-        vf.key_value_outbuf_to_dict(x) for x in re.split("\n\n", ret_values)
-    ]
+    return [vf.key_value_outbuf_to_dict(x) for x in re.split("\n\n",
+                                                             ret_values)]
 
 
-def get_component_fru_info(component="cpu", fru_objs=None):
+def get_component_fru_info(component='cpu',
+                           fru_objs=None):
     r"""
     Get fru info for the given component and return it as a list of
     dictionaries.
@@ -463,11 +449,9 @@ def get_component_fru_info(component="cpu", fru_objs=None):
 
     if fru_objs is None:
         fru_objs = get_fru_info()
-    return [
-        x
-        for x in fru_objs
-        if re.match(component + "([0-9]+)? ", x["fru_device_description"])
-    ]
+    return\
+        [x for x in fru_objs
+         if re.match(component + '([0-9]+)? ', x['fru_device_description'])]
 
 
 def get_user_info(userid, channel_number=1):
@@ -510,12 +494,8 @@ def get_user_info(userid, channel_number=1):
       [enable_status]        enabled
     """
 
-    status, ret_values = grk.run_key_u(
-        "Run IPMI Standard Command  channel getaccess "
-        + str(channel_number)
-        + " "
-        + str(userid)
-    )
+    status, ret_values = grk.run_key_u("Run IPMI Standard Command  channel getaccess "
+                                       + str(channel_number) + " " + str(userid))
 
     if userid == "":
         return vf.key_value_outbuf_to_dicts(ret_values, process_indent=1)
@@ -524,6 +504,7 @@ def get_user_info(userid, channel_number=1):
 
 
 def channel_getciphers_ipmi():
+
     r"""
     Run 'channel getciphers ipmi' command and return the result as a list of dictionaries.
 
@@ -570,9 +551,7 @@ def get_device_id_config():
         [revision]:             129
         [device_revision]:        1
     """
-    stdout, stderr, rc = bsu.bmc_execute_command(
-        "cat /usr/share/ipmi-providers/dev_id.json"
-    )
+    stdout, stderr, rc = bsu.bmc_execute_command("cat /usr/share/ipmi-providers/dev_id.json")
 
     result = json.loads(stdout)
 
@@ -583,7 +562,7 @@ def get_device_id_config():
     # [6:4] reserved. Return as 0.
     # [3:0] Device Revision, binary encoded.
 
-    result["device_revision"] = result["revision"] & 0x0F
+    result['device_revision'] = result['revision'] & 0x0F
 
     return result
 
@@ -639,9 +618,8 @@ def get_chassis_status():
       [power_button_disabled]:               false
     """
 
-    status, ret_values = grk.run_key_u(
-        "Run IPMI Standard Command  chassis status"
-    )
+    status, ret_values = \
+        grk.run_key_u("Run IPMI Standard Command  chassis status")
     result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
 
     return result
@@ -671,19 +649,19 @@ def get_channel_info(channel_number=1):
         [access_mode]:                                always available
     """
 
-    status, ret_values = grk.run_key_u(
-        "Run IPMI Standard Command  channel info " + str(channel_number)
-    )
+    status, ret_values = \
+        grk.run_key_u("Run IPMI Standard Command  channel info " + str(channel_number))
     key_var_list = list(filter(None, ret_values.split("\n")))
     # To match the dict format, add a colon after 'Volatile(active) Settings' and 'Non-Volatile Settings'
     # respectively.
-    key_var_list[6] = "Volatile(active) Settings:"
-    key_var_list[11] = "Non-Volatile Settings:"
+    key_var_list[6] = 'Volatile(active) Settings:'
+    key_var_list[11] = 'Non-Volatile Settings:'
     result = vf.key_value_list_to_dict(key_var_list, process_indent=1)
     return result
 
 
 def get_user_access_ipmi(channel_number=1):
+
     r"""
     Run 'user list [<channel number>]' command and return the result as a list of dictionaries.
 
@@ -733,12 +711,9 @@ def get_channel_auth_capabilities(channel_number=1, privilege_level=4):
         [channel_supports_ipmi_v2.0]:                   yes
     """
 
-    status, ret_values = grk.run_key_u(
-        "Run IPMI Standard Command  channel authcap "
-        + str(channel_number)
-        + " "
-        + str(privilege_level)
-    )
+    status, ret_values = \
+        grk.run_key_u("Run IPMI Standard Command  channel authcap " + str(channel_number) + " "
+                      + str(privilege_level))
     result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
 
     return result
@@ -815,8 +790,8 @@ def modify_and_fetch_threshold(old_threshold, threshold_list):
     newthreshold_list = []
     for th in old_threshold:
         th = th.strip()
-        if th == "na":
-            newthreshold_list.append("na")
+        if th == 'na':
+            newthreshold_list.append('na')
         else:
             x = int(float(th)) + n
             newthreshold_list.append(x)

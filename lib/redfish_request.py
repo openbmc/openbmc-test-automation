@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
 
+import requests
+import urllib.request
+from urllib3.exceptions import InsecureRequestWarning
 import json
 import secrets
 import string
-import urllib.request
 
-import requests
 from robot.api import logger
-from robot.api.deco import keyword
 from robot.libraries.BuiltIn import BuiltIn
-from urllib3.exceptions import InsecureRequestWarning
+from robot.api.deco import keyword
 
 
 class redfish_request(object):
+
     @staticmethod
     def generate_clientid():
         r"""
@@ -22,11 +23,9 @@ class redfish_request(object):
 
         """
 
-        clientid = "".join(
-            secrets.choice(string.ascii_letters + string.digits)
-            for i in range(10)
-        )
-        clientid = "".join(str(i) for i in clientid)
+        clientid = ''.join(secrets.choice(
+            string.ascii_letters + string.digits) for i in range(10))
+        clientid = ''.join(str(i) for i in clientid)
 
         return clientid
 
@@ -39,13 +38,11 @@ class redfish_request(object):
         url        Url passed by user e.g. /redfish/v1/Systems/system.
         """
 
-        openbmc_host = BuiltIn().get_variable_value(
-            "${OPENBMC_HOST}", default=""
-        )
+        openbmc_host = \
+            BuiltIn().get_variable_value("${OPENBMC_HOST}", default="")
         https_port = BuiltIn().get_variable_value("${HTTPS_PORT}", default="")
-        form_url = (
+        form_url = \
             "https://" + str(openbmc_host) + ":" + str(https_port) + str(url)
-        )
 
         return form_url
 
@@ -58,11 +55,10 @@ class redfish_request(object):
         response        Response from requests.
         """
 
-        logger.console(msg="", newline=True)
-        logger.info(
-            "Response : [%s]" % response.status_code, also_console=True
-        )
-        logger.console(msg="", newline=True)
+        logger.console(msg='', newline=True)
+        logger.info("Response : [%s]" % response.status_code,
+                    also_console=True)
+        logger.console(msg='', newline=True)
 
     def request_login(self, headers, url, credential, timeout=10):
         r"""
@@ -85,21 +81,19 @@ class redfish_request(object):
 
         if headers == "None":
             headers = dict()
-            headers["Content-Type"] = "application/json"
+            headers['Content-Type'] = 'application/json'
 
-        client_id = credential["Oem"]["OpenBMC"].get("ClientID", "None")
+        client_id = credential['Oem']['OpenBMC'].get('ClientID', "None")
 
         if "None" == client_id:
             self.clientid = redfish_request.generate_clientid()
-            credential["Oem"]["OpenBMC"]["ClientID"] = self.clientid
+            credential['Oem']['OpenBMC']['ClientID'] = self.clientid
 
-        logger.console(msg="", newline=True)
-        requests.packages.urllib3.disable_warnings(
-            category=InsecureRequestWarning
-        )
-        response = redfish_request.request_post(
-            self, headers=headers, url=url, data=credential
-        )
+        logger.console(msg='', newline=True)
+        requests.packages.urllib3.\
+            disable_warnings(category=InsecureRequestWarning)
+        response = redfish_request.request_post(self, headers=headers,
+                                                url=url, data=credential)
 
         return response
 
@@ -122,27 +116,19 @@ class redfish_request(object):
                        is not considered.
         """
 
-        if headers.get("Content-Type", None) is None:
-            headers["Content-Type"] = "application/json"
+        if headers.get('Content-Type', None) is None:
+            headers['Content-Type'] = 'application/json'
 
         url = redfish_request.form_url(url)
 
-        logger.console(msg="", newline=True)
-        msg = (
-            "Request Method : GET  ,headers = "
-            + json.dumps(headers)
-            + " ,uri = "
-            + str(url)
-            + " ,timeout = "
-            + str(timeout)
-            + " ,verify = "
-            + str(verify)
-        )
+        logger.console(msg='', newline=True)
+        msg = "Request Method : GET  ,headers = " + \
+              json.dumps(headers) + " ,uri = " + str(url) + " ,timeout = " + \
+              str(timeout) + " ,verify = " + str(verify)
         logger.info(msg, also_console=True)
 
-        response = requests.get(
-            url, headers=headers, timeout=timeout, verify=verify
-        )
+        response = requests.get(url, headers=headers,
+                                timeout=timeout, verify=verify)
         redfish_request.log_console(response)
 
         return response
@@ -169,29 +155,20 @@ class redfish_request(object):
                        is not considered.
         """
 
-        if headers.get("Content-Type", None) is None:
-            headers["Content-Type"] = "application/json"
+        if headers.get('Content-Type', None) is None:
+            headers['Content-Type'] = 'application/json'
 
         url = redfish_request.form_url(url)
 
-        logger.console(msg="", newline=True)
-        msg = (
-            "Request Method : PATCH  ,headers = "
-            + json.dumps(headers)
-            + " ,uri = "
-            + str(url)
-            + " ,data = "
-            + json.dumps(data)
-            + " ,timeout = "
-            + str(timeout)
-            + " ,verify = "
-            + str(verify)
-        )
+        logger.console(msg='', newline=True)
+        msg = "Request Method : PATCH  ,headers = " + \
+              json.dumps(headers) + " ,uri = " + str(url) + " ,data = " + \
+              json.dumps(data) + " ,timeout = " + str(timeout) + \
+              " ,verify = " + str(verify)
         logger.info(msg, also_console=True)
 
-        response = requests.patch(
-            url, headers=headers, data=data, timeout=timeout, verify=verify
-        )
+        response = requests.patch(url, headers=headers, data=data,
+                                  timeout=timeout, verify=verify)
         redfish_request.log_console(response)
 
         return response
@@ -218,40 +195,26 @@ class redfish_request(object):
                        is not considered.
         """
 
-        if headers.get("Content-Type", None) is None:
-            headers["Content-Type"] = "application/json"
+        if headers.get('Content-Type', None) is None:
+            headers['Content-Type'] = 'application/json'
 
         url = redfish_request.form_url(url)
 
-        logger.console(msg="", newline=True)
-        msg = (
-            "Request Method : POST  ,headers = "
-            + json.dumps(headers)
-            + " ,uri = "
-            + str(url)
-            + " ,data = "
-            + json.dumps(data)
-            + " ,timeout = "
-            + str(timeout)
-            + " ,verify = "
-            + str(verify)
-        )
+        logger.console(msg='', newline=True)
+        msg = "Request Method : POST  ,headers = " + \
+              json.dumps(headers) + " ,uri = " + str(url) + " ,data = " + \
+              json.dumps(data) + " ,timeout = " + str(timeout) + \
+              " ,verify = " + str(verify)
         logger.info(msg, also_console=True)
 
-        response = requests.post(
-            url,
-            headers=headers,
-            data=json.dumps(data),
-            timeout=timeout,
-            verify=verify,
-        )
+        response = requests.post(url, headers=headers, data=json.dumps(data),
+                                 timeout=timeout, verify=verify)
         redfish_request.log_console(response)
 
         return response
 
-    def request_put(
-        self, headers, url, files=None, data=None, timeout=10, verify=False
-    ):
+    def request_put(self, headers, url, files=None, data=None,
+                    timeout=10, verify=False):
         r"""
         Redfish put request.
 
@@ -276,41 +239,25 @@ class redfish_request(object):
                        is not considered.
         """
 
-        if headers.get("Content-Type", None) is None:
-            headers["Content-Type"] = "application/json"
+        if headers.get('Content-Type', None) is None:
+            headers['Content-Type'] = 'application/json'
 
         url = redfish_request.form_url(url)
 
-        logger.console(msg="", newline=True)
-        msg = (
-            "Request Method : PUT  ,headers = "
-            + json.dumps(headers)
-            + " ,uri = "
-            + str(url)
-            + " ,data = "
-            + json.dumps(data)
-            + " ,timeout = "
-            + str(timeout)
-            + " ,verify = "
-            + str(verify)
-        )
+        logger.console(msg='', newline=True)
+        msg = "Request Method : PUT  ,headers = " + \
+              json.dumps(headers) + " ,uri = " + str(url) + " ,data = " + \
+              json.dumps(data) + " ,timeout = " + str(timeout) + \
+              " ,verify = " + str(verify)
         logger.info(msg, also_console=True)
 
-        response = requests.put(
-            url,
-            headers=headers,
-            files=files,
-            data=data,
-            timeout=timeout,
-            verify=verify,
-        )
+        response = requests.put(url, headers=headers, files=files, data=data,
+                                timeout=timeout, verify=verify)
         redfish_request.log_console(response)
 
         return response
 
-    def request_delete(
-        self, headers, url, data=None, timeout=10, verify=False
-    ):
+    def request_delete(self, headers, url, data=None, timeout=10, verify=False):
         r"""
         Redfish delete request.
 
@@ -332,29 +279,20 @@ class redfish_request(object):
                        is not considered.
         """
 
-        if headers.get("Content-Type", None) is None:
-            headers["Content-Type"] = "application/json"
+        if headers.get('Content-Type', None) is None:
+            headers['Content-Type'] = 'application/json'
 
         url = redfish_request.form_url(url)
 
-        logger.console(msg="", newline=True)
-        msg = (
-            "Request Method : DELETE  ,headers = "
-            + json.dumps(headers)
-            + " ,uri = "
-            + str(url)
-            + " ,data = "
-            + json.dumps(data)
-            + " ,timeout = "
-            + str(timeout)
-            + " ,verify = "
-            + str(verify)
-        )
-        logger.console(msg="", newline=True)
+        logger.console(msg='', newline=True)
+        msg = "Request Method : DELETE  ,headers = " + \
+              json.dumps(headers) + " ,uri = " + str(url) + " ,data = " + \
+              json.dumps(data) + " ,timeout = " + str(timeout) + \
+              " ,verify = " + str(verify)
+        logger.console(msg='', newline=True)
 
-        response = requests.delete(
-            url, headers=headers, data=data, timeout=timeout, verify=verify
-        )
+        response = requests.delete(url, headers=headers, data=data,
+                                   timeout=timeout, verify=verify)
         redfish_request.log_console(response)
 
         return response

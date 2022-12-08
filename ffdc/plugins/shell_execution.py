@@ -10,16 +10,14 @@ def execute_cmd(parms_string, quiet=False):
     quiet                do not print tool error message if True
     """
 
-    result = subprocess.run(
-        [parms_string],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        shell=True,
-        universal_newlines=True,
-    )
+    result = subprocess.run([parms_string],
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            shell=True,
+                            universal_newlines=True)
 
     if result.stderr and not quiet:
-        print("\n\t\tERROR with %s " % parms_string)
-        print("\t\t" + result.stderr)
+        print('\n\t\tERROR with %s ' % parms_string)
+        print('\t\t' + result.stderr)
 
     return result.stdout

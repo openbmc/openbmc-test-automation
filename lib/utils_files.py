@@ -4,21 +4,22 @@ r"""
 This module contains file functions such as file_diff.
 """
 
+import time
 import os
 import re
-import time
-
 from gen_cmd import cmd_fnc_u
-
 robot_env = 1
 try:
-    from robot.libraries import DateTime
     from robot.libraries.BuiltIn import BuiltIn
+    from robot.libraries import DateTime
 except ImportError:
     robot_env = 0
 
 
-def file_diff(file1_path, file2_path, diff_file_path, skip_string):
+def file_diff(file1_path,
+              file2_path,
+              diff_file_path,
+              skip_string):
     r"""
     Compare the contents of two text files.  The comparison uses the Unix
     'diff' command.  Differences can be selectively ignored by use of
@@ -58,12 +59,12 @@ def file_diff(file1_path, file2_path, diff_file_path, skip_string):
 
     now = time.strftime("%Y-%m-%d %H:%M:%S")
 
-    if not os.path.exists(file1_path) or (not os.path.exists(file2_path)):
+    if (not os.path.exists(file1_path) or (not os.path.exists(file2_path))):
         return INPUT_FILE_DOES_NOT_EXIST
     try:
-        with open(file1_path, "r") as file:
+        with open(file1_path, 'r') as file:
             initial = file.readlines()
-        with open(file2_path, "r") as file:
+        with open(file2_path, 'r') as file:
             final = file.readlines()
     except IOError:
         file.close()
@@ -78,30 +79,24 @@ def file_diff(file1_path, file2_path, diff_file_path, skip_string):
     if len(initial) < min_file_byte_size:
         return INPUT_FILE_MALFORMED
 
-    if initial == final:
+    if (initial == final):
         try:
-            file = open(diff_file_path, "w")
+            file = open(diff_file_path, 'w')
         except IOError:
             file.close()
-        line_to_print = (
-            "Specified skip (ignore) string = " + skip_string + "\n\n"
-        )
+        line_to_print = "Specified skip (ignore) string = " + \
+            skip_string + "\n\n"
         file.write(line_to_print)
-        line_to_print = (
-            now
-            + " found no difference between file "
-            + file1_path
-            + " and "
-            + file2_path
-            + "\n"
-        )
+        line_to_print = now + " found no difference between file " + \
+            file1_path + " and " + \
+            file2_path + "\n"
         file.write(line_to_print)
         file.close()
         return FILES_MATCH
 
     # Find the differences and write difference report to diff_file_path file
     try:
-        file = open(diff_file_path, "w")
+        file = open(diff_file_path, 'w')
     except IOError:
         file.close()
         return IO_EXCEPTION_WRITING_FILE
@@ -110,10 +105,9 @@ def file_diff(file1_path, file2_path, diff_file_path, skip_string):
     # if skip_string="size,capacity",  command = 'diff  -I "size"
     # -I "capacity"  file1_path file2_path'.
     skip_list = filter(None, re.split(r"[ ]*,[ ]*", skip_string))
-    ignore_string = " ".join([("-I " + '"' + x + '"') for x in skip_list])
-    command = " ".join(
-        filter(None, ["diff", ignore_string, file1_path, file2_path])
-    )
+    ignore_string = ' '.join([("-I " + '"' + x + '"') for x in skip_list])
+    command = ' '.join(filter(None, ["diff", ignore_string, file1_path,
+                                     file2_path]))
 
     line_to_print = now + "   " + command + "\n"
     file.write(line_to_print)

@@ -4,12 +4,11 @@ r"""
 This module provides validation functions like valid_value(), valid_integer(), etc.
 """
 
-import datetime
 import os
-
-import func_args as fa
-import gen_cmd as gc
 import gen_print as gp
+import gen_cmd as gc
+import func_args as fa
+import datetime
 
 exit_on_error = False
 
@@ -135,7 +134,8 @@ def process_error_message(error_message):
 
 
 # The docstring header and footer will be added to each validation function's existing docstring.
-docstring_header = r"""
+docstring_header = \
+    r"""
     Determine whether var_value is valid, construct an error_message and call
     process_error_message(error_message).
 
@@ -143,7 +143,8 @@ docstring_header = r"""
     are processed.
     """
 
-additional_args_docstring_footer = r"""
+additional_args_docstring_footer = \
+    r"""
     var_name                        The name of the variable whose value is passed in var_value.  For the
                                     general case, this argument is unnecessary as this function can figure
                                     out the var_name.  This is provided for Robot callers in which case, this
@@ -177,9 +178,8 @@ def valid_type(var_value, required_type, var_name=None):
     # If we get to this point, the validation has failed.
     var_name = get_var_name(var_name)
     error_message += "Invalid variable type:\n"
-    error_message += gp.sprint_varx(
-        var_name, var_value, gp.blank() | gp.show_type()
-    )
+    error_message += gp.sprint_varx(var_name, var_value,
+                                    gp.blank() | gp.show_type())
     error_message += "\n"
     error_message += gp.sprint_var(required_type)
 
@@ -187,6 +187,7 @@ def valid_type(var_value, required_type, var_name=None):
 
 
 def valid_value(var_value, valid_values=[], invalid_values=[], var_name=None):
+
     r"""
     The variable value is valid if it is either contained in the valid_values list or if it is NOT contained
     in the invalid_values list.  If the caller specifies nothing for either of these 2 arguments,
@@ -229,11 +230,11 @@ def valid_value(var_value, valid_values=[], invalid_values=[], var_name=None):
         error_message += gp.sprint_var(valid_values)
         return process_error_message(error_message)
 
-    error_message = valid_type(valid_values, list, var_name="valid_values")
+    error_message = valid_type(valid_values, list, var_name='valid_values')
     if error_message:
         return process_error_message(error_message)
 
-    error_message = valid_type(invalid_values, list, var_name="invalid_values")
+    error_message = valid_type(invalid_values, list, var_name='invalid_values')
     if error_message:
         return process_error_message(error_message)
 
@@ -243,15 +244,14 @@ def valid_value(var_value, valid_values=[], invalid_values=[], var_name=None):
             return process_error_message(error_message)
         var_name = get_var_name(var_name)
         error_message += "Invalid variable value:\n"
-        error_message += gp.sprint_varx(
-            var_name, var_value, gp.blank() | gp.verbose() | gp.show_type()
-        )
+        error_message += gp.sprint_varx(var_name, var_value,
+                                        gp.blank() | gp.verbose()
+                                        | gp.show_type())
         error_message += "\n"
         error_message += "It must be one of the following values:\n"
         error_message += "\n"
-        error_message += gp.sprint_var(
-            valid_values, gp.blank() | gp.show_type()
-        )
+        error_message += gp.sprint_var(valid_values,
+                                       gp.blank() | gp.show_type())
         return process_error_message(error_message)
 
     if len_invalid_values == 0:
@@ -264,13 +264,14 @@ def valid_value(var_value, valid_values=[], invalid_values=[], var_name=None):
 
     var_name = get_var_name(var_name)
     error_message += "Invalid variable value:\n"
-    error_message += gp.sprint_varx(
-        var_name, var_value, gp.blank() | gp.verbose() | gp.show_type()
-    )
+    error_message += gp.sprint_varx(var_name, var_value,
+                                    gp.blank() | gp.verbose()
+                                    | gp.show_type())
     error_message += "\n"
     error_message += "It must NOT be any of the following values:\n"
     error_message += "\n"
-    error_message += gp.sprint_var(invalid_values, gp.blank() | gp.show_type())
+    error_message += gp.sprint_var(invalid_values,
+                                   gp.blank() | gp.show_type())
     return process_error_message(error_message)
 
 
@@ -337,9 +338,8 @@ def valid_integer(var_value, lower=None, upper=None, var_name=None):
         var_value = int(str(var_value), 0)
     except ValueError:
         error_message += "Invalid integer value:\n"
-        error_message += gp.sprint_varx(
-            var_name, var_value, gp.blank() | gp.show_type()
-        )
+        error_message += gp.sprint_varx(var_name, var_value,
+                                        gp.blank() | gp.show_type())
         return process_error_message(error_message)
 
     # Check the range (if any).
@@ -373,9 +373,8 @@ def valid_float(var_value, lower=None, upper=None, var_name=None):
         var_value = float(str(var_value))
     except ValueError:
         error_message += "Invalid float value:\n"
-        error_message += gp.sprint_varx(
-            var_name, var_value, gp.blank() | gp.show_type()
-        )
+        error_message += gp.sprint_varx(var_name, var_value,
+                                        gp.blank() | gp.show_type())
         return process_error_message(error_message)
 
     # Check the range (if any).
@@ -398,15 +397,12 @@ def valid_date_time(var_value, var_name=None):
     """
 
     error_message = ""
-    rc, out_buf = gc.shell_cmd(
-        "date -d '" + str(var_value) + "'", quiet=1, show_err=0, ignore_err=1
-    )
+    rc, out_buf = gc.shell_cmd("date -d '" + str(var_value) + "'", quiet=1, show_err=0, ignore_err=1)
     if rc:
         var_name = get_var_name(var_name)
         error_message += "Invalid date/time value:\n"
-        error_message += gp.sprint_varx(
-            var_name, var_value, gp.blank() | gp.show_type()
-        )
+        error_message += gp.sprint_varx(var_name, var_value,
+                                        gp.blank() | gp.show_type())
         return process_error_message(error_message)
 
     return process_error_message(error_message)
@@ -463,14 +459,8 @@ def valid_path(var_value, var_name=None):
     return process_error_message(error_message)
 
 
-def valid_list(
-    var_value,
-    valid_values=[],
-    invalid_values=[],
-    required_values=[],
-    fail_on_empty=False,
-    var_name=None,
-):
+def valid_list(var_value, valid_values=[], invalid_values=[],
+               required_values=[], fail_on_empty=False, var_name=None):
     r"""
     The variable value is valid if it is a list where each entry can be found in the valid_values list or if
     none of its values can be found in the invalid_values list or if all of the values in the required_values
@@ -493,11 +483,7 @@ def valid_list(
     error_message = ""
 
     # Validate this function's arguments.
-    if not (
-        bool(len(valid_values))
-        ^ bool(len(invalid_values))
-        ^ bool(len(required_values))
-    ):
+    if not (bool(len(valid_values)) ^ bool(len(invalid_values)) ^ bool(len(required_values))):
         error_message += "Programmer error - You must provide only one of the"
         error_message += " following: valid_values, invalid_values,"
         error_message += " required_values.\n"
@@ -524,25 +510,21 @@ def valid_list(
         for ix in range(0, len(required_values)):
             if required_values[ix] not in var_value:
                 found_error = 1
-                display_required_values[ix] = (
+                display_required_values[ix] = \
                     str(display_required_values[ix]) + "*"
-                )
         if found_error:
             var_name = get_var_name(var_name)
             error_message += "The following list is invalid:\n"
-            error_message += gp.sprint_varx(
-                var_name, var_value, gp.blank() | gp.show_type()
-            )
+            error_message += gp.sprint_varx(var_name, var_value,
+                                            gp.blank() | gp.show_type())
             error_message += "\n"
             error_message += "Because some of the values in the "
             error_message += "required_values list are not present (see"
-            error_message += ' entries marked with "*"):\n'
+            error_message += " entries marked with \"*\"):\n"
             error_message += "\n"
-            error_message += gp.sprint_varx(
-                "required_values",
-                display_required_values,
-                gp.blank() | gp.show_type(),
-            )
+            error_message += gp.sprint_varx('required_values',
+                                            display_required_values,
+                                            gp.blank() | gp.show_type())
             error_message += "\n"
 
         return process_error_message(error_message)
@@ -558,10 +540,9 @@ def valid_list(
         if found_error:
             var_name = get_var_name(var_name)
             error_message += "The following list is invalid (see entries"
-            error_message += ' marked with "*"):\n'
-            error_message += gp.sprint_varx(
-                var_name, display_var_value, gp.blank() | gp.show_type()
-            )
+            error_message += " marked with \"*\"):\n"
+            error_message += gp.sprint_varx(var_name, display_var_value,
+                                            gp.blank() | gp.show_type())
             error_message += "\n"
             error_message += gp.sprint_var(invalid_values, gp.show_type())
         return process_error_message(error_message)
@@ -576,10 +557,9 @@ def valid_list(
     if found_error:
         var_name = get_var_name(var_name)
         error_message += "The following list is invalid (see entries marked"
-        error_message += ' with "*"):\n'
-        error_message += gp.sprint_varx(
-            var_name, display_var_value, gp.blank() | gp.show_type()
-        )
+        error_message += " with \"*\"):\n"
+        error_message += gp.sprint_varx(var_name, display_var_value,
+                                        gp.blank() | gp.show_type())
         error_message += "\n"
         error_message += gp.sprint_var(valid_values, gp.show_type())
         return process_error_message(error_message)
@@ -587,13 +567,7 @@ def valid_list(
     return process_error_message(error_message)
 
 
-def valid_dict(
-    var_value,
-    required_keys=[],
-    valid_values={},
-    invalid_values={},
-    var_name=None,
-):
+def valid_dict(var_value, required_keys=[], valid_values={}, invalid_values={}, var_name=None):
     r"""
     The dictionary variable value is valid if it contains all required keys and each entry passes the
     valid_value() call.
@@ -627,9 +601,7 @@ def valid_dict(
         var_name = get_var_name(var_name)
         error_message += "The following dictionary is invalid because it is"
         error_message += " missing required keys:\n"
-        error_message += gp.sprint_varx(
-            var_name, var_value, gp.blank() | gp.show_type()
-        )
+        error_message += gp.sprint_varx(var_name, var_value, gp.blank() | gp.show_type())
         error_message += "\n"
         error_message += gp.sprint_var(missing_keys, gp.show_type())
         return process_error_message(error_message)
@@ -637,24 +609,15 @@ def valid_dict(
     var_name = get_var_name(var_name)
     if len(valid_values):
         keys = valid_values.keys()
-        error_message = valid_dict(
-            var_value, required_keys=keys, var_name=var_name
-        )
+        error_message = valid_dict(var_value, required_keys=keys, var_name=var_name)
         if error_message:
             return process_error_message(error_message)
     for key, value in valid_values.items():
         key_name = "  [" + key + "]"
-        sub_error_message = valid_value(
-            var_value[key], valid_values=value, var_name=key_name
-        )
+        sub_error_message = valid_value(var_value[key], valid_values=value, var_name=key_name)
         if sub_error_message:
-            error_message += (
-                "The following dictionary is invalid because one of its"
-                " entries is invalid:\n"
-            )
-            error_message += gp.sprint_varx(
-                var_name, var_value, gp.blank() | gp.show_type()
-            )
+            error_message += "The following dictionary is invalid because one of its entries is invalid:\n"
+            error_message += gp.sprint_varx(var_name, var_value, gp.blank() | gp.show_type())
             error_message += "\n"
             error_message += sub_error_message
             return process_error_message(error_message)
@@ -663,17 +626,10 @@ def valid_dict(
         if key not in var_value:
             continue
         key_name = "  [" + key + "]"
-        sub_error_message = valid_value(
-            var_value[key], invalid_values=value, var_name=key_name
-        )
+        sub_error_message = valid_value(var_value[key], invalid_values=value, var_name=key_name)
         if sub_error_message:
-            error_message += (
-                "The following dictionary is invalid because one of its"
-                " entries is invalid:\n"
-            )
-            error_message += gp.sprint_varx(
-                var_name, var_value, gp.blank() | gp.show_type()
-            )
+            error_message += "The following dictionary is invalid because one of its entries is invalid:\n"
+            error_message += gp.sprint_varx(var_name, var_value, gp.blank() | gp.show_type())
             error_message += "\n"
             error_message += sub_error_message
             return process_error_message(error_message)
@@ -691,9 +647,8 @@ def valid_program(var_value, var_name=None):
     """
 
     error_message = ""
-    rc, out_buf = gc.shell_cmd(
-        "which " + var_value, quiet=1, show_err=0, ignore_err=1
-    )
+    rc, out_buf = gc.shell_cmd("which " + var_value, quiet=1, show_err=0,
+                               ignore_err=1)
     if rc:
         var_name = get_var_name(var_name)
         error_message += "The following required program could not be found"
@@ -737,19 +692,10 @@ def valid_length(var_value, min_length=None, max_length=None, var_name=None):
 # Modify selected function docstrings by adding headers/footers.
 
 func_names = [
-    "valid_type",
-    "valid_value",
-    "valid_range",
-    "valid_integer",
-    "valid_dir_path",
-    "valid_file_path",
-    "valid_path",
-    "valid_list",
-    "valid_dict",
-    "valid_program",
-    "valid_length",
-    "valid_float",
-    "valid_date_time",
+    "valid_type", "valid_value", "valid_range", "valid_integer",
+    "valid_dir_path", "valid_file_path", "valid_path", "valid_list",
+    "valid_dict", "valid_program", "valid_length", "valid_float",
+    "valid_date_time"
 ]
 
 raw_doc_strings = {}
@@ -759,5 +705,5 @@ for func_name in func_names:
     cmd_buf += ".__doc__"
     exec(cmd_buf)
     cmd_buf = func_name + ".__doc__ = docstring_header + " + func_name
-    cmd_buf += '.__doc__.rstrip(" \\n") + additional_args_docstring_footer'
+    cmd_buf += ".__doc__.rstrip(\" \\n\") + additional_args_docstring_footer"
     exec(cmd_buf)

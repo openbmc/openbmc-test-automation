@@ -17,7 +17,7 @@ medium_type_ipmi_conf_map = {
     "SMBus v2.0": "smbus-v2.0",
     "USB 1.x": "usb-1x",
     "USB 2.x": "usb-2x",
-    "System Interface": "system-interface",
+    "System Interface": "system-interface"
 }
 
 
