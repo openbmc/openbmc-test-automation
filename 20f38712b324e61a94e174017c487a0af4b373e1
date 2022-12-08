@@ -33,6 +33,23 @@
       "message": "#(CST) 2022/12/08 10:46:51.320450 -    0.029707 - Finished running robot.\n\nrobot_runtime:                                    998.671849\n\nGeneral Boot Testing :: Performs repeated boot tests.                 | PASS |\n------------------------------------------------------------------------------\nObmc Boot Test :: Do random repeated boots based on the state of t... | PASS |\n1 test, 1 passed, 0 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\nBoot test run also worked good in my environment setup",
       "revId": "20f38712b324e61a94e174017c487a0af4b373e1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06e41e38_a4520a1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-12-08T17:01:28Z",
+      "side": 1,
+      "message": "Awaiting Dave to give a run and +1 in his setup and I ll merge Thanks",
+      "revId": "20f38712b324e61a94e174017c487a0af4b373e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
