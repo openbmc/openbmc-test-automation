@@ -32,25 +32,25 @@ WORKSPACE="${WORKSPACE%/}/"
 git_dir_path="${git_dir_path%/}/"
 
 
-function mainf {
+function mainf() {
 
-  # Delete leftover output from prior runs.
-  rm -f ${WORKSPACE}*.html ${WORKSPACE}*.xml || return 1
-  process_git "${git_dir_path}" "${post_clone_command-}" || return 1
-  process_docker "${git_dir_path}" || return 1
+    # Delete leftover output from prior runs.
+    rm -f ${WORKSPACE}*.html ${WORKSPACE}*.xml || return 1
+    process_git "${git_dir_path}" "${post_clone_command-}" || return 1
+    process_docker "${git_dir_path}" || return 1
 
-  if [ -z "${robot_file_path-}" ] ; then
-    echo "robot_file_path is blank so no there is no need to continue."
-    return
-  fi
+    if [ -z "${robot_file_path-}" ] ; then
+        echo "robot_file_path is blank so no there is no need to continue."
+        return
+    fi
 
-  run_docker_robot "${robot_file_path}" || return 1
+    run_docker_robot "${robot_file_path}" || return 1
 
 }
 
 
 # Main
 
-  mainf "${@}"
-  rc="${?}"
-  exit "${rc}"
+mainf "${@}"
+rc="${?}"
+exit "${rc}"

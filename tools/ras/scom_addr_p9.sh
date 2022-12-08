@@ -3,16 +3,16 @@
 
 function usage()
 {
-        echo
-        echo "This script runs on HOST OS and gives translated SCOM address."
-        echo "usage: $0: <scom_addr> <core_id>"
-        echo
-        echo "  <scom_addr>:"
-        echo "     SCOM address that needs translation (e.g. '10010800')."
-        echo "  <core_id>:"
-        echo "     Core id as obtained from probe_cpu.sh."
-        echo "     Should be between 0-23 (e.g. '0')."
-        exit 1
+    echo
+    echo "This script runs on HOST OS and gives translated SCOM address."
+    echo "usage: $0: <scom_addr> <core_id>"
+    echo
+    echo "  <scom_addr>:"
+    echo "     SCOM address that needs translation (e.g. '10010800')."
+    echo "  <core_id>:"
+    echo "     Core id as obtained from probe_cpu.sh."
+    echo "     Should be between 0-23 (e.g. '0')."
+    exit 1
 }
 
 [ $# -lt 2 ] && usage
