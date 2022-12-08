@@ -5,14 +5,15 @@ Use robot framework API to extract test data from test suites.
 Refer to https://robot-framework.readthedocs.io/en/3.0.1/autodoc/robot.parsing.html
 """
 
-import sys
-import os
-from robot.parsing.model import TestData
-sys.path.append(os.path.join(os.path.dirname(__file__), "../lib"))
-
 from gen_arg import *
 from gen_print import *
 from gen_valid import *
+from robot.parsing.model import TestData
+
+import sys
+import os
+
+sys.path.append(os.path.join(os.path.dirname(__file__), "../lib"))
 
 # Set exit_on_error for gen_valid functions.
 set_exit_on_error(True)

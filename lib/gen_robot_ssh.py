@@ -16,10 +16,13 @@ except ImportError:
 
 import gen_print as gp
 import func_timer as ft
-func_timer = ft.func_timer_class()
+
 
 from robot.libraries.BuiltIn import BuiltIn
 from SSHLibrary import SSHLibrary
+
+func_timer = ft.func_timer_class()
+
 sshlib = SSHLibrary()
 
 

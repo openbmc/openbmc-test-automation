@@ -3,6 +3,9 @@ r"""
 Generate an inventory variable file containing a list of properties
 fields from the YAML phosphor-dbus-interfaces repository.
 """
+
+from gen_print import *
+
 import sys
 import os
 import yaml
@@ -10,7 +13,6 @@ import json
 
 lib_path = sys.path[0] + "/../lib"
 sys.path.insert(0, lib_path)
-from gen_print import *
 
 # This list will be longer when more development codes are available.
 inventory_items = ['fru', 'core', 'fan', 'fan_wc', 'gpu']
