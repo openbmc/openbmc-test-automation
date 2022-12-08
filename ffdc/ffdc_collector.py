@@ -4,8 +4,6 @@ r"""
 See class prolog below for details.
 """
 
-from ssh_utility import SSHRemoteclient
-from telnet_utility import TelnetRemoteclient
 from errno import EACCES, EPERM
 
 import os
@@ -25,6 +23,8 @@ for root, dirs, files in os.walk(script_dir):
     for dir in dirs:
         sys.path.append(os.path.join(root, dir))
 
+from ssh_utility import SSHRemoteclient         #NOQA
+from telnet_utility import TelnetRemoteclient   #NOQA
 
 r"""
 User define plugins python functions.

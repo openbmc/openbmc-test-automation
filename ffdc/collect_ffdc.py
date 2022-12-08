@@ -4,8 +4,6 @@ r"""
 CLI FFDC Collector.
 """
 
-from ffdc_collector import ffdc_collector
-
 import os
 import sys
 import click
@@ -20,6 +18,8 @@ sys.path.append(full_path)
 for root, dirs, files in os.walk(full_path):
     for found_dir in dirs:
         sys.path.append(os.path.join(root, found_dir))
+
+from ffdc_collector import ffdc_collector  #NOQA
 
 
 @click.command(context_settings=dict(help_option_names=['-h', '--help']))

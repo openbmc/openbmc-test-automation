@@ -33,12 +33,12 @@ import var_stack as vs
 import gen_plug_in_utils as gpu
 import pel_utils as pel
 import logging_utils as log
-import run_keyword as rk
 
 base_path = os.path.dirname(os.path.dirname(
                             imp.find_module("gen_robot_print")[1])) +\
     os.sep
 sys.path.append(base_path + "extended/")
+import run_keyword as rk  #NOQA
 
 # Setting master_pid correctly influences the behavior of plug-ins like
 # DB_Logging

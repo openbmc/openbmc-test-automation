@@ -3,13 +3,12 @@
 import os
 import sys
 
-
-from ffdc_collector import ffdc_collector
-from ssh_utility import SSHRemoteclient
+sys.path.append(__file__.split(__file__.split("/")[-1])[0] + "../ffdc")
+from ffdc_collector import ffdc_collector  #NOQA
+from ssh_utility import SSHRemoteclient    #NOQA
 
 from robot.libraries.BuiltIn import BuiltIn as robotBuildIn
 
-sys.path.append(__file__.split(__file__.split("/")[-1])[0] + "../ffdc")
 
 # (Sub) String constants used for input dictionary key search
 HOST = "HOST"
