@@ -3,56 +3,67 @@ r"""
 Generate an inventory variable file containing a list of properties
 fields from the YAML phosphor-dbus-interfaces repository.
 """
-import sys
-import os
-import yaml
 import json
+import os
+import sys
+
+import yaml
 
 lib_path = sys.path[0] + "/../lib"
 sys.path.insert(0, lib_path)
-from gen_print import *    # NOQA
+from gen_print import *  # NOQA
 
 # This list will be longer when more development codes are available.
-inventory_items = ['fru', 'core', 'fan', 'fan_wc', 'gpu']
+inventory_items = ["fru", "core", "fan", "fan_wc", "gpu"]
 print_var(inventory_items)
-fru_inventory_file_path = 'inventory.py'
+fru_inventory_file_path = "inventory.py"
 print_var(fru_inventory_file_path)
 
 # Properties inventory list
 yaml_inventory_list = []
 
 # Clone the phosphor-dbus-interfaces repository
-cmd_buf = 'git clone https://github.com/openbmc/phosphor-dbus-interfaces'
+cmd_buf = "git clone https://github.com/openbmc/phosphor-dbus-interfaces"
 os.system(cmd_buf)
 
-repo_subdir_path = '/phosphor-dbus-interfaces/xyz/openbmc_project/'
+repo_subdir_path = "/phosphor-dbus-interfaces/xyz/openbmc_project/"
 base_dir_path = os.getcwd() + repo_subdir_path
 
 # yaml file paths for FRU
-yaml_fru_list = ['Inventory/Item.interface.yaml',
-                 'Inventory/Decorator/Asset.interface.yaml',
-                 'Inventory/Decorator/Revision.interface.yaml',
-                 'Inventory/Decorator/Replaceable.interface.yaml',
-                 'Inventory/Decorator/Cacheable.interface.yaml',
-                 'State/Decorator/OperationalStatus.interface.yaml', ]
+yaml_fru_list = [
+    "Inventory/Item.interface.yaml",
+    "Inventory/Decorator/Asset.interface.yaml",
+    "Inventory/Decorator/Revision.interface.yaml",
+    "Inventory/Decorator/Replaceable.interface.yaml",
+    "Inventory/Decorator/Cacheable.interface.yaml",
+    "State/Decorator/OperationalStatus.interface.yaml",
+]
 
 # yaml file paths for CORE.
-yaml_core_list = ['Inventory/Item.interface.yaml',
-                  'State/Decorator/OperationalStatus.interface.yaml', ]
+yaml_core_list = [
+    "Inventory/Item.interface.yaml",
+    "State/Decorator/OperationalStatus.interface.yaml",
+]
 
 # yaml file paths for fan.
-yaml_fan_list = ['Inventory/Item.interface.yaml',
-                 'Inventory/Decorator/MeetsMinimumShipLevel.interface.yaml',
-                 'State/Decorator/OperationalStatus.interface.yaml', ]
+yaml_fan_list = [
+    "Inventory/Item.interface.yaml",
+    "Inventory/Decorator/MeetsMinimumShipLevel.interface.yaml",
+    "State/Decorator/OperationalStatus.interface.yaml",
+]
 
 # yaml file paths for fan_wc (fans in water-cooled system).
-yaml_fan_wc_list = ['Inventory/Item.interface.yaml',
-                    'Inventory/Decorator/MeetsMinimumShipLevel.interface.yaml', ]
+yaml_fan_wc_list = [
+    "Inventory/Item.interface.yaml",
+    "Inventory/Decorator/MeetsMinimumShipLevel.interface.yaml",
+]
 
 # yaml file paths for GPU.
-yaml_gpu_list = ['Inventory/Item.interface.yaml',
-                 'Inventory/Decorator/Replaceable.interface.yaml',
-                 'State/Decorator/OperationalStatus.interface.yaml', ]
+yaml_gpu_list = [
+    "Inventory/Item.interface.yaml",
+    "Inventory/Decorator/Replaceable.interface.yaml",
+    "State/Decorator/OperationalStatus.interface.yaml",
+]
 
 # Append to inventory list
 yaml_inventory_list.append(yaml_fru_list)
@@ -77,16 +88,18 @@ for inv_index in range(len(yaml_inventory_list)):
         f = open(yaml_file_path)
         yaml_data = yaml.safe_load(f)
         f.close()
-        for item in range(0, len(yaml_data['properties'])):
-            tmp_data = yaml_data['properties'][item]['name']
+        for item in range(0, len(yaml_data["properties"])):
+            tmp_data = yaml_data["properties"][item]["name"]
             inventory_dict[str(inventory_items[inv_index])].append(tmp_data)
 
 # Pretty print json formatter
-data = json.dumps(inventory_dict,
-                  indent=4,
-                  sort_keys=True,
-                  default=str,
-                  separators=(',', ':'))
+data = json.dumps(
+    inventory_dict,
+    indent=4,
+    sort_keys=True,
+    default=str,
+    separators=(",", ":"),
+)
 
 # Check if there is mismatch in data vs expect list
 if len(inventory_dict) != len(inventory_items):
@@ -98,8 +111,8 @@ if len(inventory_dict) != len(inventory_items):
 # Write dictionary data to inventory file
 print("\nGenerated Inventory item json format\n")
 print(data)
-out = open(fru_inventory_file_path, 'w')
-out.write('inventory_dict = ')
+out = open(fru_inventory_file_path, "w")
+out.write("inventory_dict = ")
 out.write(data)
 
 out.close()

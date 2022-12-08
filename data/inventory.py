@@ -1,20 +1,7 @@
 inventory_dict = {
-    "core": [
-        "PrettyName",
-        "Present",
-        "Functional"
-    ],
-    "fan": [
-        "PrettyName",
-        "Present",
-        "MeetsMinimumShipLevel",
-        "Functional"
-    ],
-    "fan_wc": [
-        "PrettyName",
-        "Present",
-        "MeetsMinimumShipLevel"
-    ],
+    "core": ["PrettyName", "Present", "Functional"],
+    "fan": ["PrettyName", "Present", "MeetsMinimumShipLevel", "Functional"],
+    "fan_wc": ["PrettyName", "Present", "MeetsMinimumShipLevel"],
     "fru": [
         "PrettyName",
         "Present",
@@ -26,12 +13,7 @@ inventory_dict = {
         "Version",
         "FieldReplaceable",
         "Cached",
-        "Functional"
+        "Functional",
     ],
-    "gpu": [
-        "PrettyName",
-        "Present",
-        "FieldReplaceable",
-        "Functional"
-    ]
+    "gpu": ["PrettyName", "Present", "FieldReplaceable", "Functional"],
 }

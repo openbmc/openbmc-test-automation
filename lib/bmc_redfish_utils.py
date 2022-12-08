@@ -6,15 +6,15 @@ BMC redfish utility functions.
 
 import json
 import re
-from robot.libraries.BuiltIn import BuiltIn
+
 import gen_print as gp
+from robot.libraries.BuiltIn import BuiltIn
 
 MTLS_ENABLED = BuiltIn().get_variable_value("${MTLS_ENABLED}")
 
 
 class bmc_redfish_utils(object):
-
-    ROBOT_LIBRARY_SCOPE = 'TEST SUITE'
+    ROBOT_LIBRARY_SCOPE = "TEST SUITE"
 
     def __init__(self):
         r"""
@@ -22,22 +22,25 @@ class bmc_redfish_utils(object):
         """
         # Obtain a reference to the global redfish object.
         self.__inited__ = False
-        self._redfish_ = BuiltIn().get_library_instance('redfish')
+        self._redfish_ = BuiltIn().get_library_instance("redfish")
 
-        if MTLS_ENABLED == 'True':
+        if MTLS_ENABLED == "True":
             self.__inited__ = True
         else:
             # There is a possibility that a given driver support both redfish and
             # legacy REST.
             self._redfish_.login()
-            self._rest_response_ = \
-                self._redfish_.get("/xyz/openbmc_project/", valid_status_codes=[200, 404])
+            self._rest_response_ = self._redfish_.get(
+                "/xyz/openbmc_project/", valid_status_codes=[200, 404]
+            )
 
             # If REST URL /xyz/openbmc_project/ is supported.
             if self._rest_response_.status == 200:
                 self.__inited__ = True
 
-        BuiltIn().set_global_variable("${REDFISH_REST_SUPPORTED}", self.__inited__)
+        BuiltIn().set_global_variable(
+            "${REDFISH_REST_SUPPORTED}", self.__inited__
+        )
 
     def get_redfish_session_info(self):
         r"""
@@ -50,7 +53,7 @@ class bmc_redfish_utils(object):
         """
         session_dict = {
             "key": self._redfish_.get_session_key(),
-            "location": self._redfish_.get_session_location()
+            "location": self._redfish_.get_session_location(),
         }
         return session_dict
 
@@ -115,9 +118,11 @@ class bmc_redfish_utils(object):
 
             # Iterate and check if path object has the attribute.
             for child_path_idx in child_path_list:
-                if ('JsonSchemas' in child_path_idx)\
-                        or ('SessionService' in child_path_idx)\
-                        or ('#' in child_path_idx):
+                if (
+                    ("JsonSchemas" in child_path_idx)
+                    or ("SessionService" in child_path_idx)
+                    or ("#" in child_path_idx)
+                ):
                     continue
                 if self.get_attribute(child_path_idx, attribute):
                     valid_path_list.append(child_path_idx)
@@ -180,7 +185,7 @@ class bmc_redfish_utils(object):
         # Return the matching target URL entry.
         for target in target_list:
             # target "/redfish/v1/Systems/system/Actions/ComputerSystem.Reset"
-            attribute_in_uri = target.rsplit('/', 1)[-1]
+            attribute_in_uri = target.rsplit("/", 1)[-1]
             # attribute_in_uri "ComputerSystem.Reset"
             if target_attribute == attribute_in_uri:
                 return target
@@ -226,9 +231,9 @@ class bmc_redfish_utils(object):
         # Set quiet variable to keep subordinate get() calls quiet.
         quiet = 1
         self.__pending_enumeration = set()
-        self._rest_response_ = \
-            self._redfish_.get(resource_path,
-                               valid_status_codes=[200, 404, 500])
+        self._rest_response_ = self._redfish_.get(
+            resource_path, valid_status_codes=[200, 404, 500]
+        )
 
         # Return empty list.
         if self._rest_response_.status != 200:
@@ -237,17 +242,18 @@ class bmc_redfish_utils(object):
         if not self.__pending_enumeration:
             return resource_path
         for resource in self.__pending_enumeration.copy():
-            self._rest_response_ = \
-                self._redfish_.get(resource,
-                                   valid_status_codes=[200, 404, 500])
+            self._rest_response_ = self._redfish_.get(
+                resource, valid_status_codes=[200, 404, 500]
+            )
 
             if self._rest_response_.status != 200:
                 continue
             self.walk_nested_dict(self._rest_response_.dict)
         return list(sorted(self.__pending_enumeration))
 
-    def enumerate_request(self, resource_path, return_json=1,
-                          include_dead_resources=False):
+    def enumerate_request(
+        self, resource_path, return_json=1, include_dead_resources=False
+    ):
         r"""
         Perform a GET enumerate request and return available resource paths.
 
@@ -292,71 +298,91 @@ class bmc_redfish_utils(object):
                 # Example: '/redfish/v1/JsonSchemas/' and sub resources.
                 #          '/redfish/v1/SessionService'
                 #          '/redfish/v1/Managers/bmc#/Oem'
-                if ('JsonSchemas' in resource) or ('SessionService' in resource)\
-                        or ('PostCodes' in resource) or ('Registries' in resource)\
-                        or ('Journal' in resource)\
-                        or ('#' in resource):
+                if (
+                    ("JsonSchemas" in resource)
+                    or ("SessionService" in resource)
+                    or ("PostCodes" in resource)
+                    or ("Registries" in resource)
+                    or ("Journal" in resource)
+                    or ("#" in resource)
+                ):
                     continue
 
-                self._rest_response_ = \
-                    self._redfish_.get(resource, valid_status_codes=[200, 404, 405, 500])
+                self._rest_response_ = self._redfish_.get(
+                    resource, valid_status_codes=[200, 404, 405, 500]
+                )
                 # Enumeration is done for available resources ignoring the
                 # ones for which response is not obtained.
                 if self._rest_response_.status != 200:
                     if include_dead_resources:
                         try:
                             dead_resources[self._rest_response_.status].append(
-                                resource)
+                                resource
+                            )
                         except KeyError:
-                            dead_resources[self._rest_response_.status] = \
-                                [resource]
+                            dead_resources[self._rest_response_.status] = [
+                                resource
+                            ]
                     continue
 
                 self.walk_nested_dict(self._rest_response_.dict, url=resource)
 
             enumerated_resources.update(set(resources_to_be_enumerated))
-            resources_to_be_enumerated = \
-                tuple(self.__pending_enumeration - enumerated_resources)
+            resources_to_be_enumerated = tuple(
+                self.__pending_enumeration - enumerated_resources
+            )
 
         if return_json:
             if include_dead_resources:
-                return json.dumps(self.__result, sort_keys=True,
-                                  indent=4, separators=(',', ': ')), dead_resources
+                return (
+                    json.dumps(
+                        self.__result,
+                        sort_keys=True,
+                        indent=4,
+                        separators=(",", ": "),
+                    ),
+                    dead_resources,
+                )
             else:
-                return json.dumps(self.__result, sort_keys=True,
-                                  indent=4, separators=(',', ': '))
+                return json.dumps(
+                    self.__result,
+                    sort_keys=True,
+                    indent=4,
+                    separators=(",", ": "),
+                )
         else:
             if include_dead_resources:
                 return self.__result, dead_resources
             else:
                 return self.__result
 
-    def walk_nested_dict(self, data, url=''):
+    def walk_nested_dict(self, data, url=""):
         r"""
         Parse through the nested dictionary and get the resource id paths.
         Description of argument(s):
         data    Nested dictionary data from response message.
         url     Resource for which the response is obtained in data.
         """
-        url = url.rstrip('/')
+        url = url.rstrip("/")
 
         for key, value in data.items():
-
             # Recursion if nested dictionary found.
             if isinstance(value, dict):
                 self.walk_nested_dict(value)
             else:
                 # Value contains a list of dictionaries having member data.
-                if 'Members' == key:
+                if "Members" == key:
                     if isinstance(value, list):
                         for memberDict in value:
                             if isinstance(memberDict, str):
                                 self.__pending_enumeration.add(memberDict)
                             else:
-                                self.__pending_enumeration.add(memberDict['@odata.id'])
+                                self.__pending_enumeration.add(
+                                    memberDict["@odata.id"]
+                                )
 
-                if '@odata.id' == key:
-                    value = value.rstrip('/')
+                if "@odata.id" == key:
+                    value = value.rstrip("/")
                     # Data for the given url.
                     if value == url:
                         self.__result[url] = data

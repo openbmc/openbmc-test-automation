@@ -5,22 +5,21 @@ This module provides many valuable openbmctool.py functions such as
 openbmctool_execute_command.
 """
 
-import gen_print as gp
-import gen_cmd as gc
-import gen_valid as gv
-import gen_misc as gm
-import var_funcs as vf
-import utils as utils
-from robot.libraries.BuiltIn import BuiltIn
-import re
-import tempfile
 import collections
 import json
+import re
+import tempfile
+
+import gen_cmd as gc
+import gen_misc as gm
+import gen_print as gp
+import gen_valid as gv
+import utils as utils
+import var_funcs as vf
+from robot.libraries.BuiltIn import BuiltIn
 
 
-def openbmctool_execute_command(command_string,
-                                *args,
-                                **kwargs):
+def openbmctool_execute_command(command_string, *args, **kwargs):
     r"""
     Run the command string as an argument to the openbmctool.py program and
     return the stdout and the return code.
@@ -64,10 +63,12 @@ def openbmctool_execute_command(command_string,
     # Get global BMC variable values.
     openbmc_host = BuiltIn().get_variable_value("${OPENBMC_HOST}", default="")
     https_port = BuiltIn().get_variable_value("${HTTPS_PORT}", default="443")
-    openbmc_username = BuiltIn().get_variable_value("${OPENBMC_USERNAME}",
-                                                    default="")
-    openbmc_password = BuiltIn().get_variable_value("${OPENBMC_PASSWORD}",
-                                                    default="")
+    openbmc_username = BuiltIn().get_variable_value(
+        "${OPENBMC_USERNAME}", default=""
+    )
+    openbmc_password = BuiltIn().get_variable_value(
+        "${OPENBMC_PASSWORD}", default=""
+    )
     if not gv.valid_value(openbmc_host):
         return "", "", 1
     if not gv.valid_value(openbmc_username):
@@ -81,24 +82,35 @@ def openbmctool_execute_command(command_string,
     # example, the user may have specified "fru status | head -n 2" which
     # would be broken into 2 list elements.  We will also break on ">"
     # (re-direct).
-    pipeline = list(map(str.strip, re.split(r' ([\|>]) ',
-                        str(command_string))))
+    pipeline = list(
+        map(str.strip, re.split(r" ([\|>]) ", str(command_string)))
+    )
     # The "tail" command below prevents a "egrep: write error: Broken pipe"
     # error if the user is piping the output to a sub-process.
     # Use "egrep -v" to get rid of editorial output from openbmctool.py.
-    pipeline.insert(1, "| tail -n +1 | egrep -v 'Attempting login|User [^ ]+"
-                    " has been logged out'")
+    pipeline.insert(
+        1,
+        "| tail -n +1 | egrep -v 'Attempting login|User [^ ]+"
+        " has been logged out'",
+    )
 
-    command_string = "set -o pipefail ; python3 $(which openbmctool.py) -H "\
-        + openbmc_host + ":" + https_port + " -U " + openbmc_username + " -P " + openbmc_password\
-        + " " + " ".join(pipeline)
+    command_string = (
+        "set -o pipefail ; python3 $(which openbmctool.py) -H "
+        + openbmc_host
+        + ":"
+        + https_port
+        + " -U "
+        + openbmc_username
+        + " -P "
+        + openbmc_password
+        + " "
+        + " ".join(pipeline)
+    )
 
     return gc.shell_cmd(command_string, *args, **kwargs)
 
 
-def openbmctool_execute_command_json(command_string,
-                                     *args,
-                                     **kwargs):
+def openbmctool_execute_command_json(command_string, *args, **kwargs):
     r"""
     Run the command string as an argument to the openbmctool.py program, parse
     the JSON output into a dictionary and return the dictionary.
@@ -112,21 +124,19 @@ def openbmctool_execute_command_json(command_string,
     See openbmctool_execute_command (above) for all field descriptions.
     """
 
-    rc, output = openbmctool_execute_command(command_string,
-                                             *args,
-                                             **kwargs)
+    rc, output = openbmctool_execute_command(command_string, *args, **kwargs)
     try:
         json_object = utils.to_json_ordered(output)
     except json.JSONDecodeError:
         BuiltIn().fail(gp.sprint_error(output))
 
-    if json_object['status'] != "ok":
+    if json_object["status"] != "ok":
         err_msg = "Error found in JSON data returned by the openbmctool.py "
         err_msg += "command. Expected a 'status' field value of \"ok\":\n"
         err_msg += gp.sprint_var(json_object, 1)
         BuiltIn().fail(gp.sprint_error(err_msg))
 
-    return json_object['data']
+    return json_object["data"]
 
 
 def get_fru_status():
@@ -155,8 +165,9 @@ def get_fru_status():
         [functional]:            No
     ...
     """
-    rc, output = openbmctool_execute_command("fru status", print_output=False,
-                                             ignore_err=False)
+    rc, output = openbmctool_execute_command(
+        "fru status", print_output=False, ignore_err=False
+    )
     # Example value for output (partial):
     # Component     | Is a FRU  | Present  | Functional  | Has Logs
     # cpu0          | Yes       | Yes      | Yes         | No
@@ -234,8 +245,9 @@ def get_fru_print(parse_json=True):
                                     parsed into a list of dictionaries.
     """
 
-    rc, output = openbmctool_execute_command("fru print", print_output=False,
-                                             ignore_err=False)
+    rc, output = openbmctool_execute_command(
+        "fru print", print_output=False, ignore_err=False
+    )
     if parse_json:
         return gm.json_loads_multiple(output)
     else:
@@ -305,8 +317,9 @@ def get_fru_list(parse_json=True):
                                     parsed into a list of dictionaries.
     """
 
-    rc, output = openbmctool_execute_command("fru list", print_output=False,
-                                             ignore_err=False)
+    rc, output = openbmctool_execute_command(
+        "fru list", print_output=False, ignore_err=False
+    )
     if parse_json:
         return gm.json_loads_multiple(output)
     else:
@@ -314,7 +327,6 @@ def get_fru_list(parse_json=True):
 
 
 def get_sensors_print():
-
     r"""
     Get the output of the sensors print command and return as a list of
     dictionaries.
@@ -341,9 +353,9 @@ def get_sensors_print():
         [target]:                Active
     ...
     """
-    rc, output = openbmctool_execute_command("sensors print",
-                                             print_output=False,
-                                             ignore_err=False)
+    rc, output = openbmctool_execute_command(
+        "sensors print", print_output=False, ignore_err=False
+    )
     # Example value for output (partial):
     # sensor                 | type         | units     | value    | target
     # OCC0                   | Discrete     | N/A       | Active   | Active
@@ -353,7 +365,6 @@ def get_sensors_print():
 
 
 def get_sensors_list():
-
     r"""
     Get the output of the sensors list command and return as a list of
     dictionaries.
@@ -380,9 +391,9 @@ def get_sensors_list():
         [target]:                Active
     ...
     """
-    rc, output = openbmctool_execute_command("sensors list",
-                                             print_output=False,
-                                             ignore_err=False)
+    rc, output = openbmctool_execute_command(
+        "sensors list", print_output=False, ignore_err=False
+    )
     # Example value for output (partial):
     # sensor                 | type         | units     | value    | target
     # OCC0                   | Discrete     | N/A       | Active   | Active
@@ -402,9 +413,9 @@ def get_openbmctool_version():
     Example result (excerpt):
     openbmctool_version:         1.06
     """
-    rc, output = openbmctool_execute_command("-V | cut -f 2 -d ' '",
-                                             print_output=False,
-                                             ignore_err=False)
+    rc, output = openbmctool_execute_command(
+        "-V | cut -f 2 -d ' '", print_output=False, ignore_err=False
+    )
     return output
 
 
@@ -414,15 +425,14 @@ def service_data_files():
     the collect_service_data command.
     """
 
-    return\
-        [
-            "inventory.txt",
-            "sensorReadings.txt",
-            "ledStatus.txt",
-            "SELshortlist.txt",
-            "parsedSELs.txt",
-            "bmcFullRaw.txt"
-        ]
+    return [
+        "inventory.txt",
+        "sensorReadings.txt",
+        "ledStatus.txt",
+        "SELshortlist.txt",
+        "parsedSELs.txt",
+        "bmcFullRaw.txt",
+    ]
 
 
 def collect_service_data(verify=False):
@@ -439,32 +449,41 @@ def collect_service_data(verify=False):
     # Route the output of collect_service_data to a file for easier parsing.
     temp = tempfile.NamedTemporaryFile()
     temp_file_path = temp.name
-    openbmctool_execute_command("collect_service_data > " + temp_file_path,
-                                ignore_err=False)
+    openbmctool_execute_command(
+        "collect_service_data > " + temp_file_path, ignore_err=False
+    )
     # Isolate the file paths in the collect_service_data output.  We're
     # looking for output lines like this from which to extract the file paths:
     # Inventory collected and stored in /tmp/dummy--2018-09-26_17.59.18/inventory.txt
-    rc, file_paths = gc.shell_cmd("egrep 'collected and' " + temp_file_path
-                                  # + " | sed -re 's#.*/tmp#/tmp#g'",
-                                  + " | sed -re 's#[^/]*/#/#'",
-                                  quiet=1, print_output=0)
+    rc, file_paths = gc.shell_cmd(
+        "egrep 'collected and' " + temp_file_path
+        # + " | sed -re 's#.*/tmp#/tmp#g'",
+        + " | sed -re 's#[^/]*/#/#'",
+        quiet=1,
+        print_output=0,
+    )
     # Example file_paths value:
     # /tmp/dummy--2018-09-26_17.59.18/inventory.txt
     # /tmp/dummy--2018-09-26_17.59.18/sensorReadings.txt
     # etc.
     # Convert from output to list.
-    collect_service_data_file_paths =\
-        list(filter(None, file_paths.split("\n")))
+    collect_service_data_file_paths = list(
+        filter(None, file_paths.split("\n"))
+    )
     if int(verify):
         # Create a list of files by stripping the dir names from the elements
         # of collect_service_data_file_paths.
-        files_obtained = [re.sub(r".*/", "", file_path)
-                          for file_path in collect_service_data_file_paths]
+        files_obtained = [
+            re.sub(r".*/", "", file_path)
+            for file_path in collect_service_data_file_paths
+        ]
         files_expected = service_data_files()
         files_missing = list(set(files_expected) - set(files_obtained))
         if len(files_missing) > 0:
-            gp.printn("collect_service_data output:\n"
-                      + gm.file_to_str(temp_file_path))
+            gp.printn(
+                "collect_service_data output:\n"
+                + gm.file_to_str(temp_file_path)
+            )
             err_msg = "The following files are missing from the list of files"
             err_msg += " returned by collect_service_data:\n"
             err_msg += gp.sprint_var(files_missing)
@@ -479,11 +498,7 @@ def health_check_fields():
     Return a complete list of field names returned by the health_check command.
     """
 
-    return\
-        [
-            "hardware_status",
-            "performance"
-        ]
+    return ["hardware_status", "performance"]
 
 
 def get_health_check(verify=False):
@@ -507,9 +522,9 @@ def get_health_check(verify=False):
                                     health_check command.
     """
 
-    rc, output = openbmctool_execute_command("health_check",
-                                             print_output=False,
-                                             ignore_err=False)
+    rc, output = openbmctool_execute_command(
+        "health_check", print_output=False, ignore_err=False
+    )
     health_check = vf.key_value_outbuf_to_dict(output, delim=":")
     if int(verify):
         err_msg = gv.valid_dict(health_check, health_check_fields())
@@ -525,11 +540,7 @@ def remote_logging_view_fields():
     remote_logging view command.
     """
 
-    return\
-        [
-            "Address",
-            "Port"
-        ]
+    return ["Address", "Port"]
 
 
 def get_remote_logging_view(verify=False):
@@ -554,14 +565,14 @@ def get_remote_logging_view(verify=False):
                                     remote_logging view' command.
     """
 
-    remote_logging_view =\
-        openbmctool_execute_command_json("logging remote_logging view",
-                                         print_output=False,
-                                         ignore_err=False)
+    remote_logging_view = openbmctool_execute_command_json(
+        "logging remote_logging view", print_output=False, ignore_err=False
+    )
 
     if int(verify):
-        err_msg = gv.valid_dict(remote_logging_view,
-                                remote_logging_view_fields())
+        err_msg = gv.valid_dict(
+            remote_logging_view, remote_logging_view_fields()
+        )
         if err_msg != "":
             BuiltIn().fail(gp.sprint_error(err_msg))
 
@@ -604,8 +615,9 @@ def network(sub_command, **options):
     else:
         new_options = options
 
-    command_string = gc.create_command_string('network ' + sub_command,
-                                              new_options)
-    return openbmctool_execute_command_json(command_string,
-                                            print_output=False,
-                                            ignore_err=False)
+    command_string = gc.create_command_string(
+        "network " + sub_command, new_options
+    )
+    return openbmctool_execute_command_json(
+        command_string, print_output=False, ignore_err=False
+    )

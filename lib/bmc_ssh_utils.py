@@ -5,19 +5,22 @@ This module provides many valuable bmc ssh functions such as bmc_execute_command
 """
 
 import os
-import gen_valid as gv
+
 import gen_robot_ssh as grs
+import gen_valid as gv
 from robot.libraries.BuiltIn import BuiltIn
 
 
-def bmc_execute_command(cmd_buf,
-                        print_out=0,
-                        print_err=0,
-                        ignore_err=0,
-                        fork=0,
-                        quiet=None,
-                        test_mode=None,
-                        time_out=None):
+def bmc_execute_command(
+    cmd_buf,
+    print_out=0,
+    print_err=0,
+    ignore_err=0,
+    fork=0,
+    quiet=None,
+    test_mode=None,
+    time_out=None,
+):
     r"""
     Run the given command in an BMC SSH session and return the stdout, stderr and the return code.
 
@@ -45,10 +48,12 @@ def bmc_execute_command(cmd_buf,
     # Get global BMC variable values.
     openbmc_host = BuiltIn().get_variable_value("${OPENBMC_HOST}", default="")
     ssh_port = BuiltIn().get_variable_value("${SSH_PORT}", default="22")
-    openbmc_username = BuiltIn().get_variable_value("${OPENBMC_USERNAME}",
-                                                    default="")
-    openbmc_password = BuiltIn().get_variable_value("${OPENBMC_PASSWORD}",
-                                                    default="")
+    openbmc_username = BuiltIn().get_variable_value(
+        "${OPENBMC_USERNAME}", default=""
+    )
+    openbmc_password = BuiltIn().get_variable_value(
+        "${OPENBMC_PASSWORD}", default=""
+    )
 
     if not gv.valid_value(openbmc_host):
         return "", "", 1
@@ -59,30 +64,47 @@ def bmc_execute_command(cmd_buf,
     if not gv.valid_value(ssh_port):
         return "", "", 1
 
-    open_connection_args = {'host': openbmc_host, 'alias': 'bmc_connection',
-                            'timeout': '25.0', 'prompt': '# ', 'port': ssh_port}
-    login_args = {'username': openbmc_username, 'password': openbmc_password}
+    open_connection_args = {
+        "host": openbmc_host,
+        "alias": "bmc_connection",
+        "timeout": "25.0",
+        "prompt": "# ",
+        "port": ssh_port,
+    }
+    login_args = {"username": openbmc_username, "password": openbmc_password}
 
-    openbmc_user_type = os.environ.get('USER_TYPE', "") or \
-        BuiltIn().get_variable_value("${USER_TYPE}", default="")
-    if openbmc_user_type == 'sudo':
-        cmd_buf = 'sudo -i ' + cmd_buf
-    return grs.execute_ssh_command(cmd_buf, open_connection_args, login_args,
-                                   print_out, print_err, ignore_err, fork,
-                                   quiet, test_mode, time_out)
+    openbmc_user_type = os.environ.get(
+        "USER_TYPE", ""
+    ) or BuiltIn().get_variable_value("${USER_TYPE}", default="")
+    if openbmc_user_type == "sudo":
+        cmd_buf = "sudo -i " + cmd_buf
+    return grs.execute_ssh_command(
+        cmd_buf,
+        open_connection_args,
+        login_args,
+        print_out,
+        print_err,
+        ignore_err,
+        fork,
+        quiet,
+        test_mode,
+        time_out,
+    )
 
 
-def os_execute_command(cmd_buf,
-                       print_out=0,
-                       print_err=0,
-                       ignore_err=0,
-                       fork=0,
-                       quiet=None,
-                       test_mode=None,
-                       time_out=None,
-                       os_host="",
-                       os_username="",
-                       os_password=""):
+def os_execute_command(
+    cmd_buf,
+    print_out=0,
+    print_err=0,
+    ignore_err=0,
+    fork=0,
+    quiet=None,
+    test_mode=None,
+    time_out=None,
+    os_host="",
+    os_username="",
+    os_password="",
+):
     r"""
     Run the given command in an OS SSH session and return the stdout, stderr and the return code.
 
@@ -111,9 +133,13 @@ def os_execute_command(cmd_buf,
     if os_host == "":
         os_host = BuiltIn().get_variable_value("${OS_HOST}", default="")
     if os_username == "":
-        os_username = BuiltIn().get_variable_value("${OS_USERNAME}", default="")
+        os_username = BuiltIn().get_variable_value(
+            "${OS_USERNAME}", default=""
+        )
     if os_password == "":
-        os_password = BuiltIn().get_variable_value("${OS_PASSWORD}", default="")
+        os_password = BuiltIn().get_variable_value(
+            "${OS_PASSWORD}", default=""
+        )
 
     if not gv.valid_value(os_host):
         return "", "", 1
@@ -122,21 +148,32 @@ def os_execute_command(cmd_buf,
     if not gv.valid_value(os_password):
         return "", "", 1
 
-    open_connection_args = {'host': os_host, 'alias': 'os_connection'}
-    login_args = {'username': os_username, 'password': os_password}
+    open_connection_args = {"host": os_host, "alias": "os_connection"}
+    login_args = {"username": os_username, "password": os_password}
 
-    return grs.execute_ssh_command(cmd_buf, open_connection_args, login_args,
-                                   print_out, print_err, ignore_err, fork,
-                                   quiet, test_mode, time_out)
+    return grs.execute_ssh_command(
+        cmd_buf,
+        open_connection_args,
+        login_args,
+        print_out,
+        print_err,
+        ignore_err,
+        fork,
+        quiet,
+        test_mode,
+        time_out,
+    )
 
 
-def xcat_execute_command(cmd_buf,
-                         print_out=0,
-                         print_err=0,
-                         ignore_err=0,
-                         fork=0,
-                         quiet=None,
-                         test_mode=None):
+def xcat_execute_command(
+    cmd_buf,
+    print_out=0,
+    print_err=0,
+    ignore_err=0,
+    fork=0,
+    quiet=None,
+    test_mode=None,
+):
     r"""
     Run the given command in an XCAT SSH session and return the stdout, stderr and the return code.
 
@@ -161,12 +198,13 @@ def xcat_execute_command(cmd_buf,
 
     # Get global XCAT variable values.
     xcat_host = BuiltIn().get_variable_value("${XCAT_HOST}", default="")
-    xcat_username = BuiltIn().get_variable_value("${XCAT_USERNAME}",
-                                                 default="")
-    xcat_password = BuiltIn().get_variable_value("${XCAT_PASSWORD}",
-                                                 default="")
-    xcat_port = BuiltIn().get_variable_value("${XCAT_PORT}",
-                                             default="22")
+    xcat_username = BuiltIn().get_variable_value(
+        "${XCAT_USERNAME}", default=""
+    )
+    xcat_password = BuiltIn().get_variable_value(
+        "${XCAT_PASSWORD}", default=""
+    )
+    xcat_port = BuiltIn().get_variable_value("${XCAT_PORT}", default="22")
 
     if not gv.valid_value(xcat_host):
         return "", "", 1
@@ -177,19 +215,27 @@ def xcat_execute_command(cmd_buf,
     if not gv.valid_value(xcat_port):
         return "", "", 1
 
-    open_connection_args = {'host': xcat_host, 'alias': 'xcat_connection',
-                            'port': xcat_port}
-    login_args = {'username': xcat_username, 'password': xcat_password}
+    open_connection_args = {
+        "host": xcat_host,
+        "alias": "xcat_connection",
+        "port": xcat_port,
+    }
+    login_args = {"username": xcat_username, "password": xcat_password}
 
-    return grs.execute_ssh_command(cmd_buf, open_connection_args, login_args,
-                                   print_out, print_err, ignore_err, fork,
-                                   quiet, test_mode)
+    return grs.execute_ssh_command(
+        cmd_buf,
+        open_connection_args,
+        login_args,
+        print_out,
+        print_err,
+        ignore_err,
+        fork,
+        quiet,
+        test_mode,
+    )
 
 
-def device_write(cmd_buf,
-                 print_out=0,
-                 quiet=None,
-                 test_mode=None):
+def device_write(cmd_buf, print_out=0, quiet=None, test_mode=None):
     r"""
     Write the given command in a device SSH session and return the stdout, stderr and the return code.
 
@@ -216,12 +262,13 @@ def device_write(cmd_buf,
 
     # Get global DEVICE variable values.
     device_host = BuiltIn().get_variable_value("${DEVICE_HOST}", default="")
-    device_username = BuiltIn().get_variable_value("${DEVICE_USERNAME}",
-                                                   default="")
-    device_password = BuiltIn().get_variable_value("${DEVICE_PASSWORD}",
-                                                   default="")
-    device_port = BuiltIn().get_variable_value("${DEVICE_PORT}",
-                                               default="22")
+    device_username = BuiltIn().get_variable_value(
+        "${DEVICE_USERNAME}", default=""
+    )
+    device_password = BuiltIn().get_variable_value(
+        "${DEVICE_PASSWORD}", default=""
+    )
+    device_port = BuiltIn().get_variable_value("${DEVICE_PORT}", default="22")
 
     if not gv.valid_value(device_host):
         return "", "", 1
@@ -232,10 +279,21 @@ def device_write(cmd_buf,
     if not gv.valid_value(device_port):
         return "", "", 1
 
-    open_connection_args = {'host': device_host, 'alias': 'device_connection',
-                            'port': device_port}
-    login_args = {'username': device_username, 'password': device_password}
+    open_connection_args = {
+        "host": device_host,
+        "alias": "device_connection",
+        "port": device_port,
+    }
+    login_args = {"username": device_username, "password": device_password}
 
-    return grs.execute_ssh_command(cmd_buf, open_connection_args, login_args,
-                                   print_out, print_err=0, ignore_err=1,
-                                   fork=0, quiet=quiet, test_mode=test_mode)
+    return grs.execute_ssh_command(
+        cmd_buf,
+        open_connection_args,
+        login_args,
+        print_out,
+        print_err=0,
+        ignore_err=1,
+        fork=0,
+        quiet=quiet,
+        test_mode=test_mode,
+    )

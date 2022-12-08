@@ -4,12 +4,12 @@ r"""
 This module is the python counterpart to run_keyword.robot.
 """
 
-import gen_print as gp
-import gen_robot_valid as grv
-import gen_robot_utils as gru
-
-from robot.libraries.BuiltIn import BuiltIn
 import re
+
+import gen_print as gp
+import gen_robot_utils as gru
+import gen_robot_valid as grv
+from robot.libraries.BuiltIn import BuiltIn
 
 
 def setup():
@@ -42,10 +42,7 @@ def program_teardown():
     gp.qprint_pgm_footer()
 
 
-def my_run_keywords(lib_file_path,
-                    keyword_string,
-                    quiet=0,
-                    test_mode=0):
+def my_run_keywords(lib_file_path, keyword_string, quiet=0, test_mode=0):
     r"""
     Run the keywords in the keyword string.
 
@@ -92,10 +89,10 @@ def my_run_keywords(lib_file_path,
         del lib_file_path_list[0]
     for lib_file_path in lib_file_path_list:
         if lib_file_path.endswith(".py"):
-            gp.dprint_issuing("import_library(\"" + lib_file_path + "\")")
+            gp.dprint_issuing('import_library("' + lib_file_path + '")')
             BuiltIn().import_library(lib_file_path)
         else:
-            gp.dprint_issuing("my_import_resource(\"" + lib_file_path + "\")")
+            gp.dprint_issuing('my_import_resource("' + lib_file_path + '")')
             gru.my_import_resource(lib_file_path)
 
     # The user can pass multiple keyword strings by separating them with " ; ".

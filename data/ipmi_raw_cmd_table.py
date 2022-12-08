@@ -11,16 +11,14 @@ IPMI raw commands table:
 # Refer:
 # openbmc/meta-openbmc-machines/meta-openpower/meta-ibm/meta-witherspoon/recipe
 # s-phosphor/ipmi/phosphor-ipmi-host/cipher_list.json
-valid_ciphers = ['17']
-unsupported_ciphers = ['1', '2', '15', '16']
+valid_ciphers = ["17"]
+unsupported_ciphers = ["1", "2", "15", "16"]
 
 IPMI_RAW_CMD = {
     # Interface name
-    'power_supply_redundancy':
-    {
+    "power_supply_redundancy": {
         # Command action type
-        'Get':
-        [
+        "Get": [
             # raw command, expected output(s), comment
             "0x04 0x2d 0x0b",
             "00 00 01 00",
@@ -30,73 +28,61 @@ IPMI_RAW_CMD = {
             "00 40 02 00",
             "40 is scanning enabled and 02 indicates redundancy enabled",
         ],
-        'Enabled':
-        [
+        "Enabled": [
             # raw command, expected output, comment
             "0x04 0x30 0x0b 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x00 0x00",
             "none",
             "Enabled nibble position 6th LSB e.g. 0x2",
         ],
-        'Disabled':
-        [
+        "Disabled": [
             # raw command, expected output, comment
             "0x04 0x30 0x0b 0x00 0x00 0x01 0x00 0x00 0x00 0x00 0x00 0x00",
             "none",
             "Enabled nibble position 6th LSB e.g. 0x1",
         ],
     },
-    'power_reading':
-    {
-        'Get':
-        [
+    "power_reading": {
+        "Get": [
             # raw command, expected output(s), comment
             "0x2c 0x02 0xdc 0x01 0x01 0x00",
             "dc d5 00 d5 00 d5 00 d5 00 00 00 00 00 00 00 00 00 00",
             "Byte position 2nd LSB e.g. d5 Instantaneous power readings",
         ],
     },
-    'conf_param':
-    {
-        'Enabled':
-        [
+    "conf_param": {
+        "Enabled": [
             # raw command, expected output, comment
             "0x2c 0x12 0xdc 0x02 0x00 0x01",
             "dc",
             "Enabled nibble position 6th LSB e.g. 0x01",
         ],
-        'Disabled':
-        [
+        "Disabled": [
             # raw command, expected output, comment
             "0x2c 0x12 0xdc 0x02 0x00 0x00",
             "dc",
             "Disable nibble position 6th LSB e.g. 0x00",
-        ]
+        ],
     },
-    'SEL_entry':
-    {
-        'Reserve':
-        [
+    "SEL_entry": {
+        "Reserve": [
             # raw command, expected output, comment
             "0x0a 0x42",
             "27 00",
             "27 is Reservation ID, LSB, 00 Reservation ID, MSB ",
         ],
-        'Get_SEL_Time':
-        [
+        "Get_SEL_Time": [
             # raw command
-            '0x0a 0x48',
+            "0x0a 0x48",
         ],
-        'Set_SEL_Time':
-        [
+        "Set_SEL_Time": [
             # raw command, expected output(s)
-            '0x0a 0x49',
-            'rsp=0xd5',
-            'not supported in present state',
-            'rsp=0xc7',
-            'Request data length invalid',
+            "0x0a 0x49",
+            "rsp=0xd5",
+            "not supported in present state",
+            "rsp=0xc7",
+            "Request data length invalid",
         ],
-        'Clear_SEL':
-        [
+        "Clear_SEL": [
             # raw command, expected output(s)
             "0x0a 0x47",
             "0x43 0x4c 0x52 0xaa",
@@ -106,56 +92,48 @@ IPMI_RAW_CMD = {
             "Reservation cancelled or invalid",
             "0x43 0x4c 0x52 0x00",
         ],
-        'SEL_info':
-        [
+        "SEL_info": [
             # raw command
             "0x0a 0x40"
         ],
-        'Create_SEL':
-        [
+        "Create_SEL": [
             # raw command
             "0x0a 0x44 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x00 0x00 0x04",
             "0x00 0xa0 0x04 0x07",
         ],
-        'Get_SEL_Entry':
-        [
+        "Get_SEL_Entry": [
             # raw command
             "0x0a 0x43 0x00 0x00",
             "0x00 0xff",
         ],
     },
-    'Self_Test_Results':
-    {
-        'Get':
-        [
+    "Self_Test_Results": {
+        "Get": [
             # raw command, expected output(s), comment
             "0x06 0x04",
             "56 00",
             "56h = Self Test function not implemented in this controller.",
         ]
     },
-    'Device GUID':
-    {
-        'Get':
-        [
+    "Device GUID": {
+        "Get": [
             # raw command, expected output(s), comment
             "0x06 0x08",
             "01 70 9b ae da 6f dd 9c b4 4c 36 be 66 c8 49 28",
             "Get GUID bytes 1 through 16.",
-
         ]
     },
-    'LAN_Config_Params':
-    {
-        'Get':
-        [
+    "LAN_Config_Params": {
+        "Get": [
             # raw command, expected output, comment
             "0x0c 0x02",
             "11 02",
-            "11 is Parameter revision, 02 is Configuration parameter data e.g. Cipher Suite Entry count",
+            (
+                "11 is Parameter revision, 02 is Configuration parameter data"
+                " e.g. Cipher Suite Entry count"
+            ),
         ],
-        'Set':
-        [
+        "Set": [
             # raw command, expected output, error response
             "0x0c 0x01",
             "11 00",
@@ -163,135 +141,116 @@ IPMI_RAW_CMD = {
             "Invalid data field in request",
         ],
     },
-    'Payload':
-    {
-        'Get_Payload_Activation_Status':
-        [
+    "Payload": {
+        "Get_Payload_Activation_Status": [
             # raw command, expected output(s), comment
             "0x06 0x4a 0x01",
             "01 00 00",
-            "1st byte is instance capacity, last two bytes is activation status of instances",
+            (
+                "1st byte is instance capacity, last two bytes is activation"
+                " status of instances"
+            ),
         ],
-        'Activate_Payload':
-        [
+        "Activate_Payload": [
             # raw command, expected output(s), comment
             "0x06 0x48 0x01 0x01 0xc6 0x00 0x00 0x00",
             "00 00 00 00 ff 00 ff 00 6f 02 ff ff",
-            "Last two bits are payload vlan number, - FFFFh if VLAN addressing is not used",
+            (
+                "Last two bits are payload vlan number, - FFFFh if VLAN"
+                " addressing is not used"
+            ),
         ],
-        'Deactivate_Payload':
-        [
+        "Deactivate_Payload": [
             # raw command, expected output(s), comment
             "0x06 0x49 0x01 0x01 0x00 0x00 0x00 0x00",
             "",
             "Line feed only",
         ],
-        'Get_Payload_Instance_Info':
-        [
+        "Get_Payload_Instance_Info": [
             # raw command, expected output(s), comment
             "0x06 0x4b 0x01 0x01",
             "00 00 00 00 00 00 00 00 00 00 00 00",
-            "When the payload is activated, the first four bytes are the session ID,"
-            "otherwise it should be 00."
+            (
+                "When the payload is activated, the first four bytes are the"
+                " session ID,otherwise it should be 00."
+            ),
         ],
-        'Get_User_Access_Payload':
-        [
+        "Get_User_Access_Payload": [
             # raw command,
             "0x06 0x4d"
         ],
-        'Set_User_Access_Payload':
-        [
+        "Set_User_Access_Payload": [
             # raw command,
             "0x06 0x4c"
         ],
-        'Get_Channel_Payload_Version':
-        [
+        "Get_Channel_Payload_Version": [
             # raw command,
             "0x06 0x4F"
         ],
-        'Get_Channel_Payload_Support':
-        [
+        "Get_Channel_Payload_Support": [
             # raw command,
             "0x06 0x4E"
         ],
     },
-    'BIOS_POST_Code':
-    {
-        'Get':
-        [
+    "BIOS_POST_Code": {
+        "Get": [
             # raw command, expected output, comment
             "0x30 0xe9",
             "",
             "Response bytes will vary in length depending on state of system",
             "0x89",
-            "error response byte when host is powered off"
+            "error response byte when host is powered off",
         ]
     },
-    'Device ID':
-    {
-        'Get':
-        [
+    "Device ID": {
+        "Get": [
             # raw command, error response, error code
             "0x06 0x01",
             "Error: Unable to establish IPMI v2 / RMCP+ session",
             "0xc7",
         ]
     },
-    'Cold Reset':
-    {
-        'reset':
-        [
+    "Cold Reset": {
+        "reset": [
             # raw command
             "0x06 0x02"
         ]
     },
-    'lan_parameters':
-    {
-        'get_ip':
-        [
+    "lan_parameters": {
+        "get_ip": [
             # raw command
             "0x0c 0x02 0x01 0x03 0 0"
         ],
-        'get_ip_src':
-        [
+        "get_ip_src": [
             # raw command
             "0x0c 0x02 0x01 0x04 0 0"
         ],
-        'get_dot1q':
-        [
+        "get_dot1q": [
             # raw command
             "0x0c 0x02 0x01 0x14 0 0"
-        ]
+        ],
     },
-    'SDR_Info':
-    {
-        'get':
-        [
+    "SDR_Info": {
+        "get": [
             # raw command
             "0x04 0x20 1"
         ]
     },
-    'Chassis_status':
-    {
-        'get':
-        [
+    "Chassis_status": {
+        "get": [
             # raw command
             "0x00 0x01"
         ]
     },
-    'SEL_Info':
-    {
-        'get':
-        [
+    "SEL_Info": {
+        "get": [
             # raw command
             "0x0a 0x40"
         ]
     },
-    'Watchdog':
-    {
+    "Watchdog": {
         # Command action type
-        'Get':
-        [
+        "Get": [
             # raw command, expected output(s), comment
             "0x06 0x25",
             "05 00 00 00 64 00",
@@ -341,8 +300,7 @@ IPMI_RAW_CMD = {
             "0x06 0x25 0x00",
             "Get with one extra byte",
         ],
-        'Set':
-        [
+        "Set": [
             # raw command, expected output, comment
             "0x06 0x24 0x05 0x00 0x00 0x00 0x64 0x00",
             "none",
@@ -435,8 +393,7 @@ IPMI_RAW_CMD = {
             "none",
             "Set with one extra byte",
         ],
-        'Reset':
-        [
+        "Reset": [
             # raw command, expected output, comment
             "0x06 0x22",
             "none",
@@ -447,21 +404,17 @@ IPMI_RAW_CMD = {
             "0x06 0x22",
             "none",
             "Reset watchdog timer without initialized watchdog",
-        ]
+        ],
     },
-    'SOL':
-    {
-        'Set_SOL':
-        [
+    "SOL": {
+        "Set_SOL": [
             # raw command, expected output(s), comment
-            'Invalid value',
-            'Valid values are serial, 9.6 19.2, 38.4, 57.6 and 115.2',
+            "Invalid value",
+            "Valid values are serial, 9.6 19.2, 38.4, 57.6 and 115.2",
         ]
     },
-    'Get SDR':
-    {
-        'Get':
-        [
+    "Get SDR": {
+        "Get": [
             # Get SDR raw command without Reservation ID.
             "0x0a 0x23 0x00 0x00 0x00 0x00 0x00 0xff",
             # Netfunction and cmd.
@@ -469,22 +422,18 @@ IPMI_RAW_CMD = {
             # Record ID offset and bytes to read.
             "0x01 0x0f",
             #  Raw command To Get SDR Partial without Reservation ID.
-            "0x0a 0x23 0x00 0x00 0x00 0x00 0x01 0x0f"
+            "0x0a 0x23 0x00 0x00 0x00 0x00 0x01 0x0f",
         ],
     },
-    'Get':
-    {
-        'POH_Counter':
-        [
+    "Get": {
+        "POH_Counter": [
             # raw command, error response
-            '0x00 0x0f',
-            'Error: Unable to establish IPMI v2 / RMCP+ session'
+            "0x00 0x0f",
+            "Error: Unable to establish IPMI v2 / RMCP+ session",
         ]
     },
-    'Device_SDR':
-    {
-        'Get_Info':
-        [
+    "Device_SDR": {
+        "Get_Info": [
             # raw command, expected output(s), comment
             "0x04 0x20 0x00",
             "0x04 0x20 0x01",
@@ -493,16 +442,14 @@ IPMI_RAW_CMD = {
             "rsp=0xd4",
             "Insufficient privilege level",
         ],
-        'Get':
-        [
+        "Get": [
             # raw command, expected output(s), comment
             "0x04 0x21",
             "0x00 0x00 0x00 0xff",
             "rsp=0xc7",
             "Request data length invalid",
         ],
-        'Reserve_Repository':
-        [
+        "Reserve_Repository": [
             # raw command, expected output(s), comment
             "0x04 0x22",
             "rsp=0xc7",
@@ -510,114 +457,91 @@ IPMI_RAW_CMD = {
             "rsp=0xd4",
             "Insufficient privilege level",
             "Reservation cancelled or invalid",
-        ]
+        ],
     },
-    'System_Info':
-    {
-        'param0_Set_In_Progress':
-        {
-            'Get':
-            [
+    "System_Info": {
+        "param0_Set_In_Progress": {
+            "Get": [
                 # raw command, expected output(s)
                 "0x06 0x59 0x00 0x00 0x00 0x00",
                 "Request data length invalid",
             ],
-            'Set':
-            [
+            "Set": [
                 # raw command, expected output(s)
                 "0x06 0x58 0x00",
                 "Request data length invalid",
                 "Invalid data field in request",
             ],
         },
-        'param1_System_Firmware_Version':
-        {
-            'Get':
-            [
+        "param1_System_Firmware_Version": {
+            "Get": [
                 # raw command, expected output(s)
                 "0x06 0x59 0x00 0x01 0x00 0x00",
                 "Request data length invalid",
             ],
-            'Set':
-            [
+            "Set": [
                 # raw command, expected output(s)
                 "0x06 0x58 0x01 0x00 0x00 0x0e",
                 "Invalid data field in request",
             ],
         },
-        'param2_System_Name':
-        {
-            'Get':
-            [
+        "param2_System_Name": {
+            "Get": [
                 # raw command, expected output(s)
                 "0x06 0x59 0x00 0x02 0x00 0x00",
                 "Request data length invalid",
             ],
-            'Set':
-            [
+            "Set": [
                 # raw command, expected output(s)
                 "0x06 0x58 0x02 0x00 0x00 0x0e",
                 "Invalid data field in request",
             ],
         },
-        'param3_Primary_Operating_System_Name':
-        {
-            'Get':
-            [
+        "param3_Primary_Operating_System_Name": {
+            "Get": [
                 # raw command, expected output(s)
                 "0x06 0x59 0x00 0x03 0x00 0x00",
                 "Request data length invalid",
             ],
-            'Set':
-            [
+            "Set": [
                 # raw command, expected output(s)
                 "0x06 0x58 0x03 0x00 0x00 0x0e",
                 "Invalid data field in request",
             ],
         },
-        'param4_Operating_System_Name':
-        {
-            'Get':
-            [
+        "param4_Operating_System_Name": {
+            "Get": [
                 # raw command, expected output(s)
                 "0x06 0x59 0x00 0x04 0x00 0x00",
                 "Request data length invalid",
             ],
-            'Set':
-            [
+            "Set": [
                 # raw command, expected output(s)
                 "0x06 0x58 0x04 0x00 0x00 0x0e",
                 "Invalid data field in request",
             ],
         },
-        'param5_Present_OS_Version_number':
-        {
-            'Get':
-            [
+        "param5_Present_OS_Version_number": {
+            "Get": [
                 # raw command, expected output(s)
                 "0x06 0x59 0x00 0x05 0x00 0x00",
                 "Request data length invalid",
             ],
-            'Set':
-            [
+            "Set": [
                 # raw command, expected output(s)
                 "0x06 0x58 0x05 0x00 0x00 0x0e",
                 "Invalid data field in request",
-            ]
-        }
+            ],
+        },
     },
-    'Get Channel Auth Cap':
-    {
-        'get':
-        [
+    "Get Channel Auth Cap": {
+        "get": [
             # raw command
             "0x06 0x38",
         ]
     },
-    'Cipher Suite':
-    {
-        'get':
-        [
+    "Cipher Suite": {
+        "get": [
             # raw command, supported algorithm
             "0x06 0x54",
             "03 44 81",
@@ -626,10 +550,8 @@ IPMI_RAW_CMD = {
             # 81 - aes_cbc_128
         ]
     },
-    'SDR':
-    {
-        'Get':
-        [
+    "SDR": {
+        "Get": [
             # Get SDR raw command without Reservation ID.
             "0x0a 0x23 0x00 0x00 0x00 0x00 0x00 0xff",
             # Netfunction and command.
@@ -637,50 +559,41 @@ IPMI_RAW_CMD = {
             # Record ID offset and bytes to read.
             "0x00 0x00 0x01 0x0f",
             #  Raw command To Get SDR Partial without reservation ID.
-            "0x0a 0x23 0x00 0x00 0x00 0x00 0x01 0x0f"
+            "0x0a 0x23 0x00 0x00 0x00 0x00 0x01 0x0f",
         ],
-        'Reserve SDR Repository':
-        [
+        "Reserve SDR Repository": [
             # raw command, expected output(s), comment
             "0x0a 0x22",
         ],
-        'SDR Repository Info':
-        [
+        "SDR Repository Info": [
             # raw command.
             "0x0a 0x20",
         ],
-        'Get SDR allocation Info':
-        [
+        "Get SDR allocation Info": [
             # raw command.
             "0x0a 0x21"
         ],
-        'Delete SDR':
-        [
+        "Delete SDR": [
             # raw command.
             "0x0a 0x26"
         ],
-        'Partially Add SDR':
-        [
+        "Partially Add SDR": [
             # raw command.
             "0x0a 0x25"
-        ]
+        ],
     },
-    'FRU':
-    {
-        'Inventory_Area_Info':
-        [
+    "FRU": {
+        "Inventory_Area_Info": [
             # raw command, expected output(s), comment
             "0x0a 0x10",
             "Invalid data field in request",
-            "Request data length invalid"
+            "Request data length invalid",
         ],
-        'Read':
-        [
+        "Read": [
             # raw command
             "0x0a 0x11",
         ],
-        'Write':
-        [
+        "Write": [
             # raw command
             "0x0a 0x12",
         ],

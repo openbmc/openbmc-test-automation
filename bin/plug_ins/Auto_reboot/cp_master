@@ -10,7 +10,15 @@ import time
 
 save_dir_path = sys.path.pop(0)
 
-modules = ['gen_arg', 'gen_print', 'gen_valid', 'gen_misc', 'gen_cmd', 'gen_plug_in_utils', 'gen_call_robot']
+modules = [
+    "gen_arg",
+    "gen_print",
+    "gen_valid",
+    "gen_misc",
+    "gen_cmd",
+    "gen_plug_in_utils",
+    "gen_call_robot",
+]
 for module in modules:
     exec("from " + module + " import *")
 
@@ -21,22 +29,27 @@ sys.path.insert(0, save_dir_path)
 set_exit_on_error(True)
 
 parser = argparse.ArgumentParser(
-    usage='%(prog)s [OPTIONS]',
-    description="%(prog)s will set the auto_boot policy according to the user's wishes.",
+    usage="%(prog)s [OPTIONS]",
+    description=(
+        "%(prog)s will set the auto_boot policy according to the user's"
+        " wishes."
+    ),
     formatter_class=argparse.RawTextHelpFormatter,
-    prefix_chars='-+')
+    prefix_chars="-+",
+)
 
 
 # Populate stock_list with options we want.
-stock_list = [("test_mode", get_plug_default("test_mode", 0)),
-              ("quiet", get_plug_default("quiet", 0)),
-              ("debug", get_plug_default("debug", 0))]
+stock_list = [
+    ("test_mode", get_plug_default("test_mode", 0)),
+    ("quiet", get_plug_default("quiet", 0)),
+    ("debug", get_plug_default("debug", 0)),
+]
 
 AUTO_REBOOT_DISABLE = "1"
 
 
 def validate_parms():
-
     r"""
     Validate program parameters, etc.  Return True or False (i.e. pass/fail) accordingly.
     """
@@ -53,10 +66,9 @@ def validate_parms():
 
 
 def main():
-
     gen_setup()
 
-    set_term_options(term_requests='children')
+    set_term_options(term_requests="children")
 
     print_plug_in_header()
 
@@ -67,18 +79,36 @@ def main():
 
     lib_file_path = init_robot_file_path("lib/utils.robot")
 
-    REDFISH_SUPPORT_TRANS_STATE = int(os.environ.get('REDFISH_SUPPORT_TRANS_STATE', 0)) or \
-        int(os.environ.get('AUTOBOOT_REDFISH_SUPPORT_TRANS_STATE', 0))
+    REDFISH_SUPPORT_TRANS_STATE = int(
+        os.environ.get("REDFISH_SUPPORT_TRANS_STATE", 0)
+    ) or int(os.environ.get("AUTOBOOT_REDFISH_SUPPORT_TRANS_STATE", 0))
 
     enable_auto_reboot = 1 - AUTO_REBOOT_DISABLE
     print_var(enable_auto_reboot)
     keyword_string = "Set Auto Reboot Setting  ${%i}" % enable_auto_reboot
 
-    cmd_buf = create_robot_cmd_string("extended/run_keyword.robot", OPENBMC_HOST, SSH_PORT, HTTPS_PORT,
-                                      REST_USERNAME, REST_PASSWORD, OPENBMC_USERNAME, OPENBMC_PASSWORD,
-                                      IPMI_USERNAME, IPMI_PASSWORD, REDFISH_SUPPORT_TRANS_STATE,
-                                      keyword_string, lib_file_path, quiet, test_mode, debug, outputdir,
-                                      output, log, report)
+    cmd_buf = create_robot_cmd_string(
+        "extended/run_keyword.robot",
+        OPENBMC_HOST,
+        SSH_PORT,
+        HTTPS_PORT,
+        REST_USERNAME,
+        REST_PASSWORD,
+        OPENBMC_USERNAME,
+        OPENBMC_PASSWORD,
+        IPMI_USERNAME,
+        IPMI_PASSWORD,
+        REDFISH_SUPPORT_TRANS_STATE,
+        keyword_string,
+        lib_file_path,
+        quiet,
+        test_mode,
+        debug,
+        outputdir,
+        output,
+        log,
+        report,
+    )
 
     retry_count = 3
     while not robot_cmd_fnc(cmd_buf):

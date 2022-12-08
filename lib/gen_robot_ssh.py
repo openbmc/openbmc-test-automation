@@ -4,28 +4,29 @@ r"""
 This module provides many valuable ssh functions such as sprint_connection, execute_ssh_command, etc.
 """
 
+import re
+import socket
+import sys
+import traceback
+
+import paramiko
 from robot.libraries.BuiltIn import BuiltIn
 from SSHLibrary import SSHLibrary
 
-import sys
-import traceback
-import re
-import socket
-import paramiko
 try:
     import exceptions
 except ImportError:
     import builtins as exceptions
 
-import gen_print as gp
 import func_timer as ft
+import gen_print as gp
+
 func_timer = ft.func_timer_class()
 
 sshlib = SSHLibrary()
 
 
-def sprint_connection(connection,
-                      indent=0):
+def sprint_connection(connection, indent=0):
     r"""
     sprint data from the connection object to a string and return it.
 
@@ -47,15 +48,15 @@ def sprint_connection(connection,
     buffer += gp.sprint_varx("term_type", connection.term_type, 0, indent)
     buffer += gp.sprint_varx("width", connection.width, 0, indent)
     buffer += gp.sprint_varx("height", connection.height, 0, indent)
-    buffer += gp.sprint_varx("path_separator", connection.path_separator, 0,
-                             indent)
+    buffer += gp.sprint_varx(
+        "path_separator", connection.path_separator, 0, indent
+    )
     buffer += gp.sprint_varx("encoding", connection.encoding, 0, indent)
 
     return buffer
 
 
-def sprint_connections(connections=None,
-                       indent=0):
+def sprint_connections(connections=None, indent=0):
     r"""
     sprint data from the connections list to a string and return it.
 
@@ -91,16 +92,16 @@ def find_connection(open_connection_args={}):
 
     for connection in sshlib.get_connections():
         # Create connection_dict from connection object.
-        connection_dict = dict((key, str(value)) for key, value in
-                               connection._config.items())
+        connection_dict = dict(
+            (key, str(value)) for key, value in connection._config.items()
+        )
         if dict(connection_dict, **open_connection_args) == connection_dict:
             return connection
 
     return False
 
 
-def login_ssh(login_args={},
-              max_login_attempts=5):
+def login_ssh(login_args={}, max_login_attempts=5):
     r"""
     Login on the latest open SSH connection.  Retry on failure up to max_login_attempts.
 
@@ -132,8 +133,10 @@ def login_ssh(login_args={},
             except_type, except_value, except_traceback = sys.exc_info()
             gp.lprint_var(except_type)
             gp.lprint_varx("except_value", str(except_value))
-            if except_type is paramiko.ssh_exception.SSHException and\
-                    re.match(r"No existing session", str(except_value)):
+            if (
+                except_type is paramiko.ssh_exception.SSHException
+                and re.match(r"No existing session", str(except_value))
+            ):
                 continue
             else:
                 # We don't tolerate any other error so break from loop and re-raise exception.
@@ -146,16 +149,18 @@ def login_ssh(login_args={},
     raise (except_value)
 
 
-def execute_ssh_command(cmd_buf,
-                        open_connection_args={},
-                        login_args={},
-                        print_out=0,
-                        print_err=0,
-                        ignore_err=1,
-                        fork=0,
-                        quiet=None,
-                        test_mode=None,
-                        time_out=None):
+def execute_ssh_command(
+    cmd_buf,
+    open_connection_args={},
+    login_args={},
+    print_out=0,
+    print_err=0,
+    ignore_err=1,
+    fork=0,
+    quiet=None,
+    test_mode=None,
+    time_out=None,
+):
     r"""
     Run the given command in an SSH session and return the stdout, stderr and the return code.
 
@@ -221,11 +226,12 @@ def execute_ssh_command(cmd_buf,
             index_or_alias = connection.index
         else:
             index_or_alias = connection.alias
-        gp.lprint_timen("Switching to existing connection: \""
-                        + str(index_or_alias) + "\".")
+        gp.lprint_timen(
+            'Switching to existing connection: "' + str(index_or_alias) + '".'
+        )
         sshlib.switch_connection(index_or_alias)
     else:
-        gp.lprint_timen("Connecting to " + open_connection_args['host'] + ".")
+        gp.lprint_timen("Connecting to " + open_connection_args["host"] + ".")
         cix = sshlib.open_connection(**open_connection_args)
         try:
             login_ssh(login_args)
@@ -242,18 +248,19 @@ def execute_ssh_command(cmd_buf,
             if fork:
                 sshlib.start_command(cmd_buf)
             else:
-                if open_connection_args['alias'] == "device_connection":
+                if open_connection_args["alias"] == "device_connection":
                     stdout = sshlib.write(cmd_buf)
                     stderr = ""
                     rc = 0
                 else:
-                    stdout, stderr, rc = \
-                        func_timer.run(sshlib.execute_command,
-                                       cmd_buf,
-                                       return_stdout=True,
-                                       return_stderr=True,
-                                       return_rc=True,
-                                       time_out=time_out)
+                    stdout, stderr, rc = func_timer.run(
+                        sshlib.execute_command,
+                        cmd_buf,
+                        return_stdout=True,
+                        return_stderr=True,
+                        return_rc=True,
+                        time_out=time_out,
+                    )
                     BuiltIn().log_to_console(stdout)
         except Exception:
             except_type, except_value, except_traceback = sys.exc_info()
@@ -265,30 +272,47 @@ def execute_ssh_command(cmd_buf,
             stderr = str(except_value)
             stdout = ""
 
-            if except_type is exceptions.AssertionError and\
-               re.match(r"Connection not open", str(except_value)):
+            if except_type is exceptions.AssertionError and re.match(
+                r"Connection not open", str(except_value)
+            ):
                 try:
                     login_ssh(login_args)
                     # Now we must continue to next loop iteration to retry the
                     # execute_command.
                     continue
                 except Exception:
-                    except_type, except_value, except_traceback =\
-                        sys.exc_info()
+                    (
+                        except_type,
+                        except_value,
+                        except_traceback,
+                    ) = sys.exc_info()
                     rc = 1
                     stderr = str(except_value)
                     stdout = ""
                     break
 
-            if (except_type is paramiko.ssh_exception.SSHException
-                and re.match(r"SSH session not active", str(except_value))) or\
-               ((except_type is socket.error
-                 or except_type is ConnectionResetError)
-                and re.match(r"\[Errno 104\] Connection reset by peer",
-                             str(except_value))) or\
-               (except_type is paramiko.ssh_exception.SSHException
-                and re.match(r"Timeout opening channel\.",
-                             str(except_value))):
+            if (
+                (
+                    except_type is paramiko.ssh_exception.SSHException
+                    and re.match(r"SSH session not active", str(except_value))
+                )
+                or (
+                    (
+                        except_type is socket.error
+                        or except_type is ConnectionResetError
+                    )
+                    and re.match(
+                        r"\[Errno 104\] Connection reset by peer",
+                        str(except_value),
+                    )
+                )
+                or (
+                    except_type is paramiko.ssh_exception.SSHException
+                    and re.match(
+                        r"Timeout opening channel\.", str(except_value)
+                    )
+                )
+            ):
                 # Close and re-open a connection.
                 # Note: close_connection() doesn't appear to get rid of the
                 # connection.  It merely closes it.  Since there is a concern
@@ -297,8 +321,9 @@ def execute_ssh_command(cmd_buf,
                 # connections.
                 gp.lprint_timen("Closing all connections.")
                 sshlib.close_all_connections()
-                gp.lprint_timen("Connecting to "
-                                + open_connection_args['host'] + ".")
+                gp.lprint_timen(
+                    "Connecting to " + open_connection_args["host"] + "."
+                )
                 cix = sshlib.open_connection(**open_connection_args)
                 login_ssh(login_args)
                 continue
@@ -324,13 +349,16 @@ def execute_ssh_command(cmd_buf,
         gp.printn(stderr + stdout)
 
     if not ignore_err:
-        message = gp.sprint_error("The prior SSH"
-                                  + " command returned a non-zero return"
-                                  + " code:\n"
-                                  + gp.sprint_var(rc, gp.hexa()) + stderr
-                                  + "\n")
+        message = gp.sprint_error(
+            "The prior SSH"
+            + " command returned a non-zero return"
+            + " code:\n"
+            + gp.sprint_var(rc, gp.hexa())
+            + stderr
+            + "\n"
+        )
         BuiltIn().should_be_equal(rc, 0, message)
 
-    if open_connection_args['alias'] == "device_connection":
+    if open_connection_args["alias"] == "device_connection":
         return stdout
     return stdout, stderr, rc

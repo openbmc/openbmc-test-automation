@@ -2,6 +2,7 @@
 
 import os
 import sys
+
 try:
     import __builtin__
 except ImportError:
@@ -17,9 +18,9 @@ except ImportError:
 save_path_0 = sys.path[0]
 del sys.path[0]
 
-from gen_print import *     # NOQA
-from gen_arg import *       # NOQA
-from gen_plug_in import *   # NOQA
+from gen_arg import *  # NOQA
+from gen_plug_in import *  # NOQA
+from gen_print import *  # NOQA
 
 # Restore sys.path[0].
 sys.path.insert(0, save_path_0)
@@ -29,32 +30,32 @@ sys.path.insert(0, save_path_0)
 
 # Create parser object.
 parser = argparse.ArgumentParser(
-    usage='%(prog)s [OPTIONS] [PLUG_IN_DIR_PATHS]',
+    usage="%(prog)s [OPTIONS] [PLUG_IN_DIR_PATHS]",
     description="%(prog)s will validate the plug-in packages passed to it."
-                + "  It will also print a list of the absolute plug-in"
-                + " directory paths for use by the calling program.",
+    + "  It will also print a list of the absolute plug-in"
+    + " directory paths for use by the calling program.",
     formatter_class=argparse.ArgumentDefaultsHelpFormatter,
-    prefix_chars='-+')
+    prefix_chars="-+",
+)
 
 # Create arguments.
 parser.add_argument(
-    'plug_in_dir_paths',
-    nargs='?',
+    "plug_in_dir_paths",
+    nargs="?",
     default="",
-    help=plug_in_dir_paths_help_text + default_string)
+    help=plug_in_dir_paths_help_text + default_string,
+)
 
 parser.add_argument(
-    '--mch_class',
-    default="obmc",
-    help=mch_class_help_text + default_string)
+    "--mch_class", default="obmc", help=mch_class_help_text + default_string
+)
 
 # The stock_list will be passed to gen_get_options.  We populate it with the names of stock parm options we
 # want.  These stock parms are pre-defined by gen_get_options.
 stock_list = [("test_mode", 0), ("quiet", 1), ("debug", 0)]
 
 
-def exit_function(signal_number=0,
-                  frame=None):
+def exit_function(signal_number=0, frame=None):
     r"""
     Execute whenever the program ends normally or with the signals that we catch (i.e. TERM, INT).
     """
@@ -112,8 +113,9 @@ def main():
     global plug_in_dir_paths
     global mch_class
 
-    plug_in_packages_list = return_plug_in_packages_list(plug_in_dir_paths,
-                                                         mch_class)
+    plug_in_packages_list = return_plug_in_packages_list(
+        plug_in_dir_paths, mch_class
+    )
     qprint_var(plug_in_packages_list)
 
     # As stated in the help text, this program must print the full paths of each selected plug in.
