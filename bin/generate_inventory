@@ -10,7 +10,7 @@ import json
 
 lib_path = sys.path[0] + "/../lib"
 sys.path.insert(0, lib_path)
-from gen_print import *
+from gen_print import *    # NOQA
 
 # This list will be longer when more development codes are available.
 inventory_items = ['fru', 'core', 'fan', 'fan_wc', 'gpu']

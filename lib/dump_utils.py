@@ -4,20 +4,20 @@ r"""
 This file contains functions which are useful for processing BMC dumps.
 """
 
+from robot.libraries.BuiltIn import BuiltIn
 import gen_print as gp
 import gen_misc as gm
 import gen_robot_keyword as grk
 import bmc_ssh_utils as bsu
 import var_funcs as vf
 import os
-from robot.libraries.BuiltIn import BuiltIn
 import sys
 import os
 import imp
 base_path = os.path.dirname(os.path.dirname(
                             imp.find_module("gen_robot_print")[1])) + os.sep
 sys.path.append(base_path + "data/")
-import variables as var
+import variables as var     # NOQA
 
 
 def get_dump_dict(quiet=None):

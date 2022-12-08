@@ -14,9 +14,9 @@ from retrying import retry
 save_path_0 = sys.path[0]
 del sys.path[0]
 
-from gen_print import *
-from gen_arg import *
-from gen_valid import *
+from gen_print import *   # NOQA
+from gen_arg import *     # NOQA
+from gen_valid import *   # NOQA
 
 # Restore sys.path[0].
 sys.path.insert(0, save_path_0)

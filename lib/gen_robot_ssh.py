@@ -4,6 +4,9 @@ r"""
 This module provides many valuable ssh functions such as sprint_connection, execute_ssh_command, etc.
 """
 
+from robot.libraries.BuiltIn import BuiltIn
+from SSHLibrary import SSHLibrary
+
 import sys
 import traceback
 import re
@@ -18,8 +21,6 @@ import gen_print as gp
 import func_timer as ft
 func_timer = ft.func_timer_class()
 
-from robot.libraries.BuiltIn import BuiltIn
-from SSHLibrary import SSHLibrary
 sshlib = SSHLibrary()
 
 

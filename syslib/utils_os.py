@@ -9,8 +9,8 @@ import os
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../lib"))
 
-import bmc_ssh_utils
-import var_funcs
+import bmc_ssh_utils  # NOQA
+import var_funcs      # NOQA
 
 
 def get_os_release_info(default_cmd="cat /etc/os-release"):

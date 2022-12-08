@@ -4,6 +4,8 @@ r"""
 This module provides utilities for code updates.
 """
 
+from robot.libraries.BuiltIn import BuiltIn
+
 import os
 import re
 import sys
@@ -16,11 +18,10 @@ robot_pgm_dir_path = os.path.dirname(__file__) + os.sep
 repo_data_path = re.sub('/lib', '/data', robot_pgm_dir_path)
 sys.path.append(repo_data_path)
 
-import bmc_ssh_utils as bsu
-import gen_robot_keyword as keyword
-import gen_print as gp
-import variables as var
-from robot.libraries.BuiltIn import BuiltIn
+import bmc_ssh_utils as bsu             # NOQA
+import gen_robot_keyword as keyword     # NOQA
+import gen_print as gp                  # NOQA
+import variables as var                 # NOQA
 
 
 def get_bmc_firmware(image_type, sw_dict):

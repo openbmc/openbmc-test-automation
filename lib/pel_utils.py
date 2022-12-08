@@ -14,7 +14,7 @@ from robot.libraries.BuiltIn import BuiltIn
 base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(base_path + "/data/")
 
-import pel_variables
+import pel_variables  # NOQA
 
 
 class peltool_exception(Exception):

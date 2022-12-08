@@ -6,6 +6,10 @@ by robot tests. For more information on the Robot Framework API, see
 http://robot-framework.readthedocs.io/en/3.0/autodoc/robot.result.html
 """
 
+from robot.api import ExecutionResult
+from robot.result.visitor import ResultVisitor
+from xml.etree import ElementTree
+
 import sys
 import os
 import getopt
@@ -14,18 +18,15 @@ import robot.errors
 import re
 import stat
 import datetime
-from robot.api import ExecutionResult
-from robot.result.visitor import ResultVisitor
-from xml.etree import ElementTree
 
 # Remove the python library path to restore with local project path later.
 save_path_0 = sys.path[0]
 del sys.path[0]
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../lib"))
 
-from gen_arg import *
-from gen_print import *
-from gen_valid import *
+from gen_arg import *    # NOQA
+from gen_print import *  # NOQA
+from gen_valid import *  # NOQA
 
 # Restore sys.path[0].
 sys.path.insert(0, save_path_0)

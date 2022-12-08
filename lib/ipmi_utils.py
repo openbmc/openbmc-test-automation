@@ -4,6 +4,7 @@ r"""
 Provide useful ipmi functions.
 """
 
+from robot.libraries.BuiltIn import BuiltIn
 import re
 import gen_print as gp
 import gen_misc as gm
@@ -14,9 +15,8 @@ import bmc_ssh_utils as bsu
 import var_funcs as vf
 import ipmi_client as ic
 import tempfile
-gru.my_import_resource("ipmi_client.robot")
-from robot.libraries.BuiltIn import BuiltIn
 import json
+gru.my_import_resource("ipmi_client.robot")
 
 
 def get_sol_info():

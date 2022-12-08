@@ -22,11 +22,11 @@ import os
 save_path_0 = sys.path[0]
 del sys.path[0]
 
-from gen_arg import *
-from gen_print import *
-from gen_valid import *
-from gen_misc import *
-from gen_cmd import *
+from gen_arg import *      # NOQA
+from gen_print import *    # NOQA
+from gen_valid import *    # NOQA
+from gen_misc import *     # NOQA
+from gen_cmd import *      # NOQA
 
 # Restore sys.path[0].
 sys.path.insert(0, save_path_0)

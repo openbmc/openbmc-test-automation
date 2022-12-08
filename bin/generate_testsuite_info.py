@@ -10,9 +10,9 @@ import os
 from robot.parsing.model import TestData
 sys.path.append(os.path.join(os.path.dirname(__file__), "../lib"))
 
-from gen_arg import *
-from gen_print import *
-from gen_valid import *
+from gen_arg import *     # NOQA
+from gen_print import *   # NOQA
+from gen_valid import *   # NOQA
 
 # Set exit_on_error for gen_valid functions.
 set_exit_on_error(True)
