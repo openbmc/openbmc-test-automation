@@ -17,6 +17,10 @@ DCMI_RAW_CMD = {
         "GET_TEMPERATURE_READING": [
             # raw command, inlet temp entity ID, CPU temp entity ID, Baseboard temp entity ID
             "0x2c 0x10 0xdc 0x01",
+        ],
+        "Sensor_Info": [
+            # raw command, inlet temp entity ID, CPU temp entity ID, Baseboard temp entity ID
+            "0x2c 0x07 0xdc 0x01",
             "0x40",
             "0x41",
             "0x42",
