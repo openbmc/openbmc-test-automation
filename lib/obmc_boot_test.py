@@ -38,7 +38,7 @@ base_path = os.path.dirname(os.path.dirname(
                             imp.find_module("gen_robot_print")[1])) +\
     os.sep
 sys.path.append(base_path + "extended/")
-import run_keyword as rk
+import run_keyword as rk  # NOQA
 
 # Setting master_pid correctly influences the behavior of plug-ins like
 # DB_Logging

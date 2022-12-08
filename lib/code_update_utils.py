@@ -4,6 +4,8 @@ r"""
 This module provides utilities for code updates.
 """
 
+from robot.libraries.BuiltIn import BuiltIn
+
 import os
 import re
 import sys
@@ -20,7 +22,6 @@ import bmc_ssh_utils as bsu
 import gen_robot_keyword as keyword
 import gen_print as gp
 import variables as var
-from robot.libraries.BuiltIn import BuiltIn
 
 
 def get_bmc_firmware(image_type, sw_dict):
