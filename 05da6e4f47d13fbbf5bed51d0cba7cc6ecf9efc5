@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b8ec385_9ee7f25d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-09T05:16:00Z",
+      "side": 1,
+      "message": "Added test to verify error while initiating BMC dump\n\nChanges:\n    - Added a new automation test case to verify error while \n      initiating BMC dump during dumping state.\n    - Added an argument to skip BMC dump completion in create dump\n      keyword",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 101
+      },
+      "revId": "05da6e4f47d13fbbf5bed51d0cba7cc6ecf9efc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf474b98_719cd2fc",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-09T05:16:00Z",
+      "side": 1,
+      "message": "better to use skip_dump_completion variable name like below.\n\n    [Arguments]  ${skip_dump_completion}\u003d0\n    \n    # skip_dump_completion          If skip_dump_completion is set to 0, this \n    #                               keyword will waiting for BMC dump to \n    #                               complete and returns the dump id. \n    #                               Otherwise, the keyword is skipped after \n    #                               initiating BMC dump and returns dump task id.",
+      "range": {
+        "startLine": 282,
+        "startChar": 26,
+        "endLine": 282,
+        "endChar": 103
+      },
+      "revId": "05da6e4f47d13fbbf5bed51d0cba7cc6ecf9efc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6a8cf85_18e19430",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-09T05:16:00Z",
+      "side": 1,
+      "message": "Move this check after below example to the line 297 and check compare the value with 0 like below\n\n    Run Keyword If  ${skip_dump_completion} !\u003d 0  Return From Keyword  ${resp.dict[\u0027Id\u0027]}",
+      "range": {
+        "startLine": 288,
+        "startChar": 0,
+        "endLine": 288,
+        "endChar": 87
+      },
+      "revId": "05da6e4f47d13fbbf5bed51d0cba7cc6ecf9efc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
