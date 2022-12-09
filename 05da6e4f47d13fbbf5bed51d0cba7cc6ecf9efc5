@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d75d6b2_dc3a3d31",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-09T06:06:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b8ec385_9ee7f25d",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 101
+      },
+      "revId": "05da6e4f47d13fbbf5bed51d0cba7cc6ecf9efc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf474b98_719cd2fc",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b5cb693_a2f86232",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-09T06:06:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf474b98_719cd2fc",
+      "range": {
+        "startLine": 282,
+        "startChar": 26,
+        "endLine": 282,
+        "endChar": 103
+      },
+      "revId": "05da6e4f47d13fbbf5bed51d0cba7cc6ecf9efc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6a8cf85_18e19430",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-12-09T05:16:00Z",
       "side": 1,
       "message": "Move this check after below example to the line 297 and check compare the value with 0 like below\n\n    Run Keyword If  ${skip_dump_completion} !\u003d 0  Return From Keyword  ${resp.dict[\u0027Id\u0027]}",
+      "range": {
+        "startLine": 288,
+        "startChar": 0,
+        "endLine": 288,
+        "endChar": 87
+      },
+      "revId": "05da6e4f47d13fbbf5bed51d0cba7cc6ecf9efc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd5e32d7_9063fe97",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-09T06:06:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6a8cf85_18e19430",
       "range": {
         "startLine": 288,
         "startChar": 0,
