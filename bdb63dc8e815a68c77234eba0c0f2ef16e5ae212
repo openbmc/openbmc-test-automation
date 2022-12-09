@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3a4a676_39ceb988",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-09T06:02:15Z",
+      "side": 1,
+      "message": "oh yeah. This need to be aligned like below. This would make them split in multiple lines.\n\n@{mandatory_pel_fields}                Private Header  User Header  Primary SRC  \n...                                    Extended User Header  Failing MTMS\n@{mandatory_Predictive_pel_fileds}     Private Header  User Header  Primary SRC\n...                                    Extended User Header  Failing MTMS  User \n...                                    Data\n@{Mandatory_Informational_Pel_Fields}  Private Header  User Header  Primary SRC\n...                                    Extended User Header  User Data",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 36
+      },
+      "revId": "bdb63dc8e815a68c77234eba0c0f2ef16e5ae212",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2491c4cc_e8ccf8b8",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-09T06:02:15Z",
+      "side": 1,
+      "message": "Verify host transmission state of not offloaded PEL logs.",
+      "range": {
+        "startLine": 706,
+        "startChar": 21,
+        "endLine": 706,
+        "endChar": 89
+      },
+      "revId": "bdb63dc8e815a68c77234eba0c0f2ef16e5ae212",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48fbfdf0_0fa43968",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-09T06:02:15Z",
+      "side": 1,
+      "message": "Verify host transmission state of offloaded PEL logs.",
+      "range": {
+        "startLine": 717,
+        "startChar": 21,
+        "endLine": 717,
+        "endChar": 89
+      },
+      "revId": "bdb63dc8e815a68c77234eba0c0f2ef16e5ae212",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5875dff_5800c8a8",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 943,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-09T06:02:15Z",
+      "side": 1,
+      "message": "Instead of sleep use wait for sent event.\n\n    # Check host transmission state for the cases where PEL is expected to be \n    ...  offloaded to HOST.\n    Run Keyword If  \"${transmission_state}\" \u003d\u003d \"sent\"\n    ...  Wait Until Keyword Succeeds  2 min  10 sec  Is PEL Sent To Host\n\n\n    # Adding delay before checking host transmission for the cases where PEL is not \n    ...  expected to be offloaded to HOST.\n    Run Keyword If  \"${transmission_state}\" \u003d\u003d \"Not sent\"  Sleep  120s\n    \n\n\nAlso add below keyword for above changes to work.\n  \nIs PEL Sent To Host\n    [Documentation]  Check if PEL is sent to host.\n\n    ${pel_records}\u003d  Run Keyword  Peltool  -lfh\n\n    # Check the host transmission details in the PEL log.\n    ${host_transmission}\u003d  Get PEL Field Value  ${pel_id}  User Header  Host Transmission\n    Should Be Equal  \"${host_transmission}\"  \"sent\"",
+      "range": {
+        "startLine": 941,
+        "startChar": 0,
+        "endLine": 943,
+        "endChar": 19
+      },
+      "revId": "bdb63dc8e815a68c77234eba0c0f2ef16e5ae212",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
