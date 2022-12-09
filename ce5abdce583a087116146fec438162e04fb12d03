@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dca470ec_4d204c72",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-12-09T13:54:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bef2bf8f_852dffcb",
+      "range": {
+        "startLine": 17,
+        "startChar": 74,
+        "endLine": 17,
+        "endChar": 75
+      },
+      "revId": "ce5abdce583a087116146fec438162e04fb12d03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4325fef_03c93959",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-09T13:09:48Z",
       "side": 1,
       "message": "remove tall these tabs",
+      "range": {
+        "startLine": 18,
+        "startChar": 4,
+        "endLine": 18,
+        "endChar": 17
+      },
+      "revId": "ce5abdce583a087116146fec438162e04fb12d03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e005eeb7_10a904dc",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-12-09T13:54:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4325fef_03c93959",
       "range": {
         "startLine": 18,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c00a026_c8718faf",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 946,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-12-09T13:54:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22d6bea8_ade6a075",
+      "range": {
+        "startLine": 946,
+        "startChar": 54,
+        "endLine": 946,
+        "endChar": 84
+      },
+      "revId": "ce5abdce583a087116146fec438162e04fb12d03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "421e44b7_4ff812b0",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-12-09T13:09:48Z",
       "side": 1,
       "message": "Run Keyword If  \"${expected_transmission_state}\" \u003d\u003d \"Not sent\"\n    ...  Run Keywords  Sleep  120s  AND\n    ...  Check If PEL Transmission State Is Expected  not send",
+      "range": {
+        "startLine": 950,
+        "startChar": 0,
+        "endLine": 951,
+        "endChar": 65
+      },
+      "revId": "ce5abdce583a087116146fec438162e04fb12d03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9745342d_0594e2ba",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 951,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2022-12-09T13:54:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "421e44b7_4ff812b0",
       "range": {
         "startLine": 950,
         "startChar": 0,
