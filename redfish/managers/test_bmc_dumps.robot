@@ -85,7 +85,7 @@ Verify BMC Dump Default Location In BMC
      ${dump_file}  ${stderr}  ${rc}=  BMC Execute Command
      ...  ls ${BMC_DUMP_COLLECTOR_PATH}/${dump_id}
      Should Be True  ${rc} == 0
-     Should Start With  ${file_there}  BMCDUMP
+     Should Start With  ${dump_file}  BMCDUMP
 
 
 Verify User Initiated BMC Dump When Host Booted
@@ -294,7 +294,7 @@ Is BMC Dump Available
 Get Disk Usage For Dumps
     [Documentation]  Return disk usage in kilobyte for BMC dumps.
 
-    ${usage_output}  ${stderr}  ${rc}=  BMC Execute Command  du -s ${BMC_DUMP_COLLECTOR_PATH} 
+    ${usage_output}  ${stderr}  ${rc}=  BMC Execute Command  du -s ${BMC_DUMP_COLLECTOR_PATH}
 
     # Example of output from above BMC cli command.
     # $ du -s /var/lib/phosphor-debug-collector/dumps
