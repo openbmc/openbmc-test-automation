@@ -11,7 +11,6 @@ from datetime import datetime
 
 import bmc_ssh_utils as bsu
 import func_args as fa
-from robot.libraries.BuiltIn import BuiltIn
 
 base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(base_path + "/data/")
