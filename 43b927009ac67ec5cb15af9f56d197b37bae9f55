@@ -229,6 +229,30 @@
       },
       "revId": "43b927009ac67ec5cb15af9f56d197b37bae9f55",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de964bfa_62348a62",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2022-12-12T10:33:48Z",
+      "side": 1,
+      "message": "In places this is used, it makes sense to define only 1 place. check if we can define and use it without any issues.",
+      "parentUuid": "7545f2fd_cfc9a7a8",
+      "range": {
+        "startLine": 462,
+        "startChar": 4,
+        "endLine": 462,
+        "endChar": 38
+      },
+      "revId": "43b927009ac67ec5cb15af9f56d197b37bae9f55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
