@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dceac682_c2e4ec0e",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-12T10:35:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1167a1d4_83a02c99",
+      "revId": "ced0b673380f7561c3f6eba9fc57577a0b50d3bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66621213_ba301e60",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-12-12T10:08:15Z",
       "side": 1,
       "message": "event ID",
+      "range": {
+        "startLine": 154,
+        "startChar": 19,
+        "endLine": 154,
+        "endChar": 24
+      },
+      "revId": "ced0b673380f7561c3f6eba9fc57577a0b50d3bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20659e6b_84d7e231",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-12T10:35:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66621213_ba301e60",
       "range": {
         "startLine": 154,
         "startChar": 19,
