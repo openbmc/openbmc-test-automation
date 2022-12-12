@@ -90,8 +90,10 @@ def openbmctool_execute_command(command_string, *args, **kwargs):
     # Use "egrep -v" to get rid of editorial output from openbmctool.py.
     pipeline.insert(
         1,
-        "| tail -n +1 | egrep -v 'Attempting login|User [^ ]+"
-        " has been logged out'",
+        (
+            "| tail -n +1 | egrep -v 'Attempting login|User [^ ]+"
+            " has been logged out'"
+        ),
     )
 
     command_string = (
