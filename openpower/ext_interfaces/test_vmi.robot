@@ -452,6 +452,17 @@ Assign Static IPv4 Address With Invalid Gateway To VMI
     ${test_ipv4}  10.3.36.-10      ${test_netmask}   ${HTTP_BAD_REQUEST}
 
 
+Enable DHCP When Host Poweroff And Verify On Poweron
+    [Documentation]  Enable DHCP when host power off and verify VMI origin is DHCP.
+    [Tags]  Enable_DHCP_When_Host_Poweroff_And_Verify_On_Poweron
+    [Setup]  Redfish Power Off  stack_mode=skip
+
+    Set VMI IPv4 Origin  ${True}
+    Redfish PowerOn  stack_mode=skip
+    ${default}=  Set Variable  0.0.0.0
+    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
+
+
 *** Keywords ***
 
 Suite Setup Execution
