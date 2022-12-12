@@ -265,6 +265,34 @@ Verify Error While Initiating BMC Dump During Dumping State
     ...  body=${payload}  valid_status_codes=[${HTTP_SERVICE_UNAVAILABLE}]
 
 
+Verify BMC Dump Creation Error Until Older BMC Dump Completion
+    [Documentation]  Verify BMC dump creation error until older BMC dump completion.
+    [Tags]  Verify BMC_Dump_Creation_Error_Until_Older_BMC_Dump_Completion 
+
+    Redfish Delete All BMC Dumps
+
+    # Initiate a BMC dump that returns without completion.
+    Create User Initiated BMC Dump Via Redfish  ${1}
+
+    # Now continue to initiate multiple dump request which is not expected to be accepted
+    # till earlier BMC dump task is completed. A limit is set to avoid risk of infinite loop.
+    WHILE  True  limit=1000
+        Redfish.Post
+        ...  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
+        ...  body=${payload}  valid_status_codes=[${HTTP_SERVICE_UNAVAILABLE}]
+        ${dump_entries}=  Get BMC Dump Entries
+        ${cnt}=    Get length    ${dump_entries}
+
+        # Come out of the loop if prior BMC dump process completes with dump count more than zero.
+        IF  ${cnt} > 0  BREAK
+    END
+
+    # The next BMC dump request should be accepted as earlier dump is completed.
+    Redfish.Post
+    ...  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
+    ...  body=${payload}  valid_status_codes=[${HTTP_ACCEPTED}]
+
+
 *** Keywords ***
 
 Get BMC Dump Entries
