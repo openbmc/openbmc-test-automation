@@ -72,6 +72,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1a4c071_eb47e7da",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-12-12T10:23:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "75dfa543_02749b15",
+      "revId": "43b927009ac67ec5cb15af9f56d197b37bae9f55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "909f2b8a_7c8737a0",
@@ -113,6 +131,54 @@
         "startChar": 38,
         "endLine": 456,
         "endChar": 48
+      },
+      "revId": "43b927009ac67ec5cb15af9f56d197b37bae9f55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99747cbc_a73d53d2",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-12-12T10:23:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "137224fb_df95a5ea",
+      "range": {
+        "startLine": 456,
+        "startChar": 38,
+        "endLine": 456,
+        "endChar": 48
+      },
+      "revId": "43b927009ac67ec5cb15af9f56d197b37bae9f55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e8def38_48fec3fd",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-12-12T10:23:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "909f2b8a_7c8737a0",
+      "range": {
+        "startLine": 456,
+        "startChar": 64,
+        "endLine": 456,
+        "endChar": 68
       },
       "revId": "43b927009ac67ec5cb15af9f56d197b37bae9f55",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
