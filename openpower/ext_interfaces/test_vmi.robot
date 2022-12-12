@@ -29,6 +29,8 @@ ${test_netmask}           255.255.252.0
 &{DISABLE_DHCP}           DHCPv4=&{DHCP_DISABLED}
 ${wait_time}              10s
 
+${default}                0.0.0.0
+
 
 *** Test Cases ***
 
@@ -130,7 +132,6 @@ Verify Persistency Of VMI IPv4 Details After Host Reboot
     Set VMI IPv4 Origin  ${True}  ${HTTP_ACCEPTED}
     Redfish Power Off  stack_mode=skip
     Redfish Power On
-    ${default}=  Set Variable  0.0.0.0
     Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
 
     # Verifying persistency of static address.
@@ -262,7 +263,6 @@ Enable DHCP When Static IP Configured DHCP Server Unavailable And Verify IP
 
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
     Set VMI IPv4 Origin  ${True}
-    ${default}=  Set Variable  0.0.0.0
     Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
 
 
@@ -409,7 +409,6 @@ Enable And Disable DHCP And Verify
     [Tags]  Enable_And_Disable_DHCP_And_Verify
 
     Set VMI IPv4 Origin  ${True}
-    ${default}=  Set Variable  0.0.0.0
     Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
     Set VMI IPv4 Origin  ${False}
     Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default}
@@ -420,7 +419,6 @@ Multiple Times Enable And Disable DHCP And Verify
     ...  each time when DHCP is enabled
     [Tags]  Multiple_Times_Enable_And_Disable_DHCP_And_Verify
 
-    ${default}=  Set Variable  0.0.0.0
     FOR  ${i}  IN RANGE  ${2}
       Set VMI IPv4 Origin  ${True}
       Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
@@ -450,6 +448,16 @@ Assign Static IPv4 Address With Invalid Gateway To VMI
     ${test_ipv4}  0xa.0xb.0xc.0xd  ${test_netmask}   ${HTTP_BAD_REQUEST}
     ${test_ipv4}  10.3.36          ${test_netmask}   ${HTTP_BAD_REQUEST}
     ${test_ipv4}  10.3.36.-10      ${test_netmask}   ${HTTP_BAD_REQUEST}
+
+
+Enable DHCP When Host Poweroff And Verify On Poweron
+    [Documentation]  Enable DHCP when host power off and verify VMI origin is DHCP.
+    [Tags]  Enable_DHCP_When_Host_Poweroff_And_Verify_On_Poweron
+    [Setup]  Redfish Power Off  stack_mode=skip
+
+    Set VMI IPv4 Origin  ${True}
+    Redfish Power On  stack_mode=skip
+    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
 
 
 *** Keywords ***
@@ -506,7 +514,6 @@ Switch VMI IPv4 Origin And Verify Details
     ${dhcp_mode_before}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
     ${dhcp_enabled}=  Set Variable If  ${dhcp_mode_before} == ${False}  ${True}  ${False}
 
-    ${default}=  Set Variable  0.0.0.0
     ${origin}=  Set Variable If  ${dhcp_mode_before} == ${False}  DHCP  Static
     Set VMI IPv4 Origin  ${dhcp_enabled}  ${HTTP_ACCEPTED}
 
