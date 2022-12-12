@@ -253,6 +253,30 @@
       },
       "revId": "43b927009ac67ec5cb15af9f56d197b37bae9f55",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d49fa48_d7b5a123",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-12-12T10:41:41Z",
+      "side": 1,
+      "message": "as I said, we have some of the tescases where we need to fetch default vmi ip address.. If I add this in suite setup, those test case will fail.\n\nExample TC : Verify VMI Network Interface Details",
+      "parentUuid": "de964bfa_62348a62",
+      "range": {
+        "startLine": 462,
+        "startChar": 4,
+        "endLine": 462,
+        "endChar": 38
+      },
+      "revId": "43b927009ac67ec5cb15af9f56d197b37bae9f55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
