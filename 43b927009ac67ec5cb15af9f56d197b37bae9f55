@@ -52,6 +52,29 @@
       "parentUuid": "2fef0718_203c9dbd",
       "revId": "43b927009ac67ec5cb15af9f56d197b37bae9f55",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad5ab9a3_c43c12c4",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2022-12-12T09:48:37Z",
+      "side": 1,
+      "message": "Define this in the Suite Setup.\nI see that this is used in a couple of more test cases.",
+      "range": {
+        "startLine": 462,
+        "startChar": 4,
+        "endLine": 462,
+        "endChar": 38
+      },
+      "revId": "43b927009ac67ec5cb15af9f56d197b37bae9f55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
