@@ -75,6 +75,30 @@
       },
       "revId": "43b927009ac67ec5cb15af9f56d197b37bae9f55",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7545f2fd_cfc9a7a8",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-12-12T10:10:33Z",
+      "side": 1,
+      "message": "I can\u0027t add this in suite setup because, in many of the test cases we will be fetching the default IP details.",
+      "parentUuid": "ad5ab9a3_c43c12c4",
+      "range": {
+        "startLine": 462,
+        "startChar": 4,
+        "endLine": 462,
+        "endChar": 38
+      },
+      "revId": "43b927009ac67ec5cb15af9f56d197b37bae9f55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
