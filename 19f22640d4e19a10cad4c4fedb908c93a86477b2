@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5d20edf_5abff785",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-12T09:35:31Z",
+      "side": 1,
+      "message": "Compare PEL, Redfish Event log and verify PEL log",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "19f22640d4e19a10cad4c4fedb908c93a86477b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c50c809_f2d37a25",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-12T09:35:31Z",
+      "side": 1,
+      "message": "Verify that no PEL exists in BMC. Raise an exception if it does.",
+      "revId": "19f22640d4e19a10cad4c4fedb908c93a86477b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0da06844_75092aa5",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-12T09:35:31Z",
+      "side": 1,
+      "message": "event_time_format[0].split(\u0027-\u0027)",
+      "range": {
+        "startLine": 145,
+        "startChar": 4,
+        "endLine": 146,
+        "endChar": 38
+      },
+      "revId": "19f22640d4e19a10cad4c4fedb908c93a86477b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c05cec7b_aa15e742",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-12T09:35:31Z",
+      "side": 1,
+      "message": "match.\nTo add clarity, pls mention the PEL\u0027s and Event\u0027s date/time which are being compared.",
+      "range": {
+        "startLine": 160,
+        "startChar": 73,
+        "endLine": 160,
+        "endChar": 80
+      },
+      "revId": "19f22640d4e19a10cad4c4fedb908c93a86477b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

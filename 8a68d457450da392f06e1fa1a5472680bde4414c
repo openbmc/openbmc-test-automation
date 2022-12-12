@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd67ec4d_1a5e9211",
+        "filename": ".flake8-ignore",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-12T09:35:31Z",
+      "side": 0,
+      "message": "Why is this removed?",
+      "revId": "8a68d457450da392f06e1fa1a5472680bde4414c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
