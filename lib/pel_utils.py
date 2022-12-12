@@ -4,6 +4,7 @@ r"""
 PEL functions.
 """
 
+from datetime import datetime
 import json
 import os
 import sys
@@ -92,6 +93,70 @@ def get_pel_data_from_bmc(
     except Exception as e:
         raise peltool_exception("Failed to get PEL data from BMC : " + str(e))
     return pel_data
+
+
+def verify_no_pel_exists_on_bmc():
+    r"""
+    Verify if no PEL are present in BMC else raise an exception.
+    """
+
+    pel_data = get_pel_data_from_bmc()
+
+    if len(pel_data) == 0:
+        return True
+    else:
+        print("PEL data present. \n", pel_data)
+        raise peltool_exception("PEL data present in BMC")
+
+
+def compare_pel_and_redfish_event_log(pel_record, event_record):
+    r"""
+    Compare PEL log attributes like "SRC", "Created at" with Redfish
+    event log attributes like "EventId", "Created".
+    Return False if they do not match.
+
+    Description of arguments:
+    pel_record     PEL record.
+    event_record   Redfish event which is equivalent of PEL record.
+    """
+
+    # Below is format of PEL record / event record and following i.e. "SRC", "Created at" from
+    # PEL record is compared with "EventId", "Created" from event record.
+
+    # PEL Log attributes
+    # SRC        : XXXXXXXX
+    # Created at : 11/14/2022 12:38:04
+
+    # Event log attributes
+    # EventId : XXXXXXXX XXXXXXXX XXXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXX XXXXXXXX
+
+    # Created : 2022-11-14T12:38:04+00:00
+
+    print(pel_record)
+    print(event_record)
+
+    pel_src = pel_record['pel_data']['SRC']
+    pel_created_time = pel_record['pel_detail_data']['Private Header']['Created at']
+
+    event_ids = (event_record['EventId']).split(' ')
+
+    event_time_format = (event_record['Created']).split('T')
+    event_date = event_time_format[0]
+    event_date = event_date.split('-')
+    event_date = datetime(int(event_date[0]), int(event_date[1]), int(event_date[2]))
+    event_date = event_date.strftime("%m/%d/%Y")
+    event_sub_time_format = (event_time_format[1]).split('+')
+    event_date_time = event_date + " " + event_sub_time_format[0]
+
+    event_created_time = event_date_time.replace('-', '/')
+
+    print("\nPEL SRC : {0} | PEL Created Time : {1}".format(pel_src, pel_created_time))
+    print("\nError evenr id : {0} | Error Log Created Time : {1}".format(event_ids[0], event_created_time))
+
+    if pel_src == event_ids[0] and pel_created_time == event_created_time:
+        print("\nPEL SRC and created date time matched with event")
+    else:
+        raise peltool_exception("\nPEL SRC and created date time did not matched with event")
 
 
 def fetch_all_pel_ids_for_src(src_id, severity, include_hidden_pels=False):
