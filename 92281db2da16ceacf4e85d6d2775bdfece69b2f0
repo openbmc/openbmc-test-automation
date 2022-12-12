@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3a9a639_eb51ed61",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-12-12T15:42:36Z",
+      "side": 1,
+      "message": "Verify BMC Dump Create Errors While Another BMC Dump In Progress",
+      "range": {
+        "startLine": 268,
+        "startChar": 0,
+        "endLine": 268,
+        "endChar": 62
+      },
+      "revId": "92281db2da16ceacf4e85d6d2775bdfece69b2f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99d3cc89_be8545f5",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-12-12T15:42:36Z",
+      "side": 1,
+      "message": "Fix the tag",
+      "range": {
+        "startLine": 270,
+        "startChar": 18,
+        "endLine": 270,
+        "endChar": 19
+      },
+      "revId": "92281db2da16ceacf4e85d6d2775bdfece69b2f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea0ae008_766b08d3",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-12-12T15:42:36Z",
+      "side": 1,
+      "message": "Remove space",
+      "range": {
+        "startLine": 270,
+        "startChar": 74,
+        "endLine": 270,
+        "endChar": 75
+      },
+      "revId": "92281db2da16ceacf4e85d6d2775bdfece69b2f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9b77a9a_feab898d",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-12-12T15:42:36Z",
+      "side": 1,
+      "message": "Remove it, Test setup does it already",
+      "range": {
+        "startLine": 272,
+        "startChar": 0,
+        "endLine": 272,
+        "endChar": 32
+      },
+      "revId": "92281db2da16ceacf4e85d6d2775bdfece69b2f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14bea393_499bb540",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-12-12T15:42:36Z",
+      "side": 1,
+      "message": "count",
+      "range": {
+        "startLine": 284,
+        "startChar": 10,
+        "endLine": 284,
+        "endChar": 13
+      },
+      "revId": "92281db2da16ceacf4e85d6d2775bdfece69b2f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
