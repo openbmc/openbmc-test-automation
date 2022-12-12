@@ -4,13 +4,14 @@ r"""
 PEL functions.
 """
 
-from robot.libraries.BuiltIn import BuiltIn
-from datetime import datetime
 import json
 import os
 import sys
+from datetime import datetime
+
 import bmc_ssh_utils as bsu
 import func_args as fa
+from robot.libraries.BuiltIn import BuiltIn
 
 base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(base_path + "/data/")
@@ -139,37 +140,52 @@ def compare_pel_and_redfish_event_log(pel_record, event_record):
         print("\nPEL records : {0}".format(pel_record))
         print("\nEvent records : {0}".format(event_record))
 
-        pel_src = pel_record['pel_data']['SRC']
-        pel_created_time = \
-            pel_record['pel_detail_data']['Private Header']['Created at']
+        pel_src = pel_record["pel_data"]["SRC"]
+        pel_created_time = pel_record["pel_detail_data"]["Private Header"][
+            "Created at"
+        ]
 
-        event_ids = (event_record['EventId']).split(' ')
+        event_ids = (event_record["EventId"]).split(" ")
 
-        event_time_format = (event_record['Created']).split('T')
-        event_date = (event_time_format[0]).split('-')
-        event_date = \
-            datetime(int(event_date[0]), int(event_date[1]), int(event_date[2]))
+        event_time_format = (event_record["Created"]).split("T")
+        event_date = (event_time_format[0]).split("-")
+        event_date = datetime(
+            int(event_date[0]), int(event_date[1]), int(event_date[2])
+        )
         event_date = event_date.strftime("%m/%d/%Y")
-        event_sub_time_format = (event_time_format[1]).split('+')
+        event_sub_time_format = (event_time_format[1]).split("+")
         event_date_time = event_date + " " + event_sub_time_format[0]
 
-        event_created_time = event_date_time.replace('-', '/')
+        event_created_time = event_date_time.replace("-", "/")
 
-        print("\nPEL SRC : {0} | PEL Created Time : {1}".
-              format(pel_src, pel_created_time))
-        print("\nError event ID : {0} | Error Log Created Time : {1}".
-              format(event_ids[0], event_created_time))
+        print(
+            "\nPEL SRC : {0} | PEL Created Time : {1}".format(
+                pel_src, pel_created_time
+            )
+        )
+        print(
+            "\nError event ID : {0} | Error Log Created Time : {1}".format(
+                event_ids[0], event_created_time
+            )
+        )
 
         if pel_src == event_ids[0] and pel_created_time == event_created_time:
-            print("\nPEL SRC and created date time match with "
-                  "event ID, created time")
+            print(
+                "\nPEL SRC and created date time match with "
+                "event ID, created time"
+            )
         else:
-            raise peltool_exception("\nPEL SRC and created date time did not "
-                                    "match with event ID, created time")
+            raise peltool_exception(
+                "\nPEL SRC and created date time did not "
+                "match with event ID, created time"
+            )
     except Exception as e:
-        raise peltool_exception("Exception occured during PEL and Event log "
-                                "comparison for SRC or event ID and created "
-                                "time : " + str(e))
+        raise peltool_exception(
+            "Exception occured during PEL and Event log "
+            "comparison for SRC or event ID and created "
+            "time : "
+            + str(e)
+        )
 
 
 def fetch_all_pel_ids_for_src(src_id, severity, include_hidden_pels=False):
