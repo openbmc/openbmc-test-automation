@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "382f513e_d95ab405",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2022-12-12T15:13:21Z",
+      "side": 1,
+      "message": "I don\u0027t know too much about robot, but at a high level it seems to do what we want.",
+      "revId": "289a54d32dafffc6ac9e5b2f1ff26f4cec9025a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7902ec70_26272f11",
+        "filename": "lib/open_power_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2022-12-12T15:13:21Z",
+      "side": 1,
+      "message": "If you didn\u0027t want to hardcode the possible service names, you could look them up with a call to the mapper, like:\n\n# busctl call xyz.openbmc_project.ObjectMapper /xyz/openbmc_project/object_mapper xyz.openbmc_project.ObjectMapper GetObject sas /xyz/openbmc_project/sensors/temperature/Ambient_0_Temp 1 xyz.openbmc_project.Sensor.Value  -j\n{\n\t\"type\" : \"a{sas}\",\n\t\"data\" : [\n\t\t{\n\t\t\t\"xyz.openbmc_project.HwmonTempSensor\" : [\n\t\t\t\t\"xyz.openbmc_project.Association.Definitions\",\n\t\t\t\t\"xyz.openbmc_project.Sensor.Threshold.Warning\",\n\t\t\t\t\"xyz.openbmc_project.Sensor.Value\",\n\t\t\t\t\"xyz.openbmc_project.State.Decorator.Availability\",\n\t\t\t\t\"xyz.openbmc_project.State.Decorator.OperationalStatus\"\n\t\t\t]\n\t\t}\n\t]\n}\n\n\nyou could also get back the service names of all the sensors in the system at once with:\nbusctl call xyz.openbmc_project.ObjectMapper /xyz/openbmc_project/object_mapper xyz.openbmc_project.ObjectMapper GetSubTree sias /xyz/openbmc_project/sensors 0 1 xyz.openbmc_project.Sensor.Value -j\n\nThis would entail having to read the JSON response to find what you needed though, so I\u0027m fine with what you have.  (Though there are more sensor daemons in the system so if someone else put a sensor  in the JSON file not in any of these 3 daemons they\u0027d have to make an update here.",
+      "revId": "289a54d32dafffc6ac9e5b2f1ff26f4cec9025a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
