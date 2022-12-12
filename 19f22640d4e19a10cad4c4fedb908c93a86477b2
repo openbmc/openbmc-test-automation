@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d546f5c_3cf71827",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-12T09:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5d20edf_5abff785",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 41
+      },
+      "revId": "19f22640d4e19a10cad4c4fedb908c93a86477b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c50c809_f2d37a25",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-12-12T09:35:31Z",
       "side": 1,
       "message": "Verify that no PEL exists in BMC. Raise an exception if it does.",
+      "revId": "19f22640d4e19a10cad4c4fedb908c93a86477b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "505c34b5_e1d80378",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-12T09:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c50c809_f2d37a25",
       "revId": "19f22640d4e19a10cad4c4fedb908c93a86477b2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -64,6 +106,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a422bd4_722cf375",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-12T09:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0da06844_75092aa5",
+      "range": {
+        "startLine": 145,
+        "startChar": 4,
+        "endLine": 146,
+        "endChar": 38
+      },
+      "revId": "19f22640d4e19a10cad4c4fedb908c93a86477b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c05cec7b_aa15e742",
@@ -77,6 +143,30 @@
       "writtenOn": "2022-12-12T09:35:31Z",
       "side": 1,
       "message": "match.\nTo add clarity, pls mention the PEL\u0027s and Event\u0027s date/time which are being compared.",
+      "range": {
+        "startLine": 160,
+        "startChar": 73,
+        "endLine": 160,
+        "endChar": 80
+      },
+      "revId": "19f22640d4e19a10cad4c4fedb908c93a86477b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b15812c_e7c85e0f",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-12T09:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c05cec7b_aa15e742",
       "range": {
         "startLine": 160,
         "startChar": 73,
