@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4af14bf_d72631b0",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 32
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-13T08:26:52Z",
+      "side": 1,
+      "message": "I am not returning same thing its updated information.\nline number 250 you can observe I am executing on command to get detail info of PEL.",
+      "parentUuid": "bc43cbfb_45e1b42e",
+      "revId": "64fbf1a714771a74d65e089e24930826792fe71e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c67fb4c3_9d82e9e4",
         "filename": "lib/logging_utils.robot",
         "patchSetId": 32
@@ -31,6 +49,24 @@
       "writtenOn": "2022-12-13T07:01:14Z",
       "side": 1,
       "message": "remove",
+      "revId": "64fbf1a714771a74d65e089e24930826792fe71e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63de465c_3531b0e9",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 32
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-13T08:26:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c67fb4c3_9d82e9e4",
       "revId": "64fbf1a714771a74d65e089e24930826792fe71e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -48,6 +84,24 @@
       "writtenOn": "2022-12-13T07:01:14Z",
       "side": 1,
       "message": "remove, do not fail at keyword.\nIt will send if it finds else nothing",
+      "revId": "64fbf1a714771a74d65e089e24930826792fe71e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ad89cc3_c32fef40",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 32
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-13T08:26:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f5e8fbb_59071145",
       "revId": "64fbf1a714771a74d65e089e24930826792fe71e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
