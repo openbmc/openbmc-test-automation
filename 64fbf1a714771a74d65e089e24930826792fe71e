@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4fe6b035_b976e1c3",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 32
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-13T09:27:10Z",
+      "side": 1,
+      "message": "it return PEL -l individual data plus PEL -I  complete data in dictionary.",
+      "parentUuid": "6d1b120b_71476c4b",
+      "revId": "64fbf1a714771a74d65e089e24930826792fe71e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c67fb4c3_9d82e9e4",
         "filename": "lib/logging_utils.robot",
         "patchSetId": 32
