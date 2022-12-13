@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56ea96b5_16a48083",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 32
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-13T09:27:58Z",
+      "side": 1,
+      "message": "pel-i info is getting consumed later in keywords.",
+      "parentUuid": "4fe6b035_b976e1c3",
+      "revId": "64fbf1a714771a74d65e089e24930826792fe71e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c67fb4c3_9d82e9e4",
         "filename": "lib/logging_utils.robot",
         "patchSetId": 32
