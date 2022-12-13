@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "243e5ae1_81661c04",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 23
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-13T15:56:05Z",
+      "side": 1,
+      "message": "Please move this to lib/pel_utils.py as we have all PEL related methods there. This resource file has methods with Redfish Event logs. So let us keep it that way for clarity.\nDo not name this keyword as Get PEL Software Inventory. Rename it to \u0027Get PEL Details\u0027 in that library.",
+      "parentUuid": "6e666048_4d2a5bad",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 276,
+        "endChar": 26
+      },
+      "revId": "70c259f0c058f31fd3cacfa826fb44a184ed8938",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "562470b5_26e37fc9",
         "filename": "lib/logging_utils.robot",
         "patchSetId": 23
@@ -343,6 +367,30 @@
       "side": 1,
       "message": "line 267",
       "parentUuid": "20022d9f_7b5329df",
+      "range": {
+        "startLine": 351,
+        "startChar": 9,
+        "endLine": 351,
+        "endChar": 19
+      },
+      "revId": "70c259f0c058f31fd3cacfa826fb44a184ed8938",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "621f13cd_b5e27296",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 23
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-13T15:56:05Z",
+      "side": 1,
+      "message": "Rename it to pel_data for more clarity",
+      "parentUuid": "d69637e7_4e8d181d",
       "range": {
         "startLine": 351,
         "startChar": 9,

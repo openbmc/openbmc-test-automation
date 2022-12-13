@@ -16,6 +16,52 @@
       "message": "DONT push anything yet, lets other commit fixing the CI failure goes in first. ",
       "revId": "f381e953d769cc43ccfd412e8da9d52ae4acff54",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "356fc1de_13c76b47",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 49
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-13T15:56:05Z",
+      "side": 1,
+      "message": "What is the necessity for this keyword when you can do a Get on event log ID?\neg https://${BMC_IP}/redfish/v1/Systems/system/LogServices/EventLog/Entries/\u003cevent_id\u003e",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 31
+      },
+      "revId": "f381e953d769cc43ccfd412e8da9d52ae4acff54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3624837f_e6eeac90",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 49
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-13T15:56:05Z",
+      "side": 1,
+      "message": "Remove dict from variable name",
+      "range": {
+        "startLine": 306,
+        "startChar": 28,
+        "endLine": 306,
+        "endChar": 43
+      },
+      "revId": "f381e953d769cc43ccfd412e8da9d52ae4acff54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
