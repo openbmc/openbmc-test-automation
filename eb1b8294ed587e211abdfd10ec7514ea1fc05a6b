@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b030955_be5c8ebe",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2022-12-13T15:33:01Z",
+      "side": 1,
+      "message": "We should avoid using Older terminology for this case.",
+      "parentUuid": "aab480d0_38ce9ecb",
+      "range": {
+        "startLine": 268,
+        "startChar": 0,
+        "endLine": 268,
+        "endChar": 64
+      },
+      "revId": "eb1b8294ed587e211abdfd10ec7514ea1fc05a6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "00413456_92fc2a03",
         "filename": "redfish/managers/test_bmc_dumps.robot",
         "patchSetId": 7
