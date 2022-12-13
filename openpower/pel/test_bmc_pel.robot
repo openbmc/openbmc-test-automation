@@ -932,6 +932,8 @@ Verify PEL Transmission To Host
     ...  ELSE IF  '${host_state}' == 'On'
     ...  Redfish Power On  stack_mode=skip
 
+    Redfish Purge Event Log
+
     # Inject required error log.
     Run Keyword If  "${error_type}" == "informational_error"
     ...  BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
@@ -939,30 +941,30 @@ Verify PEL Transmission To Host
     ...  BMC Execute Command  ${CMD_UNRECOVERABLE_ERROR}
     ...  ELSE IF  "${error_type}" == "predictive_error"
     ...  BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
+ 
+    ${pel_records}=  Get Pel Data From Bmc  True  True
+    ${ids}=  Get Dictionary Keys  ${pel_records}
+    ${pel_id}=  Get From List  ${ids}  -1
 
     # Check host transmission state for the cases where PEL is
     # expected to be  offloaded to HOST.
     Run Keyword If  "${expected_transmission_state}" == "Acked"
     ...  Wait Until Keyword Succeeds  2 min  10 sec
-    ...  Check If PEL Transmission State Is Expected  Acked
+    ...  Check If PEL Transmission State Is Expected  ${pel_id}  Acked
 
     # Adding delay before checking host transmission for the cases where PEL is
     # not expected to be offloaded to HOST.
     Run Keyword If  "${expected_transmission_state}" == "Not sent"
     ...  Run Keywords  Sleep  120s AND
-    ...  Check If PEL Transmission State Is Expected  Not sent
+    ...  Check If PEL Transmission State Is Expected  ${pel_id}  Not sent
 
 
 Check If PEL Transmission State Is Expected
     [Documentation]  Check if PEL's host transmission state is matching expected state.
-    [Arguments]  ${expected_transmission_state}
+    [Arguments]  ${pel_id}  ${expected_transmission_state}
 
     # Description of argument(s):
     # expected_transmission_state       Expected transmission state of PEL log.
-
-    ${pel_records}=  Get Pel Data From Bmc  True  True
-    ${ids}=  Get Dictionary Keys  ${pel_records}
-    ${pel_id}=  Get From List  ${ids}  -1
 
     # Check the transmission details in the error log.
     ${host_transmission}=  Get PEL Field Value  ${pel_id}  User Header  Host Transmission
