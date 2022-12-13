@@ -484,3 +484,52 @@ def return_decoded_string(input):
     encoded_string = input.encode("ascii", "ignore")
     decoded_string = encoded_string.decode()
     return decoded_string
+
+
+def convert_name_into_bytes_with_prefix(name):
+    r"""
+    convert name into bytes with prefix 0x
+    """
+
+    tmp_lst = []
+
+    for letter in name:
+        tmp_lst.append(hex(ord(letter)))
+
+    return tmp_lst
+
+def convert_name_into_bytes_without_prefix(name):
+    r"""
+    convert name into bytes
+    """
+
+    tmp_lst = []
+
+    for letter in name:
+        value = convert_to_hex_value_without_prefix(letter)
+        tmp_lst.append(value)
+
+    return tmp_lst
+
+def convert_to_hex_value_without_prefix(letter):
+    r"""
+    convert into hex
+    """
+    value = (hex(ord(letter)))
+    if value[:2] == '0x':
+        value = value[2:]
+
+    return value
+
+def convert_prefix_hex_list_to_non_prefix_hex_list(list):
+    r"""
+    convert into list of hex with prefix to list of hex without prefix.
+    """
+
+    tmp_list = []
+
+    for value in list:
+        if value[:2] == '0x':
+            tmp_list.append(value[2:])
+    
+    return tmp_list
