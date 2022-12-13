@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f039e182_b73cc1fb",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-13T06:16:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3a9a639_eb51ed61",
+      "range": {
+        "startLine": 268,
+        "startChar": 0,
+        "endLine": 268,
+        "endChar": 62
+      },
+      "revId": "92281db2da16ceacf4e85d6d2775bdfece69b2f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99d3cc89_be8545f5",
@@ -70,6 +94,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc8d499f_a66e9b84",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-13T06:16:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea0ae008_766b08d3",
+      "range": {
+        "startLine": 270,
+        "startChar": 74,
+        "endLine": 270,
+        "endChar": 75
+      },
+      "revId": "92281db2da16ceacf4e85d6d2775bdfece69b2f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9852f45_bbb04f46",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-13T06:16:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99d3cc89_be8545f5",
+      "range": {
+        "startLine": 270,
+        "startChar": 18,
+        "endLine": 270,
+        "endChar": 19
+      },
+      "revId": "92281db2da16ceacf4e85d6d2775bdfece69b2f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9b77a9a_feab898d",
@@ -93,6 +165,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bffc50d1_09700dee",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-13T06:16:42Z",
+      "side": 1,
+      "message": "The setup work is one time only. But we do several dump related tests in between. Cleaning would confirm no dump is there as mandatory for this test. So decided to keep this.",
+      "parentUuid": "c9b77a9a_feab898d",
+      "range": {
+        "startLine": 272,
+        "startChar": 0,
+        "endLine": 272,
+        "endChar": 32
+      },
+      "revId": "92281db2da16ceacf4e85d6d2775bdfece69b2f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14bea393_499bb540",
@@ -106,6 +202,30 @@
       "writtenOn": "2022-12-12T15:42:36Z",
       "side": 1,
       "message": "count",
+      "range": {
+        "startLine": 284,
+        "startChar": 10,
+        "endLine": 284,
+        "endChar": 13
+      },
+      "revId": "92281db2da16ceacf4e85d6d2775bdfece69b2f0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ae57965_84c9695a",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-13T06:16:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14bea393_499bb540",
       "range": {
         "startLine": 284,
         "startChar": 10,
