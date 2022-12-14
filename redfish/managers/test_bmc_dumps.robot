@@ -78,7 +78,7 @@ Verify Multiple BMC Dump Creation
 
 Verify BMC Dump Default Location In BMC
      [Documentation]  Verify that BMC dump is created in its default location of BMC.
-     [Tags]  Verify_BMC_Dump_In_Default_Folder
+     [Tags]  Verify_BMC_Dump_Default_Location_In_BMC
 
      Redfish Delete All BMC Dumps
      ${dump_id}=  Create User Initiated BMC Dump Via Redfish
