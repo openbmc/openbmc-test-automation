@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "594e536f_de0194f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2022-12-14T16:03:54Z",
+      "side": 1,
+      "message": "Added Megha to the IBM CI approval list ",
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
