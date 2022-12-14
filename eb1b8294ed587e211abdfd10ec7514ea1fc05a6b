@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73708952_4b15d195",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-14T06:44:47Z",
+      "side": 1,
+      "message": "Probably we need to formulate another name as per my comments at #291",
+      "parentUuid": "9b030955_be5c8ebe",
+      "range": {
+        "startLine": 268,
+        "startChar": 0,
+        "endLine": 268,
+        "endChar": 64
+      },
+      "revId": "eb1b8294ed587e211abdfd10ec7514ea1fc05a6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00413456_92fc2a03",
@@ -61,6 +85,30 @@
       "writtenOn": "2022-12-13T15:17:57Z",
       "side": 1,
       "message": "Not required. We already have this as part of test setup in this file.\n\nTest Setup          Redfish Delete All BMC Dumps",
+      "range": {
+        "startLine": 271,
+        "startChar": 0,
+        "endLine": 272,
+        "endChar": 32
+      },
+      "revId": "eb1b8294ed587e211abdfd10ec7514ea1fc05a6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a25034e_f962fddf",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-14T06:44:47Z",
+      "side": 1,
+      "message": "For this test case, it is must that no dump should be there.\n\nsetup is one time. But then, multiple dump tests are done and there might be a risk of some earlier dumps remaining. So, keeping this.",
+      "parentUuid": "00413456_92fc2a03",
       "range": {
         "startLine": 271,
         "startChar": 0,
@@ -96,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3572ce9f_8719d220",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-14T06:44:47Z",
+      "side": 1,
+      "message": "will be done",
+      "parentUuid": "0bc47313_75d85954",
+      "range": {
+        "startLine": 275,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 52
+      },
+      "revId": "eb1b8294ed587e211abdfd10ec7514ea1fc05a6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b73880d8_ab6b1923",
         "filename": "redfish/managers/test_bmc_dumps.robot",
         "patchSetId": 7
@@ -107,6 +179,30 @@
       "writtenOn": "2022-12-13T15:17:57Z",
       "side": 1,
       "message": "# Check error while initiating BMC dump while dump in progress. Running\n    # a 10 mins loop(60*10s\u003d 600 seconds) until older dump completes.\n    \n    WHILE  True  limit\u003d60\n      \u003c add a code to exit this loop if above task_id is complete\u003e\n      ${payload}\u003d  Create Dictionary  DiagnosticDataType\u003dManager\n      Redfish.Post\n      ... /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData\n      ...  body\u003d${payload}  valid_status_codes\u003d[${HTTP_SERVICE_UNAVAILABLE}]\n\n      # Delay before initiating another BMC dump.\n      Sleep  10s\n    END",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 7
+      },
+      "revId": "eb1b8294ed587e211abdfd10ec7514ea1fc05a6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b66aaa04_23fdae0e",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-14T06:44:47Z",
+      "side": 1,
+      "message": "As I mentioned earlier, this testcase corresponds to a defect, where multiple dumps were initiated without a time gap that leads to total dump failure. so my intent:\n\n1. Keep initiating dumps one after another without a time gap\n2. Ensure each dump request has error response  service unavailable.\n3. If earlier dump dump gets completed (dump is found), come out  of the loop.\n4. Initiate another dump request which should return accepted in stead of service unavailable.\n\nKeeping in mind this test case was prepared. So, I am  keeping my original code but shall remove \u0027Sleep  3s\u0027 from there.",
+      "parentUuid": "b73880d8_ab6b1923",
       "range": {
         "startLine": 277,
         "startChar": 0,
@@ -130,6 +226,30 @@
       "writtenOn": "2022-12-13T15:17:57Z",
       "side": 1,
       "message": "# Check new BMC dump creation after older BMC dump completion.\n    Create User Initiated BMC Dump Via Redfish",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 80
+      },
+      "revId": "eb1b8294ed587e211abdfd10ec7514ea1fc05a6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b345065c_bc14a8be",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-14T06:44:47Z",
+      "side": 1,
+      "message": "Let this remain as it is as I am comparing with earlier Redfish.Post where expected return is ${HTTP_SERVICE_UNAVAILABLE} but now with dump completion, it is expected to be ${HTTP_ACCEPTED}",
+      "parentUuid": "032b3bf0_43f12c06",
       "range": {
         "startLine": 293,
         "startChar": 0,
