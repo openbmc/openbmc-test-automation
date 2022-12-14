@@ -75,15 +75,16 @@ Switch And Verify BIOS Attribute Firmware Boot Side
     # Get pre reboot state.
     ${pre_reboot_state}=  Get Pre Reboot State
 
-    # Get fw_boot_side value, make sure given set_fw_boot_side and
+    # Get fw_boot_side value.
     # fw_boot_side values are not same.
 
     ${cur_boot_side}=  Redfish.Get Attribute  ${BIOS_ATTR_URI}  Attributes
-    Should Not Be Equal  ${cur_boot_side["fw_boot_side_current"]}  ${set_fw_boot_side}
-    ...  msg=Current firmware boot side & the given firmware boot side are same...
 
     Log To Console  Current firmware boot side :: ${cur_boot_side["fw_boot_side"]}
     Log To Console  Given firmware boot side :: ${set_fw_boot_side}
+
+    Return From Keyword If  "${cur_boot_side["fw_boot_side_current"]}" == "${set_fw_boot_side}"
+    ...  ${True}
 
     # Set the given firmware boot side value.
     Set BIOS Attribute Value And Verify  fw_boot_side  ${set_fw_boot_side}  False
