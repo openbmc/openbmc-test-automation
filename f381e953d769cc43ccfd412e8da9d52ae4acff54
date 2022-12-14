@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "de3e3250_7ef781b7",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 49
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-14T14:16:08Z",
+      "side": 1,
+      "message": "Why do you want to do that? You can do a GET on the URI directly to get the output instead of looking into the list of event entries. This keyword is not required. Remove.",
+      "parentUuid": "8abb2aac_021450fd",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 31
+      },
+      "revId": "f381e953d769cc43ccfd412e8da9d52ae4acff54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3624837f_e6eeac90",
         "filename": "lib/logging_utils.robot",
         "patchSetId": 49
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "I did not get you.",
       "parentUuid": "3624837f_e6eeac90",
+      "range": {
+        "startLine": 306,
+        "startChar": 28,
+        "endLine": 306,
+        "endChar": 43
+      },
+      "revId": "f381e953d769cc43ccfd412e8da9d52ae4acff54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47726765_60ffe740",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 49
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-14T14:16:08Z",
+      "side": 1,
+      "message": "Dont mention that it is a dict in the variable name. Also change it to some other name - pel_sw_inv as it is not appropriate for the data it is storing.",
+      "parentUuid": "07b77b7c_7e771eb4",
       "range": {
         "startLine": 306,
         "startChar": 28,

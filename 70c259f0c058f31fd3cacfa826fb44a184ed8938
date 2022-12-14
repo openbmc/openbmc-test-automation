@@ -262,6 +262,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef38ad56_79bb8174",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 23
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-14T14:16:08Z",
+      "side": 1,
+      "message": "what is line 267?",
+      "parentUuid": "a38d2844_90ce7554",
+      "range": {
+        "startLine": 316,
+        "startChar": 11,
+        "endLine": 316,
+        "endChar": 25
+      },
+      "revId": "70c259f0c058f31fd3cacfa826fb44a184ed8938",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "08349195_2d463f39",
         "filename": "lib/logging_utils.robot",
         "patchSetId": 23
@@ -439,6 +463,30 @@
       "side": 1,
       "message": "I have more information for the user so, he is well aware what data is getting stored in this dictionary.\n\n# Below dictionary  i.e. pel_sw_inv_dict stores two data.\n# pel_data           : which is insatnce of list of particular PEL logs.\n# pel_detail_data    : which is detail information of particular instance PEL logs.\n\n\u0026{pel_sw_inv_dict}\u003d  Create Dictionary",
       "parentUuid": "621f13cd_b5e27296",
+      "range": {
+        "startLine": 351,
+        "startChar": 9,
+        "endLine": 351,
+        "endChar": 19
+      },
+      "revId": "70c259f0c058f31fd3cacfa826fb44a184ed8938",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2290702_4cd96063",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 23
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2022-12-14T14:16:08Z",
+      "side": 1,
+      "message": "The description is fine but the variable name doesn\u0027t not make sense. So pls change accordingly.",
+      "parentUuid": "247d1228_f79d81f9",
       "range": {
         "startLine": 351,
         "startChar": 9,
