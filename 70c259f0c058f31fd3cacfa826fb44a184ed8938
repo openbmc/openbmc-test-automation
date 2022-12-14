@@ -72,6 +72,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97a2255b_66491565",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 23
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-14T05:54:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "243e5ae1_81661c04",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 276,
+        "endChar": 26
+      },
+      "revId": "70c259f0c058f31fd3cacfa826fb44a184ed8938",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "562470b5_26e37fc9",
@@ -391,6 +415,30 @@
       "side": 1,
       "message": "Rename it to pel_data for more clarity",
       "parentUuid": "d69637e7_4e8d181d",
+      "range": {
+        "startLine": 351,
+        "startChar": 9,
+        "endLine": 351,
+        "endChar": 19
+      },
+      "revId": "70c259f0c058f31fd3cacfa826fb44a184ed8938",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "247d1228_f79d81f9",
+        "filename": "lib/logging_utils.robot",
+        "patchSetId": 23
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-14T05:54:03Z",
+      "side": 1,
+      "message": "I have more information for the user so, he is well aware what data is getting stored in this dictionary.\n\n# Below dictionary  i.e. pel_sw_inv_dict stores two data.\n# pel_data           : which is insatnce of list of particular PEL logs.\n# pel_detail_data    : which is detail information of particular instance PEL logs.\n\n\u0026{pel_sw_inv_dict}\u003d  Create Dictionary",
+      "parentUuid": "621f13cd_b5e27296",
       "range": {
         "startLine": 351,
         "startChar": 9,
