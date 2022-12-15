@@ -2,8 +2,6 @@
 
 Documentation    Test Redfish session and its connection stability.
 
-Resource         ../../lib/resource.robot
-Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/bmc_redfish_utils.robot
 Resource         ../../lib/openbmc_ffdc.robot
 
