@@ -4,13 +4,7 @@ r"""
  Define methods to import platform specific files.
 """
 
-import imp
-import importlib
-import string
-import sys
-
-from robot.libraries.BuiltIn import BuiltIn
-
+import importlib as importlib
 
 def get_service_restart_policy_services(module_name):
     r"""
