@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "451a36e1_f0826741",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-15T07:42:14Z",
+      "side": 1,
+      "message": "keep it all capital i.e. PEL",
+      "range": {
+        "startLine": 7,
+        "startChar": 47,
+        "endLine": 7,
+        "endChar": 50
+      },
+      "revId": "8ed0150f8ae3ceaad2fb8f0cfd95e603c3a6f1e3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a71ec61_aa8cc808",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-15T07:42:14Z",
+      "side": 1,
+      "message": "Keep this test case just after `Verify Host Off State From PEL` test case.",
+      "range": {
+        "startLine": 728,
+        "startChar": 0,
+        "endLine": 728,
+        "endChar": 29
+      },
+      "revId": "8ed0150f8ae3ceaad2fb8f0cfd95e603c3a6f1e3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
