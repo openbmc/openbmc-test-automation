@@ -8,14 +8,12 @@ http://robot-framework.readthedocs.io/en/3.0/autodoc/robot.result.html
 
 import csv
 import datetime
-import getopt
 import os
-import re
 import stat
 import sys
+import argparse
 from xml.etree import ElementTree
 
-import robot.errors
 from robot.api import ExecutionResult
 from robot.result.visitor import ResultVisitor
 
@@ -24,9 +22,9 @@ save_path_0 = sys.path[0]
 del sys.path[0]
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../lib"))
 
-from gen_arg import *  # NOQA
-from gen_print import *  # NOQA
-from gen_valid import *  # NOQA
+import gen_print as gp  # NOQA
+import gen_valid import gv  # NOQA
+import gen_arg import ga  # NOQA
 
 # Restore sys.path[0].
 sys.path.insert(0, save_path_0)
@@ -128,11 +126,11 @@ def exit_function(signal_number=0, frame=None):
     catch (i.e. TERM, INT).
     """
 
-    dprint_executing()
+    gp.dprint_executing()
 
-    dprint_var(signal_number)
+    gp.dprint_var(signal_number)
 
-    qprint_pgm_footer()
+    gp.qprint_pgm_footer()
 
 
 def signal_handler(signal_number, frame):
@@ -145,7 +143,7 @@ def signal_handler(signal_number, frame):
     # Our convention is to set up exit_function with atexit.register() so
     # there is no need to explicitly call exit_function from here.
 
-    dprint_executing()
+    gp.dprint_executing()
 
     # Calling exit prevents us from returning to the code that was running
     # when the signal was received.
@@ -158,13 +156,13 @@ def validate_parms():
     accordingly.
     """
 
-    if not valid_file_path(source):
+    if not gv.valid_file_path(source):
         return False
 
-    if not valid_dir_path(dest):
+    if not gv.valid_dir_path(dest):
         return False
 
-    gen_post_validation(exit_function, signal_handler)
+    ga.gen_post_validation(exit_function, signal_handler)
 
     return True
 
@@ -420,7 +418,7 @@ def get_system_details(xml_file_path):
         if "${bmc_model} = " in node.text:
             bmc_platform = node.text.split(" = ")[1]
 
-    print_vars(bmc_version_id, bmc_platform)
+    gp.print_vars(bmc_version_id, bmc_platform)
     return [str(bmc_version_id), str(bmc_platform)]
 
 

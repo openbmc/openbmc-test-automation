@@ -4,9 +4,8 @@ r"""
 This module provides some functions for Secure Boot verification.
 """
 
-import bmc_ssh_utils as bsu
-import var_funcs as vf
-from robot.libraries.BuiltIn import BuiltIn
+import bmc_ssh_utils as bsu  # NOQA
+import var_funcs as vf  # NOQA
 
 
 # Define 'constant' functions.
