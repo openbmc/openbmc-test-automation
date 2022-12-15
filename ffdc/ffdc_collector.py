@@ -792,7 +792,7 @@ class ffdc_collector:
 
         Description of argument(s):
         targ_dir_path                   The path of the directory to receive the files.
-        targ_file_prefix                Prefix which will be pre-pended to each
+        targ_file_prefix                Prefix which will be prepended to each
                                         target file's name.
         file_dict                       A dictionary of files to scp from targeted system to this system
 

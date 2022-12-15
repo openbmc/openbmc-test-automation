@@ -322,7 +322,7 @@ Verify Redfish Functional Image Version Is Same
     [Arguments]  ${image}
 
     # Description of argument(s):
-    # image           Fucntional Image or Backup Image
+    # image           Functional Image or Backup Image
 
     Verify Firmware Version Same In Firmware Inventory And Managers
 

@@ -19,7 +19,7 @@ ${IPMI_POWEROFF_WAIT_TIMEOUT}    3
 *** Test Cases ***
 
 IPMI Chassis Status On
-    [Documentation]  This test case verfies system power on status
+    [Documentation]  This test case verifies system power on status
     ...               using IPMI Get Chassis status command.
     [Tags]  IPMI_Chassis_Status_On
 
@@ -29,7 +29,7 @@ IPMI Chassis Status On
     Should Contain  ${power_status}  on
 
 IPMI Chassis Status Off
-    [Documentation]  This test case verfies system power off status
+    [Documentation]  This test case verifies system power off status
     ...               using IPMI Get Chassis status command.
     [Tags]  IPMI_Chassis_Status_Off
 

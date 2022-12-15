@@ -13,7 +13,7 @@ ${host_reboot_time}  360
 *** Test Cases ***
 
 IPMI Chassis Status On
-    [Documentation]  This test case verfies system power on status
+    [Documentation]  This test case verifies system power on status
     ...               using IPMI Get Chassis status command.
     [Tags]  IPMI_Chassis_Status_On
 

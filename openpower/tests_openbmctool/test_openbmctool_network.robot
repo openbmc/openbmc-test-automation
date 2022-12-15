@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation  Verify OBMC tool's network fuctionality.
+Documentation  Verify OBMC tool's network functionality.
 
 
 Library                 String

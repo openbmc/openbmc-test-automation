@@ -10,8 +10,8 @@ try:
     from robot.libraries.BuiltIn import BuiltIn
 except ImportError:
     pass
-import os
 import time
+import re
 
 
 def run_until_keyword_fails(retry, retry_interval, name, *args):
@@ -189,7 +189,7 @@ def build_error_dict(htx_error_log_output):
     error_list = []
     error_list = htx_error_log_to_list(htx_error_log_output)
 
-    # dictionary which holds the error dictionry entry.
+    # dictionary which holds the error dictionary entry.
     error_dict = {}
 
     temp_error_dict = {}
