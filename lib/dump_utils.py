@@ -12,7 +12,6 @@ import bmc_ssh_utils as bsu
 import gen_misc as gm
 import gen_print as gp
 import gen_robot_keyword as grk
-import var_funcs as vf
 from robot.libraries.BuiltIn import BuiltIn
 
 base_path = (
@@ -107,7 +106,7 @@ def scp_dumps(targ_dir_path, targ_file_prefix="", dump_dict=None, quiet=None):
     Description of argument(s):
     targ_dir_path                   The path of the directory to receive the
                                     dump files.
-    targ_file_prefix                Prefix which will be pre-pended to each
+    targ_file_prefix                Prefix which will be prepended to each
                                     target file's name.
     dump_dict                       A dump dictionary such as the one returned
                                     by get_dump_dict.  If this value is None,

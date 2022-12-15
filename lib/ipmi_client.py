@@ -144,7 +144,7 @@ ipmi_setup()
 
 def process_ipmi_user_options(command):
     r"""
-    Return the buffer with any ipmi_user_options pre-pended.
+    Return the buffer with any ipmi_user_options prepended.
 
     Description of argument(s):
     command                         An IPMI command (e.g. "power status").

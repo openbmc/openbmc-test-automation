@@ -1986,7 +1986,7 @@ def create_print_wrapper_funcs(
     replace_dict                    Please see the create_func_def_string function in wrap_utils.py for
                                     details on this parameter.  This parameter will be passed directly to
                                     create_func_def_string.
-    func_prefix                     Prefix to be pre-pended to the generated function name.
+    func_prefix                     Prefix to be prepended to the generated function name.
     """
 
     buffer = ""

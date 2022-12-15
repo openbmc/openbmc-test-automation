@@ -210,7 +210,7 @@ Log Out OpenBMC
     ...  X-Auth-Token=${XAUTH_TOKEN}
     ${data}=  Create dictionary  data=@{EMPTY}
 
-    # If there is no active sesion it will throw the following exception
+    # If there is no active session it will throw the following exception
     # "Non-existing index or alias 'openbmc'"
     ${resp}=  POST On Session  openbmc
     ...  /logout  json=${data}  headers=${headers}

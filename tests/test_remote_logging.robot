@@ -156,9 +156,9 @@ Test Remote Logging Invalid Port Config And Verify BMC Journald
     ...  msg=${bmc_journald} doesn't contain rsyslog retry entries.
 
 
-Verfiy BMC Journald Synced To Remote Logging Server
+Verify BMC Journald Synced To Remote Logging Server
     [Documentation]  Check that BMC journald is sync to remote rsyslog.
-    [Tags]  Verfiy_BMC_Journald_Synced_To_Remote_Logging_Server
+    [Tags]  Verify_BMC_Journald_Synced_To_Remote_Logging_Server
 
     # Restart BMC dump service and get the last entry of the journald.
     # Example:

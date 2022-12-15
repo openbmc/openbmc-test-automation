@@ -155,7 +155,7 @@ Set RequestedActivation To None
 
 
 Set RequestedActivation And Activation To Invalid Value
-    [Documentation]  Set the RequestedActivation and Activation propreties of
+    [Documentation]  Set the RequestedActivation and Activation properties of
     ...              the image to an invalid value and verify that it was not
     ...              changed.
     [Template]  Set Property To Invalid Value And Verify No Change

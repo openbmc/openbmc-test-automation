@@ -131,7 +131,7 @@ Verify Redfish Unresponsive URL paths
 *** Keywords ***
 
 GET And Verify Redfish Response
-    [Documentation]  GET given resource and verfiy response.
+    [Documentation]  GET given resource and verify response.
     [Arguments]  ${valid_status_codes}  ${resource_path}
 
     # Description of argument(s):

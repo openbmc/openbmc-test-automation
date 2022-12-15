@@ -345,7 +345,7 @@ Stop SOL Console Logging
     ...          ${targ_file_path}=${EXECDIR}${/}logs${/}
     ...          ${return_data}=${1}
 
-    # If there are muliple system console processes, they will all be stopped.
+    # If there are multiple system console processes, they will all be stopped.
     # If there is no existing log file this keyword will return an error
     # message to that effect (and write that message to targ_file_path, if
     # specified).
