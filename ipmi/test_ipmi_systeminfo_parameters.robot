@@ -230,7 +230,7 @@ Verify Set System Info System Name With Invalid Data Length
     ${system_name}=  Generate Random String  15  [LETTERS]
     ${system_name}  ${name_hex_data}=  Identify Request Data  ${system_name}
     # Consider random string generated is 'zwclMXwfczMvcYz'.
-    # The request data bytes will be 15 bytes, in which 14 bytes are only exepcted.
+    # The request data bytes will be 15 bytes, in which 14 bytes are only expected.
 
     # Check if the Set System Info Parameter for param 2 - System Name throws error for invalid request data.
     Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param2_System_Name']['Set'][1]}*

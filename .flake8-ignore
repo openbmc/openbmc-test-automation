@@ -16,16 +16,12 @@ data/Witherspoon.py
 data/ipmi_variable.py
 data/model.py
 data/platform_variables.py
-ffdc/ffdc_collector.py
-ffdc/lib/ssh_utility.py
-ffdc/plugins/redfish.py
 gui/lib/utils_get_version.py
 lib/bmc_network_utils.py
 lib/bmc_redfish.py
 lib/bmc_redfish_utils.py
 lib/boot_data.py
 lib/disable_warning_urllib.py
-lib/dump_utils.py
 lib/external_intf/management_console_utils.py
 lib/func_args.py
 lib/gen_arg.py
@@ -33,7 +29,6 @@ lib/gen_call_robot.py
 lib/gen_cmd.py
 lib/gen_plug_in.py
 lib/gen_plug_in_utils.py
-lib/gen_print.py
 lib/gen_robot_plug_in.py
 lib/gen_robot_ssh.py
 lib/gen_valid.py
@@ -51,6 +46,5 @@ lib/tftp_update_utils.py
 lib/utilities.py
 lib/utils_files.py
 lib/var_funcs.py
-syslib/utils_keywords.py
 templates/python_pgm_template
 tools/ct_metrics/gen_csv_results.py
