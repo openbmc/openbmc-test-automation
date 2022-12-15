@@ -73,7 +73,7 @@ def process_error_message(error_message):
         BuiltIn().fail(error_message)
 
 
-# The docstring header will be pre-pended to each validation function's existing docstring.
+# The docstring header will be prepended to each validation function's existing docstring.
 docstring_header = r"""
     Fail if the variable named by var_name is invalid.
     """
