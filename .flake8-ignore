@@ -14,7 +14,6 @@ bin/validate_plug_ins.py
 bin/websocket_monitor.py
 data/Witherspoon.py
 data/ipmi_variable.py
-data/model.py
 data/platform_variables.py
 ffdc/ffdc_collector.py
 ffdc/lib/ssh_utility.py
@@ -44,11 +43,9 @@ lib/openbmc_ffdc_list.py
 lib/pldm_utils.py
 lib/pythonutil.py
 lib/redfish_request.py
-lib/secureboot/secureboot.py
 lib/state.py
 lib/tftp_update_utils.py
 lib/utilities.py
 lib/utils_files.py
 lib/var_funcs.py
 templates/python_pgm_template
-tools/ct_metrics/gen_csv_results.py

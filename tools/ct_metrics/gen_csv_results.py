@@ -8,14 +8,12 @@ http://robot-framework.readthedocs.io/en/3.0/autodoc/robot.result.html
 
 import csv
 import datetime
-import getopt
 import os
-import re
 import stat
 import sys
+import argparse
 from xml.etree import ElementTree
 
-import robot.errors
 from robot.api import ExecutionResult
 from robot.result.visitor import ResultVisitor
 
@@ -24,8 +22,8 @@ save_path_0 = sys.path[0]
 del sys.path[0]
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../lib"))
 
+import gen_print as gp  # NOQA
 from gen_arg import *  # NOQA
-from gen_print import *  # NOQA
 from gen_valid import *  # NOQA
 
 # Restore sys.path[0].
@@ -128,11 +126,11 @@ def exit_function(signal_number=0, frame=None):
     catch (i.e. TERM, INT).
     """
 
-    dprint_executing()
+    gp.dprint_executing()
 
-    dprint_var(signal_number)
+    gp.dprint_var(signal_number)
 
-    qprint_pgm_footer()
+    gp.qprint_pgm_footer()
 
 
 def signal_handler(signal_number, frame):
@@ -145,7 +143,7 @@ def signal_handler(signal_number, frame):
     # Our convention is to set up exit_function with atexit.register() so
     # there is no need to explicitly call exit_function from here.
 
-    dprint_executing()
+    gp.dprint_executing()
 
     # Calling exit prevents us from returning to the code that was running
     # when the signal was received.
