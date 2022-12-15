@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba0bd13e_b991b5a4",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-12-15T11:10:40Z",
+      "side": 1,
+      "message": "I think this name is clear about test case.",
+      "parentUuid": "14de2425_3b30e1d7",
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ae174f5e_05dd3106",
         "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
         "patchSetId": 8
@@ -48,6 +66,30 @@
       "writtenOn": "2022-12-15T06:56:01Z",
       "side": 1,
       "message": "Add test setup to fetch IPMI and SSH setting before starting the test case. And in the teardown restore the value back to the initial value.\n\n[Setup]  Fetch IPMI And SSH setting\n[Teardown]  Set SSH And IPMI State Via GUI  inital_ssh_setting  initial_ipmi_setting\n\n\nFetch IPMI And SSH setting\n  ${initial_ssh_state}\u003d  Get Text  ${xpath_bmc_ssh_toggle}\n  Set Suite Variable  initial_ssh_state\n  ${initial_ipmi_state}\u003d  Get Text  ${xpath_ipmi_toggle}\n  Set Suite Variable  initial_ssh_state",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 39
+      },
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52a5eb3d_c462fb5d",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-12-15T11:10:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae174f5e_05dd3106",
       "range": {
         "startLine": 176,
         "startChar": 0,
@@ -81,6 +123,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4774ecb_86393ab7",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-12-15T11:10:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "398b755e_afc4f9d3",
+      "range": {
+        "startLine": 229,
+        "startChar": 21,
+        "endLine": 229,
+        "endChar": 62
+      },
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1d51966_355c99ca",
@@ -94,6 +160,30 @@
       "writtenOn": "2022-12-15T06:56:01Z",
       "side": 1,
       "message": "It\u0027s not new its current SSH state. So keep the variable name as current_ssh_state",
+      "range": {
+        "startLine": 239,
+        "startChar": 6,
+        "endLine": 239,
+        "endChar": 16
+      },
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ced42256_51d19d4e",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-12-15T11:10:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1d51966_355c99ca",
       "range": {
         "startLine": 239,
         "startChar": 6,
@@ -127,6 +217,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "840ce0ae_e6cb65ae",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-12-15T11:10:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3eb0a851_997d4aab",
+      "range": {
+        "startLine": 251,
+        "startChar": 6,
+        "endLine": 251,
+        "endChar": 16
+      },
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67952576_fdbe9329",
@@ -140,6 +254,30 @@
       "writtenOn": "2022-12-15T06:56:01Z",
       "side": 1,
       "message": "As we are not doing login as part of the keyword. Take it out of documentation.",
+      "range": {
+        "startLine": 261,
+        "startChar": 21,
+        "endLine": 261,
+        "endChar": 68
+      },
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec80dc2e_f91a0dad",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-12-15T11:10:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67952576_fdbe9329",
       "range": {
         "startLine": 261,
         "startChar": 21,
@@ -173,6 +311,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dab8175a_b5f02811",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-12-15T11:10:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "577c3597_49c6f0e8",
+      "range": {
+        "startLine": 268,
+        "startChar": 6,
+        "endLine": 268,
+        "endChar": 19
+      },
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d22970e_609c53d2",
@@ -196,6 +358,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50c910f6_122de0ad",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-12-15T11:10:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d22970e_609c53d2",
+      "range": {
+        "startLine": 270,
+        "startChar": 0,
+        "endLine": 274,
+        "endChar": 47
+      },
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76690ca4_390dad59",
@@ -209,6 +395,30 @@
       "writtenOn": "2022-12-15T06:56:01Z",
       "side": 1,
       "message": "current_ipmi_state",
+      "range": {
+        "startLine": 276,
+        "startChar": 6,
+        "endLine": 276,
+        "endChar": 20
+      },
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e85c2516_0d2ad148",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-12-15T11:10:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76690ca4_390dad59",
       "range": {
         "startLine": 276,
         "startChar": 6,
