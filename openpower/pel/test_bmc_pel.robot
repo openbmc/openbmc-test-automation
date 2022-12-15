@@ -196,6 +196,20 @@ Verify Host Off State From PEL
     Valid Value  pel_host_state  ['Off']
 
 
+Verify Host On State From PEL
+    [Documentation]  Verify Host on state from PEL.
+    [Tags]  Verify_Host_On_State_From_PEL
+
+    Redfish Power On  stack_mode=skip
+    Create Test PEL Log
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    ${pel_host_state}=  Get PEL Field Value  ${id}  User Data  HostState
+
+    Valid Value  pel_host_state  ['Running']
+
+
 Verify BMC Version From PEL
     [Documentation]  Verify BMC Version from PEL.
     [Tags]  Verify_BMC_Version_From_PEL
