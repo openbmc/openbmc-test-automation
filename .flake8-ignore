@@ -14,7 +14,6 @@ bin/validate_plug_ins.py
 bin/websocket_monitor.py
 data/Witherspoon.py
 data/ipmi_variable.py
-data/model.py
 data/platform_variables.py
 ffdc/ffdc_collector.py
 ffdc/lib/ssh_utility.py
