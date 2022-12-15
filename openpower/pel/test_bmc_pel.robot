@@ -725,6 +725,20 @@ Verify PEL Log Offloaded To Host
       informational_error   On              Acked
 
 
+Verify Host On State From PEL
+    [Documentation]  Verify Host on state from PEL.
+    [Tags]  Verify_Host_On_State_From_PEL
+
+    Redfish Power On  stack_mode=skip
+    Create Test PEL Log
+
+    ${pel_ids}=  Get PEL Log Via BMC CLI
+    ${id}=  Get From List  ${pel_ids}  -1
+    ${pel_host_state}=  Get PEL Field Value  ${id}  User Data  HostState
+
+    Valid Value  pel_host_state  ['Running']
+
+
 *** Keywords ***
 
 Error Logging Rotation Policy
