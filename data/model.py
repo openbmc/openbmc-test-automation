@@ -1,7 +1,6 @@
 #!/usr/bin/env python3 -u
-import imp
-import string
-import sys
+import imp as imp
+import string as string
 
 from robot.libraries.BuiltIn import BuiltIn
 
