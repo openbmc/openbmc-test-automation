@@ -8,14 +8,12 @@ http://robot-framework.readthedocs.io/en/3.0/autodoc/robot.result.html
 
 import csv
 import datetime
-import getopt
 import os
-import re
 import stat
 import sys
+import argparse
 from xml.etree import ElementTree
 
-import robot.errors
 from robot.api import ExecutionResult
 from robot.result.visitor import ResultVisitor
 
@@ -24,6 +22,7 @@ save_path_0 = sys.path[0]
 del sys.path[0]
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../lib"))
 
+from gen_cmd import *  # NOQA
 from gen_arg import *  # NOQA
 from gen_print import *  # NOQA
 from gen_valid import *  # NOQA
