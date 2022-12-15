@@ -2,11 +2,9 @@
 Documentation    Test Redfish LDAP user configuration.
 
 Library          ../../lib/gen_robot_valid.py
-Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
-Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/utils.robot
-Library          ../../lib/gen_robot_valid.py
+Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/bmc_network_utils.robot
 Resource         ../../lib/bmc_ldap_utils.robot
 
