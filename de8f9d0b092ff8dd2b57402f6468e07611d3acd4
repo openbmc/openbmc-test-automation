@@ -16,6 +16,190 @@
       "message": "Added Megha to the IBM CI approval list ",
       "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae174f5e_05dd3106",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-15T06:56:01Z",
+      "side": 1,
+      "message": "Add test setup to fetch IPMI and SSH setting before starting the test case. And in the teardown restore the value back to the initial value.\n\n[Setup]  Fetch IPMI And SSH setting\n[Teardown]  Set SSH And IPMI State Via GUI  inital_ssh_setting  initial_ipmi_setting\n\n\nFetch IPMI And SSH setting\n  ${initial_ssh_state}\u003d  Get Text  ${xpath_bmc_ssh_toggle}\n  Set Suite Variable  initial_ssh_state\n  ${initial_ipmi_state}\u003d  Get Text  ${xpath_ipmi_toggle}\n  Set Suite Variable  initial_ssh_state",
+      "range": {
+        "startLine": 176,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 39
+      },
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "398b755e_afc4f9d3",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-15T06:56:01Z",
+      "side": 1,
+      "message": "This keyword is for checking SSH and IPMI value both together. So we should mention the same in the keyword name. Also as we are not doing login as part of the keyword. Take it out of documentation. you can just keep it as.\n\nVerify SSH And IPMI Policy State\n    [Documentation]  Verify if the current SSH and IPMI setting matches with  \n    ...  given values.",
+      "range": {
+        "startLine": 229,
+        "startChar": 21,
+        "endLine": 229,
+        "endChar": 62
+      },
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1d51966_355c99ca",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-15T06:56:01Z",
+      "side": 1,
+      "message": "It\u0027s not new its current SSH state. So keep the variable name as current_ssh_state",
+      "range": {
+        "startLine": 239,
+        "startChar": 6,
+        "endLine": 239,
+        "endChar": 16
+      },
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eb0a851_997d4aab",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-15T06:56:01Z",
+      "side": 1,
+      "message": "Same comment as above. Keep it as current_ipmi_state",
+      "range": {
+        "startLine": 251,
+        "startChar": 6,
+        "endLine": 251,
+        "endChar": 16
+      },
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67952576_fdbe9329",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-15T06:56:01Z",
+      "side": 1,
+      "message": "As we are not doing login as part of the keyword. Take it out of documentation.",
+      "range": {
+        "startLine": 261,
+        "startChar": 21,
+        "endLine": 261,
+        "endChar": 68
+      },
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "577c3597_49c6f0e8",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-15T06:56:01Z",
+      "side": 1,
+      "message": "current_ssh_state",
+      "range": {
+        "startLine": 268,
+        "startChar": 6,
+        "endLine": 268,
+        "endChar": 19
+      },
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d22970e_609c53d2",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-15T06:56:01Z",
+      "side": 1,
+      "message": "Add a comment for the reason behind single click and double click.",
+      "range": {
+        "startLine": 270,
+        "startChar": 0,
+        "endLine": 274,
+        "endChar": 47
+      },
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76690ca4_390dad59",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-15T06:56:01Z",
+      "side": 1,
+      "message": "current_ipmi_state",
+      "range": {
+        "startLine": 276,
+        "startChar": 6,
+        "endLine": 276,
+        "endChar": 20
+      },
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
