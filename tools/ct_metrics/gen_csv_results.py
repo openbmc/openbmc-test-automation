@@ -8,14 +8,12 @@ http://robot-framework.readthedocs.io/en/3.0/autodoc/robot.result.html
 
 import csv
 import datetime
-import getopt
 import os
-import re
 import stat
 import sys
+import argparse
 from xml.etree import ElementTree
 
-import robot.errors
 from robot.api import ExecutionResult
 from robot.result.visitor import ResultVisitor
 
