@@ -484,3 +484,20 @@ def return_decoded_string(input):
     encoded_string = input.encode("ascii", "ignore")
     decoded_string = encoded_string.decode()
     return decoded_string
+
+
+def get_key_value_from_nested_dict(nested_data, expected_key):
+    r"""
+    Return the dictionary with expected_key and its value
+    """
+
+    temp = dict()
+    for key, val in nested_data.items():
+        if expected_key in val:
+            temp[val[expected_key]] = val
+        else:
+            print(
+                "Expected key not found in nested dictionary: " + expected_key
+            )
+            return False
+    return temp
