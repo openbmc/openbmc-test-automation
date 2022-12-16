@@ -139,10 +139,8 @@ def compare_pel_and_redfish_event_log(pel_record, event_record):
         print("\nPEL records : {0}".format(pel_record))
         print("\nEvent records : {0}".format(event_record))
 
-        pel_src = pel_record["pel_data"]["SRC"]
-        pel_created_time = pel_record["pel_detail_data"]["Private Header"][
-            "Created at"
-        ]
+        pel_src = pel_record["Pel Instance"]["SRC"]
+        pel_created_time = pel_record["Private Header"]["Created at"]
 
         event_ids = (event_record["EventId"]).split(" ")
 
@@ -185,6 +183,7 @@ def compare_pel_and_redfish_event_log(pel_record, event_record):
             "time : "
             + str(e)
         )
+        return False
 
 
 def fetch_all_pel_ids_for_src(src_id, severity, include_hidden_pels=False):
@@ -303,3 +302,96 @@ def get_bmc_event_log_id_for_pel(pel_id):
     print(pel_data)
     bmc_id_for_pel = pel_data["Private Header"]["BMC Event Log Id"]
     return bmc_id_for_pel
+
+
+def get_pel_information_by_id(pel_id):
+    r"""
+    Return PEL information for given PEL ID.
+    Description of arguments:
+    pel_id       PEL ID. E.g. 0x50000021.
+    """
+
+    try:
+        pel_detail_data = peltool("-i " + pel_id)
+        print(pel_detail_data)
+        return pel_detail_data
+
+    except Exception as e:
+        raise peltool_exception(
+            "Exception occured while getting PEL information: " + str(e)
+        )
+
+
+def get_pel_detail_information():
+    r"""
+    Return dictionary which contains PEL instance information added
+    to PEL information data.
+    """
+
+    try:
+        pel_detail_info = dict()
+
+
+        # pel_dict_records dictionary contains all the PEL records.        
+        pel_dict_records = get_pel_data_from_bmc()
+
+        if len(pel_dict_records) == 0:
+            raise peltool_exception("No PEL data found")
+
+        # Below for loop iterate over all the PEL records,
+        # (to get all PEL records with command "peltool -l")
+        # on each instance of PEL record is getting combined
+        # with PEL information data.
+        # (to get PEL information data with command "peltool -i <pel_id>")
+
+        for pel_id in pel_dict_records:
+            pel_information_dict_record = get_pel_information_by_id(pel_id)
+            
+            if (
+                pel_information_dict_record is False
+                or len(pel_information_dict_record) == 0
+            ):
+                raise peltool_exception("No PEL detail information found")
+            pel_information_dict_record["Pel Instance"] = pel_dict_records[
+                pel_id
+            ]
+            pel_detail_info[pel_id] = pel_information_dict_record
+
+        return pel_detail_info
+
+    except Exception as e:
+        raise peltool_exception(
+            "Exception occured while getting PEL detail information: " + str(e)
+        )
+
+
+def get_formatted_dict(pel_data_key, pel_data_sub_key, pel_data):
+    r"""
+    Return formatted dictionary based on the value passed by user.
+
+    Here pel_data will get reformatted, based on the key and nested key
+    provided as input.
+
+    For example :
+    pel_data_key : A
+    pel_data_sub_key : 1A
+    pel_data = {1: {'A': {'1A': "ABC"}}, 2: {'B': {'1B': "BCD"}}}
+
+    pel_tmep_data = {"ABC": {'A': {'1A': "ABC"}}, "BCD": 2: {'B': {'1B': "BCD"}}}
+    """ 
+
+    try:
+        pel_tmep_data = dict()
+
+        for pel_instance_key, pel_instance_value in pel_data.items():
+            get_pel_data_value = pel_instance_value.get(pel_data_key)
+            get_pel_data_sub_value = get_pel_data_value.get(pel_data_sub_key)
+            if get_pel_data_value is None and get_pel_data_sub_value is None:
+                return False
+            pel_tmep_data[get_pel_data_sub_value] = pel_instance_value
+
+        else:
+            return pel_tmep_data
+
+    except Exception as e:
+        raise peltool_exception("Exception occured: " + str(e))
