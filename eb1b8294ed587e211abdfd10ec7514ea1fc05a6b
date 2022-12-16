@@ -72,6 +72,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c78c826f_0fa4f55c",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-16T11:56:44Z",
+      "side": 1,
+      "message": "I have decided to keep it same looking at the test",
+      "parentUuid": "73708952_4b15d195",
+      "range": {
+        "startLine": 268,
+        "startChar": 0,
+        "endLine": 268,
+        "endChar": 64
+      },
+      "revId": "eb1b8294ed587e211abdfd10ec7514ea1fc05a6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00413456_92fc2a03",
@@ -109,6 +133,30 @@
       "side": 1,
       "message": "For this test case, it is must that no dump should be there.\n\nsetup is one time. But then, multiple dump tests are done and there might be a risk of some earlier dumps remaining. So, keeping this.",
       "parentUuid": "00413456_92fc2a03",
+      "range": {
+        "startLine": 271,
+        "startChar": 0,
+        "endLine": 272,
+        "endChar": 32
+      },
+      "revId": "eb1b8294ed587e211abdfd10ec7514ea1fc05a6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aae19c9_2e7d2788",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-16T11:56:44Z",
+      "side": 1,
+      "message": "I am removing this as discussed",
+      "parentUuid": "2a25034e_f962fddf",
       "range": {
         "startLine": 271,
         "startChar": 0,
@@ -166,6 +214,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "074c192e_c256e989",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-16T11:56:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3572ce9f_8719d220",
+      "range": {
+        "startLine": 275,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 52
+      },
+      "revId": "eb1b8294ed587e211abdfd10ec7514ea1fc05a6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b73880d8_ab6b1923",
@@ -203,6 +275,30 @@
       "side": 1,
       "message": "As I mentioned earlier, this testcase corresponds to a defect, where multiple dumps were initiated without a time gap that leads to total dump failure. so my intent:\n\n1. Keep initiating dumps one after another without a time gap\n2. Ensure each dump request has error response  service unavailable.\n3. If earlier dump dump gets completed (dump is found), come out  of the loop.\n4. Initiate another dump request which should return accepted in stead of service unavailable.\n\nKeeping in mind this test case was prepared. So, I am  keeping my original code but shall remove \u0027Sleep  3s\u0027 from there.",
       "parentUuid": "b73880d8_ab6b1923",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 7
+      },
+      "revId": "eb1b8294ed587e211abdfd10ec7514ea1fc05a6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "601b741a_518d6c5a",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-16T11:56:44Z",
+      "side": 1,
+      "message": "As discussed I partly modified the code:\n- add a code to exit this loop if above task_id is complete\n(remove my code for this)",
+      "parentUuid": "b66aaa04_23fdae0e",
       "range": {
         "startLine": 277,
         "startChar": 0,
