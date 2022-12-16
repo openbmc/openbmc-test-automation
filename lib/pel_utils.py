@@ -115,7 +115,42 @@ def compare_pel_and_redfish_event_log(pel_record, event_record):
     r"""
     Compare PEL log attributes like "SRC", "Created at" with Redfish
     event log attributes like "EventId", "Created".
-    Return False if they do not match.
+
+    Arguments that is pel_record and event_record are required in specific
+    format before comparision.
+
+    Below steps are define to capture following arguments.
+
+    pel_record:
+    1. Get all the PEL records from "get_pel_detail_information" function.
+       (above function defined in lib/pel_utils.py)
+    2. PEL records need to be rearranged where key will be nested key that
+       is "BMC Event Log Id" available in key "Private Header" and
+       value is PEL instance.
+
+    Sample data of pel_record with limited infromation:
+    1
+    [Private Header]
+        [BMC Event Log Id'] : 1
+        [Platform Log Id]   : 0xXXXXXX
+        [Log Id] : 0xXXXXXX
+        [Created at] : 01/04/2023 07:24:53
+    [0xXXXXXX]
+        [PLID] : 0xXXXXXX
+        [SRC] : XXXXXXXX
+
+    event_record:
+    1. Get all the event records by using keyword "Get Redfish Event Logs"
+       (above keyword defined in lib/logging_utils.robot)
+    2. Event records need to be rearranged where key is Id and value is
+       event instance.
+
+    Sample data of event_record with limited infromation:
+    1
+    [@odata.id] : /redfish/v1/Systems/system/LogServices/EventLog/Entries/1
+    [Id] : 1
+    [Created] : 2023-01-04T07:24:53+00:00
+    [Event Id]
 
     Description of arguments:
     pel_record     PEL record.
@@ -139,13 +174,11 @@ def compare_pel_and_redfish_event_log(pel_record, event_record):
         print("\nPEL records : {0}".format(pel_record))
         print("\nEvent records : {0}".format(event_record))
 
-        pel_src = pel_record["pel_data"]["SRC"]
-        pel_created_time = pel_record["pel_detail_data"]["Private Header"][
-            "Created at"
-        ]
+        pel_id = pel_record["Private Header"]["Platform Log Id"]
+        pel_src = pel_record[pel_id]["SRC"]
+        pel_created_time = pel_record["Private Header"]["Created at"]
 
         event_ids = (event_record["EventId"]).split(" ")
-
         event_time_format = (event_record["Created"]).split("T")
         event_date = (event_time_format[0]).split("-")
         event_date = datetime(
@@ -154,7 +187,6 @@ def compare_pel_and_redfish_event_log(pel_record, event_record):
         event_date = event_date.strftime("%m/%d/%Y")
         event_sub_time_format = (event_time_format[1]).split("+")
         event_date_time = event_date + " " + event_sub_time_format[0]
-
         event_created_time = event_date_time.replace("-", "/")
 
         print(
@@ -303,3 +335,65 @@ def get_bmc_event_log_id_for_pel(pel_id):
     print(pel_data)
     bmc_id_for_pel = pel_data["Private Header"]["BMC Event Log Id"]
     return bmc_id_for_pel
+
+
+def get_pel_information_by_id(pel_id):
+    r"""
+    Return PEL information for given PEL ID.
+    Description of arguments:
+    pel_id       PEL ID. E.g. 0x50000021.
+    """
+
+    try:
+        pel_detail_data = peltool("-i " + pel_id)
+        print(pel_detail_data)
+        return pel_detail_data
+
+    except Exception as e:
+        raise peltool_exception(
+            "Exception occured while getting PEL information: " + str(e)
+        )
+
+
+def get_pel_detail_information():
+    r"""
+    Return all the PEL records, where each PEL record is consist of two data.
+    1. Get PEL instance record from list of PEL records.
+       (command to get list of PEL records: peltool -l)
+    2. Get PEL information record for PEL instance.
+       (command to get PEL information record: peltool -i <pel_id>)
+    3. Combine the PEL instance record with PEL information record.
+    """
+
+    try:
+        pel_detail_info = dict()
+
+        # pel_dict_records dictionary contains all the PEL records.
+        pel_records = get_pel_data_from_bmc()
+
+        if len(pel_records) == 0:
+            raise peltool_exception("No PEL data found")
+
+        # Below for loop iterate over all the PEL records,
+        # (to get all PEL records with command "peltool -l")
+        # on each instance of PEL record is getting combined
+        # with PEL information data.
+        # (to get PEL information data with command "peltool -i <pel_id>")
+
+        for pel_id in pel_records:
+            pel_information_record = get_pel_information_by_id(pel_id)
+
+            if (
+                pel_information_record == "PEL not found"
+            ):
+                raise peltool_exception("No PEL detail information found")
+
+            pel_information_record[pel_id] = pel_records[pel_id]
+            pel_detail_info[pel_id] = pel_information_record
+
+        return pel_detail_info
+
+    except Exception as e:
+        raise peltool_exception(
+            "Exception occured while getting PEL detail information: " + str(e)
+        )
