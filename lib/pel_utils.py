@@ -139,10 +139,8 @@ def compare_pel_and_redfish_event_log(pel_record, event_record):
         print("\nPEL records : {0}".format(pel_record))
         print("\nEvent records : {0}".format(event_record))
 
-        pel_src = pel_record["pel_data"]["SRC"]
-        pel_created_time = pel_record["pel_detail_data"]["Private Header"][
-            "Created at"
-        ]
+        pel_src = pel_record["Pel Instance"]["SRC"]
+        pel_created_time = pel_record["Private Header"]["Created at"]
 
         event_ids = (event_record["EventId"]).split(" ")
 
@@ -303,3 +301,75 @@ def get_bmc_event_log_id_for_pel(pel_id):
     print(pel_data)
     bmc_id_for_pel = pel_data["Private Header"]["BMC Event Log Id"]
     return bmc_id_for_pel
+
+
+def get_pel_information_by_id(pel_id):
+    r"""
+    Return PEL information for given PEL ID.
+    Description of arguments:
+    pel_id       PEL ID. E.g. 0x50000021.
+    """
+
+    try:
+        pel_detail_data = peltool("-i " + pel_id)
+        print(pel_detail_data)
+        return pel_detail_data
+
+    except Exception as e:
+        raise peltool_exception(
+            "Exception occured while getting PEL information: " + str(e)
+        )
+    return False
+
+
+def get_pel_detail_information():
+    r"""
+    Return dictionary which contains lisof PEL instance information
+    added to PEL information instance.
+    """
+
+    try:
+        pel_detail_info_dict = dict()
+        pel_instance_dict = get_pel_data_from_bmc()
+
+        if len(pel_instance_dict) == 0:
+            raise peltool_exception("No PEL instance found")
+
+        for pel_id in pel_instance_dict:
+            pel_id_dict = get_pel_information_by_id(pel_id)
+
+            if pel_id_dict is False or len(pel_id_dict) == 0:
+                raise peltool_exception("No PEL detail information found")
+
+            pel_id_dict["Pel Instance"] = pel_instance_dict[pel_id]
+            pel_detail_info_dict[pel_id] = pel_id_dict
+
+        return pel_detail_info_dict
+
+    except Exception as e:
+        raise peltool_exception(
+            "Exception occured while getting PEL detail information: " + str(e)
+        )
+    return False
+
+
+def get_formatted_dict(pel_data_key, pel_data_sub_key, pel_data):
+    r"""
+    Return formatted dictionary based on the value passed by user.
+    """
+
+    try:
+        pel_tmep_data = dict()
+
+        for pel_instance_key, pel_instance_value in pel_data.items():
+            get_pel_data_value = pel_instance_value.get(pel_data_key)
+            get_pel_data_sub_value = get_pel_data_value.get(pel_data_sub_key)
+            pel_tmep_data[get_pel_data_sub_value] = pel_instance_value
+
+        else:
+            print(pel_tmep_data)
+            return pel_tmep_data
+
+    except Exception as e:
+        raise peltool_exception("Exception occured: " + str(e))
+    return False

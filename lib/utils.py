@@ -484,3 +484,16 @@ def return_decoded_string(input):
     encoded_string = input.encode("ascii", "ignore")
     decoded_string = encoded_string.decode()
     return decoded_string
+
+
+def get_key_value_from_nested_dict(ndict, key_id):
+    r"""
+    return formatted dictionary with key ID.
+    """
+
+    temp = dict()
+    for key, val in ndict.items():
+        if key_id in val:
+            temp[val[key_id]] = val
+
+    return temp
