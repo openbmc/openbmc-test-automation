@@ -206,10 +206,9 @@ def fetch_all_pel_ids_for_src(src_id, severity, include_hidden_pels=False):
         pel_id_list = pel_data.keys()
         for pel_id in pel_id_list:
             # Check if required SRC ID with severity is present
-            if (pel_data[pel_id]["SRC"] == src_id) and (
-                pel_data[pel_id]["Sev"] == severity
-            ):
-                src_pel_ids.append(pel_id)
+            if (src_id in pel_data[pel_id]["SRC"]):
+                if (pel_data[pel_id]["Sev"] == severity):
+                    src_pel_ids.append(pel_id)
 
         if not src_pel_ids:
             raise peltool_exception(
