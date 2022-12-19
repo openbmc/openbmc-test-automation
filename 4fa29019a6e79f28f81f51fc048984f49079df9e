@@ -16,6 +16,23 @@
       "message": "As discussed, I have incorporated some of your comments.",
       "revId": "4fa29019a6e79f28f81f51fc048984f49079df9e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54800102_2bbff550",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-19T07:14:52Z",
+      "side": 1,
+      "message": "I would like to keep the code with explanations provided. Thanks. ",
+      "revId": "4fa29019a6e79f28f81f51fc048984f49079df9e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
