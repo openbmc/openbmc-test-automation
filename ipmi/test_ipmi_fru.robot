@@ -21,8 +21,8 @@ Test FRU Info Of Power Supplies
     [Tags]  Test_FRU_Info_Of_Power_Supplies
 
     # IPMI FRU info.
-    ${ipmi_fru_component_info}=  Get Component FRU Info  ${COMPONENT_NAME_OF_POWER_SUPPLY}
-    ...  ${fru_objs}
+    ${status}  ${ipmi_fru_component_info}=  Run Keyword And Ignore Error  Get Component FRU Info
+    ...  ${COMPONENT_NAME_OF_POWER_SUPPLY}  ${fru_objs}
 
     # Redfish FRU info.
     ${redfish_power_details}=  Redfish.Get Members List  /redfish/v1/Chassis/${CHASSIS_ID}/PowerSubsystem/PowerSupplies
