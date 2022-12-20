@@ -406,6 +406,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95ef1816_1e1c0a96",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2022-12-20T11:51:34Z",
+      "side": 1,
+      "message": "The main objective of this test case is, need to check the functionality of SSH/IPMI by clicking those elements at a time. If I use the above one then the clicking action will takes only once...So better to keep the code as it is.",
+      "parentUuid": "33acfd2b_375e2d03",
+      "range": {
+        "startLine": 270,
+        "startChar": 0,
+        "endLine": 274,
+        "endChar": 47
+      },
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76690ca4_390dad59",
