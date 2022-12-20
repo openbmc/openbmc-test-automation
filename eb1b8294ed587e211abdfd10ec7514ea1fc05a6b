@@ -426,6 +426,30 @@
       },
       "revId": "eb1b8294ed587e211abdfd10ec7514ea1fc05a6b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f0d79dd_c6646b26",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2022-12-20T08:34:09Z",
+      "side": 1,
+      "message": "Sure, taken care of the wait. But not able to push further because of infra issue.",
+      "parentUuid": "9283295c_7220bc90",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 80
+      },
+      "revId": "eb1b8294ed587e211abdfd10ec7514ea1fc05a6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
