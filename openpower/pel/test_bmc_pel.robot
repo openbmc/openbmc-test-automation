@@ -201,6 +201,8 @@ Verify Host On State From PEL
     [Tags]  Verify_Host_On_State_From_PEL
 
     Redfish Power On  stack_mode=skip
+    Redfish Purge Event Log
+
     Create Test PEL Log
 
     ${pel_ids}=  Get PEL Log Via BMC CLI
@@ -963,7 +965,7 @@ Verify PEL Transmission To Host
     # Check host transmission state for the cases where PEL is
     # expected to be  offloaded to HOST.
     Run Keyword If  "${expected_transmission_state}" == "Acked"
-    ...  Wait Until Keyword Succeeds  2 min  10 sec
+    ...  Wait Until Keyword Succeeds  5 min  10 sec
     ...  Check If PEL Transmission State Is Expected  ${pel_id}  Acked
 
     # Adding delay before checking host transmission for the cases where PEL is
