@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "748e4454_2b23020a",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-21T04:48:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3783d638_7b4facdc",
+      "range": {
+        "startLine": 327,
+        "startChar": 37,
+        "endLine": 327,
+        "endChar": 42
+      },
+      "revId": "ec5e716de93ad698d2dcff5e7a641fdac584b31d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1824df3_dc423ed5",
@@ -37,6 +61,54 @@
       "writtenOn": "2022-12-16T15:33:58Z",
       "side": 1,
       "message": "This module provides general keywords for PEL.",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 38
+      },
+      "revId": "ec5e716de93ad698d2dcff5e7a641fdac584b31d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85899b23_a29945c8",
+        "filename": "lib/pel_utils.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-21T04:48:37Z",
+      "side": 1,
+      "message": "Both are same",
+      "parentUuid": "b1824df3_dc423ed5",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 38
+      },
+      "revId": "ec5e716de93ad698d2dcff5e7a641fdac584b31d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ac6418c_545eb954",
+        "filename": "lib/pel_utils.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-21T04:48:37Z",
+      "side": 1,
+      "message": "Both are same.",
+      "parentUuid": "b1824df3_dc423ed5",
       "range": {
         "startLine": 2,
         "startChar": 17,
@@ -72,6 +144,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79fe54d5_77faa366",
+        "filename": "lib/pel_utils.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-21T04:48:37Z",
+      "side": 1,
+      "message": "Added Now only later there will be variables which can be used.",
+      "parentUuid": "25761b38_a228a501",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 17
+      },
+      "revId": "ec5e716de93ad698d2dcff5e7a641fdac584b31d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c14a261b_9b5962fe",
+        "filename": "lib/pel_utils.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-21T04:48:37Z",
+      "side": 1,
+      "message": "Its can be used later I just define there.",
+      "parentUuid": "25761b38_a228a501",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 17
+      },
+      "revId": "ec5e716de93ad698d2dcff5e7a641fdac584b31d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf155735_c4ac1309",
         "filename": "lib/pel_utils.robot",
         "patchSetId": 9
@@ -83,6 +203,54 @@
       "writtenOn": "2022-12-16T15:33:58Z",
       "side": 1,
       "message": "...  Fail  msg\u003dPEL log and event entries are not equal.",
+      "range": {
+        "startLine": 40,
+        "startChar": 16,
+        "endLine": 40,
+        "endChar": 56
+      },
+      "revId": "ec5e716de93ad698d2dcff5e7a641fdac584b31d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "171cba12_b764ab4c",
+        "filename": "lib/pel_utils.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-21T04:48:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf155735_c4ac1309",
+      "range": {
+        "startLine": 40,
+        "startChar": 16,
+        "endLine": 40,
+        "endChar": 56
+      },
+      "revId": "ec5e716de93ad698d2dcff5e7a641fdac584b31d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72406d9c_62f21565",
+        "filename": "lib/pel_utils.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2022-12-21T04:48:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf155735_c4ac1309",
       "range": {
         "startLine": 40,
         "startChar": 16,
