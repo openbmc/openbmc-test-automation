@@ -34,6 +34,7 @@ Force Tags               BMC_Code_Update
 
 @{ADMIN}          admin_user  TestPwd123
 &{USERS}          Administrator=${ADMIN}
+${LOOP_COUNT}     ${2}
 
 *** Test Cases ***
 
@@ -53,6 +54,22 @@ Redfish Code Update With ApplyTime Immediate
 
     # policy
     Immediate
+
+
+Redfish Code Update Same Firmware Multiple Times
+    [Documentation]  Multiple times update the firmware image for update service.
+    [Tags]  Redfish_Code_Update_Same_Firmware_Multiple_Times
+
+    ${temp_update_loop_count}=  Evaluate  ${LOOP_COUNT} + 1
+
+    FOR  ${count}  IN RANGE  1  ${temp_update_loop_count}
+       Print Timen  **************************************
+       Print Timen  * The Current Loop Count is ${count} of ${LOOP_COUNT} *
+       Print Timen  **************************************
+
+       Redfish Update Firmware  apply_time=OnReset
+    END
+
 
 
 Redfish Code Update With Multiple Firmware
