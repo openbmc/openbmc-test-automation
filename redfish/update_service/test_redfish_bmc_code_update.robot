@@ -19,6 +19,7 @@ Resource                 ../../lib/logging_utils.robot
 Resource                 ../../lib/redfish_code_update_utils.robot
 Resource                 ../../lib/utils.robot
 Resource                 ../../lib/bmc_redfish_utils.robot
+Resource                 ../../lib/external_intf/management_console_utils.robot
 Library                  ../../lib/gen_robot_valid.py
 Library                  ../../lib/tftp_update_utils.py
 Library                  ../../lib/gen_robot_keyword.py
@@ -81,6 +82,49 @@ Redfish Code Update With Multiple Firmware
     Immediate  ${IMAGE_FILE_PATH}  ${ALTERNATE_IMAGE_FILE_PATH}
 
 
+Post BMC Reset Perform Redfish Code Update
+    [Documentation]  Test to reset BMC at standby and then perform BMC firmware update and
+    ...              ensure there is not error or dump logs post update.
+    [Tags]  Post_BMC_Reset_Perform_Redfish_Code_Update
+
+    Redfish Delete All BMC Dumps
+    Redfish Purge Event Log
+
+    Redfish OBMC Reboot (off)
+
+    Redfish Update Firmware  apply_time=OnReset
+
+    Event Log Should Not Exist
+    Redfish BMC Dump Should Not Exist
+
+    Redfish Power Off
+
+
+Post BMC Reset Perform Image Switched To Backup Multiple Times
+    [Documentation]  Test to reset BMC at standby and then perfrom switch to backup image multiple times.
+    ...              Then ensure no event and dump logs exist.
+    [Tags]  Post_BMC_Reset_Perform_Image_Switched_To_Backup_Multiple_Times
+
+    Redfish Delete All BMC Dumps
+    Redfish Purge Event Log
+
+    Redfish OBMC Reboot (off)
+
+    ${temp_update_loop_count}=  Evaluate  ${LOOP_COUNT} + 1
+
+    FOR  ${count}  IN RANGE  1  ${temp_update_loop_count}
+      ${state}=  Get Pre Reboot State
+
+      # change to backup image and reset the BMC.
+      Switch Backup Firmware Image To Functional
+
+      Wait For Reboot  start_boot_seconds=${state['epoch_seconds']}
+    END
+
+    Event Log Should Not Exist
+    Redfish BMC Dump Should Not Exist
+
+
 Verify If The Modified Admin Credential Is Valid Post Image Switched To Backup
     [Documentation]  Verify updated admin credential remain same post switch to back up image.
     [Tags]  Verify_If_The_Modified_Admin_Credential_Is_Valid_Post_Image_Switched_To_Backup
@@ -124,8 +168,11 @@ Suite Setup Execution
 
     Valid File Path  IMAGE_FILE_PATH
     Redfish.Login
+
     Redfish Delete All BMC Dumps
     Redfish Purge Event Log
+
+    Redfish Power Off  stack_mode=skip
 
 
 Redfish Update Firmware
