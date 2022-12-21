@@ -34,6 +34,7 @@ Force Tags               BMC_Code_Update
 
 @{ADMIN}          admin_user  TestPwd123
 &{USERS}          Administrator=${ADMIN}
+${LOOP_COUNT}     ${2}
 
 *** Test Cases ***
 
@@ -53,6 +54,15 @@ Redfish Code Update With ApplyTime Immediate
 
     # policy
     Immediate
+
+
+Redfish Code Update Same Firmware With Multiple Times
+    [Documentation]  Multiple times update the firmware image for update service.
+    [Tags]  Redfish_Code_Update_Same_Firmwar_With_Multiple_Times
+    [Template]  Redfish Code Update Same Firmware
+
+    # policy
+    OnReset
 
 
 Redfish Code Update With Multiple Firmware
@@ -142,6 +152,24 @@ Redfish Update Firmware
     Redfish.Login
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
     Verify Get ApplyTime  ${apply_time}
+
+
+Redfish Code Update Same Firmware
+    [Documentation]  Update the BMC firmware via redfish interface.
+    [Arguments]  ${apply_time}
+
+    # Description of argument(s):
+    # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
+
+    ${temp_update_loop_count}=  Evaluate  ${LOOP_COUNT} + 1
+
+    FOR  ${count}  IN RANGE  1  ${temp_update_loop_count}
+       Print Timen  **************************************
+       Print Timen  * The Current Loop Count is ${count} of ${LOOP_COUNT} *
+       Print Timen  **************************************
+
+       Redfish Update Firmware  ${apply_time}
+    END
 
 
 Redfish Multiple Upload Image And Check Progress State
