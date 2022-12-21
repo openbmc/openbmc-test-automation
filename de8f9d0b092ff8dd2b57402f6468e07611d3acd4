@@ -430,6 +430,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e52794c1_21bdbf74",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-12-21T03:49:53Z",
+      "side": 1,
+      "message": "If that the intention of this keyword then name and documentation of the keyword also needs to be changed to reflect it. From current keyword name it seems to a generic keyword to set SSH and IPMI setting. \n\nAlso if you are not keeping this as a genric keyword then this keyword cant be used in the teardown to restore value.",
+      "parentUuid": "95ef1816_1e1c0a96",
+      "range": {
+        "startLine": 270,
+        "startChar": 0,
+        "endLine": 274,
+        "endChar": 47
+      },
+      "revId": "de8f9d0b092ff8dd2b57402f6468e07611d3acd4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76690ca4_390dad59",
