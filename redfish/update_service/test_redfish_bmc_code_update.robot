@@ -19,6 +19,7 @@ Resource                 ../../lib/logging_utils.robot
 Resource                 ../../lib/redfish_code_update_utils.robot
 Resource                 ../../lib/utils.robot
 Resource                 ../../lib/bmc_redfish_utils.robot
+Resource                 ../../lib/external_intf/management_console_utils.robot
 Library                  ../../lib/gen_robot_valid.py
 Library                  ../../lib/tftp_update_utils.py
 Library                  ../../lib/gen_robot_keyword.py
@@ -34,6 +35,7 @@ Force Tags               BMC_Code_Update
 
 @{ADMIN}          admin_user  TestPwd123
 &{USERS}          Administrator=${ADMIN}
+${LOOP_COUNT}     ${2}
 
 *** Test Cases ***
 
@@ -62,6 +64,41 @@ Redfish Code Update With Multiple Firmware
 
     # policy   image_file_path     alternate_image_file_path
     Immediate  ${IMAGE_FILE_PATH}  ${ALTERNATE_IMAGE_FILE_PATH}
+
+
+Post BMC Reset Perform Redfish Code Update
+    [Documentation]  Post BMC reset perform code update.
+    [Tags]  Post_BMC_Reset_Perform_Redfish_Code_Update
+
+    Redfish BMC Reset Operation
+    Wait Until Keyword Succeeds  3 min  10 sec  Redfish BMC Match States  match_state=Enabled
+    Is BMC Standby
+
+    Redfish Update Firmware  apply_time=OnReset
+
+    Redfish Power On  stack_mode=skip
+    Redfish Power Off
+
+
+Post BMC Reset Perfrom Image Switched To Backup Multiple Times
+    [Documentation]  Post BMC reset perform perfrom image switch to backup multiple times.
+    [Tags]  Post_BMC_Reset_Perfrom_Image_Switched_To_Backup_Multiple_Times
+
+    Redfish BMC Reset Operation
+    Wait Until Keyword Succeeds  3 min  10 sec  Redfish BMC Match States  match_state=Enabled
+    Is BMC Standby
+
+    ${temp_update_loop_count}=  Evaluate  ${LOOP_COUNT} + 1
+
+    FOR  ${count}  IN RANGE  1  ${temp_update_loop_count}
+      ${post_code_update_actions}=  Get Post Boot Action
+      ${state}=  Get Pre Reboot State
+
+      # change to backup image and reset the BMC.
+      Switch Backup Firmware Image To Functional
+
+      Wait For Reboot  start_boot_seconds=${state['epoch_seconds']}
+    END
 
 
 Verify If The Modified Admin Credential Is Valid Post Image Switched To Backup
@@ -107,8 +144,11 @@ Suite Setup Execution
 
     Valid File Path  IMAGE_FILE_PATH
     Redfish.Login
+
     Redfish Delete All BMC Dumps
     Redfish Purge Event Log
+
+    Redfish Power Off  stack_mode=skip
 
 
 Redfish Update Firmware
