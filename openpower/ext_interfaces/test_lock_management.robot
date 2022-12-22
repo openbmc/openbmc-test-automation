@@ -10,9 +10,9 @@ Resource                ../../lib/rest_response_code.robot
 Library                 ../../lib/bmc_network_utils.py
 Library                 JSONLibrary
 
-Suite Setup              Run Keyword And Ignore Error  Delete All Redfish Sessions
-Suite Teardown           Run Keyword And Ignore Error  Delete All Redfish Sessions
-Test Setup               Printn
+Suite Setup              Run Keyword And Ignore Error  Delete All Redfish And HMC Sessions
+Suite Teardown           Run Keyword And Ignore Error  Delete All Redfish And HMC Sessions
+Test Setup               Run Keyword And Ignore Error  Delete All Redfish And HMC Sessions
 Test Teardown            FFDC On Test Case Fail
 
 *** Variables ***
@@ -350,7 +350,7 @@ Create Redfish Session With ClientID
     #              (e.g. 12345, "HMCID").
 
     ${session_info}=  Create Dictionary
-    ${session}=  Redfish Login  kwargs= "Oem":{"OpenBMC" : {"ClientID":"${client_id}"}}
+    ${session}=  Redfish Login  kwargs="Oem":{"OpenBMC" : {"ClientID":"${client_id}"}}
 
     Set To Dictionary  ${session_info}  SessionIDs  ${session['Id']}
     Set To Dictionary  ${session_info}  ClientID  ${session["Oem"]["OpenBMC"]["ClientID"]}
@@ -1189,6 +1189,7 @@ Verify Fail To Acquire Lock For Invalid Resource ID Data Type
 Verify Fail To Acquire Lock For Invalid Lock Data
     [Documentation]  Verify fail to acquired lock with invalid lock types, lock flags, segment flags.
     [Arguments]  ${client_id}  ${lock_type}  ${message}
+    [Teardown]  Delete All Redfish And HMC Sessions
 
     # Description of argument(s):
     # client_id    This client id can contain string value
@@ -1407,3 +1408,19 @@ Verify Lock Records For Multiple Invalid And Valid Session
     Verify Lock On Resource  ${session_info1}[0]  ${trans_id_emptylist}
 
     Redfish Delete Session  ${session_info1}[0]
+
+
+Delete All Redfish and HMC Sessions
+    [Documentation]  Delete all active redfish sessions.
+
+    ${saved_session_info}=  Get Redfish Session Info
+
+    ${resp_list}=  Redfish_Utils.Get Member List
+    ...  /redfish/v1/SessionService/Sessions
+
+    # Remove the current login session from the list.
+    Remove Values From List  ${resp_list}  ${saved_session_info["location"]}
+
+    FOR  ${session}  IN  @{resp_list}
+        Run Keyword And Ignore Error  Redfish.Delete  ${session}
+    END
