@@ -10,9 +10,9 @@ Resource                ../../lib/rest_response_code.robot
 Library                 ../../lib/bmc_network_utils.py
 Library                 JSONLibrary
 
-Suite Setup              Run Keyword And Ignore Error  Delete All Redfish Sessions
-Suite Teardown           Run Keyword And Ignore Error  Delete All Redfish Sessions
-Test Setup               Printn
+Suite Setup              Run Keyword And Ignore Error  Delete All Redfish And HMC Sessions
+Suite Teardown           Run Keyword And Ignore Error  Delete All Redfish And HMC Sessions
+Test Setup               Run Keyword And Ignore Error  Delete All Redfish And HMC Sessions
 Test Teardown            FFDC On Test Case Fail
 
 *** Variables ***
@@ -167,6 +167,7 @@ Fail To Release Lock With Invalid TransactionID
     [Documentation]  Fail to release lock with invalid transaction id.
     [Tags]  Fail_To_Release_Lock_With_Invalid_TransactionID
     [Template]  Verify Fail To Release Lock With Invalid TransactionID
+    [setup]  Delete All Redfish And HMC Sessions
 
     # client_id    lock_type     release_lock_type
     HMCID-01       ReadCase1     Transaction
@@ -177,6 +178,7 @@ Fail To Release Multiple Lock With Invalid TransactionID
     [Documentation]  Release in-valid lock result in fail.
     [Tags]  Fail_To_Release_Multiple_Lock_With_Invalid_TransactionID
     [Template]  Verify Fail To Release Multiple Lock With Invalid TransactionID
+    [setup]  Delete All Redfish And HMC Sessions
 
     # client_id    lock_type                        release_lock_type
     HMCID-01       ReadCase1,ReadCase1,ReadCase1    Transaction
@@ -188,6 +190,7 @@ Fail To Release Multiple Lock With Valid And Invalid TransactionID
     [Documentation]  Release multiple lock with valid and invalid transaction.
     [Tags]  Fail_To_Release_Multiple_Lock_With_Valid_And_Invalid_TransactionID
     [Template]  Verify Fail To Release Multiple Lock With Valid And Invalid TransactionID
+    [setup]  Delete All Redfish And HMC Sessions
 
     # client_id    lock_type              release_lock_type
     HMCID-01       ReadCase1,ReadCase1    Transaction
@@ -197,6 +200,7 @@ Fail To Release Lock With String As TransactionID Data Type
     [Documentation]  Fail to release lock with string as transaction id data type.
     [Tags]  Fail_To_Release_Lock_With_String_As_TransactionID_Data_Type
     [Template]  Verify Fail To Release Lock With TransactionID As String Type
+    [setup]  Delete All Redfish And HMC Sessions
 
     # client_id    lock_type     release_lock_type
     HMCID-01       ReadCase1     Transaction
@@ -207,6 +211,7 @@ Fail To Release Lock For Another Session
     [Documentation]  Failed to release locks from another session.
     [Tags]  Fail_To_Release_Lock_For_Another_Session
     [Template]  Verify Fail To Release Lock For Another Session
+    [setup]  Delete All Redfish And HMC Sessions
 
     # client_id          lock_type
     HMCID-01,HMCID-02    ReadCase1,ReadCase1
@@ -216,6 +221,7 @@ Test Invalid Resource ID Data Type Locking
     [Documentation]  Failed to acquire lock for invalid resource id data type.
     [Tags]  Test_Invalid_Resource_ID_Data_Type_Locking
     [Template]  Verify Fail To Acquire Lock For Invalid Resource ID Data Type
+    [setup]  Delete All Redfish And HMC Sessions
 
     # client_id    lock_type
     HMCID-01       ReadCase1
@@ -230,6 +236,7 @@ Fail To Acquire Lock For Invalid Lock Type
     [Documentation]  Failed to acquire read, write lock for invalid lock data passed.
     [Tags]  Fail_To_Acquire_Lock_For_Invalid_Lock_Type
     [Template]  Verify Fail To Acquire Lock For Invalid Lock Data
+    [setup]  Delete All Redfish And HMC Sessions
 
     # client_id    lock_type      message
     HMCID-01       ReadCase1      ${BAD_REQUEST}
@@ -248,6 +255,7 @@ Fail To Acquire Lock For Invalid Lock Flag
     [Documentation]  Failed to acquire read write lock for invalid lock flag passed.
     [Tags]  Fail_To_Acquire_Lock_For_Invalid_Lock_Flag
     [Template]  Verify Fail To Acquire Lock For Invalid Lock Data
+    [setup]  Delete All Redfish And HMC Sessions
 
     # client_id    lock_type       message
     HMCID-01       ReadCase6       ${BAD_REQUEST}
@@ -268,6 +276,7 @@ Fail To Acquire Lock For Invalid Segment Flag
     [Documentation]  Failed to acquire read write lock for invalid segment flag passed.
     [Tags]  Fail_To_Acquire_Lock_For_Invalid_Segment_Flag
     [Template]  Verify Fail To Acquire Lock For Invalid Lock Data
+    [setup]  Delete All Redfish And HMC Sessions
 
     # client_id    lock_type       message
     HMCID-01       ReadCase12      ${BAD_REQUEST}
@@ -282,6 +291,7 @@ Fail To Acquire Lock For Invalid Segment Data Type Flag
     [Documentation]  Failed to acquire read write lock for invalid segment flag passed.
     [Tags]  Fail_To_Acquire_Lock_For_Invalid_Segment_Data_Type_Flag
     [Template]  Verify Fail To Acquire Lock For Invalid Lock Data
+    [setup]  Delete All Redfish And HMC Sessions
 
     # client_id    lock_type       message
     HMCID-01       ReadCase15      ${EMPTY}
@@ -299,6 +309,7 @@ Get Empty Lock Records For Session Where No Locks Acquired
     ...              empty lock records.
     [Tags]  Get_Empty_Lock_Records_For_Session_Where_No_Locks_Acquired
     [Template]  Verify No Locks Records For Session With No Acquired Lock
+    [setup]  Delete All Redfish And HMC Sessions
 
     # client_id
     HMCID-01
@@ -308,6 +319,7 @@ Get Lock Records Empty For Invalid Session
     [Documentation]  Record of lock list is empty for invalid session.
     [Tags]  Get_Lock_Records_Empty_For_Invalid_Session
     [Template]  Verify Empty Lock Records For Invalid Session
+    [setup]  Delete All Redfish And HMC Sessions
 
     # client_id
     HMCID-01
@@ -320,12 +332,14 @@ Get Lock Records For Multiple Session
 
     # client_ids         lock_type
     HMCID-01,HMCID-02    ReadCase1,ReadCase1
+    [setup]  Delete All Redfish And HMC Sessions
 
 
 Get Lock Records For Multiple Invalid Session
     [Documentation]  Record of lock list is empty for list of invalid session.
     [Tags]  Get_Lock_Records_For_Multiple_Invalid_Session
     [Template]  Verify Lock Records For Multiple Invalid Session
+    [setup]  Delete All Redfish And HMC Sessions
 
     # client_id
     HMCID-01
@@ -335,6 +349,7 @@ Get Lock Records For Multiple Invalid And Valid Session
     [Documentation]  Get record of lock from invalid and valid session.
     [Tags]  Get_Lock_Records_For_Multiple_Invalid_And_Valid_Session
     [Template]  Verify Lock Records For Multiple Invalid And Valid Session
+    [setup]  Delete All Redfish And HMC Sessions
 
     # client_id          lock_type
     HMCID-01,HMCID-02    ReadCase1
@@ -350,7 +365,7 @@ Create Redfish Session With ClientID
     #              (e.g. 12345, "HMCID").
 
     ${session_info}=  Create Dictionary
-    ${session}=  Redfish Login  kwargs= "Oem":{"OpenBMC" : {"ClientID":"${client_id}"}}
+    ${session}=  Redfish Login  kwargs="Oem":{"OpenBMC" : {"ClientID":"${client_id}"}}
 
     Set To Dictionary  ${session_info}  SessionIDs  ${session['Id']}
     Set To Dictionary  ${session_info}  ClientID  ${session["Oem"]["OpenBMC"]["ClientID"]}
@@ -1407,3 +1422,19 @@ Verify Lock Records For Multiple Invalid And Valid Session
     Verify Lock On Resource  ${session_info1}[0]  ${trans_id_emptylist}
 
     Redfish Delete Session  ${session_info1}[0]
+
+
+Delete All Redfish and HMC Sessions
+    [Documentation]  Delete all active redfish sessions.
+
+    ${saved_session_info}=  Get Redfish Session Info
+
+    ${resp_list}=  Redfish_Utils.Get Member List
+    ...  /redfish/v1/SessionService/Sessions
+
+    # Remove the current login session from the list.
+    Remove Values From List  ${resp_list}  ${saved_session_info["location"]}
+
+    FOR  ${session}  IN  @{resp_list}
+        Run Keyword And Ignore Error  Redfish.Delete  ${session}
+    END
