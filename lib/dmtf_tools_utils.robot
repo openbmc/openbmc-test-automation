@@ -45,7 +45,9 @@ Redfish Service Validator Result
 
     # Example:
     # Validation has failed: 9 problems found
-    Should Not Contain  ${tool_output}  Validation has failed
+    # Service could not be started: RetriesExhaustedError()
+    Should Not Contain Any  ${tool_output}  Validation has failed
+    ...  Service could not be started: RetriesExhaustedError()
 
 
 Redfish JsonSchema ResponseValidator Result
