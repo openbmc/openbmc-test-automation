@@ -10,8 +10,8 @@ Resource                ../../lib/rest_response_code.robot
 Library                 ../../lib/bmc_network_utils.py
 Library                 JSONLibrary
 
-Suite Setup              Run Keyword And Ignore Error  Delete All Redfish Sessions
-Suite Teardown           Run Keyword And Ignore Error  Delete All Redfish Sessions
+Suite Setup              Run Keyword And Ignore Error  Delete All Redfish And HMC Sessions
+Suite Teardown           Run Keyword And Ignore Error  Delete All Redfish And HMC Sessions
 Test Setup               Printn
 Test Teardown            FFDC On Test Case Fail
 
@@ -1407,3 +1407,19 @@ Verify Lock Records For Multiple Invalid And Valid Session
     Verify Lock On Resource  ${session_info1}[0]  ${trans_id_emptylist}
 
     Redfish Delete Session  ${session_info1}[0]
+
+
+Delete All Redfish and HMC Sessions
+    [Documentation]  Delete all active redfish sessions.
+
+    ${saved_session_info}=  Get Redfish Session Info
+
+    ${resp_list}=  Redfish_Utils.Get Member List
+    ...  /redfish/v1/SessionService/Sessions
+
+    # Remove the current login session from the list.
+    Remove Values From List  ${resp_list}  ${saved_session_info["location"]}
+
+    FOR  ${session}  IN  @{resp_list}
+        Run Keyword And Ignore Error  Redfish.Delete  ${session}
+    END
