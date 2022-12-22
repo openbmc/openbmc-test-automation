@@ -10,10 +10,10 @@ Resource                ../../lib/rest_response_code.robot
 Library                 ../../lib/bmc_network_utils.py
 Library                 JSONLibrary
 
-Suite Setup              Run Keyword And Ignore Error  Delete All Redfish Sessions
-Suite Teardown           Run Keyword And Ignore Error  Delete All Redfish Sessions
-Test Setup               Printn
-Test Teardown            FFDC On Test Case Fail
+Suite Setup              Run Keyword And Ignore Error  Delete All Redfish And HMC Sessions
+Suite Teardown           Run Keyword And Ignore Error  Delete All Redfish And HMC Sessions
+Test Setup               Delete All Redfish And HMC Sessions
+Test Teardown            Run Keywords  FFDC On Test Case Fail  AND  Restart Bmcweb On Failure
 
 *** Variables ***
 
@@ -350,7 +350,7 @@ Create Redfish Session With ClientID
     #              (e.g. 12345, "HMCID").
 
     ${session_info}=  Create Dictionary
-    ${session}=  Redfish Login  kwargs= "Oem":{"OpenBMC" : {"ClientID":"${client_id}"}}
+    ${session}=  Redfish Login  kwargs="Oem":{"OpenBMC" : {"ClientID":"${client_id}"}}
 
     Set To Dictionary  ${session_info}  SessionIDs  ${session['Id']}
     Set To Dictionary  ${session_info}  ClientID  ${session["Oem"]["OpenBMC"]["ClientID"]}
@@ -1407,3 +1407,37 @@ Verify Lock Records For Multiple Invalid And Valid Session
     Verify Lock On Resource  ${session_info1}[0]  ${trans_id_emptylist}
 
     Redfish Delete Session  ${session_info1}[0]
+
+
+Delete All Redfish and HMC Sessions
+    [Documentation]  Delete all active redfish sessions.
+
+    ${saved_session_info}=  Get Redfish Session Info
+
+    ${resp_list}=  Redfish_Utils.Get Member List
+    ...  /redfish/v1/SessionService/Sessions
+
+    # Remove the current login session from the list.
+    Remove Values From List  ${resp_list}  ${saved_session_info["location"]}
+
+    FOR  ${session}  IN  @{resp_list}
+        Run Keyword And Ignore Error  Redfish.Delete  ${session}
+    END
+
+
+Restart Bmcweb On Failure
+    [Documentation]  Restart bmcweb only if test failed.
+
+    Return From Keyword If  "${TEST_STATUS}" == "PASS"
+
+    # This procedure is needs to be corrected or removed, when we figure out
+    # what is causing the real failure here.
+
+    Log To Console  Likely ConnectionResetError: Restarting bmcweb
+
+    ${stdout}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  systemctl restart bmcweb  print_out=1
+
+    Should Be Empty  ${stderr}
+
+    Sleep  10s  reason=Wait for service to restart properly.
