@@ -10,10 +10,10 @@ Resource                ../../lib/rest_response_code.robot
 Library                 ../../lib/bmc_network_utils.py
 Library                 JSONLibrary
 
-Suite Setup              Run Keyword And Ignore Error  Delete All Redfish And HMC Sessions
-Suite Teardown           Run Keyword And Ignore Error  Delete All Redfish And HMC Sessions
-Test Setup               Delete All Redfish And HMC Sessions
-Test Teardown            Run Keywords  FFDC On Test Case Fail  AND  Restart Bmcweb On Failure
+Suite Setup              Run Keyword And Ignore Error  Delete All Redfish Sessions
+Suite Teardown           Run Keyword And Ignore Error  Delete All Redfish Sessions
+Test Setup               Printn
+Test Teardown            FFDC On Test Case Fail
 
 *** Variables ***
 
@@ -35,32 +35,6 @@ Acquire Read Write Lock
     HMCID-01       WriteCase1    False
     HMCID-01       WriteCase2    False
     HMCID-01       WriteCase3    False
-
-
-Verify Lock Is Not Persistent On BMC Reboot
-    [Documentation]  Acquire lock and after reboot the locks are removed as no persistency
-    ...  maintained.
-    [Tags]  Verify_Lock_Is_Not_Persistent_On_BMC_Reboot
-    [Template]  Acquire Lock On Resource
-
-    # client_id    lock_type     reboot_flag
-    HMCID-01       ReadCase1     True
-    HMCID-01       ReadCase2     True
-    HMCID-01       ReadCase3     True
-    HMCID-01       WriteCase1    True
-    HMCID-01       WriteCase2    True
-    HMCID-01       WriteCase3    True
-
-
-Check After Reboot Transaction ID Set To Default
-    [Documentation]  After reboot, the transaction id starts with default i.e. 1,
-    ...  if any lock is acquired.
-    [Tags]  Check_After_Reboot_Transaction_ID_Set_To_Default
-    [Template]  Verify Acquire And Release Lock In Loop
-
-    # client_id    lock_type     reboot_flag
-    HMCID-01       ReadCase1     True
-    HMCID-01       WriteCase1    True
 
 
 Acquire Read Lock On Read Lock
@@ -212,6 +186,21 @@ Fail To Release Lock For Another Session
     HMCID-01,HMCID-02    ReadCase1,ReadCase1
 
 
+Verify Lock Is Not Persistent On BMC Reboot
+    [Documentation]  Acquire lock and after reboot the locks are removed as no persistency
+    ...  maintained.
+    [Tags]  Verify_Lock_Is_Not_Persistent_On_BMC_Reboot
+    [Template]  Acquire Lock On Resource
+
+    # client_id    lock_type     reboot_flag
+    HMCID-01       ReadCase1     True
+    HMCID-01       ReadCase2     True
+    HMCID-01       ReadCase3     True
+    HMCID-01       WriteCase1    True
+    HMCID-01       WriteCase2    True
+    HMCID-01       WriteCase3    True
+
+
 Test Invalid Resource ID Data Type Locking
     [Documentation]  Failed to acquire lock for invalid resource id data type.
     [Tags]  Test_Invalid_Resource_ID_Data_Type_Locking
@@ -262,6 +251,17 @@ Fail To Acquire Lock For Invalid Lock Flag
     HMCID-01       WriteCase9      ${BAD_REQUEST}
     HMCID-01       WriteCase10     ${BAD_REQUEST}
     HMCID-01       WriteCase11     ${BAD_REQUEST}
+
+
+Check After Reboot Transaction ID Set To Default
+    [Documentation]  After reboot, the transaction id starts with default i.e. 1,
+    ...  if any lock is acquired.
+    [Tags]  Check_After_Reboot_Transaction_ID_Set_To_Default
+    [Template]  Verify Acquire And Release Lock In Loop
+
+    # client_id    lock_type     reboot_flag
+    HMCID-01       ReadCase1     True
+    HMCID-01       WriteCase1    True
 
 
 Fail To Acquire Lock For Invalid Segment Flag
