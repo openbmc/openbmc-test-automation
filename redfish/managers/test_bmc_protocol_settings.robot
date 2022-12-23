@@ -276,7 +276,7 @@ Set SSH And IPMI Protocol
     ...  valid_status_codes=[${HTTP_NO_CONTENT}]
 
     # Wait for timeout for new values to take effect.
-    Sleep  ${NETWORK_TIMEOUT}s
+    Sleep  30s
 
     Run Keyword if  ${persistency_check} == ${True}
     ...  Redfish OBMC Reboot (off)  stack_mode=skip
