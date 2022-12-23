@@ -12,7 +12,8 @@ Test Teardown   FFDC On Test Case Fail
 
 *** Variables ***
 
-${cmd_prefix}  ipmitool -I lanplus -C 17 -p 623 -U ${IPMI_USERNAME} -P ${IPMI_PASSWORD}
+${cmd_prefix}            ipmitool -I lanplus -C 17 -p 623 -U ${IPMI_USERNAME} -P ${IPMI_PASSWORD}
+${SETTING_WAIT_TIMEOUT}  30s
 
 
 *** Test Cases ***
@@ -276,7 +277,7 @@ Set SSH And IPMI Protocol
     ...  valid_status_codes=[${HTTP_NO_CONTENT}]
 
     # Wait for timeout for new values to take effect.
-    Sleep  ${NETWORK_TIMEOUT}s
+    Sleep  ${SETTING_WAIT_TIMEOUT}
 
     Run Keyword if  ${persistency_check} == ${True}
     ...  Redfish OBMC Reboot (off)  stack_mode=skip
