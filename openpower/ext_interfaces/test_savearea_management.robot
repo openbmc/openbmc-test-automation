@@ -195,15 +195,6 @@ Redfish Persistency Update Partition File On BMC
     testfile01-file             False
 
 
-Redfish Persistency Update Partition File Post BMC Reboot
-    [Documentation]  Upload partition file to BMC using Redfish and verify the content after the reboot.
-    [Tags]  Redfish_Persistency_Update_Partition_File_Post_BMC_Reboot
-    [Template]  Redfish Update Partition File With Same Content
-
-    # file_name                 reboot_flag
-    testfile01-file             True
-
-
 Redfish Delete Non Existence Of Partition File
     [Documentation]  Delete the partition file if do not exists.
     [Tags]  Redfish_Delete_Non_Existence_Of_Partition_File
@@ -270,6 +261,15 @@ Test Redfish Fail To Upload Partition File Name With Special Character To BMC
     1KB-*filename    ${HTTP_BAD_REQUEST}    ${UNSUPPORTED_FILE_NAME_MESSAGE}
     1KB-!filename    ${HTTP_BAD_REQUEST}    ${UNSUPPORTED_FILE_NAME_MESSAGE}
     1KB-@filename    ${HTTP_BAD_REQUEST}    ${UNSUPPORTED_FILE_NAME_MESSAGE}
+
+
+Redfish Persistency Update Partition File Post BMC Reboot
+    [Documentation]  Upload partition file to BMC using Redfish and verify the content after the reboot.
+    [Tags]  Redfish_Persistency_Update_Partition_File_Post_BMC_Reboot
+    [Template]  Redfish Update Partition File With Same Content
+
+    # file_name                 reboot_flag
+    testfile01-file             True
 
 
 Redfish Upload Validated Partition File From Path To BMC
