@@ -159,6 +159,13 @@ ${LDAP_SERVER_URI}          ldap://${LDAP_SERVER_HOST}
 # FFDC_DEFAULT == 1; use Default FFDC methods
 ${FFDC_DEFAULT}            ${1}
 
+# NTP Server Address
+# NTP Address needs to be given as an list.
+# For example,
+# 1 NTP Address - 14.139.60.103
+# 2 NTP Address - 14.139.60.103  14.139.60.106
+@{NTP_SERVER_ADDRESSES}    ${EMPTY}
+
 *** Keywords ***
 Get Inventory Schema
     [Documentation]  Get inventory schema.
