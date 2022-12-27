@@ -168,7 +168,10 @@ ${FFDC_DEFAULT}            ${1}
 # 2 NTP Address - 14.139.60.103  14.139.60.106
 @{NTP_SERVER_ADDRESSES}    ${EMPTY}
 
+<<<<<<< PATCH SET (0167a0 Redfish: Added new redfish script to validate ntp)
+=======
 
+>>>>>>> BASE      (a8aee2 Add SEL Entry: Modified add sel entry command)
 *** Keywords ***
 Get Inventory Schema
     [Documentation]  Get inventory schema.
