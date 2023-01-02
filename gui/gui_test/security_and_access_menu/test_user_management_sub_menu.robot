@@ -102,10 +102,19 @@ Verify User Access Privilege
 
     # username      privilege_level  enabled
     admin_user      Administrator    ${True}
-    operator_user   Operator         ${True}
     readonly_user   ReadOnly         ${True}
-    noaccess_user   NoAccess         ${True}
     disabled_user   Administrator    ${False}
+
+
+Verify Operator And No Access User Privilege
+    [Documentation]  Create users with different access privilege 
+    ...  and verify that the user is getting created.
+    [Tags]  Verify_Operator_And_No_Access_User_Privilege
+    [Template]  Create User And Verify
+
+    # username      privilege_level  enabled
+    operator_user   Operator         ${True}
+    noaccess_user   NoAccess         ${True}
 
 
 Verify User Account And Properties Saved Through Reboots
