@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "604fadf5_69460e5a",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-01-02T10:30:56Z",
+      "side": 1,
+      "message": "Redfish Code Update Same Firmware Multiple Times",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 53
+      },
+      "revId": "071a4469d24684699e608d388c352f27f1467bae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0466b62a_a0c1e7b3",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-01-02T10:30:56Z",
+      "side": 1,
+      "message": "Update firmware image with same firmware multiple times.",
+      "range": {
+        "startLine": 60,
+        "startChar": 21,
+        "endLine": 60,
+        "endChar": 81
+      },
+      "revId": "071a4469d24684699e608d388c352f27f1467bae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
