@@ -34,9 +34,9 @@ Verify BMC GUI Is Accessible Via Both Network Interfaces
     ${browser_ID}=  Open Browser  ${bmc_url_1}  alias=tab2
     Set Window Size  1920  1080
     Switch Browser  tab1
-    Run Keywords  Login GUI  AND  Logout GUI
+    Run Keywords  Launch Browser And Login GUI  AND  Logout GUI
     Switch Browser  tab2
-    Run Keywords  Login GUI  AND  Logout GUI
+    Run Keywords  Launch Browser And Login GUI  AND  Logout GUI
 
 
 Load Certificates Via Eth1 IP Address And Verify
