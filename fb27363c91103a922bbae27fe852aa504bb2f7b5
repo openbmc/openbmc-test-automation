@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "286041c6_c86425eb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-02T05:24:59Z",
+      "side": 1,
+      "message": "Fix for error logs test cases",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 74
+      },
+      "revId": "fb27363c91103a922bbae27fe852aa504bb2f7b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01e266b7_bfdc761f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-02T05:24:59Z",
+      "side": 1,
+      "message": "Changes:\n    - Cleared error logs after system power on\n    - Increased the wait time for PEL log to get acknowledge\n      from HOST",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 96
+      },
+      "revId": "fb27363c91103a922bbae27fe852aa504bb2f7b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86d15e61_34ec3dcf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-02T05:24:59Z",
+      "side": 1,
+      "message": "Please make changes in commit message as suggested",
+      "revId": "fb27363c91103a922bbae27fe852aa504bb2f7b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
