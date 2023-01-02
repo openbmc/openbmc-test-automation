@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "174c41e9_e8b43d23",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-01-02T09:54:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "286041c6_c86425eb",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 74
+      },
+      "revId": "fb27363c91103a922bbae27fe852aa504bb2f7b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01e266b7_bfdc761f",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-02T05:24:59Z",
       "side": 1,
       "message": "Changes:\n    - Cleared error logs after system power on\n    - Increased the wait time for PEL log to get acknowledge\n      from HOST",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 96
+      },
+      "revId": "fb27363c91103a922bbae27fe852aa504bb2f7b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7869c72f_870867c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-01-02T09:54:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01e266b7_bfdc761f",
       "range": {
         "startLine": 9,
         "startChar": 0,
