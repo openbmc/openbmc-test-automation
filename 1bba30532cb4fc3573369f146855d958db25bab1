@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "43ab1cf2_2df2719e",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-01-02T11:22:01Z",
+      "side": 1,
+      "message": "ok.My suggestion is instead of writing here, you can call it in teardown section.",
+      "parentUuid": "301da70a_1fda0ebf",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 21
+      },
+      "revId": "1bba30532cb4fc3573369f146855d958db25bab1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "981552af_e8b1fd65",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 3
