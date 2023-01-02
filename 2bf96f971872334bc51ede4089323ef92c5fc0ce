@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a92f9168_4eae1273",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-01-02T10:42:43Z",
+      "side": 1,
+      "message": "here you have used perform word twice, can you please remove one.",
+      "revId": "2bf96f971872334bc51ede4089323ef92c5fc0ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
