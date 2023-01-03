@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f48623fc_2849a1ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-03T10:15:41Z",
+      "side": 1,
+      "message": "minor documentation comments",
+      "revId": "f35103e8d7d594bc0c73d2f5e747a65ae39f80cb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffc8f1aa_13c948a9",
+        "filename": "gui/gui_test/logs_menu/test_progress_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-03T10:15:41Z",
+      "side": 1,
+      "message": "Verify Existence Of All Fields In Progress Logs Page\n    [Documentation]  Verify existence of all fields in progress Logs page.",
+      "range": {
+        "startLine": 48,
+        "startChar": 1,
+        "endLine": 48,
+        "endChar": 65
+      },
+      "revId": "f35103e8d7d594bc0c73d2f5e747a65ae39f80cb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
