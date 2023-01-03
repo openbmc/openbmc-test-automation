@@ -38,6 +38,25 @@ Verify Existence Of All Input Boxes In Progress Logs Page
     Page Should Contain Element  ${xpath_to_date_input}  limit=1
 
 
+Verify Existence Of All Sections In Progress Logs Page
+    [Documentation]  Verify existence of all sections in Progress Logs page.
+    [Tags]  Verify_Existence_Of_All_Sections_In_Progress_Logs_Page
+
+    Page Should Contain  Progress logs
+
+
+Verify Existence Of All Fields In Progress Logs Page
+    [Documentation] Verify existence of all fields in progress Logs page.
+    [Tags]  Verify_Existence_Of_All_Fields_In_Progress_Logs_Page
+    [Template]  Page Should Contain
+
+    # Expected parameters
+    Created
+    Time stamp offset
+    Boot count
+    Code
+
+
 *** Keywords ***
 
 Suite Setup Execution
