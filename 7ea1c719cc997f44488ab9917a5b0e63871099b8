@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd4d6eef_311ca8bc",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-03T17:15:12Z",
+      "side": 1,
+      "message": "pel_src is PEL instance plus PEL instance information data.\n\nfor example peltool -l give list of PEL data from there I picked single PEL instance and then grab the PEL instance information data, then combine the data in dictionary.\n\nThis I have mention in lib/pel_utils.robot.",
+      "parentUuid": "24310f5a_446e5cb9",
+      "range": {
+        "startLine": 142,
+        "startChar": 29,
+        "endLine": 142,
+        "endChar": 43
+      },
+      "revId": "7ea1c719cc997f44488ab9917a5b0e63871099b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "871f5362_e3108353",
         "filename": "lib/pel_utils.py",
         "patchSetId": 10
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-03T06:30:16Z",
       "side": 1,
       "message": "When will this line get executed? even when a PEL doesn\u0027t exist it will return \"PEL not found\" and get returned @line 316.",
+      "range": {
+        "startLine": 322,
+        "startChar": 4,
+        "endLine": 322,
+        "endChar": 16
+      },
+      "revId": "7ea1c719cc997f44488ab9917a5b0e63871099b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68da59e9_3bc4314d",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-03T17:15:12Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "871f5362_e3108353",
       "range": {
         "startLine": 322,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3927822_638f5896",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-03T17:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "825ed18d_70149b0a",
+      "range": {
+        "startLine": 332,
+        "startChar": 8,
+        "endLine": 332,
+        "endChar": 28
+      },
+      "revId": "7ea1c719cc997f44488ab9917a5b0e63871099b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88d392aa_9c9d2592",
@@ -93,6 +165,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f865cbe5_bebfe41f",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-03T17:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88d392aa_9c9d2592",
+      "range": {
+        "startLine": 333,
+        "startChar": 8,
+        "endLine": 333,
+        "endChar": 25
+      },
+      "revId": "7ea1c719cc997f44488ab9917a5b0e63871099b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6e9a3ab_97f8e011",
@@ -106,6 +202,30 @@
       "writtenOn": "2023-01-03T06:30:16Z",
       "side": 1,
       "message": "Remove instance from the msg",
+      "range": {
+        "startLine": 336,
+        "startChar": 37,
+        "endLine": 336,
+        "endChar": 58
+      },
+      "revId": "7ea1c719cc997f44488ab9917a5b0e63871099b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e6c3443_7647caf8",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-03T17:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6e9a3ab_97f8e011",
       "range": {
         "startLine": 336,
         "startChar": 37,
@@ -141,6 +261,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3d490d17_2aee6989",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-03T17:15:12Z",
+      "side": 1,
+      "message": "I did not understand your comments. But I have added more information in this function.",
+      "parentUuid": "62e45932_971a1479",
+      "range": {
+        "startLine": 341,
+        "startChar": 2,
+        "endLine": 342,
+        "endChar": 74
+      },
+      "revId": "7ea1c719cc997f44488ab9917a5b0e63871099b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d25067e_5280f2a6",
         "filename": "lib/pel_utils.py",
         "patchSetId": 10
@@ -152,6 +296,30 @@
       "writtenOn": "2023-01-03T06:30:16Z",
       "side": 1,
       "message": "What are you trying to do here? Why is the key named as \"Pel Instance\"? The output from get_pel_information_by_id(pel_id) should be directly assigned to pel_detail_info_dict[pel_id]",
+      "range": {
+        "startLine": 344,
+        "startChar": 12,
+        "endLine": 345,
+        "endChar": 54
+      },
+      "revId": "7ea1c719cc997f44488ab9917a5b0e63871099b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aec5721b_1aefee41",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-03T17:15:12Z",
+      "side": 1,
+      "message": "I have added more information related to PEL instance. what this variable holds. also mention in line number 142",
+      "parentUuid": "1d25067e_5280f2a6",
       "range": {
         "startLine": 344,
         "startChar": 12,
@@ -187,6 +355,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe43028b_7c5f37d0",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-03T17:15:12Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "27310724_3ba1bf1c",
+      "range": {
+        "startLine": 353,
+        "startChar": 4,
+        "endLine": 353,
+        "endChar": 16
+      },
+      "revId": "7ea1c719cc997f44488ab9917a5b0e63871099b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0653fa8d_da59e030",
         "filename": "lib/pel_utils.py",
         "patchSetId": 10
@@ -210,6 +402,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd1538b4_739eacde",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-03T17:15:12Z",
+      "side": 1,
+      "message": "1. Its w.r.t PEL so. I wrote it here. \n2. It can be used by others as its related to PEL\n3. this file contains function which returns specific details.\n4. I have added an example.",
+      "parentUuid": "0653fa8d_da59e030",
+      "range": {
+        "startLine": 356,
+        "startChar": 0,
+        "endLine": 376,
+        "endChar": 0
+      },
+      "revId": "7ea1c719cc997f44488ab9917a5b0e63871099b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b17d6de1_ccb5785e",
         "filename": "lib/pel_utils.robot",
         "patchSetId": 10
@@ -221,6 +437,30 @@
       "writtenOn": "2023-01-03T06:30:16Z",
       "side": 1,
       "message": "Remove dict from variable name",
+      "range": {
+        "startLine": 25,
+        "startChar": 6,
+        "endLine": 25,
+        "endChar": 16
+      },
+      "revId": "7ea1c719cc997f44488ab9917a5b0e63871099b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13a5f007_f0ad46fe",
+        "filename": "lib/pel_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-03T17:15:12Z",
+      "side": 1,
+      "message": "I have changed the variable name.",
+      "parentUuid": "b17d6de1_ccb5785e",
       "range": {
         "startLine": 25,
         "startChar": 6,
@@ -279,6 +519,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ce86d3dd_c20cd136",
+        "filename": "lib/pel_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-03T17:15:12Z",
+      "side": 1,
+      "message": "I have changed the variable name.",
+      "parentUuid": "3cc3ea12_5ce4929d",
+      "range": {
+        "startLine": 27,
+        "startChar": 6,
+        "endLine": 27,
+        "endChar": 18
+      },
+      "revId": "7ea1c719cc997f44488ab9917a5b0e63871099b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39c03bc0_248cba8c",
+        "filename": "lib/pel_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-03T17:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9b52d41_5dc916ff",
+      "range": {
+        "startLine": 27,
+        "startChar": 28,
+        "endLine": 27,
+        "endChar": 58
+      },
+      "revId": "7ea1c719cc997f44488ab9917a5b0e63871099b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6079e209_6f42c49d",
         "filename": "lib/pel_utils.robot",
         "patchSetId": 10
@@ -290,6 +578,30 @@
       "writtenOn": "2023-01-03T06:30:16Z",
       "side": 1,
       "message": "remove dict from variable name",
+      "range": {
+        "startLine": 30,
+        "startChar": 6,
+        "endLine": 30,
+        "endChar": 14
+      },
+      "revId": "7ea1c719cc997f44488ab9917a5b0e63871099b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a595809_2e004750",
+        "filename": "lib/pel_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-03T17:15:12Z",
+      "side": 1,
+      "message": "I have changed the variable name.",
+      "parentUuid": "6079e209_6f42c49d",
       "range": {
         "startLine": 30,
         "startChar": 6,
@@ -325,6 +637,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d06e13f_30206d2c",
+        "filename": "lib/pel_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-03T17:15:12Z",
+      "side": 1,
+      "message": "I have changed the variable name.",
+      "parentUuid": "7cddb6fe_c75a1d6f",
+      "range": {
+        "startLine": 32,
+        "startChar": 6,
+        "endLine": 32,
+        "endChar": 16
+      },
+      "revId": "7ea1c719cc997f44488ab9917a5b0e63871099b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e359cac_65eb37cc",
         "filename": "lib/utils.py",
         "patchSetId": 10
@@ -336,6 +672,30 @@
       "writtenOn": "2023-01-03T06:30:16Z",
       "side": 1,
       "message": "nested_data, expected_key",
+      "range": {
+        "startLine": 489,
+        "startChar": 35,
+        "endLine": 489,
+        "endChar": 40
+      },
+      "revId": "7ea1c719cc997f44488ab9917a5b0e63871099b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f199c455_0aea2e3a",
+        "filename": "lib/utils.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-03T17:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e359cac_65eb37cc",
       "range": {
         "startLine": 489,
         "startChar": 35,
@@ -369,6 +729,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f7a7ad0_7708cc2e",
+        "filename": "lib/utils.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-03T17:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46bae5c9_f939ca1f",
+      "range": {
+        "startLine": 491,
+        "startChar": 4,
+        "endLine": 491,
+        "endChar": 44
+      },
+      "revId": "7ea1c719cc997f44488ab9917a5b0e63871099b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5a58128_0b3cd944",
@@ -382,6 +766,30 @@
       "writtenOn": "2023-01-03T06:30:16Z",
       "side": 1,
       "message": "You need to check whether the expected_key has a value to it and then return that dictionary. The current code doesn\u0027t do that.",
+      "range": {
+        "startLine": 497,
+        "startChar": 12,
+        "endLine": 497,
+        "endChar": 35
+      },
+      "revId": "7ea1c719cc997f44488ab9917a5b0e63871099b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac2ab801_e7af3146",
+        "filename": "lib/utils.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-03T17:15:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5a58128_0b3cd944",
       "range": {
         "startLine": 497,
         "startChar": 12,
