@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54bf6a1e_dd5b1403",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-03T10:17:49Z",
+      "side": 1,
+      "message": "Verify Existence Of All Fields In Event LogsPage\n    [Documentation]  Verify existence of all the required fields in Event Logs page.",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 84
+      },
+      "revId": "b1a6da3ca617831f3b319007e15e92cb8d890f77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
