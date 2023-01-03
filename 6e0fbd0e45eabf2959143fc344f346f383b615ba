@@ -1,6 +1,24 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4563b87_42678f22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-03T06:59:47Z",
+      "side": 1,
+      "message": "Okay. So please abandon this comment as the changes are already merged with different commit.",
+      "revId": "6e0fbd0e45eabf2959143fc344f346f383b615ba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "4e4a753c_2fccda10",
         "filename": "openpower/service_account/test_admin_restrictions.robot",
@@ -20,10 +38,10 @@
         "endChar": 40
       },
       "revId": "6e0fbd0e45eabf2959143fc344f346f383b615ba",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "0a8c04af_6ffa88ef",
         "filename": "openpower/service_account/test_admin_restrictions.robot",
@@ -44,8 +62,7 @@
         "endChar": 40
       },
       "revId": "6e0fbd0e45eabf2959143fc344f346f383b615ba",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
