@@ -38,6 +38,16 @@ Verify Existence Of All Buttons In Firmware Page
     Page Should Contain Element  ${xpath_upload_image_and_reboot}
 
 
+Verify Existence Of All Sections Under BMC And Server.
+    [Documentation]  Verify existence of all sections under BMC and server page.
+    [Tags]  Verify_Existence_Of_All_Sections_Under_BMC_And_Server_Page
+
+    Page Should Contain  Running image
+    Page Should Contain  Backup image
+    Page Should Contain  Temporary
+    Page Should Contain  Permanent
+
+
 *** Keywords ***
 
 Suite Setup Execution
