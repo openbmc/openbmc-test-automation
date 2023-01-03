@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "758f31fd_d113eca0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-03T04:34:48Z",
+      "side": 1,
+      "message": "Splitted user access privilege test case\n\nChange:\n    - Splitted user access privilege test case into two test cases",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 25
+      },
+      "revId": "d67a191a10e07521cb548e45b19ee6670983af0c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88ebab6a_cb058d61",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-03T04:34:48Z",
+      "side": 1,
+      "message": "Verify Operator And No Access User Privilege\n    [Documentation]  Create users with different access privilege and verify that the user is getting created.",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 38
+      },
+      "revId": "d67a191a10e07521cb548e45b19ee6670983af0c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
