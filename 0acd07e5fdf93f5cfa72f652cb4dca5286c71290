@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "477990d9_1d0b7487",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-01-04T11:41:09Z",
+      "side": 1,
+      "message": "Fixed below 6 test cases \n\nVerify Navigation To Date And Time Page\nVerify Existence Of All Sections In Date And Time Page\nVerify Existence Of All Buttons In Date And Time Page\nVerify Existence Of All Input Boxes In Date And Time Page\nVerify Date And Time From Configuration Section\nVerify Display Of Date And Time In GUI Page",
+      "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
