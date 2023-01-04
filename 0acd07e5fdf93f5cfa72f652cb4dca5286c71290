@@ -16,6 +16,74 @@
       "message": "Fixed below 6 test cases \n\nVerify Navigation To Date And Time Page\nVerify Existence Of All Sections In Date And Time Page\nVerify Existence Of All Buttons In Date And Time Page\nVerify Existence Of All Input Boxes In Date And Time Page\nVerify Date And Time From Configuration Section\nVerify Display Of Date And Time In GUI Page",
       "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4be17114_0f78a83f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000844
+      },
+      "writtenOn": "2023-01-04T12:56:15Z",
+      "side": 1,
+      "message": "Few comments",
+      "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e0eded8_c6d287d4",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000844
+      },
+      "writtenOn": "2023-01-04T12:56:15Z",
+      "side": 1,
+      "message": "It should be GUI page.. Right?",
+      "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a99d3bfb_1d93035b",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000844
+      },
+      "writtenOn": "2023-01-04T12:56:15Z",
+      "side": 1,
+      "message": "Looks like a space at the end of this line. Please remove that.",
+      "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0976d9b7_5145c8f3",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000844
+      },
+      "writtenOn": "2023-01-04T12:56:15Z",
+      "side": 1,
+      "message": "Probably a comment on why is it required.",
+      "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
