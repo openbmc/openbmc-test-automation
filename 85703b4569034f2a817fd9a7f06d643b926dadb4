@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e87a9d5_7d34555c",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-04T06:57:48Z",
+      "side": 1,
+      "message": "Return dictionary with PEL ID as key and output of peltool -i \u003cPEL ID\u003e as its value.",
+      "range": {
+        "startLine": 327,
+        "startChar": 4,
+        "endLine": 328,
+        "endChar": 28
+      },
+      "revId": "85703b4569034f2a817fd9a7f06d643b926dadb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a61f970b_0a95fc04",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-04T06:57:48Z",
+      "side": 1,
+      "message": "Do not mention the variable type in the variable name as per our coding guideline.",
+      "revId": "85703b4569034f2a817fd9a7f06d643b926dadb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdf28d4f_8751f36e",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-04T06:57:48Z",
+      "side": 1,
+      "message": "Rename to pel_details or pel_detailed_info",
+      "range": {
+        "startLine": 347,
+        "startChar": 12,
+        "endLine": 347,
+        "endChar": 39
+      },
+      "revId": "85703b4569034f2a817fd9a7f06d643b926dadb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "073d674d_af114824",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-04T06:57:48Z",
+      "side": 1,
+      "message": "Change it as below.\n\npel_detail_info[pel_id]\u003d pel_information_dict_record\n\nHere Key is the PEL ID and value is the detailed information of the PEL.",
+      "range": {
+        "startLine": 353,
+        "startChar": 12,
+        "endLine": 356,
+        "endChar": 65
+      },
+      "revId": "85703b4569034f2a817fd9a7f06d643b926dadb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9995c682_eeba5c63",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-04T06:57:48Z",
+      "side": 1,
+      "message": "1. The method name \"get_formatted_dict\" seems too vague. Change it to something more meaningful.\n2. Though this deals with PEL data here, it is way too generic from the way it is coded. This is just taking care of reformatting the dictionary. So holds good to be used to reformat any dictionary and not just pel_data. Move this to lib/utils.py and remove the PEL reference.\n3. Do not include the example in the documentation ie inside r\"\"\" to keep it short. Move it to next line.\n4. Rename the variables accordingly.",
+      "range": {
+        "startLine": 370,
+        "startChar": 4,
+        "endLine": 378,
+        "endChar": 0
+      },
+      "revId": "85703b4569034f2a817fd9a7f06d643b926dadb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ade12dd6_fc7a55dc",
+        "filename": "lib/pel_utils.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-04T06:57:48Z",
+      "side": 1,
+      "message": "It still contains dict in its name. Change it to event_records",
+      "range": {
+        "startLine": 38,
+        "startChar": 6,
+        "endLine": 38,
+        "endChar": 24
+      },
+      "revId": "85703b4569034f2a817fd9a7f06d643b926dadb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df728e18_40608102",
+        "filename": "lib/pel_utils.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-04T06:57:48Z",
+      "side": 1,
+      "message": "pel_records",
+      "range": {
+        "startLine": 53,
+        "startChar": 6,
+        "endLine": 53,
+        "endChar": 22
+      },
+      "revId": "85703b4569034f2a817fd9a7f06d643b926dadb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63250ada_8032a0ce",
+        "filename": "lib/utils.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-04T06:57:48Z",
+      "side": 1,
+      "message": "My previous concern is still not addressed.\n\nYou are trying to return the value of the key \u0027expected_key\u0027 right? Then y are u returning val again? --\u003e temp[val[expected_key]] \u003d val.\n\nProvide an example to understand the code.",
+      "range": {
+        "startLine": 496,
+        "startChar": 9,
+        "endLine": 497,
+        "endChar": 41
+      },
+      "revId": "85703b4569034f2a817fd9a7f06d643b926dadb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

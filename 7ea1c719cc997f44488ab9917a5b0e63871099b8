@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9505d1d3_7c43acce",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-04T06:57:48Z",
+      "side": 1,
+      "message": "So this method expects pel_record in some specific format. So that should be included in the description of this argument.",
+      "parentUuid": "fd4d6eef_311ca8bc",
+      "range": {
+        "startLine": 142,
+        "startChar": 29,
+        "endLine": 142,
+        "endChar": 43
+      },
+      "revId": "7ea1c719cc997f44488ab9917a5b0e63871099b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "871f5362_e3108353",
         "filename": "lib/pel_utils.py",
         "patchSetId": 10
@@ -273,6 +297,30 @@
       "side": 1,
       "message": "I did not understand your comments. But I have added more information in this function.",
       "parentUuid": "62e45932_971a1479",
+      "range": {
+        "startLine": 341,
+        "startChar": 2,
+        "endLine": 342,
+        "endChar": 74
+      },
+      "revId": "7ea1c719cc997f44488ab9917a5b0e63871099b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "104148d2_4826ec99",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-04T06:57:48Z",
+      "side": 1,
+      "message": "What I meant is even when the required PEL doesn\u0027t exist on system, the result that you get from peltool -i \u003c\u003e will not be blank. It will return the response \"PEL not found\". So the above condition is not valid to check whether the detail exists.",
+      "parentUuid": "3d490d17_2aee6989",
       "range": {
         "startLine": 341,
         "startChar": 2,
