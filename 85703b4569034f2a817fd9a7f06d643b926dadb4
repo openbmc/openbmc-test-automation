@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6911be03_92ab1355",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-04T09:59:15Z",
+      "side": 1,
+      "message": "Added updated information.",
+      "parentUuid": "5e87a9d5_7d34555c",
+      "range": {
+        "startLine": 327,
+        "startChar": 4,
+        "endLine": 328,
+        "endChar": 28
+      },
+      "revId": "85703b4569034f2a817fd9a7f06d643b926dadb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a61f970b_0a95fc04",
         "filename": "lib/pel_utils.py",
         "patchSetId": 18
@@ -37,6 +61,24 @@
       "writtenOn": "2023-01-04T06:57:48Z",
       "side": 1,
       "message": "Do not mention the variable type in the variable name as per our coding guideline.",
+      "revId": "85703b4569034f2a817fd9a7f06d643b926dadb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ce86fb9_c4b3d46f",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-04T09:59:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a61f970b_0a95fc04",
       "revId": "85703b4569034f2a817fd9a7f06d643b926dadb4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -54,6 +96,30 @@
       "writtenOn": "2023-01-04T06:57:48Z",
       "side": 1,
       "message": "Rename to pel_details or pel_detailed_info",
+      "range": {
+        "startLine": 347,
+        "startChar": 12,
+        "endLine": 347,
+        "endChar": 39
+      },
+      "revId": "85703b4569034f2a817fd9a7f06d643b926dadb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6199bd5a_20d703d5",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-04T09:59:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdf28d4f_8751f36e",
       "range": {
         "startLine": 347,
         "startChar": 12,
@@ -89,6 +155,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aca878f8_b7396c2f",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-04T09:59:15Z",
+      "side": 1,
+      "message": "I did not get you.",
+      "parentUuid": "073d674d_af114824",
+      "range": {
+        "startLine": 353,
+        "startChar": 12,
+        "endLine": 356,
+        "endChar": 65
+      },
+      "revId": "85703b4569034f2a817fd9a7f06d643b926dadb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9995c682_eeba5c63",
         "filename": "lib/pel_utils.py",
         "patchSetId": 18
@@ -100,6 +190,30 @@
       "writtenOn": "2023-01-04T06:57:48Z",
       "side": 1,
       "message": "1. The method name \"get_formatted_dict\" seems too vague. Change it to something more meaningful.\n2. Though this deals with PEL data here, it is way too generic from the way it is coded. This is just taking care of reformatting the dictionary. So holds good to be used to reformat any dictionary and not just pel_data. Move this to lib/utils.py and remove the PEL reference.\n3. Do not include the example in the documentation ie inside r\"\"\" to keep it short. Move it to next line.\n4. Rename the variables accordingly.",
+      "range": {
+        "startLine": 370,
+        "startChar": 4,
+        "endLine": 378,
+        "endChar": 0
+      },
+      "revId": "85703b4569034f2a817fd9a7f06d643b926dadb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1daa7a4e_72733e15",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-04T09:59:15Z",
+      "side": 1,
+      "message": "I have removed this function and doing same in keywords it self.",
+      "parentUuid": "9995c682_eeba5c63",
       "range": {
         "startLine": 370,
         "startChar": 4,
@@ -133,6 +247,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff8be0b6_4192ae89",
+        "filename": "lib/pel_utils.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-04T09:59:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ade12dd6_fc7a55dc",
+      "range": {
+        "startLine": 38,
+        "startChar": 6,
+        "endLine": 38,
+        "endChar": 24
+      },
+      "revId": "85703b4569034f2a817fd9a7f06d643b926dadb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df728e18_40608102",
@@ -156,6 +294,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a88d549_999df7cf",
+        "filename": "lib/pel_utils.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-04T09:59:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df728e18_40608102",
+      "range": {
+        "startLine": 53,
+        "startChar": 6,
+        "endLine": 53,
+        "endChar": 22
+      },
+      "revId": "85703b4569034f2a817fd9a7f06d643b926dadb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63250ada_8032a0ce",
@@ -169,6 +331,30 @@
       "writtenOn": "2023-01-04T06:57:48Z",
       "side": 1,
       "message": "My previous concern is still not addressed.\n\nYou are trying to return the value of the key \u0027expected_key\u0027 right? Then y are u returning val again? --\u003e temp[val[expected_key]] \u003d val.\n\nProvide an example to understand the code.",
+      "range": {
+        "startLine": 496,
+        "startChar": 9,
+        "endLine": 497,
+        "endChar": 41
+      },
+      "revId": "85703b4569034f2a817fd9a7f06d643b926dadb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f66b035f_afdad176",
+        "filename": "lib/utils.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-04T09:59:15Z",
+      "side": 1,
+      "message": "I have removed this function and doing same in keywords it self.",
+      "parentUuid": "63250ada_8032a0ce",
       "range": {
         "startLine": 496,
         "startChar": 9,
