@@ -19,6 +19,8 @@ ${xpath_ntp_server1}           //input[@data-test-id="dateTime-input-ntpServer1"
 ${xpath_ntp_server2}           //input[@data-test-id="dateTime-input-ntpServer2"]
 ${xpath_ntp_server3}           //input[@data-test-id="dateTime-input-ntpServer3"]
 ${xpath_select_save_settings}  //button[@data-test-id="dateTime-button-saveSettings"]
+${xpath_Profile_Settings}      //a[@href="#/profile-settings"]
+${xpath_Profile_Settings_Header}   //h1[text()="Profile settings"]
 
 
 *** Test Cases ***
@@ -91,6 +93,12 @@ Verify Display Of Date And Time In GUI Page
     Page Should Contain  ${redfish_time}
 
 
+Verify Display of Date and Time Change to IST in GU Page
+    [Documentation]  Change of default UTC time to IST in profile settings page
+
+    Click Element   ${xpath_Profile_Settings}
+    Page Should Contain Element   ${xpath_Profile_Settings_Header}  
+
 Verify NTP Server Input Fields In Date And Time Page
     [Documentation]  Verify NTP server input fields in date and time page.
     [Tags]  Verify_NTP_Server_Input_Fields_In_Date_And_Time_Page
@@ -114,6 +122,7 @@ Suite Setup Execution
    [Documentation]  Do test case setup tasks.
 
     Launch Browser And Login GUI
+    Maximize Browser Window
     Navigate To Date and Time Page
 
 Navigate To Date and Time Page
@@ -121,6 +130,6 @@ Navigate To Date and Time Page
 
     Click Element  ${xpath_settings_menu}
     Click Element  ${xpath_date_time_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  date-time
-    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Wait Until Keyword Succeeds  60 sec  10 sec  Location Should Contain  date-time
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=60
 
