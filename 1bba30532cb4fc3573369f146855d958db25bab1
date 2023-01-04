@@ -218,6 +218,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "196c7eb3_26668ae6",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-04T11:13:26Z",
+      "side": 1,
+      "message": "I have added the information in Documentation.",
+      "parentUuid": "4bfe4c4b_52f0b4ed",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 21
+      },
+      "revId": "1bba30532cb4fc3573369f146855d958db25bab1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "981552af_e8b1fd65",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 3
