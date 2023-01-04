@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bc5c235_245ead7c",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2023-01-04T09:12:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a050d18_2bb652d2",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 54
+      },
+      "revId": "735ffd90518c539e46d09e4b1be8b5a80bce8138",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b83c4548_5542c9e0",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-01-04T08:59:12Z",
       "side": 1,
       "message": "Verify existence of all sub sections under BMC and server section.",
+      "range": {
+        "startLine": 42,
+        "startChar": 60,
+        "endLine": 42,
+        "endChar": 80
+      },
+      "revId": "735ffd90518c539e46d09e4b1be8b5a80bce8138",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91e4b2af_9b22f82a",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2023-01-04T09:12:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b83c4548_5542c9e0",
       "range": {
         "startLine": 42,
         "startChar": 60,
