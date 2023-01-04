@@ -146,6 +146,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d579c653_a355e446",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-04T05:08:36Z",
+      "side": 1,
+      "message": "code update will make sure power-on works,right?",
+      "parentUuid": "bba0bed3_9372f51e",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 21
+      },
+      "revId": "1bba30532cb4fc3573369f146855d958db25bab1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "981552af_e8b1fd65",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 3
