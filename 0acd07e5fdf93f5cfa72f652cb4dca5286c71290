@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "453c9404_2bfb761f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-05T05:26:36Z",
+      "side": 1,
+      "message": "Use commit message format. Refer below commit - \nhttps://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/59699",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 37
+      },
+      "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "477990d9_1d0b7487",
@@ -37,6 +60,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ab7e817d_b6a0f05b",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-05T05:26:36Z",
+      "side": 1,
+      "message": "We should be using data-test-id. As its not there for this you can use \n\n${xpath_profile_settings_button} //button[contains(text(), \u0027Profile Settings\u0027)]",
+      "range": {
+        "startLine": 22,
+        "startChar": 31,
+        "endLine": 22,
+        "endChar": 62
+      },
+      "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "144836f7_0799eb1c",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-05T05:26:36Z",
+      "side": 1,
+      "message": "Move this under common variable file - gui/data/gui_variables.py and rename the variable name to xpath_profile_settings_heading",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 66
+      },
+      "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e0eded8_c6d287d4",
         "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
         "patchSetId": 1
@@ -54,6 +123,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "84f38a7d_e944db12",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-05T05:26:36Z",
+      "side": 1,
+      "message": "This test just checks if the profile button works in Date and time page. So change the test case name and document to something like below:\n\nVerify Profile Setting Button in Date And Time Page\n    [Documentation]  Verify navigation to profile setting page after clicking\n    ...  on profile setting button in date and time page.",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 79
+      },
+      "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a99d3bfb_1d93035b",
         "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
         "patchSetId": 1
@@ -65,6 +157,29 @@
       "writtenOn": "2023-01-04T12:56:15Z",
       "side": 1,
       "message": "Looks like a space at the end of this line. Please remove that.",
+      "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63a5c1f3_6e58af05",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-05T05:26:36Z",
+      "side": 1,
+      "message": "It may take some time for the page to navigate so use wait until keyword like below\n\nWait Until Page Contains Element  ${xpath_Profile_Settings_Header}",
+      "range": {
+        "startLine": 100,
+        "startChar": 4,
+        "endLine": 100,
+        "endChar": 31
+      },
       "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
