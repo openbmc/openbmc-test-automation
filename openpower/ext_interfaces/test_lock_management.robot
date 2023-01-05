@@ -10,10 +10,10 @@ Resource                ../../lib/rest_response_code.robot
 Library                 ../../lib/bmc_network_utils.py
 Library                 JSONLibrary
 
-Suite Setup              Run Keyword And Ignore Error  Delete All Redfish And HMC Sessions
-Suite Teardown           Run Keyword And Ignore Error  Delete All Redfish And HMC Sessions
-Test Setup               Delete All Redfish And HMC Sessions
-Test Teardown            Run Keywords  FFDC On Test Case Fail  AND  Restart Bmcweb On Failure
+#Suite Setup              Run Keyword And Ignore Error  Delete All Redfish And HMC Sessions
+#Suite Teardown           Run Keyword And Ignore Error  Delete All Redfish And HMC Sessions
+#Test Setup               Delete All Redfish And HMC Sessions
+#Test Teardown            Run Keywords  FFDC On Test Case Fail  AND  Restart Bmcweb On Failure
 
 *** Variables ***
 
@@ -22,6 +22,59 @@ ${BAD_REQUEST}           Bad Request
 &{default_trans_id}      TransactionID=${1}
 
 *** Test Cases ***
+
+Test Session
+    [Tags]  Test_Session
+
+    FOR  ${count}  IN RANGE  1  100
+      Log  ${count}
+      Log To Console  ${count}
+      ${trans_id_emptylist}=  Create List
+      ${trans_id_list}=  Create List
+
+      ${session_info}=  Create Redfish Session With ClientID  HMCTEST-01
+      ${trans_id}=  Redfish Post Acquire Lock  ReadCase1
+      Append To List  ${trans_id_list}  ${trans_id}
+
+      Verify Lock On Resource  ${session_info}  ${trans_id_list}
+
+      Release Locks On Resource  ${session_info}  ${trans_id_list}  Transaction  ${HTTP_OK}
+      ${trans_id_emptylist}=  Create List
+      Verify Lock On Resource  ${session_info}  ${trans_id_emptylist}
+      Redfish Delete Session  ${session_info}
+    END
+
+
+Test Session2
+    [Tags]  Test_Session2
+
+    FOR  ${count}  IN RANGE  1  1001
+      Log  ${count}
+      Log To Console  ${count}
+
+      #${trans_id_emptylist}=  Create List
+      #Verify Lock On Resource  ${session_info}  ${trans_id_emptylist}
+      ${session_info}=  Create Redfish Session With ClientID  HMCTEST-01
+      Log  ${session_info}
+      #${sessions}=  Redfish.Get  /redfish/v1/SessionService/Sessions/${session_info['SessionIDs']}
+      #Log  ${sessions}
+      Redfish Delete Session  ${session_info}
+      #Sleep  3s
+    END
+
+
+Test Session3
+    [Tags]  Test_Session3
+
+    FOR  ${count}  IN RANGE  1  1000
+       Log  ${count}
+       Log To Console  ${count}
+
+       Redfish.Login
+       Redfish.Get  /redfish/v1/SessionService/Sessions
+       Redfish.Logout
+    END
+
 
 Acquire Read Write Lock
     [Documentation]  Acquire and release different read locks.
