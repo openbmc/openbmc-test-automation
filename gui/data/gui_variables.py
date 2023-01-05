@@ -96,6 +96,8 @@ class gui_variables:
     xpath_profile_save_button = (
         "//*[@data-test-id='profileSettings-button-saveSettings']"
     )
+    xpath_Profile_Settings = "//button[contains(text(),'Profile Settings')]"
+    xpath_profile_settings_heading = "//h1[text()='Profile settings']"
     xpath_input_password = (
         "//*[@data-test-id='profileSettings-input-newPassword']"
     )

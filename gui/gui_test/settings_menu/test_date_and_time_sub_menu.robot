@@ -91,6 +91,15 @@ Verify Display Of Date And Time In GUI Page
     Page Should Contain  ${redfish_time}
 
 
+Verify Profile Setting Button in Date And Time Page
+    [Documentation]  Verify navigation to profile setting page after clicking
+    ...  on profile setting button in date and time page.
+    [Tags]  Verify_Profile_Setting_Butoon_in_Date_And_Time_Page
+
+    Click Element   ${xpath_Profile_Settings}
+    Wait Until Page Contains Element  ${xpath_profile_settings_heading}  timeout=10
+    Location Should Contain   profile-settings
+
 Verify NTP Server Input Fields In Date And Time Page
     [Documentation]  Verify NTP server input fields in date and time page.
     [Tags]  Verify_NTP_Server_Input_Fields_In_Date_And_Time_Page
@@ -114,6 +123,8 @@ Suite Setup Execution
    [Documentation]  Do test case setup tasks.
 
     Launch Browser And Login GUI
+    #To view date and time after expanding settings element
+    Maximize Browser Window
     Navigate To Date and Time Page
 
 Navigate To Date and Time Page
@@ -121,6 +132,6 @@ Navigate To Date and Time Page
 
     Click Element  ${xpath_settings_menu}
     Click Element  ${xpath_date_time_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  date-time
-    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Wait Until Keyword Succeeds  60 sec  10 sec  Location Should Contain  date-time
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=60
 
