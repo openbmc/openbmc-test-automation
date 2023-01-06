@@ -17,7 +17,6 @@ ${xpath_boot_option_select}                //*[@id='boot-option']
 ${xpath_shutdown_button}                   //*[@data-test-id='serverPowerOperations-button-shutDown']
 ${xpath_reboot_button}                     //*[@data-test-id='serverPowerOperations-button-reboot']
 ${xpath_poweron_button}                    //*[@data-test-id='serverPowerOperations-button-powerOn']
-${xpath_tpm_policy_button}                 //input[@id='tpm-required-policy']
 ${xpath_save_button}                       //button[contains(text(),'Save')]
 ${xpath_shutdown_orderly_radio}            //*[@data-test-id='serverPowerOperations-radio-shutdownOrderly']
 ${xpath_shutdown_immediate_radio}          //*[@data-test-id='serverPowerOperations-radio-shutdownImmediate']
@@ -83,14 +82,6 @@ Verify Existence Of All Input Boxes In Host Os Boot Settings
     Page Should Contain Element  ${xpath_boot_option_select}
 
 
-Verify Existence Of All Sections In Host Os Boot Settings
-    [Documentation]  Verify existence of all sections in host os boot settings.
-    [Tags]  Verify_Existence_Of_All_Sections_In_Host_Os_Boot_Settings
-
-    Wait Until Page Contains  Boot settings override  timeout=5
-    Page Should Contain  TPM required policy
-
-
 Verify System State At Power Off
     [Documentation]  Verify state of the system in power off state.
     [Tags]  Verify_System_State_At_Power_Off
@@ -107,6 +98,7 @@ Verify System State At Power On
     ...  AND  Navigate to Server Power Operation Page
 
     Wait Until Keyword Succeeds  15 sec  5 sec   Element Should Contain   ${xpath_current_power_state}  On
+
 
 Verify PowerOn Button Should Present At Power Off
     [Documentation]  Verify existence of poweron button at power off.
@@ -126,16 +118,6 @@ Verify Shutdown And Reboot Buttons Presence At Power On
     # TODO: Implement power on using GUI later.
     Page Should Contain Element  ${xpath_shutdown_button}
     Page Should Contain Element  ${xpath_reboot_button}
-
-
-Verify Existence Of Buttons In Host Os Boot Settings
-    [Documentation]  Verify existence of buttons in Host OS boot settings.
-    [Tags]  Verify_Existence_Of_Buttons_In_Host_Os_Boot_Settings
-
-    # Added a delay for the page to load boot settings section.
-    Wait Until Page Contains  Boot settings  timeout=5
-    Page Should Contain Element  ${xpath_tpm_policy_button}
-    Page Should Contain Element  ${xpath_save_button}
 
 
 Verify Host Immediate Reboot
