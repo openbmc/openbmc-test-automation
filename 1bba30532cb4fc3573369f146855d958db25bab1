@@ -290,6 +290,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c481a6b_2b7a587c",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-06T10:26:31Z",
+      "side": 1,
+      "message": "Make it like this: Post BMC reset check if code update and power operations work.\nTry to cover in a single stmt and with one full stop.",
+      "parentUuid": "ed454a95_9e9f5713",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 21
+      },
+      "revId": "1bba30532cb4fc3573369f146855d958db25bab1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "981552af_e8b1fd65",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 3
