@@ -227,6 +227,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "64f51c0e_b0a196ba",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 18
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-09T13:54:06Z",
+      "side": 1,
+      "message": "I have removed the Pel Instance, used alternative way to get SRC.",
+      "parentUuid": "b8e8db04_67c12448",
+      "range": {
+        "startLine": 353,
+        "startChar": 12,
+        "endLine": 356,
+        "endChar": 65
+      },
+      "revId": "85703b4569034f2a817fd9a7f06d643b926dadb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9995c682_eeba5c63",
         "filename": "lib/pel_utils.py",
         "patchSetId": 18
