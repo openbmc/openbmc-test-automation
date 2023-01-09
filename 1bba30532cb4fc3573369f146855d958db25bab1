@@ -314,6 +314,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0cfe30fa_12e0c78c",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-09T10:25:11Z",
+      "side": 1,
+      "message": "I did not get you here. Are you asking me to move line 79/80 to separate keyword ?",
+      "parentUuid": "2c481a6b_2b7a587c",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 21
+      },
+      "revId": "1bba30532cb4fc3573369f146855d958db25bab1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "981552af_e8b1fd65",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 3
