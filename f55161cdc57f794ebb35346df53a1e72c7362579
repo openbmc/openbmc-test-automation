@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d92d7075_f08fa02f",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 29
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-10T06:50:07Z",
+      "side": 1,
+      "message": "End the documentation for the keyword here. Do not include notes for arguments as part of keyword doc.",
+      "range": {
+        "startLine": 118,
+        "startChar": 4,
+        "endLine": 118,
+        "endChar": 38
+      },
+      "revId": "f55161cdc57f794ebb35346df53a1e72c7362579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe8aa762_2b3c1a63",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 29
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-10T06:50:07Z",
+      "side": 1,
+      "message": "Remove this. You need an output of peltool -i \u003cpel_id\u003e as the pel_record. Mention this in a line below line 157.",
+      "range": {
+        "startLine": 125,
+        "startChar": 2,
+        "endLine": 130,
+        "endChar": 29
+      },
+      "revId": "f55161cdc57f794ebb35346df53a1e72c7362579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32ba9629_8eff0f5e",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 29
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-10T06:50:07Z",
+      "side": 1,
+      "message": "Mention this in a line after line 158 saying you need a GET on /redfish/v1/Systems/system/LogServices/EventLog/Entries/\u003cevent_id\u003e",
+      "range": {
+        "startLine": 143,
+        "startChar": 4,
+        "endLine": 150,
+        "endChar": 5
+      },
+      "revId": "f55161cdc57f794ebb35346df53a1e72c7362579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2704ec63_447ccab5",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 29
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-10T06:50:07Z",
+      "side": 1,
+      "message": "Return dictionary containing PEL ID with output of \u0027peltool -i \u003cpel_id\u003e.",
+      "range": {
+        "startLine": 361,
+        "startChar": 4,
+        "endLine": 366,
+        "endChar": 67
+      },
+      "revId": "f55161cdc57f794ebb35346df53a1e72c7362579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0adb2479_7c96e3c2",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 29
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-10T06:50:07Z",
+      "side": 1,
+      "message": "As told earlier, these conditions do not flag when the PEL info is not found. Instead you should be seeing if it contains \"PEL not found\" then raise an exception.",
+      "range": {
+        "startLine": 389,
+        "startChar": 15,
+        "endLine": 389,
+        "endChar": 51
+      },
+      "revId": "f55161cdc57f794ebb35346df53a1e72c7362579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8b7afd3_a5c60b21",
+        "filename": "lib/pel_utils.robot",
+        "patchSetId": 29
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-10T06:50:07Z",
+      "side": 1,
+      "message": "Use directly below instead of assigning to a variable",
+      "range": {
+        "startLine": 77,
+        "startChar": 1,
+        "endLine": 79,
+        "endChar": 76
+      },
+      "revId": "f55161cdc57f794ebb35346df53a1e72c7362579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
