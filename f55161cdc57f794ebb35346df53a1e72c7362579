@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a4f3e26_f18f6b50",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 29
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-10T11:04:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d92d7075_f08fa02f",
+      "range": {
+        "startLine": 118,
+        "startChar": 4,
+        "endLine": 118,
+        "endChar": 38
+      },
+      "revId": "f55161cdc57f794ebb35346df53a1e72c7362579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe8aa762_2b3c1a63",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-10T06:50:07Z",
       "side": 1,
       "message": "Remove this. You need an output of peltool -i \u003cpel_id\u003e as the pel_record. Mention this in a line below line 157.",
+      "range": {
+        "startLine": 125,
+        "startChar": 2,
+        "endLine": 130,
+        "endChar": 29
+      },
+      "revId": "f55161cdc57f794ebb35346df53a1e72c7362579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01383a6a_52fe544d",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 29
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-10T11:04:12Z",
+      "side": 1,
+      "message": "This information needed so user will know how the data need to be passed.\nthere are two data combined which I have mention in below comment.",
+      "parentUuid": "fe8aa762_2b3c1a63",
       "range": {
         "startLine": 125,
         "startChar": 2,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eca40012_95e3799a",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 29
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-10T11:04:12Z",
+      "side": 1,
+      "message": "This information needed so user will know how the data need to be passed.",
+      "parentUuid": "32ba9629_8eff0f5e",
+      "range": {
+        "startLine": 143,
+        "startChar": 4,
+        "endLine": 150,
+        "endChar": 5
+      },
+      "revId": "f55161cdc57f794ebb35346df53a1e72c7362579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2704ec63_447ccab5",
         "filename": "lib/pel_utils.py",
         "patchSetId": 29
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a8454cfe_d43c1551",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 29
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-10T11:04:12Z",
+      "side": 1,
+      "message": "on 3 point two data are getting combined. a portion from peltool -l to peltool -i.",
+      "parentUuid": "2704ec63_447ccab5",
+      "range": {
+        "startLine": 361,
+        "startChar": 4,
+        "endLine": 366,
+        "endChar": 67
+      },
+      "revId": "f55161cdc57f794ebb35346df53a1e72c7362579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0adb2479_7c96e3c2",
         "filename": "lib/pel_utils.py",
         "patchSetId": 29
@@ -106,6 +202,30 @@
       "writtenOn": "2023-01-10T06:50:07Z",
       "side": 1,
       "message": "As told earlier, these conditions do not flag when the PEL info is not found. Instead you should be seeing if it contains \"PEL not found\" then raise an exception.",
+      "range": {
+        "startLine": 389,
+        "startChar": 15,
+        "endLine": 389,
+        "endChar": 51
+      },
+      "revId": "f55161cdc57f794ebb35346df53a1e72c7362579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fabb6df1_5c60a8a0",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 29
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-10T11:04:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0adb2479_7c96e3c2",
       "range": {
         "startLine": 389,
         "startChar": 15,
