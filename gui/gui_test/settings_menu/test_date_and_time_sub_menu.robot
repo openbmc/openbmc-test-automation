@@ -90,6 +90,15 @@ Verify Display Of Date And Time In GUI Page
     Page Should Contain  ${redfish_date}
     Page Should Contain  ${redfish_time}
 
+Verify Profile Setting Button In Date And Time Page
+    [Documentation]  Verify navigation to profile setting page after clicking
+    ...  on profile setting button in date and time page.
+    [Tags]  Verify_Profile_Setting_Button_In_Date_And_Time_Page
+
+    Click Element   ${xpath_Profile_Settings}
+    Wait Until Page Contains Element  ${xpath_profile_settings_heading}  timeout=10
+    Location Should Contain   profile-settings
+
 
 Verify NTP Server Input Fields In Date And Time Page
     [Documentation]  Verify NTP server input fields in date and time page.
