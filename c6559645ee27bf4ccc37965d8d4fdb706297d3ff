@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bf5a69e_8046b5f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-01-10T08:29:04Z",
+      "side": 1,
+      "message": "Changed the commit message as below :\n\nAdded a test case to Verify Profile Setting Button In Date And Time Page\n\nChanges:\n   - Added one test case to Verify Profile Setting Button In Date And Time Page\nTested:\n   - Ran above test case from sandbox successfully",
+      "parentUuid": "599109c7_54ec664a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 69
+      },
+      "revId": "c6559645ee27bf4ccc37965d8d4fdb706297d3ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25085c5a_e9c0ec28",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ae8ce33_c7e109c7",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-01-10T08:29:04Z",
+      "side": 1,
+      "message": "Capitalized all the words",
+      "parentUuid": "25085c5a_e9c0ec28",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 51
+      },
+      "revId": "c6559645ee27bf4ccc37965d8d4fdb706297d3ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b80e7d13_36e2fefc",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-01-06T11:05:27Z",
       "side": 1,
       "message": "Same comment as above.",
+      "range": {
+        "startLine": 97,
+        "startChar": 12,
+        "endLine": 97,
+        "endChar": 63
+      },
+      "revId": "c6559645ee27bf4ccc37965d8d4fdb706297d3ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcfb3ab6_2ad47e66",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-01-10T08:29:04Z",
+      "side": 1,
+      "message": "Capitalized all the words",
+      "parentUuid": "b80e7d13_36e2fefc",
       "range": {
         "startLine": 97,
         "startChar": 12,

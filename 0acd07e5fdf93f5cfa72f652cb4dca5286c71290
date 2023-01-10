@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "07720b59_95665cae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-01-10T08:29:04Z",
+      "side": 1,
+      "message": "Changed the commit message as below: \n\nAdded a test case to Verify Profile Setting Button In Date And Time Page\n\nChanges:\n   - Added one test case to Verify Profile Setting Button In Date And Time Page\nTested:\n   - Ran above test case from sandbox successfully",
+      "parentUuid": "453c9404_2bfb761f",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 37
+      },
+      "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "477990d9_1d0b7487",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -81,6 +105,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5814e5ad_af0b9b28",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-01-10T08:29:04Z",
+      "side": 1,
+      "message": "Changed the xpath expression to xpath_Profile_Settings \u003d \"//button[contains(text(),\u0027Profile Settings\u0027)]\"",
+      "parentUuid": "ab7e817d_b6a0f05b",
+      "range": {
+        "startLine": 22,
+        "startChar": 31,
+        "endLine": 22,
+        "endChar": 62
+      },
+      "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "144836f7_0799eb1c",
@@ -94,6 +142,30 @@
       "writtenOn": "2023-01-05T05:26:36Z",
       "side": 1,
       "message": "Move this under common variable file - gui/data/gui_variables.py and rename the variable name to xpath_profile_settings_heading",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 66
+      },
+      "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b99cc0cd_35d3acc5",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-01-10T08:29:04Z",
+      "side": 1,
+      "message": "Moved below to gui/data/gui_variables.py file :\n\n    xpath_Profile_Settings \u003d \"//button[contains(text(),\u0027Profile Settings\u0027)]\"\n    xpath_profile_settings_heading \u003d \"//h1[text()\u003d\u0027Profile settings\u0027]\"",
+      "parentUuid": "144836f7_0799eb1c",
       "range": {
         "startLine": 23,
         "startChar": 0,
@@ -121,6 +193,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebcecb26_28f73910",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-01-10T08:29:04Z",
+      "side": 1,
+      "message": "Changed it to GUI",
+      "parentUuid": "1e0eded8_c6d287d4",
+      "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84f38a7d_e944db12",
@@ -134,6 +224,30 @@
       "writtenOn": "2023-01-05T05:26:36Z",
       "side": 1,
       "message": "This test just checks if the profile button works in Date and time page. So change the test case name and document to something like below:\n\nVerify Profile Setting Button in Date And Time Page\n    [Documentation]  Verify navigation to profile setting page after clicking\n    ...  on profile setting button in date and time page.",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 79
+      },
+      "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "838d20e6_aef395c9",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-01-10T08:29:04Z",
+      "side": 1,
+      "message": "Changed it as mentioned in the comment",
+      "parentUuid": "84f38a7d_e944db12",
       "range": {
         "startLine": 96,
         "startChar": 0,
@@ -184,6 +298,48 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83230c59_0f235176",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-01-10T08:29:04Z",
+      "side": 1,
+      "message": "Included \"Wait Until Page Contains Element  ${xpath_profile_settings_heading}  timeout\u003d10\" in the test case",
+      "parentUuid": "63a5c1f3_6e58af05",
+      "range": {
+        "startLine": 100,
+        "startChar": 4,
+        "endLine": 100,
+        "endChar": 31
+      },
+      "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f0513d7_71722707",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-01-10T08:29:04Z",
+      "side": 1,
+      "message": "Space removed at EOL",
+      "parentUuid": "a99d3bfb_1d93035b",
+      "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0976d9b7_5145c8f3",
@@ -197,6 +353,24 @@
       "writtenOn": "2023-01-04T12:56:15Z",
       "side": 1,
       "message": "Probably a comment on why is it required.",
+      "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e526f29_f6a10879",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-01-10T08:29:04Z",
+      "side": 1,
+      "message": "It is required for the page to scroll to date and time element",
+      "parentUuid": "0976d9b7_5145c8f3",
       "revId": "0acd07e5fdf93f5cfa72f652cb4dca5286c71290",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
