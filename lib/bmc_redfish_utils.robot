@@ -113,7 +113,7 @@ Redfish Delete List Of Session
 Delete All Redfish Sessions
     [Documentation]  Delete all active redfish sessions.
 
-    ${saved_session_info}=  Get Redfish Session Info
+    ${saved_session_info}=  Redfish_Utils.Get Redfish Session Info
 
     ${resp_list}=  Redfish_Utils.Get Member List
     ...  /redfish/v1/SessionService/Sessions
