@@ -16,6 +16,24 @@
       "message": "Button and not Butoon.",
       "revId": "0cec342f02af366174a4822d800735519d2f896a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8fc8328_9f0f9e3e",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-01-10T09:03:14Z",
+      "side": 1,
+      "message": "Changed it.",
+      "parentUuid": "1531e3a9_ea870774",
+      "revId": "0cec342f02af366174a4822d800735519d2f896a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
