@@ -9,9 +9,10 @@ Suite Teardown  Close Browser
 
 *** Variables ***
 
-${xpath_firmware_heading}         //h1[text()="Firmware"]
-${xpath_change_image_and_reboot}  //button[contains(text(),'Change image and reboot BMC')]
-${xpath_upload_image_and_reboot}  //button[contains(text(),'Upload and reboot BMC')]
+${xpath_firmware_heading}                //h1[text()="Firmware"]
+${xpath_add_file_button}                 //*[contains(text(),"Add file")]
+${xpath_start_update_button}             //*[@data-test-id="firmware-button-startUpdate"]
+
 
 *** Test Cases ***
 
@@ -28,14 +29,17 @@ Verify Existence Of All Sections In Firmware Page
 
     Page Should Contain  BMC and server
     Page Should Contain  Update firmware
+    Page Should Contain  Access key expiration
 
 
-Verify Existence Of All Buttons In Firmware Page
-    [Documentation]  Verify existence of all buttons in firmware page.
-    [Tags]  Verify_Existence_Of_All_Buttons_In_Firmware_Page
+Verify Existence Of All Buttons In Firmware Page At Host Power Off
+    [Documentation]  Verify existence of all buttons in firmware page at host power off.
+    [Tags]  Verify_Existence_Of_All_Buttons_In_Firmware_Page_At_Host_Power_Off
 
-    Page Should Contain Element  ${xpath_change_image_and_reboot}
-    Page Should Contain Element  ${xpath_upload_image_and_reboot}
+    Redfish Power Off  stack_mode=skip
+
+    Page Should Contain Element  ${xpath_add_file_button}
+    Page Should Contain Element  ${xpath_start_update_button}
 
 
 Verify Existence Of All Sub Sections Under BMC And Server Section
