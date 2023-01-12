@@ -129,6 +129,16 @@ Verify Disk Backplane VPD Data Via Redfish
     Disk Backplane  Location
 
 
+Verify System VPD Data via Redfish
+    [Documentation]  Verify system VPD details via Redfish output.
+    [Tags]  Verify_System_VPD_Data_Via_Redfish
+    [Template]  Verify System VPD Data
+
+    # Component     Field
+    System          Model
+    System          SerialNumber
+
+
 *** Keywords ***
 
 Verify Redfish VPD Data
@@ -203,3 +213,20 @@ Get Assembly Component VPD
         Exit For Loop IF  "${component_name}" == "${assembly_component["Name"]}"
     END
     [Return]  ${output}
+
+
+Verify System VPD Data
+    [Documentation]  Verify Redfish VPD data of system.
+    [Arguments]  ${component}  ${field}
+
+    # Description of arguments:
+    # component       VPD component (e.g. /system/chassis/motherboard/vdd_vrm1).
+    # field           VPD field (e.g. Model, SerialNumber etc.).
+
+    ${redfish_uri}=  Set Variable  /redfish/v1/Systems/system
+    ${resp}=  Redfish.Get Properties  ${redfish_uri}
+
+    ${vpd_component}=  Set Variable  /system
+    ${vpd_records}=  Vpdtool  -o -O ${vpd_component}
+
+    Should Be Equal As Strings  ${resp["${field}"]}  ${vpd_records['${vpd_component}']['${field}']}
