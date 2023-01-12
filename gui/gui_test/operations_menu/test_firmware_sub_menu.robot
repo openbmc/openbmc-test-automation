@@ -52,6 +52,16 @@ Verify Existence Of All Sub Sections Under BMC And Server Section
     Page Should Contain  Permanent
 
 
+Verify Existence Of All Buttons In Firmware Page At Host Power On
+    [Documentation]  Verify existence of all buttons in firmware page at host power on.
+    [Tags]  Verify_Existence_Of_All_Buttons_In_Firmware_Page_At_Host_Power_On
+
+    Redfish Power On  stack_mode=skip
+
+    Page Does Not Contain Element  ${xpath_add_file}
+    Page Does Not Contain Element  ${xpath_start_update}
+
+
 *** Keywords ***
 
 Suite Setup Execution
