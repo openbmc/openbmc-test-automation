@@ -129,6 +129,16 @@ Verify Disk Backplane VPD Data Via Redfish
     Disk Backplane  Location
 
 
+Verify System VPD Data Via Redfish
+    [Documentation]  Verify system Model and SN via Redfish output.
+    [Tags]  Verify_System_VPD_Data_Via_Redfish
+    [Template]  Verify Redfish VPD Data
+
+    # Component     Field
+    System          Model
+    System          SerialNumber
+
+
 *** Keywords ***
 
 Verify Redfish VPD Data
@@ -157,6 +167,8 @@ Verify Redfish VPD Data
     ...    Set Variable  /redfish/v1/Chassis/chassis/Assembly  Operator Panel LCD
     ...  ELSE IF  '${component}' == 'Disk Backplane'
     ...    Set Variable  /redfish/v1/Chassis/chassis/Assembly  NVMe Backplane
+    ...  ELSE IF  '${component}' == 'System'
+    ...    Set Variable  /redfish/v1/Systems/system  System
 
     ${resp}=  Run Keyword If  '${redfish_component_uri}' == '/redfish/v1/Chassis/chassis/Assembly'
     ...  Get Assembly Component VPD  ${redfish_component_name}
@@ -179,12 +191,17 @@ Verify Redfish VPD Data
     ...  '${component}' == 'OP Panel'  /system/chassis/motherboard/dasd_backplane/panel0
     ...  '${component}' == 'OP Panel LCD'  /system/chassis/motherboard/dasd_backplane/panel1
     ...  '${component}' == 'Disk Backplane'  /system/chassis/motherboard/dasd_backplane
+    ...  '${component}' == 'System'  /system
 
     ${vpd_records}=  Vpdtool  -o -O ${vpd_component}
 
     Run Keyword if  '${field}' == 'Location'
     ...    Should Be Equal As Strings  ${resp["Location"]["PartLocation"]["ServiceLabel"]}
     ...    ${vpd_records['${vpd_component}']['${vpd_field}']}
+
+    # Check whether the vpd details from redfish and vpdtool are the same.
+    ...  ELSE IF  '${component}' == 'System'
+    ...    Should Be Equal As Strings  ${resp["${field}"]}  ${vpd_records['${vpd_component}']['${field}']}
     ...  ELSE
     ...    Should Be Equal As Strings  ${resp["${field}"]}  ${vpd_records['${vpd_component}']['${vpd_field}']}
 
