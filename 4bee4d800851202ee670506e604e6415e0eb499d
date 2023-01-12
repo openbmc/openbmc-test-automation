@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aceb823c_7ab5fbf9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-12T07:11:49Z",
+      "side": 1,
+      "message": "Address the review comments.",
+      "revId": "4bee4d800851202ee670506e604e6415e0eb499d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c3d63b8_e880b858",
@@ -14,6 +31,30 @@
       "writtenOn": "2023-01-12T05:58:15Z",
       "side": 1,
       "message": "Test to reset BMC at standby and then perform BMC code update and ensure there is not error log or dumps post update.",
+      "range": {
+        "startLine": 70,
+        "startChar": 21,
+        "endLine": 70,
+        "endChar": 83
+      },
+      "revId": "4bee4d800851202ee670506e604e6415e0eb499d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87e82840_346fccf5",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-12T07:11:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c3d63b8_e880b858",
       "range": {
         "startLine": 70,
         "startChar": 21,
@@ -47,6 +88,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90225625_2402edd8",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-12T07:11:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9499c70a_bd740c94",
+      "range": {
+        "startLine": 76,
+        "startChar": 2,
+        "endLine": 79,
+        "endChar": 0
+      },
+      "revId": "4bee4d800851202ee670506e604e6415e0eb499d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d70372a_cde8e07e",
@@ -70,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d19626d1_8937de47",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-12T07:11:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d70372a_cde8e07e",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 21
+      },
+      "revId": "4bee4d800851202ee670506e604e6415e0eb499d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0f43cb6_657271f3",
@@ -83,6 +172,30 @@
       "writtenOn": "2023-01-12T05:58:15Z",
       "side": 1,
       "message": "Redfish OBMC Reboot (off)",
+      "range": {
+        "startLine": 97,
+        "startChar": 3,
+        "endLine": 99,
+        "endChar": 18
+      },
+      "revId": "4bee4d800851202ee670506e604e6415e0eb499d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b35022a6_3579a077",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-12T07:11:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0f43cb6_657271f3",
       "range": {
         "startLine": 97,
         "startChar": 3,
