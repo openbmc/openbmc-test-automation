@@ -128,7 +128,7 @@ Verify Displayed Event Details With Redfish
     Page Should Contain  ${event_data[0]["Message"]}
 
 
-Verify Existence Of All Fields In Event LogsPage
+Verify Existence Of All Fields In Event Logs Page
     [Documentation]  Verify existence of all required fields in Event Logs page.
     [Tags]  Verify_Existence_Of_All_Fields_In_Event_Logs_Page
     [Template]  Page Should Contain

@@ -256,7 +256,7 @@ Set SSH And IPMI State Via GUI
 
     # Description of argument(s):
     # ssh_state     State of SSH to be set (e.g. Enabled, Disabled).
-    # ipmi_state    State of IPMI to be set (e.g. Enabled, Disbaled).
+    # ipmi_state    State of IPMI to be set (e.g. Enabled, Disabled).
 
     ${current_ssh_state}=  Get Text  ${xpath_bmc_ssh_toggle}
 
