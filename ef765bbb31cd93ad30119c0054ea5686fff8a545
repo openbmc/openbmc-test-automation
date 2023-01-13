@@ -160,6 +160,24 @@
       "parentUuid": "1f5c7825_817c573c",
       "revId": "ef765bbb31cd93ad30119c0054ea5686fff8a545",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fab0d16_922bab72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-13T06:47:38Z",
+      "side": 1,
+      "message": "Lets clear it and make a better code.",
+      "parentUuid": "6933474f_59544246",
+      "revId": "ef765bbb31cd93ad30119c0054ea5686fff8a545",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
