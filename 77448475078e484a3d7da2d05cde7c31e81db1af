@@ -142,6 +142,24 @@
       "parentUuid": "a2c42912_dc46cf5f",
       "revId": "77448475078e484a3d7da2d05cde7c31e81db1af",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48690239_0ffdb033",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-13T06:54:02Z",
+      "side": 1,
+      "message": "We\u0027ll discuss and make this more of a lock management rather than focusing more on  sessions.",
+      "parentUuid": "05b38fb7_ddaf8faf",
+      "revId": "77448475078e484a3d7da2d05cde7c31e81db1af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
