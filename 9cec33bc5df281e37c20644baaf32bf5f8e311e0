@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "838b90b3_f7387bf7",
+        "filename": "redfish/managers/test_bmc_network_mac.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-01-13T07:55:03Z",
+      "side": 1,
+      "message": "make alignment",
+      "parentUuid": "8a0a39fa_36523305",
+      "revId": "9cec33bc5df281e37c20644baaf32bf5f8e311e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "023aab40_0e3ba802",
         "filename": "redfish/managers/test_bmc_network_mac.robot",
         "patchSetId": 1
