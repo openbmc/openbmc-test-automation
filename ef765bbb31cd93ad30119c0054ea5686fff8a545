@@ -124,6 +124,24 @@
       "parentUuid": "466a6fd1_97919804",
       "revId": "ef765bbb31cd93ad30119c0054ea5686fff8a545",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f5c7825_817c573c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-13T06:38:12Z",
+      "side": 1,
+      "message": "Delete all in the teardown",
+      "parentUuid": "66420a14_826a27df",
+      "revId": "ef765bbb31cd93ad30119c0054ea5686fff8a545",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
