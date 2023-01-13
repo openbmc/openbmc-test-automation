@@ -160,6 +160,24 @@
       "parentUuid": "05b38fb7_ddaf8faf",
       "revId": "77448475078e484a3d7da2d05cde7c31e81db1af",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "981f66d6_7bfbd0a5",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-13T07:06:17Z",
+      "side": 1,
+      "message": "Deleting the session should not hit max connection number.",
+      "parentUuid": "48690239_0ffdb033",
+      "revId": "77448475078e484a3d7da2d05cde7c31e81db1af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
