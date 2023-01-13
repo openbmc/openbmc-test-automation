@@ -34,6 +34,24 @@
       "parentUuid": "01fbe79f_0b42cc86",
       "revId": "77448475078e484a3d7da2d05cde7c31e81db1af",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8908bc6e_326f52ab",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-13T06:14:49Z",
+      "side": 1,
+      "message": "how will existing sessions impact next test cases?",
+      "parentUuid": "19befbf2_376dc05f",
+      "revId": "77448475078e484a3d7da2d05cde7c31e81db1af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
