@@ -124,6 +124,24 @@
       "parentUuid": "8d9874b3_2d843d26",
       "revId": "77448475078e484a3d7da2d05cde7c31e81db1af",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05b38fb7_ddaf8faf",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-13T06:51:13Z",
+      "side": 1,
+      "message": "Initially, max connection setting was not there. So, I did not included in design.\nTo to do in one or two session code then each TC will have some changes and may be some extra code I may have to write.",
+      "parentUuid": "a2c42912_dc46cf5f",
+      "revId": "77448475078e484a3d7da2d05cde7c31e81db1af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
