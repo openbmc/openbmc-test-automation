@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a0a39fa_36523305",
+        "filename": "redfish/managers/test_bmc_network_mac.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-01-13T07:32:54Z",
+      "side": 1,
+      "message": "When out of range MAC is assigned, the first 48 bits are truncated and assigned.\nFYR\nhttps://github.com/openbmc/phosphor-networkd/issues/46",
+      "parentUuid": "be991918_3a97a206",
+      "revId": "9cec33bc5df281e37c20644baaf32bf5f8e311e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "023aab40_0e3ba802",
         "filename": "redfish/managers/test_bmc_network_mac.robot",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2023-01-13T07:04:43Z",
       "side": 1,
       "message": "why did you comment it?",
+      "revId": "9cec33bc5df281e37c20644baaf32bf5f8e311e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba609a30_c2301981",
+        "filename": "redfish/managers/test_bmc_network_mac.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-01-13T07:32:54Z",
+      "side": 1,
+      "message": "Removing this.",
+      "parentUuid": "023aab40_0e3ba802",
       "revId": "9cec33bc5df281e37c20644baaf32bf5f8e311e0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
