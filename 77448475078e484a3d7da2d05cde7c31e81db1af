@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01fbe79f_0b42cc86",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-13T05:12:55Z",
+      "side": 1,
+      "message": "I see delete session at test level as well. Why in both places??\nCan you remove delete session from each test case and delete all sessions during suite teardown and keep the suite as is?",
+      "revId": "77448475078e484a3d7da2d05cde7c31e81db1af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
