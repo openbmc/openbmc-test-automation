@@ -88,6 +88,24 @@
       "parentUuid": "2001f509_1a375375",
       "revId": "77448475078e484a3d7da2d05cde7c31e81db1af",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d9874b3_2d843d26",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-13T06:29:00Z",
+      "side": 1,
+      "message": "in TC some places I am have to delete the session to remove locks. I kept the design of TC like, Create Session, Performs locks operation and then delete session.\nCurrently by changing the sequence of TC I am not hitting connection issue.",
+      "parentUuid": "24ba6c3d_00637c5a",
+      "revId": "77448475078e484a3d7da2d05cde7c31e81db1af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
