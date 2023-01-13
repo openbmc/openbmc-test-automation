@@ -196,6 +196,70 @@
       "parentUuid": "981f66d6_7bfbd0a5",
       "revId": "77448475078e484a3d7da2d05cde7c31e81db1af",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6d82b66_0316a539",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-01-13T07:22:12Z",
+      "side": 1,
+      "message": "I agree with Prashanth, this should revolve around the lock management rather than the number of sessions.",
+      "parentUuid": "48690239_0ffdb033",
+      "revId": "77448475078e484a3d7da2d05cde7c31e81db1af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb095289_7d78f99f",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-01-13T07:22:12Z",
+      "side": 1,
+      "message": "Better to keep it.",
+      "range": {
+        "startLine": 16,
+        "startChar": 25,
+        "endLine": 16,
+        "endChar": 47
+      },
+      "revId": "77448475078e484a3d7da2d05cde7c31e81db1af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0939a15a_9dab8273",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-01-13T07:22:12Z",
+      "side": 1,
+      "message": "this is False by default right. Not required to pass the argument.",
+      "range": {
+        "startLine": 32,
+        "startChar": 33,
+        "endLine": 32,
+        "endChar": 38
+      },
+      "revId": "77448475078e484a3d7da2d05cde7c31e81db1af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
