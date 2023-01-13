@@ -106,6 +106,24 @@
       "parentUuid": "24ba6c3d_00637c5a",
       "revId": "77448475078e484a3d7da2d05cde7c31e81db1af",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2c42912_dc46cf5f",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-13T06:37:03Z",
+      "side": 1,
+      "message": "Use delete session only where it is required.\nWhat is the use case or practicality of using too many sessions for lock management?? can\u0027t we do lock management with 1 or 2 sessions?",
+      "parentUuid": "8d9874b3_2d843d26",
+      "revId": "77448475078e484a3d7da2d05cde7c31e81db1af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
