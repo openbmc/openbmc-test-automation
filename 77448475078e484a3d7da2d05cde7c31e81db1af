@@ -52,6 +52,24 @@
       "parentUuid": "19befbf2_376dc05f",
       "revId": "77448475078e484a3d7da2d05cde7c31e81db1af",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2001f509_1a375375",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-13T06:19:03Z",
+      "side": 1,
+      "message": "There is no impact. I am running my suite by cleaning the session. As those are not opened by this suite. Other suite also make sure once the session is consumed, delete the session before exiting to suite.",
+      "parentUuid": "8908bc6e_326f52ab",
+      "revId": "77448475078e484a3d7da2d05cde7c31e81db1af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
