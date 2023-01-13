@@ -87,6 +87,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4a60bfd_665a70a6",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-01-13T12:54:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "944c1ce2_8b3d474d",
+      "range": {
+        "startLine": 132,
+        "startChar": 23,
+        "endLine": 132,
+        "endChar": 26
+      },
+      "revId": "cd5d01818e43c6bbbec2f8033da06423d51ac85c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57fb804c_01bde3e1",
@@ -134,6 +158,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f99ab4d8_865aea79",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-01-13T12:54:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de3f4847_d6a6d4e5",
+      "range": {
+        "startLine": 133,
+        "startChar": 21,
+        "endLine": 133,
+        "endChar": 66
+      },
+      "revId": "cd5d01818e43c6bbbec2f8033da06423d51ac85c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a834eed1_cb707425",
@@ -147,6 +195,30 @@
       "writtenOn": "2023-01-13T11:15:24Z",
       "side": 1,
       "message": "Verify Redfish VPD Data",
+      "range": {
+        "startLine": 135,
+        "startChar": 16,
+        "endLine": 135,
+        "endChar": 38
+      },
+      "revId": "cd5d01818e43c6bbbec2f8033da06423d51ac85c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ab8f9dd_60a91e79",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-01-13T12:54:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a834eed1_cb707425",
       "range": {
         "startLine": 135,
         "startChar": 16,
@@ -180,6 +252,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59ff2a0b_681c521e",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-01-13T12:54:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4ae147b_4f121aca",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 77
+      },
+      "revId": "cd5d01818e43c6bbbec2f8033da06423d51ac85c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df3e5366_24e64e22",
@@ -193,6 +289,30 @@
       "writtenOn": "2023-01-13T11:15:24Z",
       "side": 1,
       "message": "Add below one for system\n    ...  \u0027${component}\u0027 \u003d\u003d \u0027System\u0027  /system",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 87
+      },
+      "revId": "cd5d01818e43c6bbbec2f8033da06423d51ac85c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d19adcc_eb95d878",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-01-13T12:54:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df3e5366_24e64e22",
       "range": {
         "startLine": 191,
         "startChar": 0,
@@ -244,6 +364,54 @@
         "startChar": 0,
         "endLine": 232,
         "endChar": 99
+      },
+      "revId": "cd5d01818e43c6bbbec2f8033da06423d51ac85c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dc77f27_2d0cf1e0",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-01-13T12:54:54Z",
+      "side": 1,
+      "message": "Ok.",
+      "parentUuid": "94eebe2e_f8fbaeae",
+      "range": {
+        "startLine": 217,
+        "startChar": 0,
+        "endLine": 232,
+        "endChar": 99
+      },
+      "revId": "cd5d01818e43c6bbbec2f8033da06423d51ac85c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79e9e0e0_cf5fd9d4",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-01-13T12:54:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f53fb1fb_1157d97d",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 232,
+        "endChar": 21
       },
       "revId": "cd5d01818e43c6bbbec2f8033da06423d51ac85c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
