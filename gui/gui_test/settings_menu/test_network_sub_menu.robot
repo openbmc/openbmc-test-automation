@@ -44,7 +44,6 @@ ${alpha_netmask}                         ff.ff.ff.ff
 ${out_of_range_netmask}                  255.256.255.0
 ${more_byte_netmask}                     255.255.255.0.0
 ${lowest_netmask}                        128.0.0.0
-${test_gateway}                          10.7.7.1
 ${test_hostname}                         openbmc
 
 *** Test Cases ***
@@ -141,11 +140,11 @@ Configure Static IPv4 Netmask Via GUI And Verify
     [Template]  Add Static IP Address And Verify
 
     # ip_addresses      subnet_masks             gateway          expected_status
-    ${test_ipv4_addr}   ${lowest_netmask}        ${test_gateway}  Success
-    ${test_ipv4_addr}   ${more_byte_netmask}     ${test_gateway}  Invalid format
-    ${test_ipv4_addr}   ${alpha_netmask}         ${test_gateway}  Invalid format
-    ${test_ipv4_addr}   ${out_of_range_netmask}  ${test_gateway}  Invalid format
-    ${test_ipv4_addr}   ${test_subnet_mask}      ${test_gateway}  Success
+    ${test_ipv4_addr}   ${lowest_netmask}        ${default_gateway}  Success
+    ${test_ipv4_addr}   ${more_byte_netmask}     ${default_gateway}  Invalid format
+    ${test_ipv4_addr}   ${alpha_netmask}         ${default_gateway}  Invalid format
+    ${test_ipv4_addr}   ${out_of_range_netmask}  ${default_gateway}  Invalid format
+    ${test_ipv4_addr}   ${test_subnet_mask}      ${default_gateway}  Success
 
 
 Configure Hostname Via GUI And Verify
