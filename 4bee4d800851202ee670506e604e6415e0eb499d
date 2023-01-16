@@ -65,6 +65,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e6de7d3_8f7e01c0",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-16T08:36:29Z",
+      "side": 1,
+      "message": "The older documentation sounds better to me.\nThe documentation should highlight the bigger operations performed by test \u0026 objective rather than non-operational \u0026 implicit things. I would prefer older name than highlighting error code \u0026 dump here. Successful reset/code-update/power operation will cover implicit things.\nProbably you can make something like this:\nPost BMC reset check if code update and power operations work without any issues.",
+      "parentUuid": "87e82840_346fccf5",
+      "range": {
+        "startLine": 70,
+        "startChar": 21,
+        "endLine": 70,
+        "endChar": 83
+      },
+      "revId": "4bee4d800851202ee670506e604e6415e0eb499d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9499c70a_bd740c94",
