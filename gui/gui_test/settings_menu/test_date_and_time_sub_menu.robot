@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation   Test OpenBMC GUI "Date and time" sub-menu of "Settings".
+Documentation   Test OpenBMC GUI "Date and time" sub-menu of "Settings"
 
 Resource        ../../lib/gui_resource.robot
 
@@ -90,14 +90,37 @@ Verify Display Of Date And Time In GUI Page
     Page Should Contain  ${redfish_date}
     Page Should Contain  ${redfish_time}
 
+
 Verify Profile Setting Button In Date And Time Page
     [Documentation]  Verify navigation to profile setting page after clicking
     ...  on profile setting button in date and time page.
     [Tags]  Verify_Profile_Setting_Button_In_Date_And_Time_Page
 
-    Click Element   ${xpath_Profile_Settings}
+    Click Element   ${xpath_profile_settings}
     Wait Until Page Contains Element  ${xpath_profile_settings_heading}  timeout=10
     Location Should Contain   profile-settings
+
+
+Verify Existence Of Timezone Buttons In Profile Settings Page
+    [Documentation]  Verify default UTC button and browser offset IST button
+    ...  in Profile settings page
+    [Tags]  Verify_Existence_Of_Timezone_Buttons_In_Profile_Settings_Page
+
+    Click Element   ${xpath_profile_settings}
+    Page Should Contain  ${xpath_default_UTC}
+    Page Should Contain  ${xpath_browser_offset}
+
+
+Verify Date And Time Change To IST
+    [Documentation]  Verify date and time change to IST after making
+    ...  changes in Profile setting page
+    [Tags]  Verify_Date_And_Time_Change_To_IST
+
+    Click Element   ${xpath_profile_settings}
+    Click Element   ${xpath_browser_offset}
+    Click Element   ${xpath_profile_save_button}
+    Navigate To Date and Time Page
+    Page Should Contain  ${xpath_ist_text}
 
 
 Verify NTP Server Input Fields In Date And Time Page
