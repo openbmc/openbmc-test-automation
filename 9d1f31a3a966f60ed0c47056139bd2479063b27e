@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "525014fc_aca020c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-01-16T06:23:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7de70abf_c0fb39e3",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 80
+      },
+      "revId": "9d1f31a3a966f60ed0c47056139bd2479063b27e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c514380d_b2dd04b4",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c833f1e_4b73923b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-01-16T06:23:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c514380d_b2dd04b4",
+      "range": {
+        "startLine": 11,
+        "startChar": 54,
+        "endLine": 11,
+        "endChar": 57
+      },
+      "revId": "9d1f31a3a966f60ed0c47056139bd2479063b27e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95f18ee7_5f70212e",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-01-16T04:54:51Z",
       "side": 1,
       "message": "Move this before line 277 so that it need not be created inside the loop in every iteration and also in line 287.",
+      "range": {
+        "startLine": 280,
+        "startChar": 8,
+        "endLine": 280,
+        "endChar": 66
+      },
+      "revId": "9d1f31a3a966f60ed0c47056139bd2479063b27e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c229cb3_339ee63b",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-01-16T06:23:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95f18ee7_5f70212e",
       "range": {
         "startLine": 280,
         "startChar": 8,
