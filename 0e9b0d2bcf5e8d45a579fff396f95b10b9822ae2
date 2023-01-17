@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95a2de2b_1b4b5102",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-17T12:59:38Z",
+      "side": 1,
+      "message": "Add your component and restrict the subject line to 50 chars",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 82
+      },
+      "revId": "0e9b0d2bcf5e8d45a579fff396f95b10b9822ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8727d12_83f2f997",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-17T12:59:38Z",
+      "side": 1,
+      "message": "Keep only one Changes and Tested headlines.\nMention the tags for both the tests which are added.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 51
+      },
+      "revId": "0e9b0d2bcf5e8d45a579fff396f95b10b9822ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43f53ffc_35d59bde",
+        "filename": "gui/data/gui_variables.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-17T12:59:38Z",
+      "side": 1,
+      "message": "use lower case in variable names throughout.",
+      "range": {
+        "startLine": 99,
+        "startChar": 1,
+        "endLine": 104,
+        "endChar": 45
+      },
+      "revId": "0e9b0d2bcf5e8d45a579fff396f95b10b9822ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3caaf7ca_113d5c01",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-17T12:59:38Z",
+      "side": 1,
+      "message": "Add one more new line after this test.",
+      "revId": "0e9b0d2bcf5e8d45a579fff396f95b10b9822ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
