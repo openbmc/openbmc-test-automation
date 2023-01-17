@@ -45,7 +45,7 @@ Verify Canceling Operation On BMC Reboot Operation
     [Tags]  Verify_Canceling_Operation_On_BMC_Reboot_Operation
 
     Click Element  ${xpath_reboot_bmc_button}
-    Click Element  ${xpath_reboot_cancel_button}
+    Click Element At Coordinates  ${xpath_reboot_cancel_button}  0  0
     Wait Until Element Is Not Visible  ${xpath_reboot_cancel_button}  timeout=15
 
 
@@ -75,3 +75,4 @@ Test Setup Execution
     Click Element  ${xpath_operations_menu}
     Click Element  ${xpath_reboot_bmc_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  reboot-bmc
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
