@@ -53,4 +53,4 @@ Suite Setup Execution
     Launch Browser And Login GUI
     Click Element  ${xpath_notice_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  notices
-
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
