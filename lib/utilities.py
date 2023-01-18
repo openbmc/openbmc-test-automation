@@ -11,7 +11,6 @@ import subprocess
 from robot.libraries.BuiltIn import BuiltIn
 from robot.utils import DotDict
 
-
 def random_mac():
     r"""
     Return random mac address in the following format.
@@ -307,3 +306,20 @@ def add_prefix_to_string(string, prefix):
     for item in data_list:
         prefix_string += prefix + item + " "
     return prefix_string.strip()
+
+
+def get_value_from_nested_dict(key, nested_dict):
+    r"""
+    Returns the key value from the nested dictionary.
+
+    key               Key value of the dictionary to look up.
+    nested_dict       Dictionary data.
+    """
+    result = []
+    for k,v in nested_dict.items():        
+        if k == key:
+            result.append(v)
+        elif isinstance(v, dict) and k != key:
+            result += get_value_from_nested_dict(key,v)
+
+    return result
