@@ -125,6 +125,47 @@ Post BMC Reset Perform Image Switched To Backup Multiple Times
     Redfish BMC Dump Should Not Exist
 
 
+Fail To Perform Redfish Firmware Update
+     [Documentation]  Test is to perfrom kernel panic during the ongoing firmware update and ensure
+     ...              firmware update is not successful.
+     [Tags]  Fail_To_Perform_Redfish_Firmware_Update
+
+     ${post_code_update_actions}=  Get Post Boot Action
+
+     Set ApplyTime  policy=OnReset
+
+     ${task_inv_dict}=  Get Task State from File
+
+     ${file_bin_data}=  OperatingSystem.Get Binary File  ${image_file_path}
+
+     Log To Console   Start uploading image to BMC.
+     Upload Image To BMC  ${REDFISH_BASE_URI}UpdateService  timeout=${600}  data=${file_bin_data}
+     Log To Console   Completed image upload to BMC.
+
+     ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc
+
+     ${before_update_activeswimage}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  Links
+     Rprint Vars  before_update_activeswimage
+
+     ${task_inv}=  Check Task With Match TargetUri  /redfish/v1/UpdateService
+
+     Rprint Vars  task_inv
+
+     Kernel Panic BMC Reset Operation
+
+     Run Key  ${post_code_update_actions['BMC image']['OnReset']}
+     Redfish.Login
+
+     ${after_update_activeswimage}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  Links
+     Rprint Vars  after_update_activeswimage
+
+     Should Be Equal As Strings
+     ...  ${before_update_activeswimage['ActiveSoftwareImage']['@odata.id']}
+     ...  ${after_update_activeswimage['ActiveSoftwareImage']['@odata.id']}
+
+     Verify Get ApplyTime  OnReset
+
+
 Verify If The Modified Admin Credential Is Valid Post Image Switched To Backup
     [Documentation]  Verify updated admin credential remain same post switch to back up image.
     [Tags]  Verify_If_The_Modified_Admin_Credential_Is_Valid_Post_Image_Switched_To_Backup
