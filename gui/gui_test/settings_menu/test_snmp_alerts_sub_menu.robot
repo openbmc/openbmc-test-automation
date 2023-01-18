@@ -5,6 +5,7 @@ Documentation   Test OpenBMC GUI "SNMP Alerts" sub-menu of "Settings".
 Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/snmp/resource.robot
 Resource        ../../../lib/snmp/redfish_snmp_utils.robot
+Resource        ../../lib/bmc_network_utils.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
@@ -193,6 +194,16 @@ Configure SNMP Manager Via GUI And Verify SNMP Trap
 
     # Generate informational error.
     ${CMD_INFORMATIONAL_ERROR}  ${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}
+
+
+Configure SNMP Manager With Hostname Via GUI AND Verify
+    [Documentation]  Login GUI SNMP alerts page and add SNMP manager with hostname
+    ...  via GUI and verify.
+    [Tags]  Configure_SNMP_Manager_With_Hostname_Via_GUI_And_Verify
+
+    ${hostname}=  Get BMC Hostname
+    Configure SNMP Manager Via GUI  ${hostname}  ${SNMP_DEFAULT_PORT}
+    Wait Until Page Contains  ${hostname}  timeout=15s
 
 
 *** Keywords ***
