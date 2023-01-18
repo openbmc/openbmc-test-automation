@@ -4,6 +4,7 @@ Documentation  Open power domain keywords.
 Variables      ../data/variables.py
 Resource       ../lib/utils.robot
 Resource       ../lib/connection_client.robot
+Library        utilities.py
 
 *** Variables ***
 ${functional_cpu_count}       ${0}
@@ -401,3 +402,45 @@ Log And Fail
     Rprint Vars  json_sensor_data
     Fail  Runtime generated Dbus sensors does not match
 
+
+Dump Fan Control JSON
+    [Documentation]  Execute fan control on BMC to dump config with 'fanctl dump',
+    ...              which makes it write a /tmp/fan_control_dump.json file.
+
+    ${output}  ${stderr}  ${rc} =  BMC Execute Command  test -f /usr/bin/fanctl
+    ...  print_err=1  ignore_err=1
+    Return From Keyword If   ${rc} == 1  fanctl application doesn't exist.
+
+    # This command will force a fan_control_dump.json file in temp path and
+    # takes few seconds to complete..
+    BMC Execute Command  fanctl dump
+    Sleep  10s
+
+    # Check for the generated file and return the file data as JSON and fails if
+    # it doesn't find file generated.
+    ${cmd}=  Catenate  test -f /tmp/fan_control_dump.json; cat /tmp/fan_control_dump.json
+    ${json_string}  ${stderr}  ${rc} =  BMC Execute Command  ${cmd}
+    ...  print_out=1  print_err=1  ignore_err=1
+
+    Should Be True  ${rc} == 0  msg=No Fan control config JSON file is generated.
+    ${fan_json}=  Evaluate  json.loads('''${json_string}''')  json
+
+    [return]  ${fan_json}
+
+
+Get Fan Attribute Value
+    [Documentation]  Return the specified value of the matched search key in
+    ...              nested dictionary data.
+    [Arguments]  ${key_value}
+
+    # Description of Argument(s):
+    # key_value      User input attribute value in the dictionary.
+
+    ${fan_dict}=  Dump Fan Control JSON
+
+    # Python module:  get_value_from_nested_dict(key,dict)
+    ${value_list}=  utilities.Get Value From Nested Dict  ${key_value}  ${fan_dict}
+
+    Should Not Be Empty  ${value_list}  msg=${key_value} key attribute not found.
+
+    [Return]  ${value_list[0]}
