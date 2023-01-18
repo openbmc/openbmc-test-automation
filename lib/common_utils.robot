@@ -987,7 +987,7 @@ Kernel Panic BMC Reset Operation
     [Documentation]  Create kernel panic to reset BMC.
 
     ${kernel_panic_cmd_file}=  Set Variable  /bin/sh -c "echo c > /proc/sysrq-trigger"
-    ${status}=  Run Keyword And Return Status  BMC Execute Command  ${kernel_panic_cmd_file}  time_out=120
+    ${status}=  Run Keyword And Return Status  BMC Execute Command  ${kernel_panic_cmd_file}  time_out=20
 
     [Return]  ${status}
 
