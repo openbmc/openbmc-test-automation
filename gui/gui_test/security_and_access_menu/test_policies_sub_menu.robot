@@ -184,6 +184,21 @@ Configure SSH And IPMI Settings Via GUI And Verify
     Disabled        Enabled
 
 
+Verify Persistency Of Policy Settings On BMC Reboot Via GUI
+    [Documentation]  Login to GUI Policies page,set SSH and IPMI toggle and
+    ...  verify SSH & IPMI settings after BMC reboot.
+    [Tags]  Verify_Persistency_Of_Policy_Settings_On_BMC_Reboot_Via_GUI
+    [Setup]  Fetch IPMI And SSH Settings
+    [Template]  Set SSH And IPMI State Via GUI
+    [Teardown]  Set SSH And IPMI State Via GUI  ${initial_ssh_setting}  ${initial_ipmi_setting}
+
+    # ssh_state     ipmi_state   persistency_check
+    Enabled         Enabled      True
+    Disabled        Disabled     True
+    Enabled         Disabled     True
+    Disabled        Enabled      True
+
+
 *** Keywords ***
 
 Test Setup Execution
@@ -277,6 +292,9 @@ Set SSH And IPMI State Via GUI
     ...  AND  Click Element  ${xpath_network_ipmi_toggle}
     ...  ELSE IF  '${ipmi_state}' != '${current_ipmi_state}'
     ...  Click Element  ${xpath_network_ipmi_toggle}
+ 
+    Run Keyword If  ${persistency_check} == ${True}
+    ...  Run Keywords  Reboot BMC via GUI  AND  Test Setup Execution
 
     Wait Until Keyword Succeeds  30 sec  15 sec  Verify Policy State  ${ssh_state}  ${ipmi_state}
 
