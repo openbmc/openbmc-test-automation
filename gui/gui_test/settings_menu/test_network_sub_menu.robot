@@ -15,18 +15,14 @@ ${xpath_network_heading}                 //h1[text()="Network"]
 ${xpath_interface_settings}              //h2[text()="Interface settings"]
 ${xpath_network_settings}                //h2[text()="Network settings"]
 ${xpath_static_ipv4}                     //h2[text()="IPv4"]
-${xpath_static_dns}                      //h2[text()="Static DNS"]
 ${xpath_domain_name_toggle}              //*[@data-test-id="networkSettings-switch-useDomainName"]
-${xpath_dns_servers_toggle}              //*[@data-test-id="networkSettings-switch-useDns"]
 ${xpath_ntp_servers_toggle}              //*[@data-test-id="networkSettings-switch-useNtp"]
 ${xpath_add_static_ipv4_address_button}  //button[contains(text(),"Add static IPv4 address")]
-${xpath_add_dns_ip_address_button}       //button[contains(text(),"Add IP address")]
 ${xpath_hostname}                        //*[@title="Edit hostname"]
 ${xpath_hostname_input}                  //*[@id="hostname"]
 ${xpath_input_ip_address}                //*[@id="ipAddress"]
 ${xpath_input_gateway}                   //*[@id="gateway"]
 ${xpath_input_subnetmask}                //*[@id="subnetMask"]
-${xpath_input_static_dns}                //*[@id="staticDns"]
 ${xpath_cancel_button}                   //button[contains(text(),'Cancel')]
 ${xpath_delete_dns_server}               //*[@title="Delete DNS address"]
 ${xpath_save_button}                     //button[contains(text(),'Save')]
@@ -203,34 +199,6 @@ Suite Setup Execution
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
     ${default_gateway}=  Get BMC Default Gateway
     Set Suite Variable  ${default_gateway}
-
-
-Add DNS Servers And Verify
-    [Documentation]  Login to GUI Network page,add DNS server on BMC
-    ...  and verify it via BMC CLI.
-    [Arguments]  ${dns_server}   ${expected_status}=Valid format
-
-    # Description of the argument(s):
-    # dns_server           A list of static name server IPs to be
-    #                      configured on the BMC.
-    # expected_status      Expected status while adding DNS server address
-    # ...                  (e.g. Invalid format / Field required).
-
-    Wait Until Page Contains Element  ${xpath_add_dns_ip_address_button}  timeout=15sec
-
-    Click Button  ${xpath_add_dns_ip_address_button}
-    Input Text  ${xpath_input_static_dns}  ${dns_server}
-    Click Button  ${xpath_add_button}
-    Run keyword if  '${expected_status}' != 'Valid format'
-    ...  Run keywords  Page Should Contain  ${expected_status}  AND  Return From Keyword
-
-    Wait Until Page Contains Element  ${xpath_add_dns_ip_address_button}  timeout=10sec
-    Wait Until Page Contains  ${dns_server}  timeout=40sec
-
-    # Check if newly added DNS server is configured on BMC.
-    ${cli_name_servers}=  CLI Get Nameservers
-    ${cmd_status}=  Run Keyword And Return Status
-    ...  List Should Contain Sub List  ${cli_name_servers}  ${dns_server}
 
 
 Delete DNS Servers And Verify
