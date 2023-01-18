@@ -64,9 +64,9 @@ Redfish Code Update Same Firmware Multiple Times
     ${temp_update_loop_count}=  Evaluate  ${LOOP_COUNT} + 1
 
     FOR  ${count}  IN RANGE  1  ${temp_update_loop_count}
-       Print Timen  **************************************
+       Print Timen  ***************************************
        Print Timen  * The Current Loop Count is ${count} of ${LOOP_COUNT} *
-       Print Timen  **************************************
+       Print Timen  ***************************************
 
        Redfish Update Firmware  apply_time=OnReset
     END
@@ -124,6 +124,47 @@ Post BMC Reset Perform Image Switched To Backup Multiple Times
 
     Event Log Should Not Exist
     Redfish BMC Dump Should Not Exist
+
+
+Verify Code Update Fails When Kernel Panic Occur
+     [Documentation]  Ensure firmware update is un-successful when kernel panic
+     ...              occur during ongoing firmware update.
+     [Tags]  Verify_Code_Update_Fails_When_Kernel_Panic_Occur
+
+     ${before_update_activeswimage}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  Links
+     Rprint Vars  before_update_activeswimage
+
+     Set ApplyTime  policy=OnReset
+
+     ${task_inv_dict}=  Get Task State from File
+
+     ${file_bin_data}=  OperatingSystem.Get Binary File  ${image_file_path}
+
+     Log To Console   Start uploading image to BMC.
+     Upload Image To BMC  ${REDFISH_BASE_URI}UpdateService  timeout=${600}  data=${file_bin_data}
+     Log To Console   Completed image upload to BMC.
+
+     Sleep  5
+
+     ${task_inv}=  Check Task With Match TargetUri  /redfish/v1/UpdateService
+     Rprint Vars  task_inv
+
+     Run Keyword  Kernel Panic BMC Reset Operation
+
+     Is BMC Unpingable
+
+     Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Standby
+
+     Redfish.Login
+
+     ${after_update_activeswimage}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  Links
+     Rprint Vars  after_update_activeswimage
+
+     Should Be Equal As Strings
+     ...  ${before_update_activeswimage['ActiveSoftwareImage']['@odata.id']}
+     ...  ${after_update_activeswimage['ActiveSoftwareImage']['@odata.id']}
+
+     Verify Get ApplyTime  OnReset
 
 
 Verify If The Modified Admin Credential Is Valid Post Image Switched To Backup
@@ -246,3 +287,5 @@ Redfish Multiple Upload Image And Check Progress State
     Run Key  ${post_code_update_actions['BMC image']['${apply_time}']}
     Redfish.Login
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
+
+
