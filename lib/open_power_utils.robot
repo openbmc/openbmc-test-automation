@@ -401,3 +401,19 @@ Log And Fail
     Rprint Vars  json_sensor_data
     Fail  Runtime generated Dbus sensors does not match
 
+
+Dump Fan Control JSON
+    [Documentation]  Get fan control to dump config with 'fanctl dump',
+    ...              which makes it write a /tmp/fan_control_dump.json file.
+
+    BMC Execute Command  fanctl dump
+
+    ${cmd}=  Catenate  test -f /tmp/fan_control_dump.json; cat /tmp/fan_control_dump.json
+    ${json_string}  ${stderr}  ${rc} =  BMC Execute Command  ${cmd}
+    ...  print_out=1  print_err=1
+
+    Should Be True  ${rc} == 0  msg=No Fan control config JSON generated.
+
+    ${fan_json}=  Evaluate  json.loads('''${json_string}''')  json
+
+    [return]  ${fan_json}
