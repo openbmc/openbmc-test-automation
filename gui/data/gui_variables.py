@@ -71,6 +71,10 @@ class gui_variables:
     xpath_power_restore_policy_sub_menu = (
         "//*[@data-test-id='nav-item-power-restore-policy']"
     )
+    xpath_static_dns = "//h2[text()='Static DNS']"
+    xpath_dns_servers_toggle = "//*[@data-test-id='networkSettings-switch-useDns']"
+    xpath_add_dns_ip_address_button = "//button[contains(text(),'Add IP address')]"
+    xpath_input_static_dns = "//*[@id='staticDns']"
 
     # Security and access menu
     xpath_secuity_and_accesss_menu = (
