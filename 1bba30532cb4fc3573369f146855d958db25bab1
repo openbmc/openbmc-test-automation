@@ -478,6 +478,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f2f6245_4759ba33",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-01-18T06:42:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f7b507e7_fec67286",
+      "range": {
+        "startLine": 94,
+        "startChar": 8,
+        "endLine": 94,
+        "endChar": 13
+      },
+      "revId": "1bba30532cb4fc3573369f146855d958db25bab1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2ffe2da_f150c6d2",
@@ -515,6 +539,30 @@
       "side": 1,
       "message": "This names derived from old TC.",
       "parentUuid": "b2ffe2da_f150c6d2",
+      "range": {
+        "startLine": 99,
+        "startChar": 43,
+        "endLine": 99,
+        "endChar": 67
+      },
+      "revId": "1bba30532cb4fc3573369f146855d958db25bab1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17ecd2ba_df49bb7d",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-01-18T06:42:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8dd069f4_9cb8f032",
       "range": {
         "startLine": 99,
         "startChar": 43,
