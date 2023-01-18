@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbd5893d_ee4f579e",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-18T14:41:30Z",
+      "side": 1,
+      "message": "Can you optimise the name of TC.",
+      "revId": "f0e4822a6b951650ffcedbaa8317c037ca8c195e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1afe6f78_c477cf2b",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-18T14:41:30Z",
+      "side": 1,
+      "message": "There should be space in between Teardown and Parameters.",
+      "revId": "f0e4822a6b951650ffcedbaa8317c037ca8c195e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3270e8e1_85a4a0ca",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-18T14:41:30Z",
+      "side": 1,
+      "message": "Can you add one extra line as space.",
+      "revId": "f0e4822a6b951650ffcedbaa8317c037ca8c195e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
