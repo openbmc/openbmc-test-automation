@@ -153,3 +153,31 @@ Reboot BMC via GUI
     Wait Until Keyword Succeeds  30 sec  10 sec  Click Button  ${xpath_confirm_bmc_reboot}
     Wait Until Keyword Succeeds  2 min  10 sec  Is BMC Unpingable
     Wait For Host To Ping  ${OPENBMC_HOST}  1 min
+
+
+Add DNS Servers And Verify
+    [Documentation]  Login to GUI Network page,add DNS server on BMC
+    ...  and verify it via BMC CLI.
+    [Arguments]  ${dns_server}   ${expected_status}=Valid format
+
+    # Description of the argument(s):
+    # dns_server           A list of static name server IPs to be
+    #                      configured on the BMC.
+    # expected_status      Expected status while adding DNS server address
+    #                      (e.g. Invalid format / Field required).
+
+    Wait Until Page Contains Element  ${xpath_add_dns_ip_address_button}  timeout=15sec
+
+    Click Button  ${xpath_add_dns_ip_address_button}
+    Input Text  ${xpath_input_static_dns}  ${dns_server}
+    Click Button  ${xpath_add_button}
+    Run keyword if  '${expected_status}' != 'Valid format'
+    ...  Run keywords  Page Should Contain  ${expected_status}  AND  Return From Keyword
+
+    Wait Until Page Contains Element  ${xpath_add_dns_ip_address_button}  timeout=10sec
+    Wait Until Page Contains  ${dns_server}  timeout=40sec
+
+    # Check if newly added DNS server is configured on BMC.
+    ${cli_name_servers}=  CLI Get Nameservers
+    ${cmd_status}=  Run Keyword And Return Status
+    ...  List Should Contain Sub List  ${cli_name_servers}  ${dns_server}
