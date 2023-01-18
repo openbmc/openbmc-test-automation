@@ -5,6 +5,7 @@ Documentation   Test OpenBMC GUI "SNMP Alerts" sub-menu of "Settings".
 Resource        ../../../lib/snmp/redfish_snmp_utils.robot
 Resource        ../../../lib/snmp/resource.robot
 Resource        ../../lib/gui_resource.robot
+Resource        ../../lib/bmc_network_utils.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
@@ -28,6 +29,7 @@ ${snmp_page_heading}                              SNMP alerts
 ${invalid_port_error}                             Value must be between 0 – 65535
 ${invalid_destination_error}                      Error in adding SNMP alert destination
 ${invalid_ip_error}                               Field required
+${dns_server}                                     10.10.10.10
 
 
 *** Test Cases ***
@@ -196,6 +198,21 @@ Configure SNMP Manager Via GUI And Verify SNMP Trap
     ${CMD_INFORMATIONAL_ERROR}  ${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}
 
 
+Configure SNMP Manager By Its Hostname Via GUI AND Verify
+    [Documentation]  Login GUI SNMP alerts page and add SNMP manager with its hostname
+    ...  via GUI and verify.
+    [Tags]  Configure_SNMP_Manager_By_Its_Hostname_Via_GUI_And_Verify
+
+    Set DNS Server IP
+
+    # Navigate to SNMP page and configure SNMP manager.
+    Click Element  ${xpath_snmp_alerts_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  snmp-alerts
+
+    Configure SNMP Manager Via GUI  ${SNMP_HOSTNAME}  ${SNMP_DEFAULT_PORT}
+    Wait Until Page Contains  ${HOSTNAME}  timeout=15s
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -322,3 +339,12 @@ Close Add SNMP Alerts Destination Window
     ...  Click Element  ${xpath_cancel_button}
     ...  ELSE IF  '${expected_error}' == '${invalid_ip_error}'
     ...  Click Element  ${xpath_cancel_button}
+
+
+Set DNS Server IP
+    [Documentation]  Add static DNS IP.
+    
+    Click Element  ${xpath_network_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network
+
+    Add DNS Servers And Verify  ${dns_server}
