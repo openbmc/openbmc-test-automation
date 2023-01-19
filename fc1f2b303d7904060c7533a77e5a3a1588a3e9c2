@@ -16,6 +16,24 @@
       "message": "Suggestion : Test GUI SSH And IPMI Persistency Setting Post Reboot",
       "revId": "fc1f2b303d7904060c7533a77e5a3a1588a3e9c2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72009957_b5ddc7f9",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-01-19T06:14:52Z",
+      "side": 1,
+      "message": "rather than this below TC name will be more suitable \u0026 easy to mark RQM.\n\nConfigure SSH And IPMI Settings Via GUI And Verify Its Persistency",
+      "parentUuid": "5cd1b0d2_c9551c41",
+      "revId": "fc1f2b303d7904060c7533a77e5a3a1588a3e9c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
