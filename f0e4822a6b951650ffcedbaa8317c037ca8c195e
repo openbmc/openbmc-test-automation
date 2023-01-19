@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e3fc470_f704869a",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-01-19T05:43:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbd5893d_ee4f579e",
+      "revId": "f0e4822a6b951650ffcedbaa8317c037ca8c195e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1afe6f78_c477cf2b",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "835def03_19c48d39",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-01-19T05:43:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1afe6f78_c477cf2b",
+      "revId": "f0e4822a6b951650ffcedbaa8317c037ca8c195e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3270e8e1_85a4a0ca",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-01-18T14:41:30Z",
       "side": 1,
       "message": "Can you add one extra line as space.",
+      "revId": "f0e4822a6b951650ffcedbaa8317c037ca8c195e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d63c5aa_dced6abb",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-01-19T05:43:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3270e8e1_85a4a0ca",
       "revId": "f0e4822a6b951650ffcedbaa8317c037ca8c195e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
