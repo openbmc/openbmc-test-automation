@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15a8e42b_3bbad880",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-01-19T16:47:30Z",
+      "side": 1,
+      "message": "why u put log statement here ? It will just log the redfish url in the loop.",
+      "range": {
+        "startLine": 263,
+        "startChar": 8,
+        "endLine": 263,
+        "endChar": 39
+      },
+      "revId": "3778d76ee94939178b1a2ef18e25d6186977d383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad65e6c3_e1eda0a9",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-01-19T16:47:30Z",
+      "side": 1,
+      "message": "remove space",
+      "range": {
+        "startLine": 267,
+        "startChar": 53,
+        "endLine": 267,
+        "endChar": 54
+      },
+      "revId": "3778d76ee94939178b1a2ef18e25d6186977d383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dd6a383_7b8fb206",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-01-19T16:47:30Z",
+      "side": 1,
+      "message": "exceeding max char, please check",
+      "range": {
+        "startLine": 273,
+        "startChar": 17,
+        "endLine": 273,
+        "endChar": 108
+      },
+      "revId": "3778d76ee94939178b1a2ef18e25d6186977d383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eda76eeb_318cd89c",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-01-19T16:47:30Z",
+      "side": 1,
+      "message": "check max char length",
+      "range": {
+        "startLine": 277,
+        "startChar": 21,
+        "endLine": 277,
+        "endChar": 128
+      },
+      "revId": "3778d76ee94939178b1a2ef18e25d6186977d383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
