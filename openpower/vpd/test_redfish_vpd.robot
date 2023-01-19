@@ -139,6 +139,19 @@ Verify System VPD Data Via Redfish
     System          SerialNumber
 
 
+Verify Power Supply VPD Data Via Redfish
+    [Documentation]  Verify power supply VPD details via Redfish output.
+    [Tags]  Verify_Power_Supply_VPD_Data_Via_Redfish
+    [Template]  Verify Redfish VPD Data
+
+    # Component     Field
+    Power Supply    Model
+    Power Supply    PartNumber
+    Power Supply    SerialNumber
+    Power Supply    SparePartNumber
+    Power Supply    Location
+
+
 *** Keywords ***
 
 Verify Redfish VPD Data
@@ -169,9 +182,14 @@ Verify Redfish VPD Data
     ...    Set Variable  /redfish/v1/Chassis/chassis/Assembly  NVMe Backplane
     ...  ELSE IF  '${component}' == 'System'
     ...    Set Variable  /redfish/v1/Systems/system  System
+    ...  ELSE IF  '${component}' == 'Power Supply'
+    ...    Set Variable  /redfish/v1/Chassis/chassis/PowerSubsystem/PowerSupplies  Powersupply
 
     ${resp}=  Run Keyword If  '${redfish_component_uri}' == '/redfish/v1/Chassis/chassis/Assembly'
     ...  Get Assembly Component VPD  ${redfish_component_name}
+    ...  ELSE IF  '${redfish_component_uri}' == '/redfish/v1/Chassis/chassis/PowerSubsystem/PowerSupplies'
+    ...  Run Keywords  Get All VPD Data  ${redfish_component_uri}  ${field}  AND
+    ...  Return From Keyword
     ...  ELSE  Redfish.Get Properties  ${redfish_component_uri}
 
     ${vpd_field}=  Set Variable If
@@ -220,3 +238,42 @@ Get Assembly Component VPD
         Exit For Loop IF  "${component_name}" == "${assembly_component["Name"]}"
     END
     [Return]  ${output}
+
+
+Get All VPD Data
+    [Documentation]  Verify all Redfish VPD data of given component.
+    [Arguments]  ${redfish_component_uri}  ${field}
+
+    # Description of arguments:
+    # component       VPD component (TPM Card, Power Supply).
+    # field           VPD field (e.g. Model, PartNumber etc.).
+
+
+    ${redfish_uri_list}=  Get Member List
+    ...  ${redfish_component_uri}
+
+    # Example output:
+    # {'@odata.id': '/redfish/v1/Chassis/chassis/PowerSubsystem/PowerSupplies/powersupply0'}
+    # {'@odata.id': '/redfish/v1/Chassis/chassis/PowerSubsystem/PowerSupplies/powersupply1'}
+
+    ${vpd_field}=  Set Variable If
+    ...  '${field}' == 'Model'  CC
+    ...  '${field}' == 'PartNumber'  PN
+    ...  '${field}' == 'SerialNumber'  SN
+    ...  '${field}' == 'SparePartNumber'  FN
+    ...  '${field}' == 'Location'  LocationCode
+
+    FOR  ${uri}  IN  @{redfish_uri_list}
+        ${resp}=  Redfish.Get Properties  ${uri}
+        ${name}=  Fetch From Right  ${uri}  /
+        ${vpd_component}=  Set Variable  /system/chassis/motherboard/${name}
+        ${vpd_records}=  Vpdtool  -o -O ${vpd_component}
+ 
+        # Check whether the vpd details from redfish and vpdtool are the same.
+        Run Keyword if  '${field}' == 'Location'
+        ...    Should Be Equal As Strings  ${resp["Location"]["PartLocation"]["ServiceLabel"]}
+        ...    ${vpd_records['${vpd_component}']['${vpd_field}']}
+        ...  ELSE
+        ...    Should Be Equal As Strings  ${resp["${field}"]}
+        ...    ${vpd_records['${vpd_component}']['${vpd_field}']}
+    END
