@@ -139,6 +139,19 @@ Verify System VPD Data Via Redfish
     System          SerialNumber
 
 
+Verify Power Supply VPD Data Via Redfish
+    [Documentation]  Verify power supply VPD details via Redfish output.
+    [Tags]  Verify_Power_Supply_VPD_Data_Via_Redfish
+    [Template]  Verify Power Supply VPD Data
+
+    # Field
+    Model
+    PartNumber
+    SerialNumber
+    SparePartNumber
+    Location
+
+
 *** Keywords ***
 
 Verify Redfish VPD Data
@@ -220,3 +233,47 @@ Get Assembly Component VPD
         Exit For Loop IF  "${component_name}" == "${assembly_component["Name"]}"
     END
     [Return]  ${output}
+
+
+Verify Power Supply VPD Data
+    [Documentation]  Verify the powersupply vpd data via redfish.
+    [Arguments]  ${field}
+
+    # description of arguments:
+    # field           vpd field (e.g. model, partnumber etc.).
+
+    ${total_redfish_uri}=  Redfish.Get Attribute
+    ...  ${REDFISH_CHASSIS_URI}/${CHASSIS_ID}/PowerSubsystem/PowerSupplies  Members
+
+    # Example output:
+    # {'@odata.id': '/redfish/v1/Chassis/chassis/PowerSubsystem/PowerSupplies/powersupply0'}
+    # {'@odata.id': '/redfish/v1/Chassis/chassis/PowerSubsystem/PowerSupplies/powersupply1'}
+    # {'@odata.id': '/redfish/v1/Chassis/chassis/PowerSubsystem/PowerSupplies/powersupply2'}
+
+    ${count}=  Get Length  ${total_redfish_uri}
+
+    ${vpd_field}=  Set Variable If
+    ...  '${field}' == 'Model'  CC
+    ...  '${field}' == 'PartNumber'  PN
+    ...  '${field}' == 'SerialNumber'  SN
+    ...  '${field}' == 'SparePartNumber'  FN
+    ...  '${field}' == 'Location'  LocationCode
+
+    FOR  ${i}  IN RANGE  ${count}
+        Log  ${total_redfish_uri}[${i}]
+        ${dict_values}=  Get Dictionary Values  ${total_redfish_uri}[${i}]
+        ${list_to_string}=  Evaluate  " ".join(${dict_values})
+        ${current_power_supply}=  Set Variable  ${list_to_string}[-12:]
+        # Getting power supply VPD data from vpdtool. 
+        ${vpd_component}=  Set Variable  /system/chassis/motherboard/${current_power_supply}
+        ${vpd_records}=  Vpdtool  -o -O ${vpd_component}
+            FOR  ${uri}  IN  ${list_to_string}
+                ${redfish_resp}=  Redfish.Get Properties  ${list_to_string}
+                Run Keyword if  '${field}' == 'Location'
+                ...  Should Be Equal As Strings  ${redfish_resp["Location"]["PartLocation"]["ServiceLabel"]}
+                ...  ${vpd_records['${vpd_component}']['${vpd_field}']}
+                ...  ELSE
+                # Check whether the vpd details from redfish and vpdtool are the same.
+                ...  Should Be Equal As Strings  ${redfish_resp["${field}"]}  ${vpd_records['${vpd_component}']['${vpd_field}']}
+            END
+    END
