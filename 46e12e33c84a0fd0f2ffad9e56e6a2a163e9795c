@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a989466_383c4d9a",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-20T07:02:44Z",
+      "side": 1,
+      "message": "Configure SNMP Manager With BMC Hostname Via GUI AND Verify",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 199,
+        "endChar": 57
+      },
+      "revId": "46e12e33c84a0fd0f2ffad9e56e6a2a163e9795c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83d78c75_9e7a1067",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-20T07:02:44Z",
+      "side": 1,
+      "message": "Ideally BMC should not allow setting SNMP manager to BMC IP/hostname because your SNMP manager would not have the same hostname/IP. Isn\u0027t it?",
+      "range": {
+        "startLine": 199,
+        "startChar": 30,
+        "endLine": 199,
+        "endChar": 38
+      },
+      "revId": "46e12e33c84a0fd0f2ffad9e56e6a2a163e9795c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1a36462_d9a3f414",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-20T07:02:44Z",
+      "side": 1,
+      "message": "BMC hostname",
+      "range": {
+        "startLine": 200,
+        "startChar": 74,
+        "endLine": 200,
+        "endChar": 77
+      },
+      "revId": "46e12e33c84a0fd0f2ffad9e56e6a2a163e9795c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
