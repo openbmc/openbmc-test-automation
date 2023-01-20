@@ -210,7 +210,7 @@ Get Inventory URIs
     ...  [('ProcessorType', 'Accelerator')]  regex=1
 
     ${power_supplies}=  Redfish.Get Attribute
-    ...  ${REDFISH_CHASSIS_POWER_URI}  PowerSupplies
+    ...  ${REDFISH_CHASSIS_URI}${CHASSIS_ID}/Power  PowerSupplies
 
     [Return]  ${cpu_info}  ${gpu_info}  ${power_supplies}
 
