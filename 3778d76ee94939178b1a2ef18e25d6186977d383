@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f7dce493_3aefaeb4",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-20T06:41:19Z",
+      "side": 1,
+      "message": "As discussed, please have a have the flow something like this so that all other components which has multiple uri can be tested.\n\nVerify Power Supply VPD Data Via Redfish\n    [Documentation]  Verify power supply VPD details via Redfish output.\n    [Tags]  Verify_Power_Supply_VPD_Data_Via_Redfish\n    [Template]  Verify All Redfish VPD Data\n\n    # Component       Field\n    Power Supply      Model\n    Power Supply      PartNumber\n    Power Supply      SerialNumber\n    Power Supply      SparePartNumber\n    Power Supply      Location\n    \n    \nVerify All Redfish VPD Data\n    [Documentation]  Verify all Redfish VPD data of given component.\n    [Arguments]  ${component}  ${field}\n    \n    # Description of arguments:\n    # component       VPD component (TPM Card, Power Supply).\n    # field           VPD field (e.g. Model, PartNumber etc.).\n\n    ${redfish_component_uri}  \u003d  Run Keyword If\n    ...  \u0027${component}\u0027 \u003d\u003d \u0027Power Supply\u0027  Set Variable  /redfish/v1/Chassis/chassis/PowerSubsystem/PowerSupplies\n    ...  ELSE IF  \u0027${component}\u0027 \u003d\u003d \u0027FAN\u0027\n    ...    Set Variable  /redfish/v1/Chassis/fan\n    \n    ${total_redfish_uri}\u003d  Redfish.Get Attribute\n    ...  ${redfish_component_uri}  Members\n\n    FOR  ${uri}  IN RANGE  ${total_redfish_uri}\n        Verify VPD Data For Single Redfish URI  ${uri}  ${field}\n \n \n Verify VPD Data For Single Redfish URI\n    [Documentation]  Verify VPD data for single URI.\n    [Arguments]  ${component_uri}  ${field}\n\n    # Description of arguments:\n    # component_uri   VPD component uri (e.g. /system/chassis/motherboard/vdd_vrm1).\n    # field           VPD field (e.g. Model, PartNumber etc.).",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 12
+      },
+      "revId": "3778d76ee94939178b1a2ef18e25d6186977d383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15a8e42b_3bbad880",
         "filename": "openpower/vpd/test_redfish_vpd.robot",
         "patchSetId": 1
