@@ -10,7 +10,7 @@ ${SNMP_MGR2_IP}       10.6.6.7
 ${SNMP_MGR3_IP}       10.6.6.8
 ${out_of_range_ip}    10.6.6.256
 ${alpha_ip}           xx.xx.xx.xx
-${less_octet_ip}      10.5.5
+${less_octet_ip}      10.
 ${negative_ip}        -10.6.6.6
 ${empty_ip}           ${EMPTY}
 
