@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "528e1198_057ff5a5",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-01-20T12:39:58Z",
+      "side": 1,
+      "message": "you can name like \n\"Verify and Perform Redfish Firmware Update On Reset\"",
+      "parentUuid": "121906ca_1b26b7df",
+      "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9793d6b2_67bcc3bb",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 1
@@ -48,6 +66,23 @@
       "writtenOn": "2023-01-20T11:03:26Z",
       "side": 1,
       "message": "tweak keyword Redfish Update Firmware and use it",
+      "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7083ff75_5eba5e8c",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-01-20T12:39:58Z",
+      "side": 1,
+      "message": "you can add a comment making it easier to understand.",
       "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
