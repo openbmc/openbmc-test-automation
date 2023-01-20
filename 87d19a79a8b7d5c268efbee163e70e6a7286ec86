@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0143380_93d8cbf2",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-20T10:36:23Z",
+      "side": 1,
+      "message": "whats the change here in earlier keyword \u0026 here?",
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e7ad69a_dff4e6cb",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-20T10:36:23Z",
+      "side": 1,
+      "message": "make it pel_record in pel_records or pel_id in pel_ids",
+      "range": {
+        "startLine": 383,
+        "startChar": 12,
+        "endLine": 383,
+        "endChar": 18
+      },
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c52b8f76_9bb71f5a",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-20T10:36:23Z",
+      "side": 1,
+      "message": "whats the objective here \u0026 use case?",
+      "range": {
+        "startLine": 369,
+        "startChar": 0,
+        "endLine": 390,
+        "endChar": 60
+      },
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
