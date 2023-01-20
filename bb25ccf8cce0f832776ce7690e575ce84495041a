@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e135fff_fef2910c",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-20T20:56:14Z",
+      "side": 1,
+      "message": "I will get back.",
+      "parentUuid": "528e1198_057ff5a5",
+      "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9793d6b2_67bcc3bb",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 1
@@ -49,6 +67,24 @@
       "writtenOn": "2023-01-20T11:03:26Z",
       "side": 1,
       "message": "it should come as a statement",
+      "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20080ee3_a6cc2082",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-20T20:56:14Z",
+      "side": 1,
+      "message": "Suggestion : Fail to perform code update.\n\nLet me know your view.",
+      "parentUuid": "9793d6b2_67bcc3bb",
       "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -72,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32059ef1_c2e07d41",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-20T20:56:14Z",
+      "side": 1,
+      "message": "I see your comment on line 133 , Are you asking me to change test case name or this variable \"post_code_update_actions\".",
+      "parentUuid": "37ffbdd1_09bcbf37",
+      "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7083ff75_5eba5e8c",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 1
@@ -83,6 +137,24 @@
       "writtenOn": "2023-01-20T12:39:58Z",
       "side": 1,
       "message": "you can add a comment making it easier to understand.",
+      "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3599db7e_e2d90549",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-20T20:56:14Z",
+      "side": 1,
+      "message": "you want me to add comment about what values are getting compared ?",
+      "parentUuid": "7083ff75_5eba5e8c",
       "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
