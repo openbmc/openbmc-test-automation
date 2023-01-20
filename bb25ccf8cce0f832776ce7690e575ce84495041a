@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "121906ca_1b26b7df",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-20T11:03:26Z",
+      "side": 1,
+      "message": "whats the test cases??\ntest case to have what you are performing and verification",
+      "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9793d6b2_67bcc3bb",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-20T11:03:26Z",
+      "side": 1,
+      "message": "it should come as a statement",
+      "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37ffbdd1_09bcbf37",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-20T11:03:26Z",
+      "side": 1,
+      "message": "tweak keyword Redfish Update Firmware and use it",
+      "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
