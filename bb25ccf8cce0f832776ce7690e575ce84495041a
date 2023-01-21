@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8900053b_f3a6657c",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-21T06:21:01Z",
+      "side": 1,
+      "message": "Suggestion : \n\n1. Perform Kernel Panic During Ongoing Redfish Firmware Update\n2. Ongoing Redfish Firmware Update Fails When Kernel Panic Occur\n\nLet me know your view on above test case name and can you suggest test case name.",
+      "parentUuid": "7e135fff_fef2910c",
+      "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9793d6b2_67bcc3bb",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 1
@@ -85,6 +103,24 @@
       "side": 1,
       "message": "Suggestion : Fail to perform code update.\n\nLet me know your view.",
       "parentUuid": "9793d6b2_67bcc3bb",
+      "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b92161a_64faf792",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-21T06:21:01Z",
+      "side": 1,
+      "message": "Suggestion : \n\n1. Fail to perform firmware update when kernel panic occur during ongoing firmware update.\n\n\n2. Ensure firmware update is un-successful when kernel panic occur during ongoing firmware update.\n\n\nLet me know your view on above Documentation and can you suggest.",
+      "parentUuid": "20080ee3_a6cc2082",
       "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
