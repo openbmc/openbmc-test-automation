@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "93c615fa_7ee5fa1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-23T12:11:37Z",
+      "side": 1,
+      "message": "Change the commit msg as per the standard format",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 42
+      },
+      "revId": "e782a1a0bf4557345ec249ce15f5135003293dc8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2e4fbeb3_809235cb",
@@ -43,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "93a41724_e9dcf499",
+        "filename": "gui/data/gui_variables.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-23T12:11:37Z",
+      "side": 1,
+      "message": "Why do we need two variables for the same thing?",
+      "parentUuid": "27f0516e_081fa5c9",
+      "range": {
+        "startLine": 99,
+        "startChar": 4,
+        "endLine": 99,
+        "endChar": 32
+      },
+      "revId": "e782a1a0bf4557345ec249ce15f5135003293dc8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c01a8cdb_ae1c7f68",
         "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
         "patchSetId": 4
@@ -54,6 +101,24 @@
       "writtenOn": "2023-01-23T10:58:51Z",
       "side": 1,
       "message": "If you are generalizing it, then do not mention IST in Documentation.",
+      "revId": "e782a1a0bf4557345ec249ce15f5135003293dc8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3339e949_d5f3c309",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-23T12:11:37Z",
+      "side": 1,
+      "message": "Agree",
+      "parentUuid": "c01a8cdb_ae1c7f68",
       "revId": "e782a1a0bf4557345ec249ce15f5135003293dc8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
