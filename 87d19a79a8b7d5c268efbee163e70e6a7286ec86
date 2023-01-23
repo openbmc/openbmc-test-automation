@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c4e27dbe_81e18bdd",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-23T08:24:56Z",
+      "side": 1,
+      "message": "For user I mean one who uses it or tester: what is enhancement or change in behavior?",
+      "parentUuid": "d4282402_a24bf08a",
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e7ad69a_dff4e6cb",
         "filename": "lib/pel_utils.py",
         "patchSetId": 32
@@ -169,6 +187,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "92535457_de36669a",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-23T08:24:56Z",
+      "side": 1,
+      "message": "when u r using \u0027in\u0027, it indicates same object or data types.\n\"record in records\" \"file in files\" or \"id in ids\" or \"name in names\" makes sense.",
+      "parentUuid": "92389145_3ea6fbe6",
+      "range": {
+        "startLine": 383,
+        "startChar": 12,
+        "endLine": 383,
+        "endChar": 18
+      },
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c52b8f76_9bb71f5a",
         "filename": "lib/pel_utils.py",
         "patchSetId": 32
@@ -252,6 +294,30 @@
       "side": 1,
       "message": "It not only grab the data but also pack the data. which I have explained in python function. You will get more information once you run the code.",
       "parentUuid": "6c25df8b_faaca9ea",
+      "range": {
+        "startLine": 369,
+        "startChar": 0,
+        "endLine": 390,
+        "endChar": 60
+      },
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5164b98a_1d72ae36",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-23T08:24:56Z",
+      "side": 1,
+      "message": "you are packing already existing data, why can\u0027t we use that data directly?",
+      "parentUuid": "38d82356_573bcd50",
       "range": {
         "startLine": 369,
         "startChar": 0,
