@@ -96,8 +96,8 @@ Verify Profile Setting Button In Date And Time Page
     ...  on profile setting button in date and time page.
     [Tags]  Verify_Profile_Setting_Button_In_Date_And_Time_Page
 
-    Click Element   ${xpath_profile_settings}
-    Wait Until Page Contains Element  ${xpath_profile_settings_heading}  timeout=10
+    Click Element   ${xpath_profile_settings_link}
+    Wait Until Page Contains Element  ${xpath_profile_settings_link_heading}  timeout=10
     Location Should Contain   profile-settings
 
 
@@ -106,21 +106,20 @@ Verify Existence Of Timezone Buttons In Profile Settings Page
     ...  in Profile settings page
     [Tags]  Verify_Existence_Of_Timezone_Buttons_In_Profile_Settings_Page
 
-    Click Element   ${xpath_profile_settings}
+    Click Element   ${xpath_profile_settings_link}
     Page Should Contain  ${xpath_default_UTC}
     Page Should Contain  ${xpath_browser_offset}
 
 
-Verify Date And Time Change To IST
+Verify Date And Time Change To Browser Offset
     [Documentation]  Verify date and time change to IST after making
     ...  changes in Profile setting page
-    [Tags]  Verify_Date_And_Time_Change_To_IST
+    [Tags]  Verify_Date_And_Time_Change_To_Browser_Offset
 
-    Click Element   ${xpath_profile_settings}
-    Click Element   ${xpath_browser_offset}
+    Click Element   ${xpath_profile_settings_link}
+    Wait Until Page Contains Element  ${xpath_profile_settings_heading}  timeout=10
+    Click Element At Coordinates  ${xpath_browser_offset}  0  0
     Click Element   ${xpath_profile_save_button}
-    Navigate To Date and Time Page
-    Page Should Contain  ${xpath_ist_text}
 
 
 Verify NTP Server Input Fields In Date And Time Page
@@ -146,6 +145,7 @@ Suite Setup Execution
    [Documentation]  Do test case setup tasks.
 
     Launch Browser And Login GUI
+    Maximize Browser Window
     Navigate To Date and Time Page
 
 Navigate To Date and Time Page

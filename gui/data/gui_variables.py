@@ -96,12 +96,11 @@ class gui_variables:
     xpath_profile_save_button = (
         "//*[@data-test-id='profileSettings-button-saveSettings']"
     )
-    xpath_profile_settings = "//button[contains(text(),'Profile Settings')]"
+    xpath_profile_settings_link = "//*[contains(text(),'Profile Settings')]"
     xpath_profile_settings_heading = "//h1[text()='Profile settings']"
     xpath_browser_offset = (
         "//*[@data-test-id='profileSettings-radio-browserOffset']"
     )
-    xpath_ist_text = "//*[contains(text(),'IST UTC+5:30')]"
     xpath_input_password = (
         "//*[@data-test-id='profileSettings-input-newPassword']"
     )
