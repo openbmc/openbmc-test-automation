@@ -306,6 +306,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7f8f0f8_522a7c2b",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-23T08:29:49Z",
+      "side": 1,
+      "message": "We\u0027ll discuss. It is not an efficient use of existing code \u0026 we can\u0027t simply use same lines of code everywhere.",
+      "parentUuid": "e621ee77_e9592422",
+      "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7083ff75_5eba5e8c",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 1
