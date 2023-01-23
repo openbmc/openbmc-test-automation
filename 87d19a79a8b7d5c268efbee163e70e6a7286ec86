@@ -128,6 +128,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "36068606_6b522fe8",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-23T09:22:44Z",
+      "side": 1,
+      "message": "I told in previous comment \"I was using custom keys which I have removed.\"\n\nOld Code : \n\npel_src \u003d pel_record[\"pel_data\"][\"SRC\"]\npel_created_time \u003d pel_record[\"pel_detail_data\"][\"Private Header\"][\"Created at\"]\n\n\nNew Code:\n\npel_src \u003d pel_record[pel_id][\"SRC\"]\npel_created_time \u003d pel_record[\"Private Header\"][\"Created at\"]\n\nAs I have mention earlier that I was using custom keys like pel_data, pel_detail_data, which I removed in new code as I was having comment in get_pel_detail_information this function.\nHistory of this patch has the information.",
+      "parentUuid": "9fc0089a_1e3427f2",
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e7ad69a_dff4e6cb",
         "filename": "lib/pel_utils.py",
         "patchSetId": 32
@@ -450,6 +468,30 @@
       "side": 1,
       "message": "OK, requirements #1 \u0026 #2 are already there, and they are the base.\nyou are constructing #3 from #1 \u0026 #2.\nYou can construct new data #4 from #1 \u0026 #3\nyou can construct new data #5 from #2 \u0026 #3. And so on. \nBase data is already there why we need create another data variable/s which is already there in #1 \u0026 #2?",
       "parentUuid": "a1c0b16f_cfb0d1d8",
+      "range": {
+        "startLine": 369,
+        "startChar": 0,
+        "endLine": 390,
+        "endChar": 60
+      },
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "035693dd_14a2b969",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-23T09:22:44Z",
+      "side": 1,
+      "message": "I did not understand you comment.",
+      "parentUuid": "1cf751c6_ecfad07e",
       "range": {
         "startLine": 369,
         "startChar": 0,
