@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4282402_a24bf08a",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-23T08:02:56Z",
+      "side": 1,
+      "message": "To see changes you need to compare the code. once you open patch there need to select Base on one side and other with latest patch.",
+      "parentUuid": "8c1bbcfb_8c373b9d",
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e7ad69a_dff4e6cb",
         "filename": "lib/pel_utils.py",
         "patchSetId": 32
@@ -127,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "92389145_3ea6fbe6",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-23T08:02:56Z",
+      "side": 1,
+      "message": "Running For loops I am taking keys.",
+      "parentUuid": "cf63ed06_97973a6b",
+      "range": {
+        "startLine": 383,
+        "startChar": 12,
+        "endLine": 383,
+        "endChar": 18
+      },
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c52b8f76_9bb71f5a",
         "filename": "lib/pel_utils.py",
         "patchSetId": 32
@@ -186,6 +228,30 @@
       "side": 1,
       "message": "Yeah, it is grabbing data from other keywords and making a new data, we can use directly those data instead of deriving another data from existing data.",
       "parentUuid": "0c0fbd68_4efd6e13",
+      "range": {
+        "startLine": 369,
+        "startChar": 0,
+        "endLine": 390,
+        "endChar": 60
+      },
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38d82356_573bcd50",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-23T08:02:56Z",
+      "side": 1,
+      "message": "It not only grab the data but also pack the data. which I have explained in python function. You will get more information once you run the code.",
+      "parentUuid": "6c25df8b_faaca9ea",
       "range": {
         "startLine": 369,
         "startChar": 0,
