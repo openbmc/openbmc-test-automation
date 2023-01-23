@@ -90,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e76313f5_f02d7619",
+        "filename": "gui/data/gui_variables.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-23T15:38:14Z",
+      "side": 1,
+      "message": "As this is a link use like below\n\nxpath_profile_settings_link \u003d //a[contains(text(),\u0027Profile Settings\u0027)]\n\nand keep the old one as it is",
+      "parentUuid": "93a41724_e9dcf499",
+      "range": {
+        "startLine": 99,
+        "startChar": 4,
+        "endLine": 99,
+        "endChar": 32
+      },
+      "revId": "e782a1a0bf4557345ec249ce15f5135003293dc8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c01a8cdb_ae1c7f68",
         "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
         "patchSetId": 4

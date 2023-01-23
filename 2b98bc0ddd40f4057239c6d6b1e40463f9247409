@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc2bbe6b_523a4de4",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-23T15:38:14Z",
+      "side": 0,
+      "message": "This is an important verification which is required for this test. We should add it up",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 42
+      },
+      "revId": "2b98bc0ddd40f4057239c6d6b1e40463f9247409",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
