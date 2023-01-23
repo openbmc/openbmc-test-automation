@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "717c3bc4_5c6e3f0c",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-23T04:52:07Z",
+      "side": 1,
+      "message": "probably \nVerify Code Update Fails When Kernel Panic Occur",
+      "parentUuid": "8900053b_f3a6657c",
+      "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9793d6b2_67bcc3bb",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 1
@@ -127,6 +145,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b6bc2adb_7eb87d8b",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-23T04:52:07Z",
+      "side": 1,
+      "message": "2 looks better",
+      "parentUuid": "9b92161a_64faf792",
+      "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "37ffbdd1_09bcbf37",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 1
@@ -156,6 +192,24 @@
       "side": 1,
       "message": "I see your comment on line 133 , Are you asking me to change test case name or this variable \"post_code_update_actions\".",
       "parentUuid": "37ffbdd1_09bcbf37",
+      "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76316261_8bdec898",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-23T04:52:07Z",
+      "side": 1,
+      "message": "Redfish update firmware keyword already has most of the code written here.\nYou can tweak and use it.",
+      "parentUuid": "32059ef1_c2e07d41",
       "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
