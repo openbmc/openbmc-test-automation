@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5eff542f_b799fdd2",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-23T04:54:51Z",
+      "side": 1,
+      "message": "I was using custom keys which I have removed.",
+      "parentUuid": "d0143380_93d8cbf2",
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e7ad69a_dff4e6cb",
         "filename": "lib/pel_utils.py",
         "patchSetId": 32
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e572ec10_18f413b3",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-23T04:54:51Z",
+      "side": 1,
+      "message": "it contains pel id information so , I defined variable as pel_id.",
+      "parentUuid": "8e7ad69a_dff4e6cb",
+      "range": {
+        "startLine": 383,
+        "startChar": 12,
+        "endLine": 383,
+        "endChar": 18
+      },
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c52b8f76_9bb71f5a",
         "filename": "lib/pel_utils.py",
         "patchSetId": 32
@@ -54,6 +96,30 @@
       "writtenOn": "2023-01-20T10:36:23Z",
       "side": 1,
       "message": "whats the objective here \u0026 use case?",
+      "range": {
+        "startLine": 369,
+        "startChar": 0,
+        "endLine": 390,
+        "endChar": 60
+      },
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c0fbd68_4efd6e13",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-23T04:54:51Z",
+      "side": 1,
+      "message": "It contains information related to pel information and in my use case I am using this information to compare PEL log to Error log.",
+      "parentUuid": "c52b8f76_9bb71f5a",
       "range": {
         "startLine": 369,
         "startChar": 0,
