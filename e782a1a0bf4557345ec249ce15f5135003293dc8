@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e4fbeb3_809235cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000844
+      },
+      "writtenOn": "2023-01-23T10:58:51Z",
+      "side": 1,
+      "message": "One comment",
+      "revId": "e782a1a0bf4557345ec249ce15f5135003293dc8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c01a8cdb_ae1c7f68",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000844
+      },
+      "writtenOn": "2023-01-23T10:58:51Z",
+      "side": 1,
+      "message": "If you are generalizing it, then do not mention IST in Documentation.",
+      "revId": "e782a1a0bf4557345ec249ce15f5135003293dc8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
