@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00345f5e_076dc739",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-23T08:47:43Z",
+      "side": 1,
+      "message": "This code is new and no one has used it.",
+      "parentUuid": "c4e27dbe_81e18bdd",
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e7ad69a_dff4e6cb",
         "filename": "lib/pel_utils.py",
         "patchSetId": 32
@@ -211,6 +229,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac068bd7_2f3d5e44",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-23T08:47:43Z",
+      "side": 1,
+      "message": "May be run the code so, then you will able to know why I am using pel_id.",
+      "parentUuid": "92535457_de36669a",
+      "range": {
+        "startLine": 383,
+        "startChar": 12,
+        "endLine": 383,
+        "endChar": 18
+      },
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c52b8f76_9bb71f5a",
         "filename": "lib/pel_utils.py",
         "patchSetId": 32
@@ -318,6 +360,30 @@
       "side": 1,
       "message": "you are packing already existing data, why can\u0027t we use that data directly?",
       "parentUuid": "38d82356_573bcd50",
+      "range": {
+        "startLine": 369,
+        "startChar": 0,
+        "endLine": 390,
+        "endChar": 60
+      },
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1c0b16f_cfb0d1d8",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-23T08:47:43Z",
+      "side": 1,
+      "message": "Return all the PEL records, where each PEL record is consist of two data.\n\n    1. Get PEL instance record from list of PEL records.\n       (command to get list of PEL records: peltool -l)\n    2. Get PEL information record for PEL instance.\n       (command to get PEL information record: peltool -i \u003cpel_id\u003e)\n    3. Combine the PEL instance record with PEL information record.\n\nThis information I am packing. let me know if any function does the same.",
+      "parentUuid": "5164b98a_1d72ae36",
       "range": {
         "startLine": 369,
         "startChar": 0,
