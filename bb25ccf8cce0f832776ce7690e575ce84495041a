@@ -288,6 +288,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e621ee77_e9592422",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-23T07:46:15Z",
+      "side": 1,
+      "message": "As I told in previous comment that I don\u0027t want to add more logic in code update.",
+      "parentUuid": "6737d707_c81d04b0",
+      "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7083ff75_5eba5e8c",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 1
