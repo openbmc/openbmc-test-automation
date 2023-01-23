@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9fc0089a_1e3427f2",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-23T09:04:17Z",
+      "side": 1,
+      "message": "Agreed: this code is new, but whats the enhancement or change in behavior for the user?",
+      "parentUuid": "00345f5e_076dc739",
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e7ad69a_dff4e6cb",
         "filename": "lib/pel_utils.py",
         "patchSetId": 32
@@ -253,6 +271,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc92a3e4_5df7633a",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-23T09:04:17Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "ac068bd7_2f3d5e44",
+      "range": {
+        "startLine": 383,
+        "startChar": 12,
+        "endLine": 383,
+        "endChar": 18
+      },
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c52b8f76_9bb71f5a",
         "filename": "lib/pel_utils.py",
         "patchSetId": 32
@@ -384,6 +426,30 @@
       "side": 1,
       "message": "Return all the PEL records, where each PEL record is consist of two data.\n\n    1. Get PEL instance record from list of PEL records.\n       (command to get list of PEL records: peltool -l)\n    2. Get PEL information record for PEL instance.\n       (command to get PEL information record: peltool -i \u003cpel_id\u003e)\n    3. Combine the PEL instance record with PEL information record.\n\nThis information I am packing. let me know if any function does the same.",
       "parentUuid": "5164b98a_1d72ae36",
+      "range": {
+        "startLine": 369,
+        "startChar": 0,
+        "endLine": 390,
+        "endChar": 60
+      },
+      "revId": "87d19a79a8b7d5c268efbee163e70e6a7286ec86",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cf751c6_ecfad07e",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 32
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-01-23T09:04:17Z",
+      "side": 1,
+      "message": "OK, requirements #1 \u0026 #2 are already there, and they are the base.\nyou are constructing #3 from #1 \u0026 #2.\nYou can construct new data #4 from #1 \u0026 #3\nyou can construct new data #5 from #2 \u0026 #3. And so on. \nBase data is already there why we need create another data variable/s which is already there in #1 \u0026 #2?",
+      "parentUuid": "a1c0b16f_cfb0d1d8",
       "range": {
         "startLine": 369,
         "startChar": 0,
