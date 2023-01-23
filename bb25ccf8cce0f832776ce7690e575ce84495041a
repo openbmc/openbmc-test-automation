@@ -90,6 +90,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7daf3076_a0583858",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-23T07:35:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "717c3bc4_5c6e3f0c",
+      "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9793d6b2_67bcc3bb",
@@ -161,6 +179,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49ad9d88_fe33419b",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-23T07:35:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6bc2adb_7eb87d8b",
+      "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37ffbdd1_09bcbf37",
@@ -210,6 +246,24 @@
       "side": 1,
       "message": "Redfish update firmware keyword already has most of the code written here.\nYou can tweak and use it.",
       "parentUuid": "32059ef1_c2e07d41",
+      "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c48da337_8b716092",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-01-23T07:35:01Z",
+      "side": 1,
+      "message": "1. I am avoiding to add special logic which I have here like to compare before_update_activeswimage and after_update_activeswimage.\n2. I want to keep Redfish Update Firmware for only code update with less condition.",
+      "parentUuid": "76316261_8bdec898",
       "revId": "bb25ccf8cce0f832776ce7690e575ce84495041a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
