@@ -184,12 +184,12 @@ Verify Redfish VPD Data
     ${vpd_component}=  Set Variable If
     ...  '${component}' == 'CPU'  /system/chassis/motherboard/dcm0/cpu0
     ...  '${component}' == 'Chassis'  /system/chassis
-    ...  '${component}' == 'BMC'  /system/chassis/motherboard/bmc
+    ...  '${component}' == 'BMC'  /system/chassis/motherboard/ebmc_card_bmc
     ...  '${component}' == 'TPM'  /system/chassis/motherboard/tpm
     ...  '${component}' == 'TOD Battery'  /system/chassis/motherboard/bmc/tod_battery
     ...  '${component}' == 'VRM'  /system/chassis/motherboard/vrm0
-    ...  '${component}' == 'OP Panel'  /system/chassis/motherboard/dasd_backplane/panel0
-    ...  '${component}' == 'OP Panel LCD'  /system/chassis/motherboard/dasd_backplane/panel1
+    ...  '${component}' == 'OP Panel'  /system/chassis/motherboard/base_op_panel_blyth
+    ...  '${component}' == 'OP Panel LCD'  /system/chassis/motherboard/lcd_op_panel_hill
     ...  '${component}' == 'Disk Backplane'  /system/chassis/motherboard/dasd_backplane
     ...  '${component}' == 'System'  /system
 
