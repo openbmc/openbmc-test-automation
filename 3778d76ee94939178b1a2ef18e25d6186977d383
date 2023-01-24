@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74c2a98d_a645dafc",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-01-24T11:12:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7dce493_3aefaeb4",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 12
+      },
+      "revId": "3778d76ee94939178b1a2ef18e25d6186977d383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15a8e42b_3bbad880",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-19T16:47:30Z",
       "side": 1,
       "message": "why u put log statement here ? It will just log the redfish url in the loop.",
+      "range": {
+        "startLine": 263,
+        "startChar": 8,
+        "endLine": 263,
+        "endChar": 39
+      },
+      "revId": "3778d76ee94939178b1a2ef18e25d6186977d383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85dc44ad_b222903c",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-01-24T11:12:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15a8e42b_3bbad880",
       "range": {
         "startLine": 263,
         "startChar": 8,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b8500c7_e2a7822a",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-01-24T11:12:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad65e6c3_e1eda0a9",
+      "range": {
+        "startLine": 267,
+        "startChar": 53,
+        "endLine": 267,
+        "endChar": 54
+      },
+      "revId": "3778d76ee94939178b1a2ef18e25d6186977d383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4dd6a383_7b8fb206",
@@ -93,6 +165,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e5b80a6_840ed8c5",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-01-24T11:12:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4dd6a383_7b8fb206",
+      "range": {
+        "startLine": 273,
+        "startChar": 17,
+        "endLine": 273,
+        "endChar": 108
+      },
+      "revId": "3778d76ee94939178b1a2ef18e25d6186977d383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eda76eeb_318cd89c",
@@ -106,6 +202,30 @@
       "writtenOn": "2023-01-19T16:47:30Z",
       "side": 1,
       "message": "check max char length",
+      "range": {
+        "startLine": 277,
+        "startChar": 21,
+        "endLine": 277,
+        "endChar": 128
+      },
+      "revId": "3778d76ee94939178b1a2ef18e25d6186977d383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9739dee_f8771677",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-01-24T11:12:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eda76eeb_318cd89c",
       "range": {
         "startLine": 277,
         "startChar": 21,
