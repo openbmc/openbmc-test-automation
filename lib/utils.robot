@@ -1048,6 +1048,14 @@ Is Boot Progress At Any State
     Should Contain Any  ${boot_progress}  @{boot_states}
 
 
+Is Host Quiesced
+    [Documentation]  Get HostState and check if it is Quiesced.
+
+    ${boot_progress}  ${host_state}=  Redfish Get Boot Progress
+
+    Should Be Equal  ${host_state}  Quiesced
+
+
 Set Watchdog Interval Using Busctl
     [Documentation]  Set Watchdog time interval.
     [Arguments]  ${milliseconds}=1000
