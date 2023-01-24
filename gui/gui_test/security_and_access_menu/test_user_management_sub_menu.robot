@@ -10,6 +10,8 @@ Test Setup      Test Setup Execution
 
 
 *** Variables ***
+
+
 ${xpath_user_management_heading}         //h1[text()="User management"]
 ${xpath_select_user}                     //input[contains(@class,"custom-control-input")]
 ${xpath_account_policy}                  //button[contains(text(),'Account policy settings')]
@@ -30,6 +32,7 @@ ${xpath_auto_unlock}                     //*[@data-test-id='userManagement-radio
 ${xpath_manual_unlock}                   //*[@data-test-id='userManagement-radio-manualUnlock']
 ${xpath_max_failed_login}                //*[@data-test-id='userManagement-input-lockoutThreshold']
 ${test_user_password}                    TestPwd1
+
 
 *** Test Cases ***
 
@@ -188,4 +191,5 @@ Test Setup Execution
 
     Click Element  ${xpath_secuity_and_accesss_menu}
     Click Element  ${xpath_user_management_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  user-managemen
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  user-management
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30

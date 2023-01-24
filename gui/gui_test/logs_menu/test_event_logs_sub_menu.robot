@@ -150,6 +150,7 @@ Suite Setup Execution
     Navigate To Event Logs Page
     Redfish.Login
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
 
 Suite Teardown Execution
     [Documentation]  Suite teardown tasks.
