@@ -199,6 +199,7 @@ Suite Setup Execution
     ...  Click Element  ${xpath_settings_menu}
     Click Element  ${xpath_network_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
     ${default_gateway}=  Get BMC Default Gateway
     Set Suite Variable  ${default_gateway}
 

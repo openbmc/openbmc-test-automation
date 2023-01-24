@@ -48,3 +48,4 @@ Verify GUI Logout
     Click Element  ${xpath_root_button_menu}
     Click Element  ${xpath_logout_button}
     Wait Until Page Contains Element  ${xpath_login_button}  timeout=15s
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30

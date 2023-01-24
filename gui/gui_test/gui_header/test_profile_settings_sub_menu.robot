@@ -88,3 +88,4 @@ Test Setup Execution
     Wait Until Page Contains Element  ${xpath_profile_settings}
     Click Element  ${xpath_profile_settings}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  profile-settings
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30

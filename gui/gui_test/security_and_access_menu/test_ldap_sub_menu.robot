@@ -194,6 +194,7 @@ Suite Setup Execution
     Click Element  ${xpath_secuity_and_accesss_menu}
     Click Element  ${xpath_ldap_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  ldap
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
     Wait Until Element Is Enabled  ${xpath_enable_ldap_checkbox}  timeout=10s
 
     Valid Value  LDAP_TYPE  valid_values=["ActiveDirectory", "LDAP"]

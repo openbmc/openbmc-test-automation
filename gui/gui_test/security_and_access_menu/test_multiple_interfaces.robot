@@ -108,4 +108,4 @@ Navigate To SSL Certificate Page
     Click Element  ${xpath_secuity_and_accesss_menu}
     Click Element  ${xpath_certificates_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  certificates
-
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30

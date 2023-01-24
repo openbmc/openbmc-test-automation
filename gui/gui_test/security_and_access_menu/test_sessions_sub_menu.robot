@@ -31,3 +31,4 @@ Test Setup Execution
     Click Element  ${xpath_secuity_and_accesss_menu}
     Click Element  ${xpath_sessions_sub_menu}
     Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  sessions
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30

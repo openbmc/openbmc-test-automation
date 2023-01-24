@@ -158,3 +158,4 @@ Navigate to Server Power Operation Page
     Click Element  ${xpath_operations_menu}
     Click Element  ${xpath_server_power_operations_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  server-power-operations
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30

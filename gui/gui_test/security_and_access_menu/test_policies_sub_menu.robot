@@ -12,6 +12,8 @@ Test Setup       Test Setup Execution
 
 
 *** Variables ***
+
+
 ${xpath_policies_heading}                     //h1[text()="Policies"]
 ${xpath_bmc_ssh_toggle}                       //*[@data-test-id='policies-toggle-bmcShell']
 ...  /following-sibling::label
@@ -23,6 +25,7 @@ ${xpath_rtad_toggle}                          //*[@data-test-id='policies-toggle
 ${xpath_usb_firmware_update_policy_toggle}    //*[@data-test-id='policies-toggle-usbFirmwareUpdatePolicy']
 ${xpath_secure_version_lockin_toggle}         //*[@data-test-id='policies-toggle-svle']
 ${xpath_host_usb_enablement_toggle}           //*[@data-test-id='policies-toggle-hostUsb']
+
 
 *** Test Cases ***
 
@@ -207,7 +210,7 @@ Test Setup Execution
     Wait Until Keyword Succeeds  30 sec  15 sec  Click Element  ${xpath_secuity_and_accesss_menu}
     Click Element  ${xpath_policies_sub_menu}
     Wait Until Keyword Succeeds  30 sec  15 sec  Location Should Contain  policies
-
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
 
 Set Policy Via GUI
 

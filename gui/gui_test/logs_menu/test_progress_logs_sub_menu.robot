@@ -66,3 +66,4 @@ Suite Setup Execution
     Click Element  ${xpath_logs_menu}
     Click Element  ${xpath_progress_logs_sub_menu}
     Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  post-code-logs
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
