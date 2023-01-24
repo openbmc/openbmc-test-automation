@@ -1048,6 +1048,19 @@ Is Boot Progress At Any State
     Should Contain Any  ${boot_progress}  @{boot_states}
 
 
+Is Host At State
+    [Documentation]  Get Host state and check if it matches
+    ...   user input expected state.
+    [Arguments]  ${expected_host_state}
+
+    # Description of argument(s):
+    # expected_host_state  Expected Host State to check.(e.g. Quiesced).
+
+    ${boot_progress}  ${host_state}=  Redfish Get Boot Progress
+
+    Should Be Equal  ${host_state}  ${expected_host_state}
+
+
 Set Watchdog Interval Using Busctl
     [Documentation]  Set Watchdog time interval.
     [Arguments]  ${milliseconds}=1000
