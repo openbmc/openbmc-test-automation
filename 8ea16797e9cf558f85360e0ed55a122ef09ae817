@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c56f94c0_ab0532a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-24T11:06:18Z",
+      "side": 1,
+      "message": "Redfish",
+      "range": {
+        "startLine": 7,
+        "startChar": 54,
+        "endLine": 7,
+        "endChar": 61
+      },
+      "revId": "8ea16797e9cf558f85360e0ed55a122ef09ae817",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae214cea_eab42dfc",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-24T11:06:18Z",
+      "side": 1,
+      "message": "As this keyword differs from above. Keep the documentation something like below:\n\nVerify Redfish VPD data using all the inventory URIs of given component.",
+      "range": {
+        "startLine": 239,
+        "startChar": 21,
+        "endLine": 239,
+        "endChar": 67
+      },
+      "revId": "8ea16797e9cf558f85360e0ed55a122ef09ae817",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5643862_a08e8e08",
+        "filename": "openpower/vpd/test_redfish_vpd.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-24T11:06:18Z",
+      "side": 1,
+      "message": "bring into single line",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 249,
+        "endChar": 33
+      },
+      "revId": "8ea16797e9cf558f85360e0ed55a122ef09ae817",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
