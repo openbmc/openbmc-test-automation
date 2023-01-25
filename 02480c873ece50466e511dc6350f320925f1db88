@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daa540ec_8355a772",
+        "filename": "lib/utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 1057,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-25T07:13:15Z",
+      "side": 1,
+      "message": "Can we make this general to check any host state?",
+      "range": {
+        "startLine": 1051,
+        "startChar": 0,
+        "endLine": 1057,
+        "endChar": 0
+      },
+      "revId": "02480c873ece50466e511dc6350f320925f1db88",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
