@@ -461,6 +461,17 @@ Enable DHCP When Host Is Off And Verify After Poweron
     Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
 
 
+Disable DHCP When Host Is Off And Verify VMI Origin Is Static
+    [Documentation]  Disable DHCP when host is off and
+    ...  get network info and verify that VMI origin is static.
+    [Tags]  Disable_DHCP_When_Host_Is_Off_And_Verify_VMI_Origin_Is_Static
+    [Setup]  Redfish Power Off  stack_mode=skip
+
+    Set VMI IPv4 Origin  ${False}
+    Redfish Power On  stack_mode=skip
+    Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default} 
+
+
 *** Keywords ***
 
 Suite Setup Execution
