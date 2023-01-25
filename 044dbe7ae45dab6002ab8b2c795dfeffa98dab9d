@@ -16,6 +16,24 @@
       "message": "Disable DHCP When Host Is Off And Verify New State Reflects After Power On",
       "revId": "044dbe7ae45dab6002ab8b2c795dfeffa98dab9d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38ea7df8_5954928c",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-01-25T10:30:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db38d1e9_a24e8c81",
+      "revId": "044dbe7ae45dab6002ab8b2c795dfeffa98dab9d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
