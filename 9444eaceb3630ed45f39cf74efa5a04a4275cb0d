@@ -16,6 +16,24 @@
       "message": "can you remove extra space from end of line.",
       "revId": "9444eaceb3630ed45f39cf74efa5a04a4275cb0d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf07f8d2_67a47fcf",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-01-25T06:32:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7fd4525_d0479397",
+      "revId": "9444eaceb3630ed45f39cf74efa5a04a4275cb0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
