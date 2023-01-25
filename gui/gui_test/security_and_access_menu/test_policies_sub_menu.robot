@@ -299,7 +299,7 @@ Set SSH And IPMI State Via GUI
     Run Keyword If  ${persistency_check} == ${True}
     ...  Run Keywords  Reboot BMC via GUI  AND  Test Setup Execution
 
-    Wait Until Keyword Succeeds  30 sec  15 sec  Verify Policy State  ${ssh_state}  ${ipmi_state}
+    Wait Until Keyword Succeeds  30 sec  15 sec  Verify Policy State
 
 
 Fetch IPMI And SSH Settings
