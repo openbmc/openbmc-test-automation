@@ -101,7 +101,8 @@ Post BMC Reset Perform Redfish Code Update
 
 
 Post BMC Reset Perform Image Switched To Backup Multiple Times
-    [Documentation]  Test to reset BMC at standby and then perfrom switch to backup image multiple times.
+    [Documentation]  Test to reset BMC at standby and then perform switch
+    ...              to backup image multiple times.
     ...              Then ensure no event and dump logs exist.
     [Tags]  Post_BMC_Reset_Perform_Image_Switched_To_Backup_Multiple_Times
 
