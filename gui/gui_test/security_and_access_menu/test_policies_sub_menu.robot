@@ -97,7 +97,8 @@ Disable IPMI Via GUI And Verify
     Set Policy Via GUI  IPMI  Disabled
 
     ${status}=  Run Keyword And Return Status
-    ...  Wait Until Keyword Succeeds  ${NETWORK_TIMEOUT}  ${NETWORK_RETRY_TIME}  Run IPMI Standard Command  sel info
+    ...  Wait Until Keyword Succeeds  ${NETWORK_TIMEOUT}  ${NETWORK_RETRY_TIME}
+    ...  Run IPMI Standard Command  sel info
 
     Should Be Equal As Strings  ${status}  False
     ...  msg=IPMI command is working after disabling IPMI.
@@ -109,7 +110,8 @@ Enable IPMI Via GUI And Verify
     [Tags]  Enable_IPMI_Via_GUI_And_Verify
 
     Set Policy Via GUI  IPMI  Enabled
-    Wait Until Keyword Succeeds  ${NETWORK_TIMEOUT}  ${NETWORK_RETRY_TIME}  Run IPMI Standard Command  sel info
+    Wait Until Keyword Succeeds  ${NETWORK_TIMEOUT}  ${NETWORK_RETRY_TIME}
+    ...  Run IPMI Standard Command  sel info
 
 
 Enable SSH Via GUI And Verify Persistency On BMC Reboot
@@ -166,7 +168,8 @@ Disable IPMI Via GUI And Verify Persistency On BMC Reboot
     Reboot BMC via GUI
 
     ${status}=  Run Keyword And Return Status
-    ...  Wait Until Keyword Succeeds  ${NETWORK_TIMEOUT}  ${NETWORK_RETRY_TIME}  Run IPMI Standard Command  sel info
+    ...  Wait Until Keyword Succeeds  ${NETWORK_TIMEOUT}  ${NETWORK_RETRY_TIME}
+    ...  Run IPMI Standard Command  sel info
 
     Should Be Equal As Strings  ${status}  False
     ...  msg=IPMI command is working after disabling IPMI.
@@ -260,7 +263,8 @@ Verify Policy State
 
     # Verify IPMI state value.
     ${status}=  Run Keyword And Return Status
-    ...  Wait Until Keyword Succeeds  ${NETWORK_TIMEOUT}  ${NETWORK_RETRY_TIME}  Run IPMI Standard Command  sel info
+    ...  Wait Until Keyword Succeeds  ${NETWORK_TIMEOUT}  ${NETWORK_RETRY_TIME}
+    ...  Run IPMI Standard Command  sel info
 
     Run Keyword If  '${status}' == 'True'
     ...  Element Text Should Be  ${xpath_network_ipmi_toggle}  Enabled
