@@ -96,7 +96,7 @@ Verify Profile Setting Button In Date And Time Page
     ...  on profile setting button in date and time page.
     [Tags]  Verify_Profile_Setting_Button_In_Date_And_Time_Page
 
-    Click Element   ${xpath_profile_settings}
+    Click Element   ${xpath_profile_settings_link}
     Wait Until Page Contains Element  ${xpath_profile_settings_heading}  timeout=10
     Location Should Contain   profile-settings
 
@@ -106,21 +106,29 @@ Verify Existence Of Timezone Buttons In Profile Settings Page
     ...  in Profile settings page
     [Tags]  Verify_Existence_Of_Timezone_Buttons_In_Profile_Settings_Page
 
-    Click Element   ${xpath_profile_settings}
-    Page Should Contain  ${xpath_default_UTC}
-    Page Should Contain  ${xpath_browser_offset}
+    Click Element   ${xpath_profile_settings_link}
+    Wait Until Page Contains Element  ${xpath_profile_settings_heading}  timeout=30
+    Page Should Contain Element  ${xpath_default_UTC}
+    Page Should Contain Element  ${xpath_browser_offset}
 
 
-Verify Date And Time Change To IST
-    [Documentation]  Verify date and time change to IST after making
-    ...  changes in Profile setting page
-    [Tags]  Verify_Date_And_Time_Change_To_IST
+Verify Date And Time Change To Browser Offsite Time
+    [Documentation]  Verify date and time change to broswer's offset time when
+    ...  'Browser offset' option is selected in Profile settings page.
+    [Tags]   Verify_Date_And_Time_Change_To_Browser_Offset_Time
 
-    Click Element   ${xpath_profile_settings}
-    Click Element   ${xpath_browser_offset}
+    Click Element   ${xpath_profile_settings_link}
+    Wait Until Page Contains Element  ${xpath_profile_settings_heading}  timeout=10
+    Click Element At Coordinates  ${xpath_browser_offset}  0  0
     Click Element   ${xpath_profile_save_button}
+    ${xpath_browser_offset_text}=  Get Text  ${xpath_browser_offset_textfield}
+
+    #We get an output ${xpath_browser_offset_text} = Browser offset (CST UTC-6).
+    #Need to compare "CST UTC-6" text so removing the spaces and other values.
+
+    ${text}=  Set Variable  ${xpath_browser_offset_text.split("(")[1].split(")")[0]}
     Navigate To Date and Time Page
-    Page Should Contain  ${xpath_ist_text}
+    Page Should Contain  ${text}
 
 
 Verify NTP Server Input Fields In Date And Time Page
@@ -146,6 +154,7 @@ Suite Setup Execution
    [Documentation]  Do test case setup tasks.
 
     Launch Browser And Login GUI
+    Maximize Browser Window
     Navigate To Date and Time Page
 
 Navigate To Date and Time Page
