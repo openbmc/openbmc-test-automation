@@ -97,7 +97,7 @@ Verify Profile Setting Button In Date And Time Page
     [Tags]  Verify_Profile_Setting_Button_In_Date_And_Time_Page
 
     Click Element   ${xpath_profile_settings_link}
-    Wait Until Page Contains Element  ${xpath_profile_settings_link_heading}  timeout=10
+    Wait Until Page Contains Element  ${xpath_profile_settings_heading}  timeout=10
     Location Should Contain   profile-settings
 
 
@@ -107,19 +107,23 @@ Verify Existence Of Timezone Buttons In Profile Settings Page
     [Tags]  Verify_Existence_Of_Timezone_Buttons_In_Profile_Settings_Page
 
     Click Element   ${xpath_profile_settings_link}
-    Page Should Contain  ${xpath_default_UTC}
-    Page Should Contain  ${xpath_browser_offset}
+    Page Should Contain Element  ${xpath_default_UTC}
+    Page Should Contain Element  ${xpath_browser_offset}
 
 
-Verify Date And Time Change To Browser Offset
-    [Documentation]  Verify date and time change to IST after making
-    ...  changes in Profile setting page
-    [Tags]  Verify_Date_And_Time_Change_To_Browser_Offset
-
+Verify Date And Time Change To Browser Offsite Time
+    [Documentation]  Verify date and time change to broswer offset time when selected
+    ...  Browser offset option is selected in Profile settings page
+    [Tags]   Verify_Date_And_Time_Change_To_Browser_Offset_Time
     Click Element   ${xpath_profile_settings_link}
     Wait Until Page Contains Element  ${xpath_profile_settings_heading}  timeout=10
     Click Element At Coordinates  ${xpath_browser_offset}  0  0
     Click Element   ${xpath_profile_save_button}
+    ${xpath_browser_offset_text}  Get Text  ${xpath_browser_offset_textfield}
+    ${text}  Remove String  ${xpath_browser_offset_text}  Browser  offset  (  )
+    ${text}  Replace String  ${text}  ${space}  ${empty}  count=2
+    Navigate To Date and Time Page
+    Page Should Contain  ${text}
 
 
 Verify NTP Server Input Fields In Date And Time Page
