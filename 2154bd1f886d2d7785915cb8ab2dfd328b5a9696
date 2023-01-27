@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2929ca93_511edcfe",
+        "filename": "gui/data/gui_variables.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-27T13:32:58Z",
+      "side": 1,
+      "message": "What is the reason for this change? The previous one should work just fine. Was it leading to multiple matches?",
+      "range": {
+        "startLine": 100,
+        "startChar": 4,
+        "endLine": 100,
+        "endChar": 38
+      },
+      "revId": "2154bd1f886d2d7785915cb8ab2dfd328b5a9696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e1fced9_4a4fb693",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-27T13:32:58Z",
+      "side": 1,
+      "message": "spelling\nPls reword:\nVerify date and time change to browser\u0027s offset time when \u0027Browser offset\u0027 option is selected in Profile settings page",
+      "range": {
+        "startLine": 115,
+        "startChar": 52,
+        "endLine": 115,
+        "endChar": 59
+      },
+      "revId": "2154bd1f886d2d7785915cb8ab2dfd328b5a9696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6800541_e0bf91e2",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-27T13:32:58Z",
+      "side": 1,
+      "message": "Give an eg. of what output you get pls",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 122,
+        "endChar": 77
+      },
+      "revId": "2154bd1f886d2d7785915cb8ab2dfd328b5a9696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd030b70_7697b5e7",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-01-27T13:32:58Z",
+      "side": 1,
+      "message": "Use \"\u003d\" symbol.\nfor eg. ${text}\u003d  Remove String  ${xpath_browser_offset_text}  Browser  offset  (  )",
+      "range": {
+        "startLine": 122,
+        "startChar": 1,
+        "endLine": 124,
+        "endChar": 65
+      },
+      "revId": "2154bd1f886d2d7785915cb8ab2dfd328b5a9696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
