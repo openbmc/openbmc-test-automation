@@ -2,9 +2,9 @@
 
 Documentation   Test OpenBMC GUI "SNMP Alerts" sub-menu of "Settings".
 
-Resource        ../../lib/gui_resource.robot
-Resource        ../../../lib/snmp/resource.robot
 Resource        ../../../lib/snmp/redfish_snmp_utils.robot
+Resource        ../../../lib/snmp/resource.robot
+Resource        ../../lib/gui_resource.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
@@ -27,6 +27,7 @@ ${xpath_delete_destination}                       //button[contains(text(),'Dele
 ${snmp_page_heading}                              SNMP alerts
 ${invalid_port_error}                             Value must be between 0 – 65535
 ${invalid_destination_error}                      Error in adding SNMP alert destination
+${invalid_ip_error}                               Field required
 
 
 *** Test Cases ***
@@ -115,10 +116,10 @@ Configure Invalid SNMP Settings On BMC Via GUI And Verify
     ${SNMP_MGR1_IP}     ${alpha_port}            ${invalid_port_error}
     ${SNMP_MGR1_IP}     ${negative_port}         ${invalid_port_error}
     ${SNMP_MGR1_IP}     ${alphanumeric_port}     ${invalid_port_error}
+    ${empty_ip}         ${NON_DEFAULT_PORT1}     ${invalid_ip_error}
     ${out_of_range_ip}  ${NON_DEFAULT_PORT1}     ${invalid_destination_error}
     ${alpha_ip}         ${NON_DEFAULT_PORT1}     ${invalid_destination_error}
     ${negative_ip}      ${NON_DEFAULT_PORT1}     ${invalid_destination_error}
-    ${empty_ip}         ${NON_DEFAULT_PORT1}     ${invalid_destination_error}
     ${less_octet_ip}    ${NON_DEFAULT_PORT1}     ${invalid_destination_error}
 
 
@@ -245,8 +246,7 @@ Configure SNMP Manager On BMC With Invalid Setting Via GUI And Verify
 
     [Documentation]  Configure SNMP manager on BMC with invalid setting via GUI and verify.
     [Arguments]  ${snmp_manager_ip}  ${snmp_manager_port}  ${expected_error}
-    [Teardown]  Run Keyword If  '${expected_error}' == '${invalid_port_error}'
-    ...  Click Element  ${xpath_cancel_button}
+    [Teardown]  Close Add SNMP Alerts Destination Window  ${expected_error}
 
     # Description of argument(s):
     # snmp_manager_ip     SNMP manager IP address.
@@ -309,3 +309,16 @@ Create Error On BMC And Verify Trap On Default Port
     ${snmp_trap}=  Split String  ${trap_info}  \t
 
     Verify SNMP Trap  ${snmp_trap}  ${expected_error}
+
+
+Close Add SNMP Alerts Destination Window
+    [Documentation]  Close Add SNMP Alerts Destination window.
+    [Arguments]  ${expected_error}=${invalid_port_error}
+
+    # Description of argument(s):
+    # expected_error  Expected error on SNMP alerts page.
+
+    Run Keyword If  '${expected_error}' == '${invalid_port_error}'
+    ...  Click Element  ${xpath_cancel_button}
+    ...  ELSE IF  '${expected_error}' == '${invalid_ip_error}'
+    ...  Click Element  ${xpath_cancel_button}
