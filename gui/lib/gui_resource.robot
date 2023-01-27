@@ -150,6 +150,6 @@ Reboot BMC via GUI
     Click Element  ${xpath_operations_menu}
     Click Element  ${xpath_reboot_bmc_sub_menu}
     Click Button  ${xpath_reboot_bmc_button}
-    Click Button  ${xpath_confirm_bmc_reboot}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Click Button  ${xpath_confirm_bmc_reboot}
     Wait Until Keyword Succeeds  2 min  10 sec  Is BMC Unpingable
     Wait For Host To Ping  ${OPENBMC_HOST}  1 min
