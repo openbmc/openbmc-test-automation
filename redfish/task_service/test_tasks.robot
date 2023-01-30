@@ -13,10 +13,8 @@ Suite Setup         Suite Setup Execution
 Suite Teardown      Suite Teardown Execution
 Test Teardown       FFDC On Test Case Fail
 
-
 *** Variables ***
 ${TIME_REGEXP_PATTERN}   (.+)[\\-|\\+]\\d\\d\\:\\d\\d
-
 
 *** Test Cases ***
 
@@ -237,7 +235,10 @@ Verify Generate Task Instance Completion
 Load Task Service Properties Data
     [Documentation]  Load the task service related properties from json file.
 
-    ${json}=  OperatingSystem.Get File  data/task_state.json
+    # User input -v TASK_JSON_FILE_PATH:<path> else default path.
+    ${task_json_file}=  Get Variable Value  ${TASK_JSON_FILE_PATH}  data/task_state.json
+
+    ${json}=  OperatingSystem.Get File  ${task_json_file}
     ${properties}=  Evaluate  json.loads('''${json}''')  json
 
     Set Suite Variable  ${allowed_completed_task_overwrite_policy}
