@@ -1,0 +1,349 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7276b6b8_8f50b3cf",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-30T07:08:49Z",
+      "side": 1,
+      "message": "Not required. You can use it directly like below\n\nRetreieve Telemetery Data Definitions  /redfish/v1/TelemetryService/MetricDefinitions/total_power",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 67
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34756a9f_d1141e5a",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-30T07:08:49Z",
+      "side": 1,
+      "message": "As per our coding rule, keep local variable all small letters.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 73
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a1f0ea9_95aedf13",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-30T07:08:49Z",
+      "side": 1,
+      "message": "Not required. Use it directly",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 40
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a93a584_0917d5c5",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-30T07:08:49Z",
+      "side": 1,
+      "message": "better to name it as `status`",
+      "range": {
+        "startLine": 31,
+        "startChar": 6,
+        "endLine": 31,
+        "endChar": 15
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3027f1b5_a221c15d",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-30T07:08:49Z",
+      "side": 1,
+      "message": "same comment as above use lower case for all local variable name in this suite.",
+      "range": {
+        "startLine": 41,
+        "startChar": 19,
+        "endLine": 41,
+        "endChar": 25
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28cec675_bc836b58",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-30T07:08:49Z",
+      "side": 1,
+      "message": "Please add an example of Redfish response.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 47
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07432710_deb925d1",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-30T07:08:49Z",
+      "side": 1,
+      "message": "Not required to set variable. Use them directly.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 39
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ed269f1_a11516c4",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-30T07:08:49Z",
+      "side": 1,
+      "message": "we can also better name this keyword as \n\nIs Telementry Data Aligned With Definitions",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 49
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5059d884_958dec27",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-30T07:08:49Z",
+      "side": 1,
+      "message": "please state example for metricProperties so that user can understand what we are doing here",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 44
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5895f8a6_016a1c02",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-30T07:08:49Z",
+      "side": 1,
+      "message": "Add example of Redfish response.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 44
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "813b9301_c218cc79",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-30T07:08:49Z",
+      "side": 1,
+      "message": "Same comments as above. Dont set variable name.",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 54
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fcfd2aa_44e39c84",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-30T07:08:49Z",
+      "side": 1,
+      "message": "add space\n\nVerify Metric Reading",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 19
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bdb0a56_282550d9",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-30T07:08:49Z",
+      "side": 1,
+      "message": "Keep two spaces only as per our coding rule.",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 32
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eec87ac0_8e6b3cc1",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-30T07:08:49Z",
+      "side": 1,
+      "message": "I guess this power on is required for total power on. If yes, then this is not applicable for entire suite and should be move to the test case. If no, then please add a comment for adding this power on.",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 37
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c04b16a_f8d8b40d",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-30T07:08:49Z",
+      "side": 1,
+      "message": "Close All Connections is not required because we are not creating any ssh session in this suite.",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 25
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
