@@ -34,6 +34,24 @@
       "parentUuid": "32768051_731ed2cb",
       "revId": "35acba8401cb8dc4465bcb3ba02b8ad70bd3d1d2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89d57471_a1958e73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-01-30T11:58:52Z",
+      "side": 1,
+      "message": "I mentioned another  - File name too long for which FFDC failed. Any idea ?",
+      "parentUuid": "2598c543_3e7065cb",
+      "revId": "35acba8401cb8dc4465bcb3ba02b8ad70bd3d1d2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
