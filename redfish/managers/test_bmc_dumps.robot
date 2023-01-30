@@ -256,13 +256,16 @@ Verify Error While Initiating BMC Dump During Dumping State
     [Documentation]  Verify error while initiating BMC dump during dumping state.
     [Tags]  Verify_Error_While_Initiating_BMC_Dump_During_Dumping_State
 
-    Create User Initiated BMC Dump Via Redfish  ${1}
+    ${task_id}=  Create User Initiated BMC Dump Via Redfish  ${1}
 
     # Check error while initiating BMC dump while dump in progress.
     ${payload}=  Create Dictionary  DiagnosticDataType=Manager
     Redfish.Post
     ...  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
     ...  body=${payload}  valid_status_codes=[${HTTP_SERVICE_UNAVAILABLE}]
+
+    # Wait for above initiated dump to complete. Otherwise, on going dump would impact next test.
+    Wait Until Keyword Succeeds  5 min  15 sec  Check Task Completion  ${task_id}
 
 
 Verify BMC Dump Create Errors While Another BMC Dump In Progress
