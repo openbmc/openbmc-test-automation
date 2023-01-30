@@ -133,6 +133,7 @@ Test Generated Task Instance Validity And Task State
     ${time_diff}=  Subtract Date From Date  ${cur_time}  ${start_time[0]}
     ...  date1_format=%m/%d/%Y %H:%M:%S  date2_format=%Y-%m-%dT%H:%M:%S
 
+
     ${time_diff}=  Evaluate  ${time_diff} < 10
     Should Be Equal  ${time_diff}  ${TRUE}  Time difference greater than 10 seconds.
 
@@ -252,3 +253,24 @@ Load Task Service Properties Data
 
     Set Suite Variable  ${valid_status}
     ...  ${properties["TaskService"]["Status"]}
+
+
+Get Current Date from BMC
+    [Documentation]  Runs the date command from BMC and returns current date and time.
+
+    # Get Current Date from BMC
+    ${date}  ${stderr}  ${rc}=  BMC Execute Command   date
+
+    # Split the string and remove first and 2nd last value from
+    # the list and join to form %d %b %H:%M:%S %Y date format.
+
+   ${date}=  Split String  ${date}
+
+    Remove From List  ${date}  0
+    Remove From List  ${date}  -2
+    ${date}=  Evaluate  " ".join(${date})
+
+    # Convert the date format to %m/%d/%Y %H:%M:%S
+    ${date}=  Convert Date  ${date}  date_format=%b %d %H:%M:%S %Y  result_format=%m/%d/%Y %H:%M:%S  exclude_millis=True
+
+    [Return]   ${date}
