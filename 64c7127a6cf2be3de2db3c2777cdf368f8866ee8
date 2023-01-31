@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6304f9a1_1d32422f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000844
+      },
+      "writtenOn": "2023-01-31T10:57:09Z",
+      "side": 1,
+      "message": "One comment.",
+      "revId": "64c7127a6cf2be3de2db3c2777cdf368f8866ee8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b815a24_b209aa99",
+        "filename": "gui/data/gui_variables.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000844
+      },
+      "writtenOn": "2023-01-31T10:57:09Z",
+      "side": 1,
+      "message": "I think you can Catenate xpath_browser_offset and /following-sibling::* for xpath_browser_offset_textfield instead.",
+      "revId": "64c7127a6cf2be3de2db3c2777cdf368f8866ee8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
