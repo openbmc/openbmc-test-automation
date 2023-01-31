@@ -33,6 +33,29 @@
       "message": "I think you can Catenate xpath_browser_offset and /following-sibling::* for xpath_browser_offset_textfield instead.",
       "revId": "64c7127a6cf2be3de2db3c2777cdf368f8866ee8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a68dc992_e22802a1",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-01-31T11:32:20Z",
+      "side": 1,
+      "message": "Why do we need this? If this is required, please add a comment in the test case for this.",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 66
+      },
+      "revId": "64c7127a6cf2be3de2db3c2777cdf368f8866ee8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
