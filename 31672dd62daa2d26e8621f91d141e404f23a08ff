@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "144f580c_f45faf4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-01-31T07:49:48Z",
+      "side": 1,
+      "message": "I dont see your name in CLA list, Please get it approve it before merging this code",
+      "revId": "31672dd62daa2d26e8621f91d141e404f23a08ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
