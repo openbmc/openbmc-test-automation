@@ -29,6 +29,7 @@ ${xpath_input_subnetmask}                //*[@id="subnetMask"]
 ${xpath_input_static_dns}                //*[@id="staticDns"]
 ${xpath_cancel_button}                   //button[contains(text(),'Cancel')]
 ${xpath_delete_dns_server}               //*[@title="Delete DNS address"]
+${xpath_save_button}                     //button[contains(text(),'Save')]
 
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
@@ -90,7 +91,7 @@ Verify Existence Of All Fields In Hostname
     Wait Until Page Contains  Edit hostname  timeout=1min
     Page Should Contain Textfield  ${xpath_hostname_input}
     Page Should Contain Button  ${xpath_cancel_button}
-    Page Should Contain Button  ${xpath_add_button}
+    Page Should Contain Button  ${xpath_save_button}
 
 
 Verify Existence Of All Fields In Static IP Address
