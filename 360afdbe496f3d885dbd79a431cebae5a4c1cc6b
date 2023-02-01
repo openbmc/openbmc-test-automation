@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3d0d144_a8063f1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000844
+      },
+      "writtenOn": "2023-02-01T09:45:07Z",
+      "side": 1,
+      "message": "Minor comments.",
+      "revId": "360afdbe496f3d885dbd79a431cebae5a4c1cc6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "446e6640_bb6ec793",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000844
+      },
+      "writtenOn": "2023-02-01T09:45:07Z",
+      "side": 1,
+      "message": "Add a period.",
+      "revId": "360afdbe496f3d885dbd79a431cebae5a4c1cc6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "273e37f9_eeb48f1f",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000844
+      },
+      "writtenOn": "2023-02-01T09:45:07Z",
+      "side": 1,
+      "message": "Add periods to comments.\nAlso add a blank line between line 123 and 124.",
+      "revId": "360afdbe496f3d885dbd79a431cebae5a4c1cc6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
