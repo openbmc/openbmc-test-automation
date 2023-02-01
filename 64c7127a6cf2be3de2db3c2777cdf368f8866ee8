@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6ec8e45_83631c31",
+        "filename": "gui/data/gui_variables.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-01T07:30:34Z",
+      "side": 1,
+      "message": "I concatenated as suggested.",
+      "parentUuid": "7b815a24_b209aa99",
+      "revId": "64c7127a6cf2be3de2db3c2777cdf368f8866ee8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a68dc992_e22802a1",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-01-31T11:32:20Z",
       "side": 1,
       "message": "Why do we need this? If this is required, please add a comment in the test case for this.",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 66
+      },
+      "revId": "64c7127a6cf2be3de2db3c2777cdf368f8866ee8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "926a115d_2b55141a",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-01T07:30:34Z",
+      "side": 1,
+      "message": "I had added a line for ${xpath_browser_offset_text} output and the reason for adding below lines.",
+      "parentUuid": "a68dc992_e22802a1",
       "range": {
         "startLine": 124,
         "startChar": 0,
