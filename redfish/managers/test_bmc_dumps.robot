@@ -27,6 +27,7 @@ Verify Error Response For Already Deleted Dump Id
     [Documentation]  Delete non existing BMC dump and expect an error.
     [Tags]  Verify_Error_Response_For_Already_Deleted_Dump_Id
 
+    Redfish Power Off  stack_mode=skip
     ${dump_id}=  Create User Initiated BMC Dump Via Redfish
     Redfish Delete BMC Dump  ${dump_id}
     Run Keyword And Expect Error  ValueError: *  Redfish Delete BMC Dump  ${dump_id}
