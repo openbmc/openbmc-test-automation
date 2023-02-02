@@ -270,7 +270,8 @@ Enable DHCP When Static IP Configured DHCP Server Unavailable And Verify IP
 Verify To Configure VMI Static IP Address With Different User Roles
     [Documentation]  Verify to configure vmi static ip address with different user roles.
     [Tags]  Verify_To_Configure_VMI_Static_IP_Address_With_Different_User_Roles
-    [Setup]  Create Users With Different Roles  users=${USERS}  force=${True}
+    [Setup]  Run Keywords  Delete BMC Users Using Redfish
+    ...  AND  Create Users With Different Roles  users=${USERS}  force=${True}
     [Template]  Config VMI Static IP Address Using Different Users
     [Teardown]  Delete BMC Users Using Redfish
 
