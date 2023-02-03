@@ -6,6 +6,7 @@ Resource            ../../lib/bmc_redfish_resource.robot
 Resource            ../../lib/boot_utils.robot
 Resource            ../../lib/dump_utils.robot
 Resource            ../../lib/openbmc_ffdc.robot
+Variables           ../../data/pel_variables.py
 
 Suite Setup         Redfish.Login
 Test Setup          Redfish Delete All BMC Dumps
@@ -293,6 +294,26 @@ Verify BMC Dump Create Errors While Another BMC Dump In Progress
 
     # Wait for above initiated dump to complete. Otherwise, on going dump would impact next test.
     Wait Until Keyword Succeeds  5 min  15 sec  Check Task Completion  ${resp.dict['Id']}
+
+
+Verify Size For Internal Failure Initiated Dump Is Less Than Max
+    [Documentation]  Verify size for internal failure initiated dump Is less than max.
+    [Tags]  Verify_Unrecoverable_Error_Log
+
+    Redfish Delete All BMC Dumps
+
+    # Create an internal failure error log.
+    BMC Execute Command  ${CMD_INTERNAL_FAILURE}
+
+    # Verify that BMC dump is available.
+
+    Wait Until Keyword Succeeds  2 min  10 sec  Is BMC Dump Available
+    ${dump_entries}=  Get BMC Dump Entries
+    ${resp}=  Redfish.Get Properties
+    ...  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_entries[0]}
+
+    # Max size for dump is 20 MB = 20x1024x1024 Byte.
+    Should Be True  0 < ${resp["AdditionalDataSizeBytes"]} < 20971520
 
 
 *** Keywords ***
