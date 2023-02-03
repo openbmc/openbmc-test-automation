@@ -96,7 +96,6 @@ class gui_variables:
     xpath_profile_save_button = (
         "//*[@data-test-id='profileSettings-button-saveSettings']"
     )
-    xpath_profile_settings = "//button[contains(text(),'Profile Settings')]"
     xpath_profile_settings_heading = "//h1[text()='Profile settings']"
     xpath_browser_offset = (
         "//*[@data-test-id='profileSettings-radio-browserOffset']"
