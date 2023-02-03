@@ -6,6 +6,7 @@ Resource            ../../lib/bmc_redfish_resource.robot
 Resource            ../../lib/boot_utils.robot
 Resource            ../../lib/dump_utils.robot
 Resource            ../../lib/openbmc_ffdc.robot
+Variables           ../../data/pel_variables.py
 
 Suite Setup         Redfish.Login
 Test Setup          Redfish Delete All BMC Dumps
@@ -62,6 +63,29 @@ Verify User Initiated BMC Dump Size
     # "Name": "BMC Dump Entry"
 
     # Max size for dump is 20 MB = 20x1024x1024 Byte.
+    Should Be True  0 < ${resp["AdditionalDataSizeBytes"]} < 20971520
+
+
+Verify Internal Failure Initiated BMC Dump Size
+    [Documentation]  Verify that the internal failure initiated BMC dump size is under 20 MB.
+    [Tags]  Verify_Internal_Failure_Initiated_BMC_Dump_Size
+
+    Redfish Delete All BMC Dumps
+
+    # Create an internal failure error log.
+    BMC Execute Command  ${CMD_INTERNAL_FAILURE}
+
+    # Wait for BMC dump to get generated after injecting internal failure.
+    Wait Until Keyword Succeeds  2 min  10 sec  Is BMC Dump Available
+
+    # Verify that only one BMC dump is generated after injecting error.
+    ${dump_entries}=  Get BMC Dump Entries
+    ${length}=  Get length  ${dump_entries}
+    Should Be Equal As Integers  ${length}  ${1}
+
+    # Max size for dump is 20 MB = 20x1024x1024 Byte.
+    ${resp}=  Redfish.Get Properties
+    ...  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_entries[0]}
     Should Be True  0 < ${resp["AdditionalDataSizeBytes"]} < 20971520
 
 
