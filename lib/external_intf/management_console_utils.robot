@@ -2,6 +2,7 @@
 Documentation    Management console utilities keywords.
 
 Resource         ../../lib/bmc_redfish_utils.robot
+Resource         ../../lib/common_utils.robot
 Library          ../../lib/gen_robot_valid.py
 Library          Collections
 Library          ../../lib/bmc_ssh_utils.py
@@ -124,15 +125,4 @@ Get Lock Resource Information
     Rprint Vars  resource_lock_json
 
     [Return]  ${resource_lock_json}
-
-
-Redfish BMC Match States
-    [Documentation]  Verify the BMC match state.
-    [Arguments]  ${match_state}
-
-    # Description of argument(s):
-    # match_state    Match the state of BMC.
-
-    ${bmc_state}=  Redfish Get BMC State
-    Should Be Equal As Strings  ${match_state}  ${bmc_state}
 
