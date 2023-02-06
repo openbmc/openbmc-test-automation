@@ -983,6 +983,18 @@ Is BMC Unpingable
     Log  RC: ${RC}\nOutput:\n${output}
     Should be equal  ${RC}  ${1}
 
+
+Redfish BMC Match States
+    [Documentation]  Verify the BMC match state.
+    [Arguments]  ${match_state}
+
+    # Description of argument(s):
+    # match_state    Match the state of BMC.
+
+    ${bmc_state}=  Redfish Get BMC State
+    Should Be Equal As Strings  ${match_state}  ${bmc_state}
+
+
 Kernel Panic BMC Reset Operation
     [Documentation]  Create kernel panic to reset BMC.
 
