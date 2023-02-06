@@ -382,6 +382,25 @@ Verify Error Log And Dump For Internal Failure
     Should Be Equal As Integers  ${length}  ${1}
 
 
+Verify Core Watchdog Initiated BMC Dump
+    [Documentation]  Verify core watchdog timeout initiated BMC dump.
+    [Tags]  Verify_Core_Watchdog_Initiated_BMC_Dump
+
+    Redfish Delete All BMC Dumps
+    Redfish Power Off  stack_mode=skip
+
+    # Trigger watchdog timeout.
+    Redfish Initiate Auto Reboot  2000
+
+    # Wait for BMC dump to get generated after injecting watchdog timeout. 
+    Wait Until Keyword Succeeds  4 min  20 sec  Is BMC Dump Available
+
+    # Verify that only one BMC dump is available.
+    ${dump_entry_list}=  Get BMC Dump Entries
+    ${length}=  Get length  ${dump_entry_list}
+    Should Be Equal As Integers  ${length}  ${1}
+
+
 *** Keywords ***
 
 Get BMC Dump Entries
