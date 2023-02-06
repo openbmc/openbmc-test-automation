@@ -295,6 +295,24 @@ Verify BMC Dump Create Errors While Another BMC Dump In Progress
     Wait Until Keyword Succeeds  5 min  15 sec  Check Task Completion  ${resp.dict['Id']}
 
 
+Verify Core Watch Dog Timeout Initiated BMC Dump
+    [Documentation]  Verify core watch dog timeout initiated BMC dump.
+    [Tags]  Verify_Core_Watch_Dog_Timeout_Initiated_BMC_Dump
+
+    Redfish Delete All BMC Dumps
+    Redfish Power On  stack_mode=skip
+
+    # Trigger watchdog timeout.
+    Redfish Initiate Auto Reboot  1000
+
+    # Logging takes time to generate the timeout error and generate dump.
+    Wait Until Keyword Succeeds  3 min  20 sec
+
+    # Verifing that there is only one dump.
+    ${length}=  Get length  ${dump_entry_list}
+    Should Be Equal As Integers  ${length}  ${1}
+
+
 *** Keywords ***
 
 Get BMC Dump Entries
