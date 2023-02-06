@@ -77,27 +77,31 @@ FFDC_BMC_FILE = {
         "PEL_logs_complete_display.json": (
             "peltool -a -f -h>/tmp/PEL_logs_complete_display.json 2>&1"
         ),
-        "PEL_logs_badPEL.txt": "hexdump -C"
-        + " /var/lib/phosphor-logging/extensions/pels/badPEL>/tmp/PEL_logs_badPEL.txt"
-        " 2>&1",
+        "PEL_logs_badPEL.txt": (
+            "hexdump -C"
+            + " /var/lib/phosphor-logging/extensions/pels/badPEL>/tmp/PEL_logs_badPEL.txt"
+            " 2>&1"
+        ),
         "PLDM_fru_record.txt": (
             "pldmtool fru getfrurecordtable>/tmp/PLDM_fru_record.txt 2>&1"
         ),
         "BMC_pldm_flight_recorder.txt": (
             "rm -rf /tmp/pldm_flight_recorder; killall -s SIGUSR1 pldmd;"
-        )
-        + " sleep 5; cat /tmp/pldm_flight_recorder >"
-        " /tmp/BMC_pldm_flight_recorder.txt 2>&1;",
-        "OCC_state.txt": 'echo "OCC state check";for i in {0..3};'
-        + " do (echo /org/open_power/control/occ$i;"
-        + " busctl get-property org.open_power.OCC.Control"
-        " /org/open_power/control/occ$i"
-        + " org.open_power.OCC.Status OccActive) done > /tmp/OCC_state.txt"
-        " 2>&1",
+            + " sleep 5; cat /tmp/pldm_flight_recorder >"
+            " /tmp/BMC_pldm_flight_recorder.txt 2>&1;"
+        ),
+        "OCC_state.txt": (
+            'echo "OCC state check";for i in {0..3};'
+            + " do (echo /org/open_power/control/occ$i;"
+            + " busctl get-property org.open_power.OCC.Control"
+            " /org/open_power/control/occ$i"
+            + " org.open_power.OCC.Status OccActive) done > /tmp/OCC_state.txt"
+            " 2>&1"
+        ),
         "bmcweb_persistent_data.json": (
             "cat /home/root/bmcweb_persistent_data.json"
-        )
-        + " > /tmp/bmcweb_persistent_data.json",
+            + " > /tmp/bmcweb_persistent_data.json"
+        ),
         "GUARD_list.txt": "guard -l > /tmp/GUARD_list.txt 2>&1",
         "fan_control_dump.json": "fanctl dump; sleep 5",
         "DEVTREE": (
@@ -113,8 +117,10 @@ FFDC_OS_ALL_DISTROS_FILE = {
         "OS_msglog.txt": (
             "cat /sys/firmware/opal/msglog >/tmp/OS_msglog.txt 2>&1"
         ),
-        "OS_cpufrequency.txt": "ppc64_cpu --frequency "
-        + ">/tmp/OS_cpufrequency.txt 2>&1",
+        "OS_cpufrequency.txt": (
+            "ppc64_cpu --frequency "
+            + ">/tmp/OS_cpufrequency.txt 2>&1"
+        ),
         "OS_dmesg.txt": "dmesg >/tmp/OS_dmesg.txt 2>&1",
         "OS_opal_prd.txt": "cat /var/log/opal-prd* >/tmp/OS_opal_prd.txt 2>&1",
         "OS_boot.txt": "cat /var/log/boot.log >/tmp/OS_boot.txt 2>&1",
@@ -124,8 +130,10 @@ FFDC_OS_ALL_DISTROS_FILE = {
         "OS_lspci.txt": "lspci >/tmp/OS_lspci.txt 2>&1",
         "OS_lscpu.txt": "lscpu >/tmp/OS_lscpu.txt 2>&1",
         "OS_lscfg.txt": "lscfg >/tmp/OS_lscfg.txt 2>&1",
-        "OS_journalctl_nopager.txt": "journalctl --no-pager -b "
-        + "> /tmp/OS_journalctl_nopager.txt  2>&1",
+        "OS_journalctl_nopager.txt": (
+            "journalctl --no-pager -b "
+            + "> /tmp/OS_journalctl_nopager.txt  2>&1"
+        ),
     },
 }
 # Add file name and corresponding command needed for Ubuntu Linux
@@ -138,17 +146,17 @@ FFDC_OS_UBUNTU_FILE = {
         ),
         "OS_authlog.txt": (
             "{ cat /var/log/auth.log; cat /var/log/auth.log.1 ; } "
-        )
-        + ">/tmp/OS_authlog.txt 2>&1",
+            + ">/tmp/OS_authlog.txt 2>&1"
+        ),
         "OS_syslog.txt": (
             "tail -n 200000 /var/log/syslog >/tmp/OS_syslog.txt 2>&1"
+            "OS_info.txt": "{ uname -a; dpkg -s opal-prd; dpkg -s ipmitool ; } "
+            + ">/tmp/OS_info.txt 2>&1"
         ),
-        "OS_info.txt": "{ uname -a; dpkg -s opal-prd; dpkg -s ipmitool ; } "
-        + ">/tmp/OS_info.txt 2>&1",
         "OS_sosreport.txt": (
             "{ rm -rf /tmp/sosreport*FFDC* ; sosreport --batch --tmp-dir "
-        )
-        + "/tmp --ticket-number FFDC ; } >/tmp/OS_sosreport.txt 2>&1",
+            + "/tmp --ticket-number FFDC ; } >/tmp/OS_sosreport.txt 2>&1"
+        ),
     },
 }
 # Add file name and corresponding command needed for RHEL Linux
@@ -157,14 +165,16 @@ FFDC_OS_RHEL_FILE = {
         # File Name         Command
         "OS_rsct.txt": "/usr/bin/ctversion -bv >/tmp/OS_rsct.txt 2>&1",
         "OS_secure.txt": "cat /var/log/secure >/tmp/OS_secure.txt 2>&1",
-        "OS_syslog.txt": "tail -n 200000 /var/log/messages "
-        + ">/tmp/OS_syslog.txt 2>&1",
+        "OS_syslog.txt": (
+            "tail -n 200000 /var/log/messages "
+            + ">/tmp/OS_syslog.txt 2>&1"
+        ),
         "OS_info.txt": "{ lsb_release -a; cat /etc/redhat-release; "
-        + "uname -a; rpm -qa ; } >/tmp/OS_info.txt 2>&1",
+            + "uname -a; rpm -qa ; } >/tmp/OS_info.txt 2>&1",
         "OS_sosreport.txt": (
             "{ rm -rf /tmp/sosreport*FFDC* ; sosreport --batch --tmp-dir "
-        )
-        + "/tmp --label FFDC ; } >/tmp/OS_sosreport.txt 2>&1",
+            + "/tmp --label FFDC ; } >/tmp/OS_sosreport.txt 2>&1"
+        ),
     },
 }
 # Add file name and corresponding command needed for AIX.
@@ -251,8 +261,8 @@ FFDC_METHOD_CALL = {
         "PEL Files": "Collect PEL Log",
         "Redfish Log": "Enumerate Redfish Resources",
         "Firmware Log": "Enumerate Redfish Resources  "
-        + " enum_uri=/redfish/v1/UpdateService/FirmwareInventory  "
-        + " file_enum_name=redfish_FIRMWARE_list.txt",
+            + " enum_uri=/redfish/v1/UpdateService/FirmwareInventory  "
+            + " file_enum_name=redfish_FIRMWARE_list.txt",
         "Redfish OEM Log": "Enumerate Redfish OEM Resources",
         "End ffdc cleanup": "BMC FFDC Cleanup",
     },
