@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d26e1d21_a5da4230",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-07T07:26:36Z",
+      "side": 1,
+      "message": "can you re-frame Documentation text.",
+      "revId": "32d8883371eff6b066bd52aa743d4593329f8216",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bab6a7a_c9fb65e2",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-07T07:26:36Z",
+      "side": 1,
+      "message": "Suggestion : Set DNS Server IP",
+      "revId": "32d8883371eff6b066bd52aa743d4593329f8216",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97960f40_fd2f9c58",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-07T07:26:36Z",
+      "side": 1,
+      "message": "missing ending period.",
+      "revId": "32d8883371eff6b066bd52aa743d4593329f8216",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57c16d0d_fe80a0b6",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-07T07:26:36Z",
+      "side": 1,
+      "message": "Suggestion: Add Static DNS Server IP",
+      "revId": "32d8883371eff6b066bd52aa743d4593329f8216",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c560666_a21deffa",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-07T07:26:36Z",
+      "side": 1,
+      "message": "can you re-frame Documentation text.",
+      "revId": "32d8883371eff6b066bd52aa743d4593329f8216",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a66e5d41_0fb6f5a3",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-07T07:26:36Z",
+      "side": 1,
+      "message": "1. can you remove three dots.\n2. Mention all the possible value for expected_status which you need for keyword.\n3. Mention by default what value is set already.",
+      "revId": "32d8883371eff6b066bd52aa743d4593329f8216",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
