@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39b91e77_a384c036",
+        "filename": "gui/data/gui_variables.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-07T04:48:49Z",
+      "side": 1,
+      "message": "Removing this line as a merge conflict with Nandish\u0027s change.",
+      "parentUuid": "7f2f7251_7f6073d8",
+      "range": {
+        "startLine": 99,
+        "startChar": 4,
+        "endLine": 99,
+        "endChar": 26
+      },
+      "revId": "360afdbe496f3d885dbd79a431cebae5a4c1cc6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "446e6640_bb6ec793",
@@ -54,6 +78,24 @@
       "writtenOn": "2023-02-01T09:45:07Z",
       "side": 1,
       "message": "Add a period.",
+      "revId": "360afdbe496f3d885dbd79a431cebae5a4c1cc6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8fb1d44_089ae8d1",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-07T04:48:49Z",
+      "side": 1,
+      "message": "Added",
+      "parentUuid": "446e6640_bb6ec793",
       "revId": "360afdbe496f3d885dbd79a431cebae5a4c1cc6b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -75,6 +117,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68bb42ba_17840f52",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-07T04:48:49Z",
+      "side": 1,
+      "message": "Added",
+      "parentUuid": "273e37f9_eeb48f1f",
+      "revId": "360afdbe496f3d885dbd79a431cebae5a4c1cc6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "540848c0_36ab324f",
@@ -88,6 +148,30 @@
       "writtenOn": "2023-02-06T06:02:55Z",
       "side": 1,
       "message": "# Take time zone out of browser offset text by selecting text under round \n    # bracket.\n\n    ${text}\u003d  Set Variable  ${xpath_browser_offset_text.split(\"(\")[1].split(\")\")[0]}",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 66
+      },
+      "revId": "360afdbe496f3d885dbd79a431cebae5a4c1cc6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e894712_a1ab5fe2",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-07T04:48:49Z",
+      "side": 1,
+      "message": "Removed my code and added this line.",
+      "parentUuid": "540848c0_36ab324f",
       "range": {
         "startLine": 123,
         "startChar": 0,
