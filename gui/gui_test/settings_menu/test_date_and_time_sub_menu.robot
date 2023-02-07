@@ -134,10 +134,15 @@ Verify Date And Time Change To Browser Offsite Time
 Verify NTP Server Input Fields In Date And Time Page
     [Documentation]  Verify NTP server input fields in date and time page.
     [Tags]  Verify_NTP_Server_Input_Fields_In_Date_And_Time_Page
+    [Setup]  Run Keyword  Redfish Power off  stack_mode=skip
+    [Teardown]  Run Keyword  Redfish Power On
 
-    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
-    ...  body={'NTP':{'NTPServers': ['10.10.10.10', '20.20.20.20', '30.30.30.30']}}
-    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    Click Element At Coordinates  ${xpath_select_ntp}  0  0
+    Input Text  ${xpath_ntp_server1}  10.10.10.10
+    Input Text  ${xpath_ntp_server2}  20.20.20.20
+    Input Text  ${xpath_ntp_server3}  30.30.30.30
+    Click Element  ${xpath_select_save_settings}
+
 
     # Refresh the NTP Page.
     Click Element  ${xpath_refresh_button}
