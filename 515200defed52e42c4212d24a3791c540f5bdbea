@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9359c827_f1e92edc",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-07T05:49:25Z",
+      "side": 1,
+      "message": "We are not taking time into consideration for different time zones as CLI time in BMC doesn\u0027t get changed with respect to the user time zone.\nCLI time on BMC would always show the UTC time\nWe are only comparing the user time zone text in profile setting page and date and time page when browser offset is set.",
+      "parentUuid": "d043d86d_6e20ec9a",
+      "range": {
+        "startLine": 123,
+        "startChar": 4,
+        "endLine": 125,
+        "endChar": 0
+      },
+      "revId": "515200defed52e42c4212d24a3791c540f5bdbea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d488fe43_1473742d",
