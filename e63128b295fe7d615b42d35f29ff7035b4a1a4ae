@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2de365d_451098af",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-02-07T13:34:43Z",
+      "side": 1,
+      "message": "${chassis_state}  ${chassis_status}\u003d  Redfish Get Host State\n    Run Keyword If  \u0027${chassis_state}\u0027 \u003d\u003d \u0027On\u0027  Redfish Power Off\n\nreplace these 2 line with this code.\n\n  Redfish Power Off  stack_mode\u003dskip",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 65
+      },
+      "revId": "e63128b295fe7d615b42d35f29ff7035b4a1a4ae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
