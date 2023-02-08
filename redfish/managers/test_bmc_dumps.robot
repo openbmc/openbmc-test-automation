@@ -296,6 +296,23 @@ Verify BMC Dump Create Errors While Another BMC Dump In Progress
     Wait Until Keyword Succeeds  5 min  15 sec  Check Task Completion  ${resp.dict['Id']}
 
 
+Verify User Initiated BMC Dump At HOST IPL
+    [Documentation]  Create and verify user initiated BMC dump at HOST IPL.
+    [Tags]  Verify_User_Initiated_BMC_Dump_At_HOST_IPL 
+
+    Redfish Delete All BMC Dumps
+
+    # Initiate power on and wait for IPL to start.
+    Redfish Power Operation  On
+    Wait Until Keyword Succeeds  2 min  5 sec  Is Boot Progress Changed
+
+    # Create user initiated BMC dump and verify only one dump is available.
+    Create User Initiated BMC Dump Via Redfish
+    ${dump_entries}=  Get BMC Dump Entries
+    Length Should Be  ${dump_entries}  1
+    Should Be Equal As Integers  ${length}  ${1}
+
+
 *** Keywords ***
 
 Get BMC Dump Entries
