@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61a9a8c6_b450c96b",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-08T10:57:00Z",
+      "side": 1,
+      "message": "# Navigate to Network page and set DNS server.\n    Click Element  ${xpath_network_sub_menu}\n    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network\n\n    Add DNS Servers And Verify  ${dns_server}",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 21
+      },
+      "revId": "a82f0cfb96d6f10c2786bff8e9f0cf13922db95a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1600362_980b4d67",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-08T10:57:00Z",
+      "side": 1,
+      "message": "This is suppose to be use on at the suite setup level. It you want to navigate to this page better to add the code like below and avoid suite setup.\n\n    # Navigate to SNMP page and configure SNMP manager.\n    Click Element  ${xpath_settings_menu}\n    Click Element  ${xpath_snmp_alerts_sub_menu}\n    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  snmp-alerts",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 25
+      },
+      "revId": "a82f0cfb96d6f10c2786bff8e9f0cf13922db95a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fad2fa5_55f412b0",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-08T10:57:00Z",
+      "side": 1,
+      "message": "better to name it as SNMP_HOSTNAME. As this variable needs to be added while running this suite mention about in suite documentation.",
+      "range": {
+        "startLine": 210,
+        "startChar": 38,
+        "endLine": 210,
+        "endChar": 46
+      },
+      "revId": "a82f0cfb96d6f10c2786bff8e9f0cf13922db95a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "700b058c_fb6ef7d0",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-08T10:57:00Z",
+      "side": 1,
+      "message": "our code needs to be modular in such a way that it does just the task which is suppose to do. I see that we are also navigating in above code. Better to use this code directly in above.",
+      "range": {
+        "startLine": 342,
+        "startChar": 0,
+        "endLine": 348,
+        "endChar": 45
+      },
+      "revId": "a82f0cfb96d6f10c2786bff8e9f0cf13922db95a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
