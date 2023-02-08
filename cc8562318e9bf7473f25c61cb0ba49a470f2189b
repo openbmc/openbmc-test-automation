@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d0b8ee3_fd38ba1d",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-08T08:43:55Z",
+      "side": 1,
+      "message": "Remove Run Keyword in both setup and teardown",
+      "revId": "cc8562318e9bf7473f25c61cb0ba49a470f2189b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f371933b_291ede09",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-08T08:43:55Z",
+      "side": 1,
+      "message": "Why do you want to power on in the teardown?",
+      "range": {
+        "startLine": 138,
+        "startChar": 4,
+        "endLine": 138,
+        "endChar": 43
+      },
+      "revId": "cc8562318e9bf7473f25c61cb0ba49a470f2189b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
