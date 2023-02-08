@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "270afae5_1892fbc4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-08T08:54:24Z",
+      "side": 1,
+      "message": "Added",
+      "parentUuid": "4fb09765_50b544cb",
+      "range": {
+        "startLine": 13,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 49
+      },
+      "revId": "e63128b295fe7d615b42d35f29ff7035b4a1a4ae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13c96573_762f7a8f",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-08T06:45:51Z",
       "side": 1,
       "message": "We should also restore date and time setting in the test teardown. This was not done earlier. See if that can be added now.",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 64
+      },
+      "revId": "e63128b295fe7d615b42d35f29ff7035b4a1a4ae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77471fb2_87a28ebc",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-08T08:54:24Z",
+      "side": 1,
+      "message": "Added Teardown to",
+      "parentUuid": "13c96573_762f7a8f",
       "range": {
         "startLine": 136,
         "startChar": 0,
@@ -86,6 +134,54 @@
       "range": {
         "startLine": 138,
         "startChar": 3,
+        "endLine": 139,
+        "endChar": 65
+      },
+      "revId": "e63128b295fe7d615b42d35f29ff7035b4a1a4ae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eb5ff6f_8442ca0e",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-08T08:54:24Z",
+      "side": 1,
+      "message": "Added Redfish Power off stack_mode\u003dskip in setup",
+      "parentUuid": "7a0ea2b1_f811be83",
+      "range": {
+        "startLine": 138,
+        "startChar": 3,
+        "endLine": 139,
+        "endChar": 65
+      },
+      "revId": "e63128b295fe7d615b42d35f29ff7035b4a1a4ae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80483ee4_0cf357ce",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-08T08:54:24Z",
+      "side": 1,
+      "message": "Added Redfish Power off  stack_mode\u003dskip in setup",
+      "parentUuid": "c2de365d_451098af",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
         "endLine": 139,
         "endChar": 65
       },
