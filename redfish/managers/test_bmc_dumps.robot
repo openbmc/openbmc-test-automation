@@ -296,6 +296,32 @@ Verify BMC Dump Create Errors While Another BMC Dump In Progress
     Wait Until Keyword Succeeds  5 min  15 sec  Check Task Completion  ${resp.dict['Id']}
 
 
+Verify Error Log And Dump For Internal Failure
+    [Documentation]  Verify error log and dump for internal failure.
+    [Tags]  Verify_Error_Log_And_Dump_For_Internal_Failure
+
+    Redfish Purge Event Log
+    Redfish Delete All BMC Dumps
+
+    # Create an internal failure error log.
+    BMC Execute Command  ${CMD_INTERNAL_FAILURE}
+
+    # Verify that error log is available.
+    ${pel_records}=  Peltool  -lfh
+    ${ids}=  Get Dictionary Keys  ${pel_records}
+    ${id}=  Get From List  ${ids}  0
+    Should Contain  ${pel_records['${id}']['Sev']}  Internal
+
+    # Verify that BMC dump is available.
+
+    Wait Until Keyword Succeeds  2 min  10 sec  Is BMC Dump Available
+    ${dump_entries}=  Get BMC Dump Entries
+
+    # Verifing that there is only one dump.
+    ${length}=  Get length  ${dump_entries}
+    Should Be Equal As Integers  ${length}  ${1}
+
+
 *** Keywords ***
 
 Get BMC Dump Entries
