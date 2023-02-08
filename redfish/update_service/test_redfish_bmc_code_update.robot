@@ -20,6 +20,7 @@ Resource                 ../../lib/redfish_code_update_utils.robot
 Resource                 ../../lib/utils.robot
 Resource                 ../../lib/bmc_redfish_utils.robot
 Resource                 ../../lib/external_intf/management_console_utils.robot
+Resource                 ../../lib/bmc_network_utils.robot
 Library                  ../../lib/gen_robot_valid.py
 Library                  ../../lib/tftp_update_utils.py
 Library                  ../../lib/gen_robot_keyword.py
@@ -36,6 +37,7 @@ Force Tags               BMC_Code_Update
 @{ADMIN}          admin_user  TestPwd123
 &{USERS}          Administrator=${ADMIN}
 ${LOOP_COUNT}     ${2}
+@{HOSTNAME}       bmc_system01  bmc_system02  bmc_system03  bmc_system04  bmc_system05
 
 *** Test Cases ***
 
@@ -203,6 +205,17 @@ Verify If The Modified Admin Credential Is Valid Post Update
     Redfish.Login  admin_user  0penBmc123
     Redfish.Logout
 
+
+Redfish Code Update With Different Interrupted Operation
+    [Documentation]  Ensure firmware update is successful when different interrupted operation executed
+    ...              i.e. change the hostname.
+    [Tags]  Redfish_Code_Update_With_Different_Interrupted_Operation
+    [Template]  Verify Redfish Code Update With Different Interrupted Operation
+
+    # operation    count
+    Hostname       1
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -288,4 +301,91 @@ Redfish Multiple Upload Image And Check Progress State
     Redfish.Login
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
 
+
+Configure BMC Hostname
+    [Documentation]  Configure hostname on BMC via Redfish.
+    [Arguments]  ${hostname}  ${status_code}
+
+    # Description of argument(s):
+    # hostname       A hostname value which is to be configured on BMC.
+    # status_code    HTTP status code.
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    ${data}=  Create Dictionary  HostName=${hostname}
+    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+    ...  valid_status_codes=[${status_code}]
+
+
+Run Configure BMC Hostname In Loop
+    [Documentation]  Update hostname in loop.
+    [Arguments]  ${count}
+
+    # Description of argument(s):
+    # count    Loop count.
+
+    FOR  ${index}  IN RANGE  ${count}
+      Configure BMC Hostname  hostname=${hostname}[${index}]  status_code=${HTTP_INTERNAL_SERVER_ERROR}
+    END
+
+
+Run Operation On BMC
+    [Documentation]  Run operation on BMC.
+    [Arguments]  ${operation}  ${count}
+
+    # Description of argument(s):
+    # operation    If Hostname then change hostname.
+    # count        Loop count.
+
+    Return From Keyword If  '${operation}' == 'Hostname'  Run Configure BMC Hostname In Loop  count=${count}
+
+
+Verify Redfish Code Update With Different Interrupted Operation
+    [Documentation]  Verify code update is successful when other opreation getting executed i.e.
+    ...              change the hostname.
+    [Arguments]  ${operation}  ${count}
+
+    # Description of argument(s):
+    # operation    Hostname to change Hostname.
+    # count        Number of times loop will get executed.
+
+    ${before_update_activeswimage}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  Links
+    Rprint Vars  before_update_activeswimage
+
+    ${post_code_update_actions}=  Get Post Boot Action
+
+    Set ApplyTime  policy=OnReset
+
+    ${task_inv_dict}=  Get Task State from File
+
+    ${file_bin_data}=  OperatingSystem.Get Binary File  ${image_file_path}
+
+    Log To Console   Start uploading image to BMC.
+    Upload Image To BMC  ${REDFISH_BASE_URI}UpdateService  timeout=${600}  data=${file_bin_data}
+    Log To Console   Completed image upload to BMC.
+
+    ${task_inv}=  Check Task With Match TargetUri  /redfish/v1/UpdateService
+    Rprint Vars  task_inv
+
+    Wait Until Keyword Succeeds  1 min  10 sec
+    ...  Verify Task Progress State  ${task_inv}  ${task_inv_dict['TaskStarting']}
+
+    Run Operation On BMC  ${operation}  ${count}
+
+    Wait Until Keyword Succeeds  5 min  10 sec
+    ...  Verify Task Progress State  ${task_inv}  ${task_inv_dict['TaskCompleted']}
+
+    Run Key  ${post_code_update_actions['BMC image']['OnReset']}
+
+    Redfish.Login
+    Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
+    Verify Get ApplyTime  OnReset
+
+    ${after_update_activeswimage}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  Links
+    Rprint Vars  after_update_activeswimage
+
+    Should Not Be Equal As Strings
+    ...  ${before_update_activeswimage['ActiveSoftwareImage']['@odata.id']}
+    ...  ${after_update_activeswimage['ActiveSoftwareImage']['@odata.id']}
 
