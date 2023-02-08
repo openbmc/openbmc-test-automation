@@ -125,6 +125,23 @@ Verify User Initiated BMC Dump When Host Booted
     List Should Contain Value  ${dump_entries}  ${dump_id}
 
 
+Verify User Initiated BMC Dump At HOST IPL
+    [Documentation]  Create and verify user initiated BMC dump during HOST IPL
+    ...  or when host booting is in progress.
+    [Tags]  Verify_User_Initiated_BMC_Dump_At_HOST_IPL
+
+    Redfish Delete All BMC Dumps
+
+    # Initiate power on.
+    Redfish Power Operation  On
+    Wait Until Keyword Succeeds  2 min  5 sec  Is Boot Progress Changed
+
+    # Create user initiated BMC dump and verify only one dump is available.
+    Create User Initiated BMC Dump Via Redfish
+    ${dump_entries}=  Get BMC Dump Entries
+    Length Should Be  ${dump_entries}  1
+
+
 Verify Dump Persistency On Dump Service Restart
     [Documentation]  Create user dump, restart dump manager service and verify dump
     ...  persistency.
