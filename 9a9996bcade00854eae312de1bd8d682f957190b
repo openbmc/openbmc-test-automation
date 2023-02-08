@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef161581_025e0be6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-08T07:02:53Z",
+      "side": 1,
+      "message": "Please add tested status and reword the commit message a little like below. \n\nAdded test to verify BMC dump creation at HOST IPL\n\nChanges:\n       -  Added a new automation test case to verify BMC dump creation during HOST IPL state.\n\nTested:\n    - \u003ctest status\u003e",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 34
+      },
+      "revId": "9a9996bcade00854eae312de1bd8d682f957190b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca8c329d_685ae804",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-08T07:02:53Z",
+      "side": 1,
+      "message": "Move this test case just after \"Verify User Initiated BMC Dump When Host Booted\" or \"Verify_User_Initiated_BMC_Dump_When_Host_Powered_Off\" test so that similar test case are together.",
+      "range": {
+        "startLine": 299,
+        "startChar": 0,
+        "endLine": 299,
+        "endChar": 42
+      },
+      "revId": "9a9996bcade00854eae312de1bd8d682f957190b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d5277f6_cc055571",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-08T07:02:53Z",
+      "side": 1,
+      "message": "remove white space",
+      "range": {
+        "startLine": 301,
+        "startChar": 54,
+        "endLine": 301,
+        "endChar": 55
+      },
+      "revId": "9a9996bcade00854eae312de1bd8d682f957190b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a9a0d22_5e6fc512",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-08T07:02:53Z",
+      "side": 1,
+      "message": "Initiate HOST power on",
+      "range": {
+        "startLine": 305,
+        "startChar": 6,
+        "endLine": 305,
+        "endChar": 20
+      },
+      "revId": "9a9996bcade00854eae312de1bd8d682f957190b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
