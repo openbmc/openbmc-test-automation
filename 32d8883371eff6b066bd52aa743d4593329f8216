@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94bc11b9_4c5e8170",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-08T07:26:18Z",
+      "side": 1,
+      "message": "this documentation explains clearly about this tc",
+      "parentUuid": "d26e1d21_a5da4230",
+      "revId": "32d8883371eff6b066bd52aa743d4593329f8216",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0bab6a7a_c9fb65e2",
         "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
         "patchSetId": 7
@@ -31,6 +49,24 @@
       "writtenOn": "2023-02-07T07:26:36Z",
       "side": 1,
       "message": "Suggestion : Set DNS Server IP",
+      "revId": "32d8883371eff6b066bd52aa743d4593329f8216",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a466a767_cdeabe55",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-08T07:26:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bab6a7a_c9fb65e2",
       "revId": "32d8883371eff6b066bd52aa743d4593329f8216",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa13bc33_86715aaa",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-08T07:26:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97960f40_fd2f9c58",
+      "revId": "32d8883371eff6b066bd52aa743d4593329f8216",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57c16d0d_fe80a0b6",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-02-07T07:26:36Z",
       "side": 1,
       "message": "Suggestion: Add Static DNS Server IP",
+      "revId": "32d8883371eff6b066bd52aa743d4593329f8216",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c8dda3_b6178ee0",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-08T07:26:18Z",
+      "side": 1,
+      "message": "this is already present in network suite also.",
+      "parentUuid": "57c16d0d_fe80a0b6",
       "revId": "32d8883371eff6b066bd52aa743d4593329f8216",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -99,6 +171,24 @@
       "writtenOn": "2023-02-07T07:26:36Z",
       "side": 1,
       "message": "1. can you remove three dots.\n2. Mention all the possible value for expected_status which you need for keyword.\n3. Mention by default what value is set already.",
+      "revId": "32d8883371eff6b066bd52aa743d4593329f8216",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4771cdac_3ee8e98a",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-08T07:26:18Z",
+      "side": 1,
+      "message": "this is not my code it is already available in network suite am just calling out here",
+      "parentUuid": "a66e5d41_0fb6f5a3",
       "revId": "32d8883371eff6b066bd52aa743d4593329f8216",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
