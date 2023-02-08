@@ -110,7 +110,7 @@ Verify BMC Dump Default Location In BMC
      ${dump_file}  ${stderr}  ${rc}=  BMC Execute Command
      ...  ls ${BMC_DUMP_COLLECTOR_PATH}/${dump_id}
      Should Be True  ${rc} == 0
-     Should Contain Any  ${dump_file}  BMCDUMP  obmcdump
+     Should Contain Any  ${dump_file}  BMCDUMP  obmcdump 
 
 
 Verify User Initiated BMC Dump When Host Booted
@@ -356,6 +356,30 @@ Verify Core Dump After Terminating Dump Manager Service
 
     # Verifying that there is only one dump.
     ${dump_entries}=  Get BMC Dump Entries
+    ${length}=  Get length  ${dump_entries}
+    Should Be Equal As Integers  ${length}  ${1}
+
+
+Verify Error Log And Dump For Internal Failure
+    [Documentation]  Verify error log and dump for internal failure.
+    [Tags]  Verify_Error_Log_And_Dump_For_Internal_Failure
+
+    Redfish Purge Event Log
+    Redfish Delete All BMC Dumps
+
+    # Create an internal failure error log.
+    BMC Execute Command  ${CMD_INTERNAL_FAILURE}
+
+    # With internal failure, an error log file is generated. So, an attempt to
+    # retrieve content is successful as file attachment exist.
+    Redfish.Get  /redfish/v1/Systems/system/LogServices/CELog/Entries/1/attachment
+    ...  valid_status_codes=[${HTTP_OK}]
+
+    # Verify that BMC dump is available.
+    Wait Until Keyword Succeeds  2 min  10 sec  Is BMC Dump Available
+    ${dump_entries}=  Get BMC Dump Entries
+
+    # Verifing that there is only one dump.
     ${length}=  Get length  ${dump_entries}
     Should Be Equal As Integers  ${length}  ${1}
 
