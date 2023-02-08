@@ -1,5 +1,9 @@
 {
     "comment": "This is a generic possible redfish standard task states.",
+    "TaskStarting": {
+        "TaskState": "Starting",
+        "TaskStatus": "OK"
+    },
     "TaskRunning": {
         "TaskState": "Running",
         "TaskStatus": "OK"
