@@ -20,6 +20,7 @@ Resource                 ../../lib/redfish_code_update_utils.robot
 Resource                 ../../lib/utils.robot
 Resource                 ../../lib/bmc_redfish_utils.robot
 Resource                 ../../lib/external_intf/management_console_utils.robot
+Resource                 ../../lib/bmc_network_utils.robot
 Library                  ../../lib/gen_robot_valid.py
 Library                  ../../lib/tftp_update_utils.py
 Library                  ../../lib/gen_robot_keyword.py
@@ -36,6 +37,7 @@ Force Tags               BMC_Code_Update
 @{ADMIN}          admin_user  TestPwd123
 &{USERS}          Administrator=${ADMIN}
 ${LOOP_COUNT}     ${2}
+@{HOSTNAME}       bmc_system01  bmc_system02  bmc_system03  bmc_system04  bmc_system05
 
 *** Test Cases ***
 
@@ -126,47 +128,6 @@ Post BMC Reset Perform Image Switched To Backup Multiple Times
     Redfish BMC Dump Should Not Exist
 
 
-Verify Code Update Fails When Kernel Panic Occur
-     [Documentation]  Ensure firmware update is un-successful when kernel panic
-     ...              occur during ongoing firmware update.
-     [Tags]  Verify_Code_Update_Fails_When_Kernel_Panic_Occur
-
-     ${before_update_activeswimage}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  Links
-     Rprint Vars  before_update_activeswimage
-
-     Set ApplyTime  policy=OnReset
-
-     ${task_inv_dict}=  Get Task State from File
-
-     ${file_bin_data}=  OperatingSystem.Get Binary File  ${image_file_path}
-
-     Log To Console   Start uploading image to BMC.
-     Upload Image To BMC  ${REDFISH_BASE_URI}UpdateService  timeout=${600}  data=${file_bin_data}
-     Log To Console   Completed image upload to BMC.
-
-     Sleep  5
-
-     ${task_inv}=  Check Task With Match TargetUri  /redfish/v1/UpdateService
-     Rprint Vars  task_inv
-
-     Run Keyword  Kernel Panic BMC Reset Operation
-
-     Is BMC Unpingable
-
-     Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Standby
-
-     Redfish.Login
-
-     ${after_update_activeswimage}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  Links
-     Rprint Vars  after_update_activeswimage
-
-     Should Be Equal As Strings
-     ...  ${before_update_activeswimage['ActiveSoftwareImage']['@odata.id']}
-     ...  ${after_update_activeswimage['ActiveSoftwareImage']['@odata.id']}
-
-     Verify Get ApplyTime  OnReset
-
-
 Verify If The Modified Admin Credential Is Valid Post Image Switched To Backup
     [Documentation]  Verify updated admin credential remain same post switch to back up image.
     [Tags]  Verify_If_The_Modified_Admin_Credential_Is_Valid_Post_Image_Switched_To_Backup
@@ -202,6 +163,17 @@ Verify If The Modified Admin Credential Is Valid Post Update
     # verify modified admin credentails on latest image.
     Redfish.Login  admin_user  0penBmc123
     Redfish.Logout
+
+
+Redfish Code Update With Different Interrupted Operation
+    [Documentation]  Ensure firmware update is successful when different interrupted operation executed
+    ...              i.e. change the hostname.
+    [Tags]  Redfish_Code_Update_With_Different_Interrupted_Operation
+    [Template]  Verify Redfish Code Update With Different Interrupted Operation
+
+    # operation    count
+    host_name       1
+    kernel_panic    1
 
 *** Keywords ***
 
@@ -288,4 +260,93 @@ Redfish Multiple Upload Image And Check Progress State
     Redfish.Login
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
 
+
+Run Configure BMC Hostname In Loop
+    [Documentation]  Update hostname in loop.
+    [Arguments]  ${count}
+
+    # Description of argument(s):
+    # count    Loop count.
+
+    FOR  ${index}  IN RANGE  ${count}
+      Configure Hostname  hostname=${HOSTNAME}[${index}]  status_code=[${HTTP_INTERNAL_SERVER_ERROR}]
+    END
+
+
+Run Operation On BMC
+    [Documentation]  Run operation on BMC.
+    [Arguments]  ${operation}  ${count}
+
+    # Description of argument(s):
+    # operation    If host_name then change hostname.
+    # count        Loop count.
+
+    Run Keyword If  '${operation}' == 'host_name'  Run Configure BMC Hostname In Loop  count=${count}
+    Run Keyword If  '${operation}' == 'kernel_panic'
+    ...  Run Keywords  Kernel Panic BMC Reset Operation  AND
+    ...  Is BMC Unpingable
+
+
+Get Active Firmware Image
+    [Documentation]  Return get active firmware image.
+
+    ${active_image}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  Links
+    #Rprint Vars  active_image
+
+    [Return]  ${active_image}
+
+
+Verify Redfish Code Update With Different Interrupted Operation
+    [Documentation]  Verify code update is successful when other opreation getting executed i.e.
+    ...              change the hostname.
+    [Arguments]  ${operation}  ${count}
+
+    # Description of argument(s):
+    # operation    host_name to change Hostname, kernel_panic to perform kernel panic.
+    # count        Number of times loop will get executed.
+
+    ${before_update_activeswimage}=  Get Active Firmware Image
+
+    ${post_code_update_actions}=  Get Post Boot Action
+
+    Set ApplyTime  policy=OnReset
+
+    ${task_inv_dict}=  Get Task State from File
+
+    ${file_bin_data}=  OperatingSystem.Get Binary File  ${image_file_path}
+
+    Log To Console   Start uploading image to BMC.
+    Upload Image To BMC  ${REDFISH_BASE_URI}UpdateService  timeout=${600}  data=${file_bin_data}
+    Log To Console   Completed image upload to BMC.
+
+    ${task_inv}=  Check Task With Match TargetUri  /redfish/v1/UpdateService
+    Rprint Vars  task_inv
+
+    Wait Until Keyword Succeeds  1 min  10 sec
+    ...  Verify Task Progress State  ${task_inv}  ${task_inv_dict['TaskStarting']}
+
+    Run Operation On BMC  ${operation}  ${count}
+
+    Run Keyword If  '${operation}' == 'kernel_panic'
+    ...  Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Standby
+
+    Run Keyword If  '${operation}' == 'host_name'
+    ...  Run Keywords  Wait Until Keyword Succeeds  5 min  10 sec
+    ...  Verify Task Progress State  ${task_inv}  ${task_inv_dict['TaskCompleted']}  AND
+    ...  Run Key  ${post_code_update_actions['BMC image']['OnReset']}  AND
+    ...  Redfish.Login  AND
+    ...  Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
+
+    ${after_update_activeswimage}=  Get Active Firmware Image
+
+    ${status}=  Run Keyword And Return Status  Should Be Equal As Strings
+    ...  ${before_update_activeswimage['ActiveSoftwareImage']['@odata.id']}
+    ...  ${after_update_activeswimage['ActiveSoftwareImage']['@odata.id']}
+
+    Run Keyword If  '${operation}' == 'kernel_panic'
+    ...    Should Be True  ${status}
+    ...  ELSE
+    ...    Should Not Be True  ${status}
+
+    Verify Get ApplyTime  OnReset
 
