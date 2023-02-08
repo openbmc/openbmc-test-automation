@@ -296,6 +296,32 @@ Verify BMC Dump Create Errors While Another BMC Dump In Progress
     Wait Until Keyword Succeeds  5 min  15 sec  Check Task Completion  ${resp.dict['Id']}
 
 
+Verify Initiate Core Dumps And Kill Phosphor-dump-manager
+    [Documentation]  Verify initiate core dumps and kill Phosphor-dump-manager.
+    [Tags]  Verify_Initiate_Core_Dumps_And_Kill_Phosphor-dump-manager
+
+    # Remove all available dumps in BMC.
+    Redfish Delete All BMC Dumps
+
+    # Initiate core dump
+    Trigger Core Dump
+
+    # Kill phosphor dump manager
+    # Find the pid of the phosphor-dump-manage and kill it.
+    ${cmd_buf}=  Catenate  kill -s SEGV $(ps | egrep ' phosphor-dump-manager$' |
+    ...  egrep -v grep | \ cut -c1-6)
+    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd_buf}
+    Should Be Equal As Integers  ${rc}  ${0}
+
+    # Verify that BMC dump is available.
+    Wait Until Keyword Succeeds  2 min  10 sec  Is BMC Dump Available
+
+    # Verifing that there is only one dump.
+    ${dump_entries}=  Get BMC Dump Entries
+    ${length}=  Get length  ${dump_entries}
+    Should Be Equal As Integers  ${length}  ${1}
+
+
 *** Keywords ***
 
 Get BMC Dump Entries
