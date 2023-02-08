@@ -347,7 +347,7 @@ Run Build Net
 
 Configure Hostname
     [Documentation]  Configure hostname on BMC via Redfish.
-    [Arguments]  ${hostname}
+    [Arguments]  ${hostname}  ${status_code}=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Description of argument(s):
     # hostname  A hostname value which is to be configured on BMC.
@@ -357,7 +357,7 @@ Configure Hostname
 
     ${data}=  Create Dictionary  HostName=${hostname}
     Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
-    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    ...  valid_status_codes=${status_code}
 
 
 Verify IP On BMC
