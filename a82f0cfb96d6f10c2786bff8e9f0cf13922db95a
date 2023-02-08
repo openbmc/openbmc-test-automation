@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68d57396_7f3f6a3d",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-08T14:22:33Z",
+      "side": 1,
+      "message": "I have written this as a keyword",
+      "parentUuid": "61a9a8c6_b450c96b",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 21
+      },
+      "revId": "a82f0cfb96d6f10c2786bff8e9f0cf13922db95a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1600362_980b4d67",
         "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
         "patchSetId": 9
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff32b3b1_49b9a042",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-08T14:22:33Z",
+      "side": 1,
+      "message": "instead of adding 3 lines of code it\u0027s better to use a single line code by calling the keyword right",
+      "parentUuid": "d1600362_980b4d67",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 25
+      },
+      "revId": "a82f0cfb96d6f10c2786bff8e9f0cf13922db95a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2fad2fa5_55f412b0",
         "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
         "patchSetId": 9
@@ -60,6 +108,30 @@
       "writtenOn": "2023-02-08T10:57:00Z",
       "side": 1,
       "message": "better to name it as SNMP_HOSTNAME. As this variable needs to be added while running this suite mention about in suite documentation.",
+      "range": {
+        "startLine": 210,
+        "startChar": 38,
+        "endLine": 210,
+        "endChar": 46
+      },
+      "revId": "a82f0cfb96d6f10c2786bff8e9f0cf13922db95a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06ac1989_2dd0e577",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-08T14:22:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fad2fa5_55f412b0",
       "range": {
         "startLine": 210,
         "startChar": 38,
