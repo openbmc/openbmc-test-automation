@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "460a6615_533b0853",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-09T10:56:00Z",
+      "side": 1,
+      "message": "Changed accordingly.",
+      "parentUuid": "b8cffaa7_70e28328",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 72
+      },
+      "revId": "0abf862f8df507867551b26f944b98881cd4c632",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfdd1b73_8db7b3d5",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-09T08:39:24Z",
       "side": 1,
       "message": "This is a good candidate to be in test setup. You can add this as a common one.",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 34
+      },
+      "revId": "0abf862f8df507867551b26f944b98881cd4c632",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "652b9437_cc30755b",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-09T10:56:00Z",
+      "side": 1,
+      "message": "Added in Test Setup and removed from test cases",
+      "parentUuid": "cfdd1b73_8db7b3d5",
       "range": {
         "startLine": 121,
         "startChar": 0,
