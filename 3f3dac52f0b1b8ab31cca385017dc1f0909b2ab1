@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1405342a_13943538",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-09T11:51:44Z",
+      "side": 1,
+      "message": "Fixed it",
+      "parentUuid": "2a667426_109eec77",
+      "revId": "3f3dac52f0b1b8ab31cca385017dc1f0909b2ab1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30175398_755347c8",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-02-09T11:04:29Z",
       "side": 1,
       "message": "Don\u0027t u want to navigate to date time for this test?",
+      "range": {
+        "startLine": 137,
+        "startChar": 4,
+        "endLine": 137,
+        "endChar": 47
+      },
+      "revId": "3f3dac52f0b1b8ab31cca385017dc1f0909b2ab1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d55d582e_a271b3c7",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-09T11:51:44Z",
+      "side": 1,
+      "message": "I made the changes accordingly",
+      "parentUuid": "30175398_755347c8",
       "range": {
         "startLine": 137,
         "startChar": 4,
