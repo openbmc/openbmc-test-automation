@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a40f304_ae355811",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-09T12:09:08Z",
+      "side": 1,
+      "message": "DateTime:Setup to navigate to date and time page",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 17
+      },
+      "revId": "8f22cc1ccd6868ae406cd8930d1c62ae7ccbf78d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef3c2c6c_71f8e871",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-09T12:09:08Z",
+      "side": 1,
+      "message": "Setup To Power Off And Navigate",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 21
+      },
+      "revId": "8f22cc1ccd6868ae406cd8930d1c62ae7ccbf78d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
