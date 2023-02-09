@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0fcb381_d83f050a",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-02-09T09:04:26Z",
+      "side": 1,
+      "message": "use from network utils lib",
+      "revId": "9ee28d812806a7e67abd5139173f6a4dec35016c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ccc498a_b67e69d5",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-02-09T09:04:26Z",
+      "side": 1,
+      "message": "can you make kernel panic as operation here and use this code.",
+      "range": {
+        "startLine": 374,
+        "startChar": 0,
+        "endLine": 374,
+        "endChar": 48
+      },
+      "revId": "9ee28d812806a7e67abd5139173f6a4dec35016c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
