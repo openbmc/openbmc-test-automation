@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "caf66f9c_62b28d57",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-09T12:26:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a40f304_ae355811",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 17
+      },
+      "revId": "8f22cc1ccd6868ae406cd8930d1c62ae7ccbf78d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef3c2c6c_71f8e871",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-09T12:09:08Z",
       "side": 1,
       "message": "Setup To Power Off And Navigate",
+      "range": {
+        "startLine": 163,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 21
+      },
+      "revId": "8f22cc1ccd6868ae406cd8930d1c62ae7ccbf78d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e36d3b93_9b5a6d04",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-09T12:26:51Z",
+      "side": 1,
+      "message": "Changed",
+      "parentUuid": "ef3c2c6c_71f8e871",
       "range": {
         "startLine": 163,
         "startChar": 0,
