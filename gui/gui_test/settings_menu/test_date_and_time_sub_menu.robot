@@ -106,6 +106,7 @@ Verify Existence Of Timezone Buttons In Profile Settings Page
     ...  in Profile settings page
     [Tags]  Verify_Existence_Of_Timezone_Buttons_In_Profile_Settings_Page
 
+    Navigate To Date and Time Page
     Click Element   ${xpath_profile_settings_link}
     Wait Until Page Contains Element  ${xpath_profile_settings_heading}  timeout=30
     Page Should Contain Element  ${xpath_default_UTC}
@@ -117,6 +118,7 @@ Verify Date And Time Change To Browser Offsite Time
     ...  'Browser offset' option is selected in Profile settings page.
     [Tags]   Verify_Date_And_Time_Change_To_Browser_Offset_Time
 
+    Navigate To Date and Time Page
     Click Element   ${xpath_profile_settings_link}
     Wait Until Page Contains Element  ${xpath_profile_settings_heading}  timeout=10
     Click Element At Coordinates  ${xpath_browser_offset}  0  0
@@ -136,6 +138,7 @@ Verify NTP Server Input Fields In Date And Time Page
     [Tags]  Verify_NTP_Server_Input_Fields_In_Date_And_Time_Page
     [Setup]  Redfish Power off  stack_mode=skip
 
+    Navigate To Date and Time Page
     Click Element At Coordinates  ${xpath_select_ntp}  0  0
     Input Text  ${xpath_ntp_server1}  10.10.10.10
     Input Text  ${xpath_ntp_server2}  20.20.20.20
