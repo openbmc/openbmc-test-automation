@@ -6,7 +6,7 @@ Resource        ../../lib/gui_resource.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
-
+Test Setup      Navigate To Date and Time Page
 
 *** Variables ***
 
@@ -159,7 +159,6 @@ Suite Setup Execution
 
     Launch Browser And Login GUI
     Maximize Browser Window
-    Navigate To Date and Time Page
 
 Navigate To Date and Time Page
     [Documentation]  Navigate to the date and time page from main menu.
