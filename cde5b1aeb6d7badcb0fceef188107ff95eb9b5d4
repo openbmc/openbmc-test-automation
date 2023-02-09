@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe38842c_cfcf8643",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-09T06:53:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6b35020_6c5eff1d",
+      "range": {
+        "startLine": 299,
+        "startChar": 0,
+        "endLine": 299,
+        "endChar": 64
+      },
+      "revId": "cde5b1aeb6d7badcb0fceef188107ff95eb9b5d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b579f5e_69f81f39",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-07T07:26:03Z",
       "side": 1,
       "message": "\"Is\" is having capital I in the documentation. Test case name can be shorter. Try keep it small like below:\n\nVerify Internal Failure Initiated BMC Dump Size\n    [Documentation]  Verify that the internal failure initiated BMC dump \n    ...  size is under 20 MB.\n    [Tags]  Verify_Internal_Failure_Initiated_BMC_Dump_Size",
+      "range": {
+        "startLine": 299,
+        "startChar": 0,
+        "endLine": 301,
+        "endChar": 42
+      },
+      "revId": "cde5b1aeb6d7badcb0fceef188107ff95eb9b5d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe43314e_7e16af9d",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-09T06:53:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b579f5e_69f81f39",
       "range": {
         "startLine": 299,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f09d81f2_35b7bd63",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-09T06:53:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b2789f3_b5f005ab",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 308,
+        "endChar": 40
+      },
+      "revId": "cde5b1aeb6d7badcb0fceef188107ff95eb9b5d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "495f2cf2_1ea8497e",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-02-07T07:26:03Z",
       "side": 1,
       "message": "After this also make sure that only one BMC dump gets created after injecting error like below.\n\n    # Verify that only one BMC dump is generated after injecting error.\n    ${length}\u003d  Get length  ${dump_entries}\n    Should Be Equal As Integers  ${length}  ${1}",
+      "range": {
+        "startLine": 312,
+        "startChar": 0,
+        "endLine": 313,
+        "endChar": 77
+      },
+      "revId": "cde5b1aeb6d7badcb0fceef188107ff95eb9b5d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab95fafa_8113b0bd",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-09T06:53:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "495f2cf2_1ea8497e",
       "range": {
         "startLine": 312,
         "startChar": 0,
