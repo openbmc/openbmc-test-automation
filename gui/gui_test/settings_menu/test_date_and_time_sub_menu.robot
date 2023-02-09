@@ -6,7 +6,7 @@ Resource        ../../lib/gui_resource.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
-
+Test Setup      Navigate To Date and Time Page
 
 *** Variables ***
 
@@ -134,7 +134,7 @@ Verify Date And Time Change To Browser Offsite Time
 Verify NTP Server Input Fields In Date And Time Page
     [Documentation]  Verify NTP server input fields in date and time page.
     [Tags]  Verify_NTP_Server_Input_Fields_In_Date_And_Time_Page
-    [Setup]  Redfish Power off  stack_mode=skip
+    [Setup]  Requirement Execution
 
     Click Element At Coordinates  ${xpath_select_ntp}  0  0
     Input Text  ${xpath_ntp_server1}  10.10.10.10
@@ -159,7 +159,14 @@ Suite Setup Execution
 
     Launch Browser And Login GUI
     Maximize Browser Window
-    Navigate To Date and Time Page
+
+Requirement Execution
+   [Documentation]  Power off system if not powered off and go to date and
+   ...  time page.
+
+   Redfish Power off  stack_mode=skip
+   Navigate To Date and Time Page
+
 
 Navigate To Date and Time Page
     [Documentation]  Navigate to the date and time page from main menu.
