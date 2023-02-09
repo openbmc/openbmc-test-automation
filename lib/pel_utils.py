@@ -15,10 +15,10 @@ import func_args as fa
 base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(base_path + "/data/")
 
-import pel_variables  # NOQA
+#import pel_variables  # NOQA
 
 
-class peltool_exception(Exception):
+class PeltoolException(Exception):
     r"""
     Base class for peltool related exceptions.
     """
@@ -49,15 +49,17 @@ def peltool(option_string, parse_json=True, **bsu_options):
         [CreatorID]:                    BMC
 
     Description of argument(s):
-    option_string                   A string of options which are to be processed by the peltool command.
-    parse_json                      Indicates that the raw JSON data should parsed into a list of
-                                    dictionaries.
-    bsu_options                     Options to be passed directly to bmc_execute_command. See its prolog for
+    option_string                   A string of options which are to be
+                                    processed by the peltool command.
+    parse_json                      Indicates that the raw JSON data should
+                                    parsed into a list of dictionaries.
+    bsu_options                     Options to be passed directly to
+                                    bmc_execute_command. See its prolog for
                                     details.
     """
 
     bsu_options = fa.args_to_objects(bsu_options)
-    out_buf, stderr, rc = bsu.bmc_execute_command(
+    out_buf, _ , _ = bsu.bmc_execute_command(
         "peltool " + option_string, **bsu_options
     )
     if parse_json:
@@ -89,8 +91,9 @@ def get_pel_data_from_bmc(
         pel_data = peltool(pel_cmd)
         if not pel_data:
             print("No PEL data present in BMC ...")
-    except Exception as e:
-        raise peltool_exception("Failed to get PEL data from BMC : " + str(e))
+    except Exception as exception:
+        raise PeltoolException("Failed to get PEL data from BMC : " +
+              str(exception)) from exception
     return pel_data
 
 
@@ -104,11 +107,12 @@ def verify_no_pel_exists_on_bmc():
 
         if len(pel_data) == 0:
             return True
-        else:
-            print("PEL data present. \n", pel_data)
-            raise peltool_exception("PEL data present in BMC")
-    except Exception as e:
-        raise peltool_exception("Failed to get PEL data from BMC : " + str(e))
+
+        print("PEL data present. \n", pel_data)
+        raise PeltoolException("PEL data present in BMC")
+    except Exception as exception:
+        raise PeltoolException("Failed to get PEL data from BMC : " +
+              str(exception)) from exception
 
 
 def compare_pel_and_redfish_event_log(pel_record, event_record):
@@ -136,8 +140,8 @@ def compare_pel_and_redfish_event_log(pel_record, event_record):
 
         # Created : 2022-11-14T12:38:04+00:00
 
-        print("\nPEL records : {0}".format(pel_record))
-        print("\nEvent records : {0}".format(event_record))
+        print(f"\nPEL records : {pel_record}")
+        print(f"\nEvent records : {event_record}")
 
         pel_src = pel_record["pel_data"]["SRC"]
         pel_created_time = pel_record["pel_detail_data"]["Private Header"][
@@ -157,16 +161,10 @@ def compare_pel_and_redfish_event_log(pel_record, event_record):
 
         event_created_time = event_date_time.replace("-", "/")
 
-        print(
-            "\nPEL SRC : {0} | PEL Created Time : {1}".format(
-                pel_src, pel_created_time
-            )
-        )
-        print(
-            "\nError event ID : {0} | Error Log Created Time : {1}".format(
-                event_ids[0], event_created_time
-            )
-        )
+        print(f"\nPEL SRC : {pel_src} | PEL Created Time : {pel_created_time}")
+
+        print(f"\nError event ID : {event_ids[0]} | Error Log Created Time "+
+               ": {event_created_time}")
 
         if pel_src == event_ids[0] and pel_created_time == event_created_time:
             print(
@@ -174,17 +172,17 @@ def compare_pel_and_redfish_event_log(pel_record, event_record):
                 "event ID, created time"
             )
         else:
-            raise peltool_exception(
+            raise PeltoolException(
                 "\nPEL SRC and created date time did not "
                 "match with event ID, created time"
             )
-    except Exception as e:
-        raise peltool_exception(
+    except Exception as exception:
+        raise PeltoolException(
             "Exception occurred during PEL and Event log "
             "comparison for SRC or event ID and created "
             "time : "
-            + str(e)
-        )
+            + str(exception)
+        ) from exception
 
 
 def fetch_all_pel_ids_for_src(src_id, severity, include_hidden_pels=False):
@@ -211,13 +209,13 @@ def fetch_all_pel_ids_for_src(src_id, severity, include_hidden_pels=False):
                     src_pel_ids.append(pel_id)
 
         if not src_pel_ids:
-            raise peltool_exception(
+            raise PeltoolException(
                 src_id + " with severity " + severity + " not present"
             )
-    except Exception as e:
-        raise peltool_exception(
-            "Failed to fetch PEL ID for required SRC : " + str(e)
-        )
+    except Exception as exception:
+        raise PeltoolException(
+            "Failed to fetch PEL ID for required SRC : " + str(exception)
+        ) from exception
     return src_pel_ids
 
 
@@ -236,13 +234,14 @@ def fetch_all_src(include_hidden_pels=False):
             for pel_id in pel_id_list:
                 src_id.append(pel_data[pel_id]["SRC"])
         print("SRC IDs: " + str(src_id))
-    except Exception as e:
-        raise peltool_exception("Failed to fetch all SRCs : " + str(e))
+    except Exception as exception:
+        raise PeltoolException("Failed to fetch all SRCs : " + str(exception)) \
+        from exception
     return src_id
 
 
 def check_for_unexpected_src(
-    unexpected_src_list=[], include_hidden_pels=False
+    unexpected_src_list=None, include_hidden_pels=False
 ):
     r"""
     From the given unexpected SRC list, check if any unexpected SRC created
@@ -265,12 +264,12 @@ def check_for_unexpected_src(
                 print("Found an unexpected SRC : " + src)
                 unexpected_src_count = unexpected_src_count + 1
         if unexpected_src_count >= 1:
-            raise peltool_exception("Unexpected SRC found.")
+            raise PeltoolException("Unexpected SRC found.")
 
-    except Exception as e:
-        raise peltool_exception(
-            "Failed to verify unexpected SRC list : " + str(e)
-        )
+    except Exception as exception:
+        raise PeltoolException(
+            "Failed to verify unexpected SRC list : " + str(exception)
+        ) from exception
     return unexpected_src_count
 
 
@@ -302,3 +301,15 @@ def get_bmc_event_log_id_for_pel(pel_id):
     print(pel_data)
     bmc_id_for_pel = pel_data["Private Header"]["BMC Event Log Id"]
     return bmc_id_for_pel
+
+def get_latest_pels(number_of_pels=1):
+    r"""
+    Return latest PEL IDs.
+
+    Description of arguments:
+    number_of_pels       Number of PELS to be returned.
+    """
+
+    pel_data = peltool("-lr")
+    pel_ids = list(pel_data.keys())
+    return pel_ids[:number_of_pels]
