@@ -302,3 +302,15 @@ def get_bmc_event_log_id_for_pel(pel_id):
     print(pel_data)
     bmc_id_for_pel = pel_data["Private Header"]["BMC Event Log Id"]
     return bmc_id_for_pel
+
+def get_latest_pels(number_of_pels=1):
+    r"""
+    Return latest PEL IDs.
+
+    Description of arguments:
+    number_of_pels       Number of PELS to be returned.
+    """
+
+    pel_data = peltool("-lr")
+    pel_ids = list(pel_data.keys())
+    return pel_ids[:number_of_pels]
