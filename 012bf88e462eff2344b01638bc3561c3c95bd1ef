@@ -16,6 +16,23 @@
       "message": "$ python3 -m pylint gui/data/gui_variables.py\n************* Module gui_variables\ngui/data/gui_variables.py:8:0: C0115: Missing class docstring (missing-class-docstring)\ngui/data/gui_variables.py:8:0: C0103: Class name \"gui_variables\" doesn\u0027t conform to PascalCase naming style (invalid-name)\ngui/data/gui_variables.py:8:0: R0903: Too few public methods (0/2) (too-few-public-methods)",
       "revId": "012bf88e462eff2344b01638bc3561c3c95bd1ef",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "728c21b4_f682991c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-02-10T05:29:21Z",
+      "side": 1,
+      "message": "After fix \n\n$ python3 -m pylint gui/data/gui_variables.py\n************* Module gui_variables\ngui/data/gui_variables.py:8:0: R0903: Too few public methods (0/2) (too-few-public-methods)\n\n------------------------------------------------------------------\nYour code has been rated at 9.84/10 (previous run: 9.84/10, +0.00\n\n\nThis class is for robot to use and we dont intend to write public method for now. Ignoring",
+      "revId": "012bf88e462eff2344b01638bc3561c3c95bd1ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
