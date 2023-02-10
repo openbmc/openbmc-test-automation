@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e48b831_187ef8db",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-10T09:44:03Z",
+      "side": 1,
+      "message": "Verify Error Log And BMC Dump For Internal Failure",
+      "range": {
+        "startLine": 299,
+        "startChar": 0,
+        "endLine": 299,
+        "endChar": 46
+      },
+      "revId": "096ab4100526460f2f3471ee769796c92db82437",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "152e5bc4_4ace41e6",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-10T09:44:03Z",
+      "side": 1,
+      "message": "Use Redfish to verify error log presence because peltool in a BMC cli command which is meant to be used by support people only.",
+      "range": {
+        "startLine": 309,
+        "startChar": 0,
+        "endLine": 313,
+        "endChar": 60
+      },
+      "revId": "096ab4100526460f2f3471ee769796c92db82437",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab252834_5f580b55",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-10T09:44:03Z",
+      "side": 1,
+      "message": "# Wait for the BMC dump to become available and verify its presence\n    Wait Until Keyword Succeeds  2 min  10 sec  Is BMC Dump Available\n\n    ${dump_entries}\u003d  Get BMC Dump Entries\n    Should Be Equal As Integers ${len(${dump_entries})} ${1}",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 322,
+        "endChar": 48
+      },
+      "revId": "096ab4100526460f2f3471ee769796c92db82437",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
