@@ -198,7 +198,7 @@ Configure SNMP Manager Via GUI And Verify SNMP Trap
     ${CMD_INFORMATIONAL_ERROR}  ${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}
 
 
-Configure SNMP Manager By Its Hostname Via GUI AND Verify
+Configure SNMP Manager By Its Hostname Via GUI And Verify
     [Documentation]  Login GUI SNMP alerts page and add SNMP manager with its hostname
     ...  via GUI and verify.
     [Tags]  Configure_SNMP_Manager_By_Its_Hostname_Via_GUI_And_Verify
@@ -343,7 +343,7 @@ Close Add SNMP Alerts Destination Window
 
 Set DNS Server IP
     [Documentation]  Add static DNS IP.
-    
+
     Click Element  ${xpath_network_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network
 
