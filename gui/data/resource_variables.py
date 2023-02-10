@@ -7,6 +7,9 @@ menus.
 
 
 class resource_variables:
+    r"""
+    Base class for GUI resource related XPATH variables.
+    """
     xpath_textbox_hostname = "//input[@id='host']"
     xpath_textbox_username = "//input[@id='username']"
     xpath_textbox_password = "//input[@id='password']"
