@@ -5,7 +5,11 @@ Contains xpaths and related string constants applicable for new Vue based OpenBM
 """
 
 
-class gui_variables:
+class GuiVariables:
+    r"""
+    Base class for GUI related XPATH variables.
+    """
+
     # Login page
     xpath_textbox_hostname = "//input[@id='host']"
     xpath_textbox_username = "//*[@data-test-id='login-input-username']"
