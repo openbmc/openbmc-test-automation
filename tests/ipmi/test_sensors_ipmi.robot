@@ -138,7 +138,7 @@ Set OperatingSystemState To CBoot And Verify
     [Template]  Check OperatingSystemState
 
     # OperatingSystemStateID  OperatingSystemState
-    0x02                      ${OS_BOOT_CBoot}
+    0x02                      ${OS_BOOT_CBOOT}
 
 
 Set OperatingSystemState To PXEBoot And Verify
@@ -188,7 +188,7 @@ Set OperatingSystemState To DiagBoot And Verify
     [Template]  Check OperatingSystemState
 
     # OperatingSystemStateID  OperatingSystemState
-    0x08                      ${OS_BOOT_DiagBoot}
+    0x08                      ${OS_BOOT_DIAGBOOT}
 
 
 # Boot Progress Test Cases.

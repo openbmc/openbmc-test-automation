@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+
+r"""
+Variable constants applicable to all OpenBMC test.
+"""
+
 import os
 
 from robot.libraries.BuiltIn import BuiltIn
@@ -140,8 +146,8 @@ OS_BOOT_COMPLETE = (
 OS_BOOT_CDROM = STATE_DBUS_BASE + "OperatingSystem.Status.OSStatus.CDROMBoot"
 OS_BOOT_ROM = STATE_DBUS_BASE + "OperatingSystem.Status.OSStatus.ROMBoot"
 OS_BOOT_PXE = STATE_DBUS_BASE + "OperatingSystem.Status.OSStatus.PXEBoot"
-OS_BOOT_CBoot = STATE_DBUS_BASE + "OperatingSystem.Status.OSStatus.CBoot"
-OS_BOOT_DiagBoot = STATE_DBUS_BASE + "OperatingSystem.Status.OSStatus.DiagBoot"
+OS_BOOT_CBOOT = STATE_DBUS_BASE + "OperatingSystem.Status.OSStatus.CBoot"
+OS_BOOT_DIAGBOOT = STATE_DBUS_BASE + "OperatingSystem.Status.OSStatus.DiagBoot"
 
 # Boot variables.
 BOOT_SOURCE_DEFAULT = "xyz.openbmc_project.Control.Boot.Source.Sources.Default"
