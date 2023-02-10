@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5785330d_72d4e7f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-02-10T07:11:07Z",
+      "side": 1,
+      "message": "Before\n\n$ python3 -m pylint data/variables.py\n************* Module variables\ndata/variables.py:1:0: C0114: Missing module docstring (missing-module-docstring)\ndata/variables.py:143:0: C0103: Constant name \"OS_BOOT_CBoot\" doesn\u0027t conform to UPPER_CASE naming style (invalid-name)\ndata/variables.py:144:0: C0103: Constant name \"OS_BOOT_DiagBoot\" doesn\u0027t conform to UPPER_CASE naming style (invalid-name)\n------------------------------------------------------------------\nYour code has been rated at 9.59/10 (previous run: 9.59/10, +0.00)\n\n\n\nafter\n\n$ python3 -m pylint data/variables.py\n\n--------------------------------------------------------------------\nYour code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)",
+      "revId": "81be58b1a8f0da99804c9fed48556efbf7c10c65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
