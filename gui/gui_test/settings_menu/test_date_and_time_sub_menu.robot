@@ -112,7 +112,7 @@ Verify Existence Of Timezone Buttons In Profile Settings Page
     Page Should Contain Element  ${xpath_browser_offset}
 
 
-Verify Date And Time Change To Browser Offsite Time
+Verify Date And Time Change To Browser Offset Time
     [Documentation]  Verify date and time change to broswer's offset time when
     ...  'Browser offset' option is selected in Profile settings page.
     [Tags]   Verify_Date_And_Time_Change_To_Browser_Offset_Time
@@ -160,7 +160,7 @@ Suite Setup Execution
     Launch Browser And Login GUI
     Maximize Browser Window
 
-Setup To Power Off And Navigate   
+Setup To Power Off And Navigate
    [Documentation]  Power off system if not powered off and go to date and
    ...  time page.
 
