@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ed8259f_9617470b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-10T09:28:42Z",
+      "side": 1,
+      "message": "Added test to verify BMC dump after killing Phosphor-dump-manager\n\nChanges:\n    - Added a new test case to verify BMC core dumps when\n      Phosphor-dump-manager is terminated.\n      \nTested:\n       - New test case has been run and passed successfully from sandbox environment.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 99
+      },
+      "revId": "557fced6fc913b18b14f730bb1d26af28e929ee8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7d28cea_f2210e8c",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-10T09:28:42Z",
+      "side": 1,
+      "message": "Verify Core Dump After Terminating Dump Manager Service\n\n    [Documentation]  Verify that BMC core dump is generated after terminating\n    ... dump manager service.",
+      "range": {
+        "startLine": 299,
+        "startChar": 0,
+        "endLine": 299,
+        "endChar": 57
+      },
+      "revId": "557fced6fc913b18b14f730bb1d26af28e929ee8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0fd6651_85c9303f",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-10T09:28:42Z",
+      "side": 1,
+      "message": "I believe these are not required",
+      "range": {
+        "startLine": 306,
+        "startChar": 0,
+        "endLine": 307,
+        "endChar": 21
+      },
+      "revId": "557fced6fc913b18b14f730bb1d26af28e929ee8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93d07c69_91b47770",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-10T09:28:42Z",
+      "side": 1,
+      "message": "# Find the pid of the phosphor-dump-manage process and kill it.",
+      "range": {
+        "startLine": 309,
+        "startChar": 0,
+        "endLine": 310,
+        "endChar": 58
+      },
+      "revId": "557fced6fc913b18b14f730bb1d26af28e929ee8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f9c4ec7_6899f61d",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-10T09:28:42Z",
+      "side": 1,
+      "message": "Just use below line\n\n    ${cmd_buf}\u003d  Catenate  kill -s SEGV $(pgrep phosphor-dump-manager)",
+      "range": {
+        "startLine": 311,
+        "startChar": 0,
+        "endLine": 312,
+        "endChar": 37
+      },
+      "revId": "557fced6fc913b18b14f730bb1d26af28e929ee8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "588014dd_0d15eca0",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-10T09:28:42Z",
+      "side": 1,
+      "message": "you can just use below\n    Should Be Equal As Integers  ${len(${dump_entries})}  ${1}",
+      "range": {
+        "startLine": 321,
+        "startChar": 0,
+        "endLine": 322,
+        "endChar": 48
+      },
+      "revId": "557fced6fc913b18b14f730bb1d26af28e929ee8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
