@@ -152,6 +152,26 @@ Verify NTP Server Input Fields In Date And Time Page
     Textfield Value Should Be  ${xpath_ntp_server3}  30.30.30.30
 
 
+Verify Setting BMC Time With BMC Owner
+   [Documentation]  Verify changing manual time and comparing it with CLI time
+   [Tags]  Verify_Setting_BMC_Time_With_BMC_Owner
+   [Setup]  Setup To Power Off And Navigate
+
+   Click Element At Coordinates  ${xpath_select_manual}  0  0
+   input_manual_date = "2023-05-12"
+   input_manual_time = "15:30"
+   Input Text  ${xpath_manual_date}  ${input_manual_date}
+   Input Text  ${xpath_manual_time}  ${input_manual_time}
+   Click Element  ${xpath_select_save_settings}
+   Sleep 120
+   ${manual_date}=  Get Value  ${xpath_manual_date}
+   ${manual_time}=  Get Value  ${xpath_manual_time}
+
+   ${cli_date_time}=  CLI Get BMC DateTime
+   Should contain  ${cli_date_time}  ${manual_date}  ${manual_time}
+
+
+
 *** Keywords ***
 
 Suite Setup Execution
