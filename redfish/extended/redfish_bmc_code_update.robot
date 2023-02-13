@@ -39,6 +39,9 @@ ${DELETE_ERRLOGS}        ${1}
 
 ${ACTIVATION_WAIT_TIMEOUT}     8 min
 
+# New code update path.
+${REDFISH_UPDATE_URI}    /redfish/v1/UpdateService/update
+
 *** Test Cases ***
 
 Redfish BMC Code Update
@@ -122,6 +125,17 @@ Suite Setup Execution
     ...   Run Keyword And Ignore Error  Redfish Purge Event Log
     # Checking for file existence.
     Valid File Path  IMAGE_FILE_PATH
+
+    # Check and set the update path.
+    # Old - /redfish/v1/UpdateService/
+    # New - /redfish/v1/UpdateService/update
+    ${resp}=  Redfish.Get  /redfish/v1/UpdateService/update
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NOT_FOUND},${HTTP_METHOD_NOT_ALLOWED}]
+
+    Run Keyword If  ${resp.status} != ${HTTP_OK}
+    ...  Set Suite Variable  ${REDFISH_UPDATE_URI}  /redfish/v1/UpdateService
+
+    Log To Console  Update URI: ${REDFISH_UPDATE_URI}
 
     Redfish Power Off  stack_mode=skip
 
@@ -256,7 +270,7 @@ Redfish Update Firmware
     Log To Console   Current images on the BMC before upload: ${before_inv_list}
 
     Print Timen  Start uploading image to BMC.
-    Redfish Upload Image  /redfish/v1/UpdateService  ${IMAGE_FILE_PATH}
+    Redfish Upload Image  ${REDFISH_UPDATE_URI}  ${IMAGE_FILE_PATH}
     Print Timen  Completed image upload to BMC.
 
     # Python module:  get_member_list(resource_path)
