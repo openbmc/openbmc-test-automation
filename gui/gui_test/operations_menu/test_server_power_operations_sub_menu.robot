@@ -22,7 +22,6 @@ ${xpath_shutdown_orderly_radio}            //*[@data-test-id='serverPowerOperati
 ${xpath_shutdown_immediate_radio}          //*[@data-test-id='serverPowerOperations-radio-shutdownImmediate']
 ${xpath_confirm_button}                    //button[contains(text(),'Confirm')]
 ${xpath_current_power_state}               //*[@data-test-id='powerServerOps-text-hostStatus']
-${xpath_reboot_orderly_radio}              //*[@data-test-id='serverPowerOperations-radio-rebootOrderly']
 ${xpath_reboot_immediate_radio}            //*[@data-test-id='serverPowerOperations-radio-rebootImmediate']
 
 
@@ -141,7 +140,6 @@ Verify Host Orderly Reboot
     [Setup]  Run Keywords  Redfish Power On  stack_mode=skip  AND  Launch Browser And Login GUI
     ...  AND  Navigate to Server Power Operation Page
 
-    Click Element At Coordinates  ${xpath_reboot_orderly_radio}  0  0
     Click Element  ${xpath_reboot_button}
     Wait Until Page Contains Element  ${xpath_confirm_button}  timeout=10
     Click Element  ${xpath_confirm_button}
