@@ -7,13 +7,13 @@ and import as a user-defined keyword.
 import json
 import ssl
 
-import gen_print as gp
-import gen_valid as gv
+import gen_print as gp # NOQA
+import gen_valid as gv # NOQA
 import requests
 import websocket
 
 
-class EventNotification:
+class event_notification: # NOQA
     r"""
     Main class to subscribe and receive event notifications.
     """
@@ -96,9 +96,7 @@ class EventNotification:
         ).replace("\n", ";")
 
         websocket.enableTrace(enable_trace)
-       # self.__websocket = websocket.create_connection(
-        #    "wss://{host}/subscribe".format(host=self.__host),
-        self.__websocket = websocket.create_connection(f"{'wss://{host=self.__host}/subscribe'}",
+        self.__websocket = websocket.create_connection(f"wss://{self.__host}/subscribe",
             sslopt={"cert_reqs": ssl.CERT_NONE},
             cookie=cookies,
         )
