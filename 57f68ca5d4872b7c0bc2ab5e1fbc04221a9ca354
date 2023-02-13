@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c62052bf_237d20cd",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-13T15:07:40Z",
+      "side": 1,
+      "message": "Let\u0027s not add owner in the test cases name because now we have only one owner.\n\nVerify Setting Manual BMC Time",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 38
+      },
+      "revId": "57f68ca5d4872b7c0bc2ab5e1fbc04221a9ca354",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f85fe71a_84c55e91",
         "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
         "patchSetId": 2
@@ -42,6 +65,76 @@
         "startChar": 4,
         "endLine": 162,
         "endChar": 34
+      },
+      "revId": "57f68ca5d4872b7c0bc2ab5e1fbc04221a9ca354",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "750d45f5_ea386151",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-13T15:07:40Z",
+      "side": 1,
+      "message": "we can also just keep power off in setup to remove this redundancy.\n\n    [Setup]  Redfish Power off  stack_mode\u003dskip",
+      "parentUuid": "f85fe71a_84c55e91",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 162,
+        "endChar": 34
+      },
+      "revId": "57f68ca5d4872b7c0bc2ab5e1fbc04221a9ca354",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1a3a20f_2c9845f1",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-13T15:07:40Z",
+      "side": 1,
+      "message": "No need to set variable name. Just directly use it.\n\nInput Text  ${xpath_manual_date}  2023-05-12\nInput Text  ${xpath_manual_time}  15:30",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 58
+      },
+      "revId": "57f68ca5d4872b7c0bc2ab5e1fbc04221a9ca354",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9822c71_154ba4b6",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-13T15:07:40Z",
+      "side": 1,
+      "message": "Add a comment for this sleep\n\n    # Wait for changes to take effect.\n    Sleep 120",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 13
       },
       "revId": "57f68ca5d4872b7c0bc2ab5e1fbc04221a9ca354",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
