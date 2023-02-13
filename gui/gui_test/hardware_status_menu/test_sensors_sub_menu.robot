@@ -100,6 +100,8 @@ Verify Filter By Severity Button OK
     [Documentation]  Select severity button OK from filter and verify.
     [Tags]  Verify_Filter_By_Severity_Button_OK
 
+    Refresh GUI
+
     Wait Until Page Contains Element  ${xpath_sensors_filter}  timeout=15s
     Click Element  ${xpath_sensors_filter}
 
