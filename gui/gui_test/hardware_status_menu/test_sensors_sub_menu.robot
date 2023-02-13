@@ -8,6 +8,7 @@ Suite Teardown  Close Browser
 
 
 *** Variables ***
+
 ${xpath_sensor_heading}      //h1[text()="Sensors"]
 ${xpath_sensors_filter}      //button[contains(text(),'Filter')]
 ${xpath_sensors_search}      //input[contains(@class,"search-input")]
@@ -16,6 +17,7 @@ ${xpath_filter_warning}      //*[@data-test-id='tableFilter-checkbox-Warning']
 ${xpath_filter_critical}     //*[@data-test-id='tableFilter-checkbox-Critical']
 ${xpath_filter_clear_all}    //*[@data-test-id='tableFilter-button-clearAll']
 ${xpath_selected_severity}   //*[@class="d-inline-block mb-0"]
+${xpath_clear_search_input}  //*[@title="Clear search input"]
 
 *** Test Cases ***
 
@@ -69,6 +71,7 @@ Verify Sensors Filter From Server Health Clickable
 Verify Invalid Text In Filter Sensors Search
     [Documentation]  Input invalid text in sensor search and verify error message.
     [Tags]  Verify_Invalid_Text_In_Filter_Sensors_Search
+    [Teardown]  Click Element  ${xpath_clear_search_input}
 
     Wait Until Page Contains Element  ${xpath_sensors_search}
     Input Text  ${xpath_sensors_search}  abcd123
@@ -79,6 +82,7 @@ Verify Invalid Text In Filter Sensors Search
 Verify Clear All Button In Sensor Page
     [Documentation]  Select all severity and verify clear all button de-selects all severity.
     [Tags]  Verify_Clear_All_Button_In_Sensor_Page
+    [Teardown]  Click Element  ${xpath_sensors_filter}
 
     Wait Until Page Contains Element  ${xpath_sensors_filter}  timeout=15s
     Click Element  ${xpath_sensors_filter}
