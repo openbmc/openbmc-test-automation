@@ -10,7 +10,6 @@ import datetime
 import os
 from multiprocessing import Manager, Process
 
-import gen_print as gp
 from robot.libraries.BuiltIn import BuiltIn
 
 
@@ -48,7 +47,7 @@ def execute_process(num_process, keyword_name):
     process_list = []
 
     # Append user-defined times process needed to execute.
-    for ix in range(int(num_process)):
+    for _ix in range(int(num_process)):
         task = Process(
             target=execute_keyword, args=(keyword_name, return_dict)
         )

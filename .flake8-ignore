@@ -36,7 +36,6 @@ lib/gen_robot_plug_in.py
 lib/gen_robot_ssh.py
 lib/gen_valid.py
 lib/ipmi_utils.py
-lib/jobs_processing.py
 lib/obmc_boot_test.py
 lib/openbmc_ffdc.py
 lib/openbmc_ffdc_list.py
