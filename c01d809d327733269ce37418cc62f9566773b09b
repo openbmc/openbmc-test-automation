@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "238be4df_08411d9f",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-13T11:32:57Z",
+      "side": 1,
+      "message": "Added",
+      "parentUuid": "2706937c_ccbaa727",
+      "range": {
+        "startLine": 156,
+        "startChar": 4,
+        "endLine": 156,
+        "endChar": 25
+      },
+      "revId": "c01d809d327733269ce37418cc62f9566773b09b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05555411_ee690964",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "485d6656_b1a593f4",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-13T11:32:57Z",
+      "side": 1,
+      "message": "Changed",
+      "parentUuid": "05555411_ee690964",
+      "range": {
+        "startLine": 161,
+        "startChar": 3,
+        "endLine": 162,
+        "endChar": 30
+      },
+      "revId": "c01d809d327733269ce37418cc62f9566773b09b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "663dd47c_510d0a0d",
@@ -60,6 +108,24 @@
       "writtenOn": "2023-02-13T09:49:06Z",
       "side": 1,
       "message": "2 newlines are enough.",
+      "revId": "c01d809d327733269ce37418cc62f9566773b09b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81af57eb_1a7f6c4a",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-13T11:32:57Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "663dd47c_510d0a0d",
       "revId": "c01d809d327733269ce37418cc62f9566773b09b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
