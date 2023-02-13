@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97c528f0_d3770d4f",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-13T11:59:59Z",
+      "side": 1,
+      "message": "Remove tab",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 4
+      },
+      "revId": "57f68ca5d4872b7c0bc2ab5e1fbc04221a9ca354",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f85fe71a_84c55e91",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-13T11:59:59Z",
+      "side": 1,
+      "message": "this action makes the test setup navigation redundant. You can do one thing. Add an arg to the test setup to make changes to Profile settings page only if required so that you can use the common setup across.",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 162,
+        "endChar": 34
+      },
+      "revId": "57f68ca5d4872b7c0bc2ab5e1fbc04221a9ca354",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
