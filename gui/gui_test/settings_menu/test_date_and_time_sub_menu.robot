@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation   Test OpenBMC GUI "Date and time" sub-menu of "Settings"
+Documentation   Test OpenBMC GUI "Date and time" sub-menu of "Settings".
 
 Resource        ../../lib/gui_resource.robot
 
@@ -150,6 +150,26 @@ Verify NTP Server Input Fields In Date And Time Page
     Textfield Value Should Be  ${xpath_ntp_server1}  10.10.10.10
     Textfield Value Should Be  ${xpath_ntp_server2}  20.20.20.20
     Textfield Value Should Be  ${xpath_ntp_server3}  30.30.30.30
+
+
+Verify Setting Manual BMC Time
+    [Documentation]  Verify changing manual time and comparing it with CLI time.
+    [Tags]  Verify_Setting_Manual_BMC_Time
+    [Setup]  Run Keywords  Set Timezone In Profile Settings Page
+    ...  Default  AND  Setup To Power Off And Navigate
+
+    Click Element At Coordinates  ${xpath_select_manual}  0  0
+    Input Text  ${xpath_manual_date}  2023-05-12
+    Input Text  ${xpath_manual_time}  15:30
+    Click Element  ${xpath_select_save_settings}
+
+    # Wait for changes to take effect.
+    Sleep  120
+    ${manual_date}=  Get Value  ${xpath_manual_date}
+    ${manual_time}=  Get Value  ${xpath_manual_time}
+
+    ${cli_date_time}=  CLI Get BMC DateTime
+    Should contain  ${cli_date_time}  ${manual_date}  ${manual_time}
 
 
 *** Keywords ***
