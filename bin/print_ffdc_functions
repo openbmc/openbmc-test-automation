@@ -27,8 +27,7 @@ parser = argparse.ArgumentParser(
         " functions.\n\nExample:"
     )
     + "\n\n\nDump Log:FFDC Generic Report:Get Request FFDC:SEL Log:BMC"
-    " Specific Files:Sys Inventory Files"
-    + ":Core Files:OS FFDC:Dump Files",
+    " Specific Files:Sys Inventory Files" + ":Core Files:OS FFDC:Dump Files",
     formatter_class=argparse.RawDescriptionHelpFormatter,
     prefix_chars="-+",
 )
