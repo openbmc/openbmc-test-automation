@@ -200,7 +200,54 @@ Verify Session Persistency After BMC Reboot
 
     List Should Contain Value  ${sessions}  ${payload}
 
+
+Fail To Create Session Not More Than Max Connection Count
+    [Documentation]  Test is ensure when max connection count reached to 100,
+    ...  then no session gets created.
+    [Tags]  Fail_To_Create_Session_Not_More_Than_Max_Connection_Count
+
+    ${session_states}=  Create List
+    Set Test Variable  ${COUNT}   100
+    Set Test Variable  ${client_id}  HMCID-01
+
+    ${temp_update_loop_count}=  Evaluate  ${COUNT} + 1
+
+    FOR  ${iter}  IN RANGE  1  ${temp_update_loop_count}
+        Print Timen  ***************************************
+        Print Timen  * The Current Loop Count is ${iter} of ${count} *
+        Print Timen  ***************************************
+
+        ${session_status}=  Run Keyword And Return Status  Create Redfish Session With ClientID  ${client_id}
+        Append To List  ${session_states}  '${session_status}'
+    END
+
+    List Should Contain Value  ${session_states}  'True'
+    List Should Contain Value  ${session_states}  'False'
+
+    Delete All Redfish Sessions
+
+
 *** Keywords ***
+
+
+Create Redfish Session With ClientID
+    [Documentation]  Create redifish session with client id.
+    [Arguments]  ${client_id}
+
+    # Description of argument(s):
+    # client_id    This client id can contain string value
+    #              (e.g. 12345, "HMCID").
+
+    ${session_info}=  Create Dictionary
+    ${session}=  Redfish Login  kwargs= "Oem":{"OpenBMC" : {"ClientID":"${client_id}"}}
+
+    Log  ${session}
+
+    Set To Dictionary  ${session_info}  SessionIDs  ${session['Id']}
+    Set To Dictionary  ${session_info}  ClientID  ${session["Oem"]["OpenBMC"]["ClientID"]}
+
+    [Return]  ${session_info}
+
 
 Create Session And Verify Response Code
     [Documentation]  Create session and verify response code.
