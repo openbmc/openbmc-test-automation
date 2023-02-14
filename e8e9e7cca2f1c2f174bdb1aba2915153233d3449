@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1b47fff2_eca37cd1",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-14T06:20:28Z",
+      "side": 1,
+      "message": "I need that let me un-comment that line.",
+      "parentUuid": "3c36039a_ad54662e",
+      "range": {
+        "startLine": 294,
+        "startChar": 4,
+        "endLine": 294,
+        "endChar": 30
+      },
+      "revId": "e8e9e7cca2f1c2f174bdb1aba2915153233d3449",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c3059e52_efd93ab5",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 9
@@ -83,6 +107,24 @@
       "writtenOn": "2023-02-14T05:40:54Z",
       "side": 1,
       "message": "remove one line here.",
+      "revId": "e8e9e7cca2f1c2f174bdb1aba2915153233d3449",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa3374db_13b5dc78",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-14T06:20:28Z",
+      "side": 1,
+      "message": "I did not understood your comment.",
+      "parentUuid": "c3059e52_efd93ab5",
       "revId": "e8e9e7cca2f1c2f174bdb1aba2915153233d3449",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
