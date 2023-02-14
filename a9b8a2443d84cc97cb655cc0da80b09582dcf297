@@ -16,6 +16,24 @@
       "message": "Verify Redfish Code Update With Different Interrupted Operation\n    [Documentation]  Verify code update is successful when other opreation getting executed i.e.\n    ...              change the hostname.\n    [Arguments]  ${operation}  ${count}\n\n    # Description of argument(s):\n    # operation    host_name to change Hostname.\n    # count        Number of times loop will get executed.\n\n    ${before_update_activeswimage}\u003d  Get Active Firmware Image\n\n    ${post_code_update_actions}\u003d  Get Post Boot Action\n\n    Set ApplyTime  policy\u003dOnReset\n\n    ${task_inv_dict}\u003d  Get Task State from File\n\n    ${file_bin_data}\u003d  OperatingSystem.Get Binary File  ${image_file_path}\n\n    Log To Console   Start uploading image to BMC.\n    Upload Image To BMC  ${REDFISH_BASE_URI}UpdateService  timeout\u003d${600}  data\u003d${file_bin_data}\n    Log To Console   Completed image upload to BMC.\n\n    ${task_inv}\u003d  Check Task With Match TargetUri  /redfish/v1/UpdateService\n    Rprint Vars  task_inv\n\n    Wait Until Keyword Succeeds  1 min  10 sec\n    ...  Verify Task Progress State  ${task_inv}  ${task_inv_dict[\u0027TaskStarting\u0027]}\n\n    Run Operation On BMC  ${operation}  ${count}\n\n    Run Keyword If  \u0027${operation}\u0027 \u003d\u003d \u0027kernel_panic\u0027\n    ...  Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Standby\n\n\n    Run Keyword If  \u0027${operation}\u0027 \u003d\u003d \u0027host_name\u0027\n    ...  Run Keywords  Wait Until Keyword Succeeds  5 min  10 sec\n    ...  Verify Task Progress State  ${task_inv}  ${task_inv_dict[\u0027TaskCompleted\u0027]}  AND\n    ...  Run Key  ${post_code_update_actions[\u0027BMC image\u0027][\u0027OnReset\u0027]}  AND\n    ...  Redfish.Login  AND\n    ...  Redfish Verify BMC Version  ${IMAGE_FILE_PATH}\n\n    ${after_update_activeswimage}\u003d Get Active Firmware Image\n\n    ${status}\u003d Run Keyword And Return Status  Should Be Equal As Strings\n    ...  ${before_update_activeswimage[\u0027ActiveSoftwareImage\u0027][\u0027@odata.id\u0027]}\n    ...  ${after_update_activeswimage[\u0027ActiveSoftwareImage\u0027][\u0027@odata.id\u0027]}\n \n    Run Keyword If  \u0027${operation}\u0027 \u003d\u003d \u0027kernel_panic\u0027\n    ...  Should Be True  $status  ELSE  Should Not Be True  $status\n\n\n    Verify Get ApplyTime  OnReset",
       "revId": "a9b8a2443d84cc97cb655cc0da80b09582dcf297",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca0628c9_28d36554",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-14T05:07:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ddbc801_b9565bda",
+      "revId": "a9b8a2443d84cc97cb655cc0da80b09582dcf297",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
