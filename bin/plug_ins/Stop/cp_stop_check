@@ -7,16 +7,14 @@ Check for stop conditions.  Return code of 2 if stop conditions are found.
 import argparse
 import os
 import re
-import subprocess
-import sys
 
-from gen_arg import *
-from gen_call_robot import *
-from gen_cmd import *
-from gen_misc import *
-from gen_plug_in_utils import *
-from gen_print import *
-from gen_valid import *
+from gen_arg import *  # NOQA
+from gen_call_robot import *  # NOQA
+from gen_cmd import *  # NOQA
+from gen_misc import *  # NOQA
+from gen_plug_in_utils import *  # NOQA
+from gen_print import *  # NOQA
+from gen_valid import *  # NOQA
 
 # Set exit_on_error for gen_valid functions.
 set_exit_on_error(True)
@@ -272,8 +270,7 @@ def main():
         if hardware_error_found:
             print_timen(
                 "The caller wishes to stop test execution when the"
-                " Verify_hardware plug-in detects a"
-                + " hardware error."
+                " Verify_hardware plug-in detects a hardware error."
             )
             stop_check()
 
