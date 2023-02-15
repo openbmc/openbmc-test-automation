@@ -184,8 +184,7 @@ def compare_pel_and_redfish_event_log(pel_record, event_record):
         raise PeltoolException(
             "Exception occurred during PEL and Event log "
             "comparison for SRC or event ID and created "
-            "time : "
-            + str(exception)
+            "time : " + str(exception)
         ) from exception
 
 
