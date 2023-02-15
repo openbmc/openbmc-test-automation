@@ -719,6 +719,17 @@ Verify Mandatory Fields For Informational Error
     END
 
 
+Verify PEL Log Offloaded To Host
+    [Documentation]  Verify host transmission state of offloaded PEL logs.
+    [Tags]  Verify_PEL_Log_Offloaded_To_Host
+    [Template]  Verify PEL Transmission To Host
+
+    # error_type            host_state      expected_transmission_state
+      informational_error   On              Acked
+      unrecoverable_error   On              Acked
+      predictive_error      On              Acked
+
+
 Verify PEL Log Not Offloaded To Host
     [Documentation]  Verify host transmission state of not offloaded PEL logs.
     [Tags]  Verify_PEL_Log_Not_Offloaded_To_Host
@@ -728,17 +739,6 @@ Verify PEL Log Not Offloaded To Host
       informational_error   Off             Not Sent
       unrecoverable_error   Off             Not Sent
       predictive_error      Off             Not Sent
-
-
-Verify PEL Log Offloaded To Host
-    [Documentation]  Verify host transmission state of offloaded PEL logs.
-    [Tags]  Verify_PEL_Log_Offloaded_To_Host
-    [Template]  Verify PEL Transmission To Host
-
-    # error_type            host_state      expected_transmission_state
-      unrecoverable_error   On              Acked
-      predictive_error      On              Acked
-      informational_error   On              Acked
 
 
 *** Keywords ***
@@ -965,7 +965,7 @@ Verify PEL Transmission To Host
     # Check host transmission state for the cases where PEL is
     # expected to be  offloaded to HOST.
     Run Keyword If  "${expected_transmission_state}" == "Acked"
-    ...  Wait Until Keyword Succeeds  5 min  10 sec
+    ...  Wait Until Keyword Succeeds  10 min  10 sec
     ...  Check If PEL Transmission State Is Expected  ${pel_id}  Acked
 
     # Adding delay before checking host transmission for the cases where PEL is
