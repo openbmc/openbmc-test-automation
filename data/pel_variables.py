@@ -19,8 +19,7 @@ ERROR_LOG_CREATE_BASE_CMD = (
 )
 
 CMD_INTERNAL_FAILURE = (
-    ERROR_LOG_CREATE_BASE_CMD
-    + "xyz.openbmc_project.Common.Error.InternalFailure    "
+    ERROR_LOG_CREATE_BASE_CMD + "xyz.openbmc_project.Common.Error.InternalFailure  "
     " xyz.openbmc_project.Logging.Entry.Level.Error 0"
 )
 
@@ -50,8 +49,7 @@ CMD_INVENTORY_PREFIX = (
 )
 
 CMD_UNRECOVERABLE_ERROR = (
-    ERROR_LOG_CREATE_BASE_CMD
-    + "org.open_power.Logging.Error.TestError1    "
+    ERROR_LOG_CREATE_BASE_CMD + "org.open_power.Logging.Error.TestError1  "
     " xyz.openbmc_project.Logging.Entry.Level.Error 0"
 )
 
@@ -62,15 +60,13 @@ CMD_PREDICTIVE_ERROR = (
 )
 
 CMD_UNRECOVERABLE_HOST_ERROR = (
-    ERROR_LOG_CREATE_BASE_CMD
-    + "xyz.openbmc_project.Host.Error.Event    "
+    ERROR_LOG_CREATE_BASE_CMD + "xyz.openbmc_project.Host.Error.Event  "
     " xyz.openbmc_project.Logging.Entry.Level.Error 1 RAWPEL"
     " /tmp/FILE_NBMC_UNRECOVERABLE"
 )
 
 CMD_INFORMATIONAL_HOST_ERROR = (
-    ERROR_LOG_CREATE_BASE_CMD
-    + "xyz.openbmc_project.Host.Error.Event    "
+    ERROR_LOG_CREATE_BASE_CMD + "xyz.openbmc_project.Host.Error.Event  "
     " xyz.openbmc_project.Logging.Entry.Level.Error 1 RAWPEL"
     " /tmp/FILE_HOST_INFORMATIONAL"
 )
