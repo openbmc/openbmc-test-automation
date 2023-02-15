@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bc5aea0_acee8609",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-15T08:58:15Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "97c528f0_d3770d4f",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 4
+      },
+      "revId": "57f68ca5d4872b7c0bc2ab5e1fbc04221a9ca354",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c62052bf_237d20cd",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-13T15:07:40Z",
       "side": 1,
       "message": "Let\u0027s not add owner in the test cases name because now we have only one owner.\n\nVerify Setting Manual BMC Time",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 38
+      },
+      "revId": "57f68ca5d4872b7c0bc2ab5e1fbc04221a9ca354",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6d72488_4898cfb9",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-15T08:58:15Z",
+      "side": 1,
+      "message": "Made changes",
+      "parentUuid": "c62052bf_237d20cd",
       "range": {
         "startLine": 156,
         "startChar": 0,
@@ -94,6 +142,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efbb49e6_12afbfc4",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-15T08:58:15Z",
+      "side": 1,
+      "message": "Made changes",
+      "parentUuid": "750d45f5_ea386151",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 162,
+        "endChar": 34
+      },
+      "revId": "57f68ca5d4872b7c0bc2ab5e1fbc04221a9ca354",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1a3a20f_2c9845f1",
@@ -117,6 +189,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7d5791a_9a3544ba",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-15T08:58:15Z",
+      "side": 1,
+      "message": "Added the input text directly",
+      "parentUuid": "a1a3a20f_2c9845f1",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 58
+      },
+      "revId": "57f68ca5d4872b7c0bc2ab5e1fbc04221a9ca354",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9822c71_154ba4b6",
@@ -130,6 +226,30 @@
       "writtenOn": "2023-02-13T15:07:40Z",
       "side": 1,
       "message": "Add a comment for this sleep\n\n    # Wait for changes to take effect.\n    Sleep 120",
+      "range": {
+        "startLine": 169,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 13
+      },
+      "revId": "57f68ca5d4872b7c0bc2ab5e1fbc04221a9ca354",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aacefda9_d65d2835",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-15T08:58:15Z",
+      "side": 1,
+      "message": "Added comment",
+      "parentUuid": "f9822c71_154ba4b6",
       "range": {
         "startLine": 169,
         "startChar": 0,
