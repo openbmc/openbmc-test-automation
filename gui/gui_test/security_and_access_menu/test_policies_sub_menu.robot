@@ -213,7 +213,7 @@ Test Setup Execution
     Wait Until Keyword Succeeds  30 sec  15 sec  Click Element  ${xpath_secuity_and_accesss_menu}
     Click Element  ${xpath_policies_sub_menu}
     Wait Until Keyword Succeeds  30 sec  15 sec  Location Should Contain  policies
-    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=1min
 
 Set Policy Via GUI
 
@@ -274,7 +274,7 @@ Verify Policy State
 
 Set SSH And IPMI State Via GUI
     [Documentation]  Set SSH and IPMI states via GUI.
-    [Arguments]  ${ssh_state}  ${ipmi_state}
+    [Arguments]  ${ssh_state}  ${ipmi_state}  ${persistency_check}=${False}
 
     # Description of argument(s):
     # ssh_state     State of SSH to be set (e.g. Enabled, Disabled).
