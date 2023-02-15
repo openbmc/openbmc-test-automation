@@ -272,8 +272,7 @@ def main():
         if hardware_error_found:
             print_timen(
                 "The caller wishes to stop test execution when the"
-                " Verify_hardware plug-in detects a"
-                + " hardware error."
+                " Verify_hardware plug-in detects a hardware error."
             )
             stop_check()
 

@@ -6,8 +6,6 @@ bin/obmc_ser_num
 bin/plug_ins/Auto_reboot/cp_master
 bin/plug_ins/FFDC/cp_ffdc_check
 bin/plug_ins/Soft_errors/cp_post_boot
-bin/plug_ins/Stop/cp_stop_check
-bin/print_ffdc_functions
 bin/process_plug_in_packages.py
 bin/prop_call.py
 bin/validate_plug_ins.py
