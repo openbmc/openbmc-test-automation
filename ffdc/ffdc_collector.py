@@ -329,8 +329,7 @@ class ffdc_collector:
             )
             self.logger.error(
                 "\tERROR: Requested protocol %s is not in working protocol"
-                " list.\n"
-                % self.remote_protocol
+                " list.\n" % self.remote_protocol
             )
             sys.exit(-1)
         else:

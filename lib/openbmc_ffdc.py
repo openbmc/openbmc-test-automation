@@ -74,8 +74,7 @@ def ffdc(
         if not int(state[interface]) and state["uptime"] == "":
             gp.print_error(
                 "BMC is not communicating via ssh or Redfish.  Terminating"
-                " FFDC"
-                + " collection.\n"
+                " FFDC" + " collection.\n"
             )
             return ffdc_file_list
 
