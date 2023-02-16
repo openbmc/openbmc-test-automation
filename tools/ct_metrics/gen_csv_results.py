@@ -331,6 +331,9 @@ def parse_output_xml(
         # Test Result pass=0 fail=1
         if testcase.status == "PASS":
             l_test_result = 0
+        elif testcase.status == "SKIP":
+            # Skipped test result should not be mark pass or fail.
+            continue
         else:
             l_test_result = 1
 
