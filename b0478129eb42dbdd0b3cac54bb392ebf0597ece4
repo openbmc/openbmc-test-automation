@@ -16,6 +16,24 @@
       "message": "I dont see the commit and code with the chages",
       "revId": "b0478129eb42dbdd0b3cac54bb392ebf0597ece4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4b5bb67_9ea9393e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-16T06:28:13Z",
+      "side": 1,
+      "message": "It is there. I have modified documentation and commit message to be generic.",
+      "parentUuid": "f0e3a077_dc0bf343",
+      "revId": "b0478129eb42dbdd0b3cac54bb392ebf0597ece4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
