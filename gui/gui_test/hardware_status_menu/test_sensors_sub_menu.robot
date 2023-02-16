@@ -103,6 +103,7 @@ Verify Clear All Button In Sensor Page
 Verify Filter By Severity Button OK
     [Documentation]  Select severity button OK from filter and verify.
     [Tags]  Verify_Filter_By_Severity_Button_OK
+    [Teardown]  Clean Up Filter Values
 
     Wait Until Page Contains Element  ${xpath_sensors_filter}  timeout=15s
     Click Element  ${xpath_sensors_filter}
@@ -118,6 +119,45 @@ Verify Filter By Severity Button OK
     Element Should Not Contain  ${xpath_selected_severity}  Critical
 
 
+Verify Filter By Severity Button Warning
+
+    [Documentation]  Select severity button Warning from filter and verify.
+    [Tags]  Verify_Filter_By_Severity_Button_Warning
+    [Teardown]  Clean Up Filter Values
+
+    Wait Until Page Contains Element  ${xpath_sensors_filter}  timeout=15s
+    Click Element  ${xpath_sensors_filter}
+
+    # Select Warning severity from filter.
+    Wait Until Page Contains Element  ${xpath_filter_warning}  timeout=5s
+
+    Click Element At Coordinates  ${xpath_filter_warning}  0  0
+    Click Element  ${xpath_sensors_filter}
+
+    Element Should Contain  ${xpath_selected_severity}  Warning
+    Element Should Not Contain  ${xpath_selected_severity}  OK
+    Element Should Not Contain  ${xpath_selected_severity}  Critical
+
+
+Verify Filter By Severity Button Critical
+
+    [Documentation]  Select severity button Critical from filter and verify.
+    [Tags]  Verify_Filter_By_Severity_Button_Critical
+    [Teardown]  Clean Up Filter Values
+
+    Wait Until Page Contains Element  ${xpath_sensors_filter}  timeout=15s
+    Click Element  ${xpath_sensors_filter}
+
+    # Select Warning severity from filter.
+    Wait Until Page Contains Element  ${xpath_filter_critical}  timeout=5s
+
+    Click Element At Coordinates  ${xpath_filter_critical}  0  0
+    Click Element  ${xpath_sensors_filter}
+
+    Element Should Contain  ${xpath_selected_severity}  Critical
+    Element Should Not Contain  ${xpath_selected_severity}  OK
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -130,3 +170,9 @@ Suite Setup Execution
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
     # Added delay for sensor page to load completely.
     Sleep  100s
+
+
+Clean Up Filter Values
+    [Documentation]  Do clean up filter values after test execution
+    Click Element  ${xpath_sensors_filter}
+    Click Element  ${xpath_filter_clear_all}
