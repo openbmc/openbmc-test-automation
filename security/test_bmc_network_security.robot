@@ -16,6 +16,7 @@ Library                 ../lib/bmc_network_utils.py
 Library                 ../lib/ipmi_utils.py
 
 Suite Setup             Suite Setup Execution
+Test Teardown           FFDC On Test Case Fail
 
 Force Tags              Network_Nping
 
@@ -125,6 +126,23 @@ Flood Redfish Interface With Packets With Flags And Check Stability
 
     # Flood packets with all flags and check BMC behavior.
     ${OPENBMC_HOST}  ${iterations}   ${REDFISH_INTERFACE}   ${ALL_FLAGS}
+
+
+Send Network Packets Continuously To SOL Port
+    [Documentation]  Send network packets continuously to SOL port and verify stability.
+    [Tags]  Send_Network_Packets_Continuously_To_SOL_Port
+    [Teardown]  Close all connections
+
+    # Send large number of packets to SOL port.
+    ${packet_loss}=  Send Network Packets And Get Packet Loss
+    ...  ${OPENBMC_HOST}  ${iterations}  ${TCP_PACKETS}  ${HOST_SOL_PORT}
+
+    # Check if SOL interface is functional.
+
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}  port=${HOST_SOL_PORT}
+    Verify Interface Stability  ${HOST_SOL_PORT}
+    Should Be Equal As Numbers  ${packet_loss}  0.0
+    ...  msg=FAILURE: BMC is dropping some packets.
 
 
 *** Keywords ***
