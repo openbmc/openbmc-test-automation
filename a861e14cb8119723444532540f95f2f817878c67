@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddf860b5_bb18c5ef",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-16T04:11:35Z",
+      "side": 0,
+      "message": "Can you please explain the reason for removing this particular line of code?",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 86
+      },
+      "revId": "a861e14cb8119723444532540f95f2f817878c67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
