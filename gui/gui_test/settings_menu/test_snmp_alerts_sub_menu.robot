@@ -160,9 +160,9 @@ Configure Multiple SNMP Managers On BMC Via GUI And Verify Persistency On BMC Re
     [Documentation]  Login GUI SNMP alerts page and
     ...  add multiple SNMP Managers on BMC via GUI and verify persistency on BMC reboot.
     [Tags]  Configure_Multiple_SNMP_Managers_On_BMC_Via_GUI_And_Verify_Persistency_On_BMC_Reboot
-    [Teardown]   Run Keywords  Delete SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
-    ...  AND  Delete SNMP Manager Via GUI  ${SNMP_MGR2_IP}  ${SNMP_DEFAULT_PORT}
+    [Teardown]  Delete Multiple SNMP Managers With Default Port Via GUI  ${ip_address_list}
 
+    ${ip_address_list}=  Create list  ${SNMP_MGR1_IP}  ${SNMP_MGR2_IP}
     Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
     Wait Until Page Contains  ${SNMP_MGR1_IP}  timeout=45s
 
@@ -172,9 +172,8 @@ Configure Multiple SNMP Managers On BMC Via GUI And Verify Persistency On BMC Re
     # Reboot BMC and check persistency SNMP manager.
     Reboot BMC via GUI
 
-    Suite Setup Execution
-    Wait Until Page Contains  ${snmp_page_heading}  timeout=1min
-
+    Navigate To SNMP Alerts Page    
+    
     Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
     Verify SNMP Manager Configured On BMC  ${SNMP_MGR2_IP}  ${SNMP_DEFAULT_PORT}
 
@@ -210,7 +209,26 @@ Configure SNMP Manager By Its Hostname Via GUI And Verify
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  snmp-alerts
 
     Configure SNMP Manager Via GUI  ${SNMP_HOSTNAME}  ${SNMP_DEFAULT_PORT}
-    Wait Until Page Contains  ${HOSTNAME}  timeout=15s
+    Wait Until Page Contains  ${SNMP_HOSTNAME}  timeout=15s
+
+
+Verify Persistency Of SNMP Manager And Trap On BMC Reboot
+    [Documentation]  Configure SNMP manager and check whether SNMP manager still persists
+    ...  after BMC reboot and trap is sent to its fields.
+    [Tags]  Verify_Persistency_Of_SNMP_Manager_And_Trap_On_BMC_Reboot
+    [Template]  Create Error On BMC And Verify Trap On Default Port
+    [Teardown]  Delete SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+
+    # event_log                 expected_error                           persistency_check
+
+    # Generate internal failure error.
+    ${CMD_INTERNAL_FAILURE}     ${SNMP_TRAP_BMC_INTERNAL_FAILURE}        ${True}
+
+    # Generate timeout error.
+    ${CMD_FRU_CALLOUT}          ${SNMP_TRAP_BMC_CALLOUT_ERROR}           ${True}
+
+    # Generate informational error.
+    ${CMD_INFORMATIONAL_ERROR}  ${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}     ${True}
 
 
 *** Keywords ***
@@ -272,7 +290,7 @@ Configure SNMP Manager On BMC With Invalid Setting Via GUI And Verify
     # ....                (e.g. Invalid format / Value must be between 0 – 65535).
 
     Configure SNMP Manager Via GUI  ${snmp_manager_ip}  ${snmp_manager_port}
-    Wait Until Page Contains   ${expected_error}
+    Wait Until Page Contains   ${expected_error}  timeout=10sec
     ${status}=  Run Keyword And Return Status
     ...  Verify SNMP Manager Configured On BMC  ${snmp_manager_ip}  ${snmp_manager_port}
     Should Be Equal As Strings  ${status}  False
@@ -295,12 +313,17 @@ Configure Multiple SNMP Managers On BMC With Valid Port Via GUI And Verify
 Create Error On BMC And Verify Trap On Default Port
     [Documentation]  Generate error on BMC and verify if trap is sent to default port.
     [Arguments]  ${event_log}=${CMD_INTERNAL_FAILURE}  ${expected_error}=${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+    ...  ${persistency_check}=${False}
 
     # Description of argument(s):
-    # event_log       Event logs to be created.
-    # expected_error  Expected error on SNMP.
+    # event_log          Event logs to be created.
+    # expected_error     Expected error on SNMP.
+    # persistency_check  Check whether reboot is required or not (e.g. True, False).
 
     Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+
+    Run Keyword If  ${persistency_check} == ${True}
+    ...  Run Keywords  Reboot BMC via GUI  AND  Navigate To SNMP Alerts Page
 
     Start SNMP Manager
 
@@ -348,3 +371,24 @@ Set DNS Server IP
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network
 
     Add DNS Servers And Verify  ${dns_server}
+
+
+Delete Multiple SNMP Managers Via GUI
+    [Documentation]  Delete multiple SNMP managers on BMC via GUI.
+    [Arguments]  ${ip_address_list}
+
+    # Description of argument(s):
+    # ${ip_address_list}   List of IP address.
+
+    FOR  ${ip_address}  IN  @{ip_address_list}
+      Wait Until Keyword Succeeds   30 sec  10 sec
+      ...  Delete SNMP Manager Via GUI  ${ip_address}  ${SNMP_DEFAULT_PORT}
+    END
+
+
+Navigate To SNMP Alerts Page
+    [Documentation]  Navigate to SNMP alerts page.
+
+    Click Element  ${xpath_settings_menu}
+    Click Element  ${xpath_snmp_alerts_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  snmp-alerts
