@@ -417,7 +417,7 @@ Get Invalid User ID
     [Documentation]  Get random invalid user ID using "channel getaccess" IPMI standard command.
 
     # Python module:  get_user_info(userid, channel_number=1)
-    ${user_info}=  Get User Info  ${EMPTY}
+    ${user_info}=  Get User Info  ${EMPTY}  ${CHANNEL_NUMBER}
     ${user_info}=  Filter Struct  ${user_info}  [('user_name', None)]  invert=1
     ${empty_user_info}=  Filter Struct  ${user_info}  [('user_name', '')]
     @{invalid_userid_list}=  Create List
