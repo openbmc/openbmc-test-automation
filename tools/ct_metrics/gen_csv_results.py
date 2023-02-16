@@ -8,19 +8,16 @@ http://robot-framework.readthedocs.io/en/3.0/autodoc/robot.result.html
 
 import csv
 import datetime
-import getopt
 import os
-import re
 import stat
 import sys
 from xml.etree import ElementTree
 
-import robot.errors
 from robot.api import ExecutionResult
 from robot.result.visitor import ResultVisitor
 
 # Remove the python library path to restore with local project path later.
-save_path_0 = sys.path[0]
+SAVE_PATH_0 = sys.path[0]
 del sys.path[0]
 sys.path.append(os.path.join(os.path.dirname(__file__), "../../lib"))
 
@@ -29,7 +26,7 @@ from gen_print import *  # NOQA
 from gen_valid import *  # NOQA
 
 # Restore sys.path[0].
-sys.path.insert(0, save_path_0)
+sys.path.insert(0, SAVE_PATH_0)
 
 
 this_program = sys.argv[0]
@@ -149,7 +146,7 @@ def signal_handler(signal_number, frame):
 
     # Calling exit prevents us from returning to the code that was running
     # when the signal was received.
-    exit(0)
+    sys.exit(0)
 
 
 def validate_parms():
@@ -242,16 +239,19 @@ def parse_output_xml(
     print("Test End Time:\t\t %s" % result.suite.endtime)
     print("--------------------------------------")
 
-    # Use ResultVisitor object and save off the test data info
+    # Use ResultVisitor object and save off the test data info.
     class TestResult(ResultVisitor):
+        r"""
+        Class methods to save off the test data information.
+        """
         def __init__(self):
-            self.testData = []
+            self.test_data = []
 
         def visit_test(self, test):
-            self.testData += [test]
+            self.test_data += [test]
 
-    collectDataObj = TestResult()
-    result.visit(collectDataObj)
+    collect_data_obj = TestResult()
+    result.visit(collect_data_obj)
 
     # Write the result statistics attributes to CSV file
     l_csvlist = []
@@ -322,7 +322,7 @@ def parse_output_xml(
 
     print("Writing data into csv file:%s" % l_csvfile)
 
-    for testcase in collectDataObj.testData:
+    for testcase in collect_data_obj.test_data:
         # Functional Area: Suite Name
         # Test Name: Test Case Name
         l_func_area = str(testcase.parent).split(" ", 1)[1]
@@ -360,10 +360,11 @@ def parse_output_xml(
         l_csvlist.append(l_data)
 
     # Open the file and write to the CSV file
-    l_file = open(l_csvfile, "w")
-    l_writer = csv.writer(l_file, lineterminator="\n")
-    l_writer.writerows(l_csvlist)
-    l_file.close()
+    with open(l_csvfile, "w", encoding="utf8") as l_file:
+        l_writer = csv.writer(l_file, lineterminator="\n")
+        l_writer.writerows(l_csvlist)
+        l_file.close()
+
     # Set file permissions 666.
     perm = (
         stat.S_IRUSR
@@ -408,7 +409,7 @@ def get_system_details(xml_file_path):
 
     bmc_version_id = ""
     bmc_platform = ""
-    with open(xml_file_path, "rt") as output:
+    with open(xml_file_path, "rt", encoding="utf-8") as output:
         tree = ElementTree.parse(output)
 
     for node in tree.iter("msg"):
@@ -428,6 +429,10 @@ def get_system_details(xml_file_path):
 
 
 def main():
+    r"""
+    Main caller.
+    """
+
     if not gen_get_options(parser, stock_list):
         return False
 
@@ -446,4 +451,4 @@ def main():
 # Main
 
 if not main():
-    exit(1)
+    sys.exit(1)
