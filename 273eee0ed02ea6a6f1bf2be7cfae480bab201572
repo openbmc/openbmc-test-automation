@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b52afffa_f61265f6",
+        "filename": "ipmi/test_ipmi_payload.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-16T14:25:30Z",
+      "side": 1,
+      "message": "Define it as a suite variable with value as 1 so that it doesn\u0027t break existing flow.Only when required, user can pass it via cmd line.\nPls do this for all test suites.",
+      "range": {
+        "startLine": 420,
+        "startChar": 45,
+        "endLine": 420,
+        "endChar": 61
+      },
+      "revId": "273eee0ed02ea6a6f1bf2be7cfae480bab201572",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
