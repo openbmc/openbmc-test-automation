@@ -410,7 +410,7 @@ IPMI Create User
 
     ${ipmi_cmd}=  Catenate  user set name ${userid} ${username}
     ${resp}=  Run IPMI Standard Command  ${ipmi_cmd}
-    ${user_info}=  Get User Info  ${userid}
+    ${user_info}=  Get User Info  ${userid}  ${CHANNEL_NUMBER}
     Should Be Equal  ${user_info['user_name']}  ${username}
 
 
@@ -422,7 +422,7 @@ Enable IPMI User And Verify
     # userid   A numeric userid (e.g. "4").
 
     Run IPMI Standard Command  user enable ${userid}
-    ${user_info}=  Get User Info  ${userid}
+    ${user_info}=  Get User Info  ${userid}  ${CHANNEL_NUMBER}
     Valid Value  user_info['enable_status']  ['enabled']
 
 
@@ -466,7 +466,7 @@ Delete All Non Root IPMI User
     [Documentation]  Delete all non-root IPMI user.
 
     # Get complete list of user info records.
-    ${user_info}=  Get User Info  ${EMPTY}
+    ${user_info}=  Get User Info  ${EMPTY}  ${CHANNEL_NUMBER}
     # Remove header record.
     ${user_info}=  Filter Struct  ${user_info}  [('user_name', None)]  invert=1
     ${non_empty_user_info}=  Filter Struct  ${user_info}  [('user_name', '')]  invert=1
