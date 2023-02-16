@@ -49,6 +49,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "01df22d2_e340daf1",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-16T12:58:56Z",
+      "side": 1,
+      "message": "Can you simplify this documentation like what should persist on reboot or what verification is done on reboot.",
+      "range": {
+        "startLine": 218,
+        "startChar": 21,
+        "endLine": 219,
+        "endChar": 65
+      },
+      "revId": "119eb34e96ac158d770a7b3a752fed03209fc389",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6dcab178_8de2ec5b",
         "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
         "patchSetId": 2
