@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5cfe9e5_683ae1ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-16T14:13:42Z",
+      "side": 1,
+      "message": "If REST is not supported, REST URI call to get system URIs will be skipped.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 28
+      },
+      "revId": "86caf94c2fe1f2fccaee08b15cb02548c54ac53f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c41112a7_58fe1591",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-16T14:13:42Z",
+      "side": 1,
+      "message": "Line 280 uses SYSTEM_URI as the default value. This change will affect the keyword - Get Component URIs",
+      "range": {
+        "startLine": 418,
+        "startChar": 6,
+        "endLine": 418,
+        "endChar": 40
+      },
+      "revId": "86caf94c2fe1f2fccaee08b15cb02548c54ac53f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
