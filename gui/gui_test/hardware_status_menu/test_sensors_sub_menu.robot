@@ -49,6 +49,7 @@ Verify Existence Of All Buttons And Input Boxes In Sensor Page
 Verify Search Text Entered
     [Documentation]  Verify search text input allowed from "Sensors" page.
     [Tags]  Verify_Search_Text_Entered
+    [Teardown]  Click Element  ${xpath_clear_search_input}
 
     Wait Until Page Contains Element  ${xpath_sensors_search}
     Input Text  ${xpath_sensors_search}  ambi
@@ -103,6 +104,7 @@ Verify Clear All Button In Sensor Page
 Verify Filter By Severity Button OK
     [Documentation]  Select severity button OK from filter and verify.
     [Tags]  Verify_Filter_By_Severity_Button_OK
+    [Teardown]  Clean Up Filter Values
 
     Wait Until Page Contains Element  ${xpath_sensors_filter}  timeout=15s
     Click Element  ${xpath_sensors_filter}
@@ -130,3 +132,9 @@ Suite Setup Execution
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
     # Added delay for sensor page to load completely.
     Sleep  100s
+
+
+Clean Up Filter Values
+    [Documentation]  Do clean up filter values after test execution
+    Click Element  ${xpath_sensors_filter}
+    Click Element  ${xpath_filter_clear_all}
