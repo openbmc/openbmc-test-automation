@@ -337,7 +337,7 @@ Verify Core Dump After Terminating Dump Manager Service
     # Verify that BMC dump is available.
     Wait Until Keyword Succeeds  2 min  10 sec  Is BMC Dump Available
 
-    # Verifing that there is only one dump.
+    # Verifying that there is only one dump.
     ${dump_entries}=  Get BMC Dump Entries
     ${length}=  Get length  ${dump_entries}
     Should Be Equal As Integers  ${length}  ${1}

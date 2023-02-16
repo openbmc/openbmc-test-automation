@@ -297,8 +297,8 @@ Get Active Firmware Image
 
 
 Verify Redfish Code Update With Different Interrupted Operation
-    [Documentation]  Verify code update is successful when other opreation getting executed i.e.
-    ...              change the hostname.
+    [Documentation]  Verify code update is successful when other operation
+    ...              getting executed i.e. change the hostname.
     [Arguments]  ${operation}  ${count}
 
     # Description of argument(s):
