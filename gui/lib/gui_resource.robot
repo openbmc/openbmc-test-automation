@@ -68,6 +68,13 @@ Launch Headless Browser
 
 
 Launch Browser And Login GUI
+    [Documentation]  Launch browser and login to OpenBMC GUI, retry 2 attempts
+    ...              in 1 minute time.
+
+    Wait Until Keyword Succeeds  130 sec   65 sec  Retry Browser Login Attempts
+
+
+Retry Browser Login Attempts
     [Documentation]  Launch browser and login to OpenBMC GUI.
 
     Open Browser With URL  ${obmc_gui_url}
