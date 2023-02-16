@@ -411,9 +411,13 @@ Suite Setup Execution
     ${record_id}=  Get SDR Record ID
     Set Suite Variable  ${record_id}
 
-    ${uri_list}=  Read Properties  ${OPENBMC_BASE_URI}list
-    Set Suite Variable  ${SYSTEM_URI}  ${uri_list}
-    Log  ${uri_list}
+    # If REST is supported, then the uri_list will be returned.
+    ${resp}=  OpenBMC Get Request  ${OPENBMC_BASE_URI}
+    IF  '${resp.status_code}' == '${HTTP_OK}'
+      ${uri_list}=  Read Properties  ${OPENBMC_BASE_URI}list
+      Set Suite Variable  ${SYSTEM_URI}  ${uri_list}
+      Log  ${uri_list}
+    END
 
 
 Test Teardown Execution
