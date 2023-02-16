@@ -245,7 +245,7 @@ Verify IPMI User Deletion
     Set Test Variable  ${random_userid}
     # Delete IPMI User and verify
     Run IPMI Standard Command  user set name ${random_userid} ""
-    ${user_info}=  Get User Info  ${random_userid}
+    ${user_info}=  Get User Info  ${random_userid}  ${CHANNEL_NUMBER}
     Should Be Equal  ${user_info['user_name']}  ${EMPTY}
 
 
@@ -336,7 +336,7 @@ Disable IPMI User And Verify
 
     # Disable IPMI user and verify.
     Run IPMI Standard Command  user disable ${random_userid}
-    ${user_info}=  Get User Info  ${random_userid}
+    ${user_info}=  Get User Info  ${random_userid}  ${CHANNEL_NUMBER}
     Should Be Equal  ${user_info['enable_status']}  disabled
 
     # Verify that disabled IPMI  user is unable to run IPMI command.
@@ -756,7 +756,7 @@ Find Free User Id
     Check Enabled User Count
     FOR    ${num}    IN RANGE    300
         ${random_userid}=  Evaluate  random.randint(1, ${expected_max_ids})  modules=random
-        ${access}=  Run IPMI Standard Command  channel getaccess 1 ${random_userid}
+        ${access}=  Run IPMI Standard Command  channel getaccess ${CHANNEL_NUMBER} ${random_userid}
 
         ${name_line}=  Get Lines Containing String  ${access}  User Name
         Log To Console  For ID ${random_userid}: ${name_line}

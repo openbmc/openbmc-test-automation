@@ -329,7 +329,7 @@ Find Free User Id
     FOR    ${jj}    IN RANGE    300
         # IPMI maximum users count (i.e. 15 users).
         ${random_userid}=  Evaluate  random.randint(1, ${ipmi_max_num_users})  modules=random
-        ${access}=  Run IPMI Standard Command  channel getaccess 1 ${random_userid}
+        ${access}=  Run IPMI Standard Command  channel getaccess ${CHANNEL_NUMBER} ${random_userid}
 
         ${name_line}=  Get Lines Containing String  ${access}  User Name
         Log To Console  For ID ${random_userid}: ${name_line}
