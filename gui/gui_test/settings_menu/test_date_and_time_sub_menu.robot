@@ -19,6 +19,7 @@ ${xpath_ntp_server1}           //input[@data-test-id="dateTime-input-ntpServer1"
 ${xpath_ntp_server2}           //input[@data-test-id="dateTime-input-ntpServer2"]
 ${xpath_ntp_server3}           //input[@data-test-id="dateTime-input-ntpServer3"]
 ${xpath_select_save_settings}  //button[@data-test-id="dateTime-button-saveSettings"]
+${xpath_invalid_feedback}      //*[@class="invalid-feedback"]
 
 
 *** Test Cases ***
@@ -170,6 +171,18 @@ Verify Setting Manual BMC Time
 
     ${cli_date_time}=  CLI Get BMC DateTime
     Should contain  ${cli_date_time}  ${manual_date}  ${manual_time}
+
+
+Verify Setting Invalid Date And Time Is Not Allowed
+    [Documentation]  Verify if invalid time is given, it should throw error.
+    [Tags]  Verify_Setting_Invalid_Date_And_Time_Is_Not_Allowed
+    [Setup]  Setup To Power Off And Navigate
+
+    Click Element At Coordinates  ${xpath_select_manual}  0  0
+    Input Text  ${xpath_manual_date}  2023-18-48
+    Page Should Contain Element  ${xpath_invalid_feedback}
+    Input Text  ${xpath_manual_time}  29:48
+    Page Should Contain Element  ${xpath_invalid_feedback}
 
 
 *** Keywords ***
