@@ -97,6 +97,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed96b39c_e342b5d7",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-17T05:02:22Z",
+      "side": 1,
+      "message": "Please always push two separate commit for new test case and automation fix.",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 80
+      },
+      "revId": "119eb34e96ac158d770a7b3a752fed03209fc389",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "01df22d2_e340daf1",
         "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
         "patchSetId": 2
@@ -137,6 +160,29 @@
         "startChar": 21,
         "endLine": 219,
         "endChar": 65
+      },
+      "revId": "119eb34e96ac158d770a7b3a752fed03209fc389",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d2493c3_6dd95f34",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-17T05:02:22Z",
+      "side": 1,
+      "message": "Let this test case go only in the",
+      "range": {
+        "startLine": 217,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 80
       },
       "revId": "119eb34e96ac158d770a7b3a752fed03209fc389",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
@@ -226,6 +272,29 @@
       "side": 1,
       "message": "yes, but reboot is under operations menu \u0026 SNMP is under settings menu..In order to avoid 3 lines of code, I have called this keyword",
       "parentUuid": "f06e73ba_68eed5ac",
+      "range": {
+        "startLine": 327,
+        "startChar": 48,
+        "endLine": 327,
+        "endChar": 69
+      },
+      "revId": "119eb34e96ac158d770a7b3a752fed03209fc389",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6a0a5d4_53711799",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-17T05:02:22Z",
+      "side": 1,
+      "message": "Please do not use suite setup execution in the test case. This keyword is specifically created for Suite setup task. you can create a new keyword or put the setup tasks in this keyword.",
       "range": {
         "startLine": 327,
         "startChar": 48,
