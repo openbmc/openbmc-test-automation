@@ -276,7 +276,6 @@ def GetNewValuesForAllBIOSAttrs(attr_table_data):
         except ValueError:
             try:
                 # The data values have a double quote in them.
-                # Eg: '"IBM I"' instead of just 'IBM I'
                 data = '"' + str(existing_data[attr]) + '"'
                 temp_list[attr].remove(data)
             except ValueError:
