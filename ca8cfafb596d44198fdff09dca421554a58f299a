@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07837af5_8e1ec4bb",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-17T07:24:32Z",
+      "side": 1,
+      "message": "Verify Persistence of SNMP Manager And Trap On BMC Reboot\n[Documentation] Configure the SNMP manager and verify that it remains operational after a BMC system reboot. Also, confirm that a trap is successfully sent.",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 57
+      },
+      "revId": "ca8cfafb596d44198fdff09dca421554a58f299a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00d74ba0_7773f050",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-17T07:24:32Z",
+      "side": 1,
+      "message": "This keyword is not generic enough. What if we have 3 SNMP IP in the system?\n\nTo make this generic enough you can do something like below\n\n```\nDelete Multiple SNMP Managers Via GUI\n[Documentation] Delete multiple SNMP managers on BMC via GUI.\n[Arguments] ${ip_port_list}\n\nFOR  ${ip_port}  IN  @{ip_port_list}\n  Wait Until Keyword Succeeds   30 sec  10 sec\n  ...  Delete SNMP Manager Via GUI  ${ip_port[0]}  ${ip_port[1]}\nEND\n```",
+      "range": {
+        "startLine": 379,
+        "startChar": 0,
+        "endLine": 381,
+        "endChar": 80
+      },
+      "revId": "ca8cfafb596d44198fdff09dca421554a58f299a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
