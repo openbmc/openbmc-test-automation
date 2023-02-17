@@ -183,6 +183,7 @@ Test Stability On Large Number Of Wrong Login Attempts To GUI
     ${fail_count}=  Count Values In List  ${status_list}  False
     Run Keyword If  ${fail_count} > ${0}  FAIL  Could not open BMC GUI ${fail_count} times
 
+
 Test BMC GUI Stability On Continuous Refresh Of GUI Home Page
     [Documentation]  Login to BMC GUI and keep refreshing home page and verify stability
         ...  by login at times in another browser.
@@ -214,12 +215,14 @@ Test BMC GUI Stability On Continuous Refresh Of GUI Home Page
     ${fail_count}=  Get Length  ${failed_list}
     Run Keyword If  ${fail_count} > ${0}  FAIL  Could not open BMC GUI ${fail_count} times
 
+
 Test BMCweb Stability On Continuous Redfish Login Attempts With Invalid Credentials
     [Documentation]  Make invalid credentials Redfish login attempts continuously and
     ...  verify bmcweb stability by login to Redfish with valid credentials.
     [Tags]  Test_BMCweb_Stability_On_Continuous_Redfish_Login_Attempts_With_Invalid_Credentials
 
     Invalid Credentials Redfish Login Attempts
+
 
 Test User Delete Operation Without Session Token And Expect Failure
     [Documentation]  Try to delete an object without valid session token and verifies it throws
@@ -254,6 +257,31 @@ Test Bmcweb Stability On Continuous Redfish Delete Operation Request Without Ses
     ${fail_count}=  Get Length  ${failed_iter_list}
     Run Keyword If  ${fail_count} > ${0}  FAIL  Could not do Redfish delete operation ${fail_count} times
 
+
+Verify Flood Put Method Without Auth Token
+    [Documentation]  Flood put method without auth token and check BMC stability.
+    [Tags]  Verify_Flood_Put_Method_Without_Auth_Token
+
+    Redfish.Logout
+    @{status_list}=  Create List
+
+    FOR  ${i}  IN RANGE  ${1}  ${iterations}
+        Log To Console  ${i}th iteration
+        Run Keyword And Ignore Error
+        ...  Redfish.Put  ${LED_LAMP_TEST_ASSERTED_URI}attr/Asserted  body={"data":1}
+        # Every 100th iteration, check BMC allows put with auth token.
+        ${status}=  Run Keyword If  ${i} % 100 == 0  Run Keyword And Return Status
+        ...  Login And Upload Partition File To BMC
+        Run Keyword If  ${status} == False  Append To List  ${status_list}  ${status}
+    END
+
+    ${verify_count}=  Evaluate  ${iterations}/100
+    ${fail_count}=  Get Length  ${status_list}
+
+    Should Be Equal  ${fail_count}  ${0}
+    ...  msg=Put operation failed ${fail_count} times in ${verify_count} attempts.
+
+
 *** Keywords ***
 
 Login And Configure Hostname
@@ -279,9 +307,10 @@ Login And Create User
     Redfish.Login
 
     ${user_info}=  Create Dictionary
-    ...  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
+    ...  UserName=test_user  Password=TestPwd123  RoleId=ReadOnly  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{user_info}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_CREATED}]
+
 
 Login And Delete User
     [Documentation]  Login create and delete user
@@ -291,10 +320,11 @@ Login And Delete User
     Redfish.Login
 
     ${user_info}=  Create Dictionary
-    ...  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
+    ...  UserName=test_user  Password=TestPwd123  RoleId=ReadOnly  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{user_info}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_CREATED}]
     Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
+
 
 Set Account Lockout Threshold
    [Documentation]  Set user account lockout threshold.
@@ -311,6 +341,7 @@ Login to GUI With Incorrect Credentials
     Input Text  ${xpath_textbox_username}  root
     Input Password  ${xpath_textbox_password}  incorrect_password
     Click Button  ${xpath_login_button}
+
 
 Invalid Credentials Redfish Login Attempts
     [Documentation]  Continuous invalid credentials login attempts to Redfish and
@@ -349,3 +380,37 @@ Confirm Ability to Connect Then Close All Connections
     ...  SSHLibrary.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
     Skip If  ${status} == ${False}  msg= SSH Login failed: test will be skipped
     SSHLibrary.Close All Connections
+
+
+Login And Upload Partition File To BMC
+    [Documentation]  Upload partition file to BMC.
+
+    Create Partition File
+    Initialize OpenBMC
+
+    # Get the content of the file and upload to BMC.
+    ${image_data}=  OperatingSystem.Get Binary File  100-file
+    ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}  Content-Type=application/octet-stream
+
+    ${kwargs}=  Create Dictionary  data=${image_data}
+    Set To Dictionary  ${kwargs}  headers  ${headers}
+    ${resp}=  Put Request  openbmc  /ibm/v1/Host/ConfigFiles/100-file  &{kwargs}  timeout=10
+    Should Be Equal As Strings  ${resp.status_code}  200
+    Delete Local Partition File
+
+
+Delete Local Partition File
+    [Documentation]  Delete local partition file.
+
+    ${file_exist}=  Run Keyword And Return Status  OperatingSystem.File Should Exist  100-file
+    Run Keyword If  'True' == '${file_exist}'  Remove File  100-file
+
+
+Create Partition File
+    [Documentation]  Create Partition file.
+
+    Delete Local Partition File
+
+    @{words}=  Split String  100-file  -
+    Run  dd if=/dev/zero of=100-file bs=${words}[-0] count=1
+    OperatingSystem.File Should Exist  100-file
