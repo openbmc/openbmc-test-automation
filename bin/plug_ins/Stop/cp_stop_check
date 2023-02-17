@@ -201,7 +201,7 @@ def pel_stop_check():
         qprint_var(pel_txt_file_path)
         return
 
-    default_stop_dir_path = "/afs/rchland.ibm.com/projects/esw/dvt/"
+    default_stop_dir_path = ""
 
     # If pel_stop_file_path is unqualified and cannot be found, pre-pend
     # default_stop_dir_path for the user.
