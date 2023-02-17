@@ -31,14 +31,17 @@ def pldmtool(option_string, **bsu_options):
       }
 
     Description of argument(s):
-    option_string                   A string of options which are to be processed by the pldmtool command.
-    parse_results                   Parse the pldmtool results and return a dictionary rather than the raw
-                                    pldmtool output.
-    bsu_options                     Options to be passed directly to bmc_execute_command.  See its prolog for
-                                    details.
+    option_string         A string of options which are to be processed by the
+                          pldmtool command.
+    parse_results         Parse the pldmtool results and return a dictionary
+                          rather than the raw
+                          pldmtool output.
+    bsu_options           Options to be passed directly to bmc_execute_command.
+                          See its prolog for details.
     """
 
-    # This allows callers to specify arguments in python style (e.g. print_out=1 vs. print_out=${1}).
+    # This allows callers to specify arguments in python style
+    # (e.g. print_out=1 vs. print_out=${1}).
     bsu_options = fa.args_to_objects(bsu_options)
 
     stdout, stderr, rc = bsu.bmc_execute_command(
@@ -133,8 +136,10 @@ def GetBIOSStrAndIntAttributeHandles(attr_type, attr_val_table_data):
 
     if attr_type == "BIOSInteger":
         return attr_val_int_dict
-    elif attr_type == "BIOSString":
+    if attr_type == "BIOSString":
         return attr_val_str_dict
+
+    return None
 
 
 def GetRandomBIOSIntAndStrValues(attr_name, count):
@@ -276,7 +281,6 @@ def GetNewValuesForAllBIOSAttrs(attr_table_data):
         except ValueError:
             try:
                 # The data values have a double quote in them.
-                # Eg: '"IBM I"' instead of just 'IBM I'
                 data = '"' + str(existing_data[attr]) + '"'
                 temp_list[attr].remove(data)
             except ValueError:
