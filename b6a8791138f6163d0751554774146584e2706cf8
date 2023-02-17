@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38c95ea2_d3401a8d",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-17T12:32:15Z",
+      "side": 1,
+      "message": "Changed the xpath",
+      "parentUuid": "d75777f1_8660b7a3",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 61
+      },
+      "revId": "b6a8791138f6163d0751554774146584e2706cf8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38337dae_a580984b",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6542bc27_56dd6035",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-17T12:32:15Z",
+      "side": 1,
+      "message": "Here, we are giving invalid date and invalid time and checking for error.",
+      "parentUuid": "38337dae_a580984b",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 51
+      },
+      "revId": "b6a8791138f6163d0751554774146584e2706cf8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2968c50_72d4f8fd",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-02-16T13:13:41Z",
       "side": 1,
       "message": "Verify if invalid time input is given, GUI should throw an error.",
+      "range": {
+        "startLine": 177,
+        "startChar": 21,
+        "endLine": 177,
+        "endChar": 76
+      },
+      "revId": "b6a8791138f6163d0751554774146584e2706cf8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69b0ee87_e880fd40",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-17T12:32:15Z",
+      "side": 1,
+      "message": "Changed accordingly",
+      "parentUuid": "a2968c50_72d4f8fd",
       "range": {
         "startLine": 177,
         "startChar": 21,
