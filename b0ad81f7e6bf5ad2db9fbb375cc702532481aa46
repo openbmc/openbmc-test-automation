@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1472850_7a5939d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-18T04:46:23Z",
+      "side": 1,
+      "message": "minor comment there",
+      "revId": "b0ad81f7e6bf5ad2db9fbb375cc702532481aa46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9a4d1bf_4e0c5ff4",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-18T04:46:23Z",
+      "side": 1,
+      "message": "Align this line with above variable like below\n\n${xpath_ntp_server3}             //input[@data-test-id\u003d\"dateTime-input-ntpServer3\"]\n${xpath_select_save_settings}    //button[@data-test-id\u003d\"dateTime-button-saveSettings\"]\n${xpath_invalid_format_message}  //*[contains(text(), \"Invalid format\")]",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 76
+      },
+      "revId": "b0ad81f7e6bf5ad2db9fbb375cc702532481aa46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
