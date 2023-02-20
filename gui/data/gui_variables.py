@@ -11,9 +11,9 @@ class gui_variables:
     """
 
     # Login page
-    xpath_textbox_hostname = "//input[@id='host']"
-    xpath_textbox_username = "//*[@data-test-id='login-input-username']"
-    xpath_textbox_password = "//*[@data-test-id='login-input-password']"
+    xpath_login_hostname_input = "//input[@id='host']"
+    xpath_login_username_input = "//*[@data-test-id='login-input-username']"
+    xpath_login_password_input = "//*[@data-test-id='login-input-password']"
     xpath_login_button = "//*[@data-test-id='login-button-submit']"
     xpath_logout_button = "//*[@data-test-id='appHeader-link-logout']"
 

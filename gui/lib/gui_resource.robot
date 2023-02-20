@@ -90,9 +90,9 @@ Login GUI
     # password  The password to be used for login.
 
     Go To  ${obmc_gui_url}
-    Wait Until Element Is Enabled  ${xpath_textbox_username}
-    Input Text  ${xpath_textbox_username}  ${username}
-    Input Password  ${xpath_textbox_password}  ${password}
+    Wait Until Element Is Enabled  ${xpath_login_username_input}
+    Input Text  ${xpath_login_username_input}  ${username}
+    Input Password  ${xpath_login_password_input}  ${password}
     Click Element  ${xpath_login_button}
     Wait Until Page Contains  Overview  timeout=60s
 
