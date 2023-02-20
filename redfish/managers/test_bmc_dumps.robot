@@ -110,7 +110,8 @@ Verify BMC Dump Default Location In BMC
      ${dump_file}  ${stderr}  ${rc}=  BMC Execute Command
      ...  ls ${BMC_DUMP_COLLECTOR_PATH}/${dump_id}
      Should Be True  ${rc} == 0
-     Should Start With  ${dump_file}  BMCDUMP
+     ${status}=  Run Keyword And Return Status  Should Start With  ${dump_file}  BMCDUMP
+     Run Keyword If  ${status} == False  Should Start With  ${dump_file}  obmcdump
 
 
 Verify User Initiated BMC Dump When Host Booted
