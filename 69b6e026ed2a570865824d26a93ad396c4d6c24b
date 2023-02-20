@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de4be56e_97183a8f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2023-02-20T06:05:39Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "a1f13cd3_a6c43cc4",
+      "range": {
+        "startLine": 7,
+        "startChar": 36,
+        "endLine": 7,
+        "endChar": 45
+      },
+      "revId": "69b6e026ed2a570865824d26a93ad396c4d6c24b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "288f31f7_be058823",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae291019_16d19486",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2023-02-20T06:05:39Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "288f31f7_be058823",
+      "range": {
+        "startLine": 10,
+        "startChar": 7,
+        "endLine": 10,
+        "endChar": 101
+      },
+      "revId": "69b6e026ed2a570865824d26a93ad396c4d6c24b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "061d0833_1eecf070",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-02-20T05:56:06Z",
       "side": 1,
       "message": "Added delay for sensor page to load completely by waiting for disapperance of progress bar.",
+      "range": {
+        "startLine": 133,
+        "startChar": 6,
+        "endLine": 133,
+        "endChar": 93
+      },
+      "revId": "69b6e026ed2a570865824d26a93ad396c4d6c24b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d63d673a_7afc8fb0",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2023-02-20T06:05:39Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "061d0833_1eecf070",
       "range": {
         "startLine": 133,
         "startChar": 6,
