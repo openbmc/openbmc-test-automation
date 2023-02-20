@@ -285,7 +285,7 @@ Generate CSR Via Redfish
 
     ${certificate_dict}=  Create Dictionary  @odata.id=${certificate_uri}
     ${payload}=  Create Dictionary  City=Austin  CertificateCollection=${certificate_dict}
-    ...  CommonName=${OPENBMC_HOST}  Country=US  Organization=IBM
+    ...  CommonName=${OPENBMC_HOST}  Country=US  Organization=xyz
     ...  OrganizationalUnit=ISL  State=AU  KeyBitLength=${key_bit_length}
     ...  KeyPairAlgorithm=${key_pair_algorithm}  KeyCurveId=${key_curv_id}
 
