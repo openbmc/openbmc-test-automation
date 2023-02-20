@@ -129,9 +129,11 @@ Suite Setup Execution
     Click Element  ${xpath_hardware_status_menu}
     Click Element  ${xpath_sensor_sub_menu}
     Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  sensors
-    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
-    # Added delay for sensor page to load completely.
-    Sleep  100s
+
+    # Added delay for sensor page to load completely and waiting to not visible progress bar.
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=15min
+  
+    
 
 
 Clean Up Filter Values
