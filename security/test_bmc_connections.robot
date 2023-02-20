@@ -308,8 +308,8 @@ Set Account Lockout Threshold
 Login to GUI With Incorrect Credentials
     [Documentation]  Attempt to login to GUI as root, providing incorrect password argument.
 
-    Input Text  ${xpath_textbox_username}  root
-    Input Password  ${xpath_textbox_password}  incorrect_password
+    Input Text  ${xpath_login_username_input}  root
+    Input Password  ${xpath_login_password_input}  incorrect_password
     Click Button  ${xpath_login_button}
 
 Invalid Credentials Redfish Login Attempts
