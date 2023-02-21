@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8267cc85_bb4dd5d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2023-02-21T06:05:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5cfe9e5_683ae1ff",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 28
+      },
+      "revId": "86caf94c2fe1f2fccaee08b15cb02548c54ac53f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c41112a7_58fe1591",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-16T14:13:42Z",
       "side": 1,
       "message": "Line 280 uses SYSTEM_URI as the default value. This change will affect the keyword - Get Component URIs",
+      "range": {
+        "startLine": 418,
+        "startChar": 6,
+        "endLine": 418,
+        "endChar": 40
+      },
+      "revId": "86caf94c2fe1f2fccaee08b15cb02548c54ac53f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ff4eff0_8d3eac5b",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2023-02-21T06:05:33Z",
+      "side": 1,
+      "message": "Now, this script is failing in Suite Setup due to not being able to get SYSTEM_URI using REST. so I have added this logic to skip the code to get SYSTEM_URI via REST if it is not supported. Anyways the keywords which are all using SYSTEM_URI as the default value will fail even my changes there or not.",
+      "parentUuid": "c41112a7_58fe1591",
       "range": {
         "startLine": 418,
         "startChar": 6,
