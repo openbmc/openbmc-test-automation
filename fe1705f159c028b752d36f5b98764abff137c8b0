@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ede491e_08d62aae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-02-21T15:10:18Z",
+      "side": 1,
+      "message": "Before\n\n$ python3 -m pylint tools/robot_custom_rules.py\n************* Module robot_custom_rules\ntools/robot_custom_rules.py:1:0: C0114: Missing module docstring (missing-module-docstring)\ntools/robot_custom_rules.py:17:4: C0116: Missing function or method docstring (missing-function-docstring)\ntools/robot_custom_rules.py:27:20: C0209: Formatting a regular string which could be a f-string (consider-using-f-string)\n\n------------------------------------------------------------------\nYour code has been rated at 6.25/10 (previous run: 5.00/10, +1.25)\n\n\n\nAfter:\n\n$ python3 -m pylint tools/robot_custom_rules.py\n\n--------------------------------------------------------------------\nYour code has been rated at 10.00/10 (previous run: 10.00/10, +0.00)",
+      "revId": "fe1705f159c028b752d36f5b98764abff137c8b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
