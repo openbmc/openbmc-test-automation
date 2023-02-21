@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c07e569_a4ea8ae7",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-21T06:12:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07837af5_8e1ec4bb",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 57
+      },
+      "revId": "ca8cfafb596d44198fdff09dca421554a58f299a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00d74ba0_7773f050",
