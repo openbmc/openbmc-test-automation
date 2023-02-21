@@ -77,27 +77,27 @@ Verify Server Power Cap Setting Is On
 
 
 Verify Server Power Cap Setting Is Off
-    [Documentation]   Verify power cap cannot be set or modified when power cap check box is off.
+    [Documentation]  Verify server power cap setting is off.
     [Tags]  Verify_Server_Power_Cap_Setting_Is_Off
+    [Setup]  Save Initial Power Cap State
+    [Teardown]  Restore Initial Power Cap State
 
-    Page Should Contain Element  ${xpath_power_ops_checkbox}
+    Run Keyword If  '${checkbox_initial_state}' == 'True'
+    ...  Click Element At Coordinates  ${xpath_power_ops_checkbox}  0  0
 
-    # Set a value in check box.
-    ${checkbox_Selected}=  Run Keyword And Return Status
-    ...  Checkbox Should Be Selected  ${xpath_power_ops_checkbox}
-    Run Keyword If  False == ${checkbox_Selected}  Click Element  ${xpath_power_ops_checkbox}
+    # Now input a cap value and submit.
     Wait Until Element Is Enabled  ${xpath_cap_input_button}  timeout=10
-    Input Text  ${xpath_cap_input_button}  ${499}
 
-    # Now disable input box by deselecting the check box
-    Click Element  ${xpath_power_ops_checkbox}
-    Checkbox Should Not Be Selected  ${xpath_power_ops_checkbox}
-    Element Should Be Disabled  ${xpath_cap_input_button}
+    # Get maximum and minimum values of power cap.
+    ${resp}=  Redfish.Get Properties  /redfish/v1/Chassis/${CHASSIS_ID}/EnvironmentMetrics
 
-    # Click submit.
+    ${power_cap_value}=  Evaluate
+    ...  random.randint(${resp['PowerLimitWatts']['AllowableMin']},${resp['PowerLimitWatts']['AllowableMax']})
+    ...  modules=random
+
+    Input Text  ${xpath_cap_input_button}  ${power_cap_value}
     Click Element  ${xpath_submit_button}
-    ${power_cap}=  Get Power Cap Value
-    Should Not Be True  ${power_cap} == 499
+    Wait Until Keyword Succeeds  1 min  15 sec  Is Power Cap Value Set  ${power_cap_value}
 
 
 *** Keywords ***
