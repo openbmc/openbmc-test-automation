@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d52a2c5_82b0a63e",
+        "filename": "gui/gui_test/resource_management_menu/test_power_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-21T11:11:40Z",
+      "side": 1,
+      "message": "Unable to make out test case with current documentation. Please modify it like below.\n\nVerify Setting Server Power Cap With Power Cap Disabled\n    [Documentation]  Verify that valid server power cap value can be set\n    ...  in GUI with power cap is in disabled state.",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 50
+      },
+      "revId": "99ccf0214485419482ff970c2da014316814defe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
