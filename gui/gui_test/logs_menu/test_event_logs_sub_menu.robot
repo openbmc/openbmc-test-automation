@@ -27,7 +27,10 @@ ${xpath_delete_first_row}         //*[@data-test-id="eventLogs-button-deleteRow-
 ${xpath_confirm_delete}           //button[text()="Delete"]
 ${xpath_event_status_resolved}    //*[@data-test-id="tableFilter-checkbox-Resolved"]
 ${xpath_event_status_unresolved}  //*[@data-test-id="tableFilter-checkbox-Unresolved"]
-${xpath_event_action_download}    //button[contains(text(),"Download")]
+${xpath_event_action_download}    //button[text()[normalize-space()='Download']]
+${xpath_success_message}          //*[contains(text(),"Success")]
+${xpath_resolved_button}          //button[contains(text(),"Resolve")]
+${xpath_unresolved_button}        //button[contains(text(),"Unresolve")]
 
 *** Test Cases ***
 
@@ -77,6 +80,7 @@ Select Single Error Log And Delete
     ${number_of_events_after}=  Get Number Of Event Logs
     Should Be Equal  ${number_of_events_before -1}  ${number_of_events_after}
     ...  msg=Failed to delete single error log entry.
+    Wait Until Element Is Not Visible   ${xpath_success_message}  timeout=30
 
 
 Select All Error Logs And Verify Buttons
@@ -86,8 +90,8 @@ Select All Error Logs And Verify Buttons
     Create Error Logs  ${2}
     Wait Until Element Is Visible  ${xpath_delete_first_row}
     Select All Events
-    Page Should Contain Element  ${xpath_event_status_resolved}
-    Page Should Contain Element  ${xpath_event_status_unresolved}
+    Page Should Contain Element  ${xpath_resolved_button}
+    Page Should Contain Element  ${xpath_unresolved_button}
     Page Should Contain Element  ${xpath_event_action_download}
     Page Should Contain Element  ${xpath_event_action_delete}
     Page Should Contain Element  ${xpath_event_action_cancel}
