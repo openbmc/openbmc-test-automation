@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f6b075b_d8340658",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T15:07:24Z",
+      "side": 1,
+      "message": "Test cases to enable and disable DHCP for eth1",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 14
+      },
+      "revId": "e267425cf8d2d4a47566e39538a1fb8b9032ed18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a2d6c24_394dfa32",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T15:07:24Z",
+      "side": 1,
+      "message": "Align to left. \nAdd the test case tags in changes",
+      "range": {
+        "startLine": 9,
+        "startChar": 4,
+        "endLine": 11,
+        "endChar": 45
+      },
+      "revId": "e267425cf8d2d4a47566e39538a1fb8b9032ed18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c8599287_e2513a2a",
@@ -14,6 +60,23 @@
       "writtenOn": "2023-02-22T10:46:54Z",
       "side": 1,
       "message": "Changing back to data as it needs to take DHCP_ENABLED or DHCP_DISABLED",
+      "revId": "e267425cf8d2d4a47566e39538a1fb8b9032ed18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00d16e2c_f635cb72",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T15:07:24Z",
+      "side": 1,
+      "message": "Can you mention it is eth1 by default.",
       "revId": "e267425cf8d2d4a47566e39538a1fb8b9032ed18",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
