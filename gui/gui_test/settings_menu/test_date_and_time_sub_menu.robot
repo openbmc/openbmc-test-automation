@@ -19,7 +19,7 @@ ${xpath_ntp_server1}           //input[@data-test-id="dateTime-input-ntpServer1"
 ${xpath_ntp_server2}           //input[@data-test-id="dateTime-input-ntpServer2"]
 ${xpath_ntp_server3}           //input[@data-test-id="dateTime-input-ntpServer3"]
 ${xpath_select_save_settings}  //button[@data-test-id="dateTime-button-saveSettings"]
-${xpath_invalid_format_message}      //*[contains(text(), "Invalid format")]
+${xpath_invalid_format_message}  //*[contains(text(), "Invalid format")]
 
 *** Test Cases ***
 
@@ -183,6 +183,37 @@ Verify Setting Invalid Date And Time Is Not Allowed
     Page Should Contain Element  ${xpath_invalid_format_message}
     Input Text  ${xpath_manual_time}  29:48
     Page Should Contain Element  ${xpath_invalid_format_message}
+
+
+Verify Remove NTP Server Configuration
+    [Documentation]  Verify if we are able to change from NTP server configuration
+    ...  to manual setting date and time.
+    [Tags]  Verify_Remove_NTP_Server_Configuration
+    [Setup]  Setup To Power Off And Navigate
+
+    Click Element At Coordinates  ${xpath_select_ntp}  0  0
+    Input Text  ${xpath_ntp_server1}  10.10.10.10
+    Click Element  ${xpath_select_save_settings}
+
+    # Wait for changes to take effect
+    Sleep 120
+
+    #Clear the NTP server
+    Clear Element Text  ${xpath_ntp_server1}
+
+    # Wait for changes to take effect
+    Sleep  60
+
+    # Set the manual date and time
+    Click Element At Coordinates  ${xpath_select_manual}  0  0
+    Click Element At Coordinates  ${xpath_select_manual}  0  0
+    Input Text  ${xpath_manual_date}  2023-05-24
+    Input Text  ${xpath_manual_time}  15:30
+    Click Element  ${xpath_select_save_settings}
+
+    # Wait for changes to take effect
+    Sleep  120
+    Page Should Contain  2023-05-24
 
 
 *** Keywords ***
