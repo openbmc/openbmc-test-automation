@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c801ea17_4ebaffb6",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-22T05:03:33Z",
+      "side": 1,
+      "message": "giving one line after every test case",
+      "parentUuid": "be4989d9_feb8107c",
+      "revId": "847625080d0e8599d3210af7b7491103ed68c275",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42e5a3a5_0655a8b4",
         "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
         "patchSetId": 1
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21393927_034b0d85",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-22T05:03:33Z",
+      "side": 1,
+      "message": "Not required as by default the DHCP on eth1 is considered as True in the scenario of\neth0 in static and eth1 in DHCP.",
+      "parentUuid": "42e5a3a5_0655a8b4",
+      "revId": "847625080d0e8599d3210af7b7491103ed68c275",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52ff2b81_e12635e0",
         "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
         "patchSetId": 1
@@ -48,6 +84,24 @@
       "writtenOn": "2023-02-21T07:25:37Z",
       "side": 1,
       "message": "remove extra line space",
+      "revId": "847625080d0e8599d3210af7b7491103ed68c275",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7eceac6_1a5a3cdb",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-22T05:03:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52ff2b81_e12635e0",
       "revId": "847625080d0e8599d3210af7b7491103ed68c275",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
