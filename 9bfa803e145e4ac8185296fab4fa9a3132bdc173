@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbae1715_73592aaf",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T09:51:35Z",
+      "side": 1,
+      "message": "Redfish",
+      "range": {
+        "startLine": 24,
+        "startChar": 48,
+        "endLine": 24,
+        "endChar": 55
+      },
+      "revId": "9bfa803e145e4ac8185296fab4fa9a3132bdc173",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e858fffa_97907b69",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T09:51:35Z",
+      "side": 1,
+      "message": "Making sure that the BMC pings, should be part of this test.",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 39
+      },
+      "revId": "9bfa803e145e4ac8185296fab4fa9a3132bdc173",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a05a9a8b_c56eafc9",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T09:51:35Z",
+      "side": 1,
+      "message": "Enable",
+      "range": {
+        "startLine": 32,
+        "startChar": 21,
+        "endLine": 32,
+        "endChar": 28
+      },
+      "revId": "9bfa803e145e4ac8185296fab4fa9a3132bdc173",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70854c0a_e5453f05",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T09:51:35Z",
+      "side": 1,
+      "message": "using Redfish",
+      "range": {
+        "startLine": 32,
+        "startChar": 42,
+        "endLine": 32,
+        "endChar": 52
+      },
+      "revId": "9bfa803e145e4ac8185296fab4fa9a3132bdc173",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78772f4f_db23bdc3",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T09:51:35Z",
+      "side": 1,
+      "message": "As said above this should be part of the test. So add it there and remove it from here.",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 35
+      },
+      "revId": "9bfa803e145e4ac8185296fab4fa9a3132bdc173",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51ae0137_8849f926",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T09:51:35Z",
+      "side": 1,
+      "message": "Enable Or Disable DHCP",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 22
+      },
+      "revId": "9bfa803e145e4ac8185296fab4fa9a3132bdc173",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
