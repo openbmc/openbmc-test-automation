@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "817c8eb1_0ec958af",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T06:20:24Z",
+      "side": 1,
+      "message": "using Redfish",
+      "range": {
+        "startLine": 24,
+        "startChar": 42,
+        "endLine": 24,
+        "endChar": 52
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2285718b_eeb79050",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T06:20:24Z",
+      "side": 1,
+      "message": "Which variable is this?",
+      "range": {
+        "startLine": 41,
+        "startChar": 58,
+        "endLine": 41,
+        "endChar": 76
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "864819cd_408a2a2b",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T06:20:24Z",
+      "side": 1,
+      "message": "enable_dhcp",
+      "range": {
+        "startLine": 41,
+        "startChar": 19,
+        "endLine": 41,
+        "endChar": 31
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdf50960_e392853b",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T06:20:24Z",
+      "side": 1,
+      "message": "I believe you always expect the patch to be successful.",
+      "range": {
+        "startLine": 41,
+        "startChar": 79,
+        "endLine": 41,
+        "endChar": 129
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef5e0025_95df2df7",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T06:20:24Z",
+      "side": 1,
+      "message": "Add all args in description.",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 14
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b67f4586_ed179b0d",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T06:20:24Z",
+      "side": 1,
+      "message": "End all statements with a period.",
+      "range": {
+        "startLine": 45,
+        "startChar": 17,
+        "endLine": 45,
+        "endChar": 29
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13cddff4_1fae2c4f",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T06:20:24Z",
+      "side": 1,
+      "message": "You are just setting the value to True or False in the body. Use it directly instead of using suite variables. Pass \u0027${dhcp_enabled}\u0027 to it.",
+      "range": {
+        "startLine": 47,
+        "startChar": 1,
+        "endLine": 47,
+        "endChar": 91
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37beb9a0_327db518",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T06:20:24Z",
+      "side": 1,
+      "message": "This should not be part of this keyword or you would need to rename the keyword.",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 62
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2acd8ec_1830154b",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T06:20:24Z",
+      "side": 1,
+      "message": "Do a Redfish.Login here.",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 30
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
