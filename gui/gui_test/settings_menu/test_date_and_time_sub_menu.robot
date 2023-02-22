@@ -5,21 +5,21 @@ Documentation   Test OpenBMC GUI "Date and time" sub-menu of "Settings".
 Resource        ../../lib/gui_resource.robot
 
 Suite Setup     Suite Setup Execution
-Suite Teardown  Close Browser
+Suite Teardown  Suite Teardown Execution
 Test Setup      Navigate To Date and Time Page
 
 *** Variables ***
 
-${xpath_date_time_heading}     //h1[text()="Date and time"]
-${xpath_select_manual}         //*[@data-test-id="dateTime-radio-configureManual"]
-${xpath_select_ntp}            //*[@data-test-id="dateTime-radio-configureNTP"]
-${xpath_manual_date}           //input[@data-test-id="dateTime-input-manualDate"]
-${xpath_manual_time}           //input[@data-test-id="dateTime-input-manualTime"]
-${xpath_ntp_server1}           //input[@data-test-id="dateTime-input-ntpServer1"]
-${xpath_ntp_server2}           //input[@data-test-id="dateTime-input-ntpServer2"]
-${xpath_ntp_server3}           //input[@data-test-id="dateTime-input-ntpServer3"]
-${xpath_select_save_settings}  //button[@data-test-id="dateTime-button-saveSettings"]
-${xpath_invalid_format_message}      //*[contains(text(), "Invalid format")]
+${xpath_date_time_heading}       //h1[text()="Date and time"]
+${xpath_select_manual}           //*[@data-test-id="dateTime-radio-configureManual"]
+${xpath_select_ntp}              //*[@data-test-id="dateTime-radio-configureNTP"]
+${xpath_manual_date}             //input[@data-test-id="dateTime-input-manualDate"]
+${xpath_manual_time}             //input[@data-test-id="dateTime-input-manualTime"]
+${xpath_ntp_server1}             //input[@data-test-id="dateTime-input-ntpServer1"]
+${xpath_ntp_server2}             //input[@data-test-id="dateTime-input-ntpServer2"]
+${xpath_ntp_server3}             //input[@data-test-id="dateTime-input-ntpServer3"]
+${xpath_select_save_settings}    //button[@data-test-id="dateTime-button-saveSettings"]
+${xpath_invalid_format_message}  //*[contains(text(), "Invalid format")]
 
 *** Test Cases ***
 
@@ -185,6 +185,41 @@ Verify Setting Invalid Date And Time Is Not Allowed
     Page Should Contain Element  ${xpath_invalid_format_message}
 
 
+Verify Changing BMC Time From NTP To Manual
+    [Documentation]  Verify that BMC time can be changed from NPT to
+    ...  manual time via GUI.
+    [Tags]  Verify_BMC_Time_From_NTP_To_Manual
+    [Setup]  Setup To Power Off And Navigate
+
+    # Add NPT server for BMC time to sync.
+    Click Element At Coordinates  ${xpath_select_ntp}  0  0
+    Input Text  ${xpath_ntp_server1}  time.google.com
+    Click Element  ${xpath_select_save_settings}
+
+    # Wait for changes to take effect.
+    Wait Until Page Contains Element  ${xpath_select_ntp}  timeout=30s
+
+    # Set the manual date and time.
+    ${cli_date_time}=  CLI Get BMC DateTime
+    ${date_changed}=  Add Time To Date  ${cli_date_time}  31 days
+    ${date_changed}=  Add Time To Date  ${date_changed}  05:10:00
+    Log  "Setting BMC date : ${date_changed} using Manual option"
+    ${date}=  Convert Date  ${date_changed}  result_format=%Y-%m-%d
+    ${time}=  Convert Date  ${date_changed}  result_format=%H:%M
+    Click Element At Coordinates  ${xpath_select_manual}  0  0
+    Input Text  ${xpath_manual_date}  ${date}
+    Input Text  ${xpath_manual_time}  ${time}
+    Click Element  ${xpath_select_save_settings}
+
+    # Refresh the NTP Page.
+    Click Element  ${xpath_refresh_button}
+    Wait Until Page Contains  ${date}  timeout=60s
+    Page Should Contain  ${time}
+
+    # Wait for the "Saved Successfully" window to close automatically.
+    Sleep  15
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -192,6 +227,12 @@ Suite Setup Execution
 
     Launch Browser And Login GUI
     Maximize Browser Window
+
+Suite Teardown Execution
+   [Documentation]  Do the post suite teardown.
+
+    Logout GUI
+    Close Browser
 
 Setup To Power Off And Navigate
    [Documentation]  Power off system if not powered off and go to date and
