@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "496e701f_536f7525",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-22T08:04:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7276b6b8_8f50b3cf",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 67
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34756a9f_d1141e5a",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-30T07:08:49Z",
       "side": 1,
       "message": "As per our coding rule, keep local variable all small letters.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 73
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e64055a_1f03ee97",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-22T08:04:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34756a9f_d1141e5a",
       "range": {
         "startLine": 26,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "023ce736_75e34b12",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-22T08:04:34Z",
+      "side": 1,
+      "message": "I am keeping it for readability",
+      "parentUuid": "2a1f0ea9_95aedf13",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 40
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a93a584_0917d5c5",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-01-30T07:08:49Z",
       "side": 1,
       "message": "better to name it as `status`",
+      "range": {
+        "startLine": 31,
+        "startChar": 6,
+        "endLine": 31,
+        "endChar": 15
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ae7c503_aa3224e1",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-22T08:04:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a93a584_0917d5c5",
       "range": {
         "startLine": 31,
         "startChar": 6,
@@ -116,6 +212,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36cf40d8_ef165e7d",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-22T08:04:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3027f1b5_a221c15d",
+      "range": {
+        "startLine": 41,
+        "startChar": 19,
+        "endLine": 41,
+        "endChar": 25
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28cec675_bc836b58",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-01-30T07:08:49Z",
       "side": 1,
       "message": "Please add an example of Redfish response.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 47
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74d59be4_d788333d",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-22T08:04:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28cec675_bc836b58",
       "range": {
         "startLine": 46,
         "startChar": 0,
@@ -162,6 +306,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bebf2b43_c7a9022c",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-22T08:04:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07432710_deb925d1",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 39
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ed269f1_a11516c4",
@@ -175,6 +343,30 @@
       "writtenOn": "2023-01-30T07:08:49Z",
       "side": 1,
       "message": "we can also better name this keyword as \n\nIs Telementry Data Aligned With Definitions",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 49
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0af7ae0_998d89a5",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-22T08:04:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ed269f1_a11516c4",
       "range": {
         "startLine": 55,
         "startChar": 0,
@@ -208,6 +400,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "222f8ed3_1536737e",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-22T08:04:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5059d884_958dec27",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 44
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5895f8a6_016a1c02",
@@ -221,6 +437,30 @@
       "writtenOn": "2023-01-30T07:08:49Z",
       "side": 1,
       "message": "Add example of Redfish response.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 44
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9359c9b_d52fa4c4",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-22T08:04:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5895f8a6_016a1c02",
       "range": {
         "startLine": 69,
         "startChar": 0,
@@ -254,6 +494,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "097d9946_9707f446",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-22T08:04:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "813b9301_c218cc79",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 54
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fcfd2aa_44e39c84",
@@ -267,6 +531,30 @@
       "writtenOn": "2023-01-30T07:08:49Z",
       "side": 1,
       "message": "add space\n\nVerify Metric Reading",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 19
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dc8d31a_3babf388",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-22T08:04:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fcfd2aa_44e39c84",
       "range": {
         "startLine": 114,
         "startChar": 0,
@@ -300,6 +588,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5580a84a_ee6e3be2",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-22T08:04:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bdb0a56_282550d9",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 32
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eec87ac0_8e6b3cc1",
@@ -323,6 +635,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe6213d1_64f7bd4e",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-22T08:04:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eec87ac0_8e6b3cc1",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 139,
+        "endChar": 37
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c04b16a_f8d8b40d",
@@ -336,6 +672,30 @@
       "writtenOn": "2023-01-30T07:08:49Z",
       "side": 1,
       "message": "Close All Connections is not required because we are not creating any ssh session in this suite.",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 25
+      },
+      "revId": "6fab9f0eb58b3dc4a8477036d5d7850f7e97c796",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b66965fa_93c72b4e",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-22T08:04:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c04b16a_f8d8b40d",
       "range": {
         "startLine": 147,
         "startChar": 0,
