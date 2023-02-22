@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dadce5d8_7f9d8fb1",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-22T06:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "817c8eb1_0ec958af",
+      "range": {
+        "startLine": 24,
+        "startChar": 42,
+        "endLine": 24,
+        "endChar": 52
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2285718b_eeb79050",
@@ -95,6 +119,78 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96e09d73_416b5fc9",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-22T06:49:34Z",
+      "side": 1,
+      "message": "valid_status_code making it only successful",
+      "parentUuid": "2285718b_eeb79050",
+      "range": {
+        "startLine": 41,
+        "startChar": 58,
+        "endLine": 41,
+        "endChar": 76
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d80e483_4edb590c",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-22T06:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdf50960_e392853b",
+      "range": {
+        "startLine": 41,
+        "startChar": 79,
+        "endLine": 41,
+        "endChar": 129
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce0f3e52_810fee33",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-22T06:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "864819cd_408a2a2b",
+      "range": {
+        "startLine": 41,
+        "startChar": 19,
+        "endLine": 41,
+        "endChar": 31
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef5e0025_95df2df7",
         "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
         "patchSetId": 2
@@ -139,6 +235,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5da2e497_bc15d16f",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-22T06:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b67f4586_ed179b0d",
+      "range": {
+        "startLine": 45,
+        "startChar": 17,
+        "endLine": 45,
+        "endChar": 29
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05a78bef_d6ef39b9",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-22T06:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef5e0025_95df2df7",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 14
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13cddff4_1fae2c4f",
@@ -152,6 +296,30 @@
       "writtenOn": "2023-02-22T06:20:24Z",
       "side": 1,
       "message": "You are just setting the value to True or False in the body. Use it directly instead of using suite variables. Pass \u0027${dhcp_enabled}\u0027 to it.",
+      "range": {
+        "startLine": 47,
+        "startChar": 1,
+        "endLine": 47,
+        "endChar": 91
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d5c5c04_3ec2484c",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-22T06:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13cddff4_1fae2c4f",
       "range": {
         "startLine": 47,
         "startChar": 1,
@@ -185,6 +353,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53fe84ee_9be088ff",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-22T06:49:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37beb9a0_327db518",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 62
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2acd8ec_1830154b",
@@ -198,6 +390,30 @@
       "writtenOn": "2023-02-22T06:20:24Z",
       "side": 1,
       "message": "Do a Redfish.Login here.",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 30
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "550ea1ea_41c0ea79",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-22T06:49:34Z",
+      "side": 1,
+      "message": "Just for pinging the host Redfish Login is not required.",
+      "parentUuid": "b2acd8ec_1830154b",
       "range": {
         "startLine": 57,
         "startChar": 4,
