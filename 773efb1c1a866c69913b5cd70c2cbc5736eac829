@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9c7ca8e_bb9c1156",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T07:38:51Z",
+      "side": 1,
+      "message": "Align with above",
+      "revId": "773efb1c1a866c69913b5cd70c2cbc5736eac829",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d4ad813a_45133b1c",
         "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
         "patchSetId": 1
@@ -20,6 +37,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91e0d208_9c25a3a7",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T07:38:51Z",
+      "side": 1,
+      "message": "Is there anything on the page to keep checking to confirm that changes have been applied instead of just waiting for 120s?",
+      "range": {
+        "startLine": 199,
+        "startChar": 4,
+        "endLine": 199,
+        "endChar": 13
+      },
+      "revId": "773efb1c1a866c69913b5cd70c2cbc5736eac829",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75f5f9a6_1d00d8c4",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T07:38:51Z",
+      "side": 1,
+      "message": "Give a space after \u0027#\u0027",
+      "range": {
+        "startLine": 201,
+        "startChar": 4,
+        "endLine": 201,
+        "endChar": 17
+      },
+      "revId": "773efb1c1a866c69913b5cd70c2cbc5736eac829",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f0ab565_6e84639f",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T07:38:51Z",
+      "side": 1,
+      "message": "Same question as above. \nDoes it take 1 full minute to clear the text?",
+      "range": {
+        "startLine": 205,
+        "startChar": 4,
+        "endLine": 205,
+        "endChar": 13
+      },
+      "revId": "773efb1c1a866c69913b5cd70c2cbc5736eac829",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51af6346_41893b80",
         "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
         "patchSetId": 1
@@ -31,6 +117,29 @@
       "writtenOn": "2023-02-22T06:42:47Z",
       "side": 1,
       "message": "Input Text  ${xpath_manual_date}  2023-05-24\n\ninstead of hardcoding, since it will become obsolete date after something..\n\nGet the current date from BMC + 1 months and then input it.",
+      "revId": "773efb1c1a866c69913b5cd70c2cbc5736eac829",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "890bba1b_5630e40c",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-22T07:38:51Z",
+      "side": 1,
+      "message": "Use \u0027Wait Until Keyword Succeeds\u0027 here instead of sleeping for 120s",
+      "range": {
+        "startLine": 216,
+        "startChar": 4,
+        "endLine": 216,
+        "endChar": 35
+      },
       "revId": "773efb1c1a866c69913b5cd70c2cbc5736eac829",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
