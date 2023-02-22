@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9df92bc0_bff50472",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-22T16:35:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f6b075b_d8340658",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 14
+      },
+      "revId": "e267425cf8d2d4a47566e39538a1fb8b9032ed18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a2d6c24_394dfa32",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-22T15:07:24Z",
       "side": 1,
       "message": "Align to left. \nAdd the test case tags in changes",
+      "range": {
+        "startLine": 9,
+        "startChar": 4,
+        "endLine": 11,
+        "endChar": 45
+      },
+      "revId": "e267425cf8d2d4a47566e39538a1fb8b9032ed18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1f4cd14_fe4024dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-22T16:35:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a2d6c24_394dfa32",
       "range": {
         "startLine": 9,
         "startChar": 4,
@@ -77,6 +125,24 @@
       "writtenOn": "2023-02-22T15:07:24Z",
       "side": 1,
       "message": "Can you mention it is eth1 by default.",
+      "revId": "e267425cf8d2d4a47566e39538a1fb8b9032ed18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84f5b717_d05ba937",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-22T16:35:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00d16e2c_f635cb72",
       "revId": "e267425cf8d2d4a47566e39538a1fb8b9032ed18",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
