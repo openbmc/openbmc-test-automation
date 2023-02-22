@@ -10,16 +10,16 @@ Test Setup      Navigate To Date and Time Page
 
 *** Variables ***
 
-${xpath_date_time_heading}     //h1[text()="Date and time"]
-${xpath_select_manual}         //*[@data-test-id="dateTime-radio-configureManual"]
-${xpath_select_ntp}            //*[@data-test-id="dateTime-radio-configureNTP"]
-${xpath_manual_date}           //input[@data-test-id="dateTime-input-manualDate"]
-${xpath_manual_time}           //input[@data-test-id="dateTime-input-manualTime"]
-${xpath_ntp_server1}           //input[@data-test-id="dateTime-input-ntpServer1"]
-${xpath_ntp_server2}           //input[@data-test-id="dateTime-input-ntpServer2"]
-${xpath_ntp_server3}           //input[@data-test-id="dateTime-input-ntpServer3"]
-${xpath_select_save_settings}  //button[@data-test-id="dateTime-button-saveSettings"]
-${xpath_invalid_format_message}      //*[contains(text(), "Invalid format")]
+${xpath_date_time_heading}       //h1[text()="Date and time"]
+${xpath_select_manual}           //*[@data-test-id="dateTime-radio-configureManual"]
+${xpath_select_ntp}              //*[@data-test-id="dateTime-radio-configureNTP"]
+${xpath_manual_date}             //input[@data-test-id="dateTime-input-manualDate"]
+${xpath_manual_time}             //input[@data-test-id="dateTime-input-manualTime"]
+${xpath_ntp_server1}             //input[@data-test-id="dateTime-input-ntpServer1"]
+${xpath_ntp_server2}             //input[@data-test-id="dateTime-input-ntpServer2"]
+${xpath_ntp_server3}             //input[@data-test-id="dateTime-input-ntpServer3"]
+${xpath_select_save_settings}    //button[@data-test-id="dateTime-button-saveSettings"]
+${xpath_invalid_format_message}  //*[contains(text(), "Invalid format")]
 
 *** Test Cases ***
 
@@ -183,6 +183,36 @@ Verify Setting Invalid Date And Time Is Not Allowed
     Page Should Contain Element  ${xpath_invalid_format_message}
     Input Text  ${xpath_manual_time}  29:48
     Page Should Contain Element  ${xpath_invalid_format_message}
+
+
+Verify Remove NTP Server Configuration
+    [Documentation]  Verify if we are able to change from NTP server configuration
+    ...  to manual setting date and time.
+    [Tags]  Verify_Remove_NTP_Server_Configuration
+    [Setup]  Setup To Power Off And Navigate
+
+    Click Element At Coordinates  ${xpath_select_ntp}  0  0
+    Input Text  ${xpath_ntp_server1}  10.10.10.10
+    Click Element  ${xpath_select_save_settings}
+
+    # Wait for changes to take effect.
+    Wait Until Page Contains Element  ${xpath_select_ntp}  timeout=30s
+
+    # Clear the NTP server.
+    Clear Element Text  ${xpath_ntp_server1}
+
+    # Set the manual date and time.
+    ${cli_date_time}=  CLI Get BMC DateTime
+    ${date_changed}=  Add Time To Date  ${cli_date_time}  31 days
+    Log  ${date_changed}
+    ${date}=  Convert Date  ${date_changed}  result_format=%Y-%m-%d
+    Click Element At Coordinates  ${xpath_select_manual}  0  0
+    Input Text  ${xpath_manual_date}  ${date}
+    Click Element  ${xpath_select_save_settings}
+
+    # Refresh the date and time Page.
+    Click Element  ${xpath_refresh_button}
+    Wait Until Page Contains  ${date}  timeout=60s
 
 
 *** Keywords ***
