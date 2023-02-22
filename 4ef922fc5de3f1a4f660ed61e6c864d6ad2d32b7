@@ -22,6 +22,30 @@
       },
       "revId": "4ef922fc5de3f1a4f660ed61e6c864d6ad2d32b7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "173a2890_8b489487",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-22T15:10:00Z",
+      "side": 1,
+      "message": "Actually we will be deleting SNMP managers in each test case...we are keeping the page empty.....So I have used this keyword",
+      "parentUuid": "1351bf23_1bde5850",
+      "range": {
+        "startLine": 76,
+        "startChar": 16,
+        "endLine": 76,
+        "endChar": 48
+      },
+      "revId": "4ef922fc5de3f1a4f660ed61e6c864d6ad2d32b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
