@@ -93,6 +93,30 @@
       },
       "revId": "86caf94c2fe1f2fccaee08b15cb02548c54ac53f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9bc07a1_20f4ace1",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-02-22T07:11:51Z",
+      "side": 1,
+      "message": "Anusha this code is not fully redfish complaint.. so this solution should work cleanly for systems running with REST code.",
+      "parentUuid": "7ff4eff0_8d3eac5b",
+      "range": {
+        "startLine": 418,
+        "startChar": 6,
+        "endLine": 418,
+        "endChar": 40
+      },
+      "revId": "86caf94c2fe1f2fccaee08b15cb02548c54ac53f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
