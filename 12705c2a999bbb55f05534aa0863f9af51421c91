@@ -237,6 +237,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6660786_366c1303",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-22T10:35:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da007d84_9d5b837b",
+      "range": {
+        "startLine": 41,
+        "startChar": 58,
+        "endLine": 41,
+        "endChar": 76
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef5e0025_95df2df7",
@@ -486,6 +510,30 @@
       "side": 1,
       "message": "You are doing a patch later in the suite so login is required.",
       "parentUuid": "550ea1ea_41c0ea79",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 57,
+        "endChar": 30
+      },
+      "revId": "12705c2a999bbb55f05534aa0863f9af51421c91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7022dc4_f4d3b4ca",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-22T10:35:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ff40b13_461d1c7f",
       "range": {
         "startLine": 57,
         "startChar": 4,
