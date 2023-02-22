@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6023136_af5511ba",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000844
+      },
+      "writtenOn": "2023-02-22T13:01:20Z",
+      "side": 1,
+      "message": "Say \"Setting BMC date : ${date_changed} using Manual option\" for Log",
+      "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
