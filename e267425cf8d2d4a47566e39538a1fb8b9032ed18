@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8599287_e2513a2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-22T10:46:54Z",
+      "side": 1,
+      "message": "Changing back to data as it needs to take DHCP_ENABLED or DHCP_DISABLED",
+      "revId": "e267425cf8d2d4a47566e39538a1fb8b9032ed18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
