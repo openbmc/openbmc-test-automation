@@ -79,7 +79,7 @@ Verify Server Power Cap Setting Is On
 Verify Server Power Cap Setting With Power Cap Disabled
     [Documentation]  Verify that valid server power cap value can be set
     ...  in GUI with power cap is in disabled state.
-    [Tags]  Verify_Server_Power_Cap_Setting_Is_Off
+    [Tags]  Verify_Server_Power_Cap_Setting_With_Power_Cap_Disabled
     [Setup]  Save Initial Power Cap State
     [Teardown]  Restore Initial Power Cap State
 
