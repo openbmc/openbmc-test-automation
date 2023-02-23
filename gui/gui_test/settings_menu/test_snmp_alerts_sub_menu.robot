@@ -160,7 +160,7 @@ Configure Multiple SNMP Managers On BMC Via GUI And Verify Persistency On BMC Re
     [Documentation]  Login GUI SNMP alerts page and
     ...  add multiple SNMP Managers on BMC via GUI and verify persistency on BMC reboot.
     [Tags]  Configure_Multiple_SNMP_Managers_On_BMC_Via_GUI_And_Verify_Persistency_On_BMC_Reboot
-    [Teardown]  Run Kewords  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    [Teardown]  Run Keywords  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
     ...  AND  Delete SNMP Manager Via Redfish  ${SNMP_MGR2_IP}  ${SNMP_DEFAULT_PORT}
 
     ${ip_address_list}=  Create list  ${SNMP_MGR1_IP}  ${SNMP_MGR2_IP}
