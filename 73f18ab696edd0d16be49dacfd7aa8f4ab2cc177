@@ -26,6 +26,121 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dbd286ff_5c985d22",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-23T04:47:31Z",
+      "side": 1,
+      "message": "Verify Changing BMC Time From NTP To Manual\n    [Documentation]  Verify that BMC time can be changed from NPT to\n    ...  manual time via GUI.",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 41
+      },
+      "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59f18ff9_5f5517f9",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-23T04:47:31Z",
+      "side": 1,
+      "message": "Add a teardown to set BMC time to default NTP setting",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 192,
+        "endChar": 44
+      },
+      "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "876d4f5d_6b62dffe",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-23T04:47:31Z",
+      "side": 1,
+      "message": "Add a comment for doing this setup.\n\n```\n# Add NPT server for BMC time to sync.\n```",
+      "range": {
+        "startLine": 194,
+        "startChar": 3,
+        "endLine": 194,
+        "endChar": 59
+      },
+      "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ef69b13_aeaa427f",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-23T04:47:31Z",
+      "side": 1,
+      "message": "Instead of some IP, better to give a valid NTP server address here e.g. time.google.com",
+      "range": {
+        "startLine": 195,
+        "startChar": 38,
+        "endLine": 195,
+        "endChar": 49
+      },
+      "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "157fab57_409c8f00",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-23T04:47:31Z",
+      "side": 1,
+      "message": "Not required.",
+      "range": {
+        "startLine": 201,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 44
+      },
+      "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7b47b080_410b20a6",
         "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
         "patchSetId": 3
@@ -37,6 +152,29 @@
       "writtenOn": "2023-02-22T14:11:33Z",
       "side": 1,
       "message": "Any specific reason for adding 31 days? Just curious.If there is something specific then you can add it as a comment.",
+      "range": {
+        "startLine": 206,
+        "startChar": 58,
+        "endLine": 206,
+        "endChar": 65
+      },
+      "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "112d7a6a_bae77b4e",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-23T04:47:31Z",
+      "side": 1,
+      "message": "With some date also add some time in hours and minutes",
       "range": {
         "startLine": 206,
         "startChar": 58,
@@ -82,6 +220,29 @@
         "startChar": 4,
         "endLine": 214,
         "endChar": 21
+      },
+      "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "545d044c_125c1432",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-23T04:47:31Z",
+      "side": 1,
+      "message": "Here we are only checking BMC data. Please add a check for BMC time also.",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 50
       },
       "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
