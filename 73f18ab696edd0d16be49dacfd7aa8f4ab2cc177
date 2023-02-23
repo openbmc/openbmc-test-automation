@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bbeb215_84fcb931",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-23T11:25:11Z",
+      "side": 1,
+      "message": "Added",
+      "parentUuid": "fbe18e36_ba9f87e3",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 29
+      },
+      "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbd286ff_5c985d22",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-23T04:47:31Z",
       "side": 1,
       "message": "Verify Changing BMC Time From NTP To Manual\n    [Documentation]  Verify that BMC time can be changed from NPT to\n    ...  manual time via GUI.",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 41
+      },
+      "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ef2c592_8cfcf25a",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-23T11:25:11Z",
+      "side": 1,
+      "message": "Changed.",
+      "parentUuid": "dbd286ff_5c985d22",
       "range": {
         "startLine": 188,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2be24287_ffb6393b",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-23T11:25:11Z",
+      "side": 1,
+      "message": "Teardown of the test cases will do in next PR",
+      "parentUuid": "59f18ff9_5f5517f9",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 192,
+        "endChar": 44
+      },
+      "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "876d4f5d_6b62dffe",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-02-23T04:47:31Z",
       "side": 1,
       "message": "Add a comment for doing this setup.\n\n```\n# Add NPT server for BMC time to sync.\n```",
+      "range": {
+        "startLine": 194,
+        "startChar": 3,
+        "endLine": 194,
+        "endChar": 59
+      },
+      "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6559b14b_7417cbb1",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-23T11:25:11Z",
+      "side": 1,
+      "message": "Added",
+      "parentUuid": "876d4f5d_6b62dffe",
       "range": {
         "startLine": 194,
         "startChar": 3,
@@ -116,6 +212,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e74d51b_1ec676da",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-23T11:25:11Z",
+      "side": 1,
+      "message": "Changed",
+      "parentUuid": "3ef69b13_aeaa427f",
+      "range": {
+        "startLine": 195,
+        "startChar": 38,
+        "endLine": 195,
+        "endChar": 49
+      },
+      "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "157fab57_409c8f00",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-02-23T04:47:31Z",
       "side": 1,
       "message": "Not required.",
+      "range": {
+        "startLine": 201,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 44
+      },
+      "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2624804_65562e80",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-23T11:25:11Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "157fab57_409c8f00",
       "range": {
         "startLine": 201,
         "startChar": 0,
@@ -185,6 +329,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7a89c0c_ae7a2832",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-23T11:25:11Z",
+      "side": 1,
+      "message": "George has asked not to give hard coded value and to put a value 1 month forward to the current month",
+      "parentUuid": "7b47b080_410b20a6",
+      "range": {
+        "startLine": 206,
+        "startChar": 58,
+        "endLine": 206,
+        "endChar": 65
+      },
+      "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02ccb2cd_963d0525",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-23T11:25:11Z",
+      "side": 1,
+      "message": "Added",
+      "parentUuid": "112d7a6a_bae77b4e",
+      "range": {
+        "startLine": 206,
+        "startChar": 58,
+        "endLine": 206,
+        "endChar": 65
+      },
+      "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6023136_af5511ba",
@@ -198,6 +390,24 @@
       "writtenOn": "2023-02-22T13:01:20Z",
       "side": 1,
       "message": "Say \"Setting BMC date : ${date_changed} using Manual option\" for Log",
+      "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20eeb78a_faf6242b",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-23T11:25:11Z",
+      "side": 1,
+      "message": "Changed",
+      "parentUuid": "d6023136_af5511ba",
       "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -225,6 +435,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f170f53f_872b2812",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-23T11:25:11Z",
+      "side": 1,
+      "message": "It doesn\u0027t show automatically and takes more time.",
+      "parentUuid": "c5aec2a1_74015212",
+      "range": {
+        "startLine": 214,
+        "startChar": 4,
+        "endLine": 214,
+        "endChar": 21
+      },
+      "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "545d044c_125c1432",
@@ -238,6 +472,30 @@
       "writtenOn": "2023-02-23T04:47:31Z",
       "side": 1,
       "message": "Here we are only checking BMC data. Please add a check for BMC time also.",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 50
+      },
+      "revId": "73f18ab696edd0d16be49dacfd7aa8f4ab2cc177",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "019f3b24_ece4345e",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-23T11:25:11Z",
+      "side": 1,
+      "message": "Added",
+      "parentUuid": "545d044c_125c1432",
       "range": {
         "startLine": 215,
         "startChar": 0,
