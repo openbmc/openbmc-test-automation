@@ -21,6 +21,7 @@ Resource                 ../../lib/utils.robot
 Resource                 ../../lib/bmc_redfish_utils.robot
 Resource                 ../../lib/external_intf/management_console_utils.robot
 Resource                 ../../lib/bmc_network_utils.robot
+Resource                 ../../lib/certificate_utils.robot
 Library                  ../../lib/gen_robot_valid.py
 Library                  ../../lib/tftp_update_utils.py
 Library                  ../../lib/gen_robot_keyword.py
@@ -171,9 +172,10 @@ Redfish Code Update With Different Interrupted Operation
     [Tags]  Redfish_Code_Update_With_Different_Interrupted_Operation
     [Template]  Verify Redfish Code Update With Different Interrupted Operation
 
-    # operation    count
-    host_name       1
-    kernel_panic    1
+    # operation          count
+    host_name            1
+    kernel_panic         1
+    https_certificate    1
 
 *** Keywords ***
 
@@ -273,6 +275,30 @@ Run Configure BMC Hostname In Loop
     END
 
 
+Redfish Update Certificate Upload In Loop
+    [Documentation]  Verify server certificate via openssl command.
+    [Arguments]  ${count}
+
+    # Description of argument(s):
+    # count    Loop count.
+
+    FOR  ${index}  IN RANGE  ${count}
+      ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate Valid Privatekey
+      ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
+      ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+
+      ${certificate_dict}=  Create Dictionary
+      ...  @odata.id=/redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates/1
+      ${payload}=  Create Dictionary  CertificateString=${file_data}
+      ...  CertificateType=PEM  CertificateUri=${certificate_dict}
+
+      ${resp}=  redfish.Post  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
+      ...  body=${payload}
+
+      Verify Certificate Visible Via OpenSSL  ${cert_file_path}
+    END
+
+
 Run Operation On BMC
     [Documentation]  Run operation on BMC.
     [Arguments]  ${operation}  ${count}
@@ -285,6 +311,7 @@ Run Operation On BMC
     Run Keyword If  '${operation}' == 'kernel_panic'
     ...  Run Keywords  Kernel Panic BMC Reset Operation  AND
     ...  Is BMC Unpingable
+    Run Keyword If  '${operation}' == 'https_certificate'  Redfish Update Certificate Upload In Loop  count=${count}
 
 
 Get Active Firmware Image
@@ -294,6 +321,14 @@ Get Active Firmware Image
     Rprint Vars  active_image
 
     [Return]  ${active_image}
+
+
+Get New Image ID
+    [Documentation]  Return the ID of the most recently extracted image.
+
+    ${image_id}=   Get Image Id   Updating
+
+    [Return]  ${image_id}
 
 
 Verify Redfish Code Update With Different Interrupted Operation
@@ -319,6 +354,11 @@ Verify Redfish Code Update With Different Interrupted Operation
     Upload Image To BMC  ${REDFISH_BASE_URI}UpdateService  timeout=${600}  data=${file_bin_data}
     Log To Console   Completed image upload to BMC.
 
+    Sleep  5
+
+    ${image_id}=  Get New Image ID
+    Rprint Vars  image_id
+
     ${task_inv}=  Check Task With Match TargetUri  /redfish/v1/UpdateService
     Rprint Vars  task_inv
 
@@ -336,6 +376,17 @@ Verify Redfish Code Update With Different Interrupted Operation
     ...  Run Key  ${post_code_update_actions['BMC image']['OnReset']}  AND
     ...  Redfish.Login  AND
     ...  Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
+
+    Run Keyword If  '${operation}' == 'https_certificate'
+    ...  Run Keywords  Check Image Update Progress State
+    ...  match_state='Updating'  image_id=${image_id}  AND
+    ...  Wait Until Keyword Succeeds  8 min  20 sec
+    ...  Check Image Update Progress State
+    ...  match_state='Enabled'  image_id=${image_id}  AND
+    ...  Run Key  ${post_code_update_actions['BMC image']['OnReset']}  AND
+    ...  Redfish.Login  AND
+    ...  Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
+
 
     ${after_update_activeswimage}=  Get Active Firmware Image
 

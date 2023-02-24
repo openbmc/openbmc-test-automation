@@ -667,7 +667,7 @@ Get Image Id
 
     FOR  ${sw_member}  IN  @{sw_member_list}
       ${status}=  Redfish.Get Attribute  ${sw_member}  Status
-      Return From Keyword If  '${status['State']}' == ${match_state}  ${sw_member.split('/')[-1]}
+      Return From Keyword If  '${status['State']}' == '${match_state}'  ${sw_member.split('/')[-1]}
     END
 
     [Return]  None
