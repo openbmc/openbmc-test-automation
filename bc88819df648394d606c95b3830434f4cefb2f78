@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d4c3260_0883aa75",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-24T16:47:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e785e1de_92ba587b",
+      "range": {
+        "startLine": 279,
+        "startChar": 4,
+        "endLine": 279,
+        "endChar": 17
+      },
+      "revId": "bc88819df648394d606c95b3830434f4cefb2f78",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12ee2cd5_32683d49",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-24T10:22:38Z",
       "side": 1,
       "message": "You can make use of Replace Certificate Via Redfish if already present\nelse\nuse Install And Verify Certificate Via Redfish if not present\nin\nlib/certificate_utils.robot",
+      "range": {
+        "startLine": 286,
+        "startChar": 6,
+        "endLine": 286,
+        "endChar": 63
+      },
+      "revId": "bc88819df648394d606c95b3830434f4cefb2f78",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0dfbc4f_dbd3743b",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-24T16:47:09Z",
+      "side": 1,
+      "message": "I noticed this certificate can\u0027t be deleted. it means it comes with the firmware.\nI have added a extra code were I making it mandatory that this cert. should be available else fail the TC.",
+      "parentUuid": "12ee2cd5_32683d49",
       "range": {
         "startLine": 286,
         "startChar": 6,

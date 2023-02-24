@@ -199,6 +199,30 @@
       },
       "revId": "8120b0ae52bdd8de9850c7779590f912c159ce67",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e142bc2_57b720eb",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-24T16:47:09Z",
+      "side": 1,
+      "message": "I noticed this certificate can\u0027t be deleted. it means it comes with the firmware.\nI have added a extra code were I making it mandatory that this cert. should be available else fail the TC.",
+      "parentUuid": "ae86c482_2baf2092",
+      "range": {
+        "startLine": 296,
+        "startChar": 30,
+        "endLine": 296,
+        "endChar": 106
+      },
+      "revId": "8120b0ae52bdd8de9850c7779590f912c159ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

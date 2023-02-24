@@ -93,6 +93,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bb38fbd_a87d4e15",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-24T16:47:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a176818_24046c9f",
+      "range": {
+        "startLine": 314,
+        "startChar": 4,
+        "endLine": 314,
+        "endChar": 116
+      },
+      "revId": "f7b61fda142b0b6bcdeea7698f8ceb67eb13d55e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc08144d_37b6b54d",
@@ -106,6 +130,30 @@
       "writtenOn": "2023-02-24T13:02:44Z",
       "side": 1,
       "message": "Use IF.. ELSE instead of Run Keyword If",
+      "range": {
+        "startLine": 379,
+        "startChar": 4,
+        "endLine": 386,
+        "endChar": 55
+      },
+      "revId": "f7b61fda142b0b6bcdeea7698f8ceb67eb13d55e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba800456_1a695892",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-24T16:47:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc08144d_37b6b54d",
       "range": {
         "startLine": 379,
         "startChar": 4,
