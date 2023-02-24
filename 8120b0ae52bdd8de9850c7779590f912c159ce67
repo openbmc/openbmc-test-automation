@@ -175,6 +175,30 @@
       },
       "revId": "8120b0ae52bdd8de9850c7779590f912c159ce67",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae86c482_2baf2092",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-24T12:58:27Z",
+      "side": 1,
+      "message": "If HTTPS certificate is present in the system, you replace the certificate\nif HTTPS Certificate is not present you have to install and upload a new one it.",
+      "parentUuid": "4c250043_9de1c8a8",
+      "range": {
+        "startLine": 296,
+        "startChar": 30,
+        "endLine": 296,
+        "endChar": 106
+      },
+      "revId": "8120b0ae52bdd8de9850c7779590f912c159ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
