@@ -41,6 +41,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e226a3d3_b9c6510e",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-24T10:46:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5d7f0fd_258171a8",
+      "revId": "bc88819df648394d606c95b3830434f4cefb2f78",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbc49ea3_def35d61",
@@ -54,6 +72,24 @@
       "writtenOn": "2023-02-24T09:42:40Z",
       "side": 1,
       "message": "in suite setup only you are doing redfish login right?",
+      "revId": "bc88819df648394d606c95b3830434f4cefb2f78",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07f11ff0_46455ea9",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-24T10:46:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbc49ea3_def35d61",
       "revId": "bc88819df648394d606c95b3830434f4cefb2f78",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
