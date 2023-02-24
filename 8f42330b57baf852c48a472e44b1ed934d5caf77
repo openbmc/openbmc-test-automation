@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86c0c16f_c148c25a",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-24T11:29:48Z",
+      "side": 1,
+      "message": "Suggestion: Test System Stability With Invalid Request",
+      "revId": "8f42330b57baf852c48a472e44b1ed934d5caf77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c9f29ece_d4e43ace",
         "filename": "security/test_bmc_connections.robot",
         "patchSetId": 2
@@ -20,6 +37,74 @@
         "endLine": 265,
         "endChar": 18
       },
+      "revId": "8f42330b57baf852c48a472e44b1ed934d5caf77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64ac8368_3fe22047",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-24T11:29:48Z",
+      "side": 1,
+      "message": "Use a Keyword which Delete All the session.",
+      "revId": "8f42330b57baf852c48a472e44b1ed934d5caf77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d878abec_cfadda12",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-24T11:29:48Z",
+      "side": 1,
+      "message": "How will you make sure Redfish.Put is failing as per the TC expectation.?\n\nfor example if Redfish.Put return fails for exception .",
+      "revId": "8f42330b57baf852c48a472e44b1ed934d5caf77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9571fb57_a09f3e69",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-24T11:29:48Z",
+      "side": 1,
+      "message": "Are you deleting the partition file from BMC after completion of TC.",
+      "revId": "8f42330b57baf852c48a472e44b1ed934d5caf77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d825d6ee_4f04a07d",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-24T11:29:48Z",
+      "side": 1,
+      "message": "Can you use HHTP variables instead of number (200).",
       "revId": "8f42330b57baf852c48a472e44b1ed934d5caf77",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
