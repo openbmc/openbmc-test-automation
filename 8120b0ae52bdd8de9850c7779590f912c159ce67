@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f15e989_9e77045b",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-24T09:24:06Z",
+      "side": 1,
+      "message": "documentation is missing",
+      "revId": "8120b0ae52bdd8de9850c7779590f912c159ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
