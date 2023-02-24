@@ -119,6 +119,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0de47de3_875478de",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-24T09:06:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8f8c3d7_348a591e",
+      "range": {
+        "startLine": 309,
+        "startChar": 0,
+        "endLine": 313,
+        "endChar": 60
+      },
+      "revId": "096ab4100526460f2f3471ee769796c92db82437",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab252834_5f580b55",
@@ -180,6 +204,30 @@
       "side": 1,
       "message": "I dont see any changes in the latest patch. Please address them",
       "parentUuid": "0fcf3b82_992d98cf",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 322,
+        "endChar": 48
+      },
+      "revId": "096ab4100526460f2f3471ee769796c92db82437",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93769e2a_d1c21591",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-24T09:06:03Z",
+      "side": 1,
+      "message": "seems some rebase issue happened earlier so my code did not go earlier,",
+      "parentUuid": "3514a266_97d92803",
       "range": {
         "startLine": 315,
         "startChar": 0,
