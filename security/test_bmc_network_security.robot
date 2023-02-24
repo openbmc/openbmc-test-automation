@@ -68,7 +68,7 @@ Send Network Packets Continuously To Redfish Interface
     Should Be Equal As Numbers  ${packet_loss}  0.0
     ...  msg=FAILURE: BMC is dropping some packets.
 
-    # Check if Redfish interface is functional.
+    # Check if Redfish bmcweb server response is functional.
     Redfish.Login
     Redfish.Logout
 
@@ -144,6 +144,40 @@ Send Network Packets Continuously To SOL Port
     ...  msg=FAILURE: BMC is dropping some packets.
 
 
+Send Continuous TCP Connection Requests To Redfish Interface And Check Stability
+    [Documentation]  Establish large number of TCP connections to Redfish port (443)
+    ...  and check check network responses stability.
+    [Tags]  Send_Continuous_TCP_Connection_Requests_To_Redfish_Interface_And_Check_Stability
+
+    # Establish large number of TCP connections to Redfish interface.
+    ${connection_loss}=  Establish TCP Connections And Get Connection Failures
+    ...  ${OPENBMC_HOST}  ${iterations}  ${TCP_CONNECTION}  ${HTTPS_PORT}
+
+    # Check if Redfish interface is functional.
+    Redfish.Login
+    Redfish.Logout
+
+    # Check if TCP connections dropped.
+    Should Be Equal As Numbers  ${connection_loss}  0.0
+    ...  msg=FAILURE: BMC is dropping some connections.
+
+
+Send Continuous TCP Connection Requests To IPMI Interface And Check Stability
+    [Documentation]  Establish large number of TCP connections to IPMI interface
+    ...  and check stability.
+    [Tags]  Send_Continuous_TCP_Connection_Requests_To_IPMI_Interface_And_Check_Stability
+
+    # Establish large number of TCP connections to IPMI interface.
+    ${connection_loss}=  Establish TCP Connections And Get Connection Failures
+    ...  ${OPENBMC_HOST}  ${iterations}  ${TCP_CONNECTION}  ${IPMI_PORT}
+
+    # Check if IPMI interface is functional.
+    Verify IPMI Works
+
+    # Check if TCP/Network connections dropped.
+    Should Be Equal As Numbers  ${connection_loss}  0.0
+    ...  msg=FAILURE: BMC is dropping connections
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -170,3 +204,22 @@ Verify Interface Stability
     ...  Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  port=${HOST_SOL_PORT}
     ...  ELSE
     ...  Redfish.Login
+
+Establish TCP Connections And Get Connection Failures
+    [Documentation]  Establish TCP connections and return nping connection responses.
+    [Arguments]  ${target_host}  ${num}=${count}  ${packet_type}=${TCP_CONNECTION}
+    ...          http_port=${80}
+
+    # Description of argument(s):
+    # host         The host name or IP address of the target system.
+    # packet_type  The type of packets to be sent ("TCP, "udp", "icmp").
+    # http_port    Network port.
+    # num          Number of connections to be sent.
+
+    # This keyword expects host, port, type and number of connections to be sent
+    # and rate at which connectionss to be sent, should be given in command line.
+    # By default it sends 4 TCP connections at 1 connection/second.
+
+    ${cmd_buf}=  Set Variable  --delay ${delay} ${host} -c ${num} --${packet_type} -p ${port}
+    ${nping_result}=  Nping  ${cmd_buf}
+    [Return]   ${nping_result['percent_failed']}
