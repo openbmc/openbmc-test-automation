@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a5f25d07_29490a41",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-24T09:47:41Z",
+      "side": 1,
+      "message": "Add Changes.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 16
+      },
+      "revId": "8120b0ae52bdd8de9850c7779590f912c159ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9f15e989_9e77045b",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 2
@@ -32,6 +55,52 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "9f15e989_9e77045b",
+      "revId": "8120b0ae52bdd8de9850c7779590f912c159ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "978f56e1_6bac8d54",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-24T09:47:41Z",
+      "side": 1,
+      "message": "you can use REDFISH_HTTPS_CERTIFICATE_URI from data/variables.py",
+      "range": {
+        "startLine": 292,
+        "startChar": 21,
+        "endLine": 292,
+        "endChar": 81
+      },
+      "revId": "8120b0ae52bdd8de9850c7779590f912c159ce67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ce285d9_b947ce68",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-24T09:47:41Z",
+      "side": 1,
+      "message": "If it is already present then you can replace it, if it is a new https certificate then you need to upload it.",
+      "range": {
+        "startLine": 296,
+        "startChar": 30,
+        "endLine": 296,
+        "endChar": 106
+      },
       "revId": "8120b0ae52bdd8de9850c7779590f912c159ce67",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
