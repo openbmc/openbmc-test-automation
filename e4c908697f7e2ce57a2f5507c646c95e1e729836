@@ -108,6 +108,53 @@
       },
       "revId": "e4c908697f7e2ce57a2f5507c646c95e1e729836",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2963ae20_1302d4d9",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-24T09:22:49Z",
+      "side": 1,
+      "message": "Rename it to -- Reboot BMC And Verify Last Reboot Time",
+      "parentUuid": "f75f7be6_88a22da8",
+      "range": {
+        "startLine": 343,
+        "startChar": 0,
+        "endLine": 343,
+        "endChar": 18
+      },
+      "revId": "e4c908697f7e2ce57a2f5507c646c95e1e729836",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbec464f_6fc0b500",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-24T09:22:49Z",
+      "side": 1,
+      "message": "Change the documentation accordingly",
+      "range": {
+        "startLine": 344,
+        "startChar": 4,
+        "endLine": 344,
+        "endChar": 51
+      },
+      "revId": "e4c908697f7e2ce57a2f5507c646c95e1e729836",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
