@@ -21,6 +21,7 @@ Resource                 ../../lib/utils.robot
 Resource                 ../../lib/bmc_redfish_utils.robot
 Resource                 ../../lib/external_intf/management_console_utils.robot
 Resource                 ../../lib/bmc_network_utils.robot
+Resource                 ../../lib/certificate_utils.robot
 Library                  ../../lib/gen_robot_valid.py
 Library                  ../../lib/tftp_update_utils.py
 Library                  ../../lib/gen_robot_keyword.py
@@ -167,13 +168,15 @@ Verify If The Modified Admin Credential Is Valid Post Update
 
 Redfish Code Update With Different Interrupted Operation
     [Documentation]  Ensure firmware update is successful when different interrupted operation executed
-    ...              i.e. change the hostname.
+    ...              i.e. change the hostname, updating https certificate and firmware update fail
+    ...              when kernel panic.
     [Tags]  Redfish_Code_Update_With_Different_Interrupted_Operation
     [Template]  Verify Redfish Code Update With Different Interrupted Operation
 
-    # operation    count
-    host_name       1
-    kernel_panic    1
+    # operation          count
+    host_name            1
+    kernel_panic         1
+    https_certificate    1
 
 *** Keywords ***
 
@@ -273,6 +276,33 @@ Run Configure BMC Hostname In Loop
     END
 
 
+Redfish Update Certificate Upload In Loop
+    [Documentation]  Upload HTTPS server certificate via Redfish and verify using OpenSSL.
+    [Arguments]  ${count}
+
+    # Description of argument(s):
+    # count    Loop count.
+
+    FOR  ${index}  IN RANGE  ${count}
+      ${resp}=  Run Keyword And Return Status  Redfish.Get  ${REDFISH_HTTPS_CERTIFICATE_URI}/1  valid_status_codes=[${HTTP_OK}]
+      Should Be Equal As Strings  ${resp}  ${True}
+
+      ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate Valid Privatekey
+      ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
+      ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
+
+      ${certificate_dict}=  Create Dictionary
+      ...  @odata.id=${REDFISH_HTTPS_CERTIFICATE_URI}/1
+      ${payload}=  Create Dictionary  CertificateString=${file_data}
+      ...  CertificateType=PEM  CertificateUri=${certificate_dict}
+
+      ${resp}=  Redfish.Post  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
+      ...  body=${payload}
+
+      Verify Certificate Visible Via OpenSSL  ${cert_file_path}
+    END
+
+
 Run Operation On BMC
     [Documentation]  Run operation on BMC.
     [Arguments]  ${operation}  ${count}
@@ -281,10 +311,15 @@ Run Operation On BMC
     # operation    If host_name then change hostname.
     # count        Loop count.
 
-    Run Keyword If  '${operation}' == 'host_name'  Run Configure BMC Hostname In Loop  count=${count}
-    Run Keyword If  '${operation}' == 'kernel_panic'
-    ...  Run Keywords  Kernel Panic BMC Reset Operation  AND
-    ...  Is BMC Unpingable
+    Run Keyword If  '${operation}' == 'host_name'
+    ...    Run Configure BMC Hostname In Loop  count=${count}
+    ...  ELSE IF  '${operation}' == 'kernel_panic'
+    ...    Run Keywords  Kernel Panic BMC Reset Operation  AND
+    ...    Is BMC Unpingable
+    ...  ELSE IF  '${operation}' == 'https_certificate'
+    ...    Redfish Update Certificate Upload In Loop  count=${count}
+    ...  ELSE
+    ...    Fail  msg=Operation not handled.
 
 
 Get Active Firmware Image
@@ -296,9 +331,18 @@ Get Active Firmware Image
     [Return]  ${active_image}
 
 
+Get New Image ID
+    [Documentation]  Return the ID of the most recently extracted image.
+
+    ${image_id}=   Get Image Id   Updating
+
+    [Return]  ${image_id}
+
+
 Verify Redfish Code Update With Different Interrupted Operation
     [Documentation]  Verify code update is successful when other operation
-    ...              getting executed i.e. change the hostname.
+    ...              getting executed i.e. change the hostname, updating http certificate
+    ...              and code update will fail for kernel panic.
     [Arguments]  ${operation}  ${count}
 
     # Description of argument(s):
@@ -319,6 +363,11 @@ Verify Redfish Code Update With Different Interrupted Operation
     Upload Image To BMC  ${REDFISH_BASE_URI}UpdateService  timeout=${600}  data=${file_bin_data}
     Log To Console   Completed image upload to BMC.
 
+    Sleep  5
+
+    ${image_id}=  Get New Image ID
+    Rprint Vars  image_id
+
     ${task_inv}=  Check Task With Match TargetUri  /redfish/v1/UpdateService
     Rprint Vars  task_inv
 
@@ -327,15 +376,24 @@ Verify Redfish Code Update With Different Interrupted Operation
 
     Run Operation On BMC  ${operation}  ${count}
 
-    Run Keyword If  '${operation}' == 'kernel_panic'
-    ...  Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Standby
-
-    Run Keyword If  '${operation}' == 'host_name'
-    ...  Run Keywords  Wait Until Keyword Succeeds  5 min  10 sec
-    ...  Verify Task Progress State  ${task_inv}  ${task_inv_dict['TaskCompleted']}  AND
-    ...  Run Key  ${post_code_update_actions['BMC image']['OnReset']}  AND
-    ...  Redfish.Login  AND
-    ...  Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
+    IF  '${operation}' == 'kernel_panic'
+        Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Standby
+    ELSE IF  '${operation}' == 'host_name'
+        Wait Until Keyword Succeeds  5 min  10 sec
+        ...  Verify Task Progress State  ${task_inv}  ${task_inv_dict['TaskCompleted']}
+        Run Key  ${post_code_update_actions['BMC image']['OnReset']}
+        Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
+    ELSE IF  '${operation}' == 'https_certificate'
+        Check Image Update Progress State
+        ...  match_state='Updating'  image_id=${image_id}
+        Wait Until Keyword Succeeds  8 min  20 sec
+        ...  Check Image Update Progress State
+        ...  match_state='Enabled'  image_id=${image_id}
+        Run Key  ${post_code_update_actions['BMC image']['OnReset']}
+        Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
+    ELSE
+        Fail  msg=Operation not handled.
+    END
 
     ${after_update_activeswimage}=  Get Active Firmware Image
 
