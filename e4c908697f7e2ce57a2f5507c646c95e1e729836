@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92561b96_3ac09984",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-24T07:41:22Z",
+      "side": 1,
+      "message": "Modify the commit msg to this format\n\nRedfish:Fixed the CT issue\n\nChanges:\n - Modified test teardown instead of suite teardown\n\nTested:\n - Test case tag",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 50
+      },
+      "revId": "e4c908697f7e2ce57a2f5507c646c95e1e729836",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e19b036_111ccd19",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-24T07:41:22Z",
+      "side": 1,
+      "message": "Return\nEnd all statements with a period. Fix for all",
+      "revId": "e4c908697f7e2ce57a2f5507c646c95e1e729836",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6afd8b1e_3039e749",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-24T07:41:22Z",
+      "side": 1,
+      "message": "Add desc to this",
+      "range": {
+        "startLine": 337,
+        "startChar": 4,
+        "endLine": 337,
+        "endChar": 30
+      },
+      "revId": "e4c908697f7e2ce57a2f5507c646c95e1e729836",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5a6fa63_735c23a1",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-24T07:41:22Z",
+      "side": 1,
+      "message": "Define a keyword for this",
+      "range": {
+        "startLine": 339,
+        "startChar": 4,
+        "endLine": 339,
+        "endChar": 27
+      },
+      "revId": "e4c908697f7e2ce57a2f5507c646c95e1e729836",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f75f7be6_88a22da8",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-24T07:41:22Z",
+      "side": 1,
+      "message": "The keyword does more than BMC reboot. So change accordingly",
+      "range": {
+        "startLine": 343,
+        "startChar": 0,
+        "endLine": 343,
+        "endChar": 18
+      },
+      "revId": "e4c908697f7e2ce57a2f5507c646c95e1e729836",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
