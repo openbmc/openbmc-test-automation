@@ -10,7 +10,7 @@ Suite Teardown  Close Browser
 *** Variables ***
 
 ${xpath_firmware_heading}                //h1[text()="Firmware"]
-${xpath_add_file_button}                 //*[contains(text(),"Add file")]
+${xpath_add_file_button}                 //*[@id='image-file']
 ${xpath_start_update_button}             //*[@data-test-id="firmware-button-startUpdate"]
 
 
@@ -58,8 +58,8 @@ Verify Existence Of All Buttons In Firmware Page At Host Power On
 
     Redfish Power On  stack_mode=skip
 
-    Page Does Not Contain Element  ${xpath_add_file}
-    Page Does Not Contain Element  ${xpath_start_update}
+    Element Should Be Disabled  ${xpath_add_file_button}
+    Element Should Be Disabled  ${xpath_start_update_button}
 
 
 *** Keywords ***
