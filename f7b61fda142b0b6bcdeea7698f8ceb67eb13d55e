@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06676610_7b8db085",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-24T13:02:44Z",
+      "side": 1,
+      "message": "Keep the subj line under 50 chars",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 16
+      },
+      "revId": "f7b61fda142b0b6bcdeea7698f8ceb67eb13d55e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b44f92e_a344ab57",
+        "filename": "lib/code_update_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-24T13:02:44Z",
+      "side": 1,
+      "message": "Format",
+      "range": {
+        "startLine": 670,
+        "startChar": 6,
+        "endLine": 670,
+        "endChar": 20
+      },
+      "revId": "f7b61fda142b0b6bcdeea7698f8ceb67eb13d55e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "072ee199_156b6aa2",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 4
@@ -19,6 +65,52 @@
         "startChar": 4,
         "endLine": 171,
         "endChar": 46
+      },
+      "revId": "f7b61fda142b0b6bcdeea7698f8ceb67eb13d55e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a176818_24046c9f",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-24T13:02:44Z",
+      "side": 1,
+      "message": "Format like below\n```\nRun Keyword If condition\n...      Log To Console\n...  ELSE IF  condition\n...      Log To Console\n...  ELSE\n...      Bye Have fun!\n```",
+      "range": {
+        "startLine": 314,
+        "startChar": 4,
+        "endLine": 314,
+        "endChar": 116
+      },
+      "revId": "f7b61fda142b0b6bcdeea7698f8ceb67eb13d55e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc08144d_37b6b54d",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-24T13:02:44Z",
+      "side": 1,
+      "message": "Use IF.. ELSE instead of Run Keyword If",
+      "range": {
+        "startLine": 379,
+        "startChar": 4,
+        "endLine": 386,
+        "endChar": 55
       },
       "revId": "f7b61fda142b0b6bcdeea7698f8ceb67eb13d55e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
