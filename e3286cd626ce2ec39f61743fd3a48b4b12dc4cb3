@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "43c5b59c_c96a1667",
         "filename": "lib/resource.robot",
@@ -20,10 +21,10 @@
         "endChar": 38
       },
       "revId": "e3286cd626ce2ec39f61743fd3a48b4b12dc4cb3",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "a5d1c879_d14b538d",
         "filename": "security/test_bmc_network_security.robot",
@@ -43,10 +44,10 @@
         "endChar": 83
       },
       "revId": "e3286cd626ce2ec39f61743fd3a48b4b12dc4cb3",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "c8852674_32b9ee39",
         "filename": "security/test_bmc_network_security.robot",
@@ -66,10 +67,10 @@
         "endChar": 28
       },
       "revId": "e3286cd626ce2ec39f61743fd3a48b4b12dc4cb3",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "d994b6c7_9442e932",
         "filename": "security/test_bmc_network_security.robot",
@@ -89,10 +90,10 @@
         "endChar": 79
       },
       "revId": "e3286cd626ce2ec39f61743fd3a48b4b12dc4cb3",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "376b79c8_91239e01",
         "filename": "security/test_bmc_network_security.robot",
@@ -112,10 +113,10 @@
         "endChar": 32
       },
       "revId": "e3286cd626ce2ec39f61743fd3a48b4b12dc4cb3",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "6de78dd6_c2175cf2",
         "filename": "security/test_bmc_network_security.robot",
@@ -135,10 +136,10 @@
         "endChar": 27
       },
       "revId": "e3286cd626ce2ec39f61743fd3a48b4b12dc4cb3",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "98820625_84af94a5",
         "filename": "security/test_bmc_network_security.robot",
@@ -158,10 +159,10 @@
         "endChar": 32
       },
       "revId": "e3286cd626ce2ec39f61743fd3a48b4b12dc4cb3",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "8d023839_eb2f928b",
         "filename": "security/test_bmc_network_security.robot",
@@ -181,10 +182,10 @@
         "endChar": 43
       },
       "revId": "e3286cd626ce2ec39f61743fd3a48b4b12dc4cb3",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "30d0524b_26560bf6",
         "filename": "security/test_bmc_network_security.robot",
@@ -204,10 +205,10 @@
         "endChar": 74
       },
       "revId": "e3286cd626ce2ec39f61743fd3a48b4b12dc4cb3",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "b38b8823_b8688905",
         "filename": "security/test_bmc_network_security.robot",
@@ -227,10 +228,10 @@
         "endChar": 23
       },
       "revId": "e3286cd626ce2ec39f61743fd3a48b4b12dc4cb3",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "0b4bd663_bdf2c6d0",
         "filename": "security/test_bmc_network_security.robot",
@@ -250,8 +251,8 @@
         "endChar": 27
       },
       "revId": "e3286cd626ce2ec39f61743fd3a48b4b12dc4cb3",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
-  ]
+  ],
+  "submitRequirementResults": []
 }
