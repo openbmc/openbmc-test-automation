@@ -73,6 +73,8 @@ Verify Existence Of All Checkboxes In LDAP Page
 Verify LDAP Configurations Editable
     [Documentation]  Verify LDAP configurations are editable.
     [Tags]  Verify_LDAP_Configurations_Editable
+    [Setup]  Redfish.Login
+    [Teardown]  Redfish.Logout
 
     Create LDAP Configuration  ${LDAP_SERVER_URI}  ${LDAP_TYPE}  ${LDAP_BIND_DN}
     ...  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}

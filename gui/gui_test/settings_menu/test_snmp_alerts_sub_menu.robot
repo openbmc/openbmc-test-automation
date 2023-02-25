@@ -9,7 +9,7 @@ Resource        ../../lib/bmc_network_utils.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
-
+Suite Teardown  Run Keywords  Redfish.Logout  AND  Close Browser
 
 *** Variables ***
 
@@ -243,6 +243,8 @@ Suite Setup Execution
     Click Element  ${xpath_snmp_alerts_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  snmp-alerts
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Redfish.Login
+
 
 Configure SNMP Manager Via GUI
     [Documentation]  Configure SNMP manager via GUI.

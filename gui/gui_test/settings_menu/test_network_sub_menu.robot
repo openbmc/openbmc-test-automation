@@ -134,6 +134,8 @@ Configure And Verify DNS Server Via GUI
 Configure Static IPv4 Netmask Via GUI And Verify
     [Documentation]  Login to GUI Network page, configure static IPv4 netmask and verify.
     [Tags]  Configure_Static_IPv4_Netmask_Via_GUI_And_Verify
+    [Setup]  Redfish.Login
+    [Teardown]  Redfish.Logout
     [Template]  Add Static IP Address And Verify
 
     # ip_addresses      subnet_masks             gateway          expected_status
@@ -161,6 +163,8 @@ Configure Hostname Via GUI And Verify
 Configure And Verify Static IP Address
     [Documentation]  Login to GUI Network page, configure static ip address and verify.
     [Tags]  Configure_And_Verify_Static_IP_Address
+    [Setup]  Redfish.Login
+    [Teardown]  Redfish.Logout
 
     Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success
 
