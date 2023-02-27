@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1df93ff5_74f10fe1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-27T11:46:19Z",
+      "side": 1,
+      "message": "Changed",
+      "parentUuid": "957dec05_37c9d342",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 62
+      },
+      "revId": "69306e527a8e0d60d194460ac537b9394f7da44d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ed89e48_572ac801",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-27T10:22:08Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 224,
+        "startChar": 28,
+        "endLine": 224,
+        "endChar": 32
+      },
+      "revId": "69306e527a8e0d60d194460ac537b9394f7da44d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edb69681_386a9b35",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-27T11:46:19Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "3ed89e48_572ac801",
       "range": {
         "startLine": 224,
         "startChar": 28,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18ff9247_887e1ec0",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-27T11:46:19Z",
+      "side": 1,
+      "message": "Changed",
+      "parentUuid": "d242534b_7c7da3dc",
+      "range": {
+        "startLine": 229,
+        "startChar": 4,
+        "endLine": 242,
+        "endChar": 67
+      },
+      "revId": "69306e527a8e0d60d194460ac537b9394f7da44d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfdb1043_bc8b6017",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-02-27T10:22:08Z",
       "side": 1,
       "message": "Why is this sleep required? Does it hamper following test cases? If yes, should you not make sure that it actually closes or close it manually as part teardown?",
+      "range": {
+        "startLine": 259,
+        "startChar": 4,
+        "endLine": 259,
+        "endChar": 13
+      },
+      "revId": "69306e527a8e0d60d194460ac537b9394f7da44d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3255a4dc_ae46cf8b",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-02-27T11:46:19Z",
+      "side": 1,
+      "message": "The pop up message stays for 10 to 15s and closes automatically.\nIn Suite Teardown Execution we have a keyword for Logout GUI where while clicking the dropdown option the saved automatically pop up is coming in between for the element to be clicked and failing.\nSo once the settings are saved and the page finds the date and time in less than 10 to 15s, it will close automatically and Suite Teardown execution will pass else it will fail.",
+      "parentUuid": "cfdb1043_bc8b6017",
       "range": {
         "startLine": 259,
         "startChar": 4,
