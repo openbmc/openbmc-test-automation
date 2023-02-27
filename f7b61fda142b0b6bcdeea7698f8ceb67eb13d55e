@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f9eb074_d89c7990",
+        "filename": "lib/code_update_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-27T10:48:11Z",
+      "side": 1,
+      "message": "```\nReturn From Keyword If  \u0027${status[\u0027State\u0027]}\u0027 \u003d\u003d \u0027${match_state}\u0027  \n...  ${sw_member.split(\u0027/\u0027)[-1]}\n```",
+      "parentUuid": "7662948b_5a72a713",
+      "range": {
+        "startLine": 670,
+        "startChar": 6,
+        "endLine": 670,
+        "endChar": 20
+      },
+      "revId": "f7b61fda142b0b6bcdeea7698f8ceb67eb13d55e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "072ee199_156b6aa2",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 4
