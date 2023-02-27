@@ -120,6 +120,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e983afe_d4e10bb7",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-27T09:17:02Z",
+      "side": 1,
+      "message": "By default a session is get created before suit level. \n\nhttps://github.com/openbmc/openbmc-test-automation/issues/2204\n\nHere if you want to make sure no session is active then use it.",
+      "parentUuid": "bac3da5e_abd0e6e5",
+      "revId": "8f42330b57baf852c48a472e44b1ed934d5caf77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d878abec_cfadda12",
         "filename": "security/test_bmc_connections.robot",
         "patchSetId": 2
@@ -155,6 +173,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eada4d93_a6a3676a",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-27T09:17:02Z",
+      "side": 1,
+      "message": "What error ? if you don\u0027t want to consider any particular error then this logic works fine.",
+      "parentUuid": "d17587e2_d1ec22dd",
+      "revId": "8f42330b57baf852c48a472e44b1ed934d5caf77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9571fb57_a09f3e69",
         "filename": "security/test_bmc_connections.robot",
         "patchSetId": 2
@@ -184,6 +220,24 @@
       "side": 1,
       "message": "yes",
       "parentUuid": "9571fb57_a09f3e69",
+      "revId": "8f42330b57baf852c48a472e44b1ed934d5caf77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "891f4418_9dab9e5a",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-27T09:17:02Z",
+      "side": 1,
+      "message": "can you point me to the code.",
+      "parentUuid": "cf634589_3baf2f9f",
       "revId": "8f42330b57baf852c48a472e44b1ed934d5caf77",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
