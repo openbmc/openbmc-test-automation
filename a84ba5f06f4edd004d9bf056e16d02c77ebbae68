@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fbf3ce0_4307082b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-27T09:55:30Z",
+      "side": 1,
+      "message": "Remove period. Do not exceed 50 char limit",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 63
+      },
+      "revId": "a84ba5f06f4edd004d9bf056e16d02c77ebbae68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b2eaded_11c4dc98",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-27T09:55:30Z",
+      "side": 1,
+      "message": "The commit msg says that it is a test case addition but here there is only spelling fix.",
+      "range": {
+        "startLine": 194,
+        "startChar": 4,
+        "endLine": 194,
+        "endChar": 41
+      },
+      "revId": "a84ba5f06f4edd004d9bf056e16d02c77ebbae68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
