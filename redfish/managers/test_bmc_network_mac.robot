@@ -122,9 +122,9 @@ Configure More Byte MAC And Verify
     [Documentation]  Configure more byte MAC via Redfish and verify.
     [Tags]  Configure_More_Byte_MAC_And_Verify
 
-    Configure MAC Settings  ${more_byte_mac}  valid
+    Configure MAC Settings  ${more_byte_mac}  error
     # Verify whether new MAC is configured on FW_Env.
-    Verify MAC Address Via FW_Env  ${more_byte_mac}  valid
+    Verify MAC Address Via FW_Env  ${more_byte_mac}  error
 
 
 *** Keywords ***
