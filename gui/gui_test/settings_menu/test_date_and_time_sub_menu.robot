@@ -20,7 +20,7 @@ ${xpath_ntp_server2}             //input[@data-test-id="dateTime-input-ntpServer
 ${xpath_ntp_server3}             //input[@data-test-id="dateTime-input-ntpServer3"]
 ${xpath_select_save_settings}    //button[@data-test-id="dateTime-button-saveSettings"]
 ${xpath_invalid_format_message}  //*[contains(text(), "Invalid format")]
-
+${xpath_saved_message}           //*[contains(text(), "Success")]
 *** Test Cases ***
 
 Verify Navigation To Date And Time Page
@@ -191,7 +191,7 @@ Verify Changing BMC Time From NTP To Manual
     [Tags]  Verify_Changing_BMC_Time_From_NTP_To_Manual
     [Setup]  Setup To Power Off And Navigate
 
-    # Add NPT server for BMC time to sync.
+    # Add NTP server for BMC time to sync.
     Click Element At Coordinates  ${xpath_select_ntp}  0  0
     Input Text  ${xpath_ntp_server1}  time.google.com
     Click Element  ${xpath_select_save_settings}
@@ -220,6 +220,32 @@ Verify Changing BMC Time From NTP To Manual
     Sleep  15
 
 
+Verify Changing BMC Time From Manual To NTP
+    [Documentation]  Verify BMC time syncing with NTP server time
+    ...  from manual time.
+    [Tags]  Verify_Changing_BMC_Time_From_Manual_To_NTP
+    [Setup]  Setup To Power Off And Navigate
+
+    # Add Manual date and time for BMC to sync.
+    Set Manual Date and Time Via GUI
+
+    # Set BMC date time to sync with NTP server.
+    Click Element At Coordinates  ${xpath_select_ntp}  0  0
+    Input Text  ${xpath_ntp_server1}  216.239.35.0
+    Click Element  ${xpath_select_save_settings}
+
+    # Refresh the NTP Page.
+    Click Element  ${xpath_refresh_button}
+
+    ${cli_date_time}=  CLI Get BMC DateTime
+    ${ntp_date}=  Convert Date  ${cli_date_time}  result_format=%Y-%m-%d
+    ${ntp_time}=  Convert Date  ${cli_date_time}  result_format=%H:%M
+    Wait Until Page Contains  ${ntp_date}   timeout=60s
+    Page Should Contain   ${ntp_time}
+
+    Wait Until Element Is Not Visible   ${xpath_saved_message}  timeout=30
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -241,7 +267,6 @@ Setup To Power Off And Navigate
    Redfish Power off  stack_mode=skip
    Navigate To Date and Time Page
 
-
 Navigate To Date and Time Page
     [Documentation]  Navigate to the date and time page from main menu.
 
@@ -249,4 +274,21 @@ Navigate To Date and Time Page
     Click Element  ${xpath_date_time_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  date-time
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+
+Set Manual Date and Time Via GUI
+    [Documentation]  Set BMC date and time to one month in future via GUI.
+
+    ${cli_date_time}=  CLI Get BMC DateTime
+    ${new_date}=  Add Time To Date  ${cli_date_time}  31 days
+    ${new_date_time}=  Add Time To Date  ${new_date}  05:10:00
+    Log  "Setting BMC date : ${new_date_time} using Manual option"
+    ${date}=  Convert Date  ${new_date_time}  result_format=%Y-%m-%d
+    ${time}=  Convert Date  ${new_date_time}  result_format=%H:%M
+    Click Element At Coordinates  ${xpath_select_manual}  0  0
+    Input Text  ${xpath_manual_date}  ${date}
+    Input Text  ${xpath_manual_time}  ${time}
+    Click Element  ${xpath_select_save_settings}
+
+    # Wait for changes to take effect.
+    Wait Until Element Is Enabled  ${xpath_select_ntp}  timeout=30s
 
