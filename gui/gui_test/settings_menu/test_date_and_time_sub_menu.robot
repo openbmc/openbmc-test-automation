@@ -191,7 +191,7 @@ Verify Changing BMC Time From NTP To Manual
     [Tags]  Verify_Changing_BMC_Time_From_NTP_To_Manual
     [Setup]  Setup To Power Off And Navigate
 
-    # Add NPT server for BMC time to sync.
+    # Add NTP server for BMC time to sync.
     Click Element At Coordinates  ${xpath_select_ntp}  0  0
     Input Text  ${xpath_ntp_server1}  time.google.com
     Click Element  ${xpath_select_save_settings}
