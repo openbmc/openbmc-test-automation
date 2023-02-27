@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "957dec05_37c9d342",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-27T10:22:08Z",
+      "side": 1,
+      "message": "Still exceeds 50 char limit",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 62
+      },
+      "revId": "69306e527a8e0d60d194460ac537b9394f7da44d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ed89e48_572ac801",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-27T10:22:08Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 224,
+        "startChar": 28,
+        "endLine": 224,
+        "endChar": 32
+      },
+      "revId": "69306e527a8e0d60d194460ac537b9394f7da44d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d242534b_7c7da3dc",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-27T10:22:08Z",
+      "side": 1,
+      "message": "This should be part of setup. Create a keyword to set Manual time",
+      "range": {
+        "startLine": 229,
+        "startChar": 4,
+        "endLine": 242,
+        "endChar": 67
+      },
+      "revId": "69306e527a8e0d60d194460ac537b9394f7da44d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfdb1043_bc8b6017",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-27T10:22:08Z",
+      "side": 1,
+      "message": "Why is this sleep required? Does it hamper following test cases? If yes, should you not make sure that it actually closes or close it manually as part teardown?",
+      "range": {
+        "startLine": 259,
+        "startChar": 4,
+        "endLine": 259,
+        "endChar": 13
+      },
+      "revId": "69306e527a8e0d60d194460ac537b9394f7da44d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
