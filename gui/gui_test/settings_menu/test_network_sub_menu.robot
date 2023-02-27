@@ -26,6 +26,7 @@ ${xpath_input_subnetmask}                //*[@id="subnetMask"]
 ${xpath_cancel_button}                   //button[contains(text(),'Cancel')]
 ${xpath_delete_dns_server}               //*[@title="Delete DNS address"]
 ${xpath_save_button}                     //button[contains(text(),'Save')]
+${xpath_dhcp_toggle_switch}              //*[@id='dhcpSwitch']
 
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
@@ -73,6 +74,7 @@ Verify Existence Of All Buttons In Network Page
     Page Should Contain Button  ${xpath_domain_name_toggle}
     Page Should Contain Button  ${xpath_dns_servers_toggle}
     Page Should Contain Button  ${xpath_ntp_servers_toggle}
+    Page Should Contain Button  ${xpath_dhcp_toggle_switch}
 
 
 Verify Existence Of All Fields In Hostname
@@ -189,6 +191,7 @@ Configure And Verify Invalid Static IP Address
     ${negative_ip}       ${test_subnet_mask}  ${default_gateway}  Invalid format
     ${hex_ip}            ${test_subnet_mask}  ${default_gateway}  Invalid format
     ${spl_char_ip}       ${test_subnet_mask}  ${default_gateway}  Invalid format
+
 
 *** Keywords ***
 
