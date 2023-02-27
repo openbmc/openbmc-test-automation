@@ -26,6 +26,10 @@ ${xpath_input_subnetmask}                //*[@id="subnetMask"]
 ${xpath_cancel_button}                   //button[contains(text(),'Cancel')]
 ${xpath_delete_dns_server}               //*[@title="Delete DNS address"]
 ${xpath_save_button}                     //button[contains(text(),'Save')]
+${xpath_dhcp_toggle_switch}              //*[@id='dhcpSwitch']
+${xpath_dhcp_usedomainnameserver}        //*[@id='useDomainNameSwitch']
+${xpath_dhcp_usedns}                     //*[@id='useDnsSwitch']
+${xpath_ntpswitch}                       //*[@id='useNtpSwitch']
 
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
@@ -189,6 +193,15 @@ Configure And Verify Invalid Static IP Address
     ${negative_ip}       ${test_subnet_mask}  ${default_gateway}  Invalid format
     ${hex_ip}            ${test_subnet_mask}  ${default_gateway}  Invalid format
     ${spl_char_ip}       ${test_subnet_mask}  ${default_gateway}  Invalid format
+
+Verify Existence Of All Checkboxes In Network Page
+    [Documentation]  Verify existence of all checkboxes in network page.
+    [Tags]  Verify_Existence_Of_All_Checkboxes_In_Network_Page
+
+    Page Should Contain Checkbox  ${xpath_dhcp_toggle_switch}
+    Page Should Contain Checkbox  ${xpath_dhcp_usedomainnameserver}
+    Page Should Contain Checkbox  ${xpath_dhcp_usedns}
+    Page Should Contain Checkbox  ${xpath_ntpswitch}
 
 *** Keywords ***
 
