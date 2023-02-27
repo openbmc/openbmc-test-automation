@@ -191,7 +191,7 @@ Verify Changing BMC Time From NTP To Manual
     [Tags]  Verify_Changing_BMC_Time_From_NTP_To_Manual
     [Setup]  Setup To Power Off And Navigate
 
-    # Add NPT server for BMC time to sync.
+    # Add NTP server for BMC time to sync.
     Click Element At Coordinates  ${xpath_select_ntp}  0  0
     Input Text  ${xpath_ntp_server1}  time.google.com
     Click Element  ${xpath_select_save_settings}
@@ -215,6 +215,36 @@ Verify Changing BMC Time From NTP To Manual
     Click Element  ${xpath_refresh_button}
     Wait Until Page Contains  ${date}  timeout=60s
     Page Should Contain  ${time}
+
+    # Wait for the "Saved Successfully" window to close automatically.
+    Sleep  15
+
+
+Verify Changing BMC Time From Manual to NTP
+    [Documentation]  Verify BMC time syncing with NTP server time
+    ...  from manual time.
+    [Tags]  Verify_Changing_BMC_Time_From_Manual_To_NTP
+    [Setup]  Setup To Power Off And Navigate
+
+    # Add Manual date and time for BMC to sync.
+    Set Manual Date and Time
+
+    # Wait for changes to take effect.
+    Wait Until Element Is Enabled  ${xpath_select_ntp}  timeout=30s
+
+    # Convert from manual time to NTP server.
+    Click Element At Coordinates  ${xpath_select_ntp}  0  0
+    Input Text  ${xpath_ntp_server1}  216.239.35.0
+    Click Element  ${xpath_select_save_settings}
+
+    # Refresh the NTP Page.
+    Click Element  ${xpath_refresh_button}
+
+    ${cli_date_time}=  CLI Get BMC DateTime
+    ${ntp_date}=  Convert Date  ${cli_date_time}  result_format=%Y-%m-%d
+    ${ntp_time}=  Convert Date  ${cli_date_time}  result_format=%H:%M
+    Wait Until Page Contains  ${ntp_date}   timeout=60s
+    Page Should Contain  ${ntp_time}
 
     # Wait for the "Saved Successfully" window to close automatically.
     Sleep  15
@@ -250,3 +280,17 @@ Navigate To Date and Time Page
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  date-time
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
 
+
+Set Manual Date and Time
+    [Documentation]  Set the date and time manually.
+
+    ${cli_date_time}=  CLI Get BMC DateTime
+    ${date_changed}=  Add Time To Date  ${cli_date_time}  31 days
+    ${date_changed}=  Add Time To Date  ${date_changed}  05:10:00
+    Log  "Setting BMC date : ${date_changed} using Manual option"
+    ${date}=  Convert Date  ${date_changed}  result_format=%Y-%m-%d
+    ${time}=  Convert Date  ${date_changed}  result_format=%H:%M
+    Click Element At Coordinates  ${xpath_select_manual}  0  0
+    Input Text  ${xpath_manual_date}  ${date}
+    Input Text  ${xpath_manual_time}  ${time}
+    Click Element  ${xpath_select_save_settings}
