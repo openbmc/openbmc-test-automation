@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c505de2_f79a2771",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-27T09:44:24Z",
+      "side": 1,
+      "message": "Brief about the test case here. Don\u0027t exceed 50 char limit",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 40
+      },
+      "revId": "ccd25754110b4729c13026c2c0537113e53845ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7658673f_6ad7ea41",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-27T09:44:24Z",
+      "side": 1,
+      "message": "without which authorisation? Redfish?\nHow are you making sure that there is no auth token?",
+      "range": {
+        "startLine": 262,
+        "startChar": 38,
+        "endLine": 262,
+        "endChar": 50
+      },
+      "revId": "ccd25754110b4729c13026c2c0537113e53845ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e44cc6f_f3673297",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-27T09:44:24Z",
+      "side": 1,
+      "message": "Give a meaningful var name instead of i",
+      "range": {
+        "startLine": 267,
+        "startChar": 11,
+        "endLine": 267,
+        "endChar": 12
+      },
+      "revId": "ccd25754110b4729c13026c2c0537113e53845ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79a85327_c61b66fc",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-27T09:44:24Z",
+      "side": 1,
+      "message": "Format Run Keyword If like below\n```\nRun Keyword If condition\n...      Log To Console\n...  ELSE IF  condition\n...      Log To Console\n...  ELSE\n...      Log\n```",
+      "range": {
+        "startLine": 272,
+        "startChar": 8,
+        "endLine": 272,
+        "endChar": 17
+      },
+      "revId": "ccd25754110b4729c13026c2c0537113e53845ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71447891_658800bc",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-27T09:44:24Z",
+      "side": 1,
+      "message": "Where is the logout after file upload?",
+      "range": {
+        "startLine": 273,
+        "startChar": 13,
+        "endLine": 273,
+        "endChar": 51
+      },
+      "revId": "ccd25754110b4729c13026c2c0537113e53845ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e376a920_fafa9dad",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-27T09:44:24Z",
+      "side": 1,
+      "message": "Check for boolean value ${False}",
+      "range": {
+        "startLine": 274,
+        "startChar": 37,
+        "endLine": 274,
+        "endChar": 42
+      },
+      "revId": "ccd25754110b4729c13026c2c0537113e53845ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c28f7e40_32705de3",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-27T09:44:24Z",
+      "side": 1,
+      "message": "Format If condition as said above.",
+      "range": {
+        "startLine": 274,
+        "startChar": 62,
+        "endLine": 274,
+        "endChar": 73
+      },
+      "revId": "ccd25754110b4729c13026c2c0537113e53845ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a49e7629_ff5109b7",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-02-27T09:44:24Z",
+      "side": 1,
+      "message": "Add a comment for this",
+      "range": {
+        "startLine": 277,
+        "startChar": 4,
+        "endLine": 277,
+        "endChar": 49
+      },
+      "revId": "ccd25754110b4729c13026c2c0537113e53845ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
