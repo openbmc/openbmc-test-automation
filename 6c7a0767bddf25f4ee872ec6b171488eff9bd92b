@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae42d826_9b6a0884",
+        "filename": "redfish/telemetry_service/test_telemetry.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-27T05:55:09Z",
+      "side": 1,
+      "message": "As discussed, I believe we should convert this test case in something like below to verify that telemetry definition is correctly set in IBM system. Also I would say that this particular test should go downstream.\n\nVerify Telemetery Metric Definitions For Total Power\n    [Documentation]  Verify telemetery metric definitions for total power.\n    [Tags]  Verify_Telemetery_Metric_Definitions_For_Total_Power\n    [Template]  Verify Telemetery Metric Definitions For Single Component\n    \n    # Component    Field             Value\n    total_power    Name   \t     total_power           \n    total_power    Id                total_power\n    total_power    MetricType        Numeric\n    total_power    Units             W\n    total_power    MetricProperties  /redfish/v1/Chassis/chassis/Sensors/total_power/Reading",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 29
+      },
+      "revId": "6c7a0767bddf25f4ee872ec6b171488eff9bd92b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
