@@ -5,7 +5,7 @@ Documentation  Test OpenBMC GUI "Power" sub-menu of "Resource Management".
 Resource        ../../lib/gui_resource.robot
 
 Suite Setup     Suite Setup Execution
-Suite Teardown  Close Browser
+Suite Teardown  Suite Teardown Execution
 
 
 *** Variables ***
@@ -19,6 +19,7 @@ ${xpath_select_powersaving}           //input[@value='PowerSaving']
 ${xpath_select_maximum_performance}   //input[@value='MaximumPerformance']
 ${xpath_update_power_save_mode}       //button[contains(text(),'Update power saver mode')]
 ${xpath_page_loading_progress_bar}    //*[@aria-label='Page loading progress bar']
+
 
 *** Test Cases ***
 
@@ -38,6 +39,7 @@ Verify Existence Of All Sections In Power Page
     Page Should Contain  Power cap value
     Page Should Contain  Power and performance mode
     Page Should Contain  Idle power saver
+
 
 Verify Existence Of All Buttons In Power Page
     [Documentation]  Verify existence of all buttons in power page.
@@ -74,6 +76,8 @@ Verify Server Power Cap Setting Is On
     Input Text  ${xpath_cap_input_button}  ${power_cap_value}
     Click Element  ${xpath_submit_button}
     Wait Until Keyword Succeeds  1 min  15 sec  Is Power Cap Value Set  ${power_cap_value}
+    Wait Until Element Is Visible   ${xpath_success_message}  timeout=60
+    Wait Until Element Is Not Visible   ${xpath_success_message}  timeout=60
 
 
 Verify Server Power Cap Setting With Power Cap Disabled
@@ -99,7 +103,8 @@ Verify Server Power Cap Setting With Power Cap Disabled
     Input Text  ${xpath_cap_input_button}  ${power_cap_value}
     Click Element  ${xpath_submit_button}
     Wait Until Keyword Succeeds  1 min  15 sec  Is Power Cap Value Set  ${power_cap_value}
-
+    Wait Until Element Is Visible   ${xpath_success_message}  timeout=60
+    Wait Until Element Is Not Visible   ${xpath_success_message}  timeout=60
 
 *** Keywords ***
 
@@ -156,3 +161,11 @@ Suite Setup Execution
     Click Element  ${xpath_power_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  power
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Redfish.Login
+
+Suite Teardown Execution
+    [Documentation]  Do suite teardown tasks.
+
+    Logout GUI
+    Close Browser
+    Redfish.Logout

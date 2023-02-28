@@ -102,6 +102,7 @@ class gui_variables:
     )
     xpath_power_sub_menu = "//*[@data-test-id='nav-item-power']"
     xpath_power_heading = "//h1[contains(text(), 'Power')]"
+    xpath_success_message = "//*[contains(text(),'Success')]"
 
     # Profile settings
     xpath_default_UTC = "//*[@data-test-id='profileSettings-radio-defaultUTC']"
