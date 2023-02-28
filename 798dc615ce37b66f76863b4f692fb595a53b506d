@@ -46,6 +46,30 @@
       },
       "revId": "798dc615ce37b66f76863b4f692fb595a53b506d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3a1a5d6_ed7cb4e6",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-02-28T14:45:10Z",
+      "side": 1,
+      "message": "OK, that is a merged code. Anyways I\u0027ve a question. I\u0027ll ask in that commit also.\n\nWhich one is the valid URI for code update, old URI or new URI? If the new URI is coming old URI is going to be obsolete, right? \nIf new URI is the valid expected URI, older builds also should comply with new URI. We need to open a an issue \u0026 get it done on older builds also.\nCorrect me if I\u0027m wrong.",
+      "parentUuid": "598fa8ac_4cdc0998",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 53
+      },
+      "revId": "798dc615ce37b66f76863b4f692fb595a53b506d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
