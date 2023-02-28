@@ -5,7 +5,7 @@ Documentation  Test OpenBMC GUI "Power" sub-menu of "Resource Management".
 Resource        ../../lib/gui_resource.robot
 
 Suite Setup     Suite Setup Execution
-Suite Teardown  Close Browser
+Suite Teardown  Suite Teardown Execution
 
 
 *** Variables ***
@@ -19,6 +19,8 @@ ${xpath_select_powersaving}           //input[@value='PowerSaving']
 ${xpath_select_maximum_performance}   //input[@value='MaximumPerformance']
 ${xpath_update_power_save_mode}       //button[contains(text(),'Update power saver mode')]
 ${xpath_page_loading_progress_bar}    //*[@aria-label='Page loading progress bar']
+${xpath_success_message}              //*[contains(text(),"Success")]
+
 
 *** Test Cases ***
 
@@ -38,6 +40,7 @@ Verify Existence Of All Sections In Power Page
     Page Should Contain  Power cap value
     Page Should Contain  Power and performance mode
     Page Should Contain  Idle power saver
+
 
 Verify Existence Of All Buttons In Power Page
     [Documentation]  Verify existence of all buttons in power page.
@@ -156,3 +159,12 @@ Suite Setup Execution
     Click Element  ${xpath_power_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  power
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Redfish.Login
+
+Suite Teardown Execution
+    [Documentation]  Do suite teardown tasks.
+
+    Wait Until Element Is Not Visible   ${xpath_success_message}  timeout=30
+    Logout GUI
+    Close Browser
+    Redfish.Logout
