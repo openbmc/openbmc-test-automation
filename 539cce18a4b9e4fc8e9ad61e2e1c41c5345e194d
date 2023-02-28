@@ -47,6 +47,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5ece788_10a5b6f1",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-28T09:40:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f0f1b56_16d17cd4",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 298,
+        "endChar": 48
+      },
+      "revId": "539cce18a4b9e4fc8e9ad61e2e1c41c5345e194d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d89382e5_2cb0e25c",
@@ -60,6 +84,30 @@
       "writtenOn": "2023-02-06T08:45:37Z",
       "side": 1,
       "message": "As this test case requires power on, BMC dump can offload to OS. So it will not pass always. Better logic is required for this use case.",
+      "range": {
+        "startLine": 303,
+        "startChar": 0,
+        "endLine": 303,
+        "endChar": 37
+      },
+      "revId": "539cce18a4b9e4fc8e9ad61e2e1c41c5345e194d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a278a52b_d6d7a3b2",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-28T09:40:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d89382e5_2cb0e25c",
       "range": {
         "startLine": 303,
         "startChar": 0,
@@ -93,6 +141,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ca3b6fb_e5647bde",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-28T09:40:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5c6384d_ab7a351f",
+      "range": {
+        "startLine": 308,
+        "startChar": 6,
+        "endLine": 308,
+        "endChar": 72
+      },
+      "revId": "539cce18a4b9e4fc8e9ad61e2e1c41c5345e194d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a089d8c_68ac1858",
@@ -116,6 +188,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b06f8757_8c0aabcf",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-28T09:40:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a089d8c_68ac1858",
+      "range": {
+        "startLine": 309,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 46
+      },
+      "revId": "539cce18a4b9e4fc8e9ad61e2e1c41c5345e194d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11c60be5_f333550b",
@@ -129,6 +225,30 @@
       "writtenOn": "2023-02-06T08:45:37Z",
       "side": 1,
       "message": "# Verify that only one BMC dump is available.",
+      "range": {
+        "startLine": 311,
+        "startChar": 0,
+        "endLine": 311,
+        "endChar": 43
+      },
+      "revId": "539cce18a4b9e4fc8e9ad61e2e1c41c5345e194d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71386b7b_12439fce",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-02-28T09:40:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11c60be5_f333550b",
       "range": {
         "startLine": 311,
         "startChar": 0,
