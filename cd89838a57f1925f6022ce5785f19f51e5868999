@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d6d441c_4a09949f",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-28T10:35:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72995db3_b16a955e",
+      "range": {
+        "startLine": 29,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 27
+      },
+      "revId": "cd89838a57f1925f6022ce5785f19f51e5868999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8001733_c5182988",
@@ -43,6 +67,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79430258_525b5b8e",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-28T10:35:18Z",
+      "side": 1,
+      "message": "yes.these are the ones present on the GUI page.\nBut these will be enabled only in DHCP setup.",
+      "parentUuid": "e8001733_c5182988",
+      "revId": "cd89838a57f1925f6022ce5785f19f51e5868999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a069c120_0161213c",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 1
@@ -54,6 +96,24 @@
       "writtenOn": "2023-02-28T09:57:12Z",
       "side": 1,
       "message": "is this a checkbox?",
+      "revId": "cd89838a57f1925f6022ce5785f19f51e5868999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1232b749_a5a1d3c5",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-02-28T10:35:18Z",
+      "side": 1,
+      "message": "Yes all the four are checkboxes.",
+      "parentUuid": "a069c120_0161213c",
       "revId": "cd89838a57f1925f6022ce5785f19f51e5868999",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
