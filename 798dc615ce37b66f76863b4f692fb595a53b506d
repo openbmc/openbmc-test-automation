@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "221db7cb_a5f70efa",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-02-28T08:27:55Z",
+      "side": 1,
+      "message": "Either one URI will be valid.\nOld URI would be no more valid, right?\nHow about going with new URI as default UPDATE_URI and leave it to user to use -V while passing UPDATE_URI.",
+      "range": {
+        "startLine": 196,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 53
+      },
+      "revId": "798dc615ce37b66f76863b4f692fb595a53b506d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
