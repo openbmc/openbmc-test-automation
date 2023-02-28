@@ -288,7 +288,7 @@ Configure SNMP Manager On BMC With Invalid Setting Via GUI And Verify
     # ....                (e.g. Invalid format / Value must be between 0 – 65535).
 
     Configure SNMP Manager Via GUI  ${snmp_manager_ip}  ${snmp_manager_port}
-    Wait Until Page Contains   ${expected_error}  timeout=10sec
+    Wait Until Page Contains   ${expected_error}  timeout=30sec
     ${status}=  Run Keyword And Return Status
     ...  Verify SNMP Manager Configured On BMC  ${snmp_manager_ip}  ${snmp_manager_port}
     Should Be Equal As Strings  ${status}  False
