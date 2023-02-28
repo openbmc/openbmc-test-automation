@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ed8cfde_e46b8711",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-28T14:03:27Z",
+      "side": 1,
+      "message": "I followed same method as mention in recent merged code.\n\nhttps://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/60880",
+      "parentUuid": "f48f9915_9bc1df2a",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 23
+      },
+      "revId": "f199ff4bf3d4f14cfd265fb3ead9ec7e4beff9cd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6768130f_9a01acd5",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-28T13:59:45Z",
       "side": 1,
       "message": "There is no decision taken if HTTP_METHOD_NOT_ALLOWED is returned. You should fail the test or try with the other URI.",
+      "range": {
+        "startLine": 202,
+        "startChar": 60,
+        "endLine": 202,
+        "endChar": 83
+      },
+      "revId": "f199ff4bf3d4f14cfd265fb3ead9ec7e4beff9cd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca5fa458_739efdd0",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-02-28T14:03:27Z",
+      "side": 1,
+      "message": "same as above.",
+      "parentUuid": "6768130f_9a01acd5",
       "range": {
         "startLine": 202,
         "startChar": 60,
