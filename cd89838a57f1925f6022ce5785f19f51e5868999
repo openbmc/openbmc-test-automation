@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72995db3_b16a955e",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-28T09:57:12Z",
+      "side": 1,
+      "message": "can you use like ${xpath_dhcp_toggle}",
+      "range": {
+        "startLine": 29,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 27
+      },
+      "revId": "cd89838a57f1925f6022ce5785f19f51e5868999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8001733_c5182988",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-28T09:57:12Z",
+      "side": 1,
+      "message": "domain name server toggle is same for static \u0026 DHCP right?",
+      "revId": "cd89838a57f1925f6022ce5785f19f51e5868999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a069c120_0161213c",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-28T09:57:12Z",
+      "side": 1,
+      "message": "is this a checkbox?",
+      "revId": "cd89838a57f1925f6022ce5785f19f51e5868999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
