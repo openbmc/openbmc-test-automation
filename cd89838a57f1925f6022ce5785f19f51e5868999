@@ -85,6 +85,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50900260_ab1ddbf3",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-28T11:47:38Z",
+      "side": 1,
+      "message": "actually the path which you have used is not only for DHCP domainnameserver...\nit is for whole domain name server toggle.",
+      "parentUuid": "79430258_525b5b8e",
+      "revId": "cd89838a57f1925f6022ce5785f19f51e5868999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88f67f66_f49b6e65",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-28T11:47:38Z",
+      "side": 1,
+      "message": "are you checking whether it is enabled or not....then this not the right xpath, it is not pointing for Text Enabled, it is pointing for that toggle",
+      "parentUuid": "79430258_525b5b8e",
+      "revId": "cd89838a57f1925f6022ce5785f19f51e5868999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a069c120_0161213c",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 1
@@ -114,6 +150,24 @@
       "side": 1,
       "message": "Yes all the four are checkboxes.",
       "parentUuid": "a069c120_0161213c",
+      "revId": "cd89838a57f1925f6022ce5785f19f51e5868999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3d684a2_5e23a0a0",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-28T11:47:38Z",
+      "side": 1,
+      "message": "what exactly you are checking for?\nin line 70 you are checking for domain name server/dns/ntp servers check box....\nso what about this code....",
+      "parentUuid": "1232b749_a5a1d3c5",
       "revId": "cd89838a57f1925f6022ce5785f19f51e5868999",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
