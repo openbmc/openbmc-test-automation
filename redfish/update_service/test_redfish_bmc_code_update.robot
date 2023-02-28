@@ -35,10 +35,13 @@ Force Tags               BMC_Code_Update
 
 *** Variables ***
 
-@{ADMIN}          admin_user  TestPwd123
-&{USERS}          Administrator=${ADMIN}
-${LOOP_COUNT}     ${2}
-@{HOSTNAME}       bmc_system01  bmc_system02  bmc_system03  bmc_system04  bmc_system05
+@{ADMIN}                 admin_user  TestPwd123
+&{USERS}                 Administrator=${ADMIN}
+${LOOP_COUNT}            ${2}
+@{HOSTNAME}              bmc_system01  bmc_system02  bmc_system03  bmc_system04  bmc_system05
+
+# New code update path.
+${REDFISH_UPDATE_URI}    /redfish/v1/UpdateService/update
 
 *** Test Cases ***
 
@@ -191,6 +194,19 @@ Suite Setup Execution
 
     Redfish Power Off  stack_mode=skip
 
+    # Check and set the update path.
+    # Old - /redfish/v1/UpdateService/
+    # New - /redfish/v1/UpdateService/update
+
+    ${resp}=  Redfish.Get  /redfish/v1/UpdateService/update
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NOT_FOUND},${HTTP_METHOD_NOT_ALLOWED}]
+
+    # If the method is not found, set update URI to old method.
+    Run Keyword If  ${resp.status} == ${HTTP_NOT_FOUND}
+    ...  Set Suite Variable  ${REDFISH_UPDATE_URI}  /redfish/v1/UpdateService
+
+    Log To Console  Update URI: ${REDFISH_UPDATE_URI}
+
 
 Redfish Update Firmware
     [Documentation]  Update the BMC firmware via redfish interface.
@@ -208,11 +224,13 @@ Redfish Update Firmware
 
     ${file_bin_data}=  OperatingSystem.Get Binary File  ${image_file_path}
 
+    Log To Console  Update URI: ${REDFISH_UPDATE_URI}
+
     Log To Console   Start uploading image to BMC.
-    Upload Image To BMC  ${REDFISH_BASE_URI}UpdateService  timeout=${600}  data=${file_bin_data}
+    Upload Image To BMC  ${REDFISH_UPDATE_URI}  timeout=${600}  data=${file_bin_data}
     Log To Console   Completed image upload to BMC.
 
-    ${task_inv}=  Check Task With Match TargetUri  /redfish/v1/UpdateService
+    ${task_inv}=  Check Task With Match TargetUri  ${REDFISH_UPDATE_URI}
 
     Rprint Vars  task_inv
 
