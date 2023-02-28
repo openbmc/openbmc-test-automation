@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c96348f0_ed0ba18d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000844
+      },
+      "writtenOn": "2023-02-28T08:34:42Z",
+      "side": 1,
+      "message": "Looks good.\nUse another PR to push NTP Date and Time validation.",
+      "revId": "8b1372ef37aa03c972a218c7b7ef4b31e9cbdc62",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
