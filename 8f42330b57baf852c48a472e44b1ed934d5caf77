@@ -138,6 +138,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f3d76709_93f3f600",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-28T08:30:54Z",
+      "side": 1,
+      "message": "in suite setup am using redfish.logout",
+      "parentUuid": "0e983afe_d4e10bb7",
+      "revId": "8f42330b57baf852c48a472e44b1ed934d5caf77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d878abec_cfadda12",
         "filename": "security/test_bmc_connections.robot",
         "patchSetId": 2
@@ -185,6 +203,24 @@
       "side": 1,
       "message": "What error ? if you don\u0027t want to consider any particular error then this logic works fine.",
       "parentUuid": "d17587e2_d1ec22dd",
+      "revId": "8f42330b57baf852c48a472e44b1ed934d5caf77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f6a3299_5c7435b9",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-28T08:30:54Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "eada4d93_a6a3676a",
       "revId": "8f42330b57baf852c48a472e44b1ed934d5caf77",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },

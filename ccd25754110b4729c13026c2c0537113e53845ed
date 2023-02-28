@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81fc9b12_aca7c46e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-28T08:30:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c505de2_f79a2771",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 40
+      },
+      "revId": "ccd25754110b4729c13026c2c0537113e53845ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7658673f_6ad7ea41",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-27T09:44:24Z",
       "side": 1,
       "message": "without which authorisation? Redfish?\nHow are you making sure that there is no auth token?",
+      "range": {
+        "startLine": 262,
+        "startChar": 38,
+        "endLine": 262,
+        "endChar": 50
+      },
+      "revId": "ccd25754110b4729c13026c2c0537113e53845ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41f93a5a_2ee8d313",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-28T08:30:54Z",
+      "side": 1,
+      "message": "without login am performing put operation, which means there will be no token.",
+      "parentUuid": "7658673f_6ad7ea41",
       "range": {
         "startLine": 262,
         "startChar": 38,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ecd1678_be00fef7",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-28T08:30:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e44cc6f_f3673297",
+      "range": {
+        "startLine": 267,
+        "startChar": 11,
+        "endLine": 267,
+        "endChar": 12
+      },
+      "revId": "ccd25754110b4729c13026c2c0537113e53845ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79a85327_c61b66fc",
@@ -110,6 +182,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe1f835f_a91fcf95",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-28T08:30:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79a85327_c61b66fc",
+      "range": {
+        "startLine": 272,
+        "startChar": 8,
+        "endLine": 272,
+        "endChar": 17
+      },
+      "revId": "ccd25754110b4729c13026c2c0537113e53845ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71447891_658800bc",
@@ -123,6 +219,30 @@
       "writtenOn": "2023-02-27T09:44:24Z",
       "side": 1,
       "message": "Where is the logout after file upload?",
+      "range": {
+        "startLine": 273,
+        "startChar": 13,
+        "endLine": 273,
+        "endChar": 51
+      },
+      "revId": "ccd25754110b4729c13026c2c0537113e53845ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2c6614e_6bbf9824",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-28T08:30:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71447891_658800bc",
       "range": {
         "startLine": 273,
         "startChar": 13,
@@ -179,6 +299,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e775597c_c8cb54f0",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-28T08:30:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e376a920_fafa9dad",
+      "range": {
+        "startLine": 274,
+        "startChar": 37,
+        "endLine": 274,
+        "endChar": 42
+      },
+      "revId": "ccd25754110b4729c13026c2c0537113e53845ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "144cce61_06dd2026",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-28T08:30:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c28f7e40_32705de3",
+      "range": {
+        "startLine": 274,
+        "startChar": 62,
+        "endLine": 274,
+        "endChar": 73
+      },
+      "revId": "ccd25754110b4729c13026c2c0537113e53845ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a49e7629_ff5109b7",
@@ -192,6 +360,30 @@
       "writtenOn": "2023-02-27T09:44:24Z",
       "side": 1,
       "message": "Add a comment for this",
+      "range": {
+        "startLine": 277,
+        "startChar": 4,
+        "endLine": 277,
+        "endChar": 49
+      },
+      "revId": "ccd25754110b4729c13026c2c0537113e53845ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31b7a49a_6fae5916",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-02-28T08:30:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a49e7629_ff5109b7",
       "range": {
         "startLine": 277,
         "startChar": 4,
