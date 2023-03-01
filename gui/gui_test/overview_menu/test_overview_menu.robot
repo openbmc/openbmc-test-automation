@@ -25,7 +25,8 @@ ${xpath_event_logs_view_more_button}             (//*[text()="View more"])[5]
 ${xpath_inventory_and_leds_view_more_button}     (//*[text()="View more"])[6]
 ${xpath_launch_host_console}                     //*[@data-test-id='overviewQuickLinks-button-solConsole']
 ${xpath_led_button}                              //*[@data-test-id='overviewInventory-checkbox-identifyLed']
-${view_all_Dumps}                                (//*[text()="View more"])[7]
+${xpath_dumps_view_more_button}                  (//*[text()="View more"])[7]
+${xpath_critical_logs_count}                     //dt[contains(text(),'Critical')]/following-sibling::dd[1]
 
 *** Test Cases ***
 
@@ -89,15 +90,18 @@ Verify Edit Network Setting Button
     Wait Until Page Contains Element  ${xpath_network_heading}
 
 
-Verify Event Under High Priority Events Section
-    [Documentation]  Verify event under high priority events section in case of any event.
-    [Tags]  Verify_Event_Under_High_Priority_Events_Section
+Verify Event Under Critical Event Logs Section
+    [Documentation]  Verify event under critical event logs section in case of any event.
+    [Tags]  Verify_Event_Under_Critical_Event_Logs_Section
+    [Teardown]  Redfish Purge Event Log
 
     Redfish Purge Event Log
     Click Element  ${xpath_refresh_button}
     Generate Test Error Log
     Click Element  ${xpath_refresh_button}
-    Wait Until Page Contains  xyz.openbmc_project.Common.Error.InternalFailure  timeout=30s
+    
+    ${log_count}=  Get Text  ${xpath_critical_logs_count}
+    Should Be True  '${log_count}' == '${1}'
 
 
 Verify View More Event Logs Button
@@ -172,8 +176,8 @@ Verify View More Button For Dumps
     [Documentation]  Verify view more button for dumps button in overview page.
     [Tags]  Verify_View_More_Button_For_Dumps
 
-    Wait Until Page Contains Element  ${view_all_Dumps}  timeout=30
-    Click Element  ${view_all_Dumps}
+    Wait Until Page Contains Element  ${xpath_dumps_view_more_button}  timeout=30
+    Click Element  ${xpath_dumps_view_more_button}
     Wait Until Page Contains Element  ${xpath_dumps_header}  timeout=30
 
 
