@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "100d75b0_73b37e0c",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-03-01T04:04:21Z",
+      "side": 1,
+      "message": "I did not understand your comment.",
+      "parentUuid": "a46fc429_9f921708",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 23
+      },
+      "revId": "f199ff4bf3d4f14cfd265fb3ead9ec7e4beff9cd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6768130f_9a01acd5",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 4
