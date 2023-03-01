@@ -70,6 +70,30 @@ Verify LDAP Login Works When Eth1 IP Is Not Configured
     ...  Add IP Address  ${OPENBMC_HOST_1}  ${eth1_subnet_mask}  ${eth1_gateway}
 
     Create LDAP Configuration
+    Redfish.Logout
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Logout
+
+
+Verify LDAP Login Works When Both Interfaces Are Configured
+    [Documentation]  Verify LDAP login works when both interfaces are configured.
+    [Tags]  Verify_LDAP_Login_Works_When_Both_Interfaces_Are_Configured
+    [Teardown]  Redfish.Login
+
+    Create LDAP Configuration
+    Redfish.Logout
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Logout
+
+
+Verify Secure LDAP Login Works When Both Interfaces Are Configured
+    [Documentation]  Verify Secure LDAP login works when both the interfaces are configured.
+    [Tags]  Verify_Secure_LDAP_Login_Works_When_Both_Interfaces_Are_Configured
+    [Teardown]  Redfish.Login
+
+    Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI_1}  ${LDAP_BIND_DN}
+    ...  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
+    Redfish.Logout
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Redfish.Logout
 
