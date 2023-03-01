@@ -89,15 +89,17 @@ Verify Edit Network Setting Button
     Wait Until Page Contains Element  ${xpath_network_heading}
 
 
-Verify Event Under High Priority Events Section
-    [Documentation]  Verify event under high priority events section in case of any event.
-    [Tags]  Verify_Event_Under_High_Priority_Events_Section
+Verify Event Log Count Under Event Logs Section
+    [Documentation]  Verify event log count under event logs section in case of any event.
+    [Tags]  Verify_Event_Log_Count_Under_Event_Logs_Section
+    [Teardown]  Redfish Purge Event Log
 
     Redfish Purge Event Log
     Click Element  ${xpath_refresh_button}
     Generate Test Error Log
     Click Element  ${xpath_refresh_button}
-    Wait Until Page Contains  xyz.openbmc_project.Common.Error.InternalFailure  timeout=30s
+    ${log_count}=  Redfish.Get Attribute  /redfish/v1/Systems/system/LogServices/EventLog/Entries  Members@odata.count
+    Should Be True  '${log_count}' == '${1}'
 
 
 Verify View More Event Logs Button
