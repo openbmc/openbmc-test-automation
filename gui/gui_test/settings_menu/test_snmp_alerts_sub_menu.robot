@@ -8,7 +8,6 @@ Resource        ../../lib/gui_resource.robot
 Resource        ../../lib/bmc_network_utils.robot
 
 Suite Setup     Suite Setup Execution
-Suite Teardown  Close Browser
 Suite Teardown  Run Keywords  Redfish.Logout  AND  Close Browser
 
 *** Variables ***
@@ -265,7 +264,7 @@ Configure SNMP Manager Via GUI
 Delete All SNMP Managers Via GUI
     [Documentation]  Delete SNMP manager via GUI.
 
-    Wait Until Page Contains Element  ${xpath_select_all_snmp}  timeout=30s 
+    Wait Until Page Contains Element  ${xpath_select_all_snmp}  timeout=30s
     Click Element At Coordinates  ${xpath_select_all_snmp}  0  0
     Wait Until Keyword Succeeds  30 sec  5 sec  Click Element  ${xpath_delete_button}
     Wait Until Page Contains  Delete SNMP alert destination
