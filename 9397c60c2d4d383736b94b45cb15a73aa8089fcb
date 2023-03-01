@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12ab3b99_b1557f4f",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-01T17:00:10Z",
+      "side": 1,
+      "message": "Here we should verify that the overview page has 1 log count under critical section.\nThis does a verification via Redfish which should not be a way here for GUT test.",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 44
+      },
+      "revId": "9397c60c2d4d383736b94b45cb15a73aa8089fcb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
