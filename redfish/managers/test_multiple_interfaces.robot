@@ -74,6 +74,27 @@ Verify LDAP Login Works When Eth1 IP Is Not Configured
     Redfish.Logout
 
 
+Verify LDAP Login Works When Both Interfaces Are Configured
+    [Documentation]  Verify LDAP login works when both interfaces are configured.
+    [Tags]  Verify_LDAP_Login_Works_When_Both_Interfaces_Are_Configured
+    [Teardown]  Redfish.Login
+
+    Create LDAP Configuration
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Logout
+
+
+Verify Secure LDAP Login Works When Both Interfaces Are Configured
+    [Documentation]  Verify Secure LDAP login works when both the interfaces are configured.
+    [Tags]  Verify_Secure_LDAP_Login_Works_When_Both_Interfaces_Are_Configured
+    [Teardown]  Redfish.Login
+
+    Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI_1}  ${LDAP_BIND_DN}
+    ...  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Logout
+
+
 Verify SNMP Works When Eth1 IP Is Not Configured
     [Documentation]  Verify SNMP works when eth1 IP is not configured.
     [Tags]  Verify_SNMP_Works_When_Eth1_IP_Is_Not_Configured
