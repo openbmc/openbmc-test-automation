@@ -74,6 +74,27 @@ Verify LDAP Login Works When Eth1 IP Is Not Configured
     Redfish.Logout
 
 
+Verify LDAP Login Works When Both Interfaces Are Configured
+    [Documentation]  Verify LDAP login works when both interfaces are configured.
+    [Tags]  Verify_LDAP_Login_Works_When_Both_Interfaces_Are_Configured
+    [Teardown]  Redfish.Login
+
+    Create LDAP Configuration
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Logout
+
+
+Verify Secure LDAP Login Works When Both Interfaces Are Configured
+    [Documentation]  Verify Secure LDAP login works when both the interfaces are configure.
+    [Tags]  Verify_Secure_LDAP_Login_Works_When_Both_Interfaces_Are_Configured
+    [Teardown]  Redfish.Login
+
+    Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI_1}  ${LDAP_BIND_DN}
+    ...  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
+    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Redfish.Logout
+
+
 Verify SNMP Works When Eth1 IP Is Not Configured
     [Documentation]  Verify SNMP works when eth1 IP is not configured.
     [Tags]  Verify_SNMP_Works_When_Eth1_IP_Is_Not_Configured
@@ -85,14 +106,15 @@ Verify SNMP Works When Eth1 IP Is Not Configured
     Create Error On BMC And Verify Trap
 
 
-Disable And Enable Eth0 Interface
-    [Documentation]  Disable and Enable eth0 ethernet interface via redfish.
-    [Tags]  Disable_And_Enable_Eth0_Interface
-    [Template]  Set BMC Ethernet Interfaces State
+# https://github.com/openbmc/phosphor-networkd/issues/55
+#Disable And Enable Eth0 Interface
+#    [Documentation]  Disable and Enable eth0 ethernet interface via redfish.
+#    [Tags]  Disable_And_Enable_Eth0_Interface
+#    [Template]  Set BMC Ethernet Interfaces State
 
     # interface_ip   interface  enabled
-    ${OPENBMC_HOST}   eth0      ${False}
-    ${OPENBMC_HOST}   eth0      ${True}
+#    ${OPENBMC_HOST}   eth0      ${False}
+#    ${OPENBMC_HOST}   eth0      ${True}
 
 
 Verify Both Interfaces Access Concurrently Via Redfish
@@ -195,7 +217,7 @@ Suite Setup Execution
 
 
 Set BMC Ethernet Interfaces State
-    [Documentation]  Set BMC ethernet interface state.
+    [Documentation]  Set BMC etherntest_gateway state.
     [Arguments]  ${interface_ip}  ${interface}  ${enabled}
     [Teardown]  Redfish1.Logout
 
