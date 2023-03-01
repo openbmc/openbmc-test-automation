@@ -4,9 +4,8 @@ r"""
 This module contains functions for tftp update.
 """
 
-import gen_print as gp
+import gen_print as gp  # NOQA
 import state as st
-from robot.libraries.BuiltIn import BuiltIn
 
 
 def get_pre_reboot_state():
