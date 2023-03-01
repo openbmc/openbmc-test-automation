@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b274bc4a_f2d1c997",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-03-01T08:35:02Z",
+      "side": 1,
+      "message": "--- ./gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot:\nVerify Changing BMC Time From Manual to NTP\nVerify_Changing_BMC_Time_From_Manual_To_NTP\n\nfix the Tag and Test case name mismatch",
+      "range": {
+        "startLine": 223,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 55
+      },
+      "revId": "e135d3fc50996f8a225f00f48f6c186d546ed0fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b5a15afa_92c5960a",
         "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
         "patchSetId": 4
