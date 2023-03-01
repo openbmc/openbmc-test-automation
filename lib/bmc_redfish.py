@@ -11,9 +11,9 @@ from json.decoder import JSONDecodeError
 
 import func_args as fa
 import gen_print as gp
-from redfish.rest.v1 import InvalidCredentialsError
-from redfish_plus import redfish_plus
 from robot.libraries.BuiltIn import BuiltIn
+from redfish_plus import redfish_plus
+from redfish.rest.v1 import InvalidCredentialsError
 
 MTLS_ENABLED = BuiltIn().get_variable_value("${MTLS_ENABLED}")
 
