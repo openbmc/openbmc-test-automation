@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "29749cad_d5b6e4d8",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-03-01T17:43:17Z",
+      "side": 1,
+      "message": "do you need to keep the session open?",
+      "revId": "12aa51464883a81b53ac6d7275ef0441518d9d6e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d256b64f_a54961a6",
         "filename": "redfish/managers/test_multiple_interfaces.robot",
         "patchSetId": 1
@@ -32,6 +49,29 @@
       "side": 1,
       "message": "Shall I remove this test case from the suite Prashanth?\nAs you are aware IP is getting erased on disabling the interface.",
       "parentUuid": "d256b64f_a54961a6",
+      "revId": "12aa51464883a81b53ac6d7275ef0441518d9d6e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80e23624_23ccc99a",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-03-01T17:43:17Z",
+      "side": 1,
+      "message": "ethernet",
+      "range": {
+        "startLine": 220,
+        "startChar": 19,
+        "endLine": 220,
+        "endChar": 21
+      },
       "revId": "12aa51464883a81b53ac6d7275ef0441518d9d6e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
