@@ -170,6 +170,24 @@
       "parentUuid": "1232b749_a5a1d3c5",
       "revId": "cd89838a57f1925f6022ce5785f19f51e5868999",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7298b15d_421cadf1",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-03-01T06:41:45Z",
+      "side": 1,
+      "message": "Yes sorry missed it out. Adding xpath_dhcp_toggle_switch in the same test case.",
+      "parentUuid": "f3d684a2_5e23a0a0",
+      "revId": "cd89838a57f1925f6022ce5785f19f51e5868999",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
