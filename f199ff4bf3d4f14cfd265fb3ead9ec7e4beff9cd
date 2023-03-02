@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "628a13c6_e978756f",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-03-02T09:11:04Z",
+      "side": 1,
+      "message": "At MAX we can put this variable out to data/variables.py   and use it globally.",
+      "parentUuid": "100d75b0_73b37e0c",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 23
+      },
+      "revId": "f199ff4bf3d4f14cfd265fb3ead9ec7e4beff9cd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6768130f_9a01acd5",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 4
@@ -157,6 +181,30 @@
       "side": 1,
       "message": "The merged code is fine. This condition will be left open if nothing is done here.",
       "parentUuid": "ca5fa458_739efdd0",
+      "range": {
+        "startLine": 202,
+        "startChar": 60,
+        "endLine": 202,
+        "endChar": 83
+      },
+      "revId": "f199ff4bf3d4f14cfd265fb3ead9ec7e4beff9cd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c8fea47_a84b80d9",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-03-02T09:11:04Z",
+      "side": 1,
+      "message": "This a valid response code in transition builds. eventually in future we can clean it up but in any case, this is good to go",
+      "parentUuid": "a9a4c193_e31ca7a8",
       "range": {
         "startLine": 202,
         "startChar": 60,
