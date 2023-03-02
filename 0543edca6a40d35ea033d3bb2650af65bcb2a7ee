@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ba68cec_3ecb6600",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-02T06:45:50Z",
+      "side": 1,
+      "message": "Once we change the hostname, network service would restart. And that might be leading to failure in our CT run. So taking care of network service restart in hostname test case would resolve this problem. Please check that out.",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 65
+      },
+      "revId": "0543edca6a40d35ea033d3bb2650af65bcb2a7ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
