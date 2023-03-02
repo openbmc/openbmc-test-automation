@@ -213,6 +213,30 @@
       },
       "revId": "f199ff4bf3d4f14cfd265fb3ead9ec7e4beff9cd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0865e797_b64ba9d9",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-03-02T09:23:23Z",
+      "side": 1,
+      "message": "HTTP_METHOD_NOT_ALLOWED this can be removed because this is not CI but Code update test..",
+      "parentUuid": "7c8fea47_a84b80d9",
+      "range": {
+        "startLine": 202,
+        "startChar": 60,
+        "endLine": 202,
+        "endChar": 83
+      },
+      "revId": "f199ff4bf3d4f14cfd265fb3ead9ec7e4beff9cd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
