@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "168a21a9_096d898b",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-03-02T05:08:50Z",
+      "side": 1,
+      "message": "yes.. this suite is designed like Logging in first.",
+      "parentUuid": "29749cad_d5b6e4d8",
+      "revId": "12aa51464883a81b53ac6d7275ef0441518d9d6e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d256b64f_a54961a6",
         "filename": "redfish/managers/test_multiple_interfaces.robot",
         "patchSetId": 1
@@ -66,6 +84,30 @@
       "writtenOn": "2023-03-01T17:43:17Z",
       "side": 1,
       "message": "ethernet",
+      "range": {
+        "startLine": 220,
+        "startChar": 19,
+        "endLine": 220,
+        "endChar": 21
+      },
+      "revId": "12aa51464883a81b53ac6d7275ef0441518d9d6e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd156c93_324d7e7e",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-03-02T05:08:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80e23624_23ccc99a",
       "range": {
         "startLine": 220,
         "startChar": 19,
