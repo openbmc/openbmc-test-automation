@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f64ef58a_c6417891",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-03-02T05:10:45Z",
+      "side": 1,
+      "message": "Changed",
+      "parentUuid": "b274bc4a_f2d1c997",
+      "range": {
+        "startLine": 223,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 55
+      },
+      "revId": "e135d3fc50996f8a225f00f48f6c186d546ed0fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5a15afa_92c5960a",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-28T11:58:14Z",
       "side": 1,
       "message": "Better to move this under \"Set Manual Date and Time\" keyword\n\n    # Wait for changes to take effect.\n    Wait Until Element Is Enabled  ${xpath_select_ntp}  timeout\u003d30s",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 67
+      },
+      "revId": "e135d3fc50996f8a225f00f48f6c186d546ed0fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8038927e_6d2f7861",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-03-02T05:10:45Z",
+      "side": 1,
+      "message": "Changed",
+      "parentUuid": "b5a15afa_92c5960a",
       "range": {
         "startLine": 232,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "329d6c13_90231153",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-03-02T05:10:45Z",
+      "side": 1,
+      "message": "Changed",
+      "parentUuid": "ae22dc08_4b4c59c2",
+      "range": {
+        "startLine": 235,
+        "startChar": 6,
+        "endLine": 235,
+        "endChar": 44
+      },
+      "revId": "e135d3fc50996f8a225f00f48f6c186d546ed0fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee4d5ec3_ce204e3a",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-02-28T11:58:14Z",
       "side": 1,
       "message": "Instead on sleep, wait for the successful message to disappeared from screen using Wait until page does not contain keyword.",
+      "range": {
+        "startLine": 250,
+        "startChar": 4,
+        "endLine": 250,
+        "endChar": 13
+      },
+      "revId": "e135d3fc50996f8a225f00f48f6c186d546ed0fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1ccd2b6_df588fee",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-03-02T05:10:45Z",
+      "side": 1,
+      "message": "Added a new code for it.",
+      "parentUuid": "ee4d5ec3_ce204e3a",
       "range": {
         "startLine": 250,
         "startChar": 4,
@@ -116,6 +212,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "168392c0_aeccf9af",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-03-02T05:10:45Z",
+      "side": 1,
+      "message": "Changed",
+      "parentUuid": "40aa74db_49da02fb",
+      "range": {
+        "startLine": 284,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 24
+      },
+      "revId": "e135d3fc50996f8a225f00f48f6c186d546ed0fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3f86e6c_79a9031e",
@@ -139,6 +259,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "536b781f_f34645f9",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-03-02T05:10:45Z",
+      "side": 1,
+      "message": "Changed",
+      "parentUuid": "f3f86e6c_79a9031e",
+      "range": {
+        "startLine": 288,
+        "startChar": 6,
+        "endLine": 288,
+        "endChar": 18
+      },
+      "revId": "e135d3fc50996f8a225f00f48f6c186d546ed0fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4dae41ac_87246deb",
@@ -152,6 +296,30 @@
       "writtenOn": "2023-02-28T11:58:14Z",
       "side": 1,
       "message": "new_date_time",
+      "range": {
+        "startLine": 289,
+        "startChar": 6,
+        "endLine": 289,
+        "endChar": 18
+      },
+      "revId": "e135d3fc50996f8a225f00f48f6c186d546ed0fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01ec72d4_9d195f4a",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-03-02T05:10:45Z",
+      "side": 1,
+      "message": "Changed",
+      "parentUuid": "4dae41ac_87246deb",
       "range": {
         "startLine": 289,
         "startChar": 6,
