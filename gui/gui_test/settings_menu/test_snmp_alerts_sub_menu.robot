@@ -231,6 +231,25 @@ Verify Persistency Of SNMP Manager And Trap On BMC Reboot
     ${CMD_INFORMATIONAL_ERROR}  ${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}     ${True}
 
 
+Configure SNMP Manager Via GUI And Verify SNMP Trap On Non Default Port
+    [Documentation]  Add SNMP manager via GUI SNMP alerts page, generate error on BMC
+    ...  and verify trap on non default port.
+    [Tags]  Configure_SNMP_Manager_Via_GUI_And_Verify_SNMP_Trap_On_Non_Default_Port
+    [Template]  Generate Error Log On BMC And Verify Trap On Non Default Port
+    [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT}
+
+    # event_log_cmd             trap_msg
+
+    # Generate internal failure error.
+    ${CMD_INTERNAL_FAILURE}     ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+
+    # Generate timeout error.
+    ${CMD_FRU_CALLOUT}          ${SNMP_TRAP_BMC_CALLOUT_ERROR}
+
+    # Generate informational error.
+    ${CMD_INFORMATIONAL_ERROR}  ${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -391,3 +410,47 @@ Navigate To SNMP Alerts Page
     Click Element  ${xpath_settings_menu}
     Click Element  ${xpath_snmp_alerts_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  snmp-alerts
+
+
+Generate Error Log On BMC And Verify Trap On Non Default Port
+    [Documentation]  Generate error log on BMC and verify if trap is sent to non default port.
+    [Arguments]  ${event_log_cmd}  ${trap_msg}
+    ...  ${persistency_check}=${False}
+
+    # Description of argument(s):
+    # event_log_cmd       Event logs to be created.
+    # trap_msg            Expected trap on SNMP.
+
+    Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT}
+
+    IF  ${persistency_check} == ${True}
+    ...  Run Keywords  Reboot BMC via GUI  AND  Navigate To SNMP Alerts Page
+    END
+
+    Start SNMP Manager
+
+    # Generate error log.
+    BMC Execute Command  ${event_log_cmd}
+
+    SSHLibrary.Switch Connection  snmp_server
+    ${SNMP_LISTEN_OUT}=  Read  delay=1s
+
+    # Stop SNMP manager process.
+    SSHLibrary.Execute Command  sudo killall snmptrapd
+
+    # Reference URL for SNMP MIB.
+    # https://github.com/openbmc/phosphor-snmp/blob/master/mibs/NotificationMIB.txt
+
+    # Sample SNMP trap:
+    # 2021-06-16 07:05:29 xx.xx.xx.xx [UDP: [xx.xx.xx.xx]:58154->[xx.xx.xx.xx]:xxx]:
+    # DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (2100473) 5:50:04.73
+    #   SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.49871.1.0.0.1
+    #  SNMPv2-SMI::enterprises.49871.1.0.1.1 = Gauge32: 369    SNMPv2-SMI::enterprises.49871.1.0.1.2 = Opaque:
+    # UInt64: 1397718405502468474     SNMPv2-SMI::enterprises.49871.1.0.1.3 = INTEGER: 3
+    #      SNMPv2-SMI::enterprises.49871.1.0.1.4 = STRING: "xxx.xx.xx Failure"
+
+    ${snmp_info_list}=  Split To Lines  ${SNMP_LISTEN_OUT}
+    ${trap_info}=  Get From List  ${snmp_info_list}  -1
+    ${snmp_trap}=  Split String  ${trap_info}  \t
+
+    Verify SNMP Trap  ${snmp_trap}  ${trap_msg}
