@@ -19,14 +19,14 @@ Test Teardown   Test Teardown Execution
 *** Variables ****
 
 ${CMD_ENABLE_TPO}      busctl set-property xyz.openbmc_project.State.ScheduledHostTransition
-...   /xyz/openbmc_project/state/host0 xyz.openbmc_project.State.ScheduledHostTransition
+...   /xyz/openbmc_project/scheduled/host0 xyz.openbmc_project.State.ScheduledHostTransition
 ...   ScheduledTransition s "xyz.openbmc_project.State.Host.Transition.On"
 
 ${CMD_SET_TPO_TIME}    busctl set-property xyz.openbmc_project.State.ScheduledHostTransition
-...  /xyz/openbmc_project/state/host0 xyz.openbmc_project.State.ScheduledHostTransition ScheduledTime t
+...  /xyz/openbmc_project/scheduled/host0 xyz.openbmc_project.State.ScheduledHostTransition ScheduledTime t
 
 ${CMD_GET_TPO_TIME}    busctl get-property xyz.openbmc_project.State.ScheduledHostTransition
-...  /xyz/openbmc_project/state/host0 xyz.openbmc_project.State.ScheduledHostTransition ScheduledTime
+...  /xyz/openbmc_project/scheduled/host0 xyz.openbmc_project.State.ScheduledHostTransition ScheduledTime
 
 # Time in seconds.
 ${TIMER_POWER_ON}      100
