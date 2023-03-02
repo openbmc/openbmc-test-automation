@@ -22,6 +22,30 @@
       },
       "revId": "0543edca6a40d35ea033d3bb2650af65bcb2a7ee",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3f016f4_9214d3d9",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-03-02T09:22:38Z",
+      "side": 1,
+      "message": "Every suite starts afresh with Launch Browser and Login GUI right Rahul. On changing the hostname the session logs out and comes to the login page again.\nNetwork service restart is not required.",
+      "parentUuid": "9ba68cec_3ecb6600",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 65
+      },
+      "revId": "0543edca6a40d35ea033d3bb2650af65bcb2a7ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
