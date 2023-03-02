@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93e1d6be_e7f6d111",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-02T10:15:21Z",
+      "side": 1,
+      "message": "You should Logout before this. Applies to next test as well.",
+      "range": {
+        "startLine": 83,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 17
+      },
+      "revId": "2feeb8cdf10671c1a061c0848faab91ef7183f84",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "132f512a_80c34588",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-02T10:15:21Z",
+      "side": 1,
+      "message": "configured",
+      "range": {
+        "startLine": 88,
+        "startChar": 81,
+        "endLine": 88,
+        "endChar": 90
+      },
+      "revId": "2feeb8cdf10671c1a061c0848faab91ef7183f84",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91682cb9_b9b051ef",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-02T10:15:21Z",
+      "side": 1,
+      "message": "Push this as a separate commit",
+      "range": {
+        "startLine": 109,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 0
+      },
+      "revId": "2feeb8cdf10671c1a061c0848faab91ef7183f84",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
