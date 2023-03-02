@@ -65,6 +65,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5a97ae7_831eab91",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-03-02T07:43:06Z",
+      "side": 1,
+      "message": "Changed",
+      "parentUuid": "78e328ca_80457e1d",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 65
+      },
+      "revId": "f2dd44febc80ee5d2fbda2ee8f0ddcf0ea1aff62",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7cf90df_a506eea3",
@@ -78,6 +102,30 @@
       "writtenOn": "2023-03-02T04:57:22Z",
       "side": 1,
       "message": "Also check if the successfull message appears before disappearing. Also keep 60 second timeout max for checking these checks.\n\n    Wait Until Element Is Visible   ${xpath_saved_message}  timeout\u003d60\n    Wait Until Element Is Not Visible   ${xpath_saved_message}  timeout\u003d60",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 74
+      },
+      "revId": "f2dd44febc80ee5d2fbda2ee8f0ddcf0ea1aff62",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e6d5051_53792ca5",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-03-02T07:43:06Z",
+      "side": 1,
+      "message": "Added",
+      "parentUuid": "a7cf90df_a506eea3",
       "range": {
         "startLine": 246,
         "startChar": 0,
