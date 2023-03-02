@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bc34190b_48d53332",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-03-02T17:59:11Z",
+      "side": 1,
+      "message": "will logout after Creating the LDAP Configuration",
+      "parentUuid": "d7b0cbe4_0bcf387e",
+      "range": {
+        "startLine": 83,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 17
+      },
+      "revId": "2feeb8cdf10671c1a061c0848faab91ef7183f84",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "132f512a_80c34588",
         "filename": "redfish/managers/test_multiple_interfaces.robot",
         "patchSetId": 2
