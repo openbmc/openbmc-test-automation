@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "999fbe37_22b0575b",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-03-02T06:05:28Z",
+      "side": 1,
+      "message": "I mean to keep the session logged in..",
+      "parentUuid": "f28e327e_bd9b3e55",
+      "revId": "12aa51464883a81b53ac6d7275ef0441518d9d6e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d256b64f_a54961a6",
         "filename": "redfish/managers/test_multiple_interfaces.robot",
         "patchSetId": 1
