@@ -148,20 +148,6 @@ Configure Static IPv4 Netmask Via GUI And Verify
     ${test_ipv4_addr}   ${test_subnet_mask}      ${default_gateway}  Success
 
 
-Configure Hostname Via GUI And Verify
-    [Documentation]  Login to GUI Network page, configure hostname and verify.
-    [Tags]  Configure_Hostname_Via_GUI_And_Verify
-    [Teardown]  Configure And Verify Network Settings Via GUI
-    ...  ${xpath_hostname}  ${xpath_hostname_input}  ${hostname}
-
-    ${hostname}=  Get BMC Hostname
-    Configure And Verify Network Settings Via GUI  ${xpath_hostname}
-    ...  ${xpath_hostname_input}  ${test_hostname}
-
-    ${bmc_hostname}=  Get BMC Hostname
-    Should Be Equal As Strings  ${bmc_hostname}  ${test_hostname}
-
-
 Configure And Verify Static IP Address
     [Documentation]  Login to GUI Network page, configure static ip address and verify.
     [Tags]  Configure_And_Verify_Static_IP_Address
@@ -173,6 +159,8 @@ Configure And Verify Static IP Address
 
 Configure And Verify Multiple Static IP Address
     [Documentation]  Login to GUI Network page, configure multiple static IP address and verify.
+    [Setup]  Redfish.Login
+    [Teardown]  Redfish.Logout
     [Tags]  Configure_And_Verify_Multiple_Static_IP_Address
 
     Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success
@@ -182,6 +170,8 @@ Configure And Verify Multiple Static IP Address
 Configure And Verify Invalid Static IP Address
     [Documentation]  Login to GUI Network page, configure invalid static IP address and verify.
     [Tags]  Configure_And_Verify_Invalid_Static_IP_Address
+    [Setup]  Redfish.Login
+    [Teardown]  Redfish.Logout
     [Template]  Add Static IP Address And Verify
 
     # ip                 subnet_mask          gateway             status
@@ -192,6 +182,21 @@ Configure And Verify Invalid Static IP Address
     ${hex_ip}            ${test_subnet_mask}  ${default_gateway}  Invalid format
     ${spl_char_ip}       ${test_subnet_mask}  ${default_gateway}  Invalid format
 
+
+Configure Hostname Via GUI And Verify
+    [Documentation]  Login to GUI Network page, configure hostname and verify.
+    [Tags]  Configure_Hostname_Via_GUI_And_Verify
+    [Teardown]  Configure the Hostname Back And Verify
+
+    ${hostname}=  Get BMC Hostname
+    Set Suite Variable  ${hostname}
+    Configure And Verify Network Settings Via GUI  ${xpath_hostname}
+    ...  ${xpath_hostname_input}  ${test_hostname}
+
+    ${bmc_hostname}=  Get BMC Hostname
+    Should Be Equal As Strings  ${bmc_hostname}  ${test_hostname}
+
+    Launch Browser And Login GUI
 
 *** Keywords ***
 
@@ -207,6 +212,13 @@ Suite Setup Execution
     ${default_gateway}=  Get BMC Default Gateway
     Set Suite Variable  ${default_gateway}
 
+Configure the Hostname Back And Verify
+    [Documentation]  Configure the hostname back.
+
+    Configure And Verify Network Settings Via GUI
+    ...  ${xpath_hostname}  ${xpath_hostname_input}  ${hostname}
+    ${bmc_hostname_after}=  Get BMC Hostname
+    Should Be Equal As Strings  ${bmc_hostname_after}  ${hostname}
 
 Delete DNS Servers And Verify
     [Documentation]  Login to GUI Network page,delete static name servers
