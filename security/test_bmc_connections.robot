@@ -1,6 +1,5 @@
 *** Settings ***
 Documentation  Connections and authentication module stability tests.
-
 Resource  ../lib/bmc_redfish_resource.robot
 Resource  ../lib/bmc_network_utils.robot
 Resource  ../lib/openbmc_ffdc.robot
@@ -37,7 +36,6 @@ ${bmc_url}            https://${OPENBMC_HOST}
 Test Patch Without Auth Token Fails
     [Documentation]  Send patch method without auth token and verify it throws an error.
     [Tags]   Test_Patch_Without_Auth_Token_Fails
-
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
@@ -48,7 +46,6 @@ Test Patch Without Auth Token Fails
 Flood Patch Without Auth Token And Check Stability Of BMC
     [Documentation]  Flood patch method without auth token and check BMC stability.
     [Tags]  Flood_Patch_Without_Auth_Token_And_Check_Stability_Of_BMC
-
     @{fail_list}=  Create List
 
     ${active_channel_config}=  Get Active Channel Config
@@ -94,7 +91,6 @@ Verify User Cannot Login After 5 Non-Logged In Sessions
 Test Post Without Auth Token Fails
     [Documentation]  Send post method without auth token and verify it throws an error.
     [Tags]   Test_Post_Without_Auth_Token_Fails
-
     ${user_info}=  Create Dictionary
     ...  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{user_info}
@@ -104,7 +100,6 @@ Test Post Without Auth Token Fails
 Flood Post Without Auth Token And Check Stability Of BMC
     [Documentation]  Flood post method without auth token and check BMC stability.
     [Tags]  Flood_Post_Without_Auth_Token_And_Check_Stability_Of_BMC
-
     @{fail_list}=  Create List
 
     ${user_info}=  Create Dictionary
@@ -158,7 +153,6 @@ Make Large Number Of Wrong SSH Login Attempts And Check Stability
 Test Stability On Large Number Of Wrong Login Attempts To GUI
     [Documentation]  Test stability on large number of wrong login attempts to GUI.
     [Tags]   Test_Stability_On_Large_Number_Of_Wrong_Login_Attempts_To_GUI
-
     @{status_list}=  Create List
 
     # Open headless browser.
@@ -220,7 +214,6 @@ Test BMCweb Stability On Continuous Redfish Login Attempts With Invalid Credenti
     [Documentation]  Make invalid credentials Redfish login attempts continuously and
     ...  verify bmcweb stability by login to Redfish with valid credentials.
     [Tags]  Test_BMCweb_Stability_On_Continuous_Redfish_Login_Attempts_With_Invalid_Credentials
-
     Invalid Credentials Redfish Login Attempts
 
 
@@ -238,7 +231,6 @@ Test Bmcweb Stability On Continuous Redfish Delete Operation Request Without Ses
     [Documentation]  Send delete object request without valid session token continuously and
     ...  verify bmcweb stability by sending delete request with valid session token.
     [Tags]  Test_Bmcweb_Stability_On_Continuous_Redfish_Delete_Operation_Request_Without_Session_Token
-
     @{failed_iter_list}=  Create List
 
     FOR  ${iter}  IN RANGE  ${iterations}
@@ -303,7 +295,6 @@ Login And Configure Hostname
 
 Login And Create User
     [Documentation]  Login and create user
-
     [Teardown]  Run Keywords   Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
     ...  AND  Redfish.Logout
 
@@ -317,7 +308,6 @@ Login And Create User
 
 Login And Delete User
     [Documentation]  Login create and delete user
-
     [Teardown]  Redfish.Logout
 
     Redfish.Login
@@ -331,7 +321,6 @@ Login And Delete User
 
 Set Account Lockout Threshold
    [Documentation]  Set user account lockout threshold.
-
    [Teardown]  Redfish.Logout
 
    Redfish.Login
@@ -340,7 +329,6 @@ Set Account Lockout Threshold
 
 Login to GUI With Incorrect Credentials
     [Documentation]  Attempt to login to GUI as root, providing incorrect password argument.
-
     Input Text  ${xpath_login_username_input}  root
     Input Password  ${xpath_login_password_input}  incorrect_password
     Click Button  ${xpath_login_button}
@@ -376,7 +364,6 @@ Invalid Credentials Redfish Login Attempts
 Confirm Ability to Connect Then Close All Connections
     [Documentation]  Confirm that SSH login works, otherwise, skip this test.
     ...  If login succeeds, close all SSH connections to BMC to prepare for test.
-
     SSHLibrary.Close All Connections
     SSHLibrary.Open Connection  ${OPENBMC_HOST}
     ${status}=   Run Keyword And Return Status
@@ -387,7 +374,6 @@ Confirm Ability to Connect Then Close All Connections
 
 Login And Upload Partition File To BMC
     [Documentation]  Upload partition file to BMC.
-
     Create Partition File
     Initialize OpenBMC
 
@@ -397,21 +383,19 @@ Login And Upload Partition File To BMC
 
     ${kwargs}=  Create Dictionary  data=${image_data}
     Set To Dictionary  ${kwargs}  headers  ${headers}
-    ${resp}=  Put Request  openbmc  ${OEM_HOST_CONFIG_URI}/100-file  &{kwargs}  timeout=10
+    ${resp}=  PUT On Session  openbmc  ${OEM_HOST_CONFIG_URI}/100-file  &{kwargs}  timeout=10
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     Delete Local Partition File
 
 
 Delete Local Partition File
     [Documentation]  Delete local partition file.
-
     ${file_exist}=  Run Keyword And Return Status  OperatingSystem.File Should Exist  100-file
     Run Keyword If  'True' == '${file_exist}'  Remove File  100-file
 
 
 Create Partition File
     [Documentation]  Create Partition file.
-
     Delete Local Partition File
 
     @{words}=  Split String  100-file  -
@@ -421,13 +405,12 @@ Create Partition File
 
 Delete All BMC Partition File
     [Documentation]  Delete multiple partition file on BMC via Redfish.
-
     Initialize OpenBMC
     ${data}=  Create Dictionary
     ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}
     Set To Dictionary  ${data}  headers  ${headers}
 
-    ${resp}=  Put Request  openbmc  ${OEM_HOST_CONFIG_URI}.DeleteAll  &{data}
+    ${resp}=  POST On Session  openbmc  ${OEM_HOST_CONFIG_ACTIONS_URI}.DeleteAll  &{data}
     Should Be Equal As Strings  ${resp.status_code}   ${HTTP_OK}
 
     Delete All Sessions
