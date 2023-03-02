@@ -148,6 +148,41 @@ Configure Static IPv4 Netmask Via GUI And Verify
     ${test_ipv4_addr}   ${test_subnet_mask}      ${default_gateway}  Success
 
 
+Configure And Verify Static IP Address
+    [Documentation]  Login to GUI Network page, configure static ip address and verify.
+    [Tags]  Configure_And_Verify_Static_IP_Address
+    [Setup]  Redfish.Login
+    [Teardown]  Redfish.Logout
+
+    Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success
+
+
+Configure And Verify Multiple Static IP Address
+    [Documentation]  Login to GUI Network page, configure multiple static IP address and verify.
+    [Setup]  Redfish.Login
+    [Teardown]  Redfish.Logout
+    [Tags]  Configure_And_Verify_Multiple_Static_IP_Address
+
+    Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success
+    Add Static IP Address And Verify  ${test_ipv4_addr_1}  ${test_subnet_mask}  ${default_gateway}  Success
+
+
+Configure And Verify Invalid Static IP Address
+    [Documentation]  Login to GUI Network page, configure invalid static IP address and verify.
+    [Tags]  Configure_And_Verify_Invalid_Static_IP_Address
+    [Setup]  Redfish.Login
+    [Teardown]  Redfish.Logout
+    [Template]  Add Static IP Address And Verify
+
+    # ip                 subnet_mask          gateway             status
+    ${out_of_range_ip}   ${test_subnet_mask}  ${default_gateway}  Invalid format
+    ${less_octet_ip}     ${test_subnet_mask}  ${default_gateway}  Invalid format
+    ${string_ip}         ${test_subnet_mask}  ${default_gateway}  Invalid format
+    ${negative_ip}       ${test_subnet_mask}  ${default_gateway}  Invalid format
+    ${hex_ip}            ${test_subnet_mask}  ${default_gateway}  Invalid format
+    ${spl_char_ip}       ${test_subnet_mask}  ${default_gateway}  Invalid format
+
+
 Configure Hostname Via GUI And Verify
     [Documentation]  Login to GUI Network page, configure hostname and verify.
     [Tags]  Configure_Hostname_Via_GUI_And_Verify
@@ -160,37 +195,6 @@ Configure Hostname Via GUI And Verify
 
     ${bmc_hostname}=  Get BMC Hostname
     Should Be Equal As Strings  ${bmc_hostname}  ${test_hostname}
-
-
-Configure And Verify Static IP Address
-    [Documentation]  Login to GUI Network page, configure static ip address and verify.
-    [Tags]  Configure_And_Verify_Static_IP_Address
-    [Setup]  Redfish.Login
-    [Teardown]  Redfish.Logout
-
-    Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success
-
-
-Configure And Verify Multiple Static IP Address
-    [Documentation]  Login to GUI Network page, configure multiple static IP address and verify.
-    [Tags]  Configure_And_Verify_Multiple_Static_IP_Address
-
-    Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success
-    Add Static IP Address And Verify  ${test_ipv4_addr_1}  ${test_subnet_mask}  ${default_gateway}  Success
-
-
-Configure And Verify Invalid Static IP Address
-    [Documentation]  Login to GUI Network page, configure invalid static IP address and verify.
-    [Tags]  Configure_And_Verify_Invalid_Static_IP_Address
-    [Template]  Add Static IP Address And Verify
-
-    # ip                 subnet_mask          gateway             status
-    ${out_of_range_ip}   ${test_subnet_mask}  ${default_gateway}  Invalid format
-    ${less_octet_ip}     ${test_subnet_mask}  ${default_gateway}  Invalid format
-    ${string_ip}         ${test_subnet_mask}  ${default_gateway}  Invalid format
-    ${negative_ip}       ${test_subnet_mask}  ${default_gateway}  Invalid format
-    ${hex_ip}            ${test_subnet_mask}  ${default_gateway}  Invalid format
-    ${spl_char_ip}       ${test_subnet_mask}  ${default_gateway}  Invalid format
 
 
 *** Keywords ***
