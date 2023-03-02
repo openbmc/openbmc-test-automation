@@ -303,7 +303,6 @@ Login And Configure Hostname
 
 Login And Create User
     [Documentation]  Login and create user
-
     [Teardown]  Run Keywords   Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
     ...  AND  Redfish.Logout
 
@@ -317,7 +316,6 @@ Login And Create User
 
 Login And Delete User
     [Documentation]  Login create and delete user
-
     [Teardown]  Redfish.Logout
 
     Redfish.Login
@@ -331,7 +329,6 @@ Login And Delete User
 
 Set Account Lockout Threshold
    [Documentation]  Set user account lockout threshold.
-
    [Teardown]  Redfish.Logout
 
    Redfish.Login
@@ -397,7 +394,7 @@ Login And Upload Partition File To BMC
 
     ${kwargs}=  Create Dictionary  data=${image_data}
     Set To Dictionary  ${kwargs}  headers  ${headers}
-    ${resp}=  Put Request  openbmc  ${OEM_HOST_CONFIG_URI}/100-file  &{kwargs}  timeout=10
+    ${resp}=  PUT On Session  openbmc  ${OEM_HOST_CONFIG_URI}/100-file  &{kwargs}  timeout=10
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     Delete Local Partition File
 
@@ -427,7 +424,7 @@ Delete All BMC Partition File
     ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}
     Set To Dictionary  ${data}  headers  ${headers}
 
-    ${resp}=  Put Request  openbmc  ${OEM_HOST_CONFIG_URI}.DeleteAll  &{data}
+    ${resp}=  POST On Session  openbmc  ${OEM_HOST_CONFIG_ACTIONS_URI}.DeleteAll  &{data}
     Should Be Equal As Strings  ${resp.status_code}   ${HTTP_OK}
 
     Delete All Sessions
