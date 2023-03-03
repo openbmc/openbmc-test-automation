@@ -81,6 +81,30 @@
       },
       "revId": "0543edca6a40d35ea033d3bb2650af65bcb2a7ee",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fb50bb5_5557dfe6",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-03T03:56:53Z",
+      "side": 1,
+      "message": "As per our discussion, please implement a check to re-login to the GUI after changing the hostname, and ensure that the hostname is accurately reflected. This will confirm that the hostname has been set correctly, while also allowing us to conclude the test case without affecting subsequent test runs.",
+      "parentUuid": "e3f016f4_9214d3d9",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 65
+      },
+      "revId": "0543edca6a40d35ea033d3bb2650af65bcb2a7ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
