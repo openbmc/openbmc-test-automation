@@ -124,11 +124,10 @@ Verify Server LED Turn On
 
     # Turn Off the server LED via Redfish and refresh GUI.
     Set IndicatorLED State  Off
-
     Refresh GUI
 
     # Turn ON the LED via GUI.
-    Click Element At Coordinates  ${xpath_led_button}  0  0
+    Click Element  ${xpath_led_button}
 
     # Cross check that server LED ON state via Redfish.
     Verify Identify LED State Via Redfish  Lit
@@ -248,11 +247,8 @@ Verify Identify LED State Via Redfish
     # expected_state    Expected value of Identify LED.
 
     # Python module:  get_member_list(resource_path)
-    ${systems}=  Redfish_Utils.Get Member List  /redfish/v1/Systems
-    FOR  ${system}  IN  @{systems}
-        ${led_value}=  Redfish.Get Attribute  ${system}  IndicatorLED
-        Should Be True  '${led_value}' == '${expected_state}'
-    END
+    ${led_state}=  Redfish.Get Attribute  /redfish/v1/Systems/system  IndicatorLED
+    Should Be True  '${led_state}' == '${expected_state}'
 
 
 Set IndicatorLED State
@@ -263,7 +259,5 @@ Set IndicatorLED State
     # expect_resp_code     Expected HTTPS response code. Default [200, 204]
 
     # Python module:  get_member_list(resource_path)
-    ${systems}=  Redfish_Utils.Get Member List  /redfish/v1/Systems
-    FOR  ${system}  IN  @{systems}
-        Redfish.Patch  ${system}  body={"IndicatorLED":${led_state}}   valid_status_codes=${expect_resp_code}
-    END
+    Redfish.Patch  /redfish/v1/Systems/system  body={"IndicatorLED": "${led_state}"}   valid_status_codes=${expect_resp_code}
+
