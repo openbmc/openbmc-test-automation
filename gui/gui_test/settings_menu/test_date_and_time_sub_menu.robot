@@ -244,6 +244,32 @@ Verify Changing BMC Time From Manual To NTP
     Wait Until Element Is Not Visible   ${xpath_success_message}  timeout=60
 
 
+Verify Moving From Manual To NTP In 5 Loops
+    [Documentation]  Verify setting manual mode to ntp mode for 5 loops.
+    [Tags]  Verify_Moving_From_Manual_To_NTP_In_5_Loops
+    [Setup]  Setup To Power Off And Navigate
+
+    FOR  ${x}  IN RANGE  5
+       Set Manual Date and Time Via GUI
+       # Set BMC date time to sync with NTP server.
+       Click Element At Coordinates  ${xpath_select_ntp}  0  0
+       Input Text  ${xpath_ntp_server1}  216.239.35.0
+       Click Element  ${xpath_select_save_settings}
+
+       # Wait until saved successfully message is visible.
+       Wait Until Element Is Visible  ${xpath_success_message}  timeout=60
+
+       ${cli_date_time}=  CLI Get BMC DateTime
+       ${ntp_date}=  Convert Date  ${cli_date_time}  result_format=%Y-%m-%d
+       ${ntp_time}=  Convert Date  ${cli_date_time}  result_format=%H:%M
+       Wait Until Page Contains  ${ntp_date}   timeout=60s
+       Page Should Contain  ${ntp_time}
+
+       Wait Until Element Is Not Visible   ${xpath_success_message}  timeout=60
+       Log  "Completed Loop for ${x} time"
+    END
+
+
 *** Keywords ***
 
 Suite Setup Execution
