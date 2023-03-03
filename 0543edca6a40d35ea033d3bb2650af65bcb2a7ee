@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cbc16c80_aace8964",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-03-03T07:37:51Z",
+      "side": 1,
+      "message": "As Rahul suggested adding the check to verify the hostname.\nKeeping this as the last test case as from the login page we would have to navigate to the settings\u003eNetwork page again which is a part of the suite setup already.",
+      "parentUuid": "3d21f44d_c6b6b75a",
+      "revId": "0543edca6a40d35ea033d3bb2650af65bcb2a7ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ba68cec_3ecb6600",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 1
