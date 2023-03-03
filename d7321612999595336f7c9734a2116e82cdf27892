@@ -16,6 +16,23 @@
       "message": "Testing in progress",
       "revId": "d7321612999595336f7c9734a2116e82cdf27892",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc1102ef_f4574fee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-03-03T04:20:13Z",
+      "side": 1,
+      "message": "I see https://gerrit.openbmc.org/c/openbmc/phosphor-state-manager/+/61361  is not yet merged.. So I ll hold it out till it goes in before I test it out. Thanks for the code Andrew.",
+      "revId": "d7321612999595336f7c9734a2116e82cdf27892",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
