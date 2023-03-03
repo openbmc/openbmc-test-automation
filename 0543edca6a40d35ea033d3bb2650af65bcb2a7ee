@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3d21f44d_c6b6b75a",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-03-03T07:13:16Z",
+      "side": 1,
+      "message": "Its better solve the problem instead of shuffling the test cases.\nIt is expected that on hostname change, user gets logged out and login prompt comes. have a test case for this and solve it by code rather than shuffling.",
+      "parentUuid": "59c78991_6954415a",
+      "revId": "0543edca6a40d35ea033d3bb2650af65bcb2a7ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9ba68cec_3ecb6600",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 1
