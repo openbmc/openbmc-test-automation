@@ -22,6 +22,30 @@
       },
       "revId": "13368f9f3d3a7831804349d3e28b5d6c1330ba55",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74275d38_c2f63b07",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-04T05:13:18Z",
+      "side": 1,
+      "message": "Yes. I also agree",
+      "parentUuid": "a01efbe4_67261803",
+      "range": {
+        "startLine": 247,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 45
+      },
+      "revId": "13368f9f3d3a7831804349d3e28b5d6c1330ba55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
