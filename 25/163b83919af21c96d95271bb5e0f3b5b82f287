@@ -1,0 +1,9 @@
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+1: Anusha Dathatri <adathatr@in.ibm.com>
+Code-Review+1: Prashanth Katti <prkatti1@in.ibm.com>
+Code-Review+2: George Keishing <gkeishin@gmail.com>
+Submitted-by: George Keishing <gkeishin@gmail.com>
+Submitted-at: Mon, 06 Mar 2023 06:25:44 +0000
+Reviewed-on: https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/61170
+Project: openbmc/openbmc-test-automation
+Branch: refs/heads/master
