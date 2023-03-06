@@ -966,6 +966,16 @@ Redfish Get States
     [Return]  ${states}
 
 
+Is BMC Not Quiesced
+    [Documentation]  Verify BMC state is not quiesced.
+
+    ${bmc_state}=   Redfish Get States
+
+    Log To Console  BMC State : ${bmc_state}
+
+    Should Not Be Equal As Strings  Quiesced  ${bmc_state['bmc']}
+
+
 Is BMC Standby
     [Documentation]  Check if BMC is ready and host at standby.
 
