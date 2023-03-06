@@ -16,6 +16,24 @@
       "message": "Add documentation saying. Verify switching between manual mode and NTP mode for 5 loops.",
       "revId": "788467d53bb1fbd13c5ba047bb69db46eac6d161",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e4366e2_82e0a5cc",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-03-06T12:13:19Z",
+      "side": 1,
+      "message": "Changed.",
+      "parentUuid": "83a7987a_011010c3",
+      "revId": "788467d53bb1fbd13c5ba047bb69db46eac6d161",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
