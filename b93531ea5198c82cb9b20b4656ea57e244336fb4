@@ -119,6 +119,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a29b33a9_e73d4d55",
+        "filename": "lib/utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-03-06T12:54:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88aac8e5_9cfc8bb3",
+      "range": {
+        "startLine": 944,
+        "startChar": 0,
+        "endLine": 944,
+        "endChar": 31
+      },
+      "revId": "b93531ea5198c82cb9b20b4656ea57e244336fb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be561f58_448f4d98",
