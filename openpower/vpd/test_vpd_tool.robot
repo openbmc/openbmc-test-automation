@@ -18,15 +18,14 @@ ${SN_WRITE_VALUE}              ABCD12345678
 *** Test Cases ***
 
 Verify System VPD
-    [Documentation]  Verify system VPD details via vpdtool '-i' option.
+    [Documentation]  Verify the system VPD details via vpdtool and busctl.
     [Tags]  Verify_System_VPD
+    [Template]  Verify System VPD Data
 
-    ${vpd_records}=  Vpdtool  -i
-
-    ${components}=  Get Dictionary Keys  ${vpd_records}
-    FOR  ${component}  IN  @{components}
-        Verify VPD Data  ${vpd_records}  ${component}
-    END
+    # Component     Field
+    System          Model
+    System          SerialNumber
+    System          LocationCode
 
 
 Verify VPD Component Read
@@ -179,3 +178,31 @@ Verify VPD Field Value
     ${cmd_output}=  BMC Execute Command  ${cmd}
 
     Valid Value  vpd_records['${component}']['${field}']  ['${cmd_output[0].split('"')[1].strip('"')}']
+
+
+Verify System VPD Data
+    [Documentation]  Verify system VPD data of given component.
+    [Arguments]  ${component}  ${field}
+    # Description of arguments:
+    # component       VPD component (e.g. system,chassis etc).
+    # field           VPD field (e.g. serialnumber,partnumber etc).
+
+    # Get the system VPD details via vpd-tool.
+    ${vpd_records}=  Vpdtool  -o -O /system
+
+    # Get the system VPD details via busctl command.
+    ${busctl_field}=  Set Variable If
+    ...  '${field}' == 'LocationCode'  com.ibm.ipzvpd.Location LocationCode
+    ...  '${field}' == 'Model'  xyz.openbmc_project.Inventory.Decorator.Asset Model
+    ...  '${field}' == 'SerialNumber'  xyz.openbmc_project.Inventory.Decorator.Asset SerialNumber
+
+    ${cmd}=  Catenate  ${CMD_GET_PROPERTY_INVENTORY} /xyz/openbmc_project/inventory/system
+    ...  ${busctl_field}
+    ${cmd_output}=  BMC Execute Command  ${cmd}
+    # Example of cmd_output:
+    #   [0]:                                            s "ABCD.XY1.1234567-P0"
+    #   [1]:
+    #   [2]:                                            0
+
+    # Check whether vpd-tool and busctl responses same for system VPD component.
+    Should Be Equal As Strings  ${vpd_records["/system"]["${field}"]}  ${cmd_output[0].split('"')[1].strip('"')}
