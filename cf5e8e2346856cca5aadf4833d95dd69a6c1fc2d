@@ -187,6 +187,30 @@
       },
       "revId": "cf5e8e2346856cca5aadf4833d95dd69a6c1fc2d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e7c24cb_892dec6d",
+        "filename": "lib/utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-06T13:54:10Z",
+      "side": 1,
+      "message": "In that case the keyword should be \"Is BMC Not Quiesced\". I was suggesting that you check whether BMC is quiesced. But if that doesn\u0027t suite your requirements then change the keyword accordingly.",
+      "parentUuid": "108b7a94_4324fe02",
+      "range": {
+        "startLine": 985,
+        "startChar": 21,
+        "endLine": 985,
+        "endChar": 54
+      },
+      "revId": "cf5e8e2346856cca5aadf4833d95dd69a6c1fc2d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
