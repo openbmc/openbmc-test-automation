@@ -85,6 +85,23 @@
       "message": "Testing in progress Driver: 2.14.0-dev-647-g7dd348be1",
       "revId": "d7321612999595336f7c9734a2116e82cdf27892",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1f6d6cb_c5be7346",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-03-06T04:48:09Z",
+      "side": 1,
+      "message": "Works good upstream \n\nroot@witherspoon-Y230UF71K02J:~# busctl get-property xyz.openbmc_project.State.ScheduledHostTransition /xyz/openbmc_project/scheduled/host0 xyz.openbmc_project.State.ScheduledHostTransition ScheduledTime\nt 0\nroot@witherspoon-Y230UF71K02J:~# busctl get-property xyz.openbmc_project.State.ScheduledHostTransition /xyz/openbmc_project/scheduled/host0 xyz.openbmc_project.State.ScheduledHostTransition ScheduledTransition\ns \"xyz.openbmc_project.State.Host.Transition.On\"\n\nroot@witherspoon-Y230UF71K02J:~# date \"+%s\"\n1678096433\nroot@witherspoon-Y230UF71K02J:~#\n\nroot@witherspoon-Y230UF71K02J:~# busctl set-property xyz.openbmc_project.State.ScheduledHostTransition /xyz/openbmc_project/scheduled/host0 xyz.\nopenbmc_project.State.ScheduledHostTransition ScheduledTime t 1678096533\nroot@witherspoon-Y230UF71K02J:~# busctl set-property xyz.openbmc_project.State.ScheduledHostTransition /xyz/openbmc_project/scheduled/host0 xyz.\nopenbmc_project.State.ScheduledHostTransition ScheduledTime t 1678096533\nroot@witherspoon-Y230UF71K02J:~# busctl get-property xyz.openbmc_project.State.ScheduledHostTransition /xyz/openbmc_project/scheduled/host0 xyz.openbmc_project.State.ScheduledHostTransition ScheduledTime\nt 1678096533\nroot@witherspoon-Y230UF71K02J:~# obmcutil state\nCurrentBMCState     : xyz.openbmc_project.State.BMC.BMCState.Ready\nCurrentPowerState   : xyz.openbmc_project.State.Chassis.PowerState.Off\nCurrentHostState    : xyz.openbmc_project.State.Host.HostState.Off\nBootProgress        : xyz.openbmc_project.State.Boot.Progress.ProgressStages.Unspecified\nOperatingSystemState: xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.Inactive\nroot@witherspoon-Y230UF71K02J:~#\n\nroot@witherspoon-Y230UF71K02J:~# Mar 06 09:55:33 witherspoon-Y230UF71K02J phosphor-scheduled-host-transition[277]: Set RestartCause to scheduled power on reason\nMar 06 09:55:33 witherspoon-Y230UF71K02J phosphor-host-state-manager[432]: Host state transition request of xyz.openbmc_project.State.Host.Transition.On\nMar 06 09:55:33 witherspoon-Y230UF71K02J phosphor-scheduled-host-transition[277]: Set requestedTransition to xyz.openbmc_project.State.Host.Transition.On\nMar 06 09:55:34 witherspoon-Y230UF71K02J systemd[1]: Stopped target Chassis0 (Powered Off)\n\nroot@witherspoon-Y230UF71K02J:~# obmcutil state\nCurrentBMCState     : xyz.openbmc_project.State.BMC.BMCState.Ready\nCurrentPowerState   : xyz.openbmc_project.State.Chassis.PowerState.On\nCurrentHostState    : xyz.openbmc_project.State.Host.HostState.Running\nBootProgress        : xyz.openbmc_project.State.Boot.Progress.ProgressStages.Unspecified\nOperatingSystemState: xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.Inactive\nroot@witherspoon-Y230UF71K02J:~#\n\n\nroot@witherspoon-Y230UF71K02J:~# obmcutil state\nCurrentBMCState     : xyz.openbmc_project.State.BMC.BMCState.Ready\nCurrentPowerState   : xyz.openbmc_project.State.Chassis.PowerState.On\nCurrentHostState    : xyz.openbmc_project.State.Host.HostState.Running\nBootProgress        : xyz.openbmc_project.State.Boot.Progress.ProgressStages.Unspecified\nOperatingSystemState: xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.Inactive\nroot@witherspoon-Y230UF71K02J:~# obmcutil state\nCurrentBMCState     : xyz.openbmc_project.State.BMC.BMCState.Ready\nCurrentPowerState   : xyz.openbmc_project.State.Chassis.PowerState.On\nCurrentHostState    : xyz.openbmc_project.State.Host.HostState.Running\nBootProgress        : xyz.openbmc_project.State.Boot.Progress.ProgressStages.OSStart\nOperatingSystemState: xyz.openbmc_project.State.OperatingSystem.Status.OSStatus.BootComplete\nroot@witherspoon-Y230UF71K02J:~# date \"+%s\"\n1678096663\nroot@witherspoon-Y230UF71K02J:~#",
+      "revId": "d7321612999595336f7c9734a2116e82cdf27892",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
