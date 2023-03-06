@@ -16,6 +16,29 @@
       "message": "Any comments ?",
       "revId": "9b7578378e4c8edb788212337a80e88ed1265ba0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a2fb10a_4654c294",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-03-06T06:32:55Z",
+      "side": 1,
+      "message": "from whr it gets hostname??",
+      "range": {
+        "startLine": 219,
+        "startChar": 53,
+        "endLine": 219,
+        "endChar": 64
+      },
+      "revId": "9b7578378e4c8edb788212337a80e88ed1265ba0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
