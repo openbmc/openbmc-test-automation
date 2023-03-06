@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59d5ee6c_65f9f004",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-03-06T11:54:18Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "210f8f4a_6489f377",
+      "range": {
+        "startLine": 11,
+        "startChar": 4,
+        "endLine": 11,
+        "endChar": 60
+      },
+      "revId": "ad2874de8cc466e3cf72455c61482b8fbc742c25",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0079dfdc_b9330574",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-06T11:44:00Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 23,
+        "startChar": 34,
+        "endLine": 23,
+        "endChar": 35
+      },
+      "revId": "ad2874de8cc466e3cf72455c61482b8fbc742c25",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a06e3da_048e263e",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-03-06T11:54:18Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "0079dfdc_b9330574",
       "range": {
         "startLine": 23,
         "startChar": 34,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74e073cb_c5f53b5b",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-03-06T11:54:18Z",
+      "side": 1,
+      "message": "We had a discussion for this as moving from manual to NTP for 5 loops will make it move from ntp to manual between the loops, Sagar has suggested not to create loop for NTP to manual.",
+      "parentUuid": "022d2882_98c74b6e",
+      "range": {
+        "startLine": 189,
+        "startChar": 1,
+        "endLine": 190,
+        "endChar": 59
+      },
+      "revId": "ad2874de8cc466e3cf72455c61482b8fbc742c25",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce4b1309_4e5a77f4",
@@ -93,6 +165,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f3d7d56_797a7439",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-03-06T11:54:18Z",
+      "side": 1,
+      "message": "Changed",
+      "parentUuid": "ce4b1309_4e5a77f4",
+      "range": {
+        "startLine": 225,
+        "startChar": 51,
+        "endLine": 225,
+        "endChar": 54
+      },
+      "revId": "ad2874de8cc466e3cf72455c61482b8fbc742c25",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5ba1a1d_654188fa",
@@ -106,6 +202,30 @@
       "writtenOn": "2023-03-06T11:44:00Z",
       "side": 1,
       "message": "Description",
+      "range": {
+        "startLine": 282,
+        "startChar": 4,
+        "endLine": 282,
+        "endChar": 17
+      },
+      "revId": "ad2874de8cc466e3cf72455c61482b8fbc742c25",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2287a338_8e606944",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-03-06T11:54:18Z",
+      "side": 1,
+      "message": "Added",
+      "parentUuid": "f5ba1a1d_654188fa",
       "range": {
         "startLine": 282,
         "startChar": 4,
