@@ -941,6 +941,21 @@ Redfish Get Boot Progress
     [Return]  ${boot_progress["BootProgress"]["LastState"]}  ${boot_progress["Status"]["State"]}
 
 
+Is Boot Progress Last State At Required State
+    [Documentation]  Get boot progress last state and expect boot progress last state to match.
+    [Arguments]  ${match_state}
+
+    # Description of argument(s):
+    # match_state      Expected states.
+
+    ${boot_progress_last_state}  ${boot_progress_state}=  Redfish Get Boot Progress
+
+    Log To Console  Match State : ${match_state}
+    Log To Console  Boot Progress : ${boot_progress_last_state}
+
+    Should Be Equal As Strings  ${match_state}  ${boot_progress_last_state}
+
+
 Redfish Get States
     [Documentation]  Return all the BMC and host states in dictionary.
     [Timeout]  120 Seconds
@@ -964,6 +979,16 @@ Redfish Get States
     #Log  ${states}
 
     [Return]  ${states}
+
+
+Is BMC Not Quiesced
+    [Documentation]  Verify BMC state is not quiesced.
+
+    ${bmc_state}=   Redfish Get States
+
+    Log To Console  BMC State : ${bmc_state}
+
+    Should Not Be Equal As Strings  Quiesced  ${bmc_state['bmc']}
 
 
 Is BMC Standby
