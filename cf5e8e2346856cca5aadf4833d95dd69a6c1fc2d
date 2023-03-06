@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72740159_594b68be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-06T12:07:20Z",
+      "side": 1,
+      "message": "Verify boot progress last state and BMC quiesce",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 23
+      },
+      "revId": "cf5e8e2346856cca5aadf4833d95dd69a6c1fc2d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa064af5_7593c50b",
+        "filename": "lib/utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 949,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-06T12:07:20Z",
+      "side": 1,
+      "message": "state",
+      "range": {
+        "startLine": 949,
+        "startChar": 32,
+        "endLine": 949,
+        "endChar": 38
+      },
+      "revId": "cf5e8e2346856cca5aadf4833d95dd69a6c1fc2d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95f7d778_26d1e1c8",
+        "filename": "lib/utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 951,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-06T12:07:20Z",
+      "side": 1,
+      "message": "boot_progress_last_state",
+      "range": {
+        "startLine": 951,
+        "startChar": 6,
+        "endLine": 951,
+        "endChar": 29
+      },
+      "revId": "cf5e8e2346856cca5aadf4833d95dd69a6c1fc2d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c1ba2ec_74ffe7f8",
+        "filename": "lib/utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-06T12:07:20Z",
+      "side": 1,
+      "message": "Verify whether BMC has quiesced.\n\nShould Be Equal As Strings  Quiesced  ${bmc_state[\u0027bmc\u0027]}",
+      "range": {
+        "startLine": 985,
+        "startChar": 21,
+        "endLine": 985,
+        "endChar": 54
+      },
+      "revId": "cf5e8e2346856cca5aadf4833d95dd69a6c1fc2d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
