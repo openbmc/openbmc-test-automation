@@ -68,6 +68,23 @@
       "message": "root@witherspoon-Y230UF71K02J:~# busctl get-property xyz.openbmc_project.State.ScheduledHostTransition  /xyz/openbmc_project/scheduled/host0 xyz.openbmc_project.State.ScheduledHostTransition ScheduledTime\nt 0\n\nlatest build has this changes.",
       "revId": "d7321612999595336f7c9734a2116e82cdf27892",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed7721f0_d4bccfdd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-03-06T04:35:07Z",
+      "side": 1,
+      "message": "Testing in progress Driver: 2.14.0-dev-647-g7dd348be1",
+      "revId": "d7321612999595336f7c9734a2116e82cdf27892",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
