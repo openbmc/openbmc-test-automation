@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51f9d9f1_904d5176",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-03-06T11:22:48Z",
+      "side": 1,
+      "message": "It\u0027s hard to give brief in just 50 chars. but will add text in changes.",
+      "parentUuid": "75360bcc_12826a73",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 15
+      },
+      "revId": "b93531ea5198c82cb9b20b4656ea57e244336fb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79f45623_adf224a4",
         "filename": "lib/utils.robot",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-06T11:03:34Z",
       "side": 1,
       "message": "This is same as \"Is Boot Progress At Required State\"",
+      "range": {
+        "startLine": 944,
+        "startChar": 0,
+        "endLine": 944,
+        "endChar": 31
+      },
+      "revId": "b93531ea5198c82cb9b20b4656ea57e244336fb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2ad95c7_d2282d58",
+        "filename": "lib/utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-03-06T11:22:48Z",
+      "side": 1,
+      "message": "Here I need to check boot_progress_laststate. I corrected it.",
+      "parentUuid": "79f45623_adf224a4",
       "range": {
         "startLine": 944,
         "startChar": 0,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56e735c9_4760dfb2",
+        "filename": "lib/utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-03-06T11:22:48Z",
+      "side": 1,
+      "message": "Using same text from other keywords.",
+      "parentUuid": "be561f58_448f4d98",
+      "range": {
+        "startLine": 945,
+        "startChar": 66,
+        "endLine": 945,
+        "endChar": 74
+      },
+      "revId": "b93531ea5198c82cb9b20b4656ea57e244336fb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44631fb9_a165813d",
         "filename": "lib/utils.robot",
         "patchSetId": 3
@@ -83,6 +155,30 @@
       "writtenOn": "2023-03-06T11:03:34Z",
       "side": 1,
       "message": "Its better to check \u0027Is BMC Quiesced\u0027",
+      "range": {
+        "startLine": 983,
+        "startChar": 0,
+        "endLine": 983,
+        "endChar": 32
+      },
+      "revId": "b93531ea5198c82cb9b20b4656ea57e244336fb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "260ad436_a08f08f4",
+        "filename": "lib/utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 983,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-03-06T11:22:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44631fb9_a165813d",
       "range": {
         "startLine": 983,
         "startChar": 0,
