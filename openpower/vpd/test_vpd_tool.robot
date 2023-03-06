@@ -17,16 +17,15 @@ ${SN_WRITE_VALUE}              ABCD12345678
 
 *** Test Cases ***
 
-Verify System VPD
-    [Documentation]  Verify system VPD details via vpdtool '-i' option.
-    [Tags]  Verify_System_VPD
+Verify System VPD Data Via Vpdtool
+    [Documentation]  Verify the system VPD details via vpdtool output.
+    [Tags]  Verify_System_VPD_Data_Via_Vpdtool
+    [Template]  Verify VPD Data Via VPD Tool
 
-    ${vpd_records}=  Vpdtool  -i
-
-    ${components}=  Get Dictionary Keys  ${vpd_records}
-    FOR  ${component}  IN  @{components}
-        Verify VPD Data  ${vpd_records}  ${component}
-    END
+    # Component     Field
+    System          Model
+    System          SerialNumber
+    System          LocationCode
 
 
 Verify VPD Component Read
@@ -179,3 +178,36 @@ Verify VPD Field Value
     ${cmd_output}=  BMC Execute Command  ${cmd}
 
     Valid Value  vpd_records['${component}']['${field}']  ['${cmd_output[0].split('"')[1].strip('"')}']
+
+
+Verify VPD Data Via Vpdtool
+    [Documentation]  Get VPD details of given component via vpdtool and verify it
+    ...              using busctl command.
+    [Arguments]  ${component}  ${field}
+    # Description of arguments:
+    # component       VPD component (e.g. System,Chassis etc).
+    # field           VPD field (e.g. Serialnumber,LocationCode etc).
+
+    ${component_url}=  Run Keyword If
+    ...  '${component}' == 'System'  Set Variable  /system
+
+    # Get VPD details of given component via vpd-tool.
+    ${vpd_records}=  Vpdtool  -o -O ${component_url}
+
+    # Get VPD details of given component via busctl command.
+    ${busctl_field}=  Set Variable If
+    ...  '${field}' == 'LocationCode'  com.ibm.ipzvpd.Location LocationCode
+    ...  '${field}' == 'Model'  xyz.openbmc_project.Inventory.Decorator.Asset Model
+    ...  '${field}' == 'SerialNumber'  xyz.openbmc_project.Inventory.Decorator.Asset SerialNumber
+
+    ${cmd}=  Catenate  ${CMD_GET_PROPERTY_INVENTORY} /xyz/openbmc_project/inventory/system
+    ...  ${busctl_field}
+    ${cmd_output}=  BMC Execute Command  ${cmd}
+    # Example of cmd_output:
+    #   [0]:                                            s "ABCD.XY1.1234567-P0"
+    #   [1]:
+    #   [2]:                                            0
+
+    # Cross check vpdtool output with busctl response.
+    Should Be Equal As Strings  ${vpd_records["/system"]["${field}"]}
+    ...  ${cmd_output[0].split('"')[1].strip('"')}
