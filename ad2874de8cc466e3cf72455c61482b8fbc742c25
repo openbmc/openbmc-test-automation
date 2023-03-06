@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "210f8f4a_6489f377",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-06T11:44:00Z",
+      "side": 1,
+      "message": "Remove",
+      "range": {
+        "startLine": 11,
+        "startChar": 4,
+        "endLine": 11,
+        "endChar": 60
+      },
+      "revId": "ad2874de8cc466e3cf72455c61482b8fbc742c25",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0079dfdc_b9330574",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-06T11:44:00Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 23,
+        "startChar": 34,
+        "endLine": 23,
+        "endChar": 35
+      },
+      "revId": "ad2874de8cc466e3cf72455c61482b8fbc742c25",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "022d2882_98c74b6e",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-06T11:44:00Z",
+      "side": 1,
+      "message": "Modify this one too. If you want to, then do it in next commit.",
+      "range": {
+        "startLine": 189,
+        "startChar": 1,
+        "endLine": 190,
+        "endChar": 59
+      },
+      "revId": "ad2874de8cc466e3cf72455c61482b8fbc742c25",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce4b1309_4e5a77f4",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-06T11:44:00Z",
+      "side": 1,
+      "message": "NTP",
+      "range": {
+        "startLine": 225,
+        "startChar": 51,
+        "endLine": 225,
+        "endChar": 54
+      },
+      "revId": "ad2874de8cc466e3cf72455c61482b8fbc742c25",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5ba1a1d_654188fa",
+        "filename": "gui/gui_test/settings_menu/test_date_and_time_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-06T11:44:00Z",
+      "side": 1,
+      "message": "Description",
+      "range": {
+        "startLine": 282,
+        "startChar": 4,
+        "endLine": 282,
+        "endChar": 17
+      },
+      "revId": "ad2874de8cc466e3cf72455c61482b8fbc742c25",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
