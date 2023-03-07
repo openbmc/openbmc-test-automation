@@ -16,6 +16,190 @@
       "message": "ra",
       "revId": "b0186c228268b77fe8263ff8731af7b20cb9b1b3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea89a74a_9f64deda",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-07T05:19:15Z",
+      "side": 1,
+      "message": "Better to mention in the test case name that we are testing this VPD data via vpdtool.\n```\nVerify System VPD data Via VPD Tool\n    [Documentation]  Verify system VPD details via vpdtool output.\n```",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 74
+      },
+      "revId": "b0186c228268b77fe8263ff8731af7b20cb9b1b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8b4521c_4c7bfe2d",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-07T05:19:15Z",
+      "side": 1,
+      "message": "Keep this keyword as generic to test all other data also.\n\n```\nVerify VPD Data Via VPD Tool\n    [Documentation]  Get VPD details of given component via vpdtool and verify it\n    ...  using busctl command.\n```",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 22
+      },
+      "revId": "b0186c228268b77fe8263ff8731af7b20cb9b1b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffa377e3_77876487",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-07T05:19:15Z",
+      "side": 1,
+      "message": "```\n    # component       VPD component (e.g. System,Chassis etc).\n    # field           VPD field (e.g. SerialNumber, LocationCode etc).\n```",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 67
+      },
+      "revId": "b0186c228268b77fe8263ff8731af7b20cb9b1b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1463999_c7c29764",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-07T05:19:15Z",
+      "side": 1,
+      "message": "```\n    # Get VPD details of given component via vpd-tool.\n```",
+      "range": {
+        "startLine": 190,
+        "startChar": 6,
+        "endLine": 190,
+        "endChar": 46
+      },
+      "revId": "b0186c228268b77fe8263ff8731af7b20cb9b1b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7590890_96fe1705",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-07T05:19:15Z",
+      "side": 1,
+      "message": "Take this component url based on the given component name like\n\n${component_url}\u003d  Set Variable If\n    ...  \u0027${component}\u0027 \u003d\u003d \u0027System\u0027  /system",
+      "range": {
+        "startLine": 191,
+        "startChar": 36,
+        "endLine": 191,
+        "endChar": 43
+      },
+      "revId": "b0186c228268b77fe8263ff8731af7b20cb9b1b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d38d3768_7ceaa9c2",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-07T05:19:15Z",
+      "side": 1,
+      "message": "Make it genric\n```\n    # Get VPD details via busctl command.\n```",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 52
+      },
+      "revId": "b0186c228268b77fe8263ff8731af7b20cb9b1b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72fc1a62_69e0e607",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-07T05:19:15Z",
+      "side": 1,
+      "message": "```\n    # Cross check vpdtool output with busctl response.\n```",
+      "range": {
+        "startLine": 207,
+        "startChar": 6,
+        "endLine": 207,
+        "endChar": 79
+      },
+      "revId": "b0186c228268b77fe8263ff8731af7b20cb9b1b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5995de10_8975a72c",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-07T05:19:15Z",
+      "side": 1,
+      "message": "exceeding 110 limit. Break it into two lines.\n\n```\n    Should Be Equal As Strings  ${vpd_records[\"/system\"][\"${field}\"]}\n    ...  ${cmd_output[0].split(\u0027\"\u0027)[1].strip(\u0027\"\u0027)}\n```",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 112
+      },
+      "revId": "b0186c228268b77fe8263ff8731af7b20cb9b1b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
