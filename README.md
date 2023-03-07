@@ -95,7 +95,7 @@ Installing expect:
 
 These documents contain details on developing OpenBMC test code and debugging.
 
-- [MAINTAINERS](MAINTAINERS): OpenBMC test code maintainers information.
+- [MAINTAINERS](OWNERS): OpenBMC test code maintainers information.
 - [CONTRIBUTING.md](CONTRIBUTING.md): Coding guidelines.
 - [Code Check Tools](https://github.com/openbmc/openbmc-test-automation/blob/master/docs/code_standards_check.md):
   To check common code misspellings, syntax and standard checks.
