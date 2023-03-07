@@ -20,6 +20,20 @@ ${low_severity_errlog_regex}  \\.(Informational|Notice|Debug|OK)$
 
 *** Keywords ***
 
+Filter Expected Logging Events
+    [Documentation]  Get redfish logging entry, remove the user input expected
+    ...              log event and return the object list.
+    [Arguments]  ${expected_event}=None
+
+    # Description of argument(s):
+    # expected_eventd   Event log list.
+
+    ${all_event_list}=  Get Redfish Event Logs
+    Remove Values From List  ${all_event_list}  ${expected_event}
+
+    [Return]  ${all_event_list}
+   
+
 Get Logging Entry List
     [Documentation]  Get logging entry and return the object list.
 
