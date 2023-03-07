@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63476f79_4bd37c71",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-03-07T08:53:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1bcb707_c8751983",
+      "range": {
+        "startLine": 20,
+        "startChar": 27,
+        "endLine": 20,
+        "endChar": 35
+      },
+      "revId": "8f0623304bc5190b53e25a9338542fc4846802e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f75d2dd_74f73f10",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-07T08:36:14Z",
       "side": 1,
       "message": "Verify VPD Data Via Vpdtool",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 28
+      },
+      "revId": "8f0623304bc5190b53e25a9338542fc4846802e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "628f1f09_44feea6d",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-03-07T08:53:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f75d2dd_74f73f10",
       "range": {
         "startLine": 183,
         "startChar": 0,
