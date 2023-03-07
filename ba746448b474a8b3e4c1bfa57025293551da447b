@@ -1,4 +1,22 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9f7a32e_8198ffa4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-03-07T06:28:46Z",
+      "side": 1,
+      "message": "Sample test code\n\nVerify Filter Expected Event Logs\n    [Documentation]  Sample code to filter test event logs.\n\n    ${event_logs}\u003d  Filter Expected Logging Events  xyz.openbmc_project.Logging.SEL.Error.Created\n    Log To console   ${event_logs}\n    Should Not Contain   ${event_logs}      xyz.openbmc_project.Logging.SEL.Error.Created",
+      "revId": "ba746448b474a8b3e4c1bfa57025293551da447b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ],
   "submitRequirementResults": []
 }
