@@ -10,16 +10,22 @@ Suite Teardown  Suite Teardown Execution
 
 *** Variables ***
 
-${xpath_power_heading}                //h1[text()="Power"]
-${xpath_power_ops_checkbox}           //*[@data-test-id='power-checkbox-togglePowerCapField']
-${xpath_cap_input_button}             //*[@data-test-id='power-input-powerCap']
-${xpath_submit_button}                //*[@data-test-id='power-button-savePowerCapValue']
-${xpath_select_static}                //input[@value='Static']
-${xpath_select_powersaving}           //input[@value='PowerSaving']
-${xpath_select_maximum_performance}   //input[@value='MaximumPerformance']
-${xpath_update_power_save_mode}       //button[contains(text(),'Update power saver mode')]
-${xpath_page_loading_progress_bar}    //*[@aria-label='Page loading progress bar']
-
+${xpath_power_heading}                   //h1[text()="Power"]
+${xpath_power_ops_checkbox}              //*[@data-test-id='power-checkbox-togglePowerCapField']
+${xpath_cap_input_button}                //*[@data-test-id='power-input-powerCap']
+${xpath_submit_button}                   //*[@data-test-id='power-button-savePowerCapValue']
+${xpath_select_static}                   //input[@value='Static']
+${xpath_select_powersaving}              //input[@value='PowerSaving']
+${xpath_select_maximum_performance}      //input[@value='MaximumPerformance']
+${xpath_update_power_save_mode}          //button[contains(text(),'Update power saver mode')]
+${xpath_page_loading_progress_bar}       //*[@aria-label='Page loading progress bar']
+${xpath_idle_power_saver_checkbox}       //*[@data-test-id='power-checkbox-toggleIdlePower']
+${xpath_to_enter_delay_time}             //*[@data-test-id='power-input-enterDwellTimeSeconds']
+${xpath_to_enter_utilization_threshold}  //*[@data-test-id='power-input-enterUtilizationPercent']
+${xpath_to_exit_delay_time}              //*[@data-test-id='power-input-exitDwellTimeSeconds']
+${xpath_to_exit_utilization_threshold}   //*[@data-test-id='power-input-exitUtilizationPercent']
+${xpath_update_idle_power_saver}         //button[contains(text(),'Update idle power saver')]
+${xpath_reset_to_default}                //button[contains(text(),'Reset to default')]
 
 *** Test Cases ***
 
@@ -27,6 +33,10 @@ Verify Navigation To Power Page
     [Documentation]  Verify navigation to power page.
     [Tags]  Verify_Navigation_To_Power_Page
 
+    Page Should Contain Element  ${xpath_power_heading}
+    Click Element  ${xpath_overview_menu}
+    Click Element  ${xpath_power_link}
+    Location Should Contain  power
     Page Should Contain Element  ${xpath_power_heading}
 
 
@@ -52,6 +62,13 @@ Verify Existence Of All Buttons In Power Page
     Page Should Contain Element  ${xpath_select_powersaving}
     Page Should Contain Element  ${xpath_select_maximum_performance}
     Page Should Contain Element  ${xpath_update_power_save_mode}
+    Page Should Contain Element  ${xpath_idle_power_saver_checkbox}
+    Page Should Contain Element  ${xpath_to_enter_delay_time}
+    Page Should Contain Element  ${xpath_to_enter_utilization_threshold}
+    Page Should Contain Element  ${xpath_to_exit_delay_time}
+    Page Should Contain Element  ${xpath_to_exit_utilization_threshold}
+    Page Should Contain Element  ${xpath_update_idle_power_saver}
+    Page Should Contain Element  ${xpath_reset_to_default}
 
 
 Verify Server Power Cap Setting Is On
