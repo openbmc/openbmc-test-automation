@@ -101,6 +101,7 @@ class gui_variables:
         "//*[@data-test-id='nav-button-resource-management']"
     )
     xpath_power_sub_menu = "//*[@data-test-id='nav-item-power']"
+    xpath_power_link = "//a[@href='#/resource-management/power']"
     xpath_power_heading = "//h1[contains(text(), 'Power')]"
     xpath_success_message = "//*[contains(text(),'Success')]"
 
