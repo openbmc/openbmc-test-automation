@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4e6ef90_b39976b0",
+        "filename": "lib/utils.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-03-07T07:15:14Z",
+      "side": 1,
+      "message": "Remove this code and use\n\n Is Boot Progress At Required State",
+      "range": {
+        "startLine": 944,
+        "startChar": 0,
+        "endLine": 944,
+        "endChar": 45
+      },
+      "revId": "7a7969be74d133e1c5a4582194efe02235e126cb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
