@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f82ec2a5_8ebc6bf9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-03-07T06:28:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7d5bdda_ea68edc2",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 25
+      },
+      "revId": "b0186c228268b77fe8263ff8731af7b20cb9b1b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6b8a21c9_f6373d6c",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -64,6 +88,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "176cf1c5_3fe7547e",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-03-07T06:28:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea89a74a_9f64deda",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 74
+      },
+      "revId": "b0186c228268b77fe8263ff8731af7b20cb9b1b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8b4521c_4c7bfe2d",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-03-07T05:19:15Z",
       "side": 1,
       "message": "Keep this keyword as generic to test all other data also.\n\n```\nVerify VPD Data Via VPD Tool\n    [Documentation]  Get VPD details of given component via vpdtool and verify it\n    ...  using busctl command.\n```",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 22
+      },
+      "revId": "b0186c228268b77fe8263ff8731af7b20cb9b1b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b79b9e9_4706f3ed",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-03-07T06:28:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8b4521c_4c7bfe2d",
       "range": {
         "startLine": 182,
         "startChar": 0,
@@ -110,6 +182,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "957e7dee_285bbfa7",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-03-07T06:28:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffa377e3_77876487",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 67
+      },
+      "revId": "b0186c228268b77fe8263ff8731af7b20cb9b1b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1463999_c7c29764",
@@ -123,6 +219,30 @@
       "writtenOn": "2023-03-07T05:19:15Z",
       "side": 1,
       "message": "```\n    # Get VPD details of given component via vpd-tool.\n```",
+      "range": {
+        "startLine": 190,
+        "startChar": 6,
+        "endLine": 190,
+        "endChar": 46
+      },
+      "revId": "b0186c228268b77fe8263ff8731af7b20cb9b1b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f582c5ba_2697e50a",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-03-07T06:28:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1463999_c7c29764",
       "range": {
         "startLine": 190,
         "startChar": 6,
@@ -156,6 +276,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2ac7dfa_8b87427c",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-03-07T06:28:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7590890_96fe1705",
+      "range": {
+        "startLine": 191,
+        "startChar": 36,
+        "endLine": 191,
+        "endChar": 43
+      },
+      "revId": "b0186c228268b77fe8263ff8731af7b20cb9b1b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d38d3768_7ceaa9c2",
@@ -169,6 +313,30 @@
       "writtenOn": "2023-03-07T05:19:15Z",
       "side": 1,
       "message": "Make it genric\n```\n    # Get VPD details via busctl command.\n```",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 52
+      },
+      "revId": "b0186c228268b77fe8263ff8731af7b20cb9b1b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b788f8d1_8b75360e",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-03-07T06:28:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d38d3768_7ceaa9c2",
       "range": {
         "startLine": 193,
         "startChar": 0,
@@ -202,6 +370,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03d01a06_603b839f",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-03-07T06:28:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72fc1a62_69e0e607",
+      "range": {
+        "startLine": 207,
+        "startChar": 6,
+        "endLine": 207,
+        "endChar": 79
+      },
+      "revId": "b0186c228268b77fe8263ff8731af7b20cb9b1b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5995de10_8975a72c",
@@ -215,6 +407,30 @@
       "writtenOn": "2023-03-07T05:19:15Z",
       "side": 1,
       "message": "exceeding 110 limit. Break it into two lines.\n\n```\n    Should Be Equal As Strings  ${vpd_records[\"/system\"][\"${field}\"]}\n    ...  ${cmd_output[0].split(\u0027\"\u0027)[1].strip(\u0027\"\u0027)}\n```",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 112
+      },
+      "revId": "b0186c228268b77fe8263ff8731af7b20cb9b1b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d78c5ce_2cdf7702",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-03-07T06:28:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5995de10_8975a72c",
       "range": {
         "startLine": 208,
         "startChar": 0,
