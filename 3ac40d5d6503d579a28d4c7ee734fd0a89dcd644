@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "619fd2d0_1e3b9f4e",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-07T07:35:31Z",
+      "side": 1,
+      "message": "Revisit this keyword.",
+      "range": {
+        "startLine": 427,
+        "startChar": 48,
+        "endLine": 427,
+        "endChar": 69
+      },
+      "revId": "3ac40d5d6503d579a28d4c7ee734fd0a89dcd644",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65ed1fd6_56a34f68",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-07T07:35:31Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 429,
+        "startChar": 4,
+        "endLine": 429,
+        "endChar": 18
+      },
+      "revId": "3ac40d5d6503d579a28d4c7ee734fd0a89dcd644",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
