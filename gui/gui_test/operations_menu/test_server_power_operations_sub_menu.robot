@@ -143,7 +143,7 @@ Verify Host Orderly Reboot
     Click Element  ${xpath_reboot_button}
     Wait Until Page Contains Element  ${xpath_confirm_button}  timeout=10
     Click Element  ${xpath_confirm_button}
-    Wait Until Keyword Succeeds  3 min  2 sec  Element Should Contain  ${xpath_current_power_state}  Off
+    Wait Until Keyword Succeeds  2 min  1 sec  Is Server Status Off
     Click Element  ${xpath_refresh_button}
     Wait Until Keyword Succeeds  10 min  15 sec  Element Should Contain  ${xpath_current_power_state}  On
 
@@ -157,3 +157,7 @@ Navigate to Server Power Operation Page
     Click Element  ${xpath_server_power_operations_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  server-power-operations
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+
+Is Server Status Off
+    Refresh GUI
+    Element Should Contain  ${xpath_current_power_state}  Off
