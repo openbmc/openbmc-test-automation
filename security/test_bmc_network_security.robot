@@ -178,6 +178,24 @@ Send Continuous TCP Connection Requests To IPMI Interface And Check Stability
     Should Be Equal As Numbers  ${connection_loss}  0.0
     ...  msg=FAILURE: BMC is dropping connections
 
+
+Send Continuous TCP Connection Requests To SSH Interface And Check Stability
+    [Documentation]  Establish large number of TCP connections to SSH interface
+    ...  and check stability.
+    [Tags]  Send_Continuous_TCP_Connection_Requests_To_SSH_Interface_And_Check_Stability
+
+    # Establish large number of TCP connections to SSH interface.
+    ${connection_loss}=  Establish TCP Connections And Get Connection Failures
+    ...  ${OPENBMC_HOST}  ${iterations}  ${TCP_CONNECTION}  ${SSH_PORT}
+
+    # Check if SSH interface is functional.
+    Verify Interface Stability  ${SSH_PORT}
+
+    # Check if TCP/Network connections dropped.
+    Should Be Equal As Numbers  ${connection_loss}  0.0
+    ...  msg=FAILURE: BMC is dropping connections
+
+
 *** Keywords ***
 
 Suite Setup Execution
