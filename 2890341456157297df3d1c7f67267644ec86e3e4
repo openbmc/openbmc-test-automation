@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7083eee_a5a76e8f",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-08T07:49:35Z",
+      "side": 1,
+      "message": "```\nIF  ${persistency_check} \u003d\u003d ${True}\n    Reboot BMC via GUI\n    Navigate To SNMP Alerts Page\nEND\n```",
+      "range": {
+        "startLine": 426,
+        "startChar": 4,
+        "endLine": 427,
+        "endChar": 76
+      },
+      "revId": "2890341456157297df3d1c7f67267644ec86e3e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
