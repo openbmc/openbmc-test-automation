@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c38aaacf_c551e9e8",
+        "filename": "gui/gui_test/operations_menu/test_server_power_operations_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-03-08T13:25:20Z",
+      "side": 1,
+      "message": "Add documentation",
+      "revId": "4392a9189cb3af82935783b5788be65ba3ae7b15",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
