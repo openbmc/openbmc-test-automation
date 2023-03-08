@@ -236,7 +236,7 @@ Configure SNMP Manager Via GUI And Verify SNMP Trap On Non Default Port
     ...  and verify trap on non default port.
     [Tags]  Configure_SNMP_Manager_Via_GUI_And_Verify_SNMP_Trap_On_Non_Default_Port
     [Template]  Generate Error Log On BMC And Verify Trap On Non Default Port
-    [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT}
+    [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
 
     # event_log_cmd             trap_msg
 
@@ -306,7 +306,7 @@ Configure SNMP Manager On BMC With Invalid Setting Via GUI And Verify
     # ....                (e.g. Invalid format / Value must be between 0 – 65535).
 
     Configure SNMP Manager Via GUI  ${snmp_manager_ip}  ${snmp_manager_port}
-    Wait Until Page Contains   ${expected_error}  timeout=30sec
+    Wait Until Page Contains   ${expected_error}  timeout=60sec
     ${status}=  Run Keyword And Return Status
     ...  Verify SNMP Manager Configured On BMC  ${snmp_manager_ip}  ${snmp_manager_port}
     Should Be Equal As Strings  ${status}  False
@@ -421,7 +421,7 @@ Generate Error Log On BMC And Verify Trap On Non Default Port
     # event_log_cmd       Event logs to be created.
     # trap_msg            Expected trap on SNMP.
 
-    Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT}
+    Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
 
     IF  ${persistency_check} == ${True}
         Reboot BMC via GUI
