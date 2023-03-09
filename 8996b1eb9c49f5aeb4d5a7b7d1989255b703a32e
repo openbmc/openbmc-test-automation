@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d69dde1_ef2741b1",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-03-09T07:08:34Z",
+      "side": 1,
+      "message": "Actually initially I have used variable name as NON_DEFAULT PORT, now am using it as NON_DEFAULT_PORT_1 which has already been called in lib files",
+      "parentUuid": "0f045895_bf3c03be",
+      "range": {
+        "startLine": 239,
+        "startChar": 68,
+        "endLine": 239,
+        "endChar": 85
+      },
+      "revId": "8996b1eb9c49f5aeb4d5a7b7d1989255b703a32e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04f30469_550002bf",
         "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-09T06:36:50Z",
       "side": 1,
       "message": "Better to keep it 1 min or 60 seconds here.",
+      "range": {
+        "startLine": 309,
+        "startChar": 58,
+        "endLine": 309,
+        "endChar": 60
+      },
+      "revId": "8996b1eb9c49f5aeb4d5a7b7d1989255b703a32e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecc33a3e_abdbc511",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-03-09T07:08:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04f30469_550002bf",
       "range": {
         "startLine": 309,
         "startChar": 58,
