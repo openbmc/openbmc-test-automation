@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "495dc811_c9e8766f",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-09T17:30:37Z",
+      "side": 1,
+      "message": "I did not get you. But I see that there is no NON_DEFAULT_PORT defined anywhere in our automation and that seems to be the reason its not working. So changing to NON_DEFAULT_PORT1 which already defined in lib/snmp/resource.robot as 186 make sense.\n\nIf I am correct then please add such explanations in commit message going forward. as of now I am fine.",
+      "parentUuid": "6d69dde1_ef2741b1",
+      "range": {
+        "startLine": 239,
+        "startChar": 68,
+        "endLine": 239,
+        "endChar": 85
+      },
+      "revId": "8996b1eb9c49f5aeb4d5a7b7d1989255b703a32e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04f30469_550002bf",
         "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
         "patchSetId": 1
