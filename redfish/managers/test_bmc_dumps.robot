@@ -130,6 +130,7 @@ Verify User Initiated BMC Dump At Host Booting
     ...  or when host booting is in progress.
     [Tags]  Verify_User_Initiated_BMC_Dump_At_Host_Booting
 
+    Redfish Power Off  stack_mode=skip
     Redfish Delete All BMC Dumps
 
     # Initiate power on.
