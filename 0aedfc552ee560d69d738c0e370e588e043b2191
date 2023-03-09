@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f0dbb37_8dea9cc7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-09T12:17:14Z",
+      "side": 1,
+      "message": "CT Fix : Fixed Verify_User_Initiated_BMC_Dump_At_Host_Booting",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 44
+      },
+      "revId": "0aedfc552ee560d69d738c0e370e588e043b2191",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60c61599_3629801f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-09T12:17:14Z",
+      "side": 1,
+      "message": "Please also try to provide details about why we are making the change for such type of commit here.",
+      "range": {
+        "startLine": 10,
+        "startChar": 10,
+        "endLine": 10,
+        "endChar": 94
+      },
+      "revId": "0aedfc552ee560d69d738c0e370e588e043b2191",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fa1d85a_090c82c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-09T12:17:14Z",
+      "side": 1,
+      "message": "I am fine with the change but I have some comment on the commit message format.",
+      "revId": "0aedfc552ee560d69d738c0e370e588e043b2191",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
