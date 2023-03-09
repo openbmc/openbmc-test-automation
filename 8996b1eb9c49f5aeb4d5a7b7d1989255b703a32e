@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f045895_bf3c03be",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-09T06:36:50Z",
+      "side": 1,
+      "message": "What is the purpose of having both NON_DEFAULT_PORT and NON_DEFAULT_PORT1 in this suite? I\u0027m having trouble understanding the rationale behind this modification.",
+      "range": {
+        "startLine": 239,
+        "startChar": 68,
+        "endLine": 239,
+        "endChar": 85
+      },
+      "revId": "8996b1eb9c49f5aeb4d5a7b7d1989255b703a32e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04f30469_550002bf",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-09T06:36:50Z",
+      "side": 1,
+      "message": "Better to keep it 1 min or 60 seconds here.",
+      "range": {
+        "startLine": 309,
+        "startChar": 58,
+        "endLine": 309,
+        "endChar": 60
+      },
+      "revId": "8996b1eb9c49f5aeb4d5a7b7d1989255b703a32e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
