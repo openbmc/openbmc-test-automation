@@ -22,7 +22,8 @@ ${ethernet_interface}     eth1
 *** Test Cases ***
 
 Disable DHCP On Eth1 And Verify System Is Accessible By Eth0
-    [Documentation]  Disable DHCP on eth1 using Redfish and verify if system is accessible by eth0.
+    [Documentation]  Disable DHCP on eth1 using Redfish and verify
+    ...              if system is accessible by eth0.
     [Tags]  Disable_DHCP_On_Eth1_And_Verify_System_Is_Accessible_By_Eth0
     [Teardown]  Set DHCPEnabled To Enable Or Disable  True  eth1
 
@@ -30,7 +31,8 @@ Disable DHCP On Eth1 And Verify System Is Accessible By Eth0
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
 Enable DHCP On Eth1 And Verify System Is Accessible By Eth0
-    [Documentation]  Enable DHCP on eth1 using Redfish and verify if system is accessible by eth0.
+    [Documentation]  Enable DHCP on eth1 using Redfish and verify if system
+    ...              is accessible by eth0.
     [Tags]  Enable_DHCP_On_Eth1_And_Verify_System_Is_Accessible_By_Eth0
     [Setup]  Set DHCPEnabled To Enable Or Disable  False  eth1
 
@@ -41,12 +43,14 @@ Enable DHCP On Eth1 And Verify System Is Accessible By Eth0
 
 Set DHCPEnabled To Enable Or Disable
     [Documentation]  Enable or Disable DHCP on the interface.
-    [Arguments]  ${dhcp_enabled}=${False}  ${interface}=${ethernet_interface}  ${valid_status_code}=[${HTTP_OK},${HTTP_ACCEPTED}]
+    [Arguments]  ${dhcp_enabled}=${False}  ${interface}=${ethernet_interface}
+    ...          ${valid_status_code}=[${HTTP_OK},${HTTP_ACCEPTED}]
 
     # Description of argument(s):
     # dhcp_enabled        False for disabling DHCP and True for Enabling DHCP.
     # interface           eth0 or eth1. Default is eth1.
-    # valid_status_code   Expected valid status code from Patch request. Default is HTTP_OK.
+    # valid_status_code   Expected valid status code from Patch request.
+    #                     Default is HTTP_OK.
 
     ${data}=  Set Variable If  ${dhcp_enabled} == ${False}  ${DISABLE_DHCP}  ${ENABLE_DHCP}
     ${resp}=  Redfish.Patch

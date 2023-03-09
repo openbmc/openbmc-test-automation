@@ -303,5 +303,3 @@ Switch From Manual To NTP
        Wait Until Element Is Not Visible   ${xpath_success_message}  timeout=60
        Log  "Completed Loop for ${x} time"
     END
-
-
