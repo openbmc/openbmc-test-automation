@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39eda0d8_ddc087ba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2023-03-09T05:08:56Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "2653c378_ac7fc2a3",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 93
+      },
+      "revId": "6f70bca64a97f91173979f430a501941df909d4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "964bf401_7b12891f",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fc1db00_e68a4a87",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2023-03-09T05:08:56Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "964bf401_7b12891f",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 28,
+        "endChar": 16
+      },
+      "revId": "6f70bca64a97f91173979f430a501941df909d4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e3c1c75_ce89285a",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-03-09T04:57:23Z",
       "side": 1,
       "message": "xpath_critical_logs_count",
+      "range": {
+        "startLine": 29,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 15
+      },
+      "revId": "6f70bca64a97f91173979f430a501941df909d4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1836986c_1b7a6b35",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2023-03-09T05:08:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e3c1c75_ce89285a",
       "range": {
         "startLine": 29,
         "startChar": 2,
