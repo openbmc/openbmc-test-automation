@@ -321,12 +321,12 @@ Expire And Update New Password Via Redfish
 
 Verify User Password Expired Using Redfish
     [Documentation]  Checking whether user password expired or not using redfish.
+    [Arguments]  ${username}  ${password}  ${expected_result}=${True}
 
     # Description of argument(s):
     # username        The username to be used to login to the BMC.
     # password        The password to be used to login to the BMC.
 
-    [Arguments]  ${username}  ${password}  ${expected_result}=${True}
     Redfish.Login  ${username}  ${password}
     ${resp}=  Redfish.Get  /redfish/v1/AccountService/Accounts/${username}
     Should Be Equal  ${resp.dict["PasswordChangeRequired"]}  ${expected_result}
