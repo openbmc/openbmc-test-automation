@@ -31,6 +31,7 @@ ${xpath_event_action_download}    //button[text()[normalize-space()='Download']]
 ${xpath_success_message}          //*[contains(text(),"Success")]
 ${xpath_resolved_button}          //button[contains(text(),"Resolve")]
 ${xpath_unresolved_button}        //button[contains(text(),"Unresolve")]
+${xpath_filter_clearall_button}   //button[contains(text(),"Clear all")]
 
 *** Test Cases ***
 
@@ -44,7 +45,7 @@ Verify Navigation To Event Logs Page
 Verify Existence Of All Buttons In Event Logs Page
     [Documentation]  Verify existence of all buttons in Event Logs page.
     [Tags]  Verify_Existence_Of_All_Buttons_In_Event_Logs_Page
-    [Teardown]  Click Element  ${xpath_filter_event}
+    [Teardown]  Click Button  ${xpath_filter_clearall_button}
 
     # Types of event severity: OK, Warning, Critical.
     Click Element  ${xpath_filter_event}
@@ -55,6 +56,7 @@ Verify Existence Of All Buttons In Event Logs Page
     # Types of event status: Resolved, Unresolved.
     Page Should Contain Element  ${xpath_event_status_resolved}  limit=1
     Page Should Contain Element  ${xpath_event_status_unresolved}  limit=1
+
 
 Verify Existence Of All Input Boxes In Event Logs Page
     [Documentation]  Verify existence of all input boxes in Event Logs page.
