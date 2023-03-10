@@ -15,7 +15,7 @@ Test Teardown       FFDC On Test Case Fail
 *** Variables ***
 
 # Error strings to check from journald.
-${ERROR_REGEX}     SEGV|core-dump|FAILURE|Failed to start
+${ERROR_REGEX}     SEGV|core-dump|FAILURE|Failed to start|Found ordering cycle
 ${STANDBY_REGEX}   Startup finished in
 
 ${SKIP_ERROR}      ${EMPTY}

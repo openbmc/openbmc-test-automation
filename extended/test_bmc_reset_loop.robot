@@ -19,7 +19,7 @@ ${LOOP_COUNT}          ${50}
 ${CHECK_FOR_ERRORS}    ${1}
 
 # Error strings to check from journald.
-${ERROR_REGEX}     SEGV|core-dump|FAILURE|Failed to start
+${ERROR_REGEX}     SEGV|core-dump|FAILURE|Failed to start|Found ordering cycle
 
 *** Test Cases ***
 
