@@ -196,7 +196,6 @@ Configure Hostname Via GUI And Verify
     ${bmc_hostname}=  Get BMC Hostname
     Should Be Equal As Strings  ${bmc_hostname}  ${test_hostname}
 
-    Launch Browser And Login GUI
 
 *** Keywords ***
 
