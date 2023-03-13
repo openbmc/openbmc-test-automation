@@ -5,7 +5,7 @@ Documentation  Test OpenBMC GUI "User management" sub-menu of "Security and acce
 Resource        ../../lib/gui_resource.robot
 
 Suite Setup     Launch Browser And Login GUI
-Suite Teardown  Close Browser
+Suite Teardown  Suite Teardown Execution
 Test Setup      Test Setup Execution
 
 
@@ -32,6 +32,7 @@ ${xpath_auto_unlock}                     //*[@data-test-id='userManagement-radio
 ${xpath_manual_unlock}                   //*[@data-test-id='userManagement-radio-manualUnlock']
 ${xpath_max_failed_login}                //*[@data-test-id='userManagement-input-lockoutThreshold']
 ${test_user_password}                    TestPwd1
+@{username}                              admin_user  readonly_user  disabled_user
 
 
 *** Test Cases ***
@@ -101,12 +102,13 @@ Verify Existence Of All Buttons And Fields In Account Policy Settings
 Verify User Access Privilege
     [Documentation]  Create a new user with a privilege and verify that user is created.
     [Tags]  Verify_User_Access_Privilege
+    [Teardown]  Delete Users Via Redfish  @{username}
     [Template]  Create User And Verify
 
-    # username      privilege_level  enabled
-    admin_user      Administrator    ${True}
-    readonly_user   ReadOnly         ${True}
-    disabled_user   Administrator    ${False}
+    # username       privilege_level  enabled
+    ${username}[0]   Administrator    ${True}
+    ${username}[1]   ReadOnly         ${True}
+    ${username}[2]   Administrator    ${False}
 
 
 Verify Operator And No Access User Privilege
@@ -122,6 +124,7 @@ Verify Operator And No Access User Privilege
 
 Verify User Account And Properties Saved Through Reboots
     [Documentation]  Verify that user account and properties saved through reboots.
+    [Teardown]  Delete Users Via Redfish  my_admin_user
     [Tags]  Verify_User_Account_And_Properties_Saved_Through_Reboots
 
     # Create an User account.
@@ -139,8 +142,6 @@ Verify User Account And Properties Saved Through Reboots
 Create User And Verify
     [Documentation]  Create a user with given user name and privilege and verify that the
     ...  user is created successfully via GUI and Redfish.
-    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login  AND
-    ...  Redfish.Delete  /redfish/v1/AccountService/Accounts/${user_name}
     [Arguments]  ${user_name}  ${user_privilege}  ${enabled}
 
     # Description of argument(s):
@@ -169,19 +170,22 @@ Create User And Verify
     # Refresh page and check new user is available.
     Wait Until Page Contains Element  ${xpath_add_user}
     Click Element  ${xpath_refresh_button}
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
     Wait Until Page Contains  ${user_name}  timeout=15
 
     # Cross check the privilege of newly added user via Redfish.
+    Redfish.Login
     ${user_priv_redfish}=  Redfish_Utils.Get Attribute
     ...  /redfish/v1/AccountService/Accounts/${user_name}  RoleId
     Should Be Equal  ${user_privilege}  ${user_priv_redfish}
+    Redfish.Logout
 
     # Check enable/disable status for user.
-    Redfish.Logout
     ${status}=  Run Keyword And Return Status  Redfish.Login  ${user_name}  ${test_user_password}
     Run Keyword If  ${enabled} == ${False}
     ...  Should Be Equal  ${status}  ${False}
     ...  ELSE  Should Be Equal  ${status}  ${True}
+    Redfish.Logout
 
 
 Test Setup Execution
@@ -193,3 +197,24 @@ Test Setup Execution
     Click Element  ${xpath_user_management_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  user-management
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+
+
+Delete Users Via Redfish
+    [Documentation]  Delete given users using Redfish.
+    [Arguments]  @{user_list}
+    # Description of argument(s):
+    # user_list          List of user name to be deleted.
+
+    FOR  ${user}  IN  @{user_list}
+      Redfish.Login
+      Redfish.Delete  /redfish/v1/AccountService/Accounts/${user}
+      Redfish.Logout
+    END
+
+
+Suite Teardown Execution
+    [Documentation]  Do suite teardown tasks.
+
+    Logout GUI
+    Close Browser
+    Redfish.Logout
