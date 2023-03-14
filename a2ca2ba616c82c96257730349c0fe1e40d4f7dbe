@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca811d9b_c3e4de2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-14T04:52:05Z",
+      "side": 1,
+      "message": "Comments there",
+      "revId": "a2ca2ba616c82c96257730349c0fe1e40d4f7dbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71a8cc31_dbde06f5",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-14T04:52:05Z",
+      "side": 1,
+      "message": "[Teardown]  Delete Users Via Redfish  my_admin_user",
+      "range": {
+        "startLine": 127,
+        "startChar": 16,
+        "endLine": 127,
+        "endChar": 39
+      },
+      "revId": "a2ca2ba616c82c96257730349c0fe1e40d4f7dbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "becb3546_f6c1afc0",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-14T04:52:05Z",
+      "side": 1,
+      "message": "Not required because we have remove the teardown.",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 152,
+        "endChar": 35
+      },
+      "revId": "a2ca2ba616c82c96257730349c0fe1e40d4f7dbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e7354d2_dd9c47ad",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-14T04:52:05Z",
+      "side": 1,
+      "message": "Add redfish logout at the end",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 50
+      },
+      "revId": "a2ca2ba616c82c96257730349c0fe1e40d4f7dbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "639425c7_6b04a02f",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-14T04:52:05Z",
+      "side": 1,
+      "message": "Delete Users Via Redfish\n    [Documentation]  Delete given users using Redfish.",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 203,
+        "endChar": 46
+      },
+      "revId": "a2ca2ba616c82c96257730349c0fe1e40d4f7dbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4699fa62_73d3358d",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-14T04:52:05Z",
+      "side": 1,
+      "message": "FOR  ${user}  IN  @{user_list}\n      Redfish.Login\n      Redfish.Delete  /redfish/v1/AccountService/Accounts/${user}\n      Redfish.Logout\n    END",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 211,
+        "endChar": 7
+      },
+      "revId": "a2ca2ba616c82c96257730349c0fe1e40d4f7dbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79b74608_989d08d6",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-14T04:52:05Z",
+      "side": 1,
+      "message": "Move Redfish.Logout to Suite teardown",
+      "range": {
+        "startLine": 218,
+        "startChar": 4,
+        "endLine": 218,
+        "endChar": 18
+      },
+      "revId": "a2ca2ba616c82c96257730349c0fe1e40d4f7dbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad3ec402_1a7cd015",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-14T04:52:05Z",
+      "side": 1,
+      "message": "keyword should be created when it going to be used by many test cases. lets not create it.",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 18
+      },
+      "revId": "a2ca2ba616c82c96257730349c0fe1e40d4f7dbe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
