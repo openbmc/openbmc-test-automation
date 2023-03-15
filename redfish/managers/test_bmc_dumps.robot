@@ -324,9 +324,47 @@ Verify BMC Dump Create Errors While Another BMC Dump In Progress
     WHILE  True  limit=1000
         ${task_dict}=  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
         IF  '${task_dict['TaskState']}' == 'Completed'  BREAK
-        Redfish.Post
+        ${resp}=  Redfish.Post
         ...  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
-        ...  body=${payload}  valid_status_codes=[${HTTP_SERVICE_UNAVAILABLE}]
+        ...  body=${payload}  valid_status_codes=[${HTTP_SERVICE_UNAVAILABLE}, ${HTTP_ACCEPTED}]
+
+        # Sample response of above POST request:
+        # 503
+        # Strict-Transport-Security max-age=31536000; includeSubdomains; preload
+        # X-Frame-Options DENY
+        # Pragma no-cache
+        # Cache-Control no-Store,no-Cache
+        # X-XSS-Protection 1; mode=block
+        # X-Content-Type-Options nosniff
+        # Content-Security-Policy default-src 'none'; img-src 'self' data:; font-src 'self'; style-src
+        # 'self'; script-src 'self'; connect-src 'self' wss:; form-action 'none'; frame-ancestors 'none';
+        # object-src 'none'; base-uri 'none'
+        # Content-Type application/json
+        # Date Thu, 16 Mar 2023 06:41:06 GMT
+        # Content-Length 573
+        # {
+        # "error": {
+        # "@Message.ExtendedInfo": [
+        # {
+        # "@odata.type": "#Message.v1_1_1.Message",
+        # "Message": "The request could not be performed because the resource is in standby.",
+        # "MessageArgs": [],
+        # "MessageId": "Base.1.8.1.ResourceInStandby",
+        # "MessageSeverity": "Critical",
+        # "Resolution": "Ensure that the resource is in the correct power state and resubmit the request."
+        # }
+        # ],
+        # "code": "Base.1.8.1.ResourceInStandby",
+        # "message": "The request could not be performed because the resource is in standby."
+        # }
+        # }
+
+        # At this point RC from response should be HTTP_SERVICE_UNAVAILABLE. However, if response contains the RC
+        # HTTP_ACCEPTED, it means earlier dump initiation is completed. We are verify this with below check.
+        ${resp}=  Convert To String  ${resp}
+        ${contains}=  Run Keyword And Return Status  Should Contain  ${resp.split()[0]}  ${HTTP_ACCEPTED}
+        ${task_dict}=  Run Keyword If  ${contains}  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
+        Run Keyword If  ${contains}  Should Be True  '${task_dict['TaskState']}' == 'Completed'
     END
 
     # The next BMC dump initiation request should be accepted as earlier dump is completed.
