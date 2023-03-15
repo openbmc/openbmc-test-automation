@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43b39f92_321f2d50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-15T09:55:53Z",
+      "side": 1,
+      "message": "Minor commit. Also please modify the commit message",
+      "revId": "97b191e4a3f1d153c17f992c7be614c22bce0c22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cecce8e4_74a5d639",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-15T09:55:53Z",
+      "side": 1,
+      "message": "Add intention for below for loop.\n```\n    FOR  ${user}  IN  @{user_list}\n      Redfish.Login\n      Redfish.Delete  /redfish/v1/AccountService/Accounts/${user}\n      Redfish.Logout\n    END\n```",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 7
+      },
+      "revId": "97b191e4a3f1d153c17f992c7be614c22bce0c22",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
