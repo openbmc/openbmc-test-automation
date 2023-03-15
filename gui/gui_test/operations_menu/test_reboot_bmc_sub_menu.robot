@@ -57,11 +57,12 @@ Verify BMC Reboot Operation
     Click Element  ${xpath_confirm_button}
 
     # Checks BMC gets into Unpingable state and later becomes Pingable.
+    Wait Until Keyword Succeeds  30 sec  10 sec  Click Button  ${xpath_confirm_button}
+
     Wait Until Keyword Succeeds  1 min  5 sec  Is BMC Unpingable
     Wait For Host To Ping  ${OPENBMC_HOST}  1 min
 
-    # Checks BMC gets into ready state.
-    Wait Until Keyword Succeeds  5 min  10 sec  Is BMC Ready
+    Wait Until Keyword Succeeds  5 min  10 sec  Is Host At State  Enabled
 
     Click Element  ${xpath_refresh_button}
     Wait Until Element Is Visible  ${xpath_reboot_bmc_button}  timeout=10
