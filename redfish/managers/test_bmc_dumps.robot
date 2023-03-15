@@ -324,9 +324,14 @@ Verify BMC Dump Create Errors While Another BMC Dump In Progress
     WHILE  True  limit=1000
         ${task_dict}=  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
         IF  '${task_dict['TaskState']}' == 'Completed'  BREAK
-        Redfish.Post
+        ${resp}=  Redfish.Post
         ...  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
-        ...  body=${payload}  valid_status_codes=[${HTTP_SERVICE_UNAVAILABLE}]
+        ...  body=${payload}  valid_status_codes=[${HTTP_SERVICE_UNAVAILABLE}, ${HTTP_ACCEPTED}]
+        ${respStr}=  Convert To String  ${resp}
+        ${respStr}=  Get Substring  ${respStr}  0  3
+        ${contains}=  Run Keyword And Return Status  Should Contain  ${respStr}  ${HTTP_ACCEPTED}
+        ${task_dict}=  Run Keyword If  ${contains}  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
+        Run Keyword If  ${contains}  Should Be True  '${task_dict['TaskState']}' == 'Completed'
     END
 
     # The next BMC dump initiation request should be accepted as earlier dump is completed.
