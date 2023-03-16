@@ -31,6 +31,18 @@ Verify Navigation To Date And Time Page
     Page Should Contain Element  ${xpath_date_time_heading}
 
 
+Verify Text Under Date And Time Page
+    [Documentation] Verify the presence of the required text on the date and time page.
+    [Tags]  Verify_Text_Under_Date_And_Time_Page
+
+
+    Page Should Contain  To change how date and time are displayed
+    ...  (either UTC or browser offset) throughout the application, visit Profile Settings
+
+    Page Should Contain  If NTP is selected but an NTP server is not given or the
+    ...  given NTP server is not reachable, then time.google.com will be used.
+
+
 Verify Existence Of All Sections In Date And Time Page
     [Documentation]  Verify existence of all sections in date and time page.
     [Tags]  Verify_Existence_Of_All_Sections_In_Date_And_Time_Page
