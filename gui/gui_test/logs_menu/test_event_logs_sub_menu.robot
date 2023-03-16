@@ -98,6 +98,7 @@ Select All Error Logs And Verify Buttons
     Page Should Contain Element  ${xpath_event_action_delete}
     Page Should Contain Element  ${xpath_event_action_cancel}
 
+
 Select And Verify Default UTC Timezone For Events
     [Documentation]  Select and verify that default UTC timezone is displayed for an event.
     [Tags]  Select_And_Verify_Default_UTC_Timezone_For_Events
@@ -145,6 +146,14 @@ Verify Existence Of All Fields In Event Logs Page
     Date
     Description
     Status
+
+
+Verify Invalid Content Search Logs
+    [Documentation]  Input invalid PEL ID in the search log  and verify error message.
+    [Tags]  Verify_Invalid_Content_Search_Logs
+
+    Input Text  ${xpath_event_search}  AG806993
+    Page Should Contain  No items match the search query
 
 
 *** Keywords ***
