@@ -183,7 +183,6 @@ Configure SNMP Manager Via GUI And Verify SNMP Trap
     ...  and generate error on BMC and verify trap and its fields.
     [Tags]  Configure_SNMP_Manager_Via_GUI_And_Verify_SNMP_Trap
     [Template]  Create Error On BMC And Verify Trap On Default Port
-    [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
 
     # event_log                 expected_error
 
@@ -217,7 +216,6 @@ Verify Persistency Of SNMP Manager And Trap On BMC Reboot
     ...  after a BMC system reboot. Also, confirm that a trap is successfully sent.
     [Tags]  Verify_Persistency_Of_SNMP_Manager_And_Trap_On_BMC_Reboot
     [Template]  Create Error On BMC And Verify Trap On Default Port
-    [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
 
     # event_log                 expected_error                           persistency_check
 
@@ -236,7 +234,6 @@ Configure SNMP Manager Via GUI And Verify SNMP Trap On Non Default Port
     ...  and verify trap on non default port.
     [Tags]  Configure_SNMP_Manager_Via_GUI_And_Verify_SNMP_Trap_On_Non_Default_Port
     [Template]  Generate Error Log On BMC And Verify Trap On Non Default Port
-    [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
 
     # event_log_cmd             trap_msg
 
@@ -330,6 +327,7 @@ Create Error On BMC And Verify Trap On Default Port
     [Documentation]  Generate error on BMC and verify if trap is sent to default port.
     [Arguments]  ${event_log}=${CMD_INTERNAL_FAILURE}  ${expected_error}=${SNMP_TRAP_BMC_INTERNAL_FAILURE}
     ...  ${persistency_check}=${False}
+    [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
 
     # Description of argument(s):
     # event_log          Event logs to be created.
@@ -416,6 +414,7 @@ Generate Error Log On BMC And Verify Trap On Non Default Port
     [Documentation]  Generate error log on BMC and verify if trap is sent to non default port.
     [Arguments]  ${event_log_cmd}  ${trap_msg}
     ...  ${persistency_check}=${False}
+    [Teardown]  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
 
     # Description of argument(s):
     # event_log_cmd       Event logs to be created.
