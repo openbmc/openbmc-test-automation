@@ -231,6 +231,18 @@ Verify Moving From Manual To NTP
     ${LOOP_COUNT}
 
 
+Verify Text Under Date And Time Page
+    [Documentation]  Verify the required text is there under date and time page.
+    [Tags]  Verify_Text_Under_Date_And_Time_Page
+
+
+    Page Should Contain  To change how date and time are displayed
+    ...  (either UTC or browser offset) throughout the application, visit Profile Settings
+
+    Page Should Contain  If NTP is selected but an NTP server is not given or the
+    ...  given NTP server is not reachable, then time.google.com will be used.
+
+
 *** Keywords ***
 
 Suite Setup Execution
