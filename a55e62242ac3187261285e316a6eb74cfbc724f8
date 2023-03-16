@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e813a9a_29bfcf53",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-16T04:59:34Z",
+      "side": 1,
+      "message": "I think the issue with this test case is that we are sending BMC dump requests too frequently, which may cause some requests to be rejected while others are still being processed. To resolve this issue, we can introduce a 5-second delay between BMC dump requests, which should ensure that all requests are completed successfully.\n\nIf you dont want to keep the sleep here then please add comments explaining the logic you used to fix the issue, as well as an example of the resp output?  I am unable to make out why we are converting to string thing here.",
+      "range": {
+        "startLine": 327,
+        "startChar": 0,
+        "endLine": 334,
+        "endChar": 95
+      },
+      "revId": "a55e62242ac3187261285e316a6eb74cfbc724f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
