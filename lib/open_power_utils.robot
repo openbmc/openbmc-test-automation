@@ -10,6 +10,7 @@ Library        utilities.py
 ${functional_cpu_count}       ${0}
 ${active_occ_count}           ${0}
 ${OCC_WAIT_TIMEOUT}           4 min
+${fan_json_msg}               Unable to create dump on non-JSON config based system
 
 *** Keywords ***
 
@@ -416,6 +417,10 @@ Dump Fan Control JSON
     BMC Execute Command  fanctl dump
     Sleep  10s
 
+
+Get Fan JSON Data
+    [Documentation]  Read the JSON string file from BMC and return.
+
     # Check for the generated file and return the file data as JSON and fails if
     # it doesn't find file generated.
     ${cmd}=  Catenate  test -f /tmp/fan_control_dump.json; cat /tmp/fan_control_dump.json
@@ -431,12 +436,24 @@ Dump Fan Control JSON
 Get Fan Attribute Value
     [Documentation]  Return the specified value of the matched search key in
     ...              nested dictionary data.
-    [Arguments]  ${key_value}
+    [Arguments]  ${fan_dict}  ${key_value}
 
     # Description of Argument(s):
     # key_value      User input attribute value in the dictionary.
 
-    ${fan_dict}=  Dump Fan Control JSON
+    ${empty_dicts}=  Create Dictionary
+
+    # Check for JSON response data.
+    # {
+    #   "msg":   "Unable to create dump on non-JSON config based system"
+    # }
+
+    ${status}=  Run Keyword And Return Status
+    ...   Should Be Equal  ${fan_dict["msg"]}  ${fan_json_msg}
+    IF  ${status}
+        Log To Console  Skipping attribute ${key_value} check.
+        Return From Keyword  ${empty_dicts}
+    END
 
     # Python module:  get_value_from_nested_dict(key,dict)
     ${value_list}=  utilities.Get Value From Nested Dict  ${key_value}  ${fan_dict}
