@@ -85,7 +85,7 @@ Verify Installed CA Certificate
 
     # Install CA certificate via Redfish.
     ${file_data}=  Generate Certificate File Data  CA
-    Install Certificate File On BMC  ${REDFISH_CA_CERTIFICATE_URI}  ok  data=${file_data}
+    Install And Verify Certificate Via Redfish  CA  Valid Certificate  ok
 
     # Refresh GUI and verify CA certificate availability in GUI.
     Refresh GUI
@@ -113,7 +113,7 @@ Verify Installed LDAP Certificate
 
     # Install LDAP certificate.
     ${file_data}=  Generate Certificate File Data  Client
-    Install Certificate File On BMC  ${REDFISH_LDAP_CERTIFICATE_URI}  ok  data=${file_data}
+    Install And Verify Certificate Via Redfish  Client  Valid Certificate Valid Privatekey  ok
 
     # Refresh GUI and verify certificate is available in GUI.
     Refresh GUI
