@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d9fd46e_183536b9",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-17T04:55:39Z",
+      "side": 1,
+      "message": "We verify this --\u003e Remove \u0027are\u0027",
+      "range": {
+        "startLine": 363,
+        "startChar": 72,
+        "endLine": 363,
+        "endChar": 90
+      },
+      "revId": "d99f0bae85bc54770de918638367d18bf6f30708",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e624ead_518719fa",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-17T04:55:39Z",
+      "side": 1,
+      "message": "```\nIF  ${contains}\n    ${task_dict}\u003d  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}\n    Should Be True  \u0027${task_dict[\u0027TaskState\u0027]}\u0027 \u003d\u003d \u0027Completed\u0027\nEND\n```",
+      "range": {
+        "startLine": 366,
+        "startChar": 8,
+        "endLine": 367,
+        "endChar": 95
+      },
+      "revId": "d99f0bae85bc54770de918638367d18bf6f30708",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
