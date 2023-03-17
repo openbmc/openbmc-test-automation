@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "106e65a9_dd36d6ad",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-03-17T07:04:02Z",
+      "side": 1,
+      "message": "RC  replace with HTTPS\n\nExample:\n\nAt this point, the request HTTPS response should be HTTP_SERVICE_UNAVAILABLE. However, if the response contains the HTTPS response code HTTP_ACCEPTED. it implies there is a dump initiation request which is completed. We verify this with the below check.",
+      "range": {
+        "startLine": 362,
+        "startChar": 24,
+        "endLine": 362,
+        "endChar": 27
+      },
+      "revId": "29dd841640d0cc23c74f05a22843cbde6ec5987d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
