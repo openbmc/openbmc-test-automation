@@ -16,6 +16,24 @@
       "message": "why are you removing from here?\nwhat is the problem \u0026 how it is going to solve the problem??",
       "revId": "003c25a0407005fac9b51ea1cb8ced2f7eb94d3a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b24013b_606e0cfa",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-03-17T04:30:50Z",
+      "side": 0,
+      "message": "Initially I have added teardown in keyword \u0026 it was working fine....Because here in this test case we are using template...so already existing SNMP is causing issue for next one...so am adding teardown in keyword.",
+      "parentUuid": "51c820ee_a1bc93ae",
+      "revId": "003c25a0407005fac9b51ea1cb8ced2f7eb94d3a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
