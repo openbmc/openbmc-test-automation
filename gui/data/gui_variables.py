@@ -37,6 +37,7 @@ class gui_variables:
     xpath_dumps_header = "//h1[text()='Dumps']"
     xpath_event_logs_sub_menu = "//*[@data-test-id='nav-item-event-logs']"
     xpath_event_logs_heading = "//h1[contains(text(), 'Event logs')]"
+    xpath_event_search = "//input[@placeholder='Search logs']"
     xpath_progress_logs_sub_menu = (
         "//*[@data-test-id='nav-item-post-code-logs']"
     )
