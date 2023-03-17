@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "db2355e3_249f9b4c",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-03-17T07:32:05Z",
+      "side": 1,
+      "message": "yeah ok.",
+      "parentUuid": "f5375b9c_d6c77494",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 120
+      },
+      "revId": "5d0a9443461a41a3c35858dd890689bc273d083e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3743adc1_d5dac75c",
         "filename": "openpower/vpd/test_vpd_tool.robot",
         "patchSetId": 2
@@ -178,6 +202,30 @@
       "writtenOn": "2023-03-17T04:35:22Z",
       "side": 1,
       "message": "This is not addressed",
+      "parentUuid": "3743adc1_d5dac75c",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 17
+      },
+      "revId": "5d0a9443461a41a3c35858dd890689bc273d083e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dececee_681f9f43",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-03-17T07:32:05Z",
+      "side": 1,
+      "message": "If we use this logic for every uri same component name will be there.so",
       "parentUuid": "3743adc1_d5dac75c",
       "range": {
         "startLine": 87,

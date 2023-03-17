@@ -22,6 +22,30 @@
       },
       "revId": "7da07fede3dfd00e2519769c1553f02723bb15ed",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23ba71b4_1e4bf06a",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-03-17T07:32:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b36abfaa_ea1ef907",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 57
+      },
+      "revId": "7da07fede3dfd00e2519769c1553f02723bb15ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
