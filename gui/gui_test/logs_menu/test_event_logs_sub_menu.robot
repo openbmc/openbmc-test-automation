@@ -31,6 +31,9 @@ ${xpath_success_message}          //*[contains(text(),"Success")]
 ${xpath_resolved_button}          //button[contains(text(),"Resolve")]
 ${xpath_unresolved_button}        //button[contains(text(),"Unresolve")]
 ${xpath_filter_clearall_button}   //button[contains(text(),"Clear all")]
+${xpath_clear_search}             //button[@title="Clear search input"]
+${xpath_event_log_resolve}        //*[@name="switch"]
+${xpath_event_logs_resolve}       //button[contains(text(),'Resolve')]
 
 *** Test Cases ***
 
@@ -153,6 +156,37 @@ Verify Invalid Content Search Logs
 
     Input Text  ${xpath_event_search}  AG806993
     Page Should Contain  No items match the search query
+    Click Button  ${xpath_clear_search}
+
+
+Verify Resolving Single Error Log In GUI
+    [Documentation]   Verify that error log can be resolved via GUI
+    ...               and the resolution is reflected in Redfish.
+    [Tags]  Verify_Resolving_Single_Error_Log_In_GUI
+    [Setup]  Run Keywords  Redfish.Login  AND  Redfish Purge Event Log
+
+    Create Error Logs  ${1}
+    # Mark single event log as resolved.
+    Click Element At Coordinates  ${xpath_event_log_resolve}  0  0
+    Page Should Contain  Successfully resolved 1 log.
+    Wait Until Page Does Not Contain Element  Successs
+    # Verify the Redfish response after event log mark as resolved.
+    Get And Verify Value Of Resolved Attribute For Event Logs  ${True}
+
+
+Verify Resolving Multiple Error Logs In GUI
+    [Documentation]  Verify that error logs can be resolved via GUI
+    ...               and the resolution is reflected in Redfish.
+    [Tags]  Verify_Resolving_Multiple_Error_Logs_In_GUI
+    [Setup]  Redfish Purge Event Log
+
+    Create Error Logs  ${3}
+    Select All Events
+    Click Element  ${xpath_event_logs_resolve}
+    Page Should Contain  Successfully resolved 3 logs.
+    Wait Until Page Does Not Contain Element  Successs
+    # Verify the event logs status from Redfish after mark as resolved.
+    Get And Verify Value Of Resolved Attribute For Event Logs  ${True}
 
 
 *** Keywords ***
@@ -189,7 +223,22 @@ Create Error Logs
         Generate Test Error Log
     END
 
+
 Select All Events
     [Documentation]  Select all error logs.
 
     Click Element At Coordinates  ${xpath_select_all_events}  0  0
+
+
+Get And Verify Value Of Resolved Attribute For Event Logs
+    [Documentation]  Get event log entry and verify resolved attribute value.
+    [Arguments]  ${expected_resolved_status}
+
+    # Description of argument(s):
+    # expected_resolved_status    status of the error logs.
+ 
+    ${elog_entry}=  Get Event Logs
+
+    FOR  ${elog}  IN  @{elog_entry}
+        Should Be Equal  ${elog["Resolved"]}   ${expected_resolved_status}
+    END
