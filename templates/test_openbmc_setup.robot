@@ -37,7 +37,10 @@ Test REST Setup
 Test SSH Setup
     [Documentation]  Verify SSH works.
 
-    BMC Execute Command  uname -a
+    ${stdout}    ${stderr}    ${rc}=    BMC Execute Command    uname -a    print_out=1    print_err=1
+    IF    ${rc}
+        Fail    BMC SSH login failed.
+    END
 
 
 Test IPMI Setup
