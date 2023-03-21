@@ -32,7 +32,7 @@ Verify Navigation To Date And Time Page
 
 
 Verify Text Under Date And Time Page
-    [Documentation] Verify the presence of the required text on the date and time page.
+    [Documentation]  Verify the presence of the required text on the date and time page.
     [Tags]  Verify_Text_Under_Date_And_Time_Page
 
 

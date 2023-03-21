@@ -126,7 +126,7 @@ Test Baseboard Temperature Via IPMI
     ${ipmi_temp_list}=  Create List
     FOR  ${line}  IN  @{lines}
         ${baseboard_temp_ipmi}=  Set Variable  ${line.split('+')[1].strip(' C')}
-        Append To List  ${ipmi_temp_list}  ${baseboard_temp_ipmi} 
+        Append To List  ${ipmi_temp_list}  ${baseboard_temp_ipmi}
     END
     ${list_length}=  Get Length  ${ipmi_temp_list}
 
@@ -284,7 +284,8 @@ Get Temperature Reading From Redfish
     # member_id    Member id of temperature.
 
     @{thermal_uri}=  redfish_utils.Get Member List  /redfish/v1/Chassis/
-    @{redfish_readings}=  redfish_utils.Get Attribute  ${thermal_uri[0]}/${THERMAL_METRICS}  TemperatureReadingsCelsius
+    @{redfish_readings}=  redfish_utils.Get Attribute
+    ...  ${thermal_uri[0]}/${THERMAL_METRICS}  TemperatureReadingsCelsius
 
     # Example of Baseboard temperature via Redfish
 

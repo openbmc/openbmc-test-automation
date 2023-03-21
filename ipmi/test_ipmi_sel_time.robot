@@ -42,7 +42,7 @@ Test Teardown    Test Teardown Execution
 ${NETWORK_RESTART_TIME}   5s
 @{time_difference_list}  +8760:153:25  -87600:453:120  +175200:40:15  -43800:10:05  +20:35:12  -8760:00:00
 
-# Based on 13th byte of add SEL entry command as per IPMI spec 
+# Based on 13th byte of add SEL entry command as per IPMI spec
 # event_dir and event_type variable value needs to be given.
 ${sel_no_entry_msg}  SEL has no entries
 ${event_type}        Lower Non-critical going low

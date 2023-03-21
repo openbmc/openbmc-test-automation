@@ -25,7 +25,8 @@ Test FRU Info Of Power Supplies
     ...  ${fru_objs}
 
     # Redfish FRU info.
-    ${redfish_power_details}=  Redfish.Get Members List  /redfish/v1/Chassis/${CHASSIS_ID}/PowerSubsystem/PowerSupplies
+    ${redfish_power_details}=  Redfish.Get Members List
+    ...  /redfish/v1/Chassis/${CHASSIS_ID}/PowerSubsystem/PowerSupplies
     ${redfish_power_dict}=  Create List
     FOR  ${power_supply}  IN  @{redfish_power_details}
         ${redfish_power_supply_reading}=  Redfish.Get Properties  ${power_supply}

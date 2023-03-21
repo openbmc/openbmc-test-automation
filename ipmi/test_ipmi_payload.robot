@@ -386,7 +386,8 @@ Verify Sol Activate Disabled
 
 Set User Access Payload For Given User
     [Documentation]  Set the user access payload on given user, channel and return response.
-    [Arguments]  ${user_id}  ${operation_mode}=Enable  ${oempayload_value}=0x00  ${standard_payload_value}=0x02
+    [Arguments]  ${user_id}  ${operation_mode}=Enable  ${oempayload_value}=0x00
+    ...          ${standard_payload_value}=0x02
 
     # Description of argument(s):
     # user_id                  The user ID (e.g. "1", "2", etc.).
