@@ -31,6 +31,9 @@ ${xpath_success_message}          //*[contains(text(),"Success")]
 ${xpath_resolved_button}          //button[contains(text(),"Resolve")]
 ${xpath_unresolved_button}        //button[contains(text(),"Unresolve")]
 ${xpath_filter_clearall_button}   //button[contains(text(),"Clear all")]
+${xpath_status_switch}            //tr[1]//*[@name="switch"]
+${xpath_notification_close}       //*[@aria-label="Close"]
+${xpath_event_resolve}            //button[contains(text(),'Resolve')]
 
 *** Test Cases ***
 
@@ -153,6 +156,31 @@ Verify Invalid Content Search Logs
 
     Input Text  ${xpath_event_search}  AG806993
     Page Should Contain  No items match the search query
+
+
+Select Single Error Log And Mark As Resolved
+    [Documentation]  Select single error log and mark as resolved.
+    [Tags]  Select_Single_Error_Log_And_Mark_As_Resolved
+
+    Create Error Logs  ${1}
+    Click Element At Coordinates  ${xpath_status_switch}  0  0
+    # Given the time to get the resolved notification.
+    Sleep  5s
+    Page Should Contain  Successfully resolved 1 log.
+    Click Button  ${xpath_notification_close}
+
+
+Select Multiple Error Logs And Mark As Resolved
+    [Documentation]  Select multiple error logs and mark as resolved.
+    [Tags]  Select_Multiple_Error_Logs_And_Mark_As_Resolved
+
+    Create Error Logs  ${3}
+    Select All Events
+    Click Element  ${xpath_event_resolve}
+    # Given the time to get the resolved notification.
+    Sleep  5s
+    Page Should Contain  Successfully resolved
+    Click Button  ${xpath_notification_close}
 
 
 *** Keywords ***
