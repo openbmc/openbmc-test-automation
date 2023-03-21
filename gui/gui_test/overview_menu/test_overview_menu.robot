@@ -27,6 +27,7 @@ ${xpath_launch_host_console}                     //*[@data-test-id='overviewQuic
 ${xpath_led_button}                              //*[@data-test-id='overviewInventory-checkbox-identifyLed']
 ${xpath_dumps_view_more_button}                  (//*[text()="View more"])[7]
 ${xpath_critical_logs_count}                     //dt[contains(text(),'Critical')]/following-sibling::dd[1]
+${xpath_warning_logs_count}                      //dt[contains(text(),'Warning')]/following-sibling::dd[1]
 
 *** Test Cases ***
 
@@ -102,6 +103,23 @@ Verify Event Under Critical Event Logs Section
 
     ${log_count}=  Get Text  ${xpath_critical_logs_count}
     Should Be True  '${log_count}' == '${1}'
+
+
+Verify Event Under Warning Event Logs Section
+    [Documentation]  Verify event under warning event logs section in case of any event.
+    [Tags]  Verify_Event_Under_Warning_Event_Logs_Section
+    [Teardown]  Redfish Purge Event Log
+
+    Redfish Purge Event Log
+    Click Element  ${xpath_refresh_button}
+
+    # Generate a predictable error for testing purpose.
+    BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
+
+    Click Element  ${xpath_refresh_button}
+
+    ${log_count}=  Get Text  ${xpath_warning_logs_count}
+    Should Be Equal As Integers  ${log_count}  1
 
 
 Verify View More Event Logs Button
