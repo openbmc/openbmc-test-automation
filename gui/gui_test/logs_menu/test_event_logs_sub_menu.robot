@@ -31,6 +31,14 @@ ${xpath_success_message}          //*[contains(text(),"Success")]
 ${xpath_resolved_button}          //button[contains(text(),"Resolve")]
 ${xpath_unresolved_button}        //button[contains(text(),"Unresolve")]
 ${xpath_filter_clearall_button}   //button[contains(text(),"Clear all")]
+${xpath_clear_search}             //button[@title="Clear search input"]
+${xpath_status_switch}            //tr[1]//*[@name="switch"]
+${xpath_notification_close}       //*[@aria-label="Close"]
+${xpath_event_resolve}            //button[contains(text(),'Resolve')]
+${xpath_successfully_resolved}    //*[@class="toast-body"]
+@{before_resolve}                 ${False}  ${False}  ${False}
+@{after_resolve}                  ${True}  ${True}  ${True}
+
 
 *** Test Cases ***
 
@@ -153,6 +161,47 @@ Verify Invalid Content Search Logs
 
     Input Text  ${xpath_event_search}  AG806993
     Page Should Contain  No items match the search query
+    Click Button  ${xpath_clear_search}
+
+
+Verify Setting Single Error Log And Mark As Resolved
+    [Documentation]  Select and mark a single error log as resolved through GUI and verify via Redfish.
+    [Tags]  Verify_Setting_Single_Error_Log_And_Mark_As_Resolved
+    [Setup]  Run Keywords  Redfish.Login  AND  Redfish Purge Event Log
+    [Teardown]  Redfish.Logout
+
+    Create Error Logs  ${1}
+
+    #  Verify the Redfish response before event log mark as resolved.
+    ${redfish_res}=  Get Single Event Log Redfish Status
+    Should Be Equal As Strings   ${redfish_res}  False
+    #  Mark single event log as resolved 
+    Click Element At Coordinates  ${xpath_status_switch}  0  0
+    Wait Until Page Contains Element  ${xpath_successfully_resolved}
+    #  Verify the Redfish response after event log mark as resolved.
+    ${redfish_res}=  Get Single Event Log Redfish Status
+    Should Be Equal As Strings   ${redfish_res}  True
+    Click Button  ${xpath_notification_close}
+
+
+Verify Setting Multiple Error Logs And Mark As Resolved
+    [Documentation]  Select and mark a multiple error log as resolved through GUI and verify via Redfish.
+    [Tags]  Verify_Setting_Multiple_Error_Logs_And_Mark_As_Resolved
+    [Setup]  Run Keywords  Redfish.Login  AND  Redfish Purge Event Log
+    [Teardown]  Redfish.Logout
+
+    Create Error Logs  ${3}
+    
+    #  Verify the event logs status from Redfish before mark as resolved.
+    ${redfish_res}=  Get Multiple Event Logs Redfish Status
+    Lists Should Be Equal  ${redfish_res}  ${before_resolve}
+    Select All Events
+    Click Element  ${xpath_event_resolve}
+    Wait Until Page Contains Element  ${xpath_successfully_resolved}
+    #  Verify the event logs status from Redfish after mark as resolved.
+    ${redfish_res}=  Get Multiple Event Logs Redfish Status
+    Lists Should Be Equal  ${redfish_res}  ${after_resolve}
+    Click Button  ${xpath_notification_close}
 
 
 *** Keywords ***
@@ -193,3 +242,27 @@ Select All Events
     [Documentation]  Select all error logs.
 
     Click Element At Coordinates  ${xpath_select_all_events}  0  0
+
+
+Get Single Event Log Redfish Status
+    [Documentation]  Get error log resolved status from the redfish.
+
+    ${redfish_uri}=  Redfish.Get Properties  /redfish/v1/Systems/system/LogServices/EventLog/Entries
+    ${errorlog}=  Get From Dictionary  ${redfish_uri}   Members
+    ${status}=  Get From List   ${errorlog}  0
+    ${redfish_res}=  Get From Dictionary  ${status}  Resolved
+
+    [Return]  ${redfish_res}
+
+
+Get Multiple Event Logs Redfish Status
+    [Documentation]  Get error logs resolved status from the redfish.
+
+    ${uri}=  Redfish.Get Properties  /redfish/v1/Systems/system/LogServices/EventLog/Entries
+    ${resolved_list}=  Create List
+    ${members}=  Get From Dictionary  ${uri}  Members
+    FOR  ${member}  IN  @{members}
+        ${resolved}=  Get From Dictionary  ${member}  Resolved
+        Append To List  ${resolved_list}  ${resolved}
+    END
+    [Return]  ${resolved_list}
