@@ -21,6 +21,7 @@ ${BMC_DUMP_TOTAL_SIZE}       ${1024}
 ${BMC_DUMP_MIN_SPACE_REQD}   ${20}
 ${MAX_DUMP_COUNT}            ${20}
 ${BMC_DUMP_COLLECTOR_PATH}   /var/lib/phosphor-debug-collector/dumps
+&{OS_DUMP_OFFLOAD_PATH}      AIX=/var/adm/ras/platform  LINUX=/var/log/dump
 
 *** Test Cases ***
 
@@ -441,6 +442,26 @@ Verify Core Watchdog Initiated BMC Dump
     ${dump_entry_list}=  Get BMC Dump Entries
     ${length}=  Get length  ${dump_entry_list}
     Should Be Equal As Integers  ${length}  ${1}
+
+
+Verify Dump Offload To OS
+    [Documentation]  Verify Dump Offload To Host OS.
+    [Tags]  Verify_Dump_Offload_To_OS
+
+    Redfish Delete All BMC Dumps
+    Redfish Power On  stack_mode=skip
+    Wait For Host To Ping  ${OS_HOST}  5 mins
+    ${dump_id}=  Create User Initiated BMC Dump Via Redfish
+    ${dump_file}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  ls ${BMC_DUMP_COLLECTOR_PATH}/${dump_id}
+
+    Login To OS Host  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
+    ${os_type}=  OS Distro Type
+    ${dump_cmd}=  Set Variable IF  "AIX" in "${os_type}"
+    ...  cd ${OS_DUMP_OFFLOAD_PATH}[AIX]; ls -lt ${dump_file}
+    ...  cd ${OS_DUMP_OFFLOAD_PATH}[LINUX]; ls -lt ${dump_file}
+    ${result}  ${stderr}  ${rc}=  OS Execute Command  ${dump_cmd}
+    Should Not Be Empty  ${result}  msg= Dump is not offloaded to OS.
 
 
 *** Keywords ***
