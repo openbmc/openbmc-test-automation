@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "202352fd_b779b38e",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-23T06:38:33Z",
+      "side": 1,
+      "message": "Verify Setting Single Error Log As Resolved\n[Documentation] Select and mark a single error log as resolved through GUI and verify via Redfish.",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 66
+      },
+      "revId": "d986d2383664c934395eabebfdd8516764491b94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b6970da_cfc06ebd",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-23T06:38:33Z",
+      "side": 1,
+      "message": "Instead of sleep use wait condition for successful message to appear.",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 13
+      },
+      "revId": "d986d2383664c934395eabebfdd8516764491b94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b581317a_77e6b424",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-23T06:38:33Z",
+      "side": 1,
+      "message": "Kindly include a verification step to ensure that the error log has been marked as resolved in the Redfish API.",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 45
+      },
+      "revId": "d986d2383664c934395eabebfdd8516764491b94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41fa0665_71c45b9b",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-23T06:38:33Z",
+      "side": 1,
+      "message": "same comment as above",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 45
+      },
+      "revId": "d986d2383664c934395eabebfdd8516764491b94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
