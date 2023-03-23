@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68196ca4_82d3237c",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-23T06:18:19Z",
+      "side": 1,
+      "message": "I believe this test is specific to IBM system. So should go to downstream only.",
+      "range": {
+        "startLine": 446,
+        "startChar": 0,
+        "endLine": 447,
+        "endChar": 25
+      },
+      "revId": "f71a3280b8cbb6182ebc1074b8675d9985d18817",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a198131b_a2ee50b5",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-23T06:18:19Z",
+      "side": 1,
+      "message": "Make this test case specific to BMC dump by changing the defect headline like below.\n\n\nVerify BMC Dump Offload To OS\n    [Documentation]  Verify BMC dump offload to the host OS.",
+      "range": {
+        "startLine": 447,
+        "startChar": 0,
+        "endLine": 448,
+        "endChar": 52
+      },
+      "revId": "f71a3280b8cbb6182ebc1074b8675d9985d18817",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8803ecd7_c3bace7e",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-23T06:18:19Z",
+      "side": 1,
+      "message": "As we are not checking rc and stderr, we can just keep it like\n\n    ${dump_file}\u003d  BMC Execute Command  ls ${BMC_DUMP_COLLECTOR_PATH}/${dump_id}",
+      "range": {
+        "startLine": 455,
+        "startChar": 0,
+        "endLine": 456,
+        "endChar": 49
+      },
+      "revId": "f71a3280b8cbb6182ebc1074b8675d9985d18817",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "167f6524_f1d6c258",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-23T06:18:19Z",
+      "side": 1,
+      "message": "If its Linux then it would fail. Please add the check for Linux also here.\n\n\"LINUX\" in \"${os_type}\"\n\nalso just `ls` should be good enough instead of ls -lt",
+      "range": {
+        "startLine": 462,
+        "startChar": 0,
+        "endLine": 462,
+        "endChar": 63
+      },
+      "revId": "f71a3280b8cbb6182ebc1074b8675d9985d18817",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7548d48_615c3ff4",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-23T06:18:19Z",
+      "side": 1,
+      "message": "If the dump is not there then this RC would fail. Please add a check for rc here.",
+      "range": {
+        "startLine": 464,
+        "startChar": 0,
+        "endLine": 464,
+        "endChar": 69
+      },
+      "revId": "f71a3280b8cbb6182ebc1074b8675d9985d18817",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
