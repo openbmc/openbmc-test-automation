@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4e9a1b18_fa6c0447",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-03-23T09:14:19Z",
+      "side": 1,
+      "message": "Will be done as discussed.",
+      "parentUuid": "68196ca4_82d3237c",
+      "range": {
+        "startLine": 446,
+        "startChar": 0,
+        "endLine": 447,
+        "endChar": 25
+      },
+      "revId": "f71a3280b8cbb6182ebc1074b8675d9985d18817",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a198131b_a2ee50b5",
         "filename": "redfish/managers/test_bmc_dumps.robot",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-23T06:18:19Z",
       "side": 1,
       "message": "Make this test case specific to BMC dump by changing the defect headline like below.\n\n\nVerify BMC Dump Offload To OS\n    [Documentation]  Verify BMC dump offload to the host OS.",
+      "range": {
+        "startLine": 447,
+        "startChar": 0,
+        "endLine": 448,
+        "endChar": 52
+      },
+      "revId": "f71a3280b8cbb6182ebc1074b8675d9985d18817",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f19c94f_236ce603",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-03-23T09:14:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a198131b_a2ee50b5",
       "range": {
         "startLine": 447,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a5c37d3_4e8189cb",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-03-23T09:14:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8803ecd7_c3bace7e",
+      "range": {
+        "startLine": 455,
+        "startChar": 0,
+        "endLine": 456,
+        "endChar": 49
+      },
+      "revId": "f71a3280b8cbb6182ebc1074b8675d9985d18817",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "167f6524_f1d6c258",
@@ -93,6 +165,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e60f0ec_9b11c7aa",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-03-23T09:14:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "167f6524_f1d6c258",
+      "range": {
+        "startLine": 462,
+        "startChar": 0,
+        "endLine": 462,
+        "endChar": 63
+      },
+      "revId": "f71a3280b8cbb6182ebc1074b8675d9985d18817",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7548d48_615c3ff4",
@@ -106,6 +202,30 @@
       "writtenOn": "2023-03-23T06:18:19Z",
       "side": 1,
       "message": "If the dump is not there then this RC would fail. Please add a check for rc here.",
+      "range": {
+        "startLine": 464,
+        "startChar": 0,
+        "endLine": 464,
+        "endChar": 69
+      },
+      "revId": "f71a3280b8cbb6182ebc1074b8675d9985d18817",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "574b8804_d9c32681",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-03-23T09:14:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7548d48_615c3ff4",
       "range": {
         "startLine": 464,
         "startChar": 0,
