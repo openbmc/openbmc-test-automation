@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3bc8c6b_08cd60a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-23T06:27:29Z",
+      "side": 1,
+      "message": "Commit message is quite long. Please keep it under 110 limit like:\n\nGUI: Added a new test to check warning log count on overview page",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 86
+      },
+      "revId": "e5695a37289567940abb32a28798ea198882ef66",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52048a9b_d98c3141",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-23T06:27:29Z",
+      "side": 1,
+      "message": "```\n# Generate a predictable error for testing purpose.\n```",
+      "range": {
+        "startLine": 116,
+        "startChar": 6,
+        "endLine": 116,
+        "endChar": 50
+      },
+      "revId": "e5695a37289567940abb32a28798ea198882ef66",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6169d380_0fd3cc94",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-23T06:27:29Z",
+      "side": 1,
+      "message": "You can also user below way. \n```\n    Should Be Equal As Integers  ${log_count}  1\n```",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 44
+      },
+      "revId": "e5695a37289567940abb32a28798ea198882ef66",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
