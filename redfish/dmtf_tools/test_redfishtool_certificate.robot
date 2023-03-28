@@ -284,7 +284,7 @@ Verify Redfishtool Install Certificate
 Delete All CA Certificate Via Redfisthtool
     [Documentation]  Delete all CA certificate via Redfish.
 
-    ${cmd_output}=  Redfishtool Get  /redfish/v1/Managers/bmc/Truststore/Certificates
+    ${cmd_output}=  Redfishtool Get  /redfish/v1/Managers/bmc/Certificates
     ${cmd_output}=  Convert String to JSON  ${cmd_output}
     ${cert_list}=  Set Variable  ${cmd_output["Members"]}
     FOR  ${cert}  IN  @{cert_list}
