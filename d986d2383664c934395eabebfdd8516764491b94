@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc22874d_50a504e2",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-03-28T06:51:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "202352fd_b779b38e",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 66
+      },
+      "revId": "d986d2383664c934395eabebfdd8516764491b94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b6970da_cfc06ebd",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-23T06:38:33Z",
       "side": 1,
       "message": "Instead of sleep use wait condition for successful message to appear.",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 13
+      },
+      "revId": "d986d2383664c934395eabebfdd8516764491b94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b810b89b_6d047e4c",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-03-28T06:51:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b6970da_cfc06ebd",
       "range": {
         "startLine": 167,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3039a9ca_09651f6b",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-03-28T06:51:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b581317a_77e6b424",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 45
+      },
+      "revId": "d986d2383664c934395eabebfdd8516764491b94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41fa0665_71c45b9b",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-03-23T06:38:33Z",
       "side": 1,
       "message": "same comment as above",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 45
+      },
+      "revId": "d986d2383664c934395eabebfdd8516764491b94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4587b316_7df2007f",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-03-28T06:51:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41fa0665_71c45b9b",
       "range": {
         "startLine": 173,
         "startChar": 0,
