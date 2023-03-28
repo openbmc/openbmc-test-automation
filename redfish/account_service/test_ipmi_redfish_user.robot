@@ -18,11 +18,8 @@ ${valid_password2}      0penBmc2
 ${admin_level_priv}     4
 ${operator_level_priv}  3
 ${readonly_level_priv}  2
-# Refer:  #openbmc/phosphor-user-manager/blob/master/user_mgr.hpp#L41
-# ipmiMaxUsers = 15;    <-- IPMI
-# maxSystemUsers = 30;  <-- Max system redfish account users allowed
 ${ipmi_max_num_users}   ${15}
-${max_num_users}        ${30}
+${max_num_users}        ${15}
 ${empty_name_pattern}   ^User Name\\s.*\\s:\\s$
 
 ** Test Cases **
@@ -231,7 +228,7 @@ Verify Failure To Exceed Max Number Of Users
 
     @{username_list}=  Create List
 
-    # Create users to reach maximum users count (i.e. 30 users).
+    # Create users to reach maximum users count (i.e. 15 users).
     FOR  ${INDEX}  IN RANGE  ${current_user_count}  ${max_num_users}
       ${random_username}=  Generate Random String  8  [LETTERS]
       Set To Dictionary  ${payload}  UserName  ${random_username}
