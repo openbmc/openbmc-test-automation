@@ -123,6 +123,51 @@ Verify Server Power Cap Setting With Power Cap Disabled
     Wait Until Element Is Visible   ${xpath_success_message}  timeout=60
     Wait Until Element Is Not Visible   ${xpath_success_message}  timeout=60
 
+
+Verify And Set Idle Power Saver To New Values And Restore Back To Default
+
+    [Documentation]  Enable checkbox,set and verify random values of idle power saver
+    ...  After Verify restore values back to default.
+    [Tags]  Verify_And_Set_Idle_Power_Saver_To_New_Values_And_Restore_Back_To_Default
+    [Setup]  Run Keywords  Enable Idle Power Saver Value  AND  Restore Idle Power Saver Value To Default
+    [Teardown]  Restore Idle Power Saver Value To Default
+
+    Run Keyword If  '${checkbox_initial_state}' == 'False'
+    ...  Click Element At Coordinates  ${xpath_idle_power_saver_checkbox}  0  0
+
+    # Now input a idle power saver values and submit.
+    Wait Until Element Is Enabled  ${xpath_to_enter_delay_time}  timeout=10
+
+    # Get default (or) initial values of idle power saver.
+    ${initial_idle_power_saver_values}=  Get Idle Power Saver Value
+    Log To Console  ${initial_idle_power_saver_values}
+
+    # Taking random enter and exit of delaytime and utilization threshold values.
+    ${enter_delaytime}=  Evaluate  random.randint(10, 600)  modules=random
+    ${exit_delaytime}=  Evaluate  random.randint(10, 600)  modules=random
+    ${enter_utilization_threshold}=  Evaluate  random.randint(1, 95)  modules=random
+    ${exit_utilization_threshold}=  Evaluate  random.randint(${enter_utilization_threshold}, 95)  modules=random
+
+    # To enter delay time and utilization threshold values.
+    Input Text  ${xpath_to_enter_delay_time}  ${enter_delaytime}
+    Input Text  ${xpath_to_enter_utilization_threshold}  ${enter_utilization_threshold}
+
+    # To exit delay time and utilization threshold values.
+    Input Text  ${xpath_to_exit_delay_time}  ${exit_delaytime}
+    Input Text  ${xpath_to_exit_utilization_threshold}  ${exit_utilization_threshold}
+
+    # Save and update idle power saver values.
+    Click Element  ${xpath_update_idle_power_saver_button}
+
+    # Get update idle power saver values.
+    ${updated_idle_power_saver_values}=  Get Idle Power Saver Value
+
+    # Verify is idle power saver value set.
+    Log To Console  ${updated_idle_power_saver_values}
+    Log To Console  ${initial_idle_power_saver_values}
+    Should Not Be Equal  ${updated_idle_power_saver_values}  ${initial_idle_power_saver_values}
+
+
 *** Keywords ***
 
 Is Power Cap Value Set
@@ -169,6 +214,39 @@ Get Power Cap Value
 
     [return]  ${redfish_power['PowerLimitWatts']['SetPoint']}
 
+
+Enable Idle Power Saver Value
+    [Documentation]  Enable Idle Power Saver Value By Selecting The Checkbox.
+
+    Wait Until Page Contains Element  ${xpath_idle_power_saver_checkbox}
+    ${status}=  Run Keyword And Return Status  Checkbox Should Be Selected  ${xpath_idle_power_saver_checkbox}
+    Set Suite Variable  ${checkbox_initial_state}  ${status}
+
+Restore Idle Power Saver Value To Default
+    [Documentation]  Restore Idle Power Saver Values To Default.
+
+    ${status}=  Run Keyword And Return Status  Checkbox Should Be Selected  ${xpath_idle_power_saver_checkbox}
+    Run Keyword If  ${status} != ${checkbox_initial_state}
+    ...  Click Element At Coordinates  ${xpath_idle_power_saver_checkbox}  0  0
+    Click Element  ${xpath_reset_to_default_button}
+
+Get Idle Power Saver Value
+    [Documentation]  Return the power cap value.
+
+    #  "IdlePowerSaver": {
+    #        "Enabled": true,
+    #        "EnterDwellTimeSeconds": 240,
+    #        "EnterUtilizationPercent": 10,
+    #        "ExitDwellTimeSeconds": 8,
+    #        "ExitUtilizationPercent": 12
+    #  }
+
+    ${power_saver}=  Redfish.Get Properties  /redfish/v1/Systems/system
+    ${enter_dwell_time_seconds}=  Set Variable  ${power_saver['IdlePowerSaver']['EnterDwellTimeSeconds']}
+    ${enter_utilization_percent}=  Set Variable  ${power_saver['IdlePowerSaver']['EnterUtilizationPercent']}
+    ${exit_dwell_time_seconds}=  Set Variable  ${power_saver['IdlePowerSaver']['ExitDwellTimeSeconds']}
+    ${exit_utilization_percent}=  Set Variable  ${power_saver['IdlePowerSaver']['ExitUtilizationPercent']}
+    [Return]   ${enter_dwell_time_seconds}  ${enter_utilization_percent}  ${exit_dwell_time_seconds}  ${exit_utilization_percent}
 
 Suite Setup Execution
     [Documentation]  Do suite setup tasks.
