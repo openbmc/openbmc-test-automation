@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "64ae0017_af727784",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-29T08:44:01Z",
+      "side": 1,
+      "message": "Be specific",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3e88aa02_9ee2a1dc",
@@ -14,6 +37,276 @@
       "writtenOn": "2023-03-28T06:51:02Z",
       "side": 1,
       "message": "done",
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23a13159_8037172e",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-29T08:44:01Z",
+      "side": 1,
+      "message": "Remove these and use \"List Should Not Contain Value\" to verify the list.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 59
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be925931_f286d1c0",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-29T08:44:01Z",
+      "side": 1,
+      "message": "Verify Resolving A Single Error Log In GUI",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 52
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c298b6fd_57563003",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-29T08:44:01Z",
+      "side": 1,
+      "message": "Why is this login required again? A Login is already done at the suite level.",
+      "range": {
+        "startLine": 171,
+        "startChar": 4,
+        "endLine": 171,
+        "endChar": 70
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4b8cd36_38cc9415",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-29T08:44:01Z",
+      "side": 1,
+      "message": "event_status",
+      "range": {
+        "startLine": 177,
+        "startChar": 6,
+        "endLine": 177,
+        "endChar": 17
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fe0db25_8f6b8ba9",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-29T08:44:01Z",
+      "side": 1,
+      "message": "Create a keyword that gets the event state and verifies whether it is True or False.",
+      "range": {
+        "startLine": 177,
+        "startChar": 4,
+        "endLine": 178,
+        "endChar": 54
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e27f966_89ee1365",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-29T08:44:01Z",
+      "side": 1,
+      "message": "Verify Resolving Multiple Error Logs In GUI",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 55
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c9931af_525054f1",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-29T08:44:01Z",
+      "side": 1,
+      "message": "Select and mark multiple error logs as resolved through GUI",
+      "range": {
+        "startLine": 189,
+        "startChar": 21,
+        "endLine": 189,
+        "endChar": 81
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a04b99c9_ffc94ac3",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-29T08:44:01Z",
+      "side": 1,
+      "message": "same comment as above",
+      "range": {
+        "startLine": 192,
+        "startChar": 4,
+        "endLine": 192,
+        "endChar": 25
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb56ba9f_f77c4221",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-29T08:44:01Z",
+      "side": 1,
+      "message": "New keyword pls as said above.\n\nRename the variable name to error_logs_status",
+      "range": {
+        "startLine": 197,
+        "startChar": 4,
+        "endLine": 197,
+        "endChar": 27
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "221034a8_c6092170",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-29T08:44:01Z",
+      "side": 1,
+      "message": "Redfish",
+      "range": {
+        "startLine": 249,
+        "startChar": 60,
+        "endLine": 249,
+        "endChar": 67
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88a7d39c_276b6e58",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-29T08:44:01Z",
+      "side": 1,
+      "message": "1. You can use this for both single and multiple error logs. So remove the method \nGet Single Event Log Redfish Status\n2. Rename to \u0027Get Event Logs Status From Redfish\u0027",
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a169c036_e92af485",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-03-29T08:44:01Z",
+      "side": 1,
+      "message": "rename to events_status",
+      "range": {
+        "startLine": 263,
+        "startChar": 6,
+        "endLine": 263,
+        "endChar": 19
+      },
       "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
