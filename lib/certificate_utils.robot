@@ -163,7 +163,7 @@ Verify Certificate Visible Via OpenSSL
 
 Delete All CA Certificate Via Redfish
     [Documentation]  Delete all CA certificate via Redfish.
-    ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/bmc/Truststore/Certificates
+    ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/bmc/Certificates
     FOR  ${cert}  IN  @{cert_list}
       Redfish.Delete  ${cert}  valid_status_codes=[${HTTP_NO_CONTENT}]
       Log To Console  Wait Time started in seconds ${wait_time}

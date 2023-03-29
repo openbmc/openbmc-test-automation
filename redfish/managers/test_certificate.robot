@@ -84,7 +84,7 @@ Verify Maximum CA Certificate Install
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Delete All CA Certificate Via Redfish
 
     # Get CA certificate count from BMC.
-    ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/bmc/Truststore/Certificates
+    ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/bmc/Certificates
     ${cert_count}=  Get Length  ${cert_list}
 
     # Install CA certificate to reach maximum count of 10.
@@ -239,7 +239,7 @@ Verify Certificates Location Via Redfish
     ${Links}=  Get From Dictionary  ${resp.dict}  Links
 
     ${match_cert}=  Catenate
-    ...  /redfish/v1/Managers/bmc/Truststore/Certificates/${cert_id}
+    ...  /redfish/v1/Managers/bmc/Certificates/${cert_id}
     ${match}=  Set Variable  ${False}
 
     FOR  ${Certificates_dict}  IN  @{Links['Certificates']}
