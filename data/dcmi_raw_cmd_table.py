@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+
+r"""
+DCMI raw commands table:
+
+   - Define DCMI interface index, commands and expected output.
+
+"""
+
+DCMI_RAW_CMD = {
+    # Interface name
+    "DCMI": {
+        "SET_DCMI_CONFIG_PARAMETER": {
+                "DISCOVERY_CONFIGURATION": {
+                        "OPTION_12_WITHOUT_RANDOM_BACKOFF": "0x2c 0x12 0xdc 0x02 0x00 0x01",
+                        "OPTION_60_AND_43_WITHOUT_RANDOM_BACKOFF": "0x2c 0x12 0xdc 0x02 0x00 0x02",
+                        "OPTION_12_WITH_RANDOM_BACKOFF": "0x2c 0x12 0xdc 0x02 0x00 0x81",
+                        "OPTION_60_AND_43_WITH_RANDOM_BACKOFF": "0x2c 0x12 0xdc 0x02 0x00 0x82",                                   
+                    },
+            },
+        "GET_DCMI_CONFIG_PARAMETER": {
+                "DISCOVERY_CONFIGURATION": "0x2c 0x13 0xdc 0x02 0x00"
+            },
+    },
+}
