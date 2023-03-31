@@ -5,7 +5,8 @@ Documentation    Test Redfish session and its connection stability.
 Resource         ../../lib/bmc_redfish_utils.robot
 Resource         ../../lib/openbmc_ffdc.robot
 
-Suite Teardown   Redfish.Logout
+Suite Setup      Disable Redfish Delete Session
+Suite Teardown   Run Keywords  Enable Redfish Delete Session  AND  Redfish.Logout
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
 
@@ -60,3 +61,14 @@ Check Connection On Reboot
     # Verify session is still active and no issues on connection after reboot.
     Repeat Keyword  ${reboot_interval}  Send Heartbeat
 
+Disable Redfish Delete Session
+    [Documentation]  Disable delete redfish while performing power operation keyword.
+
+    ${REDFISH_DELETE_SESSIONS}=  Set Variable  ${0}
+    Set Suite Variable  ${REDFISH_DELETE_SESSIONS}
+
+Enable Redfish Delete Session
+    [Documentation]  Enable delete redfish while performing power operation keyword.
+
+    ${REDFISH_DELETE_SESSIONS}=  Set Variable  ${1}
+    Set Suite Variable  ${REDFISH_DELETE_SESSIONS}
