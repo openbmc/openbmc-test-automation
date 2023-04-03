@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4367ec1e_0ae2c1e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-03T08:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64ae0017_af727784",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3e88aa02_9ee2a1dc",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
@@ -64,6 +88,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f086e7d0_77de1533",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-03T08:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23a13159_8037172e",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 59
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be925931_f286d1c0",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-03-29T08:44:01Z",
       "side": 1,
       "message": "Verify Resolving A Single Error Log In GUI",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 167,
+        "endChar": 52
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e2faacc_8fc45b2f",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-03T08:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be925931_f286d1c0",
       "range": {
         "startLine": 167,
         "startChar": 0,
@@ -112,6 +184,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "72e2e01a_7087ffc4",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-03T08:56:47Z",
+      "side": 1,
+      "message": "In the before testcase[Verify Displayed Event Details With Redfish]  --\u003e\u003eRedfish.Logout is there so Redfish.Login required here",
+      "parentUuid": "c298b6fd_57563003",
+      "range": {
+        "startLine": 171,
+        "startChar": 4,
+        "endLine": 171,
+        "endChar": 70
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d4b8cd36_38cc9415",
         "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
         "patchSetId": 6
@@ -123,6 +219,30 @@
       "writtenOn": "2023-03-29T08:44:01Z",
       "side": 1,
       "message": "event_status",
+      "range": {
+        "startLine": 177,
+        "startChar": 6,
+        "endLine": 177,
+        "endChar": 17
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4432ad63_48666a3b",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-03T08:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4b8cd36_38cc9415",
       "range": {
         "startLine": 177,
         "startChar": 6,
@@ -156,6 +276,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6d9735e_28c06d2c",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-03T08:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fe0db25_8f6b8ba9",
+      "range": {
+        "startLine": 177,
+        "startChar": 4,
+        "endLine": 178,
+        "endChar": 54
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e27f966_89ee1365",
@@ -169,6 +313,30 @@
       "writtenOn": "2023-03-29T08:44:01Z",
       "side": 1,
       "message": "Verify Resolving Multiple Error Logs In GUI",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 55
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "166a7cec_124340a5",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-03T08:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e27f966_89ee1365",
       "range": {
         "startLine": 188,
         "startChar": 0,
@@ -202,6 +370,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5b42940_78797c22",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-03T08:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c9931af_525054f1",
+      "range": {
+        "startLine": 189,
+        "startChar": 21,
+        "endLine": 189,
+        "endChar": 81
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a04b99c9_ffc94ac3",
@@ -215,6 +407,30 @@
       "writtenOn": "2023-03-29T08:44:01Z",
       "side": 1,
       "message": "same comment as above",
+      "range": {
+        "startLine": 192,
+        "startChar": 4,
+        "endLine": 192,
+        "endChar": 25
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64b5ec43_d4bdd084",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-03T08:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a04b99c9_ffc94ac3",
       "range": {
         "startLine": 192,
         "startChar": 4,
@@ -248,6 +464,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aead9d8_c1f8d93a",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-03T08:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb56ba9f_f77c4221",
+      "range": {
+        "startLine": 197,
+        "startChar": 4,
+        "endLine": 197,
+        "endChar": 27
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "221034a8_c6092170",
@@ -261,6 +501,30 @@
       "writtenOn": "2023-03-29T08:44:01Z",
       "side": 1,
       "message": "Redfish",
+      "range": {
+        "startLine": 249,
+        "startChar": 60,
+        "endLine": 249,
+        "endChar": 67
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb7bb395_264f8558",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-03T08:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "221034a8_c6092170",
       "range": {
         "startLine": 249,
         "startChar": 60,
@@ -288,6 +552,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efa708b1_43d33e21",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-03T08:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88a7d39c_276b6e58",
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a169c036_e92af485",
@@ -301,6 +583,30 @@
       "writtenOn": "2023-03-29T08:44:01Z",
       "side": 1,
       "message": "rename to events_status",
+      "range": {
+        "startLine": 263,
+        "startChar": 6,
+        "endLine": 263,
+        "endChar": 19
+      },
+      "revId": "901803955ebc85e8ebc6fc171bf12bae3f4a0537",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f3fd7a7_9d869631",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-03T08:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a169c036_e92af485",
       "range": {
         "startLine": 263,
         "startChar": 6,
