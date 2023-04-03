@@ -1,4 +1,22 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44e27e2c_3eb59c75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2023-04-03T13:43:11Z",
+      "side": 1,
+      "message": "This idle power saver code not required so abandoned.",
+      "revId": "33b4626693050746434794ac58cb0e8dc60064f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ],
   "submitRequirementResults": []
 }
