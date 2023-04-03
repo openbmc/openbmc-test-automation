@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0a36cca_9fc49481",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-04-03T10:15:33Z",
+      "side": 1,
+      "message": "Don\u0027t use data type in variable names --\u003e list\nThe variable name should be resolved_status or events_status..",
+      "range": {
+        "startLine": 173,
+        "startChar": 6,
+        "endLine": 173,
+        "endChar": 19
+      },
+      "revId": "21d5390f64e673168c28cbd6e549f6b2d0a24392",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3899516_142b12d4",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-04-03T10:15:33Z",
+      "side": 1,
+      "message": "same as above",
+      "range": {
+        "startLine": 179,
+        "startChar": 4,
+        "endLine": 179,
+        "endChar": 20
+      },
+      "revId": "21d5390f64e673168c28cbd6e549f6b2d0a24392",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02c71d03_6051e065",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-04-03T10:15:33Z",
+      "side": 1,
+      "message": "same comment as above",
+      "range": {
+        "startLine": 192,
+        "startChar": 6,
+        "endLine": 192,
+        "endChar": 20
+      },
+      "revId": "21d5390f64e673168c28cbd6e549f6b2d0a24392",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55fe0a44_f7b3b266",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-04-03T10:15:33Z",
+      "side": 1,
+      "message": "status",
+      "range": {
+        "startLine": 250,
+        "startChar": 10,
+        "endLine": 250,
+        "endChar": 20
+      },
+      "revId": "21d5390f64e673168c28cbd6e549f6b2d0a24392",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
