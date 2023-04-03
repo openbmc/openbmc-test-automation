@@ -50,6 +50,7 @@ Verify User Initiated BMC Dump Size
     [Documentation]  Verify user initiated BMC dump size is under 20 MB.
     [Tags]  Verify_User_Initiated_BMC_Dump_Size
 
+    Redfish Power Off  stack_mode=skip
     ${dump_id}=  Create User Initiated BMC Dump Via Redfish
     ${resp}=  Redfish.Get Properties  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}
 
@@ -95,6 +96,7 @@ Verify Multiple BMC Dump Creation
     ...  another successfully.
     [Tags]   Verify_Multiple_BMC_Dump_Creation
 
+    Redfish Power Off  stack_mode=skip
     ${dump_count}=  Evaluate  random.randint(5, 10)  modules=random
     FOR  ${INDEX}  IN  1  ${dump_count}
       Create User Initiated BMC Dump Via Redfish
@@ -105,6 +107,7 @@ Verify BMC Dump Default Location In BMC
      [Documentation]  Verify that BMC dump is created in its default location of BMC.
      [Tags]  Verify_BMC_Dump_Default_Location_In_BMC
 
+     Redfish Power Off  stack_mode=skip
      Redfish Delete All BMC Dumps
      ${dump_id}=  Create User Initiated BMC Dump Via Redfish
      ${dump_file}  ${stderr}  ${rc}=  BMC Execute Command
@@ -148,6 +151,7 @@ Verify Dump Persistency On Dump Service Restart
     ...  persistency.
     [Tags]  Verify_Dump_Persistency_On_Dump_Service_Restart
 
+    Redfish Power Off  stack_mode=skip
     Create User Initiated BMC Dump Via Redfish
     ${dump_entries_before}=  redfish_utils.get_member_list  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
 
@@ -180,6 +184,7 @@ Delete User Initiated BMC Dump And Verify
     [Documentation]  Delete user initiated BMC dump and verify.
     [Tags]  Delete_User_Initiated_BMC_Dump_And_Verify
 
+    Redfish Power Off  stack_mode=skip
     ${dump_id}=  Create User Initiated BMC Dump Via Redfish
     Redfish Delete BMC Dump  ${dump_id}
 
@@ -207,6 +212,7 @@ Create Two User Initiated BMC Dumps
     [Documentation]  Create two user initiated BMC dumps.
     [Tags]  Create_Two_User_Initiated_BMC_Dumps
 
+    Redfish Power Off  stack_mode=skip
     ${dump_id1}=  Create User Initiated BMC Dump Via Redfish
     ${dump_id2}=  Create User Initiated BMC Dump Via Redfish
 
@@ -220,6 +226,7 @@ Create Two User Initiated BMC Dumps And Delete One
     [Documentation]  Create two dumps and delete the first.
     [Tags]  Create_Two_User_Initiated_BMC_Dumps_And_Delete_One
 
+    Redfish Power Off  stack_mode=skip
     ${dump_id1}=  Create User Initiated BMC Dump Via Redfish
     ${dump_id2}=  Create User Initiated BMC Dump Via Redfish
 
@@ -234,6 +241,7 @@ Create And Delete User Initiated BMC Dump Multiple Times
     [Documentation]  Create and delete user initiated BMC dump multiple times.
     [Tags]  Create_And_Delete_User_Initiated_BMC_Dump_Multiple_Times
 
+    Redfish Power Off  stack_mode=skip
     FOR  ${INDEX}  IN  1  10
       ${dump_id}=  Create User Initiated BMC Dump Via Redfish
       Redfish Delete BMC Dump  ${dump_id}
@@ -299,6 +307,7 @@ Verify Error While Initiating BMC Dump During Dumping State
     [Documentation]  Verify error while initiating BMC dump during dumping state.
     [Tags]  Verify_Error_While_Initiating_BMC_Dump_During_Dumping_State
 
+    Redfish Power Off  stack_mode=skip
     ${task_id}=  Create User Initiated BMC Dump Via Redfish  ${1}
 
     # Check error while initiating BMC dump while dump in progress.
@@ -314,6 +323,8 @@ Verify Error While Initiating BMC Dump During Dumping State
 Verify BMC Dump Create Errors While Another BMC Dump In Progress
     [Documentation]  Verify BMC dump creation error until older BMC dump completion.
     [Tags]  Verify_BMC_Dump_Create_Errors_While_Another_BMC_Dump_In_Progress
+
+    Redfish Power Off  stack_mode=skip
 
     # Initiate a BMC dump that returns without completion.
     ${task_id}=  Create User Initiated BMC Dump Via Redfish  ${1}
