@@ -109,11 +109,13 @@ Verify Installed LDAP Certificate
     [Documentation]  Install LDAP certificate via Redfish and verify it in GUI.
     [Tags]  Verify_Installed_LDAP_Certificate
 
+    Redfish.Login
     Delete Certificate Via BMC CLI  Client
 
     # Install LDAP certificate.
     ${file_data}=  Generate Certificate File Data  Client
     Install And Verify Certificate Via Redfish  Client  Valid Certificate Valid Privatekey  ok
+    Redfish.Logout    
 
     # Refresh GUI and verify certificate is available in GUI.
     Refresh GUI
