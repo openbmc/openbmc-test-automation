@@ -12,7 +12,7 @@ Suite Teardown  Close Browser
 *** Variables ***
 
 ${xpath_ldap_heading}                   //h1[text()="LDAP"]
-${xpath_enable_ldap_checkbox}           //*[@data-test-id='ldap-checkbox-ldapAuthenticationEnabled']//following-sibling::label
+${xpath_enable_ldap_checkbox}           //*[@data-test-id='ldap-checkbox-ldapAuthenticationEnabled']
 ${xpath_secure_ldap_checkbox}           //*[@data-test-id='ldap-checkbox-secureLdapEnabled']
 ${xpath_service_radio_button}           //*[@data-test-id="ldap-radio-activeDirectoryEnabled"]
 ${xpath_add_role_group_button}          //button[contains(text(),'Add role group')]
@@ -231,7 +231,7 @@ Create LDAP Configuration
     # Wait for GUI to reflect LDAP disabled status.
     Run Keywords  Refresh GUI  AND  Sleep  10s
 
-    Click Element  ${xpath_enable_ldap_checkbox}
+    Click Element At Coordinates  ${xpath_enable_ldap_checkbox}  0  0
     ${radio_buttons}=  Get WebElements  ${xpath_service_radio_button}
 
     Run Keyword If  '${ldap_service_type}' == 'LDAP'
