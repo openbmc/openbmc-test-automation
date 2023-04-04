@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10150c28_e7a76494",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-04-04T13:12:29Z",
+      "side": 1,
+      "message": "Get And Verify Value Of Resolved Attribute For Event Logs",
+      "revId": "df53c33dff9574921029a4451237b3f8b2d09654",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a60c52f_fc68c63c",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-04-04T13:12:29Z",
+      "side": 1,
+      "message": "description missing",
+      "revId": "df53c33dff9574921029a4451237b3f8b2d09654",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
