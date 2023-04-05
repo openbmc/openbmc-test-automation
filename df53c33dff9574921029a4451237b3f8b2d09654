@@ -47,6 +47,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb9a570c_2a4611a0",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-05T10:11:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b9ec0d0_3c2a646a",
+      "range": {
+        "startLine": 165,
+        "startChar": 21,
+        "endLine": 166,
+        "endChar": 44
+      },
+      "revId": "df53c33dff9574921029a4451237b3f8b2d09654",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c44770e_d3123792",
@@ -60,6 +84,30 @@
       "writtenOn": "2023-04-04T14:34:33Z",
       "side": 1,
       "message": "Not required to check error log resolved because every new error log will come as unresolved",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 45
+      },
+      "revId": "df53c33dff9574921029a4451237b3f8b2d09654",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd872456_add93aa1",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-05T10:11:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c44770e_d3123792",
       "range": {
         "startLine": 171,
         "startChar": 0,
@@ -93,6 +141,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3f6225a_99f8ebb7",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-05T10:11:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5e37b87_ba2fb180",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 21
+      },
+      "revId": "df53c33dff9574921029a4451237b3f8b2d09654",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96299ee0_d44974a5",
@@ -106,6 +178,30 @@
       "writtenOn": "2023-04-04T14:34:33Z",
       "side": 1,
       "message": "Instead on this, I would say wait until notification gets disappear",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 179,
+        "endChar": 45
+      },
+      "revId": "df53c33dff9574921029a4451237b3f8b2d09654",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21bae36d_24cf1e4a",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-05T10:11:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96299ee0_d44974a5",
       "range": {
         "startLine": 179,
         "startChar": 0,
@@ -139,6 +235,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea9d9eec_424d6f6a",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-05T10:11:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "060cdabd_5564b785",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 43
+      },
+      "revId": "df53c33dff9574921029a4451237b3f8b2d09654",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10150c28_e7a76494",
@@ -152,6 +272,24 @@
       "writtenOn": "2023-04-04T13:12:29Z",
       "side": 1,
       "message": "Get And Verify Value Of Resolved Attribute For Event Logs",
+      "revId": "df53c33dff9574921029a4451237b3f8b2d09654",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd12f630_79f367c4",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-05T10:11:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10150c28_e7a76494",
       "revId": "df53c33dff9574921029a4451237b3f8b2d09654",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -173,6 +311,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "248782c0_fd5fc11d",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-05T10:11:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a60c52f_fc68c63c",
+      "revId": "df53c33dff9574921029a4451237b3f8b2d09654",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cdb4b62_910ba20d",
@@ -186,6 +342,30 @@
       "writtenOn": "2023-04-04T14:34:33Z",
       "side": 1,
       "message": "This keyword needs to take action based on error log provided. Like take error log id as the argument and then check if those are marked as resolved\n\nor directly do this verification in the above test cases.",
+      "range": {
+        "startLine": 240,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 7
+      },
+      "revId": "df53c33dff9574921029a4451237b3f8b2d09654",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89f8094b_1fcc75a9",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-05T10:11:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2cdb4b62_910ba20d",
       "range": {
         "startLine": 240,
         "startChar": 0,
