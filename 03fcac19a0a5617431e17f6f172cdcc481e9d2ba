@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80897f88_0533bcc4",
+        "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-04-05T06:57:02Z",
+      "side": 1,
+      "message": "in case of expected_status is error what are you expecting here?",
+      "revId": "03fcac19a0a5617431e17f6f172cdcc481e9d2ba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
