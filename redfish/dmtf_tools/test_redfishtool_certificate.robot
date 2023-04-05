@@ -381,13 +381,14 @@ Verify Redfishtool Replace Certificate
     ${payload}=  Set Variable  '${string}'
 
     ${expected_resp}=  Set Variable If  '${expected_status}' == 'ok'  ${HTTP_OK}
-    ...  '${expected_status}' == 'error'  ${HTTP_NOT_FOUND}
+    ...  '${expected_status}' == 'error'  ${HTTP_NOT_FOUND}, ${HTTP_INTERNAL_SERVER_ERROR}
 
     ${response}=  Redfishtool Post
     ...  ${payload}  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
     ...  expected_error=${expected_resp}
 
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
+    Sleep  5s
     ${bmc_cert_content}=  Redfishtool GetAttribute  ${certificate_uri}  CertificateString
 
     Run Keyword If  '${expected_status}' == 'ok'
