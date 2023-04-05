@@ -8,6 +8,7 @@ Resource                ../lib/resource.robot
 Resource                ../lib/bmc_redfish_resource.robot
 Resource                ../lib/ipmi_client.robot
 Resource                ../lib/bmc_network_security_utils.robot
+Resource                ../lib/protocol_setting_utils.robot
 
 Library                 OperatingSystem
 Library                 String
@@ -172,7 +173,7 @@ Send Continuous TCP Connection Requests To IPMI Interface And Check Stability
     ...  ${OPENBMC_HOST}  ${iterations}  ${TCP_CONNECTION}  ${IPMI_PORT}
 
     # Check if IPMI interface is functional.
-    Verify IPMI Works
+    Verify IPMI Works  lan print
 
     # Check if TCP/Network connections dropped.
     Should Be Equal As Numbers  ${connection_loss}  0.0
