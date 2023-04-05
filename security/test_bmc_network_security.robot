@@ -227,7 +227,7 @@ Verify Interface Stability
 Establish TCP Connections And Get Connection Failures
     [Documentation]  Establish TCP connections and return nping connection responses.
     [Arguments]  ${target_host}  ${num}=${count}  ${packet_type}=${TCP_CONNECTION}
-    ...          http_port=${80}
+    ...          ${http_port}=${80}
 
     # Description of argument(s):
     # host         The host name or IP address of the target system.
