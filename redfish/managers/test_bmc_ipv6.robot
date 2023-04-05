@@ -55,7 +55,7 @@ Verify All Configured IPv6 And PrefixLength On BMC
     [Tags]  Verify_All_Configured_IPv6_And_PrefixLength_On_BMC
 
     FOR  ${ipv6_network_configuration}  IN  @{ipv6_network_configurations}
-      Verify IPv6 And PrefixLength On BMC  ${ipv6_network_configuration['Address']}
+      Verify IPv6 And PrefixLength  ${ipv6_network_configuration['Address']}
       ...  ${ipv6_network_configuration['PrefixLength']}
     END
 
