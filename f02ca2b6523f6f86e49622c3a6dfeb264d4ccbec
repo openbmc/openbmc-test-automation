@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d36ac2af_c8ff837a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-04-05T16:43:10Z",
+      "side": 1,
+      "message": "Verify All Configured IPv6 And PrefixLength On BMC :: Verify IPv6 ... | FAIL |\nNo keyword with name \u0027Verify IPv6 And PrefixLength On BMC\u0027 found. Did you mean:\n    Verify IPv6 And PrefixLength",
+      "revId": "f02ca2b6523f6f86e49622c3a6dfeb264d4ccbec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
