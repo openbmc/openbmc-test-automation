@@ -10,6 +10,11 @@ Variables      ../data/gui_variables.py
 
 *** Variables ***
 ${obmc_gui_url}              https://${OPENBMC_HOST}
+${xpath_power_page}          //*[@data-test-id='appHeader-container-power']
+${xpath_power_shutdown}      //*[@data-test-id='serverPowerOperations-button-shutDown']
+${xpath_power_power_on}      //*[@data-test-id='serverPowerOperations-button-powerOn']
+${xpath_power_reboot}        //*[@data-test-id='serverPowerOperations-button-reboot']
+${xpath_confirm}             //button[contains(text(),'Confirm')]
 
 # Default GUI browser and mode is set to "Firefox" and "headless"
 # respectively here.
@@ -93,6 +98,7 @@ Login GUI
     Wait Until Element Is Enabled  ${xpath_login_username_input}
     Input Text  ${xpath_login_username_input}  ${username}
     Input Password  ${xpath_login_password_input}  ${password}
+    Wait Until Element Is Enabled  ${xpath_login_button}
     Click Element  ${xpath_login_button}
     Wait Until Page Contains  Overview  timeout=60s
 
@@ -188,3 +194,57 @@ Add DNS Servers And Verify
     ${cli_name_servers}=  CLI Get Nameservers
     ${cmd_status}=  Run Keyword And Return Status
     ...  List Should Contain Sub List  ${cli_name_servers}  ${dns_server}
+
+
+Navigate To Server Power Page
+    [Documentation]  Navigate To Server Power Page.
+
+    Click Element  ${xpath_power_page}
+    Wait Until Element Is Not Visible  ${xpath_progress_bar}  timeout=30
+
+
+Power Off Server
+    [Documentation]  Powering off server.
+
+    Navigate To Server Power Page
+    ${present}=    Run Keyword And Return Status
+    ...  Element Should Be Visible    ${xpath_power_shutdown}
+    IF  ${present}
+      Click Element  ${xpath_power_shutdown}
+      Click Button  ${xpath_confirm}
+      Wait Until Element Is Visible  ${xpath_power_poweron}  timeout=60
+    ELSE
+      Log To console    Server is already powered Off.
+    END
+
+
+Power On Server
+    [Documentation]  Powering on server.
+
+    Navigate To Server Power Page
+    ${present}=    Run Keyword And Return Status
+    ...  Element Should Be Visible    ${xpath_power_power_on}
+    IF  (${present})
+      Click Element  ${xpath_power_power_on}
+      Wait Until Element Is Visible  ${xpath_power_shutdown}  timeout=60
+    ELSE
+      Log To console    Server is already powered On.
+    END
+
+
+Reboot Server
+    [Documentation]  Rebooting the server.
+
+    Navigate To Server Power Page
+    ${present}=    Run Keyword And Return Status
+    ...  Element Should Be Visible    ${xpath_power_reboot}
+    IF  ${present}
+      Click Element  ${xpath_power_reboot}
+      Wait Until Element Is Visible  ${xpath_confirm}  timeout=30
+      Click Button  ${xpath_confirm}
+      Wait Until Element Is Visible  ${xpath_power_reboot}  timeout=60
+    ELSE
+      Log To console    Server is already powered Off, can't reboot.
+    END
+
+
