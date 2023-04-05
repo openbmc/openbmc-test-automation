@@ -326,7 +326,7 @@ Verify Power Reading Using IPMI And Redfish
 
     ${ipmi_reading}=  Get IPMI Power Reading
     ${redfish_power_reading}=  redfish_utils.Get Attribute
-    ...  /redfish/v1/Chassis/chassis/Sensors/total_power  Reading
+    ...  /redfish/v1/Chassis/chassis/Sensors/power_total_power  Reading
 
     ${ipmi_redfish_power_diff}=
     ...  Evaluate  abs(${redfish_power_reading} - ${ipmi_reading['instantaneous_power_reading']})
