@@ -382,6 +382,8 @@ Verify BMC Dump Create Errors While Another BMC Dump In Progress
     END
 
     # The next BMC dump initiation request should be accepted as earlier dump is completed.
+    # Wait for few seconds before initiating the dump.
+    Sleep  2s
     ${resp}=  Redfish.Post
     ...  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
     ...  body=${payload}  valid_status_codes=[${HTTP_ACCEPTED}]
