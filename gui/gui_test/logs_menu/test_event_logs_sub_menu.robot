@@ -159,6 +159,15 @@ Verify Invalid Content Search Logs
     Click Button  ${xpath_clear_search}
 
 
+Verify Error Log Unresolved Status Via Redfish
+    [Documentation]   Verify that error log unresolved status via redfish.
+    [Tags]  Verify_Error_Log_Unresolved_Status_Via_Redfish
+    [Setup]  Run Keywords  Redfish.Login  AND  Redfish Purge Event Log
+
+    Create Error Logs  ${1}
+    Get And Verify Status Of Event Logs  ${false}
+
+
 Verify Resolving Single Error Log In GUI
     [Documentation]   Verify that error log can be resolved via GUI
     ...               and the resolution is reflected in Redfish.
@@ -168,10 +177,12 @@ Verify Resolving Single Error Log In GUI
     Create Error Logs  ${1}
     # Mark single event log as resolved.
     Click Element At Coordinates  ${xpath_event_log_resolve}  0  0
+    # Given the time to get the notification.
+    Sleep  2s
     Page Should Contain  Successfully resolved 1 log.
     Wait Until Page Does Not Contain Element  Successs
     # Verify the Redfish response after event log mark as resolved.
-    Get And Verify Value Of Resolved Attribute For Event Logs  ${True}
+    Get And Verify Status Of Event Logs  ${True}
 
 
 Verify Resolving Multiple Error Logs In GUI
@@ -186,7 +197,7 @@ Verify Resolving Multiple Error Logs In GUI
     Page Should Contain  Successfully resolved 3 logs.
     Wait Until Page Does Not Contain Element  Successs
     # Verify the event logs status from Redfish after mark as resolved.
-    Get And Verify Value Of Resolved Attribute For Event Logs  ${True}
+    Get And Verify Status Of Event Logs  ${True}
 
 
 *** Keywords ***
@@ -230,7 +241,7 @@ Select All Events
     Click Element At Coordinates  ${xpath_select_all_events}  0  0
 
 
-Get And Verify Value Of Resolved Attribute For Event Logs
+Get And Verify Status Of Event Logs
     [Documentation]  Get event log entry and verify resolved attribute value.
     [Arguments]  ${expected_resolved_status}
 
