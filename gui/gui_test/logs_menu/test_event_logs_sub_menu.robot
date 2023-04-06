@@ -34,6 +34,7 @@ ${xpath_filter_clearall_button}   //button[contains(text(),"Clear all")]
 ${xpath_clear_search}             //button[@title="Clear search input"]
 ${xpath_event_log_resolve}        //*[@name="switch"]
 ${xpath_event_logs_resolve}       //button[contains(text(),'Resolve')]
+${xpath_event_status}             //td[contains(text(),'Critical')]/following-sibling::td[3]
 
 *** Test Cases ***
 
@@ -168,10 +169,11 @@ Verify Resolving Single Error Log In GUI
     Create Error Logs  ${1}
     # Mark single event log as resolved.
     Click Element At Coordinates  ${xpath_event_log_resolve}  0  0
-    Page Should Contain  Successfully resolved 1 log.
+    # Given the time to get the notification.
+    Wait Until Page Contains  Successfully resolved 1 log.
     Wait Until Page Does Not Contain Element  Successs
     # Verify the Redfish response after event log mark as resolved.
-    Get And Verify Value Of Resolved Attribute For Event Logs  ${True}
+    Get And Verify Status Of Resolved Field In Event Logs  ${True}
 
 
 Verify Resolving Multiple Error Logs In GUI
@@ -186,7 +188,20 @@ Verify Resolving Multiple Error Logs In GUI
     Page Should Contain  Successfully resolved 3 logs.
     Wait Until Page Does Not Contain Element  Successs
     # Verify the event logs status from Redfish after mark as resolved.
-    Get And Verify Value Of Resolved Attribute For Event Logs  ${True}
+    Get And Verify Status Of Resolved Field In Event Logs  ${True}
+
+
+Verify Default Value Of Resolved Field In Error Log
+    [Documentation]   Verify that error log unresolved status from GUI
+    [Tags]  Verify_Default_Value_Of_Resolved_Field_In_Error_Log
+
+    Redfish Purge Event Log
+    Create Error Logs  ${1}
+    # Verify default value of resolved field from GUI.
+    ${gui_event_log_status}=  Get Text  ${xpath_event_status}
+    Should Be Equal As Strings  ${gui_event_log_status}  Unresolved
+    # Verify default value of resolved field from Redfish.
+    Get And Verify Status Of Resolved Field In Event Logs  ${False}
 
 
 *** Keywords ***
@@ -230,7 +245,7 @@ Select All Events
     Click Element At Coordinates  ${xpath_select_all_events}  0  0
 
 
-Get And Verify Value Of Resolved Attribute For Event Logs
+Get And Verify Status Of Resolved Field In Event Logs
     [Documentation]  Get event log entry and verify resolved attribute value.
     [Arguments]  ${expected_resolved_status}
 
