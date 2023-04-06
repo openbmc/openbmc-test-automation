@@ -54,6 +54,9 @@ Verify BMC Reboot Operation
     [Tags]  Verify_BMC_Reboot_Operation
 
     Click Element  ${xpath_reboot_bmc_button}
+
+    # Delay added for confirm button to appear.
+    Sleep  5s
     Click Element At Coordinates  ${xpath_confirm_button}  0  0
 
     # Checks BMC gets into Unpingable state and later becomes Pingable.
