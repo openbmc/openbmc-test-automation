@@ -252,6 +252,50 @@ Verify View More Button Under Inventory And LEDs Section
     Wait Until Page Contains Element  ${xpath_inventory_and_leds_heading}  timeout=30
 
 
+Verify Text Under Server Information Section
+    [Documentation]  Verify text under server information section in overview page.
+    [Tags]  Verify_Text_Under_Server_Information_Section
+
+    Page Should Contain  Server information
+    Page Should Contain  Model
+    Page Should Contain  Operating mode
+    Page Should Contain  Serial number
+    Page Should Contain  Service login
+    Page Should Contain  Asset tag
+    Page Should Contain Element  ${xpath_server_information_view_more_button}
+
+
+Verify Text Under Firmware Information Section
+    [Documentation]  Verify text under firmware information section in overview page.
+    [Tags]  Verify_Text_Under_Firmware_Information_Section
+
+    Page Should Contain  Running
+    Page Should Contain  Backup
+    Page Should Contain  Access key expiration
+    Page Should Contain Element  ${xpath_firmware_information_view_more_button}
+
+
+Verify Text Under Network Information Section
+    [Documentation]  Verify text under network information section in overview page.
+    [Tags]  Verify_Text_Under_Network_Information_Section
+
+    Page Should Contain  Hostname
+    Page Should Contain  IPv4
+    Page Should Contain  DHCPv4
+    Page Should Contain Element  ${xpath_network_information_view_more_button}
+
+
+Verify Text Under Power Information Section
+    [Documentation]  Verify text under power information section in overview page.
+    [Tags]  Verify_Text_Under_Power_Information_Section
+
+    Page Should Contain  Power consumption
+    Page Should Contain  Idle power saver
+    Page Should Contain  Power cap
+    Page Should Contain  Power mode
+    Page Should Contain Element  ${xpath_power_information_view_more_button}
+
+
 *** Keywords ***
 
 Test Setup Execution
