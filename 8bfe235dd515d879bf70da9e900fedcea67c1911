@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3717e900_3607cb39",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-07T05:03:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23ba1a1d_7f140222",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 74
+      },
+      "revId": "8bfe235dd515d879bf70da9e900fedcea67c1911",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c65e2f0c_caf464cc",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-04-06T10:45:11Z",
       "side": 1,
       "message": "This is not a GUI test case. If you want to add this test case then add in redfish bucket or change this test to check GUI error log status.",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 49
+      },
+      "revId": "8bfe235dd515d879bf70da9e900fedcea67c1911",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "359643ae_dc64e3c6",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-07T05:03:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c65e2f0c_caf464cc",
       "range": {
         "startLine": 162,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6344adc_26f21882",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-07T05:03:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3a3f065_1b10390e",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 13
+      },
+      "revId": "8bfe235dd515d879bf70da9e900fedcea67c1911",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88e97b01_9c61d210",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-04-06T10:45:11Z",
       "side": 1,
       "message": "Get And Verify Status Of Resolved Field In Event Logs",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 244,
+        "endChar": 35
+      },
+      "revId": "8bfe235dd515d879bf70da9e900fedcea67c1911",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afa801da_66d673a7",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-07T05:03:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88e97b01_9c61d210",
       "range": {
         "startLine": 244,
         "startChar": 0,
