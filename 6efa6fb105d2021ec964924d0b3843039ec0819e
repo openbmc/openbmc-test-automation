@@ -22,6 +22,30 @@
       },
       "revId": "6efa6fb105d2021ec964924d0b3843039ec0819e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29ca3c8d_ad8b452c",
+        "filename": "gui/gui_test/operations_menu/test_reboot_bmc_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2023-04-07T10:03:47Z",
+      "side": 1,
+      "message": "using Wait Until Element Is Visible  ${xpath_confirm_button}\nhitting issue. \nso using Sleep  5s",
+      "parentUuid": "b4ad964b_6eb4b78f",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 13
+      },
+      "revId": "6efa6fb105d2021ec964924d0b3843039ec0819e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
