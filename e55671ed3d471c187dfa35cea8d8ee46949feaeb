@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bc58c7b_560b2b3a",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-04-07T09:54:36Z",
+      "side": 1,
+      "message": "Not required as discussed.",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 259,
+        "endChar": 43
+      },
+      "revId": "e55671ed3d471c187dfa35cea8d8ee46949feaeb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acd5951f_0675d9a9",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-04-07T09:54:36Z",
+      "side": 1,
+      "message": "Not required as we are already doing this validation in above test cases. Same comment applied to all",
+      "range": {
+        "startLine": 265,
+        "startChar": 0,
+        "endLine": 265,
+        "endChar": 77
+      },
+      "revId": "e55671ed3d471c187dfa35cea8d8ee46949feaeb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
