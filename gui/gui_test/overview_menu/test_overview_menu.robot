@@ -252,6 +252,67 @@ Verify View More Button Under Inventory And LEDs Section
     Wait Until Page Contains Element  ${xpath_inventory_and_leds_heading}  timeout=30
 
 
+Verify Text Under Server Information Section
+    [Documentation]  Verify text under server information section in overview page.
+    [Tags]  Verify_Text_Under_Server_Information_Section
+
+    Page Should Contain  Model
+    Page Should Contain  Operating mode
+    Page Should Contain  Serial number
+    Page Should Contain  Service login
+    Page Should Contain  Asset tag
+
+
+Verify Text Under Firmware Information Section
+    [Documentation]  Verify text under firmware information section in overview page.
+    [Tags]  Verify_Text_Under_Firmware_Information_Section
+
+    Page Should Contain  Running
+    Page Should Contain  Backup
+    Page Should Contain  Access key expiration
+
+
+Verify Text Under Network Information Section
+    [Documentation]  Verify text under network information section in overview page.
+    [Tags]  Verify_Text_Under_Network_Information_Section
+
+    Page Should Contain  Hostname
+    Page Should Contain  IPv4
+    Page Should Contain  DHCPv4
+
+
+Verify Text Under Power Information Section
+    [Documentation]  Verify text under power information section in overview page.
+    [Tags]  Verify_Text_Under_Power_Information_Section
+
+    Page Should Contain  Power consumption
+    Page Should Contain  Idle power saver
+    Page Should Contain  Power cap
+    Page Should Contain  Power mode
+
+
+Verify Text Under Event Logs Section
+    [Documentation]  Verify text under event logs section in overview page.
+    [Tags]  Verify_Text_Under_Event_Logs_Section
+
+    Page Should Contain  Critical
+    Page Should Contain  Warning
+
+
+Verify Text Under Inventory And LEDs Section
+    [Documentation]  Verify text under inventory and leds section in overview page.
+    [Tags]  Verify_Text_Under_Inventory_And_Leds_Section
+
+    Page Should Contain  System identify LED
+
+
+Verify Text Under Dumps Section
+    [Documentation]  Verify text under Dumps section in overview page.
+    [Tags]  Verify_Text_Under_Dumps_Section
+
+    Page Should Contain  Total
+
+
 *** Keywords ***
 
 Test Setup Execution
