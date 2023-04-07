@@ -201,7 +201,7 @@ Verify Error Upon Creating Same Users With Different Privileges
 
     # Create specified user.
     ${payload}=  Create Dictionary
-    ...  UserName=test_user  Password=TestPwd123  RoleId=Operator  Enabled=${True}
+    ...  UserName=test_user  Password=TestPwd123  RoleId=ReadOnly  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
     ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
