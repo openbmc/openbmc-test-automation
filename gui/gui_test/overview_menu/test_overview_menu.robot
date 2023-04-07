@@ -252,6 +252,18 @@ Verify View More Button Under Inventory And LEDs Section
     Wait Until Page Contains Element  ${xpath_inventory_and_leds_heading}  timeout=30
 
 
+Verify Text Under Server Information Section
+    [Documentation]  Verify text under server information section in overview page.
+    [Tags]  Verify_Text_Under_Server_Information_Section
+
+    Page Should Contain  Model
+    Page Should Contain  Operating mode
+    Page Should Contain  Serial number
+    Page Should Contain  Service login
+    Page Should Contain  Asset tag
+    Page Should Contain Element  ${xpath_server_information_view_more_button}
+
+
 *** Keywords ***
 
 Test Setup Execution
