@@ -82,9 +82,14 @@ Compare IPMI And Redfish FRU Component
 
     FOR    ${key}    ${value}    IN    @{key_map}
       Exit For Loop IF    "${value}" == "${EMPTY}"
-      Should Contain  ${redfish_fru_component_obj['${value}']}
-      ...  ${ipmi_fru_component_obj['${key}']}
-      ...  msg=Comparison failed.
+      FOR  ${ipmi_fru_component}  IN  ${ipmi_fru_component_obj}
+        FOR  ${redfish_fru_component}  IN  ${redfish_fru_component_obj}
+          Run Keyword If  '${ipmi_fru_component['product_name']}' == '${redfish_fru_component['Name']}'
+          ...  Should Contain  ${redfish_fru_component_obj['${value}']}
+          ...  ${ipmi_fru_component_obj['${key}']}
+          ...  msg=Comparison failed.
+        END
+      END
     END
 
 
