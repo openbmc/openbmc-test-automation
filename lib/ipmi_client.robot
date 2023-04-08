@@ -494,8 +494,11 @@ Create SEL
     #                              obtained from Sensor ID field in - ipmitool sdr get "sensor_name".
     #                              Example: Sensor ID : SENSOR_1 (0xHH), here 0xHH is sensor number.
 
-    ${resp}=  Run IPMI Command
-    ...  ${IPMI_RAW_CMD['SEL_entry']['Create_SEL'][0]} 0x${sensor_type} 0x${sensor_number} ${IPMI_RAW_CMD['SEL_entry']['Create_SEL'][1]}
+    ${cmd}=  Catenate  ${IPMI_RAW_CMD['SEL_entry']['Create_SEL'][0]} 0x${GEN_ID_BYTE_1} 0x${GEN_ID_BYTE_2}
+    ...  ${IPMI_RAW_CMD['SEL_entry']['Create_SEL'][1]} 0x${sensor_type} 0x${sensor_number}
+    ...  ${IPMI_RAW_CMD['SEL_entry']['Create_SEL'][2]}
+
+    ${resp}=  Run IPMI Command  ${cmd}
 
     Should Not Contain  ${resp}  00 00  msg=SEL not created.
 
