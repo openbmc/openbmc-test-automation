@@ -58,6 +58,8 @@ ${IPMI_COMMAND}    External
 ${IPMI_CIPHER_LEVEL}  ${17}
 # IPMI timeout default.
 ${IPMI_TIMEOUT}       ${3}
+${GEN_ID_BYTE_1}  ${20}
+${GEN_ID_BYTE_2}  ${00}
 
 # Log default path for IPMI SOL.
 ${IPMI_SOL_LOG_FILE}    ${EXECDIR}${/}logs${/}sol_${OPENBMC_HOST}
