@@ -28,6 +28,7 @@ ${CMD_INFORMATIONAL_ERROR}  busctl call xyz.openbmc_project.Logging /xyz/openbmc
 
 ${SNMP_TRAP_BMC_INTERNAL_FAILURE}  xyz.openbmc_project.Common.Error.InternalFailure
 ${SNMP_TRAP_BMC_CALLOUT_ERROR}  xyz.openbmc_project.Common.Error.Timeout
+...  CALLOUT_INVENTORY_PATH=/xyz/openbmc_project/inventory/system/chassis/motherboard TIMEOUT_IN_MSEC=5
 ${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}  xyz.openbmc_project.Common.Error.TestError2
 
 
