@@ -1,0 +1,8 @@
+--include Add_Valid_IPv4_Address_And_Verify
+# TODO: Debugging system bricked by thus test case.
+#--include Modify_IPv4_Address_And_Verify
+--include Add_Valid_IPv4_Address_And_Check_Persistency
+--include Configure_And_Verify_Multiple_Static_IPv4_Addresses
+--include Configure_Hostname_And_Verify
+--include Configure_DNS_Server_And_Verify
+--include Delete_DNS_Server_And_Verify
