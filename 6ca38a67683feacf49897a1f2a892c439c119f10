@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bc41716_87b225d9",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-04-11T10:55:47Z",
+      "side": 1,
+      "message": "Wait Until Page Contains  Successfully resolved 1 log  timeout\u003d10",
+      "range": {
+        "startLine": 173,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 58
+      },
+      "revId": "6ca38a67683feacf49897a1f2a892c439c119f10",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06080117_73e971c6",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-04-11T10:55:47Z",
+      "side": 1,
+      "message": "Leave a blank line before comment message.",
+      "range": {
+        "startLine": 199,
+        "startChar": 0,
+        "endLine": 199,
+        "endChar": 27
+      },
+      "revId": "6ca38a67683feacf49897a1f2a892c439c119f10",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c15eb45_ac8732c3",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-04-11T10:55:47Z",
+      "side": 1,
+      "message": "```\nElement should contain  ${xpath_event_log_data}  Unresolved\n```",
+      "range": {
+        "startLine": 201,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 67
+      },
+      "revId": "6ca38a67683feacf49897a1f2a892c439c119f10",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58081b8e_cb66388a",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-04-11T10:55:47Z",
+      "side": 1,
+      "message": "Not required. Add a separate test case in redfish bucket.",
+      "range": {
+        "startLine": 203,
+        "startChar": 0,
+        "endLine": 204,
+        "endChar": 67
+      },
+      "revId": "6ca38a67683feacf49897a1f2a892c439c119f10",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
