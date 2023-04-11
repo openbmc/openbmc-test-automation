@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f08f239_a63edc72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000382
+      },
+      "writtenOn": "2023-04-11T05:27:38Z",
+      "side": 1,
+      "message": "Where are the DHCPv4 scenarios covered?",
+      "revId": "02b5a4d93e9dd8e64417ee0ab50c64a3b4e51257",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
