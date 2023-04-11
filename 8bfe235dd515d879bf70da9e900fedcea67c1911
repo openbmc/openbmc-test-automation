@@ -95,6 +95,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10097059_43ffc550",
+        "filename": "gui/gui_test/logs_menu/test_event_logs_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-04-11T03:44:42Z",
+      "side": 1,
+      "message": "I mean... if you want to have this test case here then we need to checking resolve field status from GUI. Otherwise move this test case in redfish error log bucket",
+      "parentUuid": "359643ae_dc64e3c6",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 49
+      },
+      "revId": "8bfe235dd515d879bf70da9e900fedcea67c1911",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3a3f065_1b10390e",
