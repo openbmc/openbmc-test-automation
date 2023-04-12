@@ -245,6 +245,7 @@ Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
     Redfish.Login
+    Redfish Power Off  stack_mode=skip
 
 
 Test Teardown Execution
