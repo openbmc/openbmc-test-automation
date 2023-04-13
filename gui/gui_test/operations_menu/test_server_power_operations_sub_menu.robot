@@ -141,6 +141,8 @@ Verify Host Orderly Reboot
     ...  AND  Navigate to Server Power Operation Page
 
     Click Element  ${xpath_reboot_button}
+    # Delay for confirm button to appear.
+    Sleep  5s
     Wait Until Element Is Visible  ${xpath_confirm_button}  timeout=10
     Click Element  ${xpath_confirm_button}
     Wait Until Keyword Succeeds  2 min  1 sec  Is Server Status Off
