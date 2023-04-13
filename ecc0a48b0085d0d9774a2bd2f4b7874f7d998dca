@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "971ec861_4210985a",
+        "filename": "gui/gui_test/operations_menu/test_server_power_operations_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-04-13T15:03:46Z",
+      "side": 1,
+      "message": "remove white space",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 4
+      },
+      "revId": "ecc0a48b0085d0d9774a2bd2f4b7874f7d998dca",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
