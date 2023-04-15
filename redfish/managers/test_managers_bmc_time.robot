@@ -23,6 +23,7 @@ ${invalid_datetime}          "2019-04-251T12:24:46+00:00"
 ${ntp_server_1}              9.9.9.9
 ${ntp_server_2}              2.2.3.3
 &{original_ntp}              &{EMPTY}
+${year_without_ntp}          1970
 
 *** Test Cases ***
 
@@ -251,6 +252,10 @@ Suite Setup Execution
     Printn
     Redfish.Login
     Get NTP Initial Status
+    ${old_date_time}=  CLI Get BMC DateTime
+    ${year_status}=  Run Keyword And Return Status  Should Not Contain  ${old_date_time}  ${year_without_ntp}
+    Run Keyword If  ${year_status} == False
+    ...  Enable NTP And Add NTP Address
     Set Time To Manual Mode
 
 
@@ -333,3 +338,19 @@ Verify System Time Sync Status
     ...  Should Contain  ${sync_status}  active (running)
     Run Keyword If  ${expected_sync_status}==${False}
     ...  Should Contain  ${sync_status}  inactive (dead)
+
+Enable NTP And Add NTP Address
+    [Documentation]  Enable NTP Protocol and Add NTP Address.
+
+    Set NTP state  ${TRUE}
+
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'NTPServers': ${NTP_SERVER_ADDRESSES}}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    Wait Until Keyword Succeeds  1 min  10 sec  Check Date And Time Was Changed
+    
+Check Date And Time Was Changed
+    [Documentation]  Verify date was current date and time.
+
+    ${new_date_time}=  CLI Get BMC DateTime
+    Should Not Contain  ${new_date_time}  ${year_without_ntp}
