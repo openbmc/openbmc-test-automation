@@ -18,6 +18,8 @@ ${rsv_dir_path}           Redfish-Reference-Checker
 ${command_string}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}RedfishReferenceTool.py
 ...                --nochkcert 'https://${OPENBMC_HOST}:${HTTPS_PORT}/redfish/v1/$metadata'
 
+${branch_name}    main
+
 *** Test Case ***
 
 Test BMC Redfish Reference
@@ -36,5 +38,5 @@ Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
     Printn
-    Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}
+    Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}  ${branch_name}
 

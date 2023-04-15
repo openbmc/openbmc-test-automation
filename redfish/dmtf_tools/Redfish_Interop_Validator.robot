@@ -14,6 +14,7 @@ ${cmd_str_master}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}RedfishInteropValidator.
 ...                --ip https://${OPENBMC_HOST}:${HTTPS_PORT} --authtype=Session -u ${OPENBMC_USERNAME}
 ...                -p ${OPENBMC_PASSWORD} --logdir ${EXECDIR}${/}logs${/} --debugging
 ...                ${EXECDIR}/data/openbmc_redfish_interop_profile.json
+${branch_name}     master
 
 *** Test Case ***
 
@@ -21,7 +22,7 @@ Test BMC Redfish Using Redfish Interop Validator
     [Documentation]  Check conformance based on the OpenBMC Interoperability profile.
     [Tags]  Test_BMC_Redfish_Using_Redfish_Interop_Validator
 
-    Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}
+    Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}  ${branch_name}
 
     ${rc}  ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${cmd_str_master}  check_error=1
 

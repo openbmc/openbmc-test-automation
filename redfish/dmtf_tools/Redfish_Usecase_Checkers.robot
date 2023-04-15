@@ -29,6 +29,7 @@ ${command_power_control}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}power_control/pow
 ${power_on_timeout}       15 mins
 ${power_off_timeout}      15 mins
 ${state_change_timeout}   3 mins
+${branch_name}            main
 
 *** Test Case ***
 
@@ -71,7 +72,7 @@ Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
     Printn
-    Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}
+    Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}  ${branch_name}
 
 
 Test Teardown Execution

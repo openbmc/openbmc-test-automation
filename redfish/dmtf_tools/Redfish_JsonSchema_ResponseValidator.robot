@@ -14,13 +14,15 @@ ${rsv_github_url}  https://github.com/DMTF/Redfish-JsonSchema-ResponseValidator.
 ${command_string}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}Redfish-JsonSchema-ResponseValidator.py
 ...                -r https://${OPENBMC_HOST} -u ${OPENBMC_USERNAME} -p ${OPENBMC_PASSWORD} -S -v
 
+${branch_name}    main
+
 *** Test Case ***
 
 Test BMC Redfish Using Redfish JsonSchema ResponseValidator
     [Documentation]  Check OpenBMC conformance with JsonSchema files at the DMTF site.
     [Tags]  Test_BMC_Redfish_Using_Redfish_JsonSchema_ResponseValidator
 
-    Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}
+    Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}  ${branch_name}
 
     Redfish.Login
     ${url_list}=  redfish_utils.List Request  /redfish/v1

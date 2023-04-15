@@ -16,6 +16,7 @@ ${rsv_github_url}  https://github.com/DMTF/Redfish-Service-Validator.git
 ${cmd_str_master}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}RedfishServiceValidator.py
 ...                --ip https://${OPENBMC_HOST}:${HTTPS_PORT} --authtype=Session -u ${OPENBMC_USERNAME}
 ...                -p ${OPENBMC_PASSWORD} --logdir ${EXECDIR}${/}logs${/} --debugging
+${branch_name}    master
 
 *** Test Case ***
 
@@ -23,7 +24,7 @@ Test BMC Redfish Using Redfish Service Validator
     [Documentation]  Check conformance with a Redfish service interface.
     [Tags]  Test_BMC_Redfish_Using_Redfish_Service_Validator
 
-    Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}
+    Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}  ${branch_name}
 
     ${rc}  ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${cmd_str_master}  check_error=1
 
@@ -61,7 +62,7 @@ Create User And Run Service Validator
     Redfish Create User  ${username}  ${password}  ${role}  ${enabled}
     Redfish.Logout
 
-    Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}
+    Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}  ${branch_name}
 
     ${cmd}=  Catenate  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}RedfishServiceValidator.py
     ...  --ip https://${OPENBMC_HOST}:${HTTPS_PORT} --authtype=Session -u ${username}
