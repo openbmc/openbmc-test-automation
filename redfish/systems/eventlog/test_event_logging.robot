@@ -425,6 +425,19 @@ Test Event Log Wrapping
     ...  msg=The event log should have wrapped such that entry ID 1 is now purged.
 
 
+Verify Default Value Of Resolved Field Is False For An Error Log Via Redfish
+    [Documentation]   Verify the Resolve field status is false for an error log from Redfish.
+    [Tags]  Verify_Default_Value_Of_Resolved_Field_Is_False_For_An_Error_Log_Via_Redfish
+
+    Redfish Purge Event Log
+    Create Test Error Log
+
+    # Check resolve field value of created error log.
+    ${elog_entry}=  Get Event Logs
+    ${elog_status}=  Set Variable  ${elog_entry[0]["Resolved"]}
+    Should Be Equal  ${elog_status}  ${False}
+
+
 *** Keywords ***
 
 Suite Setup Execution
