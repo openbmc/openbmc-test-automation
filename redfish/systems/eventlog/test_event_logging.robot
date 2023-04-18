@@ -425,6 +425,20 @@ Test Event Log Wrapping
     ...  msg=The event log should have wrapped such that entry ID 1 is now purged.
 
 
+Verify Default Value Of Resolved Field In Error Log Via Redfish
+    [Documentation]   Verify that default status of error log from Redfish
+    [Tags]  Verify_Default_Value_Of_Resolved_Field_In_Error_Log_Via_Redfish
+
+    Redfish Purge Event Log
+    Create Test Error Log
+ 
+    # Verify the default status of error log from Redfish.
+    ${elog_entry}=  Get Event Logs
+    FOR  ${elog}  IN  @{elog_entry}
+        Should Be Equal  ${elog["Resolved"]}  ${False}
+    END 
+
+
 *** Keywords ***
 
 Suite Setup Execution
