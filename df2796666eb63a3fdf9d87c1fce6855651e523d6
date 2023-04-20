@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b1259b8_ae102710",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-20T12:31:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a690c7e6_3de07920",
+      "revId": "df2796666eb63a3fdf9d87c1fce6855651e523d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7634d24e_bbf7ef5b",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-04-18T15:58:34Z",
       "side": 1,
       "message": "Verify that the default Resolve field status is false for an error log from Redfish.",
+      "revId": "df2796666eb63a3fdf9d87c1fce6855651e523d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5e94f88_d0ec702b",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-20T12:31:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7634d24e_bbf7ef5b",
       "revId": "df2796666eb63a3fdf9d87c1fce6855651e523d6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -58,6 +94,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b17c632d_8392b8ae",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-20T12:31:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6641200e_dab266bc",
+      "range": {
+        "startLine": 435,
+        "startChar": 3,
+        "endLine": 435,
+        "endChar": 58
+      },
+      "revId": "df2796666eb63a3fdf9d87c1fce6855651e523d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1922ff10_17a5d6ed",
@@ -71,6 +131,30 @@
       "writtenOn": "2023-04-19T04:50:07Z",
       "side": 1,
       "message": "As we are only creating one error log, this loop is not required.\n```\n    ${elog_entry}\u003d  Get Event Logs\n    Should Be Equal  ${elog_entry[0][\"Resolved\"]}  ${False}\n```",
+      "range": {
+        "startLine": 436,
+        "startChar": 0,
+        "endLine": 439,
+        "endChar": 7
+      },
+      "revId": "df2796666eb63a3fdf9d87c1fce6855651e523d6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4fc8db9_8db7e609",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-04-20T12:31:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1922ff10_17a5d6ed",
       "range": {
         "startLine": 436,
         "startChar": 0,
