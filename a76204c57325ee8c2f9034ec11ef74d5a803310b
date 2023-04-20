@@ -22,6 +22,30 @@
       },
       "revId": "a76204c57325ee8c2f9034ec11ef74d5a803310b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1573b35_cf46d337",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-04-20T10:28:19Z",
+      "side": 1,
+      "message": "also why navigation to SNMP page is required. Same comment for below.",
+      "parentUuid": "dd0662c7_bf4c70fd",
+      "range": {
+        "startLine": 342,
+        "startChar": 0,
+        "endLine": 342,
+        "endChar": 21
+      },
+      "revId": "a76204c57325ee8c2f9034ec11ef74d5a803310b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
