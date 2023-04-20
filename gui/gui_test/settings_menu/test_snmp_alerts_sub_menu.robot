@@ -336,10 +336,13 @@ Create Error On BMC And Verify Trap On Default Port
 
     Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
 
-    Run Keyword If  ${persistency_check} == ${True}
-    ...  Run Keywords  Reboot BMC via GUI  AND  Navigate To SNMP Alerts Page
+    IF  ${persistency_check} == ${True}
+        Reboot BMC via GUI
+        Navigate To SNMP Alerts Page
+        Redfish.Login
+    END
 
-    Start SNMP Manager
+    Start SNMP Manager On Specific Port  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
 
     # Generate error log.
     BMC Execute Command  ${event_log}
@@ -425,9 +428,10 @@ Generate Error Log On BMC And Verify Trap On Non Default Port
     IF  ${persistency_check} == ${True}
         Reboot BMC via GUI
         Navigate To SNMP Alerts Page
+        Redfish.Login
     END
 
-    Start SNMP Manager
+    Start SNMP Manager On Specific Port  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
 
     # Generate error log.
     BMC Execute Command  ${event_log_cmd}
