@@ -45,6 +45,10 @@ Verify Canceling Operation On BMC Reboot Operation
     [Tags]  Verify_Canceling_Operation_On_BMC_Reboot_Operation
 
     Click Element  ${xpath_reboot_bmc_button}
+
+    # Delay added for confirm button to appear.
+    Sleep  5s
+
     Click Element At Coordinates  ${xpath_reboot_cancel_button}  0  0
     Wait Until Element Is Not Visible  ${xpath_reboot_cancel_button}  timeout=15
 
