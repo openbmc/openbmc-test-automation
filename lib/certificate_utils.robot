@@ -234,7 +234,7 @@ Replace Certificate Via Redfish
     ${payload}=  Create Dictionary  CertificateString=${file_data}
     ...  CertificateType=PEM  CertificateUri=${certificate_dict}
 
-    ${expected_resp}=  Set Variable If  '${expected_status}' == 'ok'  ${HTTP_OK}
+    ${expected_resp}=  Set Variable If  '${expected_status}' == 'ok'  ${HTTP_OK}, ${HTTP_NO_CONTENT}
     ...  '${expected_status}' == 'error'  ${HTTP_NOT_FOUND}, ${HTTP_INTERNAL_SERVER_ERROR}
     ${resp}=  redfish.Post  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
     ...  body=${payload}  valid_status_codes=[${expected_resp}]

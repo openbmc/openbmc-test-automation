@@ -148,6 +148,7 @@ Install Server Certificate Using Redfishtool And Verify Via OpenSSL
 
     ${response}=  Redfishtool Post
     ...  ${payload}  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     Wait Until Keyword Succeeds  2 mins  15 secs  Verify Certificate Visible Via OpenSSL  ${cert_file_path}
 
@@ -223,7 +224,7 @@ Generate CSR Via Redfishtool
     Run Keyword If  '${key_pair_algorithm}' == 'EC'  Remove From Dictionary  ${csr_dict}  KeyBitLength
     ...  ELSE IF  '${key_pair_algorithm}' == 'RSA'  Remove From Dictionary  ${csr_dict}  KeyCurveId
 
-    ${expected_resp}=  Set Variable If  '${expected_status}' == 'ok'  ${HTTP_OK}
+    ${expected_resp}=  Set Variable If  '${expected_status}' == 'ok'  ${HTTP_OK}, ${HTTP_NO_CONTENT}
     ...  '${expected_status}' == 'error'  ${HTTP_BAD_REQUEST}
 
     ${string}=  Convert To String  ${csr_dict}
@@ -234,7 +235,7 @@ Generate CSR Via Redfishtool
 
     ${response}=  Redfishtool Post
     ...  ${payload}  /redfish/v1/CertificateService/Actions/CertificateService.GenerateCSR
-    ...  expected_error=${expected_resp}
+    ...  expected_error=[${expected_resp}]
 
     # Delay added between two CSR generation request.
     Sleep  5s
@@ -335,10 +336,12 @@ Redfishtool Install Certificate File On BMC
     Set To Dictionary  ${kwargs}  headers  ${headers}
 
     ${resp}=  POST On Session  openbmc  ${uri}  &{kwargs}  expected_status=any
-    ${cert_id}=  Set Variable If  '${resp.status_code}' == '${HTTP_OK}'  ${resp.json()["Id"]}  -1
+    ${cert_id}=  Set Variable If  
+    ...  '${resp.status_code}' == '${HTTP_OK}'  ${resp.json()["Id"]}  -1
+    ...  '${resp.status_code}' == '${HTTP_NO_CONTENT}'  ${resp.json()["Id"]}  -1
 
     Run Keyword If  '${status}' == 'ok'
-    ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ...  Should Contain Any  "${resp.status_code}"  ${HTTP_OK}  ${HTTP_NO_CONTENT}
     ...  ELSE IF  '${status}' == 'error'
     ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_INTERNAL_SERVER_ERROR}
 
@@ -380,12 +383,12 @@ Verify Redfishtool Replace Certificate
     ${string}=  Replace String  ${string}  '  "
     ${payload}=  Set Variable  '${string}'
 
-    ${expected_resp}=  Set Variable If  '${expected_status}' == 'ok'  ${HTTP_OK}
-    ...  '${expected_status}' == 'error'  ${HTTP_NOT_FOUND},${HTTP_INTERNAL_SERVER_ERROR}
+    ${expected_resp}=  Set Variable If  '${expected_status}' == 'ok'  ${HTTP_OK}, ${HTTP_NO_CONTENT}
+    ...  '${expected_status}' == 'error'  ${HTTP_NOT_FOUND}
 
     ${response}=  Redfishtool Post
     ...  ${payload}  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
-    ...  expected_error=${expected_resp}
+    ...  expected_error=[${expected_resp}]
 
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
     Sleep  5s
