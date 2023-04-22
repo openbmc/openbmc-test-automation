@@ -130,7 +130,7 @@ Verify Server Certificate View Via Openssl
     ...  CertificateType=PEM  CertificateUri=${certificate_dict}
 
     ${resp}=  redfish.Post  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
-    ...  body=${payload}
+    ...  body=${payload}  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     Wait Until Keyword Succeeds  2 mins  15 secs  Verify Certificate Visible Via OpenSSL  ${cert_file_path}
 
