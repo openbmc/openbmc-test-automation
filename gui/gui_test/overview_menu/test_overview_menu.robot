@@ -301,7 +301,7 @@ Verify Text Under Event Logs Section
 
 Verify Text Under Inventory And LEDs Section
     [Documentation]  Verify text under inventory and leds section in overview page.
-    [Tags]  Verify_Text_Under_Inventory_And_Leds_Section
+    [Tags]  Verify_Text_Under_Inventory_And_LEDs_Section
 
     Page Should Contain  System identify LED
 
