@@ -22,8 +22,7 @@ ${xpath_shutdown_orderly_radio}            //*[@data-test-id='serverPowerOperati
 ${xpath_shutdown_immediate_radio}          //*[@data-test-id='serverPowerOperations-radio-shutdownImmediate']
 ${xpath_confirm_button}                    //button[contains(text(),'Confirm')]
 ${xpath_current_power_state}               //*[@data-test-id='powerServerOps-text-hostStatus']
-${xpath_reboot_immediate_radio}            //*[@data-test-id='serverPowerOperations-radio-rebootImmediate']
-
+${xpath_reboot_immediate_radio}            //*[@data-test-id='serverPowerOperations-radio-shutdownImmediate']
 
 *** Test Cases ***
 
@@ -128,6 +127,9 @@ Verify Host Immediate Reboot
     Click Element At Coordinates  ${xpath_reboot_immediate_radio}  0  0
     Click Element  ${xpath_reboot_button}
     Wait Until Page Contains Element  ${xpath_confirm_button}  timeout=10
+
+    # Delay added for confirm button to appear.
+    Sleep  5sec
     Click Element  ${xpath_confirm_button}
     Wait Until Keyword Succeeds  3 min  2 sec  Element Should Contain  ${xpath_current_power_state}  Off
     Click Element  ${xpath_refresh_button}
