@@ -171,7 +171,7 @@ Verify Resolving Single Error Log In GUI
     Click Element At Coordinates  ${xpath_event_log_resolve}  0  0
     # Given the time to get the notification.
     Wait Until Page Contains  Successfully resolved 1 log  timeout=10
-    Wait Until Page Does Not Contain Element  Successs
+    Wait Until Page Does Not Contain Element  Success
     # Verify the Redfish response after event log mark as resolved.
     Get And Verify Status Of Resolved Field In Event Logs  ${True}
 
@@ -186,7 +186,7 @@ Verify Resolving Multiple Error Logs In GUI
     Select All Events
     Click Element  ${xpath_event_logs_resolve}
     Page Should Contain  Successfully resolved 3 logs.
-    Wait Until Page Does Not Contain Element  Successs
+    Wait Until Page Does Not Contain Element  Success
     # Verify the event logs status from Redfish after mark as resolved.
     Get And Verify Status Of Resolved Field In Event Logs  ${True}
 
