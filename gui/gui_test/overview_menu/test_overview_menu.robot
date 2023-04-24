@@ -28,6 +28,10 @@ ${xpath_led_button}                              //*[@data-test-id='overviewInve
 ${xpath_dumps_view_more_button}                  (//*[text()="View more"])[7]
 ${xpath_critical_logs_count}                     //dt[contains(text(),'Critical')]/following-sibling::dd[1]
 ${xpath_warning_logs_count}                      //dt[contains(text(),'Warning')]/following-sibling::dd[1]
+${xpath_asset_tag}                               //dt[contains(text(),'Asset tag')]/following-sibling::dd[1]
+${xpath_operating_mode}                          //dt[contains(text(),'Operating mode')]/following-sibling::dd[1]
+${xpath_machine_model}                           //dt[contains(text(),'Model')]/following-sibling::dd[1]
+${xpath_serial_number}                           //dt[contains(text(),'Serial number')]/following-sibling::dd[1]
 
 *** Test Cases ***
 
@@ -63,16 +67,21 @@ Verify Server Information Section
     [Documentation]  Verify values under server information section in overview page.
     [Tags]  Verify_Server_Information_Section
 
-    ${redfish_machine_model}=  Redfish.Get Attribute  /redfish/v1/Systems/system/  Model
-    Page Should Contain  ${redfish_machine_model}
+    # Model.
+    ${redfish_machine_model}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  Model
+    Element Should Contain  ${xpath_machine_model}  ${redfish_machine_model}
 
-    ${redfish_serial_number}=  Redfish.Get Attribute  /redfish/v1/Systems/system/  SerialNumber
-    Page Should Contain  ${redfish_serial_number}
+    # Serial Number.
+    ${redfish_serial_number}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  SerialNumber
+    Element Should Contain  ${xpath_serial_number}  ${redfish_serial_number}
 
-    ${redfish_motherboard_manufacturer}=  Redfish.Get Attribute
-    ...  /redfish/v1/Systems/system/  Manufacturer
+    # Asset Tag.
+    ${redfish_asset_tag}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  AssetTag
+    Element Should Contain  ${xpath_asset_tag}  ${redfish_asset_tag}
 
-    Page Should Contain  ${redfish_motherboard_manufacturer}
+    # Operating mode.
+    ${redfish_operating_mode}=  Redfish.Get Attribute  ${BIOS_ATTR_URI}  Attributes
+    Element Should Contain  ${xpath_operating_mode}  ${redfish_operating_mode['pvm_system_operating_mode']}
 
 
 Verify BMC Information Section
