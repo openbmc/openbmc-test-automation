@@ -3,11 +3,10 @@ Documentation          DHCP Network to test suite functionality.
 
 Resource               ../lib/openbmc_ffdc.robot
 Resource               ../lib/bmc_network_utils.robot
-Library                ../lib/ipmi_utils.py
 Library                ../lib/bmc_network_utils.py
 
 Suite Setup            Suite Setup Execution
-Suite Teardown         Redfish.Logout
+Suite Teardown         Run Keywords  Restore Configuration  AND Redfish.Logout
 
 *** Variables ***
 
@@ -56,61 +55,43 @@ Set Network Property via Redfish And Verify
 Suite Setup Execution
     [Documentation]  Suite Setup Execution.
 
+    Ping Host  ${OPENBMC_HOST}
+    Ping Host  ${OPENBMC_HOST_1}
     Redfish.Login
 
-    Redfish Power On
-    # This keyword should login to host OS.
-    Run Inband IPMI Standard Command
-    ...  lan set ${CHANNEL_NUMBER} ipsrc static  login_host=${1}
-
-    ${host_name}  ${ip_address}=  Get Host Name IP  host=${OPENBMC_HOST}
-
-    Set Suite Variable  ${ip_address}
-
-    @{network_configurations}=  Get Network Configuration
+    ${network_configurations}=  Get Network Configuration Using Channel Number  ${2}
     FOR  ${network_configuration}  IN  @{network_configurations}
-      Run Keyword If  '${network_configuration['Address']}' == '${ip_address}'
-      ...  Set Suite Variable  ${subnet_mask}  ${network_configuration['SubnetMask']}
+      Run Keyword If  '${network_configuration['Address']}' == '${OPENBMC_HOST_1}'
+      ...  Run Keywords  Set Suite Variable  ${eth1_subnet_mask}  ${network_configuration['SubnetMask']}
+      ...  AND  Set Suite Variable  ${eth1_gateway}  ${network_configuration['Gateway']}
+      ...  AND  Exit For Loop
     END
 
-    ${initial_lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}  ipmi_cmd_type=inband
-    Set Suite Variable  ${initial_lan_config}
+    ${network_configurations}=  Get Network Configuration Using Channel Number  ${1}
+    FOR  ${network_configuration}  IN  @{network_configurations}
+      Run Keyword If  '${network_configuration['Address']}' == '${OPENBMC_HOST}'
+      ...  Run Keywords  Set Suite Variable  ${eth0_subnet_mask}  ${network_configuration['SubnetMask']}
+      ...  AND  Set Suite Variable  ${eth0_gateway}  ${network_configuration['Gateway']}
+      ...  AND  Exit For Loop
+    END
 
-
-Set IPMI Inband Network Configuration
-    [Documentation]  Run sequence of standard in-band IPMI command and set
-    ...              the IP configuration.
-    [Arguments]  ${ip}  ${netmask}  ${gateway}
+Get Network Configuration Using Channel Number
+    [Documentation]  Get ethernet interface.
+    [Arguments]  ${channel_number}
 
     # Description of argument(s):
-    # ip       The IP address to be set using ipmitool-inband.
-    # netmask  The Netmask to be set using ipmitool-inband.
-    # gateway  The Gateway address to be set using ipmitool-inband.
-    # login    Indicates that this keyword should login to host OS.
+    # channel_number   Ethernet channel number, 1 is for eth0 and 2 is for eth1 (e.g. "1").
 
-    Run Inband IPMI Standard Command
-    ...  lan set ${CHANNEL_NUMBER} ipaddr ${ip}  login_host=${0}
-    Run Inband IPMI Standard Command
-    ...  lan set ${CHANNEL_NUMBER} netmask ${netmask}  login_host=${0}
-    Run Inband IPMI Standard Command
-    ...  lan set ${CHANNEL_NUMBER} defgw ipaddr ${gateway}  login_host=${0}
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
 
-
-Restore Configuration
-    [Documentation]  Restore the configuration to its pre-test state.
-
-    ${length}=  Get Length  ${initial_lan_config}
-    Return From Keyword If  ${length} == ${0}
-
-    Set IPMI Inband Network Configuration  ${ip_address}  ${subnet_mask}
-    ...  ${initial_lan_config['Default Gateway IP']}
-
+    @{network_configurations}=  Get From Dictionary  ${resp.dict}  IPv4StaticAddresses
+    [Return]  @{network_configurations}
 
 Apply Ethernet Config
     [Documentation]  Set the given Ethernet config property.
     [Arguments]  ${property}
-    [Teardown]  Run Keywords  Restore Configuration  AND
-    ...  Set Global Variable  ${TEST_STATUS}  ${KEYWORD STATUS}  AND  FFDC On Test Case Fail
 
     # Description of argument(s):
     # property   Ethernet property to be set..
@@ -124,7 +105,12 @@ Apply Ethernet Config
     ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
     Verify Ethernet Config Property  ${property}  ${resp.dict["DHCPv4"]}
 
+Restore Configuration
+    [Documentation]  Restore the configuration to Both Static Network
 
+    Run Keyword If  '${CHANNEL_NUMBER}' == '1'  Add IP Address  ${OPENBMC_HOST}  ${eth0_subnet_mask}  ${eth0_gateway}
+    ...  ELSE IF  '${CHANNEL_NUMBER}' == '2'  Add IP Address  ${OPENBMC_HOST_1}  ${eth1_subnet_mask}  ${eth1_gateway}
+ 
 Verify Ethernet Config Property
     [Documentation]  verify ethernet config properties.
     [Arguments]  ${property}  ${response_data}
