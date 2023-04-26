@@ -19,7 +19,7 @@ try:
     from robot.utils import DotDict
 except ImportError:
     pass
-
+import re
 
 # The code base directory will be one level up from the directory containing this module.
 code_base_dir_path = os.path.dirname(os.path.dirname(__file__)) + os.sep
@@ -484,3 +484,11 @@ def return_decoded_string(input):
     encoded_string = input.encode("ascii", "ignore")
     decoded_string = encoded_string.decode()
     return decoded_string
+
+
+def remove_unicode_from_uri(uri):
+    r"""
+    returns dbus uri without unicode in prefix
+    """
+
+    return re.sub("`-|\\|-", "", uri)

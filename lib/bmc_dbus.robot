@@ -61,7 +61,7 @@ Fetch DBUS URI List Without Unicode
     @{dbus_list}=  Create List
     FOR  ${item}  IN  @{dbus_uri_list}
         ${item}=  Set Variable  ${item.strip()}
-        ${item}=  return_decoded_string  ${item}
+        ${item}=  Remove Unicode From Uri  ${item}
         Append To List  ${dbus_list}  ${item}
     END
 
