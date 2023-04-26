@@ -19,7 +19,7 @@ try:
     from robot.utils import DotDict
 except ImportError:
     pass
-
+import re
 
 # The code base directory will be one level up from the directory containing this module.
 code_base_dir_path = os.path.dirname(os.path.dirname(__file__)) + os.sep
@@ -484,3 +484,78 @@ def return_decoded_string(input):
     encoded_string = input.encode("ascii", "ignore")
     decoded_string = encoded_string.decode()
     return decoded_string
+
+
+def get_string_index(input, value):
+    r"""
+    returns index from the string.
+    """
+
+    return input.find(value)
+
+
+def convert_two_list_to_one_dictionary(list1, list2):
+    return {list1[i]: list2[i] for i in range(len(list1))}
+
+def return_missing_value_from_list(list1, list2):
+    missing_values= set(list1).difference(list2)
+    return missing_values
+
+def convert_name_into_bytes_with_prefix(name):
+
+    r"""
+    convert name into bytes with prefix 0x
+    """
+
+    tmp_lst = []
+
+    for letter in name:
+        tmp_lst.append(hex(ord(letter)))
+
+    return tmp_lst
+
+def convert_name_into_bytes_without_prefix(name):
+
+    r"""
+    convert name into bytes
+    """
+
+    tmp_lst = []
+
+    for letter in name:
+        value = convert_to_hex_value_without_prefix(letter)
+        tmp_lst.append(value)
+
+    return tmp_lst
+
+def convert_to_hex_value_without_prefix(letter):
+
+    r"""
+    convert into hex
+    """
+    value = (hex(ord(letter)))
+    if value[:2] == '0x':
+        value = value[2:]
+
+    return value
+
+def convert_prefix_hex_list_to_non_prefix_hex_list(list):
+
+    r"""
+    convert into list of hex with prefix to list of hex without prefix.
+    """
+
+    tmp_list = []
+
+    for value in list:
+        if value[:2] == '0x':
+            tmp_list.append(value[2:])
+    
+    return tmp_list
+
+def remove_unicode_from_uri(uri):
+    r"""
+    returns dbus uri without unicode in prefix
+    """
+
+    return re.sub("`-|\\|-", "", uri)
