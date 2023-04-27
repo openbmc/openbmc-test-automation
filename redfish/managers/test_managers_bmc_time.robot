@@ -201,7 +201,7 @@ Test Teardown Execution
 Redfish Get DateTime
     [Documentation]  Returns BMC Datetime value from Redfish.
 
-    ${date_time}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}Managers/bmc  DateTime
+    ${date_time}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  DateTime
     [Return]  ${date_time}
 
 
@@ -225,7 +225,7 @@ Redfish Set DateTime
     ...  ELSE
     ...  Set Variable  ${date_time}
     Wait Until Keyword Succeeds  1min  5sec
-    ...  Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${date_time}'}  &{kwargs}
+    ...  Redfish.Patch  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  body={'DateTime': '${date_time}'}  &{kwargs}
 
 
 Set Time To Manual Mode
@@ -312,7 +312,7 @@ Set BMC Date And Verify
     Should Be True  '${time_diff}'<='3'
 
 Verify NTP Servers Are Populated
-    [Documentation]  Redfish GET request /redfish/v1/Managers/bmc/NetworkProtocol response
+    [Documentation]  Redfish GET request /redfish/v1/Managers/${MANAGER_ID}/NetworkProtocol response
     ...              and verify if NTP servers are populated.
 
     ${network_protocol}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}

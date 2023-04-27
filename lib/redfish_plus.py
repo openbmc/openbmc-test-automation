@@ -95,7 +95,7 @@ class redfish_plus(HttpClient):
 
         From a python program:
 
-        response = bmc_redfish.get("/redfish/v1/Managers/bmc/EthernetInterfaces", [200, 201])
+        response = bmc_redfish.get("/redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces", [200, 201])
 
         If this call to the get method generates a response.status equal to anything other than 200 or 201,
         an exception will be raised.
@@ -103,7 +103,7 @@ class redfish_plus(HttpClient):
         From a robot program:
 
         BMC_Redfish.logout
-        ${response}=  BMC_Redfish.Get  /redfish/v1/Managers/bmc/EthernetInterfaces  valid_status_codes=[401]
+        ${response}=  BMC_Redfish.Get  /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces  valid_status_codes=[401]
 
         As part of a robot test, the programmer has logged out to verify that the get request will generate a
         status code of 401 (i.e. "Unauthorized").

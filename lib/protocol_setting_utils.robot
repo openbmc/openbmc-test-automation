@@ -45,7 +45,7 @@ Verify SSH Protocol State
 
     # Sample output:
     # {
-    #   "@odata.id": "/redfish/v1/Managers/bmc/NetworkProtocol",
+    #   "@odata.id": "/redfish/v1/Managers/${MANAGER_ID}/NetworkProtocol",
     #   "@odata.type": "#ManagerNetworkProtocol.v1_5_0.ManagerNetworkProtocol",
     #   "Description": "Manager Network Service",
     #   "FQDN": "bmc",
@@ -55,7 +55,7 @@ Verify SSH Protocol State
     #  },
     #  "HTTPS": {
     #    "Certificates": {
-    #      "@odata.id": "/redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates"
+    #      "@odata.id": "/redfish/v1/Managers/${MANAGER_ID}/NetworkProtocol/HTTPS/Certificates"
     #    },
     #    "Port": xxx,
     #    "ProtocolEnabled": true

@@ -383,8 +383,8 @@ class redfish_request(object):
 
         'Actions' : {
         '#Manager.Reset' : {
-        '@Redfish.ActionInfo' : '/redfish/v1/Managers/bmc/ResetActionInfo',
-        'target' : '/redfish/v1/Managers/bmc/Actions/Manager.Reset'
+        '@Redfish.ActionInfo' : '/redfish/v1/Managers/${MANAGER_ID}/ResetActionInfo',
+        'target' : '/redfish/v1/Managers/${MANAGER_ID}/Actions/Manager.Reset'
         }
         }
         """

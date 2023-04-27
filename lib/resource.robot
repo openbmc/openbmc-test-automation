@@ -37,6 +37,7 @@ ${SERVICE_USER_PASSWORD}   0penBmc
 # For users privilege admin or sudo.
 ${USER_TYPE}          ${EMPTY}
 
+${MANAGER_ID}  bmc
 ${CHASSIS_ID}  chassis
 
 # MTLS_ENABLED indicates whether mTLS is enabled.
