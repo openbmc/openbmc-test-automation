@@ -424,7 +424,7 @@ Get Network Configuration
     # Sample output:
     #{
     #  "@odata.context": "/redfish/v1/$metadata#EthernetInterface.EthernetInterface",
-    #  "@odata.id": "/redfish/v1/Managers/bmc/EthernetInterfaces/eth0",
+    #  "@odata.id": "/redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/eth0",
     #  "@odata.type": "#EthernetInterface.v1_2_0.EthernetInterface",
     #  "Description": "Management Network Interface",
     #  "IPv4Addresses": [

@@ -338,7 +338,7 @@ Run Operation On BMC
 Get Active Firmware Image
     [Documentation]  Return get active firmware image.
 
-    ${active_image}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  Links
+    ${active_image}=  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  Links
     Rprint Vars  active_image
 
     [Return]  ${active_image}
