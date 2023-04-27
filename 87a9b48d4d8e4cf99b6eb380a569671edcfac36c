@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6019c904_afc58fd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-04-27T09:16:15Z",
+      "side": 1,
+      "message": "Sweta, As discussed can you Pls take a look athttps://github.com/openbmc/openbmc-test-automation/blob/8381f7358fadf9ef4e5b0b78d874497bda2da842/network/test_bmc_dhcp_conf.robot\nand enable that code to utilise eth1 instead of inband IPMI.",
+      "revId": "87a9b48d4d8e4cf99b6eb380a569671edcfac36c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
