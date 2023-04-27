@@ -54,7 +54,7 @@ Set DHCPEnabled To Enable Or Disable
 
     ${data}=  Set Variable If  ${dhcp_enabled} == ${False}  ${DISABLE_DHCP}  ${ENABLE_DHCP}
     ${resp}=  Redfish.Patch
-    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${interface}
+    ...  /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/${interface}
     ...  body=${data}  valid_status_codes=${valid_status_code}
 
 Suite Setup Execution

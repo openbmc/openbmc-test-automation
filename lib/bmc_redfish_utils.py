@@ -297,7 +297,7 @@ class bmc_redfish_utils(object):
                 # required in enumeration.
                 # Example: '/redfish/v1/JsonSchemas/' and sub resources.
                 #          '/redfish/v1/SessionService'
-                #          '/redfish/v1/Managers/bmc#/Oem'
+                #          '/redfish/v1/Managers/${MANAGER_ID}#/Oem'
                 if (
                     ("JsonSchemas" in resource)
                     or ("SessionService" in resource)

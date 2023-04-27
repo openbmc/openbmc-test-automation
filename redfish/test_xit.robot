@@ -22,7 +22,7 @@ Verify No BMC Dump And Application Failures In BMC
 
     # Check dump entry based on Redfish API availability.
     Redfish.Login
-    ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
+    ${resp}=  Redfish.Get  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
 
     Log To Console  ${resp}
