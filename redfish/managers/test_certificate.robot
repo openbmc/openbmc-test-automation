@@ -84,7 +84,7 @@ Verify Maximum CA Certificate Install
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Delete All CA Certificate Via Redfish
 
     # Get CA certificate count from BMC.
-    ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/bmc/Truststore/Certificates
+    ${cert_list}=  Redfish_Utils.Get Member List  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates
     ${cert_count}=  Get Length  ${cert_list}
 
     # Install CA certificate to reach maximum count of 10.
@@ -125,7 +125,7 @@ Verify Server Certificate View Via Openssl
     ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
 
     ${certificate_dict}=  Create Dictionary
-    ...  @odata.id=/redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates/1
+    ...  @odata.id=/redfish/v1/Managers/${MANAGER_ID}/NetworkProtocol/HTTPS/Certificates/1
     ${payload}=  Create Dictionary  CertificateString=${file_data}
     ...  CertificateType=PEM  CertificateUri=${certificate_dict}
 
@@ -239,7 +239,7 @@ Verify Certificates Location Via Redfish
     ${Links}=  Get From Dictionary  ${resp.dict}  Links
 
     ${match_cert}=  Catenate
-    ...  /redfish/v1/Managers/bmc/Truststore/Certificates/${cert_id}
+    ...  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates/${cert_id}
     ${match}=  Set Variable  ${False}
 
     FOR  ${Certificates_dict}  IN  @{Links['Certificates']}
@@ -263,7 +263,7 @@ Get Current BMC Date
 Restore BMC Date
     [Documentation]  Restore BMC date to its prior value.
 
-    Redfish.Patch  ${REDFISH_BASE_URI}Managers/bmc  body={'DateTime': '${cli_date_time}'}
+    Redfish.Patch  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  body={'DateTime': '${cli_date_time}'}
     ...  valid_status_codes=[${HTTP_OK}]
 
 

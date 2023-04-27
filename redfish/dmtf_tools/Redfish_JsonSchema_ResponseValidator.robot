@@ -54,7 +54,7 @@ Save Logs For Debugging
     ${validate_errs}=  Shell Cmd  cat validate_errs
     Log  ${validate_errs}
 
-    # URL /redfish/v1/Managers/bmc strip the last ending string and save off
+    # URL /redfish/v1/Managers/${MANAGER_ID} strip the last ending string and save off
     # the logs for debugging "validate_errs_AccountService" and move to logs/.
     Run Keyword If  ${status} == ${False}
     ...  Shell Cmd  mv validate_errs logs/validate_errs_${url.rsplit("/")[-1]}

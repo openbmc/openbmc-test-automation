@@ -217,7 +217,7 @@ Test Certificate Persistency After BMC Code Update
     Sleep  30s
 
     ${bmc_cert_content}=  redfish_utils.Get Attribute
-    ...  /redfish/v1/Managers/bmc/Truststore/Certificates/${cert_id}  CertificateString
+    ...  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates/${cert_id}  CertificateString
     Should Contain  ${cert_file_content}  ${bmc_cert_content}
 
     Upload And Activate Image  ${IMAGE_FILE_PATH}

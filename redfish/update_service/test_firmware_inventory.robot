@@ -85,7 +85,7 @@ Verify BMC Version Matches With FirmwareInventory
     [Documentation]  Verify BMC version from FirmwareInventory same as in manager.
     [Tags]  Verify_BMC_Version_Matches_With_FirmwareInventory
 
-    ${bmc_manager}=  Redfish.Get  /redfish/v1/Managers/bmc
+    ${bmc_manager}=  Redfish.Get  /redfish/v1/Managers/${MANAGER_ID}
     ${manager_bmc_version}=  Get BMC Version
     # Check for manager version and cat /etc/os-release.
     Should Be Equal As Strings
@@ -195,7 +195,7 @@ Verify Redfish Software Image And Firmware Inventory Are Same
     # /redfish/v1/UpdateService/FirmwareInventory/632c5114
     # /redfish/v1/UpdateService/FirmwareInventory/e702a011
 
-    ${firmware_inv_path}=  Redfish.Get Properties  ${REDFISH_BASE_URI}Managers/bmc
+    ${firmware_inv_path}=  Redfish.Get Properties  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}
     ${firmware_inv_path}=  Get From Dictionary  ${firmware_inv_path}  Links
     ${sw_image}=  Get From Dictionary  ${firmware_inv_path}  SoftwareImages
 
@@ -271,11 +271,11 @@ Verify Firmware Version Same In Firmware Inventory And Managers
     ${sw_inv_list}=  Get Functional Firmware  BMC image
     ${sw_inv_dict}=  Get Non Functional Firmware  ${sw_inv_list}  True
 
-    # /redfish/v1/Managers/bmc
+    # /redfish/v1/Managers/${MANAGER_ID}
     # "FirmwareVersion": "2.8.0-dev-150-g04508dc9f"
 
     ${firmware_version}=  Redfish.Get Attribute
-    ...  ${REDFISH_BASE_URI}Managers/bmc  FirmwareVersion
+    ...  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  FirmwareVersion
 
     Should Be Equal  ${sw_inv_dict['version']}  ${firmware_version}
 
@@ -297,11 +297,11 @@ Verify Firmware Version Is Not Same In Firmware Inventory And Managers
     ${sw_inv_list}=  Get Functional Firmware  BMC image
     ${sw_inv_list}=  Get Non Functional Firmware List  ${sw_inv_list}  False
 
-    # /redfish/v1/Managers/bmc
+    # /redfish/v1/Managers/${MANAGER_ID}
     # "FirmwareVersion": "2.8.0-dev-150-g04508dc9f"
 
     ${firmware_version}=  Redfish.Get Attribute
-    ...  ${REDFISH_BASE_URI}Managers/bmc  FirmwareVersion
+    ...  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  FirmwareVersion
 
     FOR  ${sw_inv}  IN  @{sw_inv_list}
       Should Not Be Equal  ${sw_inv['version']}  ${firmware_version}
@@ -348,7 +348,7 @@ Verify Active Software Image And Firmware Inventory Is Same
     # /redfish/v1/UpdateService/FirmwareInventory/632c5114
     # /redfish/v1/UpdateService/FirmwareInventory/632c5444
 
-    ${firmware_inv_path}=  Redfish.Get Properties  ${REDFISH_BASE_URI}Managers/bmc
+    ${firmware_inv_path}=  Redfish.Get Properties  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}
     ${firmware_inv_path}=  Get From Dictionary  ${firmware_inv_path}  Links
     ${active_sw_image}=  Get From Dictionary  ${firmware_inv_path}  ActiveSoftwareImage
     ${active_sw_image}=  Get From Dictionary  ${active_sw_image}  @odata.id

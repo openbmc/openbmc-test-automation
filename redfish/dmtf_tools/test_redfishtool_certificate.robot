@@ -137,7 +137,7 @@ Install Server Certificate Using Redfishtool And Verify Via OpenSSL
     ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
 
     ${certificate_dict}=  Create Dictionary
-    ...  @odata.id=/redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates/1
+    ...  @odata.id=/redfish/v1/Managers/${MANAGER_ID}/NetworkProtocol/HTTPS/Certificates/1
 
     ${dict_objects}=  Create Dictionary  CertificateString=${file_data}
     ...  CertificateType=PEM  CertificateUri=${certificate_dict}
@@ -284,7 +284,7 @@ Verify Redfishtool Install Certificate
 Delete All CA Certificate Via Redfisthtool
     [Documentation]  Delete all CA certificate via Redfish.
 
-    ${cmd_output}=  Redfishtool Get  /redfish/v1/Managers/bmc/Truststore/Certificates
+    ${cmd_output}=  Redfishtool Get  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates
     ${cmd_output}=  Convert String to JSON  ${cmd_output}
     ${cert_list}=  Set Variable  ${cmd_output["Members"]}
     FOR  ${cert}  IN  @{cert_list}
