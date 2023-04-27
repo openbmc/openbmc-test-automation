@@ -49,7 +49,7 @@ GET Redfish Resources With Login
     ${HTTP_OK}           /redfish/v1/AccountService
     ${HTTP_OK}           /redfish/v1/Systems/system
     ${HTTP_OK}           /redfish/v1/Chassis/${CHASSIS_ID}
-    ${HTTP_OK}           /redfish/v1/Managers/bmc
+    ${HTTP_OK}           /redfish/v1/Managers/${MANAGER_ID}
     ${HTTP_OK}           /redfish/v1/UpdateService
 
 

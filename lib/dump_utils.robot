@@ -162,17 +162,17 @@ Redfish Delete BMC Dump
     # Description of Argument(s):
     # dump_id  An integer value that identifies a particular dump (e.g. 1, 3).
 
-    Redfish.Delete  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}
+    Redfish.Delete  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries/${dump_id}
 
 
 Redfish Delete All BMC Dumps
     [Documentation]  Delete all BMC dumps via Redfish.
 
     # Check if dump entries exist, if not return.
-    ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
+    ${resp}=  Redfish.Get  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries
     Return From Keyword If  ${resp.dict["Members@odata.count"]} == ${0}
 
-    Redfish.Post  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.ClearLog
+    Redfish.Post  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Actions/LogService.ClearLog
 
 
 Get Redfish BMC Dump Log Entries
@@ -262,7 +262,7 @@ Initiate BMC Dump Using Redfish And Return Task Id
 
      ${payload}=  Create Dictionary  DiagnosticDataType=Manager
      ${resp}=  Redfish.Post
-     ...  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
+     ...  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Actions/LogService.CollectDiagnosticData
      ...  body=${payload}  valid_status_codes=[${HTTP_ACCEPTED}]
 
      # Example of response from above Redfish POST request.
@@ -286,7 +286,7 @@ Create User Initiated BMC Dump Via Redfish
     #                               initiating BMC dump and returns dump task id.
 
     ${payload}=  Create Dictionary  DiagnosticDataType=Manager
-    ${resp}=  Redfish.Post  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
+    ${resp}=  Redfish.Post  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Actions/LogService.CollectDiagnosticData
     ...  body=${payload}  valid_status_codes=[${HTTP_ACCEPTED}]
 
     # Example of response from above Redfish POST request.
@@ -310,11 +310,11 @@ Create User Initiated BMC Dump Via Redfish
     #      "Connection: Keep-Alive",
     #      "Accept: */*",
     #      "Content-Length: 33",
-    #      "Location: /redfish/v1/Managers/bmc/LogServices/Dump/Entries/2"]
+    #      "Location: /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries/2"]
     #    ],
     #    "HttpOperation": "POST",
     #    "JsonBody": "{\"DiagnosticDataType\":\"Manager\"}",
-    #     "TargetUri": "/redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData"
+    #     "TargetUri": "/redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Actions/LogService.CollectDiagnosticData"
     # }
 
     [Return]  ${task_dict["Payload"]["HttpHeaders"][-1].split("/")[-1]}
@@ -369,12 +369,12 @@ Get Dump ID
     #      "Connection: Keep-Alive",
     #      "Accept: */*",
     #      "Content-Length: 33",
-    #      "Location: /redfish/v1/Managers/bmc/LogServices/Dump/Entries/2"]
+    #      "Location: /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries/2"]
     #    ],
     #    "HttpOperation": "POST",
     #    "JsonBody": "{\"DiagnosticDataType\":\"Manager\"}",
     #     "TargetUri":
-    # "/redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData"
+    # "/redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Actions/LogService.CollectDiagnosticData"
     # }
 
     ${task_dict}=  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
@@ -419,7 +419,7 @@ Create BMC User Dump
     ...  the task instance Id and response object (e.g., "5").
 
     ${payload}=  Create Dictionary  DiagnosticDataType=Manager
-    ${resp}=  Redfish.Post  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
+    ${resp}=  Redfish.Post  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Actions/LogService.CollectDiagnosticData
     ...  body=${payload}  valid_status_codes=[${HTTP_ACCEPTED}]
 
     ${ip_resp}=  Evaluate  json.loads(r'''${resp.text}''')  json

@@ -58,7 +58,7 @@ Verify Network Information In Overview Page
 
     # Get all IP addresses and prefix lengths on system.
 
-    ${resp}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc/EthernetInterfaces/eth0  IPv4StaticAddresses
+    ${resp}=  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/eth0  IPv4StaticAddresses
     ${ip_addr}=  Set Variable  ${resp[0]['Address']}
     Page Should Contain  ${ip_addr}
 
@@ -183,7 +183,7 @@ Verify BMC Time In Overview Page
     [Documentation]  Verify that BMC date from GUI matches with BMC time via Redfish.
     [Tags]  Verify_BMC_Time_In_Overview_Page
 
-    ${date_time}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}Managers/bmc  DateTime
+    ${date_time}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  DateTime
     ${converted_date}=  Convert Date  ${date_time}  result_format=%Y-%m-%d
 
     Page Should Contain  ${converted_date}

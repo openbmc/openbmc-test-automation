@@ -48,10 +48,10 @@ Redfish BMC Reset Operation
     #    "GracefulRestart",
     #    "ForceRestart"
     #  ],
-    #  "target": "/redfish/v1/Managers/bmc/Actions/Manager.Reset"
+    #  "target": "/redfish/v1/Managers/${MANAGER_ID}/Actions/Manager.Reset"
     # }
 
-    ${target}=  redfish_utils.Get Target Actions  /redfish/v1/Managers/bmc/  Manager.Reset
+    ${target}=  redfish_utils.Get Target Actions  /redfish/v1/Managers/${MANAGER_ID}/  Manager.Reset
     ${payload}=  Create Dictionary  ResetType=${reset_type}
     Redfish.Post  ${target}  body=&{payload}
 
@@ -359,6 +359,6 @@ Redfish BMC Reboot
 Get BMC Last Reset Time
     [Documentation]  Return BMC LastResetTime.
 
-    ${last_reset_time}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  LastResetTime
+    ${last_reset_time}=  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  LastResetTime
 
     [Return]  ${last_reset_time}
