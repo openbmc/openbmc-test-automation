@@ -52,12 +52,12 @@ Verify User Initiated BMC Dump Size
 
     Redfish Power Off  stack_mode=skip
     ${dump_id}=  Create User Initiated BMC Dump Via Redfish
-    ${resp}=  Redfish.Get Properties  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}
+    ${resp}=  Redfish.Get Properties  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries/${dump_id}
 
     # Example of response from above Redfish GET request.
     # "@odata.type": "#LogEntry.v1_7_0.LogEntry",
     # "AdditionalDataSizeBytes": 31644,
-    # "AdditionalDataURI": "/redfish/v1/Managers/bmc/LogServices/Dump/attachment/9",
+    # "AdditionalDataURI": "/redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/attachment/9",
     # "Created": "2020-10-23T06:32:53+00:00",
     # "DiagnosticDataType": "Manager",
     # "EntryType": "Event",
@@ -87,7 +87,7 @@ Verify Internal Failure Initiated BMC Dump Size
 
     # Max size for dump is 20 MB = 20x1024x1024 Byte.
     ${resp}=  Redfish.Get Properties
-    ...  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_entries[0]}
+    ...  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries/${dump_entries[0]}
     Should Be True  0 < ${resp["AdditionalDataSizeBytes"]} < 20971520
 
 
@@ -153,13 +153,13 @@ Verify Dump Persistency On Dump Service Restart
 
     Redfish Power Off  stack_mode=skip
     Create User Initiated BMC Dump Via Redfish
-    ${dump_entries_before}=  redfish_utils.get_member_list  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
+    ${dump_entries_before}=  redfish_utils.get_member_list  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries
 
     # Restart dump service.
     BMC Execute Command  systemctl restart xyz.openbmc_project.Dump.Manager.service
     Sleep  10s  reason=Wait for BMC dump service to restart properly
 
-    ${dump_entries_after}=  redfish_utils.get_member_list  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
+    ${dump_entries_after}=  redfish_utils.get_member_list  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries
     Lists Should Be Equal  ${dump_entries_before}  ${dump_entries_after}
 
 
@@ -171,12 +171,12 @@ Verify Dump Persistency On BMC Reset
     Redfish Power Off  stack_mode=skip
 
     Create User Initiated BMC Dump Via Redfish
-    ${dump_entries_before}=  redfish_utils.get_member_list  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
+    ${dump_entries_before}=  redfish_utils.get_member_list  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries
 
     # Reset BMC.
     OBMC Reboot (off)  stack_mode=skip
 
-    ${dump_entries_after}=  redfish_utils.get_member_list  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
+    ${dump_entries_after}=  redfish_utils.get_member_list  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries
     Lists Should Be Equal  ${dump_entries_before}  ${dump_entries_after}
 
 
@@ -265,7 +265,7 @@ Verify Maximum BMC Dump Creation
 
     # Check error while creating dump when dump size is full.
     ${payload}=  Create Dictionary  DiagnosticDataType=Manager
-    Redfish.Post  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
+    Redfish.Post  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Actions/LogService.CollectDiagnosticData
     ...  body=${payload}  valid_status_codes=[${HTTP_INTERNAL_SERVER_ERROR}]
 
 
@@ -297,7 +297,7 @@ Verify Core Dump Size
     Wait Until Keyword Succeeds  2 min  10 sec  Is BMC Dump Available
     ${dump_entries}=  Get BMC Dump Entries
     ${resp}=  Redfish.Get Properties
-    ...  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_entries[0]}
+    ...  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries/${dump_entries[0]}
 
     # Max size for dump is 20 MB = 20x1024x1024 Byte.
     Should Be True  0 < ${resp["AdditionalDataSizeBytes"]} < 20971520
@@ -313,7 +313,7 @@ Verify Error While Initiating BMC Dump During Dumping State
     # Check error while initiating BMC dump while dump in progress.
     ${payload}=  Create Dictionary  DiagnosticDataType=Manager
     Redfish.Post
-    ...  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
+    ...  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Actions/LogService.CollectDiagnosticData
     ...  body=${payload}  valid_status_codes=[${HTTP_SERVICE_UNAVAILABLE}]
 
     # Wait for above initiated dump to complete. Otherwise, on going dump would impact next test.
@@ -336,7 +336,7 @@ Verify BMC Dump Create Errors While Another BMC Dump In Progress
         ${task_dict}=  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
         IF  '${task_dict['TaskState']}' == 'Completed'  BREAK
         ${resp}=  Redfish.Post
-        ...  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
+        ...  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Actions/LogService.CollectDiagnosticData
         ...  body=${payload}  valid_status_codes=[${HTTP_SERVICE_UNAVAILABLE}, ${HTTP_ACCEPTED}]
 
         # Sample response of above POST request:
@@ -385,7 +385,7 @@ Verify BMC Dump Create Errors While Another BMC Dump In Progress
     # Wait for few seconds before initiating the dump.
     Sleep  2s
     ${resp}=  Redfish.Post
-    ...  /redfish/v1/Managers/bmc/LogServices/Dump/Actions/LogService.CollectDiagnosticData
+    ...  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Actions/LogService.CollectDiagnosticData
     ...  body=${payload}  valid_status_codes=[${HTTP_ACCEPTED}]
 
     # Wait for above initiated dump to complete. Otherwise, on going dump would impact next test.
@@ -461,7 +461,7 @@ Verify Core Watchdog Initiated BMC Dump
 Get BMC Dump Entries
     [Documentation]  Return BMC dump ids list.
 
-    ${dump_uris}=  redfish_utils.get_member_list  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
+    ${dump_uris}=  redfish_utils.get_member_list  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries
     ${dump_ids}=  Create List
 
     FOR  ${dump_uri}  IN  @{dump_uris}

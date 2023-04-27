@@ -904,7 +904,7 @@ Redfish Get BMC State
     #    "State": "Enabled"
     # },
 
-    ${status}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  Status
+    ${status}=  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  Status
     [Return]  ${status["State"]}
 
 

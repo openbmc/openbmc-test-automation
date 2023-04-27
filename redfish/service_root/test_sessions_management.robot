@@ -148,7 +148,7 @@ Verify Managers Defaults
     Valid Value  managers['Members@odata.count']  [${managers_count}]
 
     # Members can be one or more, hence checking in the list.
-    Valid List  managers['Members']  required_values=[{'@odata.id': '/redfish/v1/Managers/bmc'}]
+    Valid List  managers['Members']  required_values=[{'@odata.id': '/redfish/v1/Managers/${MANAGER_ID}'}]
 
 
 Verify Chassis Defaults

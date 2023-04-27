@@ -65,9 +65,7 @@ OS_STATE_URI = OPENBMC_BASE_URI + "state/os/"
 # Logging URI variables
 BMC_LOGGING_URI = OPENBMC_BASE_URI + "logging/"
 BMC_LOGGING_ENTRY = BMC_LOGGING_URI + "entry/"
-REDFISH_BMC_LOGGING_ENTRY = (
-    "/redfish/v1/Systems/system/LogServices/EventLog/Entries/"
-)
+REDFISH_BMC_LOGGING_ENTRY = "/redfish/v1/Systems/system/LogServices/EventLog/Entries/"
 
 
 # Software manager version
@@ -130,19 +128,13 @@ STATE_DBUS_BASE = "xyz.openbmc_project.State."
 OS_BOOT_START = STATE_DBUS_BASE + "Boot.Progress.ProgressStages.OSStart"
 OS_BOOT_OFF = STATE_DBUS_BASE + "Boot.Progress.ProgressStages.Unspecified"
 OS_BOOT_PCI = STATE_DBUS_BASE + "Boot.Progress.ProgressStages.PCIInit"
-OS_BOOT_SECPCI = (
-    STATE_DBUS_BASE + "Boot.Progress.ProgressStages.SecondaryProcInit"
-)
+OS_BOOT_SECPCI = STATE_DBUS_BASE + "Boot.Progress.ProgressStages.SecondaryProcInit"
 OS_BOOT_MEM = STATE_DBUS_BASE + "Boot.Progress.ProgressStages.MemoryInit"
-OS_BOOT_MOTHERBOARD = (
-    STATE_DBUS_BASE + "Boot.Progress.ProgressStages.MotherboardInit"
-)
+OS_BOOT_MOTHERBOARD = STATE_DBUS_BASE + "Boot.Progress.ProgressStages.MotherboardInit"
 OPENBMC_DBUS_BMC_STATE = STATE_DBUS_BASE + "BMC"
 
 # OperatingSystem status variables.
-OS_BOOT_COMPLETE = (
-    STATE_DBUS_BASE + "OperatingSystem.Status.OSStatus.BootComplete"
-)
+OS_BOOT_COMPLETE = STATE_DBUS_BASE + "OperatingSystem.Status.OSStatus.BootComplete"
 OS_BOOT_CDROM = STATE_DBUS_BASE + "OperatingSystem.Status.OSStatus.CDROMBoot"
 OS_BOOT_ROM = STATE_DBUS_BASE + "OperatingSystem.Status.OSStatus.ROMBoot"
 OS_BOOT_PXE = STATE_DBUS_BASE + "OperatingSystem.Status.OSStatus.PXEBoot"
@@ -153,9 +145,7 @@ OS_BOOT_DIAGBOOT = STATE_DBUS_BASE + "OperatingSystem.Status.OSStatus.DiagBoot"
 BOOT_SOURCE_DEFAULT = "xyz.openbmc_project.Control.Boot.Source.Sources.Default"
 BOOT_SOURCE_NETWORK = "xyz.openbmc_project.Control.Boot.Source.Sources.Network"
 BOOT_SOURCE_DISK = "xyz.openbmc_project.Control.Boot.Source.Sources.Disk"
-BOOT_SOURCE_CDROM = (
-    "xyz.openbmc_project.Control.Boot.Source.Sources.ExternalMedia"
-)
+BOOT_SOURCE_CDROM = "xyz.openbmc_project.Control.Boot.Source.Sources.ExternalMedia"
 BOOT_MODE_SAFE = "xyz.openbmc_project.Control.Boot.Mode.Modes.Safe"
 BOOT_MODE_SETUP = "xyz.openbmc_project.Control.Boot.Mode.Modes.Setup"
 BOOT_MODE_REGULAR = "xyz.openbmc_project.Control.Boot.Mode.Modes.Regular"
@@ -184,29 +174,35 @@ ACTIVATION_DIR_PATH = "/etc/activationdata/"
 REDFISH_BASE_URI = "/redfish/v1/"
 REDFISH_SESSION = REDFISH_BASE_URI + "SessionService/Sessions"
 REDFISH_SESSION_URI = "SessionService/Sessions/"
-REDFISH_NW_ETH0 = "Managers/bmc/EthernetInterfaces/eth0/"
+REDFISH_MANAGERS_ID = BuiltIn().get_variable_value("${MANAGER_ID}")
+REDFISH_NW_ETH0 = "Managers/" + REDFISH_MANAGERS_ID + "/EthernetInterfaces/eth0/"
 REDFISH_NW_ETH0_URI = REDFISH_BASE_URI + REDFISH_NW_ETH0
-REDFISH_NW_ETH_IFACE = REDFISH_BASE_URI + "Managers/bmc/EthernetInterfaces/"
-REDFISH_NW_PROTOCOL = "Managers/bmc/NetworkProtocol"
+REDFISH_NW_ETH_IFACE = (
+    REDFISH_BASE_URI + "Managers/" + REDFISH_MANAGERS_ID + "/EthernetInterfaces/"
+)
+REDFISH_NW_PROTOCOL = "Managers/" + REDFISH_MANAGERS_ID + "/NetworkProtocol"
 REDFISH_NW_PROTOCOL_URI = REDFISH_BASE_URI + REDFISH_NW_PROTOCOL
 REDFISH_ACCOUNTS_SERVICE = "AccountService/"
 REDFISH_ACCOUNTS_SERVICE_URI = REDFISH_BASE_URI + REDFISH_ACCOUNTS_SERVICE
 REDFISH_ACCOUNTS = "AccountService/Accounts/"
 REDFISH_ACCOUNTS_URI = REDFISH_BASE_URI + REDFISH_ACCOUNTS
-REDFISH_HTTPS_CERTIFICATE = "Managers/bmc/NetworkProtocol/HTTPS/Certificates"
+REDFISH_HTTPS_CERTIFICATE = (
+    "Managers/" + REDFISH_MANAGERS_ID + "/NetworkProtocol/HTTPS/Certificates"
+)
 REDFISH_HTTPS_CERTIFICATE_URI = REDFISH_BASE_URI + REDFISH_HTTPS_CERTIFICATE
 REDFISH_LDAP_CERTIFICATE = "AccountService/LDAP/Certificates"
 REDFISH_LDAP_CERTIFICATE_URI = REDFISH_BASE_URI + REDFISH_LDAP_CERTIFICATE
-REDFISH_CA_CERTIFICATE = "Managers/bmc/Truststore/Certificates"
+REDFISH_CA_CERTIFICATE = "Managers/" + REDFISH_MANAGERS_ID + "/Truststore/Certificates"
 REDFISH_CA_CERTIFICATE_URI = REDFISH_BASE_URI + REDFISH_CA_CERTIFICATE
+REDFISH_CHASSIS_ID = BuiltIn().get_variable_value("${CHASSIS_ID}")
 REDFISH_CHASSIS_URI = REDFISH_BASE_URI + "Chassis/"
-REDFISH_CHASSIS_THERMAL = "chassis/Thermal/"
+REDFISH_CHASSIS_THERMAL = REDFISH_CHASSIS_ID + "/Thermal/"
 REDFISH_CHASSIS_THERMAL_URI = REDFISH_CHASSIS_URI + REDFISH_CHASSIS_THERMAL
-REDFISH_CHASSIS_POWER = "chassis/Power/"
+REDFISH_CHASSIS_POWER = REDFISH_CHASSIS_ID + "/Power/"
 REDFISH_CHASSIS_POWER_URI = REDFISH_CHASSIS_URI + REDFISH_CHASSIS_POWER
-REDFISH_CHASSIS_SENSORS = "chassis/Sensors"
+REDFISH_CHASSIS_SENSORS = REDFISH_CHASSIS_ID + "/Sensors"
 REDFISH_CHASSIS_SENSORS_URI = REDFISH_CHASSIS_URI + REDFISH_CHASSIS_SENSORS
-REDFISH_BMC_DUMP = "Managers/bmc/LogServices/Dump/Entries"
+REDFISH_BMC_DUMP = "Managers/" + REDFISH_MANAGERS_ID + "/LogServices/Dump/Entries"
 REDFISH_DUMP_URI = REDFISH_BASE_URI + REDFISH_BMC_DUMP
 
 # Boot options and URI variables.

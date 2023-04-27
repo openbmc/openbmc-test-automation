@@ -857,7 +857,7 @@ GET BMC PNOR Version
 Redfish Get BMC Version
     [Documentation]  Get BMC version via Redfish.
 
-    ${output}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}Managers/bmc  FirmwareVersion
+    ${output}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  FirmwareVersion
     [Return]  ${output}
 
 Redfish Get Host Version

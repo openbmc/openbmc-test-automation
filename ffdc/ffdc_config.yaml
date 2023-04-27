@@ -140,7 +140,7 @@ OPENBMC:
             - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always
               raw GET /redfish/v1/AccountService/Accounts
             - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always
-              raw GET /redfish/v1/Managers/bmc/LogServices/Dump/Entries
+              raw GET /redfish/v1/Managers/${manager_id}/LogServices/Dump/Entries
             - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always
               raw GET /redfish/v1/Systems/system/LogServices/Dump/Entries
             - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always
@@ -151,6 +151,7 @@ OPENBMC:
                         - ${hostname}
                         - ${username}
                         - ${password}
+                        - ${manager_id}
                         - /redfish/v1/
                         - json
         FILES:
