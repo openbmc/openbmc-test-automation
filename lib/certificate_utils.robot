@@ -9,6 +9,7 @@ Resource       resource.robot
 
 # Default wait sync time for certificate install and restart services.
 ${wait_time}    30
+${keybit_length}  2048
 
 *** Keywords ***
 
@@ -85,7 +86,7 @@ Generate Certificate File Via Openssl
 
     Check If Openssl Tool Exist
 
-    ${openssl_cmd}=  Catenate  openssl req -x509 -sha256 -newkey rsa:2048
+    ${openssl_cmd}=  Catenate  openssl req -x509 -sha256 -newkey rsa:${keybit_length}
     ...  ${SPACE}-nodes -days ${time}
     ...  ${SPACE}-keyout ${cert_dir_name}/cert.pem -out ${cert_dir_name}/cert.pem
     ...  ${SPACE}-subj "/O=XYZ Corporation /CN=www.xyz.com"
