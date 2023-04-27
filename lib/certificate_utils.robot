@@ -85,7 +85,7 @@ Generate Certificate File Via Openssl
 
     Check If Openssl Tool Exist
 
-    ${openssl_cmd}=  Catenate  openssl req -x509 -sha256 -newkey rsa:2048
+    ${openssl_cmd}=  Catenate  openssl req -x509 -sha256 -newkey rsa:3072
     ...  ${SPACE}-nodes -days ${time}
     ...  ${SPACE}-keyout ${cert_dir_name}/cert.pem -out ${cert_dir_name}/cert.pem
     ...  ${SPACE}-subj "/O=XYZ Corporation /CN=www.xyz.com"

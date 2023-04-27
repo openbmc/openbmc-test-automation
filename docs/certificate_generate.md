@@ -14,7 +14,7 @@ D. Install CA signed server certificate
 
 1. Create private key for certificate authority(CA).
 
-`openssl genrsa -des3 -out rootCA.key 2048`
+`openssl genrsa -des3 -out rootCA.key 3072`
 
 Note: You will be prompted to give a password for private key. This password
 will be used whenever the private key is used.

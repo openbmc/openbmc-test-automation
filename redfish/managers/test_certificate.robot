@@ -18,7 +18,7 @@ Test Teardown    Test Teardown Execution
 
 ${invalid_value}  abc
 ${ROOT_CA_FILE_PATH}  /etc/ssl/certs/authority/*
-
+${keybit_length}  2048
 
 ** Test Cases **
 
@@ -141,10 +141,10 @@ Verify CSR Generation For Server Certificate
     [Template]  Generate CSR Via Redfish
 
     # csr_type  key_pair_algorithm  key_bit_length  key_curv_id  expected_status
-    Server      RSA                 ${2048}         ${EMPTY}     ok
-    Server      EC                  ${EMPTY}        prime256v1   ok
-    Server      EC                  ${EMPTY}        secp521r1    ok
-    Server      EC                  ${EMPTY}        secp384r1    ok
+    Server      RSA                 ${keybit_length}         ${EMPTY}     ok
+    Server      EC                  ${EMPTY}                 prime256v1   ok
+    Server      EC                  ${EMPTY}                 secp521r1    ok
+    Server      EC                  ${EMPTY}                 secp384r1    ok
 
 
 Verify CSR Generation For Client Certificate
@@ -153,10 +153,10 @@ Verify CSR Generation For Client Certificate
     [Template]  Generate CSR Via Redfish
 
     # csr_type  key_pair_algorithm  key_bit_length  key_curv_id  expected_status
-    Client      RSA                 ${2048}         ${EMPTY}     ok
-    Client      EC                  ${EMPTY}        prime256v1   ok
-    Client      EC                  ${EMPTY}        secp521r1    ok
-    Client      EC                  ${EMPTY}        secp384r1    ok
+    Client      RSA                 ${keybit_length}         ${EMPTY}     ok
+    Client      EC                  ${EMPTY}                 prime256v1   ok
+    Client      EC                  ${EMPTY}                 secp521r1    ok
+    Client      EC                  ${EMPTY}                 secp384r1    ok
 
 
 Verify CSR Generation For Server Certificate With Invalid Value
@@ -165,9 +165,9 @@ Verify CSR Generation For Server Certificate With Invalid Value
     [Template]  Generate CSR Via Redfish
 
     # csr_type  key_pair_algorithm  key_bit_length    key_curv_id       expected_status
-    Server      ${invalid_value}    ${2048}           prime256v1        error
-    Server      RAS                 ${invalid_value}  ${EMPTY}          error
-    Server      EC                  ${EMPTY}          ${invalid_value}  error
+    Server      ${invalid_value}    ${keybit_length}           prime256v1        error
+    Server      RAS                 ${invalid_value}           ${EMPTY}          error
+    Server      EC                  ${EMPTY}                   ${invalid_value}  error
 
 
 Verify CSR Generation For Client Certificate With Invalid Value
@@ -175,9 +175,9 @@ Verify CSR Generation For Client Certificate With Invalid Value
     [Tags]  Verify_CSR_Generation_For_Client_Certificate_With_Invalid_Value
     [Template]  Generate CSR Via Redfish
 
-    Client      ${invalid_value}    ${2048}           prime256v1        error
-    Client      RSA                 ${invalid_value}  ${EMPTY}          error
-    Client      EC                  ${EMPTY}          ${invalid_value}  error
+    Client      ${invalid_value}    ${keybit_length}           prime256v1        error
+    Client      RSA                 ${invalid_value}           ${EMPTY}          error
+    Client      EC                  ${EMPTY}                   ${invalid_value}  error
 
 
 Verify Expired Certificate Install

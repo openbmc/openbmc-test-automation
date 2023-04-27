@@ -21,8 +21,8 @@ Suite Setup       Suite Setup Execution
 
 ${root_cmd_args} =  SEPARATOR=
 ...  redfishtool raw -r ${OPENBMC_HOST}:${HTTPS_PORT} -u ${OPENBMC_USERNAME} -p ${OPENBMC_PASSWORD} -S Always
-
 ${invalid_value}  abc
+${keybit_length}  2048
 
 *** Test Cases ***
 
@@ -158,10 +158,10 @@ Verify CSR Generation For Server Certificate Via Redfishtool
     [Template]  Generate CSR Via Redfishtool
 
     # csr_type  key_pair_algorithm  key_bit_length  key_curv_id  expected_status
-    Server      RSA                 ${2048}         ${EMPTY}     ok
-    Server      EC                  ${EMPTY}        prime256v1   ok
-    Server      EC                  ${EMPTY}        secp521r1    ok
-    Server      EC                  ${EMPTY}        secp384r1    ok
+    Server      RSA                 ${keybit_length}         ${EMPTY}     ok
+    Server      EC                  ${EMPTY}                 prime256v1   ok
+    Server      EC                  ${EMPTY}                 secp521r1    ok
+    Server      EC                  ${EMPTY}                 secp384r1    ok
 
 
 Verify CSR Generation For Client Certificate Via Redfishtool
@@ -170,10 +170,10 @@ Verify CSR Generation For Client Certificate Via Redfishtool
     [Template]  Generate CSR Via Redfishtool
 
     # csr_type  key_pair_algorithm  key_bit_length  key_curv_id  expected_status
-    Client      RSA                 ${2048}         ${EMPTY}     ok
-    Client      EC                  ${EMPTY}        prime256v1   ok
-    Client      EC                  ${EMPTY}        secp521r1    ok
-    Client      EC                  ${EMPTY}        secp384r1    ok
+    Client      RSA                 ${keybit_length}         ${EMPTY}     ok
+    Client      EC                  ${EMPTY}                 prime256v1   ok
+    Client      EC                  ${EMPTY}                 secp521r1    ok
+    Client      EC                  ${EMPTY}                 secp384r1    ok
 
 
 Verify CSR Generation For Server Certificate With Invalid Value Via Redfishtool
@@ -182,8 +182,8 @@ Verify CSR Generation For Server Certificate With Invalid Value Via Redfishtool
     [Template]  Generate CSR Via Redfishtool
 
     # csr_type  key_pair_algorithm  key_bit_length    key_curv_id       expected_status
-    Server      ${invalid_value}    ${2048}           prime256v1        error
-    Server      RAS                 ${invalid_value}  ${EMPTY}          error
+    Server      ${invalid_value}    ${keybit_length}           prime256v1        error
+    Server      RAS                 ${invalid_value}           ${EMPTY}          error
 
 
 Verify CSR Generation For Client Certificate With Invalid Value Via Redfishtool
@@ -191,8 +191,8 @@ Verify CSR Generation For Client Certificate With Invalid Value Via Redfishtool
     [Tags]  Verify_CSR_Generation_For_Client_Certificate_With_Invalid_Value_Via_Redfishtool
     [Template]  Generate CSR Via Redfishtool
 
-    Client      ${invalid_value}    ${2048}           prime256v1        error
-    Client      RSA                 ${invalid_value}  ${EMPTY}          error
+    Client      ${invalid_value}    ${keybit_length}           prime256v1        error
+    Client      RSA                 ${invalid_value}           ${EMPTY}          error
 
 *** Keywords ***
 
