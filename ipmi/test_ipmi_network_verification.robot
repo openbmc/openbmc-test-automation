@@ -95,7 +95,7 @@ Get IP Address Source And Verify Using Redfish
     ${lan_config}=  Get LAN Print Dict  ${CHANNEL_NUMBER}
 
     ${ipv4_addresses}=  Redfish.Get Attribute
-    ...  /redfish/v1/Managers/bmc/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ...  /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
     ...  IPv4Addresses
 
     FOR  ${ipv4_address}  IN  @{ipv4_addresses}

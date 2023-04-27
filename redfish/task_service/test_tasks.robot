@@ -103,7 +103,7 @@ Test Generated Task Instance Validity And Task State
     #         ],
     #         "HttpOperation": "POST",
     #         "JsonBody": "{\n  \"DiagnosticDataType\": \"Manager\"\n}",
-    #         "TargetUri": "/redfish/v1/Managers/bmc/LogServices/Dump/Actions
+    #         "TargetUri": "/redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Actions
     #                      /LogService.CollectDiagnosticData"
     #     },
     #     "PercentComplete": 0,

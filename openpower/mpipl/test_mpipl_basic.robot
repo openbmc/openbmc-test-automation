@@ -114,17 +114,17 @@ Required Dumps Should Exist
     [Documentation]  Check for BMC and system dump.
 
     #   {
-    #       "@odata.id": "/redfish/v1/Managers/bmc/LogServices/Dump/Entries/4",
+    #       "@odata.id": "/redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries/4",
     #       "@odata.type": "#LogEntry.v1_8_0.LogEntry",
     #       "AdditionalDataSizeBytes": 914254,
-    #       "AdditionalDataURI": "/redfish/v1/Managers/bmc/LogServices/Dump/Entries/4/attachment",
+    #       "AdditionalDataURI": "/redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries/4/attachment",
     #       "Created": "2022-07-22T03:36:23+00:00",
     #       "DiagnosticDataType": "Manager",
     #       "EntryType": "Event",
     #       "Id": "4",
     #       "Name": "BMC Dump Entry"
     #   }
-    ${bmc_dump}=  Redfish.Get Properties  /redfish/v1/Managers/bmc/LogServices/Dump/Entries
+    ${bmc_dump}=  Redfish.Get Properties  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries
     Log To Console  BMC dumps generated: ${bmc_dump['Members@odata.count']}
     Should Be True  ${bmc_dump['Members@odata.count']} >= 1  msg=No BMC dump generated.
 

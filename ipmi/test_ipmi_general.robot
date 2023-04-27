@@ -30,7 +30,7 @@ Test Get Device GUID Via IPMI Raw Command
     [Tags]  Test_Get_Device_GUID_Via_IPMI_Raw_Command
     [Teardown]  Run Keywords  Redfish.Logout  AND  FFDC On Test Case Fail
     # Get GUIDS via IPMI.
-    # This should match the /redfish/v1/Managers/bmc's UUID data.
+    # This should match the /redfish/v1/Managers/${MANAGER_ID}'s UUID data.
     ${guids}=  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['Device GUID']['Get'][0]}
     # Reverse the order and remove space delims.
     ${guids}=  Split String  ${guids}
@@ -38,7 +38,7 @@ Test Get Device GUID Via IPMI Raw Command
     ${guids}=  Evaluate  "".join(${guids})
 
     Redfish.Login
-    ${uuid}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  UUID
+    ${uuid}=  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  UUID
     ${uuid}=  Remove String  ${uuid}  -
 
     Rprint Vars  guids  uuid
