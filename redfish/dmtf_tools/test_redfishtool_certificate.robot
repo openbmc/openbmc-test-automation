@@ -158,7 +158,7 @@ Verify CSR Generation For Server Certificate Via Redfishtool
     [Template]  Generate CSR Via Redfishtool
 
     # csr_type  key_pair_algorithm  key_bit_length  key_curv_id  expected_status
-    Server      RSA                 ${2048}         ${EMPTY}     ok
+    Server      RSA                 ${3072}         ${EMPTY}     ok
     Server      EC                  ${EMPTY}        prime256v1   ok
     Server      EC                  ${EMPTY}        secp521r1    ok
     Server      EC                  ${EMPTY}        secp384r1    ok
@@ -170,7 +170,7 @@ Verify CSR Generation For Client Certificate Via Redfishtool
     [Template]  Generate CSR Via Redfishtool
 
     # csr_type  key_pair_algorithm  key_bit_length  key_curv_id  expected_status
-    Client      RSA                 ${2048}         ${EMPTY}     ok
+    Client      RSA                 ${3072}         ${EMPTY}     ok
     Client      EC                  ${EMPTY}        prime256v1   ok
     Client      EC                  ${EMPTY}        secp521r1    ok
     Client      EC                  ${EMPTY}        secp384r1    ok
@@ -182,7 +182,7 @@ Verify CSR Generation For Server Certificate With Invalid Value Via Redfishtool
     [Template]  Generate CSR Via Redfishtool
 
     # csr_type  key_pair_algorithm  key_bit_length    key_curv_id       expected_status
-    Server      ${invalid_value}    ${2048}           prime256v1        error
+    Server      ${invalid_value}    ${3072}           prime256v1        error
     Server      RAS                 ${invalid_value}  ${EMPTY}          error
 
 
@@ -191,7 +191,7 @@ Verify CSR Generation For Client Certificate With Invalid Value Via Redfishtool
     [Tags]  Verify_CSR_Generation_For_Client_Certificate_With_Invalid_Value_Via_Redfishtool
     [Template]  Generate CSR Via Redfishtool
 
-    Client      ${invalid_value}    ${2048}           prime256v1        error
+    Client      ${invalid_value}    ${3072}           prime256v1        error
     Client      RSA                 ${invalid_value}  ${EMPTY}          error
 
 *** Keywords ***
@@ -204,7 +204,7 @@ Generate CSR Via Redfishtool
     # Description of argument(s):
     # cert_type           Certificate type ("Server" or "Client").
     # key_pair_algorithm  CSR key pair algorithm ("EC" or "RSA").
-    # key_bit_length      CSR key bit length ("2048").
+    # key_bit_length      CSR key bit length ("3072").
     # key_curv_id         CSR key curv id ("prime256v1" or "secp521r1" or "secp384r1").
     # expected_status     Expected status of certificate replace Redfishtool request ("ok" or "error").
 

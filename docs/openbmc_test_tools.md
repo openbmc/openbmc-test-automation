@@ -170,13 +170,13 @@ certificates and private keys, create CSRs and identify certificate information.
 To generate a self-signed certificate with a private key:
 
 ```
-openssl req -x509 -sha256 -newkey rsa:2048 -nodes -days <number of days a certificate is valid for> -keyout <certificate filename> -out <certificate filename> -subj "/O=<Organization Name>/CN=<Common Name>"
+openssl req -x509 -sha256 -newkey rsa:3072 -nodes -days <number of days a certificate is valid for> -keyout <certificate filename> -out <certificate filename> -subj "/O=<Organization Name>/CN=<Common Name>"
 ```
 
 _Example:_
 
 ```
-openssl req -x509 -sha256 -newkey rsa:2048 -nodes -days 365 -keyout certificate.pem -out certificate.pem -subj "/O=XYZ Corporation /CN=www.xyz.com"
+openssl req -x509 -sha256 -newkey rsa:3072 -nodes -days 365 -keyout certificate.pem -out certificate.pem -subj "/O=XYZ Corporation /CN=www.xyz.com"
 ```
 
 To view installed certificates on a OpenBMC system:
