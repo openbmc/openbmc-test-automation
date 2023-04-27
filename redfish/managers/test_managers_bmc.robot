@@ -27,7 +27,7 @@ Verify Redfish BMC Firmware Version
     [Tags]  Verify_Redfish_BMC_Firmware_Version
 
     Redfish.Login
-    ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc
+    ${resp}=  Redfish.Get  /redfish/v1/Managers/${MANAGER_ID}
     Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
     ${bmc_version}=  Get BMC Version
     Should Be Equal As Strings
@@ -39,7 +39,7 @@ Verify Redfish BMC Manager Properties
     [Tags]  Verify_Redfish_BMC_Manager_Properties
 
     Redfish.Login
-    ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc
+    ${resp}=  Redfish.Get  /redfish/v1/Managers/${MANAGER_ID}
     Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
     # Example:
     #  "Description": "Baseboard Management Controller"
@@ -83,12 +83,12 @@ Verify MAC Address Property Is Populated
         ...  ${active_channel_config["${channel_number}"]["is_valid"]}==${FALSE}
 
         # Get ethernet valid paths in redfish.
-        # Example: ['/redfish/v1/Managers/bmc/EthernetInterfaces']
+        # Example: ['/redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces']
         ${eth_interface}=  redfish_utils.Get Endpoint Path List
         ...  /redfish/v1/Managers/  EthernetInterfaces
 
         # Get the MACAddress attrivute value with the 'name': 'eth0'.
-        # Example: /redfish/v1/Managers/bmc/EthernetInterfaces/eth0
+        # Example: /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/eth0
         ${redfish_mac_addr}=  Redfish.Get Attribute
         ...  ${eth_interface[0]}/${active_channel_config["${channel_number}"]["name"]}
         ...  MACAddress
@@ -113,7 +113,7 @@ Redfish BMC Manager GracefulRestart When Host Off
     #    "GracefulRestart",
     #    "ForceRestart"
     #  ],
-    #  "target": "/redfish/v1/Managers/bmc/Actions/Manager.Reset"
+    #  "target": "/redfish/v1/Managers/${MANAGER_ID}/Actions/Manager.Reset"
     # }
 
     ${test_file_path}=  Set Variable  /tmp/before_bmcreboot
@@ -143,7 +143,7 @@ Redfish BMC Manager ForceRestart When Host Off
     #    "GracefulRestart",
     #    "ForceRestart"
     #  ],
-    #  "target": "/redfish/v1/Managers/bmc/Actions/Manager.Reset"
+    #  "target": "/redfish/v1/Managers/${MANAGER_ID}/Actions/Manager.Reset"
     # }
 
     ${test_file_path}=  Set Variable  /tmp/before_bmcreboot

@@ -63,8 +63,8 @@ REST Enumerate Request On BMC
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
     # Trigger GET REST enumeration.
-    ${resp}=  GET On Session  openbmc  /redfish/v1/Managers/bmc  expected_status=any
-    Log To Console  GET Request /redfish/v1/Managers/bmc
+    ${resp}=  GET On Session  openbmc  /redfish/v1/Managers/${MANAGER_ID}  expected_status=any
+    Log To Console  GET Request /redfish/v1/Managers/${MANAGER_ID}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     Delete All Sessions
 

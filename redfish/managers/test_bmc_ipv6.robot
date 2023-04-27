@@ -105,7 +105,7 @@ Get IPv6 Network Configuration
     [Documentation]  Get Ipv6 network configuration.
     # Sample output:
     # {
-    #  "@odata.id": "/redfish/v1/Managers/bmc/EthernetInterfaces/eth0",
+    #  "@odata.id": "/redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/eth0",
     #  "@odata.type": "#EthernetInterface.v1_4_1.EthernetInterface",
     #   "DHCPv4": {
     #    "DHCPEnabled": false,
@@ -176,7 +176,7 @@ Get IPv6 Network Configuration
     #    "State": "Enabled"
     #  },
     #  "VLANs": {
-    #    "@odata.id": "/redfish/v1/Managers/bmc/EthernetInterfaces/eth0/VLANs"
+    #    "@odata.id": "/redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/eth0/VLANs"
 
 
     ${active_channel_config}=  Get Active Channel Config
