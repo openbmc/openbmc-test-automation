@@ -110,14 +110,14 @@ Redfish BMC Switch Firmware Side
 
 Match BMC Release And Redifsh Firmware Version
     [Documentation]  The /etc/os-release vs Redfish FirmwareVersion attribute value from
-    ...             /redfish/v1/Managers/bmc should match.
+    ...             /redfish/v1/Managers/${MANAGER_ID} should match.
 
     # Python module: get_bmc_release_info()
     ${bmc_release_info}=  utils.Get BMC Release Info
     ${bmc_release}=  Set Variable  ${bmc_release_info['version_id']}
     Rprint Vars  bmc_release
 
-    ${firmware_version}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  FirmwareVersion
+    ${firmware_version}=  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  FirmwareVersion
     Rprint Vars  firmware_version
 
     Should Be Equal As Strings   ${bmc_release}   ${firmware_version}
@@ -139,6 +139,6 @@ Switch Firmware Side
     Print Timen  Switch to back up completed.
 
     # Check if the BMC version after rebooted is the same version asked to switch.
-    ${firmware_version}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  FirmwareVersion
+    ${firmware_version}=  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  FirmwareVersion
     Should Be Equal As Strings   ${image_version}   ${firmware_version}
     ...  msg=${image_version} does not match redfish version ${firmware_version}
