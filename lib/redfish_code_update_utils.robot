@@ -22,7 +22,7 @@ Get Software Functional State
 
     ${sw_functional}=  Run Keyword If
     ...   '${image_info["Description"]}' == 'BMC image' or '${image_info["Description"]}' == 'BMC update'
-    ...    Redfish.Get Attribute  /redfish/v1/Managers/bmc  FirmwareVersion
+    ...    Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  FirmwareVersion
     ...  ELSE
     ...    Redfish.Get Attribute  /redfish/v1/Systems/system  BiosVersion
 
@@ -53,7 +53,7 @@ Find Active Software Image
     # "ActiveSoftwareImage": {
     #         "@odata.id": "/redfish/v1/UpdateService/FirmwareInventory/5ca9fec0"
     #     },
-    ${active_sw_img}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  Links
+    ${active_sw_img}=  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  Links
 
     ${active_id}=  Set Variable  ${active_sw_img["ActiveSoftwareImage"]["@odata.id"].split("/")[-1]}
 
@@ -281,7 +281,7 @@ Switch Backup Firmware Image To Functional
    ...  Set Variable  /redfish/v1/UpdateService/FirmwareInventory/${nonfunctional_sw_inv['image_id']}
 
    # Below URI, change to backup image and reset the BMC.
-   Redfish.Patch  /redfish/v1/Managers/bmc
+   Redfish.Patch  /redfish/v1/Managers/${MANAGER_ID}
    ...  body={'Links': {'ActiveSoftwareImage': {'@odata.id': '${firmware_inv_path}'}}}
 
 
