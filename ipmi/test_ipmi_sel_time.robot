@@ -26,12 +26,12 @@ Documentation    Module to test IPMI SEL Time functionality.
 ...              Gets BMC Current Time and subtracts 1 day and compare against BMC native command (date),
 ...              Add SEL Entry for all the above scenarios and compare against BMC native command (date).
 
+Resource         ../lib/ipmi_client.robot
+Resource         ../lib/openbmc_ffdc.robot
 Library          DateTime
 Library          Collections
 Library          String
 Library          ../lib/ipmi_utils.py
-Resource         ../lib/ipmi_client.robot
-Resource         ../lib/openbmc_ffdc.robot
 Variables        ../data/ipmi_raw_cmd_table.py
 
 Test Setup       Test Setup Execution

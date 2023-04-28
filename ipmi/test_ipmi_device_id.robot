@@ -14,11 +14,11 @@ Documentation       This suite tests IPMI Payload in OpenBMC.
 ...                       - data/ipmi_raw_cmd_table.py
 
 
+Resource            ../lib/ipmi_client.robot
+Resource            ../lib/openbmc_ffdc.robot
 Library             Collections
 Library             ../lib/ipmi_utils.py
 Library             ../lib/var_funcs.py
-Resource            ../lib/ipmi_client.robot
-Resource            ../lib/openbmc_ffdc.robot
 Variables           ../data/ipmi_raw_cmd_table.py
 
 
