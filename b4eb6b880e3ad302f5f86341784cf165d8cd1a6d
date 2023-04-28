@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cca639d_7b93d645",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-04-28T18:34:02Z",
+      "side": 1,
+      "message": "Before changes\nmsgubuntu@msgubuntu:~/ganesan/gerrit/openbmc-test-automation$ robot -d logs/ipmi/ ipmi/test_ipmi_cold_reset.robot ipmi/test_ipmi_device_id.robot ipmi/test_ipmi_poh_counter.robot ipmi/test_ipmi_sdr.robot ipmi/test_ipmi_sel_time.robot \n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nTest Ipmi Cold Reset \u0026 Test Ipmi Device Id \u0026 Test Ipmi Poh Counter \u0026 Test I...\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n#(UTC) 2023/04/28 18:10:10.793668 -    0.067821 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U root -P 0penBmc -H power status\nrc:                                               0x0000000000000001\n#(UTC) 2023/04/28 18:10:11.011466 -    0.217798 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -P 0penBmc -H power status\nrc:                                               0x0000000000000001\n#(UTC) 2023/04/28 18:10:11.077573 -    0.066107 - **ERROR** Unable to run ipmitool (with or without the \u0027-U\u0027 option).\n#(UTC) 2023/04/28 18:10:11.304479 -    0.226906 - Executing: get(\u0027/redfish/v1/\u0027)\n#(UTC) 2023/04/28 18:10:11.399823 -    0.095344 - Executing: get(\u0027/redfish/v1/\u0027)\n#(UTC) 2023/04/28 18:10:11.638004 -    0.238180 - Executing: get(\u0027/xyz/openbmc_project/\u0027, valid_status_codes\u003d[200, 404])\nTest Ipmi Cold Reset \u0026 Test Ipmi Device Id \u0026 Test Ipmi Poh Counter \u0026 Test I...\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nCold Reset Via IPMI :: Verify Cold Reset via IPMI.                    #(UTC) 2023/04/28 18:10:12.309567 -    0.671563 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U root -P 0penBmc -H raw 0x06 0x02\nF.....\n                                                                              \nCold Reset Via IPMI :: Verify Cold Reset via IPMI.                    | FAIL |\nAddress lookup for raw failed\nCould not open socket!\nError: Unable to establish IPMI v2 / RMCP+ session: 1 !\u003d 0\n------------------------------------------------------------------------------",
+      "revId": "b4eb6b880e3ad302f5f86341784cf165d8cd1a6d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
