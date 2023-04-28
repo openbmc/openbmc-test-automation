@@ -6,29 +6,17 @@ Resource         ../lib/boot_utils.robot
 Library          ../lib/ipmi_utils.py
 Variables        ../data/ipmi_raw_cmd_table.py
 
-*** Variables ***
-${power_state_change}  10
-${host_reboot_time}  360
+Suite Setup  IPMI Power On
+Suite Teardown  IPMI Power On  stack_mode=skip  quiet=1
 
 *** Test Cases ***
-
-IPMI Chassis Status On
-    [Documentation]  This test case verifies system power on status
-    ...               using IPMI Get Chassis status command.
-    [Tags]  IPMI_Chassis_Status_On
-
-    # Check the chassis status.
-    Verify Host PowerOn Via IPMI
-    ${resp}=  Run IPMI Standard Command  chassis power status
-    Should Be Equal As Strings  '${resp}'  'Chassis Power is on'
-
 Test Get BIOS POST Code via IPMI Raw Command
     [Documentation]  Get BIOS POST Code via IPMI raw command.
     [Tags]  Test_Get_BIOS_POST_Code_via_IPMI_Raw_Command
 
+    Wait Until Keyword Succeeds  10 min  1 sec  Check Host Is Pinging  ${OS_HOST}
+    Wait Until Keyword Succeeds  1 min  1 sec  Check Chassis Power Status  on
     ${resp}=  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['BIOS_POST_Code']['Get'][0]}
-    Sleep  10
-
     Verify POST Code Response Length  ${resp}
 
 Test Get BIOS POST Code via IPMI Raw Command After Power Cycle
@@ -36,15 +24,10 @@ Test Get BIOS POST Code via IPMI Raw Command After Power Cycle
     [Tags]  Test_Get_BIOS_POST_Code_via_IPMI_Raw_Command_After_Power_Cycle
 
     ${resp}=  Run IPMI Standard Command  chassis power cycle
-    Sleep  ${power_state_change}
-    Should Contain  ${resp}  Chassis Power Control: Cycle
-    sleep  ${host_reboot_time}
-    ${ipmi_state}=  Get Host State Via External IPMI
-    Valid Value  ipmi_state  ['on']
+    Wait Until Keyword Succeeds  1 min  1 sec  Check Host Is Not Pinging  ${OS_HOST}
+    Wait Until Keyword Succeeds  10 min  1 sec  Check Host Is Pinging  ${OS_HOST}
 
     ${resp}=  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['BIOS_POST_Code']['Get'][0]}
-    Sleep  ${host_reboot_time}
-
     Verify POST Code Response Length  ${resp}
 
 Test Get BIOS POST Code via IPMI Raw Command With Host Powered Off
@@ -52,29 +35,13 @@ Test Get BIOS POST Code via IPMI Raw Command With Host Powered Off
     [Tags]  Test_Get_BIOS_POST_Code_via_IPMI_Raw_Command_With_Host_Powered_Off
 
     ${resp}=  Run IPMI Standard Command  chassis power off
-    Sleep  ${power_state_change}
-    Should Contain  ${resp}  Chassis Power Control: Down/Off
+    Wait Until Keyword Succeeds  1 min  1 sec  Check Host Is Not Pinging  ${OS_HOST}
+    Wait Until Keyword Succeeds  1 min  1 sec  Check Chassis Power Status  off
 
     ${resp}=  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['BIOS_POST_Code']['Get'][0]}  fail_on_err=0
     Should Contain  ${resp}  ${IPMI_RAW_CMD['BIOS_POST_Code']['Get'][3]}
 
-    # Turn host back on.
-    IPMI Power On  stack_mode=skip  quiet=1
-    Verify Host PowerOn Via IPMI
-    ${resp}=  Run IPMI Standard Command  chassis power status
-    Should Be Equal As Strings  '${resp}'  'Chassis Power is on'
-
 *** Keywords ***
-
-Verify Host PowerOn Via IPMI
-    [Documentation]   Verify host power on operation using external IPMI command.
-    [Tags]  Verify_Host_PowerOn_Via_IPMI
-
-    IPMI Power On  stack_mode=skip  quiet=1
-    ${ipmi_state}=  Get Host State Via External IPMI
-    Valid Value  ipmi_state  ['on']
-
-
 Verify POST Code Response Length
     [Documentation]  Verify the BIOS POST Code response byte length.
     [Tags]  Verify_POST_Code_Response_Length
@@ -97,3 +64,48 @@ Verify POST Code Response Length
 
     Should Be Equal  ${true_length}  ${byte_length_integer}
 
+Check Chassis Power Status
+    [Documentation]  Validate chassis power status.
+    [Arguments]  ${expected_state}
+
+    # Description of argument(s):
+    # expected_state    on, off
+
+    ${resp}=  Run IPMI Standard Command  chassis power status
+    Should Contain  ${resp}  ${expected_state}
+
+Check Host Is Pinging
+    [Documentation]  Check given ip/hostname is pinging.
+    [Arguments]  ${host_ip}
+
+    # Description of argument(s):
+    # host_ip      The host name or IP of the host to ping.
+
+    ${ping_rsp}=  Host Ping  ${host_ip}
+    # Should Not Contain  ${ping_rsp}  Destination Host Unreachable
+    # ...  msg=${host_ip} is not pinging.
+    Should Not Contain  ${ping_rsp}  100% packet loss
+    ...  msg=${host_ip} is not pinging.
+
+Check Host Is Not Pinging
+    [Documentation]  Check given ip/hostname is not pinging.
+    [Arguments]  ${host_ip}
+
+    # Description of argument(s):
+    # host_ip      The host name or IP of the host to ping.
+
+    ${ping_rsp}=  Host Ping  ${host_ip}
+    Should Contain  ${ping_rsp}  100% packet loss
+    ...  msg=${host_ip} is pinging.
+
+Host Ping
+    [Documentation]  Ping the given host.
+    [Arguments]  ${host_ip}
+
+    # Description of argument(s):
+    # host_ip      The host name or IP of the host to ping.
+
+    ${cmd}=  Catenate  ping -c 4 ${host_ip}
+    ${output}=  Run  ${cmd}
+
+    [Return]  ${output}
