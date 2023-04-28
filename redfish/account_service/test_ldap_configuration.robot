@@ -20,6 +20,7 @@ ${old_ldap_privilege}   Administrator
 ${hostname}             ${EMPTY}
 ${test_ip}              10.6.6.6
 ${test_mask}            255.255.255.0
+${invalid_ldap_server_uri}  ldap://10.0.0.1
 
 ** Test Cases **
 
@@ -229,7 +230,7 @@ Update LDAP Group Name And Verify Operations
 
     # group_name             group_privilege  valid_status_codes
     ${GROUP_NAME}            Administrator    [${HTTP_OK}, ${HTTP_NO_CONTENT}]
-    ${GROUP_NAME}            Operator         [${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    ${GROUP_NAME}            Operator         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
     ${GROUP_NAME}            ReadOnly         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
     Invalid_LDAP_Group_Name  Administrator    [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
     Invalid_LDAP_Group_Name  Operator         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
@@ -304,8 +305,7 @@ Verify LDAP Authorization With Invalid Privilege
     [Tags]  Verify_LDAP_Authorization_With_Invalid_Privilege
     [Teardown]  Restore LDAP Privilege
 
-    Update LDAP Config And Verify Set Host Name  ${GROUP_NAME}
-    ...  Invalid_Privilege  [${HTTP_FORBIDDEN}]
+    Update LDAP Config And Verify Set Host Name  ${GROUP_NAME}  Invalid_Privilege
 
 
 Verify LDAP Login With Invalid Data
@@ -316,7 +316,7 @@ Verify LDAP Login With Invalid Data
     ...  Redfish.Login  AND
     ...  Create LDAP Configuration
 
-    Create LDAP Configuration  ${LDAP_TYPE}  Invalid_LDAP_Server_URI
+    Create LDAP Configuration  ${LDAP_TYPE}  ${invalid_ldap_server_uri}
     ...  Invalid_LDAP_BIND_DN  LDAP_BIND_DN_PASSWORD
     ...  Invalid_LDAP_BASE_DN
     Sleep  15s
@@ -331,8 +331,8 @@ Verify LDAP Config Creation Without BASE DN
     ...  Redfish.Login  AND
     ...  Create LDAP Configuration
 
-    Create LDAP Configuration  ${LDAP_TYPE}  Invalid_LDAP_Server_URI
-    ...  Invalid_LDAP_BIND_DN  LDAP_BIND_DN_PASSWORD  ${EMPTY}
+    Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI}
+    ...  ${LDAP_BIND_DN}  ${LDAP_BIND_DN_PASSWORD}  ${EMPTY}
     Sleep  15s
     Redfish Verify LDAP Login  ${False}
 
@@ -519,7 +519,8 @@ Switch LDAP Type And Verify Login Fails
 
     # Enable the inverse LDAP type
     Disable Other LDAP  ${True}
-    Create LDAP Configuration  ${LDAP_TYPE_1}  ${LDAP_SERVER_URI_1}  ${LDAP_BIND_DN_1}  ${LDAP_BIND_DN_PASSWORD_1}  ${LDAP_BASE_DN_1}
+    Create LDAP Configuration  ${LDAP_TYPE_1}  ${LDAP_SERVER_URI_1}  ${LDAP_BIND_DN_1}
+    ...  ${LDAP_BIND_DN_PASSWORD_1}  ${LDAP_BASE_DN_1}
     Redfish.Logout
     Sleep  10s
 
@@ -552,12 +553,37 @@ Redfish Verify LDAP Login
     Redfish.Logout
     Redfish.Login
 
+Get Initial HostName
+    [Documentation]  Get default hostname and set it as test variable.
+
+    ${initial_hostname}=  Redfish.Get Attribute  ${REDFISH_NW_ETH0_URI}  HostName
+    Set Test Variable  ${initial_hostname}
+
+Set Initial Hostname
+    [Documentation]  Configure back the initial hostname.
+
+    Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body={'HostName': '${initial_hostname}'}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+Logout Redfish LDAP Based On Privilege
+    [Documentation]  Based on privilege perform redfish ldap logout.
+    [Arguments]  ${group_privilege}
+
+    # Description of argument(s):
+    # group_privilegeilege               The group privilege ("Administrator",
+    #                               "Operator", "User" or "Callback").
+
+    Run Keyword If  '${group_privilege}'=='Administrator' or '${group_privilege}'=='Operator' or '${group_privilege}'=='ReadOnly'
+    ...    Run Keywords  Redfish.Logout  AND  Redfish.Login
+    ...  ELSE
+    ...    Redfish.Login
 
 Update LDAP Config And Verify Set Host Name
     [Documentation]  Update LDAP config and verify by attempting to set host name.
     [Arguments]  ${group_name}  ${group_privilege}=Administrator
     ...  ${valid_status_codes}=[${HTTP_OK}]
-    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
+    [Teardown]  Run Keywords  Logout Redfish LDAP Based On Privilege  ${group_privilege}  AND
+    ...  Set Initial Hostname
 
     # Description of argument(s):
     # group_name                    The group name of user.
@@ -567,8 +593,15 @@ Update LDAP Config And Verify Set Host Name
     #                               operation (e.g. "200") used to update
     #                               HostName.  See prolog of rest_request
     #                               method in redfish_plus.py for details.
-    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
-    ...  ${group_privilege}  ${group_name}
+
+    Get Initial HostName
+
+    Run Keyword If  '${group_privilege}'=='Invalid_Privilege'
+    ...    Run Keyword And Return  Update LDAP Configuration with LDAP User Role And Group
+    ...    ${LDAP_TYPE}  ${group_privilege}  ${group_name}  [${HTTP_BAD_REQUEST}]
+    ...  ELSE
+    ...    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
+    ...    ${group_privilege}  ${group_name}
 
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     # Verify that the LDAP user in ${group_name} with the given privilege is
@@ -702,18 +735,20 @@ Get LDAP Configuration
 
 Update LDAP Configuration with LDAP User Role And Group
     [Documentation]  Update LDAP configuration update with LDAP user Role and group.
-    [Arguments]   ${ldap_type}  ${group_privilege}  ${group_name}
+    [Arguments]   ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_codes}=[${HTTP_OK}]
 
     # Description of argument(s):
     # ldap_type        The LDAP type ("ActiveDirectory" or "LDAP").
     # group_privilege  The group privilege ("Administrator", "Operator", "User" or "Callback").
     # group_name       The group name of user.
+    # valid_status_codes 200
 
     ${local_role_remote_group}=  Create Dictionary  LocalRole=${group_privilege}  RemoteGroup=${group_name}
     ${remote_role_mapping}=  Create List  ${local_role_remote_group}
     ${ldap_data}=  Create Dictionary  RemoteRoleMapping=${remote_role_mapping}
     ${payload}=  Create Dictionary  ${ldap_type}=${ldap_data}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=&{payload}
+    ...  valid_status_codes=${valid_status_codes}
     # Provide adequate time for LDAP daemon to restart after the update.
     Sleep  15s
 
@@ -755,7 +790,7 @@ Verify Host Power Status
 Update LDAP User Role And Host Poweroff
     [Documentation]  Update LDAP user role and do host poweroff.
     [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}
-    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
+    [Teardown]  Logout Redfish LDAP Based On Privilege  ${group_privilege}
 
     # Description of argument(s):
     # ldap_type          The LDAP type ("ActiveDirectory" or "LDAP").
@@ -781,7 +816,7 @@ Update LDAP User Role And Host Poweroff
 Update LDAP User Role And Host Poweron
     [Documentation]  Update LDAP user role and do host poweron.
     [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}
-    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
+    [Teardown]  Logout Redfish LDAP Based On Privilege  ${group_privilege}
 
     # Description of argument(s):
     # ldap_type          The LDAP type ("ActiveDirectory" or "LDAP").
@@ -807,7 +842,8 @@ Update LDAP User Role And Host Poweron
 Update LDAP User Role And Configure IP Address
     [Documentation]  Update LDAP user role and configure IP address.
     [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}=${HTTP_OK}
-    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login  AND  Delete IP Address  ${test_ip}
+    [Teardown]  Run Keywords  Logout Redfish LDAP Based On Privilege  ${group_privilege}  AND
+    ...  Delete IP Address  ${test_ip}
 
     # Description of argument(s):
     # ldap_type          The LDAP type ("ActiveDirectory" or "LDAP").
@@ -830,7 +866,8 @@ Update LDAP User Role And Configure IP Address
 Update LDAP User Role And Delete IP Address
     [Documentation]  Update LDAP user role and delete IP address.
     [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}=${HTTP_OK}
-    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login  AND  Delete IP Address  ${test_ip}
+    [Teardown]  Run Keywords  Logout Redfish LDAP Based On Privilege  ${group_privilege}  AND
+    ...  Delete IP Address  ${test_ip}
 
     # Description of argument(s):
     # ldap_type          The LDAP type ("ActiveDirectory" or "LDAP").
@@ -856,7 +893,7 @@ Update LDAP User Role And Delete IP Address
 Update LDAP User Role And Read Network Configuration
     [Documentation]  Update LDAP user role and read network configuration.
     [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}=${HTTP_OK}
-    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
+    [Teardown]  Logout Redfish LDAP Based On Privilege  ${group_privilege}
 
     # Description of argument(s):
     # ldap_type          The LDAP type ("ActiveDirectory" or "LDAP").
