@@ -105,8 +105,8 @@ Verify Timer Action For State Change
     [Template]  Validate Watchdog Timer Actions And SEL Events
 
     # set action command                  power state  SEL event
-    ${IPMI_RAW_CMD['Watchdog']['Set'][60]}  ['off']   Power done
-    ${IPMI_RAW_CMD['Watchdog']['Set'][63]}  ['on']    Hard Reset
+    ${IPMI_RAW_CMD['Watchdog']['Set'][60]}  ['off']   Power down
+    ${IPMI_RAW_CMD['Watchdog']['Set'][63]}  ['on']    Hard reset
     ${IPMI_RAW_CMD['Watchdog']['Set'][66]}  ['on']    Power cycle
     ${IPMI_RAW_CMD['Watchdog']['Set'][69]}  ['on']    Timer expired
 
