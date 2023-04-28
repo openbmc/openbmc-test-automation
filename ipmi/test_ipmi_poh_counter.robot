@@ -25,10 +25,10 @@ Documentation       This suite tests IPMI POH Counter Support in OpenBMC.
 ...                 time / Power operation.
 
 
-Library             Collections
-Library             ../lib/ipmi_utils.py
 Resource            ../lib/ipmi_client.robot
 Resource            ../lib/openbmc_ffdc.robot
+Library             Collections
+Library             ../lib/ipmi_utils.py
 Variables           ../data/ipmi_raw_cmd_table.py
 
 Suite Setup      Suite Setup Execution

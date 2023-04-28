@@ -9,10 +9,10 @@ Documentation       Module to test IPMI System Info Parameters functionality.
 ...                 5. OS Name - param 4,
 ...                 6. Present OS Version Number - param 5.
 
-Library             Collections
-Library             String
 Resource            ../lib/ipmi_client.robot
 Resource            ../lib/openbmc_ffdc.robot
+Library             Collections
+Library             String
 Library             ../lib/ipmi_utils.py
 Variables           ../data/ipmi_raw_cmd_table.py
 

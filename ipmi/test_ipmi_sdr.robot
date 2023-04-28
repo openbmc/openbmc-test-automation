@@ -1,8 +1,8 @@
 *** Settings ***
 Documentation  Test IPMI sensor IDs.
 
-Resource               ../lib/rest_client.robot
 Resource               ../lib/ipmi_client.robot
+Resource               ../lib/rest_client.robot
 Resource               ../lib/openbmc_ffdc.robot
 Resource               ../lib/boot_utils.robot
 Resource               ../lib/bmc_redfish_resource.robot

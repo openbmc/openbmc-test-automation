@@ -21,10 +21,10 @@ Documentation       This suite tests IPMI Cold Reset in OpenBMC.
 ...
 ...                 Request data for cold reset present under data/ipmi_raw_cmd_table.py
 
-Library             Collections
-Library             ../lib/ipmi_utils.py
 Resource            ../lib/ipmi_client.robot
 Resource            ../lib/openbmc_ffdc.robot
+Library             Collections
+Library             ../lib/ipmi_utils.py
 Variables           ../data/ipmi_raw_cmd_table.py
 
 Test Teardown       FFDC On Test Case Fail
