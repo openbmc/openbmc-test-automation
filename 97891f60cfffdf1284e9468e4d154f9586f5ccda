@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62e654b1_1701d95f",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-04-29T14:48:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f139fb12_c8a61362",
+      "range": {
+        "startLine": 41,
+        "startChar": 6,
+        "endLine": 41,
+        "endChar": 40
+      },
+      "revId": "97891f60cfffdf1284e9468e4d154f9586f5ccda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bcb84f6_5e0627c3",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-09-22T17:01:03Z",
       "side": 1,
       "message": "Check If Reading Value Available In IPMI",
+      "range": {
+        "startLine": 56,
+        "startChar": 1,
+        "endLine": 56,
+        "endChar": 37
+      },
+      "revId": "97891f60cfffdf1284e9468e4d154f9586f5ccda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14a78c62_478861a3",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-04-29T14:48:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bcb84f6_5e0627c3",
       "range": {
         "startLine": 56,
         "startChar": 1,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15af76b4_63c1e35f",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-04-29T14:48:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "800c1c5e_e06a3f27",
+      "range": {
+        "startLine": 201,
+        "startChar": 42,
+        "endLine": 201,
+        "endChar": 49
+      },
+      "revId": "97891f60cfffdf1284e9468e4d154f9586f5ccda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e9a12a2_39c91aba",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-09-22T17:01:03Z",
       "side": 1,
       "message": "may be for the comment section u should mention as \u0027na\u0027 or NA to distinguish\n\nSame for all the comments that use na",
+      "range": {
+        "startLine": 205,
+        "startChar": 104,
+        "endLine": 205,
+        "endChar": 106
+      },
+      "revId": "97891f60cfffdf1284e9468e4d154f9586f5ccda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3461866_72a095a3",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-04-29T14:48:31Z",
+      "side": 1,
+      "message": "renanmed \u0027na\u0027 in comments and in documentation",
+      "parentUuid": "8e9a12a2_39c91aba",
       "range": {
         "startLine": 205,
         "startChar": 104,
@@ -133,6 +229,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e13f5f8_7154c613",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-04-29T14:48:31Z",
+      "side": 1,
+      "message": "In this keyword, we were getting threshold values for the sensor from the dbus and set those threshold values in dictionary. apart from that we didn\u0027t set any threshold value to that respective sensor just we are getting threshold value from dbus and save it in dictionary.",
+      "parentUuid": "7d893853_aa295323",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 36
+      },
+      "revId": "97891f60cfffdf1284e9468e4d154f9586f5ccda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3114bead_7a2a8bbd",
@@ -146,6 +266,30 @@
       "writtenOn": "2022-09-22T17:01:03Z",
       "side": 1,
       "message": "Instead of Get.. Use Set",
+      "range": {
+        "startLine": 463,
+        "startChar": 0,
+        "endLine": 463,
+        "endChar": 3
+      },
+      "revId": "97891f60cfffdf1284e9468e4d154f9586f5ccda",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0666a0b_ae520682",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-04-29T14:48:31Z",
+      "side": 1,
+      "message": "From ipmi sensor command we were getting the sensor list which was not having an single threshold.",
+      "parentUuid": "3114bead_7a2a8bbd",
       "range": {
         "startLine": 463,
         "startChar": 0,
