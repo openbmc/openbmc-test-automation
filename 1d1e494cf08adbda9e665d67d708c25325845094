@@ -16,6 +16,24 @@
       "message": "I observe that there is no try and catch block for exception handling.. how to handle in case of failures?",
       "revId": "1d1e494cf08adbda9e665d67d708c25325845094",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eafe3cdb_bebbb721",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 13
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-04-29T14:59:42Z",
+      "side": 1,
+      "message": "try-catch block is needed in this python function. actually this python function  will get input from \"Validate Default Threshold Values Alignment As Per IPMI Spec\" keyword which was present on sensor_info_record.robot file. \nActually in that keyword before passing to the python function we will check how many threshold values are present for an sensor and if it was 1 we can\u0027t compare hence we will ignore there itself and if it was more that 1 then we will pass those values to the respective python function and this python function was called with run keyword and continue on failure robot keyword. hence eventhough value comparison failed it will continue to validate to other sensor threshold values.",
+      "parentUuid": "c723dcdc_840b590f",
+      "revId": "1d1e494cf08adbda9e665d67d708c25325845094",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
