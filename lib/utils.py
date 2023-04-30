@@ -492,3 +492,12 @@ def remove_unicode_from_uri(uri):
     """
 
     return re.sub("`-|\\|-", "", uri)
+
+
+def return_missing_value_from_list(list1, list2):
+    r"""
+    returns missing values on list2.
+    """
+
+    missing_values = set(list1).difference(list2)
+    return missing_values
