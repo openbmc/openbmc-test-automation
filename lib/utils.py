@@ -505,3 +505,12 @@ def get_bmc_major_minor_version(version):
     """
 
     return re.findall(r"\d+", re.sub("[A-Z]|[a-z]", "", version))
+
+
+def return_missing_value_from_list(list1, list2):
+    r"""
+    returns missing values on list2.
+    """
+
+    missing_values = set(list1).difference(list2)
+    return missing_values
