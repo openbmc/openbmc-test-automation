@@ -484,3 +484,7 @@ def return_decoded_string(input):
     encoded_string = input.encode("ascii", "ignore")
     decoded_string = encoded_string.decode()
     return decoded_string
+
+def return_missing_value_from_list(list1, list2):
+    missing_values= set(list1).difference(list2)
+    return missing_values
