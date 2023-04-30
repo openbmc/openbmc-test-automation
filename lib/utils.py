@@ -558,3 +558,12 @@ def convert_prefix_hex_list_to_non_prefix_hex_list(list):
             tmp_list.append(value[2:])
 
     return tmp_list
+
+
+def return_missing_value_from_list(list1, list2):
+    r"""
+    returns missing values on list2.
+    """
+
+    missing_values = set(list1).difference(list2)
+    return missing_values
