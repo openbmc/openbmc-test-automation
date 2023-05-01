@@ -21,5 +21,11 @@ DCMI_RAW_CMD = {
             "0x41",
             "0x42",
         ],
+        "Asset_Tag": [
+            # raw command for get asset tag
+            "0x2c 0x06 0xdc 0x00",
+            # raw command for set asset tag
+            "0x2c 0x08 0xdc 0x00",
+        ],
     },
 }
