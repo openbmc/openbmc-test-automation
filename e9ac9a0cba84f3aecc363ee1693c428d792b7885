@@ -16,6 +16,24 @@
       "message": "can we move under directory structure as \n ipmi/dcmi/test_dcmi_get_capabilities.robot",
       "revId": "e9ac9a0cba84f3aecc363ee1693c428d792b7885",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08250a11_b70aec55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-02T13:55:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "203eb8b2_a8ee6c92",
+      "revId": "e9ac9a0cba84f3aecc363ee1693c428d792b7885",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
