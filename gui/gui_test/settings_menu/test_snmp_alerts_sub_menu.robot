@@ -247,6 +247,25 @@ Configure SNMP Manager Via GUI And Verify SNMP Trap On Non Default Port
     ${CMD_INFORMATIONAL_ERROR}  ${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}
 
 
+Configure Multiple SNMP Managers Via GUI And Verify SNMP Trap
+    [Documentation]  Configure multiple SNMP Managers on BMC via GUI
+    ...  and check trap.
+    [Tags]  Configure_Multiple_SNMP_Managers_Via_GUI_And_Verify_SNMP_Trap
+
+    Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    Configure SNMP Manager Via GUI  ${SNMP_MGR2_IP}  ${NON_DEFAULT_PORT1}
+
+    # Reboot BMC and check persistency SNMP manager.
+    Reboot BMC Via GUI
+
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR2_IP}  ${NON_DEFAULT_PORT1}
+
+    # Check if trap is generated and sent to SNMP managers after reboot.
+    Generate Error On BMC And Verify Trap
+    ...  ${CMD_INTERNAL_FAILURE}  ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+
+
 *** Keywords ***
 
 Suite Setup Execution
