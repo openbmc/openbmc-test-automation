@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4f3f03c_c12d7170",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-02T16:24:50Z",
+      "side": 1,
+      "message": "minor comments. please fix those and we should be good",
+      "revId": "e56f61cb3fbfffa16da7df032669c9150d60a3a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "712e51c4_ae1ebc1a",
+        "filename": "ipmi/test_get_bios_post_code.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-02T16:24:50Z",
+      "side": 1,
+      "message": "# Description of argument(s):\n# expected_state    Expected IPMI power state (e.g on/off).",
+      "revId": "e56f61cb3fbfffa16da7df032669c9150d60a3a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0c9a8fe_fb5699ad",
+        "filename": "ipmi/test_get_bios_post_code.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-02T16:24:50Z",
+      "side": 1,
+      "message": "host_ip   would be appropriate. Please change in other places too in this suite.",
+      "range": {
+        "startLine": 89,
+        "startChar": 19,
+        "endLine": 89,
+        "endChar": 21
+      },
+      "revId": "e56f61cb3fbfffa16da7df032669c9150d60a3a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ecd62cd_41830453",
+        "filename": "ipmi/test_get_bios_post_code.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-02T16:24:50Z",
+      "side": 1,
+      "message": "host_ip    would be appropriate here. Please change",
+      "range": {
+        "startLine": 100,
+        "startChar": 19,
+        "endLine": 100,
+        "endChar": 23
+      },
+      "revId": "e56f61cb3fbfffa16da7df032669c9150d60a3a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
