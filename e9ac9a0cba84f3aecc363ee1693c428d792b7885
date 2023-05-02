@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "203eb8b2_a8ee6c92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-02T09:01:02Z",
+      "side": 1,
+      "message": "can we move under directory structure as \n ipmi/dcmi/test_dcmi_get_capabilities.robot",
+      "revId": "e9ac9a0cba84f3aecc363ee1693c428d792b7885",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
