@@ -22,6 +22,30 @@
       },
       "revId": "e24e43e97d40356748d31beb084c40f761e4cdbd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9213b0f_2f5af4f0",
+        "filename": "lib/resource.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-02T13:02:48Z",
+      "side": 1,
+      "message": "Removed, actually this keyword was added accidentally.\nI have remove this keyword from resource.robot",
+      "parentUuid": "326d7133_2d72439f",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 25
+      },
+      "revId": "e24e43e97d40356748d31beb084c40f761e4cdbd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
