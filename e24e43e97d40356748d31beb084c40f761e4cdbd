@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "326d7133_2d72439f",
+        "filename": "lib/resource.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-02T09:36:10Z",
+      "side": 1,
+      "message": "Where is this coming from? the MAX SEL entries 20. Any so documentation link in openbmc or IPMI which says it has to be 20. Can u educate me a bit. THanks",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 25
+      },
+      "revId": "e24e43e97d40356748d31beb084c40f761e4cdbd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
