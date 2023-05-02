@@ -247,6 +247,25 @@ Configure SNMP Manager Via GUI And Verify SNMP Trap On Non Default Port
     ${CMD_INFORMATIONAL_ERROR}  ${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}
 
 
+Configure Multiple SNMP Managers Via GUI And Verify SNMP Trap
+    [Documentation]  Configure multiple SNMP Managers on BMC via GUI
+    ...  and check trap.
+    [Tags]  Configure_Multiple_SNMP_Managers_Via_GUI_And_Verify_SNMP_Trap
+    [Teardown]  Run Keywords  Delete SNMP Manager Via Redfish  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    ...  AND  Delete SNMP Manager Via Redfish  ${SNMP_MGR2_IP}  ${NON_DEFAULT_PORT1}
+
+    Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    Configure SNMP Manager Via GUI  ${SNMP_MGR2_IP}  ${NON_DEFAULT_PORT1}
+
+    # Check if trap is generated and sent to SNMP managers those are configured.
+
+    Create Error Log On BMC And Verify Trap  ${SNMP_MGR1_IP}  ${SNMP_DEFAULT_PORT}
+    ...  ${CMD_INTERNAL_FAILURE}     ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+
+    Create Error Log On BMC And Verify Trap  ${SNMP_MGR2_IP}  ${NON_DEFAULT_PORT1}
+    ...  ${CMD_INTERNAL_FAILURE}     ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -455,6 +474,43 @@ Generate Error Log On BMC And Verify Trap On Non Default Port
 
     ${snmp_info_list}=  Split To Lines  ${SNMP_LISTEN_OUT}
     ${trap_info}=  Get From List  ${snmp_info_list}  -1
+    ${snmp_trap}=  Split String  ${trap_info}  \t
+
+    Verify SNMP Trap  ${snmp_trap}  ${trap_msg}
+
+
+Create Error Log On BMC And Verify Trap
+    [Documentation]  Generate error on BMC
+    ...  and check whether the trap is sent to all those are configured.
+    [Arguments]  ${snmp_ip_value}  ${snmp_port_value}  ${event_log_cmd}  ${trap_msg}
+
+    # Description of argument(s):
+    # snmp_ip_value     SNMP manager IP address.
+    # snmp_port_value   SNMP manager port.
+    # event_log_cmd     Event logs to be created.
+    # trap_msg          Expected trap on SNMP.
+
+    Start SNMP Manager On Specific Port  ${snmp_ip_value}  ${snmp_port_value}
+
+    # Generate error log.
+    BMC Execute Command  ${event_log_cmd}
+
+    SSHLibrary.Switch Connection  snmp_server
+    ${SNMP_LISTEN_OUT}=  Read  delay=1s
+
+    # Stop SNMP manager process.
+    SSHLibrary.Execute Command  sudo killall snmptrapd
+
+    # Sample SNMP trap:
+    # 2021-06-16 07:05:29 xx.xx.xx.xx [UDP: [xx.xx.xx.xx]:58154->[xx.xx.xx.xx]:xxx]:
+    # DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (2100473) 5:50:04.73
+    #   SNMPv2-MIB::snmpTrapOID.0 = OID: SNMPv2-SMI::enterprises.49871.1.0.0.1
+    #  SNMPv2-SMI::enterprises.49871.1.0.1.1 = Gauge32: 369    SNMPv2-SMI::enterprises.49871.1.0.1.2 = Opaque:
+    # UInt64: 1397718405502468474     SNMPv2-SMI::enterprises.49871.1.0.1.3 = INTEGER: 3
+    #      SNMPv2-SMI::enterprises.49871.1.0.1.4 = STRING: "xxx.xx.xx Failure"
+
+    ${lines}=  Split To Lines  ${SNMP_LISTEN_OUT}
+    ${trap_info}=  Get From List  ${lines}  -1
     ${snmp_trap}=  Split String  ${trap_info}  \t
 
     Verify SNMP Trap  ${snmp_trap}  ${trap_msg}
