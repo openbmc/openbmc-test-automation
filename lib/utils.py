@@ -492,3 +492,16 @@ def remove_unicode_from_uri(uri):
     """
 
     return re.sub("`-|\\|-", "", uri)
+
+
+def get_bmc_major_minor_version(version):
+    r"""
+    returns major version and minor version
+    from cat /etc/os-release command.
+    For example,
+    xyz23.01 --> [23, 01]
+    xyz.0-112 --> [0, 112]
+    ZERzzYY-23.04-1-xx3 --> [23, 04, 1, 3]
+    """
+
+    return re.findall(r"\d+", re.sub("[A-Z]|[a-z]", "", version))
