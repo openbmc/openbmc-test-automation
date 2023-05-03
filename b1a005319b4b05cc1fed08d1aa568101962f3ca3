@@ -33,6 +33,24 @@
       "message": "are you verifying trap at both SNMP managers??",
       "revId": "b1a005319b4b05cc1fed08d1aa568101962f3ca3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21840b3f_34ea49b0",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-05-03T06:39:16Z",
+      "side": 1,
+      "message": "Modified the code, yes.",
+      "parentUuid": "25a07d0b_321fbda9",
+      "revId": "b1a005319b4b05cc1fed08d1aa568101962f3ca3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
