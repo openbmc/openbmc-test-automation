@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "058c54ba_3193534b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-03T05:00:51Z",
+      "side": 1,
+      "message": "Yeah. Can you point to the development commit/tread for this change?  I am unable to make out reason for this change.",
+      "parentUuid": "b7cd1959_e7c47a71",
+      "revId": "468ae68a8e15a76be0fb941011df52d2d7ef2fe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "321ba4eb_6f011469",
         "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
         "patchSetId": 1
