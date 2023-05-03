@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7cd1959_e7c47a71",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-05-03T04:50:58Z",
+      "side": 1,
+      "message": "3072 or 2072??\nCan you share any reference for this change?",
+      "revId": "468ae68a8e15a76be0fb941011df52d2d7ef2fe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "321ba4eb_6f011469",
+        "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-05-03T04:50:58Z",
+      "side": 1,
+      "message": "define varibale",
+      "range": {
+        "startLine": 161,
+        "startChar": 36,
+        "endLine": 161,
+        "endChar": 44
+      },
+      "revId": "468ae68a8e15a76be0fb941011df52d2d7ef2fe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d38d7bd_181128a0",
+        "filename": "redfish/managers/test_certificate.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-05-03T04:50:58Z",
+      "side": 1,
+      "message": "define variable $key_len  3072\nUser can give his choice of length while running test.",
+      "range": {
+        "startLine": 156,
+        "startChar": 35,
+        "endLine": 156,
+        "endChar": 43
+      },
+      "revId": "468ae68a8e15a76be0fb941011df52d2d7ef2fe5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
