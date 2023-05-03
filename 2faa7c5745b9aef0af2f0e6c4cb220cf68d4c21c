@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6952f86_8dd237f6",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-03T14:21:11Z",
+      "side": 1,
+      "message": "old tag name is not able to identify the test case,\nwhen script was executed with old tag name Verify_LDAP_Login_With_Invalid_BIND_DN_PASSWORD it was showing as\n\n[ ERROR ] Suite \u0027Test Ldap Configuration\u0027 contains no tests matching tag \u0027Verify LDAP Login With Invalid BIND DN PASSW OR D\u0027.\n\nHence, old tag name was changed to Verify_LDAP_Login_With_Invalid_BIND_DN_PWD",
+      "parentUuid": "f58125b7_35a61934",
+      "range": {
+        "startLine": 369,
+        "startChar": 12,
+        "endLine": 369,
+        "endChar": 54
+      },
+      "revId": "2faa7c5745b9aef0af2f0e6c4cb220cf68d4c21c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d383e11_6af653c6",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-05-03T07:05:45Z",
       "side": 1,
       "message": "Remove spaces",
+      "range": {
+        "startLine": 572,
+        "startChar": 70,
+        "endLine": 572,
+        "endChar": 71
+      },
+      "revId": "2faa7c5745b9aef0af2f0e6c4cb220cf68d4c21c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8d2891c_1eeac6ae",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-03T14:21:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d383e11_6af653c6",
       "range": {
         "startLine": 572,
         "startChar": 70,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89ec2666_9794c413",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-03T14:21:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50f5bbf1_cec097c9",
+      "range": {
+        "startLine": 574,
+        "startChar": 81,
+        "endLine": 574,
+        "endChar": 82
+      },
+      "revId": "2faa7c5745b9aef0af2f0e6c4cb220cf68d4c21c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b27d9e67_a0985430",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-05-03T07:05:45Z",
       "side": 1,
       "message": "remove spaces throughout",
+      "range": {
+        "startLine": 578,
+        "startChar": 57,
+        "endLine": 578,
+        "endChar": 58
+      },
+      "revId": "2faa7c5745b9aef0af2f0e6c4cb220cf68d4c21c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7fe188d_822dfad3",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-03T14:21:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b27d9e67_a0985430",
       "range": {
         "startLine": 578,
         "startChar": 57,
@@ -116,6 +212,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b05edcb_d4538b8e",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-03T14:21:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99b82947_000ae64c",
+      "range": {
+        "startLine": 588,
+        "startChar": 6,
+        "endLine": 588,
+        "endChar": 21
+      },
+      "revId": "2faa7c5745b9aef0af2f0e6c4cb220cf68d4c21c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "442ad7ab_00f2464a",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-05-03T07:05:45Z",
       "side": 1,
       "message": "NoAccess or ReadOnly",
+      "range": {
+        "startLine": 589,
+        "startChar": 48,
+        "endLine": 589,
+        "endChar": 68
+      },
+      "revId": "2faa7c5745b9aef0af2f0e6c4cb220cf68d4c21c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b649b426_eeb85a86",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-03T14:21:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "442ad7ab_00f2464a",
       "range": {
         "startLine": 589,
         "startChar": 48,
@@ -162,6 +306,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8f08dcd_4e6dd3ae",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-03T14:21:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d345af9_a6bd19fc",
+      "range": {
+        "startLine": 592,
+        "startChar": 59,
+        "endLine": 592,
+        "endChar": 60
+      },
+      "revId": "2faa7c5745b9aef0af2f0e6c4cb220cf68d4c21c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46915263_afc25fef",
@@ -185,6 +353,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69a8e89f_f51435b4",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-03T14:21:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46915263_afc25fef",
+      "range": {
+        "startLine": 593,
+        "startChar": 13,
+        "endLine": 593,
+        "endChar": 14
+      },
+      "revId": "2faa7c5745b9aef0af2f0e6c4cb220cf68d4c21c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ff19710_7c499470",
@@ -198,6 +390,30 @@
       "writtenOn": "2023-05-03T07:05:45Z",
       "side": 1,
       "message": "Remove spaces",
+      "range": {
+        "startLine": 594,
+        "startChar": 24,
+        "endLine": 594,
+        "endChar": 25
+      },
+      "revId": "2faa7c5745b9aef0af2f0e6c4cb220cf68d4c21c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3047d2c4_15a53b20",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-03T14:21:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ff19710_7c499470",
       "range": {
         "startLine": 594,
         "startChar": 24,
