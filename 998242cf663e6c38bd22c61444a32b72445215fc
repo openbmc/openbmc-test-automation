@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bdc2edf_45f8cceb",
+        "filename": "ipmi/dcmi_commands/test_dcmi_get_capabilities.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-03T06:37:30Z",
+      "side": 1,
+      "message": "Instead of dcmi_commands folder just keep dcmi folder\n\nipmi/dcmi_commands/test_dcmi_get_capabilities.robot ----\u003e ipmi/dcmi/test_dcmi_get_capabilities.robot",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 16
+      },
+      "revId": "998242cf663e6c38bd22c61444a32b72445215fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5189c2d7_2dc2d9ca",
+        "filename": "ipmi/dcmi_commands/test_dcmi_get_capabilities.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-03T06:37:30Z",
+      "side": 1,
+      "message": "All there are not required. Please only add the required ones for the current test case in this bucket.",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 40
+      },
+      "revId": "998242cf663e6c38bd22c61444a32b72445215fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
