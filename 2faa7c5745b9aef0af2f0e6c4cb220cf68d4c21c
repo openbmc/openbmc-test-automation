@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f58125b7_35a61934",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-05-03T07:05:45Z",
+      "side": 1,
+      "message": "test case name and the tag names are preferably kept the same to avoid confusion.",
+      "range": {
+        "startLine": 369,
+        "startChar": 12,
+        "endLine": 369,
+        "endChar": 54
+      },
+      "revId": "2faa7c5745b9aef0af2f0e6c4cb220cf68d4c21c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d383e11_6af653c6",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-05-03T07:05:45Z",
+      "side": 1,
+      "message": "Remove spaces",
+      "range": {
+        "startLine": 572,
+        "startChar": 70,
+        "endLine": 572,
+        "endChar": 71
+      },
+      "revId": "2faa7c5745b9aef0af2f0e6c4cb220cf68d4c21c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50f5bbf1_cec097c9",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-05-03T07:05:45Z",
+      "side": 1,
+      "message": "Remove spaces.",
+      "range": {
+        "startLine": 574,
+        "startChar": 81,
+        "endLine": 574,
+        "endChar": 82
+      },
+      "revId": "2faa7c5745b9aef0af2f0e6c4cb220cf68d4c21c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b27d9e67_a0985430",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-05-03T07:05:45Z",
+      "side": 1,
+      "message": "remove spaces throughout",
+      "range": {
+        "startLine": 578,
+        "startChar": 57,
+        "endLine": 578,
+        "endChar": 58
+      },
+      "revId": "2faa7c5745b9aef0af2f0e6c4cb220cf68d4c21c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99b82947_000ae64c",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-05-03T07:05:45Z",
+      "side": 1,
+      "message": "grp_privilege",
+      "range": {
+        "startLine": 588,
+        "startChar": 6,
+        "endLine": 588,
+        "endChar": 21
+      },
+      "revId": "2faa7c5745b9aef0af2f0e6c4cb220cf68d4c21c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "442ad7ab_00f2464a",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-05-03T07:05:45Z",
+      "side": 1,
+      "message": "NoAccess or ReadOnly",
+      "range": {
+        "startLine": 589,
+        "startChar": 48,
+        "endLine": 589,
+        "endChar": 68
+      },
+      "revId": "2faa7c5745b9aef0af2f0e6c4cb220cf68d4c21c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d345af9_a6bd19fc",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-05-03T07:05:45Z",
+      "side": 1,
+      "message": "Remove spaces",
+      "range": {
+        "startLine": 592,
+        "startChar": 59,
+        "endLine": 592,
+        "endChar": 60
+      },
+      "revId": "2faa7c5745b9aef0af2f0e6c4cb220cf68d4c21c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46915263_afc25fef",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-05-03T07:05:45Z",
+      "side": 1,
+      "message": "remove Spaces",
+      "range": {
+        "startLine": 593,
+        "startChar": 13,
+        "endLine": 593,
+        "endChar": 14
+      },
+      "revId": "2faa7c5745b9aef0af2f0e6c4cb220cf68d4c21c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ff19710_7c499470",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-05-03T07:05:45Z",
+      "side": 1,
+      "message": "Remove spaces",
+      "range": {
+        "startLine": 594,
+        "startChar": 24,
+        "endLine": 594,
+        "endChar": 25
+      },
+      "revId": "2faa7c5745b9aef0af2f0e6c4cb220cf68d4c21c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
