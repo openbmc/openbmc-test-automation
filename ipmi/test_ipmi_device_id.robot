@@ -69,15 +69,19 @@ Verify Device ID Response Data Via IPMI
 
     # Get version details from /etc/os-release.
     ${os_release}=  Get BMC OS Release Details
-    ${version}=  Get Version Details From BMC OS Release  ${os_release['version']}
+    ${version}=  Get Bmc Major Minor Version  ${os_release['version']}
 
     # Verify Firmware Revision 1.
     ${firmware_rev1}=  Set Variable  ${version[0]}
-    Run Keyword And Continue On Failure  Should Be Equal  ${resp[2]}  0${firmware_rev1}
+    ${ipmi_rsp_firmware_rev1}=  Convert To Integer  ${resp[2]}  base=16
+    Run Keyword And Continue On Failure  Should Be Equal As Integers
+    ...  ${ipmi_rsp_firmware_rev1}  ${firmware_rev1}
 
     # Verify Firmware Revision 2.
     ${firmware_rev2}=  Set Variable  ${version[1]}
-    Run Keyword And Continue On Failure  Should Be Equal  ${resp[3]}  0${firmware_rev2}
+    ${ipmi_rsp_firmware_rev2}=  Convert To Integer  ${resp[3]}  base=16
+    Run Keyword And Continue On Failure  Should Be Equal As Integers
+    ...  ${ipmi_rsp_firmware_rev2}  ${firmware_rev2}
 
     # Verify IPMI Version.
     Run Keyword And Continue On Failure  Should Be Equal  ${resp[4]}  02
@@ -95,10 +99,6 @@ Verify Device ID Response Data Via IPMI
     Run Keyword And Continue On Failure  Should Not Be Equal  ${product_id}  0000
     ...  msg=Product ID cannot be Zero
 
-    # Verify Auxiliary Firmware Revision Information.
-    # etc/os-release - from bmc.
-    ${auxiliary_info}=  Get Auxiliary Firmware Revision Information
-
     # Get Auxiliary Firmware Revision Information from IPMI response.
     ${auxiliary_rev_version}=  Set Variable  ${resp[11:]}
     Reverse List  ${auxiliary_rev_version}
@@ -109,9 +109,6 @@ Verify Device ID Response Data Via IPMI
     ${dev_id_data}=  Get Device Info From BMC
     ${aux_info}=  Get From Dictionary  ${dev_id_data}  aux
     Run Keyword And Continue On Failure  Should Be Equal  ${aux_info}  ${auxiliary_rev_version}
-
-    # Compare both IPMI version and /etc/os-release version.
-    Run Keyword And Continue On Failure  Should Be Equal  ${auxiliary_info}  ${auxiliary_rev_version}
 
 
 *** Keywords ***
@@ -133,37 +130,6 @@ Get BMC OS Release Details
     ${os_release}=  Convert To Dictionary  ${os_release}
 
     [Return]  ${os_release}
-
-
-Get Version Details From BMC OS Release
-    [Documentation]  To get the Version details from bmc etc/os-release,
-    ...              and returns list consists of major, minor and auxiliary version.
-    [Arguments]  ${version}
-
-    # As per BMC, VERSION="X.Y.Z-ZZZZ"
-    # ${version} - ["X", "Y" ,"Z-ZZZZ"]
-    # here, X - major version, Y - minor version,
-    # Z-ZZZZ - auxiliary version.
-    ${version}=  Split String  ${version}  .
-
-    [Return]  ${version}
-
-
-Get Auxiliary Firmware Revision Information
-    [Documentation]  To Get the Auxiliary Firmware Revision Information from BMC etc/os-release.
-
-    # Get the Auxiliary Firmware Revision Information version from etc/os-release.
-    ${os_release}=  Get BMC OS Release Details
-
-    # Fetch the version from dictionary response and identify Auxiliary version.
-    ${version}=  Get Version Details From BMC OS Release  ${os_release['version']}
-    ${aux_rev}=  Set Variable  ${version[2]}
-
-    # Remove extra special character.
-    ${aux_rev}=  Replace String  ${aux_rev}  -  ${EMPTY}
-    ${aux_rev}=  Convert To Integer  ${aux_rev}
-
-    [Return]  ${aux_rev}
 
 
 Get Device Info From BMC
