@@ -69,15 +69,19 @@ Verify Device ID Response Data Via IPMI
 
     # Get version details from /etc/os-release.
     ${os_release}=  Get BMC OS Release Details
-    ${version}=  Get Version Details From BMC OS Release  ${os_release['version']}
+    ${version}=  Get Bmc Major Minor Version  ${os_release['version']}
 
     # Verify Firmware Revision 1.
     ${firmware_rev1}=  Set Variable  ${version[0]}
-    Run Keyword And Continue On Failure  Should Be Equal  ${resp[2]}  0${firmware_rev1}
+    ${ipmi_rsp_firmware_rev1}=  Convert To Integer  ${resp[2]}  base=16
+    Run Keyword And Continue On Failure  Should Be Equal As Integers
+    ...  ${ipmi_rsp_firmware_rev1}  ${firmware_rev1}
 
     # Verify Firmware Revision 2.
     ${firmware_rev2}=  Set Variable  ${version[1]}
-    Run Keyword And Continue On Failure  Should Be Equal  ${resp[3]}  0${firmware_rev2}
+    ${ipmi_rsp_firmware_rev2}=  Convert To Integer  ${resp[3]}  base=16
+    Run Keyword And Continue On Failure  Should Be Equal As Integers
+    ...  ${ipmi_rsp_firmware_rev2}  ${firmware_rev2}
 
     # Verify IPMI Version.
     Run Keyword And Continue On Failure  Should Be Equal  ${resp[4]}  02
@@ -135,20 +139,6 @@ Get BMC OS Release Details
     [Return]  ${os_release}
 
 
-Get Version Details From BMC OS Release
-    [Documentation]  To get the Version details from bmc etc/os-release,
-    ...              and returns list consists of major, minor and auxiliary version.
-    [Arguments]  ${version}
-
-    # As per BMC, VERSION="X.Y.Z-ZZZZ"
-    # ${version} - ["X", "Y" ,"Z-ZZZZ"]
-    # here, X - major version, Y - minor version,
-    # Z-ZZZZ - auxiliary version.
-    ${version}=  Split String  ${version}  .
-
-    [Return]  ${version}
-
-
 Get Auxiliary Firmware Revision Information
     [Documentation]  To Get the Auxiliary Firmware Revision Information from BMC etc/os-release.
 
@@ -156,7 +146,7 @@ Get Auxiliary Firmware Revision Information
     ${os_release}=  Get BMC OS Release Details
 
     # Fetch the version from dictionary response and identify Auxiliary version.
-    ${version}=  Get Version Details From BMC OS Release  ${os_release['version']}
+    ${version}=  Get Bmc Major Minor Version  ${os_release['version']}
     ${aux_rev}=  Set Variable  ${version[2]}
 
     # Remove extra special character.
