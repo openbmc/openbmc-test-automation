@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29882e30_e87a8afd",
+        "filename": "ipmi/test_get_bios_post_code.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-03T16:04:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "712e51c4_ae1ebc1a",
+      "revId": "e56f61cb3fbfffa16da7df032669c9150d60a3a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0c9a8fe_fb5699ad",
@@ -58,6 +76,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38e60ab0_d4f81c15",
+        "filename": "ipmi/test_get_bios_post_code.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-03T16:04:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0c9a8fe_fb5699ad",
+      "range": {
+        "startLine": 89,
+        "startChar": 19,
+        "endLine": 89,
+        "endChar": 21
+      },
+      "revId": "e56f61cb3fbfffa16da7df032669c9150d60a3a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ecd62cd_41830453",
@@ -71,6 +113,30 @@
       "writtenOn": "2023-05-02T16:24:50Z",
       "side": 1,
       "message": "host_ip    would be appropriate here. Please change",
+      "range": {
+        "startLine": 100,
+        "startChar": 19,
+        "endLine": 100,
+        "endChar": 23
+      },
+      "revId": "e56f61cb3fbfffa16da7df032669c9150d60a3a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46370bd5_72bce2b5",
+        "filename": "ipmi/test_get_bios_post_code.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-03T16:04:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ecd62cd_41830453",
       "range": {
         "startLine": 100,
         "startChar": 19,
