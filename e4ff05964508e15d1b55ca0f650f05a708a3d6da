@@ -22,6 +22,30 @@
       },
       "revId": "e4ff05964508e15d1b55ca0f650f05a708a3d6da",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d84b7695_781a6cc9",
+        "filename": "ipmi/dcmi/test_dcmi_get_capabilities.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-04T07:04:00Z",
+      "side": 1,
+      "message": "Actually this script only have cases regarding dcmi get capabilities.\nIndividual scripts were created for other dcmi commands.",
+      "parentUuid": "555b5064_e39c5976",
+      "range": {
+        "startLine": 3,
+        "startChar": 17,
+        "endLine": 3,
+        "endChar": 61
+      },
+      "revId": "e4ff05964508e15d1b55ca0f650f05a708a3d6da",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
