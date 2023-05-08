@@ -385,7 +385,7 @@ Verify PEL Log Entry For Event Log
     # elog_entry:
     #  [0]:
     #    [Message]:                             BD802003 event in subsystem: Platform Firmware
-    #    [Created]:                             2020-04-20T01:55:22+00:00
+    #    [Created]:                             2023-05-08T10:19:30.412+00:00
     #    [Id]:                                  1
     #    [@odata.id]:                           /redfish/v1/Systems/system/LogServices/EventLog/Entries/1
     #    [@odata.type]:                         #LogEntry.v1_4_0.LogEntry
@@ -393,7 +393,7 @@ Verify PEL Log Entry For Event Log
     #    [Severity]:                            Critical
     #    [Name]:                                System Event Log Entry
 
-    ${redfish_log_time}=  Convert Date  ${elog_entry[0]["Created"]}  epoch
+    ${redfish_log_time}=  Convert Date  ${elog_entry[0]["Created"].split('.')[0]}  epoch
 
     ${pel_records}=  Peltool  -l
     # Example output from 'Peltool  -l':
