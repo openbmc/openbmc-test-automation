@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5860a7f7_be2d70c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-09T14:46:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "487b13c8_7d7b7e0f",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 72
+      },
+      "revId": "2649519be4c817725bebca61b028aee24afe371a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c75750a9_53692f1e",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-05-09T11:36:54Z",
       "side": 1,
       "message": "Pls format  \neg\n```\n${cert_id}\u003d  Set Variable If  \n...  \u0027${resp.status_code}\u0027 \u003d\u003d \u0027${HTTP_OK}\u0027  ${resp.json()[\"Id\"]}  \n...  \u0027${resp.status_code}\u0027 \u003d\u003d \u0027${HTTP_NO_CONTENT}\u0027  ${resp.json()[\"Id\"]}  -1\n```",
+      "range": {
+        "startLine": 227,
+        "startChar": 4,
+        "endLine": 227,
+        "endChar": 27
+      },
+      "revId": "2649519be4c817725bebca61b028aee24afe371a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fb5cba5_0a3a7f15",
+        "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-09T14:46:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c75750a9_53692f1e",
       "range": {
         "startLine": 227,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "babb654b_60feaaac",
+        "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-09T14:46:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2333149d_ea25d508",
+      "range": {
+        "startLine": 339,
+        "startChar": 32,
+        "endLine": 339,
+        "endChar": 34
+      },
+      "revId": "2649519be4c817725bebca61b028aee24afe371a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92cacd5c_c62c2862",
@@ -93,6 +165,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aac1cd7_7e62f40c",
+        "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-09T14:46:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92cacd5c_c62c2862",
+      "range": {
+        "startLine": 339,
+        "startChar": 4,
+        "endLine": 342,
+        "endChar": 0
+      },
+      "revId": "2649519be4c817725bebca61b028aee24afe371a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14691a30_4068a837",
@@ -106,6 +202,30 @@
       "writtenOn": "2023-05-09T11:36:54Z",
       "side": 1,
       "message": "Pls format like above \neg\n```\n${cert_id}\u003d  Set Variable If  \n...  \u0027${resp.status_code}\u0027 \u003d\u003d \u0027${HTTP_OK}\u0027  ${resp.json()[\"Id\"]}  \n...  \u0027${resp.status_code}\u0027 \u003d\u003d \u0027${HTTP_NO_CONTENT}\u0027  ${resp.json()[\"Id\"]}  -1\n```",
+      "range": {
+        "startLine": 386,
+        "startChar": 3,
+        "endLine": 386,
+        "endChar": 62
+      },
+      "revId": "2649519be4c817725bebca61b028aee24afe371a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2be443a8_48700bff",
+        "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-09T14:46:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14691a30_4068a837",
       "range": {
         "startLine": 386,
         "startChar": 3,
