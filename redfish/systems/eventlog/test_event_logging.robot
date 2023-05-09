@@ -158,7 +158,7 @@ Create Test Event Log And Verify Time Stamp
     #    "@odata.context": "/redfish/v1/$metadata#LogEntry.LogEntry",
     #    "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/1",
     #    "@odata.type": "#LogEntry.v1_4_0.LogEntry",
-    #    "Created": "2019-05-29T13:19:27+00:00", <--- Time stamp
+    #    "Created": "2023-05-10T10:26:02.186+00:00", <--- Time stamp
     #    "EntryType": "Event",
     #    "Id": "1",
     #    "Message": "org.open_power.Host.Error.Event",
@@ -180,8 +180,8 @@ Create Test Event Log And Verify Time Stamp
 
     # The event log generated is associated with the epoc time and unique
     # for every error and in increasing time stamp.
-    ${time_stamp1}=  Convert Date  ${elog_entry[0]["Created"]}  epoch
-    ${time_stamp2}=  Convert Date  ${elog_entry[1]["Created"]}  epoch
+    ${time_stamp1}=  Convert Date  ${elog_entry[0]["Created"].split('.')[0]}  epoch
+    ${time_stamp2}=  Convert Date  ${elog_entry[1]["Created"].split('.')[0]}  epoch
 
     Should Be True  ${time_stamp2} > ${time_stamp1}
 
@@ -207,11 +207,11 @@ Verify Setting Error Log As Resolved
     #  "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/2045",
     #  "@odata.type": "#LogEntry.v1_8_0.LogEntry",
     #  "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/EventLog/attachment/2045",
-    #  "Created": "2021-05-11T04:45:07+00:00",
+    #  "Created": "2023-05-10T10:26:02.186+00:00",
     #  "EntryType": "Event",
     #  "Id": "2045",
     #  "Message": "xyz.openbmc_project.Host.Error.Event",
-    #  "Modified": "2021-05-11T07:24:36+00:00",
+    #  "Modified": "2023-05-10T10:26:02.186+00:00",
     #  "Name": "System Event Log Entry",
     #  "Resolved": true,
     #  "Severity": "OK"
@@ -220,8 +220,8 @@ Verify Setting Error Log As Resolved
     Should Be Equal As Strings  ${elog_entry[0]["Resolved"]}  True
 
     # Difference created and modified time of error log should be around 5 seconds.
-    ${creation_time}=  Convert Date  ${elog_entry[0]["Created"]}  epoch
-    ${modification_time}=  Convert Date  ${elog_entry[0]["Modified"]}  epoch
+    ${creation_time}=  Convert Date  ${elog_entry[0]["Created"].split('.')[0]}  epoch
+    ${modification_time}=  Convert Date  ${elog_entry[0]["Modified"].split('.')[0]}  epoch
 
     ${diff}=  Subtract Date From Date  ${modification_time}  ${creation_time}
     ${diff}=  Convert To Number  ${diff}
