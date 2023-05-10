@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54bb5693_d7224847",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-10T14:05:30Z",
+      "side": 1,
+      "message": "CI seems failed, \n\n-REDFISH_MANAGERS_ID \u003d BuiltIn().get_variable_value(\"${MANAGER_ID}\", default\u003d\"bmc\")\n+REDFISH_MANAGERS_ID \u003d BuiltIn().get_variable_value(\n+    \"${MANAGER_ID}\", default\u003d\"bmc\"\n+)\n REDFISH_NW_ETH0 \u003d (\n     \"Managers/\" + REDFISH_MANAGERS_ID + \"/EthernetInterfaces/eth0/\"\n )\nFormat: FAILED\n\n\nPlease fix it.. Thanks\n\nrefer  https://jenkins.openbmc.org/job/ci-repository/66069/console",
+      "revId": "f7db8825bb245336e9189771c646ebd73b456021",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
