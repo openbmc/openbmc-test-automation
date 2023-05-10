@@ -33,6 +33,29 @@
       "message": "Ran a test case. Working clean.",
       "revId": "6aae871df49447b8450d671911e86656e8adb1e9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07eef3a9_c5b7d061",
+        "filename": "data/variables.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-10T08:42:16Z",
+      "side": 1,
+      "message": "Do like this for this one and I think we should be good\n\nREDFISH_MANAGERS_ID \u003d BuiltIn().get_variable_value(\"${MANAGER_ID}\", default\u003d\"bmc\")\n\nCurrent error noticed:\n\nError in file \u0027/home/dev/openbmc-test-automation/lib/open_power_utils.robot\u0027 on line 4: Processing variable file\n/home/dev/openbmc-test-automation/data/variables.py\u0027 failed: Importing variable file \u0027/afs/rchland.ibm.com/projects/esw/dvt/autoipl/apollodev/bin/git/openbmc-test-automation/data/variables.py\u0027 failed: TypeError: can only concatenate str (not \"NoneType\") to str\nTraceback (most recent call last):\n  File \"/home/dev/openbmc-test-automation/data/variables.py\", line 189, in \u003cmodule\u003e\n    \"Managers/\" + REDFISH_MANAGERS_ID + \"/EthernetInterfaces/eth0/\"\nPYTHONPATH:",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 67
+      },
+      "revId": "6aae871df49447b8450d671911e86656e8adb1e9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
