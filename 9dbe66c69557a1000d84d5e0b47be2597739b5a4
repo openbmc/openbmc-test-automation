@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13de5a9c_d79453ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-10T16:37:07Z",
+      "side": 1,
+      "message": "Awaiting David Shaw +1 on his setup env and I ll merged,, Thanks",
+      "revId": "9dbe66c69557a1000d84d5e0b47be2597739b5a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
