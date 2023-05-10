@@ -3,6 +3,8 @@ Documentation   DMTF tools utility keywords.
 
 Resource        resource.robot
 Library         gen_cmd.py
+Library         utils.py
+Variables       ../data/oem_uri_list.py
 
 *** Variables ***
 
@@ -57,3 +59,34 @@ Redfish JsonSchema ResponseValidator Result
     # 0 errors
     Should Contain  ${tool_output}  0 errors
 
+
+Get OEM URI List
+    [Documentation]  Return oem uri list.
+    [Arguments]  ${url_list}
+
+    # Description of arguments:
+    # url_list  master url list that has all redfish uri's.
+
+    @{tmp_lst}=  Create List
+
+    # Get OEM URI's as an list from data/oem_uri_list.py
+    ${uri_list}=  Set Variable  ${URI}
+
+    FOR  ${oem_uri}  IN  @{uri_list}
+      # Get index value for the related oem uri's from master uri list.
+      # For example, Consider /redfish/v1/Chassis is an OEM URI
+      # All the subsequent uri's index such as /redfish/v1/Chassis/chassis,
+      # /redfish/v1/Chassis/chassis/Power and /redfish/v1/Chassis/chassis/Thermal will be returned.
+      ${index_lst}=  Get Subsequent Value From List  ${url_list}  ${oem_uri}
+      FOR  ${index}  IN  @{index_lst}
+        # With that index value all the respective oem uri's will be appended to tmp_list.
+        ${uri}=  Get From List  ${url_list}  ${index}
+        Append To List  ${tmp_lst}  ${uri}
+      END
+      FOR  ${uri}  IN  @{tmp_lst}
+        # oem uri's will be removed from master uri list to avoid failures during validation.
+        Remove Values From List  ${url_list}  ${uri}
+      END
+    END
+
+    [Return]  ${tmp_lst}  ${url_list}
