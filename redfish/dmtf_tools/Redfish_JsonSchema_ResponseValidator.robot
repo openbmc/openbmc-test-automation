@@ -25,14 +25,18 @@ Test BMC Redfish Using Redfish JsonSchema ResponseValidator
     Download DMTF Tool  ${rsv_dir_path}  ${rsv_github_url}  ${branch_name}
 
     Redfish.Login
-    ${url_list}=  redfish_utils.List Request  /redfish/v1
+    ${urls}=  redfish_utils.List Request  /redfish/v1
     Redfish.Logout
 
     Shell Cmd  mkdir -p logs/
 
     Set Test Variable  ${test_run_status}  ${True}
 
-    FOR  ${url}  IN  @{url_list}
+    # Get oem uri's list and master uri list(non oem uri list)
+    ${oem_uri_list}  ${urls}=  Get OEM URI List And Non OEM URI List  ${urls}
+    Log  ${oem_uri_list}
+
+    FOR  ${url}  IN  @{urls}
         ${rc}  ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${command_string} -i ${url}
         ${status}=  Run Keyword And Return Status  Redfish JsonSchema ResponseValidator Result  ${output}
         Run Keyword If  ${status} == ${False}  Set Test Variable  ${test_run_status}  ${status}
