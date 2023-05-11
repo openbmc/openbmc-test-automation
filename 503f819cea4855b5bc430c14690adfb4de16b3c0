@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b4295ac_5bdb9940",
+        "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-11T04:42:11Z",
+      "side": 1,
+      "message": "This could be problematic.  since with this it would create a string 200, 204\n\nbut it would fail at the Redfishtool Post \n\nhttps://github.com/openbmc/openbmc-test-automation/blob/master/lib/dmtf_redfishtool_utils.robot#L68\n\nwhere we are checking\n\nRun Keyword If  ${rc} \u003d\u003d 0\n    ...    Should Be True  ${expected_error} \u003d\u003d 200",
+      "revId": "503f819cea4855b5bc430c14690adfb4de16b3c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
