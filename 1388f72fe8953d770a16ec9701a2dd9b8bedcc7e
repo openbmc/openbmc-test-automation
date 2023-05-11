@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1c10108_a97b1942",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-11T16:46:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1dd3abd6_ec29b3cf",
+      "revId": "1388f72fe8953d770a16ec9701a2dd9b8bedcc7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b97657b0_97e6a67e",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-05-11T07:34:50Z",
       "side": 1,
       "message": "Created a new keyword",
+      "range": {
+        "startLine": 11,
+        "startChar": 6,
+        "endLine": 11,
+        "endChar": 21
+      },
+      "revId": "1388f72fe8953d770a16ec9701a2dd9b8bedcc7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5fc4549_c37018f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-11T16:46:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b97657b0_97e6a67e",
       "range": {
         "startLine": 11,
         "startChar": 6,
@@ -58,6 +100,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dfac10f_28a4d409",
+        "filename": "data/oem_uri_list.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-11T16:46:52Z",
+      "side": 1,
+      "message": "oem uri is an internal uri and it\u0027s respective schema also internal.\nso only it was empty.",
+      "parentUuid": "25ae5fc0_09f354ec",
+      "revId": "1388f72fe8953d770a16ec9701a2dd9b8bedcc7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5efb855_7ba4349e",
@@ -71,6 +131,30 @@
       "writtenOn": "2023-05-11T07:34:50Z",
       "side": 1,
       "message": "OEM URI\n\npls change in documentation where ever applicable\n\nCan you add more documentation. This method returns OEM list and also the URL list without OEM. This requires change to the method name too to indicate that there are 2 lists returned and not just one.",
+      "range": {
+        "startLine": 64,
+        "startChar": 29,
+        "endLine": 64,
+        "endChar": 36
+      },
+      "revId": "1388f72fe8953d770a16ec9701a2dd9b8bedcc7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d3c6866_6a0fc07c",
+        "filename": "lib/dmtf_tools_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-11T16:46:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5efb855_7ba4349e",
       "range": {
         "startLine": 64,
         "startChar": 29,
@@ -104,6 +188,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a207dff_68435d58",
+        "filename": "lib/dmtf_tools_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-11T16:46:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20e5e801_922fe901",
+      "range": {
+        "startLine": 68,
+        "startChar": 16,
+        "endLine": 68,
+        "endChar": 59
+      },
+      "revId": "1388f72fe8953d770a16ec9701a2dd9b8bedcc7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "800925ed_57dca823",
@@ -117,6 +225,30 @@
       "writtenOn": "2023-05-11T07:34:50Z",
       "side": 1,
       "message": "Do not include data type in the variable name.",
+      "range": {
+        "startLine": 70,
+        "startChar": 6,
+        "endLine": 70,
+        "endChar": 13
+      },
+      "revId": "1388f72fe8953d770a16ec9701a2dd9b8bedcc7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbea76e0_05086ab5",
+        "filename": "lib/dmtf_tools_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-11T16:46:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "800925ed_57dca823",
       "range": {
         "startLine": 70,
         "startChar": 6,
@@ -150,6 +282,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4be65457_386d656a",
+        "filename": "lib/dmtf_tools_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-11T16:46:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70dfc1a8_f3a90a4e",
+      "range": {
+        "startLine": 72,
+        "startChar": 20,
+        "endLine": 72,
+        "endChar": 30
+      },
+      "revId": "1388f72fe8953d770a16ec9701a2dd9b8bedcc7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43c73517_a8f05fb4",
@@ -163,6 +319,30 @@
       "writtenOn": "2023-05-11T07:34:50Z",
       "side": 1,
       "message": "${uri_list} is expected as an input and then the same list is overridden. Why is that?",
+      "range": {
+        "startLine": 73,
+        "startChar": 6,
+        "endLine": 73,
+        "endChar": 14
+      },
+      "revId": "1388f72fe8953d770a16ec9701a2dd9b8bedcc7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f12ce5c1_e792f209",
+        "filename": "lib/dmtf_tools_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-11T16:46:52Z",
+      "side": 1,
+      "message": "no i didn\u0027t overwrite.",
+      "parentUuid": "43c73517_a8f05fb4",
       "range": {
         "startLine": 73,
         "startChar": 6,
@@ -190,6 +370,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47994bc9_366113de",
+        "filename": "lib/dmtf_tools_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-11T16:46:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf75be7c_8d460160",
+      "revId": "1388f72fe8953d770a16ec9701a2dd9b8bedcc7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5b21163_54224a50",
@@ -203,6 +401,30 @@
       "writtenOn": "2023-05-11T07:34:50Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 4
+      },
+      "revId": "1388f72fe8953d770a16ec9701a2dd9b8bedcc7e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "711e54df_83c6b188",
+        "filename": "redfish/dmtf_tools/Redfish_JsonSchema_ResponseValidator.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-11T16:46:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5b21163_54224a50",
       "range": {
         "startLine": 34,
         "startChar": 0,
