@@ -422,7 +422,7 @@ Verify ReadOnly User Privilege
 
 Verify Minimum Password Length For Redfish User
     [Documentation]  Verify minimum password length for new and existing user.
-    [Tags]  Verify_Minimum_Password_Length_For_Redfish_User
+    [Tags]  Verify_Minimum_Password_Length_For_User
 
     ${user_name}=  Set Variable  testUser
 

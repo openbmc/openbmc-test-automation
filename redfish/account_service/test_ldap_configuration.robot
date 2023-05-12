@@ -38,7 +38,7 @@ Verify LDAP Configuration Created
 Verify LDAP Service Disable
     [Documentation]  Verify that LDAP is disabled and that LDAP user cannot
     ...  login.
-    [Tags]  Verify_LDAP_Service_Disable
+    [Tags]  Verify_Redfish_LDAP_Service_Disable
 
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${False}}}
@@ -325,7 +325,7 @@ Verify LDAP Login With Invalid Data
     Redfish Verify LDAP Login  ${False}
 
 
-Verify LDAP Config Creation Without BASE_DN
+Verify LDAP Config Creation Without BASE DN
     [Documentation]  Verify that LDAP login with LDAP configuration
     ...  created without BASE_DN fails.
     [Tags]  Verify_LDAP_Config_Creation_Without_BASE_DN
@@ -349,7 +349,7 @@ Verify LDAP Authentication Without Password
     Valid Value  status  [${False}]
 
 
-Verify LDAP Login With Invalid BASE_DN
+Verify LDAP Login With Invalid BASE DN
     [Documentation]  Verify that LDAP login with invalid BASE_DN and
     ...  valid LDAP user fails.
     [Tags]  Verify_LDAP_Login_With_Invalid_BASE_DN
@@ -377,7 +377,7 @@ Verify LDAP Login With Invalid BIND_DN_PASSWORD
     Redfish Verify LDAP Login  ${False}
 
 
-Verify LDAP Login With Invalid BASE_DN And Invalid BIND_DN
+Verify LDAP Login With Invalid BASE DN And Invalid BIND DN
     [Documentation]  Verify that LDAP login with invalid BASE_DN and invalid
     ...  BIND_DN and valid LDAP user fails.
     [Tags]  Verify_LDAP_Login_With_Invalid_BASE_DN_And_Invalid_BIND_DN
@@ -402,7 +402,7 @@ Verify Group Name And Group Privilege Able To Modify
     ...  Administrator  ${GROUP_NAME}
 
 
-Verify LDAP Login With Invalid BIND_DN
+Verify LDAP Login With Invalid BIND DN
     [Documentation]  Verify that LDAP login with invalid BIND_DN and
     ...  valid LDAP user fails.
     [Tags]  Verify_LDAP_Login_With_Invalid_BIND_DN
