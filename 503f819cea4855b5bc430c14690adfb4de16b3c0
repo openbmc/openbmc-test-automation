@@ -33,6 +33,24 @@
       "message": "This could be problematic.  since with this it would create a string 200, 204\n\nbut it would fail at the Redfishtool Post \n\nhttps://github.com/openbmc/openbmc-test-automation/blob/master/lib/dmtf_redfishtool_utils.robot#L68\n\nwhere we are checking\n\nRun Keyword If  ${rc} \u003d\u003d 0\n    ...    Should Be True  ${expected_error} \u003d\u003d 200",
       "revId": "503f819cea4855b5bc430c14690adfb4de16b3c0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4acaca27_ce274b59",
+        "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-12T00:08:23Z",
+      "side": 1,
+      "message": "Normally in redfishtool if there is any error, then only it shows response code otherwise it is not showing response code\nWhen i looked into the code, there we are passing expected status code(200/204) to redfishtool post keyword as an argument for ${expected_error}. \nbut in if loop we are checking that argument keyword(${expected_error}) with 200 an hardcoded value.\n```\n    Run Keyword If  ${rc} \u003d\u003d 0\n    ...    Should Be True  ${expected_error} \u003d\u003d 200\n```\n\nchecking the expected response code with the hardcoded value is not making an sense.\n\nso i modified if condition like below,\n\n```\n    Run Keyword If  ${rc} !\u003d 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}\n```\n\nIf there is any error in any of the redfish methods(Get/Post/Patch/Delete) on redfishtool then rc will not be 0.\n\nso having \"Is HTTP error Expected\" keyword is enough on if condition.",
+      "parentUuid": "4b4295ac_5bdb9940",
+      "revId": "503f819cea4855b5bc430c14690adfb4de16b3c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
