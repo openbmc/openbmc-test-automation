@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53ea831f_4d14e03b",
+        "filename": "lib/utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 1123,
+      "author": {
+        "id": 1000844
+      },
+      "writtenOn": "2023-05-12T05:30:25Z",
+      "side": 1,
+      "message": "Any reason to replace\n ${bmc_status} \u003d  Redfish Get BMC State\nwith\nRedfish.login\n${bmc_status}\u003d Redfish.Get Attribute /redfish/v1/Managers/${MANAGER_ID} Status",
+      "revId": "2c778c7fedce8093335c96ae9e2892ab6c59f7cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
