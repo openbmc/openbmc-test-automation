@@ -1116,8 +1116,13 @@ Set BIOS Attribute
 Is BMC Operational
     [Documentation]  Check if BMC is enabled.
 
-    ${bmc_status} =  Redfish Get BMC State
-    Should Be Equal  ${bmc_status}  Enabled
+    Wait Until Keyword Succeeds  5 min  5 sec  Ping Host  ${OPENBMC_HOST}
+    # In some of bmc stack, network services will gets started before redfish and ipmi libraries initialized.
+    # Hence, 3mins sleep time is added.
+    Sleep  180s
+    Redfish.login
+    ${bmc_status}=  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  Status
+    Should Be Equal  ${bmc_status["State"]}  Enabled
 
 
 PLDM Set BIOS Attribute
