@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "584290cd_89ec5c0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-12T05:24:17Z",
+      "side": 1,
+      "message": "Masnah / Rahul,   Any comments ?",
+      "revId": "85c22656810bdc4c5fb0def6fb8e023fc7046844",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
