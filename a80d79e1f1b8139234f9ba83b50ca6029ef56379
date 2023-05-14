@@ -16,6 +16,24 @@
       "message": "This suite needs to taken care of it and not here.. This change is not needed",
       "revId": "a80d79e1f1b8139234f9ba83b50ca6029ef56379",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a0d1902_0acd7eb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-14T17:17:03Z",
+      "side": 1,
+      "message": "Sometimes, while running bunch of scripts we are hitting 401(unauthorized). so to avoid these type of failures if we have redfish.login on obmc_boot_test_resource.robot file, whenever power operation keyword was executed at that time surely an session will be created. \nso in this perspective its better that we can have redfish.login in obmc_boot_test_resource.robot",
+      "parentUuid": "bb184934_ead2d61d",
+      "revId": "a80d79e1f1b8139234f9ba83b50ca6029ef56379",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
