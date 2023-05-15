@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18f24099_5414e354",
+        "filename": "lib/utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1123,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-15T04:20:27Z",
+      "side": 1,
+      "message": "Normally we dont encourage to add Login in the lib resource files unless needed. I\u0027m sure the test suite calling it would have initialize it. Let me know if this is needed for sure ?",
+      "range": {
+        "startLine": 1123,
+        "startChar": 4,
+        "endLine": 1123,
+        "endChar": 17
+      },
+      "revId": "3c5477e065b629a68db36dfb0654b3d7fffe4ca8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
