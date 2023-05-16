@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b12b3261_23b41c8d",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-05-16T10:01:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fced372d_729cafe4",
+      "range": {
+        "startLine": 261,
+        "startChar": 68,
+        "endLine": 261,
+        "endChar": 73
+      },
+      "revId": "6667da04325f4704dfc4a3509837cc5102ae8812",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e976b41b_eb2b3673",
@@ -64,6 +88,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73811995_8b34e70b",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-05-16T10:01:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e976b41b_eb2b3673",
+      "range": {
+        "startLine": 505,
+        "startChar": 0,
+        "endLine": 505,
+        "endChar": 112
+      },
+      "revId": "6667da04325f4704dfc4a3509837cc5102ae8812",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b1a47ca_459bdbae",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-05-16T09:37:18Z",
       "side": 1,
       "message": "Where are we using this code? Please remove it if not required.",
+      "range": {
+        "startLine": 517,
+        "startChar": 0,
+        "endLine": 530,
+        "endChar": 78
+      },
+      "revId": "6667da04325f4704dfc4a3509837cc5102ae8812",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b91b4ea7_8fef40d3",
+        "filename": "gui/gui_test/settings_menu/test_snmp_alerts_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-05-16T10:01:50Z",
+      "side": 1,
+      "message": "we are using this keyword in \"Create Error Log On BMC And Verify Trap\"",
+      "parentUuid": "1b1a47ca_459bdbae",
       "range": {
         "startLine": 517,
         "startChar": 0,
