@@ -22,6 +22,30 @@
       },
       "revId": "3c5477e065b629a68db36dfb0654b3d7fffe4ca8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89b0fe25_1f65df5e",
+        "filename": "lib/utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1123,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-16T11:40:18Z",
+      "side": 1,
+      "message": "Yes it is needed.\n\nActually in test cases, after bmc reboot Redfish.Login is not present.\nSo because of that for Redfish Get BMC State keyword it is getting 404 unauthorized as redfish session was not created.\nBecause of this i have added redfish.login before getting bmc state.\n\nFor example,\nIn test_ipmi_cold_reset.robot script for \"Cold Reset Via IPMI\" test case,\n\nAfter issuing cold reset, here we are checking whether bmc ip is unpingable and if it was unpingable directly it goes to Is BMC Operational Keyword.\n\n    # Cold Reset Via IPMI raw command.\n    Run External IPMI Raw Command  ${IPMI_RAW_CMD[\u0027Cold Reset\u0027][\u0027reset\u0027][0]}\n\n    # Get the BMC Status.\n    Wait Until Keyword Succeeds  3 min  10 sec  Is BMC Unpingable\n    Wait Until Keyword Succeeds  3 min  10 sec  Is BMC Operational",
+      "parentUuid": "18f24099_5414e354",
+      "range": {
+        "startLine": 1123,
+        "startChar": 4,
+        "endLine": 1123,
+        "endChar": 17
+      },
+      "revId": "3c5477e065b629a68db36dfb0654b3d7fffe4ca8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
