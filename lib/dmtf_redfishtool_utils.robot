@@ -60,7 +60,7 @@ Redfishtool Post
     # cmd_args        Commandline arguments.
     # expected_error  Expected error optionally provided in testcase (e.g. 401 /
     #                 authentication error, etc. ).
-    
+
     ${cmd}=  Catenate  ${cmd_args} POST ${uri} --data=${payload}
     Log  ${cmd}
     ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd}

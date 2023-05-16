@@ -348,7 +348,7 @@ Enable NTP And Add NTP Address
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     Wait Until Keyword Succeeds  1 min  10 sec  Check Date And Time Was Changed
-    
+
 Check Date And Time Was Changed
     [Documentation]  Verify date was current date and time.
 

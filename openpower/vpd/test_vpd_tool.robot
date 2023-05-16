@@ -48,7 +48,8 @@ Verify VPD Field Read
     ${vpd_records}=  Vpdtool  -i
     ${components}=  Get Dictionary Keys  ${vpd_records}
     FOR  ${component}  IN  @{components}
-       #  drive component field values response in ascii format due to that skipping here. 
+       # Drive component field values response in ascii format
+       # due to that skipping here.
        IF  'drive' in '${component}'
            Continue FOR Loop
        ELSE
@@ -92,17 +93,17 @@ Verify VPD Component Read Operation
 
     ${vpdtool_res}=  Set To Dictionary  ${vpd_records}[${component}]
     FOR  ${vpd_field}  IN  @{fields}
-        ${match_key_exists}=  Run Keyword And Return Status 
+        ${match_key_exists}=  Run Keyword And Return Status
         ...  Dictionary Should Contain Key  ${vpdtool_res}  ${vpd_field}
           IF  '${match_key_exists}' == 'True'
               #  drive components busctl field response in ascii due to that checking only locationcode.
               IF  'drive' in '${component}'
                   ${vpd_field}=  Set Variable  LocationCode
               END
-              # Skip check if VPD field is empty. 
+              # Skip check if VPD field is empty.
               Run Keyword If  '${vpd_records['${component}']['${vpd_field}']}' == ''
               ...  Continue For Loop
-              
+
               # Get VPD field values via busctl.
               ${busctl_field}=  Set Variable If
               ...  '${vpd_field}' == 'LocationCode'  com.ibm.ipzvpd.Location LocationCode
@@ -112,7 +113,7 @@ Verify VPD Component Read Operation
               ...  /xyz/openbmc_project/inventory${component} ${busctl_field}
               ${cmd_output}=  BMC Execute Command  ${cmd}
               # Check whether the vpdtool response and busctl response matching.
-              Valid Value  vpd_records['${component}']['${vpd_field}'] 
+              Valid Value  vpd_records['${component}']['${vpd_field}']
               ...  ['${cmd_output[0].split('"')[1].strip('"')}']
           ELSE
              Continue For Loop

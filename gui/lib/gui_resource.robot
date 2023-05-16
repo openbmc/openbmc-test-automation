@@ -246,5 +246,3 @@ Reboot Server
     ELSE
       Log To console    Server is already powered Off, can't reboot.
     END
-
-
