@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57f0f07d_c2bf1f3c",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-05-17T11:43:22Z",
+      "side": 1,
+      "message": "Remove the comment",
+      "range": {
+        "startLine": 109,
+        "startChar": 3,
+        "endLine": 109,
+        "endChar": 6
+      },
+      "revId": "adf8dd64ef38b847b20aed0ef58f542a3c6db06e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03c7ff3f_07d1a2d4",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-05-17T11:43:22Z",
+      "side": 1,
+      "message": "Use new template \nIF\n    ....\nELSE\n    ....\nEND",
+      "range": {
+        "startLine": 300,
+        "startChar": 6,
+        "endLine": 302,
+        "endChar": 61
+      },
+      "revId": "adf8dd64ef38b847b20aed0ef58f542a3c6db06e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bbbdd0b_ec684fb9",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-05-17T11:43:22Z",
+      "side": 1,
+      "message": "Use new template\nIF\n    ......\nELSE\n    .......\nEND",
+      "range": {
+        "startLine": 324,
+        "startChar": 4,
+        "endLine": 326,
+        "endChar": 62
+      },
+      "revId": "adf8dd64ef38b847b20aed0ef58f542a3c6db06e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
