@@ -87,6 +87,24 @@
       "message": "If we are using Redfish.login in this test itself then I would recommend using Redfish.Logout after the operation.",
       "revId": "3c5477e065b629a68db36dfb0654b3d7fffe4ca8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85781159_82391c30",
+        "filename": "lib/utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1124,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-17T16:28:55Z",
+      "side": 1,
+      "message": "Yes please do that..",
+      "parentUuid": "f2f36d6f_657da13f",
+      "revId": "3c5477e065b629a68db36dfb0654b3d7fffe4ca8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
