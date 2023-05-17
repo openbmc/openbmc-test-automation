@@ -72,6 +72,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2249c88c_d2b21842",
+        "filename": "lib/utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1123,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-17T17:11:39Z",
+      "side": 1,
+      "message": "Actually If we move Redfish.Login to test case, then below peace of code will be repeated before wherever Is BMC Operational keyword called.\n\nSo that\u0027s why we have added redfish.login in this keyword itself.\n\nIf we need redfish.login Before \"Is BMC Unpingable\" keyword, then the below codes also mandatory\n\n    Wait Until Keyword Succeeds  5 min  5 sec  Ping Host  ${OPENBMC_HOST}\n    # In some of bmc stack, network services will gets loaded before redfish/ipmi services gets loaded.\n    # Hence, 3mins sleep time is added to allow other service gets loaded.\n    Sleep  180s\n    Redfish.Login\n\nThis is the main reason that we have kept redfish.login keyword in Is BMC Operational.",
+      "parentUuid": "acf6adc0_6d341039",
+      "range": {
+        "startLine": 1123,
+        "startChar": 4,
+        "endLine": 1123,
+        "endChar": 17
+      },
+      "revId": "3c5477e065b629a68db36dfb0654b3d7fffe4ca8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2f36d6f_657da13f",
@@ -102,6 +126,24 @@
       "writtenOn": "2023-05-17T16:28:55Z",
       "side": 1,
       "message": "Yes please do that..",
+      "parentUuid": "f2f36d6f_657da13f",
+      "revId": "3c5477e065b629a68db36dfb0654b3d7fffe4ca8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3cc3eab_259306a3",
+        "filename": "lib/utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1124,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-17T17:11:39Z",
+      "side": 1,
+      "message": "Added redfish.logout in teardown on the keyword.",
       "parentUuid": "f2f36d6f_657da13f",
       "revId": "3c5477e065b629a68db36dfb0654b3d7fffe4ca8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
