@@ -5,7 +5,7 @@ The base needed packages for Linux distro.
 - Python 3.x or latter
 - Robot Framework ( base framework package )
 
-Browser specific pacakges:
+Browser specific packages:
 
 - Mozilla Firefox
 - Robot Framework Selenium Library
@@ -37,7 +37,7 @@ Last tested packages versions:
 - Firefox Installation: Please follow the documented procedure available.
 
 - geckodriver installation: Please follow the documented procedure available.
-  [Firfox Geckodriver](https://github.com/mozilla/geckodriver/releases)
+  [Firefox Geckodriver](https://github.com/mozilla/geckodriver/releases)
 
 The recommended installation method is using pip:
 
