@@ -29,6 +29,13 @@ Test Teardown            FFDC On Test Case Fail
 
 Force Tags               Host_Code_Update
 
+
+*** Variables ***
+
+# New code update path.
+${REDFISH_UPDATE_URI}    /redfish/v1/UpdateService/update
+
+
 *** Test Cases ***
 
 Redfish Host Code Update With ApplyTime OnReset
@@ -70,6 +77,19 @@ Suite Setup Execution
     Run Keyword And Ignore Error  Redfish Purge Event Log
     Redfish Power Off  stack_mode=skip
 
+    # Check and set the update path.
+    # Old - /redfish/v1/UpdateService/
+    # New - /redfish/v1/UpdateService/update
+
+    ${resp}=  Redfish.Get  /redfish/v1/UpdateService/update
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NOT_FOUND},${HTTP_METHOD_NOT_ALLOWED}]
+
+    # If the method is not found, set update URI to old method.
+    Run Keyword If  ${resp.status} == ${HTTP_NOT_FOUND}
+    ...  Set Suite Variable  ${REDFISH_UPDATE_URI}  /redfish/v1/UpdateService
+
+    Log To Console  Update URI: ${REDFISH_UPDATE_URI}
+
 
 Redfish Update Firmware
     [Documentation]  Update the Host firmware via redfish interface.
@@ -81,7 +101,7 @@ Redfish Update Firmware
     Redfish.Login
     ${post_code_update_actions}=  Get Post Boot Action
     Set ApplyTime  policy=${apply_Time}
-    Redfish Upload Image And Check Progress State
+    Redfish Upload Image And Check Progress State  ${REDFISH_UPDATE_URI}
     Run Key  ${post_code_update_actions['Host image']['${apply_time}']}
     Redfish.Login
     Redfish Verify Host Version  ${IMAGE_FILE_PATH}
@@ -92,7 +112,7 @@ Redfish Firmware Update And Do BMC Reboot
     [Documentation]  Update the firmware via redfish interface and do BMC reboot.
 
     Set ApplyTime  policy="Immediate"
-    Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${IMAGE_FILE_PATH}
+    Redfish Upload Image  ${REDFISH_UPDATE_URI}  ${IMAGE_FILE_PATH}
     ${image_id}=  Get Latest Image ID
     Wait Until Keyword Succeeds  1 min  10 sec
     ...  Check Image Update Progress State  match_state='Updating'  image_id=${image_id}

@@ -204,9 +204,14 @@ Get Non Functional Firmware List
 
 Redfish Upload Image And Check Progress State
     [Documentation]  Code update with ApplyTime.
+    [Arguments]  ${uri}=${REDFISH_BASE_URI}UpdateService
+
+    # Description of argument(s):
+    # uri    Code update URI,
+    #        default value is ${REDFISH_BASE_URI}UpdateService.
 
     Log To Console   Start uploading image to BMC.
-    Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${IMAGE_FILE_PATH}
+    Redfish Upload Image  ${uri}  ${IMAGE_FILE_PATH}
     Log To Console   Completed image upload to BMC.
 
     ${image_id}=  Get Latest Image ID

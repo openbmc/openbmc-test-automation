@@ -29,6 +29,11 @@ Test Teardown            FFDC On Test Case Fail
 
 Force Tags               Mcu_Code_Update
 
+*** Variables ***
+
+# New code update path.
+${REDFISH_UPDATE_URI}    /redfish/v1/UpdateService/update
+
 *** Test Cases ***
 
 Redfish Mcu Code Update With ApplyTime OnReset
@@ -62,6 +67,19 @@ Suite Setup Execution
     Redfish Delete All BMC Dumps
     Redfish Purge Event Log
 
+    # Check and set the update path.
+    # Old - /redfish/v1/UpdateService/
+    # New - /redfish/v1/UpdateService/update
+
+    ${resp}=  Redfish.Get  /redfish/v1/UpdateService/update
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NOT_FOUND},${HTTP_METHOD_NOT_ALLOWED}]
+
+    # If the method is not found, set update URI to old method.
+    Run Keyword If  ${resp.status} == ${HTTP_NOT_FOUND}
+    ...  Set Suite Variable  ${REDFISH_UPDATE_URI}  /redfish/v1/UpdateService
+
+    Log To Console  Update URI: ${REDFISH_UPDATE_URI}
+
 
 Redfish Verify MCU Version
     [Documentation]  Verify that the version on the MCU is the same as the
@@ -93,7 +111,7 @@ Redfish Update Firmware
 
     Set ApplyTime  policy=${apply_time}
 
-    Redfish Upload Image  /redfish/v1/UpdateService  ${image_file_path}
+    Redfish Upload Image  ${REDFISH_UPDATE_URI}  ${image_file_path}
     Sleep  30s
 
     ${image_version}=  Get Version Tar  ${image_file_path}
