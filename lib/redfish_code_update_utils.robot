@@ -202,11 +202,20 @@ Get Non Functional Firmware List
     [Return]  ${list_inv}
 
 
+Get Redfish Update Service URI
+    [Documentation]  Get Redfish firmware updated URI.
+
+    ${output}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}UpdateService  HttpPushUri
+
+    [Return]  ${output}
+
+
 Redfish Upload Image And Check Progress State
     [Documentation]  Code update with ApplyTime.
 
     Log To Console   Start uploading image to BMC.
-    Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${IMAGE_FILE_PATH}
+    ${redfish_update_uri}=  Get Redfish Update Service URI
+    Redfish Upload Image  ${redfish_update_uri}  ${IMAGE_FILE_PATH}
     Log To Console   Completed image upload to BMC.
 
     ${image_id}=  Get Latest Image ID
