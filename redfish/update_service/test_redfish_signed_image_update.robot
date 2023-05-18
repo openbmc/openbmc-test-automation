@@ -30,6 +30,9 @@ Force Tags   Signed_Upload_Test
 *** Variables ***
 
 ${ACTIVATION_WAIT_TIMEOUT}     8 min
+	
+# New code update path.
+${REDFISH_UPDATE_URI}    /redfish/v1/UpdateService/update
 
 *** Test Cases ***
 
@@ -73,6 +76,19 @@ Suite Setup Execution
     Redfish Delete All BMC Dumps
     Redfish Purge Event Log
 
+    # Check and set the update path.
+    # Old - /redfish/v1/UpdateService/
+    # New - /redfish/v1/UpdateService/update
+
+    ${resp}=  Redfish.Get  /redfish/v1/UpdateService/update
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NOT_FOUND},${HTTP_METHOD_NOT_ALLOWED}]
+
+    # If the method is not found, set update URI to old method.
+    Run Keyword If  ${resp.status} == ${HTTP_NOT_FOUND}
+    ...  Set Suite Variable  ${REDFISH_UPDATE_URI}  /redfish/v1/UpdateService
+
+    Log To Console  Update URI: ${REDFISH_UPDATE_URI}
+
 
 Redfish Signed Firmware Update
     [Documentation]  Update the BMC/Host firmware via redfish interface.
@@ -94,7 +110,7 @@ Redfish Signed Firmware Update
     ${before_inv_list}=  redfish_utils.Get Member List  /redfish/v1/UpdateService/FirmwareInventory
     Log To Console   Current images on the BMC before upload: ${before_inv_list}
 
-    Redfish Upload Image  /redfish/v1/UpdateService  ${IMAGE_FILE_PATH}
+    Redfish Upload Image  ${REDFISH_UPDATE_URI}  ${IMAGE_FILE_PATH}
 
     # Python module:  get_member_list(resource_path)
     ${after_inv_list}=  redfish_utils.Get Member List  /redfish/v1/UpdateService/FirmwareInventory
@@ -126,7 +142,7 @@ Redfish Unsigned Firmware Update
 
     Field Mode Should Be Enabled
     Set ApplyTime  policy=Immediate
-    Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${image_file_path}
+    Redfish Upload Image  ${REDFISH_UPDATE_URI}  ${image_file_path}
     ${image_id}=  Get Latest Image ID
     Rprint Vars  image_id
     Sleep  5s
