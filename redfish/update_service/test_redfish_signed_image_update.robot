@@ -94,7 +94,8 @@ Redfish Signed Firmware Update
     ${before_inv_list}=  redfish_utils.Get Member List  /redfish/v1/UpdateService/FirmwareInventory
     Log To Console   Current images on the BMC before upload: ${before_inv_list}
 
-    Redfish Upload Image  /redfish/v1/UpdateService  ${IMAGE_FILE_PATH}
+    ${redfish_update_uri}=  Get Redfish Update Service URI
+    Redfish Upload Image  ${redfish_update_uri}  ${IMAGE_FILE_PATH}
 
     # Python module:  get_member_list(resource_path)
     ${after_inv_list}=  redfish_utils.Get Member List  /redfish/v1/UpdateService/FirmwareInventory
@@ -126,7 +127,8 @@ Redfish Unsigned Firmware Update
 
     Field Mode Should Be Enabled
     Set ApplyTime  policy=Immediate
-    Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${image_file_path}
+    ${redfish_update_uri}=  Get Redfish Update Service URI 
+    Redfish Upload Image  ${redfish_update_uri}  ${image_file_path}
     ${image_id}=  Get Latest Image ID
     Rprint Vars  image_id
     Sleep  5s
