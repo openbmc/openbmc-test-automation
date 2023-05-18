@@ -29,6 +29,7 @@ Test Teardown            FFDC On Test Case Fail
 
 Force Tags               Mcu_Code_Update
 
+
 *** Test Cases ***
 
 Redfish Mcu Code Update With ApplyTime OnReset
@@ -93,7 +94,11 @@ Redfish Update Firmware
 
     Set ApplyTime  policy=${apply_time}
 
-    Redfish Upload Image  /redfish/v1/UpdateService  ${image_file_path}
+    # URI : /redfish/v1/UpdateService
+    # "HttpPushUri": "/redfish/v1/UpdateService/update",
+
+    ${redfish_update_uri}=  Get Redfish Update Service URI
+    Redfish Upload Image  ${redfish_update_uri}  ${image_file_path}
     Sleep  30s
 
     ${image_version}=  Get Version Tar  ${image_file_path}
