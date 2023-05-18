@@ -81,6 +81,10 @@ Redfish Update Firmware
     Redfish.Login
     ${post_code_update_actions}=  Get Post Boot Action
     Set ApplyTime  policy=${apply_Time}
+
+    # URI : /redfish/v1/UpdateService
+    # "HttpPushUri": "/redfish/v1/UpdateService/update",
+
     Redfish Upload Image And Check Progress State
     Run Key  ${post_code_update_actions['Host image']['${apply_time}']}
     Redfish.Login
@@ -92,7 +96,12 @@ Redfish Firmware Update And Do BMC Reboot
     [Documentation]  Update the firmware via redfish interface and do BMC reboot.
 
     Set ApplyTime  policy="Immediate"
-    Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${IMAGE_FILE_PATH}
+
+     # URI : /redfish/v1/UpdateService
+     # "HttpPushUri": "/redfish/v1/UpdateService/update",
+
+    ${redfish_update_uri}=  Get Redfish Update Service URI
+    Redfish Upload Image  ${redfish_update_uri}  ${IMAGE_FILE_PATH}
     ${image_id}=  Get Latest Image ID
     Wait Until Keyword Succeeds  1 min  10 sec
     ...  Check Image Update Progress State  match_state='Updating'  image_id=${image_id}
