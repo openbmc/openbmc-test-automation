@@ -47,3 +47,8 @@ The recommended installation method is using pip:
     pip install --upgrade xvfbwrapper
     pip install --upgrade robotframework-xvfb
 ```
+
+## Geckodriver Supported platforms
+
+Mapping between geckodriver releases, and required versions of Selenium and Firefox:
+[Geckodriver Supported platforms](https://firefox-source-docs.mozilla.org/testing/geckodriver/Support.html#supported-platforms)
