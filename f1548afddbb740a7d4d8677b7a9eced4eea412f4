@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e266f400_7fb2549d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-05-18T07:37:19Z",
+      "side": 1,
+      "message": "Suggestion: you can add below lines in your commit message\n\nChanges:\n    - Added \"Delete IPv6 Address And Verify\" test case\n    - Added \"Delete IPv6 Address\" keyword\n    \nTested:\n    - Ran successfully test_bmc_ipv6.robot",
+      "revId": "f1548afddbb740a7d4d8677b7a9eced4eea412f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
