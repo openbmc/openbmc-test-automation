@@ -33,7 +33,6 @@
 
 owners:
 - gkeishin@in.ibm.com
-- micwalsh@us.ibm.com
 
 reviewers:
 - adathatr@in.ibm.com
@@ -44,7 +43,5 @@ openbmc:
 - name: George Keishing
   email: gkeishin@in.ibm.com
   discord: gkeishin
-- name: Michael Walsh
-  email: micwalsh@us.ibm.com
 - name: Anusha Dathatri
   email: adathatr@in.ibm.com
