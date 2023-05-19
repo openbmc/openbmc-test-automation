@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b71058fb_32914d23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-19T03:00:44Z",
+      "side": 1,
+      "message": "Please either split multi interface or don\u0027t mandate here to run on both intf .",
+      "revId": "69c759b9778bbbb2f109d9180799226f09c387d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
