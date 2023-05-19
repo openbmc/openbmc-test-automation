@@ -16,6 +16,24 @@
       "message": "Ideally, openbmc-test-automation would be reading the update path from HttpPushUri at /redfish/v1/UpdateService\n\n\nSee https://github.com/openbmc/docs/blob/master/REDFISH-cheatsheet.md#firmware-update",
       "revId": "984903d02b835ee90a3d5b5ef102033f26ab2d54",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4bb2e44_b4343e01",
+        "filename": "redfish/update_service/test_redfish_signed_image_update.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-05-19T04:49:37Z",
+      "side": 1,
+      "message": "Changed the implementation by reading HttpPushUri from /redfish/v1/UpdateService.",
+      "parentUuid": "d5010b87_e49d39ee",
+      "revId": "984903d02b835ee90a3d5b5ef102033f26ab2d54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
