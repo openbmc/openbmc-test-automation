@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "94cb222c_55ce2191",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-05-22T06:39:17Z",
+      "side": 1,
+      "message": "Yes, Its working.",
+      "parentUuid": "562f2af6_a22a618a",
+      "revId": "b3ee3e7dc1379cb9aa7e07552654600017233189",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "002768a4_545cd1a3",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-05-19T20:22:04Z",
       "side": 1,
       "message": "be careful about extra spaces in commits, it distracts the reviewer and makes history/git blame harder to understand. Oh well, for next time. :)",
+      "revId": "b3ee3e7dc1379cb9aa7e07552654600017233189",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d95c85ac_24399146",
+        "filename": "oem/nuvoton/test_redfish_mcu_fw_update.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-05-22T06:39:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd51c07c_faad28e3",
       "revId": "b3ee3e7dc1379cb9aa7e07552654600017233189",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
