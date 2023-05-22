@@ -16,6 +16,7 @@ Suite Setup    Suite Setup Execution
 *** Variables ***
 ${test_ipv6_addr}          2001:db8:3333:4444:5555:6666:7777:8888
 ${test_ipv6_invalid_addr}  2001:db8:3333:4444:5555:6666:7777:JJKK
+${test_ipv6_addr1}         2001:db8:3333:4444:5555:6666:7777:9999
 
 # Valid prefix length is a integer ranges from 1 to 128.
 ${test_prefix_length}     64
@@ -77,6 +78,16 @@ Delete IPv6 Address And Verify
     Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
 
     Delete IPv6 Address  ${test_ipv6_addr}
+
+
+
+Modify IPv6 Address And verify
+    [Documentation]  Modify IPv6 address and verify.
+    [Tags]  Modify_IPv6_Address_And_Verify
+
+    Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
+
+    Modify IPv6 Address  ${test_ipv6_addr}  ${test_ipv6_addr1}  ${test_prefix_length}
 
 
 *** Keywords ***
@@ -274,7 +285,7 @@ Configure IPv6 Address On BMC
 Validate IPv6 Network Config On BMC
     [Documentation]  Check that IPv6 network info obtained via redfish matches info
     ...              obtained via CLI.
-    @{network_configurations}=  Get IPv6 Network Configuration
+    @{ipv6_network_configurations}=  Get IPv6 Network Configuration
     ${ipv6_data}=  Get BMC IPv6 Info
     FOR  ${ipv6_network_configuration}  IN  @{ipv6_network_configurations}
       Should Contain Match  ${ipv6_data}  ${ipv6_network_configuration['Address']}/*
@@ -328,5 +339,105 @@ Delete IPv6 Address
     ELSE
         Should Be True  '${delete_status}' == '${True}'
     END
+
+    Validate IPv6 Network Config On BMC
+
+
+Modify IPv6 Address
+    [Documentation]  Modify and verify IPv6 address of BMC.
+    [Arguments]  ${ipv6}  ${new_ipv6}  ${prefix_len}
+    ...  ${valid_status_codes}=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Description of argument(s):
+    # ipv6                  IPv6 address to be replaced (e.g. "2001:AABB:CCDD::AAFF").
+    # new_ipv6              New IPv6 address to be configured.
+    # prefix_len            Prefix length value (Range 1 to 128).
+    # valid_status_codes    Expected return code from patch operation
+    #                       (e.g. "200", "201").
+
+    ${empty_dict}=  Create Dictionary
+    ${patch_list}=  Create List
+    ${prefix_length}=  Convert To Integer  ${prefix_len}
+    ${ipv6_data}=  Create Dictionary
+    ...  Address=${new_ipv6}  PrefixLength=${prefix_length}
+
+    # Sample IPv6 network configurations:
+    #  "IPv6AddressPolicyTable": [],
+    #  "IPv6Addresses": [
+    #    {
+    #      "Address": "X002:db8:0:2::XX0",
+    #      "AddressOrigin": "DHCPv6",
+    #      "PrefixLength": 128
+    #    },
+    #    {
+    #      "Address": “X002:db8:0:2:a94:XXff:fe82:XXXX",
+    #      "AddressOrigin": "SLAAC",
+    #      "PrefixLength": 64
+    #    },
+    #    {
+    #      "Address": “Y002:db8:0:2:a94:efff:fe82:5000",
+    #      "AddressOrigin": "Static",
+    #      "PrefixLength": 56
+    #    },
+    #    {
+    #      "Address": “Z002:db8:0:2:a94:efff:fe82:5000",
+    #      "AddressOrigin": "Static",
+    #      "PrefixLength": 56
+    #    },
+    #    {
+    #      "Address": “Xe80::a94:efff:YYYY:XXXX",
+    #      "AddressOrigin": "LinkLocal",
+    #      "PrefixLength": 64
+    #    },
+    #    {
+    #     "Address": “X002:db8:1:2:eff:233:fee:546",
+    #      "AddressOrigin": "Static",
+    #      "PrefixLength": 56
+    #    }
+    #  ],
+    #  "IPv6DefaultGateway": “XXXX::ab2e:80fe:87df:XXXX”,
+    #  "IPv6StaticAddresses": [
+    #    {
+    #      "Address": “X002:db8:0:2:a94:efff:fe82:5000",
+    #      "PrefixLength": 56
+    #    },
+    #    {
+    #      "Address": “Y002:db8:0:2:a94:efff:fe82:5000",
+    #      "PrefixLength": 56
+    #    },
+    #    {
+    #      "Address": “Z002:db8:1:2:eff:233:fee:546",
+    #      "PrefixLength": 56
+    #    }
+    #  ],
+    #  "IPv6StaticDefaultGateways": [],
+
+    # Find the position of IPv6 address to be modified.
+    @{ipv6_network_configurations}=  Get IPv6 Network Configuration
+    FOR  ${ipv6_network_configuration}  IN  @{ipv6_network_configurations}
+      Run Keyword If  '${ipv6_network_configuration['Address']}' == '${ipv6}'
+      ...  Append To List  ${patch_list}  ${ipv6_data}
+      ...  ELSE  Append To List  ${patch_list}  ${empty_dict}
+    END
+
+    # Modify the IPv6 address only if given IPv6 is found
+    ${ip_found}=  Run Keyword And Return Status  List Should Contain Value
+    ...  ${patch_list}  ${ipv6_data}  msg=${ipv6} does not exist on BMC
+    Pass Execution If  ${ip_found} == ${False}  ${ipv6} does not exist on BMC
+
+    ${data}=  Create Dictionary  IPv6StaticAddresses=${patch_list}
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body=&{data}  valid_status_codes=${valid_status_codes}
+
+    # Note: Network restart takes around 15-18s after patch request processing.
+    Sleep  ${NETWORK_TIMEOUT}s
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+    # Verify if new IPv6 address is configured on BMC.
+    Verify IPv6 On BMC  ${new_ipv6}
 
     Validate IPv6 Network Config On BMC
