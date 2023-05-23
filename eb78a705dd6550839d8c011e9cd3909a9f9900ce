@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b443e6e5_43457e4f",
+        "filename": "ipmi/dcmi/test_dcmi_management_controller.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed4af5ef_d159716b",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71b50fe0_4f1516ef",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-16T10:46:56Z",
       "side": 1,
       "message": "Library          ../../lib/bmc_network_utils.py\n\nRemove not needed",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36b8cb55_f163098d",
+        "filename": "ipmi/dcmi/test_dcmi_management_controller.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71b50fe0_4f1516ef",
       "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "278a1231_2af8c7b3",
+        "filename": "ipmi/dcmi/test_dcmi_management_controller.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de68682c_23cf5002",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c5ad2b0_7162ff54",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-05-16T10:46:56Z",
       "side": 1,
       "message": "Validate String Length  of what ?\n\ncan u make it complete please",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fa364ec_41363899",
+        "filename": "ipmi/dcmi/test_dcmi_management_controller.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c5ad2b0_7162ff54",
       "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -86,6 +158,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c11d2004_f88d12d1",
+        "filename": "ipmi/dcmi/test_dcmi_management_controller.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1ae62a4_6db2d89d",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cc0b01b_aef40be5",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-05-16T10:46:56Z",
       "side": 1,
       "message": "Check Hostname Was Verified With Get Management Controller Identifier String\n\nto perhaps\n\nTest Hostname is Same With Management Controller Identifier String",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b725668e_38ea71d7",
+        "filename": "ipmi/dcmi/test_dcmi_management_controller.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cc0b01b_aef40be5",
       "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -120,6 +228,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d025a4da_b44deb45",
+        "filename": "ipmi/dcmi/test_dcmi_management_controller.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2088fa7_36897ea6",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e27ce5f9_40fb5829",
@@ -133,6 +259,24 @@
       "writtenOn": "2023-05-16T10:46:56Z",
       "side": 1,
       "message": "Verify ID String Length and data.\nExample: ??? sample",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cebf4788_672a1384",
+        "filename": "ipmi/dcmi/test_dcmi_management_controller.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e27ce5f9_40fb5829",
       "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -154,6 +298,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbcaba57_175cf399",
+        "filename": "ipmi/dcmi/test_dcmi_management_controller.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acea5b85_d83f3d35",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "846db1d5_c72ee65e",
@@ -167,6 +329,24 @@
       "writtenOn": "2023-05-16T10:46:56Z",
       "side": 1,
       "message": "FOR  ${bytes}  IN  @{ipmi_cmd_rsp_list[2:]}\n      Append To List  ${tmp_lst}  0x${bytes}\n    END",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee16a906_40d33c70",
+        "filename": "ipmi/dcmi/test_dcmi_management_controller.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "846db1d5_c72ee65e",
       "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -188,6 +368,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4688f6d1_64fa5db0",
+        "filename": "ipmi/dcmi/test_dcmi_management_controller.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ef9ae3c_f3a06054",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61f31eab_6ee93635",
@@ -201,6 +399,24 @@
       "writtenOn": "2023-05-16T10:46:56Z",
       "side": 1,
       "message": "${rsp}  to  ${resp}",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f2e97f4_568ac168",
+        "filename": "ipmi/dcmi/test_dcmi_management_controller.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61f31eab_6ee93635",
       "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -222,6 +438,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8bae1de_fe6068e7",
+        "filename": "ipmi/dcmi/test_dcmi_management_controller.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8cd9a91_ec9d617f",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3361188e_4a120d9c",
@@ -235,6 +469,24 @@
       "writtenOn": "2023-05-16T10:46:56Z",
       "side": 1,
       "message": "${rsp}\u003d  to     ${resp}\u003d",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c249a1f9_a14e247b",
+        "filename": "ipmi/dcmi/test_dcmi_management_controller.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3361188e_4a120d9c",
       "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -256,6 +508,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8817e24e_48f1238d",
+        "filename": "ipmi/dcmi/test_dcmi_management_controller.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c66b6eb3_272717e4",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c02abc25_a80a396c",
@@ -269,6 +539,24 @@
       "writtenOn": "2023-05-16T10:46:56Z",
       "side": 1,
       "message": "// Where ${name[0]} is hostname\n    ${hostname_bytes}\u003d  convert_name_into_bytes_without_prefix  ${name[0]}",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17152a68_6592685f",
+        "filename": "ipmi/dcmi/test_dcmi_management_controller.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c02abc25_a80a396c",
       "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -290,6 +578,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3e99ef5_01173cc0",
+        "filename": "ipmi/dcmi/test_dcmi_management_controller.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b036ae3_80e52533",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c0825ed_b1ebed91",
@@ -307,6 +613,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9de50df_0d69960c",
+        "filename": "ipmi/dcmi/test_dcmi_management_controller.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c0825ed_b1ebed91",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9b4187f_20af1b95",
@@ -320,6 +644,24 @@
       "writtenOn": "2023-05-16T10:46:56Z",
       "side": 1,
       "message": "Convert",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54a3484c_ebe7ef6b",
+        "filename": "lib/utils.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9b4187f_20af1b95",
       "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -347,6 +689,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4715654_31160079",
+        "filename": "lib/utils.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a93c35cd_671d2078",
+      "range": {
+        "startLine": 515,
+        "startChar": 4,
+        "endLine": 515,
+        "endChar": 12
+      },
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "896106fa_5a965038",
@@ -360,6 +726,24 @@
       "writtenOn": "2023-05-16T10:46:56Z",
       "side": 1,
       "message": "Convert name into bytes.",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "992980be_b69ba141",
+        "filename": "lib/utils.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "896106fa_5a965038",
       "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -381,6 +765,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81e0898a_d2776831",
+        "filename": "lib/utils.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cdad922_acf792b1",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4ab09f4_b1aab558",
@@ -394,6 +796,24 @@
       "writtenOn": "2023-05-16T10:46:56Z",
       "side": 1,
       "message": "Convert into list of hex with prefix to the list of hex without prefix.",
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ce51ecc_d5861e0e",
+        "filename": "lib/utils.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-23T16:19:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4ab09f4_b1aab558",
       "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
