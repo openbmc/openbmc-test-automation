@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "839956c4_5adc5582",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-05-23T10:08:36Z",
+      "side": 1,
+      "message": "I have addressed only one comment.\n\nWhy I have not addressed other changes - this file is actually re-pushed to resolve the sync issue where an old code got into upstream. This sync issue led to multiple failures. Now, reverting back to earlier changes as per review comments is not worthwhile as they undergone modification to fix issues arising out of underlying redfish changes / CT issues over the years.\n\nLast approved changes were merged on 26th April. So the same file of 26th April was pushed together with incorporation one of today\u0027s comment. All the automation test cases are passing with this code.",
+      "revId": "38a227b6cc2d1a6f14345b6cd02d87eec6ad9451",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

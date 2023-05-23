@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46761ab3_211286bf",
+        "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-05-23T10:08:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7fb4dc10_62703707",
+      "revId": "3cf4195e9a62d438d1cd4ff09b2107653b35f908",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c0b245b_3fe90bff",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6a48438_70cfd205",
+        "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-05-23T10:08:36Z",
+      "side": 1,
+      "message": "It is not required. We changed it long ago.",
+      "parentUuid": "7c0b245b_3fe90bff",
+      "revId": "3cf4195e9a62d438d1cd4ff09b2107653b35f908",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c46adf05_a63147a0",
         "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
         "patchSetId": 1
@@ -48,6 +84,30 @@
       "writtenOn": "2023-05-23T06:56:27Z",
       "side": 1,
       "message": "keybit_length\n\n\nuse the variable and do the changes in other places",
+      "range": {
+        "startLine": 161,
+        "startChar": 38,
+        "endLine": 161,
+        "endChar": 42
+      },
+      "revId": "3cf4195e9a62d438d1cd4ff09b2107653b35f908",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89b0e5c4_94b7d1d4",
+        "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-05-23T10:08:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c46adf05_a63147a0",
       "range": {
         "startLine": 161,
         "startChar": 38,
@@ -77,6 +137,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8a50b00_8819b070",
+        "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-05-23T10:08:36Z",
+      "side": 1,
+      "message": "It is not required. We changed it long ago.",
+      "parentUuid": "e93f6333_6251d951",
+      "revId": "3cf4195e9a62d438d1cd4ff09b2107653b35f908",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7aac2151_1e5ad62b",
         "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
         "patchSetId": 1
@@ -88,6 +166,24 @@
       "writtenOn": "2023-05-23T06:56:27Z",
       "side": 1,
       "message": "Run Keyword If  \u0027${cert_type}\u0027 \u003d\u003d \u0027CA\u0027\n    ...  Delete All CA Certificate Via Redfishtool  ${delete_cert}\n    ...  ELSE IF  \u0027${cert_type}\u0027 \u003d\u003d \u0027Client\u0027\n    ...  Redfishtool Delete Certificate Via BMC CLI  ${cert_type}  ${delete_cert}\n\n    Return From Keyword If  \"${install_type}\" !\u003d \"install\" and \"${file_status}\" !\u003d \"Not Found\"",
+      "revId": "3cf4195e9a62d438d1cd4ff09b2107653b35f908",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e73e7ecb_13a7e36d",
+        "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-05-23T10:08:36Z",
+      "side": 1,
+      "message": "It is not required. We changed it long ago.",
+      "parentUuid": "7aac2151_1e5ad62b",
       "revId": "3cf4195e9a62d438d1cd4ff09b2107653b35f908",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -117,6 +213,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "34fe2923_4ae644ff",
+        "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-05-23T10:08:36Z",
+      "side": 1,
+      "message": "It is not required. We changed it long ago.",
+      "parentUuid": "ea073b16_23822e31",
+      "range": {
+        "startLine": 297,
+        "startChar": 0,
+        "endLine": 297,
+        "endChar": 29
+      },
+      "revId": "3cf4195e9a62d438d1cd4ff09b2107653b35f908",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7171939e_317b983d",
         "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
         "patchSetId": 1
@@ -128,6 +248,24 @@
       "writtenOn": "2023-05-23T06:56:27Z",
       "side": 1,
       "message": "Set Test Variable  ${file_status}\n    Return From Keyword If  \"${file_status}\" !\u003d \"Found\" or \u0027${delete_cert}\u0027 !\u003d \"${True}",
+      "revId": "3cf4195e9a62d438d1cd4ff09b2107653b35f908",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8958fb9_045d3f58",
+        "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-05-23T10:08:36Z",
+      "side": 1,
+      "message": "It is not required. We changed it long ago.",
+      "parentUuid": "7171939e_317b983d",
       "revId": "3cf4195e9a62d438d1cd4ff09b2107653b35f908",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
