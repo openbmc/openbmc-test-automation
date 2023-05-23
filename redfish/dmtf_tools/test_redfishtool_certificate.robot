@@ -21,6 +21,7 @@ Suite Setup       Suite Setup Execution
 
 ${root_cmd_args} =  SEPARATOR=
 ...  redfishtool raw -r ${OPENBMC_HOST}:${HTTPS_PORT} -u ${OPENBMC_USERNAME} -p ${OPENBMC_PASSWORD} -S Always
+
 ${invalid_value}  abc
 ${keybit_length}  2048
 
@@ -137,7 +138,7 @@ Install Server Certificate Using Redfishtool And Verify Via OpenSSL
     ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
 
     ${certificate_dict}=  Create Dictionary
-    ...  @odata.id=/redfish/v1/Managers/${MANAGER_ID}/NetworkProtocol/HTTPS/Certificates/1
+    ...  @odata.id=/redfish/v1/Managers/bmc/NetworkProtocol/HTTPS/Certificates/1
 
     ${dict_objects}=  Create Dictionary  CertificateString=${file_data}
     ...  CertificateType=PEM  CertificateUri=${certificate_dict}
@@ -148,7 +149,6 @@ Install Server Certificate Using Redfishtool And Verify Via OpenSSL
 
     ${response}=  Redfishtool Post
     ...  ${payload}  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
-    ...  valid_status_codes=${HTTP_OK}, ${HTTP_NO_CONTENT}
 
     Wait Until Keyword Succeeds  2 mins  15 secs  Verify Certificate Visible Via OpenSSL  ${cert_file_path}
 
@@ -182,9 +182,9 @@ Verify CSR Generation For Server Certificate With Invalid Value Via Redfishtool
     [Tags]  Verify_CSR_Generation_For_Server_Certificate_With_Invalid_Value_Via_Redfishtool
     [Template]  Generate CSR Via Redfishtool
 
-    # csr_type  key_pair_algorithm  key_bit_length    key_curv_id       expected_status
-    Server      ${invalid_value}    ${keybit_length}           prime256v1        error
-    Server      RAS                 ${invalid_value}           ${EMPTY}          error
+    # csr_type  key_pair_algorithm  ${keybit_length}          key_curv_id       expected_status
+    Server      ${invalid_value}    ${keybit_length}          prime256v1        error
+    Server      RAS                 ${invalid_value}          ${EMPTY}          error
 
 
 Verify CSR Generation For Client Certificate With Invalid Value Via Redfishtool
@@ -224,8 +224,7 @@ Generate CSR Via Redfishtool
     Run Keyword If  '${key_pair_algorithm}' == 'EC'  Remove From Dictionary  ${csr_dict}  KeyBitLength
     ...  ELSE IF  '${key_pair_algorithm}' == 'RSA'  Remove From Dictionary  ${csr_dict}  KeyCurveId
 
-    ${expected_resp}=  Set Variable If
-    ...  '${expected_status}' == 'ok'     ${HTTP_OK}, ${HTTP_NO_CONTENT}
+    ${expected_resp}=  Set Variable If  '${expected_status}' == 'ok'  ${HTTP_OK}
     ...  '${expected_status}' == 'error'  ${HTTP_BAD_REQUEST}
 
     ${string}=  Convert To String  ${csr_dict}
@@ -245,7 +244,6 @@ Generate CSR Via Redfishtool
 Verify Redfishtool Install Certificate
     [Documentation]  Install and verify certificate using Redfishtool.
     [Arguments]  ${cert_type}  ${cert_format}  ${expected_status}  ${delete_cert}=${True}
-    ...  ${install_type}=install
 
     # Description of argument(s):
     # cert_type           Certificate type (e.g. "Client" or "CA").
@@ -254,12 +252,10 @@ Verify Redfishtool Install Certificate
     #                     request (i.e. "ok" or "error").
     # delete_cert         Certificate will be deleted before installing if this True.
 
-    Run Keyword If  '${cert_type}' == 'CA'
-    ...  Delete All CA Certificate Via Redfishtool  ${delete_cert}
-    ...  ELSE IF  '${cert_type}' == 'Client'
-    ...  Redfishtool Delete Certificate Via BMC CLI  ${cert_type}  ${delete_cert}
-
-    Return From Keyword If  "${install_type}" != "install" and "${file_status}" != "Not Found"
+    Run Keyword If  '${cert_type}' == 'CA' and '${delete_cert}' == '${True}'
+    ...  Delete All CA Certificate Via Redfisthtool
+    ...  ELSE IF  '${cert_type}' == 'Client' and '${delete_cert}' == '${True}'
+    ...  Redfishtool Delete Certificate Via BMC CLI  ${cert_type}
 
     ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}
     ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
@@ -283,24 +279,15 @@ Verify Redfishtool Install Certificate
 
     Run Keyword If  '${expected_status}' == 'ok'  Should Contain  ${cert_file_content}  ${bmc_cert_content}
 
+    [Return]  ${cert_id}
 
-Delete All CA Certificate Via Redfishtool
+
+Delete All CA Certificate Via Redfisthtool
     [Documentation]  Delete all CA certificate via Redfish.
-    [Arguments]  ${delete_cert}=${True}
 
-    ${cmd_output}=  Redfishtool Get  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates
+    ${cmd_output}=  Redfishtool Get  /redfish/v1/Managers/bmc/Truststore/Certificates
     ${cmd_output}=  Convert String to JSON  ${cmd_output}
     ${cert_list}=  Set Variable  ${cmd_output["Members"]}
-    ${uri_length}=  Get Length  ${cert_list}
-    ${file_status}=  Set Variable If
-    ...  "${uri_length}" == "0"  Not Found
-    ...  "${uri_length}" != "0"  Found
-    ${cert_id}=  Set Variable If
-    ...  "${uri_length}" != "0"  ${cert_list[-1]["@odata.id"].split("/")[-1].strip()}
-    ...  "${uri_length}" == "0"  None
-    Set Test Variable  ${cert_id}
-    Set Test Variable  ${file_status}
-    Return From Keyword If  "${file_status}" != "Found" or "${delete_cert}" != "${True}"
     FOR  ${cert}  IN  @{cert_list}
       Redfishtool Delete  ${cert["@odata.id"]}  ${root_cmd_args}
     END
@@ -308,7 +295,7 @@ Delete All CA Certificate Via Redfishtool
 
 Redfishtool Delete Certificate Via BMC CLI
     [Documentation]  Delete certificate via BMC CLI.
-    [Arguments]  ${cert_type}  ${delete_cert}=${True}
+    [Arguments]  ${cert_type}
 
     # Description of argument(s):
     # cert_type           Certificate type (e.g. "Client" or "CA").
@@ -324,8 +311,7 @@ Redfishtool Delete Certificate Via BMC CLI
     ${file_status}  ${stderr}  ${rc}=  BMC Execute Command
     ...  [ -f ${certificate_file_path} ] && echo "Found" || echo "Not Found"
 
-    Set Test Variable  ${file_status}
-    Return From Keyword If  "${file_status}" != "Found" or '${delete_cert}' != "${True}"
+    Return From Keyword If  "${file_status}" != "Found"
     BMC Execute Command  rm ${certificate_file_path}
     BMC Execute Command  systemctl restart ${certificate_service}
     BMC Execute Command  systemctl daemon-reload
@@ -350,12 +336,10 @@ Redfishtool Install Certificate File On BMC
     Set To Dictionary  ${kwargs}  headers  ${headers}
 
     ${resp}=  POST On Session  openbmc  ${uri}  &{kwargs}  expected_status=any
-    ${cert_id}=  Set Variable If
-    ...  '${resp.status_code}' == '${HTTP_OK}'  ${resp.json()["Id"]}
-    ...  '${resp.status_code}' == '${HTTP_NO_CONTENT}'  ${resp.json()["Id"]}  -1
+    ${cert_id}=  Set Variable If  '${resp.status_code}' == '${HTTP_OK}'  ${resp.json()["Id"]}  -1
 
     Run Keyword If  '${status}' == 'ok'
-    ...  Should Contain Any  "${resp.status_code}"  ${HTTP_OK}  ${HTTP_NO_CONTENT}
+    ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ...  ELSE IF  '${status}' == 'error'
     ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_INTERNAL_SERVER_ERROR}
 
@@ -376,12 +360,10 @@ Verify Redfishtool Replace Certificate
     #                  request (i.e. "ok" or "error").
 
     # Install certificate before replacing client or CA certificate.
-    Run Keyword If  '${cert_type}' == 'Client'
-    ...    Verify Redfishtool Install Certificate  ${cert_type}  ${cert_format}  ${expected_status}
-    ...    ${False}  replace
+    ${cert_id}=  Run Keyword If  '${cert_type}' == 'Client'
+    ...    Verify Redfishtool Install Certificate  ${cert_type}  Valid Certificate Valid Privatekey  ok
     ...  ELSE IF  '${cert_type}' == 'CA'
-    ...    Verify Redfishtool Install Certificate  ${cert_type}  ${cert_format}  ${expected_status}
-    ...    ${False}  replace
+    ...    Verify Redfishtool Install Certificate  ${cert_type}  Valid Certificate  ok
 
     ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}
     ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
@@ -399,9 +381,8 @@ Verify Redfishtool Replace Certificate
     ${string}=  Replace String  ${string}  '  "
     ${payload}=  Set Variable  '${string}'
 
-    ${expected_resp}=  Set Variable If
-    ...  '${expected_status}' == 'ok'     ${HTTP_OK}, ${HTTP_NO_CONTENT}
-    ...  '${expected_status}' == 'error'  ${HTTP_BAD_REQUEST}
+    ${expected_resp}=  Set Variable If  '${expected_status}' == 'ok'  ${HTTP_OK}
+    ...  '${expected_status}' == 'error'  ${HTTP_NOT_FOUND},${HTTP_INTERNAL_SERVER_ERROR}
 
     ${response}=  Redfishtool Post
     ...  ${payload}  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
