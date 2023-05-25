@@ -176,6 +176,7 @@ Verify Set Invalid Session Privilege Level Via IPMI Raw Command
     [Template]  Set Invalid Session Privilege Level And Verify
 
     # invalid_privilege_level
+    0x01
     0x05
     0x06
     0x07
@@ -269,7 +270,15 @@ Set Invalid Session Privilege Level And Verify
     # Verify requested level exceeds Channel and/or User Privilege Limit.
     ${msg}=  Run Keyword And Expect Error  *  Run External IPMI Raw Command
     ...  0x06 0x3b ${privilege_level}
-    Should Contain  ${msg}  Unknown  rsp=0x81
+
+    # 0x05 is OEM proprietary level.
+    IF  ${privilege_level} == 0x05
+        Should Contain  ${msg}  Unknown  rsp=0x81
+    ELSE
+        # According to IPMI spec privelege level except 0x00-0x05, others are reserved. So if we
+        # try to set those privelege we will get rsp as 0xcc(Invalid data filed in request)
+        Should Contain  ${msg}  Invalid data field in request  rsp=0xcc
+    END
 
 
 Verify Identify LED State Via Redfish
