@@ -3,6 +3,10 @@
 Documentation    Module to test dcmi get capabilites functionality.
 Resource         ../../lib/ipmi_client.robot
 
+*** Variables ***
+@{slave_address_list}  Slave address of device: 0h (8bits)(Satellite/External controller)
+...                    Slave address of device: 20h (BMC)
+
 *** Test Cases ***
 
 Verify Get DCMI Capabilities
@@ -21,11 +25,10 @@ Verify Get DCMI Capabilities
     ...  200 SEL entries
     ...  SEL automatic rollover is enabled
     # Optional Platform Attributes:
-    ...  Slave address of device: 0h (8bits)(Satellite/External controller)
     ...  Channel number is 0h (Primary BMC)
     ...  Device revision is 0
     # Manageability Access Attributes:
-    ...  Primary LAN channel number: 1 is available
+    ...  Primary LAN channel number: ${CHANNEL_NUMBER} is available
     ...  Secondary LAN channel is not available for OOB
     ...  No serial channel is available
 
@@ -33,3 +36,11 @@ Verify Get DCMI Capabilities
       Run Keyword And Continue On Failure  Should Contain  ${cmd_output}  ${capability}  ignore_case=True
       ...  msg=Supported DCMI capabilities not present.
     END
+
+    FOR  ${slave_address}  IN  @{slave_address_list}
+      ${slave_address_status}=  Run Keyword And Return Status
+      ...  Should Contain  ${cmd_output}  ${slave_address}  ignore_case=True
+      Exit For Loop IF  ${slave_address_status} == True
+    END
+
+    Run Keyword IF  ${slave_address_status} == False  Fail  msg=Slave address is showing wrongly.
