@@ -129,6 +129,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95288265_660a45f8",
+        "filename": "ipmi/dcmi/test_dcmi_management_controller.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-05-25T12:18:16Z",
+      "side": 1,
+      "message": "It was renamed to ${hostname_file_path} as per george\u0027s comment.\nhttps://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/62999/11..12/ipmi/dcmi/test_dcmi_management_controller.robot#b19",
+      "parentUuid": "29d81af2_49773c70",
+      "range": {
+        "startLine": 19,
+        "startChar": 2,
+        "endLine": 19,
+        "endChar": 14
+      },
+      "revId": "eb78a705dd6550839d8c011e9cd3909a9f9900ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c5ad2b0_7162ff54",
