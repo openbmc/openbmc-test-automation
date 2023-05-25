@@ -303,13 +303,14 @@ Verify SOL Set In Progress
 Check IPMI SOL Output Content
     [Documentation]  Check if SOL has given content.
     [Arguments]  ${data}  ${file_path}=${IPMI_SOL_LOG_FILE}
+
     # Description of argument(s):
     # data       Content which need to be checked(e.g. Petitboot, ISTEP).
     # file_path  The file path on the local machine to check SOL content.
     #            By default it check SOL content from log/sol_<BMC_IP>.
 
     ${output}=  OperatingSystem.Get File  ${file_path}  encoding_errors=ignore
-    Should Contain  ${output}  ${data}  case_insensitive=True
+    Should Match Regexp  ${output}  ${data}  case_insensitive=True
 
 
 Verify SOL Setting
