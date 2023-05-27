@@ -6,6 +6,9 @@ IPMI raw commands table:
    - Define IPMI interface index, commands and expected output.
 
 """
+
+from robot.libraries.BuiltIn import BuiltIn
+
 # The currently supported cipher list.
 # Refer:
 # openbmc/meta-openbmc-machines/meta-openpower/meta-ibm/meta-witherspoon/recipe
@@ -219,15 +222,21 @@ IPMI_RAW_CMD = {
     "lan_parameters": {
         "get_ip": [
             # raw command
-            "0x0c 0x02 0x01 0x03 0 0",
+            "0x0c 0x02 0x"
+            + BuiltIn().get_variable_value("${CHANNEL_NUMBER}")
+            + " 0x03 0 0",
         ],
         "get_ip_src": [
             # raw command
-            "0x0c 0x02 0x01 0x04 0 0",
+            "0x0c 0x02 0x"
+            + BuiltIn().get_variable_value("${CHANNEL_NUMBER}")
+            + " 0x04 0 0",
         ],
         "get_dot1q": [
             # raw command
-            "0x0c 0x02 0x01 0x14 0 0",
+            "0x0c 0x02 0x"
+            + BuiltIn().get_variable_value("${CHANNEL_NUMBER}")
+            + " 0x14 0 0",
         ],
     },
     "SDR_Info": {
