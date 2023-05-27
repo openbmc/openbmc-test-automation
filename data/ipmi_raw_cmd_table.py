@@ -598,4 +598,11 @@ IPMI_RAW_CMD = {
             "0x0a 0x12",
         ],
     },
+    "Chassis Capabilities": {
+        "Get": [
+            # raw command, invalid data length
+            "0x00 0x00",
+            "0x00 0x00 0x01",
+        ]
+    },
 }
