@@ -4,6 +4,7 @@ Documentation    Module to test IPMI chassis functionality.
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
 Resource         ../lib/boot_utils.robot
+Resource         ../lib/bmc_dbus.robot
 Library          ../lib/ipmi_utils.py
 Variables        ../data/ipmi_raw_cmd_table.py
 
@@ -11,10 +12,14 @@ Suite Setup      Redfish.Login
 Suite Teardown   Redfish.Logout
 Test Teardown    Test Teardown Execution
 
+
 *** Variables ***
 
 # Timeout value in minutes. Default 3 minutes.
-${IPMI_POWEROFF_WAIT_TIMEOUT}    3
+${IPMI_POWEROFF_WAIT_TIMEOUT}      3
+${busctl_settings}                 xyz.openbmc_project.Settings
+${chassis_capabilities_dbus_URL}   /xyz/openbmc_project/Control/ChassisCapabilities
+
 
 *** Test Cases ***
 
@@ -114,6 +119,37 @@ Verify Chassis Status Via IPMI
     previous
 
 
+Verify Get Chassis Capabilities
+    [Documentation]  Verify get chassis capabilities IPMI cmd with valid data length and verify
+    ...  its response comparing with busctl command.
+    [Tags]  Verify_Get_Chassis_Capabilities
+    [Teardown]  FFDC On Test Case Fail
+
+    ${ipmi_resp}=  Run External IPMI Raw Command
+    ...  ${IPMI_RAW_CMD['Chassis Capabilities']['Get'][0]}
+
+    ${ipmi_resp}=  Split String  ${ipmi_resp}
+    ${busctl_cmd}=  Catenate  ${BUSCTL_INTROSPECT_COMMAND} ${busctl_settings}
+    ...  ${chassis_capabilities_dbus_URL}
+
+    ${busctl_resp}=  BMC Execute Command  sh --login -c "${busctl_cmd}"
+
+    Verify Chassis Capabilities Response  ${ipmi_resp[0]}  ${busctl_resp[0]}  CapabilitiesFlags
+    Verify Chassis Capabilities Response  ${ipmi_resp[1]}  ${busctl_resp[0]}  FRUDeviceAddress
+    Verify Chassis Capabilities Response  ${ipmi_resp[2]}  ${busctl_resp[0]}  SDRDeviceAddress
+    Verify Chassis Capabilities Response  ${ipmi_resp[3]}  ${busctl_resp[0]}  SELDeviceAddress
+    Verify Chassis Capabilities Response  ${ipmi_resp[4]}  ${busctl_resp[0]}  SMDeviceAddress
+    Verify Chassis Capabilities Response  ${ipmi_resp[5]}  ${busctl_resp[0]}  BridgeDeviceAddress
+
+
+Verify Get Chassis Capabilities With Invalid Data Length
+    [Documentation]  Verify get chassis capabilities IPMI command with invalid data length
+    [Tags]  Verify_Get_Chassis_Capabilities_With_Invalid_Data_Length
+    [Teardown]  FFDC On Test Case Fail
+
+    Verify Invalid IPMI Command  ${IPMI_RAW_CMD['Chassis Capabilities']['Get'][1]}  0xc7
+
+
 *** Keywords ***
 
 Set Chassis Power Policy Via IPMI And Verify
@@ -162,6 +198,18 @@ Check Chassis Status Via IPMI
     ${last_power_event}=  Convert To Binary  ${status[1]}  base=16
     ${last_power_event}=  Zfill Data  ${last_power_event}  8
     Should Be Equal As Strings  ${last_power_event[3]}  1
+
+
+Verify Chassis Capabilities Response
+    [Documentation]  Will compare the ipmi response with thh busctl response for given property.
+    [Arguments]  ${ipmi_response}  ${busctl_response}  ${property}
+
+    ${ipmi_response}=  Convert To Integer  ${ipmi_response}  16
+
+    ${busctl_value}=  Get Regexp Matches  ${busctl_response}
+    ...  \\.${property}\\s+property\\s+\\w\\s+(\\d+)\\s+  1
+
+    Should Be Equal As Integers   ${ipmi_response}  ${busctl_value[0]}
 
 
 Test Setup Execution
