@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51f8dd9d_28647e3e",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-05-30T17:11:42Z",
+      "side": 1,
+      "message": "Modify IPv6 Address And Verify",
+      "range": {
+        "startLine": 346,
+        "startChar": 0,
+        "endLine": 346,
+        "endChar": 19
+      },
+      "revId": "d0ec66cf255289e6c12aadb799a89892a599f9f9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8f4e545_b4c41059",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-05-30T17:11:42Z",
+      "side": 1,
+      "message": "range(1 to 128)",
+      "range": {
+        "startLine": 354,
+        "startChar": 28,
+        "endLine": 354,
+        "endChar": 48
+      },
+      "revId": "d0ec66cf255289e6c12aadb799a89892a599f9f9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d696dbac_da79d9c2",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 2
