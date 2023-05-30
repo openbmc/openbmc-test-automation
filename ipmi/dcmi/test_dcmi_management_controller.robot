@@ -23,7 +23,8 @@ Validate IPMI Response Length
 
     ${rsp}=  Get DCMI Management Controller Identifier String
     @{ipmi_cmd_rsp_list}=  Split String  ${rsp}
-    # ipmi_cmd_rsp_list = ["00", "0a", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09"]
+    # ipmi_cmd_rsp_list = ["00", "0a", "00", "01", "02", "03",
+    #                      "04", "05", "06", "07", "08", "09"]
     # rsp_length = 10
     # string_length = 0a
     ${rsp_length}=  Get Length  ${ipmi_cmd_rsp_list[2:]}
@@ -32,13 +33,15 @@ Validate IPMI Response Length
     # ipmi_cmd_rsp_list[1] = 0a
     # string_length = 0a
     # the above condition is equal.
-    # suppose if string_length and ipmi_cmd_rsp_lst[1] not matches then it will fails.
+    # suppose if string_length and ipmi_cmd_rsp_list[1] not matches
+    #  then it will fails.
     Should Be Equal As Strings  ${ipmi_cmd_rsp_list[1]}  ${string_length}
     ...  msg=Id string length in ipmi response is showing wrongly
 
-Test Hostname is Same With Management Controller Identifier String
-    [Documentation]  Check hostname was verified with get management controller identfier string.
-    [Tags]  Validate_Hostname_With_Get_DCMI_MCID_String
+Test Hostname Is Same With Management Controller Identifier String
+    [Documentation]  Check hostname was verified with get management
+    ...              controller identifier string.
+    [Tags]  Test_Hostname_Is_Same_With_Management_Controller_Identifier_String
 
     ${rsp}=  Get DCMI Management Controller Identifier String
     @{ipmi_cmd_rsp_list}=  Split String  ${rsp}
@@ -49,7 +52,7 @@ Test Hostname is Same With Management Controller Identifier String
 
 Test Get Management Controller Identifier String
     [Documentation]  Validate set and get mcid string.
-    [Tags]  Set_And_Get_Management_Controller_Identifier_String
+    [Tags]  Test_Get_Management_Controller_Identifier_String
     [Setup]  Get Default MCID
     [Teardown]  Set Default MCID
 
@@ -69,13 +72,15 @@ Test Get Management Controller Identifier String
     ...  msg=Number of bytes that was set and id string length are not same.
 
     # Verify ID String Length and data.
-    # ipmi_cmd_rsp_list = ["00", "0a", "00", "01", "02", "03", "04", "05", "06", "07", "08", "09"]
+    # ipmi_cmd_rsp_list = ["00", "0a", "00", "01", "02", "03", "04",
+    #                      "05", "06", "07", "08", "09"]
     # rsp_length = 10
     # string_length = 0a
     # ipmi_cmd_rsp_list[1] = 0a
     # ipmi_cmd_rsp_list[1] is equal to string_length
     # the above condition is equal.
-    # suppose if string_length and ipmi_cmd_rsp_lst[1] not matches then it will fails.
+    # suppose if string_length and ipmi_cmd_rsp_list[1] not matches then
+    # it will fails.
     ${rsp_length}=  Get Length  ${ipmi_cmd_rsp_list[2:]}
     ${string_length}=  Get Response Length In Hex  ${rsp_length}
     Run Keyword And Continue On Failure
