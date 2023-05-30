@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d696dbac_da79d9c2",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-30T08:55:35Z",
+      "side": 1,
+      "message": "Build a list of IPv6 addresses to be modified.",
+      "revId": "d0ec66cf255289e6c12aadb799a89892a599f9f9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b9bef34_fd0f0807",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-30T08:55:35Z",
+      "side": 1,
+      "message": "@{ipv6_network_list}",
+      "revId": "d0ec66cf255289e6c12aadb799a89892a599f9f9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28cdbfe9_b23ea3c7",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-30T08:55:35Z",
+      "side": 1,
+      "message": "FOR  ${ipv6_network}  IN  @{ipv6_network_list}",
+      "revId": "d0ec66cf255289e6c12aadb799a89892a599f9f9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "514ab5fe_c9897fb5",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-30T08:55:35Z",
+      "side": 1,
+      "message": "Modify the IPv6 address only if given IPv6 is found.",
+      "revId": "d0ec66cf255289e6c12aadb799a89892a599f9f9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9142380e_8a9ac5db",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-30T08:55:35Z",
+      "side": 1,
+      "message": "Why do u need to PASS here ?",
+      "revId": "d0ec66cf255289e6c12aadb799a89892a599f9f9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
