@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "772fa9bc_3c5cccd6",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-30T16:14:27Z",
+      "side": 1,
+      "message": "May be use *** comment *** \nInstead of # here for commenting test codes.. Example\n\n\nFor example:\n\n*** Test Cases *** \n| test 1 \n| | log | this is test one\n\n*** comment ***\n| test 2\n| | log | this is test two\n\n*** Test Cases ***\n| test 3\n| | log | this is test three\nIf you run the above test you\u0027ll see that only test 1 and test3 are executed. Everything in the \"comment\" table are ignored.",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 58
+      },
+      "revId": "ab24a312f82183fc626dea8b63a7a794e6a3739b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
