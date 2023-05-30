@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8337e0b9_81449a07",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-30T07:25:03Z",
+      "side": 1,
+      "message": "Resource            ../../lib/boot_utils.robot\n\nwhy do u need this ? remove if not used",
+      "revId": "94625e6f9bde73c6cc06b1958c6344a00a58b9b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d45fa27c_4ef1a8e9",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-30T07:25:03Z",
+      "side": 1,
+      "message": "${metric_proprty_uri_base}     /redfish/v1/Chassis/${CHASSIS_ID}/Sensors",
+      "revId": "94625e6f9bde73c6cc06b1958c6344a00a58b9b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ef42756_12c546c5",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-30T07:25:03Z",
+      "side": 1,
+      "message": "${metric_proprty_uri_base} \n\nto\n\n${metric_property_base_uri}",
+      "revId": "94625e6f9bde73c6cc06b1958c6344a00a58b9b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0577776d_7b1bf18a",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-05-30T07:25:03Z",
+      "side": 1,
+      "message": "${metric_definition_uri_base} to\n\n${metric_definition_base_uri}",
+      "revId": "94625e6f9bde73c6cc06b1958c6344a00a58b9b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
