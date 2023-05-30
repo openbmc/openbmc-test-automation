@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f9ca5bc_3071aeab",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-05-30T10:20:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8337e0b9_81449a07",
+      "revId": "94625e6f9bde73c6cc06b1958c6344a00a58b9b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d45fa27c_4ef1a8e9",
@@ -52,6 +70,42 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2df790d_f31bff04",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-05-30T10:20:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef42756_12c546c5",
+      "revId": "94625e6f9bde73c6cc06b1958c6344a00a58b9b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b07d7017_91561f1b",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-05-30T10:20:13Z",
+      "side": 1,
+      "message": "/redfish/v1/Chassis/chassis/Sensors is the correct uri.",
+      "parentUuid": "d45fa27c_4ef1a8e9",
+      "revId": "94625e6f9bde73c6cc06b1958c6344a00a58b9b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0577776d_7b1bf18a",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-05-30T07:25:03Z",
       "side": 1,
       "message": "${metric_definition_uri_base} to\n\n${metric_definition_base_uri}",
+      "revId": "94625e6f9bde73c6cc06b1958c6344a00a58b9b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b37d41c3_d6ecfc5b",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-05-30T10:20:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0577776d_7b1bf18a",
       "revId": "94625e6f9bde73c6cc06b1958c6344a00a58b9b4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
