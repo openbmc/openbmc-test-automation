@@ -124,6 +124,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "446dceac_865d24ec",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-05-31T11:51:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94ef0f8a_589689cf",
+      "revId": "94625e6f9bde73c6cc06b1958c6344a00a58b9b4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0577776d_7b1bf18a",
