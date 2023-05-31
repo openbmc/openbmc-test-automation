@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f1e0b4e_1c0bb312",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-31T06:21:54Z",
+      "side": 1,
+      "message": "Can you add the test case tag name here instead on test case name? Thats make it easy to find test case comment in gerrit.",
+      "range": {
+        "startLine": 10,
+        "startChar": 27,
+        "endLine": 10,
+        "endChar": 65
+      },
+      "revId": "13e98188363306629720c1903e80d07eae18f981",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "862104e3_cd8219e2",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-31T06:21:54Z",
+      "side": 1,
+      "message": "This url is already defined in variable.py as REDFISH_CHASSIS_SENSORS_URI. You can use it instead of creating new variable name.\n\nOr you can directly use this url in the test case like the way we are doing for many other test cases.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 66
+      },
+      "revId": "13e98188363306629720c1903e80d07eae18f981",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e20d1df_94c1f3f5",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-31T06:21:54Z",
+      "side": 1,
+      "message": "2 spaces please\n\n    ${dict}\u003d  Evaluate json.loads(\u0027\u0027\u0027${body}\u0027\u0027\u0027)  json",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 60
+      },
+      "revId": "13e98188363306629720c1903e80d07eae18f981",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1cd72f5_c2029a76",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-05-31T06:21:54Z",
+      "side": 1,
+      "message": "Please also check that the report is available after its creation.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 46
+      },
+      "revId": "13e98188363306629720c1903e80d07eae18f981",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
