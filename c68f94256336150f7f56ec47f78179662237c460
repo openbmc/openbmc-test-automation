@@ -16,6 +16,24 @@
       "message": "#Should Contain  ${msg}  Unknown  rsp\u003d0x81\n\nRemove it if not used. Thanks",
       "revId": "c68f94256336150f7f56ec47f78179662237c460",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fef7cf9_acd6cdf9",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-06-01T11:08:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40742871_de884d5f",
+      "revId": "c68f94256336150f7f56ec47f78179662237c460",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
