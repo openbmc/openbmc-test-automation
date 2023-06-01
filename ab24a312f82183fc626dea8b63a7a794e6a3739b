@@ -22,6 +22,30 @@
       },
       "revId": "ab24a312f82183fc626dea8b63a7a794e6a3739b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ca26efd_28e82108",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-06-01T09:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "772fa9bc_3c5cccd6",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 58
+      },
+      "revId": "ab24a312f82183fc626dea8b63a7a794e6a3739b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
