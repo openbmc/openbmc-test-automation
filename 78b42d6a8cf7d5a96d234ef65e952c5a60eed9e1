@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24290f07_ad2fd615",
+        "filename": "ipmi/dcmi/test_dcmi_get_temperature_reading.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-06-05T06:20:25Z",
+      "side": 1,
+      "message": "--- ipmi/dcmi/test_dcmi_get_temperature_reading.robot:\nVerify Get Temperature Reading Command For CPU 0 Temperature Sensor\nVerify_Get_Temperature_Reading_Command_For_CPU_Temperature_Sensor\n\n --- ipmi/dcmi/test_dcmi_get_temperature_reading.robot:\nVerify Get Temperature Reading Command For CPU 1 Temperature Sensor\nVerify_Get_Temperature_Reading_Command_For_CPU_Temperature_Sensor\n\n\nplease fix the test case name and Tag mismatch. keep it same",
+      "revId": "78b42d6a8cf7d5a96d234ef65e952c5a60eed9e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ee038c3_f5c10e14",
+        "filename": "ipmi/dcmi/test_dcmi_get_temperature_reading.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-06-05T06:20:25Z",
+      "side": 1,
+      "message": "Generic comment for output response variable naming\n\nrsp to resp\nret for return",
+      "revId": "78b42d6a8cf7d5a96d234ef65e952c5a60eed9e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
