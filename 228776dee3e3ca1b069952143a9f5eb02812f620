@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "376b198a_38ed1d61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-06-05T06:13:35Z",
+      "side": 1,
+      "message": "Few minor comments else looks good to me",
+      "revId": "228776dee3e3ca1b069952143a9f5eb02812f620",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2b1fbba_5b64adba",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-06-05T06:13:35Z",
+      "side": 1,
+      "message": "Please fix the test case name and Tag name mismatch. Keep it same\n\n --- ipmi/dcmi/test_dcmi_configuration_parameters.robot:\nGet Default DCMI Configuration Parameters For Param 2\nGet_Default_DCMI_Config_Parameter_For_Param_2\n\n --- ipmi/dcmi/test_dcmi_configuration_parameters.robot:\nSet DCMI Configuration For Param 2 Discovery Method Without Random Backoff For Option 12\nSet_12_without_backoff\n\n --- ipmi/dcmi/test_dcmi_configuration_parameters.robot:\nCheck Error Completion Code For Param 2 Discovery Method Without Random Backoff For Option 60 And 43\nCheck_Error_Completion_Code_For_Param_2_Without_Random_Backoff_For_Option_60_And_43\n\n --- ipmi/dcmi/test_dcmi_configuration_parameters.robot:\nSet DCMI Configuration For Param 2 Discovery Method With Random Backoff For Option 12\nSet_12_with_backoff\n\n --- ipmi/dcmi/test_dcmi_configuration_parameters.robot:\nSet DCMI Configuration For Param 2 Discovery Method Without Random Backoff For Option 60 And 43\nSet_60_43_without_backoff\n\n --- ipmi/dcmi/test_dcmi_configuration_parameters.robot:\nSet DCMI Configuration For Param 2 Discovery Method With Random Backoff For Option 60 And 43\nSet_60_43_with_backoff",
+      "revId": "228776dee3e3ca1b069952143a9f5eb02812f620",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8799544d_85bce38b",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-06-05T06:13:35Z",
+      "side": 1,
+      "message": "its best to keep something like resp  instead of rsp for generic through from response message\n\nexample\n\n${dcmi_rsp}  to ${dcmi_resp}  \n\nand do for all",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 14
+      },
+      "revId": "228776dee3e3ca1b069952143a9f5eb02812f620",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13a8befb_65527eec",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-06-05T06:13:35Z",
+      "side": 1,
+      "message": "Check Error Completion Code For Param 2 Discovery Method Without Random Backoff For Option 60 And 43\n\ninstead of mentioning params.. best is to give a test name view at top level what function this is testing of.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 100
+      },
+      "revId": "228776dee3e3ca1b069952143a9f5eb02812f620",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbf697c8_f59b9b31",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-06-05T06:13:35Z",
+      "side": 1,
+      "message": "[Return]  ${rsp}\n\nbest to use \n    [Return]  ${ret}\n\nresp for response,  ret for return variable naming",
+      "revId": "228776dee3e3ca1b069952143a9f5eb02812f620",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
