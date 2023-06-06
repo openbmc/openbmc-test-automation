@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9bb8826_e884f5cc",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-06-06T14:41:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2b1fbba_5b64adba",
+      "revId": "228776dee3e3ca1b069952143a9f5eb02812f620",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8799544d_85bce38b",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-06-05T06:13:35Z",
       "side": 1,
       "message": "its best to keep something like resp  instead of rsp for generic through from response message\n\nexample\n\n${dcmi_rsp}  to ${dcmi_resp}  \n\nand do for all",
+      "range": {
+        "startLine": 22,
+        "startChar": 6,
+        "endLine": 22,
+        "endChar": 14
+      },
+      "revId": "228776dee3e3ca1b069952143a9f5eb02812f620",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7972a37_4e025f2f",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-06-06T14:41:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8799544d_85bce38b",
       "range": {
         "startLine": 22,
         "startChar": 6,
@@ -81,6 +123,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ed5fe3f_bb17a3db",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-06-06T14:41:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13a8befb_65527eec",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 100
+      },
+      "revId": "228776dee3e3ca1b069952143a9f5eb02812f620",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bbf697c8_f59b9b31",
@@ -94,6 +160,24 @@
       "writtenOn": "2023-06-05T06:13:35Z",
       "side": 1,
       "message": "[Return]  ${rsp}\n\nbest to use \n    [Return]  ${ret}\n\nresp for response,  ret for return variable naming",
+      "revId": "228776dee3e3ca1b069952143a9f5eb02812f620",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14eaff95_62ef410f",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-06-06T14:41:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbf697c8_f59b9b31",
       "revId": "228776dee3e3ca1b069952143a9f5eb02812f620",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
