@@ -107,8 +107,8 @@ These documents contain details on developing OpenBMC test code and debugging.
   testing.
 - [REDFISH-cheatsheet.md](https://github.com/openbmc/docs/blob/master/REDFISH-cheatsheet.md):
   Quick reference for some common curl commands required for redfish testing.
-- [README.md](https://github.com/openbmc/phosphor-webui/blob/master/README.md):
-  Web UI setup reference.
+- [README.md](https://github.com/openbmc/webui-vue/blob/master/README.md): Web
+  UI setup reference.
 - [Corporate CLA and Individual CLA](https://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#submitting-changes-via-gerrit-server):
   Submitting changes via Gerrit server
 
