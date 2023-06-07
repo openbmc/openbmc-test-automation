@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21a45263_4274b2d4",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-06-07T08:31:18Z",
+      "side": 1,
+      "message": "[ WARN ] Multiple tests with name \u0027Check Error Completion Code For Discovery Method With Random Backoff\u0027 executed in suite \u0027Test Dcmi Configuration Parameters\u0027.\nCheck Error Completion Code For Discovery Method With Random Backo... | PASS |\n------------------------------------------------------------------------------",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 71
+      },
+      "revId": "310edb132292255cc4bae58c133b961795295470",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
