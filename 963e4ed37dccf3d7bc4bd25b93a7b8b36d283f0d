@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7a8fb8e_cb9cb840",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-06-09T09:01:01Z",
+      "side": 1,
+      "message": "you can remove this as it is already called in ../../lib/protocol_setting_utils.robot",
+      "range": {
+        "startLine": 18,
+        "startChar": 53,
+        "endLine": 18,
+        "endChar": 54
+      },
+      "revId": "963e4ed37dccf3d7bc4bd25b93a7b8b36d283f0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81475cc2_97ae8ad8",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-06-09T09:01:01Z",
+      "side": 1,
+      "message": "can you it in a template... example as below\n\nConfigure NTP Settings And Verify\n    [Documentation]  Set NTP protocol state to true or false \u0026 verify\n    [Tags]  Set_NTP_Settings_And_Verify\n    [Template]  Set NTP Protocol State And Verify\n    \n    # ntp_state\n    true\n    false",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 30
+      },
+      "revId": "963e4ed37dccf3d7bc4bd25b93a7b8b36d283f0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5cba9f8_41425144",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-06-09T09:01:01Z",
+      "side": 1,
+      "message": "make it as one keyword (Set NTP Protocol State And Verify) and call it as template for above commented TCs\n\nSet NTP Protocol State And Verify\n    [Documentation]  Set NTP protocol state to true or false \u0026 verify.\n    [Arguments]  ${ntp_state}\n    \n    ${payload}\u003d  Create Payload For Enable Or Disable NTP Protocol  ${ntp_state}\n    Redfish.Patch  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}/NetworkProtocol  body\u003d${payload}\n    ...  valid_status_codes\u003d[${HTTP_NO_CONTENT}]\n    Sleep  10s\n    Verify NTP Protocol State  ${ntp_state}",
+      "range": {
+        "startLine": 449,
+        "startChar": 0,
+        "endLine": 464,
+        "endChar": 13
+      },
+      "revId": "963e4ed37dccf3d7bc4bd25b93a7b8b36d283f0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc5e1d73_5e8589be",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-06-09T09:01:01Z",
+      "side": 1,
+      "message": "Use if-else condition and make it one keyword \u0026 use it in Set NTP Protocol State And Verify\n\n\"Verify NTP Protocol State\"",
+      "range": {
+        "startLine": 467,
+        "startChar": 0,
+        "endLine": 488,
+        "endChar": 38
+      },
+      "revId": "963e4ed37dccf3d7bc4bd25b93a7b8b36d283f0d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
