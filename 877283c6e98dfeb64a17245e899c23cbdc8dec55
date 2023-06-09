@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dd50f3b_c477c16c",
+        "filename": "ipmi/dcmi/test_dcmi_sensor_info.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-06-09T10:41:54Z",
+      "side": 1,
+      "message": "dcmi_config_file_name",
+      "revId": "877283c6e98dfeb64a17245e899c23cbdc8dec55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b53d09c_b3313b49",
+        "filename": "ipmi/dcmi/test_dcmi_sensor_info.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-06-09T10:41:54Z",
+      "side": 1,
+      "message": "dcmi_sensor_name_dict",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 18
+      },
+      "revId": "877283c6e98dfeb64a17245e899c23cbdc8dec55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f083a6a0_8f8435cd",
+        "filename": "ipmi/dcmi/test_dcmi_sensor_info.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-06-09T10:41:54Z",
+      "side": 1,
+      "message": "dcmi_instance_count_dict",
+      "range": {
+        "startLine": 23,
+        "startChar": 2,
+        "endLine": 23,
+        "endChar": 21
+      },
+      "revId": "877283c6e98dfeb64a17245e899c23cbdc8dec55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "024cb7ea_05261a35",
+        "filename": "ipmi/dcmi/test_dcmi_sensor_info.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-06-09T10:41:54Z",
+      "side": 1,
+      "message": "This is a good generic code we can make use of\n\nif possible can u put in a keyword to some utils file \n\n\n\nMay be put the code here lib/common_utils.robot\n\nSCP File From BMC\n    [Documentation]  Secure copy file from BMC.\n\t[Arguments]      ${source_file_name}    ${dest_file_name}\u003d${EXEC_DIR}\n\t\n\t# Description of argument(s):\n    # source_file_name       File name to be copied.\n    # dest_file_name         File location to be copied.\n\t\n    scp.Open Connection\n    ...  ${OPENBMC_HOST}  username\u003d${OPENBMC_USERNAME}  password\u003d${OPENBMC_PASSWORD}  port\u003d${SSH_PORT}\n    scp.Get File  ${file_name}  ${dest_file_name}\n    scp.Close Connection\n\t\n\nImport in your test suite and use perhaps \nResource     lib/common_utils.robot\n\n    \n    # Get this file to client machine /usr/share/ipmi-providers/dcmi_sensors.json\n\tSCP File From BMC   ${dcmi_sensors_info_json_file}",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 24
+      },
+      "revId": "877283c6e98dfeb64a17245e899c23cbdc8dec55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
