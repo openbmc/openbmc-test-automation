@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91494bad_34a077d0",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-06-09T10:29:52Z",
+      "side": 1,
+      "message": "Where is this used in the suite ? remove if not used",
+      "revId": "ed41a1eb262afeb05cbe10d519b3835be6899904",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de7c7bc0_1a253b12",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-06-09T10:29:52Z",
+      "side": 1,
+      "message": "What does Param 2 refers to here ?",
+      "revId": "ed41a1eb262afeb05cbe10d519b3835be6899904",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b304d2f9_5b44ee36",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-06-09T10:29:52Z",
+      "side": 1,
+      "message": "------------------------------------------------------------------------------\n[ WARN ] Multiple tests with name \u0027Check Error Completion Code For Discovery Method With Random Backoff\u0027 executed in suite \u0027Test Dcmi Configuration Parameters\u0027.\nCheck Error Completion Code For Discovery Method With Random Backo... | PASS |",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 71
+      },
+      "revId": "ed41a1eb262afeb05cbe10d519b3835be6899904",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
