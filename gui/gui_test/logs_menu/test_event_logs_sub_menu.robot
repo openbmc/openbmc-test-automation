@@ -167,6 +167,8 @@ Verify Resolving Single Error Log In GUI
     [Setup]  Run Keywords  Redfish.Login  AND  Redfish Purge Event Log
 
     Create Error Logs  ${1}
+    Refresh GUI
+
     # Mark single event log as resolved.
     Click Element At Coordinates  ${xpath_event_log_resolve}  0  0
     # Given the time to get the notification.
@@ -183,7 +185,9 @@ Verify Resolving Multiple Error Logs In GUI
     [Setup]  Redfish Purge Event Log
 
     Create Error Logs  ${3}
+    Refresh GUI
     Select All Events
+
     Click Element  ${xpath_event_logs_resolve}
     Page Should Contain  Successfully resolved 3 logs.
     Wait Until Page Does Not Contain Element  Success
@@ -197,6 +201,7 @@ Verify Default Value Of Resolved Field In Error Log
 
     Redfish Purge Event Log
     Create Error Logs  ${1}
+    Refresh GUI
 
     # Verify default value of resolved field from GUI.
     Element Should Contain  ${xpath_event_log_data}  Unresolved
