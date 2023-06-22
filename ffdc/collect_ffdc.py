@@ -26,6 +26,8 @@ from ffdc_collector import ffdc_collector  # NOQA
 @click.option("-r", "--remote", help="Hostname/IP of the remote host")
 @click.option("-u", "--username", help="Username of the remote host.")
 @click.option("-p", "--password", help="Password of the remote host.")
+@click.option("-port_https", default=443, help="HTTPS port value.")
+@click.option("-port_ipmi", default=623, help="IPMI port value.")
 @click.option(
     "-c",
     "--config",
@@ -77,6 +79,8 @@ def cli_ffdc(
     remote,
     username,
     password,
+    port_https,
+    port_ipmi,
     config,
     location,
     type,
@@ -93,11 +97,15 @@ def cli_ffdc(
         "\n********** FFDC (First Failure Data Collection) Starts **********"
     )
 
-    if input_options_ok(remote, username, password, config, type):
+    if input_options_ok(
+        remote, username, password, port_https, port_ipmi, config, type
+    ):
         this_ffdc = ffdc_collector(
             remote,
             username,
             password,
+            port_https,
+            port_ipmi,
             config,
             location,
             type,
@@ -127,7 +135,9 @@ def cli_ffdc(
     click.echo("\n********** FFDC Finishes **********\n\n")
 
 
-def input_options_ok(remote, username, password, config, type):
+def input_options_ok(
+    remote, username, password, port_https, port_ipmi, config, type
+):
     r"""
     Verify script options exist via CLI options or environment variables.
     """
