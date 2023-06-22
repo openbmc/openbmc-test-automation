@@ -137,24 +137,24 @@ OPENBMC:
     # File contains the data returned from 'redfishtool GET URL'
     REDFISH_LOGS:
         COMMANDS:
-            - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always
+          - redfishtool -u ${username} -p ${password} -r ${hostname}:${port_https} -S Always
               raw GET /redfish/v1/AccountService/Accounts
-            - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always
+          - redfishtool -u ${username} -p ${password} -r ${hostname}:${port_https} -S Always
               raw GET
               /redfish/v1/Managers/${manager_id}/LogServices/Dump/Entries
-            - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always
+          - redfishtool -u ${username} -p ${password} -r ${hostname}:${port_https} -S Always
               raw GET /redfish/v1/Systems/system/LogServices/Dump/Entries
-            - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always
+          - redfishtool -u ${username} -p ${password} -r ${hostname}:${port_https} -S Always
               raw GET /redfish/v1/Systems/system/LogServices/EventLog/Entries
-            - plugin:
-                  - plugin_name: plugin.redfish.enumerate_request
-                  - plugin_args:
-                        - ${hostname}
-                        - ${username}
-                        - ${password}
-                        - ${manager_id}
-                        - /redfish/v1/
-                        - json
+          - plugin:
+                - plugin_name: plugin.redfish.enumerate_request
+                - plugin_args:
+                      - ${hostname}
+                      - ${username}
+                      - ${password}
+                      - ${manager_id}
+                      - /redfish/v1/
+                      - json
         FILES:
             - "REDFISH_bmc_user_accounts.json"
             - "REDFISH_bmc_dump_entries.json"
@@ -168,11 +168,11 @@ OPENBMC:
     IPMI_LOGS:
         COMMANDS:
             - ipmitool -I lanplus -C 17 -U ${username} -P ${password} -H
-              ${hostname} lan print
+              ${hostname} -p ${port_ipmi} lan print
             - ipmitool -I lanplus -C 17 -U ${username} -P ${password} -H
-              ${hostname} fru list
+              ${hostname} -p ${port_ipmi} fru list
             - ipmitool -I lanplus -C 17 -U ${username} -P ${password} -H
-              ${hostname} user list
+              ${hostname} -p ${port_ipmi} user list
         FILES:
             - "IPMI_LAN_print.txt"
             - "IPMI_FRU_list.txt"
