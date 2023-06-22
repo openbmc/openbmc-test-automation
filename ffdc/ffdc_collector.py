@@ -119,6 +119,8 @@ class ffdc_collector:
         hostname,
         username,
         password,
+        port_https,
+        port_ipmi,
         ffdc_config,
         location,
         remote_type,
@@ -133,6 +135,8 @@ class ffdc_collector:
         hostname            name/ip of the targeted (remote) system
         username            user on the targeted system with access to FFDC files
         password            password for user on targeted system
+        port_https          HTTPS port value. By default 443
+        port_ipmi           IPMI port value. By default 623
         ffdc_config         configuration file listing commands and files for FFDC
         location            where to store collected FFDC
         remote_type         os type of the remote host
@@ -145,6 +149,8 @@ class ffdc_collector:
         self.hostname = hostname
         self.username = username
         self.password = password
+        self.port_https = str(port_https)
+        self.port_ipmi = str(port_ipmi)
         self.ffdc_config = ffdc_config
         self.location = location + "/" + remote_type.upper()
         self.ssh_remoteclient = None
@@ -925,6 +931,8 @@ class ffdc_collector:
                 + self.password
                 + " -H "
                 + self.hostname
+                + " -p "
+                + str(self.port_ipmi)
                 + " power status"
             )
         else:
@@ -933,6 +941,8 @@ class ffdc_collector:
                 + self.password
                 + " -H "
                 + self.hostname
+                + " -p "
+                + str(self.port_ipmi)
                 + " power status"
             )
 
@@ -1036,11 +1046,15 @@ class ffdc_collector:
         os.environ["hostname"] = self.hostname
         os.environ["username"] = self.username
         os.environ["password"] = self.password
+        os.environ["port_https"] = self.port_https
+        os.environ["port_ipmi"] = self.port_ipmi
 
         # Append default Env.
         self.env_dict["hostname"] = self.hostname
         self.env_dict["username"] = self.username
         self.env_dict["password"] = self.password
+        self.env_dict["port_https"] = self.port_https
+        self.env_dict["port_ipmi"] = self.port_ipmi
 
         try:
             tmp_env_dict = {}
