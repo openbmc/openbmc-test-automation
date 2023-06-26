@@ -119,6 +119,7 @@ class ffdc_collector:
         hostname,
         username,
         password,
+        port_ssh,
         port_https,
         port_ipmi,
         ffdc_config,
@@ -135,6 +136,7 @@ class ffdc_collector:
         hostname            name/ip of the targeted (remote) system
         username            user on the targeted system with access to FFDC files
         password            password for user on targeted system
+        port_ssh            SSH port value. By default 22
         port_https          HTTPS port value. By default 443
         port_ipmi           IPMI port value. By default 623
         ffdc_config         configuration file listing commands and files for FFDC
@@ -149,6 +151,7 @@ class ffdc_collector:
         self.hostname = hostname
         self.username = username
         self.password = password
+        self.port_ssh = str(port_ssh)
         self.port_https = str(port_https)
         self.port_ipmi = str(port_ipmi)
         self.ffdc_config = ffdc_config
@@ -348,7 +351,7 @@ class ffdc_collector:
         """
 
         self.ssh_remoteclient = SSHRemoteclient(
-            self.hostname, self.username, self.password
+            self.hostname, self.username, self.password, self.port_ssh
         )
 
         if self.ssh_remoteclient.ssh_remoteclient_login():
@@ -914,6 +917,8 @@ class ffdc_collector:
         redfish_parm = (
             "redfishtool -r "
             + self.hostname
+            + ":"
+            + self.port_https
             + " -S Always raw GET /redfish/v1/"
         )
         return self.run_tool_cmd(redfish_parm, True)
@@ -1046,6 +1051,7 @@ class ffdc_collector:
         os.environ["hostname"] = self.hostname
         os.environ["username"] = self.username
         os.environ["password"] = self.password
+        os.environ["port_ssh"] = self.port_ssh
         os.environ["port_https"] = self.port_https
         os.environ["port_ipmi"] = self.port_ipmi
 
@@ -1053,6 +1059,7 @@ class ffdc_collector:
         self.env_dict["hostname"] = self.hostname
         self.env_dict["username"] = self.username
         self.env_dict["password"] = self.password
+        self.env_dict["port_ssh"] = self.port_ssh
         self.env_dict["port_https"] = self.port_https
         self.env_dict["port_ipmi"] = self.port_ipmi
 
