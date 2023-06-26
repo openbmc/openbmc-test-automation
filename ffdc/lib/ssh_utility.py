@@ -22,7 +22,7 @@ class SSHRemoteclient:
     for remote host command execution and scp.
     """
 
-    def __init__(self, hostname, username, password):
+    def __init__(self, hostname, username, password, port_ssh):
         r"""
         Description of argument(s):
 
@@ -38,6 +38,7 @@ class SSHRemoteclient:
         self.hostname = hostname
         self.username = username
         self.password = password
+        self.port_ssh = port_ssh
 
     def ssh_remoteclient_login(self):
         r"""
@@ -55,6 +56,7 @@ class SSHRemoteclient:
             # Connect to the server
             self.sshclient.connect(
                 hostname=self.hostname,
+                port=self.port_ssh,
                 username=self.username,
                 password=self.password,
                 banner_timeout=120,
