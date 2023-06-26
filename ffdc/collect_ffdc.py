@@ -27,6 +27,9 @@ from ffdc_collector import ffdc_collector  # NOQA
 @click.option("-u", "--username", help="Username of the remote host.")
 @click.option("-p", "--password", help="Password of the remote host.")
 @click.option(
+    "-port_ssh", default=22, show_default=True, help="SSH port value."
+)
+@click.option(
     "-port_https", default=443, show_default=True, help="HTTPS port value."
 )
 @click.option(
@@ -83,6 +86,7 @@ def cli_ffdc(
     remote,
     username,
     password,
+    port_ssh,
     port_https,
     port_ipmi,
     config,
@@ -102,12 +106,20 @@ def cli_ffdc(
     )
 
     if input_options_ok(
-        remote, username, password, port_https, port_ipmi, config, type
+        remote,
+        username,
+        password,
+        port_ssh,
+        port_https,
+        port_ipmi,
+        config,
+        type,
     ):
         this_ffdc = ffdc_collector(
             remote,
             username,
             password,
+            port_ssh,
             port_https,
             port_ipmi,
             config,
@@ -140,7 +152,7 @@ def cli_ffdc(
 
 
 def input_options_ok(
-    remote, username, password, port_https, port_ipmi, config, type
+    remote, username, password, port_ssh, port_https, port_ipmi, config, type
 ):
     r"""
     Verify script options exist via CLI options or environment variables.
