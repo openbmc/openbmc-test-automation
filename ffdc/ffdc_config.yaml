@@ -152,7 +152,7 @@ OPENBMC:
             - plugin:
                   - plugin_name: plugin.redfish.enumerate_request
                   - plugin_args:
-                        - ${hostname}
+                        - ${hostname}:${port_https}
                         - ${username}
                         - ${password}
                         - /redfish/v1/
