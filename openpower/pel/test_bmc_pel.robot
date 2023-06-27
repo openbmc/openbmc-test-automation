@@ -971,7 +971,7 @@ Verify PEL Transmission To Host
     # Adding delay before checking host transmission for the cases where PEL is
     # not expected to be offloaded to HOST.
     Run Keyword If  "${expected_transmission_state}" == "Not sent"
-    ...  Run Keywords  Sleep  120s AND
+    ...  Run Keywords  Sleep  120s  AND
     ...  Check If PEL Transmission State Is Expected  ${pel_id}  Not sent
 
 
