@@ -14,8 +14,9 @@ MY_BLOCK:
 
     REDFISH_LOGS:
         COMMANDS:
-            - redfishtool -u ${username} -p ${password} -r ${hostname} -S Always
-              raw GET /redfish/v1/AccountService/Accounts
+          - redfishtool -u ${username} -p ${password}
+            -r ${hostname}:${port_https} -S Always
+            raw GET /redfish/v1/AccountService/Accounts
         FILES:
             - "REDFISH_bmc_user_accounts.json"
         PROTOCOL:
@@ -24,7 +25,7 @@ MY_BLOCK:
     IPMI_LOGS:
         COMMANDS:
             - ipmitool -I lanplus -C 17 -U ${username} -P ${password} -H
-              ${hostname} lan print
+              -p ${port_ipmi} ${hostname} lan print
         FILES:
             - "IPMI_LAN_print.txt"
         PROTOCOL:
