@@ -23,7 +23,7 @@ Reset Network Interface During Code Update
     # Verify code update was successful and 'Activation' state is 'Active'.
     Wait For Activation State Change  ${version_id}  ${ACTIVATING}
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
-    Should Be Equal As Strings  &{software_state}[Activation]  ${ACTIVE}
+    Should Be Equal As Strings  ${software_state}[Activation]  ${ACTIVE}
 
     Run Keyword If  '${reboot}'  OBMC Reboot (off)  stack_mode=normal
 

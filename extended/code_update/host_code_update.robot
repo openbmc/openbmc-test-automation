@@ -150,7 +150,7 @@ Set RequestedActivation To None
     Set Host Software Property  @{software_objects}[0]  RequestedActivation
     ...  ${REQUESTED_NONE}
     ${software_properties}=  Get Host Software Property  @{software_objects}[0]
-    Should Be Equal As Strings  &{software_properties}[RequestedActivation]
+    Should Be Equal As Strings  ${software_properties}[RequestedActivation]
     ...  ${REQUESTED_NONE}
 
 
