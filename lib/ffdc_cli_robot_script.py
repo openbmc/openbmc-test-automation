@@ -13,6 +13,9 @@ from ssh_utility import SSHRemoteclient  # NOQA
 HOST = "HOST"
 USER = "USERNAME"
 PASSWD = "PASSWORD"
+PORT_SSH = "SSH_PORT"
+PORT_HTTPS = "HTTPS_PORT"
+PORT_IPMI = "IPMI_PORT"
 CONFIG = "CONFIG"
 TYPE = "TYPE"
 LOC = "LOCATION"
@@ -83,6 +86,15 @@ def ffdc_robot_script_cli(**kwargs):
         dict_of_parms["OPENBMC_PASSWORD"] = robotBuildIn().get_variable_value(
             "${OPENBMC_PASSWORD}", default=None
         )
+        dict_of_parms["SSH_PORT"] = robotBuildIn().get_variable_value(
+            "${SSH_PORT}", default=22
+        )
+        dict_of_parms["HTTPS_PORT"] = robotBuildIn().get_variable_value(
+            "${HTTPS_PORT}", default=443
+        )
+        dict_of_parms["IPMI_PORT"] = robotBuildIn().get_variable_value(
+            "${IPMI_PORT}", default=623
+        )
         dict_of_parms["REMOTE_TYPE"] = "OPENBMC"
 
         run_ffdc_collector(dict_of_parms)
@@ -136,6 +148,12 @@ def run_ffdc_collector(dict_of_parm):
             username = dict_of_parm[key]
         elif PASSWD in key:
             password = dict_of_parm[key]
+        elif PORT_SSH in key:
+            port_ssh = dict_of_parm[key]
+        elif PORT_HTTPS in key:
+            port_https = dict_of_parm[key]
+        elif PORT_IPMI in key:
+            port_ipmi = dict_of_parm[key]
         elif CONFIG in key:
             config = dict_of_parm[key]
         elif LOC in key:
@@ -185,6 +203,9 @@ def run_ffdc_collector(dict_of_parm):
             remote,
             username,
             password,
+            port_ssh,
+            port_https,
+            port_ipmi,
             config,
             location,
             remote_type,
