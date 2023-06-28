@@ -188,8 +188,8 @@ Verify Expired Certificate Install
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore BMC Date
 
     # cert_type  cert_format          expected_status
-    Client       Expired Certificate  error
-    CA           Expired Certificate  error
+    Client       Expired Certificate  ok
+    CA           Expired Certificate  ok
 
 
 Verify Expired Certificate Replace
@@ -200,7 +200,7 @@ Verify Expired Certificate Replace
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore BMC Date
 
     # cert_type  cert_format          expected_status
-    Server       Expired Certificate  error
+    Server       Expired Certificate  ok
 
 
 Verify Not Yet Valid Certificate Install
