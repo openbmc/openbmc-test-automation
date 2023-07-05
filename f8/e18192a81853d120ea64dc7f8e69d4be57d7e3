@@ -1,0 +1,10 @@
+Code-Review+2: George Keishing <gkeishin@gmail.com>
+Code-Review+1: <rajeshkb@ami.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+1: <nagarjunb@ami.com>
+Code-Review+1: Prashanth Katti <prkatti1@in.ibm.com>
+Submitted-by: George Keishing <gkeishin@gmail.com>
+Submitted-at: Wed, 05 Jul 2023 09:51:27 +0000
+Reviewed-on: https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/64646
+Project: openbmc/openbmc-test-automation
+Branch: refs/heads/master
