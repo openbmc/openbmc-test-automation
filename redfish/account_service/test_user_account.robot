@@ -16,6 +16,8 @@ Test Teardown    Test Teardown Execution
 ${account_lockout_duration}   ${30}
 ${account_lockout_threshold}  ${3}
 
+${ssh_status}                 ${True}
+
 ** Test Cases **
 
 Verify AccountService Available
@@ -503,7 +505,10 @@ Verify Error While Deleting Root User
 
 
 Verify SSH Login Access With Admin User
-    [Documentation]  Verify that admin user does not have SSH login access.
+    [Documentation]  Verify that admin user have SSH login access.
+    ...              By default, admin should have access but there could be
+    ...              case where admin user shell access is restricted by design
+    ...              in the community sphere..
     [Tags]  Verify_SSH_Login_Access_With_Admin_User
 
     # Create an admin User.
@@ -512,7 +517,10 @@ Verify SSH Login Access With Admin User
     # Attempt SSH login with admin user.
     SSHLibrary.Open Connection  ${OPENBMC_HOST}
     ${status}=  Run Keyword And Return Status  SSHLibrary.Login  new_admin  TestPwd1
-    Should Be Equal  ${status}  ${False}
+
+    # By default ssh_status is True, user can change the status via CLI
+    # -v ssh_status:False
+    Should Be Equal As Strings  "${status}"  "${ssh_status}"
 
     Redfish.Login
     Redfish.Delete  /redfish/v1/AccountService/Accounts/new_admin
