@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea4db1d5_bad15856",
+        "filename": "redfish/chassis/test_chassis.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-07-06T04:24:56Z",
+      "side": 1,
+      "message": "May be add bit more information what are we doing in this suite..",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 36
+      },
+      "revId": "b3df2ddd350426f4c1d8370d559bae01654f9120",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b10a1ceb_dad7343a",
+        "filename": "redfish/chassis/test_chassis.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-07-06T04:24:56Z",
+      "side": 1,
+      "message": "1) No keyword with name \u0027Get Respective Sensor Property Value Via Redfish\u0027 found. Did you try using keyword \u0027Redfish.Get\u0027 or \u0027RequestsLibrary.GET\u0027 and forgot to use enough whitespace between keyword and arguments?\n\n2) No keyword with name \u0027Get Respective Sensor Property Value Via Redfish\u0027 found. Did you try using keyword \u0027Redfish.Get\u0027 or \u0027RequestsLibrary.GET\u0027 and forgot to use enough whitespace between keyword and arguments?",
+      "revId": "b3df2ddd350426f4c1d8370d559bae01654f9120",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3368e015_536caaac",
+        "filename": "redfish/chassis/test_chassis.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-07-06T04:24:56Z",
+      "side": 1,
+      "message": "Check Chassis Collections Count Is Not Reduced When Host Was Rebooted\n\nmay in this line\n\nVerify Chassis Collection Count Remains Same After Host is Booted",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 69
+      },
+      "revId": "b3df2ddd350426f4c1d8370d559bae01654f9120",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0d43dbe_844cc5c3",
+        "filename": "redfish/chassis/test_chassis.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-07-06T04:24:56Z",
+      "side": 1,
+      "message": "Since there is not Host reboot in the test case but power on to Runtime\n\nmbr_lst_when_host_off",
+      "range": {
+        "startLine": 29,
+        "startChar": 6,
+        "endLine": 29,
+        "endChar": 32
+      },
+      "revId": "b3df2ddd350426f4c1d8370d559bae01654f9120",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aef8fa30_7e49e625",
+        "filename": "redfish/chassis/test_chassis.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-07-06T04:24:56Z",
+      "side": 1,
+      "message": "mbr_lst_after_host_booted",
+      "range": {
+        "startLine": 33,
+        "startChar": 6,
+        "endLine": 33,
+        "endChar": 31
+      },
+      "revId": "b3df2ddd350426f4c1d8370d559bae01654f9120",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e9d1f64_7685d4b2",
+        "filename": "redfish/chassis/test_chassis.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-07-06T04:24:56Z",
+      "side": 1,
+      "message": "Should Be Equal  ${count_bfr_host_reboot}  ${count_afr_host_reboot}\n    ...  message\u003dchassis count is not matched after host is booted, missing chassis id are ${missing_chassis_id}",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 109
+      },
+      "revId": "b3df2ddd350426f4c1d8370d559bae01654f9120",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abc15adf_5d06ac92",
+        "filename": "redfish/chassis/test_chassis.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-07-06T04:24:56Z",
+      "side": 1,
+      "message": "--- ./redfish/chassis/test_chassis.robot:\nCheck Property Response Were Not Empty For All Chassis Instances\nCheck_Property_Response_Were_Not_Empty\n\n\nplease fix the Tag name in same line with Test case naming",
+      "range": {
+        "startLine": 42,
+        "startChar": 5,
+        "endLine": 42,
+        "endChar": 50
+      },
+      "revId": "b3df2ddd350426f4c1d8370d559bae01654f9120",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58adaf07_3a6c405a",
+        "filename": "redfish/chassis/test_chassis.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-07-06T04:24:56Z",
+      "side": 1,
+      "message": "What are doing here ? how are we executing this lines inside the for loop ?",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 34
+      },
+      "revId": "b3df2ddd350426f4c1d8370d559bae01654f9120",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dfacec5_63e1d63f",
+        "filename": "redfish/chassis/test_chassis.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-07-06T04:24:56Z",
+      "side": 1,
+      "message": "What are doing here ? how are we executing this lines inside the for loop ?",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 34
+      },
+      "revId": "b3df2ddd350426f4c1d8370d559bae01654f9120",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
