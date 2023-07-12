@@ -20,7 +20,7 @@ from ssh_utility import SSHRemoteclient  # NOQA
 
 
 def ssh_execute_cmd(
-    hostname, username, password, command, timeout=60, type=None
+    hostname, username, password, port_ssh, command, timeout=60, type=None
 ):
     r"""
     Description of argument(s):
@@ -28,11 +28,12 @@ def ssh_execute_cmd(
     hostname        Name/IP of the remote (targeting) host
     username        User on the remote host with access to FFCD files
     password        Password for user on remote host
+    port_ssh        SSH port value. By default 22.
     command         Command to run on remote host
     timeout         Time, in second, to wait for command completion
     type            Data type return as list or others.
     """
-    ssh_remoteclient = SSHRemoteclient(hostname, username, password)
+    ssh_remoteclient = SSHRemoteclient(hostname, username, password, port_ssh)
 
     cmd_exit_code = 0
     err = ""
