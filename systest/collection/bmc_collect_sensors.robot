@@ -26,7 +26,7 @@ ${sensors_flagged_redfish}   Redfish sensors collection excluded
 Rest Collect Sensors
     [Documentation]  Collect the sensors values using the OpenBMC Rest API.
     [Tags]  Rest_Collect_Sensors  rest
-    [Teardown]  FFDC On Test Case Fail  clean_up=${FALSE}
+    [Teardown]  FFDC On Test Case Fail
 
     ${sensors}=  OpenBMC Get Request  ${SENSORS_URI}enumerate
     ${sensors}=  Evaluate  $sensors.json()['data']
@@ -90,4 +90,4 @@ Redfish Test Teardown Execution
     [Documentation]  Do the post test teardown for redfish.
 
     Redfish.Logout
-    FFDC On Test Case Fail  clean_up=${FALSE}
+    FFDC On Test Case Fail

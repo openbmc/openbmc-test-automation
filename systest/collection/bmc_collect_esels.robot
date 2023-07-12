@@ -23,7 +23,7 @@ ${redfish_event_logs}          Redfish error log collection excluded
 Rest Collect eSELs
     [Documentation]  Collect eSEL using the OpenBMC Rest API.
     [Tags]  Rest_Collect_eSELs  rest
-    [Teardown]  FFDC On Test Case Fail  clean_up=${FALSE}
+    [Teardown]  FFDC On Test Case Fail
 
     ${error_logs}=  Get Error Logs  ${QUIET}
     ${rest_error_logs}=  gen_robot_print.Sprint Vars  error_logs
@@ -73,4 +73,4 @@ Redfish Test Teardown Execution
     [Documentation]  Do the post test teardown for redfish.
 
     Redfish.Logout
-    FFDC On Test Case Fail  clean_up=${FALSE}
+    FFDC On Test Case Fail

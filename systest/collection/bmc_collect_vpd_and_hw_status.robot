@@ -21,7 +21,7 @@ ${redfish_collected_values}  Redfish collection excluded
 Rest Collect VPD And Hardware Status
     [Documentation]  Collect VPD and hardware status using the OpenBMC Rest API.
     [Tags]  Rest_Collect_VPD_And_Hardware_Status  rest
-    [Teardown]  FFDC On Test Case Fail  clean_up=${FALSE}
+    [Teardown]  FFDC On Test Case Fail
 
     ${system_properties}=  OpenBMC Get Request  ${HOST_INVENTORY_URI}system
     ${system_properties}=  Evaluate  $system_properties.json()
@@ -72,4 +72,4 @@ Redfish Test Teardown Execution
     [Documentation]  Do the post test teardown for redfish.
 
     Redfish.Logout
-    FFDC On Test Case Fail  clean_up=${FALSE}
+    FFDC On Test Case Fail
