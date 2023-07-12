@@ -4,7 +4,7 @@ Documentation  Test OpenBMC GUI "Event logs" sub-menu of "Logs" menu.
 
 Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/logging_utils.robot
-Library         ../../../data/pel_variables.py
+Variables       ../../../data/pel_variables.py
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Suite Teardown Execution
