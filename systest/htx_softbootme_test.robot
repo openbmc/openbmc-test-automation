@@ -74,22 +74,22 @@ Run HTX Soft Bootme Exerciser
     FOR    ${index}    IN RANGE    999999
         ${l_ping}=
         ...   Run Keyword And Return Status   Ping Host  ${OS_HOST}
-
+            
         IF   '${l_ping}' == '${False}'
             Log to console   ("OS Host is rebooting")
-            # Wait for OS (re) Boot - Max 10 minutes
-            FOR   ${waitindex}   IN RANGE   20
+            # Wait for OS (re) Boot - Max 20 minutes
+            FOR   ${waitindex}   IN RANGE   40
                 Run Key U  Sleep \ 30s
                 ${l_ping}=
                 ...   Run Keyword And Return Status   Ping Host  ${OS_HOST}
                 Exit For Loop If    '${l_ping}' == '${True}'
             END
 
-            Wait Until Keyword Succeeds
-            ...   15 min   30 sec   Verify Ping and REST Authentication
+            Run Keyword If  '${l_ping}' == '${False}'  Fail  msg=OS not pinging in 20 minutes.
 
-            # Give OS a minute from first ping for sshd to (re)start
-            Run Key U  Sleep \ 60s
+            Wait Until Keyword Succeeds
+            ...   1 min   30 sec   Verify Ping SSH And Redfish Authentication
+
             OS Execute Command  uptime
             Check HTX Run Status
 
