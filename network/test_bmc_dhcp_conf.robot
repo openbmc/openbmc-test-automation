@@ -110,7 +110,7 @@ Restore Configuration
 
     Run Keyword If  '${CHANNEL_NUMBER}' == '1'  Add IP Address  ${OPENBMC_HOST}  ${eth0_subnet_mask}  ${eth0_gateway}
     ...  ELSE IF  '${CHANNEL_NUMBER}' == '2'  Add IP Address  ${OPENBMC_HOST_1}  ${eth1_subnet_mask}  ${eth1_gateway}
- 
+
 Verify Ethernet Config Property
     [Documentation]  verify ethernet config properties.
     [Arguments]  ${property}  ${response_data}

@@ -134,7 +134,7 @@ Redfish Unsigned Firmware Update
     # URI : /redfish/v1/UpdateService
     # "HttpPushUri": "/redfish/v1/UpdateService/update",
 
-    ${redfish_update_uri}=  Get Redfish Update Service URI 
+    ${redfish_update_uri}=  Get Redfish Update Service URI
     Redfish Upload Image  ${redfish_update_uri}  ${image_file_path}
     ${image_id}=  Get Latest Image ID
     Rprint Vars  image_id
