@@ -43,6 +43,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c2761f70_f9fff96e",
+        "filename": "redfish/chassis/test_chassis.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-07-14T06:44:02Z",
+      "side": 1,
+      "message": "can we mention this in uppercase ?\n\n\u0026{CHASSIS_PROPERTIES}\n@{CHASSIS_URI_LIST}",
+      "range": {
+        "startLine": 19,
+        "startChar": 2,
+        "endLine": 19,
+        "endChar": 20
+      },
+      "revId": "b3df2ddd350426f4c1d8370d559bae01654f9120",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3368e015_536caaac",
         "filename": "redfish/chassis/test_chassis.robot",
         "patchSetId": 9
@@ -181,6 +204,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0c4adc3_39f76087",
+        "filename": "redfish/chassis/test_chassis.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-07-14T06:44:02Z",
+      "side": 1,
+      "message": "Can this be simply\n\nValidate Properties In Redfish Response\n\n[Documentation]  Check properties values are showing properly in redfish response.",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 66
+      },
+      "revId": "b3df2ddd350426f4c1d8370d559bae01654f9120",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2dfacec5_63e1d63f",
         "filename": "redfish/chassis/test_chassis.robot",
         "patchSetId": 9
@@ -197,6 +243,92 @@
         "startChar": 0,
         "endLine": 70,
         "endChar": 34
+      },
+      "revId": "b3df2ddd350426f4c1d8370d559bae01654f9120",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86f8dee4_19973136",
+        "filename": "redfish/chassis/test_chassis.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-07-14T06:44:02Z",
+      "side": 1,
+      "message": "Documentation for arguments are missing",
+      "range": {
+        "startLine": 96,
+        "startChar": 4,
+        "endLine": 96,
+        "endChar": 44
+      },
+      "revId": "b3df2ddd350426f4c1d8370d559bae01654f9120",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4361f111_77974a3c",
+        "filename": "redfish/chassis/test_chassis.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-07-14T06:44:02Z",
+      "side": 1,
+      "message": "Check If Property Response Is Not Empty",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 38
+      },
+      "revId": "b3df2ddd350426f4c1d8370d559bae01654f9120",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c94c31fe_4f659400",
+        "filename": "redfish/chassis/test_chassis.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-07-14T06:44:02Z",
+      "side": 1,
+      "message": "Documentation for arguments are missing",
+      "revId": "b3df2ddd350426f4c1d8370d559bae01654f9120",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57013030_6cdf7af7",
+        "filename": "redfish/chassis/test_chassis.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-07-14T06:44:02Z",
+      "side": 1,
+      "message": "change \u0027was showing as empty\u0027 to \u0027is empty\u0027\n\nplease it do it for similar sentence.",
+      "range": {
+        "startLine": 131,
+        "startChar": 54,
+        "endLine": 131,
+        "endChar": 65
       },
       "revId": "b3df2ddd350426f4c1d8370d559bae01654f9120",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
