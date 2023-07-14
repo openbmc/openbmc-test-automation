@@ -3,6 +3,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d2150ae_d453f829",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-07-14T07:24:12Z",
+      "side": 1,
+      "message": "Give one line space after line 2, line 6, line 9",
+      "revId": "ed41a1eb262afeb05cbe10d519b3835be6899904",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bee08152_5930e5a7",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-07-14T07:24:12Z",
+      "side": 1,
+      "message": "DCMI\n\nin documentation through out the test file mention dcmi as DCMI",
+      "range": {
+        "startLine": 2,
+        "startChar": 32,
+        "endLine": 2,
+        "endChar": 36
+      },
+      "revId": "ed41a1eb262afeb05cbe10d519b3835be6899904",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "91494bad_34a077d0",
         "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
         "patchSetId": 18
@@ -37,6 +77,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fbaa29b6_c18db195",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-07-14T07:24:12Z",
+      "side": 1,
+      "message": "what is option 12 here?",
+      "range": {
+        "startLine": 30,
+        "startChar": 69,
+        "endLine": 30,
+        "endChar": 79
+      },
+      "revId": "ed41a1eb262afeb05cbe10d519b3835be6899904",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b304d2f9_5b44ee36",
         "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
         "patchSetId": 18
@@ -53,6 +116,98 @@
         "startChar": 0,
         "endLine": 41,
         "endChar": 71
+      },
+      "revId": "ed41a1eb262afeb05cbe10d519b3835be6899904",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ed4fec6_be318f3f",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-07-14T07:24:12Z",
+      "side": 1,
+      "message": "give a suitable name instead of just ${cmd}\n\nsame at line 54 and line 63",
+      "range": {
+        "startLine": 45,
+        "startChar": 6,
+        "endLine": 45,
+        "endChar": 9
+      },
+      "revId": "ed41a1eb262afeb05cbe10d519b3835be6899904",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09edf832_113d94e6",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-07-14T07:24:12Z",
+      "side": 1,
+      "message": "why in *** Comment ***",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 15
+      },
+      "revId": "ed41a1eb262afeb05cbe10d519b3835be6899904",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb96dc02_fceaa735",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-07-14T07:24:12Z",
+      "side": 1,
+      "message": "what is option 60 and 43?\n\nplease match it with testcase name",
+      "range": {
+        "startLine": 94,
+        "startChar": 21,
+        "endLine": 94,
+        "endChar": 83
+      },
+      "revId": "ed41a1eb262afeb05cbe10d519b3835be6899904",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d696936b_c800873c",
+        "filename": "ipmi/dcmi/test_dcmi_configuration_parameters.robot",
+        "patchSetId": 18
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-07-14T07:24:12Z",
+      "side": 1,
+      "message": "Documentation for keywords are missing",
+      "range": {
+        "startLine": 108,
+        "startChar": 4,
+        "endLine": 108,
+        "endChar": 29
       },
       "revId": "ed41a1eb262afeb05cbe10d519b3835be6899904",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
