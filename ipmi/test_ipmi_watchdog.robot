@@ -12,7 +12,7 @@ Variables        ../data/ipmi_raw_cmd_table.py
 *** Variables ***
 
 ${TIMER_DELAY}          3
-${POWER_STATE_CHANGE}   20
+${POWER_STATE_CHANGE}   3
 
 *** Test Cases ***
 
@@ -193,7 +193,8 @@ Verify Invalid Reset Timer Request Data
 
     # Reset BMC.
     Run External IPMI Standard Command  mc reset cold -N 10 -R 1
-    Check If BMC is Up
+    Wait Until Keyword Succeeds  ${OPENBMC_REBOOT_TIMEOUT} min  10 sec
+    ...  Is BMC Operational
 
     # Reset Watchdog Timer without initialized watchdog.
     Run Keyword and Expect Error  *Unknown*
@@ -267,7 +268,20 @@ Validate Watchdog Timer Actions And SEL Events
     # Delay for power state.
     Sleep  ${POWER_STATE_CHANGE}
 
-    Verify Host Power State  ${power_state}
+    IF  '${sel_event}' == 'Hard reset' or '${sel_event}' == 'Power cycle'
+        # If Timer expire action is Hard Reset then the host/chassis immediately powering on
+        # after timer expires. So verifying whether host is rebooting by expecting
+        # the Host Ip to not ping.
+        Run Keyword If  '${sel_event}' == 'Power cycle'
+        ...  Wait Until Keyword Succeeds  1 min  10 sec  Verify Host Power State  ['off']
+        ...  ELSE
+        ...  Wait Until Keyword Succeeds  20 sec  5 sec  Is Host Unpingable  ${OS_HOST}
+        Wait Until Keyword Succeeds  5 min  30 sec  Verify Host Power State  ['on']
+        Wait Until Keyword Succeeds  7 min  30 sec  OS Execute Command  uptime
+    ELSE
+        Wait Until Keyword Succeeds  1 min  20 sec  Verify Host Power State  ${power_state}
+    END
+
     Verify Watchdog Timer Action SEL Event  ${sel_event}
 
 
