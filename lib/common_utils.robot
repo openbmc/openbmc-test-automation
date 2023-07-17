@@ -984,6 +984,18 @@ Is BMC Unpingable
     Should be equal  ${RC}  ${1}
 
 
+Is Host Unpingable
+    [Documentation]  Check if Given IP is unpingable.
+    [Arguments]  ${ip}
+
+    # Description of argument(s):
+    # ip           HostOS IP address (e.g. "10.7.7.7").
+
+    ${RC}  ${output}=  Run and return RC and Output  ping -c 4 ${ip}
+    Log  RC: ${RC}\nOutput:\n${output}
+    Should be equal  ${RC}  ${1}
+
+
 Redfish BMC Match States
     [Documentation]  Verify the BMC match state.
     [Arguments]  ${match_state}
