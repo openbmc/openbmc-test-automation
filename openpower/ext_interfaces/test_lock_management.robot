@@ -350,10 +350,11 @@ Create Redfish Session With ClientID
     #              (e.g. 12345, "HMCID").
 
     ${session_info}=  Create Dictionary
-    ${session}=  Redfish Login  kwargs="Oem":{"OpenBMC" : {"ClientID":"${client_id}"}}
+
+    ${session}=  Redfish Login  kwargs="Context": "${client_id}"
 
     Set To Dictionary  ${session_info}  SessionIDs  ${session['Id']}
-    Set To Dictionary  ${session_info}  ClientID  ${session["Oem"]["OpenBMC"]["ClientID"]}
+    Set To Dictionary  ${session_info}  ClientID  ${session["Context"]}
 
     [Return]  ${session_info}
 
@@ -1120,7 +1121,7 @@ Verify Fail To Release Lock With TransactionID As String Type
 
     Append To List  ${trans_id_list}  ${trans_id}
 
-    ${temp_trans_id_list}=  Copy Dictionary  ${trans_id_list}  deepcopy=True
+    ${temp_trans_id_list}=  Copy List  ${trans_id_list}  deepcopy=True
 
     ${value}=  Get From Dictionary  ${trans_id_list}[0]  TransactionID
     ${value}=  Set Variable  \'${value}\'
@@ -1392,7 +1393,7 @@ Verify Lock Records For Multiple Invalid And Valid Session
     Append To List  ${lock_list}  ${trans_id}
     Verify Lock On Resource  ${session_info1}[0]  ${trans_id_list1}
 
-    ${session_info2}=  Copy Dictionary  ${session_info1}  deepcopy=True
+    ${session_info2}=  Copy List  ${session_info1}  deepcopy=True
     set to dictionary  ${session_info2}[0]  SessionIDs  ${invalid_session_ids}[0]
     Append To List  ${session_dict_list}  ${session_info2}[0]
 

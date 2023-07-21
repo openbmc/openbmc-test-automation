@@ -51,10 +51,11 @@ Create Session With ClientID
     #              (e.g. 12345, "EXTERNAL-CLIENT").
 
     ${session_info}=  Create Dictionary
-    ${session_resp}=  Redfish Login  kwargs= "Oem":{"OpenBMC" : {"ClientID":"${client_id}"}}
+
+    ${session_resp}=  Redfish Login  kwargs="Context":"${client_id}"
 
     Set To Dictionary  ${session_info}  SessionIDs  ${session_resp['Id']}
-    Set To Dictionary  ${session_info}  ClientID  ${session_resp["Oem"]["OpenBMC"]["ClientID"]}
+    Set To Dictionary  ${session_info}  ClientID  ${session_resp["Context"]}
     Set To Dictionary  ${session_info}  SessionToken  ${XAUTH_TOKEN}
     Set To Dictionary  ${session_info}  SessionResp  ${session_resp}
 
@@ -107,10 +108,11 @@ Verify A Session Created With ClientID
     FOR  ${client}  ${session}  IN ZIP  ${client_id}  ${session_ids}
       ${session_resp}=  Redfish.Get Properties  /redfish/v1/SessionService/Sessions/${session["SessionIDs"]}
       Rprint Vars  session_resp
-      @{words} =  Split String  ${session_resp["ClientOriginIPAddress"]}  :
+
       ${ip_address}=  Get Running System IP
-      Set Test Variable  ${temp_ipaddr}  ${words}[-1]
-      Valid Value  client  ['${session_resp["Oem"]["OpenBMC"]["ClientID"]}']
+
+      Set Test Variable  ${temp_ipaddr}  ${session_resp["ClientOriginIPAddress"]}
+      Valid Value  client  ['${session_resp["Context"]}']
       Valid Value  session["SessionIDs"]  ['${session_resp["Id"]}']
       Valid Value  temp_ipaddr  ${ip_address}
     END
