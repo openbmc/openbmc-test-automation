@@ -237,9 +237,9 @@ Load Task Service Properties Data
     [Documentation]  Load the task service related properties from json file.
 
     # User input -v TASK_JSON_FILE_PATH:<path> else default path.
-    ${task_json_file}=  Get Variable Value  ${TASK_JSON_FILE_PATH}  data/task_state.json
+    # ${task_json_file}=  Get Variable Value  ${TASK_JSON_FILE_PATH}  data/task_state.json
 
-    ${json}=  OperatingSystem.Get File  ${task_json_file}
+    ${json}=  OperatingSystem.Get File  ${TASK_JSON_FILE_PATH}
     ${properties}=  Evaluate  json.loads('''${json}''')  json
 
     Set Suite Variable  ${allowed_completed_task_overwrite_policy}
