@@ -170,6 +170,10 @@ ${FFDC_DEFAULT}            ${1}
 @{NTP_SERVER_ADDRESSES}    ${EMPTY}
 
 
+# Task Service related variables.
+${TASK_JSON_FILE_PATH}   data/task_state.json
+
+
 *** Keywords ***
 Get Inventory Schema
     [Documentation]  Get inventory schema.
