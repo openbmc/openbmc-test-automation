@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "276d80e9_d76639f1",
+        "filename": "ipmi/test_ipmi_watchdog.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-07-25T10:06:27Z",
+      "side": 1,
+      "message": "Rephrasing comment\n\nIf timer expire action is \u0027Hard Reset\u0027 then the host/chassis immediately powering on after timer expires. Verify if host is rebooting by expecting that host is unpingable.",
+      "range": {
+        "startLine": 274,
+        "startChar": 14,
+        "endLine": 274,
+        "endChar": 21
+      },
+      "revId": "2e597821484f8c27bb163bb7db48d70f3a7e9fd6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4610630_b64ac649",
+        "filename": "lib/common_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 989,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-07-25T10:06:27Z",
+      "side": 1,
+      "message": "[Documentation]  Check if given host IP is unpingable.\n\ndocumentation of args are missing",
+      "revId": "2e597821484f8c27bb163bb7db48d70f3a7e9fd6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
