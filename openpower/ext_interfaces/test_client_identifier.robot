@@ -120,7 +120,7 @@ Set Client Origin IP
 
     ${session}=  Run Keyword And Return Status
     ...  Redfish Login
-    ...  kwargs= "Oem":{"OpenBMC": {"ClientID":"${client_id}", "ClientOriginIP":"${client_ip}"}}
+    ...  kwargs= {"Context": "${client_id}", "ClientOriginIP":"${client_ip}"}}
     Valid Value  session  [${status}]
 
 
@@ -149,7 +149,7 @@ Create A Non Admin Session With ClientID
 
     FOR  ${client}  IN  @{client_id}
       ${resp}=  Redfish Login  rest_username=${username}  rest_password=${password}
-      ...  kwargs= "Oem":{"OpenBMC" : {"ClientID":"${client}"}}
+      ...  kwargs="Context": "${client_id}"
       Append To List  ${session_list}  ${resp}
     END
 
