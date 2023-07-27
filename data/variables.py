@@ -243,7 +243,7 @@ REMOTE_LOGGING_URI = OPENBMC_BASE_URI + "logging/config/remote/"
 # Certificate variables.
 SERVER_CERTIFICATE_URI = OPENBMC_BASE_URI + "certs/server/https"
 CLIENT_CERTIFICATE_URI = OPENBMC_BASE_URI + "certs/client/ldap"
-CA_CERTIFICATE_URI = OPENBMC_BASE_URI + "certs/authority/ldap"
+CA_CERTIFICATE_URI = OPENBMC_BASE_URI + "certs/authority/truststore"
 
 # EventLog variables.
 SYSTEM_BASE_URI = REDFISH_BASE_URI + "Systems/system/"
