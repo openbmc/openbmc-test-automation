@@ -12,7 +12,7 @@ Suite Teardown  Close Browser
 ${xpath_firmware_heading}                //h1[text()="Firmware"]
 ${xpath_add_file_button}                 //*[@id='image-file']
 ${xpath_start_update_button}             //*[@data-test-id="firmware-button-startUpdate"]
-
+${xpath_switch_to_running}               //*[@data-test-id="firmware-button-switchToRunning"]
 
 *** Test Cases ***
 
@@ -42,14 +42,17 @@ Verify Existence Of All Buttons In Firmware Page At Host Power Off
     Page Should Contain Element  ${xpath_start_update_button}
 
 
-Verify Existence Of All Sub Sections Under BMC And Server Section
-    [Documentation]  Verify existence of all sub sections under BMC and server section.
-    [Tags]  Verify_Existence_Of_All_Sub_Sections_Under_BMC_And_Server_Section
+Verify Existence Of All Sub Sections Under BMC And Server Section At Poweroff State
+    [Documentation]  Verify existence of all sub sections under BMC and server section at poweroff state.
+    [Tags]  Verify_Existence_Of_All_Sub_Sections_Under_BMC_And_Server_Section_At_Poweroff_State
+
+    Redfish Power Off  stack_mode=skip  quiet=1
 
     Page Should Contain  Running image
     Page Should Contain  Backup image
     Page Should Contain  Temporary
     Page Should Contain  Permanent
+    Element Should Be Visible  ${xpath_switch_to_running}
 
 
 Verify Existence Of All Buttons In Firmware Page At Host Power On
