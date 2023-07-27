@@ -336,7 +336,7 @@ Verify All REST Objects Are Accessible
     Remove Values From List  ${uri_list}
     ...  /xyz/openbmc_project/certs/client/ldap
     ...  /xyz/openbmc_project/certs/server/https
-    ...  /xyz/openbmc_project/certs/authority/ldap
+    ...  /xyz/openbmc_project/certs/authority/truststore
     ...  /xyz/openbmc_project/ipmi
     ...  /xyz/openbmc_project/ipmi/internal
     ...  /xyz/openbmc_project/ipmi/internal/soft_power_off
