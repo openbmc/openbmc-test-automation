@@ -11,13 +11,17 @@ Test Setup       Printn
 
 ${LOGIN_SESSION_COUNT}   ${50}
 
-&{header_requirements}  Strict-Transport-Security=max-age=31536000; includeSubdomains; preload
+&{header_requirements}  Strict-Transport-Security=max-age=31536000; includeSubdomains
 ...                     X-Frame-Options=DENY
 ...                     Pragma=no-cache
-...                     Cache-Control=no-Store,no-Cache
-...                     Content-Security-Policy=default-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self' wss:; form-action 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'none'
-...                     X-XSS-Protection=1; mode=block
+...                     Cache-Control=no-store, max-age=0
+...                     Referrer-Policy=no-referrer
 ...                     X-Content-Type-Options=nosniff
+...                     X-Permitted-Cross-Domain-Policies=none
+...                     Cross-Origin-Embedder-Policy=require-corp
+...                     Cross-Origin-Opener-Policy=same-origin
+...                     Cross-Origin-Resource-Policy=same-origin
+...                     Content-Security-Policy=default-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self' wss:; form-action 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'none'
 
 *** Test Cases ***
 
@@ -112,13 +116,18 @@ Login And Verify HTTP Response Header
     [Tags]  Login_And_Verify_HTTP_Response_Header
 
     # Example of HTTP redfish response header.
-    # Strict-Transport-Security: max-age=31536000; includeSubdomains; preload
+    # Strict-Transport-Security: max-age=31536000; includeSubdomains
     # X-Frame-Options: DENY
     # Pragma: no-cache
-    # Cache-Control: no-Store,no-Cache
-    # Content-Security-Policy: default-src 'self'; img-src 'self' data:
-    # X-XSS-Protection: 1; mode=block
+    # Cache-Control: no-store, max-age=0
     # X-Content-Type-Options: nosniff
+    # Referrer-Policy: no-referrer
+    # X-Permitted-Cross-Domain-Policies: none
+    # Cross-Origin-Embedder-Policy: require-corp
+    # Cross-Origin-Opener-Policy: same-origin
+    # Cross-Origin-Resource-Policy: same-origin
+    # Content-Security-Policy: default-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self' wss:; form-action 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'none'
+
 
     Rprint Vars  header_requirements  fmt=1
 
@@ -127,18 +136,20 @@ Login And Verify HTTP Response Header
 
     # The getheaders() method returns the headers as a list of tuples:
     # headers:
-    #    [Strict-Transport-Security]:        max-age=31536000; includeSubdomains; preload
-    #    [X-Frame-Options]:                  DENY
-    #    [Pragma]:                           no-cache
-    #    [Cache-Control]:                    no-Store,no-Cache
-    #    [Content-Security-Policy]:          default-src 'self'; img-src 'self' data:
-    #    [X-XSS-Protection]:                 1; mode=block
-    #    [X-Content-Type-Options]:           nosniff
-    #    [X-UA-Compatible]:                  IE=11
-    #    [Content-Type]:                     application/json
-    #    [Server]:                           iBMC
-    #    [Date]:                             Tue, 16 Apr 2019 17:49:46 GMT
-    #    [Content-Length]:                   2177
+
+    # [Strict-Transport-Security]:             max-age=31536000; includeSubdomains
+    # [X-Frame-Options]:                       DENY
+    # [Pragma]:                                no-cache
+    # [Cache-Control]:                         no-store, max-age=0
+    # [X-Content-Type-Options]:                nosniff
+    # [Referrer-Policy]:                       no-referrer
+    # [X-Permitted-Cross-Domain-Policies]:     none
+    # [Cross-Origin-Embedder-Policy]:          require-corp
+    # [Cross-Origin-Opener-Policy]:            same-origin
+    # [Cross-Origin-Resource-Policy]:          same-origin
+    # [Content-Security-Policy]:               default-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self' wss:; form-action 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'none'
+    # [Content-Type]:                          application/json
+    # [Content-Length]:                        394
 
     ${headers}=  Key Value List To Dict  ${resp.getheaders()}
     Rprint Vars  headers  fmt=1
