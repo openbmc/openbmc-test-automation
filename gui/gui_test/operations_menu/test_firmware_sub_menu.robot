@@ -65,6 +65,19 @@ Verify Existence Of All Buttons In Firmware Page At Host Power On
     Element Should Be Disabled  ${xpath_start_update_button}
 
 
+Verify Existence Of All Sub Sections Under BMC And Server Section At Poweron State
+    [Documentation]  Verify existence of all sub sections under BMC and server section at poweron state.
+    [Tags]  Verify_Existence_Of_All_Sub_Sections_Under_BMC_And_Server_Section_At_Poweron_State
+
+    Redfish Power On  stack_mode=skip  quiet=1
+
+    Page Should Contain  Running image
+    Page Should Contain  Backup image
+    Page Should Contain  Temporary
+    Page Should Contain  Permanent
+    Element Should Be Disabled  ${xpath_switch_to_running}
+
+
 *** Keywords ***
 
 Suite Setup Execution
