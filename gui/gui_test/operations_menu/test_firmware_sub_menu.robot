@@ -55,6 +55,19 @@ Verify Existence Of All Sub Sections Under BMC And Server Section At Poweroff St
     Element Should Be Visible  ${xpath_switch_to_running}
 
 
+Verify Existence Of All Sub Sections Under BMC And Server Section At Power On State
+    [Documentation]  Verify existence of all sub sections under BMC and server section at power on state.
+    [Tags]  Verify_Existence_Of_All_Sub_Sections_Under_BMC_And_Server_Section_At_Power_On_State
+
+    Redfish Power On  stack_mode=skip  quiet=1
+
+    Page Should Contain  Running image
+    Page Should Contain  Backup image
+    Page Should Contain  Temporary
+    Page Should Contain  Permanent
+    Element Should Be Disabled  ${xpath_switch_to_running}
+
+
 Verify Existence Of All Buttons In Firmware Page At Host Power On
     [Documentation]  Verify existence of all buttons in firmware page at host power on.
     [Tags]  Verify_Existence_Of_All_Buttons_In_Firmware_Page_At_Host_Power_On
