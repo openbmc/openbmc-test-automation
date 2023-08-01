@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa2610cc_03d23ad4",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-08-01T10:30:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c0524c2_72f04beb",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 136
+      },
+      "revId": "f69f9baf1a0f42b06d4470ec1743763379affd25",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55808527_d000cfb6",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3da46a4a_eab5a14a",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-08-01T10:30:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55808527_d000cfb6",
+      "range": {
+        "startLine": 61,
+        "startChar": 43,
+        "endLine": 61,
+        "endChar": 82
+      },
+      "revId": "f69f9baf1a0f42b06d4470ec1743763379affd25",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57d587a8_cd32ae65",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-07-28T05:45:17Z",
       "side": 1,
       "message": "This and above test seems to be same. So please verify if the report which get created is really periodic or not",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 41
+      },
+      "revId": "f69f9baf1a0f42b06d4470ec1743763379affd25",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26617b3b_ebc85ce0",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-08-01T10:30:39Z",
+      "side": 1,
+      "message": "Both are different. \u0027MetricReportDefinitionType\u0027 of this test code is \u0027Periodic\u0027 while for the other it is OnRequest. We apply usual validation with last two statements.",
+      "parentUuid": "57d587a8_cd32ae65",
       "range": {
         "startLine": 61,
         "startChar": 0,
