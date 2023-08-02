@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "637b78cb_589c4031",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2023-08-02T09:03:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d7e2882_15d6f237",
+      "range": {
+        "startLine": 10,
+        "startChar": 5,
+        "endLine": 10,
+        "endChar": 43
+      },
+      "revId": "b96a93153317450dbac69c14262ef413ce4ff6ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f5ebba9_0a92b910",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-02T08:48:56Z",
       "side": 1,
       "message": "Move this test case to line 58 so that this and Verify_Existence_Of_All_Sub_Sections_Under_BMC_And_Server_Section_At_Poweroff_State test are one after the other.",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 58
+      },
+      "revId": "b96a93153317450dbac69c14262ef413ce4ff6ad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee4b6112_cc6736b0",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2023-08-02T09:03:55Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "4f5ebba9_0a92b910",
       "range": {
         "startLine": 68,
         "startChar": 0,
