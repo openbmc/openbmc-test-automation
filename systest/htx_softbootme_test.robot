@@ -90,8 +90,10 @@ Run HTX Soft Bootme Exerciser
             Wait Until Keyword Succeeds
             ...   1 min   30 sec   Verify Ping SSH And Redfish Authentication
 
-            OS Execute Command  uptime
-            Check HTX Run Status
+            Wait Until Keyword Succeeds
+            ...   3x  60 sec  OS Execute Command  uptime
+            Wait Until Keyword Succeeds
+            ...   1 min   30 sec   Check HTX Run Status
 
             Set Suite Variable  ${iteration}  ${iteration + 1}
             ${loop_count}=  Catenate  Completed reboot number: ${iteration}
@@ -108,7 +110,7 @@ Run HTX Soft Bootme Exerciser
     END
 
     Wait Until Keyword Succeeds
-    ...   15 min   30 sec   Verify Ping and REST Authentication
+    ...   15 min   30 sec   Verify Ping SSH And Redfish Authentication
 
     Shutdown Bootme
 
