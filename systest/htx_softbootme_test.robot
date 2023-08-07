@@ -150,8 +150,8 @@ Test Setup Execution
     # Shutdown if HTX is running.
     ${status}=  Is HTX Running
     Run Keyword If  '${status}' == 'True'
-    ...  Shutdown HTX Exerciser
-
+    ...  Wait Until Keyword Succeeds
+    ...     2 min  60 sec   Shutdown HTX Exerciser
 
 Test Teardown Execution
     [Documentation]  Do the post-test teardown.
@@ -159,7 +159,8 @@ Test Teardown Execution
     # Keep HTX running if user set HTX_KEEP_RUNNING to 1.
     Run Keyword If
     ...  '${TEST_STATUS}' == 'FAIL' and ${HTX_KEEP_RUNNING} == ${0}
-    ...  Shutdown HTX Exerciser
+    ...  Wait Until Keyword Succeeds
+    ...     2 min  60 sec   Shutdown HTX Exerciser 
 
     ${keyword_buf}=  Catenate  Stop SOL Console Logging
     ...  \ targ_file_path=${EXECDIR}${/}logs${/}SOL.log
