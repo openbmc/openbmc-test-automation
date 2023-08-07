@@ -112,10 +112,13 @@ Run HTX Soft Bootme Exerciser
     Wait Until Keyword Succeeds
     ...   15 min   30 sec   Verify Ping SSH And Redfish Authentication
 
-    Shutdown Bootme
+    Wait Until Keyword Succeeds
+    ...   2 min  60 sec   Shutdown Bootme
 
     # If user needs to keep the HTX running to debug on failure or post processing.
-    Run Keyword If  ${HTX_KEEP_RUNNING} == ${0}  Shutdown HTX Exerciser
+    Run Keyword If  ${HTX_KEEP_RUNNING} == ${0}
+    ...  Wait Until Keyword Succeeds
+    ...     2 min  60 sec   Shutdown HTX Exerciser
 
 
 Test Setup Execution
