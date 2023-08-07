@@ -16,6 +16,23 @@
       "message": "Will have to wait for https://gerrit.openbmc.org/c/openbmc/phosphor-certificate-manager/+/65458",
       "revId": "f75ee2ebb821ac0d4c25429fbfbcc061f252db4e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e387fbb_f6cecded",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001329
+      },
+      "writtenOn": "2023-08-07T12:37:18Z",
+      "side": 1,
+      "message": "The patchset in phosphor-certificate-manager is now ready to submit. I\u0027m kindly asking to review these changes, so I could merge everything simultaneously.",
+      "revId": "f75ee2ebb821ac0d4c25429fbfbcc061f252db4e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
