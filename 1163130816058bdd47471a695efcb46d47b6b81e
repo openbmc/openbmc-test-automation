@@ -16,6 +16,24 @@
       "message": "seems tags and test title is bit changed\n\nVerify_Basic_Periodic_Telemetry_Report_Creation",
       "revId": "1163130816058bdd47471a695efcb46d47b6b81e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5720d944_d6a161d5",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-08-08T09:58:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57f3022e_b421f227",
+      "revId": "1163130816058bdd47471a695efcb46d47b6b81e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
