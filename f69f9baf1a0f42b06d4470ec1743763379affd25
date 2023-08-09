@@ -140,6 +140,30 @@
       },
       "revId": "f69f9baf1a0f42b06d4470ec1743763379affd25",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd587a5a_6e9b5e54",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-08-09T06:58:48Z",
+      "side": 1,
+      "message": "Ideally we should ensure that the telemetry data from the report is periodic. If we are unable to do so due to complexity, we should at least verify that the report type is periodic in the created report.",
+      "parentUuid": "26617b3b_ebc85ce0",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 41
+      },
+      "revId": "f69f9baf1a0f42b06d4470ec1743763379affd25",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
