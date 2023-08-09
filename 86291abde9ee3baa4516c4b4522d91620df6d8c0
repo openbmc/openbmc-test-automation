@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a5287617_8b94dc1f",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-08-09T08:14:45Z",
+      "side": 1,
+      "message": "As the other approved testcase, I would keep this Basic. Lots of different things can be verified in the reports. However, we just check if report is created or not.So, keeping basic. I shall add other testcases removing the word basic where I shall add other tests/checks.",
+      "parentUuid": "93a5ef58_13936965",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 47
+      },
+      "revId": "86291abde9ee3baa4516c4b4522d91620df6d8c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2cf4ab3_234e88a8",
         "filename": "redfish/telemetry_service/test_telemetry_report.robot",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-09T06:58:48Z",
       "side": 1,
       "message": "Remove white spaces",
+      "range": {
+        "startLine": 42,
+        "startChar": 59,
+        "endLine": 42,
+        "endChar": 60
+      },
+      "revId": "86291abde9ee3baa4516c4b4522d91620df6d8c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61eadbbd_62b7b12e",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-08-09T08:14:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2cf4ab3_234e88a8",
       "range": {
         "startLine": 42,
         "startChar": 59,

@@ -164,6 +164,30 @@
       },
       "revId": "f69f9baf1a0f42b06d4470ec1743763379affd25",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05806244_2ce5f637",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-08-09T08:14:45Z",
+      "side": 1,
+      "message": "This is done like earlier approved code where request type was \u0027OnRequest\u0027. Here we place \u0027Periodic\u0027. If we put other values like \u0027ePeriodic\u0027 etc. it throws error.\n\nBut already spent some time regarding parsing out \u0027Periodic\u0027 from definition response - ${resp}\u003d  redfish.Get  /redfish/v1/TelemetryService/MetricReportDefinitions/Test_basic_periodic_report_ambient_temp\n\nusing - ${resp[\"MetricReportDefinitionType\"]} gives TypeError: \u0027RestResponse\u0027 object is not subscriptable.\n\nwhile \u0027${json}\u003d    evaluate    json.loads(\u0027\u0027\u0027${resp}\u0027\u0027\u0027)    json\u0027 gives JSONDecodeError: Extra data: line 2 column 1 (char 4). I explored in tech channel.\n\nAs I put reasons in the beginning, it should be fine. However, if you have quick solution without going to much complexity, it is OK for me. I shall incorporate.",
+      "parentUuid": "cd587a5a_6e9b5e54",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 41
+      },
+      "revId": "f69f9baf1a0f42b06d4470ec1743763379affd25",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
