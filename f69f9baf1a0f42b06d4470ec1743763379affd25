@@ -188,6 +188,30 @@
       },
       "revId": "f69f9baf1a0f42b06d4470ec1743763379affd25",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96753232_6dea3efe",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-08-10T04:37:14Z",
+      "side": 1,
+      "message": "Please work with Nirmal/Nandish/Ramya. If they are unable to help you, please let me know.\n\nI try to test this from my end, I see that here we should be checking if periodic is set in the report using below Redfish API. Add this at the end of the test case and we should be all good.\n\n/redfish/v1/TelemetryService/MetricReportDefinitions/${report_name}\n\n  \"MetricReportDefinitionType\": \"Periodic\",",
+      "parentUuid": "05806244_2ce5f637",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 41
+      },
+      "revId": "f69f9baf1a0f42b06d4470ec1743763379affd25",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
