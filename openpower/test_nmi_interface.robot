@@ -59,7 +59,7 @@ Test Setup Execution
     Redfish Power On
     # Delete any pre-existing dump files.
     OS Execute Command  rm -rf /var/crash/*
-    ${os_release_info}=  Get OS Release Info
+    ${os_release_info}=  utils.Get OS Release Info
     # Start crash dump utility on OS.
     ${cmd}=  Set Variable If
     ...  '${os_release_info['id']}' == 'ubuntu'  kdump-config show  kdumpctl start

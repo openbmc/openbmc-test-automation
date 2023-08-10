@@ -55,7 +55,7 @@ Verify Service User SSH Login Without ACF file
 Verify Service Login Failure With Expired ACF
     [Documentation]  Verify service user login failure with expired ACF.
     [Tags]  Verify_Service_Login_Failure_With_Expired_ACF
-    [Setup]  Valid Value EXPIRED_SERVICE_FILE_PATH
+    [Setup]  Valid Value  EXPIRED_SERVICE_FILE_PATH
 
     Remove Existing ACF
     Open Connection for SCP
@@ -78,7 +78,7 @@ Verify Service Login Failure With Incorrect Password
 Verify SSH Login Access With Service User
     [Documentation]  Verify SSH login access with service user.
     [Tags]  Verify_SSH_Login_Access_With_Service_User
-    [Setup]  Remove Existing ACF  AND  Upload Valid ACF
+    [Setup]  Run keywords  Remove Existing ACF  AND  Upload Valid ACF
 
     # Attempt SSH login with service user.
     SSHLibrary.Open Connection  ${OPENBMC_HOST}
@@ -89,7 +89,7 @@ Verify SSH Login Access With Service User
 Verify SSH Login Failure With Incorrect Service User Password
     [Documentation]  Verify SSH login failure with incorrect service user password.
     [Tags]  Verify_SSH_Login_Failure_With_Incorrect_Service_User_Password
-    [Setup]  Remove Existing ACF  AND  Upload Valid ACF
+    [Setup]  Run keywords  Remove Existing ACF  AND  Upload Valid ACF
 
     # Attempt SSH login with service user.
     SSHLibrary.Open Connection  ${OPENBMC_HOST}
