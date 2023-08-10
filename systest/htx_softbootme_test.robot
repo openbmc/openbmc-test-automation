@@ -33,7 +33,7 @@ Soft Bootme Test
     [Tags]  Soft_Bootme_Test
 
     Printn
-    Rprint Vars  HTX_DURATION  HTX_LOOP
+    Rprint Vars   BOOTME_PERIOD   HTX_LOOP
 
     # Set up the (soft) bootme iteration (loop) counter.
     Set Suite Variable  ${iteration}  ${0}  children=true
@@ -54,8 +54,13 @@ Run HTX Soft Bootme Exerciser
     # - Soft bootme (OS Reboot).
     # - Check HTX status for errors.
 
-    ${runtime}=   Convert Time  ${HTX_DURATION}
+    ${var_boot}=   Set Variable If
+    ...  ${BOOTME_PERIOD} == 1  20m
+    ...  ${BOOTME_PERIOD} == 2  30m
+    ...  ${BOOTME_PERIOD} == 3  1h
 
+    ${runtime}=  Convert Time  ${var_boot}
+ 
     ${startTime} =    Get Current Date
     Run Keyword If  '${HTX_MDT_PROFILE}' == 'mdt.bu'
     ...  Create Default MDT Profile
