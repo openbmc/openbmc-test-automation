@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b85b8a66_c852afca",
+        "filename": "systest/htx_softbootme_test.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-08-11T06:30:31Z",
+      "side": 1,
+      "message": "oops...blank space",
+      "revId": "461b9788faf86b8b42654a09d94731ab673e1981",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
