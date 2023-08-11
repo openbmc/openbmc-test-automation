@@ -39,6 +39,30 @@
       },
       "revId": "602b0b7024080b6421d6a58426f79b72aff48c31",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae918893_06783c3d",
+        "filename": "systest/htx_softbootme_test.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2023-08-11T06:04:19Z",
+      "side": 1,
+      "message": "Changed as mentioned.",
+      "parentUuid": "1c5d0bd9_f791968b",
+      "range": {
+        "startLine": 58,
+        "startChar": 5,
+        "endLine": 61,
+        "endChar": 0
+      },
+      "revId": "602b0b7024080b6421d6a58426f79b72aff48c31",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
