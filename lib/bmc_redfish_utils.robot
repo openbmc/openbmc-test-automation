@@ -134,22 +134,21 @@ Delete All Redfish Sessions
 
 
 Get Session With Client Id
-    [Documentation]  Iterate through the active sessions and return sessions populated with client id.
+    [Documentation]  Iterate through the active sessions and return sessions
+    ...              populated with client id.
     [Arguments]  ${session_list}
 
     # Description of argument(s):
     # session_list   Active session list from SessionService.
 
-    #  "Oem": {
-    #    "OpenBMC": {
-    #        "@odata.type": "#OemSession.v1_0_0.Session",
-    #        "ClientID": "MYID=Vd57f62*2811504"
-    #    }
+    # "@odata.type": "#Session.v1_5_0.Session",
+    # "ClientOriginIPAddress": "xx.xx.xx.xx",
+    # "Context": "MYID-01"
 
     ${client_id_sessions}=  Create List
     FOR  ${session}  IN  @{session_list}
         ${resp}=  Redfish.Get  ${session}   valid_status_codes=[200,404]
-        Run Keyword If  '${resp.dict["Oem"]["OpenBMC"]["ClientID"]}' != '${EMPTY}'
+        Run Keyword If  '${resp.dict["Context"]}' != '${EMPTY}'
         ...    Append To List  ${client_id_sessions}  ${session}
     END
 
