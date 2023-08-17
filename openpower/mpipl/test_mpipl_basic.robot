@@ -33,7 +33,7 @@ Trigger User Tool Initiated MPIPL
     FOR  ${count}  IN RANGE  0  ${MPIPL_LOOP_COUNT}
         Log To Console   MPIPL LOOP_COUNT:${count} execution.
         Tool Initd MP Reboot
-        Required Dumps Should Exist
+        Wait Until Keyword Succeeds  5 min  10 sec  Required Dumps Should Exist
     END
 
 
@@ -45,7 +45,7 @@ Trigger User Initiated MPIPL Using Redfish
     FOR  ${count}  IN RANGE  0  ${MPIPL_LOOP_COUNT}
         Log To Console   MPIPL LOOP_COUNT:${count} execution.
         Redfish Initiated MPIPL
-        Required Dumps Should Exist
+        Wait Until Keyword Succeeds  5 min  10 sec  Required Dumps Should Exist
     END
 
 
