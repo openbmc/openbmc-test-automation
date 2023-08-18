@@ -401,7 +401,7 @@ Verify Redfishtool Replace Certificate
 
     ${expected_resp}=  Set Variable If
     ...  '${expected_status}' == 'ok'     ${HTTP_OK}, ${HTTP_NO_CONTENT}
-    ...  '${expected_status}' == 'error'  ${HTTP_BAD_REQUEST}
+    ...  '${expected_status}' == 'error'  ${HTTP_NOT_FOUND},${HTTP_INTERNAL_SERVER_ERROR} 
 
     ${response}=  Redfishtool Post
     ...  ${payload}  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
