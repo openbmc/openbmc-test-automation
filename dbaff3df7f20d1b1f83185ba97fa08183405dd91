@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6821e4f2_ec4c1c1d",
+        "filename": "lib/common_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-08-21T13:21:56Z",
+      "side": 1,
+      "message": "Pls use the existing keyword \u0027Wait For Host To Ping\u0027 to accept an additional arg to verify the RC instead of adding a new keyword.",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 33
+      },
+      "revId": "dbaff3df7f20d1b1f83185ba97fa08183405dd91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80dc149e_7927f4a1",
+        "filename": "lib/common_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-08-21T13:21:56Z",
+      "side": 1,
+      "message": "expected_rc",
+      "range": {
+        "startLine": 156,
+        "startChar": 31,
+        "endLine": 156,
+        "endChar": 39
+      },
+      "revId": "dbaff3df7f20d1b1f83185ba97fa08183405dd91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
