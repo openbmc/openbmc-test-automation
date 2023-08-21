@@ -120,31 +120,33 @@ Verify BMC System Model
 Wait For Host To Ping
     [Documentation]  Wait for the given host to ping.
     [Arguments]  ${host}  ${timeout}=${OPENBMC_REBOOT_TIMEOUT}min
-    ...          ${interval}=5 sec
+    ...          ${interval}=5 sec  ${expected_rc}=${0}
 
     # Description of argument(s):
-    # host      The host name or IP of the host to ping.
-    # timeout   The amount of time after which ping attempts cease.
-    #           This should be expressed in Robot Framework's time format
-    #           (e.g. "10 seconds").
-    # interval  The amount of time in between attempts to ping.
-    #           This should be expressed in Robot Framework's time format
-    #           (e.g. "5 seconds").
+    # host           The host name or IP of the host to ping.
+    # timeout        The amount of time after which ping attempts cease.
+    #                This should be expressed in Robot Framework's time format
+    #                (e.g. "10 seconds").
+    # interval       The amount of time in between attempts to ping.
+    #                This should be expressed in Robot Framework's time format
+    #                (e.g. "5 seconds").
+    # expected_rc    Expected return code of ping command.
 
-    Wait Until Keyword Succeeds  ${timeout}  ${interval}  Ping Host  ${host}
+    Wait Until Keyword Succeeds  ${timeout}  ${interval}  Ping Host  ${host}  ${expected_rc}
 
 
 Ping Host
     [Documentation]  Ping the given host.
-    [Arguments]     ${host}
+    [Arguments]     ${host}  ${expected_rc}=${0}
 
     # Description of argument(s):
-    # host      The host name or IP of the host to ping.
+    # host           The host name or IP of the host to ping.
+    # expected_rc    Expected return code of ping command.
 
     Should Not Be Empty    ${host}   msg=No host provided
-    ${RC}   ${output}=     Run and return RC and Output    ping -c 4 ${host}
-    Log     RC: ${RC}\nOutput:\n${output}
-    Should be equal     ${RC}   ${0}
+    ${rc}   ${output}=     Run and return RC and Output    ping -c 4 ${host}
+    Log     RC: ${rc}\nOutput:\n${output}
+    Should be equal     ${rc}   ${expected_rc}
 
 
 Check OS
