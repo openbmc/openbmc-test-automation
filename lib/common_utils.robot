@@ -117,6 +117,23 @@ Verify BMC System Model
     [Return]  ${ret}
 
 
+Wait For BMC Network Ping To Fail
+    [Documentation]  BMC to fail to ping.
+    [Arguments]  ${host}  ${timeout}=${OPENBMC_REBOOT_TIMEOUT}min
+    ...          ${interval}=5 sec
+
+    # Description of argument(s):
+    # host      The BMC name or IP of the BMC to ping.
+    # timeout   The amount of time after which ping attempts cease.
+    #           This should be expressed in Robot Framework's time format
+    #           (e.g. "10 seconds").
+    # interval  The amount of time in between attempts to ping.
+    #           This should be expressed in Robot Framework's time format
+    #           (e.g. "5 seconds").
+
+    Wait Until Keyword Succeeds  ${timeout}  ${interval}  Ping Host  ${host}  ${1}
+
+
 Wait For Host To Ping
     [Documentation]  Wait for the given host to ping.
     [Arguments]  ${host}  ${timeout}=${OPENBMC_REBOOT_TIMEOUT}min
@@ -136,15 +153,17 @@ Wait For Host To Ping
 
 Ping Host
     [Documentation]  Ping the given host.
-    [Arguments]     ${host}
+    [Arguments]     ${host}  ${match_rc}=${0}
 
     # Description of argument(s):
-    # host      The host name or IP of the host to ping.
+    # host        The host name or IP of the host to ping.
+    # match_rc    Return code of ping command. Default value is set as 0.
+    #             E.g. if 0 then success and if 1 then fail.
 
     Should Not Be Empty    ${host}   msg=No host provided
     ${RC}   ${output}=     Run and return RC and Output    ping -c 4 ${host}
     Log     RC: ${RC}\nOutput:\n${output}
-    Should be equal     ${RC}   ${0}
+    Should be equal     ${RC}   ${match_rc}
 
 
 Check OS
