@@ -30,7 +30,7 @@ Verify Error Response For Already Deleted Dump Id
 
     Redfish Power Off  stack_mode=skip
     ${dump_id}=  Create User Initiated BMC Dump Via Redfish
-    Redfish Delete BMC Dump  ${dump_id}
+    Wait Until Keyword Succeeds  15 sec  5 sec  Redfish Delete BMC Dump  ${dump_id}
     Run Keyword And Expect Error  ValueError: *  Redfish Delete BMC Dump  ${dump_id}
 
 
@@ -186,7 +186,7 @@ Delete User Initiated BMC Dump And Verify
 
     Redfish Power Off  stack_mode=skip
     ${dump_id}=  Create User Initiated BMC Dump Via Redfish
-    Redfish Delete BMC Dump  ${dump_id}
+    Wait Until Keyword Succeeds  15 sec  5 sec  Redfish Delete BMC Dump  ${dump_id}
 
     ${dump_entries}=  Get BMC Dump Entries
     Should Be Empty  ${dump_entries}
@@ -230,7 +230,7 @@ Create Two User Initiated BMC Dumps And Delete One
     ${dump_id1}=  Create User Initiated BMC Dump Via Redfish
     ${dump_id2}=  Create User Initiated BMC Dump Via Redfish
 
-    Redfish Delete BMC Dump  ${dump_id1}
+    Wait Until Keyword Succeeds  15 sec  5 sec  Redfish Delete BMC Dump  ${dump_id1}
 
     ${dump_entries}=  Get BMC Dump Entries
     Length Should Be  ${dump_entries}  1
@@ -244,7 +244,7 @@ Create And Delete User Initiated BMC Dump Multiple Times
     Redfish Power Off  stack_mode=skip
     FOR  ${INDEX}  IN  1  10
       ${dump_id}=  Create User Initiated BMC Dump Via Redfish
-      Redfish Delete BMC Dump  ${dump_id}
+      Wait Until Keyword Succeeds  15 sec  5 sec  Redfish Delete BMC Dump  ${dump_id}
     END
 
 
