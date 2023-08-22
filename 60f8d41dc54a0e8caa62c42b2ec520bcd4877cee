@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f5dd0d6_b61b7d44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-08-22T16:35:11Z",
+      "side": 1,
+      "message": "Address the review comments.",
+      "revId": "60f8d41dc54a0e8caa62c42b2ec520bcd4877cee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ae350dc_b62b5ee9",
@@ -31,6 +48,30 @@
       "writtenOn": "2023-08-22T14:51:20Z",
       "side": 1,
       "message": "Expected return code of ping command.\n\nThe additional example is little bit confusing. if the expected RC is 1 then the keyword doesn\u0027t fail even if the ping is failing. So please reword like given above and remove the eg.",
+      "range": {
+        "startLine": 133,
+        "startChar": 21,
+        "endLine": 134,
+        "endChar": 63
+      },
+      "revId": "60f8d41dc54a0e8caa62c42b2ec520bcd4877cee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b5bde14_d346df27",
+        "filename": "lib/common_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-08-22T16:35:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ae350dc_b62b5ee9",
       "range": {
         "startLine": 133,
         "startChar": 21,
@@ -64,6 +105,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77870daf_ad5c782a",
+        "filename": "lib/common_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-08-22T16:35:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a508ac7b_03c5afdf",
+      "range": {
+        "startLine": 145,
+        "startChar": 4,
+        "endLine": 147,
+        "endChar": 0
+      },
+      "revId": "60f8d41dc54a0e8caa62c42b2ec520bcd4877cee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e46b0e16_48738bf3",
@@ -77,6 +142,24 @@
       "writtenOn": "2023-08-22T12:38:26Z",
       "side": 1,
       "message": "change match_rc as expected_rc\n\ncan u please change with ${RC} as ${rc} ?",
+      "revId": "60f8d41dc54a0e8caa62c42b2ec520bcd4877cee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2132d80_210852c5",
+        "filename": "lib/common_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-08-22T16:35:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e46b0e16_48738bf3",
       "revId": "60f8d41dc54a0e8caa62c42b2ec520bcd4877cee",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
