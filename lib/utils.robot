@@ -1004,6 +1004,17 @@ Match State
     Dictionaries Should Be Equal  ${match_state}  ${current_state}
 
 
+Wait For Host Boot Progress To Reach Required State
+    [Documentation]  Wait till host boot progress reaches required state.
+    [Arguments]      ${expected_boot_state}
+
+    # Description of argument(s):
+    # expected_boot_state    Expected boot state. E.g. OSRunning, SystemInitComplete etc.
+
+    Wait Until Keyword Succeeds  ${power_on_timeout}  20 sec
+    ...  Is Boot Progress At Required State  ${expected_boot_state}
+
+
 Redfish Initiate Auto Reboot
     [Documentation]  Initiate an auto reboot.
     [Arguments]  ${interval}=2000
