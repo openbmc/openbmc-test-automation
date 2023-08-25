@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86fb8a63_cd1b7c44",
+        "filename": "lib/utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-08-25T06:31:44Z",
+      "side": 1,
+      "message": "Re-arrange the input args\n\n${expected_boot_state}    ${wait_timeout}\u003d5 min\n\nbecause ${expected_boot_state} is must to give input option were as ${wait_timeout} can be optional.",
+      "revId": "84d2f5d6fde803b02d3fd1c47e7f699f84ab0a62",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46cbbcdc_bba1d047",
+        "filename": "lib/utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-08-25T06:31:44Z",
+      "side": 1,
+      "message": "mention the E.g.",
+      "range": {
+        "startLine": 1013,
+        "startChar": 30,
+        "endLine": 1013,
+        "endChar": 39
+      },
+      "revId": "84d2f5d6fde803b02d3fd1c47e7f699f84ab0a62",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
