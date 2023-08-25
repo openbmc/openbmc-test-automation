@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "497306f0_77aa1545",
+        "filename": "lib/utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 1001681
+      },
+      "writtenOn": "2023-08-25T10:50:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44f23fbf_2c5363ca",
+      "revId": "a20b49959b8b769b2c1e08af2a58ab152c509792",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25c63ff9_410fd26a",
@@ -41,6 +59,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5851cd23_2a3accdd",
+        "filename": "lib/utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 1001681
+      },
+      "writtenOn": "2023-08-25T10:50:04Z",
+      "side": 1,
+      "message": "okay",
+      "parentUuid": "25c63ff9_410fd26a",
+      "range": {
+        "startLine": 1009,
+        "startChar": 4,
+        "endLine": 1009,
+        "endChar": 75
+      },
+      "revId": "a20b49959b8b769b2c1e08af2a58ab152c509792",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9173a61_7c26d219",
@@ -54,6 +96,24 @@
       "writtenOn": "2023-08-24T16:29:58Z",
       "side": 1,
       "message": "double space after wait_timeout\n\nIs this tested?",
+      "revId": "a20b49959b8b769b2c1e08af2a58ab152c509792",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b346cf24_5ea47e9c",
+        "filename": "lib/utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1015,
+      "author": {
+        "id": 1001681
+      },
+      "writtenOn": "2023-08-25T10:50:04Z",
+      "side": 1,
+      "message": "Yes tested.",
+      "parentUuid": "e9173a61_7c26d219",
       "revId": "a20b49959b8b769b2c1e08af2a58ab152c509792",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
