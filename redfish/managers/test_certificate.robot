@@ -18,7 +18,7 @@ Test Teardown    Test Teardown Execution
 
 ${invalid_value}  abc
 ${ROOT_CA_FILE_PATH}  /etc/ssl/certs/authority/*
-${keybit_length}  2048
+${keybit_length}  ${2048}
 
 ** Test Cases **
 
