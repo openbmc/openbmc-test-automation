@@ -1006,7 +1006,7 @@ Match State
 
 Wait For Host Boot Progress To Reach Required State
     [Documentation]  Wait till host boot progress reaches required state.
-    [Arguments]      ${expected_boot_state}
+    [Arguments]      ${expected_boot_state}=OSRunning
 
     # Description of argument(s):
     # expected_boot_state    Expected boot state. E.g. OSRunning, SystemInitComplete etc.
