@@ -908,6 +908,18 @@ Redfish Get BMC State
     [Return]  ${status["State"]}
 
 
+Redfish Verify BMC State
+    [Documentation]  Verify BMC state is enabled.
+    [Arguments]  ${match_state}=Enabled
+
+    # Description of argument(s):
+    # match_state    Expected match state (e.g. Enabled, Starting, Error)
+
+    ${Status}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  Status
+
+    Should Be Equal As Strings  ${match_state}  ${Status['State']}
+
+
 Redfish Get Host State
     [Documentation]  Return host power and health state.
 
