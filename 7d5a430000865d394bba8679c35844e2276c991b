@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e96c7a3a_a8356e7f",
+        "filename": "redfish/dmtf_tools/test_redfishtool_certificate.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-08-28T06:33:30Z",
+      "side": 0,
+      "message": "We should keep single status code at least to verify if we got correct response from Redfish. Why we are removing both the valid status code?",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 58
+      },
+      "revId": "7d5a430000865d394bba8679c35844e2276c991b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
