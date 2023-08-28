@@ -227,6 +227,7 @@ REDFISH_BMC_DUMP = (
     "Managers/" + REDFISH_MANAGERS_ID + "/LogServices/Dump/Entries"
 )
 REDFISH_DUMP_URI = REDFISH_BASE_URI + REDFISH_BMC_DUMP
+REDFISH_SYSTEM_DUMP = REDFISH_BASE_URI + "/Systems/system/LogServices/Dump/Entries"
 
 # Boot options and URI variables.
 POWER_ON = "On"

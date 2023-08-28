@@ -156,7 +156,7 @@ Delete All Dumps
 
 
 Redfish Delete BMC Dump
-    [Documentation]  Deletes a given BMC dump via Redfish..
+    [Documentation]  Deletes a given BMC dump via Redfish.
     [Arguments]  ${dump_id}
 
     # Description of Argument(s):
@@ -173,6 +173,13 @@ Redfish Delete All BMC Dumps
     Return From Keyword If  ${resp.dict["Members@odata.count"]} == ${0}
 
     Redfish.Post  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Actions/LogService.ClearLog
+
+
+Get Redfish System Dump Log Entries
+     [Documentation]  Get the BMC dump log entries.
+     ${resp}=  Redfish.Get  ${REDFISH_SYSTEM_DUMP}
+
+     [Return]  ${resp.dict}
 
 
 Get Redfish BMC Dump Log Entries
