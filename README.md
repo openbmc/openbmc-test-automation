@@ -88,10 +88,10 @@ Installing tox:
     $ pip install -U tox
 ```
 
-Installing expect:
+Installing expect (Ubuntu example):
 
 ```
-    $ sudo apt-get install expect (Ubuntu example)
+    $ sudo apt-get install expect
 ```
 
 ## OpenBMC Test Development
@@ -245,11 +245,17 @@ packages which will help to invoke tests through tox (Note that tox version
   -v OPENBMC_PASSWORD:<openbmc password>
   ```
 
-- For QEMU tests, set the following environment variables as well:
+- Testing in qemu:
 
+  Set extra environment variables:
   ```
   $ export SSH_PORT=<ssh port number>
   $ export HTTPS_PORT=<https port number>
+  ```
+
+  Run the QEMU CI test suite (not all tests will pass in qemu):
+  ```
+  $ OPENBMC_HOST=x.x.x.x SSH_PORT=<port number> HTTPS_PORT=<port number> robot --argumentfile test_lists/QEMU_CI tests/
   ```
 
 - Run tests:
@@ -258,45 +264,49 @@ packages which will help to invoke tests through tox (Note that tox version
   $ tox tests
   ```
 
-- How to run individual test:
-
-  One specific test:
+- How to run an individual test:
 
   ```
   $ tox -e default -- --include Power_On_Test  tests/test_basic_poweron.robot
   ```
 
-  No preset environment variables, default configuration for all supported
+- No preset environment variables, default configuration for all supported
   systems:
 
   ```
   $ OPENBMC_HOST=x.x.x.x tox -e default -- tests
   ```
 
-  No preset environment variables, one test case from a test suite:
+- No preset environment variables, one test case from a test suite:
 
   ```
   $ OPENBMC_HOST=x.x.x.x tox -e default -- --include Power_On_Test tests/test_basic_poweron.robot
   ```
 
-  No preset environment variables, the entire test suite:
+- No preset environment variables, the entire test suite:
 
   ```
   $ OPENBMC_HOST=x.x.x.x tox -e default -- tests
   ```
 
-  No preset environment variables, the entire test suite excluding test cases
+- No preset environment variables, the entire test suite excluding test cases
   using argument file:
 
   ```
   $ OPENBMC_HOST=x.x.x.x tox -e default -- --argumentfile test_lists/skip_test tests
   ```
 
-  Exclude test list for supported systems:
+- Exclude test list for supported systems:
 
   ```
   Palmetto:  test_lists/skip_test_palmetto
   Witherspoon:  test_lists/skip_test_witherspoon
+  ```
+
+  Using the exclude lists (example for Witherspoon)
+
+  ```
+  $ robot -v OPENBMC_HOST:xx.xx.xx.xx --argumentfile test_lists/skip_test_witherspoon tests/
   ```
 
 - Run IPMI tests:
@@ -316,7 +326,7 @@ packages which will help to invoke tests through tox (Note that tox version
 - Run GUI tests:
 
   By default, GUI runs with Firefox browser and headless mode. Example with
-  chrome browser and header mode:
+  Chrome browser and header mode:
 
   ```
   $ robot -v OPENBMC_HOST:x.x.x.x -v GUI_BROWSER:gc -v GUI_MODE:header gui/test/
@@ -385,9 +395,14 @@ packages which will help to invoke tests through tox (Note that tox version
   $ export PLATFORM_ARCH_TYPE=x86
   ```
 
-**Jenkins jobs tox commands**
+**Jenkins Jobs tox Commands**
 
 - HW CI tox command:
   ```
   $ OPENBMC_HOST=x.x.x.x tox -e default -- --argumentfile test_lists/HW_CI tests
+  ```
+
+- QEMU CI tox command:
+  ```
+  $ OPENBMC_HOST=x.x.x.x SSH_PORT=<port number> HTTPS_PORT=<port number> tox -e default -- --argumentfile test_lists/QEMU_CI tests
   ```
