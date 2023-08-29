@@ -10,10 +10,17 @@ Resource           ../../lib/dmtf_tools_utils.robot
 ${DEFAULT_PYTHON}  python3
 ${rsv_dir_path}    Redfish-Interop-Validator
 ${rsv_github_url}  https://github.com/DMTF/Redfish-Interop-Validator.git
+# In future, when the profile is available at https://redfish.dmtf.org/profiles/
+# Default profile available at  data/openbmc_redfish_interop_profile.json
+${profile_path}    ${EXECDIR}/data/openbmc_redfish_interop_profile.json
 ${cmd_str_master}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}RedfishInteropValidator.py
-...                --ip https://${OPENBMC_HOST}:${HTTPS_PORT} --authtype=Session -u ${OPENBMC_USERNAME}
-...                -p ${OPENBMC_PASSWORD} --logdir ${EXECDIR}${/}logs${/} --debugging
-...                ${EXECDIR}/data/openbmc_redfish_interop_profile.json
+...                --ip https://${OPENBMC_HOST}:${HTTPS_PORT}
+...                --authtype=Session
+...                -u ${OPENBMC_USERNAME}
+...                -p ${OPENBMC_PASSWORD}
+...                --logdir ${EXECDIR}${/}logs${/}
+...                ${profile_path}
+...                --debugging
 ${branch_name}     main
 
 *** Test Case ***
