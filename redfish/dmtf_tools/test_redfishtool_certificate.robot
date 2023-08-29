@@ -22,7 +22,7 @@ Suite Setup       Suite Setup Execution
 ${root_cmd_args} =  SEPARATOR=
 ...  redfishtool raw -r ${OPENBMC_HOST}:${HTTPS_PORT} -u ${OPENBMC_USERNAME} -p ${OPENBMC_PASSWORD} -S Always
 ${invalid_value}  abc
-${keybit_length}  2048
+${keybit_length}  ${2048}
 
 *** Test Cases ***
 
