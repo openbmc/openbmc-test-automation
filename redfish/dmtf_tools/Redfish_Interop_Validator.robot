@@ -14,7 +14,7 @@ ${cmd_str_master}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}RedfishInteropValidator.
 ...                --ip https://${OPENBMC_HOST}:${HTTPS_PORT} --authtype=Session -u ${OPENBMC_USERNAME}
 ...                -p ${OPENBMC_PASSWORD} --logdir ${EXECDIR}${/}logs${/} --debugging
 ...                ${EXECDIR}/data/openbmc_redfish_interop_profile.json
-${branch_name}     master
+${branch_name}     main
 
 *** Test Case ***
 
