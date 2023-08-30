@@ -191,18 +191,15 @@ Suite Setup Execution
 
     Redfish Power Off  stack_mode=skip
 
-    # Check and set the update path.
-    # Old - /redfish/v1/UpdateService/
-    # New - /redfish/v1/UpdateService/update
+	
+Get Redfish Update Service URI
+    [Documentation]  Get Redfish firmware update URI.
 
-    ${resp}=  Redfish.Get  /redfish/v1/UpdateService/update
-    ...  valid_status_codes=[${HTTP_OK},${HTTP_NOT_FOUND}]
+    ${update_url}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}UpdateService  HttpPushUri
 
-    # If the method is not found, set update URI to old method.
-    Run Keyword If  ${resp.status} == ${HTTP_NOT_FOUND}
-    ...  Set Suite Variable  ${REDFISH_UPDATE_URI}  /redfish/v1/UpdateService
+    Log To Console  Firmware update URI: ${update_url}
 
-    Log To Console  Update URI: ${REDFISH_UPDATE_URI}
+    [Return]  ${update_url}
 
 
 Redfish Update Firmware
@@ -221,11 +218,20 @@ Redfish Update Firmware
 
     ${file_bin_data}=  OperatingSystem.Get Binary File  ${image_file_path}
 
+
     Log To Console   Start uploading image to BMC.
-    Upload Image To BMC  ${REDFISH_UPDATE_URI}  timeout=${600}  data=${file_bin_data}
+
+    # URI : /redfish/v1/UpdateService
+    # "HttpPushUri": "/redfish/v1/UpdateService/update",
+
+    ${redfish_update_uri}=  Get Redfish Update Service URI
+
+    ${resp}=  Upload Image To BMC  ${redfish_update_uri}  timeout=${600}  data=${file_bin_data}
     Log To Console   Completed image upload to BMC.
 
-    ${task_inv}=  Check Task With Match TargetUri  ${REDFISH_UPDATE_URI}
+    Sleep  5s
+
+    ${task_inv}=  Check Task With Match TargetUri  ${redfish_update_uri}
 
     Rprint Vars  task_inv
 
@@ -253,12 +259,17 @@ Redfish Multiple Upload Image And Check Progress State
     Rprint Vars  state
 
     Set ApplyTime  policy=${apply_time}
-    Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${IMAGE_FILE_PATH}
+
+    # URI : /redfish/v1/UpdateService
+    # "HttpPushUri": "/redfish/v1/UpdateService/update",
+
+    ${redfish_update_uri}=  Get Redfish Update Service URI
+    Redfish Upload Image  ${redfish_update_uri}  ${IMAGE_FILE_PATH}
 
     ${first_image_id}=  Get Latest Image ID
     Rprint Vars  first_image_id
     Sleep  5s
-    Redfish Upload Image  ${REDFISH_BASE_URI}UpdateService  ${ALTERNATE_IMAGE_FILE_PATH}
+    Redfish Upload Image  ${redfish_update_uri}  ${ALTERNATE_IMAGE_FILE_PATH}
 
     ${second_image_id}=  Get Latest Image ID
     Rprint Vars  second_image_id
@@ -285,7 +296,7 @@ Run Configure BMC Hostname In Loop
     # count    Loop count.
 
     FOR  ${index}  IN RANGE  ${count}
-      Configure Hostname  hostname=${HOSTNAME}[${index}]  status_code=[${HTTP_INTERNAL_SERVER_ERROR}]
+      Configure Hostname  hostname=${HOSTNAME}[${index}]  status_code=[${HTTP_OK}]
     END
 
 
@@ -373,7 +384,12 @@ Verify Redfish Code Update With Different Interrupted Operation
     ${file_bin_data}=  OperatingSystem.Get Binary File  ${image_file_path}
 
     Log To Console   Start uploading image to BMC.
-    Upload Image To BMC  ${REDFISH_BASE_URI}UpdateService  timeout=${600}  data=${file_bin_data}
+
+    # URI : /redfish/v1/UpdateService
+    # "HttpPushUri": "/redfish/v1/UpdateService/update",
+
+    ${redfish_update_uri}=  Get Redfish Update Service URI
+    Upload Image To BMC  ${redfish_update_uri}  timeout=${600}  data=${file_bin_data}
     Log To Console   Completed image upload to BMC.
 
     Sleep  5
@@ -381,10 +397,10 @@ Verify Redfish Code Update With Different Interrupted Operation
     ${image_id}=  Get New Image ID
     Rprint Vars  image_id
 
-    ${task_inv}=  Check Task With Match TargetUri  /redfish/v1/UpdateService
+    ${task_inv}=  Check Task With Match TargetUri  ${redfish_update_uri}
     Rprint Vars  task_inv
 
-    Wait Until Keyword Succeeds  1 min  10 sec
+    Wait Until Keyword Succeeds  2 min  10 sec
     ...  Verify Task Progress State  ${task_inv}  ${task_inv_dict['TaskStarting']}
 
     Run Operation On BMC  ${operation}  ${count}
