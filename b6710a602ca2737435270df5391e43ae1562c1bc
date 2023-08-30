@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b8b9e63_36e7cc3c",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-08-30T13:21:52Z",
+      "side": 1,
+      "message": "Redfish Get All System Dumps",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 35
+      },
+      "revId": "b6710a602ca2737435270df5391e43ae1562c1bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43f8b2c8_9ef003cb",
+        "filename": "lib/utils.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-08-30T13:21:52Z",
+      "side": 1,
+      "message": "Redfish Verify BMC State",
+      "range": {
+        "startLine": 911,
+        "startChar": 0,
+        "endLine": 911,
+        "endChar": 24
+      },
+      "revId": "b6710a602ca2737435270df5391e43ae1562c1bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
