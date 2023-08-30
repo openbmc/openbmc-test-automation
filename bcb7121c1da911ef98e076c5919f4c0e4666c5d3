@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7982db20_90e77b46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-08-30T17:00:09Z",
+      "side": 1,
+      "message": "Tentatively giving +1, awaiting CLA approval, will merge once your name is in CLA\u0027s approved list.\n\nFor reference:  https://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#starting-out",
+      "revId": "bcb7121c1da911ef98e076c5919f4c0e4666c5d3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
