@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7384646_68a94c0c",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-08-30T13:24:29Z",
+      "side": 1,
+      "message": "Best to use --argumentfile    instead of -A  in the example here.. just for consistency in the documentation as used in other places here as well..",
+      "range": {
+        "startLine": 308,
+        "startChar": 38,
+        "endLine": 308,
+        "endChar": 40
+      },
+      "revId": "83adf176e4a3f391561c637af1e01a58dddcd002",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
