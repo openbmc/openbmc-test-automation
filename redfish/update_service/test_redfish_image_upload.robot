@@ -142,13 +142,13 @@ Redfish Bad Firmware Update
     Valid File Path  image_file_path
     Set ApplyTime  policy=OnReset
     ${image_data}=  OperatingSystem.Get Binary File  ${image_file_path}
-    ${status_code}=  Upload Image To BMC
+    ${resp}=  Upload Image To BMC
     ...  ${REDFISH_BASE_URI}UpdateService
     ...  ${timeout}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_INTERNAL_SERVER_ERROR}]
     ...  data=${image_data}
 
-    Return From Keyword If  ${status_code} == ${HTTP_INTERNAL_SERVER_ERROR}
+    Return From Keyword If  ${resp.status_code} == ${HTTP_INTERNAL_SERVER_ERROR}
 
     ${image_id}=  Get Latest Image ID
     Rprint Vars  image_id
