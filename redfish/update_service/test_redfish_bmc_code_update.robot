@@ -82,7 +82,7 @@ Redfish Code Update With Multiple Firmware
     [Template]  Redfish Multiple Upload Image And Check Progress State
 
     # policy   image_file_path     alternate_image_file_path
-    Immediate  ${IMAGE_FILE_PATH}  ${ALTERNATE_IMAGE_FILE_PATH}
+    OnReset  ${IMAGE_FILE_PATH}  ${ALTERNATE_IMAGE_FILE_PATH}
 
 
 Post BMC Reset Perform Redfish Code Update
@@ -227,6 +227,9 @@ Redfish Update Firmware
     ${redfish_update_uri}=  Get Redfish Update Service URI
 
     ${resp}=  Upload Image To BMC  ${redfish_update_uri}  timeout=${600}  data=${file_bin_data}
+
+    Log  ${resp.content}
+
     Log To Console   Completed image upload to BMC.
 
     Sleep  5s
@@ -253,8 +256,13 @@ Redfish Multiple Upload Image And Check Progress State
     # IMAGE_FILE_PATH            The path to BMC image file.
     # ALTERNATE_IMAGE_FILE_PATH  The path to alternate BMC image file.
 
+
+    ${task_inv_dict}=  Get Task State from File
+
     ${post_code_update_actions}=  Get Post Boot Action
+
     Valid File Path  ALTERNATE_IMAGE_FILE_PATH
+
     ${state}=  Get Pre Reboot State
     Rprint Vars  state
 
@@ -264,25 +272,35 @@ Redfish Multiple Upload Image And Check Progress State
     # "HttpPushUri": "/redfish/v1/UpdateService/update",
 
     ${redfish_update_uri}=  Get Redfish Update Service URI
-    Redfish Upload Image  ${redfish_update_uri}  ${IMAGE_FILE_PATH}
 
-    ${first_image_id}=  Get Latest Image ID
-    Rprint Vars  first_image_id
-    Sleep  5s
-    Redfish Upload Image  ${redfish_update_uri}  ${ALTERNATE_IMAGE_FILE_PATH}
+    ${file_bin_data1}=  OperatingSystem.Get Binary File  ${IMAGE_FILE_PATH}
+    ${file_bin_data2}=  OperatingSystem.Get Binary File  ${ALTERNATE_IMAGE_FILE_PATH}
 
-    ${second_image_id}=  Get Latest Image ID
-    Rprint Vars  second_image_id
+    Log To Console  Uploading first image.
+    ${resp1}=  Upload Image To BMC  ${redfish_update_uri}  timeout=${600}  data=${file_bin_data1}
 
-    Check Image Update Progress State
-    ...  match_state='Updating', 'Disabled'  image_id=${second_image_id}
+    Log To Console  Uploading second image.
+    ${resp2}=  Upload Image To BMC  ${redfish_update_uri}  timeout=${600}  data=${file_bin_data2}
 
-    Check Image Update Progress State
-    ...  match_state='Updating'  image_id=${first_image_id}
+    ${task_info2}=    evaluate    json.loads('''${resp2.content}''')    json
 
-    Wait Until Keyword Succeeds  8 min  20 sec
-    ...  Check Image Update Progress State
-    ...    match_state='Enabled'  image_id=${first_image_id}
+    Sleep  3s
+
+    ${task_inv2}=  Get Task Inventory  ${task_info2}
+    Log  ${task_inv2}   
+
+    Wait Until Keyword Succeeds  5 min  10 sec
+    ...  Verify Task Progress State  ${task_inv2}  ${task_inv_dict['TaskException']}
+
+    ${task_info1}=    evaluate    json.loads('''${resp1.content}''')    json
+    Log  ${task_info1}
+
+    ${task_inv1}=  Get Task Inventory  ${task_info1}
+    Log  ${task_inv1}
+
+    Wait Until Keyword Succeeds  5 min  10 sec
+    ...  Verify Task Progress State  ${task_inv1}  ${task_inv_dict['TaskCompleted']}
+
     Run Key  ${post_code_update_actions['BMC image']['${apply_time}']}
     Redfish.Login
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
