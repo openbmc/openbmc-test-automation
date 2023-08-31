@@ -372,7 +372,7 @@ Upload Image To BMC
     Valid Value  ret.status_code  ${valid_status_codes}
     Delete All Sessions
 
-    [Return]  ${ret.status_code}
+    [Return]  ${ret}
 
 
 Redfish Login

@@ -341,6 +341,26 @@ Create Initiated Task State Dict
     [Return]  ${task_inv}
 
 
+Get Task Inventory
+    [Documentation]  Return task inventory.
+    [Arguments]  ${task_info}
+
+    # Description of argument(s):
+    # task_info    Task information.
+
+    # Task information.
+    # @odata.id: /redfish/v1/TaskService/Tasks/1
+    # Id: 1
+    # TaskState: Starting
+    # TaskStatus: OK
+
+    ${task_payload}=  Redfish.Get Properties   ${task_info['@odata.id']}
+
+    ${task_inv}=  Create Initiated Task State Dict  ${task_payload}
+
+    [Return]  ${task_inv}
+
+
 Match Target URI
     [Documentation]  Match target uri from task list.
     [Arguments]  ${task_list}  ${target_uri}
