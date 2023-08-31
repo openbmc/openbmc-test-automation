@@ -154,7 +154,8 @@ verification. The "tests" subdirectory uses legacy REST and will be deprecated
 at some point and therefore no longer supported.
 
 `extended/`: Contains test cases for boot testing, code update testing using
-legacy REST, etc.
+legacy REST, etc.  The "extended" subdirectory uses legacy REST and will be
+deprecated at some point and therefore no longer supported.
 
 `systest/`: Contains test cases for HTX bootme testing.
 
