@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e641b8ca_c2b79be6",
+        "filename": "lib/rest_client.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-08-31T14:30:56Z",
+      "side": 1,
+      "message": "DONT change any in this file",
+      "range": {
+        "startLine": 375,
+        "startChar": 4,
+        "endLine": 375,
+        "endChar": 20
+      },
+      "revId": "5e587a60f0fc61423b80e64954f61f78f4c34bab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
