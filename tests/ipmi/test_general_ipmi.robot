@@ -119,8 +119,8 @@ Verify Get Device ID
     Valid Value  mc_info['ipmi_version']  ['2.0']
 
     Valid Value  ${mc_info['manufacturer_id']}  [${device_id_config['manuf_id']}]
-    ${product_id_hex} =  Convert To Hex  ${device_id_config['prod_id']}  lowercase=True
-    Valid Value  mc_info['product_id']  ['${device_id_config['prod_id']} (0x${product_id_hex})']
+    ${product_id_hex} =  Convert To Hex  ${device_id_config['prod_id']}  lowercase=True  length=4  prefix=0x
+    Valid Value  mc_info['product_id']  ['${device_id_config['prod_id']} (${product_id_hex})']
 
     Valid Value  mc_info['device_available']  ['yes']
     Valid Value  mc_info['provides_device_sdrs']  ['yes']
