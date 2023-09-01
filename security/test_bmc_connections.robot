@@ -29,7 +29,7 @@ ${iterations}         10000
 ${loop_iteration}     ${1000}
 ${hostname}           testhostname
 ${MAX_UNAUTH_PER_IP}  ${5}
-${bmc_url}            https://${OPENBMC_HOST}
+${bmc_url}            https://${OPENBMC_HOST}:${HTTPS_PORT}
 
 
 *** Test Cases ***
