@@ -16,6 +16,23 @@
       "message": "I am not sure if the changes to the security/test_ssl.robot makes sense this test seems to be for the old REST API. If HTTPS_PORT is still valid for that then it\u0027s correct. I left the port 80 alone since there\u0027s no defined HTTP_PORT variable anywhere else.",
       "revId": "04ea62b5dd596e5a5e417ac1c57dfdd3bbe0f01c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcd7798a_8360b783",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-09-05T06:08:57Z",
+      "side": 1,
+      "message": "Let me know once your CLA is approved.. so that I can start merging them.",
+      "revId": "04ea62b5dd596e5a5e417ac1c57dfdd3bbe0f01c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
