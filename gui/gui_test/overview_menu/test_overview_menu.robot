@@ -126,6 +126,7 @@ Verify Event Under Warning Event Logs Section
     BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
 
     Click Element  ${xpath_refresh_button}
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
 
     ${log_count}=  Get Text  ${xpath_warning_logs_count}
     Should Be Equal As Integers  ${log_count}  1
