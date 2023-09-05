@@ -46,6 +46,30 @@
       },
       "revId": "5e587a60f0fc61423b80e64954f61f78f4c34bab",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e213e45c_6a55c3c0",
+        "filename": "lib/rest_client.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-09-05T09:01:12Z",
+      "side": 1,
+      "message": "Now this keyword will return complete URI response instead of only status_code .  I see only one place \"status_code\" is used. I have replaced the code from \"status_code\" to \"resp.status_code\".",
+      "parentUuid": "27dba85a_2480f7ac",
+      "range": {
+        "startLine": 375,
+        "startChar": 4,
+        "endLine": 375,
+        "endChar": 20
+      },
+      "revId": "5e587a60f0fc61423b80e64954f61f78f4c34bab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
