@@ -165,6 +165,17 @@ work-in-progress, feel free to propose changes.
 
 - Tags:
 
+  - Create a tag for every test suite with a tag name that represents the suite
+    name as follows:
+
+    ```
+    Create a suite Tag name from test file name
+    Example:
+        Suite:  test_boot_progress_code.robot
+
+        Force Tags    Boot_Progress_Code
+    ```
+
   - Create a tag for every test case with a tag name that mirrors the test case
     name as follows:
 
