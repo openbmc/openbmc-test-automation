@@ -65,7 +65,8 @@ Test PostCodes When Host Powered Off
     ${post_codes}=  Redfish.Get Properties
     ...  /redfish/v1/Systems/system/LogServices/PostCodes/Entries
     Log To Console  BIOS POST Codes count: ${post_codes['Members@odata.count']}
-    Should Be True  ${post_codes['Members@odata.count']} >= 1  msg=No BIOS POST Codes populated.
+    Should Be True  ${post_codes['Members@odata.count']} == 0
+    ...  msg=BIOS POST Codes populated.
 
 
 Test PostCode Id Value Incremented On Host Reboot
