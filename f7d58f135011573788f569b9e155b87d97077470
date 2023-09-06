@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f96867ac_d3c9a599",
+        "filename": "tests/ipmi/test_general_ipmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2023-09-06T05:46:05Z",
+      "side": 1,
+      "message": "Can you please check?\n\n.....#(IST) 2023/09/06 11:10:47.203211 -    0.269389 - Issuing: grep ^VERSION_ID\u003d /etc/os-release | cut -f 2 -d \u0027\u003d\u0027\not-0.3-7-g1a1562-173357b\nVerify Get Device ID :: Verify get device ID command output.          | FAIL |\n#(IST) 2023/09/06 11:10:47.398603 -    0.057750 - **ERROR** Invalid variable value:\nmc_info[\u0027product_id\u0027]:                            156 (0x009c) \u003cstr\u003e\n\nIt must be one of the following values:\n\nvalid_values: \u003clist\u003e\n  [0]:                                            123 (0x007b) \u003cstr\u003e",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 123,
+        "endChar": 94
+      },
+      "revId": "f7d58f135011573788f569b9e155b87d97077470",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
