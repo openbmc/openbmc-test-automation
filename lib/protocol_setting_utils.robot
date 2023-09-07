@@ -6,6 +6,11 @@ Resource         ../lib/resource.robot
 Resource         ../lib/utils.robot
 
 
+*** Variables ***
+
+${cmd_prefix}    ipmitool -I lanplus -C 17 -p 623 -U ${IPMI_USERNAME} -P ${IPMI_PASSWORD}
+
+
 *** Keywords ***
 
 Enable SSH Protocol

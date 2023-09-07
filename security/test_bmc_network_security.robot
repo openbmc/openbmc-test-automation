@@ -230,7 +230,7 @@ Establish TCP Connections And Get Connection Failures
     ...          ${http_port}=${80}
 
     # Description of argument(s):
-    # host         The host name or IP address of the target system.
+    # target_host  The host name or IP address of the target system.
     # packet_type  The type of packets to be sent ("tcp", "udp", "icmp").
     # http_port    Network port.
     # num          Number of connections to be sent.
@@ -239,6 +239,6 @@ Establish TCP Connections And Get Connection Failures
     # and rate at which connectionss to be sent, should be given in command line.
     # By default it sends 4 TCP connections at 1 connection/second.
 
-    ${cmd_buf}=  Set Variable  --delay ${delay} ${host} -c ${num} --${packet_type} -p ${port}
+    ${cmd_buf}=  Set Variable  --delay ${delay} ${target_host} -c ${num} --${packet_type} -p ${http_port}
     ${nping_result}=  Nping  ${cmd_buf}
     [Return]   ${nping_result['percent_failed']}
