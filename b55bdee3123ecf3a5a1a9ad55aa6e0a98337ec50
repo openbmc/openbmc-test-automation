@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f4b0aa7_e2b0904f",
+        "filename": "lib/protocol_setting_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-09-07T07:09:17Z",
+      "side": 1,
+      "message": "seems this variable is getting used at \u0027Verify IPMI Works\u0027 keyword in this lib file.\n\nCan we have a better variable name?\n\nlike IPMI_CMD_PREFIX ?",
+      "revId": "b55bdee3123ecf3a5a1a9ad55aa6e0a98337ec50",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
