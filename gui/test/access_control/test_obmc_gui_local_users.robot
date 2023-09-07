@@ -7,7 +7,7 @@ Resource        ../../lib/resource.robot
 Suite Setup     Launch Browser And Login OpenBMC GUI
 Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
-Force Tags      Manage_User
+Force Tags      Obmc_Gui_Local_Users
 
 *** Variables ***
 

@@ -12,7 +12,7 @@ Variables           ../data/ipmi_raw_cmd_table.py
 Test Setup          Start SOL Console Logging
 Test Teardown       Test Teardown Execution
 
-Force Tags          SOL_Test
+Force Tags          Ipmi_Sol
 
 
 *** Variables ***

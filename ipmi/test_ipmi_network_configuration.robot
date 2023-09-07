@@ -15,7 +15,7 @@ Suite Teardown         Redfish.Logout
 Test Setup             Printn
 Test Teardown          Test Teardown Execution
 
-Force Tags             IPMI_Network_Config
+Force Tags             Ipmi_Network_Configuration
 
 
 *** Variables ***

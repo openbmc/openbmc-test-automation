@@ -16,7 +16,7 @@ Suite setup            Suite Setup Execution
 Suite Teardown         Redfish.Logout
 Test Teardown          FFDC On Test Case Fail
 
-Force Tags             SDR_Test
+Force Tags             Ipmi_Inband_Sdr
 
 
 *** Test Cases ***

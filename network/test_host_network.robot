@@ -11,7 +11,7 @@ Library             ../lib/utilities.py
 Test Setup          Open Connection And Log In
 Test Teardown       Test Teardown Execution
 
-Force Tags          Host_Network_Test
+Force Tags          Host_Network
 
 *** Variables ***
 ${SET_ADDR_PREFIX}  0x00 0x08 0x61 0x80 0x21 0x70 0x62 0x21 0x00 0x01 0x06 0x04

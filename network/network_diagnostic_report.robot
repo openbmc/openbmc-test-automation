@@ -7,7 +7,7 @@ Library       ../lib/utilities.py
 Resource      ../lib/utils.robot
 Test Setup    Check If Tool Exist
 
-Force Tags  Check_Network_Latency
+Force Tags  Network_Diagnostic_Report
 
 *** Test Cases ***
 
