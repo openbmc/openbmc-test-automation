@@ -152,7 +152,7 @@ Send Continuous TCP Connection Requests To Redfish Interface And Check Stability
 
     # Establish large number of TCP connections to Redfish interface.
     ${connection_loss}=  Establish TCP Connections And Get Connection Failures
-    ...  ${OPENBMC_HOST}  ${iterations}  ${TCP_CONNECTION}  ${HTTPS_PORT}
+    ...  ${OPENBMC_HOST}  ${iterations}  ${TCP_CONNECT}  ${HTTPS_PORT}
 
     # Check if Redfish interface is functional.
     Redfish.Login
@@ -170,7 +170,7 @@ Send Continuous TCP Connection Requests To IPMI Interface And Check Stability
 
     # Establish large number of TCP connections to IPMI interface.
     ${connection_loss}=  Establish TCP Connections And Get Connection Failures
-    ...  ${OPENBMC_HOST}  ${iterations}  ${TCP_CONNECTION}  ${IPMI_PORT}
+    ...  ${OPENBMC_HOST}  ${iterations}  ${TCP_CONNECT}  ${IPMI_PORT}
 
     # Check if IPMI interface is functional.
     Verify IPMI Works  lan print
@@ -187,7 +187,7 @@ Send Continuous TCP Connection Requests To SSH Interface And Check Stability
 
     # Establish large number of TCP connections to SSH interface.
     ${connection_loss}=  Establish TCP Connections And Get Connection Failures
-    ...  ${OPENBMC_HOST}  ${iterations}  ${TCP_CONNECTION}  ${SSH_PORT}
+    ...  ${OPENBMC_HOST}  ${iterations}  ${TCP_CONNECT}  ${SSH_PORT}
 
     # Check if SSH interface is functional.
     Verify Interface Stability  ${SSH_PORT}
@@ -226,11 +226,11 @@ Verify Interface Stability
 
 Establish TCP Connections And Get Connection Failures
     [Documentation]  Establish TCP connections and return nping connection responses.
-    [Arguments]  ${target_host}  ${num}=${count}  ${packet_type}=${TCP_CONNECTION}
+    [Arguments]  ${target_host}  ${num}=${count}  ${packet_type}=${TCP_CONNECT}
     ...          ${http_port}=${80}
 
     # Description of argument(s):
-    # host         The host name or IP address of the target system.
+    # target_host  The host name or IP address of the target system.
     # packet_type  The type of packets to be sent ("tcp", "udp", "icmp").
     # http_port    Network port.
     # num          Number of connections to be sent.
@@ -239,6 +239,6 @@ Establish TCP Connections And Get Connection Failures
     # and rate at which connectionss to be sent, should be given in command line.
     # By default it sends 4 TCP connections at 1 connection/second.
 
-    ${cmd_buf}=  Set Variable  --delay ${delay} ${host} -c ${num} --${packet_type} -p ${port}
+    ${cmd_buf}=  Set Variable  --delay ${delay} ${target_host} -c ${num} --${packet_type} -p ${http_port}
     ${nping_result}=  Nping  ${cmd_buf}
     [Return]   ${nping_result['percent_failed']}
