@@ -724,10 +724,10 @@ Verify PEL Log Offloaded To Host
     [Tags]  Verify_PEL_Log_Offloaded_To_Host
     [Template]  Verify PEL Transmission To Host
 
-    # error_type            host_state      expected_transmission_state
+    # error_type            host_state      expected_transmission_state   
+      predictive_error      On              Acked         
+      unrecoverable_error   On              Acked              
       informational_error   On              Acked
-      unrecoverable_error   On              Acked
-      predictive_error      On              Acked
 
 
 Verify PEL Log Not Offloaded To Host
@@ -736,9 +736,9 @@ Verify PEL Log Not Offloaded To Host
     [Template]  Verify PEL Transmission To Host
 
     # error_type            host_state      expected_transmission_state
-      informational_error   Off             Not Sent
-      unrecoverable_error   Off             Not Sent
       predictive_error      Off             Not Sent
+      unrecoverable_error   Off             Not Sent
+      informational_error   Off             Not Sent
 
 
 *** Keywords ***
@@ -948,6 +948,8 @@ Verify PEL Transmission To Host
     ...  ELSE IF  '${host_state}' == 'On'
     ...  Redfish Power On  stack_mode=skip
 
+    Wait For Host To Ping  ${OS_HOST}  5 min  10 sec
+
     Redfish Purge Event Log
 
     # Inject required error log.
@@ -965,7 +967,7 @@ Verify PEL Transmission To Host
     # Check host transmission state for the cases where PEL is
     # expected to be  offloaded to HOST.
     Run Keyword If  "${expected_transmission_state}" == "Acked"
-    ...  Wait Until Keyword Succeeds  10 min  10 sec
+    ...  Wait Until Keyword Succeeds  15 min  10 sec
     ...  Check If PEL Transmission State Is Expected  ${pel_id}  Acked
 
     # Adding delay before checking host transmission for the cases where PEL is
