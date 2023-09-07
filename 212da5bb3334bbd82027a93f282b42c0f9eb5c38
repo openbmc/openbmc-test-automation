@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8a9813c_bd1354da",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-07T07:55:46Z",
+      "side": 1,
+      "message": "why this sleep is required? If you want to make sure that system boots to OS, then wait until OS IP is pingable",
+      "range": {
+        "startLine": 953,
+        "startChar": 0,
+        "endLine": 955,
+        "endChar": 0
+      },
+      "revId": "212da5bb3334bbd82027a93f282b42c0f9eb5c38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
