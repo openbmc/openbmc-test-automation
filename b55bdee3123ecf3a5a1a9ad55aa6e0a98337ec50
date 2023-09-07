@@ -16,6 +16,24 @@
       "message": "seems this variable is getting used at \u0027Verify IPMI Works\u0027 keyword in this lib file.\n\nCan we have a better variable name?\n\nlike IPMI_CMD_PREFIX ?",
       "revId": "b55bdee3123ecf3a5a1a9ad55aa6e0a98337ec50",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24bbb932_2cb65627",
+        "filename": "lib/protocol_setting_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-09-07T07:13:18Z",
+      "side": 1,
+      "message": "this variable has been used in many suites. so, it would be better if we leave as it is....orelse we need to change in all robot files",
+      "parentUuid": "1f4b0aa7_e2b0904f",
+      "revId": "b55bdee3123ecf3a5a1a9ad55aa6e0a98337ec50",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
