@@ -17,7 +17,7 @@ Library         ../../lib/state_map.py
 Test Teardown   Test Teardown Execution
 Suite Teardown  Suite Teardown Execution
 
-Force Tags      power_restore
+Force Tags      Power_Restore
 
 *** Variables ***
 

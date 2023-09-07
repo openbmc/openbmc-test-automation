@@ -27,7 +27,7 @@ Suite Teardown           Redfish.Logout
 Test Setup               Printn
 Test Teardown            FFDC On Test Case Fail
 
-Force Tags               Host_Code_Update
+Force Tags               Redfish_Host_Code_Update
 
 *** Test Cases ***
 

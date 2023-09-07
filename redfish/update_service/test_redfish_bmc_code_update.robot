@@ -31,7 +31,7 @@ Suite Teardown           Redfish.Logout
 Test Setup               Printn
 Test Teardown            FFDC On Test Case Fail
 
-Force Tags               BMC_Code_Update
+Force Tags               Redfish_Bmc_Code_Update
 
 *** Variables ***
 

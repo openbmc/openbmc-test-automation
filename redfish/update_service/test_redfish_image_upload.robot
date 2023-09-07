@@ -33,7 +33,7 @@ Suite Teardown         Redfish.Logout
 Test Setup             Printn
 Test Teardown          Test Teardown Execution
 
-Force Tags  Upload_Test
+Force Tags             Redfish_Image_Upload
 
 *** Variables ***
 ${timeout}             20

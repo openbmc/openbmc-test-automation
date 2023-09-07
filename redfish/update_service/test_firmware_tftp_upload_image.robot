@@ -26,7 +26,7 @@ Suite Teardown   Redfish.Logout
 Test Setup       Run Keywords  Redfish Power Off  stack_mode=skip  quiet=1  AND  Redfish.Login
 Test Teardown    FFDC On Test Case Fail
 
-Force Tags       tftp_update
+Force Tags       Firmware_Tftp_Upload_Image
 
 *** Test Cases ***
 

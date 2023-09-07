@@ -52,7 +52,7 @@
 --include Verify_operator_User_Privilege
 --include Verify_User_User_Privilege
 # Certificate
---include Certificate_Test
+--include Certificate
 # Network test cases(non-disruptive)
 --include Get_IP_Address_And_Verify
 --include Get_Netmask_And_Verify

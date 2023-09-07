@@ -15,7 +15,7 @@ Suite Teardown      Suite Teardown Execution
 Test Setup          Test Setup Execution
 Test Teardown       FFDC On Test Case Fail
 
-Force Tags  eSEL_Logging
+Force Tags  eSEL
 
 *** Variables ***
 

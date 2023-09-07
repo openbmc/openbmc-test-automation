@@ -13,7 +13,7 @@ Suite Teardown  Suite Teardown Execution
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 
-Force Tags     Network_Conf_Test
+Force Tags     Bmc_Network_Conf
 
 *** Variables ***
 ${test_hostname}           openbmc

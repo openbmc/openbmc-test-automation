@@ -11,7 +11,7 @@ Suite Setup              Suite Setup Execution
 Suite Teardown           Run Keyword And Ignore Error  Redfish.Logout
 Test Teardown            FFDC On Test Case Fail
 
-Force Tags    Test_BMC_Image_Switch
+Force Tags               Bmc_Image_Switch
 
 *** Variables ***
 

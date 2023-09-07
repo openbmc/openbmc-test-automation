@@ -21,9 +21,9 @@
 # Skip org code update.
 --exclude Initiate_Code_Update_BMC
 --exclude BIOS_Code_Update
---exclude Upload_Test
---exclude BMC_Code_Update
---exclude Host_Code_Update
+--exclude Redfish_Image_Upload
+--exclude Bmc_Code_Update
+--exclude Redfish_Host_Code_Update
 --exclude BMC_Update_Recoverable_Error
 --exclude Host_Update_Recoverable_Error
 --exclude BMC_Multi_Code_Update
@@ -71,4 +71,4 @@
 # Remote logging
 --exclude Verify_BMC_Journald_Contains_No_Credential_Data
 # Non bmcweb certificate.
---exclude Certificate_Test
+--exclude Certificate
