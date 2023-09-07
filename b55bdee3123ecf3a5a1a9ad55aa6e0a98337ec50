@@ -34,6 +34,29 @@
       "parentUuid": "1f4b0aa7_e2b0904f",
       "revId": "b55bdee3123ecf3a5a1a9ad55aa6e0a98337ec50",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33a2b313_046849a8",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-09-07T07:42:26Z",
+      "side": 1,
+      "message": "instead of changing it in multiple places, keep as is is here.\ncan you change in only one place where it is defined.",
+      "range": {
+        "startLine": 155,
+        "startChar": 41,
+        "endLine": 155,
+        "endChar": 56
+      },
+      "revId": "b55bdee3123ecf3a5a1a9ad55aa6e0a98337ec50",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
