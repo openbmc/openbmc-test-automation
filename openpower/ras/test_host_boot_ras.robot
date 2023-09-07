@@ -19,7 +19,7 @@ Test Setup          RAS Test Setup
 Test Teardown       FFDC On Test Case Fail
 Suite Teardown      RAS Suite Cleanup
 
-Force Tags          Host_boot_RAS
+Force Tags          Host_Boot_RAS
 
 *** Variables ***
 ${stack_mode}       normal

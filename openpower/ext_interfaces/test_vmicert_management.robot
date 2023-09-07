@@ -13,7 +13,7 @@ Suite Setup       Suite Setup Execution
 Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Run Keyword And Ignore Error  Suite Teardown Execution
 
-Force Tags        vmi_certificate_test
+Force Tags        Vmicert_Management
 
 
 *** Variables ***
