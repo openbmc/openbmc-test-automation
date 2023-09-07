@@ -16,6 +16,24 @@
       "message": "??",
       "revId": "f59f0878d6ef9162c2d9632b0740720095ad7047",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71ba63a0_45730f59",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-09-07T06:10:44Z",
+      "side": 1,
+      "message": "Because in this suite we have IPMI TC where we need to check IPMI is working or not....earlier we have not used variable so, i have added it now",
+      "parentUuid": "63dffa31_17cedb5b",
+      "revId": "f59f0878d6ef9162c2d9632b0740720095ad7047",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
