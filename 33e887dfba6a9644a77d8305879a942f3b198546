@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc080039_e52b4c9b",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2023-09-07T15:04:09Z",
+      "side": 1,
+      "message": "You are just returning the whole dictionary ? you are not pulling the dump ids from them ?",
+      "revId": "33e887dfba6a9644a77d8305879a942f3b198546",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b53c4aa2_13bf6720",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2023-09-07T15:04:09Z",
+      "side": 1,
+      "message": "Also , this dictionary contains all type of SYS dumps like SBE dump , MPIPL , Checkstop and HB dumps .. is that categorized ?",
+      "revId": "33e887dfba6a9644a77d8305879a942f3b198546",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
