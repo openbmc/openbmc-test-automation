@@ -7,6 +7,7 @@ Resource        ../../lib/list_utils.robot
 Resource        ../../lib/logging_utils.robot
 Resource        ../../lib/connection_client.robot
 Resource        ../../lib/openbmc_ffdc.robot
+Resource        ../../lib/utils.robot
 
 Test Setup      Redfish.Login
 Test Teardown   Run Keywords  Redfish.Logout  AND  FFDC On Test Case Fail
@@ -947,6 +948,10 @@ Verify PEL Transmission To Host
     ...  Redfish Power Off  stack_mode=skip
     ...  ELSE IF  '${host_state}' == 'On'
     ...  Redfish Power On  stack_mode=skip
+
+    Wait For Host Boot Progress To Reach Required State  OSRunning
+    # Wait for system to load with all error logs.
+    Sleep  10s
 
     Redfish Purge Event Log
 
