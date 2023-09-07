@@ -1,0 +1,10 @@
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+1: Anusha Dathatri <adathatr@in.ibm.com>
+Code-Review+1: Sridevi Ramesh <sridevra@in.ibm.com>
+Code-Review+1: <matthew.fischer@hpe.com>
+Code-Review+2: George Keishing <gkeishin@gmail.com>
+Submitted-by: George Keishing <gkeishin@gmail.com>
+Submitted-at: Thu, 07 Sep 2023 14:41:12 +0000
+Reviewed-on: https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/66470
+Project: openbmc/openbmc-test-automation
+Branch: refs/heads/master
