@@ -7,6 +7,7 @@ Resource        ../../lib/list_utils.robot
 Resource        ../../lib/logging_utils.robot
 Resource        ../../lib/connection_client.robot
 Resource        ../../lib/openbmc_ffdc.robot
+Resource        ../../lib/utils.robot
 
 Test Setup      Redfish.Login
 Test Teardown   Run Keywords  Redfish.Logout  AND  FFDC On Test Case Fail
@@ -948,6 +949,8 @@ Verify PEL Transmission To Host
     ...  ELSE IF  '${host_state}' == 'On'
     ...  Redfish Power On  stack_mode=skip
 
+    Wait For Host To Ping  ${OPENBMC_HOST}  3 min
+
     Redfish Purge Event Log
 
     # Inject required error log.
@@ -965,7 +968,7 @@ Verify PEL Transmission To Host
     # Check host transmission state for the cases where PEL is
     # expected to be  offloaded to HOST.
     Run Keyword If  "${expected_transmission_state}" == "Acked"
-    ...  Wait Until Keyword Succeeds  10 min  10 sec
+    ...  Wait Until Keyword Succeeds  15 min  10 sec
     ...  Check If PEL Transmission State Is Expected  ${pel_id}  Acked
 
     # Adding delay before checking host transmission for the cases where PEL is
