@@ -22,6 +22,30 @@
       },
       "revId": "f7d58f135011573788f569b9e155b87d97077470",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38a8e13c_1271205a",
+        "filename": "tests/ipmi/test_general_ipmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1001842
+      },
+      "writtenOn": "2023-09-08T16:27:21Z",
+      "side": 1,
+      "message": "Can you tell me how you got this? I\u0027m trying to figure out how my changes could have changed the values like that. 0x007b to 0x009c",
+      "parentUuid": "f96867ac_d3c9a599",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 123,
+        "endChar": 94
+      },
+      "revId": "f7d58f135011573788f569b9e155b87d97077470",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
