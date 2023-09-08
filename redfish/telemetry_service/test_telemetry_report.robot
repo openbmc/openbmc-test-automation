@@ -66,6 +66,29 @@ Verify Basic Periodic Telemetry Report Creation
     ${resp}=  Redfish.Get  ${metric_definition_base_uri}/${report_name}
     Should Be True  '${resp.dict["MetricReportDefinitionType"]}' == 'Periodic'
 
+
+Verify Error After Exceeding Maximum Report Creation
+    [Documentation]  Verify Error After Exceeding Maximum Report Creation
+    [Tags]  Verify_Error_After_Exceeding_Maximum_Report_Creation
+
+    ${resp}=  Redfish.Get Properties  /redfish/v1/TelemetryService
+    ${report_name}=  Set Variable  Testreport
+
+    # Create maximum number of reports.
+    FOR  ${i}  IN RANGE  ${resp["MaxReports"]}
+        Create Basic Telemetry Report   Ambient_0_Temp   ${report_name}${i}  success
+    END
+
+    # Attempt another report creation and it should fail.
+    Create Basic Telemetry Report   Ambient_0_Temp   ${report_name}${resp["MaxReports"]}  fail
+
+    # Now delete the reports created.
+    FOR  ${i}  IN RANGE  ${resp["MaxReports"]} 
+        Redfish.Delete  ${metric_definition_base_uri}/${report_name}${i}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    END
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -78,3 +101,26 @@ Test Teardown Execution
     [Documentation]  Do test teardown operation.
 
     FFDC On Test Case Fail
+
+
+Create Basic Telemetry Report
+    [Arguments]  ${metric}   ${report_name}  ${result}=success
+
+    ${resp}=  Redfish.Get Properties
+    ...  /redfish/v1/TelemetryService/MetricDefinitions/${metric}
+    ${body}=  Catenate  {"Id": "${report_name}",
+    ...  "MetricReportDefinitionType": "OnRequest",
+    ...  "ReportActions":["LogToMetricReportsCollection"],
+    ...  "Metrics":[{"MetricProperties":${resp["MetricProperties"]}}]}
+    ${body}=  Replace String  ${body}  '  "
+    ${dict}  Evaluate  json.loads('''${body}''')  json
+
+    ${status_code_expected}=  Set Variable If
+    ...  '${result}' == 'success'  [${HTTP_CREATED}, ${HTTP_OK}]
+    ...  '${result}' == 'fail'  [${HTTP_BAD_REQUEST}, ${HTTP_NOT_FOUND}]
+
+    Redfish.Post  ${metric_definition_base_uri}  body=&{dict}
+     ...  valid_status_codes=${status_code_expected}
+
+    Redfish.Get  ${metric_report_base_uri}/${report_name}
+     ...  valid_status_codes=${status_code_expected}
