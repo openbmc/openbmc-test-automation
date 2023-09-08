@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a4ef3943_288bcc50",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-09-08T05:34:20Z",
+      "side": 1,
+      "message": "In my test case the requirement is for complete response data.",
+      "parentUuid": "dc080039_e52b4c9b",
+      "revId": "33e887dfba6a9644a77d8305879a942f3b198546",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b53c4aa2_13bf6720",
         "filename": "lib/dump_utils.robot",
         "patchSetId": 8
@@ -31,6 +49,24 @@
       "writtenOn": "2023-09-07T15:04:09Z",
       "side": 1,
       "message": "Also , this dictionary contains all type of SYS dumps like SBE dump , MPIPL , Checkstop and HB dumps .. is that categorized ?",
+      "revId": "33e887dfba6a9644a77d8305879a942f3b198546",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47c98ffd_a4769277",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2023-09-08T05:34:20Z",
+      "side": 1,
+      "message": "yes it return all the dumps. Another keyword can be created which separate the dumps. in my test case requirement is to get all the dumps.",
+      "parentUuid": "b53c4aa2_13bf6720",
       "revId": "33e887dfba6a9644a77d8305879a942f3b198546",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
