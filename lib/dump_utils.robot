@@ -6,6 +6,8 @@ Variables       ../data/variables.py
 
 *** Variables ***
 
+${delete_bmc_dumps_together}  ${False}
+
 *** Keywords ***
 
 Create User Initiated Dump
@@ -172,7 +174,22 @@ Redfish Delete All BMC Dumps
     ${resp}=  Redfish.Get  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries
     Return From Keyword If  ${resp.dict["Members@odata.count"]} == ${0}
 
-    Redfish.Post  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Actions/LogService.ClearLog
+    Run Keyword IF  ${delete_bmc_dumps_together} == True
+    ...   Redfish.Post  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Actions/LogService.ClearLog
+    ...  ELSE
+    ...   Redfish Delete All BMC Dumps Individually
+
+
+Redfish Delete All BMC Dumps Individually
+    [Documentation]  Delete all BMC dumps via Redfish.
+
+    ${dump_uris}=  redfish_utils.get_member_list  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries
+
+    FOR  ${dump_uri}  IN  @{dump_uris}
+      #${dump_id}=  Fetch From Right  ${dump_uri}  /
+      #Redfish.Delete  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries/${dump_id}
+      Redfish.Delete  ${dump_uri}
+    END
 
 
 Redfish Get All System Dumps
