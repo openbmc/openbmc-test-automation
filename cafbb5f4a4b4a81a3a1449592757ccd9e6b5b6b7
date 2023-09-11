@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4399af1_54557678",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-11T07:23:22Z",
+      "side": 1,
+      "message": "Please follow commit message format.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 61
+      },
+      "revId": "cafbb5f4a4b4a81a3a1449592757ccd9e6b5b6b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3c4a1491_45d398a2",
@@ -14,6 +37,144 @@
       "writtenOn": "2023-09-11T05:52:50Z",
       "side": 1,
       "message": "Test looks good - there is a typo in the commit message (Telemtry) if that matters.",
+      "revId": "cafbb5f4a4b4a81a3a1449592757ccd9e6b5b6b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "083956d5_60559a08",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-11T07:23:22Z",
+      "side": 1,
+      "message": "Before starting creating any report delete all existing reports.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 66
+      },
+      "revId": "cafbb5f4a4b4a81a3a1449592757ccd9e6b5b6b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5d95493_a2eab52f",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-11T07:23:22Z",
+      "side": 1,
+      "message": "remove whitespace",
+      "range": {
+        "startLine": 86,
+        "startChar": 45,
+        "endLine": 86,
+        "endChar": 47
+      },
+      "revId": "cafbb5f4a4b4a81a3a1449592757ccd9e6b5b6b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12a2ae07_bc729f0f",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-11T07:23:22Z",
+      "side": 1,
+      "message": "I believe one ${HTTP_OK} is required here",
+      "range": {
+        "startLine": 88,
+        "startChar": 33,
+        "endLine": 88,
+        "endChar": 64
+      },
+      "revId": "cafbb5f4a4b4a81a3a1449592757ccd9e6b5b6b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8036dcb4_39ea19dc",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-11T07:23:22Z",
+      "side": 1,
+      "message": "Add description of argument",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 62
+      },
+      "revId": "cafbb5f4a4b4a81a3a1449592757ccd9e6b5b6b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5736fa9b_49e926ef",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-11T07:23:22Z",
+      "side": 1,
+      "message": "why two status code for success and failure? One should be good enough",
+      "range": {
+        "startLine": 119,
+        "startChar": 36,
+        "endLine": 119,
+        "endChar": 63
+      },
+      "revId": "cafbb5f4a4b4a81a3a1449592757ccd9e6b5b6b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87b131ab_39f85627",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-11T07:23:22Z",
+      "side": 1,
+      "message": "not really required because it gets tested by other test cases already.",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 52
+      },
       "revId": "cafbb5f4a4b4a81a3a1449592757ccd9e6b5b6b7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
