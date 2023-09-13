@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f140e3e_4155e19a",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 952,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-13T14:09:49Z",
+      "side": 1,
+      "message": "OPENBMC_HOST is our BMC IP. We should be using OS_HOST here. Also better to make it 5 mins like below\n\nWait For Host To Ping  ${OS_HOST}  5 min",
+      "range": {
+        "startLine": 952,
+        "startChar": 44,
+        "endLine": 952,
+        "endChar": 45
+      },
+      "revId": "cfc7db53fd3b297503aa519a74e8d51afd5ee3b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93a8bfcb_6e75e8ff",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 971,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-13T14:09:49Z",
+      "side": 1,
+      "message": "I would say lets not increase this time from 10 mins. If we are seeing that error log is taking more time to get acknowledgement from OS then we should be opening issue.",
+      "range": {
+        "startLine": 971,
+        "startChar": 38,
+        "endLine": 971,
+        "endChar": 40
+      },
+      "revId": "cfc7db53fd3b297503aa519a74e8d51afd5ee3b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

@@ -46,6 +46,30 @@
       },
       "revId": "212da5bb3334bbd82027a93f282b42c0f9eb5c38",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c941872_d3aaa48e",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-13T14:09:49Z",
+      "side": 1,
+      "message": "you can use below in place of the code\n\nWait Until Keyword Succeeds  5 min  15 sec  Check Host Is Pinging  ${OS_HOST}",
+      "parentUuid": "a8a9813c_bd1354da",
+      "range": {
+        "startLine": 953,
+        "startChar": 0,
+        "endLine": 955,
+        "endChar": 0
+      },
+      "revId": "212da5bb3334bbd82027a93f282b42c0f9eb5c38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
