@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2abed11b_60305ee0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-13T12:41:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2cccdff4_699cb95c",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "90984e44d3e4bd6fc1530bb96c3f5678c4372a49",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91014f23_54bb3bfb",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-13T05:25:47Z",
       "side": 1,
       "message": "End with the period. Also only keep first character as upper case like below.\n\n\n    [Documentation]  Verify error while creating telemetry report more than max report limit.",
+      "range": {
+        "startLine": 71,
+        "startChar": 21,
+        "endLine": 71,
+        "endChar": 73
+      },
+      "revId": "90984e44d3e4bd6fc1530bb96c3f5678c4372a49",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cde4cefc_c6388a03",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-13T12:41:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91014f23_54bb3bfb",
       "range": {
         "startLine": 71,
         "startChar": 21,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a49a5aff_ca0995a5",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-13T12:41:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3752b516_21d4f34a",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 7
+      },
+      "revId": "90984e44d3e4bd6fc1530bb96c3f5678c4372a49",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00b7d697_8c5a37d7",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-09-13T05:25:47Z",
       "side": 1,
       "message": "Documentation is missing. Please add",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 29
+      },
+      "revId": "90984e44d3e4bd6fc1530bb96c3f5678c4372a49",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "becf6f4f_5285907c",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-13T12:41:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00b7d697_8c5a37d7",
       "range": {
         "startLine": 113,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a48aae19_8f88d14f",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-13T12:41:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94c9dac7_713ac375",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 59
+      },
+      "revId": "90984e44d3e4bd6fc1530bb96c3f5678c4372a49",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "507ce5be_f9d4ea5e",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-09-13T05:25:47Z",
       "side": 1,
       "message": "End with period. Also change the description something like below.\n\n    # report_name      Name of telemetry report which needs to be created.",
+      "range": {
+        "startLine": 119,
+        "startChar": 32,
+        "endLine": 119,
+        "endChar": 56
+      },
+      "revId": "90984e44d3e4bd6fc1530bb96c3f5678c4372a49",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "982fbb55_86b08d33",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-13T12:41:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "507ce5be_f9d4ea5e",
       "range": {
         "startLine": 119,
         "startChar": 32,
@@ -162,6 +306,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac4430b6_7f322a7c",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-13T12:41:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "444536a0_fa96a833",
+      "range": {
+        "startLine": 120,
+        "startChar": 5,
+        "endLine": 120,
+        "endChar": 33
+      },
+      "revId": "90984e44d3e4bd6fc1530bb96c3f5678c4372a49",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b24bd861_73f3c21a",
@@ -175,6 +343,30 @@
       "writtenOn": "2023-09-13T05:25:47Z",
       "side": 1,
       "message": "Keep expected_result instead of result and change the description like below. \n\n    # expected_result        Expected result of report creation.",
+      "range": {
+        "startLine": 121,
+        "startChar": 32,
+        "endLine": 121,
+        "endChar": 63
+      },
+      "revId": "90984e44d3e4bd6fc1530bb96c3f5678c4372a49",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3b9b010_5d1aa2aa",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-13T12:41:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b24bd861_73f3c21a",
       "range": {
         "startLine": 121,
         "startChar": 32,
