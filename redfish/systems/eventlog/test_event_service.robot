@@ -12,6 +12,8 @@ Suite teardown   Suite Teardown Execution
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
+Force Tags       Event_Service
+
 ***Variables***
 
 # override this default using -v REMOTE_SERVER_IP:<IP> from CLI

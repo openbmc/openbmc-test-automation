@@ -11,6 +11,7 @@ Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 Suite Teardown   Suite Teardown Execution
 
+Force Tags       Post_Codes
 
 *** Variables ***
 ${max_view_count}    1000

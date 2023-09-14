@@ -13,6 +13,8 @@ Suite Teardown      Suite Teardown Execution
 Test Setup          Test Setup Execution
 Test Teardown       Test Teardown Execution
 
+Force Tags          Event_Logging
+
 ** Variables ***
 
 ${max_num_event_logs}  ${200}

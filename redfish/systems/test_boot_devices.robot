@@ -10,6 +10,8 @@ Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 Suite Teardown   Suite Teardown Execution
 
+Force Tags       Boot_Devices
+
 *** Variables ***
 # Maps for correlating redfish data values to IPMI data values.
 # The redfish values are obtained with Redfish.Get or Redfish.Get Properties.
