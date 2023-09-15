@@ -33,6 +33,24 @@
       "message": "Any plans to sunset this? \nCan you add a date? \nRemove 3Q24 ?",
       "revId": "d2bcbf76c07d3153933a397f34a32dafecf80128",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87325474_6462c502",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-09-15T17:33:40Z",
+      "side": 1,
+      "message": "Looks like we might still need for older release when going back and forth for n - n+1 and vice versa.. so lets keep it for now ans we can see latter",
+      "parentUuid": "4ccb3af4_7fca61b8",
+      "revId": "d2bcbf76c07d3153933a397f34a32dafecf80128",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
