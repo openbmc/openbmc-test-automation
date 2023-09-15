@@ -151,7 +151,11 @@ Get Session With Client Id
         # This prevents dictionary KeyError exception when the Context
         # attribute is not populated in generic session response.
         ${context_var}=  Get Variable Value  ${resp.dict["Context"]}  ${EMPTY}
+        # Handle backward compatibility for OEM.
+        ${oem_var}=  Get Variable Value  ${resp.dict["Oem"]["OpenBMC"]["ClientID"]}  ${EMPTY}
         Run Keyword If  '${context_var}' != '${EMPTY}'
+        ...    Append To List  ${client_id_sessions}  ${session}
+        Run Keyword If  '${oem_var}' != '${EMPTY}'
         ...    Append To List  ${client_id_sessions}  ${session}
     END
 
