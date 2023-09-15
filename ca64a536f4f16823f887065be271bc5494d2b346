@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91eac150_b3b1c5d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-15T12:12:51Z",
+      "side": 1,
+      "message": "Minor comments there",
+      "revId": "ca64a536f4f16823f887065be271bc5494d2b346",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e7a41b5_58cfcc48",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-15T12:12:51Z",
+      "side": 1,
+      "message": "remove white spaces in all place of this code",
+      "range": {
+        "startLine": 71,
+        "startChar": 93,
+        "endLine": 71,
+        "endChar": 94
+      },
+      "revId": "ca64a536f4f16823f887065be271bc5494d2b346",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01ffb62d_db8215c0",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-15T12:12:51Z",
+      "side": 1,
+      "message": "# property    Name of MetrixDefination\u0027s property for report. E.g. Ambient_0_Temp.",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 79
+      },
+      "revId": "ca64a536f4f16823f887065be271bc5494d2b346",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34c1adf8_2ae770e4",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-15T12:12:51Z",
+      "side": 1,
+      "message": "no blank line required between twi argument description.",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 5
+      },
+      "revId": "ca64a536f4f16823f887065be271bc5494d2b346",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7953b30_4732eb79",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-15T12:12:51Z",
+      "side": 1,
+      "message": "I guess HTTP_OK is also required here. Please cross check",
+      "range": {
+        "startLine": 138,
+        "startChar": 54,
+        "endLine": 138,
+        "endChar": 71
+      },
+      "revId": "ca64a536f4f16823f887065be271bc5494d2b346",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
