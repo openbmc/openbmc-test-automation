@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b76b82ab_e01e6443",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-15T12:57:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e7a41b5_58cfcc48",
+      "range": {
+        "startLine": 71,
+        "startChar": 93,
+        "endLine": 71,
+        "endChar": 94
+      },
+      "revId": "ca64a536f4f16823f887065be271bc5494d2b346",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01ffb62d_db8215c0",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-09-15T12:12:51Z",
       "side": 1,
       "message": "# property    Name of MetrixDefination\u0027s property for report. E.g. Ambient_0_Temp.",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 79
+      },
+      "revId": "ca64a536f4f16823f887065be271bc5494d2b346",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91123071_5590af51",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-15T12:57:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01ffb62d_db8215c0",
       "range": {
         "startLine": 110,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ebeb1e2_9c6d98db",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-15T12:57:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34c1adf8_2ae770e4",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 5
+      },
+      "revId": "ca64a536f4f16823f887065be271bc5494d2b346",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7953b30_4732eb79",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-09-15T12:12:51Z",
       "side": 1,
       "message": "I guess HTTP_OK is also required here. Please cross check",
+      "range": {
+        "startLine": 138,
+        "startChar": 54,
+        "endLine": 138,
+        "endChar": 71
+      },
+      "revId": "ca64a536f4f16823f887065be271bc5494d2b346",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ccc705b_d21f1a8e",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-15T12:57:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7953b30_4732eb79",
       "range": {
         "startLine": 138,
         "startChar": 54,
