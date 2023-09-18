@@ -29,11 +29,19 @@ class bmc_redfish_utils(object):
         else:
             # There is a possibility that a given driver support both redfish and
             # legacy REST.
+            # If you have logged in before, you will not be able to log out of your previous account by logging in again.
+            has_login_before = False
+            if self._redfish_.get_session_key():
+                has_login_before = True
+                self._redfish_.logout()
             self._redfish_.login()
             self._rest_response_ = self._redfish_.get(
                 "/xyz/openbmc_project/", valid_status_codes=[200, 404]
             )
 
+            # If you have logged in before, should keep session instead of logout.
+            if not has_login_before:
+                self._redfish_.logout()
             # If REST URL /xyz/openbmc_project/ is supported.
             if self._rest_response_.status == 200:
                 self.__inited__ = True
