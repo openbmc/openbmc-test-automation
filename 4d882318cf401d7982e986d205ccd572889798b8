@@ -56,6 +56,30 @@
       },
       "revId": "4d882318cf401d7982e986d205ccd572889798b8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f614ebf1_bbcd5eb5",
+        "filename": "lib/bmc_redfish_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-09-19T07:54:07Z",
+      "side": 1,
+      "message": "That is correct. we dont force log out here.. its upto the test cases to explicitly log out once the test is done .",
+      "parentUuid": "35a7aee6_049b0f28",
+      "range": {
+        "startLine": 41,
+        "startChar": 12,
+        "endLine": 41,
+        "endChar": 36
+      },
+      "revId": "4d882318cf401d7982e986d205ccd572889798b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
