@@ -89,7 +89,7 @@ OBMC Boot Test
     [Teardown]  OBMC Boot Test Teardown
     [Arguments]  ${pos_arg1}=${EMPTY}  &{arguments}
 
-    Redfish.Login
+    Run Keyword And Ignore Error  Redfish.Login
 
     # Note: If I knew how to specify a keyword teardown in python, I would
     # rename the "OBMC Boot Test Py" python function to "OBMC Boot Test" and
