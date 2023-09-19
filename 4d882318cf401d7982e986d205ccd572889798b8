@@ -16,6 +16,46 @@
       "message": "Quick question for you.. I don\u0027t see you are listed in the CLA here\n\nhttps://drive.google.com/drive/folders/1Ooi0RdTcaOWF1DWFJUAJDdN7tRKde7Nl\n\nCan you point me if already part of it .. \n\nIf you are new , take a look at this one time process https://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#starting-out",
       "revId": "4d882318cf401d7982e986d205ccd572889798b8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab33f12c_c2a32757",
+        "filename": "lib/bmc_redfish_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-09-19T07:51:09Z",
+      "side": 1,
+      "message": "has_active_session",
+      "revId": "4d882318cf401d7982e986d205ccd572889798b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35a7aee6_049b0f28",
+        "filename": "lib/bmc_redfish_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-09-19T07:51:09Z",
+      "side": 1,
+      "message": "Why do we need an if condition here?\n\nLogging out here is a good thing to do but it could break any tests or functionality if we are using it without logging in elsewhere. What do you suggest @gkeishin",
+      "range": {
+        "startLine": 41,
+        "startChar": 12,
+        "endLine": 41,
+        "endChar": 36
+      },
+      "revId": "4d882318cf401d7982e986d205ccd572889798b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
