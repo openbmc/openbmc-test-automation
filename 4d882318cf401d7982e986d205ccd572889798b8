@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfd57c2a_c531a550",
+        "filename": "lib/bmc_redfish_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001909
+      },
+      "writtenOn": "2023-09-19T08:24:00Z",
+      "side": 1,
+      "message": "Thanks for the suggestion, it has been modified here",
+      "parentUuid": "ab33f12c_c2a32757",
+      "revId": "4d882318cf401d7982e986d205ccd572889798b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35a7aee6_049b0f28",
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "That is correct. we dont force log out here.. its upto the test cases to explicitly log out once the test is done .",
       "parentUuid": "35a7aee6_049b0f28",
+      "range": {
+        "startLine": 41,
+        "startChar": 12,
+        "endLine": 41,
+        "endChar": 36
+      },
+      "revId": "4d882318cf401d7982e986d205ccd572889798b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d0deb01_c6d7dd8e",
+        "filename": "lib/bmc_redfish_utils.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001909
+      },
+      "writtenOn": "2023-09-19T08:24:00Z",
+      "side": 1,
+      "message": "Yes, it could be called when the test case is executed, if the test case is already logged in at the time of execution, then logging in here will result in a session that cannot be destroyed and cannot be used. So I need to judge the previous login status first, and then keep the original login state after the execution here is completed.",
+      "parentUuid": "f614ebf1_bbcd5eb5",
       "range": {
         "startLine": 41,
         "startChar": 12,
