@@ -456,6 +456,29 @@ Verify Core Watchdog Initiated BMC Dump
     Should Be Equal As Integers  ${length}  ${1}
 
 
+Verify BMC Dump Retrieval
+    [Documentation]  Verify retrieval of BMC dump.
+
+    ${dump_id}=  Create User Initiated BMC Dump Via Redfish
+    ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}
+    ${original_dump_size}=  Set Variable  ${resp.dict["AdditionalDataSizeBytes"]}
+
+    Initialize OpenBMC
+    ${headers}=  Create Dictionary  Content-Type=application/octet-stream
+    ...  X-Auth-Token=${XAUTH_TOKEN}
+
+    ${ret}=  Get Request  openbmc
+    ...  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}/attachment
+    ...  headers=${headers}
+
+    Run Keyword And Continue On Failure    Should Be Equal As Numbers     ${ret.status_code}    200
+
+    Create Binary File     BMC_dump.tar.gz     ${ret.content}
+    ${offloaded_size}=  Get File Size  BMC_dump.tar.gz
+
+    Should Be Equal  ${offloaded_size}  ${original_dump_size}
+
+
 *** Keywords ***
 
 Get BMC Dump Entries
