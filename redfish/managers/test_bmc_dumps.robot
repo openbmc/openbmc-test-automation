@@ -510,6 +510,16 @@ Verify Retrieve Core Initiated BMC Dump
     Download BMC Dump  ${dump_entries[0]}
 
 
+Verify Retrieve User Initiated BMC Dump
+    [Documentation]  Verify retrieval of user initiated BMC dump.
+    [Tags]  Verify_Retrieve_User_Initiated_BMC_Dump
+
+    ${dump_id}=  Create User Initiated BMC Dump Via Redfish
+
+    # Download BMC dump.
+    Download BMC Dump  ${dump_id}
+
+
 *** Keywords ***
 
 Extract BMC Dump
@@ -521,7 +531,7 @@ Extract BMC Dump
     # filename                name of BMC dump tar file.
     # bmc_dump_timestamp      timestamp of generated BMC dump.
 
-    File Should Exist  ${filename}
+    OperatingSystem.File Should Exist  ${filename}
     ${rc}=  Run And Return RC  dd if=${filename} of=output.zst bs=1 skip=628
     Should Be True  0 == ${rc}
 
