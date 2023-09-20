@@ -456,8 +456,40 @@ Verify Core Watchdog Initiated BMC Dump
     Should Be Equal As Integers  ${length}  ${1}
 
 
+Verify Retrieve User Initiated BMC Dump
+    [Documentation]  Verify retrieval of user initiated BMC dump.
+    [Tags]  Verify_Retrieve_User_Initiated_BMC_Dump 
+
+    ${dump_id}=  Create User Initiated BMC Dump Via Redfish
+
+    # Download BMC dump.
+    Download BMC Dump  ${dump_id}
+
 *** Keywords ***
 
+Download BMC Dump
+    [Documentation]  Download BMC dump and verify its size.
+    [Arguments]  ${dump_id}
+
+    # Description of argument(s):
+    # dump_id                dump identifier.
+
+    ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}
+    ${redfish_bmc_dump_size}=  Set Variable  ${resp.dict["AdditionalDataSizeBytes"]}
+    ${redfish_dump_creation_timestamp}=  Set Variable  ${resp.dict["Created"]}
+
+    Initialize OpenBMC
+    ${headers}=  Create Dictionary  Content-Type=application/octet-stream  X-Auth-Token=${XAUTH_TOKEN}
+
+    ${ret}=  Get Request  openbmc  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}/attachment  headers=${headers}
+
+    Should Be Equal As Numbers  ${ret.status_code}  200
+
+    Create Binary File  BMC_dump.tar.gz  ${ret.content}
+    ${downloaded_dump_size}=  Get File Size  BMC_dump.tar.gz
+    Should Be Equal  ${downloaded_dump_size}  ${redfish_bmc_dump_size}
+
+ 
 Get BMC Dump Entries
     [Documentation]  Return BMC dump ids list.
 
