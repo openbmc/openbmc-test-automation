@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4f97286_5fc88859",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-21T07:11:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2fa148e_b93323ee",
+      "revId": "63ada61d9d08b1544267b8c8603c028972fb481a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49f77910_09577b47",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-09-21T06:55:30Z",
       "side": 1,
       "message": "Remove space.",
+      "revId": "63ada61d9d08b1544267b8c8603c028972fb481a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc155a5d_060e54e5",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-21T07:11:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49f77910_09577b47",
       "revId": "63ada61d9d08b1544267b8c8603c028972fb481a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
