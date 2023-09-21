@@ -65,8 +65,12 @@ def peltool(option_string, parse_json=True, **bsu_options):
     if parse_json:
         try:
             return json.loads(out_buf)
-        except ValueError:
-            return {}
+        except ValueError as e:
+            if type(out_buf) == str:
+                return out_buf
+            else:
+                print(str(e))
+                return {}
     return out_buf
 
 
