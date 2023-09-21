@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2fcc4326_fec2e115",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-21T07:23:24Z",
+      "side": 1,
+      "message": "That is correct. However, as the API is failing now, setting to true will lead to failures only. So, I kept it false so that, dumps are deleted successfully one after another.",
+      "parentUuid": "03dc7ebd_052d5a9e",
+      "range": {
+        "startLine": 9,
+        "startChar": 32,
+        "endLine": 9,
+        "endChar": 37
+      },
+      "revId": "2babcf354a33defbc01b3e0683f1e46140bd0ac7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "54cd9964_b7e7064e",
         "filename": "lib/dump_utils.robot",
         "patchSetId": 4
