@@ -456,7 +456,68 @@ Verify Core Watchdog Initiated BMC Dump
     Should Be Equal As Integers  ${length}  ${1}
 
 
+Verify User Initiated BMC Dump Type
+    [Documentation]  Download user initiate BMC dump and validates its type.
+    [Tags]  Verify_User_Initiated_BMC_Dump_Type
+
+    ${dump_id}=  Create User Initiated BMC Dump Via Redfish
+
+    # Retrieve BMC dump.
+    ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}
+    ${redfish_bmc_dump_size}=  Set Variable  ${resp.dict["AdditionalDataSizeBytes"]}
+    ${redfish_dump_creation_timestamp}=  Set Variable  ${resp.dict["Created"]}
+
+    Initialize OpenBMC
+    ${headers}=  Create Dictionary  Content-Type=application/octet-stream
+    ...  X-Auth-Token=${XAUTH_TOKEN}
+
+    ${ret}=  Get Request  openbmc
+    ...  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}/attachment
+    ...  headers=${headers}
+
+    Should Be Equal As Numbers     ${ret.status_code}    200
+
+    Create Binary File     BMC_dump.tar.gz     ${ret.content}
+    ${downloaded_dump_size}=  Get File Size  BMC_dump.tar.gz
+    Should Be Equal  ${downloaded_dump_size}  ${redfish_bmc_dump_size}
+
+    # Extract dump and verify type of dump.
+    ${extracted_dump_folder}=  Extract BMC Dump  BMC_dump.tar.gz  ${redfish_dump_creation_timestamp}
+    ${contents}=  OperatingSystem.Get File  ${extracted_dump_folder}/summary.log
+    Should Match Regexp  ${contents}  Type:[ ]*user
+
+    # Clean extracted dump files.
+    Remove Files  output  output.zst
+    Remove Directory  ${extracted_dump_folder}  True
+
+
 *** Keywords ***
+
+Extract BMC Dump
+    [Documentation]  Extract BMC dump from the tar file
+    [Arguments]  ${filename}   ${bmc_dump_timestamp}
+
+    # Description of argument(s):
+    # filename                name of BMC dump tar file.
+    # bmc_dump_timestamp      timestamp of generated BMC dump.
+
+    ${rc}  =  Run and Return RC  dd if=${filename} of=output.zst bs=1 skip=628
+    Should Be True  0 == ${rc}
+
+    ${rc}  =  Run and Return RC  zstd -d output.zst
+    Should Be True  0 == ${rc}
+
+    ${rc}  ${cmd_output}=  Run and Return RC  tar -xvf output
+    Should Be True  0 == ${rc}
+
+    # Find the extracted dump folder identified with BMCDUMP as prefix and timestamp of dump generation.
+    ${var}=  Fetch From Left  ${bmc_dump_timestamp}  .
+    ${var}=  Remove String  ${var}  -  T  :
+    ${bmc_extraction_folders}=  OperatingSystem.List Directories In Directory  .  BMCDUMP*${var}
+    ${cnt}=  Get length  ${bmc_extraction_folders}
+    should be equal as numbers  ${cnt}  1
+    [Return]  ${bmc_extraction_folders}[0]
+
 
 Get BMC Dump Entries
     [Documentation]  Return BMC dump ids list.
