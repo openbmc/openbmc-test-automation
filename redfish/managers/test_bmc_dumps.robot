@@ -456,7 +456,84 @@ Verify Core Watchdog Initiated BMC Dump
     Should Be Equal As Integers  ${length}  ${1}
 
 
+Verify User Initiated BMC Dump Type
+    [Documentation]  The testcase verifies the type of BMC dump initiated.
+    ...   For this, it first generates a BMC dump of user type, retrieves the dump
+    ...   from BMC, extracts and the verifies the type of the dump from the extraction.
+    [Tags]  Verify_User_Initiated_BMC_Dump_Type
+
+    ${dump_id}=  Create User Initiated BMC Dump Via Redfish
+
+    # Retrieve BMC dump.
+    ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}
+    ${original_dump_size}=  Set Variable  ${resp.dict["AdditionalDataSizeBytes"]}
+    ${dump_creation_timestamp}=  Set Variable  ${resp.dict["Created"]}
+
+    Initialize OpenBMC
+    ${headers}=  Create Dictionary  Content-Type=application/octet-stream
+    ...  X-Auth-Token=${XAUTH_TOKEN}
+
+    ${ret}=  Get Request  openbmc
+    ...  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}/attachment
+    ...  headers=${headers}
+
+    Run Keyword And Continue On Failure    Should Be Equal As Numbers     ${ret.status_code}    200
+
+    Create Binary File     BMC_dump.tar.gz     ${ret.content}
+    ${offloaded_size}=  Get File Size  BMC_dump.tar.gz
+    Should Be Equal  ${offloaded_size}  ${original_dump_size}
+
+    # Extract dump.
+    Extract BMC Dump  BMC_dump.tar.gz
+
+    # Verify type of BMC dump after extraction.
+    ${extracted_dump_folder}=  Get Extracted BMC Dump Folder Name  ${dump_creation_timestamp}
+
+    # Verify BMC dump type.
+    ${contents}=  OperatingSystem.Get File  ${extracted_dump_folder}/summary.log
+    Should Match Regexp  ${contents}  Type:[ ]*user
+
+    # Clean extracted dump files.
+    Remove Files  output  output.zst
+    Remove Directory  ${extracted_dump_folder}  True
+
+
 *** Keywords ***
+
+Extract BMC Dump
+    [Documentation]  Extract BMC dump from the tar file.
+    [Arguments]  ${filename}
+
+    # Description of argument(s):
+    # filename      name of BMC dump tar file.
+
+    ${cmd1}=  Catenate  dd if=${filename} of=output.zst bs=1 skip=628
+    ${rc}  ${cmd_output}=  Run and Return RC and Output   ${cmd1}
+    Should Be True  0 == ${rc}
+
+    ${cmd2}=  Catenate  zstd -d output.zst
+    ${rc}  ${cmd_output}=  Run and Return RC and Output   ${cmd2}
+    Should Be True  0 == ${rc}
+
+    ${cmd3}=  Catenate  tar -xvf output
+    ${rc}  ${cmd_output}=  Run and Return RC and Output   ${cmd3}
+    Should Be True  0 == ${rc}
+
+
+Get Extracted BMC Dump Folder Name
+   [Documentation]  Get the name of the folder BMC dump got extracted.
+   [Arguments]  ${bmc_dump_timestamp}
+
+   # Description of argument(s):
+   # bmc_dump_timestamp      timestamp of generated BMC dump.
+
+   ${var}=  Fetch From Left  ${bmc_dump_timestamp}  .
+   ${var}=  Remove String  ${var}  -  T  :
+   ${bmc_extraction_folders}=  OperatingSystem.List Directories In Directory  .  BMCDUMP*${var}
+   ${cnt}=  Get length  ${bmc_extraction_folders}
+   should be equal as numbers  ${cnt}  1
+   [Return]  ${bmc_extraction_folders}[0]
+
 
 Get BMC Dump Entries
     [Documentation]  Return BMC dump ids list.
