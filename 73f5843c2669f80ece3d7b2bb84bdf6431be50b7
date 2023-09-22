@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e14f1a44_8413f83e",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1001326
+      },
+      "writtenOn": "2023-09-22T15:00:35Z",
+      "side": 1,
+      "message": "Description of Argument is missing",
+      "revId": "73f5843c2669f80ece3d7b2bb84bdf6431be50b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a38a90c_47fcf4c3",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1001326
+      },
+      "writtenOn": "2023-09-22T15:00:35Z",
+      "side": 1,
+      "message": "Description of arguments is missing",
+      "revId": "73f5843c2669f80ece3d7b2bb84bdf6431be50b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
