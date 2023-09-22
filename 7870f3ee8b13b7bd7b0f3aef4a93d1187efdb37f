@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94004d06_b567944f",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-22T11:24:59Z",
+      "side": 1,
+      "message": "One of the important verification of this test case is to verify that the downloaded dump is a BMC dump only. So untar the dump and check if the BMC dump summary file has BMC dump description.",
+      "range": {
+        "startLine": 487,
+        "startChar": 0,
+        "endLine": 487,
+        "endChar": 54
+      },
+      "revId": "7870f3ee8b13b7bd7b0f3aef4a93d1187efdb37f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
