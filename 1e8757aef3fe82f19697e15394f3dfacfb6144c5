@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7618974_0387e794",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-09-22T05:30:39Z",
+      "side": 1,
+      "message": "good addition.",
+      "range": {
+        "startLine": 69,
+        "startChar": 1,
+        "endLine": 72,
+        "endChar": 4
+      },
+      "revId": "1e8757aef3fe82f19697e15394f3dfacfb6144c5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
