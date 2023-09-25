@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "062c6228_82e216c9",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-09-25T04:06:22Z",
+      "side": 1,
+      "message": "Also your getting the file back. so please change the title accordingly\n\n\u0027Fetch Extracted BMC Dump Folder\u0027 or \u0027Find And Get Extracted BMC Dump Folder\u0027\n\nand mention about what is returned in the documentation.",
+      "revId": "73f5843c2669f80ece3d7b2bb84bdf6431be50b7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a38a90c_47fcf4c3",
         "filename": "redfish/managers/test_bmc_dumps.robot",
         "patchSetId": 2
