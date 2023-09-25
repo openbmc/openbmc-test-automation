@@ -205,6 +205,13 @@ Redfish BMC Dump Should Not Exist
      Should Be Equal As Integers  0  ${dump_entries['Members@odata.count']}
 
 
+Redfish BMC Dump Should Exist
+    [Documentation]  Check if BMC dump is generated.
+
+    ${dump_entries}=  Get Redfish BMC Dump Log Entries
+    Should Be True   ${dump_entries['Members@odata.count']} >= 1  msg=No BMC dump generated.
+
+
 Delete All BMC Dump
     [Documentation]  Delete all BMC dump entries using "DeleteAll" interface.
 
