@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f7cc7070_51e3f1c3",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-25T09:00:28Z",
+      "side": 1,
+      "message": "Verify User Initiated BMC Dump Download",
+      "range": {
+        "startLine": 459,
+        "startChar": 0,
+        "endLine": 459,
+        "endChar": 35
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d7ec7eb5_82633dba",
         "filename": "redfish/managers/test_bmc_dumps.robot",
         "patchSetId": 5
@@ -43,6 +66,168 @@
         "startChar": 4,
         "endLine": 462,
         "endChar": 87
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61cbf9bc_90465f4e",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-25T09:00:28Z",
+      "side": 1,
+      "message": "It can be further minimize  like below\n\nDownload user initiate BMC dump and validates its dump type.",
+      "parentUuid": "1e3053e5_e4c497b2",
+      "range": {
+        "startLine": 460,
+        "startChar": 4,
+        "endLine": 462,
+        "endChar": 87
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6abb2039_fffcbc22",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-25T09:00:28Z",
+      "side": 1,
+      "message": "use - redfish_bmc_dump_size",
+      "range": {
+        "startLine": 469,
+        "startChar": 6,
+        "endLine": 469,
+        "endChar": 24
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73650d9e_0681e63e",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-25T09:00:28Z",
+      "side": 1,
+      "message": "redfish_dump_creation_timestamp",
+      "range": {
+        "startLine": 470,
+        "startChar": 6,
+        "endLine": 470,
+        "endChar": 29
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51747745_8dd4c1ea",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-25T09:00:28Z",
+      "side": 1,
+      "message": "It can be bring in one line",
+      "range": {
+        "startLine": 473,
+        "startChar": 0,
+        "endLine": 474,
+        "endChar": 36
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fd825ae_878c4c3a",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-25T09:00:28Z",
+      "side": 1,
+      "message": "Why are be continue on failure here. I would say wait for the dump to get downlaod here.",
+      "range": {
+        "startLine": 480,
+        "startChar": 0,
+        "endLine": 480,
+        "endChar": 99
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ea4c3af_9ed3dc16",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-25T09:00:28Z",
+      "side": 1,
+      "message": "downloaded_bmc_dump_size",
+      "range": {
+        "startLine": 483,
+        "startChar": 6,
+        "endLine": 483,
+        "endChar": 20
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8c7259a_db47478d",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-25T09:00:28Z",
+      "side": 1,
+      "message": "You can have one comment in place of multiple below comment",
+      "range": {
+        "startLine": 486,
+        "startChar": 0,
+        "endLine": 486,
+        "endChar": 19
       },
       "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
