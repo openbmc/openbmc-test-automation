@@ -231,6 +231,122 @@
       },
       "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38db6353_cade96d8",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-25T10:20:24Z",
+      "side": 1,
+      "message": "Like\n\n```\n# Extract the downloaded BMC dump and verify its dump type.\n```",
+      "parentUuid": "d8c7259a_db47478d",
+      "range": {
+        "startLine": 486,
+        "startChar": 0,
+        "endLine": 486,
+        "endChar": 19
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "359ed42e_f66728d1",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-25T10:20:24Z",
+      "side": 1,
+      "message": "why this cmd1 variable is required. We can use the command likely like below.",
+      "range": {
+        "startLine": 510,
+        "startChar": 0,
+        "endLine": 510,
+        "endChar": 69
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d686d06_ee8316ca",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-25T10:20:24Z",
+      "side": 1,
+      "message": "cmd_output is not used anywhere. Please use it like below\n\n    ${rc}\u003d  Run and Return RC  dd if\u003d${filename} of\u003doutput.zst bs\u003d1 skip\u003d628",
+      "range": {
+        "startLine": 511,
+        "startChar": 0,
+        "endLine": 511,
+        "endChar": 65
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98255c24_ead283e6",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-25T10:20:24Z",
+      "side": 1,
+      "message": "I guess we can just have all these command in one line like below\n\n    ${rc}\u003d  Run and Return RC  dd if\u003d${filename} of\u003doutput.zst bs\u003d1 skip\u003d628; zstd -d output.zst; tar -xvf output",
+      "range": {
+        "startLine": 519,
+        "startChar": 0,
+        "endLine": 519,
+        "endChar": 65
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ec88a42_e7f6ab2a",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-25T10:20:24Z",
+      "side": 1,
+      "message": "What we are doing here. Please add some description on this?",
+      "range": {
+        "startLine": 530,
+        "startChar": 0,
+        "endLine": 535,
+        "endChar": 41
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
