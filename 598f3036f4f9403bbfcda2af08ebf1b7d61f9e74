@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3cb06838_6848c794",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-26T06:16:06Z",
+      "side": 1,
+      "message": "This testcase is to verify type of bmcdump dowloaded as per testplan, not to verify download.",
+      "parentUuid": "f7cc7070_51e3f1c3",
+      "range": {
+        "startLine": 459,
+        "startChar": 0,
+        "endLine": 459,
+        "endChar": 35
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d7ec7eb5_82633dba",
         "filename": "redfish/managers/test_bmc_dumps.robot",
         "patchSetId": 5
@@ -95,6 +119,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9638fc83_00588e9b",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-26T06:16:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61cbf9bc_90465f4e",
+      "range": {
+        "startLine": 460,
+        "startChar": 4,
+        "endLine": 462,
+        "endChar": 87
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6abb2039_fffcbc22",
@@ -108,6 +156,30 @@
       "writtenOn": "2023-09-25T09:00:28Z",
       "side": 1,
       "message": "use - redfish_bmc_dump_size",
+      "range": {
+        "startLine": 469,
+        "startChar": 6,
+        "endLine": 469,
+        "endChar": 24
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0040ade_6fdcf00f",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-26T06:16:06Z",
+      "side": 1,
+      "message": "I think not necessary, both are bmc dumps, redfish is the technique used",
+      "parentUuid": "6abb2039_fffcbc22",
       "range": {
         "startLine": 469,
         "startChar": 6,
@@ -143,6 +215,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c4c2db9_23cce053",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-26T06:16:06Z",
+      "side": 1,
+      "message": "I think not necessary, both are bmc dumps, redfish is the technique used",
+      "parentUuid": "73650d9e_0681e63e",
+      "range": {
+        "startLine": 470,
+        "startChar": 6,
+        "endLine": 470,
+        "endChar": 29
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51747745_8dd4c1ea",
         "filename": "redfish/managers/test_bmc_dumps.robot",
         "patchSetId": 5
@@ -154,6 +250,30 @@
       "writtenOn": "2023-09-25T09:00:28Z",
       "side": 1,
       "message": "It can be bring in one line",
+      "range": {
+        "startLine": 473,
+        "startChar": 0,
+        "endLine": 474,
+        "endChar": 36
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f7dce3e_d88db46a",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-26T06:16:06Z",
+      "side": 1,
+      "message": "I would like to keep that.",
+      "parentUuid": "51747745_8dd4c1ea",
       "range": {
         "startLine": 473,
         "startChar": 0,
@@ -187,6 +307,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc29a2f4_76100f41",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-26T06:16:06Z",
+      "side": 1,
+      "message": "Done - The API waits till dump content is retrieved.",
+      "parentUuid": "7fd825ae_878c4c3a",
+      "range": {
+        "startLine": 480,
+        "startChar": 0,
+        "endLine": 480,
+        "endChar": 99
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ea4c3af_9ed3dc16",
@@ -200,6 +344,30 @@
       "writtenOn": "2023-09-25T09:00:28Z",
       "side": 1,
       "message": "downloaded_bmc_dump_size",
+      "range": {
+        "startLine": 483,
+        "startChar": 6,
+        "endLine": 483,
+        "endChar": 20
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f529b9be_ceeb476f",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-26T06:16:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ea4c3af_9ed3dc16",
       "range": {
         "startLine": 483,
         "startChar": 6,
@@ -257,6 +425,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac9f4df9_0deeae19",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-26T06:16:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8c7259a_db47478d",
+      "range": {
+        "startLine": 486,
+        "startChar": 0,
+        "endLine": 486,
+        "endChar": 19
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "359ed42e_f66728d1",
@@ -270,6 +462,30 @@
       "writtenOn": "2023-09-25T10:20:24Z",
       "side": 1,
       "message": "why this cmd1 variable is required. We can use the command likely like below.",
+      "range": {
+        "startLine": 510,
+        "startChar": 0,
+        "endLine": 510,
+        "endChar": 69
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09f7aeb8_23c3447a",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-26T06:16:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "359ed42e_f66728d1",
       "range": {
         "startLine": 510,
         "startChar": 0,
@@ -303,6 +519,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b4a992c_3388f771",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-26T06:16:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d686d06_ee8316ca",
+      "range": {
+        "startLine": 511,
+        "startChar": 0,
+        "endLine": 511,
+        "endChar": 65
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98255c24_ead283e6",
@@ -326,6 +566,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82468a18_238f36d5",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-26T06:16:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98255c24_ead283e6",
+      "range": {
+        "startLine": 519,
+        "startChar": 0,
+        "endLine": 519,
+        "endChar": 65
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ec88a42_e7f6ab2a",
@@ -339,6 +603,30 @@
       "writtenOn": "2023-09-25T10:20:24Z",
       "side": 1,
       "message": "What we are doing here. Please add some description on this?",
+      "range": {
+        "startLine": 530,
+        "startChar": 0,
+        "endLine": 535,
+        "endChar": 41
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cbe47cd_a69fc1e3",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-26T06:16:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ec88a42_e7f6ab2a",
       "range": {
         "startLine": 530,
         "startChar": 0,
