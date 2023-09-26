@@ -16,6 +16,75 @@
       "message": "Thanks for reviewing",
       "revId": "4e830790302613f165473d677e3378c962aa9579",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54935f6f_5ae44186",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-26T07:54:46Z",
+      "side": 1,
+      "message": "No need to have a separate keyword. Please combine this and above keyword so that we extract BMC dump and return its location.",
+      "range": {
+        "startLine": 497,
+        "startChar": 0,
+        "endLine": 517,
+        "endChar": 34
+      },
+      "revId": "4e830790302613f165473d677e3378c962aa9579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c9c9f9b_ab64b09c",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-26T07:54:46Z",
+      "side": 1,
+      "message": "Always remove whitespace.",
+      "range": {
+        "startLine": 523,
+        "startChar": 0,
+        "endLine": 523,
+        "endChar": 3
+      },
+      "revId": "4e830790302613f165473d677e3378c962aa9579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23305b7f_bda3c097",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-26T07:54:46Z",
+      "side": 1,
+      "message": "Please add example of BMC dump time stamp in the comments.",
+      "range": {
+        "startLine": 524,
+        "startChar": 0,
+        "endLine": 524,
+        "endChar": 103
+      },
+      "revId": "4e830790302613f165473d677e3378c962aa9579",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

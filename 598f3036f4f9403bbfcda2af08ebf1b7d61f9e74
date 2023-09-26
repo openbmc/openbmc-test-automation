@@ -192,6 +192,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57403bc0_548332f0",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-26T07:54:46Z",
+      "side": 1,
+      "message": "We should add some info on where we are picking the size from. And that is why its good to name it like redfish_bmc_dump_size",
+      "parentUuid": "c0040ade_6fdcf00f",
+      "range": {
+        "startLine": 469,
+        "startChar": 6,
+        "endLine": 469,
+        "endChar": 24
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73650d9e_0681e63e",
         "filename": "redfish/managers/test_bmc_dumps.robot",
         "patchSetId": 5
@@ -239,6 +263,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fa968461_e05a2174",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-26T07:54:46Z",
+      "side": 1,
+      "message": "Same comment as above.",
+      "parentUuid": "5c4c2db9_23cce053",
+      "range": {
+        "startLine": 470,
+        "startChar": 6,
+        "endLine": 470,
+        "endChar": 29
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51747745_8dd4c1ea",
         "filename": "redfish/managers/test_bmc_dumps.robot",
         "patchSetId": 5
@@ -274,6 +322,30 @@
       "side": 1,
       "message": "I would like to keep that.",
       "parentUuid": "51747745_8dd4c1ea",
+      "range": {
+        "startLine": 473,
+        "startChar": 0,
+        "endLine": 474,
+        "endChar": 36
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e62056f_c787582d",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-26T07:54:46Z",
+      "side": 1,
+      "message": "We should bring in one line where all its possible. So please do that",
+      "parentUuid": "0f7dce3e_d88db46a",
       "range": {
         "startLine": 473,
         "startChar": 0,
@@ -496,6 +568,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80d8b428_281f2917",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-26T07:54:46Z",
+      "side": 1,
+      "message": "I dont see the change",
+      "parentUuid": "09f7aeb8_23c3447a",
+      "range": {
+        "startLine": 510,
+        "startChar": 0,
+        "endLine": 510,
+        "endChar": 69
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d686d06_ee8316ca",
@@ -580,6 +676,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "98255c24_ead283e6",
+      "range": {
+        "startLine": 519,
+        "startChar": 0,
+        "endLine": 519,
+        "endChar": 65
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95a3951c_a75d1120",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-26T07:54:46Z",
+      "side": 1,
+      "message": "I dont see the change",
+      "parentUuid": "82468a18_238f36d5",
       "range": {
         "startLine": 519,
         "startChar": 0,
