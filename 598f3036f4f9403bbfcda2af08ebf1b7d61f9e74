@@ -214,6 +214,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3134d34f_2523f1cb",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-27T09:31:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57403bc0_548332f0",
+      "range": {
+        "startLine": 469,
+        "startChar": 6,
+        "endLine": 469,
+        "endChar": 24
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73650d9e_0681e63e",
@@ -285,6 +309,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8c2844d_a75dd15d",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-27T09:31:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa968461_e05a2174",
+      "range": {
+        "startLine": 470,
+        "startChar": 6,
+        "endLine": 470,
+        "endChar": 29
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51747745_8dd4c1ea",
@@ -346,6 +394,30 @@
       "side": 1,
       "message": "We should bring in one line where all its possible. So please do that",
       "parentUuid": "0f7dce3e_d88db46a",
+      "range": {
+        "startLine": 473,
+        "startChar": 0,
+        "endLine": 474,
+        "endChar": 36
+      },
+      "revId": "598f3036f4f9403bbfcda2af08ebf1b7d61f9e74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7768b1e0_91469457",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-09-27T09:31:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e62056f_c787582d",
       "range": {
         "startLine": 473,
         "startChar": 0,
