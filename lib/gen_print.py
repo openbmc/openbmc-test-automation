@@ -395,7 +395,7 @@ def get_arg_name(var, arg_num=1, stack_frame_ix=1):
 
     # Join the start line through the end line into a composite line.
     composite_line = "".join(
-        map(str.strip, source_lines[start_line_ix : end_line_ix + 1])
+        map(str.strip, source_lines[start_line_ix: end_line_ix + 1])
     )
     # Insert one space after first "=" if there isn't one already.
     composite_line = re.sub("=[ ]*([^ ])", "= \\1", composite_line, 1)

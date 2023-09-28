@@ -435,7 +435,7 @@ def split_string_with_index(stri, n):
     """
 
     n = int(n)
-    data = [stri[index : index + n] for index in range(0, len(stri), n)]
+    data = [stri[index: index + n] for index in range(0, len(stri), n)]
     return data
 
 

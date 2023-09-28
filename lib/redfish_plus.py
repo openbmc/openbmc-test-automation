@@ -103,7 +103,8 @@ class redfish_plus(HttpClient):
         From a robot program:
 
         BMC_Redfish.logout
-        ${response}=  BMC_Redfish.Get  /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces  valid_status_codes=[401]
+        ${response}=  BMC_Redfish.Get  /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces
+                      valid_status_codes=[401]
 
         As part of a robot test, the programmer has logged out to verify that the get request will generate a
         status code of 401 (i.e. "Unauthorized").
