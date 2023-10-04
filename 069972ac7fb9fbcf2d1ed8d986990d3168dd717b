@@ -22,6 +22,30 @@
       },
       "revId": "069972ac7fb9fbcf2d1ed8d986990d3168dd717b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6dfde39_de55149f",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2023-10-04T10:44:14Z",
+      "side": 1,
+      "message": "Done, Create a new keyword to do that task",
+      "parentUuid": "bdd4aebc_f063c5ae",
+      "range": {
+        "startLine": 275,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 25
+      },
+      "revId": "069972ac7fb9fbcf2d1ed8d986990d3168dd717b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
