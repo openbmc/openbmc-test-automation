@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4222bb1d_b8c3a7a5",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-04T07:49:46Z",
+      "side": 1,
+      "message": "```\n# Download BMC dump and verify its size.\n```",
+      "range": {
+        "startLine": 465,
+        "startChar": 0,
+        "endLine": 465,
+        "endChar": 24
+      },
+      "revId": "553ba5a850c8a2351d5cc95259706e2e5609b7d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c092a92_0e8d6632",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-04T07:49:46Z",
+      "side": 1,
+      "message": "Bring it into one line this will help minimizing code length",
+      "range": {
+        "startLine": 474,
+        "startChar": 0,
+        "endLine": 475,
+        "endChar": 27
+      },
+      "revId": "553ba5a850c8a2351d5cc95259706e2e5609b7d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20d76618_2a256fe5",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-04T07:49:46Z",
+      "side": 1,
+      "message": "2 spaces please \n\n    Should Be Equal As Numbers  ${ret.status_code}  200\n    Create Binary File  BMC_dump.tar.gz  ${ret.content}",
+      "range": {
+        "startLine": 477,
+        "startChar": 0,
+        "endLine": 479,
+        "endChar": 61
+      },
+      "revId": "553ba5a850c8a2351d5cc95259706e2e5609b7d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44caecb1_752b95dc",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-04T07:49:46Z",
+      "side": 1,
+      "message": "Before such regex, please also add an example of summary.log file showing dump type.",
+      "range": {
+        "startLine": 486,
+        "startChar": 0,
+        "endLine": 486,
+        "endChar": 51
+      },
+      "revId": "553ba5a850c8a2351d5cc95259706e2e5609b7d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffb12528_941c5741",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-04T07:49:46Z",
+      "side": 1,
+      "message": "2 spaces please",
+      "range": {
+        "startLine": 498,
+        "startChar": 28,
+        "endLine": 498,
+        "endChar": 31
+      },
+      "revId": "553ba5a850c8a2351d5cc95259706e2e5609b7d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2afeb977_237c72a2",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-04T07:49:46Z",
+      "side": 1,
+      "message": "We should not be passing this timestamp. As this keyword is designed to do BMC extraction we should only do that part.",
+      "range": {
+        "startLine": 498,
+        "startChar": 31,
+        "endLine": 498,
+        "endChar": 52
+      },
+      "revId": "553ba5a850c8a2351d5cc95259706e2e5609b7d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e081d676_99748a76",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-04T07:49:46Z",
+      "side": 1,
+      "message": "As suggested earlier, I guess we can just have all these command in one line like below. Please cross check\n\n${rc}\u003d  Run and Return RC  dd if\u003d${filename} of\u003doutput.zst bs\u003d1 skip\u003d628; zstd -d output.zst; tar -xvf output",
+      "range": {
+        "startLine": 504,
+        "startChar": 0,
+        "endLine": 512,
+        "endChar": 30
+      },
+      "revId": "553ba5a850c8a2351d5cc95259706e2e5609b7d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "593624db_074965e6",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-04T07:49:46Z",
+      "side": 1,
+      "message": "Please dont depend on bmc_dump_timestamp. You can create a folder and there extract the BMC dump and then return the folder path.",
+      "range": {
+        "startLine": 514,
+        "startChar": 0,
+        "endLine": 520,
+        "endChar": 41
+      },
+      "revId": "553ba5a850c8a2351d5cc95259706e2e5609b7d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
