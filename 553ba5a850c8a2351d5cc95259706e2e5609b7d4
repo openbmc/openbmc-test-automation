@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bca933e6_c429fb89",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-04T11:07:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4222bb1d_b8c3a7a5",
+      "range": {
+        "startLine": 465,
+        "startChar": 0,
+        "endLine": 465,
+        "endChar": 24
+      },
+      "revId": "553ba5a850c8a2351d5cc95259706e2e5609b7d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c092a92_0e8d6632",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-04T07:49:46Z",
       "side": 1,
       "message": "Bring it into one line this will help minimizing code length",
+      "range": {
+        "startLine": 474,
+        "startChar": 0,
+        "endLine": 475,
+        "endChar": 27
+      },
+      "revId": "553ba5a850c8a2351d5cc95259706e2e5609b7d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ea95b90_7ea2334a",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-04T11:07:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c092a92_0e8d6632",
       "range": {
         "startLine": 474,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5e91e4a_0d87b5cc",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-04T11:07:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20d76618_2a256fe5",
+      "range": {
+        "startLine": 477,
+        "startChar": 0,
+        "endLine": 479,
+        "endChar": 61
+      },
+      "revId": "553ba5a850c8a2351d5cc95259706e2e5609b7d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44caecb1_752b95dc",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-10-04T07:49:46Z",
       "side": 1,
       "message": "Before such regex, please also add an example of summary.log file showing dump type.",
+      "range": {
+        "startLine": 486,
+        "startChar": 0,
+        "endLine": 486,
+        "endChar": 51
+      },
+      "revId": "553ba5a850c8a2351d5cc95259706e2e5609b7d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "547b67b1_75ba2d93",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-04T11:07:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44caecb1_752b95dc",
       "range": {
         "startLine": 486,
         "startChar": 0,
@@ -141,6 +237,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "087436a5_801f4a28",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 498,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-04T11:07:57Z",
+      "side": 1,
+      "message": "This is required and used to identify the folder during extraction.",
+      "parentUuid": "2afeb977_237c72a2",
+      "range": {
+        "startLine": 498,
+        "startChar": 31,
+        "endLine": 498,
+        "endChar": 52
+      },
+      "revId": "553ba5a850c8a2351d5cc95259706e2e5609b7d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e081d676_99748a76",
         "filename": "redfish/managers/test_bmc_dumps.robot",
         "patchSetId": 12
@@ -164,6 +284,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d480de1f_3ebb7020",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-04T11:07:57Z",
+      "side": 1,
+      "message": "We only talked about avoiding variables for command construction.\nHowever, I would stay with this. Reason - I am checking checking RC, if RC is 0, then only next command executed.",
+      "parentUuid": "e081d676_99748a76",
+      "range": {
+        "startLine": 504,
+        "startChar": 0,
+        "endLine": 512,
+        "endChar": 30
+      },
+      "revId": "553ba5a850c8a2351d5cc95259706e2e5609b7d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "593624db_074965e6",
         "filename": "redfish/managers/test_bmc_dumps.robot",
         "patchSetId": 12
@@ -175,6 +319,30 @@
       "writtenOn": "2023-10-04T07:49:46Z",
       "side": 1,
       "message": "Please dont depend on bmc_dump_timestamp. You can create a folder and there extract the BMC dump and then return the folder path.",
+      "range": {
+        "startLine": 514,
+        "startChar": 0,
+        "endLine": 520,
+        "endChar": 41
+      },
+      "revId": "553ba5a850c8a2351d5cc95259706e2e5609b7d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9191fa57_7a197cb5",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-04T11:07:57Z",
+      "side": 1,
+      "message": "Why create extra folder, this is a better solution. I have already incorporated two review comments for time stamp for this.",
+      "parentUuid": "593624db_074965e6",
       "range": {
         "startLine": 514,
         "startChar": 0,
