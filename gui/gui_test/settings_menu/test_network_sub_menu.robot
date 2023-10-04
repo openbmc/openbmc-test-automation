@@ -211,6 +211,16 @@ Suite Setup Execution
     ${default_gateway}=  Get BMC Default Gateway
     Set Suite Variable  ${default_gateway}
 
+Launch Browser And Navigate To Network Page
+    [Documentaion]  Launch browser and navigate to network page.
+
+    Launch Browser And Login GUI
+    Wait Until Keyword Succeeds  1 min  15 sec
+    ...  Click Element  ${xpath_settings_menu}
+    Click Element  ${xpath_network_sub_menu}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  network
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+
 Configure the Hostname Back And Verify
     [Documentation]  Configure the hostname back.
 
@@ -272,4 +282,8 @@ Configure And Verify Network Settings Via GUI
     Wait Until Keyword Succeeds  30 sec  10 sec  Click Element  ${xpath_nw_settings}
     Input Text  ${xpath_nw_settings_input_field}  ${input_value}
     Click Button  ${xpath_save_button}
+
+    # Re-Login gui and navigate to network page.
+    Launch Browser And Navigate To Network Page
+
     Wait Until Page Contains  ${input_value}  timeout=30sec
