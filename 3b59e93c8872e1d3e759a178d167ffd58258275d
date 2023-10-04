@@ -22,6 +22,30 @@
       },
       "revId": "3b59e93c8872e1d3e759a178d167ffd58258275d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25b7e872_7c5889ea",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 951,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-10-04T09:33:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b843222_1a526167",
+      "range": {
+        "startLine": 951,
+        "startChar": 29,
+        "endLine": 951,
+        "endChar": 33
+      },
+      "revId": "3b59e93c8872e1d3e759a178d167ffd58258275d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
