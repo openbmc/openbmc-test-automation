@@ -46,6 +46,30 @@
       },
       "revId": "e10493f1f89f09a2894c0efacd973c2ba6bdd162",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1eb17a4_07dcaea4",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-04T15:03:59Z",
+      "side": 1,
+      "message": "Okay as suggested in other commit, please have a common keyword to download a given BMC dump id and return its location.",
+      "parentUuid": "f316c193_27489224",
+      "range": {
+        "startLine": 478,
+        "startChar": 0,
+        "endLine": 478,
+        "endChar": 54
+      },
+      "revId": "e10493f1f89f09a2894c0efacd973c2ba6bdd162",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
