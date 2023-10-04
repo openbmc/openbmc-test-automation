@@ -70,6 +70,30 @@
       },
       "revId": "7870f3ee8b13b7bd7b0f3aef4a93d1187efdb37f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "273a3dd2_8d0ff48d",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-04T15:00:12Z",
+      "side": 1,
+      "message": "Okay so you are going to have 4 test cases(i.e. two for dump download and two for Dump type  verification from the downloaded dump).\n\nAll these four test cases would need BMC dump download. So please have a common keyword to download a given BMC dump id and return its location.",
+      "parentUuid": "54aa3447_260bebee",
+      "range": {
+        "startLine": 487,
+        "startChar": 0,
+        "endLine": 487,
+        "endChar": 54
+      },
+      "revId": "7870f3ee8b13b7bd7b0f3aef4a93d1187efdb37f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
