@@ -272,4 +272,5 @@ Configure And Verify Network Settings Via GUI
     Wait Until Keyword Succeeds  30 sec  10 sec  Click Element  ${xpath_nw_settings}
     Input Text  ${xpath_nw_settings_input_field}  ${input_value}
     Click Button  ${xpath_save_button}
+    Suite Setup Execution
     Wait Until Page Contains  ${input_value}  timeout=30sec
