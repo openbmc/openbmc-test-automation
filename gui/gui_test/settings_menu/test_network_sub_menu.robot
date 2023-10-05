@@ -212,7 +212,7 @@ Suite Setup Execution
     Set Suite Variable  ${default_gateway}
 
 Launch Browser Login GUI And Navigate To Network Page
-    [Documentaion]  Launch browser Login GUI and navigate to network page.
+    [Documentation]  Launch browser Login GUI and navigate to network page.
 
     Launch Browser And Login GUI
     Wait Until Keyword Succeeds  1 min  15 sec
