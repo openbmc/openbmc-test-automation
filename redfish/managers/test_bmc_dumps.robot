@@ -460,23 +460,14 @@ Verify User Initiated BMC Dump Type
     [Documentation]  Download user initiate BMC dump and validates its type.
     [Tags]  Verify_User_Initiated_BMC_Dump_Type
 
+    Redfish Power Off  stack_mode=skip
     ${dump_id}=  Create User Initiated BMC Dump Via Redfish
 
     # Download BMC dump and verify its size.
     ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}
-    ${redfish_bmc_dump_size}=  Set Variable  ${resp.dict["AdditionalDataSizeBytes"]}
     ${redfish_dump_creation_timestamp}=  Set Variable  ${resp.dict["Created"]}
-
-    Initialize OpenBMC
-    ${headers}=  Create Dictionary  Content-Type=application/octet-stream  X-Auth-Token=${XAUTH_TOKEN}
-
-    ${ret}=  Get Request  openbmc  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}/attachment  headers=${headers}
-
-    Should Be Equal As Numbers  ${ret.status_code}  200
-
-    Create Binary File  BMC_dump.tar.gz  ${ret.content}
-    ${downloaded_dump_size}=  Get File Size  BMC_dump.tar.gz
-    Should Be Equal  ${downloaded_dump_size}  ${redfish_bmc_dump_size}
+    # Download BMC dump and verify its size.
+    ${tarfile}=  Download BMC Dump  ${dump_id}
 
     # Extract dump and verify type of dump from summary.log content:
     # Wed Aug 30 17:23:29 UTC 2023 Name:          BMCDUMP.XXXXXXX.0001005.20230830172329
@@ -514,13 +505,74 @@ Verify Retrieve User Initiated BMC Dump
     [Documentation]  Verify retrieval of user initiated BMC dump.
     [Tags]  Verify_Retrieve_User_Initiated_BMC_Dump
 
+    Redfish Power Off  stack_mode=skip
     ${dump_id}=  Create User Initiated BMC Dump Via Redfish
 
     # Download BMC dump.
     Download BMC Dump  ${dump_id}
 
 
+Verify Core Initiated BMC Dump Type
+    [Documentation]  Download core initiate BMC dump and validates its type.
+    [Tags]  Verify_Core_Initiated_BMC_Dump_Type
+
+    Redfish Power Off  stack_mode=skip
+
+    # Ensure all dumps are cleaned out.
+    Redfish Delete All BMC Dumps
+    Trigger Core Dump
+
+    # Verify that BMC dump is available.
+    Wait Until Keyword Succeeds  2 min  10 sec  Is BMC Dump Available
+
+    ${dump_entries}=  Get BMC Dump Entries
+
+    # Find the timestamp of BMC dump.
+    ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_entries[0]}
+    ${redfish_dump_creation_timestamp}=  Set Variable  ${resp.dict["Created"]}
+
+    # Download BMC dump and verify its size.
+    ${tarfile}=  Download BMC Dump  ${dump_entries[0]}
+
+    # Extract dump and verify type of dump from summary.log content:
+    # Wed Aug 30 17:23:29 UTC 2023 Name:          BMCDUMP.XXXXXXX.0001005.20230830172329
+    # Wed Aug 30 17:23:29 UTC 2023 Epochtime:     1693416209
+    # Wed Aug 30 17:23:29 UTC 2023 ID:            0001005
+    # Wed Aug 30 17:23:29 UTC 2023 Type:          core
+
+    ${extracted_dump_folder}=  Extract BMC Dump  ${tarfile}  ${redfish_dump_creation_timestamp}
+    ${contents}=  OperatingSystem.Get File  ${extracted_dump_folder}/summary.log
+    Should Match Regexp  ${contents}  Type:[ ]*core
+
+    # Clean extracted dump files.
+    Remove Files  output  output.zst
+    Remove Directory  ${extracted_dump_folder}  True
+
+
 *** Keywords ***
+
+Download BMC Dump
+    [Documentation]  Download BMC dump and verify its size.
+    [Arguments]  ${dump_id}
+
+    # Description of argument(s):
+    # dump_id                An integer value that identifies a particular dump (e.g. 1, 3).
+
+    ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}
+    ${redfish_bmc_dump_size}=  Set Variable  ${resp.dict["AdditionalDataSizeBytes"]}
+
+    Initialize OpenBMC
+    ${headers}=  Create Dictionary  Content-Type=application/octet-stream  X-Auth-Token=${XAUTH_TOKEN}
+
+    ${ret}=  Get Request  openbmc  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}/attachment  headers=${headers}
+
+    Should Be Equal As Numbers  ${ret.status_code}  200
+
+    Create Binary File  BMC_dump.tar.gz  ${ret.content}
+    ${downloaded_dump_size}=  Get File Size  BMC_dump.tar.gz
+    Should Be Equal  ${downloaded_dump_size}  ${redfish_bmc_dump_size}
+    [Return]  BMC_dump.tar.gz
+
 
 Extract BMC Dump
     [Documentation]  Extract BMC dump from the tar file and returns the name of
@@ -550,30 +602,6 @@ Extract BMC Dump
     should be equal as numbers  ${cnt}  1
 
     [Return]  ${bmc_extraction_folders}[0]
-
-
-Download BMC Dump
-    [Documentation]  Download BMC dump and verify its size.
-    [Arguments]  ${dump_id}
-
-    # Description of argument(s):
-    # dump_id                An integer value that identifies a particular dump (e.g. 1, 3).
-
-    ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}
-    ${redfish_bmc_dump_size}=  Set Variable  ${resp.dict["AdditionalDataSizeBytes"]}
-    ${redfish_dump_creation_timestamp}=  Set Variable  ${resp.dict["Created"]}
-
-    Initialize OpenBMC
-    ${headers}=  Create Dictionary  Content-Type=application/octet-stream  X-Auth-Token=${XAUTH_TOKEN}
-
-    ${ret}=  Get Request  openbmc
-    ...  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}/attachment  headers=${headers}
-
-    Should Be Equal As Numbers  ${ret.status_code}  200
-
-    Create Binary File  BMC_dump.tar.gz  ${ret.content}
-    ${downloaded_dump_size}=  Get File Size  BMC_dump.tar.gz
-    Should Be Equal  ${downloaded_dump_size}  ${redfish_bmc_dump_size}
 
 
 Get BMC Dump Entries
