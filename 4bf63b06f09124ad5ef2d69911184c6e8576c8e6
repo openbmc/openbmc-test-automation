@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "622206f6_4aa43c93",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-10-05T05:24:43Z",
+      "side": 1,
+      "message": "please remove spaces @465 and @485",
+      "revId": "4bf63b06f09124ad5ef2d69911184c6e8576c8e6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d87e228_2580a400",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-10-05T05:24:43Z",
+      "side": 1,
+      "message": "please change - BMCDUMP.XXXXXXX. do not put the serial number on open source.",
+      "range": {
+        "startLine": 482,
+        "startChar": 51,
+        "endLine": 482,
+        "endChar": 65
+      },
+      "revId": "4bf63b06f09124ad5ef2d69911184c6e8576c8e6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
