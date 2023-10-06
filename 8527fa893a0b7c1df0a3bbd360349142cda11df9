@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02e11e16_a4531bf7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-06T04:44:27Z",
+      "side": 1,
+      "message": "Minor comment.",
+      "revId": "8527fa893a0b7c1df0a3bbd360349142cda11df9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e13545e_1f702219",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-06T04:44:27Z",
+      "side": 1,
+      "message": "```\n    # dump_id  An integer value that identifies a particular dump (e.g. 1, 3).\n```",
+      "range": {
+        "startLine": 484,
+        "startChar": 0,
+        "endLine": 484,
+        "endChar": 45
+      },
+      "revId": "8527fa893a0b7c1df0a3bbd360349142cda11df9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a68a902_324a1d30",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-06T04:44:27Z",
+      "side": 1,
+      "message": "It is exceeding 110 characters line limit. Split in two line.",
+      "range": {
+        "startLine": 493,
+        "startChar": 0,
+        "endLine": 493,
+        "endChar": 126
+      },
+      "revId": "8527fa893a0b7c1df0a3bbd360349142cda11df9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
