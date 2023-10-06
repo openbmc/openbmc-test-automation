@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6137a17_8b56cbc7",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-06T04:52:36Z",
+      "side": 1,
+      "message": "Remove white space",
+      "range": {
+        "startLine": 461,
+        "startChar": 51,
+        "endLine": 461,
+        "endChar": 52
+      },
+      "revId": "822891fb8f8f702a3db66d651bd02b4e63b2393a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2938c2c3_2fd5573e",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-06T04:52:36Z",
+      "side": 1,
+      "message": "Same comment as the other commit\n\n    # dump_id  An integer value that identifies a particular dump (e.g. 1, 3).",
+      "range": {
+        "startLine": 475,
+        "startChar": 0,
+        "endLine": 475,
+        "endChar": 45
+      },
+      "revId": "822891fb8f8f702a3db66d651bd02b4e63b2393a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97be55a0_f5dcba89",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-06T04:52:36Z",
+      "side": 1,
+      "message": "It is exceeding 110 characters line limit. Split in two line.",
+      "range": {
+        "startLine": 484,
+        "startChar": 0,
+        "endLine": 484,
+        "endChar": 126
+      },
+      "revId": "822891fb8f8f702a3db66d651bd02b4e63b2393a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aa9535d_f41ed27a",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-06T04:52:36Z",
+      "side": 1,
+      "message": "Remove white space",
+      "range": {
+        "startLine": 492,
+        "startChar": 0,
+        "endLine": 492,
+        "endChar": 1
+      },
+      "revId": "822891fb8f8f702a3db66d651bd02b4e63b2393a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
