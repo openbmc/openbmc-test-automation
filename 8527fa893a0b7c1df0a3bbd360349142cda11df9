@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aab33679_44f694c1",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-06T07:42:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e13545e_1f702219",
+      "range": {
+        "startLine": 484,
+        "startChar": 0,
+        "endLine": 484,
+        "endChar": 45
+      },
+      "revId": "8527fa893a0b7c1df0a3bbd360349142cda11df9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a68a902_324a1d30",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-10-06T04:44:27Z",
       "side": 1,
       "message": "It is exceeding 110 characters line limit. Split in two line.",
+      "range": {
+        "startLine": 493,
+        "startChar": 0,
+        "endLine": 493,
+        "endChar": 126
+      },
+      "revId": "8527fa893a0b7c1df0a3bbd360349142cda11df9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f9b2b21_a8d20c90",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-06T07:42:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a68a902_324a1d30",
       "range": {
         "startLine": 493,
         "startChar": 0,
