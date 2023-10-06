@@ -101,6 +101,7 @@ TFTP Download Install
     # Download image from TFTP server to BMC.
     Redfish.Post  /redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate
     ...  body={"TransferProtocol" : "TFTP", "ImageURI" : "${TFTP_SERVER}/${IMAGE_FILE_NAME}"}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_ACCEPTED}]
 
     # Wait for image tar file to download complete.
     ${image_id}=  Wait Until Keyword Succeeds  180 sec  10 sec  Get Latest Image ID
@@ -145,6 +146,7 @@ ImageURI Download Install
     # Download image from TFTP server via ImageURI to BMC.
     Redfish.Post  /redfish/v1/UpdateService/Actions/UpdateService.SimpleUpdate
     ...  body={"ImageURI": "tftp://${TFTP_SERVER}/${IMAGE_FILE_NAME}"}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_ACCEPTED}]
 
     # Wait for image tar file download to complete.
     ${image_id}=  Wait Until Keyword Succeeds  180 sec  10 sec  Get Latest Image ID
