@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "867878af_cf4e0169",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-09T14:19:57Z",
+      "side": 1,
+      "message": "Thanks for reviewing.",
+      "revId": "da7fd92ce0006d2cd7f19d47c5a06de4c94a5cf6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25d975cb_b7a7e443",
@@ -14,6 +31,24 @@
       "writtenOn": "2023-10-09T14:09:53Z",
       "side": 1,
       "message": "leave one line space before [Return]\n\ncan u please mention why are u returning the binary file?",
+      "revId": "da7fd92ce0006d2cd7f19d47c5a06de4c94a5cf6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "461c6dba_9f1566c1",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-09T14:19:57Z",
+      "side": 1,
+      "message": "Done - the file reference is sent whoever uses it after download. DUMP type verification test cases would need it; would extract the binary tar file and verify content of summary.log file (one of files after extraction) to find the type of dump.",
+      "parentUuid": "25d975cb_b7a7e443",
       "revId": "da7fd92ce0006d2cd7f19d47c5a06de4c94a5cf6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
