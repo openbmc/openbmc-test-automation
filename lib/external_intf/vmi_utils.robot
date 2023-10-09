@@ -17,7 +17,7 @@ Library          ../../lib/bmc_network_utils.py
 &{ENABLE_DHCP}            DHCPv4=&{DHCP_ENABLED}
 &{DISABLE_DHCP}           DHCPv4=&{DHCP_DISABLED}
 
-${wait_time}              10s
+${wait_time}              40s
 ${ethernet_interface}     eth0
 
 *** Keywords ***
@@ -110,6 +110,7 @@ Set VMI IPv4 Origin
     ${resp}=  Redfish.Get
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
     Should Be Equal  ${resp.dict["DHCPv4"]["DHCPEnabled"]}  ${dhcp_enabled}
+
 
 Get VMI Network Interface Details
     [Documentation]  Get VMI network interface details.
