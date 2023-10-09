@@ -16,6 +16,115 @@
       "message": "Thanks.",
       "revId": "474814c62fecaaef59d93d59acfd039d0c5edd27",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54c73dc8_e4aa4b32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-09T11:38:37Z",
+      "side": 1,
+      "message": "minor comments",
+      "revId": "474814c62fecaaef59d93d59acfd039d0c5edd27",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb1716a0_0d85d547",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-09T11:38:37Z",
+      "side": 1,
+      "message": "add one blank line before every comment",
+      "range": {
+        "startLine": 529,
+        "startChar": 0,
+        "endLine": 529,
+        "endChar": 37
+      },
+      "revId": "474814c62fecaaef59d93d59acfd039d0c5edd27",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64ecb857_9078b0c4",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-09T11:38:37Z",
+      "side": 1,
+      "message": "same comment as above.  add one blank line before every comment",
+      "range": {
+        "startLine": 532,
+        "startChar": 0,
+        "endLine": 532,
+        "endChar": 44
+      },
+      "revId": "474814c62fecaaef59d93d59acfd039d0c5edd27",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3adcfb1_bee5585d",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-09T11:38:37Z",
+      "side": 1,
+      "message": "Add blank like after this line",
+      "range": {
+        "startLine": 539,
+        "startChar": 0,
+        "endLine": 539,
+        "endChar": 54
+      },
+      "revId": "474814c62fecaaef59d93d59acfd039d0c5edd27",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28ef8f52_f541784e",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-09T11:38:37Z",
+      "side": 1,
+      "message": "# dump_id  An integer value that identifies a particular dump (e.g. 1, 3).",
+      "range": {
+        "startLine": 556,
+        "startChar": 29,
+        "endLine": 556,
+        "endChar": 45
+      },
+      "revId": "474814c62fecaaef59d93d59acfd039d0c5edd27",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
