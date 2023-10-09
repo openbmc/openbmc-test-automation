@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76065221_405acc4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-10-09T07:30:37Z",
+      "side": 1,
+      "message": "https://github.com/DMTF/Redfish-Service-Validator\n\n\nbranch default name is now \"main\"",
+      "revId": "1b3aae581cb630d4fadfe1f606f8d3de6be7c267",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
