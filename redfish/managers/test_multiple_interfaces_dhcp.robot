@@ -68,7 +68,26 @@ Set Network Property via Redfish And Verify
     ${enable_multiple_properties}
     ${disable_multiple_properties}
 
+Enable DHCP On Eth1 And Check No Impact On Eth0
+    [Documentation]  Enable DHCP On Eth1 And Check No Impact On Eth0.
+    [Tags]  Enable_DHCP_On_Eth1_And_Check_No_Impact_On_Eth0
+    [Setup]  Set DHCPEnabled To Enable Or Disable  False  eth1
+
+    Set DHCPEnabled To Enable Or Disable  True  eth1
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status
+    Set Suite Variable  ${DHCPEnabled}
+    Should Be Equal  ${DHCPEnabled}  ${False}
+
 *** Keywords ***
+
+Get IPv4 DHCP Enabled Status
+    [Documentation]  Return IPv4 DHCP enabled status from redfish URI.
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${resp}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  DHCPv4
+    ${status}=  Set Variable  ${resp['DHCPEnabled']}
+    Return From Keyword  ${status}
 
 Set DHCPEnabled To Enable Or Disable
     [Documentation]  Enable or Disable DHCP on the interface.
