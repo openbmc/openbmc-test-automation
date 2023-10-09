@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25d975cb_b7a7e443",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-10-09T14:09:53Z",
+      "side": 1,
+      "message": "leave one line space before [Return]\n\ncan u please mention why are u returning the binary file?",
+      "revId": "da7fd92ce0006d2cd7f19d47c5a06de4c94a5cf6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
