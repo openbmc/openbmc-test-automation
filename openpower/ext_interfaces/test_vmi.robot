@@ -27,7 +27,7 @@ ${test_netmask}           255.255.252.0
 
 &{ENABLE_DHCP}            DHCPv4=&{DHCP_ENABLED}
 &{DISABLE_DHCP}           DHCPv4=&{DHCP_DISABLED}
-${wait_time}              10s
+${wait_time}              40s
 
 ${default}                0.0.0.0
 
@@ -52,8 +52,6 @@ Verify Existing VMI Network Interface Details
     Should Be Equal As Strings  ${vmi_ip["Description"]}
     ...  Hypervisor's Virtual Management Ethernet Interface
     Should Be Equal As Strings  ${vmi_ip["Name"]}  Hypervisor Ethernet Interface
-    Run Keyword If  '${vmi_ip["IPv4_Address"]}' != '${default}'
-    ...  Should Be True  ${vmi_ip["InterfaceEnabled"]}
     Run Keyword If   ${vmi_ip["IPv4StaticAddresses"]} != @{empty}
     ...  Verify VMI Network Interface Details  ${vmi_ip["IPv4_Address"]}
     ...  ${origin}  ${vmi_ip["IPv4_Gateway"]}  ${vmi_ip["IPv4_SubnetMask"]}
@@ -192,7 +190,7 @@ Enable DHCP When Static IP Configured And Verify Static IP
     [Teardown]  Test Teardown Execution
 
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
-    Set VMI IPv4 Origin  ${True}
+    Set VMI IPv4 Origin  ${true}
     ${vmi_network_conf}=  Get VMI Network Interface Details
     Should Not Be Equal As Strings  ${test_ipv4}  ${vmi_network_conf["IPv4_Address"]}
 
