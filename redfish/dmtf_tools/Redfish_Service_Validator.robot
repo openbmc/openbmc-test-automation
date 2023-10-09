@@ -16,7 +16,7 @@ ${rsv_github_url}  https://github.com/DMTF/Redfish-Service-Validator.git
 ${cmd_str_master}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}RedfishServiceValidator.py
 ...                --ip https://${OPENBMC_HOST}:${HTTPS_PORT} --authtype=Session -u ${OPENBMC_USERNAME}
 ...                -p ${OPENBMC_PASSWORD} --logdir ${EXECDIR}${/}logs${/} --debugging
-${branch_name}    master
+${branch_name}    main
 
 *** Test Case ***
 
