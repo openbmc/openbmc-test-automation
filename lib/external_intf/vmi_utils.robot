@@ -11,13 +11,13 @@ Library          ../../lib/bmc_network_utils.py
 
 *** Variables ***
 
-&{DHCP_ENABLED}           DHCPEnabled=${True}
-&{DHCP_DISABLED}          DHCPEnabled=${False}
+&{DHCP_ENABLED}           DHCPEnabled=${true}
+&{DHCP_DISABLED}          DHCPEnabled=${false}
 
 &{ENABLE_DHCP}            DHCPv4=&{DHCP_ENABLED}
 &{DISABLE_DHCP}           DHCPv4=&{DHCP_DISABLED}
 
-${wait_time}              10s
+${wait_time}              60s
 ${ethernet_interface}     eth0
 
 *** Keywords ***
@@ -111,6 +111,7 @@ Set VMI IPv4 Origin
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
     Should Be Equal  ${resp.dict["DHCPv4"]["DHCPEnabled"]}  ${dhcp_enabled}
 
+
 Get VMI Network Interface Details
     [Documentation]  Get VMI network interface details.
     [Arguments]  ${interface}=${ethernet_interface}  ${valid_status_code}=${HTTP_OK}
@@ -126,7 +127,6 @@ Get VMI Network Interface Details
     ...  valid_status_codes=[${valid_status_code}]
 
     ${ip_resp}=  Evaluate  json.loads(r'''${resp.text}''')  json
-
     ${ip_exists}=  Set Variable If  ${ip_resp["IPv4Addresses"]} == @{empty}  ${False}  ${True}
     ${static_exists}=  Set Variable If  ${ip_resp["IPv4StaticAddresses"]} == @{empty}  ${False}  ${True}
 
