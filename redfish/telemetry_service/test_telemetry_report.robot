@@ -13,30 +13,33 @@ Test Teardown       Test Teardown Execution
 
 ${metric_definition_base_uri}  /redfish/v1/TelemetryService/MetricReportDefinitions
 ${metric_report_base_uri}      /redfish/v1/TelemetryService/MetricReports
+${total_power_metric}          total_power
+${battery_voltage_metric}      Battery_Voltage
+${ambient_temp_metric}         Ambient_0_Temp
+${proc_core_temp_metric}       proc0_core1_1_temp
+${pcie_temp_metric}            PCIE_0_Temp
+${dimm_temp_metric}            dimm0_pmic_temp
+${relative_humidity_metric}    Relative_Humidity
+${pcie_power_metric}           pcie_dcm0_power
+${io_power_metric}             io_dcm0_power
+
 
 *** Test Cases ***
 
 Verify Basic Telemetry Report Creation
-    [Documentation]  Verify if a telemetry basic report is created.
+    [Documentation]  Verify basic telemetry report creations for different metrics.
     [Tags]  Verify_Basic_Telemetry_Report_Creation
-    [Teardown]  Redfish.Delete  ${metric_definition_base_uri}/${report_name}
-    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    [Template]  Create Basic Telemetry Report
 
-    ${report_name}=  Set Variable  Test_basic_report_ambient_temp
-    ${resp}=  Redfish.Get Properties
-    ...  /redfish/v1/TelemetryService/MetricDefinitions/Ambient_0_Temp
-    ${body}=  Catenate  {"Id": "${report_name}",
-    ...  "MetricReportDefinitionType": "OnRequest",
-    ...  "ReportActions":["LogToMetricReportsCollection"],
-    ...  "Metrics":[{"MetricProperties":${resp["MetricProperties"]}}]}
-    ${body}=  Replace String  ${body}  '  "
-    ${dict}  Evaluate  json.loads('''${body}''')  json
-
-    Redfish.Post  ${metric_definition_base_uri}  body=&{dict}
-     ...  valid_status_codes=[${HTTP_CREATED}]
-
-    Redfish.Get  ${metric_report_base_uri}/Test_basic_report_ambient_temp
-     ...  valid_status_codes=[${HTTP_OK}]
+    ${total_power_metric}          total_power_metric_report          success
+    ${ambient_temp_metric}         ambient_temp_metric_report         success
+    ${battery_voltage_metric}      processor_core_temp_metric_report  success
+    ${proc_core_temp_metric}       processor_mem_temp_metric_report   success
+    ${pcie_temp_metric}            pcie_temp_metric_report            success
+    ${dimm_temp_metric}            dimm_temp_metric_report            success
+    ${relative_humidity_metric}    relative_humidity_metric_report    success
+    ${pcie_power_metric}           pcie_power_metric_report           success
+    ${io_power_metric}             io_power_metric_report             success
 
 
 Verify Basic Periodic Telemetry Report Creation
@@ -94,12 +97,15 @@ Suite Setup Execution
     [Documentation]  Do test case setup tasks.
 
     Redfish.Login
+    Delete All Telemetry Reports
+    Redfish Power On  stack_mode=skip
 
 
 Test Teardown Execution
     [Documentation]  Do test teardown operation.
 
     FFDC On Test Case Fail
+    Delete All Telemetry Reports
 
 
 Create Basic Telemetry Report
@@ -142,6 +148,15 @@ Create Basic Telemetry Report
     Redfish.Post  ${metric_definition_base_uri}  body=&{dict}
      ...  valid_status_codes=${status_code_expected}
 
+    IF  '${expected_result}' == 'success'
+
+        # verify definition of report has attributes provided at the time of creation.
+        ${resp2}=  Redfish.Get  ${metric_definition_base_uri}/${report_name}
+        ...  valid_status_codes=[${HTTP_OK}]
+        Should Be True  '${resp2.dict["MetricReportDefinitionType"]}' == 'OnRequest'
+        Should Be True  '${resp2.dict["ReportActions"][0]}' == 'LogToMetricReportsCollection'
+        Should Be True  '${resp2.dict["Metrics"]}[0][MetricProperties][0]' == '${resp["MetricProperties"][0]}'
+    END
 
 Delete All Telemetry Reports
     [Documentation]  Delete all existing telemetry reports.
