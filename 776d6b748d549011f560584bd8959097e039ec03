@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f583e134_39916027",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-10-10T09:22:49Z",
+      "side": 1,
+      "message": "Is the keyword defined here??\n\nAnd it should not take 40 seconds, is it a new observation??",
+      "parentUuid": "2b3222e2_83dbed18",
+      "revId": "776d6b748d549011f560584bd8959097e039ec03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d0f9888_b9a040af",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
         "patchSetId": 1
