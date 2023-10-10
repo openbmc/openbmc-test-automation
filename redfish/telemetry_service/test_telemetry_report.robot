@@ -14,57 +14,23 @@ Test Teardown       Test Teardown Execution
 ${metric_definition_base_uri}  /redfish/v1/TelemetryService/MetricReportDefinitions
 ${metric_report_base_uri}      /redfish/v1/TelemetryService/MetricReports
 
+
 *** Test Cases ***
 
 Verify Basic Telemetry Report Creation
-    [Documentation]  Verify if a telemetry basic report is created.
+    [Documentation]  Verify basic telemetry report creations for different metrics.
     [Tags]  Verify_Basic_Telemetry_Report_Creation
-    [Teardown]  Redfish.Delete  ${metric_definition_base_uri}/${report_name}
-    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    [Template]  Create Basic Telemetry Report
 
-    ${report_name}=  Set Variable  Test_basic_report_ambient_temp
-    ${resp}=  Redfish.Get Properties
-    ...  /redfish/v1/TelemetryService/MetricDefinitions/Ambient_0_Temp
-    ${body}=  Catenate  {"Id": "${report_name}",
-    ...  "MetricReportDefinitionType": "OnRequest",
-    ...  "ReportActions":["LogToMetricReportsCollection"],
-    ...  "Metrics":[{"MetricProperties":${resp["MetricProperties"]}}]}
-    ${body}=  Replace String  ${body}  '  "
-    ${dict}  Evaluate  json.loads('''${body}''')  json
-
-    Redfish.Post  ${metric_definition_base_uri}  body=&{dict}
-     ...  valid_status_codes=[${HTTP_CREATED}]
-
-    Redfish.Get  ${metric_report_base_uri}/Test_basic_report_ambient_temp
-     ...  valid_status_codes=[${HTTP_OK}]
-
-
-Verify Basic Periodic Telemetry Report Creation
-    [Documentation]  Verify if a telemetry basic periodic report is created.
-    [Tags]  Verify_Basic_Periodic_Telemetry_Report_Creation
-    [Teardown]  Redfish.Delete  ${metric_definition_base_uri}/${report_name}
-    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
-
-    ${report_name}=  Set Variable  Test_basic_periodic_report_ambient_temp
-    ${resp}=  Redfish.Get Properties
-    ...  /redfish/v1/TelemetryService/MetricDefinitions/Ambient_0_Temp
-    ${body}=  Catenate  {"Id": "${report_name}",
-    ...  "MetricReportDefinitionType": "Periodic",
-    ...  "Name": "Report",
-    ...  "ReportActions":["LogToMetricReportsCollection"],
-    ...  "Metrics":[{"CollectionDuration": "PT30.000S",
-    ...  "CollectionFunction": "Average","MetricProperties":${resp["MetricProperties"]}}],
-    ...  "ReportUpdates": "AppendWrapsWhenFull",
-    ...  "AppendLimit":10,
-    ...  "Schedule": {"RecurrenceInterval": "PT5.000S"}}
-    ${body}=  Replace String  ${body}  '  "
-    ${dict}  Evaluate  json.loads('''${body}''')  json
-
-    Redfish.Post  ${metric_definition_base_uri}  body=&{dict}
-     ...  valid_status_codes=[${HTTP_CREATED}]
-
-    ${resp}=  Redfish.Get  ${metric_definition_base_uri}/${report_name}
-    Should Be True  '${resp.dict["MetricReportDefinitionType"]}' == 'Periodic'
+    total_power         OnRequest  LogToMetricReportsCollection
+    Battery_Voltage     Periodic   LogToMetricReportsCollection  
+    Ambient_0_Temp      OnRequest  LogToMetricReportsCollection
+    proc0_core1_1_temp  Periodic   LogToMetricReportsCollection
+    PCIE_0_Temp         OnRequest  LogToMetricReportsCollection
+    dimm0_pmic_temp     Periodic   LogToMetricReportsCollection
+    Relative_Humidity   OnRequest  LogToMetricReportsCollection
+    pcie_dcm0_power     Periodic   LogToMetricReportsCollection
+    io_dcm0_power       OnRequest  LogToMetricReportsCollection
 
 
 Verify Error After Exceeding Maximum Report Creation
@@ -79,14 +45,15 @@ Verify Error After Exceeding Maximum Report Creation
     # Create maximum number of reports.
     ${resp}=  Redfish.Get Properties  /redfish/v1/TelemetryService
     FOR  ${i}  IN RANGE  ${resp["MaxReports"]}
-        Create Basic Telemetry Report   Ambient_0_Temp   ${report_name}${i}  success
+        Create Basic Telemetry Report   total_power  Periodic  LogToMetricReportsCollection
     END
 
     # Attempt another report creation and it should fail.
-    Create Basic Telemetry Report   Ambient_0_Temp   ${report_name}${resp["MaxReports"]}  fail
+    Create Basic Telemetry Report   total_power  Periodic  LogToMetricReportsCollection  fail
 
     # Now delete the reports created.
     Delete All Telemetry Reports
+
 
 *** Keywords ***
 
@@ -94,21 +61,25 @@ Suite Setup Execution
     [Documentation]  Do test case setup tasks.
 
     Redfish.Login
+    Delete All Telemetry Reports
+    Redfish Power On  stack_mode=skip
 
 
 Test Teardown Execution
     [Documentation]  Do test teardown operation.
 
     FFDC On Test Case Fail
+    Delete All Telemetry Reports
 
 
 Create Basic Telemetry Report
     [Documentation]  Create a basic telemetry report with single metric.
-    [Arguments]  ${metric_definition_name}   ${report_name}  ${expected_result}=success
+    [Arguments]  ${metric_definition_name}  ${metric_definition_type}  ${report_action}  ${expected_result}=success
 
     # Description of argument(s):
     # metric_definition_name    Name of metric definition like Ambient_0_Temp.
-    # report_name               Name of telemetry report which needs to be created.
+    # metric_definition_type    Name of telemetry report which needs to be created.
+    # report_action             Telemetry report action.
     # expected_result           Expected result of report creation - success or fail.
 
     ${resp}=  Redfish.Get Properties
@@ -128,10 +99,17 @@ Create Basic Telemetry Report
     # "Name": "Ambient_0_Temp",
     # "Units": "Cel"
 
+    ${report_name}=  Generate Random String  16  [NUMBERS]abcdef
     ${body}=  Catenate  {"Id": "${report_name}",
-    ...  "MetricReportDefinitionType": "OnRequest",
-    ...  "ReportActions":["LogToMetricReportsCollection"],
-    ...  "Metrics":[{"MetricProperties":${resp["MetricProperties"]}}]}
+    ...  "MetricReportDefinitionType": "${metric_definition_type}",
+    ...  "Name": "Report",
+    ...  "ReportActions":["${report_action}"],
+    ...  "Metrics":[{"CollectionDuration": "PT30.000S",
+    ...  "MetricProperties":${resp["MetricProperties"]}}],
+    ...  "ReportUpdates": "AppendWrapsWhenFull",
+    ...  "AppendLimit":10,
+    ...  "Schedule": {"RecurrenceInterval": "PT5.000S"}}
+
     ${body}=  Replace String  ${body}  '  "
     ${dict}  Evaluate  json.loads('''${body}''')  json
 
@@ -141,6 +119,15 @@ Create Basic Telemetry Report
 
     Redfish.Post  ${metric_definition_base_uri}  body=&{dict}
      ...  valid_status_codes=${status_code_expected}
+
+    IF  '${expected_result}' == 'success'
+        # Verify definition of report has attributes provided at the time of creation.
+        ${resp_report}=  Redfish.Get  ${metric_definition_base_uri}/${report_name}
+        ...  valid_status_codes=[${HTTP_OK}]
+        Should Be True  '${resp_report.dict["MetricReportDefinitionType"]}' == '${metric_definition_type}'
+        Should Be True  '${resp_report.dict["ReportActions"][0]}' == '${report_action}'
+        Should Be True  '${resp_report.dict["Metrics"]}[0][MetricProperties][0]' == '${resp["MetricProperties"][0]}'
+    END
 
 
 Delete All Telemetry Reports
