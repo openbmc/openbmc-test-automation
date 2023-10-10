@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0bbc81f7_6f20b91d",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-10-10T14:25:06Z",
+      "side": 1,
+      "message": "it is not used anywhere in this file, what happens if we remove it??",
+      "parentUuid": "8f682ba7_ffd5b6d1",
+      "revId": "776d6b748d549011f560584bd8959097e039ec03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d0f9888_b9a040af",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
         "patchSetId": 1
