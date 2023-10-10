@@ -16,6 +16,8 @@ Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 Suite Teardown   Suite Teardown Execution
 
+Force Tags       MPIPL_Basic
+
 *** Variables ***
 
 # By default 1 iteration, user can key in nth number of iteration to control

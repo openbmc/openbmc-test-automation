@@ -14,6 +14,8 @@ Suite Setup       Suite Setup Execution
 Test Teardown     Test Teardown Execution
 Suite Teardown    Suite Teardown Execution
 
+Force Tags        Savearea_Management
+
 *** Variables ***
 
 ${MAXIMUM_FILE_SIZE_MESSAGE}        File size exceeds maximum allowed size[25MB]

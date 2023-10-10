@@ -12,6 +12,7 @@ Library          ../../lib/ipmi_utils.py
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
+Force Tags       IPMI_Redfish_User
 
 *** Variables ***
 

@@ -11,6 +11,7 @@ Resource        ../../lib/openbmc_ffdc.robot
 Test Setup      Redfish.Login
 Test Teardown   Run Keywords  Redfish.Logout  AND  FFDC On Test Case Fail
 
+Force Tags      Bmc_Pel
 
 *** Variables ***
 
@@ -724,9 +725,9 @@ Verify PEL Log Offloaded To Host
     [Tags]  Verify_PEL_Log_Offloaded_To_Host
     [Template]  Verify PEL Transmission To Host
 
-    # error_type            host_state      expected_transmission_state   
-      predictive_error      On              Acked         
-      unrecoverable_error   On              Acked              
+    # error_type            host_state      expected_transmission_state
+      predictive_error      On              Acked
+      unrecoverable_error   On              Acked
       informational_error   On              Acked
 
 
