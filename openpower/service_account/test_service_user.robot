@@ -9,6 +9,7 @@ Suite Setup      Suite Setup Execution
 Suite Teardown   Redfish.Logout
 Test Teardown    FFDC On Test Case Fail
 
+Force Tags       Service_User
 
 *** Test Cases ***
 

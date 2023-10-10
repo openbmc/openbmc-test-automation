@@ -17,6 +17,7 @@ Suite Teardown    Run Keyword And Ignore Error  Delete All Redfish Sessions
 Test Setup        Printn
 Test Teardown     FFDC On Test Case Fail
 
+Force Tags        Client_Identifier
 
 *** Test Cases ***
 

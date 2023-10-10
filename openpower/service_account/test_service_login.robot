@@ -18,6 +18,7 @@ Library          SSHLibrary
 Suite Setup      Suite Setup Execution
 Test Teardown    FFDC On Test Case Fail
 
+Force Tags       Service_Login
 
 *** Variables ***
 

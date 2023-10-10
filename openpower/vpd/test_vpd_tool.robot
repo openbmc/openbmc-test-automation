@@ -7,6 +7,7 @@ Resource        ../../lib/openbmc_ffdc.robot
 
 Test Teardown   FFDC On Test Case Fail
 
+Force Tags      VPD_Tool
 
 *** Variables ***
 
