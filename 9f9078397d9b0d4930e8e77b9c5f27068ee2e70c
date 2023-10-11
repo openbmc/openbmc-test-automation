@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03762ee0_dbb7f6f2",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-10-11T12:02:42Z",
+      "side": 1,
+      "message": "[Documentation]  Force expire admin password and update admin password via GUI.",
+      "revId": "9f9078397d9b0d4930e8e77b9c5f27068ee2e70c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6a20654_c1850908",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-10-11T12:02:42Z",
+      "side": 1,
+      "message": "Verify that admin user should not be able to login with expired password.",
+      "revId": "9f9078397d9b0d4930e8e77b9c5f27068ee2e70c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baa9236b_4533aaae",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-10-11T12:02:42Z",
+      "side": 1,
+      "message": "Verify error message to update the password.",
+      "revId": "9f9078397d9b0d4930e8e77b9c5f27068ee2e70c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a7a12c0_16b43004",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-10-11T12:02:42Z",
+      "side": 1,
+      "message": "Update a valid acceptable password.",
+      "revId": "9f9078397d9b0d4930e8e77b9c5f27068ee2e70c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
