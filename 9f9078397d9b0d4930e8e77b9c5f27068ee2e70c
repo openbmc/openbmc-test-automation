@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbb85052_ee189f6b",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-10-11T17:15:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03762ee0_dbb7f6f2",
+      "revId": "9f9078397d9b0d4930e8e77b9c5f27068ee2e70c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6a20654_c1850908",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-11T12:02:42Z",
       "side": 1,
       "message": "Verify that admin user should not be able to login with expired password.",
+      "revId": "9f9078397d9b0d4930e8e77b9c5f27068ee2e70c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea50f1ab_c99c7445",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-10-11T17:15:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6a20654_c1850908",
       "revId": "9f9078397d9b0d4930e8e77b9c5f27068ee2e70c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "100b371e_662662df",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-10-11T17:15:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baa9236b_4533aaae",
+      "revId": "9f9078397d9b0d4930e8e77b9c5f27068ee2e70c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a7a12c0_16b43004",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-10-11T12:02:42Z",
       "side": 1,
       "message": "Update a valid acceptable password.",
+      "revId": "9f9078397d9b0d4930e8e77b9c5f27068ee2e70c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0188641e_11c3743e",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-10-11T17:15:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a7a12c0_16b43004",
       "revId": "9f9078397d9b0d4930e8e77b9c5f27068ee2e70c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
