@@ -16,6 +16,40 @@
       "message": "commit 66982 \u0026 this one, both are same??",
       "revId": "a82fe1f5566b3d57edc5d999a9631f2f257b164d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db69f40f_a6bcbc20",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-10-11T09:07:07Z",
+      "side": 1,
+      "message": "not equired?",
+      "revId": "a82fe1f5566b3d57edc5d999a9631f2f257b164d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "398ee33d_a0607cf5",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-10-11T09:07:07Z",
+      "side": 1,
+      "message": "not required?",
+      "revId": "a82fe1f5566b3d57edc5d999a9631f2f257b164d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
