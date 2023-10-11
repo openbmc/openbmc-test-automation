@@ -10,10 +10,16 @@ Library           SSHLibrary
 
 Test Setup       Set Account Lockout Threshold
 
+Force Tags       BMC_Expire_Password
+
+
 *** Variables ***
 
 # If user re-tries more than 5 time incorrectly, the user gets locked for 5 minutes.
 ${default_lockout_duration}   ${300}
+${admin_user}                 admin_user
+${default_adminuser_passwd}   AdminUser1
+${admin_password}             AdminUser2
 
 
 *** Test Cases ***
@@ -201,6 +207,32 @@ Verify New Password Persistency After BMC Reboot
     Redfish.Login  admin_user  0penBmc123
 
 
+Verify Expire And Change Admin User Password Via GUI
+    [Documentation]  Force expire admin password and update admin password via GUI.
+    [Tags]  Verify_Expire_And_Change_Admin_User_Password_Via_GUI
+    [Setup]  Run Keywords  Launch Browser And Login GUI
+    [Teardown]  Run Keywords  Logout GUI  AND  Close Browser
+
+    Expire Password  ${admin_user}  ${default_adminuser_passwd}  Administrator  ${True}
+
+    Logout GUI
+
+    # Verify that admin user should not be able to login with expired password.
+    Login GUI  ${admin_user}  ${default_adminuser_passwd}
+
+    # Verify error message to update the password.
+    Wait Until Page Contains  The password is expired and must be changed.  timeout=10
+
+    # Update a valid acceptable password.
+    Input Text  ${xpath_input_password}  ${admin_password}
+    Input Text  ${xpath_input_confirm_password}  ${admin_password}
+    Click Button  ${xpath_confirm_password_button}
+    Wait Until Page Contains  Overview  timeout=20
+
+    # Verify valid password.
+    Redfish.Login  ${admin_user}  ${admin_password}
+
+
 *** Keywords ***
 
 Set Account Lockout Threshold
@@ -236,3 +268,31 @@ Test Teardown Execution
     Redfish.Logout
     Set Account Lockout Threshold  account_lockout_threshold=${5}
     FFDC On Test Case Fail
+
+
+Expire Password
+    [Documentation]  Force expire password.
+    [Arguments]  ${username}  ${default_user_passwd}  ${role_id}  ${Enabled}
+
+    # Description of argument(s):
+    # username                       User to be created and expire.
+    # default_user_passwd            The password to be assigned. 
+    # role_id                        The role ID of the user to be created.
+    #                                (e.g. "Administrator", "ReadOnly", etc.).
+    # Enabled                        Indicates whether the username being created.
+    #                                should be enabled (${True}, ${False}).
+
+    # Create user.
+    Redfish Create User  ${username}  ${default_user_passwd}  ${role_id}  ${Enabled}
+
+    # Expire the password.
+    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${username}
+    Should Contain Any  ${output}  password expiry information changed  password changed
+
+    # Example output:
+    # passwd --expire admin
+    # passwd: password changed.
+
+    Close All Connections
