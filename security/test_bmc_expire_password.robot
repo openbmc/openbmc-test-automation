@@ -10,10 +10,16 @@ Library           SSHLibrary
 
 Test Setup       Set Account Lockout Threshold
 
+Force Tags       BMC_Expire_Password
+
+
 *** Variables ***
 
 # If user re-tries more than 5 time incorrectly, the user gets locked for 5 minutes.
 ${default_lockout_duration}   ${300}
+${admin_user}                 admin_user
+${default_adminuser_passwd}   AdminUser1
+${admin_password}             AdminUser2
 
 
 *** Test Cases ***
@@ -23,10 +29,7 @@ Expire Root Password And Check IPMI Access Fails
     [Tags]  Expire_Root_Password_And_Check_IPMI_Access_Fails
     [Teardown]  Test Teardown Execution
 
-    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
-
-    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
-    Should Contain Any  ${output}  password expiry information changed  password changed
+    Expire Password  ${OPENBMC_USERNAME}
 
     ${status}=  Run Keyword And Return Status   Run External IPMI Standard Command  lan print -v
     Should Be Equal  ${status}  ${False}
@@ -37,10 +40,8 @@ Expire Root Password And Check SSH Access Fails
     [Tags]  Expire_Root_Password_And_Check_SSH_Access_Fails
     [Teardown]  Test Teardown Execution
 
-    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
-    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
-    Should Contain Any  ${output}  password expiry information changed  password changed
-
+    Expire Password  ${OPENBMC_USERNAME}
+    
     ${status}=  Run Keyword And Return Status
     ...  Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
     Should Be Equal  ${status}  ${False}
@@ -52,10 +53,7 @@ Expire And Change Root User Password And Access Via SSH
     [Teardown]  Run Keywords  Wait Until Keyword Succeeds  1 min  10 sec
     ...  Restore Default Password For Root User  AND  FFDC On Test Case Fail
 
-    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
-
-    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
-    Should Contain Any  ${output}  password expiry information changed  password changed
+    Expire Password  ${OPENBMC_USERNAME}
 
     Redfish.Login
     # Change to a valid password.
@@ -72,9 +70,7 @@ Expire Root Password And Update Bad Password Length Via Redfish
    [Teardown]  Run Keywords  Wait Until Keyword Succeeds  1 min  10 sec
    ...  Restore Default Password For Root User  AND  FFDC On Test Case Fail
 
-   Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
-   ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
-   Should Contain Any  ${output}  password expiry information changed  password changed
+   Expire Password  ${OPENBMC_USERNAME}
 
    Redfish.Login
    ${status}=  Run Keyword And Return Status
@@ -90,10 +86,7 @@ Expire And Change Root User Password Via Redfish And Verify
    ...  Wait Until Keyword Succeeds  1 min  10 sec
    ...  Restore Default Password For Root User
 
-   Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
-
-   ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
-   Should Contain Any  ${output}  password expiry information changed  password changed
+   Expire Password  ${OPENBMC_USERNAME}
 
    Verify User Password Expired Using Redfish  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
    # Change to a valid password.
@@ -111,9 +104,7 @@ Verify Error While Creating User With Expired Password
     [Teardown]  Run Keywords  Wait Until Keyword Succeeds  1 min  10 sec
     ...  Restore Default Password For Root User  AND  FFDC On Test Case Fail
 
-    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
-    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
-    Should Contain Any  ${output}  password expiry information changed  password changed
+    Expire Password  ${OPENBMC_USERNAME}
 
     Verify User Password Expired Using Redfish  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
     Redfish.Login
@@ -130,9 +121,7 @@ Expire And Change Root Password Via GUI
     [Teardown]  Run Keywords  Logout GUI  AND  Close Browser
     ...  AND  Restore Default Password For Root User  AND  FFDC On Test Case Fail
 
-    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
-    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${OPENBMC_USERNAME}
-    Should Contain Any  ${output}  password expiry information changed  password changed
+    Expire Password  ${OPENBMC_USERNAME}
 
     Wait Until Page Contains Element  ${xpath_root_button_menu}
     Click Element  ${xpath_root_button_menu}
@@ -201,6 +190,33 @@ Verify New Password Persistency After BMC Reboot
     Redfish.Login  admin_user  0penBmc123
 
 
+Verify Expire And Change Admin User Password Via GUI
+    [Documentation]  Force expire admin password and update admin password via GUI.
+    [Tags]  Verify_Expire_And_Change_Admin_User_Password_Via_GUI
+    [Setup]  Run Keywords  Launch Browser And Login GUI  AND
+    ...  Redfish Create User  ${admin_user}  ${default_adminuser_passwd}  Administrator  ${True}
+    [Teardown]  Run Keywords  Logout GUI  AND  Close Browser
+
+    Expire Password  ${admin_user}
+
+    Logout GUI
+
+    # Verify that admin user should not be able to login with expired password.
+    Login GUI  ${admin_user}  ${default_adminuser_passwd}
+
+    # Verify error message to update the password.
+    Wait Until Page Contains  The password is expired and must be changed.  timeout=10
+
+    # Update a valid acceptable password.
+    Input Text  ${xpath_input_password}  ${admin_password}
+    Input Text  ${xpath_input_confirm_password}  ${admin_password}
+    Click Button  ${xpath_confirm_password_button}
+    Wait Until Page Contains  Overview  timeout=20
+
+    # Verify valid password.
+    Redfish.Login  ${admin_user}  ${admin_password}
+
+
 *** Keywords ***
 
 Set Account Lockout Threshold
@@ -236,3 +252,23 @@ Test Teardown Execution
     Redfish.Logout
     Set Account Lockout Threshold  account_lockout_threshold=${5}
     FFDC On Test Case Fail
+
+
+Expire Password
+    [Documentation]  Force expire password.
+    [Arguments]  ${username}
+
+    # Description of argument(s):
+    # username                       User to be created and expire.
+
+    # Expire the password.
+    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  passwd --expire ${username}
+    Should Contain Any  ${output}  password expiry information changed  password changed
+
+    # Example output:
+    # passwd --expire admin
+    # passwd: password changed.
+
+    Close All Connections
