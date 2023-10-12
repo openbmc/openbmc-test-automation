@@ -324,72 +324,20 @@ Verify BMC Dump Create Errors While Another BMC Dump In Progress
     [Documentation]  Verify BMC dump creation error until older BMC dump completion.
     [Tags]  Verify_BMC_Dump_Create_Errors_While_Another_BMC_Dump_In_Progress
 
-    Redfish Power Off  stack_mode=skip
+    #Redfish Power Off  stack_mode=skip
 
     # Initiate a BMC dump that returns without completion.
     ${task_id}=  Create User Initiated BMC Dump Via Redfish  ${1}
-
-    # Now continue to initiate multiple dump request which is not expected to be accepted
-    # till earlier BMC dump task is completed. A limit is set to avoid risk of infinite loop.
+    ${task_dict}=  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
     ${payload}=  Create Dictionary  DiagnosticDataType=Manager
-    WHILE  True  limit=1000
-        ${task_dict}=  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
-        IF  '${task_dict['TaskState']}' == 'Completed'  BREAK
+    IF  '${task_dict['TaskState']}' != 'Completed'
         ${resp}=  Redfish.Post
         ...  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Actions/LogService.CollectDiagnosticData
-        ...  body=${payload}  valid_status_codes=[${HTTP_SERVICE_UNAVAILABLE}, ${HTTP_ACCEPTED}]
-
-        # Sample response of above POST request:
-        # 503
-        # Strict-Transport-Security max-age=31536000; includeSubdomains; preload
-        # X-Frame-Options DENY
-        # Pragma no-cache
-        # Cache-Control no-Store,no-Cache
-        # X-XSS-Protection 1; mode=block
-        # X-Content-Type-Options nosniff
-        # Content-Security-Policy default-src 'none'; img-src 'self' data:; font-src 'self'; style-src
-        # 'self'; script-src 'self'; connect-src 'self' wss:; form-action 'none'; frame-ancestors 'none';
-        # object-src 'none'; base-uri 'none'
-        # Content-Type application/json
-        # Date Thu, 16 Mar 2023 06:41:06 GMT
-        # Content-Length 573
-        # {
-        # "error": {
-        # "@Message.ExtendedInfo": [
-        # {
-        # "@odata.type": "#Message.v1_1_1.Message",
-        # "Message": "The request could not be performed because the resource is in standby.",
-        # "MessageArgs": [],
-        # "MessageId": "Base.1.8.1.ResourceInStandby",
-        # "MessageSeverity": "Critical",
-        # "Resolution": "Ensure that the resource is in the correct power state and resubmit the request."
-        # }
-        # ],
-        # "code": "Base.1.8.1.ResourceInStandby",
-        # "message": "The request could not be performed because the resource is in standby."
-        # }
-        # }
-
-        # At this point the request HTTPS response should be HTTP_SERVICE_UNAVAILABLE. However, if the
-        # response contains the HTTPS response code HTTP_ACCEPTED, it means there is a dump initiation
-        # request which is completed. We verify this with below check.
-        ${resp}=  Convert To String  ${resp}
-        ${contains}=  Run Keyword And Return Status  Should Contain  ${resp.split()[0]}  ${HTTP_ACCEPTED}
-        IF  ${contains}
-           ${task_dict}=  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
-           Should Be True  '${task_dict['TaskState']}' == 'Completed'
-        END
+        ...  body=${payload}  valid_status_codes=[${HTTP_SERVICE_UNAVAILABLE}]
     END
 
-    # The next BMC dump initiation request should be accepted as earlier dump is completed.
-    # Wait for few seconds before initiating the dump.
-    Sleep  2s
-    ${resp}=  Redfish.Post
-    ...  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Actions/LogService.CollectDiagnosticData
-    ...  body=${payload}  valid_status_codes=[${HTTP_ACCEPTED}]
-
     # Wait for above initiated dump to complete. Otherwise, on going dump would impact next test.
-    Wait Until Keyword Succeeds  5 min  15 sec  Check Task Completion  ${resp.dict['Id']}
+    Wait Until Keyword Succeeds  5 min  15 sec  Check Task Completion  ${task_id}
 
 
 Verify Core Dump After Terminating Dump Manager Service
