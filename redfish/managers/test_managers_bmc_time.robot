@@ -13,7 +13,10 @@ Test Teardown                Test Teardown Execution
 Suite Setup                  Suite Setup Execution
 Suite Teardown               Suite Teardown Execution
 
+Force Tags                   Managers_BMC_Time
+
 *** Variables ***
+
 ${max_time_diff_in_seconds}  6
 # The "offset" consists of the value "26" specified for hours.  Redfish will
 # convert that to the next day + 2 hours.
