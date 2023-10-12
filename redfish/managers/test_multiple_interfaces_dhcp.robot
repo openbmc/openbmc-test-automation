@@ -43,6 +43,8 @@ Disable DHCP On Eth1 And Verify System Is Accessible By Eth0
     [Teardown]  Set DHCPEnabled To Enable Or Disable  True  eth1
 
     Set DHCPEnabled To Enable Or Disable  False  eth1
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status
+    Should Be Equal  ${DHCPEnabled}  ${False}
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
 Enable DHCP On Eth1 And Verify System Is Accessible By Eth0
@@ -52,6 +54,8 @@ Enable DHCP On Eth1 And Verify System Is Accessible By Eth0
     [Setup]  Set DHCPEnabled To Enable Or Disable  False  eth1
 
     Set DHCPEnabled To Enable Or Disable  True  eth1
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status
+    Should Be Equal  ${DHCPEnabled}  ${True}
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
 Set Network Property via Redfish And Verify
@@ -91,15 +95,51 @@ Enable DHCP On Eth1 And Check No Impact On Eth0
     # Before and after IP details must match.
     Should Be Equal  ${ip_data_before}  ${ip_data_after}
 
+Enable DHCP On Eth1 And Check No Impact On Eth0
+    [Documentation]  Enable DHCP On Eth1 And Check No Impact On Eth0.
+    [Tags]  Enable_DHCP_On_Eth1_And_Check_No_Impact_On_Eth0
+    [Setup]  Set DHCPEnabled To Enable Or Disable  False  eth1
+
+    # Getting the eth0 details before enabling DHCP.
+    ${ip_data_before}=  Get BMC IP Info
+
+    # Enable DHCP.
+    Set DHCPEnabled To Enable Or Disable  True  eth1
+
+    # Check the value of DHCPEnabled on eth0 is not impacted.
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status
+    Should Be Equal  ${DHCPEnabled}  ${False}
+
+    # Getting eth0 details after enabling DHCP.
+    ${ip_data_after}=  Get BMC IP Info
+
+    # Before and after IP details must match.
+    Should Be Equal  ${ip_data_before}  ${ip_data_after}
+
+Switch Between DHCP And Static
+    [Documentation]  Switch between DHCP and static.
+    [Tags]  Switch_Between_DHCP_And_Static
+    [Teardown]  Set DHCPEnabled To Enable Or Disable  True  eth1
+
+    # Fetch the IP details before.
+    ${ip_addr_before}  ${gateway_before}  ${subnetmask_before}  Get DHCP IP Info
+
+    # Switch Between Static and DHCP.
+    FOR  ${i}  IN RANGE  ${10}
+      Set DHCPEnabled To Enable Or Disable  False  eth1
+      Set DHCPEnabled To Enable Or Disable  True  eth1
+    END
+    Sleep  5s
+
+    # Fetch the IP details after.
+    ${ip_addr_after}  ${gateway_after}  ${subnetmask_after}  Get DHCP IP Info
+
+    # DHCP Details must be the same before and after.
+    Should Be Equal  ${ip_addr_before}  ${ip_addr_after}
+    Should Be Equal  ${gateway_before}  ${gateway_after}
+    Should Be Equal  ${subnetmask_before}  ${subnetmask_after}
+
 *** Keywords ***
-
-Get IPv4 DHCP Enabled Status
-    [Documentation]  Return IPv4 DHCP enabled status from redfish URI.
-
-    ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
-    ${resp}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  DHCPv4
-    Return From Keyword  ${resp['DHCPEnabled']}
 
 Set DHCPEnabled To Enable Or Disable
     [Documentation]  Enable or Disable DHCP on the interface.
@@ -183,7 +223,6 @@ Suite Setup Execution
     [Documentation]  Do suite setup task.
 
     Ping Host  ${OPENBMC_HOST}
-    Ping Host  ${OPENBMC_HOST_1}
     Redfish.Login
 
     # Get the configuration of eth1
@@ -203,4 +242,3 @@ Suite Setup Execution
       ...  AND  Set Suite Variable  ${eth0_gateway}  ${network_configuration['Gateway']}
       ...  AND  Exit For Loop
     END
-
