@@ -8,6 +8,8 @@ Suite Setup     Suite Setup Execution
 Suite Teardown  Suite Teardown Execution
 Test Setup      Navigate To Date and Time Page
 
+Force Tags      Date_And_Time_Sub_Menu
+
 *** Variables ***
 
 ${xpath_date_time_heading}       //h1[text()="Date and time"]
