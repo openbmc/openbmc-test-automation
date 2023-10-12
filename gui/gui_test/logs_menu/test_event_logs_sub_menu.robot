@@ -9,6 +9,7 @@ Variables       ../../../data/pel_variables.py
 Suite Setup     Suite Setup Execution
 Suite Teardown  Suite Teardown Execution
 
+Force Tags      Event_Logs_Sub_Menu
 
 *** Variables ***
 ${xpath_event_logs_heading}       //h1[text()="Event logs"]

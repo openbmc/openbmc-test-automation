@@ -10,6 +10,7 @@ Suite Setup      Run Keywords  Launch Browser And Login GUI  AND  Redfish.Login
 Suite Teardown   Close Browser
 Test Setup       Test Setup Execution
 
+Force Tags       Policies_Sub_Menu
 
 *** Variables ***
 

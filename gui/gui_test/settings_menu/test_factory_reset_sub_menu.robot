@@ -7,6 +7,7 @@ Resource        ../../lib/gui_resource.robot
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
 
+Force Tags      Factory_Reset_Sub_Menu
 
 *** Variables ***
 
@@ -56,4 +57,4 @@ Suite Setup Execution
     Click Element  ${xpath_settings_menu}
     Click Element  ${xpath_factory_reset_sub_menu}
     Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  factory-reset
-
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
