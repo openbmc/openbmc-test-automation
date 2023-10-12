@@ -256,7 +256,7 @@ Suite Setup Execution
 Suite Teardown Execution
    [Documentation]  Do the post suite teardown.
 
-    Logout GUI
+    Run Keyword And Ignore Error  Logout GUI
     Close Browser
 
 Setup To Power Off And Navigate
