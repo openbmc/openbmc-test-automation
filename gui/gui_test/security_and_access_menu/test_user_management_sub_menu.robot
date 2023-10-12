@@ -8,6 +8,7 @@ Suite Setup     Launch Browser And Login GUI
 Suite Teardown  Suite Teardown Execution
 Test Setup      Test Setup Execution
 
+Force Tags      User_Management_Sub_Menu
 
 *** Variables ***
 

@@ -9,6 +9,7 @@ Suite Setup     Launch Browser And Login GUI
 Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
 
+Force Tags      Reboot_BMC_Sub_Menu
 
 *** Variables ***
 

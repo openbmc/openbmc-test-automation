@@ -7,6 +7,7 @@ Resource        ../../lib/gui_resource.robot
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
 
+Force Tags      Inventory_And_Leds_Sub_Menu
 
 *** Variables ***
 

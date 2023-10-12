@@ -8,6 +8,7 @@ Resource        ../../../lib/bmc_ldap_utils.robot
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
 
+Force Tags      LDAP_Sub_Menu
 
 *** Variables ***
 

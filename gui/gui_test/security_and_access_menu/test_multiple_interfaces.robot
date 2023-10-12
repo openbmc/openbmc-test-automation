@@ -8,6 +8,8 @@ Resource        ../../../lib/certificate_utils.robot
 Suite Setup     Suite Setup Execution
 Test Teardown   FFDC On Test Case Fail
 
+Force Tags      Multiple_Interfaces
+
 *** Variables ***
 
 ${bmc_url}                     https://${OPENBMC_HOST}

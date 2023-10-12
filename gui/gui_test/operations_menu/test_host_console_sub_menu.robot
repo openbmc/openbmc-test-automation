@@ -8,6 +8,7 @@ Suite Setup     Launch Browser And Login GUI
 Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
 
+Force Tags      Host_Console_Sub_Menu
 
 *** Variables ***
 

@@ -8,6 +8,7 @@ Resource        ../../../lib/state_manager.robot
 Test Setup      Run Keywords  Launch Browser And Login GUI  AND  Navigate to Server Power Operation Page
 Test Teardown   Close Browser
 
+Force Tags      Server_Power_Operations_Sub_Menu
 
 *** Variables ***
 

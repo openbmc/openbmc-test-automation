@@ -7,6 +7,7 @@ Resource        ../../lib/gui_resource.robot
 Suite Setup     Launch Browser And Login GUI
 Suite Teardown  Close Browser
 
+Force Tags      GUI_Header
 
 *** Variables ***
 

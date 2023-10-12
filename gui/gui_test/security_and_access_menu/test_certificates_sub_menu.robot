@@ -9,6 +9,7 @@ Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
 
+Force Tags      Certificates_Sub_Menu
 
 *** Variables ***
 

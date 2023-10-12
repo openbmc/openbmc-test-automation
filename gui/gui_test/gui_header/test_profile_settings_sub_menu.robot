@@ -8,6 +8,7 @@ Suite Setup     Launch Browser And Login GUI
 Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
 
+Force Tags      Profile_Settings_Sub_Menu
 
 *** Variables ***
 
