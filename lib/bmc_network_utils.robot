@@ -814,3 +814,24 @@ Update IP Address
     Verify IP On BMC  ${new_ip}
     Validate Network Config On BMC
 
+Get IPv4 DHCP Enabled Status
+    [Documentation]  Return IPv4 DHCP enabled status from redfish URI.
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${resp}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  DHCPv4
+    Return From Keyword  ${resp['DHCPEnabled']}
+
+Get DHCP IP Info
+    [Documentation]  Return DHCP IP address, gateway and subnetmask from redfish URI.
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${resp_list}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  IPv4Addresses
+    FOR  ${resp}  IN  @{resp_list}
+        Continue For Loop If  '${resp['AddressOrigin']}' != 'DHCP'
+        ${ip_addr}=  Set Variable  ${resp['Address']}
+        ${gateway}=  Set Variable  ${resp['Gateway']}
+        ${subnetmask}=  Set Variable  ${resp['SubnetMask']}
+        Return From Keyword  ${ip_addr}  ${gateway}  ${subnetmask}
+    END
