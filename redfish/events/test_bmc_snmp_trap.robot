@@ -15,6 +15,7 @@ Test Teardown     FFDC On Test Case Fail
 Suite Setup       Suite Setup Execution
 Suite Teardown    Suite Teardown Execution
 
+Force Tags        BMC_SNMP_Trap
 
 *** Test Cases ***
 

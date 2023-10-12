@@ -10,6 +10,8 @@ Resource        ../../lib/bmc_network_utils.robot
 Suite Setup     Suite Setup Execution
 Suite Teardown  Run Keywords  Redfish.Logout  AND  Close Browser
 
+Force Tags      SNMP_Alerts_Sub_Menu
+
 *** Variables ***
 
 ${xpath_snmp_alerts_sub_menu}                     //*[@data-test-id='nav-item-snmp-alerts']
