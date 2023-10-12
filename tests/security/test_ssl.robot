@@ -24,6 +24,6 @@ Test Non SSL Connection To Port 80
 Test Non SSL Connection To HTTPS Port
     [Documentation]  Test that OpenBmc does not accept the non-secure
     ...  http connection at port ${HTTPS_PORT} and would expect a connection error.
-    [Tags]  Test_Non_SSL_Connection_To_Https_Port
+    [Tags]  Test_Non_SSL_Connection_To_HTTPS_Port
     Create Session  openbmc  http://${OPENBMC_HOST}:${HTTPS_PORT}/  timeout=3
     Run Keyword And Expect Error  ConnectionError*  Get Request  openbmc  /list

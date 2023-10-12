@@ -285,7 +285,7 @@ Redfish Multiple Upload Image And Check Progress State
     Sleep  3s
 
     ${task_inv2}=  Get Task Inventory  ${task_info2}
-    Log  ${task_inv2}   
+    Log  ${task_inv2}
 
     Wait Until Keyword Succeeds  5 min  10 sec
     ...  Verify Task Progress State  ${task_inv2}  ${task_inv_dict['TaskException']}
