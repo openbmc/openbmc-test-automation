@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a294b53c_d320626b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-13T07:22:06Z",
+      "side": 1,
+      "message": "minor comments",
+      "revId": "3d6a00aa52fcc1057525bf488ca22f85d047e167",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a462c3dc_67d1e2d4",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-13T07:22:06Z",
+      "side": 1,
+      "message": "remove whitespaces from all the places",
+      "range": {
+        "startLine": 446,
+        "startChar": 45,
+        "endLine": 446,
+        "endChar": 58
+      },
+      "revId": "3d6a00aa52fcc1057525bf488ca22f85d047e167",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c93c00ef_bd78c8f5",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-13T07:22:06Z",
+      "side": 1,
+      "message": "exceeding max 110 characters limit",
+      "range": {
+        "startLine": 471,
+        "startChar": 0,
+        "endLine": 471,
+        "endChar": 117
+      },
+      "revId": "3d6a00aa52fcc1057525bf488ca22f85d047e167",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67452021_2db2c9cf",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-13T07:22:06Z",
+      "side": 1,
+      "message": "Correct in indention in this if else loop like below\n\n    ...    Get Event Logs\n    ...  ELSE\n    ...    Get Informational Event Logs",
+      "range": {
+        "startLine": 472,
+        "startChar": 0,
+        "endLine": 474,
+        "endChar": 37
+      },
+      "revId": "3d6a00aa52fcc1057525bf488ca22f85d047e167",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "708eda78_eba242f7",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-13T07:22:06Z",
+      "side": 1,
+      "message": "Add one more blank line after this. Always keep two blank line at the end of keyword.",
+      "range": {
+        "startLine": 476,
+        "startChar": 0,
+        "endLine": 476,
+        "endChar": 68
+      },
+      "revId": "3d6a00aa52fcc1057525bf488ca22f85d047e167",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
