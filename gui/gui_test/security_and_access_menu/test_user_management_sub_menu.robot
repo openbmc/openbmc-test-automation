@@ -216,6 +216,6 @@ Delete Users Via Redfish
 Suite Teardown Execution
     [Documentation]  Do suite teardown tasks.
 
-    Logout GUI
+    Run Keyword And Ignore Error  Logout GUI
     Close Browser
     Redfish.Logout
