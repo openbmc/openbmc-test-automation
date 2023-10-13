@@ -72,6 +72,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f92c732_14ff1305",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2023-10-13T05:28:04Z",
+      "side": 1,
+      "message": "this is common code in all test cases:\ncan we not make a keyword for this \u0026 re-use in all test cases??\n\n    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}\n\n    ${output}  ${stderr}  ${rc}\u003d  BMC Execute Command  passwd --expire ${username}\n    Should Contain Any  ${output}  password expiry information changed  password changed",
+      "parentUuid": "85edb192_4ee34e64",
+      "revId": "727182171a60bdeec42c8f7380eb3abd80d98931",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abd963a4_e54c4b5c",
