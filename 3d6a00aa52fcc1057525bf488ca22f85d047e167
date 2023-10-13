@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc55a0e8_6e11517f",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-10-13T07:55:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a462c3dc_67d1e2d4",
+      "range": {
+        "startLine": 446,
+        "startChar": 45,
+        "endLine": 446,
+        "endChar": 58
+      },
+      "revId": "3d6a00aa52fcc1057525bf488ca22f85d047e167",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c93c00ef_bd78c8f5",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-10-13T07:22:06Z",
       "side": 1,
       "message": "exceeding max 110 characters limit",
+      "range": {
+        "startLine": 471,
+        "startChar": 0,
+        "endLine": 471,
+        "endChar": 117
+      },
+      "revId": "3d6a00aa52fcc1057525bf488ca22f85d047e167",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76f255c9_ae6f6617",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-10-13T07:55:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c93c00ef_bd78c8f5",
       "range": {
         "startLine": 471,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40aa2c2c_ff68850b",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-10-13T07:55:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67452021_2db2c9cf",
+      "range": {
+        "startLine": 472,
+        "startChar": 0,
+        "endLine": 474,
+        "endChar": 37
+      },
+      "revId": "3d6a00aa52fcc1057525bf488ca22f85d047e167",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "708eda78_eba242f7",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-10-13T07:22:06Z",
       "side": 1,
       "message": "Add one more blank line after this. Always keep two blank line at the end of keyword.",
+      "range": {
+        "startLine": 476,
+        "startChar": 0,
+        "endLine": 476,
+        "endChar": 68
+      },
+      "revId": "3d6a00aa52fcc1057525bf488ca22f85d047e167",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cc53015_2301c3bd",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1001508
+      },
+      "writtenOn": "2023-10-13T07:55:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "708eda78_eba242f7",
       "range": {
         "startLine": 476,
         "startChar": 0,
