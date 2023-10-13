@@ -273,6 +273,48 @@ Get Event Logs
     [Return]  ${members}
 
 
+Get Informational Event Logs
+    [Documentation]  Get all available informational event log entries.
+
+    #  {
+    #  "@odata.id": "/redfish/v1/Systems/system/LogServices/CELog/Entries",
+    #  "@odata.type": "#LogEntryCollection.LogEntryCollection",
+    #  "Description": "Collection of System Event Log Entries",
+    #  "Members": [
+    #  {
+    #  "@odata.id": "/redfish/v1/Systems/system/LogServices/CELog/Entries/1",
+    #  "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+    #  "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/CELog/Entries/1/attachment",
+    #  "Created": "2023-10-13T05:43:02.682+00:00",
+    #  "EntryType": "Event",
+    #  "EventId": "BD752004 00000055 2E2D0010 00000000 00000000 00000000 00000000 00000000 00000000",
+    #  "Id": "1",
+    #  "Message": "BD752004 event in subsystem: Not Applicable",
+    #  "Modified": "2023-10-13T05:43:02.682+00:00",
+    #  "Name": "System Event Log Entry",
+    #  "Oem": {
+    #  "IBM": {
+    #  "@odata.id": "/redfish/v1/Systems/system/LogServices/CELog/Entries/1/OemPelAttachment"
+    #  },
+    #  "OpenBMC": {
+    #  "@odata.type": "#OemLogEntry.v1_0_0.LogEntry",
+    #  "ManagementSystemAck": false
+    #  }
+    #  },
+    #  "Resolution": "1. Priority: High, Procedure: BMC0001\n",
+    #  "Resolved": false,
+    #  "ServiceProviderNotified": false,
+    #  "Severity": "OK"
+    #  }
+    #  ],
+    #  "Members@odata.count": 1,
+    #  "Name": "System Event Log Entries"
+    #}
+
+    ${members}=  Redfish.Get Attribute  /redfish/v1/Systems/system/LogServices/CELog/Entries  Members
+    [Return]  ${members}
+
+
 Get Redfish Event Logs
     [Documentation]  Pack the list of all available EventLog entries in dictionary.
     [Arguments]   ${quiet}=1  &{filter_struct_args}

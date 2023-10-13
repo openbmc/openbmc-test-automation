@@ -438,8 +438,42 @@ Verify Default Value Of Resolved Field Is False For An Error Log Via Redfish
     ${elog_entry}=  Get Event Logs
     Should Be Equal  ${elog_entry[0]["Resolved"]}  ${False}
 
+Verify Error Log Severity Field Via Redfish
+    [Documentation]  Create an errorlog and verify severity via Redfish.
+    [Tags]  Verify_Error_Log_Severity_Field_Via_Redfish
+    [Template]  Inject Error Log And Verify Field Via Redfish
+ 
+    # error_type               expected_value             
+    unrecoverable_error        Critical
+    predictive_error           Warning 
+    informational_error        OK
 
 *** Keywords ***
+
+Inject Error Log And Verify Field Via Redfish
+    [Documentation]  Inject error log and verify its severity field.
+    [Arguments]  ${error_type}  ${expected_value}
+
+    # Description of argument(s):
+    # error_type                         Type of error log to be injected.
+    # expected_value                     Severity field expected value of error log.
+  
+    Redfish Purge Event Log
+
+    # Inject required error log.
+    Run Keyword If  "${error_type}" == "unrecoverable_error"
+    ...  BMC Execute Command  ${CMD_UNRECOVERABLE_ERROR}
+    ...  ELSE IF  "${error_type}" == "predictive_error"
+    ...  BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
+    ...  ELSE IF  "${error_type}" == "informational_error"
+    ...  BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
+       
+    ${elog_entry}=  Run Keyword If  "${error_type}" == "predictive_error" or "${error_type}" == "unrecoverable_error"
+    ...  Get Event Logs
+    ...  ELSE
+    ...  Get Informational Event Logs
+
+    Should Be Equal  ${elog_entry[0]["Severity"]}  ${expected_value}
 
 Suite Setup Execution
    [Documentation]  Do test case setup tasks.
