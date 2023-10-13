@@ -54,6 +54,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85edb192_4ee34e64",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-10-13T05:18:16Z",
+      "side": 1,
+      "message": "actually in above TCs they are expiring root password.in this keyword we are creating users like readonly \u0026 admin...So, am not using this in above TCs.",
+      "parentUuid": "39e30fdf_e74d0fd3",
+      "revId": "727182171a60bdeec42c8f7380eb3abd80d98931",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abd963a4_e54c4b5c",
