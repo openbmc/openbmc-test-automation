@@ -217,6 +217,17 @@ Verify Expire And Change Admin User Password Via GUI
     Redfish.Login  ${admin_user}  ${admin_password}
 
 
+Expire Admin Password And Check IPMI Access Fails
+    [Documentation]   Expire admin user password and expect an error while access via IPMI.
+    [Tags]  Expire_Admin_Password_And_Check_IPMI_Access_Fails
+    [Setup]  Redfish Create User  ${admin_user}  ${default_adminuser_passwd}  Administrator  ${True}
+
+    Expire Password  ${admin_user}
+
+    ${status}=  Run Keyword And Return Status   Run External IPMI Standard Command  lan print -v
+    Should Be Equal  ${status}  ${False}
+
+
 *** Keywords ***
 
 Set Account Lockout Threshold
