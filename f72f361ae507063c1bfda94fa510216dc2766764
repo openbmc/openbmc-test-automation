@@ -16,6 +16,29 @@
       "message": "Please make \n\n[Template]    Create Basic Telemetry Report\n\nand the variable info the test body.",
       "revId": "f72f361ae507063c1bfda94fa510216dc2766764",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e92496bf_38ebb1c4",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-13T03:57:15Z",
+      "side": 1,
+      "message": "As discussed, please create a separate test case and check if the telemetry report is being generated for different MetricDefinitions (which are supported by HMC, such as total_power and Ambient_0_Temp), and verify the telemetry report.",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 56
+      },
+      "revId": "f72f361ae507063c1bfda94fa510216dc2766764",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
