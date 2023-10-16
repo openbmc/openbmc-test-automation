@@ -70,6 +70,30 @@
       },
       "revId": "f7d58f135011573788f569b9e155b87d97077470",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ece46c3_d92eb805",
+        "filename": "tests/ipmi/test_general_ipmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2023-10-16T05:36:40Z",
+      "side": 1,
+      "message": "KEYWORD ${product_id_hex} \u003d BuiltIn . Convert To Hex ${device_id_config[\u0027prod_id\u0027]}, lowercase\u003dTrue, length\u003d4, prefix\u003d0x\nDocumentation: \t\n\nConverts the given item to a hexadecimal string.\nStart / End / Elapsed: \t20231016 11:03:08.674 / 20231016 11:03:08.678 / 00:00:00.004\n11:03:08.678 \tTRACE \tArguments: [ 3 | lowercase\u003dTrue | length\u003d\u00274\u0027 | prefix\u003d\u00270x\u0027 ] \t\n11:03:08.678 \tDEBUG \tArgument types are:\n\u003cclass \u0027int\u0027\u003e \t\n11:03:08.678 \tTRACE \tReturn: \u00270x0003\u0027 \t\n11:03:08.678 \tINFO \t${product_id_hex} \u003d 0x0003 \t\n00:00:00.018 KEYWORD gen_robot_valid . Valid Value mc_info[\u0027product_id\u0027], [\u0027${device_id_config[\u0027prod_id\u0027]} (${product_id_hex})\u0027]\nDocumentation: \t\n\nFail if the variable named by var_name is invalid.\nStart / End / Elapsed: \t20231016 11:03:08.678 / 20231016 11:03:08.696 / 00:00:00.018\n11:03:08.682 \tTRACE \tArguments: [ \"mc_info[\u0027product_id\u0027]\" | \"[\u00273 (0x0003)\u0027]\" ] \t\n11:03:08.696 \tTRACE \tReturn: None\n\nNow its passing,",
+      "parentUuid": "ee32c63f_0ec8f3fd",
+      "range": {
+        "startLine": 122,
+        "startChar": 4,
+        "endLine": 123,
+        "endChar": 94
+      },
+      "revId": "f7d58f135011573788f569b9e155b87d97077470",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
