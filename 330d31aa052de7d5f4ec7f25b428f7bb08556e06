@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1c32198_6a50b4da",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-10-16T16:07:40Z",
+      "side": 1,
+      "message": "Enable DHCP on eth1",
+      "revId": "330d31aa052de7d5f4ec7f25b428f7bb08556e06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c72797f6_e90e600b",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2023-10-16T16:07:40Z",
+      "side": 1,
+      "message": "Check the value of DHCP Enabled on eth1 is not impacted",
+      "revId": "330d31aa052de7d5f4ec7f25b428f7bb08556e06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
