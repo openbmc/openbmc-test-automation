@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9536f98d_b44c176b",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-16T13:01:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97a3b5a3_092e2369",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 44
+      },
+      "revId": "15ddec1841e33a29a61f46962245ea9b061200d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d8ed566_96c32eb7",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-10-16T08:03:03Z",
       "side": 1,
       "message": "Why do we need to pass expected_result and report name here. By default expected result is set to success so dont pass it. And when it comes to report name, take random name for the report in the keyword.\n\n```\n# Metric definition name.\ntotal_power\nBattery_Voltage\nAmbient_0_Temp\n```",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 77
+      },
+      "revId": "15ddec1841e33a29a61f46962245ea9b061200d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "036064e2_b3dcb272",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-16T13:01:05Z",
+      "side": 1,
+      "message": "Done - giving a random name inside keyword will have consequent report creation to have same report name leading to failure. I do not want to delete report immediately creation for other tests.",
+      "parentUuid": "6d8ed566_96c32eb7",
       "range": {
         "startLine": 33,
         "startChar": 0,
@@ -89,6 +137,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49a8f317_33fb10f9",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-16T13:01:05Z",
+      "side": 1,
+      "message": "It is my choice to add extra precautionary measure.",
+      "parentUuid": "6f6ba8fe_92be05a2",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 37
+      },
+      "revId": "15ddec1841e33a29a61f46962245ea9b061200d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09d5b4a8_f3f6de2f",
         "filename": "redfish/telemetry_service/test_telemetry_report.robot",
         "patchSetId": 5
@@ -100,6 +172,30 @@
       "writtenOn": "2023-10-16T08:03:03Z",
       "side": 1,
       "message": "As discussed, we should be taking ramdon value from the supported list for MetricReportDefinitionType, ReportActions  and Metrics so that all these values get tested.",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 54
+      },
+      "revId": "15ddec1841e33a29a61f46962245ea9b061200d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6999c640_e44533fd",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-16T13:01:05Z",
+      "side": 1,
+      "message": "Done - Metrics properties like sensor path are not provided by externally by user, they are retrieved from provided metric definition  as already discussed.",
+      "parentUuid": "09d5b4a8_f3f6de2f",
       "range": {
         "startLine": 137,
         "startChar": 0,
@@ -133,6 +229,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3033a93_19becb36",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-16T13:01:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac80a5f0_8d8545a7",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 41
+      },
+      "revId": "15ddec1841e33a29a61f46962245ea9b061200d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae6bb82a_2fbac9be",
@@ -146,6 +266,30 @@
       "writtenOn": "2023-10-16T08:03:03Z",
       "side": 1,
       "message": "Keep capital letter for v in Verify in the comment. You can also reword like below.\n\n```\n# Verify that the created report has all the attributes provided at the time of creation\n```",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 86
+      },
+      "revId": "15ddec1841e33a29a61f46962245ea9b061200d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1954625_ccfefd2f",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-16T13:01:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae6bb82a_2fbac9be",
       "range": {
         "startLine": 153,
         "startChar": 0,
