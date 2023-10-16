@@ -12,6 +12,7 @@ Test Setup     Test Setup Execution
 Test Teardown  Test Teardown Execution
 Suite Setup    Suite Setup Execution
 
+Force Tags     BMC_IPv6
 
 *** Variables ***
 ${test_ipv6_addr}          2001:db8:3333:4444:5555:6666:7777:8888
