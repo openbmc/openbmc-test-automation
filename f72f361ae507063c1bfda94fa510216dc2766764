@@ -81,6 +81,30 @@
       },
       "revId": "f72f361ae507063c1bfda94fa510216dc2766764",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57892ae3_07c15548",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-16T08:04:23Z",
+      "side": 1,
+      "message": "I dont see that you have created a separated test case for new ones. If you want to keep them as part of existing please make the changes as suggested.",
+      "parentUuid": "bca45271_b7fbb132",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 56
+      },
+      "revId": "f72f361ae507063c1bfda94fa510216dc2766764",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
