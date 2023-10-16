@@ -14,6 +14,8 @@ Test Teardown    FFDC On Test Case Fail
 Suite Setup      Redfish BIOS Suite Setup
 Suite Teardown   Run Keyword And Ignore Error  Redfish BIOS Suite Cleanup
 
+Force Tags       Redfish_Bios_Attributes
+
 *** Variables ***
 
 ${bios_original_data}       ${EMPTY}

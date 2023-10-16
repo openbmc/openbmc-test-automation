@@ -9,6 +9,7 @@ Resource         ../lib/openbmc_ffdc.robot
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
 
+Force Tags       Pldm_OEM
 
 *** Test Cases ***
 

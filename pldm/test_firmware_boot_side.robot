@@ -26,6 +26,8 @@ Resource         ../lib/openbmc_ffdc.robot
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
 
+Force Tags       Firmware_Boot_Side
+
 *** Variables ***
 
 # By default 2, to ensure, it performs both Perm and Temp side switch and boot.
