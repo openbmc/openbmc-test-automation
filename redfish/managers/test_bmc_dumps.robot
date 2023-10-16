@@ -12,6 +12,8 @@ Suite Setup         Redfish.Login
 Test Setup          Redfish Delete All BMC Dumps
 Test Teardown       Test Teardown Execution
 
+Force Tags          BMC_Dumps
+
 *** Variables ***
 
 # Total size of the dump in kilo bytes

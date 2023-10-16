@@ -9,6 +9,7 @@ Suite Setup     Suite Setup Execution
 Suite Teardown  Run Keywords  Enable IPMI Protocol  ${initial_ipmi_state}  AND  Redfish.Logout
 Test Teardown   FFDC On Test Case Fail
 
+Force Tags      BMC_Protocol_Settings
 
 *** Variables ***
 
