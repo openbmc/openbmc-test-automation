@@ -9,6 +9,8 @@ Suite Setup         Suite Setup Execution
 Suite Teardown      Redfish.Logout
 Test Teardown       Test Teardown Execution
 
+Force Tags          Telemetry_Report
+
 *** Variables ***
 
 ${metric_definition_base_uri}  /redfish/v1/TelemetryService/MetricReportDefinitions

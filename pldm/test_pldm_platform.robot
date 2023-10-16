@@ -12,6 +12,8 @@ Test Setup        Printn
 Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Pldmtool Platform Suite Cleanup
 
+Force Tags        Pldm_Platform
+
 *** Test Cases ***
 Verify GetPDR
     [Documentation]  Verify GetPDR (Platform Descpritor Record) response message.
