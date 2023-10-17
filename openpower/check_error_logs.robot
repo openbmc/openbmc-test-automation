@@ -43,4 +43,4 @@ Redfish Test Teardown Execution
     [Documentation]  Do the post test teardown for redfish.
 
     Redfish.Logout
-    FFDC On Test Case Fail  clean_up=${FALSE}
+    FFDC On Test Case Fail
