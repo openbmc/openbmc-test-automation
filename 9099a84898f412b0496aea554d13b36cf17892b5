@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db617f7c_2fe8788e",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-17T06:36:55Z",
+      "side": 1,
+      "message": "Add it like below in this keyword to use random value. If random values are also allowed for others like Metrics, ReportUpdates and AppendLimit than also use it.\n\n```\n${random_report_name}\u003d  Generate Random String  8  [LETTERS]\n${random_metric_definition_type}\u003d  Set Random  ${supported_metric_definition_type}\n${random_report_action}\u003d  Set Random  ${supported_report_action}\n\n    ${body}\u003d  Catenate  {\"Id\": \"${random_report_name}\",\n    ...  \"MetricReportDefinitionType\": \"${random_metric_definition_type}\",\n    ...  \"Name\": \"Report\",\n    ...  \"ReportActions\":[\"${random_report_action}\"],\n    ...  \"Metrics\":[{\"CollectionDuration\": \"PT30.000S\",\n    ...  \"MetricProperties\":${resp[\"MetricProperties\"]}}],\n    ...  \"ReportUpdates\": \"AppendWrapsWhenFull\",\n    ...  \"AppendLimit\":10,\n    ...  \"Schedule\": {\"RecurrenceInterval\": \"PT5.000S\"}}\n    \n ```\n \nAdd supported list in the variable like below\n \n *** Variables ***\n@{supported_metric_definition_type}  Periodic  OnRequest\n@{supported_report_action}           LogToMetricReportsCollection  etc",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 56
+      },
+      "revId": "9099a84898f412b0496aea554d13b36cf17892b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c13a719_39f93a7e",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-17T06:36:55Z",
+      "side": 1,
+      "message": "instead of resp2 you can use redfish_output. Also compare the value with the random which was set.\n\n        Should Be True  \u0027${redfish_output.dict[\"MetricReportDefinitionType\"]}\u0027 \u003d\u003d \u0027${random_metric_definition_type}\u0027\n        Should Be True  \u0027${redfish_output.dict[\"ReportActions\"][0]}\u0027 \u003d\u003d \u0027${random_report_action}\u0027\n        Should Be True  \u0027${redfish_output.dict[\"Metrics\"]}[0][MetricProperties][0]\u0027 \u003d\u003d \u0027${resp[\"MetricProperties\"][0]}\u0027",
+      "range": {
+        "startLine": 124,
+        "startChar": 10,
+        "endLine": 124,
+        "endChar": 15
+      },
+      "revId": "9099a84898f412b0496aea554d13b36cf17892b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

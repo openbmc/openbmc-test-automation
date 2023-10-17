@@ -136,6 +136,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea9b1876_29168c59",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-17T06:36:55Z",
+      "side": 1,
+      "message": "If we provide these values over here then only these value will get tested. So its better to do as suggested in the recent comment in Create Basic Telemetry Report keyword.",
+      "parentUuid": "036064e2_b3dcb272",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 77
+      },
+      "revId": "15ddec1841e33a29a61f46962245ea9b061200d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f6ba8fe_92be05a2",
@@ -173,6 +197,30 @@
       "side": 1,
       "message": "It is my choice to add extra precautionary measure.",
       "parentUuid": "6f6ba8fe_92be05a2",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 37
+      },
+      "revId": "15ddec1841e33a29a61f46962245ea9b061200d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97efcd7e_4de9a814",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-17T06:36:55Z",
+      "side": 1,
+      "message": "We should not be adding unless its required. So please remove it.",
+      "parentUuid": "49a8f317_33fb10f9",
       "range": {
         "startLine": 100,
         "startChar": 0,
