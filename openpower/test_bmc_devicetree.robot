@@ -6,9 +6,8 @@ Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/ipmi_client.robot
 Library             String
 
-Suite Setup         Open Connection And Log In
-Suite Teardown      Close All Connections
-Test Teardown       FFDC On Test Case Fail
+Test Setup          Open Connection And Log In
+Test Teardown       Run Keywords  Close All Connections  AND FFDC On Test Case Fail
 
 *** Variables ***
 ${devicetree_base}  /sys/firmware/devicetree/base/
