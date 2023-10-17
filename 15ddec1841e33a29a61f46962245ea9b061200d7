@@ -160,6 +160,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96f47a49_2234cab3",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-17T10:14:16Z",
+      "side": 1,
+      "message": "George .. Any thought on this.",
+      "parentUuid": "ea9b1876_29168c59",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 77
+      },
+      "revId": "15ddec1841e33a29a61f46962245ea9b061200d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f6ba8fe_92be05a2",
@@ -245,6 +269,30 @@
       "side": 1,
       "message": "It is better programmer technique for precaution; there is no harm and no extra overhead as such for delete attempt if reports are already deleted.",
       "parentUuid": "97efcd7e_4de9a814",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 37
+      },
+      "revId": "15ddec1841e33a29a61f46962245ea9b061200d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc876858_1b4ebc02",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-17T10:14:16Z",
+      "side": 1,
+      "message": "If we are deleting two times then we will not come to know when the delete fails one time. So its always good to add when only its required.\n\nGeorge... Any thoughts?",
+      "parentUuid": "c44c0a32_88a37536",
       "range": {
         "startLine": 100,
         "startChar": 0,
