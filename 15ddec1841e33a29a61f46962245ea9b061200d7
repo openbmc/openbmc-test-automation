@@ -186,6 +186,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "81b989ad_439639c4",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-17T10:31:27Z",
+      "side": 1,
+      "message": "We earlier decided to keep test data - like report type, collection type externally as template parameters. Lets stick to that. \nGiving any test data internally  inside the keyword is not a good test idea. Lets keep them visible.",
+      "parentUuid": "96f47a49_2234cab3",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 77
+      },
+      "revId": "15ddec1841e33a29a61f46962245ea9b061200d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6f6ba8fe_92be05a2",
         "filename": "redfish/telemetry_service/test_telemetry_report.robot",
         "patchSetId": 5
@@ -293,6 +317,30 @@
       "side": 1,
       "message": "If we are deleting two times then we will not come to know when the delete fails one time. So its always good to add when only its required.\n\nGeorge... Any thoughts?",
       "parentUuid": "c44c0a32_88a37536",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 37
+      },
+      "revId": "15ddec1841e33a29a61f46962245ea9b061200d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69b17a4f_bf2263be",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-17T10:31:27Z",
+      "side": 1,
+      "message": "We do testing on telemetry report creation. Before and after the test, our job is to confirm cleaning all the existing reports. If we do multiple times cleaning, Before and after the test, it does not matter.",
+      "parentUuid": "dc876858_1b4ebc02",
       "range": {
         "startLine": 100,
         "startChar": 0,
