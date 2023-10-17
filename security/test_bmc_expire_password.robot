@@ -237,10 +237,31 @@ Verify Expire Admin Password And Update Bad Password Length Via Redfish
 
    Redfish.Login
    ${status}=  Run Keyword And Return Status
-   ...  Redfish.Patch  /redfish/v1/AccountService/Accounts/${OPENBMC_USERNAME}
+   ...  Redfish.Patch  /redfish/v1/AccountService/Accounts/${admin_user}
    ...  body={'Password': '0penBmc0penBmc0penBmc'}
 
    Should Be Equal  ${status}  ${False}
+
+
+Expire And Change Admin User Password Via Redfish And Verify
+   [Documentation]   Expire and change admin user password via Redfish and verify.
+   [Tags]  Expire_And_Change_Admin_User_Password_Via_Redfish_And_Verify
+   [Setup]  Redfish Create User  ${admin_user}  ${default_adminuser_passwd}  Administrator  ${True}
+   [Teardown]  Restore Default Password For Admin User
+
+   Expire Password  ${admin_user}
+
+   Verify User Password Expired Using Redfish  ${admin_user}  ${default_adminuser_passwd}
+
+   # Change to a valid password.
+   ${status}=  Run Keyword And Return Status
+   ...  Redfish.Patch  /redfish/v1/AccountService/Accounts/${admin_user}
+   ...  body={'Password': 'AdminUser2'}
+   Should Be Equal  ${status}  ${True}
+   Redfish.Logout
+
+   # Verify login with the new password.
+   Redfish.Login  ${admin_user}  AdminUser2
 
 
 *** Keywords ***
@@ -298,3 +319,13 @@ Expire Password
     # passwd: password changed.
 
     Close All Connections
+
+
+Restore Default Password For Admin User
+    [Documentation]  Restore default password for admin user (i.e. AdminUser1).
+
+    # Set default password for admin user.
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/${admin_user}
+    ...   body={'Password': '${default_adminuser_passwd}'}  valid_status_codes=[${HTTP_OK}]
+    # Verify that admin user is able to run Redfish command using default password.
+    Redfish.Logout
