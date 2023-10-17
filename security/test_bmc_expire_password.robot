@@ -237,7 +237,7 @@ Verify Expire Admin Password And Update Bad Password Length Via Redfish
 
    Redfish.Login
    ${status}=  Run Keyword And Return Status
-   ...  Redfish.Patch  /redfish/v1/AccountService/Accounts/${OPENBMC_USERNAME}
+   ...  Redfish.Patch  /redfish/v1/AccountService/Accounts/${admin_user}
    ...  body={'Password': '0penBmc0penBmc0penBmc'}
 
    Should Be Equal  ${status}  ${False}
@@ -276,6 +276,27 @@ Verify New Admin Password Persistency After BMC Reboot
 
     # Verify password is persisted after bmc reboot.
     Redfish.Login  ${admin_user}  ${admin_password}
+
+
+Expire And Change Admin User Password Via Redfish And Verify
+   [Documentation]   Expire and change admin user password via Redfish and verify.
+   [Tags]  Expire_And_Change_Admin_User_Password_Via_Redfish_And_Verify
+   [Setup]  Redfish Create User  ${admin_user}  ${default_adminuser_passwd}  Administrator  ${True}
+   [Teardown]  Restore Default Password For Admin User
+
+   Expire Password  ${admin_user}
+
+   Verify User Password Expired Using Redfish  ${admin_user}  ${default_adminuser_passwd}
+
+   # Change to a valid password.
+   ${status}=  Run Keyword And Return Status
+   ...  Redfish.Patch  /redfish/v1/AccountService/Accounts/${admin_user}
+   ...  body={'Password': 'AdminUser2'}
+   Should Be Equal  ${status}  ${True}
+   Redfish.Logout
+
+   # Verify login with the new password.
+   Redfish.Login  ${admin_user}  AdminUser2
 
 
 *** Keywords ***
