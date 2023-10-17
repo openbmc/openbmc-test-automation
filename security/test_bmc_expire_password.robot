@@ -228,6 +228,22 @@ Expire Admin Password And Check IPMI Access Fails
     Should Be Equal  ${status}  ${False}
 
 
+Expire Admin Password And Update Bad Password Length Via Redfish
+   [Documentation]  Expire admin password and update bad password with more than 20 characters
+   ...  via Redfish and expect an error.
+   [Tags]  Expire_Admin_Password_And_Update_Bad_Password_Length_Via_Redfish
+   [Setup]  Redfish Create User  ${admin_user}  ${default_adminuser_passwd}  Administrator  ${True}
+
+   Expire Password  ${admin_user}
+
+   Redfish.Login
+   ${status}=  Run Keyword And Return Status
+   ...  Redfish.Patch  /redfish/v1/AccountService/Accounts/${OPENBMC_USERNAME}
+   ...  body={'Password': '0penBmc0penBmc0penBmc'}
+
+   Should Be Equal  ${status}  ${False}
+
+
 *** Keywords ***
 
 Set Account Lockout Threshold
