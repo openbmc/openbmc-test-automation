@@ -228,6 +228,24 @@ Expire Admin Password And Check IPMI Access Fails
     Should Be Equal  ${status}  ${False}
 
 
+Expire And Change Admin User Password Via Redfish And Verify
+   [Documentation]   Expire and change admin user password via Redfish and verify.
+   [Tags]  Expire_And_Change_Admin_User_Password_Via_Redfish_And_Verify
+   [Setup]  Redfish Create User  ${admin_user}  ${default_adminuser_passwd}  Administrator  ${True}
+
+   Expire Password  ${admin_user}
+
+   Verify User Password Expired Using Redfish  ${admin_user}  ${default_adminuser_passwd}
+
+   # Change to a valid password.
+   Redfish.Patch  /redfish/v1/AccountService/Accounts/${admin_user}
+   ...  body={'Password': 'AdminUser2'}
+   Redfish.Logout
+
+   # Verify login with the new password.
+   Redfish.Login  ${admin_user}  AdminUser2
+
+
 *** Keywords ***
 
 Set Account Lockout Threshold
