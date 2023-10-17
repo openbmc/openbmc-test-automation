@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ed635fc_954315fe",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-10-17T07:12:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1c32198_6a50b4da",
+      "revId": "330d31aa052de7d5f4ec7f25b428f7bb08556e06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c72797f6_e90e600b",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-16T16:07:40Z",
       "side": 1,
       "message": "Check the value of DHCP Enabled on eth1 is not impacted",
+      "revId": "330d31aa052de7d5f4ec7f25b428f7bb08556e06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "374c21f7_9c71a7ac",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-10-17T07:12:44Z",
+      "side": 1,
+      "message": "Checking the DHCPEnabled status on eth0.",
+      "parentUuid": "c72797f6_e90e600b",
       "revId": "330d31aa052de7d5f4ec7f25b428f7bb08556e06",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
