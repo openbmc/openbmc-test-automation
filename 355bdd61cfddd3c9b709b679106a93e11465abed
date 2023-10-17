@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be8cd1f3_c903716d",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-10-17T11:36:59Z",
+      "side": 1,
+      "message": "Please Add Verify in the beginning",
+      "revId": "355bdd61cfddd3c9b709b679106a93e11465abed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
