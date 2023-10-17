@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b982a16_5251f2a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-17T06:13:20Z",
+      "side": 1,
+      "message": "I have remove providing report name string externally. Now it will create random string inside the keyword.",
+      "revId": "884bcef2ba26d1eacd482b2c39eb2bc16571ad69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
