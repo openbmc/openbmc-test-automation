@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b283864_68fa4e7c",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-17T07:16:56Z",
+      "side": 1,
+      "message": "I had already added code for report name to be generated random way. \nHowever, report action, definition etc., will be provided from outside from the testcase where such test data will be visible. Keeping test data inside keyword is not a very good idea.I am keeping them.",
+      "parentUuid": "db617f7c_2fe8788e",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 56
+      },
+      "revId": "9099a84898f412b0496aea554d13b36cf17892b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c13a719_39f93a7e",
         "filename": "redfish/telemetry_service/test_telemetry_report.robot",
         "patchSetId": 7
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-17T06:36:55Z",
       "side": 1,
       "message": "instead of resp2 you can use redfish_output. Also compare the value with the random which was set.\n\n        Should Be True  \u0027${redfish_output.dict[\"MetricReportDefinitionType\"]}\u0027 \u003d\u003d \u0027${random_metric_definition_type}\u0027\n        Should Be True  \u0027${redfish_output.dict[\"ReportActions\"][0]}\u0027 \u003d\u003d \u0027${random_report_action}\u0027\n        Should Be True  \u0027${redfish_output.dict[\"Metrics\"]}[0][MetricProperties][0]\u0027 \u003d\u003d \u0027${resp[\"MetricProperties\"][0]}\u0027",
+      "range": {
+        "startLine": 124,
+        "startChar": 10,
+        "endLine": 124,
+        "endChar": 15
+      },
+      "revId": "9099a84898f412b0496aea554d13b36cf17892b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16bbd316_483ca611",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-17T07:16:56Z",
+      "side": 1,
+      "message": "Done - modified resp2 keeping rest unchanged.",
+      "parentUuid": "8c13a719_39f93a7e",
       "range": {
         "startLine": 124,
         "startChar": 10,

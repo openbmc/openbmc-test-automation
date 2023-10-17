@@ -233,6 +233,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c44c0a32_88a37536",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-10-17T07:16:56Z",
+      "side": 1,
+      "message": "It is better programmer technique for precaution; there is no harm and no extra overhead as such for delete attempt if reports are already deleted.",
+      "parentUuid": "97efcd7e_4de9a814",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 37
+      },
+      "revId": "15ddec1841e33a29a61f46962245ea9b061200d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09d5b4a8_f3f6de2f",
         "filename": "redfish/telemetry_service/test_telemetry_report.robot",
         "patchSetId": 5
