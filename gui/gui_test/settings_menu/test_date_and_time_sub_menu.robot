@@ -305,8 +305,8 @@ Switch From Manual To NTP
        Input Text  ${xpath_ntp_server1}  216.239.35.0
        Click Element  ${xpath_select_save_settings}
 
-       # Wait until saved successfully message is visible.
-       Wait Until Element Is Visible  ${xpath_success_message}  timeout=60
+       # Wait until progress bar is not visible.
+       Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=60
 
        ${cli_date_time}=  CLI Get BMC DateTime
        ${ntp_date}=  Convert Date  ${cli_date_time}  result_format=%Y-%m-%d
