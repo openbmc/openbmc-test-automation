@@ -44,7 +44,7 @@ Disable DHCP On Eth1 And Verify System Is Accessible By Eth0
     [Teardown]  Set DHCPEnabled To Enable Or Disable  True  eth1
 
     Set DHCPEnabled To Enable Or Disable  False  eth1
-    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status  ${2}
     Should Be Equal  ${DHCPEnabled}  ${False}
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
@@ -55,7 +55,7 @@ Enable DHCP On Eth1 And Verify System Is Accessible By Eth0
     [Setup]  Set DHCPEnabled To Enable Or Disable  False  eth1
 
     Set DHCPEnabled To Enable Or Disable  True  eth1
-    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status  ${2}
     Should Be Equal  ${DHCPEnabled}  ${True}
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
@@ -87,7 +87,7 @@ Enable DHCP On Eth1 And Check No Impact On Eth0
     Set DHCPEnabled To Enable Or Disable  True  eth1
 
     # Check the value of DHCPEnabled on eth0 is not impacted.
-    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status  ${1}
     Should Be Equal  ${DHCPEnabled}  ${False}
 
     # Getting eth0 details after enabling DHCP.
@@ -118,6 +118,18 @@ Switch Between DHCP And Static
     Should Be Equal  ${ip_addr_before}  ${ip_addr_after}
     Should Be Equal  ${gateway_before}  ${gateway_after}
     Should Be Equal  ${subnetmask_before}  ${subnetmask_after}
+
+Switch From DHCP To Static And Verify DHCP IP Erased
+    [Documentation]  Switch from DHCP to static and verify DHCP IP is erased.
+    [Tags]  Switch_From_DHCP_To_Static_And_Verify_DHCP_IP_Erased
+    [Teardown]  Set DHCPEnabled To Enable Or Disable  True  eth1
+
+    Set DHCPEnabled To Enable Or Disable  False  eth1
+
+    ${ip_data_after}=  Get Network Configuration Using Channel Number  ${2}
+
+    Should Be Empty  ${ip_data_after}
+    ...  msg=From switching from DHCP to Static DHCP IP is not erased.
 
 *** Keywords ***
 
