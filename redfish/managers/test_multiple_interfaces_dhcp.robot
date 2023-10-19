@@ -119,6 +119,18 @@ Switch Between DHCP And Static
     Should Be Equal  ${gateway_before}  ${gateway_after}
     Should Be Equal  ${subnetmask_before}  ${subnetmask_after}
 
+Switch From DHCP To Static And Verify DHCP IP Erased
+    [Documentation]  Switch from DHCP to static and verify DHCP IP is erased.
+    [Tags]  Switch_From_DHCP_To_Static_And_Verify_DHCP_IP_Erased
+    [Teardown]  Set DHCPEnabled To Enable Or Disable  True  eth1
+
+    Set DHCPEnabled To Enable Or Disable  False  eth1
+
+    ${ip_data_after}=  Get Network Configuration Using Channel Number  ${2}
+
+    Should Be Empty  ${ip_data_after}
+    ...  msg=From switching from DHCP to Static DHCP IP is not erased.
+
 *** Keywords ***
 
 Set DHCPEnabled To Enable Or Disable
