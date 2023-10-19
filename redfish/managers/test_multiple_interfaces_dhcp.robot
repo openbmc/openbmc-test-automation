@@ -44,7 +44,7 @@ Disable DHCP On Eth1 And Verify System Is Accessible By Eth0
     [Teardown]  Set DHCPEnabled To Enable Or Disable  True  eth1
 
     Set DHCPEnabled To Enable Or Disable  False  eth1
-    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status  ${2}
     Should Be Equal  ${DHCPEnabled}  ${False}
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
@@ -55,7 +55,7 @@ Enable DHCP On Eth1 And Verify System Is Accessible By Eth0
     [Setup]  Set DHCPEnabled To Enable Or Disable  False  eth1
 
     Set DHCPEnabled To Enable Or Disable  True  eth1
-    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status  ${2}
     Should Be Equal  ${DHCPEnabled}  ${True}
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
@@ -87,7 +87,7 @@ Enable DHCP On Eth1 And Check No Impact On Eth0
     Set DHCPEnabled To Enable Or Disable  True  eth1
 
     # Check the value of DHCPEnabled on eth0 is not impacted.
-    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status  ${1}
     Should Be Equal  ${DHCPEnabled}  ${False}
 
     # Getting eth0 details after enabling DHCP.
@@ -118,6 +118,20 @@ Switch Between DHCP And Static
     Should Be Equal  ${ip_addr_before}  ${ip_addr_after}
     Should Be Equal  ${gateway_before}  ${gateway_after}
     Should Be Equal  ${subnetmask_before}  ${subnetmask_after}
+
+Disable DHCP On Eth1 And Verify DHCP IP Erased
+    [Documentation]  Disable DHCP on Eth1 and verify DHCP IP erased.
+    [Tags]  Disable_DHCP_On_Eth1_And_Verify_DHCP_IP_Erased
+    [Teardown]  Set DHCPEnabled To Enable Or Disable  True  eth1
+
+    Set DHCPEnabled To Enable Or Disable  False  eth1
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status  ${2}
+    Should Be Equal  ${DHCPEnabled}  ${False}
+
+    ${dhcp_ip_list}=  Get Network Configuration Using Channel Number  ${2}
+
+    Should Be Empty  ${dhcp_ip_list}
+    ...  msg=From switching from DHCP to Static DHCP IP is not erased.
 
 *** Keywords ***
 
@@ -182,8 +196,8 @@ Verify Ethernet Config Property
 Restore Configuration
     [Documentation]  Restore the configuration to Both Static Network
 
-    Run Keyword If  '${CHANNEL_NUMBER}' == '1'  Add IP Address  ${OPENBMC_HOST}  ${eth0_subnet_mask}  ${eth0_gateway}
-    ...  ELSE IF  '${CHANNEL_NUMBER}' == '2'  Add IP Address  ${OPENBMC_HOST_1}  ${eth1_subnet_mask}  ${eth1_gateway}
+    Run Keyword If  '${CHANNEL_NUMBER}' == '${1}'  Add IP Address  ${OPENBMC_HOST}  ${eth0_subnet_mask}  ${eth0_gateway}
+    ...  ELSE IF  '${CHANNEL_NUMBER}' == '{2}'  Add IP Address  ${OPENBMC_HOST_1}  ${eth1_subnet_mask}  ${eth1_gateway}
 
 Get Network Configuration Using Channel Number
     [Documentation]  Get ethernet interface.
