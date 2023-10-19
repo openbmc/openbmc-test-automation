@@ -27,6 +27,7 @@ ${xpath_password_input_button}           //*[@data-test-id='userManagement-input
 ${xpath_password_confirm_button}         //*[@data-test-id='userManagement-input-passwordConfirmation']
 ${xpath_cancel_button}                   //*[@data-test-id='userManagement-button-cancel']
 ${xpath_submit_button}                   //*[@data-test-id='userManagement-button-submit']
+${xpath_delete_button}                   //button[text()='Delete user']
 ${xpath_add_user_heading}                //h5[contains(text(),'Add user')]
 ${xpath_policy_settings_header}          //*[text()="Account policy settings"]
 ${xpath_auto_unlock}                     //*[@data-test-id='userManagement-radio-automaticUnlock']
@@ -138,6 +139,17 @@ Verify User Account And Properties Saved Through Reboots
     Wait Until Page Contains  my_admin_user  timeout=15
 
 
+Delete User Account Via GUI
+    [Documentation]  Delete user account via GUI.
+    [Tags]  Delete_User_Account_Via_GUI
+
+    # Create new user account via GUI.
+    Create User And Verify  ${username}[0]  Administrator  ${True}
+
+    # Delete the user created via GUI.
+    Delete Users Via GUI  ${username}[0]
+
+
 *** Keywords ***
 
 Create User And Verify
@@ -210,6 +222,21 @@ Delete Users Via Redfish
       Redfish.Login
       Redfish.Delete  /redfish/v1/AccountService/Accounts/${user}
       Redfish.Logout
+    END
+
+
+Delete Users Via GUI
+    [Documentation]  Delete given users via GUI.
+    [Arguments]  @{user_list}
+    # Description of argument(s):
+    # user_list          List of user name to be deleted.
+
+    FOR  ${user}  IN  @{user_list}
+      Wait Until Keyword Succeeds  30 sec  5 sec  Click Element
+      ...  //td[text()='${user}']/following-sibling::*/*/*[@title='Delete user']
+      Wait Until Keyword Succeeds  30 sec  5 sec  Click Element  ${xpath_delete_button}
+      Wait Until Element Is Visible  ${xpath_success_message}  timeout=30
+      Wait Until Element Is Not Visible  ${xpath_success_message}  timeout=60
     END
 
 
