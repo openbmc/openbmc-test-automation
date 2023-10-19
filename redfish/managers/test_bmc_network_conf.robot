@@ -791,7 +791,7 @@ Suite Setup Execution
     #   - And set the same as static IP address
 
     Redfish.Login
-    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status  ${1}
     Set Suite Variable  ${DHCPEnabled}
 
     Run Keyword If  ${DHCPEnabled}==True
