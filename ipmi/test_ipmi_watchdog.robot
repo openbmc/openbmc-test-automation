@@ -9,6 +9,8 @@ Library          String
 Library          Collections
 Variables        ../data/ipmi_raw_cmd_table.py
 
+Force Tags       IPMI_Watchdog
+
 *** Variables ***
 
 ${TIMER_DELAY}          3

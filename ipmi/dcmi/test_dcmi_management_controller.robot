@@ -13,7 +13,10 @@ Library          ../../lib/utilities.py
 Library          ../../lib/utils.py
 Library          JSONLibrary
 
+Force Tags       DCMI_Management_Controller
+
 *** Variables ***
+
 ${hostname_file_path}  /etc/hostname
 
 *** Test Cases ***

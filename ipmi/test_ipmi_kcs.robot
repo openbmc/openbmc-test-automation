@@ -1,17 +1,18 @@
 *** Settings ***
 
-Documentation          To Verify KCS interface.
+Documentation   To Verify KCS interface.
 
-Resource               ../lib/ipmi_client.robot
-Resource               ../lib/ipmi_utils.robot
-Variables              ../data/ipmi_raw_cmd_table.py
-Library                ../lib/ipmi_utils.py
-
+Resource        ../lib/ipmi_client.robot
+Resource        ../lib/ipmi_utils.robot
+Variables       ../data/ipmi_raw_cmd_table.py
+Library         ../lib/ipmi_utils.py
 
 Suite Setup     Suite Setup Execution
 
+Force Tags      IPMI_KCS
 
 *** Variables ***
+
 ${LOOP_COUNT}          ${1}
 
 

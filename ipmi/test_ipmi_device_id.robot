@@ -21,6 +21,7 @@ Library             ../lib/ipmi_utils.py
 Library             ../lib/var_funcs.py
 Variables           ../data/ipmi_raw_cmd_table.py
 
+Force Tags          IPMI_Device_ID
 
 *** Test Cases ***
 

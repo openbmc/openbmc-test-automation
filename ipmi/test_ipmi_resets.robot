@@ -9,6 +9,8 @@ Suite Teardown   Redfish.Logout
 
 Test Teardown    FFDC On Test Case Fail
 
+Force Tags       IPMI_Resets
+
 *** Variables ***
 
 # User may pass LOOP_COUNT.

@@ -15,7 +15,10 @@ Library          JSONLibrary
 
 Suite Setup  Suite Setup Execution
 
+Force Tags       DCMI_Get_Temperature_Reading
+
 *** Variables ***
+
 ${config_file_name}             dcmi_sensors.json
 ${dcmi_sensors_info_json_file}  /usr/share/ipmi-providers/${config_file_name}
 ${client_config_file_path}      ${EXEC_DIR}/${config_file_name}

@@ -12,6 +12,8 @@ Library          ../lib/ipmi_utils.py
 Suite Setup      IPMI General Test Suite Setup
 Test Teardown    FFDC On Test Case Fail
 
+Force Tags       IPMI_General
+
 *** Test Cases ***
 
 Test Get Self Test Results via IPMI Raw Command

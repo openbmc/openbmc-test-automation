@@ -9,6 +9,8 @@ Variables        ../data/ipmi_raw_cmd_table.py
 Test Setup       Test Setup Execution
 Test Teardown    FFDC On Test Case Fail
 
+Force Tags       IPMI_SEL
+
 *** Variables ***
 
 # Based on 13th byte of add SEL entry command as per IPMI spec

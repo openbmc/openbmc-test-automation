@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation  Validate IPMI sensor IDs using Redfish.
+Documentation     Validate IPMI sensor IDs using Redfish.
 
 Resource          ../lib/ipmi_client.robot
 Resource          ../lib/openbmc_ffdc.robot
@@ -11,8 +11,10 @@ Test Setup        Redfish.Login
 Test Teardown     Run Keywords  FFDC On Test Case Fail  AND
 ...  Redfish.Logout
 
+Force Tags        IPMI_Sensor
 
 *** Variables ***
+
 ${allowed_temp_diff}    ${2}
 ${allowed_power_diff}   ${10}
 

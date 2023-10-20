@@ -7,12 +7,13 @@ Resource            ../lib/bmc_network_utils.robot
 Variables           ../data/ipmi_raw_cmd_table.py
 Library             ../lib/ipmi_utils.py
 
-
 Suite Setup         IPMI Payload Setup Execution
 Test Teardown       FFDC On Test Case Fail
 
+Force Tags          IPMI_Payload
 
 *** Variables ***
+
 ${user_priv}                     2
 ${operator_priv}                 3
 ${admin_level_priv}              4

@@ -10,6 +10,8 @@ Test Setup          Printn
 Suite Setup         Suite Setup Execution
 Test Teardown       Test Teardown Execution
 
+Force Tags          IPMI_User
+
 *** Variables ***
 
 ${invalid_username}     user%

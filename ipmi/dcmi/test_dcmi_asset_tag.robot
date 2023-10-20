@@ -11,6 +11,7 @@ Suite Setup      Redfish.Login
 Suite Teardown   Redfish.Logout
 Test Teardown    FFDC On Test Case Fail
 
+Force Tags       DCMI_Asset_Tag
 
 *** Test Cases ***
 

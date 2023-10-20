@@ -10,8 +10,10 @@ Suite Setup            Suite Setup Execution
 Suite Teardown         Suite Teardown Execution
 Test Teardown          Test Teardown Execution
 
+Force Tags             IPMI_FRU
 
 *** Variables ***
+
 &{ipmi_redfish_fru_field_map}  product_serial=SerialNumber  product_part_number=PartNumber
 
 *** Test Cases ***

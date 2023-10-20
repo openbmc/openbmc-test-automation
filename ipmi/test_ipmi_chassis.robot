@@ -12,6 +12,7 @@ Suite Setup      Redfish.Login
 Suite Teardown   Redfish.Logout
 Test Teardown    Test Teardown Execution
 
+Force Tags       IPMI_Chassis
 
 *** Variables ***
 

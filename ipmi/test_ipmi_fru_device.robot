@@ -6,7 +6,10 @@ Resource               ../lib/bmc_dbus.robot
 Variables              ../data/ipmi_raw_cmd_table.py
 Library                ../lib/ipmi_utils.py
 
+Force Tags             IPMI_FRU_Device
+
 *** Variables ***
+
 ${FRU_NAME}       dimm01 dimm02 cpu0 cpu1  motherboard
 ${BUSCTL_FRU}                xyz.openbmc_project.FruDevice
 ${FRU_DBUS_URL}              /xyz/openbmc_project/FruDevice

@@ -13,6 +13,7 @@ Suite Setup      IPMI Cipher Suite Setup
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
 
+Force Tags       IPMI_Cipher
 
 *** Variables  ***
 ${cipher_suite}      standard
