@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4942dd77_760321fa",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-10-20T05:30:44Z",
+      "side": 1,
+      "message": "looks this is very specific to admin user so should rename the title as\n\nVerify Delete Admin User Account Via GUI",
+      "revId": "faf409d93aacf1487d01afd1c089f43f710cbba6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
