@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation     This testsuite is for testing SSL connection to OpenBMC.
 Suite Teardown    Delete All Sessions
+Test Tags         Requires-REST
 
 Resource          ../../lib/rest_client.robot
 Resource          ../../lib/resource.robot

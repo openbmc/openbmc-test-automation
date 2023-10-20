@@ -4,7 +4,7 @@ Documentation  Test IPMI FRU data.
 Resource               ../lib/ipmi_client.robot
 Resource               ../lib/openbmc_ffdc.robot
 Library                ../lib/ipmi_utils.py
-
+Test Tags              IPMI
 
 Suite Setup            Suite Setup Execution
 Suite Teardown         Suite Teardown Execution

@@ -7,6 +7,7 @@ Resource        ../lib/ipmi_client.robot
 Resource        ../lib/openbmc_ffdc.robot
 Resource        ../lib/utils.robot
 Resource        ../lib/boot_utils.robot
+Test Tags       IPMI Requires-REST
 
 Suite Setup     Test Suite Setup
 Test Teardown   Post Test Case Execution

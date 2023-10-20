@@ -9,7 +9,7 @@ Resource       ../lib/openbmc_ffdc.robot
 Suite Setup    Setup The Suite
 Test Teardown  FFDC On Test Case Fail
 
-Force Tags  LED_Group
+Test Tags  LED_Group
 
 *** Variables ***
 

@@ -6,7 +6,7 @@ Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/bmc_network_utils.robot
 Variables           ../data/ipmi_raw_cmd_table.py
 Library             ../lib/ipmi_utils.py
-
+Test Tags           IPMI
 
 Suite Setup         IPMI Payload Setup Execution
 Test Teardown       FFDC On Test Case Fail

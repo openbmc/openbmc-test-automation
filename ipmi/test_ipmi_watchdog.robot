@@ -8,6 +8,7 @@ Library          ../lib/ipmi_utils.py
 Library          String
 Library          Collections
 Variables        ../data/ipmi_raw_cmd_table.py
+Test Tags        IPMI
 
 *** Variables ***
 

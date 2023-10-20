@@ -8,6 +8,7 @@ Resource               ../../lib/state_manager.robot
 Library                ../../data/model.py
 Resource               ../../lib/boot_utils.robot
 Resource               ../../lib/utils.robot
+Test Tags              IPMI
 
 Test Teardown           Test Teardown Execution
 

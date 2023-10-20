@@ -15,6 +15,7 @@ Suite Teardown          Redfish.Logout
 Test Teardown           Test Teardown Execution
 
 Force Tags              Ipmi_Sdr
+Test Tags               IPMI
 
 
 *** Test Cases ***

@@ -4,6 +4,7 @@ Documentation    Module to test IPMI disable functionality.
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
 Library          ../lib/ipmi_utils.py
+Test Tags        IPMI
 
 *** Test Cases ***
 

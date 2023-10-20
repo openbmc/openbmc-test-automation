@@ -17,7 +17,7 @@ Variables         ../data/inventory.py
 Suite Setup       Suite Setup Execution
 Test Teardown     FFDC On Test Case Fail
 
-Force Tags        Inventory
+Test Tags         Inventory Requires-REST
 
 ***Variables***
 

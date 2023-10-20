@@ -6,6 +6,7 @@ Resource               ../lib/ipmi_client.robot
 Resource               ../lib/ipmi_utils.robot
 Variables              ../data/ipmi_raw_cmd_table.py
 Library                ../lib/ipmi_utils.py
+Test Tags              IPMI
 
 *** Variables ***
 ${LOOP_COUNT}          ${1}

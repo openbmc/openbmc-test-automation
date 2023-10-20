@@ -33,6 +33,7 @@ Library          Collections
 Library          String
 Library          ../lib/ipmi_utils.py
 Variables        ../data/ipmi_raw_cmd_table.py
+Test Tags        IPMI
 
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution

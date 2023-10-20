@@ -7,6 +7,7 @@ Resource            ../lib/boot_utils.robot
 Resource            ../lib/logging_utils.robot
 
 Test Teardown       FFDC On Test Case Fail
+Test Tags           Requires-REST
 
 *** Variables ***
 

@@ -8,6 +8,7 @@ Resource            ../lib/boot_utils.robot
 Resource            ../lib/bmc_redfish_resource.robot
 Library             ../lib/ipmi_utils.py
 Variables           ../data/ipmi_raw_cmd_table.py
+Test Tags           IPMI
 
 Test Setup          Start SOL Console Logging
 Test Teardown       Test Teardown Execution

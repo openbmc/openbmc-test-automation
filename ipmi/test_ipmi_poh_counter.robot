@@ -30,6 +30,7 @@ Resource            ../lib/openbmc_ffdc.robot
 Library             Collections
 Library             ../lib/ipmi_utils.py
 Variables           ../data/ipmi_raw_cmd_table.py
+Test Tags           IPMI
 
 Suite Setup      Suite Setup Execution
 Suite Teardown   Suite Teardown Execution

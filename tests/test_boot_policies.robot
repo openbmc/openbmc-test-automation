@@ -8,12 +8,12 @@ Resource           ../lib/utils.robot
 Resource           ../lib/openbmc_ffdc.robot
 Resource           ../lib/state_manager.robot
 Resource           ../lib/boot_utils.robot
+Test Tags          IPMI Requires-REST boot_policy_test
 
 Suite Setup        Suite Setup Execution
 Test Teardown      FFDC On Test Case Fail
 Suite Teardown     Suite Teardown Execution
 
-Force Tags  boot_policy_test
 
 *** Variables ***
 ${ONETIME}    ${1}

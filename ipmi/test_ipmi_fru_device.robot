@@ -5,6 +5,7 @@ Resource               ../lib/ipmi_client.robot
 Resource               ../lib/bmc_dbus.robot
 Variables              ../data/ipmi_raw_cmd_table.py
 Library                ../lib/ipmi_utils.py
+Test Tags              IPMI
 
 *** Variables ***
 ${FRU_NAME}       dimm01 dimm02 cpu0 cpu1  motherboard

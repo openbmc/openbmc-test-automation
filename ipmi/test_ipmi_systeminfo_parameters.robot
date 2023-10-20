@@ -15,6 +15,7 @@ Library             Collections
 Library             String
 Library             ../lib/ipmi_utils.py
 Variables           ../data/ipmi_raw_cmd_table.py
+Test Tags           IPMI
 
 Suite Setup         Suite Setup Execution
 Test Teardown       Run Keywords  Restore Default Configuration  AND  FFDC On Test Case Fail

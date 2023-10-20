@@ -9,6 +9,7 @@ Library                ../lib/gen_robot_valid.py
 Library                ../lib/var_funcs.py
 Library                ../lib/bmc_network_utils.py
 Variables              ../data/ipmi_raw_cmd_table.py
+Test Tags              IPMI
 
 Suite Setup            Redfish.Login
 Test Setup             Printn

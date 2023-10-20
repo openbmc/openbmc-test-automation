@@ -11,6 +11,7 @@ Library             ../../lib/ipmi_utils.py
 Variables           ../../data/ipmi_raw_cmd_table.py
 Library             ../../lib/gen_misc.py
 Library             ../../lib/gen_robot_valid.py
+Test Tags           IPMI Requires-REST
 
 Test Setup          Log to Console  ${EMPTY}
 Test Teardown       FFDC On Test Case Fail

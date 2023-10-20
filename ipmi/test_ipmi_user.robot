@@ -6,6 +6,7 @@ Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/bmc_network_utils.robot
 Library             ../lib/ipmi_utils.py
 Test Setup          Printn
+Test Tags           IPMI
 
 Suite Setup         Suite Setup Execution
 Test Teardown       Test Teardown Execution

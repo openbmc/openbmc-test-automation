@@ -7,6 +7,7 @@ Resource               ../../lib/openbmc_ffdc.robot
 Resource               ../../lib/boot_utils.robot
 Library                ../../lib/ipmi_utils.py
 Library                ../../data/model.py
+Test Tags              IPMI Requires-REST
 
 Test Teardown          Test Teardown Execution
 Suite Setup            Suite Setup Execution

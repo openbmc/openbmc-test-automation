@@ -8,6 +8,7 @@ Variables        ../data/ipmi_raw_cmd_table.py
 Variables        ../data/ipmi_variable.py
 Library          ../lib/bmc_network_utils.py
 Library          ../lib/ipmi_utils.py
+Test Tags        IPMI
 
 Suite Setup      IPMI General Test Suite Setup
 Test Teardown    FFDC On Test Case Fail

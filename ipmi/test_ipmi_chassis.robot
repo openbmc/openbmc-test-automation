@@ -7,6 +7,7 @@ Resource         ../lib/boot_utils.robot
 Resource         ../lib/bmc_dbus.robot
 Library          ../lib/ipmi_utils.py
 Variables        ../data/ipmi_raw_cmd_table.py
+Test Tags        IPMI
 
 Suite Setup      Redfish.Login
 Suite Teardown   Redfish.Logout

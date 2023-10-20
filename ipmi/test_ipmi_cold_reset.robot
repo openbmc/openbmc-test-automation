@@ -26,6 +26,7 @@ Resource            ../lib/openbmc_ffdc.robot
 Library             Collections
 Library             ../lib/ipmi_utils.py
 Variables           ../data/ipmi_raw_cmd_table.py
+Test Tags        IPMI
 
 Test Teardown       FFDC On Test Case Fail
 

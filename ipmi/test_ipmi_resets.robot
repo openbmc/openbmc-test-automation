@@ -3,6 +3,7 @@ Documentation    Module to test IPMI cold and warm reset functionalities.
 
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
+Test Tags        IPMI
 
 Suite Setup      Redfish.Login
 Suite Teardown   Redfish.Logout

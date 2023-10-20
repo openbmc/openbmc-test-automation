@@ -12,6 +12,7 @@ Library  String
 Library  SSHLibrary
 
 Test Teardown  FFDC On Test Case Fail
+Test Tags      SNMP
 
 *** Variables ***
 
