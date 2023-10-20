@@ -14,10 +14,10 @@ Suite Setup            Redfish.Login
 Test Setup             Printn
 Test Teardown          FFDC On Test Case Fail
 
-Force Tags             Ipmi_Network_Verification
-
+Force Tags             IPMI_Network_Verification
 
 *** Variables ***
+
 ${set_mac_address}                      02:f4:43:24:e7:1a
 ${Invalid_mac_address}                  11:f4:43:24:e7:1a
 

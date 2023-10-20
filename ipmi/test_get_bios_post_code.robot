@@ -6,10 +6,13 @@ Resource         ../lib/boot_utils.robot
 Library          ../lib/ipmi_utils.py
 Variables        ../data/ipmi_raw_cmd_table.py
 
-Suite Setup  IPMI Power On
-Suite Teardown  IPMI Power On  stack_mode=skip  quiet=1
+Suite Setup      IPMI Power On
+Suite Teardown   IPMI Power On  stack_mode=skip  quiet=1
+
+Force Tags       Get_BIOS_Post_Code
 
 *** Test Cases ***
+
 Test Get BIOS POST Code via IPMI Raw Command
     [Documentation]  Get BIOS POST Code via IPMI raw command.
     [Tags]  Test_Get_BIOS_POST_Code_via_IPMI_Raw_Command

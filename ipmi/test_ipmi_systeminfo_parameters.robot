@@ -19,6 +19,7 @@ Variables           ../data/ipmi_raw_cmd_table.py
 Suite Setup         Suite Setup Execution
 Test Teardown       Run Keywords  Restore Default Configuration  AND  FFDC On Test Case Fail
 
+Force Tags          IPMI_SystemInfo_Parameters
 
 *** Variables ***
 

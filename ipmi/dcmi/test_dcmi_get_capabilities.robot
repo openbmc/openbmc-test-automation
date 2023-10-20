@@ -3,7 +3,10 @@
 Documentation    Module to test dcmi get capabilites functionality.
 Resource         ../../lib/ipmi_client.robot
 
+Force Tags       DCMI_Get_Capabilities
+
 *** Variables ***
+
 @{slave_address_list}  Slave address of device: 0h (8bits)(Satellite/External controller)
 ...                    Slave address of device: 20h (BMC)
 
