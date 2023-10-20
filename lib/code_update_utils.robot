@@ -760,3 +760,46 @@ Get Image Version From TFTP Server
 
     [Return]  ${version}
 
+
+Redfish Update Firmware
+    [Documentation]  Update the BMC firmware via redfish interface.
+    [Arguments]  ${apply_time}
+
+    # Description of argument(s):
+    # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
+
+    ${post_code_update_actions}=  Get Post Boot Action
+    ${state}=  Get Pre Reboot State
+    Rprint Vars  state
+    Set ApplyTime  policy=${apply_Time}
+
+    ${task_inv_dict}=  Get Task State from File
+
+    ${file_bin_data}=  OperatingSystem.Get Binary File  ${image_file_path}
+
+
+    Log To Console   Start uploading image to BMC.
+
+    # URI : /redfish/v1/UpdateService
+    # "HttpPushUri": "/redfish/v1/UpdateService/update",
+
+    ${redfish_update_uri}=  Get Redfish Update Service URI
+
+    ${resp}=  Upload Image To BMC  ${redfish_update_uri}  timeout=${600}  data=${file_bin_data}
+
+    Log To Console   Completed image upload to BMC.
+
+    Sleep  5s
+
+    ${task_inv}=  Check Task With Match TargetUri  ${redfish_update_uri}
+
+    Rprint Vars  task_inv
+
+    Wait Until Keyword Succeeds  5 min  10 sec
+    ...  Verify Task Progress State  ${task_inv}  ${task_inv_dict['TaskCompleted']}
+
+    Run Key  ${post_code_update_actions['BMC image']['${apply_time}']}
+    Redfish.Login
+    Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
+    Verify Get ApplyTime  ${apply_time}
+
