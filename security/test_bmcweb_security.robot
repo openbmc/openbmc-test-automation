@@ -8,6 +8,8 @@ Resource         ../lib/openbmc_ffdc.robot
 Test Setup       Test Setup Execution
 Test Teardown    FFDC On Test Case Fail
 
+Force Tags       BMCweb_Security
+
 *** Variables ***
 
 ${LOOP_COUNT}   4

@@ -31,11 +31,12 @@ Library             Collections
 Library             ../lib/ipmi_utils.py
 Variables           ../data/ipmi_raw_cmd_table.py
 
-Suite Setup      Suite Setup Execution
-Suite Teardown   Suite Teardown Execution
+Suite Setup         Suite Setup Execution
+Suite Teardown      Suite Teardown Execution
 
-Test Teardown    FFDC On Test Case Fail
+Test Teardown       FFDC On Test Case Fail
 
+Force Tags          IPMI_Poh_Counter
 
 *** Variables ***
 

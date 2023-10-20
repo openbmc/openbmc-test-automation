@@ -18,7 +18,7 @@ Library                 ../lib/ipmi_utils.py
 
 Suite Setup             Suite Setup Execution
 
-Force Tags              Network_Nping
+Force Tags              BMC_Network_Security
 
 *** Variables ***
 

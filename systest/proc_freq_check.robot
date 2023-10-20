@@ -14,6 +14,7 @@ Suite Setup      Run Keyword  Start SOL Console Logging
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
+Force Tags       Proc_Freq_Check
 
 *** Test Cases ***
 

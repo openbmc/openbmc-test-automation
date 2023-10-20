@@ -12,7 +12,10 @@ Documentation  Verify that the OS network interfaces are configured and
 
 Resource         ../syslib/utils_install.robot
 
+Force Tags       Host_Network_Interfaces
+
 *** Variables ***
+
 ${FAIL_ON_LINK_DOWN}  1
 
 

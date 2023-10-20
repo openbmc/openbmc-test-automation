@@ -49,6 +49,8 @@ Suite Setup     Suite Setup Execution
 Suite Teardown  Collect HTX Log Files
 Test Teardown   FFDC On Test Case Fail
 
+Force Tags      Boot_Acceptance
+
 *** Variables ***
 
 ${HTX_DURATION}     8 hours

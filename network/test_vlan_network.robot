@@ -18,8 +18,10 @@ Library                         Collections
 
 Suite Teardown                  Suite Teardown Execution
 
+Force Tags                      VLAN_Network
 
 *** Variables ***
+
 ${vlan_id}                      ${53}
 @{vlan_ids}                     ${35}  ${55}
 ${invalid_vlan_id}              abc

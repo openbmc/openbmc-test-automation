@@ -21,7 +21,9 @@ Library   Screenshot
 
 Suite Setup   Redfish.Logout
 
-Variables  ../gui/data/gui_variables.py
+Variables     ../gui/data/gui_variables.py
+
+Force Tags    BMC_Connections
 
 *** Variables ***
 

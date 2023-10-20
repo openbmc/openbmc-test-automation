@@ -22,6 +22,8 @@ Suite Setup     Start SOL Console Logging
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 
+Force Tags      HTX_Softbootme
+
 *** Variables ****
 
 ${rest_keyword}     REST

@@ -8,7 +8,10 @@ Resource         ../../lib/code_update_utils.robot
 
 Suite Setup      Suite Setup Execution
 
+Force Tags       IPMI_Flash
+
 *** Variables ***
+
 ${image-bios}        image-bios
 ${image-bios-sig}    image-bios.sig
 ${image-bmc}         image-bmc

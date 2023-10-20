@@ -15,10 +15,10 @@ Suite Teardown         Redfish.Logout
 Test Setup             Printn
 Test Teardown          Test Teardown Execution
 
-Force Tags             Ipmi_Network_Configuration
-
+Force Tags             IPMI_Network_Configuration
 
 *** Variables ***
+
 ${vlan_id_for_ipmi}     ${10}
 @{vlan_ids}             ${20}  ${30}
 ${interface}            eth0

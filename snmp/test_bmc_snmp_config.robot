@@ -13,6 +13,8 @@ Library  SSHLibrary
 
 Test Teardown  FFDC On Test Case Fail
 
+Force Tags     BMC_SNMP_Config
+
 *** Variables ***
 
 ${CMD_INTERNAL_FAILURE}  busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging

@@ -12,7 +12,6 @@ Test Setup       Set Account Lockout Threshold
 
 Force Tags       BMC_Expire_Password
 
-
 *** Variables ***
 
 # If user re-tries more than 5 time incorrectly, the user gets locked for 5 minutes.

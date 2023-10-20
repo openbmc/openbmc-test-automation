@@ -4,6 +4,8 @@ Documentation    Test BMC SSH security.
 Resource         ../lib/resource.robot
 Resource         ../lib/openbmc_ffdc_methods.robot
 
+Force Tags       BMC_SSH_Security
+
 *** Variables ***
 
 @{allowed_shell_rcs}   ${255}

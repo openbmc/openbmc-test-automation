@@ -37,6 +37,8 @@ Variables        ../data/ipmi_raw_cmd_table.py
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
+Force Tags       IPMI_SEL_Time
+
 *** Variables ***
 
 ${NETWORK_RESTART_TIME}   5s

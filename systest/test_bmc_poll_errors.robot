@@ -9,8 +9,10 @@ Resource          ../lib/boot_utils.robot
 Resource          ../lib/bmc_redfish_resource.robot
 Resource          ../lib/esel_utils.robot
 
-Suite Setup      Suite Setup Execution
-Test Teardown    Post Test Case Execution
+Suite Setup       Suite Setup Execution
+Test Teardown     Post Test Case Execution
+
+Force Tags        BMC_Poll_Errors
 
 *** Variables ***
 

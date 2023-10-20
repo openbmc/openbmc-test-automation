@@ -29,6 +29,7 @@ Variables           ../data/ipmi_raw_cmd_table.py
 
 Test Teardown       FFDC On Test Case Fail
 
+Force Tags          IPMI_Cold_Reset
 
 *** Variables ***
 

@@ -5,6 +5,8 @@ Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
 Library          ../lib/ipmi_utils.py
 
+Force Tags       IPMI_Disable
+
 *** Test Cases ***
 
 Verify Disabling And Enabling IPMI Via Host
