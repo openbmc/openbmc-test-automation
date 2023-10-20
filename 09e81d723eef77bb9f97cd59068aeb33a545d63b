@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34a1f086_ba4b59ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001842
+      },
+      "writtenOn": "2023-10-20T02:53:55Z",
+      "side": 1,
+      "message": "One other thing I want to do is just nuke that old tests folder if it\u0027s all the REST stuff. Time for REST tests to die I think.",
+      "revId": "09e81d723eef77bb9f97cd59068aeb33a545d63b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
