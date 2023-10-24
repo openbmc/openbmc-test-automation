@@ -106,7 +106,7 @@ Redfish Login Via SessionService
     [Documentation]  Login to BMC via redfish session service.
     [Tags]   Redfish_Login_Via_SessionService
 
-    Create Session  openbmc  https://${OPENBMC_HOST}
+    Create Session  openbmc  https://${OPENBMC_HOST}:${HTTPS_PORT}
     ${headers}=  Create Dictionary  Content-Type=application/json
     ${data}=  Set Variable  {"UserName":"${OPENBMC_USERNAME}", "Password":"${OPENBMC_PASSWORD}"}
 
