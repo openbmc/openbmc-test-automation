@@ -9,7 +9,7 @@ Library         ../lib/ipmi_utils.py
 
 Suite Setup     Suite Setup Execution
 
-Force Tags      IPMI_KCS
+Test Tags      IPMI_KCS
 
 *** Variables ***
 

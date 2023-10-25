@@ -16,7 +16,7 @@ Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 Suite Teardown   Suite Teardown Execution
 
-Force Tags       MPIPL_Basic
+Test Tags       MPIPL_Basic
 
 *** Variables ***
 
