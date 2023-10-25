@@ -10,7 +10,7 @@ Suite Setup            Suite Setup Execution
 Suite Teardown         Suite Teardown Execution
 Test Teardown          Test Teardown Execution
 
-Force Tags             IPMI_FRU
+Test Tags             IPMI_FRU
 
 *** Variables ***
 

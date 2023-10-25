@@ -10,7 +10,7 @@ Suite Teardown      Redfish.Logout
 Test Setup          Delete All Telemetry Reports
 Test Teardown       Test Teardown Execution
 
-Force Tags          Telemetry_Report
+Test Tags          Telemetry_Report
 
 *** Variables ***
 

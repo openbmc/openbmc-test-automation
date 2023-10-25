@@ -27,7 +27,7 @@ Suite Teardown           Redfish.Logout
 Test Setup               Printn
 Test Teardown            FFDC On Test Case Fail
 
-Force Tags               Mcu_Code_Update
+Test Tags               Mcu_Code_Update
 
 *** Test Cases ***
 

@@ -8,7 +8,7 @@ Library          ../lib/os_utils_keywords.py
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 
-Force Tags      Network_Stability
+Test Tags      Network_Stability
 
 *** Variables ****
 

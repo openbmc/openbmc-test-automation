@@ -9,7 +9,7 @@ Library        ../../lib/bmc_network_utils.py
 Suite Setup    Suite Setup Execution
 Test Teardown  Test Teardown Execution
 
-Force Tags     Bmc_Network_Mac
+Test Tags     Bmc_Network_Mac
 
 *** Variables ***
 
