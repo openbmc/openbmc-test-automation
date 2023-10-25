@@ -10,7 +10,7 @@ Resource          ../lib/utils.robot
 
 Test Teardown     FFDC On Test Case Fail
 
-Force Tags        System_LED
+Test Tags        System_LED
 
 *** Variables ***
 

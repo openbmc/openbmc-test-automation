@@ -8,7 +8,7 @@ Library  String
 
 Suite Setup  Suite Setup Execution
 
-Force Tags  Network_Nping
+Test Tags  Network_Nping
 
 *** Variables ***
 

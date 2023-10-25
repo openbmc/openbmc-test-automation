@@ -9,7 +9,7 @@ Suite Setup         Suite Setup Execution
 Suite Teardown      Redfish.Logout
 Test Teardown       Test Teardown Execution
 
-Force Tags          Telemetry_Report
+Test Tags          Telemetry_Report
 
 *** Variables ***
 

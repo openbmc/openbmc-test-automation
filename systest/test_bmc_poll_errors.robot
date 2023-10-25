@@ -12,7 +12,7 @@ Resource          ../lib/esel_utils.robot
 Suite Setup       Suite Setup Execution
 Test Teardown     Post Test Case Execution
 
-Force Tags        BMC_Poll_Errors
+Test Tags        BMC_Poll_Errors
 
 *** Variables ***
 

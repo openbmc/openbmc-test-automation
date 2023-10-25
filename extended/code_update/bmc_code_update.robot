@@ -22,7 +22,7 @@ Test Teardown     Test Teardown Execution
 # Force the test to timedout to prevent test hanging.
 Test Timeout      30 minutes
 
-Force Tags        BMC_Code_Update
+Test Tags        BMC_Code_Update
 
 *** Variables ***
 

@@ -15,7 +15,7 @@ Suite Teardown           Run Keyword And Ignore Error  Delete All Redfish Sessio
 Test Setup               Printn
 Test Teardown            FFDC On Test Case Fail
 
-Force Tags               Lock_Management
+Test Tags               Lock_Management
 
 *** Variables ***
 
