@@ -13,7 +13,7 @@ Test Teardown    FFDC On Test Case Fail
 Suite Setup      PLDM BIOS Attribute Suite Setup
 Suite Teardown   PLDM BIOS Attribute Suite Cleanup
 
-Force Tags       Pldm_Bios_Attributes
+Test Tags       Pldm_Bios_Attributes
 
 *** Variables ***
 

@@ -36,7 +36,7 @@ Suite Teardown      Suite Teardown Execution
 
 Test Teardown       FFDC On Test Case Fail
 
-Force Tags          IPMI_Poh_Counter
+Test Tags          IPMI_Poh_Counter
 
 *** Variables ***
 

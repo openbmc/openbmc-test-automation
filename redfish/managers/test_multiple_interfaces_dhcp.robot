@@ -33,7 +33,7 @@ ${ethernet_interface}     eth1
 ...                                UseNTPServers=${False}
 ...                                UseDNSServers=${False}
 
-Force Tags                         Multiple_Interfaces_DHCP
+Test Tags                         Multiple_Interfaces_DHCP
 
 *** Test Cases ***
 
