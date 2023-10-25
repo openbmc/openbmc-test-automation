@@ -13,7 +13,7 @@ Library          ../../lib/utilities.py
 Library          ../../lib/utils.py
 Library          JSONLibrary
 
-Force Tags       DCMI_Management_Controller
+Test Tags       DCMI_Management_Controller
 
 *** Variables ***
 

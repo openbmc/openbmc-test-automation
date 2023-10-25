@@ -6,7 +6,7 @@ Resource               ../lib/bmc_dbus.robot
 Variables              ../data/ipmi_raw_cmd_table.py
 Library                ../lib/ipmi_utils.py
 
-Force Tags             IPMI_FRU_Device
+Test Tags             IPMI_FRU_Device
 
 *** Variables ***
 
