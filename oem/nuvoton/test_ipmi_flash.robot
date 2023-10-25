@@ -8,7 +8,7 @@ Resource         ../../lib/code_update_utils.robot
 
 Suite Setup      Suite Setup Execution
 
-Force Tags       IPMI_Flash
+Test Tags       IPMI_Flash
 
 *** Variables ***
 

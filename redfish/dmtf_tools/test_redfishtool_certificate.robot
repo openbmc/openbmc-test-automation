@@ -16,7 +16,7 @@ Resource          ../../lib/dmtf_redfishtool_utils.robot
 
 Suite Setup       Suite Setup Execution
 
-Force Tags        Redfishtool_Certificate
+Test Tags        Redfishtool_Certificate
 
 *** Variables ***
 

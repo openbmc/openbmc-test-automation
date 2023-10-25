@@ -14,7 +14,7 @@ Test Setup          RAS Test Setup
 Test Teardown       FFDC On Test Case Fail
 Suite Teardown      RAS Suite Cleanup
 
-Force Tags          Reboot_RAS
+Test Tags          Reboot_RAS
 
 *** Test Cases ***
 Verify Host Unrecoverable Callout Handling At Reboot
