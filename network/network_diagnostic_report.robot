@@ -7,7 +7,7 @@ Library       ../lib/utilities.py
 Resource      ../lib/utils.robot
 Test Setup    Check If Tool Exist
 
-Force Tags    Network_Diagnostic_Report
+Test Tags    Network_Diagnostic_Report
 
 *** Test Cases ***
 
