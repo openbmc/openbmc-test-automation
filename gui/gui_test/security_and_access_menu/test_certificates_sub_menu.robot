@@ -46,6 +46,8 @@ Verify Existence Of All Sections In Certificate Page
     [Tags]  Verify_Existence_Of_All_Sections_In_Certificate_Page
 
     Page should contain  Certificate
+    Page should contain  Issued by
+    Page should contain  Issued to
     Page should contain  Valid from
     Page should contain  Valid until
 
