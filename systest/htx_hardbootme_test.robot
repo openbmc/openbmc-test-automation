@@ -51,7 +51,7 @@ Suite Setup     Run Keyword  Start SOL Console Logging
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 
-Force Tags      HTX_Hardbootme
+Test Tags      HTX_Hardbootme
 
 *** Variables ****
 

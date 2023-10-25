@@ -7,7 +7,7 @@ Resource        ../../lib/gui_resource.robot
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
 
-Force Tags      Factory_Reset_Sub_Menu
+Test Tags      Factory_Reset_Sub_Menu
 
 *** Variables ***
 
