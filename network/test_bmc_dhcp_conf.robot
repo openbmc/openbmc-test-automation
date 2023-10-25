@@ -8,7 +8,7 @@ Library                ../lib/bmc_network_utils.py
 Suite Setup            Suite Setup Execution
 Suite Teardown         Run Keywords  Restore Configuration  AND Redfish.Logout
 
-Force Tags             BMC_DHCP_Conf
+Test Tags             BMC_DHCP_Conf
 
 *** Variables ***
 

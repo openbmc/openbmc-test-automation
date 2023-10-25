@@ -13,7 +13,7 @@ Test Teardown                Test Teardown Execution
 Suite Setup                  Suite Setup Execution
 Suite Teardown               Suite Teardown Execution
 
-Force Tags                   Managers_BMC_Time
+Test Tags                   Managers_BMC_Time
 
 *** Variables ***
 

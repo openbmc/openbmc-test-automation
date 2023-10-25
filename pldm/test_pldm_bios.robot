@@ -13,7 +13,7 @@ Test Teardown    FFDC On Test Case Fail
 Suite Setup      PLDM BIOS Suite Setup
 Suite Teardown   Run Keyword And Ignore Error  PLDM BIOS Suite Cleanup
 
-Force Tags       Pldm_Bios
+Test Tags       Pldm_Bios
 
 *** Test Cases ***
 

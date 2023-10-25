@@ -10,7 +10,7 @@ Resource         ../../lib/external_intf/vmi_utils.robot
 Suite Setup       Suite Setup Execution
 Suite Teardown    Run Keyword And Ignore Error  Suite Teardown Execution
 
-Force Tags        Vmi_Multiple_Interfaces
+Test Tags        Vmi_Multiple_Interfaces
 
 *** Variables ***
 

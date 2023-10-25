@@ -18,7 +18,7 @@ Library                         Collections
 
 Suite Teardown                  Suite Teardown Execution
 
-Force Tags                      VLAN_Network
+Test Tags                      VLAN_Network
 
 *** Variables ***
 

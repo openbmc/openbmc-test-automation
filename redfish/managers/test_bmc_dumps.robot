@@ -12,7 +12,7 @@ Suite Setup         Redfish.Login
 Test Setup          Redfish Delete All BMC Dumps
 Test Teardown       Test Teardown Execution
 
-Force Tags          BMC_Dumps
+Test Tags          BMC_Dumps
 
 *** Variables ***
 

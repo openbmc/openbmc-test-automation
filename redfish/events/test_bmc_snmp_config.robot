@@ -13,7 +13,7 @@ Library         SSHLibrary
 
 Test Teardown   FFDC On Test Case Fail
 
-Force Tags      BMC_SNMP_Config
+Test Tags       BMC_SNMP_Config
 
 *** Variables ***
 

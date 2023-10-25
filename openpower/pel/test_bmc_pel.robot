@@ -11,7 +11,7 @@ Resource        ../../lib/openbmc_ffdc.robot
 Test Setup      Redfish.Login
 Test Teardown   Run Keywords  Redfish.Logout  AND  FFDC On Test Case Fail
 
-Force Tags      Bmc_Pel
+Test Tags      Bmc_Pel
 
 *** Variables ***
 
