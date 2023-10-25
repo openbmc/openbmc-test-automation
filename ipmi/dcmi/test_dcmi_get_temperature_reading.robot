@@ -15,7 +15,7 @@ Library          JSONLibrary
 
 Suite Setup  Suite Setup Execution
 
-Force Tags       DCMI_Get_Temperature_Reading
+Test Tags       DCMI_Get_Temperature_Reading
 
 *** Variables ***
 

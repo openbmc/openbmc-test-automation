@@ -12,7 +12,7 @@ Resource                ../lib/state_manager.robot
 
 Test Teardown           Test Teardown Execution
 
-Force Tags  BIOS_Code_Update
+Test Tags  BIOS_Code_Update
 
 *** Variables ***
 

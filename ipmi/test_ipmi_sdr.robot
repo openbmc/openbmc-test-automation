@@ -14,7 +14,7 @@ Suite setup             Suite Setup Execution
 Suite Teardown          Redfish.Logout
 Test Teardown           Test Teardown Execution
 
-Force Tags              IPMI_SDR
+Test Tags              IPMI_SDR
 
 *** Test Cases ***
 

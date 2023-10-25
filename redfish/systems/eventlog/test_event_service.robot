@@ -12,7 +12,7 @@ Suite teardown   Suite Teardown Execution
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
-Force Tags       Event_Service
+Test Tags       Event_Service
 
 ***Variables***
 
