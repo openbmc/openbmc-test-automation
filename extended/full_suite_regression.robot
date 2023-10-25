@@ -11,7 +11,7 @@ Library  DateTime
 Suite Setup         Open Connection And Log In
 Suite Teardown      Close All Connections
 
-Force Tags  Full_Suite_Regression
+Test Tags  Full_Suite_Regression
 
 *** Variables ***
 ${ITERATION}          10

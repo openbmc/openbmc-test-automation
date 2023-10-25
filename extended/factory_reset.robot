@@ -10,7 +10,7 @@ Library         OperatingSystem
 Suite Setup      Validate Setup
 Suite Teardown   Close All Connections
 
-Force Tags  Factory_Reset
+Test Tags  Factory_Reset
 
 *** Test Cases ***
 

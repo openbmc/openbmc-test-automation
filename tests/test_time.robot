@@ -13,7 +13,7 @@ Library                DateTime
 Test Setup             Open Connection And Log In
 Test Teardown          Post Test Case Execution
 
-Force Tags  Clock_Time
+Test Tags  Clock_Time
 
 *** Variables ***
 ${SYSTEM_TIME_INVALID}      01/01/1969 00:00:00

@@ -23,7 +23,7 @@ Library               ../../lib/code_update_utils.py
 
 Test Teardown  Upload Image Teardown
 
-Force Tags  Upload_Test
+Test Tags  Upload_Test
 
 *** Variables ***
 ${timeout}            10
