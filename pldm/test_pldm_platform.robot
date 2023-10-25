@@ -12,7 +12,7 @@ Test Setup        Printn
 Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Pldmtool Platform Suite Cleanup
 
-Force Tags        Pldm_Platform
+Test Tags        Pldm_Platform
 
 *** Test Cases ***
 Verify GetPDR

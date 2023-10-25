@@ -3,7 +3,7 @@
 Documentation    Module to test dcmi get capabilites functionality.
 Resource         ../../lib/ipmi_client.robot
 
-Force Tags       DCMI_Get_Capabilities
+Test Tags       DCMI_Get_Capabilities
 
 *** Variables ***
 

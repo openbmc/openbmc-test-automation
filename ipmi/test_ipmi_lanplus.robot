@@ -7,7 +7,7 @@ Resource               ../lib/ipmi_utils.robot
 Variables              ../data/ipmi_raw_cmd_table.py
 Library                ../lib/ipmi_utils.py
 
-Force Tags             IPMI_LANplus
+Test Tags             IPMI_LANplus
 
 *** Variables ***
 

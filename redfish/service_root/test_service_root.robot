@@ -8,7 +8,7 @@ Resource         ../../lib/openbmc_ffdc.robot
 Test Teardown    FFDC On Test Case Fail
 Test Setup       Printn
 
-Force Tags       Service_Root
+Test Tags       Service_Root
 
 *** Test Cases ***
 

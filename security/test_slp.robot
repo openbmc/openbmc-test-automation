@@ -9,7 +9,7 @@ Resource        ../lib/utils.robot
 # Get the SLP services available, make it suite global.
 Suite Setup     Suite Setup Execution
 
-Force Tags  SLP_Service_Test
+Test Tags  SLP_Service_Test
 
 *** Variables ***
 ${service_types}    findsrvtypes
