@@ -9,7 +9,7 @@ Variables        ../data/ipmi_raw_cmd_table.py
 Suite Setup      IPMI Power On
 Suite Teardown   IPMI Power On  stack_mode=skip  quiet=1
 
-Force Tags       Get_BIOS_Post_Code
+Test Tags       Get_BIOS_Post_Code
 
 *** Test Cases ***
 

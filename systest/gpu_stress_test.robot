@@ -24,7 +24,7 @@ Suite Setup      Run Keyword  Start SOL Console Logging
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
-Force Tags       GPU_Stress
+Test Tags       GPU_Stress
 
 *** Variables ****
 
