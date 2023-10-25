@@ -6,15 +6,22 @@
 --include Redfish_Login_And_Logout
 --include GET_Redfish_Resources_With_Login
 --include GET_Redfish_SessionService_Without_Login
+--include Redfish_Login_Via_SessionService
 --include Redfish_Login_Using_Invalid_Token
 --include Delete_Redfish_Session_Using_Valid_Login
 --include Redfish_Login_With_Invalid_Credentials
 --include Verify_Update_Service_Enabled
 --include Verify_Redfish_Software_Inventory_Collection
 --include Redfish_Software_Inventory_Status_Check
+--include Verify_Redfish_BMC_Time
+--include Verify_Redfish_Invalid_URL_Response_Code
+--include Verify_Redfish_Unresponsive_URL_paths
 #IPMI tests.
 --include Enable_IPMI_User_And_Verify
 --include Verify_IPMI_User_Deletion
+--include Verify_IPMI_SEL_Version
+--include Test_Get_Self_Test_Results_via_IPMI_Raw_Command
+--include Test_Get_Device_GUID_Via_IPMI_Raw_Command
 #Local user tests.
 --include Verify_AccountService_Available
 #Check for BMC dump.
