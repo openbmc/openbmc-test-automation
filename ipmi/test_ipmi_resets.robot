@@ -9,7 +9,7 @@ Suite Teardown   Redfish.Logout
 
 Test Teardown    FFDC On Test Case Fail
 
-Force Tags       IPMI_Resets
+Test Tags       IPMI_Resets
 
 *** Variables ***
 

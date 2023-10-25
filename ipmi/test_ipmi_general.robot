@@ -13,7 +13,7 @@ Library          ../lib/ipmi_utils.py
 Suite Setup      IPMI General Test Suite Setup
 Test Teardown    FFDC On Test Case Fail
 
-Force Tags       IPMI_General
+Test Tags       IPMI_General
 
 *** Test Cases ***
 
