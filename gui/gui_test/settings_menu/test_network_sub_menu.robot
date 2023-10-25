@@ -8,7 +8,7 @@ Resource        ../../../lib/bmc_network_utils.robot
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
 
-Force Tags      Network_Sub_Menu
+Test Tags      Network_Sub_Menu
 
 *** Variables ***
 

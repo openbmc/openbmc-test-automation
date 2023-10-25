@@ -173,7 +173,7 @@ work-in-progress, feel free to propose changes.
     Example:
         Suite:  test_boot_progress_code.robot
 
-        Force Tags    Boot_Progress_Code
+        Test Tags    Boot_Progress_Code
     ```
 
   - Create a tag for every test case with a tag name that mirrors the test case

@@ -10,7 +10,7 @@ Library             ../lib/ipmi_utils.py
 Suite Setup         IPMI Payload Setup Execution
 Test Teardown       FFDC On Test Case Fail
 
-Force Tags          IPMI_Payload
+Test Tags          IPMI_Payload
 
 *** Variables ***
 

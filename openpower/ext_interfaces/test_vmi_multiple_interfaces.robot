@@ -11,7 +11,7 @@ Suite Setup       Suite Setup Execution
 Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Run Keyword And Ignore Error  Suite Teardown Execution
 
-Force Tags        Vmi_Multiple_Interfaces
+Test Tags        Vmi_Multiple_Interfaces
 
 *** Variables ***
 
