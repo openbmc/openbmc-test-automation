@@ -11,7 +11,7 @@ Test Setup        Redfish.Login
 Test Teardown     Run Keywords  FFDC On Test Case Fail  AND
 ...  Redfish.Logout
 
-Force Tags        IPMI_Sensor
+Test Tags        IPMI_Sensor
 
 *** Variables ***
 

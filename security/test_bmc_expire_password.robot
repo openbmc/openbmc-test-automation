@@ -10,7 +10,7 @@ Library           SSHLibrary
 
 Test Setup       Set Account Lockout Threshold
 
-Force Tags       BMC_Expire_Password
+Test Tags       BMC_Expire_Password
 
 *** Variables ***
 
