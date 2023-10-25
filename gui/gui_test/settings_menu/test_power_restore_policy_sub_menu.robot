@@ -8,7 +8,7 @@ Suite Setup      Launch Browser And Login GUI
 Suite Teardown   Close Browser
 Test Setup       Test Setup Execution
 
-Force Tags       Power_Restore_Policy_Sub_Menu
+Test Tags       Power_Restore_Policy_Sub_Menu
 
 *** Variables ***
 

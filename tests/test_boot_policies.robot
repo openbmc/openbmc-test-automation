@@ -13,7 +13,7 @@ Suite Setup        Suite Setup Execution
 Test Teardown      FFDC On Test Case Fail
 Suite Teardown     Suite Teardown Execution
 
-Force Tags  boot_policy_test
+Test Tags  boot_policy_test
 
 *** Variables ***
 ${ONETIME}    ${1}
