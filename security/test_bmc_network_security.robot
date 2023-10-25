@@ -18,7 +18,7 @@ Library                 ../lib/ipmi_utils.py
 
 Suite Setup             Suite Setup Execution
 
-Force Tags              BMC_Network_Security
+Test Tags              BMC_Network_Security
 
 *** Variables ***
 

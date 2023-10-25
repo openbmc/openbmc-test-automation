@@ -14,7 +14,7 @@ Suite Setup            Redfish.Login
 Test Setup             Printn
 Test Teardown          FFDC On Test Case Fail
 
-Force Tags             IPMI_Network_Verification
+Test Tags             IPMI_Network_Verification
 
 *** Variables ***
 

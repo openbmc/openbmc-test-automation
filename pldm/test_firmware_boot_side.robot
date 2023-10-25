@@ -26,7 +26,7 @@ Resource         ../lib/openbmc_ffdc.robot
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
 
-Force Tags       Firmware_Boot_Side
+Test Tags       Firmware_Boot_Side
 
 *** Variables ***
 

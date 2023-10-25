@@ -21,7 +21,7 @@ Resource        ../syslib/utils_os.robot
 
 Suite Setup     Test Setup Execution
 
-Force Tags      Cable_Pull_Recover
+Test Tags      Cable_Pull_Recover
 
 *** Variables ***
 

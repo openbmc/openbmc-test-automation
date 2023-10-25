@@ -8,7 +8,7 @@ Suite Setup     Suite Setup Execution
 Suite Teardown  Suite Teardown Execution
 Test Setup      Navigate To Date and Time Page
 
-Force Tags      Date_And_Time_Sub_Menu
+Test Tags      Date_And_Time_Sub_Menu
 
 *** Variables ***
 

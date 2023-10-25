@@ -23,7 +23,7 @@ Suite Setup   Redfish.Logout
 
 Variables     ../gui/data/gui_variables.py
 
-Force Tags    BMC_Connections
+Test Tags    BMC_Connections
 
 *** Variables ***
 

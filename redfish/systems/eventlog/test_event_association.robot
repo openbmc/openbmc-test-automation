@@ -15,7 +15,7 @@ Suite Teardown      Suite Teardown Execution
 Test Setup          Test Setup Execution
 Test Teardown       FFDC On Test Case Fail
 
-Force Tags          Event_Association
+Test Tags          Event_Association
 
 ***Variables***
 ${target_device_path}  /sys/devices/platform/gpio-fsi/fsi0/slave@00:00/raw
