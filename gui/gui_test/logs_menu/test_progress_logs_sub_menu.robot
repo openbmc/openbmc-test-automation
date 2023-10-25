@@ -8,7 +8,7 @@ Resource        ../../../lib/logging_utils.robot
 Suite Setup     Suite Setup Execution
 Suite Teardown  Close Browser
 
-Force Tags      Progress_Logs_Sub_Menu
+Test Tags      Progress_Logs_Sub_Menu
 
 *** Variables ***
 

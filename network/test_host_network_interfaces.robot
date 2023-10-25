@@ -12,7 +12,7 @@ Documentation  Verify that the OS network interfaces are configured and
 
 Resource         ../syslib/utils_install.robot
 
-Force Tags       Host_Network_Interfaces
+Test Tags       Host_Network_Interfaces
 
 *** Variables ***
 
