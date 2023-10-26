@@ -181,6 +181,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c82bb9f5_05a40cb5",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-26T16:24:34Z",
+      "side": 1,
+      "message": "Keyword should be independent of test case so please remove Redfish logout from here. Instead use below in above test case teardown\n\n    [Teardown]  Run Keywords  Set Power Cap Value Via Redfish ${initial_power_value} AND Redfish.Logout",
+      "range": {
+        "startLine": 387,
+        "startChar": 0,
+        "endLine": 387,
+        "endChar": 30
+      },
+      "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2781d14_061b7b08",
         "filename": "ipmi/test_ipmi_general.robot",
         "patchSetId": 1
