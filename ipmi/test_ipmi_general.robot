@@ -4,6 +4,7 @@ Documentation    Module to test IPMI asset tag functionality.
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
 Resource         ../lib/bmc_network_utils.robot
+Resource         ../lib/energy_scale_utils.robot
 Variables        ../data/ipmi_raw_cmd_table.py
 Variables        ../data/ipmi_variable.py
 Library          ../lib/bmc_network_utils.py
@@ -234,6 +235,31 @@ Verify Chassis Identify Off And Force Identify On via IPMI
     Verify Identify LED State Via Redfish  Off
 
 
+Set Power Cap Value Via IPMI And Verify Using Redfish
+    [Documentation]  Set power cap value via IPMI and verify using Redfish.
+    [Setup]  Redfish.Login
+    [Teardown]  Run Keywords  Set Power Cap Value Via Redfish  ${initial_power_value}  AND  Redfish.Logout
+    [Tags]  Set_Power_Cap_Value_Via_IPMI_And_Verify_Using_Redfish
+
+    # Get initial power cap value via Redfish.
+    ${power_limit_watts}=  Get System Power Cap Limit
+    ${initial_power_value}=  Set Variable  ${power_limit_watts['SetPoint']}
+
+    # Get the allowable min and max power cap value via Redfish.
+    ${min_power_value}=  Set Variable  ${power_limit_watts['AllowableMin']}
+    ${max_power_value}=  Set Variable  ${power_limit_watts['AllowableMax']}
+
+    # Generate a random power cap value within the allowable range.
+    ${random_power_cap}=  Evaluate  random.randint(${min_power_value}, ${max_power_value})  modules=random
+
+    # Set power cap value via IPMI.
+    Run Keyword  Run IPMI Standard Command  dcmi power set_limit limit ${random_power_cap}
+
+    # Verify the power cap value with the Redfish value.
+    ${updated_power_limits}=  Get System Power Cap Limit
+    Should Be Equal  ${updated_power_limits['SetPoint']}  ${random_power_cap}
+
+
 *** Keywords ***
 
 IPMI General Test Suite Setup
@@ -356,3 +382,16 @@ Verify Channel Auth Command For Invalid Data Length
    ...  Catenate  ${IPMI_RAW_CMD['Get Channel Auth Cap']['get'][0]}  ${CHANNEL_NUMBER} 0x04 0x01
 
    Verify Invalid IPMI Command  ${req_cmd}  0xc7
+
+
+Set Power Cap Value Via Redfish
+    [Documentation]  Set power cap value via Redfish
+    [Arguments]   ${power_cap_value}
+
+    # Description of argument(s):
+    # power_cap_value    Power cap value which need to be set.
+
+    # Set power cap value based on argument.
+    Redfish.Patch  /redfish/v1/Chassis/chassis/EnvironmentMetrics
+    ...  body={"PowerLimitWatts":{"SetPoint": ${power_cap_value}}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
