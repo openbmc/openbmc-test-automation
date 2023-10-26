@@ -37,6 +37,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2dcbfc95_bb3d9f7c",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2023-10-26T16:09:09Z",
+      "side": 1,
+      "message": "Verify power cap value with Redfish.",
+      "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b2afafb_230b875f",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2023-10-26T16:09:09Z",
+      "side": 1,
+      "message": "give a space after the \"#\" symbol.",
+      "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2781d14_061b7b08",
         "filename": "ipmi/test_ipmi_general.robot",
         "patchSetId": 1
