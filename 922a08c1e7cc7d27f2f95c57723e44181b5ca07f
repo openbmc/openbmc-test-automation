@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a55d9148_4d666abe",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-26T16:18:25Z",
+      "side": 1,
+      "message": "As the initial power cap is calculated for teardown better to have two separate comments like below:\n```\n    # Get initial power cap value via Redfish.\n    ${power_limit_watts}\u003d  Get System Power Cap Limit\n    ${initial_power_value}\u003d  Set Variable  ${power_limit_watts[\u0027SetPoint\u0027]}\n    \n    # Get the allowable min and max power cap value via Redfish.\n    ${min_power_value}\u003d  Set Variable  ${power_limit_watts[\u0027AllowableMin\u0027]}\n    ${max_power_value}\u003d  Set Variable  ${power_limit_watts[\u0027AllowableMax\u0027]}\n```",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 75
+      },
+      "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a9232f7_55ee5578",
         "filename": "ipmi/test_ipmi_general.robot",
         "patchSetId": 1
@@ -31,6 +54,52 @@
       "writtenOn": "2023-10-26T16:04:40Z",
       "side": 1,
       "message": "u can use \n#Taking random maximum and minimum values for power cap in watts",
+      "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5aa91f6_a93f6135",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-26T16:18:25Z",
+      "side": 1,
+      "message": "```\n    # Generate a random power cap value within the allowable range.\n ```",
+      "range": {
+        "startLine": 250,
+        "startChar": 0,
+        "endLine": 250,
+        "endChar": 37
+      },
+      "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c23ea9b_fb851ade",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-26T16:18:25Z",
+      "side": 1,
+      "message": "use random_power_cap instead of power_capacity",
+      "range": {
+        "startLine": 251,
+        "startChar": 6,
+        "endLine": 251,
+        "endChar": 20
+      },
       "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -83,6 +152,29 @@
       "side": 1,
       "message": "or \nVerify power cap value via Redfish.",
       "parentUuid": "2dcbfc95_bb3d9f7c",
+      "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c167edf_4eed4023",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-26T16:18:25Z",
+      "side": 1,
+      "message": "Leave space after # and change the variable name to a more meaningful full name like below\n```\n    # Verify the power cap value with the Redfish value.\n    ${updated_power_limits}\u003d  Get System Power Cap Limit\n    Should Be Equal  ${updated_power_limits[\u0027SetPoint\u0027]}  ${random_power_cap}\n```",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 70
+      },
       "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
