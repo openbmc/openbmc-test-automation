@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cf0f42a_48a14864",
+        "filename": "gui/gui_test/gui_header/test_gui_header.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-10-27T09:57:15Z",
+      "side": 1,
+      "message": "Verify System Serial And Model Number In GUI Header Via Redfish ?",
+      "revId": "dc9f9d1058fc80cfbfe51c84c10f58ae2e7d0a06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
