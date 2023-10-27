@@ -947,9 +947,8 @@ Verify PEL Transmission To Host
     Run Keyword If  '${host_state}' == 'Off'
     ...  Redfish Power Off  stack_mode=skip
     ...  ELSE IF  '${host_state}' == 'On'
-    ...  Redfish Power On  stack_mode=skip
-
-    Wait For Host To Ping  ${OS_HOST}  5 min  10 sec
+    ...  Run Keywords  Redfish Power On  stack_mode=skip  AND
+    ...  Wait For Host To Ping  ${OS_HOST}  5 min  10 sec
 
     Redfish Purge Event Log
 
