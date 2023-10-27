@@ -12,7 +12,8 @@ Force Tags      GUI_Header
 *** Variables ***
 
 ${xpath_header_text}       //*[contains(@class, "navbar-text")]
-
+${xpath_model_number}      //div[@class='pl-2 nav-tags']/span[3]
+${xpath_serial_number}     //div[@class='pl-2 nav-tags']/span[4]
 
 *** Test Cases ***
 
@@ -50,3 +51,17 @@ Verify GUI Logout
     Click Element  ${xpath_logout_button}
     Wait Until Page Contains Element  ${xpath_login_button}  timeout=15s
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+
+
+Verify System Serial And Model Number In GUI Header
+    [Documentation]  Verify system serial and model number in GUI header.
+    [Tags]  Verify_System_Serial_And_Model_Number_In_GUI_Header
+
+    # Model Number.
+    ${redfish_machine_model}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  Model
+    Element Should Contain  ${xpath_model_number}  ${redfish_machine_model}
+
+    # Serial Number.
+    ${redfish_serial_number}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  SerialNumber
+    Element Should Contain  ${xpath_serial_number}  ${redfish_serial_number}
+
