@@ -13,7 +13,6 @@ Force Tags      GUI_Header
 
 ${xpath_header_text}       //*[contains(@class, "navbar-text")]
 
-
 *** Test Cases ***
 
 Verify GUI Header Text
@@ -50,3 +49,16 @@ Verify GUI Logout
     Click Element  ${xpath_logout_button}
     Wait Until Page Contains Element  ${xpath_login_button}  timeout=15s
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+
+
+Verify System Serial And Model Number In GUI Header Page
+    [Documentation]  Verify system serial and model number in GUI header page.
+    [Tags]  Verify_System_Serial_And_Model_Number_In_GUI_Header_Page
+
+   # Model.
+   ${redfish_model_number}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  Model
+   Element Should Be Visible  //*[@data-test-id='appHeader-container-overview']/following-sibling::*/*[text()='${redfish_model_number}']
+
+   # Serial Number.
+   ${redfish_serial_number}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  SerialNumber
+   Element Should Be Visible  //*[@data-test-id='appHeader-container-overview']/following-sibling::*/*[text()='${redfish_serial_number}']
