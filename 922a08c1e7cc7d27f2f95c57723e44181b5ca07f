@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9b08a58_c6c8679f",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-10-30T04:49:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a55d9148_4d666abe",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 75
+      },
+      "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a9232f7_55ee5578",
@@ -81,6 +105,66 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e547c2a0_3e0987e6",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-10-30T04:49:01Z",
+      "side": 1,
+      "message": "changed to \u0027 # Generate a random power cap value within the allowable range.\u0027",
+      "parentUuid": "d1642049_92a895f6",
+      "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e87b74d8_49929f4a",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-10-30T04:49:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a9232f7_55ee5578",
+      "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfe3ab11_1b1d4e18",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-10-30T04:49:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5aa91f6_a93f6135",
+      "range": {
+        "startLine": 250,
+        "startChar": 0,
+        "endLine": 250,
+        "endChar": 37
+      },
+      "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c23ea9b_fb851ade",
@@ -94,6 +178,30 @@
       "writtenOn": "2023-10-26T16:18:25Z",
       "side": 1,
       "message": "use random_power_cap instead of power_capacity",
+      "range": {
+        "startLine": 251,
+        "startChar": 6,
+        "endLine": 251,
+        "endChar": 20
+      },
+      "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fe61238_d65e4416",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-10-30T04:49:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c23ea9b_fb851ade",
       "range": {
         "startLine": 251,
         "startChar": 6,
@@ -156,6 +264,42 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e62faada_b3ac0d31",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-10-30T04:49:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b2afafb_230b875f",
+      "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3ac88e1_557a8a79",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-10-30T04:49:01Z",
+      "side": 1,
+      "message": "changed to \u0027 # Verify the power cap value with the Redfish value.\u0027",
+      "parentUuid": "39018df3_87fc749c",
+      "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c167edf_4eed4023",
@@ -169,6 +313,30 @@
       "writtenOn": "2023-10-26T16:18:25Z",
       "side": 1,
       "message": "Leave space after # and change the variable name to a more meaningful full name like below\n```\n    # Verify the power cap value with the Redfish value.\n    ${updated_power_limits}\u003d  Get System Power Cap Limit\n    Should Be Equal  ${updated_power_limits[\u0027SetPoint\u0027]}  ${random_power_cap}\n```",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 70
+      },
+      "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c18035b_ea313a0f",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-10-30T04:49:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c167edf_4eed4023",
       "range": {
         "startLine": 256,
         "startChar": 0,
@@ -202,6 +370,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "063af283_6318306c",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-10-30T04:49:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c82bb9f5_05a40cb5",
+      "range": {
+        "startLine": 387,
+        "startChar": 0,
+        "endLine": 387,
+        "endChar": 30
+      },
+      "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2781d14_061b7b08",
@@ -215,6 +407,24 @@
       "writtenOn": "2023-10-26T16:04:40Z",
       "side": 1,
       "message": "use  # power_cap_value",
+      "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abcc97a0_4a3cb756",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-10-30T04:49:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2781d14_061b7b08",
       "revId": "922a08c1e7cc7d27f2f95c57723e44181b5ca07f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
