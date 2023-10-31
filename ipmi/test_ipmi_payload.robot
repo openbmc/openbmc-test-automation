@@ -17,7 +17,6 @@ Force Tags          IPMI_Payload
 ${user_priv}                     2
 ${operator_priv}                 3
 ${admin_level_priv}              4
-${no_access_priv}                15
 ${new_user_passwd}               0penBmc1
 ${standard_payload_type_resp}    03 00
 ${session_setup_payload_resp}    3f 00
