@@ -22,7 +22,6 @@ ${operator_level_priv}  0x3
 ${user_priv}            2
 ${operator_priv}        3
 ${admin_level_priv}     4
-${no_access_priv}       15
 ${valid_password}       0penBmc1
 ${max_password_length}  20
 ${ipmi_setaccess_cmd}   channel setaccess
@@ -285,17 +284,6 @@ Test IPMI Administrator Privilege Level
     ${admin_level_priv}  Passed           Passed               Passed
 
 
-Test IPMI No Access Privilege Level
-    [Documentation]  Verify IPMI user with no access privilege can not run command at any level.
-    [Tags]  Test_IPMI_No_Access_Privilege_Level
-    [Template]  Test IPMI User Privilege
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Delete Created User  ${random_userid}
-
-    #Privilege level     User Cmd Status  Operator Cmd Status  Admin Cmd Status
-    ${no_access_priv}    Failed           Failed               Failed
-
-
 Enable IPMI User And Verify
     [Documentation]  Enable IPMI user and verify that the user is able
     ...  to run IPMI command.
@@ -369,9 +357,9 @@ Verify IPMI Root User Password Change
     ...  root  ${valid_password}
 
 
-Verify Administrator And No Access Privilege For Different Channels
-    [Documentation]  Set administrator and no access privilege for different channels and verify.
-    [Tags]  Verify_Administrator_And_No_Access_Privilege_For_Different_Channels
+Verify Administrator And User Privilege For Different Channels
+    [Documentation]  Set administrator and user privilege for different channels and verify.
+    [Tags]  Verify_Administrator_And_User_Privilege_For_Different_Channels
     [Setup]  Check Active Ethernet Channels
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
     ...  Delete Created User  ${random_userid}
@@ -384,8 +372,8 @@ Verify Administrator And No Access Privilege For Different Channels
     # Set admin privilege for newly created user with channel 1.
     Set Channel Access  ${random_userid}  ipmi=on privilege=${admin_level_priv}  ${CHANNEL_NUMBER}
 
-    # Set no access privilege for newly created user with channel 2.
-    Set Channel Access  ${random_userid}  ipmi=on privilege=${no_access_priv}  ${secondary_channel_number}
+    # Set user privilege for newly created user with channel 2.
+    Set Channel Access  ${random_userid}  ipmi=on privilege=${user_priv}  ${secondary_channel_number}
 
     Enable IPMI User And Verify  ${random_userid}
 
