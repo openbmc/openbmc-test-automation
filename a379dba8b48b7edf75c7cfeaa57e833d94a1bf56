@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5439cd3_dd619df8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001842
+      },
+      "writtenOn": "2023-10-31T16:27:57Z",
+      "side": 1,
+      "message": "Code is fine, but why remove it?",
+      "revId": "a379dba8b48b7edf75c7cfeaa57e833d94a1bf56",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
