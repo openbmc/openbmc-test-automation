@@ -16,6 +16,41 @@
       "message": "Code is fine, but why remove it?",
       "revId": "a379dba8b48b7edf75c7cfeaa57e833d94a1bf56",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c158d62e_f5eb2895",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2023-11-01T11:45:46Z",
+      "side": 1,
+      "message": "done",
+      "revId": "a379dba8b48b7edf75c7cfeaa57e833d94a1bf56",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6a4571b_7cd05e93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2023-11-01T11:45:46Z",
+      "side": 1,
+      "message": "As per the below given gerrit we have removed no-access privilege\n \nhttps://gerrit.openbmc.org/c/openbmc/bmcweb/+/52365",
+      "parentUuid": "a5439cd3_dd619df8",
+      "revId": "a379dba8b48b7edf75c7cfeaa57e833d94a1bf56",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
