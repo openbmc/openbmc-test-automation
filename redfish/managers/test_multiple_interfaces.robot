@@ -64,7 +64,7 @@ Verify Redfish Works On Both Interfaces
 Verify LDAP Login Works When Eth1 IP Is Not Configured
     [Documentation]  Verify LDAP login works when eth1 IP is erased.
     [Tags]  Verify_LDAP_Login_Works_When_Eth1_IP_Is_Not_Configured
-    [Setup]  Run Keywords  Set Test Variable  ${CHANNEL_NUMBER}  ${2}
+    [Setup]  Run Keywords  Set Test Variable  ${CHANNEL_NUMBER}  ${SECONDARY_CHANNEL_NUMBER}
     ...  AND  Delete IP Address  ${OPENBMC_HOST_1}
     ...  AND  Redfish.Login
     [Teardown]  Run Keywords  Redfish.Logout  AND
@@ -101,7 +101,7 @@ Verify Secure LDAP Login Works When Both Interfaces Are Configured
 Verify SNMP Works When Eth1 IP Is Not Configured
     [Documentation]  Verify SNMP works when eth1 IP is not configured.
     [Tags]  Verify_SNMP_Works_When_Eth1_IP_Is_Not_Configured
-    [Setup]  Run Keywords  Set Test Variable  ${CHANNEL_NUMBER}  ${2}
+    [Setup]  Run Keywords  Set Test Variable  ${CHANNEL_NUMBER}  ${SECONDARY_CHANNEL_NUMBER}
     ...  AND  Delete IP Address  ${OPENBMC_HOST_1}
     [Teardown]  Run Keywords  Redfish.Login  AND
     ...  Add IP Address  ${OPENBMC_HOST_1}  ${eth1_subnet_mask}  ${eth1_gateway}
@@ -207,7 +207,7 @@ Suite Setup Execution
     Ping Host  ${OPENBMC_HOST}
     Ping Host  ${OPENBMC_HOST_1}
 
-    ${network_configurations}=  Get Network Configuration Using Channel Number  ${2}
+    ${network_configurations}=  Get Network Configuration Using Channel Number  ${SECONDARY_CHANNEL_NUMBER}
     FOR  ${network_configuration}  IN  @{network_configurations}
 
       Run Keyword If  '${network_configuration['Address']}' == '${OPENBMC_HOST_1}'
