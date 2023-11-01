@@ -100,6 +100,7 @@ ${NETWORK_TIMEOUT}         18
 ${ICMP_TIMESTAMP_REQUEST}  13
 ${ICMP_ECHO_REQUEST}       8
 ${CHANNEL_NUMBER}          1
+${SEC_CHANNEL_NUMBER}      ${EMPTY}
 ${TCP_PACKETS}             tcp
 ${TCP_CONNECTION}          tcp-connect
 ${ICMP_NETMASK_REQUEST}    17
