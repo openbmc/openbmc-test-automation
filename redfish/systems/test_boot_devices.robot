@@ -28,7 +28,7 @@ Force Tags       Boot_Devices
 # corresponding IPMI output value.
 &{redfish_ipmi_target_map}  Hdd=Force Boot from default Hard-Drive
 ...                         Pxe=Force PXE
-...                         Diags=Force Boot from default Hard-Drive, request Safe-Mode
+...                         Diags=Force Boot from Diagnostic Partition
 ...                         Cd=Force Boot from CD/DVD
 ...                         BiosSetup=Force Boot into BIOS Setup
 ...                         None=No override
