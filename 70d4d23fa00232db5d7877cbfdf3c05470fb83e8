@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1382dacc_68d7f5fb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-02T05:29:39Z",
+      "side": 1,
+      "message": "Period \".\" is not required here",
+      "range": {
+        "startLine": 7,
+        "startChar": 51,
+        "endLine": 7,
+        "endChar": 52
+      },
+      "revId": "70d4d23fa00232db5d7877cbfdf3c05470fb83e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc74da51_5fde2b50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-02T05:29:39Z",
+      "side": 1,
+      "message": "Keep one blank line after tested",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 54
+      },
+      "revId": "70d4d23fa00232db5d7877cbfdf3c05470fb83e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "833e5beb_7c0e524c",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-02T05:29:39Z",
+      "side": 1,
+      "message": "[Documentation]  Set power cap value via Redfish and verify it using IPMI.",
+      "range": {
+        "startLine": 264,
+        "startChar": 21,
+        "endLine": 264,
+        "endChar": 53
+      },
+      "revId": "70d4d23fa00232db5d7877cbfdf3c05470fb83e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45997649_65917dba",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-02T05:29:39Z",
+      "side": 1,
+      "message": "By default, power cap value is not set to any value. When the initial value is not set then our verification would happen between empty value. So better to set some valid value via Redfish and then verify it via IPMI.",
+      "range": {
+        "startLine": 270,
+        "startChar": 21,
+        "endLine": 270,
+        "endChar": 47
+      },
+      "revId": "70d4d23fa00232db5d7877cbfdf3c05470fb83e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "576c608a_3da59a08",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-02T05:29:39Z",
+      "side": 1,
+      "message": "As we are using should contain below, this catenate is not required.",
+      "range": {
+        "startLine": 271,
+        "startChar": 0,
+        "endLine": 271,
+        "endChar": 70
+      },
+      "revId": "70d4d23fa00232db5d7877cbfdf3c05470fb83e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bda03a90_aa71b0a5",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-02T05:29:39Z",
+      "side": 1,
+      "message": "Keep R capital in Redfish",
+      "range": {
+        "startLine": 273,
+        "startChar": 51,
+        "endLine": 273,
+        "endChar": 58
+      },
+      "revId": "70d4d23fa00232db5d7877cbfdf3c05470fb83e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
