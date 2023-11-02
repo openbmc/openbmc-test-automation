@@ -260,6 +260,21 @@ Set Power Cap Value Via IPMI And Verify Using Redfish
     Should Be Equal  ${updated_power_limits['SetPoint']}  ${random_power_cap}
 
 
+Verify Power Cap Value Via IPMI
+    [Documentation]  Verify power cap value via IPMI.
+    [Setup]  Redfish.Login
+    [Teardown]  Redfish.Logout
+    [Tags]  Verify_Power_Cap_Value_Via_IPMI
+
+    # Get power cap value via Redfish.
+    ${power_limit}=  Get System Power Cap Limit
+    ${power_limit_watts}=  Catenate  ${power_limit['SetPoint']}  Watts
+
+    # Get power cap value via IPMI and verify with redfish value.
+    ${power_cap_value}=  Run IPMI Standard Command  dcmi power get_limit
+    Should Contain  ${power_cap_value}  ${power_limit_watts}
+
+
 *** Keywords ***
 
 IPMI General Test Suite Setup
