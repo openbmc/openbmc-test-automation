@@ -260,6 +260,48 @@ Set Power Cap Value Via IPMI And Verify Using Redfish
     Should Be Equal  ${updated_power_limits['SetPoint']}  ${random_power_cap}
 
 
+Verify Power Cap Value Via IPMI
+    [Documentation]  Verify the power cap value via IPMI, set to non-zero using Redfish
+    ...              if initial power cap value is zero.
+    [Tags]  Verify_Power_Cap_Value_Via_IPMI
+    [Setup]  Redfish.Login
+    [Teardown]  Run Keywords  Set Power Cap Value Via Redfish  ${initial_power_value}  AND  Redfish.Logout
+
+    # Get power cap value via Redfish.
+    ${power_cap_limit}=  Get System Power Cap Limit
+
+    # Get initial power cap vaule.
+    ${initial_power_value}=  Set Variable  ${power_cap_limit['SetPoint']}
+
+    # Update power cap value via Redfish if the initial power cap value is zero.
+    IF  ${initial_power_value} == 0
+        # Get the allowable min and max power cap value via Redfish.
+        ${min_power_value}=  Set Variable  ${power_cap_limit['AllowableMin']}
+        ${max_power_value}=  Set Variable  ${power_cap_limit['AllowableMax']}
+
+        # Generate a random power cap value within the allowable range.
+        ${random_power_cap}=  Evaluate  random.randint(${min_power_value}, ${max_power_value})  modules=random
+
+        # Set power value via Redfish.
+        Set Power Cap Value Via Redfish  ${random_power_cap}
+    END
+
+    # Get power cap value via IPMI.
+    ${cmd}=  Catenate  dcmi power get_limit | grep "Power Limit:"
+    ${resp}=  Run IPMI Standard Command  ${cmd}
+
+    # The output will be as below.
+    # Power Limit:         1472 Watts
+
+    # Truncate power limit: and watts from output.
+    ${output_limit}=  Strip String  ${resp}  mode=left  characters=Power Limit:
+    ${ipmi_power_cap_value}=  Strip String  ${output_limit}  mode=both  characters= Watts
+
+    # Perform a comparison of power cap values obtained from both IPMI and Redfish.
+    ${redfish_power_cap_value}=  Convert To String  ${random_power_cap}
+    Should Be Equal  ${ipmi_power_cap_value}  ${redfish_power_cap_value}
+
+
 *** Keywords ***
 
 IPMI General Test Suite Setup
