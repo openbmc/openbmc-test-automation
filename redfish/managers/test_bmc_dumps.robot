@@ -514,7 +514,7 @@ Download BMC Dump
     Initialize OpenBMC
     ${headers}=  Create Dictionary  Content-Type=application/octet-stream  X-Auth-Token=${XAUTH_TOKEN}
 
-    ${ret}=  Get Request  openbmc  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}/attachment  headers=${headers}
+    ${ret}=  GET On Session  openbmc  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}/attachment  headers=${headers}
 
     Should Be Equal As Numbers  ${ret.status_code}  200
 
