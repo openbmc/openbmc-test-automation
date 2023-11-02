@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "393367b9_87527e33",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-02T09:00:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1382dacc_68d7f5fb",
+      "range": {
+        "startLine": 7,
+        "startChar": 51,
+        "endLine": 7,
+        "endChar": 52
+      },
+      "revId": "70d4d23fa00232db5d7877cbfdf3c05470fb83e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc74da51_5fde2b50",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-02T05:29:39Z",
       "side": 1,
       "message": "Keep one blank line after tested",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 54
+      },
+      "revId": "70d4d23fa00232db5d7877cbfdf3c05470fb83e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56244a7e_1e75690e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-02T09:00:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc74da51_5fde2b50",
       "range": {
         "startLine": 12,
         "startChar": 0,
@@ -94,6 +142,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2032cbfc_aad221dd",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-02T09:00:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74396198_6e858eaa",
+      "range": {
+        "startLine": 264,
+        "startChar": 21,
+        "endLine": 264,
+        "endChar": 53
+      },
+      "revId": "70d4d23fa00232db5d7877cbfdf3c05470fb83e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45997649_65917dba",
@@ -131,6 +203,30 @@
       "side": 1,
       "message": "Updated the code to set the power cap to valid value if the initial value is zero.",
       "parentUuid": "45997649_65917dba",
+      "range": {
+        "startLine": 270,
+        "startChar": 21,
+        "endLine": 270,
+        "endChar": 47
+      },
+      "revId": "70d4d23fa00232db5d7877cbfdf3c05470fb83e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17a21567_81dd2230",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-02T09:00:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f12521b8_07742328",
       "range": {
         "startLine": 270,
         "startChar": 21,
