@@ -741,16 +741,7 @@ Configure Static Name Servers
     ...  valid_status_codes=[${valid_status_codes}, ${HTTP_INTERNAL_SERVER_ERROR}]
 
     # Patch operation takes 1 to 3 seconds to set new value.
-    Sleep  3s
-
-    # Check if newly added DNS server is configured on BMC.
-    ${cli_nameservers}=  CLI Get Nameservers
-    ${cmd_status}=  Run Keyword And Return Status
-    ...  List Should Contain Sub List  ${cli_nameservers}  ${static_name_servers}
-
-    Run Keyword If  '${valid_status_codes}' == '${HTTP_OK}'
-    ...  Should Be True  ${cmd_status} == ${True}
-    ...  ELSE  Should Be True  ${cmd_status} == ${False}
+    Wait Until Keyword Succeeds  1 min  3 sec    CLI Get and Verify Name Servers    ${static_name_servers}  ${valid_status_codes}
 
 Delete Static Name Servers
     [Documentation]  Delete static name servers.
