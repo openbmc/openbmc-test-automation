@@ -418,6 +418,21 @@ CLI Get Nameservers
 
     [Return]  ${nameservers}
 
+CLI Get and Verify Name Servers
+    [Documentation]    Get and Verify the nameserver IPs from /etc/resolv.conf and compare with redfish nameserver.
+    [Arguments]     ${static_name_servers}
+    ...  ${valid_status_codes}=${HTTP_OK}
+
+    # Description of Argument(s):
+    # static_name_servers:   Address for static name server
+
+    ${cli_nameservers}=  CLI Get Nameservers
+    ${cmd_status}=  Run Keyword And Return Status
+    ...  List Should Contain Sub List  ${cli_nameservers}  ${static_name_servers}
+
+    Run Keyword If  '${valid_status_codes}' == '${HTTP_OK}'
+    ...  Should Be True  ${cmd_status}
+    ...  ELSE  Should Be True  ${cmd_status}
 
 Get Network Configuration
     [Documentation]  Get network configuration.
