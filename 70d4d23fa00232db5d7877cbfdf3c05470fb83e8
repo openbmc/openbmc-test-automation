@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "74396198_6e858eaa",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-02T08:58:00Z",
+      "side": 1,
+      "message": "updated the documentation",
+      "parentUuid": "833e5beb_7c0e524c",
+      "range": {
+        "startLine": 264,
+        "startChar": 21,
+        "endLine": 264,
+        "endChar": 53
+      },
+      "revId": "70d4d23fa00232db5d7877cbfdf3c05470fb83e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "45997649_65917dba",
         "filename": "ipmi/test_ipmi_general.robot",
         "patchSetId": 2
@@ -83,6 +107,30 @@
       "writtenOn": "2023-11-02T05:29:39Z",
       "side": 1,
       "message": "By default, power cap value is not set to any value. When the initial value is not set then our verification would happen between empty value. So better to set some valid value via Redfish and then verify it via IPMI.",
+      "range": {
+        "startLine": 270,
+        "startChar": 21,
+        "endLine": 270,
+        "endChar": 47
+      },
+      "revId": "70d4d23fa00232db5d7877cbfdf3c05470fb83e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f12521b8_07742328",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-02T08:58:00Z",
+      "side": 1,
+      "message": "Updated the code to set the power cap to valid value if the initial value is zero.",
+      "parentUuid": "45997649_65917dba",
       "range": {
         "startLine": 270,
         "startChar": 21,
@@ -116,6 +164,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "079363e2_37caabbb",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-02T08:58:00Z",
+      "side": 1,
+      "message": "removed catenate operation.",
+      "parentUuid": "576c608a_3da59a08",
+      "range": {
+        "startLine": 271,
+        "startChar": 0,
+        "endLine": 271,
+        "endChar": 70
+      },
+      "revId": "70d4d23fa00232db5d7877cbfdf3c05470fb83e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bda03a90_aa71b0a5",
@@ -129,6 +201,30 @@
       "writtenOn": "2023-11-02T05:29:39Z",
       "side": 1,
       "message": "Keep R capital in Redfish",
+      "range": {
+        "startLine": 273,
+        "startChar": 51,
+        "endLine": 273,
+        "endChar": 58
+      },
+      "revId": "70d4d23fa00232db5d7877cbfdf3c05470fb83e8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abbcec68_c80cd182",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-02T08:58:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bda03a90_aa71b0a5",
       "range": {
         "startLine": 273,
         "startChar": 51,
