@@ -87,6 +87,10 @@ Verify MAC Address Property Is Populated
         ${eth_interface}=  redfish_utils.Get Endpoint Path List
         ...  /redfish/v1/Managers/  EthernetInterfaces
 
+        Run Keyword and Continue on Failure  Redfish.Get Attribute
+        ...  ${eth_interface[0]}/${active_channel_config["${channel_number}"]["name"]}
+        ...  MACAddress
+
         # Get the MACAddress attrivute value with the 'name': 'eth0'.
         # Example: /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/eth0
         ${redfish_mac_addr}=  Redfish.Get Attribute
