@@ -839,3 +839,12 @@ Get DHCP IP Info
         ${subnetmask}=  Set Variable  ${resp['SubnetMask']}
         Return From Keyword  ${ip_addr}  ${gateway}  ${subnetmask}
     END
+
+Check Active Ethernet Channels
+    [Documentation]  Check active ethernet channels and set suite variables.
+
+    ${channel_number_list}=  Get Active Ethernet Channel List
+    ${channel_length}=  Get Length  ${channel_number_list}
+    Set Suite Variable      ${channel_length}
+    Skip If  '${channel_length}' == '1'
+    ...  msg= Skips this test case as only one channel was in active.

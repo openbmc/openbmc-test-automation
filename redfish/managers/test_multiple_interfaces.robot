@@ -3,8 +3,6 @@ Documentation   Test BMC multiple network interface functionalities.
 
 # User input BMC IP for the eth1.
 # Use can input as  -v OPENBMC_HOST_1:xx.xxx.xx from command line.
-Library         ../../lib/bmc_redfish.py  https://${OPENBMC_HOST_1}:${HTTPS_PORT}
-...             ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  WITH NAME  Redfish1
 
 Resource        ../../lib/resource.robot
 Resource        ../../lib/common_utils.robot
@@ -20,7 +18,7 @@ Library         OperatingSystem
 
 Suite Setup     Suite Setup Execution
 Test Teardown   FFDC On Test Case Fail
-Suite Teardown  Run Keywords  Redfish1.Logout  AND  Redfish.Logout
+Suite Teardown  Suite Teardown Execution
 
 *** Variables ***
 
@@ -201,11 +199,19 @@ Get Network Configuration Using Channel Number
 Suite Setup Execution
     [Documentation]  Do suite setup task.
 
+    Check Active Ethernet Channels
+
+    Import Library      ../../lib/bmc_redfish.py  https://${OPENBMC_HOST_1}:${HTTPS_PORT}
+    ...  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  WITH NAME  Redfish1
+
     Valid Value  OPENBMC_HOST_1
 
     # Check both interfaces are configured and reachable.
     Ping Host  ${OPENBMC_HOST}
     Ping Host  ${OPENBMC_HOST_1}
+
+    Check DHCPEnabaled status for eth0 Interface
+    Check DHCPEnabaled status for eth1 Interface
 
     ${network_configurations}=  Get Network Configuration Using Channel Number  ${2}
     FOR  ${network_configuration}  IN  @{network_configurations}
@@ -294,3 +300,53 @@ Install Certificate Via Redfish And Verify
     ...  ${certificate_uri}/${cert_id}  CertificateString
     Run Keyword If  '${expected_status}' == 'ok'  Should Contain  ${cert_file_content}  ${bmc_cert_content}
     [Return]  ${cert_id}
+
+Check DHCPEnabaled status for eth0 Interface
+    [Documentation]   Set Static IPAddress for eth0 Interface if DHCP IPV4 status is enabled.
+    # - Get DHCP IPv4 enabled/disabled status from redfish managers URI
+    # - If DHCP IPv4 is enabled ,
+    #   - Get DHCP IPv4 settings - ip address, gateway, subnetmask
+    #   - And set the same as static IP address
+
+    Redfish.Login
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status
+    Set Suite Variable  ${DHCPEnabled}
+
+    Run Keyword If  ${DHCPEnabled}==True
+    ...  Run Keywords
+    ...  ${ip_addr}  ${gateway}  ${subnetmask}=  Get DHCP IP Info  AND
+    ...  Add IP Address  ${ip_addr}  ${subnetmask}  ${gateway}  AND
+    ...  Set Suite Variable ${OPENBMC_HOST}    ${ip_addr}
+
+Check DHCPEnabaled status for eth1 Interface
+    [Documentation]   Set Static IPAddress for eth1 Interface if DHCP IPV4 status is enabled.
+    # - Get DHCP IPv4 enabled/disabled status from redfish managers URI
+    # - If DHCP IPv4 is enabled ,
+    #   - Get DHCP IPv4 settings - ip address, gateway, subnetmask
+    #   - And set the same as static IP address
+
+    Redfish1.Login
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status
+    Set Suite Variable  ${DHCPEnabled}
+
+    Run Keyword If  ${DHCPEnabled}==True
+    ...  Run Keywords
+    ...  ${ip_addr}  ${gateway}  ${subnetmask}=  Get DHCP IP Info  AND
+    ...  Add IP Address  ${ip_addr}  ${subnetmask}  ${gateway}  AND
+    ...  Set Suite Variable ${OPENBMC_HOST1}    ${ip_addr}
+
+Get IPv4 DHCP Enabled Status
+    [Documentation]  Return IPv4 DHCP enabled status from redfish URI.
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${resp}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  DHCPv4
+    ${status}=  Set Variable  ${resp['DHCPEnabled']}
+    Return From Keyword  ${status}
+
+Suite Teardown Execution
+    [Documentation]    Logout of Redfish sessions
+
+    Run Keyword If  '${channel_length}' != '1'  Redfish1.Logout
+    Redfish.Logout
+
