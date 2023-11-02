@@ -216,6 +216,8 @@ Get Network Configuration Using Channel Number
 Suite Setup Execution
     [Documentation]  Do suite setup task.
 
+    Check Active Ethernet Channels
+
     Ping Host  ${OPENBMC_HOST}
     Redfish.Login
 
