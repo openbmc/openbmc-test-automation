@@ -109,7 +109,7 @@ def execute_process_multi_keyword(number_args, *keyword_names):
     # Wait for process to complete.
     for task in process_list:
         task.join()
-    return return_dict
+    return return_dict.copy()
 
 
 def get_current_date_time():
