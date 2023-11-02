@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16e86e35_f2f13bdb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-11-02T18:51:04Z",
+      "side": 1,
+      "message": "I dont see your name in CLA access list https://drive.google.com/drive/folders/12CXCpXKHZSRzm0S8G2Td9YNkSabX1JY5 \nCan u ask your org CLA approver to add your name. Thanks",
+      "revId": "d7918e52654afd20c496204782f06c08777fc4fe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
