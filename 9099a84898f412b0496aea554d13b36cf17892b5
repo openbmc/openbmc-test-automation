@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aecd6b72_76f310da",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-11-02T07:49:29Z",
+      "side": 1,
+      "message": "The testdata is not actually random, it is carefully selected so that available/common to all types of systems etc.\n\nAdditionally, I would not let keyword to select testdata randomly. I would give tester freedom to choose testdata with  clear intent.\n\nKeeping testdata hidden within a library / keyword is not a very good practice either. So, keeping this for testdata to be visible,easily modifiable (add / delete / modify) in main test script for any future consideration.",
+      "parentUuid": "1b6b2801_43274fba",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 56
+      },
+      "revId": "9099a84898f412b0496aea554d13b36cf17892b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c13a719_39f93a7e",
         "filename": "redfish/telemetry_service/test_telemetry_report.robot",
         "patchSetId": 7

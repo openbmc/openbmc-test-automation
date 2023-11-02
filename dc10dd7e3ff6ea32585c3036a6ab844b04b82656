@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4246972d_8b214799",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-11-02T07:49:29Z",
+      "side": 1,
+      "message": "Thanks for reviewing !",
+      "revId": "dc10dd7e3ff6ea32585c3036a6ab844b04b82656",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cab43f7_950da540",
@@ -31,6 +48,30 @@
       "writtenOn": "2023-11-02T06:19:47Z",
       "side": 1,
       "message": "always follow a consistent approach in naming here like below\n\n\n    # Metric Definition  Metric Report Definition Type   Report Actions       Append Limit",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 85
+      },
+      "revId": "dc10dd7e3ff6ea32585c3036a6ab844b04b82656",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e14627ce_8c7a612b",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-11-02T07:49:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cab43f7_950da540",
       "range": {
         "startLine": 26,
         "startChar": 0,
@@ -64,6 +105,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13db6305_7c48b0fc",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-11-02T07:49:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8316ba20_b76265a0",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 135
+      },
+      "revId": "dc10dd7e3ff6ea32585c3036a6ab844b04b82656",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74c6ca02_0ae8519c",
@@ -87,6 +152,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e68141f3_6a9e4706",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-11-02T07:49:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74c6ca02_0ae8519c",
+      "range": {
+        "startLine": 101,
+        "startChar": 45,
+        "endLine": 101,
+        "endChar": 47
+      },
+      "revId": "dc10dd7e3ff6ea32585c3036a6ab844b04b82656",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cabfa026_da5bd1a7",
@@ -100,6 +189,30 @@
       "writtenOn": "2023-11-02T06:19:47Z",
       "side": 1,
       "message": "exceeding 110 limit",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 116
+      },
+      "revId": "dc10dd7e3ff6ea32585c3036a6ab844b04b82656",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c21003b5_17cc4f09",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-11-02T07:49:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cabfa026_da5bd1a7",
       "range": {
         "startLine": 129,
         "startChar": 0,
