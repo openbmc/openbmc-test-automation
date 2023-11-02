@@ -835,7 +835,7 @@ Get IPv4 DHCP Enabled Status
 
     # Description of argument(s):
     # channel_number   Ethernet channel number, 1 is for eth0 and 2 is for eth1 (e.g. "1").
- 
+
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
     ${resp}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  DHCPv4
@@ -854,3 +854,11 @@ Get DHCP IP Info
         ${subnetmask}=  Set Variable  ${resp['SubnetMask']}
         Return From Keyword  ${ip_addr}  ${gateway}  ${subnetmask}
     END
+
+Check Active Ethernet Channels
+    [Documentation]  Check active ethernet channels and set suite variables.
+
+    ${channel_number_list}=  Get Active Ethernet Channel List
+    ${channel_length}=  Get Length  ${channel_number_list}
+    Run Keyword If  ${channel_length} == ${1}
+    ...  Fail  msg=Failing this test suite due to only one channel was in active.
