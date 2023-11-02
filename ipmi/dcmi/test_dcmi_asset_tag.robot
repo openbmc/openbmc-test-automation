@@ -72,7 +72,7 @@ Set Asset Tag With Invalid String Length Via DCMI Command
     ${cmd}=  Catenate  ${DCMI_RAW_CMD['DCMI']['Asset_Tag'][1]} 0x${number_of_bytes_to_write} ${random_hex}
     ${resp}=  Run Keyword And Expect Error  *
     ...  Run External IPMI Raw Command  ${cmd}
-    Should Contain  ${resp}  resp=0xc9): Parameter out of range:  ignore_case=True
+    Should Contain  ${resp}  rsp=0xc9): Parameter out of range:  ignore_case=True
 
 
 Set Valid Asset Tag With DCMI And Verify With Redfish
