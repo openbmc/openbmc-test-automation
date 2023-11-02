@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1b6b2801_43274fba",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-02T06:19:47Z",
+      "side": 1,
+      "message": "The test data we are passing for this keyword is a random one except for metric definition. So it is better to use all in the keyword itself.",
+      "parentUuid": "3b283864_68fa4e7c",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 56
+      },
+      "revId": "9099a84898f412b0496aea554d13b36cf17892b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c13a719_39f93a7e",
         "filename": "redfish/telemetry_service/test_telemetry_report.robot",
         "patchSetId": 7
