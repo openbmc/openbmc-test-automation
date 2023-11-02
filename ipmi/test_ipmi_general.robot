@@ -260,6 +260,45 @@ Set Power Cap Value Via IPMI And Verify Using Redfish
     Should Be Equal  ${updated_power_limits['SetPoint']}  ${random_power_cap}
 
 
+Verify Power Cap Value Via IPMI
+    [Documentation]  Verify the power cap value via IPMI, and if the initial value is zero, set the power cap value via Redfish.
+    [Setup]  Redfish.Login
+    [Teardown]  Redfish.Logout
+    [Tags]  Verify_Power_Cap_Value_Via_IPMI
+
+    # Get power cap value via Redfish.
+    ${power_cap_limit}=  Get System Power Cap Limit
+
+    # Update power cap value via Redfish if the initial power cap value is zero.
+    IF  ${power_cap_limit['SetPoint']} == 0
+
+        # Get the allowable min and max power cap value via Redfish.
+        ${min_power_value}=  Set Variable  ${power_cap_limit['AllowableMin']}
+        ${max_power_value}=  Set Variable  ${power_cap_limit['AllowableMax']}
+
+        # Generate a random power cap value within the allowable range.
+        ${random_power_cap}=  Evaluate  random.randint(${min_power_value}, ${max_power_value})  modules=random
+
+        # Set power value via Redfish.
+        Set Power Cap Value Via Redfish  ${random_power_cap}
+
+        # Get updated power cap value via Redfish.
+        ${power_cap_limit}=  Get System Power Cap Limit
+    END
+
+    # Get power cap value via IPMI.
+    ${cmd}=  Catenate  dcmi power get_limit | grep "Power Limit:"
+    ${resp}=  Run IPMI Standard Command  ${cmd}
+
+    # Truncate power limit: and watts from output.
+    ${output_limit}=  Strip String  ${resp}  mode=left  characters=Power Limit:
+    ${power_limit}=  Strip String  ${output_limit}  mode=both  characters= Watts
+
+    # Perform a comparison of power cap values obtained from both IPMI and Redfish.
+    ${power_limit_watts}=  Convert To String  ${power_cap_limit['SetPoint']}
+    Should Be Equal  ${power_limit}  ${power_limit_watts}
+
+
 *** Keywords ***
 
 IPMI General Test Suite Setup
