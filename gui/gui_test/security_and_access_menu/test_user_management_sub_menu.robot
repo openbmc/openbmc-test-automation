@@ -34,7 +34,10 @@ ${xpath_auto_unlock}                     //*[@data-test-id='userManagement-radio
 ${xpath_manual_unlock}                   //*[@data-test-id='userManagement-radio-manualUnlock']
 ${xpath_max_failed_login}                //*[@data-test-id='userManagement-input-lockoutThreshold']
 ${test_user_password}                    TestPwd1
+${xpath_user_creation_error_message}     //*[contains(text(),'Error creating user')]
+${xpath_close_error_message}             //*/*[contains(text(),'Error')]/following-sibling::button
 @{username}                              admin_user  readonly_user  disabled_user
+@{list_user_privilege}                   Administrator  ReadOnly
 
 
 *** Test Cases ***
@@ -150,17 +153,34 @@ Delete User Account Via GUI
     Delete Users Via GUI  ${username}[0]
 
 
+Verify Error While Creating Users With Same Name
+    [Documentation]  Verify proper error message while creating two user accounts with same username.
+    [Tags]  Verify_Error_While_Creating_Users_With_Same_Name
+    [Teardown]  Delete Users Via Redfish  ${username}
+
+    # Get random username and user privilege level.
+    ${username}=  Generate Random String  8  [LETTERS]
+    ${privilege_level}=  Evaluate  random.choice(${list_user_privilege})  random
+
+    # Create new user account.
+    Create User And Verify  ${username}  ${privilege_level}  ${True}
+
+    # Expect failure while creating second user account with same username.
+    Create User And Verify  ${username}  ${privilege_level}  ${True}  Failure
+
+
 *** Keywords ***
 
 Create User And Verify
     [Documentation]  Create a user with given user name and privilege and verify that the
     ...  user is created successfully via GUI and Redfish.
-    [Arguments]  ${user_name}  ${user_privilege}  ${enabled}
+    [Arguments]  ${user_name}  ${user_privilege}  ${enabled}  ${expected_status}=Success
 
     # Description of argument(s):
     # user_name           The name of the user to be created (e.g. "test", "robert", etc.).
     # user_privilege      Privilege of the user.
     # enabled             If the user is enabled (e.g True if enabled, False if disabled).
+    # expected_status     Expected status of user creation (e.g. Success, Failure).
 
     Click Element  ${xpath_add_user}
     Wait Until Page Contains Element  ${xpath_add_user_heading}
@@ -180,25 +200,37 @@ Create User And Verify
     # Submit.
     Click Element  ${xpath_submit_button}
 
-    # Refresh page and check new user is available.
-    Wait Until Page Contains Element  ${xpath_add_user}
-    Click Element  ${xpath_refresh_button}
-    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
-    Wait Until Page Contains  ${user_name}  timeout=15
+    # Proceed with future steps based on the expected execution status.
+    IF  '${expected_status}' == 'Success'
+        Wait Until Element Is Visible  ${xpath_success_message}  timeout=30
 
-    # Cross check the privilege of newly added user via Redfish.
-    Redfish.Login
-    ${user_priv_redfish}=  Redfish_Utils.Get Attribute
-    ...  /redfish/v1/AccountService/Accounts/${user_name}  RoleId
-    Should Be Equal  ${user_privilege}  ${user_priv_redfish}
-    Redfish.Logout
+        # Refresh page and check new user is available.
+        Wait Until Page Contains Element  ${xpath_add_user}
+        Click Element  ${xpath_refresh_button}
+        Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+        Wait Until Page Contains  ${user_name}  timeout=15
 
-    # Check enable/disable status for user.
-    ${status}=  Run Keyword And Return Status  Redfish.Login  ${user_name}  ${test_user_password}
-    Run Keyword If  ${enabled} == ${False}
-    ...  Should Be Equal  ${status}  ${False}
-    ...  ELSE  Should Be Equal  ${status}  ${True}
-    Redfish.Logout
+        # Cross check the privilege of newly added user via Redfish.
+        Redfish.Login
+        ${user_priv_redfish}=  Redfish_Utils.Get Attribute
+        ...  /redfish/v1/AccountService/Accounts/${user_name}  RoleId
+        Should Be Equal  ${user_privilege}  ${user_priv_redfish}
+        Redfish.Logout
+
+        # Check enable/disable status for user.
+        ${status}=  Run Keyword And Return Status  Redfish.Login  ${user_name}  ${test_user_password}
+        Run Keyword If  ${enabled} == ${False}
+        ...  Should Be Equal  ${status}  ${False}
+        ...  ELSE  Should Be Equal  ${status}  ${True}
+        Redfish.Logout
+
+    ELSE IF   '${expected_status}' == 'Failure'
+        Wait Until Element Is Visible  ${xpath_user_creation_error_message}  timeout=60
+       
+        # Close error message popup.
+        Click Element  ${xpath_close_error_message}
+        Wait Until Element Is Not Visible  ${xpath_user_creation_error_message}  timeout=60
+    END
 
 
 Test Setup Execution
