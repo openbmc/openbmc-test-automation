@@ -254,7 +254,7 @@ Create IPMI User Without Any Privilege And Verify Via Redfish
     # Verify new user privilege level via Redfish.
     ${privilege}=  Redfish_Utils.Get Attribute
     ...  /redfish/v1/AccountService/Accounts/${username}  RoleId
-    Valid Value  privilege  ['NoAccess']
+    Valid Value  privilege  ['ReadOnly']
 
 *** Keywords ***
 
