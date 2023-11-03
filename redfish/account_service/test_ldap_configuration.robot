@@ -231,11 +231,9 @@ Update LDAP Group Name And Verify Operations
     ${GROUP_NAME}            Administrator    [${HTTP_OK}, ${HTTP_NO_CONTENT}]
     ${GROUP_NAME}            Operator         [${HTTP_OK}, ${HTTP_NO_CONTENT}]
     ${GROUP_NAME}            ReadOnly         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
-    ${GROUP_NAME}            NoAccess         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
     Invalid_LDAP_Group_Name  Administrator    [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
     Invalid_LDAP_Group_Name  Operator         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
     Invalid_LDAP_Group_Name  ReadOnly         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
-    Invalid_LDAP_Group_Name  NoAccess         [${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
 
 
 Verify LDAP BaseDN Update And LDAP Login
@@ -435,9 +433,6 @@ Update LDAP User Roles And Verify Host Poweroff Operation
     [Template]  Update LDAP User Role And Host Poweroff
     # ldap_type   group_privilege  group_name     valid_status_codes
 
-    # Verify LDAP user with NoAccess privilege not able to do host poweroff.
-    ${LDAP_TYPE}  NoAccess         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
-
     # Verify LDAP user with ReadOnly privilege not able to do host poweroff.
     ${LDAP_TYPE}  ReadOnly         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
 
@@ -455,9 +450,6 @@ Update LDAP User Roles And Verify Host Poweron Operation
 
     [Template]  Update LDAP User Role And Host Poweron
     # ldap_type   group_privilege  group_name     valid_status_codes
-
-    # Verify LDAP user with NoAccess privilege not able to do host poweron.
-    ${LDAP_TYPE}  NoAccess         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
 
     # Verify LDAP user with ReadOnly privilege not able to do host poweron.
     ${LDAP_TYPE}  ReadOnly         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
@@ -481,9 +473,6 @@ Configure IP Address Via Different User Roles And Verify
     # Verify LDAP user with ReadOnly privilege is forbidden to configure IP address.
     ${LDAP_TYPE}  ReadOnly         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
 
-    # Verify LDAP user with NoAccess privilege is forbidden to configure IP address.
-    ${LDAP_TYPE}  NoAccess         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
-
     # Verify LDAP user with Operator privilege is able to configure IP address.
     ${LDAP_TYPE}  Operator         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
 
@@ -500,9 +489,6 @@ Delete IP Address Via Different User Roles And Verify
     # Verify LDAP user with ReadOnly privilege is forbidden to delete IP address.
     ${LDAP_TYPE}  ReadOnly         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
 
-    # Verify LDAP user with NoAccess privilege is forbidden to delete IP address.
-    ${LDAP_TYPE}  NoAccess         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
-
     # Verify LDAP user with Operator privilege is able to delete IP address.
     ${LDAP_TYPE}  Operator         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
 
@@ -516,8 +502,6 @@ Read Network Configuration Via Different User Roles And Verify
     ${LDAP_TYPE}  Administrator  ${GROUP_NAME}  ${HTTP_OK}
 
     ${LDAP_TYPE}  ReadOnly       ${GROUP_NAME}  ${HTTP_OK}
-
-    ${LDAP_TYPE}  NoAccess       ${GROUP_NAME}  ${HTTP_FORBIDDEN}
 
     ${LDAP_TYPE}  Operator       ${GROUP_NAME}  ${HTTP_OK}
 
@@ -573,8 +557,7 @@ Update LDAP Config And Verify Set Host Name
     [Documentation]  Update LDAP config and verify by attempting to set host name.
     [Arguments]  ${group_name}  ${group_privilege}=Administrator
     ...  ${valid_status_codes}=[${HTTP_OK}]
-    [Teardown]  Run Keyword If  '${group_privilege}'=='NoAccess'  Redfish.Login
-                ...  ELSE  Run Keywords  Redfish.Logout  AND  Redfish.Login
+    [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
 
     # Description of argument(s):
     # group_name                    The group name of user.
@@ -587,20 +570,11 @@ Update LDAP Config And Verify Set Host Name
     Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
     ...  ${group_privilege}  ${group_name}
 
-    Run Keyword If  '${group_privilege}'=='NoAccess'
-    ...  Run Keyword And Return  Verify Redfish Login for LDAP Userrole NoAccess
-
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     # Verify that the LDAP user in ${group_name} with the given privilege is
     # allowed to change the hostname.
     Redfish.Patch  ${REDFISH_NW_ETH0_URI}  body={'HostName': '${hostname}'}
     ...  valid_status_codes=${valid_status_codes}
-
-Verify Redfish Login for LDAP Userrole NoAccess
-    [Documentation]  Verify Redfish login should not be able to login for LDAP Userrole NoAccess.
-
-    ${status}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
-    Valid Value  status  [${False}]
 
 Disable Other LDAP
     [Documentation]  Disable other LDAP configuration.
@@ -785,7 +759,7 @@ Update LDAP User Role And Host Poweroff
 
     # Description of argument(s):
     # ldap_type          The LDAP type ("ActiveDirectory" or "LDAP").
-    # group_privilege    The group privilege ("Administrator", "Operator", "ReadOnly" or "NoAccess").
+    # group_privilege    The group privilege ("Administrator", "Operator" or "ReadOnly").
     # group_name         The group name of user.
     # valid_status_code  The expected valid status code.
 
@@ -811,7 +785,7 @@ Update LDAP User Role And Host Poweron
 
     # Description of argument(s):
     # ldap_type          The LDAP type ("ActiveDirectory" or "LDAP").
-    # group_privilege    The group privilege ("Administrator", "Operator", "ReadOnly" or "NoAccess").
+    # group_privilege    The group privilege ("Administrator", "Operator" or "ReadOnly").
     # group_name         The group name of user.
     # valid_status_code  The expected valid status code.
 
@@ -837,7 +811,7 @@ Update LDAP User Role And Configure IP Address
 
     # Description of argument(s):
     # ldap_type          The LDAP type ("ActiveDirectory" or "LDAP").
-    # group_privilege    The group privilege ("Administrator", "Operator", "ReadOnly" or "NoAccess").
+    # group_privilege    The group privilege ("Administrator", "Operator" or "ReadOnly").
     # group_name         The group name of user.
     # valid_status_code  The expected valid status code.
 
@@ -850,10 +824,7 @@ Update LDAP User Role And Configure IP Address
 
     ${test_gateway}=  Get BMC Default Gateway
 
-    Run Keyword If  '${group_privilege}' == 'NoAccess'
-    ...  Add IP Address With NoAccess User  ${test_ip}  ${test_mask}  ${test_gateway}  ${valid_status_code}
-    ...  ELSE
-    ...  Add IP Address  ${test_ip}  ${test_mask}  ${test_gateway}  ${valid_status_code}
+    Add IP Address  ${test_ip}  ${test_mask}  ${test_gateway}  ${valid_status_code}
 
 
 Update LDAP User Role And Delete IP Address
@@ -863,7 +834,7 @@ Update LDAP User Role And Delete IP Address
 
     # Description of argument(s):
     # ldap_type          The LDAP type ("ActiveDirectory" or "LDAP").
-    # group_privilege    The group privilege ("Administrator", "Operator", "ReadOnly" or "NoAccess").
+    # group_privilege    The group privilege ("Administrator", "Operator" or "ReadOnly").
     # group_name         The group name of user.
     # valid_status_code  The expected valid status code.
 
@@ -879,10 +850,7 @@ Update LDAP User Role And Delete IP Address
 
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
 
-    Run Keyword If  '${group_privilege}' == 'NoAccess'
-    ...  Delete IP Address With NoAccess User  ${test_ip}  ${valid_status_code}
-    ...  ELSE
-    ...  Delete IP Address  ${test_ip}  ${valid_status_code}
+    Delete IP Address  ${test_ip}  ${valid_status_code}
 
 
 Update LDAP User Role And Read Network Configuration
@@ -892,7 +860,7 @@ Update LDAP User Role And Read Network Configuration
 
     # Description of argument(s):
     # ldap_type          The LDAP type ("ActiveDirectory" or "LDAP").
-    # group_privilege    The group privilege ("Administrator", "Operator", "ReadOnly" or "NoAccess").
+    # group_privilege    The group privilege ("Administrator", "Operator" or "ReadOnly").
     # group_name         The group name of user.
     # valid_status_code  The expected valid status code.
 
@@ -903,106 +871,3 @@ Update LDAP User Role And Read Network Configuration
 
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Redfish.Get  ${REDFISH_NW_ETH0_URI}  valid_status_codes=[${valid_status_code}]
-
-
-Add IP Address With NoAccess User
-    [Documentation]  Add IP Address To BMC.
-    [Arguments]  ${ip}  ${subnet_mask}  ${gateway}
-    ...  ${valid_status_codes}=${HTTP_OK}
-
-    # Description of argument(s):
-    # ip                  IP address to be added (e.g. "10.7.7.7").
-    # subnet_mask         Subnet mask for the IP to be added
-    #                     (e.g. "255.255.0.0").
-    # gateway             Gateway for the IP to be added (e.g. "10.7.7.1").
-    # valid_status_codes  Expected return code from patch operation
-    #                     (e.g. "200").  See prolog of rest_request
-    #                     method in redfish_plus.py for details.
-
-    # Logout from LDAP user.
-    Redfish.Logout
-
-    # Login with local user.
-    Redfish.Login
-
-    ${empty_dict}=  Create Dictionary
-    ${ip_data}=  Create Dictionary  Address=${ip}
-    ...  SubnetMask=${subnet_mask}  Gateway=${gateway}
-
-    ${patch_list}=  Create List
-    ${network_configurations}=  Get Network Configuration
-    ${num_entries}=  Get Length  ${network_configurations}
-
-    FOR  ${INDEX}  IN RANGE  0  ${num_entries}
-      Append To List  ${patch_list}  ${empty_dict}
-    END
-
-    ${valid_status_codes}=  Run Keyword If  '${valid_status_codes}' == '${HTTP_OK}'
-    ...  Set Variable   ${HTTP_OK},${HTTP_NO_CONTENT}
-    ...  ELSE  Set Variable  ${valid_status_codes}
-
-    # We need not check for existence of IP on BMC while adding.
-    Append To List  ${patch_list}  ${ip_data}
-    ${data}=  Create Dictionary  IPv4StaticAddresses=${patch_list}
-
-    ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
-
-    # Logout from local user.
-    Redfish.Logout
-
-    # Login from LDAP user and check if we can configure IP address.
-    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
-
-    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
-    ...  valid_status_codes=[${valid_status_codes}]
-
-
-Delete IP Address With NoAccess User
-    [Documentation]  Delete IP Address Of BMC.
-    [Arguments]  ${ip}  ${valid_status_codes}=${HTTP_OK}
-
-    # Description of argument(s):
-    # ip                  IP address to be deleted (e.g. "10.7.7.7").
-    # valid_status_codes  Expected return code from patch operation
-    #                     (e.g. "200").  See prolog of rest_request
-    #                     method in redfish_plus.py for details.
-
-    # Logout from LDAP user.
-    Redfish.Logout
-
-    # Login with local user.
-    Redfish.Login
-
-    ${empty_dict}=  Create Dictionary
-    ${patch_list}=  Create List
-
-    @{network_configurations}=  Get Network Configuration
-    FOR  ${network_configuration}  IN  @{network_configurations}
-      Run Keyword If  '${network_configuration['Address']}' == '${ip}'
-      ...  Append To List  ${patch_list}  ${null}
-      ...  ELSE  Append To List  ${patch_list}  ${empty_dict}
-    END
-
-    ${ip_found}=  Run Keyword And Return Status  List Should Contain Value
-    ...  ${patch_list}  ${null}  msg=${ip} does not exist on BMC
-    Pass Execution If  ${ip_found} == ${False}  ${ip} does not exist on BMC
-
-    # Run patch command only if given IP is found on BMC
-    ${data}=  Create Dictionary  IPv4StaticAddresses=${patch_list}
-
-    ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
-
-    # Logout from local user.
-    Redfish.Logout
-
-    # Login from LDAP user and check if we can delete IP address.
-    Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
-
-    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
-    ...  valid_status_codes=[${valid_status_codes}]
-
-    # Note: Network restart takes around 15-18s after patch request processing
-    Sleep  ${NETWORK_TIMEOUT}s
-    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
