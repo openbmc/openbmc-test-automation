@@ -35,11 +35,11 @@ Configure Valid MAC And Verify
     [Documentation]  Configure valid MAC via Redfish and verify.
     [Tags]  Configure_Valid_MAC_And_Verify
 
-    Configure MAC Settings  ${valid_mac}  valid
+    Configure MAC Settings  ${valid_mac}
 
     # Verify whether new MAC is configured on BMC and FW_Env.
     Validate MAC On BMC  ${valid_mac}
-    Verify MAC Address Via FW_Env  ${valid_mac}  valid
+    Verify MAC Address Via FW_Env  ${valid_mac}
 
 Configure Zero MAC And Verify
     [Documentation]  Configure zero MAC via Redfish and verify.
@@ -47,7 +47,7 @@ Configure Zero MAC And Verify
 
     [Template]  Configure MAC Settings
     # MAC address  scenario
-    ${zero_mac}    error
+    ${zero_mac}    [${HTTP_BAD_REQUEST}]
 
 Configure Broadcast MAC And Verify
     [Documentation]  Configure broadcast MAC via Redfish and verify.
@@ -55,7 +55,7 @@ Configure Broadcast MAC And Verify
 
     [Template]  Configure MAC Settings
     # MAC address    scenario
-    ${broadcast_mac}  error
+    ${broadcast_mac}  [${HTTP_BAD_REQUEST}]
 
 Configure Invalid MAC And Verify
     [Documentation]  Configure invalid MAC address which is a string.
@@ -63,13 +63,13 @@ Configure Invalid MAC And Verify
 
     [Template]  Configure MAC Settings
     # MAC Address        Expected_Result
-    ${special_char_mac}  error
+    ${special_char_mac}  [${HTTP_BAD_REQUEST}]
 
 Configure Valid MAC And Check Persistency
     [Documentation]  Configure valid MAC and check persistency.
     [Tags]  Configure_Valid_MAC_And_Check_Persistency
 
-    Configure MAC Settings  ${valid_mac}  valid
+    Configure MAC Settings  ${valid_mac}
 
     # Verify whether new MAC is configured on BMC.
     Validate MAC On BMC  ${valid_mac}
@@ -77,7 +77,7 @@ Configure Valid MAC And Check Persistency
     # Reboot BMC and check whether MAC is persistent on BMC and FW_Env.
     OBMC Reboot (off)
     Validate MAC On BMC  ${valid_mac}
-    Verify MAC Address Via FW_Env  ${valid_mac}  valid
+    Verify MAC Address Via FW_Env  ${valid_mac}
 
 Configure Invalid MAC And Verify On FW_Env
     [Documentation]  Configure Invalid  MAC via Redfish and verify on FW_Env.
@@ -86,29 +86,29 @@ Configure Invalid MAC And Verify On FW_Env
     [Template]  Configure MAC Settings
 
     # invalid_MAC        scenario
-    ${zero_mac}          error
-    ${broadcast_mac}     error
-    ${special_char_mac}  error
-    ${less_byte_mac}     error
+    ${zero_mac}          [${HTTP_BAD_REQUEST}]
+    ${broadcast_mac}     [${HTTP_BAD_REQUEST}]
+    ${special_char_mac}  [${HTTP_BAD_REQUEST}]
+    ${less_byte_mac}     [${HTTP_BAD_REQUEST}]
 
 Configure Invalid MAC And Verify Persistency On FW_Env
     [Documentation]  Configure invalid MAC and verify persistency on FW_Env.
     [Tags]  Configure_Invalid_MAC_And_Verify_Persistency_On_FW_Env
 
-    Configure MAC Settings  ${special_char_mac}  error
+    Configure MAC Settings  ${special_char_mac}  [${HTTP_BAD_REQUEST}]
 
     # Reboot BMC and check whether MAC is persistent on FW_Env.
     OBMC Reboot (off)
-    Verify MAC Address Via FW_Env  ${special_char_mac}  error
+    Verify MAC Address Via FW_Env  ${special_char_mac}  [${HTTP_BAD_REQUEST}]
 
 Configure Out Of Range MAC And Verify
     [Documentation]  Configure out of range MAC via Redfish and verify.
     [Tags]  Configure_Out_Of_Range_MAC_And_Verify
 
-    Configure MAC Settings  ${out_of_range_mac}  error
+    Configure MAC Settings  ${out_of_range_mac}  [${HTTP_BAD_REQUEST}]
 
     # Verify whether new MAC is configured on FW_Env.
-    Verify MAC Address Via FW_Env  ${out_of_range_mac}  error
+    Verify MAC Address Via FW_Env  ${out_of_range_mac}  [${HTTP_BAD_REQUEST}]
 
 Configure Less Byte MAC And Verify
     [Documentation]  Configure less byte MAC via Redfish and verify.
@@ -116,15 +116,15 @@ Configure Less Byte MAC And Verify
 
     [Template]  Configure MAC Settings
     # MAC address     scenario
-    ${less_byte_mac}  error
+    ${less_byte_mac}  [${HTTP_BAD_REQUEST}]
 
 Configure More Byte MAC And Verify
     [Documentation]  Configure more byte MAC via Redfish and verify.
     [Tags]  Configure_More_Byte_MAC_And_Verify
 
-    Configure MAC Settings  ${more_byte_mac}  error
+    Configure MAC Settings  ${more_byte_mac}  [${HTTP_BAD_REQUEST}]
     # Verify whether new MAC is configured on FW_Env.
-    Verify MAC Address Via FW_Env  ${more_byte_mac}  error
+    Verify MAC Address Via FW_Env  ${more_byte_mac}  [${HTTP_BAD_REQUEST}]
 
 
 *** Keywords ***
@@ -133,7 +133,7 @@ Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
     # Revert to initial MAC address.
-    Configure MAC Settings  ${initial_mac_address}  valid
+    Configure MAC Settings  ${initial_mac_address}
 
     # Verify whether new MAC is configured on BMC and FW_Env.
     Validate MAC On BMC  ${initial_mac_address}
@@ -161,7 +161,7 @@ Suite Setup Execution
 
 Configure MAC Settings
     [Documentation]  Configure MAC settings via Redfish.
-    [Arguments]  ${mac_address}  ${expected_result}
+    [Arguments]  ${mac_address}  ${valid_status_codes}=[${HTTP_OK}]
 
     # Description of argument(s):
     # mac_address      MAC address of BMC.
@@ -174,7 +174,7 @@ Configure MAC Settings
     ${payload}=  Create Dictionary  MACAddress=${mac_address}
 
     Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{payload}
-    ...  valid_status_codes=[200, 400, 500]
+    ...  valid_status_codes=${valid_status_codes}
 
     # After any modification on network interface, BMC restarts network
     # Note: Network restart takes around 15-18s after patch request processing.
@@ -187,18 +187,18 @@ Configure MAC Settings
     ${status}=  Run Keyword And Return Status
     ...  Validate MAC On BMC  ${mac_address}
 
-    Run Keyword If  '${expected_result}' == 'error'
+    Run Keyword If  ${valid_status_codes} == [${HTTP_BAD_REQUEST}]
     ...      Should Be Equal  ${status}  ${False}
     ...      msg=Allowing the configuration of an invalid MAC.
     ...  ELSE
     ...      Should Be Equal  ${status}  ${True}
     ...      msg=Not allowing the configuration of a valid MAC.
 
-    Verify MAC Address Via FW_Env  ${mac_address}  ${expected_result}
+    Verify MAC Address Via FW_Env  ${mac_address}  ${valid_status_codes}
 
 Verify MAC Address Via FW_Env
     [Documentation]  Verify MAC address on FW_Env.
-    [Arguments]  ${mac_address}  ${expected_result}
+    [Arguments]  ${mac_address}  ${valid_status_codes}=[${HTTP_OK}]
 
     # Description of argument(s):
     # mac_address      MAC address of BMC.
@@ -207,7 +207,7 @@ Verify MAC Address Via FW_Env
     ${status}=  Run Keyword And Return Status
     ...  Validate MAC On FW_Env  ${mac_address}
 
-    Run Keyword If  '${expected_result}' == 'error'
+    Run Keyword If  ${valid_status_codes} == [${HTTP_BAD_REQUEST}]
     ...      Should Be Equal  ${status}  ${False}
     ...      msg=Allowing the configuration of an invalid MAC.
     ...  ELSE
