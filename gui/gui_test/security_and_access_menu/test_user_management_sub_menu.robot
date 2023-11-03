@@ -34,8 +34,10 @@ ${xpath_auto_unlock}                     //*[@data-test-id='userManagement-radio
 ${xpath_manual_unlock}                   //*[@data-test-id='userManagement-radio-manualUnlock']
 ${xpath_max_failed_login}                //*[@data-test-id='userManagement-input-lockoutThreshold']
 ${test_user_password}                    TestPwd1
+${xpath_error_message}                   //*[contains(text(),'Error creating user')]
+${xpath_close_error_message}             //*/*[contains(text(),'Error')]/following-sibling::button
 @{username}                              admin_user  readonly_user  disabled_user
-
+@{list_user_privilege}                   Administrator  ReadOnly
 
 *** Test Cases ***
 
@@ -150,6 +152,27 @@ Delete User Account Via GUI
     Delete Users Via GUI  ${username}[0]
 
 
+Verify Proper Error While Creating Two Users With Same Name
+    [Documentation]  Verify proper error message while creating two user accounts with same username.
+    [Teardown]  Delete Users Via Redfish  ${username}
+    [Tags]  Verify_Proper_Error_While_Creating_Two_Users_With_Same_Name
+
+    # Get random username and user prilivege level.
+    ${username}=  Generate Random String  8  [LETTERS]
+    ${privilege_level}=  Evaluate  random.choice(${list_user_privilege})  random
+
+    # Create new user account.
+    Create User And Verify  ${username}  ${privilege_level}  ${True}
+
+    # Expect error while creating second user account with same username.
+    Run Keyword And Expect Error  Element*Success*not visible*
+    ...  Create User And Verify  ${username}  ${privilege_level}  ${True}
+
+    # Verify error message displayed when a user account creation fails and subsequently close the error message popup.
+    Wait Until Element Is Visible  ${xpath_error_message}  timeout=30
+    Click Element  ${xpath_close_error_message}
+
+
 *** Keywords ***
 
 Create User And Verify
@@ -179,6 +202,10 @@ Create User And Verify
 
     # Submit.
     Click Element  ${xpath_submit_button}
+
+    # Verify user creation success message popup.
+    Wait Until Element Is Visible  ${xpath_success_message}  timeout=30
+    Wait Until Element Is Not Visible  ${xpath_success_message}  timeout=60
 
     # Refresh page and check new user is available.
     Wait Until Page Contains Element  ${xpath_add_user}
