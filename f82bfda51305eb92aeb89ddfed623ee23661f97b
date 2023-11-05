@@ -1,0 +1,222 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c2e4560_b46a4799",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-05T16:52:12Z",
+      "side": 1,
+      "message": "please cut down commit message to 50 charachter only.\n\nE.g.\n\nEnhancement for multiple interface test scripts",
+      "range": {
+        "startLine": 7,
+        "startChar": 1,
+        "endLine": 9,
+        "endChar": 8
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4845dd43_5d268ae9",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-05T16:52:12Z",
+      "side": 1,
+      "message": "instead of channel_length it is better to say as active_channel_count",
+      "range": {
+        "startLine": 847,
+        "startChar": 6,
+        "endLine": 847,
+        "endChar": 20
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eaa5643_6e4383fd",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-05T16:52:12Z",
+      "side": 1,
+      "message": "please mention in comment why Redfish1 is created.",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 0
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef9245f8_96ecfd6e",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-05T16:52:12Z",
+      "side": 1,
+      "message": "spelling mistake and a space as mentioned below \n\nCheck DHCP Enabled status for eth0 Interface",
+      "range": {
+        "startLine": 304,
+        "startChar": 0,
+        "endLine": 304,
+        "endChar": 44
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c852b6c_69a02275",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-05T16:52:12Z",
+      "side": 1,
+      "message": "DHCP_enabled\n\nplease change through out the file.",
+      "range": {
+        "startLine": 312,
+        "startChar": 6,
+        "endLine": 312,
+        "endChar": 17
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adc8a956_616e07eb",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-05T16:52:12Z",
+      "side": 1,
+      "message": "spelling mistake and a space as mentioned below\n\nCheck DHCP Enabled Status For Eth1 Interface",
+      "range": {
+        "startLine": 321,
+        "startChar": 0,
+        "endLine": 321,
+        "endChar": 44
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a273962_469b71c3",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-05T16:52:12Z",
+      "side": 1,
+      "message": "end with period.",
+      "range": {
+        "startLine": 325,
+        "startChar": 1,
+        "endLine": 326,
+        "endChar": 43
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53b7cb47_617ad079",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-05T16:52:12Z",
+      "side": 1,
+      "message": "two space after \u0027Set Suite Variable\u0027 needed.\n\napplicable for throughout the new addition.",
+      "range": {
+        "startLine": 336,
+        "startChar": 9,
+        "endLine": 336,
+        "endChar": 27
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0634dec_1bc31791",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-05T16:52:12Z",
+      "side": 1,
+      "message": "please mention example what is returned in status is it True/False or 0/1 ?",
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "739585ea_5b71a786",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-05T16:52:12Z",
+      "side": 1,
+      "message": "end with period.",
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
