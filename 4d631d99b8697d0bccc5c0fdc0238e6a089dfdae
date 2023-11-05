@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55bf12fd_a8572efd",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2023-11-05T06:50:52Z",
+      "side": 1,
+      "message": "Missing - Description of argument(s):",
+      "revId": "4d631d99b8697d0bccc5c0fdc0238e6a089dfdae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f5b9e1a_b60e33c6",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2023-11-05T06:50:52Z",
+      "side": 1,
+      "message": "Should Be True  ${cmd_status}",
+      "range": {
+        "startLine": 431,
+        "startChar": 10,
+        "endLine": 431,
+        "endChar": 49
+      },
+      "revId": "4d631d99b8697d0bccc5c0fdc0238e6a089dfdae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f3d8132_ebcb9096",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2023-11-05T06:50:52Z",
+      "side": 1,
+      "message": "Should Not Be True ${cmd_status}",
+      "range": {
+        "startLine": 432,
+        "startChar": 15,
+        "endLine": 432,
+        "endChar": 55
+      },
+      "revId": "4d631d99b8697d0bccc5c0fdc0238e6a089dfdae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
