@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f03d9df_d2ae8434",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-05T16:12:25Z",
+      "side": 1,
+      "message": "minor comments please fix.",
+      "revId": "e999477ba35b41f78a9e775e0020c6a44fbb5ef0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7998a3c5_f2d50a5c",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-05T16:12:25Z",
+      "side": 1,
+      "message": "xpath_create_error_message ?",
+      "range": {
+        "startLine": 37,
+        "startChar": 2,
+        "endLine": 37,
+        "endChar": 21
+      },
+      "revId": "e999477ba35b41f78a9e775e0020c6a44fbb5ef0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d133ce1_110867fa",
@@ -14,6 +54,23 @@
       "writtenOn": "2023-11-03T16:02:38Z",
       "side": 1,
       "message": "Is it better to call \"Error while creating User with duplicate username\"?",
+      "revId": "e999477ba35b41f78a9e775e0020c6a44fbb5ef0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac12e5ae_e89d90e6",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-05T16:12:25Z",
+      "side": 1,
+      "message": "please place [Tags] after [Documentation]",
       "revId": "e999477ba35b41f78a9e775e0020c6a44fbb5ef0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
