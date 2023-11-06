@@ -45,6 +45,29 @@
       },
       "revId": "d549363940c3b1b2190ee35ce90f247f0c7f77fb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35594adb_933bdaed",
+        "filename": "lib/resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2023-11-06T05:46:49Z",
+      "side": 1,
+      "message": "agreed above comment.\nare you providing ${SEC_CHANNEL_NUMBER} through command if not add this\n${SECONDARY_CHANNEL_NUMBER}    2",
+      "range": {
+        "startLine": 103,
+        "startChar": 2,
+        "endLine": 103,
+        "endChar": 20
+      },
+      "revId": "d549363940c3b1b2190ee35ce90f247f0c7f77fb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
