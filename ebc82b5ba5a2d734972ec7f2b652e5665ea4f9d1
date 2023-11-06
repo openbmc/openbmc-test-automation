@@ -33,6 +33,57 @@
       "message": "All good Prashanth ?",
       "revId": "ebc82b5ba5a2d734972ec7f2b652e5665ea4f9d1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b15c176_4bd608af",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-11-06T04:57:39Z",
+      "side": 1,
+      "message": "Reduce variable length\nuse ${default_admin_passwd}",
+      "revId": "ebc82b5ba5a2d734972ec7f2b652e5665ea4f9d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c0eda92_034f210d",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-11-06T04:57:39Z",
+      "side": 1,
+      "message": "Better to add a Check for verifying if the password is valid\n\n${status} \u003d Run Keyword And Return Status Redfish.Patch  /redfish/v1/AccountService/Accounts/${admin_user} body\u003d{\u0027Password\u0027: \u0027AdminUser2\u0027}\n\nShould Be Equal  ${status} ${True}",
+      "revId": "ebc82b5ba5a2d734972ec7f2b652e5665ea4f9d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ff9c8b4_6e8b80af",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-11-06T04:57:39Z",
+      "side": 1,
+      "message": "Include Redfish.Logout in the Teardown.",
+      "revId": "ebc82b5ba5a2d734972ec7f2b652e5665ea4f9d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
