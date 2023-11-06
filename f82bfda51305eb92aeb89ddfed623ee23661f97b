@@ -72,6 +72,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c149a0c1_8088ca67",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-11-06T06:27:49Z",
+      "side": 1,
+      "message": "you can use \n${DHCPEnabled}\u003d  Get IPv4 DHCP Enabled Status  ${2}\nShould Be Equal  ${DHCPEnabled}  ${False}\n    \n${DHCPEnabled}\u003d  Get IPv4 DHCP Enabled Status ${1}\nShould Be Equal  ${DHCPEnabled}  ${False}",
+      "range": {
+        "startLine": 213,
+        "startChar": 4,
+        "endLine": 213,
+        "endChar": 30
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ef9245f8_96ecfd6e",
         "filename": "redfish/managers/test_multiple_interfaces.robot",
         "patchSetId": 1
@@ -83,6 +106,30 @@
       "writtenOn": "2023-11-05T16:52:12Z",
       "side": 1,
       "message": "spelling mistake and a space as mentioned below \n\nCheck DHCP Enabled status for eth0 Interface",
+      "range": {
+        "startLine": 304,
+        "startChar": 0,
+        "endLine": 304,
+        "endChar": 44
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fd2023a_517ef0dc",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-11-06T06:27:49Z",
+      "side": 1,
+      "message": "This change has been included in\nlib/bmc_network_utils.robot\n\nJust use the channel number either 1 or 2 as per ethernet interface.\n${DHCPEnabled}\u003d Get IPv4 DHCP Enabled Status ${1}\nShould Be Equal ${DHCPEnabled} ${False}",
+      "parentUuid": "ef9245f8_96ecfd6e",
       "range": {
         "startLine": 304,
         "startChar": 0,
@@ -135,6 +182,23 @@
         "endLine": 321,
         "endChar": 44
       },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62720d68_acb934d4",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-11-06T06:27:49Z",
+      "side": 1,
+      "message": "Use\n${DHCPEnabled}\u003d Get IPv4 DHCP Enabled Status ${2}\nShould Be Equal ${DHCPEnabled} ${False}",
       "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -198,6 +262,24 @@
       "writtenOn": "2023-11-05T16:52:12Z",
       "side": 1,
       "message": "please mention example what is returned in status is it True/False or 0/1 ?",
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63927496_11ed0a4d",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-11-06T06:27:49Z",
+      "side": 1,
+      "message": "This keyword is already included in \nlib/bmc_network_utils.robot",
+      "parentUuid": "b0634dec_1bc31791",
       "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
