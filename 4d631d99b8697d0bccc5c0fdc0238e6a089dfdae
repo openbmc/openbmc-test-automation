@@ -62,6 +62,29 @@
       },
       "revId": "4d631d99b8697d0bccc5c0fdc0238e6a089dfdae",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a685804_197a27fa",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-11-06T05:44:05Z",
+      "side": 1,
+      "message": "Please reduce the timer.\nas Patch operation takes 1 to 3 seconds to set new value",
+      "range": {
+        "startLine": 744,
+        "startChar": 33,
+        "endLine": 744,
+        "endChar": 45
+      },
+      "revId": "4d631d99b8697d0bccc5c0fdc0238e6a089dfdae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
