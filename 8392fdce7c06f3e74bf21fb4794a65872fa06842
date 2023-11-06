@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "618a0735_59c635fc",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-06T07:02:35Z",
+      "side": 1,
+      "message": "exceeding 110 line limit",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 264,
+        "endChar": 128
+      },
+      "revId": "8392fdce7c06f3e74bf21fb4794a65872fa06842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6708be0a_34ecf742",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-06T07:02:35Z",
+      "side": 1,
+      "message": "Please set initial power cap value in the teardown",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 30
+      },
+      "revId": "8392fdce7c06f3e74bf21fb4794a65872fa06842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a26571a2_59c46c3e",
         "filename": "ipmi/test_ipmi_general.robot",
         "patchSetId": 6
@@ -14,6 +60,121 @@
       "writtenOn": "2023-11-05T17:19:00Z",
       "side": 1,
       "message": "please place [Tags] before [Documentation].",
+      "revId": "8392fdce7c06f3e74bf21fb4794a65872fa06842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe8849bc_1f617306",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-06T07:02:35Z",
+      "side": 1,
+      "message": "Remove the blank line after this. its not required.",
+      "range": {
+        "startLine": 273,
+        "startChar": 0,
+        "endLine": 273,
+        "endChar": 43
+      },
+      "revId": "8392fdce7c06f3e74bf21fb4794a65872fa06842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80796721_e1d8f78d",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-06T07:02:35Z",
+      "side": 1,
+      "message": "This is not required.",
+      "range": {
+        "startLine": 285,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 55
+      },
+      "revId": "8392fdce7c06f3e74bf21fb4794a65872fa06842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4efb0748_cd5a8a95",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-06T07:02:35Z",
+      "side": 1,
+      "message": "Please add example of above output",
+      "range": {
+        "startLine": 291,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 47
+      },
+      "revId": "8392fdce7c06f3e74bf21fb4794a65872fa06842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05c28189_698dae99",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-06T07:02:35Z",
+      "side": 1,
+      "message": "ipmi_power_cap_value",
+      "range": {
+        "startLine": 295,
+        "startChar": 6,
+        "endLine": 295,
+        "endChar": 17
+      },
+      "revId": "8392fdce7c06f3e74bf21fb4794a65872fa06842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d58955c5_2dc4d888",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-06T07:02:35Z",
+      "side": 1,
+      "message": "just check if random_power_cap is getting reflected in IPMI\n\n    Should Be Equal  `${random_power_cap}`  `${ipmi_power_cap_value}`",
+      "range": {
+        "startLine": 299,
+        "startChar": 0,
+        "endLine": 299,
+        "endChar": 57
+      },
       "revId": "8392fdce7c06f3e74bf21fb4794a65872fa06842",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
