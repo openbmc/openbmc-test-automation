@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1949aaf_98005aa7",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-07T06:53:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "618a0735_59c635fc",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 264,
+        "endChar": 128
+      },
+      "revId": "8392fdce7c06f3e74bf21fb4794a65872fa06842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6708be0a_34ecf742",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-06T07:02:35Z",
       "side": 1,
       "message": "Please set initial power cap value in the teardown",
+      "range": {
+        "startLine": 266,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 30
+      },
+      "revId": "8392fdce7c06f3e74bf21fb4794a65872fa06842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c86fc44b_3c6ce6b7",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-07T06:53:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6708be0a_34ecf742",
       "range": {
         "startLine": 266,
         "startChar": 0,
@@ -64,6 +112,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7173aeff_55141d06",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-07T06:53:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a26571a2_59c46c3e",
+      "revId": "8392fdce7c06f3e74bf21fb4794a65872fa06842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe8849bc_1f617306",
@@ -77,6 +143,30 @@
       "writtenOn": "2023-11-06T07:02:35Z",
       "side": 1,
       "message": "Remove the blank line after this. its not required.",
+      "range": {
+        "startLine": 273,
+        "startChar": 0,
+        "endLine": 273,
+        "endChar": 43
+      },
+      "revId": "8392fdce7c06f3e74bf21fb4794a65872fa06842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5556ef2_adc8e5c8",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-07T06:53:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe8849bc_1f617306",
       "range": {
         "startLine": 273,
         "startChar": 0,
@@ -110,6 +200,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d6a3b81_7c33409e",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-07T06:53:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80796721_e1d8f78d",
+      "range": {
+        "startLine": 285,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 55
+      },
+      "revId": "8392fdce7c06f3e74bf21fb4794a65872fa06842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4efb0748_cd5a8a95",
@@ -123,6 +237,30 @@
       "writtenOn": "2023-11-06T07:02:35Z",
       "side": 1,
       "message": "Please add example of above output",
+      "range": {
+        "startLine": 291,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 47
+      },
+      "revId": "8392fdce7c06f3e74bf21fb4794a65872fa06842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae986301_80be4f3b",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-07T06:53:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4efb0748_cd5a8a95",
       "range": {
         "startLine": 291,
         "startChar": 0,
@@ -156,6 +294,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "245ab305_5f68ebe7",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-07T06:53:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05c28189_698dae99",
+      "range": {
+        "startLine": 295,
+        "startChar": 6,
+        "endLine": 295,
+        "endChar": 17
+      },
+      "revId": "8392fdce7c06f3e74bf21fb4794a65872fa06842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d58955c5_2dc4d888",
@@ -169,6 +331,30 @@
       "writtenOn": "2023-11-06T07:02:35Z",
       "side": 1,
       "message": "just check if random_power_cap is getting reflected in IPMI\n\n    Should Be Equal  `${random_power_cap}`  `${ipmi_power_cap_value}`",
+      "range": {
+        "startLine": 299,
+        "startChar": 0,
+        "endLine": 299,
+        "endChar": 57
+      },
+      "revId": "8392fdce7c06f3e74bf21fb4794a65872fa06842",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1abdb37_b73102f6",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-07T06:53:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d58955c5_2dc4d888",
       "range": {
         "startLine": 299,
         "startChar": 0,
