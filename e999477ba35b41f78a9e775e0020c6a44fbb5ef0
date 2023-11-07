@@ -65,6 +65,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2610f1d4_69ce77fc",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-07T11:57:26Z",
+      "side": 1,
+      "message": "we are just verifying the error message from the above xpath.",
+      "parentUuid": "7998a3c5_f2d50a5c",
+      "range": {
+        "startLine": 37,
+        "startChar": 2,
+        "endLine": 37,
+        "endChar": 21
+      },
+      "revId": "e999477ba35b41f78a9e775e0020c6a44fbb5ef0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d133ce1_110867fa",
@@ -100,6 +124,42 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3359c1bd_eab3131d",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-07T11:57:26Z",
+      "side": 1,
+      "message": "Reframed the test case name.",
+      "parentUuid": "4d133ce1_110867fa",
+      "revId": "e999477ba35b41f78a9e775e0020c6a44fbb5ef0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6020deea_b287e2d9",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-07T11:57:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "265d1e02_5c4436a0",
+      "revId": "e999477ba35b41f78a9e775e0020c6a44fbb5ef0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac12e5ae_e89d90e6",
@@ -117,6 +177,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b200886_7684f28f",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-07T11:57:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac12e5ae_e89d90e6",
+      "revId": "e999477ba35b41f78a9e775e0020c6a44fbb5ef0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1a8fd9c_bdf30d2c",
@@ -130,6 +208,30 @@
       "writtenOn": "2023-11-06T06:41:54Z",
       "side": 1,
       "message": "Just use below changes.\n\nCreate User And Verify  ${username}  ${privilege_level}  ${True}  Failure",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 47
+      },
+      "revId": "e999477ba35b41f78a9e775e0020c6a44fbb5ef0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "827e406e_1df1dda2",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-07T11:57:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1a8fd9c_bdf30d2c",
       "range": {
         "startLine": 168,
         "startChar": 0,
@@ -163,6 +265,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf14957b_f9e29f31",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-07T11:57:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "522216a8_9ed8f49f",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 186,
+        "endChar": 90
+      },
+      "revId": "e999477ba35b41f78a9e775e0020c6a44fbb5ef0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f250d5e_0ff9257d",
@@ -176,6 +302,30 @@
       "writtenOn": "2023-11-06T06:41:54Z",
       "side": 1,
       "message": "```\nIf  ${expected_status} \u003d\u003d Success\n    Wait Until Element Is Visible  ${xpath_success_message}  timeout\u003d30\nElse\n    Wait Until Element Is Visible  ${xpath_error_message}  timeout\u003d60\n    Wait Until Element Is Not Visible  ${xpath_error_message}  timeout\u003d60\n    Exit the keyword\n    ```",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 75
+      },
+      "revId": "e999477ba35b41f78a9e775e0020c6a44fbb5ef0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b76cf1b0_11192f94",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-07T11:57:26Z",
+      "side": 1,
+      "message": "modified code accordingly.",
+      "parentUuid": "6f250d5e_0ff9257d",
       "range": {
         "startLine": 207,
         "startChar": 0,
