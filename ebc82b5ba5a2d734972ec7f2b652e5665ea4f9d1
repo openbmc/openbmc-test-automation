@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0c7fb4e_bdfca0fd",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-11-07T05:54:00Z",
+      "side": 1,
+      "message": "This is verification if the password set is valid or not.\n\n#261 is for checking if user is able to login with updated password.",
+      "parentUuid": "42765733_eae1c621",
+      "revId": "ebc82b5ba5a2d734972ec7f2b652e5665ea4f9d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ff9c8b4_6e8b80af",
         "filename": "security/test_bmc_expire_password.robot",
         "patchSetId": 2
