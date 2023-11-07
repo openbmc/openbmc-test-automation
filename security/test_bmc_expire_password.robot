@@ -243,6 +243,22 @@ Verify Expire Admin Password And Update Bad Password Length Via Redfish
    Should Be Equal  ${status}  ${False}
 
 
+Verify Error While Creating User With Expired Admin Password
+    [Documentation]  Expire admin password and expect an error while creating new user.
+    [Tags]  Verify_Error_While_Creating_User_With_Expired_Admin_Password
+    [Teardown]  Restore Default Password For Admin User
+
+    Expire Password  ${admin_user}
+
+    Verify User Password Expired Using Redfish  ${admin_user}  ${default_adminuser_passwd}
+
+    # Create new user with expired admin password and expect an error.
+    ${payload}=  Create Dictionary
+    ...  UserName=admin_user1  Password=TestPwd123  RoleId=Administrator  Enabled=${True}
+    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    ...  valid_status_codes=[${HTTP_FORBIDDEN}]
+
+
 *** Keywords ***
 
 Set Account Lockout Threshold
@@ -298,3 +314,13 @@ Expire Password
     # passwd: password changed.
 
     Close All Connections
+
+
+Restore Default Password For Admin User
+    [Documentation]  Restore default password for admin user (i.e. AdminUser1).
+
+    # Set default password for admin user.
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/${admin_user}
+    ...   body={'Password': '${default_adminuser_passwd}'}  valid_status_codes=[${HTTP_OK}]
+    # Verify that admin user is able to run Redfish command using default password.
+    Redfish.Logout
