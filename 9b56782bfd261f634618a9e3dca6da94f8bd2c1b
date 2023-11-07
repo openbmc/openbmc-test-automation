@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abb7d7f1_29ee9b80",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-11-07T06:06:56Z",
+      "side": 1,
+      "message": "Give spaces\nShould Be Equal  ${status}  ${True}",
+      "range": {
+        "startLine": 260,
+        "startChar": 3,
+        "endLine": 260,
+        "endChar": 36
+      },
+      "revId": "9b56782bfd261f634618a9e3dca6da94f8bd2c1b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
