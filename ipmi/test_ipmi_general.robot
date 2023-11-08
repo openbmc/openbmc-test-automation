@@ -207,17 +207,17 @@ Verify Chassis Identify via IPMI
 
     # Set to default "chassis identify" and verify that LED blinks for 15s.
     Run IPMI Standard Command  chassis identify
-    Verify Identify LED State Via Redfish  Lit
+    Verify Identify LED State Via Redfish  True
 
     Sleep  18s
-    Verify Identify LED State Via Redfish  Off
+    Verify Identify LED State Via Redfish  False
 
     # Set "chassis identify" to 10s and verify that the LED blinks for 10s.
     Run IPMI Standard Command  chassis identify 10
-    Verify Identify LED State Via Redfish  Lit
+    Verify Identify LED State Via Redfish  True
 
     Sleep  12s
-    Verify Identify LED State Via Redfish  Off
+    Verify Identify LED State Via Redfish  False
 
 
 Verify Chassis Identify Off And Force Identify On via IPMI
@@ -228,11 +228,11 @@ Verify Chassis Identify Off And Force Identify On via IPMI
 
     # Set the LED to "Force Identify On".
     Run IPMI Standard Command  chassis identify force
-    Verify Identify LED State Via Redfish  Lit
+    Verify Identify LED State Via Redfish  True
 
     # Set "chassis identify" to 0 and verify that the LED turns off.
     Run IPMI Standard Command  chassis identify 0
-    Verify Identify LED State Via Redfish  Off
+    Verify Identify LED State Via Redfish  False
 
 
 Set Power Cap Value Via IPMI And Verify Using Redfish
@@ -366,7 +366,7 @@ Verify Identify LED State Via Redfish
     # Python module:  get_member_list(resource_path)
     ${systems}=  Redfish_Utils.Get Member List  /redfish/v1/Systems
     FOR  ${system}  IN  @{systems}
-        ${led_value}=  Redfish.Get Attribute  ${system}  IndicatorLED
+        ${led_value}=  Redfish.Get Attribute  ${system}  LocationIndicatorActive
         # Get attribute return None if IndicatorLED does not exist in the URI.
         Continue For Loop If  '${led_value}' == 'None'
         Should Be True  '${led_value}' == '${expected_state}'
