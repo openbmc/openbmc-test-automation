@@ -51,10 +51,11 @@ Send Network Packets
     # by default it sends 100 TCP packets at 5 packets/second.
 
     ${cmd_buff}=  Run Keyword If  '${packet_type}' == 'icmp'
-    ...  Set Variable  nping --delay ${delay} ${host} -c ${count} --${packet_type}
+    ...  Set Variable
+    ...  echo ${CLIENT_PASSWORD} | sudo -S nping --delay ${delay} ${host} -c ${count} --${packet_type}
     ...  ELSE
     ...  Set variable
-    ...  nping --delay ${delay} ${host} -c ${count} -p ${port} --${packet_type}
+    ...  echo ${CLIENT_PASSWORD} | sudo -S nping --delay ${delay} ${host} -c ${count} -p ${port} --${packet_type}
     ${rc}  ${output}  Run And Return RC And Output  ${cmd_buff}
     Should Be Equal As Integers  ${rc}  0  msg=Command execution failed.
     ${packet_loss}  Get Packet Loss  ${host}  ${output}

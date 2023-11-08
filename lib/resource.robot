@@ -169,6 +169,8 @@ ${FFDC_DEFAULT}            ${1}
 # 2 NTP Address - 14.139.60.103  14.139.60.106
 @{NTP_SERVER_ADDRESSES}    ${EMPTY}
 
+# Client related parameters
+${CLIENT_PASSWORD}         ${EMPTY}
 
 # Task Service related variables.
 ${TASK_JSON_FILE_PATH}   data/task_state.json
