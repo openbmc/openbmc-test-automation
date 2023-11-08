@@ -502,6 +502,8 @@ Create SEL
 
     Should Not Contain  ${resp}  00 00  msg=SEL not created.
 
+    Sleep  5s
+
     [Return]  ${resp}
 
 
