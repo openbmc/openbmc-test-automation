@@ -353,6 +353,16 @@ def get_sdr_info():
     return result
 
 
+def fetch_sdr_type(sdr_oem_data):
+    data=sdr_oem_data.split("\n")
+    list1=[]
+    for i, j in enumerate(data):
+        a=j.split(":")
+        if a[0].strip() == "SDR record type":
+            list1.append(a[1].strip())
+    return list1.count('0xc0')
+
+
 def get_aux_version(version_id):
     r"""
     Get IPMI Aux version info data and return it.
