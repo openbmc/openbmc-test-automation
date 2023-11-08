@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cd90ae0_00d3f6ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-11-08T10:30:23Z",
+      "side": 1,
+      "message": "+++ b/lib/ipmi_utils.py\n@@ -354,13 +354,13 @@ def get_sdr_info():\n \n \n def fetch_sdr_type(sdr_oem_data):\n-    data\u003dsdr_oem_data.split(\"\\n\")\n-    list1\u003d[]\n+    data \u003d sdr_oem_data.split(\"\\n\")\n+    list1 \u003d []\n     for i, j in enumerate(data):\n-        a\u003dj.split(\":\")\n+        a \u003d j.split(\":\")\n         if a[0].strip() \u003d\u003d \"SDR record type\":\n             list1.append(a[1].strip())\n-    return list1.count(\u00270xc0\u0027)\n+    return list1.count(\"0xc0\")\n \n \n def get_aux_version(version_id):\nFormat: FAILED\n\n\nplease fix the CI failure",
+      "revId": "1faa141462644fda461346853565754c5af37b95",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
