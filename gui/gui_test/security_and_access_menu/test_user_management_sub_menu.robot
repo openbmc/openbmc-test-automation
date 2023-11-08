@@ -169,6 +169,44 @@ Verify Error While Creating Users With Same Name
     Create User And Verify  ${username}  ${privilege_level}  ${True}  Failure
 
 
+Modify User Account Privilege Via GUI
+    [Documentation]  Change user account privilege via GUI.
+    [Tags]  Modify_User_Account_Privilege_Via_GUI
+    [Teardown]  Delete Users Via Redfish  ${username}
+
+    # Get random username and user privilege level.
+    ${username}=  Generate Random String  8  [LETTERS]
+    ${privilege_level}=  Evaluate  random.choice(${user_privilege_list})  random
+
+    # Create new user account.
+    Create User And Verify  ${username}  ${privilege_level}  ${True}
+ 
+    # Get user privilege role details distinct from the current ones.
+    FOR  ${privilege}  IN  @{user_privilege_list}
+      IF  '${privilege}' != '${privilege_level}'
+          ${modify_privilege}=  Set Variable  ${privilege}
+      END
+    END
+
+    # Modify user privilege via GUI.
+    Wait Until Keyword Succeeds  30 sec   5 sec  Click Element
+    ...  //td[text()='${username}']/following-sibling::*/*/*[@title='Edit user']
+    Select From List by Value  ${xpath_privilege_list_button}  ${modify_privilege}
+
+    # Submit changes.
+    Click Element  ${xpath_submit_button}
+ 
+    # Confirm the successful update.
+    Wait Until Element Is Visible  ${xpath_success_message}  timeout=30
+    Wait Until Element Is Not Visible  ${xpath_success_message}  timeout=30
+
+    # Verify GUI modification via Redfish.
+    Redfish.Login
+    ${resp}=  Redfish.Get  /redfish/v1/AccountService/Accounts/${username}
+    Should Be Equal  ${resp.dict["RoleId"]}  ${modify_privilege}
+    Redfish.Logout
+
+
 *** Keywords ***
 
 Create User And Verify
