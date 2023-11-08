@@ -79,6 +79,16 @@ Verify LED Fans Asserted At Runtime
     On                  "xyz.openbmc_project.Led.Physical.Action.Off"   Off
 
 
+Verify Location Indicator Active status
+    [Documentation]  Verify the Location Indicator Active status to true or false.
+    [Tags]  Verify_Location_Indicator_Active_status
+    [setup]     Set Suite LED Indicator Initial Value
+    [Teardown]  Set Intial Value  ${value}
+
+
+   Set And Verify LED Location Indicator Active  ${set_value}
+
+
 *** Keywords ***
 
 Set and Verify Lamp LED Indicator
@@ -216,3 +226,41 @@ Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
     FFDC On Test Case Fail
+
+
+Set Suite LED Indicator Initial Value
+    [Documentation]  set suite For LED Initial value.
+
+    ${value}=  Redfish.Get Attribute      /redfish/v1/Systems/system  LocationIndicatorActive
+    Set Suite Variable  ${value}
+
+    IF  ${value} == False
+        Set Suite Variable  ${set_value}  ${True}
+    ELSE
+        Set Suite Variable  ${set_value}  ${False}
+    END
+
+
+Set And Verify LED Location Indicator Active
+    [Documentation]  Set And Verify LED Location Indicator State.
+    [Arguments]  ${set_value}
+
+    ${payload}=  Create Dictionary    LocationIndicatorActive=${set_value}
+    Redfish.Patch      /redfish/v1/Systems/system    body=&{payload}
+    ...  valid_status_codes=[${HTTP_NO_CONTENT}]
+
+    ${value}=  Redfish.Get Attribute      /redfish/v1/Systems/system  LocationIndicatorActive
+
+    Should Be Equal As Strings  ${value}    ${set_value}
+
+
+Set Intial Value
+    [Documentation]  setting back Initial value.
+    [Arguments]  ${value}
+
+    ${payload}=  Create Dictionary    LocationIndicatorActive=${value}
+    Redfish.Patch      /redfish/v1/Systems/system    body=&{payload}
+    ...  valid_status_codes=[${HTTP_NO_CONTENT}]
+
+    ${intial_value}=  Redfish.Get Attribute      /redfish/v1/Systems/system  LocationIndicatorActive
+    Should Be Equal As Strings  ${intial_value}  ${value}
