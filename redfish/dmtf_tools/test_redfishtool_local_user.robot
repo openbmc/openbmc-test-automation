@@ -119,9 +119,9 @@ Verify Error While Creating User With Invalid Role
     Redfishtool Create User  "UserT100"  "TestPwd123"  "wrongroleid"  true  expected_error=${HTTP_BAD_REQUEST}
 
 
-Verify Minimum Password Length For Redfish User
+Verify Minimum Password Length For Redfish User Using Redfishtool
     [Documentation]  Verify minimum password length of eight characters for new and existing user.
-    [Tags]  Verify_Minimum_Password_Length_For_Redfish_User
+    [Tags]  Verify_Minimum_Password_Length_For_Redfish_User_Using_Redfishtool
     [Teardown]  Redfishtool Delete User  "UserT100"
 
     Redfishtool Create User  "UserT100"  "TestPwd"  "ReadOnly"  true  expected_error=${HTTP_BAD_REQUEST}
