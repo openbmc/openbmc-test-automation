@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f32ef473_bb4a98b0",
+        "filename": "redfish/systems/test_led_indicator_asserted.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-11-08T09:15:48Z",
+      "side": 1,
+      "message": "How about this \n\nVerify Location Indicator Active status\n    [Documentation]  Verify the Location Indicator Active status to true or false.\n    [Tags]  Verify_Location_Indicator_Active_status\n    [setup]  Set And Verify LED Location Indicator Active  ${set_value}\n     \n\t# Indicator_status\n\t${True}\n\t${False}\n\n\nIn that way, it test both setting true and false.. irrespective of what was set and covers both use cases.",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 61
+      },
+      "revId": "9a99751b3bd8b9c3c55258a2ea71080000be697c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7922e4c_6f093c33",
+        "filename": "redfish/systems/test_led_indicator_asserted.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-11-08T09:15:48Z",
+      "side": 1,
+      "message": "Remove this if the above comment is accepted.",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 7
+      },
+      "revId": "9a99751b3bd8b9c3c55258a2ea71080000be697c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
