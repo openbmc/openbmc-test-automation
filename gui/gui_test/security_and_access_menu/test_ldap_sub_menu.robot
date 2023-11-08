@@ -100,6 +100,7 @@ Verify Create LDAP Configuration
 Verify LDAP Config Update With Incorrect LDAP IP Address
     [Documentation]  Verify that LDAP login fails with incorrect LDAP IP Address.
     [Tags]  Verify_LDAP_Config_Update_With_Incorrect_LDAP_IP_Address
+    [Setup]  Redfish.Login
     [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
 
     Create LDAP Configuration  ${incorrect_ip}   ${LDAP_TYPE}  ${LDAP_BIND_DN}
