@@ -72,6 +72,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "298b8e4a_73c522cd",
+        "filename": "gui/gui_test/gui_header/test_gui_header.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2023-11-08T09:15:42Z",
+      "side": 1,
+      "message": "removed those variables.",
+      "parentUuid": "844c5e84_21e08418",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 64
+      },
+      "revId": "dc9f9d1058fc80cfbfe51c84c10f58ae2e7d0a06",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cf0f42a_48a14864",
