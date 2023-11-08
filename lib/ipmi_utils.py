@@ -353,6 +353,32 @@ def get_sdr_info():
     return result
 
 
+def fetch_sdr_count(sdr_data):
+    r"""
+    Get IPMI SDR list and return it.
+
+    The data is obtained by issuing the IPMI "sdr elist -vvv" command.  An
+    example is shown below:
+
+    SDR record ID   : 0x00cb
+    SDR record ID   : 0x00cc
+    SDR record type : 0xc0
+    SDR record next : 0xffff
+    SDR record bytes: 11
+    Getting 11 bytes from SDR at offset 5
+
+    For the data shown above, the SDR record type with 0xc0 count will be returned.
+    """
+
+    data = sdr_data.split("\n")
+    sdr_list = []
+    for i, j in enumerate(data):
+        a = j.split(":")
+        if a[0].strip() == "SDR record type":
+            sdr_list.append(a[1].strip())
+    return sdr_list.count("0xc0")
+
+
 def get_aux_version(version_id):
     r"""
     Get IPMI Aux version info data and return it.
