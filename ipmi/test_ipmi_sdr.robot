@@ -47,10 +47,15 @@ Verify SDR Info
     ${sdr_info}=  Get SDR Info
     Should Be Equal  ${sdr_info['sdr_version']}  0x51
 
+    # Get sdr oem record count from "sdr elist -vvv" command output.
+    ${sdr_data}=  Run IPMI Standard Command  sdr elist -vvv
+    ${sdr_oem}=  Fetch Sdr Type  ${sdr_data}
+    ${sdr_info_record_count}=  Evaluate  ${sdr_info['record_count']} - ${sdr_oem}
+
     # Get sensor count from "sdr elist all" command output.
     ${sensor_count}=  Get Sensor Count
     Should Be Equal As Strings
-    ...  ${sdr_info['record_count']}  ${sensor_count}
+    ...  ${sdr_info_record_count}  ${sensor_count}
 
     Should Be Equal  ${sdr_info['free_space']}  unspecified
     Should Not Be Equal  ${sdr_info['most_recent_addition']}  ${EMPTY}
