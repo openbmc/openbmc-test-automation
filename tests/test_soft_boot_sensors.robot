@@ -59,7 +59,7 @@ Verify Boot AttemptsLeft When Power Off
     [Template]  Validate Boot AttemptsLeft
 
     # System at standby    AttemptsLeft
-    Off                    2
+    Off                    3
 
 
 Verify Boot Sensor States At Ready
