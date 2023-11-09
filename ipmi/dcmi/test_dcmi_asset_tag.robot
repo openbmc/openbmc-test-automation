@@ -63,11 +63,10 @@ Set Asset Tag With Invalid String Length Via DCMI Command
     [Documentation]  Set asset tag with invalid string length and verify.
     [Tags]  Set_Asset_Tag_With_Invalid_String_Length_Via_DCMI_Command
 
-    ${random_string}=  Generate Random String  ${16}
+    ${random_string}=  Generate Random String  ${17}
     ${string_hex_list}=  convert_name_into_bytes_with_prefix  ${random_string}
     ${random_hex}=  Catenate  @{string_hex_list}
-    ${number_of_random_string}=  Evaluate  ${16} + 1
-    ${number_of_bytes_to_write}=  Get Response Length In Hex  ${number_of_random_string}
+    ${number_of_bytes_to_write}=  Get Response Length In Hex  ${17}
 
     ${cmd}=  Catenate  ${DCMI_RAW_CMD['DCMI']['Asset_Tag'][1]} 0x${number_of_bytes_to_write} ${random_hex}
     ${resp}=  Run Keyword And Expect Error  *
@@ -92,12 +91,11 @@ Set Valid Asset Tag
     [Documentation]  Set valid length asset tag.
 
     # 16 bytes maximum as per dcmi spec
-    ${random_int}=  Evaluate  random.randint(1, 15)  modules=random
+    ${random_int}=  Evaluate  random.randint(1, 17)  modules=random
     ${random_string}=  Generate Random String  ${random_int}
     ${string_hex_list}=  convert_name_into_bytes_with_prefix  ${random_string}
     ${random_hex}=  Catenate  @{string_hex_list}
-    ${number_of_random_string}=  Evaluate  ${random_int} + 1
-    ${number_of_bytes_to_write}=  Get Response Length In Hex  ${number_of_random_string}
+    ${number_of_bytes_to_write}=  Get Response Length In Hex  ${random_int}
 
     ${cmd}=  Catenate  ${DCMI_RAW_CMD['DCMI']['Asset_Tag'][1]} 0x${number_of_bytes_to_write} ${random_hex}
     ${ret}=  Run External IPMI Raw Command  ${cmd}
