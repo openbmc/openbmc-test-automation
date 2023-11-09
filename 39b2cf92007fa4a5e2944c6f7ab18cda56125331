@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b715724_49babf68",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2023-11-09T19:21:12Z",
+      "side": 1,
+      "message": "Can you please explain how this works?\n\nAccording to the bmcweb code `Diags` sets DBUS interface to `\"xyz.openbmc_project.Control.Boot.Mode.Modes.Safe\"`\nhttps://github.com/openbmc/bmcweb/blob/63509dd54c3290750961899125d588ea5f339023/redfish-core/lib/systems.hpp#L860\n\nAnd phosphor-ipmi-hostd maps this value to 3 https://github.com/openbmc/phosphor-host-ipmid/blob/1214d6cc51cbbde74b0b2b486cf161af6b616d65/chassishandler.cpp#L1540C12-L1540C15\n\nAnd according to the IPMI specification `Boot device selector \u003d\u003d 3` means:\n```\n0011b \u003d Force boot from default Hard-drive, request Safe Mode\n```",
+      "revId": "39b2cf92007fa4a5e2944c6f7ab18cda56125331",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
