@@ -32,8 +32,8 @@ Set Asset Tag With Invalid String Length
     # Any string more than 63 character is invalid for asset tag.
     ${random_string}=  Generate Random String  64
 
-    ${resp}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
-    ...  dcmi set_asset_tag ${random_string}
+    ${resp}=  Run IPMI Standard Command
+    ...  dcmi set_asset_tag ${random_string}  fail_on_err=0
     Should Contain  ${resp}  Parameter out of range  ignore_case=True
 
 
