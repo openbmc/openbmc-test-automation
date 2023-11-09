@@ -47,7 +47,7 @@ Library         ../lib/utils_files.py
 Library         ../lib/logging_utils.py
 Library         ../syslib/utils_os.py
 
-Suite Setup     Run Keyword  Start SOL Console Logging
+Suite Setup     Run Keyword And Ignore Error  Start SOL Console Logging
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 
