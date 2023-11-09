@@ -47,7 +47,7 @@ Library         ../lib/utils_files.py
 Library         ../lib/logging_utils.py
 Library         ../syslib/utils_os.py
 
-Suite Setup     Run Keyword  Start SOL Console Logging
+Suite Setup     Run Keyword And Ignore Error  Start SOL Console Logging
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 
@@ -267,7 +267,7 @@ Test Teardown Execution
 
     ${keyword_buf}=  Catenate  Stop SOL Console Logging
     ...  \ targ_file_path=${EXECDIR}${/}logs${/}SOL.log
-    Run Key  ${keyword_buf}
+    Run Keyword And Ignore Error   ${keyword_buf}
 
     FFDC On Test Case Fail
     Close All Connections

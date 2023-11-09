@@ -18,7 +18,7 @@ Resource        ../lib/openbmc_ffdc_utils.robot
 Library         ../syslib/utils_os.py
 Library         DateTime
 
-Suite Setup     Start SOL Console Logging
+Suite Setup     Run Keyword And Ignore Error  Start SOL Console Logging
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 
@@ -174,6 +174,6 @@ Test Teardown Execution
 
     ${keyword_buf}=  Catenate  Stop SOL Console Logging
     ...  \ targ_file_path=${EXECDIR}${/}logs${/}SOL.log
-    Run Key  ${keyword_buf}
+    Run Keyword And Ignore Error   ${keyword_buf}
 
     Close All Connections
