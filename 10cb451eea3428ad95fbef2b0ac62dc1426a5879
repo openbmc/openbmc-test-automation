@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39009d6d_3722fed2",
+        "filename": "redfish/systems/test_led_indicator_asserted.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-11-09T15:42:12Z",
+      "side": 1,
+      "message": "Get LED Indicator Initial Value\n\nand in general coding terms \n\nGET - returns back values to the caller\n\n\nIf your intention is to GET and set a variable for the suite.. \n\nThe keyword should be something like\n\nSet Suite LED Indicator Initial Value",
+      "revId": "10cb451eea3428ad95fbef2b0ac62dc1426a5879",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e9219f0_170e4f03",
+        "filename": "redfish/systems/test_led_indicator_asserted.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-11-09T15:42:12Z",
+      "side": 1,
+      "message": "Please fix those white spaces tabs in the code..",
+      "revId": "10cb451eea3428ad95fbef2b0ac62dc1426a5879",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "048e2e88_fb8dbce1",
+        "filename": "redfish/systems/test_led_indicator_asserted.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-11-09T15:42:12Z",
+      "side": 1,
+      "message": "Please fix those white spaces tabs in the code..",
+      "revId": "10cb451eea3428ad95fbef2b0ac62dc1426a5879",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
