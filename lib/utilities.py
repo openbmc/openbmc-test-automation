@@ -199,6 +199,7 @@ def get_mtr_report(host=""):
     )
     out_buf, err_buf = sub_proc.communicate()
     shell_rc = sub_proc.returncode
+    out_buf = out_buf.decode("utf-8")
 
     # Split the output by line.
     rows = out_buf.rstrip("\n").split("\n")
