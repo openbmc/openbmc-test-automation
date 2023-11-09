@@ -18,7 +18,7 @@ Resource        ../lib/openbmc_ffdc_utils.robot
 Library         ../syslib/utils_os.py
 Library         DateTime
 
-Suite Setup     Start SOL Console Logging
+Suite Setup     Run Keyword And Ignore Error  Start SOL Console Logging
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 
