@@ -26,6 +26,7 @@ ${delay}                1000ms
 ${count}                4
 ${program_name}         nping
 ${iterations}           5000
+${TCP_CONNECTION}       tcp
 
 *** Test Cases ***
 
@@ -241,4 +242,6 @@ Establish TCP Connections And Get Connection Failures
 
     ${cmd_buf}=  Set Variable  --delay ${delay} ${target_host} -c ${num} --${packet_type} -p ${http_port}
     ${nping_result}=  Nping  ${cmd_buf}
-    [Return]   ${nping_result['percent_failed']}
+
+    Get Regexp Matches   {nping_result}    lost
+    [Return]   ${nping_result['percent_lost']}
