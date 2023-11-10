@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20800d68_6f956269",
+        "filename": "redfish/systems/test_led_indicator_asserted.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1001876
+      },
+      "writtenOn": "2023-11-10T07:22:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39009d6d_3722fed2",
+      "revId": "10cb451eea3428ad95fbef2b0ac62dc1426a5879",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e9219f0_170e4f03",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c768a9b4_092306b9",
+        "filename": "redfish/systems/test_led_indicator_asserted.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1001876
+      },
+      "writtenOn": "2023-11-10T07:22:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9219f0_170e4f03",
+      "revId": "10cb451eea3428ad95fbef2b0ac62dc1426a5879",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "048e2e88_fb8dbce1",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-11-09T15:42:12Z",
       "side": 1,
       "message": "Please fix those white spaces tabs in the code..",
+      "revId": "10cb451eea3428ad95fbef2b0ac62dc1426a5879",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98213f3f_c21a47a6",
+        "filename": "redfish/systems/test_led_indicator_asserted.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1001876
+      },
+      "writtenOn": "2023-11-10T07:22:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "048e2e88_fb8dbce1",
       "revId": "10cb451eea3428ad95fbef2b0ac62dc1426a5879",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
