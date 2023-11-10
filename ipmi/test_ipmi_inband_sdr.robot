@@ -30,11 +30,13 @@ Verify Get SDR For Maximum Record Via IPMI
     # Validate each and every record till the last record.
     FOR  ${record}  IN RANGE  0  ${record_count}
         # Convert number to hexadecimal record ID.
-        ${recordhex}=  Convert To Hex  ${record}  length=2  lowercase=yes
+        ${recordhex}=  Convert To Hex  ${record}  length=4  lowercase=yes
+        ${first_digit}    Set Variable    ${recordhex}[0:2]
+        ${second_digit}    Set Variable    ${recordhex}[2:4]
 
         # Get SDR command.
         ${resp}=  Run IPMI Standard Command
-        ...  raw ${IPMI_RAW_CMD['Get SDR']['Get'][1]} 0x00 0x00 0x${recordhex} 0x00 0x00 0xff
+        ...  raw ${IPMI_RAW_CMD['Get SDR']['Get'][1]} 0x00 0x00 0x${second_digit} 0x${first_digit} 0x00 0xff
         ${get_SDR}=  Split String  ${resp}
 
         # If the record ID reaches the last data available, the next record ID will be ff ff.
@@ -45,22 +47,24 @@ Verify Get SDR For Maximum Record Via IPMI
 
         IF  '${record}' != '${last_record}'
           # current record ID in response data.
-          Should Be Equal  ${get_SDR[2]}  ${recordhex}
-          Should Be Equal  ${get_SDR[3]}  00
+          Should Be Equal  ${get_SDR[2]}  ${second_digit}
+          Should Be Equal  ${get_SDR[3]}  ${first_digit}
 
           # Next record ID in response data.
           ${record_next}=  Evaluate  ${record} + 1
-          ${record_next}=  Convert To Hex  ${record_next}  length=2  lowercase=yes
-          Should Be Equal  ${get_SDR[0]}  ${record_next}
-          Should Be Equal  ${get_SDR[1]}  00
+          ${record_next}=  Convert To Hex  ${record_next}  length=4  lowercase=yes
+          ${record_next_msb}    Set Variable    ${record_next}[0:2]
+          ${record_next_lsb}    Set Variable    ${record_next}[2:4]
+          Should Be Equal  ${get_SDR[0]}  ${record_next_lsb}
+          Should Be Equal  ${get_SDR[1]}  ${record_next_msb}
         ELSE
           # Next record ID in response data.
           Should Be Equal  ${get_SDR[0]}  ff
           Should Be Equal  ${get_SDR[1]}  ff
 
           # current record ID in response data.
-          Should Be Equal  ${get_SDR[2]}  ${recordhex}
-          Should Be Equal  ${get_SDR[3]}  00
+          Should Be Equal  ${get_SDR[2]}  ${second_digit}
+          Should Be Equal  ${get_SDR[3]}  ${first_digit}
         END
 
         # Response Data Count - total records (max - FFh - 255 in decimal).
@@ -270,11 +274,13 @@ Verify Get Device SDR For Maximum Record Via IPMI
     # Validate each and every record till the last record.
     FOR  ${record}  IN RANGE  0  ${record_count}
         # Convert number to hexadecimal record ID.
-        ${recordhex}=  Convert To Hex  ${record}  length=2  lowercase=yes
+        ${recordhex}=  Convert To Hex  ${record}  length=4  lowercase=yes
+        ${first_digit}    Set Variable    ${recordhex}[0:2]
+        ${second_digit}    Set Variable    ${recordhex}[2:4]
 
         # Get Device SDR command.
         ${resp}=  Run Inband IPMI Standard Command
-        ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x00 0x00 0x${recordhex} 0x00 0x00 0xff
+        ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x00 0x00 0x${second_digit} 0x${first_digit} 0x00 0xff
         ${get_dev_SDR}=  Split String  ${resp}
 
         # If the record ID reaches the last data available, the next record ID will be ff ff
@@ -285,14 +291,16 @@ Verify Get Device SDR For Maximum Record Via IPMI
 
         IF  '${record}' != '${last_record}'
           # current record ID in response data.
-          Should Be Equal  ${get_dev_SDR[2]}  ${recordhex}
-          Should Be Equal  ${get_dev_SDR[3]}  00
+          Should Be Equal  ${get_dev_SDR[2]}  ${second_digit}
+          Should Be Equal  ${get_dev_SDR[3]}  ${first_digit}
 
           # Next record ID in response data.
           ${record_next}=  Evaluate  ${record} + 1
-          ${record_next}=  Convert To Hex  ${record_next}  length=2  lowercase=yes
-          Should Be Equal  ${get_dev_SDR[0]}  ${record_next}
-          Should Be Equal  ${get_dev_SDR[1]}  00
+          ${record_next}=  Convert To Hex  ${record_next}  length=4  lowercase=yes
+          ${record_next_msb}    Set Variable    ${record_next}[0:2]
+          ${record_next_lsb}    Set Variable    ${record_next}[2:4]
+          Should Be Equal  ${get_dev_SDR[0]}  ${record_next_lsb}
+          Should Be Equal  ${get_dev_SDR[1]}  ${record_next_msb}
 
         ELSE
           # Next record ID in response data.
@@ -300,8 +308,8 @@ Verify Get Device SDR For Maximum Record Via IPMI
           Should Be Equal  ${get_dev_SDR[1]}  ff
 
           # current record ID in response data.
-          Should Be Equal  ${get_dev_SDR[2]}  ${recordhex}
-          Should Be Equal  ${get_dev_SDR[3]}  00
+          Should Be Equal  ${get_dev_SDR[2]}  ${second_digit}
+          Should Be Equal  ${get_dev_SDR[3]}  ${first_digit}
 
         END
         # Response data count - total record ID (max - FFh - 255 in decimal).
