@@ -71,20 +71,18 @@ Test Invalid IPMI Channel Response
     [Documentation]  Verify invalid IPMI channels supported response.
     [Tags]  Test_Invalid_IPMI_Channel_Response
 
-    ${channel_count}=  Get Physical Network Interface Count
-
-    # To target invalid channel, increment count.
-    ${channel_number}=  Evaluate  ${channel_count} + 1
-
     # Example of invalid channel:
     # $ ipmitool -I lanplus -H xx.xx.xx.xx -P password lan print 3
     # Get Channel Info command failed: Parameter out of range
     # Invalid channel: 3
 
-    ${stdout}=  Run External IPMI Standard Command
-    ...  lan print ${channel_number}  fail_on_err=${0}
-    Should Contain  ${stdout}  Invalid channel
-    ...  msg=IPMI channel ${channel_number} is invalid but seen working.
+    @{inactive_channel_list}=  Get Invalid Channel Number List
+    FOR  ${channel_number}  IN  @{inactive_channel_list}
+        ${stdout}=  Run IPMI Standard Command
+        ...  lan print ${channel_number}  fail_on_err=${0}
+        Should Contain  ${stdout}  Invalid channel
+        ...  msg=IPMI channel ${channel_number} is invalid but seen working.
+    END
 
 
 Get IP Address Source And Verify Using Redfish
@@ -205,8 +203,8 @@ Verify Invalid Set MAC Address Via IPMI
 
     # Set MAC Address with invalid data.
     ${cmd}=  Catenate  ${IPMI_RAW_CMD['LAN_Config_Params']['Set'][0]} ${CHANNEL_NUMBER}
-    ...  0x05 ${Invalid_mac_address_hex}  fail_on_err=0
-    ${ipmi_set_output}=  Run Inband IPMI Raw Command  ${cmd}
+    ...  0x05 ${Invalid_mac_address_hex}
+    ${ipmi_set_output}=  Run Inband IPMI Raw Command  ${cmd}  fail_on_err=0
 
     Should Contain  ${ipmi_set_output}  ${IPMI_RAW_CMD['LAN_Config_Params']['Set'][3]}
 
@@ -222,8 +220,8 @@ Verify Get And Set MAC Address Via IPMI
 
     # Set the MAC address.
     ${cmd}=  Catenate  ${IPMI_RAW_CMD['LAN_Config_Params']['Set'][0]} ${CHANNEL_NUMBER}
-    ...  0x05 ${mac_address_hex}  fail_on_err=0
-    ${ipmi_set_output}=  Run Inband IPMI Raw Command  ${cmd}
+    ...  0x05 ${mac_address_hex}
+    ${ipmi_set_output}=  Run Inband IPMI Raw Command  ${cmd}  fail_on_err=0
 
     # Get the MAC address and verify.
     ${ipmi_output}=  Run Inband IPMI Raw Command
@@ -370,8 +368,8 @@ Set Default Mac And Verify
 
     # Set the Default MAC address.
     ${cmd}=  Catenate  ${IPMI_RAW_CMD['LAN_Config_Params']['Set'][0]} ${CHANNEL_NUMBER}
-    ...  0x05 ${default_mac_address_hex}  fail_on_err=0
-    ${ipmi_set_output}=  Run Inband IPMI Raw Command  ${cmd}
+    ...  0x05 ${default_mac_address_hex}
+    ${ipmi_set_output}=  Run Inband IPMI Raw Command  ${cmd}  fail_on_err=0
 
     # check whether the default MAC is set.
     ${ipmi_get_mac}=  Run Inband IPMI Raw Command
