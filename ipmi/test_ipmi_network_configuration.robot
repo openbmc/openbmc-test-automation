@@ -9,6 +9,7 @@ Library                ../lib/ipmi_utils.py
 Library                ../lib/gen_robot_valid.py
 Library                ../lib/var_funcs.py
 Library                ../lib/bmc_network_utils.py
+Variables              ../data/ipmi_raw_cmd_table.py
 
 Suite Setup            Suite Setup Execution
 Suite Teardown         Redfish.Logout
@@ -22,11 +23,11 @@ Force Tags             IPMI_Network_Configuration
 ${vlan_id_for_ipmi}     ${10}
 @{vlan_ids}             ${20}  ${30}
 ${interface}            eth0
-${ip}                   10.0.0.1
+${ip}                   ${STATIC_IP}
 ${initial_lan_config}   &{EMPTY}
 ${vlan_resource}        ${NETWORK_MANAGER}action/VLAN
-${netmask}              ${24}
-${gateway}              0.0.0.0
+${subnet_mask}          ${24}
+${gateway_ip}           0.0.0.0
 ${vlan_id_for_rest}     ${30}
 
 
@@ -35,7 +36,9 @@ ${vlan_id_for_rest}     ${30}
 Verify IPMI Inband Network Configuration
     [Documentation]  Verify BMC network configuration via inband IPMI.
     [Tags]  Verify_IPMI_Inband_Network_Configuration
-    [Teardown]  Run Keywords  Restore Configuration  AND  FFDC On Test Case Fail
+    [Teardown]  Run Keywords  Restore Configuration  AND  set_base_url    https://${OPENBMC_HOST}:${HTTPS_PORT}
+    ...  AND  FFDC On Test Case Fail  AND
+    ...  Redfish.Login  AND  Run IPMI Command  ${IPMI_RAW_CMD['Device ID']['Get'][0]}
 
     Redfish Power On
 
@@ -46,6 +49,28 @@ Verify IPMI Inband Network Configuration
     Valid Value  lan_print_output['IP Address']  ["${STATIC_IP}"]
     Valid Value  lan_print_output['Subnet Mask']  ["${NETMASK}"]
     Valid Value  lan_print_output['Default Gateway IP']  ["${GATEWAY}"]
+
+    # To verify changed static ip is communicable through external IPMI cmd.
+    Run External IPMI Raw Command  ${IPMI_RAW_CMD['Device ID']['Get'][0]}  H=${STATIC_IP}
+
+    set_base_url    https://${STATIC_IP}:${HTTPS_PORT}
+    Redfish.Login
+
+
+    ${ipv4_addresses}=  Redfish.Get Attribute
+    ...  ${REDFISH_NW_ETH_IFACE}${interface}  IPv4Addresses
+
+    FOR  ${ipv4_address}  IN  @{ipv4_addresses}
+        ${ip_address}=  Set Variable if  '${ipv4_address['Address']}' == '${STATIC_IP}'
+                        ...  ${ipv4_address}
+        Exit For Loop If  ${ip_address} != None
+    END
+
+    Should Be Equal  ${ip_address['AddressOrigin']}  Static
+    Should Be Equal  ${ip_address['SubnetMask']}  ${NETMASK}
+    Should Be Equal  ${ip_address['Gateway']}  ${GATEWAY}
+
+    Redfish.Logout
 
 
 Disable VLAN Via IPMI When Multiple VLAN Exist On BMC
