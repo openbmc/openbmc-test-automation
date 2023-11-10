@@ -207,6 +207,46 @@ Test Modifying User Privilege Of Existing User Via GUI
     Redfish.Logout
 
 
+Test Modifying User Account Status Of Existing User Via GUI
+    [Documentation]  Test modifying user account status of existing user via GUI and verify changes using Redfish.
+    [Tags]  Test_Modifying_User_Account_Status_Of_Existing_User_Via_GUI
+    [Teardown]  Delete Users Via Redfish  ${username}
+
+    # Get random username, user privilege level and account status.
+    ${username}=  Generate Random String  8  [LETTERS]
+    ${privilege_level}=  Evaluate  random.choice(${user_privilege_list})  random
+    ${account_status}=  Evaluate  random.choice([True, False])  random
+
+    # Create new user account.
+    Create User And Verify  ${username}  ${privilege_level}  ${account_status}
+
+    # Modify user account status via GUI.
+    Wait Until Keyword Succeeds  30 sec   5 sec  Click Element
+    ...  //td[text()='${username}']/following-sibling::*/*/*[@title='Edit user']
+    Sleep  2s
+    IF  ${account_status} == ${True}
+        Click Element At Coordinates  ${xpath_account_status_disabled_button}  0  0
+    ELSE
+        Click Element At Coordinates  ${xpath_account_status_enabled_button}  0  0
+    END
+
+    # Submit changes.
+    Click Element  ${xpath_submit_button}
+
+    # Confirm the successful update.
+    Wait Until Element Is Visible  ${xpath_success_message}  timeout=30
+    Wait Until Element Is Not Visible  ${xpath_success_message}  timeout=60
+	
+    # Verify account status via Redfish.
+    IF  ${account_status} == ${True}
+        ${status}=  Run Keyword And Return Status  Redfish.Login  ${username}  ${test_user_password}
+        Should Be Equal  ${status}  ${False}
+    ELSE
+        ${status}=  Run Keyword And Return Status  Redfish.Login  ${username}  ${test_user_password}
+        Should Be Equal  ${status}  ${True}
+    END
+
+
 *** Keywords ***
 
 Create User And Verify
