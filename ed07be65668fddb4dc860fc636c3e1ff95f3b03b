@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f8c0ee6_e6effabc",
+        "filename": "ipmi/test_ipmi_network_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-11-10T09:17:12Z",
+      "side": 1,
+      "message": "${ip}                   ${STATIC_IP} \n\nvariable to another variable assignment is not a good idea to do.. \n\nif this IP is private and dont want to show but driven by user input.. do like this declaration\n\n${STATIC_IP}         ${EMPTY}",
+      "revId": "ed07be65668fddb4dc860fc636c3e1ff95f3b03b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
