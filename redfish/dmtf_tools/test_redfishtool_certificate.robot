@@ -149,6 +149,7 @@ Install Server Certificate Using Redfishtool And Verify Via OpenSSL
 
     ${response}=  Redfishtool Post
     ...  ${payload}  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
+    ...  expected_error=${HTTP_OK}, ${HTTP_NO_CONTENT}
 
     Wait Until Keyword Succeeds  2 mins  15 secs  Verify Certificate Visible Via OpenSSL  ${cert_file_path}
 
