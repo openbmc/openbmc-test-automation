@@ -39,6 +39,7 @@ ${power_policy_setup}             ${0}
 ${bmc_power_policy_method}        ${EMPTY}
 @{BOOT_PROGRESS_STATES}           SystemHardwareInitializationComplete  OSBootStarted  OSRunning
 
+${REDFISH_SYS_STATE_WAIT_TIMEOUT}    120 Seconds
 
 *** Keywords ***
 
@@ -955,7 +956,7 @@ Redfish Get Boot Progress
 
 Redfish Get States
     [Documentation]  Return all the BMC and host states in dictionary.
-    [Timeout]  120 Seconds
+    [Timeout]  ${REDFISH_SYS_STATE_WAIT_TIMEOUT}
 
     # Refer: openbmc/docs/designs/boot-progress.md
 
