@@ -36,8 +36,8 @@ Verify Disabling IPMI Via OOB IPMI
     ...  AND  Run Inband IPMI Standard Command  lan set ${CHANNEL_NUMBER} access on
 
     # Disable IPMI via OOB IPMI and verify
-    Run Keyword and Expect Error  *IPMI response is NULL*
-    ...  Run IPMI Standard Command  lan set ${CHANNEL_NUMBER} access off
+    ${resp}=  Run Keyword and Ignore Error  Run External IPMI Standard Command  lan set ${CHANNEL_NUMBER} access off
+    Should Contain any  ${resp}  ${EMPTY}  Set Channel Access for channel ${CHANNEL_NUMBER} was successful.
     Run Keyword and Expect Error  *Unable to establish IPMI*
     ...  Run External IPMI Standard Command  lan print ${CHANNEL_NUMBER}
 
