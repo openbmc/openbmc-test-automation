@@ -28,10 +28,15 @@ Retrieve IP Address Via IPMI And Verify Using Redfish
     [Documentation]  Retrieve IP address using IPMI and verify using Redfish.
     [Tags]  Retrieve_IP_Address_Via_IPMI_And_Verify_Using_Redfish
 
-    ${active_channel_config}=  Get Active Channel Config
-    FOR  ${channel_number}  IN  @{active_channel_config.keys()}
-      Verify Channel Info  ${channel_number}  IPv4StaticAddresses  ${active_channel_config}
+    ${valid_channel_number_interface_names}=  Get Channel Number For All Interface
+    ${valid_channel_number_interface_name}=  Get Valid Channel Number  ${valid_channel_number_interface_names}
+    ${channel_number_list}=  Get Channel Number For Valid Ethernet Interface
+    ...  ${valid_channel_number_interface_name}
+
+    FOR  ${channel_number}  IN  @{channel_number_list}
+      Verify Channel Info  ${channel_number}  IPv4StaticAddresses  ${valid_channel_number_interface_name}
     END
+
 
 Retrieve Default Gateway Via IPMI And Verify
     [Documentation]  Retrieve default gateway via IPMI and verify it's existence on the BMC.
@@ -46,9 +51,13 @@ Retrieve MAC Address Via IPMI And Verify Using Redfish
     [Documentation]  Retrieve MAC address via IPMI and verify using Redfish.
     [Tags]  Retrieve_MAC_Address_Via_IPMI_And_Verify_Using_Redfish
 
-    ${active_channel_config}=  Get Active Channel Config
-    FOR  ${channel_number}  IN  @{active_channel_config.keys()}
-      Verify Channel Info  ${channel_number}  MACAddress  ${active_channel_config}
+    ${valid_channel_number_interface_names}=  Get Channel Number For All Interface
+    ${valid_channel_number_interface_name}=  Get Valid Channel Number  ${valid_channel_number_interface_names}
+    ${channel_number_list}=  Get Channel Number For Valid Ethernet Interface
+    ...  ${valid_channel_number_interface_name}
+
+    FOR  ${channel_number}  IN  @{channel_number_list}
+      Verify Channel Info  ${channel_number}  MACAddress  ${valid_channel_number_interface_name}
     END
 
 
@@ -56,14 +65,12 @@ Test Valid IPMI Channels Supported
     [Documentation]  Verify IPMI channels supported on a given system.
     [Tags]  Test_Valid_IPMI_Channels_Supported
 
-    ${channel_count}=  Get Physical Network Interface Count
-    Should Be True  ${channel_count} > 0
-    ...  msg=IPMI Lan channel support expected > 0 but found ${channel_count}
-    ${channel_count}=  Evaluate  ${channel_count} + 1
+    @{active_channel_list}=  Get Active Ethernet Channel List
+    Set Suite Variable  @{active_channel_list}
 
-    # Note: IPMI network channel logically starts from 1.
-    FOR  ${channel_number}  IN RANGE  1  ${channel_count}
-      Run IPMI Standard Command  lan print ${channel_number}
+        FOR  ${channel_number}  IN  @{active_channel_list}
+        ${stdout}=  Run IPMI Standard Command
+        ...  lan print ${channel_number}
     END
 
 
@@ -317,21 +324,21 @@ Get Physical Network Interface Count
 
 Verify Channel Info
     [Documentation]  Verify the channel info.
-    [Arguments]  ${channel_number}  ${network_parameter}  ${active_channel_config}
+    [Arguments]  ${channel_number}  ${network_parameter}  ${valid_channel_number_interface_name}
 
     Run Keyword If  '${network_parameter}' == 'IPv4StaticAddresses'
-    ...    Verify IPv4 Static Address  ${channel_number}  ${active_channel_config}
+    ...    Verify IPv4 Static Address  ${channel_number}  ${valid_channel_number_interface_name}
     ...  ELSE IF  '${network_parameter}' == 'MACAddress'
-    ...    Verify MAC Address  ${channel_number}  ${active_channel_config}
+    ...    Verify MAC Address  ${channel_number}  ${valid_channel_number_interface_name}
 
 
 Verify IPv4 Static Address
     [Documentation]  Verify the IPv4 Static Address.
-    [Arguments]  ${channel_number}  ${active_channel_config}
+    [Arguments]  ${channel_number}  ${valid_channel_number_interface_name}
 
     ${lan_print_ipmi}=  Get LAN Print Dict  ${channel_number}
     ${ipv4_static_addresses}=  Redfish.Get Attribute
-    ...  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${channel_number}']['name']}  IPv4StaticAddresses
+    ...  ${REDFISH_NW_ETH_IFACE}${valid_channel_number_interface_name['${channel_number}']['name']}  IPv4StaticAddresses
     ${redfish_ips}=  Nested Get  Address  ${ipv4_static_addresses}
     Rprint Vars  lan_print_ipmi  ipv4_static_addresses  redfish_ips
     Valid Value  lan_print_ipmi['IP Address']  ${redfish_ips}
@@ -339,11 +346,11 @@ Verify IPv4 Static Address
 
 Verify MAC Address
     [Documentation]  Verify the MAC Address.
-    [Arguments]  ${channel_number}  ${active_channel_config}
+    [Arguments]  ${channel_number}  ${valid_channel_number_interface_name}
 
     ${lan_print_ipmi}=  Get LAN Print Dict  ${channel_number}
     ${redfish_mac_address}=  Redfish.Get Attribute
-    ...  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${channel_number}']['name']}  MACAddress
+    ...  ${REDFISH_NW_ETH_IFACE}${valid_channel_number_interface_name['${channel_number}']['name']}  MACAddress
     Rprint Vars  lan_print_ipmi  redfish_mac_address
     Valid Value  lan_print_ipmi['MAC Address']  ['${redfish_mac_address}']
 
