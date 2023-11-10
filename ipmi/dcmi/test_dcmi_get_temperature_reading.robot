@@ -186,6 +186,15 @@ Get IPMI Sensor Reading
     ${dbus_uri}=  Get From Dictionary  ${dbus_uris}  ${instance}
     ${sensor_name}=  Set Variable  ${dbus_uri.split('/')[-1]}
 
+    ${sensor_format}=  Run IPMI Standard Command  sensor
+    ${sensor_name_status}=  Run Keyword And Return Status  Should Contain
+    ...  ${sensor_format}  _
+
+    ${sensor_name}=  Run Keyword If  ${sensor_name_status} == True
+    ...    Set Variable  ${sensor_name_dbus}
+    ...  ELSE
+    ...    Replace String  ${sensor_name}  _  ${SPACE}
+
     ${ret}=  Run External IPMI Standard Command  sensor | grep -i "${sensor_name}"
 
     [Return]  ${ret}
