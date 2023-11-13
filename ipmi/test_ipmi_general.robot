@@ -270,7 +270,7 @@ Verify Power Cap Value Via IPMI
     # Get power cap value via Redfish.
     ${power_cap_limit}=  Get System Power Cap Limit
 
-    # Get initial power cap vaule.
+    # Get initial power cap value.
     ${initial_power_value}=  Set Variable  ${power_cap_limit['SetPoint']}
 
     # Update power cap value via Redfish if the initial power cap value is zero.

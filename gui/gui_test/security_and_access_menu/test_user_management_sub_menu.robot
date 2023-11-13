@@ -264,7 +264,7 @@ Create User And Verify
 
     ELSE IF   '${expected_status}' == 'Failure'
         Wait Until Element Is Visible  ${xpath_user_creation_error_message}  timeout=60
-       
+
         # Close error message popup.
         Click Element  ${xpath_close_error_message}
         Wait Until Element Is Not Visible  ${xpath_user_creation_error_message}  timeout=60
