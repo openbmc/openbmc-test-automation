@@ -23,7 +23,7 @@ Resource     ../../lib/state_manager.robot
 Variables    ../data/resource_variables.py
 
 *** Variables ***
-${obmc_gui_url}              https://${OPENBMC_HOST}
+${obmc_gui_url}              https://${OPENBMC_HOST}:${HTTPS_PORT}
 
 ${obmc_PowerOff_state}       Off
 ${obmc_PowerRunning_state}   Running

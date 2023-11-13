@@ -9,7 +9,7 @@ Variables      ../data/gui_variables.py
 
 
 *** Variables ***
-${obmc_gui_url}              https://${OPENBMC_HOST}
+${obmc_gui_url}              https://${OPENBMC_HOST}:${HTTPS_PORT}
 ${xpath_power_page}          //*[@data-test-id='appHeader-container-power']
 ${xpath_power_shutdown}      //*[@data-test-id='serverPowerOperations-button-shutDown']
 ${xpath_power_power_on}      //*[@data-test-id='serverPowerOperations-button-powerOn']
