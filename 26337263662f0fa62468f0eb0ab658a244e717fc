@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "31c42a94_65ae405e",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2023-11-13T07:16:39Z",
+      "side": 1,
+      "message": "This whole keyword is failing due to this line, Kindly re-check",
+      "parentUuid": "f527a21e_263151c4",
+      "range": {
+        "startLine": 246,
+        "startChar": 25,
+        "endLine": 246,
+        "endChar": 43
+      },
+      "revId": "26337263662f0fa62468f0eb0ab658a244e717fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d32779d1_9042e5c7",
         "filename": "security/test_bmc_network_security.robot",
         "patchSetId": 2
@@ -59,6 +83,29 @@
         "startChar": 31,
         "endLine": 247,
         "endChar": 43
+      },
+      "revId": "26337263662f0fa62468f0eb0ab658a244e717fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08c9a216_3330c8af",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2023-11-13T07:16:39Z",
+      "side": 1,
+      "message": "Old script used ${nping_result[\u0027percent_failed\u0027]} but ${nping_result[\u0027percent_lost\u0027]} percent_lost key not available inside ${nping_result}",
+      "range": {
+        "startLine": 247,
+        "startChar": 15,
+        "endLine": 247,
+        "endChar": 46
       },
       "revId": "26337263662f0fa62468f0eb0ab658a244e717fc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
