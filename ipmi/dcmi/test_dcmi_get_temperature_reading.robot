@@ -31,7 +31,7 @@ Verify Get Temperature Reading Command For Inlet Temperature Sensor
 
     ${cmd}=  Catenate  ${DCMI_RAW_CMD['DCMI']['GET_TEMPERATURE_READING'][0]}
     ...  ${DCMI_RAW_CMD['DCMI']['GET_TEMPERATURE_READING'][1]} 0x00 0x00
-    ${ipmi_resp}=  Run External IPMI Raw Command  ${cmd}
+    ${ipmi_resp}=  Run IPMI Command  ${cmd}
     Verify Reading With IPMI  ${ipmi_resp}  ${1}  inlet
     # Verify Temperature Reading With Dbus URI  ${ipmi_resp}  inlet  ${1}
 
@@ -41,7 +41,7 @@ Verify Get Temperature Reading Command For CPU 0 Temperature Sensor
 
     ${cmd}=  Catenate  ${DCMI_RAW_CMD['DCMI']['GET_TEMPERATURE_READING'][0]}
     ...  ${DCMI_RAW_CMD['DCMI']['GET_TEMPERATURE_READING'][2]} 0x00 0x00
-    ${ipmi_resp}=  Run External IPMI Raw Command  ${cmd}
+    ${ipmi_resp}=  Run IPMI Command  ${cmd}
     Verify Reading With IPMI  ${ipmi_resp}  ${1}  cpu
     # Verify Temperature Reading With Dbus URI  ${ipmi_resp}  cpu  ${1}
 
@@ -51,7 +51,7 @@ Verify Get Temperature Reading Command For CPU 1 Temperature Sensor
 
     ${cmd}=  Catenate  ${DCMI_RAW_CMD['DCMI']['GET_TEMPERATURE_READING'][0]}
     ...  ${DCMI_RAW_CMD['DCMI']['GET_TEMPERATURE_READING'][2]} 0x00 0x00
-    ${ipmi_resp}=  Run External IPMI Raw Command  ${cmd}
+    ${ipmi_resp}=  Run IPMI Command  ${cmd}
     Verify Reading With IPMI  ${ipmi_resp}  ${2}  cpu
     # Verify Temperature Reading With Dbus URI  ${ipmi_resp}  cpu  ${2}
 
@@ -61,7 +61,7 @@ Verify Get Temperature Reading Command For Baseboard Temperature Sensor
 
     ${cmd}=  Catenate  ${DCMI_RAW_CMD['DCMI']['GET_TEMPERATURE_READING'][0]}
     ...  ${DCMI_RAW_CMD['DCMI']['GET_TEMPERATURE_READING'][3]} 0x00 0x00
-    ${ipmi_resp}=  Run External IPMI Raw Command  ${cmd}
+    ${ipmi_resp}=  Run IPMI Command  ${cmd}
     Verify Reading With IPMI  ${ipmi_resp}  ${1}  baseboard
     # Verify Temperature Reading With Dbus URI  ${ipmi_resp}  baseboard  ${1}
 

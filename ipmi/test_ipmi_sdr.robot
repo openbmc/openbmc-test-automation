@@ -167,13 +167,13 @@ Test Get SDR Using Reservation ID
    ${reservation_id}=  Get Reservation ID  add_prefix=True
 
    # Get SDR full without using Reservation ID.
-   Run External IPMI Raw Command  ${IPMI_RAW_CMD['SDR']['Get'][0]}
+   Run IPMI Command  ${IPMI_RAW_CMD['SDR']['Get'][0]}
 
    # Get SDR Partially using Reservation ID.
    ${get_sdr_raw_cmd}=  Catenate
    ...  ${IPMI_RAW_CMD['Get SDR']['Get'][1]} ${reservation_id} 0x${record_id} 0x00
    ...  ${IPMI_RAW_CMD['Get SDR']['Get'][2]}
-   Run External IPMI Raw Command  ${get_sdr_raw_cmd}
+   Run IPMI Command  ${get_sdr_raw_cmd}
 
    # Get SDR partially without using reservation ID and expect error.
    Verify Invalid IPMI Command  ${IPMI_RAW_CMD['SDR']['Get'][3]}  0xc5
@@ -218,7 +218,7 @@ Test Reserve SDR Repository After BMC Reboot
     ${get_sdr_raw_cmd}=  Catenate
     ...  ${IPMI_RAW_CMD['Get SDR']['Get'][1]} ${reservation_id_after_reboot} 0x${record_id} 0x00
     ...  ${IPMI_RAW_CMD['Get SDR']['Get'][2]}
-    Run External IPMI Raw Command  ${get_sdr_raw_cmd}
+    Run IPMI Command  ${get_sdr_raw_cmd}
 
 
 *** Keywords ***
@@ -236,7 +236,7 @@ Get Reservation ID
     #                        e.g. IPMI response for reservation ID command will be like  01 0a
     #                        return reservation ID will be "a1" for above response.
 
-    ${reservation_id}=  Run External IPMI Raw Command
+    ${reservation_id}=  Run IPMI Command
     ...  ${IPMI_RAW_CMD['SDR']['Reserve SDR Repository'][0]}
 
     ${reservation_id}=  Run Keyword If  ${add_prefix}
@@ -389,7 +389,7 @@ Fetch IPMI Command Support Status
     # Description of argument(s):
     # ipmi_cmd    IPMI command.
 
-    ${resp}=  Run External IPMI Raw Command  ${ipmi_cmd}  fail_on_err=0
+    ${resp}=  Run IPMI Command  ${ipmi_cmd}  fail_on_err=0
     ${resp_code_match}=  Get Regexp Matches  ${resp}  rsp=0xc1
 
     ${cmd_support}=  Set Variable If  ${resp_code_match} != []  no  yes
@@ -400,7 +400,7 @@ Fetch IPMI Command Support Status
 Get SDR Record ID
     [Documentation]  Fetch one record ID from SDR elist IPMI cmd response.
 
-    ${resp}=  Run External IPMI Standard Command  sdr elist
+    ${resp}=  Run IPMI Standard Command  sdr elist
     ${record_id}=  Get Regexp Matches  ${resp}  \\|\\s+([0-9]+)h\\s+\\|  1
 
     [Return]  ${record_id[0]}

@@ -50,7 +50,9 @@ def get_sol_info():
       sol_info[Retry Count]:                         7
     """
 
-    status, ret_values = grk.run_key_u("Run IPMI Standard Command  sol info")
+    status, ret_values = grk.run_key_u(
+        "Run External IPMI Standard Command  sol info"
+    )
 
     # Create temp file path.
     temp = tempfile.NamedTemporaryFile()
@@ -78,7 +80,7 @@ def set_sol_setting(setting_name, setting_value):
     """
 
     status, ret_values = grk.run_key_u(
-        "Run IPMI Standard Command  sol set "
+        "Run External IPMI Standard Command  sol set "
         + setting_name
         + " "
         + setting_value
@@ -666,7 +668,7 @@ def get_chassis_status():
     """
 
     status, ret_values = grk.run_key_u(
-        "Run IPMI Standard Command  chassis status"
+        "Run External IPMI Standard Command  chassis status"
     )
     result = vf.key_value_outbuf_to_dict(ret_values, process_indent=1)
 

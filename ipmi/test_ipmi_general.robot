@@ -21,7 +21,7 @@ Test Get Self Test Results via IPMI Raw Command
     [Documentation]  Get self test results via IPMI raw command and verify the output.
     [Tags]  Test_Get_Self_Test_Results_via_IPMI_Raw_Command
 
-    ${resp}=  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['Self_Test_Results']['Get'][0]}
+    ${resp}=  Run IPMI Command  ${IPMI_RAW_CMD['Self_Test_Results']['Get'][0]}
 
     # 55h = No error. All Self Tests Passed.
     # 56h = Self Test function not implemented in this controller.
@@ -34,7 +34,7 @@ Test Get Device GUID Via IPMI Raw Command
     [Teardown]  Run Keywords  Redfish.Logout  AND  FFDC On Test Case Fail
     # Get GUIDS via IPMI.
     # This should match the /redfish/v1/Managers/${MANAGER_ID}'s UUID data.
-    ${guids}=  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['Device GUID']['Get'][0]}
+    ${guids}=  Run IPMI Command  ${IPMI_RAW_CMD['Device GUID']['Get'][0]}
     # Reverse the order and remove space delims.
     ${guids}=  Split String  ${guids}
     Reverse List  ${guids}

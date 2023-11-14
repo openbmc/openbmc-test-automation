@@ -153,14 +153,14 @@ Verify Device SDR Info Via IPMI Lanplus
 
     # Sensor Count Via Device SDR Info via lanplus.
     ${resp}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Get_Info'][5]}*
-    ...  Run IPMI Standard Command
+    ...  Run External IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get_Info'][0]}
     # Proper error code should be returned.
     Should Contain  ${resp}  ${IPMI_RAW_CMD['Device_SDR']['Get_Info'][4]}
 
     # SDR Count Via Device SDR Info via lanplus.
     ${resp}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Get_Info'][5]}*
-    ...  Run IPMI Standard Command
+    ...  Run External IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get_Info'][1]}
     # Proper error code should be returned.
     Should Contain  ${resp}  ${IPMI_RAW_CMD['Device_SDR']['Get_Info'][4]}
@@ -197,7 +197,7 @@ Verify Reserve Device SDR Repository Info Via IPMI Lanplus
 
     # Reserve Device SDR Repository via lanplus.
     ${resp}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Reserve_Repository'][4]}*
-    ...  Run IPMI Standard Command
+    ...  Run External IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Reserve_Repository'][0]}
     # Proper error code should be returned.
     Should Contain  ${resp}  ${IPMI_RAW_CMD['Device_SDR']['Reserve_Repository'][3]}

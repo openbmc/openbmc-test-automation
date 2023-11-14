@@ -44,7 +44,7 @@ Cold Reset Via IPMI
     [Tags]  Cold_Reset_Via_IPMI
 
     # Cold Reset Via IPMI raw command.
-    Run External IPMI Raw Command  ${IPMI_RAW_CMD['Cold Reset']['reset'][0]}
+    Run IPMI Command  ${IPMI_RAW_CMD['Cold Reset']['reset'][0]}
 
     # Get the BMC Status.
     Wait Until Keyword Succeeds  3 min  10 sec  Is BMC Unpingable
@@ -52,7 +52,7 @@ Cold Reset Via IPMI
 
     # Verify if BMC restarted with Get Device ID command.
 
-    ${resp}=  Run External IPMI Raw Command  ${IPMI_RAW_CMD['Device ID']['Get'][0]}
+    ${resp}=  Run IPMI Command  ${IPMI_RAW_CMD['Device ID']['Get'][0]}
     Should Not Contain  ${resp}  ${IPMI_RAW_CMD['Device ID']['Get'][1]}
 
 
@@ -62,7 +62,7 @@ Cold Reset With Invalid Data Request Via IPMI
 
     # Verify cold reset with invalid length of the request data and expect error.
     ${resp}=  Run Keyword and Expect Error  *Request data length invalid*
-    ...  Run External IPMI Raw Command  ${IPMI_RAW_CMD['Cold Reset']['reset'][0]} 0x00
+    ...  Run IPMI Command  ${IPMI_RAW_CMD['Cold Reset']['reset'][0]} 0x00
 
 
 Verify Cold Reset Impact On Sensor Threshold Via IPMI
@@ -91,7 +91,7 @@ Verify Cold Reset Impact On Sensor Threshold Via IPMI
     Should Not Be Equal  ${new_threshold_value}  ${old_threshold_value}
 
     # Cold Reset Via IPMI raw command.
-    Run External IPMI Raw Command  ${IPMI_RAW_CMD['Cold Reset']['reset'][0]}
+    Run IPMI Command  ${IPMI_RAW_CMD['Cold Reset']['reset'][0]}
 
     # Get the BMC Status.
     Wait Until Keyword Succeeds  3 min  10 sec  Is BMC Unpingable

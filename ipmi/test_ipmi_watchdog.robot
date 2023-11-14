@@ -121,10 +121,10 @@ Verify Reset Timer
     Power On Host And Verify
 
     # Set Watchdog Timer initCount(0x3530).
-    Run IPMI Standard Command  raw ${IPMI_RAW_CMD['Watchdog']['Set'][72]}
+    Run IPMI Command  ${IPMI_RAW_CMD['Watchdog']['Set'][72]}
 
     # Get Watchdog Timer.
-    ${resp}=  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['Watchdog']['Get'][0]}
+    ${resp}=  Run IPMI Command  ${IPMI_RAW_CMD['Watchdog']['Get'][0]}
     Should Contain  ${resp}  ${IPMI_RAW_CMD['Watchdog']['Get'][41]}
 
     @{start_timer_value}=  Split String  ${resp}
@@ -143,13 +143,13 @@ Verify Reset Timer
     Sleep   ${TIMER_DELAY}
 
     # Get Watchdog Timer before reset watchdog timer.
-    ${resp}=  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['Watchdog']['Get'][0]}
+    ${resp}=  Run IPMI Command  ${IPMI_RAW_CMD['Watchdog']['Get'][0]}
     Should Contain  ${resp}  ${IPMI_RAW_CMD['Watchdog']['Get'][41]}
 
     FOR    ${1}    IN    ${3}
 
         # Reset Watchdog Timer.
-        Run IPMI Standard Command  raw ${IPMI_RAW_CMD['Watchdog']['Reset'][0]}
+        Run IPMI Command  ${IPMI_RAW_CMD['Watchdog']['Reset'][0]}
         # Delay.
         Sleep  ${TIMER_DELAY}
         Get Watchdog Timer And Compare To Start Value  ${start_timer_integer}
@@ -173,7 +173,7 @@ Verify Failure For Pre-Timeout Interval Greater Than Initial Count
 
     # Expected to fail: pre-timeout interval (4000) > initial count (1000).
     Run Keyword and Expect Error  *Invalid data field*
-    ...  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['Watchdog']['Set'][78]}
+    ...  Run IPMI Command  ${IPMI_RAW_CMD['Watchdog']['Set'][78]}
 
 Verify Invalid Request Data Length
     [Documentation]  Set Watchdog via IPMI raw command and verify via Get Watchdog Timer.
@@ -191,16 +191,16 @@ Verify Invalid Reset Timer Request Data
 
     # Reset Watchdog Timer with one extra byte.
     Run Keyword and Expect Error  *Request data length*
-    ...  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['Watchdog']['Reset'][3]}
+    ...  Run IPMI Command  ${IPMI_RAW_CMD['Watchdog']['Reset'][3]}
 
     # Reset BMC.
-    Run External IPMI Standard Command  mc reset cold -N 10 -R 1
+    Run IPMI Standard Command  mc reset cold -N 10 -R 1
     Wait Until Keyword Succeeds  ${OPENBMC_REBOOT_TIMEOUT} min  10 sec
     ...  Is BMC Operational
 
     # Reset Watchdog Timer without initialized watchdog.
     Run Keyword and Expect Error  *Unknown*
-    ...  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['Watchdog']['Reset'][6]}
+    ...  Run IPMI Command  ${IPMI_RAW_CMD['Watchdog']['Reset'][6]}
 
 *** Keywords ***
 
@@ -212,10 +212,10 @@ Execute IPMI Raw Command And Verify Response Data After Watchdog Expires
     # get_raw_cmd     The response bytes for the command.
     # resp_expect     The expected response bytes for the command.
 
-    Run IPMI Standard Command  raw ${set_raw_cmd}
-    Run IPMI Standard Command  raw ${IPMI_RAW_CMD['Watchdog']['Reset'][0]}
-    Run IPMI Standard Command  raw ${set_raw_cmd}
-    ${resp}=  Run IPMI Standard Command  raw ${get_raw_cmd}
+    Run IPMI Command  ${set_raw_cmd}
+    Run IPMI Command  ${IPMI_RAW_CMD['Watchdog']['Reset'][0]}
+    Run IPMI Command  ${set_raw_cmd}
+    ${resp}=  Run IPMI Command  ${get_raw_cmd}
     Should Contain  ${resp}  ${resp_expect}  msg=Expecting ${resp_expect} but got ${resp}.
 
 Execute IPMI Raw Command And Verify Response Data
@@ -227,8 +227,8 @@ Execute IPMI Raw Command And Verify Response Data
     # get_raw_cmd     The response bytes for the command.
     # resp_expect     The expected response bytes for the command.
 
-    Run IPMI Standard Command  raw ${set_raw_cmd}
-    ${resp}=  Run IPMI Standard Command  raw ${get_raw_cmd}
+    Run IPMI Command  ${set_raw_cmd}
+    ${resp}=  Run IPMI Command  ${get_raw_cmd}
     Should Contain  ${resp}  ${resp_expect}  msg=Expecting ${resp_expect} but got ${resp}.
 
 Execute IPMI Raw Command And Verify Timer Expiration Data
@@ -240,10 +240,10 @@ Execute IPMI Raw Command And Verify Timer Expiration Data
     # get_raw_cmd        The response bytes for the command.
     # resp_expect        The expected response bytes for the command.
 
-    Run IPMI Standard Command  raw ${set_raw_cmd}
-    Run IPMI Standard Command  raw ${get_raw_cmd}
-    Run IPMI Standard Command  raw ${IPMI_RAW_CMD['Watchdog']['Reset'][0]}
-    ${resp}=  Run IPMI Standard Command  raw ${get_raw_cmd}
+    Run IPMI Command  ${set_raw_cmd}
+    Run IPMI Command  ${get_raw_cmd}
+    Run IPMI Command  ${IPMI_RAW_CMD['Watchdog']['Reset'][0]}
+    ${resp}=  Run IPMI Command  ${get_raw_cmd}
     Should Contain  ${resp}  ${resp_expect}  msg=Expecting ${resp_expect} but got ${resp}.
 
 Validate Watchdog Timer Actions And SEL Events
@@ -262,10 +262,10 @@ Validate Watchdog Timer Actions And SEL Events
     Run IPMI Standard Command  sel clear
 
     # Set watchdog timer action to perform action.
-    Run IPMI Standard Command  raw ${set_raw_cmd}
+    Run IPMI Command  ${set_raw_cmd}
 
     # Reset Watchdog Timer.
-    Run IPMI Standard Command  raw ${IPMI_RAW_CMD['Watchdog']['Reset'][0]}
+    Run IPMI Command  ${IPMI_RAW_CMD['Watchdog']['Reset'][0]}
 
     # Delay for power state.
     Sleep  ${POWER_STATE_CHANGE}
@@ -322,7 +322,7 @@ Watchdog Invalid Request Data Length
     # watchdog_command     The raw watchdog IPMI command request bytes.
 
     Run Keyword and Expect Error  *Request data length*
-    ...  Run IPMI Standard Command  raw ${watchdog_command}
+    ...  Run IPMI Command  ${watchdog_command}
 
 Validate Watchdog Pre-timeout
     [Documentation]   Verify watchdog pre-timeout valid request bytes.
@@ -332,7 +332,7 @@ Validate Watchdog Pre-timeout
     # watchdog_command     The raw watchdog IPMI command request bytes.
     # response             The expected response bytes.
 
-    ${resp}=  Run IPMI Standard Command  raw ${watchdog_command}
+    ${resp}=  Run IPMI Command  ${watchdog_command}
     Should Contain  ${resp}  ${response}
 
 Get Watchdog Timer And Compare To Start Value
@@ -343,7 +343,7 @@ Get Watchdog Timer And Compare To Start Value
     # start_timer_integer     The initial value for the watchdog timer.
 
     # Get Watchdog Timer.
-    ${resp}=  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['Watchdog']['Get'][0]}
+     ${resp}=  Run IPMI Command  ${IPMI_RAW_CMD['Watchdog']['Get'][0]}
     @{timer_value}=  Split String  ${resp}
 
     # Convert to integer and compare with start value.
