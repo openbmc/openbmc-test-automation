@@ -285,7 +285,7 @@ Get User Access Payload For Given Channel
 
     ${raw_command}=  Catenate  ${IPMI_RAW_CMD['Payload']['Get_User_Access_Payload'][0]}
     ...  ${channel_number} ${user_id}
-    ${resp}=  Run External IPMI Raw Command  ${raw_command}
+    ${resp}=  Run IPMI Command  ${raw_command}
     [Return]  ${resp}
 
 
@@ -345,7 +345,7 @@ Verify Username And Password
     # password    The user password (e.g. "0penBmc", "0penBmc1", etc.).
     # options     Additional ipmitool command options  (e.g "-L=Operator","-C=3").
 
-    Wait Until Keyword Succeeds  15 sec  5 sec  Run External IPMI Raw Command
+    Wait Until Keyword Succeeds  15 sec  5 sec  Run IPMI Command
     ...  ${IPMI_RAW_CMD['Device GUID']['Get'][0]}  U=${username}  P=${password}  &{options}
 
 
@@ -476,7 +476,7 @@ Verify Payload Type Version
         ${get_cmd}=  Catenate  ${IPMI_RAW_CMD['Payload']['Get_Channel_Payload_Version'][0]}
         ...  ${channel_number} ${payload_type_number}
 
-        ${resp}=  Run External IPMI Raw Command  ${get_cmd}
+        ${resp}=  Run IPMI Command  ${get_cmd}
         ${resp}=  Strip String  ${resp}
         Should Be Equal  ${resp}  10
     END
@@ -529,7 +529,7 @@ Verify Payload Support
     ...  Verify Invalid IPMI Command  ${raw_cmd}  0xcc
 
     # will be executed only if invalid_channel == 0.
-    ${resp}=  Run External IPMI Raw Command  ${raw_cmd}
+    ${resp}=  Run IPMI Command  ${raw_cmd}
 
     ${resp}=  Strip String  ${resp}
     ${expected_resp}=  Catenate  ${standard_payload_type_resp}  ${session_setup_payload_resp} 00 00 00 00

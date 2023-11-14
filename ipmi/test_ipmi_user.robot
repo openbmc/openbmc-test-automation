@@ -471,7 +471,7 @@ Verify Continuous IPMI Command Execution
     [Tags]  Verify_Continuous_IPMI_Command_Execution
 
     FOR  ${i}  IN RANGE  ${USER_LOOP_COUNT}
-        Run IPMI Standard Command  lan print
+        Run IPMI Standard Command  lan print ${CHANNEL_NUMBER}
         Run IPMI Standard Command  power status
         Run IPMI Standard Command  fru list
         Run IPMI Standard Command  sel list
@@ -664,7 +664,7 @@ Determine Root User Id
     [Documentation]  Determines the user ID of the root user.
 
     ${resp}=  Wait Until Keyword Succeeds  15 sec  1 sec  Run IPMI Standard Command
-    ...  user list
+    ...  user list ${CHANNEL_NUMBER}
     @{lines}=  Split To Lines  ${resp}
 
     ${root_userid}=  Set Variable  ${-1}
@@ -736,7 +736,7 @@ Verify IPMI Username Visible
     # Description of argument(s):
     # username         The user name (e.g. "root", "robert", etc.).
 
-    ${resp}=  Run IPMI Standard Command  user list
+    ${resp}=  Run IPMI Standard Command  user list ${CHANNEL_NUMBER}
     Should Contain  ${resp}  ${username}
 
 

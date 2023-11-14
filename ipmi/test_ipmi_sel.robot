@@ -124,13 +124,13 @@ Verify Reserve SEL
     [Documentation]  Verify reserve SEL.
     [Tags]  Verify_Reserve_SEL
 
-    ${resp}=  Run IPMI Standard Command
+    ${resp}=  Run IPMI Command
     ...  raw ${IPMI_RAW_CMD['SEL_entry']['Reserve'][0]}
     ${reserve_id}=  Split String  ${resp}
 
     # Execute clear SEL raw command with Reservation ID.
     # Command will not execute unless the correct Reservation ID value is provided.
-    Run IPMI Standard Command
+    Run IPMI Command
     ...  raw 0x0a 0x47 0x${reserve_id[0]} 0x${reserve_id[1]} 0x43 0x4c 0x52 0xaa
 
     # Check SEL list.
@@ -210,12 +210,12 @@ Verify Clear SEL With Invalid Reservation ID
     [Tags]  Verify_Clear_SEL_With_Invalid_Reservation_ID
 
     # Reserve Sel command - 1.
-    ${resp}=  Run IPMI Standard Command
+    ${resp}=  Run IPMI Command
     ...  raw ${IPMI_RAW_CMD['SEL_entry']['Reserve'][0]}
     ${reserve_id}=  Split String  ${resp}
 
     # Reserve Sel command - 2.
-    ${resp}=  Run IPMI Standard Command
+    ${resp}=  Run IPMI Command
     ...  raw ${IPMI_RAW_CMD['SEL_entry']['Reserve'][0]}
 
     ${cmd}=  Catenate  ${IPMI_RAW_CMD['SEL_entry']['Clear_SEL'][0]} 0x${reserve_id[0]}
@@ -223,7 +223,7 @@ Verify Clear SEL With Invalid Reservation ID
 
     # Clear SEL command.
     ${clear_resp}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['SEL_entry']['Clear_SEL'][4]}*
-    ...  Run IPMI Standard Command  raw ${cmd}
+    ...  Run IPMI Command  ${cmd}
     Should Contain  ${clear_resp}  ${IPMI_RAW_CMD['SEL_entry']['Clear_SEL'][5]}
 
 
@@ -233,7 +233,7 @@ Verify Reservation ID Erasure Status
     [Tags]  Verify_Reservation_ID_Erasure_Status
 
     # Generate Reserve ID 1.
-    ${resp}=  Run IPMI Standard Command
+    ${resp}=  Run IPMI Command
     ...  raw ${IPMI_RAW_CMD['SEL_entry']['Reserve'][0]}
     ${reserve_id}=  Split String  ${resp}
 
@@ -242,10 +242,10 @@ Verify Reservation ID Erasure Status
 
     # Execute clear SEL raw command with Reservation ID.
     # Command will not execute unless the correct Reservation ID value is provided.
-    Run IPMI Standard Command  raw ${cmd1}
+    Run IPMI Command  ${cmd1}
 
     # Generate Reserver ID 2.
-    ${resp}=  Run IPMI Standard Command
+    ${resp}=  Run IPMI Command
     ...  raw ${IPMI_RAW_CMD['SEL_entry']['Reserve'][0]}
     ${reserve_id}=  Split String  ${resp}
 
@@ -253,7 +253,7 @@ Verify Reservation ID Erasure Status
     ...  0x${reserve_id[1]} ${IPMI_RAW_CMD['SEL_entry']['Clear_SEL'][6]}
 
     # Check the Erasure status of Clear SEL.
-    ${data}=  Run IPMI Standard Command  raw ${cmd2}
+    ${data}=  Run IPMI Command  ${cmd2}
 
     # 00 - Erasure in Progress , 01 - Erasure Complete.
     Should Contain Any  ${data}  00  01
@@ -264,7 +264,7 @@ Verify Clear SEL After Cold Reset
     [Tags]  Verify_Clear_SEL_After_Cold_Reset
 
     # Reserve Sel command.
-    ${resp}=  Run IPMI Standard Command
+    ${resp}=  Run IPMI Command
     ...  raw ${IPMI_RAW_CMD['SEL_entry']['Reserve'][0]}
     ${reserve_id}=  Split String  ${resp}
 
@@ -276,7 +276,7 @@ Verify Clear SEL After Cold Reset
 
     # Clear SEL command.
     ${clear_resp}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['SEL_entry']['Clear_SEL'][5]}*
-    ...  Run IPMI Standard Command  raw ${cmd}
+    ...  Run IPMI Command  ${cmd}
 
     Should Contain  ${clear_resp}  ${IPMI_RAW_CMD['SEL_entry']['Clear_SEL'][4]}
 
@@ -308,7 +308,7 @@ Get SEL Entry Via IPMI
     ...  0x${record2} ${IPMI_RAW_CMD['SEL_entry']['Get_SEL_Entry'][1]}
 
     # Get SEL Entry Raw command.
-    ${resp}=  Run IPMI Standard Command  raw ${cmd}
+    ${resp}=  Run IPMI Command  ${cmd}
     ${resp}=  Split String  ${resp}
 
     [Return]  ${resp}
