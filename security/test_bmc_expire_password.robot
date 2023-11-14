@@ -259,6 +259,25 @@ Verify Error While Creating User With Expired Admin Password
     ...  valid_status_codes=[${HTTP_FORBIDDEN}]
 
 
+Verify New Admin Password Persistency After BMC Reboot
+    [Documentation]  Verify new admin password persistency after BMC reboot.
+    [Tags]  Verify_New_Admin_Password_Persistency_After_BMC_Reboot
+    [Setup]  Redfish Create User  ${admin_user}  ${default_adminuser_passwd}  Administrator  ${True}
+    [Teardown]  Restore Default Password For Admin User
+
+    Expire Password  ${admin_user}
+
+    ${status}=  Run Keyword And Return Status
+    ...  Redfish.Patch  /redfish/v1/AccountService/Accounts/${admin_user}
+    ...  body={'Password': '${admin_password}'}
+
+    # Reboot BMC and verify persistency.
+    Redfish OBMC Reboot (off)  stack_mode=skip
+
+    # Verify password is persisted after bmc reboot.
+    Redfish.Login  ${admin_user}  ${admin_password}
+
+
 *** Keywords ***
 
 Set Account Lockout Threshold
