@@ -176,7 +176,7 @@ Test Modifying User Privilege Of Existing User Via GUI
 
     # Get random username and user privilege level.
     ${username}=  Generate Random String  8  [LETTERS]
-    ${privilege_level}=  Evaluate  random.choice(${user_privilege_list})  random
+    ${privilege_level}=  Evaluate  random.choice(${list_user_privilege})  random
 
     # Create new user account.
     Create User And Verify  ${username}  ${privilege_level}  ${True}
