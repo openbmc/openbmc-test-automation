@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c542d694_951bfd7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-11-14T10:01:07Z",
+      "side": 1,
+      "message": "Please run the boot test with this changes for the following boots and let us know if it works good.\n\n-v \u0027power_on_timeout:30 mins\u0027 -v \u0027boot_stack:Redfish Power On:Redfish Power Off:Redfish OBMC Reboot (run):Redfish OBMC Reboot (off):Redfish Power On:Redfish Power Off:Redfish OBMC Reboot (run):Redfish OBMC Reboot (off):Redfish Power On:Redfish Power Off:Redfish OBMC Reboot (run):Redfish OBMC Reboot (off)\u0027 extended/obmc_boot_test.robot",
+      "revId": "afcdba73a4d4bc8b728ba368fee9686ccc818947",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
