@@ -16,6 +16,24 @@
       "message": "These are web UI test .. so the browser url wont need the HTTPS port.",
       "revId": "828c53aed24d4cdb8b7f038a842e1e750765e7ab",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e56cb5e_31f90647",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001842
+      },
+      "writtenOn": "2023-11-14T14:36:10Z",
+      "side": 1,
+      "message": "When running in an emulator exposing port 443 on an alternate port you do need this.  For example running qemu we expose 443 to 2443 for all https traffic.",
+      "parentUuid": "ea70a841_013e56a8",
+      "revId": "828c53aed24d4cdb8b7f038a842e1e750765e7ab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
