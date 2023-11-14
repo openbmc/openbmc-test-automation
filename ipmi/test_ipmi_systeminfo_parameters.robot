@@ -96,8 +96,8 @@ Verify Get System Info Set In Progress With Invalid Data Length
     # Check if the Get System Info Parameter for param 0 - set in progress throws
     # error for invalid data length.
     Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Get'][1]}*
-    ...  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Get'][0]} 0x00
+    ...  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Get'][0]} 0x00
 
 
 Verify Set System Info Set In Progress With Invalid Data Length
@@ -108,8 +108,8 @@ Verify Set System Info Set In Progress With Invalid Data Length
     # Check if the Set System Info Parameter for param 0 - set in progress throws
     # error for invalid data length.
     Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Set'][1]}*
-    ...  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Set'][0]} 0x00 0x00
+    ...  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Set'][0]} 0x00 0x00
 
 
 Verify Set System Info Set In Progress With Invalid State
@@ -119,8 +119,8 @@ Verify Set System Info Set In Progress With Invalid State
 
     # Check if the Set System Info Parameter for param 0 - set in progress throws error for invalid State.
     Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Set'][2]}*
-    ...  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Set'][0]} 0x04
+    ...  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Set'][0]} 0x04
 
 
 Verify System Info System Firmware Version
@@ -154,8 +154,8 @@ Verify Get System Info System Firmware Version With Invalid Data Length
     # Check if the Get System Info Parameter for param 1 - System Firmware Version throws
     # error for invalid data length.
     Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param1_System_Firmware_Version']['Get'][1]}*
-    ...  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param1_System_Firmware_Version']['Get'][0]} 0x00
+    ...  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param1_System_Firmware_Version']['Get'][0]} 0x00
 
 
 Verify Set System Info System Firmware Version With Invalid Data Length
@@ -176,8 +176,8 @@ Verify Set System Info System Firmware Version With Invalid Data Length
     # Check if the Set System Info Parameter for param 1 - System Firmware Version throws
     # error for invalid request data.
     Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param1_System_Firmware_Version']['Set'][1]}*
-    ...  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param1_System_Firmware_Version']['Set'][0]} ${firmware_version}
+    ...  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param1_System_Firmware_Version']['Set'][0]} ${firmware_version}
 
 
 Verify System Info System Name
@@ -213,8 +213,8 @@ Verify Get System Info System Name With Invalid Data Length
     # Check if the Get System Info Parameter for param 2 - System Name throws error
     # for invalid request data length.
     Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param2_System_Name']['Get'][1]}*
-    ...  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param2_System_Name']['Get'][0]} 0x00
+    ...  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param2_System_Name']['Get'][0]} 0x00
 
 
 Verify Set System Info System Name With Invalid Data Length
@@ -235,8 +235,8 @@ Verify Set System Info System Name With Invalid Data Length
 
     # Check if the Set System Info Parameter for param 2 - System Name throws error for invalid request data.
     Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param2_System_Name']['Set'][1]}*
-    ...  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param2_System_Name']['Set'][0]} ${system_name}
+    ...  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param2_System_Name']['Set'][0]} ${system_name}
 
 
 Verify System Info Primary OS Name
@@ -266,8 +266,8 @@ Verify Get System Info Primary OS Name With Invalid Data Length
     # Check if the Get System Info Parameter for param 3 - Primary OS Name throws
     # error for invalid request data.
     Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Get'][1]}*
-    ...  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Get'][0]} 0x00
+    ...  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Get'][0]} 0x00
 
 
 Verify Set System Info Primary OS Name With Invalid Data Length
@@ -287,8 +287,8 @@ Verify Set System Info Primary OS Name With Invalid Data Length
     # Check if the Set System Info Parameter for param 3 - Primary OS Name throws error
     # for invalid data request.
     Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Set'][1]}*
-    ...  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Set'][0]} ${os_name}
+    ...  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Set'][0]} ${os_name}
 
 
 Verify System Info OS Name
@@ -344,8 +344,8 @@ Verify Get System Info OS Name With Invalid Data Length
 
     # Check if the Get System Info Parameter for param 4 - OS Name throws error for invalid request data.
     Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Get'][1]}*
-    ...  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Get'][0]} 0x00
+    ...  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Get'][0]} 0x00
 
 
 Verify Set System Info OS Name With Invalid Data Length
@@ -364,8 +364,8 @@ Verify Set System Info OS Name With Invalid Data Length
 
     # Check if the Set System Info Parameter for param 4 - OS Name throws error for invalid request data.
     Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Set'][1]}*
-    ...  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Set'][0]} ${os_name}
+    ...  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Set'][0]} ${os_name}
 
 
 Verify System Info Present OS Version Number
@@ -397,8 +397,8 @@ Verify Get System Info Present OS Version Number With Invalid Data Length
     # error for invalid request data.
     Run Keyword and Expect Error
     ...  *${IPMI_RAW_CMD['System_Info']['param5_Present_OS_Version_number']['Get'][1]}*
-    ...  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param5_Present_OS_Version_number']['Get'][0]} 0x00
+    ...  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param5_Present_OS_Version_number']['Get'][0]} 0x00
 
 
 Verify Set System Info Present OS Version Number With Invalid Data Length
@@ -419,8 +419,8 @@ Verify Set System Info Present OS Version Number With Invalid Data Length
     # error for invalid request data.
     Run Keyword and Expect Error
     ...  *${IPMI_RAW_CMD['System_Info']['param5_Present_OS_Version_number']['Set'][1]}*
-    ...  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param5_Present_OS_Version_number']['Set'][0]} ${os_name}
+    ...  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param5_Present_OS_Version_number']['Set'][0]} ${os_name}
 
 
 *** Keywords ***
@@ -456,8 +456,8 @@ Get System Info Set In Progress
     [Documentation]  Run Get system info parameter command for set-in-progress and return response data.
 
     # Get System Info Parameter for param 0 - Set In Progress.
-    ${resp}=  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Get'][0]}
+    ${resp}=  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Get'][0]}
     ${resp}=  Split String  ${resp}
 
     [Return]  ${resp}
@@ -469,8 +469,8 @@ Set System Info Set In Progress
 
     # Set System Info Parameter for param 0 - Set In Progress.
     # ${state} can be can be any - 00 | 01 | 10 | 11.
-    Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Set'][0]} ${state}
+    Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Set'][0]} ${state}
 
 
 Get System Firmware Version
@@ -478,8 +478,8 @@ Get System Firmware Version
     ...              and return response data.
 
     # Get System Info Parameter for param 1 - System Firmware Version.
-    ${resp}=  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param1_System_Firmware_Version']['Get'][0]}
+    ${resp}=  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param1_System_Firmware_Version']['Get'][0]}
     ${resp}=  Split String  ${resp}
 
     [Return]  ${resp}
@@ -491,16 +491,16 @@ Set System Firmware Version
 
     # Set System Info Parameter for param 1 - System Firmware Version.
     # ${version} can be any 14 data.
-    Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param1_System_Firmware_Version']['Set'][0]} ${version}
+    Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param1_System_Firmware_Version']['Set'][0]} ${version}
 
 
 Get System Name
     [Documentation]  Run system info parameter command for system name and return response data.
 
     # Get System Info Parameter for param 2 - System Name.
-    ${resp}=  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param2_System_Name']['Get'][0]}
+    ${resp}=  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param2_System_Name']['Get'][0]}
     ${resp}=  Split String  ${resp}
 
     [Return]  ${resp}
@@ -512,16 +512,16 @@ Set System Name
 
     # Set System Info Parameter for param 2 - System Name.
     # ${sys_name} can be any 14 byte data.
-    Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param2_System_Name']['Set'][0]} ${sys_name}
+    Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param2_System_Name']['Set'][0]} ${sys_name}
 
 
 Get Primary OS Name
     [Documentation]  Run Get System Info command for primary OS name and return response data.
 
     # Get System Info Parameter for param 3 - Primary OS Name.
-    ${resp}=  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Get'][0]}
+    ${resp}=  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Get'][0]}
     ${resp}=  Split String  ${resp}
 
     [Return]  ${resp}
@@ -533,16 +533,16 @@ Set Primary OS Name
 
     # Set System Info Parameter for param 3 - Primary OS Name.
     # ${os_name} can be any 14 byte data.
-    Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Set'][0]} ${os_name}
+    Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Set'][0]} ${os_name}
 
 
 Get OS Name
     [Documentation]  Run get System Info command for OS name and return response data.
 
     # Get System Info Parameter for param 4 - OS Name.
-    ${resp}=  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Get'][0]}
+    ${resp}=  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Get'][0]}
     ${resp}=  Split String  ${resp}
 
     [Return]  ${resp}
@@ -554,16 +554,16 @@ Set OS Name
 
     # Set System Info Parameter for param 4 - OS Name.
     # ${os_name} can be any 14 byte data.
-    Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Set'][0]} ${os_name}
+    Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Set'][0]} ${os_name}
 
 
 Get Present OS Version Number
     [Documentation]  Run Get System Info command for present os version name and return response.
 
     # Get System Info Parameter for param 5 - Present OS Version Number.
-    ${resp}=  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param5_Present_OS_Version_number']['Get'][0]}
+    ${resp}=  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param5_Present_OS_Version_number']['Get'][0]}
     ${resp}=  Split String  ${resp}
 
     [Return]  ${resp}
@@ -575,8 +575,8 @@ Set Present OS Version Number
 
     # Set System Info Parameter for param 5 - Present OS Version Number.
     # ${os_name} can be any 14 byte data
-    Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['System_Info']['param5_Present_OS_Version_number']['Set'][0]} ${os_name}
+    Run IPMI Command
+    ...  ${IPMI_RAW_CMD['System_Info']['param5_Present_OS_Version_number']['Set'][0]} ${os_name}
 
 
 Add Prefix To List Objects And Join String
@@ -672,16 +672,16 @@ Restore Default Configuration
     Set System Info Set In Progress  0x${set_in_progress}
 
     # System Firmware Version - param 1.
-    Run IPMI Standard Command  raw 0x06 0x58 0x01 0x00 ${sys_fw_version_string}
+    Run IPMI Command  0x06 0x58 0x01 0x00 ${sys_fw_version_string}
 
     # System Name - param 2.
-    Run IPMI Standard Command  raw 0x06 0x58 0x02 0x00 ${sys_name_hex_default}
+    Run IPMI Command  0x06 0x58 0x02 0x00 ${sys_name_hex_default}
 
     # Primary OS Name - param 3.
-    Run IPMI Standard Command  raw 0x06 0x58 0x03 0x00 ${primary_os_name_hex}
+    Run IPMI Command  0x06 0x58 0x03 0x00 ${primary_os_name_hex}
 
     # OS Name - param 4.
-    Run IPMI Standard Command  raw 0x06 0x58 0x04 0x00 ${default_os_name_hex}
+    Run IPMI Command  0x06 0x58 0x04 0x00 ${default_os_name_hex}
 
     # Present OS Version Number - param 5.
-    Run IPMI Standard Command  raw 0x06 0x58 0x05 0x00 ${present_os_num_hex}
+    Run IPMI Command  0x06 0x58 0x05 0x00 ${present_os_num_hex}

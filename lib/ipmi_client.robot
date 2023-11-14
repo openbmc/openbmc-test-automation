@@ -598,8 +598,8 @@ Get SEL Info Via IPMI
 
     # Example: ${resp} will be "51 XX XX XX XX ff ff ff ff ff ff ff ff XX"
 
-    ${resp}=  Run IPMI Standard Command
-    ...  raw ${IPMI_RAW_CMD['SEL_entry']['SEL_info'][0]}
+    ${resp}=  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['SEL_entry']['SEL_info'][0]}
     ${resp}=  Split String  ${resp}
 
     [Return]  ${resp}
@@ -613,7 +613,7 @@ Verify Invalid IPMI Command
     #  ${ipmi_cmd}   - IPMI raw cmd with invalid data length.
     #  ${error_code} - Expected error code e.g 0xc7, 0xcc.
 
-    ${resp}=  Run External IPMI Raw Command  ${ipmi_cmd}  fail_on_err=0
+    ${resp}=  Run IPMI Command  ${ipmi_cmd}  fail_on_err=0
 
     Should Contain  ${resp}  rsp=${error_code}
 

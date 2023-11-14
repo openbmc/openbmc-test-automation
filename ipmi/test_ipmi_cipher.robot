@@ -188,7 +188,7 @@ Verify Cipher ID and Supported Algorithm For Channel
     ${cmd}=  Catenate  ${IPMI_RAW_CMD['Cipher Suite']['get'][0]}
     ...  ${channel_num} ${payload_type} ${index_value}
 
-    ${resp}=  Run External IPMI Raw Command  ${cmd}
+    ${resp}=  Run IPMI Command  ${cmd}
     ${resp}=  Strip String  ${resp}
 
     # channel 14 represents current channel in which we send request.
