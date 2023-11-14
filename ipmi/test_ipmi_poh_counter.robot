@@ -48,7 +48,7 @@ Get POH Counter Command Via IPMI
     [Tags]  Get_POH_Counter_Command_Via_IPMI
 
     # Verify get POH counter command via IPMI.
-    ${resp}=  Run IPMI Command
+    ${resp}=  Run External IPMI Raw Command
     ...  ${IPMI_RAW_CMD['Get']['POH_Counter'][0]}
     Should Not Contain  ${resp}  ${IPMI_RAW_CMD['Get']['POH_Counter'][1]}
 
@@ -59,7 +59,7 @@ Verify Get POH Counter With Invalid Data Request Via IPMI
 
     # verify get POH counter command with invalid data request Via IPMI.
     ${resp}=  Run Keyword and Expect Error  *Request data length invalid*
-    ...  Run IPMI Command  ${IPMI_RAW_CMD['Get']['POH_Counter'][0]} 0x00
+    ...  Run External IPMI Raw Command  ${IPMI_RAW_CMD['Get']['POH_Counter'][0]} 0x00
 
 
 Verify POH Counter Reading With Wait Time
@@ -130,7 +130,7 @@ Run Get POH Command And Return Counter Reading
     [Documentation]  Run the IPMI command to Get POH Counter.
 
     # Get POH counter Via IPMI.
-    ${resp}=  Run IPMI Command
+    ${resp}=  Run External IPMI Raw Command
     ...  ${IPMI_RAW_CMD['Get']['POH_Counter'][0]}
 
     # Verify Minutes per count.

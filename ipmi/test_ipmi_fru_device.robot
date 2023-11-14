@@ -29,7 +29,7 @@ Test FRU Device Name
     [Documentation]  Search FRU for device name
     [Tags]  Test_FRU_Device_Name
 
-    ${output}=  Run External IPMI Standard Command  fru
+    ${output}=  Run IPMI Standard Command  fru
     Should Contain  ${output}  ${FRU_NAME}  msg=Fail: Given FRU device ${FRU_NAME} not found
 
 
@@ -39,7 +39,7 @@ Verify Fru Device Configuration
     [Tags]  Verify_Fru_Device_Configuration
 
     # IPMI FRU print.
-    ${ipmi_output}=  Run External IPMI Standard Command  fru
+    ${ipmi_output}=  Run IPMI Standard Command  fru
 
     # Create dictionary with FRU device serial number as key and details as value from IPMI.
     ${ipmi_fru}=  Get IPMI FRU Devices Data  ${ipmi_output}
@@ -78,7 +78,7 @@ Verify Get FRU Inventory Area Info For Invalid Device Data
 
     # Verify response for invalid FRU device id.
     Run Keyword and Expect Error  *${IPMI_RAW_CMD['FRU']['Inventory_Area_Info'][1]}*
-    ...  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['FRU']['Inventory_Area_Info'][0]} ${fru_device_id_invalid}
+    ...  Run IPMI Command  ${IPMI_RAW_CMD['FRU']['Inventory_Area_Info'][0]} ${fru_device_id_invalid}
 
 
 Verify Get FRU Inventory Area Info For Invalid Data Request
@@ -87,7 +87,7 @@ Verify Get FRU Inventory Area Info For Invalid Data Request
 
     # Verify response for invalid response data - extra bytes.
     Run Keyword and Expect Error  *${IPMI_RAW_CMD['FRU']['Inventory_Area_Info'][2]}*
-    ...  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['FRU']['Inventory_Area_Info'][0]} ${fru_device_id} 0x00
+    ...  Run IPMI Command  ${IPMI_RAW_CMD['FRU']['Inventory_Area_Info'][0]} ${fru_device_id} 0x00
 
 
 Verify IPMI Write FRU Data
@@ -313,7 +313,7 @@ Compare IPMI FRU with DBUS
 Get FRU Inventory Area Info
     [Documentation]  IPMI Get FRU Inventory Area Info and returns FRU Inventory area size in bytes.
 
-    ${resp}=  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['FRU']['Inventory_Area_Info'][0]} ${fru_device_id}
+    ${resp}=  Run IPMI Command  ${IPMI_RAW_CMD['FRU']['Inventory_Area_Info'][0]} ${fru_device_id}
     ${resp}=  Split String  ${resp}
 
     [Return]  ${resp[0]}
@@ -329,7 +329,7 @@ Read FRU Data Via IPMI
 
     # IPMI Read FRU Data Command.
     # 0xff - Count to read --- count is ‘1’ based
-    ${resp}=  Run IPMI Standard Command
+    ${resp}=  Run IPMI Command
     ...  raw ${IPMI_RAW_CMD['FRU']['Read'][0]} ${fru_id} ${offset} 0xff
 
     [Return]  ${resp}
@@ -346,7 +346,7 @@ Write FRU Data Via IPMI
    # length        Count of bytes that gets written in write FRU command.
 
     # IPMI Write FRU Data Command.
-    ${resp}=  Run IPMI Standard Command
+    ${resp}=  Run IPMI Command
     ...  raw ${IPMI_RAW_CMD['FRU']['Write'][0]} ${fru_id} ${offset} ${data}
 
     Should Be Equal As Strings  ${resp}  ${length}

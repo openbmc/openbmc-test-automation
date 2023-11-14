@@ -27,7 +27,7 @@ Set SOL Enabled
     [Documentation]  Verify enabling SOL via IPMI.
     [Tags]  Set_SOL_Enabled
 
-    ${msg}=  Run Keyword  Run IPMI Standard Command
+    ${msg}=  Run Keyword  Run External IPMI Standard Command
     ...  sol set enabled true
 
     # Verify SOL status from ipmitool sol info command.
@@ -42,7 +42,7 @@ Set SOL Disabled
     [Documentation]  Verify disabling SOL via IPMI.
     [Tags]  Set_SOL_Disabled
 
-    ${msg}=  Run Keyword  Run IPMI Standard Command
+    ${msg}=  Run Keyword  Run External IPMI Standard Command
     ...  sol set enabled false
 
     # Verify SOL status from ipmitool sol info command.
@@ -52,7 +52,7 @@ Set SOL Disabled
     Should Be Equal  '${sol_enable_status}'  'false'
 
     # Verify error while activating SOL with SOL disabled.
-    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
+    ${msg}=  Run Keyword And Expect Error  *  Run External IPMI Standard Command
     ...  sol activate
     Should Contain  ${msg}  SOL payload disabled  ignore_case=True
 
@@ -75,7 +75,7 @@ Set Invalid SOL Privilege Level
     [Tags]  Set_Invalid_SOL_Privilege_Level
 
     ${value}=  Generate Random String  ${8}
-    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
+    ${msg}=  Run Keyword And Expect Error  *  Run External IPMI Standard Command
     ...  sol set privilege-level ${value}
     Should Contain  ${msg}  Invalid value  ignore_case=True
 
@@ -87,7 +87,7 @@ Set Invalid SOL Retry Count
     # Any integer above 7 is invalid for SOL retry count.
     ${value}=  Evaluate  random.randint(8, 10000)  modules=random
 
-    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
+    ${msg}=  Run Keyword And Expect Error  *  Run External IPMI Standard Command
     ...  sol set retry-count ${value}
     Should Contain  ${msg}  Invalid value  ignore_case=True
 
@@ -99,7 +99,7 @@ Set Invalid SOL Retry Interval
     # Any integer above 255 is invalid for SOL retry interval.
     ${value}=  Evaluate  random.randint(256, 10000)  modules=random
 
-    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
+    ${msg}=  Run Keyword And Expect Error  *  Run External IPMI Standard Command
     ...  sol set retry-interval ${value}
     Should Contain  ${msg}  Invalid value  ignore_case=True
 
@@ -111,7 +111,7 @@ Set Invalid SOL Character Accumulate Level
     # Any integer above 255 is invalid for SOL character accumulate level.
     ${value}=  Evaluate  random.randint(256, 10000)  modules=random
 
-    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
+    ${msg}=  Run Keyword And Expect Error  *  Run External IPMI Standard Command
     ...  sol set character-accumulate-level ${value}
     Should Contain  ${msg}  Invalid value  ignore_case=True
 
@@ -123,7 +123,7 @@ Set Invalid SOL Character Send Threshold
     # Any integer above 255 is invalid for SOL character send threshold.
     ${value}=  Evaluate  random.randint(256, 10000)  modules=random
 
-    ${msg}=  Run Keyword And Expect Error  *  Run IPMI Standard Command
+    ${msg}=  Run Keyword And Expect Error  *  Run External IPMI Standard Command
     ...  sol set character-send-threshold ${value}
     Should Contain  ${msg}  Invalid value  ignore_case=True
 
@@ -238,7 +238,7 @@ Set Valid SOL Non Volatile Bit Rate
 
       # Set valid non-volatile-bit-rate from SOL Info.
       Run Keyword And Expect Error  *Parameter not supported*
-      ...  Run IPMI Standard Command
+      ...  Run External IPMI Standard Command
       ...  sol set non-volatile-bit-rate ${bit_rate}
 
     END
@@ -250,7 +250,7 @@ Set Invalid SOL Non Volatile Bit Rate
 
     # Set Invalid non-volatile-bit-rate from SOL Info.
     ${resp} =  Run Keyword and Expect Error  *${IPMI_RAW_CMD['SOL']['Set_SOL'][0]}*
-    ...  Run IPMI Standard Command  sol set non-volatile-bit-rate ${invalid_bit_rate}
+    ...  Run External IPMI Standard Command  sol set non-volatile-bit-rate ${invalid_bit_rate}
 
     # Compares whether valid values are displayed.
     Should Contain  ${resp}  ${IPMI_RAW_CMD['SOL']['Set_SOL'][1]}  ignore_case=True
@@ -264,7 +264,7 @@ Set Valid SOL Volatile Bit Rate
 
       # Set valid volatile-bit-rate from SOL Info.
       Run Keyword and Expect Error  *Parameter not supported*
-      ...  Run IPMI Standard Command
+      ...  Run External IPMI Standard Command
       ...  sol set volatile-bit-rate ${bit_rate}
 
     END
@@ -276,7 +276,7 @@ Set Invalid SOL Volatile Bit Rate
 
     # Set invalid volatile-bit-rate from SOL Info.
     ${resp} =  Run Keyword and Expect Error  *${IPMI_RAW_CMD['SOL']['Set_SOL'][0]}*
-    ...  Run IPMI Standard Command  sol set volatile-bit-rate ${invalid_bit_rate}
+    ...  Run External IPMI Standard Command  sol set volatile-bit-rate ${invalid_bit_rate}
 
     # Compares whether valid values are displayed.
     Should Contain  ${resp}  ${IPMI_RAW_CMD['SOL']['Set_SOL'][1]}  ignore_case=True
@@ -290,7 +290,7 @@ Verify SOL Set In Progress
 
     # Set the param 0 - set-in-progress from SOL Info.
     FOR  ${prog}  IN  @{setinprogress}
-       Run Keyword  Run IPMI Standard Command  sol set set-in-progress ${prog}
+       Run Keyword  Run External IPMI Standard Command  sol set set-in-progress ${prog}
        # Get the param 0 - set-in-progress from SOL Info and verify.
        ${set_inprogress_state}=  Get SOL Setting  Set in progress
        Should Be Equal  ${prog}  ${set_inprogress_state}
