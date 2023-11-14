@@ -30,7 +30,7 @@ IPMI Chassis Status On
     [Tags]  IPMI_Chassis_Status_On
 
     Redfish Power On  stack_mode=skip  quiet=1
-    ${resp}=  Run IPMI Standard Command  chassis status
+    ${resp}=  Run External IPMI Standard Command  chassis status
     ${power_status}=  Get Lines Containing String  ${resp}  System Power
     Should Contain  ${power_status}  on
 
@@ -40,7 +40,7 @@ IPMI Chassis Status Off
     [Tags]  IPMI_Chassis_Status_Off
 
     Redfish Power Off  stack_mode=skip  quiet=1
-    ${resp}=  Run IPMI Standard Command  chassis status
+     ${resp}=  Run External IPMI Standard Command  chassis status
     ${power_status}=  Get Lines Containing String  ${resp}  System Power
     Should Contain  ${power_status}  off
 
@@ -66,7 +66,7 @@ Verify Soft Shutdown
     [Tags]  Verify_Soft_Shutdown
 
     Redfish Power On  stack_mode=skip
-    Run IPMI Standard Command  chassis power soft
+    Run External IPMI Standard Command  chassis power soft
     Wait Until Keyword Succeeds  ${IPMI_POWEROFF_WAIT_TIMEOUT} min  10 sec  Is Host Off Via IPMI
 
 
@@ -97,7 +97,7 @@ Verify Chassis Power Policy
     [Tags]  Verify_Chassis_Power_Policy
     [Setup]  Test Setup Execution
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Run IPMI Standard Command  chassis policy ${initial_power_policy}
+    ...  Run External IPMI Standard Command  chassis policy ${initial_power_policy
     [Template]  Set Chassis Power Policy Via IPMI And Verify
 
     # power_policy
@@ -111,7 +111,7 @@ Verify Chassis Status Via IPMI
     [Tags]  Verify_Chassis_Status_Via_IPMI
     [Setup]  Test Setup Execution
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Run IPMI Standard Command  chassis policy ${initial_power_policy}
+    ...  Run External IPMI Standard Command  chassis policy ${initial_power_policy}
     [Template]  Check Chassis Status Via IPMI
 
     # power_policy
@@ -160,7 +160,7 @@ Set Chassis Power Policy Via IPMI And Verify
     # Description of argument(s):
     # power_policy    Chassis power policy to be set(e.g. "always-off", "always-on").
 
-    Run IPMI Standard Command  chassis policy ${power_policy}
+    Run External IPMI Standard Command  chassis policy ${power_policy}
     ${resp}=  Get Chassis Status
     Valid Value  resp['power_restore_policy']  ['${power_policy}']
 
@@ -223,7 +223,7 @@ Test Setup Execution
 Test Teardown Execution
     [Documentation]  Do Test Teardown tasks.
 
-    ${resp}=  Run IPMI Standard Command  chassis status
+    ${resp}=  Run External IPMI Standard Command  chassis status
     ${power_status}=  Get Lines Containing String  ${resp}  System Power
     @{powertolist}=  Split String  ${power_status}   :
     ${status}=  Get From List  ${powertolist}  1

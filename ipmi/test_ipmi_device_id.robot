@@ -30,7 +30,7 @@ Get Device ID Via IPMI
     [Tags]  Get_Device_ID_Via_IPMI
 
     # Verify Get Device ID.
-    ${resp}=  Run External IPMI Raw Command
+    ${resp}=  Run IPMI Command
     ...  ${IPMI_RAW_CMD['Device ID']['Get'][0]}
     Should Not Contain  ${resp}  ${IPMI_RAW_CMD['Device ID']['Get'][1]}
 
@@ -41,7 +41,7 @@ Verify Get Device ID With Invalid Data Request
 
     # Run IPMI Get Device ID command with invalid request data byte.
     ${resp}=  Run Keyword and Expect Error  *Request data length invalid*
-    ...  Run External IPMI Raw Command  ${IPMI_RAW_CMD['Device ID']['Get'][0]} 0x00
+    ...  Run IPMI Command  ${IPMI_RAW_CMD['Device ID']['Get'][0]} 0x00
     # Verify error code in 'rsp='.
     Should Contain  ${resp}  ${IPMI_RAW_CMD['Device ID']['Get'][2]}
 
@@ -51,7 +51,7 @@ Verify Device ID Response Data Via IPMI
     [Tags]  Verify_Device_ID_Response_Data_Via_IPMI
 
     # Get Device ID IPMI command.
-    ${resp}=  Run External IPMI Raw Command
+    ${resp}=  Run IPMI Command
     ...  ${IPMI_RAW_CMD['Device ID']['Get'][0]}
 
     # Split each and every byte and form list.

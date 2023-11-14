@@ -70,7 +70,7 @@ Set Asset Tag With Invalid String Length Via DCMI Command
 
     ${cmd}=  Catenate  ${DCMI_RAW_CMD['DCMI']['Asset_Tag'][1]} 0x${number_of_bytes_to_write} ${random_hex}
     ${resp}=  Run Keyword And Expect Error  *
-    ...  Run External IPMI Raw Command  ${cmd}
+    ...  Run IPMI Command  ${cmd}
     Should Contain  ${resp}  rsp=0xc9): Parameter out of range:  ignore_case=True
 
 
@@ -98,7 +98,7 @@ Set Valid Asset Tag
     ${number_of_bytes_to_write}=  Get Response Length In Hex  ${random_int}
 
     ${cmd}=  Catenate  ${DCMI_RAW_CMD['DCMI']['Asset_Tag'][1]} 0x${number_of_bytes_to_write} ${random_hex}
-    ${ret}=  Run External IPMI Raw Command  ${cmd}
+    ${ret}=  Run IPMI Command  ${cmd}
 
     Set Test Variable  ${string_hex_list}
     Set Test Variable  ${random_string}
@@ -110,7 +110,7 @@ Get Raw Asset Tag
     [Documentation]  Get asset tag command in raw command.
 
     ${cmd}=  Catenate  ${DCMI_RAW_CMD['DCMI']['Asset_Tag'][0]} 0x${number_of_bytes_to_write}
-    ${ret}=  Run External IPMI Raw Command  ${cmd}
+    ${ret}=  Run IPMI Command  ${cmd}
 
     [Return]  ${ret}
 
