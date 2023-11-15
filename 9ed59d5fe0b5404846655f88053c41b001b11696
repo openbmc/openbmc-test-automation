@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8b7fd42_5542443f",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-15T15:38:20Z",
+      "side": 1,
+      "message": "Verify boot source override policy persistency with enabled mode as Once after BMC reboot..\n\nFor all documentation start with capital letter followed by small letters please and end with a period.",
+      "range": {
+        "startLine": 106,
+        "startChar": 1,
+        "endLine": 106,
+        "endChar": 111
+      },
+      "revId": "9ed59d5fe0b5404846655f88053c41b001b11696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67956596_b3eead80",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-15T15:38:20Z",
+      "side": 1,
+      "message": "Verify boot source override policy persistency with enabled mode as Continuous after BMC reboot.\nFor all documentation start with capital letter followed by small letters please and end with a period.",
+      "range": {
+        "startLine": 126,
+        "startChar": 21,
+        "endLine": 127,
+        "endChar": 38
+      },
+      "revId": "9ed59d5fe0b5404846655f88053c41b001b11696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95ec9719_f8352fa7",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-15T15:38:20Z",
+      "side": 1,
+      "message": "Verify Boot Source Override with Enabled Mode As Once After Host Reboot\n\nThis template by default setting BootSourceOverrideEnabled as Once so why have this an argument.. simply we can eliminate ${override_enabled} as shown below\n\n```\nVerify Boot Source Override with Enabled Mode As Once After Host Reboot\n[Arguments]     ${override_target}  ${override_mode}\u003dUEFI\n\nRedfish Set Boot Default  Once  ${override_target}  ${override_mode}\n```",
+      "range": {
+        "startLine": 149,
+        "startChar": 16,
+        "endLine": 149,
+        "endChar": 87
+      },
+      "revId": "9ed59d5fe0b5404846655f88053c41b001b11696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f9e48d6_6cc4964a",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-15T15:38:20Z",
+      "side": 1,
+      "message": "Verify boot source override policy with enabled mode as Continuous after host reboot.\nFor all documentation start with capital letter followed by small letters please and end with a period.",
+      "range": {
+        "startLine": 165,
+        "startChar": 22,
+        "endLine": 165,
+        "endChar": 106
+      },
+      "revId": "9ed59d5fe0b5404846655f88053c41b001b11696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7a15b38_92e3764c",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-15T15:38:20Z",
+      "side": 1,
+      "message": "Similarly as mentioned in line 149\n\n```\nVerify Boot Source Override with Enabled Mode As Continuous After Host Reboot\n[Arguments]     ${override_target}  ${override_mode}\u003dUEFI\n\nRedfish Set Boot Default    Continuous   ${override_target}  ${override_mode}\n```",
+      "range": {
+        "startLine": 167,
+        "startChar": 3,
+        "endLine": 167,
+        "endChar": 93
+      },
+      "revId": "9ed59d5fe0b5404846655f88053c41b001b11696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d23d9834_f9fe7cbc",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-15T15:38:20Z",
+      "side": 1,
+      "message": "Verify boot source override policy after Host reboot For BiosSetup override target.\n For all documentation start with capital letter followed by small letters please and end with a period.",
+      "range": {
+        "startLine": 183,
+        "startChar": 20,
+        "endLine": 183,
+        "endChar": 104
+      },
+      "revId": "9ed59d5fe0b5404846655f88053c41b001b11696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "711fde6a_8081aa88",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-15T15:38:20Z",
+      "side": 1,
+      "message": "I have suggestion both below keywords are doing mostly the same with lill difference\n\n\u0027Verify Boot Source Override with Enabled Mode As Once After Host Reboot\u0027  \u0027Verify Boot Source Override with Enabled Mode As Once After Host Reboot for BiosSetup\u0027\n\nCan we optimize this as a single keyword with is_bios_setup flag as shown below\n\n```\nVerify Boot Source Override with Enabled Mode As Once After Host Reboot\n\n    [Arguments]      ${override_enabled}  ${override_target}  ${override_mode}\u003dUEFI   ${is_bios_setup}\u003dFalse\n\n  \n    Redfish Set Boot Default  ${override_enabled}  ${override_target}  ${override_mode}\n\n    Repeat Keyword  ${loop_count} times  Host reboot for BiosSetup\n\n    IF \u0027${is_bios_setup}\u0027 \u003d\u003d \u0027True\u0027\n         Repeat Keyword  ${loop_count} times  Host reboot for BiosSetup\n    ELSE\n         RF SYS GracefulRestart\n         ${output}\u003d  Run IPMI Standard Command  chassis bootparam get 5\n         Should Contain  ${output}  ${redfish_ipmi_enabled_map[\u0027Once\u0027]}\n         Should Contain  ${output}  ${redfish_ipmi_target_map[\u0027None\u0027]}\n         IF  \u0027${PLATFORM_ARCH_TYPE}\u0027 \u003d\u003d \u0027x86\u0027\n             Should Contain  ${output}  ${redfish_ipmi_mode_map[\u0027Legacy\u0027]}\n         END\n    END    \n       \n\n    ${resp}\u003d  Redfish.Get Attribute  /redfish/v1/Systems/system  Boot\n    Should Be Equal As Strings  ${resp[\"BootSourceOverrideEnabled\"]}  Disabled\n    Should Be Equal As Strings  ${resp[\"BootSourceOverrideTarget\"]}  None\n    Run Keyword If  \u0027${PLATFORM_ARCH_TYPE}\u0027 \u003d\u003d \u0027x86\u0027\n    ...  Should Be Equal As Strings  ${resp[\"BootSourceOverrideMode\"]}  Legacy\n```",
+      "revId": "9ed59d5fe0b5404846655f88053c41b001b11696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8ef524c_86c6e3b3",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-15T15:38:20Z",
+      "side": 1,
+      "message": "There is an existing keyword in ./lib/bmc_redfish_utils.robot please make use of it\n\n```\nRedfish Power Operation\n    [Documentation]  Do Redfish host power operation.\n    [Arguments]      ${reset_type}\n\n    # Description of arguments:\n    # reset_type     Type of power operation.\n    #                (e.g. On/ForceOff/GracefulRestart/GracefulShutdown)\n\n\n```",
+      "range": {
+        "startLine": 468,
+        "startChar": 1,
+        "endLine": 476,
+        "endChar": 15
+      },
+      "revId": "9ed59d5fe0b5404846655f88053c41b001b11696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
