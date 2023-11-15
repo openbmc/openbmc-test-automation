@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aeb5bfc_151edbb3",
+        "filename": "lib/ipmi_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-11-15T12:59:36Z",
+      "side": 1,
+      "message": "def fetch_sdr_type(sdr_oem_data):\n\nTo\n\ndef fetch_sdr_type(sdr_data):\n\nplease update it.. the function logic here doesnt need to know if its OEM or not. Thanks",
+      "revId": "084d34e76323cb9c4c01f9c9228380fab8c89dd5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "123cdfb6_66067467",
+        "filename": "lib/ipmi_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-11-15T12:59:36Z",
+      "side": 1,
+      "message": "Please check the bellow functions and update the params and function documentation docstring",
+      "revId": "084d34e76323cb9c4c01f9c9228380fab8c89dd5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a60d1fe9_c0ce2940",
+        "filename": "lib/ipmi_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-11-15T12:59:36Z",
+      "side": 1,
+      "message": "perhaps \n\nsdr_list \u003d []",
+      "revId": "084d34e76323cb9c4c01f9c9228380fab8c89dd5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
