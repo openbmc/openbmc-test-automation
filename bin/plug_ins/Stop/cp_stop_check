@@ -129,8 +129,6 @@ def rest_fail():
         OPENBMC_HOST,
         SSH_PORT,
         HTTPS_PORT,
-        REST_USERNAME,
-        REST_PASSWORD,
         OPENBMC_USERNAME,
         OPENBMC_PASSWORD,
         REDFISH_SUPPORT_TRANS_STATE,
