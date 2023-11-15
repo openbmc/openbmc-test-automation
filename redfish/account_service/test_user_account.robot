@@ -784,7 +784,7 @@ Configure AuthMethods
     ...  Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body=${payload}  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
 
-    # Setting authmethod properties using basic auth incase the former fails
+    # Setting authmethod properties using basic auth in case the former fails
     IF  ${status}==${FALSE}
         # Payload dictionary pre-process to match json formatting
         ${payload}=  Convert To String  ${payload}
