@@ -92,8 +92,6 @@ def main():
         OPENBMC_HOST,
         SSH_PORT,
         HTTPS_PORT,
-        REST_USERNAME,
-        REST_PASSWORD,
         OPENBMC_USERNAME,
         OPENBMC_PASSWORD,
         IPMI_USERNAME,

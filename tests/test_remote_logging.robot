@@ -225,7 +225,7 @@ Verify BMC Journald Contains No Credential Data
     ${bmc_journald}  ${stderr}  ${rc}=  BMC Execute Command
     ...  journalctl -o json-pretty | cat
 
-    Should Not Contain Any  ${bmc_journald}  ${OPENBMC_PASSWORD}  ${REST_PASSWORD}  ${valid_password}
+    Should Not Contain Any  ${bmc_journald}  ${OPENBMC_PASSWORD}  ${valid_password}
     ...  ignore_case=False  msg=Journald logs BMC credentials/password ${OPENBMC_PASSWORD}.
 
 
