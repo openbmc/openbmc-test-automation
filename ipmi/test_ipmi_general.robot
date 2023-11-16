@@ -265,16 +265,16 @@ Verify Power Cap Value Via IPMI
     ...              if initial power cap value is zero.
     [Tags]  Verify_Power_Cap_Value_Via_IPMI
     [Setup]  Redfish.Login
-    [Teardown]  Run Keywords  Set Power Cap Value Via Redfish  ${initial_power_value}  AND  Redfish.Logout
+    [Teardown]  Run Keywords  Set Power Cap Value Via Redfish  ${redfish_power_value}  AND  Redfish.Logout
 
     # Get power cap value via Redfish.
     ${power_cap_limit}=  Get System Power Cap Limit
 
     # Get initial power cap value.
-    ${initial_power_value}=  Set Variable  ${power_cap_limit['SetPoint']}
+    ${redfish_power_value}=  Set Variable  ${power_cap_limit['SetPoint']}
 
     # Update power cap value via Redfish if the initial power cap value is zero.
-    IF  ${initial_power_value} == 0
+    IF  ${redfish_power_value} == 0
         # Get the allowable min and max power cap value via Redfish.
         ${min_power_value}=  Set Variable  ${power_cap_limit['AllowableMin']}
         ${max_power_value}=  Set Variable  ${power_cap_limit['AllowableMax']}
@@ -284,6 +284,7 @@ Verify Power Cap Value Via IPMI
 
         # Set power value via Redfish.
         Set Power Cap Value Via Redfish  ${random_power_cap}
+        ${redfish_power_value}=  Set Variable  ${random_power_cap}
     END
 
     # Get power cap value via IPMI.
@@ -298,7 +299,7 @@ Verify Power Cap Value Via IPMI
     ${ipmi_power_cap_value}=  Strip String  ${output_limit}  mode=both  characters= Watts
 
     # Perform a comparison of power cap values obtained from both IPMI and Redfish.
-    ${redfish_power_cap_value}=  Convert To String  ${random_power_cap}
+    ${redfish_power_cap_value}=  Convert To String  ${redfish_power_value}
     Should Be Equal  ${ipmi_power_cap_value}  ${redfish_power_cap_value}
 
 
