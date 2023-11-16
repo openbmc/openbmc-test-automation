@@ -339,12 +339,15 @@ Verify IPMI Root User Password Change
     [Documentation]  Change IPMI root user password and verify that
     ...  root user is able to run IPMI command.
     [Tags]  Verify_IPMI_Root_User_Password_Change
+    [Setup]  Skip if  len( '${OPENBMC_PASSWORD}' ) < 8
+    ...  msg= Do not run this test if len( OPENBMC_PASSWORD ) < 8
+    # Reason: if OPENBMC_PASSWORD is not at least 8 characters,
+    #         it cannot be restored in the Teardown step.
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
+    ...  Run Keyword If  "${TEST STATUS}" != "SKIP"
     ...  Wait Until Keyword Succeeds  15 sec  5 sec
-    ...  Set Default Password For IPMI Root User
+    ...  Restore Default Password For IPMI Root User
 
-    # User input password should be minimum 8 characters long.
-    Valid Length  OPENBMC_PASSWORD  min_length=8
     # Set new password for root user.
     Run IPMI Standard Command
     ...  user set password ${root_userid} ${valid_password}
@@ -511,9 +514,9 @@ Modify IPMI User
 
 *** Keywords ***
 
-Set Default Password For IPMI Root User
-    [Documentation]  Set default password for IPMI root user (i.e. 0penBmc).
-    # Set default password for root user.
+Restore Default Password For IPMI Root User
+    [Documentation]  Restore default password for IPMI root user
+
     ${result}=  Run External IPMI Standard Command
     ...  user set password ${root_userid} ${OPENBMC_PASSWORD}
     ...  P=${valid_password}
