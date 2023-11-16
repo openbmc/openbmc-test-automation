@@ -31,8 +31,8 @@ ${OPENBMC_PASSWORD}    0penBmc
 ${REST_USERNAME}       root
 ${REST_PASSWORD}       0penBmc
 ${OPENBMC_ADMIN_USERNAME}  admin
-${OPENBMC_ADMIN_PASSWORD}  0penBmc
-${SERVICE_USER_PASSWORD}   0penBmc
+${OPENBMC_ADMIN_PASSWORD}  ${EMPTY}
+${SERVICE_USER_PASSWORD}   ${EMPTY}
 
 # For users privilege admin or sudo.
 ${USER_TYPE}          ${EMPTY}
