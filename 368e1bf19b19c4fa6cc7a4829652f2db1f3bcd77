@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34184bc4_5091a34a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-16T09:00:02Z",
+      "side": 1,
+      "message": "bl eto",
+      "revId": "368e1bf19b19c4fa6cc7a4829652f2db1f3bcd77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32e7a739_e287740e",
+        "filename": "ipmi/test_ipmi_general.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-16T09:00:02Z",
+      "side": 1,
+      "message": "We should have a better logic. I am unable to understand it.",
+      "range": {
+        "startLine": 301,
+        "startChar": 0,
+        "endLine": 306,
+        "endChar": 9
+      },
+      "revId": "368e1bf19b19c4fa6cc7a4829652f2db1f3bcd77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
