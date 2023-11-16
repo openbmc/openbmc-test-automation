@@ -298,7 +298,11 @@ Verify Power Cap Value Via IPMI
     ${ipmi_power_cap_value}=  Strip String  ${output_limit}  mode=both  characters= Watts
 
     # Perform a comparison of power cap values obtained from both IPMI and Redfish.
-    ${redfish_power_cap_value}=  Convert To String  ${random_power_cap}
+    IF  ${initial_power_value} == 0
+        ${redfish_power_cap_value}=  Convert To String  ${random_power_cap}
+    ELSE
+        ${redfish_power_cap_value}=  Convert To String  ${initial_power_value}
+    END
     Should Be Equal  ${ipmi_power_cap_value}  ${redfish_power_cap_value}
 
 
