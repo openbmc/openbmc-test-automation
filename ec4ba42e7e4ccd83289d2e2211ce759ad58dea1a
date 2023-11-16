@@ -16,6 +16,24 @@
       "message": "Please fix the CI failure",
       "revId": "ec4ba42e7e4ccd83289d2e2211ce759ad58dea1a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab290cd7_52b0e1b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2023-11-16T06:23:44Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "260510c0_2889c214",
+      "revId": "ec4ba42e7e4ccd83289d2e2211ce759ad58dea1a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
