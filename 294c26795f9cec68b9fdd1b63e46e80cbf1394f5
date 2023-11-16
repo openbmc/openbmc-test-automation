@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0789c5e_a6c314ce",
+        "filename": "lib/resource.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-11-16T09:33:23Z",
+      "side": 1,
+      "message": "I am fine with above two. Can others also like \u0027OPENBMC_USERNAME\u0027 follow the same or remove or appropriate comment. I just leave it to you, not a -1.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 35
+      },
+      "revId": "294c26795f9cec68b9fdd1b63e46e80cbf1394f5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
