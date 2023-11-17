@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff5ca40e_a455a5a4",
+        "filename": "ipmi/test_ipmi_network_verification.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-11-17T07:37:42Z",
+      "side": 1,
+      "message": "Align END \n    FOR  ${channel_number}  IN  @{active_channel_list}\n        ${stdout}\u003d  Run IPMI Standard Command\n        ...  lan print ${channel_number}\n    END",
+      "range": {
+        "startLine": 74,
+        "startChar": 4,
+        "endLine": 74,
+        "endChar": 7
+      },
+      "revId": "99f177ca4bcf89929403513a946f3a523f1b0752",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
