@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f81f605_dbdaac1e",
+        "filename": "redfish/managers/test_bmc_network_mac.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2023-11-17T06:17:10Z",
+      "side": 1,
+      "message": "Please use ${HTTP_BAD_REQUEST} instead of giving [${HTTP_BAD_REQUEST}]. Please change in all places",
+      "range": {
+        "startLine": 190,
+        "startChar": 45,
+        "endLine": 190,
+        "endChar": 66
+      },
+      "revId": "2809b3b5fbf6c0666207977818ec243164f38fe8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
