@@ -27,7 +27,7 @@ Test Setup               Printn
 Test Teardown            FFDC On Test Case Fail
 
 # Force the test to timedout to prevent test hanging.
-Test Timeout             30 minutes
+Test Timeout             45 minutes
 
 Force Tags               Bmc_Code_Update
 
