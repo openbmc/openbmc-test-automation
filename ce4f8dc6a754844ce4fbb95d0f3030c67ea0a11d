@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57d7a6d2_6fe01fca",
+        "filename": "lib/common_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-11-20T11:26:26Z",
+      "side": 1,
+      "message": "Get Service PID Using Systemctl In BMC",
+      "range": {
+        "startLine": 1020,
+        "startChar": 0,
+        "endLine": 1021,
+        "endChar": 44
+      },
+      "revId": "ce4f8dc6a754844ce4fbb95d0f3030c67ea0a11d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be4e8b36_e621a6f7",
+        "filename": "lib/common_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 1022,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-11-20T11:26:26Z",
+      "side": 1,
+      "message": "[Documentation]   Get process identifier for specified service in BMC.",
+      "revId": "ce4f8dc6a754844ce4fbb95d0f3030c67ea0a11d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "309e19bb_41d06dd1",
+        "filename": "lib/common_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 1034,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-11-20T11:26:26Z",
+      "side": 1,
+      "message": "~# systemctl show --property MainPID --value bmcweb\n712\n\n\nUse this to optimize the output\n\n\nIf the service doesnt exist it will return 0\n\nsystemctl show bmcwebxyz -p MainPID\nMainPID\u003d0",
+      "range": {
+        "startLine": 1031,
+        "startChar": 1,
+        "endLine": 1034,
+        "endChar": 8
+      },
+      "revId": "ce4f8dc6a754844ce4fbb95d0f3030c67ea0a11d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
