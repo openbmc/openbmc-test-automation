@@ -26,8 +26,8 @@ ${DBUS_PREFIX}    ${EMPTY}
 ${PORT}           ${EMPTY}
 # AUTH_SUFFIX here is derived from variables.py
 ${AUTH_URI}       https://${OPENBMC_HOST}${AUTH_SUFFIX}
-${OPENBMC_USERNAME}    root
-${OPENBMC_PASSWORD}    0penBmc
+${OPENBMC_USERNAME}        root
+${OPENBMC_PASSWORD}        ${EMPTY}
 ${OPENBMC_ADMIN_USERNAME}  admin
 ${OPENBMC_ADMIN_PASSWORD}  ${EMPTY}
 ${SERVICE_USER_PASSWORD}   ${EMPTY}
