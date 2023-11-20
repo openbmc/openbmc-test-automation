@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05879ca7_fcfdcf02",
+        "filename": "lib/ipmi_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2023-11-20T13:11:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2aeb5bfc_151edbb3",
+      "revId": "084d34e76323cb9c4c01f9c9228380fab8c89dd5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "123cdfb6_66067467",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "324f746c_8360e351",
+        "filename": "lib/ipmi_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2023-11-20T13:11:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "123cdfb6_66067467",
+      "revId": "084d34e76323cb9c4c01f9c9228380fab8c89dd5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a60d1fe9_c0ce2940",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-11-15T12:59:36Z",
       "side": 1,
       "message": "perhaps \n\nsdr_list \u003d []",
+      "revId": "084d34e76323cb9c4c01f9c9228380fab8c89dd5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7094e58_463f387d",
+        "filename": "lib/ipmi_utils.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2023-11-20T13:11:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a60d1fe9_c0ce2940",
       "revId": "084d34e76323cb9c4c01f9c9228380fab8c89dd5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
