@@ -1017,3 +1017,19 @@ Kernel Panic BMC Reset Operation
 
     [Return]  ${status}
 
+
+Get Property Value Of Systemd Service In BMC
+    [Documentation]  Get property of systemd service in BMC.
+    [Arguments]  ${service_name}  ${property_name}
+
+    # Description of argument(s):
+    # service_name   Systemd service name. E.g. bmcweb etc.
+    # property_name  Property name. E.g. MainPID etc.
+
+    # ~# systemctl show --property MainPID --value bmcweb
+    # 1273
+
+    ${stdout}  ${stderr}  ${rc}=  BMC Execute Command
+    ...  systemctl show --property ${property_name} --value ${service_name}
+
+    [Return]  ${stdout}
