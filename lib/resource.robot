@@ -26,8 +26,8 @@ ${DBUS_PREFIX}    ${EMPTY}
 ${PORT}           ${EMPTY}
 # AUTH_SUFFIX here is derived from variables.py
 ${AUTH_URI}       https://${OPENBMC_HOST}${AUTH_SUFFIX}
-${OPENBMC_USERNAME}    root
-${OPENBMC_PASSWORD}    0penBmc
+${OPENBMC_USERNAME}        root
+${OPENBMC_PASSWORD}        ${EMPTY}
 ${OPENBMC_ADMIN_USERNAME}  admin
 ${OPENBMC_ADMIN_PASSWORD}  ${EMPTY}
 ${SERVICE_USER_PASSWORD}   ${EMPTY}
@@ -46,7 +46,7 @@ ${VALID_CERT}          ${EMPTY}
 ${CERT_DIR_PATH}       ${EMPTY}
 
 ${IPMI_USERNAME}       root
-${IPMI_PASSWORD}       0penBmc
+${IPMI_PASSWORD}       ${EMPTY}
 ${MACHINE_TYPE}    palmetto
 ${DBUS_POLL_INTERVAL}      15s
 ${OPENBMC_REBOOT_TIMEOUT}   ${10}
