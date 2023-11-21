@@ -182,7 +182,7 @@ Test Modifying User Privilege Of Existing User Via GUI
     Create User And Verify  ${username}  ${privilege_level}  ${True}
 
     # Get user privilege role details distinct from the current ones.
-    FOR  ${privilege}  IN  @{user_privilege_list}
+    FOR  ${privilege}  IN  @{list_user_privilege}
       IF  '${privilege}' != '${privilege_level}'
           ${modify_privilege}=  Set Variable  ${privilege}
       END
@@ -214,7 +214,7 @@ Test Modifying User Account Status Of Existing User Via GUI
 
     # Get random username, user privilege level and account status.
     ${username}=  Generate Random String  8  [LETTERS]
-    ${privilege_level}=  Evaluate  random.choice(${user_privilege_list})  random
+    ${privilege_level}=  Evaluate  random.choice(${list_user_privilege})  random
     ${initial_account_status}=  Evaluate  random.choice([True, False])  random
 
     # Create new user account.
