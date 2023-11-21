@@ -16,6 +16,213 @@
       "message": "Done",
       "revId": "47e94a5b4020f2a087e96225283c2f4486ffd6ed",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "187f031c_e76f35b7",
+        "filename": "ipmi/test_ipmi_inband_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-21T06:46:48Z",
+      "side": 1,
+      "message": "I believe we can run this raw SRD command via both Inband and external IPMI command. So we should be using `Run IPMI Command` keyword here.",
+      "range": {
+        "startLine": 152,
+        "startChar": 9,
+        "endLine": 152,
+        "endChar": 43
+      },
+      "revId": "47e94a5b4020f2a087e96225283c2f4486ffd6ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3da43c5c_661d0cc8",
+        "filename": "ipmi/test_ipmi_inband_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-21T06:46:48Z",
+      "side": 1,
+      "message": "Same comment as above",
+      "range": {
+        "startLine": 159,
+        "startChar": 9,
+        "endLine": 159,
+        "endChar": 43
+      },
+      "revId": "47e94a5b4020f2a087e96225283c2f4486ffd6ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eef862b1_ccabe780",
+        "filename": "ipmi/test_ipmi_inband_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-21T06:46:48Z",
+      "side": 1,
+      "message": "Same comment as above",
+      "range": {
+        "startLine": 196,
+        "startChar": 9,
+        "endLine": 196,
+        "endChar": 43
+      },
+      "revId": "47e94a5b4020f2a087e96225283c2f4486ffd6ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f775c9df_77804f94",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-21T06:46:48Z",
+      "side": 1,
+      "message": "raw not required",
+      "range": {
+        "startLine": 128,
+        "startChar": 9,
+        "endLine": 128,
+        "endChar": 13
+      },
+      "revId": "47e94a5b4020f2a087e96225283c2f4486ffd6ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cd21e1b_e38cae1d",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-21T06:46:48Z",
+      "side": 1,
+      "message": "same comment as above",
+      "range": {
+        "startLine": 134,
+        "startChar": 9,
+        "endLine": 134,
+        "endChar": 13
+      },
+      "revId": "47e94a5b4020f2a087e96225283c2f4486ffd6ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb585e9b_915e5b17",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-21T06:46:48Z",
+      "side": 1,
+      "message": "same comment as above",
+      "range": {
+        "startLine": 214,
+        "startChar": 9,
+        "endLine": 214,
+        "endChar": 12
+      },
+      "revId": "47e94a5b4020f2a087e96225283c2f4486ffd6ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83756820_172c0a99",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-21T06:46:48Z",
+      "side": 1,
+      "message": "same comment as above",
+      "range": {
+        "startLine": 219,
+        "startChar": 9,
+        "endLine": 219,
+        "endChar": 13
+      },
+      "revId": "47e94a5b4020f2a087e96225283c2f4486ffd6ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbcfef25_3da90c98",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-21T06:46:48Z",
+      "side": 1,
+      "message": "raw not required",
+      "range": {
+        "startLine": 237,
+        "startChar": 9,
+        "endLine": 237,
+        "endChar": 13
+      },
+      "revId": "47e94a5b4020f2a087e96225283c2f4486ffd6ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59db93ac_723582c0",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-21T06:46:48Z",
+      "side": 1,
+      "message": "raw not required",
+      "range": {
+        "startLine": 268,
+        "startChar": 9,
+        "endLine": 268,
+        "endChar": 13
+      },
+      "revId": "47e94a5b4020f2a087e96225283c2f4486ffd6ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
