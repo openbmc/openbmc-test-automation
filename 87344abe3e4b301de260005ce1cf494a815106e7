@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13195ebb_48104457",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-11-22T04:56:33Z",
+      "side": 1,
+      "message": "Rahul/Prashanth , good to go here ?",
+      "revId": "87344abe3e4b301de260005ce1cf494a815106e7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
