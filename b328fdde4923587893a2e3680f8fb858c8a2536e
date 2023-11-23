@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f0c408e_7771c1ed",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2023-11-23T15:25:04Z",
+      "side": 1,
+      "message": "line numbers 239 to 243,270 to 273, 290 to 295\n\n\nmy suggestion:Create new keyword and re-use\nVerify Password updated Using Redfish\n[Arguments]  ${new_password}  ${expect_result}\n\n ${status}\u003d  Run Keyword And Return Status\n ...  Redfish.Patch  /redfish/v1/AccountService/Accounts/${admin_user}\n ...  body\u003d{\u0027Password\u0027: \u0027${new_password}\u0027}\n\nShould be Equal ${status}${expect_result}",
+      "range": {
+        "startLine": 291,
+        "startChar": 0,
+        "endLine": 295,
+        "endChar": 38
+      },
+      "revId": "b328fdde4923587893a2e3680f8fb858c8a2536e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
