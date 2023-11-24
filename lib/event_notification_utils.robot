@@ -25,3 +25,16 @@ Get Event Subscription IDs
     END
     [Return]  ${subscription_ids}
 
+Get Destination IPs Of Event Subscriptions
+    [Documentation]  Get all subscribed server IPs from event subscriptions.
+
+    ${subscription_ids}=  Get Event Subscription IDs
+
+    ${server_ips}=  Create List
+    FOR  ${id}  IN  @{subscription_ids}
+        ${destination}=  Redfish.Get Attribute  /redfish/v1/EventService/Subscriptions/${id}  Destination
+        # E.g. https://xx.xx.xx.xx:xxxx/redfish/events
+        ${dest_ip}=  Get Regexp Matches  ${destination}  .*://(.*):.*  1
+        ${server_ips}=  Combine Lists  ${server_ips}  ${dest_ip}
+    END
+    [Return]  ${server_ips}
