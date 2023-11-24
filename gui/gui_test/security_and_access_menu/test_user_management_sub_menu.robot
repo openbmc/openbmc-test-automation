@@ -249,6 +249,42 @@ Test Modifying User Account Status Of Existing User Via GUI
     END
 
 
+Test Modifying User Password Of Existing User Via GUI
+    [Documentation]  Modify user password of existing user via GUI and verify changes using Redfish.
+    [Tags]  Test_Modifying_User_Password_Of_Existing_User_Via_GUI
+    [Teardown]  Delete Users Via Redfish  ${username}
+
+    # Get random username, user privilege level and account status.
+    ${username}=  Generate Random String  8  [LETTERS]
+    ${privilege_level}=  Evaluate  random.choice(${list_user_privilege})  random
+    ${initial_account_status}=  Evaluate  random.choice([True, False])  random
+
+    # Initialize the new password for the account.
+    ${new_password}=  Set Variable  Testpassword1
+
+    # Create new user account.
+    Create User And Verify  ${username}  ${privilege_level}  ${initial_account_status}
+
+    # Wait for newly created user to appear on the page.
+    Wait Until Element Is Visible  //td[text()='${username}']
+
+    # Modify user password via GUI.
+    Click Element  //td[text()='${username}']/following-sibling::*/*/*[@title='Edit user']
+    Input Text  ${xpath_password_input_button}  ${new_password}
+    Input Text  ${xpath_password_confirm_button}  ${new_password}
+
+    # Submit changes.
+    Click Element  ${xpath_submit_button}
+
+    # Confirm the successful update.
+    Wait Until Element Is Visible  ${xpath_success_message}  timeout=30
+    Wait Until Element Is Not Visible  ${xpath_success_message}  timeout=60
+
+    # Verify changes via Redfish.
+    ${status}=  Run Keyword And Return Status  Redfish.Login  ${username}  ${new_password}
+    Should Be Equal  ${status}  ${True}
+
+
 *** Keywords ***
 
 Create User And Verify
