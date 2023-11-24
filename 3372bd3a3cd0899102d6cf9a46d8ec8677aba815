@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f7c204b_65b624a4",
+        "filename": "lib/event_notification_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-24T16:21:31Z",
+      "side": 1,
+      "message": "looks like we are getting server_ips as per @29, @33 and @38.\nCan we have keyword title as\n\nGet Server IPs Of Event Subscriptions ?\n\nIn documentation please mention that list type is returned.",
+      "range": {
+        "startLine": 28,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 15
+      },
+      "revId": "3372bd3a3cd0899102d6cf9a46d8ec8677aba815",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
