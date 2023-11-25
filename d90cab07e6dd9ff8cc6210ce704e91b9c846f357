@@ -16,6 +16,24 @@
       "message": "Better to fail test case at setup rather than skipping.\nUser does not get to know the issue. If user is warned of fail he can make required changes \u0026 re-run the test.",
       "revId": "d90cab07e6dd9ff8cc6210ce704e91b9c846f357",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23ae3da4_8cbbdc53",
+        "filename": "ipmi/test_ipmi_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1001419
+      },
+      "writtenOn": "2023-11-25T05:20:37Z",
+      "side": 1,
+      "message": "Resolved in off-line discussion with Prashanth.\n- Background: without this, the test fails for default root password 0penBmc.\n- Skip, because we check a precondition on an external pararameter, which may not be under our control.  As opposed to a fail because of a hardware or firmware bug.\n- Skipping also allows the Teardown section conditional (line 347), avoiding a secondary fail in Teardown step.\n- User notification is in next line, 343, with further elaboration in comments line 344, 345.",
+      "parentUuid": "022340ab_9a6d7cb7",
+      "revId": "d90cab07e6dd9ff8cc6210ce704e91b9c846f357",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
