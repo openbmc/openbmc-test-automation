@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa834696_75f9736b",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-27T10:09:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96f7bdb4_b469bffb",
+      "range": {
+        "startLine": 263,
+        "startChar": 6,
+        "endLine": 263,
+        "endChar": 21
+      },
+      "revId": "6b349848a1bab273388fb45d7010e56833391fba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3b47420_35135575",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-27T06:26:09Z",
       "side": 1,
       "message": "instead of multiple clicks.\n\n```\n# Wait for newly created user to appear on the page. Something like below.\nWait until element is visible //td[text()\u003d\u0027${username}\u0027]  \n\nAnd then click element\nClick Element  //td[text()\u003d\u0027${username}\u0027]/following-sibling::*/*/*[@title\u003d\u0027Edit user\u0027]`\n```",
+      "range": {
+        "startLine": 269,
+        "startChar": 3,
+        "endLine": 269,
+        "endChar": 31
+      },
+      "revId": "6b349848a1bab273388fb45d7010e56833391fba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a04e506_a502cdc6",
+        "filename": "gui/gui_test/security_and_access_menu/test_user_management_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1001676
+      },
+      "writtenOn": "2023-11-27T10:09:47Z",
+      "side": 1,
+      "message": "Updated code accordingly.",
+      "parentUuid": "e3b47420_35135575",
       "range": {
         "startLine": 269,
         "startChar": 3,
