@@ -568,6 +568,10 @@ Get Bytes From SDR Sensor
 
 Get Current Date from BMC
     [Documentation]  Runs the date command from BMC and returns current date and time
+    [Arguments]  ${date_format}=%m/%d/%Y %H:%M:%S
+
+    # Description of argument(s):
+    # date_format    Date format of the result. E.g. %Y-%m-%d %H:%M:%S etc.
 
     # Get Current Date from BMC
     ${date}  ${stderr}  ${rc}=  BMC Execute Command   date
@@ -578,8 +582,8 @@ Get Current Date from BMC
     Remove From List  ${date}  -2
     ${date}=  Evaluate  " ".join(${date})
 
-    # Convert the date format to %m/%d/%Y %H:%M:%S
-    ${date}=  Convert Date  ${date}  date_format=%b %d %H:%M:%S %Y  result_format=%m/%d/%Y %H:%M:%S  exclude_millis=True
+    # Convert the date to specified format, default:%m/%d/%Y %H:%M:%S
+    ${date}=  Convert Date  ${date}  date_format=%b %d %H:%M:%S %Y  result_format=${date_format}  exclude_millis=True
 
     [Return]   ${date}
 
