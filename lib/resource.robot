@@ -20,12 +20,12 @@ ${REDFISH_SUPPORT_TRANS_STATE}    ${0}
 # By default Delete all Redfish session per boot run.
 ${REDFISH_DELETE_SESSIONS}        ${1}
 
-${OPENBMC_MODEL}  ${EMPTY}
-${OPENBMC_HOST}   ${EMPTY}
-${DBUS_PREFIX}    ${EMPTY}
-${PORT}           ${EMPTY}
+${OPENBMC_MODEL}           ${EMPTY}
+${OPENBMC_HOST}            ${EMPTY}
+${DBUS_PREFIX}             ${EMPTY}
+${PORT}                    ${EMPTY}
 # AUTH_SUFFIX here is derived from variables.py
-${AUTH_URI}       https://${OPENBMC_HOST}${AUTH_SUFFIX}
+${AUTH_URI}                https://${OPENBMC_HOST}${AUTH_SUFFIX}
 ${OPENBMC_USERNAME}        root
 ${OPENBMC_PASSWORD}        ${EMPTY}
 ${OPENBMC_ADMIN_USERNAME}  admin
@@ -33,22 +33,25 @@ ${OPENBMC_ADMIN_PASSWORD}  ${EMPTY}
 ${SERVICE_USER_PASSWORD}   ${EMPTY}
 
 # For users privilege admin or sudo.
-${USER_TYPE}          ${EMPTY}
+${USER_TYPE}               ${EMPTY}
 
-${MANAGER_ID}  bmc
-${CHASSIS_ID}  chassis
+${MANAGER_ID}              bmc
+${CHASSIS_ID}              chassis
 
 # MTLS_ENABLED indicates whether mTLS is enabled.
-${MTLS_ENABLED}        False
+${MTLS_ENABLED}            False
 # Valid mTLS certificate for authentication.
-${VALID_CERT}          ${EMPTY}
+${VALID_CERT}              ${EMPTY}
 # Path of mTLS certificates directory.
-${CERT_DIR_PATH}       ${EMPTY}
+${CERT_DIR_PATH}           ${EMPTY}
 
-${IPMI_USERNAME}       root
-${IPMI_PASSWORD}       ${EMPTY}
-${MACHINE_TYPE}    palmetto
-${DBUS_POLL_INTERVAL}      15s
+${IPMI_USERNAME}           root
+# Assign BMC password as default. User can input using -v option to key in
+# IPMI password if different.
+${IPMI_PASSWORD}           ${OPENBMC_PASSWORD}
+
+${MACHINE_TYPE}             palmetto
+${DBUS_POLL_INTERVAL}       15s
 ${OPENBMC_REBOOT_TIMEOUT}   ${10}
 # IPMI_COMMAND here is set to "External" by default. User
 # can override to "Dbus" from command line.
