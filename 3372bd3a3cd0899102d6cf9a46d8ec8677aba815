@@ -22,6 +22,30 @@
       },
       "revId": "3372bd3a3cd0899102d6cf9a46d8ec8677aba815",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beed54e1_8708bcf5",
+        "filename": "lib/event_notification_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2023-11-28T05:18:43Z",
+      "side": 1,
+      "message": "The reason it is named as Destination is because that is the name given by DMTF. \n\nModified the documentation to include the type as list.",
+      "parentUuid": "8f7c204b_65b624a4",
+      "range": {
+        "startLine": 28,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 15
+      },
+      "revId": "3372bd3a3cd0899102d6cf9a46d8ec8677aba815",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
