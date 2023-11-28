@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f9b7447_39574e7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-11-28T06:49:44Z",
+      "side": 1,
+      "message": "Yeah context id might not be best solution.. reverting the score",
+      "revId": "4106eacdb62fa43367aba830a5cb4e63fb53b534",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e6b33a1_932f5615",
