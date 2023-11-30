@@ -1,0 +1,152 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec86f773_ed969f6d",
+        "filename": "ipmi/dcmi/test_dcmi_get_power_reading.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-30T17:11:32Z",
+      "side": 1,
+      "message": "One line space after documentation.",
+      "revId": "e009c2a776e96b7346547e1302f9314c2d96708c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf467048_3da36fa7",
+        "filename": "ipmi/dcmi/test_dcmi_get_power_reading.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-30T17:11:32Z",
+      "side": 1,
+      "message": "DCMI",
+      "range": {
+        "startLine": 2,
+        "startChar": 32,
+        "endLine": 2,
+        "endChar": 36
+      },
+      "revId": "e009c2a776e96b7346547e1302f9314c2d96708c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e17e1e73_68535906",
+        "filename": "ipmi/dcmi/test_dcmi_get_power_reading.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-30T17:11:32Z",
+      "side": 1,
+      "message": "One line space after any section beginning.",
+      "revId": "e009c2a776e96b7346547e1302f9314c2d96708c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8e6116e_c1463b02",
+        "filename": "ipmi/dcmi/test_dcmi_get_power_reading.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-30T17:11:32Z",
+      "side": 1,
+      "message": "Simply\n\nFrom the input JSON file get the content and return in the JSON format.",
+      "range": {
+        "startLine": 49,
+        "startChar": 21,
+        "endLine": 49,
+        "endChar": 25
+      },
+      "revId": "e009c2a776e96b7346547e1302f9314c2d96708c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00b29fcf_61465539",
+        "filename": "ipmi/dcmi/test_dcmi_get_power_reading.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-30T17:11:32Z",
+      "side": 1,
+      "message": "Description of arguments are missing for all the keywords.\n\nplease add it",
+      "revId": "e009c2a776e96b7346547e1302f9314c2d96708c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f70c447_6310278d",
+        "filename": "ipmi/dcmi/test_dcmi_get_power_reading.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-30T17:11:32Z",
+      "side": 1,
+      "message": "Simply\n\nGet the D-bus object from the given JSON file.",
+      "revId": "e009c2a776e96b7346547e1302f9314c2d96708c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6632f7b_a976fd59",
+        "filename": "ipmi/dcmi/test_dcmi_get_power_reading.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-30T17:11:32Z",
+      "side": 1,
+      "message": "Verify Power reading With IPMI Command Response\n\nplease change aptly in the documentation too",
+      "revId": "e009c2a776e96b7346547e1302f9314c2d96708c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae81428a_d7825dec",
+        "filename": "ipmi/dcmi/test_dcmi_get_power_reading.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-11-30T17:11:32Z",
+      "side": 1,
+      "message": "Remove will",
+      "revId": "e009c2a776e96b7346547e1302f9314c2d96708c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
