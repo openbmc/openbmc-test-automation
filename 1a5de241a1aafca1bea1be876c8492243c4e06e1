@@ -1,4 +1,22 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ed3efa7_f4c0f0bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2023-11-30T12:07:35Z",
+      "side": 1,
+      "message": "As per the IPMI spec, \nTable 43-11, OEM Record - SDR Type C0h\nSDR type for OEM Record needs to be C0",
+      "revId": "1a5de241a1aafca1bea1be876c8492243c4e06e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ],
   "submitRequirementResults": []
 }
