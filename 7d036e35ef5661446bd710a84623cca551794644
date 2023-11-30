@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e2791f2_f2c23508",
+        "filename": "redfish/dmtf_tools/Redfish_JsonSchema_ResponseValidator.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-11-30T13:49:56Z",
+      "side": 1,
+      "message": "bit confused here..  we get the OEM URIL and master URI list..\n\nwhen i check the log, ${oem_uri_list} has the master list but {urls} is EMPTY",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 28
+      },
+      "revId": "7d036e35ef5661446bd710a84623cca551794644",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
