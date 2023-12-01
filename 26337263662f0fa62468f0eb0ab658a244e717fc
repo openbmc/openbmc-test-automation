@@ -109,6 +109,30 @@
       },
       "revId": "26337263662f0fa62468f0eb0ab658a244e717fc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e83e8c2b_f90d5ea4",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1001876
+      },
+      "writtenOn": "2023-12-01T10:29:02Z",
+      "side": 1,
+      "message": "Previously it was percent lost or lost, recently it was changed to percent_failed or failed. so ignoring this change",
+      "parentUuid": "08c9a216_3330c8af",
+      "range": {
+        "startLine": 247,
+        "startChar": 15,
+        "endLine": 247,
+        "endChar": 46
+      },
+      "revId": "26337263662f0fa62468f0eb0ab658a244e717fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
