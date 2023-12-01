@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "517e5881_5d06f71d",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001876
+      },
+      "writtenOn": "2023-12-01T10:29:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f479ac41_9630b6cf",
+      "revId": "26337263662f0fa62468f0eb0ab658a244e717fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f527a21e_263151c4",
@@ -55,6 +73,30 @@
       "side": 1,
       "message": "This whole keyword is failing due to this line, Kindly re-check",
       "parentUuid": "f527a21e_263151c4",
+      "range": {
+        "startLine": 246,
+        "startChar": 25,
+        "endLine": 246,
+        "endChar": 43
+      },
+      "revId": "26337263662f0fa62468f0eb0ab658a244e717fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2380fd5e_641f3105",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1001876
+      },
+      "writtenOn": "2023-12-01T10:29:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31c42a94_65ae405e",
       "range": {
         "startLine": 246,
         "startChar": 25,
@@ -130,6 +172,54 @@
         "startChar": 15,
         "endLine": 247,
         "endChar": 46
+      },
+      "revId": "26337263662f0fa62468f0eb0ab658a244e717fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f95b6274_09772f1f",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1001876
+      },
+      "writtenOn": "2023-12-01T10:29:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e83e8c2b_f90d5ea4",
+      "range": {
+        "startLine": 247,
+        "startChar": 15,
+        "endLine": 247,
+        "endChar": 46
+      },
+      "revId": "26337263662f0fa62468f0eb0ab658a244e717fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "619d4efd_32bc42ea",
+        "filename": "security/test_bmc_network_security.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1001876
+      },
+      "writtenOn": "2023-12-01T10:29:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d32779d1_9042e5c7",
+      "range": {
+        "startLine": 247,
+        "startChar": 31,
+        "endLine": 247,
+        "endChar": 43
       },
       "revId": "26337263662f0fa62468f0eb0ab658a244e717fc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
