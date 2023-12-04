@@ -25,7 +25,8 @@ Validate IPMI Response Length
     [Tags]  Validate_IPMI_Response_Length
 
     ${rsp}=  Get DCMI Management Controller Identifier String
-    @{ipmi_cmd_rsp_list}=  Split String  ${rsp}
+    ${rsp_omit}=  Strip String  ${rsp}  mode=right  characters=${SPACE}00
+    @{ipmi_cmd_rsp_list}=  Split String  ${rsp_omit}
     # ipmi_cmd_rsp_list = ["00", "0a", "00", "01", "02", "03",
     #                      "04", "05", "06", "07", "08", "09"]
     # rsp_length = 10
