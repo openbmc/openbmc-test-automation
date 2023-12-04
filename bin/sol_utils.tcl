@@ -13,7 +13,7 @@ source [exec bash -c "which source.tcl"]
 my_source \
 [list print.tcl opt.tcl valid.tcl call_stack.tcl tools.exp cmd.tcl host.tcl]
 
-longoptions openbmc_host: openbmc_username:=root openbmc_password:=0penBmc host_sol_port:=2200\
+longoptions openbmc_host: openbmc_username:=root openbmc_password: host_sol_port:=2200\
   os_host: os_username:=root os_password: proc_name: ftp_username: \
   ftp_password: os_repo_url: autoboot_setting: test_mode:=0 quiet:=0 debug:=0
 pos_parms
