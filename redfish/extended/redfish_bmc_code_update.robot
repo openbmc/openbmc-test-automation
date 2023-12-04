@@ -33,9 +33,11 @@ Force Tags               Bmc_Code_Update
 
 *** Variables ***
 
-${FORCE_UPDATE}          ${0}
-${LOOP_COUNT}            ${2}
-${DELETE_ERRLOGS}        ${1}
+${FORCE_UPDATE}             ${0}
+${LOOP_COUNT}               ${2}
+${DELETE_ERRLOGS}           ${1}
+# Refer: https://github.com/open-power/guard
+${DELETE_OLD_GUARD_FILE}    ${0}
 
 ${ACTIVATION_WAIT_TIMEOUT}     8 min
 
@@ -123,6 +125,10 @@ Suite Setup Execution
     Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
     Run Keyword If  ${DELETE_ERRLOGS} == ${1}
     ...   Run Keyword And Ignore Error  Redfish Purge Event Log
+    # To invalidate all the guard records.
+    Run Keyword If  '${DELETE_OLD_GUARD_FILE}' == '${1}'
+    ...  BMC Execute Command  guard -I
+
     # Checking for file existence.
     Valid File Path  IMAGE_FILE_PATH
 
