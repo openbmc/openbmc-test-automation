@@ -134,6 +134,7 @@ Get DCMI Management Controller Identifier String
 
     ${mcid_get_cmd}=  Catenate  ${DCMI_RAW_CMD['DCMI']['MANAGEMENT_CONTROLLER_IDENTIFIER_STRING']['GET']}
     ${resp}=  Run External IPMI Raw Command  ${mcid_get_cmd}
+    ${resp}=  Strip String  ${resp}  mode=right  characters=${SPACE}00\n
 
     [Return]  ${resp}
 
