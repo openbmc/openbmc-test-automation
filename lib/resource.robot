@@ -30,7 +30,6 @@ ${OPENBMC_USERNAME}        root
 ${OPENBMC_PASSWORD}        ${EMPTY}
 ${OPENBMC_ADMIN_USERNAME}  admin
 ${OPENBMC_ADMIN_PASSWORD}  ${EMPTY}
-${SERVICE_USER_PASSWORD}   ${EMPTY}
 
 # For users privilege admin or sudo.
 ${USER_TYPE}               ${EMPTY}
