@@ -24,13 +24,13 @@ ${OPENBMC_MODEL}           ${EMPTY}
 ${OPENBMC_HOST}            ${EMPTY}
 ${DBUS_PREFIX}             ${EMPTY}
 ${PORT}                    ${EMPTY}
+
 # AUTH_SUFFIX here is derived from variables.py
 ${AUTH_URI}                https://${OPENBMC_HOST}${AUTH_SUFFIX}
 ${OPENBMC_USERNAME}        root
 ${OPENBMC_PASSWORD}        ${EMPTY}
 ${OPENBMC_ADMIN_USERNAME}  admin
 ${OPENBMC_ADMIN_PASSWORD}  ${EMPTY}
-${SERVICE_USER_PASSWORD}   ${EMPTY}
 
 # For users privilege admin or sudo.
 ${USER_TYPE}               ${EMPTY}
@@ -50,18 +50,19 @@ ${IPMI_USERNAME}           root
 # IPMI password if different.
 ${IPMI_PASSWORD}           ${OPENBMC_PASSWORD}
 
-${MACHINE_TYPE}             palmetto
-${DBUS_POLL_INTERVAL}       15s
 ${OPENBMC_REBOOT_TIMEOUT}   ${10}
+
 # IPMI_COMMAND here is set to "External" by default. User
 # can override to "Dbus" from command line.
-${IPMI_COMMAND}    External
+${IPMI_COMMAND}        External
+
 # IPMI chipher default.
-${IPMI_CIPHER_LEVEL}  ${17}
+${IPMI_CIPHER_LEVEL}   ${17}
+
 # IPMI timeout default.
-${IPMI_TIMEOUT}       ${3}
-${GEN_ID_BYTE_1}  ${20}
-${GEN_ID_BYTE_2}  ${00}
+${IPMI_TIMEOUT}        ${3}
+${GEN_ID_BYTE_1}       ${20}
+${GEN_ID_BYTE_2}       ${00}
 
 # Log default path for IPMI SOL.
 ${IPMI_SOL_LOG_FILE}    ${EXECDIR}${/}logs${/}sol_${OPENBMC_HOST}
@@ -111,6 +112,7 @@ ${RESET_PACKETS}           RST
 ${FIN_PACKETS}             FIN
 ${SYN_ACK_RESET}           SAR
 ${ALL_FLAGS}               ALL
+
 # Used to set BMC static IPv4 configuration.
 ${STATIC_IP}            10.10.10.10
 ${NETMASK}              255.255.255.0
@@ -179,6 +181,7 @@ ${TASK_JSON_FILE_PATH}   data/task_state.json
 
 
 *** Keywords ***
+
 Get Inventory Schema
     [Documentation]  Get inventory schema.
     [Arguments]    ${machine}
