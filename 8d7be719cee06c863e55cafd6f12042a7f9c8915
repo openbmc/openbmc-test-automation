@@ -16,6 +16,24 @@
       "message": "Wilson, can you talk to your CLA manager listed here and ask to add your name so that we can merge your code https://drive.google.com/drive/folders/1Q30cSGkAKBz0Jm--ndoA_kxdf4lJhOGv",
       "revId": "8d7be719cee06c863e55cafd6f12042a7f9c8915",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d94e1fa7_80e05dab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000978
+      },
+      "writtenOn": "2023-12-07T18:10:14Z",
+      "side": 1,
+      "message": "Hi George, I\u0027m trying to get CLA manager update schedule A list. Do they have access upload the file or send to manager@lfprojects.org? Thanks.",
+      "parentUuid": "b9617593_0ae94149",
+      "revId": "8d7be719cee06c863e55cafd6f12042a7f9c8915",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
