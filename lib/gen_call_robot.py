@@ -164,22 +164,10 @@ def init_robot_test_base_dir_path():
                 # Use to the apollo dir path.
                 ROBOT_TEST_BASE_DIR_PATH = apollo_dir_path + suffix
 
-    OBMC_TOOLS_BASE_DIR_PATH = (
-        os.path.dirname(ROBOT_TEST_BASE_DIR_PATH.rstrip("/"))
-        + "/openbmc-tools/"
-    )
-    OPENBMCTOOL_DIR_PATH = OBMC_TOOLS_BASE_DIR_PATH + "openbmctool/"
-    JSON_CHECKER_TOOLS_DIR_PATH = (
-        OBMC_TOOLS_BASE_DIR_PATH + "expectedJsonChecker/"
-    )
-
     gv.valid_value(ROBOT_TEST_BASE_DIR_PATH)
     gp.dprint_vars(
         ROBOT_TEST_RUNNING_FROM_SB,
         ROBOT_TEST_BASE_DIR_PATH,
-        OBMC_TOOLS_BASE_DIR_PATH,
-        OPENBMCTOOL_DIR_PATH,
-        JSON_CHECKER_TOOLS_DIR_PATH,
     )
     gv.valid_dir_path(ROBOT_TEST_BASE_DIR_PATH)
 
@@ -189,17 +177,6 @@ def init_robot_test_base_dir_path():
 
     gm.set_mod_global(ROBOT_TEST_RUNNING_FROM_SB)
     os.environ["ROBOT_TEST_RUNNING_FROM_SB"] = str(ROBOT_TEST_RUNNING_FROM_SB)
-
-    gm.set_mod_global(OBMC_TOOLS_BASE_DIR_PATH)
-    os.environ["OBMC_TOOLS_BASE_DIR_PATH"] = str(OBMC_TOOLS_BASE_DIR_PATH)
-
-    gm.set_mod_global(OPENBMCTOOL_DIR_PATH)
-    os.environ["OPENBMCTOOL_DIR_PATH"] = str(OPENBMCTOOL_DIR_PATH)
-
-    gm.set_mod_global(JSON_CHECKER_TOOLS_DIR_PATH)
-    os.environ["JSON_CHECKER_TOOLS_DIR_PATH"] = str(
-        JSON_CHECKER_TOOLS_DIR_PATH
-    )
 
 
 raw_robot_file_search_path = (
@@ -467,7 +444,6 @@ def robot_cmd_fnc(
     ROBOT_TEST_RUNNING_FROM_SB = gm.get_mod_global(
         "ROBOT_TEST_RUNNING_FROM_SB"
     )
-    OPENBMCTOOL_DIR_PATH = gm.get_mod_global("OPENBMCTOOL_DIR_PATH")
 
     if robot_jail == "":
         if ROBOT_TEST_RUNNING_FROM_SB:
@@ -511,7 +487,6 @@ def robot_cmd_fnc(
                 "/usr/bin",
                 "/sbin",
                 "/bin",
-                OPENBMCTOOL_DIR_PATH.rstrip("/"),
             ]
         )
         PATH = ":".join(NEW_PATH_LIST)
@@ -527,8 +502,6 @@ def robot_cmd_fnc(
             + ":"
             + ROBOT_TEST_BASE_DIR_PATH
             + "bin"
-            + ":"
-            + OPENBMCTOOL_DIR_PATH.rstrip("/")
         )
 
     os.environ["PYTHONPATH"] = PYTHONPATH
