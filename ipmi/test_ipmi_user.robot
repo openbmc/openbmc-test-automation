@@ -30,7 +30,6 @@ ${ipmi_setaccess_cmd}   channel setaccess
               ...       7=0penBmc  8=0penBmc0
 ${expected_max_ids}     15
 ${root_pattern}         ^.*\\sroot\\s.*ADMINISTRATOR.*$
-${empty_name_pattern}   ^User Name\\s.*\\s:\\s$
 
 # User defined count.
 ${USER_LOOP_COUNT}      20
@@ -47,7 +46,6 @@ Verify IPMI User Summary
     ${initial_user_count}  ${maximum_ids}=  Get Enabled User Count
 
     ${random_userid}  ${random_username}=  Create Random IPMI User
-    Wait And Confirm New User Entry  ${random_username}
     Set Test Variable  ${random_userid}
     Run IPMI Standard Command  user enable ${random_userid}
 
@@ -378,6 +376,9 @@ Verify Administrator And User Privilege For Different Channels
     # Set user privilege for newly created user with channel 2.
     Set Channel Access  ${random_userid}  ipmi=on privilege=${user_priv}  ${secondary_channel_number}
 
+    # Delay added for user privileges to get set.
+    Sleep  5s
+
     Enable IPMI User And Verify  ${random_userid}
 
     # Verify that user is able to run administrator level IPMI command with channel 1.
@@ -405,6 +406,9 @@ Verify Operator And User Privilege For Different Channels
 
     # Set user privilege for newly created user with channel 2.
     Set Channel Access  ${random_userid}  ipmi=on privilege=${user_priv}  ${secondary_channel_number}
+
+    # Delay added for user privileges to get set.
+    Sleep  5s
 
     Enable IPMI User And Verify  ${random_userid}
 
@@ -540,9 +544,7 @@ Test IPMI User Privilege
     #                     privilege (i.e. "Passed" or "Failed").
 
     # Create IPMI user and set valid password.
-    ${random_username}=  Generate Random String  8  [LETTERS]
-    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
-    IPMI Create User  ${random_userid}  ${random_username}
+    ${random_userid}  ${random_username}=  Create Random IPMI User
     Set Test Variable  ${random_userid}
     Run IPMI Standard Command
     ...  user set password ${random_userid} ${valid_password}
@@ -651,18 +653,6 @@ Suite Setup Execution
     Run Keyword If  '${IPMI_USERNAME}' == 'root'  Determine Root User Id
 
 
-Check Enabled User Count
-    [Documentation]  Ensure that there are available user IDs.
-
-    # Check for the enabled user count
-    ${resp}=  Run IPMI Standard Command  user summary ${CHANNEL_NUMBER}
-    ${enabled_user_count}=
-    ...  Get Lines Containing String  ${resp}  Enabled User Count
-
-    Should not contain  ${enabled_user_count}  ${expected_max_ids}
-    ...  msg=IPMI have reached maximum user count
-
-
 Determine Root User Id
     [Documentation]  Determines the user ID of the root user.
 
@@ -719,43 +709,3 @@ Get Enabled User Count
     ${int_maximum_ids_count}=  Convert To Integer  ${max_ids}
 
     [Return]  ${user_count}  ${int_maximum_ids_count}
-
-
-Wait And Confirm New User Entry
-    [Documentation]  Wait in loop until new user appears with given username.
-    [Arguments]  ${username}
-
-    # Description of argument(s):
-    # username         The user name (e.g. "root", "robert", etc.).
-
-    Wait Until Keyword Succeeds  45 sec  1 sec  Verify IPMI Username Visible
-    ...  ${username}
-
-
-Verify IPMI Username Visible
-    [Documentation]  Confirm that username is present in user list.
-    [Arguments]  ${username}
-
-    # Description of argument(s):
-    # username         The user name (e.g. "root", "robert", etc.).
-
-    ${resp}=  Run IPMI Standard Command  user list
-    Should Contain  ${resp}  ${username}
-
-
-Find Free User Id
-    [Documentation]  Find a user ID that is not being used.
-
-    Check Enabled User Count
-    FOR    ${num}    IN RANGE    300
-        ${random_userid}=  Evaluate  random.randint(1, ${expected_max_ids})  modules=random
-        ${access}=  Run IPMI Standard Command  channel getaccess ${CHANNEL_NUMBER} ${random_userid}
-
-        ${name_line}=  Get Lines Containing String  ${access}  User Name
-        Log To Console  For ID ${random_userid}: ${name_line}
-        ${is_empty}=  Run Keyword And Return Status
-        ...  Should Match Regexp  ${name_line}  ${empty_name_pattern}
-
-        Exit For Loop If  ${is_empty} == ${True}
-    END
-    [Return]  ${random_userid}

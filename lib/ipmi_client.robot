@@ -22,7 +22,9 @@ ${IPMI_USER_OPTIONS}   ${EMPTY}
 ${IPMI_INBAND_CMD}=    ipmitool -C ${IPMI_CIPHER_LEVEL} -N ${IPMI_TIMEOUT} -p ${IPMI_PORT}
 ${HOST}=               -H
 ${RAW}=                raw
-${IPMITOOL_PATH}  /tmp/ipmitool
+${IPMITOOL_PATH}       /tmp/ipmitool
+${expected_max_ids}    15
+${empty_name_pattern}  ^User Name\\s.*\\s:\\s$
 
 *** Keywords ***
 
@@ -430,9 +432,62 @@ Create Random IPMI User
     [Documentation]  Create IPMI user with random username and userid and return those fields.
 
     ${random_username}=  Generate Random String  8  [LETTERS]
-    ${random_userid}=  Evaluate  random.randint(2, 15)  modules=random
+    ${random_userid}=  Find Free User Id
     IPMI Create User  ${random_userid}  ${random_username}
+    Wait And Confirm New User Entry  ${random_username}
     [Return]  ${random_userid}  ${random_username}
+
+
+Find Free User Id
+    [Documentation]  Find a userid that is not being used.
+
+    Check Enabled User Count
+    FOR    ${num}    IN RANGE    300
+        ${random_userid}=  Evaluate  random.randint(1, ${expected_max_ids})  modules=random
+        ${access}=  Run IPMI Standard Command  channel getaccess ${CHANNEL_NUMBER} ${random_userid}
+
+        ${name_line}=  Get Lines Containing String  ${access}  User Name
+        Log To Console  For ID ${random_userid}: ${name_line}
+        ${is_empty}=  Run Keyword And Return Status
+        ...  Should Match Regexp  ${name_line}  ${empty_name_pattern}
+
+        Exit For Loop If  ${is_empty} == ${True}
+    END
+    [Return]  ${random_userid}
+
+
+Check Enabled User Count
+    [Documentation]  Ensure that there are available user IDs.
+
+    # Check for the enabled user count
+    ${resp}=  Run IPMI Standard Command  user summary ${CHANNEL_NUMBER}
+    ${enabled_user_count}=
+    ...  Get Lines Containing String  ${resp}  Enabled User Count
+
+    Should not contain  ${enabled_user_count}  ${expected_max_ids}
+    ...  msg=IPMI has reached maximum user count
+
+
+Wait And Confirm New User Entry
+    [Documentation]  Wait in loop until new user appears with given username.
+    [Arguments]  ${username}
+
+    # Description of argument(s):
+    # username         The user name (e.g. "root", "robert", etc.).
+
+    Wait Until Keyword Succeeds  45 sec  1 sec  Verify IPMI Username Visible
+    ...  ${username}
+
+
+Verify IPMI Username Visible
+    [Documentation]  Confirm that username is present in user list.
+    [Arguments]  ${username}
+
+    # Description of argument(s):
+    # username         The user name (e.g. "root", "robert", etc.).
+
+    ${resp}=  Run IPMI Standard Command  user list
+    Should Contain  ${resp}  ${username}
 
 
 Delete Created User
