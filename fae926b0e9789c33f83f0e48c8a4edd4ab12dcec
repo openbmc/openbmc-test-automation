@@ -16,6 +16,41 @@
       "message": "Is the sleep 5 needed? Were we seeing problems without a delay?",
       "revId": "fae926b0e9789c33f83f0e48c8a4edd4ab12dcec",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eae32db6_959fad12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001419
+      },
+      "writtenOn": "2023-12-11T17:13:53Z",
+      "side": 1,
+      "message": "Yes, in our testing we saw a fail here if the next command is issued too soon after keyword \u0027Set Channel Access\u0027.  The proposed solution merely duplicates the delay that was already inserted in multiple places before, in this same file, namely lines 302ff, 498ff, 553ff, 609ff (base version numbering).  In other words, we made the application of a delay after \u0027Set Channel Access` consistent... and solved a fail.  As we duplicated the existing solution, we did not fine-tune the duration of this delay.",
+      "parentUuid": "92cc1f01_e91ebc49",
+      "revId": "fae926b0e9789c33f83f0e48c8a4edd4ab12dcec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21caf3ca_b79a3358",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001419
+      },
+      "writtenOn": "2023-12-11T17:13:53Z",
+      "side": 1,
+      "message": "Answered Matt Fisher\u0027s comment re: necessity of \u0027sleep  5s\u0027.",
+      "revId": "fae926b0e9789c33f83f0e48c8a4edd4ab12dcec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
