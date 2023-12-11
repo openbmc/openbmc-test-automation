@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d84b298_5f7d3340",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-12-11T13:50:55Z",
+      "side": 1,
+      "message": "https://github.com/openbmc/openbmc-build-scripts/blob/16baaf73f94dad86dc5bab02616e2675c6d6f71a/scripts/build-qemu-robot-docker.sh#L122\n\nI ll have to check with the latest version / stable of all packages of robot and python compatibility before merging.. I ll test out in the mean time on my env",
+      "revId": "a73b6a0f85e326f6096e3444f1a07aec96a03513",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
