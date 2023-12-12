@@ -52,6 +52,23 @@
       "parentUuid": "d94e1fa7_80e05dab",
       "revId": "8d7be719cee06c863e55cafd6f12042a7f9c8915",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "455160de_ec8d14e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-12-12T14:36:02Z",
+      "side": 1,
+      "message": "Tentatively giving +1 while awaiting for CLA update",
+      "revId": "8d7be719cee06c863e55cafd6f12042a7f9c8915",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
