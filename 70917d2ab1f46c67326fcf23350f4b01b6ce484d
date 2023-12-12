@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2ea7e4c_70ab4888",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-12-12T15:13:02Z",
+      "side": 1,
+      "message": "Note for reviewers:  https://github.com/openbmc/openbmc-test-automation/wiki/What\u0027s-New#important-notification-\n\nFor reference",
+      "revId": "70917d2ab1f46c67326fcf23350f4b01b6ce484d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
