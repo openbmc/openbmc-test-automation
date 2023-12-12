@@ -68,6 +68,23 @@
       "message": "Anyone has further comments on this commit ? else I ll merge it sooner if there are no further concern on it..Thanks",
       "revId": "fae926b0e9789c33f83f0e48c8a4edd4ab12dcec",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e14d5c60_40130b67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001842
+      },
+      "writtenOn": "2023-12-12T04:47:14Z",
+      "side": 1,
+      "message": "ship it!",
+      "revId": "fae926b0e9789c33f83f0e48c8a4edd4ab12dcec",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
