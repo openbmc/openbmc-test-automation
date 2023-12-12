@@ -791,14 +791,14 @@ Suite Setup Execution
     #   - And set the same as static IP address
 
     Redfish.Login
-    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status  ${1}
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status   ${CHANNEL_NUMBER}
     Set Suite Variable  ${DHCPEnabled}
 
+    ${ip_addr}  ${gateway}  ${subnetmask}=  Run Keyword If  ${DHCPEnabled}==True
+    ...   Get DHCP IP Info
+
     Run Keyword If  ${DHCPEnabled}==True
-    ...  Run Keywords
-    ...  ${ip_addr}  ${gateway}  ${subnetmask}=  Get DHCP IP Info  AND
-    ...  Add IP Address  ${ip_addr}  ${subnetmask}  ${gateway}  AND
-    ...  Set Suite Variable  ${ip_addr}
+    ...  Add IP Address  ${ip_addr}  ${subnetmask}  ${gateway}
 
     ${test_gateway}=  Get BMC Default Gateway
     Set Suite Variable  ${test_gateway}
@@ -810,6 +810,7 @@ Suite Teardown Execution
     # - If the DHCP IPv4 is enabled before suite setup execution
     #   - Restore the DHCP IPv4 to enabled state
 
+    Redfish.Login
     Run Keyword If  ${DHCPEnabled}==True
     ...  Enable IPv4 DHCP Settings
 
