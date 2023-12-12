@@ -3,6 +3,7 @@
 **Interface Feature List**
 
 - REST
+  [Legacy REST](https://github.com/openbmc/openbmc-test-automation/releases/tag/v4.0-stable)
 - DMTF Redfish
 - Out-of-band IPMI
 - SSH to BMC and Host OS
@@ -153,13 +154,8 @@ There are several sub-directories within the openbmc-test-automation base which
 contain test suites, tools, templates, etc. These sub-directories are classified
 as follows:
 
-`tests/`: Contains the general test cases for OpenBMC stack functional
-verification. The "tests" subdirectory uses legacy REST and will be deprecated
-at some point and therefore no longer supported.
-
-`extended/`: Contains test cases for boot testing, code update testing using
-legacy REST, etc. The "extended" subdirectory uses legacy REST and will be
-deprecated at some point and therefore no longer supported.
+`redfish/`: Contains the general test cases for OpenBMC stack functional
+verification.
 
 `systest/`: Contains test cases for HTX bootme testing.
 
@@ -177,11 +173,7 @@ platform, OEM).
 `snmp/`: Contains test cases for SNMP (Simple Network Management Protocol)
 configuration testing.
 
-`openpower/ras/`: Contains test cases for RAS (Reliability, Availability and
-Serviceability) for an OpenPOWER system.
-
-`openpower/secureboot/`: Contains test cases for secure boot testing on a secure
-boot feature enabled OpenPOWER system only.
+`openpower/`: Contains test cases for an OpenPOWER based system.
 
 `tools/`: Contains various tools.
 
@@ -200,8 +192,8 @@ simple, modern and secure management of scalable platform hardware.
 `redfish/`: Contains test cases for DMTF Redfish-related feature supported on
 OpenBMC.
 
-`redfish/extended/`: Contains test cases for combined legacy REST and DMTF
-Redfish-related feature supported on OpenBMC.
+`redfish/extended/`: Contains test cases for combined DMTF Redfish-related
+feature supported on OpenBMC. Some of the test will be deprecated.
 
 Note: Work in progress test development parameter
 `-v REDFISH_SUPPORT_TRANS_STATE:1` to force the test suites to execute in
