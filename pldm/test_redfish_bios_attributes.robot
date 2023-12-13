@@ -125,6 +125,7 @@ Redfish Verify Set BIOS Enumeration Attribute Type
     ...              and set back to original BIOS attribute values using Redfish.
     [Tags]  Redfish_Verify_Set_BIOS_Enumeration_Attribute_Type
 
+    @{failed_attr_list}=  Create List
 
     # Fetch BIOS attribute optional values from pldmtool getbiostable.
     ${attr_val_data}=  GetBIOSEnumAttributeOptionalValues  ${attr_table_data}
@@ -136,21 +137,14 @@ Redfish Verify Set BIOS Enumeration Attribute Type
     # Update multiple attribute values for corresponding attribute handle.
     FOR  ${i}  IN  @{attr_handles}
         @{attr_val_list}=  Set Variable  ${attr_val_data}[${i}]
-        Set Optional BIOS Attribute Values And Verify  ${i}  @{attr_val_list}
+        ${status}=  Run Keyword And Return Status
+        ...  Set Optional BIOS Attribute Values And Verify  ${i}  @{attr_val_list}
+        Run Keyword If  ${status} == ${False}  Append To List  ${failed_attr_list}  ${i}
     END
 
-
-Redfish Verify Restore BIOS Attribute Values
-    [Documentation]  Restore all BIOS attribute values with its default values and verify
-    ...              using Redfish.
-    [Tags]  Redfish_Verify_Restore_BIOS_Attribute_Values
-
-    ${bios_default_data}=  GetBIOSAttrDefaultValues  ${attr_table_data}
-    @{attr_handles}=  Get Dictionary Keys  ${bios_default_data}
-
-    FOR  ${i}  IN  @{attr_handles}
-        Set BIOS Attribute Value And Verify  ${i}  ${bios_default_data['${i}']}
-    END
+    ${fail_count}=  Get Length  ${failed_attr_list}
+    Should Be Equal  ${fail_count}  ${0}
+    ...  msg= BIOS write Failed ${fail_count} list: ${failed_attr_list}
 
 
 *** Keywords ***
