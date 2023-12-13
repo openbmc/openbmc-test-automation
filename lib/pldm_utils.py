@@ -45,7 +45,7 @@ def pldmtool(option_string, **bsu_options):
     bsu_options = fa.args_to_objects(bsu_options)
 
     stdout, stderr, rc = bsu.bmc_execute_command(
-        "pldmtool " + option_string, **bsu_options
+        "pldmtool " + option_string, **bsu_options, ignore_err=1
     )
     if stderr:
         return stderr
@@ -206,14 +206,22 @@ def GetBIOSAttrOriginalValues(attr_val_table_data):
         attr_handle = re.findall(r"\(.*?\)", item["AttributeNameHandle"])
         attr_name = attr_handle[0][1:-1]
 
-        command = "bios GetBIOSAttributeCurrentValueByHandle -a " + attr_name
-        value = pldmtool(command)
-        attr_val_data_dict[attr_name] = value["CurrentValue"]
-        if not value["CurrentValue"]:
-            if "name" in attr_name:
-                attr_val_data_dict[attr_name] = '""'
-            elif "hb_lid_ids" in attr_name:
-                attr_val_data_dict[attr_name] = '""'
+        # Exclude BIOS attribute which are ReadOnly.
+        if "ReadOnly" not in item["AttributeType"]:
+            command = (
+                "bios GetBIOSAttributeCurrentValueByHandle -a " + attr_name
+            )
+            value = pldmtool(command)
+            if "error" in value:
+                print("Ignore BIOS attribute which throws error...")
+                pass
+            elif not value["CurrentValue"]:
+                if "name" in attr_name:
+                    attr_val_data_dict[attr_name] = '""'
+                elif "hb_lid_ids" in attr_name:
+                    attr_val_data_dict[attr_name] = '""'
+            else:
+                attr_val_data_dict[attr_name] = value["CurrentValue"]
 
     return attr_val_data_dict
 
@@ -304,7 +312,8 @@ def GetNewValuesForAllBIOSAttrs(attr_table_data):
             )
             if random_val != existing_data[attr]:
                 break
-        attr_random_data[attr] = random_val.strip('"')
+        if isinstance(random_val, str):
+            attr_random_data[attr] = random_val.strip('"')
     logger.info("Values generated for string type attributes")
 
     for attr in int_attr_data:

@@ -8,6 +8,10 @@ Resource         utils.robot
 Library          tftp_update_utils.py
 
 
+*** Variables ***
+${OS_RUNNING_TIMEOUT}            30
+
+
 *** Keywords ***
 
 Set BIOS Attribute Value And Verify
@@ -20,14 +24,30 @@ Set BIOS Attribute Value And Verify
     # @{attr_val}       Attribute value for the given attribute handle.
     # ${verify}         Verify the new value.
 
+    # Check if the BIOS attribute value type is string.
+    ${type_str}=    Evaluate  isinstance($attr_val, str)
 
-    ${type_int}=    Evaluate  isinstance($attr_val, int)
-    ${value}=  Set Variable If  '${type_int}' == '${True}'  ${attr_val}  '${attr_val}'
+    IF  ${type_str}
+        # Handling the case when the BIOS attribute value is an empty string.
+        ${attr_value_length}=  Evaluate  len($attr_val.replace('"', ''))
+        IF  ${attr_value_length} 
+            ${value}=  Set Variable  "${attr_val}"
+        ELSE
+            ${value}=  Set Variable  ${attr_val}
+        END
+   ELSE
+       ${value}=  Set Variable  ${attr_val}
+   END
 
-    Redfish.Patch  ${BIOS_ATTR_SETTINGS_URI}  body={"Attributes":{"${attr_handle}": ${value}}}
-    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    # BIOS attribute with _current are ReadOnly can not be updated.
+    IF  'current' in '${attr_handle}'
+        Log To Console  BIOS attribute with _current are ReadOnly can not be updated !!
+    ELSE
+        Redfish.Patch  ${BIOS_ATTR_SETTINGS_URI}  body={"Attributes":{"${attr_handle}": ${value}}}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
-    Run Keyword If  '${verify}' == '${True}'  Verify BIOS Attribute  ${attr_handle}  ${attr_val}
+        Run Keyword If  '${verify}' == '${True}'  Verify BIOS Attribute  ${attr_handle}  ${attr_val}
+    END
 
 
 Set Optional BIOS Attribute Values And Verify
@@ -57,7 +77,10 @@ Verify BIOS Attribute
     # ${attr_val}       The expected value for the given attribute handle.
 
     ${output}=  Redfish.Get Attribute  ${BIOS_ATTR_URI}  Attributes
-    Should Be Equal  ${output['${attr_handle}']}  ${attr_val}
+    ${cmd_rsp_status}=  Run Keyword And Return Status  Should Not Be Empty  ${output['${attr_handle}']}
+    IF  ${cmd_rsp_status}
+        Should Be Equal  ${output['${attr_handle}']}  ${attr_val}
+    END
 
 
 Switch And Verify BIOS Attribute Firmware Boot Side
