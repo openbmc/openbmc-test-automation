@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9eeb765_24ad4b9f",
+        "filename": "ffdc/ffdc_config.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000008
+      },
+      "writtenOn": "2023-12-13T14:22:25Z",
+      "side": 1,
+      "message": "maybe it\u0027s better to do it how pldmd did it on 2 lines above with the -s SIGUSR1 just so it\u0027s consistent.",
+      "revId": "464cb297da4ff9cf9ffc8134fd766af7c1cf8edf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
