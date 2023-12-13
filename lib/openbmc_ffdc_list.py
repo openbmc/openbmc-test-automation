@@ -104,6 +104,7 @@ FFDC_BMC_FILE = {
         ),
         "GUARD_list.txt": "guard -l > /tmp/GUARD_list.txt 2>&1",
         "fan_control_dump.json": "fanctl dump; sleep 5",
+        "fan_monitor_dump.json": "killall -USR1 phosphor-fan-monitor; sleep 5",
         "DEVTREE": (
             "cat /var/lib/phosphor-software-manager/pnor/rw/DEVTREE >"
             " /tmp/DEVTREE 2>&1"
