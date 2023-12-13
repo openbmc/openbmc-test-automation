@@ -16,6 +16,24 @@
       "message": "Fix BMC network config test suite\n\nChanges:\n    - Modified suite setup execution Keyword.\n\nTested:\n    - Executed in BMC environment.\n\nResolves openbmc/openbmc-test-automation#2233",
       "revId": "732f266722f74e742a0ce9873e3a9bcc9f06c89f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57c1bacd_cc0cbaca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2023-12-13T10:51:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18a150e2_ffc494a7",
+      "revId": "732f266722f74e742a0ce9873e3a9bcc9f06c89f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
