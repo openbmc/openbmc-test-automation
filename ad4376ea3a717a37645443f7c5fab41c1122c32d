@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b741dc4_3f1c3a13",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2023-12-13T06:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6928d561_aa4d9824",
+      "range": {
+        "startLine": 10,
+        "startChar": 5,
+        "endLine": 10,
+        "endChar": 42
+      },
+      "revId": "ad4376ea3a717a37645443f7c5fab41c1122c32d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b4265389_71bfdda0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-12-12T16:22:28Z",
       "side": 1,
       "message": "End with full stop.",
+      "range": {
+        "startLine": 13,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 31
+      },
+      "revId": "ad4376ea3a717a37645443f7c5fab41c1122c32d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2152d138_5744c098",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2023-12-13T06:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4265389_71bfdda0",
       "range": {
         "startLine": 13,
         "startChar": 4,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51934131_8c388960",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2023-12-13T06:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64ddaa43_a9c9cb18",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 70
+      },
+      "revId": "ad4376ea3a717a37645443f7c5fab41c1122c32d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0bd3835b_092f3839",
         "filename": "redfish/managers/test_bmc_network_conf.robot",
         "patchSetId": 1
@@ -83,6 +155,30 @@
       "writtenOn": "2023-12-12T16:22:28Z",
       "side": 1,
       "message": "Leave a line after the comments.",
+      "range": {
+        "startLine": 811,
+        "startChar": 4,
+        "endLine": 811,
+        "endChar": 48
+      },
+      "revId": "ad4376ea3a717a37645443f7c5fab41c1122c32d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5b2680d_c7f2d39b",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2023-12-13T06:16:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bd3835b_092f3839",
       "range": {
         "startLine": 811,
         "startChar": 4,
