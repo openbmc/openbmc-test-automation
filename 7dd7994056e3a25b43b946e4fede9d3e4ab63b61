@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f3cfbe7_b678d086",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-12-13T09:07:57Z",
+      "side": 1,
+      "message": "please remove the additional space.",
+      "range": {
+        "startLine": 38,
+        "startChar": 96,
+        "endLine": 38,
+        "endChar": 98
+      },
+      "revId": "7dd7994056e3a25b43b946e4fede9d3e4ab63b61",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
