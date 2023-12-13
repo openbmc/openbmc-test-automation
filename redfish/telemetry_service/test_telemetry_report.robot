@@ -25,7 +25,7 @@ Verify Basic Telemetry Report Creation
     [Tags]  Verify_Basic_Telemetry_Report_Creation
     [Template]  Create Basic Telemetry Report
 
-    # Metric definition Metric ReportDefinition Type   Report Actions       Append Limit
+    # Metric definition Metric ReportDefinition Type   Report Actions       Append Limit  Expected Result [default = success]
     total_power         OnRequest         LogToMetricReportsCollection
     Battery_Voltage     Periodic          LogToMetricReportsCollection      100
     Ambient_0_Temp      OnRequest         LogToMetricReportsCollection
@@ -35,6 +35,7 @@ Verify Basic Telemetry Report Creation
     Relative_Humidity   OnRequest         LogToMetricReportsCollection
     pcie_dcm0_power     Periodic          LogToMetricReportsCollection      32768
     io_dcm0_power       OnRequest         LogToMetricReportsCollection
+    invalid_value       OnRequest         LogToMetricReportsCollection      100             fail
 
 
 Verify Error After Exceeding Maximum Report Creation
@@ -86,6 +87,12 @@ Create Basic Telemetry Report
 
     ${resp}=  Redfish.Get Properties
     ...  /redfish/v1/TelemetryService/MetricDefinitions/${metric_definition_name}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+    ${contains}=  Run Keyword And Return Status  Should Contain  ${resp}  error
+    IF  ${Contains} == ${True}
+        Should Be True  '${expected_result}' == 'fail'
+        RETURN
+    END 
     # Example of response from above Redfish GET request.
     # "@odata.id": "/redfish/v1/TelemetryService/MetricDefinitions/Ambient_0_Temp",
     # "@odata.type": "#MetricDefinition.v1_0_3.MetricDefinition",
