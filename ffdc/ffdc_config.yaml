@@ -87,6 +87,7 @@ OPENBMC:
             - "pldmtool fru getfrurecordtable>/tmp/PLDM_fru_record.txt"
             - "killall -s SIGUSR1 pldmd; sleep 5"
             - "fanctl dump"
+            - "killall -s SIGUSR1 phosphor-fan-monitor; sleep 5"
             - "cat /var/lib/phosphor-software-manager/pnor/rw/DEVTREE >
               /tmp/DEVTREE"
             - "cat /home/root/bmcweb_persistent_data.json >
@@ -116,6 +117,7 @@ OPENBMC:
             - "/tmp/PLDM_fru_record.txt"
             - "/tmp/pldm_flight_recorder"
             - "/tmp/fan_control_dump.json"
+            - "/tmp/fan_monitor_dump.json"
             - "/tmp/DEVTREE"
             - "/tmp/bmcweb_persistent_data.json"
         PROTOCOL:
