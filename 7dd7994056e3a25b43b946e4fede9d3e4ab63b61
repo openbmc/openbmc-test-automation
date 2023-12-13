@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9aea92b6_eacbd694",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-12-13T12:38:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6bb4931_1b8e7a98",
+      "range": {
+        "startLine": 28,
+        "startChar": 90,
+        "endLine": 28,
+        "endChar": 118
+      },
+      "revId": "7dd7994056e3a25b43b946e4fede9d3e4ab63b61",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f3cfbe7_b678d086",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee78acbd_ea40a6b6",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-12-13T12:38:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f3cfbe7_b678d086",
+      "range": {
+        "startLine": 38,
+        "startChar": 96,
+        "endLine": 38,
+        "endChar": 98
+      },
+      "revId": "7dd7994056e3a25b43b946e4fede9d3e4ab63b61",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0b87b7f_1ce892b9",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-12-13T10:11:10Z",
       "side": 1,
       "message": "why we are putting HTTP_NOT_FOUND for success",
+      "range": {
+        "startLine": 90,
+        "startChar": 43,
+        "endLine": 90,
+        "endChar": 57
+      },
+      "revId": "7dd7994056e3a25b43b946e4fede9d3e4ab63b61",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50183fcd_0c86b670",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-12-13T12:38:44Z",
+      "side": 1,
+      "message": "HTTP_NOT_FOUND is expected when a report creation is attempted with invalid / unavailable telemetry data. This is an error scenario test case.",
+      "parentUuid": "e0b87b7f_1ce892b9",
       "range": {
         "startLine": 90,
         "startChar": 43,
