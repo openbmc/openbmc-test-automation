@@ -16,6 +16,24 @@
       "message": "Please put this changes back",
       "revId": "9e4481b8205461510c6f8e77ef082942bb5cd547",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32798c4c_343999c7",
+        "filename": "pldm/test_redfish_bios_attributes.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2023-12-13T09:48:06Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "2bd16f3f_b12edec6",
+      "revId": "9e4481b8205461510c6f8e77ef082942bb5cd547",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
