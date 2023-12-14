@@ -13,9 +13,7 @@ ${PLATFORM_ARCH_TYPE}             power
 # FFDC Redfish OEM path /<oem>/v1/
 ${OEM_REDFISH_PATH}               ${EMPTY}
 
-# Transition REST vs Redfish ONLY temporary changes for stagging
-# automation infrastructure change and for continuity.
-${REDFISH_SUPPORT_TRANS_STATE}    ${0}
+${REDFISH_SUPPORT_TRANS_STATE}    ${1}
 
 # By default Delete all Redfish session per boot run.
 ${REDFISH_DELETE_SESSIONS}        ${1}
