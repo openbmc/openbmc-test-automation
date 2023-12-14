@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "64bdbd74_9e44b394",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-12-14T11:04:17Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "aaed913c_61801aa6",
+      "range": {
+        "startLine": 28,
+        "startChar": 90,
+        "endLine": 28,
+        "endChar": 118
+      },
+      "revId": "7dd7994056e3a25b43b946e4fede9d3e4ab63b61",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f3cfbe7_b678d086",
         "filename": "redfish/telemetry_service/test_telemetry_report.robot",
         "patchSetId": 1
@@ -180,6 +204,30 @@
       "side": 1,
       "message": "Sure",
       "parentUuid": "50183fcd_0c86b670",
+      "range": {
+        "startLine": 90,
+        "startChar": 43,
+        "endLine": 90,
+        "endChar": 57
+      },
+      "revId": "7dd7994056e3a25b43b946e4fede9d3e4ab63b61",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81b2a89d_59914afa",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2023-12-14T11:04:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf6418ae_ccc62991",
       "range": {
         "startLine": 90,
         "startChar": 43,
