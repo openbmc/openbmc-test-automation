@@ -11,7 +11,7 @@ Documentation  Stress the system using HTX exerciser - bootme option.
 # HTX_LOOP            The number of times to loop HTX.
 
 
-Resource        ../syslib/resource.robot
+Resource        ../lib/resource.robot
 Resource        ../syslib/utils_os.robot
 Library         ../syslib/utils_keywords.py
 Resource        ../lib/openbmc_ffdc_utils.robot
