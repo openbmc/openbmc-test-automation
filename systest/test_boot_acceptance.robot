@@ -41,7 +41,7 @@ Library         SSHLibrary
 Library         String
 Library         ../lib/bmc_ssh_utils.py
 Resource        ../lib/resource.robot
-Resource        ../syslib/utils_os.robot
+Resource        ../lib/os_utilities.robot
 Resource        ../lib/bmc_network_utils.robot
 Resource        ../lib/bmc_redfish_resource.robot
 

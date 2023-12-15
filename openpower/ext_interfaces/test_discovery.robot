@@ -11,7 +11,7 @@ Library              ../../lib/gen_misc.py
 Resource             ../../lib/external_intf/management_console_utils.robot
 Resource             ../../lib/redfish_code_update_utils.robot
 Resource             ../../lib/boot_utils.robot
-Resource             ../../syslib/utils_os.robot
+Resource             ../../lib/os_utilities.robot
 Resource             ../../lib/code_update_utils.robot
 
 Suite Setup          Suite Setup Execution

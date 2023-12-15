@@ -12,10 +12,10 @@ Documentation  Stress the system using HTX exerciser - bootme option.
 
 
 Resource        ../lib/htx_resource.robot
-Resource        ../syslib/utils_os.robot
+Resource        ../lib/os_utilities.robot
 Library         ../lib/os_utils_keywords.py
 Resource        ../lib/openbmc_ffdc_utils.robot
-Library         ../syslib/utils_os.py
+Library         ../lib/os_utilities.robot
 Library         DateTime
 
 Suite Setup     Run Keyword And Ignore Error  Start SOL Console Logging
@@ -154,7 +154,7 @@ Test Setup Execution
     Run Keyword And Ignore Error  Redfish Purge Event Log
     Tool Exist  htxcmdline
 
-    ${os_release_info}=  utils_os.Get OS Release Info  uname
+    ${os_release_info}=  os_utilities.Get OS Release Info  uname
     Rprint Vars  os_release_info  fmt=1
 
     # Shutdown if HTX is running.

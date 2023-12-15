@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation      Keywords for system data information.
 
-Resource           ../syslib/utils_os.robot
+Resource           ../lib/os_utilities.robot
 
 *** Variables ***
 

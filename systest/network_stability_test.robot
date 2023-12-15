@@ -2,7 +2,7 @@
 Documentation    Module to test network stability.
 ...              By default running HTX mdt.bu profile for stress test.
 
-Resource         ../syslib/utils_os.robot
+Resource         ../lib/os_utilities.robot
 Library          ../lib/os_utils_keywords.py
 
 Test Setup      Test Setup Execution

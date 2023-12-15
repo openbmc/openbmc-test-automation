@@ -36,7 +36,7 @@ Documentation  Stress the system using HTX exerciser.
 #                     optional.  If not specified the default value is
 #                     "size".
 
-Resource        ../syslib/utils_os.robot
+Resource        ../lib/os_utilities.robot
 Resource        ../lib/openbmc_ffdc_utils.robot
 Resource        ../lib/logging_utils.robot
 Resource        ../lib/code_update_utils.robot
@@ -45,7 +45,7 @@ Resource        ../lib/htx_resource.robot
 Library         ../lib/os_utils_keywords.py
 Library         ../lib/utils_files.py
 Library         ../lib/logging_utils.py
-Library         ../syslib/utils_os.py
+Library         ../lib/os_utilities.py
 
 Suite Setup     Run Keyword And Ignore Error  Start SOL Console Logging
 Test Setup      Test Setup Execution
@@ -248,7 +248,7 @@ Test Setup Execution
     Run Keyword And Ignore Error  Redfish Purge Event Log
     Tool Exist  htxcmdline
 
-    ${os_release_info}=  utils_os.Get OS Release Info  uname
+    ${os_release_info}=  os_utilities.Get OS Release Info  uname
     Rprint Vars  os_release_info  fmt=1
 
     # Shutdown if HTX is running.

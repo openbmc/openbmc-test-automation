@@ -4,7 +4,7 @@ Documentation      Keywords for system related tools installation.
 
 
 Resource     ../lib/boot_utils.robot
-Resource     ../syslib/utils_os.robot
+Resource     ../lib/os_utilities.robot
 
 ***Keywords***
 

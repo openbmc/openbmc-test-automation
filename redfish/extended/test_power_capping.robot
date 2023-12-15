@@ -12,7 +12,7 @@ Resource          ../../lib/rest_client.robot
 Resource          ../../lib/openbmc_ffdc.robot
 Resource          ../../lib/boot_utils.robot
 Resource          ../../lib/ipmi_client.robot
-Resource          ../../syslib/utils_os.robot
+Resource          ../../lib/os_utilities.robot
 
 
 Suite Setup      Suite Setup Execution

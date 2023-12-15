@@ -14,7 +14,7 @@ Resource             ../../lib/esel_utils.robot
 Resource             ../../lib/bmc_redfish_resource.robot
 Resource             ../../lib/logging_utils.robot
 Resource             ../../lib/dump_utils.robot
-Resource             ../../syslib/utils_os.robot
+Resource             ../../lib/os_utilities.robot
 Library              ../../lib/gen_cmd.py
 Library              OperatingSystem
 

@@ -8,7 +8,7 @@ Documentation  Check processor speed.
 # OS_USERNAME    The OS login userid (usually root).
 # OS_PASSWORD    The password for the OS login.
 
-Resource        ../syslib/utils_os.robot
+Resource        ../lib/os_utilities.robot
 
 Suite Setup      Run Keyword  Start SOL Console Logging
 Test Setup       Test Setup Execution

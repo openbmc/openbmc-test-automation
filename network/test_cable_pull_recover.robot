@@ -17,7 +17,7 @@ Documentation  Verify the port recovery by simulating its disconnection.
 
 Library         ../lib/bmc_ssh_utils.py
 Resource        ../lib/resource.robot
-Resource        ../syslib/utils_os.robot
+Resource        ../lib/os_utilities.robot
 
 Suite Setup     Test Setup Execution
 
