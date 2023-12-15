@@ -10,7 +10,7 @@ Documentation  Verify that the OS network interfaces are configured and
 #   FAIL_ON_LINK_DOWN           If set to 1, the test will exit if
 #                               a link is down. Default is 1.
 
-Resource         ../syslib/utils_install.robot
+Resource         ../lib/os_utils_install.robot
 
 Force Tags       Host_Network_Interfaces
 

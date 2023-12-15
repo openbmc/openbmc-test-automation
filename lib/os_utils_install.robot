@@ -3,8 +3,8 @@ Documentation      Keywords for system related tools installation.
 ...                For HTX refer to https://github.com/open-power/HTX
 
 
-Resource     utils_os.robot
 Resource     ../lib/boot_utils.robot
+Resource     ../syslib/utils_os.robot
 
 ***Keywords***
 
