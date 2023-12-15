@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53c669c4_4dac31d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2023-12-15T04:06:31Z",
+      "side": 1,
+      "message": "I now see the latest CLA with your name approved list in the Google Drive link bellow.\n\nhttps://drive.google.com/drive/folders/1Q30cSGkAKBz0Jm--ndoA_kxdf4lJhOGv\n\nWilson Suen - CLA Manager\n\n\nI am merging the code.",
+      "revId": "785d68656d5f2684375b4509b31ed009ef3fbc1e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
