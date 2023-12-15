@@ -46,6 +46,30 @@
       },
       "revId": "862d11f14d12eb04a18974b7012c1cccd5839e71",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "407bbd09_0bb1f173",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-12-15T07:49:54Z",
+      "side": 1,
+      "message": "As discussed, this logic is just checking if we are getting expected failure for invalid MetricDefinitions. So please create a new test case for it like below and don\u0027t club it with this template.\n\n```\nVerify Error For Invalid Metric Definition\n\n    ${resp}\u003d  Redfish.Get Properties\n    ...  /redfish/v1/TelemetryService/MetricDefinitions/invalid_value\n    Should Contain  ${resp}  error\n```",
+      "parentUuid": "bc78af67_42387fca",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 8
+      },
+      "revId": "862d11f14d12eb04a18974b7012c1cccd5839e71",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
