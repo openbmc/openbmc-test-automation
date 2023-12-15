@@ -42,7 +42,7 @@ Resource        ../lib/logging_utils.robot
 Resource        ../lib/code_update_utils.robot
 Resource        ../lib/esel_utils.robot
 Resource        ../lib/htx_resource.robot
-Library         ../syslib/utils_keywords.py
+Library         ../lib/os_utils_keywords.py
 Library         ../lib/utils_files.py
 Library         ../lib/logging_utils.py
 Library         ../syslib/utils_os.py

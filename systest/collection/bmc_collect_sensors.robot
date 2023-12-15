@@ -7,7 +7,7 @@ Documentation       BMC server health, collect sensors.
 Resource            ../../lib/bmc_redfish_resource.robot
 Resource            ../../lib/openbmc_ffdc.robot
 Library             Collections
-Library             ../syslib/utils_keywords.py
+Library             ../lib/os_utils_keywords.py
 
 Suite Setup         Suite Setup Execution
 Suite Teardown      Suite Teardown Execution

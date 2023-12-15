@@ -13,7 +13,7 @@ Documentation  Stress the system using HTX exerciser - bootme option.
 
 Resource        ../lib/htx_resource.robot
 Resource        ../syslib/utils_os.robot
-Library         ../syslib/utils_keywords.py
+Library         ../lib/os_utils_keywords.py
 Resource        ../lib/openbmc_ffdc_utils.robot
 Library         ../syslib/utils_os.py
 Library         DateTime
