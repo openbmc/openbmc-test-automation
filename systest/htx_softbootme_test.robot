@@ -15,7 +15,7 @@ Resource        ../lib/htx_resource.robot
 Resource        ../lib/os_utilities.robot
 Library         ../lib/os_utils_keywords.py
 Resource        ../lib/openbmc_ffdc_utils.robot
-Library         ../lib/os_utilities.robot
+Library         ../lib/os_utilities.py
 Library         DateTime
 
 Suite Setup     Run Keyword And Ignore Error  Start SOL Console Logging
