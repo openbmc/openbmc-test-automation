@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4db0e95_91fdb094",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2023-12-18T22:01:56Z",
+      "side": 1,
+      "message": "Why is this needed?",
+      "revId": "7d036e35ef5661446bd710a84623cca551794644",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9050f11d_0ab2de74",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2023-12-18T22:01:56Z",
+      "side": 1,
+      "message": "Can you use your full name here?\n\nFrom\nhttps://github.com/openbmc/docs/blob/55c850913157ae07ea6deb02f7c5b1beda4f48be/CONTRIBUTING.md?plain\u003d1#L247\n\nAll commit messages must include a \"Signed-off-by\" line, which indicates that\nyou the contributor have agreed to the Developer Certificate of Origin (see\nbelow). This line must include the full name you commonly use, often a given\nname and a family name or surname. (ok: Sam Samuelsson, Robert A. Heinlein; not\nok: xXthorXx, Sam, RAH)",
+      "revId": "7d036e35ef5661446bd710a84623cca551794644",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4e2791f2_f2c23508",
         "filename": "redfish/dmtf_tools/Redfish_JsonSchema_ResponseValidator.robot",
         "patchSetId": 4
