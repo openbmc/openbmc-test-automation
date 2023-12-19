@@ -109,6 +109,19 @@ Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
     Redfish.Login
+    Set Power Policy For TPO  Automatic
+
+
+Set Power Policy For TPO
+    [Documentation]   Change 'server power policy' option to automatic.
+    [Arguments]  ${power_policy_mode}
+
+    # Description of argument(s):
+    # power_policy_mode           BIOS attribute value. E.g. "Stay On", "Automatic".
+
+    Redfish.Patch  /redfish/v1/Systems/system/Bios/Settings
+    ...  body={"Attributes":{"pvm_system_power_off_policy": "${power_policy_mode}"}}
+    ...  valid_status_codes=[${HTTP_OK}]
 
 
 Test Teardown Execution
