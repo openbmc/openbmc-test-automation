@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c577a2f_f9b336bc",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-12-19T15:48:50Z",
+      "side": 1,
+      "message": "Please keep the name of the test case and the tag name same for convenience.",
+      "range": {
+        "startLine": 367,
+        "startChar": 12,
+        "endLine": 367,
+        "endChar": 54
+      },
+      "revId": "509399079a9f6d2602e051966ab3db644b83558d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff7435ff_66824f98",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-12-19T15:48:50Z",
+      "side": 1,
+      "message": "group_privilege to maintain consistency throughout the code.",
+      "range": {
+        "startLine": 570,
+        "startChar": 19,
+        "endLine": 570,
+        "endChar": 27
+      },
+      "revId": "509399079a9f6d2602e051966ab3db644b83558d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffc241a0_82886af3",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-12-19T15:48:50Z",
+      "side": 1,
+      "message": "group_privilege",
+      "range": {
+        "startLine": 573,
+        "startChar": 6,
+        "endLine": 573,
+        "endChar": 19
+      },
+      "revId": "509399079a9f6d2602e051966ab3db644b83558d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a9cf1a6_613ec11f",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2023-12-19T15:48:50Z",
+      "side": 1,
+      "message": "Add status code in the arguments.\n add # valid_status_code  The expected valid status code.",
+      "range": {
+        "startLine": 743,
+        "startChar": 3,
+        "endLine": 743,
+        "endChar": 8
+      },
+      "revId": "509399079a9f6d2602e051966ab3db644b83558d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
