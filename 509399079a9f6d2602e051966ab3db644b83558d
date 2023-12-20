@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30b9d7ad_30250475",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-12-20T06:14:45Z",
+      "side": 1,
+      "message": "Done",
+      "revId": "509399079a9f6d2602e051966ab3db644b83558d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c577a2f_f9b336bc",
@@ -14,6 +31,30 @@
       "writtenOn": "2023-12-19T15:48:50Z",
       "side": 1,
       "message": "Please keep the name of the test case and the tag name same for convenience.",
+      "range": {
+        "startLine": 367,
+        "startChar": 12,
+        "endLine": 367,
+        "endChar": 54
+      },
+      "revId": "509399079a9f6d2602e051966ab3db644b83558d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "933d21ae_7c12c57d",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-12-20T06:14:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c577a2f_f9b336bc",
       "range": {
         "startLine": 367,
         "startChar": 12,
@@ -47,6 +88,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae0728d4_d4096562",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-12-20T06:14:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff7435ff_66824f98",
+      "range": {
+        "startLine": 570,
+        "startChar": 19,
+        "endLine": 570,
+        "endChar": 27
+      },
+      "revId": "509399079a9f6d2602e051966ab3db644b83558d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffc241a0_82886af3",
@@ -70,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7117f02_115ca476",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-12-20T06:14:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffc241a0_82886af3",
+      "range": {
+        "startLine": 573,
+        "startChar": 6,
+        "endLine": 573,
+        "endChar": 19
+      },
+      "revId": "509399079a9f6d2602e051966ab3db644b83558d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a9cf1a6_613ec11f",
@@ -83,6 +172,30 @@
       "writtenOn": "2023-12-19T15:48:50Z",
       "side": 1,
       "message": "Add status code in the arguments.\n add # valid_status_code  The expected valid status code.",
+      "range": {
+        "startLine": 743,
+        "startChar": 3,
+        "endLine": 743,
+        "endChar": 8
+      },
+      "revId": "509399079a9f6d2602e051966ab3db644b83558d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c901c30_2675058c",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1001315
+      },
+      "writtenOn": "2023-12-20T06:14:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a9cf1a6_613ec11f",
       "range": {
         "startLine": 743,
         "startChar": 3,
