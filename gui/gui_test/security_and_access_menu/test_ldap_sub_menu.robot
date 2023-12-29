@@ -167,7 +167,6 @@ Read Network Configuration Via Different User Roles And Verify Using GUI
     ${GROUP_NAME}    Administrator  ${HTTP_OK}
     ${GROUP_NAME}    Operator       ${HTTP_OK}
     ${GROUP_NAME}    ReadOnly       ${HTTP_OK}
-    ${GROUP_NAME}    NoAccess       ${HTTP_FORBIDDEN}
 
 
 Verify LDAP Login Fails On Wrong LDAP Port
@@ -283,7 +282,7 @@ Update LDAP Configuration With LDAP User Role And Group
     # Description of argument(s):
     # group_name       The group name of LDAP user.
     # group_privilege  The group privilege for LDAP user
-    #                  (e.g. "Administrator", "Operator", "ReadOnly" or "NoAcccess").
+    #                  (e.g. "Administrator", "Operator" or "ReadOnly").
 
     Create LDAP Configuration
     Click Element  ${xpath_add_role_group_button}
@@ -355,7 +354,7 @@ Update LDAP User Role And Read Network Configuration Via GUI
     ...  AND  Delete LDAP Role Group  ${group_name}
 
     # Description of argument(s):
-    # group_privilege    The group privilege ("Administrator", "Operator", "ReadOnly" or "NoAccess").
+    # group_privilege    The group privilege ("Administrator", "Operator" or "ReadOnly").
     # group_name         The group name of user.
     # valid_status_code  The expected valid status code.
 
