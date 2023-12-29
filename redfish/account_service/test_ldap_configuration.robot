@@ -621,7 +621,7 @@ Restore AccountLockout Attributes
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body=[('AccountLockoutDuration', ${old_account_service['AccountLockoutDuration']})]
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
-    ...  body=[('AccountLockoutDuration', ${old_account_service['AccountLockoutThreshold']})]
+    ...  body=[('AccountLockoutThreshold', ${old_account_service['AccountLockoutThreshold']})]
 
 
 Suite Setup Execution
