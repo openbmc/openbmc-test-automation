@@ -9,7 +9,7 @@ Resource        ../../lib/bmc_network_utils.robot
 Resource        ../../lib/openbmc_ffdc.robot
 
 Suite Setup     Suite Setup Execution
-Test Teardown   FFDC On Test Case Fail
+#Test Teardown   FFDC On Test Case Fail
 Suite Teardown  Redfish.Logout
 
 *** Variables ***
@@ -95,6 +95,16 @@ Enable DHCP On Eth1 And Check No Impact On Eth0
 
     # Before and after IP details must match.
     Should Be Equal  ${ip_data_before}  ${ip_data_after}
+
+Enable DHCP On Eth1 And Check Persistency On Reboot
+    [Documentation]  Enable DHCP on Eth1 and check persistency
+    ...  on reboot and should not switch to static.
+    [Tags]  Enable_DHCP_On_Eth1_And_Check_Persistency_On_Reboot
+    [Setup]  Set DHCPEnabled To Enable Or Disable  True  eth1
+
+    Redfish OBMC Reboot (off)  stack_mode=skip
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status  ${2}
+    Should Be Equal  ${DHCPEnabled}  ${True}
 
 Switch Between DHCP And Static
     [Documentation]  Switch between DHCP and static.
