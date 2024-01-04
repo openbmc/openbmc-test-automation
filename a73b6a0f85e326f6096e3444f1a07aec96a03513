@@ -33,6 +33,23 @@
       "message": "robot --version\nRobot Framework 6.1.1 (Python 3.10.12 on linux)\n\nCurrently, my setup is at this level. \n\nI see Robot Framework 7.0 alpha 2  \n\n\nRobot Framework 7.0 alpha 2 was released on Wednesday, November 22, 2023 .. \n\nso let\u0027s hold these changes for a while.",
       "revId": "a73b6a0f85e326f6096e3444f1a07aec96a03513",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3f3926a_9e385a70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001842
+      },
+      "writtenOn": "2024-01-04T21:12:19Z",
+      "side": 1,
+      "message": "George - we ready to merge this? I will fix the conflicts if so.",
+      "revId": "a73b6a0f85e326f6096e3444f1a07aec96a03513",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
