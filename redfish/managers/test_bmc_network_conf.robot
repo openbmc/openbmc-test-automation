@@ -122,6 +122,14 @@ Configure Hostname And Verify
     ${new_hostname}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
     Should Be Equal  ${new_hostname}  ${test_hostname}
 
+Configure Invalid HostName And Verify
+    [Documentation]  Configure invalid hostname via Redfish and Verify.
+    [Tags]  Configure_Invalid_HostName_And_Verify
+    [Template]  Configure Hostname
+
+    # hostname          status_code
+    !#@                 [${HTTP_BAD_REQUEST}]
+    ${EMPTY}            [${HTTP_BAD_REQUEST}]
 
 Add Valid IPv4 Address And Verify
     [Documentation]  Add IPv4 Address via Redfish and verify.
