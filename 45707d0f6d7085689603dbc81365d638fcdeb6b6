@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd57e027_4a908fb3",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-04T07:18:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42088a76_7d9acaa3",
+      "range": {
+        "startLine": 50,
+        "startChar": 10,
+        "endLine": 50,
+        "endChar": 17
+      },
+      "revId": "45707d0f6d7085689603dbc81365d638fcdeb6b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1a9eece_9ff0417f",
@@ -95,6 +119,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9727409f_3aca9ee3",
+        "filename": "lib/ipmi_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-04T07:18:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42466346_ba96dc70",
+      "range": {
+        "startLine": 358,
+        "startChar": 13,
+        "endLine": 358,
+        "endChar": 16
+      },
+      "revId": "45707d0f6d7085689603dbc81365d638fcdeb6b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58d10c34_f9b69ff4",
@@ -126,6 +174,24 @@
       "side": 1,
       "message": "1.As per the IPMI spec,\nTable 43-11, OEM Record - SDR Type C0h\nSDR type for OEM Record needs to be C0\n \n2.The Objective for this function is to get count of SDR OEM Record. If there is no C0 in the list it will return 0",
       "parentUuid": "58d10c34_f9b69ff4",
+      "revId": "45707d0f6d7085689603dbc81365d638fcdeb6b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8f70ce7_4696f495",
+        "filename": "lib/ipmi_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-04T07:18:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1f27f28_85cf8a13",
       "revId": "45707d0f6d7085689603dbc81365d638fcdeb6b6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
