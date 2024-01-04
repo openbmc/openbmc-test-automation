@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42088a76_7d9acaa3",
+        "filename": "ipmi/test_ipmi_sdr.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-04T07:17:16Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "85e62c62_0a28bc5d",
+      "range": {
+        "startLine": 50,
+        "startChar": 10,
+        "endLine": 50,
+        "endChar": 17
+      },
+      "revId": "45707d0f6d7085689603dbc81365d638fcdeb6b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b1a9eece_9ff0417f",
         "filename": "lib/ipmi_utils.py",
         "patchSetId": 3
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42466346_ba96dc70",
+        "filename": "lib/ipmi_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-04T07:17:16Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "b1a9eece_9ff0417f",
+      "range": {
+        "startLine": 358,
+        "startChar": 13,
+        "endLine": 358,
+        "endChar": 16
+      },
+      "revId": "45707d0f6d7085689603dbc81365d638fcdeb6b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58d10c34_f9b69ff4",
         "filename": "lib/ipmi_utils.py",
         "patchSetId": 3
@@ -60,6 +108,24 @@
       "writtenOn": "2023-11-21T06:41:44Z",
       "side": 1,
       "message": "why is 0xc0 value hardcoded here?\n\nwhy not get the count of sdr_list itself?",
+      "revId": "45707d0f6d7085689603dbc81365d638fcdeb6b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1f27f28_85cf8a13",
+        "filename": "lib/ipmi_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-04T07:17:16Z",
+      "side": 1,
+      "message": "1.As per the IPMI spec,\nTable 43-11, OEM Record - SDR Type C0h\nSDR type for OEM Record needs to be C0\n \n2.The Objective for this function is to get count of SDR OEM Record. If there is no C0 in the list it will return 0",
+      "parentUuid": "58d10c34_f9b69ff4",
       "revId": "45707d0f6d7085689603dbc81365d638fcdeb6b6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
