@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "821d9147_3df62c5a",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-01-04T06:41:49Z",
+      "side": 1,
+      "message": "Align",
+      "range": {
+        "startLine": 130,
+        "startChar": 4,
+        "endLine": 130,
+        "endChar": 35
+      },
+      "revId": "5664c6d291cb67788e83cbe4841d86b33380809f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89804c48_3bf9639c",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-01-04T06:41:49Z",
+      "side": 1,
+      "message": "you can also verify if the hostname has not been changed from the original value using the keyword\nValidate Hostname On BMC",
+      "range": {
+        "startLine": 132,
+        "startChar": 6,
+        "endLine": 132,
+        "endChar": 45
+      },
+      "revId": "5664c6d291cb67788e83cbe4841d86b33380809f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
