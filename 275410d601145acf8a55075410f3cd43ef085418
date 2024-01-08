@@ -46,6 +46,30 @@
       },
       "revId": "275410d601145acf8a55075410f3cd43ef085418",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caa038f3_5ae922cb",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-01-08T04:54:38Z",
+      "side": 1,
+      "message": "Removing it from the setup and moving it to the test case.",
+      "parentUuid": "a214018c_b3f12935",
+      "range": {
+        "startLine": 103,
+        "startChar": 4,
+        "endLine": 103,
+        "endChar": 61
+      },
+      "revId": "275410d601145acf8a55075410f3cd43ef085418",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
