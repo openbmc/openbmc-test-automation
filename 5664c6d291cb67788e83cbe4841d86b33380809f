@@ -71,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "307c4722_80e7e650",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-01-08T05:05:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40bb0911_25615b8c",
+      "range": {
+        "startLine": 125,
+        "startChar": 18,
+        "endLine": 125,
+        "endChar": 26
+      },
+      "revId": "5664c6d291cb67788e83cbe4841d86b33380809f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da01b1a3_b0e9a69d",
@@ -84,6 +108,24 @@
       "writtenOn": "2024-01-04T10:40:09Z",
       "side": 1,
       "message": "Configure invalid hostname via Redfish and verify.",
+      "revId": "5664c6d291cb67788e83cbe4841d86b33380809f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a49fd26_c80c50d2",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-01-08T05:05:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da01b1a3_b0e9a69d",
       "revId": "5664c6d291cb67788e83cbe4841d86b33380809f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
