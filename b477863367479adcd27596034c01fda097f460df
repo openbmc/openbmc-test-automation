@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50bab019_924452fc",
+        "filename": "lib/ipmi_utils.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1001842
+      },
+      "writtenOn": "2024-01-09T14:20:11Z",
+      "side": 1,
+      "message": "how about fetch_sdr_count",
+      "revId": "b477863367479adcd27596034c01fda097f460df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59d0d1c5_2de78a05",
+        "filename": "lib/ipmi_utils.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1001842
+      },
+      "writtenOn": "2024-01-09T14:20:11Z",
+      "side": 1,
+      "message": "you are not returning the record but the count of them",
+      "revId": "b477863367479adcd27596034c01fda097f460df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
