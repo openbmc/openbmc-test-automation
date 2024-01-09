@@ -727,60 +727,6 @@ Verify CLI and Redfish Nameservers
     List Should Contain Sub List  ${resolve_conf_nameservers}  ${redfish_nameservers}
     ...  msg=The nameservers obtained via Redfish do not match those found in /etc/resolv.conf.
 
-Configure Static Name Servers
-    [Documentation]  Configure DNS server on BMC.
-    [Arguments]  ${static_name_servers}=${original_nameservers}
-     ...  ${valid_status_codes}=${HTTP_OK}
-
-    # Description of the argument(s):
-    # static_name_servers  A list of static name server IPs to be
-    #                      configured on the BMC.
-
-    ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
-
-    ${type} =  Evaluate  type($static_name_servers).__name__
-    ${static_name_servers}=  Set Variable If  '${type}'=='str'
-    ...  '${static_name_servers}'  ${static_name_servers}
-
-    # Currently BMC is sending 500 response code instead of 400 for invalid scenarios.
-    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
-    ...  body={'StaticNameServers': ${static_name_servers}}
-    ...  valid_status_codes=[${valid_status_codes}, ${HTTP_INTERNAL_SERVER_ERROR}]
-
-    # Patch operation takes 1 to 3 seconds to set new value.
-    Wait Until Keyword Succeeds  1 min  3 sec    CLI Get and Verify Name Servers    ${static_name_servers}  ${valid_status_codes}
-
-Delete Static Name Servers
-    [Documentation]  Delete static name servers.
-
-    DNS Test Setup Execution
-    Configure Static Name Servers  static_name_servers=@{EMPTY}
-
-    # Check if all name servers deleted on BMC.
-    ${nameservers}=  CLI Get Nameservers
-    Should Not Contain  ${nameservers}  ${original_nameservers}
-
-    DNS Test Setup Execution
-
-    Should Be Empty  ${original_nameservers}
-
-DNS Test Setup Execution
-    [Documentation]  Do DNS test setup execution.
-
-    Redfish.Login
-
-    ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
-
-    ${original_nameservers}=  Redfish.Get Attribute
-    ...  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  StaticNameServers
-
-    Rprint Vars  original_nameservers
-    # Set suite variables to trigger restoration during teardown.
-    Set Suite Variable  ${original_nameservers}
-
-
 Suite Setup Execution
     [Documentation]  Do suite setup execution.
 
