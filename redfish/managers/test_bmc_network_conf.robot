@@ -780,7 +780,6 @@ DNS Test Setup Execution
     # Set suite variables to trigger restoration during teardown.
     Set Suite Variable  ${original_nameservers}
 
-
 Suite Setup Execution
     [Documentation]  Do suite setup execution.
 
