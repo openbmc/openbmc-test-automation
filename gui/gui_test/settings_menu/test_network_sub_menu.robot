@@ -129,6 +129,7 @@ Configure And Verify DNS Server Via GUI
     [Documentation]  Login to GUI Network page, add DNS server IP
     ...  and verify that the page reflects server IP.
     [Tags]  Configure_And_Verify_DNS_Server_Via_GUI
+    [Setup]  DNS Test Setup Execution
     [Teardown]  Delete DNS Servers And Verify
 
     Add DNS Servers And Verify  ${dns_server}
@@ -240,7 +241,11 @@ Delete DNS Servers And Verify
     Wait Until Page Contains Element  ${xpath_add_dns_ip_address_button}  timeout=15
     # Check if all name servers deleted on BMC.
     ${nameservers}=  CLI Get Nameservers
-    Should Be Empty  ${nameservers}
+    Should Not Contain  ${nameservers}  ${original_nameservers}
+
+    DNS Test Setup Execution
+
+    Should Be Empty  ${original_nameservers}
 
 
 Add Static IP Address And Verify
