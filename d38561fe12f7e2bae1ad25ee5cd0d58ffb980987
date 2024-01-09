@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79690a94_c853dd8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-09T05:58:06Z",
+      "side": 1,
+      "message": "As per Spec,0xc0 is the SDR OEM record. Sensor elist will not show SDR OEM record, SDR info will show the SDR OEM record. While comparing sensor elist and sdr info there will be a mismatch in the count. Hence from SDR elist returning OEM record count and subtracting that count in SDR info so that sdr info will have record count excluding SDR OEM record.",
+      "parentUuid": "428fe698_79f7674f",
+      "revId": "d38561fe12f7e2bae1ad25ee5cd0d58ffb980987",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ef225cc_2082a9a3",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-01-04T21:21:16Z",
       "side": 1,
       "message": "I\u0027m a bit confused by this. Why are we only returning the count of 0xc0 record types? Is that the only type we want to count?  If so then this function needs a better name.",
+      "revId": "d38561fe12f7e2bae1ad25ee5cd0d58ffb980987",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a96cb28_1355ddff",
+        "filename": "lib/ipmi_utils.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-09T05:58:06Z",
+      "side": 1,
+      "message": "As per Spec,0xc0 is the SDR OEM record. Sensor elist will not show SDR OEM record, SDR info will show the SDR OEM record. While comparing sensor elist and sdr info there will be a mismatch in the count. Hence from SDR elist returning OEM record count and subtracting that count in SDR info so that sdr info will have record count excluding SDR OEM record.\n\nModified Function name.",
+      "parentUuid": "7ef225cc_2082a9a3",
       "revId": "d38561fe12f7e2bae1ad25ee5cd0d58ffb980987",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
