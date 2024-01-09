@@ -839,3 +839,19 @@ Get DHCP IP Info
         ${subnetmask}=  Set Variable  ${resp['SubnetMask']}
         Return From Keyword  ${ip_addr}  ${gateway}  ${subnetmask}
     END
+
+
+DNS Test Setup Execution
+    [Documentation]  Do DNS test setup execution.
+
+    Redfish.Login
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    ${original_nameservers}=  Redfish.Get Attribute
+    ...  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  StaticNameServers
+
+    Rprint Vars  original_nameservers
+    # Set suite variables to trigger restoration during teardown.
+    Set Suite Variable  ${original_nameservers}
