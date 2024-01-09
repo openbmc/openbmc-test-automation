@@ -191,9 +191,7 @@ Add DNS Servers And Verify
     Wait Until Page Contains  ${dns_server}  timeout=40sec
 
     # Check if newly added DNS server is configured on BMC.
-    ${cli_name_servers}=  CLI Get Nameservers
-    ${cmd_status}=  Run Keyword And Return Status
-    ...  List Should Contain Sub List  ${cli_name_servers}  ${dns_server}
+    CLI Get and Verify Name Servers  ${dns_server}  ${HTTP_OK}
 
 
 Navigate To Server Power Page
