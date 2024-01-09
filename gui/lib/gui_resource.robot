@@ -194,6 +194,10 @@ Add DNS Servers And Verify
     ${cli_name_servers}=  CLI Get Nameservers
     ${cmd_status}=  Run Keyword And Return Status
     ...  List Should Contain Sub List  ${cli_name_servers}  ${dns_server}
+    
+    Run Keyword If  '${expected_status}' == '${HTTP_OK}'
+    ...  Should Be True  ${cmd_status} == ${True}
+    ...  ELSE  Should Be True  ${cmd_status} == ${False}
 
 
 Navigate To Server Power Page
