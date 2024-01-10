@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ac7cb3c_2402b992",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-01-10T10:27:42Z",
+      "side": 1,
+      "message": "DHCP is set to true on eth1 by default.\nadding Setup as disabling DHCP and then enabling DHCP",
+      "parentUuid": "41017930_b95349c0",
+      "revId": "3fbb1ffb118f8fb3874b44d326a4131fcb977218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e45f660b_b54933be",
         "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2024-01-10T05:27:36Z",
       "side": 1,
       "message": "if it is already dhcp enabled, it is like no op.\nif dhcp is already enabled, first disable it in setup then enable it at the test level",
+      "revId": "3fbb1ffb118f8fb3874b44d326a4131fcb977218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "759e75d3_d07905cf",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-01-10T10:27:42Z",
+      "side": 1,
+      "message": "disabling DHCP in setup",
+      "parentUuid": "e45f660b_b54933be",
       "revId": "3fbb1ffb118f8fb3874b44d326a4131fcb977218",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
