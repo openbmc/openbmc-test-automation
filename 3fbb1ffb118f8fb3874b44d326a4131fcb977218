@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41017930_b95349c0",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2024-01-10T05:27:36Z",
+      "side": 1,
+      "message": "Pls restore the initial settings at the end of the test.",
+      "revId": "3fbb1ffb118f8fb3874b44d326a4131fcb977218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e45f660b_b54933be",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2024-01-10T05:27:36Z",
+      "side": 1,
+      "message": "if it is already dhcp enabled, it is like no op.\nif dhcp is already enabled, first disable it in setup then enable it at the test level",
+      "revId": "3fbb1ffb118f8fb3874b44d326a4131fcb977218",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
