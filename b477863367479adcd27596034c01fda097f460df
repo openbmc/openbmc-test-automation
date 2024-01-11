@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7371f65c_d619cb16",
+        "filename": "lib/ipmi_utils.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-11T05:26:46Z",
+      "side": 1,
+      "message": "modified the changes as suggested",
+      "parentUuid": "50bab019_924452fc",
+      "revId": "b477863367479adcd27596034c01fda097f460df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59d0d1c5_2de78a05",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-01-09T14:20:11Z",
       "side": 1,
       "message": "you are not returning the record but the count of them",
+      "revId": "b477863367479adcd27596034c01fda097f460df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e086eb6_271a72e2",
+        "filename": "lib/ipmi_utils.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-11T05:26:46Z",
+      "side": 1,
+      "message": "modified the changes as suggested",
+      "parentUuid": "59d0d1c5_2de78a05",
       "revId": "b477863367479adcd27596034c01fda097f460df",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
