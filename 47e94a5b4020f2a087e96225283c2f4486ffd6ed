@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e799428_e18f2125",
+        "filename": "ipmi/test_ipmi_inband_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-11T14:16:07Z",
+      "side": 1,
+      "message": "Please note that these are negative cases.\n\nVerify_Device_SDR_Info_Via_IPMI_Lanplus\nVerify_Reserve_Device_SDR_Repository_Info_Via_IPMI_Lanplus\n\nAs per Spec Get Device SDR will work only from Host and should not work from Lanplus.",
+      "parentUuid": "187f031c_e76f35b7",
+      "range": {
+        "startLine": 152,
+        "startChar": 9,
+        "endLine": 152,
+        "endChar": 43
+      },
+      "revId": "47e94a5b4020f2a087e96225283c2f4486ffd6ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3da43c5c_661d0cc8",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-11-21T06:46:48Z",
       "side": 1,
       "message": "Same comment as above",
+      "range": {
+        "startLine": 159,
+        "startChar": 9,
+        "endLine": 159,
+        "endChar": 43
+      },
+      "revId": "47e94a5b4020f2a087e96225283c2f4486ffd6ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "606f722d_5848a58a",
+        "filename": "ipmi/test_ipmi_inband_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-11T14:16:07Z",
+      "side": 1,
+      "message": "Please note that these are negative cases.\nVerify_Device_SDR_Info_Via_IPMI_Lanplus\nVerify_Reserve_Device_SDR_Repository_Info_Via_IPMI_Lanplus\n\n\nAs per Spec Get Device SDR will work only from Host and should not work from Lanplus.",
+      "parentUuid": "3da43c5c_661d0cc8",
       "range": {
         "startLine": 159,
         "startChar": 9,
@@ -87,6 +135,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86a9edf2_80d8830f",
+        "filename": "ipmi/test_ipmi_inband_sdr.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-11T14:16:07Z",
+      "side": 1,
+      "message": "Please note that these are negative cases.\nVerify_Device_SDR_Info_Via_IPMI_Lanplus\nVerify_Reserve_Device_SDR_Repository_Info_Via_IPMI_Lanplus\n\nAs per Spec Get Device SDR will work only from Host and should not work from Lanplus.",
+      "parentUuid": "eef862b1_ccabe780",
+      "range": {
+        "startLine": 196,
+        "startChar": 9,
+        "endLine": 196,
+        "endChar": 43
+      },
+      "revId": "47e94a5b4020f2a087e96225283c2f4486ffd6ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f775c9df_77804f94",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-11-21T06:46:48Z",
       "side": 1,
       "message": "raw not required",
+      "range": {
+        "startLine": 128,
+        "startChar": 9,
+        "endLine": 128,
+        "endChar": 13
+      },
+      "revId": "47e94a5b4020f2a087e96225283c2f4486ffd6ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0fea1a1_88a9c22e",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-11T14:16:07Z",
+      "side": 1,
+      "message": "modified as suggested",
+      "parentUuid": "f775c9df_77804f94",
       "range": {
         "startLine": 128,
         "startChar": 9,
@@ -133,6 +229,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72fe25a1_5539109f",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-11T14:16:07Z",
+      "side": 1,
+      "message": "modified as suggested",
+      "parentUuid": "1cd21e1b_e38cae1d",
+      "range": {
+        "startLine": 134,
+        "startChar": 9,
+        "endLine": 134,
+        "endChar": 13
+      },
+      "revId": "47e94a5b4020f2a087e96225283c2f4486ffd6ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb585e9b_915e5b17",
@@ -146,6 +266,30 @@
       "writtenOn": "2023-11-21T06:46:48Z",
       "side": 1,
       "message": "same comment as above",
+      "range": {
+        "startLine": 214,
+        "startChar": 9,
+        "endLine": 214,
+        "endChar": 12
+      },
+      "revId": "47e94a5b4020f2a087e96225283c2f4486ffd6ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88452459_841c6ac3",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-11T14:16:07Z",
+      "side": 1,
+      "message": "modified as suggested",
+      "parentUuid": "eb585e9b_915e5b17",
       "range": {
         "startLine": 214,
         "startChar": 9,
@@ -179,6 +323,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3001f82c_974995ce",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-11T14:16:07Z",
+      "side": 1,
+      "message": "modified as suggested",
+      "parentUuid": "83756820_172c0a99",
+      "range": {
+        "startLine": 219,
+        "startChar": 9,
+        "endLine": 219,
+        "endChar": 13
+      },
+      "revId": "47e94a5b4020f2a087e96225283c2f4486ffd6ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbcfef25_3da90c98",
@@ -202,6 +370,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9a998ec_738073b8",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-11T14:16:07Z",
+      "side": 1,
+      "message": "modified as suggested",
+      "parentUuid": "dbcfef25_3da90c98",
+      "range": {
+        "startLine": 237,
+        "startChar": 9,
+        "endLine": 237,
+        "endChar": 13
+      },
+      "revId": "47e94a5b4020f2a087e96225283c2f4486ffd6ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59db93ac_723582c0",
@@ -215,6 +407,30 @@
       "writtenOn": "2023-11-21T06:46:48Z",
       "side": 1,
       "message": "raw not required",
+      "range": {
+        "startLine": 268,
+        "startChar": 9,
+        "endLine": 268,
+        "endChar": 13
+      },
+      "revId": "47e94a5b4020f2a087e96225283c2f4486ffd6ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af65e110_6b70fb4e",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-11T14:16:07Z",
+      "side": 1,
+      "message": "modified as suggested",
+      "parentUuid": "59db93ac_723582c0",
       "range": {
         "startLine": 268,
         "startChar": 9,
