@@ -16,6 +16,24 @@
       "message": "${ip}                   ${STATIC_IP} \n\nvariable to another variable assignment is not a good idea to do.. \n\nif this IP is private and dont want to show but driven by user input.. do like this declaration\n\n${STATIC_IP}         ${EMPTY}",
       "revId": "ed07be65668fddb4dc860fc636c3e1ff95f3b03b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fa79d11_cdb4aefc",
+        "filename": "ipmi/test_ipmi_network_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-11T11:14:03Z",
+      "side": 1,
+      "message": "${STATIC_IP} is a global variable hence used this directly. removed this\n${ip} ${STATIC_IP}",
+      "parentUuid": "5f8c0ee6_e6effabc",
+      "revId": "ed07be65668fddb4dc860fc636c3e1ff95f3b03b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
