@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2342f5e7_ddca9bb4",
+        "filename": "ipmi/test_ipmi_network_verification.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-11T05:39:26Z",
+      "side": 1,
+      "message": "modified changes as suggested",
+      "parentUuid": "ec676e3f_08c2521b",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 44
+      },
+      "revId": "99f177ca4bcf89929403513a946f3a523f1b0752",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7147d32e_13cf7144",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-20T12:14:42Z",
       "side": 1,
       "message": "${valid_channels_list}",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 42
+      },
+      "revId": "99f177ca4bcf89929403513a946f3a523f1b0752",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "466a07e1_cb9653be",
+        "filename": "ipmi/test_ipmi_network_verification.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-11T05:39:26Z",
+      "side": 1,
+      "message": "modified changes as suggested",
+      "parentUuid": "7147d32e_13cf7144",
       "range": {
         "startLine": 32,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0b50d8c_c8895905",
+        "filename": "ipmi/test_ipmi_network_verification.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-11T05:39:26Z",
+      "side": 1,
+      "message": "modified changes as suggested",
+      "parentUuid": "afa40ff5_01de2253",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 27
+      },
+      "revId": "99f177ca4bcf89929403513a946f3a523f1b0752",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08ed710d_fa752ecb",
@@ -93,6 +165,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "469d7ad2_c538b7db",
+        "filename": "ipmi/test_ipmi_network_verification.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-11T05:39:26Z",
+      "side": 1,
+      "message": "modified changes as suggested",
+      "parentUuid": "08ed710d_fa752ecb",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 8
+      },
+      "revId": "99f177ca4bcf89929403513a946f3a523f1b0752",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff5ca40e_a455a5a4",
@@ -106,6 +202,30 @@
       "writtenOn": "2023-11-17T07:37:42Z",
       "side": 1,
       "message": "Align END \n    FOR  ${channel_number}  IN  @{active_channel_list}\n        ${stdout}\u003d  Run IPMI Standard Command\n        ...  lan print ${channel_number}\n    END",
+      "range": {
+        "startLine": 74,
+        "startChar": 4,
+        "endLine": 74,
+        "endChar": 7
+      },
+      "revId": "99f177ca4bcf89929403513a946f3a523f1b0752",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0147730_a80ca17a",
+        "filename": "ipmi/test_ipmi_network_verification.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-11T05:39:26Z",
+      "side": 1,
+      "message": "modified changes as suggested",
+      "parentUuid": "ff5ca40e_a455a5a4",
       "range": {
         "startLine": 74,
         "startChar": 4,
