@@ -435,6 +435,6 @@ Set Power Cap Value Via Redfish
     # power_cap_value    Power cap value which need to be set.
 
     # Set power cap value based on argument.
-    Redfish.Patch  /redfish/v1/Chassis/chassis/EnvironmentMetrics
+    Redfish.Patch  /redfish/v1/Chassis/${CHASSIS_ID}/EnvironmentMetrics
     ...  body={"PowerLimitWatts":{"SetPoint": ${power_cap_value}}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]

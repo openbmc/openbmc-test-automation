@@ -231,7 +231,7 @@ Test Teardown Execution
 Set Suite LED Indicator Initial Value
     [Documentation]  set suite For LED Initial value.
 
-    ${value}=  Redfish.Get Attribute      /redfish/v1/Systems/system  LocationIndicatorActive
+    ${value}=  Redfish.Get Attribute      /redfish/v1/Systems/${SYSTEM_ID}  LocationIndicatorActive
     Set Suite Variable  ${value}
 
     IF  ${value} == False
@@ -246,10 +246,10 @@ Set And Verify LED Location Indicator Active
     [Arguments]  ${set_value}
 
     ${payload}=  Create Dictionary    LocationIndicatorActive=${set_value}
-    Redfish.Patch      /redfish/v1/Systems/system    body=&{payload}
+    Redfish.Patch      /redfish/v1/Systems/${SYSTEM_ID}    body=&{payload}
     ...  valid_status_codes=[${HTTP_NO_CONTENT}]
 
-    ${value}=  Redfish.Get Attribute      /redfish/v1/Systems/system  LocationIndicatorActive
+    ${value}=  Redfish.Get Attribute      /redfish/v1/Systems/${SYSTEM_ID}  LocationIndicatorActive
 
     Should Be Equal As Strings  ${value}    ${set_value}
 
@@ -259,8 +259,8 @@ Set Initial Value
     [Arguments]  ${value}
 
     ${payload}=  Create Dictionary    LocationIndicatorActive=${value}
-    Redfish.Patch      /redfish/v1/Systems/system    body=&{payload}
+    Redfish.Patch      /redfish/v1/Systems/${SYSTEM_ID}    body=&{payload}
     ...  valid_status_codes=[${HTTP_NO_CONTENT}]
 
-    ${intial_value}=  Redfish.Get Attribute      /redfish/v1/Systems/system  LocationIndicatorActive
+    ${intial_value}=  Redfish.Get Attribute      /redfish/v1/Systems/${SYSTEM_ID}  LocationIndicatorActive
     Should Be Equal As Strings  ${intial_value}  ${value}

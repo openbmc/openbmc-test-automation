@@ -317,7 +317,7 @@ Redfish Purge Event Log
     [Documentation]  Do Redfish EventLog purge.
 
     ${target_action}=  redfish_utils.Get Target Actions
-    ...  /redfish/v1/Systems/system/LogServices/EventLog/  LogService.ClearLog
+    ...  /redfish/v1/Systems/${SYSTEM_ID}/LogServices/EventLog/  LogService.ClearLog
     Redfish.Post  ${target_action}  body={'target': '${target_action}'}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
@@ -333,7 +333,7 @@ Redfish Clear PostCodes
     [Documentation]  Do Redfish PostCodes purge from system.
 
     ${target_action}=  redfish_utils.Get Target Actions
-    ...  /redfish/v1/Systems/system/LogServices/PostCodes/  LogService.ClearLog
+    ...  /redfish/v1/Systems/${SYSTEM_ID}/LogServices/PostCodes/  LogService.ClearLog
     Redfish.Post  ${target_action}  body={'target': '${target_action}'}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
@@ -359,7 +359,7 @@ Redfish Get PostCodes
     #    [Name]:                   POST Code Log Entry
     #    [Severity]:               OK
 
-    ${members}=  Redfish.Get Attribute  /redfish/v1/Systems/system/LogServices/PostCodes/Entries  Members
+    ${members}=  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}/LogServices/PostCodes/Entries  Members
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     [Return]  ${members}
