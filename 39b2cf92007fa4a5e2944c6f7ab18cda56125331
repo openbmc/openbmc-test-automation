@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5b90bf0c_8c09f9c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-12T12:58:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c59c8d6_1003849a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 100
+      },
+      "revId": "39b2cf92007fa4a5e2944c6f7ab18cda56125331",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "26f12e67_2019e546",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -54,6 +78,24 @@
       "writtenOn": "2023-11-09T19:21:12Z",
       "side": 1,
       "message": "Can you please explain how this works?\n\nAccording to the bmcweb code `Diags` sets DBUS interface to `\"xyz.openbmc_project.Control.Boot.Mode.Modes.Safe\"`\nhttps://github.com/openbmc/bmcweb/blob/63509dd54c3290750961899125d588ea5f339023/redfish-core/lib/systems.hpp#L860\n\nAnd phosphor-ipmi-hostd maps this value to 3 https://github.com/openbmc/phosphor-host-ipmid/blob/1214d6cc51cbbde74b0b2b486cf161af6b616d65/chassishandler.cpp#L1540C12-L1540C15\n\nAnd according to the IPMI specification `Boot device selector \u003d\u003d 3` means:\n```\n0011b \u003d Force boot from default Hard-drive, request Safe Mode\n```",
+      "revId": "39b2cf92007fa4a5e2944c6f7ab18cda56125331",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44f5e8ba_af2ff1f6",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-12T12:58:23Z",
+      "side": 1,
+      "message": "As per the redfish resource and schema guide\nhttps://redfish.dmtf.org/schemas/DSP2046_2019.2.html\nFor Diags the description in redfish resource and schema guide is \"Boot to the manufacturer\u0027s diagnostics program\".\nIn IPMI chassis get param 5 cmd, it should show as Force Boot from Diagnostic Partition",
+      "parentUuid": "3b715724_49babf68",
       "revId": "39b2cf92007fa4a5e2944c6f7ab18cda56125331",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
