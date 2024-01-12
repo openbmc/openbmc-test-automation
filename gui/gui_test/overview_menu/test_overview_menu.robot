@@ -340,7 +340,7 @@ Verify Identify LED State Via Redfish
     # Description of argument(s):
     # expected_state    Expected value of Identify LED.
 
-    ${led_state}=  Redfish.Get Attribute  /redfish/v1/Systems/system  IndicatorLED
+    ${led_state}=  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}  IndicatorLED
     Should Be True  '${led_state}' == '${expected_state}'
 
 
@@ -352,6 +352,6 @@ Set IndicatorLED State
     # expect_resp_code     Expected HTTPS response code. Default [200, 204]
 
 
-    Redfish.Patch  /redfish/v1/Systems/system  body={"IndicatorLED": "${led_state}"}
+    Redfish.Patch  /redfish/v1/Systems/${SYSTEM_ID}  body={"IndicatorLED": "${led_state}"}
     ...  valid_status_codes=${expect_resp_code}
 

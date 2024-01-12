@@ -375,7 +375,7 @@ Old Get Power Policy
 Redfish Get Power Restore Policy
     [Documentation]  Returns the BMC power restore policy.
 
-    ${power_restore_policy}=  Redfish.Get Attribute  /redfish/v1/Systems/system  PowerRestorePolicy
+    ${power_restore_policy}=  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}  PowerRestorePolicy
     [Return]  ${power_restore_policy}
 
 Get Auto Reboot
@@ -388,7 +388,7 @@ Get Auto Reboot
 Redfish Get Auto Reboot
     [Documentation]  Returns auto reboot setting.
 
-    ${resp}=  Redfish.Get Attribute  /redfish/v1/Systems/system  Boot
+    ${resp}=  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}  Boot
     [Return]  ${resp["AutomaticRetryConfig"]}
 
 
@@ -691,7 +691,7 @@ Redfish Set Power Restore Policy
     # Description of argument(s):
     # power_restore_policy    Power restore policy (e.g. "AlwaysOff", "AlwaysOn", "LastState").
 
-    Redfish.Patch  /redfish/v1/Systems/system  body={"PowerRestorePolicy": "${power_restore_policy}"}
+    Redfish.Patch  /redfish/v1/Systems/${SYSTEM_ID}  body={"PowerRestorePolicy": "${power_restore_policy}"}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
 
@@ -749,7 +749,7 @@ Redfish Set Auto Reboot
     # Description of argument(s):
     # setting    The reboot setting, "RetryAttempts" and "Disabled".
 
-    Redfish.Patch  /redfish/v1/Systems/system  body={"Boot": {"AutomaticRetryConfig": "${setting}"}}
+    Redfish.Patch  /redfish/v1/Systems/${SYSTEM_ID}  body={"Boot": {"AutomaticRetryConfig": "${setting}"}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     ${current_setting}=  Redfish Get Auto Reboot
@@ -881,10 +881,10 @@ Redfish Set Boot Default
 
     ${payload}=  Create Dictionary  Boot=${data}
 
-    Redfish.Patch  /redfish/v1/Systems/system  body=&{payload}
+    Redfish.Patch  /redfish/v1/Systems/${SYSTEM_ID}  body=&{payload}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
 
-    ${resp}=  Redfish.Get Attribute  /redfish/v1/Systems/system  Boot
+    ${resp}=  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}  Boot
     Should Be Equal As Strings  ${resp["BootSourceOverrideEnabled"]}  ${override_enabled}
     Should Be Equal As Strings  ${resp["BootSourceOverrideTarget"]}  ${override_target}
     Run Keyword If  '${PLATFORM_ARCH_TYPE}' == 'x86'
@@ -916,7 +916,7 @@ Redfish Verify BMC State
     # Description of argument(s):
     # match_state    Expected match state (e.g. Enabled, Starting, Error)
 
-    ${Status}=  Redfish.Get Attribute  /redfish/v1/Managers/bmc  Status
+    ${Status}=  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  Status
 
     Should Be Equal As Strings  ${match_state}  ${Status['State']}
 
@@ -946,7 +946,7 @@ Redfish Get Boot Progress
     #    "LastState": "OSRunning"
     # },
 
-    ${boot_progress}=  Redfish.Get Properties  /redfish/v1/Systems/system/
+    ${boot_progress}=  Redfish.Get Properties  /redfish/v1/Systems/${SYSTEM_ID}/
 
     Return From Keyword If  "${PLATFORM_ARCH_TYPE}" == "x86"
     ...  NA  ${boot_progress["Status"]["State"]}

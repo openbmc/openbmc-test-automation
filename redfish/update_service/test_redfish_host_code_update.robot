@@ -53,9 +53,9 @@ BMC Reboot When PNOR Update Goes On
     [Documentation]  Trigger PNOR update and do BMC reboot.
     [Tags]  BMC_Reboot_When_PNOR_Update_Goes_On
 
-    ${bios_version_before}=  Redfish.Get Attribute  /redfish/v1/Systems/system/  BiosVersion
+    ${bios_version_before}=  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}/  BiosVersion
     Redfish Firmware Update And Do BMC Reboot
-    ${bios_version_after}=  Redfish.Get Attribute  /redfish/v1/Systems/system/  BiosVersion
+    ${bios_version_after}=  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}/  BiosVersion
     Valid Value  bios_version_after  ['${bios_version_before}']
 
 

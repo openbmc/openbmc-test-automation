@@ -32,7 +32,7 @@ Redfish Power Operation
     #  }
     # }
 
-    ${target}=  redfish_utils.Get Target Actions  /redfish/v1/Systems/system/  ComputerSystem.Reset
+    ${target}=  redfish_utils.Get Target Actions  /redfish/v1/Systems/${SYSTEM_ID}/  ComputerSystem.Reset
     ${payload}=  Create Dictionary  ResetType=${reset_type}
     ${resp}=  Redfish.Post  ${target}  body=&{payload}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
@@ -60,7 +60,7 @@ Redfish BMC Reset Operation
 Reset BIOS Via Redfish
     [Documentation]  Do BIOS reset through Redfish.
 
-    ${target}=  redfish_utils.Get Target Actions  /redfish/v1/Systems/system/Bios/  Bios.ResetBios
+    ${target}=  redfish_utils.Get Target Actions  /redfish/v1/Systems/${SYSTEM_ID}/Bios/  Bios.ResetBios
     Redfish.Post  ${target}  valid_status_codes=[${HTTP_OK}]
 
 
@@ -173,7 +173,7 @@ Get Valid FRUs
     # fru_type  The type of fru (e.g. "Processors", "Memory", etc.).
 
     ${fru_records}=  Redfish_Utils.Enumerate Request
-    ...  /redfish/v1/Systems/system/${fru_type}  return_json=0
+    ...  /redfish/v1/Systems/${SYSTEM_ID}/${fru_type}  return_json=0
     ${fru_records}=  Filter Struct  ${fru_records}  [('State', 'Enabled'), ('Health', 'OK')]
 
     [Return]  ${fru_records}

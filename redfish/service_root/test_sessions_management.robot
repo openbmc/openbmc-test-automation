@@ -181,7 +181,7 @@ Verify Systems Defaults
     Valid Value  systems['Members@odata.count']  [${systems_count}]
     Valid Value  systems['Members@odata.count']  [${systems_count}]
     # Members can be one or more, hence checking in the list.
-    Valid List  systems['Members']  required_values=[{'@odata.id': '/redfish/v1/Systems/system'}]
+    Valid List  systems['Members']  required_values=[{'@odata.id': '/redfish/v1/Systems/${SYSTEM_ID}'}]
 
 
 Verify Session Persistency After BMC Reboot
