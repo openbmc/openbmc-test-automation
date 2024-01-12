@@ -65,8 +65,13 @@ OS_STATE_URI = OPENBMC_BASE_URI + "state/os/"
 # Logging URI variables
 BMC_LOGGING_URI = OPENBMC_BASE_URI + "logging/"
 BMC_LOGGING_ENTRY = BMC_LOGGING_URI + "entry/"
+REDFISH_SYSTEM_ID = BuiltIn().get_variable_value(
+    "${SYSTEM_ID}", default="system"
+)
 REDFISH_BMC_LOGGING_ENTRY = (
-    "/redfish/v1/Systems/system/LogServices/EventLog/Entries/"
+    "/redfish/v1/Systems/"
+    + REDFISH_SYSTEM_ID
+    + "/LogServices/EventLog/Entries/"
 )
 
 
@@ -228,7 +233,10 @@ REDFISH_BMC_DUMP = (
 )
 REDFISH_DUMP_URI = REDFISH_BASE_URI + REDFISH_BMC_DUMP
 REDFISH_SYSTEM_DUMP = (
-    REDFISH_BASE_URI + "/Systems/system/LogServices/Dump/Entries"
+    REDFISH_BASE_URI
+    + "/Systems/"
+    + REDFISH_SYSTEM_ID
+    + "/LogServices/Dump/Entries"
 )
 
 # Boot options and URI variables.
@@ -237,7 +245,9 @@ POWER_GRACEFUL_OFF = "GracefulShutdown"
 POWER_GRACEFUL_RESTART = "GracefulRestart"
 POWER_FORCE_OFF = "ForceOff"
 
-REDFISH_POWER = "Systems/system/Actions/ComputerSystem.Reset"
+REDFISH_POWER = (
+    "Systems/" + REDFISH_SYSTEM_ID + "/Actions/ComputerSystem.Reset"
+)
 REDFISH_POWER_URI = REDFISH_BASE_URI + REDFISH_POWER
 
 # rsyslog variables.
@@ -249,7 +259,7 @@ CLIENT_CERTIFICATE_URI = OPENBMC_BASE_URI + "certs/client/ldap"
 CA_CERTIFICATE_URI = OPENBMC_BASE_URI + "certs/authority/truststore"
 
 # EventLog variables.
-SYSTEM_BASE_URI = REDFISH_BASE_URI + "Systems/system/"
+SYSTEM_BASE_URI = REDFISH_BASE_URI + "Systems/" + REDFISH_SYSTEM_ID + "/"
 EVENT_LOG_URI = SYSTEM_BASE_URI + "LogServices/EventLog/"
 DUMP_URI = SYSTEM_BASE_URI + "LogServices/Dump/"
 

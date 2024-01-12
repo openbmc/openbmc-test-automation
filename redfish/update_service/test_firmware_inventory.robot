@@ -234,7 +234,7 @@ Verify Redfish BIOS Version
     [Documentation]  Get host firmware version from system inventory.
     [Tags]  Verify_Redfish_BIOS_Version
 
-    ${bios_version}=  Redfish.Get Attribute  /redfish/v1/Systems/system/  BiosVersion
+    ${bios_version}=  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}/  BiosVersion
     ${pnor_version}=  Get PNOR Version
     Should Be Equal  ${pnor_version}  ${bios_version}
 
