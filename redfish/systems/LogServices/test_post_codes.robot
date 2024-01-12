@@ -28,7 +28,7 @@ Test PostCodes When Host Boots
     Rprint Vars  post_code_list
 
     ${post_codes}=  Redfish.Get Properties
-    ...  /redfish/v1/Systems/system/LogServices/PostCodes/Entries
+    ...  /redfish/v1/Systems/${SYSTEM_ID}/LogServices/PostCodes/Entries
     Log To Console  BIOS POST Codes count: ${post_codes['Members@odata.count']}
     Should Be True  ${post_codes['Members@odata.count']} >= 1  msg=No BIOS POST Codes populated.
 
@@ -46,7 +46,7 @@ Test PostCodes When Host Reboot
     Rprint Vars  post_code_list
 
     ${post_codes}=  Redfish.Get Properties
-    ...  /redfish/v1/Systems/system/LogServices/PostCodes/Entries
+    ...  /redfish/v1/Systems/${SYSTEM_ID}/LogServices/PostCodes/Entries
     Log To Console  BIOS POST Codes count: ${post_codes['Members@odata.count']}
     Should Be True  ${post_codes['Members@odata.count']} >= 1  msg=No BIOS POST Codes populated.
 
@@ -64,7 +64,7 @@ Test PostCodes When Host Powered Off
     Rprint Vars  post_code_list
 
     ${post_codes}=  Redfish.Get Properties
-    ...  /redfish/v1/Systems/system/LogServices/PostCodes/Entries
+    ...  /redfish/v1/Systems/${SYSTEM_ID}/LogServices/PostCodes/Entries
     Log To Console  BIOS POST Codes count: ${post_codes['Members@odata.count']}
     Should Be True  ${post_codes['Members@odata.count']} == 0
     ...  msg=BIOS POST Codes populated.
@@ -96,7 +96,7 @@ Test PostCode Log Perisistency After BMC Reboot
 
     # Get log count before BMC reboot.
     ${post_codes}=  Redfish.Get Properties
-    ...  /redfish/v1/Systems/system/LogServices/PostCodes/Entries
+    ...  /redfish/v1/Systems/${SYSTEM_ID}/LogServices/PostCodes/Entries
     ${initial_log_count}=  Set Variable  ${post_codes['Members@odata.count']}
 
     # Reboot BMC.
@@ -104,7 +104,7 @@ Test PostCode Log Perisistency After BMC Reboot
 
     # Get log count after BMC reboot and compare with initial log count.
     ${post_codes}=  Redfish.Get Properties
-    ...  /redfish/v1/Systems/system/LogServices/PostCodes/Entries
+    ...  /redfish/v1/Systems/${SYSTEM_ID}/LogServices/PostCodes/Entries
     ${current_log_count}=  Set Variable  ${post_codes['Members@odata.count']}
     Should Be True  ${current_log_count} == ${initial_log_count}
 
@@ -117,7 +117,7 @@ Test Clear Post Code Log Action
     # Perform clear postcode log action.
     Redfish Clear PostCodes
     ${post_codes}=  Redfish.Get Properties
-    ...  /redfish/v1/Systems/system/LogServices/PostCodes/Entries
+    ...  /redfish/v1/Systems/${SYSTEM_ID}/LogServices/PostCodes/Entries
 
     # Verify if log count becomes zero.
     Should Be True  ${post_codes['Members@odata.count']} == 0
@@ -189,13 +189,13 @@ Get Boot Count For Last PostCode Entry
     #     "Name": "BIOS POST Code Log Entries"
     # }
     ${post_codes}=  Redfish.Get Properties
-    ...  /redfish/v1/Systems/system/LogServices/PostCodes/Entries
+    ...  /redfish/v1/Systems/${SYSTEM_ID}/LogServices/PostCodes/Entries
     ${total_log_count}=  Set Variable  ${post_codes['Members@odata.count']}
 
     IF  ${total_log_count} > ${max_view_count}
         ${skip_count}=  Evaluate  (${total_log_count}//${max_view_count})*${max_view_count}
         ${uri}=  Set Variable
-        ...  /redfish/v1/Systems/system/LogServices/PostCodes/Entries?$skip=${skip_count}
+        ...  /redfish/v1/Systems/${SYSTEM_ID}/LogServices/PostCodes/Entries?$skip=${skip_count}
         ${post_codes}=  Redfish.Get Properties  ${uri}
     END
 
@@ -211,7 +211,7 @@ Populate PostCode Logs Incase No Prior Entries Available
     ...  to populate postcode logs if there are no prior log entries.
 
     ${post_codes}=  Redfish.Get Properties
-    ...  /redfish/v1/Systems/system/LogServices/PostCodes/Entries
+    ...  /redfish/v1/Systems/${SYSTEM_ID}/LogServices/PostCodes/Entries
     Run Keyword If  ${post_codes['Members@odata.count']} == 0
     ...  RF SYS GracefulRestart
 
