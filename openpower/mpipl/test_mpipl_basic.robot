@@ -143,7 +143,7 @@ Required Dumps Should Exist
     #       "Name": "System Dump Entry",
     #       "OEMDiagnosticDataType": "System"
     #   }
-    ${sys_dump}=  Redfish.Get Properties  /redfish/v1/Systems/system/LogServices/Dump/Entries
+    ${sys_dump}=  Redfish.Get Properties  /redfish/v1/Systems/${SYSTEM_ID}/LogServices/Dump/Entries
     Log To Console  System dump generated: ${sys_dump['Members@odata.count']}
     Should Be True  ${sys_dump['Members@odata.count']} == 1  msg=No system dump generated.
 

@@ -165,9 +165,9 @@ Verify Machine Type Model And Serial Number
     #    [Serial Number]:                              ABCDEFG    <---- Serial number
     #    [Sub-section type]:                           0
 
-    ${redfish_machine_model}=  Redfish.Get Attribute  /redfish/v1/Systems/system/  Model
+    ${redfish_machine_model}=  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}/  Model
     ${redfish_machine_model}=  Replace String Using Regexp  ${redfish_machine_model}  ^0+  ${EMPTY}
-    ${redfish_serial_number}=  Redfish.Get Attribute  /redfish/v1/Systems/system/  SerialNumber
+    ${redfish_serial_number}=  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}/  SerialNumber
     ${redfish_serial_number}=  Replace String Using Regexp  ${redfish_serial_number}  ^0+  ${EMPTY}
 
     Valid Value  pel_machine_type_model  ['${redfish_machine_model}']
@@ -267,7 +267,7 @@ Verify BMC Event Log ID
     #    [BMC Event Log Id]:           341      <---- BMC event log id value
     #    [Committed at]:               03/25/1920 12:06:22
 
-    ${redfish_event_logs}=  Redfish.Get Properties  /redfish/v1/Systems/system/LogServices/EventLog/Entries
+    ${redfish_event_logs}=  Redfish.Get Properties  /redfish/v1/Systems/${SYSTEM_ID}/LogServices/EventLog/Entries
 
     # Example of redfish_event_logs output:
     # redfish_event_logs:

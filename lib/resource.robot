@@ -35,6 +35,7 @@ ${USER_TYPE}               ${EMPTY}
 
 ${MANAGER_ID}              bmc
 ${CHASSIS_ID}              chassis
+${SYSTEM_ID}               system
 
 # MTLS_ENABLED indicates whether mTLS is enabled.
 ${MTLS_ENABLED}            False
