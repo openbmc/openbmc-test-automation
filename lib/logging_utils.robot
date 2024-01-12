@@ -10,7 +10,9 @@ Variables       ../data/pel_variables.py
 
 
 # Define variables for use by callers of 'Get Error Logs'.
-${low_severity_errlog_regex}  \\.(Informational|Notice|Debug|OK)$
+# Old regex: ${low_severity_errlog_regex}  \\.(Informational|Notice|Debug|OK)$
+# Simplified regex string search
+${low_severity_errlog_regex}   Informational|Notice|Debug|OK
 &{low_severity_errlog_filter}  Severity=${low_severity_errlog_regex}
 &{low_severity_errlog_filter_args}  filter_dict=${low_severity_errlog_filter}  regex=${True}  invert=${True}
 # The following is equivalent to &{low_severity_errlog_filter_args} but the name may be more intuitive for
