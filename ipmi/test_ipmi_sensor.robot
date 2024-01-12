@@ -384,7 +384,7 @@ Set Present Bit Via IPMI and Verify Using Redfish
 
      # Redfish cpu components have "-" instead of "_" (e.g.: dcm0-cpu0).
      ${cpu_name}=  Replace String  ${sensor_name}  _  -
-     ${sensor_properties}=  Redfish.Get Properties  /redfish/v1/Systems/system/Processors/${cpu_name}
+     ${sensor_properties}=  Redfish.Get Properties  /redfish/v1/Systems/${SYSTEM_ID}/Processors/${cpu_name}
 
      #  Example of CPU state via Redfish
 

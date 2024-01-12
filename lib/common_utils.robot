@@ -865,7 +865,7 @@ Redfish Get BMC Version
 Redfish Get Host Version
     [Documentation]  Get host version via Redfish.
 
-    ${output}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}Systems/system  BiosVersion
+    ${output}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}Systems/${SYSTEM_ID}  BiosVersion
     [Return]  ${output}
 
 
