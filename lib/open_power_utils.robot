@@ -83,7 +83,7 @@ Read Object Attribute
 Get Functional Processor Count
     [Documentation]  Get functional processor count.
 
-    ${cpu_list}=  Redfish.Get Members List  /redfish/v1/Systems/system/Processors/  *cpu*
+    ${cpu_list}=  Redfish.Get Members List  /redfish/v1/Systems/${SYSTEM_ID}/Processors/  *cpu*
 
     FOR  ${endpoint_path}  IN  @{cpu_list}
        # {'Health': 'OK', 'State': 'Enabled'} get only matching status good.
@@ -98,7 +98,7 @@ Get Functional Processor Count
 Get Active OCC State Count
     [Documentation]  Get active OCC state count.
 
-    ${cpu_list}=  Redfish.Get Members List  /redfish/v1/Systems/system/Processors/  *cpu*
+    ${cpu_list}=  Redfish.Get Members List  /redfish/v1/Systems/${SYSTEM_ID}/Processors/  *cpu*
 
     FOR  ${endpoint_path}  IN  @{cpu_list}
        ${num}=  Set Variable  ${endpoint_path[-1]}
@@ -150,7 +150,7 @@ Verify OCC State
     #  /redfish/v1/Systems/system/Processors/cpu0
     #  /redfish/v1/Systems/system/Processors/cpu1
 
-    ${cpu_list}=  Redfish.Get Members List  /redfish/v1/Systems/system/Processors/  cpu*
+    ${cpu_list}=  Redfish.Get Members List  /redfish/v1/Systems/${SYSTEM_ID}/Processors/  cpu*
 
     FOR  ${endpoint_path}  IN  @{cpu_list}
        # {'Health': 'OK', 'State': 'Enabled'} get only matching status good.

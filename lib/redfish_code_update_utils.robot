@@ -24,7 +24,7 @@ Get Software Functional State
     ...   '${image_info["Description"]}' == 'BMC image' or '${image_info["Description"]}' == 'BMC update'
     ...    Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  FirmwareVersion
     ...  ELSE
-    ...    Redfish.Get Attribute  /redfish/v1/Systems/system  BiosVersion
+    ...    Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}  BiosVersion
 
     ${functional}=  Run Keyword And Return Status
     ...   Should Be Equal  ${sw_functional}  ${image_info["Version"]}
@@ -245,7 +245,7 @@ Get Host Power State
     # quiet    Indicates whether results should be printed.
 
     ${state}=  Redfish.Get Attribute
-    ...  ${REDFISH_BASE_URI}Systems/system  PowerState
+    ...  ${REDFISH_BASE_URI}Systems/${SYSTEM_ID}  PowerState
     Rqprint Vars  state
 
     [Return]  ${state}

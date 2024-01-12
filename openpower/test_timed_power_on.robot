@@ -119,7 +119,7 @@ Set Power Policy For TPO
     # Description of argument(s):
     # power_policy_mode           BIOS attribute value. E.g. "Stay On", "Automatic".
 
-    Redfish.Patch  /redfish/v1/Systems/system/Bios/Settings
+    Redfish.Patch  /redfish/v1/Systems/${SYSTEM_ID}/Bios/Settings
     ...  body={"Attributes":{"pvm_system_power_off_policy": "${power_policy_mode}"}}
     ...  valid_status_codes=[${HTTP_OK}]
 
