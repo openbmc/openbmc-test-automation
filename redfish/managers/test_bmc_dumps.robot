@@ -374,7 +374,7 @@ Verify User Initiated BMC Dump Type
     ${dump_id}=  Create User Initiated BMC Dump Via Redfish
 
     # Download BMC dump and verify its size.
-    ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}
+    ${resp}=  Redfish.Get  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries/${dump_id}
     ${redfish_dump_creation_timestamp}=  Set Variable  ${resp.dict["Created"]}
     # Download BMC dump and verify its size.
     ${tarfile}=  Download BMC Dump  ${dump_id}
@@ -438,7 +438,7 @@ Verify Core Initiated BMC Dump Type
     ${dump_entries}=  Get BMC Dump Entries
 
     # Find the timestamp of BMC dump.
-    ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_entries[0]}
+    ${resp}=  Redfish.Get  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries/${dump_entries[0]}
     ${redfish_dump_creation_timestamp}=  Set Variable  ${resp.dict["Created"]}
 
     # Download BMC dump and verify its size.
@@ -487,13 +487,13 @@ Download BMC Dump
     # Description of argument(s):
     # dump_id                An integer value that identifies a particular dump (e.g. 1, 3).
 
-    ${resp}=  Redfish.Get  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}
+    ${resp}=  Redfish.Get  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries/${dump_id}
     ${redfish_bmc_dump_size}=  Set Variable  ${resp.dict["AdditionalDataSizeBytes"]}
 
     Initialize OpenBMC
     ${headers}=  Create Dictionary  Content-Type=application/octet-stream  X-Auth-Token=${XAUTH_TOKEN}
 
-    ${ret}=  GET On Session  openbmc  /redfish/v1/Managers/bmc/LogServices/Dump/Entries/${dump_id}/attachment  headers=${headers}
+    ${ret}=  GET On Session  openbmc  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries/${dump_id}/attachment  headers=${headers}
 
     Should Be Equal As Numbers  ${ret.status_code}  200
 
