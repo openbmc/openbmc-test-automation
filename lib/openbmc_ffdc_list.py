@@ -236,8 +236,20 @@ if redfish_support_trans_state == 1:
         del FFDC_GET_REQUEST[key]
 
 REDFISH_BASE = "/redfish/v1/"
-REDFISH_ELOG = REDFISH_BASE + "Systems/system/LogServices/EventLog/Entries"
 REDFISH_FIRMWARE = REDFISH_BASE + "UpdateService/FirmwareInventory"
+try:
+    REDFISH_SYSTEM_ID = BuiltIn().get_variable_value(
+        "${SYSTEM_ID}", default="system"
+    )
+    REDFISH_ELOG = (
+        REDFISH_BASE
+        + "Systems/"
+        + REDFISH_SYSTEM_ID
+        + "/LogServices/EventLog/Entries"
+    )
+except RobotNotRunningError:
+    REDFISH_ELOG = REDFISH_BASE + "Systems/system/LogServices/EventLog/Entries"
+    pass
 
 # Add file name and corresponding Get Request
 FFDC_GET_REDFISH_REQUEST = {

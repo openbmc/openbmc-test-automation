@@ -66,7 +66,7 @@ Delete Redfish Event Log And Verify
     Create Test PEL Log
     ${elog_entry}=  Get Event Logs
 
-    Redfish.Delete  /redfish/v1/Systems/system/LogServices/EventLog/Entries/${elog_entry[0]["Id"]}
+    Redfish.Delete  /redfish/v1/Systems/${SYSTEM_ID}/LogServices/EventLog/Entries/${elog_entry[0]["Id"]}
 
     ${error_entries}=  Get Redfish Error Entries
     Should Be Empty  ${error_entries}
@@ -338,7 +338,7 @@ Create Two Test Event Logs And Delete One
     Create Test PEL Log
     Create Test PEL Log
     ${error_entries_before}=  Get Redfish Error Entries
-    Redfish.Delete  /redfish/v1/Systems/system/LogServices/EventLog/Entries/${error_entries_before[0]}
+    Redfish.Delete  /redfish/v1/Systems/${SYSTEM_ID}/LogServices/EventLog/Entries/${error_entries_before[0]}
 
     ${error_entries_after}=  Get Redfish Error Entries
     Should Not Contain  ${error_entries_after}  ${error_entries_before[0]}
@@ -477,7 +477,7 @@ Test Teardown Execution
 
 Get Redfish Error Entries
     [Documentation]  Return Redfish error ids list.
-    ${error_uris}=  redfish_utils.get_member_list  /redfish/v1/Systems/system/LogServices/EventLog/Entries
+    ${error_uris}=  redfish_utils.get_member_list  /redfish/v1/Systems/${SYSTEM_ID}/LogServices/EventLog/Entries
     ${error_ids}=  Create List
 
     FOR  ${error_uri}  IN  @{error_uris}

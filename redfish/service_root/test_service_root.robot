@@ -49,7 +49,7 @@ GET Redfish Resources With Login
     # Expect status      Resource URL Path
     ${HTTP_OK}           /redfish/v1/SessionService
     ${HTTP_OK}           /redfish/v1/AccountService
-    ${HTTP_OK}           /redfish/v1/Systems/system
+    ${HTTP_OK}           /redfish/v1/Systems/${SYSTEM_ID}
     ${HTTP_OK}           /redfish/v1/Chassis/${CHASSIS_ID}
     ${HTTP_OK}           /redfish/v1/Managers/${MANAGER_ID}
     ${HTTP_OK}           /redfish/v1/UpdateService
