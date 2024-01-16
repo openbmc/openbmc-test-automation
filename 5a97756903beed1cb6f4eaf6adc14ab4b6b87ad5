@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cea572f_59087383",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2024-01-16T13:21:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da06bce0_764bacc2",
+      "revId": "5a97756903beed1cb6f4eaf6adc14ab4b6b87ad5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e29af7d_96b3cc44",
@@ -41,6 +59,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a53e01d6_b6809e63",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2024-01-16T13:21:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e29af7d_96b3cc44",
+      "range": {
+        "startLine": 333,
+        "startChar": 6,
+        "endLine": 333,
+        "endChar": 15
+      },
+      "revId": "5a97756903beed1cb6f4eaf6adc14ab4b6b87ad5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efeca8d7_82e5ff9b",
@@ -54,6 +96,30 @@
       "writtenOn": "2024-01-16T13:09:06Z",
       "side": 1,
       "message": "where will be the new certificate_dir will be used?",
+      "range": {
+        "startLine": 338,
+        "startChar": 17,
+        "endLine": 338,
+        "endChar": 32
+      },
+      "revId": "5a97756903beed1cb6f4eaf6adc14ab4b6b87ad5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "494adc3c_2375f16f",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2024-01-16T13:21:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efeca8d7_82e5ff9b",
       "range": {
         "startLine": 338,
         "startChar": 17,
