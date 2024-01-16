@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "929afb7e_6b676d8d",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-16T05:04:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55bf12fd_a8572efd",
+      "revId": "4d631d99b8697d0bccc5c0fdc0238e6a089dfdae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f5b9e1a_b60e33c6",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-11-05T06:50:52Z",
       "side": 1,
       "message": "Should Be True  ${cmd_status}",
+      "range": {
+        "startLine": 431,
+        "startChar": 10,
+        "endLine": 431,
+        "endChar": 49
+      },
+      "revId": "4d631d99b8697d0bccc5c0fdc0238e6a089dfdae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88f1a5bc_dc184156",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-16T05:04:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f5b9e1a_b60e33c6",
       "range": {
         "startLine": 431,
         "startChar": 10,
@@ -64,6 +106,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf705050_f802d4da",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-16T05:04:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f3d8132_ebcb9096",
+      "range": {
+        "startLine": 432,
+        "startChar": 15,
+        "endLine": 432,
+        "endChar": 55
+      },
+      "revId": "4d631d99b8697d0bccc5c0fdc0238e6a089dfdae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a685804_197a27fa",
@@ -77,6 +143,30 @@
       "writtenOn": "2023-11-06T05:44:05Z",
       "side": 1,
       "message": "Please reduce the timer.\nas Patch operation takes 1 to 3 seconds to set new value",
+      "range": {
+        "startLine": 744,
+        "startChar": 33,
+        "endLine": 744,
+        "endChar": 45
+      },
+      "revId": "4d631d99b8697d0bccc5c0fdc0238e6a089dfdae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0f687b3_4685ffa5",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-16T05:04:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a685804_197a27fa",
       "range": {
         "startLine": 744,
         "startChar": 33,
