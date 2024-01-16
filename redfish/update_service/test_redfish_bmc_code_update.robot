@@ -172,6 +172,7 @@ Redfish Code Update With Different Interrupted Operation
     ...              when kernel panic.
     [Tags]  Redfish_Code_Update_With_Different_Interrupted_Operation
     [Template]  Verify Redfish Code Update With Different Interrupted Operation
+    [Teardown]  Code Update Interrupted Operation Teardown
 
     # operation          count
     host_name            1
@@ -190,6 +191,30 @@ Suite Setup Execution
     Redfish Purge Event Log
 
     Redfish Power Off  stack_mode=skip
+
+
+Code Update Interrupted Operation Teardown
+    [Documentation]  Code update interrupted operation teardown.
+
+    ${task_inv_dict}=  Get Task State from File
+
+    ${redfish_update_uri}=  Get Redfish Update Service URI
+
+    IF  '${TEST STATUS}' == 'FAIL'
+
+      ${task_inv}=  Check Task With Match TargetUri  ${redfish_update_uri}
+      Rprint Vars  task_inv
+
+      Wait Until Keyword Succeeds  2 min  10 sec
+      ...  Verify Task Progress State  ${task_inv}  ${task_inv_dict['TaskStarting']}
+
+      Wait Until Keyword Succeeds  5 min  10 sec
+      ...  Verify Task Progress State  ${task_inv}  ${task_inv_dict['TaskCompleted']}
+
+      Redfish BMC Reset Operation
+      Is BMC Standby
+
+    END
 
 
 Get Redfish Update Service URI
@@ -305,8 +330,19 @@ Run Operation On BMC
     [Arguments]  ${operation}  ${count}
 
     # Description of argument(s):
-    # operation    If host_name then change hostname.
+    # operation    Supports differnt variables.
+    #              If host_name then change hostname,
+    #              If kernel_panic then perform kernel panic,
+    #              If https_certificate then change the https certificate.
     # count        Loop count.
+
+    # Below directory is required by keyword.
+    # Redfish Update Certificate Upload In Loop
+
+    IF  '${operation}' == 'https_certificate'
+      Run  rm -r certificate_dir
+      Run  mkdir certificate_dir
+    END
 
     Run Keyword If  '${operation}' == 'host_name'
     ...    Run Configure BMC Hostname In Loop  count=${count}
@@ -365,7 +401,7 @@ Verify Redfish Code Update With Different Interrupted Operation
     Upload Image To BMC  ${redfish_update_uri}  timeout=${600}  data=${file_bin_data}
     Log To Console   Completed image upload to BMC.
 
-    Sleep  5
+    Sleep  8
 
     ${image_id}=  Get New Image ID
     Rprint Vars  image_id
