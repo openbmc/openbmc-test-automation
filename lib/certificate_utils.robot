@@ -41,7 +41,7 @@ Install Certificate File On BMC
 
     Delete All Sessions
 
-    [Return]  ${cert_id}
+    RETURN  ${cert_id}
 
 
 Get Certificate Content From BMC Via Openssl
@@ -56,7 +56,7 @@ Get Certificate Content From BMC Via Openssl
     ${result}=  Fetch From Left
     ...  ${output}  -----END CERTIFICATE-----
     ${result}=  Fetch From Right  ${result}  -----BEGIN CERTIFICATE-----
-    [Return]  ${result}
+    RETURN  ${result}
 
 
 Get Certificate File Content From BMC
@@ -69,7 +69,7 @@ Get Certificate File Content From BMC
     ${certificate}  ${stderr}  ${rc}=  Run Keyword If  '${cert_type}' == 'Client'
     ...    BMC Execute Command  cat /etc/nslcd/certs/cert.pem
 
-    [Return]  ${certificate}
+    RETURN  ${certificate}
 
 
 Generate Certificate File Via Openssl
@@ -127,7 +127,7 @@ Generate Certificate File Via Openssl
     ${cert_name}=  Catenate  SEPARATOR=  ${random_name}  .pem
     Create File  ${cert_dir_name}/${cert_name}  ${cert_data}
 
-    [Return]  ${EXECDIR}${/}${cert_dir_name}${/}${cert_name}
+    RETURN  ${EXECDIR}${/}${cert_dir_name}${/}${cert_name}
 
 
 Get Certificate Content From File
@@ -140,7 +140,7 @@ Get Certificate Content From File
     ${file_content}=  OperatingSystem.Get File  ${cert_file_path}
     ${result}=  Fetch From Left  ${file_content}  -----END CERTIFICATE-----
     ${result}=  Fetch From Right  ${result}  -----BEGIN CERTIFICATE-----
-    [Return]  ${result}
+    RETURN  ${result}
 
 
 Check If Openssl Tool Exist
@@ -290,7 +290,7 @@ Install And Verify Certificate Via Redfish
     ...  ${certificate_uri}/${cert_id}  CertificateString
 
     Run Keyword If  '${expected_status}' == 'ok'  Should Contain  ${cert_file_content}  ${bmc_cert_content}
-    [Return]  ${cert_id}
+    RETURN  ${cert_id}
 
 
 Modify BMC Date

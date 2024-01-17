@@ -21,7 +21,7 @@ Getscom Operations On OS
     #                -c|--chip <chip-id> <addr>
 
     ${output}  ${stderr}  ${rc}=  OS Execute Command  getscom ${input_cmd}
-    [Return]  ${output}
+    RETURN  ${output}
 
 Gard Operations On OS
     [Documentation]  Executes opal-gard command on OS with the given
@@ -31,7 +31,7 @@ Gard Operations On OS
     # input_cmd      list/clear all/show <gard_record_id>
 
     ${output}  ${stderr}  ${rc}=  OS Execute Command  opal-gard ${input_cmd}
-    [Return]  ${output}
+    RETURN  ${output}
 
 Putscom Operations On OS
     [Documentation]  Executes putscom command on OS with the given
@@ -66,7 +66,7 @@ Get ProcChipId From OS
 
     # Example output:
     # 00000008
-    [Return]  ${proc_id}
+    RETURN  ${proc_id}
 
 Get Core IDs From OS
     [Documentation]  Get Core IDs corresponding to the input processor chip ID.
@@ -80,7 +80,7 @@ Get Core IDs From OS
     ${core_ids}=  Split String  ${output}
     # Example output:
     # ['2', '3', '4', '5', '6']
-    [Return]  ${core_ids}
+    RETURN  ${core_ids}
 
 FIR Address Translation Through HOST
     [Documentation]  Do FIR address translation through host for given FIR,
@@ -97,7 +97,7 @@ FIR Address Translation Through HOST
     ${translated_addr}=  Split String  ${output}  :${SPACE}0x
     # Example output:
     # 0x10010c00
-    [Return]  ${translated_addr[1]}
+    RETURN  ${translated_addr[1]}
 
 Inject Error Through HOST
     [Documentation]  Inject checkstop on multiple targets like
@@ -164,7 +164,7 @@ Is Opal-PRD Service Enabled
 
     # Example output from prior command:
     # opal-prd.service enabled
-    [Return]  ${opal_prd_state[1]}
+    RETURN  ${opal_prd_state[1]}
 
 Enable Opal-PRD Service On HOST
     [Documentation]  Enable Opal-PRD service on host.

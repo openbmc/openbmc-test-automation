@@ -136,7 +136,7 @@ Get DCMI Management Controller Identifier String
     ${resp}=  Run IPMI Command  ${mcid_get_cmd}
     ${resp}=  Strip String  ${resp}  mode=right  characters=${SPACE}00\n
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 Set DCMI Management Controller Identifier String
     [Documentation]  Set DCMI MCID String.
@@ -157,7 +157,7 @@ Set DCMI Management Controller Identifier String
     Set Test Variable  ${random_int}
     Set Test Variable  ${number_of_bytes_to_write}
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 Get Hostname From BMC Console
     [Documentation]  Get hostname.
@@ -167,7 +167,7 @@ Get Hostname From BMC Console
     ${name}=  Convert To List  ${bmc_hostname}
     ${hostname_bytes}=  convert_name_into_bytes_without_prefix  ${name[0]}
 
-    [Return]  ${hostname_bytes}
+    RETURN  ${hostname_bytes}
 
 Get Response Length In Hex
     [Documentation]  Get response length in hex.
@@ -180,4 +180,4 @@ Get Response Length In Hex
     ...  '${length_1}' != '1'  ${length}
     ${resp_length_3}=  Convert To Lower Case  ${length_2}
 
-    [Return]  ${resp_length_3}
+    RETURN  ${resp_length_3}
