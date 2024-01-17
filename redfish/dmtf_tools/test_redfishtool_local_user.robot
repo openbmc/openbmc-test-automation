@@ -247,7 +247,7 @@ Redfishtool Verify User Name Exists
     ${status}=  Run Keyword And Return Status  redfishtool Get
     ...  /redfish/v1/AccountService/Accounts/${user_name}
 
-    [return]  ${status}
+    RETURN  ${status}
 
 
 Suite Setup Execution

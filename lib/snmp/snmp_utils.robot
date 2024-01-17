@@ -17,7 +17,7 @@ Get SNMP URI List
 
     @{snmp_uri_list}=  Read Properties  ${SNMP_MANAGER_URI}
 
-    [Return]  @{snmp_uri_list}
+    RETURN  @{snmp_uri_list}
 
 Configure SNMP Manager On BMC
     [Documentation]  Configure SNMP manager on BMC.
@@ -64,7 +64,7 @@ Get List Of SNMP Manager And Port Configured On BMC
       Append To List  ${ip_and_port_list}  ${ip}  ${port}
     END
 
-    [Return]  @{ip_and_port_list}
+    RETURN  @{ip_and_port_list}
 
 
 Verify SNMP Manager

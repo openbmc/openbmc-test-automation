@@ -45,7 +45,7 @@ Get Software Objects
       Append To List  ${host_list}  ${index}
     END
 
-    [Return]  ${host_list}
+    RETURN  ${host_list}
 
 
 Read Software Attribute
@@ -60,7 +60,7 @@ Read Software Attribute
     ${resp}=  OpenBMC Get Request  ${software_object}/attr/${attribute_name}
     ...  quiet=${1}
     Return From Keyword If  ${resp.status_code} != ${HTTP_OK}
-    [Return]  ${resp.json()["data"]}
+    RETURN  ${resp.json()["data"]}
 
 
 Get Software Objects Id
@@ -79,7 +79,7 @@ Get Software Objects Id
     FOR  ${index}  IN  @{sw_list}
         Append To List  ${sw_id_list}  ${index.rsplit('/', 1)[1]}
     END
-    [Return]  ${sw_id_list}
+    RETURN  ${sw_id_list}
 
 
 Get Host Software Property
@@ -91,7 +91,7 @@ Get Host Software Property
     #             (e.g. "/xyz/openbmc_project/software/f3b29aa8").
 
     ${sw_attributes}=  Read Properties  ${host_object}
-    [return]  ${sw_attributes}
+    RETURN  ${sw_attributes}
 
 Get Host Software Objects Details
     [Documentation]  Return software object details as a list of dictionaries.
@@ -104,7 +104,7 @@ Get Host Software Objects Details
         ${resp}=  OpenBMC Get Request  ${pnor}  quiet=${1}
         Append To List  ${software}  ${resp.json()["data"]}
     END
-    [Return]  ${software}
+    RETURN  ${software}
 
 Set Host Software Property
     [Documentation]  Set the host software properties of a given object.
@@ -265,7 +265,7 @@ Upload And Activate Image
     Wait Until Keyword Succeeds  10 sec  5 sec
     ...  Check Software Object Attribute  ${version_id}  Priority  ${0}
 
-    [Return]  ${version_id}
+    RETURN  ${version_id}
 
 
 Attempt To Reboot BMC During Image Activation
@@ -427,7 +427,7 @@ Get Least Value Priority Image
     END
     ${min_value}=  Min List Value  ${priority_value_list}
 
-    [Return]  ${min_value}
+    RETURN  ${min_value}
 
 
 Enable Field Mode And Verify Unmount
@@ -532,7 +532,7 @@ Get Latest Image ID
     Return From Keyword If  '${image_id}' != '${EMPTY}'  ${image_id}
 
     ${image_id}=   Get Image Id   Updating
-    [Return]  ${image_id}
+    RETURN  ${image_id}
 
 
 Check Image Update Progress State
@@ -572,7 +572,7 @@ Get All Task
     ${num_records}=  Get Length  ${task_inventory}
     Return From Keyword If  ${num_records} == ${0}  ${EMPTY}
 
-    [Return]  ${task_inventory}
+    RETURN  ${task_inventory}
 
 
 Get Task Objects
@@ -598,7 +598,7 @@ Get Task Objects
       Set To Dictionary  ${task_inv_dict}  ${task_id.split("/")[-1]}  ${tmp_dict}
     END
 
-    [Return]  ${task_inv_dict}
+    RETURN  ${task_inv_dict}
 
 
 Check Task Attribute
@@ -625,7 +625,7 @@ Check Task Attribute
       ...  ${tmp_dict}
     END
 
-    [Return]  ${EMPTY}
+    RETURN  ${EMPTY}
 
 
 Check Task Progress State
@@ -671,7 +671,7 @@ Get Image Id
       ...  ${sw_member.split('/')[-1]}
     END
 
-    [Return]  None
+    RETURN  None
 
 
 Get Image Update Progress State
@@ -690,7 +690,7 @@ Get Image Update Progress State
     ${status}=  Redfish.Get Attribute  /redfish/v1/UpdateService/FirmwareInventory/${image_id}  Status
     Rprint Vars  status
 
-    [Return]  ${status["State"]}
+    RETURN  ${status["State"]}
 
 
 Get Firmware Image Version
@@ -705,7 +705,7 @@ Get Firmware Image Version
     ${version}=  Redfish.Get Attribute  /redfish/v1/UpdateService/FirmwareInventory/${image_id}  Version
     Rprint Vars  version
 
-    [Return]  ${version}
+    RETURN  ${version}
 
 
 Get ApplyTime
@@ -717,7 +717,7 @@ Get ApplyTime
 
     ${system_applytime}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}UpdateService  HttpPushUriOptions
 
-    [Return]  ${system_applytime["HttpPushUriApplyTime"]["ApplyTime"]}
+    RETURN  ${system_applytime["HttpPushUriApplyTime"]["ApplyTime"]}
 
 
 Verify Get ApplyTime
@@ -758,7 +758,7 @@ Get Image Version From TFTP Server
     ${version}=  Get Version Tar  tftp_image.tar
     OperatingSystem.Remove File  tftp_image.tar
 
-    [Return]  ${version}
+    RETURN  ${version}
 
 
 Redfish Update Firmware

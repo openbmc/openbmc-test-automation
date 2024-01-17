@@ -363,7 +363,7 @@ Redfishtool Install Certificate File On BMC
 
     Delete All Sessions
 
-    [Return]  ${cert_id}
+    RETURN  ${cert_id}
 
 
 Verify Redfishtool Replace Certificate
@@ -435,7 +435,7 @@ Redfishtool GetAttribute
 
     ${cmd_output}=  Convert String to JSON  ${cmd_output}
 
-    [Return]  ${cmd_output["CertificateString"]}
+    RETURN  ${cmd_output["CertificateString"]}
 
 
 Suite Setup Execution
