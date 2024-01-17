@@ -28,7 +28,7 @@ Send Network Packets And Get Packet Loss
     ${cmd_buf}=  Set Variable  --delay ${delay} ${host} -c ${num} --${packet_type} ${cmd_suffix}
 
     ${nping_result}=  Nping  ${cmd_buf}
-    [Return]   ${nping_result['percent_lost']}
+    RETURN   ${nping_result['percent_lost']}
 
 
 Send Network Packets With Flags And Verify Stability

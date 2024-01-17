@@ -145,7 +145,7 @@ Get VMI Network Interface Details
     ...  IPv4_Address=${ip_resp["IPv4Addresses"]}  Name=${ip_resp["Name"]}
     ...  InterfaceEnabled=${${ip_resp["InterfaceEnabled"]}}
 
-    [Return]  &{vmi_ip}
+    RETURN  &{vmi_ip}
 
 
 Get VMI Interfaces
@@ -168,7 +168,7 @@ Get VMI Interfaces
         Append To List  ${interface_list}  ${interface_value}
     END
 
-   [Return]  @{interface_list}
+   RETURN  @{interface_list}
 
 
 Verify VMI EthernetInterfaces
@@ -208,4 +208,4 @@ Get And Set Static VMI IP
     Set Static IPv4 Address To VMI And Verify  ${vmi_ip}  ${bmc_ip_data[0]['Gateway']}
     ...  ${bmc_ip_data[0]['SubnetMask']}  ${valid_status_code}  ${interface}
 
-    [Return]   ${vmi_ip}  ${bmc_ip_data}
+    RETURN   ${vmi_ip}  ${bmc_ip_data}

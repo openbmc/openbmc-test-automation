@@ -211,7 +211,7 @@ Get IPMI FRU Devices Data
         Set To Dictionary  ${fru}  ${serial_number}  ${tmp}
     END
 
-    [Return]  ${fru}
+    RETURN  ${fru}
 
 
 Get DBUS Dictionary For FRU Devices
@@ -316,7 +316,7 @@ Get FRU Inventory Area Info
     ${resp}=  Run IPMI Command  ${IPMI_RAW_CMD['FRU']['Inventory_Area_Info'][0]} ${fru_device_id}
     ${resp}=  Split String  ${resp}
 
-    [Return]  ${resp[0]}
+    RETURN  ${resp[0]}
 
 
 Read FRU Data Via IPMI
@@ -332,7 +332,7 @@ Read FRU Data Via IPMI
     ${resp}=  Run IPMI Command
     ...  raw ${IPMI_RAW_CMD['FRU']['Read'][0]} ${fru_id} ${offset} 0xff
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Write FRU Data Via IPMI
@@ -365,7 +365,7 @@ Generate Random Data For FRU
     ${string}=  Generate Random String  ${initial_fru_length}  [LETTERS]
     ${frudata_prefixed}  ${fru_data}=  Identify Request Data  ${string}
 
-    [Return]  ${frudata_prefixed}  ${fru_data}
+    RETURN  ${frudata_prefixed}  ${fru_data}
 
 
 Get Default FRU Data

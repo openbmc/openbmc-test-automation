@@ -142,7 +142,7 @@ Login To OS Host
 
     SSHLibrary.Open Connection  ${os_host}
     ${resp}=  SSHLibrary.Login  ${os_username}  ${os_password}
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Initiate Auto Reboot
@@ -220,7 +220,7 @@ Read Turbo Setting Via REST
 
     ${turbo_setting}=  Read Attribute
     ...  ${CONTROL_HOST_URI}turbo_allowed  TurboAllowed
-    [Return]  ${turbo_setting}
+    RETURN  ${turbo_setting}
 
 
 Set Turbo Setting Via REST
@@ -260,7 +260,7 @@ Old Get Boot Progress
     ${state}=  Read Attribute  ${OPENBMC_BASE_URI}sensors/host/BootProgress
     ...  value  quiet=${quiet}
 
-    [Return]  ${state}
+    RETURN  ${state}
 
 
 Set Boot Progress Method
@@ -342,7 +342,7 @@ Get Boot Progress
     ...  ELSE
     ...      Old Get Boot Progress  quiet=${quiet}
 
-    [Return]  ${state}
+    RETURN  ${state}
 
 
 New Get Boot Progress
@@ -355,41 +355,41 @@ New Get Boot Progress
 
     ${state}=  Read Attribute  ${HOST_STATE_URI}  BootProgress  quiet=${quiet}
 
-    [Return]  ${state.rsplit('.', 1)[1]}
+    RETURN  ${state.rsplit('.', 1)[1]}
 
 
 New Get Power Policy
     [Documentation]  Returns the BMC power policy (new method).
     ${currentPolicy}=  Read Attribute  ${POWER_RESTORE_URI}  PowerRestorePolicy
 
-    [Return]  ${currentPolicy}
+    RETURN  ${currentPolicy}
 
 
 Old Get Power Policy
     [Documentation]  Returns the BMC power policy (old method).
     ${currentPolicy}=  Read Attribute  ${HOST_SETTING}  power_policy
 
-    [Return]  ${currentPolicy}
+    RETURN  ${currentPolicy}
 
 
 Redfish Get Power Restore Policy
     [Documentation]  Returns the BMC power restore policy.
 
     ${power_restore_policy}=  Redfish.Get Attribute  /redfish/v1/Systems/system  PowerRestorePolicy
-    [Return]  ${power_restore_policy}
+    RETURN  ${power_restore_policy}
 
 Get Auto Reboot
     [Documentation]  Returns auto reboot setting.
     ${setting}=  Read Attribute  ${CONTROL_HOST_URI}/auto_reboot  AutoReboot
 
-    [Return]  ${setting}
+    RETURN  ${setting}
 
 
 Redfish Get Auto Reboot
     [Documentation]  Returns auto reboot setting.
 
     ${resp}=  Redfish.Get Attribute  /redfish/v1/Systems/system  Boot
-    [Return]  ${resp["AutomaticRetryConfig"]}
+    RETURN  ${resp["AutomaticRetryConfig"]}
 
 
 Trigger Warm Reset
@@ -423,7 +423,7 @@ Get Power State
     ...        data=${args}  quiet=${quiet}
     Should be equal as strings  ${resp.status_code}  ${HTTP_OK}
 
-    [Return]  ${resp.json()["data"]}
+    RETURN  ${resp.json()["data"]}
 
 
 Clear BMC Gard Record
@@ -456,7 +456,7 @@ Get Flash BIOS Status
     [Documentation]  Returns the status of the flash BIOS API as a string. For
     ...              example 'Flashing', 'Flash Done', etc
     ${data}=  Read Properties  /org/openbmc/control/flash/bios
-    [Return]    ${data['status']}
+    RETURN    ${data['status']}
 
 
 Is PNOR Flashing
@@ -493,7 +493,7 @@ Create OS Console File Path
     ${log_file_path}=  Set Variable If  '${log_file_path}' == '${EMPTY}'
     ...  ${default_file_path}  ${log_file_path}
 
-    [Return]  ${log_file_path}
+    RETURN  ${log_file_path}
 
 
 Get Endpoint Paths
@@ -522,7 +522,7 @@ Get Endpoint Paths
     # any digit or lower case character.
     ${resp}=  Get Matches  ${list}  regexp=^.*[0-9a-z_].${endpoint}\[_0-9a-z]*$  case_insensitive=${True}
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Set BMC Power Policy
@@ -578,7 +578,7 @@ Get Elog URL List
 
     ${url_list}=  Read Properties  /xyz/openbmc_project/logging/entry/
     Sort List  ${url_list}
-    [Return]  ${url_list}
+    RETURN  ${url_list}
 
 
 Get BMC Flash Chip Boot Side
@@ -591,7 +591,7 @@ Get BMC Flash Chip Boot Side
     ${boot_side}  ${stderr}  ${rc}=  BMC Execute Command
     ...  cat /sys/class/watchdog/watchdog1/bootstatus
 
-    [Return]  ${boot_side}
+    RETURN  ${boot_side}
 
 
 Watchdog Object Should Exist
@@ -610,7 +610,7 @@ Get System LED State
     # led_name     System LED name (e.g. heartbeat, identify, beep).
 
     ${state}=  Read Attribute  ${LED_PHYSICAL_URI}${led_name}  State
-    [Return]  ${state.rsplit('.', 1)[1]}
+    RETURN  ${state.rsplit('.', 1)[1]}
 
 
 Verify LED State
@@ -633,7 +633,7 @@ Get LED State XYZ
 
     ${state}=  Read Attribute  ${LED_GROUPS_URI}${led_name}  Asserted
     # Returns the state of the LED, either On or Off.
-    [Return]  ${state}
+    RETURN  ${state}
 
 
 Verify Identify LED State
@@ -789,7 +789,7 @@ CLI Get BMC DateTime
     [Documentation]  Returns BMC date time from date command.
 
     ${bmc_time_via_date}  ${stderr}  ${rc}=  BMC Execute Command  date +"%Y-%m-%d %H:%M:%S"  print_err=1
-    [Return]  ${bmc_time_via_date}
+    RETURN  ${bmc_time_via_date}
 
 
 Update Root Password
@@ -829,7 +829,7 @@ Get Post Boot Action
     ...  json.load(open('${code_base_dir_path}data/applytime_table.json'))  modules=json
     Rprint Vars  post_code_update_actions
 
-    [Return]  ${post_code_update_actions}
+    RETURN  ${post_code_update_actions}
 
 
 Get Task State From File
@@ -858,7 +858,7 @@ Get Task State From File
     ...  json.load(open('${code_base_dir_path}data/task_state.json'))  modules=json
     Rprint Vars  task_state
 
-    [Return]  ${task_state}
+    RETURN  ${task_state}
 
 
 Redfish Set Boot Default
@@ -906,7 +906,7 @@ Redfish Get BMC State
     # },
 
     ${status}=  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  Status
-    [Return]  ${status["State"]}
+    RETURN  ${status["State"]}
 
 
 Redfish Verify BMC State
@@ -935,7 +935,7 @@ Redfish Get Host State
     # },
 
     ${chassis}=  Redfish.Get Properties  /redfish/v1/Chassis/${CHASSIS_ID}
-    [Return]  ${chassis["PowerState"]}  ${chassis["Status"]["State"]}
+    RETURN  ${chassis["PowerState"]}  ${chassis["Status"]["State"]}
 
 
 Redfish Get Boot Progress
@@ -951,7 +951,7 @@ Redfish Get Boot Progress
     Return From Keyword If  "${PLATFORM_ARCH_TYPE}" == "x86"
     ...  NA  ${boot_progress["Status"]["State"]}
 
-    [Return]  ${boot_progress["BootProgress"]["LastState"]}  ${boot_progress["Status"]["State"]}
+    RETURN  ${boot_progress["BootProgress"]["LastState"]}  ${boot_progress["Status"]["State"]}
 
 
 Redfish Get States
@@ -976,7 +976,7 @@ Redfish Get States
     # test is run in loops.
     #Log  ${states}
 
-    [Return]  ${states}
+    RETURN  ${states}
 
 
 Is BMC Not Quiesced
@@ -1121,7 +1121,7 @@ Get BIOS Attribute
     ${systems}=  Redfish_Utils.Get Member List  /redfish/v1/Systems
     ${bios_attr_dict}=  Redfish.Get Attribute  ${systems[0]}/Bios  Attributes
 
-    [Return]  ${bios_attr_dict}
+    RETURN  ${bios_attr_dict}
 
 
 Set BIOS Attribute
@@ -1185,7 +1185,7 @@ PLDM Get BIOS Attribute
     # attribute_name     Valid BIOS attribute name e.g ("fw_boot_side")
 
     ${pldm_output}=  pldmtool  bios GetBIOSAttributeCurrentValueByHandle -a ${attribute_name}
-    [Return]  ${pldm_output}
+    RETURN  ${pldm_output}
 
 
 Verify Host Power State

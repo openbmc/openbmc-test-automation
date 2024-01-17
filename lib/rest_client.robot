@@ -50,7 +50,7 @@ OpenBMC Get Request
     ${resp}=  GET On Session  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}  expected_status=any
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${resp}
     Delete All Sessions
-    [Return]    ${resp}
+    RETURN    ${resp}
 
 OpenBMC Post Request
     [Documentation]  Do REST POST request and return the result.
@@ -77,7 +77,7 @@ OpenBMC Post Request
     ${ret}=  POST On Session  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
     Delete All Sessions
-    [Return]    ${ret}
+    RETURN    ${ret}
 
 OpenBMC Put Request
     [Documentation]  Do REST PUT request on the resource identified by the URI.
@@ -100,7 +100,7 @@ OpenBMC Put Request
     ${resp}=  PUT On Session  openbmc  ${base_uri}  json=${kwargs["data"]}  headers=${headers}
     Log Response    ${resp}
     Delete All Sessions
-    [Return]    ${resp}
+    RETURN    ${resp}
 
 OpenBMC Delete Request
     [Documentation]  Do REST request to delete the resource identified by the
@@ -126,7 +126,7 @@ OpenBMC Delete Request
     ${ret}=  DELETE On Session  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
     Run Keyword If  '${quiet}' == '${0}'  Log Response    ${ret}
     Delete All Sessions
-    [Return]    ${ret}
+    RETURN    ${ret}
 
 Initialize OpenBMC
     [Documentation]  Do a REST login connection within specified time.
@@ -266,7 +266,7 @@ Read Attribute
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     Run Keyword If  '${expected_value}' != '${EMPTY}'
     ...  Should Be Equal As Strings  ${expected_value}  ${resp.json()["data"]}
-    [Return]    ${resp.json()["data"]}
+    RETURN    ${resp.json()["data"]}
 
 
 Write Attribute
@@ -323,7 +323,7 @@ Read Properties
     ${resp}=  OpenBMC Get Request  ${uri}  timeout=${timeout}  quiet=${quiet}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
-    [Return]  ${resp.json()["data"]}
+    RETURN  ${resp.json()["data"]}
 
 Call Method
     [Documentation]  Invoke the specific REST service method.
@@ -338,7 +338,7 @@ Call Method
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     ${resp}=  OpenBmc Post Request  ${base_uri}action/${method}
     ...  timeout=${timeout}  quiet=${quiet}  &{kwargs}
-    [Return]     ${resp}
+    RETURN    ${resp}
 
 
 Upload Image To BMC
@@ -372,7 +372,7 @@ Upload Image To BMC
     Valid Value  ret.status_code  ${valid_status_codes}
     Delete All Sessions
 
-    [Return]  ${ret}
+    RETURN  ${ret}
 
 
 Redfish Login
@@ -401,7 +401,7 @@ Redfish Login
 
     Set Global Variable  ${XAUTH_TOKEN}  ${resp.headers["X-Auth-Token"]}
 
-    [Return]  ${resp.json()}
+    RETURN  ${resp.json()}
 
 
 Redfish Get Request
@@ -425,7 +425,7 @@ Redfish Get Request
     ${resp}=  GET On Session  redfish  ${base_uri}  &{kwargs}  timeout=${timeout}
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${resp}
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Redfish Post Request
@@ -449,4 +449,4 @@ Redfish Post Request
     ${resp}=  POST On Session  redfish  ${base_uri}  &{kwargs}  timeout=${timeout}  expected_status=any
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${resp}
 
-    [Return]  ${resp}
+    RETURN  ${resp}

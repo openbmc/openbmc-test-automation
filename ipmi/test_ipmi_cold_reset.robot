@@ -116,7 +116,7 @@ Get Sensor List
     ${data}=  Wait Until Keyword Succeeds  2 min  30 sec
     ...  Run IPMI Standard Command   sensor
 
-    [Return]  ${data}
+    RETURN  ${data}
 
 Get The Sensor Name And Threshold
     [Documentation]  To get the sensor threshold for given sensor using IPMI.
@@ -148,7 +148,7 @@ Get The Sensor Name And Threshold
       Remove Values From List  ${tmp_list}  ${random_sensor}
     END
 
-    [Return]  ${random_sensor}  ${sensor_threshold}
+    RETURN  ${random_sensor}  ${sensor_threshold}
 
 Selecting Random Sensor Name And Threshold Value
     [Documentation]  Select Random Sensor Name And Threshold Values.
@@ -203,7 +203,7 @@ Selecting Random Sensor Name And Threshold Value
     Run Keyword If  '${upper_non_recoverable_threshold_status}' == 'True'
     ...  Set To Dictionary  ${tmp_dict}  unr  ${ipmi_upper_non_recoverable_threshold}
 
-    [Return]  ${random_sensor_name}  ${tmp_dict}
+    RETURN  ${random_sensor_name}  ${tmp_dict}
 
 Modify Default Sensor Threshold Value
     [Documentation]  Modify Default Sensor Threshold Value with adding 100 to old threshold values.
@@ -211,7 +211,7 @@ Modify Default Sensor Threshold Value
 
     ${new_threshold}=  Evaluate  ${old_threshold} + 100
 
-    [Return]  ${new_threshold}
+    RETURN  ${new_threshold}
 
 Set And Get Sensor Threshold For given Sensor
     [Documentation]  Set/Get Sensor Threshold for given sensor Via IPMI.
@@ -224,7 +224,7 @@ Set And Get Sensor Threshold For given Sensor
 
     ${sensor_new_threshold_value}=  Getting Sensor Threshold Value Based On Threshold Key  ${random_threshold_key}  ${sensor_name}
 
-    [Return]  ${sensor_new_threshold_value}
+    RETURN  ${sensor_new_threshold_value}
 
 Getting Sensor Threshold Value Based On Threshold Key
     [Documentation]  Getting Particular Sensor Threshold Value Based On Sensor Name And Threshold Key.
@@ -245,4 +245,4 @@ Getting Sensor Threshold Value Based On Threshold Key
     ${get_sensor_new_threshold_value}=  Get From List  ${new_sensor_details}  ${index_value}
     ${sensor_new_threshold_value}=  Set Variable  ${get_sensor_new_threshold_value.strip()}
 
-    [Return]  ${sensor_new_threshold_value}
+    RETURN  ${sensor_new_threshold_value}

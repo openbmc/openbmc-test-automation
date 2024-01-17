@@ -195,7 +195,7 @@ Get Redfish Privilege Registry Json URL
     ...  /redfish/v1/Registries/PrivilegeRegistry/
     @{location}=  Get From Dictionary  ${resp.dict}  Location
     ${uri}=   Set Variable   ${location[0]['Uri']}
-    [Return]   ${uri}
+    RETURN   ${uri}
 
 Create And Verify Various Privilege Users
     [Documentation]  Create and verify admin, test, operator, and readonly users.
