@@ -118,7 +118,7 @@ Get Host State Attribute
 
     ${state}=
     ...  Read Attribute  ${HOST_STATE_URI}  ${host_attribute}  quiet=${quiet}
-    [Return]  ${state}
+    RETURN  ${state}
 
 
 Is OS Booted
@@ -175,7 +175,7 @@ Is Host Quiesced
     ${host_state}=  Get Host State
     ${status}=  Run Keyword And Return Status  Should Be Equal
     ...  ${host_state}  Quiesced
-    [Return]  ${status}
+    RETURN  ${status}
 
 
 Recover Quiesced Host
@@ -194,7 +194,7 @@ Get Host State
     ${state}=
     ...  Read Attribute  ${HOST_STATE_URI}  CurrentHostState
     ...  quiet=${quiet}
-    [Return]  ${state.rsplit('.', 1)[1]}
+    RETURN  ${state.rsplit('.', 1)[1]}
 
 Get Host Trans State
     [Documentation]  Return the transition state of host as a string.
@@ -206,7 +206,7 @@ Get Host Trans State
     ${state}=
     ...  Read Attribute  ${HOST_STATE_URI}  RequestedHostTransition
     ...  quiet=${quiet}
-    [Return]  ${state.rsplit('.', 1)[1]}
+    RETURN  ${state.rsplit('.', 1)[1]}
 
 Get Chassis Power State
     [Documentation]  Return the power state of the Chassis
@@ -216,7 +216,7 @@ Get Chassis Power State
     ${state}=
     ...  Read Attribute  ${CHASSIS_STATE_URI}  CurrentPowerState
     ...  quiet=${quiet}
-    [Return]  ${state.rsplit('.', 1)[1]}
+    RETURN  ${state.rsplit('.', 1)[1]}
 
 
 Get BMC State
@@ -225,7 +225,7 @@ Get BMC State
     # quiet - Suppress REST output logging to console.
     ${state}=
     ...  Read Attribute  ${BMC_STATE_URI}  CurrentBMCState  quiet=${quiet}
-    [Return]  ${state.rsplit('.', 1)[1]}
+    RETURN  ${state.rsplit('.', 1)[1]}
 
 
 Put BMC State
@@ -269,7 +269,7 @@ Check If BMC Reboot Is Initiated
     ${alive}=   Run Keyword and Return Status
     ...    Open Connection And Log In
     Return From Keyword If   '${alive}' == '${False}'    ${False}
-    [Return]    ${True}
+    RETURN    ${True}
 
 Is BMC Ready
     [Documentation]  Check if BMC state is Ready.
@@ -324,4 +324,4 @@ Get Host State Via Redfish
     ${powerstate}=
     ...  Redfish.Get Attribute  ${REDFISH_CHASSIS_URI}/${CHASSIS_ID}  PowerState
 
-    [Return]  ${powerstate}
+    RETURN  ${powerstate}

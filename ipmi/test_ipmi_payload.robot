@@ -255,7 +255,7 @@ Get Payload Activation Status
 
     ${payload_status}=  Set Variable  ${resp[1]}
 
-    [return]  ${payload_status}
+    RETURN  ${payload_status}
 
 
 Activate Payload
@@ -286,7 +286,7 @@ Get User Access Payload For Given Channel
     ${raw_command}=  Catenate  ${IPMI_RAW_CMD['Payload']['Get_User_Access_Payload'][0]}
     ...  ${channel_number} ${user_id}
     ${resp}=  Run IPMI Command  ${raw_command}
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Create And Verify IPMI User
@@ -304,7 +304,7 @@ Create And Verify IPMI User
     Set And Verify User Access Privilege  ${random_user_id}  ${user_privilege_level}
     Verify Username And Password  ${random_user_name}  ${new_user_passwd}  L=${privilege}
 
-    [Return]  ${random_user_id}  ${random_user_name}
+    RETURN  ${random_user_id}  ${random_user_name}
 
 
 Set User Password
@@ -411,7 +411,7 @@ Set User Access Payload For Given User
 
     ${resp}=  Run IPMI Command  ${set_cmd}
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Get Invalid User ID
@@ -427,7 +427,7 @@ Get Invalid User ID
     END
     ${invalid_user_id}=  Evaluate  random.choice(${invalid_userid_list})  random
 
-    [Return]  ${invalid_user_id}
+    RETURN  ${invalid_user_id}
 
 
 Verify Set User Access Payload For Invalid Channel

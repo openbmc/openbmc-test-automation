@@ -58,7 +58,7 @@ Call FFDC Methods
 
     Run Key U  SSHLibrary.Close All Connections
 
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 Method Call Keyword List
@@ -97,7 +97,7 @@ Method Call Keyword List
       ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}  ${ffdc_file_sub_list}
     END
 
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 Execute Keyword Method
@@ -124,7 +124,7 @@ Execute Keyword Method
     ...  ${ffdc_file_list}
 
     ${status}  ${ffdc_file_list}=  Run Key  ${keyword_name}  ignore=1
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 BMC FFDC Cleanup
@@ -148,7 +148,7 @@ BMC FFDC Manifest
       Iterate BMC Command List Pairs  ${index}
     END
 
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 Iterate BMC Command List Pairs
@@ -189,7 +189,7 @@ Execute Command and Write FFDC
     ...    ERROR output:${\n}${stderr}${\n}Output:${\n}${stdout}${\n}
     ...    ${logpath}
 
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 # Method : BMC FFDC Files                                      #
@@ -218,7 +218,7 @@ BMC FFDC Files
     BMC Execute Command  rm -rf /tmp/BMC_*
     scp.Close Connection
 
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 Create File and Write Data
@@ -239,7 +239,7 @@ Create File and Write Data
       ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}  ${ffdc_file_sub_list}
     END
 
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 # Method : Log Test Case Status                                #
@@ -301,7 +301,7 @@ Log FFDC Get Requests
       Append To List  ${ffdc_file_list}  ${logpath}
     END
 
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 Log FFDC Get Redfish Requests
@@ -325,7 +325,7 @@ Log FFDC Get Redfish Requests
       Append To List  ${ffdc_file_list}  ${logpath}
     END
 
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 BMC FFDC Get Requests
@@ -344,7 +344,7 @@ BMC FFDC Get Requests
       ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}  ${ffdc_file_sub_list}
     END
 
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 BMC FFDC Get Redfish Requests
@@ -363,7 +363,7 @@ BMC FFDC Get Redfish Requests
       ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}  ${ffdc_file_sub_list}
     END
 
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 Log OS All distros FFDC
@@ -386,7 +386,7 @@ Log OS All distros FFDC
       ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}  ${ffdc_file_sub_list}
     END
 
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 Log OS SPECIFIC DISTRO FFDC
@@ -435,7 +435,7 @@ Log OS SPECIFIC DISTRO FFDC
     # Add the file location to the ffdc_file_list.
     Append To List  ${ffdc_file_list}  ${local_sosreport_file_path}
 
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 OS FFDC Files
@@ -491,7 +491,7 @@ OS FFDC Files
     OS Execute Command  rm -rf /tmp/OS_* /tmp/sosreport*FFDC*  ignore_err=${True}
     scp.Close Connection
 
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 System Inventory Files
@@ -517,7 +517,7 @@ System Inventory Files
 
     Run Keyword and Ignore Error  Remove Files  ${globex}
 
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 SCP Coredump Files
@@ -548,7 +548,7 @@ SCP Coredump Files
 
     END
 
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 SCP Dump Files
@@ -557,7 +557,7 @@ SCP Dump Files
     # Check if dumps exist
     ${ffdc_file_list}=  Scp Dumps  ${FFDC_DIR_PATH}  ${FFDC_PREFIX}
 
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 Collect Dump Log
@@ -629,7 +629,7 @@ Enumerate Redfish Resources
 
     Append To List  ${ffdc_file_list}  ${logpath}
 
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 Enumerate Redfish OEM Resources
@@ -659,7 +659,7 @@ Enumerate Redfish OEM Resources
 
     Append To List  ${ffdc_file_list}  ${logpath}
 
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 Collect eSEL Log
@@ -702,7 +702,7 @@ Collect eSEL Log
     Convert eSEL To Elog Format  ${logpath}
     Append To List  ${ffdc_file_list}  ${logpath}.txt
 
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 Convert eSEL To Elog Format
@@ -735,7 +735,7 @@ OS Distro Type
     # If linux distro doesn't have os-release, check for uname.
     ${stdout}  ${stderr}  ${rc}=  OS Execute Command  uname  ignore_err=${0}
 
-   [Return]  ${stdout}
+    RETURN  ${stdout}
 
 
 Get OS Distro Release Info
@@ -748,4 +748,4 @@ Get OS Distro Release Info
     # If linux distro doesn't have os-release, check for uname.
     ${stdout}  ${stderr}  ${rc}=  OS Execute Command  uname  ignore_err=${0}
 
-   [Return]  ${stdout}
+    RETURN  ${stdout}
