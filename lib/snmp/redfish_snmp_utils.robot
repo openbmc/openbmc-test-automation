@@ -60,7 +60,7 @@ Get SNMP Manager List
       Append To List  ${snmp_mgr_list}  ${snmp_mgr}
     END
 
-    [Return]  ${snmp_mgr_list}
+    RETURN  ${snmp_mgr_list}
 
 
 Configure SNMP Manager Via Redfish
@@ -138,7 +138,7 @@ Get SNMP Child URIs
     # Get the list of child URIs.
     @{snmp_mgr_uris}=  Redfish.Get Members List  ${subscription_uri}  filter=snmp
 
-    [Return]  ${snmp_mgr_uris}
+    RETURN  ${snmp_mgr_uris}
 
 
 Delete SNMP Manager Via Redfish
@@ -227,7 +227,7 @@ Create Error On BMC And Verify Trap
 
     Verify SNMP Trap  ${snmp_trap}  ${expected_error}
 
-    [Return]  ${snmp_trap}
+    RETURN  ${snmp_trap}
 
 
 Verify SNMP Trap
@@ -298,7 +298,7 @@ Create Error On BMC And Verify Trap On Non Default Port
 
     Verify SNMP Trap  ${snmp_trap}  ${expected_error}
 
-    [Return]  ${snmp_trap}
+    RETURN  ${snmp_trap}
 
 
 Start SNMP Manager On Specific Port
@@ -354,5 +354,5 @@ Generate Error On BMC And Verify Trap
 
     Verify SNMP Trap  ${snmp_trap}  ${expected_error}
 
-    [Return]  ${snmp_trap}
+    RETURN  ${snmp_trap}
 

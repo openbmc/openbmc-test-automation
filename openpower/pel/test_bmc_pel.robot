@@ -833,7 +833,7 @@ Get Disk Usage For Error Logs
     # Logging disk capacity limit is set to 20MB. So calculating the log usage percentage.
     ${usage_percent}=  Evaluate  ${usage_output} / 20 * 100
 
-    [return]  ${usage_percent}
+    RETURN  ${usage_percent}
 
 
 Get PEL Log IDs
@@ -880,7 +880,7 @@ Get PEL Log IDs
     END
     Sort List  ${pel_id_list}
 
-    [Return]  ${pel_id_list}
+    RETURN  ${pel_id_list}
 
 
 Get PEL Log Via BMC CLI
@@ -890,7 +890,7 @@ Get PEL Log Via BMC CLI
     ${ids}=  Get Dictionary Keys  ${pel_records}
     Sort List  ${ids}
 
-    [Return]  ${ids}
+    RETURN  ${ids}
 
 
 Get PEL Field Value
@@ -931,7 +931,7 @@ Get PEL Field Value
     ${pel_section_output}=  Get From Dictionary  ${pel_output}  ${pel_section}
     ${pel_field_output}=  Get From Dictionary  ${pel_section_output}  ${pel_field}
 
-    [Return]  ${pel_field_output}
+    RETURN  ${pel_field_output}
 
 
 Verify PEL Transmission To Host

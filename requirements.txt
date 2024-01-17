@@ -1,4 +1,4 @@
-robotframework
+robotframework==7.0
 requests
 robotframework-requests
 robotframework-jsonlibrary
