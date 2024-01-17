@@ -127,7 +127,7 @@ Find Websocket Monitor
     # There may be more than one pid returned if there is an instance
     # of a monitory_pgm running from a previous run.
     @{pid_list}=  Split String  ${pid}
-    [Return]  ${pid_list}
+    RETURN  ${pid_list}
 
 
 Kill Websocket Monitor

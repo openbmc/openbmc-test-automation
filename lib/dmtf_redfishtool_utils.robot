@@ -27,7 +27,7 @@ Redfishtool Get
     ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd}
     Run Keyword If  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
 
-    [Return]  ${cmd_output}
+    RETURN  ${cmd_output}
 
 
 Redfishtool Patch
@@ -46,7 +46,7 @@ Redfishtool Patch
     ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd}
     Run Keyword If  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
 
-    [Return]  ${cmd_output}
+    RETURN  ${cmd_output}
 
 
 Redfishtool Post
@@ -66,7 +66,7 @@ Redfishtool Post
     ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd}
     Run Keyword If  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
 
-    [Return]  ${cmd_output}
+    RETURN  ${cmd_output}
 
 
 Redfishtool Delete
@@ -84,7 +84,7 @@ Redfishtool Delete
     ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd}
     Run Keyword If  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
 
-    [Return]  ${cmd_output}
+    RETURN  ${cmd_output}
 
 
 Is HTTP error Expected

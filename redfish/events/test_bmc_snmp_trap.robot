@@ -338,4 +338,4 @@ Generate Error And Verify System Up Time
 
     Should Be Equal As Integers  ${bmc_uptime_in_minutes}  ${sysuptime_in_minutes}
 
-    [Return]  ${sysuptime_in_minutes}
+    RETURN  ${sysuptime_in_minutes}

@@ -380,7 +380,7 @@ Get SEL Entry Via IPMI
     ${resp}=  Run IPMI Command  ${cmd}
     ${resp}=  Split String  ${resp}
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Get Most Recent Addition Timestamp From SEL Info
@@ -394,7 +394,7 @@ Get Most Recent Addition Timestamp From SEL Info
     Reverse List  ${addition_timestamp}
     ${addition_timestamp}=  Evaluate  "".join(${addition_timestamp})
 
-    [Return]  ${addition_timestamp}
+    RETURN  ${addition_timestamp}
 
 
 Get Most Recent Erase Timestamp From SEL Info
@@ -408,7 +408,7 @@ Get Most Recent Erase Timestamp From SEL Info
     Reverse List  ${erase_timestamp}
     ${erase_timestamp}=  Evaluate  "".join(${erase_timestamp})
 
-    [Return]  ${erase_timestamp}
+    RETURN  ${erase_timestamp}
 
 
 Get SEL Elist Last Entry Date In Epoch
@@ -421,7 +421,7 @@ Get SEL Elist Last Entry Date In Epoch
     ${sel_entry_date}=  Fetch Added SEL Date  ${resp}
     ${epoch_date}=  Convert Date  ${sel_entry_date}  epoch  exclude_millis=yes  date_format=%m/%d/%Y %H:%M:%S
 
-    [Return]  ${epoch_date}
+    RETURN  ${epoch_date}
 
 
 Get BMC Time In Epoch
@@ -432,7 +432,7 @@ Get BMC Time In Epoch
 
     ${epoch_date}=  Convert Date  ${date}  epoch  exclude_millis=yes  date_format=%m/%d/%Y %H:%M:%S
 
-    [Return]   ${epoch_date}
+    RETURN   ${epoch_date}
 
 
 Install Tarball For Error Creation

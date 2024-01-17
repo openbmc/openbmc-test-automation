@@ -130,7 +130,7 @@ Get BMC OS Release Details
     ${os_release}=  Get BMC Release Info
     ${os_release}=  Convert To Dictionary  ${os_release}
 
-    [Return]  ${os_release}
+    RETURN  ${os_release}
 
 
 Get Device Info From BMC
@@ -144,4 +144,4 @@ Get Device Info From BMC
     ${info}=  Set Variable  ${data[0]}
     ${info}=  Evaluate  dict(${info})
 
-    [Return]  ${info}
+    RETURN  ${info}
