@@ -590,7 +590,7 @@ Generate CSR String
     ${output}=  Run  ${ssl_cmd} ${ssl_sub}
     ${csr}=  OperatingSystem.Get File  ${CSR_FILE}
 
-    [Return]  ${csr}
+    RETURN  ${csr}
 
 
 Send CSR To VMI And Get Signed
@@ -619,7 +619,7 @@ Send CSR To VMI And Get Signed
     ...  timeout=${read_timeout}  expected_status=any
     Log to console  ${resp.content}
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Get Root Certificate
@@ -669,7 +669,7 @@ Get Subject
     ...   ELSE
     ...     Run  openssl x509 -in ${file_name} -text -noout | grep Subject:
 
-    [Return]  ${subject}
+    RETURN  ${subject}
 
 
 Get Public Key
@@ -683,7 +683,7 @@ Get Public Key
     ${PublicKey}=  Run Keyword If  ${is_csr_file}  Run  openssl req -in ${file_name} -noout -pubkey
     ...   ELSE  Run  openssl x509 -in ${file_name} -noout -pubkey
 
-    [Return]  ${PublicKey}
+    RETURN  ${PublicKey}
 
 
 Get Certificate Signed By VMI

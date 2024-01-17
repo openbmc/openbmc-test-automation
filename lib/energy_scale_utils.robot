@@ -26,7 +26,7 @@ Get System Power Cap Limit
 
     ${power_limit_watts}=  Redfish.Get Attribute  ${power_cap_uri}   PowerLimitWatts
 
-    [return]  ${power_limit_watts}
+    RETURN  ${power_limit_watts}
 
 
 DCMI Power Get Limits
@@ -49,7 +49,7 @@ DCMI Power Get Limits
     ${output}=  Remove String  ${output}  milliseconds
     ${output}=  Remove String  ${output}  seconds
     &{limits}=  Key Value Outbuf To Dict  ${output}
-    [Return]  &{limits}
+    RETURN  &{limits}
 
 
 Get DCMI Power Limit
@@ -58,7 +58,7 @@ Get DCMI Power Limit
 
     &{limits}=  DCMI Power Get Limits
     ${power_setting}=  Get From Dictionary  ${limits}  power_limit
-    [Return]  ${power_setting}
+    RETURN  ${power_setting}
 
 
 Set DCMI Power Limit And Verify
@@ -114,7 +114,7 @@ Get DCMI Power Limit Via REST
     ...  watts setting using REST interface.
 
     ${power_limit}=  Read Attribute  ${CONTROL_HOST_URI}power_cap  PowerCap
-    [Return]  ${power_limit}
+    RETURN  ${power_limit}
 
 
 Set DCMI Power Limit Via REST
@@ -172,7 +172,7 @@ Get DCMI Power Activation Via REST
 
     ${power_activation_setting}=  Read Attribute
     ...  ${CONTROL_HOST_URI}power_cap  PowerCapEnable
-    [Return]  ${power_activation_setting}
+    RETURN  ${power_activation_setting}
 
 
 OCC Tool Upload Setup

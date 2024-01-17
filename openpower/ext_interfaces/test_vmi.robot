@@ -523,7 +523,7 @@ Get Immediate Child Parameter From VMI Network Interface
     ${value}=  Set Variable If  '${parameter}' != 'DHCPEnabled'   ${ip_resp["${parameter}"]}
     ...  ${ip_resp["DHCPv4"]["${parameter}"]}
 
-    [Return]  ${value}
+    RETURN  ${value}
 
 
 Switch VMI IPv4 Origin And Verify Details

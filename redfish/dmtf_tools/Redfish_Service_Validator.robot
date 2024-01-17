@@ -18,7 +18,7 @@ ${cmd_str_master}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}RedfishServiceValidator.
 ...                -p ${OPENBMC_PASSWORD} --logdir ${EXECDIR}${/}logs${/} --debugging
 ${branch_name}    main
 
-*** Test Case ***
+*** Test Cases ***
 
 Test BMC Redfish Using Redfish Service Validator
     [Documentation]  Check conformance with a Redfish service interface.

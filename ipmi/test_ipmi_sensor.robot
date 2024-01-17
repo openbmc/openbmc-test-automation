@@ -246,7 +246,7 @@ Get IPMI Sensor Reading
         Set To Dictionary  ${sensor_value_dict}  ${sensor_key}  ${sensor_value}
     END
 
-    [Return]  ${sensor_value_dict}
+    RETURN  ${sensor_value_dict}
 
 
 Get DCMI Sensor Reading
@@ -275,7 +275,7 @@ Get DCMI Sensor Reading
         ...  Set To Dictionary  ${sensor_value_dict}  ${sensor_key}  ${sensor_value}
     END
 
-    [Return]  ${sensor_value_dict}
+    RETURN  ${sensor_value_dict}
 
 
 Get Temperature Reading From Redfish
@@ -311,7 +311,7 @@ Get Temperature Reading From Redfish
         ...  Set To Dictionary  ${redfish_value_dict}  ${data}[DeviceName]  ${reading}
     END
 
-    [Return]  ${redfish_value_dict}
+    RETURN  ${redfish_value_dict}
 
 
 Verify Power Reading Using IPMI And Redfish
@@ -493,7 +493,7 @@ Get Available Sensors
     # Example of output for ${sensor_list}
     # ['dcm0_cpu0', 'dcm0_cpu1', 'dcm1_cpu0', 'dcm1_cpu1']
 
-    [RETURN]  ${sensor_list}
+    RETURN  ${sensor_list}
 
 
 Get Sensor Id For Sensor
@@ -519,5 +519,5 @@ Get Sensor Id For Sensor
 
     # Example of output for ${sensor_id} is 0x41.
 
-    [RETURN]  ${sensor_id}
+    RETURN  ${sensor_id}
 
