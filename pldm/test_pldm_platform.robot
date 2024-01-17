@@ -101,7 +101,7 @@ Verify GetPDR For Record Handle
     ...  ELSE  Fail  msg="Unknown PDR Type is received"
 
     Should be equal as strings  ${pldm_output['recordHandle']}  ${record_handle}
-    [Return]  ${pldm_output['nextRecordHandle']}
+    RETURN  ${pldm_output['nextRecordHandle']}
 
 Verify SetStateEffecterStates For Effecter States
     [Documentation]  Verify set state effecter states for given input effecter states.

@@ -121,7 +121,7 @@ Get Total Number Of PowerSupplies
     # {'@odata.id': '/redfish/v1/Chassis/chassis/PowerSubsystem/PowerSupplies/powersupply1'}
     # {'@odata.id': '/redfish/v1/Chassis/chassis/PowerSubsystem/PowerSupplies/powersupply2'}
     # {'@odata.id': '/redfish/v1/Chassis/chassis/PowerSubsystem/PowerSupplies/powersupply3'}
-    [Return]  ${total_num_powersupplies}
+    RETURN  ${total_num_powersupplies}
 
 
 Set and Verify Power Mode Switches

@@ -137,7 +137,7 @@ Set Timer For Power ON
     ${time_set}=  Evaluate  ${current_bmc_time[0]} + ${TIMER_POWER_ON}
     BMC Execute Command  ${CMD_SET_TPO_TIME} ${time_set}
 
-    [Return]  ${time_set}
+    RETURN  ${time_set}
 
 
 Get Time Power ON Value
@@ -148,4 +148,4 @@ Get Time Power ON Value
     ${return_value}=  Evaluate  ${return_value}[1]
 
     # BMC command returns integer value.
-    [Return]  ${return_value}
+    RETURN  ${return_value}

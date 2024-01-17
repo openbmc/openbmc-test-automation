@@ -449,7 +449,7 @@ Identify Request Data
     END
     ${fw_ver_hex}=  Evaluate  " ".join(${fw_ver_hex_list})
 
-    [Return]  ${fw_ver_hex}  ${hex_data_list}
+    RETURN  ${fw_ver_hex}  ${hex_data_list}
 
 
 Get System Info Set In Progress
@@ -460,7 +460,7 @@ Get System Info Set In Progress
     ...  ${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Get'][0]}
     ${resp}=  Split String  ${resp}
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Set System Info Set In Progress
@@ -482,7 +482,7 @@ Get System Firmware Version
     ...  ${IPMI_RAW_CMD['System_Info']['param1_System_Firmware_Version']['Get'][0]}
     ${resp}=  Split String  ${resp}
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Set System Firmware Version
@@ -503,7 +503,7 @@ Get System Name
     ...  ${IPMI_RAW_CMD['System_Info']['param2_System_Name']['Get'][0]}
     ${resp}=  Split String  ${resp}
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Set System Name
@@ -524,7 +524,7 @@ Get Primary OS Name
     ...  ${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Get'][0]}
     ${resp}=  Split String  ${resp}
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Set Primary OS Name
@@ -545,7 +545,7 @@ Get OS Name
     ...  ${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Get'][0]}
     ${resp}=  Split String  ${resp}
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Set OS Name
@@ -566,7 +566,7 @@ Get Present OS Version Number
     ...  ${IPMI_RAW_CMD['System_Info']['param5_Present_OS_Version_number']['Get'][0]}
     ${resp}=  Split String  ${resp}
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Set Present OS Version Number
@@ -591,7 +591,7 @@ Add Prefix To List Objects And Join String
     ${prefix_list}=  Prefix Bytes  ${list}
     ${prefix_list}=  Evaluate  " ".join(${prefix_list})
 
-    [Return]  ${prefix_list}
+    RETURN  ${prefix_list}
 
 
 Suite Setup Execution

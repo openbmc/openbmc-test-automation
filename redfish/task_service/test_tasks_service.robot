@@ -275,4 +275,4 @@ Get Current Date from BMC
     # Convert the date format to %m/%d/%Y %H:%M:%S
     ${date}=  Convert Date  ${date}  date_format=%b %d %H:%M:%S %Y  result_format=%m/%d/%Y %H:%M:%S  exclude_millis=True
 
-    [Return]   ${date}
+    RETURN   ${date}

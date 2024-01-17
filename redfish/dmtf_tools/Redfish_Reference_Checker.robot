@@ -20,7 +20,7 @@ ${command_string}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}RedfishReferenceTool.py
 
 ${branch_name}    main
 
-*** Test Case ***
+*** Test Cases ***
 
 Test BMC Redfish Reference
     [Documentation]  Checks for valid reference URLs in CSDL XML files.
