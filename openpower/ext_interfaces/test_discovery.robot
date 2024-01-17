@@ -138,7 +138,7 @@ Discover BMC With Service Type
     Print Timen  Exception message is ${exc_msg}
     Should Not Be Empty  ${bmc_list}
     Rprint Vars  bmc_list
-    [Return]  ${bmc_list}
+    RETURN  ${bmc_list}
 
 
 Verify Existence Of BMC Record From List

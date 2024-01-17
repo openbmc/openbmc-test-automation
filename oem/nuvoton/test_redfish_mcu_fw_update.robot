@@ -112,4 +112,4 @@ Get Image Id By Image Info
     [Documentation]  Get image ID from image_info.
     [Arguments]  ${image_info}
 
-    [Return]  ${image_info["image_id"]}
+    RETURN  ${image_info["image_id"]}

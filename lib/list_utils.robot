@@ -23,7 +23,7 @@ Smart Combine Lists
 
     ${new_list}=  Combine Lists  @{lists}
 
-    [Return]  ${new_list}
+    RETURN  ${new_list}
 
 
 Intersect Lists
@@ -51,7 +51,7 @@ Intersect Lists
 
     @{intersected_list}=  Remove Duplicates  ${intersected_list}
 
-    [Return]  @{intersected_list}
+    RETURN  @{intersected_list}
 
 
 Subtract Lists
@@ -71,4 +71,4 @@ Subtract Lists
         ...  Append To List  ${diff_list}  ${item}
     END
 
-    [Return]  ${diff_list}
+    RETURN  ${diff_list}

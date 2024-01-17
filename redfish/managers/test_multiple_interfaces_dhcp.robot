@@ -222,7 +222,7 @@ Get Network Configuration Using Channel Number
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
 
     @{network_configurations}=  Get From Dictionary  ${resp.dict}  IPv4StaticAddresses
-    [Return]  @{network_configurations}
+    RETURN  @{network_configurations}
 
 Suite Setup Execution
     [Documentation]  Do suite setup task.

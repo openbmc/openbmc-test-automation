@@ -106,7 +106,7 @@ Remote Logging Server Execute Command
     ...  &{remote_dict}
     ${stdout}  ${stderr}=  Execute Command  ${command}  return_stderr=True
     Should Be Empty  ${stderr}
-    [Return]  ${stdout}
+    RETURN  ${stdout}
 
 
 Get Remote Log Server Configured

@@ -12,14 +12,14 @@ Get PNOR Info
     ...  return_stderr=True
     Should Be Empty  ${stderr}
     Log  ${\n}version: ${version}  console=yes
-    [Return]  ${version}
+    RETURN  ${version}
 
 Get Inventory
     [Documentation]  Get system inventory.
     ${inventory}  ${stderr}=  Execute Command  lshw -short  return_stderr=True
     Should Be Empty  ${stderr}
     Log  ${\n}inventory: ${inventory}  console=yes
-    [Return]  ${inventory}
+    RETURN  ${inventory}
 
 Get Memory Count
     [Documentation]  Get Memory Count.
@@ -27,7 +27,7 @@ Get Memory Count
     ...  Execute Command  lshw -short | grep memory | wc -l  return_stderr=True
     Should Be Empty  ${stderr}
     Log  ${\n}memory count: ${memory_count}  console=yes
-    [Return]  ${memory_count}
+    RETURN  ${memory_count}
 
 Verify Memory Count
     [Documentation]  Verify memory count.
@@ -43,7 +43,7 @@ Get Dimm Count
     ...  return_stderr=True
     Should Be Empty  ${stderr}
     Log  ${\n}dimm_count: ${dimm_count}  console=yes
-    [Return]  ${dimm_count}
+    RETURN  ${dimm_count}
 
 Verify Dimm Count
     [Documentation]  Verify DIMM count.
