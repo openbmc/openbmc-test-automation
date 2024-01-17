@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11f3985c_c960f15f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2024-01-17T09:28:06Z",
+      "side": 1,
+      "message": "Please rebase.. I think CI failed for some reason",
+      "revId": "8ae96e66e010e3a209b864a3be267c98cd19c002",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
