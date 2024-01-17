@@ -287,7 +287,7 @@ Get PNOR Extended Version
 
     ${version}= BMC Execute Command
     ...  grep extended_version= ${manifest_path}
-    [return] ${version.split(",")}
+    RETURN   ${version.split(",")}
 
 
 Code Update Test Teardown

@@ -59,7 +59,7 @@ Send Network Packets
     ${rc}  ${output}  Run And Return RC And Output  ${cmd_buff}
     Should Be Equal As Integers  ${rc}  0  msg=Command execution failed.
     ${packet_loss}  Get Packet Loss  ${host}  ${output}
-    [Return]  ${packet_loss}
+    RETURN  ${packet_loss}
 
 Get Packet Loss
     [Documentation]  Check packet loss percentage.
@@ -84,4 +84,4 @@ Get Packet Loss
 
     ${summary}=  Get Lines Containing String  ${traffic_details}  Rcvd:
     Log To Console  \nPacket loss summary on ${host}\n*********************
-    [Return]  ${summary}
+    RETURN  ${summary}

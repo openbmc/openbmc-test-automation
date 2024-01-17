@@ -241,4 +241,4 @@ Establish TCP Connections And Get Connection Failures
 
     ${cmd_buf}=  Set Variable  --delay ${delay} ${target_host} -c ${num} --${packet_type} -p ${http_port}
     ${nping_result}=  Nping  ${cmd_buf}
-    [Return]   ${nping_result['percent_failed']}
+    RETURN   ${nping_result['percent_failed']}

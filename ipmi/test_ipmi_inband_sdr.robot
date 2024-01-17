@@ -359,7 +359,7 @@ Get IPMI Sensor Count
     ${output}=  Run IPMI Standard Command  sdr elist all
     ${sensor_list}=  Split String  ${output}  \n
     ${sensor_count}=  Get Length  ${sensor_list}
-    [Return]  ${sensor_count}
+    RETURN  ${sensor_count}
 
 
 Get Device SDR Info For Sensor Data
@@ -369,7 +369,7 @@ Get Device SDR Info For Sensor Data
     ${sensor_data}=  Run Inband IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get_Info'][0]}
 
-    [Return]  ${sensor_data}
+    RETURN  ${sensor_data}
 
 
 Get Device SDR Info For SDR Data
@@ -379,7 +379,7 @@ Get Device SDR Info For SDR Data
     ${SDR_data}=  Run Inband IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get_Info'][1]}
 
-    [Return]  ${SDR_data}
+    RETURN  ${SDR_data}
 
 
 Get Sensor Count From SDR Info
@@ -393,7 +393,7 @@ Get Sensor Count From SDR Info
     ${sensor_count}=  Set Variable  ${sensor_data[0]}
     ${sensor_count}=  Convert To Integer  ${sensor_count}  16
 
-    [Return]  ${sensor_count}
+    RETURN  ${sensor_count}
 
 
 Get SDR Count From SDR Info
@@ -407,7 +407,7 @@ Get SDR Count From SDR Info
     ${SDR_count}=  Set Variable  ${SDR_data[0]}
     ${SDR_count}=  Convert To Integer  ${SDR_count}  16
 
-    [Return]  ${SDR_count}
+    RETURN  ${SDR_count}
 
 
 Get Device SDR Timestamp
@@ -434,7 +434,7 @@ Get Device SDR Timestamp
     ${timestamp}=  Zfill Data  ${timestamp}  8
     ${timestamp}=  Convert To Integer  ${timestamp}  16
 
-    [Return]  ${timestamp}
+    RETURN  ${timestamp}
 
 
 Get Count for Sensor And SDR Elist All
@@ -445,7 +445,7 @@ Get Count for Sensor And SDR Elist All
     # Get SDR elist all via IPMI lanplus.
     ${SDR_count}=  Get IPMI Sensor Count
 
-    [Return]  ${sensor_count}  ${SDR_count}
+    RETURN  ${sensor_count}  ${SDR_count}
 
 
 Get Reserve Device SDR Repository
@@ -455,7 +455,7 @@ Get Reserve Device SDR Repository
     ${resp}=  Run Inband IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Reserve_Repository'][0]}
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Get IPMI SDR Status Info
@@ -483,7 +483,7 @@ Get IPMI SDR Status Info
     ...  case-insensitive
     ${setting_status}=  Fetch From Right  ${setting_line}  :${SPACE}
 
-    [Return]  ${setting_status}
+    RETURN  ${setting_status}
 
 
 Get Record Count And Last Record From SDR
@@ -497,7 +497,7 @@ Get Record Count And Last Record From SDR
     # Then Last record ID will be 57 (in decimal) - 39h.
     ${last_record}=  Evaluate  ${record_count} - 1
 
-    [Return]  ${record_count}  ${last_record}
+    RETURN  ${record_count}  ${last_record}
 
 
 Suite Setup Execution
