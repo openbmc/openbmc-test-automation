@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b53f474d_706b2d87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2024-01-17T17:49:05Z",
+      "side": 1,
+      "message": "docker run -it openbmc/ubuntu-robot-qemu /bin/bash\nfspcibld@12cb82427b10:/$ robot --version\nRobot Framework 7.0 (Python 3.10.12 on linux)\n\nwe run into problem with the upstream HW CI test job with latest where the test ran ok but seems to hit problem with plugins in Jenkins\n\nERROR: Build step failed with exception\njava.lang.NullPointerException\n\nwe have to hold it for while this one.",
+      "revId": "0f9bbd764f4ef8340c46fb2fb0e55fd52c9e0fee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
