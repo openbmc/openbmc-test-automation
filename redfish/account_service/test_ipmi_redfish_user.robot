@@ -285,7 +285,7 @@ IPMI Create Random User Plus Password And Privilege
     Run Keyword If  '${privilege}' != '0'
     ...  Set Channel Access  ${random_userid}  ipmi=on privilege=${privilege}
 
-    [Return]  ${random_username}  ${random_userid}
+    RETURN  ${random_username}  ${random_userid}
 
 
 Delete Users Via Redfish
@@ -336,4 +336,4 @@ Find Free User Id
         Exit For Loop If  ${is_empty} == ${True}
     END
     Run Keyword If  '${jj}' == '299'  Fail  msg=A free user ID could not be found.
-    [Return]  ${random_userid}
+    RETURN  ${random_userid}

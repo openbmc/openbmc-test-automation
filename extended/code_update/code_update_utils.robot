@@ -104,7 +104,7 @@ Retry SCP
     ...  ls -lh ${targ_file_path}
     ${status}=  Run Keyword And Return Status
     ...  Should Contain  ${file_size}  32.0M  msg=Incomplete file transfer.
-    [return]  ${status}
+    RETURN  ${status}
 
 
 Check If File Exist
