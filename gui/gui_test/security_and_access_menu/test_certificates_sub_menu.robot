@@ -142,7 +142,7 @@ Generate Certificate File Data
     ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
     ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
 
-    [return]  ${file_data}
+    RETURN  ${file_data}
 
 
 Test Setup Execution

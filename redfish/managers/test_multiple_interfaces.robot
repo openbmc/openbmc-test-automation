@@ -195,7 +195,7 @@ Get Network Configuration Using Channel Number
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
 
     @{network_configurations}=  Get From Dictionary  ${resp.dict}  IPv4StaticAddresses
-    [Return]  @{network_configurations}
+    RETURN  @{network_configurations}
 
 
 Suite Setup Execution
@@ -255,7 +255,7 @@ Run IPMI
 
     ${rc}  ${output}=  Run And Return Rc And Output  ${cmd_prefix} -H ${host} ${sub_cmd}
     Should Be Equal As Strings  ${rc}  0
-    [Return]  ${output}
+    RETURN  ${output}
 
 
 Install Certificate Via Redfish And Verify
@@ -293,4 +293,4 @@ Install Certificate Via Redfish And Verify
     ${bmc_cert_content}=  Run Keyword If  '${expected_status}' == 'ok'  redfish_utils.Get Attribute
     ...  ${certificate_uri}/${cert_id}  CertificateString
     Run Keyword If  '${expected_status}' == 'ok'  Should Contain  ${cert_file_content}  ${bmc_cert_content}
-    [Return]  ${cert_id}
+    RETURN  ${cert_id}

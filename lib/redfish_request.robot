@@ -28,7 +28,7 @@ Redfish Generic Login Request
     ${resp}=  Request_Login  headers=None  url=${uri}  credential=${data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_CREATED}
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Redfish Generic Session Request
@@ -53,4 +53,4 @@ Redfish Generic Session Request
     Set Global Variable  ${active_session_info}  ${session_dict}
     Append To List  ${session_dict_list}  ${session_dict}
 
-    [Return]  ${session_dict}
+    RETURN  ${session_dict}

@@ -65,7 +65,7 @@ Get Operating System
     ...     Set Variable  windows
     ...   ELSE
     ...     Run  uname
-    [Return]  ${op_system}
+    RETURN  ${op_system}
 
 Launch Header Browser
     [Documentation]  Open the browser with the URL and
@@ -93,7 +93,7 @@ Launch Headless Browser
     ${browser_ID}=  Open Browser  ${URL}
     Set Window Size  1920  1080
 
-    [Return]  ${browser_ID}
+    RETURN  ${browser_ID}
 
 Login OpenBMC GUI
     [Documentation]  Perform login to open BMC GUI.
@@ -228,7 +228,7 @@ Open Browser With URL
     ...  Launch Headless Browser  ${URL}  ${browser}
     ...  ELSE  Open Browser  ${URL}  ${browser}
 
-    [Return]  ${browser_ID}
+    RETURN  ${browser_ID}
 
 
 Controller Server Power Click Button

@@ -193,7 +193,7 @@ Get IPv6 Network Configuration
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
     @{ipv6_network_configurations}=  Get From Dictionary  ${resp.dict}  IPv6StaticAddresses
-    [Return]  @{ipv6_network_configurations}
+    RETURN  @{ipv6_network_configurations}
 
 
 Verify IPv6 And PrefixLength

@@ -358,7 +358,7 @@ Create Redfish Session With ClientID
     Set To Dictionary  ${session_info}  SessionIDs  ${session['Id']}
     Set To Dictionary  ${session_info}  ClientID  ${session["Context"]}
 
-    [Return]  ${session_info}
+    RETURN  ${session_info}
 
 
 RW General Dictionary
@@ -378,7 +378,7 @@ RW General Dictionary
 
     Set To Dictionary  ${request_dict}  ResourceID  ${res_id}
 
-    [Return]  ${request_dict}
+    RETURN  ${request_dict}
 
 
 Return Description Of Response
@@ -395,7 +395,7 @@ Return Description Of Response
 
     ${message}=  Evaluate  json.loads('''${resp_text}''')  json
 
-    [Return]  ${message}
+    RETURN  ${message}
 
 
 Verify Redfish Session Deleted
@@ -469,7 +469,7 @@ Redfish Post Acquire Lock
     ...  ELSE
     ...    Run Keyword And Return  Return Description Of Response  ${resp.content}
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Redfish Post Acquire List Lock
@@ -492,7 +492,7 @@ Redfish Post Acquire List Lock
     ...  ELSE
     ...    Run Keyword And Return  Return Description Of Response  ${resp.content}
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Redfish Post Acquire Invalid Lock
@@ -512,7 +512,7 @@ Redfish Post Acquire Invalid Lock
     Run Keyword If  '${message}' != '${EMPTY}'
     ...  Valid Value  message  ['${resp.content}']
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Redfish Post Acquire Invalid Lock With Invalid Data Type Of Resource ID
@@ -530,7 +530,7 @@ Redfish Post Acquire Invalid Lock With Invalid Data Type Of Resource ID
     ...  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${lock_dict_param}
     Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Form Data To Acquire Lock
@@ -547,7 +547,7 @@ Form Data To Acquire Lock
     ${temp_list}=  Create List  ${resp}
     ${lock_request_dict}=  Create Dictionary  Request=${temp_list}
 
-    [Return]  ${lock_request_dict}
+    RETURN  ${lock_request_dict}
 
 
 Create Data To Acquire List Of Lock
@@ -569,7 +569,7 @@ Create Data To Acquire List Of Lock
 
     ${lock_request_dict}=  Create Dictionary  Request=${temp_list}
 
-    [Return]  ${lock_request_dict}
+    RETURN  ${lock_request_dict}
 
 
 Form Data To Acquire Invalid Lock With Invalid Data Type Of Resource ID
@@ -586,7 +586,7 @@ Form Data To Acquire Invalid Lock With Invalid Data Type Of Resource ID
     ${temp_list}=  Create List  ${resp}
     ${lock_request_dict}=  Create Dictionary  Request=${temp_list}
 
-    [Return]  ${lock_request_dict}
+    RETURN  ${lock_request_dict}
 
 
 Form Data To Acquire Invalid Lock
@@ -603,7 +603,7 @@ Form Data To Acquire Invalid Lock
     ${temp_list}=  Create List  ${resp}
     ${lock_request_dict}=  Create Dictionary  Request=${temp_list}
 
-    [Return]  ${lock_request_dict}
+    RETURN  ${lock_request_dict}
 
 
 Get Locks List On Resource
@@ -619,7 +619,7 @@ Get Locks List On Resource
     ...  data=${data}
     ${locks}=  Evaluate  json.loads('''${resp.text}''')  json
 
-    [Return]  ${locks["Records"]}
+    RETURN  ${locks["Records"]}
 
 
 Verify Lock On Resource
@@ -694,7 +694,7 @@ Form Data To Release Lock
       Append To List  ${tran_ids}  ${item['TransactionID']}
     END
 
-    [Return]  ${tran_ids}
+    RETURN  ${tran_ids}
 
 
 Release Locks On Resource
@@ -1237,7 +1237,7 @@ Create List Of Session ID
 
     ${session_id_list}=  Evaluate  json.dumps(${session_id_list})  json
 
-    [Return]  ${session_id_list}
+    RETURN  ${session_id_list}
 
 
 Get Locks List On Resource With Session List
@@ -1253,7 +1253,7 @@ Get Locks List On Resource With Session List
     Should Be Equal As Strings  ${resp.status_code}  ${exp_status_code}
     ${locks}=  Evaluate  json.loads('''${resp.text}''')  json
 
-    [Return]  ${locks}
+    RETURN  ${locks}
 
 
 Verify List Of Session Lock On Resource

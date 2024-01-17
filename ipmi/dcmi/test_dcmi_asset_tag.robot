@@ -104,7 +104,7 @@ Set Valid Asset Tag
     Set Test Variable  ${random_string}
     Set Test Variable  ${number_of_bytes_to_write}
 
-    [Return]  ${ret}
+    RETURN  ${ret}
 
 Get Raw Asset Tag
     [Documentation]  Get asset tag command in raw command.
@@ -112,7 +112,7 @@ Get Raw Asset Tag
     ${cmd}=  Catenate  ${DCMI_RAW_CMD['DCMI']['Asset_Tag'][0]} 0x${number_of_bytes_to_write}
     ${ret}=  Run IPMI Command  ${cmd}
 
-    [Return]  ${ret}
+    RETURN  ${ret}
 
 Validate Asset Tag Via Raw Command
     [Documentation]  Validate asset tag via raw cmd.
@@ -136,4 +136,4 @@ Get Response Length In Hex
     ...  '${length_1}' != '1'  ${length}
     ${ret}=  Convert To Lower Case  ${length_2}
 
-    [Return]  ${ret}
+    RETURN  ${ret}
