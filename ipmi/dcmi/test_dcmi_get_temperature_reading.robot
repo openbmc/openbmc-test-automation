@@ -197,4 +197,4 @@ Get IPMI Sensor Reading
 
     ${ret}=  Run External IPMI Standard Command  sensor | grep -i "${sensor_name}"
 
-    [Return]  ${ret}
+    RETURN  ${ret}

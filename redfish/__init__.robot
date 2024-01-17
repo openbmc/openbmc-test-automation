@@ -5,7 +5,7 @@ Resource         ../lib/common_utils.robot
 
 Suite Setup      Get System Environment
 
-*** Keyword ***
+*** Keywords ***
 
 Get System Environment
     [Documentation]  System environment details.

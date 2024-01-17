@@ -32,7 +32,7 @@ Get Test Dir and Name
     ${suite_name}=     Catenate  SEPARATOR=    ${FFDC_TIME}_   ${suite_name}
     ${test_name}=      Get strip string   ${TEST_NAME}
     ${test_name}=   Catenate  SEPARATOR=  ${FFDC_TIME}_   ${test_name}
-    [Return]  ${suite_name}   ${test_name}
+    RETURN  ${suite_name}   ${test_name}
 
 
 Create FFDC Directory
@@ -58,7 +58,7 @@ Get Current Time Stamp
     [Documentation]     Get the current time stamp data
     ${cur_time}=    Get Current Date   result_format=%Y-%m-%d %H:%M:%S:%f
     ${cur_time}=    Get strip string   ${cur_time}
-    [Return]   ${cur_time}
+    RETURN  ${cur_time}
 
 
 Header Message
@@ -100,7 +100,7 @@ Header Message
     END
 
     Write Data To File  ${MSG_DETAIL}
-    [Return]  ${ffdc_file_list}
+    RETURN  ${ffdc_file_list}
 
 
 Write Cmd Output to FFDC File

@@ -55,7 +55,7 @@ Run SLP Command
     ${rc}  ${output}=  Run And Return Rc And Output
     ...   slptool -u ${OPENBMC_HOST} ${cmd} ${param}
     Should Be Equal As Integers  ${rc}  0
-    [Return]  ${output}
+    RETURN  ${output}
 
 Verify Service Types
     [Documentation]  Verifies the output of service types.

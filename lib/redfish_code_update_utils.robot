@@ -38,7 +38,7 @@ Get Software Functional State
     ...   '${image_info["Description"]}' == 'BMC image' or '${image_info["Description"]}' == 'BMC update'
     ...   Run Keyword And Return  Find Active Software Image  ${image_id}
 
-    [Return]  ${functional}
+    RETURN  ${functional}
 
 
 Find Active Software Image
@@ -61,7 +61,7 @@ Find Active Software Image
     ...  Should Be Equal As Strings  ${image_id}  ${active_id}
 
     # Returns True if matched else False.
-    [Return]  ${matched_functional}
+    RETURN  ${matched_functional}
 
 
 Get Software Inventory State
@@ -111,7 +111,7 @@ Get Software Inventory State
         Set To Dictionary  ${sw_inv_dict}  ${uri_path.split("/")[-1]}  ${tmp_dict}
     END
 
-    [Return]  &{sw_inv_dict}
+    RETURN  &{sw_inv_dict}
 
 
 Get Software Inventory State By Version
@@ -140,7 +140,7 @@ Get Software Inventory State By Version
     Return From Keyword If  ${num_records} == ${0}  ${EMPTY}
 
     # Return the first list entry.
-    [Return]  ${software_inventory}[0]
+    RETURN  ${software_inventory}[0]
 
 
 Get BMC Functional Firmware
@@ -149,7 +149,7 @@ Get BMC Functional Firmware
     ${sw_inv}=  Get Functional Firmware  BMC update
     ${sw_inv}=  Get Non Functional Firmware  ${sw_inv}  True
 
-    [Return]  ${sw_inv}
+    RETURN  ${sw_inv}
 
 
 Get Functional Firmware
@@ -162,7 +162,7 @@ Get Functional Firmware
     ${software_inventory}=  Get Software Inventory State
     ${bmc_inv}=  Get BMC Firmware  ${image_type}  ${software_inventory}
 
-    [Return]  ${bmc_inv}
+    RETURN  ${bmc_inv}
 
 
 Get Non Functional Firmware
@@ -181,7 +181,7 @@ Get Non Functional Firmware
 
     ${list_inv_dict}=  Get Dictionary Values  ${resp}
 
-    [Return]  ${list_inv_dict}[0]
+    RETURN  ${list_inv_dict}[0]
 
 
 Get Non Functional Firmware List
@@ -199,7 +199,7 @@ Get Non Functional Firmware List
       ...  Append To List  ${list_inv}  ${sw_inv['${key}']}
     END
 
-    [Return]  ${list_inv}
+    RETURN  ${list_inv}
 
 
 Get Redfish Update Service URI
@@ -209,7 +209,7 @@ Get Redfish Update Service URI
 
     Log To Console  Firmware update URI: ${update_url}
 
-    [Return]  ${update_url}
+    RETURN  ${update_url}
 
 
 Redfish Upload Image And Check Progress State
@@ -248,7 +248,7 @@ Get Host Power State
     ...  ${REDFISH_BASE_URI}Systems/${SYSTEM_ID}  PowerState
     Rqprint Vars  state
 
-    [Return]  ${state}
+    RETURN  ${state}
 
 
 Check Host Power State
@@ -283,7 +283,7 @@ Get System Firmware Details
     ...  ${sys_firmware_dict}  FirmwareVersion  ${firmware_version}  BiosVersion  ${bios_version}
     Rprint Vars  sys_firmware_dict
 
-    [Return]  &{sys_firmware_dict}
+    RETURN  &{sys_firmware_dict}
 
 
 Switch Backup Firmware Image To Functional
@@ -315,7 +315,7 @@ Create List Of Task
       Append To List  ${task_list}  ${task_dict['@odata.id']}
     END
 
-    [Return]  ${task_list}
+    RETURN  ${task_list}
 
 
 Create Initiated Task State Dict
@@ -338,7 +338,7 @@ Create Initiated Task State Dict
     Set To Dictionary  ${task_inv}  TaskState  ${task_obj['TaskState']}
     Set To Dictionary  ${task_inv}  TaskStatus  ${task_obj['TaskStatus']}
 
-    [Return]  ${task_inv}
+    RETURN  ${task_inv}
 
 
 Get Task Inventory
@@ -358,7 +358,7 @@ Get Task Inventory
 
     ${task_inv}=  Create Initiated Task State Dict  ${task_payload}
 
-    [Return]  ${task_inv}
+    RETURN  ${task_inv}
 
 
 Match Target URI
@@ -390,7 +390,7 @@ Check Task With Match TargetUri
 
     ${task_inv}=  Match Target URI  ${task_list}  ${target_uri}
 
-    [Return]  ${task_inv}
+    RETURN  ${task_inv}
 
 
 Verify Task Progress State

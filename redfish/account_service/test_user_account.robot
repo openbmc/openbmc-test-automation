@@ -622,7 +622,7 @@ Verify Redfish User Login
     Run Keyword And Ignore Error  Redfish.Logout
 
     ${status}=  Run Keyword And Return Status  Redfish.Login  ${username}  ${password}
-    [Return]  ${status}
+    RETURN  ${status}
 
 
 Redfish Create And Verify User

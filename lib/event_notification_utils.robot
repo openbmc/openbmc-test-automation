@@ -23,7 +23,7 @@ Get Event Subscription IDs
         Append To List  ${subscription_ids}
         ...  ${subscription['@odata.id'].split("/redfish/v1/EventService/Subscriptions/")[-1]}
     END
-    [Return]  ${subscription_ids}
+    RETURN  ${subscription_ids}
 
 Get Destination IPs Of Event Subscriptions
     [Documentation]  Get all subscribed server IPs as a list from event subscriptions.
