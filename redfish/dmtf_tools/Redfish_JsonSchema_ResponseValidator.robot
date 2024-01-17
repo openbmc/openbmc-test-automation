@@ -16,7 +16,7 @@ ${command_string}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}Redfish-JsonSchema-Respo
 
 ${branch_name}    main
 
-*** Test Case ***
+*** Test Cases ***
 
 Test BMC Redfish Using Redfish JsonSchema ResponseValidator
     [Documentation]  Check OpenBMC conformance with JsonSchema files at the DMTF site.

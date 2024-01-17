@@ -697,7 +697,7 @@ Get LDAP Configuration
     # ldap_type  The LDAP type ("ActiveDirectory" or "LDAP").
 
     ${ldap_config}=  Redfish.Get Properties  ${REDFISH_BASE_URI}AccountService
-    [Return]  ${ldap_config["${ldap_type}"]}
+    RETURN  ${ldap_config["${ldap_type}"]}
 
 
 Update LDAP Configuration with LDAP User Role And Group
@@ -725,7 +725,7 @@ Get LDAP Privilege
     ${num_list_entries}=  Get Length  ${ldap_config["RemoteRoleMapping"]}
     Return From Keyword If  ${num_list_entries} == ${0}  @{EMPTY}
 
-    [Return]  ${ldap_config["RemoteRoleMapping"][0]["LocalRole"]}
+    RETURN  ${ldap_config["RemoteRoleMapping"][0]["LocalRole"]}
 
 
 Restore LDAP Privilege

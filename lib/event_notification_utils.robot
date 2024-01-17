@@ -23,7 +23,7 @@ Get Event Subscription IDs
         Append To List  ${subscription_ids}
         ...  ${subscription['@odata.id'].split("/redfish/v1/EventService/Subscriptions/")[-1]}
     END
-    [Return]  ${subscription_ids}
+    RETURN  ${subscription_ids}
 
 Get Destination IPs Of Event Subscriptions
     [Documentation]  Get all subscribed server IPs as a list from event subscriptions.
@@ -37,7 +37,7 @@ Get Destination IPs Of Event Subscriptions
         ${dest_ip}=  Get Regexp Matches  ${destination}  .*://(.*):.*  1
         ${server_ips}=  Combine Lists  ${server_ips}  ${dest_ip}
     END
-    [Return]  ${server_ips}
+    RETURN  ${server_ips}
 
 Delete Event Subscription Of Unpingable Destination IPs
     [Documentation]  Delete event subscription with non-pinging destination IPs.
