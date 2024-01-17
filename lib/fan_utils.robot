@@ -23,7 +23,7 @@ Is Water Cooled
 
     ${water_cooled}=  Read Attribute
     ...  ${HOST_INVENTORY_URI}system/chassis  WaterCooled
-    [Return]  ${water_cooled}
+    RETURN  ${water_cooled}
 
 
 Get Fan Names
@@ -47,7 +47,7 @@ Get Fan Names
         Append To List  ${fan_names}  ${fan_name}
     END
 
-    [Return]  ${fan_names}
+    RETURN  ${fan_names}
 
 
 Verify System Error Indication Due To Fans
@@ -114,7 +114,7 @@ Get Target Speed Of Fans
         ${max_target}=  Run Keyword If  ${target_speed} > ${max_target}
         ...  Set Variable  ${target_speed}  ELSE  Set Variable  ${max_target}
     END
-    [Return]  ${max_target}
+    RETURN  ${max_target}
 
 
 Get Target And Blade Speeds
@@ -139,7 +139,7 @@ Get Target And Blade Speeds
     ${response}=  OpenBMC Get Request  ${path}
     ${fan_counterclockwise_speed}=  Set Variable  ${response.json()["data"]["Value"]}
 
-    [Return]  ${target_speed}  ${fan_clockwise_speed}
+    RETURN  ${target_speed}  ${fan_clockwise_speed}
     ...  ${fan_counterclockwise_speed}
 
 
@@ -157,7 +157,7 @@ Get Fan Target And Speed
     ...  ${clockwise_speed} > ${counterclockwise_speed}
     ...  Set Variable  ${clockwise_speed}  ELSE
     ...  Set Variable  ${counterclockwise_speed}
-    [Return]  ${target_speed}  ${blade_speed}
+    RETURN  ${target_speed}  ${blade_speed}
 
 
 Set Fan Daemon State
@@ -235,7 +235,7 @@ Get Fan Count And Names
 
     ${number_of_fans}=  Get Length  ${fan_names}
 
-    [Return]  ${number_of_fans}  ${fan_names}
+    RETURN  ${number_of_fans}  ${fan_names}
 
 
 

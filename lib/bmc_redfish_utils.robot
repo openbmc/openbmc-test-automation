@@ -159,7 +159,7 @@ Get Session With Client Id
         ...    Append To List  ${client_id_sessions}  ${session}
     END
 
-    [Return]  ${client_id_sessions}
+    RETURN  ${client_id_sessions}
 
 
 Get Valid FRUs
@@ -175,7 +175,7 @@ Get Valid FRUs
     ...  /redfish/v1/Systems/system/${fru_type}  return_json=0
     ${fru_records}=  Filter Struct  ${fru_records}  [('State', 'Enabled'), ('Health', 'OK')]
 
-    [Return]  ${fru_records}
+    RETURN  ${fru_records}
 
 
 Get Num Valid FRUs
@@ -188,7 +188,7 @@ Get Num Valid FRUs
     ${fru_records}=  Get Valid FRUs  ${fru_type}
     ${num_valid_frus}=  Get length  ${fru_records}
 
-    [Return]  ${num_valid_frus}
+    RETURN  ${num_valid_frus}
 
 
 Verify Valid Records
@@ -227,7 +227,7 @@ Verify Valid Records
     ...  [('Health', '^OK$'), ('State', '^Enabled$'), ('${reading_type}', '')]  regex=1  invert=1
     Valid Length  invalid_records  max_length=0
 
-    [Return]  ${records}
+    RETURN  ${records}
 
 
 Redfish Create User
@@ -271,7 +271,7 @@ Get User Role
     ${role_config}=  Redfish_Utils.Get Attribute
     ...  ${REDFISH_ACCOUNTS_URI}${user_name}  RoleId
 
-    [Return]  ${role_config}
+    RETURN  ${role_config}
 
 
 Create Users With Different Roles
@@ -367,4 +367,4 @@ Get BMC Last Reset Time
 
     ${last_reset_time}=  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  LastResetTime
 
-    [Return]  ${last_reset_time}
+    RETURN  ${last_reset_time}
