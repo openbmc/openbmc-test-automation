@@ -54,7 +54,7 @@ Get Component URIs
     ${component_uris}=  Get Matches  ${uri_list}
     ...  regexp=^.*[0-9a-z_].${component_name}\[_0-9a-z]*$
     ...  case_insensitive=${True}
-    [Return]  ${component_uris}
+    RETURN  ${component_uris}
 
 
 Get SDR Presence Via IPMI
@@ -89,7 +89,7 @@ Get SDR Presence Via IPMI
 
     ${presence_ipmi}=  Fetch From Right  ${sdr_component_line}  |
     ${presence_ipmi}=  Strip String  ${presence_ipmi}
-    [Return]  ${presence_ipmi}
+    RETURN  ${presence_ipmi}
 
 
 Get SDR Record ID
@@ -98,7 +98,7 @@ Get SDR Record ID
     ${resp}=  Run External IPMI Standard Command  sdr elist
     ${record_id}=  Get Regexp Matches  ${resp}  \\|\\s+([0-9]+)h\\s+\\|  1
 
-    [Return]  ${record_id[0]}
+    RETURN  ${record_id[0]}
 
 
 Suite Setup Execution

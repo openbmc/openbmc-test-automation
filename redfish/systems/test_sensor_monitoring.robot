@@ -137,7 +137,7 @@ Get Sensors Name List From Redfish
         Append To List  ${sensor_name_list}  ${sensor_info['MemberId']}
     END
 
-    [Return]  ${sensor_name_list}
+    RETURN  ${sensor_name_list}
 
 
 Check Sensor Status And Reading Via Sensor Name
