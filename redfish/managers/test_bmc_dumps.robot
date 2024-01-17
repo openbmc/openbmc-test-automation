@@ -500,7 +500,7 @@ Download BMC Dump
     Create Binary File  BMC_dump.tar.gz  ${ret.content}
     ${downloaded_dump_size}=  Get File Size  BMC_dump.tar.gz
     Should Be Equal  ${downloaded_dump_size}  ${redfish_bmc_dump_size}
-    [Return]  BMC_dump.tar.gz
+    RETURN  BMC_dump.tar.gz
 
 
 Extract BMC Dump
@@ -530,7 +530,7 @@ Extract BMC Dump
     ${cnt}=  Get length  ${bmc_extraction_folders}
     should be equal as numbers  ${cnt}  1
 
-    [Return]  ${bmc_extraction_folders}[0]
+    RETURN  ${bmc_extraction_folders}[0]
 
 
 Get BMC Dump Entries
@@ -544,7 +544,7 @@ Get BMC Dump Entries
       Append To List  ${dump_ids}  ${dump_id}
     END
 
-    [Return]  ${dump_ids}
+    RETURN  ${dump_ids}
 
 
 Is BMC Dump Available
@@ -569,7 +569,7 @@ Get Disk Usage For Dumps
     ${usage_output}=  Fetch From Left  ${usage_output}  /
     ${usage_output}=  Convert To Integer  ${usage_output}
 
-    [return]  ${usage_output}
+    RETURN  ${usage_output}
 
 
 Test Teardown Execution
