@@ -382,7 +382,7 @@ Get SOL Setting
     ${sol_info_dict}=  Get SOL Info
     ${setting_status}=  Get From Dictionary  ${sol_info_dict}  ${setting}
 
-    [Return]  ${setting_status}
+    RETURN  ${setting_status}
 
 
 Restore Default SOL Configuration

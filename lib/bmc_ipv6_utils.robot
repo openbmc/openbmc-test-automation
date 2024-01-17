@@ -37,7 +37,7 @@ Get BMC IPv6 Info
       Append To List  ${ipv6_data}  ${ip_n_prefix}
     END
 
-    [Return]  ${ipv6_data}
+    RETURN  ${ipv6_data}
 
 
 Verify IPv6 On BMC
@@ -86,4 +86,4 @@ Get BMC IPv6 Route Info
     ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command
     ...  /sbin/ip -6 route
 
-    [Return]  ${cmd_output}
+    RETURN  ${cmd_output}

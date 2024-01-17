@@ -167,7 +167,7 @@ Run IPMI Command Returned
     [Documentation]  Run the IPMI command and return the output.
     [Arguments]    ${args}
     ${output_1}=    Execute Command   /tmp/ipmitool -I dbus raw ${args}
-    [Return]    ${output_1}
+    RETURN    ${output_1}
 
 
 Check IPMI OEMpartialadd Reject
@@ -176,7 +176,7 @@ Check IPMI OEMpartialadd Reject
     Login To OS Host  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
     ${stdout}  ${stderr}  ${output_2}=  Execute Command  ipmitool raw ${args}
     ...        return_stdout=True  return_stderr=True  return_rc=True
-    [Return]  ${stderr}
+    RETURN  ${stderr}
 
 
 Test Setup Execution
@@ -213,7 +213,7 @@ Check IPMI OEMpartialadd Accept
     ${stdout}  ${stderr}  ${output_3}=  Execute Command  ipmitool raw ${args}
     ...         return_stdout=True  return_stderr=True  return_rc=True
     Should Be Equal  ${output_3}  ${0}  msg=${stderr}
-    [Return]  ${stderr}
+    RETURN  ${stderr}
 
 
 Event Log Should Exist

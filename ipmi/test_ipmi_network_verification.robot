@@ -317,7 +317,7 @@ Get Physical Network Interface Count
     ${mac_unique_list}=  Remove Duplicates  ${mac_entry_list}
     ${physical_interface_count}=  Get Length  ${mac_unique_list}
 
-    [Return]  ${physical_interface_count}
+    RETURN  ${physical_interface_count}
 
 
 Verify Channel Info
