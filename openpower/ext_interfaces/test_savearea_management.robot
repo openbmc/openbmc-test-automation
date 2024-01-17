@@ -411,7 +411,7 @@ Return Description Of Response
     Return From Keyword If  '${status}' == 'False'  ${resp_text}
     ${message}=  Evaluate  json.loads('''${resp_text}''')  json
 
-    [Return]  ${message["Description"]}
+    RETURN  ${message["Description"]}
 
 
 Upload Partition File To BMC
@@ -631,7 +631,7 @@ Add Content To Files
        Set To Dictionary  ${content_dict}  ${conf_file}  ${content-${index}}
     END
 
-    [Return]  &{content_dict}
+    RETURN  &{content_dict}
 
 
 Redfish Read Partition File
@@ -747,7 +747,7 @@ Create File Names
     FOR  ${count}  IN RANGE  ${range}
       Append To List  ${file_name_list}  1KB-file${count}
     END
-    [Return]  ${file_name_list}
+    RETURN  ${file_name_list}
 
 
 Redfish Upload Partition File With Range

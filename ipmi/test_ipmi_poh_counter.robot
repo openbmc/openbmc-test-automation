@@ -143,7 +143,7 @@ Run Get POH Command And Return Counter Reading
     ${poh_counter_reading}=  Evaluate  "".join(${poh_counter_reading})
     ${poh_counter_reading}=  Convert To Integer  ${poh_counter_reading}  16
 
-    [Return]  ${poh_counter_reading}
+    RETURN  ${poh_counter_reading}
 
 
 Suite Setup Execution
