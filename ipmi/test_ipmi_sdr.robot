@@ -246,7 +246,7 @@ Get Reservation ID
     ...  ELSE
     ...  Return From Keyword  ${reservation_id}
 
-    [Return]  ${reservation_id}
+    RETURN  ${reservation_id}
 
 
 Get Sensor Count
@@ -275,7 +275,7 @@ Get Sensor Count
     ${output}=  Run IPMI Standard Command  sdr elist all
     ${sensor_list}=  Split String  ${output}  \n
     ${sensor_count}=  Get Length  ${sensor_list}
-    [Return]  ${sensor_count}
+    RETURN  ${sensor_count}
 
 
 Get Component URIs
@@ -298,7 +298,7 @@ Get Component URIs
     ${component_uris}=  Get Matches  ${uri_list}
     ...  regexp=^.*[0-9a-z_].${component_name}\[_0-9a-z]*$
     ...  case_insensitive=${True}
-    [Return]  ${component_uris}
+    RETURN  ${component_uris}
 
 
 Get SDR Presence Via IPMI
@@ -333,7 +333,7 @@ Get SDR Presence Via IPMI
 
     ${presence_ipmi}=  Fetch From Right  ${sdr_component_line}  |
     ${presence_ipmi}=  Strip String  ${presence_ipmi}
-    [Return]  ${presence_ipmi}
+    RETURN  ${presence_ipmi}
 
 
 Verify SDR
@@ -394,7 +394,7 @@ Fetch IPMI Command Support Status
 
     ${cmd_support}=  Set Variable If  ${resp_code_match} != []  no  yes
 
-    [Return]  ${cmd_support}
+    RETURN  ${cmd_support}
 
 
 Get SDR Record ID
@@ -403,7 +403,7 @@ Get SDR Record ID
     ${resp}=  Run IPMI Standard Command  sdr elist
     ${record_id}=  Get Regexp Matches  ${resp}  \\|\\s+([0-9]+)h\\s+\\|  1
 
-    [Return]  ${record_id[0]}
+    RETURN  ${record_id[0]}
 
 
 Suite Setup Execution

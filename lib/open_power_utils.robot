@@ -28,7 +28,7 @@ Get OCC Objects
 
     ${occ_list}=  Get Endpoint Paths  ${OPENPOWER_CONTROL}  occ*
 
-    [Return]  ${occ_list}
+    RETURN  ${occ_list}
 
 
 Get OCC Active State
@@ -47,7 +47,7 @@ Get OCC Active State
     # The command returns format  'b true'
     Return From Keyword If  '${cmd_output.split(' ')[-1]}' == 'true'  ${1}
 
-    [Return]  ${0}
+    RETURN  ${0}
 
 
 Count Object Entries
@@ -62,7 +62,7 @@ Count Object Entries
     ${object_list}=  Get Endpoint Paths
     ...  ${object_base_uri_path}  ${object_name}
     ${list_count}=  Get Length  ${object_list}
-    [Return]  ${list_count}
+    RETURN  ${list_count}
 
 
 Read Object Attribute
@@ -77,7 +77,7 @@ Read Object Attribute
     ${resp}=  OpenBMC Get Request
     ...  ${object_base_uri_path}/attr/${attribute_name}  quiet=${1}
     Return From Keyword If  ${resp.status_code} != ${HTTP_OK}
-    [Return]  ${resp.json()["data"]}
+    RETURN  ${resp.json()["data"]}
 
 
 Get Functional Processor Count
@@ -92,7 +92,7 @@ Get Functional Processor Count
        ${functional_cpu_count} =  Evaluate   ${functional_cpu_count} + 1
     END
 
-    [Return]  ${functional_cpu_count}
+    RETURN  ${functional_cpu_count}
 
 
 Get Active OCC State Count
@@ -113,7 +113,7 @@ Get Active OCC State Count
        ${active_occ_count} =  Evaluate   ${active_occ_count} + 1
     END
 
-    [Return]  ${active_occ_count}
+    RETURN  ${active_occ_count}
 
 
 Match OCC And CPU State Count
@@ -194,7 +194,7 @@ Get Sensors Aggregation Data
     FOR  ${entry}  IN  @{resp}
        Append To List  ${power_sensors_value_list}  ${entry[1]}
     END
-    [Return]  ${power_sensors_value_list}
+    RETURN  ${power_sensors_value_list}
 
 
 Get Sensors Aggregation URL List
@@ -235,7 +235,7 @@ Get Sensors Aggregation URL List
         Run Keyword If  'maximum' in '${entry}'  Append To List  ${power_supply_max_list}  ${entry}
     END
 
-    [Return]  ${power_supply_avg_list}  ${power_supply_max_list}
+    RETURN  ${power_supply_avg_list}  ${power_supply_max_list}
 
 
 REST Verify No Gard Records
@@ -342,7 +342,7 @@ Get Sensors Dbus Tree List
     # [xyz.openbmc_project.VirtualSensor]:
     #    [0]:     /xyz/openbmc_project/sensors/temperature/Ambient_Virtual_Temp
 
-    [Return]  ${sensors_dbus_tree_dict}
+    RETURN  ${sensors_dbus_tree_dict}
 
 
 Get Populated Sensors Dbus List
@@ -364,7 +364,7 @@ Get Populated Sensors Dbus List
         END
     END
 
-    [Return]  ${valid_dbus_list}
+    RETURN  ${valid_dbus_list}
 
 
 Verify Runtime Sensors Dbus List
@@ -430,7 +430,7 @@ Get Fan JSON Data
     Should Be True  ${rc} == 0  msg=No Fan control config JSON file is generated.
     ${fan_json}=  Evaluate  json.loads('''${json_string}''')  json
 
-    [return]  ${fan_json}
+    RETURN  ${fan_json}
 
 
 Get Fan Attribute Value
@@ -460,4 +460,4 @@ Get Fan Attribute Value
 
     Should Not Be Empty  ${value_list}  msg=${key_value} key attribute not found.
 
-    [Return]  ${value_list[0]}
+    RETURN  ${value_list[0]}

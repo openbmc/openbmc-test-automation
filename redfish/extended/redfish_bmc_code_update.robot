@@ -226,7 +226,7 @@ Get Image Priority
     # Convert from dict to list.
     ${software_info}=  Get Dictionary Values  ${software_info}
 
-    [Return]  ${software_info[0]['Priority']}
+    RETURN  ${software_info[0]['Priority']}
 
 
 Set BMC Image Priority To Least

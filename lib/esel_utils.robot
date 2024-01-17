@@ -37,7 +37,7 @@ Count eSEL Entries
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
     ${count}=  Get Length  ${resp.json()["data"]}
-    [Return]  ${count}
+    RETURN  ${count}
 
 
 Verify eSEL Entries

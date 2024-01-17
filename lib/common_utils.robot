@@ -100,7 +100,7 @@ Get BMC System Model
     ...  test_mode=0
     Should Be Empty  ${stderr}
     Should Not Be Empty  ${bmc_model}  msg=BMC model is empty.
-    [Return]  ${bmc_model}
+    RETURN  ${bmc_model}
 
 
 Verify BMC System Model
@@ -114,7 +114,7 @@ Verify BMC System Model
     ${tmp_bmc_model}=  Fetch From Left  ${tmp_bmc_model}  .
     ${ret}=  Run Keyword And Return Status  Should Contain  ${bmc_model}
     ...  ${tmp_bmc_model}  ignore_case=True
-    [Return]  ${ret}
+    RETURN  ${ret}
 
 
 Wait For Host To Ping
@@ -274,7 +274,7 @@ Check If warmReset is Initiated
     ${alive}=   Run Keyword and Return Status
     ...    Open Connection And Log In
     Return From Keyword If   '${alive}' == '${False}'    ${False}
-    [Return]    ${True}
+    RETURN    ${True}
 
 
 Initialize DBUS cmd
@@ -307,7 +307,7 @@ Create OS Console Command String
     ${cmd}=  Catenate  ${ssh_pw_file_path} ${OPENBMC_PASSWORD} -p ${HOST_SOL_PORT}
     ...  -o "StrictHostKeyChecking no" ${OPENBMC_USERNAME}@${OPENBMC_HOST} ${OPENBMC_CONSOLE_CLIENT}
 
-    [Return]  ${cmd.strip()}
+    RETURN  ${cmd.strip()}
 
 
 Get SOL Console Pid
@@ -382,7 +382,7 @@ Stop SOL Console Logging
     ...  Cmd Fnc  cat ${log_file_path} 2>/dev/null  quiet=${loc_quiet}
     ...  print_output=${0}  show_err=${0}
 
-    [Return]  ${output}
+    RETURN  ${output}
 
 
 Start SOL Console Logging
@@ -423,13 +423,13 @@ Start SOL Console Logging
     Wait Until Keyword Succeeds  10 seconds  0 seconds
     ...   Get SOL Console Pid  ${1}  ${log_file_path}
 
-    [Return]  ${log_output}
+    RETURN  ${log_output}
 
 
 Get Time Stamp
     [Documentation]     Get the current time stamp data
     ${cur_time}=    Get Current Date   result_format=%Y%m%d%H%M%S%f
-    [Return]   ${cur_time}
+    RETURN   ${cur_time}
 
 
 Start Journal Log
@@ -484,7 +484,7 @@ Stop Journal Log
 
     Execute Command    rm ${file_path}-${LOG_TIME}
 
-    [Return]    ${journal_log}
+    RETURN    ${journal_log}
 
 
 Mac Address To Hex String
@@ -501,7 +501,7 @@ Mac Address To Hex String
     # i_macaddress   The MAC address.
 
     ${mac_hex}=  Catenate  0x${i_macaddress.replace(':', ' 0x')}
-    [Return]    ${mac_hex}
+    RETURN    ${mac_hex}
 
 
 IP Address To Hex String
@@ -524,7 +524,7 @@ IP Address To Hex String
     END
     ${ip_hex}=  Catenate    @{ip}
 
-    [Return]    ${ip_hex}
+    RETURN    ${ip_hex}
 
 
 BMC CPU Performance Check
@@ -615,7 +615,7 @@ Get URL List
     ${url_list}=  Read Properties  ${openbmc_url}list  quiet=${1}
     Sort List  ${url_list}
 
-    [Return]  ${url_list}
+    RETURN  ${url_list}
 
 
 Check Zombie Process
@@ -656,7 +656,7 @@ Get System Power Policy
     # Run the appropriate keyword.
     ${currentPolicy}=  Run Keyword  @{cmd_buf}
 
-    [Return]  ${currentPolicy}
+    RETURN  ${currentPolicy}
 
 
 Set BMC Reset Reference Time
@@ -681,7 +681,7 @@ Get BMC Boot Time
     ...  return_stderr=True
     Should Be Empty  ${stderr}
     ${btime}=  Convert To Integer  ${output}
-    [Return]  ${btime}
+    RETURN  ${btime}
 
 
 Enable Core Dump On BMC
@@ -696,7 +696,7 @@ Get Number Of BMC Core Dump Files
     Open Connection And Log In
     ${num_of_core_dump}=  Execute Command
     ...  ls /tmp/core* 2>/dev/null | wc -l
-    [Return]  ${num_of_core_dump}
+    RETURN  ${num_of_core_dump}
 
 
 Set Core Dump File Size Unlimited
@@ -774,7 +774,7 @@ Get BMC Boot Count
     ...  AND
     ...  Set Global Variable  ${BOOT_COUNT}  ${BOOT_COUNT + 1}
 
-    [Return]  ${BOOT_COUNT}
+    RETURN  ${BOOT_COUNT}
 
 
 Set BMC Boot Count
@@ -820,14 +820,14 @@ Get BMC Version
 
     ${cmd}=  Set Variable  grep ^VERSION_ID= /etc/os-release | cut -f 2 -d '='
     ${output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
-    [Return]  ${output}
+    RETURN  ${output}
 
 
 Get PNOR Version
     [Documentation]  Returns the PNOR version from the BMC.
 
     ${pnor_attrs}=  Get PNOR Attributes
-    [Return]  ${pnor_attrs['version']}
+    RETURN  ${pnor_attrs['version']}
 
 
 Get PNOR Attributes
@@ -840,7 +840,7 @@ Get PNOR Attributes
     ...  cat /var/lib/phosphor-software-manager/pnor/ro/pnor.toc
     ${pnor_attrs}=  Key Value Outbuf To Dict  ${outbuf}  delim==
 
-    [Return]  ${pnor_attrs}
+    RETURN  ${pnor_attrs}
 
 
 GET BMC PNOR Version
@@ -853,20 +853,20 @@ GET BMC PNOR Version
     Log  ${pnor_version}
     Rprint Vars  pnor_version
 
-    [Return]  ${bmc_version}  ${pnor_version}
+    RETURN  ${bmc_version}  ${pnor_version}
 
 
 Redfish Get BMC Version
     [Documentation]  Get BMC version via Redfish.
 
     ${output}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  FirmwareVersion
-    [Return]  ${output}
+    RETURN  ${output}
 
 Redfish Get Host Version
     [Documentation]  Get host version via Redfish.
 
     ${output}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}Systems/system  BiosVersion
-    [Return]  ${output}
+    RETURN  ${output}
 
 
 Copy Address Translation Utils To HOST OS
@@ -967,7 +967,7 @@ Get Service Attribute
     ${cmd}=  Set Variable
     ...  systemctl -p ${option} show ${servicename} | cut -d = -f2
     ${attr}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
-    [Return]  ${attr}
+    RETURN  ${attr}
 
 
 Verify Watchdog Enabled
@@ -1015,7 +1015,7 @@ Kernel Panic BMC Reset Operation
     ${kernel_panic_cmd_file}=  Set Variable  /bin/sh -c "echo c > /proc/sysrq-trigger"
     ${status}=  Run Keyword And Return Status  BMC Execute Command  ${kernel_panic_cmd_file}  time_out=20
 
-    [Return]  ${status}
+    RETURN  ${status}
 
 
 Get Property Value Of Systemd Service In BMC
@@ -1032,4 +1032,4 @@ Get Property Value Of Systemd Service In BMC
     ${stdout}  ${stderr}  ${rc}=  BMC Execute Command
     ...  systemctl show --property ${property_name} --value ${service_name}
 
-    [Return]  ${stdout}
+    RETURN  ${stdout}

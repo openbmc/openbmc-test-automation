@@ -81,7 +81,7 @@ Get BMC IP Info
       Append To List  ${ip_data}  ${ip_n_prefix}
     END
 
-    [Return]  ${ip_data}
+    RETURN  ${ip_data}
 
 Get BMC Route Info
     [Documentation]  Get system route info.
@@ -95,7 +95,7 @@ Get BMC Route Info
     ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command
     ...  /sbin/ip route
 
-    [Return]  ${cmd_output}
+    RETURN  ${cmd_output}
 
 # TODO: openbmc/openbmc-test-automation#1331
 Get BMC MAC Address
@@ -117,7 +117,7 @@ Get BMC MAC Address
 
     @{words}=  Split String  ${cmd_output}
 
-    [Return]  ${words[1]}
+    RETURN  ${words[1]}
 
 
 Get BMC MAC Address List
@@ -141,7 +141,7 @@ Get BMC MAC Address List
       Append To List  ${mac_list}  ${words[1]}
     END
 
-    [Return]  ${mac_list}
+    RETURN  ${mac_list}
 
 Get BMC Hostname
     [Documentation]  Get BMC hostname.
@@ -151,7 +151,7 @@ Get BMC Hostname
 
     ${output}  ${stderr}  ${rc}=  BMC Execute Command  hostname
 
-    [Return]  ${output}
+    RETURN  ${output}
 
 Get FW_Env MAC Address
     [Documentation]  Get FW_Env MAC address.
@@ -173,7 +173,7 @@ Get FW_Env MAC Address
 
     @{words}=  Split String  ${cmd_output}  =
 
-    [Return]  ${words[1]}
+    RETURN  ${words[1]}
 
 
 Get List Of IP Address Via REST
@@ -195,7 +195,7 @@ Get List Of IP Address Via REST
       Append To List  ${ip_list}  ${ip_addr}
     END
 
-    [Return]  @{ip_list}
+    RETURN  @{ip_list}
 
 Delete IP And Object
     [Documentation]  Delete IP and object.
@@ -321,7 +321,7 @@ Truncate MAC Address
 
     END
     ${user_new_mac_string}=   Evaluate  ":".join(${user_new_mac_list})
-    [Return]  ${user_new_mac_string}
+    RETURN  ${user_new_mac_string}
 
 Truncate MAC Bits
     [Documentation]  Truncates user provided MAC address byte to bits.
@@ -333,7 +333,7 @@ Truncate MAC Bits
     ${user_mac_addr_int}=   Convert To List  ${user_mac_addr_byte}
     ${user_mac_addr_byte}=  Get Slice From List  ${user_mac_addr_int}  0  2
     ${user_mac_addr_byte_string}=  Evaluate  "".join(${user_mac_addr_byte})
-    [Return]  ${user_mac_addr_byte_string}
+    RETURN  ${user_mac_addr_byte_string}
 
 
 Run Build Net
@@ -402,7 +402,7 @@ Get BMC DNS Info
     ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command
     ...  cat /etc/resolv.conf
 
-    [Return]  ${cmd_output}
+    RETURN  ${cmd_output}
 
 
 CLI Get Nameservers
@@ -416,7 +416,7 @@ CLI Get Nameservers
     ...  egrep nameserver /etc/resolv.conf | cut -f2- -d ' '
     ${nameservers}=  Split String  ${stdout}
 
-    [Return]  ${nameservers}
+    RETURN  ${nameservers}
 
 CLI Get and Verify Name Servers
     [Documentation]    Get and Verify the nameserver IPs from /etc/resolv.conf and compare with redfish nameserver.
@@ -474,7 +474,7 @@ Get Network Configuration
     ...  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${network_active_channel}']['name']}
 
     @{network_configurations}=  Get From Dictionary  ${resp.dict}  IPv4StaticAddresses
-    [Return]  @{network_configurations}
+    RETURN  @{network_configurations}
 
 
 Add IP Address
@@ -674,7 +674,7 @@ Get BMC Default Gateway
     #   [3]:   dev
     #   [4]:   eth1
 
-    [Return]  ${default_gw[2]}
+    RETURN  ${default_gw[2]}
 
 
 Validate Hostname On BMC
@@ -697,7 +697,7 @@ Get Channel Number For All Interface
 
     ${valid_channel_number_interface_names}=  Convert To Dictionary  ${valid_channel_number_interface_names}
 
-    [Return]  ${valid_channel_number_interface_names}
+    RETURN  ${valid_channel_number_interface_names}
 
 Get Valid Channel Number
     [Documentation]  Get Valid Channel Number.
@@ -713,7 +713,7 @@ Get Valid Channel Number
       ...  Set To Dictionary  ${valid_channel_number_interface_name}  ${key}  ${values}
     END
 
-    [Return]  ${valid_channel_number_interface_name}
+    RETURN  ${valid_channel_number_interface_name}
 
 Get Invalid Channel Number List
     [Documentation]  Get Invalid Channel and return as list.
@@ -727,7 +727,7 @@ Get Invalid Channel Number List
        ...  Append To List  ${invalid_channel_number_list}  ${channel_number}
     END
 
-    [Return]  ${invalid_channel_number_list}
+    RETURN  ${invalid_channel_number_list}
 
 
 Get Channel Number For Valid Ethernet Interface
@@ -746,7 +746,7 @@ Get Channel Number For Valid Ethernet Interface
       ...  Append To List  ${channel_number_list}  ${channel_number}
     END
 
-    [Return]  ${channel_number_list}
+    RETURN  ${channel_number_list}
 
 
 Get Current Channel Name List
@@ -762,7 +762,7 @@ Get Current Channel Name List
         ...  Run Keyword  Append To List  ${channel_list}  ${channel_number}
     END
 
-    [Return]  ${channel_list}
+    RETURN  ${channel_list}
 
 
 Get Active Ethernet Channel List
@@ -780,7 +780,7 @@ Get Active Ethernet Channel List
     ${channel_number_list}=  Get Current Channel Name List
     ...  ${channel_number_list}  ${valid_channel_number_interface_names}
 
-    [Return]  ${channel_number_list}
+    RETURN  ${channel_number_list}
 
 Update IP Address
     [Documentation]  Update and verify IP address of BMC.

@@ -154,7 +154,7 @@ Create A Non Admin Session With ClientID
       Append To List  ${session_list}  ${resp}
     END
 
-    [Return]  ${session_list}
+    RETURN  ${session_list}
 
 
 Verify A Non Admin Session Created With ClientID
