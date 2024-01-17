@@ -23,7 +23,7 @@ ${cmd_str_master}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}RedfishInteropValidator.
 ...                --debugging
 ${branch_name}     main
 
-*** Test Case ***
+*** Test Cases ***
 
 Test BMC Redfish Using Redfish Interop Validator
     [Documentation]  Check conformance based on the OpenBMC Interoperability profile.

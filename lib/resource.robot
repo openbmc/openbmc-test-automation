@@ -184,14 +184,14 @@ ${TASK_JSON_FILE_PATH}   data/task_state.json
 Get Inventory Schema
     [Documentation]  Get inventory schema.
     [Arguments]    ${machine}
-    [Return]    &{INVENTORY}[${machine}]
+    RETURN    &{INVENTORY}[${machine}]
 
 Get Inventory Items Schema
     [Documentation]  Get inventory items schema.
     [Arguments]    ${machine}
-    [Return]    &{INVENTORY_ITEMS}[${machine}]
+    RETURN    &{INVENTORY_ITEMS}[${machine}]
 
 Get Sensor Schema
     [Documentation]  Get sensors schema.
     [Arguments]    ${machine}
-    [Return]    &{SENSORS}[${machine}]
+    RETURN    &{SENSORS}[${machine}]

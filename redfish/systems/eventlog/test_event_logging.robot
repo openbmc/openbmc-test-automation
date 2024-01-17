@@ -444,7 +444,7 @@ Get Redfish Error Entries
       Append To List  ${error_ids}  ${error_id}
     END
 
-    [Return]  ${error_ids}
+    RETURN  ${error_ids}
 
 
 Event Log Should Not Exist

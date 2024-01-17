@@ -111,4 +111,4 @@ Host Ping
     ${cmd}=  Catenate  ping -c 4 ${host_ip}
     ${output}=  Run  ${cmd}
 
-    [Return]  ${output}
+    RETURN  ${output}

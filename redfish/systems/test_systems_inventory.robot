@@ -175,7 +175,7 @@ Get CPU TotalCores
 
     ${total_cores}=  Redfish.Get Attribute  ${processor}  TotalCores
     Return From Keyword If  ${total_cores} is ${NONE}  ${0}
-    [Return]  ${total_cores}
+    RETURN  ${total_cores}
 
 
 GPU State Check
@@ -212,7 +212,7 @@ Get Inventory URIs
     ${power_supplies}=  Redfish.Get Attribute
     ...  ${REDFISH_CHASSIS_URI}${CHASSIS_ID}/Power  PowerSupplies
 
-    [Return]  ${cpu_info}  ${gpu_info}  ${power_supplies}
+    RETURN  ${cpu_info}  ${gpu_info}  ${power_supplies}
 
 
 Verify FRU Inventory Minimums

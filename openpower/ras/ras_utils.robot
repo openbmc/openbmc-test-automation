@@ -150,7 +150,7 @@ Fetch FIR Address Translation Value
     ${translated_fir_addr}=  FIR Address Translation Through HOST
     ...  ${fir_address}  ${core_id}  ${target_type}
 
-    [Return]  ${translated_fir_addr}
+    RETURN  ${translated_fir_addr}
 
 RAS Test SetUp
     [Documentation]  Validates input parameters.
