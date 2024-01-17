@@ -451,7 +451,7 @@ Get SEL Time Command
     ${get_sel_time}=  Run IPMI Command
     ...  ${IPMI_RAW_CMD['SEL_entry']['Get_SEL_Time'][0]}
 
-    [Return]    ${get_sel_time}
+    RETURN    ${get_sel_time}
 
 
 Set SEL Time Entry Via Raw Command
@@ -492,14 +492,14 @@ Verify SEL Added
     ${sel_entry}=  Get Lines Containing String  ${get_sel_entry}  ${event_type}
     Should Contain  ${sel_entry}  ${event_dir}  msg=Add SEL Entry failed.
 
-    [Return]  ${sel_entry}
+    RETURN  ${sel_entry}
 
 
 Check Current Date Time Via IPMI
     [Documentation]  Verify Current Date and Time Via IPMI user command.
 
     ${resp}=  Run IPMI Standard Command  sel time get
-    [Return]  ${resp}
+    RETURN  ${resp}
 
 
 Get Specific Sel Date
@@ -516,7 +516,7 @@ Get Specific Sel Date
     ${date}=  Add Time To Date
     ...  ${current_date}  ${days}d  result_format=%m/%d/%Y %H:%M:%S  date_format=%m/%d/%Y %H:%M:%S
 
-    [Return]   ${date}
+    RETURN   ${date}
 
 
 Converting Date to HexaDecimal
@@ -541,7 +541,7 @@ Converting Date to HexaDecimal
     Reverse List  ${date}
     ${date}=  Evaluate  " ".join(${date})
 
-    [Return]  ${date}
+    RETURN  ${date}
 
 
 Get Time Difference
@@ -557,7 +557,7 @@ Get Time Difference
 
     ${diff}=  Evaluate  int(${epoch_date1}) - int(${epoch_date2})
 
-    [Return]  ${diff}
+    RETURN  ${diff}
 
 
 Identify SEL Time
@@ -586,7 +586,7 @@ Identify SEL Time
     #Set SEL Time.
     ${quoted_date}=  Fetch Date  ${datetime}
 
-    [Return]  ${quoted_date}  ${datetime}
+    RETURN  ${quoted_date}  ${datetime}
 
 
 Set SEL Time Via IPMI

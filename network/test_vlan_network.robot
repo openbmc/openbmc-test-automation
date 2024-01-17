@@ -335,7 +335,7 @@ Get VLAN IDs
     ...  /sbin/ip addr | grep @eth0 | cut -f1 -d@ | cut -f2 -d.
     ${vlan_ids}=  Split String  ${vlan_ids}
 
-    [Return]  @{vlan_ids}
+    RETURN  @{vlan_ids}
 
 
 Get VLAN URI For IP
@@ -362,7 +362,7 @@ Get VLAN URI For IP
     ${uris}=  Get Dictionary Keys  ${vlan_record}
     Return From Keyword If  @{uris} == @{EMPTY}
 
-    [Return]  ${uris[${0}]}
+    RETURN  ${uris[${0}]}
 
 
 Verify Existence Of VLAN

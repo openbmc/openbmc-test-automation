@@ -5,7 +5,7 @@ Resource           resource.robot
 Library            OperatingSystem
 Library            Collections
 
-*** Variable ***
+*** Variables ***
 
 ${BUSCTL_TREE_COMMAND}                   busctl tree | less
 ${BUSCTL_INTROSPECT_COMMAND}             busctl introspect
@@ -45,7 +45,7 @@ Get DBUS URI List From BMC
         Append To List  ${dbus_uri_list}  ${dbus_uri}
     END
 
-    [Return]  ${dbus_uri_list[1:]}
+    RETURN  ${dbus_uri_list[1:]}
 
 
 Fetch DBUS URI List Without Unicode
@@ -65,7 +65,7 @@ Fetch DBUS URI List Without Unicode
         Append To List  ${dbus_list}  ${item}
     END
 
-    [Return]  ${dbus_list}
+    RETURN  ${dbus_list}
 
 
 Execute DBUS Introspect Command
@@ -80,4 +80,4 @@ Execute DBUS Introspect Command
     ${cmd}=  Catenate  ${BUSCTL_INTROSPECT_COMMAND} ${dbus_command}
     ${resp}=  BMC Execute Command  ${cmd}
 
-    [Return]  ${resp[0]}
+    RETURN  ${resp[0]}

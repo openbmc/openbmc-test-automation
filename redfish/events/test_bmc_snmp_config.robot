@@ -210,7 +210,7 @@ Create Error On BMC And Verify If Trap Is Sent
     Should Match Regexp  ${SNMP_TRAP}[4]  SNMPv2-SMI::enterprises.49871.1.0.1.3 = INTEGER: \[0-9]
     Should Be Equal  ${SNMP_TRAP}[5]  SNMPv2-SMI::enterprises.49871.1.0.1.4 = STRING: "${expected_error}"
 
-    [Return]  ${SNMP_TRAP}
+    RETURN  ${SNMP_TRAP}
 
 
 Generate Error And Verify System Up Time
@@ -247,4 +247,4 @@ Generate Error And Verify System Up Time
 
     Should Be Equal As Integers  ${bmc_uptime_in_minutes}  ${sysuptime_in_minutes}
 
-    [Return]  ${sysuptime_in_minutes}
+    RETURN  ${sysuptime_in_minutes}

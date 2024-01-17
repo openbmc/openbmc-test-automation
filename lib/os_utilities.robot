@@ -98,7 +98,7 @@ Is HTX Running
     ${running}=  Set Variable If
     ...  "Currently running" in """${status}"""  ${True}  ${False}
 
-    [Return]  ${running}
+    RETURN  ${running}
 
 
 Write Log Data To File
@@ -176,7 +176,7 @@ Get CPU Min Frequency Limit
 
     ${cmd}=  Catenate  lscpu | grep min  | tr -dc '0-9.\n'
     ${cpu_freq}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
-    [Return]  ${cpu_freq}
+    RETURN  ${cpu_freq}
 
 
 Get CPU Min Frequency
@@ -190,7 +190,7 @@ Get CPU Min Frequency
     ${cmd}=  Catenate  ppc64_cpu --frequency -t 10 | grep min
     ...  | cut -f 2 | cut -d ' ' -f 1 | tr -dc '0-9\n'
     ${cpu_freq}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
-    [Return]  ${cpu_freq}
+    RETURN  ${cpu_freq}
 
 
 Get CPU Max Frequency Limit
@@ -201,7 +201,7 @@ Get CPU Max Frequency Limit
 
     ${cmd}=  Catenate  lscpu | grep max  | tr -dc '0-9.\n'
     ${cpu_freq}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
-    [Return]  ${cpu_freq}
+    RETURN  ${cpu_freq}
 
 
 Get CPU Max Frequency
@@ -215,7 +215,7 @@ Get CPU Max Frequency
     ${cmd}=  Catenate  ppc64_cpu --frequency -t 10 | grep max
     ...  | cut -f 2 | cut -d ' ' -f 1 | tr -dc '0-9\n'
     ${cpu_freq}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
-    [Return]  ${cpu_freq}
+    RETURN  ${cpu_freq}
 
 
 Get CPU Max Temperature
@@ -232,7 +232,7 @@ Get CPU Max Temperature
     ...  [ x['Value'] for x in $cpu_temperatuture_objs.values() ]
 
     ${cpu_max_temp}  Evaluate  int(max(map(int, $cpu_temperatures))/1000)
-    [Return]  ${cpu_max_temp}
+    RETURN  ${cpu_max_temp}
 
 
 Get CPU Min Temperature
@@ -249,7 +249,7 @@ Get CPU Min Temperature
     ...  [ x['Value'] for x in $cpu_temperatuture_objs.values() ]
 
     ${cpu_min_temp}  Evaluate  int(min(map(int, $cpu_temperatures))/1000)
-    [Return]  ${cpu_min_temp}
+    RETURN  ${cpu_min_temp}
 
 
 Check For Errors On OS Dmesg Log
@@ -323,7 +323,7 @@ Get GPU Power Limit
     # Allow for sensor overshoot.  That is, max power reported for
     # a GPU could be a few watts above the limit.
     ${power_max}=  Evaluate  ${nvidia_out}+${7.00}
-    [Return]  ${power_max}
+    RETURN  ${power_max}
 
 
 Get GPU Max Power
@@ -339,7 +339,7 @@ Get GPU Max Power
     ${cmd}=  Catenate  nvidia-smi --query-gpu=power.draw
     ...  --format=csv | cut -f 1 -d ' ' | sort -n -u | tail -n 1
     ${nvidia_out}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
-    [Return]  ${nvidia_out}
+    RETURN  ${nvidia_out}
 
 
 Get GPU Min Power
@@ -349,7 +349,7 @@ Get GPU Min Power
     ${cmd}=  Catenate  nvidia-smi --query-gpu=power.draw --format=csv |
     ...  grep -v 'power.draw' | cut -f 1 -d ' ' | sort -n -u | head -1
     ${gpu_min_power}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
-    [Return]  ${gpu_min_power}
+    RETURN  ${gpu_min_power}
 
 
 Get GPU Temperature Limit
@@ -364,7 +364,7 @@ Get GPU Temperature Limit
     ${cmd}=  Catenate  nvidia-smi -q -d TEMPERATURE  | grep "GPU Max"
     ...  | cut -f 2 -d ":" |  tr -dc '0-9\n' | sort -n -u | tail -n 1
     ${nvidia_out}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
-    [Return]  ${nvidia_out}
+    RETURN  ${nvidia_out}
 
 
 Get GPU Min Temperature
@@ -373,7 +373,7 @@ Get GPU Min Temperature
     ${cmd}=  Catenate  nvidia-smi --query-gpu=temperature.gpu
     ...  --format=csv | grep -v 'temperature.gpu' | sort -n -u | head -1
     ${nvidia_out}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
-    [Return]  ${nvidia_out}
+    RETURN  ${nvidia_out}
 
 
 Get GPU Max Temperature
@@ -388,7 +388,7 @@ Get GPU Max Temperature
     ${cmd}=  Catenate  nvidia-smi --query-gpu=temperature.gpu
     ...  --format=csv | sort -n -u | tail -n 1
     ${nvidia_out}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
-    [Return]  ${nvidia_out}
+    RETURN  ${nvidia_out}
 
 
 Get GPU Temperature Via REST
@@ -412,7 +412,7 @@ Get GPU Temperature Via REST
     ${max_gpu_temperature}=  Evaluate
     ...  int(max(map(int, $gpu_temperatures))/1000)
 
-    [Return]  ${max_gpu_temperature}
+    RETURN  ${max_gpu_temperature}
 
 
 Get GPU Clock Limit
@@ -427,7 +427,7 @@ Get GPU Clock Limit
     ${cmd}=  Catenate  nvidia-smi --query-gpu=clocks.max.gr
     ...  --format=csv | cut -f 1 -d ' ' |  sort -n -u | tail -n 1
     ${nvidia_out}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
-    [Return]  ${nvidia_out}
+    RETURN  ${nvidia_out}
 
 
 Get GPU Clock
@@ -442,7 +442,7 @@ Get GPU Clock
     ${cmd}=  Catenate  nvidia-smi --query-gpu=clocks.gr
     ...  --format=csv | cut -f 1 -d ' ' | sort -n -u | tail -n 1
     ${nvidia_out}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
-    [Return]  ${nvidia_out}
+    RETURN  ${nvidia_out}
 
 
 Count GPUs From BMC
@@ -469,7 +469,7 @@ Count GPUs From BMC
       ${num_bmc_gpus}=  Run Keyword If  ${present} and ${state}
       ...  Evaluate  ${num_bmc_gpus}+${1}
     END
-    [Return]  ${num_bmc_gpus}
+    RETURN  ${num_bmc_gpus}
 
 
 Create Default MDT Profile
@@ -627,7 +627,7 @@ Retrieve Hardware Info
     # class  Device class to retrieve with lshw.
     ${output}  ${stderr}  ${rc}=  OS Execute Command  lshw -c ${class} -json
     ${output}=  Verify JSON string  ${output}
-    [Return]  ${output}
+    RETURN  ${output}
 
 
 Verify JSON String
@@ -637,7 +637,7 @@ Verify JSON String
     # unver_string  JSON String we will be checking for lshw comma errors.
     ${unver_string}=  Convert to String  ${unver_string}
     ${ver_string}=  Replace String Using Regexp  ${unver_string}  }\\s*{  },{
-    [Return]  ${ver_string}
+    RETURN  ${ver_string}
 
 
 Clean Up String
@@ -650,7 +650,7 @@ Clean Up String
     ${trimmed_string}=  Get Substring  ${clean_string}  0  -1
     ${clean_string}=  Set Variable If  '${last_char}' == ','
     ...  ${trimmed_string}  ${clean_string}
-    [Return]  ${clean_string}
+    RETURN  ${clean_string}
 
 
 Get OS Network Interface Names
@@ -658,7 +658,7 @@ Get OS Network Interface Names
 
     ${stdout}  ${stderr}  ${rc}=  OS Execute Command  ls /sys/class/net
     @{interface_names}=  Split String  ${stdout}
-    [Return]  @{interface_names}
+    RETURN  @{interface_names}
 
 
 Run Soft Bootme

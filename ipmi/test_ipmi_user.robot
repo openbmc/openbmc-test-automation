@@ -708,4 +708,4 @@ Get Enabled User Count
     ${max_ids}=  Fetch From Right  ${maximum_ids}  \:
     ${int_maximum_ids_count}=  Convert To Integer  ${max_ids}
 
-    [Return]  ${user_count}  ${int_maximum_ids_count}
+    RETURN  ${user_count}  ${int_maximum_ids_count}

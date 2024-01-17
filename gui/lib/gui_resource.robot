@@ -39,7 +39,7 @@ Open Browser With URL
     ...  Launch Headless Browser  ${URL}  ${browser}
     ...  ELSE  Open Browser  ${URL}  ${browser}
 
-    [Return]  ${browser_ID}
+    RETURN  ${browser_ID}
 
 
 Launch Header Browser
@@ -69,7 +69,7 @@ Launch Headless Browser
     ${browser_ID}=  Open Browser  ${URL}
     Set Window Size  1920  1080
 
-    [Return]  ${browser_ID}
+    RETURN  ${browser_ID}
 
 
 Launch Browser And Login GUI
