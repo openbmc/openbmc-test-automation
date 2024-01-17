@@ -205,7 +205,7 @@ Redfish Get DateTime
     [Documentation]  Returns BMC Datetime value from Redfish.
 
     ${date_time}=  Redfish.Get Attribute  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  DateTime
-    [Return]  ${date_time}
+    RETURN  ${date_time}
 
 
 Redfish Set DateTime

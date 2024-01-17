@@ -36,7 +36,7 @@ Execute Command On XCAT
     ${stdout}  ${stderr}=  Execute Command  ${xcat_cmd}  return_stderr=True
     Should Be Empty  ${stderr}
 
-    [Return]  ${stdout}
+    RETURN  ${stdout}
 
 
 Get List Of BMC Nodes
@@ -52,7 +52,7 @@ Get List Of BMC Nodes
     File Should Not Be Empty  ${node_cfg_file_path}  msg=Empty config file.
 
     ${bmc_list}=  OperatingSystem.Get File  ${node_cfg_file_path}
-    [Return]  ${bmc_list}
+    RETURN  ${bmc_list}
 
 Add Nodes To XCAT
     [Documentation]  Add nodes to XCAT configuration.
@@ -111,7 +111,7 @@ Get Power Status
     ...  ${XCAT_DIR_PATH}/rpower ${node} state  return_stderr=True
     Should Be Empty  ${stderr}
 
-    [Return]  ${stdout}
+    RETURN  ${stdout}
 
 Add Nodes To Group
     [Documentation]  Add BMC nodes to group.
@@ -141,7 +141,7 @@ Get List Of Nodes In Group
     ...  ${XCAT_DIR_PATH}/nodels ${group}  return_stderr=True
     Should Be Empty  ${stderr}
 
-    [Return]  ${stdout}
+    RETURN  ${stdout}
 
 Validate Node Added In Group
     [Documentation]  Validate whether node is added in group.
@@ -167,4 +167,4 @@ Get Hardware Vitals Via XCAT
     ${stdout}  ${stderr}=  Execute Command  ${cmd_buf}  return_stderr=True
     Should Be Empty  ${stderr}
 
-    [Return]  ${stdout}
+    RETURN  ${stdout}

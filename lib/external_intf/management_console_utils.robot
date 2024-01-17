@@ -59,7 +59,7 @@ Create Session With ClientID
     Set To Dictionary  ${session_info}  SessionToken  ${XAUTH_TOKEN}
     Set To Dictionary  ${session_info}  SessionResp  ${session_resp}
 
-    [Return]  ${session_info}
+    RETURN  ${session_info}
 
 
 Create Session With List Of ClientID
@@ -78,7 +78,7 @@ Create Session With List Of ClientID
       Append To List  ${session_dict_list}  ${session_dict}
     END
 
-    [Return]  ${session_dict_list}
+    RETURN  ${session_dict_list}
 
 
 Verify A Session Created With ClientID
@@ -126,5 +126,5 @@ Get Lock Resource Information
     ...  json.load(open('${code_base_dir_path}data/resource_lock_table.json'))  modules=json
     Rprint Vars  resource_lock_json
 
-    [Return]  ${resource_lock_json}
+    RETURN  ${resource_lock_json}
 

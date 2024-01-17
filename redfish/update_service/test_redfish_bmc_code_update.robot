@@ -243,7 +243,7 @@ Get Redfish Update Service URI
 
     Log To Console  Firmware update URI: ${update_url}
 
-    [Return]  ${update_url}
+    RETURN  ${update_url}
 
 
 Redfish Multiple Upload Image And Check Progress State
@@ -380,7 +380,7 @@ Get Active Firmware Image
     ${active_image}=  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  Links
     Rprint Vars  active_image
 
-    [Return]  ${active_image}
+    RETURN  ${active_image}
 
 
 Get New Image ID
@@ -388,7 +388,7 @@ Get New Image ID
 
     ${image_id}=   Get Image Id   Updating
 
-    [Return]  ${image_id}
+    RETURN  ${image_id}
 
 
 Verify Redfish Code Update With Different Interrupted Operation
