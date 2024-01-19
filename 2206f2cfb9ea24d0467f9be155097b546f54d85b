@@ -54,6 +54,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "03f3a8b6_4934a421",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000504
+      },
+      "writtenOn": "2024-01-19T12:48:25Z",
+      "side": 1,
+      "message": "can we please have more appropriate names for lists",
+      "revId": "2206f2cfb9ea24d0467f9be155097b546f54d85b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "094d24b7_01a3d6b9",
         "filename": "lib/sensor_info_record.robot",
         "patchSetId": 23
