@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67abc138_8c965eeb",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-19T09:05:27Z",
+      "side": 1,
+      "message": "modified as suggested",
+      "parentUuid": "f8b7fd42_5542443f",
+      "range": {
+        "startLine": 106,
+        "startChar": 1,
+        "endLine": 106,
+        "endChar": 111
+      },
+      "revId": "9ed59d5fe0b5404846655f88053c41b001b11696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67956596_b3eead80",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-15T15:38:20Z",
       "side": 1,
       "message": "Verify boot source override policy persistency with enabled mode as Continuous after BMC reboot.\nFor all documentation start with capital letter followed by small letters please and end with a period.",
+      "range": {
+        "startLine": 126,
+        "startChar": 21,
+        "endLine": 127,
+        "endChar": 38
+      },
+      "revId": "9ed59d5fe0b5404846655f88053c41b001b11696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "307dd7e0_1a4fd2f1",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-19T09:05:27Z",
+      "side": 1,
+      "message": "modified as suggested",
+      "parentUuid": "67956596_b3eead80",
       "range": {
         "startLine": 126,
         "startChar": 21,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdf6caec_4f1120ba",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-19T09:05:27Z",
+      "side": 1,
+      "message": "modified as suggested",
+      "parentUuid": "95ec9719_f8352fa7",
+      "range": {
+        "startLine": 149,
+        "startChar": 16,
+        "endLine": 149,
+        "endChar": 87
+      },
+      "revId": "9ed59d5fe0b5404846655f88053c41b001b11696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f9e48d6_6cc4964a",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-11-15T15:38:20Z",
       "side": 1,
       "message": "Verify boot source override policy with enabled mode as Continuous after host reboot.\nFor all documentation start with capital letter followed by small letters please and end with a period.",
+      "range": {
+        "startLine": 165,
+        "startChar": 22,
+        "endLine": 165,
+        "endChar": 106
+      },
+      "revId": "9ed59d5fe0b5404846655f88053c41b001b11696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af470200_a048ba35",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-19T09:05:27Z",
+      "side": 1,
+      "message": "modified as suggested",
+      "parentUuid": "7f9e48d6_6cc4964a",
       "range": {
         "startLine": 165,
         "startChar": 22,
@@ -116,6 +212,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f78cf227_884afa89",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-19T09:05:27Z",
+      "side": 1,
+      "message": "modified as suggested",
+      "parentUuid": "f7a15b38_92e3764c",
+      "range": {
+        "startLine": 167,
+        "startChar": 3,
+        "endLine": 167,
+        "endChar": 93
+      },
+      "revId": "9ed59d5fe0b5404846655f88053c41b001b11696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d23d9834_f9fe7cbc",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-11-15T15:38:20Z",
       "side": 1,
       "message": "Verify boot source override policy after Host reboot For BiosSetup override target.\n For all documentation start with capital letter followed by small letters please and end with a period.",
+      "range": {
+        "startLine": 183,
+        "startChar": 20,
+        "endLine": 183,
+        "endChar": 104
+      },
+      "revId": "9ed59d5fe0b5404846655f88053c41b001b11696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "811936e8_c3df349c",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-19T09:05:27Z",
+      "side": 1,
+      "message": "modified as suggested",
+      "parentUuid": "d23d9834_f9fe7cbc",
       "range": {
         "startLine": 183,
         "startChar": 20,
@@ -156,6 +300,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23cb01aa_3c925812",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-19T09:05:27Z",
+      "side": 1,
+      "message": "modified as suggested",
+      "parentUuid": "711fde6a_8081aa88",
+      "revId": "9ed59d5fe0b5404846655f88053c41b001b11696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8ef524c_86c6e3b3",
@@ -169,6 +331,30 @@
       "writtenOn": "2023-11-15T15:38:20Z",
       "side": 1,
       "message": "There is an existing keyword in ./lib/bmc_redfish_utils.robot please make use of it\n\n```\nRedfish Power Operation\n    [Documentation]  Do Redfish host power operation.\n    [Arguments]      ${reset_type}\n\n    # Description of arguments:\n    # reset_type     Type of power operation.\n    #                (e.g. On/ForceOff/GracefulRestart/GracefulShutdown)\n\n\n```",
+      "range": {
+        "startLine": 468,
+        "startChar": 1,
+        "endLine": 476,
+        "endChar": 15
+      },
+      "revId": "9ed59d5fe0b5404846655f88053c41b001b11696",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddad0166_2227297a",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-19T09:05:27Z",
+      "side": 1,
+      "message": "As suggested used \"Redfish Power Operation\" keyword but after Post operation, need to give some time for host in every loop count.so added sleep 1min.",
+      "parentUuid": "d8ef524c_86c6e3b3",
       "range": {
         "startLine": 468,
         "startChar": 1,
