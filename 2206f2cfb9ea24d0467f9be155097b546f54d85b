@@ -16,6 +16,57 @@
       "message": "Vinay / Sridevi all good ?",
       "revId": "2206f2cfb9ea24d0467f9be155097b546f54d85b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b40f16e3_49dbb2af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-01-19T06:49:58Z",
+      "side": 1,
+      "message": "Two minor comments please fix it.. otherwise +1 from me.",
+      "revId": "2206f2cfb9ea24d0467f9be155097b546f54d85b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de63add4_47ae6a0f",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-01-19T06:49:58Z",
+      "side": 1,
+      "message": "can u mention the documentation for this library?? what is this library for ?",
+      "revId": "2206f2cfb9ea24d0467f9be155097b546f54d85b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "094d24b7_01a3d6b9",
+        "filename": "lib/sensor_info_record.robot",
+        "patchSetId": 23
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-01-19T06:49:58Z",
+      "side": 1,
+      "message": "Minimum one line space after keyword section.",
+      "revId": "2206f2cfb9ea24d0467f9be155097b546f54d85b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
