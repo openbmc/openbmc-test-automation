@@ -34,6 +34,24 @@
       "parentUuid": "b53f474d_706b2d87",
       "revId": "0f9bbd764f4ef8340c46fb2fb0e55fd52c9e0fee",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f636360b_0448b47b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2024-01-19T05:53:12Z",
+      "side": 1,
+      "message": "I don\u0027t know for sure at this point..it is probably due to newer changes or labels etc \nI even tried the patch for other syntax changes + your label changes\nExample reference:\nhttps://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/68906\n\nbut it still doesn\u0027t work.. so probably it\u0027s something to do with overall changes in robot 7.0 package which the Jenkins robot plugin is not compatible with at this point I guess.",
+      "parentUuid": "1a4ed21b_b0c57a0d",
+      "revId": "0f9bbd764f4ef8340c46fb2fb0e55fd52c9e0fee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
