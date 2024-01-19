@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0767db43_533f61f2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2024-01-19T12:55:36Z",
+      "side": 1,
+      "message": "IPMI",
+      "range": {
+        "startLine": 9,
+        "startChar": 32,
+        "endLine": 9,
+        "endChar": 36
+      },
+      "revId": "bef2ccc7f36498c2a6f0d43011472dfc2eb55a9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e8fe26bc_3664d5ca",
@@ -14,6 +37,293 @@
       "writtenOn": "2024-01-18T13:36:02Z",
       "side": 1,
       "message": "Sridevi all good ?",
+      "revId": "bef2ccc7f36498c2a6f0d43011472dfc2eb55a9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8ff2cd4_3c0dd972",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2024-01-19T12:55:36Z",
+      "side": 1,
+      "message": "Variables",
+      "range": {
+        "startLine": 16,
+        "startChar": 4,
+        "endLine": 16,
+        "endChar": 12
+      },
+      "revId": "bef2ccc7f36498c2a6f0d43011472dfc2eb55a9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "934c239a_8ed9fa3e",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2024-01-19T12:55:36Z",
+      "side": 1,
+      "message": "Are all these command line arguments? If yes, capitalise the variable names pls.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 23
+      },
+      "revId": "bef2ccc7f36498c2a6f0d43011472dfc2eb55a9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e464b8e4_b70b5c44",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2024-01-19T12:55:36Z",
+      "side": 1,
+      "message": "Test Cases",
+      "range": {
+        "startLine": 26,
+        "startChar": 4,
+        "endLine": 26,
+        "endChar": 13
+      },
+      "revId": "bef2ccc7f36498c2a6f0d43011472dfc2eb55a9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4efe9e9a_a8701d68",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2024-01-19T12:55:36Z",
+      "side": 1,
+      "message": "IPMI",
+      "revId": "bef2ccc7f36498c2a6f0d43011472dfc2eb55a9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4e8ab62_00740fb2",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2024-01-19T12:55:36Z",
+      "side": 1,
+      "message": "Pls use 4 spaces for indentation",
+      "range": {
+        "startLine": 35,
+        "startChar": 6,
+        "endLine": 35,
+        "endChar": 20
+      },
+      "revId": "bef2ccc7f36498c2a6f0d43011472dfc2eb55a9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f81e8550_ab21c307",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2024-01-19T12:55:36Z",
+      "side": 1,
+      "message": "Can you please use IF.. END syntax instead of Run Keyword If",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 18
+      },
+      "revId": "bef2ccc7f36498c2a6f0d43011472dfc2eb55a9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7804386_327adcc8",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2024-01-19T12:55:36Z",
+      "side": 1,
+      "message": "ipmi - IPMI \nchange where ever applicable pls.",
+      "range": {
+        "startLine": 45,
+        "startChar": 86,
+        "endLine": 45,
+        "endChar": 90
+      },
+      "revId": "bef2ccc7f36498c2a6f0d43011472dfc2eb55a9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "037250a2_58a26897",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2024-01-19T12:55:36Z",
+      "side": 1,
+      "message": "DBus",
+      "revId": "bef2ccc7f36498c2a6f0d43011472dfc2eb55a9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98cdbb70_ef3b8957",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2024-01-19T12:55:36Z",
+      "side": 1,
+      "message": "Pls rename these variables to remove the data type mentioned ie list and dict",
+      "range": {
+        "startLine": 111,
+        "startChar": 1,
+        "endLine": 112,
+        "endChar": 24
+      },
+      "revId": "bef2ccc7f36498c2a6f0d43011472dfc2eb55a9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e87a75c_b1107016",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2024-01-19T12:55:36Z",
+      "side": 1,
+      "message": "Create an expected sensor list.\n\nChange the comment to sentence case throughout",
+      "range": {
+        "startLine": 132,
+        "startChar": 4,
+        "endLine": 132,
+        "endChar": 36
+      },
+      "revId": "bef2ccc7f36498c2a6f0d43011472dfc2eb55a9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f1e3336_c73e081b",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2024-01-19T12:55:36Z",
+      "side": 1,
+      "message": "End all comments with a period.",
+      "range": {
+        "startLine": 135,
+        "startChar": 4,
+        "endLine": 135,
+        "endChar": 30
+      },
+      "revId": "bef2ccc7f36498c2a6f0d43011472dfc2eb55a9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d70a64dc_611ebe15",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2024-01-19T12:55:36Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 137,
+        "startChar": 94,
+        "endLine": 137,
+        "endChar": 95
+      },
+      "revId": "bef2ccc7f36498c2a6f0d43011472dfc2eb55a9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ad355cf_9eaa8245",
+        "filename": "ipmi/test_ipmi_threshold_sensor_validation.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2024-01-19T12:55:36Z",
+      "side": 1,
+      "message": "DBus URI\n\nchange throughout",
+      "range": {
+        "startLine": 168,
+        "startChar": 16,
+        "endLine": 168,
+        "endChar": 24
+      },
       "revId": "bef2ccc7f36498c2a6f0d43011472dfc2eb55a9b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
