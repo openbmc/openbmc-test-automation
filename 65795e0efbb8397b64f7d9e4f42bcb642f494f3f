@@ -16,6 +16,69 @@
       "message": "Konstantine/ Sridevi ? all good ?",
       "revId": "65795e0efbb8397b64f7d9e4f42bcb642f494f3f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ac48b9a_f4cc704f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-01-23T07:07:52Z",
+      "side": 1,
+      "message": "Minor comments.. please fix it.",
+      "revId": "65795e0efbb8397b64f7d9e4f42bcb642f494f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e6eed83_cfc3c594",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-01-23T07:07:52Z",
+      "side": 1,
+      "message": "please end the documentation with period through out the new changes.",
+      "range": {
+        "startLine": 126,
+        "startChar": 1,
+        "endLine": 126,
+        "endChar": 99
+      },
+      "revId": "65795e0efbb8397b64f7d9e4f42bcb642f494f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53be7cfc_838e1921",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-01-23T07:07:52Z",
+      "side": 1,
+      "message": "Host Reboot For BiosSetup",
+      "range": {
+        "startLine": 442,
+        "startChar": 1,
+        "endLine": 442,
+        "endChar": 25
+      },
+      "revId": "65795e0efbb8397b64f7d9e4f42bcb642f494f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
