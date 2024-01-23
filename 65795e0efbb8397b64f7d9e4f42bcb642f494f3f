@@ -58,6 +58,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c0c6bc9_979ff599",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-23T10:30:05Z",
+      "side": 1,
+      "message": "modified as suggested",
+      "parentUuid": "6e6eed83_cfc3c594",
+      "range": {
+        "startLine": 126,
+        "startChar": 1,
+        "endLine": 126,
+        "endChar": 99
+      },
+      "revId": "65795e0efbb8397b64f7d9e4f42bcb642f494f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53be7cfc_838e1921",
@@ -71,6 +95,30 @@
       "writtenOn": "2024-01-23T07:07:52Z",
       "side": 1,
       "message": "Host Reboot For BiosSetup",
+      "range": {
+        "startLine": 442,
+        "startChar": 1,
+        "endLine": 442,
+        "endChar": 25
+      },
+      "revId": "65795e0efbb8397b64f7d9e4f42bcb642f494f3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aaf3216_2df92926",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-23T10:30:05Z",
+      "side": 1,
+      "message": "modified as suggested",
+      "parentUuid": "53be7cfc_838e1921",
       "range": {
         "startLine": 442,
         "startChar": 1,
