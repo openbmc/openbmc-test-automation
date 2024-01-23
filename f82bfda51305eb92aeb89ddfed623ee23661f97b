@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4068bad5_709849f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c2e4560_b46a4799",
+      "range": {
+        "startLine": 7,
+        "startChar": 1,
+        "endLine": 9,
+        "endChar": 8
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b21f5b4_7229053d",
@@ -41,6 +65,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13734abd_dea46470",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b21f5b4_7229053d",
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4845dd43_5d268ae9",
@@ -54,6 +96,30 @@
       "writtenOn": "2023-11-05T16:52:12Z",
       "side": 1,
       "message": "instead of channel_length it is better to say as active_channel_count",
+      "range": {
+        "startLine": 847,
+        "startChar": 6,
+        "endLine": 847,
+        "endChar": 20
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "953a5211_7c1f6a33",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4845dd43_5d268ae9",
       "range": {
         "startLine": 847,
         "startChar": 6,
@@ -87,6 +153,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1df3edac_1d07fb0f",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e047aff_bbb93b6b",
+      "range": {
+        "startLine": 848,
+        "startChar": 4,
+        "endLine": 848,
+        "endChar": 45
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "761f401e_456e5d0b",
@@ -100,6 +190,30 @@
       "writtenOn": "2023-11-07T10:54:34Z",
       "side": 1,
       "message": "Multiple interface test suite will work in when server having 2 interfaces\n\nRun keyword if  ${channel_length} \u003d\u003d ${1}  Fail Failing this test suite due to only one channel was in active.",
+      "range": {
+        "startLine": 849,
+        "startChar": 3,
+        "endLine": 850,
+        "endChar": 69
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b035d05_23c0e660",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "761f401e_456e5d0b",
       "range": {
         "startLine": 849,
         "startChar": 3,
@@ -133,6 +247,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13948cb6_186ffa61",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c9ade99_9ee52e1d",
+      "range": {
+        "startLine": 204,
+        "startChar": 4,
+        "endLine": 205,
+        "endChar": 70
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4eaa5643_6e4383fd",
@@ -156,6 +294,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "076a9c24_be0f6de8",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "User input BMC IP for the eth1.\nUse can input as  -v OPENBMC_HOST_1:xx.xxx.xx from command line.",
+      "parentUuid": "4eaa5643_6e4383fd",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 206,
+        "endChar": 0
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c149a0c1_8088ca67",
@@ -169,6 +331,30 @@
       "writtenOn": "2023-11-06T06:27:49Z",
       "side": 1,
       "message": "you can use \n${DHCPEnabled}\u003d  Get IPv4 DHCP Enabled Status  ${2}\nShould Be Equal  ${DHCPEnabled}  ${False}\n    \n${DHCPEnabled}\u003d  Get IPv4 DHCP Enabled Status ${1}\nShould Be Equal  ${DHCPEnabled}  ${False}",
+      "range": {
+        "startLine": 213,
+        "startChar": 4,
+        "endLine": 213,
+        "endChar": 30
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3113276_7bb3704d",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c149a0c1_8088ca67",
       "range": {
         "startLine": 213,
         "startChar": 4,
@@ -226,6 +412,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4a2dbe4_3844fbd4",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fd2023a_517ef0dc",
+      "range": {
+        "startLine": 304,
+        "startChar": 0,
+        "endLine": 304,
+        "endChar": 44
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c852b6c_69a02275",
@@ -272,6 +482,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f4c8fae_9e51d860",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16499dfe_c18910c0",
+      "range": {
+        "startLine": 303,
+        "startChar": 0,
+        "endLine": 312,
+        "endChar": 49
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dc5f735_8c1d15a1",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c852b6c_69a02275",
+      "range": {
+        "startLine": 312,
+        "startChar": 6,
+        "endLine": 312,
+        "endChar": 17
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1cc3b9ad_575d4556",
@@ -285,6 +543,30 @@
       "writtenOn": "2023-11-07T10:54:34Z",
       "side": 1,
       "message": "ths steps not required , are you resetting  eth0 ip details any where ?",
+      "range": {
+        "startLine": 313,
+        "startChar": 0,
+        "endLine": 319,
+        "endChar": 57
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0db1be3_d689fea3",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cc3b9ad_575d4556",
       "range": {
         "startLine": 313,
         "startChar": 0,
@@ -318,6 +600,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f6e3bae_8573ee9a",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adc8a956_616e07eb",
+      "range": {
+        "startLine": 321,
+        "startChar": 0,
+        "endLine": 321,
+        "endChar": 44
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62720d68_acb934d4",
@@ -331,6 +637,24 @@
       "writtenOn": "2023-11-06T06:27:49Z",
       "side": 1,
       "message": "Use\n${DHCPEnabled}\u003d Get IPv4 DHCP Enabled Status ${2}\nShould Be Equal ${DHCPEnabled} ${False}",
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "117549ea_518240c9",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62720d68_acb934d4",
       "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -358,6 +682,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7fd2041_7e38f8e2",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a273962_469b71c3",
+      "range": {
+        "startLine": 325,
+        "startChar": 1,
+        "endLine": 326,
+        "endChar": 43
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "953ed9a1_602caf00",
@@ -371,6 +719,30 @@
       "writtenOn": "2023-11-07T10:54:34Z",
       "side": 1,
       "message": "Verify DHCP enabled status of eth1 interface from eth1 ip address\n    [Documentation]   Verify DHCP enabled status of eth1 interface from eth1 ip address\n\n    ${DHCPEnabled}\u003d  Get IPv4 DHCP Enabled Status using eth1 ip address\n    Should Be Equal ${DHCPEnabled} ${False}\n\nPlease add this keyword at line number 214",
+      "range": {
+        "startLine": 321,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 0
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e82bee92_88fb1501",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "953ed9a1_602caf00",
       "range": {
         "startLine": 321,
         "startChar": 0,
@@ -427,6 +799,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ae0a710_4c0a6df9",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53b7cb47_617ad079",
+      "range": {
+        "startLine": 336,
+        "startChar": 9,
+        "endLine": 336,
+        "endChar": 27
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c7ea45c_bc6da1e3",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9363adaf_0ec2ec9c",
+      "range": {
+        "startLine": 332,
+        "startChar": 0,
+        "endLine": 336,
+        "endChar": 58
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57d71d30_133ec976",
@@ -440,6 +860,30 @@
       "writtenOn": "2023-11-07T10:54:34Z",
       "side": 1,
       "message": "same keyword name used for to get eth0 interface dhcp status using eth0 ip address lib/bmc_network_utils.robot. Please change name like\nGet IPv4 DHCP Enabled Status of eth1 interface using eth1 ip address",
+      "range": {
+        "startLine": 338,
+        "startChar": 0,
+        "endLine": 338,
+        "endChar": 28
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "232ced18_a5e43d60",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57d71d30_133ec976",
       "range": {
         "startLine": 338,
         "startChar": 0,
@@ -485,6 +929,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb1b97ba_c31613b8",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63927496_11ed0a4d",
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "102cb966_c396c49a",
@@ -508,6 +970,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8381cfb_e9275e33",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "102cb966_c396c49a",
+      "range": {
+        "startLine": 338,
+        "startChar": 0,
+        "endLine": 345,
+        "endChar": 34
+      },
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "739585ea_5b71a786",
@@ -521,6 +1007,24 @@
       "writtenOn": "2023-11-05T16:52:12Z",
       "side": 1,
       "message": "end with period.",
+      "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "775958d0_7cc73006",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-01-23T05:47:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "739585ea_5b71a786",
       "revId": "f82bfda51305eb92aeb89ddfed623ee23661f97b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
