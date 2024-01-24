@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "477716c9_91d6d614",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2024-01-24T05:51:17Z",
+      "side": 1,
+      "message": "why this is required here?",
+      "revId": "f6c6808482d969c60e461a39e6bdb26fcb909417",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1c9bc3aa_9e9ce756",
         "filename": "redfish/managers/test_multiple_interfaces.robot",
         "patchSetId": 4
