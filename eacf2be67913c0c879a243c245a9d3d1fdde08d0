@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25ace268_c431289b",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-25T10:51:00Z",
+      "side": 1,
+      "message": "modified as suggested",
+      "parentUuid": "9af3fc09_4f9f6ae2",
+      "range": {
+        "startLine": 106,
+        "startChar": 100,
+        "endLine": 106,
+        "endChar": 103
+      },
+      "revId": "eacf2be67913c0c879a243c245a9d3d1fdde08d0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7baf4006_37ada89e",
@@ -81,6 +105,48 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ec37aa3_b40a2121",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-25T10:51:00Z",
+      "side": 1,
+      "message": "modified as suggested",
+      "parentUuid": "7baf4006_37ada89e",
+      "revId": "eacf2be67913c0c879a243c245a9d3d1fdde08d0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "846b601d_7501df15",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-25T10:51:00Z",
+      "side": 1,
+      "message": "modified as suggested",
+      "parentUuid": "0bf935bf_de396e7a",
+      "range": {
+        "startLine": 107,
+        "startChar": 21,
+        "endLine": 107,
+        "endChar": 110
+      },
+      "revId": "eacf2be67913c0c879a243c245a9d3d1fdde08d0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a357540_39d5e567",
@@ -94,6 +160,30 @@
       "writtenOn": "2024-01-25T08:58:11Z",
       "side": 1,
       "message": "BIOS Setup\n\nPlease change in other places too.",
+      "range": {
+        "startLine": 181,
+        "startChar": 76,
+        "endLine": 181,
+        "endChar": 85
+      },
+      "revId": "eacf2be67913c0c879a243c245a9d3d1fdde08d0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c842423_de071d4d",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1001883
+      },
+      "writtenOn": "2024-01-25T10:51:00Z",
+      "side": 1,
+      "message": "modified as suggested",
+      "parentUuid": "3a357540_39d5e567",
       "range": {
         "startLine": 181,
         "startChar": 76,
