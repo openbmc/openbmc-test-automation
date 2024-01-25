@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa31e31e_b4c15d7f",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2024-01-25T08:54:14Z",
+      "side": 1,
+      "message": "OK, how and what way it is helping the test execution??",
+      "parentUuid": "0b6d4965_2cb3fcaa",
+      "revId": "f6c6808482d969c60e461a39e6bdb26fcb909417",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c9bc3aa_9e9ce756",
