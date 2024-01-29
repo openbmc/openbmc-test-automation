@@ -17,6 +17,7 @@ class ExtendInvalidTable(SuiteRule):
     table section if it is a section of comments.
     e.g "*** Comments ***"
     """
+
     severity = ERROR
 
     def apply(self, suite):
