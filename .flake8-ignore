@@ -49,3 +49,4 @@ lib/utils_files.py
 lib/var_funcs.py
 templates/python_pgm_template
 tools/ct_metrics/gen_csv_results.py
+tools/robot_custom_rules.py

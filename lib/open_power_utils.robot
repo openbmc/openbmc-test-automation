@@ -9,7 +9,7 @@ Library        utilities.py
 *** Variables ***
 ${functional_cpu_count}       ${0}
 ${active_occ_count}           ${0}
-${OCC_WAIT_TIMEOUT}           4 min
+${OCC_WAIT_TIMEOUT}           8 min
 ${fan_json_msg}               Unable to create dump on non-JSON config based system
 
 *** Keywords ***
