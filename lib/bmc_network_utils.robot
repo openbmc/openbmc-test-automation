@@ -432,7 +432,7 @@ CLI Get and Verify Name Servers
 
     Run Keyword If  '${valid_status_codes}' == '${HTTP_OK}'
     ...  Should Be True  ${cmd_status}
-    ...  ELSE  Should Be True  ${cmd_status}
+    ...  ELSE  Should Not Be True  ${cmd_status}
 
 Get Network Configuration
     [Documentation]  Get network configuration.
