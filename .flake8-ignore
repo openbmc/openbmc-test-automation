@@ -19,6 +19,7 @@ ffdc/ffdc_collector.py
 ffdc/lib/ssh_utility.py
 ffdc/plugins/redfish.py
 gui/lib/utils_get_version.py
+gui/data/resource_variables.py
 lib/bmc_network_utils.py
 lib/bmc_redfish.py
 lib/bmc_redfish_utils.py
@@ -49,3 +50,4 @@ lib/utils_files.py
 lib/var_funcs.py
 templates/python_pgm_template
 tools/ct_metrics/gen_csv_results.py
+tools/robot_custom_rules.py
