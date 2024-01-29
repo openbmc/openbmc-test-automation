@@ -8,15 +8,15 @@ Example usage:
 
 import re
 
-from rflint.common import ERROR, SuiteRule
+from rflint.common import ERROR, suiterule
 
-
-class ExtendInvalidTable(SuiteRule):
+class extend_invalid_table(suiterule):
     r"""
     Extend robotframework-lint SuiteRule function for InvalidTable to allow a
     table section if it is a section of comments.
     e.g "*** Comments ***"
     """
+
     severity = ERROR
 
     def apply(self, suite):
