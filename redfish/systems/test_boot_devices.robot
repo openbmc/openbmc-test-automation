@@ -102,7 +102,7 @@ Verify BMC Redfish Boot Source Override with Enabled Mode As Disabled
     Disabled                      None                        Legacy
 
 
-Verify Boot Source Override Policy Persistency with Enabled Mode As Once After BMC Reboot
+Verify Boot Source Override Policy Persistency With Enabled Mode As Once After BMC Reboot
     [Documentation]  Verify Boot Source Override Policy Persistency with Enabled Mode As Once After BMC Reboot.
     [Tags]           Verify_Boot_Source_Override_Policy_Persistency_With_Enabled_Mode_As_Once_After_BMC_Reboot
     [Template]  Verify Boot Source Override After BMC Reboot
@@ -122,7 +122,7 @@ Verify Boot Source Override Policy Persistency with Enabled Mode As Once After B
     Once                          None                        Legacy
 
 
-Verify Boot Source Override Policy Persistency with Enabled Mode As Continuous After BMC Reboot
+Verify Boot Source Override Policy Persistency With Enabled Mode As Continuous After BMC Reboot
     [Documentation]  Verify Boot Source Override Policy Persistency with Enabled Mode As Continuous After BMC Reboot.
     [Tags]           Verify_Boot_Source_Override_Policy_Persistency_With_Enabled_Mode_As_Continuous_After_BMC_Reboot
     [Template]  Verify Boot Source Override After BMC Reboot
@@ -142,7 +142,7 @@ Verify Boot Source Override Policy Persistency with Enabled Mode As Continuous A
     Continuous                    None                        Legacy
 
 
-Verify Boot Source Override Policy with Enabled Mode As Once After Host Reboot
+Verify Boot Source Override Policy With Enabled Mode As Once After Host Reboot
     [Documentation]  Verify Boot Source Override Policy with Enabled Mode As Once After Host Reboot.
     [Tags]           Verify_Boot_Source_Override_Policy_With_Enabled_Mode_As_Once_After_Host_Reboot
     [Template]  Verify Boot Source Override with Enabled Mode As Once After Host Reboot
@@ -160,7 +160,7 @@ Verify Boot Source Override Policy with Enabled Mode As Once After Host Reboot
     None                        Legacy
 
 
-Verify Boot Source Override Policy with Enabled Mode As Continuous After Host Reboot
+Verify Boot Source Override Policy With Enabled Mode As Continuous After Host Reboot
     [Documentation]  Verify Boot Source Override Policy With Enabled Mode As Continuous After Host Reboot.
     [Tags]           Verify_Boot_Source_Override_Policy_With_Enabled_Mode_As_Continuous_After_Host_Reboot
     [Template]  Verify Boot Source Override with Enabled Mode As Continuous After Host Reboot
@@ -178,7 +178,7 @@ Verify Boot Source Override Policy with Enabled Mode As Continuous After Host Re
     None                        Legacy
 
 
-Verify Boot Source Override with Enabled Mode As Once After Host Reboot For Bios Setup
+Verify Boot Source Override With Enabled Mode As Once After Host Reboot For Bios Setup
     [Documentation]  Verify Boot Source Override with Enabled Mode As Once After Host Reboot For Bios Setup.
     [Tags]           Verify_Boot_Source_Override_With_Enabled_Mode_As_Once_After_Host_Reboot_For_Bios_Setup
     [Template]  Verify Boot Source Override with Enabled Mode As Once After Host Reboot
@@ -188,7 +188,7 @@ Verify Boot Source Override with Enabled Mode As Once After Host Reboot For Bios
     BiosSetup                   Legacy                   True
 
 
-Verify Boot Source Override with Enabled Mode As Continuous After Host Reboot For Bios Setup
+Verify Boot Source Override With Enabled Mode As Continuous After Host Reboot For Bios Setup
     [Documentation]  Verify Boot Source Override with Enabled Mode As Continuous After Host Reboot For Bios Setup.
     [Tags]           Verify_Boot_Source_Override_With_Enabled_Mode_As_Continuous_After_Host_Reboot_For_Bios_Setup
     [Template]  Verify Boot Source Override with Enabled Mode As Continuous After Host Reboot

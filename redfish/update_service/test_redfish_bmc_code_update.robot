@@ -330,7 +330,7 @@ Run Operation On BMC
     [Arguments]  ${operation}  ${count}
 
     # Description of argument(s):
-    # operation    Supports differnt variables.
+    # operation    Supports different variables.
     #              If host_name then change hostname,
     #              If kernel_panic then perform kernel panic,
     #              If https_certificate then change the https certificate.

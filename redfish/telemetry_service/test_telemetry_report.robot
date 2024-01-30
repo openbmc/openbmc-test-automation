@@ -93,7 +93,7 @@ Create Basic Telemetry Report
         ${metricProperties}=  Set Variable  ""
     ELSE
         ${metricProperties}=  Set Variable  ${resp["MetricProperties"]}
-    END 
+    END
     # Example of response from above Redfish GET request.
     # "@odata.id": "/redfish/v1/TelemetryService/MetricDefinitions/Ambient_0_Temp",
     # "@odata.type": "#MetricDefinition.v1_0_3.MetricDefinition",

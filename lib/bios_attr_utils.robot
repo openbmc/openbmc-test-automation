@@ -30,7 +30,7 @@ Set BIOS Attribute Value And Verify
     IF  ${type_str}
         # Handling the case when the BIOS attribute value is an empty string.
         ${attr_value_length}=  Evaluate  len($attr_val.replace('"', ''))
-        IF  ${attr_value_length} 
+        IF  ${attr_value_length}
             ${value}=  Set Variable  "${attr_val}"
         ELSE
             ${value}=  Set Variable  ${attr_val}
