@@ -166,17 +166,36 @@ Verify If The Modified Admin Credential Is Valid Post Update
     Redfish.Logout
 
 
-Redfish Code Update With Different Interrupted Operation
+Redfish Code Update With Hostname Change Interrupted Operation
     [Documentation]  Ensure firmware update is successful when different interrupted operation executed
-    ...              i.e. change the hostname, updating https certificate and firmware update fail
-    ...              when kernel panic.
-    [Tags]  Redfish_Code_Update_With_Different_Interrupted_Operation
+    ...              i.e. change the hostname.
+    [Tags]  Redfish_Code_Update_With_Hostname_Change_Interrupted_Operation
     [Template]  Verify Redfish Code Update With Different Interrupted Operation
     [Teardown]  Code Update Interrupted Operation Teardown
 
     # operation          count
     host_name            1
+
+
+Redfish Code Update With Kernel Panic Interrupted Operation
+    [Documentation]  Ensure firmware update is successful when different interrupted operation executed
+    ...              i.e. firmware update fail when kernel panic.
+    [Tags]  Redfish_Code_Update_With_Kernel_Panic_Interrupted_Operation
+    [Template]  Verify Redfish Code Update With Different Interrupted Operation
+    [Teardown]  Code Update Interrupted Operation Teardown
+
+    # operation          count
     kernel_panic         1
+
+
+Redfish Code Update With HTTPS Certificate Interrupted Operation
+    [Documentation]  Ensure firmware update is successful when different interrupted operation executed
+    ...              i.e. updating https certificate.
+    [Tags]  Redfish_Code_Update_With_HTTPS_Certificate_Interrupted_Operation
+    [Template]  Verify Redfish Code Update With Different Interrupted Operation
+    [Teardown]  Code Update Interrupted Operation Teardown
+
+    # operation          count
     https_certificate    1
 
 *** Keywords ***
