@@ -166,17 +166,36 @@ Verify If The Modified Admin Credential Is Valid Post Update
     Redfish.Logout
 
 
-Redfish Code Update With Different Interrupted Operation
-    [Documentation]  Ensure firmware update is successful when different interrupted operation executed
-    ...              i.e. change the hostname, updating https certificate and firmware update fail
-    ...              when kernel panic.
-    [Tags]  Redfish_Code_Update_With_Different_Interrupted_Operation
+Verify Redfish Code Update Completion In Spite Of Changing Hostname
+    [Documentation]  Ensure firmware update is successful when interrupted operation performed like
+    ...              change the hostname.
+    [Tags]  Verify_Redfish_Code_Update_Completion_In_Spite_Of_Changing_Hostname
     [Template]  Verify Redfish Code Update With Different Interrupted Operation
     [Teardown]  Code Update Interrupted Operation Teardown
 
     # operation          count
     host_name            1
+
+
+Verify Redfish Code Update Completion In Spite Of Performing Kernel Panic
+    [Documentation]  Ensure firmware update is successful when interrupted operation performed like
+    ...              firmware update fail when kernel panic.
+    [Tags]  Verify_Redfish_Code_Update_Completion_In_Spite_Of_Performing_Kernel_Panic
+    [Template]  Verify Redfish Code Update With Different Interrupted Operation
+    [Teardown]  Code Update Interrupted Operation Teardown
+
+    # operation          count
     kernel_panic         1
+
+
+Verify Redfish Code Update Completion In Spite Of Updating HTTPS Certificate
+    [Documentation]  Ensure firmware update is successful when interrupted operation performed like
+    ...              updating https certificate.
+    [Tags]  Verify_Redfish_Code_Update_Completion_In_Spite_Of_Updating_HTTPS_Certificate
+    [Template]  Verify Redfish Code Update With Different Interrupted Operation
+    [Teardown]  Code Update Interrupted Operation Teardown
+
+    # operation          count
     https_certificate    1
 
 *** Keywords ***
