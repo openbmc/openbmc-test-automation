@@ -16,6 +16,24 @@
       "message": "CI failure - please address it.",
       "revId": "d5e069aaf5c01957e25c49666ea0c38dcaf0bde1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "decbd6a6_e4e3845a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-01-30T07:06:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f603470_0f08e4d7",
+      "revId": "d5e069aaf5c01957e25c49666ea0c38dcaf0bde1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

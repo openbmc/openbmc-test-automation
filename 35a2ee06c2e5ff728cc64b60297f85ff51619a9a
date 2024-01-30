@@ -16,6 +16,24 @@
       "message": "Any update ?",
       "revId": "35a2ee06c2e5ff728cc64b60297f85ff51619a9a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0672e2c0_886b6bdf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-01-30T07:06:27Z",
+      "side": 1,
+      "message": "Done rebase",
+      "parentUuid": "096f4801_432f2198",
+      "revId": "35a2ee06c2e5ff728cc64b60297f85ff51619a9a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
