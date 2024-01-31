@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d6e4440c_37579472",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2024-01-31T14:22:08Z",
+      "side": 1,
+      "message": "I have changed the test case name.",
+      "parentUuid": "92dc4b91_97969ee2",
+      "revId": "adef79bfc7fb2b796f53032015b020caf76e5426",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f238710_eab9d5c9",
         "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2024-01-31T05:40:56Z",
       "side": 1,
       "message": "Do you mean upload HTTPS certificate ?",
+      "revId": "adef79bfc7fb2b796f53032015b020caf76e5426",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45df0777_73a8d150",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2024-01-31T14:22:08Z",
+      "side": 1,
+      "message": "Yes. I have changed the test case name.",
+      "parentUuid": "1f238710_eab9d5c9",
       "revId": "adef79bfc7fb2b796f53032015b020caf76e5426",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
