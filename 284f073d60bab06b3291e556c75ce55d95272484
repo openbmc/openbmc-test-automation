@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95f62816_2ee649aa",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2024-01-31T14:39:52Z",
+      "side": 1,
+      "message": "Interrupt. Change wherever applicable",
+      "revId": "284f073d60bab06b3291e556c75ce55d95272484",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
