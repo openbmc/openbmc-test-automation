@@ -16,6 +16,24 @@
       "message": "Verify Redfish Code Update Completion Inspite Of Changing Hostname\n\nPls change similarly for others too",
       "revId": "1dbae5c68161c047a41c6f51abd1a2dd0eef10b6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bdb8647_09f9ee55",
+        "filename": "redfish/update_service/test_redfish_bmc_code_update.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2024-02-01T17:02:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e52f5a16_89ce2837",
+      "revId": "1dbae5c68161c047a41c6f51abd1a2dd0eef10b6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
