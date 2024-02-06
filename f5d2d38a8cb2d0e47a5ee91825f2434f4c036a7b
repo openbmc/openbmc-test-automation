@@ -33,6 +33,24 @@
       "message": "Via GUI, we can delete DNS servers individually, whereas via redfish if we delete it\u0027ll delete all DNS servers. Here what is it deleting??\nCan you re-look into it and modify the code accordingly.",
       "revId": "f5d2d38a8cb2d0e47a5ee91825f2434f4c036a7b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5062460f_a8316f52",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-02-06T08:47:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfeedfc7_50ebfd67",
+      "revId": "f5d2d38a8cb2d0e47a5ee91825f2434f4c036a7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
