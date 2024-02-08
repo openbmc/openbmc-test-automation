@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c6ddb32_a3bf6f64",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-02-08T05:42:04Z",
+      "side": 1,
+      "message": "You can use the existing keyword\nWait For Host Boot Progress To Reach Required State\nin lib/utils.robot",
+      "range": {
+        "startLine": 483,
+        "startChar": 48,
+        "endLine": 483,
+        "endChar": 82
+      },
+      "revId": "86507da87697c8e90021523590cae4cbb83eefa7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
