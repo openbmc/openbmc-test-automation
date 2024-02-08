@@ -116,6 +116,24 @@
       "parentUuid": "44f5e8ba_af2ff1f6",
       "revId": "39b2cf92007fa4a5e2944c6f7ab18cda56125331",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba9b7d9a_6117fa35",
+        "filename": "redfish/systems/test_boot_devices.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001882
+      },
+      "writtenOn": "2024-02-08T12:55:15Z",
+      "side": 1,
+      "message": "Actually, The script needs to identify the issues on bmc. \nMapping for Diags was done incorrectly in the script.\nSo I have fixed script issue and raised this MR.\nFor Image Issue, I have raised issue on phosphor-host-ipmid.\nhttps://github.com/openbmc/phosphor-host-ipmid/issues/200",
+      "parentUuid": "2a2323ff_e2ddcdde",
+      "revId": "39b2cf92007fa4a5e2944c6f7ab18cda56125331",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
