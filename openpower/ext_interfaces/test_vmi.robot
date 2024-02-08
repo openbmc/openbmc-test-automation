@@ -478,6 +478,11 @@ Suite Setup Execution
 
     Redfish.Login
     Redfish Power On
+
+    Wait Until Keyword Succeeds  15 min  1 sec  Is Boot Progress At Required State  OSRunning
+
+    Wait Until Keyword Succeeds  15 min  1 sec  OS Execute Command  uname
+
     ${active_channel_config}=  Get Active Channel Config
     Set Suite Variable   ${active_channel_config}
     Set Suite Variable  ${ethernet_interface}  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
