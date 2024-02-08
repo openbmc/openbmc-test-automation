@@ -72,6 +72,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b7dc10b_1b76f8dc",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-02-08T06:04:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35f447bf_2d4e6d4b",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 200,
+        "endChar": 56
+      },
+      "revId": "0a5e4b9304732ea8d8b29bbcfe2ed8ac8a494e6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d650c182_13896b91",
