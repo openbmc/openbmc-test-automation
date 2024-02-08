@@ -742,6 +742,10 @@ Suite Setup Execution
     Remove Files  *.csr  *.key  *.cert
     # Create different user accounts.
     Redfish.Login
+
+    Redfish Power Off
+    Set BIOS Attribute  pvm_hmc_managed  Enabled
+
     Redfish Power On
     Create Users With Different Roles  users=${USERS}  force=${True}
 

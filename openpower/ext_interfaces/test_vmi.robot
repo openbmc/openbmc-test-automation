@@ -477,6 +477,9 @@ Suite Setup Execution
     [Documentation]  Do test setup execution task.
 
     Redfish.Login
+
+    Redfish Power Off
+    Set BIOS Attribute  pvm_hmc_managed  Enabled
     Redfish Power On
 
     # Check whether OS is up and working fine.
