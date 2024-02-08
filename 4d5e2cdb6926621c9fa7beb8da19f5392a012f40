@@ -16,6 +16,24 @@
       "message": "Why are you running uname command?\n\nif you are just checking if the OS is up and running then may be you can add a comment here.",
       "revId": "4d5e2cdb6926621c9fa7beb8da19f5392a012f40",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf33a187_75cb4b61",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-02-08T05:49:04Z",
+      "side": 1,
+      "message": "I have already added in comment\n# Check whether OS is up and working fine.",
+      "parentUuid": "81bb6540_f96412e7",
+      "revId": "4d5e2cdb6926621c9fa7beb8da19f5392a012f40",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

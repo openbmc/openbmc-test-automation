@@ -22,6 +22,30 @@
       },
       "revId": "86507da87697c8e90021523590cae4cbb83eefa7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f65ded0_69b8915e",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-02-08T05:49:04Z",
+      "side": 1,
+      "message": "The keyword which you have suggested has the same keyword \"Is Boot Progress At Required State\" but there it is waiting for 20 sec....so am directly calling \"Is Boot Progress At Required State\" and waiting interval i have reduced it",
+      "parentUuid": "5c6ddb32_a3bf6f64",
+      "range": {
+        "startLine": 483,
+        "startChar": 48,
+        "endLine": 483,
+        "endChar": 82
+      },
+      "revId": "86507da87697c8e90021523590cae4cbb83eefa7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
