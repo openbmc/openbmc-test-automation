@@ -16,6 +16,24 @@
       "message": "I encountered an account bug, please delete or close this commit, I will resubmit",
       "revId": "69757819c78df5a9add1beaa5709e18ae7afb157",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bbabd01_e55ebf91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2024-02-14T06:44:05Z",
+      "side": 1,
+      "message": "You will have to abandon this commit from your end. The option should be there once you open this gerrit commit on the right hand top corner of the the page. Thanks",
+      "parentUuid": "69ad6761_14d30bbb",
+      "revId": "69757819c78df5a9add1beaa5709e18ae7afb157",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
