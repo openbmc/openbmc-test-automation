@@ -97,7 +97,7 @@ Verify Chassis Power Policy
     [Tags]  Verify_Chassis_Power_Policy
     [Setup]  Test Setup Execution
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Run External IPMI Standard Command  chassis policy ${initial_power_policy
+    ...  Run External IPMI Standard Command  chassis policy ${initial_power_policy}
     [Template]  Set Chassis Power Policy Via IPMI And Verify
 
     # power_policy
