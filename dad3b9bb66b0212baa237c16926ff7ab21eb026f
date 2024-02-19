@@ -1,4 +1,22 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88511826_531c32e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001924
+      },
+      "writtenOn": "2024-02-19T08:36:47Z",
+      "side": 1,
+      "message": "thereis error afyer running cherry pivk\n\n---------------------------------------------------------------\n\u003cclass \u0027redfish.rest.v1.InvalidCredentialsError\u0027\u003e\n0\nRe-try login due to exception and it is likely error response from server side.\nTest Bmc Network Conf :: Network interface configuration and verif... | FAIL |\nConfigure Invalid HostName And Verify :: Configure invalid hostn                                                                Configure Invalid HostName And Verify :: Configure invalid hostnam... | FAIL |",
+      "revId": "dad3b9bb66b0212baa237c16926ff7ab21eb026f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ],
   "submitRequirementResults": []
 }
