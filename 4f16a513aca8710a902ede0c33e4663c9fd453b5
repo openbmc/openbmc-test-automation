@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01458f78_de5e27a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2024-02-22T15:49:46Z",
+      "side": 1,
+      "message": "Already got +2 already, some CI intermittent issues.. Merging the code",
+      "revId": "4f16a513aca8710a902ede0c33e4663c9fd453b5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
