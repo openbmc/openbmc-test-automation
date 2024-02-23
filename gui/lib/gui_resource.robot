@@ -73,7 +73,7 @@ Launch Headless Browser
 
 
 Launch Browser And Login GUI
-    [Documentation]  Launch browser and login to OpenBMC GUI, retry 2 attempts
+    [Documentation]  Launch browser and login to OpenBMC GUI, retry 22attempts
     ...              in 1 minute time.
 
     Wait Until Keyword Succeeds  195 sec   65 sec  Retry Browser Login Attempts
@@ -101,6 +101,7 @@ Login GUI
     Wait Until Element Is Enabled  ${xpath_login_button}
     Click Element  ${xpath_login_button}
     Wait Until Page Contains  Overview  timeout=60s
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=120s
 
 Logout GUI
     [Documentation]  Logout of OpenBMC GUI.
