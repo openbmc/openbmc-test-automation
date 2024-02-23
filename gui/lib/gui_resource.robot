@@ -101,6 +101,8 @@ Login GUI
     Wait Until Element Is Enabled  ${xpath_login_button}
     Click Element  ${xpath_login_button}
     Wait Until Page Contains  Overview  timeout=60s
+    Wait Until Element Is Not Visible
+    ...  ${xpath_page_loading_progress_bar}  timeout=120s
 
 Logout GUI
     [Documentation]  Logout of OpenBMC GUI.
