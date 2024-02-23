@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01496594_258a4810",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-02-23T16:42:40Z",
+      "side": 1,
+      "message": "30 seconds is a very small time. I would say keep it 120 seconds.",
+      "range": {
+        "startLine": 104,
+        "startChar": 76,
+        "endLine": 104,
+        "endChar": 86
+      },
+      "revId": "141aa538ea8268b056be2df57945e9af07ac344e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
