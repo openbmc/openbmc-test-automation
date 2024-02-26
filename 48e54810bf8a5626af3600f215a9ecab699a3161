@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b86bed8_00f0b661",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-02-26T15:01:21Z",
+      "side": 1,
+      "message": "There is one more change you have done. Please add a note for that one also.",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 69
+      },
+      "revId": "48e54810bf8a5626af3600f215a9ecab699a3161",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b06e0348_29dd506d",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-02-26T15:01:21Z",
+      "side": 1,
+      "message": "use - existing_log_count",
+      "range": {
+        "startLine": 377,
+        "startChar": 6,
+        "endLine": 377,
+        "endChar": 18
+      },
+      "revId": "48e54810bf8a5626af3600f215a9ecab699a3161",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a8a98d5_8fcf52b2",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-02-26T15:01:21Z",
+      "side": 1,
+      "message": "Correct the statement. \n\n\n    # With internal failure, an error log file is generated. Check if\n    # BMC has one extra error log for this internal failure.",
+      "range": {
+        "startLine": 382,
+        "startChar": 0,
+        "endLine": 383,
+        "endChar": 59
+      },
+      "revId": "48e54810bf8a5626af3600f215a9ecab699a3161",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
