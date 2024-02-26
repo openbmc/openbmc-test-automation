@@ -912,4 +912,4 @@ Configure Static Name Servers
     Sleep  3s
 
     # Check if newly added DNS server is configured on BMC.
-    CLI Get and Verify Name Servers  ${static_name_servers}  ${HTTP_OK}
+    CLI Get and Verify Name Servers  ${static_name_servers}  ${valid_status_codes}
