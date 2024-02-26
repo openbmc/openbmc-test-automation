@@ -74,6 +74,7 @@ Verify Internal Failure Initiated BMC Dump Size
     [Documentation]  Verify that the internal failure initiated BMC dump size is under 20 MB.
     [Tags]  Verify_Internal_Failure_Initiated_BMC_Dump_Size
 
+    Redfish Power Off  stack_mode=skip
     Redfish Delete All BMC Dumps
 
     # Create an internal failure error log.
@@ -369,6 +370,7 @@ Verify Error Log And Dump For Internal Failure
     [Documentation]  Verify error log and dump for internal failure.
     [Tags]  Verify_Error_Log_And_Dump_For_Internal_Failure
 
+    Redfish Power Off  stack_mode=skip
     Redfish Purge Event Log
     Redfish Delete All BMC Dumps
 
