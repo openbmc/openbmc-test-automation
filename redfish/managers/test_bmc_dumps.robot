@@ -74,6 +74,7 @@ Verify Internal Failure Initiated BMC Dump Size
     [Documentation]  Verify that the internal failure initiated BMC dump size is under 20 MB.
     [Tags]  Verify_Internal_Failure_Initiated_BMC_Dump_Size
 
+    Redfish Power Off  stack_mode=skip
     Redfish Delete All BMC Dumps
 
     # Create an internal failure error log.
@@ -369,15 +370,16 @@ Verify Error Log And Dump For Internal Failure
     [Documentation]  Verify error log and dump for internal failure.
     [Tags]  Verify_Error_Log_And_Dump_For_Internal_Failure
 
-    Redfish Purge Event Log
+    Redfish Power Off  stack_mode=skip
     Redfish Delete All BMC Dumps
+    Redfish Purge Event Log
 
     # Create an internal failure error log.
     BMC Execute Command  ${CMD_INTERNAL_FAILURE}
 
     # With internal failure, an error log file is generated. Check if
-    # BMC has only one error log for this internal failure.
-    ${resp}=  Redfish.Get  /redfish/v1/Systems/system/LogServices/CELog/Entries
+    # BMC has one error log for this.
+    ${resp}=  Redfish.Get  /redfish/v1/Systems/system/LogServices/EventLog/Entries 
     Should Be True  ${resp.dict["Members@odata.count"]} == ${1}
 
     # Wait for the BMC dump to become available and verify its presence.
