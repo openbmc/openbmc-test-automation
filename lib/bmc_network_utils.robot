@@ -165,7 +165,7 @@ Get FW_Env MAC Address
     ${ethernet_interface}=  Set Variable If
     ...  "${ethernet_interface}"=="eth0"  ethaddr  eth1addr
 
-    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  /sbin/fw_printenv | grep ${ethernet_interface}
+    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  sudo -i /sbin/fw_printenv | grep ${ethernet_interface}
 
     # Split the line and return MAC address.
     # Split list data:
