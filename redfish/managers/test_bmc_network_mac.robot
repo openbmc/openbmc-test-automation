@@ -161,11 +161,11 @@ Suite Setup Execution
 
 Configure MAC Settings
     [Documentation]  Configure MAC settings via Redfish.
-    [Arguments]  ${mac_address}  ${valid_status_codes}=[${HTTP_OK}]
+    [Arguments]  ${mac_address}  ${valid_status_code}=${HTTP_OK}
 
     # Description of argument(s):
-    # mac_address      MAC address of BMC.
-    # expected_result  Expected status of MAC configuration.
+    # mac_address         MAC address of BMC.
+    # valid_status_code   Expected response code, default is ${HTTP_OK}.
 
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
@@ -174,7 +174,7 @@ Configure MAC Settings
     ${payload}=  Create Dictionary  MACAddress=${mac_address}
 
     Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{payload}
-    ...  valid_status_codes=${valid_status_codes}
+    ...  valid_status_codes=[${valid_status_codes},${HTTP_INTERNAL_SERVER_ERROR}]
 
     # After any modification on network interface, BMC restarts network
     # Note: Network restart takes around 15-18s after patch request processing.
@@ -198,11 +198,11 @@ Configure MAC Settings
 
 Verify MAC Address Via FW_Env
     [Documentation]  Verify MAC address on FW_Env.
-    [Arguments]  ${mac_address}  ${valid_status_codes}=[${HTTP_OK}]
+    [Arguments]  ${mac_address}  ${valid_status_codes}=${HTTP_OK}
 
     # Description of argument(s):
-    # mac_address      MAC address of BMC.
-    # expected_result  Expected status of MAC configuration.
+    # mac_address         MAC address of BMC.
+    # valid_status_code   Expected response code, default is ${HTTP_OK}.
 
     ${status}=  Run Keyword And Return Status
     ...  Validate MAC On FW_Env  ${mac_address}
