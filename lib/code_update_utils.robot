@@ -15,7 +15,7 @@ Resource        openbmc_ffdc.robot
 ${ignore_err}    ${0}
 
 # Time in minutes.
-${IMAGE_UPLOAD_WAIT_TIMEOUT}     4
+${IMAGE_UPLOAD_WAIT_TIMEOUT}     5
 
 *** Keywords ***
 
