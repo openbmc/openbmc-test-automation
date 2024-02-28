@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff9fdd28_ee801a2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2024-02-28T16:38:16Z",
+      "side": 1,
+      "message": "Yep, the ole firmware image just keeps on growing.",
+      "revId": "8f72e20e14459dc3413f5a0503a599e2081f9c71",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
