@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03aa2084_84408a22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-05T14:24:18Z",
+      "side": 1,
+      "message": "minor comment in the white space. Otherwise I am fine with the code so +1 from my side",
+      "revId": "7112848fb8b3ec45ac444e0bf84dd60851f55089",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "113a81c5_ca16b03f",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-05T14:24:18Z",
+      "side": 1,
+      "message": "remove white space",
+      "range": {
+        "startLine": 382,
+        "startChar": 82,
+        "endLine": 382,
+        "endChar": 83
+      },
+      "revId": "7112848fb8b3ec45ac444e0bf84dd60851f55089",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
