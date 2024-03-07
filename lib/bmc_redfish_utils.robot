@@ -369,3 +369,17 @@ Get BMC Last Reset Time
     ${last_reset_time}=  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  LastResetTime
 
     [Return]  ${last_reset_time}
+
+
+Disable Redfish Delete Session
+    [Documentation]  Disable delete redfish while performing power operation keyword.
+
+    ${REDFISH_DELETE_SESSIONS}=  Set Variable  ${0}
+    Set Suite Variable  ${REDFISH_DELETE_SESSIONS}
+
+
+Enable Redfish Delete Session
+    [Documentation]  Enable delete redfish while performing power operation keyword.
+
+    ${REDFISH_DELETE_SESSIONS}=  Set Variable  ${1}
+    Set Suite Variable  ${REDFISH_DELETE_SESSIONS}
