@@ -56,6 +56,30 @@
       },
       "revId": "150f22aa52b801e580404e3ce74b3daaeac8276c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d1ba2f7_c5e07066",
+        "filename": "redfish/managers/test_bmc_dumps.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2024-03-07T04:22:33Z",
+      "side": 1,
+      "message": "Please do the needful Manash and make the changes in place where its needed for this test suite",
+      "parentUuid": "c21b3907_c366603e",
+      "range": {
+        "startLine": 384,
+        "startChar": 27,
+        "endLine": 384,
+        "endChar": 79
+      },
+      "revId": "150f22aa52b801e580404e3ce74b3daaeac8276c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
