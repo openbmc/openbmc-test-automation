@@ -64,6 +64,16 @@ Reset BIOS Via Redfish
     Redfish.Post  ${target}  valid_status_codes=[${HTTP_OK}]
 
 
+Set Redfish Delete Session Flag
+    [Documentation]  Disable or enable delete redfish while performing the power operation keyword.
+    [Arguments]  ${set_flag}
+
+    # Description of argument(s):
+    # set_flag    Set user specified enable(1) or disable(0).
+
+    Set Suite Variable  ${REDFISH_DELETE_SESSIONS}  ${set_flag}
+
+
 Redfish Delete Session
     [Documentation]  Redfish delete session.
     [Arguments]  ${session_info}
