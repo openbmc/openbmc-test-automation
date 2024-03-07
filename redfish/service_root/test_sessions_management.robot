@@ -18,6 +18,7 @@ Test Teardown    FFDC On Test Case Fail
 # User-driven input parameter to skip operator user.
 # -v SKIP_OPERATOR_USER:1  to skip from CLI.
 ${SKIP_OPERATOR_USER}    ${0}
+${REDFISH_DELETE_SESSIONS}  ${0}
 
 
 *** Test Cases ***
@@ -293,11 +294,13 @@ Suite Setup Execution
 
     Create Users With Different Roles  users=${USERS}  force=${True}
     Get Default Timeout Value
+    Set Redfish Delete Session Flag  ${0}
 
 
 Suite Teardown Execution
     [Documentation]  Suite teardown execution.
 
     Delete BMC Users Via Redfish  users=${USERS}
+    Set Redfish Delete Session Flag  ${1}
     Run Keyword And Ignore Error  Delete All Redfish Sessions
     Redfish.Logout
