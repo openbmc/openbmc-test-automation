@@ -273,6 +273,7 @@ Verify Redfishtool Install Certificate
     ${cert_id}=  Redfishtool Install Certificate File On BMC
     ...  ${certificate_uri}  ${expected_status}  data=${file_data}
     Logging  Installed certificate id: ${cert_id}
+    Set Test Variable  ${cert_id}
 
     # Adding delay after certificate installation.
     Sleep  30s
