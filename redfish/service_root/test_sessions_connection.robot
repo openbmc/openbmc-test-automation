@@ -60,15 +60,3 @@ Check Connection On Reboot
 
     # Verify session is still active and no issues on connection after reboot.
     Repeat Keyword  ${reboot_interval}  Send Heartbeat
-
-Disable Redfish Delete Session
-    [Documentation]  Disable delete redfish while performing power operation keyword.
-
-    ${REDFISH_DELETE_SESSIONS}=  Set Variable  ${0}
-    Set Suite Variable  ${REDFISH_DELETE_SESSIONS}
-
-Enable Redfish Delete Session
-    [Documentation]  Enable delete redfish while performing power operation keyword.
-
-    ${REDFISH_DELETE_SESSIONS}=  Set Variable  ${1}
-    Set Suite Variable  ${REDFISH_DELETE_SESSIONS}

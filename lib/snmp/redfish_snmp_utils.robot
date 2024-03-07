@@ -72,7 +72,8 @@ Configure SNMP Manager Via Redfish
     # snmp_port  SNMP manager port
     # valid_status_code  expected code
 
-    ${snmp_mgr_data}=  Create Dictionary  Destination=snmp://${snmp_mgr_ip}:${snmp_port}
+    ${colon}=  Set Variable If  '${snmp_port}' == '${EMPTY}'  ${EMPTY}  :
+    ${snmp_mgr_data}=  Create Dictionary  Destination=snmp://${snmp_mgr_ip}${colon}${snmp_port}
     ...  SubscriptionType=${snmp_function}  Protocol=${snmp_version}
 
     Redfish.Post  ${subscription_uri}  body=&{snmp_mgr_data}
