@@ -1077,6 +1077,11 @@ def test_loop_body():
     global boot_success
     global boot_end_time
 
+    # The flag can be enabled or disabled on the go
+    redfish_delete_sessions = int(
+        BuiltIn().get_variable_value("${REDFISH_DELETE_SESSIONS}", default=1)
+    )
+
     gp.qprintn()
 
     next_boot = select_boot()
