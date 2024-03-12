@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "433854c9_d61fa0ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2024-03-12T15:10:53Z",
+      "side": 1,
+      "message": "Waiting for one more reviewer to give +1 and I\u0027ll merge this changes.",
+      "revId": "cda198dfa14c26942eaccee40ba0c0a490f34d7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
