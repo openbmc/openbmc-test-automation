@@ -38,3 +38,18 @@ Get Destination IPs Of Event Subscriptions
         ${server_ips}=  Combine Lists  ${server_ips}  ${dest_ip}
     END
     [Return]  ${server_ips}
+
+Delete Event Subscription Of Unpingable Destination
+    [Documentation]  Delete a event subscription with non-pinging destination.
+
+    ${subscription_ids}=  Get Event Subscription IDs
+
+    FOR  ${id}  IN  @{subscription_ids}
+        ${destination}=  Redfish.Get Attribute  /redfish/v1/EventService/Subscriptions/${id}  Destination
+        ${dest_ip}=  Get Regexp Matches  ${destination}  .*://(.*):.*  1
+        ${status}=  Run Keyword And Return Status  Ping Host  ${dest_ip}[0]
+
+        IF  ${status} == False
+            Redfish.Delete   /redfish/v1/EventService/Subscriptions/${id}
+        END
+    END
