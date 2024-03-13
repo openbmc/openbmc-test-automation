@@ -355,7 +355,7 @@ def get_sdr_info():
     return result
 
 
-def fetch_sdr_count(sdr_data):
+def fetch_oem_sdr_count(sdr_data):
     r"""
     Get IPMI SDR list and return the SDR OEM count.
 

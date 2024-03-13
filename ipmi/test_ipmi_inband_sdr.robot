@@ -88,8 +88,13 @@ Verify Sensor And SDR Count In Get Device SDR Info Via Inband IPMI
 
     # Get SDR Count From Get Device SDR Info command.
     ${SDR_count1}=  Get SDR Count From SDR Info
+    # Get sdr oem record count from "sdr elist -vvv" command output.
+    ${sdr_data}=  Run Inband IPMI Standard Command  sdr elist -vvv  fail_on_err=0
+    ${sdr_oem}=  Fetch OEM Sdr Count  ${sdr_data}
+    ${sdr_info_record_count}=  Evaluate  ${SDR_count1} - ${sdr_oem}
+
     # Compare Get Device SDR Sdr count with SDR Elist All count from lanplus.
-    Should Be Equal As Integers  ${SDR_count1}  ${SDR_count_lan1}
+    Should Be Equal As Integers  ${sdr_info_record_count}  ${SDR_count_lan1}
 
     # Reboot Host using Chassis Power Cycle.
     IPMI Power Cycle
@@ -104,8 +109,9 @@ Verify Sensor And SDR Count In Get Device SDR Info Via Inband IPMI
 
     # Get SDR Count From Get Device SDR Info command.
     ${SDR_count2}=  Get SDR Count From SDR Info
+    ${sdr_info_record_count2}=  Evaluate  ${SDR_count2} - ${sdr_oem}
     # Compare Get Device SDR Sdr count with SDR Elist All count from lanplus.
-    Should Be Equal As Integers  ${SDR_count2}  ${SDR_count_lan2}
+    Should Be Equal As Integers  ${sdr_info_record_count2}  ${SDR_count_lan2}
 
 
 Verify Timestamp In Get Device SDR Info Via Inband IPMI
