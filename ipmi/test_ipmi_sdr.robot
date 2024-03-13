@@ -49,7 +49,7 @@ Verify SDR Info
 
     # Get SDR OEM record count from "sdr elist -vvv" command output.
     ${sdr_data}=  Run IPMI Standard Command  sdr elist -vvv
-    ${sdr_oem}=  Fetch Sdr Count  ${sdr_data}
+    ${sdr_oem}=  Fetch OEM Sdr Count  ${sdr_data}
     ${sdr_info_record_count}=  Evaluate  ${sdr_info['record_count']} - ${sdr_oem}
 
     # Get sensor count from "sdr elist all" command output.
