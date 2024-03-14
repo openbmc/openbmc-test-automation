@@ -330,7 +330,7 @@ Read FRU Data Via IPMI
     # IPMI Read FRU Data Command.
     # 0xff - Count to read --- count is ‘1’ based
     ${resp}=  Run IPMI Command
-    ...  raw ${IPMI_RAW_CMD['FRU']['Read'][0]} ${fru_id} ${offset} 0xff
+    ...  ${IPMI_RAW_CMD['FRU']['Read'][0]} ${fru_id} ${offset} 0xff
 
     [Return]  ${resp}
 
@@ -347,7 +347,7 @@ Write FRU Data Via IPMI
 
     # IPMI Write FRU Data Command.
     ${resp}=  Run IPMI Command
-    ...  raw ${IPMI_RAW_CMD['FRU']['Write'][0]} ${fru_id} ${offset} ${data}
+    ...  ${IPMI_RAW_CMD['FRU']['Write'][0]} ${fru_id} ${offset} ${data}
 
     Should Be Equal As Strings  ${resp}  ${length}
 
