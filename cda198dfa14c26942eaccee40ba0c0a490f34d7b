@@ -51,6 +51,29 @@
       "parentUuid": "6de35eb9_06d011c6",
       "revId": "cda198dfa14c26942eaccee40ba0c0a490f34d7b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d841cbf_5fdd0833",
+        "filename": "lib/openbmc_ffdc_list.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2024-03-15T04:13:46Z",
+      "side": 1,
+      "message": "REDFISH_BASE \u003d \"/redfish/v1/\"\nREDFISH_FIRMWARE \u003d REDFISH_BASE + \"UpdateService/FirmwareInventory\"\ntry:\n    REDFISH_SYSTEM_ID \u003d BuiltIn().get_variable_value(\n        \"${SYSTEM_ID}\", default\u003d\"system\"\n    )\n    REDFISH_ELOG \u003d REDFISH_BASE + \"Systems/\" + REDFISH_SYSTEM_ID + \"/LogServices/EventLog/Entries\"\n\nexcept RobotNotRunningError:\n    REDFISH_ELOG \u003d REDFISH_BASE + \"Systems/system/LogServices/EventLog/Entries\"\n    pass\n\n\nPlease handle like this for it..",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 243,
+        "endChar": 67
+      },
+      "revId": "cda198dfa14c26942eaccee40ba0c0a490f34d7b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
