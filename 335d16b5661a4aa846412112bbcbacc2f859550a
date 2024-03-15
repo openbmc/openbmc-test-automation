@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4819448_eab0ef7c",
+        "filename": "ipmi/test_ipmi_inband_sdr.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1001306
+      },
+      "writtenOn": "2024-03-15T05:13:12Z",
+      "side": 1,
+      "message": "Can we have the keyword Name as \"Fetch OEM Sdr Count\" instead of \"Fetch Sdr Count\".\nBecause in the keyword we are fetching only oem sdr count alone.",
+      "revId": "335d16b5661a4aa846412112bbcbacc2f859550a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
