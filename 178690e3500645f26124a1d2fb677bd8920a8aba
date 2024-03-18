@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ed56778_c56d7fd6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-03-18T13:46:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5750f19_36d2c8c9",
+      "range": {
+        "startLine": 7,
+        "startChar": 8,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "178690e3500645f26124a1d2fb677bd8920a8aba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f070dca4_287599d0",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d66f181b_46208ca3",
+        "filename": "redfish/managers/test_bmc_network_mac.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-03-18T13:46:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f070dca4_287599d0",
+      "range": {
+        "startLine": 168,
+        "startChar": 6,
+        "endLine": 168,
+        "endChar": 21
+      },
+      "revId": "178690e3500645f26124a1d2fb677bd8920a8aba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1af0546_2fa16b17",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-03-18T08:58:54Z",
       "side": 1,
       "message": "change to ${valid_status_codes} and description accordingly.",
+      "range": {
+        "startLine": 205,
+        "startChar": 4,
+        "endLine": 205,
+        "endChar": 21
+      },
+      "revId": "178690e3500645f26124a1d2fb677bd8920a8aba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e19bbcb_0e773662",
+        "filename": "redfish/managers/test_bmc_network_mac.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-03-18T13:46:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1af0546_2fa16b17",
       "range": {
         "startLine": 205,
         "startChar": 4,
