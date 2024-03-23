@@ -33,6 +33,24 @@
       "message": "All good Konstantine ?",
       "revId": "b4447760758171775b7af52b2339173b5f59ef89",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc18c9eb_255ce39f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000926
+      },
+      "writtenOn": "2024-03-23T11:58:49Z",
+      "side": 1,
+      "message": "Honestly right now I think this would just break the test forever. The redfish vs IPMI mapping can be interpreted differently, and I haven\u0027t seen any positive response from the community for such change",
+      "parentUuid": "ccad7d86_4ca04c94",
+      "revId": "b4447760758171775b7af52b2339173b5f59ef89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
