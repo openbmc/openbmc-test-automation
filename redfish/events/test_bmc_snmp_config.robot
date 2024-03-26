@@ -3,17 +3,17 @@ Documentation  This testing requires special setup where SNMP trapd is
 ...            configured and installed. For download, installation and
 ...            configuration refer http://www.net-snmp.org/.
 
-Resource  ../lib/snmp/resource.robot
-Resource  ../lib/snmp/snmp_utils.robot
-Resource  ../lib/openbmc_ffdc.robot
-Resource  ../lib/logging_utils.robot
+Resource        ../../lib/snmp/resource.robot
+Resource        ../../lib/snmp/snmp_utils.robot
+Resource        ../../lib/openbmc_ffdc.robot
+Resource        ../../lib/logging_utils.robot
 
-Library  String
-Library  SSHLibrary
+Library         String
+Library         SSHLibrary
 
-Test Teardown  FFDC On Test Case Fail
+Test Teardown   FFDC On Test Case Fail
 
-Force Tags     BMC_SNMP_Config
+Force Tags      BMC_SNMP_Config
 
 *** Variables ***
 
