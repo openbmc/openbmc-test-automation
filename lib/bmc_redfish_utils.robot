@@ -34,7 +34,7 @@ Redfish Power Operation
 
     ${target}=  redfish_utils.Get Target Actions  /redfish/v1/Systems/system/  ComputerSystem.Reset
     ${payload}=  Create Dictionary  ResetType=${reset_type}
-    ${resp}=  Redfish.Post  ${target}  body=&{payload}
+    ${resp}=  Redfish.Post  ${target}  body=&{payload}  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
 
 Redfish BMC Reset Operation
