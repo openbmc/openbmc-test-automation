@@ -4,11 +4,11 @@ Documentation    Test suite to verify if the Robot setup is ready for use.
 Resource         ../lib/resource.robot
 Resource         ../lib/connection_client.robot
 Resource         ../lib/ipmi_client.robot
-Resource        ../lib/bmc_redfish_resource.robot
+Resource         ../lib/bmc_redfish_resource.robot
 
 Force Tags      Openbmc_Setup
 
-*** Variables  ****
+*** Variables  ***
 
 ${REDFISH_SUPPORT_TRANS_STATE}   ${1}
 
