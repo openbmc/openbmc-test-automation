@@ -16,6 +16,23 @@
       "message": "Delta changes in lib/openbmc_ffdc_list.py\n\nTEST 1:\nrobot -v OPENBMC_HOST:xx.xx.xx.xx -v OPENBMC_PASSWORD:xxxxxxxxxxxx tools/myffdc.robot\n********* DEBUG *******\nsystem\n\nTEST 2:\nrobot -v OPENBMC_HOST:xx.xx.xx.xx -v OPENBMC_PASSWORD:xxxxxxxxxxxx -v SYSTEM_ID:system1 tools/myffdc.robot\n********* DEBUG *******\nsystem1\n\nTEST 3:\nexport SYSTEM_ID\u003d\"\"\nrobot -v OPENBMC_HOST:xx.xx.xx.xx -v OPENBMC_PASSWORD:xxxxxxxxxxxx tools/myffdc.robot\n********* DEBUG *******\nsystem\n\nTEST 4:\nexport SYSTEM_ID\u003d\"system2\"\nrobot -v OPENBMC_HOST:xx.xx.xx.xx -v OPENBMC_PASSWORD:xxxxxxxxxxxx tools/myffdc.robot\n\nWorks good now.\n\nI have asked David Shaw to cherry pick and give a run as well in his environment. \n\nOnce I get +1 from him, we will merge this changes",
       "revId": "bf8de11df01c4478737261ace25edd5dc1ce58b1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa089043_0aa78c74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001049
+      },
+      "writtenOn": "2024-03-30T14:54:54Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "bf8de11df01c4478737261ace25edd5dc1ce58b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
