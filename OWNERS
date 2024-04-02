@@ -36,6 +36,7 @@ owners:
 
 reviewers:
 - adathatr@in.ibm.com
+- sridevra@in.ibm.com
 
 matchers:
 
@@ -45,3 +46,6 @@ openbmc:
   discord: gkeishin
 - name: Anusha Dathatri
   email: adathatr@in.ibm.com
+- name: Sridevi Ramesh
+  email: sridevra@in.ibm.com
+  discord: srideviramesh
