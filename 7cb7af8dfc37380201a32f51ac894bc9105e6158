@@ -16,6 +16,23 @@
       "message": "@chosteven I don\u0027t see your name in the approved list for Inventec\n\nhttps://drive.google.com/drive/folders/19RJNsE9nnNV8pMnV-6Q63mbhDMXKTUo1\n\ncan you talk to Vic Ye to get your name added before I can merge the gerrit commit patch changes..\n\nCLA Manager:\nVic Ye ye.vic@inventec.com",
       "revId": "7cb7af8dfc37380201a32f51ac894bc9105e6158",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed30c1b8_1fa57c31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2024-04-03T13:00:17Z",
+      "side": 1,
+      "message": "-1 till the CLA is added for Steven for Inventec..\nWill merge once I see its added in approved list. Thanks",
+      "revId": "7cb7af8dfc37380201a32f51ac894bc9105e6158",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
