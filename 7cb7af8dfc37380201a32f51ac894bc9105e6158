@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a982c8b6_2997f2dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2024-04-03T07:05:51Z",
+      "side": 1,
+      "message": "@chosteven I don\u0027t see your name in the approved list for Inventec\n\nhttps://drive.google.com/drive/folders/19RJNsE9nnNV8pMnV-6Q63mbhDMXKTUo1\n\ncan you talk to Vic Ye to get your name added before I can merge the gerrit commit patch changes..\n\nCLA Manager:\nVic Ye ye.vic@inventec.com",
+      "revId": "7cb7af8dfc37380201a32f51ac894bc9105e6158",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
