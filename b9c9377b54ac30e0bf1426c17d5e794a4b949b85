@@ -34,6 +34,24 @@
       "parentUuid": "d5e30811_9954b81a",
       "revId": "b9c9377b54ac30e0bf1426c17d5e794a4b949b85",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d662b3b9_92ad22d2",
+        "filename": "redfish/test_xit.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2024-04-04T15:48:16Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "6f47b116_2dfa2591",
+      "revId": "b9c9377b54ac30e0bf1426c17d5e794a4b949b85",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
