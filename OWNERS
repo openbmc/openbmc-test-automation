@@ -32,7 +32,7 @@
 # data within them will be kept sorted.
 
 owners:
-- gkeishin@in.ibm.com
+- gkeishin@gmail.com
 
 reviewers:
 - adathatr@in.ibm.com
@@ -42,7 +42,7 @@ matchers:
 
 openbmc:
 - name: George Keishing
-  email: gkeishin@in.ibm.com
+  email: gkeishin@gmail.com
   discord: gkeishin
 - name: Anusha Dathatri
   email: adathatr@in.ibm.com
