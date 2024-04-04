@@ -16,6 +16,24 @@
       "message": "This doesn\u0027t seem related to the rest of the change?",
       "revId": "b9c9377b54ac30e0bf1426c17d5e794a4b949b85",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f47b116_2dfa2591",
+        "filename": "redfish/test_xit.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2024-04-04T15:41:08Z",
+      "side": 0,
+      "message": "Thats the old REST dunp delete function. \n\nThe next line \n\nRedfish Delete All BMC Dumps\n\nis the new one.",
+      "parentUuid": "d5e30811_9954b81a",
+      "revId": "b9c9377b54ac30e0bf1426c17d5e794a4b949b85",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
