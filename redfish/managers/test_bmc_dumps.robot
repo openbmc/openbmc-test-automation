@@ -119,18 +119,6 @@ Verify BMC Dump Default Location In BMC
      Should Contain Any  ${dump_file}  BMCDUMP  obmcdump
 
 
-Verify User Initiated BMC Dump When Host Booted
-    [Documentation]  Create user initiated BMC dump at host booted state and
-    ...  verify dump entry for it.
-    [Tags]  Verify_User_Initiated_BMC_Dump_When_Host_Booted
-
-    Redfish Power On  stack_mode=skip
-    ${dump_id}=  Create User Initiated BMC Dump Via Redfish
-    ${dump_entries}=  Get BMC Dump Entries
-    Length Should Be  ${dump_entries}  1
-    List Should Contain Value  ${dump_entries}  ${dump_id}
-
-
 Verify User Initiated BMC Dump At Host Booting
     [Documentation]  Create and verify user initiated BMC dump during Host is powwering on
     ...  or when host booting is in progress.
