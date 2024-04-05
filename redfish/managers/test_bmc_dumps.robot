@@ -124,7 +124,8 @@ Verify User Initiated BMC Dump When Host Booted
     ...  verify dump entry for it.
     [Tags]  Verify_User_Initiated_BMC_Dump_When_Host_Booted
 
-    Redfish Power On  stack_mode=skip
+    Set BIOS Attribute  pvm_stop_at_standby  Enabled
+    Redfish Power On
     ${dump_id}=  Create User Initiated BMC Dump Via Redfish
     ${dump_entries}=  Get BMC Dump Entries
     Length Should Be  ${dump_entries}  1
