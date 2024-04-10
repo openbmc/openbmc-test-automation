@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b7d5400_23928ee1",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-04-10T17:29:49Z",
+      "side": 1,
+      "message": "Space\nSet new\u003c1 space\u003epassword via redfish.",
+      "range": {
+        "startLine": 362,
+        "startChar": 4,
+        "endLine": 362,
+        "endChar": 51
+      },
+      "revId": "b19623805a1d1e8269f8bc1c4f16303fbdc0c310",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ed4c29c_c353837f",
         "filename": "security/test_bmc_expire_password.robot",
         "patchSetId": 10
@@ -14,6 +37,29 @@
       "writtenOn": "2024-04-10T16:21:50Z",
       "side": 1,
       "message": "I get:\n20240410 17:28:12.932 \tERROR \tError in file \u0027/workdir/openbmc-test-automation/security/test_bmc_expire_password.robot\u0027 on line 363: Creating keyword \u0027Set Password Via Redfish\u0027 failed: Invalid argument specification: Invalid argument syntax \u0027${new_password} ${expect_result}\u0027.",
+      "revId": "b19623805a1d1e8269f8bc1c4f16303fbdc0c310",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6bcc08f_3e6efd88",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-04-10T17:29:49Z",
+      "side": 1,
+      "message": "Give two spaces \n${new_password}\u003c2 spaces\u003e${expect_result}",
+      "range": {
+        "startLine": 363,
+        "startChar": 4,
+        "endLine": 363,
+        "endChar": 49
+      },
       "revId": "b19623805a1d1e8269f8bc1c4f16303fbdc0c310",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
