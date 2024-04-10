@@ -104,6 +104,24 @@
       "message": "why are you disabling it?? can you Pls elaborate. Thanks",
       "revId": "5cb340273befff983a72ce15e27374004bf22aad",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9871bbc3_a79b0c13",
+        "filename": "redfish/service_root/test_sessions_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000978
+      },
+      "writtenOn": "2024-04-10T18:16:40Z",
+      "side": 1,
+      "message": "Because for Verify_Session_Persistency_After_BMC_Reboot test case, if not disable delete session, the \u0027Redfish OBMC Reboot (off)\u0027 keyword will clear all sessions at the end, which makes \u0027check session persistency\u0027 fail",
+      "parentUuid": "d2fdbda3_13bd4878",
+      "revId": "5cb340273befff983a72ce15e27374004bf22aad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
