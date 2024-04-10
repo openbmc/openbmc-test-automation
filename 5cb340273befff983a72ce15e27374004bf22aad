@@ -22,6 +22,30 @@
       },
       "revId": "5cb340273befff983a72ce15e27374004bf22aad",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95a6631c_eae7fcf3",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2024-04-10T03:59:24Z",
+      "side": 1,
+      "message": "and use the new keyword as  example\n\nSet Redfish Delete Session Flag   ${0}\n\nSet Redfish Delete Session Flag   ${1}",
+      "parentUuid": "05fae886_98f6c734",
+      "range": {
+        "startLine": 372,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 0
+      },
+      "revId": "5cb340273befff983a72ce15e27374004bf22aad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
