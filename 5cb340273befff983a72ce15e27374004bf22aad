@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05fae886_98f6c734",
+        "filename": "lib/bmc_redfish_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2024-04-10T03:54:23Z",
+      "side": 1,
+      "message": "lib/resource.robot:${REDFISH_DELETE_SESSIONS}        ${1}\n\nBy default it\u0027s enabled.. but if there are use cases where you want to enable/disable it on the go.. You may want to do something like this\n\n\nSet Redfish Delete Session Flag\n    [Documentation]  Disable or enable delete redfish while performing the power operation keyword.\n    [Arguments]   ${set_flag}\n\t# Description of argument(s):\n    # set_flag    Set user specified enable(1) or disable(1).\n\n    Set Suite Variable  ${REDFISH_DELETE_SESSIONS}   ${set_flag}",
+      "range": {
+        "startLine": 372,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 0
+      },
+      "revId": "5cb340273befff983a72ce15e27374004bf22aad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
