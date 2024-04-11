@@ -359,8 +359,8 @@ Restore Default Password For Admin User
 
 
 Set Password Via Redfish
-    [Documentation]  Set new  password via redfish.
-    [Arguments]  ${new_password} ${expect_result}
+    [Documentation]  Set new password via redfish.
+    [Arguments]  ${new_password}  ${expect_result}
 
     # Description of argument(s):
     # new_password        New password set.
