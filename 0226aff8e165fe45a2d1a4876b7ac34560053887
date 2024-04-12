@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5f95ec0_8565f65f",
+        "filename": "redfish/service_root/test_sessions_management.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2024-04-12T05:21:06Z",
+      "side": 1,
+      "message": "I believe you wont need this anymore",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 32
+      },
+      "revId": "0226aff8e165fe45a2d1a4876b7ac34560053887",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
