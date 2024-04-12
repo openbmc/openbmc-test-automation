@@ -122,6 +122,24 @@
       "parentUuid": "d2fdbda3_13bd4878",
       "revId": "5cb340273befff983a72ce15e27374004bf22aad",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b919b596_6a54ab07",
+        "filename": "redfish/service_root/test_sessions_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2024-04-12T10:11:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9871bbc3_a79b0c13",
+      "revId": "5cb340273befff983a72ce15e27374004bf22aad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
