@@ -8,6 +8,7 @@ Documentation    VMI multiple network interface tests.
 Resource         ../../lib/external_intf/vmi_utils.robot
 
 Suite Setup       Suite Setup Execution
+Test Setup        Redfish.Login
 Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Run Keyword And Ignore Error  Suite Teardown Execution
 
