@@ -8,7 +8,6 @@ Documentation    VMI multiple network interface tests.
 Resource         ../../lib/external_intf/vmi_utils.robot
 
 Suite Setup       Suite Setup Execution
-Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Run Keyword And Ignore Error  Suite Teardown Execution
 
 Force Tags        Vmi_Multiple_Interfaces
@@ -51,7 +50,7 @@ Configure VMI Both Interfaces In Dynamic And Verify
     [Tags]  Configure_VMI_Both_Interfaces_In_Dynamic_And_Verify
     [Teardown]   Run keywords  Set VMI IPv4 Origin  ${False}
     ...  AND  Set VMI IPv4 Origin  ${False}  ${HTTP_ACCEPTED}  ${interface_list}[1]
-    ...  AND  Test Teardown
+    ...  AND  Test Teardown Execution
 
     Set VMI IPv4 Origin  ${True}
     ${default}=  Set Variable  0.0.0.0
@@ -65,7 +64,7 @@ Configure VMI First Interface In Static And Second In Dynamic And Verify
     [Tags]  Configure_VMI_First_Interface_In_Static_And_Second_In_Dynamic_And_Verify
     [Teardown]   Run keywords  Delete VMI IPv4 Address  AND
     ...  Set VMI IPv4 Origin  ${False}  ${HTTP_ACCEPTED}  ${interface_list}[1]
-    ...  AND  Test Teardown
+    ...  AND  Test Teardown Execution
 
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4_1}  ${test_gateway_1}
     ...  ${test_netmask_1}
@@ -80,7 +79,7 @@ Configure VMI First Interface In Dynamic And Second In Static And Verify
     [Tags]  Configure_VMI_First_Interface_In_Dynamic_And_Second_In_Static_And_Verify
     [Teardown]   Run keywords  Set VMI IPv4 Origin  ${False}  AND
     ...  Delete VMI IPv4 Address  IPv4StaticAddresses  ${HTTP_ACCEPTED}  ${interface_list}[1]
-    ...  AND  Test Teardown
+    ...  AND  Test Teardown Execution
 
     Set VMI IPv4 Origin  ${True}
     ${default}=  Set Variable  0.0.0.0
