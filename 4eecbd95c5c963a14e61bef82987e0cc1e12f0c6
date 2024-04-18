@@ -50,6 +50,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06fa8c24_4ae7b9ef",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-04-18T05:59:59Z",
+      "side": 1,
+      "message": "Not required",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 31
+      },
+      "revId": "4eecbd95c5c963a14e61bef82987e0cc1e12f0c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57b8b9ec_7c062790",
         "filename": "openpower/ext_interfaces/test_vmi_multiple_interfaces.robot",
         "patchSetId": 2
@@ -73,6 +96,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00ac349e_361ff19a",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-04-18T05:59:59Z",
+      "side": 1,
+      "message": "Test Teardown doing redfish logout because of this below test case failing, kindly check ct run146, please replace with ffdc on test fail",
+      "range": {
+        "startLine": 55,
+        "startChar": 14,
+        "endLine": 55,
+        "endChar": 27
+      },
+      "revId": "4eecbd95c5c963a14e61bef82987e0cc1e12f0c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eec5dad7_34ec8bb8",
         "filename": "openpower/ext_interfaces/test_vmi_multiple_interfaces.robot",
         "patchSetId": 2
@@ -84,6 +130,29 @@
       "writtenOn": "2024-04-18T05:50:02Z",
       "side": 1,
       "message": "Replace with Test Teardown Execution or FFDC On Test Fail",
+      "range": {
+        "startLine": 69,
+        "startChar": 14,
+        "endLine": 69,
+        "endChar": 27
+      },
+      "revId": "4eecbd95c5c963a14e61bef82987e0cc1e12f0c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4166adfb_d58de137",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-04-18T05:59:59Z",
+      "side": 1,
+      "message": "same as #55",
       "range": {
         "startLine": 69,
         "startChar": 14,
