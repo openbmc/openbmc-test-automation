@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ff7b48c_2f000dfd",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-04-18T05:05:15Z",
+      "side": 1,
+      "message": "Redfish.Login is a part of Suite Setup and Test Setup.\nYou can remove it from here else.",
+      "range": {
+        "startLine": 97,
+        "startChar": 4,
+        "endLine": 97,
+        "endChar": 17
+      },
+      "revId": "4eecbd95c5c963a14e61bef82987e0cc1e12f0c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
