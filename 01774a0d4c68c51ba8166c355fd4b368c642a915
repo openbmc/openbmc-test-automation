@@ -34,6 +34,24 @@
       "parentUuid": "cd380e9e_120882ed",
       "revId": "01774a0d4c68c51ba8166c355fd4b368c642a915",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c76c1aa8_c7d41ee5",
+        "filename": "lib/obmc_boot_test.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000978
+      },
+      "writtenOn": "2024-04-19T05:06:20Z",
+      "side": 1,
+      "message": "I\u0027ve tested and reviewed the stack, the assignment in line 90 is actually a bug. The value is read only once during module import. The keyword \"Set Redfish Delete Session Flag\" that changes the REDFISH_DELETE_SESSIONS value will not be updated in the function.\n                 \nIf REDFISH_DELETE_SESSIONS in Variable file is 1, the function will always clear all session regardless what you change in robot space afterward.",
+      "parentUuid": "6ece5a1c_da65a765",
+      "revId": "01774a0d4c68c51ba8166c355fd4b368c642a915",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
