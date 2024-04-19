@@ -91,7 +91,7 @@ def create_ipmi_ext_command_string(command, **options):
 
 def verify_ipmi_user_parm_accepted():
     r"""
-    Deterimine whether the OBMC accepts the '-U' ipmitool option and adjust
+    Determine whether the OBMC accepts the '-U' ipmitool option and adjust
     the global ipmi_required_options accordingly.
     """
 

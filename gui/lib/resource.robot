@@ -123,7 +123,7 @@ Test Setup Execution
 
     Print Timen  ${TEST NAME} ==> [STARTED]
     Launch Browser And Login OpenBMC GUI
-    Log To Console  Verifying the system state and stablity...
+    Log To Console  Verifying the system state and stability.
 
     Click Element  ${xpath_select_server_power}
     Wait Until Page Does Not Contain  Unreachable

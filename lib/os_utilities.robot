@@ -543,7 +543,7 @@ Create JSON Inventory File
     [Documentation]  Create a JSON inventory file, and make a YAML copy.
     [Arguments]  ${json_file_path}
     # Description of argument:
-    # json_file_path  Where the inventory file is wrtten to.
+    # json_file_path  Where the inventory file is written to.
 
     Login To OS
     Compile Inventory JSON

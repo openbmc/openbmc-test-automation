@@ -280,7 +280,7 @@ Create Users With Different Roles
     [Arguments]  ${users}  ${force}=${False}
 
     # Description of argument(s):
-    # users    Dictionary of roles and user credentails to be created.
+    # users    Dictionary of roles and user credentials to be created.
     #          Ex:  {'Administrator': '[admin_user, TestPwd123]', 'Operator': '[operator_user, TestPwd123]'}
     # force    Delete given user account if already exists when force is True.
 

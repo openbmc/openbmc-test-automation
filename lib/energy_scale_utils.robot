@@ -145,7 +145,7 @@ Activate DCMI Power Via REST
     Write Attribute   ${CONTROL_HOST_URI}power_cap  PowerCapEnable
     ...  data=${data}
     Return From Keyword If  ${verify} == ${False}
-    ${setting}=  Get DCMI Power Acivation Via REST
+    ${setting}=  Get DCMI Power Activation Via REST
     Should Be True  ${setting} == ${1}
     ...  msg=Failed to activate power limiting via REST.
 
@@ -161,12 +161,12 @@ Deactivate DCMI Power Via REST
     Write Attribute   ${CONTROL_HOST_URI}power_cap  PowerCapEnable
     ...  data=${data}
     Return From Keyword If  ${verify} == ${False}
-    ${setting}=  Get DCMI Power Acivation Via REST
+    ${setting}=  Get DCMI Power Activation Via REST
     Should Be True  ${setting} == ${0}
     ...  msg=Failed to deactivate power limiting via REST.
 
 
-Get DCMI Power Acivation Via REST
+Get DCMI Power Activation Via REST
     [Documentation]  Return the system's current DCMI power activation
     ...  state setting using REST interface.
 

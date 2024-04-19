@@ -118,7 +118,7 @@ Get Software Inventory State By Version
     [Documentation]  Return the software inventory record that matches the given software version.
     [Arguments]  ${software_version}
 
-    # If no matchine record can be found, return ${EMPTY}.
+    # If no matching record can be found, return ${EMPTY}.
 
     # Example of returned data:
     # software_inventory_record:

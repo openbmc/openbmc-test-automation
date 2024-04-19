@@ -1,7 +1,7 @@
 *** Settings ***
 
 Documentation       Module to test IPMI System Info Parameters functionality.
-...                 Following parameters are verfied in the script,
+...                 Following parameters are verified in the script,
 ...                 1. Set In Progress - param 0,
 ...                 2. System Firmware Version - param 1,
 ...                 3. System Name - param 2,

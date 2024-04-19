@@ -940,7 +940,7 @@ Verify Acquire And Release Lock In Loop
 
 
 Acquire And Release Multiple Locks
-    [Documentation]  Acquire mutilple locks on resource.
+    [Documentation]  Acquire multiple locks on resource.
     [Arguments]  ${client_id}  ${lock_type}  ${release_lock_type}
 
     # Description of argument(s):

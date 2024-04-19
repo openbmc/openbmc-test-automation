@@ -161,7 +161,7 @@ Verify If The Modified Admin Credential Is Valid Post Update
     # Flash latest firmware using redfish.
     Redfish Update Firmware  OnReset
 
-    # verify modified admin credentails on latest image.
+    # verify modified admin credentials on latest image.
     Redfish.Login  admin_user  0penBmc123
     Redfish.Logout
 
