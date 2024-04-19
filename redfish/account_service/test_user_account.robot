@@ -570,7 +570,7 @@ Redfish Create User
 
     # Resetting faillock count as a workaround for issue
     # openbmc/phosphor-user-manager#4
-    ${cmd}=  Catenate  test -f /usr/sbin/faillock && /usr/sbin/faillock --user ${username} --reset
+    ${cmd}=  Catenate  /usr/sbin/faillock --user ${username} --reset
 
     Bmc Execute Command  ${cmd}
 
