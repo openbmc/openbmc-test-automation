@@ -13,7 +13,7 @@
 --include Verify_Update_Service_Enabled
 --include Verify_Redfish_Software_Inventory_Collection
 --include Redfish_Software_Inventory_Status_Check
---include Verify_Redfish_BMC_Time
+# openbmc/openbmc#264 --include Verify_Redfish_BMC_Time
 --include Verify_Redfish_Invalid_URL_Response_Code
 --include Verify_Redfish_Unresponsive_URL_paths
 #IPMI tests.
