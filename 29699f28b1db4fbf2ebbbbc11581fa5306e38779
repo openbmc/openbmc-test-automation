@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18fd27e2_62098dc0",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-04-22T05:46:04Z",
+      "side": 1,
+      "message": "Instead on having hardcoded name, we are now using generic name and later making out the proper name by looking at Redfish. This approach is good. Keep it there. But I have some suggestion below take care of it.",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 24
+      },
+      "revId": "29699f28b1db4fbf2ebbbbc11581fa5306e38779",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1566674_554faa1c",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-04-22T05:46:04Z",
+      "side": 1,
+      "message": "Please don\u0027t rely solely on what is available in Redfish. Instead, perform system-specific checks to ensure that all the required metric definitions are tested. In inventory, we have a similar problem which we resolved. Please refer to the test suite below and make similar changes.\n\nopenpower/vpd/test_p10_redfish_vpd.robot\n\nAlso please move this test case downstream as this test is going to be IBM system specific.",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 7
+      },
+      "revId": "29699f28b1db4fbf2ebbbbc11581fa5306e38779",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
