@@ -281,6 +281,26 @@ Verify Clear SEL After Cold Reset
     Should Contain  ${clear_resp}  ${IPMI_RAW_CMD['SEL_entry']['Clear_SEL'][4]}
 
 
+Delete Non Existing SEL Event Entry
+    [Documentation]  Delete non existing SEL event entry.
+    [Tags]  Delete_Non_Existing_SEL_Event_Entry
+
+    ${sel_delete}=  Run Keyword And Expect Error  *
+    ...  Run IPMI Standard Command  sel delete 100
+    Should Contain  ${sel_delete}  Unable to delete entry
+    ...  case_insensitive=True
+
+
+Delete Invalid SEL Event Entry
+    [Documentation]  Delete invalid SEL event entry.
+    [Tags]  Delete_Invalid_SEL_Event_Entry
+
+    ${sel_delete}=  Run Keyword And Expect Error  *
+    ...  Run IPMI Standard Command  sel delete abc
+    Should Contain  ${sel_delete}  Given SEL ID 'abc' is invalid
+    ...  case_insensitive=True
+
+
 *** Keywords ***
 
 Create User Defined SEL

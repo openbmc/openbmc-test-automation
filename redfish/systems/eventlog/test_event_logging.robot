@@ -256,26 +256,6 @@ Verify IPMI SEL Delete
     ...  case_insensitive=True
 
 
-Delete Non Existing SEL Event Entry
-    [Documentation]  Delete non existing SEL event entry.
-    [Tags]  Delete_Non_Existing_SEL_Event_Entry
-
-    ${sel_delete}=  Run Keyword And Expect Error  *
-    ...  Run IPMI Standard Command  sel delete 100
-    Should Contain  ${sel_delete}  Unable to delete entry
-    ...  case_insensitive=True
-
-
-Delete Invalid SEL Event Entry
-    [Documentation]  Delete invalid SEL event entry.
-    [Tags]  Delete_Invalid_SEL_Event_Entry
-
-    ${sel_delete}=  Run Keyword And Expect Error  *
-    ...  Run IPMI Standard Command  sel delete abc
-    Should Contain  ${sel_delete}  Given SEL ID 'abc' is invalid
-    ...  case_insensitive=True
-
-
 Verify IPMI SEL Event Entries
     [Documentation]  Verify IPMI SEL's entries info.
     [Tags]  Verify_IPMI_SEL_Event_Entries
