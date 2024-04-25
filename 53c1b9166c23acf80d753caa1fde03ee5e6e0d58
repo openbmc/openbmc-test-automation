@@ -16,6 +16,41 @@
       "message": "can u please mention why the movement is required?",
       "revId": "53c1b9166c23acf80d753caa1fde03ee5e6e0d58",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f395138_c7288ea5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-04-25T06:13:21Z",
+      "side": 1,
+      "message": "Vidya, you can just a comment add like below:\n\nMoving IPMI related tests from error log suite to IPMI suite.",
+      "parentUuid": "22417e24_fe2788c2",
+      "revId": "53c1b9166c23acf80d753caa1fde03ee5e6e0d58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52cdfec6_16239d66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-04-25T06:13:21Z",
+      "side": 1,
+      "message": "Code looks good to me so giving +1. Please see what needs to be done to fix CI error.",
+      "revId": "53c1b9166c23acf80d753caa1fde03ee5e6e0d58",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
