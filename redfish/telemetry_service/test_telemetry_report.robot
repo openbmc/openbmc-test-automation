@@ -16,6 +16,10 @@ Force Tags          Telemetry_Report
 
 ${metric_definition_base_uri}  /redfish/v1/TelemetryService/MetricReportDefinitions
 ${metric_report_base_uri}      /redfish/v1/TelemetryService/MetricReports
+&{user_tele_def}               ambient temperature=Ambient.*Temp    pcie temperature=PCIE.*Temp
+...                            processor temperature=proc.*temp    dimm temperature=dimm.*temp
+...                            battery voltage=Battery_Voltage    total power=total_power
+...                            relative humidity=Relative_Humidity
 
 
 *** Test Cases ***
@@ -25,17 +29,14 @@ Verify Basic Telemetry Report Creation
     [Tags]  Verify_Basic_Telemetry_Report_Creation
     [Template]  Create Basic Telemetry Report
 
-    # Metric definition Metric ReportDefinition Type   Report Actions       Append Limit  Expected Result
-    total_power         OnRequest         LogToMetricReportsCollection
-    Battery_Voltage     Periodic          LogToMetricReportsCollection      100
-    Ambient_0_Temp      OnRequest         LogToMetricReportsCollection
-    proc0_core1_1_temp  Periodic          LogToMetricReportsCollection      500
-    PCIE_0_Temp         OnRequest         LogToMetricReportsCollection
-    dimm0_pmic_temp     Periodic          LogToMetricReportsCollection      1000
-    Relative_Humidity   OnRequest         LogToMetricReportsCollection
-    pcie_dcm0_power     Periodic          LogToMetricReportsCollection      32768
-    io_dcm0_power       OnRequest         LogToMetricReportsCollection
-    invalid_value       OnRequest         LogToMetricReportsCollection      100             fail
+    # Metric definition   Metric ReportDefinition Type     Report Actions         Append Limit  Expected Result
+    ambient temperature      OnRequest               LogToMetricReportsCollection
+    processor temperature    Periodic                LogToMetricReportsCollection      500
+    dimm temperature         Periodic                LogToMetricReportsCollection      1000
+    total power              OnRequest               LogToMetricReportsCollection
+    invalid value            OnRequest               LogToMetricReportsCollection      100             fail
+    relative humidity        OnRequest               LogToMetricReportsCollection
+    battery voltage          Periodic                LogToMetricReportsCollection      100
 
 
 Verify Error After Exceeding Maximum Report Creation
@@ -47,14 +48,22 @@ Verify Error After Exceeding Maximum Report Creation
     # Create maximum number of reports.
     ${resp}=  Redfish.Get Properties  /redfish/v1/TelemetryService
     FOR  ${i}  IN RANGE  ${resp["MaxReports"]}
-        Create Basic Telemetry Report   total_power  Periodic  LogToMetricReportsCollection
+        Create Basic Telemetry Report   total power  Periodic  LogToMetricReportsCollection
     END
 
     # Attempt another report creation and it should fail.
-    Create Basic Telemetry Report   total_power  Periodic  LogToMetricReportsCollection  expected_result=fail
+    Create Basic Telemetry Report   total power  Periodic  LogToMetricReportsCollection  expected_result=fail
 
     # Now delete the reports created.
     Delete All Telemetry Reports
+
+
+Verify Basic Telemetry Report Creation For PCIE
+     [Documentation]  Verify basic telemetry report creations for PCIE.
+     [Tags]  Verify_Basic_Telemetry_Report_Creation_For_PCIE
+
+     #                              Metric definition   Metric ReportDefinition Type     Report Actions
+     Create Basic Telemetry Report  pcie temperature         OnRequest              LogToMetricReportsCollection
 
 
 *** Keywords ***
@@ -64,6 +73,37 @@ Suite Setup Execution
 
     Redfish.Login
     Redfish Power On  stack_mode=skip
+    ${metric_definitions_list}=  Redfish_Utils.Get Member List  /redfish/v1/TelemetryService/MetricDefinitions
+
+    ${text_dict}=   Create Dictionary
+    Set Suite Variable  ${text_dict}
+    Set Suite Variable  ${metric_definitions_list}
+
+    Set To Dictionary  ${text_dict}  invalid value   invalid_value
+
+    # Find and collect actual telemetry definitions.
+    FOR    ${key}    IN    @{user_tele_def.keys()}
+      Add To Telemetry definition Record   ${key}   ${user_tele_def['${key}']}
+    END
+
+
+Add To Telemetry definition Record
+    [Documentation]  Find actual telemetry definitions available and store.
+    [Arguments]  ${key}  ${value}
+
+    # Description of argument(s):
+    # key       Name of metric definition in plain english.
+    # Example:  ambient temperature
+    # value     Equivalent regex expression of telemetry definition.
+    # Example:  Ambient.*Temp
+
+    FOR    ${item}    IN    @{metric_definitions_list}
+    ${result}=  Get Regexp Matches  ${item}  ${value}
+      IF   ${result} != []
+        Set To Dictionary   ${text_dict}  ${key}=${result}[0]
+        Exit For Loop
+      END
+    END
 
 
 Test Teardown Execution
@@ -85,6 +125,7 @@ Create Basic Telemetry Report
     # append_limit              Append limit of the metric data in the report.
     # expected_result           Expected result of report creation - success or fail.
 
+    ${metric_definition_name}=  Set Variable  ${text_dict}[${metric_definition_name}]
     ${resp}=  Redfish.Get Properties
     ...  /redfish/v1/TelemetryService/MetricDefinitions/${metric_definition_name}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
