@@ -3,7 +3,11 @@
 Documentation    Module to test IPMI SEL functionality.
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
+Resource         ../../../lib/logging_utils.robot
+
 Library          ../lib/ipmi_utils.py
+Library          ../../../lib/logging_utils.py
+
 Variables        ../data/ipmi_raw_cmd_table.py
 
 Test Setup       Test Setup Execution
@@ -280,6 +284,47 @@ Verify Clear SEL After Cold Reset
 
     Should Contain  ${clear_resp}  ${IPMI_RAW_CMD['SEL_entry']['Clear_SEL'][4]}
 
+Delete Non Existing SEL Event Entry
+    [Documentation]  Delete non existing SEL event entry.
+    [Tags]  Delete_Non_Existing_SEL_Event_Entry
+
+    ${sel_delete}=  Run Keyword And Expect Error  *
+    ...  Run IPMI Standard Command  sel delete 100
+    Should Contain  ${sel_delete}  Unable to delete entry
+    ...  case_insensitive=True
+
+
+Delete Invalid SEL Event Entry
+    [Documentation]  Delete invalid SEL event entry.
+    [Tags]  Delete_Invalid_SEL_Event_Entry
+
+    ${sel_delete}=  Run Keyword And Expect Error  *
+    ...  Run IPMI Standard Command  sel delete abc
+    Should Contain  ${sel_delete}  Given SEL ID 'abc' is invalid
+    ...  case_insensitive=True
+
+
+Verify IPMI SEL Event Last Add Time
+    [Documentation]  Verify IPMI SEL's last added timestamp.
+    [Tags]  Verify_IPMI_SEL_Event_Last_Add_Time
+    [Setup]  Install Tarball For Error Creation
+	
+    Create Test Error Log
+    ${sel_time}=  Run IPMI Standard Command  sel time get
+    ${sel_time}=  Convert Date  ${sel_time}
+    ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=True
+
+    ${sel_last_add_time}=  Get IPMI SEL Setting  Last Add Time
+    ${sel_last_add_time}=  Convert Date  ${sel_last_add_time}
+    ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=True
+
+    ${time_diff}=
+    ...  Subtract Date From Date  ${sel_last_add_time}  ${sel_time}
+
+    # Verify if the delay in current time check and last add SEL time
+    # is less or equals to 2 seconds.
+    Should Be True  ${time_diff} <= 2
+
 
 *** Keywords ***
 
@@ -364,6 +409,13 @@ Get BMC Time In Epoch
     ${epoch_date}=  Convert Date  ${date}  epoch  exclude_millis=yes  date_format=%m/%d/%Y %H:%M:%S
 
     [Return]   ${epoch_date}
+
+
+Install Tarball For Error Creation
+    [Documentation]  Install tarball for error log creation.
+ 
+    ${status}=  Run Keyword And Return Status  Logging Test Binary Exist
+    Run Keyword If  ${status} == ${False}  Install Tarball
 
 
 Test Setup Execution
