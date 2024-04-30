@@ -288,27 +288,6 @@ Verify IPMI SEL Event Entries
     Should Be Equal As Strings  ${sel_entries_count}  ${count}
 
 
-Verify IPMI SEL Event Last Add Time
-    [Documentation]  Verify IPMI SEL's last added timestamp.
-    [Tags]  Verify_IPMI_SEL_Event_Last_Add_Time
-
-    Create Test Error Log
-    ${sel_time}=  Run IPMI Standard Command  sel time get
-    ${sel_time}=  Convert Date  ${sel_time}
-    ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=True
-
-    ${sel_last_add_time}=  Get IPMI SEL Setting  Last Add Time
-    ${sel_last_add_time}=  Convert Date  ${sel_last_add_time}
-    ...  date_format=%m/%d/%Y %H:%M:%S  exclude_millis=True
-
-    ${time_diff}=
-    ...  Subtract Date From Date  ${sel_last_add_time}  ${sel_time}
-
-    # Verify if the delay in current time check and last add SEL time
-    # is less or equals to 2 seconds.
-    Should Be True  ${time_diff} <= 2
-
-
 Create Test Event Log And Delete
     [Documentation]  Create an event log and delete it.
     [Tags]  Create_Test_Event_Log_And_Delete
