@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cc10d38_9499b21b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-03T08:55:05Z",
+      "side": 1,
+      "message": "Leave one blank line after heading. Also remove the period \".\" from the end",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 57
+      },
+      "revId": "886a6aa2d80626fc6fa2b0947f8dd7d9d2ecebb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23d93622_b7828b2c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-03T08:55:05Z",
+      "side": 1,
+      "message": "Remove the arrow from here",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 2
+      },
+      "revId": "886a6aa2d80626fc6fa2b0947f8dd7d9d2ecebb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e4ad9bc_a9bf69b5",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-03T08:55:05Z",
+      "side": 1,
+      "message": "Leave one blank line after setup",
+      "range": {
+        "startLine": 291,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 47
+      },
+      "revId": "886a6aa2d80626fc6fa2b0947f8dd7d9d2ecebb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bb05b97_a866a827",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-03T08:55:05Z",
+      "side": 1,
+      "message": "Leave one blank line after documentation.",
+      "range": {
+        "startLine": 395,
+        "startChar": 0,
+        "endLine": 395,
+        "endChar": 60
+      },
+      "revId": "886a6aa2d80626fc6fa2b0947f8dd7d9d2ecebb4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
