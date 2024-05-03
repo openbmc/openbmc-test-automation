@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed148d68_3b2af072",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-03T10:20:48Z",
+      "side": 1,
+      "message": "Please align this comment message with below",
+      "range": {
+        "startLine": 28,
+        "startChar": 6,
+        "endLine": 28,
+        "endChar": 105
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c07ff444_86610dbb",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-03T10:20:48Z",
+      "side": 1,
+      "message": "I see that PCIE Temp has been moved as a separate test case so it\u0027s fine. However, I noticed that the following ones have also been removed. Is there any reason why they were taken out of the validation?\n\npcie_dcm0_power\nio_dcm0_power",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 19
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96421f59_c8dbe273",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-03T10:20:48Z",
+      "side": 1,
+      "message": "Add comment message like in above test case about these.",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 52
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6adf6009_b09ad3ae",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-03T10:20:48Z",
+      "side": 1,
+      "message": "Please move this dictionary to the variable section of this suite. You can also name it to somthing like - telemetry_sensor or telemetry_metric_definations",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 69
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17cb1d93_4bc8d262",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-03T10:20:48Z",
+      "side": 1,
+      "message": "add proper indent\n\n    FOR  ${key}  IN  @{user_tele_def.keys()}\n      Add To Telemetry definition Record  ${key}  ${user_tele_def[\u0027${key}\u0027]}\n    END",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 7
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec27a267_cc873d6b",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-03T10:20:48Z",
+      "side": 1,
+      "message": "Two spaces please \n\n    [Arguments]  ${key}  ${value}",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 35
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b7b8580_105b09d6",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-03T10:20:48Z",
+      "side": 1,
+      "message": "Remove white space and add example here and below",
+      "range": {
+        "startLine": 94,
+        "startChar": 58,
+        "endLine": 94,
+        "endChar": 59
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6b8725d_beb1dbe9",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-03T10:20:48Z",
+      "side": 1,
+      "message": "Have proper indent",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 7
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71b652ee_b34b202b",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-03T10:20:48Z",
+      "side": 1,
+      "message": "Please remove the extra END",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 7
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0608b90d_c9a71c58",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-03T10:20:48Z",
+      "side": 1,
+      "message": "metric_definition_name here is same as suite variable. Have a difference between these names.",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 85
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
