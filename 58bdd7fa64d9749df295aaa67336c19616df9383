@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c26db665_681ec53c",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-06T10:09:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed148d68_3b2af072",
+      "range": {
+        "startLine": 28,
+        "startChar": 6,
+        "endLine": 28,
+        "endChar": 105
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c07ff444_86610dbb",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-05-03T10:20:48Z",
       "side": 1,
       "message": "I see that PCIE Temp has been moved as a separate test case so it\u0027s fine. However, I noticed that the following ones have also been removed. Is there any reason why they were taken out of the validation?\n\npcie_dcm0_power\nio_dcm0_power",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 19
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e3fe9b0_fc31972e",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-06T10:09:15Z",
+      "side": 1,
+      "message": "These two does not appear anymore in metric definition. Neither they look to be important as per my earlier discussion with HMC team. So, I am not including them anymore.",
+      "parentUuid": "c07ff444_86610dbb",
       "range": {
         "startLine": 35,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30cf343e_9c112d0b",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-06T10:09:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96421f59_c8dbe273",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 52
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6adf6009_b09ad3ae",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-05-03T10:20:48Z",
       "side": 1,
       "message": "Please move this dictionary to the variable section of this suite. You can also name it to somthing like - telemetry_sensor or telemetry_metric_definations",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 69
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0014e314_cbbcf758",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-06T10:09:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6adf6009_b09ad3ae",
       "range": {
         "startLine": 77,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e87affe4_583fd653",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-06T10:09:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17cb1d93_4bc8d262",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 7
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec27a267_cc873d6b",
@@ -129,6 +249,30 @@
       "writtenOn": "2024-05-03T10:20:48Z",
       "side": 1,
       "message": "Two spaces please \n\n    [Arguments]  ${key}  ${value}",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 35
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34f1c36e_21dbcede",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-06T10:09:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec27a267_cc873d6b",
       "range": {
         "startLine": 91,
         "startChar": 0,
@@ -162,6 +306,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "126a650e_dfd01d6a",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-06T10:09:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b7b8580_105b09d6",
+      "range": {
+        "startLine": 94,
+        "startChar": 58,
+        "endLine": 94,
+        "endChar": 59
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6b8725d_beb1dbe9",
@@ -175,6 +343,30 @@
       "writtenOn": "2024-05-03T10:20:48Z",
       "side": 1,
       "message": "Have proper indent",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 7
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58fc4e7a_d14e82a0",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-06T10:09:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6b8725d_beb1dbe9",
       "range": {
         "startLine": 96,
         "startChar": 0,
@@ -208,6 +400,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd038753_8876b853",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-06T10:09:15Z",
+      "side": 1,
+      "message": "It is required - one is for loop, another for If statement.",
+      "parentUuid": "71b652ee_b34b202b",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 7
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0608b90d_c9a71c58",
@@ -221,6 +437,30 @@
       "writtenOn": "2024-05-03T10:20:48Z",
       "side": 1,
       "message": "metric_definition_name here is same as suite variable. Have a difference between these names.",
+      "range": {
+        "startLine": 125,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 85
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af6c5cba_662972e6",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-06T10:09:15Z",
+      "side": 1,
+      "message": "Both are different - the suite variable is metric_definitions_list",
+      "parentUuid": "0608b90d_c9a71c58",
       "range": {
         "startLine": 125,
         "startChar": 0,
