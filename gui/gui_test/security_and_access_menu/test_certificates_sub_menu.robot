@@ -24,7 +24,6 @@ ${xpath_input_city}                //*[@data-test-id='modalGenerateCsr-input-cit
 ${xpath_input_company_name}        //*[@data-test-id='modalGenerateCsr-input-companyName']
 ${xpath_input_company_unit}        //*[@data-test-id='modalGenerateCsr-input-companyUnit']
 ${xpath_input_common_name}         //*[@data-test-id='modalGenerateCsr-input-commonName']
-${xpath_input_challenge_password}  //*[@data-test-id='modalGenerateCsr-input-challengePassword']
 ${xpath_input_contact_person}      //*[@data-test-id='modalGenerateCsr-input-contactPerson']
 ${xpath_input_email_address}       //*[@data-test-id='modalGenerateCsr-input-emailAddress']
 ${xpath_generate_csr_submit}       //*[@data-test-id='modalGenerateCsr-button-ok']
@@ -72,7 +71,6 @@ Verify Generate CSR Certificate Button
     Page Should Contain Element  ${xpath_input_city}
     Page Should Contain Element  ${xpath_input_company_name}
     Page Should Contain Element  ${xpath_input_common_name}
-    Page Should Contain Element  ${xpath_input_challenge_password}
     Page Should Contain Element  ${xpath_input_contact_person}
     Page Should Contain Element  ${xpath_input_email_address}
     Page Should Contain Element  ${xpath_input_alternate_name}
