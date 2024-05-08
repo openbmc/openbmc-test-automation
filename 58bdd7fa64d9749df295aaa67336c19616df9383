@@ -95,6 +95,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "110b5752_134d1923",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-08T06:22:32Z",
+      "side": 1,
+      "message": "Okay them please add this info in the commit message.",
+      "parentUuid": "7e3fe9b0_fc31972e",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 19
+      },
+      "revId": "58bdd7fa64d9749df295aaa67336c19616df9383",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96421f59_c8dbe273",
