@@ -41,6 +41,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cca8eb0_cb3b2e8b",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-08T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ffe978c_4769d727",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 111
+      },
+      "revId": "2290f431fb17d87e6c281075db6aecd576f8b9ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89084bfe_098d2463",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-08T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ffe978c_4769d727",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 111
+      },
+      "revId": "2290f431fb17d87e6c281075db6aecd576f8b9ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "927c31fc_bbe7603c",
@@ -64,6 +112,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f6fd086_85ce14f8",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-08T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "927c31fc_bbe7603c",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 112
+      },
+      "revId": "2290f431fb17d87e6c281075db6aecd576f8b9ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c77c036a_c2024c6e",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-08T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "927c31fc_bbe7603c",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 112
+      },
+      "revId": "2290f431fb17d87e6c281075db6aecd576f8b9ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30d400db_bcdb4413",
@@ -77,6 +173,54 @@
       "writtenOn": "2024-05-08T06:22:32Z",
       "side": 1,
       "message": "Bring examples in one line like below. If you want to keep in two lines then align the example text.\n\n    # key       Name of metric definition in plain english. Example: ambient temperature\n    # value     Equivalent regex expression of telemetry definition. Example:  Ambient.*Temp",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 29
+      },
+      "revId": "2290f431fb17d87e6c281075db6aecd576f8b9ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a7a90de_6ff30cc2",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-08T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30d400db_bcdb4413",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 29
+      },
+      "revId": "2290f431fb17d87e6c281075db6aecd576f8b9ce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "978a0ed8_34169a88",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-08T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30d400db_bcdb4413",
       "range": {
         "startLine": 95,
         "startChar": 0,
