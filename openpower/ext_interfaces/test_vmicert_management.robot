@@ -747,6 +747,7 @@ Suite Setup Execution
     Set BIOS Attribute  pvm_hmc_managed  Enabled
 
     Redfish Power On
+    Wait For Host Boot Progress To Reach Required State
     Create Users With Different Roles  users=${USERS}  force=${True}
 
 
