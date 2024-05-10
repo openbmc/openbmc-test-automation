@@ -327,6 +327,25 @@ Verify IPMI SEL Event Last Add Time
     Should Be True  ${time_diff} <= 2
 
 
+Verify IPMI SEL Event Entries
+    [Documentation]  Verify IPMI SEL event entries info.
+    [Tags]  Verify_IPMI_SEL_Event_Entries
+    [Setup]  Install Tarball For Error Creation
+
+    # Clear all SEL entries using IPMI command.
+    Run IPMI Standard Command  sel clear
+    Sleep  5s
+
+    # Generate error logs of random count.
+    ${count}=  Evaluate  random.randint(1, 5)  modules=random
+    Repeat Keyword  ${count}  Create Test Error Log
+
+    ${sel_entries_count}=  Get IPMI SEL Setting  Entries
+    # After issuing the IPMI SEL clear command, there will be one informational SEL entry in the IPMI SEL.
+    # So comparing the IPMI SEL count with this additional single entry.
+    Should Be Equal As Strings  ${sel_entries_count}  ${count + 1}
+
+
 *** Keywords ***
 
 Create User Defined SEL
