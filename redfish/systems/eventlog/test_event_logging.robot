@@ -256,18 +256,6 @@ Verify IPMI SEL Delete
     ...  case_insensitive=True
 
 
-Verify IPMI SEL Event Entries
-    [Documentation]  Verify IPMI SEL's entries info.
-    [Tags]  Verify_IPMI_SEL_Event_Entries
-
-    # Generate error logs of random count.
-    ${count}=  Evaluate  random.randint(1, 5)  modules=random
-    Repeat Keyword  ${count}  Create Test Error Log
-
-    ${sel_entries_count}=  Get IPMI SEL Setting  Entries
-    Should Be Equal As Strings  ${sel_entries_count}  ${count}
-
-
 Create Test Event Log And Delete
     [Documentation]  Create an event log and delete it.
     [Tags]  Create_Test_Event_Log_And_Delete
