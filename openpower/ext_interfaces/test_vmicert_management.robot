@@ -71,7 +71,8 @@ Send CSR Request When VMI Is Off And Verify
     [Documentation]  Send CSR signing request to VMI when it is off and expect an error.
     [Tags]  Send_CSR_Request_When_VMI_Is_Off_And_Verify
     [Setup]  Redfish Power Off
-    [Teardown]  Run keywords  Redfish Power On  stack_mode=skip  AND  FFDC On Test Case Fail
+    [Teardown]  Run keywords  Redfish Power On  stack_mode=skip  AND
+    ...  Wait For Host Boot Progress To Reach Required State
     [Template]  Get Certificate Signed By VMI
 
     # username           password             force_create  valid_csr  valid_status_code         read_timeout
@@ -109,7 +110,8 @@ Get Root Certificate When VMI Is Off And Verify
     [Documentation]  Get root certificate when vmi is off and verify.
     [Tags]  Get_Root_Certificate_When_VMI_Is_Off_And_Verify
     [Setup]  Redfish Power Off
-    [Teardown]  Run keywords  Redfish Power On  stack_mode=skip  AND  FFDC On Test Case Fail
+    [Teardown]  Run keywords  Redfish Power On  stack_mode=skip  AND
+    ...  Wait For Host Boot Progress To Reach Required State
     [Template]  Get Root Certificate
 
     # username           password             force_create  valid_csr  valid_status_code
