@@ -33,6 +33,24 @@
       "message": "Not clear comment statement what is \u0027first ID\u0027 here\n```\n# Entry ID 1 is for information log.\n# Entry ID 2 is for event log.\n```\nplease mention clearly.",
       "revId": "205e980c0c4c0ab9b7cd3e53aa28fff56c59c8e3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dc3c85a_9ec9e632",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-14T14:39:07Z",
+      "side": 1,
+      "message": "You can add comment message like below :\n\n```\n# After issuing Redfish purge event log, there will be one informational error log \n# in BMC with ID 1. Due to this the newly generated error log would have ID as 2.\n```",
+      "parentUuid": "a589e8a9_f84f909c",
+      "revId": "205e980c0c4c0ab9b7cd3e53aa28fff56c59c8e3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
