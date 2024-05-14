@@ -127,7 +127,10 @@ Test Event Entry Numbering Reset On Restart
 
     Create Test PEL Log
     ${elogs}=  Get Event Logs
-    Should Be Equal  ${elogs[0]["Id"]}  1  msg=Event log entry is not 1
+
+    # After issuing Redfish purge event log, there will be one informational error log
+    # in BMC with ID 1. Due to this the newly generated error log would have ID as 2.
+    Should Be Equal  ${elogs[0]["Id"]}  2  msg=Event log entry is not 2
 
 
 Test Event Log Persistency On Reboot
