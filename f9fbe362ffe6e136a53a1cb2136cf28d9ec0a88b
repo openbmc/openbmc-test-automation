@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "884d3faf_32d97b08",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-14T11:15:01Z",
+      "side": 1,
+      "message": "Clear SEL log at the start of the test case",
+      "range": {
+        "startLine": 335,
+        "startChar": 0,
+        "endLine": 335,
+        "endChar": 42
+      },
+      "revId": "f9fbe362ffe6e136a53a1cb2136cf28d9ec0a88b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fbc738e_a98b9ca0",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-14T11:15:01Z",
+      "side": 1,
+      "message": "Please add a comment message just above this to explain the reason for doing Count + 1. Something like below\n\nAfter issuing the IPMI SEL clear command, there will be one informational SEL entry in the IPMI SEL. So comparing the IPMI SEL count with this additional single entry.",
+      "range": {
+        "startLine": 340,
+        "startChar": 0,
+        "endLine": 340,
+        "endChar": 66
+      },
+      "revId": "f9fbe362ffe6e136a53a1cb2136cf28d9ec0a88b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
