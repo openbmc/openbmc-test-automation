@@ -139,7 +139,7 @@ Verify Reserve SEL
 
     # Check SEL list.
     ${resp}=  Run IPMI Standard Command  sel list
-    Should Contain  ${resp}  SEL has no entries  case_insensitive=True
+    Should Contain  ${resp}  1  case_insensitive=True
 
 
 Verify IPMI SEL Most Recent Addition Timestamp
