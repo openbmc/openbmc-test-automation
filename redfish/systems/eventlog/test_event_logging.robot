@@ -127,7 +127,9 @@ Test Event Entry Numbering Reset On Restart
 
     Create Test PEL Log
     ${elogs}=  Get Event Logs
-    Should Be Equal  ${elogs[0]["Id"]}  1  msg=Event log entry is not 1
+
+    # Eentry Id 1 is for information log first Id, 2 is for event log.
+    Should Be Equal  ${elogs[0]["Id"]}  2  msg=Event log entry is not 2
 
 
 Test Event Log Persistency On Reboot
