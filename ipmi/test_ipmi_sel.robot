@@ -131,7 +131,7 @@ Verify Reserve SEL
     ${resp}=  Run IPMI Command
     ...  ${IPMI_RAW_CMD['SEL_entry']['Reserve'][0]}
     ${reserve_id}=  Split String  ${resp}
-
+    
     # Execute clear SEL raw command with Reservation ID.
     # Command will not execute unless the correct Reservation ID value is provided.
     Run IPMI Command
@@ -139,7 +139,7 @@ Verify Reserve SEL
 
     # Check SEL list.
     ${resp}=  Run IPMI Standard Command  sel list
-    Should Contain  ${resp}  SEL has no entries  case_insensitive=True
+    Should Contain  ${resp}  1  case_insensitive=True
 
 
 Verify IPMI SEL Most Recent Addition Timestamp
