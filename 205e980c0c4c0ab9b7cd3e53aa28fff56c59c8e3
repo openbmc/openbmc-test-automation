@@ -51,6 +51,24 @@
       "parentUuid": "a589e8a9_f84f909c",
       "revId": "205e980c0c4c0ab9b7cd3e53aa28fff56c59c8e3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af61a19f_338ad83b",
+        "filename": "redfish/systems/eventlog/test_event_logging.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-15T06:08:31Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "8dc3c85a_9ec9e632",
+      "revId": "205e980c0c4c0ab9b7cd3e53aa28fff56c59c8e3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
