@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "339ea051_03d410d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-05-15T12:58:09Z",
+      "side": 1,
+      "message": "Minor doc change please",
+      "revId": "44f150f76cf74cfe0e77c249ed8efce438fe009f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3030d9d1_9c89e7bb",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-05-15T12:58:09Z",
+      "side": 1,
+      "message": "can u make it simpler please\n\n```\n# One information log is created after purging error log and additional 2999 are created.\n# In total, 3000 error logs are available.\n```",
+      "range": {
+        "startLine": 579,
+        "startChar": 1,
+        "endLine": 580,
+        "endChar": 64
+      },
+      "revId": "44f150f76cf74cfe0e77c249ed8efce438fe009f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
