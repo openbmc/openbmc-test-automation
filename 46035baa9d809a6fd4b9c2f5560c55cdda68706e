@@ -193,6 +193,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec86783a_f19fee04",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2024-05-15T09:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90aea40b_376a3fe3",
+      "range": {
+        "startLine": 337,
+        "startChar": 0,
+        "endLine": 337,
+        "endChar": 13
+      },
+      "revId": "46035baa9d809a6fd4b9c2f5560c55cdda68706e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97d84193_6d2be9eb",
@@ -206,6 +230,30 @@
       "writtenOn": "2024-05-15T08:45:49Z",
       "side": 1,
       "message": "Please always keep one blank/empty line before comment message.",
+      "range": {
+        "startLine": 342,
+        "startChar": 0,
+        "endLine": 343,
+        "endChar": 56
+      },
+      "revId": "46035baa9d809a6fd4b9c2f5560c55cdda68706e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd3f28d8_68ae20b9",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2024-05-15T09:03:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97d84193_6d2be9eb",
       "range": {
         "startLine": 342,
         "startChar": 0,
