@@ -576,8 +576,9 @@ Verify Old Logs Are Deleted When Count Crosses Max
     [Tags]  Verify_Old_Logs_Are_Deleted_When_Count_Crosses_Max
 
     Redfish Purge Event Log
-    # Create 3000 error logs.
-    FOR  ${count}  IN RANGE  ${3000}
+    # One information log is created after purging error log and additional 2999 are created.
+    # In total, 3000 error logs are available.
+    FOR  ${count}  IN RANGE  1  ${3000}
         BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
     END
 
