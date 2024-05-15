@@ -58,6 +58,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c46e2b8_0843508b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-15T08:45:49Z",
+      "side": 1,
+      "message": "minor comments",
+      "revId": "46035baa9d809a6fd4b9c2f5560c55cdda68706e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8669eff_21c6bd0e",
@@ -71,6 +88,70 @@
       "writtenOn": "2024-05-15T07:49:45Z",
       "side": 1,
       "message": "Verify IPMI SEL event entries info.",
+      "revId": "46035baa9d809a6fd4b9c2f5560c55cdda68706e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e64378e_4169f9d8",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-15T08:45:49Z",
+      "side": 1,
+      "message": "The current one looks much better to me. SEL stand for System Event Logs. So we  don\u0027t have to add SEL event.",
+      "parentUuid": "f8669eff_21c6bd0e",
+      "revId": "46035baa9d809a6fd4b9c2f5560c55cdda68706e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90aea40b_376a3fe3",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-15T08:45:49Z",
+      "side": 1,
+      "message": "Please add a comment for adding this sleep like\n\n```\n    # Added a delay for IPMI SEL to clear completely.\n```",
+      "range": {
+        "startLine": 337,
+        "startChar": 0,
+        "endLine": 337,
+        "endChar": 13
+      },
+      "revId": "46035baa9d809a6fd4b9c2f5560c55cdda68706e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97d84193_6d2be9eb",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-15T08:45:49Z",
+      "side": 1,
+      "message": "Please always keep one blank/empty line before comment message.",
+      "range": {
+        "startLine": 342,
+        "startChar": 0,
+        "endLine": 343,
+        "endChar": 56
+      },
       "revId": "46035baa9d809a6fd4b9c2f5560c55cdda68706e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
