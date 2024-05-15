@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f042fe41_335d137a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2024-05-15T08:55:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e95ac2af_2e68cd3e",
+      "revId": "46035baa9d809a6fd4b9c2f5560c55cdda68706e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68c21793_6dcf85c1",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-05-15T07:49:45Z",
       "side": 1,
       "message": "keep the content in crisp\n\n- Move TC \u0027Verify IPMI SEL Event Entries\u0027 from\n  test_event_logging.robot to test_ipmi_sel.robot.\n- Replace count with count + 1",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 5
+      },
+      "revId": "46035baa9d809a6fd4b9c2f5560c55cdda68706e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1584335_65767a6a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2024-05-15T08:55:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68c21793_6dcf85c1",
       "range": {
         "startLine": 9,
         "startChar": 0,
@@ -105,6 +147,24 @@
       "writtenOn": "2024-05-15T08:45:49Z",
       "side": 1,
       "message": "The current one looks much better to me. SEL stand for System Event Logs. So we  don\u0027t have to add SEL event.",
+      "parentUuid": "f8669eff_21c6bd0e",
+      "revId": "46035baa9d809a6fd4b9c2f5560c55cdda68706e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c18ef448_a3d7ae75",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2024-05-15T08:55:57Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "f8669eff_21c6bd0e",
       "revId": "46035baa9d809a6fd4b9c2f5560c55cdda68706e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
