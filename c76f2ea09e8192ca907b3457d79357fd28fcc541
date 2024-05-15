@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b5127f3_dc735449",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2024-05-15T06:10:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee2df86f_c9e8af2c",
+      "range": {
+        "startLine": 335,
+        "startChar": 6,
+        "endLine": 335,
+        "endChar": 29
+      },
+      "revId": "c76f2ea09e8192ca907b3457d79357fd28fcc541",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "055dc122_a9332136",
         "filename": "ipmi/test_ipmi_sel.robot",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2024-05-14T14:45:26Z",
       "side": 1,
       "message": "Leave one space after # and end the comment message with a period \".\" like below\n```\n    # After issuing the IPMI SEL clear command, there will be one informational SEL entry in the IPMI SEL.\n    # So comparing the IPMI SEL count with this additional single entry.\n```",
+      "range": {
+        "startLine": 344,
+        "startChar": 0,
+        "endLine": 345,
+        "endChar": 70
+      },
+      "revId": "c76f2ea09e8192ca907b3457d79357fd28fcc541",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbb94ce8_ab85e449",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2024-05-15T06:10:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "055dc122_a9332136",
       "range": {
         "startLine": 344,
         "startChar": 0,
