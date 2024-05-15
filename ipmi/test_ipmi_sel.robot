@@ -52,10 +52,18 @@ Verify Empty SEL
 
     # Send SEL clear command and verify if it really clears up the SEL entry.
     Run IPMI Standard Command  sel clear
+
+    # Added a delay for IPMI SEL to clear completely.
     Sleep  5s
 
     ${resp}=  Run IPMI Standard Command  sel list
-    Should Contain  ${resp}  SEL has no entries  case_insensitive=True
+
+    # After executing the IPMI SEL clear command, there will be an informational
+    # SEL entry in the IPMI SEL. Therefore, checking if the IPMI SEL count is 1
+    # after clearing SEL.
+
+    ${sel_count}=  Get Line Count  ${resp}
+    Should Be Equal As Strings  ${sel_count}  1
 
 
 Verify Add SEL Entry
