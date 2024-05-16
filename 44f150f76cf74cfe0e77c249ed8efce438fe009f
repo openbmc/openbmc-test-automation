@@ -39,6 +39,29 @@
       },
       "revId": "44f150f76cf74cfe0e77c249ed8efce438fe009f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5515e6c7_44488be9",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-16T06:41:53Z",
+      "side": 1,
+      "message": "Just change ${3000} to  1 ${3000} and add a comment like below. Then no other changes would be required.\n\n```\n    # After issuing Redfish purge event log, there will be one informational\n    # error log in BMC. Therefore, creating 2999 error logs to have a total\n    # of 3000 error logs in the BMC.\n    FOR  ${count}  IN RANGE  1  ${3000}\n```",
+      "range": {
+        "startLine": 581,
+        "startChar": 29,
+        "endLine": 581,
+        "endChar": 36
+      },
+      "revId": "44f150f76cf74cfe0e77c249ed8efce438fe009f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
