@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6de9061_46e372d0",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-16T06:06:57Z",
+      "side": 1,
+      "message": "Keep one space after period and remove white space. I have reword the sentence. you can make use of it\n\n```\n    # After executing the IPMI SEL clear command, there will be an informational\n    # SEL entry in the IPMI SEL. Therefore, checking if the IPMI SEL count is 1 \n    # after clearing SEL.\n```",
+      "revId": "aaf7a911f97a3a85bc67e260040086d5ca498c13",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f85e8ec_2bc6b4cb",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-16T06:06:57Z",
+      "side": 1,
+      "message": "Here you need to verify that the IPMI SEL list shows only one entry. I would say get the IPMI output and check if only one SEL entry is there.",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 53
+      },
+      "revId": "aaf7a911f97a3a85bc67e260040086d5ca498c13",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
