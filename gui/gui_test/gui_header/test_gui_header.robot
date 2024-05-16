@@ -4,7 +4,7 @@ Documentation   Test OpenBMC GUI header.
 
 Resource        ../../lib/gui_resource.robot
 
-Suite Setup     Launch Browser And Login GUI
+Test Setup      Launch Browser And Login GUI
 Suite Teardown  Close Browser
 
 Force Tags      GUI_Header
@@ -54,6 +54,8 @@ Verify GUI Logout
 Verify System Serial And Model Number In GUI Header Page
     [Documentation]  Verify system serial and model number in GUI header page.
     [Tags]  Verify_System_Serial_And_Model_Number_In_GUI_Header_Page
+    [Setup]  Run Keywords  Launch Browser And Login GUI  AND  Redfish Login
+    [Teardown]  Run Keywords  Close Browser  AND  Redfish.Logout
 
    # Model.
    ${redfish_model_number}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  Model
@@ -64,3 +66,5 @@ Verify System Serial And Model Number In GUI Header Page
    ${redfish_serial_number}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  SerialNumber
    Element Should Be Visible  //*[@data-test-id='appHeader-container-overview']
    ...  /following-sibling::*/*[text()='${redfish_serial_number}']
+
+
