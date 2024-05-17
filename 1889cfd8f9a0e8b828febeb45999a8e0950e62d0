@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a88f997a_a5effa60",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2024-05-17T05:05:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39791969_d0dd33a9",
+      "revId": "1889cfd8f9a0e8b828febeb45999a8e0950e62d0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b842900c_31d6435e",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7d15a0f_17c0520f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2024-05-17T05:05:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b842900c_31d6435e",
+      "revId": "1889cfd8f9a0e8b828febeb45999a8e0950e62d0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f89b25a1_47eac3a5",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-05-17T04:53:53Z",
       "side": 1,
       "message": "Redfish",
+      "revId": "1889cfd8f9a0e8b828febeb45999a8e0950e62d0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f5d0f18_80b0e323",
+        "filename": "gui/gui_test/gui_header/test_gui_header.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2024-05-17T05:05:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f89b25a1_47eac3a5",
       "revId": "1889cfd8f9a0e8b828febeb45999a8e0950e62d0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
