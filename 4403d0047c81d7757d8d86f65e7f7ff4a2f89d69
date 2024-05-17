@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aaa8f62_0c0cddca",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-05-17T15:45:12Z",
+      "side": 1,
+      "message": "Create Template",
+      "revId": "4403d0047c81d7757d8d86f65e7f7ff4a2f89d69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24797923_c85b69f0",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-05-17T15:45:12Z",
+      "side": 1,
+      "message": "remove space",
+      "revId": "4403d0047c81d7757d8d86f65e7f7ff4a2f89d69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1849a2a_4d738eaf",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-05-17T15:45:12Z",
+      "side": 1,
+      "message": "english_actual_teleDef --- cant this something be simplified? not appealing",
+      "range": {
+        "startLine": 81,
+        "startChar": 26,
+        "endLine": 81,
+        "endChar": 48
+      },
+      "revId": "4403d0047c81d7757d8d86f65e7f7ff4a2f89d69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c60af6c_4962bf2c",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-05-17T15:45:12Z",
+      "side": 1,
+      "message": "Give two space.. before ${regex_matching_output}",
+      "revId": "4403d0047c81d7757d8d86f65e7f7ff4a2f89d69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
