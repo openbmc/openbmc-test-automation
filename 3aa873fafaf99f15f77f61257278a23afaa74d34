@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4400c2d3_568f274b",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-05-17T05:15:18Z",
+      "side": 1,
+      "message": "Add\n\n[Template]  Create Basic Telemetry Report",
+      "revId": "3aa873fafaf99f15f77f61257278a23afaa74d34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47ed9f6d_e8b20239",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-05-17T05:15:18Z",
+      "side": 1,
+      "message": "${text_dict} is a suite variable.. please give a meaningful variable name.",
+      "revId": "3aa873fafaf99f15f77f61257278a23afaa74d34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2579b978_97365add",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-05-17T05:15:18Z",
+      "side": 1,
+      "message": "Add To Telemetry definition Record Dictionary\n\nplease mention in which format the data is stored",
+      "revId": "3aa873fafaf99f15f77f61257278a23afaa74d34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8adf3254_dda9384c",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-05-17T05:15:18Z",
+      "side": 1,
+      "message": "key -\u003e metric_name\nvalue -\u003e tele_regex_format\n\nplease provide proper variable names.. instead of key, value",
+      "revId": "3aa873fafaf99f15f77f61257278a23afaa74d34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cdee726_bfe3054a",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-05-17T05:15:18Z",
+      "side": 1,
+      "message": "add two spaces\n\n${result} --\u003e ${regex_match_data}",
+      "revId": "3aa873fafaf99f15f77f61257278a23afaa74d34",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
