@@ -53,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d57147f_f41a27d8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2024-05-17T07:17:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "791ef222_29192c79",
+      "revId": "aaf7a911f97a3a85bc67e260040086d5ca498c13",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6de9061_46e372d0",
@@ -107,6 +125,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "a6de9061_46e372d0",
+      "revId": "aaf7a911f97a3a85bc67e260040086d5ca498c13",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6afc58b0_d965cd0a",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2024-05-17T07:17:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5efb9648_37d4e8e6",
+      "range": {
+        "startLine": 61,
+        "startChar": 3,
+        "endLine": 62,
+        "endChar": 76
+      },
       "revId": "aaf7a911f97a3a85bc67e260040086d5ca498c13",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
