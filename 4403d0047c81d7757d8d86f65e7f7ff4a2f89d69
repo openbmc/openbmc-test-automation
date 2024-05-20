@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "440e730d_3f41300f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-20T07:15:52Z",
+      "side": 1,
+      "message": "Thanks.",
+      "revId": "4403d0047c81d7757d8d86f65e7f7ff4a2f89d69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8aaa8f62_0c0cddca",
@@ -18,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0f02e5d_02fc08bd",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-20T07:15:52Z",
+      "side": 1,
+      "message": "Template does not suit here.",
+      "parentUuid": "8aaa8f62_0c0cddca",
+      "revId": "4403d0047c81d7757d8d86f65e7f7ff4a2f89d69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24797923_c85b69f0",
@@ -31,6 +66,24 @@
       "writtenOn": "2024-05-17T15:45:12Z",
       "side": 1,
       "message": "remove space",
+      "revId": "4403d0047c81d7757d8d86f65e7f7ff4a2f89d69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc9545c7_8646b54e",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-20T07:15:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24797923_c85b69f0",
       "revId": "4403d0047c81d7757d8d86f65e7f7ff4a2f89d69",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -58,6 +111,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ce6a945_6ee1622d",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-20T07:15:52Z",
+      "side": 1,
+      "message": "Not changing again - used at several places. There is a  documentation for this variable.",
+      "parentUuid": "d1849a2a_4d738eaf",
+      "range": {
+        "startLine": 81,
+        "startChar": 26,
+        "endLine": 81,
+        "endChar": 48
+      },
+      "revId": "4403d0047c81d7757d8d86f65e7f7ff4a2f89d69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c60af6c_4962bf2c",
@@ -71,6 +148,24 @@
       "writtenOn": "2024-05-17T15:45:12Z",
       "side": 1,
       "message": "Give two space.. before ${regex_matching_output}",
+      "revId": "4403d0047c81d7757d8d86f65e7f7ff4a2f89d69",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baf9c35e_a6ba3ccd",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000185
+      },
+      "writtenOn": "2024-05-20T07:15:52Z",
+      "side": 1,
+      "message": "done - two spaces for english_actual_teleDef, for regex_matching_output, it is fine.",
+      "parentUuid": "3c60af6c_4962bf2c",
       "revId": "4403d0047c81d7757d8d86f65e7f7ff4a2f89d69",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
