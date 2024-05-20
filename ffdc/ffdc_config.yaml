@@ -92,6 +92,7 @@ OPENBMC:
               /tmp/DEVTREE"
             - "cat /home/root/bmcweb_persistent_data.json >
               /tmp/bmcweb_persistent_data.json"
+            - "/usr/bin/vpd-tool -i > /tmp/vpd-inventory.txt"
         FILES:
             - "/tmp/BMC_flash_side.txt"
             - "/tmp/BMC_hwmon.txt"
@@ -120,6 +121,7 @@ OPENBMC:
             - "/tmp/fan_monitor_dump.json"
             - "/tmp/DEVTREE"
             - "/tmp/bmcweb_persistent_data.json"
+            - "/tmp/vpd-inventory.txt"
         PROTOCOL:
             - "SSH"
 

@@ -69,6 +69,7 @@ FFDC_BMC_FILE = {
         "BMC_obmc_console1.txt": (
             "cat /var/log/obmc-console1.log >/tmp/BMC_obmc_console1.txt 2>&1"
         ),
+        "vpd-inventory.txt": "vpd-tool -i >/tmp/vpd-inventory.txt 2>&1",
         "PEL_logs_list.json": "peltool -l >/tmp/PEL_logs_list.json 2>&1",
         "PEL_logs_complete_list.json": (
             "peltool -l -a -f >/tmp/PEL_logs_complete_list.json 2>&1"
