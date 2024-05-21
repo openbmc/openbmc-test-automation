@@ -129,7 +129,21 @@ Configure Invalid HostName And Verify
 
     # hostname          status_code
     !#@                 [${HTTP_BAD_REQUEST}]
-    ${EMPTY}            [${HTTP_BAD_REQUEST}]
+
+Configure Empty HostName And Verify LocalHost Is Assigned
+    [Documentation]  Configure Empty HostName And Verify LocalHost Is Assigned
+    [Tags]  Configure_Empty_HostName_And_Verify_LocalHost_Is_Assigned
+    [Teardown]  Run Keywords
+    ...  Configure Hostname  ${hostname}  AND  Validate Hostname On BMC  ${hostname}
+
+    ${hostname}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+
+    Configure Hostname  ${EMPTY}
+    Validate Hostname On BMC  localhost
+
+    # Verify configured hostname via redfish
+    ${new_hostname}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+    Should Be Equal  ${new_hostname}  localhost
 
 Add Valid IPv4 Address And Verify
     [Documentation]  Add IPv4 Address via Redfish and verify.
