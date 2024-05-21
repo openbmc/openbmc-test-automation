@@ -118,18 +118,32 @@ Configure Hostname And Verify
     Configure Hostname  ${test_hostname}
     Validate Hostname On BMC  ${test_hostname}
 
-    # Verify configured hostname via redfish.
+    # Verify configured hostname via Redfish.
     ${new_hostname}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
     Should Be Equal  ${new_hostname}  ${test_hostname}
 
 Configure Invalid HostName And Verify
-    [Documentation]  Configure invalid hostname via Redfish and Verify.
+    [Documentation]  Configure invalid hostname via Redfish and verify.
     [Tags]  Configure_Invalid_HostName_And_Verify
     [Template]  Configure Hostname
 
     # hostname          status_code
     !#@                 [${HTTP_BAD_REQUEST}]
-    ${EMPTY}            [${HTTP_BAD_REQUEST}]
+
+Configure Empty HostName And Verify If LocalHost Is Assigned
+    [Documentation]  Configure empty hostname and verify if localHost is assigned.
+    [Tags]  Configure_Empty_HostName_And_Verify_If_LocalHost_Is_Assigned
+    [Teardown]  Run Keywords
+    ...  Configure Hostname  ${hostname}  AND  Validate Hostname On BMC  ${hostname}
+
+    ${hostname}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+
+    Configure Hostname  ${EMPTY}
+    Validate Hostname On BMC  localhost
+
+    # Verify configured hostname via Redfish.
+    ${new_hostname}=  Redfish_Utils.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+    Should Be Equal  ${new_hostname}  localhost
 
 Add Valid IPv4 Address And Verify
     [Documentation]  Add IPv4 Address via Redfish and verify.
