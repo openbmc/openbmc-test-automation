@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8623e75d_2c634620",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-05-24T10:04:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "542a4833_14cde893",
+      "revId": "5b8773b3971541fe3367cecd6fc790000486bd11",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45eda9db_fce8b83c",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-05-23T05:24:07Z",
       "side": 1,
       "message": "Configure empty hostname and verify if localhost is assigned.",
+      "revId": "5b8773b3971541fe3367cecd6fc790000486bd11",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b2686db_a7e4fd69",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-05-24T10:04:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45eda9db_fce8b83c",
       "revId": "5b8773b3971541fe3367cecd6fc790000486bd11",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
