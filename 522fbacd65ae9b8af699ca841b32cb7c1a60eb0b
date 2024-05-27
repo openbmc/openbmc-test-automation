@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bebe677_d9aa5fbf",
+        "filename": "gui/gui_test/gui_header/test_gui_header.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2024-05-27T10:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82dd2196_decde66d",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 40
+      },
+      "revId": "522fbacd65ae9b8af699ca841b32cb7c1a60eb0b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71880a79_b7f0bb30",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "080699a0_a4377fa6",
+        "filename": "gui/gui_test/gui_header/test_gui_header.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2024-05-27T10:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71880a79_b7f0bb30",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 68
+      },
+      "revId": "522fbacd65ae9b8af699ca841b32cb7c1a60eb0b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a57540d3_d686bae1",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-05-27T06:17:26Z",
       "side": 1,
       "message": "This is not required after above chnages.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 18
+      },
+      "revId": "522fbacd65ae9b8af699ca841b32cb7c1a60eb0b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1644268a_a95d848a",
+        "filename": "gui/gui_test/gui_header/test_gui_header.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2024-05-27T10:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a57540d3_d686bae1",
       "range": {
         "startLine": 71,
         "startChar": 0,
