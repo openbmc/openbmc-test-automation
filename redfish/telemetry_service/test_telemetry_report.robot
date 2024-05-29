@@ -52,7 +52,8 @@ Verify Error After Exceeding Maximum Report Creation
     END
 
     # Attempt another report creation and it should fail.
-    Create Basic Telemetry Report   total power  Periodic  LogToMetricReportsCollection  expected_result=fail
+    Create Basic Telemetry Report
+    ...   total power  Periodic  LogToMetricReportsCollection  expected_result=fail
 
     # Now delete the reports created.
     Delete All Telemetry Reports
@@ -62,7 +63,8 @@ Verify Basic Telemetry Report Creation For PCIE
      [Documentation]  Verify basic telemetry report creations for PCIE.
      [Tags]  Verify_Basic_Telemetry_Report_Creation_For_PCIE
 
-     Create Basic Telemetry Report  pcie temperature  OnRequest  LogToMetricReportsCollection
+     Create Basic Telemetry Report
+     ...  pcie temperature  OnRequest  LogToMetricReportsCollection
 
 
 *** Keywords ***
@@ -72,9 +74,11 @@ Suite Setup Execution
 
     Redfish.Login
     Redfish Power On  stack_mode=skip
-    ${metric_definitions_list}=  Redfish_Utils.Get Member List  /redfish/v1/TelemetryService/MetricDefinitions
+    ${metric_definitions_list}=
+    ...  Redfish_Utils.Get Member List  /redfish/v1/TelemetryService/MetricDefinitions
 
-    # Create a dictionary of ordinary english naming and actual naming of telemtry definition.
+    # Create a dictionary of ordinary english naming and actual naming of
+    # telemtry definition.
     ${english_actual_teleDef}=   Create Dictionary
 
     Set Suite Variable  ${english_actual_teleDef}
@@ -89,13 +93,16 @@ Suite Setup Execution
 
 
 Add To Telemetry definition Record
-    [Documentation]  Find actual telemetry definitions available and store. Definitions are
-    ...  stored in a dictionary as key and value as decribed in argument documentation.
+    [Documentation]  Find actual telemetry definitions available and store.
+    ...              Definitions are stored in a dictionary as key and value
+    ...              as described in argument documentation.
     [Arguments]  ${key}  ${value}
 
     # Description of argument(s):
-    # key       Name of metric definition in plain english. Example: ambient temperature
-    # value     Equivalent regex expression of telemetry definition. Example:  Ambient.*Temp
+    # key       Name of metric definition in plain english.
+    #           Example: ambient temperature
+    # value     Equivalent regex expression of telemetry definition.
+    #           Example:  Ambient.*Temp
 
     FOR  ${item}  IN  @{metric_definitions_list}
       ${regex_matching_output}=  Get Regexp Matches  ${item}  ${value}
