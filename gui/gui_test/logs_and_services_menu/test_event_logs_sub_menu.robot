@@ -187,10 +187,12 @@ Verify Resolving Multiple Error Logs In GUI
 
     Create Error Logs  ${3}
     Refresh GUI
-    Select All Events
 
+    Select All Events
     Click Element  ${xpath_event_logs_resolve}
-    Page Should Contain  Successfully resolved 3 logs.
+
+    # Since we are selecting 'all events', 3+1 logs are resolved including informational.
+    Wait Until Page Contains  Successfully resolved 4 logs.  timeout=10
     Wait Until Page Does Not Contain Element  Success
     # Verify the event logs status from Redfish after mark as resolved.
     Get And Verify Status Of Resolved Field In Event Logs  ${True}
