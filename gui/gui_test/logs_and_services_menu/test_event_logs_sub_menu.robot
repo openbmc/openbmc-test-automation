@@ -196,6 +196,25 @@ Verify Resolving Multiple Error Logs In GUI
     Get And Verify Status Of Resolved Field In Event Logs  ${True}
 
 
+Verify Resolving Multiple Error Logs In GUI
+    [Documentation]  Verify that error logs can be resolved via GUI
+    ...               and the resolution is reflected in Redfish.
+    [Tags]  Verify_Resolving_Multiple_Error_Logs_In_GUI
+    [Setup]  Redfish Purge Event Log
+
+    Create Error Logs  ${3}
+    Refresh GUI
+
+    Select All Events
+    Click Element  ${xpath_event_logs_resolve}
+
+    # Since we are selecting 'all events', 3+1 logs are resolved including informational.
+    Wait Until Page Contains  Successfully resolved 4 logs.  timeout=10
+    Wait Until Page Does Not Contain Element  Success
+    # Verify the event logs status from Redfish after mark as resolved.
+    Get And Verify Status Of Resolved Field In Event Logs  ${True}
+
+
 Verify Default Value Of Resolved Field In Error Log
     [Documentation]   Verify that error log unresolved status from GUI
     [Tags]  Verify_Default_Value_Of_Resolved_Field_In_Error_Log
