@@ -76,11 +76,6 @@ OPENBMC:
             - {
                   "peltool -a -f -h>/tmp/PEL_logs_complete_display.json 2>&1": 1200,
               }
-            - {
-                  ? "strace -p $(pidof pldmd) -o /tmp/pldmd_strace.txt & sleep
-                    60 ; kill $!"
-                  : 70,
-              }
             - "hexdump -C /var/lib/phosphor-logging/extensions/pels/badPEL
               >/tmp/PEL_logs_badPEL.txt"
             - "guard -l >/tmp/GUARD_list.txt"
@@ -112,7 +107,6 @@ OPENBMC:
             - "/tmp/PEL_logs_complete_list.json"
             - "/tmp/PEL_logs_complete_display.json"
             - "/tmp/PEL_logs_display.json"
-            - "/tmp/pldmd_strace.txt"
             - "/tmp/PEL_logs_badPEL.txt"
             - "/tmp/GUARD_list.txt"
             - "/tmp/PLDM_fru_record.txt"
