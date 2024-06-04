@@ -86,11 +86,6 @@ FFDC_BMC_FILE = {
         "PLDM_fru_record.txt": (
             "pldmtool fru getfrurecordtable>/tmp/PLDM_fru_record.txt 2>&1"
         ),
-        "BMC_pldm_flight_recorder.txt": (
-            "rm -rf /tmp/pldm_flight_recorder; killall -s SIGUSR1 pldmd;"
-            + " sleep 5; cat /tmp/pldm_flight_recorder >"
-            " /tmp/BMC_pldm_flight_recorder.txt 2>&1;"
-        ),
         "OCC_state.txt": (
             'echo "OCC state check";for i in {0..3};'
             + " do (echo /org/open_power/control/occ$i;"
