@@ -480,12 +480,10 @@ Suite Setup Execution
 
     Redfish Power Off
     Set BIOS Attribute  pvm_hmc_managed  Enabled
+    Set BIOS Attribute  pvm_stop_at_standby  Disabled
+    
     Redfish Power On
-
-    # Check whether OS is up and working fine.
-    Wait Until Keyword Succeeds  15 min  1 sec  Is Boot Progress At Required State  OSRunning
-
-    Wait Until Keyword Succeeds  15 min  1 sec  OS Execute Command  uname
+    Wait For Host Boot Progress To Reach Required State
 
     ${active_channel_config}=  Get Active Channel Config
     Set Suite Variable   ${active_channel_config}
@@ -504,7 +502,7 @@ Test Teardown Execution
     FFDC On Test Case Fail
     ${curr_mode}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
     Run Keyword If  ${curr_mode} == ${True}  Set VMI IPv4 Origin  ${False}
-    Run Keyword If  ${vmi_network_conf} != ${None}
+    Run Keyword If  '${vmi_network_conf["IPv4_Address"]}' != '${default}'
     ...  Set Static IPv4 Address To VMI And Verify  ${vmi_network_conf["IPv4_Address"]}
     ...  ${vmi_network_conf["IPv4_Gateway"]}  ${vmi_network_conf["IPv4_SubnetMask"]}
 
