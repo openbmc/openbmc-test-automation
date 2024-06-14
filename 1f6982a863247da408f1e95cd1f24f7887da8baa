@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e6f5978_a0a433b2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2024-06-14T18:11:23Z",
+      "side": 1,
+      "message": "Just not needed anymore?\nSeems reasonable to me we don\u0027t collect",
+      "revId": "1f6982a863247da408f1e95cd1f24f7887da8baa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
