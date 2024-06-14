@@ -85,8 +85,6 @@ OPENBMC:
             - "killall -s SIGUSR1 phosphor-fan-monitor; sleep 5"
             - "cat /var/lib/phosphor-software-manager/pnor/rw/DEVTREE >
               /tmp/DEVTREE"
-            - "cat /home/root/bmcweb_persistent_data.json >
-              /tmp/bmcweb_persistent_data.json"
             - "/usr/bin/vpd-tool -i > /tmp/vpd-inventory.txt"
         FILES:
             - "/tmp/BMC_flash_side.txt"
@@ -114,7 +112,6 @@ OPENBMC:
             - "/tmp/fan_control_dump.json"
             - "/tmp/fan_monitor_dump.json"
             - "/tmp/DEVTREE"
-            - "/tmp/bmcweb_persistent_data.json"
             - "/tmp/vpd-inventory.txt"
         PROTOCOL:
             - "SSH"
