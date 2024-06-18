@@ -62,7 +62,7 @@ ${bmc_power_policy_method}        ${EMPTY}
 @{valid_power_policy_vars}        RESTORE_LAST_STATE  ALWAYS_POWER_ON
 ...                               ALWAYS_POWER_OFF
 
-${check_performance}              ${1}
+${check_performance}              ${0}
 
 
 *** Keywords ***
