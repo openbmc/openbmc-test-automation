@@ -1503,7 +1503,10 @@ def sprint_executing(stack_frame_ix=None, style=None, max_width=None):
     stack_frame = inspect.stack()[stack_frame_ix]
 
     if max_width is None:
-        max_width = 160 - (dft_col1_width + 11)
+        # Increase the console print logging. Keeping bellow
+        # for historical record which worked best until now.
+        #max_width = 160 - (dft_col1_width + 11)
+        max_width = 250 - (dft_col1_width + 11)
     func_and_args = sprint_func_line(stack_frame, style, max_width=max_width)
 
     return sprint_time() + "Executing: " + func_and_args + "\n"
