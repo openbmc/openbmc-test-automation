@@ -49,7 +49,8 @@ Redfish Power Operation
     ${target}=  Wait Until Keyword Succeeds  1 min  20 sec
     ...  redfish_utils.Get Target Actions  /redfish/v1/Systems/${SYSTEM_ID}/  ComputerSystem.Reset
     ${payload}=  Create Dictionary  ResetType=${reset_type}
-    ${resp}=  Redfish.Post  ${target}  body=&{payload}
+    ${header}=  Create Dictionary  Content-Type=application/json
+    ${resp}=  Redfish.Post  ${target}  body=&{payload}  headers=&{header}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
 
