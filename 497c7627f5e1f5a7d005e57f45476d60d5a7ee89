@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "767f4859_3b27db5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2024-06-25T16:47:05Z",
+      "side": 1,
+      "message": "https://lists.ozlabs.org/pipermail/openbmc/2024-June/035433.html\n\nwe should be ready soon to pull in this changes.. Please rebase once the above codes are merge. Thank you",
+      "revId": "497c7627f5e1f5a7d005e57f45476d60d5a7ee89",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
