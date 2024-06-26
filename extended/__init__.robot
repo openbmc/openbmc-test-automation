@@ -9,7 +9,7 @@ Resource         ../lib/code_update_utils.robot
 
 Suite Setup      System Driver Data
 
-*** Keyword ***
+*** Keywords ***
 
 System Driver Data
     [Documentation]  System driver information.

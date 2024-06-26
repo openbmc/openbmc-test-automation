@@ -9,7 +9,7 @@ Resource         ../../lib/code_update_utils.robot
 
 Suite Setup      Log System Driver Data
 
-*** Keyword ***
+*** Keywords ***
 
 Log System Driver Data
     [Documentation]  Log system driver information.

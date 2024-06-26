@@ -190,7 +190,7 @@ Get Concurrent Corrupted CSR Requests From Multiple Admin Users
     END
 
 
-*** Comment ***
+*** Comments ***
 
 Get Concurrent Root Certificate Request From Operator Users
     [Documentation]  Get multiple concurrent root certificate from non admin users and verify no errors.
@@ -222,7 +222,7 @@ Get Concurrent Root Certificate Request From Admin And Non Admin Users
     END
 
 
-*** Comment ***
+*** Comments ***
 
 Get Concurrent Root Certificate Request From Different Non Admin Users
     [Documentation]  Get multiple concurrent root certificate from different non admin users
@@ -363,7 +363,7 @@ Send Concurrent CSR Request From Admin And Non Admin Users And Verify
     END
 
 
-*** Comment ***
+*** Comments ***
 
 Send Concurrent CSR Request From Non Admin Users And Verify
     [Documentation]  Send concurrent csr request from non admin users
@@ -536,7 +536,7 @@ Send CSR Request And Corrupted CSR Requests From Non Admin Users Concurrently An
     END
 
 
-*** Comment ***
+*** Comments ***
 
 Get Root Certificate And Send CSR Requests From Admin And Operator Concurrently And Verify
     [Documentation]  Get root certificate from admin and send csr requests
