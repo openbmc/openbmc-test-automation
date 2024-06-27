@@ -1,67 +1,64 @@
 *** Settings ***
-Documentation    Module to test IPMI disable functionality.
+Documentation       Module to test IPMI disable functionality.
 
-Resource         ../lib/ipmi_client.robot
-Resource         ../lib/openbmc_ffdc.robot
-Library          ../lib/ipmi_utils.py
+Resource            ../lib/ipmi_client.robot
+Resource            ../lib/openbmc_ffdc.robot
+Library             ../lib/ipmi_utils.py
 
-Test Tags       IPMI_Disable
+Test Tags           ipmi_disable
+
 
 *** Test Cases ***
-
 Verify Disabling And Enabling IPMI Via Host
-    [Documentation]  Verify disabling and enabling IPMI via host.
-    [Tags]  Verify_Disabling_And_Enabling_IPMI_Via_Host
-    [Teardown]  Run Keywords  FFDC On Test Case Fail
-    ...  AND  Run Inband IPMI Standard Command  lan set ${CHANNEL_NUMBER} access on
+    [Documentation]    Verify disabling and enabling IPMI via host.
+    [Tags]    verify_disabling_and_enabling_ipmi_via_host
 
     # Disable IPMI and verify
-    Run Inband IPMI Standard Command  lan set ${CHANNEL_NUMBER} access off
-    Run Keyword and Expect Error  *Unable to establish IPMI*
-    ...  Run External IPMI Standard Command  lan print ${CHANNEL_NUMBER}
+    Run Inband IPMI Standard Command    lan set ${CHANNEL_NUMBER} access off
+    Run Keyword and Expect Error    *Unable to establish IPMI*
+    ...    Run External IPMI Standard Command    lan print ${CHANNEL_NUMBER}
 
     # Enable IPMI and verify
-    Run Inband IPMI Standard Command  lan set ${CHANNEL_NUMBER} access on
-    ${lan_print_info}=  Get Lan Print Dict  ${CHANNEL_NUMBER}
+    Run Inband IPMI Standard Command    lan set ${CHANNEL_NUMBER} access on
+    ${lan_print_info}=    Get Lan Print Dict    ${CHANNEL_NUMBER}
 
-    ${openbmc_host_name}  ${openbmc_ip}=  Get Host Name IP  host=${OPENBMC_HOST}
-    Rprint Vars  lan_print_info  openbmc_ip
-    Valid Value  lan_print_info['IP Address']  ['${openbmc_ip}']
-
+    ${openbmc_host_name}    ${openbmc_ip}=    Get Host Name IP    host=${OPENBMC_HOST}
+    Rprint Vars    lan_print_info    openbmc_ip
+    Valid Value    lan_print_info['IP Address']    ['${openbmc_ip}']
+    [Teardown]    Run Keywords    FFDC On Test Case Fail
+    ...    AND    Run Inband IPMI Standard Command    lan set ${CHANNEL_NUMBER} access on
 
 Verify Disabling IPMI Via OOB IPMI
-    [Documentation]  Verify disabling IPMI via out of band IPMI.
-    [Tags]  Verify_Disabling_IPMI_Via_OOB_IPMI
-    [Teardown]  Run Keywords  FFDC On Test Case Fail
-    ...  AND  Run Inband IPMI Standard Command  lan set ${CHANNEL_NUMBER} access on
+    [Documentation]    Verify disabling IPMI via out of band IPMI.
+    [Tags]    verify_disabling_ipmi_via_oob_ipmi
 
     # Disable IPMI via OOB IPMI and verify
-    ${resp}=  Run Keyword and Ignore Error
-    ...  Run External IPMI Standard Command  lan set ${CHANNEL_NUMBER} access off
-    Should Contain any  ${resp}  ${EMPTY}  Set Channel Access for channel ${CHANNEL_NUMBER} was successful.
-    Run Keyword and Expect Error  *Unable to establish IPMI*
-    ...  Run External IPMI Standard Command  lan print ${CHANNEL_NUMBER}
+    ${resp}=    Run Keyword and Ignore Error
+    ...    Run External IPMI Standard Command    lan set ${CHANNEL_NUMBER} access off
+    Should Contain any    ${resp}    ${EMPTY}    Set Channel Access for channel ${CHANNEL_NUMBER} was successful.
+    Run Keyword and Expect Error    *Unable to establish IPMI*
+    ...    Run External IPMI Standard Command    lan print ${CHANNEL_NUMBER}
 
     # Enable IPMI via Host and verify
-    Run Inband IPMI Standard Command  lan set ${CHANNEL_NUMBER} access on
-    ${lan_print_info}=  Get Lan Print Dict  ${CHANNEL_NUMBER}
+    Run Inband IPMI Standard Command    lan set ${CHANNEL_NUMBER} access on
+    ${lan_print_info}=    Get Lan Print Dict    ${CHANNEL_NUMBER}
 
-    ${openbmc_host_name}  ${openbmc_ip}=  Get Host Name IP  host=${OPENBMC_HOST}
-    Rprint Vars  lan_print_info  openbmc_ip
-    Valid Value  lan_print_info['IP Address']  ['${openbmc_ip}']
-
+    ${openbmc_host_name}    ${openbmc_ip}=    Get Host Name IP    host=${OPENBMC_HOST}
+    Rprint Vars    lan_print_info    openbmc_ip
+    Valid Value    lan_print_info['IP Address']    ['${openbmc_ip}']
+    [Teardown]    Run Keywords    FFDC On Test Case Fail
+    ...    AND    Run Inband IPMI Standard Command    lan set ${CHANNEL_NUMBER} access on
 
 Verify IPMI Disable Persistency After BMC Reboot
-    [Documentation]  Verify IPMI disable persistency after BMC reboot.
-    [Tags]  Verify_IPMI_Disable_Persistency_After_BMC_Reboot
-    [Teardown]  Run Keywords  FFDC On Test Case Fail
-    ...  AND  Run Inband IPMI Standard Command  lan set ${CHANNEL_NUMBER} access on
+    [Documentation]    Verify IPMI disable persistency after BMC reboot.
+    [Tags]    verify_ipmi_disable_persistency_after_bmc_reboot
 
     # Disable IPMI and reboot BMC.
-    Run Inband IPMI Standard Command  lan set ${CHANNEL_NUMBER} access off
+    Run Inband IPMI Standard Command    lan set ${CHANNEL_NUMBER} access off
     OBMC Reboot (run)
 
     # Verify that IPMI remains disabled after reboot.
-    Run Keyword and Expect Error  *Unable to establish IPMI*
-    ...  Run External IPMI Standard Command  lan print ${CHANNEL_NUMBER}
-
+    Run Keyword and Expect Error    *Unable to establish IPMI*
+    ...    Run External IPMI Standard Command    lan print ${CHANNEL_NUMBER}
+    [Teardown]    Run Keywords    FFDC On Test Case Fail
+    ...    AND    Run Inband IPMI Standard Command    lan set ${CHANNEL_NUMBER} access on

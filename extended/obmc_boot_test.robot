@@ -1,14 +1,13 @@
 *** Settings ***
-Documentation  Do random repeated boots based on the state of the BMC machine.
+Documentation       Do random repeated boots based on the state of the BMC machine.
 
-Resource  obmc_boot_test_resource.robot
+Resource            obmc_boot_test_resource.robot
 
-*** Variables ***
 
 *** Test Cases ***
 General Boot Testing
-    [Documentation]  Performs repeated boot tests.
-    [Tags]  General_Boot_Testing
-    [Teardown]  Test Teardown
+    [Documentation]    Performs repeated boot tests.
+    [Tags]    general_boot_testing
 
     OBMC Boot Test
+    [Teardown]    Test Teardown

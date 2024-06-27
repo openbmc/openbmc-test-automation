@@ -1,45 +1,44 @@
 *** Settings ***
-Documentation  Network stack stress tests using "nping" tool.
+Documentation       Network stack stress tests using "nping" tool.
 
-Resource  ../lib/resource.robot
+Resource            ../lib/resource.robot
+Library             OperatingSystem
+Library             String
 
-Library  OperatingSystem
-Library  String
+Suite Setup         Suite Setup Execution
 
-Suite Setup  Suite Setup Execution
+Test Tags           network_nping
 
-Test Tags  Network_Nping
 
 *** Variables ***
+${delay}                200ms
+${count}                100
+${bmc_packet_loss}      ${EMPTY}
 
-${delay}             200ms
-${count}             100
-${bmc_packet_loss}   ${EMPTY}
 
 *** Test Cases ***
-
 Verify Zero Network Packet Loss On BMC
-    [Documentation]  Pump network packets to target.
-    [Tags]  Verify_Zero_Network_Packet_Loss_On_BMC
+    [Documentation]    Pump network packets to target.
+    [Tags]    verify_zero_network_packet_loss_on_bmc
 
     # Send packets to BMC and check packet loss.
-    ${bmc_packet_loss}=  Send Network Packets
-    ...  ${OPENBMC_HOST}  ${PACKET_TYPE}  ${NETWORK_PORT}
+    ${bmc_packet_loss}=    Send Network Packets
+    ...    ${OPENBMC_HOST}    ${PACKET_TYPE}    ${NETWORK_PORT}
     Should Contain
-    ...  ${bmc_packet_loss}  Lost: 0 (0.00%)  msg=Fail, Packet loss on BMC.
+    ...    ${bmc_packet_loss}    Lost: 0 (0.00%)    msg=Fail, Packet loss on BMC.
+
 
 *** Keywords ***
-
 Suite Setup Execution
-    [Documentation]  Validate the setup.
+    [Documentation]    Validate the setup.
 
-    Should Not Be Empty  ${OPENBMC_HOST}  msg=BMC IP address not provided.
-    ${output}=  Run  which nping
-    Should Not Be Empty  ${output}  msg="nping" tool not installed.
+    Should Not Be Empty    ${OPENBMC_HOST}    msg=BMC IP address not provided.
+    ${output}=    Run    which nping
+    Should Not Be Empty    ${output}    msg="nping" tool not installed.
 
 Send Network Packets
-    [Documentation]  Send TCP, UDP or ICMP packets to the target.
-    [Arguments]  ${host}  ${packet_type}=tcp  ${port}=80
+    [Documentation]    Send TCP, UDP or ICMP packets to the target.
+    [Arguments]    ${host}    ${packet_type}=tcp    ${port}=80
 
     # Description of arguments:
     # ${host}- Target system to which network packets to be sent.
@@ -50,38 +49,38 @@ Send Network Packets
     # and rate at which packets to be sent, should be given in command line
     # by default it sends 100 TCP packets at 5 packets/second.
 
-    ${cmd_buff}=  Run Keyword If  '${packet_type}' == 'icmp'
-    ...  Set Variable
-    ...  echo ${CLIENT_PASSWORD} | sudo -S nping --delay ${delay} ${host} -c ${count} --${packet_type}
-    ...  ELSE
-    ...  Set variable
-    ...  echo ${CLIENT_PASSWORD} | sudo -S nping --delay ${delay} ${host} -c ${count} -p ${port} --${packet_type}
-    ${rc}  ${output}  Run And Return RC And Output  ${cmd_buff}
-    Should Be Equal As Integers  ${rc}  0  msg=Command execution failed.
-    ${packet_loss}  Get Packet Loss  ${host}  ${output}
-    RETURN  ${packet_loss}
+    IF    '${packet_type}' == 'icmp'
+        ${cmd_buff}=    Set Variable
+        ...    echo ${CLIENT_PASSWORD} | sudo -S nping --delay ${delay} ${host} -c ${count} --${packet_type}
+    ELSE
+        ${cmd_buff}=    Set variable
+        ...    echo ${CLIENT_PASSWORD} | sudo -S nping --delay ${delay} ${host} -c ${count} -p ${port} --${packet_type}
+    END
+    ${rc}    ${output}=    Run And Return RC And Output    ${cmd_buff}
+    Should Be Equal As Integers    ${rc}    0    msg=Command execution failed.
+    ${packet_loss}=    Get Packet Loss    ${host}    ${output}
+    RETURN    ${packet_loss}
 
 Get Packet Loss
-    [Documentation]  Check packet loss percentage.
+    [Documentation]    Check packet loss percentage.
+    [Arguments]    ${host}    ${traffic_details}
 
     # Sample Output from "nping" command:
     # Starting Nping 0.6.47 ( http://nmap.org/nping ) at 2017-02-21 22:05 IST
     # SENT (0.0181s) TCP Source IP:37577 >
-    #   Destination IP:80 S ttl=64 id=39113 iplen=40  seq=629782493 win=1480
+    #    Destination IP:80 S ttl=64 id=39113 iplen=40    seq=629782493 win=1480
     # SENT (0.2189s) TCP Source IP:37577 >
-    #   Destination IP:80 S ttl=64 id=39113 iplen=40  seq=629782493 win=1480
+    #    Destination IP:80 S ttl=64 id=39113 iplen=40    seq=629782493 win=1480
     # RCVD (0.4120s) TCP Destination IP:80 >
-    #   Source IP:37577 SA ttl=49 id=0 iplen=44  seq=1078301364 win=5840 <mss 1380>
+    #    Source IP:37577 SA ttl=49 id=0 iplen=44    seq=1078301364 win=5840 <mss 1380>
     # Max rtt: 193.010ms | Min rtt: 193.010ms | Avg rtt: 193.010ms
     # Raw packets sent: 2 (80B) | Rcvd: 1 (46B) | Lost: 1 (50.00%)
     # Nping done: 1 IP address pinged in 0.43 seconds
-
-    [Arguments]  ${host}  ${traffic_details}
 
     # Description of arguments:
     # ${host}- System on which packet loss to be checked.
     # ${traffic_details}- Details of the network traffic sent.
 
-    ${summary}=  Get Lines Containing String  ${traffic_details}  Rcvd:
-    Log To Console  \nPacket loss summary on ${host}\n*********************
-    RETURN  ${summary}
+    ${summary}=    Get Lines Containing String    ${traffic_details}    Rcvd:
+    Log To Console    \nPacket loss summary on ${host}\n*********************
+    RETURN    ${summary}

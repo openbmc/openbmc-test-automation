@@ -1,137 +1,129 @@
 *** Settings ***
+Documentation       Protocol settings utilities keywords.
 
-Documentation  Protocol settings utilities keywords.
-
-Resource         ../lib/resource.robot
-Resource         ../lib/utils.robot
+Resource            ../lib/resource.robot
+Resource            ../lib/utils.robot
 
 
 *** Variables ***
-
-${cmd_prefix}    ipmitool -I lanplus -C 17 -p 623 -U ${IPMI_USERNAME} -P ${IPMI_PASSWORD}
+${cmd_prefix}       ipmitool -I lanplus -C 17 -p 623 -U ${IPMI_USERNAME} -P ${IPMI_PASSWORD}
 
 
 *** Keywords ***
-
 Enable SSH Protocol
-    [Documentation]  Enable or disable SSH protocol.
-    [Arguments]  ${enable_value}=${True}
+    [Documentation]    Enable or disable SSH protocol.
+    [Arguments]    ${enable_value}=${True}
 
     # Description of argument(s}:
-    # enable_value  Enable or disable SSH, e.g. (true, false).
+    # enable_value    Enable or disable SSH, e.g. (true, false).
 
-    ${ssh_state}=  Create Dictionary  ProtocolEnabled=${enable_value}
-    ${data}=  Create Dictionary  SSH=${ssh_state}
+    ${ssh_state}=    Create Dictionary    ProtocolEnabled=${enable_value}
+    ${data}=    Create Dictionary    SSH=${ssh_state}
 
-    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
-    ...  valid_status_codes=[${HTTP_NO_CONTENT}]
+    Redfish.Patch    ${REDFISH_NW_PROTOCOL_URI}    body=&{data}
+    ...    valid_status_codes=[${HTTP_NO_CONTENT}]
 
     # Wait for timeout for new values to take effect.
-    Sleep  ${NETWORK_TIMEOUT}s
-
+    Sleep    ${NETWORK_TIMEOUT}s
 
 Verify SSH Login And Commands Work
-    [Documentation]  Verify if SSH connection works and able to run command on SSH session.
-    [Teardown]  Close All Connections
+    [Documentation]    Verify if SSH connection works and able to run command on SSH session.
 
     # Check if we can open SSH connection and login.
     Open Connection And Login
 
     # Check if we can run command successfully on SSH session.
-    BMC Execute Command  /sbin/ip addr
-
+    BMC Execute Command    /sbin/ip addr
+    [Teardown]    Close All Connections
 
 Verify SSH Protocol State
-    [Documentation]  verify SSH protocol state.
-    [Arguments]  ${state}=${True}
+    [Documentation]    verify SSH protocol state.
+    [Arguments]    ${state}=${True}
 
     # Description of argument(s}:
-    # state  Enable or disable SSH, e.g. (true, false)
+    # state    Enable or disable SSH, e.g. (true, false)
 
     # Sample output:
     # {
-    #   "@odata.id": "/redfish/v1/Managers/${MANAGER_ID}/NetworkProtocol",
-    #   "@odata.type": "#ManagerNetworkProtocol.v1_5_0.ManagerNetworkProtocol",
-    #   "Description": "Manager Network Service",
-    #   "FQDN": "bmc",
-    #  "HTTP": {
+    #    "@odata.id": "/redfish/v1/Managers/${MANAGER_ID}/NetworkProtocol",
+    #    "@odata.type": "#ManagerNetworkProtocol.v1_5_0.ManagerNetworkProtocol",
+    #    "Description": "Manager Network Service",
+    #    "FQDN": "bmc",
+    #    "HTTP": {
     #    "Port": 0,
     #    "ProtocolEnabled": false
-    #  },
-    #  "HTTPS": {
+    #    },
+    #    "HTTPS": {
     #    "Certificates": {
-    #      "@odata.id": "/redfish/v1/Managers/${MANAGER_ID}/NetworkProtocol/HTTPS/Certificates"
+    #    "@odata.id": "/redfish/v1/Managers/${MANAGER_ID}/NetworkProtocol/HTTPS/Certificates"
     #    },
     #    "Port": xxx,
     #    "ProtocolEnabled": true
-    #  },
-    #  "HostName": "xxxxbmc",
-    #  "IPMI": {
+    #    },
+    #    "HostName": "xxxxbmc",
+    #    "IPMI": {
     #    "Port": xxx,
     #    "ProtocolEnabled": true
-    #  },
-    #  "Id": "NetworkProtocol",
-    #  "NTP": {
+    #    },
+    #    "Id": "NetworkProtocol",
+    #    "NTP": {
     #    "NTPServers": [
-    #      "xx.xx.xx.xx",
-    #      "xx.xx.xx.xx",
-    #      "xx.xx.xx.xx"
+    #    "xx.xx.xx.xx",
+    #    "xx.xx.xx.xx",
+    #    "xx.xx.xx.xx"
     #    ],
     #    "ProtocolEnabled": true
-    #  },
-    #  "Name": "Manager Network Protocol",
-    #  "SSH": {
+    #    },
+    #    "Name": "Manager Network Protocol",
+    #    "SSH": {
     #    "Port": xx,
     #    "ProtocolEnabled": true
-    #  },
-    #  "Status": {
+    #    },
+    #    "Status": {
     #    "Health": "OK",
     #    "HealthRollup": "OK",
     #    "State": "Enabled"
-    #  }
+    #    }
 
-    ${resp}=  Redfish.Get  ${REDFISH_NW_PROTOCOL_URI}
-    Should Be Equal As Strings  ${resp.dict['SSH']['ProtocolEnabled']}  ${state}
-    ...  msg=Protocol states are not matching.
-
+    ${resp}=    Redfish.Get    ${REDFISH_NW_PROTOCOL_URI}
+    Should Be Equal As Strings    ${resp.dict['SSH']['ProtocolEnabled']}    ${state}
+    ...    msg=Protocol states are not matching.
 
 Enable IPMI Protocol
-    [Documentation]  Enable or disable IPMI protocol.
-    [Arguments]  ${enable_value}=${True}
+    [Documentation]    Enable or disable IPMI protocol.
+    [Arguments]    ${enable_value}=${True}
 
     # Description of argument(s}:
-    # enable_value  Enable or disable IPMI, e.g. (true, false).
+    # enable_value    Enable or disable IPMI, e.g. (true, false).
 
-    ${ipmi_state}=  Create Dictionary  ProtocolEnabled=${enable_value}
-    ${data}=  Create Dictionary  IPMI=${ipmi_state}
+    ${ipmi_state}=    Create Dictionary    ProtocolEnabled=${enable_value}
+    ${data}=    Create Dictionary    IPMI=${ipmi_state}
 
-    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
-    ...  valid_status_codes=[${HTTP_NO_CONTENT}]
+    Redfish.Patch    ${REDFISH_NW_PROTOCOL_URI}    body=&{data}
+    ...    valid_status_codes=[${HTTP_NO_CONTENT}]
 
     # Wait for timeout for new values to take effect.
-    Sleep  ${NETWORK_TIMEOUT}s
-
+    Sleep    ${NETWORK_TIMEOUT}s
 
 Verify IPMI Works
-    [Documentation]  Run IPMI command and return status.
-    [Arguments]  ${sub_cmd}  ${host}=${OPENBMC_HOST}
+    [Documentation]    Run IPMI command and return status.
+    [Arguments]    ${sub_cmd}    ${host}=${OPENBMC_HOST}
 
     # Description of argument(s):
-    # host         BMC host name or IP address.
-    # sub_cmd      The IPMI command string to be executed.
+    # host    BMC host name or IP address.
+    # sub_cmd    The IPMI command string to be executed.
 
-    ${rc}=  Run And Return Rc  ${cmd_prefix} -H ${host} ${sub_cmd}
-    Should Be Equal As Strings  ${rc}  0
-    ...  msg=IPMI is not enabled and commands are failing.
-
+    ${rc}=    Run And Return Rc    ${cmd_prefix} -H ${host} ${sub_cmd}
+    Should Be Equal As Strings    ${rc}    0
+    ...    msg=IPMI is not enabled and commands are failing.
 
 Verify IPMI Protocol State
-    [Documentation]  Verify IPMI protocol state.
-    [Arguments]  ${state}=${True}
+    [Documentation]    Verify IPMI protocol state.
+    [Arguments]    ${state}=${True}
 
     # Description of argument(s}:
-    # state  Enable or disable IPMI, e.g. (true, false)
+    # state    Enable or disable IPMI, e.g. (true, false)
 
-    ${resp}=  Redfish.Get  ${REDFISH_NW_PROTOCOL_URI}
-    Should Be Equal As Strings  ${resp.dict['IPMI']['ProtocolEnabled']}  ${state}
-    ...  msg=Protocol states are not matching.
+    ${resp}=    Redfish.Get    ${REDFISH_NW_PROTOCOL_URI}
+    Should Be Equal As Strings    ${resp.dict['IPMI']['ProtocolEnabled']}    ${state}
+    ...    msg=Protocol states are not matching.

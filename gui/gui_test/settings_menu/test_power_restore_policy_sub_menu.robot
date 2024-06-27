@@ -1,55 +1,51 @@
 *** Settings ***
+Documentation       Test OpenBMC GUI "Power restore policy" sub-menu of "Settings" menu.
 
-Documentation  Test OpenBMC GUI "Power restore policy" sub-menu of "Settings" menu.
+Resource            ../../lib/gui_resource.robot
 
-Resource        ../../lib/gui_resource.robot
+Suite Setup         Launch Browser And Login GUI
+Suite Teardown      Close Browser
+Test Setup          Test Setup Execution
 
-Suite Setup      Launch Browser And Login GUI
-Suite Teardown   Close Browser
-Test Setup       Test Setup Execution
+Test Tags           power_restore_policy_sub_menu
 
-Test Tags       Power_Restore_Policy_Sub_Menu
 
 *** Variables ***
+${xpath_power_restore_policy_heading}       //h1[text()="Power restore policy"]
+${xpath_AlwaysOn_radio}                     //input[@value='AlwaysOn']
+${xpath_AlwaysOff_radio}                    //input[@value='AlwaysOff']
+${xpath_LastState_radio}                    //input[@value='LastState']
+${xpath_save_settings_button}               //button[contains(text(),'Save')]
 
-${xpath_power_restore_policy_heading}  //h1[text()="Power restore policy"]
-${xpath_AlwaysOn_radio}                //input[@value='AlwaysOn']
-${xpath_AlwaysOff_radio}               //input[@value='AlwaysOff']
-${xpath_LastState_radio}               //input[@value='LastState']
-${xpath_save_settings_button}          //button[contains(text(),'Save')]
 
 *** Test Cases ***
-
 Verify Navigation To Power Restore Policy Page
-    [Documentation]  Verify navigation to Power Restore Policy page.
-    [Tags]  Verify_Navigation_To_Power_Restore_Policy_Page
+    [Documentation]    Verify navigation to Power Restore Policy page.
+    [Tags]    verify_navigation_to_power_restore_policy_page
 
-    Page Should Contain Element  ${xpath_power_restore_policy_heading}
-
+    Page Should Contain Element    ${xpath_power_restore_policy_heading}
 
 Verify Existence Of All Sections In Power Restore Policy Page
-    [Documentation]  Verify existence of all sections in Power Restore Policy page.
-    [Tags]  Verify_Existence_Of_All_Sections_In_Power_Restore_Policy_Page
+    [Documentation]    Verify existence of all sections in Power Restore Policy page.
+    [Tags]    verify_existence_of_all_sections_in_power_restore_policy_page
 
-    Page Should Contain  Power restore policies
-
+    Page Should Contain    Power restore policies
 
 Verify Existence Of All Buttons In Power Restore Policy Page
-    [Documentation]  Verify existence of All Buttons.
-    [Tags]  Verify_Existence_Of_All_Buttons_In_Power_Restore_Policy_Page
+    [Documentation]    Verify existence of All Buttons.
+    [Tags]    verify_existence_of_all_buttons_in_power_restore_policy_page
 
-    Page Should Contain Element  ${xpath_AlwaysOn_radio}
-    Page Should Contain Element  ${xpath_AlwaysOff_radio}
-    Page Should Contain Element  ${xpath_LastState_radio}
-    Page Should Contain Element  ${xpath_save_settings_button}
+    Page Should Contain Element    ${xpath_AlwaysOn_radio}
+    Page Should Contain Element    ${xpath_AlwaysOff_radio}
+    Page Should Contain Element    ${xpath_LastState_radio}
+    Page Should Contain Element    ${xpath_save_settings_button}
 
 
 *** Keywords ***
-
 Test Setup Execution
-    [Documentation]  Do test case setup tasks.
+    [Documentation]    Do test case setup tasks.
 
-    Click Element  ${xpath_settings_menu}
-    Click Element  ${xpath_power_restore_policy_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  power-restore-policy
-    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Click Element    ${xpath_settings_menu}
+    Click Element    ${xpath_power_restore_policy_sub_menu}
+    Wait Until Keyword Succeeds    30 sec    10 sec    Location Should Contain    power-restore-policy
+    Wait Until Element Is Not Visible    ${xpath_page_loading_progress_bar}    timeout=30

@@ -1,123 +1,118 @@
 *** Settings ***
-Documentation    This suite tests Redfish Host power operations.
+Documentation       This suite tests Redfish Host power operations.
 
-Resource         ../../lib/boot_utils.robot
-Resource         ../../lib/common_utils.robot
-Resource         ../../lib/open_power_utils.robot
+Resource            ../../lib/boot_utils.robot
+Resource            ../../lib/common_utils.robot
+Resource            ../../lib/open_power_utils.robot
 
-Test Setup       Test Setup Execution
-Test Teardown    Test Teardown Execution
+Test Setup          Test Setup Execution
+Test Teardown       Test Teardown Execution
+
 
 *** Variables ***
-
 # Extended code to check OCC state, power metric and others.
-${additional_power_check}      ${0}
-${additional_occ_check}        ${0}
+${additional_power_check}       ${0}
+${additional_occ_check}         ${0}
 
 # By default disable SOL logging collection.
-${capture_sol}                 ${0}
+${capture_sol}                  ${0}
+
 
 *** Test Cases ***
-
 Verify Redfish Host GracefulShutdown
-    [Documentation]  Verify Redfish host graceful shutdown operation.
-    [Tags]  Verify_Redfish_Host_GracefulShutdown
+    [Documentation]    Verify Redfish host graceful shutdown operation.
+    [Tags]    verify_redfish_host_gracefulshutdown
 
     Redfish Power Off
 
-
 Verify Redfish BMC PowerOn With OCC State
-    [Documentation]  Verify Redfish host power on operation.
-    [Tags]  Verify_Redfish_BMC_PowerOn_With_OCC_State
+    [Documentation]    Verify Redfish host power on operation.
+    [Tags]    verify_redfish_bmc_poweron_with_occ_state
 
     Redfish Power On
 
     # TODO: Replace OCC state check with redfish property when available.
     Verify OCC State
 
-
 Verify Redfish Host PowerOn
-    [Documentation]  Verify Redfish host power on operation.
-    [Tags]  Verify_Redfish_Host_PowerOn
+    [Documentation]    Verify Redfish host power on operation.
+    [Tags]    verify_redfish_host_poweron
 
     Redfish Power On
 
-    Run Keyword If  ${additional_occ_check} == ${1}
-    ...  Wait Until Keyword Succeeds  3 mins  30 secs  Match OCC And CPU State Count
+    IF    ${additional_occ_check} == ${1}
+        Wait Until Keyword Succeeds    3 mins    30 secs    Match OCC And CPU State Count
+    END
 
-    Run Keyword If  ${additional_power_check} == ${1}  Power Check
-
+    IF    ${additional_power_check} == ${1}    Power Check
 
 Verify Redfish Host GracefulRestart
-    [Documentation]  Verify Redfish host graceful restart operation.
-    [Tags]  Verify_Redfish_Host_GracefulRestart
+    [Documentation]    Verify Redfish host graceful restart operation.
+    [Tags]    verify_redfish_host_gracefulrestart
 
     RF SYS GracefulRestart
 
-
 Verify Redfish Host PowerOff
-    [Documentation]  Verify Redfish host power off operation.
-    [Tags]  Verify_Redfish_Host_PowerOff
+    [Documentation]    Verify Redfish host power off operation.
+    [Tags]    verify_redfish_host_poweroff
 
     Redfish Hard Power Off
 
-*** Keywords ***
 
+*** Keywords ***
 Test Setup Execution
-    [Documentation]  Do test case setup tasks.
+    [Documentation]    Do test case setup tasks.
 
     Printn
-    Run Keyword If  ${capture_sol} == ${1}  Start SOL Console Logging
+    IF    ${capture_sol} == ${1}    Start SOL Console Logging
     Redfish.Login
 
-
 Test Teardown Execution
-    [Documentation]  Collect FFDC and SOL log.
+    [Documentation]    Collect FFDC and SOL log.
 
     FFDC On Test Case Fail
-    Run Keyword If  ${capture_sol} == ${1}  Stop SOL Capture
+    IF    ${capture_sol} == ${1}    Stop SOL Capture
 
-    Run Keyword If  ${REDFISH_SUPPORTED}
-    ...    Redfish Set Auto Reboot  RetryAttempts
-    ...  ELSE
-    ...    Set Auto Reboot  ${1}
+    IF    ${REDFISH_SUPPORTED}
+        Redfish Set Auto Reboot    RetryAttempts
+    ELSE
+        Set Auto Reboot    ${1}
+    END
     Redfish.Logout
 
-
 Stop SOL Capture
-    [Documentation]  Stop SOL log collection.
+    [Documentation]    Stop SOL log collection.
 
     ${sol_log}=    Stop SOL Console Logging
-    Log   ${sol_log}
-
+    Log    ${sol_log}
 
 Power Check
-    [Documentation]  Verify PowerConsumedWatts property.
+    [Documentation]    Verify PowerConsumedWatts property.
 
-    ${power_uri_list}=  redfish_utils.Get Members URI  /redfish/v1/Chassis/  PowerControl
-    Log List  ${power_uri_list}
+    ${power_uri_list}=    redfish_utils.Get Members URI    /redfish/v1/Chassis/    PowerControl
+    Log List    ${power_uri_list}
 
     # Power entries could be seen across different redfish path, remove the URI
     # where the attribute is non-existent.
     # Example:
-    #     ['/redfish/v1/Chassis/chassis/Power',
-    #      '/redfish/v1/Chassis/motherboard/Power']
-    FOR  ${idx}  IN  @{power_uri_list}
-        ${power_control}=  redfish_utils.Get Attribute  ${idx}  PowerControl
-        Log Dictionary  ${power_control[0]}
+    #    ['/redfish/v1/Chassis/chassis/Power',
+    #    '/redfish/v1/Chassis/motherboard/Power']
+    FOR    ${idx}    IN    @{power_uri_list}
+        ${power_control}=    redfish_utils.Get Attribute    ${idx}    PowerControl
+        Log Dictionary    ${power_control[0]}
 
         # Ensure the path does have the attribute else set to EMPTY as default to skip.
-        ${value}=  Get Variable Value  ${power_control[0]['PowerConsumedWatts']}  ${EMPTY}
-        Run Keyword If  "${value}" == "${EMPTY}"
-        ...  Remove Values From List  ${power_uri_list}  ${idx}
+        ${value}=    Get Variable Value    ${power_control[0]['PowerConsumedWatts']}    ${EMPTY}
+        IF    "${value}" == "${EMPTY}"
+            Remove Values From List    ${power_uri_list}    ${idx}
+        END
 
         # Check the next available element in the list.
-        Continue For Loop If  "${value}" == "${EMPTY}"
+        IF    "${value}" == "${EMPTY}"    CONTINUE
 
-        Valid Dict  power_control[${0}]  ['PowerConsumedWatts']
-
+        Valid Dict    power_control[${0}]    ['PowerConsumedWatts']
     END
 
     # Double check, the validation has at least one valid path.
-    Should Not Be Empty  ${power_uri_list}
-    ...  msg=Should contain at least one element in the list.
+    Should Not Be Empty    ${power_uri_list}
+    ...    msg=Should contain at least one element in the list.

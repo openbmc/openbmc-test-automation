@@ -1,307 +1,289 @@
 *** Settings ***
-Documentation     Update the BMC code on a target BMC.
-...               Execution Method:
-...               python -m robot -v OPENBMC_HOST:<hostname>
-...               -v IMAGE_FILE_PATH:<path/*.tar>  bmc_code_update.robot
+Documentation       Update the BMC code on a target BMC.
+...                 Execution Method:
+...                 python -m robot -v OPENBMC_HOST:<hostname>
+...                 -v IMAGE_FILE_PATH:<path/*.tar>    bmc_code_update.robot
 
-Library           ../../lib/code_update_utils.py
-Library           ../../lib/gen_robot_keyword.py
-Variables         ../../data/variables.py
-Resource          ../../lib/utils.robot
-Resource          ../../lib/boot_utils.robot
-Resource          code_update_utils.robot
-Resource          ../../lib/code_update_utils.robot
-Resource          ../../lib/openbmc_ffdc.robot
-Resource          ../../lib/dump_utils.robot
-Resource          ../../lib/certificate_utils.robot
+Library             ../../lib/code_update_utils.py
+Library             ../../lib/gen_robot_keyword.py
+Variables           ../../data/variables.py
+Resource            ../../lib/utils.robot
+Resource            ../../lib/boot_utils.robot
+Resource            code_update_utils.robot
+Resource            ../../lib/code_update_utils.robot
+Resource            ../../lib/openbmc_ffdc.robot
+Resource            ../../lib/dump_utils.robot
+Resource            ../../lib/certificate_utils.robot
 
-Suite Setup       Suite Setup Execution
-
-Test Teardown     Test Teardown Execution
-
+Suite Setup         Suite Setup Execution
+Test Teardown       Test Teardown Execution
 # Force the test to timedout to prevent test hanging.
-Test Timeout      30 minutes
+Test Timeout        30 minutes
 
-Test Tags        BMC_Code_Update
+Test Tags           bmc_code_update
+
 
 *** Variables ***
+${QUIET}                        ${1}
+${IMAGE_FILE_PATH}              ${EMPTY}
+${ALTERNATE_IMAGE_FILE_PATH}    ${EMPTY}
+${SKIP_UPDATE_IF_ACTIVE}        false
+${dump_id}                      ${EMPTY}
+${running_persistence_test}     ${FALSE}
+${test_errlog_text}             AutoTestSimple
 
-${QUIET}                          ${1}
-${IMAGE_FILE_PATH}                ${EMPTY}
-${ALTERNATE_IMAGE_FILE_PATH}      ${EMPTY}
-${SKIP_UPDATE_IF_ACTIVE}          false
-${dump_id}                        ${EMPTY}
-${running_persistence_test}       ${FALSE}
-${test_errlog_text}               AutoTestSimple
 
 *** Test Cases ***
-
 Test Basic BMC Performance Before BMC Code Update
-    [Documentation]  Check performance of memory, CPU & file system of BMC.
-    [Tags]  Test_Basic_BMC_Performance_Before_BMC_Code_Update
+    [Documentation]    Check performance of memory, CPU & file system of BMC.
+    [Tags]    test_basic_bmc_performance_before_bmc_code_update
 
     Open Connection And Log In
     Check BMC Performance
 
 Prepare Persistent Data
-    [Documentation]  Set data that should persist across the code update.
-    [Tags]  Prepare_Persistent_Data
+    [Documentation]    Set data that should persist across the code update.
+    [Tags]    prepare_persistent_data
 
     # Install the debug tarball.
-    BMC Execute Command  rm -rf /tmp/tarball
-    Install Debug Tarball On BMC  tarball_file_path=${DEBUG_TARBALL_PATH}
+    BMC Execute Command    rm -rf /tmp/tarball
+    Install Debug Tarball On BMC    tarball_file_path=${DEBUG_TARBALL_PATH}
 
     # Create a dummy error log and dump.
-    BMC Execute Command  /tmp/tarball/bin/logging-test -c ${test_errlog_text}
-    ${dump_id}=  Create User Initiated Dump
-    Check Dump Existence  ${dump_id}
-    Set Suite Variable  ${dump_id}
+    BMC Execute Command    /tmp/tarball/bin/logging-test -c ${test_errlog_text}
+    ${dump_id}=    Create User Initiated Dump
+    Check Dump Existence    ${dump_id}
+    Set Suite Variable    ${dump_id}
 
     # Set persistent settings.
-    ${autoreboot_dict}=  Create Dictionary  data=${0}
-    Write Attribute  ${CONTROL_HOST_URI}auto_reboot  AutoReboot
-    ...  data=${autoreboot_dict}
-    ${onetime_dict}=  Create Dictionary  data=${0}
-    Write Attribute  ${CONTROL_HOST_URI}boot/one_time  Enabled
-    ...  data=${onetime_dict}
+    ${autoreboot_dict}=    Create Dictionary    data=${0}
+    Write Attribute    ${CONTROL_HOST_URI}auto_reboot    AutoReboot
+    ...    data=${autoreboot_dict}
+    ${onetime_dict}=    Create Dictionary    data=${0}
+    Write Attribute    ${CONTROL_HOST_URI}boot/one_time    Enabled
+    ...    data=${onetime_dict}
 
     # Let the remaining test cases know we are doing a persistence test so we
     # do not delete logs.
-    Set Suite Variable  ${running_persistence_test}  ${TRUE}
-
+    Set Suite Variable    ${running_persistence_test}    ${TRUE}
 
 REST BMC Code Update
-    [Documentation]  Do a BMC code update by uploading image on BMC via REST.
-    [Tags]  REST_BMC_Code_Update
-    [Teardown]  REST BMC Code Update Teardown
+    [Documentation]    Do a BMC code update by uploading image on BMC via REST.
+    [Tags]    rest_bmc_code_update
 
-    Run Keyword And Ignore Error  List Installed Images  BMC
-    Run Keyword And Ignore Error  Set ApplyTime  policy=OnReset
+    Run Keyword And Ignore Error    List Installed Images    BMC
+    Run Keyword And Ignore Error    Set ApplyTime    policy=OnReset
 
-    ${image_version}=  Get Version Tar  ${IMAGE_FILE_PATH}
-    ${bmc_release_info}=  Get BMC Release Info
-    ${functional_version}=  Set Variable  ${bmc_release_info['version_id']}
-    Rprint Vars  image_version  functional_version
+    ${image_version}=    Get Version Tar    ${IMAGE_FILE_PATH}
+    ${bmc_release_info}=    Get BMC Release Info
+    ${functional_version}=    Set Variable    ${bmc_release_info['version_id']}
+    Rprint Vars    image_version    functional_version
 
     # Check if the existing firmware is functional.
-    Pass Execution If  '${functional_version}' == '${image_version}'
-    ...  The existing ${image_version} firmware is already functional.
+    Pass Execution If    '${functional_version}' == '${image_version}'
+    ...    The existing ${image_version} firmware is already functional.
 
-    Run Keyword And Ignore Error  Delete Only BMC Image
+    Run Keyword And Ignore Error    Delete Only BMC Image
 
-    Upload And Activate Image  ${IMAGE_FILE_PATH}
-    ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
+    Upload And Activate Image    ${IMAGE_FILE_PATH}
+    ...    skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
     OBMC Reboot (off)
-    Verify Running BMC Image  ${IMAGE_FILE_PATH}
-    BMC Execute Command  cd /etc ; cat host.conf hosts hostname  print_out=1
-
+    Verify Running BMC Image    ${IMAGE_FILE_PATH}
+    BMC Execute Command    cd /etc ; cat host.conf hosts hostname    print_out=1
+    [Teardown]    REST BMC Code Update Teardown
 
 Verify Error Log Persistency
-    [Documentation]  Check that the error log is still present after a
-    ...              code update.
-    [Tags]  Verify_Error_Log_Persistency
+    [Documentation]    Check that the error log is still present after a
+    ...    code update.
+    [Tags]    verify_error_log_persistency
 
-    ${error_log_paths}=  Read Properties  ${BMC_LOGGING_ENTRY}list
-    Log To Console  ${error_log_paths}
-    ${test_error_message}=  Read Attribute  @{error_log_paths}[-1]  Message
-    Should Be Equal  ${test_error_message}
-    ...  example.xyz.openbmc_project.Example.Elog.${test_errlog_text}
-    Delete Error Log Entry  @{error_log_paths}[-1]
-
+    ${error_log_paths}=    Read Properties    ${BMC_LOGGING_ENTRY}list
+    Log To Console    ${error_log_paths}
+    ${test_error_message}=    Read Attribute    @{error_log_paths}[-1]    Message
+    Should Be Equal    ${test_error_message}
+    ...    example.xyz.openbmc_project.Example.Elog.${test_errlog_text}
+    Delete Error Log Entry    @{error_log_paths}[-1]
 
 Verify BMC Dump Persistency
-    [Documentation]  Check that the BMC dump present after a code update.
-    [Tags]  Verify_BMC_Dump_Persistency
-    [Teardown]  Set Suite Variable  ${running_persistence_test}  ${FALSE}
+    [Documentation]    Check that the BMC dump present after a code update.
+    [Tags]    verify_bmc_dump_persistency
 
-    Check Dump Existence  ${dump_id}
-    Delete BMC Dump  ${dump_id}
-
+    Check Dump Existence    ${dump_id}
+    Delete BMC Dump    ${dump_id}
+    [Teardown]    Set Suite Variable    ${running_persistence_test}    ${FALSE}
 
 Verify Settings Persistency
-    [Documentation]  Verify that the settings from 'Prepare Persistent Data'
-    ...              are still set correctly after the code update.
-    [Tags]  Verify_Settings_Persistency
+    [Documentation]    Verify that the settings from 'Prepare Persistent Data'
+    ...    are still set correctly after the code update.
+    [Tags]    verify_settings_persistency
 
-    ${autoreboot_enabled}=  Read Attribute  ${CONTROL_HOST_URI}auto_reboot
-    ...  AutoReboot
-    Should Be Equal  ${autoreboot_enabled}  ${0}
-    ${onetime_enabled}=  Read Attribute  ${CONTROL_HOST_URI}boot/one_time
-    ...  Enabled
-    Should Be Equal  ${onetime_enabled}  ${0}
+    ${autoreboot_enabled}=    Read Attribute    ${CONTROL_HOST_URI}auto_reboot
+    ...    AutoReboot
+    Should Be Equal    ${autoreboot_enabled}    ${0}
+    ${onetime_enabled}=    Read Attribute    ${CONTROL_HOST_URI}boot/one_time
+    ...    Enabled
+    Should Be Equal    ${onetime_enabled}    ${0}
 
     # Set values back to their defaults
-    ${autoreboot_dict}=  Create Dictionary  data=${1}
-    Write Attribute  ${CONTROL_HOST_URI}auto_reboot  AutoReboot
-    ...  data=${autoreboot_dict}
-    ${onetime_dict}=  Create Dictionary  data=${1}
-    Write Attribute  ${CONTROL_HOST_URI}boot/one_time  Enabled
-    ...  data=${onetime_dict}
-
+    ${autoreboot_dict}=    Create Dictionary    data=${1}
+    Write Attribute    ${CONTROL_HOST_URI}auto_reboot    AutoReboot
+    ...    data=${autoreboot_dict}
+    ${onetime_dict}=    Create Dictionary    data=${1}
+    Write Attribute    ${CONTROL_HOST_URI}boot/one_time    Enabled
+    ...    data=${onetime_dict}
 
 Upload And Activate Multiple BMC Images
-    [Documentation]  Upload another BMC image and verify that its state is
-    ...              different from all others.
-    [Tags]  Upload_And_Activate_Multiple_BMC_Images
-    [Template]  Activate Image And Verify No Duplicate Priorities
-    [Setup]  Upload And Activate Multiple BMC Images Setup
+    [Documentation]    Upload another BMC image and verify that its state is
+    ...    different from all others.
+    [Tags]    upload_and_activate_multiple_bmc_images
+    [Template]    Activate Image And Verify No Duplicate Priorities
+    [Setup]    Upload And Activate Multiple BMC Images Setup
 
-    # Image File Path              Image Purpose
-    ${ALTERNATE_IMAGE_FILE_PATH}   ${VERSION_PURPOSE_BMC}
-
+    # Image File Path    Image Purpose
+    ${ALTERNATE_IMAGE_FILE_PATH}    ${VERSION_PURPOSE_BMC}
 
 BMC Set Priority To Invalid Values
-    [Documentation]  Attempt to set the priority of an image to an invalid
-    ...              value and expect an error.
-    [Tags]  BMC_Set_Priority_To_Invalid_Values
-    [Template]  Set Priority To Invalid Value And Expect Error
+    [Documentation]    Attempt to set the priority of an image to an invalid
+    ...    value and expect an error.
+    [Tags]    bmc_set_priority_to_invalid_values
+    [Template]    Set Priority To Invalid Value And Expect Error
 
-    # Version Type              Priority
-    ${VERSION_PURPOSE_BMC}     ${-1}
-    ${VERSION_PURPOSE_BMC}     ${256}
-
+    # Version Type    Priority
+    ${VERSION_PURPOSE_BMC}    ${-1}
+    ${VERSION_PURPOSE_BMC}    ${256}
 
 Delete BMC Image
-    [Documentation]  Delete a BMC image from the BMC flash chip.
-    [Tags]  Delete_BMC_Image
+    [Documentation]    Delete a BMC image from the BMC flash chip.
+    [Tags]    delete_bmc_image
 
-    ${software_object}=  Get Non Running BMC Software Object
-    Delete Image And Verify  ${software_object}  ${VERSION_PURPOSE_BMC}
-
+    ${software_object}=    Get Non Running BMC Software Object
+    Delete Image And Verify    ${software_object}    ${VERSION_PURPOSE_BMC}
 
 BMC Image Priority Attribute Test
-    [Documentation]  Set "Priority" attribute.
-    [Tags]  BMC_Image_Priority_Attribute_Test
-    [Template]  Temporarily Set BMC Attribute
+    [Documentation]    Set "Priority" attribute.
+    [Tags]    bmc_image_priority_attribute_test
+    [Template]    Temporarily Set BMC Attribute
 
-    # Property        Value
-    Priority          ${False}
-    Priority          ${True}
-    Priority          ${0}
-    Priority          ${1}
-    Priority          ${127}
-    Priority          ${255}
-
+    # Property    Value
+    Priority    ${False}
+    Priority    ${True}
+    Priority    ${0}
+    Priority    ${1}
+    Priority    ${127}
+    Priority    ${255}
 
 Delete All Non Running BMC Images
-    [Documentation]  Delete all non running BMC images.
-    [Tags]  Delete_All_Non_Running_BMC_Images
+    [Documentation]    Delete all non running BMC images.
+    [Tags]    delete_all_non_running_bmc_images
 
-    ${version_id}=  Upload And Activate Image  ${ALTERNATE_IMAGE_FILE_PATH}
-    ...  skip_if_active=true
+    ${version_id}=    Upload And Activate Image    ${ALTERNATE_IMAGE_FILE_PATH}
+    ...    skip_if_active=true
     Delete All Non Running BMC Images
 
-    ${software_ids}=  Get Software Objects Id
-    ...  version_type=${VERSION_PURPOSE_BMC}
-    Should Not Contain  ${software_ids}  ${version_id}
-
+    ${software_ids}=    Get Software Objects Id
+    ...    version_type=${VERSION_PURPOSE_BMC}
+    Should Not Contain    ${software_ids}    ${version_id}
 
 Test Certificate Persistency After BMC Code Update
-    [Documentation]  Test certificate persistency after BMC update.
-    [Tags]  Test_Certificate_Persistency_After_BMC_Code_Update
+    [Documentation]    Test certificate persistency after BMC update.
+    [Tags]    test_certificate_persistency_after_bmc_code_update
 
     # Create certificate sub-directory in current working directory.
-    Create Directory  certificate_dir
-    OperatingSystem.Directory Should Exist  ${EXECDIR}${/}certificate_dir
+    Create Directory    certificate_dir
+    OperatingSystem.Directory Should Exist    ${EXECDIR}${/}certificate_dir
 
-    ${cert_file_path}=  Generate Certificate File Via Openssl
-    ...  Valid Certificate Valid Privatekey
-    ${file_data}=  OperatingSystem.Get Binary File  ${cert_file_path}
-    ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
+    ${cert_file_path}=    Generate Certificate File Via Openssl
+    ...    Valid Certificate Valid Privatekey
+    ${file_data}=    OperatingSystem.Get Binary File    ${cert_file_path}
+    ${cert_file_content}=    OperatingSystem.Get File    ${cert_file_path}
 
     Redfish.Login
-    ${cert_id}=  Install Certificate File On BMC  ${REDFISH_CA_CERTIFICATE_URI}  ok  data=${file_data}
-    Logging  Installed certificate id: ${cert_id}
+    ${cert_id}=    Install Certificate File On BMC    ${REDFISH_CA_CERTIFICATE_URI}    ok    data=${file_data}
+    Logging    Installed certificate id: ${cert_id}
 
     # Adding delay after certificate installation.
-    Sleep  30s
+    Sleep    30s
 
-    ${bmc_cert_content}=  redfish_utils.Get Attribute
-    ...  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates/${cert_id}  CertificateString
-    Should Contain  ${cert_file_content}  ${bmc_cert_content}
+    ${bmc_cert_content}=    redfish_utils.Get Attribute
+    ...    /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates/${cert_id}    CertificateString
+    Should Contain    ${cert_file_content}    ${bmc_cert_content}
 
-    Upload And Activate Image  ${IMAGE_FILE_PATH}
-    ...  skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
+    Upload And Activate Image    ${IMAGE_FILE_PATH}
+    ...    skip_if_active=${SKIP_UPDATE_IF_ACTIVE}
     OBMC Reboot (off)
-    Verify Running BMC Image  ${IMAGE_FILE_PATH}
+    Verify Running BMC Image    ${IMAGE_FILE_PATH}
 
     Redfish.Login
-    ${bmc_cert_content}=  redfish_utils.Get Attribute
-    ...  ${REDFISH_CA_CERTIFICATE_URI}/${cert_id}  CertificateString
-    Should Contain  ${cert_file_content}  ${bmc_cert_content}
+    ${bmc_cert_content}=    redfish_utils.Get Attribute
+    ...    ${REDFISH_CA_CERTIFICATE_URI}/${cert_id}    CertificateString
+    Should Contain    ${cert_file_content}    ${bmc_cert_content}
 
     Redfish.Logout
 
-
 Test Basic BMC Performance After Code Update
-    [Documentation]  Check performance of memory, CPU & file system of BMC.
-    [Tags]  Test_Basic_BMC_Performance_After_Code_Update
+    [Documentation]    Check performance of memory, CPU & file system of BMC.
+    [Tags]    test_basic_bmc_performance_after_code_update
 
     Open Connection And Log In
     Check BMC Performance
 
 
 *** Keywords ***
-
 Temporarily Set BMC Attribute
-    [Documentation]  Update the BMC attribute value.
-    [Arguments]  ${attribute_name}  ${attribute_value}
+    [Documentation]    Update the BMC attribute value.
+    [Arguments]    ${attribute_name}    ${attribute_value}
 
     # Description of argument(s):
     # attribute_name    BMC software attribute name (e.g. "Priority").
-    # attribute_value   Value to be written.
+    # attribute_value    Value to be written.
 
-    ${image_ids}=  Get Software Objects  ${VERSION_PURPOSE_BMC}
-    ${init_bmc_properties}=  Get Host Software Property  ${image_ids[0]}
-    ${initial_priority}=  Set Variable  ${init_bmc_properties["Priority"]}
+    ${image_ids}=    Get Software Objects    ${VERSION_PURPOSE_BMC}
+    ${init_bmc_properties}=    Get Host Software Property    ${image_ids[0]}
+    ${initial_priority}=    Set Variable    ${init_bmc_properties["Priority"]}
 
-    Set Host Software Property  ${image_ids[0]}  ${attribute_name}
-    ...  ${attribute_value}
+    Set Host Software Property    ${image_ids[0]}    ${attribute_name}
+    ...    ${attribute_value}
 
-    ${cur_bmc_properties}=  Get Host Software Property  ${image_ids[0]}
-    Should Be Equal As Integers  ${cur_bmc_properties["Priority"]}
-    ...  ${attribute_value}
+    ${cur_bmc_properties}=    Get Host Software Property    ${image_ids[0]}
+    Should Be Equal As Integers    ${cur_bmc_properties["Priority"]}
+    ...    ${attribute_value}
 
     # Revert to to initial value.
     Set Host Software Property
-    ...  ${image_ids[0]}  ${attribute_name}  ${initial_priority}
-
+    ...    ${image_ids[0]}    ${attribute_name}    ${initial_priority}
 
 Upload And Activate Multiple BMC Images Setup
-    [Documentation]  Check that the ALTERNATE_FILE_PATH variable is set.
+    [Documentation]    Check that the ALTERNATE_FILE_PATH variable is set.
 
-    Should Not Be Empty  ${ALTERNATE_IMAGE_FILE_PATH}
-
+    Should Not Be Empty    ${ALTERNATE_IMAGE_FILE_PATH}
 
 Delete Only BMC Image
-    [Documentation]  Delete a BMC image from the BMC flash chip.
+    [Documentation]    Delete a BMC image from the BMC flash chip.
 
-    ${software_object}=  Get Non Running BMC Software Object
-    Delete Image And Verify  ${software_object}  ${VERSION_PURPOSE_BMC}
-
+    ${software_object}=    Get Non Running BMC Software Object
+    Delete Image And Verify    ${software_object}    ${VERSION_PURPOSE_BMC}
 
 REST BMC Code Update Teardown
-    [Documentation]  Do code update test teardown.
+    [Documentation]    Do code update test teardown.
 
     FFDC On Test Case Fail
-    Run Keyword If Test Failed  Fatal Error  msg=Code update failed.
-
+    Run Keyword If Test Failed    Fatal Error    msg=Code update failed.
 
 Suite Setup Execution
-    [Documentation]  Do code update test case setup.
+    [Documentation]    Do code update test case setup.
     # - Clean up all existing BMC dumps.
 
-    Run Key  Delete All Dumps  ignore=1
-    Run Keyword And Ignore Error  Smart Power Off
+    Run Key    Delete All Dumps    ignore=1
+    Run Keyword And Ignore Error    Smart Power Off
 
 Test Teardown Execution
-    [Documentation]  Do code update test case teardown.
+    [Documentation]    Do code update test case teardown.
     # 1. Collect FFDC if test case failed.
     # 2. Collect FFDC if test PASS but error log exists.
 
     # Don't delete our logs if we want to persist them for tests.
-    Return From Keyword If  ${running_persistence_test}
+    IF    ${running_persistence_test}    RETURN
 
     FFDC On Test Case Fail
-    Run Keyword If  '${TEST_STATUS}' == 'PASS'  Check Error And Collect FFDC
+    IF    '${TEST_STATUS}' == 'PASS'    Check Error And Collect FFDC
     Close All Connections

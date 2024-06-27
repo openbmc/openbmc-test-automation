@@ -1,8 +1,7 @@
 *** Settings ***
-Documentation  Test for HW CI.
+Documentation       Test for HW CI.
 
 Library             DateTime
-
 Resource            ../../lib/utils.robot
 Resource            ../../lib/ipmi_client.robot
 Resource            ../../lib/boot_utils.robot
@@ -12,29 +11,29 @@ Resource            ../../lib/bmc_redfish_resource.robot
 Test Setup          Test Setup Execution
 Test Teardown       FFDC On Test Case Fail
 
+
 *** Variables ***
-
 # Error strings to check from journald.
-${ERROR_REGEX}     SEGV|core-dump|FAILURE|Failed to start|Found ordering cycle
-${STANDBY_REGEX}   Startup finished in
+${ERROR_REGEX}                  SEGV|core-dump|FAILURE|Failed to start|Found ordering cycle
+${STANDBY_REGEX}                Startup finished in
 
-${SKIP_ERROR}      ${EMPTY}
+${SKIP_ERROR}                   ${EMPTY}
 
 # 3 minutes standby boot time.
-${startup_time_threshold}  180
+${startup_time_threshold}       180
+
 
 *** Test Cases ***
-
 Verify Application Services Running At Standby
-    [Documentation]  Check if there are services that have not completed.
-    [Tags]  Verify_Application_Services_Running_At_Standby
+    [Documentation]    Check if there are services that have not completed.
+    [Tags]    verify_application_services_running_at_standby
 
     # Application services running on the BMC are not tightly coupled.
     # At standby, there shouldn't be any pending job waiting to complete.
     # Examples:
     # Failure o/p:
     # root@witherspoon:~# systemctl list-jobs --no-pager | cat
-    #    JOB UNIT                                     TYPE  STATE
+    #    JOB UNIT    TYPE    STATE
     # 35151 xyz.openbmc_project.ObjectMapper.service start running
     # 1 jobs listed.
     #
@@ -43,66 +42,60 @@ Verify Application Services Running At Standby
     # No jobs running.
 
     Redfish Hard Power Off
-    ${stdout}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  systemctl list-jobs --no-pager | cat
-    Should Be Equal As Strings  ${stdout}  No jobs running.
-
+    ${stdout}    ${stderr}    ${rc}=    BMC Execute Command
+    ...    systemctl list-jobs --no-pager | cat
+    Should Be Equal As Strings    ${stdout}    No jobs running.
 
 Verify Front And Rear LED At Standby
-    [Documentation]  Front and Rear LED should be off at standby.
-    [Tags]  Verify_Front_And_Rear_LED_At_Standby
+    [Documentation]    Front and Rear LED should be off at standby.
+    [Tags]    verify_front_and_rear_led_at_standby
 
-    Redfish Power Off  stack_mode=skip  quiet=1
-    Verify Identify LED State  ${0}
-
+    Redfish Power Off    stack_mode=skip    quiet=1
+    Verify Identify LED State    ${0}
 
 Check For Application Failures
-    [Documentation]  Parse the journal log and check for failures.
-    [Tags]  Check_For_Application_Failures
+    [Documentation]    Parse the journal log and check for failures.
+    [Tags]    check_for_application_failures
 
-    Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b  filter_string=${SKIP_ERROR}
-
+    Check For Regex In Journald    ${ERROR_REGEX}    error_check=${0}    boot=-b    filter_string=${SKIP_ERROR}
 
 Verify Uptime Average Against Threshold
-    [Documentation]  Compare BMC average boot time to a constant threshold.
-    [Tags]  Verify_Uptime_Average_Against_Threshold
+    [Documentation]    Compare BMC average boot time to a constant threshold.
+    [Tags]    verify_uptime_average_against_threshold
 
     Redfish OBMC Reboot (off)
 
     Wait Until Keyword Succeeds
-    ...  1 min  30 sec  Check BMC Uptime Journald
-
+    ...    1 min    30 sec    Check BMC Uptime Journald
 
 Test SSH And IPMI Connections
-    [Documentation]  Try SSH and IPMI commands to verify each connection.
-    [Tags]  Test_SSH_And_IPMI_Connections
+    [Documentation]    Try SSH and IPMI commands to verify each connection.
+    [Tags]    test_ssh_and_ipmi_connections
 
-    BMC Execute Command  true
-    Run IPMI Standard Command  chassis status
+    BMC Execute Command    true
+    Run IPMI Standard Command    chassis status
 
 
 *** Keywords ***
-
 Test Setup Execution
-   [Documentation]  Do test case setup tasks.
+    [Documentation]    Do test case setup tasks.
 
-   Printn
-   Redfish.Login
-
+    Printn
+    Redfish.Login
 
 Check BMC Uptime Journald
-    [Documentation]  Check BMC journald uptime entry.
+    [Documentation]    Check BMC journald uptime entry.
 
     # Example output:
     # Startup finished in 10.074s (kernel) + 2min 23.506s (userspace) = 2min 33.581s.
-    ${startup_time}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  journalctl --no-pager | egrep '${STANDBY_REGEX}' | tail -1
-    Should Not Be Empty  ${startup_time}
+    ${startup_time}    ${stderr}    ${rc}=    BMC Execute Command
+    ...    journalctl --no-pager | egrep '${STANDBY_REGEX}' | tail -1
+    Should Not Be Empty    ${startup_time}
 
     # Example time conversion:
     # Get the "2min 33.581s" string total time taken to reach standby.
     # Convert time "2min 33.581s" to unit 153.581.
-    ${startup_time}=  Convert Time  ${startup_time.split("= ",1)[1].strip(".")}
+    ${startup_time}=    Convert Time    ${startup_time.split("= ",1)[1].strip(".")}
 
-    Should Be True  ${startup_time} < ${startup_time_threshold}
-    ...  msg=${startup_time} greater than threshold value of ${startup_time_threshold}.
+    Should Be True    ${startup_time} < ${startup_time_threshold}
+    ...    msg=${startup_time} greater than threshold value of ${startup_time_threshold}.

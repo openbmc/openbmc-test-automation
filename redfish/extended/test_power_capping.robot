@@ -1,115 +1,104 @@
 *** Settings ***
-Documentation     Energy scale power capping tests.
-
+Documentation       Energy scale power capping tests.
 
 # Acronyms
-#  PL     Power Limit
-#  OCC    On Chip Controller
+#    PL    Power Limit
+#    OCC    On Chip Controller
+Resource            ../../lib/energy_scale_utils.robot
+Resource            ../../lib/rest_client.robot
+Resource            ../../lib/openbmc_ffdc.robot
+Resource            ../../lib/boot_utils.robot
+Resource            ../../lib/ipmi_client.robot
+Resource            ../../lib/os_utilities.robot
+
+Suite Setup         Suite Setup Execution
+Test Teardown       Test Teardown Execution
 
 
-Resource          ../../lib/energy_scale_utils.robot
-Resource          ../../lib/rest_client.robot
-Resource          ../../lib/openbmc_ffdc.robot
-Resource          ../../lib/boot_utils.robot
-Resource          ../../lib/ipmi_client.robot
-Resource          ../../lib/os_utilities.robot
-
-
-Suite Setup      Suite Setup Execution
-Test Teardown    Test Teardown Execution
-
-
-
-*** Variables ****
-
-${max_power}            3050
-${near_max_power_50}    3000
-${near_max_power_100}   2950
-
+*** Variables ***
+${max_power}                3050
+${near_max_power_50}        3000
+${near_max_power_100}       2950
 
 
 *** Test Cases ***
-
-
 Escale System On And PL Enabled
-    [Documentation]  Change active power limit with system power on and
-    ...  Power limit active.
-    [Tags]  Escale_System_On_And_PL_Enabled
+    [Documentation]    Change active power limit with system power on and
+    ...    Power limit active.
+    [Tags]    escale_system_on_and_pl_enabled
 
-    Set DCMI Power Limit And Verify  ${max_power}
+    Set DCMI Power Limit And Verify    ${max_power}
 
-    Redfish Power On  stack_mode=skip
+    Redfish Power On    stack_mode=skip
 
-    Tool Exist  opal-prd
+    Tool Exist    opal-prd
     OCC Tool Upload Setup
 
     # Get OCC data from OS.
-    ${cmd}=  Set Variable  /tmp/occtoolp9 -p | grep -e State: -e Sensor:
-    ${output}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
+    ${cmd}=    Set Variable    /tmp/occtoolp9 -p | grep -e State: -e Sensor:
+    ${output}    ${stderr}    ${rc}=    OS Execute Command    ${cmd}
 
     # Check for expected responses.
-    Should Contain  ${output}  ACTIVE
-    Should Contain  ${output}  Sensor: TEMP
-    Should Contain  ${output}  Sensor: FREQ
-    Should Contain  ${output}  Sensor: POWR
+    Should Contain    ${output}    ACTIVE
+    Should Contain    ${output}    Sensor: TEMP
+    Should Contain    ${output}    Sensor: FREQ
+    Should Contain    ${output}    Sensor: POWR
 
     # Disable OCC.
-    ${output}  ${stderr}  ${rc}=  OS Execute Command  opal-prd occ disable
+    ${output}    ${stderr}    ${rc}=    OS Execute Command    opal-prd occ disable
     # With OCC disabled we should have OBSERVATION in output.
-    ${output}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
-    Should Contain  ${output}  OBSERVATION
+    ${output}    ${stderr}    ${rc}=    OS Execute Command    ${cmd}
+    Should Contain    ${output}    OBSERVATION
 
     # Re-enable OCC for remaining tests.
-    ${output}  ${stderr}  ${rc}=  OS Execute Command  opal-prd occ enable
-    ${output}  ${stderr}  ${rc}=  OS Execute Command  ${cmd}
-    Should Contain  ${output}  ACTIVE
+    ${output}    ${stderr}    ${rc}=    OS Execute Command    opal-prd occ enable
+    ${output}    ${stderr}    ${rc}=    OS Execute Command    ${cmd}
+    Should Contain    ${output}    ACTIVE
 
-    ${power}=  Get DCMI Power Limit
-    Should Be True  ${power} == ${max_power}
-    ...  msg=DCMI power limit should be ${max_power}.
+    ${power}=    Get DCMI Power Limit
+    Should Be True    ${power} == ${max_power}
+    ...    msg=DCMI power limit should be ${max_power}.
 
     Activate DCMI Power And Verify
 
-    Set DCMI Power Limit And Verify  ${near_max_power_50}
-
+    Set DCMI Power Limit And Verify    ${near_max_power_50}
 
 Escale System On And PL Disabled
-    [Documentation]  Change active power limit with system power on and
-    ...  deactivate power limit prior to change.
-    [Tags]  Escale_System_On_And_PL_Disabled
+    [Documentation]    Change active power limit with system power on and
+    ...    deactivate power limit prior to change.
+    [Tags]    escale_system_on_and_pl_disabled
 
-    ${power_setting}=  Set Variable  ${near_max_power_100}
+    ${power_setting}=    Set Variable    ${near_max_power_100}
 
-    Redfish Power On  stack_mode=skip
+    Redfish Power On    stack_mode=skip
 
-    Set DCMI Power Limit And Verify  ${power_setting}
+    Set DCMI Power Limit And Verify    ${power_setting}
 
     # Deactivate and check limit
     Deactivate DCMI Power And Verify
 
-    ${cmd}=  Catenate  dcmi power set_limit limit ${near_max_power_50}
-    Run External IPMI Standard Command  ${cmd}
-    ${power}=  Get DCMI Power Limit
+    ${cmd}=    Catenate    dcmi power set_limit limit ${near_max_power_50}
+    Run External IPMI Standard Command    ${cmd}
+    ${power}=    Get DCMI Power Limit
 
-    Should Be True  ${power} == ${near_max_power_50}
-    ...  msg=Could not set power limit when power limiting deactivated.
-
+    Should Be True    ${power} == ${near_max_power_50}
+    ...    msg=Could not set power limit when power limiting deactivated.
 
 Escale Check Settings System On Then Off
-    [Documentation]  Set power limit and activate power limit before
-    ...  BMC state is power on.
-    [Tags]  Escale_Check_Settings_System_On_Then_Off
+    [Documentation]    Set power limit and activate power limit before
+    ...    BMC state is power on.
+    [Tags]    escale_check_settings_system_on_then_off
 
-    ${power_setting}=  Set Variable  ${near_max_power_100}
+    ${power_setting}=    Set Variable    ${near_max_power_100}
 
-    Redfish Power On  stack_mode=skip
+    Redfish Power On    stack_mode=skip
 
-    Set DCMI Power Limit And Verify  ${power_setting}
+    Set DCMI Power Limit And Verify    ${power_setting}
     Deactivate DCMI Power And Verify
 
-    ${power}=  Get DCMI Power Limit
-    Should Be True  ${power} == ${power_setting}
-    ...  msg=dcmi power limit not set to ${power_setting} as expected.
+    ${power}=    Get DCMI Power Limit
+    Should Be True    ${power} == ${power_setting}
+    ...    msg=dcmi power limit not set to ${power_setting} as expected.
 
     Smart Power Off
 
@@ -117,124 +106,118 @@ Escale Check Settings System On Then Off
 
     Redfish Power On
 
-    ${power}=  Get DCMI Power Limit
-    Should Be True  ${power} == ${power_setting}
-    ...  msg=Power limit setting of watts not retained at Runtime.
+    ${power}=    Get DCMI Power Limit
+    Should Be True    ${power} == ${power_setting}
+    ...    msg=Power limit setting of watts not retained at Runtime.
 
     Deactivate DCMI Power And Verify
 
-
 Escale Check Settings System Off Then On
-    [Documentation]  Set and activate power limit with system power off.
-    [Tags]  Escale_Check_Settings_System_Off_Then_On
+    [Documentation]    Set and activate power limit with system power off.
+    [Tags]    escale_check_settings_system_off_then_on
 
-    ${power_setting}=  Set Variable  ${near_max_power_50}
+    ${power_setting}=    Set Variable    ${near_max_power_50}
 
-    Set DCMI Power Limit And Verify  ${power_setting}
+    Set DCMI Power Limit And Verify    ${power_setting}
     Deactivate DCMI Power and Verify
 
     Smart Power Off
 
     # Check deactivated and the power limit.
     Fail If DCMI Power Is Not Deactivated
-    ${power}=  Get DCMI Power Limit
-    Should Be True  ${power} == ${power_setting}
-    ...  msg=DCMI power not set at ${power_setting} as expected
+    ${power}=    Get DCMI Power Limit
+    Should Be True    ${power} == ${power_setting}
+    ...    msg=DCMI power not set at ${power_setting} as expected
 
     Activate DCMI Power And Verify
-    Set DCMI Power Limit And Verify  ${power_setting}
+    Set DCMI Power Limit And Verify    ${power_setting}
 
     Redfish Power On
 
     Fail If DCMI Power Is Not Activated
 
-    ${power}=  Get DCMI Power Limit
-    Should Be True  ${power} == ${power_setting}
-    ...  msg=Power limit setting not retained at Runtime.
-
+    ${power}=    Get DCMI Power Limit
+    Should Be True    ${power} == ${power_setting}
+    ...    msg=Power limit setting not retained at Runtime.
 
 Escale Change Limit At Runtime
-    [Documentation]  Change power limit at runtime.
-    [Tags]  Escale_Change_Limit_At_Runtime
+    [Documentation]    Change power limit at runtime.
+    [Tags]    escale_change_limit_at_runtime
 
-    ${power_setting}=  Set Variable  ${near_max_power_100}
+    ${power_setting}=    Set Variable    ${near_max_power_100}
 
-    Set DCMI Power Limit And Verify  ${near_max_power_50}
+    Set DCMI Power Limit And Verify    ${near_max_power_50}
 
     Smart Power Off
 
-    Redfish Power On  stack_mode=skip
+    Redfish Power On    stack_mode=skip
 
-    Set DCMI Power Limit And Verify  ${power_setting}
+    Set DCMI Power Limit And Verify    ${power_setting}
 
     # Check that DCMI power limit setting = ${power_setting}.
-    ${power}=  Get DCMI Power Limit
-    Should Be True  ${power} == ${power_setting}
-    ...  msg=DCMI power limit not set to ${power_setting} watts as expected.
+    ${power}=    Get DCMI Power Limit
+    Should Be True    ${power} == ${power_setting}
+    ...    msg=DCMI power limit not set to ${power_setting} watts as expected.
 
-    Set DCMI Power Limit And Verify  ${max_power}
-
+    Set DCMI Power Limit And Verify    ${max_power}
 
 Escale Disable And Enable At Runtime
-    [Documentation]  Disable/enable power limit at runtime.
-    [Tags]  Escale_Disable_And_Enable_At_Runtime
+    [Documentation]    Disable/enable power limit at runtime.
+    [Tags]    escale_disable_and_enable_at_runtime
 
-    ${power_setting}=  Set Variable  ${near_max_power_50}
+    ${power_setting}=    Set Variable    ${near_max_power_50}
 
     Smart Power Off
 
-    Set DCMI Power Limit And Verify  ${power_setting}
+    Set DCMI Power Limit And Verify    ${power_setting}
     Activate DCMI Power And Verify
 
     # Power on the system.
     Redfish Power On
 
     # Check that DCMI power limit setting = ${power_setting}.
-    ${power}=  Get DCMI Power Limit
-    Should Be True  ${power} == ${power_setting}
-    ...  msg=DCMI power limit not set to ${power_setting} watts as expected.
+    ${power}=    Get DCMI Power Limit
+    Should Be True    ${power} == ${power_setting}
+    ...    msg=DCMI power limit not set to ${power_setting} watts as expected.
 
     Deactivate DCMI Power And Verify
 
     Activate DCMI Power And Verify
 
-    ${power}=  Get DCMI Power Limit
-    Should Be True  ${power} == ${power_setting}
-    ...  msg=DCMI power limit not set to ${power_setting} watts as expected.
+    ${power}=    Get DCMI Power Limit
+    Should Be True    ${power} == ${power_setting}
+    ...    msg=DCMI power limit not set to ${power_setting} watts as expected.
 
 
 *** Keywords ***
-
-
 Suite Setup Execution
-    [Documentation]  Do test setup initialization.
-    #  Power Off if system if not already off.
-    #  Save initial settings.
-    #  Deactivate power and set limit.
+    [Documentation]    Do test setup initialization.
+    #    Power Off if system if not already off.
+    #    Save initial settings.
+    #    Deactivate power and set limit.
 
     Smart Power Off
 
     # Save the deactivation/activation setting.
-    ${cmd}=  Catenate  dcmi power get_limit | grep State
-    ${resp}=  Run External IPMI Standard Command  ${cmd}
+    ${cmd}=    Catenate    dcmi power get_limit | grep State
+    ${resp}=    Run External IPMI Standard Command    ${cmd}
     # Response is either "Power Limit Active" or "No Active Power Limit".
-    ${initial_deactivation}=  Get Count  ${resp}  No
+    ${initial_deactivation}=    Get Count    ${resp}    No
     # If deactivated: initial_deactivation = 1, 0 otherwise.
-    Set Suite Variable  ${initial_deactivation}  children=true
+    Set Suite Variable    ${initial_deactivation}    children=true
 
     # Save the power limit setting.
-    ${initial_power_setting}=  Get DCMI Power Limit
-    Set Suite Variable  ${initial_power_setting}  children=true
+    ${initial_power_setting}=    Get DCMI Power Limit
+    Set Suite Variable    ${initial_power_setting}    children=true
 
     # Set power limiting deactivated.
     Deactivate DCMI Power And Verify
 
     # Set initial power setting value.
-    Set DCMI Power Limit And Verify  ${max_power}
-
+    Set DCMI Power Limit And Verify    ${max_power}
 
 Test Teardown Execution
-    [Documentation]  Do the post test teardown.
+    [Documentation]    Do the post test teardown.
     # FFDC on test case fail.
     # Power off the OS and wait for power off state.
     # Return the system's initial deactivation/activation setting.
@@ -244,8 +227,12 @@ Test Teardown Execution
 
     Smart Power Off
 
-    Run Keyword If  '${initial_power_setting}' != '${0}'
-    ...  Set DCMI Power Limit And Verify  ${initial_power_setting}
+    IF    '${initial_power_setting}' != '${0}'
+        Set DCMI Power Limit And Verify    ${initial_power_setting}
+    END
 
-    Run Keyword If  '${initial_deactivation}' == '${1}'
-    ...  Deactivate DCMI Power And Verify  ELSE  Activate DCMI Power And Verify
+    IF    '${initial_deactivation}' == '${1}'
+        Deactivate DCMI Power And Verify
+    ELSE
+        Activate DCMI Power And Verify
+    END

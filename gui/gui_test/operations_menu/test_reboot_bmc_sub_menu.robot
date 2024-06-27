@@ -1,85 +1,78 @@
 *** Settings ***
+Documentation       Test OpenBMC GUI "Reboot BMC" sub-menu of "Operation" menu.
 
-Documentation  Test OpenBMC GUI "Reboot BMC" sub-menu of "Operation" menu.
+Resource            ../../lib/gui_resource.robot
+Resource            ../../../lib/common_utils.robot
 
-Resource        ../../lib/gui_resource.robot
-Resource        ../../../lib/common_utils.robot
+Suite Setup         Launch Browser And Login GUI
+Suite Teardown      Close Browser
+Test Setup          Test Setup Execution
 
-Suite Setup     Launch Browser And Login GUI
-Suite Teardown  Close Browser
-Test Setup      Test Setup Execution
+Test Tags           reboot_bmc_sub_menu
 
-Test Tags      Reboot_BMC_Sub_Menu
 
 *** Variables ***
-
-${xpath_reboot_bmc_heading}      //h1[text()="Reboot BMC"]
-${xpath_reboot_bmc_button}       //button[contains(text(),'Reboot BMC')]
-${xpath_reboot_cancel_button}    //button[contains(text(),'Cancel')]
+${xpath_reboot_bmc_heading}         //h1[text()="Reboot BMC"]
+${xpath_reboot_bmc_button}          //button[contains(text(),'Reboot BMC')]
+${xpath_reboot_cancel_button}       //button[contains(text(),'Cancel')]
 
 
 *** Test Cases ***
-
 Verify Navigation To Reboot BMC Page
-    [Documentation]  Verify navigation to reboot BMC page.
-    [Tags]  Verify_Navigation_To_Reboot_BMC_Page
+    [Documentation]    Verify navigation to reboot BMC page.
+    [Tags]    verify_navigation_to_reboot_bmc_page
 
-    Page Should Contain Element  ${xpath_reboot_bmc_heading}
-
+    Page Should Contain Element    ${xpath_reboot_bmc_heading}
 
 Verify Existence Of All Buttons In Reboot BMC Page
-    [Documentation]  Verify existence of all buttons in reboot BMC page.
-    [Tags]  Verify_Existence_Of_All_Buttons_In_Reboot_BMC_Page
+    [Documentation]    Verify existence of all buttons in reboot BMC page.
+    [Tags]    verify_existence_of_all_buttons_in_reboot_bmc_page
 
-    Page Should Contain Element  ${xpath_reboot_bmc_button}
-
+    Page Should Contain Element    ${xpath_reboot_bmc_button}
 
 Verify Existence Of All Sections In Reboot BMC Page
-    [Documentation]  Verify Existence Of All Sections In Reboot BMC Page.
-    [Tags]  Verify_Existence_Of_All_Sections_In_Reboot_BMC_Page
+    [Documentation]    Verify Existence Of All Sections In Reboot BMC Page.
+    [Tags]    verify_existence_of_all_sections_in_reboot_bmc_page
 
-    Page Should Contain  Last BMC reboot
-
+    Page Should Contain    Last BMC reboot
 
 Verify Canceling Operation On BMC Reboot Operation
-    [Documentation]  Verify Canceling Operation On BMC Reboot operation
-    [Tags]  Verify_Canceling_Operation_On_BMC_Reboot_Operation
+    [Documentation]    Verify Canceling Operation On BMC Reboot operation
+    [Tags]    verify_canceling_operation_on_bmc_reboot_operation
 
-    Click Element  ${xpath_reboot_bmc_button}
+    Click Element    ${xpath_reboot_bmc_button}
 
     # Delay added for cancel button to appear.
-    Sleep  5s
+    Sleep    5s
 
-    Click Element At Coordinates  ${xpath_reboot_cancel_button}  0  0
-    Wait Until Element Is Not Visible  ${xpath_reboot_cancel_button}  timeout=15
-
+    Click Element At Coordinates    ${xpath_reboot_cancel_button}    0    0
+    Wait Until Element Is Not Visible    ${xpath_reboot_cancel_button}    timeout=15
 
 Verify BMC Reboot Operation
-    [Documentation]  Verify BMC Reboot operation
-    [Tags]  Verify_BMC_Reboot_Operation
+    [Documentation]    Verify BMC Reboot operation
+    [Tags]    verify_bmc_reboot_operation
 
-    Click Element  ${xpath_reboot_bmc_button}
+    Click Element    ${xpath_reboot_bmc_button}
 
     # Delay added for confirm button to appear.
-    Sleep  5s
-    Click Element At Coordinates  ${xpath_confirm_button}  0  0
+    Sleep    5s
+    Click Element At Coordinates    ${xpath_confirm_button}    0    0
 
     # Checks BMC gets into Unpingable state and later becomes Pingable.
-    Wait Until Keyword Succeeds  1 min  5 sec  Is BMC Unpingable
-    Wait For Host To Ping  ${OPENBMC_HOST}  1 min
+    Wait Until Keyword Succeeds    1 min    5 sec    Is BMC Unpingable
+    Wait For Host To Ping    ${OPENBMC_HOST}    1 min
 
-    Wait Until Keyword Succeeds  3 min  10 sec  Is BMC Operational
+    Wait Until Keyword Succeeds    3 min    10 sec    Is BMC Operational
 
-    Click Element  ${xpath_refresh_button}
-    Wait Until Element Is Visible  ${xpath_reboot_bmc_button}  timeout=10
+    Click Element    ${xpath_refresh_button}
+    Wait Until Element Is Visible    ${xpath_reboot_bmc_button}    timeout=10
 
 
 *** Keywords ***
-
 Test Setup Execution
-    [Documentation]  Do test case setup tasks.
+    [Documentation]    Do test case setup tasks.
 
-    Click Element  ${xpath_operations_menu}
-    Click Element  ${xpath_reboot_bmc_sub_menu}
-    Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  reboot-bmc
-    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Click Element    ${xpath_operations_menu}
+    Click Element    ${xpath_reboot_bmc_sub_menu}
+    Wait Until Keyword Succeeds    30 sec    10 sec    Location Should Contain    reboot-bmc
+    Wait Until Element Is Not Visible    ${xpath_page_loading_progress_bar}    timeout=30

@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation  Utilities for eSEL testing.
+Documentation       Utilities for eSEL testing.
 
 Resource            ../lib/ipmi_client.robot
 Resource            ../lib/utils.robot
@@ -8,40 +8,36 @@ Variables           ../data/variables.py
 
 
 *** Variables ***
+${RAW_PREFIX}           raw 0x3a 0xf0 0x
 
-${RAW_PREFIX}       raw 0x3a 0xf0 0x
+${RESERVE_ID}           raw 0x0a 0x42
 
-${RESERVE_ID}       raw 0x0a 0x42
+${RAW_SUFFIX}           0x00 0x00 0x00 0x00 0x00 0x01 0x00 0x00
+...                     0xdf 0x00 0x00 0x00 0x00 0x20 0x00 0x04 0x12 0x65 0x6f 0xaa 0x00 0x00
 
-${RAW_SUFFIX}       0x00 0x00 0x00 0x00 0x00 0x01 0x00 0x00
-...  0xdf 0x00 0x00 0x00 0x00 0x20 0x00 0x04 0x12 0x65 0x6f 0xaa 0x00 0x00
-
-${RAW_SEL_COMMIT}   raw 0x0a 0x44 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x20
-...  0x00 0x04 0x12 0xA6 0x6f 0x02 0x00 0x01
+${RAW_SEL_COMMIT}       raw 0x0a 0x44 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x20
+...                     0x00 0x04 0x12 0xA6 0x6f 0x02 0x00 0x01
 
 
 *** Keywords ***
-
 Create eSEL
-    [Documentation]  Create an eSEL.
+    [Documentation]    Create an eSEL.
     Open Connection And Log In
-    ${Resv_id}=  Run Inband IPMI Standard Command  ${RESERVE_ID}
-    ${cmd}=  Catenate
-    ...  ${RAW_PREFIX}${Resv_id.strip().rsplit(' ', 1)[0]}  ${RAW_SUFFIX}
-    Run Inband IPMI Standard Command  ${cmd}
-    Run Inband IPMI Standard Command  ${RAW_SEL_COMMIT}
-
+    ${Resv_id}=    Run Inband IPMI Standard Command    ${RESERVE_ID}
+    ${cmd}=    Catenate
+    ...    ${RAW_PREFIX}${Resv_id.strip().rsplit(' ', 1)[0]}    ${RAW_SUFFIX}
+    Run Inband IPMI Standard Command    ${cmd}
+    Run Inband IPMI Standard Command    ${RAW_SEL_COMMIT}
 
 Count eSEL Entries
-    [Documentation]  Count eSEL entries logged.
-    ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}
-    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ${count}=  Get Length  ${resp.json()["data"]}
-    RETURN  ${count}
-
+    [Documentation]    Count eSEL entries logged.
+    ${resp}=    OpenBMC Get Request    ${BMC_LOGGING_ENTRY}
+    Should Be Equal As Strings    ${resp.status_code}    ${HTTP_OK}
+    ${count}=    Get Length    ${resp.json()["data"]}
+    RETURN    ${count}
 
 Verify eSEL Entries
-    [Documentation]  Verify eSEL entries logged.
+    [Documentation]    Verify eSEL entries logged.
 
     # {
     #    "@odata.context": "/redfish/v1/$metadata#LogEntry.LogEntry",
@@ -55,34 +51,32 @@ Verify eSEL Entries
     #    "Severity": "Critical"
     # }
 
-    ${elog_entry}=  Get Event Logs
-    Should Be Equal  ${elog_entry[0]["Message"]}  org.open_power.Host.Error.Event
-    Should Be Equal  ${elog_entry[0]["Severity"]}  Critical
-
+    ${elog_entry}=    Get Event Logs
+    Should Be Equal    ${elog_entry[0]["Message"]}    org.open_power.Host.Error.Event
+    Should Be Equal    ${elog_entry[0]["Severity"]}    Critical
 
 Check For Error Logs
-    [Documentation]  Fail if there are error logs. Ignore logs with
-    ...              severity in the ignorelist.
-
-    [Arguments]  ${ignorelist}
+    [Documentation]    Fail if there are error logs. Ignore logs with
+    ...    severity in the ignorelist.
+    [Arguments]    ${ignorelist}
 
     # Description of Argument(s):
     # ignorelist A list to be used to filter out esels which are
-    #            of no interest to the caller.
-    #            Error Logs with Severity field matching an
-    #            entry in this list will be ignored. (e.g.
-    #            xyz.openbmc_project.Logging.Entry.Level.Error)
+    #    of no interest to the caller.
+    #    Error Logs with Severity field matching an
+    #    entry in this list will be ignored. (e.g.
+    #    xyz.openbmc_project.Logging.Entry.Level.Error)
 
-    Print Timen  Checking Error Logs.
-    ${error_logs}=  Get Error Logs
+    Print Timen    Checking Error Logs.
+    ${error_logs}=    Get Error Logs
 
-    ${num_error_logs}=  Get Length  ${error_logs}
-    Return From Keyword If  ${num_error_logs} == ${0}
+    ${num_error_logs}=    Get Length    ${error_logs}
+    IF    ${num_error_logs} == ${0}    RETURN
 
     # Get a list of the severities of the error logs.
-    ${error_log_severities}=  Nested Get  Severity  ${error_logs}
+    ${error_log_severities}=    Nested Get    Severity    ${error_logs}
     # Subtract the IGNORETLIST from the error_log_severities.
-    ${problem_error_logs}=  Evaluate
-    ...  list(set($error_log_severities) - set($ignorelist))
+    ${problem_error_logs}=    Evaluate
+    ...    list(set($error_log_severities) - set($ignorelist))
 
-    Valid Length  problem_error_logs   max_length=0
+    Valid Length    problem_error_logs    max_length=0

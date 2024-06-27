@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation       Test dump functionality of OpenBMC.
 
 Resource            ../../lib/openbmc_ffdc.robot
@@ -14,84 +13,82 @@ Suite Setup         Suite Setup Execution
 Test Setup          Open Connection And Log In
 Test Teardown       Test Teardown Execution
 
-*** Test Cases ***
 
+*** Test Cases ***
 Verify Dump After Host Watchdog Error Injection
-    [Documentation]  Inject host watchdog error and verify whether dump is generated.
-    [Tags]  Verify_Dump_After_Host_Watchdog_Error_Injection
+    [Documentation]    Inject host watchdog error and verify whether dump is generated.
+    [Tags]    verify_dump_after_host_watchdog_error_injection
 
     Redfish Power On
 
-    Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
+    Run Keyword And Ignore Error    Redfish Delete All BMC Dumps
 
     # Enable auto reboot
-    Set Auto Reboot  ${1}
+    Set Auto Reboot    ${1}
 
-    Set Watchdog Interval Using Busctl  2000
+    Set Watchdog Interval Using Busctl    2000
 
-    Wait Until Keyword Succeeds  300 sec  20 sec  Is Host Rebooted
+    Wait Until Keyword Succeeds    300 sec    20 sec    Is Host Rebooted
 
-    #Get dump details
-    @{dump_entry_list}=  Read Properties  ${DUMP_ENTRY_URI}
+    # Get dump details
+    @{dump_entry_list}=    Read Properties    ${DUMP_ENTRY_URI}
 
     # Verifying that there is only one dump
-    ${length}=  Get length  ${dump_entry_list}
-    Should Be Equal As Integers  ${length}  ${1}
+    ${length}=    Get length    ${dump_entry_list}
+    Should Be Equal As Integers    ${length}    ${1}
 
     # Get dump id
-    ${value}=  Get From List  ${dump_entry_list}  0
-    @{split_value}=  Split String  ${value}  /
-    ${dump_id}=  Get From List  ${split_value}  -1
+    ${value}=    Get From List    ${dump_entry_list}    0
+    @{split_value}=    Split String    ${value}    /
+    ${dump_id}=    Get From List    ${split_value}    -1
 
     # Max size for dump is 200k = 200x1024
-    ${dump_size}=  Read Attribute  ${DUMP_ENTRY_URI}${dump_id}  Size
-    Should Be True  0 < ${dump_size} < 204800
-
+    ${dump_size}=    Read Attribute    ${DUMP_ENTRY_URI}${dump_id}    Size
+    Should Be True    0 < ${dump_size} < 204800
 
 Verify Download BMC Dump
-    [Documentation]  Verify that a BMC dump can be downloaded to the local machine.
-    [Tags]  Verify_Download_BMC_Dump
+    [Documentation]    Verify that a BMC dump can be downloaded to the local machine.
+    [Tags]    verify_download_bmc_dump
 
-    ${dump_id}=  Create User Initiated BMC Dump Via Redfish
-    ${dump_dict}=  Get Dump Dict
-    ${bmc_dump_name}=  Fetch From Right  ${dump_dict['${dump_id}']}  /
-    ${bmc_dump_checksum}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  md5sum ${dump_dict['${dump_id}']}|awk '{print$1}'
-    ${bmc_dump_size}  ${stderr}  ${rc}=  BMC Execute Command
-    ...  stat -c "%s" ${dump_dict['${dump_id}']}
+    ${dump_id}=    Create User Initiated BMC Dump Via Redfish
+    ${dump_dict}=    Get Dump Dict
+    ${bmc_dump_name}=    Fetch From Right    ${dump_dict['${dump_id}']}    /
+    ${bmc_dump_checksum}    ${stderr}    ${rc}=    BMC Execute Command
+    ...    md5sum ${dump_dict['${dump_id}']}|awk '{print$1}'
+    ${bmc_dump_size}    ${stderr}    ${rc}=    BMC Execute Command
+    ...    stat -c "%s" ${dump_dict['${dump_id}']}
 
-    ${response}=  OpenBMC Get Request  ${DUMP_DOWNLOAD_URI}${dump_id}
-    ...  quiet=${1}
-    Should Be Equal As Strings  ${response.status_code}  ${HTTP_OK}
-    Create Binary File  ${EXECDIR}${/}dumps   ${response.content}
-    Run  tar -xvf ${EXECDIR}${/}dumps
-    ${download_dump_name}=  Fetch From Left  ${bmc_dump_name}  .
-    ${download_dump_checksum}=  Run  md5sum ${EXECDIR}/dumps|awk '{print$1}'
-    ${download_dump_size}=  Run  stat -c "%s" ${EXECDIR}${/}dumps
+    ${response}=    OpenBMC Get Request    ${DUMP_DOWNLOAD_URI}${dump_id}
+    ...    quiet=${1}
+    Should Be Equal As Strings    ${response.status_code}    ${HTTP_OK}
+    Create Binary File    ${EXECDIR}${/}dumps    ${response.content}
+    Run    tar -xvf ${EXECDIR}${/}dumps
+    ${download_dump_name}=    Fetch From Left    ${bmc_dump_name}    .
+    ${download_dump_checksum}=    Run    md5sum ${EXECDIR}/dumps|awk '{print$1}'
+    ${download_dump_size}=    Run    stat -c "%s" ${EXECDIR}${/}dumps
 
-    OperatingSystem.Directory Should Exist  ${EXECDIR}/${download_dump_name}
-    ...  msg=Created dump name and downloaded dump name don't match.
-    Should Be Equal As Strings  ${bmc_dump_checksum}  ${download_dump_checksum}
-    Should Be Equal As Strings  ${bmc_dump_size}  ${download_dump_size}
+    OperatingSystem.Directory Should Exist    ${EXECDIR}/${download_dump_name}
+    ...    msg=Created dump name and downloaded dump name don't match.
+    Should Be Equal As Strings    ${bmc_dump_checksum}    ${download_dump_checksum}
+    Should Be Equal As Strings    ${bmc_dump_size}    ${download_dump_size}
 
-    Run  rm -rf ${EXECDIR}${/}${download_dump_name};rm ${EXECDIR}${/}dumps
+    Run    rm -rf ${EXECDIR}${/}${download_dump_name};rm ${EXECDIR}${/}dumps
 
 
 *** Keywords ***
-
 Suite Setup Execution
-    [Documentation]  Do initial suite setup tasks.
+    [Documentation]    Do initial suite setup tasks.
 
-    ${resp}=  OpenBMC Get Request  ${DUMP_URI}
-    Run Keyword If  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
-    ...  Run Keywords  Set Suite Variable  ${DUMP_URI}  /xyz/openbmc_project/dump/  AND
-    ...  Set Suite Variable  ${DUMP_ENTRY_URI}  /xyz/openbmc_project/dump/entry/
-
+    ${resp}=    OpenBMC Get Request    ${DUMP_URI}
+    IF    '${resp.status_code}' == '${HTTP_NOT_FOUND}'
+        Set Suite Variable    ${DUMP_URI}    /xyz/openbmc_project/dump/
+        Set Suite Variable    ${DUMP_ENTRY_URI}    /xyz/openbmc_project/dump/entry/
+    END
 
 Test Teardown Execution
-    [Documentation]  Do the post test teardown.
+    [Documentation]    Do the post test teardown.
 
-    Wait Until Keyword Succeeds  3 min  15 sec  Verify No Dump In Progress
+    Wait Until Keyword Succeeds    3 min    15 sec    Verify No Dump In Progress
     FFDC On Test Case Fail
     Delete All BMC Dump
     Close All Connections

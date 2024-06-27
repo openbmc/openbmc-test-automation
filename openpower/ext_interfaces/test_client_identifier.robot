@@ -1,215 +1,203 @@
 *** Settings ***
+Documentation       Test client identifier feature on BMC.
 
-Documentation     Test client identifier feature on BMC.
+Resource            ../../lib/rest_client.robot
+Resource            ../../lib/openbmc_ffdc.robot
+Resource            ../../lib/resource.robot
+Resource            ../../lib/bmc_redfish_utils.robot
+Resource            ../../lib/external_intf/management_console_utils.robot
+Resource            ../../lib/utils.robot
+Library             ../../lib/bmc_network_utils.py
+Library             ../../lib/gen_robot_valid.py
 
-Resource          ../../lib/rest_client.robot
-Resource          ../../lib/openbmc_ffdc.robot
-Resource          ../../lib/resource.robot
-Resource          ../../lib/bmc_redfish_utils.robot
-Resource          ../../lib/external_intf/management_console_utils.robot
-Resource          ../../lib/utils.robot
-Library           ../../lib/bmc_network_utils.py
-Library           ../../lib/gen_robot_valid.py
+Suite Setup         Redfish.Login
+Suite Teardown      Run Keyword And Ignore Error    Delete All Redfish Sessions
+Test Setup          Printn
+Test Teardown       FFDC On Test Case Fail
 
+Test Tags           client_identifier
 
-Suite Setup       Redfish.Login
-Suite Teardown    Run Keyword And Ignore Error  Delete All Redfish Sessions
-Test Setup        Printn
-Test Teardown     FFDC On Test Case Fail
-
-Test Tags        Client_Identifier
 
 *** Test Cases ***
-
 Create A Session With ClientID And Verify
-    [Documentation]  Create a session with client id and verify client id is same.
-    [Tags]  Create_A_Session_With_ClientID_And_Verify
-    [Template]  Create And Verify Session ClientID
+    [Documentation]    Create a session with client id and verify client id is same.
+    [Tags]    create_a_session_with_clientid_and_verify
+    [Template]    Create And Verify Session ClientID
 
-    # client_id           reboot_flag
-    12345                 False
-    123456                False
+    # client_id    reboot_flag
+    12345    False
+    123456    False
     EXTERNAL-CLIENT-01    False
     EXTERNAL-CLIENT-02    False
 
-
 Check ClientID Persistency On BMC Reboot
-    [Documentation]  Create a session with client id and verify client id is same after the reboot.
-    [Tags]  Check_ClientID_Persistency_On_BMC_Reboot
-    [Template]  Create And Verify Session ClientID
+    [Documentation]    Create a session with client id and verify client id is same after the reboot.
+    [Tags]    check_clientid_persistency_on_bmc_reboot
+    [Template]    Create And Verify Session ClientID
 
-    # client_id           reboot_flag
-    12345                 True
+    # client_id    reboot_flag
+    12345    True
     EXTERNAL-CLIENT-01    True
 
-
 Create A Multiple Session With ClientID And Verify
-    [Documentation]  Create a multiple session with client id and verify client id is same.
-    [Tags]  Create_A_Multiple_Session_With_ClientID_And_Verify
-    [Template]  Create And Verify Session ClientID
+    [Documentation]    Create a multiple session with client id and verify client id is same.
+    [Tags]    create_a_multiple_session_with_clientid_and_verify
+    [Template]    Create And Verify Session ClientID
 
-    # client_id                              reboot_flag
-    12345,123456                             False
+    # client_id    reboot_flag
+    12345,123456    False
     EXTERNAL-CLIENT-01,EXTERNAL-CLIENT-02    False
 
-
 Check Multiple ClientID Persistency On BMC Reboot
-    [Documentation]  Create a multiple session with client id and verify client id is same after the reboot.
-    [Tags]  Check_Multiple_ClientID_Persistency_On_BMC_Reboot
-    [Template]  Create And Verify Session ClientID
+    [Documentation]    Create a multiple session with client id and verify client id is same after the reboot.
+    [Tags]    check_multiple_clientid_persistency_on_bmc_reboot
+    [Template]    Create And Verify Session ClientID
 
-    # client_id                              reboot_flag
-    12345,123456                             True
+    # client_id    reboot_flag
+    12345,123456    True
     EXTERNAL-CLIENT-01,EXTERNAL-CLIENT-02    True
 
-
 Fail To Set Client Origin IP
-    [Documentation]  Fail to set the client origin IP.
-    [Tags]  Fail_To_Set_Client_Origin_IP
-    [Template]  Create Session And Fail To Set Client Origin IP
+    [Documentation]    Fail to set the client origin IP.
+    [Tags]    fail_to_set_client_origin_ip
+    [Template]    Create Session And Fail To Set Client Origin IP
 
     # client_id
     12345
     EXTERNAL-CLIENT-01
 
-
 Create Session For Non Admin User
-    [Documentation]  Create Session for non-admin user.
-    [Tags]  Create_Session_For_Non_Admin_User
-    [Template]  Non Admin User To Create Session
+    [Documentation]    Create Session for non-admin user.
+    [Tags]    create_session_for_non_admin_user
+    [Template]    Non Admin User To Create Session
 
-    # client_id    username         password      role_id
-    12345          operator_user    TestPwd123    Operator
+    # client_id    username    password    role_id
+    12345    operator_user    TestPwd123    Operator
 
 
 *** Keywords ***
-
 Create And Verify Session ClientID
-    [Documentation]  Create redifish session with client id and verify it remain same.
-    [Arguments]  ${client_id}  ${reboot_flag}=False
+    [Documentation]    Create redifish session with client id and verify it remain same.
+    [Arguments]    ${client_id}    ${reboot_flag}=False
 
     # Description of argument(s):
     # client_id    This client id contain string value
-    #              (e.g. 12345, "EXTERNAL-CLIENT").
-    # reboot_flag  Flag is used to run reboot the BMC code.
-    #               (e.g. True or False).
+    #    (e.g. 12345, "EXTERNAL-CLIENT").
+    # reboot_flag    Flag is used to run reboot the BMC code.
+    #    (e.g. True or False).
 
-    ${client_ids}=  Split String  ${client_id}  ,
-    ${session_info}=  Create Session With List Of ClientID  ${client_ids}
-    Verify A Session Created With ClientID  ${client_ids}  ${session_info}
+    ${client_ids}=    Split String    ${client_id}    ,
+    ${session_info}=    Create Session With List Of ClientID    ${client_ids}
+    Verify A Session Created With ClientID    ${client_ids}    ${session_info}
 
-    ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
+    ${before_reboot_xauth_token}=    Set Variable    ${XAUTH_TOKEN}
 
-    Run Keyword If  '${reboot_flag}' == 'True'
-    ...  Run Keywords  Redfish BMC Reset Operation  AND
-    ...  Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}  AND
-    ...  Is BMC Standby  AND
-    ...  Verify A Session Created With ClientID  ${client_ids}  ${session_info}
+    IF    '${reboot_flag}' == 'True'
+        Redfish BMC Reset Operation
+        Set Global Variable    ${XAUTH_TOKEN}    ${before_reboot_xauth_token}
+        Is BMC Standby
+        Verify A Session Created With ClientID    ${client_ids}    ${session_info}
+    END
 
-    Redfish Delete List Of Session  ${session_info}
-
+    Redfish Delete List Of Session    ${session_info}
 
 Set Client Origin IP
-    [Documentation]  Set client origin IP.
-    [Arguments]  ${client_id}  ${client_ip}  ${status}
+    [Documentation]    Set client origin IP.
+    [Arguments]    ${client_id}    ${client_ip}    ${status}
 
     # Description of argument(s):
     # client_id    This client id contain string value
-    #              (e.g. 12345, "EXTERNAL-CLIENT").
+    #    (e.g. 12345, "EXTERNAL-CLIENT").
     # client_ip    Valid IP address
-    # status       HTTP status code
+    # status    HTTP status code
 
-    ${session}=  Run Keyword And Return Status
-    ...  Redfish Login
-    ...  kwargs= {"Context": "${client_id}", "ClientOriginIP":"${client_ip}"}}
-    Valid Value  session  [${status}]
-
+    ${session}=    Run Keyword And Return Status
+    ...    Redfish Login
+    ...    kwargs= {"Context": "${client_id}", "ClientOriginIP":"${client_ip}"}}
+    Valid Value    session    [${status}]
 
 Create Session And Fail To Set Client Origin IP
-    [Documentation]  Create redifish session with client id and fail to set client origin IP.
-    [Arguments]  ${client_id}
+    [Documentation]    Create redifish session with client id and fail to set client origin IP.
+    [Arguments]    ${client_id}
 
     # Description of argument(s):
     # client_id    This client id contain string value
-    #              (e.g. 12345, "EXTERNAL-CLIENT").
+    #    (e.g. 12345, "EXTERNAL-CLIENT").
 
-    Set Test Variable  ${client_ip}  10.6.7.8
-    ${resp}=  Set Client Origin IP  ${client_id}  ${client_ip}  status=False
-
+    Set Test Variable    ${client_ip}    10.6.7.8
+    ${resp}=    Set Client Origin IP    ${client_id}    ${client_ip}    status=False
 
 Create A Non Admin Session With ClientID
-    [Documentation]  Create redifish session with client id.
-    [Arguments]  ${client_id}  ${username}  ${password}
+    [Documentation]    Create redifish session with client id.
+    [Arguments]    ${client_id}    ${username}    ${password}
 
     # Description of argument(s):
     # client_id    This client id can contain string value
-    #              (e.g. 12345, "EXTERNAL-CLIENT").
+    #    (e.g. 12345, "EXTERNAL-CLIENT").
 
-    @{session_list}=  Create List
-    &{tmp_dict}=  Create Dictionary
+    @{session_list}=    Create List
+    &{tmp_dict}=    Create Dictionary
 
-    FOR  ${client}  IN  @{client_id}
-      ${resp}=  Redfish Login  rest_username=${username}  rest_password=${password}
-      ...  kwargs="Context": "${client_id}"
-      Append To List  ${session_list}  ${resp}
+    FOR    ${client}    IN    @{client_id}
+        ${resp}=    Redfish Login    rest_username=${username}    rest_password=${password}
+        ...    kwargs="Context": "${client_id}"
+        Append To List    ${session_list}    ${resp}
     END
 
-    RETURN  ${session_list}
-
+    RETURN    ${session_list}
 
 Verify A Non Admin Session Created With ClientID
-    [Documentation]  Verify session created with client id.
-    [Arguments]  ${client_ids}  ${session_ids}
+    [Documentation]    Verify session created with client id.
+    [Arguments]    ${client_ids}    ${session_ids}
 
     # Description of argument(s):
     # client_ids    External client name.
-    # session_ids   This value is a session id.
+    # session_ids    This value is a session id.
 
     # {
-    #   "@odata.id": "/redfish/v1/SessionService/Sessions/H8q2ZKucSJ",
-    #   "@odata.type": "#Session.v1_0_2.Session",
-    #   "Description": "Manager User Session",
-    #   "Id": "H8q2ZKucSJ",
-    #   "Name": "User Session",
-    #   "Oem": {
-    #   "OpenBMC": {
-    #  "@odata.type": "#OemSession.v1_0_0.Session",
-    #  "ClientID": "",
-    #  "ClientOriginIP": "::ffff:x.x.x.x"
-    #       }
-    #     },
-    #   "UserName": "root"
+    #    "@odata.id": "/redfish/v1/SessionService/Sessions/H8q2ZKucSJ",
+    #    "@odata.type": "#Session.v1_0_2.Session",
+    #    "Description": "Manager User Session",
+    #    "Id": "H8q2ZKucSJ",
+    #    "Name": "User Session",
+    #    "Oem": {
+    #    "OpenBMC": {
+    #    "@odata.type": "#OemSession.v1_0_0.Session",
+    #    "ClientID": "",
+    #    "ClientOriginIP": "::ffff:x.x.x.x"
+    #    }
+    #    },
+    #    "UserName": "root"
     # }
 
-    FOR  ${client}  ${session}  IN ZIP  ${client_ids}  ${session_ids}
-      ${resp}=  Redfish Get Request  /redfish/v1/SessionService/Sessions/${session["Id"]}
-      Rprint Vars  resp.json()
-      @{words} =  Split String  ${resp.json()["ClientOriginIPAddress"]}  :
-      ${ip_address}=  Get Running System IP
-      Set Test Variable  ${temp_ipaddr}  ${words}[-1]
-      Valid Value  client  ['${resp.json()["Oem"]["OpenBMC"]["ClientID"]}']
-      Valid Value  session["Id"]  ['${resp.json()["Id"]}']
-      Valid Value  temp_ipaddr  ${ip_address}
+    FOR    ${client}    ${session}    IN ZIP    ${client_ids}    ${session_ids}
+        ${resp}=    Redfish Get Request    /redfish/v1/SessionService/Sessions/${session["Id"]}
+        Rprint Vars    resp.json()
+        @{words}=    Split String    ${resp.json()["ClientOriginIPAddress"]}    :
+        ${ip_address}=    Get Running System IP
+        Set Test Variable    ${temp_ipaddr}    ${words}[-1]
+        Valid Value    client    ['${resp.json()["Oem"]["OpenBMC"]["ClientID"]}']
+        Valid Value    session["Id"]    ['${resp.json()["Id"]}']
+        Valid Value    temp_ipaddr    ${ip_address}
     END
 
-
 Non Admin User To Create Session
-    [Documentation]  Non Admin user create a session and verify the session is created.
-    [Arguments]  ${client_id}  ${username}  ${password}  ${role}  ${enabled}=${True}
+    [Documentation]    Non Admin user create a session and verify the session is created.
+    [Arguments]    ${client_id}    ${username}    ${password}    ${role}    ${enabled}=${True}
 
     # Description of argument(s):
     # client_id    This client id contain string value
-    #              (e.g. 12345, "EXTERNAL-CLIENT").
-    # username     Username.
-    # password     Password.
-    # role         Role of user.
-    # enabled      Value can be True or False.
+    #    (e.g. 12345, "EXTERNAL-CLIENT").
+    # username    Username.
+    # password    Password.
+    # role    Role of user.
+    # enabled    Value can be True or False.
 
     Redfish.Login
-    Redfish Create User  ${username}  ${password}  ${role}  ${enabled}
+    Redfish Create User    ${username}    ${password}    ${role}    ${enabled}
     Delete All Sessions
     Redfish.Logout
-    Initialize OpenBMC  rest_username=${username}  rest_password=${password}
-    ${client_ids}=  Split String  ${client_id}  ,
-    ${session_info}=  Create A Non Admin Session With ClientID  ${client_ids}  ${username}  ${password}
-    Verify A Non Admin Session Created With ClientID  ${client_ids}  ${session_info}
+    Initialize OpenBMC    rest_username=${username}    rest_password=${password}
+    ${client_ids}=    Split String    ${client_id}    ,
+    ${session_info}=    Create A Non Admin Session With ClientID    ${client_ids}    ${username}    ${password}
+    Verify A Non Admin Session Created With ClientID    ${client_ids}    ${session_info}
