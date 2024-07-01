@@ -66,7 +66,7 @@ Launch Headless Browser
     #          (e.g. gc for google chrome, ff for firefox).
 
     Start Virtual Display
-    ${browser_ID}=  Open Browser  ${URL}
+    ${browser_ID}=  Open Browser  ${URL}    ${browser}
     Set Window Size  1920  1080
 
     RETURN  ${browser_ID}
