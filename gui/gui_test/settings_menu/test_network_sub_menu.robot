@@ -261,7 +261,9 @@ Add Static IP Address And Verify
     # expected_status     Expected status while adding static ipv4 address
     # ....                (e.g. Invalid format / Field required).
 
-    Wait Until Keyword Succeeds  30 sec  10 sec  Click Element  ${xpath_add_static_ipv4_address_button}
+    Wait Until Keyword Succeeds  30 sec  10 sec
+    ...  Wait Until Element Is Enabled  ${xpath_add_static_ipv4_address_button}
+    Click Element  ${xpath_add_static_ipv4_address_button}
 
     Input Text  ${xpath_input_ip_address}  ${ip_address}
     Input Text  ${xpath_input_subnetmask}  ${subnet_mask}
