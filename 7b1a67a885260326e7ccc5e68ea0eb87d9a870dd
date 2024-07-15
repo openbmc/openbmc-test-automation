@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cbc7994_26d75f32",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-07-15T06:51:00Z",
+      "side": 1,
+      "message": "as you are adding wait here why you need to use #264 keyword?\n\nyou can use as below\n\nWait Until Element Is Enabled  ${xpath_add_static_ipv4_address_button}. timeout\u003d30 sec",
+      "revId": "7b1a67a885260326e7ccc5e68ea0eb87d9a870dd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
