@@ -1,0 +1,691 @@
+{
+    "Redfish Power On": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Redfish Power Operation  On",
+        "lib_file_path": "bmc_redfish_utils.robot"
+    },
+    "IPMI Power On": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Run External IPMI Standard Command  power on -N 10 -R 1",
+        "lib_file_path": "ipmi_client.robot"
+    },
+    "Istep Power On": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "BMC Execute Command  '/usr/bin/istep'  fork=${1}"
+    },
+    "Redfish Power Off": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$",
+            "os_ping": "^0$",
+            "os_login": "^0$",
+            "os_run_cmd": "^0$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Redfish Power Operation  GracefulShutdown",
+        "lib_file_path": "bmc_redfish_utils.robot"
+    },
+    "Redfish Hard Power Off": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$",
+            "os_ping": "^0$",
+            "os_login": "^0$",
+            "os_run_cmd": "^0$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Redfish Power Operation  ForceOff",
+        "lib_file_path": "bmc_redfish_utils.robot"
+    },
+    "IPMI Power Off": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$",
+            "os_ping": "^0$",
+            "os_login": "^0$",
+            "os_run_cmd": "^0$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Run External IPMI Standard Command  power off -N 10 -R 1",
+        "lib_file_path": "ipmi_client.robot"
+    },
+    "IPMI Power Soft": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$",
+            "os_ping": "^0$",
+            "os_login": "^0$",
+            "os_run_cmd": "^0$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Run External IPMI Standard Command  power soft -N 10 -R 1",
+        "lib_file_path": "ipmi_client.robot"
+    },
+    "Host Power Off": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$",
+            "os_ping": "^0$",
+            "os_login": "^0$",
+            "os_run_cmd": "^0$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "utils.Initiate OS Host Power Off",
+        "lib_file_path": "utils.robot"
+    },
+
+    "APOR": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Set Global Variable  ${PDU_TYPE}  pdu ; Set Global Variable  ${PDU_IP}  ${PDU_HOST} ; PDU Power Cycle",
+        "lib_file_path": "pdu/pdu.robot:pdu/synaccess.robot"
+    },
+    "OBMC Reboot (run)": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "bmc": "^Enabled$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "BMC Execute Command  /sbin/reboot  fork=${1}"
+    },
+    "Redfish OBMC Reboot (run)": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "bmc": "^Enabled$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Redfish BMC Reset Operation",
+        "lib_file_path": "bmc_redfish_utils.robot"
+    },
+    "OBMC Reboot (off)": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^Off$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "bmc": "^Enabled$",
+            "chassis": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "BMC Execute Command  /sbin/reboot  fork=${1}"
+    },
+    "Redfish OBMC Reboot (off)": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^Off$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "bmc": "^Enabled$",
+            "chassis": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Redfish BMC Reset Operation",
+        "lib_file_path": "bmc_redfish_utils.robot"
+    },
+    "PDU AC Cycle (run)": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Set Global Variable  ${PDU_TYPE}  pdu ; Set Global Variable  ${PDU_IP}  ${PDU_HOST} ; PDU Power Cycle",
+        "lib_file_path": "pdu/pdu.robot:pdu/synaccess.robot"
+    },
+    "PDU AC Cycle (off)": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^Off$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Set Global Variable  ${PDU_TYPE}  pdu ; Set Global Variable  ${PDU_IP}  ${PDU_HOST} ; PDU Power Cycle",
+        "lib_file_path": "pdu/pdu.robot:pdu/synaccess.robot"
+    },
+    "IPMI MC Reset Warm (run)": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "bmc": "^Enabled$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Run External IPMI Standard Command  mc reset warm -N 10 -R 1 ; Printn",
+        "lib_file_path": "ipmi_client.robot:gen_print.py"
+    },
+    "IPMI MC Reset Warm (off)": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^Off$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "bmc": "^Enabled$",
+            "chassis": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Run External IPMI Standard Command  mc reset warm -N 10 -R 1 ; Printn",
+        "lib_file_path": "ipmi_client.robot:gen_print.py"
+    },
+    "IPMI MC Reset Cold (run)": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "bmc": "^Enabled$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Run External IPMI Standard Command  mc reset cold -N 10 -R 1 ; Printn",
+        "lib_file_path": "ipmi_client.robot:gen_print.py"
+    },
+    "IPMI MC Reset Cold (off)": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^Off$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "bmc": "^Enabled$",
+            "chassis": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Run External IPMI Standard Command  mc reset cold -N 10 -R 1 ; Printn",
+        "lib_file_path": "ipmi_client.robot:gen_print.py"
+    },
+    "IPMI Std MC Reset Warm (run)": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Run IPMI Standard Command  mc reset warm -N 10 -R 1 ; Printn",
+        "lib_file_path": "ipmi_client.robot:gen_print.py"
+    },
+    "IPMI Std MC Reset Warm (off)": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^Off$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Run IPMI Standard Command  mc reset warm -N 10 -R 1 ; Printn",
+        "lib_file_path": "ipmi_client.robot:gen_print.py"
+    },
+    "IPMI Std MC Reset Cold (run)": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Run IPMI Standard Command  mc reset cold -N 10 -R 1 ; Printn",
+        "lib_file_path": "ipmi_client.robot:gen_print.py"
+    },
+    "IPMI Std MC Reset Cold (off)": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^Off$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "Run IPMI Standard Command  mc reset cold -N 10 -R 1 ; Printn",
+        "lib_file_path": "ipmi_client.robot:gen_print.py"
+    },
+    "IPMI Power Cycle": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Run External IPMI Standard Command  power cycle -N 10 -R 1",
+        "lib_file_path": "ipmi_client.robot"
+    },
+    "IPMI Power Reset": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Run External IPMI Standard Command  power reset -N 10 -R 1",
+        "lib_file_path": "ipmi_client.robot"
+    },
+    "Auto Reboot": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^Off$",
+            "boot_progress": "^None$",
+            "host": "^Disabled$",
+            "os_ping": "^0$",
+            "os_login": "^0$",
+            "os_run_cmd": "^0$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "utils.Redfish Initiate Auto Reboot  1000",
+        "lib_file_path": "utils.robot"
+    },
+    "Host initd Reset": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "bmc": "^Enabled$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 1,
+        "method_type": "keyword",
+        "method": "utils.Stop PLDM Service And Wait",
+        "lib_file_path": "utils.robot"
+    },
+    "Host Reboot": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "utils.Initiate OS Host Reboot",
+        "lib_file_path": "utils.robot"
+    },
+    "RF SYS GracefulRestart": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Redfish Power Operation  GracefulRestart",
+        "lib_file_path": "bmc_redfish_utils.robot"
+    },
+    "RF SYS ForceRestart": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Redfish Power Operation  ForceRestart",
+        "lib_file_path": "bmc_redfish_utils.robot"
+    },
+    "Tool Initd MP Reboot": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "BMC Execute Command  systemctl start obmc-host-crash@0.target"
+    },
+    "OPAL TI": {
+        "start": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "end": {
+            "redfish": "^1$",
+            "chassis": "^On$",
+            "boot_progress": "^OSRunning$",
+            "host": "^Enabled$",
+            "os_ping": "^1$",
+            "os_login": "^1$",
+            "os_run_cmd": "^1$"
+        },
+        "bmc_reboot": 0,
+        "method_type": "keyword",
+        "method": "Inject OPAL TI",
+        "lib_file_path": "open_power_utils.robot"
+    }
+}
