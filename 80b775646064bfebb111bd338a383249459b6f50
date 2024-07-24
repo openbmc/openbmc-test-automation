@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c6a2be9_ac5baefa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2024-07-24T18:15:28Z",
+      "side": 1,
+      "message": "If the only difference here is that we no longer consider \"OSStarted\" to indicate the host firmware has fully booted, I don\u0027t think that is POWER specific. We got agreement among the community that it was not used to indicate a complete boot of the system. It\u0027s just our old AC922 class systems that run OPAL did use it as an indication they had completed their boot. I think we should name this file something more generic and eventually make it the default.",
+      "revId": "80b775646064bfebb111bd338a383249459b6f50",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
