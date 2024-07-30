@@ -16,6 +16,23 @@
       "message": "Awaiting from the submitter for the CLA access to be added. Once done, this code is good to merged.",
       "revId": "64db7ff8e59684d8ae432c733487ea3a88373886",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2c716b1_d8c73c36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2024-07-30T04:50:51Z",
+      "side": 1,
+      "message": "I now see Yuvan Varshitha \u003cyuvanvarshitha@ami.com\u003e\n\nCLA approved list for AMI \n\nhttps://drive.google.com/drive/folders/12CXCpXKHZSRzm0S8G2Td9YNkSabX1JY5",
+      "revId": "64db7ff8e59684d8ae432c733487ea3a88373886",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
