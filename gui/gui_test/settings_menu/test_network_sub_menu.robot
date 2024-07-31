@@ -28,6 +28,10 @@ ${xpath_cancel_button}                   //button[contains(text(),'Cancel')]
 ${xpath_delete_dns_server}               //*[@title="Delete DNS address"]
 ${xpath_save_button}                     //button[contains(text(),'Save')]
 ${xpath_dhcp_toggle_switch}              //*[@id='dhcpSwitch']
+${xpath_ntp_switch_button}               //*[@id="useNtpSwitch"]/following-sibling::label
+${xpath_dns_switch_button}               //*[@id="useDnsSwitch"]/following-sibling::label
+${xpath_domainname_switch_button}        //*[@id="useDomainNameSwitch"]/following-sibling::label
+${xpath_success_popup}                   //*[contains(text(),'Success')]/following-sibling::button
 
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
@@ -186,6 +190,18 @@ Configure And Verify Invalid Static IP Address
     ${spl_char_ip}       ${test_subnet_mask}  ${default_gateway}  Invalid format
 
 
+Modify DHCP Properties By Toggling And Verify
+    [Documentation]  Modify DHCP properties by toggling and verify.
+    [Tags]  Modify_DHCP_Properties_By_Toggling_And_Verify
+    [Template]  Toggle DHCPv4 property And Verify
+
+    # property                 xpath_property
+
+    UseNTPServers              ${xpath_ntp_switch_button}
+    UseDNSServers              ${xpath_dns_switch_button}
+    UseDomainName              ${xpath_domainname_switch_button}
+
+
 Configure Hostname Via GUI And Verify
     [Documentation]  Login to GUI Network page, configure hostname and verify.
     [Tags]  Configure_Hostname_Via_GUI_And_Verify
@@ -261,7 +277,7 @@ Add Static IP Address And Verify
     # expected_status     Expected status while adding static ipv4 address
     # ....                (e.g. Invalid format / Field required).
 
-    Wait Until Element Is Enabled  ${xpath_add_static_ipv4_address_button} timeout=60sec
+    Wait Until Element Is Enabled  ${xpath_add_static_ipv4_address_button}  timeout=60sec
     Click Element  ${xpath_add_static_ipv4_address_button}
 
     Input Text  ${xpath_input_ip_address}  ${ip_address}
@@ -296,3 +312,55 @@ Configure And Verify Network Settings Via GUI
     Launch Browser Login GUI And Navigate To Network Page
 
     Wait Until Page Contains  ${input_value}  timeout=30sec
+
+
+Toggle DHCPv4 Property And Verify
+    [Documentation]  Toggle DHVPv4 property and verify.
+    [Arguments]  ${property}   ${xpath_property}
+
+    # Description of argument(s):
+    # ${property}       DHCP Property name.
+    # xpath_property    xpath of the DHCPv4 property.
+
+    Wait Until Page Contains Element  ${xpath_property}
+
+    ${redfish_before_set}=  Get DHCP Property Via Redfish  ${property}
+    ${gui_before_set}=  Get Text  ${xpath_property}
+
+    Click Element At Coordinates   ${xpath_property}  0  0
+    Verify Popup Message And Close Popup  ${xpath_success_popup}
+    Wait Until Element Is Not Visible
+    ...  ${xpath_page_loading_progress_bar}  timeout=120s
+
+    ${redfish_after_set}=  Get DHCP Property Via Redfish  ${property}
+    ${gui_after_set}=  Get Text  ${xpath_property}
+
+    Should Not Be Equal  ${redfish_before_set}  ${redfish_after_set}
+    Should Not Be Equal  ${gui_before_set}  ${gui_after_set}
+
+    Click Element At Coordinates   ${xpath_property}  0  0
+
+
+Get DHCP Property Via Redfish
+     [Documentation]  Get DHCPv4 property value via redfish.
+     [Arguments]   ${property}
+
+     # Description of argument(s):
+     # ${property}       DHCP Property name.
+
+     ${active_channel_config}=  Get Active Channel Config
+     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+     RETURN  ${resp.dict["DHCPv4"]["${property}"]}
+
+
+Verify Popup Message And Close Popup
+    [Documentation]  Verify popup message and close popup.
+    [Arguments]   ${popup_msg}
+
+    # Description of argument(s):
+    # popup_msg        Popup message (Eg: Success or Error).
+
+    Wait Until Keyword Succeeds  1 min  15 sec
+    ...  Wait Until Page Contains Element  ${popup_msg}
+    Click Element  ${popup_msg}
