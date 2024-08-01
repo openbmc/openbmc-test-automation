@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d6ffdc2e_2753c673",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-08-01T13:10:53Z",
+      "side": 1,
+      "message": "it is not required in this testcases, just toggle radio button verifying toggled or not",
+      "parentUuid": "365de0c6_86a09fa9",
+      "range": {
+        "startLine": 198,
+        "startChar": 4,
+        "endLine": 198,
+        "endChar": 29
+      },
+      "revId": "f978adbad319871539d9bf239ea1fc19159c1c49",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1cf60356_eb7b27cb",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 2
@@ -88,6 +112,30 @@
       "writtenOn": "2024-08-01T06:42:06Z",
       "side": 1,
       "message": "I think its better to include enable and disable for all the 3 properties rather than just checking the toggling.",
+      "range": {
+        "startLine": 322,
+        "startChar": 4,
+        "endLine": 322,
+        "endChar": 55
+      },
+      "revId": "f978adbad319871539d9bf239ea1fc19159c1c49",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c893ae8_c3faa6af",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-08-01T13:10:53Z",
+      "side": 1,
+      "message": "it is not required in this testcases, just toggle radio button verifying toggled or not",
+      "parentUuid": "6625c761_b1ed2c72",
       "range": {
         "startLine": 322,
         "startChar": 4,
