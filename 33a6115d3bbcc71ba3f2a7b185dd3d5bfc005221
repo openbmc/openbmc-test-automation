@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fb7f70c_40bc0dba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001924
+      },
+      "writtenOn": "2024-08-02T11:48:31Z",
+      "side": 1,
+      "message": "one error wncountered in review command.\n---------------------------------------------------            ---------------------------\nTest Bmc Network Conf :: Network interface configur            ation and verif... | FAIL |\n1 test, 0 passed, 1 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nOutput:  /gsa/rchgsa-h2/01/kvishal/anvesh-review/op            enbmc-test-automation/output.xml\nLog:     /gsa/rchgsa-h2/01/kvishal/anvesh-review/op            enbmc-test-automation/log.html\nReport:  /gsa/rchgsa-h2/01/kvishal/anvesh-review/op            enbmc-test-automation/report.html",
+      "revId": "33a6115d3bbcc71ba3f2a7b185dd3d5bfc005221",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
