@@ -1,0 +1,358 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8f7df7f_e1eeeb00",
+        "filename": "lib/bmc_date_and_time_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-08-04T10:37:15Z",
+      "side": 1,
+      "message": "ntp -\u003e NTP",
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fcaaa53_5b3a9af4",
+        "filename": "lib/bmc_date_and_time_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-08-04T10:37:15Z",
+      "side": 1,
+      "message": "any better variable name?",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 19
+      },
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9655c269_db81a1fd",
+        "filename": "lib/bmc_date_and_time_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-08-04T10:37:15Z",
+      "side": 1,
+      "message": "from -\u003e via",
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7eeab82_be6082cf",
+        "filename": "lib/bmc_date_and_time_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-08-04T10:37:15Z",
+      "side": 1,
+      "message": "th --\u003e the Redfish.patch",
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a750ccf_d804d4fe",
+        "filename": "lib/bmc_date_and_time_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-08-04T10:37:15Z",
+      "side": 1,
+      "message": "Set DateTime To Manual Mode",
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1230051f_a409a440",
+        "filename": "lib/bmc_date_and_time_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-08-04T10:37:15Z",
+      "side": 1,
+      "message": "this is not a example. mention it as Valid Values: on/off.",
+      "range": {
+        "startLine": 61,
+        "startChar": 19,
+        "endLine": 61,
+        "endChar": 21
+      },
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3488c2db_2cc48b81",
+        "filename": "lib/bmc_date_and_time_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-08-04T10:37:15Z",
+      "side": 1,
+      "message": "missing -\u003e Description of argument(s):",
+      "range": {
+        "startLine": 77,
+        "startChar": 5,
+        "endLine": 77,
+        "endChar": 14
+      },
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90c496aa_ee6f9216",
+        "filename": "lib/bmc_date_and_time_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-08-04T10:37:15Z",
+      "side": 1,
+      "message": "If u mention Get in the keyword there should be RETURN in the keyword body. mostly your creating a suite variable. Modify keyword name accordingly.",
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9218068e_5be4964c",
+        "filename": "lib/bmc_date_and_time_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-08-04T10:37:15Z",
+      "side": 1,
+      "message": "Restore NTP State",
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e055d25c_b7d1667f",
+        "filename": "lib/bmc_date_and_time_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-08-04T10:37:15Z",
+      "side": 1,
+      "message": "I suggest the keyword title as\n\nCheck If NTP Server Info Is Populated",
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6690be51_47a2ca19",
+        "filename": "lib/bmc_date_and_time_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-08-04T10:37:15Z",
+      "side": 1,
+      "message": "Not required to mention URI. just say\n\nFrom network protocol response check if NTP servers are populated are not.",
+      "range": {
+        "startLine": 99,
+        "startChar": 41,
+        "endLine": 99,
+        "endChar": 100
+      },
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3df95029_7c71939d",
+        "filename": "lib/bmc_date_and_time_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-08-04T10:37:15Z",
+      "side": 1,
+      "message": "Check If Date And Time Are Changed\n    [Documentation]  check if date and time are changed.",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 0
+      },
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03602f13_c3427968",
+        "filename": "lib/bmc_date_and_time_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-08-04T10:37:15Z",
+      "side": 1,
+      "message": "Remove additional one-line space",
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42203e95_2fc17430",
+        "filename": "redfish/managers/test_network_ntp_redfish.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-08-04T10:37:15Z",
+      "side": 1,
+      "message": "Documentation    Test suite for NTP configuration and verification.",
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df6f9fa7_d4b02d46",
+        "filename": "redfish/managers/test_network_ntp_redfish.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-08-04T10:37:15Z",
+      "side": 1,
+      "message": "NTP server values are not same",
+      "range": {
+        "startLine": 36,
+        "startChar": 40,
+        "endLine": 36,
+        "endChar": 49
+      },
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6232ab6_1bf27769",
+        "filename": "redfish/managers/test_network_ntp_redfish.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-08-04T10:37:15Z",
+      "side": 1,
+      "message": "Preferably\n\nVerify Enable NTP Mode",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 17
+      },
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7d30281_9bd47dd9",
+        "filename": "redfish/managers/test_network_ntp_redfish.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-08-04T10:37:15Z",
+      "side": 1,
+      "message": "remove protocol -- redundant",
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96b59c2d_9cecd969",
+        "filename": "redfish/managers/test_network_ntp_redfish.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-08-04T10:37:15Z",
+      "side": 1,
+      "message": "looks like exceeding 110 character limit",
+      "range": {
+        "startLine": 103,
+        "startChar": 4,
+        "endLine": 103,
+        "endChar": 88
+      },
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
