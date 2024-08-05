@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "db414e38_59cd9272",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-08-05T07:20:45Z",
+      "side": 1,
+      "message": "Change the commit message\nSeparating NTP and Manual - date Time Testcases",
+      "range": {
+        "startLine": 7,
+        "startChar": 3,
+        "endLine": 7,
+        "endChar": 4
+      },
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94f3fc0b_bbcb4be9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-08-05T07:20:45Z",
+      "side": 1,
+      "message": "Remove",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 62
+      },
+      "revId": "046abc6f1208193db555c927138916b3e3610f39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8f7df7f_e1eeeb00",
         "filename": "lib/bmc_date_and_time_utils.robot",
         "patchSetId": 3
