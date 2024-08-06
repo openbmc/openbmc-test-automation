@@ -16,6 +16,23 @@
       "message": "Don\u0027t see any error.",
       "revId": "c043decb25e8a87307a0d5be6853dd9d297c72e4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c672ecb_4d5a3965",
+        "filename": "redfish/managers/test_bmc_network_protocol.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2024-08-06T14:33:53Z",
+      "side": 1,
+      "message": "this test case is not making much sense to me.\nSince it is moving from one path to logical path, will let it go.\nWill discuss and come with right logic in next commit.",
+      "revId": "c043decb25e8a87307a0d5be6853dd9d297c72e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
