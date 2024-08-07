@@ -34,6 +34,23 @@
       "parentUuid": "4fb7f70c_40bc0dba",
       "revId": "33a6115d3bbcc71ba3f2a7b185dd3d5bfc005221",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd9700f0_928987fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001924
+      },
+      "writtenOn": "2024-08-07T06:30:50Z",
+      "side": 1,
+      "message": "with new command, rerun the code and saw dollowing result\ngfwa122 openbmc-test-automation]$ Test Network Sub Menu :: Test OpenBMC GUI \"Network\" sub-menu of \"S... | FAIL |\n\u003e 13 tests, 12 passed, 1 failed\n\u003e \u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\u003e Output:  /home/anvesh/anvesh/10April/network_test/output.xml\n\u003e Log:     /home/anvesh/anvesh/10April/network_test/log.\nthi3 i3 \nthis is the  known issue and anvesh is working on it.",
+      "revId": "33a6115d3bbcc71ba3f2a7b185dd3d5bfc005221",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
