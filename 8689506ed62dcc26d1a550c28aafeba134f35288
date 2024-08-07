@@ -33,6 +33,23 @@
       "message": "code looks correct",
       "revId": "8689506ed62dcc26d1a550c28aafeba134f35288",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1f72125_8640038b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001924
+      },
+      "writtenOn": "2024-08-07T09:32:21Z",
+      "side": 1,
+      "message": "adding aome morw info failure\n(python311) [kvishal@gfwa122 openbmc-test-automation]$ Test Network Sub Menu :: Test OpenBMC GUI \"Network\" sub-menu of \"S... | FAIL |\n\u003e 13 tests, 12 passed, 1 failed\n\u003e \u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\u003e Output:  /home/anvesh/anvesh/10April/network_test/output.xml\n\u003e Log:     /home/anvesh/anvesh/10April/network_test/log.html\n\u003e Report:  /home/anvesh/anvesh/10April/network_test/report.html",
+      "revId": "8689506ed62dcc26d1a550c28aafeba134f35288",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
