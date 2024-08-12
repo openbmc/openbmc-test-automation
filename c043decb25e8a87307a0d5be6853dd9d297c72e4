@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84d6a1dc_d4e58ec6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-08-12T05:44:08Z",
+      "side": 1,
+      "message": "Adding +1 as the submitter is planning to re-work on the commit after separating the file.",
+      "revId": "c043decb25e8a87307a0d5be6853dd9d297c72e4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c672ecb_4d5a3965",
