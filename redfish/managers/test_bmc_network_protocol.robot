@@ -76,6 +76,23 @@ Verify Enable NTP
     Rprint Vars  ntp
     Valid Value  ntp["ProtocolEnabled"]  valid_values=[True]
 
+Verify Disble NTP
+    [Documentation]  Verify NTP protocol mode can be disabled.
+    [Teardown]  Restore NTP Mode
+    [Tags]  Verify_Disable_NTP
+
+    ${original_ntp}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  NTP
+    Set Suite Variable  ${original_ntp}
+    Rprint Vars  original_ntp
+
+    # The following patch command should set the ["NTP"]["ProtocolEnabled"] property to "False".
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'ProtocolEnabled': ${False}}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    Wait Until Keyword Succeeds  1 min  5 sec
+    ...  Verify System Time Sync Status  ${False}
+    ${ntp}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  NTP
+    Rprint Vars  ntp
+    Valid Value  ntp["ProtocolEnabled"]  valid_values=[False]
 
 Verify Set DateTime With NTP Enabled
     [Documentation]  Verify whether set managers dateTime is restricted with NTP enabled.
