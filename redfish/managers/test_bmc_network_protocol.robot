@@ -64,9 +64,6 @@ Verify Enable NTP
     [Teardown]  Restore NTP Mode
     [Tags]  Verify_Enable_NTP
 
-    ${original_ntp}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  NTP
-    Set Suite Variable  ${original_ntp}
-    Rprint Vars  original_ntp
     # The following patch command should set the ["NTP"]["ProtocolEnabled"] property to "True".
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'ProtocolEnabled': ${True}}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
@@ -76,6 +73,19 @@ Verify Enable NTP
     Rprint Vars  ntp
     Valid Value  ntp["ProtocolEnabled"]  valid_values=[True]
 
+Verify Disble NTP
+    [Documentation]  Verify NTP protocol mode can be disabled.
+    [Teardown]  Restore NTP Mode
+    [Tags]  Verify_Disable_NTP
+
+    # The following patch command should set the ["NTP"]["ProtocolEnabled"] property to "False".
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'ProtocolEnabled': ${False}}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    Wait Until Keyword Succeeds  1 min  5 sec
+    ...  Verify System Time Sync Status  ${False}
+    ${ntp}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  NTP
+    Rprint Vars  ntp
+    Valid Value  ntp["ProtocolEnabled"]  valid_values=[False]
 
 Verify Set DateTime With NTP Enabled
     [Documentation]  Verify whether set managers dateTime is restricted with NTP enabled.
@@ -88,7 +98,6 @@ Verify Set DateTime With NTP Enabled
     ${local_system_time}=  Get Current Date
     Redfish Set DateTime  ${local_system_time}
     ...  valid_status_codes=[${HTTP_BAD_REQUEST}, ${HTTP_INTERNAL_SERVER_ERROR}]
-
 
 *** Keywords ***
 
@@ -103,7 +112,6 @@ Suite Setup Execution
     ${year_status}=  Run Keyword And Return Status  Should Not Contain  ${old_date_time}  ${year_without_ntp}
     Run Keyword If  ${year_status} == False
     ...  Enable NTP And Add NTP Address
-
 
 Suite Teardown Execution
     [Documentation]  Do the suite level teardown.
