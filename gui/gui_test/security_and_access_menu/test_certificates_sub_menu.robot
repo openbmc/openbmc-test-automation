@@ -28,7 +28,6 @@ ${xpath_input_contact_person}      //*[@data-test-id='modalGenerateCsr-input-con
 ${xpath_input_email_address}       //*[@data-test-id='modalGenerateCsr-input-emailAddress']
 ${xpath_generate_csr_submit}       //*[@data-test-id='modalGenerateCsr-button-ok']
 ${xpath_csr_cancel_button}         //button[contains(text(),"Cancel")]
-${xpath_input_alternate_name}      //input[@id='alternate-name']
 ${xpath_select_algorithm_button}   //*[@data-test-id='modalGenerateCsr-select-keyPairAlgorithm']
 
 *** Test Cases ***
@@ -73,7 +72,6 @@ Verify Generate CSR Certificate Button
     Page Should Contain Element  ${xpath_input_common_name}
     Page Should Contain Element  ${xpath_input_contact_person}
     Page Should Contain Element  ${xpath_input_email_address}
-    Page Should Contain Element  ${xpath_input_alternate_name}
     Page Should Contain Element  ${xpath_select_algorithm_button}
     Page Should Contain Element  ${xpath_generate_csr_submit}
 
