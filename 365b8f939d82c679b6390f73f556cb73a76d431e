@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f6748bf_19f023c2",
+        "filename": "redfish/managers/test_bmc_network_protocol.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-08-15T02:52:46Z",
+      "side": 0,
+      "message": "this also move to suite setup",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 29
+      },
+      "revId": "365b8f939d82c679b6390f73f556cb73a76d431e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
