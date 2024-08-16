@@ -22,6 +22,30 @@
       },
       "revId": "365b8f939d82c679b6390f73f556cb73a76d431e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89d13f66_5eb807f2",
+        "filename": "redfish/managers/test_bmc_network_protocol.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-08-16T17:00:42Z",
+      "side": 0,
+      "message": "This is just printing, so not including it.",
+      "parentUuid": "6f6748bf_19f023c2",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 29
+      },
+      "revId": "365b8f939d82c679b6390f73f556cb73a76d431e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
