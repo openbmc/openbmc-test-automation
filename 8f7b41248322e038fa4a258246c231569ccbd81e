@@ -16,6 +16,24 @@
       "message": "can you check changes made on GUI is reflecting in backend.",
       "revId": "8f7b41248322e038fa4a258246c231569ccbd81e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aa61af5_9793a3ef",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-08-16T06:54:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a079206b_8d40eb5b",
+      "revId": "8f7b41248322e038fa4a258246c231569ccbd81e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
