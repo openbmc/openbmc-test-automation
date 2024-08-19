@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df155d56_c07069c8",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-08-19T15:10:02Z",
+      "side": 1,
+      "message": "verify perfix length also long with modifed ipv6 address\nVerify IPv6 And PrefixLength   ${new_ipv6_addr}    ${prefix_len}",
+      "range": {
+        "startLine": 441,
+        "startChar": 2,
+        "endLine": 441,
+        "endChar": 35
+      },
+      "revId": "3151076af37c19a39e7e90dce1f7b764c888758c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "259cdac8_3af866b0",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-08-19T15:10:02Z",
+      "side": 1,
+      "message": "my suggestion: verify old ipv6 should not exist",
+      "revId": "3151076af37c19a39e7e90dce1f7b764c888758c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
