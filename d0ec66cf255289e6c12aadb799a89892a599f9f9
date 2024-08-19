@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28482a1d_f32a749a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2024-08-19T08:07:29Z",
+      "side": 1,
+      "message": "yeah, updating today",
+      "parentUuid": "fe4d8e8f_be9c30b3",
+      "revId": "d0ec66cf255289e6c12aadb799a89892a599f9f9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51f8dd9d_28647e3e",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-05-30T17:11:42Z",
       "side": 1,
       "message": "Modify IPv6 Address And Verify",
+      "range": {
+        "startLine": 346,
+        "startChar": 0,
+        "endLine": 346,
+        "endChar": 19
+      },
+      "revId": "d0ec66cf255289e6c12aadb799a89892a599f9f9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7250b5bd_98cab10a",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2024-08-19T08:07:29Z",
+      "side": 1,
+      "message": "yeah, test case name is Modify IPv6 Addresss and modify.\nCalling keyword Modify IPv6 address.\nOtherwise both test \u0026 keyword names will be same.",
+      "parentUuid": "51f8dd9d_28647e3e",
       "range": {
         "startLine": 346,
         "startChar": 0,
@@ -64,6 +106,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "960c963d_43e48234",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2024-08-19T08:07:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8f4e545_b4c41059",
+      "range": {
+        "startLine": 354,
+        "startChar": 28,
+        "endLine": 354,
+        "endChar": 48
+      },
+      "revId": "d0ec66cf255289e6c12aadb799a89892a599f9f9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d696dbac_da79d9c2",
@@ -77,6 +143,24 @@
       "writtenOn": "2023-05-30T08:55:35Z",
       "side": 1,
       "message": "Build a list of IPv6 addresses to be modified.",
+      "revId": "d0ec66cf255289e6c12aadb799a89892a599f9f9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8efe194_cb182124",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2024-08-19T08:07:29Z",
+      "side": 1,
+      "message": "It is to find position of the ip address that need to be modified.",
+      "parentUuid": "d696dbac_da79d9c2",
       "revId": "d0ec66cf255289e6c12aadb799a89892a599f9f9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -100,6 +184,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d62ea53a_493ee0e6",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2024-08-19T08:07:29Z",
+      "side": 1,
+      "message": "yeah, it has IPv6 configurations on the BMC.",
+      "parentUuid": "9b9bef34_fd0f0807",
+      "revId": "d0ec66cf255289e6c12aadb799a89892a599f9f9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "28cdbfe9_b23ea3c7",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 2
@@ -111,6 +213,24 @@
       "writtenOn": "2023-05-30T08:55:35Z",
       "side": 1,
       "message": "FOR  ${ipv6_network}  IN  @{ipv6_network_list}",
+      "revId": "d0ec66cf255289e6c12aadb799a89892a599f9f9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "044a3fb8_4b099f82",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2024-08-19T08:07:29Z",
+      "side": 1,
+      "message": "adding sample ipv6 configurations",
+      "parentUuid": "28cdbfe9_b23ea3c7",
       "revId": "d0ec66cf255289e6c12aadb799a89892a599f9f9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -132,6 +252,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85827fba_137144c2",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2024-08-19T08:07:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "514ab5fe_c9897fb5",
+      "revId": "d0ec66cf255289e6c12aadb799a89892a599f9f9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9142380e_8a9ac5db",
@@ -145,6 +283,24 @@
       "writtenOn": "2023-05-30T08:55:35Z",
       "side": 1,
       "message": "Why do u need to PASS here ?",
+      "revId": "d0ec66cf255289e6c12aadb799a89892a599f9f9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07ca4ed7_65ebf3f1",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2024-08-19T08:07:29Z",
+      "side": 1,
+      "message": "that means, user has given wrong ipv6 address to modify.\nWhen IPv6 address given by user is searched, it is not found on BMC because wrong address passed.\nSo we are passing test case saying IPv6 does not exist on BMC.",
+      "parentUuid": "9142380e_8a9ac5db",
       "revId": "d0ec66cf255289e6c12aadb799a89892a599f9f9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
