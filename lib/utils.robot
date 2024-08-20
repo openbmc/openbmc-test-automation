@@ -389,7 +389,8 @@ Get Auto Reboot
 Redfish Get Auto Reboot
     [Documentation]  Returns auto reboot setting.
 
-    ${resp}=  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}  Boot
+    ${resp}=  Wait Until Keyword Succeeds  1 min  20 sec
+    ...  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}  Boot
     RETURN  ${resp["AutomaticRetryConfig"]}
 
 
@@ -906,7 +907,8 @@ Redfish Get BMC State
     #    "State": "Enabled"
     # },
 
-    ${status}=  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  Status
+    ${status}=  Wait Until Keyword Succeeds  1 min  20 sec
+    ...  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  Status
     RETURN  ${status["State"]}
 
 
@@ -917,7 +919,8 @@ Redfish Verify BMC State
     # Description of argument(s):
     # match_state    Expected match state (e.g. Enabled, Starting, Error)
 
-    ${Status}=  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  Status
+    ${Status}=  Wait Until Keyword Succeeds  1 min  20 sec
+    ...  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  Status
 
     Should Be Equal As Strings  ${match_state}  ${Status['State']}
 
@@ -935,7 +938,8 @@ Redfish Get Host State
     #    "State": "StandbyOffline"
     # },
 
-    ${chassis}=  Redfish.Get Properties  /redfish/v1/Chassis/${CHASSIS_ID}
+    ${chassis}=  Wait Until Keyword Succeeds  1 min  20 sec
+    ...  Redfish.Get Properties  /redfish/v1/Chassis/${CHASSIS_ID}
     RETURN  ${chassis["PowerState"]}  ${chassis["Status"]["State"]}
 
 
@@ -947,7 +951,8 @@ Redfish Get Boot Progress
     #    "LastState": "OSRunning"
     # },
 
-    ${boot_progress}=  Redfish.Get Properties  /redfish/v1/Systems/${SYSTEM_ID}/
+    ${boot_progress}=  Wait Until Keyword Succeeds  1 min  20 sec
+    ...  Redfish.Get Properties  /redfish/v1/Systems/${SYSTEM_ID}/
 
     Return From Keyword If  "${PLATFORM_ARCH_TYPE}" == "x86"
     ...  NA  ${boot_progress["Status"]["State"]}

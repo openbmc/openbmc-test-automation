@@ -9,6 +9,7 @@ import re
 
 import gen_print as gp
 from robot.libraries.BuiltIn import BuiltIn
+from json.decoder import JSONDecodeError
 
 MTLS_ENABLED = BuiltIn().get_variable_value("${MTLS_ENABLED}")
 
@@ -66,8 +67,13 @@ class bmc_redfish_utils(object):
                                     "/redfish/v1/Systems/1").
         attribute                   Name of the attribute (e.g. 'PowerState').
         """
-
-        resp = self._redfish_.get(resource_path)
+        try:
+            resp = self._redfish_.get(resource_path)
+        except JSONDecodeError as e:
+            BuiltIn().log_to_console(
+                    "get_attribute: JSONDecodeError, re-trying"
+            )
+            resp = self._redfish_.get(resource_path)
 
         if verify:
             if resp.dict[attribute] == verify:
@@ -308,9 +314,18 @@ class bmc_redfish_utils(object):
                 ):
                     continue
 
-                self._rest_response_ = self._redfish_.get(
-                    resource, valid_status_codes=[200, 404, 405, 500]
-                )
+                try:
+                    self._rest_response_ = self._redfish_.get(
+                        resource, valid_status_codes=[200, 404, 405, 500]
+                    )
+                except JSONDecodeError as e:
+                    BuiltIn().log_to_console(
+                            "enumerate_request: JSONDecodeError, re-trying"
+                    )
+                    self._rest_response_ = self._redfish_.get(
+                        resource, valid_status_codes=[200, 404, 405, 500]
+                    )
+
                 # Enumeration is done for available resources ignoring the
                 # ones for which response is not obtained.
                 if self._rest_response_.status != 200:
