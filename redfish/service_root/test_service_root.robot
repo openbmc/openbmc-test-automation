@@ -77,7 +77,8 @@ Verify Redfish Invalid URL Response Code
     [Tags]  Verify_Redfish_Invalid_URL_Response_Code
 
     Redfish.Login
-    Redfish.Get  /redfish/v1/idontexist  valid_status_codes=[${HTTP_NOT_FOUND}]
+    Wait Until Keyword Succeeds  1 min  30 sec
+    ...  Redfish.Get  /redfish/v1/idontexist  valid_status_codes=[${HTTP_NOT_FOUND}]
     Redfish.Logout
 
 

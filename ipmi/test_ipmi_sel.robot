@@ -3,10 +3,10 @@
 Documentation    Module to test IPMI SEL functionality.
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
-Resource         ../../../lib/logging_utils.robot
+Resource         ../lib/logging_utils.robot
 
 Library          ../lib/ipmi_utils.py
-Library          ../../../lib/logging_utils.py
+Library          ../lib/logging_utils.py
 
 Variables        ../data/ipmi_raw_cmd_table.py
 
