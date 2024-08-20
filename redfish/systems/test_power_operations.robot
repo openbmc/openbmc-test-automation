@@ -59,7 +59,7 @@ Verify Redfish Host PowerOff
     [Documentation]  Verify Redfish host power off operation.
     [Tags]  Verify_Redfish_Host_PowerOff
 
-    Redfish Hard Power Off
+    Redfish Hard Power Off  stack_mode=skip
 
 *** Keywords ***
 
