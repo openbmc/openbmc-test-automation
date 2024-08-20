@@ -389,7 +389,8 @@ Get Auto Reboot
 Redfish Get Auto Reboot
     [Documentation]  Returns auto reboot setting.
 
-    ${resp}=  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}  Boot
+    ${resp}=  Wait Until Keyword Succeeds  1 min  20 sec
+    ...  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}  Boot
     RETURN  ${resp["AutomaticRetryConfig"]}
 
 
