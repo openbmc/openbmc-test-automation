@@ -308,9 +308,18 @@ class bmc_redfish_utils(object):
                 ):
                     continue
 
-                self._rest_response_ = self._redfish_.get(
-                    resource, valid_status_codes=[200, 404, 405, 500]
-                )
+                try:
+                    self._rest_response_ = self._redfish_.get(
+                        resource, valid_status_codes=[200, 404, 405, 500]
+                    )
+                except ValueError:  # includes JSONDecodeError
+                    BuiltIn().log_to_console(
+                        "Decoding JSON has failed, re-trying"
+                    )
+                    self._rest_response_ = self._redfish_.get(
+                        resource, valid_status_codes=[200, 404, 405, 500]
+                    )
+
                 # Enumeration is done for available resources ignoring the
                 # ones for which response is not obtained.
                 if self._rest_response_.status != 200:
