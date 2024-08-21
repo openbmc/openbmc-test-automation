@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "985ea55f_ebcad19b",
+        "filename": "redfish/managers/test_bmc_network_protocol.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-08-21T10:22:07Z",
+      "side": 1,
+      "message": "Gets the original NTP value",
+      "parentUuid": "8f60efc8_d2e3415a",
+      "revId": "a872946f3dc97218a1b16e6fb31cee9cf9228746",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a8bd7fc0_94d546cd",
         "filename": "redfish/managers/test_bmc_network_protocol.robot",
         "patchSetId": 2
