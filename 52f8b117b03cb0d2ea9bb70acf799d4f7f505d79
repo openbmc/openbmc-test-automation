@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbee3f88_fa091800",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000004
+      },
+      "writtenOn": "2024-08-27T12:32:32Z",
+      "side": 1,
+      "message": "This has tested out will in our p10bmc CI. We were hitting intermittent network issues to our simulation model (still being worked by our simulation team) and this helps us handle those intermittent issues.",
+      "revId": "52f8b117b03cb0d2ea9bb70acf799d4f7f505d79",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
