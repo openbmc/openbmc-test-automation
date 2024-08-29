@@ -32,6 +32,9 @@ ${xpath_ntp_switch_button}               //*[@id="useNtpSwitch"]/following-sibli
 ${xpath_dns_switch_button}               //*[@id="useDnsSwitch"]/following-sibling::label
 ${xpath_domainname_switch_button}        //*[@id="useDomainNameSwitch"]/following-sibling::label
 ${xpath_success_popup}                   //*[contains(text(),'Success')]/following-sibling::button
+${xpath_delete_ipv4_addres}              //*[text()='${test_ipv4_addr}']/following::td[4]
+...                                      //*[@title="Delete IPv4 address"]
+${xpath_delete_button}                   //*[text()="Delete"]
 
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
@@ -193,6 +196,8 @@ Configure And Verify Invalid Static IP Address
 Modify DHCP Properties By Toggling And Verify
     [Documentation]  Modify DHCP properties by toggling and verify.
     [Tags]  Modify_DHCP_Properties_By_Toggling_And_Verify
+    [Setup]  Redfish.Login
+    [Teardown]  Redfish.Logout
     [Template]  Toggle DHCPv4 property And Verify
 
     # property                 xpath_property
@@ -200,6 +205,16 @@ Modify DHCP Properties By Toggling And Verify
     UseNTPServers              ${xpath_ntp_switch_button}
     UseDNSServers              ${xpath_dns_switch_button}
     UseDomainName              ${xpath_domainname_switch_button}
+
+
+Delete IPv4 Address Via GUI And Verify
+   [Documentation]  Delete IPv4 Address via GUI and verify.
+   [Tags]  Delete_IPv4_Address_Via_GUI_And_Verify
+   [Setup]  Redfish.Login
+   [Teardown]  Redfish.Logout
+
+   Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success
+   Delete IPv4 Address And Verify  ${test_ipv4_addr}
 
 
 Configure Hostname Via GUI And Verify
@@ -364,3 +379,24 @@ Verify Popup Message And Close Popup
     Wait Until Keyword Succeeds  1 min  15 sec
     ...  Wait Until Page Contains Element  ${popup_msg}
     Click Element  ${popup_msg}
+
+
+Delete IPv4 Address And Verify
+   [Arguments]  ${ip_addr}
+
+   # Description of argument(s):
+   # ip_addr      IP address to be deleted.
+
+   Wait Until Page Contains  ${ip_addr}
+   Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=120s
+   Wait Until Element Is Enabled  ${xpath_delete_ipv4_addres}
+   Click Element  ${xpath_delete_ipv4_addres}
+   Click Element  ${xpath_delete_button}
+   Wait Until Page Contains Element   ${xpath_success_message}
+   Sleep  ${NETWORK_TIMEOUT}s
+
+   # verify IP on BMC via Redfish.
+   ${delete_status}=  Run Keyword And Return Status  Verify IP On BMC  ${ip_addr}
+   Should Be Equal  ${delete_status}  ${False}
+
+   Wait Until Page Does Not Contain  ${ip_addr}
