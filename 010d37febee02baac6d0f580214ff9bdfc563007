@@ -39,6 +39,24 @@
       "message": "Instead of verifying via redfish, you can verify IP is deleted or not via GUI only right? just a suggestion",
       "revId": "010d37febee02baac6d0f580214ff9bdfc563007",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3db69715_88010dd3",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-09-02T06:29:54Z",
+      "side": 1,
+      "message": "402 line number, verifying from GUI",
+      "parentUuid": "f0ba9a32_77bf7478",
+      "revId": "010d37febee02baac6d0f580214ff9bdfc563007",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
