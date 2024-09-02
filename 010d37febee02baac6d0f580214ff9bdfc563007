@@ -57,6 +57,24 @@
       "parentUuid": "f0ba9a32_77bf7478",
       "revId": "010d37febee02baac6d0f580214ff9bdfc563007",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "650dfd2c_bcd1e26a",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-09-02T06:49:03Z",
+      "side": 1,
+      "message": "then you want to check it via redfish again?",
+      "parentUuid": "3db69715_88010dd3",
+      "revId": "010d37febee02baac6d0f580214ff9bdfc563007",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
