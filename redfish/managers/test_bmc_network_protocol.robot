@@ -73,7 +73,7 @@ Verify Enable NTP
     Rprint Vars  ntp
     Valid Value  ntp["ProtocolEnabled"]  valid_values=[True]
 
-Verify Disble NTP
+Verify Disable NTP
     [Documentation]  Verify NTP protocol mode can be disabled.
     [Teardown]  Restore NTP Mode
     [Tags]  Verify_Disable_NTP
