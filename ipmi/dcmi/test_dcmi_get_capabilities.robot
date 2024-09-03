@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation    Module to test dcmi get capabilites functionality.
+Documentation    Module to test dcmi get capabilities functionality.
 Resource         ../../lib/ipmi_client.robot
 
 Test Tags       DCMI_Get_Capabilities
@@ -19,10 +19,10 @@ Verify Get DCMI Capabilities
 
     @{supported_capabilities}=  Create List
     # Supported DCMI capabilities:
-    ...  Mandatory platform capabilties
-    ...  Optional platform capabilties
+    ...  Mandatory platform capabilities
+    ...  Optional platform capabilities
     ...  Power management available
-    ...  Managebility access capabilties
+    ...  Managebility access capabilities
     ...  In-band KCS channel available
     # Mandatory platform attributes:
     ...  200 SEL entries
