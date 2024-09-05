@@ -42,8 +42,17 @@ Redfish Set DateTime
     ...  '${date_time}' == '${EMPTY}'  Get Current Date  time_zone=UTC
     ...  ELSE
     ...  Set Variable  ${date_time}
-    Wait Until Keyword Succeeds  1min  5sec
-    ...  Redfish.Patch  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  body={'DateTime': '${date_time}'}  &{kwargs}
+    # Change date format to 2024-03-07T07:58:50+00:00 from 2024-03-07 07:58:50.000.
+    IF  "T" in "${date_time}"
+        Wait Until Keyword Succeeds  1min  5sec
+        ...  Redfish.Patch  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  body={'DateTime': '${date_time}'}
+        ...  &{kwargs}  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    ELSE
+        ${date_time_formatted}=  Convert Date  ${date_time}  result_format=%Y-%m-%dT%H:%M:%S+00:00
+        Wait Until Keyword Succeeds  1min  5sec
+        ...  Redfish.Patch  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  body={'DateTime': '${date_time_formatted}'}
+        ...  &{kwargs}  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    END
 
 
 Set Time To Manual Mode
