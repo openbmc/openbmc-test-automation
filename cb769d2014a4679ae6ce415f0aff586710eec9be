@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "334babb1_8a4ab28e",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2024-09-10T05:12:39Z",
+      "side": 1,
+      "message": "can you use code that verifies if the IP is really deleted from IP list.",
+      "revId": "cb769d2014a4679ae6ce415f0aff586710eec9be",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
