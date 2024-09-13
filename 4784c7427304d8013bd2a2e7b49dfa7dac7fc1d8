@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5479c4be_5ecf1d83",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-09-13T10:25:21Z",
+      "side": 1,
+      "message": "Please add a note this is executed with both eth0 and eth1 in static mode.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 13
+      },
+      "revId": "4784c7427304d8013bd2a2e7b49dfa7dac7fc1d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4401266c_602f45b8",
         "filename": "redfish/managers/test_multiple_interfaces.robot",
         "patchSetId": 2
@@ -32,6 +55,29 @@
       "side": 1,
       "message": "Redfish.Login is not required,will remove",
       "parentUuid": "4401266c_602f45b8",
+      "revId": "4784c7427304d8013bd2a2e7b49dfa7dac7fc1d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eb09ebd_19f65d05",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-09-13T10:25:21Z",
+      "side": 1,
+      "message": "Usually we need to wait for 30s for logging-in with LDAP user, Please verify the same.",
+      "range": {
+        "startLine": 93,
+        "startChar": 14,
+        "endLine": 93,
+        "endChar": 29
+      },
       "revId": "4784c7427304d8013bd2a2e7b49dfa7dac7fc1d8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
