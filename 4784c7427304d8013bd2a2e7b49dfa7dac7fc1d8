@@ -69,6 +69,24 @@
       "parentUuid": "56f665e5_05585170",
       "revId": "4784c7427304d8013bd2a2e7b49dfa7dac7fc1d8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81ca5284_6db1c8e2",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-09-13T10:25:15Z",
+      "side": 1,
+      "message": "yes my question is as already test setup is running Redfish.Login keyword then again why do you want to run it inside the testcase setup again?",
+      "parentUuid": "28a1416a_f52c2c76",
+      "revId": "4784c7427304d8013bd2a2e7b49dfa7dac7fc1d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
