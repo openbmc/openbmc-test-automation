@@ -1,5 +1,6 @@
 *** Settings ***
 Documentation   Test BMC multiple network interface functionalities.
+...             Run on setup both eth0 and eth1 in static mode.
 
 # User input BMC IP for the eth1.
 # Use can input as  -v OPENBMC_HOST_1:xx.xxx.xx from command line.
@@ -19,12 +20,12 @@ Library         ../../lib/jobs_processing.py
 Library         OperatingSystem
 
 Suite Setup     Suite Setup Execution
-Test Teardown   FFDC On Test Case Fail
-Suite Teardown  Run Keywords  Redfish1.Logout  AND  Redfish.Logout
+Test Setup      Run Keywords  Redfish.Login  AND  Redfish1.Login
+Test Teardown   Run Keywords  FFDC On Test Case Fail  AND  Redfish.Logout  AND  Redfish1.Logout
 
 *** Variables ***
 
-${cmd_prefix}  ipmitool -I lanplus -C 17 -p 623 -U ${OPENBMC_USERNAME} -P ${OPENBMC_PASSWORD}
+${cmd_prefix}  ipmitool -I lanplus -C 17 -p 623 -U ${IPMI_USERNAME} -P ${IPMI_PASSWORD}
 ${test_ipv4_addr}     10.7.7.7
 ${test_ipv4_addr2}    10.7.7.8
 ${test_subnet_mask}   255.255.255.0
@@ -46,9 +47,6 @@ Verify Redfish Works On Both Interfaces
     [Teardown]  Run Keywords
     ...  Configure Hostname  ${hostname}  AND  Validate Hostname On BMC  ${hostname}
 
-    Redfish1.Login
-    Redfish.Login
-
     ${hostname}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
     ${data}=  Create Dictionary  HostName=openbmc
     Redfish1.patch  ${REDFISH_NW_ETH_IFACE}eth1  body=&{data}
@@ -65,46 +63,43 @@ Verify LDAP Login Works When Eth1 IP Is Not Configured
     [Documentation]  Verify LDAP login works when eth1 IP is erased.
     [Tags]  Verify_LDAP_Login_Works_When_Eth1_IP_Is_Not_Configured
     [Setup]  Run Keywords  Set Test Variable  ${CHANNEL_NUMBER}  ${SECONDARY_CHANNEL_NUMBER}
-    ...  AND  Delete IP Address  ${OPENBMC_HOST_1}
-    ...  AND  Redfish.Login
-    [Teardown]  Run Keywords  Redfish.Logout  AND
+    ...  AND  Redfish.Login  AND  Delete IP Address  ${OPENBMC_HOST_1}
+    [Teardown]  Run Keywords  Redfish.Login  AND
     ...  Add IP Address  ${OPENBMC_HOST_1}  ${eth1_subnet_mask}  ${eth1_gateway}
 
     Create LDAP Configuration
     Redfish.Logout
+    Sleep   30
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
 
 
 Verify LDAP Login Works When Both Interfaces Are Configured
     [Documentation]  Verify LDAP login works when both interfaces are configured.
     [Tags]  Verify_LDAP_Login_Works_When_Both_Interfaces_Are_Configured
-    [Setup]  Redfish.Login
-    [Teardown]  Redfish.Logout
 
     Create LDAP Configuration
     Redfish.Logout
+    Sleep   30
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
 
 
 Verify Secure LDAP Login Works When Both Interfaces Are Configured
     [Documentation]  Verify Secure LDAP login works when both the interfaces are configured.
     [Tags]  Verify_Secure_LDAP_Login_Works_When_Both_Interfaces_Are_Configured
-    [Setup]  Redfish.Login
-    [Teardown]  Redfish.Logout
 
     Create LDAP Configuration  ${LDAP_TYPE}  ${LDAP_SERVER_URI_1}  ${LDAP_BIND_DN}
     ...  ${LDAP_BIND_DN_PASSWORD}  ${LDAP_BASE_DN}
     Redfish.Logout
+    Sleep   30
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
 
 
 Verify SNMP Works When Eth1 IP Is Not Configured
     [Documentation]  Verify SNMP works when eth1 IP is not configured.
     [Tags]  Verify_SNMP_Works_When_Eth1_IP_Is_Not_Configured
-    [Setup]  Run Keywords  Set Test Variable  ${CHANNEL_NUMBER}  ${SECONDARY_CHANNEL_NUMBER}
+    [Setup]  Run Keywords  Redfish.Login  AND  Set Test Variable  ${CHANNEL_NUMBER}  ${SECONDARY_CHANNEL_NUMBER}
     ...  AND  Delete IP Address  ${OPENBMC_HOST_1}
-    [Teardown]  Run Keywords  Redfish.Login  AND
-    ...  Add IP Address  ${OPENBMC_HOST_1}  ${eth1_subnet_mask}  ${eth1_gateway}
+    [Teardown]  Add IP Address  ${OPENBMC_HOST_1}  ${eth1_subnet_mask}  ${eth1_gateway}
 
     Create Error On BMC And Verify Trap
 
@@ -122,9 +117,6 @@ Disable And Enable Eth0 Interface
 Verify Both Interfaces Access Concurrently Via Redfish
     [Documentation]  Verify both interfaces access conurrently via redfish.
     [Tags]  Verify_Both_Interfaces_Access_Concurrently_Via_Redfish
-
-    Redfish.Login
-    Redfish1.Login
 
     ${dict}=  Execute Process Multi Keyword  ${2}
     ...  Redfish.Patch ${REDFISH_NW_ETH_IFACE}eth0 body={'DHCPv4':{'UseDNSServers':${True}}}
@@ -160,7 +152,7 @@ Verify Modifying IP Address Multiple Times On Interface
     [Documentation]  Verify modifying IP address multiple times on interface.
     [Tags]  Verify_Modifying_IP_Address_Multiple_Times_On_Interface
     [Teardown]  Run Keywords
-    ...  Delete IP Address  ${test_ipv4_addr}  AND  Test Teardown
+    ...  Delete IP Address  ${test_ipv4_addr}  AND  Redfish.Logout
 
     ${test_gateway}=  Get BMC Default Gateway
     Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
@@ -171,10 +163,7 @@ Verify Modifying IP Address Multiple Times On Interface
 
 Verify Able To Load Certificates Via Eth1 IP Address
     [Documentation]  Verify able to load certificates via eth1 IP address.
-    [Setup]   Create Directory  certificate_dir
     [Tags]  Verify_Able_To_Load_Certificates_Via_Eth1_IP_Address
-    [Teardown]  Run Keywords  Remove Directory  certificate_dir  recursive=True
-    ...  AND  FFDC On Test Case Fail
     [Template]  Install Certificate Via Redfish And Verify
 
     # cert_type  cert_format                         expected_status
@@ -261,6 +250,7 @@ Run IPMI
 Install Certificate Via Redfish And Verify
     [Documentation]  Install and verify certificate using Redfish.
     [Arguments]  ${cert_type}  ${cert_format}  ${expected_status}  ${delete_cert}=${True}
+    [Teardown]  Remove Directory  certificate_dir  recursive=True
 
     # Description of argument(s):
     # cert_type           Certificate type (e.g. "Client" or "CA").
@@ -270,6 +260,7 @@ Install Certificate Via Redfish And Verify
     #                     request (i.e. "ok" or "error").
     # delete_cert         Certificate will be deleted before installing if this True.
 
+    Create Directory  certificate_dir
     # AUTH_URI is a global variable defined in lib/resource.robot
     Set Test Variable  ${AUTH_URI}  https://${OPENBMC_HOST_1}
     Run Keyword If  '${cert_type}' == 'CA' and '${delete_cert}' == '${True}'
