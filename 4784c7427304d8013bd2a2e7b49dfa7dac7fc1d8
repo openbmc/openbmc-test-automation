@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "831922e3_bc1a6791",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-09-13T10:22:58Z",
+      "side": 1,
+      "message": "Redfish.Login is not required,will remove",
+      "parentUuid": "4401266c_602f45b8",
+      "revId": "4784c7427304d8013bd2a2e7b49dfa7dac7fc1d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "56f665e5_05585170",
         "filename": "redfish/managers/test_multiple_interfaces.robot",
         "patchSetId": 2
