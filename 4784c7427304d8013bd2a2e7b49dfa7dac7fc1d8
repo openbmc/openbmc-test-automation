@@ -59,6 +59,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a66146c4_64c422d9",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-09-17T06:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "831922e3_bc1a6791",
+      "revId": "4784c7427304d8013bd2a2e7b49dfa7dac7fc1d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5eb09ebd_19f65d05",
@@ -72,6 +90,30 @@
       "writtenOn": "2024-09-13T10:25:21Z",
       "side": 1,
       "message": "Usually we need to wait for 30s for logging-in with LDAP user, Please verify the same.",
+      "range": {
+        "startLine": 93,
+        "startChar": 14,
+        "endLine": 93,
+        "endChar": 29
+      },
+      "revId": "4784c7427304d8013bd2a2e7b49dfa7dac7fc1d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c30fa18f_1224503b",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-09-17T06:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5eb09ebd_19f65d05",
       "range": {
         "startLine": 93,
         "startChar": 14,
@@ -167,6 +209,24 @@
       "side": 1,
       "message": "In the existing [setup] configuration, there was a keyword \"Create Directory certificate_dir\" within the [setup] section. To prevent unauthorised issue without removing the existing code, adding Redfish.login. This login step ensures proper authentication and authorization, thereby resolving the unauthorised access problem.\n\nwhy do you want to run it inside the testcase setup again?\nbecause another keyword also \"Create Directory certificate_dir\" there, so i want to run both [setup].",
       "parentUuid": "b8b1a3d8_71bb4452",
+      "revId": "4784c7427304d8013bd2a2e7b49dfa7dac7fc1d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1ea9f23_34148d28",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-09-17T06:13:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf57ce84_8bfedcdf",
       "revId": "4784c7427304d8013bd2a2e7b49dfa7dac7fc1d8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
