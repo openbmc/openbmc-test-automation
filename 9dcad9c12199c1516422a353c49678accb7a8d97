@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b034841_30fdcd10",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-09-17T06:45:31Z",
+      "side": 1,
+      "message": "Do you want to keep this LDAP redfish session open after the execution also?",
+      "revId": "9dcad9c12199c1516422a353c49678accb7a8d97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0347f31_a9d3ea58",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-09-17T06:45:31Z",
+      "side": 1,
+      "message": "Same as above",
+      "revId": "9dcad9c12199c1516422a353c49678accb7a8d97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
