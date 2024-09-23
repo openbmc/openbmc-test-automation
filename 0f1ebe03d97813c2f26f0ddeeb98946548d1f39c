@@ -16,6 +16,24 @@
       "message": "add with as mentioned below\nsetup with both ...",
       "revId": "0f1ebe03d97813c2f26f0ddeeb98946548d1f39c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "680a1af9_d20b2fd0",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-09-23T05:45:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12b71f3f_3ab5441a",
+      "revId": "0f1ebe03d97813c2f26f0ddeeb98946548d1f39c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
