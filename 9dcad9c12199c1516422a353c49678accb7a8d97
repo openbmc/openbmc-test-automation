@@ -101,6 +101,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82f44d49_db285492",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-09-23T13:14:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08b9dcdf_87b35fee",
+      "revId": "9dcad9c12199c1516422a353c49678accb7a8d97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0347f31_a9d3ea58",
@@ -132,6 +150,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "d0347f31_a9d3ea58",
+      "revId": "9dcad9c12199c1516422a353c49678accb7a8d97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b94175a7_e37fe300",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-09-23T13:14:26Z",
+      "side": 1,
+      "message": "this line 24th line take care redfish.logout",
+      "parentUuid": "d298485d_ff175a18",
       "revId": "9dcad9c12199c1516422a353c49678accb7a8d97",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
