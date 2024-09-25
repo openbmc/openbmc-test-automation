@@ -16,12 +16,14 @@ Resource        ../../lib/bmc_ldap_utils.robot
 Resource        ../../lib/snmp/resource.robot
 Resource        ../../lib/snmp/redfish_snmp_utils.robot
 Resource        ../../lib/certificate_utils.robot
+Resource         ../../lib/protocol_setting_utils.robot
 Library         ../../lib/jobs_processing.py
 Library         OperatingSystem
 
 Suite Setup     Suite Setup Execution
 Test Setup      Run Keywords  Redfish.Login  AND  Redfish1.Login
 Test Teardown   Run Keywords  FFDC On Test Case Fail  AND  Redfish.Logout  AND  Redfish1.Logout
+Suite Teardown  Run Keywords  Redfish1.Logout  AND  Redfish.Logout
 
 *** Variables ***
 
@@ -120,8 +122,8 @@ Verify Both Interfaces Access Concurrently Via Redfish
     [Tags]  Verify_Both_Interfaces_Access_Concurrently_Via_Redfish
 
     ${dict}=  Execute Process Multi Keyword  ${2}
-    ...  Redfish.Patch ${REDFISH_NW_ETH_IFACE}eth0 body={'DHCPv4':{'UseDNSServers':${True}}}
-    ...  Redfish1.Patch ${REDFISH_NW_ETH_IFACE}eth1 body={'DHCPv4':{'UseDNSServers':${True}}}
+    ...  Redfish.patch ${REDFISH_NW_ETH_IFACE}eth0 body={'DHCPv4':{'UseDNSServers':${True}}}
+    ...  Redfish1.patch ${REDFISH_NW_ETH_IFACE}eth1 body={'DHCPv4':{'UseDNSServers':${True}}}
 
     Dictionary Should Not Contain Value  ${dict}  False
     ...  msg=One or more operations has failed.
@@ -170,6 +172,39 @@ Verify Able To Load Certificates Via Eth1 IP Address
     # cert_type  cert_format                         expected_status
     CA           Valid Certificate                   ok
     Client       Valid Certificate Valid Privatekey  ok
+
+Enable SSH Protocol Via Eth1 And Verify On Both Interfaces
+    [Documentation]  Enable SSH protocol via eth1 and verify on both interfaces.
+    [Tags]  Enable_SSH_Protocol_Via_Eth1_And_Verify_On_Both_Interfaces
+
+    Set SSH Value Via Eth1  ${True}
+    # Check if SSH is really enabled via Redfish via eth1.
+    Verify SSH Protocol State Via Eth1  ${True}
+    # Check if SSH login and commands on SSH session work on both interfaces.
+    Verify SSH Login And Commands Work
+    Verify SSH Login And Commands Work  ${OPENBMC_HOST_1}
+
+Disable SSH Protocol Via Eth1 And Verify On Both Interfaces
+    [Documentation]  Disable SSH protocol via eth1 and verify on both interfaces.
+    [Tags]  Disable_SSH_Protocol_Via_Eth1_And_Verify_On_Both_Interfaces
+    [Teardown]  Set SSH Value Via Eth1  ${True}
+
+    Set SSH Value Via Eth1  ${False}
+    # Check if SSH is really disabled via Redfish via eth1.
+    Verify SSH Protocol State Via Eth1  ${False}
+    # Check if SSH login and commands fail on eth1.
+    ${status}=  Run Keyword And Return Status
+    ...  Verify SSH Login And Commands Work  ${OPENBMC_HOST_1}
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=SSH Login and commands are working after disabling SSH via eth1.
+
+    # Check if SSH login and commands fail.
+    ${status}=  Run Keyword And Return Status
+    ...  Verify SSH Login And Commands Work
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=SSH Login and commands are working after disabling SSH.
 
 *** Keywords ***
 
@@ -286,3 +321,31 @@ Install Certificate Via Redfish And Verify
     ...  ${certificate_uri}/${cert_id}  CertificateString
     Run Keyword If  '${expected_status}' == 'ok'  Should Contain  ${cert_file_content}  ${bmc_cert_content}
     RETURN  ${cert_id}
+
+Set SSH Value Via Eth1
+    [Documentation]  Enable or disable SSH protocol via Eth1.
+    [Arguments]  ${enable_value}=${True}
+
+    # Description of argument(s}:
+    # enable_value  Enable or disable SSH, e.g. (true, false).
+
+    ${ssh_state}=  Create Dictionary  ProtocolEnabled=${enable_value}
+    ${data}=  Create Dictionary  SSH=${ssh_state}
+
+    Redfish1.Login
+    Redfish1.patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
+    ...  valid_status_codes=[${HTTP_NO_CONTENT}]
+
+    # Wait for timeout for new values to take effect.
+    Sleep  ${NETWORK_TIMEOUT}s
+
+Verify SSH Protocol State Via Eth1
+    [Documentation]  Verify SSH protocol state via eth1.
+    [Arguments]  ${state}=${True}
+
+    # Description of argument(s}:
+    # state  Enable or disable SSH, e.g. (true, false)
+
+    ${resp}=  Redfish1.Get  ${REDFISH_NW_PROTOCOL_URI}
+    Should Be Equal As Strings  ${resp.dict['SSH']['ProtocolEnabled']}  ${state}
+    ...  msg=Protocol states are not matching.
