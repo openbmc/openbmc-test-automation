@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdfd72d7_688a5343",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-09-25T09:27:58Z",
+      "side": 1,
+      "message": "as you are using this keyword for both enabling \u0026 disabling, please use like below.\nSet SSH Value Via Eth1",
+      "revId": "2befd96f25ab9218985506ad43e49b411aff4d04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb1e6235_b3c7b43a",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-09-25T09:27:58Z",
+      "side": 1,
+      "message": "instead of line #330 to #338 use already available keyword from lib/protocol_setting_utils.robot\n\nEnable SSH Protocol",
+      "revId": "2befd96f25ab9218985506ad43e49b411aff4d04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cb9969f_bf9abcfc",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-09-25T09:27:58Z",
+      "side": 1,
+      "message": "remove extra space",
+      "revId": "2befd96f25ab9218985506ad43e49b411aff4d04",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
