@@ -217,6 +217,20 @@ Delete IPv4 Address Via GUI And Verify
    Delete IPv4 Address And Verify  ${test_ipv4_addr}
 
 
+Verify MAC Address Is Displayed
+   [Documentation]  Verify MAC address is displayed.
+   [Tags]  Verify_MAC_Address_Is_Displayed
+   [Setup]  Redfish.Login
+   [Teardown]  Redfish.Logout
+
+   ${active_channel_config}=  Get Active Channel Config
+   ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+   ${resp}=  redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+
+   # Verify the MAC address on GUI.
+   Page Should Contain  ${resp.dict['MACAddress']}
+
+
 Configure Hostname Via GUI And Verify
     [Documentation]  Login to GUI Network page, configure hostname and verify.
     [Tags]  Configure_Hostname_Via_GUI_And_Verify
@@ -342,7 +356,7 @@ Toggle DHCPv4 Property And Verify
     ${redfish_before_set}=  Get DHCP Property Via Redfish  ${property}
     ${gui_before_set}=  Get Text  ${xpath_property}
 
-    Click Element At Coordinates   ${xpath_property}  0  0
+    Click Element  ${xpath_property}
     Verify Popup Message And Close Popup  ${xpath_success_popup}
     Wait Until Element Is Not Visible
     ...  ${xpath_page_loading_progress_bar}  timeout=120s
