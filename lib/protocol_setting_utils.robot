@@ -32,11 +32,14 @@ Enable SSH Protocol
 
 Verify SSH Login And Commands Work
     [Documentation]  Verify if SSH connection works and able to run command on SSH session.
+    [Arguments]  ${host}=${OPENBMC_HOST}
     [Teardown]  Close All Connections
 
-    # Check if we can open SSH connection and login.
-    Open Connection And Login
+    # Description of argument(s}:
+    # host  OPENBMC_HOST, OPENBMC_HOST_1, Use eth0 as the default interface
 
+    # Check if we can open SSH connection and login.
+    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  host=${host}
     # Check if we can run command successfully on SSH session.
     BMC Execute Command  /sbin/ip addr
 
