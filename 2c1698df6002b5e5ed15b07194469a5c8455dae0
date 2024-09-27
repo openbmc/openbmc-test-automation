@@ -92,6 +92,24 @@
       "parentUuid": "34baf756_1bb8eeae",
       "revId": "2c1698df6002b5e5ed15b07194469a5c8455dae0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3805a2e_ca706e4b",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-09-27T06:48:27Z",
+      "side": 1,
+      "message": "may be you can add a comment\nVerifying the MAC address from Redfish and GUI are matching",
+      "parentUuid": "08b1607f_0cadf8d4",
+      "revId": "2c1698df6002b5e5ed15b07194469a5c8455dae0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
