@@ -22,6 +22,40 @@
       },
       "revId": "2c1698df6002b5e5ed15b07194469a5c8455dae0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db0b91bf_d3554849",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-09-27T06:33:24Z",
+      "side": 1,
+      "message": "Suggestion - As MAC address is present on both the interfaces better if you specify which interface you are checking for",
+      "revId": "2c1698df6002b5e5ed15b07194469a5c8455dae0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34baf756_1bb8eeae",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-09-27T06:33:24Z",
+      "side": 1,
+      "message": "Is it required to call this redfish commands here to verify the presence of MAC address via GUI?",
+      "revId": "2c1698df6002b5e5ed15b07194469a5c8455dae0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
