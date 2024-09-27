@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d22c4392_fa07126a",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-09-27T07:00:14Z",
+      "side": 1,
+      "message": "As inside this code you are checking whether enabling SSH is enabling SSH on both the interfaces or not right?\nSo can you please rename the testcase name as per your code.",
+      "revId": "6f02737a3d543fcf95aa122c5684c5db2c6b327a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80e80357_0ddc5892",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-09-27T07:00:14Z",
+      "side": 1,
+      "message": "As inside this code you are checking whether Disabling SSH is Disabling SSH on both the interfaces or not right?\nSo can you please rename the testcase name as per your code.",
+      "revId": "6f02737a3d543fcf95aa122c5684c5db2c6b327a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
