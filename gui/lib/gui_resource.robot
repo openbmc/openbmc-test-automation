@@ -104,6 +104,18 @@ Login GUI
     Wait Until Element Is Not Visible
     ...  ${xpath_page_loading_progress_bar}  timeout=120s
 
+Launch Browser And Login GUI With Given User
+    [Documentation]  Launch browser and login eBMC with specified user
+    ...  credentials through GUI.
+    [Arguments]  ${user_name}  ${user_password}
+
+    # Description of argument(s):
+    # user_name        User name to login to eBMC.
+    # user_password    User password to login to eBMC.
+
+    Open Browser With URL  ${obmc_gui_url}
+    LOGIN GUI  ${user_name}  ${user_password}
+
 Logout GUI
     [Documentation]  Logout of OpenBMC GUI.
 
