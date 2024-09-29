@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55c1c8e8_402042e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001049
+      },
+      "writtenOn": "2024-09-29T05:27:07Z",
+      "side": 1,
+      "message": "description?",
+      "revId": "730f32bc6c5bcff29c9357a8a5f9ec349dfe6d5f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eb95a1d_c2550668",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001049
+      },
+      "writtenOn": "2024-09-29T05:27:07Z",
+      "side": 1,
+      "message": "Looks good to me otherwise.",
+      "revId": "730f32bc6c5bcff29c9357a8a5f9ec349dfe6d5f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
