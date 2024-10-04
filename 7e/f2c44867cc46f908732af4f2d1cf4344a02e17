@@ -1,0 +1,14 @@
+Code-Review+2: George Keishing <gkeishin@gmail.com>
+Code-Review+1: Rahul Maheshwari <rahulmaheshwari@in.ibm.com>
+Code-Review+1: <smriti.ayushi@linux.intel.com>
+Code-Review+1: <anvesh.kumar.rayankula@ibm.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Code-Review+1: <sagaranand@in.ibm.com>
+Code-Review+1: Sridevi Ramesh <sridevra@in.ibm.com>
+Code-Review+1: Arun Lal K M <arun.lal@intel.com>
+Submitted-by: George Keishing <gkeishin@gmail.com>
+Submitted-at: Fri, 04 Oct 2024 07:05:34 +0000
+Reviewed-on: https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/74916
+Comments-Total: 13
+Project: openbmc/openbmc-test-automation
+Branch: refs/heads/master
