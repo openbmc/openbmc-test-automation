@@ -15,8 +15,6 @@
 --include Redfish_Software_Inventory_Status_Check
 # openbmc/bmcweb#264 --include Verify_Redfish_BMC_Time
 --include Verify_Redfish_Invalid_URL_Response_Code
-#Certificate test case
---include Verify_Server_Certificate_Replace
 #IPMI tests.
 --include Enable_IPMI_User_And_Verify
 --include Verify_IPMI_User_Deletion
