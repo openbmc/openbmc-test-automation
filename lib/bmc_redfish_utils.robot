@@ -18,19 +18,33 @@ Redfish Power Operation
     # Example:
     # "Actions": {
     # "#ComputerSystem.Reset": {
-    #  "ResetType@Redfish.AllowableValues": [
-    #    "On",
-    #    "ForceOff",
-    #    "ForceOn",
-    #    "ForceRestart",
-    #    "GracefulRestart",
-    #    "GracefulShutdown"
-    #    "PowerCycle",
-    #    "Nmi"
-    #  ],
-    #  "target": "/redfish/v1/Systems/system/Actions/ComputerSystem.Reset"
-    #  }
-    # }
+    #        "@Redfish.ActionInfo": "/redfish/v1/Systems/${SYSTEM_ID}/ResetActionInfo",
+    #        "target": "/redfish/v1/Systems/${SYSTEM_ID}/Actions/ComputerSystem.Reset"
+    #    }
+
+    # Parameters allowable values  /redfish/v1/Systems/${SYSTEM_ID}/ResetActionInfo
+
+    # "@odata.id": "/redfish/v1/Systems/${SYSTEM_ID}/ResetActionInfo",
+    # "@odata.type": "#ActionInfo.v1_1_2.ActionInfo",
+    # "Id": "ResetActionInfo",
+    # "Name": "Reset Action Info",
+    # "Parameters": [
+    #    {
+    #        "AllowableValues": [
+    #            "ForceOff",
+    #            "PowerCycle",
+    #            "Nmi",
+    #            "GracefulShutdown",
+    #            "On",
+    #            "ForceOn",
+    #            "GracefulRestart",
+    #            "ForceRestart"
+    #        ],
+    #        "DataType": "String",
+    #        "Name": "ResetType",
+    #        "Required": true
+    #    }
+    # ]
 
     ${target}=  Wait Until Keyword Succeeds  1 min  20 sec
     ...  redfish_utils.Get Target Actions  /redfish/v1/Systems/${SYSTEM_ID}/  ComputerSystem.Reset
@@ -45,13 +59,35 @@ Redfish BMC Reset Operation
 
     # Example:
     # "Actions": {
-    # "#Manager.Reset": {
-    #  "ResetType@Redfish.AllowableValues": [
-    #    "GracefulRestart",
-    #    "ForceRestart"
-    #  ],
-    #  "target": "/redfish/v1/Managers/${MANAGER_ID}/Actions/Manager.Reset"
-    # }
+    #    "#Manager.Reset": {
+    #        "@Redfish.ActionInfo": "/redfish/v1/Managers/${MANAGER_ID}/ResetActionInfo",
+    #        "target": "/redfish/v1/Managers/${MANAGER_ID}/Actions/Manager.Reset"
+    #    },
+    #    "#Manager.ResetToDefaults": {
+    #        "ResetType@Redfish.AllowableValues": [
+    #            "ResetAll"
+    #        ],
+    #        "target": "/redfish/v1/Managers/${MANAGER_ID}/Actions/Manager.ResetToDefaults"
+    #    }
+    # },
+
+    # Parameters allowable values  /redfish/v1/Managers/${MANAGER_ID}/ResetActionInfo
+
+    # "@odata.id": "/redfish/v1/Managers/${MANAGER_ID}/ResetActionInfo",
+    # "@odata.type": "#ActionInfo.v1_1_2.ActionInfo",
+    # "Id": "ResetActionInfo",
+    # "Name": "Reset Action Info",
+    # "Parameters": [
+    #    {
+    #        "AllowableValues": [
+    #            "GracefulRestart",
+    #            "ForceRestart"
+    #        ],
+    #        "DataType": "String",
+    #        "Name": "ResetType",
+    #        "Required": true
+    #    }
+    # ]
 
     ${target}=  Wait Until Keyword Succeeds  1 min  20 sec
     ...  redfish_utils.Get Target Actions  /redfish/v1/Managers/${MANAGER_ID}/  Manager.Reset
