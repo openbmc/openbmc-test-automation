@@ -19,6 +19,7 @@ ${default_lockout_duration}   ${300}
 ${admin_user}                 admin_user
 ${default_adminuser_passwd}   AdminUser1
 ${admin_password}             AdminUser2
+${invalid_password}           abcd12345
 
 
 *** Test Cases ***
@@ -289,6 +290,28 @@ Expire And Change Admin User Password Via Redfish And Verify
 
    # Verify login with the new password.
    Redfish.Login  ${admin_user}  AdminUser2
+
+
+Verify Maximum Failed Attempts For Admin User And Check Admin User Account Locked
+    [Documentation]  Verify maximum failed attempts for admin user and check whether admin user is locked.
+    [Tags]  Verify_Maximum_Failed_Attempts_For_Admin_User_And_Check_Admin_User_Account_Locked
+    [Setup]  Run Keywords
+    ...  Redfish Create User  ${admin_user}  ${default_adminuser_passwd}  Administrator  ${True}
+    ...  AND  Set Account Lockout Threshold  account_lockout_threshold=${5}
+
+    # Make maximum failed login attempts.
+    Repeat Keyword  ${5} times
+    ...  Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  ${admin_user}  ${invalid_password}
+
+    # Verify that login fails with admin user due to lockout.
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  ${admin_user}  ${default_adminuser_passwd}
+
+    # Wait for lockout duration to expire and then verify that login with admin user works.
+    Sleep  ${default_lockout_duration}s
+    Redfish.Login  ${admin_user}  ${default_adminuser_passwd}
+    Redfish.Logout
 
 
 *** Keywords ***
