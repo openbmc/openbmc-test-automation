@@ -10,7 +10,7 @@ Library           SSHLibrary
 
 Test Setup       Set Account Lockout Threshold
 
-Test Tags       BMC_Expire_Password
+Test Tags        BMC_Expire_Password
 
 *** Variables ***
 
@@ -19,6 +19,7 @@ ${default_lockout_duration}   ${300}
 ${admin_user}                 admin_user
 ${default_adminuser_passwd}   AdminUser1
 ${admin_password}             AdminUser2
+${invalid_password}           abcd12345
 
 
 *** Test Cases ***
@@ -291,6 +292,31 @@ Expire And Change Admin User Password Via Redfish And Verify
    Redfish.Login  ${admin_user}  AdminUser2
 
 
+Verify Maximum Failed Attempts For Admin User And Check Account Locked
+    [Documentation]  Verify maximum failed attempts for admin user
+    ...  and check whether admin user account is locked.
+    [Tags]  Verify_Maximum_Failed_Attempts_For_Admin_User_And_Check_Account_Locked
+    [Setup]  Run Keywords
+    ...  Redfish Create User  ${admin_user}  ${default_adminuser_passwd}  Administrator  ${True}
+    ...  AND  Set Account Lockout Threshold  account_lockout_threshold=${5}
+    [Teardown]  Run Keywords  Restore Default Account Lockout Threshold
+    ...  AND  Redfish.Delete  /redfish/v1/AccountService/Accounts/${admin_user}
+    ...  AND  Redfish.Logout
+
+    # Make maximum failed login attempts.
+    Repeat Keyword  ${5} times
+    ...  Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  ${admin_user}  ${invalid_password}
+
+    # Verify that login fails with admin user due to lockout.
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  ${admin_user}  ${default_adminuser_passwd}
+
+    # Wait for lockout duration to expire and then verify that login with admin user works.
+    Sleep  ${default_lockout_duration}s
+    Redfish.Login  ${admin_user}  ${default_adminuser_passwd}
+
+
 *** Keywords ***
 
 Set Account Lockout Threshold
@@ -302,6 +328,7 @@ Set Account Lockout Threshold
    # account_lockout_duration     Set lockout duration value.
 
    Redfish.login
+   Get Default Account Lockout Threshold
    ${payload}=  Create Dictionary  AccountLockoutThreshold=${account_lockout_threshold}
    ...  AccountLockoutDuration=${account_lockout_duration}
    Redfish.Patch  /redfish/v1/AccountService/  body=&{payload}
@@ -371,3 +398,16 @@ Set Password Via Redfish
     ... body={'Password': '${new_password}'}
 
     Should be Equal  ${status}  ${expect_result}
+
+
+Get Default Account Lockout Threshold
+   [Documentation]  Get default account lockout threshold.
+
+   ${res}=  Redfish.Get Attribute  /redfish/v1/AccountService  AccountLockoutThreshold
+   Set Suite Variable  ${defaultlockout_threshold}  ${res}
+
+
+Restore Default Account Lockout Threshold
+   [Documentation]  Restore default account lockout threshold.
+
+   Redfish.Patch  /redfish/v1/AccountService  body=[('AccountLockoutThreshold', ${defaultlockout_threshold})]
