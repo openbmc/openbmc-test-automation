@@ -28,6 +28,12 @@ ${test_netmask}           255.255.252.0
 &{ENABLE_DHCP}            DHCPv4=&{DHCP_ENABLED}
 &{DISABLE_DHCP}           DHCPv4=&{DHCP_DISABLED}
 
+&{SLAAC_ENABLED}          IPv6AutoConfigEnabled=${True}
+&{SLAAC_DISABLED}         IPv6AutoConfigEnabled=${False}
+
+&{ENABLE_SLAAC}           StatelessAddressAutoConfig=&{SLAAC_ENABLED}
+&{DISABLE_SLAAC}          StatelessAddressAutoConfig=&{SLAAC_DISABLED}
+
 ${default}                0.0.0.0
 
 
@@ -471,6 +477,16 @@ Disable DHCP When Host Is Off And Verify New State Reflects After Power On
     Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default}
 
 
+Enable VMI Stateless Address AutoConfig And Verify
+    [Documentation]  Enable VMI SLAACv6 and verify an origin.
+    [Tags]  Enable_VMI_Stateless_Address_AutoConfig_And_Verify
+
+    Set VMI SLAACv6 Origin    ${True}
+
+    # Check origin is set to slaac and address are getting displayed.
+    Verify VMI IPv6 Address  SLAAC
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -629,3 +645,42 @@ Suite Teardown Execution
     ...  ${vmi_network_conf["IPv4_Gateway"]}  ${vmi_network_conf["IPv4_SubnetMask"]}
     Delete All Redfish Sessions
     Redfish.Logout
+
+
+Set VMI SLAACv6 Origin
+    [Documentation]  Set VMI SLAACv6 origin.
+    [Arguments]  ${slaac_enabled}=${False}  ${valid_status_code}=${HTTP_ACCEPTED}
+    ...  ${interface}=${ethernet_interface}
+
+    # Description of argument(s):
+    # slaacv6_enabled    True if user wants to enable SLAACv6. Default is Static, hence value is set to False.
+    # valid_status_code  Expected valid status code from PATCH request. Default is HTTP_OK.
+    # interface          VMI interface (eg. eth0 or eth1).
+
+    ${data}=  Set Variable If  ${slaac_enabled} == ${False}  ${DISABLE_SLAAC}  ${ENABLE_SLAAC}
+    ${resp}=  Redfish.Patch
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+    ...  body=${data}  valid_status_codes=[${valid_status_code}]
+
+    Sleep  ${wait_time}
+    Return From Keyword If  ${valid_status_code} != ${HTTP_ACCEPTED}
+    ${resp}=  Redfish.Get
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+    Should Be Equal  ${resp.dict["StatelessAddressAutoConfig"]["IPv6AutoConfigEnabled"]}  ${slaac_enabled}
+
+
+Verify VMI IPv6 Address
+    [Documentation]  Verify VMI IPv6 address configurations.
+    [Arguments]  ${ipv6_origin}  ${interface}=${ethernet_interface}
+
+    # Description of argument(s):
+    # ${ipv6_origin}    Origin of IPv6 address eg. Static or DHCPv6 or SLAAC.
+    # interface         VMI interface (eg. eth0 or eth1).
+
+    ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+
+    @{vmi_ipv6_configurations}=  Get From Dictionary  ${resp.dict}  IPv6Addresses
+    ${vmi_ipv6_config}=  Get From List  ${vmi_ipv6_configurations}  0
+    Should Not Be Empty  ${vmi_ipv6_config["Address"]}
+    Should Be Equal As Strings   ${vmi_ipv6_config["AddressOrigin"]}  ${ipv6_origin}
+    Should Be Equal As Strings   ${vmi_ipv6_config["PrefixLength"]}  64
