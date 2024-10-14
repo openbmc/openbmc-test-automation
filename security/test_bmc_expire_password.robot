@@ -10,15 +10,17 @@ Library           SSHLibrary
 
 Test Setup       Set Account Lockout Threshold
 
-Test Tags       BMC_Expire_Password
+Test Tags        BMC_Expire_Password
 
 *** Variables ***
 
 # If user re-tries more than 5 time incorrectly, the user gets locked for 5 minutes.
 ${default_lockout_duration}   ${300}
+${defaultlockout_threshold}   ${5}
 ${admin_user}                 admin_user
 ${default_adminuser_passwd}   AdminUser1
 ${admin_password}             AdminUser2
+${invalid_password}           abcd12345
 
 
 *** Test Cases ***
@@ -289,6 +291,32 @@ Expire And Change Admin User Password Via Redfish And Verify
 
    # Verify login with the new password.
    Redfish.Login  ${admin_user}  AdminUser2
+
+
+Verify Maximum Failed Attempts For Admin User And Check Account Locked
+    [Documentation]  Verify maximum failed attempts for admin user
+    ...  and check whether admin user account is locked.
+    [Tags]  Verify_Maximum_Failed_Attempts_For_Admin_User_And_Check_Account_Locked
+    [Teardown]  Run Keywords  Set Account Lockout Threshold  account_lockout_threshold=${defaultlockout_threshold}
+    ...  AND  Redfish.Delete  /redfish/v1/AccountService/Accounts/${admin_user}
+    ...  AND  Redfish.Logout
+
+    # Create admin user and set account lockout threshold value.
+    Redfish Create User  ${admin_user}  ${default_adminuser_passwd}  Administrator  ${True}
+    Set Account Lockout Threshold  account_lockout_threshold=${5}
+
+    # Make maximum failed login attempts.
+    Repeat Keyword  ${5} times
+    ...  Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  ${admin_user}  ${invalid_password}
+
+    # Verify that login fails with admin user due to lockout.
+    Run Keyword And Expect Error  InvalidCredentialsError*
+    ...  Redfish.Login  ${admin_user}  ${default_adminuser_passwd}
+
+    # Wait for lockout duration to expire and then verify that login with admin user works.
+    Sleep  ${default_lockout_duration}s
+    Redfish.Login  ${admin_user}  ${default_adminuser_passwd}
 
 
 *** Keywords ***
