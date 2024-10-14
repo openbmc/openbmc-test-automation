@@ -531,6 +531,10 @@ SCP Coredump Files
     ...  ignore_err=${1}
     Run Keyword If  '${rc}' != '${0}'  Return From Keyword  ${ffdc_file_list}
 
+    # Core dumps if configured to dump on /tmp via /proc/sys/kernel/core_pattern
+    Run Keyword and Ignore Error
+    ...  BMC Execute Command  chown ${OPENBMC_USERNAME}:${OPENBMC_USERNAME} /tmp/core_*
+
     @{core_list}=  Split String  ${core_files}
     # Copy the core files
     Run Key U  Open Connection for SCP
