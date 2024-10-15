@@ -35,6 +35,7 @@ ${xpath_success_popup}                   //*[contains(text(),'Success')]/followi
 ${xpath_delete_ipv4_addres}              //*[text()='${test_ipv4_addr}']/following::td[4]
 ...                                      //*[@title="Delete IPv4 address"]
 ${xpath_delete_button}                   //*[text()="Delete"]
+${xpath_eth1_interface}                  //*[text()="eth1"]
 
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
@@ -223,12 +224,30 @@ Verify MAC Address Is Displayed
    [Setup]  Redfish.Login
    [Teardown]  Redfish.Logout
 
-   ${active_channel_config}=  Get Active Channel Config
-   ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
-   ${resp}=  redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+   ${network_details}=  Get Network Interface Details  ${CHANNEL_NUMBER}
 
    # Verify the MAC address on GUI.
-   Page Should Contain  ${resp.dict['MACAddress']}
+   Page Should Contain  ${network_details['MACAddress']}
+
+
+Verify Able To Click On Eth1 Interface
+    [Documentation]  Verify able to click on eth1 interface.
+    [Tags]  Verify_Able_To_Click_On_Eth1_Interface
+    [Setup]  Redfish.Login
+    [Teardown]  Redfish.Logout
+
+    Click Element  ${xpath_eth1_interface}
+
+    ${network_details}=  Get Network Interface Details  ${SECONDARY_CHANNEL_NUMBER}
+
+    # Verify eth1 interface MAC address on GUI.
+    Page Should Contain  ${network_details['MACAddress']}
+
+    # Verify eth1 interface IPv4 addresses on GUI.
+    ${network_ip_list}=  Set Variable  ${network_details['IPv4Addresses']}
+    FOR  ${ip_data}  IN  @{network_ip_list}
+       Page Should Contain  ${ip_data['Address']}
+    END
 
 
 Configure Hostname Via GUI And Verify
@@ -415,3 +434,16 @@ Delete IPv4 Address And Verify
    Should Be Equal  ${delete_status}  ${False}
 
    Wait Until Page Does Not Contain  ${ip_addr}
+
+
+Get Network Interface Details
+   [Documentation]  Get network interface details.
+   [Arguments]   ${channel_number}
+
+   # Description of argument(s):
+   # channel_number   Interface Channel Number(eg.eth0 or eth1).
+
+   ${active_channel_config}=  Get Active Channel Config
+   ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
+   ${resp}=  redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+   RETURN  ${resp.dict}
