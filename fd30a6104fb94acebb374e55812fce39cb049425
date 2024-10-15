@@ -146,6 +146,24 @@
       "parentUuid": "d6ae7b2b_1b39a522",
       "revId": "fd30a6104fb94acebb374e55812fce39cb049425",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10dabd7c_8fad2e4b",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-10-15T17:02:44Z",
+      "side": 1,
+      "message": "Please read my comment reply, this testcase we need to verify whether the user account is getting locked with same user.\nBut you are asking me to login with default BMC user \u0026 check the user account locked or not.This is not the scenario which am testing here.\n\nI have to verify with same user via login that is the testcase",
+      "parentUuid": "440dff6e_f9da5e44",
+      "revId": "fd30a6104fb94acebb374e55812fce39cb049425",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
