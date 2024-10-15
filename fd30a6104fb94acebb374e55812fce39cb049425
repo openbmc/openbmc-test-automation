@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37d21dab_2f8a902d",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-10-15T08:59:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06373598_42d6d415",
+      "range": {
+        "startLine": 300,
+        "startChar": 9,
+        "endLine": 300,
+        "endChar": 96
+      },
+      "revId": "fd30a6104fb94acebb374e55812fce39cb049425",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8ef25ad_898cd7fc",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb403722_c083fb39",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-10-15T08:59:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8ef25ad_898cd7fc",
+      "range": {
+        "startLine": 301,
+        "startChar": 10,
+        "endLine": 301,
+        "endChar": 75
+      },
+      "revId": "fd30a6104fb94acebb374e55812fce39cb049425",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80318cad_2229a10a",
@@ -60,6 +108,24 @@
       "writtenOn": "2024-10-15T05:27:22Z",
       "side": 1,
       "message": "verify \"Locked\" parameter in created user account, it should be TRUE via redfish\n\u0027{\"Locked\":true}",
+      "revId": "fd30a6104fb94acebb374e55812fce39cb049425",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6ae7b2b_1b39a522",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-10-15T08:59:13Z",
+      "side": 1,
+      "message": "the tescase is i need to verify whether the user is getting locked or not by enetering wrong password and verify with same user..so this verification will be done as below.",
+      "parentUuid": "80318cad_2229a10a",
       "revId": "fd30a6104fb94acebb374e55812fce39cb049425",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
