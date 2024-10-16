@@ -16,6 +16,29 @@
       "message": "checkdefault slaac ipv6 enabled/disabled , after finishing testcase restore it back",
       "revId": "e2eaeec7f6626cd95b0d7c7a83f3bbd26a6c0235",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb0b2739_1ba2f97a",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-10-16T05:20:46Z",
+      "side": 1,
+      "message": "change slaacv6_enabled to slaac_enabled\nMay be you can use slaac_enabled_vmi to avoid confusion.",
+      "range": {
+        "startLine": 656,
+        "startChar": 6,
+        "endLine": 656,
+        "endChar": 21
+      },
+      "revId": "e2eaeec7f6626cd95b0d7c7a83f3bbd26a6c0235",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
