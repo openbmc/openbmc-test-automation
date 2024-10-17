@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed6bb81f_485e429d",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-10-17T07:40:31Z",
+      "side": 1,
+      "message": "Sure will fix it...Thanks",
+      "parentUuid": "563d7317_a7337f23",
+      "range": {
+        "startLine": 302,
+        "startChar": 4,
+        "endLine": 304,
+        "endChar": 23
+      },
+      "revId": "fdb9ef0591142abab68aa462320524f27e9aab65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f29be1b2_6df64255",
         "filename": "security/test_bmc_expire_password.robot",
         "patchSetId": 7
@@ -37,6 +61,30 @@
       "writtenOn": "2024-10-16T04:03:00Z",
       "side": 1,
       "message": "instead creating new keyword , use existing keyword to set default\nSet Account Lockout Threshold  account_lockout_threshold\u003d${defaultlockout_threshold}",
+      "range": {
+        "startLine": 410,
+        "startChar": 0,
+        "endLine": 413,
+        "endChar": 109
+      },
+      "revId": "fdb9ef0591142abab68aa462320524f27e9aab65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e387b11c_4b2f5b1f",
+        "filename": "security/test_bmc_expire_password.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-10-17T07:40:31Z",
+      "side": 1,
+      "message": "this keyword is to store the already exeisting threshold lockout not the default one",
+      "parentUuid": "f29be1b2_6df64255",
       "range": {
         "startLine": 410,
         "startChar": 0,
