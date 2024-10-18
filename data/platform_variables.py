@@ -4,7 +4,6 @@ r"""
  Define methods to import platform specific files.
 """
 
-import imp
 import importlib
 import string
 import sys

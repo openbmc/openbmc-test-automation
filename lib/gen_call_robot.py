@@ -5,7 +5,7 @@ This module provides functions which are useful to plug-ins call-point programs 
 robot program calls.
 """
 
-import imp
+import importlib.util
 import os
 import re
 import subprocess
@@ -18,8 +18,8 @@ import gen_print as gp
 import gen_valid as gv
 
 base_path = (
-    os.path.dirname(os.path.dirname(imp.find_module("gen_robot_print")[1]))
-    + os.sep
+    os.path.dirname(os.path.dirname(
+        importlib.util.find_spec("gen_robot_print").origin)) + os.sep
 )
 
 
