@@ -3,13 +3,23 @@
 r"""
 Generic utility functions.
 """
-import imp
+import importlib.util
 import random
 import string
 import subprocess
 
 from robot.libraries.BuiltIn import BuiltIn
 from robot.utils import DotDict
+
+
+def load_source(name, module_path):
+    r"""
+    import util to replace deprecated imp.load_source
+    """
+    spec = importlib.util.spec_from_file_location(name, module_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def random_mac():
@@ -37,7 +47,7 @@ def get_sensor(module_name, value):
     r"""
     Return sensor matched ID name.
     """
-    m = imp.load_source("module.name", module_name)
+    m = load_source("module.name", module_name)
 
     for i in m.ID_LOOKUP["SENSOR"]:
         if m.ID_LOOKUP["SENSOR"][i] == value:
@@ -50,7 +60,7 @@ def get_inventory_sensor(module_name, value):
     r"""
     Return sensor matched ID name from inventory.
     """
-    m = imp.load_source("module.name", module_name)
+    m = load_source("module.name", module_name)
 
     value = string.replace(value, m.INVENTORY_ROOT, "<inventory_root>")
 
@@ -75,7 +85,7 @@ def get_inventory_list(module_name):
     """
 
     inventory_list = []
-    m = imp.load_source("module.name", module_name)
+    m = load_source("module.name", module_name)
 
     for i in m.ID_LOOKUP["FRU"]:
         s = m.ID_LOOKUP["FRU"][i]
@@ -98,7 +108,7 @@ def get_inventory_fru_type_list(module_name, fru):
     Return FRU URI(s) list of a given type from inventory.
     """
     inventory_list = []
-    m = imp.load_source("module.name", module_name)
+    m = load_source("module.name", module_name)
 
     for i in m.FRU_INSTANCES.keys():
         if m.FRU_INSTANCES[i]["fru_type"] == fru:
@@ -121,7 +131,7 @@ def get_vpd_inventory_list(module_name, fru):
     Return VPD URI(s) list of a FRU type from inventory.
     """
     inventory_list = []
-    m = imp.load_source("module.name", module_name)
+    m = load_source("module.name", module_name)
 
     for i in m.ID_LOOKUP["FRU_STR"]:
         x = m.ID_LOOKUP["FRU_STR"][i]

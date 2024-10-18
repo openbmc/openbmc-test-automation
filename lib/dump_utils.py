@@ -4,7 +4,7 @@ r"""
 This file contains functions which are useful for processing BMC dumps.
 """
 
-import imp
+import importlib.util
 import os
 import sys
 
@@ -15,7 +15,9 @@ import gen_robot_keyword as grk
 from robot.libraries.BuiltIn import BuiltIn
 
 base_path = (
-    os.path.dirname(os.path.dirname(imp.find_module("gen_robot_print")[1]))
+    os.path.dirname(
+        os.path.dirname(importlib.util.find_spec("gen_robot_print").origin)
+    )
     + os.sep
 )
 sys.path.append(base_path + "data/")
