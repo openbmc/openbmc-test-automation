@@ -27,7 +27,7 @@ the boot fails, they can see exactly why by looking at the current state as
 compared with the expected state.
 """
 
-import imp
+import importlib.util
 import os
 import re
 import sys
@@ -45,7 +45,9 @@ from robot.utils import DotDict
 gru.my_import_resource("rest_client.robot")
 
 base_path = (
-    os.path.dirname(os.path.dirname(imp.find_module("gen_robot_print")[1]))
+    os.path.dirname(
+        os.path.dirname(importlib.util.find_spec("gen_robot_print").origin)
+    )
     + os.sep
 )
 sys.path.append(base_path + "data/")

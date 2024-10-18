@@ -4,7 +4,7 @@ r"""
 Provide useful error log utility keywords.
 """
 
-import imp
+import importlib.util
 import os
 import sys
 
@@ -12,7 +12,9 @@ import gen_print as gp
 from robot.libraries.BuiltIn import BuiltIn
 
 base_path = (
-    os.path.dirname(os.path.dirname(imp.find_module("gen_robot_print")[1]))
+    os.path.dirname(
+        os.path.dirname(importlib.util.find_spec("gen_robot_print").origin)
+    )
     + os.sep
 )
 sys.path.append(base_path + "data/")
