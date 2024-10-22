@@ -1,0 +1,9 @@
+Code-Review+1: David L. Shaw <dlshaw@us.ibm.com>
+Code-Review+1: Adriana Kobylak <anoo@us.ibm.com>
+Code-Review+2: George Keishing <gkeishin@gmail.com>
+Verified+1: OpenBMC CI <openbmcbump-ci@yahoo.com>
+Submitted-by: George Keishing <gkeishin@gmail.com>
+Submitted-at: Tue, 22 Oct 2024 04:47:31 +0000
+Reviewed-on: https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/75265
+Project: openbmc/openbmc-test-automation
+Branch: refs/heads/master
