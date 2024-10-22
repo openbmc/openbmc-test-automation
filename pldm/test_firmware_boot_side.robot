@@ -83,7 +83,8 @@ Firmware Side Switch Power On Loop
 
         Print Timen  BMC rebooted, wait for host to boot to Runtime.
         # Post BMC reset, host should auto power on back to runtime.
-        Wait Until Keyword Succeeds  10 min  20 sec  Is Boot Progress Runtime Matched
+        Wait Until Keyword Succeeds  ${power_on_timeout}  20 sec
+        ...  Is Boot Progress Runtime Matched
 
         # Verify the system is booting up with the new fw_boot_side set.
         ${cur_boot_side}=  PLDM Get BIOS Attribute  fw_boot_side
