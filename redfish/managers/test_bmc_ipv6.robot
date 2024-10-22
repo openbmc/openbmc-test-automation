@@ -82,7 +82,7 @@ Delete IPv6 Address And Verify
 
 
 
-Modify IPv6 Address And verify
+Modify IPv6 Address And Verify
     [Documentation]  Modify IPv6 address and verify.
     [Tags]  Modify_IPv6_Address_And_Verify
 
