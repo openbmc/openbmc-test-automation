@@ -19,7 +19,7 @@ ${string_event_log}                Event log
 ${xpath_launch_serial_over_lan}    //a[@class='no-icon quick-links__item']
 ${string_launch_serial_over_lan}   Serial over LAN console
 
-*** Test Case ***
+*** Test Cases ***
 # OpenBMC @ Power Off state test cases.
 
 Verify Serial Over LAN Button
