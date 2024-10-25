@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11c9ef60_ce0981dd",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-10-25T05:43:38Z",
+      "side": 1,
+      "message": "By default VMI slaac v6 will be disabled, i think it will not impact if we keep the system in slaac v6 as enabled.",
+      "parentUuid": "2ed1914b_7fbd5a89",
+      "revId": "e2eaeec7f6626cd95b0d7c7a83f3bbd26a6c0235",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb0b2739_1ba2f97a",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
         "patchSetId": 2
@@ -31,6 +49,30 @@
       "writtenOn": "2024-10-16T05:20:46Z",
       "side": 1,
       "message": "change slaacv6_enabled to slaac_enabled\nMay be you can use slaac_enabled_vmi to avoid confusion.",
+      "range": {
+        "startLine": 656,
+        "startChar": 6,
+        "endLine": 656,
+        "endChar": 21
+      },
+      "revId": "e2eaeec7f6626cd95b0d7c7a83f3bbd26a6c0235",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4000e39c_886517c5",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-10-25T05:43:38Z",
+      "side": 1,
+      "message": "as it is IPv6 autoconfig i used the same variable name.",
+      "parentUuid": "fb0b2739_1ba2f97a",
       "range": {
         "startLine": 656,
         "startChar": 6,
