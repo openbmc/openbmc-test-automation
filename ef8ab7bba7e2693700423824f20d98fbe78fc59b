@@ -16,6 +16,24 @@
       "message": "As discussed, Pls modify the code which is more relevant to this suite:\nVerify AccountLockout when expired passwd is changed \u0026 when old password is used 5 times account gets lockout.\nAlso Pls add Redfish lock value in verification.\n\nThanks",
       "revId": "ef8ab7bba7e2693700423824f20d98fbe78fc59b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca9af8b3_0db1a722",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-10-25T12:51:45Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "fadee7aa_22431cb4",
+      "revId": "ef8ab7bba7e2693700423824f20d98fbe78fc59b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
