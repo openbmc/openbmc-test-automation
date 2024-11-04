@@ -61,6 +61,24 @@ Verify Redfish Works On Both Interfaces
     Should Be Equal  ${resp1.dict['HostName']}  ${resp2.dict['HostName']}
 
 
+Verify LDAP IP Is Pingable From Eth0
+    [Documentation]  Verify if LDAP IP is pingable from eth0.
+    [Tags]  Verify_LDAP_IP_Is_Pingable_From_Eth0
+
+    ${ping_rc}=  Run Keyword and Return Status  Ping Host  ${LDAP_SERVER_URI}
+    Should Be Equal As Strings  ${ping_rc}  ${TRUE}  msg=Unable to ping LDAP server.
+
+
+Verify LDAP IP Is Pingable From Eth1
+    [Documentation]  Verify LDAP IP is pingable from eth1.
+    [Tags]  Verify_LDAP_IP_Is_Pingable_From_Eth1
+    [Setup]  Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  host=${OPENBMC_HOST_1}
+    [Teardown]  Redfish1.Logout
+
+    ${ping_rc}=  Run Keyword and Return Status  Ping Host  ${LDAP_SERVER_URI}
+    Should Be Equal As Strings  ${ping_rc}  ${TRUE}  msg=Unable to ping LDAP server.
+
+
 Verify LDAP Login Works When Eth1 IP Is Not Configured
     [Documentation]  Verify LDAP login works when eth1 IP is erased.
     [Tags]  Verify_LDAP_Login_Works_When_Eth1_IP_Is_Not_Configured
