@@ -61,6 +61,26 @@ Verify Redfish Works On Both Interfaces
     Should Be Equal  ${resp1.dict['HostName']}  ${resp2.dict['HostName']}
 
 
+Verify LDAP IP Is Pingable From Eth0
+    [Documentation]  Verify LDAP IP is pingable from eth0.
+    [Tags]  Verify_LDAP_IP_Is_Pingable_From_Eth0
+    [Setup]  Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  host=${OPENBMC_HOST}
+
+    ${ping_rc}=  Run Keyword and Return Status  Ping Host  ${LDAP_SERVER_URI}
+    Should Be Equal As Strings  ${ping_rc}  ${TRUE}  msg=Unable to ping LDAP server.
+
+    # Deleting eth1 IP and addding back and check if LDAP is Pingable
+    ${test_gateway_before}=  Get BMC Default Gateway
+    Run Keywords  Set Test Variable  ${CHANNEL_NUMBER}  ${SECONDARY_CHANNEL_NUMBER}
+    ...  AND  Redfish.Login  AND  Delete IP Address  ${OPENBMC_HOST_1}
+
+    Run Keywords  Redfish.Logout  AND  Redfish.Login  AND
+    ...  Add IP Address  ${OPENBMC_HOST_1}  ${eth1_subnet_mask}  ${eth1_gateway}
+
+    ${test_gateway_after}=  Get BMC Default Gateway In First
+    Should Be Equal  ${test_gateway_before}  ${test_gateway_after}
+    ${ping_rc}=  Run Keyword and Return Status  Ping Host  ${LDAP_SERVER_URI}
+
 Verify LDAP Login Works When Eth1 IP Is Not Configured
     [Documentation]  Verify LDAP login works when eth1 IP is erased.
     [Tags]  Verify_LDAP_Login_Works_When_Eth1_IP_Is_Not_Configured
@@ -349,3 +369,19 @@ Verify SSH Protocol State Via Eth1
     ${resp}=  Redfish1.Get  ${REDFISH_NW_PROTOCOL_URI}
     Should Be Equal As Strings  ${resp.dict['SSH']['ProtocolEnabled']}  ${state}
     ...  msg=Protocol states are not matching.
+
+Get BMC Default Gateway In First
+    [Documentation]  Get system default gateway.
+
+    ${route_info}=  Get BMC Route Info
+    ${lines}=  Get Lines Containing String  ${route_info}  default via
+    # Extract the corresponding default gateway to get which interfaceis on top.
+    ${default_gw}=  Split String  ${lines}
+    # Example of the output
+    # default_gw:
+    #   [0]:   default
+    #   [1]:   via
+    #   [2]:   xx.xx.xx.1
+    #   [3]:   dev
+    #   [4]:   eth1
+    RETURN  ${default_gw[2]}
