@@ -22,7 +22,7 @@ Library         OperatingSystem
 
 Suite Setup     Suite Setup Execution
 Test Setup      Run Keywords  Redfish.Login  AND  Redfish1.Login
-Test Teardown   Run Keywords  FFDC On Test Case Fail  AND  Redfish.Logout  AND  Redfish1.Logout
+#Test Teardown   Run Keywords  FFDC On Test Case Fail  AND  Redfish.Logout  AND  Redfish1.Logout
 Suite Teardown  Run Keywords  Redfish1.Logout  AND  Redfish.Logout
 
 *** Variables ***
@@ -59,6 +59,24 @@ Verify Redfish Works On Both Interfaces
     ${resp1}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}eth0
     ${resp2}=  Redfish1.Get  ${REDFISH_NW_ETH_IFACE}eth1
     Should Be Equal  ${resp1.dict['HostName']}  ${resp2.dict['HostName']}
+
+
+Verify LDAP IP Is Pingable From Eth0
+    [Documentation]  Verify LDAP IP Is Pingable From Eth0
+    [Tags]  Verify_LDAP_IP_Is_Pingable_From_Eth0
+
+    ${ping_rc}=  Run Keyword and Return Status  Ping Host  ${LDAP_SERVER_URI}
+    Should Be Equal As Strings  ${ping_rc}  ${TRUE}  msg=Unable to ping LDAP server
+
+
+Verify LDAP IP Is Pingable From Eth1
+    [Documentation]  Verify LDAP IP Is Pingable From Eth1
+    [Tags]  Verify_LDAP_IP_Is_Pingable_From_Eth1
+    [Setup]  Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  host=${OPENBMC_HOST_1}
+    [Teardown]  Redfish1.Logout
+
+    ${ping_rc}=  Run Keyword and Return Status  Ping Host  ${LDAP_SERVER_URI}
+    Should Be Equal As Strings  ${ping_rc}  ${TRUE}  msg=Unable to ping LDAP serve
 
 
 Verify LDAP Login Works When Eth1 IP Is Not Configured
