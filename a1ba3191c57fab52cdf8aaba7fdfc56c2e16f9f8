@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c37077aa_8139febb",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2024-11-11T07:20:00Z",
+      "side": 1,
+      "message": "test case name indicates only one thing but multiple operations are done inside test case??\nCan you give proper name or separate out test cases?",
+      "revId": "a1ba3191c57fab52cdf8aaba7fdfc56c2e16f9f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
