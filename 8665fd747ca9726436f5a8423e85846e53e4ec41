@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fa57a52_384205d6",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-11-12T09:30:10Z",
+      "side": 1,
+      "message": "Verify if LDAP IP is pingable from eth0.\n\nend with period",
+      "revId": "8665fd747ca9726436f5a8423e85846e53e4ec41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f1f7d6d_0c8acea1",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-11-12T09:30:10Z",
+      "side": 1,
+      "message": "msg\u003dUnable to ping LDAP server from eth0.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 83
+      },
+      "revId": "8665fd747ca9726436f5a8423e85846e53e4ec41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddc80b5f_c78e5b9c",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-11-12T09:30:10Z",
+      "side": 1,
+      "message": "Verify if LDAP IP is pingable from eth1.\n\nend with period",
+      "revId": "8665fd747ca9726436f5a8423e85846e53e4ec41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e056912_8f1f25a2",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2024-11-12T09:30:10Z",
+      "side": 1,
+      "message": "Spelling mistake\n\nmsg\u003dUnable to ping LDAP server from eth1.",
+      "range": {
+        "startLine": 79,
+        "startChar": 1,
+        "endLine": 79,
+        "endChar": 82
+      },
+      "revId": "8665fd747ca9726436f5a8423e85846e53e4ec41",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
