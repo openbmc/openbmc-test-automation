@@ -391,10 +391,10 @@ class bmc_redfish_utils(object):
                         for memberDict in value:
                             if isinstance(memberDict, str):
                                 self.__pending_enumeration.add(memberDict)
+                            elif isinstance(memberDict, dict) and "@odata.id" in memberDict:
+                                self.__pending_enumeration.add(memberDict["@odata.id"])
                             else:
-                                self.__pending_enumeration.add(
-                                    memberDict["@odata.id"]
-                                )
+                                self.__pending_enumeration.add(memberDict[1])
 
                 if "@odata.id" == key:
                     value = value.rstrip("/")
