@@ -235,7 +235,6 @@ Verify Expire Admin Password And Update Bad Password Length Via Redfish
 
    Expire Password  ${admin_user}
 
-   #Update the password for root user with bad password.
    Redfish.Login
 
    Set Password Via Redfish  0penBmc0penBmc0penBmc  ${False}
