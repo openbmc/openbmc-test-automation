@@ -127,7 +127,7 @@ Verify Redfish Unresponsive URL paths
     Redfish.Login
     ${resource_list}  ${dead_resources}=  Enumerate Request  /redfish/v1  include_dead_resources=True
     Redfish.Logout
-    Valid Length  dead_resources  max_length=0
+    Valid Length    var_value=${dead_resources}    max_length=${0}    var_name=dead_resources
 
 
 *** Keywords ***
