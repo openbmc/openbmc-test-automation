@@ -94,6 +94,46 @@ Redfish BMC Reset Operation
     ${payload}=  Create Dictionary  ResetType=${reset_type}
     Redfish.Post  ${target}  body=&{payload}
 
+Redfish Bmc Reset To Defaults Operation
+    [Documentation]    Do Redfish BMC reset operation.
+    [Arguments]    ${reset_type}=ResetAll
+
+    # Example:
+    # "Actions": {
+    #    "#Manager.Reset": {
+    #        "@Redfish.ActionInfo": "/redfish/v1/Managers/${MANAGER_ID}/ResetActionInfo",
+    #        "target": "/redfish/v1/Managers/${MANAGER_ID}/Actions/Manager.Reset"
+    #    },
+    #    "#Manager.ResetToDefaults": {
+    #        "ResetType@Redfish.AllowableValues": [
+    #            "ResetAll"
+    #        ],
+    #        "target": "/redfish/v1/Managers/${MANAGER_ID}/Actions/Manager.ResetToDefaults"
+    #    }
+    # },
+
+    # Parameters allowable values  /redfish/v1/Managers/${MANAGER_ID}/ResetActionInfo
+
+    # "@odata.id": "/redfish/v1/Managers/${MANAGER_ID}/ResetActionInfo",
+    # "@odata.type": "#ActionInfo.v1_1_2.ActionInfo",
+    # "Id": "ResetActionInfo",
+    # "Name": "Reset Action Info",
+    # "Parameters": [
+    #    {
+    #        "AllowableValues": [
+    #            "GracefulRestart",
+    #            "ForceRestart"
+    #        ],
+    #        "DataType": "String",
+    #        "Name": "ResetType",
+    #        "Required": true
+    #    }
+    # ]
+    ${target}=    Wait Until Keyword Succeeds    1 min    20 sec
+    ...    redfish_utils.Get Target Actions    /redfish/v1/Managers/${REDFISH.MANAGER_ID}/    Manager.ResetToDefaults
+    ${payload}=    Create Dictionary    ResetToDefaultsType=${reset_type}
+    Redfish.Post    ${target}    body=&{payload}
+    ...    valid_status_codes=[${HTTP_OK}]
 
 Reset BIOS Via Redfish
     [Documentation]  Do BIOS reset through Redfish.
