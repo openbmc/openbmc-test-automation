@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b6dd9c38_d2ed6bbd",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-12-02T06:21:16Z",
+      "side": 1,
+      "message": "there is no way to enable slaacv6 via VMI",
+      "parentUuid": "fc19de52_3835db2d",
+      "range": {
+        "startLine": 480,
+        "startChar": 0,
+        "endLine": 480,
+        "endChar": 46
+      },
+      "revId": "f19053b40d7d02d3eefd3c3921cce3e709dfbe90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9422e8f8_94601bcf",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2024-12-02T05:49:01Z",
       "side": 1,
       "message": "via VMI",
+      "range": {
+        "startLine": 481,
+        "startChar": 21,
+        "endLine": 481,
+        "endChar": 57
+      },
+      "revId": "f19053b40d7d02d3eefd3c3921cce3e709dfbe90",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81d9300d_f984c9de",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2024-12-02T06:21:16Z",
+      "side": 1,
+      "message": "same as above comment",
+      "parentUuid": "9422e8f8_94601bcf",
       "range": {
         "startLine": 481,
         "startChar": 21,
