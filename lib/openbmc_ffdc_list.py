@@ -106,6 +106,9 @@ FFDC_BMC_FILE = {
             "cat /var/lib/phosphor-software-manager/pnor/rw/DEVTREE >"
             " /tmp/DEVTREE 2>&1"
         ),
+        "kernel_sys_trace.txt": (
+            "cat /sys/kernel/tracing/trace >/tmp/kernel_sys_trace.txt 2>&1"
+        ),
     },
 }
 # Add file name and corresponding command needed for all Linux distributions

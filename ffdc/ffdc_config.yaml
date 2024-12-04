@@ -86,6 +86,7 @@ OPENBMC:
             - "cat /var/lib/phosphor-software-manager/pnor/rw/DEVTREE >
               /tmp/DEVTREE"
             - "/usr/bin/vpd-tool -i > /tmp/vpd-inventory.txt"
+            - "cat /sys/kernel/tracing/trace > /tmp/kernel_sys_trace.txt"
         FILES:
             - "/tmp/BMC_flash_side.txt"
             - "/tmp/BMC_hwmon.txt"
@@ -113,6 +114,7 @@ OPENBMC:
             - "/tmp/fan_monitor_dump.json"
             - "/tmp/DEVTREE"
             - "/tmp/vpd-inventory.txt"
+            - "/tmp/kernel_sys_trace.txt"
         PROTOCOL:
             - "SSH"
 
