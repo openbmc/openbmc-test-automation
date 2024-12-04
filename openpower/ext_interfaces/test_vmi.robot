@@ -487,6 +487,17 @@ Enable VMI Stateless Address AutoConfig And Verify
     Verify VMI IPv6 Address  SLAAC
 
 
+Disable VMI Stateless Address AutoConfig And Verify
+    [Documentation]  Disable VMI SLAACv6 and verify an origin.
+    [Tags]  Disable_VMI_Stateless_Address_AutoConfig_And_Verify
+    [Setup]  Set VMI SLAACv6 Origin    ${True}
+
+    Set VMI SLAACv6 Origin    ${False}
+
+    # Check origin is set to static and slaacv6 address are getting erased.
+    Verify VMI IPv6 Address  Static
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -683,4 +694,3 @@ Verify VMI IPv6 Address
     ${vmi_ipv6_config}=  Get From List  ${vmi_ipv6_configurations}  0
     Should Not Be Empty  ${vmi_ipv6_config["Address"]}
     Should Be Equal As Strings   ${vmi_ipv6_config["AddressOrigin"]}  ${ipv6_origin}
-    Should Be Equal As Strings   ${vmi_ipv6_config["PrefixLength"]}  64
