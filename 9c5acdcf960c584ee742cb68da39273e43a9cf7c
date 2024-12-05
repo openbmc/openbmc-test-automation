@@ -33,6 +33,24 @@
       "message": "This will not ensure connectivity between eth1 \u0026 LDAP server.",
       "revId": "9c5acdcf960c584ee742cb68da39273e43a9cf7c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2367c01a_1532428f",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-12-05T12:36:18Z",
+      "side": 1,
+      "message": "Modifying the test case to delete eth1 interface and then check the ping status.",
+      "parentUuid": "98e8f517_f198a032",
+      "revId": "9c5acdcf960c584ee742cb68da39273e43a9cf7c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
