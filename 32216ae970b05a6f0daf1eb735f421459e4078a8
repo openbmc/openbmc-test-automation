@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58fc7ced_aa2c4fde",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2024-12-06T05:19:19Z",
+      "side": 1,
+      "message": "what is this default_route? and why VMI IPv6 address is compared with it?\nIn which case it\u0027ll be equal?\nWhat is the logic used in verifying prefix?",
+      "revId": "32216ae970b05a6f0daf1eb735f421459e4078a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
