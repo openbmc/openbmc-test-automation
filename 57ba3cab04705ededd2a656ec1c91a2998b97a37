@@ -16,6 +16,24 @@
       "message": "deleting eth1 IP?",
       "revId": "57ba3cab04705ededd2a656ec1c91a2998b97a37",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2ec9837_0b756726",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2024-12-12T14:19:50Z",
+      "side": 1,
+      "message": "Deleting and adding back eth1 and checking the gateway and pinging the LDAP server.\nWill this be ok Prashanth?",
+      "parentUuid": "d228823e_143a1b5b",
+      "revId": "57ba3cab04705ededd2a656ec1c91a2998b97a37",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
