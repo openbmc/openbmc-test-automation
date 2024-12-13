@@ -46,6 +46,30 @@
       },
       "revId": "9c4bcc43430d27fd40bfc3da59e257ca0ff0e72a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5bddba2_cbbcdcc2",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2024-12-13T05:52:30Z",
+      "side": 1,
+      "message": "Agree with Megha.\nthere is small change between 2 test cases, 493 line. so template will not required here",
+      "parentUuid": "1b7ed9ac_f55695e4",
+      "range": {
+        "startLine": 490,
+        "startChar": 0,
+        "endLine": 490,
+        "endChar": 51
+      },
+      "revId": "9c4bcc43430d27fd40bfc3da59e257ca0ff0e72a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
