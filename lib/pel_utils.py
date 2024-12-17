@@ -28,7 +28,9 @@ class PeltoolException(Exception):
         super().__init__(self.message)
 
 
-def peltool(option_string, parse_json=True, **bsu_options):
+def peltool(
+    option_string, peltool_extension=None, parse_json=True, **bsu_options
+):
     r"""
     Run peltool on the BMC with the caller's option string and return the result.
 
@@ -51,6 +53,8 @@ def peltool(option_string, parse_json=True, **bsu_options):
     Description of argument(s):
     option_string                   A string of options which are to be
                                     processed by the peltool command.
+    peltool_extension               Provide peltool extension format.
+                                    Default: None.
     parse_json                      Indicates that the raw JSON data should
                                     parsed into a list of dictionaries.
     bsu_options                     Options to be passed directly to
@@ -59,8 +63,12 @@ def peltool(option_string, parse_json=True, **bsu_options):
     """
 
     bsu_options = fa.args_to_objects(bsu_options)
+    peltool_cmd = "peltool"
+    if peltool_extension:
+        peltool_cmd = peltool_cmd + peltool_extension
+
     out_buf, _, _ = bsu.bmc_execute_command(
-        "peltool " + option_string, **bsu_options
+        peltool_cmd + " " + option_string, **bsu_options
     )
     if parse_json:
         try:
