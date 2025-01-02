@@ -598,5 +598,3 @@ MISC_SENSORS = {
     0xDA: {"class": "TurboAllowedSensor"},
     0xD8: {"class": "PowerSupplyDeratingSensor"},
 }
-
-# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
