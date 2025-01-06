@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1775db8e_d09529de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-01-06T06:14:58Z",
+      "side": 1,
+      "message": "The submitter name is listed in CLA and is good to merge\n\nhttps://docs.google.com/document/d/1tb7Ykbfu7aHy931LdWRu_VfD9phe0AqiRhUl-KUdfIY/edit?tab\u003dt.0",
+      "revId": "c86fb7babb31442afee149de02301e6e939d9d91",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
