@@ -34,6 +34,24 @@
       "parentUuid": "60a8364c_bb14b4f7",
       "revId": "f1c2cabad390d242d2cc6f7e23091f4872f96fd6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bec5378_e482610a",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-01-06T07:31:41Z",
+      "side": 1,
+      "message": "This is for VMI SLAAC, after disabling SLAAC from eBMC \u0026 enabling SLAAC on hypervisor it still show VMI SLAACv6 address.",
+      "parentUuid": "a618f0bb_b395b04c",
+      "revId": "f1c2cabad390d242d2cc6f7e23091f4872f96fd6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
