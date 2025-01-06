@@ -1,3 +1,4 @@
+vim -r test_vmi.robo
 *** Settings ***
 
 Documentation     VMI static/dynamic IP config tests.
@@ -35,6 +36,7 @@ ${test_netmask}           255.255.252.0
 &{DISABLE_SLAAC}          StatelessAddressAutoConfig=&{SLAAC_DISABLED}
 
 ${default}                0.0.0.0
+${default_ipv6addr}       ::
 
 
 *** Test Cases ***
@@ -498,6 +500,23 @@ Disable VMI Stateless Address AutoConfig And Verify
     Verify VMI IPv6 Address  Static
 
 
+Enable VMI SLAAC And Check Persistency On BMC Reboot
+    [Documentation]  Enable VMI SLAACv6 and verify its persistency
+    ...  on BMC reboot.
+    [Tags]  Enable_VMI_SLAAC_And_Check_Persistency_On_BMC_Reboot
+
+    Set VMI SLAACv6 Origin    ${True}
+
+    # Reboot BMC and verify persistency.
+    OBMC Reboot (off)
+    Redfish Power On
+    Wait For Host Boot Progress To Reach Required State
+
+    # Check origin is set to slaac and address are getting displayed.
+    ${vmi_ipv6addr}=  Verify VMI IPv6 Address  SLAAC
+    Should Not Be Equal  ${vmi_ipv6addr["Address"]}  ${default_ipv6addr}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -651,7 +670,6 @@ Update User Role And Set VMI IPv4 Origin
 Suite Teardown Execution
     [Documentation]  Do suite teardown execution task.
 
-    Run Keyword If  ${vmi_network_conf} != ${None}
     ...  Set Static IPv4 Address To VMI And Verify  ${vmi_network_conf["IPv4_Address"]}
     ...  ${vmi_network_conf["IPv4_Gateway"]}  ${vmi_network_conf["IPv4_SubnetMask"]}
     Delete All Redfish Sessions
@@ -693,4 +711,5 @@ Verify VMI IPv6 Address
     @{vmi_ipv6_configurations}=  Get From Dictionary  ${resp.dict}  IPv6Addresses
     ${vmi_ipv6_config}=  Get From List  ${vmi_ipv6_configurations}  0
     Should Not Be Empty  ${vmi_ipv6_config["Address"]}
-    Should Be Equal As Strings   ${vmi_ipv6_config["AddressOrigin"]}  ${ipv6_origin}
+    Should Be Equal As Strings   ${vmi_ipv6_config["AddressOrigin"]}  ${ipv6_orign}
+    RETURN  &{vmi_ipv6_config}
