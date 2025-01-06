@@ -5,7 +5,7 @@ Documentation     VMI static/dynamic IP config tests.
 Resource          ../../lib/external_intf/vmi_utils.robot
 
 Suite Setup       Suite Setup Execution
-Test Teardown     FFDC On Test Case Fail
+#Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Run Keyword And Ignore Error  Suite Teardown Execution
 
 Test Tags        Vmi
@@ -35,6 +35,7 @@ ${test_netmask}           255.255.252.0
 &{DISABLE_SLAAC}          StatelessAddressAutoConfig=&{SLAAC_DISABLED}
 
 ${default}                0.0.0.0
+${default_ipv6addr}       ::
 
 
 *** Test Cases ***
@@ -498,6 +499,23 @@ Disable VMI Stateless Address AutoConfig And Verify
     Verify VMI IPv6 Address  Static
 
 
+Enable VMI SLAAC And Check Persistency On BMC Reboot
+    [Documentation]  Enable VMI SLAACv6 and verify its persistency
+    ...  on BMC reboot.
+    [Tags]  Enable_VMI_SLAAC_And_Check_Persistency_On_BMC_Reboot
+
+    Set VMI SLAACv6 Origin    ${True}
+
+    # Reboot BMC and verify persistency.
+    OBMC Reboot (off)
+    Redfish Power On
+    Wait For Host Boot Progress To Reach Required State
+
+    # Check origin is set to slaac and address are getting displayed.
+    ${vmi_ipv6addr}=  Verify VMI IPv6 Address  SLAAC
+    Should Not Be Equal  ${vmi_ipv6addr["Address"]}  ${default_ipv6addr}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -694,3 +712,4 @@ Verify VMI IPv6 Address
     ${vmi_ipv6_config}=  Get From List  ${vmi_ipv6_configurations}  0
     Should Not Be Empty  ${vmi_ipv6_config["Address"]}
     Should Be Equal As Strings   ${vmi_ipv6_config["AddressOrigin"]}  ${ipv6_origin}
+    RETURN  &{vmi_ipv6_config}
