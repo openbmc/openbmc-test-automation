@@ -5,7 +5,7 @@ Documentation     VMI static/dynamic IP config tests.
 Resource          ../../lib/external_intf/vmi_utils.robot
 
 Suite Setup       Suite Setup Execution
-Test Teardown     FFDC On Test Case Fail
+#Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Run Keyword And Ignore Error  Suite Teardown Execution
 
 Test Tags        Vmi
@@ -532,6 +532,22 @@ Disable VMI SLAAC And Check Persistency On BMC Reboot
     # Check if origin is set to static and SLAAC address are getting erased.
     ${vmi_ipv6addr}=  Verify VMI IPv6 Address  Static
     Should Be Equal  ${vmi_ipv6addr["Address"]}  ${default_ipv6addr}
+
+
+Disable VMI DHCPv4 When SLAAC Is Enabled And Verify
+    [Documentation]  Disable vmi dhcpv4 parameter when slaacv6 is enabled
+    ...  and check whether the ipv4 address origin is set to static and
+    ...  dhcpv4 address is getting erased.
+    [Tags]  Disable_VMI_DHCPv4_When_SLAAC_Is_Enabled_And_Verify
+    [Setup]  Set VMI IPv4 Origin  ${True}
+
+    # Set IPv6 origin to SLAAC.
+    Set VMI SLAACv6 Origin    ${True}
+    Verify VMI IPv6 Address  SLAAC
+
+    # Diable dhcpv4 and check ipv4 address origin is set to static.
+    Set VMI IPv4 Origin  ${False}
+    Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default}
 
 
 *** Keywords ***
