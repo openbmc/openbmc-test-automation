@@ -99,8 +99,26 @@ Verify Set DateTime With NTP Enabled
     Redfish Set DateTime  ${local_system_time}
     ...  valid_status_codes=[${HTTP_BAD_REQUEST}, ${HTTP_INTERNAL_SERVER_ERROR}]
 
-*** Keywords ***
+Verify NTP Server Is Not Populated In NetworkSuppliedServers
+    [Documentation]  Patch NTP servers and verify NTP servers is not populated
+    ...  in NetworkSuppliedServers.
+    [Tags]  Verify_NTP_Server_Is_Not_Populated_In_NetworkSupppliedServers
+    [Setup]  Set NTP state  ${True}
 
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
+    ...  body={'NTP':{'NTPServers': ['${ntp_server_1}']}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # NTP network take few seconds to reload.
+    Wait Until Keyword Succeeds  30 sec  10 sec  Verify NTP Servers Are Populated
+
+    # Checking whether added NTP server is not populated in 
+    # ...  NetworkSuppliedServers as it has only DHCP NTP server list.
+    ${network_protocol}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
+    Should Not Contain  ${network_protocol["NTP"]["NetworkSuppliedServers"]}  ${ntp_server_1}
+    ...  msg=Static NTP server is coming up in NetworkSuppliedServers.
+
+*** Keywords ***
 
 Suite Setup Execution
     [Documentation]  Do the suite level setup.
