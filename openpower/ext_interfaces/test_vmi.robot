@@ -517,6 +517,23 @@ Enable VMI SLAAC And Check Persistency On BMC Reboot
     Should Not Be Equal  ${vmi_ipv6addr["Address"]}  ${default_ipv6addr}
 
 
+Disable VMI SLAAC And Check Persistency On BMC Reboot
+    [Documentation]  Disable VMI SLAACv6 and verify its persistency
+    ...  on BMC reboot.
+    [Tags]  Disable_VMI_SLAAC_And_Check_Persistency_On_BMC_Reboot
+
+    Set VMI SLAACv6 Origin    ${False}
+
+    # Reboot BMC and verify persistency.
+    OBMC Reboot (off)
+    Redfish Power On
+    Wait For Host Boot Progress To Reach Required State
+
+    # Check origin is set to static and slaac address are getting erased.
+    ${vmi_ipv6addr}=  Verify VMI IPv6 Address  Static
+    Should Be Equal  ${vmi_ipv6addr["Address"]}  ${default_ipv6addr}
+
+
 *** Keywords ***
 
 Suite Setup Execution
