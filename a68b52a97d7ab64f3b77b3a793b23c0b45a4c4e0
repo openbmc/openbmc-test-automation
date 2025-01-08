@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5965267c_fc85242b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-01-08T14:53:24Z",
+      "side": 1,
+      "message": "please add brief commit message and below info\n\nChanges:\n\nTested:",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 0
+      },
+      "revId": "a68b52a97d7ab64f3b77b3a793b23c0b45a4c4e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "66fca823_1f924bce",
         "filename": "redfish/managers/test_bmc_network_protocol.robot",
         "patchSetId": 1
