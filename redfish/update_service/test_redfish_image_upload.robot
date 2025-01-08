@@ -43,7 +43,7 @@ ${image_id}            ${EMPTY}
 *** Test Cases ***
 
 Redfish Failure To Upload BMC Image With Bad Manifest
-    [Documentation]  Upload a BMC firmware with a bad MANFIEST file.
+    [Documentation]  Upload a BMC firmware with a bad MANIFEST file.
     [Tags]  Redfish_Failure_To_Upload_BMC_Image_With_Bad_Manifest
     [Template]  Redfish Bad Firmware Update
 
@@ -79,7 +79,7 @@ Redfish Failure To Upload Empty Host Image
 
 
 Redfish TFTP Failure To Upload BMC Image With Bad Manifest
-    [Documentation]  Upload a BMC firmware with a bad MANFIEST file via TFTP.
+    [Documentation]  Upload a BMC firmware with a bad MANIFEST file via TFTP.
     [Tags]  Redfish_TFTP_Failure_To_Upload_BMC_Image_With_Bad_Manifest
     [Template]  Redfish TFTP Bad Firmware Update
 

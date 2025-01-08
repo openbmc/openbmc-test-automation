@@ -78,7 +78,7 @@ Suite Setup Execution
     ...  Redfish_Utils.Get Member List  /redfish/v1/TelemetryService/MetricDefinitions
 
     # Create a dictionary of ordinary english naming and actual naming of
-    # telemtry definition.
+    # telemetry definition.
     ${english_actual_teleDef}=   Create Dictionary
 
     Set Suite Variable  ${english_actual_teleDef}
