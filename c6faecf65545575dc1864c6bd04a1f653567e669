@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ff4289a_21b59b85",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-01-08T12:59:58Z",
+      "side": 1,
+      "message": "Disable VMI DHCPv4 and Check IPv4 address origin is set to Static.",
+      "revId": "c6faecf65545575dc1864c6bd04a1f653567e669",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
