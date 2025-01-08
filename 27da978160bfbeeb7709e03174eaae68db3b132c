@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f50eff1_5a7d1677",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-01-08T14:59:01Z",
+      "side": 1,
+      "message": "can you mention pre-condition \u0026 objective of the test",
+      "revId": "27da978160bfbeeb7709e03174eaae68db3b132c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b19a844a_9ae7f05c",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
         "patchSetId": 3
