@@ -24,6 +24,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06b5a3db_2405d0fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-01-08T14:54:57Z",
+      "side": 1,
+      "message": "Looks good to me, Pls fix other comments.",
+      "revId": "a68b52a97d7ab64f3b77b3a793b23c0b45a4c4e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66fca823_1f924bce",
