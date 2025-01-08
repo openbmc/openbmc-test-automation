@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66fca823_1f924bce",
+        "filename": "redfish/managers/test_bmc_network_protocol.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-01-08T14:52:18Z",
+      "side": 1,
+      "message": "additional p - NetworkSuppliedServers\n\ncorrect it in all applicable places",
+      "revId": "a68b52a97d7ab64f3b77b3a793b23c0b45a4c4e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "092f03a0_a85bd17b",
+        "filename": "redfish/managers/test_bmc_network_protocol.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-01-08T14:52:18Z",
+      "side": 1,
+      "message": "exceeding character length please fix",
+      "range": {
+        "startLine": 103,
+        "startChar": 1,
+        "endLine": 104,
+        "endChar": 1
+      },
+      "revId": "a68b52a97d7ab64f3b77b3a793b23c0b45a4c4e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b855799_c7caacdb",
+        "filename": "redfish/managers/test_bmc_network_protocol.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-01-08T14:52:18Z",
+      "side": 1,
+      "message": "This keyword name is similar to the test case name -- Verify NTP Server Is Not Populated In NetworkSupppliedServers\n\nplease make the change in keyword name",
+      "revId": "a68b52a97d7ab64f3b77b3a793b23c0b45a4c4e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98c746c3_45ceb391",
+        "filename": "redfish/managers/test_bmc_network_protocol.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-01-08T14:52:18Z",
+      "side": 1,
+      "message": "is this keyword actually required?? if this for single use-case purpose put the content in the testcase itself",
+      "revId": "a68b52a97d7ab64f3b77b3a793b23c0b45a4c4e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
