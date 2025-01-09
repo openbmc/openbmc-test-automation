@@ -11,6 +11,7 @@ Test Teardown    FFDC On Test Case Fail
 Test Tags       Pldm_Base
 
 *** Test Cases ***
+
 Verify Get PLDM Types
     [Documentation]  Verify supported PLDM types.
     [Tags]  Verify_Get_PLDM_Types
@@ -92,6 +93,21 @@ Verify GetPLDMCommands
     '3'            ${PLDM_BIOS_CMDS}
     '4'            ${PLDM_FRU_CMDS}
     '63'           ${PLDM_OEM_CMDS}
+
+
+Verify Verbose Flag For PLDM Subsystem Commands
+    [Documentation]  Verify verbose flag for PLDM subsystem commands.
+    [Tags]  Verify_Verbose_Flag_For_PLDM_Subsystem_Commands
+
+    ${pldm_output}=  Pldmtool  base GetPLDMTypes -v
+    Log To Console  ${pldm_output}
+    Should Contain  ${pldm_output}  pldmtool: Tx:
+    Should Contain  ${pldm_output}  pldmtool: Rx:
+
+    ${pldm_output}=  Pldmtool  bios GetDateTime -v
+    Should Contain  ${pldm_output}  pldmtool: Tx:
+    Should Contain  ${pldm_output}  pldmtool: Rx:
+
 
 *** keywords ***
 
