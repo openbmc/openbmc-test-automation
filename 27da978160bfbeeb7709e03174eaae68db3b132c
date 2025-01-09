@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c34bb8f5_d1dce24b",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-01-09T04:06:45Z",
+      "side": 1,
+      "message": "i have written objective in the documentation, for this precondition is initially IPv4 address origin must be set to dhcp, this i have mentioned in setup. As we are not verifying address of slaac i have not mentioned precondition for that.",
+      "parentUuid": "0f50eff1_5a7d1677",
+      "revId": "27da978160bfbeeb7709e03174eaae68db3b132c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b19a844a_9ae7f05c",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
         "patchSetId": 3
@@ -31,6 +49,30 @@
       "writtenOn": "2025-01-08T14:58:00Z",
       "side": 1,
       "message": "please use CAPS for the acronyms",
+      "range": {
+        "startLine": 538,
+        "startChar": 4,
+        "endLine": 540,
+        "endChar": 42
+      },
+      "revId": "27da978160bfbeeb7709e03174eaae68db3b132c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9db2a85_f8d2ee78",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-01-09T04:06:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b19a844a_9ae7f05c",
       "range": {
         "startLine": 538,
         "startChar": 4,
@@ -60,6 +102,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3dcab624_09df210f",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-01-09T04:06:45Z",
+      "side": 1,
+      "message": "It is IPv6 only",
+      "parentUuid": "01028947_edfb9142",
+      "revId": "27da978160bfbeeb7709e03174eaae68db3b132c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6ae83477_aeb5801b",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
         "patchSetId": 3
@@ -71,6 +131,24 @@
       "writtenOn": "2025-01-08T14:58:00Z",
       "side": 1,
       "message": "Disable",
+      "revId": "27da978160bfbeeb7709e03174eaae68db3b132c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f58fbf61_e53d5333",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-01-09T04:06:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ae83477_aeb5801b",
       "revId": "27da978160bfbeeb7709e03174eaae68db3b132c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
