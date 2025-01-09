@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "543f6c48_b943066c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-01-09T06:45:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5965267c_fc85242b",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 0
+      },
+      "revId": "a68b52a97d7ab64f3b77b3a793b23c0b45a4c4e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "06b5a3db_2405d0fa",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -58,6 +82,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fa3a70e_882e1791",
+        "filename": "redfish/managers/test_bmc_network_protocol.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-01-09T06:45:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66fca823_1f924bce",
+      "revId": "a68b52a97d7ab64f3b77b3a793b23c0b45a4c4e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "092f03a0_a85bd17b",
@@ -71,6 +113,30 @@
       "writtenOn": "2025-01-08T14:52:18Z",
       "side": 1,
       "message": "exceeding character length please fix",
+      "range": {
+        "startLine": 103,
+        "startChar": 1,
+        "endLine": 104,
+        "endChar": 1
+      },
+      "revId": "a68b52a97d7ab64f3b77b3a793b23c0b45a4c4e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db0c8df8_7e43c898",
+        "filename": "redfish/managers/test_bmc_network_protocol.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-01-09T06:45:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "092f03a0_a85bd17b",
       "range": {
         "startLine": 103,
         "startChar": 1,
@@ -111,6 +177,42 @@
       "writtenOn": "2025-01-08T14:52:18Z",
       "side": 1,
       "message": "is this keyword actually required?? if this for single use-case purpose put the content in the testcase itself",
+      "revId": "a68b52a97d7ab64f3b77b3a793b23c0b45a4c4e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2b0583f_d64262c3",
+        "filename": "redfish/managers/test_bmc_network_protocol.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-01-09T06:45:30Z",
+      "side": 1,
+      "message": "Removing this keyword.",
+      "parentUuid": "9b855799_c7caacdb",
+      "revId": "a68b52a97d7ab64f3b77b3a793b23c0b45a4c4e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22ac2ee6_75c168b3",
+        "filename": "redfish/managers/test_bmc_network_protocol.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-01-09T06:45:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98c746c3_45ceb391",
       "revId": "a68b52a97d7ab64f3b77b3a793b23c0b45a4c4e0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
