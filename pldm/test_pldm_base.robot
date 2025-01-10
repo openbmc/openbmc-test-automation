@@ -6,7 +6,7 @@ Variables        ../data/pldm_variables.py
 Resource         ../lib/openbmc_ffdc.robot
 
 Test Setup       Printn
-Test Teardown    FFDC On Test Case Fail
+#Test Teardown    FFDC On Test Case Fail
 
 Test Tags       Pldm_Base
 
@@ -106,6 +106,32 @@ Verify Verbose Flag For PLDM Subsystem Commands
     ${pldm_output}=  Pldmtool  bios GetDateTime -v
     Should Contain  ${pldm_output}  pldmtool: Tx:
     Should Contain  ${pldm_output}  pldmtool: Rx:
+
+
+Verify Verbose Flag For PLDM Raw Commands
+    [Documentation]  Verify verbose flag for PLDM raw commands.
+    [Tags]  Verify_Verbose_Flag_For_PLDM_Raw_Commands
+
+    # Example output format:
+    # pldmtool raw -d 0x80 0x00 0x04
+    # pldmtool: Tx: 80 00 04
+    # pldmtool: Rx: 00 00 04 00 1d 00 00 00 00 00 00 80
+
+    ${pldm_output}=  Pldmtool  ${PLDM_GET_PLDM_TYPES_RAW_CMD}
+    Should Contain  ${pldm_output}  ${PLDM_GET_PLDM_TYPES_RAW_CMD_OUTPUT}
+
+
+Verify Verbose Flag For PLDM Raw Commands With Verbose Flag
+    [Documentation]  Verify verbose flag for PLDM raw commands with verbose flag,
+    [Tags]  Verify_Verbose_Flag_For_PLDM_Raw_Commands_With_Verbose_Flag
+
+    # Example output format:
+    # pldmtool raw -d 0x80 0x00 0x04 -v
+    # pldmtool: Tx: 80 00 04
+    # pldmtool: Rx: 00 00 04 00 1d 00 00 00 00 00 00 80
+
+    ${pldm_output}=  Pldmtool  ${PLDM_GET_PLDM_TYPES_RAW_CMD} -v
+    Should Contain  ${pldm_output}  ${PLDM_GET_PLDM_TYPES_RAW_CMD_OUTPUT}
 
 
 *** keywords ***
