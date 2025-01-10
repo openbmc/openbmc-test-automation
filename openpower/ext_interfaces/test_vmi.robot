@@ -34,6 +34,12 @@ ${test_netmask}           255.255.252.0
 &{ENABLE_SLAAC}           StatelessAddressAutoConfig=&{SLAAC_ENABLED}
 &{DISABLE_SLAAC}          StatelessAddressAutoConfig=&{SLAAC_DISABLED}
 
+&{DHCPv6_ENABLED}         OperatingMode=Enabled
+&{DHCPv6_DISABLED}        OperatingMode=Disabled
+
+&{ENABLE_DHCPv6}          DHCPv6=&{DHCPv6_ENABLED}
+&{DISABLE_DHCPv6}         DHCPv6=&{DHCPv6_DISABLED}
+
 ${default}                0.0.0.0
 ${default_ipv6addr}       ::
 
@@ -550,6 +556,23 @@ Disable VMI DHCPv4 When SLAAC Is Enabled And Verify
     Verify VMI Network Interface Details  ${default}  Static  ${default}  ${default}
 
 
+Enable VMI SLAAC When DHCPv6 Is Enabled And Verify
+    [Documentation]  Enable VMI SLAACv6 when VMI DHCPv6 is
+    ...  enabled and check IPv6 gets Slaac address
+    ...  and this works on the setup where router
+    ...  advertise network prefix.
+    [Tags]  Enable_VMI_SLAAC_When_DHCPv6_Is_Enabled_And_Verify
+
+    Set VMI IPv6 Origin  Enabled
+
+    # Enable SLAAC and check whether IPv6 origin is set to SLAAC.
+    Set VMI SLAACv6 Origin    ${True}
+
+    # Check origin is set to slaac and address are getting displayed.
+    ${vmi_ipv6addr}=  Verify VMI IPv6 Address  SLAAC
+    Should Not Be Equal  ${vmi_ipv6addr["Address"]}  ${default_ipv6addr}    
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -747,3 +770,26 @@ Verify VMI IPv6 Address
     Should Not Be Empty  ${vmi_ipv6_config["Address"]}
     Should Be Equal As Strings   ${vmi_ipv6_config["AddressOrigin"]}  ${ipv6_origin}
     RETURN  &{vmi_ipv6_config}
+
+
+Set VMI IPv6 Origin
+    [Documentation]  Set VMI IPv6 origin.
+    [Arguments]  ${dhcpv6_operatingmode}=${Disabled}  ${valid_status_code}=${HTTP_ACCEPTED}
+    ...  ${interface}=${ethernet_interface}
+
+    # Description of argument(s):
+    # dhcpv6_operatingmode    True if user wants to enable DHCPv6.
+    # ...                     Default is Static, hence value is set to Disabled.
+    # valid_status_code       Expected valid status code from PATCH request. Default is HTTP_OK.
+    # interface               VMI interface (eg. eth0 or eth1).
+
+    ${data}=  Set Variable If  '${dhcpv6_operatingmode}' == 'Disabled'  ${DISABLE_DHCPv6}  ${ENABLE_DHCPv6}
+    ${resp}=  Redfish.Patch
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+    ...  body=${data}  valid_status_codes=[${valid_status_code}]
+
+    Sleep  ${wait_time}
+    Return From Keyword If  ${valid_status_code} != ${HTTP_ACCEPTED}
+    ${resp}=  Redfish.Get
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+    Should Be Equal  ${resp.dict["DHCPv6"]["OperatingMode"]}  ${dhcpv6_operatingmode}
