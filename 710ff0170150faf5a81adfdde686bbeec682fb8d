@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59522e60_93ef2051",
+        "filename": "pldm/test_pldm_base.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-01-10T13:45:50Z",
+      "side": 1,
+      "message": "Please remove the comment #",
+      "revId": "710ff0170150faf5a81adfdde686bbeec682fb8d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
