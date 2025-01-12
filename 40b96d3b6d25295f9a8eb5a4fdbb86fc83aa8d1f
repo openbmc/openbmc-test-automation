@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2d0f12c_0dfbb215",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001842
+      },
+      "writtenOn": "2025-01-12T17:49:21Z",
+      "side": 1,
+      "message": "If nobody is looking at this data over the runs then I am okay to disable by default, but if it\u0027s being captured in CI it might be useful to go back later and see when/if a perf regression was added.",
+      "revId": "40b96d3b6d25295f9a8eb5a4fdbb86fc83aa8d1f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
