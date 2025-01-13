@@ -58,7 +58,8 @@ OPENBMC:
             - "grep -r . /sys/class/hwmon/* >/tmp/BMC_hwmon.txt"
             - "top -n 1 -b >/tmp/BMC_proc_list.txt"
             - "ls -Al /proc/*/fd/ >/tmp/BMC_proc_fd_active_list.txt"
-            - "journalctl --no-pager >/tmp/BMC_journalctl_nopager.txt"
+            - "journalctl -o short-precise
+              >/tmp/BMC_journalctl_short_precise.txt"
             - "journalctl -o json-pretty >/tmp/BMC_journalctl_pretty.json"
             - "dmesg >/tmp/BMC_dmesg.txt"
             - "cat /proc/cpuinfo >/tmp/BMC_procinfo.txt"
