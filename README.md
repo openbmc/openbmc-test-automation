@@ -56,7 +56,7 @@ REST base packages:
     $ pip install -U robotframework-httplibrary
 ```
 
-Python redfish library packages: For more detailed intstructions see
+Python redfish library packages: For more detailed instructions see
 [python-redfish-library](https://github.com/DMTF/python-redfish-library)
 
 ```
@@ -102,6 +102,8 @@ These documents contain details on developing OpenBMC test code and debugging.
 - [CONTRIBUTING.md](CONTRIBUTING.md): Coding guidelines.
 - [Code Check Tools](https://github.com/openbmc/openbmc-test-automation/blob/master/docs/code_standards_check.md):
   To check common code misspellings, syntax and standard checks.
+- [Redfish Coding Guidelines](https://github.com/openbmc/openbmc-test-automation/blob/master/docs/redfish_coding_guidelines.md):
+  Refer for Redfish coding guidelines.
 - [REST-cheatsheet.md](https://github.com/openbmc/docs/blob/master/REST-cheatsheet.md):
   Quick reference for some common curl commands required for legacy REST
   testing.
@@ -109,17 +111,23 @@ These documents contain details on developing OpenBMC test code and debugging.
   Quick reference for some common curl commands required for redfish testing.
 - [README.md](https://github.com/openbmc/webui-vue/blob/master/README.md): Web
   UI setup reference.
+- [Redfish Request Via mTLS](https://github.com/openbmc/openbmc-test-automation/blob/master/docs/redfish_request_via_mTLS.md):
+  Reference for Redfish Request Via mTLS .
 - [Corporate CLA and Individual CLA](https://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#submitting-changes-via-gerrit-server):
   Submitting changes via Gerrit server
 
 ## OpenBMC Test Documentation
 
+- [OpenBMC Test Architecture](https://github.com/openbmc/openbmc-test-automation/blob/master/docs/openbmc_test_architecture.md):
+  Reference for OpenBMC Test Architecture.
 - [Tools](https://github.com/openbmc/openbmc-test-automation/blob/master/docs/openbmc_test_tools.md):
   Reference information for helper tools.
 - [Code Update](https://github.com/openbmc/openbmc-test-automation/blob/master/docs/code_update.md):
   Currently supported BMC and PNOR update.
 - [Certificate Generate](https://github.com/openbmc/openbmc-test-automation/blob/master/docs/certificate_generate.md):
   Steps to create and install CA signed certificate.
+- [Boot Test](https://github.com/openbmc/openbmc-test-automation/blob/master/docs/boot_test.md):
+  Boot test for OpenBMC.
 
 ## Supported Systems Architecture
 
@@ -152,6 +160,8 @@ To verify the installation setup is completed and ready to execute.
 There are several sub-directories within the openbmc-test-automation base which
 contain test suites, tools, templates, etc. These sub-directories are classified
 as follows:
+
+`docs/`: Contains the documentation related to OpenBMC.
 
 `redfish/`: Contains the general test cases for OpenBMC stack functional
 verification.
@@ -228,6 +238,8 @@ packages which will help to invoke tests through tox (Note that tox version
   $ export OPENBMC_USERNAME=<openbmc username>
   $ export OPENBMC_PASSWORD=<openbmc password>
   $ export IPMI_COMMAND=<Dbus/External>
+  $ export REST_USERNAME=<REST interface username>
+  $ export REST_PASSWORD=<REST interface password>
   ```
 
   or
