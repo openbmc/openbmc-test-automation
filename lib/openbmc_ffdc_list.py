@@ -47,8 +47,8 @@ FFDC_BMC_FILE = {
         "BMC_proc_fd_active_list.txt": (
             "ls -Al /proc/*/fd/ >/tmp/BMC_proc_fd_active_list.txt 2>&1"
         ),
-        "BMC_journalctl_nopager.txt": (
-            "journalctl --no-pager >/tmp/BMC_journalctl_nopager.txt 2>&1"
+        "BMC_journalctl.txt": (
+            "journalctl -o short-precise >/tmp/BMC_journalctl.txt 2>&1"
         ),
         "BMC_journalctl_pretty.json": (
             "journalctl -o json-pretty >/tmp/BMC_journalctl_pretty.json 2>&1"
