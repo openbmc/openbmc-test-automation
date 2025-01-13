@@ -16,6 +16,24 @@
       "message": "As you are checking the Static ones are not present, it will be better if you mention the same in comment like below\n\u0027Check whether added NTP server is not populated and NetworkSuppliedServers has only DHCP NTP server list.\u0027",
       "revId": "eb151495cd9f4da6f77b4160b8ab5bc440f62904",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf94d919_d73319f4",
+        "filename": "redfish/managers/test_bmc_network_protocol.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-01-13T06:02:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e6e869b_e8005b6f",
+      "revId": "eb151495cd9f4da6f77b4160b8ab5bc440f62904",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
