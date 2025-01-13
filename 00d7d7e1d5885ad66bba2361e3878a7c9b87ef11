@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f08d071a_e5d34259",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-01-13T10:32:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc29e6e8_30850ba6",
+      "range": {
+        "startLine": 560,
+        "startChar": 0,
+        "endLine": 563,
+        "endChar": 34
+      },
+      "revId": "00d7d7e1d5885ad66bba2361e3878a7c9b87ef11",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e0d5646_a12ad391",
@@ -60,6 +84,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "08479a52_ee1ac3bf",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-01-13T10:32:55Z",
+      "side": 1,
+      "message": "As discussed, I have prefix length verification part.",
+      "parentUuid": "6e0d5646_a12ad391",
+      "revId": "00d7d7e1d5885ad66bba2361e3878a7c9b87ef11",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d7dd2ad_bf9a0f46",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
         "patchSetId": 4
@@ -71,6 +113,24 @@
       "writtenOn": "2025-01-13T05:43:32Z",
       "side": 1,
       "message": "You can change the keyword name as\nSet VMI DHCPv6 Property and Verify",
+      "revId": "00d7d7e1d5885ad66bba2361e3878a7c9b87ef11",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c366577_f9e9c7c3",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-01-13T10:32:55Z",
+      "side": 1,
+      "message": "I keep it same keyword as i have not added any verification part inside this keyword",
+      "parentUuid": "5d7dd2ad_bf9a0f46",
       "revId": "00d7d7e1d5885ad66bba2361e3878a7c9b87ef11",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
