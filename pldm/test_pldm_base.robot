@@ -108,9 +108,9 @@ Verify Verbose Flag For PLDM Subsystem Commands
     Should Contain  ${pldm_output}  pldmtool: Rx:
 
 
-Verify Verbose Flag For PLDM Raw Commands
-    [Documentation]  Verify verbose flag for PLDM raw commands.
-    [Tags]  Verify_Verbose_Flag_For_PLDM_Raw_Commands
+Verify Response For PLDM Raw Commands
+    [Documentation]  Verify response for PLDM raw commands.
+    [Tags]  Verify_Response_For_PLDM_Raw_Commands
 
     # Example output format:
     # pldmtool raw -d 0x80 0x00 0x04
@@ -121,9 +121,9 @@ Verify Verbose Flag For PLDM Raw Commands
     Should Contain  ${pldm_output}  ${PLDM_GET_PLDM_TYPES_RAW_CMD_OUTPUT}
 
 
-Verify Verbose Flag For PLDM Raw Commands With Verbose Flag
-    [Documentation]  Verify verbose flag for PLDM raw commands with verbose flag,
-    [Tags]  Verify_Verbose_Flag_For_PLDM_Raw_Commands_With_Verbose_Flag
+Verify Verbose Flag For PLDM Raw Command
+    [Documentation]  Verify PLDM raw command with verbose flag,
+    [Tags]  Verify_Verbose_Flag_For_PLDM_Raw_Command
 
     # Example output format:
     # pldmtool raw -d 0x80 0x00 0x04 -v
@@ -132,6 +132,19 @@ Verify Verbose Flag For PLDM Raw Commands With Verbose Flag
 
     ${pldm_output}=  Pldmtool  ${PLDM_GET_PLDM_TYPES_RAW_CMD} -v
     Should Contain  ${pldm_output}  ${PLDM_GET_PLDM_TYPES_RAW_CMD_OUTPUT}
+
+
+Verify Verbose Flag For Incorrect PLDM Raw Command
+    [Documentation]  Verify incorrect PLDM raw command with verbose flag,
+    [Tags]  Verify_Verbose_Flag_For_Incorrect_PLDM_Raw_Command
+
+    # Example output format:
+    # pldmtool raw -d 0x80 0x00 0x00 -v
+    # pldmtool: Tx: 80 00 04
+    # pldmtool: Rx: 00 00 00 05
+
+    ${pldm_output}=  Pldmtool  ${PLDM_RAW_CMD_INVALID} -v
+    Should Contain  ${pldm_output}  ${PLDM_RAW_CMD_INVALID_OUTPUT}
 
 
 *** keywords ***
