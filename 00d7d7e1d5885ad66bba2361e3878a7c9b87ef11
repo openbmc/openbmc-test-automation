@@ -56,6 +56,23 @@
       "message": "Verify prefix length\nVerify host part of the slaac address\nverify route",
       "revId": "00d7d7e1d5885ad66bba2361e3878a7c9b87ef11",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d7dd2ad_bf9a0f46",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-01-13T05:43:32Z",
+      "side": 1,
+      "message": "You can change the keyword name as\nSet VMI DHCPv6 Property and Verify",
+      "revId": "00d7d7e1d5885ad66bba2361e3878a7c9b87ef11",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
