@@ -22,6 +22,30 @@
       },
       "revId": "374a49b61c27f7d107d82f4277bd9779b50c5ebc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e1f338b_ef555149",
+        "filename": "ffdc/ffdc_config.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-01-14T08:12:36Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "95db4d6e_a2e0a334",
+      "range": {
+        "startLine": 62,
+        "startChar": 20,
+        "endLine": 62,
+        "endChar": 52
+      },
+      "revId": "374a49b61c27f7d107d82f4277bd9779b50c5ebc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
