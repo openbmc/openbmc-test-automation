@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37917072_0b6b7add",
+        "filename": "redfish/managers/test_bmc_network_protocol.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-01-15T05:46:12Z",
+      "side": 1,
+      "message": "line #113 to # 115 you can use the keyword which is already written for this in \n/redfish/managers/test_managers_bmc_time.robot\nCall this \"Verify NTP Servers Are Populated\" keyword in lib \u0026 use it here",
+      "revId": "be7c41c91492276198c53325a05e1dafb052b4dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
