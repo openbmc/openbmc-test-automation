@@ -574,6 +574,19 @@ Enable VMI SLAAC When DHCPv6 Is Enabled And Verify
     Should Be Equal  ${vmi_ipv6addr["PrefixLength"]}  ${prefix_length}
 
 
+Disable VMI DHCPv6 Property And Verify
+    [Documentation]  Disable VMI DHCPv6 property and verify IPv6 address origin is set to
+    ...  static and DHCPv6 address is erased.
+    [Tags]  Disable_VMI_DHCPv6_And_Verify
+    [Setup]  Set VMI DHCPv6 Property  Enabled
+
+    Set VMI DHCPv6 Property  Disabled
+
+    # Verify IPv6 address origin is set to static and DHCPv6 address is erased.
+    ${vmi_ipv6addr}=  Verify VMI IPv6 Address  Static
+    Should Be Equal  ${vmi_ipv6addr["Address"]}  ${default_ipv6addr}
+
+
 *** Keywords ***
 
 Suite Setup Execution
