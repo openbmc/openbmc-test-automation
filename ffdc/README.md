@@ -10,6 +10,9 @@ Options:
   -r, --remote TEXT     Hostname/IP of the remote host
   -u, --username TEXT   Username of the remote host.
   -p, --password TEXT   Password of the remote host.
+  -port_ssh INTEGER     SSH port value.  [default: 22]
+  -port_https INTEGER   HTTPS port value.  [default: 443]
+  -port_ipmi INTEGER    IPMI port value.  [default: 623]
   -c, --config TEXT     YAML Configuration file for log collection.  [default:
                         <local path>/openbmc-test-automation/ffdc/ffdc_config.yaml]
   -l, --location TEXT   Location to save logs  [default: /tmp]
