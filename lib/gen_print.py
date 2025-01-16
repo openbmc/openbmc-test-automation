@@ -226,9 +226,7 @@ def get_arg_name(var, arg_num=1, stack_frame_ix=1):
     local_debug = int(os.environ.get("GET_ARG_NAME_DEBUG", 0))
     # In addition to GET_ARG_NAME_DEBUG, the user can set environment variable "GET_ARG_NAME_SHOW_SOURCE" to
     # have this function include source code in the debug output.
-    local_debug_show_source = int(
-        os.environ.get("GET_ARG_NAME_SHOW_SOURCE", 0)
-    )
+    local_debug_show_source = int(os.environ.get("GET_ARG_NAME_SHOW_SOURCE", 0))
 
     if stack_frame_ix < 1:
         print_error(
@@ -416,9 +414,7 @@ def get_arg_name(var, arg_num=1, stack_frame_ix=1):
         lvalues[ix] = lvalue
         ix += 1
     lvalue_prefix_regex = "(.*=[ ]+)?"
-    called_func_name_regex = (
-        lvalue_prefix_regex + func_name_regex + "[ ]*\\(.*"
-    )
+    called_func_name_regex = lvalue_prefix_regex + func_name_regex + "[ ]*\\(.*"
     called_func_name = re.sub(called_func_name_regex, "\\4", composite_line)
     arg_list_etc = "(" + re.sub(pre_args_regex, "", composite_line)
     if local_debug:
@@ -1116,9 +1112,7 @@ def sprint_varx(
             elif fmt & octal():
                 value_format = "0o%016o"
             elif fmt & binary():
-                num_digits, remainder = divmod(
-                    max(bit_length(var_value), 1), 8
-                )
+                num_digits, remainder = divmod(max(bit_length(var_value), 1), 8)
                 num_digits *= 8
                 if remainder:
                     num_digits += 8
@@ -1375,9 +1369,7 @@ def sprint_func_line(stack_frame, style=None, max_width=160):
         func_and_args = " ".join(sys.argv)
     else:
         # Get the program arguments.
-        (args, varargs, keywords, locals) = inspect.getargvalues(
-            stack_frame[0]
-        )
+        (args, varargs, keywords, locals) = inspect.getargvalues(stack_frame[0])
 
         args_list = []
         for arg_name in filter(None, args + [varargs, keywords]):
@@ -1684,7 +1676,15 @@ def sprint_issuing(cmd_buf, test_mode=0):
     if type(cmd_buf) is list:
         # Assume this is a robot command in the form of a list.
         cmd_buf = "  ".join([str(element) for element in cmd_buf])
-    buffer += "Issuing: " + cmd_buf + "\n"
+
+    passwd_value = BuiltIn().get_variable_value("${OPENBMC_PASSWORD}", "")
+    # adds overhead checking for password masking.
+    if passwd_value != "" and passwd_value in cmd_buf:
+        buffer += (
+            "Issuing: " + cmd_buf.replace(passwd_value, "**********") + "\n"
+        )
+    else:
+        buffer += "Issuing: " + cmd_buf + "\n"
 
     return buffer
 
@@ -1857,9 +1857,7 @@ def get_var_value(var_value=None, default=1, var_name=None):
         var_name = get_arg_name(None, 1, 2)
 
     if robot_env:
-        var_value = BuiltIn().get_variable_value(
-            "${" + var_name + "}", default
-        )
+        var_value = BuiltIn().get_variable_value("${" + var_name + "}", default)
     else:
         var_value = getattr(__builtin__, var_name, default)
 

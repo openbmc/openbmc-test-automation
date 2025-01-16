@@ -6,6 +6,7 @@ BMC redfish utility functions.
 
 import json
 import re
+import sys
 from json.decoder import JSONDecodeError
 
 import gen_print as gp
@@ -23,7 +24,13 @@ class bmc_redfish_utils(object):
         """
         # Obtain a reference to the global redfish object.
         self.__inited__ = False
-        self._redfish_ = BuiltIn().get_library_instance("redfish")
+        try:
+            self._redfish_ = BuiltIn().get_library_instance("redfish")
+        except RuntimeError:
+            BuiltIn().log_to_console(
+                "get_library_instance: No library redfish instance found"
+            )
+            sys.exit("RuntimeError")
 
         if MTLS_ENABLED == "True":
             self.__inited__ = True
