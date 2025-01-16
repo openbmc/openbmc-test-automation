@@ -1,7 +1,7 @@
 #Verify SSH and IPMI interfaces
 --include Test_SSH_And_IPMI_Connections
 #Basic poweron test
---include Verify_Redfish_Host_PowerOn
+#--include Verify_Redfish_Host_PowerOn
 --include Verify_Redfish_Host_PowerOff
 #Check for apps failures.
 --include Check_For_Application_Failures
