@@ -6,7 +6,7 @@ mechanism to test your system to run variety of supported boot sequences.
 **Boot test sequence example:**
 
 ```
-robot -v OPENBMC_HOST:xx.xx.xx.xx  -v 'boot_stack:<boot1>:<boot2>:<bootn>:' extended/obmc_boot_test.robot
+robot -v OPENBMC_HOST:xx.xx.xx.xx -v OPENBMC_PASSWORD:xxx -v 'boot_stack:<boot1>:<boot2>:<bootn>:' extended/obmc_boot_test.robot
 ```
 
 Where <bootx> is the supported boot type listed in the
@@ -21,12 +21,16 @@ robot -v OPENBMC_HOST:xx.xx.xx.xx  -v 'boot_stack:Redfish Power On:Redfish Power
 and it will give the following on the console the boot test report:
 
 ```
+
+
 Boot Type                                Total Pass Fail
 ---------------------------------------- ----- ---- ----
 Redfish Power On                             1    1    0
 Redfish Power On (mfg)                       0    0    0
 IPMI Power On                                0    0    0
 IPMI Power On (mfg)                          0    0    0
+Istep Power On                               0    0    0
+Istep Power On (mfg)                         0    0    0
 Redfish Power Off                            1    1    0
 Redfish Power Off (mfg)                      0    0    0
 Redfish Hard Power Off                       0    0    0
@@ -73,12 +77,16 @@ IPMI Power Reset                             0    0    0
 IPMI Power Reset (mfg)                       0    0    0
 Auto Reboot                                  0    0    0
 Auto Reboot (mfg)                            0    0    0
+Host initd Reset                             0    0    0
+Host initd Reset (mfg)                       0    0    0
 Host Reboot                                  0    0    0
 Host Reboot (mfg)                            0    0    0
 RF SYS GracefulRestart                       0    0    0
 RF SYS GracefulRestart (mfg)                 0    0    0
 RF SYS ForceRestart                          0    0    0
 RF SYS ForceRestart (mfg)                    0    0    0
+Tool Initd MP Reboot                         0    0    0
+Tool Initd MP Reboot (mfg)                   0    0    0
 OPAL TI                                      0    0    0
 OPAL TI (mfg)                                0    0    0
 ========================================================
