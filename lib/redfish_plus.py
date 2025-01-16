@@ -120,7 +120,14 @@ class redfish_plus(HttpClient):
         max_retry = kwargs.pop("max_retry", 10)
         self._max_retry = max_retry
         valid_status_codes = kwargs.pop("valid_status_codes", [200])
-        response = func(*args, **kwargs)
+
+        try:
+            response = func(*args, **kwargs)
+        except Exception as e:
+            error_response = type(e).__name__ + " from redfish_plus class"
+            BuiltIn().log_to_console(error_response)
+            return
+
         valid_http_status_code(response.status, valid_status_codes)
         return response
 

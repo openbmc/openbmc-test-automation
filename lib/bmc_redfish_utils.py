@@ -23,7 +23,14 @@ class bmc_redfish_utils(object):
         """
         # Obtain a reference to the global redfish object.
         self.__inited__ = False
-        self._redfish_ = BuiltIn().get_library_instance("redfish")
+        try:
+            self._redfish_ = BuiltIn().get_library_instance("redfish")
+        except RuntimeError as e:
+            BuiltIn().log_to_console(
+                "get_library_instance: No active redfish instance found."
+            )
+            # Handling init exception at worse to raise on error.
+            raise e
 
         if MTLS_ENABLED == "True":
             self.__inited__ = True
