@@ -56,6 +56,14 @@ class bmc_redfish(redfish_plus):
                 gp.lprint_var(except_type)
                 gp.lprint_varx("except_value", str(except_value))
                 raise (get_exception)
+        except AttributeError as e:
+            BuiltIn().log_to_console(
+                "AttributeError: Error response from server"
+            )
+        except Exception as e:
+            error_response = type(e).__name__
+            BuiltIn().log_to_console(error_response)
+
         BuiltIn().set_global_variable("${REDFISH_SUPPORTED}", self.__inited__)
         BuiltIn().set_global_variable("${REDFISH_REST_SUPPORTED}", True)
 
