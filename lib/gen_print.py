@@ -27,6 +27,7 @@ from wrap_utils import *
 try:
     robot_env = 1
     from robot.libraries.BuiltIn import BuiltIn
+    from robot.libraries.BuiltIn import RobotNotRunningError
     from robot.utils import DotDict, NormalizedDict
 
     # Having access to the robot libraries alone does not indicate that we are in a robot environment.  The
@@ -1684,7 +1685,22 @@ def sprint_issuing(cmd_buf, test_mode=0):
     if type(cmd_buf) is list:
         # Assume this is a robot command in the form of a list.
         cmd_buf = "  ".join([str(element) for element in cmd_buf])
-    buffer += "Issuing: " + cmd_buf + "\n"
+
+    passwd_value = ""
+    try:
+        passwd_value = os.environ.get(
+            "OPENBMC_PASSWORD", ""
+        ) or BuiltIn().get_variable_value("${OPENBMC_PASSWORD}", default="")
+    except RobotNotRunningError:
+        pass
+
+    # adds overhead checking for password masking.
+    if passwd_value != "" and passwd_value in cmd_buf:
+        buffer += (
+            "Issuing: " + cmd_buf.replace(passwd_value, "**********") + "\n"
+        )
+    else:
+        buffer += "Issuing: " + cmd_buf + "\n"
 
     return buffer
 
