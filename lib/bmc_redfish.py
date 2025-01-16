@@ -56,6 +56,14 @@ class bmc_redfish(redfish_plus):
                 gp.lprint_var(except_type)
                 gp.lprint_varx("except_value", str(except_value))
                 raise (get_exception)
+        except AttributeError as e:
+            BuiltIn().log_to_console(
+                "AttributeError: Error response from server"
+            )
+        except Exception as e:
+            error_response = type(e).__name__ + " from bmc_redfish class"
+            BuiltIn().log_to_console(error_response)
+
         BuiltIn().set_global_variable("${REDFISH_SUPPORTED}", self.__inited__)
         BuiltIn().set_global_variable("${REDFISH_REST_SUPPORTED}", True)
 
@@ -351,9 +359,7 @@ class bmc_redfish(redfish_plus):
         """
 
         member_list = []
-        self._rest_response_ = self.get(
-            resource_path, valid_status_codes=[200]
-        )
+        self._rest_response_ = self.get(resource_path, valid_status_codes=[200])
 
         try:
             for member in self._rest_response_.dict["Members"]:
