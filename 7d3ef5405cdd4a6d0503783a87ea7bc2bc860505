@@ -33,6 +33,24 @@
       "message": "You need here also \n\nhttps://github.com/openbmc/openbmc-test-automation/blob/master/lib/openbmc_ffdc_list.py#L50\n\nThis is the robot FFDC ..\n\nThe other YAML is the stand-alone FFDC..\n\nSo we need the same changes on both",
       "revId": "7d3ef5405cdd4a6d0503783a87ea7bc2bc860505",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "878f029b_1bd752e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-01-16T05:10:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eaad769_9f77a322",
+      "revId": "7d3ef5405cdd4a6d0503783a87ea7bc2bc860505",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
