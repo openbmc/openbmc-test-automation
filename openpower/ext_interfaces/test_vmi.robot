@@ -587,6 +587,21 @@ Disable VMI DHCPv6 Property And Verify
     Should Be Equal  ${vmi_ipv6addr["Address"]}  ${default_ipv6addr}
 
 
+Enable VMI SLAAC When DHCPv4 Is Enabled And Verify
+    [Documentation]  Enable VMI SLAACv6 when VMI DHCPv4 is enabled and verify that it is
+    ...  not having any imapact on DHCPv4 settings and IPv6 origin is set to SLAAC and this
+    ...  works on the setup where router advertise network prefix.
+    [Tags]  Enable_VMI_SLAAC_When_DHCPv4_Is_Enabled_And_Verify
+    [Setup]  Set VMI IPv4 Origin  ${True}
+
+    # Enable Autoconfig address and check whether IPv6 address origin is set to SLAAC.
+    Set VMI SLAACv6 Origin  ${True}
+    Verify VMI IPv6 Address  SLAAC
+
+    # Check there is no impact on IPv4 settings, IPv4 address origin should be DHCP.
+    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
+
+
 *** Keywords ***
 
 Suite Setup Execution
