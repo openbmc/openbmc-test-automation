@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a039da1_5b996422",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-01-16T03:23:17Z",
+      "side": 1,
+      "message": "Disable VMI DHCPv6 Property And Verify\nChange in documentation as well",
+      "range": {
+        "startLine": 577,
+        "startChar": 0,
+        "endLine": 577,
+        "endChar": 29
+      },
+      "revId": "80b971a67716b06aa6359e6cf598fbabab6318c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "566d4391_175255e5",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-01-16T03:23:17Z",
+      "side": 1,
+      "message": "Verify IPv6 address origin is set from DHCP to static and DHCPv6 address is erased.",
+      "range": {
+        "startLine": 585,
+        "startChar": 5,
+        "endLine": 585,
+        "endChar": 79
+      },
+      "revId": "80b971a67716b06aa6359e6cf598fbabab6318c2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
