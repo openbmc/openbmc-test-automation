@@ -24,7 +24,7 @@ def write_issues(response, csv_out):
         raise Exception(response.status_code)
     for issue in response.json():
         if "pull_request" not in issue:
-            labels = ", ".join([lable["name"] for lable in issue["labels"]])
+            labels = ", ".join([label["name"] for label in issue["labels"]])
 
             # Below lines to overcome "TypeError: 'NoneType' object has
             # no attribute '__getitem__'"

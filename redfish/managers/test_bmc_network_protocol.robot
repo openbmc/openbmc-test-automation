@@ -102,7 +102,7 @@ Verify Set DateTime With NTP Enabled
 Verify NTP Server Is Not Populated In NetworkSuppliedServers
     [Documentation]  Patch NTP server and verify NTP servers is not populated
     ...  in NetworkSuppliedServers.
-    [Tags]  Verify_NTP_Server_Is_Not_Populated_In_NetworkSupppliedServers
+    [Tags]  Verify_NTP_Server_Is_Not_Populated_In_NetworkSuppliedServers
     [Setup]  Set NTP state  ${True}
 
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}

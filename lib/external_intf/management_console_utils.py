@@ -25,7 +25,7 @@ def Check_bmc_record_exists(bmc_records, bmc_ip):
     Parse the BMC records to check for passed input.
 
     Description of arguments:
-    bmc_records            Contains the list of discoverd BMC records.
+    bmc_records            Contains the list of discovered BMC records.
     bmc_ip                 BMC ip address.
     """
 
@@ -144,7 +144,7 @@ def get_bmc_records(service_type, bmc_records):
 
     Description of arguments:
     service_type     Service type (e.g. RESTService, RedfishService).
-    bmc_records      Contains the list of discoverd BMC records.
+    bmc_records      Contains the list of discovered BMC records.
 
     This function will return this variable i.e.
     bmc_inv_list in dictionary form as mention below.

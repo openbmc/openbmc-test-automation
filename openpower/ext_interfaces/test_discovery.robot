@@ -112,7 +112,7 @@ Check Avahi Package
 
 
 Discover BMC With Service Type
-    [Documentation]  To get the discoverd BMC list.
+    [Documentation]  To get the discovered BMC list.
     [Arguments]  ${service_type}
 
     # Description of argument(s):
