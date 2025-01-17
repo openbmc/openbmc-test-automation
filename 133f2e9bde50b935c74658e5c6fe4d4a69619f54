@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f3eb8d9_62fc2a2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-01-17T04:19:39Z",
+      "side": 1,
+      "message": "Awaiting David Shaw testing result before merging it.",
+      "revId": "133f2e9bde50b935c74658e5c6fe4d4a69619f54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
