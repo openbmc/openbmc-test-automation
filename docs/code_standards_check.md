@@ -57,3 +57,22 @@ Example:
      Verify No BMC Dump And Application Failures In BMC
      Iam_different_here
 ```
+
+### 4. Black
+
+Project [Black](https://pypi.org/project/black/) is the Python code formatter.
+It requires Python 3.8+ to run.
+
+```
+    $ pip install black
+```
+
+Example:
+
+```
+    python -m black lib/utils.py
+
+    - To limit the line range use
+
+    python -m black -l 80 lib/utils.py
+```
