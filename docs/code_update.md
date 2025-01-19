@@ -4,7 +4,7 @@
 
 Currently supported BMC and PNOR update formats are UBI. For code update
 information, please refer to
-[code-update.md](https://github.com/openbmc/docs/blob/master/code-update/code-update.md)
+[code-update.md](https://github.com/openbmc/docs/blob/master/designs/code-update.md)
 
 - UBI Format
 
@@ -46,7 +46,7 @@ information, please refer to
 
 Currently supported BMC and PNOR update formats are UBI and non-UBI. For code
 update information, please refer to
-[code-update.md](https://github.com/openbmc/docs/blob/master/code-update/code-update.md)
+[code-update.md](https://github.com/openbmc/docs/blob/master/designs/code-update.md)
 
 - UBI Format
 
