@@ -89,10 +89,6 @@ def GetBIOSEnumAttributeOptionalValues(attr_val_table_data):
                     ]
                     value = re.search(r"\((.*?)\)", attr_values).group(1)
                     if value:
-                        # Example:
-                        # value = '"Power Off"'
-                        if " " in value:
-                            value = '"' + value + '"'
                         value_list.append(value)
                     else:
                         value_list.append("")
