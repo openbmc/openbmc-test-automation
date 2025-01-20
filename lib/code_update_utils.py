@@ -166,10 +166,7 @@ def get_latest_file(dir_path):
     """
 
     stdout, stderr, rc = bsu.bmc_execute_command(
-        "cd "
-        + dir_path
-        + "; stat -c '%Y %n' * |"
-        + " sort -k1,1nr | head -n 1"
+        "cd " + dir_path + "; stat -c '%Y %n' * |" + " sort -k1,1nr | head -n 1"
     )
     return stdout.split(" ")[-1]
 

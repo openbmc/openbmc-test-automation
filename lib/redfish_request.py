@@ -59,9 +59,7 @@ class redfish_request(object):
         """
 
         logger.console(msg="", newline=True)
-        logger.info(
-            "Response : [%s]" % response.status_code, also_console=True
-        )
+        logger.info("Response : [%s]" % response.status_code, also_console=True)
         logger.console(msg="", newline=True)
 
     def request_login(self, headers, url, credential, timeout=10):
@@ -308,9 +306,7 @@ class redfish_request(object):
 
         return response
 
-    def request_delete(
-        self, headers, url, data=None, timeout=10, verify=False
-    ):
+    def request_delete(self, headers, url, data=None, timeout=10, verify=False):
         r"""
         Redfish delete request.
 

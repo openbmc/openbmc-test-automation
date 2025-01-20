@@ -466,9 +466,7 @@ class ffdc_collector:
         if protocol == "SCP":
             self.group_copy(self.ffdc_actions[target_type][sub_type])
         else:
-            self.collect_and_copy_ffdc(
-                self.ffdc_actions[target_type][sub_type]
-            )
+            self.collect_and_copy_ffdc(self.ffdc_actions[target_type][sub_type])
 
     def protocol_telnet(self, target_type, sub_type):
         r"""

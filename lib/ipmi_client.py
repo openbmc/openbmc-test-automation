@@ -150,9 +150,7 @@ def process_ipmi_user_options(command):
     command                         An IPMI command (e.g. "power status").
     """
 
-    ipmi_user_options = BuiltIn().get_variable_value(
-        "${IPMI_USER_OPTIONS}", ""
-    )
+    ipmi_user_options = BuiltIn().get_variable_value("${IPMI_USER_OPTIONS}", "")
     if ipmi_user_options == "":
         return command
     return ipmi_user_options + " " + command

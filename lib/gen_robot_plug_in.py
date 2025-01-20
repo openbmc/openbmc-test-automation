@@ -148,17 +148,12 @@ def rprocess_plug_in_packages(
         cmd_buf = sub_cmd_buf + " > " + temp_file_path + " 2>&1"
     else:
         cmd_buf = (
-            "set -o pipefail ; "
-            + sub_cmd_buf
-            + " 2>&1 | tee "
-            + temp_file_path
+            "set -o pipefail ; " + sub_cmd_buf + " 2>&1 | tee " + temp_file_path
         )
         if debug:
             gp.print_issuing(cmd_buf)
         else:
-            gp.print_timen(
-                "Processing " + call_point + " call point programs."
-            )
+            gp.print_timen("Processing " + call_point + " call point programs.")
 
     sub_proc = subprocess.Popen(cmd_buf, shell=True, executable="/bin/bash")
     sub_proc.communicate()

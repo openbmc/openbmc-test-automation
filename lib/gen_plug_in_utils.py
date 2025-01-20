@@ -168,9 +168,7 @@ def return_plug_vars(general=True, custom=True, plug_in_package_name=None):
     # Register password values to prevent printing them out.  Any plug var whose name ends in PASSWORD will
     # be registered.
     password_vals = {
-        k: v
-        for (k, v) in plug_var_dict.items()
-        if re.match(r".*_PASSWORD$", k)
+        k: v for (k, v) in plug_var_dict.items() if re.match(r".*_PASSWORD$", k)
     }.values()
     map(gp.register_passwords, password_vals)
 

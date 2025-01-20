@@ -446,9 +446,7 @@ def compare_states(state, match_state, match_type="and"):
                     return match
         else:
             try:
-                match = (
-                    re.match(match_state_value, str(state[key])) is not None
-                )
+                match = re.match(match_state_value, str(state[key])) is not None
             except KeyError:
                 match = False
             if match != default_match:

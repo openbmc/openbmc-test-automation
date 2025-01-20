@@ -104,9 +104,7 @@ if redfish_supported:
         delete_errlogs_cmd = "Redfish Purge Event Log"
         delete_bmcdump_cmd = "Redfish Delete All BMC Dumps"
         delete_sysdump_cmd = "Redfish Delete All System Dumps"
-        default_set_power_policy = (
-            "Redfish Set Power Restore Policy  AlwaysOff"
-        )
+        default_set_power_policy = "Redfish Set Power Restore Policy  AlwaysOff"
 else:
     default_power_on = "REST Power On"
     default_power_off = "REST Power Off"
@@ -303,9 +301,7 @@ def initial_plug_in_setup():
     BuiltIn().set_global_variable("${FFDC_DIR_PATH}", ffdc_dir_path)
     BuiltIn().set_global_variable("${STATUS_DIR_PATH}", status_dir_path)
     BuiltIn().set_global_variable("${BASE_TOOL_DIR_PATH}", base_tool_dir_path)
-    BuiltIn().set_global_variable(
-        "${FFDC_LIST_FILE_PATH}", ffdc_list_file_path
-    )
+    BuiltIn().set_global_variable("${FFDC_LIST_FILE_PATH}", ffdc_list_file_path)
     BuiltIn().set_global_variable(
         "${FFDC_REPORT_LIST_PATH}", ffdc_report_list_path
     )
@@ -313,9 +309,7 @@ def initial_plug_in_setup():
         "${FFDC_SUMMARY_LIST_PATH}", ffdc_summary_list_path
     )
 
-    BuiltIn().set_global_variable(
-        "${FFDC_DIR_PATH_STYLE}", ffdc_dir_path_style
-    )
+    BuiltIn().set_global_variable("${FFDC_DIR_PATH_STYLE}", ffdc_dir_path_style)
     BuiltIn().set_global_variable("${FFDC_CHECK}", ffdc_check)
 
     # For each program parameter, set the corresponding AUTOBOOT_ environment
@@ -370,9 +364,7 @@ def plug_in_setup():
     else:
         test_really_running = 0
 
-    BuiltIn().set_global_variable(
-        "${test_really_running}", test_really_running
-    )
+    BuiltIn().set_global_variable("${test_really_running}", test_really_running)
     BuiltIn().set_global_variable("${boot_type_desc}", next_boot)
     BuiltIn().set_global_variable("${boot_pass}", boot_pass)
     BuiltIn().set_global_variable("${boot_fail}", boot_fail)
@@ -405,9 +397,7 @@ def plug_in_setup():
         os.environ["AUTOBOOT_" + var_name] = str(var_value)
 
     if debug:
-        shell_rc, out_buf = gc.cmd_fnc_u(
-            "printenv | egrep AUTOBOOT_ | sort -u"
-        )
+        shell_rc, out_buf = gc.cmd_fnc_u("printenv | egrep AUTOBOOT_ | sort -u")
 
     BuiltIn().set_log_level(LOG_LEVEL)
 
@@ -1305,9 +1295,7 @@ def post_stack():
         BuiltIn().fail(message)
 
 
-def obmc_boot_test_py(
-    loc_boot_stack=None, loc_stack_mode=None, loc_quiet=None
-):
+def obmc_boot_test_py(loc_boot_stack=None, loc_stack_mode=None, loc_quiet=None):
     r"""
     Do main program processing.
     """

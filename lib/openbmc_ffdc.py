@@ -139,9 +139,7 @@ def set_ffdc_defaults(ffdc_dir_path=None, ffdc_prefix=None):
     FFDC_TIME = BuiltIn().run_keyword(*cmd_buf)
     BuiltIn().set_global_variable("${FFDC_TIME}", FFDC_TIME)
 
-    ffdc_dir_path_style = BuiltIn().get_variable_value(
-        "${ffdc_dir_path_style}"
-    )
+    ffdc_dir_path_style = BuiltIn().get_variable_value("${ffdc_dir_path_style}")
 
     if ffdc_dir_path is None:
         if ffdc_dir_path_style:
@@ -149,9 +147,7 @@ def set_ffdc_defaults(ffdc_dir_path=None, ffdc_prefix=None):
                 ffdc_dir_path = os.environ["FFDC_DIR_PATH"]
             except KeyError:
                 ffdc_dir_path = (
-                    os.path.dirname(
-                        BuiltIn().get_variable_value("${LOG_FILE}")
-                    )
+                    os.path.dirname(BuiltIn().get_variable_value("${LOG_FILE}"))
                     + "/"
                 )
         else:
@@ -160,9 +156,7 @@ def set_ffdc_defaults(ffdc_dir_path=None, ffdc_prefix=None):
                 FFDC_LOG_PATH = ""
             if FFDC_LOG_PATH == "":
                 FFDC_LOG_PATH = (
-                    os.path.dirname(
-                        BuiltIn().get_variable_value("${LOG_FILE}")
-                    )
+                    os.path.dirname(BuiltIn().get_variable_value("${LOG_FILE}"))
                     + "/"
                 )
             error_message = gv.valid_value(

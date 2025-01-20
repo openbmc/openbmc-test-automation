@@ -133,9 +133,8 @@ def login_ssh(login_args={}, max_login_attempts=5):
             except_type, except_value, except_traceback = sys.exc_info()
             gp.lprint_var(except_type)
             gp.lprint_varx("except_value", str(except_value))
-            if (
-                except_type is paramiko.ssh_exception.SSHException
-                and re.match(r"No existing session", str(except_value))
+            if except_type is paramiko.ssh_exception.SSHException and re.match(
+                r"No existing session", str(except_value)
             ):
                 continue
             else:

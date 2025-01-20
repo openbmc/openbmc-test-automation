@@ -48,9 +48,7 @@ def execute_process(num_process, keyword_name):
 
     # Append user-defined times process needed to execute.
     for _ix in range(int(num_process)):
-        task = Process(
-            target=execute_keyword, args=(keyword_name, return_dict)
-        )
+        task = Process(target=execute_keyword, args=(keyword_name, return_dict))
         process_list.append(task)
         task.start()
 

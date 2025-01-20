@@ -80,9 +80,7 @@ def set_power_policy_method():
             "${RESTORE_LAST_STATE}", "RESTORE_LAST_STATE"
         )
         BuiltIn().set_global_variable("${ALWAYS_POWER_ON}", "ALWAYS_POWER_ON")
-        BuiltIn().set_global_variable(
-            "${ALWAYS_POWER_OFF}", "ALWAYS_POWER_OFF"
-        )
+        BuiltIn().set_global_variable("${ALWAYS_POWER_OFF}", "ALWAYS_POWER_OFF")
 
     # Set global variables to control subsequent calls to this function.
     BuiltIn().set_global_variable(

@@ -154,9 +154,7 @@ def on_message(websocket_obj, message):
             qprint_timen("eSEL received over websocket interface.")
             websocket_obj.close()
         elif "Size" in message:
-            qprint_timen(
-                "Dump notification received over websocket interface."
-            )
+            qprint_timen("Dump notification received over websocket interface.")
             websocket_obj.close()
 
 

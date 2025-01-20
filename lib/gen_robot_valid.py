@@ -130,9 +130,7 @@ def customize_doc_string(doc_string):
 
 def valid_type(var_name, *args, **kwargs):
     var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
-    error_message = gv.valid_type(
-        var_value, *args, var_name=var_name, **kwargs
-    )
+    error_message = gv.valid_type(var_value, *args, var_name=var_name, **kwargs)
     process_error_message(error_message)
 
 
@@ -194,25 +192,19 @@ def valid_file_path(var_name, *args, **kwargs):
 
 def valid_path(var_name, *args, **kwargs):
     var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
-    error_message = gv.valid_path(
-        var_value, *args, var_name=var_name, **kwargs
-    )
+    error_message = gv.valid_path(var_value, *args, var_name=var_name, **kwargs)
     process_error_message(error_message)
 
 
 def valid_list(var_name, *args, **kwargs):
     var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
-    error_message = gv.valid_list(
-        var_value, *args, var_name=var_name, **kwargs
-    )
+    error_message = gv.valid_list(var_value, *args, var_name=var_name, **kwargs)
     process_error_message(error_message)
 
 
 def valid_dict(var_name, *args, **kwargs):
     var_value, args, kwargs = valid_init(var_name, *args, **kwargs)
-    error_message = gv.valid_dict(
-        var_value, *args, var_name=var_name, **kwargs
-    )
+    error_message = gv.valid_dict(var_value, *args, var_name=var_name, **kwargs)
     process_error_message(error_message)
 
 

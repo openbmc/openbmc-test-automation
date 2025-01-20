@@ -303,9 +303,7 @@ def create_robot_cmd_string(robot_file_path, *parms):
             robot_parm_list.append(p_string)
         ix += 1
 
-    robot_cmd_buf = (
-        "robot " + " ".join(robot_parm_list) + " " + robot_file_path
-    )
+    robot_cmd_buf = "robot " + " ".join(robot_parm_list) + " " + robot_file_path
 
     return robot_cmd_buf
 
@@ -443,9 +441,7 @@ def robot_cmd_fnc(
         init_robot_test_base_dir_path()
         ROBOT_TEST_BASE_DIR_PATH = getattr(module, "ROBOT_TEST_BASE_DIR_PATH")
 
-    ROBOT_TEST_RUNNING_FROM_SB = gm.get_mod_global(
-        "ROBOT_TEST_RUNNING_FROM_SB"
-    )
+    ROBOT_TEST_RUNNING_FROM_SB = gm.get_mod_global("ROBOT_TEST_RUNNING_FROM_SB")
 
     if robot_jail == "":
         if ROBOT_TEST_RUNNING_FROM_SB:

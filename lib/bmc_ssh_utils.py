@@ -133,13 +133,9 @@ def os_execute_command(
     if os_host == "":
         os_host = BuiltIn().get_variable_value("${OS_HOST}", default="")
     if os_username == "":
-        os_username = BuiltIn().get_variable_value(
-            "${OS_USERNAME}", default=""
-        )
+        os_username = BuiltIn().get_variable_value("${OS_USERNAME}", default="")
     if os_password == "":
-        os_password = BuiltIn().get_variable_value(
-            "${OS_PASSWORD}", default=""
-        )
+        os_password = BuiltIn().get_variable_value("${OS_PASSWORD}", default="")
 
     if not gv.valid_value(os_host):
         return "", "", 1
@@ -198,12 +194,8 @@ def xcat_execute_command(
 
     # Get global XCAT variable values.
     xcat_host = BuiltIn().get_variable_value("${XCAT_HOST}", default="")
-    xcat_username = BuiltIn().get_variable_value(
-        "${XCAT_USERNAME}", default=""
-    )
-    xcat_password = BuiltIn().get_variable_value(
-        "${XCAT_PASSWORD}", default=""
-    )
+    xcat_username = BuiltIn().get_variable_value("${XCAT_USERNAME}", default="")
+    xcat_password = BuiltIn().get_variable_value("${XCAT_PASSWORD}", default="")
     xcat_port = BuiltIn().get_variable_value("${XCAT_PORT}", default="22")
 
     if not gv.valid_value(xcat_host):

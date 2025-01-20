@@ -150,9 +150,7 @@ if platform_arch_type == "x86":
                 for x in state_tuple
                 if not (
                     x.startswith("xyz.openbmc_project.State.Boot.Progress")
-                    or x.startswith(
-                        "xyz.openbmc_project.State.OperatingSystem"
-                    )
+                    or x.startswith("xyz.openbmc_project.State.OperatingSystem")
                 )
             )
             VALID_BOOT_STATES_X86[state_name].add(state_tuple_new)

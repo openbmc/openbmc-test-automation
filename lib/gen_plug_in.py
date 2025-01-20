@@ -89,9 +89,7 @@ def validate_plug_in_package(plug_in_dir_path, mch_class="obmc"):
 
     if os.path.isabs(plug_in_dir_path):
         # plug_in_dir_path begins with a slash so it is an absolute path.
-        candidate_plug_in_dir_path = (
-            os.path.normpath(plug_in_dir_path) + os.sep
-        )
+        candidate_plug_in_dir_path = os.path.normpath(plug_in_dir_path) + os.sep
         if not os.path.isdir(candidate_plug_in_dir_path):
             gp.print_error_report(
                 'Plug-in directory path "'
@@ -162,9 +160,7 @@ def return_integrated_plug_ins(mch_class="obmc"):
             )
             integrated_file_path = integrated_plug_in_dir_path + "integrated"
             if os.path.exists(integrated_file_path):
-                plug_in_name = os.path.basename(
-                    os.path.dirname(candidate_path)
-                )
+                plug_in_name = os.path.basename(os.path.dirname(candidate_path))
                 if plug_in_name not in integrated_plug_ins_list:
                     # If this plug-in has not already been added to the list...
                     integrated_plug_ins_list.append(plug_in_name)

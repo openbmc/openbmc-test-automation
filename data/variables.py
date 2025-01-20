@@ -245,9 +245,7 @@ POWER_GRACEFUL_OFF = "GracefulShutdown"
 POWER_GRACEFUL_RESTART = "GracefulRestart"
 POWER_FORCE_OFF = "ForceOff"
 
-REDFISH_POWER = (
-    "Systems/" + REDFISH_SYSTEM_ID + "/Actions/ComputerSystem.Reset"
-)
+REDFISH_POWER = "Systems/" + REDFISH_SYSTEM_ID + "/Actions/ComputerSystem.Reset"
 REDFISH_POWER_URI = REDFISH_BASE_URI + REDFISH_POWER
 
 # rsyslog variables.
