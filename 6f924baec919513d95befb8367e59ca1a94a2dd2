@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04852bfa_272ca811",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-01-20T05:52:43Z",
+      "side": 1,
+      "message": "The CI infrastructure take care of this checks for every commits.. and tools changes from time to time based on the community recommendation.. \nThis is not needed in the documentation at this point. Thank you for the code",
+      "revId": "6f924baec919513d95befb8367e59ca1a94a2dd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
