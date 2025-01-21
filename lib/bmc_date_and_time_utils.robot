@@ -45,8 +45,8 @@ Redfish Set DateTime
     # Change date format to 2024-03-07T07:58:50+00:00 from 2024-03-07 07:58:50.000.
     IF  "T" in "${date_time}"
         Wait Until Keyword Succeeds  1min  5sec
-        ...  Redfish.Patch  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  body={'DateTime': '${date_time}'}
-        ...  &{kwargs}  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+        ...  Redfish.Patch  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  
+        ...  body={'DateTime': '${date_time}'}  &{kwargs}
     ELSE
         ${date_time_formatted}=  Convert Date  ${date_time}  result_format=%Y-%m-%dT%H:%M:%S+00:00
         Wait Until Keyword Succeeds  1min  5sec
