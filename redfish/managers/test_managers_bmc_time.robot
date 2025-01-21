@@ -13,11 +13,8 @@ Test Tags                   Managers_BMC_Time
 *** Variables ***
 
 ${max_time_diff_in_seconds}  6
-# The "offset" consists of the value "26" specified for hours.  Redfish will
-# convert that to the next day + 2 hours.
 ${date_time_with_offset}     2019-04-25T26:24:46+00:00
-${expected_date_time}        2019-04-26T02:24:46+00:00
-${invalid_datetime}          "2019-04-251T12:24:46+00:00"
+${invalid_datetime}          2019-04-251T12:24:46+00:00
 
 *** Test Cases ***
 
@@ -62,15 +59,7 @@ Verify Set DateTime With Offset Using Redfish
     [Tags]  Verify_Set_DateTime_With_Offset_Using_Redfish
     [Teardown]  Run Keywords  Redfish Set DateTime  AND  FFDC On Test Case Fail
 
-    Redfish Set DateTime  ${date_time_with_offset}
-    ${cli_bmc_time}=  CLI Get BMC DateTime
-
-    ${date_time_diff}=  Subtract Date From Date  ${cli_bmc_time}
-    ...  ${expected_date_time}  exclude_millis=yes
-    ${date_time_diff}=  Convert to Integer  ${date_time_diff}
-    Rprint Vars  date_time_with_offset  expected_date_time  cli_bmc_time
-    ...  date_time_diff  max_time_diff_in_seconds
-    Valid Range  date_time_diff  0  ${max_time_diff_in_seconds}
+    Redfish Set DateTime  ${date_time_with_offset}  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
 
 Verify Set DateTime With Invalid Data Using Redfish
