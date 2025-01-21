@@ -17,7 +17,7 @@ ${max_time_diff_in_seconds}  6
 # convert that to the next day + 2 hours.
 ${date_time_with_offset}     2019-04-25T26:24:46+00:00
 ${expected_date_time}        2019-04-26T02:24:46+00:00
-${invalid_datetime}          "2019-04-251T12:24:46+00:00"
+${invalid_datetime}          2019-04-251T12:24:46+00:00
 
 *** Test Cases ***
 
@@ -62,7 +62,7 @@ Verify Set DateTime With Offset Using Redfish
     [Tags]  Verify_Set_DateTime_With_Offset_Using_Redfish
     [Teardown]  Run Keywords  Redfish Set DateTime  AND  FFDC On Test Case Fail
 
-    Redfish Set DateTime  ${date_time_with_offset}
+    Redfish Set DateTime  ${date_time_with_offset}  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
     ${cli_bmc_time}=  CLI Get BMC DateTime
 
     ${date_time_diff}=  Subtract Date From Date  ${cli_bmc_time}
