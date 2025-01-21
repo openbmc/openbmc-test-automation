@@ -16,6 +16,24 @@
       "message": "additional space.. please remove",
       "revId": "39f082593b402db797cd99fb107e39a6edbee9a5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "612720e1_5752695f",
+        "filename": "lib/bmc_date_and_time_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2025-01-21T15:29:13Z",
+      "side": 1,
+      "message": "Space removed",
+      "parentUuid": "242c6e88_5b2a0184",
+      "revId": "39f082593b402db797cd99fb107e39a6edbee9a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
