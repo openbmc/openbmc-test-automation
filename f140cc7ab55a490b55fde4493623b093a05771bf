@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f47003b8_a25b608f",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-01-22T15:18:01Z",
+      "side": 1,
+      "message": "On VMI enable SLAAC when DHCPv4 is enabled and verify DHCPv4 settings are intact and IPv6 origin is set to SLAAC \u0026 it gets assigned with SLAAC IPv6 address.",
+      "range": {
+        "startLine": 591,
+        "startChar": 21,
+        "endLine": 591,
+        "endChar": 55
+      },
+      "revId": "f140cc7ab55a490b55fde4493623b093a05771bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
