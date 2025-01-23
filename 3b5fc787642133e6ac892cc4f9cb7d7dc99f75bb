@@ -16,6 +16,23 @@
       "message": "Talked to Dave/Stephanie, once he give a run and +1 we will merge this code. Thanks",
       "revId": "3b5fc787642133e6ac892cc4f9cb7d7dc99f75bb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f0b0ccd_53c6e775",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-01-23T16:04:24Z",
+      "side": 1,
+      "message": "Dave shared info it broke in his env for boot test.. I know where the problem is, i ll fix it up and push up the delta changes.",
+      "revId": "3b5fc787642133e6ac892cc4f9cb7d7dc99f75bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
