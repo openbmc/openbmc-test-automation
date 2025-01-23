@@ -365,3 +365,17 @@ Redfish Get PostCodes
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     RETURN  ${members}
+
+
+Set Resolve Flag For Event Log
+    [Documentation]   Set the resolve flag as True or False and verify the valid status code.
+    [Arguments]  ${bmc_event_id}  ${resolved_flag}  ${valid_status_code}=${HTTP_OK}
+
+    # Description of argument(s):
+    # bmc_event_id         BMC event ID.
+    # resolved_flag        True or False.
+    # valid_status_code    Redfish valid response code.
+    #                      Default: ${HTTP_OK}
+
+    Redfish.Patch  ${EVENT_LOG_URI}Entries/${bmc_event_id}  body={'Resolved':${resolved_flag}}
+    ...  valid_status_codes=[${valid_status_code}]
