@@ -191,7 +191,6 @@ Create Test Event Log And Verify Time Stamp
     Should Be True  ${time_stamp2} > ${time_stamp1}
 
 
-# TODO: openbmc/openbmc-test-automation#1789
 Verify Setting Error Log As Resolved
     [Documentation]  Verify modified field of error log is updated when error log is marked resolved.
     [Tags]  Verify_Setting_Error_Log_As_Resolved
