@@ -428,7 +428,7 @@ Verify Delete All PEL
 
     Create Test PEL Log
     Create Test PEL Log
-    Peltool  --delete-all  False
+    Peltool  --delete-all  parse_json=False
 
     ${pel_ids}=  Get PEL Log Via BMC CLI
     Should Be Empty  ${pel_ids}
@@ -681,7 +681,7 @@ Verify PEL Delete
     BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
     ${pel_ids}=  Get PEL Log Via BMC CLI
     ${id}=  Get From List  ${pel_ids}  -1
-    Peltool  -d ${id}  False
+    Peltool  -d ${id}  parse_json=False
     Run Keyword and Expect Error  *PEL not found*  Peltool  -i ${id}
 
 
