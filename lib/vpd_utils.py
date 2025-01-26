@@ -9,6 +9,15 @@ import json
 import bmc_ssh_utils as bsu
 import func_args as fa
 
+class VpdtoolException(Exception):
+    r"""
+    Base class for vpdtool related exceptions.
+    """
+
+    def __init__(self, message):
+        self.message = message
+        super().__init__(self.message)
+
 
 def vpdtool(option_string, **bsu_options):
     r"""
@@ -50,9 +59,14 @@ def vpdtool(option_string, **bsu_options):
     )
 
     # Only return output if its not a VPD write command.
-    if "-w" not in option_string:
-        out_buf = json.loads(out_buf)
-        if "-r" in option_string:
-            return out_buf
-        else:
-            return out_buf[0]
+    try:
+        if "-w" not in option_string:
+            out_buf = json.loads(out_buf)
+            if "-r" in option_string:
+                return out_buf
+            else:
+                return out_buf[0]
+    except Exception as exception:
+        raise VpdtoolException(
+            "Failed to get VPD data from BMC : " + str(exception)
+        ) from exception
