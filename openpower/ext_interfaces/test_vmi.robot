@@ -42,7 +42,7 @@ ${test_netmask}           255.255.252.0
 
 ${default}                0.0.0.0
 ${default_ipv6addr}       ::
-${prefix_length}          64
+${prefix_length}          ${64}
 
 
 *** Test Cases ***
