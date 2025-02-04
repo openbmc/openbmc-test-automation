@@ -8,7 +8,7 @@ Suite Setup       Suite Setup Execution
 Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Run Keyword And Ignore Error  Suite Teardown Execution
 
-Test Tags        Vmi
+Test Tags         Vmi
 
 *** Variables ***
 
@@ -513,12 +513,10 @@ Enable VMI SLAAC And Check Persistency On BMC Reboot
     [Tags]  Enable_VMI_SLAAC_And_Check_Persistency_On_BMC_Reboot
 
     Set VMI SLAACv6 Origin    ${True}
-
     # Reboot BMC and verify persistency.
     OBMC Reboot (off)
     Redfish Power On
     Wait For Host Boot Progress To Reach Required State
-
     # Check origin is set to slaac and address are getting displayed.
     ${vmi_ipv6addr}=  Verify VMI IPv6 Address  SLAAC
     Should Not Be Equal  ${vmi_ipv6addr["Address"]}  ${default_ipv6addr}
@@ -530,12 +528,10 @@ Disable VMI SLAAC And Check Persistency On BMC Reboot
     [Tags]  Disable_VMI_SLAAC_And_Check_Persistency_On_BMC_Reboot
 
     Set VMI SLAACv6 Origin    ${False}
-
     # Reboot BMC and verify persistency.
     OBMC Reboot (off)
     Redfish Power On
     Wait For Host Boot Progress To Reach Required State
-
     # Check if origin is set to static and SLAAC address are getting erased.
     ${vmi_ipv6addr}=  Verify VMI IPv6 Address  Static
     Should Be Equal  ${vmi_ipv6addr["Address"]}  ${default_ipv6addr}
@@ -600,6 +596,22 @@ Enable VMI SLAAC When DHCPv4 Is Enabled And Verify
 
     # Check there is no impact on IPv4 settings, IPv4 address origin should be DHCP.
     Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
+
+
+Disable VMI DHCPv6 Property And Check Persistency On BMC Reboot
+    [Documentation]  Disable VMI DHCPv6 property and verify its persistency on
+    ...  BMC reboot.
+    [Tags]  Disable_VMI_DHCPv6_Property_And_Check_Persistency_On_BMC_Reboot
+    [Setup]  Set VMI DHCPv6 Property  Enabled
+
+    Set VMI DHCPv6 Property  Disabled
+
+    # Reboot BMC and verify persistency.
+    OBMC Reboot (off)
+
+    # Verify IPv6 address origin is set to Static and DHCPv6 address is erased.
+    ${vmi_ipv6addr}=  Verify VMI IPv6 Address  Static
+    Should Be Equal  ${vmi_ipv6addr["Address"]}  ${default_ipv6addr}
 
 
 *** Keywords ***
