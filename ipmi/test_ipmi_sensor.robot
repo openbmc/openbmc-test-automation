@@ -8,8 +8,9 @@ Library           ../lib/ipmi_utils.py
 Variables         ../data/ipmi_raw_cmd_table.py
 
 Test Setup        Redfish.Login
-Test Teardown     Run Keywords  FFDC On Test Case Fail  AND
-...  Redfish.Logout
+#Test Teardown     Run Keywords  FFDC On Test Case Fail  AND
+#...  Redfish.Logout
+Test Teardown      Redfish.Logout
 
 Test Tags        IPMI_Sensor
 
@@ -20,7 +21,6 @@ ${allowed_power_diff}   ${10}
 
 
 *** Test Cases ***
-
 Verify IPMI Temperature Readings using Redfish
     [Documentation]  Verify temperatures from IPMI sensor reading command using Redfish.
     [Tags]  Verify_IPMI_Temperature_Readings_using_Redfish
@@ -82,6 +82,7 @@ Test Ambient Temperature Via IPMI
     END
 
 
+*** Comments ***
 Test Power Reading Via IPMI With Host Off
     [Documentation]  Verify power reading via IPMI with host in off state
     [Tags]  Test_Power_Reading_Via_IPMI_With_Host_Off
@@ -286,8 +287,12 @@ Get Temperature Reading From Redfish
     # member_id    Member id of temperature.
 
     @{thermal_uri}=  redfish_utils.Get Member List  /redfish/v1/Chassis/
+    Log To Console  @{thermal_uri}
+    Log To Console  ${thermal_uri[0]}/${THERMAL_METRICS}
     @{redfish_readings}=  redfish_utils.Get Attribute
     ...  ${thermal_uri[0]}/${THERMAL_METRICS}  TemperatureReadingsCelsius
+
+    #Log To Console  ${redfish_readings}
 
     # Example of Baseboard temperature via Redfish
 
@@ -305,10 +310,21 @@ Get Temperature Reading From Redfish
 
     ${redfish_value_dict}=  Create Dictionary
     FOR  ${data}  IN  @{redfish_readings}
-        ${contains}=  Evaluate  "${member_id}" in """${data}[DeviceName]"""
+        ${keys}=  Get Dictionary Keys  ${data}
         ${reading}=  Set Variable  ${data}[Reading]
-        Run Keyword IF  "${contains}" == "True"
-        ...  Set To Dictionary  ${redfish_value_dict}  ${data}[DeviceName]  ${reading}
+        ${is_device_nam_presente}=  Evaluate  "DeviceName" in @{keys}
+
+        IF  ${is_device_nam_presente}
+            ${contains}=  Evaluate  "${member_id}" in """${data}[DeviceName]"""
+            Run Keyword IF  "${contains}" == "True"
+            ...  Set To Dictionary  ${redfish_value_dict}  ${data}[DeviceName]  ${reading}
+        ELSE
+            ${data_source_id}=  Evaluate  ("${data}[DataSourceUri]").split('temperature_')
+            ${contains}=  Evaluate  "${member_id}" in "${data_source_id[1]}"
+            IF  ${contains}
+               Set To Dictionary  ${redfish_value_dict}  ${data_source_id[1]}  ${reading}
+            END
+        END
     END
 
     RETURN  ${redfish_value_dict}
