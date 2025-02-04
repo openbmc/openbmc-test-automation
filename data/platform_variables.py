@@ -1,7 +1,7 @@
 #!/usr/bin/env python3 -u
 
 r"""
- Define methods to import platform specific files.
+Define methods to import platform specific files.
 """
 
 import importlib
