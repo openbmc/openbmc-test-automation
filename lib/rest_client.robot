@@ -360,14 +360,20 @@ Upload Image To BMC
     # kwargs                        A dictionary keys/values to be passed
     #                               directly to Post Request.
 
-    Initialize OpenBMC  ${timeout}  quiet=${quiet}
+
+    # If /redfish/v1/SessionService/Sessions POST fails, fallback to
+    # REST /login method.
+    ${passed}=  Run Keyword And Return Status   Redfish Login
+    Run Keyword If  ${passed} != True   Initialize OpenBMC  ${timeout}  quiet=${quiet}
+    ${session_object}=  Set Variable If  ${passed} !=True   redfish  openbmc
+
     ${base_uri}=  Catenate  SEPARATOR=  ${DBUS_PREFIX}  ${uri}
     ${headers}=  Create Dictionary  Content-Type=application/octet-stream
     ...  X-Auth-Token=${XAUTH_TOKEN}  Accept=application/json
     Set To Dictionary  ${kwargs}  headers  ${headers}
     Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post
     ...  base_uri=${base_uri}  args=&{kwargs}
-    ${ret}=  POST On Session  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
+    ${ret}=  POST On Session  ${session_object}  ${base_uri}  &{kwargs}  timeout=${timeout}
     Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
     Valid Value  ret.status_code  ${valid_status_codes}
     Delete All Sessions
