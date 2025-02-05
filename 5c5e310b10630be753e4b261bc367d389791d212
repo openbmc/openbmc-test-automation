@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a24fdba1_0ec43b02",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-02-05T07:31:25Z",
+      "side": 1,
+      "message": "I suggest to change as Vmi_ip_config",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 10
+      },
+      "revId": "5c5e310b10630be753e4b261bc367d389791d212",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
