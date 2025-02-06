@@ -618,6 +618,22 @@ Disable VMI DHCPv6 Property And Check Persistency On BMC Reboot
     Should Be Equal  ${vmi_ipv6addr["Address"]}  ${default_ipv6addr}
 
 
+Enable VMI SLAAC When IPv4 Origin Is Static And Verify
+    [Documentation]  On VMI enable SLAAC when IPv4 origin is static and verify IPv4 settings are intact
+    ...  and IPv6 origin is set to SLAAC & it gets assigned with SLAAC IPv6 address and this works
+    ...  on the setup where router advertise network prefix.
+    [Tags]  Enable_VMI_SLAAC_When_IPv4_Origin_Is_Static_And_Verify
+    [Setup]  Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
+    [Teardown]  Run keywords  Delete VMI IPv4 Address  AND  Test Teardown Execution
+
+    # Enable Autoconfig address and check whether IPv6 address origin is set to SLAAC.
+    Set VMI SLAACv6 Origin  ${True}
+    Verify VMI IPv6 Address  SLAAC
+
+    # Check there is no impact on IPv4 settings, IPv4 address origin should be Static.
+    Verify VMI Network Interface Details  ${test_ipv4}  Static  ${test_gateway}  ${test_netmask}
+
+
 *** Keywords ***
 
 Suite Setup Execution
