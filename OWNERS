@@ -35,7 +35,6 @@ owners:
 - gkeishin@gmail.com
 
 reviewers:
-- anusha.dathatri@gmail.com
 - sridevra@in.ibm.com
 
 matchers:
@@ -44,9 +43,6 @@ openbmc:
 - name: George Keishing
   email: gkeishin@gmail.com
   discord: gkeishin
-- name: Anusha Dathatri
-  email: anusha.dathatri@gmail.com
-  discord: adathatr3861
 - name: Sridevi Ramesh
   email: sridevra@in.ibm.com
   discord: srideviramesh
