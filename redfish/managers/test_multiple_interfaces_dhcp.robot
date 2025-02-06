@@ -12,6 +12,8 @@ Suite Setup     Suite Setup Execution
 Test Teardown   FFDC On Test Case Fail
 Suite Teardown  Redfish.Logout
 
+Test Tags       Multiple_Interfaces_DHCP
+
 *** Variables ***
 
 &{DHCP_ENABLED}           DHCPEnabled=${True}
@@ -32,8 +34,6 @@ ${ethernet_interface}     eth1
 &{disable_multiple_properties}     UseDomainName=${False}
 ...                                UseNTPServers=${False}
 ...                                UseDNSServers=${False}
-
-Test Tags                         Multiple_Interfaces_DHCP
 
 *** Test Cases ***
 
