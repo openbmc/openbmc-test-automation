@@ -509,7 +509,7 @@ Disable VMI Stateless Address AutoConfig And Verify
 Enable VMI SLAAC And Check Persistency On BMC Reboot
     [Documentation]  Enable VMI SLAACv6 and verify its persistency
     ...  on BMC reboot and this works on the setup where router
-    ...  advertise network prefix.
+    ...  advertises network prefix.
     [Tags]  Enable_VMI_SLAAC_And_Check_Persistency_On_BMC_Reboot
 
     Set VMI SLAACv6 Origin    ${True}
@@ -518,6 +518,7 @@ Enable VMI SLAAC And Check Persistency On BMC Reboot
     OBMC Reboot (off)
     Redfish Power On
     Wait For Host Boot Progress To Reach Required State
+    Sleep  5s
 
     # Check origin is set to slaac and address are getting displayed.
     ${vmi_ipv6addr}=  Verify VMI IPv6 Address  SLAAC
