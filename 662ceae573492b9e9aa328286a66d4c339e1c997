@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "680b19f9_b88cd1d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-02-06T13:08:39Z",
+      "side": 1,
+      "message": "Cloning repository http://gerrit.openbmc.org/openbmc/openbmc-test-automation\n \u003e git init /data0/jenkins/workspace/ci-repository/openbmc/openbmc-test-automation # timeout\u003d10\nERROR: Error cloning remote repo \u0027gerrit\u0027\nhudson.plugins.git.GitException: Could not init /data0/jenkins/workspace/ci-repository/openbmc/openbmc-test-automation\n\tat org.jenkinsci.plugins.gitclient.CliGitAPIImpl$5.execute(CliGitAPIImpl.java:1073)\n\tat org.jenkinsci.plugins.gitclient.CliGitAPIImpl$2.execute(CliGitAPIImpl.java:819)\n\n\nlooks like some glitch.. will re-try after sometime",
+      "revId": "662ceae573492b9e9aa328286a66d4c339e1c997",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
