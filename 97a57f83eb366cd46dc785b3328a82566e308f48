@@ -16,6 +16,24 @@
       "message": "If you are changing the tag name..\n   Vmi_ip_config\n\nchange the test suite name as well to match it\n\nopenpower/ext_interfaces/test_vmi_ip_config.robot",
       "revId": "97a57f83eb366cd46dc785b3328a82566e308f48",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d426b8dd_37e0c30a",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-02-06T04:53:16Z",
+      "side": 1,
+      "message": "no will keep it as vmi only",
+      "parentUuid": "e2d1be97_226d9ff4",
+      "revId": "97a57f83eb366cd46dc785b3328a82566e308f48",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
