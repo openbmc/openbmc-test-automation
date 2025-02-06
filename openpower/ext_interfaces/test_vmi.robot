@@ -518,6 +518,7 @@ Enable VMI SLAAC And Check Persistency On BMC Reboot
     OBMC Reboot (off)
     Redfish Power On
     Wait For Host Boot Progress To Reach Required State
+    Sleep  5s
 
     # Check origin is set to slaac and address are getting displayed.
     ${vmi_ipv6addr}=  Verify VMI IPv6 Address  SLAAC
