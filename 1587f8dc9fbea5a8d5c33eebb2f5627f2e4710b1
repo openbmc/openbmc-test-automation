@@ -16,6 +16,24 @@
       "message": "When IPv4 origin is static, enable VMI SLAAC and verify the IPv4 settings remain intact.",
       "revId": "1587f8dc9fbea5a8d5c33eebb2f5627f2e4710b1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f73ccac_293f403a",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-02-07T09:36:26Z",
+      "side": 1,
+      "message": "IPv4 settings remain intact. and Verify IPv4 settings are intact\nboth sounds same right, will keep it as it is.",
+      "parentUuid": "16472b96_b956c235",
+      "revId": "1587f8dc9fbea5a8d5c33eebb2f5627f2e4710b1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
