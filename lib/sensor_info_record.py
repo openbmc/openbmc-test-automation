@@ -118,8 +118,12 @@ def create_sensor_list_not_having_single_threshold(
     ipmi_sensor_response: Raw IPMI sensor output.
     threshold_sensor_list: List of expected threshold sensors.
 
-    Returns:
-    List of sensors missing thresholds.
+    Example IPMI response line:
+    "fan_1 | 1000 RPM | ok | 200.000 | 500.000 | 600.000 | 700.000 | 800.000 | 900.000 | na |"
+    - Splitting by "|" gives parts where `parts[4:10]` are thresholds: 
+      [500.000, 600.000, 700.000, 800.000, 900.000, na]
+    - If any threshold is not "na", thresholds exist for that sensor.
+
     """
     sensor_ids_missing_threshold = []
 
