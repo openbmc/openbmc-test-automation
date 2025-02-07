@@ -26,7 +26,6 @@ def validate_threshold_values(sensor_threshold_values, sensor_id):
     sensor_threshold_values: Dictionary of threshold values.
     sensor_id: Sensor identifier (e.g. "fan_1").
     """
-
     # Validate lower thresholds
     if not (
         float(sensor_threshold_values["lnr"])
@@ -65,7 +64,6 @@ def check_reading_value_length(sensor_reading, sensor_id, sensor_unit):
     sensor_id: Sensor identifier (e.g. "temp_ambient").
     sensor_unit: Sensor unit (e.g. "RPM").
     """
-
     max_int_len = 6 if sensor_unit == "RPM" else 4
     max_frac_len = 3 if sensor_unit == "RPM" else 4
 
@@ -103,7 +101,6 @@ def convert_sensor_name_as_per_ipmi_spec(sensor_name):
     Input: "very_long_sensor_name_12345"
     Output: "very_long_sensor" (16-byte truncated UTF-8)
     """
-
     READING_VALUE_BYTE_LIMIT = 16
     encoded = sensor_name.encode("utf-8")
     truncated = encoded[:READING_VALUE_BYTE_LIMIT]
@@ -112,24 +109,21 @@ def convert_sensor_name_as_per_ipmi_spec(sensor_name):
 
 
 def create_sensor_list_not_having_single_threshold(
-    ipmi_sensor_response, threshold_sensor_list):
+        ipmi_sensor_response, threshold_sensor_list):
     r"""
     Identify sensors with no valid thresholds.
 
     Description of arguments:
-    ipmi_sensor_response: Raw IPMI sensor output.
-    threshold_sensor_list: List of expected threshold sensors.
+        ipmi_sensor_response (str): Raw IPMI sensor output.
+        threshold_sensor_list (list): List of expected threshold sensors.
 
     Example IPMI response line:
     "fan_1 | 1000 RPM | ok | 200.000 | 500.000 | 600.000 | 700.000 | 800.000 | 900.000 | na |"
-    - Splitting by "|" gives parts where `parts[4:10]` are thresholds: 
+    - Splitting by "|" gives parts where `parts[4:10]` are thresholds:
       [500.000, 600.000, 700.000, 800.000, 900.000, na]
     - If any threshold is not "na", thresholds exist for that sensor.
 
-    Returns:
-    List of sensors missing thresholds.
     """
-
     sensor_ids_missing_threshold = []
 
     for sensor_id in threshold_sensor_list:
