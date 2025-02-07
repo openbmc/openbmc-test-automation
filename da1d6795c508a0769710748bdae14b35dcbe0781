@@ -16,6 +16,23 @@
       "message": "Sorry I had to take a break due to personal commitments. I am still very interested in helping out with reviews and would appreciate it if I could remain on the reviewer list. Thank you for your understanding.",
       "revId": "da1d6795c508a0769710748bdae14b35dcbe0781",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c4bd9f3_675c8dfc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-02-07T19:50:18Z",
+      "side": 1,
+      "message": "I hope you understand that keeping in OWNSERS list, by default you\u0027ll be tagged/added by gerrit tool automatically and you will get notification of the code changes from the community.\n\nI\u0027ll comply to your request for few weeks from now and keep this commit on HOLD.\nWe would need consistent reviews help from time to time and depending on your contribution in reviews/code contribution, we will re-consider the status of it.. Thank you for your co-operation.",
+      "revId": "da1d6795c508a0769710748bdae14b35dcbe0781",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
