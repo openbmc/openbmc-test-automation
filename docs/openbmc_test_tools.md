@@ -230,3 +230,9 @@ pldmtool is an open-source client tool that acts as a PLDM requester which runs
 on the BMC. pldmtool supports the subcommands for PLDM types such as base,
 platform, bios, fru, and oem-ibm as mentioned in the 'pldmtool --help'. Refer to
 [README](https://github.com/openbmc/pldm/tree/master/pldmtool#README.md)
+
+## VPD tool:
+
+VPD Tool is designed for managing BMC system FRU's Vital Product Data(VPD).
+It provides command line interface to read and write FRU's VPD. Refer to
+[README](https://github.ibm.com/openbmc/openbmc/wiki/VPD-TOOL-HELPER)
