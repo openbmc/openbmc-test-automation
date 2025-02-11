@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "771656cd_1234d665",
+        "filename": "redfish/managers/test_multiple_interfaces.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-02-11T05:11:18Z",
+      "side": 1,
+      "message": "Why is this logout required?",
+      "range": {
+        "startLine": 77,
+        "startChar": 4,
+        "endLine": 77,
+        "endChar": 34
+      },
+      "revId": "c45ff0beb1c3ff357e50f363c29c47c6c8fc81c8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
