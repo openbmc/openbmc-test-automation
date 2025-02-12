@@ -122,6 +122,24 @@
       "parentUuid": "1091981a_f6bcd1fe",
       "revId": "7e5a8ded3c74170521c6ca2403f5121c4d5cb87b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "230805f9_e7efa0eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002359
+      },
+      "writtenOn": "2025-02-12T14:57:15Z",
+      "side": 1,
+      "message": "thanks , i have repushed it, CI job was also triggered \nbut it says failed to build, it will be helpful for me if you can tell what is that i am missing out here.",
+      "parentUuid": "cc1681d7_be2fb6d6",
+      "revId": "7e5a8ded3c74170521c6ca2403f5121c4d5cb87b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
