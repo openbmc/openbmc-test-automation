@@ -104,6 +104,24 @@
       "parentUuid": "216b4f09_faccdb20",
       "revId": "7e5a8ded3c74170521c6ca2403f5121c4d5cb87b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc1681d7_be2fb6d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-02-12T13:03:56Z",
+      "side": 1,
+      "message": "can u re-push the commit.It looks CI job has not triggered.",
+      "parentUuid": "1091981a_f6bcd1fe",
+      "revId": "7e5a8ded3c74170521c6ca2403f5121c4d5cb87b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
