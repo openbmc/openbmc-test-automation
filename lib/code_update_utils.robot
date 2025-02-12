@@ -741,6 +741,7 @@ Set ApplyTime
 
     Redfish.Patch  ${REDFISH_BASE_URI}UpdateService
     ...  body={'HttpPushUriOptions' : {'HttpPushUriApplyTime' : {'ApplyTime' : '${policy}'}}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
     Verify Get ApplyTime  ${policy}
 
 
