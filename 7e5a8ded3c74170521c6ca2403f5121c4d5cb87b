@@ -16,6 +16,24 @@
       "message": "you\u0027ll need to submit a CLA before any code can be accepted from you.\nhttps://github.com/openbmc/docs/blob/master/CONTRIBUTING.md\n\nThanks you",
       "revId": "7e5a8ded3c74170521c6ca2403f5121c4d5cb87b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab1520be_ecc5dbde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002359
+      },
+      "writtenOn": "2025-02-12T05:05:55Z",
+      "side": 1,
+      "message": "Thanks for passing on the information George, \nand yes i have submitted the CLA and received the approval as well , attaching the link below for your reference \n\nhttps://gerrit.openbmc.org/c/openbmc/openbmc-build-scripts/+/78161",
+      "parentUuid": "9e982647_990d8fbc",
+      "revId": "7e5a8ded3c74170521c6ca2403f5121c4d5cb87b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
