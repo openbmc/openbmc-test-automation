@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "059e423d_88e5ea21",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-02-13T07:17:47Z",
+      "side": 1,
+      "message": "please follow this https://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#formatting-commit-messages\n\nOn how the commit message looks.",
+      "revId": "d04252232469d2b5756c8edb65e880ad51d51ff7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a52cddd0_7145acbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-02-13T07:17:47Z",
+      "side": 1,
+      "message": "please address CI failures.. check OpenBMC CI build - 100730",
+      "revId": "d04252232469d2b5756c8edb65e880ad51d51ff7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
