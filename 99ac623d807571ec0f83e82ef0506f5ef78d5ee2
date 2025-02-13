@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7a01770_08cdf983",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002359
+      },
+      "writtenOn": "2025-02-13T16:14:28Z",
+      "side": 1,
+      "message": "Thanks for your reply ,i have made the changes as you told, can you pls take a look at it and let me know if any modification needed? The new changes made has been pushed...",
+      "revId": "99ac623d807571ec0f83e82ef0506f5ef78d5ee2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
