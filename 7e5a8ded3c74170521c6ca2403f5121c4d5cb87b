@@ -140,6 +140,24 @@
       "parentUuid": "cc1681d7_be2fb6d6",
       "revId": "7e5a8ded3c74170521c6ca2403f5121c4d5cb87b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85ce251f_407d81a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-02-13T05:21:37Z",
+      "side": 1,
+      "message": "I dont find the log file because job has not triggered. can u fix spaces or do some minor change and re-push the code ?? lets if the CI triggers again?",
+      "parentUuid": "cc1681d7_be2fb6d6",
+      "revId": "7e5a8ded3c74170521c6ca2403f5121c4d5cb87b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
