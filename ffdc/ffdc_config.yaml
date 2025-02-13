@@ -92,7 +92,7 @@ OPENBMC:
             - "/tmp/BMC_hwmon.txt"
             - "/tmp/BMC_proc_list.txt"
             - "/tmp/BMC_proc_fd_active_list.txt"
-            - "/tmp/BMC_journalctl_nopager.txt"
+            - "/tmp/BMC_journalctl.txt"
             - "/tmp/BMC_journalctl_pretty.json"
             - "/tmp/BMC_dmesg.txt"
             - "/tmp/BMC_procinfo.txt"
