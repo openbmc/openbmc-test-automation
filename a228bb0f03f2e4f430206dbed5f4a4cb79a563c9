@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2763e01d_e5e3c258",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-02-14T07:10:01Z",
+      "side": 1,
+      "message": "Commonly followed commit format\n\n\u003ccommit message\u003e\n\nchanges:\n\u003cAdd the change info here\u003e\n\nTested:\n\u003cProvide info about the test for the change\u003e",
+      "revId": "a228bb0f03f2e4f430206dbed5f4a4cb79a563c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4dd87984_c01d5c6e",
         "filename": "lib/sensor_info_record.py",
         "patchSetId": 23
