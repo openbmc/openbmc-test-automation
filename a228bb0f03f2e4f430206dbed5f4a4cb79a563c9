@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dd87984_c01d5c6e",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-02-14T06:39:33Z",
+      "side": 1,
+      "message": "Pls add a new line after this line throughout.",
+      "range": {
+        "startLine": 28,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 7
+      },
+      "revId": "a228bb0f03f2e4f430206dbed5f4a4cb79a563c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b069ea7_a9beb2dc",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-02-14T06:39:33Z",
+      "side": 1,
+      "message": "Pls keep this in the previous line",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 2
+      },
+      "revId": "a228bb0f03f2e4f430206dbed5f4a4cb79a563c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "760b2ecf_f82c3e4f",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 23
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-02-14T06:39:33Z",
+      "side": 1,
+      "message": "Cite an example pls to better understand this code",
+      "range": {
+        "startLine": 128,
+        "startChar": 1,
+        "endLine": 128,
+        "endChar": 54
+      },
+      "revId": "a228bb0f03f2e4f430206dbed5f4a4cb79a563c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
