@@ -26,6 +26,7 @@ ${CMD_STATIS_GW_PREFIX}      busctl set-property xyz.openbmc_project.Network
 
 Factory Reset BMC
     [Documentation]  Factory reset BMC and verify BMC comes back online.
+    [Tags]  Factory_Reset_BMC
 
     BMC Execute Command  /usr/bin/hostnamectl set-hostname ${OPENBMC_MODEL}
     BMC Execute Command  /sbin/fw_setenv rwreset true
@@ -45,6 +46,7 @@ Factory Reset BMC
 
 Test Setup Execution
     [Documentation]  Check if parameters are provided.
+
     Should Not Be Empty   ${OPENBMC_SERIAL_HOST}
     Should Not Be Empty   ${OPENBMC_SERIAL_PORT}
     Should Not Be Empty   ${OPENBMC_MODEL}

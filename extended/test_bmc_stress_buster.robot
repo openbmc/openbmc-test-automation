@@ -34,6 +34,7 @@ Stress BMC REST Server
 Stress BMC SSH Server
     [Documentation]  Execute maximum allowed SSH operation.
     [Tags]  Stress_BMC_SSH_Server
+
     Log To Console  SSH call request burst ${SSH_BUSTER_MAX}
     ${dict}=  Execute Process
     ...  ${SSH_BUSTER_MAX}  SSH Connect And Execute Command
@@ -44,6 +45,7 @@ Stress BMC SSH Server
 Stress BMC IPMI Server
     [Documentation]  Execute maximum allowed IPMI operation.
     [Tags]  Stress_BMC_IPMI_Server
+
     Log To Console  IPMI call request burst ${IPMI_BUSTER_MAX}
     ${dict}=  Execute Process  ${IPMI_BUSTER_MAX}  IPMI Check Status
     Dictionary Should Not Contain Value  ${dict}  False
