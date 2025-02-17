@@ -18,7 +18,7 @@ Verify Factory Reset
     [Documentation]  Factory reset the system and verify if BMC is online.
     [Tags]  Verify_Factory_Reset
 
-    # Factory reset erases user config settings which incldes IP, netmask
+    # Factory reset erases user config settings which includes IP, netmask
     # gateway and route. Before running this test we are checking all these
     # settings and checking whether ping works with BMC host.
     # If factory reset is successful, ping to BMC host should fail as

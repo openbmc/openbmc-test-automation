@@ -37,6 +37,8 @@ Test Teardown      Gather FFDC
 My FFDC Logs
     [Documentation]  This test is needed to satisfy FFDC initial setup auto
     ...              variables required for FFDC collection.
+    [Tags]  My_FFDC_Logs
+
     Log To Console   Manual FFDC collection
 
 ** Keywords ***

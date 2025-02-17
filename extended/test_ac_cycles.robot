@@ -17,7 +17,9 @@ Test Tags  AC_Cycles
 
 Test OpenBMC Buster
     [Documentation]  Test the OpenBMC buster.
-    Validate Parameters
+    [Tags]  Test_OpenBMC_Buster
+
+    Validate PDU Parameters
     ${output}=  Execute Command
     ...  find /var/lib -type f |xargs -n 1 touch
     PDU Power Cycle
@@ -32,8 +34,9 @@ Test OpenBMC Buster
 
 *** Keywords ***
 
-Validate Parameters
+Validate PDU Parameters
     [Documentation]  Validate the PDU parameters.
+
     Should Not Be Empty  ${PDU_IP}
     Should Not Be Empty  ${PDU_TYPE}
     Should Not Be Empty  ${PDU_SLOT_NO}
