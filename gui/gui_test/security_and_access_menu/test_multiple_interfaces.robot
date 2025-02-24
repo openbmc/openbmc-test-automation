@@ -13,7 +13,7 @@ Test Tags      Multiple_Interfaces
 *** Variables ***
 
 ${bmc_url}                     https://${OPENBMC_HOST}:${HTTPS_PORT}
-${bmc_url_1}                   https://${OPENBMC_HOST_1}:${HTTPS_PORT}
+${bmc_url_1}                   https://${OPENBMC_HOST_ETH1}:${HTTPS_PORT}
 ${LDAP_FILE_PATH}              ${EMPTY}
 ${CA_FILE_PATH}                ${EMPTY}
 
@@ -56,11 +56,11 @@ Load Certificates Via Eth1 IP Address And Verify
 Suite Setup Execution
     [Documentation]  Do suite setup task.
 
-    Valid Value  OPENBMC_HOST_1
+    Valid Value  OPENBMC_HOST_ETH1
 
     # Check both interfaces are configured and reachable.
     Ping Host  ${OPENBMC_HOST}
-    Ping Host  ${OPENBMC_HOST_1}
+    Ping Host  ${OPENBMC_HOST_ETH1}
 
 
 Load Certificates On BMC Via GUI
@@ -80,7 +80,7 @@ Load Certificates On BMC Via GUI
     ...  ELSE IF  '${certificate_type}' == 'Client' and '${delete_cert}' == '${True}'
     ...  Delete Certificate Via BMC CLI  ${certificate_type}
 
-    Set Test Variable  ${obmc_gui_url}  https://${OPENBMC_HOST_1}:${HTTPS_PORT}
+    Set Test Variable  ${obmc_gui_url}  https://${OPENBMC_HOST_ETH1}:${HTTPS_PORT}
     Launch Browser And Login GUI
     Navigate To SSL Certificate Page
     Sleep  10s

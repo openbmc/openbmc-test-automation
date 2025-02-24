@@ -208,7 +208,7 @@ Restore Configuration
     [Documentation]  Restore the configuration to Both Static Network
 
     Run Keyword If  '${CHANNEL_NUMBER}' == '${1}'  Add IP Address  ${OPENBMC_HOST}  ${eth0_subnet_mask}  ${eth0_gateway}
-    ...  ELSE IF  '${CHANNEL_NUMBER}' == '{2}'  Add IP Address  ${OPENBMC_HOST_1}  ${eth1_subnet_mask}  ${eth1_gateway}
+    ...  ELSE IF  '${CHANNEL_NUMBER}' == '{2}'  Add IP Address  ${OPENBMC_HOST_ETH1}  ${eth1_subnet_mask}  ${eth1_gateway}
 
 Get Network Configuration Using Channel Number
     [Documentation]  Get ethernet interface.
@@ -233,7 +233,7 @@ Suite Setup Execution
     # Get the configuration of eth1
     ${network_configurations}=  Get Network Configuration Using Channel Number  ${2}
     FOR  ${network_configuration}  IN  @{network_configurations}
-      Run Keyword If  '${network_configuration['Address']}' == '${OPENBMC_HOST_1}'
+      Run Keyword If  '${network_configuration['Address']}' == '${OPENBMC_HOST_ETH1}'
       ...  Run Keywords  Set Suite Variable  ${eth1_subnet_mask}  ${network_configuration['SubnetMask']}
       ...  AND  Set Suite Variable  ${eth1_gateway}  ${network_configuration['Gateway']}
       ...  AND  Exit For Loop

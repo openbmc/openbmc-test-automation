@@ -2,11 +2,6 @@
 Documentation   Test BMC multiple network interface functionalities.
 ...             Run on setup with both eth0 and eth1 in static mode.
 
-# User input BMC IP for the eth1.
-# Use can input as  -v OPENBMC_HOST_1:xx.xxx.xx from command line.
-Library         ../../lib/bmc_redfish.py  https://${OPENBMC_HOST_1}:${HTTPS_PORT}
-...             ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  WITH NAME  Redfish1
-
 Resource        ../../lib/resource.robot
 Resource        ../../lib/common_utils.robot
 Resource        ../../lib/connection_client.robot
@@ -19,6 +14,11 @@ Resource        ../../lib/certificate_utils.robot
 Resource         ../../lib/protocol_setting_utils.robot
 Library         ../../lib/jobs_processing.py
 Library         OperatingSystem
+
+# User input BMC IP for the eth1.
+# Use can input as  -v OPENBMC_HOST_ETH1:xx.xxx.xx from command line.
+Library         ../../lib/bmc_redfish.py  https://${OPENBMC_HOST_ETH1}:${HTTPS_PORT}
+...             ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  WITH NAME  Redfish1
 
 Suite Setup     Suite Setup Execution
 Test Setup      Run Keywords  Redfish.Login  AND  Redfish1.Login
@@ -39,7 +39,7 @@ Verify Both Interfaces BMC IP Addresses Accessible Via SSH
     [Tags]  Verify_Both_Interfaces_BMC_IP_Addresses_Accessible_Via_SSH
 
     Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  host=${OPENBMC_HOST}
-    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  host=${OPENBMC_HOST_1}
+    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  host=${OPENBMC_HOST_ETH1}
     Close All Connections
 
 
@@ -65,9 +65,9 @@ Verify LDAP Login Works When Eth1 IP Is Not Configured
     [Documentation]  Verify LDAP login works when eth1 IP is erased.
     [Tags]  Verify_LDAP_Login_Works_When_Eth1_IP_Is_Not_Configured
     [Setup]  Run Keywords  Set Test Variable  ${CHANNEL_NUMBER}  ${SECONDARY_CHANNEL_NUMBER}
-    ...  AND  Redfish.Login  AND  Delete IP Address  ${OPENBMC_HOST_1}
+    ...  AND  Redfish.Login  AND  Delete IP Address  ${OPENBMC_HOST_ETH1}
     [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login  AND
-    ...  Add IP Address  ${OPENBMC_HOST_1}  ${eth1_subnet_mask}  ${eth1_gateway}
+    ...  Add IP Address  ${OPENBMC_HOST_ETH1}  ${eth1_subnet_mask}  ${eth1_gateway}
 
     Create LDAP Configuration
     Redfish.Logout
@@ -101,8 +101,8 @@ Verify SNMP Works When Eth1 IP Is Not Configured
     [Tags]  Verify_SNMP_Works_When_Eth1_IP_Is_Not_Configured
     [Setup]  Run Keywords  Redfish.Login  AND
     ...  Set Test Variable  ${CHANNEL_NUMBER}  ${SECONDARY_CHANNEL_NUMBER}
-    ...  AND  Delete IP Address  ${OPENBMC_HOST_1}
-    [Teardown]  Add IP Address  ${OPENBMC_HOST_1}  ${eth1_subnet_mask}  ${eth1_gateway}
+    ...  AND  Delete IP Address  ${OPENBMC_HOST_ETH1}
+    [Teardown]  Add IP Address  ${OPENBMC_HOST_ETH1}  ${eth1_subnet_mask}  ${eth1_gateway}
 
     Create Error On BMC And Verify Trap
 
@@ -139,16 +139,16 @@ Able To Access Serial Console Via Both Network Interfaces
     [Tags]  Able_To_Access_Serial_Console_Via_Both_Network_Interfaces
 
     Open Connection And Log In  host=${OPENBMC_HOST}  port=2200
-    Open Connection And Log In  host=${OPENBMC_HOST_1}  port=2200
+    Open Connection And Log In  host=${OPENBMC_HOST_ETH1}  port=2200
     Close All Connections
 
 Verify IPMI Works On Both Network Interfaces
     [Documentation]  Verify IPMI works on both network interfaces.
     [Tags]  Verify_IPMI_Works_On_Both_Network_Interfaces
 
-    Run IPMI  ${OPENBMC_HOST_1}  power on
+    Run IPMI  ${OPENBMC_HOST_ETH1}  power on
     ${status1}=  Run IPMI  ${OPENBMC_HOST}  power status
-    ${status2}=  Run IPMI  ${OPENBMC_HOST_1}  power status
+    ${status2}=  Run IPMI  ${OPENBMC_HOST_ETH1}  power status
     Should Be Equal  ${status1}  ${status2}
 
 Verify Modifying IP Address Multiple Times On Interface
@@ -162,7 +162,7 @@ Verify Modifying IP Address Multiple Times On Interface
     Update IP Address  ${test_ipv4_addr}  ${test_ipv4_addr2}  ${test_subnet_mask}  ${test_gateway}
     Update IP Address  ${test_ipv4_addr2}  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
     Run Keyword  Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
-    Run Keyword  Wait For Host To Ping  ${OPENBMC_HOST_1}  ${NETWORK_TIMEOUT}
+    Run Keyword  Wait For Host To Ping  ${OPENBMC_HOST_ETH1}  ${NETWORK_TIMEOUT}
 
 Verify Able To Load Certificates Via Eth1 IP Address
     [Documentation]  Verify able to load certificates via eth1 IP address.
@@ -182,7 +182,7 @@ Enable SSH Protocol Via Eth1 And Verify On Both Interfaces
     Verify SSH Protocol State Via Eth1  ${True}
     # Check if SSH login and commands on SSH session work on both interfaces.
     Verify SSH Login And Commands Work
-    Verify SSH Login And Commands Work  ${OPENBMC_HOST_1}
+    Verify SSH Login And Commands Work  ${OPENBMC_HOST_ETH1}
 
 Disable SSH Protocol Via Eth1 And Verify On Both Interfaces
     [Documentation]  Disable SSH protocol via eth1 and verify on both interfaces.
@@ -194,7 +194,7 @@ Disable SSH Protocol Via Eth1 And Verify On Both Interfaces
     Verify SSH Protocol State Via Eth1  ${False}
     # Check if SSH login and commands fail on eth1.
     ${status}=  Run Keyword And Return Status
-    ...  Verify SSH Login And Commands Work  ${OPENBMC_HOST_1}
+    ...  Verify SSH Login And Commands Work  ${OPENBMC_HOST_ETH1}
 
     Should Be Equal As Strings  ${status}  False
     ...  msg=SSH Login and commands are working after disabling SSH via eth1.
@@ -226,16 +226,16 @@ Get Network Configuration Using Channel Number
 Suite Setup Execution
     [Documentation]  Do suite setup task.
 
-    Valid Value  OPENBMC_HOST_1
+    Valid Value  OPENBMC_HOST_ETH1
 
     # Check both interfaces are configured and reachable.
     Ping Host  ${OPENBMC_HOST}
-    Ping Host  ${OPENBMC_HOST_1}
+    Ping Host  ${OPENBMC_HOST_ETH1}
 
     ${network_configurations}=  Get Network Configuration Using Channel Number  ${SECONDARY_CHANNEL_NUMBER}
     FOR  ${network_configuration}  IN  @{network_configurations}
 
-      Run Keyword If  '${network_configuration['Address']}' == '${OPENBMC_HOST_1}'
+      Run Keyword If  '${network_configuration['Address']}' == '${OPENBMC_HOST_ETH1}'
       ...  Run Keywords  Set Suite Variable  ${eth1_subnet_mask}  ${network_configuration['SubnetMask']}
       ...  AND  Set Suite Variable  ${eth1_gateway}  ${network_configuration['Gateway']}
       ...  AND  Exit For Loop
@@ -298,7 +298,7 @@ Install Certificate Via Redfish And Verify
 
     Create Directory  certificate_dir
     # AUTH_URI is a global variable defined in lib/resource.robot
-    Set Test Variable  ${AUTH_URI}  https://${OPENBMC_HOST_1}
+    Set Test Variable  ${AUTH_URI}  https://${OPENBMC_HOST_ETH1}
     Run Keyword If  '${cert_type}' == 'CA' and '${delete_cert}' == '${True}'
     ...  Delete All CA Certificate Via Redfish
     ...  ELSE IF  '${cert_type}' == 'Client' and '${delete_cert}' == '${True}'

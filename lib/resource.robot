@@ -23,6 +23,12 @@ ${OPENBMC_HOST}            ${EMPTY}
 ${DBUS_PREFIX}             ${EMPTY}
 ${PORT}                    ${EMPTY}
 
+# BMC ethernet eth0 and eth1 for multiple interfaces.
+# By default eth0 is assigned with OPENBMC_HOST
+${OPENBMC_HOST_ETH0}       ${OPENBMC_HOST}
+${OPENBMC_HOST_ETH1}       ${EMPTY}
+
+
 # AUTH_SUFFIX here is derived from variables.py
 ${AUTH_URI}                https://${OPENBMC_HOST}${AUTH_SUFFIX}
 ${OPENBMC_USERNAME}        root
