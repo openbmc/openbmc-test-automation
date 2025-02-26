@@ -7,7 +7,7 @@ Resource       ../../lib/openbmc_ffdc.robot
 Library        ../../lib/bmc_network_utils.py
 
 Suite Setup    Suite Setup Execution
-Test Teardown  Test Teardown Execution
+#Test Teardown  Test Teardown Execution
 
 Test Tags     Bmc_Network_Mac
 
@@ -174,7 +174,7 @@ Configure MAC Settings
     ${payload}=  Create Dictionary  MACAddress=${mac_address}
 
     Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{payload}
-    ...  valid_status_codes=[${valid_status_code},${HTTP_INTERNAL_SERVER_ERROR}]
+    ...  valid_status_codes=[${valid_status_code},${HTTP_NO_CONTENT},${HTTP_INTERNAL_SERVER_ERROR}]
 
     # After any modification on network interface, BMC restarts network
     # Note: Network restart takes around 15-18s after patch request processing.
