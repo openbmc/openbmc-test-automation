@@ -15,13 +15,10 @@ Suite Setup    Suite Setup Execution
 Test Tags     BMC_IPv6
 
 *** Variables ***
-${test_ipv6_addr}          2001:db8:3333:4444:5555:6666:7777:8888
-${test_ipv6_invalid_addr}  2001:db8:3333:4444:5555:6666:7777:JJKK
-${test_ipv6_addr1}         2001:db8:3333:4444:5555:6666:7777:9999
-
-# Valid prefix length is a integer ranges from 1 to 128.
-${test_prefix_length}     64
-
+${test_ipv6_addr}           2001:db8:3333:4444:5555:6666:7777:8888
+${test_ipv6_invalid_addr}   2001:db8:3333:4444:5555:6666:7777:JJKK
+${test_ipv6_addr1}          2001:db8:3333:4444:5555:6666:7777:9999
+${test_prefix_length}       64
 
 *** Test Cases ***
 
@@ -91,6 +88,19 @@ Modify IPv6 Address And Verify
     Modify IPv6 Address  ${test_ipv6_addr}  ${test_ipv6_addr1}  ${test_prefix_length}
 
 
+Verify Persistency Of IPv6 After Reboot
+    [Documentation]  Verify persistency of ipv6 after reboot.
+    [Tags]  Verify_Persistency_Of_IPv6_After_Reboot
+    [Teardown]  Delete IPv6 Address  ${test_ipv6_addr}
+
+    Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
+
+    Redfish OBMC Reboot (off)  stack_mode=skip
+
+    # Verifying persistency of IPv6.
+    Verify IPv6 On BMC  ${test_ipv6_addr}
+
+    
 *** Keywords ***
 
 Suite Setup Execution
