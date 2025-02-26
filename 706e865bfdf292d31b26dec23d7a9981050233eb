@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dae270b3_49637ac1",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-02-26T06:03:53Z",
+      "side": 1,
+      "message": "After BMC Reboot -- Change where ever applicable pls",
+      "range": {
+        "startLine": 93,
+        "startChar": 1,
+        "endLine": 93,
+        "endChar": 39
+      },
+      "revId": "706e865bfdf292d31b26dec23d7a9981050233eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbacd2fe_28d782a4",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-02-26T06:03:53Z",
+      "side": 1,
+      "message": "Misses the standard test teardown where FFDC collection happens.\nIs failure to delete IPV6 address handled? Just in case the configuration isnt successful and teardown fails",
+      "revId": "706e865bfdf292d31b26dec23d7a9981050233eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
