@@ -16,6 +16,24 @@
       "message": "what is the reason for getting 204 now?\nis anything changed?",
       "revId": "345a7c10e7efc753af32914ec1149ad7f46de641",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cc37f05_8717a90e",
+        "filename": "redfish/managers/test_bmc_network_mac.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-02-26T07:14:41Z",
+      "side": 1,
+      "message": "204 No Content: Success, and the action\u0027s schema definition does not contain an action response.\nAfter discussion with dev, they are saying changing upstream changes with right return code",
+      "parentUuid": "c4bf3b91_8f400b93",
+      "revId": "345a7c10e7efc753af32914ec1149ad7f46de641",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
