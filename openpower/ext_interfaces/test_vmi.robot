@@ -3,6 +3,7 @@
 Documentation     VMI static/dynamic IP config tests.
 
 Resource          ../../lib/external_intf/vmi_utils.robot
+Resource          ../../lib/bmc_ipv6_utils.robot
 
 Suite Setup       Suite Setup Execution
 Test Teardown     FFDC On Test Case Fail
@@ -43,6 +44,7 @@ ${test_netmask}           255.255.252.0
 ${default}                0.0.0.0
 ${default_ipv6addr}       ::
 ${prefix_length}          ${64}
+${test_vmi_ipv6addr}      2001:db8:1111:2222:10:5:5:6
 
 
 *** Test Cases ***
@@ -635,6 +637,17 @@ Enable VMI SLAAC When IPv4 Origin Is Static And Verify
     Verify VMI Network Interface Details  ${test_ipv4}  Static  ${test_gateway}  ${test_netmask}
 
 
+Configure Static VMI IPv6 Address And Verify
+    [Documentation]  Add static VMI IPv6 address and check whether ipv6 origin is set to static
+    ...  and Static IPv6 address are assigned.
+    [Tags]  Configure_Static_VMI_IPv6_Address_And_Verify
+
+    Configure VMI IPv6 Address  ${test_vmi_ipv6addr}  ${prefix_length}
+ 
+    # Verify IPv6 address origin is set to static and static IPv6 address is assigned.
+    ${vmi_ipv6addr}=  Verify VMI IPv6 Address  Static
+    Should Not Be Equal  ${vmi_ipv6addr["Address"]}  ${default_ipv6addr}
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -855,3 +868,31 @@ Set VMI DHCPv6 Property
     ${resp}=  Redfish.Get
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
     Should Be Equal  ${resp.dict["DHCPv6"]["OperatingMode"]}  ${dhcpv6_operatingmode}
+
+
+Configure VMI IPv6 Address
+    [Documentation]  Add VMI IPv6 address..
+    [Arguments]  ${vmi_ipv6_addr}  ${prefix_len}  ${valid_status_codes}=${HTTP_ACCEPTED}
+    ...  ${interface}=${ethernet_interface}
+
+    # Description of argument(s):
+    # vmi_ipv6_addr       VMI IPv6 address to be added.
+    # prefix_len          Prefix length for the VMI IPv6 to be added.
+    # valid_status_codes  Expected valid status code from PATCH request.
+    # interface           VMI interface (eg. eth0 or eth1).
+
+    ${prefix_length}=  Convert To Integer  ${prefix_len}
+    ${empty_dict}=  Create Dictionary
+    ${vmi_ipv6_data}=  Create Dictionary  Address=${vmi_ipv6_addr}
+    ...  PrefixLength=${prefix_length}
+
+    ${patch_list}=  Create List
+
+    Append To List  ${patch_list}  ${vmi_ipv6_data}
+    ${data}=  Create Dictionary  IPv6StaticAddresses=${patch_list}
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    Redfish.patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+    ...  body=&{data}  valid_status_codes=[${valid_status_codes}]
