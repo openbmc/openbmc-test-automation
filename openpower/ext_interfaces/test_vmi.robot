@@ -44,6 +44,7 @@ ${default}                0.0.0.0
 ${default_ipv6addr}       ::
 ${prefix_length}          ${64}
 ${test_vmi_ipv6addr}      2001:db8:1111:2222:10:5:5:6
+${test_vmi_ipv6gateway}   2001:db8:1111:2222::1
 
 
 *** Test Cases ***
@@ -649,6 +650,18 @@ Configure Static VMI IPv6 Address And Verify
     Should Be Equal  ${vmi_ipv6addr["PrefixLength"]}  ${prefix_length}
 
 
+Configure IPv6 Static Default Gateway On VMI And Verify
+    [Documentation]  Configure IPv6 static default gateway on VMI and verify.
+    [Tags]  Configure_IPv6_Static_Default_Gateway_On_VMI_And_Verify
+
+    Set VMI IPv6 Static Default Gateway  ${test_vmi_ipv6gateway}
+
+    ${resp}=  Redfish.Get
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${ethernet_interface}
+    ${vmi_ipv6_gateway}=  Get From Dictionary  ${resp.dict}  IPv6StaticDefaultGateways
+    Should Be Equal  ${vmi_ipv6_gateway}  ${test_vmi_ipv6gateway}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -891,6 +904,26 @@ Set Static VMI IPv6 Address
 
     Append To List  ${patch_list}  ${vmi_ipv6_data}
     ${data}=  Create Dictionary  IPv6StaticAddresses=${patch_list}
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    Redfish.patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+    ...  body=&{data}  valid_status_codes=[${valid_status_codes}]
+
+
+Set VMI IPv6 Static Default Gateway
+    [Documentation]  Set VMI IPv6 static default gateway address.
+    [Arguments]  ${vmi_staticipv6_gateway}  ${valid_status_codes}=${HTTP_ACCEPTED}
+    ...  ${interface}=${ethernet_interface}
+
+    # Description of argument(s):
+    # vmi_staticipv6_gateway   VMI static IPv6 default gateway address.
+    # valid_status_codes       Expected valid status code from PATCH request.
+    # interface                VMI interface (eg. eth0 or eth1).
+
+    ${patch_list}=  Create List  ${vmi_staticipv6_gateway}
+    ${data}=  Create Dictionary  IPv6StaticDefaultGateways=${patch_list}
 
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
