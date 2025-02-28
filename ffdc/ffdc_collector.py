@@ -211,10 +211,19 @@ class ffdc_collector:
 
         run_env_ok = True
 
-        redfishtool_version = (
-            self.run_tool_cmd("redfishtool -V").split(" ")[2].strip("\n")
-        )
-        ipmitool_version = self.run_tool_cmd("ipmitool -V").split(" ")[2]
+        try:
+            redfishtool_version = (
+                self.run_tool_cmd("redfishtool -V").split(" ")[2].strip("\n")
+            )
+        except Exception as e:
+            self.logger.error("\tEXCEPTION redfishtool: %s", e)
+            redfishtool_version = "Not Installed (optional)"
+
+        try:
+            ipmitool_version = self.run_tool_cmd("ipmitool -V").split(" ")[2]
+        except Exception as e:
+            self.logger.error("\tEXCEPTION ipmitool: %s", e)
+            ipmitool_version = "Not Installed (optional)"
 
         self.logger.info("\n\t---- Script host environment ----")
         self.logger.info(
@@ -466,9 +475,7 @@ class ffdc_collector:
         if protocol == "SCP":
             self.group_copy(self.ffdc_actions[target_type][sub_type])
         else:
-            self.collect_and_copy_ffdc(
-                self.ffdc_actions[target_type][sub_type]
-            )
+            self.collect_and_copy_ffdc(self.ffdc_actions[target_type][sub_type])
 
     def protocol_telnet(self, target_type, sub_type):
         r"""
