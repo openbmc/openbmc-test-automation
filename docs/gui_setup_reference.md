@@ -12,6 +12,7 @@ Browser specific packages:
 - geckodriver
 - Robotframework xvfb
 - xvfbwrapper
+- Robot Framework AngularJS Library
 
 ## Tested On Linux
 
@@ -21,9 +22,9 @@ Browser specific packages:
 Last tested packages versions:
 
 ```
-    Python                          3.10.6
+    Python                          3.11.9
     Mozilla Firefox                 112.0.2
-    Robot Framework                 5.0.1
+    Robot Framework                 7.1.1
     robotframework-seleniumlibrary  6.0.0
     geckodriver                     0.32.2
     robotframework-xvfb             1.2.2
@@ -46,6 +47,7 @@ The recommended installation method is using pip:
     pip install --upgrade robotframework-seleniumlibrary
     pip install --upgrade xvfbwrapper
     pip install --upgrade robotframework-xvfb
+    pip install --upgrade robotframework-angularjs
 ```
 
 ## Geckodriver Supported Platforms
