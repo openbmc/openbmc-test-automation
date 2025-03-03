@@ -790,7 +790,7 @@ Is Power Off
 CLI Get BMC DateTime
     [Documentation]  Returns BMC date time from date command.
 
-    ${bmc_time_via_date}  ${stderr}  ${rc}=  BMC Execute Command  date +"%Y-%m-%d %H:%M:%S"  print_err=1
+    ${bmc_time_via_date}  ${stderr}  ${rc}=  BMC Execute Command  date +"%Y-%m-%dT%H:%M:%S"  print_err=1
     RETURN  ${bmc_time_via_date}
 
 
