@@ -316,7 +316,10 @@ Modify BMC Date
     ...  body={'NTP':{'ProtocolEnabled': ${False}}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
+    # Change date format to 2024-03-07T07:58:50+00:00 from 2024-03-07 07:58:50.000.
+    ${new_time_format}=  Convert Date  ${new_time}  result_format=%Y-%m-%dT%H:%M:%S+00:00
+
     # NTP network takes few seconds to restart.
     Wait Until Keyword Succeeds  30 sec  10 sec
-    ...  Redfish.Patch  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  body={'DateTime': '${new_time}'}
-    ...  valid_status_codes=[${HTTP_OK}]
+    ...  Redfish.Patch  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  body={'DateTime': '${new_time_format}'}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
