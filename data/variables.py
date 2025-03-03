@@ -202,6 +202,12 @@ REDFISH_NW_ETH_IFACE = (
     + REDFISH_MANAGERS_ID
     + "/EthernetInterfaces/"
 )
+REDFISH_LLDP_ETH_IFACE = (
+    REDFISH_BASE_URI
+    + "Managers/"
+    + REDFISH_MANAGERS_ID
+    + "/DedicatedNetworkPorts/"
+)
 REDFISH_NW_PROTOCOL = "Managers/" + REDFISH_MANAGERS_ID + "/NetworkProtocol"
 REDFISH_NW_PROTOCOL_URI = REDFISH_BASE_URI + REDFISH_NW_PROTOCOL
 REDFISH_ACCOUNTS_SERVICE = "AccountService/"
