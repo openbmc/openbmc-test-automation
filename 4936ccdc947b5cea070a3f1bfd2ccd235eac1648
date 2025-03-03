@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b739e0b_fae5eeef",
+        "filename": "docs/gui_setup_reference.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-03T06:42:03Z",
+      "side": 1,
+      "message": "- Robot Framework AngularJS Library \n\nFor FYI:\n\nthis we are no longer supported actively in the main branch we should delete the GUI code from the main branch eventually and point to the last stable branch to the community IF they still want to use the code.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 35
+      },
+      "revId": "4936ccdc947b5cea070a3f1bfd2ccd235eac1648",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
