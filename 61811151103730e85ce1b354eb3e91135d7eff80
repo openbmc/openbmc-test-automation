@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06f9ffaf_dd4ea38e",
+        "filename": "requirements.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-03-03T05:16:27Z",
+      "side": 1,
+      "message": "Why is this required?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 5
+      },
+      "revId": "61811151103730e85ce1b354eb3e91135d7eff80",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
