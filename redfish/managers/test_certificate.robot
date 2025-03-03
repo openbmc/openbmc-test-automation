@@ -264,7 +264,7 @@ Restore BMC Date
     [Documentation]  Restore BMC date to its prior value.
 
     Redfish.Patch  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  body={'DateTime': '${cli_date_time}'}
-    ...  valid_status_codes=[${HTTP_OK}]
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
 
 Generate CSR Via Redfish
