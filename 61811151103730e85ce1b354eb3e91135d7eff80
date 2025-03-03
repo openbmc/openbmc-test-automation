@@ -22,6 +22,30 @@
       },
       "revId": "61811151103730e85ce1b354eb3e91135d7eff80",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acb37349_1cbe8f03",
+        "filename": "requirements.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-03-03T05:47:40Z",
+      "side": 1,
+      "message": "It is used in ./ffdc/collect_ffdc.py\ncheck ./ffdc/README.md",
+      "parentUuid": "06f9ffaf_dd4ea38e",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 5
+      },
+      "revId": "61811151103730e85ce1b354eb3e91135d7eff80",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
