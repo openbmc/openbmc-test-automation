@@ -34,7 +34,7 @@ Test Teardown            FFDC On Test Case Fail
 Test Tags               Redfish_Bmc_Code_Update
 
 *** Variables ***
-
+# Admin credentials
 @{ADMIN}                 admin_user  TestPwd123
 &{USERS}                 Administrator=${ADMIN}
 ${LOOP_COUNT}            ${2}
