@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84a327a8_87d40fdd",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-03-04T04:54:49Z",
+      "side": 1,
+      "message": "this line not required because from ${interface} directly using eth0 \u0026 eth1\ninstead using Channel_number",
+      "range": {
+        "startLine": 927,
+        "startChar": 0,
+        "endLine": 929,
+        "endChar": 95
+      },
+      "revId": "131921d18af0cd804c7776054f09631e3113e33e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
