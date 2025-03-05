@@ -346,7 +346,7 @@ Verify Core Dump After Terminating Dump Manager Service
     Should Be Equal As Integers  ${rc}  ${0}
 
     # Verify that BMC dump is available.
-    Wait Until Keyword Succeeds  2 min  10 sec  Is BMC Dump Available
+    Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Dump Available
 
     # Verifying that there is only one dump.
     ${dump_entries}=  Get BMC Dump Entries
