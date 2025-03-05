@@ -203,6 +203,7 @@ Verify Setting Error Log As Resolved
 
     # Mark error log as resolved by setting it to true.
     Redfish.Patch  ${EVENT_LOG_URI}Entries/${elog_entry[0]["Id"]}  body={'Resolved':True}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     ${elog_entry}=  Get Event Logs
 
