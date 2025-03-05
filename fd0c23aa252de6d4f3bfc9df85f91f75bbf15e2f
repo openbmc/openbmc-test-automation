@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a794578a_0085944d",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-05T06:04:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b13b4ec8_56864373",
+      "revId": "fd0c23aa252de6d4f3bfc9df85f91f75bbf15e2f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfd80f33_51a8dbcc",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2b029a6_d932b3a7",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-05T06:04:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfd80f33_51a8dbcc",
+      "revId": "fd0c23aa252de6d4f3bfc9df85f91f75bbf15e2f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c02106ad_a5ee80f3",
@@ -48,6 +84,30 @@
       "writtenOn": "2025-03-04T08:05:38Z",
       "side": 1,
       "message": "Should be failing the test instead of just logging",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 22
+      },
+      "revId": "fd0c23aa252de6d4f3bfc9df85f91f75bbf15e2f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "890ab39b_9472b031",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-05T06:04:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c02106ad_a5ee80f3",
       "range": {
         "startLine": 57,
         "startChar": 4,
