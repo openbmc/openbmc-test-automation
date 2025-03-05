@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "765c80b3_99658e69",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-03-05T06:51:09Z",
+      "side": 1,
+      "message": "may be u need to create a separate keyword\n\n```\nSet And Verify LLDP Configuration State\n[Arguments] ${lldp_state} ${valid_status_codes}\u003d${HTTP_OK}, ${HTTP_NO_CONTENT}]\n\n\nRedfish.Patch  ${REDFISH_LLDP_ETH_IFACE}${ethernet_interface}  body\u003d{\u0027Ethernet\u0027:{\u0027LLDPEnabled\u0027: ${lldp_state}}} valid_status_codes\u003d${valid_status_codes}\n\n  \n```",
+      "parentUuid": "9daf80b7_0028987e",
+      "range": {
+        "startLine": 21,
+        "startChar": 21,
+        "endLine": 21,
+        "endChar": 43
+      },
+      "revId": "b5987e09a5e131ceaab671741161a9ee85008048",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "680cf89b_92096c08",
         "filename": "redfish/managers/test_lldp_config.robot",
         "patchSetId": 3
