@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50a11c4f_e82866c7",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-03-06T14:24:21Z",
+      "side": 1,
+      "message": "this keyword is similar to the - Delete VMI IPv4 Address in ./lib/external_intf/vmi_utils.robot\n\nwhy not improve the existing keyword to delete IPV6 address as well? \nas - Delete VMI IPv4 Or IPV6 Static Address\n\n--\u003e Also this is not the right place to put the keyword",
+      "revId": "d44abe504e9bda32b680472be0c1f43c5a5e6f93",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
