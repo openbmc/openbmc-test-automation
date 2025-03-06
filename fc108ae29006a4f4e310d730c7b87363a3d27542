@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb15bf69_de7066b1",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-03-06T14:16:50Z",
+      "side": 1,
+      "message": "once it is deleted , check whether same value there or not",
+      "parentUuid": "15f3c020_33cf023b",
+      "revId": "fc108ae29006a4f4e310d730c7b87363a3d27542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "014bada4_e24d1a11",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
         "patchSetId": 1
@@ -120,6 +138,30 @@
       "side": 1,
       "message": "as soon as patch is done in VMI it requires time to get update so i ahve added it here",
       "parentUuid": "9e29e3ad_1bf25be6",
+      "range": {
+        "startLine": 960,
+        "startChar": 3,
+        "endLine": 960,
+        "endChar": 13
+      },
+      "revId": "fc108ae29006a4f4e310d730c7b87363a3d27542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f82f39d8_953f4bd5",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-03-06T14:16:50Z",
+      "side": 1,
+      "message": "then use inside testcase",
+      "parentUuid": "0d1a5e87_53047b86",
       "range": {
         "startLine": 960,
         "startChar": 3,
