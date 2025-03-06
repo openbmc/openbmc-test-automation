@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ad1ddd5_a30a20da",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-03-06T13:41:59Z",
+      "side": 1,
+      "message": "as you are not verifying anything inside this keyword, i would suggest you to name this keyword as \"Set LLDP Configuration State\"",
+      "revId": "fad58a4306132e204141ec4fd511cc9af0e29dfe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f85e8a92_703c55fe",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-03-06T13:41:59Z",
+      "side": 1,
+      "message": "Please add documentation",
+      "revId": "fad58a4306132e204141ec4fd511cc9af0e29dfe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5886f4d3_83c93f36",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-03-06T13:41:59Z",
+      "side": 1,
+      "message": "align the lines \u0026 end with period",
+      "revId": "fad58a4306132e204141ec4fd511cc9af0e29dfe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79a738ea_1752d94d",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-03-06T13:41:59Z",
+      "side": 1,
+      "message": "As you are collecting only FFDC in test teardown, you can directly call it in settings like below in order to avoid extra lines\n\nTest Teardown Execution   FFDC On Test Case Fail",
+      "revId": "fad58a4306132e204141ec4fd511cc9af0e29dfe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b31eea57_5e3c25de",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-03-06T13:41:59Z",
+      "side": 1,
+      "message": "same as above comment\n\nSuite Teardown Execution  Redfish.Logout",
+      "revId": "fad58a4306132e204141ec4fd511cc9af0e29dfe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
