@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15f3c020_33cf023b",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-03-06T14:07:55Z",
+      "side": 1,
+      "message": "Here am checking whether IPv6 address is empty",
+      "parentUuid": "fc9b19dd_162f0423",
+      "revId": "fc108ae29006a4f4e310d730c7b87363a3d27542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "014bada4_e24d1a11",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2025-03-06T14:03:40Z",
       "side": 1,
       "message": "Redfish.Patch",
+      "range": {
+        "startLine": 957,
+        "startChar": 4,
+        "endLine": 957,
+        "endChar": 18
+      },
+      "revId": "fc108ae29006a4f4e310d730c7b87363a3d27542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b6336e7_f1deacd1",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 957,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-03-06T14:07:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "014bada4_e24d1a11",
       "range": {
         "startLine": 957,
         "startChar": 4,
@@ -54,6 +96,30 @@
       "writtenOn": "2025-03-06T14:03:40Z",
       "side": 1,
       "message": "it is not required",
+      "range": {
+        "startLine": 960,
+        "startChar": 3,
+        "endLine": 960,
+        "endChar": 13
+      },
+      "revId": "fc108ae29006a4f4e310d730c7b87363a3d27542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d1a5e87_53047b86",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-03-06T14:07:55Z",
+      "side": 1,
+      "message": "as soon as patch is done in VMI it requires time to get update so i ahve added it here",
+      "parentUuid": "9e29e3ad_1bf25be6",
       "range": {
         "startLine": 960,
         "startChar": 3,
