@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc9b19dd_162f0423",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-03-06T14:03:40Z",
+      "side": 1,
+      "message": "Should Not Equal As String  ${vmi_ipv6addr[\"Address\"]} ${test_vmi_ipv6addr}",
+      "revId": "fc108ae29006a4f4e310d730c7b87363a3d27542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "014bada4_e24d1a11",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 957,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-03-06T14:03:40Z",
+      "side": 1,
+      "message": "Redfish.Patch",
+      "range": {
+        "startLine": 957,
+        "startChar": 4,
+        "endLine": 957,
+        "endChar": 18
+      },
+      "revId": "fc108ae29006a4f4e310d730c7b87363a3d27542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e29e3ad_1bf25be6",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-03-06T14:03:40Z",
+      "side": 1,
+      "message": "it is not required",
+      "range": {
+        "startLine": 960,
+        "startChar": 3,
+        "endLine": 960,
+        "endChar": 13
+      },
+      "revId": "fc108ae29006a4f4e310d730c7b87363a3d27542",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
