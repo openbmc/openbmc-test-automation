@@ -17,6 +17,18 @@ Library          ../../lib/bmc_network_utils.py
 &{ENABLE_DHCP}            DHCPv4=&{DHCP_ENABLED}
 &{DISABLE_DHCP}           DHCPv4=&{DHCP_DISABLED}
 
+&{SLAAC_ENABLED}          IPv6AutoConfigEnabled=${True}
+&{SLAAC_DISABLED}         IPv6AutoConfigEnabled=${False}
+
+&{ENABLE_SLAAC}           StatelessAddressAutoConfig=&{SLAAC_ENABLED}
+&{DISABLE_SLAAC}          StatelessAddressAutoConfig=&{SLAAC_DISABLED}
+
+&{DHCPv6_ENABLED}         OperatingMode=Enabled
+&{DHCPv6_DISABLED}        OperatingMode=Disabled
+
+&{ENABLE_DHCPv6}          DHCPv6=&{DHCPv6_ENABLED}
+&{DISABLE_DHCPv6}         DHCPv6=&{DHCPv6_DISABLED}
+
 ${wait_time}              40s
 ${ethernet_interface}     eth0
 
@@ -209,3 +221,126 @@ Get And Set Static VMI IP
     ...  ${bmc_ip_data[0]['SubnetMask']}  ${valid_status_code}  ${interface}
 
     RETURN   ${vmi_ip}  ${bmc_ip_data}
+
+
+Set VMI SLAACv6 Origin
+    [Documentation]  Set VMI SLAACv6 origin.
+    [Arguments]  ${slaac_enabled}=${False}  ${valid_status_code}=${HTTP_ACCEPTED}
+    ...  ${interface}=${ethernet_interface}
+
+    # Description of argument(s):
+    # slaacv6_enabled    True if user wants to enable SLAACv6. Default is Static, hence value is set to False.
+    # valid_status_code  Expected valid status code from PATCH request. Default is HTTP_OK.
+    # interface          VMI interface (eg. eth0 or eth1).
+
+    ${data}=  Set Variable If  ${slaac_enabled} == ${False}  ${DISABLE_SLAAC}  ${ENABLE_SLAAC}
+    ${resp}=  Redfish.Patch
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+    ...  body=${data}  valid_status_codes=[${valid_status_code}]
+
+    Sleep  ${wait_time}
+    Return From Keyword If  ${valid_status_code} != ${HTTP_ACCEPTED}
+    ${resp}=  Redfish.Get
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+    Should Be Equal  ${resp.dict["StatelessAddressAutoConfig"]["IPv6AutoConfigEnabled"]}  ${slaac_enabled}
+
+
+Verify VMI IPv6 Address
+    [Documentation]  Verify VMI IPv6 address configurations.
+    [Arguments]  ${ipv6_origin}  ${interface}=${ethernet_interface}
+
+    # Description of argument(s):
+    # ipv6_origin     Origin of IPv6 address eg. Static or DHCPv6 or SLAAC.
+    # interface       VMI interface (eg. eth0 or eth1).
+
+    ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+
+    @{vmi_ipv6_configurations}=  Get From Dictionary  ${resp.dict}  IPv6Addresses
+    ${vmi_ipv6_config}=  Get From List  ${vmi_ipv6_configurations}  0
+    Should Not Be Empty  ${vmi_ipv6_config["Address"]}
+    Should Be Equal As Strings   ${vmi_ipv6_config["AddressOrigin"]}  ${ipv6_origin}
+    RETURN  &{vmi_ipv6_config}
+
+
+Set VMI DHCPv6 Property
+    [Documentation]  Set VMI DHCPv6 attribute.
+    [Arguments]  ${dhcpv6_operatingmode}=${Disabled}  ${valid_status_code}=${HTTP_ACCEPTED}
+    ...  ${interface}=${ethernet_interface}
+
+    # Description of argument(s):
+    # dhcpv6_operatingmode    Enabled if user wants to enable DHCPv6.
+    # ...                     Default is Static, hence value is set to Disabled.
+    # valid_status_code       Expected valid status code from PATCH request. Default is HTTP_OK.
+    # interface               VMI interface (eg. eth0 or eth1).
+
+    ${data}=  Set Variable If  '${dhcpv6_operatingmode}' == 'Disabled'  ${DISABLE_DHCPv6}  ${ENABLE_DHCPv6}
+    ${resp}=  Redfish.Patch
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+    ...  body=${data}  valid_status_codes=[${valid_status_code}]
+
+    Sleep  ${wait_time}
+    Return From Keyword If  ${valid_status_code} != ${HTTP_ACCEPTED}
+    ${resp}=  Redfish.Get
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+    Should Be Equal  ${resp.dict["DHCPv6"]["OperatingMode"]}  ${dhcpv6_operatingmode}
+
+
+Set Static VMI IPv6 Address
+    [Documentation]  Add static VMI IPv6 address.
+    [Arguments]  ${vmi_ipv6_addr}  ${prefix_len}  ${valid_status_codes}=${HTTP_ACCEPTED}
+    ...  ${interface}=${ethernet_interface}
+
+    # Description of argument(s):
+    # vmi_ipv6_addr       VMI IPv6 address to be added.
+    # prefix_len          Prefix length for the VMI IPv6 to be added.
+    # valid_status_codes  Expected valid status code from PATCH request.
+    # interface           VMI interface (eg. eth0 or eth1).
+
+    ${prefix_length}=  Convert To Integer  ${prefix_len}
+    ${empty_dict}=  Create Dictionary
+    ${vmi_ipv6_data}=  Create Dictionary  Address=${vmi_ipv6_addr}
+    ...  PrefixLength=${prefix_length}
+
+    ${patch_list}=  Create List
+
+    Append To List  ${patch_list}  ${vmi_ipv6_data}
+    ${data}=  Create Dictionary  IPv6StaticAddresses=${patch_list}
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    Redfish.patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+    ...  body=&{data}  valid_status_codes=[${valid_status_codes}]
+
+
+Set VMI IPv6 Static Default Gateway
+    [Documentation]  Set VMI IPv6 static default gateway address.
+    [Arguments]  ${vmi_staticipv6_gateway}  ${valid_status_codes}=${HTTP_ACCEPTED}
+    ...  ${interface}=${ethernet_interface}
+
+    # Description of argument(s):
+    # vmi_staticipv6_gateway   VMI static IPv6 default gateway address.
+    # valid_status_codes       Expected valid status code from PATCH request.
+    # interface                VMI interface (eg. eth0 or eth1).
+
+    ${patch_list}=  Create List  ${vmi_staticipv6_gateway}
+    ${data}=  Create Dictionary  IPv6StaticDefaultGateways=${patch_list}
+
+    Redfish.patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+    ...  body=&{data}  valid_status_codes=[${valid_status_codes}]
+
+
+Delete VMI IPv6 Static Address
+    [Documentation]  Delete VMI IPv6 static address.
+    [Arguments]  ${valid_status_codes}=${HTTP_ACCEPTED}
+    ...  ${interface}=${ethernet_interface}
+
+    # Description of argument(s):
+    # valid_status_codes       Expected valid status code from PATCH request.
+    # interface                VMI interface (eg. eth0 or eth1).
+
+    ${data}=  Set Variable  {"IPv6StaticAddresses": [${Null}]}
+    Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+    ...  body=${data}  valid_status_codes=[${valid_status_codes}]
+
+    Sleep  5s
