@@ -41,6 +41,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fc0c91c_7c2cf570",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-06T17:11:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ad1ddd5_a30a20da",
+      "revId": "fad58a4306132e204141ec4fd511cc9af0e29dfe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f85e8a92_703c55fe",
@@ -81,6 +99,48 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80ede8b0_58e19d66",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-06T17:11:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f85e8a92_703c55fe",
+      "revId": "fad58a4306132e204141ec4fd511cc9af0e29dfe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b85263b_7c165850",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-06T17:11:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc9d80bd_f1eece3e",
+      "range": {
+        "startLine": 40,
+        "startChar": 53,
+        "endLine": 40,
+        "endChar": 86
+      },
+      "revId": "fad58a4306132e204141ec4fd511cc9af0e29dfe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5886f4d3_83c93f36",
@@ -98,6 +158,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea3cb137_807ef255",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-06T17:11:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5886f4d3_83c93f36",
+      "revId": "fad58a4306132e204141ec4fd511cc9af0e29dfe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21595454_08c151a0",
@@ -111,6 +189,30 @@
       "writtenOn": "2025-03-06T14:11:36Z",
       "side": 1,
       "message": "Redfish.Patch  ${REDFISH_LLDP_ETH_IFACE}${ethernet_interface}  body\u003d{\u0027Ethernet\u0027:{\u0027LLDPEnabled\u0027: ${lldp_state}}}  valid_status_codes\u003d[${valid_status_codes}, ${HTTP_NO_CONTENT}]",
+      "range": {
+        "startLine": 47,
+        "startChar": 28,
+        "endLine": 47,
+        "endChar": 49
+      },
+      "revId": "fad58a4306132e204141ec4fd511cc9af0e29dfe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8afd732_06ff66c2",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-06T17:11:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21595454_08c151a0",
       "range": {
         "startLine": 47,
         "startChar": 28,
@@ -146,6 +248,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3104ad77_c93ba26b",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-06T17:11:17Z",
+      "side": 1,
+      "message": "Yes, Keeping as is for now as eventually I can move this to lib if more keywords come up.",
+      "parentUuid": "060080e9_a2d84c05",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 52
+      },
+      "revId": "fad58a4306132e204141ec4fd511cc9af0e29dfe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79a738ea_1752d94d",
         "filename": "redfish/managers/test_lldp_config.robot",
         "patchSetId": 4
@@ -157,6 +283,24 @@
       "writtenOn": "2025-03-06T13:41:59Z",
       "side": 1,
       "message": "As you are collecting only FFDC in test teardown, you can directly call it in settings like below in order to avoid extra lines\n\nTest Teardown Execution   FFDC On Test Case Fail",
+      "revId": "fad58a4306132e204141ec4fd511cc9af0e29dfe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23378c7e_acff6307",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-06T17:11:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79a738ea_1752d94d",
       "revId": "fad58a4306132e204141ec4fd511cc9af0e29dfe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -174,6 +318,24 @@
       "writtenOn": "2025-03-06T13:41:59Z",
       "side": 1,
       "message": "same as above comment\n\nSuite Teardown Execution  Redfish.Logout",
+      "revId": "fad58a4306132e204141ec4fd511cc9af0e29dfe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0621d103_df3c96c5",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-06T17:11:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b31eea57_5e3c25de",
       "revId": "fad58a4306132e204141ec4fd511cc9af0e29dfe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
