@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab974f6d_9768d929",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 957,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-03-06T14:37:57Z",
+      "side": 1,
+      "message": "${data}\u003d  Set Variable  {\"IPv6StaticAddresses\": [${Null}]}",
+      "range": {
+        "startLine": 955,
+        "startChar": 5,
+        "endLine": 957,
+        "endChar": 0
+      },
+      "revId": "ee2525b3c6b44398c4e4f41179b1dbad7d67ea0f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
