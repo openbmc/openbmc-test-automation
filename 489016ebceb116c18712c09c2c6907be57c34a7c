@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d56a7273_807b1c25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-06T09:39:11Z",
+      "side": 1,
+      "message": "Please group all the UI related packages at the end the end of the requirement.txt\n\nand also UI packages will not work in any level of version.. Please check before adding it version.. \n\nRefer https://github.com/openbmc/openbmc-test-automation/blob/master/docs/gui_setup_reference.md",
+      "revId": "489016ebceb116c18712c09c2c6907be57c34a7c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c14750a0_187d03d9",
+        "filename": "requirements.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-06T09:39:11Z",
+      "side": 1,
+      "message": "Please add back \nparamiko\u003e\u003d2.5.0",
+      "revId": "489016ebceb116c18712c09c2c6907be57c34a7c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c02e7d51_8a0a120c",
+        "filename": "requirements.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-06T09:39:11Z",
+      "side": 1,
+      "message": "1.1.8",
+      "range": {
+        "startLine": 14,
+        "startChar": 13,
+        "endLine": 14,
+        "endChar": 18
+      },
+      "revId": "489016ebceb116c18712c09c2c6907be57c34a7c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25176120_fd3e9378",
+        "filename": "requirements.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-06T09:39:11Z",
+      "side": 1,
+      "message": "Remove this ipmitool..  pip3 wont install it..",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 16
+      },
+      "revId": "489016ebceb116c18712c09c2c6907be57c34a7c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
