@@ -664,6 +664,24 @@ Delete VMI Static IPv6 Address And Verify
     Should Be Equal  ${vmi_ipv6addr["Address"]}  ${default_ipv6addr}
 
 
+Enable VMI DHCPv6 When IPv6 Origin Is Static And Verify
+    [Documentation]  Enable VMI DHCPv6 when IPv6 origin is in static and verify
+    ...  origin is set to dhcp and static IPv6 address is erased.
+    [Tags]  Enable_VMI_DHCPv6_When_IPv6_Origin_Is_Static_And_Verify
+
+    Set Static VMI IPv6 Address  ${test_vmi_ipv6addr}  ${prefix_length}
+    ${vmi_ipv6addr}=  Verify VMI IPv6 Address  Static
+
+    Sleep  5s
+
+    # Enable DHCPv6 property.
+    Set VMI DHCPv6 Property  Enabled
+
+    # Check origin is set to dhcp and static IPv6 address is erased.
+    ${vmi_dhcpv6addr}=  Verify VMI IPv6 Address  DHCPv6
+    Should Not Be Equal  ${vmi_dhcpv6addr["Address"]}  ${vmi_ipv6addr["Address"]}
+
+
 *** Keywords ***
 
 Suite Setup Execution
