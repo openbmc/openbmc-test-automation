@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "523d665c_4db13615",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-07T07:47:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f35a0d56_356822ff",
+      "revId": "a3a716000d46748d09b52029f712873c276177b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63603461_a97c3ca9",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-03-06T17:25:47Z",
       "side": 1,
       "message": "you can remove this keyword , as you have already called in settings",
+      "revId": "a3a716000d46748d09b52029f712873c276177b0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a3c9c00_0667eda7",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-07T07:47:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63603461_a97c3ca9",
       "revId": "a3a716000d46748d09b52029f712873c276177b0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
