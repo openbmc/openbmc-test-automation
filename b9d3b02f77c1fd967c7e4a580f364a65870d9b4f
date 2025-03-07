@@ -16,6 +16,23 @@
       "message": "add comment here \"Verify the LLDP state is set true\"\n\nor else add it in above coment line \"Set the LLDP enabled property as True \u0026 verify.\"",
       "revId": "b9d3b02f77c1fd967c7e4a580f364a65870d9b4f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "092aaa15_b0854d31",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-03-07T08:05:10Z",
+      "side": 1,
+      "message": "Sweta please move the all lldp keywords to new utils as lib/external_intf/lldp_utils.robot",
+      "revId": "b9d3b02f77c1fd967c7e4a580f364a65870d9b4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
