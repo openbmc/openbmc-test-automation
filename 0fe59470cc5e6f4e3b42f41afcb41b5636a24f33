@@ -47,6 +47,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d90d6b0_cd6630cf",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-03-07T11:48:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1e50724_c1450116",
+      "range": {
+        "startLine": 669,
+        "startChar": 26,
+        "endLine": 669,
+        "endChar": 30
+      },
+      "revId": "0fe59470cc5e6f4e3b42f41afcb41b5636a24f33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0d594c6_8f0df3b8",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 669,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-03-07T11:48:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3362d15_70c8b04a",
+      "range": {
+        "startLine": 669,
+        "startChar": 31,
+        "endLine": 669,
+        "endChar": 34
+      },
+      "revId": "0fe59470cc5e6f4e3b42f41afcb41b5636a24f33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6c0a536_70b26785",
@@ -60,6 +108,30 @@
       "writtenOn": "2025-03-07T11:41:28Z",
       "side": 1,
       "message": "vmi_ipv6addr -\u003e static_vmi_ipv6addr",
+      "range": {
+        "startLine": 673,
+        "startChar": 0,
+        "endLine": 673,
+        "endChar": 4
+      },
+      "revId": "0fe59470cc5e6f4e3b42f41afcb41b5636a24f33",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "014fc1b8_59362875",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-03-07T11:48:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6c0a536_70b26785",
       "range": {
         "startLine": 673,
         "startChar": 0,
