@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2baec69_eab33df8",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-10T09:39:30Z",
+      "side": 1,
+      "message": "Please uncomment this code",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 74
+      },
+      "revId": "9ce1cc1c7ba938dfecad46da7f901033417db6ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "692c6c98_aa0b7752",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-10T09:39:30Z",
+      "side": 1,
+      "message": "Please fix the test case name and tag mismatch",
+      "range": {
+        "startLine": 132,
+        "startChar": 12,
+        "endLine": 132,
+        "endChar": 105
+      },
+      "revId": "9ce1cc1c7ba938dfecad46da7f901033417db6ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a1c9839_b401fa95",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-10T09:39:30Z",
+      "side": 1,
+      "message": "Remove the extra while char at the end",
+      "range": {
+        "startLine": 175,
+        "startChar": 58,
+        "endLine": 175,
+        "endChar": 60
+      },
+      "revId": "9ce1cc1c7ba938dfecad46da7f901033417db6ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59183a85_9b481f83",
+        "filename": "redfish/account_service/test_ldap_configuration.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-10T09:39:30Z",
+      "side": 1,
+      "message": "Remove the extra white char at the end",
+      "range": {
+        "startLine": 204,
+        "startChar": 59,
+        "endLine": 204,
+        "endChar": 60
+      },
+      "revId": "9ce1cc1c7ba938dfecad46da7f901033417db6ef",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
