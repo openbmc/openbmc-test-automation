@@ -66,5 +66,3 @@ Verify System Serial And Model Number In GUI Header Page
    ${redfish_serial_number}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  SerialNumber
    Element Should Be Visible  //*[@data-test-id='appHeader-container-overview']
    ...  /following-sibling::*/*[text()='${redfish_serial_number}']
-
-
