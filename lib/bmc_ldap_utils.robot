@@ -85,4 +85,5 @@ Create LDAP Configuration
     ...           {'BaseDistinguishedNames': ['${ldap_base_dn}']}}}}
 
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
     Sleep  15s
