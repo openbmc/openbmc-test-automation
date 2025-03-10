@@ -42,6 +42,7 @@ Verify Redfish LDAP Service Disable
 
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${False}}}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
     Sleep  15s
     ${resp}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}
     ...  ${LDAP_USER_PASSWORD}
@@ -52,6 +53,7 @@ Verify Redfish LDAP Service Disable
     # Enabling LDAP so that LDAP user works.
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${True}}}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
     Redfish.Logout
 
 
@@ -63,6 +65,7 @@ Verify LDAP Login With ServiceEnabled
     # Actual service enablement.
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${True}}}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
     Sleep  15s
     # After update, LDAP login.
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
@@ -75,6 +78,7 @@ Verify LDAP Login With Correct AuthenticationType
 
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${ldap_type}': {'Authentication': {'AuthenticationType':'UsernameAndPassword'}}}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
     Sleep  15s
     # After update, LDAP login.
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
@@ -168,6 +172,7 @@ Verify LDAP User With Operator Privilege Able To Do Host Poweroff
     # Verify that the LDAP user with operator privilege is able to power the system off.
     Redfish.Post  ${REDFISH_POWER_URI}
     ...  body={'ResetType': 'ForceOff'}   valid_status_codes=[200]
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
     Redfish.Logout
     Redfish.Login
 
@@ -196,8 +201,10 @@ Verify AccountLockout Attributes Set To Zero By LDAP User
     # Set Account Lockout attributes using LDAP user.
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body=[('AccountLockoutDuration', 0)]
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body=[('AccountLockoutThreshold', 0)]
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
 
 
 Verify LDAP User With Read Privilege Able To Check Inventory
@@ -245,6 +252,7 @@ Verify LDAP BaseDN Update And LDAP Login
     ${body}=  Catenate  {'${LDAP_TYPE}': { 'LDAPService': {'SearchSettings':
     ...   {'BaseDistinguishedNames': ['${LDAP_BASE_DN}']}}}}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
     Sleep  15s
     Redfish Verify LDAP Login
 
@@ -258,6 +266,7 @@ Verify LDAP BindDN Update And LDAP Login
     ...   {'AuthenticationType':'UsernameAndPassword', 'Username':
     ...  '${LDAP_BIND_DN}'}}}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
     Sleep  15s
     Redfish Verify LDAP Login
 
@@ -272,6 +281,7 @@ Verify LDAP BindDN Password Update And LDAP Login
     ...   {'AuthenticationType':'UsernameAndPassword', 'Password':
     ...  '${LDAP_BIND_DN_PASSWORD}'}}}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
     Sleep  15s
     Redfish Verify LDAP Login
 
@@ -284,6 +294,7 @@ Verify LDAP Type Update And LDAP Login
     Disable Other LDAP
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${True}}}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
     Sleep  15s
     Redfish Verify LDAP Login
 
@@ -516,6 +527,7 @@ Switch LDAP Type And Verify Login Fails
     # Disable the LDAP Type from OpenLDAP to ActiveDirectory or vice-versa
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${False}}}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
 
     # Enable the inverse LDAP type
     Disable Other LDAP  ${True}
@@ -584,6 +596,7 @@ Disable Other LDAP
     ${inverse_ldap_type}=  Set Variable If  '${LDAP_TYPE}' == 'LDAP'  ActiveDirectory  LDAP
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${inverse_ldap_type}': {'ServiceEnabled': ${service_state}}}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
     Sleep  15s
 
 
@@ -596,6 +609,7 @@ Config LDAP URL
 
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${ldap_type}': {'ServiceAddresses': ['${ldap_server_uri}']}}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
     Sleep  15s
     # After update, LDAP login.
     ${status}=  Run Keyword And Return Status  Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
@@ -611,6 +625,7 @@ Restore LDAP URL
     # Restoring the working LDAP server uri.
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${ldap_type}': {'ServiceAddresses': ['${LDAP_SERVER_URI}']}}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
     Sleep  15s
 
 
@@ -620,9 +635,10 @@ Restore AccountLockout Attributes
     Return From Keyword If  &{old_account_service} == &{EMPTY}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body=[('AccountLockoutDuration', ${old_account_service['AccountLockoutDuration']})]
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body=[('AccountLockoutThreshold', ${old_account_service['AccountLockoutThreshold']})]
-
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
 
 Suite Setup Execution
     [Documentation]  Do suite setup tasks.
@@ -714,6 +730,7 @@ Update LDAP Configuration with LDAP User Role And Group
     ${ldap_data}=  Create Dictionary  RemoteRoleMapping=${remote_role_mapping}
     ${payload}=  Create Dictionary  ${ldap_type}=${ldap_data}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=&{payload}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
     # Provide adequate time for LDAP daemon to restart after the update.
     Sleep  15s
 
