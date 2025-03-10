@@ -6,7 +6,7 @@ Resource         ../lib/connection_client.robot
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/bmc_redfish_resource.robot
 
-Force Tags      Openbmc_Setup
+Test Tags      Openbmc_Setup
 
 *** Variables  ***
 

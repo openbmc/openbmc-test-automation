@@ -154,11 +154,8 @@ Check Date And Time Was Changed
 Restore NTP Mode
     [Documentation]  Restore the original NTP mode.
 
-
     Return From Keyword If  &{original_ntp} == &{EMPTY}
     Print Timen  Restore NTP Mode.
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
     ...  body={'NTP':{'ProtocolEnabled': ${original_ntp["ProtocolEnabled"]}}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
-
-
