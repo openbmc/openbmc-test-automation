@@ -47,6 +47,7 @@ Redfish Set DateTime
         Wait Until Keyword Succeeds  1min  5sec
         ...  Redfish.Patch  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}
         ...  body={'DateTime': '${date_time}'}  &{kwargs}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
     ELSE
         ${date_time_formatted}=  Convert Date  ${date_time}  result_format=%Y-%m-%dT%H:%M:%S+00:00
         Wait Until Keyword Succeeds  1min  5sec
