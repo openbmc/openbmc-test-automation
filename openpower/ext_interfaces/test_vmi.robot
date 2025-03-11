@@ -682,6 +682,20 @@ Enable VMI DHCPv6 When IPv6 Origin Is Static And Verify
     Should Not Be Equal  ${vmi_dhcpv6addr["Address"]}  ${vmi_ipv6addr_static["Address"]}
 
 
+Configure Invalid Static IPv6 To VMI And Verify
+    [Documentation]  Configure invalid static IPv6 address to VMI and verify that address
+    ...  does not get assigned and it throws an error.
+    [Tags]  Configure_Invalid_Static_IPv6_To_VMI_And_Verify
+    [Setup]  Set Static VMI IPv6 Address  ${test_vmi_ipv6addr}  ${prefix_length}
+    [Template]  Set VMI Invalid Static IPv6 Address And Verify
+
+    # invalid_vmi_ipv6addr     invalid_prefix_length     valid_status_codes
+    ${default_ipv6addr}        128                       ${HTTP_BAD_REQUEST}
+    ${multicast_ipv6addr}      8                         ${HTTP_BAD_REQUEST}
+    ${loopback_ipv6addr}       64                        ${HTTP_BAD_REQUEST}
+    ${ipv4_hexword_addr}       64                        ${HTTP_BAD_REQUEST}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -840,3 +854,24 @@ Suite Teardown Execution
     ...  ${vmi_network_conf["IPv4_Gateway"]}  ${vmi_network_conf["IPv4_SubnetMask"]}
     Delete All Redfish Sessions
     Redfish.Logout
+
+
+Set VMI Invalid Static IPv6 Address And Verify
+    [Documentation]  Set VMI invalid static IPv6 address and verify it throws an error.
+    [Arguments]  ${invalid_vmi_ipv6addr}  ${invalid_prefix_length}  ${valid_status_codes}
+    ...  ${interface}=${ethernet_interface}
+
+    # Description of argument(s):
+    # invalid_vmi_ipv6addr           VMI IPv6 address to be added.
+    # invalid_prefix_length          Prefix length for the VMI IPv6 to be added.
+    # valid_status_codes             Expected status code for PATCH request.
+    # interface                      VMI interface (eg. eth0 or eth1).
+
+    Set Static VMI IPv6 Address  ${invalid_vmi_ipv6addr}  ${invalid_prefix_length}
+    ...  ${valid_status_codes}
+
+    ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+
+    @{vmi_ipv6_address}=  Get From Dictionary  ${resp.dict}  IPv6Addresses
+    ${vmi_ipv6_addr}=  Get From List  ${vmi_ipv6_address}  0
+    Should Not Be Equal  ${vmi_ipv6_addr["Address"]}  ${invalid_vmi_ipv6addr}
