@@ -149,7 +149,7 @@ Disable DHCP On Eth1 And Verify DHCP IP Erased
 Set DHCPEnabled To Enable Or Disable
     [Documentation]  Enable or Disable DHCP on the interface.
     [Arguments]  ${dhcp_enabled}=${False}  ${interface}=${ethernet_interface}
-    ...          ${valid_status_code}=[${HTTP_OK},${HTTP_ACCEPTED}]
+    ...          ${valid_status_code}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
 
     # Description of argument(s):
     # dhcp_enabled        False for disabling DHCP and True for Enabling DHCP.
