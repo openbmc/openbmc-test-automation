@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78cc9587_a53f2c3b",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-03-12T10:07:56Z",
+      "side": 1,
+      "message": "does not",
+      "range": {
+        "startLine": 687,
+        "startChar": 9,
+        "endLine": 687,
+        "endChar": 16
+      },
+      "revId": "020875903d064c7a00da3ee628b8a36b9fd0ad7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b97d5899_7cbf834f",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-03-12T10:07:56Z",
+      "side": 1,
+      "message": "This can be used even for a valid static IPv6 address right? Can we please rename and make it generic so that it can be used for either purpose?",
+      "range": {
+        "startLine": 859,
+        "startChar": 0,
+        "endLine": 859,
+        "endChar": 46
+      },
+      "revId": "020875903d064c7a00da3ee628b8a36b9fd0ad7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dc53e90_17666216",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-03-12T10:07:56Z",
+      "side": 1,
+      "message": "expected status code Expected status code for PATCH request.",
+      "range": {
+        "startLine": 867,
+        "startChar": 6,
+        "endLine": 867,
+        "endChar": 24
+      },
+      "revId": "020875903d064c7a00da3ee628b8a36b9fd0ad7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ded3c59d_97f4de16",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-03-12T10:07:56Z",
+      "side": 1,
+      "message": "Pls mention the default value here",
+      "revId": "020875903d064c7a00da3ee628b8a36b9fd0ad7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
