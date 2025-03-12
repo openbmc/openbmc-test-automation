@@ -285,6 +285,7 @@ Launch Browser Login GUI And Navigate To Network Page
 Configure the Hostname Back And Verify
     [Documentation]  Configure the hostname back.
 
+   # Scroll Element Into View   ${xpath_hostname_input}
     Configure And Verify Network Settings Via GUI
     ...  ${xpath_hostname}  ${xpath_hostname_input}  ${hostname}
     ${bmc_hostname_after}=  Get BMC Hostname
@@ -381,6 +382,7 @@ Toggle DHCPv4 Property And Verify
     Should Not Be Equal  ${gui_before_set}  ${gui_after_set}
 
     Click Element At Coordinates   ${xpath_property}  0  0
+    Verify Popup Message And Close Popup  ${xpath_success_popup}
 
 
 Get DHCP Property Via Redfish
