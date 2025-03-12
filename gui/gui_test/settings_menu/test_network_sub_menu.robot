@@ -381,6 +381,7 @@ Toggle DHCPv4 Property And Verify
     Should Not Be Equal  ${gui_before_set}  ${gui_after_set}
 
     Click Element At Coordinates   ${xpath_property}  0  0
+    Verify Popup Message And Close Popup  ${xpath_success_popup}
 
 
 Get DHCP Property Via Redfish
