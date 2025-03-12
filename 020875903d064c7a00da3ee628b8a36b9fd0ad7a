@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bed32f82_7015c8a2",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-03-12T10:56:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78cc9587_a53f2c3b",
+      "range": {
+        "startLine": 687,
+        "startChar": 9,
+        "endLine": 687,
+        "endChar": 16
+      },
+      "revId": "020875903d064c7a00da3ee628b8a36b9fd0ad7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b97d5899_7cbf834f",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-03-12T10:07:56Z",
       "side": 1,
       "message": "This can be used even for a valid static IPv6 address right? Can we please rename and make it generic so that it can be used for either purpose?",
+      "range": {
+        "startLine": 859,
+        "startChar": 0,
+        "endLine": 859,
+        "endChar": 46
+      },
+      "revId": "020875903d064c7a00da3ee628b8a36b9fd0ad7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a90f4f1c_f0346199",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-03-12T10:56:12Z",
+      "side": 1,
+      "message": "Verification part for both are completely different for IPv6...so better to keep it separate keyword.",
+      "parentUuid": "b97d5899_7cbf834f",
       "range": {
         "startLine": 859,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8d8a9df_a1241fb4",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-03-12T10:56:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9dc53e90_17666216",
+      "range": {
+        "startLine": 867,
+        "startChar": 6,
+        "endLine": 867,
+        "endChar": 24
+      },
+      "revId": "020875903d064c7a00da3ee628b8a36b9fd0ad7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ded3c59d_97f4de16",
@@ -83,6 +155,24 @@
       "writtenOn": "2025-03-12T10:07:56Z",
       "side": 1,
       "message": "Pls mention the default value here",
+      "revId": "020875903d064c7a00da3ee628b8a36b9fd0ad7a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4e4506f_8716eb8b",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-03-12T10:56:12Z",
+      "side": 1,
+      "message": "as i am passing the value for this variable in test case, i have not mentioned default value. This is for negative scenario.",
+      "parentUuid": "ded3c59d_97f4de16",
       "revId": "020875903d064c7a00da3ee628b8a36b9fd0ad7a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
