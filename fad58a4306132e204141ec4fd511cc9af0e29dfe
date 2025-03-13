@@ -296,6 +296,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "afdf8479_6cb3210d",
+        "filename": "redfish/managers/test_lldp_config.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-13T06:22:30Z",
+      "side": 1,
+      "message": "Addressing Anvesh\u0027s comments as not creating a separate library for now.",
+      "parentUuid": "1f94c2f8_15a0f433",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 52
+      },
+      "revId": "fad58a4306132e204141ec4fd511cc9af0e29dfe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79a738ea_1752d94d",
         "filename": "redfish/managers/test_lldp_config.robot",
         "patchSetId": 4
