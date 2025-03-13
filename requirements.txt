@@ -13,4 +13,4 @@ robotframework-xvfb
 xvfbwrapper==0.2.9
 redfish>=3.1.7
 redfishtool>=1.1.8
-webdrivermanager
+webdriver-manager==4.0.2
