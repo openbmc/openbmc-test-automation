@@ -306,13 +306,13 @@ def my_parm_file(prop_file_path):
 
     # Create the ConfigParser object.
     try:
-        config_parser = ConfigParser.ConfigParser()
+        config_parser = ConfigParser()
     except NameError:
         config_parser = configparser.ConfigParser(strict=False)
     # Make the property names case-sensitive.
     config_parser.optionxform = str
     # Read the properties from the string file.
-    config_parser.readfp(string_file)
+    config_parser.read_file(string_file)
     # Return the properties as a dictionary.
     if robot_env:
         return DotDict(config_parser.items("dummysection"))
