@@ -225,10 +225,12 @@ Verify Modifying User Attributes
     # Update admin_user username using Redfish.
     ${payload}=  Create Dictionary  UserName=newadmin_user
     Redfish.Patch  /redfish/v1/AccountService/Accounts/admin_user  body=&{payload}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Update readonly_user role using Redfish.
     ${payload}=  Create Dictionary  RoleId=Administrator
     Redfish.Patch  /redfish/v1/AccountService/Accounts/readonly_user  body=&{payload}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Verify users after updating
     Redfish Verify User  newadmin_user  TestPwd123     Administrator   ${True}
