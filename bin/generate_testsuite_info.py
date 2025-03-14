@@ -8,7 +8,7 @@ Refer to https://robot-framework.readthedocs.io/en/3.0.1/autodoc/robot.parsing.h
 import os
 import sys
 
-from robot.parsing.model import TestData
+from robot.api import SuiteVisitor, TestSuiteBuilder
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "../lib"))
 
@@ -53,6 +53,22 @@ parser.add_argument(
 # Populate stock_list with options we want.
 stock_list = [("test_mode", 0), ("quiet", 0), ("debug", 0)]
 
+class TestPrint(SuiteVisitor):
+
+    def __init__(self, option):
+        self.option = option
+
+    def visit_test(self, test):
+        if self.option == "name":
+            print(test.name)
+        elif self.option == "tags":
+            print(test.tags)
+        elif self.option == "doc":
+            print(test.doc)
+        elif self.option == "all":
+            print(test.name)
+            print(test.tags)
+            print(test.doc)
 
 def exit_function(signal_number=0, frame=None):
     r"""
@@ -119,7 +135,7 @@ def parse_test_suites(source_path, option):
         print(file_path)
         if "__init__.robot" in file_path:
             continue
-        test_suite_obj = TestData(parent=None, source=file_path)
+        test_suite_obj = TestSuiteBuilder().build(file_path)
         parse_test_file(test_suite_obj, option)
 
 
@@ -138,18 +154,7 @@ def parse_test_file(test_suite_obj, option):
                       "tags" or "doc".
     """
 
-    for testcase in test_suite_obj.testcase_table:
-        if option == "name":
-            print(testcase.name)
-        elif option == "tags":
-            print(testcase.tags)
-        elif option == "doc":
-            print(testcase.doc)
-        elif option == "all":
-            print(testcase.name)
-            print(testcase.tags)
-            print(testcase.doc)
-
+    test_suite_obj.visit(TestPrint(option))
 
 def main():
     gen_get_options(parser, stock_list)
