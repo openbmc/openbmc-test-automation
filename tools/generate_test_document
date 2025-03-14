@@ -49,17 +49,17 @@ function generate_all_test_document() {
     # Generate all test case documents
 
     local ret_code=0
-    python -m robot.testdoc tests testsdirectoryTCdocs.html || ret_code=1
-    python -m robot.testdoc extended extendeddirectoryTCdocs.html || ret_code=1
-    python -m robot.testdoc gui guidirectoryTCdocs.html || ret_code=1
-    python -m robot.testdoc systest systestdirectoryTCdocs.html || ret_code=1
-    python -m robot.testdoc xcat xcatdirectoryTCdocs.html || ret_code=1
-    python -m robot.testdoc mnfg mnfgdirectoryTCdocs.html || ret_code=1
-    python -m robot.testdoc tools toolsdirectoryTCdocs.html || ret_code=1
-    python -m robot.testdoc ./openpower/ras rasdirectoryTCdocs.html || ret_code=1
-    python -m robot.testdoc ./openpower/secureboot securebootdirectoryTCdocs.html\
+    python3 -m robot.testdoc tests testsdirectoryTCdocs.html || ret_code=1
+    python3 -m robot.testdoc extended extendeddirectoryTCdocs.html || ret_code=1
+    python3 -m robot.testdoc gui guidirectoryTCdocs.html || ret_code=1
+    python3 -m robot.testdoc systest systestdirectoryTCdocs.html || ret_code=1
+    python3 -m robot.testdoc xcat xcatdirectoryTCdocs.html || ret_code=1
+    python3 -m robot.testdoc mnfg mnfgdirectoryTCdocs.html || ret_code=1
+    python3 -m robot.testdoc tools toolsdirectoryTCdocs.html || ret_code=1
+    python3 -m robot.testdoc ./openpower/ras rasdirectoryTCdocs.html || ret_code=1
+    python3 -m robot.testdoc ./openpower/secureboot securebootdirectoryTCdocs.html\
         || ret_code=1
-    python -m robot.testdoc network networkdirectoryTCdocs.html ||\
+    python3 -m robot.testdoc network networkdirectoryTCdocs.html ||\
         ret_code=1
 
     return ${ret_code}
@@ -78,7 +78,7 @@ function main_function() {
     fi
 
     echo ${test_dir_path} ${test_case_doc_file_path}
-    python -m robot.testdoc ${test_dir_path} ${test_case_doc_file_path}\
+    python3 -m robot.testdoc ${test_dir_path} ${test_case_doc_file_path}\
         || return 1
 
     return 0
