@@ -228,6 +228,7 @@ Create LDAP Configuration
     # Clearing existing LDAP configuration by disabling it.
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${LDAP_TYPE}': {'ServiceEnabled': ${False}}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Wait for GUI to reflect LDAP disabled status.
     Run Keywords  Refresh GUI  AND  Sleep  10s
