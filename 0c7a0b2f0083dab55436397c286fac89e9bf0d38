@@ -16,6 +16,24 @@
       "message": "please point to the right reference link",
       "revId": "0c7a0b2f0083dab55436397c286fac89e9bf0d38",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f6bf726_c03d86b2",
+        "filename": "bin/generate_testsuite_info.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-14T16:56:55Z",
+      "side": 1,
+      "message": "https://robot-framework.readthedocs.io/en/latest/autodoc/robot.running.html\n\nhope this helps",
+      "parentUuid": "609ed636_ded97c0c",
+      "revId": "0c7a0b2f0083dab55436397c286fac89e9bf0d38",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
