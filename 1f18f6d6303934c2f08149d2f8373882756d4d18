@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97534548_db8725c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-17T07:02:58Z",
+      "side": 1,
+      "message": "Xcat.Test Power Operation :: Module for testing BMC via XCAT.         | FAIL |\nSuite setup failed:\nMultiple keywords with name \u0027Login\u0027 found. Give the full name of the keyword you want to use:\n    Redfish.Login\n    SSHLibrary.Login",
+      "revId": "1f18f6d6303934c2f08149d2f8373882756d4d18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
