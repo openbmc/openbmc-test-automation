@@ -18,7 +18,7 @@ Open Connection And Login To XCAT
     # xcat_port  Network port on which XCAT server accepts ssh session.
 
     SSHLibrary.Open Connection  ${xcat_host}  port=${xcat_port}
-    Login  ${XCAT_USERNAME}  ${XCAT_PASSWORD}
+    SSHLibrary.Login  ${XCAT_USERNAME}  ${XCAT_PASSWORD}
 
 
 Execute Command On XCAT
