@@ -16,6 +16,24 @@
       "message": "what is this?",
       "revId": "1361edf0e7156b1cfffd308b27700aafe41005f4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d3d21bc_7df22b14",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-03-18T08:33:55Z",
+      "side": 1,
+      "message": "Invalid IPv6 address with combination of IPv4 \u0026 hexa words",
+      "parentUuid": "ee187c26_8ab04721",
+      "revId": "1361edf0e7156b1cfffd308b27700aafe41005f4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
