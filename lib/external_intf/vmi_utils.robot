@@ -312,6 +312,7 @@ Set Static VMI IPv6 Address
     Redfish.patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
     ...  body=&{data}  valid_status_codes=[${valid_status_codes}]
 
+    Sleep  5s
 
 Set VMI IPv6 Static Default Gateway
     [Documentation]  Set VMI IPv6 static default gateway address.

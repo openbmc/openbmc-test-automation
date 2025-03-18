@@ -33,6 +33,9 @@ ${default_ipv6addr}       ::
 ${prefix_length}          ${64}
 ${test_vmi_ipv6addr}      2001:db8:1111:2222:10:5:5:6
 ${test_vmi_ipv6gateway}   2001:db8:1111:2222::1
+${ipv4_hexword_addr}      10.5.5.6:1A:1B:1C:1D:1E:1F
+${multicast_ipv6addr}     FF00
+${loopback_ipv6addr}      ::1
 
 
 *** Test Cases ***
@@ -641,13 +644,15 @@ Configure Static VMI IPv6 Address And Verify
 Configure IPv6 Static Default Gateway On VMI And Verify
     [Documentation]  Configure IPv6 static default gateway on VMI and verify.
     [Tags]  Configure_IPv6_Static_Default_Gateway_On_VMI_And_Verify
+    [Setup]  Set Static VMI IPv6 Address  ${test_vmi_ipv6addr}  ${prefix_length}
 
     Set VMI IPv6 Static Default Gateway  ${test_vmi_ipv6gateway}
 
     ${resp}=  Redfish.Get
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${ethernet_interface}
-    ${vmi_ipv6_gateway}=  Get From Dictionary  ${resp.dict}  IPv6StaticDefaultGateways
-    Should Be Equal  ${vmi_ipv6_gateway}  ${test_vmi_ipv6gateway}
+    ${vmi_ipv6_gateways}=  Get From Dictionary  ${resp.dict}  IPv6StaticDefaultGateways
+    ${vmi_ipv6_gateway} =  Get From List  ${vmi_ipv6_gateways}  0
+    Should Be Equal  ${vmi_ipv6_gateway["Address"]}  ${test_vmi_ipv6gateway}
 
 
 Delete VMI Static IPv6 Address And Verify
