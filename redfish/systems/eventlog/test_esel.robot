@@ -19,11 +19,13 @@ Test Tags          eSEL
 
 *** Variables ***
 
-${stack_mode}       skip
+${stack_mode}            skip
 
-${LOGGING_SERVICE}  xyz.openbmc_project.Logging.service
+${LOGGING_SERVICE}       xyz.openbmc_project.Logging.service
 
-${ESEL_DATA}        ESEL=00 00 df 00 00 00 00 20 00 04 12 35 6f aa 00 00
+${ESEL_DATA}             ESEL=00 00 df 00 00 00 00 20 00 04 12 35 6f aa 00 00
+
+${IPMI_RAW_PREFIX}       0x3a 0xf0 0x
 
 *** Test Cases ***
 
@@ -31,7 +33,7 @@ Verify eSEL Using Redfish
     [Documentation]  Generate eSEL log and verify using redfish.
     [Tags]  Verify_eSEL_Using_Redfish
 
-    Create eSEL
+    Create eSEL  ${IPMI_RAW_PREFIX}
     Event Log Should Exist
 
 
@@ -39,7 +41,7 @@ Verify eSEL Entries Using Redfish
     [Documentation]  Verify that eSEL entries have data.
     [Tags]  Verify_eSEL_Entries_Using_Redfish
 
-    Create eSEL
+    Create eSEL  ${IPMI_RAW_PREFIX}
     Redfish.Login
     Verify eSEL Entries
 
@@ -72,7 +74,7 @@ Verify eSEL Description And EntryID Using REST
     #    ]
     # ]
 
-    Create eSEL
+    Create eSEL  ${IPMI_RAW_PREFIX}
 
     ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
     ${desc}=  Read Attribute  ${elog_entry[0]}  Description
@@ -87,8 +89,7 @@ Verify Multiple eSEL Using Redfish
     [Documentation]  Generate multiple eSEL log and verify using redfish
     [Tags]  Verify_Multiple_eSEL_Using_Redfish
 
-    Create eSEL
-    Create eSEL
+    Create eSEL  ${IPMI_RAW_PREFIX}
     ${entries}=  Count eSEL Entries
     Should Be Equal As Integers  ${entries}  ${2}
     ...  msg=Expecting 2 eSELs but found ${entries}.
@@ -100,7 +101,7 @@ Check eSEL AdditionalData
     ...              not empty.
     [Tags]  Check_eSEL_AdditionalData
 
-    Create eSEL
+    Create eSEL  ${IPMI_RAW_PREFIX}
     ${elog_entry}=  Get URL List  ${BMC_LOGGING_ENTRY}
     ${resp}=  OpenBMC Get Request  ${elog_entry[0]}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
@@ -126,7 +127,7 @@ Test Wrong Reservation_ID
     ${rev_id_ms}=   Get Substring   ${rev_id_1}   -2
     Run Inband IPMI Raw Command   0x0a 0x42
     ${output}=  Check IPMI OEMpartialadd Reject
-    ...  0x3a 0xf0 0x${rev_id_ls} 0x${rev_id_ms} 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0xa 0xb 0xc 0xd 0xe 0xf
+    ...  ${IPMI_RAW_PREFIX}${rev_id_ls} 0x${rev_id_ms} 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0xa 0xb 0xc 0xd 0xe 0xf
     Should Contain   ${output}   Reservation cancelled
 
 Test Correct Reservation_ID
@@ -141,7 +142,7 @@ Test Correct Reservation_ID
     ${rev_id_ls}=   Get Substring   ${rev_id_2}   1   3
     ${rev_id_ms}=   Get Substring   ${rev_id_2}   -2
     ${output}=  Check IPMI OEMpartialadd Accept
-    ...  0x3a 0xf0 0x${rev_id_ls} 0x${rev_id_ms} 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0xa 0xb 0xc 0xd 0xe 0xf
+    ...  ${IPMI_RAW_PREFIX}${rev_id_ls} 0x${rev_id_ms} 0 0 0 0 0 1 2 3 4 5 6 7 8 9 0xa 0xb 0xc 0xd 0xe 0xf
     Should Be Empty    ${output}
 
 
@@ -166,6 +167,11 @@ Restart Logging Service
 Run IPMI Command Returned
     [Documentation]  Run the IPMI command and return the output.
     [Arguments]    ${args}
+
+    # Description of Argument(s):
+    # args      IPMI raw data
+    #           (e.g: 0x00 0x03 0x03).
+
     ${output_1}=    Execute Command   /tmp/ipmitool -I dbus raw ${args}
     RETURN    ${output_1}
 
@@ -173,6 +179,11 @@ Run IPMI Command Returned
 Check IPMI OEMpartialadd Reject
     [Documentation]  Check if IPMI rejects the OEM partial add command.
     [Arguments]    ${args}
+
+    # Description of Argument(s):
+    # args      IPMI raw data
+    #           (e.g: 0x00 0x03 0x03).
+
     Login To OS Host  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
     ${stdout}  ${stderr}  ${output_2}=  Execute Command  ipmitool raw ${args}
     ...        return_stdout=True  return_stderr=True  return_rc=True
@@ -209,6 +220,11 @@ Suite Setup Execution
 Check IPMI OEMpartialadd Accept
     [Documentation]  Check if IPMI accepts the OEM partial add command.
     [Arguments]    ${args}
+
+    # Description of Argument(s):
+    # args      IPMI raw data
+    #           (e.g: 0x00 0x03 0x03).
+
     Login To OS Host  ${OS_HOST}  ${OS_USERNAME}  ${OS_PASSWORD}
     ${stdout}  ${stderr}  ${output_3}=  Execute Command  ipmitool raw ${args}
     ...         return_stdout=True  return_stderr=True  return_rc=True
