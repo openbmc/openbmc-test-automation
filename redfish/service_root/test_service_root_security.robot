@@ -23,6 +23,8 @@ ${LOGIN_SESSION_COUNT}   ${50}
 ...                     Cross-Origin-Resource-Policy=same-origin
 ...                     Content-Security-Policy=default-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self' wss:; form-action 'none'; frame-ancestors 'none'; object-src 'none'; base-uri 'none'
 
+${ERROR_RESPONSE_MSG}  *Connection refused*
+
 *** Test Cases ***
 
 Redfish Login With Invalid Credentials
@@ -63,7 +65,7 @@ Redfish Login Using HTTPS Wrong Port 80 Protocol
 
     ${headers}=  Create Dictionary  Content-Type=application/json
 
-    Run Keyword And Expect Error  *Connection refused*
+    Run Keyword And Expect Error  ${ERROR_RESPONSE_MSG}
     ...  POST On Session  openbmc  /redfish/v1/SessionService/Sessions
     ...  data=${data}  headers=${headers}
 
