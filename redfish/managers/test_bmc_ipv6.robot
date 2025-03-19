@@ -5,6 +5,7 @@ Documentation  Network interface IPv6 configuration and verification
 Resource       ../../lib/bmc_redfish_resource.robot
 Resource       ../../lib/openbmc_ffdc.robot
 Resource       ../../lib/bmc_ipv6_utils.robot
+Resource       ../../lib/external_intf/vmi_utils.robot
 Library        ../../lib/bmc_network_utils.py
 Library        Collections
 
@@ -104,6 +105,13 @@ Verify Persistency Of IPv6 After BMC Reboot
 
     # Verifying persistency of IPv6.
     Verify IPv6 On BMC  ${test_ipv6_addr}
+
+
+Enable SLAAC On BMC And Verify
+    [Documentation]  Enable SLAAC on BMC and verify.
+    [Tags]  Enable_SLAAC_On_BMC_And_Verify
+
+    Set SLAAC Configuration State And Verify  ${True}
 
 
 *** Keywords ***
@@ -462,3 +470,26 @@ Modify IPv6 Address
     Should Be Equal  ${cmd_status}  ${False}  msg=Old IPv6 address is not deleted.
 
     Validate IPv6 Network Config On BMC
+
+
+Set SLAAC Configuration State And Verify
+    [Documentation]  Set SLAAC configuration state and verify.
+    [Arguments]  ${slaac_state}  ${valid_status_codes}=${HTTP_OK}
+
+    # Description of argument(s):
+    # slaac_state         SLAAC state('Enabled' or 'Disabled').
+    # valid_status_code   Expected valid status codes.
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    ${data}=  Set Variable If  ${slaac_state} == ${False}  ${DISABLE_SLAAC}  ${ENABLE_SLAAC}
+    ${resp}=  Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body=${data}  valid_status_codes=[${valid_status_codes}]
+
+    # Verify SLAAC is set correctly.
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ${slaac_verify}=  Get From Dictionary  ${resp.dict}  StatelessAddressAutoConfig
+
+    Run Keyword If  '${slaac_verify['IPv6AutoConfigEnabled']}' != '${slaac_state}'
+    ...  Fail  msg=SLAAC not set properly.
