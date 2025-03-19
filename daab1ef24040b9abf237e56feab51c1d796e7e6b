@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ddbdfc6_f332a505",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-19T16:47:56Z",
+      "side": 1,
+      "message": "Looks like CI still complains on your commit message\n\n-: UC3 Invalid Signed-off-by format: \"Signed-off-by: \u003csayenath.ravi@multicorewareinc.com\u003e\"\n\nshould be something like this\n\nSigned-off-by: Sayenath Ravi \u003csayenath.ravi@multicorewareinc.com\u003e",
+      "revId": "daab1ef24040b9abf237e56feab51c1d796e7e6b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
