@@ -49,7 +49,6 @@ Launch OpenBMC GUI Browser
     ...  ELSE IF  '${op_system}' == 'Darwin'
             # Mac OS is currently having some issues with firefox, so using
             # chrome.
-            # TODO: Need to add support for other browsers. Issue #1280.
     ...     Launch Header Browser  chrome
     ...  ELSE
             # Linux OS.
