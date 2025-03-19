@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b151643a_cb7f7e87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-19T05:43:02Z",
+      "side": 1,
+      "message": "[ ERROR ] Error in file \u0027/home/george/code_review/robot_latest_version/openpower/ext_interfaces/test_discovery.robot\u0027 on line 7: Importing library \u0027/home/george/code_review/robot_latest_version/lib/external_intf/management_console_utils.py\u0027 failed: ModuleNotFoundError: No module named \u0027data\u0027",
+      "revId": "2b798c7cc1002ce096d00df8ba959d9974d4c793",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
