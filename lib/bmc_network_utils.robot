@@ -86,7 +86,6 @@ Get BMC IP Info
 Get BMC Route Info
     [Documentation]  Get system route info.
 
-
     # Sample output of "ip route":
     # default via xx.xx.xx.x dev eth0
     # xx.xx.xx.0/23 dev eth0  src xx.xx.xx.xx
@@ -97,10 +96,8 @@ Get BMC Route Info
 
     RETURN  ${cmd_output}
 
-# TODO: openbmc/openbmc-test-automation#1331
 Get BMC MAC Address
     [Documentation]  Get system MAC address.
-
 
     # Sample output of "ip addr | grep ether":
     # link/ether xx.xx.xx.xx.xx.xx brd ff:ff:ff:ff:ff:ff

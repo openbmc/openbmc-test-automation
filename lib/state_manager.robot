@@ -55,7 +55,6 @@ Initiate Host PowerOff
 Wait For PowerOff
     [Documentation]  Wait for power off state.
 
-    # TODO: Reference to open-power/skiboot#81.
     # Revert to 3 minutes once fixed.
     Wait Until Keyword Succeeds  6 min  10 sec  Is Host Off
 
@@ -142,13 +141,11 @@ Is OS Booted
 
 Is Host Off
     [Documentation]  Check if host state is "Off".
+
     # Chassis state should be "Off" before we check the host state.
     Is Chassis Off
     ${host_state}=  Get Host State
     Should Be Equal  Off  ${host_state}
-    # Check to verify that the host shutdown completely.
-    # TODO openbmc/openbmc#2049 - boot sensor not cleared on power off
-    #Is OS Off
 
 
 Is Host Rebooted
