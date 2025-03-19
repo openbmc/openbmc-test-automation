@@ -22,6 +22,12 @@ ${test_ipv6_addr1}          2001:db8:3333:4444:5555:6666:7777:9999
 # Valid prefix length is a integer ranges from 1 to 128.
 ${test_prefix_length}       64
 
+&{SLAAC_ENABLED}          IPv6AutoConfigEnabled=${True}
+&{SLAAC_DISABLED}         IPv6AutoConfigEnabled=${False}
+
+&{ENABLE_SLAAC}           StatelessAddressAutoConfig=&{SLAAC_ENABLED}
+&{DISABLE_SLAAC}          StatelessAddressAutoConfig=&{SLAAC_DISABLED}
+
 *** Test Cases ***
 
 Get IPv6 Address And Verify
@@ -104,6 +110,13 @@ Verify Persistency Of IPv6 After BMC Reboot
 
     # Verifying persistency of IPv6.
     Verify IPv6 On BMC  ${test_ipv6_addr}
+
+
+Enable SLAAC On BMC
+    [Documentation]  Enable SLAAC on BMC.
+    [Tags]  Enable_SLAAC_On_BMC
+
+    Set SLAAC Configuration State And Verify  ${True}
 
 
 *** Keywords ***
@@ -462,3 +475,26 @@ Modify IPv6 Address
     Should Be Equal  ${cmd_status}  ${False}  msg=Old IPv6 address is not deleted.
 
     Validate IPv6 Network Config On BMC
+
+
+Set SLAAC Configuration State And Verify
+    [Documentation]  Set SLAAC Configuration State
+    [Arguments]  ${slaac_state}  ${valid_status_codes}=${HTTP_OK}
+
+    # Description of argument(s):
+    # slaac_state         SLAAC state('Enabled' or 'Disabled').
+    # valid_status_code   Expected valid status codes.
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    ${data}=  Set Variable If  ${slaac_state} == ${False}  ${DISABLE_SLAAC}  ${ENABLE_SLAAC}
+    ${resp}=  Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body=${data}  valid_status_codes=[${valid_status_codes}]
+
+    # Verify SLAAC is set correctly.
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ${slaac_verify}=  Get From Dictionary  ${resp.dict}  StatelessAddressAutoConfig
+
+    Run Keyword If  '${slaac_verify['IPv6AutoConfigEnabled']}' != '${slaac_state}'
+    ...  Fail  msg=SLAAC not set properly.
