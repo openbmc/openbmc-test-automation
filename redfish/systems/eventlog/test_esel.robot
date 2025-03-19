@@ -46,7 +46,6 @@ Verify eSEL Entries Using Redfish
     Verify eSEL Entries
 
 
-# TODO: openbmc/openbmc-test-automation#1789
 Verify eSEL Description And EntryID Using REST
     [Documentation]  Create eSEL log and verify "Description" and "EntryID"
     ...  are not empty via REST.
@@ -95,7 +94,6 @@ Verify Multiple eSEL Using Redfish
     ...  msg=Expecting 2 eSELs but found ${entries}.
 
 
-# TODO: openbmc/openbmc-test-automation#1789
 Check eSEL AdditionalData
     [Documentation]  Generate eSEL log and verify AdditionalData is
     ...              not empty.
