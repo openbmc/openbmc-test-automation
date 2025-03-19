@@ -49,6 +49,9 @@ Verify IPMI User Summary
     Set Test Variable  ${random_userid}
     Run IPMI Standard Command  user enable ${random_userid}
 
+    # Enable IPMI user and verify
+    Enable IPMI User And Verify  ${random_userid}
+
     # Verify number of currently enabled users.
     ${current_user_count}  ${maximum_ids}=  Get Enabled User Count
     ${calculated_count}=  Evaluate  ${initial_user_count} + 1
@@ -127,8 +130,7 @@ Verify IPMI User Creation With Invalid ID
 
 
 Verify Setting IPMI User With Invalid Password
-    [Documentation]  Verify error while setting IPMI user with invalid
-    ...  password.
+    [Documentation]  Verify error while setting IPMI user with invalid password.
     [Tags]  Verify_Setting_IPMI_User_With_Invalid_Password
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
     ...  Delete Created User  ${random_userid}
@@ -147,8 +149,7 @@ Verify Setting IPMI User With Invalid Password
 
 
 Verify Setting IPMI Root User With New Name
-    [Documentation]  Verify error while setting IPMI root user with new
-    ...  name.
+    [Documentation]  Verify error while setting IPMI root user with new name.
     [Tags]  Verify_Setting_IPMI_Root_User_With_New_Name
 
     # Set invalid password for newly created user.
@@ -260,8 +261,8 @@ Test IPMI User Privilege Level
 
 
 Test IPMI Operator Privilege Level
-    [Documentation]  Verify IPMI user with operator privilege can only run user and operator levels commands.
-    ...  level is set to operator.
+    [Documentation]  Verify IPMI user with operator privilege can only run user and
+    ...   operator level commands.
     [Tags]  Test_IPMI_Operator_Privilege_Level
     [Template]  Test IPMI User Privilege
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
