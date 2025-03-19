@@ -5,8 +5,6 @@ import os
 import re
 from collections import OrderedDict
 
-from data import variables
-
 bmc_rec_pattern = "^=(.*)\n(.*)\n(.*)\n(.*)\n(.*)"
 bmc_prop_pattern = [r"\w+", r"\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}", "443"]
 bmc_rec_prop = ["hostname", "address", "port", "txt"]
