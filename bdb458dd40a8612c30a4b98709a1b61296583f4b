@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42dfac91_d4de9587",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-03-20T06:21:40Z",
+      "side": 1,
+      "message": "these variables we have already added in lib/external_intf\n/vmi_utils.robot\nyou can call this lib file here rather than adding it right?",
+      "parentUuid": "b6d8786b_567c86bd",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 15
+      },
+      "revId": "bdb458dd40a8612c30a4b98709a1b61296583f4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bca0a59c_328a0bb5",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 1
