@@ -33,6 +33,23 @@
       "message": "Will wait for the test result to pass",
       "revId": "c2b1ec6ddc9df412656d6bdb1d0533424271b57c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59f46da5_95ab73bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-03-20T08:45:55Z",
+      "side": 1,
+      "message": "````\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nTest Ipmi User :: Test suite for OpenBMC IPMI user management.\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n#(CDT) 2025/03/20 03:41:12.511054 -    0.293833 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U ipmi_admin -P \u0027**********\u0027 -H XXXXX user summary 1\nVerify IPMI User Summary :: Verify IPMI maximum supported IPMI use...\n.#(CDT) 2025/03/20 03:41:12.724799 -    0.213746 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U ipmi_admin -P \u0027**********\u0027 -H XXXXX user summary 1\n.#(CDT) 2025/03/20 03:41:12.938712 -    0.213913 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U ipmi_admin -P \u0027**********\u0027 -H XXXXX user summary 1\n#(CDT) 2025/03/20 03:41:13.149358 -    0.210646 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U ipmi_admin -P \u0027**********\u0027 -H XXXXX channel getaccess 1 6\nFor ID 6: User Name            : newuser\n#(CDT) 2025/03/20 03:41:13.362111 -    0.212753 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U ipmi_admin -P \u0027**********\u0027 -H XXXXX channel getaccess 1 2\nFor ID 2: User Name            :\n#(CDT) 2025/03/20 03:41:13.580799 -    0.218688 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U ipmi_admin -P \u0027**********\u0027 -H XXXXX user set name 2 KaCPSuhl\n#(CDT) 2025/03/20 03:41:19.022335 -    5.441535 - Issuing: Run IPMI Standard Command  channel getaccess 1 2\n#(CDT) 2025/03/20 03:41:19.035525 -    0.013191 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U ipmi_admin -P \u0027**********\u0027 -H XXXXX channel getaccess 1 2\n#(CDT) 2025/03/20 03:41:19.256428 -    0.220903 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U ipmi_admin -P \u0027**********\u0027 -H XXXXX user list\n..#(CDT) 2025/03/20 03:41:19.549230 -    0.292802 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U ipmi_admin -P \u0027**********\u0027 -H XXXXX user enable 2\n.#(CDT) 2025/03/20 03:41:19.836731 -    0.287500 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U ipmi_admin -P \u0027**********\u0027 -H XXXXX user enable 2\n#(CDT) 2025/03/20 03:41:20.063521 -    0.226790 - Issuing: Run IPMI Standard Command  channel getaccess 1 2\n#(CDT) 2025/03/20 03:41:20.076228 -    0.012707 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U ipmi_admin -P \u0027**********\u0027 -H XXXXX channel getaccess 1 2\n.#(CDT) 2025/03/20 03:41:20.311434 -    0.235206 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U ipmi_admin -P \u0027**********\u0027 -H XXXXX user summary 1\nVerify IPMI User Summary :: Verify IPMI maximum supported IPMI use... ..#(CDT) 2025/03/20 03:41:20.559736 -    0.248303 - Issuing: Get Test Dir and Name\nTEST_HISTORY:                                     /gsa/ausgsa-p10/00/indiateam01/sridevra/sridevra_upstream_4/logs//test_history.txt\n#(CDT) 2025/03/20 03:41:20.586174 -    0.026437 - Issuing: ipmitool -I lanplus -C 17 -N 3 -p 623 -U ipmi_admin -P \u0027**********\u0027 -H XXXXX user set name 2 \"\"\nVerify IPMI User Summary :: Verify IPMI maximum supported IPMI use... | PASS |\n------------------------------------------------------------------------------```",
+      "revId": "c2b1ec6ddc9df412656d6bdb1d0533424271b57c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
