@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f17c54d_7cc79152",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-20T08:34:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42dfac91_d4de9587",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 15
+      },
+      "revId": "bdb458dd40a8612c30a4b98709a1b61296583f4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bca0a59c_328a0bb5",
@@ -61,6 +85,30 @@
       "writtenOn": "2025-03-20T04:54:31Z",
       "side": 1,
       "message": "Usually the environment variables are defined in caps.. \nchange to lowercase\n\nipv6_slacc_disable",
+      "range": {
+        "startLine": 26,
+        "startChar": 2,
+        "endLine": 26,
+        "endChar": 16
+      },
+      "revId": "bdb458dd40a8612c30a4b98709a1b61296583f4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b52999ce_1a6acb34",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-20T08:34:13Z",
+      "side": 1,
+      "message": "Removing these as re-using from vmi library files.",
+      "parentUuid": "bca0a59c_328a0bb5",
       "range": {
         "startLine": 26,
         "startChar": 2,
@@ -88,6 +136,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8922c426_382a5985",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-20T08:34:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "773004bc_56d8f060",
+      "revId": "bdb458dd40a8612c30a4b98709a1b61296583f4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d98f399a_98b1a2d9",
@@ -105,6 +171,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e10b09c_66eafab4",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-20T08:34:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d98f399a_98b1a2d9",
+      "revId": "bdb458dd40a8612c30a4b98709a1b61296583f4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46c729a3_c5f09562",
@@ -118,6 +202,24 @@
       "writtenOn": "2025-03-20T05:15:08Z",
       "side": 1,
       "message": "I know a variable is already defined. But as per the guideline, it is recommended to use the URI directly as it helps while debugging. Pls change here and in line 496.",
+      "revId": "bdb458dd40a8612c30a4b98709a1b61296583f4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3228b25d_d1333955",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-20T08:34:13Z",
+      "side": 1,
+      "message": "This is used throughout the bucket and in IPv4 bucket as well, leaving as is to maintain continuity.",
+      "parentUuid": "46c729a3_c5f09562",
       "revId": "bdb458dd40a8612c30a4b98709a1b61296583f4b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
