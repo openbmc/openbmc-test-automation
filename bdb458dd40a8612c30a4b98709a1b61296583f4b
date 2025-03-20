@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6d8786b_567c86bd",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-03-20T04:54:31Z",
+      "side": 1,
+      "message": "ipv6_slacc_enable",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 15
+      },
+      "revId": "bdb458dd40a8612c30a4b98709a1b61296583f4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bca0a59c_328a0bb5",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-03-20T04:54:31Z",
+      "side": 1,
+      "message": "Usually the environment variables are defined in caps.. \nchange to lowercase\n\nipv6_slacc_disable",
+      "range": {
+        "startLine": 26,
+        "startChar": 2,
+        "endLine": 26,
+        "endChar": 16
+      },
+      "revId": "bdb458dd40a8612c30a4b98709a1b61296583f4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "773004bc_56d8f060",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-03-20T04:54:31Z",
+      "side": 1,
+      "message": "Enable SLAAC On BMC And Verify\n\nchange the doc \u0026 tags accordingly",
+      "revId": "bdb458dd40a8612c30a4b98709a1b61296583f4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d98f399a_98b1a2d9",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-03-20T04:54:31Z",
+      "side": 1,
+      "message": "Set SLAAC Configuration State and verify",
+      "revId": "bdb458dd40a8612c30a4b98709a1b61296583f4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
