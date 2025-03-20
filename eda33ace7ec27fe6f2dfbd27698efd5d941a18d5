@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fb2b438_110f4157",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-20T09:52:58Z",
+      "side": 1,
+      "message": "Sample output\n\nERROR:root:POST on /redfish/v1/SessionService/Sessions caused InvalidSchema exception; building HTTP 600 response\nERROR:root:GET on /redfish/v1/odata did not return valid JSON; assuming an empty object\nERROR:root:GET on /redfish/v1/odata did not return valid JSON; assuming an empty object\nERROR:root:GET on /redfish/v1/ did not return valid JSON; assuming an empty object\nSummary - PASS: 61, WARN: 1, FAIL: 42, NOT_TESTED: 60\nReport output:\nreports/RedfishProtocolValidationReport_03_20_2025_152102.tsv\nreports/RedfishProtocolValidationReport_03_20_2025_152102.html\n#(IST) 2025/03/20 15:21:02.514512 -   10.503034 - **ERROR** The prior shell command failed.\nattempt_num:                                      1\ncommand_string:                                   python3 Redfish-Protocol-Validator/rf_protocol_validator.py -r xx.xx.xx.xx:443 -u root -p ************ --no-cert-check\ncommand_timed_out:                                False\ntime_out:                                         None\nchild_pid:                                        3632\nshell_rc:                                         0x0000000000000001\nvalid_rcs:\n  [0]:                                            0x0000000000000000\nTest BMC Redfish Protocol Validator :: The Redfish Protocol Valida... | FAIL |\nRedfish Protocol Validator Failed\n------------------------------------------------------------------------------\nRedfish Protocol Validator :: Test BMC using https://github.com/DM... | FAIL |\n1 test, 0 passed, 1 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d",
+      "revId": "eda33ace7ec27fe6f2dfbd27698efd5d941a18d5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
