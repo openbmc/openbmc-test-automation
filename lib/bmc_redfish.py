@@ -65,7 +65,6 @@ class bmc_redfish(redfish_plus):
             BuiltIn().log_to_console(error_response)
 
         BuiltIn().set_global_variable("${REDFISH_SUPPORTED}", self.__inited__)
-        BuiltIn().set_global_variable("${REDFISH_REST_SUPPORTED}", True)
 
     def login(self, *args, **kwargs):
         r"""

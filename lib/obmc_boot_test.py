@@ -86,9 +86,6 @@ redfish_support_trans_state = int(
 redfish_supported = BuiltIn().get_variable_value(
     "${REDFISH_SUPPORTED}", default=False
 )
-redfish_rest_supported = BuiltIn().get_variable_value(
-    "${REDFISH_REST_SUPPORTED}", default=False
-)
 redfish_delete_sessions = int(
     BuiltIn().get_variable_value("${REDFISH_DELETE_SESSIONS}", default=1)
 )
@@ -332,7 +329,6 @@ def initial_plug_in_setup():
         "ffdc_summary_list_path",
         "execdir",
         "redfish_supported",
-        "redfish_rest_supported",
         "redfish_support_trans_state",
     ]
 
