@@ -32,23 +32,10 @@ class bmc_redfish_utils(object):
             # Handling init exception at worse to raise on error.
             raise e
 
-        if MTLS_ENABLED == "True":
-            self.__inited__ = True
-        else:
-            # There is a possibility that a given driver support both redfish and
-            # legacy REST.
+        if MTLS_ENABLED != "True":
             self._redfish_.login()
-            self._rest_response_ = self._redfish_.get(
-                "/xyz/openbmc_project/", valid_status_codes=[200, 404]
-            )
 
-            # If REST URL /xyz/openbmc_project/ is supported.
-            if self._rest_response_.status == 200:
-                self.__inited__ = True
-
-        BuiltIn().set_global_variable(
-            "${REDFISH_REST_SUPPORTED}", self.__inited__
-        )
+        self.__inited__ = True
 
     def get_redfish_session_info(self):
         r"""
