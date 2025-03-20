@@ -79,6 +79,23 @@
       "message": "Set SLAAC Configuration State and verify",
       "revId": "bdb458dd40a8612c30a4b98709a1b61296583f4b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46c729a3_c5f09562",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-03-20T05:15:08Z",
+      "side": 1,
+      "message": "I know a variable is already defined. But as per the guideline, it is recommended to use the URI directly as it helps while debugging. Pls change here and in line 496.",
+      "revId": "bdb458dd40a8612c30a4b98709a1b61296583f4b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
