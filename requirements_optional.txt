@@ -1,0 +1,8 @@
+aenum==3.1.15
+colorama==0.4.6
+pyasn1==0.6.1
+pyasn1_modules==0.4.1
+requests==2.32.3
+sseclient-py==1.8.0
+urllib3==1.26.20
+

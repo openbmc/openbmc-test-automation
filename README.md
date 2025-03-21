@@ -48,33 +48,16 @@
 If using Python 3.x, use the corresponding `pip3` to install packages. Note:
 Older Python 2.x is not actively supported.
 
-REST base packages:
-
-```
-    $ pip install -U requests
-    $ pip install -U robotframework-requests
-    $ pip install -U robotframework-httplibrary
-```
-
-Python redfish library packages: For more detailed instructions see
-[python-redfish-library](https://github.com/DMTF/python-redfish-library)
-
-```
-    $ pip install redfish
-```
-
-SSH and SCP base packages: For more detailed installation instructions see
-[robotframework-sshlibrary](https://pypi.python.org/pypi/robotframework-sshlibrary)
-
-```
-    $ pip install robotframework-sshlibrary
-    $ pip install robotframework-scplibrary
-```
-
 Installing requirement dependencies:
 
 ```
     $ pip install -r requirements.txt
+```
+
+Optional packages but required for `redfish/dmtf_tools/`
+
+```
+    $ pip install -r requirements_optional.txt
 ```
 
 you'll find this file once your clone openbmc-test-automation repository.
