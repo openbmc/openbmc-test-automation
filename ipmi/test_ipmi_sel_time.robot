@@ -58,8 +58,6 @@ ${number_of_times_sel_entry_added}    6
 Verify Default Get SEL Time
     [Documentation]  Verify IPMI Get SEL Time.
     [Tags]  Verify_Default_Get_SEL_Time
-    [Setup]  Printn
-    [Teardown]  FFDC On Test Case Fail
 
     # Gets the current SEL time via Get SEL Time Command.
     ${resp}=  Get SEL Time Command
@@ -69,8 +67,6 @@ Verify Default Get SEL Time
 Verify Set SEL Time On NTP Mode
     [Documentation]   IPMI Set SEL Time without NTP
     [Tags]  Verify_Set_SEL_Time_On_NTP_Mode
-    [Setup]  Printn
-    [Teardown]  printn
 
     # Get current time from BMC and add future year (here, 5years).
     ${sel_date}=  Get Specific Sel Date  5
@@ -131,7 +127,7 @@ Verify Set SEL Time With Future Date And Time
 
     # Difference of time between BMC Date and Get SEL Time.
     ${bmc_time}=  Get Current Date from BMC
-    ${difference}=  Get Time Difference  ${get_sel_time}  ${bmc_time}
+    ${difference}=  Get Time Difference  ${bmc_time}  ${get_sel_time}
     Should Be True  0<=${difference}<=2
 
 
@@ -155,7 +151,7 @@ Verify Set SEL Time With Past Date And Time
         Should Be True  0<=${difference}<=2
         # Difference of time between BMC Date and Get SEL Time.
         ${bmc_time}=  Get Current Date from BMC
-        ${difference}=  Get Time Difference  ${get_sel_time}  ${bmc_time}
+        ${difference}=  Get Time Difference  ${bmc_time}  ${get_sel_time}
         Should Be True  0<=${difference}<=2
     ELSE
         FAIL  SEL Time cannot set Date less than 1970
@@ -165,8 +161,6 @@ Verify Set SEL Time With Past Date And Time
 Verify SEL Set Time For Invalid Data Request
     [Documentation]  Verify IPMI Get SEL Time for invalid data request
     [Tags]  Verify_SEL_Set_Time_For_Invalid_Data_Request
-    [Setup]  Printn
-    [Teardown]  FFDC On Test Case Fail
 
     # Gets BMC current date via date command.
     ${current_date}=  Get Current Date from BMC
@@ -183,8 +177,6 @@ Verify SEL Set Time For Invalid Data Request
 Verify SEL Set Time For Incomplete Data Request
     [Documentation]  Verify IPMI Get SEL Time for invalid data with one byte less request data.
     [Tags]  Verify_SEL_Set_Time_For_Incomplete_Data_Request
-    [Setup]  Printn
-    [Teardown]  FFDC On Test Case Fail
 
     # Gets BMC current date via date command.
     ${current_date}=  Get Current Date from BMC
@@ -282,7 +274,7 @@ Verify SEL Time In SEL Entry For Future Date and Time
 
     # Difference of time between BMC Date and Get SEL Time.
     ${bmc_time}=  Get Current Date from BMC
-    ${difference}=  Get Time Difference  ${get_sel_time}  ${bmc_time}
+    ${difference}=  Get Time Difference  ${bmc_time}  ${get_sel_time}
     Should Be True  0<=${difference}<=2
 
     # Get any Sensor available from Sensor list.
@@ -334,7 +326,7 @@ Verify SEL Time In SEL Entry For Past Date And Time
         Should Be True  0<=${difference}<=2
         # Difference of time between BMC Date and Get SEL Time.
         ${bmc_time}=  Get Current Date from BMC
-        ${difference}=  Get Time Difference  ${get_sel_time}  ${bmc_time}
+        ${difference}=  Get Time Difference  ${bmc_time}  ${get_sel_time}
         Should Be True  0<=${difference}<=2
 
         # Get any Sensor available from Sensor list.
@@ -607,6 +599,7 @@ Test Setup Execution
     # Change timesync mode to manual with timeout as per resource.robot.
     Time Sync Mode Change Through Redfish   ${FALSE}
     Sleep  ${NETWORK_TIMEOUT}
+    Printn
 
 
 Test Teardown Execution
