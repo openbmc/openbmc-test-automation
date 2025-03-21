@@ -54,7 +54,7 @@ Upload Test Image File To BMC
 
     ${image_data}=  OperatingSystem.Get Binary File  dummyfile
 
-    # Set up 'openbmc' used in POST request below.
+    # Set up 'redfish' object used in POST request below.
     Initialize OpenBMC
 
     # Create the REST payload headers and data.
@@ -64,7 +64,7 @@ Upload Test Image File To BMC
     Set To Dictionary  ${data}  headers  ${headers}
 
     # Upload to BMC and check for HTTP_BAD_REQUEST.
-    ${resp}=  Post Request  openbmc  /upload/image  &{data}
+    ${resp}=  POST On Session  redfish  /upload/image  &{data}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_BAD_REQUEST}
 
     ${loop_count}=  Catenate  Ending iteration: ${iteration}
