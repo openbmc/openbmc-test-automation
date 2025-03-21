@@ -16,6 +16,23 @@
       "message": "There is another commit for the same ? https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/78087 \n\nplease abandon one of them which you are not working on .. Thanks",
       "revId": "5d3abd4f7d1aca1b4af30703b64a8fec964bfa65",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbfdf4e1_175c62f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-21T13:10:37Z",
+      "side": 1,
+      "message": "You can use this filter to view your commits patches list \nhttps://gerrit.openbmc.org/q/owner:sayenath.ravi@multicorewareinc.com",
+      "revId": "5d3abd4f7d1aca1b4af30703b64a8fec964bfa65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
