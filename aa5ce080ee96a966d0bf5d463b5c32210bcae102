@@ -16,6 +16,23 @@
       "message": "CI failure on the python code\n\n\n-def create_sensor_list_not_having_single_threshold(ipmi_sensor_response, threshold_sensor_list):\n\nchange to \n+def create_sensor_list_not_having_single_threshold(\n+    ipmi_sensor_response, threshold_sensor_list\n+):\n     r\"\"\"\n     Identify sensors with no valid thresholds.",
       "revId": "aa5ce080ee96a966d0bf5d463b5c32210bcae102",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ad7c387_61b0a981",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-21T09:28:39Z",
+      "side": 1,
+      "message": "def create_sensor_list_not_having_single_threshold(\n    ipmi_sensor_response, threshold_sensor_list):",
+      "revId": "aa5ce080ee96a966d0bf5d463b5c32210bcae102",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
