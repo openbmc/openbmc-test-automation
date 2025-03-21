@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2ffe8b7_2fa1cf34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-21T17:09:30Z",
+      "side": 1,
+      "message": "I see the recommendation of the fix to be done in the ticket and this changes is all about that..",
+      "revId": "0d8c58b8deb89457523a85a455490e1377553926",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
