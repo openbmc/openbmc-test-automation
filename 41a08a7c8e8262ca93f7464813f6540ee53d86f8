@@ -16,6 +16,24 @@
       "message": "SLAACv6 state will not be Enabled/Disabled, it will be set as True or False.So please mention the same.",
       "revId": "41a08a7c8e8262ca93f7464813f6540ee53d86f8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ee5b61c_3d6dac7b",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-21T07:07:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25b7e7eb_c3e22d0a",
+      "revId": "41a08a7c8e8262ca93f7464813f6540ee53d86f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
