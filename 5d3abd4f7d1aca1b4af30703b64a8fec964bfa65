@@ -33,6 +33,46 @@
       "message": "You can use this filter to view your commits patches list \nhttps://gerrit.openbmc.org/q/owner:sayenath.ravi@multicorewareinc.com",
       "revId": "5d3abd4f7d1aca1b4af30703b64a8fec964bfa65",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "633b5908_b372eedd",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-03-24T07:00:57Z",
+      "side": 1,
+      "message": "this example mention in the line 129\n\nDo not put example in Argument section",
+      "range": {
+        "startLine": 116,
+        "startChar": 4,
+        "endLine": 121,
+        "endChar": 0
+      },
+      "revId": "5d3abd4f7d1aca1b4af30703b64a8fec964bfa65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4ad3b49_8f8109e3",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-03-24T07:00:57Z",
+      "side": 1,
+      "message": "Use same representation \n  Description of arguments:",
+      "revId": "5d3abd4f7d1aca1b4af30703b64a8fec964bfa65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
