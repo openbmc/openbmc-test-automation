@@ -114,6 +114,13 @@ Enable SLAACv6 On BMC And Verify
     Set SLAACv6 Configuration State And Verify  ${True}
 
 
+Enable DHCPv6 Property On BMC And Verify
+    [Documentation]  Enable DHCPv6 property on BMC and verify.
+    [Tags]  Enable_DHCPv6_Property_On_BMC_And_Verify
+
+    Set And Verify DHCPv6 Property  Enabled
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -493,3 +500,22 @@ Set SLAACv6 Configuration State And Verify
 
     Run Keyword If  '${slaac_verify['IPv6AutoConfigEnabled']}' != '${slaac_state}'
     ...  Fail  msg=SLAACv6 not set properly.
+
+Set And Verify DHCPv6 Property
+    [Documentation]  Set DHCPv6 attribute and verify.
+    [Arguments]  ${dhcpv6_operating_mode}=${Disabled}
+
+    # Description of argument(s):
+    # dhcpv6_operating_mode    Enabled if user wants to enable DHCPv6('Enabled' or 'Disabled').
+
+    ${data}=  Set Variable If  '${dhcpv6_operating_mode}' == 'Disabled'  ${DISABLE_DHCPv6}  ${ENABLE_DHCPv6}
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body=${data}  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
+
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ${dhcpv6_verify}=  Get From Dictionary  ${resp.dict}  DHCPv6
+
+    Should Be Equal  '${dhcpv6_verify['OperatingMode']}'  '${dhcpv6_operating_mode}'
