@@ -16,6 +16,29 @@
       "message": "Tested by Dave in boot test environment and looking good. Awaiting +1 from Dave before merging it.",
       "revId": "80164d1f36d0a639da85ba159923867fc3657051",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa1efeb8_08c01e45",
+        "filename": "lib/bmc_redfish_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-03-24T05:35:15Z",
+      "side": 1,
+      "message": "Why is this check necessary now that we are not using rest anymore?\nAlso self.__inited__ \u003d True happens in either cases so it need not be inside the if else condition.",
+      "range": {
+        "startLine": 35,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 34
+      },
+      "revId": "80164d1f36d0a639da85ba159923867fc3657051",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
