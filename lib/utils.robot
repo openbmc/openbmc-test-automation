@@ -20,7 +20,7 @@ Library                 gen_robot_keyword.py
 Library                 bmc_ssh_utils.py
 Library                 utils.py
 Library                 var_funcs.py
-Library                 SCPLibrary  WITH NAME  scp
+Library                 SCPLibrary  AS  scp
 Library                 gen_robot_valid.py
 Library                 pldm_utils.py
 

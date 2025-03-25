@@ -17,7 +17,7 @@ Library                 gen_robot_keyword.py
 Library                 bmc_ssh_utils.py
 Library                 utils.py
 Library                 var_funcs.py
-Library                 SCPLibrary  WITH NAME  scp
+Library                 SCPLibrary  AS  scp
 
 *** Variables ***
 
@@ -233,7 +233,7 @@ Wait for OS
 
 Copy PNOR to BMC
     [Documentation]  Copy the PNOR image to the BMC.
-    Import Library      SCPLibrary      WITH NAME       scp
+    Import Library      SCPLibrary      AS       scp
     Open Connection for SCP
     Log    Copying ${PNOR_IMAGE_PATH} to /tmp
     scp.Put File    ${PNOR_IMAGE_PATH}   /tmp
@@ -750,7 +750,7 @@ Install Debug Tarball On BMC
     ...  msg=${tarball_file_path} doesn't exist.
 
     # Upload the file to BMC.
-    Import Library  SCPLibrary  WITH NAME  scp
+    Import Library  SCPLibrary  AS  scp
     Open Connection for SCP
     scp.Put File  ${tarball_file_path}  /tmp/debug-tarball.tar.xz
 

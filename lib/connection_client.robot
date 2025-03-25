@@ -55,7 +55,7 @@ Open Connection And Log In
 
 Open Connection for SCP
     [Documentation]  Open a connection for SCP.
-    Import Library      SCPLibrary      WITH NAME       scp
+    Import Library      SCPLibrary      AS       scp
     Run Keyword If  '${SSH_PORT}' == '${EMPTY}'  scp.Open connection  ${OPENBMC_HOST}
     ...  username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}
     ...  ELSE   Run Keyword    scp.Open connection  ${OPENBMC_HOST}  port=${SSH_PORT}

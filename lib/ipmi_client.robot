@@ -315,7 +315,7 @@ Copy ipmitool
     ...  AND  Return From Keyword
 
     OperatingSystem.File Should Exist  tools/ipmitool  msg=${ipmitool_error}
-    Import Library      SCPLibrary      WITH NAME       scp
+    Import Library      SCPLibrary      AS       scp
     scp.Open connection     ${OPENBMC_HOST}     username=${OPENBMC_USERNAME}      password=${OPENBMC_PASSWORD}
     scp.Put File    tools/ipmitool   /tmp
     SSHLibrary.Open Connection     ${OPENBMC_HOST}

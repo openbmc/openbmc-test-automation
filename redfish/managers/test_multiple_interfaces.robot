@@ -18,7 +18,7 @@ Library         OperatingSystem
 # User input BMC IP for the eth1.
 # Use can input as  -v OPENBMC_HOST_ETH1:xx.xxx.xx from command line.
 Library         ../../lib/bmc_redfish.py  https://${OPENBMC_HOST_ETH1}:${HTTPS_PORT}
-...             ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  WITH NAME  Redfish1
+...             ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  AS  Redfish1
 
 Suite Setup     Suite Setup Execution
 Test Setup      Run Keywords  Redfish.Login  AND  Redfish1.Login
