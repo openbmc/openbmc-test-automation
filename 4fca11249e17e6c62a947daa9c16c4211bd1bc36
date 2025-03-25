@@ -16,6 +16,23 @@
       "message": "error: cannot format lib/sensor_info_record.py: Cannot parse: 1:0: \u003c\u003c\u003c\u003c\u003c\u003c\u003c PATCH SET (8c7335 Created new script for validating IPMI Sensor Validation)\n\nOh no! 💥 💔 💥\n102 files left unchanged, 1 file failed to reformat.\n    Running eslint\n    Running flake8\nlib/sensor_info_record.py:1:21: E999 SyntaxError: invalid decimal literal",
       "revId": "4fca11249e17e6c62a947daa9c16c4211bd1bc36",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97f2608d_00ed6e3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-25T12:08:09Z",
+      "side": 1,
+      "message": "You have a chain relation of commits dependent on another commit https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/54499/17\n\nso I cant merge this unless you break the relation and rebase .. \n\nPlease rebase and break the commit chain for us to merge.. Thanks",
+      "revId": "4fca11249e17e6c62a947daa9c16c4211bd1bc36",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
