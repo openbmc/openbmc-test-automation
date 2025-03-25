@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91972f84_f0644d80",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-03-25T05:22:01Z",
+      "side": 1,
+      "message": "Pls refine the commit msg to state specific change",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "d4ac36e9d40921e50d9731893709de95b024c5b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "50e5a524_793d5990",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 1
@@ -14,6 +37,75 @@
       "writtenOn": "2025-03-25T01:13:47Z",
       "side": 1,
       "message": "where is the verification part?",
+      "revId": "d4ac36e9d40921e50d9731893709de95b024c5b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6b8a815_3966a3a6",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-03-25T05:22:01Z",
+      "side": 1,
+      "message": "Set And Verify DHCPv6 Propery.. Modify the doc accordingly",
+      "range": {
+        "startLine": 504,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 19
+      },
+      "revId": "d4ac36e9d40921e50d9731893709de95b024c5b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd4f8109_cf190c04",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-03-25T05:22:01Z",
+      "side": 1,
+      "message": "dhcpv6_operatingmode --\u003e dhcpv6_operating_mode",
+      "range": {
+        "startLine": 506,
+        "startChar": 19,
+        "endLine": 506,
+        "endChar": 39
+      },
+      "revId": "d4ac36e9d40921e50d9731893709de95b024c5b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "214765d3_693eddd4",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-03-25T05:22:01Z",
+      "side": 1,
+      "message": "valid_status_code --\u003e valid_status_codes",
+      "range": {
+        "startLine": 506,
+        "startChar": 56,
+        "endLine": 506,
+        "endChar": 73
+      },
       "revId": "d4ac36e9d40921e50d9731893709de95b024c5b2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -82,6 +174,29 @@
         "startChar": 2,
         "endLine": 516,
         "endChar": 27
+      },
+      "revId": "d4ac36e9d40921e50d9731893709de95b024c5b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "202af28b_6ccc1e3e",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-03-25T05:22:01Z",
+      "side": 1,
+      "message": "Give an example in the comment pls.",
+      "range": {
+        "startLine": 521,
+        "startChar": 4,
+        "endLine": 521,
+        "endChar": 64
       },
       "revId": "d4ac36e9d40921e50d9731893709de95b024c5b2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
