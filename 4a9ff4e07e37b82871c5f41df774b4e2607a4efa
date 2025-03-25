@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "580aef84_c18f9fa1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-25T07:47:58Z",
+      "side": 1,
+      "message": "Update GUI test setup instruction\n\nChanges:\n    - Update gui_setup_reference.md\n    - Removed packages related to GUI\n    - Add a note in README\n\nTested:\n    - Tested with Python 3.12.2 and\n      Robot version 7.2.2",
+      "revId": "4a9ff4e07e37b82871c5f41df774b4e2607a4efa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72d0f7b5_57d55b76",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-25T07:47:58Z",
+      "side": 1,
+      "message": "the instructions",
+      "range": {
+        "startLine": 82,
+        "startChar": 48,
+        "endLine": 82,
+        "endChar": 62
+      },
+      "revId": "4a9ff4e07e37b82871c5f41df774b4e2607a4efa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
