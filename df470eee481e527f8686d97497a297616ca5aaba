@@ -16,6 +16,23 @@
       "message": "Ganesh and Sridevi code all good ?",
       "revId": "df470eee481e527f8686d97497a297616ca5aaba",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eb2b449_ab33fb29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-25T10:43:35Z",
+      "side": 1,
+      "message": "The commit says a lot about compliance checks , errors etc.. but all I see in the code is just documentation changes ? \n\n\nif this is just the document changes, please update the commit message and we will merge it. \n\nIf its not but need other code logics as mentioned in the comment, please work on it and update the code. Thanks",
+      "revId": "df470eee481e527f8686d97497a297616ca5aaba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
