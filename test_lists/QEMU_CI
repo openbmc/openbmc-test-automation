@@ -9,6 +9,7 @@
 --include Redfish_Login_Via_SessionService
 --include Redfish_Login_Using_Invalid_Token
 --include Delete_Redfish_Session_Using_Valid_Login
+--include Redfish_Login_With_Invalid_Credentials
 --include Verify_Update_Service_Enabled
 --include Verify_Redfish_Software_Inventory_Collection
 --include Redfish_Software_Inventory_Status_Check
