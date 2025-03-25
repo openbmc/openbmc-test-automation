@@ -33,6 +33,23 @@
       "message": "The commit says a lot about compliance checks , errors etc.. but all I see in the code is just documentation changes ? \n\n\nif this is just the document changes, please update the commit message and we will merge it. \n\nIf its not but need other code logics as mentioned in the comment, please work on it and update the code. Thanks",
       "revId": "df470eee481e527f8686d97497a297616ca5aaba",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3a3a5b0_de26cbae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-25T11:53:50Z",
+      "side": 1,
+      "message": "Never mind. .this is first push and I see your name in CLA approved list.. \n\nhttps://drive.google.com/drive/folders/1VkpiPXNZIb0APcBpIMauIBZ5-bNWQMf5\n\nThank you for the code.. Merging it.",
+      "revId": "df470eee481e527f8686d97497a297616ca5aaba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
