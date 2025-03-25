@@ -701,6 +701,23 @@ Configure Invalid Static IPv6 To VMI And Verify
     ${ipv4_hexword_addr}       64                        ${HTTP_BAD_REQUEST}
 
 
+Delete IPv6 Static Default Gateway On VMI And Verify
+    [Documentation]  Delete IPv6 static default gateway and verify address is erased.
+    [Tags]  Delete_IPv6_Static_Default_Gateway_On_VMI_And_Verify
+    [Setup]  Run Keywords  Set Static VMI IPv6 Address  ${test_vmi_ipv6addr}  ${prefix_length}
+    ...  AND  Set VMI IPv6 Static Default Gateway  ${test_vmi_ipv6gateway}
+
+    # Delete IPv6 static default gateway address.
+    Delete VMI IPv6 Static Default Gateway Address
+
+    Sleep  5s
+
+    # Verify static IPv6 default gateway address is deleted.
+    ${resp}=  Redfish.Get
+    ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${ethernet_interface}
+    Should Be Empty  ${resp.dict["IPv6StaticDefaultGateways"]}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -880,3 +897,17 @@ Set VMI Invalid Static IPv6 Address And Verify
     @{vmi_ipv6_address}=  Get From Dictionary  ${resp.dict}  IPv6Addresses
     ${vmi_ipv6_addr}=  Get From List  ${vmi_ipv6_address}  0
     Should Not Be Equal  ${vmi_ipv6_addr["Address"]}  ${invalid_vmi_ipv6addr}
+
+
+Delete VMI IPv6 Static Default Gateway Address
+    [Documentation]  Delete VMI IPv6 static default gateway address.
+    [Arguments]  ${valid_status_codes}=${HTTP_ACCEPTED}
+    ...  ${interface}=${ethernet_interface}
+
+    # Description of argument(s):
+    # valid_status_codes       Expected valid status code from PATCH request.
+    # interface                VMI interface (eg. eth0 or eth1).
+
+    ${data}=  Set Variable  {"IPv6StaticDefaultGateways": [${Null}]}
+    Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+    ...  body=${data}  valid_status_codes=[${valid_status_codes}]
