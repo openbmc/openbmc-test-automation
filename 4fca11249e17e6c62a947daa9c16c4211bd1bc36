@@ -33,6 +33,24 @@
       "message": "You have a chain relation of commits dependent on another commit https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/54499/17\n\nso I cant merge this unless you break the relation and rebase .. \n\nPlease rebase and break the commit chain for us to merge.. Thanks",
       "revId": "4fca11249e17e6c62a947daa9c16c4211bd1bc36",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd855bf8_93318903",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002359
+      },
+      "writtenOn": "2025-03-25T14:00:44Z",
+      "side": 1,
+      "message": "Hi George, \n\nThanks for your review. As you said, I have rebased the script and broken the relation between the commits. I hope the commit can be merged now!",
+      "parentUuid": "97f2608d_00ed6e3a",
+      "revId": "4fca11249e17e6c62a947daa9c16c4211bd1bc36",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
