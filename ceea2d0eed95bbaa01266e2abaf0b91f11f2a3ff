@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0ea96c5_c386e0f5",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-03-25T16:09:18Z",
+      "side": 1,
+      "message": "when it is already empty why check this?",
+      "range": {
+        "startLine": 719,
+        "startChar": 4,
+        "endLine": 719,
+        "endChar": 91
+      },
+      "revId": "ceea2d0eed95bbaa01266e2abaf0b91f11f2a3ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
