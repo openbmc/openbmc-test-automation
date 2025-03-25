@@ -79,7 +79,8 @@ Installing requirement dependencies:
 
 you'll find this file once your clone openbmc-test-automation repository.
 
-For Web UI ( GUI ) Testing setup instructions see
+For Web UI ( GUI ) Testing setup, please follow instructions  OpenBMC GUI Test Setup Guide
+Note: GUI test cases under `gui/` will not work without the above setup completed in your environment.
 [OpenBMC GUI Test Setup Guide](https://github.com/openbmc/openbmc-test-automation/blob/master/docs/gui_setup_reference.md)
 
 Installing tox:
