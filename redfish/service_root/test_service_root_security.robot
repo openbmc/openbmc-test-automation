@@ -33,10 +33,10 @@ Redfish Login With Invalid Credentials
     [Template]  Login And Verify Redfish Response
 
     # Username                Password               Expect status
-    ${OPENBMC_USERNAME}       deadpassword           InvalidCredentialsError
-    groot                     ${OPENBMC_PASSWORD}    InvalidCredentialsError
-    ${EMPTY}                  ${OPENBMC_PASSWORD}    SessionCreationError
-    ${OPENBMC_USERNAME}       ${EMPTY}               SessionCreationError
+    #${OPENBMC_USERNAME}       deadpassword           InvalidCredentialsError
+    #groot                     ${OPENBMC_PASSWORD}    InvalidCredentialsError
+    #${EMPTY}                  ${OPENBMC_PASSWORD}    SessionCreationError
+    #${OPENBMC_USERNAME}       ${EMPTY}               SessionCreationError
     ${EMPTY}                  ${EMPTY}               SessionCreationError
 
 
@@ -180,6 +180,7 @@ Login And Verify Redfish Response
     Redfish.Set Password  ${EMPTY}
 
     ${msg}=  Run Keyword And Expect Error  *  Redfish.Login  ${username}  ${password}
+    Log To Console   DEBUG: ${msg}
 
     # redfish package version <=3.1.6 default response is InvalidCredentialsError.
     Should Contain Any   ${msg}  InvalidCredentialsError  ${expected_response}

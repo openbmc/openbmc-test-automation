@@ -121,7 +121,13 @@ class bmc_redfish(redfish_plus):
             except_type, except_value, except_traceback = sys.exc_info()
             BuiltIn().log_to_console(str(except_type))
             BuiltIn().log_to_console(str(except_value))
-            e_message = "Unexpected exception."
+            e_message = "ValueError:Unexpected exception."
+            BuiltIn().log_to_console(e_message)
+        except KeyError as e:
+            except_type, except_value, except_traceback = sys.exc_info()
+            BuiltIn().log_to_console(str(except_type))
+            BuiltIn().log_to_console(str(except_value))
+            e_message = "KeyError: Unexpected exception." + str(e)
             BuiltIn().log_to_console(e_message)
 
     def logout(self):
