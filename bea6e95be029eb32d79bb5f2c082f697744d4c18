@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c1f095c_369f54ff",
+        "filename": "lib/bmc_date_and_time_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2025-03-25T08:11:57Z",
+      "side": 1,
+      "message": "Changed",
+      "parentUuid": "a5221a04_f0815421",
+      "range": {
+        "startLine": 34,
+        "startChar": 2,
+        "endLine": 36,
+        "endChar": 0
+      },
+      "revId": "bea6e95be029eb32d79bb5f2c082f697744d4c18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33e5ffd6_7b2155c1",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-03-25T06:09:39Z",
       "side": 1,
       "message": "Bad request -\u003e invalid\nsame at 69",
+      "range": {
+        "startLine": 62,
+        "startChar": 52,
+        "endLine": 62,
+        "endChar": 63
+      },
+      "revId": "bea6e95be029eb32d79bb5f2c082f697744d4c18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af873f71_a59f73bd",
+        "filename": "redfish/managers/test_managers_bmc_time.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2025-03-25T08:11:57Z",
+      "side": 1,
+      "message": "Changed",
+      "parentUuid": "33e5ffd6_7b2155c1",
       "range": {
         "startLine": 62,
         "startChar": 52,
