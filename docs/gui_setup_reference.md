@@ -22,13 +22,15 @@ Browser specific packages:
 Last tested packages versions:
 
 ```
-    Python                          3.11.9
+    Python                          3.12
+    Selenium                        4.8.2
     Mozilla Firefox                 112.0.2
-    Robot Framework                 7.1.1
+    Robot Framework                 7.2.2
     robotframework-seleniumlibrary  6.0.0
     geckodriver                     0.32.2
     robotframework-xvfb             1.2.2
     xvfbwrapper                     0.2.9
+    webdriver-manager               4.0.2
 ```
 
 ## Installation Setup Guide
