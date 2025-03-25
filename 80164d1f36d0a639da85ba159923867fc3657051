@@ -104,6 +104,30 @@
       },
       "revId": "80164d1f36d0a639da85ba159923867fc3657051",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f33465b_9c33f5bc",
+        "filename": "lib/bmc_redfish_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-03-25T05:30:29Z",
+      "side": 1,
+      "message": "Probably..\n\n```\nif MTLS_ENABLED !\u003d \"True\":\n    self._redfish_.login()\nself.__inited__ \u003d True\n```",
+      "parentUuid": "39e52e37_b83a3cb8",
+      "range": {
+        "startLine": 35,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 34
+      },
+      "revId": "80164d1f36d0a639da85ba159923867fc3657051",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
