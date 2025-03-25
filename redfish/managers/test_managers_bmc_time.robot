@@ -55,18 +55,18 @@ Verify Set Time Using Redfish
 
 
 Verify Set DateTime With Offset Using Redfish
-    [Documentation]  Verify set DateTime with offset using redfish API.
+    [Documentation]  Verify error while setting DateTime with offset using redfish API.
     [Tags]  Verify_Set_DateTime_With_Offset_Using_Redfish
     [Teardown]  Run Keywords  Redfish Set DateTime  AND  FFDC On Test Case Fail
 
-    Redfish Set DateTime  ${date_time_with_offset}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+    Redfish Set DateTime  ${date_time_with_offset}  invalid
 
 
 Verify Set DateTime With Invalid Data Using Redfish
     [Documentation]  Verify error while setting invalid DateTime using Redfish.
     [Tags]  Verify_Set_DateTime_With_Invalid_Data_Using_Redfish
 
-    Redfish Set DateTime  ${invalid_datetime}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+    Redfish Set DateTime  ${invalid_datetime}  invalid
 
 
 Verify DateTime Persists After Reboot
@@ -92,9 +92,9 @@ Verify Immediate Consumption Of BMC Date
     [Documentation]  Verify immediate change in BMC date time.
     [Tags]  Verify_Immediate_Consumption_Of_BMC_Date
     [Setup]  Run Keywords  Set Time To Manual Mode  AND
-    ...  Redfish Set DateTime  valid_status_codes=[${HTTP_OK}]
+    ...  Redfish Set DateTime
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND
-    ...  Redfish Set DateTime  valid_status_codes=[${HTTP_OK}]
+    ...  Redfish Set DateTime
     [Template]  Set BMC Date And Verify
 
     # host_state
