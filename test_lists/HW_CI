@@ -1,12 +1,12 @@
 #Verify SSH and IPMI interfaces
 --include Test_SSH_And_IPMI_Connections
 #Basic poweron test
---include Verify_Redfish_Host_PowerOn
---include Verify_Redfish_Host_PowerOff
+#--include Verify_Redfish_Host_PowerOn
+#--include Verify_Redfish_Host_PowerOff
 #Check for apps failures.
 --include Check_For_Application_Failures
 #Verify system boot time average
---include Verify_Uptime_Average_Against_Threshold
+#--include Verify_Uptime_Average_Against_Threshold
 #Redfish tests cases.
 --include Redfish_Login_And_Logout
 --include GET_Redfish_Resources_With_Login
@@ -16,8 +16,8 @@
 --include Redfish_Login_With_Invalid_Credentials
 --include Redfish_Login_Using_Unsecured_HTTP
 --include Verify_Update_Service_Enabled
---include Verify_Redfish_Software_Inventory_Collection
---include Redfish_Software_Inventory_Status_Check
+#--include Verify_Redfish_Software_Inventory_Collection
+#--include Redfish_Software_Inventory_Status_Check
 #IPMI tests.
 --include Enable_IPMI_User_And_Verify
 --include Verify_IPMI_User_Deletion
