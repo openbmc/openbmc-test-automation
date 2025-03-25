@@ -121,8 +121,14 @@ class bmc_redfish(redfish_plus):
             except_type, except_value, except_traceback = sys.exc_info()
             BuiltIn().log_to_console(str(except_type))
             BuiltIn().log_to_console(str(except_value))
-            e_message = "Unexpected exception."
+        except KeyError:
+            except_type, except_value, except_traceback = sys.exc_info()
+            BuiltIn().log_to_console(str(except_type))
+            BuiltIn().log_to_console(str(except_value))
+            e_message = "Login failed, something went wrong during request. "
+            e_message += "Error usually due to SessionCreationError"
             BuiltIn().log_to_console(e_message)
+            raise KeyError('SessionCreationError or InvalidCredentialsError')
 
     def logout(self):
         if MTLS_ENABLED == "True":
