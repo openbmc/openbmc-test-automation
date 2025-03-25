@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37ae7b85_7114b6ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-25T08:20:19Z",
+      "side": 1,
+      "message": "Ganesh and Sridevi code all good ?",
+      "revId": "df470eee481e527f8686d97497a297616ca5aaba",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
