@@ -24,6 +24,16 @@ Enable LLDP And Verify
     # Verify the LLDP state is set true
     Verify LLDP Configuration State  ${True}
 
+Disable LLDP And Verify
+    [Documentation]  Disable LLDP and verify.
+    [Tags]  Disable_LLDP_And_Verify
+
+    # Set the LLDP enabled property as False.
+    Set LLDP Configuration State  ${False}
+
+    # Verify the LLDP state is set false
+    Verify LLDP Configuration State  ${False}
+
 *** Keywords ***
 
 Suite Setup Execution
