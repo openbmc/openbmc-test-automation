@@ -25,34 +25,32 @@ Redfish Get DateTime
 
 Redfish Set DateTime
     [Documentation]  Set DateTime using Redfish.
-    [Arguments]  ${date_time}=${EMPTY}  &{kwargs}
+    [Arguments]  ${date_time}=${EMPTY}  ${http_request_type}=valid
     # Description of argument(s):
     # date_time                     New time to set for BMC (eg.
     #                               "2019-06-30 09:21:28"). If this value is
     #                               empty, it will be set to the UTC current
     #                               date time of the local system.
-    # kwargs                        Additional parameters to be passed directly to
-    #                               th Redfish.Patch function.  A good use for
-    #                               this is when testing a bad date-time, the
-    #                               caller can specify
-    #                               valid_status_codes=[${HTTP_BAD_REQUEST}].
+    # http_request_type             valid for valid date_time.
+    #                               invalid for invalid date_time.
 
     # Assign default value of UTC current date time if date_time is empty.
     ${date_time}=  Run Keyword If
     ...  '${date_time}' == '${EMPTY}'  Get Current Date  time_zone=UTC
     ...  ELSE
     ...  Set Variable  ${date_time}
-    # Change date format to 2024-03-07T07:58:50+00:00 from 2024-03-07 07:58:50.000.
-    IF  "T" in "${date_time}"
+    # Patch date_time based on type of ${http_request_type}.
+    IF  '${http_request_type}' == 'valid'
+        ${date_time}=  Convert Date  ${date_time}  result_format=%Y-%m-%dT%H:%M:%S+00:00
         Wait Until Keyword Succeeds  1min  5sec
         ...  Redfish.Patch  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}
-        ...  body={'DateTime': '${date_time}'}  &{kwargs}
+        ...  body={'DateTime': '${date_time}'}
         ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
     ELSE
-        ${date_time_formatted}=  Convert Date  ${date_time}  result_format=%Y-%m-%dT%H:%M:%S+00:00
         Wait Until Keyword Succeeds  1min  5sec
-        ...  Redfish.Patch  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  body={'DateTime': '${date_time_formatted}'}
-        ...  &{kwargs}  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+        ...  Redfish.Patch  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}
+        ...  body={'DateTime': '${date_time}'}
+        ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
     END
 
 
@@ -76,7 +74,7 @@ Set BMC Date And Verify
     ...    Redfish Power off  stack_mode=skip
     ${current_date}=  Get Current Date  time_zone=UTC
     ${new_value}=  Subtract Time From Date  ${current_date}  1 day
-    Redfish Set DateTime  ${new_value}  valid_status_codes=[${HTTP_OK}]
+    Redfish Set DateTime  ${new_value}
     ${current_value}=  Redfish Get DateTime
     ${time_diff}=  Subtract Date From Date  ${current_value}  ${new_value}
     Should Be True  '${time_diff}'<='3'
