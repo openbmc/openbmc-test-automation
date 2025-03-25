@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f848df6f_9cf413ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-25T12:03:01Z",
+      "side": 1,
+      "message": "error: cannot format lib/sensor_info_record.py: Cannot parse: 1:0: \u003c\u003c\u003c\u003c\u003c\u003c\u003c PATCH SET (8c7335 Created new script for validating IPMI Sensor Validation)\n\nOh no! 💥 💔 💥\n102 files left unchanged, 1 file failed to reformat.\n    Running eslint\n    Running flake8\nlib/sensor_info_record.py:1:21: E999 SyntaxError: invalid decimal literal",
+      "revId": "4fca11249e17e6c62a947daa9c16c4211bd1bc36",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
