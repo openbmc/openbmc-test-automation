@@ -1,5 +1,4 @@
 robotframework==7.2.2
-selenium==4.8.2
 paramiko>=2.5.0
 requests
 robotframework-requests
@@ -7,10 +6,5 @@ robotframework-jsonlibrary
 robotframework-sshlibrary
 robotframework-scplibrary
 robotframework-httplibrary
-robotframework-seleniumlibrary
-robotframework-angularjs
-robotframework-xvfb
-xvfbwrapper==0.2.9
 redfish>=3.1.7
 redfishtool>=1.1.8
-webdriver-manager==4.0.2
