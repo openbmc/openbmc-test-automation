@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42f351c3_f3edd671",
+        "filename": "lib/bmc_date_and_time_utils.robot",
+        "patchSetId": 14
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-26T06:48:55Z",
+      "side": 1,
+      "message": "http_request_type  \n\nChange to something like\n\nrequest_type\u003dvalid",
+      "range": {
+        "startLine": 28,
+        "startChar": 40,
+        "endLine": 28,
+        "endChar": 66
+      },
+      "revId": "72d97944e9f53a122ed9ed830cb134988b0fa183",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9151df17_e2e98d35",
+        "filename": "lib/bmc_date_and_time_utils.robot",
+        "patchSetId": 14
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-26T06:48:55Z",
+      "side": 1,
+      "message": "Change the documentation\n\nBy default. user request is valid. User can pass invalid to identify the user date time input will result in failure as expected.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 66
+      },
+      "revId": "72d97944e9f53a122ed9ed830cb134988b0fa183",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
