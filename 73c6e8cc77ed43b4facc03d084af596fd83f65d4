@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a5eec64_9c8822a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-26T06:50:24Z",
+      "side": 1,
+      "message": "Or what you can do it. .abandon this commit. \n\nDo a clean sandbox with latest code and new clean commit which doesn\u0027t depend on any other..",
+      "revId": "73c6e8cc77ed43b4facc03d084af596fd83f65d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
