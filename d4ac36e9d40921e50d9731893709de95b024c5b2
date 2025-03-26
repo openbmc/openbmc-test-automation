@@ -61,6 +61,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b83646e_1c2d901b",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-03-26T05:12:25Z",
+      "side": 1,
+      "message": "then please add verify in the same keword",
+      "parentUuid": "3dc80301_11e59dd8",
+      "revId": "d4ac36e9d40921e50d9731893709de95b024c5b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b6b8a815_3966a3a6",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 1
