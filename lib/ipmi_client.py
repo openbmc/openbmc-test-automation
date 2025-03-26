@@ -96,7 +96,7 @@ def verify_ipmi_user_parm_accepted():
     """
 
     # Assumption: "U" is in the global ipmi_required_options.
-    global ipmi_required_options
+    # global ipmi_required_options 
     print_output = 0
 
     command_string = create_ipmi_ext_command_string("power status")
