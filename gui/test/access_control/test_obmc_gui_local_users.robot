@@ -149,7 +149,7 @@ Test Login
    # password   User password.
    # expected_result  Result of the test.
 
-    Open Browser  ${obmc_gui_url}  alias=2
+    Open Browser  ${OPENBMC_GUI_URL}  alias=2
     Switch Browser  2
     ${status}=  Run Keyword And Return Status  Login OpenBMC GUI  ${username}  ${password}
     Should Be Equal  ${status}  ${expected_result}  Login expectation was not met
