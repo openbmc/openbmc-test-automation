@@ -9,7 +9,7 @@ Variables      ../data/gui_variables.py
 
 
 *** Variables ***
-${obmc_gui_url}              https://${OPENBMC_HOST}:${HTTPS_PORT}
+${OPENBMC_GUI_URL}              https://${OPENBMC_HOST}:${HTTPS_PORT}
 ${xpath_power_page}          //*[@data-test-id='appHeader-container-power']
 ${xpath_power_shutdown}      //*[@data-test-id='serverPowerOperations-button-shutDown']
 ${xpath_power_power_on}      //*[@data-test-id='serverPowerOperations-button-powerOn']
@@ -50,14 +50,14 @@ Launch Header Browser
     # Description of argument(s):
     # browser_type  Type of browser (e.g. "firefox", "chrome", etc.).
 
-    ${BROWSER_ID}=  Open Browser  ${obmc_gui_url}  ${browser_type}
+    ${BROWSER_ID}=  Open Browser  ${OPENBMC_GUI_URL}  ${browser_type}
     Maximize Browser Window
     Set Global Variable  ${BROWSER_ID}
 
 
 Launch Headless Browser
     [Documentation]  Launch headless browser.
-    [Arguments]  ${URL}=${obmc_gui_url}  ${browser}=${GUI_BROWSER}
+    [Arguments]  ${URL}=${OPENBMC_GUI_URL}  ${browser}=${GUI_BROWSER}
 
     # Description of argument(s):
     # URL      Openbmc GUI URL to be open
@@ -82,7 +82,7 @@ Launch Browser And Login GUI
 Retry Browser Login Attempts
     [Documentation]  Launch browser and login to OpenBMC GUI.
 
-    Open Browser With URL  ${obmc_gui_url}
+    Open Browser With URL  ${OPENBMC_GUI_URL}
     Login GUI  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
 
 
@@ -94,7 +94,7 @@ Login GUI
     # username  The username to be used for login.
     # password  The password to be used for login.
 
-    Go To  ${obmc_gui_url}
+    Go To  ${OPENBMC_GUI_URL}
     Wait Until Element Is Enabled  ${xpath_login_username_input}
     Input Text  ${xpath_login_username_input}  ${username}
     Input Password  ${xpath_login_password_input}  ${password}
@@ -113,7 +113,7 @@ Launch Browser And Login GUI With Given User
     # user_name        User name to login to eBMC.
     # user_password    User password to login to eBMC.
 
-    Open Browser With URL  ${obmc_gui_url}
+    Open Browser With URL  ${OPENBMC_GUI_URL}
     LOGIN GUI  ${user_name}  ${user_password}
 
 Logout GUI

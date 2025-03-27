@@ -80,7 +80,7 @@ Load Certificates On BMC Via GUI
     ...  ELSE IF  '${certificate_type}' == 'Client' and '${delete_cert}' == '${True}'
     ...  Delete Certificate Via BMC CLI  ${certificate_type}
 
-    Set Test Variable  ${obmc_gui_url}  https://${OPENBMC_HOST_ETH1}:${HTTPS_PORT}
+    Set Test Variable  ${OPENBMC_GUI_URL}  https://${OPENBMC_HOST_ETH1}:${HTTPS_PORT}
     Launch Browser And Login GUI
     Navigate To SSL Certificate Page
     Sleep  10s
