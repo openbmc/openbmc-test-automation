@@ -111,7 +111,6 @@ class redfish_plus(HttpClient):
         Timeout for GET/POST/PATCH/DELETE operations. By default 30 seconds, else user defined value.
         Similarly, Max retry by default 10 attempt for the operation, else user defined value.
         """
-        gp.qprint_executing(stack_frame_ix=3, style=gp.func_line_style_short)
         # Convert python string object definitions to objects (mostly useful for robot callers).
         args = fa.args_to_objects(args)
         kwargs = fa.args_to_objects(kwargs)
@@ -120,6 +119,18 @@ class redfish_plus(HttpClient):
         max_retry = kwargs.pop("max_retry", 10)
         self._max_retry = max_retry
         valid_status_codes = kwargs.pop("valid_status_codes", [200])
+
+        # /redfish/v1/ does not require authentication and start of the test
+        # is dumping 3 entries at the beginning which is excessive.
+        # args[0] position is always the URI for redfish request
+        # Example:
+        #      ('/redfish/v1/',)
+        #      ('/redfish/v1/Managers/bmc',)
+        # Skip logging if matches /redfish/v1/
+        if args[0] != "/redfish/v1/":
+            gp.qprint_executing(
+                stack_frame_ix=3, style=gp.func_line_style_short
+            )
 
         try:
             response = func(*args, **kwargs)
