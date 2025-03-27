@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "566fbbdb_dfcfe922",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-03-27T11:43:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91972f84_f0644d80",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "d4ac36e9d40921e50d9731893709de95b024c5b2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "50e5a524_793d5990",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 1
