@@ -22,6 +22,30 @@
       },
       "revId": "78010075c8292381e8940b866baa8993f69c1e7f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "825832ba_7beb0c2b",
+        "filename": "lib/bmc_redfish.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-28T05:56:35Z",
+      "side": 1,
+      "message": "This was one of the error we saw in QEMU.. where pass in test \n\n    # Username                Password               Expect status\n    ${OPENBMC_USERNAME}       deadpassword           InvalidCredentialsError\n    groot                     ${OPENBMC_PASSWORD}    InvalidCredentialsError\n    ${EMPTY}                  ${OPENBMC_PASSWORD}    SessionCreationError\n    ${OPENBMC_USERNAME}       ${EMPTY}               SessionCreationError\n    ${EMPTY}                  ${EMPTY}               SessionCreationError\n\nall passed except the last one \n    ${EMPTY}                  ${EMPTY}               SessionCreationError\n\nBy default it would have thrown InvalidCredentialsError or SessionCreationError\n\nbut hit KeyError which is partly due to the redfish DMTF package we used vs some unknown reason why it hit this\n\nWe disabled this in QEMU sometime ago due to this \nDiscord reference https://discord.com/channels/775381525260664832/784093735775633458/1353513010580160615",
+      "parentUuid": "73e93fb9_9daded2b",
+      "range": {
+        "startLine": 132,
+        "startChar": 26,
+        "endLine": 132,
+        "endChar": 50
+      },
+      "revId": "78010075c8292381e8940b866baa8993f69c1e7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
