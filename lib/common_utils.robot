@@ -23,12 +23,6 @@ Library                 SCPLibrary  AS  scp
 
 ${pflash_cmd}             /usr/sbin/pflash -r /dev/stdout -P VERSION
 
-${dbuscmdBase}
-...  dbus-send --system --print-reply --dest=${OPENBMC_BASE_DBUS}.settings.Host
-${dbuscmdGet}
-...  ${SETTINGS_URI}host0  org.freedesktop.DBus.Properties.Get
-${dbuscmdString}=  string:"xyz.openbmc_project.settings.Host" string:
-
 # Assign default value to QUIET for programs which may not define it.
 ${QUIET}  ${0}
 
@@ -275,18 +269,6 @@ Check If warmReset is Initiated
     ...    Open Connection And Log In
     Return From Keyword If   '${alive}' == '${False}'    ${False}
     RETURN    ${True}
-
-
-Initialize DBUS cmd
-    [Documentation]  Initialize dbus string with property string to extract
-    [Arguments]   ${boot_property}
-
-    # Description of argument(s):
-    # boot_property   Property string.
-
-    ${cmd}=     Catenate  ${dbuscmdBase} ${dbuscmdGet} ${dbuscmdString}
-    ${cmd}=     Catenate  ${cmd}${boot_property}
-    Set Global Variable   ${dbuscmd}     ${cmd}
 
 
 Create OS Console Command String
