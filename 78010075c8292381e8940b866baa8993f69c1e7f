@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73e93fb9_9daded2b",
+        "filename": "lib/bmc_redfish.py",
+        "patchSetId": 15
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-03-28T05:34:18Z",
+      "side": 1,
+      "message": "We already have an invalid cred error above. Does this scenario not get captured there?",
+      "range": {
+        "startLine": 132,
+        "startChar": 26,
+        "endLine": 132,
+        "endChar": 50
+      },
+      "revId": "78010075c8292381e8940b866baa8993f69c1e7f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
