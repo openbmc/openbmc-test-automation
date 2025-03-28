@@ -72,6 +72,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4a78fb9_cc02e8be",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-03-28T16:09:45Z",
+      "side": 1,
+      "message": "Pls add a new line before Description of args.. Modify throughout",
+      "range": {
+        "startLine": 22,
+        "startChar": 4,
+        "endLine": 22,
+        "endChar": 29
+      },
+      "revId": "d5f0acb9607cf724977a6957b9e93a1b9e38dca9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70d245a8_cb55ea3f",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-03-28T16:09:45Z",
+      "side": 1,
+      "message": "Put these under try except block incase conversion to float fails...\nCan you pls add a comment that explains what lnr, lcr and lnc are?\nSame comment for below one too.",
+      "range": {
+        "startLine": 28,
+        "startChar": 6,
+        "endLine": 30,
+        "endChar": 47
+      },
+      "revId": "d5f0acb9607cf724977a6957b9e93a1b9e38dca9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "982298b2_9a84f642",
         "filename": "lib/sensor_info_record.py",
         "patchSetId": 4
@@ -83,6 +129,29 @@
       "writtenOn": "2025-03-28T08:57:15Z",
       "side": 1,
       "message": "BuiltIn().fail(error_msg)",
+      "revId": "d5f0acb9607cf724977a6957b9e93a1b9e38dca9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fce23a69_f09dfde8",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-03-28T16:09:45Z",
+      "side": 1,
+      "message": "Add a new line",
+      "range": {
+        "startLine": 39,
+        "startChar": 3,
+        "endLine": 39,
+        "endChar": 19
+      },
       "revId": "d5f0acb9607cf724977a6957b9e93a1b9e38dca9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },

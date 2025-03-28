@@ -34,6 +34,29 @@
       "parentUuid": "2ee7e386_7e38a787",
       "revId": "cfb4c51ada799c4044105bf6269fd09215a3fe3d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "808c1e58_03543bfb",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-03-28T16:09:45Z",
+      "side": 1,
+      "message": "Good code",
+      "range": {
+        "startLine": 122,
+        "startChar": 1,
+        "endLine": 136,
+        "endChar": 1
+      },
+      "revId": "cfb4c51ada799c4044105bf6269fd09215a3fe3d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
