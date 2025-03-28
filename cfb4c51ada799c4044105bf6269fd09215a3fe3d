@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ee7e386_7e38a787",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-28T12:53:16Z",
+      "side": 1,
+      "message": "Looks good to me.. \n\nProbably calling\n\n   BuiltIn().fail(error_msg)\n\nfrom this python lib code may not be the best idea to break or fail the test.. \n\ninstead\n    return error_msg   or  error Codes in general\n\n\nthis you can do latter.",
+      "revId": "cfb4c51ada799c4044105bf6269fd09215a3fe3d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
