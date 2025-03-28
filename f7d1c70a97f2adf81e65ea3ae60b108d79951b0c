@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4004dc59_0a87829d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-28T12:23:36Z",
+      "side": 1,
+      "message": "Please fix the CI failure and few minor comments",
+      "revId": "f7d1c70a97f2adf81e65ea3ae60b108d79951b0c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3df808a2_84f70a70",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-28T12:23:36Z",
+      "side": 1,
+      "message": "Remove this file name here in documentation, since the file name itself is its identity.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "f7d1c70a97f2adf81e65ea3ae60b108d79951b0c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bc0498d_83a5622f",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-28T12:23:36Z",
+      "side": 1,
+      "message": "remove black space",
+      "range": {
+        "startLine": 76,
+        "startChar": 23,
+        "endLine": 76,
+        "endChar": 24
+      },
+      "revId": "f7d1c70a97f2adf81e65ea3ae60b108d79951b0c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c887e272_2314fbe2",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-28T12:23:36Z",
+      "side": 1,
+      "message": "remove black space",
+      "range": {
+        "startLine": 82,
+        "startChar": 23,
+        "endLine": 82,
+        "endChar": 25
+      },
+      "revId": "f7d1c70a97f2adf81e65ea3ae60b108d79951b0c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
