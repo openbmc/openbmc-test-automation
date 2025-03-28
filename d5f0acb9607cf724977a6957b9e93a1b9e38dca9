@@ -51,6 +51,109 @@
       "parentUuid": "5cb428f8_0794f8a9",
       "revId": "d5f0acb9607cf724977a6957b9e93a1b9e38dca9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b50ecbf2_5289bc87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-28T08:57:15Z",
+      "side": 1,
+      "message": "Other generic comments\n\nsensor_info_record.py:1:22: E211 whitespace before \u0027(\u0027\nsensor_info_record.py:10:80: E501 line too long (83 \u003e 79 characters)\nsensor_info_record.py:13:1: E402 module level import not at top of file\nsensor_info_record.py:14:1: E402 module level import not at top of file\nsensor_info_record.py:15:1: E302 expected 2 blank lines, found 0\nsensor_info_record.py:52:1: E302 expected 2 blank lines, found 1\nsensor_info_record.py:85:1: E302 expected 2 blank lines, found 0\nsensor_info_record.py:99:1: E302 expected 2 blank lines, found 0\nsensor_info_record.py:108:80: E501 line too long (94 \u003e 79 characters)\nsensor_info_record.py:127:1: W391 blank line at end of file",
+      "revId": "d5f0acb9607cf724977a6957b9e93a1b9e38dca9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "982298b2_9a84f642",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-28T08:57:15Z",
+      "side": 1,
+      "message": "BuiltIn().fail(error_msg)",
+      "revId": "d5f0acb9607cf724977a6957b9e93a1b9e38dca9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5cd9f66_0338bf32",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-28T08:57:15Z",
+      "side": 1,
+      "message": "BuiltIn().fail(error_msg)",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 50
+      },
+      "revId": "d5f0acb9607cf724977a6957b9e93a1b9e38dca9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c4249d8_873129e5",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-28T08:57:15Z",
+      "side": 1,
+      "message": "Remove those gp.sprint_error \n\nfrom the code.  Fail should just have the message..  Here its trying to print the string inside the fail context.",
+      "range": {
+        "startLine": 71,
+        "startChar": 12,
+        "endLine": 71,
+        "endChar": 28
+      },
+      "revId": "d5f0acb9607cf724977a6957b9e93a1b9e38dca9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07cae99b_164c4383",
+        "filename": "lib/sensor_info_record.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-28T08:57:15Z",
+      "side": 1,
+      "message": "Remove those gp.sprint_error \n\nfrom the code.  Fail should just have the message..  Here its trying to print the string inside the fail context.",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 28
+      },
+      "revId": "d5f0acb9607cf724977a6957b9e93a1b9e38dca9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
