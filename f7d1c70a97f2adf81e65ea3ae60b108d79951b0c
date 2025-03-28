@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb8abcc1_f3db6f75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-03-28T12:24:31Z",
+      "side": 1,
+      "message": "The CI check is complaining of those blank spaces in the code\n\n\n@@ -73,13 +72,13 @@ def check_reading_value_length(sensor_reading, sensor_id, sensor_unit):\n         fractional_part \u003d \"\"\n \n     if len(integer_part) \u003e max_int_len:\n-        BuiltIn().fail( \n+        BuiltIn().fail(\n             f\"{sensor_id}: Integer part exceeds {max_int_len} digits \"\n             f\"({integer_part})\"\n         )\n \n     if len(fractional_part) \u003e max_frac_len:\n-        BuiltIn().fail(  \n+        BuiltIn().fail(\n             f\"{sensor_id}: Fractional part exceeds {max_frac_len} digits \"\n             f\"({fractional_part})\"\n         )\nFormat: FAILED",
+      "revId": "f7d1c70a97f2adf81e65ea3ae60b108d79951b0c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3df808a2_84f70a70",
