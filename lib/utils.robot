@@ -214,41 +214,6 @@ Set System LED State
     Verify LED State  ${led_name}  ${led_state}
 
 
-Read Turbo Setting Via REST
-    [Documentation]  Return turbo setting via REST.
-    # Returns 1 if TurboAllowed, 0 if not.
-
-    ${turbo_setting}=  Read Attribute
-    ...  ${CONTROL_HOST_URI}turbo_allowed  TurboAllowed
-    RETURN  ${turbo_setting}
-
-
-Set Turbo Setting Via REST
-    [Documentation]  Set turbo setting via REST.
-    [Arguments]  ${setting}  ${verify}=${False}
-
-    # Description of argument(s):
-    # setting  State to set TurboAllowed, 1=allowed, 0=not allowed.
-    # verify   If True, read the TurboAllowed setting to confirm.
-
-    ${data}=  Create Dictionary  data=${${setting}}
-    Write Attribute  ${CONTROL_HOST_URI}turbo_allowed  TurboAllowed
-    ...  verify=${verify}  data=${data}
-
-
-Set REST Logging Policy
-    [Documentation]  Enable or disable REST logging setting.
-    [Arguments]  ${policy_setting}=${True}
-
-    # Description of argument(s):
-    # policy_setting    The policy setting value which can be either
-    #                   True or False.
-
-    ${log_dict}=  Create Dictionary  data=${policy_setting}
-    Write Attribute  ${BMC_LOGGING_URI}rest_api_logs  Enabled
-    ...  data=${log_dict}  verify=${1}  expected_value=${policy_setting}
-
-
 Old Get Boot Progress
     [Documentation]  Get the boot progress the old way (via org location).
     [Arguments]  ${quiet}=${QUIET}
@@ -595,7 +560,7 @@ Get BMC Flash Chip Boot Side
 
     RETURN  ${boot_side}
 
-
+Get Elog URL List
 Watchdog Object Should Exist
     [Documentation]  Check that watchdog object exists.
 
