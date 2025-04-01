@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "146f1161_8fb0073e",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-04-01T18:33:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "469915a1_788b2c59",
+      "revId": "a9a058d4150e1308379c5d3dca06df8fab742bf9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e65789b_cbe36748",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-04-01T18:25:20Z",
       "side": 1,
       "message": "...  valid_status_codes\u003d${valid_status_codes}\n\nit should be like this now.. since you are passing as \n\n${valid_status_codes}\u003d[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]",
+      "revId": "a9a058d4150e1308379c5d3dca06df8fab742bf9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "214ca09c_35e1806a",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-04-01T18:33:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e65789b_cbe36748",
       "revId": "a9a058d4150e1308379c5d3dca06df8fab742bf9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
