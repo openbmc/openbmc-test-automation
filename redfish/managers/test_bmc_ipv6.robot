@@ -326,7 +326,7 @@ Validate IPv6 Network Config On BMC
 
 Delete IPv6 Address
     [Documentation]  Delete IPv6 address of BMC.
-    [Arguments]  ${ipv6_addr}  ${valid_status_codes}=${HTTP_OK}
+    [Arguments]  ${ipv6_addr}  ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
 
     # Description of argument(s):
     # ipv6_addr           IPv6 address to be deleted (e.g. "2001:1234:1234:1234::1234").
