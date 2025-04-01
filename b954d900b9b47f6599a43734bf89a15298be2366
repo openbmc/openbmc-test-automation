@@ -16,6 +16,24 @@
       "message": "I m fine with changes. Fix the CI failure pls.",
       "revId": "b954d900b9b47f6599a43734bf89a15298be2366",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "561ffee2_367195c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002359
+      },
+      "writtenOn": "2025-04-01T11:56:01Z",
+      "side": 1,
+      "message": "Hi @anusha.dathatri@gmail.com\nI made the fix, but the CI failure came from a different file where the global variable is initialized and not being used. I solved the issue by removing the variable \n\nAlso added the try and except block as suggested. Let me know if any further changes need to be made. Thanks",
+      "parentUuid": "436b8cd7_cfd73985",
+      "revId": "b954d900b9b47f6599a43734bf89a15298be2366",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
