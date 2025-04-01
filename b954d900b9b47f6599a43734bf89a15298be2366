@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "436b8cd7_cfd73985",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-04-01T06:37:43Z",
+      "side": 1,
+      "message": "I m fine with changes. Fix the CI failure pls.",
+      "revId": "b954d900b9b47f6599a43734bf89a15298be2366",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
