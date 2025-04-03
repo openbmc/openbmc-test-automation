@@ -53,7 +53,7 @@ Test BMC Websocket ESEL Interface
     ${initial_esel_count}=  Get Number Of Event Logs
 
     # Generate eSEL (e.g.  typically "CPU 1 core 3 has failed").
-    Create eSEL
+    Create eSEL  ${RAW_PREFIX}
 
     ${current_esel_count}=   Get Number Of Event Logs
 
