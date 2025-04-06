@@ -40,10 +40,14 @@ supported.
          |                           |                             |
     ******************   *****************************    ********************
     | Interfaces:    |   | Interfaces:               |    | Interfaces:      |
-    |   - REST/IPMI  |   |   - REST/IPMI/GUI         |    |   - REST/Tools   |
+    |   - REST/IPMI  |   |   - REST/IPMI             |    |   - REST/Tools   |
+    |   - Redfish    |   |   - GUI/Redfish           |    |   - Redfish      |
     | Power on       |   | Minimal Boot Test         |    | HTX boot runs    |
     | Power off      |   | Interfaces Functions      |    | Host IO/OS test  |
     | BMC/Host reset |   | System Functionality      |    | System RAS       |
     ******************   *****************************    ********************
 
 ```
+
+NOTE: Legacy REST will be deprecated at some point and therefore no longer
+supported.
