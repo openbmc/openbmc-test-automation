@@ -371,8 +371,6 @@ Toggle DHCPv4 Property And Verify
 
     Click Element  ${xpath_property}
     Verify Popup Message And Close Popup  ${xpath_success_popup}
-    Wait Until Element Is Not Visible
-    ...  ${xpath_page_loading_progress_bar}  timeout=120s
 
     ${redfish_after_set}=  Get DHCP Property Via Redfish  ${property}
     Should Not Be Equal  ${redfish_before_set}  ${redfish_after_set}
@@ -404,8 +402,9 @@ Verify Popup Message And Close Popup
     # Description of argument(s):
     # popup_msg        Popup message (Eg: Success or Error).
 
-    Wait Until Keyword Succeeds  1 min  15 sec
-    ...  Wait Until Page Contains Element  ${popup_msg}
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=60
+    Wait Until Page Contains Element  ${popup_msg}
+
     Click Element  ${popup_msg}
 
 
