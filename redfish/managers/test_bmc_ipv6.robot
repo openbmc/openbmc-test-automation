@@ -121,6 +121,15 @@ Enable DHCPv6 Property On BMC And Verify
     Set And Verify DHCPv6 Property  Enabled
 
 
+Configure Invalid Static IPv6 And Verify
+    [Documentation]  Configure invalid static IPv6 and verify.
+    [Tags]  Configure_Invalid_Static_IPv6_And_Verify
+    [Template]  Configure IPv6 Address On BMC
+
+    #invalid_ipv6         prefix length           valid_status_code
+    ${ipv4_hexword_addr}  ${test_prefix_length}   ${HTTP_BAD_REQUEST}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -502,6 +511,7 @@ Set SLAACv6 Configuration State And Verify
     Run Keyword If  '${slaac_verify['IPv6AutoConfigEnabled']}' != '${slaac_state}'
     ...  Fail  msg=SLAACv6 not set properly.
 
+
 Set And Verify DHCPv6 Property
     [Documentation]  Set DHCPv6 attribute and verify.
     [Arguments]  ${dhcpv6_operating_mode}=${Disabled}
@@ -520,3 +530,4 @@ Set And Verify DHCPv6 Property
     ${dhcpv6_verify}=  Get From Dictionary  ${resp.dict}  DHCPv6
 
     Should Be Equal  '${dhcpv6_verify['OperatingMode']}'  '${dhcpv6_operating_mode}'
+

@@ -31,6 +31,7 @@ Library          ../../lib/bmc_network_utils.py
 
 ${wait_time}              40s
 ${ethernet_interface}     eth0
+${ipv4_hexword_addr}      10.5.5.6:1A:1B:1C:1D:1E:1F
 
 *** Keywords ***
 
