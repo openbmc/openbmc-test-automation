@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a975efd8_d036dfa4",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-04-09T11:49:23Z",
+      "side": 1,
+      "message": "@Megha.GN@ibm.com do we need this?",
+      "revId": "701b4d0424465eb9d4e177da9d0536546d19f08c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
