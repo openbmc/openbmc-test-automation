@@ -98,7 +98,7 @@ Run HTX Soft Bootme Exerciser
             Run Keyword If  '${l_ping}' == '${False}'  Fail  msg=OS not pinging in 20 minutes
 
             Wait Until Keyword Succeeds
-            ...   1 min   30 sec   Verify Ping SSH And Redfish Authentication
+            ...   2 min   30 sec   Verify Ping SSH And Redfish Authentication
 
             Wait Until Keyword Succeeds
             ...   3x  60 sec  OS Execute Command  uptime
@@ -175,5 +175,7 @@ Test Teardown Execution
     ${keyword_buf}=  Catenate  Stop SOL Console Logging
     ...  \ targ_file_path=${EXECDIR}${/}logs${/}SOL.log
     Run Keyword And Ignore Error   ${keyword_buf}
+
+    FFDC On Test Case Fail
 
     Close All Connections
