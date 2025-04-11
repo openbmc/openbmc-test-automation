@@ -234,7 +234,7 @@ Redfishtool Verify User
 
     ${user_account}=  Redfishtool Get  /redfish/v1/AccountService/Accounts/${user_name}
     ${json_obj}=   Evaluate  json.loads('''${user_account}''')  json
-    Should Be equal  "${json_obj["RoleId"]}"  ${role}
+    Should Be Equal  "${json_obj["RoleId"]}"  ${role}
 
 
 Redfishtool Verify User Name Exists
