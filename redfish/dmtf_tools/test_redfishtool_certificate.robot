@@ -291,7 +291,7 @@ Delete All CA Certificate Via Redfishtool
     [Arguments]  ${delete_cert}=${True}
 
     ${cmd_output}=  Redfishtool Get  /redfish/v1/Managers/${MANAGER_ID}/Truststore/Certificates
-    ${cmd_output}=  Convert String to JSON  ${cmd_output}
+    ${cmd_output}=  Convert String To JSON  ${cmd_output}
     ${cert_list}=  Set Variable  ${cmd_output["Members"]}
     ${uri_length}=  Get Length  ${cert_list}
     ${file_status}=  Set Variable If
@@ -430,10 +430,10 @@ Redfishtool GetAttribute
     # expected_error  Expected error optionally provided in testcase (e.g. 401 /
     #                 authentication error, etc. ).
 
-    ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd_args} GET ${uri}
-    Run Keyword If  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
+    ${rc}  ${cmd_output}=  Run And Return RC And Output  ${cmd_args} GET ${uri}
+    Run Keyword If  ${rc} != 0  Is HTTP Error Expected  ${cmd_output}  ${expected_error}
 
-    ${cmd_output}=  Convert String to JSON  ${cmd_output}
+    ${cmd_output}=  Convert String To JSON  ${cmd_output}
 
     RETURN  ${cmd_output["CertificateString"]}
 
