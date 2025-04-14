@@ -16,6 +16,24 @@
       "message": "ipv4_hexword_addr -\u003e ipv4_invalid_addr",
       "revId": "88e1a0befea0f25f86a6107b17222fded0c79ef4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a19db4a8_fc648444",
+        "filename": "lib/external_intf/vmi_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-04-14T06:06:30Z",
+      "side": 1,
+      "message": "Keeping as is as will be Adding many more invalid addresses",
+      "parentUuid": "b7a127d3_2553eb41",
+      "revId": "88e1a0befea0f25f86a6107b17222fded0c79ef4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
