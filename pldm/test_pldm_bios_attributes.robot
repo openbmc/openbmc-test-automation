@@ -180,15 +180,6 @@ Verify Set BIOS Enumeration Attribute Type
         Validate Set BIOS Attributes With Optional Values  ${i}  @{attr_val_list}
     END
 
-
-Verify Restore BIOS Attribute Values
-    [Documentation]  Restore all BIOS attribute values with its default values and verify.
-    [Tags]  Verify_Restore_BIOS_Attribute_Values
-
-    ${bios_default_data}=  GetBIOSAttrDefaultValues  ${attr_table_data}
-    Validate Set All BIOS Attributes Values  ${bios_default_data}
-
-
 *** Keywords ***
 
 PLDM BIOS Attribute Suite Setup
