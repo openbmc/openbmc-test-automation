@@ -408,12 +408,24 @@ Redfish BMC Reboot
     Redfish BMC Reset Operation
 
     # Wait for BMC real reboot and Redfish API ready
-    Wait Until Keyword Succeeds  3 min  10 sec  Is BMC LastResetTime Changed  ${last_reset_time}
+    Wait Until Keyword Succeeds  3 min  10 sec
+    ...  Is BMC LastResetTime Changed  ${last_reset_time}
 
 
 Get BMC Last Reset Time
     [Documentation]  Return BMC LastResetTime.
 
-    ${last_reset_time}=  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  LastResetTime
+    ${last_reset_time}=  Redfish.Get Attribute
+    ...  /redfish/v1/Managers/${MANAGER_ID}  LastResetTime
 
     RETURN  ${last_reset_time}
+
+
+Get BMC Active Session Count
+    [Documentation]  Return active session count from BMC.
+
+    ${session_count}=  Redfish.Get Attribute
+    ...  /redfish/v1/SessionService/Sessions  Members@odata.count
+
+    Log To Console  Redfish active session count: ${session_count}
+    RETURN  ${session_count}

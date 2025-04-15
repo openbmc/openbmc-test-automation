@@ -277,6 +277,7 @@ FFDC_METHOD_CALL = {
         "Dump Files": "SCP Dump Files",
         "PEL Files": "Collect PEL Log",
         # "Redfish Log": "Enumerate Redfish Resources",
+        "Log Redfish Session Count": "Get BMC Active Session Count",
         "Firmware Log": (
             "Enumerate Redfish Resources  "
             + " enum_uri=/redfish/v1/UpdateService/FirmwareInventory  "
@@ -284,6 +285,7 @@ FFDC_METHOD_CALL = {
         ),
         "Redfish OEM Log": "Enumerate Redfish OEM Resources",
         "End ffdc cleanup": "BMC FFDC Cleanup",
+        "Cleanup sessions": "Delete All Redfish Sessions",
     },
 }
 
