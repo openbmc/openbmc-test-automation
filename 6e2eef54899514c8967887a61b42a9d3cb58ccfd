@@ -16,6 +16,23 @@
       "message": "Have left a note to Dave to give a run in their environment.",
       "revId": "6e2eef54899514c8967887a61b42a9d3cb58ccfd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7114dcf_e7c49efe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-04-15T08:10:15Z",
+      "side": 1,
+      "message": "#(UTC) 2025/04/15 08:03:29.330543 -    0.584568 - Issuing: Get BMC Active Session Count\n#(UTC) 2025/04/15 08:03:29.349268 -    0.018726 - Executing: get(\u0027/redfish/v1/SessionService/Sessions\u0027)\nRedfish active session count: 20   \u003c-----  \n#(UTC) 2025/04/15 08:03:29.403983 -    0.054715 - Issuing: Enumerate Redfish Resources  \n\nthis will give hint when the test fails..",
+      "revId": "6e2eef54899514c8967887a61b42a9d3cb58ccfd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
