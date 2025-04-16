@@ -78,7 +78,7 @@ Delete IPv6 Address And Verify
 
     Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
 
-    Delete IPv6 Address  ${test_ipv6_addr}
+    Delete IPv6 Address  ${test_ipv6_addr}  ${HTTP_OK}
 
 
 
@@ -86,7 +86,7 @@ Modify IPv6 Address And Verify
     [Documentation]  Modify IPv6 address and verify.
     [Tags]  Modify_IPv6_Address_And_Verify
     [Teardown]  Run Keywords
-    ...  Delete IPv6 Address  ${test_ipv6_addr1}  AND  Test Teardown Execution
+    ...  Delete IPv6 Address  ${test_ipv6_addr1}  ${HTTP_OK}  AND  Test Teardown Execution
 
     Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
 
@@ -97,7 +97,7 @@ Verify Persistency Of IPv6 After BMC Reboot
     [Documentation]  Verify persistency of IPv6 after BMC reboot.
     [Tags]  Verify_Persistency_Of_IPv6_After_BMC_Reboot
     [Teardown]  Run Keywords
-    ...  Delete IPv6 Address  ${test_ipv6_addr}  AND  Test Teardown Execution
+    ...  Delete IPv6 Address  ${test_ipv6_addr}  ${HTTP_OK}  AND  Test Teardown Execution
 
     Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
 
