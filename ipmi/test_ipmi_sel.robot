@@ -335,6 +335,37 @@ Verify IPMI SEL Event Last Add Time
     Should Be True  ${time_diff} <= 2
 
 
+Verify IPMI SEL Delete
+    [Documentation]  Verify IPMI SEL delete operation.
+    [Tags]  Verify_IPMI_SEL_Delete
+    [Setup]  Install Tarball For Error Creation
+
+    Run IPMI Standard Command  sel clear
+    Sleep  5s
+    Create Test Error Log
+    ${sel_list}=  Run IPMI Standard Command  sel list
+    Should Not Be Equal As Strings  ${sel_list}  SEL has no entries
+
+    # Example of SEL List:
+    # 4 | 04/21/2017 | 10:51:16 | System Event #0x01 | Undetermined system hardware failure | Asserted
+
+    ${sel_entry}=  Fetch from Left  ${sel_list}  |
+    ${sel_entry}=  Evaluate  $sel_entry.replace(' ','')
+    ${sel_entry}=  Convert To Integer  0x${sel_entry}
+
+    ${sel_delete}=  Run IPMI Standard Command  sel delete ${sel_entry}
+    Should Be Equal As Strings  ${sel_delete}  Deleted entry ${sel_entry}
+    ...  case_insensitive=True
+
+    ${sel_entries_count}=  Get IPMI SEL Setting  Entries
+    Log To Console  Number of entries::: ${sel_entries_count}
+
+    # After issuing the IPMI SEL clear command.
+    # There will be one informational SEL entry in the IPMI SEL.
+    # So comparing the IPMI SEL count with this additional single entry.
+    Should Be Equal As Strings  ${sel_entries_count}  ${1}
+
+
 Verify IPMI SEL Event Entries
     [Documentation]  Verify IPMI SEL's entries info.
     [Tags]  Verify_IPMI_SEL_Event_Entries
