@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c41a7b8_acbff2f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-04-16T13:21:54Z",
+      "side": 1,
+      "message": "DEBUG-START\nOrderedDict({\u0027xsrf-token\u0027: \u0027sVCCVNPr3ck5YxRtHiCb\u0027, \u0027samesite\u0027: \u0027Strict\u0027, \u0027secure\u0027: \u0027\u0027, \u0027session\u0027: \u0027Ghivq2IPlMjewnLzApho\u0027, \u0027httponly\u0027: \u0027\u0027})\n\nDEBUG-END\n\nThere is no bmcweb-session  ins the response.. please check the log.html. it must have failed..",
+      "revId": "84a47e687987a87748426350fe0c4bf5b00e3287",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
