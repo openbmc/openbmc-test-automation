@@ -10,8 +10,6 @@ Library         String
 
 Suite Setup     Test Suite Setup
 
-*** Variables ***
-
 *** Test Cases ***
 
 Verify Power On Via XCAT
@@ -21,7 +19,6 @@ Verify Power On Via XCAT
     Execute Command On XCAT  rpower  on
     Wait Until Keyword Succeeds  10 min  10 sec  Is Host Running
 
-
 Verify Power Off Via XCAT
     [Documentation]  Power off system via XCAT and verify using REST.
     [Tags]  Verify_Power_Off_Via_XCAT
@@ -29,15 +26,13 @@ Verify Power Off Via XCAT
     Execute Command On XCAT  rpower  off
     Wait Until Keyword Succeeds  6 min  10 sec  Is Host Off
 
-
 Verify BMC State Via XCAT
     [Documentation]  Verify BMC state using REST and XCAT.
     [Tags]  Verify_BMC_State_Via_XCAT
 
     ${xcat_resp}=  Execute Command On XCAT  rpower  bmcstate
     ${rest_resp}=  Get BMC State
-    Should contain  ${xcat_resp}  ${rest_resp}
-
+    Should Contain  ${xcat_resp}  ${rest_resp}
 
 Verify Soft Power Off Followed With Power On
     [Documentation]  Verify soft power off system followed with power on.
@@ -50,7 +45,6 @@ Verify Soft Power Off Followed With Power On
     Execute Command On XCAT  rpower  on
     Wait Until Keyword Succeeds  10 min  10 sec  Is Host Running
 
-
 Verify Hard Power Off Followed With Power On
     [Documentation]  Verify hard power off system followed with power on.
     [Tags]  Verify_Hard_Power_Off_Followed_With_Power_On
@@ -61,7 +55,6 @@ Verify Hard Power Off Followed With Power On
 
     Execute Command On XCAT  rpower  on
     Wait Until Keyword Succeeds  10 min  10 sec  Is Host Running
-
 
 *** Keywords ***
 

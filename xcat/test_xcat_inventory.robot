@@ -7,8 +7,6 @@ Resource        ../lib/state_manager.robot
 
 Suite Setup     XCAT Suite Setup
 
-*** Variables ***
-
 *** Test Cases ***
 
 Verify BMC Version Via XCAT
@@ -21,8 +19,7 @@ Verify BMC Version Via XCAT
     # Get BMC version info via rest
     ${version_via_rest}=  Get BMC Version
 
-    Should contain  ${version_via_xcat}  ${version_via_rest}
-
+    Should Contain  ${version_via_xcat}  ${version_via_rest}
 
 *** Keywords ***
 
