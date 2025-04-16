@@ -16,6 +16,24 @@
       "message": "please provide additional info for the change",
       "revId": "02640cf9a0b450655a1d4b6de4d90dac63e08b3a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b43882a3_8ecaf88a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-04-16T10:28:06Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "132afd61_1a732862",
+      "revId": "02640cf9a0b450655a1d4b6de4d90dac63e08b3a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
