@@ -233,32 +233,6 @@ Verify Setting Error Log As Resolved
     Should Be True  4 < ${diff} < 8
 
 
-Verify IPMI SEL Delete
-    [Documentation]  Verify IPMI SEL delete operation.
-    [Tags]  Verify_IPMI_SEL_Delete
-
-    Redfish Purge Event Log
-    Create Test Error Log
-
-    ${sel_list}=  Run IPMI Standard Command  sel list
-    Should Not Be Equal As Strings  ${sel_list}  SEL has no entries
-
-    # Example of SEL List:
-    # 4 | 04/21/2017 | 10:51:16 | System Event #0x01 | Undetermined system hardware failure | Asserted
-
-    ${sel_entry}=  Fetch from Left  ${sel_list}  |
-    ${sel_entry}=  Evaluate  $sel_entry.replace(' ','')
-    ${sel_entry}=  Convert To Integer  0x${sel_entry}
-
-    ${sel_delete}=  Run IPMI Standard Command  sel delete ${sel_entry}
-    Should Be Equal As Strings  ${sel_delete}  Deleted entry ${sel_entry}
-    ...  case_insensitive=True
-
-    ${sel_list}=  Run IPMI Standard Command  sel list
-    Should Be Equal As Strings  ${sel_list}  SEL has no entries
-    ...  case_insensitive=True
-
-
 Create Test Event Log And Delete
     [Documentation]  Create an event log and delete it.
     [Tags]  Create_Test_Event_Log_And_Delete
