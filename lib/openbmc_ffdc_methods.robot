@@ -564,27 +564,6 @@ SCP Dump Files
     RETURN  ${ffdc_file_list}
 
 
-Collect Dump Log
-    [Documentation]  Collect dumps from dump entry.
-    [Arguments]  ${log_prefix_path}=${LOG_PREFIX}
-
-    Return From Keyword If  ${REDFISH_SUPPORT_TRANS_STATE} == ${1}
-
-    ${resp}=  OpenBMC Get Request  ${DUMP_URI}
-    Run Keyword If  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
-    ...  Set Test Variable  ${DUMP_ENTRY_URI}  /xyz/openbmc_project/dump/entry/
-
-    ${data}=  Read Properties  ${DUMP_ENTRY_URI}enumerate  quiet=${1}  timeout=${30}
-
-    # Grab the list of entries from dump/entry/
-    # The data shown below is the result of the "Get Dictionary Keys".
-    # Example:
-    # /xyz/openbmc_project/dump/entry/1
-    # /xyz/openbmc_project/dump/entry/2
-
-    ${dump_list}=  Get Dictionary Keys  ${data}
-
-
 Collect PEL Log
     [Documentation]  Collect PEL files from from BMC.
 
