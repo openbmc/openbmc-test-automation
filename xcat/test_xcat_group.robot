@@ -12,8 +12,8 @@ Suite Teardown  Close All Connections
 
 *** Variables ***
 
-${poweron_flag}   ON
-${poweroff_flag}  OFF
+${POWERON_FLAG}             ON
+${POWEROFF_FLAG}            OFF
 ${NUM_POWER_STATUS_CHECKS}  1000
 
 *** Test Cases ***
@@ -28,7 +28,6 @@ Add BMC Nodes To XCAT
       Validate Added Node  ${bmc}
     END
 
-
 Power On Via XCAT And Validate
     [Documentation]  Power on via XCAT and validate.
     [Tags]  Power_On_Via_XCAT_And_Validate
@@ -36,9 +35,8 @@ Power On Via XCAT And Validate
     # Power on each BMC node and validate the power status.
     FOR  ${bmc}  IN  @{BMC_LIST}
       Power On Via XCAT  ${bmc}
-      Validate Power Status Via XCAT  ${bmc}  ${poweron_flag}
+      Validate Power Status Via XCAT  ${bmc}  ${POWERON_FLAG}
     END
-
 
 Power Off Via XCAT And Validate
     [Documentation]  Power off via XCAT and validate.
@@ -47,9 +45,8 @@ Power Off Via XCAT And Validate
     # Power off each BMC node and validate the power status.
     FOR  ${bmc}  IN  @{BMC_LIST}
       Power Off Via XCAT  ${bmc}
-      Validate Power Status Via XCAT  ${bmc}  ${poweroff_flag}
+      Validate Power Status Via XCAT  ${bmc}  ${POWEROFF_FLAG}
     END
-
 
 Add Nodes To Group List
     [Documentation]  Add BMC nodes into group.
@@ -60,7 +57,6 @@ Add Nodes To Group List
       Add Nodes To Group  ${bmc}  ${GROUP}
       Validate Node Added In Group  ${bmc}  ${GROUP}
     END
-
 
 Power On Group And Validate
     [Documentation]  Power on all BMCs in group and validate.
@@ -81,9 +77,8 @@ Power On Group And Validate
 
     # Validate power status on each BMC node one by one.
     FOR  ${bmc_node}  IN  @{bmc_nodes}
-      Validate Power Status Via XCAT  ${bmc_node}  ${poweron_flag}
+      Validate Power Status Via XCAT  ${bmc_node}  ${POWERON_FLAG}
     END
-
 
 Power Off Group And Validate
     [Documentation]  Power off all BMCs in group and validate.
@@ -103,9 +98,8 @@ Power Off Group And Validate
 
     # Validate power status on each BMC node one by one.
     FOR  ${bmc_node}  IN  @{bmc_nodes}
-      Validate Power Status Via XCAT  ${bmc_node}  ${poweroff_flag}
+      Validate Power Status Via XCAT  ${bmc_node}  ${POWEROFF_FLAG}
     END
-
 
 Continuous Node Power Status
     [Documentation]  Continuously get the power status.
@@ -122,9 +116,8 @@ Continuous Node Power Status
     # of the BMC node
 
     FOR  ${index}  IN RANGE  1  ${NUM_POWER_STATUS_CHECKS}
-      Validate Power Status Via XCAT  ${BMC_LIST[1]}  ${poweron_flag}
+      Validate Power Status Via XCAT  ${BMC_LIST[1]}  ${POWERON_FLAG}
     END
-
 
 Get Temperature Reading Via XCAT
     [Documentation]  Get temperature reading via XCAT.
@@ -149,7 +142,6 @@ Get Temperature Reading Via XCAT
       Log  \n Temperature reading on $[bmc}\n ${temp_reading}
     END
 
-
 Get Fanspeed Reading Via XCAT
     [Documentation]  Get fanspeed via XCAT.
     [Tags]  Get_Fanspeed_Reading_Via_XCAT
@@ -168,7 +160,6 @@ Get Fanspeed Reading Via XCAT
       Log  \n fanspeed on $[bmc}\n ${fanspeed}
     END
 
-
 Get Voltage Reading Via XCAT
     [Documentation]  Get voltage via XCAT.
     [Tags]  Get_Voltage_Reading_Via_XCAT
@@ -183,7 +174,6 @@ Get Voltage Reading Via XCAT
       ${voltage}=  Get Hardware Vitals Via XCAT  ${bmc}  voltage
       Log  \n Voltage reading on $[bmc}\n ${voltage}
     END
-
 
 Get Wattage Via XCAT
     [Documentation]  Get wattage via XCAT.
