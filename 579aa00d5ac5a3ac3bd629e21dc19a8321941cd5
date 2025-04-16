@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3f2b0a3_ff437dfb",
+        "filename": "ipmi/test_ipmi_sel.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-04-16T13:04:11Z",
+      "side": 1,
+      "message": "[Setup]  Install Tarball For Error Creation\n\nwhy this is needed for this test, it has no dependencies on it in the old as well.",
+      "range": {
+        "startLine": 341,
+        "startChar": 0,
+        "endLine": 341,
+        "endChar": 47
+      },
+      "revId": "579aa00d5ac5a3ac3bd629e21dc19a8321941cd5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
