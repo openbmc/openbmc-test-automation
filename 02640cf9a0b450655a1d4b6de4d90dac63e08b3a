@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "132afd61_1a732862",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-04-16T10:09:50Z",
+      "side": 1,
+      "message": "please provide additional info for the change",
+      "revId": "02640cf9a0b450655a1d4b6de4d90dac63e08b3a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
