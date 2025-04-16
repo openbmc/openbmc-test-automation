@@ -16,6 +16,24 @@
       "message": "not required",
       "revId": "621d6f8675627b8c974c53ef0e2d7db4d8900be6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0443afaf_89b99adc",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-04-16T07:01:18Z",
+      "side": 1,
+      "message": "Delete IPv6 Address \n[Arguments]  ${ipv6_addr}\n...          ${valid_status_codes}\u003d[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]\n\n  \n  ${delete_status}\u003d  Run Keyword And Return Status  Verify IPv6 On BMC  ${ipv6_addr}\n\n    IF  \u0027${valid_status_codes}\u0027 \u003d\u003d \u0027${HTTP_OK}\u0027\n        Should Be True  \u0027${delete_status}\u0027 \u003d\u003d \u0027${False}\u0027\n    ELSE\n        Should Be True  \u0027${delete_status}\u0027 \u003d\u003d \u0027${True}\u0027\n    END\n\n\nin above condition it expecting to HTTP_OK after deleting IPv6 address it is expecting to \n Verify IPv6 On BMC keyword fail\n\nverify IPv6 On BMC keyword expected success after configuring or modifying ip address",
+      "parentUuid": "27fe43b0_61279f97",
+      "revId": "621d6f8675627b8c974c53ef0e2d7db4d8900be6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
