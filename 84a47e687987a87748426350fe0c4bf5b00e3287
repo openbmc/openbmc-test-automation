@@ -56,6 +56,30 @@
       },
       "revId": "84a47e687987a87748426350fe0c4bf5b00e3287",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "719858c8_abf14d02",
+        "filename": "lib/rest_client.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-04-16T16:39:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2aaacfc_7322417f",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 179,
+        "endChar": 68
+      },
+      "revId": "84a47e687987a87748426350fe0c4bf5b00e3287",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
