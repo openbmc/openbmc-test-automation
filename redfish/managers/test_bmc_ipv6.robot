@@ -65,6 +65,8 @@ Verify All Configured IPv6 And PrefixLength On BMC
 Configure IPv6 Address And Verify
     [Documentation]  Configure IPv6 address and verify.
     [Tags]  Configure_IPv6_Address_And_Verify
+    [Teardown]  Run Keywords
+    ...  Delete IPv6 Address  ${test_ipv6_addr}  AND  Test Teardown Execution
     [Template]  Configure IPv6 Address On BMC
 
 
@@ -375,7 +377,7 @@ Delete IPv6 Address
 
     # IPv6 address that is deleted should not be there on BMC.
     ${delete_status}=  Run Keyword And Return Status  Verify IPv6 On BMC  ${ipv6_addr}
-    IF  '${valid_status_codes}' == '${HTTP_OK}'
+    IF  '${valid_status_codes}' == '[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]'
         Should Be True  '${delete_status}' == '${False}'
     ELSE
         Should Be True  '${delete_status}' == '${True}'
