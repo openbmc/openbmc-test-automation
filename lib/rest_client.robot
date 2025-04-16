@@ -176,7 +176,11 @@ BMC Web Login Request
     # Example result data:
     # 'XSRF-TOKEN=hQuOyDJFEIbrN4aOg2CT; Secure,
     # BMCWEB-SESSION=c4wloTiETumSxPI9nLeg; Secure; HttpOnly'
-    Set Global Variable  ${XAUTH_TOKEN}  ${result['session']}
+
+    # To handle latest bmcweb token exceptions.
+    ${session_token}=
+    ...  Get Variable Value  ${result['bmcweb-session']}  ${result['session']}
+    Set Global Variable  ${XAUTH_TOKEN}  ${session_token}
 
 
 Post Login Request
