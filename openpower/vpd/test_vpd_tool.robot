@@ -4,6 +4,7 @@ Documentation   This suite tests System Vital Product Data (VPD) using vpdtool.
 Library         ../../lib/vpd_utils.py
 Variables       ../../data/vpd_variables.py
 Resource        ../../lib/openbmc_ffdc.robot
+Resource        ../../lib/boot_utils.robot
 
 Test Teardown   FFDC On Test Case Fail
 
@@ -62,6 +63,9 @@ Verify VPD Field Read
 Verify VPD Field Write
     [Documentation]  Verify writing VPD field value via vpdtool.
     [Tags]  Verify_VPD_Field_Write
+
+    # Put system to power off state before VPD write operation.
+    Redfish Power Off  stack_mode=skip
 
     ${components}=  Get Dictionary Keys  ${VPD_DETAILS}
     FOR  ${component}  IN  @{components}
@@ -159,12 +163,13 @@ Verify VPD Field Write Operation
     [Documentation]  Verify writing VPD fields for given component via vpdtool.
     [Arguments]  ${component}  ${field}
     [Teardown]  Restore VPD Value  ${component}  ${field}  ${old_field_value}
+
     # Description of arguments:
     # component       VPD component (e.g. /system/chassis/motherboard/vdd_vrm1).
     # field           VPD component field (e.g. PN, SN)
 
     ${vpd_records}=  Vpdtool  -r -O ${component} -R VINI -K ${field}
-    ${old_field_value}=  Set Variable  ${vpd_records['${component}']['${field}']}
+    Set Test Variable  ${old_field_value}  ${vpd_records['${component}']['${field}']}
 
     ${write_value}=  Set Variable If
     ...  '${field}' == 'DR'  ${DR_WRITE_VALUE}
@@ -194,6 +199,7 @@ Verify VPD Field Value
     # component       VDP component (e.g. /system/chassis/motherboard/vdd_vrm1).
     # field           VPD field (e.g. DR, SN, PN)
 
+    Redfish OBMC Reboot (off)  stack_mode=normal
     ${vpd_records}=  Vpdtool  -r -O ${component} -R VINI -K ${field}
 
     ${busctl_field}=  Set Variable If
