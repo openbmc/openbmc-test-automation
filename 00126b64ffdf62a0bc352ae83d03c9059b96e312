@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da423b11_6c719fec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-04-17T14:15:44Z",
+      "side": 1,
+      "message": "lib/pel_utils.py:363:17: F821 undefined name \u0027src_id\u0027\n                src_id + \" with error message\" + error_msg + \" not present\"\n                ^\n\n\nplease fix the CI failure",
+      "revId": "00126b64ffdf62a0bc352ae83d03c9059b96e312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
