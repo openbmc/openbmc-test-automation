@@ -330,3 +330,38 @@ def get_latest_pels(number_of_pels=1):
     pel_data = peltool("-lr")
     pel_ids = list(pel_data.keys())
     return pel_ids[:number_of_pels]
+
+
+def fetch_all_pel_ids_based_on_error_message(error_msg, include_hidden_pels=False,
+    include_informational_pels=False):
+    r"""
+    Fetch all PEL IDs based on the input error message and return
+    in the list format.
+
+    Description of arguments:
+    error_msg                     Error message
+    include_hidden_pels           True/False (default: False).
+                                  Set True to get hidden PELs else False.
+    include_informational_pels    True/False (default: False).
+                                  Set True to get informational PELs else False
+    """
+
+    try:
+        err_pel_ids = []
+        pel_data = get_pel_data_from_bmc(include_hidden_pels,
+                                         include_informational_pels)
+        pel_id_list = pel_data.keys()
+        for pel_id in pel_id_list:
+            # Check if required PEL with error message is created.
+            if error_msg in pel_data[pel_id]["Message"]:
+                err_pel_ids.append(pel_id)
+
+        if not err_pel_ids:
+            raise PeltoolException(
+                    "Failed to get PEL ID with error message : " + error_msg
+            )
+    except Exception as exception:
+        raise PeltoolException(
+            "Failed to fetch PEL ID for required SRC : " + str(exception)
+        ) from exception
+    return err_pel_ids
