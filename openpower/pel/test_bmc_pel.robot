@@ -89,9 +89,8 @@ Verify Mandatory Sections Of Error Log PEL
 
     Create Test PEL Log
 
-    ${pel_ids}=  Get PEL Log Via BMC CLI
-    ${pel_id}=  Get From List  ${pel_ids}  -1
-    ${pel_output}=  Peltool  -i ${pel_id}
+    ${pel_ids}=  Fetch All Pel Ids Based On Error Message  test error
+    ${pel_output}=  Peltool  -i ${pel_ids[0]}
     ${pel_sections}=  Get Dictionary Keys  ${pel_output}
 
     List Should Contain Sub List  ${pel_sections}  ${mandatory_pel_fields}
@@ -219,9 +218,8 @@ Verify BMC Version From PEL
 
     Create Test PEL Log
 
-    ${pel_ids}=  Get PEL Log Via BMC CLI
-    ${id}=  Get From List  ${pel_ids}  -1
-    ${pel_bmc_version}=  Get PEL Field Value  ${id}  User Data  FW Version ID
+    ${pel_ids}=  Fetch All Pel Ids Based On Error Message  test error
+    ${pel_bmc_version}=  Get PEL Field Value  ${pel_ids[0]}  User Data  FW Version ID
 
     ${bmc_version}=  Get BMC Version
     Valid Value  bmc_version  ['${bmc_version}']
