@@ -16,6 +16,23 @@
       "message": "lib/pel_utils.py:363:17: F821 undefined name \u0027src_id\u0027\n                src_id + \" with error message\" + error_msg + \" not present\"\n                ^\n\n\nplease fix the CI failure",
       "revId": "00126b64ffdf62a0bc352ae83d03c9059b96e312",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e62edcde_aeb4e5d8",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-04-17T14:16:56Z",
+      "side": 1,
+      "message": "Where is this src_id  coming from here ?",
+      "revId": "00126b64ffdf62a0bc352ae83d03c9059b96e312",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
