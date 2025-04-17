@@ -718,6 +718,23 @@ Delete IPv6 Static Default Gateway On VMI And Verify
     Should Be Empty  ${resp.dict["IPv6StaticDefaultGateways"]}
 
 
+Disable VMI DHCPv6 When DHCPv4 Is Enabled And Verify
+    [Documentation]  Disable VMI DHCPv6 property when DHCPv4 is enabled and verify
+    ...  DHCPv4 settings are intact and verify IPv6 address origin is set to static.
+    [Tags]  Disable_VMI_DHCPv6_When_DHCPv4_Is_Enabled_And_Verify
+    [Setup]  Run Keywords  Set VMI DHCPv6 Property  Enabled
+    ...  AND  Set VMI IPv4 Origin  ${True}
+
+    Set VMI DHCPv6 Property  Disabled
+
+    # Verify IPv6 address origin is set to static and DHCPv6 address is erased.
+    ${vmi_ipv6addr}=  Verify VMI IPv6 Address  Static
+    Should Be Equal  ${vmi_ipv6addr["Address"]}  ${default_ipv6addr}
+
+    # Check there is no impact on IPv4 settings, IPv4 address origin should be DHCP.
+    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
+
+
 *** Keywords ***
 
 Suite Setup Execution
