@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bae475e_95ef170a",
+        "filename": "data/vpd_variables.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-04-17T17:12:34Z",
+      "side": 0,
+      "message": "Removed these values as it is platform dependent.\n\nMotherboard VPD is common across all platform. Hence using the generic Motherboard VPD to verify VPD write operation via vpd-tool",
+      "range": {
+        "startLine": 10,
+        "startChar": 1,
+        "endLine": 30,
+        "endChar": 0
+      },
+      "revId": "dd76dfb9238700a2bf584aa2683b7bb5b777daa2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
