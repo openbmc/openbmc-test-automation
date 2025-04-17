@@ -712,7 +712,6 @@ Test Teardown Execution
     [Documentation]  Test teardown execution.
 
     FFDC On Test Case Fail
-    Redfish.Logout
 
 Clear IP Settings On Fail
     [Documentation]  Clear IP settings on fail.
