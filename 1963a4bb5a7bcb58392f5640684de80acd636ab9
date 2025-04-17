@@ -16,6 +16,24 @@
       "message": "Ramya, Please give a re-run with this changes",
       "revId": "1963a4bb5a7bcb58392f5640684de80acd636ab9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cf1d217_27b3a55b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-04-17T10:55:15Z",
+      "side": 1,
+      "message": "Verify Certificates Location Via Redfish :: Verify the location of... | PASS |\n------------------------------------------------------------------------------\n#(CDT) 2025/04/17 00:39:17.249634 -    0.094702 - Executing: delete(\u0027/redfish/v1/SessionService/Sessions/jZVYUEGjWS\u0027)\nTest Certificate :: Test certificate in OpenBMC.                      | PASS |\n17 tests, 17 passed, 0 failed\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n\n@gkeishin@gmail.com Ran the tests with the changes it ran clean.",
+      "parentUuid": "db3dce32_c991f5c2",
+      "revId": "1963a4bb5a7bcb58392f5640684de80acd636ab9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
