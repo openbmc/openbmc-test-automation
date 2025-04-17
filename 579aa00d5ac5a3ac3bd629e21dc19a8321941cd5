@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d1741aa_d8bc003c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-04-17T11:02:00Z",
+      "side": 1,
+      "message": "Move",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 3
+      },
+      "revId": "579aa00d5ac5a3ac3bd629e21dc19a8321941cd5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b3f2b0a3_ff437dfb",
         "filename": "ipmi/test_ipmi_sel.robot",
         "patchSetId": 1
