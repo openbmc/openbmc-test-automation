@@ -272,10 +272,10 @@ Verify User Account Locked
 
     # Make ${account_lockout_threshold} failed login attempts.
     Repeat Keyword  ${account_lockout_threshold} times
-    ...  Run Keyword And Expect Error  InvalidCredentialsError*  Redfish.Login  admin_user  abc123
+    ...  Run Keyword And Expect Error  *InvalidCredentialsError*  Redfish.Login  admin_user  0penBmc0
 
     # Verify that legitimate login fails due to lockout.
-    Run Keyword And Expect Error  InvalidCredentialsError*
+    Run Keyword And Expect Error  *InvalidCredentialsError*
     ...  Redfish.Login  admin_user  TestPwd123
 
     # Wait for lockout duration to expire and then verify that login works.
