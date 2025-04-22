@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88b8ee1d_0028ac14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-04-22T14:12:53Z",
+      "side": 1,
+      "message": "There is reason why this naming is done.. when a group of suites are run it runs in alphabetical order. This was named specifically for HW_CI \n\ntest_lists/HW_CI:--include Verify_No_BMC_Dump_And_Application_Failures_In_BMC\n\ndo it run at the end of the test group by default.",
+      "revId": "5e919b00f8867b9bdf31b0573646e2b391a2b137",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
