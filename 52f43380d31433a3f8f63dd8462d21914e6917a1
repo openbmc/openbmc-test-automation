@@ -46,6 +46,30 @@
       },
       "revId": "52f43380d31433a3f8f63dd8462d21914e6917a1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a2a7f27_152409b3",
+        "filename": "xcat/test_xcat_group.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-04-22T16:07:55Z",
+      "side": 1,
+      "message": "Yes.. earlier we had a practice to have variable defined in CAPS but slowly people created in lower cases.. However I always preferred uppercase and follow the same in my code..",
+      "parentUuid": "51275e7d_99c58b38",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 5
+      },
+      "revId": "52f43380d31433a3f8f63dd8462d21914e6917a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
