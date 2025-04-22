@@ -1,8 +1,10 @@
 *** Settings ***
+Documentation     Base resource file variables used for all context
+...               in this repository.
 Library           Collections
+Library           OperatingSystem
 Library           String
 Library           RequestsLibrary
-Library           OperatingSystem
 Variables         ../data/variables.py
 
 *** Variables ***
