@@ -63,6 +63,30 @@
       },
       "revId": "3bdb381f9a1fc5645909ed677b3e88d243c4205b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8ee40e1_2f4a5392",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-04-22T05:57:57Z",
+      "side": 1,
+      "message": "The preconditions for a test should be part of test setup.",
+      "parentUuid": "e0fc1b59_5b8e4386",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 38
+      },
+      "revId": "3bdb381f9a1fc5645909ed677b3e88d243c4205b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
