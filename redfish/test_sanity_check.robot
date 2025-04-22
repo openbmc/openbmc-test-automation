@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation   This suite is to run some test at the end of execution.
+Documentation   This suite is to perform sanity check for BMC.
 
 Resource        ../lib/resource.robot
 Resource        ../lib/bmc_redfish_resource.robot
@@ -40,7 +40,5 @@ Test Teardown Execution
     [Documentation]  Do test teardown operation.
 
     FFDC On Test Case Fail
-    # Remove rm command  once the BMC dump APIs are working.
-    Run Keyword And Ignore Error  BMC Execute Command  rm -rf /var/lib/phosphor-debug-collector/dumps/
-    Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
-    Run Keyword And Ignore Error  Redfish Delete All System Dumps
+    Redfish Delete All BMC Dumps
+    Redfish Delete All System Dumps
