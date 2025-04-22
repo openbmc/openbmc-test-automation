@@ -22,6 +22,30 @@
       },
       "revId": "52f43380d31433a3f8f63dd8462d21914e6917a1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51275e7d_99c58b38",
+        "filename": "xcat/test_xcat_group.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-04-22T14:10:29Z",
+      "side": 1,
+      "message": "Although Robot Framework variables are case-insensitive, it is recommended to use capital letters with non-local variable names.\n\n*** Variables ***\n${SUITE}         this value is overridden\n\nRefer https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-variables\n\nWe will need to start enforcing in our other code as we go.",
+      "parentUuid": "bb143352_df75aa76",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 5
+      },
+      "revId": "52f43380d31433a3f8f63dd8462d21914e6917a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
