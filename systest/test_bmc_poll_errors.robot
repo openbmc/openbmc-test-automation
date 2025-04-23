@@ -5,7 +5,6 @@ Resource          ../lib/rest_client.robot
 Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/resource.robot
 Resource          ../lib/boot_utils.robot
-Resource          ../lib/boot_utils.robot
 Resource          ../lib/bmc_redfish_resource.robot
 Resource          ../lib/esel_utils.robot
 

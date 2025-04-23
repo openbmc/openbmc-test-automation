@@ -1,8 +1,6 @@
 *** Settings ***
 Documentation    Test IPMI and Redfish combinations for user management.
 
-Resource         ../../lib/openbmc_ffdc.robot
-Resource         ../../lib/ipmi_client.robot
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot

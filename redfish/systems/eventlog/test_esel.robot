@@ -5,7 +5,6 @@ Documentation       eSEL's Test cases.
 Resource            ../../../lib/ipmi_client.robot
 Resource            ../../../lib/openbmc_ffdc.robot
 Resource            ../../../lib/utils.robot
-Resource            ../../../lib/boot_utils.robot
 Resource            ../../../lib/esel_utils.robot
 Resource            ../../../lib/boot_utils.robot
 Variables           ../../../data/variables.py
