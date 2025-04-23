@@ -7,7 +7,6 @@ Resource                        ../lib/ipmi_client.robot
 Resource                        ../lib/utils.robot
 Resource                        ../lib/common_utils.robot
 Resource                        ../lib/openbmc_ffdc.robot
-Resource                        ../lib/ipmi_client.robot
 Resource                        ../lib/bmc_network_utils.robot
 Resource                        ../lib/state_manager.robot
 Library                         ../lib/utilities.py
