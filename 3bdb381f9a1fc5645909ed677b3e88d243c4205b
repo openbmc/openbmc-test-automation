@@ -111,6 +111,30 @@
       },
       "revId": "3bdb381f9a1fc5645909ed677b3e88d243c4205b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d097003_62324af1",
+        "filename": "openpower/vpd/test_vpd_tool.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-04-23T06:11:18Z",
+      "side": 1,
+      "message": "Looking at both the comments and response, I don\u0027t see the need to do setup for this single test. If there were multiple test and need some sort of organize setup and teardown, then we can consider it.\n\nGood discussion here. Thank you for your comments.\n\nI will merge it by EOD since I don\u0027t see improvement or breaking any coding guideline rules here.",
+      "parentUuid": "aef5d81a_301e9fbd",
+      "range": {
+        "startLine": 67,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 38
+      },
+      "revId": "3bdb381f9a1fc5645909ed677b3e88d243c4205b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
