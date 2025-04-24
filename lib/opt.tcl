@@ -135,7 +135,7 @@ proc gen_get_options { argv } {
 
   # Note:  This procedure assumes that global list longoptions has been initialized via a call to the
   # longoptions procedure and that global pos_parms has been initialized via a call to the pos_parms
-  # procdure.  These data structures indicates what options and arguments are supported by the calling
+  # procedure.  These data structures indicates what options and arguments are supported by the calling
   # program.
 
   # Note: If the last var_name in pos_parms ends in "_list", then the caller can specify as many parms as

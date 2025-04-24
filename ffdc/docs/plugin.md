@@ -158,7 +158,7 @@ Example: (from the class example previously mentioned)
         [PLUGIN-END]
 ```
 
-### Plugin FILES Direcive
+### Plugin FILES Directive
 
 Rules:
 
@@ -178,7 +178,7 @@ Else, plugin response will be skipped and not written to any file.
         - None
 ```
 
-### Plugin ERROR Direcive
+### Plugin ERROR Directive
 
 Error directive on plugin supported
 
