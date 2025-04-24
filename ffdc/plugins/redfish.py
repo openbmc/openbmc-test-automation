@@ -5,7 +5,6 @@ This module contains functions having to do with redfish path walking.
 """
 
 import json
-import os
 import subprocess
 
 ERROR_RESPONSE = {

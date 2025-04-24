@@ -72,6 +72,7 @@ class SSHRemoteclient:
             socket.error,
         ) as e:
             is_ssh_login = False
+            print("SSH Login: Exception: %s" % e)
 
         return is_ssh_login
 

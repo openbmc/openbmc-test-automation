@@ -146,20 +146,11 @@ OPENBMC:
             - redfishtool -u ${username} -p ${password} -r
               ${hostname}:${port_https} -S Always raw GET
               /redfish/v1/Systems/system/LogServices/EventLog/Entries
-            - plugin:
-                  - plugin_name: plugin.redfish.enumerate_request
-                  - plugin_args:
-                        - ${hostname}:${port_https}
-                        - ${username}
-                        - ${password}
-                        - /redfish/v1/
-                        - json
         FILES:
             - "REDFISH_bmc_user_accounts.json"
             - "REDFISH_bmc_dump_entries.json"
             - "REDFISH_system_dumps_entries.json"
             - "REDFISH_event_log_entries.json"
-            - "REDFISH_enumerate_v1.json"
         PROTOCOL:
             - "REDFISH"
 
