@@ -4,7 +4,7 @@
 import os
 import sys
 
-# ---------Set sys.path for pluqin execution---------------------------------------
+# ---------Set sys.path for pluqin execution----------------------------------
 # Absolute path to this plugin
 abs_path = os.path.abspath(os.path.dirname(sys.argv[0]))
 # full_path to plugins parent directory
