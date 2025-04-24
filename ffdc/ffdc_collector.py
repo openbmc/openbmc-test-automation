@@ -54,6 +54,7 @@ try:
         try:
             plugin = __import__(plugin_module, globals(), locals(), [], 0)
         except Exception as e:
+            print("PLUGIN: Exception: %s" % e)
             print("PLUGIN: Module import failed: %s" % module)
             pass
 except FileNotFoundError as e:
@@ -910,12 +911,12 @@ class ffdc_collector:
             except (IOError, OSError) as e:
                 # PermissionError
                 if e.errno == EPERM or e.errno == EACCES:
-                    self.logger.error(
+                    print(
                         "\tERROR: os.makedirs %s failed with"
                         " PermissionError.\n" % dir_path
                     )
                 else:
-                    self.logger.error(
+                    print(
                         "\tERROR: os.makedirs %s failed with %s.\n"
                         % (dir_path, e.strerror)
                     )
@@ -1353,7 +1354,6 @@ class ffdc_collector:
                   yaml_arg_list:  [arg2, arg2]
         """
         # Get the env loaded keys as list ['hostname', 'username', 'password'].
-        env_vars_list = list(self.env_dict)
 
         if isinstance(yaml_arg_list, list):
             tmp_list = []
