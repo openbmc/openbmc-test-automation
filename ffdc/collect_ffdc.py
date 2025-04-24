@@ -9,7 +9,7 @@ import sys
 
 import click
 
-# ---------Set sys.path for cli command execution---------------------------------------
+# ---------Set sys.path for cli command execution-----------------------------
 # Absolute path to openbmc-test-automation/ffdc
 abs_path = os.path.abspath(os.path.dirname(sys.argv[0]))
 full_path = abs_path.split("ffdc")[0]

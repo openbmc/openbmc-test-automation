@@ -128,7 +128,8 @@ class SSHRemoteclient:
             paramiko.ChannelException,
             SocketTimeout,
         ) as e:
-            # Log command with error. Return to caller for next command, if any.
+            # Log command with error.
+            # Return to caller for next command, if any.
             logging.error(
                 "\n\tERROR: Fail remote command %s %s" % (e.__class__, e)
             )
@@ -188,9 +189,10 @@ class SSHRemoteclient:
                 "\n\tERROR: Fail scp %s from remotehost %s %s\n\n"
                 % (remote_file, e.__class__, e)
             )
-            # Pause for 2 seconds allowing Paramiko to finish error processing before next fetch.
-            # Without the delay after SCPException,
-            #    next fetch will get 'paramiko.ssh_exception.SSHException'> Channel closed Error.
+            # Pause for 2 seconds allowing Paramiko to finish error processing
+            # before next fetch. Without the delay after SCPException, next
+            # fetch will get 'paramiko.ssh_exception.SSHException'> Channel
+            # closed Error.
             time.sleep(2)
             return False
         # Return True for file accounting
