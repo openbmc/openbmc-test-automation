@@ -92,7 +92,8 @@ global global_plugin_list
 global_plugin_dict = {}
 global_plugin_list = []
 
-# Hold the plugin return named declared if function returned values are list,dict.
+# Hold the plugin return named declared if function returned values are
+# list,dict.
 # Refer this name list to look up the plugin dict for eval() args function
 # Example ['version']
 global_plugin_type_list = []
@@ -133,15 +134,17 @@ class ffdc_collector:
         r"""
         Description of argument(s):
 
-        hostname            name/ip of the targeted (remote) system
-        username            user on the targeted system with access to FFDC files
-        password            password for user on targeted system
+        hostname            Name/ip of the targeted (remote) system
+        username            User on the targeted system with access to
+                            FFDC files
+        password            Password for user on targeted system
         port_ssh            SSH port value. By default 22
         port_https          HTTPS port value. By default 443
         port_ipmi           IPMI port value. By default 623
-        ffdc_config         configuration file listing commands and files for FFDC
-        location            where to store collected FFDC
-        remote_type         os type of the remote host
+        ffdc_config         Configuration file listing commands and files
+                            for FFDC
+        location            Where to store collected FFDC
+        remote_type         OS type of the remote host
         remote_protocol     Protocol to use to collect data
         env_vars            User define CLI env vars '{"key : "value"}'
         econfig             User define env vars YAML file
@@ -169,8 +172,8 @@ class ffdc_collector:
         self.logger = None
 
         # Set prefix values for scp files and directory.
-        # Since the time stamp is at second granularity, these values are set here
-        # to be sure that all files for this run will have same timestamps
+        # Since the time stamp is at second granularity, these values are set
+        # here to be sure that all files for this run will have same timestamps
         # and they will be saved in the same directory.
         # self.location == local system for now
         self.set_ffdc_default_store_path()
@@ -406,7 +409,8 @@ class ffdc_collector:
         Determine actions based on remote host type
 
         Description of argument(s):
-        working_protocol_list    list of confirmed working protocols to connect to remote host.
+        working_protocol_list    List of confirmed working protocols to
+                                 connect to remote host.
         """
 
         self.logger.info(
@@ -620,8 +624,10 @@ class ffdc_collector:
         Send commands in ffdc_config file to targeted system.
 
         Description of argument(s):
-        ffdc_actions_for_target_type     commands and files for the selected remote host type.
-        form_filename                    if true, pre-pend self.target_type to filename
+        ffdc_actions_for_target_type     Commands and files for the selected
+                                         remote host type.
+        form_filename                    If true, pre-pend self.target_type to
+                                         filename
         """
 
         # Executing commands, if any
@@ -655,7 +661,8 @@ class ffdc_collector:
         Fetch list of commands from configuration file
 
         Description of argument(s):
-        ffdc_actions_for_target_type    commands and files for the selected remote host type.
+        ffdc_actions_for_target_type    Commands and files for the selected
+                                        remote host type.
         """
         try:
             list_of_commands = ffdc_actions_for_target_type["COMMANDS"]
@@ -668,7 +675,8 @@ class ffdc_collector:
         Fetch list of commands from configuration file
 
         Description of argument(s):
-        ffdc_actions_for_target_type    commands and files for the selected remote host type.
+        ffdc_actions_for_target_type    Commands and files for the selected
+                                        remote host type.
         """
         try:
             list_of_files = ffdc_actions_for_target_type["FILES"]
@@ -700,8 +708,10 @@ class ffdc_collector:
         Send commands in ffdc_config file to targeted system.
 
         Description of argument(s):
-        ffdc_actions_for_target_type    commands and files for the selected remote host type.
-        form_filename                    if true, pre-pend self.target_type to filename
+        ffdc_actions_for_target_type    Commands and files for the selected
+                                        remote host type.
+        form_filename                   If true, pre-pend self.target_type to
+                                        filename
         """
         self.logger.info(
             "\n\t[Run] Executing commands on %s using %s"
@@ -745,7 +755,8 @@ class ffdc_collector:
         scp group of files (wild card) from remote host.
 
         Description of argument(s):
-        fdc_actions_for_target_type    commands and files for the selected remote host type.
+        fdc_actions_for_target_type    Commands and files for the selected
+                                       remote host type.
         """
 
         if self.ssh_remoteclient.scpclient:
@@ -805,13 +816,16 @@ class ffdc_collector:
         quiet=None,
     ):
         r"""
-        SCP all files in file_dict to the indicated directory on the local system.
+        SCP all files in file_dict to the indicated directory on the local
+        system.
 
         Description of argument(s):
-        targ_dir_path                   The path of the directory to receive the files.
+        targ_dir_path                   The path of the directory to receive
+                                        the files.
         targ_file_prefix                Prefix which will be prepended to each
                                         target file's name.
-        file_dict                       A dictionary of files to scp from targeted system to this system
+        file_dict                       A dictionary of files to scp from
+                                        targeted system to this system
 
         """
 
@@ -858,11 +872,13 @@ class ffdc_collector:
     def set_ffdc_default_store_path(self):
         r"""
         Set a default value for self.ffdc_dir_path and self.ffdc_prefix.
-        Collected ffdc file will be stored in dir /self.location/hostname_timestr/.
+        Collected ffdc file will be stored in dir
+        /self.location/hostname_timestr/.
         Individual ffdc file will have timestr_filename.
 
         Description of class variables:
-        self.ffdc_dir_path  The dir path where collected ffdc data files should be put.
+        self.ffdc_dir_path  The dir path where collected ffdc data files
+                            should be put.
 
         self.ffdc_prefix    The prefix to be given to each ffdc file name.
 
@@ -1053,7 +1069,8 @@ class ffdc_collector:
         Perform protocol working check.
 
         """
-        # This is for the env vars a user can use in YAML to load it at runtime.
+        # This is for the env vars a user can use in YAML to load
+        # it at runtime.
         # Example YAML:
         # -COMMANDS:
         #    - my_command ${hostname}  ${username}   ${password}
@@ -1366,7 +1383,8 @@ class ffdc_collector:
         """
         # Parse the string for env vars ${env_vars}.
         try:
-            # Example, list of matching env vars ['username', 'password', 'hostname']
+            # Example, list of matching
+            # env vars ['username', 'password', 'hostname']
             # Extra escape \ for special symbols. '\$\{([^\}]+)\}' works good.
             var_name_regex = "\\$\\{([^\\}]+)\\}"
             env_var_names_list = re.findall(var_name_regex, yaml_arg_str)
@@ -1391,8 +1409,8 @@ class ffdc_collector:
                 # user added a plugin var which is not going to be populated.
                 if yaml_arg_str in global_plugin_dict:
                     if isinstance(global_plugin_dict[var], (list, dict)):
-                        # List data type or dict can't be replaced, use directly
-                        # in eval function call.
+                        # List data type or dict can't be replaced, use
+                        # directly in eval function call.
                         global_plugin_type_list.append(var)
                     else:
                         yaml_arg_str = yaml_arg_str.replace(
