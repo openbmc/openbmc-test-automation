@@ -26,7 +26,7 @@ ${chassis_capabilities_dbus_URL}   /xyz/openbmc_project/Control/ChassisCapabilit
 
 IPMI Chassis Status On
     [Documentation]  This test case verifies system power on status
-    ...               using IPMI Get Chassis status command.
+    ...              using IPMI Get Chassis status command.
     [Tags]  IPMI_Chassis_Status_On
 
     Redfish Power On  stack_mode=skip  quiet=1
@@ -36,7 +36,7 @@ IPMI Chassis Status On
 
 IPMI Chassis Status Off
     [Documentation]  This test case verifies system power off status
-    ...               using IPMI Get Chassis status command.
+    ...              using IPMI Get Chassis status command.
     [Tags]  IPMI_Chassis_Status_Off
 
     Redfish Power Off  stack_mode=skip  quiet=1
@@ -169,6 +169,9 @@ Check Chassis Status Via IPMI
     [Documentation]  Set Chassis Status via IPMI and verify and verify chassis status.
     [Arguments]  ${power_policy}
 
+    # Description of argument(s):
+    # power_policy    Chassis power policy to be set(e.g. "always-off", "always-on").
+
     # Sets power policy according to requested policy
     Set Chassis Power Policy Via IPMI And Verify  ${power_policy}
 
@@ -195,15 +198,21 @@ Check Chassis Status Via IPMI
         Should Be Equal As Strings  ${policy}  11
     END
 
-    # Last Power Event - 4th bit should be 1b i.e, last ‘Power is on’ state was entered via IPMI command
+    # Last Power Event - 4th bit should be 1b i.e, last ‘Power is on’ state
+    # was entered via IPMI command
     ${last_power_event}=  Convert To Binary  ${status[1]}  base=16
     ${last_power_event}=  Zfill Data  ${last_power_event}  8
     Should Be Equal As Strings  ${last_power_event[3]}  1
 
 
 Verify Chassis Capabilities Response
-    [Documentation]  Will compare the ipmi response with thh busctl response for given property.
+    [Documentation]  Compare the IPMI response with the busctl response for given property.
     [Arguments]  ${ipmi_response}  ${busctl_response}  ${property}
+
+    # Description of argument(s):
+    # ipmi_response    IPMI response.
+    # busctl_response  busctl command response.
+    # property         property type (e.g. CapabilitiesFlags).
 
     ${ipmi_response}=  Convert To Integer  ${ipmi_response}  16
 

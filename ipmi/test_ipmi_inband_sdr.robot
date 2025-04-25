@@ -507,7 +507,8 @@ Get Record Count And Last Record From SDR
 
 
 Suite Setup Execution
-   [Documentation]  Do suite setup tasks.
+    [Documentation]  Do suite setup tasks.
+
     Redfish.Login
     Should Not Be Empty  ${OS_HOST}  msg=Please provide required parameter OS_HOST
     Should Not Be Empty  ${OS_USERNAME}  msg=Please provide required parameter OS_USERNAME

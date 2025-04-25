@@ -1,5 +1,6 @@
 *** Settings ***
 Documentation    Module to test IPMI chipher functionality.
+
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
 Resource         ../lib/bmc_network_utils.robot
@@ -79,7 +80,8 @@ Verify Supported Cipher Via Getciphers
 
 
 Verify Cipher Suite And Supported Algorithms Via IPMI Raw Command
-    [Documentation]  Verify cipher ID and Supported Algorithms for all Available Channels.
+    [Documentation]  Verify cipher ID and Supported Algorithms for all Available
+    ...  Channels.
     [Tags]  Verify_Cipher_Suite_And_Supported_Algorithms_Via_IPMI_Raw_Command
     [Template]  Verify Cipher ID and Supported Algorithm For Channel
 
@@ -134,8 +136,9 @@ Verify Standard Cipher Suite For Channel
     [Arguments]  ${data_list}  ${channel_number}
 
     # Description of argument(s):
-    # data_list   cipher suite records in list
-    #  e.g  [01, c0, 11, 03, 44, 81]
+    # data_list       cipher suite records in list
+    #                 e.g  [01, c0, 11, 03, 44, 81]
+    # channel_number  Interface channel number
 
     ${supported_algorithms}=  Split String  ${IPMI_RAW_CMD['Cipher Suite']['get'][1]}
     ${cipher_suite_id}=  Convert To Integer  ${data_list}[2]  base=16
@@ -152,9 +155,9 @@ Verify Algorithm by Cipher Suite For Channel
     [Arguments]  ${response_data}  ${channel_number}
 
     # Description of argument(s):
-    # response_data   response data of get channel cipher suite ipmi raw command
+    # response_data   Response data of get channel cipher suite IPMI raw command
     #   e.g  01 c0 11 03 44 81   ---> list of algorithms by cipher suite (0x80 in request data 3rd byte)
-    # ${channel_number}  Interface channel number
+    # channel_number  Interface channel number
 
     @{expected_data_list}=  Split String  ${response_data}
 
@@ -167,7 +170,7 @@ Verify Supported Algorithm For Channel
     [Arguments]  ${response_data}  ${channel_number}
 
     # Description of argument(s):
-    # response_data    response data of get channel cipher suite ipmi raw command.
+    # response_data    response data of get channel cipher suite IPMI raw command.
     # channel_number   Interface Channel Number.
 
     # expected data will be like " 01 03 44 81 ".
@@ -180,8 +183,8 @@ Verify Cipher ID and Supported Algorithm For Channel
     [Arguments]  ${channel_num}  ${payload_type}  ${index_value}
 
     # Description of argument(s):
-    # channel_num   Interface channel number.
-    # payload_type   IPMI(0x00) or Sol(0x01).
+    # channel_num    Interface channel number.
+    # payload_type   IPMI(0x00) or SOL(0x01).
     # index_value    0x80 for list algorithm by cipher suite.
     #                0x00 for supported algorithms.
 

@@ -323,9 +323,9 @@ Read FRU Data Via IPMI
     [Documentation]  Read FRU data using IPMI raw command.
     [Arguments]  ${fru_id}  ${offset}
 
-   # Description of Argument(s):
-   # fru_id        FRU id.
-   # offset        Offset byte for read FRU command.
+    # Description of Argument(s):
+    # fru_id        FRU id.
+    # offset        Offset byte for read FRU command.
 
     # IPMI Read FRU Data Command.
     # 0xff - Count to read --- count is ‘1’ based
@@ -339,11 +339,11 @@ Write FRU Data Via IPMI
     [Documentation]  Write FRU data using IPMI raw command.
     [Arguments]  ${fru_id}  ${offset}  ${data}  ${length}
 
-   # Description of Argument(s):
-   # fru_id        FRU id.
-   # offset        Offset byte for read FRU command.
-   # data          Data to write for write FRU command.
-   # length        Count of bytes that gets written in write FRU command.
+    # Description of Argument(s):
+    # fru_id        FRU id.
+    # offset        Offset byte for read FRU command.
+    # data          Data to write for write FRU command.
+    # length        Count of bytes that gets written in write FRU command.
 
     # IPMI Write FRU Data Command.
     ${resp}=  Run IPMI Command

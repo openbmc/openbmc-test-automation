@@ -319,13 +319,14 @@ IPMI General Test Suite Setup
 
 
 Set Session Privilege Level And Verify
-    [Documentation]   Set session privilege with given privilege level and verify the response with
-    ...               expected level.
+    [Documentation]   Set session privilege with given privilege level and
+    ...               verify the response with expected level.
     [Arguments]  ${privilege_level}  ${expected_level}
+
     # Description of argument(s):
     # privilege_level    Requested Privilege Level.
-    # expected_level     New Privilege Level (or present level if ‘return present privilege level’
-    #                    was selected).
+    # expected_level     New Privilege Level (or present level if
+    #                    ‘return present privilege level’ was selected).
 
     ${resp}=  Run External IPMI Raw Command
     ...  0x06 0x3b ${privilege_level}
@@ -335,6 +336,7 @@ Set Session Privilege Level And Verify
 Set Invalid Session Privilege Level And Verify
     [Documentation]   Set invalid session privilege level and verify the response.
     [Arguments]  ${privilege_level}
+
     # Description of argument(s):
     # privilege_level    Requested Privilege Level.
 
@@ -356,8 +358,9 @@ Set Invalid Session Privilege Level And Verify
 Verify Identify LED State Via Redfish
     [Documentation]  Verify that Redfish identify LED system with given state.
     [Arguments]  ${expected_state}
+
     # Description of argument(s):
-    # expected_led_status  Expected value of Identify LED.
+    # expected_state  Expected state of Identify LED.
 
     # Get the following URI(s) and iterate to find the attribute IndicatorLED.
     # Example:

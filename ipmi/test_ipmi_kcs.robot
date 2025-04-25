@@ -26,7 +26,7 @@ Verify KCS interface
 
 
 Verify KCS Raw IPMI Multiple Times
-    [Documentation]  Verify KCS interface raw ipmi command for multiple times.
+    [Documentation]  Verify KCS interface raw IPMI command for multiple times.
     [Tags]  Verify_KCS_Raw_IPMI_Multiple_Times
 
     Repeat Keyword  ${LOOP_COUNT} times  Verify KCS Interface Commands
