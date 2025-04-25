@@ -105,8 +105,9 @@ Verify GetBIOSAttributeCurrentValueByHandle
     FOR  ${i}  IN  @{attr_handles}
         ${cur_attr}=  Pldmtool  bios GetBIOSAttributeCurrentValueByHandle -a ${i}
         @{attr_val_list}=  Set Variable  ${attr_val_data}[${i}]
-        Run Keyword If  '${cur_attr['CurrentValue']}' not in @{attr_val_list}
-        ...  Fail  Invalid GetBIOSAttributeCurrentValueByHandle value found.
+        IF  '${cur_attr['CurrentValue']}' not in @{attr_val_list}
+            Fail  Invalid GetBIOSAttributeCurrentValueByHandle value found.
+        END
     END
 
 

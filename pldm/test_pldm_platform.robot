@@ -12,7 +12,7 @@ Test Setup        Printn
 Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Pldmtool Platform Suite Cleanup
 
-Test Tags        Pldm_Platform
+Test Tags         Pldm_Platform
 
 *** Test Cases ***
 Verify GetPDR
@@ -24,7 +24,7 @@ Verify GetPDR
     #       Assuming there are 100 record handle.
     FOR   ${i}  IN RANGE  100
        ${next_record_handle}=  Run Keyword  Verify GetPDR For Record Handle  ${record_handle}
-       Exit For Loop If  ${next_record_handle} == 0
+       IF  ${next_record_handle} == 0  BREAK
        ${record_handle}=  Set Variable  ${next_record_handle}
     END
 
@@ -77,30 +77,25 @@ Verify GetPDR For Record Handle
     ${pldm_output}=  Pldmtool  ${pldm_cmd}
     Rprint Vars  pldm_output
 
-    Run Keyword If  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_STATE_EFFECTER_PDR']}'
-    ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_SETSTATEEFFECTER}
+    IF  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_STATE_EFFECTER_PDR']}'
+        Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_SETSTATEEFFECTER}
+    ELSE IF  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_PDR_FRU_RECORD_SET']}'
+        Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_FRURECORDSETIDENTIFIER}
+    ELSE IF  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_PDR_ENTITY_ASSOCIATION']}'
+        Log To Console  "Found PDR Type - PLDM_ENTITY_ASSOCIATION_PDR"
+    ELSE IF  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_STATE_SENSOR_PDR']}'
+        Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_STATESENSORPDR}
+    ELSE IF  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_NUMERIC_EFFECTER_PDR']}'
+        Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_NUMERICEFFECTERPDR}
+    ELSE IF  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_TERMINUS_LOCATOR_PDR']}'
+        Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_TERMINUSLOCATORPDR}
+    ELSE IF  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_COMPACT_NUMERIC_SENSOR_PDR']}'
+        Log To Console  "Found PDR Type - PLDM_COMPACT_NUMERIC_SENSOR_PDR'
+    ELSE
+        Fail  msg="Unknown PDR Type is received"
+    END
 
-    ...  ELSE IF  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_PDR_FRU_RECORD_SET']}'
-    ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_FRURECORDSETIDENTIFIER}
-
-    ...  ELSE IF  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_PDR_ENTITY_ASSOCIATION']}'
-    ...  Log To Console  "Found PDR Type - PLDM_ENTITY_ASSOCIATION_PDR"
-
-    ...  ELSE IF  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_STATE_SENSOR_PDR']}'
-    ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_STATESENSORPDR}
-
-    ...  ELSE IF  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_NUMERIC_EFFECTER_PDR']}'
-    ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_NUMERICEFFECTERPDR}
-
-    ...  ELSE IF  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_TERMINUS_LOCATOR_PDR']}'
-    ...  Valid Dict  pldm_output  valid_values=${RESPONSE_DICT_GETPDR_TERMINUSLOCATORPDR}
-
-    ...  ELSE IF  '${pldm_output['PDRType']}' == '${PLDM_PDR_TYPES['PLDM_COMPACT_NUMERIC_SENSOR_PDR']}'
-    ...  Log To Console  "Found PDR Type - PLDM_COMPACT_NUMERIC_SENSOR_PDR'
-
-    ...  ELSE  Fail  msg="Unknown PDR Type is received"
-
-    Should be equal as strings  ${pldm_output['recordHandle']}  ${record_handle}
+    Should Be Equal As Strings  ${pldm_output['recordHandle']}  ${record_handle}
     RETURN  ${pldm_output['nextRecordHandle']}
 
 Verify SetStateEffecterStates For Effecter States
