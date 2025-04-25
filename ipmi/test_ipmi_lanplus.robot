@@ -17,7 +17,7 @@ ${LOOP_COUNT}          ${1}
 *** Test Cases ***
 
 Verify Lanplus Raw IPMI Commands Multiple Times
-    [Documentation]  Verify Lanplus interface With raw ipmi command for multiple times.
+    [Documentation]  Verify Lanplus interface With raw IPMI command for multiple times.
     [Tags]  Verify_Lanplus_Raw_IPMI_Commands_Multiple_Times
 
     Repeat Keyword  ${LOOP_COUNT} times  Verify Lanplus Interface Commands
