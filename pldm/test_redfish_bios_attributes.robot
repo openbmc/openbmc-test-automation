@@ -18,8 +18,8 @@ Test Tags       Redfish_Bios_Attributes
 
 *** Variables ***
 
-${bios_original_data}       ${EMPTY}
-${attr_table_data}          ${EMPTY}
+${BIOS_ORIGINAL_DATA}       ${EMPTY}
+${ATTR_TABLE_DATA}          ${EMPTY}
 
 
 *** Test Cases ***
@@ -39,7 +39,7 @@ Redfish Verify Set Invalid Optional Value For BIOS Enumeration Attribute Type
     ...              using Redfish.
     [Tags]  Redfish_Verify_Set_Invalid_Optional_Value_For_BIOS_Enumeration_Attribute_Type
 
-    ${attr_val_data}=  GetBIOSEnumAttributeOptionalValues  ${attr_table_data}
+    ${attr_val_data}=  GetBIOSEnumAttributeOptionalValues  ${ATTR_TABLE_DATA}
     @{attr_handles}=  Get Dictionary Keys  ${attr_val_data}
     ${enum_attr}=  Evaluate  random.choice(${attr_handles})  modules=random
 
@@ -52,7 +52,7 @@ Redfish Verify Set Out Of Range Integer Value For BIOS Integer Attribute Type
     ...              using Redfish.
     [Tags]  Redfish_Verify_Set_Out_Of_Range_Integer_Value_For_BIOS_Integer_Attribute_Type
 
-    ${attr_val_data}=  GetBIOSStrAndIntAttributeHandles  BIOSInteger  ${attr_table_data}
+    ${attr_val_data}=  GetBIOSStrAndIntAttributeHandles  BIOSInteger  ${ATTR_TABLE_DATA}
     @{attr_handles}=  Get Dictionary Keys  ${attr_val_data}
     ${int_attr}=  Evaluate  random.choice(${attr_handles})  modules=random
     ${count}=  Evaluate  ${attr_val_data['${int_attr}']["UpperBound"]} + 5
@@ -67,7 +67,7 @@ Redfish Verify Set Out Of Range String Value For BIOS String Attribute Type
     ...              using Redfish.
     [Tags]  Redfish_Verify_Set_Out_Of_Range_String_Value_For_BIOS_String_Attribute_Type
 
-    ${attr_val_data}=  GetBIOSStrAndIntAttributeHandles  BIOSString  ${attr_table_data}
+    ${attr_val_data}=  GetBIOSStrAndIntAttributeHandles  BIOSString  ${ATTR_TABLE_DATA}
     @{attr_handles}=  Get Dictionary Keys  ${attr_val_data}
     ${str_attr}=  Evaluate  random.choice(${attr_handles})  modules=random
     ${count}=  Evaluate  ${attr_val_data['${str_attr}']["MaximumStringLength"]} + 5
@@ -84,13 +84,13 @@ Redfish Verify Set BIOS String Attribute Type
 
     @{failed_attr_list}=  Create List
 
-    ${attr_val_data}=  GetBIOSStrAndIntAttributeHandles  BIOSString  ${attr_table_data}
+    ${attr_val_data}=  GetBIOSStrAndIntAttributeHandles  BIOSString  ${ATTR_TABLE_DATA}
     @{attr_handles}=  Get Dictionary Keys  ${attr_val_data}
     FOR  ${i}  IN  @{attr_handles}
         ${random_value}=  GetRandomBIOSIntAndStrValues  ${i}  ${attr_val_data['${i}']["MaximumStringLength"]}
         ${status}=  Run Keyword And Return Status
         ...  Set BIOS Attribute Value And Verify  ${i}  ${random_value}
-        Run Keyword If  ${status} == ${False}  Append To List  ${failed_attr_list}  ${i}
+        IF  ${status} == ${False}  Append To List  ${failed_attr_list}  ${i}
     END
 
     ${fail_count}=  Get Length  ${failed_attr_list}
@@ -106,13 +106,13 @@ Redfish Verify Set BIOS Integer Attribute Type
 
     @{failed_attr_list}=  Create List
 
-    ${attr_val_data}=  GetBIOSStrAndIntAttributeHandles  BIOSInteger  ${attr_table_data}
+    ${attr_val_data}=  GetBIOSStrAndIntAttributeHandles  BIOSInteger  ${ATTR_TABLE_DATA}
     @{attr_handles}=  Get Dictionary Keys  ${attr_val_data}
     FOR  ${i}  IN  @{attr_handles}
         ${random_value}=  GetRandomBIOSIntAndStrValues  ${i}  ${attr_val_data['${i}']["UpperBound"]}
         ${status}=  Run Keyword And Return Status
         ...  Set BIOS Attribute Value And Verify  ${i}  ${random_value}
-        Run Keyword If  ${status} == ${False}  Append To List  ${failed_attr_list}  ${i}
+        IF  ${status} == ${False}  Append To List  ${failed_attr_list}  ${i}
     END
 
     ${fail_count}=  Get Length  ${failed_attr_list}
@@ -128,7 +128,7 @@ Redfish Verify Set BIOS Enumeration Attribute Type
     @{failed_attr_list}=  Create List
 
     # Fetch BIOS attribute optional values from pldmtool getbiostable.
-    ${attr_val_data}=  GetBIOSEnumAttributeOptionalValues  ${attr_table_data}
+    ${attr_val_data}=  GetBIOSEnumAttributeOptionalValues  ${ATTR_TABLE_DATA}
     @{attr_handles}=  Get Dictionary Keys  ${attr_val_data}
 
     # Example:
@@ -139,7 +139,7 @@ Redfish Verify Set BIOS Enumeration Attribute Type
         @{attr_val_list}=  Set Variable  ${attr_val_data}[${i}]
         ${status}=  Run Keyword And Return Status
         ...  Set Optional BIOS Attribute Values And Verify  ${i}  @{attr_val_list}
-        Run Keyword If  ${status} == ${False}  Append To List  ${failed_attr_list}  ${i}
+        IF  ${status} == ${False}  Append To List  ${failed_attr_list}  ${i}
     END
 
     ${fail_count}=  Get Length  ${failed_attr_list}
@@ -152,7 +152,7 @@ Redfish Verify Restore BIOS Attribute Values
     ...              using Redfish.
     [Tags]  Redfish_Verify_Restore_BIOS_Attribute_Values
 
-    ${bios_default_data}=  GetBIOSAttrDefaultValues  ${attr_table_data}
+    ${bios_default_data}=  GetBIOSAttrDefaultValues  ${ATTR_TABLE_DATA}
     @{attr_handles}=  Get Dictionary Keys  ${bios_default_data}
 
     FOR  ${i}  IN  @{attr_handles}
@@ -166,17 +166,17 @@ Redfish BIOS Suite Setup
 
     Redfish.Login
     ${pldm_output}=  Pldmtool  bios GetBIOSTable --type AttributeTable
-    Set Global Variable  ${attr_table_data}  ${pldm_output}
+    Set Suite Variable  ${ATTR_TABLE_DATA}  ${pldm_output}
 
     ${data}=  GetBIOSAttrOriginalValues  ${pldm_output}
-    Set Global Variable  ${bios_original_data}  ${data}
+    Set Suite Variable  ${BIOS_ORIGINAL_DATA}  ${data}
 
 
 Redfish BIOS Suite Cleanup
     [Documentation]  Perform Redfish BIOS suite cleanup.
 
-    @{attr_handles}=  Get Dictionary Keys  ${bios_original_data}
+    @{attr_handles}=  Get Dictionary Keys  ${BIOS_ORIGINAL_DATA}
     FOR  ${i}  IN  @{attr_handles}
-        Set BIOS Attribute Value And Verify  ${i}  ${bios_original_data['${i}']}
+        Set BIOS Attribute Value And Verify  ${i}  ${BIOS_ORIGINAL_DATA['${i}']}
     END
     Redfish.Logout
