@@ -88,16 +88,20 @@ Suite Setup Execution
     Set Suite Variable  ${power_cycle_cmd}
 
     Get File From SFTP Server  ${readid_svf}
-    Run KeyWord If  ${program_cpld} == 1  Get File From SFTP Server  ${readusercode_svf}
-    Run KeyWord If  ${program_cpld} == 1  Get File From SFTP Server  ${cpld_firmware1}
-    Run KeyWord If  ${program_cpld} == 1  Get File From SFTP Server  ${cpld_firmware2}
+    IF  ${program_cpld} == 1
+        Get File From SFTP Server  ${readusercode_svf}
+        Get File From SFTP Server  ${cpld_firmware1}
+        Get File From SFTP Server  ${cpld_firmware2}
+    END
 
     scp.Open connection  ${OPENBMC_HOST}  username=${OPENBMC_USERNAME}
     ...  password=${OPENBMC_PASSWORD}
     Put File To BMC  ${readid_svf}
-    Run KeyWord If  ${program_cpld} == 1  Put File To BMC  ${readusercode_svf}
-    Run KeyWord If  ${program_cpld} == 1  Put File To BMC  ${cpld_firmware1}
-    Run KeyWord If  ${program_cpld} == 1  Put File To BMC  ${cpld_firmware2}
+    IF  ${program_cpld} == 1
+        Put File To BMC  ${readusercode_svf}
+        Put File To BMC  ${cpld_firmware1}
+        Put File To BMC  ${cpld_firmware2}
+    END
     Sleep  5s
     scp.Close Connection
 
