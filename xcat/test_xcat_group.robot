@@ -218,6 +218,8 @@ Validate Power Status Via XCAT
     [Arguments]  ${node}  ${flag}=ON
 
     ${status}=  Get Power Status  ${node}
-    Run Keyword If  '${flag}' == 'ON'
-    ...  Should Contain  ${status}  on  msg=Host is off.
-    ...  ELSE  Should Contain  ${status}  off  msg=Host is on.
+    IF  '${flag}' == 'ON'
+        Should Contain  ${status}  on  msg=Host is off.
+    ELSE
+        Should Contain  ${status}  off  msg=Host is on.
+    END

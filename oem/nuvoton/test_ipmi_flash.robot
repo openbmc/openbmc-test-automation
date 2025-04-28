@@ -8,7 +8,7 @@ Resource         ../../lib/code_update_utils.robot
 
 Suite Setup      Suite Setup Execution
 
-Test Tags       IPMI_Flash
+Test Tags        IPMI_Flash
 
 *** Variables ***
 
@@ -26,7 +26,7 @@ Test BIOS Firmware Update
     [Documentation]  Test BIOS firmware update over IPMI.
     [Tags]  Test_BIOS_Firmware_Update
 
-    Run Keyword  Wait For Host To Ping  ${OS_HOST}  3 mins
+    Wait For Host To Ping  ${OS_HOST}  3 mins
 
     Get LPC SHM Address
     Update BIOS Firmware  ${IMAGE_HOST_FILE_PATH_0}
@@ -89,8 +89,7 @@ Suite Setup Execution
 
     ${os_state}=  Get Host State Attribute  OperatingSystemState
     Rprint Vars  os_state
-    Run Keyword if  '${OS_BOOT_COMPLETE}' != '${os_state}'
-    ...  Redfish Power On
+    IF  '${OS_BOOT_COMPLETE}' != '${os_state}'  Redfish Power On
 
     # generate bad image for test
     ${cmd}=  Catenate  dd if=/dev/urandom of=${HOST_WORK_DIR}/${BAD_IMG} bs=1K count=4
@@ -233,5 +232,5 @@ Update BMC Firmware
     Should Not Contain  ${stderr}  Exception received
 
     Sleep  10s
-    Check If BMC is Up  20 min  20 sec
+    Check If BMC Is Up  20 min  20 sec
     Wait For BMC Ready
