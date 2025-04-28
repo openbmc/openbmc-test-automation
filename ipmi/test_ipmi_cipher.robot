@@ -16,7 +16,7 @@ Test Teardown    FFDC On Test Case Fail
 
 Test Tags       IPMI_Cipher
 
-*** Variables  ***
+*** Variables ***
 ${cipher_suite}      standard
 &{payload_type}      ipmi=0  sol=1
 @{list_index_value}  0x80  0x00

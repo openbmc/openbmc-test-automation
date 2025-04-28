@@ -8,7 +8,7 @@ Resource         ../lib/bmc_redfish_resource.robot
 
 Test Tags      Openbmc_Setup
 
-*** Variables  ***
+*** Variables ***
 
 ${REDFISH_SUPPORT_TRANS_STATE}   ${1}
 
