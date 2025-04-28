@@ -158,6 +158,3 @@ def get_key_value_nested_dict(data, key):
     for k, v in data.items():
         if isinstance(v, dict):
             get_key_value_nested_dict(v, key)
-
-        if k == key:
-            target_list.append(v)
