@@ -50,15 +50,13 @@ Send Network Packets
     # and rate at which packets to be sent, should be given in command line
     # by default it sends 100 TCP packets at 5 packets/second.
 
-    ${cmd_buff}=  Run Keyword If  '${packet_type}' == 'icmp'
-    ...  Set Variable
-    ...  echo ${CLIENT_PASSWORD} | sudo -S nping --delay ${delay} ${host} -c ${count} --${packet_type}
-    ...  ELSE
-    ...  Set variable
-    ...  echo ${CLIENT_PASSWORD} | sudo -S nping --delay ${delay} ${host} -c ${count} -p ${port} --${packet_type}
-    ${rc}  ${output}  Run And Return RC And Output  ${cmd_buff}
+    ${cmd_buff}=  Set Variable If  '${packet_type}' == 'icmp'
+     ...  echo ${CLIENT_PASSWORD} | sudo -S nping --delay ${delay} ${host} -c ${count} --${packet_type}
+     ...  echo ${CLIENT_PASSWORD} | sudo -S nping --delay ${delay} ${host} -c ${count} -p ${port} --${packet_type}
+
+    ${rc}  ${output}=  Run And Return RC And Output  ${cmd_buff}
     Should Be Equal As Integers  ${rc}  0  msg=Command execution failed.
-    ${packet_loss}  Get Packet Loss  ${host}  ${output}
+    ${packet_loss}=  Get Packet Loss  ${host}  ${output}
     RETURN  ${packet_loss}
 
 Get Packet Loss

@@ -29,7 +29,8 @@ Verify Network Interfaces
     @{interface_names}=  Get OS Network Interface Names
     FOR  ${interface_name}  IN  @{interface_names}
        ${ethtool_dict}=  Get OS Ethtool  ${interface_name}
-       Run Keyword If  ${FAIL_ON__LINK_DOWN} == 1
-       ...  Should Be Equal  ${ethtool_dict['link_detected']}  yes
-       ...  msg=Link ${interface_name} is down.
+       IF  ${FAIL_ON__LINK_DOWN} == 1
+           Should Be Equal  ${ethtool_dict['link_detected']}  yes
+           ...  msg=Link ${interface_name} is down.
+       END
     END

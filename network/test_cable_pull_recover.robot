@@ -21,7 +21,7 @@ Resource        ../lib/os_utilities.robot
 
 Suite Setup     Test Setup Execution
 
-Test Tags      Cable_Pull_Recover
+Test Tags       Cable_Pull_Recover
 
 *** Variables ***
 
@@ -53,10 +53,11 @@ Set Switch Port State
     Device Write  enable
     Device Write  configure terminal
     Device Write  interface port ${PORT_NUMBER}
-    Run Keyword If  '${state}' == 'DOWN'
-    ...    Device Write  shutdown
-    ...  ELSE
-    ...    Device Write  no shutdown
+    IF  '${state}' == 'DOWN'
+        Device Write  shutdown
+    ELSE
+        Device Write  no shutdown
+    END
     Wait Until Keyword Succeeds  30 sec  5 sec
     ...  Check Network Interface State  ${state}
 
