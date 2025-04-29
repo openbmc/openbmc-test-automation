@@ -184,8 +184,9 @@ Create IPMI Random User With Password And Privilege
     Run IPMI Standard Command  user enable ${random_userid}
 
     # Set given privilege and enable IPMI messaging for newly created user.
-    Run Keyword If  '${privilege}' != '0'
-    ...  Set Channel Access  ${random_userid}  ipmi=on privilege=${privilege}
+    IF  '${privilege}' != '0'
+        Set Channel Access  ${random_userid}  ipmi=on privilege=${privilege}
+    END
 
     RETURN  ${random_username}  ${random_userid}
 
@@ -248,8 +249,12 @@ Find And Return Free User Id
         ${is_empty}=  Run Keyword And Return Status
         ...  Should Match Regexp  ${name_line}  ${empty_name_pattern}
 
-        Exit For Loop If  ${is_empty} == ${True}
+        IF  ${is_empty} == ${True}  BREAK
     END
-    Run Keyword If  '${index}' == '299'  Fail  msg=A free user ID could not be found.
+
+    IF  '${index}' == '299'
+        Fail  msg=A free user ID could not be found.
+    END
+
     RETURN  ${random_userid}
 
