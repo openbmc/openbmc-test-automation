@@ -278,8 +278,9 @@ Set Initial VLAN Config
         ...  ${vlan_record['${uri}']['PrefixLength']}
     END
 
-    Run Keyword If  @{uris} == @{EMPTY}
-    ...  Append To List  ${initial_vlan_config}  ${id}  ${EMPTY}  ${EMPTY}
+    IF  @{uris} == @{EMPTY}
+        Append To List  ${initial_vlan_config}  ${id}  ${EMPTY}  ${EMPTY}
+    END
 
 
 Suite Teardown Execution
@@ -290,15 +291,16 @@ Suite Teardown Execution
 
     ${previous_id}=  Set Variable  ${EMPTY}
     FOR  ${index}  IN RANGE  0  ${length}  3
-
-        Run Keyword If  '${initial_vlan_config[${index+1}]}' == '${EMPTY}'
-        ...  Create VLAN  ${initial_vlan_config[${index}]}
-        ...  ELSE IF  '${previous_id}' == '${initial_vlan_config[${index}]}'
-        ...  Configure Network Settings On VLAN  ${initial_vlan_config[${index}]}
-        ...  ${initial_vlan_config[${index+1}]}  ${initial_vlan_config[${index+2}]}
-        ...  ELSE  Run Keywords  Create VLAN  ${initial_vlan_config[${index}]}  AND
-        ...  Configure Network Settings On VLAN  ${initial_vlan_config[${index}]}
-        ...  ${initial_vlan_config[${index+1}]}  ${initial_vlan_config[${index+2}]}
+        IF  '${initial_vlan_config[${index+1}]}' == '${EMPTY}'
+            Create VLAN  ${initial_vlan_config[${index}]}
+        ELSE IF  '${previous_id}' == '${initial_vlan_config[${index}]}'
+            Configure Network Settings On VLAN  ${initial_vlan_config[${index}]}
+            ...  ${initial_vlan_config[${index+1}]}  ${initial_vlan_config[${index+2}]}
+        ELSE
+            Create VLAN  ${initial_vlan_config[${index}]}
+            Configure Network Settings On VLAN  ${initial_vlan_config[${index}]}
+            ...  ${initial_vlan_config[${index+1}]}  ${initial_vlan_config[${index+2}]}
+        END
 
         ${previous_id}=  Set Variable  ${initial_vlan_config[${index}]}
     END
@@ -352,12 +354,12 @@ Get VLAN URI For IP
     ${status}=  Run Keyword And Return Status  Should Be True  ${num_vlan_records} > 0
     ...  msg=Could not find a uri for vlan "${vlan_id}" with IP "${vlan_ip}".
 
-    Run Keyword If  '${expected_result}' == 'valid'
-    ...      Should Be Equal  ${status}  ${True}
-    ...      msg=VLAN IP URI doesn't exist!.
-    ...  ELSE
-    ...      Should Be Equal  ${status}  ${False}
-    ...      msg=VLAN IP URI exists!.
+    IF  '${expected_result}' == 'valid'
+        Should Be Equal  ${status}  ${True}  msg=VLAN IP URI doesn't exist!.
+    ELSE
+        Should Be Equal  ${status}  ${False} msg=VLAN IP URI exists!.
+    END
+
     ${uris}=  Get Dictionary Keys  ${vlan_record}
     Return From Keyword If  @{uris} == @{EMPTY}
 
@@ -383,9 +385,8 @@ Verify Existence Of VLAN
 
     Should Be Equal  ${rest_status}  ${cli_status}
     ...  msg=REST and CLI Output are not the same.
-    Run Keyword If  '${expected_result}' == 'valid'
-    ...      Should Be Equal  ${rest_status}  ${True}
-    ...      msg=VLAN ID doesn't exist!.
-    ...  ELSE
-    ...      Should Be Equal  ${rest_status}  ${False}
-    ...      msg=VLAN ID exists!.
+    IF  '${expected_result}' == 'valid'
+        Should Be Equal  ${rest_status}  ${True}  msg=VLAN ID doesn't exist!.
+    ELSE
+        Should Be Equal  ${rest_status}  ${False}  msg=VLAN ID exists!.
+    END
