@@ -26,11 +26,11 @@ Test Turbo Allowed SDR Info
 
     ${state_ipmi}=  Get SDR Presence Via IPMI  turbo_allowed${SPACE}
 
-    Run Keyword If  '${state_ipmi}' == 'Disabled'
-    ...    Should Be True  ${state_rest} == ${0}
-    ...  ELSE IF  '${state_ipmi}' == 'State Asserted'
-    ...    Should Be True  ${state_rest} == ${1}
-
+    IF  '${state_ipmi}' == 'Disabled'
+        Should Be True  ${state_rest} == ${0}
+    ELSE IF  '${state_ipmi}' == 'State Asserted'
+        Should Be True  ${state_rest} == ${1}
+    END
 
 *** Keywords ***
 

@@ -784,10 +784,10 @@ Error Logging Rotation Policy
     ${percent_diff}=  Evaluate  ${disk_usage_percentage} - ${max_allocated_space_percentage}
     ${percent_diff}=   Evaluate  abs(${percent_diff})
 
-    ${trimmed_as_expected}=  Run Keyword If  ${disk_usage_percentage} > ${max_allocated_space_percentage}
-    ...  Evaluate  ${percent_diff} <= 0.5
-    ...  ELSE
-    ...  Set Variable  True
+    ${eval_value}=  Evaluate  ${percent_diff} <= 0.5
+
+    ${trimmed_as_expected}=  Set Variable If  ${disk_usage_percentage} > ${max_allocated_space_percentage}
+    ...  ${eval_value}  True
 
     # Check PEL log count via peltool command and compare it with actual generated log count.
     ${pel_records}=  peltool  -n
@@ -795,9 +795,9 @@ Error Logging Rotation Policy
     # Number of logs can be 80% of the total logs created after trimming.
     ${expected_max_record}=   Evaluate  3000 * 0.8
 
-    Run Keyword If  ${trimmed_as_expected} == False
-    ...  Should Be True  ${no_pel_records} <= ${expected_max_record}
-
+    IF  ${trimmed_as_expected} == False
+        Should Be True  ${no_pel_records} <= ${expected_max_record}
+    END
 
 Create Error Log
     [Documentation]  Create an error log.
@@ -875,7 +875,7 @@ Get PEL Log IDs
 
       ${pel_section_output}=  Get From Dictionary  ${pel_output}  ${pel_section}
       ${pel_field_output}=  Get From Dictionary  ${pel_section_output}  ${pel_field}
-      Run Keyword If  '${pel_field_output}' in @{pel_field_value}  Append To List  ${pel_id_list}  ${id}
+      IF  '${pel_field_output}' in @{pel_field_value}  Append To List  ${pel_id_list}  ${id}
     END
     Sort List  ${pel_id_list}
 
@@ -943,21 +943,23 @@ Verify PEL Transmission To Host
     # expected_transmission_state        Expected host transmission state of PEL log.
 
     # Get system in required state.
-    Run Keyword If  '${host_state}' == 'Off'
-    ...  Redfish Power Off  stack_mode=skip
-    ...  ELSE IF  '${host_state}' == 'On'
-    ...  Run Keywords  Redfish Power On  stack_mode=skip  AND
-    ...  Wait For Host To Ping  ${OS_HOST}  5 min  10 sec
+    IF  '${host_state}' == 'Off'
+        Redfish Power Off  stack_mode=skip
+    ELSE IF  '${host_state}' == 'On'
+        Redfish Power On  stack_mode=skip
+        Wait For Host To Ping  ${OS_HOST}  5 min  10 sec
+    END
 
     Redfish Purge Event Log
 
     # Inject required error log.
-    Run Keyword If  "${error_type}" == "informational_error"
-    ...  BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
-    ...  ELSE IF  "${error_type}" == "unrecoverable_error"
-    ...  BMC Execute Command  ${CMD_UNRECOVERABLE_ERROR}
-    ...  ELSE IF  "${error_type}" == "predictive_error"
-    ...  BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
+    IF  "${error_type}" == "informational_error"
+        BMC Execute Command  ${CMD_INFORMATIONAL_ERROR}
+    ELSE IF  "${error_type}" == "unrecoverable_error"
+        BMC Execute Command  ${CMD_UNRECOVERABLE_ERROR}
+    ELSE IF  "${error_type}" == "predictive_error"
+       BMC Execute Command  ${CMD_PREDICTIVE_ERROR}
+    END
 
     ${pel_records}=  Get Pel Data From Bmc  True  True
     ${ids}=  Get Dictionary Keys  ${pel_records}
@@ -965,16 +967,17 @@ Verify PEL Transmission To Host
 
     # Check host transmission state for the cases where PEL is
     # expected to be  offloaded to HOST.
-    Run Keyword If  "${expected_transmission_state}" == "Acked"
-    ...  Wait Until Keyword Succeeds  15 min  10 sec
-    ...  Check If PEL Transmission State Is Expected  ${pel_id}  Acked
+    IF  "${expected_transmission_state}" == "Acked"
+         Wait Until Keyword Succeeds  15 min  10 sec
+         ...  Check If PEL Transmission State Is Expected  ${pel_id}  Acked
+    END
 
     # Adding delay before checking host transmission for the cases where PEL is
     # not expected to be offloaded to HOST.
-    Run Keyword If  "${expected_transmission_state}" == "Not sent"
-    ...  Run Keywords  Sleep  120s  AND
-    ...  Check If PEL Transmission State Is Expected  ${pel_id}  Not sent
-
+    IF  "${expected_transmission_state}" == "Not sent"
+        Sleep  120s
+        Check If PEL Transmission State Is Expected  ${pel_id}  Not sent
+    END
 
 Check If PEL Transmission State Is Expected
     [Documentation]  Check if PEL's host transmission state is matching expected state.
