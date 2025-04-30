@@ -187,7 +187,7 @@ Get IPMI FRU Devices Data
         ${dev}=  Split String  ${devices}  \n
         FOR  ${device}  IN  @{dev}
             ${ipmi_fru_board_serial_status}=  Run Keyword And Return Status  Should Contain  ${device}  Board Serial
-            Exit For Loop If  '${ipmi_fru_board_serial_status}' == 'True'
+            IF  '${ipmi_fru_board_serial_status}' == 'True'  BREAK
         END
         ${frudata}=  Get From List  ${output}  ${num}
         ${serial_no}=  Run Keyword If  '${ipmi_fru_board_serial_status}' == 'True'

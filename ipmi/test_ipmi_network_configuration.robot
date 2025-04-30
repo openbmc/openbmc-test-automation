@@ -62,7 +62,7 @@ Verify IPMI Inband Network Configuration
     FOR  ${ipv4_address}  IN  @{ipv4_addresses}
         ${ip_address}=  Set Variable if  '${ipv4_address['Address']}' == '${STATIC_IP}'
                         ...  ${ipv4_address}
-        Exit For Loop If  ${ip_address} != None
+        IF  ${ip_address} != None  BREAK
     END
 
     Should Be Equal  ${ip_address['AddressOrigin']}  Static

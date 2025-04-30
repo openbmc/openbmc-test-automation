@@ -333,7 +333,7 @@ Find Free User Id
         ${is_empty}=  Run Keyword And Return Status
         ...  Should Match Regexp  ${name_line}  ${empty_name_pattern}
 
-        Exit For Loop If  ${is_empty} == ${True}
+        IF  ${is_empty} == ${True}  BREAK
     END
     Run Keyword If  '${jj}' == '299'  Fail  msg=A free user ID could not be found.
     RETURN  ${random_userid}

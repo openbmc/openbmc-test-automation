@@ -144,7 +144,7 @@ Get The Sensor Name And Threshold
     FOR  ${RANGE}  IN RANGE  0  ${sensor_count}
       ${random_sensor}  ${sensor_threshold}=  Selecting Random Sensor Name And Threshold Value  ${tmp_list}  ${sensor_list}
       ${threshold_dict_count}=  Get Length  ${sensor_threshold}
-      Exit For Loop If  '${threshold_dict_count}' != '0'
+      IF  '${threshold_dict_count}' != '0'  BREAK
       Remove Values From List  ${tmp_list}  ${random_sensor}
     END
 

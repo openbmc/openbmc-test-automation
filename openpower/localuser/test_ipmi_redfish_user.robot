@@ -32,7 +32,7 @@ Create IPMI User Without Any Privilege And Verify Via Redfish
     ...  user set name ${random_userid} ${random_username}
 
     # Verify new user privilege level via Redfish.
-    ${privilege}=  Redfish_Utils.Get Attribute
+    ${privilege}=  Redfish.Get Attribute
     ...  /redfish/v1/AccountService/Accounts/${random_username}  RoleId
     Valid Value  privilege  ['ReadOnly']
 
