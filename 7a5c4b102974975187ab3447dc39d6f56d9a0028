@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bd67cb9_acc082b0",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-04-30T06:30:54Z",
+      "side": 1,
+      "message": "Remove it if not used.. \n\nand the variable trimmed_as_expected is inside the IF and not declared earlier.. it might fail.. the best u can do is here\n\n\n\n     ${eval_value}\u003d  Evaluate  ${percent_diff} \u003c\u003d 0.5\n\n     ${trimmed_as_expected}\u003d  Set Variable If  ${disk_usage_percentage} \u003e ${max_allocated_space_percentage}\n     ...  ${eval_value}\n     ...  True",
+      "range": {
+        "startLine": 787,
+        "startChar": 0,
+        "endLine": 790,
+        "endChar": 28
+      },
+      "revId": "7a5c4b102974975187ab3447dc39d6f56d9a0028",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
