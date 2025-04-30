@@ -32,7 +32,7 @@ Create IPMI User Without Any Privilege And Verify Via Redfish
     ...  user set name ${random_userid} ${random_username}
 
     # Verify new user privilege level via Redfish.
-    ${privilege}=  Redfish_Utils.Get Attribute
+    ${privilege}=  Redfish.Get Attribute
     ...  /redfish/v1/AccountService/Accounts/${random_username}  RoleId
     Valid Value  privilege  ['ReadOnly']
 
@@ -248,7 +248,7 @@ Find And Return Free User Id
         ${is_empty}=  Run Keyword And Return Status
         ...  Should Match Regexp  ${name_line}  ${empty_name_pattern}
 
-        Exit For Loop If  ${is_empty} == ${True}
+        IF  ${is_empty} == ${True}  BREAK
     END
     Run Keyword If  '${index}' == '299'  Fail  msg=A free user ID could not be found.
     RETURN  ${random_userid}
