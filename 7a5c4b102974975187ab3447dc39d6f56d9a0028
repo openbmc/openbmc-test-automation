@@ -22,6 +22,30 @@
       },
       "revId": "7a5c4b102974975187ab3447dc39d6f56d9a0028",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdbe6895_9cbd52d3",
+        "filename": "openpower/pel/test_bmc_pel.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-04-30T06:39:14Z",
+      "side": 1,
+      "message": "thanks for correcting",
+      "parentUuid": "9bd67cb9_acc082b0",
+      "range": {
+        "startLine": 787,
+        "startChar": 0,
+        "endLine": 790,
+        "endChar": 28
+      },
+      "revId": "7a5c4b102974975187ab3447dc39d6f56d9a0028",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
