@@ -27,9 +27,10 @@ Verify No BMC Dump And Application Failures In BMC
 
     Log To Console  ${resp}
 
-    Run Keyword If  '${resp.status}' == '${HTTP_OK}'
-    ...  Should Be Equal As Strings  ${resp.dict["Members@odata.count"]}  0
-    ...  msg=${resp.dict["Members@odata.count"]} dumps exist.
+    IF  '${resp.status}' == '${HTTP_OK}'
+        Should Be Equal As Strings  ${resp.dict["Members@odata.count"]}  0
+        ...  msg=${resp.dict["Members@odata.count"]} dumps exist.
+    END
 
     Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b  filter_string=${SKIP_ERROR}
 

@@ -24,7 +24,8 @@ ${REDFISH_DELETE_SESSIONS}  ${0}
 *** Test Cases ***
 
 Create Session And Verify Response Code Using Different Credentials
-    [Documentation]  Create session and verify response code using different credentials.
+    [Documentation]  Create session and verify response code using different
+    ...              credentials.
     [Tags]  Create_Session_And_Verify_Response_Code_Using_Different_Credentials
     [Template]  Create Session And Verify Response Code
 
@@ -37,7 +38,8 @@ Create Session And Verify Response Code Using Different Credentials
 
 
 Create Session And Verify Response Code Using Operator Credentials
-    [Documentation]  Create session and verify response code using operator credentials.
+    [Documentation]  Create session and verify response code using operator
+    ...              credentials.
     [Tags]  Create_Session_And_Verify_Response_Code_Using_Operator_Credentials
     [Template]  Create Session And Verify Response Code
 
@@ -65,10 +67,11 @@ Set Session Timeout And Verify Response Code
 
 
 Set Session Timeout And Verify Session After Timeout
-    [Documentation]  Set timeout for session service and verify session is deleted after timeout.
+    [Documentation]  Set timeout for session service and verify session is
+    ...              deleted after timeout.
     [Tags]  Set_Session_Timeout_And_Verify_Session_After_Timeout
-    [Teardown]  Set Session Timeout And Verify   ${Default_Timeout_Value}  ${HTTP_OK}
     [Template]  Set Session Timeout And Verify Session Deleted After Timeout
+    [Teardown]  Set Session Timeout And Verify   ${Default_Timeout_Value}  ${HTTP_OK}
 
     #timeout Value
     ${30}
@@ -76,7 +79,8 @@ Set Session Timeout And Verify Session After Timeout
 
 
 Verify Session Login And Logout For Newly Created User
-    [Documentation]  Verify able to login and logout using the session created for new user.
+    [Documentation]  Verify able to login and logout using the session created
+    ...              for new user.
     [Tags]  Verify_Session_Login_And_Logout_For_Newly_Created_User
     [Teardown]  Redfish.Login
 
@@ -235,8 +239,9 @@ Set Session Timeout And Verify
     ${session_timeout}=  Redfish.Get Attribute
     ...  ${REDFISH_BASE_URI}SessionService  SessionTimeout
 
-    Run Keyword If  ${valid_status_code}==${HTTP_OK}
-    ...  Valid Value  session_timeout  [${value}]
+    IF  ${valid_status_code}==${HTTP_OK}
+        Valid Value  session_timeout  [${value}]
+    END
 
 
 Create Session And Check Session Timeout
@@ -254,7 +259,7 @@ Create Session And Check Session Timeout
 
     Redfish.Get  ${REDFISH_SESSION}  valid_status_codes=[${HTTP_UNAUTHORIZED}]
     # Since sessions will deleted so logging again.
-    Redfish.login
+    Redfish.Login
     ${session_list}=  Redfish.Get Members List  /redfish/v1/SessionService/Sessions
 
     List Should Not Contain Value  ${session_list}  ${session_id}
@@ -286,11 +291,11 @@ Suite Setup Execution
     Redfish.Login
 
     # Skip operator user if SKIP_OPERATOR_USER is 1.
-    Run Keyword If
-    ...  ${SKIP_OPERATOR_USER} == ${1}
-    ...  Set Suite Variable  &{USERS}  Administrator=${ADMIN}
-    ...  ELSE
-    ...  Set Suite Variable  &{USERS}  Administrator=${ADMIN}  Operator=${OPERATOR}
+    IF  ${SKIP_OPERATOR_USER} == ${1}
+        Set Suite Variable  &{USERS}  Administrator=${ADMIN}
+    ELSE
+        Set Suite Variable  &{USERS}  Administrator=${ADMIN}  Operator=${OPERATOR}
+    END
 
     Create Users With Different Roles  users=${USERS}  force=${True}
     Get Default Timeout Value
