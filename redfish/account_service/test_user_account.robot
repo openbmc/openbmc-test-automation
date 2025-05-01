@@ -578,9 +578,14 @@ Redfish Create User
     Bmc Execute Command  ${cmd}
 
     # Verify login with created user.
-    ${status}=  Run Keyword If  '${login_check}' == '${True}'
-    ...  Verify Redfish User Login  ${username}  ${password}
-    Run Keyword If  '${login_check}' == '${True}'  Should Be Equal  ${status}  ${enabled}
+    IF  '${login_check}' == '${True}'
+        ${status}=  Run Keyword And Return Status
+        ...  Verify Redfish User Login  ${username}  ${password}
+    ELSE
+        ${status}=  Set Variable  ${False}
+    END
+
+    IF  '${login_check}' == '${True}'  Should Be Equal  ${status}  ${enabled}
 
     # Validate Role ID of created user.
     ${role_config}=  Redfish_Utils.Get Attribute
@@ -754,18 +759,20 @@ Template For Configure Auth Methods
     # Patch basicauth to TRUE
     Configure AuthMethods  ${auth_method}=${TRUE}
 
-    Run Keyword IF  "${auth_method}" == "XToken"
-    ...    Check XToken Works Fine  ${HTTP_OK}
-    ...  ELSE
-    ...    Check BasicAuth Works Fine  ${HTTP_OK}
+    IF  "${auth_method}" == "XToken"
+        Check XToken Works Fine  ${HTTP_OK}
+    ELSE
+        Check BasicAuth Works Fine  ${HTTP_OK}
+    END
 
     # Patch basicauth to FALSE
     Configure AuthMethods  ${auth_method}=${FALSE}
 
-    Run Keyword IF  "${auth_method}" == "BasicAuth"
-    ...    Check BasicAuth Works Fine  ${HTTP_UNAUTHORIZED}
-    ...  ELSE
-    ...    Check XToken Works Fine  ${HTTP_UNAUTHORIZED}
+    IF  "${auth_method}" == "BasicAuth"
+        Check BasicAuth Works Fine  ${HTTP_UNAUTHORIZED}
+    ELSE
+        Check XToken Works Fine  ${HTTP_UNAUTHORIZED}
+    END
 
 Configure AuthMethods
     [Documentation]  Enable/disable authmethod types.

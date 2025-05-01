@@ -766,8 +766,11 @@ Verify Host Power Status
     ${power_status}=  Redfish.Get Attribute  /redfish/v1/Chassis/${CHASSIS_ID}  PowerState
     Return From Keyword If  '${power_status}' == '${expected_power_status}'
 
-    Run Keyword If  '${power_status}' == 'Off'  Redfish Power On
-    ...  ELSE  Redfish Power Off
+    IF  '${power_status}' == 'Off'
+        Redfish Power On
+    ELSE
+        Redfish Power Off
+    END
 
 Update LDAP User Role And Host Poweroff
     [Documentation]  Update LDAP user role and do host poweroff.
