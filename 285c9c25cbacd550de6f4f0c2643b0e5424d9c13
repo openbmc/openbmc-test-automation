@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18198517_87d23acc",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-05-02T05:49:49Z",
+      "side": 1,
+      "message": "Is END not required here?",
+      "range": {
+        "startLine": 339,
+        "startChar": 3,
+        "endLine": 339,
+        "endChar": 13
+      },
+      "revId": "285c9c25cbacd550de6f4f0c2643b0e5424d9c13",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffc4637c_479361c3",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-05-02T05:49:49Z",
+      "side": 1,
+      "message": "same question as before",
+      "range": {
+        "startLine": 588,
+        "startChar": 4,
+        "endLine": 588,
+        "endChar": 16
+      },
+      "revId": "285c9c25cbacd550de6f4f0c2643b0e5424d9c13",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
