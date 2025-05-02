@@ -55,7 +55,7 @@ Firmware Switch Loop
         Log To Console   LOOP_COUNT:${count} execution.
         Redfish BMC Switch Firmware Side
 
-        Continue For Loop If  '${power_on}' == 'NO'
+        IF  '${power_on}' == 'NO'  CONTINUE
 
         Log To Console   Power on requested, issuing power on.
         Redfish Power On
@@ -95,7 +95,7 @@ Redfish BMC Switch Firmware Side
 
     # Get the backup firmware version for reference.
     FOR  ${id}  IN  @{fw_inv_dict.keys()}
-        Continue For Loop If  '${fw_inv_dict['${id}']['functional']}' == 'True'
+        IF  '${fw_inv_dict['${id}']['functional']}' == 'True'  CONTINUE
         # Find the non functional id and fetch the version.
         ${image_version}=  Set Variable  ${fw_inv_dict['${id}']['version']}
     END

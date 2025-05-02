@@ -79,8 +79,7 @@ Verify MAC Address Property Is Populated
         Log Dictionary  ${active_channel_config["${channel_number}"]}
 
         # Skip channel if is_valid is false for the channel number
-        Continue For Loop If
-        ...  ${active_channel_config["${channel_number}"]["is_valid"]}==${FALSE}
+        IF  ${active_channel_config["${channel_number}"]["is_valid"]}==${FALSE}  CONTINUE
 
         # Get ethernet valid paths in redfish.
         # Example: ['/redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces']

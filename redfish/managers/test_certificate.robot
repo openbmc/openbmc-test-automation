@@ -243,8 +243,7 @@ Verify Certificates Location Via Redfish
     ${match}=  Set Variable  ${False}
 
     FOR  ${Certificates_dict}  IN  @{Links['Certificates']}
-       Continue For Loop If
-       ...  "${Certificates_dict['@odata.id']}}" != "${match_cert}}"
+       IF  "${Certificates_dict['@odata.id']}}" != "${match_cert}}"  CONTINUE
        ${match}=  Set Variable  ${True}
     END
 

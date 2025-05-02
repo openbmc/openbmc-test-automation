@@ -289,7 +289,7 @@ Compare IPMI FRU with DBUS
         FOR  ${subkeys}  IN  @{ipmi_fru_subkeys}
             ${key_status}=  Run Keyword And Return Status  Dictionary Should Contain Key
             ...  ${ipmi_dbus_name_mapping}  ${subkeys}
-            Continue For Loop If  '${key_status}' == 'False'
+            IF  '${key_status}' == 'False'  CONTINUE
             ${property_name}=  Get From Dictionary  ${ipmi_dbus_name_mapping}  ${subkeys}
             ${dbus_data}=  Get Lines Containing String  ${dbus_resp}  ${property_name}
             ${dbus_value}=  Set Variable  ${dbus_data.split('"')[1].strip()}

@@ -372,7 +372,7 @@ Verify Identify LED State Via Redfish
     FOR  ${system}  IN  @{systems}
         ${led_value}=  Redfish.Get Attribute  ${system}  LocationIndicatorActive
         # Get attribute return None if IndicatorLED does not exist in the URI.
-        Continue For Loop If  '${led_value}' == 'None'
+        IF  '${led_value}' == 'None'  CONTINUE
         Should Be True  '${led_value}' == '${expected_state}'
     END
 

@@ -132,7 +132,7 @@ Get The Sensor Name And Threshold
     # Omit the discrete sensor and create an threshold sensor name list
     FOR  ${sensor}  IN  @{sensor_list_lines}
       ${discrete_sensor_status}=  Run Keyword And Return Status  Should Contain  ${sensor}  discrete
-      Continue For Loop If  '${discrete_sensor_status}' == 'True'
+      IF  '${discrete_sensor_status}' == 'True'  CONTINUE
       ${sensor_details}=  Split String  ${sensor}  |
       ${get_sensor_name}=  Get From List  ${sensor_details}  0
       ${sensor_name}=  Set Variable  ${get_sensor_name.strip()}

@@ -112,7 +112,7 @@ Power Check
         ...  Remove Values From List  ${power_uri_list}  ${idx}
 
         # Check the next available element in the list.
-        Continue For Loop If  "${value}" == "${EMPTY}"
+        IF  "${value}" == "${EMPTY}"  CONTINUE
 
         Valid Dict  power_control[${0}]  ['PowerConsumedWatts']
 

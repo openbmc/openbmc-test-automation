@@ -204,7 +204,7 @@ Test BMC GUI Stability On Continuous Refresh Of GUI Home Page
         Log To Console  ${iter}th Refresh of home page
 
         Refresh GUI
-        Continue For Loop If   ${iter}%100 != 0
+        IF   ${iter}%100 != 0  CONTINUE
 
         # Every 100th iteration, check BMC GUI is responsive.
         ${status}=  Run Keyword And Return Status
@@ -248,7 +248,7 @@ Test Bmcweb Stability On Continuous Redfish Delete Operation Request Without Ses
 
         Run Keyword And Ignore Error
         ...  Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
-        Continue For Loop If   ${iter}%100 != 0
+        IF   ${iter}%100 != 0  CONTINUE
 
         # Every 100th iteration, check delete operation with valid session token.
         ${status}=  Run Keyword And Return Status
@@ -359,7 +359,7 @@ Invalid Credentials Redfish Login Attempts
     FOR  ${iter}  IN RANGE  ${iterations}
         Log To Console  ${iter}th Redfish login with invalid credentials
         Run Keyword And Ignore Error  Redfish.Login   ${login_username}  incorrect_password
-        Continue For Loop If   ${iter}%100 != 0
+        IF   ${iter}%100 != 0  CONTINUE
 
         # Every 100th iteration, check Redfish is responsive.
         ${status}=  Run Keyword And Return Status
