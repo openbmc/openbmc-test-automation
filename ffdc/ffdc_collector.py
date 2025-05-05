@@ -462,6 +462,7 @@ class ffdc_collector:
         self.elapsed_time = time.strftime(
             "%H:%M:%S", time.gmtime(time.time() - self.start_time)
         )
+        self.logger.info("\n\tTotal time taken: %s" % self.elapsed_time)
         if self.ssh_remoteclient:
             self.ssh_remoteclient.ssh_remoteclient_disconnect()
         if self.telnet_remoteclient:
@@ -481,7 +482,7 @@ class ffdc_collector:
             self.group_copy(self.ffdc_actions[target_type][sub_type])
         else:
             self.collect_and_copy_ffdc(
-                self.ffdc_actions[target_type][sub_type]
+                 self.ffdc_actions[target_type][sub_type]
             )
 
     def protocol_telnet(self, target_type, sub_type):
