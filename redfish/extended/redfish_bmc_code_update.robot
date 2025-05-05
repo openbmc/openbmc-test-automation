@@ -71,9 +71,11 @@ Redfish BMC Code Update
     ${nonfunctional_sw_inv}=  Get Non Functional Firmware  ${sw_inv}  False
 
     # Redfish active software image API.
-    Run Keyword If  ${num_records} > 0
-    ...  Run Keyword If  '${nonfunctional_sw_inv['version']}' == '${image_version}'
-    ...  Set Backup Firmware To Functional  ${image_version}  ${state}
+    IF  ${num_records} > 0
+        IF  '${nonfunctional_sw_inv['version']}' == '${image_version}'
+            Set Backup Firmware To Functional  ${image_version}  ${state}
+        END
+    END
 
     Print Timen  Performing firmware update ${image_version}.
 
@@ -197,7 +199,7 @@ Activate Existing Firmware
 
     # If no software inventory record was found, there is no existing
     # firmware for the given version and therefore no action to be taken.
-    Return From Keyword If  not ${num_keys}
+    IF  not ${num_keys}  RETURN
 
     # Check if the existing firmware is functional.
     Pass Execution If  ${software_inventory_record['functional']}
@@ -241,7 +243,8 @@ Set BMC Image Priority To Least
     ${cur_priority}=  Get Image Priority  ${image_version}
     Rprint Vars  least_priority  cur_priority
 
-    Return From Keyword If  '${least_priority}' == ${cur_priority}
+    IF  '${least_priority}' == ${cur_priority}  RETURN
+
     Set Host Software Property
     ...  ${SOFTWARE_VERSION_URI}${software_inventory['image_id']}
     ...  Priority  ${least_priority}
