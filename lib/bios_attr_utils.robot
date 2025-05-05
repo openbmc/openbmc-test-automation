@@ -106,8 +106,9 @@ Switch And Verify BIOS Attribute Firmware Boot Side
     Log To Console  Current firmware boot side :: ${cur_boot_side["fw_boot_side"]}
     Log To Console  Given firmware boot side :: ${set_fw_boot_side}
 
-    Return From Keyword If  "${cur_boot_side["fw_boot_side_current"]}" == "${set_fw_boot_side}"
-    ...  ${True}
+    IF  "${cur_boot_side["fw_boot_side_current"]}" == "${set_fw_boot_side}"
+        RETURN  ${True}
+    END
 
     # Set the given firmware boot side value.
     Set BIOS Attribute Value And Verify  fw_boot_side  ${set_fw_boot_side}  False

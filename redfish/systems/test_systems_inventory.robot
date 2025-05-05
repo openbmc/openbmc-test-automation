@@ -22,7 +22,6 @@ ${min_num_power_supplies}  1
 
 *** Test Cases ***
 
-
 Verify CPU And Core Count
     [Documentation]  Get the total number of CPUs and cores in the system.
     ...              Verify counts are above minimums.
@@ -108,7 +107,7 @@ Get Available Power Supplies And Verify
         ${state}=  Set Variable  ${power_supply['Status']['State']}
         ${good_state}=  Evaluate
         ...  any(x in '${state}' for x in ('Enabled', 'StandbyOffline'))
-        Run Keyword If  not ${good_state}  Continue For Loop
+        IF  not ${good_state}  CONTINUE
         ${total_num_supplies}=  Evaluate  $total_num_supplies + ${1}
     END
 
@@ -174,7 +173,7 @@ Get CPU TotalCores
     #               "/redfish/v1/Systems/system/Processors/cpu0").
 
     ${total_cores}=  Redfish.Get Attribute  ${processor}  TotalCores
-    Return From Keyword If  ${total_cores} is ${NONE}  ${0}
+    IF  ${total_cores} is ${NONE}  RETURN  ${0}
     RETURN  ${total_cores}
 
 
@@ -191,8 +190,9 @@ GPU State Check
         ${good_state}=  Evaluate
         ...  any(x in '${state}' for x in ('Absent', 'Enabled', 'UnavailableOffline'))
         Rprint Vars  gpu  state
-        Run Keyword If  not ${good_state}  Fail
-        ...  msg=GPU State is not Absent, Enabled, or UnavailableOffline.
+        IF  not ${good_state}
+            Fail  msg=GPU State is not Absent, Enabled, or UnavailableOffline.
+        END
     END
 
 
@@ -200,18 +200,26 @@ Get Inventory URIs
     [Documentation]  Get and return a tuple of lists of URIs for CPU,
     ...              GPU and PowerSupplies.
 
+    Log To Console  =================: ${SYSTEM_BASE_URI}
+
     ${processor_info}=  Redfish_Utils.Enumerate Request
     ...  ${SYSTEM_BASE_URI}Processors  return_json=0
+    Log To Console  ==================: ${processor_info}
 
     ${cpu_info}=  Filter Struct  ${processor_info}
     ...  [('ProcessorType', 'CPU')]  regex=1
 
+    Log To Console  ================cpu_info ==:  ${cpu_info}
+
     ${gpu_info}=  Filter Struct  ${processor_info}
     ...  [('ProcessorType', 'Accelerator')]  regex=1
+
+    Log To Console  ================ gpu_info: ${gpu_info}
 
     ${power_supplies}=  Redfish.Get Attribute
     ...  ${REDFISH_CHASSIS_URI}${CHASSIS_ID}/Power  PowerSupplies
 
+    Log To Console  ================== power_supplies: ${power_supplies}
     RETURN  ${cpu_info}  ${gpu_info}  ${power_supplies}
 
 
@@ -244,7 +252,7 @@ Suite Setup Execution
     [Documentation]  Do test case setup tasks.
 
     Redfish.Login
-    Redfish Power On  stack_mode=skip
+#    Redfish Power On  stack_mode=skip
 
     ${cpu_info}  ${gpu_info}  ${power_supplies}=  Get Inventory URIs
 

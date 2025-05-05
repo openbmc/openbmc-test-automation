@@ -632,7 +632,7 @@ Restore LDAP URL
 Restore AccountLockout Attributes
     [Documentation]  Restore AccountLockout Attributes.
 
-    Return From Keyword If  &{old_account_service} == &{EMPTY}
+    IF  &{old_account_service} == &{EMPTY}  RETURN
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body=[('AccountLockoutDuration', ${old_account_service['AccountLockoutDuration']})]
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
@@ -740,7 +740,7 @@ Get LDAP Privilege
 
     ${ldap_config}=  Get LDAP Configuration  ${LDAP_TYPE}
     ${num_list_entries}=  Get Length  ${ldap_config["RemoteRoleMapping"]}
-    Return From Keyword If  ${num_list_entries} == ${0}  @{EMPTY}
+    IF  ${num_list_entries} == ${0}  @{EMPTY}  RETURN
 
     RETURN  ${ldap_config["RemoteRoleMapping"][0]["LocalRole"]}
 
@@ -749,7 +749,7 @@ Restore LDAP Privilege
     [Documentation]  Restore the LDAP privilege to its original value.
 
     Redfish.Login
-    Return From Keyword If  '${old_ldap_privilege}' == '${EMPTY}' or '${old_ldap_privilege}' == '[]'
+    IF  '${old_ldap_privilege}' == '${EMPTY}' or '${old_ldap_privilege}' == '[]'  RETURN
     # Log back in to restore the original privilege.
     Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
     ...  ${old_ldap_privilege}  ${GROUP_NAME}
@@ -764,10 +764,13 @@ Verify Host Power Status
     # expected_power_status  State of Host e.g. Off or On.
 
     ${power_status}=  Redfish.Get Attribute  /redfish/v1/Chassis/${CHASSIS_ID}  PowerState
-    Return From Keyword If  '${power_status}' == '${expected_power_status}'
+    IF  '${power_status}' == '${expected_power_status}'  RETURN
 
-    Run Keyword If  '${power_status}' == 'Off'  Redfish Power On
-    ...  ELSE  Redfish Power Off
+    IF  '${power_status}' == 'Off'
+        Redfish Power On
+    ELSE
+        Redfish Power Off
+    END
 
 Update LDAP User Role And Host Poweroff
     [Documentation]  Update LDAP user role and do host poweroff.
@@ -791,7 +794,7 @@ Update LDAP User Role And Host Poweroff
     Redfish.Post  ${REDFISH_POWER_URI}
     ...  body={'ResetType': 'ForceOff'}   valid_status_codes=[${valid_status_code}]
 
-    Return From Keyword If  ${valid_status_code} == ${HTTP_FORBIDDEN}
+    IF  ${valid_status_code} == ${HTTP_FORBIDDEN}  RETURN
     Wait Until Keyword Succeeds  1 min  10 sec  Verify Host Power State  Off
 
 
@@ -817,7 +820,7 @@ Update LDAP User Role And Host Poweron
     Redfish.Post  ${REDFISH_POWER_URI}
     ...  body={'ResetType': 'On'}   valid_status_codes=[${valid_status_code}]
 
-    Return From Keyword If  ${valid_status_code} == ${HTTP_FORBIDDEN}
+    IF  ${valid_status_code} == ${HTTP_FORBIDDEN}  RETURN
     Verify Host Is Up
 
 

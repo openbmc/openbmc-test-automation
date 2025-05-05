@@ -260,7 +260,9 @@ Verify Redfishtool Install Certificate
     ...  ELSE IF  '${cert_type}' == 'Client'
     ...  Redfishtool Delete Certificate Via BMC CLI  ${cert_type}  ${delete_cert}
 
-    Return From Keyword If  "${install_type}" != "install" and "${file_status}" != "Not Found"
+    IF  "${install_type}" != "install" and "${file_status}" != "Not Found"
+        RETURN
+    END
 
     ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}
     ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
@@ -302,7 +304,11 @@ Delete All CA Certificate Via Redfishtool
     ...  "${uri_length}" == "0"  None
     Set Test Variable  ${cert_id}
     Set Test Variable  ${file_status}
-    Return From Keyword If  "${file_status}" != "Found" or "${delete_cert}" != "${True}"
+
+    IF  "${file_status}" != "Found" or "${delete_cert}" != "${True}"
+        RETURN
+    END
+
     FOR  ${cert}  IN  @{cert_list}
       Redfishtool Delete  ${cert["@odata.id"]}  ${root_cmd_args}
     END
@@ -327,7 +333,11 @@ Redfishtool Delete Certificate Via BMC CLI
     ...  [ -f ${certificate_file_path} ] && echo "Found" || echo "Not Found"
 
     Set Test Variable  ${file_status}
-    Return From Keyword If  "${file_status}" != "Found" or '${delete_cert}' != "${True}"
+
+    IF  "${file_status}" != "Found" or '${delete_cert}' != "${True}"
+        RETURN
+    END
+
     BMC Execute Command  rm ${certificate_file_path}
     BMC Execute Command  systemctl restart ${certificate_service}
     BMC Execute Command  systemctl daemon-reload

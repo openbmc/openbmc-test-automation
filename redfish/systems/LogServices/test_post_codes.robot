@@ -203,7 +203,7 @@ Get Boot Count For Last PostCode Entry
     ${last_id}=  Split String  ${last_id}  -
     ${boot_count}=  Set Variable  ${last_id[0][1]}
 
-    Return From Keyword  ${boot_count}
+    RETURN  ${boot_count}
 
 
 Populate PostCode Logs Incase No Prior Entries Available

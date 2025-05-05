@@ -649,7 +649,7 @@ Get Root Certificate
     ...  expected_status=any
 
     Should Be Equal As Strings  ${resp.status_code}  ${valid_status_code}
-    Return From Keyword If  ${resp.status_code} != ${HTTP_OK}
+    IF  ${resp.status_code} != ${HTTP_OK}  RETURN
 
     ${cert}=  Evaluate  json.loads('''${resp.text}''', strict=False)  json
     Should Contain  ${cert["Certificate"]}  BEGIN CERTIFICATE
@@ -715,7 +715,7 @@ Get Certificate Signed By VMI
     ...  ${read_timeout}
 
     Should Be Equal As Strings  ${resp.status_code}  ${valid_status_code}
-    Return From Keyword If  ${resp.status_code} != ${HTTP_OK}
+    IF  ${resp.status_code} != ${HTTP_OK}  RETURN
 
     ${cert}=  Evaluate  json.loads('''${resp.text}''', strict=False)  json
     Should Contain  ${cert["Certificate"]}  BEGIN CERTIFICATE
