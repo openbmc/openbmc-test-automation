@@ -22,6 +22,30 @@
       },
       "revId": "76f0f9eea4183ef991ca4c9b10bf5a5d09b88782",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "566e7fe0_c0838065",
+        "filename": "redfish/systems/test_systems_inventory.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-05-05T12:45:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21cac031_32724a4f",
+      "range": {
+        "startLine": 255,
+        "startChar": 0,
+        "endLine": 255,
+        "endChar": 38
+      },
+      "revId": "76f0f9eea4183ef991ca4c9b10bf5a5d09b88782",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
