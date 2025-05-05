@@ -148,7 +148,7 @@ Redfish Bad Firmware Update
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_INTERNAL_SERVER_ERROR}]
     ...  data=${image_data}
 
-    Return From Keyword If  ${resp.status_code} == ${HTTP_INTERNAL_SERVER_ERROR}
+    IF  ${resp.status_code} == ${HTTP_INTERNAL_SERVER_ERROR}  RETURN
 
     ${image_id}=  Get Latest Image ID
     Rprint Vars  image_id
@@ -169,7 +169,8 @@ Redfish TFTP Bad Firmware Update
     ...  body={"TransferProtocol" : "TFTP", "ImageURI" : "${TFTP_SERVER}/${image_file_name}"}
     Sleep  60s
     ${image_version}=  Get Image Version From TFTP Server  ${TFTP_SERVER}  ${image_file_name}
-    Return From Keyword If  '${image_version}' == '${EMPTY}'
+    IF  '${image_version}' == '${EMPTY}'  RETURN
+
     # Wait for image tar file to download complete.
     ${image_id}=  Wait Until Keyword Succeeds  60 sec  10 sec  Get Latest Image ID
     Rprint Vars  image_id
@@ -182,6 +183,6 @@ Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
     FFDC On Test Case Fail
-    Run Keyword If  '${image_id}'  Delete Software Object
-    ...  /xyz/openbmc_project/software/${image_id}
-
+    IF  '${image_id}'
+        Delete Software Object  /xyz/openbmc_project/software/${image_id}
+    END

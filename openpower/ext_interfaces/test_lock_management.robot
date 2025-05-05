@@ -1431,7 +1431,7 @@ Delete All Redfish and HMC Sessions
 Restart Bmcweb On Failure
     [Documentation]  Restart bmcweb only if test failed.
 
-    Return From Keyword If  "${TEST_STATUS}" == "PASS"
+    IF  "${TEST_STATUS}" == "PASS"  RETURN
 
     # This procedure is needs to be corrected or removed, when we figure out
     # what is causing the real failure here.

@@ -300,8 +300,8 @@ Test Teardown Execution
     # 2. Collect FFDC if test PASS but error log exists.
 
     # Don't delete our logs if we want to persist them for tests.
-    Return From Keyword If  ${running_persistence_test}
+    IF  ${running_persistence_test}  RETURN
 
     FFDC On Test Case Fail
-    Run Keyword If  '${TEST_STATUS}' == 'PASS'  Check Error And Collect FFDC
+    IF  '${TEST_STATUS}' == 'PASS'  Check Error And Collect FFDC
     Close All Connections

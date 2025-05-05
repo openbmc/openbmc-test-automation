@@ -22,7 +22,6 @@ ${min_num_power_supplies}  1
 
 *** Test Cases ***
 
-
 Verify CPU And Core Count
     [Documentation]  Get the total number of CPUs and cores in the system.
     ...              Verify counts are above minimums.
@@ -108,7 +107,7 @@ Get Available Power Supplies And Verify
         ${state}=  Set Variable  ${power_supply['Status']['State']}
         ${good_state}=  Evaluate
         ...  any(x in '${state}' for x in ('Enabled', 'StandbyOffline'))
-        Run Keyword If  not ${good_state}  Continue For Loop
+        IF  not ${good_state}  CONTINUE
         ${total_num_supplies}=  Evaluate  $total_num_supplies + ${1}
     END
 
@@ -174,7 +173,7 @@ Get CPU TotalCores
     #               "/redfish/v1/Systems/system/Processors/cpu0").
 
     ${total_cores}=  Redfish.Get Attribute  ${processor}  TotalCores
-    Return From Keyword If  ${total_cores} is ${NONE}  ${0}
+    IF  ${total_cores} is ${NONE}  RETURN  ${0}
     RETURN  ${total_cores}
 
 
@@ -191,14 +190,16 @@ GPU State Check
         ${good_state}=  Evaluate
         ...  any(x in '${state}' for x in ('Absent', 'Enabled', 'UnavailableOffline'))
         Rprint Vars  gpu  state
-        Run Keyword If  not ${good_state}  Fail
-        ...  msg=GPU State is not Absent, Enabled, or UnavailableOffline.
+        IF  not ${good_state}
+            Fail  msg=GPU State is not Absent, Enabled, or UnavailableOffline.
+        END
     END
 
 
 Get Inventory URIs
     [Documentation]  Get and return a tuple of lists of URIs for CPU,
     ...              GPU and PowerSupplies.
+
 
     ${processor_info}=  Redfish_Utils.Enumerate Request
     ...  ${SYSTEM_BASE_URI}Processors  return_json=0
