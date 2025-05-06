@@ -834,7 +834,7 @@ Verify IP On Redfish URI
     FOR  ${network_configuration}  IN  @{network_configurations}
         ${ip_found}=  Set Variable If  '${network_configuration['Address']}' == '${ip_address}'  ${True}
         ...  ${False}
-        Exit For Loop If  ${ip_found}
+        IF  ${ip_found}  BREAK
     END
     Run Keyword If  '${ip_found}' == '${False}'
     ...  Fail  msg=Configured IP address not found on EthernetInterface URI.

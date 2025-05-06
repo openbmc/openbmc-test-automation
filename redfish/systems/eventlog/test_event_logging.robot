@@ -448,7 +448,7 @@ Verify Watchdog EventLog Content
 
     FOR  ${entry}  IN  @{elog_list}
         ${found_match}=  Run Keyword And Return Status  Is Watchdog Error Found  ${entry}
-        Exit For Loop If  '${found_match}' == 'True'
+        IF  '${found_match}' == 'True'  BREAK
     END
 
     Run Keyword If  '${found_match}' == 'False'  Fail  msg=No watchdog error logged.

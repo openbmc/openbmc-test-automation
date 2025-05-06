@@ -251,7 +251,7 @@ Verify Maximum BMC Dump Creation
     FOR  ${n}  IN RANGE  0  ${MAX_DUMP_COUNT}
       Create User Initiated BMC Dump Via Redfish
       ${dump_space}=  Get Disk Usage For Dumps
-      Exit For Loop If  ${dump_space} >= (${BMC_DUMP_TOTAL_SIZE} - ${BMC_DUMP_MIN_SPACE_REQD})
+      IF  ${dump_space} >= (${BMC_DUMP_TOTAL_SIZE} - ${BMC_DUMP_MIN_SPACE_REQD})  BREAK
     END
 
     # Check error while creating dump when dump size is full.
