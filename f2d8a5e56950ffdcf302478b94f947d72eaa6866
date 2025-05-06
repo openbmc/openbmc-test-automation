@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d3c05084_c63821dc",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 739,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-05-06T16:18:13Z",
+      "side": 1,
+      "message": "?",
+      "parentUuid": "1651b935_b54abde6",
+      "range": {
+        "startLine": 739,
+        "startChar": 81,
+        "endLine": 739,
+        "endChar": 82
+      },
+      "revId": "f2d8a5e56950ffdcf302478b94f947d72eaa6866",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0b031101_31616102",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
         "patchSetId": 6
@@ -37,6 +61,30 @@
       "writtenOn": "2025-05-06T15:20:05Z",
       "side": 1,
       "message": "static",
+      "range": {
+        "startLine": 740,
+        "startChar": 13,
+        "endLine": 740,
+        "endChar": 19
+      },
+      "revId": "f2d8a5e56950ffdcf302478b94f947d72eaa6866",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "061f037e_8275de66",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-05-06T16:18:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b031101_31616102",
       "range": {
         "startLine": 740,
         "startChar": 13,
@@ -60,6 +108,24 @@
       "writtenOn": "2025-05-06T15:20:05Z",
       "side": 1,
       "message": "why this additional sleep required",
+      "revId": "f2d8a5e56950ffdcf302478b94f947d72eaa6866",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffe018c8_c1796f18",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-05-06T16:18:13Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "4f4c3a24_348e911f",
       "revId": "f2d8a5e56950ffdcf302478b94f947d72eaa6866",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
