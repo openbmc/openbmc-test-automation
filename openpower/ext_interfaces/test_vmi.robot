@@ -735,6 +735,25 @@ Disable VMI DHCPv6 When DHCPv4 Is Enabled And Verify
     Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
 
 
+Assign Static VMI IPv6 Address And Check Persistency On BMC Reboot
+    [Documentation]  Add static VMI IPv6 address and check whether IPv6 origin is set to static
+    ...  and Static IPv6 address is assigned after BMC reboot
+    [Tags]  Configure_Static_VMI_IPv6_Address_And_Check_Persistency_On_BMC_Reboot
+
+    Set Static VMI IPv6 Address  ${test_vmi_ipv6addr}  ${prefix_length}
+
+    # Reboot BMC and verify persistency.
+    OBMC Reboot (off)
+    Redfish Power On
+    Wait For Host Boot Progress To Reach Required State
+    Sleep  5s
+
+    # Verify IPv6 address origin is set to static and static IPv6 address is assigned.
+    ${vmi_ipv6addr}=  Verify VMI IPv6 Address  Static
+    Should Not Be Equal  ${vmi_ipv6addr["Address"]}  ${default_ipv6addr}
+    Should Be Equal  ${vmi_ipv6addr["PrefixLength"]}  ${prefix_length}
+
+
 *** Keywords ***
 
 Suite Setup Execution
