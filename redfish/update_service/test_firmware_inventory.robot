@@ -104,8 +104,8 @@ Verify BMC Version Matches With FirmwareInventory
     # 3rd comparison of BMC version and verify FirmwareInventory bmc version.
     # Example:
     # "Version": 2.7.0-dev-19-g9b44ea7
-      Exit For Loop If  '${resp_resource.dict["Version"]}' == '${manager_bmc_version.strip('"')}'
-      Run Keyword If  '${entry}' == '${actual_count}'  Fail  BMC version not there in Firmware Inventory
+      IF  '${resp_resource.dict["Version"]}' == '${manager_bmc_version.strip('"')}'  BREAK
+      IF  '${entry}' == '${actual_count}'  Fail  BMC version not there in Firmware Inventory
     END
 
 

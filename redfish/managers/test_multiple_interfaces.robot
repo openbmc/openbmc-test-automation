@@ -235,10 +235,11 @@ Suite Setup Execution
     ${network_configurations}=  Get Network Configuration Using Channel Number  ${SECONDARY_CHANNEL_NUMBER}
     FOR  ${network_configuration}  IN  @{network_configurations}
 
-      Run Keyword If  '${network_configuration['Address']}' == '${OPENBMC_HOST_ETH1}'
-      ...  Run Keywords  Set Suite Variable  ${eth1_subnet_mask}  ${network_configuration['SubnetMask']}
-      ...  AND  Set Suite Variable  ${eth1_gateway}  ${network_configuration['Gateway']}
-      ...  AND  Exit For Loop
+      IF  '${network_configuration['Address']}' == '${OPENBMC_HOST_ETH1}'
+          Set Suite Variable  ${eth1_subnet_mask}  ${network_configuration['SubnetMask']}
+          Set Suite Variable  ${eth1_gateway}  ${network_configuration['Gateway']}
+          BREAK
+      END
 
     END
 

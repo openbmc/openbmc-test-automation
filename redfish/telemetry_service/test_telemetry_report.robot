@@ -108,7 +108,7 @@ Add To Telemetry definition Record
       ${regex_matching_output}=  Get Regexp Matches  ${item}  ${value}
       IF  ${regex_matching_output} != []
           Set To Dictionary  ${english_actual_teleDef}  ${key}=${regex_matching_output}[0]
-          Exit For Loop
+          BREAK
       END
     END
 

@@ -74,8 +74,9 @@ Run HTX Soft Bootme Exerciser
     ${runtime}=  Convert Time  ${boot_interval}
 
     ${startTime} =    Get Current Date
-    Run Keyword If  '${HTX_MDT_PROFILE}' == 'mdt.bu'
-    ...  Create Default MDT Profile
+    IF  '${HTX_MDT_PROFILE}' == 'mdt.bu'
+        Create Default MDT Profile
+    END
 
     Run MDT Profile
 
@@ -92,10 +93,10 @@ Run HTX Soft Bootme Exerciser
                 Run Key U  Sleep \ 30s
                 ${l_ping}=
                 ...   Run Keyword And Return Status   Ping Host  ${OS_HOST}
-                Exit For Loop If    '${l_ping}' == '${True}'
+                IF  '${l_ping}' == '${True}'  BREAK
             END
 
-            Run Keyword If  '${l_ping}' == '${False}'  Fail  msg=OS not pinging in 20 minutes
+            IF  '${l_ping}' == '${False}'  Fail  msg=OS not pinging in 20 minutes
 
             Wait Until Keyword Succeeds
             ...   2 min   30 sec   Verify Ping SSH And Redfish Authentication
@@ -116,7 +117,7 @@ Run HTX Soft Bootme Exerciser
         ${elapsedTimeSec} =
         ...   Subtract Date From Date
         ...   ${currentTime}   ${startTime}   result_format=number   exclude_millis=True
-        Exit For Loop If   ${runtime} < ${elapsedTimeSec}
+        IF   ${runtime} < ${elapsedTimeSec}  BREAK
     END
 
     Wait Until Keyword Succeeds
@@ -126,9 +127,9 @@ Run HTX Soft Bootme Exerciser
     ...   2 min  60 sec   Shutdown Bootme
 
     # If user needs to keep the HTX running to debug on failure or post processing.
-    Run Keyword If  ${HTX_KEEP_RUNNING} == ${0}
-    ...  Wait Until Keyword Succeeds
-    ...     2 min  60 sec   Shutdown HTX Exerciser
+    IF  ${HTX_KEEP_RUNNING} == ${0}
+        Wait Until Keyword Succeeds  2 min  60 sec   Shutdown HTX Exerciser
+    END
 
 
 Test Setup Execution
@@ -159,18 +160,18 @@ Test Setup Execution
 
     # Shutdown if HTX is running.
     ${status}=  Is HTX Running
-    Run Keyword If  '${status}' == 'True'
-    ...  Wait Until Keyword Succeeds
-    ...     2 min  60 sec   Shutdown HTX Exerciser
+    IF  '${status}' == 'True'
+        Wait Until Keyword Succeeds  2 min  60 sec   Shutdown HTX Exerciser
+    END
+
 
 Test Teardown Execution
     [Documentation]  Do the post-test teardown.
 
     # Keep HTX running if user set HTX_KEEP_RUNNING to 1.
-    Run Keyword If
-    ...  '${TEST_STATUS}' == 'FAIL' and ${HTX_KEEP_RUNNING} == ${0}
-    ...      Wait Until Keyword Succeeds
-    ...        2 min  60 sec   Shutdown HTX Exerciser
+    IF  '${TEST_STATUS}' == 'FAIL' and ${HTX_KEEP_RUNNING} == ${0}
+        Wait Until Keyword Succeeds  2 min  60 sec   Shutdown HTX Exerciser
+    END
 
     ${keyword_buf}=  Catenate  Stop SOL Console Logging
     ...  \ targ_file_path=${EXECDIR}${/}logs${/}SOL.log
