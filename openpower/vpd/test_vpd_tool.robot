@@ -53,7 +53,7 @@ Verify VPD Field Read
        # Drive component field values response in ascii format
        # due to that skipping here.
        IF  'drive' in '${component}'
-           Continue FOR Loop
+           CONTINUE
        ELSE
            Verify VPD Field Read Operation  ${component}
        END
@@ -106,8 +106,7 @@ Verify VPD Component Read Operation
                   ${vpd_field}=  Set Variable  LocationCode
               END
               # Skip check if VPD field is empty.
-              Run Keyword If  '${vpd_records['${component}']['${vpd_field}']}' == ''
-              ...  Continue For Loop
+              IF  '${vpd_records['${component}']['${vpd_field}']}' == ''  CONTINUE
 
               # Get VPD field values via busctl.
               ${busctl_field}=  Set Variable If
@@ -121,7 +120,7 @@ Verify VPD Component Read Operation
               Valid Value  vpd_records['${component}']['${vpd_field}']
               ...  ['${cmd_output[0].split('"')[1].strip('"')}']
           ELSE
-             Continue For Loop
+             CONTINUE
           END
     END
 
@@ -140,8 +139,7 @@ Verify VPD Field Read Operation
          IF  '${match_key_exists}' == 'True'
              ${vpd_records}=  Vpdtool  -r -O ${component} -R VINI -K ${field}
              # Skip check if field value is empty.
-             Run Keyword If  '${vpd_records['${component}']['${field}']}' == ''
-             ...  Continue For Loop
+             IF  '${vpd_records['${component}']['${field}']}' == ''  CONTINUE
 
              ${busctl_field}=  Set Variable If
              ...  '${field}' == 'PN'  xyz.openbmc_project.Inventory.Decorator.Asset PartNumber
@@ -154,7 +152,7 @@ Verify VPD Field Read Operation
              Valid Value  vpd_records['${component}']['${field}']
              ...  ['${cmd_output[0].split('"')[1].strip('"')}']
          ELSE
-            Continue For Loop
+            CONTINUE
          END
     END
 

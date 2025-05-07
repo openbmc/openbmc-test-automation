@@ -190,7 +190,7 @@ Get IPMI FRU Devices Data
             IF  '${ipmi_fru_board_serial_status}' == 'True'  BREAK
         END
         ${frudata}=  Get From List  ${output}  ${num}
-        ${serial_no}=  Run Keyword If  '${ipmi_fru_board_serial_status}' == 'True'
+        ${serial_no}=  Set Variable If  '${ipmi_fru_board_serial_status}' == 'True'
         ...    Get Lines Containing String  ${frudata}  Board Serial
         ...  ELSE
         ...    Get Lines Containing String  ${frudata}  Product Serial
@@ -232,8 +232,9 @@ Get DBUS Dictionary For FRU Devices
         ${dbus_output}=  Execute DBUS Introspect Command  ${cmd}
         ${dbus_fru_board_serial_status}=  Run Keyword And Return Status  Should Contain  ${dbus_output}  .BOARD_SERIAL
         ${dbus_fru_product_serial_status}=  Run Keyword And Return Status  Should Contain  ${dbus_output}  .PRODUCT_SERIAL
-        Run Keyword If  '${dbus_fru_board_serial_status}' == 'True' or '${dbus_fru_product_serial_status}' == 'True'
-        ...    Create Dictionary For DBUS URI  ${dbus_output}  ${ipmi_fru}  ${dbus_fru_board_serial_status}  ${cmd}
+        IF  '${dbus_fru_board_serial_status}' == 'True' or '${dbus_fru_product_serial_status}' == 'True'
+            Create Dictionary For DBUS URI  ${dbus_output}  ${ipmi_fru}  ${dbus_fru_board_serial_status}  ${cmd}
+        END
     END
 
 
@@ -253,16 +254,17 @@ Create Dictionary For DBUS URI
     # If matches then, sets the serial number as key and FRU uri as value.
     # ${dbus_dict} defined under variable section.
     FOR  ${ipmi_fru_serial_no}  IN  @{ipmi_fru.keys()}
-        ${serial_no}=  Run Keyword If  '${dbus_fru_board_serial_status}' == 'True'
+        ${serial_no}=  Set Variable If  '${dbus_fru_board_serial_status}' == 'True'
         ...    Get Lines Containing String  ${dbus_output}  .BOARD_SERIAL
         ...  ELSE
         ...    Get Lines Containing String  ${dbus_output}  .PRODUCT_SERIAL
         ${serial_no}=  Split String  ${serial_no}  "
         ${dbus_serial_no}=  Set Variable  ${serial_no[1].strip()}
         ${serial_no_status}=  Run Keyword And Return Status  Should Be Equal As Strings  ${ipmi_fru_serial_no}  ${dbus_serial_no}
-        Run Keyword If  '${serial_no_status}' == 'True'
-        ...    Run Keywords  Set To Dictionary  ${dbus_dict}  ${dbus_serial_no}  ${fru_command}  AND
-        ...    Exit For Loop
+        IF  '${serial_no_status}' == 'True'
+            Set To Dictionary  ${dbus_dict}  ${dbus_serial_no}  ${fru_command}
+            BREAK
+        END
     END
 
 

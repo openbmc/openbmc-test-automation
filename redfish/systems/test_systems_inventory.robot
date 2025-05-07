@@ -108,7 +108,7 @@ Get Available Power Supplies And Verify
         ${state}=  Set Variable  ${power_supply['Status']['State']}
         ${good_state}=  Evaluate
         ...  any(x in '${state}' for x in ('Enabled', 'StandbyOffline'))
-        Run Keyword If  not ${good_state}  Continue For Loop
+        IF  not ${good_state}  Continue For Loop
         ${total_num_supplies}=  Evaluate  $total_num_supplies + ${1}
     END
 

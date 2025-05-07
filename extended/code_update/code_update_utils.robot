@@ -81,7 +81,7 @@ Loop SCP Retry
 
     FOR  ${index}  IN RANGE  0  4
       ${status}=  Retry SCP  ${image_file_path}
-      Exit For Loop If  '${status}' == '${True}'
+      IF  '${status}' == '${True}'  BREAK
     END
 
 
@@ -127,9 +127,9 @@ System Readiness Test
 
     ${l_status}=  Run Keyword and Return Status
     ...  Verify Ping and REST Authentication
-    Run Keyword If  '${l_status}' == '${False}'
-    ...  Fail  msg=System not in ideal state to use [ERROR]
-
+    IF  '${l_status}' == '${False}'
+        Fail  msg=System not in ideal state to use [ERROR]
+    END
 
 Validate BMC Version
     [Documentation]  Get BMC version from /etc/os-release and compare.
