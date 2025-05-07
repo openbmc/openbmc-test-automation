@@ -205,7 +205,7 @@ Restore Configuration
     [Documentation]  Restore the configuration to its pre-test state.
 
     ${length}=  Get Length  ${initial_lan_config}
-    Return From Keyword If  ${length} == ${0}
+    IF  ${length} == ${0}  RETURN
 
     Set IPMI Inband Network Configuration  ${ip_address}  ${subnet_mask}
     ...  ${initial_lan_config['Default Gateway IP']}  login=${0}
@@ -227,9 +227,10 @@ Suite Setup Execution
 
     @{network_configurations}=  Get Network Configuration
     FOR  ${network_configuration}  IN  @{network_configurations}
-       Run Keyword If  '${network_configuration['Address']}' == '${ip_address}'
-       ...  Run Keywords  Set Suite Variable  ${subnet_mask}   ${network_configuration['SubnetMask']}  AND
-       ...  Exit For Loop
+       IF  '${network_configuration['Address']}' == '${ip_address}'
+           Set Suite Variable  ${subnet_mask}   ${network_configuration['SubnetMask']}
+           BREAK
+       END
     END
 
 Test Teardown Execution

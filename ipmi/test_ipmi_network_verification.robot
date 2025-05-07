@@ -107,7 +107,7 @@ Get IP Address Source And Verify Using Redfish
       ${ip_address_source}=
       ...  Set Variable if  '${ipv4_address['Address']}' == '${lan_config['IP Address']}'
       ...  ${ipv4_address['AddressOrigin']} Address
-      Exit For Loop IF  "${ip_address_source}" != 'None'
+      IF  "${ip_address_source}" != 'None'  BREAK
     END
 
     Valid Value  lan_config['IP Address Source']  ['${ip_address_source}']
@@ -324,11 +324,11 @@ Verify Channel Info
     [Documentation]  Verify the channel info.
     [Arguments]  ${channel_number}  ${network_parameter}  ${valid_channels_list}
 
-    Run Keyword If  '${network_parameter}' == 'IPv4StaticAddresses'
-    ...    Verify IPv4 Static Address  ${channel_number}  ${valid_channels_list}
-    ...  ELSE IF  '${network_parameter}' == 'MACAddress'
-    ...    Verify MAC Address  ${channel_number}  ${valid_channels_list}
-
+    IF  '${network_parameter}' == 'IPv4StaticAddresses'
+        Verify IPv4 Static Address  ${channel_number}  ${valid_channels_list}
+    ELSE IF  '${network_parameter}' == 'MACAddress'
+        Verify MAC Address  ${channel_number}  ${valid_channels_list}
+    END
 
 Verify IPv4 Static Address
     [Documentation]  Verify the IPv4 Static Address.
