@@ -22,6 +22,30 @@
       },
       "revId": "b5164aaa772a98cbebd7c57f4a09e5e525240631",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16a38f00_3d2fd993",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-05-07T08:12:15Z",
+      "side": 1,
+      "message": "Added this by mistake, removing this.",
+      "parentUuid": "5adeb4af_d6147217",
+      "range": {
+        "startLine": 575,
+        "startChar": 1,
+        "endLine": 577,
+        "endChar": 61
+      },
+      "revId": "b5164aaa772a98cbebd7c57f4a09e5e525240631",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
