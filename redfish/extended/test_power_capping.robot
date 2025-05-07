@@ -244,8 +244,12 @@ Test Teardown Execution
 
     Smart Power Off
 
-    Run Keyword If  '${initial_power_setting}' != '${0}'
-    ...  Set DCMI Power Limit And Verify  ${initial_power_setting}
+    IF  '${initial_power_setting}' != '${0}'
+        Set DCMI Power Limit And Verify  ${initial_power_setting}
+    END
 
-    Run Keyword If  '${initial_deactivation}' == '${1}'
-    ...  Deactivate DCMI Power And Verify  ELSE  Activate DCMI Power And Verify
+    IF  '${initial_deactivation}' == '${1}'
+        Deactivate DCMI Power And Verify
+    ELSE
+        Activate DCMI Power And Verify
+    END

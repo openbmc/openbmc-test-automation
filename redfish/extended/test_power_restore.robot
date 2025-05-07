@@ -151,11 +151,13 @@ Set Initial Test State
 
     Redfish.Login
 
-    Run Keyword If  '${expectedState}' == 'Running'
-    ...  Redfish Power On  stack_mode=skip
+    IF  '${expectedState}' == 'Running'
+        Redfish Power On  stack_mode=skip
+    END
 
-    Run Keyword If  '${expectedState}' == 'Off'
-    ...  Redfish Power Off  stack_mode=skip
+    IF  '${expectedState}' == 'Off'
+        Redfish Power Off  stack_mode=skip
+    END
 
 
 Test Teardown Execution

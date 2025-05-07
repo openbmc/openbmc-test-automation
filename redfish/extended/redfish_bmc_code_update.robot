@@ -125,11 +125,13 @@ Suite Setup Execution
     Redfish.Login
     # Delete BMC dump and Error logs.
     Run Keyword And Ignore Error  Redfish Delete All BMC Dumps
-    Run Keyword If  ${DELETE_ERRLOGS} == ${1}
-    ...   Run Keyword And Ignore Error  Redfish Purge Event Log
+    IF  ${DELETE_ERRLOGS} == ${1}
+        Run Keyword And Ignore Error  Redfish Purge Event Log
+    END
     # To invalidate all the guard records.
-    Run Keyword If  '${DELETE_OLD_GUARD_FILE}' == '${1}'
-    ...  BMC Execute Command  guard -I
+    IF  '${DELETE_OLD_GUARD_FILE}' == '${1}'
+        BMC Execute Command  guard -I
+    END
 
     # Checking for file existence.
     Valid File Path  IMAGE_FILE_PATH
@@ -141,8 +143,9 @@ Suite Setup Execution
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NOT_FOUND},${HTTP_METHOD_NOT_ALLOWED}]
 
     # If the method is not found, set update URI to old method.
-    Run Keyword If  ${resp.status} == ${HTTP_NOT_FOUND}
-    ...  Set Suite Variable  ${REDFISH_UPDATE_URI}  /redfish/v1/UpdateService
+    IF  ${resp.status} == ${HTTP_NOT_FOUND}
+        Set Suite Variable  ${REDFISH_UPDATE_URI}  /redfish/v1/UpdateService
+    END
 
     Log To Console  Update URI: ${REDFISH_UPDATE_URI}
 
