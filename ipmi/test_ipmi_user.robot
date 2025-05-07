@@ -604,7 +604,7 @@ Set User Password And Verify
     ...  user set password ${random_userid} ${password} ${password_option}
     Rprint Vars  status
     Valid Value  status  [${expected_result}]
-    Return From Keyword If  '${expected_result}' == '${False}'
+    IF  '${expected_result}' == '${False}'  RETURN
 
     # Set admin privilege and enable IPMI messaging for newly created user.
     Set Channel Access  ${random_userid}  ipmi=on privilege=${admin_level_priv}
@@ -651,7 +651,7 @@ Suite Setup Execution
 
     Check Enabled User Count
     # Skip root user checking if user decides not to use root user as default.
-    Run Keyword If  '${IPMI_USERNAME}' == 'root'  Determine Root User Id
+    IF  '${IPMI_USERNAME}' == 'root'  Determine Root User Id
 
 
 Determine Root User Id
@@ -668,13 +668,13 @@ Determine Root User Id
         ${root_found}=  Get Lines Matching Regexp  ${line}  ${root_pattern}
         IF  '${root_found}' != '${EMPTY}'
             ${root_userid}=  Set Variable  ${id_index}
-            Exit For Loop
+            BREAK
         END
     END
     Set Suite Variable  ${root_userid}
 
     Log To Console  The root user ID is ${root_userid}.
-    Run Keyword If  ${root_userid} < ${1}  Fail  msg= Did not identify root user ID.
+    IF  ${root_userid} < ${1}  Fail  msg= Did not identify root user ID.
 
 
 Wait And Confirm New Username And Password

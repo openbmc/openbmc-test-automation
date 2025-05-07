@@ -43,7 +43,7 @@ Verify Get DCMI Capabilities
     FOR  ${slave_address}  IN  @{slave_address_list}
       ${slave_address_status}=  Run Keyword And Return Status
       ...  Should Contain  ${cmd_output}  ${slave_address}  ignore_case=True
-      Exit For Loop IF  ${slave_address_status} == True
+      IF  ${slave_address_status} == True  BREAK
     END
 
     Run Keyword IF  ${slave_address_status} == False  Fail  msg=Slave address is showing wrongly.
