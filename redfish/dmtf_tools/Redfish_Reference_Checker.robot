@@ -30,7 +30,7 @@ Test BMC Redfish Reference
 
     # Work complete, total failures:  0
     Should Match Regexp    ${output}  Work complete, total failures:[ ]+0
-    Run Keyword If  ${rc} != 0  Fail  Redfish-Reference-Checker Failed.
+    IF  ${rc} != 0  Fail  Redfish-Reference-Checker Failed.
 
 *** Keywords ***
 

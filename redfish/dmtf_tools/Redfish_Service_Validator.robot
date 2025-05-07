@@ -29,7 +29,7 @@ Test BMC Redfish Using Redfish Service Validator
     ${rc}  ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${cmd_str_master}  check_error=1
 
     Redfish Service Validator Result  ${output}
-    Run Keyword If  ${rc} != 0  Fail  Redfish-Service-Validator Failed.
+    IF  ${rc} != 0  Fail  Redfish-Service-Validator Failed.
 
 
 Run Redfish Service Validator With Additional Roles
@@ -72,7 +72,7 @@ Create User And Run Service Validator
     ${rc}  ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${cmd}  check_error=1
 
     Redfish Service Validator Result  ${output}
-    Run Keyword If  ${rc} != 0  Fail
+    IF  ${rc} != 0  Fail
 
 
 Delete User Created

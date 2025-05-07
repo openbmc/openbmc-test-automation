@@ -52,8 +52,10 @@ Test BMC Redfish Account Management
 
     FOR  ${result}  IN  @{result_list}
        ${rc}=  Evaluate  'ErrorMessages'=='${result}'
-       ${num}=  Run Keyword If  ${rc} == False  Set Variable  ${result_list["${result}"]["fail"]}
-       Run Keyword If  ${num} != None and ${num} > 0  Append To List  ${failed_tc_list}   ${result}
+       ${num}=  Set Variable If  ${rc} == False  ${result_list["${result}"]["fail"]}
+       IF  ${num} != None and ${num} > 0
+           Append To List  ${failed_tc_list}   ${result}
+       END
     END
 
     Should Be Empty  ${failed_tc_list}  Failed test cases are ${failed_tc_list}
@@ -100,10 +102,17 @@ DMTF Power
 
     FOR  ${result}  IN  @{result_list}
        ${rc}=  Evaluate  'ErrorMessages'=='${result}'
-       ${num}=  Run Keyword If  ${rc} == False  Set Variable  ${result_list["${result}"]["fail"]}
-       Run Keyword If  ${num} != None and ${num} > 0  Append To List  ${failed_tc_list}   ${result}
-       Run Keyword If  ${rc} == True   Set Variable
-       ...  Append To List  ${error_messages}  ${result_list["ErrorMessages"]}
+
+       ${num}=  Set Variable If  ${rc} == False
+       ...  ${result_list["${result}"]["fail"]}
+
+       IF  ${num} != None and ${num} > 0
+           Append To List  ${failed_tc_list}   ${result}
+       END
+
+       IF  ${rc} == True
+           Append To List  ${error_messages}  ${result_list["ErrorMessages"]}
+       END
     END
 
     Log Many            ErrorMessages:   @{error_messages}

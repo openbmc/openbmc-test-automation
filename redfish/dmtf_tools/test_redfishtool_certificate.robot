@@ -222,8 +222,11 @@ Generate CSR Via Redfishtool
     ...  KeyPairAlgorithm=${key_pair_algorithm}  KeyCurveId=${key_curv_id}
 
     # Remove not applicable field for CSR generation.
-    Run Keyword If  '${key_pair_algorithm}' == 'EC'  Remove From Dictionary  ${csr_dict}  KeyBitLength
-    ...  ELSE IF  '${key_pair_algorithm}' == 'RSA'  Remove From Dictionary  ${csr_dict}  KeyCurveId
+    IF  '${key_pair_algorithm}' == 'EC'
+        Remove From Dictionary  ${csr_dict}  KeyBitLength
+    ELSE IF  '${key_pair_algorithm}' == 'RSA'
+        Remove From Dictionary  ${csr_dict}  KeyCurveId
+    END
 
     ${expected_resp}=  Set Variable If
     ...  '${expected_status}' == 'ok'     ${HTTP_OK}, ${HTTP_NO_CONTENT}
@@ -255,10 +258,11 @@ Verify Redfishtool Install Certificate
     #                     request (i.e. "ok" or "error").
     # delete_cert         Certificate will be deleted before installing if this True.
 
-    Run Keyword If  '${cert_type}' == 'CA'
-    ...  Delete All CA Certificate Via Redfishtool  ${delete_cert}
-    ...  ELSE IF  '${cert_type}' == 'Client'
-    ...  Redfishtool Delete Certificate Via BMC CLI  ${cert_type}  ${delete_cert}
+    IF  '${cert_type}' == 'CA'
+        Delete All CA Certificate Via Redfishtool  ${delete_cert}
+    ELSE IF  '${cert_type}' == 'Client'
+        Redfishtool Delete Certificate Via BMC CLI  ${cert_type}  ${delete_cert}
+    END
 
     IF  "${install_type}" != "install" and "${file_status}" != "Not Found"
         RETURN
@@ -282,10 +286,10 @@ Verify Redfishtool Install Certificate
 
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
 
-    ${bmc_cert_content}=  Run Keyword If  '${expected_status}' == 'ok'
-    ...  Redfishtool GetAttribute  ${certificate_uri}/${cert_id}  CertificateString
-
-    Run Keyword If  '${expected_status}' == 'ok'  Should Contain  ${cert_file_content}  ${bmc_cert_content}
+    IF  '${expected_status}' == 'ok'
+        ${bmc_cert_content}=  Redfishtool GetAttribute  ${certificate_uri}/${cert_id}  CertificateString
+        Should Contain  ${cert_file_content}  ${bmc_cert_content}
+    END
 
 
 Delete All CA Certificate Via Redfishtool
@@ -321,13 +325,18 @@ Redfishtool Delete Certificate Via BMC CLI
     # Description of argument(s):
     # cert_type           Certificate type (e.g. "Client" or "CA").
 
-    ${certificate_file_path}  ${certificate_service}  ${certificate_uri}=
-    ...  Run Keyword If  '${cert_type}' == 'Client'
-    ...    Set Variable  /etc/nslcd/certs/cert.pem  phosphor-certificate-manager@nslcd.service
-    ...    ${REDFISH_LDAP_CERTIFICATE_URI}
-    ...  ELSE IF  '${cert_type}' == 'CA'
-    ...    Set Variable  ${ROOT_CA_FILE_PATH}  phosphor-certificate-manager@authority.service
-    ...    ${REDFISH_CA_CERTIFICATE_URI}
+    # Check if cert type is Client else set to CA parameters.
+
+    ${certificate_file_path}=  Set Variable If  '${cert_type}' == 'Client'
+    ...  /etc/nslcd/certs/cert.pem  ${ROOT_CA_FILE_PATH}
+
+    ${certificate_service}=  Set Variable If  '${cert_type}' == 'Client'
+     ...  phosphor-certificate-manager@nslcd.service
+     ...  phosphor-certificate-manager@authority.service
+
+    ${certificate_uri}=  Set Variable If  '${cert_type}' == 'Client'
+    ...  ${REDFISH_LDAP_CERTIFICATE_URI}
+    ...  ${REDFISH_CA_CERTIFICATE_URI}
 
     ${file_status}  ${stderr}  ${rc}=  BMC Execute Command
     ...  [ -f ${certificate_file_path} ] && echo "Found" || echo "Not Found"
@@ -366,10 +375,11 @@ Redfishtool Install Certificate File On BMC
     ...  '${resp.status_code}' == '${HTTP_OK}'  ${resp.json()["Id"]}
     ...  '${resp.status_code}' == '${HTTP_NO_CONTENT}'  ${resp.json()["Id"]}  -1
 
-    Run Keyword If  '${status}' == 'ok'
-    ...  Should Contain Any  "${resp.status_code}"  ${HTTP_OK}  ${HTTP_NO_CONTENT}
-    ...  ELSE IF  '${status}' == 'error'
-    ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_INTERNAL_SERVER_ERROR}
+    IF  '${status}' == 'ok'
+        Should Contain Any  "${resp.status_code}"  ${HTTP_OK}  ${HTTP_NO_CONTENT}
+    ELSE IF  '${status}' == 'error'
+        Should Be Equal As Strings  ${resp.status_code}  ${HTTP_INTERNAL_SERVER_ERROR}
+    END
 
     Delete All Sessions
 
@@ -388,12 +398,13 @@ Verify Redfishtool Replace Certificate
     #                  request (i.e. "ok" or "error").
 
     # Install certificate before replacing client or CA certificate.
-    Run Keyword If  '${cert_type}' == 'Client'
-    ...    Verify Redfishtool Install Certificate  ${cert_type}  ${cert_format}  ${expected_status}
-    ...    ${False}  replace
-    ...  ELSE IF  '${cert_type}' == 'CA'
-    ...    Verify Redfishtool Install Certificate  ${cert_type}  ${cert_format}  ${expected_status}
-    ...    ${False}  replace
+    IF  '${cert_type}' == 'Client'
+        Verify Redfishtool Install Certificate  ${cert_type}  ${cert_format}  ${expected_status}
+        ...  ${False}  replace
+    ELSE IF  '${cert_type}' == 'CA'
+        Verify Redfishtool Install Certificate  ${cert_type}  ${cert_format}  ${expected_status}
+        ...  ${False}  replace
+    END
 
     ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}
     ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
@@ -423,10 +434,11 @@ Verify Redfishtool Replace Certificate
     Sleep  5s
     ${bmc_cert_content}=  Redfishtool GetAttribute  ${certificate_uri}  CertificateString
 
-    Run Keyword If  '${expected_status}' == 'ok'
-    ...    Should Contain  ${cert_file_content}  ${bmc_cert_content}
-    ...  ELSE
-    ...    Should Not Contain  ${cert_file_content}  ${bmc_cert_content}
+    IF  '${expected_status}' == 'ok'
+        Should Contain  ${cert_file_content}  ${bmc_cert_content}
+    ELSE
+        Should Not Contain  ${cert_file_content}  ${bmc_cert_content}
+    END
 
 
 Redfishtool GetAttribute
@@ -441,7 +453,7 @@ Redfishtool GetAttribute
     #                 authentication error, etc. ).
 
     ${rc}  ${cmd_output}=  Run And Return RC And Output  ${cmd_args} GET ${uri}
-    Run Keyword If  ${rc} != 0  Is HTTP Error Expected  ${cmd_output}  ${expected_error}
+    IF  ${rc} != 0  Is HTTP Error Expected  ${cmd_output}  ${expected_error}
 
     ${cmd_output}=  Convert String To JSON  ${cmd_output}
 

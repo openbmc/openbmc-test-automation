@@ -182,10 +182,11 @@ Redfishtool Create User
     ...  redfishtool raw -r ${OPENBMC_HOST} -u ${login_user} -p ${login_pasword} -S Always
     ${data}=  Set Variable
     ...  '{"UserName":${user_name},"Password":${password},"RoleId":${roleId},"Enabled":${enable}}'
-    Run Keyword If  ${login_user} == ""
-    ...   Redfishtool Post  ${data}  /redfish/v1/AccountService/Accounts  ${root_cmd_args}  ${expected_error}
-    ...   ELSE
-    ...   Redfishtool Post  ${data}  /redfish/v1/AccountService/Accounts  ${user_cmd_args}  ${expected_error}
+    IF  ${login_user} == ""
+        Redfishtool Post  ${data}  /redfish/v1/AccountService/Accounts  ${root_cmd_args}  ${expected_error}
+    ELSE
+        Redfishtool Post  ${data}  /redfish/v1/AccountService/Accounts  ${user_cmd_args}  ${expected_error}
+    END
 
 
 Redfishtool Update User Role
@@ -203,12 +204,13 @@ Redfishtool Update User Role
 
     ${user_cmd_args}=  Set Variable
     ...  redfishtool raw -r ${OPENBMC_HOST} -u ${login_user} -p ${login_pasword} -S Always
-    Run Keyword If  ${login_user} == ""
-    ...   Redfishtool Patch  '{"RoleId":${newRole}}'
-          ...  /redfish/v1/AccountService/Accounts/${user_name}  ${root_cmd_args}  ${expected_error}
-    ...   ELSE
-    ...   Redfishtool Patch  '{"RoleId":${newRole}}'
-          ...  /redfish/v1/AccountService/Accounts/${user_name}  ${user_cmd_args}  ${expected_error}
+    IF  ${login_user} == ""
+        Redfishtool Patch  '{"RoleId":${newRole}}'
+        ...  /redfish/v1/AccountService/Accounts/${user_name}  ${root_cmd_args}  ${expected_error}
+    ELSE
+        Redfishtool Patch  '{"RoleId":${newRole}}'
+        ...  /redfish/v1/AccountService/Accounts/${user_name}  ${user_cmd_args}  ${expected_error}
+    END
 
 
 Redfishtool Delete User
