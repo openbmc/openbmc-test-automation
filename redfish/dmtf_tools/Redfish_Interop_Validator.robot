@@ -1,7 +1,9 @@
 *** Settings ***
-Documentation      Test BMC Redfish conformance using  https://github.com/DMTF/Redfish-Interop-Validator.
+Documentation      Test BMC Redfish conformance using
+...                https://github.com/DMTF/Redfish-Interop-Validator.
 ...                DMTF tool.
-...                It validate the Redfish service based on an interoperability profile given to it.
+...                It validate the Redfish service based on an
+...                interoperability profile given to it.
 
 Resource           ../../lib/dmtf_tools_utils.robot
 
@@ -33,4 +35,4 @@ Test BMC Redfish Using Redfish Interop Validator
 
     ${rc}  ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${cmd_str_master}  check_error=1
 
-    Run Keyword If  ${rc} != 0  Fail  Redfish-Interop-Validator Failed.
+    IF  ${rc} != 0  Fail  Redfish-Interop-Validator Failed.

@@ -40,8 +40,7 @@ Test BMC Redfish Protocol Validator
 
     ${fail_count}=  Should Match Regexp  ${output}  FAIL: (\\d+)
 
-    Run Keyword If  ${fail_count[1]} != 0
-    ...  Fail  Redfish Protocol Validator Failed
+    IF  ${fail_count[1]} != 0  Fail  Redfish Protocol Validator Failed
 
 
 *** Keywords ***
