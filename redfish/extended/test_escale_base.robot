@@ -156,12 +156,16 @@ Test Teardown Execution
     FFDC On Test Case Fail
 
     # Restore the system's initial power limit setting.
-    Run Keyword If  '${initial_power_setting}' != '${0}'
-    ...  Set DCMI Power Limit And Verify  ${initial_power_setting}
+    IF  '${initial_power_setting}' != '${0}'
+        Set DCMI Power Limit And Verify  ${initial_power_setting}
+    END
 
     # Restore the system's initial deactivation/activation setting.
-    Run Keyword If  '${initial_deactivation}' == '${1}'
-    ...  Deactivate DCMI Power And Verify  ELSE  Activate DCMI Power And Verify
+    IF  '${initial_deactivation}' == '${1}'
+        Deactivate DCMI Power And Verify
+    ELSE
+        Activate DCMI Power And Verify
+    END
 
     # Clean up any error logs before exiting.
     Delete All Error Logs

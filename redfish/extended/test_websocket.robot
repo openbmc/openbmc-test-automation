@@ -57,8 +57,9 @@ Test BMC Websocket ESEL Interface
 
     ${current_esel_count}=   Get Number Of Event Logs
 
-    Run Keyword If  ${initial_esel_count} == ${current_esel_count}
-    ...  Fail  msg=System failed to generate eSEL upon request.
+    IF  ${initial_esel_count} == ${current_esel_count}
+        Fail  msg=System failed to generate eSEL upon request.
+    END
 
     ${line}=  Grep File  ${monitor_file}  ${esel_received}
     # Typical monitor_file contents:
@@ -68,8 +69,9 @@ Test BMC Websocket ESEL Interface
     # eSEL received over websocket interface.
 
     ${num_chars}=  Get Length  ${line}
-    Run Keyword If  ${num_chars} < ${min_number_chars}  Fail
-    ...  msg=No eSEL notification from websocket_monitor.py.
+    IF  ${num_chars} < ${min_number_chars}
+        Fail  msg=No eSEL notification from websocket_monitor.py.
+    END
 
 
 Test BMC Websocket Dump Interface
@@ -90,8 +92,9 @@ Test BMC Websocket Dump Interface
     # Dump notification received over websocket interface.
 
     ${num_chars}=  Get Length  ${line}
-    Run Keyword If  ${num_chars} < ${min_number_chars}  Fail
-    ...  msg=No dump notification from websocket_monitor.py.
+    IF  ${num_chars} < ${min_number_chars}
+        Fail  msg=No dump notification from websocket_monitor.py.
+    END
 
 
 *** Keywords ***
@@ -165,7 +168,7 @@ Test Teardown Execution
     [Documentation]  Do teardown tasks after a test.
 
     FFDC On Test Case Fail
-    Run Keyword If  '${TEST_STATUS}' == 'FAIL'  Print Websocket Monitor Log
+    IF  '${TEST_STATUS}' == 'FAIL'  Print Websocket Monitor Log
     Kill Websocket Monitor
 
     Redfish Delete All BMC Dumps

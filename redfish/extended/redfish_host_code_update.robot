@@ -43,9 +43,10 @@ Redfish Host Code Update
 
     ${num_records}=  Get Length  ${functional_sw_inv}
 
-    Run Keyword If  ${num_records} != 0
-    ...  Pass Execution If  '${functional_sw_inv['version']}' == '${image_version}'
-    ...  The existing ${image_version} firmware is already functional.
+    IF  ${num_records} != 0
+        Pass Execution If  '${functional_sw_inv['version']}' == '${image_version}'
+        ...  The existing ${image_version} firmware is already functional.
+    END
 
     ${post_code_update_actions}=  Get Post Boot Action
     ${state}=  Get Pre Reboot State
