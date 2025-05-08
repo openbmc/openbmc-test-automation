@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cc7780a_3588275a",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-05-08T03:44:44Z",
+      "side": 1,
+      "message": "This will not work.. you may need to do something like this\n\n\n        ${serial_str}\u003d  Set Variable If  \u0027${ipmi_fru_board_serial_status}\u0027 \u003d\u003d \u0027True\u0027\n        ...  Board Serial\n        ...  Product Serial\n\t\t\n\t${serial_no}\u003d  Get Lines Containing String  ${frudata}  ${serial_str}",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 70
+      },
+      "revId": "74039669b869ee3a7ccc1858fedeff773a9b8297",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64d6ef4d_8960e5eb",
+        "filename": "ipmi/test_ipmi_fru_device.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-05-08T03:44:44Z",
+      "side": 1,
+      "message": "Same comment for the above",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 260,
+        "endChar": 75
+      },
+      "revId": "74039669b869ee3a7ccc1858fedeff773a9b8297",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
