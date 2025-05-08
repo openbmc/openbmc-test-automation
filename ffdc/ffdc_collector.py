@@ -4,13 +4,13 @@ r"""
 See class prolog below for details.
 """
 
-import json
-import logging
 import os
+import sys
+import logging
+import json
 import platform
 import re
 import subprocess
-import sys
 import time
 from errno import EACCES, EPERM
 
@@ -42,24 +42,20 @@ Example how to define in YAML:
        - arg1
        - arg2
 """
-plugin_dir = __file__.split(__file__.split("/")[-1])[0] + "/plugins"
+plugin_dir = os.path.join(os.path.dirname(__file__), "plugins")
 sys.path.append(plugin_dir)
-try:
-    for module in os.listdir(plugin_dir):
-        if module == "__init__.py" or module[-3:] != ".py":
-            continue
-        plugin_module = "plugins." + module[:-3]
-        # To access the module plugin.<module name>.<function>
-        # Example: plugin.foo_func.foo_func_yaml()
-        try:
-            plugin = __import__(plugin_module, globals(), locals(), [], 0)
-        except Exception as e:
-            print("PLUGIN: Exception: %s" % e)
-            print("PLUGIN: Module import failed: %s" % module)
-            pass
-except FileNotFoundError as e:
-    print("PLUGIN: %s" % e)
-    pass
+
+for module in os.listdir(plugin_dir):
+    if module == "__init__.py" or not module.endswith(".py"):
+        continue
+
+    plugin_module = f"plugins.{module[:-3]}"
+    try:
+        plugin = __import__(plugin_module, globals(), locals(), [], 0)
+    except Exception as e:
+        print(f"PLUGIN: Exception: {e}")
+        print(f"PLUGIN: Module import failed: {module}")
+        continue
 
 r"""
 This is for plugin functions returning data or responses to the caller
@@ -482,7 +478,7 @@ class ffdc_collector:
             self.group_copy(self.ffdc_actions[target_type][sub_type])
         else:
             self.collect_and_copy_ffdc(
-                self.ffdc_actions[target_type][sub_type]
+               self.ffdc_actions[target_type][sub_type]
             )
 
     def protocol_telnet(self, target_type, sub_type):
@@ -998,6 +994,8 @@ class ffdc_collector:
         )
 
         if result.stderr and not quiet:
+            if self.password in parms_string:
+                parms_string = parms_string.replace(self.password, "********")
             self.logger.error("\n\t\tERROR with %s " % parms_string)
             self.logger.error("\t\t" + result.stderr)
 
@@ -1068,7 +1066,7 @@ class ffdc_collector:
 
     def load_env(self):
         r"""
-        Perform protocol working check.
+        Load the user environment variables YAML file.
 
         """
         # This is for the env vars a user can use in YAML to load
@@ -1112,6 +1110,9 @@ class ffdc_collector:
                     os.environ[key] = str(value)
                     self.env_dict[key] = str(value)
         except json.decoder.JSONDecodeError as e:
+            self.logger.error("\n\tERROR: %s " % e)
+            sys.exit(-1)
+        except FileNotFoundError as e:
             self.logger.error("\n\tERROR: %s " % e)
             sys.exit(-1)
 
