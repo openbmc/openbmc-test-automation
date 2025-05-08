@@ -207,8 +207,11 @@ Verify Ethernet Config Property
 Restore Configuration
     [Documentation]  Restore the configuration to Both Static Network
 
-    Run Keyword If  '${CHANNEL_NUMBER}' == '${1}'  Add IP Address  ${OPENBMC_HOST}  ${eth0_subnet_mask}  ${eth0_gateway}
-    ...  ELSE IF  '${CHANNEL_NUMBER}' == '{2}'  Add IP Address  ${OPENBMC_HOST_ETH1}  ${eth1_subnet_mask}  ${eth1_gateway}
+    IF  '${CHANNEL_NUMBER}' == '${1}'
+        Add IP Address  ${OPENBMC_HOST}  ${eth0_subnet_mask}  ${eth0_gateway}
+    ELSE IF  '${CHANNEL_NUMBER}' == '{2}'
+        Add IP Address  ${OPENBMC_HOST_ETH1}  ${eth1_subnet_mask}  ${eth1_gateway}
+    END
 
 Get Network Configuration Using Channel Number
     [Documentation]  Get ethernet interface.

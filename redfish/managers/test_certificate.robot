@@ -289,8 +289,11 @@ Generate CSR Via Redfish
     ...  KeyPairAlgorithm=${key_pair_algorithm}  KeyCurveId=${key_curv_id}
 
     # Remove not applicable field for CSR generation.
-    Run Keyword If  '${key_pair_algorithm}' == 'EC'  Remove From Dictionary  ${payload}  KeyBitLength
-    ...  ELSE IF  '${key_pair_algorithm}' == 'RSA'  Remove From Dictionary  ${payload}  KeyCurveId
+    IF  '${key_pair_algorithm}' == 'EC'
+        Remove From Dictionary  ${payload}  KeyBitLength
+    ELSE IF  '${key_pair_algorithm}' == 'RSA'
+        Remove From Dictionary  ${payload}  KeyCurveId
+    END
 
     ${expected_resp}=  Set Variable If  '${expected_status}' == 'ok'  ${HTTP_OK}
     ...  '${expected_status}' == 'error'  ${HTTP_INTERNAL_SERVER_ERROR}, ${HTTP_BAD_REQUEST}

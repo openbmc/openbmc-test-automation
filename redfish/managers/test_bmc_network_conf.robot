@@ -721,8 +721,7 @@ Clear IP Settings On Fail
     # Description of argument(s):
     # ip  IP address to be deleted.
 
-    Run Keyword If  '${TEST STATUS}' == 'FAIL'
-    ...  Delete IP Address  ${ip}
+    IF  '${TEST STATUS}' == 'FAIL'  Delete IP Address  ${ip}
 
     Test Teardown Execution
 
@@ -753,11 +752,10 @@ Suite Setup Execution
     ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status   ${CHANNEL_NUMBER}
     Set Suite Variable  ${DHCPEnabled}
 
-    ${ip_addr}  ${gateway}  ${subnetmask}=  Run Keyword If  ${DHCPEnabled}==True
-    ...   Get DHCP IP Info
-
-    Run Keyword If  ${DHCPEnabled}==True
-    ...  Add IP Address  ${ip_addr}  ${subnetmask}  ${gateway}
+    IF  ${DHCPEnabled}==True
+        ${ip_addr}  ${gateway}  ${subnetmask}=  Get DHCP IP Info
+        Add IP Address  ${ip_addr}  ${subnetmask}  ${gateway}
+    END
 
     ${test_gateway}=  Get BMC Default Gateway
     Set Suite Variable  ${test_gateway}
@@ -770,8 +768,7 @@ Suite Teardown Execution
     #   - Restore the DHCP IPv4 to enabled state
 
     Redfish.Login
-    Run Keyword If  ${DHCPEnabled}==True
-    ...  Enable IPv4 DHCP Settings
+    IF  ${DHCPEnabled}==True   Enable IPv4 DHCP Settings
 
 
 Configure Multiple Static IPv4 Addresses
@@ -813,10 +810,11 @@ Verify Network Response On Specified Host State
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
-    Run Keyword If  '${host_state}' == 'on'
-    ...    Redfish Power On  stack_mode=skip
-    ...  ELSE
-    ...    Redfish Power off  stack_mode=skip
+    IF  '${host_state}' == 'on'
+        Redfish Power On  stack_mode=skip
+    ELSE
+        Redfish Power off  stack_mode=skip
+    END
 
     Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     Ping Host  ${OPENBMC_HOST}
@@ -836,8 +834,9 @@ Verify IP On Redfish URI
         ...  ${False}
         IF  ${ip_found}  BREAK
     END
-    Run Keyword If  '${ip_found}' == '${False}'
-    ...  Fail  msg=Configured IP address not found on EthernetInterface URI.
+    IF  '${ip_found}' == '${False}'
+        Fail  msg=Configured IP address not found on EthernetInterface URI.
+    END
 
 
 Enable IPv4 DHCP Settings

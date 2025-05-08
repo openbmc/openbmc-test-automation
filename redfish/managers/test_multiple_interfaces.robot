@@ -267,8 +267,11 @@ Set BMC Ethernet Interfaces State
 
     ${status}=  Run Keyword And Return Status  Ping Host  ${interface_ip}
 
-    Run Keyword If  ${enabled} == ${True}  Should Be Equal  ${status}  ${True}
-    ...  ELSE  Should Be Equal  ${status}  ${False}
+    IF  ${enabled} == ${True}
+        Should Be Equal  ${status}  ${True}
+    ELSE
+        Should Be Equal  ${status}  ${False}
+    END
 
 
 Run IPMI
@@ -300,10 +303,11 @@ Install Certificate Via Redfish And Verify
     Create Directory  certificate_dir
     # AUTH_URI is a global variable defined in lib/resource.robot
     Set Test Variable  ${AUTH_URI}  https://${OPENBMC_HOST_ETH1}
-    Run Keyword If  '${cert_type}' == 'CA' and '${delete_cert}' == '${True}'
-    ...  Delete All CA Certificate Via Redfish
-    ...  ELSE IF  '${cert_type}' == 'Client' and '${delete_cert}' == '${True}'
-    ...  Delete Certificate Via BMC CLI  ${cert_type}
+    IF  '${cert_type}' == 'CA' and '${delete_cert}' == '${True}'
+        Delete All CA Certificate Via Redfish
+    ELSE IF  '${cert_type}' == 'Client' and '${delete_cert}' == '${True}'
+        Delete Certificate Via BMC CLI  ${cert_type}
+    END
 
     ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}
     ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
@@ -317,10 +321,18 @@ Install Certificate Via Redfish And Verify
     Logging  Installed certificate id: ${cert_id}
 
     Sleep  30s
+
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
-    ${bmc_cert_content}=  Run Keyword If  '${expected_status}' == 'ok'  redfish_utils.Get Attribute
+
+    ${content}=   redfish_utils.Get Attribute
     ...  ${certificate_uri}/${cert_id}  CertificateString
-    Run Keyword If  '${expected_status}' == 'ok'  Should Contain  ${cert_file_content}  ${bmc_cert_content}
+
+    ${bmc_cert_content}=  Set Variable If  '${expected_status}' == 'ok'
+    ...  ${content}
+
+    IF  '${expected_status}' == 'ok'
+        Should Contain  ${cert_file_content}  ${bmc_cert_content}
+    END
     RETURN  ${cert_id}
 
 Set SSH Value Via Eth1

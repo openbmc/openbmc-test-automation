@@ -220,6 +220,8 @@ Set NTP state
 Restore NTP Status
     [Documentation]  Restore NTP Status.
 
-    Run Keyword If  '${original_ntp["ProtocolEnabled"]}' == 'True'
-    ...    Set NTP state  ${TRUE}
-    ...  ELSE  Set NTP state  ${FALSE}
+    IF  '${original_ntp["ProtocolEnabled"]}' == 'True'
+        Set NTP state  ${TRUE}
+    ELSE
+        Set NTP state  ${FALSE}
+    END

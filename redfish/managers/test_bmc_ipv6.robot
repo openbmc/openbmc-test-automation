@@ -294,9 +294,9 @@ Configure IPv6 Address On BMC
       Append To List  ${patch_list}  ${empty_dict}
     END
 
-    ${valid_status_codes}=  Run Keyword If  '${valid_status_codes}' == '${HTTP_OK}'
-    ...  Set Variable   ${HTTP_OK},${HTTP_NO_CONTENT}
-    ...  ELSE  Set Variable  ${valid_status_codes}
+    ${valid_status_codes}=  Set Variable If  '${valid_status_codes}' == '${HTTP_OK}'
+    ...  ${HTTP_OK},${HTTP_NO_CONTENT}
+    ...  ${valid_status_codes}
 
     # We need not check for existence of IPv6 on BMC while adding.
     Append To List  ${patch_list}  ${ipv6_data}
@@ -458,9 +458,11 @@ Modify IPv6 Address
     # Find the position of IPv6 address to be modified.
     @{ipv6_network_configurations}=  Get IPv6 Network Configuration
     FOR  ${ipv6_network_configuration}  IN  @{ipv6_network_configurations}
-      Run Keyword If  '${ipv6_network_configuration['Address']}' == '${ipv6}'
-      ...  Append To List  ${patch_list}  ${ipv6_data}
-      ...  ELSE  Append To List  ${patch_list}  ${empty_dict}
+      IF  '${ipv6_network_configuration['Address']}' == '${ipv6}'
+          Append To List  ${patch_list}  ${ipv6_data}
+      ELSE
+          Append To List  ${patch_list}  ${empty_dict}
+      END
     END
 
     # Modify the IPv6 address only if given IPv6 is found
@@ -510,8 +512,9 @@ Set SLAACv6 Configuration State And Verify
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     ${slaac_verify}=  Get From Dictionary  ${resp.dict}  StatelessAddressAutoConfig
 
-    Run Keyword If  '${slaac_verify['IPv6AutoConfigEnabled']}' != '${slaac_state}'
-    ...  Fail  msg=SLAACv6 not set properly.
+    IF  '${slaac_verify['IPv6AutoConfigEnabled']}' != '${slaac_state}'
+        Fail  msg=SLAACv6 not set properly.
+    END
 
 
 Set And Verify DHCPv6 Property

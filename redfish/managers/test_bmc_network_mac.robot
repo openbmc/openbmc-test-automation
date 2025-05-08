@@ -187,12 +187,13 @@ Configure MAC Settings
     ${status}=  Run Keyword And Return Status
     ...  Validate MAC On BMC  ${mac_address}
 
-    Run Keyword If  ${valid_status_code} == ${HTTP_BAD_REQUEST}
-    ...      Should Be Equal  ${status}  ${False}
-    ...      msg=Allowing the configuration of an invalid MAC.
-    ...  ELSE
-    ...      Should Be Equal  ${status}  ${True}
-    ...      msg=Not allowing the configuration of a valid MAC.
+    IF  ${valid_status_code} == ${HTTP_BAD_REQUEST}
+        Should Be Equal  ${status}  ${False}
+        ...  msg=Allowing the configuration of an invalid MAC.
+    ELSE
+        Should Be Equal  ${status}  ${True}
+        ...  msg=Not allowing the configuration of a valid MAC.
+    END
 
     Verify MAC Address Via FW_Env  ${mac_address}  ${valid_status_code}
 
@@ -207,9 +208,10 @@ Verify MAC Address Via FW_Env
     ${status}=  Run Keyword And Return Status
     ...  Validate MAC On FW_Env  ${mac_address}
 
-    Run Keyword If  ${valid_status_code} == ${HTTP_BAD_REQUEST}
-    ...      Should Be Equal  ${status}  ${False}
-    ...      msg=Allowing the configuration of an invalid MAC.
-    ...  ELSE
-    ...      Should Be Equal  ${status}  ${True}
-    ...      msg=Not allowing the configuration of a valid MAC.
+    IF  ${valid_status_code} == ${HTTP_BAD_REQUEST}
+        Should Be Equal  ${status}  ${False}
+        ...  msg=Allowing the configuration of an invalid MAC.
+    ELSE
+        Should Be Equal  ${status}  ${True}
+        ...  msg=Not allowing the configuration of a valid MAC.
+    END

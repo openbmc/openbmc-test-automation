@@ -65,5 +65,6 @@ Verify LLDP Configuration State
     ${resp}=  Redfish.Get  ${REDFISH_LLDP_ETH_IFACE}${ethernet_interface}
     ${lldp_state_expected}=  Get From Dictionary  ${resp.dict}  Ethernet
 
-    Run Keyword If  '${lldp_state}' != '${lldp_state_expected['LLDPEnabled']}'
-    ...  Fail  msg=LLDP value is not set correctly.
+    IF  '${lldp_state}' != '${lldp_state_expected['LLDPEnabled']}'
+        Fail  msg=LLDP value is not set correctly.
+    END

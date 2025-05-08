@@ -120,8 +120,7 @@ Suite Setup Execution
     Get NTP Initial Status
     ${old_date_time}=  CLI Get BMC DateTime
     ${year_status}=  Run Keyword And Return Status  Should Not Contain  ${old_date_time}  ${year_without_ntp}
-    Run Keyword If  ${year_status} == False
-    ...  Enable NTP And Add NTP Address
+    IF  ${year_status} == False  Enable NTP And Add NTP Address
     Set Time To Manual Mode
 
 

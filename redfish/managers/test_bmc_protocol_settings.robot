@@ -260,8 +260,9 @@ Set SSH And IPMI Protocol
     # Wait for timeout for new values to take effect.
     Sleep  ${SETTING_WAIT_TIMEOUT}
 
-    Run Keyword if  ${persistency_check} == ${True}
-    ...  Redfish OBMC Reboot (off)  stack_mode=skip
+    IF  ${persistency_check} == ${True}
+        Redfish OBMC Reboot (off)  stack_mode=skip
+    END
     Verify Protocol State  ${ssh_state}  ${ipmi_state}
 
 
