@@ -220,8 +220,8 @@ Verify VPD Data Via Vpdtool
     # component       VPD component (e.g. System,Chassis etc).
     # field           VPD field (e.g. Serialnumber,LocationCode etc).
 
-    ${component_url}=  Run Keyword If
-    ...  '${component}' == 'System'  Set Variable  /system
+    ${component_url}=  Set Variable If
+    ...  '${component}' == 'System'  /system
 
     # Get VPD details of given component via vpd-tool.
     ${vpd_records}=  Vpdtool  -o -O ${component_url}

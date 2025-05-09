@@ -464,10 +464,11 @@ Redfish Post Acquire Lock
     ...  expected_status=any
     Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
-    Run Keyword If  ${status_code} == ${HTTP_BAD_REQUEST}
-    ...    Valid Value  ${BAD_REQUEST}  ['${resp.content}']
-    ...  ELSE
-    ...    Run Keyword And Return  Return Description Of Response  ${resp.content}
+    IF  ${status_code} == ${HTTP_BAD_REQUEST}
+        Valid Value  ${BAD_REQUEST}  ['${resp.content}']
+    ELSE
+        Run Keyword And Return  Return Description Of Response  ${resp.content}
+    END
 
     RETURN  ${resp}
 
@@ -487,10 +488,11 @@ Redfish Post Acquire List Lock
     ...   expected_status=any
     Should Be Equal As Strings  ${resp.status_code}  ${status_code}
 
-    Run Keyword If  ${status_code} == ${HTTP_CONFLICT}
-    ...    Should Be Equal As Strings  ${CONFLICT_RQUEST}  ${resp.content}
-    ...  ELSE
-    ...    Run Keyword And Return  Return Description Of Response  ${resp.content}
+    IF  ${status_code} == ${HTTP_CONFLICT}
+        Should Be Equal As Strings  ${CONFLICT_RQUEST}  ${resp.content}
+    ELSE
+        Run Keyword And Return  Return Description Of Response  ${resp.content}
+    END
 
     RETURN  ${resp}
 
@@ -509,8 +511,9 @@ Redfish Post Acquire Invalid Lock
     ${resp}=  Redfish Post Request
     ...  /ibm/v1/HMC/LockService/Actions/LockService.AcquireLock  data=${lock_dict_param}
     Should Be Equal As Strings  ${resp.status_code}  ${status_code}
-    Run Keyword If  '${message}' != '${EMPTY}'
-    ...  Valid Value  message  ['${resp.content}']
+    IF  '${message}' != '${EMPTY}'
+        Valid Value  message  ['${resp.content}']
+    END
 
     RETURN  ${resp}
 
@@ -666,15 +669,17 @@ Acquire Lock On Resource
 
     ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
 
-    Run Keyword If  '${reboot_flag}' == 'True'
-    ...  Run Keywords  Redfish BMC Reset Operation  AND
-    ...  Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}  AND
-    ...  Wait Until Keyword Succeeds  3 min  10 sec  Redfish BMC Match States  match_state=Enabled  AND
-    ...  Is BMC Standby  AND
-    ...  Verify Lock On Resource  ${session_info}  ${trans_id_emptylist}
+    IF  '${reboot_flag}' == 'True'
+        Redfish BMC Reset Operation
+        Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}
+        Wait Until Keyword Succeeds  3 min  10 sec  Redfish BMC Match States  match_state=Enabled
+        Is BMC Standby
+        Verify Lock On Resource  ${session_info}  ${trans_id_emptylist}
+    END
 
-    Run Keyword If  '${reboot_flag}' == 'False'
-    ...  Release Locks On Resource  ${session_info}  ${trans_id_list}  Transaction  ${HTTP_OK}
+    IF  '${reboot_flag}' == 'False'
+        Release Locks On Resource  ${session_info}  ${trans_id_list}  Transaction  ${HTTP_OK}
+    END
 
     ${trans_id_emptylist}=  Create List
     Verify Lock On Resource  ${session_info}  ${trans_id_emptylist}
@@ -930,12 +935,14 @@ Verify Acquire And Release Lock In Loop
     ${session_info}=  Create Redfish Session With ClientID  ${client_id}
     ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
 
-    Run Keyword If  '${reboot_flag}' == 'True'
-    ...  Run Keywords  Redfish BMC Reset Operation  AND
-    ...  Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}  AND
-    ...  Wait Until Keyword Succeeds  3 min  10 sec  Redfish BMC Match States  match_state=Enabled  AND
-    ...  Is BMC Standby  AND
-    ...  Post Reboot Acquire Lock  ${session_info}  ${lock_type}
+    IF  '${reboot_flag}' == 'True'
+        Redfish BMC Reset Operation
+        Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}
+        Wait Until Keyword Succeeds  3 min  10 sec  Redfish BMC Match States  match_state=Enabled
+        Is BMC Standby
+        Post Reboot Acquire Lock  ${session_info}  ${lock_type}
+    END
+
     Redfish Delete Session  ${session_info}
 
 

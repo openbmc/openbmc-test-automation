@@ -60,8 +60,10 @@ Get Thermal Records and Verify
     ${invalid_records}=  Evaluate  ${cmd}
 
     ${num_invalid_records}=  Get Length  ${invalid_records}
-    Run Keyword If  ${num_invalid_records} > ${0}
-    ...  Rprint Vars  num_invalid_records  invalid_records
+    IF  ${num_invalid_records} > ${0}
+        Rprint Vars  num_invalid_records  invalid_records
+    END
+
     Valid Value   num_invalid_records  valid_values=[0]
 
     Event Log Should Not Exist
