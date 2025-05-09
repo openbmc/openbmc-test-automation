@@ -167,7 +167,7 @@ Set Daemon And Discover BMC After Reboot
     #               If the value is False, skip the step to disable the AvahiDaemon.
 
     Verify Existence Of BMC Record From List  ${service_type}
-    Run Keyword If  '${skip}' == 'True'  Set AvahiDaemon Service  command=stop
+    IF  '${skip}' == 'True'  Set AvahiDaemon Service  command=stop
     Redfish OBMC Reboot (off)
     Verify AvahiDaemon Service Status  message=start
     Login To OS  ${AVAHI_CLIENT}  ${AVAHI_CLIENT_USERNAME}  ${AVAHI_CLIENT_PASSWORD}
