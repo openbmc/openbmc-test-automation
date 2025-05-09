@@ -369,7 +369,7 @@ Delete IPv6 Address
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
     Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
-    ...  valid_status_codes=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
+    ...  valid_status_codes=${valid_status_codes}
 
     # Note: Network restart takes around 15-18s after patch request processing
     Sleep  ${NETWORK_TIMEOUT}s
