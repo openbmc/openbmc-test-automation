@@ -100,11 +100,12 @@ Create And Verify Session ClientID
 
     ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
 
-    Run Keyword If  '${reboot_flag}' == 'True'
-    ...  Run Keywords  Redfish BMC Reset Operation  AND
-    ...  Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}  AND
-    ...  Is BMC Standby  AND
-    ...  Verify A Session Created With ClientID  ${client_ids}  ${session_info}
+    IF  '${reboot_flag}' == 'True'
+       Redfish BMC Reset Operation
+       Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}
+       Is BMC Standby
+       Verify A Session Created With ClientID  ${client_ids}  ${session_info}
+    END
 
     Redfish Delete List Of Session  ${session_info}
 
