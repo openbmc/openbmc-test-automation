@@ -16,6 +16,23 @@
       "message": "This change is already in https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/80071",
       "revId": "455e5eb6d121bfa514f534368672cef085ce5d53",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d90d6f6_172276a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-05-09T09:47:47Z",
+      "side": 1,
+      "message": "https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/80071\n\nanother commit there which will take care of it..",
+      "revId": "455e5eb6d121bfa514f534368672cef085ce5d53",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
