@@ -201,10 +201,10 @@ packages which will help to invoke tests through tox (Note that tox version
 
 **Robot Command Line**
 
-- Execute all test suites for `tests/`:
+- Execute all test suites for `redfish/` and `ipmi/`:
 
   ```
-  $ robot -v OPENBMC_HOST:xx.xx.xx.xx  tests
+  $ robot -v OPENBMC_HOST:xx.xx.xx.xx  redfish  ipmi
   ```
 
 - Execute a test suite:
@@ -223,8 +223,6 @@ packages which will help to invoke tests through tox (Note that tox version
   $ export OPENBMC_USERNAME=<openbmc username>
   $ export OPENBMC_PASSWORD=<openbmc password>
   $ export IPMI_COMMAND=<Dbus/External>
-  $ export REST_USERNAME=<REST interface username>
-  $ export REST_PASSWORD=<REST interface password>
   ```
 
   or
@@ -246,93 +244,76 @@ packages which will help to invoke tests through tox (Note that tox version
   $ export HTTPS_PORT=<https port number>
   ```
 
-  Run the QEMU CI test suite (not all tests will pass in qemu):
+  Run the QEMU CI test suite:
 
   ```
-  $ OPENBMC_HOST=x.x.x.x SSH_PORT=<port number> HTTPS_PORT=<port number> robot -A test_lists/QEMU_CI tests/
+  $ OPENBMC_HOST=xx.xx.xx.xx SSH_PORT=<port number> HTTPS_PORT=<port number> robot -A test_lists/QEMU_CI  redfish/ ipmi/
   ```
 
 - Run tests:
 
-  ```
-  $ tox tests
-  ```
-
 - How to run an individual test:
 
   ```
-  $ tox -e default -- --include Power_On_Test  tests/test_basic_poweron.robot
+  $ OPENBMC_HOST=xx.xx.xx.xx tox -e default -- --include Test_SSH_And_IPMI_Connections redfish/extended/test_basic_ci.robot
   ```
 
-- No preset environment variables, default configuration for all supported
-  systems:
+- How to run CI and CT bucket test:
+
+  Default CI test bucket list:
 
   ```
-  $ OPENBMC_HOST=x.x.x.x tox -e default -- tests
+  $ OPENBMC_HOST=xx.xx.xx.xx tox -e default -- --argumentfile test_lists/HW_CI  redfish/  ipmi/
   ```
 
-- No preset environment variables, one test case from a test suite:
+  Default CI smoke test bucket list:
 
   ```
-  $ OPENBMC_HOST=x.x.x.x tox -e default -- --include Power_On_Test tests/test_basic_poweron.robot
-  ```
-
-- No preset environment variables, the entire test suite:
-
-  ```
-  $ OPENBMC_HOST=x.x.x.x tox -e default -- tests
-  ```
-
-- No preset environment variables, the entire test suite excluding test cases
-  using argument file:
-
-  ```
-  $ OPENBMC_HOST=x.x.x.x tox -e default -- --argumentfile test_lists/skip_test tests
+  $ OPENBMC_HOST=xx.xx.xx.xx tox -e default -- --argumentfile test_lists/CT_basic_run  redfish/  ipmi/
   ```
 
 - Exclude test list for supported systems:
 
   ```
-  Palmetto:  test_lists/skip_test_palmetto
   Witherspoon:  test_lists/skip_test_witherspoon
   ```
 
   Using the exclude lists (example for Witherspoon)
 
   ```
-  $ robot -v OPENBMC_HOST:xx.xx.xx.xx -A test_lists/skip_test_witherspoon tests/
+  $ robot -v OPENBMC_HOST:xx.xx.xx.xx -A test_lists/skip_test_witherspoon  redfish/ ipmi/
   ```
 
-- Run IPMI tests:
+- Run IPMI tests via robot CLI interface:
 
   Running only out-of-band IPMI tests:
 
   ```
-  $ robot -v IPMI_COMMAND:External -v OPENBMC_HOST:x.x.x.x --argumentfile test_lists/witherspoon/skip_inband_ipmi tests/ipmi/
+  $ robot -v IPMI_COMMAND:External -v OPENBMC_HOST:xx.xx.xx.xx --argumentfile test_lists/witherspoon/skip_inband_ipmi  ipmi/
   ```
 
   Running only inband IPMI tests:
 
   ```
-  $ robot -v IPMI_COMMAND:Inband -v OPENBMC_HOST:x.x.x.x -v OS_HOST:x.x.x.x -v OS_USERNAME:xxxx -v OS_PASSWORD:xxxx --argumentfile test_lists/witherspoon/skip_oob_ipmi tests/ipmi/
+  $ robot -v IPMI_COMMAND:Inband -v OPENBMC_HOST:xx.xx.xx.xx -v OS_HOST:xx.xx.xx.xx -v OS_USERNAME:xxxx -v OS_PASSWORD:xxxx --argumentfile test_lists/witherspoon/skip_oob_ipmi  ipmi/
   ```
 
-- Run GUI tests:
+- Run GUI tests via robot CLI interface:
 
   By default, GUI runs with Firefox browser and headless mode. Example with
   Chrome browser and header mode:
 
   ```
-  $ robot -v OPENBMC_HOST:x.x.x.x -v GUI_BROWSER:gc -v GUI_MODE:header gui/test/
+  $ robot -v OPENBMC_HOST:xx.xx.xx.xx -v GUI_BROWSER:gc -v GUI_MODE:header gui/test/
   ```
 
   Run GUI default CI test bucket:
 
   ```
-  $ robot -v OPENBMC_HOST:x.x.x.x --argumentfile test_lists/BMC_WEB_CI gui/test/
+  $ robot -v OPENBMC_HOST:xx.xx.xx.xx --argumentfile test_lists/BMC_WEB_CI gui/test/
   ```
 
-- Run LDAP tests:
+- Run LDAP tests via robot CLI interface:
 
   Before using LDAP test functions, be sure appropriate LDAP user(s) and
   group(s) have been created on your LDAP server. Note: There are multiple ways
@@ -347,35 +328,7 @@ packages which will help to invoke tests through tox (Note that tox version
 
   ```
   $ cd redfish/account_service/
-  $ robot -v OPENBMC_HOST:x.x.x.x -v LDAP_SERVER_URI:<ldap(s)//LDAP Hostname / IP> -v LDAP_BIND_DN:<LDAP Bind DN> -v LDAP_BASE_DN:<LDAP Base DN> -v LDAP_BIND_DN_PASSWORD:<LDAP Bind password> -v LDAP_SEARCH_SCOPE:<LDAP search scope> -v LDAP_SERVER_TYPE:<LDAP server type> -v LDAP_USER:<LDAP user-id> -v LDAP_USER_PASSWORD:<LDAP PASSWORD> -v GROUP_NAME:<Group Name> -v GROUP_PRIVILEGE:<Privilege>  ./test_ldap_configuration.robot
-  ```
-
-- How to run CI and CT bucket test:
-
-  Default CI test bucket list:
-
-  ```
-  $ OPENBMC_HOST=x.x.x.x tox -e default -- --argumentfile test_lists/HW_CI tests
-  ```
-
-  Default CI smoke test bucket list:
-
-  ```
-  $ OPENBMC_HOST=x.x.x.x tox -e default -- --argumentfile test_lists/CT_basic_run tests
-  ```
-
-- Run extended tests:
-
-  For-loop test (default iteration is 10):
-
-  ```
-  $ robot -v OPENBMC_HOST:x.x.x.x -v OPENBMC_SYSTEMMODEL:xxxxxx -v ITERATION:n -v LOOP_TEST_COMMAND:xxxxxx extended/full_suite_regression.robot
-  ```
-
-  Example using tox testing a test suite for 5 iterations "witherspoon":
-
-  ```
-  OPENBMC_HOST=x.x.x.x  LOOP_TEST_COMMAND="tests/test_fw_version.robot" ITERATION=5 OPENBMC_SYSTEMMODEL=witherspoon tox -e witherspoon -- ./extended/full_suite_regression.robot
+  $ robot -v OPENBMC_HOST:xx.xx.xx.xx -v LDAP_SERVER_URI:<ldap(s)//LDAP Hostname / IP> -v LDAP_BIND_DN:<LDAP Bind DN> -v LDAP_BASE_DN:<LDAP Base DN> -v LDAP_BIND_DN_PASSWORD:<LDAP Bind password> -v LDAP_SEARCH_SCOPE:<LDAP search scope> -v LDAP_SERVER_TYPE:<LDAP server type> -v LDAP_USER:<LDAP user-id> -v LDAP_USER_PASSWORD:<LDAP PASSWORD> -v GROUP_NAME:<Group Name> -v GROUP_PRIVILEGE:<Privilege>  ./test_ldap_configuration.robot
   ```
 
 - Host CPU architecture
@@ -394,5 +347,5 @@ packages which will help to invoke tests through tox (Note that tox version
 - HW CI tox command:
 
   ```
-  $ OPENBMC_HOST=x.x.x.x tox -e default -- --argumentfile test_lists/HW_CI tests
+  $ OPENBMC_HOST=xx.xx.xx.xx tox -e default -- --argumentfile test_lists/HW_CI  redfish/  ipmi/
   ```
