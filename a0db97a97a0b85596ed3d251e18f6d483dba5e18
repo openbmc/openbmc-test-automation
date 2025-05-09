@@ -39,6 +39,30 @@
       },
       "revId": "a0db97a97a0b85596ed3d251e18f6d483dba5e18",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b19b94f7_8ae41df0",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-05-09T10:23:47Z",
+      "side": 1,
+      "message": "Keeping as is to maintain the same consistency throughout the suite.\nusing the same in Delete IPv6 Address.",
+      "parentUuid": "83b39541_6d772452",
+      "range": {
+        "startLine": 556,
+        "startChar": 0,
+        "endLine": 558,
+        "endChar": 76
+      },
+      "revId": "a0db97a97a0b85596ed3d251e18f6d483dba5e18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
