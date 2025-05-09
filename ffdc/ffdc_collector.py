@@ -1443,33 +1443,67 @@ class ffdc_collector:
 
     def plugin_error_check(self, plugin_dict):
         r"""
-        Plugin error dict processing.
+        Process plugin error dictionary and return the corresponding error
+        message.
 
-        Description of argument(s):
-        plugin_dict        Dictionary of plugin error.
+        This method checks if any dictionary in the plugin_dict list contains
+        a "plugin_error" key. If such a dictionary is found, it retrieves the
+        value associated with the "plugin_error" key and returns the
+        corresponding error message from the plugin_error_dict attribute.
+
+        Parameters:
+            plugin_dict (list of dict): A list of dictionaries containing
+                                        plugin error information.
+
+        Returns:
+           str: The error message corresponding to the "plugin_error" value,
+                or None if no error is found.
         """
         if any("plugin_error" in d for d in plugin_dict):
             for d in plugin_dict:
                 if "plugin_error" in d:
                     value = d["plugin_error"]
-                    # Reference if the error is set or not by plugin.
-                    return plugin_error_dict[value]
+                    return self.plugin_error_dict.get(value, None)
+        return None
 
     def key_index_list_dict(self, key, list_dict):
         r"""
-        Iterate list of dictionary and return index if the key match is found.
+        Find the index of the first dictionary in the list that contains
+        the specified key.
 
-        Description of argument(s):
-        key           Valid Key in a dict.
-        list_dict     list of dictionary.
+        Parameters:
+            key (str):                 The key to search for in the
+                                       dictionaries.
+            list_dict (list of dict):  A list of dictionaries to search
+                                       through.
+
+        Returns:
+            int: The index of the first dictionary containing the key, or -1
+            if no match is found.
         """
         for i, d in enumerate(list_dict):
-            if key in d.keys():
+            if key in d:
                 return i
+        return -1
 
     def plugin_expect_type(self, type, data):
         r"""
-        Plugin expect directive type check.
+        Check if the provided data matches the expected type.
+
+        This method checks if the data argument matches the specified type.
+        It supports the following types: "int", "float", "str", "list", "dict",
+        and "tuple".
+
+        If the type is not recognized, it logs an info message and returns
+        "INVALID".
+
+        Parameters:
+            type (str): The expected data type.
+            data:       The data to check against the expected type.
+
+        Returns:
+            bool or str: True if the data matches the expected type, False if
+                         not, or "INVALID" if the type is not recognized.
         """
         if type == "int":
             return isinstance(data, int)
