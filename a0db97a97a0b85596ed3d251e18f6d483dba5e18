@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83b39541_6d772452",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-05-09T09:47:22Z",
+      "side": 1,
+      "message": "Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body\u003d\u0026{data}\n    ...  valid_status_codes\u003d${valid_status_codes}",
+      "range": {
+        "startLine": 556,
+        "startChar": 0,
+        "endLine": 558,
+        "endChar": 76
+      },
+      "revId": "a0db97a97a0b85596ed3d251e18f6d483dba5e18",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
