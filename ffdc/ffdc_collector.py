@@ -16,6 +16,9 @@ from errno import EACCES, EPERM
 
 import yaml
 
+sys.dont_write_bytecode = True
+
+
 script_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(script_dir)
 # Walk path and append to sys.path

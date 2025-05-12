@@ -8,3 +8,4 @@ env_params:
     var1: 1
     var2: 2
     var3: 3
+    manager_id: "bmc"
