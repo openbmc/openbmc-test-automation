@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1b3636b_40cc8946",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-05-12T05:32:13Z",
+      "side": 1,
+      "message": "Not required. Remove",
+      "range": {
+        "startLine": 470,
+        "startChar": 8,
+        "endLine": 470,
+        "endChar": 30
+      },
+      "revId": "dfa71ae57bffe145dd60fce99aefa4b064a6d470",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb4b4f17_3747a7be",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-05-12T05:32:13Z",
+      "side": 1,
+      "message": "Same comment as above",
+      "range": {
+        "startLine": 494,
+        "startChar": 8,
+        "endLine": 494,
+        "endChar": 30
+      },
+      "revId": "dfa71ae57bffe145dd60fce99aefa4b064a6d470",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
