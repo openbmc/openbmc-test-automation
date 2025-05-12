@@ -327,14 +327,16 @@ Verify Redfish Functional Image Version Is Same
 
     Verify Firmware Version Same In Firmware Inventory And Managers
 
-    Run Keyword If  'backup_image' == '${image}'
-    ...  Verify Firmware Version Is Not Same In Firmware Inventory And Managers
+    IF  'backup_image' == '${image}'
+        Verify Firmware Version Is Not Same In Firmware Inventory And Managers
+    END
 
-    Run Keyword If  'switch_backup_image' == '${image}'
-    ...  Run Keywords  Set Backup Firmware Image As Functional  AND
-    ...    Verify Firmware Version Same In Firmware Inventory And Managers  AND
-    ...    Set Backup Firmware Image As Functional  AND
-    ...    Verify Firmware Version Same In Firmware Inventory And Managers
+    IF  'switch_backup_image' == '${image}'
+        Set Backup Firmware Image As Functional
+        Verify Firmware Version Same In Firmware Inventory And Managers
+        Set Backup Firmware Image As Functional
+        Verify Firmware Version Same In Firmware Inventory And Managers
+    END
 
 
 Verify Active Software Image And Firmware Inventory Is Same
