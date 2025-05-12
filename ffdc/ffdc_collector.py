@@ -5,6 +5,7 @@ See class prolog below for details.
 """
 
 import json
+import yaml
 import logging
 import os
 import platform
@@ -14,7 +15,8 @@ import sys
 import time
 from errno import EACCES, EPERM
 
-import yaml
+sys.dont_write_bytecode = True
+
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(script_dir)
