@@ -16,6 +16,24 @@
       "message": "This we may need to tweak a bit since its returning Content for this else statement\n\nRun Keyword And Return  Return Description Of Response  ${resp.content} \n\nkeep the original for this line",
       "revId": "a51efdb92d81370a1da4da5ba374744f764d8cf4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ca24767_9566895a",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-05-12T14:18:31Z",
+      "side": 1,
+      "message": "thanks for correcting..",
+      "parentUuid": "efab24b1_3bd53fc9",
+      "revId": "a51efdb92d81370a1da4da5ba374744f764d8cf4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
