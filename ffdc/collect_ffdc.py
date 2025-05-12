@@ -190,6 +190,8 @@ def input_options_ok(
             "        \n\tERROR: Config file %s is not found.  Please verify"
             " path and filename." % config
         )
+    else:
+        print("        \n\tLoading YAML File: %s" % config)
 
     return all_options_ok
 
