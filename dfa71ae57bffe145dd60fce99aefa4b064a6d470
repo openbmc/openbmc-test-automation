@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b13b7556_cfe0d7d1",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-05-12T06:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1b3636b_40cc8946",
+      "range": {
+        "startLine": 470,
+        "startChar": 8,
+        "endLine": 470,
+        "endChar": 30
+      },
+      "revId": "dfa71ae57bffe145dd60fce99aefa4b064a6d470",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb4b4f17_3747a7be",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-05-12T05:32:13Z",
       "side": 1,
       "message": "Same comment as above",
+      "range": {
+        "startLine": 494,
+        "startChar": 8,
+        "endLine": 494,
+        "endChar": 30
+      },
+      "revId": "dfa71ae57bffe145dd60fce99aefa4b064a6d470",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dca88e14_1fa14b8c",
+        "filename": "openpower/ext_interfaces/test_lock_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-05-12T06:35:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb4b4f17_3747a7be",
       "range": {
         "startLine": 494,
         "startChar": 8,
