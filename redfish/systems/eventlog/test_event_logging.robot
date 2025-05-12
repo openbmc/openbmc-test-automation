@@ -301,8 +301,9 @@ Verify Event Logs Capping
 
     ${elogs}=  Get Event Logs
     ${count}=  Get Length  ${elogs}
-    Run Keyword If  ${count} > 200
-    ...  Fail  Error logs created exceeded max capacity 200.
+    IF  ${count} > 200
+        Fail  Error logs created exceeded max capacity 200.
+    END
 
 
 Test Event Log Wrapping
@@ -373,7 +374,7 @@ Suite Setup Execution
     Redfish Purge Event Log
 
     ${status}=  Run Keyword And Return Status  Logging Test Binary Exist
-    Run Keyword If  ${status} == ${False}  Install Tarball
+    IF  ${status} == ${False}  Install Tarball
 
 
 Suite Teardown Execution
@@ -388,7 +389,7 @@ Test Setup Execution
     Redfish Purge Event Log
 
     ${status}=  Run Keyword And Return Status  Logging Test Binary Exist
-    Run Keyword If  ${status} == ${False}  Install Tarball
+    IF  ${status} == ${False}  Install Tarball
 
 
 Test Teardown Execution
@@ -451,7 +452,7 @@ Verify Watchdog EventLog Content
         IF  '${found_match}' == 'True'  BREAK
     END
 
-    Run Keyword If  '${found_match}' == 'False'  Fail  msg=No watchdog error logged.
+    IF  '${found_match}' == 'False'  Fail  msg=No watchdog error logged.
 
 
 Is Watchdog Error Found

@@ -363,15 +363,16 @@ Run Operation On BMC
       Run  mkdir certificate_dir
     END
 
-    Run Keyword If  '${operation}' == 'host_name'
-    ...    Run Configure BMC Hostname In Loop  count=${count}
-    ...  ELSE IF  '${operation}' == 'kernel_panic'
-    ...    Run Keywords  Kernel Panic BMC Reset Operation  AND
-    ...    Is BMC Unpingable
-    ...  ELSE IF  '${operation}' == 'https_certificate'
-    ...    Redfish Update Certificate Upload In Loop  count=${count}
-    ...  ELSE
-    ...    Fail  msg=Operation not handled.
+    IF  '${operation}' == 'host_name'
+        Run Configure BMC Hostname In Loop  count=${count}
+    ELSE IF  '${operation}' == 'kernel_panic'
+        Kernel Panic BMC Reset Operation
+        Is BMC Unpingable
+    ELSE IF  '${operation}' == 'https_certificate'
+        Redfish Update Certificate Upload In Loop  count=${count}
+    ELSE
+        Fail  msg=Operation not handled.
+    END
 
 
 Get Active Firmware Image
@@ -458,10 +459,11 @@ Verify Redfish Code Update With Different Interrupted Operation
     ...  ${before_update_activeswimage['ActiveSoftwareImage']['@odata.id']}
     ...  ${after_update_activeswimage['ActiveSoftwareImage']['@odata.id']}
 
-    Run Keyword If  '${operation}' == 'kernel_panic'
-    ...    Should Be True  ${status}
-    ...  ELSE
-    ...    Should Not Be True  ${status}
+    IF  '${operation}' == 'kernel_panic'
+        Should Be True  ${status}
+    ELSE
+        Should Not Be True  ${status}
+    END
 
     Verify Get ApplyTime  OnReset
 
