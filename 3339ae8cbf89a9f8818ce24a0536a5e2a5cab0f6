@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a63c99cc_660a2068",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-05-12T08:31:56Z",
+      "side": 1,
+      "message": "Not required.. this is how to run it..",
+      "parentUuid": "7877e65b_966be48c",
+      "revId": "3339ae8cbf89a9f8818ce24a0536a5e2a5cab0f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14766fe8_dc51f7c1",
         "filename": "README.md",
         "patchSetId": 1
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc73749d_377b6407",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-05-12T08:31:56Z",
+      "side": 1,
+      "message": "yes its working list for QEMU and currently running upstream commits",
+      "parentUuid": "14766fe8_dc51f7c1",
+      "revId": "3339ae8cbf89a9f8818ce24a0536a5e2a5cab0f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8575d299_a5f61191",
         "filename": "README.md",
         "patchSetId": 1
@@ -48,6 +84,30 @@
       "writtenOn": "2025-05-12T06:47:31Z",
       "side": 1,
       "message": "here we are referring entire ipmi bucket which has several test suites all are not for in-band ipmi.. skip list has only very limited outband scenarios to skip",
+      "range": {
+        "startLine": 298,
+        "startChar": 1,
+        "endLine": 298,
+        "endChar": 182
+      },
+      "revId": "3339ae8cbf89a9f8818ce24a0536a5e2a5cab0f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2825ec15_237fb36c",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-05-12T08:31:56Z",
+      "side": 1,
+      "message": "Correct thats because it referring to skip out of band in inband run\n\nRunning only inband IPMI tests:",
+      "parentUuid": "8575d299_a5f61191",
       "range": {
         "startLine": 298,
         "startChar": 1,
