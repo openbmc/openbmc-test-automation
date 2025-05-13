@@ -41,7 +41,7 @@ Host BIOS Power On
     [Documentation]  Power On the system and wait for OS
     [Tags]  Host_BIOS_Power_On  open-power
 
-    Run Keyword If  '${PREV_TEST_STATUS}' == 'PASS'  Validate Power On
+    IF  '${PREV_TEST_STATUS}' == 'PASS'  Validate Power On
 
 *** Keywords ***
 

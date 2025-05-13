@@ -95,7 +95,8 @@ OBMC Boot Test
     # rename the "OBMC Boot Test Py" python function to "OBMC Boot Test" and
     # do away with this robot keyword.
 
-    Run Keyword If  '${pos_arg1}' != '${EMPTY}'
-    ...  Set To Dictionary  ${arguments}  loc_boot_stack=${pos_arg1}
+    IF  '${pos_arg1}' != '${EMPTY}'
+        Set To Dictionary  ${arguments}  loc_boot_stack=${pos_arg1}
+    END
 
     OBMC Boot Test Py  &{arguments}
