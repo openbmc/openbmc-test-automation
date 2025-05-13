@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9714ba8a_263906d1",
+        "filename": "openpower/ext_interfaces/test_vmi_multiple_interfaces.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-05-13T14:48:34Z",
+      "side": 1,
+      "message": "${conf_value}\u003d  Get VMI Network Interface Details  ${interface}\n        ${vmi_network_conf_value}\u003d  Set Variable If  ${length} !\u003d ${0}  ${conf_value}",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 60
+      },
+      "revId": "1aa8d472ff68471c44f799cdee2ef5b60764cb97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "172bdda3_642308c6",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-05-13T14:48:34Z",
+      "side": 1,
+      "message": "${openssl_cmd}\u003d  Set Variable If   ${is_csr_file}\n\t...  openssl req -in ${file_name} -text -noout | grep Subject:\n\t...  openssl x509 -in ${file_name} -text -noout | grep Subject:\n    \n    ${subject}\u003d  Run  openssl req -in ${file_name} -text -noout | grep Subject:",
+      "range": {
+        "startLine": 668,
+        "startChar": 0,
+        "endLine": 672,
+        "endChar": 75
+      },
+      "revId": "1aa8d472ff68471c44f799cdee2ef5b60764cb97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c585f6a4_f393b5ab",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-05-13T14:48:34Z",
+      "side": 1,
+      "message": "Do the same as above",
+      "range": {
+        "startLine": 685,
+        "startChar": 0,
+        "endLine": 687,
+        "endChar": 65
+      },
+      "revId": "1aa8d472ff68471c44f799cdee2ef5b60764cb97",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
