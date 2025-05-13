@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0d7d495_00437555",
+        "filename": "ffdc/ffdc_collector.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-05-13T09:36:43Z",
+      "side": 1,
+      "message": "Any reason why this is done?",
+      "revId": "67b40f91d4a90f4d73a7e8440d5de29d96a731ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
