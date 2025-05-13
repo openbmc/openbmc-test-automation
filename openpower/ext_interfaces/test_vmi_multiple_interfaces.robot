@@ -119,8 +119,8 @@ Get Original Vmi Details
         ${ip_resp}=  Evaluate  json.loads(r'''${resp.text}''')  json
         ${length}=  Get Length  ${ip_resp["IPv4StaticAddresses"]}
         ${vmi_network_conf}=  Catenate  SEPARATOR=_   vmi_network_conf  ${interface}
-        ${vmi_network_conf_value}=  Run Keyword If  ${length} != ${0}
-        ...  Get VMI Network Interface Details  ${interface}
+        ${conf_value}=  Get VMI Network Interface Details  ${interface}
+        ${vmi_network_conf_value}=  Set Variable If  ${length} != ${0}  ${conf_value}
         Set Suite Variable  ${${vmi_network_conf}}  ${vmi_network_conf_value}
     END
 
@@ -130,12 +130,13 @@ Suite Teardown Execution
     ...  Set original vmi details and verify.
 
     FOR  ${interface}  IN   @{interface_list}
-        Run Keyword If  ${vmi_network_conf_${interface}} != ${None}
-        ...  Set Static IPv4 Address To VMI And Verify
-        ...  ${vmi_network_conf_${interface}}[IPv4_Address]
-        ...  ${vmi_network_conf_${interface}}[IPv4_Gateway]
-        ...  ${vmi_network_conf_${interface}}[IPv4_SubnetMask]
-        ...  ${HTTP_ACCEPTED}  ${interface}
+        IF  ${vmi_network_conf_${interface}} != ${None}
+            Set Static IPv4 Address To VMI And Verify
+            ...  ${vmi_network_conf_${interface}}[IPv4_Address]
+            ...  ${vmi_network_conf_${interface}}[IPv4_Gateway]
+            ...  ${vmi_network_conf_${interface}}[IPv4_SubnetMask]
+            ...  ${HTTP_ACCEPTED}  ${interface}
+        END
     END
 
     Redfish.Logout
