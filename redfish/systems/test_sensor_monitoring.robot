@@ -93,10 +93,11 @@ Required Parameters For Sensor Monitoring
     Should Not Be Empty   ${OS_HOST}
     Should Not Be Empty   ${OS_USERNAME}
     Should Not Be Empty   ${OS_PASSWORD}
-    Run Keyword If  '${OPENBMC_CONN_METHOD}' == 'ssh'
-    ...    Should Not Be Empty   ${OPENBMC_HOST}
-    ...  ELSE IF  '${OPENBMC_CONN_METHOD}' == 'telnet'
-    ...    Should Not Be Empty   ${OPENBMC_SERIAL_HOST}
+    IF  '${OPENBMC_CONN_METHOD}' == 'ssh'
+        Should Not Be Empty   ${OPENBMC_HOST}
+    ELSE IF  '${OPENBMC_CONN_METHOD}' == 'telnet'
+        Should Not Be Empty   ${OPENBMC_SERIAL_HOST}
+    END
     Should Not Be Empty   ${OPENBMC_MODEL}
 
 
@@ -158,9 +159,9 @@ Check Sensor Status And Reading Via Sensor Name
         ...  or '${resp.dict['Status']['State']}' != 'Enabled'
         ...  or ${resp.dict['Reading']} == ${null}
 
-    Run Keyword If  ${condition_str}
-    ...  Append To List  ${INVALID_SENSORS}  ${sensor_name}
-
+    IF  ${condition_str}
+       Append To List  ${INVALID_SENSORS}  ${sensor_name}
+    END
 
 Check Sensor Status And Reading Via Sensor Info
     [Documentation]  Check Sensor Status And Reading Via Sensor Info.
@@ -179,8 +180,7 @@ Check Sensor Status And Reading Via Sensor Info
         ...  or '${sensor_info['Status']['State']}' != 'Enabled'
         ...  or ${sensor_info['${reading_unit}']} == ${null}
 
-        Run Keyword If  ${condition_str}
-        ...  Append To List  ${INVALID_SENSORS}  ${sensor_info['MemberId']}
+        IF  ${condition_str}  Append To List  ${INVALID_SENSORS}  ${sensor_info['MemberId']}
     END
 
 
@@ -218,6 +218,5 @@ Check Sensors Present
 
     FOR  ${sensor_name}  IN  @{expected_sensor_name_list}
         ${exist}=  Evaluate  '${sensor_name}' in ${curr_sensor_name_list}
-        Run Keyword If  '${exist}' == '${False}'
-        ...  Append To List  ${INVALID_SENSORS}  ${sensor_name}
+        IF  '${exist}' == '${False}'  Append To List  ${INVALID_SENSORS}  ${sensor_name}
     END

@@ -44,8 +44,9 @@ Get Voltage Records and Verify
     ...  [('Health', '^OK$'), ('State', '^Enabled$'), ('${reading_type}', '')]  regex=1  invert=1
     ${num_invalid_records}=  Get Length  ${invalid_records}
 
-    Run Keyword If  ${num_invalid_records} > ${0}
-    ...  Rprint Vars  num_invalid_records  invalid_records  fmt=terse
+    IF  ${num_invalid_records} > ${0}
+        Rprint Vars  num_invalid_records  invalid_records  fmt=terse
+    END
     Valid Value  num_invalid_records  valid_values=[0]
 
     ${cmd}  Catenate  [x for x in ${records}
@@ -53,8 +54,9 @@ Get Voltage Records and Verify
     ${invalid_records}=  Evaluate  ${cmd}
 
     ${num_invalid_records}=  Get Length  ${invalid_records}
-    Run Keyword If  ${num_invalid_records} > ${0}
-    ...  Rprint Vars  num_invalid_records  invalid_records  fmt=terse
+    IF  ${num_invalid_records} > ${0}
+        Rprint Vars  num_invalid_records  invalid_records  fmt=terse
+    END
     Valid Value  num_invalid_records  valid_values=[0]
 
 

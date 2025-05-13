@@ -42,10 +42,10 @@ Verify Redfish Host PowerOn
 
     Redfish Power On
 
-    Run Keyword If  ${additional_occ_check} == ${1}
-    ...  Wait Until Keyword Succeeds  3 mins  30 secs  Match OCC And CPU State Count
-
-    Run Keyword If  ${additional_power_check} == ${1}  Power Check
+    IF  ${additional_occ_check} == ${1}
+        Wait Until Keyword Succeeds  3 mins  30 secs  Match OCC And CPU State Count
+    END
+    IF  ${additional_power_check} == ${1}  Power Check
 
 
 Verify Redfish Host GracefulRestart
@@ -67,7 +67,7 @@ Test Setup Execution
     [Documentation]  Do test case setup tasks.
 
     Printn
-    Run Keyword If  ${capture_sol} == ${1}  Start SOL Console Logging
+    IF  ${capture_sol} == ${1}  Start SOL Console Logging
     Redfish.Login
 
 
@@ -75,12 +75,14 @@ Test Teardown Execution
     [Documentation]  Collect FFDC and SOL log.
 
     FFDC On Test Case Fail
-    Run Keyword If  ${capture_sol} == ${1}  Stop SOL Capture
+    IF  ${capture_sol} == ${1}  Stop SOL Capture
 
-    Run Keyword If  ${REDFISH_SUPPORTED}
-    ...    Redfish Set Auto Reboot  RetryAttempts
-    ...  ELSE
-    ...    Set Auto Reboot  ${1}
+    IF  ${REDFISH_SUPPORTED}
+        Redfish Set Auto Reboot  RetryAttempts
+    ELSE
+        Set Auto Reboot  ${1}
+    END
+
     Redfish.Logout
 
 
@@ -108,9 +110,9 @@ Power Check
 
         # Ensure the path does have the attribute else set to EMPTY as default to skip.
         ${value}=  Get Variable Value  ${power_control[0]['PowerConsumedWatts']}  ${EMPTY}
-        Run Keyword If  "${value}" == "${EMPTY}"
-        ...  Remove Values From List  ${power_uri_list}  ${idx}
-
+        IF  "${value}" == "${EMPTY}"
+            Remove Values From List  ${power_uri_list}  ${idx}
+        END
         # Check the next available element in the list.
         IF  "${value}" == "${EMPTY}"  CONTINUE
 

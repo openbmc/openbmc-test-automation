@@ -212,6 +212,6 @@ Populate PostCode Logs Incase No Prior Entries Available
 
     ${post_codes}=  Redfish.Get Properties
     ...  /redfish/v1/Systems/${SYSTEM_ID}/LogServices/PostCodes/Entries
-    Run Keyword If  ${post_codes['Members@odata.count']} == 0
-    ...  RF SYS GracefulRestart
-
+    IF  ${post_codes['Members@odata.count']} == 0
+        RF SYS GracefulRestart
+    END
