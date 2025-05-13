@@ -603,8 +603,9 @@ Send CSR To VMI And Get Signed
     # username               Username to create a REST session.
     # password               Password to create a REST session.
 
-    Run Keyword If  "${XAUTH_TOKEN}" != "${EMPTY}" or ${force_create} == ${True}
-    ...  Initialize OpenBMC  rest_username=${username}  rest_password=${password}
+    IF  "${XAUTH_TOKEN}" != "${EMPTY}" or ${force_create} == ${True}
+         Initialize OpenBMC  rest_username=${username}  rest_password=${password}
+    END
 
     ${data}=  Create Dictionary
     ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}
@@ -636,8 +637,9 @@ Get Root Certificate
     #                    This is not applicable for root certificate.
     # valid_status_code  Expected status code from REST request.
 
-    Run Keyword If  "${XAUTH_TOKEN}" != "${EMPTY}" or ${force_create} == ${True}
-    ...  Initialize OpenBMC  rest_username=${username}  rest_password=${password}
+    IF  "${XAUTH_TOKEN}" != "${EMPTY}" or ${force_create} == ${True}
+         Initialize OpenBMC  rest_username=${username}  rest_password=${password}
+    END
 
     ${data}=  Create Dictionary
     ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}
@@ -664,10 +666,10 @@ Get Subject
     # file_name          Name of CSR or signed CERT file.
     # is_csr_file        A True value means a CSR while a False is for signed CERT file.
 
-    ${subject}=  Run Keyword If  ${is_csr_file}
-    ...     Run  openssl req -in ${file_name} -text -noout | grep Subject:
-    ...   ELSE
-    ...     Run  openssl x509 -in ${file_name} -text -noout | grep Subject:
+    ${openssl_cmd}=  Set Variable If  ${is_csr_file}
+    ...  openssl req -in ${file_name} -text -noout | grep Subject:
+    ...  openssl x509 -in ${file_name} -text -noout | grep Subject:
+    ${subject}=  Run  ${openssl_cmd}
 
     RETURN  ${subject}
 
@@ -680,8 +682,10 @@ Get Public Key
     # file_name          Name of CSR or CERT file.
     # is_csr_file        A True value means a CSR while a False is for signed CERT file.
 
-    ${PublicKey}=  Run Keyword If  ${is_csr_file}  Run  openssl req -in ${file_name} -noout -pubkey
-    ...   ELSE  Run  openssl x509 -in ${file_name} -noout -pubkey
+    ${openssl_cmd}=  Set Variable If  ${is_csr_file}
+    ...  openssl req -in ${file_name} -noout -pubkey
+    ...  openssl x509 -in ${file_name} -noout -pubkey
+    ${PublicKey}=  Run  ${openssl_cmd}
 
     RETURN  ${PublicKey}
 
