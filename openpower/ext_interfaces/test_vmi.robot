@@ -58,9 +58,10 @@ Verify Existing VMI Network Interface Details
     Should Be Equal As Strings  ${vmi_ip["Description"]}
     ...  Hypervisor's Virtual Management Ethernet Interface
     Should Be Equal As Strings  ${vmi_ip["Name"]}  Hypervisor Ethernet Interface
-    Run Keyword If   ${vmi_ip["IPv4StaticAddresses"]} != @{empty}
-    ...  Verify VMI Network Interface Details  ${vmi_ip["IPv4_Address"]}
-    ...  ${origin}  ${vmi_ip["IPv4_Gateway"]}  ${vmi_ip["IPv4_SubnetMask"]}
+    IF   ${vmi_ip["IPv4StaticAddresses"]} != @{empty}
+         Verify VMI Network Interface Details  ${vmi_ip["IPv4_Address"]}
+         ...  ${origin}  ${vmi_ip["IPv4_Gateway"]}  ${vmi_ip["IPv4_SubnetMask"]}
+    END
 
 
 Delete Existing Static VMI IP Address
@@ -68,7 +69,9 @@ Delete Existing Static VMI IP Address
     [Tags]  Delete_Existing_Static_VMI_IP_Address
 
     ${curr_origin}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
-    Run Keyword If  ${curr_origin} == ${True}  Set VMI IPv4 Origin  ${False}  ${HTTP_ACCEPTED}
+    IF  ${curr_origin} == ${True}
+        Set VMI IPv4 Origin  ${False}  ${HTTP_ACCEPTED}
+    END
 
     Delete VMI IPv4 Address
 
@@ -78,7 +81,9 @@ Verify User Cannot Delete ReadOnly Property IPv4Addresses
     [Tags]  Verify_User_Cannot_Delete_ReadOnly_Property_IPv4Addresses
 
     ${curr_origin}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
-    Run Keyword If  ${curr_origin} == ${True}  Set VMI IPv4 Origin  ${False}  ${HTTP_ACCEPTED}
+    IF  ${curr_origin} == ${True}
+        Set VMI IPv4 Origin  ${False}  ${HTTP_ACCEPTED}
+    END
     Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
     Delete VMI IPv4 Address  IPv4Addresses  valid_status_code=${HTTP_FORBIDDEN}
 
@@ -243,7 +248,9 @@ Enable DHCP When No Static IP Configured And Verify DHCP IP
     [Teardown]  Test Teardown Execution
 
     ${curr_origin}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
-    Run Keyword If  ${curr_origin} == ${False}  Set VMI IPv4 Origin  ${True}  ${HTTP_ACCEPTED}
+    IF  ${curr_origin} == ${False}
+        Set VMI IPv4 Origin  ${True}  ${HTTP_ACCEPTED}
+    END
     ${vmi_ip_config}=  Get VMI Network Interface Details
     Verify VMI Network Interface Details  ${vmi_ip_config["IPv4_Address"]}
     ...  DHCP  ${vmi_ip_config["IPv4_Gateway"]}  ${vmi_ip_config["IPv4_SubnetMask"]}
@@ -774,7 +781,7 @@ Suite Setup Execution
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${ethernet_interface}
     ${ip_resp}=  Evaluate  json.loads(r'''${resp.text}''')  json
     ${length}=  Get Length  ${ip_resp["IPv4StaticAddresses"]}
-    ${vmi_network_conf}=  Run Keyword If  ${length} != ${0}  Get VMI Network Interface Details
+    ${vmi_network_conf}=  IF  ${length} != ${0}  Get VMI Network Interface Details
     Set Suite Variable  ${vmi_network_conf}
 
 
@@ -783,10 +790,12 @@ Test Teardown Execution
 
     FFDC On Test Case Fail
     ${curr_mode}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
-    Run Keyword If  ${curr_mode} == ${True}  Set VMI IPv4 Origin  ${False}
-    Run Keyword If  '${vmi_network_conf["IPv4_Address"]}' != '${default}'
-    ...  Set Static IPv4 Address To VMI And Verify  ${vmi_network_conf["IPv4_Address"]}
-    ...  ${vmi_network_conf["IPv4_Gateway"]}  ${vmi_network_conf["IPv4_SubnetMask"]}
+    IF  ${curr_mode} == ${True}
+        Set VMI IPv4 Origin  ${False}
+    ELSE  '${vmi_network_conf["IPv4_Address"]}' != '${default}'
+         Set Static IPv4 Address To VMI And Verify  ${vmi_network_conf["IPv4_Address"]}
+         ...  ${vmi_network_conf["IPv4_Gateway"]}  ${vmi_network_conf["IPv4_SubnetMask"]}
+    END
 
 
 Get Immediate Child Parameter From VMI Network Interface
@@ -820,8 +829,9 @@ Switch VMI IPv4 Origin And Verify Details
     ${dhcp_mode_after}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
     Should Not Be Equal  ${dhcp_mode_before}  ${dhcp_mode_after}
 
-    Run Keyword If  ${dhcp_mode_after} == ${True}
-    ...  Verify VMI Network Interface Details  ${default}  ${origin}  ${default}  ${default}
+    IF  ${dhcp_mode_after} == ${True}
+        Verify VMI Network Interface Details  ${default}  ${origin}  ${default}  ${default}
+    END
 
 
 Delete VMI Static IP Address Using Different Users
@@ -906,9 +916,11 @@ Update User Role And Set VMI IPv4 Origin
 Suite Teardown Execution
     [Documentation]  Do suite teardown execution task.
 
-    Run Keyword If  ${vmi_network_conf} != ${None}
-    ...  Set Static IPv4 Address To VMI And Verify  ${vmi_network_conf["IPv4_Address"]}
+    IF  ${vmi_network_conf} != ${None}
+        Set Static IPv4 Address To VMI And Verify  ${vmi_network_conf["IPv4_Address"]}
     ...  ${vmi_network_conf["IPv4_Gateway"]}  ${vmi_network_conf["IPv4_SubnetMask"]}
+    END
+
     Delete All Redfish Sessions
     Redfish.Logout
 
