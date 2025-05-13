@@ -1389,59 +1389,90 @@ class ffdc_collector:
 
     def yaml_env_and_plugin_vars_populate(self, yaml_arg_str):
         r"""
-        Update ${MY_VAR} and plugin vars.
+        Update environment variables and plugin variables based on the
+        provided YAML argument string.
 
-        Description of argument(s):
-        yaml_arg_str         arg string read from YAML.
+        This method processes the yaml_arg_str argument, which is expected
+        to contain a string representing environment variables and plugin
+        variables in the format:
 
-        Example:
+        .. code-block:: yaml
+
             - cat ${MY_VAR}
             - ls -AX my_plugin_var
+
+        The method parses the string, extracts the variable names, and updates
+        the corresponding environment variables and plugin variables.
+
+        Parameters:
+            yaml_arg_str (str):   A string containing environment and plugin
+                                  variable definitions in YAML format.
+
+        Returns:
+            str:   The updated YAML argument string with plugin variables
+                   replaced.
         """
-        # Parse the string for env vars ${env_vars}.
+
+        # Parse and convert the Plugin YAML vars string to python vars
+        # Example:
+        #   ${my_hostname}:${port_https} -> ['my_hostname', 'port_https']
         try:
             # Example, list of matching
             # env vars ['username', 'password', 'hostname']
             # Extra escape \ for special symbols. '\$\{([^\}]+)\}' works good.
-            var_name_regex = "\\$\\{([^\\}]+)\\}"
-            env_var_names_list = re.findall(var_name_regex, yaml_arg_str)
+            env_var_regex = r"\$\{([^\}]+)\}"
+            env_var_names_list = re.findall(env_var_regex, yaml_arg_str)
+
             for var in env_var_names_list:
-                env_var = os.environ[var]
-                env_replace = "${" + var + "}"
-                yaml_arg_str = yaml_arg_str.replace(env_replace, env_var)
+                env_var = os.environ.get(var)
+                if env_var:
+                    env_replace = "${" + var + "}"
+                    yaml_arg_str = yaml_arg_str.replace(env_replace, env_var)
         except Exception as e:
             self.logger.error("\tERROR:yaml_env_vars_populate: %s" % e)
             pass
 
-        # Parse the string for plugin vars.
+        """
+        Parse the string for plugin vars.
+        Implement the logic to update environment variables based on the
+        extracted variable names.
+        """
         try:
-            # Example, list of plugin vars ['my_username', 'my_data']
-            plugin_var_name_list = global_plugin_dict.keys()
+            # Example, list of plugin vars env_var_names_list
+            #    ['my_hostname', 'port_https']
+            global_plugin_dict_keys = set(global_plugin_dict.keys())
+            # Skip env var list already populated above code block list.
+            plugin_var_name_list = [
+                var
+                for var in global_plugin_dict_keys
+                if var not in env_var_names_list
+            ]
+
             for var in plugin_var_name_list:
-                # skip env var list already populated above code block list.
-                if var in env_var_names_list:
-                    continue
-                # If this plugin var exist but empty in dict, don't replace.
-                # This is either a YAML plugin statement incorrectly used or
-                # user added a plugin var which is not going to be populated.
+                plugin_var_value = global_plugin_dict[var]
                 if yaml_arg_str in global_plugin_dict:
-                    if isinstance(global_plugin_dict[var], (list, dict)):
-                        # List data type or dict can't be replaced, use
-                        # directly in eval function call.
+                    """
+                    If this plugin var exist but empty in dict, don't replace.
+                    his is either a YAML plugin statement incorrectly used or
+                    user added a plugin var which is not going to be populated.
+                    """
+                    if isinstance(plugin_var_value, (list, dict)):
+                        """
+                        List data type or dict can't be replaced, use
+                        directly in eval function call.
+                        """
                         global_plugin_type_list.append(var)
                     else:
                         yaml_arg_str = yaml_arg_str.replace(
-                            str(var), str(global_plugin_dict[var])
+                            str(var), str(plugin_var_value)
                         )
-                # Just a string like filename or command.
-                else:
-                    yaml_arg_str = yaml_arg_str.replace(
-                        str(var), str(global_plugin_dict[var])
-                    )
         except (IndexError, ValueError) as e:
             self.logger.error("\tERROR: yaml_plugin_vars_populate: %s" % e)
             pass
 
+        # From ${my_hostname}:${port_https} -> ['my_hostname', 'port_https']
+        # to populated values string as
+        # Example:  xx.xx.xx.xx:443 and return the string
         return yaml_arg_str
 
     def plugin_error_check(self, plugin_dict):
