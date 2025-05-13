@@ -318,7 +318,7 @@ Delete Local Partition File
 
     FOR  ${conf_file}  IN  @{file_name}
       ${file_exist}=  Run Keyword And Return Status  OperatingSystem.File Should Exist  ${conf_file}
-      Run Keyword If  'True' == '${file_exist}'  Remove File  ${conf_file}
+      IF  'True' == '${file_exist}'  Remove File  ${conf_file}
     END
 
 
@@ -335,7 +335,7 @@ Delete Local Server Partition File
 
     FOR  ${conf_file}  IN  @{match_conf_file_list}
       ${file_exist}=  Run Keyword And Return Status  OperatingSystem.File Should Exist  ${conf_file}
-      Run Keyword If  'True' == '${file_exist}'  Remove File  ${conf_file}
+      IF  'True' == '${file_exist}'  Remove File  ${conf_file}
     END
 
 
@@ -425,7 +425,7 @@ Upload Partition File To BMC
     # flag                If True run part of program, else skip.
     # path                Partition file path.
 
-    Run Keyword If  '${flag}' == '${True}'  Initialize OpenBMC
+    IF  '${flag}' == '${True}'  Initialize OpenBMC
     FOR  ${conf_file}  IN  @{file_name}
       # Get the content of the file and upload to BMC.
       ${image_data}=  OperatingSystem.Get Binary File  ${path}${conf_file}
@@ -474,10 +474,11 @@ Redfish Upload Partition File
 
     Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPLOAD_MESSAGE}
     Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
-    Run Keyword If  ${num_records} == ${1}
-    ...    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
-    ...  ELSE
-    ...    Delete All BMC Partition File  ${HTTP_OK}
+    IF  ${num_records} == ${1}
+        Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
+    ELSE
+        Delete All BMC Partition File  ${HTTP_OK}
+    END
     Delete Local Partition File  ${Partition_file_list}
 
 
@@ -499,12 +500,12 @@ Redfish Fail To Upload Partition File
     Upload Partition File To BMC  ${Partition_file_list}  ${status_code}  ${response_message}
     Verify Partition File On BMC  ${Partition_file_list}  Partition_status=${partition_status}
 
-    Run Keyword If  ${partition_status} == 0
-    ...  Run Keywords
-    ...  Delete BMC Partition File
-    ...  ${Partition_file_list}  ${HTTP_NOT_FOUND}  ${RESOURCE_NOT_FOUND_MESSAGE}  AND
-    ...  Delete All BMC Partition File  ${HTTP_OK}  AND
-    ...  Delete Local Server Partition File
+    IF  ${partition_status} == 0
+        Delete BMC Partition File
+        ...  ${Partition_file_list}  ${HTTP_NOT_FOUND}  ${RESOURCE_NOT_FOUND_MESSAGE}
+        Delete All BMC Partition File  ${HTTP_OK}
+        Delete Local Server Partition File
+    END
 
     Delete Local Partition File  ${Partition_file_list}
 
@@ -583,10 +584,12 @@ Redfish Partition File Persistency
 
     Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
     Initialize OpenBMC
-    Run Keyword If  ${num_records} == ${1}
-    ...    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
-    ...  ELSE
-    ...    Delete All BMC Partition File  ${HTTP_OK}
+    IF  ${num_records} == ${1}
+        Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
+    ELSE
+        Delete All BMC Partition File  ${HTTP_OK}
+    END
+
     Delete Local Partition File  ${Partition_file_list}
 
 
@@ -653,18 +656,21 @@ Redfish Read Partition File
 
     ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
 
-    Run Keyword If  ${True} == ${reboot_flag}
-    ...  Run Keywords  Redfish BMC Reset Operation  AND
-    ...  Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}  AND
-    ...  Wait Until Keyword Succeeds  3 min  10 sec  Redfish BMC Match States  match_state=Enabled  AND
-    ...  Is BMC Standby  AND
-    ...  Initialize OpenBMC  AND
-    ...  Verify Redfish Partition File Content  ${Partition_file_list}  ${content_dict}  ${HTTP_OK}
+    IF  ${True} == ${reboot_flag}
+        Redfish BMC Reset Operation
+        Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}
+        Wait Until Keyword Succeeds  3 min  10 sec  Redfish BMC Match States  match_state=Enabled
+        Is BMC Standby
+        Initialize OpenBMC
+    END
 
-    Run Keyword If  ${num_records} == ${1}
-    ...    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
-    ...  ELSE
-    ...    Delete All BMC Partition File  ${HTTP_OK}
+    Verify Redfish Partition File Content  ${Partition_file_list}  ${content_dict}  ${HTTP_OK}
+
+    IF  ${num_records} == ${1}
+        Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
+    ELSE
+        Delete All BMC Partition File  ${HTTP_OK}
+    END
 
     Delete Local Partition File  ${Partition_file_list}
 
@@ -686,12 +692,13 @@ Redfish Update Partition File With Same Content
 
     ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
 
-    Run Keyword If  ${True} == ${reboot_flag}
-    ...  Run Keywords  Redfish BMC Reset Operation  AND
-    ...  Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}  AND
-    ...  Wait Until Keyword Succeeds  3 min  10 sec  Redfish BMC Match States  match_state=Enabled  AND
-    ...  Is BMC Standby  AND
-    ...  Initialize OpenBMC
+    IF  ${True} == ${reboot_flag}
+        Redfish BMC Reset Operation
+        Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}
+        Wait Until Keyword Succeeds  3 min  10 sec  Redfish BMC Match States  match_state=Enabled
+        Is BMC Standby
+        Initialize OpenBMC
+    END
 
     ${content_dict}=  Add Content To Files  ${Partition_file_list}  ${0}
     Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPDATED_MESSAGE}
@@ -719,12 +726,13 @@ Redfish Update Partition File With Different Content
 
     ${before_reboot_xauth_token}=  Set Variable  ${XAUTH_TOKEN}
 
-    Run Keyword If  ${True} == ${reboot_flag}
-    ...  Run Keywords  Redfish BMC Reset Operation  AND
-    ...  Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}  AND
-    ...  Wait Until Keyword Succeeds  3 min  10 sec  Redfish BMC Match States  match_state=Enabled  AND
-    ...  Is BMC Standby  AND
-    ...  Initialize OpenBMC
+    IF  ${True} == ${reboot_flag}
+        Redfish BMC Reset Operation
+        Set Global Variable  ${XAUTH_TOKEN}  ${before_reboot_xauth_token}
+        Wait Until Keyword Succeeds  3 min  10 sec  Redfish BMC Match States  match_state=Enabled
+        Is BMC Standby
+        Initialize OpenBMC
+    END
 
     ${content_dict}=  Add Content To Files  ${Partition_file_list}  ${1}
     Upload Partition File To BMC  ${Partition_file_list}  ${HTTP_OK}  ${FILE_UPDATED_MESSAGE}
@@ -844,13 +852,13 @@ Check Redfish Upload Partition File Name With Character Limit To BMC
 
     ${file_name_length}=  Get Length  ${Partition_file_list}[0]
 
-    Run Keyword If  ${file_name_length} == 20
-    ...  Run Keywords
-    ...    Upload Partition File To BMC  ${Partition_file_list}  ${status_code}  ${message}  AND
-    ...    Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1  AND
-    ...    Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
-    ...  ELSE
-    ...    Upload Partition File To BMC  ${Partition_file_list}  ${status_code}  ${message}
+    IF  ${file_name_length} == 20
+        Upload Partition File To BMC  ${Partition_file_list}  ${status_code}  ${message}
+        Verify Partition File On BMC  ${Partition_file_list}  Partition_status=1
+        Delete BMC Partition File  ${Partition_file_list}  ${HTTP_OK}  ${FILE_DELETED_MESSAGE}
+    ELSE
+        Upload Partition File To BMC  ${Partition_file_list}  ${status_code}  ${message}
+    END
 
     Delete Local Partition File  ${Partition_file_list}
 
