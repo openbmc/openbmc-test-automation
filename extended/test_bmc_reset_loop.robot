@@ -83,8 +83,9 @@ BMC Redfish Reset Cycle
     ${bmc_version}=  Get BMC Version
     Valid Value  bmc_version  valid_values=['${initial_bmc_version}']
 
-    Run Keyword If  '${CHECK_FOR_ERRORS}' == '${1}'
-    ...  Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b
+    IF  '${CHECK_FOR_ERRORS}' == '${1}'
+        Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b
+    END
 
     Verify BMC RTC And UTC Time Drift
 
@@ -97,8 +98,9 @@ BMC Redfish Reset Runtime Cycle
     ${bmc_version}=  Get BMC Version
     Valid Value  bmc_version  valid_values=['${initial_bmc_version}']
 
-    Run Keyword If  '${CHECK_FOR_ERRORS}' == '${1}'
-    ...  Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b
+    IF  '${CHECK_FOR_ERRORS}' == '${1}'
+        Check For Regex In Journald  ${ERROR_REGEX}  error_check=${0}  boot=-b
+    END
 
     Verify BMC RTC And UTC Time Drift
 

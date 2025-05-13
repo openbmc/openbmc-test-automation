@@ -51,17 +51,17 @@ Get To Stable State
     ...  Wait For Host To Ping  ${OPENBMC_HOST}  2 mins
 
     # Check if the ping works using 1400 MTU.
-    #Run Keyword if  ${ping_status} == ${True}  MTU Ping Test
+    #IF  ${ping_status} == ${True}  MTU Ping Test
 
-    Run Keyword if  ${ping_status} == ${False}
-    ...  Fail  ${OPENBMC_HOST} ping test failed.
+    IF  ${ping_status} == ${False}  Fail  ${OPENBMC_HOST} ping test failed.
 
     Open Connection And Log In  host=${OPENBMC_HOST}
 
-    Run Keyword If  ${REDFISH_SUPPORTED}
-    ...    Redfish Clean Up
-    ...  ELSE
-    ...    REST Clean Up
+    IF  ${REDFISH_SUPPORTED}
+        Redfish Clean Up
+    ELSE
+        REST Clean Up
+    END
 
 
     Prune Journal Log
@@ -76,10 +76,11 @@ REST Clean Up
     Wait Until Keyword Succeeds  1 min  30 sec  Initialize OpenBMC
 
     ${ready_status}=  Run Keyword And Return Status  Is BMC Ready
-    Run Keyword If  '${ready_status}' == '${False}'
-    ...    Put BMC State  Ready
-    ...  ELSE
-    ...    REST Power Off  stack_mode=skip
+    IF  '${ready_status}' == '${False}'
+        Put BMC State  Ready
+    ELSE
+        REST Power Off  stack_mode=skip
+    END
 
     Run Keyword And Ignore Error  Set BMC Power Policy  ${ALWAYS_POWER_OFF}
     Run Keyword And Ignore Error  Delete All Error Logs
@@ -106,8 +107,9 @@ BMC Online Test
 
     ${l_status}=   Run Keyword and Return Status
     ...   Verify Ping and REST Authentication
-    Run Keyword If  '${l_status}' == '${False}'
-    ...   Fail  msg=System not in ideal state to continue [ERROR]
+    IF  '${l_status}' == '${False}'
+        Fail  msg=System not in ideal state to continue [ERROR]
+    END
 
 
 Update Policy Setting

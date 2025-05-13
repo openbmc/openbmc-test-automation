@@ -66,8 +66,9 @@ Post Update Boot To OS
     [Teardown]  Run Keywords  Stop SOL Console Logging
     ...         AND  Code Update Test Teardown
 
-    Run Keyword If  '${PREV_TEST_STATUS}' == 'FAIL'
-    ...  Fail  Code update failed. No need to boot to OS.
+    IF  '${PREV_TEST_STATUS}' == 'FAIL'
+        Fail  Code update failed. No need to boot to OS.
+    END
     Delete All Error Logs
     REST Power On
     Verify Running Host Image  ${IMAGE_FILE_PATH}
@@ -109,8 +110,7 @@ REST Host Code Update While OS Is Running
     [Teardown]  Run Keywords  REST Power Off  stack_mode=skip
     ...         AND  Code Update Test Teardown
 
-    Run Keyword If  '${PREV_TEST_STATUS}' == 'FAIL'
-    ...  Fail  Cannot boot the OS.
+    IF  '${PREV_TEST_STATUS}' == 'FAIL'  Fail  Cannot boot the OS.
 
     REST Power On  stack_mode=skip
     Upload And Activate Image
@@ -182,8 +182,9 @@ Set Same Priority For Multiple Host Images
     ...              images and verify that the priorities are not the same.
     [Tags]  Set_Same_Priority_For_Multiple_Host_Images
 
-    Run Keyword If  '${PREV_TEST_STATUS}' == 'FAIL'
-    ...  Fail  Activation of alternate image failed. Cannot set priority.
+    IF  '${PREV_TEST_STATUS}' == 'FAIL'
+        Fail  Activation of alternate image failed. Cannot set priority.
+    END
     Set Same Priority For Multiple Images  ${VERSION_PURPOSE_HOST}
 
 
@@ -263,10 +264,11 @@ Code Update Setup
     Run Keyword And Ignore Error  Smart Power Off
     Run Key  Delete All Dumps  ignore=1
     Run Key  Delete All Error Logs  ignore=1
-    Run Keyword If  'true' == '${DELETE_OLD_PNOR_IMAGES}'
-    ...  Delete All PNOR Images
-    Run Keyword If  'true' == '${DELETE_OLD_GUARD_FILE}'  BMC Execute Command
-    ...  rm -f /var/lib/phosphor-software-manager/pnor/prsv/GUARD
+    IF  'true' == '${DELETE_OLD_PNOR_IMAGES}'  Delete All PNOR Images
+    IF  'true' == '${DELETE_OLD_GUARD_FILE}'
+        BMC Execute Command
+        ...  rm -f /var/lib/phosphor-software-manager/pnor/prsv/GUARD
+    END
 
     BMC Execute Command  rm -rf /tmp/images/*
 
@@ -296,4 +298,4 @@ Code Update Test Teardown
     # 2. Collect FFDC if test PASS but error log exists.
 
     FFDC On Test Case Fail
-    Run Keyword If  '${TEST_STATUS}' == 'PASS'  Check Error And Collect FFDC
+    IF  '${TEST_STATUS}' == 'PASS'  Check Error And Collect FFDC
