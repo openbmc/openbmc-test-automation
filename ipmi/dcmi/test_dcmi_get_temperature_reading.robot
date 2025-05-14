@@ -135,14 +135,22 @@ Check Reading Value In D-Bus
     ${busctl_cmd_resp}=  BMC Execute Command  ${busctl_cmd}
     ${current_temp_value_from_dbus}=  Get Regexp Matches  ${busctl_cmd_resp[0]}
     ...  \\.Value\\s+property\\s+d\\s+(\\S+)\\s  1
-    Run Keyword If  '${current_temp_value_from_dbus[0]}' == 'nan' and '${dcmi_reading_value}' == '0'
-    ...  Fail  msg=sensor reading value is not present.
-    Run Keyword If  '${current_temp_value_from_dbus[0]}' != 'nan' and '${dcmi_reading_value}' == '0'
-    ...  Fail  msg=sensor reading value is showing as 0 in dcmi get temperature raw command.
+
+    IF  '${current_temp_value_from_dbus[0]}' == 'nan' and '${dcmi_reading_value}' == '0'
+        Fail  msg=sensor reading value is not present.
+    END
+
+    IF  '${current_temp_value_from_dbus[0]}' != 'nan' and '${dcmi_reading_value}' == '0'
+        Fail  msg=sensor reading value is showing as 0 in dcmi get temperature raw command.
+    END
+
     ${dbus_reading_value}=  Set Variable  .${current_temp_value_from_dbus[0].split(".")[1].strip()}
     ${status}=  Run Keyword And Return Status  Should Be True  ${dbus_reading_value} > .499
-    Run Keyword If  ${status} == False
-    ...  Fail  msg=sensor reading value is showing wrongly in dcmi get temperature raw command.
+
+    IF  ${status} == False
+        Fail  msg=sensor reading value is showing wrongly in dcmi get temperature raw command.
+    END
+
     ${dbus_reading_value}=  Set Variable  ${current_temp_value_from_dbus[0].split(".")[0].strip()}
     Should Be Equal  ${dcmi_reading_value}  ${dbus_reading_value}
     ...  msg=sensor reading value is showing wrongly in dcmi get temperature raw command.
@@ -163,16 +171,18 @@ Verify Reading With IPMI
     ${ipmi_resp_list}=  Split String  ${ipmi_resp}
     ${temperature_reading}=  Get From List  ${ipmi_resp_list}  ${get_reading_value}
     ${dcmi_reading}=  Convert To Integer  ${temperature_reading}  16
-    Run Keyword If  '${dcmi_reading}' == '0'
-    ...  Check Reading Value In D-Bus  ${key}  ${instance}  ${dcmi_reading}
+    IF  '${dcmi_reading}' == '0'
+        Check Reading Value In D-Bus  ${key}  ${instance}  ${dcmi_reading}
+    END
     ${dcmi_temp_reading}=  Convert To String  ${dcmi_reading}
     ${ipmi_sensor_cmd_resp}=  Get IPMI Sensor Reading  ${key}  ${instance}
     ${ipmi_sensor_cmd_resp_list}=  Split String  ${ipmi_sensor_cmd_resp}  |
     ${ipmi_temp_reading}=  Set Variable  ${ipmi_sensor_cmd_resp_list[1].strip().split(".")[0]}
     ${reading_status}=  Run Keyword And Return Status  Should Be Equal
     ...  ${dcmi_temp_reading}  ${ipmi_temp_reading}
-    Run Keyword If  ${reading_status} == False
-    ...  Check Reading Value In D-Bus  ${key}  ${instance}  ${dcmi_temp_reading}
+    IF  ${reading_status} == False
+        Check Reading Value In D-Bus  ${key}  ${instance}  ${dcmi_temp_reading}
+    END
 
 Get IPMI Sensor Reading
     [Documentation]  Return ipmi sensor reading.
@@ -190,10 +200,10 @@ Get IPMI Sensor Reading
     ${sensor_name_status}=  Run Keyword And Return Status  Should Contain
     ...  ${sensor_format}  _
 
-    ${sensor_name}=  Run Keyword If  ${sensor_name_status} == True
-    ...    Set Variable  ${sensor_name_dbus}
-    ...  ELSE
-    ...    Replace String  ${sensor_name}  _  ${SPACE}
+    ${replaced_str}=  Replace String  ${sensor_name}  _  ${SPACE}
+    ${sensor_name}=  Set Variable If  ${sensor_name_status} == True
+    ...  ${sensor_name_dbus}
+    ...  ${replaced_str}
 
     ${ret}=  Run External IPMI Standard Command  sensor | grep -i "${sensor_name}"
 
