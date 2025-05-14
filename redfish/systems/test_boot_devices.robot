@@ -249,9 +249,9 @@ Set And Verify Boot Source Override
     ${output}=  Run IPMI Standard Command  chassis bootparam get 5
     Should Contain  ${output}  ${redfish_ipmi_enabled_map['${override_enabled}']}
     Should Contain  ${output}  ${redfish_ipmi_target_map['${override_target}']}
-    Run Keyword If  '${PLATFORM_ARCH_TYPE}' == 'x86'
-    ...  Should Contain  ${output}  ${redfish_ipmi_mode_map['${override_mode}']}
-
+    IF  '${PLATFORM_ARCH_TYPE}' == 'x86'
+        Should Contain  ${output}  ${redfish_ipmi_mode_map['${override_mode}']}
+    END
 
 Verify Boot Source Override After BMC Reboot
     [Documentation]  Verify Boot Source Override After BMC Reboot.
@@ -304,8 +304,9 @@ Verify Boot Source Override After BMC Reboot
     ${output}=  Run IPMI Standard Command  chassis bootparam get 5
     Should Contain  ${output}  ${redfish_ipmi_enabled_map['${override_enabled}']}
     Should Contain  ${output}  ${redfish_ipmi_target_map['${override_target}']}
-    Run Keyword If  '${PLATFORM_ARCH_TYPE}' == 'x86'
-    ...  Should Contain  ${output}  ${redfish_ipmi_mode_map['${override_mode}']}
+    IF  '${PLATFORM_ARCH_TYPE}' == 'x86'
+        Should Contain  ${output}  ${redfish_ipmi_mode_map['${override_mode}']}
+    END
 
 
 Verify Boot Source Override with Enabled Mode As Once After Host Reboot
@@ -369,9 +370,9 @@ Verify Boot Source Override with Enabled Mode As Once After Host Reboot
     ${resp}=  Redfish.Get Attribute  /redfish/v1/Systems/system  Boot
     Should Be Equal As Strings  ${resp["BootSourceOverrideEnabled"]}  Disabled
     Should Be Equal As Strings  ${resp["BootSourceOverrideTarget"]}  None
-    Run Keyword If  '${PLATFORM_ARCH_TYPE}' == 'x86'
-    ...  Should Be Equal As Strings  ${resp["BootSourceOverrideMode"]}  Legacy
-
+    IF  '${PLATFORM_ARCH_TYPE}' == 'x86'
+        Should Be Equal As Strings  ${resp["BootSourceOverrideMode"]}  Legacy
+    END
 
 Verify Boot Source Override with Enabled Mode As Continuous After Host Reboot
     [Documentation]  Verify Boot Source Override with Enabled Mode As Continuous After Host Reboot.
@@ -434,9 +435,10 @@ Verify Boot Source Override with Enabled Mode As Continuous After Host Reboot
     ${resp}=  Redfish.Get Attribute  /redfish/v1/Systems/system  Boot
     Should Be Equal As Strings  ${resp["BootSourceOverrideEnabled"]}  Continuous
     Should Be Equal As Strings  ${resp["BootSourceOverrideTarget"]}  ${override_target}
-    Run Keyword If  '${PLATFORM_ARCH_TYPE}' == 'x86'
-    ...  Should Be Equal As Strings  ${resp["BootSourceOverrideMode"]}  ${override_mode}
 
+    IF  '${PLATFORM_ARCH_TYPE}' == 'x86'
+        Should Be Equal As Strings  ${resp["BootSourceOverrideMode"]}  ${override_mode}
+    END
 
 Host Reboot For Bios Setup
     [Documentation]  Rebooting Host without checking Host state.
