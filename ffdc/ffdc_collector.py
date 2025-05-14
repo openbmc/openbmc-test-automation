@@ -1222,15 +1222,14 @@ class ffdc_collector:
 
             # Walk the plugin args ['arg1,'arg2']
             # If the YAML plugin statement 'plugin_args' is not declared.
+            plugin_args = []
             if any("plugin_args" in d for d in plugin_cmd_list):
                 idx = self.key_index_list_dict("plugin_args", plugin_cmd_list)
-                plugin_args = plugin_cmd_list[idx]["plugin_args"]
-                if plugin_args:
+                if idx is not None:
+                    plugin_args = plugin_cmd_list[idx].get("plugin_args", [])
                     plugin_args = self.yaml_args_populate(plugin_args)
                 else:
-                    plugin_args = []
-            else:
-                plugin_args = self.yaml_args_populate([])
+                    plugin_args = self.yaml_args_populate([])
 
             # Pack the args arg1, arg2, .... argn into
             # "arg1","arg2","argn"  string as params for function.
@@ -1358,34 +1357,44 @@ class ffdc_collector:
 
     def yaml_args_populate(self, yaml_arg_list):
         r"""
-        Decode env and plugin vars and populate.
+        Decode environment and plugin variables and populate the argument list.
 
-        Description of argument(s):
-        yaml_arg_list         arg list read from YAML
+        This method processes the yaml_arg_list argument, which is expected to
+        contain a list of arguments read from a YAML file. The method iterates
+        through the list, decodes environment and plugin variables, and
+        returns a populated list of arguments.
 
-        Example:
+        .. code-block:: yaml
+
           - plugin_args:
             - arg1
             - arg2
 
-                  yaml_arg_list:  [arg2, arg2]
-        """
-        # Get the env loaded keys as list ['hostname', 'username', 'password'].
+        ['${hostname}:${port_https}', '${username}', '/redfish/v1/', 'json']
 
+        Returns the populated plugin list
+            ['xx.xx.xx.xx:443', 'root', '/redfish/v1/', 'json']
+
+        Parameters:
+            yaml_arg_list (list):   A list of arguments containing environment
+                                    and plugin variables.
+
+        Returns:
+            list:   A populated list of arguments with decoded environment and
+                    plugin variables.
+        """
         if isinstance(yaml_arg_list, list):
-            tmp_list = []
+            populated_list = []
             for arg in yaml_arg_list:
                 if isinstance(arg, (int, float)):
-                    tmp_list.append(arg)
-                    continue
+                    populated_list.append(arg)
                 elif isinstance(arg, str):
                     arg_str = self.yaml_env_and_plugin_vars_populate(str(arg))
-                    tmp_list.append(arg_str)
+                    populated_list.append(arg_str)
                 else:
-                    tmp_list.append(arg)
+                    populated_list.append(arg)
 
-            # return populated list.
-            return tmp_list
+            return populated_list
 
     def yaml_env_and_plugin_vars_populate(self, yaml_arg_str):
         r"""
