@@ -47,8 +47,7 @@ GPU Stress Test
     # The BMC and OS should report the same number of GPUs.
     ${failmsg01}=  Catenate  OS reports ${num_os_gpus} GPUs, but BMC
     ...  reports ${num_bmc_gpus} present and functional GPUs.
-    Run Keyword If  '${num_os_gpus}' != '${num_bmc_gpus}'
-    ...  Fail  msg=${failmsg01}
+    IF  '${num_os_gpus}' != '${num_bmc_gpus}'  Fail  msg=${failmsg01}
 
     # Show parameters for HTX stress test.
     Printn
@@ -60,8 +59,7 @@ GPU Stress Test
 
     # Shutdown HTX if it is already running.
     ${status}=  Is HTX Running
-    Run Keyword If  '${status}' == 'True'
-    ...  Shutdown HTX Exerciser
+    IF  '${status}' == 'True'  Shutdown HTX Exerciser
 
     Repeat Keyword  ${HTX_LOOP} times  Execute GPU Test
 
@@ -113,23 +111,24 @@ Execute GPU Test
     Rpvars  power  power_max  temperature  temperature_via_rest
     ...  temperature_max  clock  clock_max
 
-    Run Keyword If  ${power} > ${power_max}  Fail
-    ...  msg=GPU Power ${power} exceeds limit of ${power_max}.
+    IF  ${power} > ${power_max}
+        Fail  msg=GPU Power ${power} exceeds limit of ${power_max}.
+    END
 
     ${err_msg}=  Catenate  GPU temperature of ${temperature} exceeds limit
     ...  of ${temperature_max}.
-    Run Keyword If  ${temperature} > ${temperature_max}  Fail  msg=${err_msg}
+    IF  ${temperature} > ${temperature_max}  Fail  msg=${err_msg}
 
-    Run Keyword If  ${clock} > ${clock_max}  Fail
-    ...  msg=GPU clock of ${clock} exceeds limit of ${clock_max}.
+    IF  ${clock} > ${clock_max}  Fail  msg=GPU clock of ${clock} exceeds limit of ${clock_max}.
 
     ${err_msg}=  Catenate  The GPU temperature reported by REST is not within
     ...  5 degrees of the nvidia_smi reported temperature.
     ${upper_limit}=  Evaluate  ${temperature_via_rest}+5
     ${lower_limit}=  Evaluate  ${temperature_via_rest}-5
-    Run Keyword If
-    ...  ${temperature} > ${upper_limit} or ${temperature} < ${lower_limit}
-    ...  Fail  msg=${err_msg}
+
+    IF  ${temperature} > ${upper_limit} or ${temperature} < ${lower_limit}
+        Fail  msg=${err_msg}
+    END
 
     Shutdown HTX Exerciser
 
@@ -171,8 +170,7 @@ Test Setup Execution
     Rpvars  num_os_gpus
 
     # If no GPUs detected, we cannot continue.
-    Run Keyword If  '${num_os_gpus}' == '${0}'  Fail
-    ...  msg=No GPUs detected so cannot run test.
+    IF  '${num_os_gpus}' == '${0}'  Fail  msg=No GPUs detected so cannot run test.
 
     Set Suite Variable  ${num_os_gpus}  children=true
 
@@ -182,8 +180,7 @@ Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
     # Keep HTX running if user set HTX_KEEP_RUNNING to 1.
-    Run Keyword If  '${TEST_STATUS}' == 'FAIL' and ${HTX_KEEP_RUNNING} == ${0}
-    ...  Shutdown HTX Exerciser
+    IF  '${TEST_STATUS}' == 'FAIL' and ${HTX_KEEP_RUNNING} == ${0}  Shutdown HTX Exerciser
 
     ${keyword_buf}=  Catenate  Stop SOL Console Logging
     ...  \ targ_file_path=${EXECDIR}${/}logs${/}SOL.log
