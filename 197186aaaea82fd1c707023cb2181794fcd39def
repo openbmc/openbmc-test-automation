@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3df2604_dc6d722d",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-05-14T08:46:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32304cef_eb64dcc3",
+      "revId": "197186aaaea82fd1c707023cb2181794fcd39def",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ce44535_b3661f4a",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-05-14T07:55:47Z",
       "side": 1,
       "message": "${PublicKey}\u003d  Run  ${openssl_cmd}",
+      "revId": "197186aaaea82fd1c707023cb2181794fcd39def",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a841e572_6546efee",
+        "filename": "openpower/ext_interfaces/test_vmicert_management.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-05-14T08:46:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ce44535_b3661f4a",
       "revId": "197186aaaea82fd1c707023cb2181794fcd39def",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
