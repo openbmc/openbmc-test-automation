@@ -81,8 +81,9 @@ Hard Bootme Test
     Rprint Vars  HTX_DURATION  HTX_LOOP  HTX_INTERVAL  CHECK_INVENTORY
     ...  INV_IGNORE_LIST  PREV_INV_FILE_PATH
 
-    Run Keyword If  '${PREV_INV_FILE_PATH}' != 'NONE'
-    ...  OperatingSystem.File Should Exist  ${PREV_INV_FILE_PATH}
+    IF  '${PREV_INV_FILE_PATH}' != 'NONE'
+        OperatingSystem.File Should Exist  ${PREV_INV_FILE_PATH}
+    END
 
     Set Suite Variable  ${PREV_INV_FILE_PATH}  children=true
     Set Suite Variable  ${INV_IGNORE_LIST}  children=true
@@ -136,12 +137,11 @@ Run HTX Exerciser
     # Post Power off and on, the OS SSH session needs to be established.
     Login To OS
 
-    Run Keyword If  '${CHECK_INVENTORY}' == 'True'
-    ...  Do Inventory And Compare  ${json_initial_file_path}
-    ...  ${PREV_INV_FILE_PATH}
+    IF  '${CHECK_INVENTORY}' == 'True'
+        Do Inventory And Compare  ${json_initial_file_path}  ${PREV_INV_FILE_PATH}
+    END
 
-    Run Keyword If  '${HTX_MDT_PROFILE}' == 'mdt.bu'
-    ...  Create Default MDT Profile
+    IF  '${HTX_MDT_PROFILE}' == 'mdt.bu'  Create Default MDT Profile
 
     Run MDT Profile
 
@@ -149,9 +149,9 @@ Run HTX Exerciser
 
     Shutdown HTX Exerciser
 
-    Run Keyword If  '${CHECK_INVENTORY}' == 'True'
-    ...  Do Inventory And Compare  ${json_final_file_path}
-    ...  ${PREV_INV_FILE_PATH}
+    IF  '${CHECK_INVENTORY}' == 'True'
+        Do Inventory And Compare  ${json_final_file_path}  ${PREV_INV_FILE_PATH}
+    END
 
     Run Keyword  ${rest_keyword} Power Off
 
@@ -179,9 +179,9 @@ Do Inventory And Compare
     # PREV_INV_FILE_PATH   The previous inventory to compare with.
 
     Create JSON Inventory File  ${inventory_file_path}
-    Run Keyword If  '${PREV_INV_FILE_PATH}' != 'NONE'
-    ...  Compare Json Inventory Files  ${inventory_file_path}
-    ...  ${PREV_INV_FILE_PATH}
+    IF  '${PREV_INV_FILE_PATH}' != 'NONE'
+        Compare Json Inventory Files  ${inventory_file_path}  ${PREV_INV_FILE_PATH}
+    END
     ${PREV_INV_FILE_PATH}=   Set Variable  ${inventory_file_path}
     Set Suite Variable  ${PREV_INV_FILE_PATH}  children=true
 
@@ -194,11 +194,12 @@ Compare Json Inventory Files
     # file2   A file that has an inventory snapshot, to compare with file1.
 
     ${diff_rc}=  File_Diff  ${file1}
-     ...  ${file2}  ${json_diff_file_path}  ${INV_IGNORE_LIST}
-    Run Keyword If  '${diff_rc}' != '${0}'
-    ...  Report Inventory Mismatch  ${diff_rc}  ${json_diff_file_path}
-    ...  ELSE  Print Timen  Inventoy check: No differences found.
-
+    ...  ${file2}  ${json_diff_file_path}  ${INV_IGNORE_LIST}
+    IF  '${diff_rc}' != '${0}'
+        Report Inventory Mismatch  ${diff_rc}  ${json_diff_file_path}
+    ELSE
+        Print Timen  Inventoy check: No differences found.
+    END
 
 Report Inventory Mismatch
     [Documentation]  Report inventory mismatch.
@@ -253,17 +254,16 @@ Test Setup Execution
 
     # Shutdown if HTX is running.
     ${status}=  Is HTX Running
-    Run Keyword If  '${status}' == 'True'
-    ...  Shutdown HTX Exerciser
+    IF  '${status}' == 'True'  Shutdown HTX Exerciser
 
 
 Test Teardown Execution
     [Documentation]  Do the post-test teardown.
 
     # Keep HTX running if user set HTX_KEEP_RUNNING to 1.
-    Run Keyword If
-    ...  '${TEST_STATUS}' == 'FAIL' and ${HTX_KEEP_RUNNING} == ${0}
-    ...  Shutdown HTX Exerciser
+    IF  '${TEST_STATUS}' == 'FAIL' and ${HTX_KEEP_RUNNING} == ${0}
+        Shutdown HTX Exerciser
+    END
 
     ${keyword_buf}=  Catenate  Stop SOL Console Logging
     ...  \ targ_file_path=${EXECDIR}${/}logs${/}SOL.log

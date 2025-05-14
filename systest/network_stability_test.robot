@@ -42,8 +42,7 @@ Execute Network Test
     # Post Power off and on, the OS SSH session needs to be established.
     Login To OS
 
-    Run Keyword If  '${HTX_MDT_PROFILE}' == 'mdt.bu'
-    ...  Create Default MDT Profile
+    IF  '${HTX_MDT_PROFILE}' == 'mdt.bu'  Create Default MDT Profile
 
     Run MDT Profile
 
@@ -51,8 +50,9 @@ Execute Network Test
     ${status}=  Run Until Keyword Fails  ${HTX_DURATION}  ${HTX_INTERVAL}
     ...  Start Network Test
 
-    Run Keyword If  '${status}' == 'False'
-    ...  Fail  Network is unstable. Please check for errors.
+    IF  '${status}' == 'False'
+        Fail  Network is unstable. Please check for errors.
+    END
 
     Shutdown HTX Exerciser
 
@@ -85,8 +85,7 @@ Test Setup Execution
 
     # Shutdown if HTX is running.
     ${status}=  Is HTX Running
-    Run Keyword If  '${status}' == 'True'
-    ...  Shutdown HTX Exerciser
+    IF  '${status}' == 'True'  Shutdown HTX Exerciser
 
 
 Test Teardown Execution
@@ -96,8 +95,9 @@ Test Teardown Execution
     # 3. Close all open SSH connections.
 
     # Keep HTX running if user set HTX_KEEP_RUNNING to 1.
-    Run Keyword If  '${TEST_STATUS}' == 'FAIL' and ${HTX_KEEP_RUNNING} == ${0}
-    ...  Shutdown HTX Exerciser
+    IF  '${TEST_STATUS}' == 'FAIL' and ${HTX_KEEP_RUNNING} == ${0}
+        Shutdown HTX Exerciser
+    END
 
     FFDC On Test Case Fail
     Close All Connections
