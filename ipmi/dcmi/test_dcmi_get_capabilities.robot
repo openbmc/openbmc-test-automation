@@ -46,12 +46,16 @@ Verify Get DCMI Capabilities
       IF  ${slave_address_status} == True  BREAK
     END
 
-    Run Keyword IF  ${slave_address_status} == False  Fail  msg=Slave address is showing wrongly.
+    IF  ${slave_address_status} == False
+        Fail  msg=Slave address is showing wrongly.
+    END
 
     ${output}=  Get Lines Containing String  ${cmd_output}  Slave address of device:
     ${slave_address_status_1}=  Run Keyword And Return Status
     ...  Should Be Equal  ${output.strip()}  ${slave_address_list[1]}  ignore_case=True
     ${output_1}=  Get Lines Containing String  ${cmd_output}   Channel number is
-    Run Keyword IF  ${slave_address_status_1} == True
-    ...    Should Be Equal  ${output_1.strip()}   ${supported_capabilities[7]}
-    ...  ELSE  Should Match Regexp  ${output.strip()}  [1-9]+h
+    IF  ${slave_address_status_1} == True
+        Should Be Equal  ${output_1.strip()}   ${supported_capabilities[7]}
+    ELSE
+        Should Match Regexp  ${output.strip()}  [1-9]+h
+    END
