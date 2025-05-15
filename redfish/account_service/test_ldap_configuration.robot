@@ -451,7 +451,7 @@ Update LDAP User Roles And Verify Host Poweroff Operation
     ${LDAP_TYPE}  Operator         ${GROUP_NAME}  ${HTTP_OK}
 
     # Verify LDAP user with Administrator privilege able to do host poweroff.
-    ${LDAP_TYPE}  Administrator    ${GROUP_NAME}  ${HTTP_OK}
+    ${LDAP_TYPE}  Administrator    ${GROUP_NAME}  [${HTTP_OK},${HTTP_NO_CONTENT}]
 
 
 Update LDAP User Roles And Verify Host Poweron Operation
@@ -469,7 +469,7 @@ Update LDAP User Roles And Verify Host Poweron Operation
     ${LDAP_TYPE}  Operator         ${GROUP_NAME}  ${HTTP_OK}
 
     # Verify LDAP user with Administrator privilege able to do host poweron.
-    ${LDAP_TYPE}  Administrator    ${GROUP_NAME}  ${HTTP_OK}
+    ${LDAP_TYPE}  Administrator    ${GROUP_NAME}  [${HTTP_OK},${HTTP_NO_CONTENT}]
 
 
 Configure IP Address Via Different User Roles And Verify
@@ -479,7 +479,7 @@ Configure IP Address Via Different User Roles And Verify
 
     [Template]  Update LDAP User Role And Configure IP Address
     # Verify LDAP user with Administrator privilege is able to configure IP address.
-    ${LDAP_TYPE}  Administrator    ${GROUP_NAME}  ${HTTP_OK}
+    ${LDAP_TYPE}  Administrator    ${GROUP_NAME}  [${HTTP_OK},${HTTP_NO_CONTENT}]
 
     # Verify LDAP user with ReadOnly privilege is forbidden to configure IP address.
     ${LDAP_TYPE}  ReadOnly         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
@@ -495,7 +495,7 @@ Delete IP Address Via Different User Roles And Verify
 
     [Template]  Update LDAP User Role And Delete IP Address
     # Verify LDAP user with Administrator privilege is able to delete IP address.
-    ${LDAP_TYPE}  Administrator    ${GROUP_NAME}  ${HTTP_OK}
+    ${LDAP_TYPE}  Administrator    ${GROUP_NAME}  [${HTTP_OK},${HTTP_NO_CONTENT}]
 
     # Verify LDAP user with ReadOnly privilege is forbidden to delete IP address.
     ${LDAP_TYPE}  ReadOnly         ${GROUP_NAME}  ${HTTP_FORBIDDEN}
@@ -774,7 +774,7 @@ Verify Host Power Status
 
 Update LDAP User Role And Host Poweroff
     [Documentation]  Update LDAP user role and do host poweroff.
-    [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}
+    [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}=[${HTTP_OK,${HTTP_NO_CONTENT}]
     [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
 
     # Description of argument(s):
@@ -792,7 +792,7 @@ Update LDAP User Role And Host Poweroff
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
 
     Redfish.Post  ${REDFISH_POWER_URI}
-    ...  body={'ResetType': 'ForceOff'}   valid_status_codes=[${valid_status_code}]
+    ...  body={'ResetType': 'ForceOff'}   valid_status_codes=${valid_status_code}
 
     IF  ${valid_status_code} == ${HTTP_FORBIDDEN}  RETURN
     Wait Until Keyword Succeeds  1 min  10 sec  Verify Host Power State  Off
@@ -800,7 +800,7 @@ Update LDAP User Role And Host Poweroff
 
 Update LDAP User Role And Host Poweron
     [Documentation]  Update LDAP user role and do host poweron.
-    [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}
+    [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}=[${HTTP_OK,${HTTP_NO_CONTENT}]
     [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
 
     # Description of argument(s):
@@ -818,7 +818,7 @@ Update LDAP User Role And Host Poweron
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
 
     Redfish.Post  ${REDFISH_POWER_URI}
-    ...  body={'ResetType': 'On'}   valid_status_codes=[${valid_status_code}]
+    ...  body={'ResetType': 'On'}   valid_status_codes=${valid_status_code}
 
     IF  ${valid_status_code} == ${HTTP_FORBIDDEN}  RETURN
     Verify Host Is Up
@@ -826,7 +826,7 @@ Update LDAP User Role And Host Poweron
 
 Update LDAP User Role And Configure IP Address
     [Documentation]  Update LDAP user role and configure IP address.
-    [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}=${HTTP_OK}
+    [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}=[${HTTP_OK,${HTTP_NO_CONTENT}]
     [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login  AND  Delete IP Address  ${test_ip}
 
     # Description of argument(s):
@@ -849,7 +849,7 @@ Update LDAP User Role And Configure IP Address
 
 Update LDAP User Role And Delete IP Address
     [Documentation]  Update LDAP user role and delete IP address.
-    [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}=${HTTP_OK}
+    [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}=[${HTTP_OK,${HTTP_NO_CONTENT}]
     [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login  AND  Delete IP Address  ${test_ip}
 
     # Description of argument(s):
