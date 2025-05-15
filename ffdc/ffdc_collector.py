@@ -1231,13 +1231,22 @@ class ffdc_collector:
                 else:
                     plugin_args = self.yaml_args_populate([])
 
-            # Pack the args arg1, arg2, .... argn into
-            # "arg1","arg2","argn"  string as params for function.
+            # Pack the args list to string parameters for plugin function.
             parm_args_str = self.yaml_args_string(plugin_args)
+
+            """
+            Example of plugin_func:
+                plugin.redfish.enumerate_request(
+                         "xx.xx.xx.xx:443",
+                         "root",
+                         "********",
+                         "/redfish/v1/",
+                         "json")
+            """
             if parm_args_str:
-                plugin_func = plugin_name + "(" + parm_args_str + ")"
+                plugin_func = f"{plugin_name}({parm_args_str})"
             else:
-                plugin_func = plugin_name + "()"
+                plugin_func = f"{plugin_name}()"
 
             # Execute plugin function.
             if global_plugin_dict:
@@ -1337,22 +1346,42 @@ class ffdc_collector:
 
     def yaml_args_string(self, plugin_args):
         r"""
-        Pack the args into string.
+        Pack the arguments into a string representation.
 
-        plugin_args            arg list ['arg1','arg2,'argn']
+        This method processes the plugin_arg argument, which is expected to
+        contain a list of arguments. The method iterates through the list,
+        converts each argument to a string, and concatenates them into a
+        single string. Special handling is applied for integer, float, and
+        predefined plugin variable types.
+
+        Ecample:
+        From
+        ['xx.xx.xx.xx:443', 'root', '********', '/redfish/v1/', 'json']
+        to
+        "xx.xx.xx.xx:443","root","********","/redfish/v1/","json"
+
+        Parameters:
+            plugin_args (list):   A list of arguments to be packed into
+                                  a string.
+
+        Returns:
+            str:   A string representation of the arguments.
         """
         args_str = ""
-        for args in plugin_args:
-            if args:
-                if isinstance(args, (int, float)):
-                    args_str += str(args)
-                elif args in global_plugin_type_list:
-                    args_str += str(global_plugin_dict[args])
+
+        for i, arg in enumerate(plugin_args):
+            if arg:
+                if isinstance(arg, (int, float)):
+                    args_str += str(arg)
+                elif arg in global_plugin_type_list:
+                    args_str += str(global_plugin_dict[arg])
                 else:
-                    args_str += '"' + str(args.strip("\r\n\t")) + '"'
-            # Skip last list element.
-            if args != plugin_args[-1]:
-                args_str += ","
+                    args_str += f'"{arg.strip("\r\n\t")}"'
+
+                # Skip last list element.
+                if i != len(plugin_args) - 1:
+                    args_str += ","
+
         return args_str
 
     def yaml_args_populate(self, yaml_arg_list):
