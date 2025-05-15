@@ -760,6 +760,22 @@ Assign Static VMI IPv6 Address And Check Persistency On BMC Reboot
     Should Be Equal  ${vmi_ipv6addr["PrefixLength"]}  ${prefix_length}
 
 
+Enable VMI DHCPv6 When DHCPv4 Is Enabled And Verify
+    [Documentation]  Enable VMI DHCPv6 when DHCPv4 is enabled and verify
+    ...  DHCPv4 settings are intact and verify IPv6 address origin is set to DHCP.
+    [Tags]  Enable_VMI_DHCPv6_When_DHCPv4_Is_Enabled_And_Verify
+    [Setup]  Set VMI IPv4 Origin  ${True}
+
+    # Enable DHCPv6 property.
+    Set VMI DHCPv6 Property  Enabled
+
+    # Check IPv6 origin is set to DHCP.
+    Verify VMI IPv6 Address  DHCPv6
+
+    # Check there is no impact on IPv4 settings, IPv4 address origin should be DHCP.
+    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
+
+
 *** Keywords ***
 
 Suite Setup Execution
