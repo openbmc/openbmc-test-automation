@@ -92,8 +92,7 @@ Execute GPU Test
     ${temperature_max}=  Get GPU Temperature Limit
     ${clock_max}=  Get GPU Clock Limit
 
-    Run Keyword If  '${HTX_MDT_PROFILE}' == 'mdt.bu'
-    ...  Create Default MDT Profile
+    IF  '${HTX_MDT_PROFILE}' == 'mdt.bu'  Create Default MDT Profile
 
     Run MDT Profile
 

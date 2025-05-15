@@ -124,10 +124,11 @@ Test Auto Reboot SDR Info
 
     ${state_ipmi}=  Get SDR Presence Via IPMI  auto_reboot${SPACE}
 
-    Run Keyword If  '${state_ipmi}' == 'Disabled'
-    ...    Should Be True  ${state_rest} == ${0}
-    ...  ELSE IF  '${state_ipmi}' == 'State Asserted'
-    ...    Should Be True  ${state_rest} == ${1}
+    IF  '${state_ipmi}' == 'Disabled'
+        Should Be True  ${state_rest} == ${0}
+    ELSE IF  '${state_ipmi}' == 'State Asserted'
+        Should Be True  ${state_rest} == ${1}
+    END
 
 
 Test TPM Enable SDR Info
@@ -141,10 +142,11 @@ Test TPM Enable SDR Info
 
     ${state_ipmi}=  Get SDR Presence Via IPMI  auto_reboot${SPACE}
 
-    Run Keyword If  '${state_ipmi}' == 'Disabled'
-    ...    Should Be True  ${state_rest} == ${0}
-    ...  ELSE IF  '${state_ipmi}' == 'State Asserted'
-    ...    Should Be True  ${state_rest} == ${1}
+    IF  '${state_ipmi}' == 'Disabled'
+        Should Be True  ${state_rest} == ${0}
+    ELSE IF  '${state_ipmi}' == 'State Asserted'
+        Should Be True  ${state_rest} == ${1}
+    END
 
 
 Test Reserve SDR Repository
@@ -356,15 +358,17 @@ Verify SDR
     ${component_name}=  Replace String  ${component_name}  /  _
     ${presence_ipmi}=  Get SDR Presence Via IPMI  ${component_name}${SPACE}
 
-    Run Keyword If  '${presence_ipmi}' == 'Disabled' or '${presence_ipmi}' == ''
-    ...    Should Be True  ${presence_rest} == ${0} and ${functional_rest} == ${0}
-    ...  ELSE IF  '${presence_ipmi}' == 'Presence Detected' or '${presence_ipmi}' == 'Presence detected'
-    ...    Should Be True  ${presence_rest} == ${1} and ${functional_rest} == ${1}
-    ...  ELSE IF  '${presence_ipmi}' == 'State Asserted'
-    ...    Should Be True  ${presence_rest} == ${1} and ${functional_rest} == ${1}
-    ...  ELSE IF  '${presence_ipmi}' == 'State Deasserted'
-    ...    Should Be True  ${presence_rest} == ${1} and ${functional_rest} == ${0}
-    ...  ELSE  Fail  msg=Invalid Presence${presence_ipmi}
+    IF  '${presence_ipmi}' == 'Disabled' or '${presence_ipmi}' == ''
+        Should Be True  ${presence_rest} == ${0} and ${functional_rest} == ${0}
+    ELSE IF  '${presence_ipmi}' == 'Presence Detected' or '${presence_ipmi}' == 'Presence detected'
+        Should Be True  ${presence_rest} == ${1} and ${functional_rest} == ${1}
+    ELSE IF  '${presence_ipmi}' == 'State Asserted'
+        Should Be True  ${presence_rest} == ${1} and ${functional_rest} == ${1}
+    ELSE IF  '${presence_ipmi}' == 'State Deasserted'
+        Should Be True  ${presence_rest} == ${1} and ${functional_rest} == ${0}
+    ELSE
+        Fail  msg=Invalid Presence${presence_ipmi}
+    END
 
 
 Test SDR Info

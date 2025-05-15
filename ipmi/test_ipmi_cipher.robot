@@ -161,8 +161,9 @@ Verify Algorithm by Cipher Suite For Channel
 
     @{expected_data_list}=  Split String  ${response_data}
 
-    Run Keyword If  '${cipher_suite}' == 'standard'
-    ...  Verify Standard Cipher Suite For Channel  ${expected_data_list}  ${channel_number}
+    IF  '${cipher_suite}' == 'standard'
+        Verify Standard Cipher Suite For Channel  ${expected_data_list}  ${channel_number}
+    END
 
 Verify Supported Algorithm For Channel
     [Documentation]  Compare the supported algorithms got from ipmi_raw_cmd_table with
@@ -200,10 +201,11 @@ Verify Cipher ID and Supported Algorithm For Channel
     ...  ELSE
     ...  Convert To Hex  ${channel_num}  length=2
 
-    Run Keyword If  '${index_value}' == '0x80'
-    ...  Verify Algorithm by Cipher Suite For Channel  ${resp}  ${channel_num}
-    ...  ELSE
-    ...  Verify Supported Algorithm For Channel  ${resp}  ${channel_num}
+    IF  '${index_value}' == '0x80'
+        Verify Algorithm by Cipher Suite For Channel  ${resp}  ${channel_num}
+    ELSE
+        Verify Supported Algorithm For Channel  ${resp}  ${channel_num}
+    END
 
 Verify Cipher Suite For Invalid Channel
    [Documentation]  Execute cipher suite ipmi cmd for invalid channel and verify Error code.
