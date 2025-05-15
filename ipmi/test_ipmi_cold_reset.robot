@@ -165,43 +165,49 @@ Selecting Random Sensor Name And Threshold Value
     ${ipmi_lower_non_recoverable_threshold}=  Set Variable  ${get_ipmi_lower_non_recoverable_threshold.strip()}
     ${lower_non_recoverable_threshold_status}=  Run Keyword And Return Status  Should Not Contain
     ...  ${ipmi_lower_non_recoverable_threshold}  na
-    Run Keyword If  '${lower_non_recoverable_threshold_status}' == 'True'
-    ...  Set To Dictionary  ${tmp_dict}  lnr  ${ipmi_lower_non_recoverable_threshold}
+    IF  '${lower_non_recoverable_threshold_status}' == 'True'
+        Set To Dictionary  ${tmp_dict}  lnr  ${ipmi_lower_non_recoverable_threshold}
+    END
 
     ${get_ipmi_lower_critical_threshold}=  Get From List  ${ipmi_sensor}  5
     ${ipmi_lower_critical_threshold}=  Set Variable  ${get_ipmi_lower_critical_threshold.strip()}
     ${lower_critical_threshold_status}=  Run Keyword And Return Status  Should Not Contain
     ...  ${ipmi_lower_critical_threshold}  na
-    Run Keyword If  '${lower_critical_threshold_status}' == 'True'
-    ...  Set To Dictionary  ${tmp_dict}  lcr  ${ipmi_lower_critical_threshold}
+    IF  '${lower_critical_threshold_status}' == 'True'
+        Set To Dictionary  ${tmp_dict}  lcr  ${ipmi_lower_critical_threshold}
+    END
 
     ${get_ipmi_lower_non_critical_threshold}=  Get From List  ${ipmi_sensor}  6
     ${ipmi_lower_non_critical_threshold}=  Set Variable  ${get_ipmi_lower_non_critical_threshold.strip()}
     ${lower_non_critical_threshold_status}=  Run Keyword And Return Status  Should Not Contain
     ...  ${ipmi_lower_non_critical_threshold}  na
-    Run Keyword If  '${lower_non_critical_threshold_status}' == 'True'
-    ...  Set To Dictionary  ${tmp_dict}  lnc  ${ipmi_lower_non_critical_threshold}
+    IF  '${lower_non_critical_threshold_status}' == 'True'
+        Set To Dictionary  ${tmp_dict}  lnc  ${ipmi_lower_non_critical_threshold}
+    END
 
     ${get_ipmi_upper_non_critical_threshold}=  Get From List  ${ipmi_sensor}  7
     ${ipmi_upper_non_critical_threshold}=  Set Variable  ${get_ipmi_upper_non_critical_threshold.strip()}
     ${upper_non_critical_threshold_status}=  Run Keyword And Return Status  Should Not Contain
     ...  ${ipmi_upper_non_critical_threshold}  na
-    Run Keyword If  '${upper_non_critical_threshold_status}' == 'True'
-    ...  Set To Dictionary  ${tmp_dict}  unc  ${ipmi_upper_non_critical_threshold}
+    IF  '${upper_non_critical_threshold_status}' == 'True'
+        Set To Dictionary  ${tmp_dict}  unc  ${ipmi_upper_non_critical_threshold}
+    END
 
     ${get_ipmi_upper_critical_threshold}=  Get From List  ${ipmi_sensor}  8
     ${ipmi_upper_critical_threshold}=  Set Variable  ${get_ipmi_upper_critical_threshold.strip()}
     ${upper_critical_threshold_status}=  Run Keyword And Return Status  Should Not Contain
     ...  ${ipmi_upper_critical_threshold}  na
-    Run Keyword If  '${upper_critical_threshold_status}' == 'True'
-    ...  Set To Dictionary  ${tmp_dict}  ucr  ${ipmi_upper_critical_threshold}
+    IF  '${upper_critical_threshold_status}' == 'True'
+        Set To Dictionary  ${tmp_dict}  ucr  ${ipmi_upper_critical_threshold}
+    END
 
     ${get_ipmi_upper_non_recoverable_threshold}=  Get From List  ${ipmi_sensor}  9
     ${ipmi_upper_non_recoverable_threshold}=  Set Variable  ${get_ipmi_upper_non_recoverable_threshold.strip()}
     ${upper_non_recoverable_threshold_status}=  Run Keyword And Return Status  Should Not Contain
     ...  ${ipmi_upper_non_recoverable_threshold}  na
-    Run Keyword If  '${upper_non_recoverable_threshold_status}' == 'True'
-    ...  Set To Dictionary  ${tmp_dict}  unr  ${ipmi_upper_non_recoverable_threshold}
+    IF  '${upper_non_recoverable_threshold_status}' == 'True'
+        Set To Dictionary  ${tmp_dict}  unr  ${ipmi_upper_non_recoverable_threshold}
+    END
 
     RETURN  ${random_sensor_name}  ${tmp_dict}
 

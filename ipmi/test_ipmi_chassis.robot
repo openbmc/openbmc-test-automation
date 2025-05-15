@@ -237,6 +237,5 @@ Test Teardown Execution
     @{powertolist}=  Split String  ${power_status}   :
     ${status}=  Get From List  ${powertolist}  1
     # Chassis Power ON if status is off
-    Run Keyword If    '${status.strip()}' != 'on'
-    ...  Redfish Power On
+    IF  '${status.strip()}' != 'on'  Redfish Power On
     FFDC On Test Case Fail
