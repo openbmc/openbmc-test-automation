@@ -37,5 +37,6 @@ Cleanup Dir
     ...  find ${cleanup_dir_path} | wc -l
     Should Be True  ${file_count2} < ${file_count1}
     # Delete the directory if it is empty.
-    Run Keyword If  ${file_count2} <= 1
-    ...  BMC Execute Command  rm -r ${cleanup_dir_path}
+    IF  ${file_count2} <= 1
+        BMC Execute Command  rm -r ${cleanup_dir_path}
+    END
