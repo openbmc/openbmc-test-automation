@@ -37,10 +37,10 @@ Redfish Set DateTime
     #                               expected.
 
     # Assign default value of UTC current date time if date_time is empty.
-    ${date_time}=  Run Keyword If
-    ...  '${date_time}' == '${EMPTY}'  Get Current Date  time_zone=UTC
-    ...  ELSE
-    ...  Set Variable  ${date_time}
+    ${current_date_time}=  Get Current Date  time_zone=UTC
+    ${date_time}=  Set Variable If  '${date_time}' == '${EMPTY}'
+    ...  ${current_date_time}  ${date_time}
+
     # Patch date_time based on type of ${request_type}.
     IF  '${request_type}' == 'valid'
         ${date_time}=  Convert Date  ${date_time}  result_format=%Y-%m-%dT%H:%M:%S+00:00
@@ -70,10 +70,12 @@ Set BMC Date And Verify
     # host_state  Host state at which date time will be updated for verification
     #             (eg. on, off).
 
-    Run Keyword If  '${host_state}' == 'on'
-    ...    Redfish Power On  stack_mode=skip
-    ...  ELSE
-    ...    Redfish Power off  stack_mode=skip
+    IF  '${host_state}' == 'on'
+        Redfish Power On  stack_mode=skip
+    ELSE
+        Redfish Power off  stack_mode=skip
+    END
+
     ${current_date}=  Get Current Date  time_zone=UTC
     ${new_value}=  Subtract Time From Date  ${current_date}  1 day
     Redfish Set DateTime  ${new_value}
@@ -100,9 +102,11 @@ Get NTP Initial Status
 Restore NTP Status
     [Documentation]  Restore NTP Status.
 
-    Run Keyword If  '${original_ntp["ProtocolEnabled"]}' == 'True'
-    ...    Set NTP state  ${TRUE}
-    ...  ELSE  Set NTP state  ${FALSE}
+    IF  '${original_ntp["ProtocolEnabled"]}' == 'True'
+        Set NTP state  ${TRUE}
+    ELSE
+        Set NTP state  ${FALSE}
+    END
 
 
 Verify NTP Servers Are Populated
@@ -128,10 +132,12 @@ Verify System Time Sync Status
     ...  systemctl status systemd-timesyncd
     ...  ignore_err=${1}
     ${sync_status}=  Get Lines Matching Regexp  ${resp[0]}  .*Active.*
-    Run Keyword If  ${expected_sync_status}==${True}
-    ...  Should Contain  ${sync_status}  active (running)
-    Run Keyword If  ${expected_sync_status}==${False}
-    ...  Should Contain  ${sync_status}  inactive (dead)
+    IF  ${expected_sync_status}==${True}
+        Should Contain  ${sync_status}  active (running)
+    END
+    IF  ${expected_sync_status}==${False}
+        Should Contain  ${sync_status}  inactive (dead)
+    END
 
 
 Enable NTP And Add NTP Address

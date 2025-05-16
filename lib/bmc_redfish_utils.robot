@@ -202,10 +202,12 @@ Get Session With Client Id
         ${context_var}=  Get Variable Value  ${resp.dict["Context"]}  ${EMPTY}
         # Handle backward compatibility for OEM.
         ${oem_var}=  Get Variable Value  ${resp.dict["Oem"]["OpenBMC"]["ClientID"]}  ${EMPTY}
-        Run Keyword If  '${context_var}' != '${EMPTY}'
-        ...    Append To List  ${client_id_sessions}  ${session}
-        Run Keyword If  '${oem_var}' != '${EMPTY}'
-        ...    Append To List  ${client_id_sessions}  ${session}
+        IF  '${context_var}' != '${EMPTY}'
+            Append To List  ${client_id_sessions}  ${session}
+        END
+        IF  '${oem_var}' != '${EMPTY}'
+            Append To List  ${client_id_sessions}  ${session}
+        END
     END
 
     RETURN  ${client_id_sessions}
@@ -298,17 +300,19 @@ Redfish Create User
     ${user_exists}=  Run Keyword And Return Status  Should Be Equal As Strings  ${curr_role}[0]  PASS
 
     # Delete user account when force is True.
-    Run Keyword If  ${force} == ${True}  Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${user_name}
-    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+    IF  ${force} == ${True}
+        Redfish.Delete  ${REDFISH_ACCOUNTS_URI}${user_name}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+    END
 
     # Create specified user when force is True or User does not exist.
     ${payload}=  Create Dictionary
     ...  UserName=${user_name}  Password=${password}  RoleId=${role_id}  Enabled=${enabled}
 
-    Run Keyword If  ${force} == ${True} or ${user_exists} == ${False}
-    ...  Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
-    ...  valid_status_codes=[${HTTP_CREATED}]
-
+    IF  ${force} == ${True} or ${user_exists} == ${False}
+        Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
+        ...  valid_status_codes=[${HTTP_CREATED}]
+    END
 
 Get User Role
     [Documentation]  Get User Role.
