@@ -131,24 +131,37 @@ class ffdc_collector:
         econfig,
         log_level,
     ):
+
         r"""
-        Description of argument(s):
+        Initialize the FFDCCollector object with the provided parameters.
 
-        hostname            Name/ip of the targeted (remote) system
-        username            User on the targeted system with access to
-                            FFDC files
-        password            Password for user on targeted system
-        port_ssh            SSH port value. By default 22
-        port_https          HTTPS port value. By default 443
-        port_ipmi           IPMI port value. By default 623
-        ffdc_config         Configuration file listing commands and files
-                            for FFDC
-        location            Where to store collected FFDC
-        remote_type         OS type of the remote host
-        remote_protocol     Protocol to use to collect data
-        env_vars            User define CLI env vars '{"key : "value"}'
-        econfig             User define env vars YAML file
+        This method initializes an FFDCCollector object with the given
+        attributes. The attributes represent the configuration for connecting
+        to a remote system, collecting log data, and storing the collected
+        data.
 
+        Parameters:
+            hostname (str):             Name or IP address of the targeted
+                                        (remote) system.
+            username (str):             User on the targeted system with access
+                                        to log files.
+            password (str):             Password for the user on the targeted
+                                        system.
+            port_ssh (int, optional):   SSH port value. Defaults to 22.
+            port_https (int, optional): HTTPS port value. Defaults to 443.
+            port_ipmi (int, optional):  IPMI port value. Defaults to 623.
+            ffdc_config (str):          Configuration file listing commands
+                                        and files for FFDC.
+            location (str):             Where to store collected log data.
+            remote_type (str):          Block YAML type name of the remote
+                                        host.
+            remote_protocol (str):      Protocol to use to collect data.
+            env_vars (dict, optional):  User-defined CLI environment variables.
+                                        Defaults to None.
+            econfig (str, optional):    User-defined environment variables
+                                        YAML file. Defaults to None.
+            log_level (str, optional):  Log level for the collector.
+                                        Defaults to "INFO".
         """
 
         self.hostname = hostname
@@ -165,17 +178,20 @@ class ffdc_collector:
         self.ffdc_prefix = ""
         self.target_type = remote_type.upper()
         self.remote_protocol = remote_protocol.upper()
-        self.env_vars = env_vars
-        self.econfig = econfig
+        self.env_vars = env_vars if env_vars else {}
+        self.econfig = econfig if econfig else {}
         self.start_time = 0
         self.elapsed_time = ""
+        self.env_dict = {}
         self.logger = None
 
-        # Set prefix values for scp files and directory.
-        # Since the time stamp is at second granularity, these values are set
-        # here to be sure that all files for this run will have same timestamps
-        # and they will be saved in the same directory.
-        # self.location == local system for now
+        """
+        Set prefix values for SCP files and directories.
+        Since the time stamp is at second granularity, these values are set
+        here to be sure that all files for this run will have the same
+        timestamps and be saved in the same directory.
+        self.location == local system for now
+        """
         self.set_ffdc_default_store_path()
 
         # Logger for this run.  Need to be after set_ffdc_default_store_path()
@@ -185,27 +201,25 @@ class ffdc_collector:
         self.validate_local_store(self.location)
 
         if self.verify_script_env():
-            # Load default or user define YAML configuration file.
-            with open(self.ffdc_config, "r") as file:
-                try:
-                    self.ffdc_actions = yaml.load(file, Loader=yaml.SafeLoader)
-                except yaml.YAMLError as e:
-                    self.logger.error(e)
-                    sys.exit(-1)
+            try:
+                with open(self.ffdc_config, "r") as file:
+                    self.ffdc_actions = yaml.safe_load(file)
+            except yaml.YAMLError as e:
+                self.logger.error(e)
+                sys.exit(-1)
 
-            if self.target_type not in self.ffdc_actions.keys():
+            if self.target_type not in self.ffdc_actions:
                 self.logger.error(
                     "\n\tERROR: %s is not listed in %s.\n\n"
                     % (self.target_type, self.ffdc_config)
                 )
                 sys.exit(-1)
+
+            self.logger.info("\n\tENV: User define input YAML variables")
+            self.env_dict = self.load_env()
         else:
             sys.exit(-1)
 
-        # Load ENV vars from user.
-        self.logger.info("\n\tENV: User define input YAML variables")
-        self.env_dict = {}
-        self.load_env()
 
     def verify_script_env(self):
         # Import to log version
