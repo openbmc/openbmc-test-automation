@@ -220,6 +220,17 @@ class ffdc_collector:
             sys.exit(-1)
 
     def verify_script_env(self):
+        r"""
+        Verify that all required environment variables are set.
+
+        This method checks if all required environment variables are set.
+        If any required variable is missing, the method returns False.
+        Otherwise, it returns True.
+
+        Returns:
+            bool: True if all required environment variables are set,
+            False otherwise.
+        """
         # Import to log version
         import click
         import paramiko
@@ -276,17 +287,39 @@ class ffdc_collector:
         return run_env_ok
 
     def script_logging(self, log_level_attr):
-        r"""
-        Create logger
+        """
+        Create a logger for the script with the specified log level.
 
+        This method creates a logger for the script with the specified
+        log level. The logger is configured to write log messages to a file
+        and the console.
+
+        self.logger = logging.getLogger(__name__)
+
+        Setting logger with __name__ will add the trace
+        Example:
+
+            INFO:ffdc_collector:    System Type: OPENBMC
+
+        Currently, set to empty purposely to log as
+            System Type: OPENBMC
+
+        Parameters:
+            log_level_attr (str):   The log level for the logger
+                                    (e.g., "DEBUG", "INFO", "WARNING",
+                                    "ERROR", "CRITICAL").
+
+        Returns:
+            None
         """
         self.logger = logging.getLogger()
         self.logger.setLevel(log_level_attr)
+
         log_file_handler = logging.FileHandler(
             self.ffdc_dir_path + "collector.log"
         )
-
         stdout_handler = logging.StreamHandler(sys.stdout)
+
         self.logger.addHandler(log_file_handler)
         self.logger.addHandler(stdout_handler)
 
@@ -295,10 +328,16 @@ class ffdc_collector:
 
     def target_is_pingable(self):
         r"""
-        Check if target system is ping-able.
+        Check if the target system is ping-able.
 
+        This method checks if the target system is reachable by sending an
+        ICMP echo request (ping). If the target system responds to the ping,
+        the method returns True. Otherwise, it returns False.
+
+        Returns:
+            bool: True if the target system is ping-able, False otherwise.
         """
-        response = os.system("ping -c 1 %s  2>&1 >/dev/null" % self.hostname)
+        response = os.system("ping -c 2 %s  2>&1 >/dev/null" % self.hostname)
         if response == 0:
             self.logger.info(
                 "\n\t[Check] %s is ping-able.\t\t [OK]" % self.hostname
@@ -310,13 +349,20 @@ class ffdc_collector:
                 % self.hostname
             )
             sys.exit(-1)
+            return False
 
     def collect_ffdc(self):
         r"""
-        Initiate FFDC Collection depending on requested protocol.
+        Initiate FFDC collection based on the requested protocol.
 
+        This method initiates FFDC (First Failure Data Capture) collection
+        based on the requested protocol (SSH,SCP, TELNET, REDFISH, IPMI).
+        The method establishes a connection to the target system using the
+        specified protocol and collects the required FFDC data.
+
+        Returns:
+            None
         """
-
         self.logger.info(
             "\n\t---- Start communicating with %s ----" % self.hostname
         )
@@ -331,13 +377,8 @@ class ffdc_collector:
                 continue
 
             for k, v in config_dict[target_type].items():
-                if (
-                    config_dict[target_type][k]["PROTOCOL"][0]
-                    not in check_protocol_list
-                ):
-                    check_protocol_list.append(
-                        config_dict[target_type][k]["PROTOCOL"][0]
-                    )
+                if v["PROTOCOL"][0] not in check_protocol_list:
+                    check_protocol_list.append(v["PROTOCOL"][0])
 
         self.logger.info(
             "\n\t %s protocol type: %s"
