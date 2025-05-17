@@ -411,8 +411,15 @@ class ffdc_collector:
 
     def ssh_to_target_system(self):
         r"""
-        Open a ssh connection to targeted system.
+        Establish an SSH connection to the target system.
 
+        This method establishes an SSH connection to the target system using
+        the provided hostname, username, password, and SSH port. If the
+        connection is successful, the method returns True. Otherwise, it logs
+        an error message and returns False.
+
+        Returns:
+            bool: True if the connection is successful, False otherwise.
         """
 
         self.ssh_remoteclient = SSHRemoteclient(
@@ -439,7 +446,15 @@ class ffdc_collector:
 
     def telnet_to_target_system(self):
         r"""
-        Open a telnet connection to targeted system.
+        Establish a Telnet connection to the target system.
+
+        This method establishes a Telnet connection to the target system using
+        the provided hostname, username, and Telnet port. If the connection is
+        successful, the method returns True. Otherwise, it logs an error
+        message and returns False.
+
+        Returns:
+            bool: True if the connection is successful, False otherwise.
         """
         self.telnet_remoteclient = TelnetRemoteclient(
             self.hostname, self.username, self.password
@@ -459,13 +474,24 @@ class ffdc_collector:
 
     def generate_ffdc(self, working_protocol_list):
         r"""
-        Determine actions based on remote host type
+        Generate FFDC (First Failure Data Capture) based on the remote host
+        type and working protocols.
 
-        Description of argument(s):
-        working_protocol_list    List of confirmed working protocols to
-                                 connect to remote host.
+        This method determines the actions to be performed for generating FFDC
+        based on the remote host type and the list of confirmed working
+        protocols. The method iterates through the available actions for the
+        remote host type and checks if any of the working protocols are
+        supported. If a supported protocol is found, the method executes the
+        corresponding FFDC generation action.
+
+        Parameters:
+            working_protocol_list (list):  A list of confirmed working
+                                           protocols to connect to the
+                                           remote host.
+
+        Returns:
+            None
         """
-
         self.logger.info(
             "\n\t---- Executing commands on " + self.hostname + " ----"
         )
@@ -482,28 +508,21 @@ class ffdc_collector:
             global_plugin_dict["global_log_store_path"] = self.ffdc_dir_path
             self.logger.info("\tSystem Type: %s" % target_type)
             for k, v in config_dict[target_type].items():
+                protocol = v["PROTOCOL"][0]
+
                 if (
                     self.remote_protocol not in working_protocol_list
                     and self.remote_protocol != "ALL"
-                ):
-                    continue
-
-                protocol = config_dict[target_type][k]["PROTOCOL"][0]
-
-                if protocol not in working_protocol_list:
+                ) or protocol not in working_protocol_list:
                     continue
 
                 if protocol in working_protocol_list:
-                    if protocol == "SSH" or protocol == "SCP":
+                    if protocol in ["SSH", "SCP"]:
                         self.protocol_ssh(protocol, target_type, k)
                     elif protocol == "TELNET":
                         self.protocol_telnet(target_type, k)
-                    elif (
-                        protocol == "REDFISH"
-                        or protocol == "IPMI"
-                        or protocol == "SHELL"
-                    ):
-                        self.protocol_execute(protocol, target_type, k)
+                    elif protocol in ["REDFISH", "IPMI", "SHELL"]:
+                        self.protocol_service_execute(protocol, target_type, k)
                 else:
                     self.logger.error(
                         "\n\tERROR: %s is not available for %s."
@@ -524,12 +543,19 @@ class ffdc_collector:
         r"""
         Perform actions using SSH and SCP protocols.
 
-        Description of argument(s):
-        protocol            Protocol to execute.
-        target_type         OS Type of remote host.
-        sub_type            Group type of commands.
-        """
+        This method executes a set of commands using the SSH protocol to
+        connect to the target system and collect FFDC data. The method takes
+        the protocol, target type, and sub-type as arguments and performs the
+        corresponding actions based on the provided parameters.
 
+        Parameters:
+            protocol (str):    The protocol to execute (SSH or SCP).
+            target_type (str): The type group of the remote host.
+            sub_type (str):    The group type of commands to execute.
+
+        Returns:
+            None
+        """
         if protocol == "SCP":
             self.group_copy(self.ffdc_actions[target_type][sub_type])
         else:
@@ -539,9 +565,19 @@ class ffdc_collector:
 
     def protocol_telnet(self, target_type, sub_type):
         r"""
-        Perform actions using telnet protocol.
-        Description of argument(s):
-        target_type          OS Type of remote host.
+        Perform actions using the Telnet protocol.
+
+        This method executes a set of commands using the Telnet protocol to
+        connect to the target system and collect FFDC data. The method takes
+        the target type and sub-type as arguments and performs the
+        corresponding actions based on the provided parameters.
+
+        Parameters:
+            target_type (str): The type group of the remote host.
+            sub_type (str):    The group type of commands to execute.
+
+        Returns:
+            None
         """
         self.logger.info(
             "\n\t[Run] Executing commands on %s using %s"
@@ -583,16 +619,24 @@ class ffdc_collector:
         for file in telnet_files_saved:
             self.logger.info("\n\t\tSuccessfully save file " + file + ".")
 
-    def protocol_execute(self, protocol, target_type, sub_type):
+    def protocol_service_execute(self, protocol, target_type, sub_type):
         r"""
         Perform actions for a given protocol.
 
-        Description of argument(s):
-        protocol            Protocol to execute.
-        target_type         OS Type of remote host.
-        sub_type            Group type of commands.
-        """
+        This method executes a set of commands using the specified protocol to
+        connect to the target system and collect FFDC data. The method takes
+        the protocol, target type, and sub-type as arguments and performs the
+        corresponding actions based on the provided parameters.
 
+        Parameters:
+            protocol (str):    The protocol to execute
+                               (REDFISH, IPMI, or SHELL).
+            target_type (str): The type group of the remote host.
+            sub_type (str):    The group type of commands to execute.
+
+        Returns:
+            None
+        """
         self.logger.info(
             "\n\t[Run] Executing commands to %s using %s"
             % (self.hostname, protocol)
@@ -675,15 +719,25 @@ class ffdc_collector:
         self, ffdc_actions_for_target_type, form_filename=False
     ):
         r"""
-        Send commands in ffdc_config file to targeted system.
+        Send commands and collect FFDC data from the targeted system.
 
-        Description of argument(s):
-        ffdc_actions_for_target_type     Commands and files for the selected
-                                         remote host type.
-        form_filename                    If true, pre-pend self.target_type to
-                                         filename
+        This method sends a set of commands and collects FFDC data from the
+        targeted system based on the provided ffdc_actions_for_target_type
+        dictionary. The method also has an optional form_filename parameter,
+        which, if set to True, prepends the target type to the output file
+        name.
+
+        Parameters:
+            ffdc_actions_for_target_type (dict): A dictionary containing
+                                                 commands and files for the
+                                                 selected remote host type.
+            form_filename (bool, optional):      If True, prepends the target
+                                                 type to the output file name.
+                                                 Defaults to False.
+
+        Returns:
+            None
         """
-
         # Executing commands, if any
         self.ssh_execute_ffdc_commands(
             ffdc_actions_for_target_type, form_filename
@@ -712,11 +766,20 @@ class ffdc_collector:
 
     def get_command_list(self, ffdc_actions_for_target_type):
         r"""
-        Fetch list of commands from configuration file
+        Fetch a list of commands from the configuration file.
 
-        Description of argument(s):
-        ffdc_actions_for_target_type    Commands and files for the selected
-                                        remote host type.
+        This method retrieves a list of commands from the
+        ffdc_actions_for_target_type dictionary, which contains commands and
+        files for the selected remote host type. The method returns the list
+        of commands.
+
+        Parameters:
+            ffdc_actions_for_target_type (dict): A dictionary containing
+                                                 commands and files for the
+                                                 selected remote host type.
+
+        Returns:
+            list: A list of commands.
         """
         try:
             list_of_commands = ffdc_actions_for_target_type["COMMANDS"]
@@ -726,11 +789,20 @@ class ffdc_collector:
 
     def get_file_list(self, ffdc_actions_for_target_type):
         r"""
-        Fetch list of commands from configuration file
+        Fetch a list of files from the configuration file.
 
-        Description of argument(s):
-        ffdc_actions_for_target_type    Commands and files for the selected
-                                        remote host type.
+        This method retrieves a list of files from the
+        ffdc_actions_for_target_type dictionary, which contains commands and
+        files for the selected remote host type. The method returns the list
+        of files.
+
+        Parameters:
+            ffdc_actions_for_target_type (dict): A dictionary containing
+                                                 commands and files for the
+                                                 selected remote host type.
+
+        Returns:
+            list: A list of files.
         """
         try:
             list_of_files = ffdc_actions_for_target_type["FILES"]
@@ -740,10 +812,23 @@ class ffdc_collector:
 
     def unpack_command(self, command):
         r"""
-        Unpack command from config file
+        Unpack a command from the configuration file, handling both dictionary
+        and string inputs.
 
-        Description of argument(s):
-        command    Command from config file.
+        This method takes a command from the configuration file, which can be
+        either a dictionary or a string. If the input is a dictionary, the
+        method extracts the command text and timeout from the dictionary.
+        If the input is a string, the method assumes a default timeout of
+        60 seconds.
+        The method returns a tuple containing the command text and timeout.
+
+        Parameters:
+            command (dict or str): A command from the configuration file,
+                                   which can be either a dictionary or a
+                                   string.
+
+        Returns:
+            tuple: A tuple containing the command text and timeout.
         """
         if isinstance(command, dict):
             command_txt = next(iter(command))
@@ -759,13 +844,29 @@ class ffdc_collector:
         self, ffdc_actions_for_target_type, form_filename=False
     ):
         r"""
-        Send commands in ffdc_config file to targeted system.
+        Send commands in the ffdc_config file to the targeted system using SSH.
 
-        Description of argument(s):
-        ffdc_actions_for_target_type    Commands and files for the selected
-                                        remote host type.
-        form_filename                   If true, pre-pend self.target_type to
-                                        filename
+        This method sends a set of commands and collects FFDC data from the
+        targeted system using the SSH protocol. The method takes the
+        ffdc_actions_for_target_type dictionary and an optional
+        form_filename parameter as arguments.
+
+        If form_filename is set to True, the method prepends the target type
+        to the output file name. The method returns the output of the executed
+        commands.
+
+        It also prints the progress counter string + on the console.
+
+        Parameters:
+            ffdc_actions_for_target_type (dict): A dictionary containing
+                                                 commands and files for the
+                                                 selected remote host type.
+            form_filename (bool, optional):      If True, prepends the target
+                                                 type to the output file name.
+                                                 Defaults to False.
+
+        Returns:
+            None
         """
         self.logger.info(
             "\n\t[Run] Executing commands on %s using %s"
@@ -806,13 +907,21 @@ class ffdc_collector:
 
     def group_copy(self, ffdc_actions_for_target_type):
         r"""
-        scp group of files (wild card) from remote host.
+        SCP a group of files (wildcard) from the remote host.
 
-        Description of argument(s):
-        fdc_actions_for_target_type    Commands and files for the selected
-                                       remote host type.
+        This method copies a group of files from the remote host using the SCP
+        protocol. The method takes the fdc_actions_for_target_type dictionary
+        as an argument, which contains commands and files for the selected
+        remote host type.
+
+        Parameters:
+            fdc_actions_for_target_type (dict): A dictionary containing
+                                                commands and files for the
+                                                selected remote host type.
+
+        Returns:
+            None
         """
-
         if self.ssh_remoteclient.scpclient:
             self.logger.info(
                 "\n\tCopying files from remote system %s via SCP.\n"
@@ -870,19 +979,33 @@ class ffdc_collector:
         quiet=None,
     ):
         r"""
-        SCP all files in file_dict to the indicated directory on the local
+        SCP all files in the file_dict to the indicated directory on the local
         system.
 
-        Description of argument(s):
-        targ_dir_path                   The path of the directory to receive
-                                        the files.
-        targ_file_prefix                Prefix which will be prepended to each
+        This method copies all files specified in the file_dict dictionary
+        from the targeted system to the local system using the SCP protocol.
+        The method takes the target directory path, target file prefix, and a
+        boolean flag form_filename as required arguments.
+
+        The file_dict argument is optional and contains the files to be copied.
+        The quiet argument is also optional and, if set to True, suppresses
+        the output of the SCP operation.
+
+        Parameters:
+            targ_dir_path (str):        The path of the directory to receive
+                                        the files on the local system.
+            targ_file_prefix (str):     Prefix which will be prepended to each
                                         target file's name.
-        file_dict                       A dictionary of files to scp from
-                                        targeted system to this system
+            form_filename (bool):       If True, prepends the target type to
+                                        the file names.
+            file_dict (dict, optional): A dictionary containing the files to
+                                        be copied. Defaults to None.
+            quiet (bool, optional):     If True, suppresses the output of the
+                                        SCP operation. Defaults to None.
 
+        Returns:
+            None
         """
-
         progress_counter = 0
         for filename in file_list:
             if form_filename:
@@ -925,19 +1048,18 @@ class ffdc_collector:
 
     def set_ffdc_default_store_path(self):
         r"""
-        Set a default value for self.ffdc_dir_path and self.ffdc_prefix.
-        Collected ffdc file will be stored in dir
-        /self.location/hostname_timestr/.
-        Individual ffdc file will have timestr_filename.
+        Set default values for self.ffdc_dir_path and self.ffdc_prefix.
 
-        Description of class variables:
-        self.ffdc_dir_path  The dir path where collected ffdc data files
-                            should be put.
+        This method sets default values for the self.ffdc_dir_path and
+        self.ffdc_prefix class variables.
 
-        self.ffdc_prefix    The prefix to be given to each ffdc file name.
+        The collected FFDC files will be stored in the directory
+        /self.location/hostname_timestr/, with individual files having the
+        format timestr_filename where timestr is in %Y%m%d-%H%M%S.
 
+        Returns:
+            None
         """
-
         timestr = time.strftime("%Y%m%d-%H%M%S")
         self.ffdc_dir_path = (
             self.location + "/" + self.hostname + "_" + timestr + "/"
@@ -946,18 +1068,23 @@ class ffdc_collector:
         self.validate_local_store(self.ffdc_dir_path)
 
     # Need to verify local store path exists prior to instantiate this class.
-    # This class method is used to share the same code between CLI input parm
-    # and Robot Framework "${EXECDIR}/logs" before referencing this class.
+    # This class method to validate log path before referencing this class.
     @classmethod
     def validate_local_store(cls, dir_path):
         r"""
-        Ensure path exists to store FFDC files locally.
+        Ensure the specified directory exists to store FFDC files locally.
 
-        Description of variable:
-        dir_path  The dir path where collected ffdc data files will be stored.
+        This method checks if the provided dir_path exists. If the directory
+        does not exist, the method creates it. The method does not return any
+        value.
 
+        Parameters:
+            dir_path (str): The directory path where collected FFDC data files
+                            will be stored.
+
+        Returns:
+            None
         """
-
         if not os.path.exists(dir_path):
             try:
                 os.makedirs(dir_path, 0o755)
@@ -977,21 +1104,32 @@ class ffdc_collector:
 
     def print_progress(self, progress):
         r"""
-        Print activity progress +
+        Print the current activity progress.
 
-        Description of variable:
-        progress  Progress counter.
+        This method prints the current activity progress using the provided
+        progress counter. The method does not return any value.
 
+        Parameters:
+            progress (int): The current activity progress counter.
+
+        Returns:
+            None
         """
-
         sys.stdout.write("\r\t" + "+" * progress)
         sys.stdout.flush()
         time.sleep(0.1)
 
     def verify_redfish(self):
         r"""
-        Verify remote host has redfish service active
+        Verify if the remote host has the Redfish service active.
 
+        This method checks if the remote host has the Redfish service active
+        by sending a GET request to the Redfish base URL /redfish/v1/.
+        If the request is successful (status code 200), the method returns
+        stdout output of the run else error message.
+
+        Returns:
+            str: Redfish service executed output.
         """
         redfish_parm = (
             "redfishtool -r "
@@ -1004,8 +1142,16 @@ class ffdc_collector:
 
     def verify_ipmi(self):
         r"""
-        Verify remote host has IPMI LAN service active
+        Verify if the remote host has the IPMI LAN service active.
 
+        This method checks if the remote host has the IPMI LAN service active
+        by sending an IPMI "power status" command.
+
+        If the command is successful (returns a non-empty response),
+        else error message.
+
+        Returns:
+            str: IPMI LAN service executed output.
         """
         if self.target_type == "OPENBMC":
             ipmi_parm = (
@@ -1034,11 +1180,21 @@ class ffdc_collector:
 
     def run_tool_cmd(self, parms_string, quiet=False):
         r"""
-        Run CLI standard tool or scripts.
+        Run a CLI standard tool or script with the provided command options.
 
-        Description of variable:
-        parms_string         tool command options.
-        quiet                do not print tool error message if True
+        This method runs a CLI standard tool or script with the provided
+        parms_string command options. If the quiet parameter is set to True,
+        the method suppresses the output of the command.
+        The method returns the output of the command as a string.
+
+        Parameters:
+            parms_string (str):     The command options for the CLI tool or
+                                    script.
+            quiet (bool, optional): If True, suppresses the output of the
+                                    command. Defaults to False.
+
+        Returns:
+            str: The output of the command as a string.
         """
 
         result = subprocess.run(
@@ -1059,10 +1215,20 @@ class ffdc_collector:
 
     def verify_protocol(self, protocol_list):
         r"""
-        Perform protocol working check.
+        Perform a working check for the provided list of protocols.
 
-        Description of argument(s):
-        protocol_list        List of protocol.
+        This method checks if the specified protocols are available on the
+        remote host. The method iterates through the protocol_list and
+        attempts to establish a connection using each protocol.
+
+        If a connection is successfully established, the method append to the
+        list and if any protocol fails to connect, the method ignores it.
+
+        Args:
+            protocol_list (list):   A list of protocols to check.
+
+        Returns:
+            list: All protocols are available list.
         """
 
         tmp_list = []
