@@ -24,13 +24,20 @@ class SSHRemoteclient:
 
     def __init__(self, hostname, username, password, port_ssh):
         r"""
-        Description of argument(s):
+        Initialize the FFDCCollector object with the provided remote host
+        details.
 
-        hostname        Name/IP of the remote (targeting) host
-        username        User on the remote host with access to FFCD files
-        password        Password for user on remote host
+        This method initializes an FFDCCollector object with the given
+        attributes, which represent the details of the remote (targeting)
+        host. The attributes include the hostname, username, password, and
+        SSH port.
+
+        Parameters:
+            hostname (str): Name or IP address of the remote (targeting) host.
+            username (str): User on the remote host with access to FFDC files.
+            password (str): Password for the user on the remote host.
+            port_ssh (int): SSH port value. By default, 22.
         """
-
         self.ssh_output = None
         self.ssh_error = None
         self.sshclient = None
@@ -42,9 +49,11 @@ class SSHRemoteclient:
 
     def ssh_remoteclient_login(self):
         r"""
-        Method to create a ssh connection to remote host.
-        """
+        Connect to remote host using the SSH client.
 
+        Returns:
+            bool: The method return True on success and False in failure.
+        """
         is_ssh_login = True
         try:
             # SSHClient to make connections to the remote server
@@ -78,9 +87,12 @@ class SSHRemoteclient:
 
     def ssh_remoteclient_disconnect(self):
         r"""
-        Clean up.
-        """
+        Disconnect from the remote host using the SSH client.
 
+        This method disconnects from the remote host using the SSH client
+        established during the FFDC collection process. The method does not
+        return any value.
+        """
         if self.sshclient:
             self.sshclient.close()
 
@@ -88,14 +100,25 @@ class SSHRemoteclient:
             self.scpclient.close()
 
     def execute_command(self, command, default_timeout=60):
+        r"""
+        Execute a command on the remote host using the SSH client.
+
+        This method executes a provided command on the remote host using the
+        SSH client. The method takes the command string as an argument and an
+        optional default_timeout parameter of 60 seconds, which specifies the
+        timeout for the command execution.
+
+        The method returns the output of the executed command as a string.
+
+        Parameters:
+            command (str):                   The command string to be executed
+                                             on the remote host.
+            default_timeout (int, optional): The timeout for the command
+                                             execution. Defaults to 60 seconds.
+
+        Returns:
+            str: The output of the executed command as a string.
         """
-        Execute command on the remote host.
-
-        Description of argument(s):
-        command                Command string sent to remote host
-
-        """
-
         empty = ""
         cmd_start = time.time()
         try:
@@ -147,7 +170,10 @@ class SSHRemoteclient:
 
     def scp_connection(self):
         r"""
-        Create a scp connection for file transfer.
+        Establish an SCP connection for file transfer.
+
+        This method creates an SCP connection for file transfer using the SSH
+        client established during the FFDC collection process.
         """
         try:
             self.scpclient = SCPClient(
@@ -172,16 +198,21 @@ class SSHRemoteclient:
 
     def scp_file_from_remote(self, remote_file, local_file):
         r"""
-        scp file in remote system to local with date-prefixed filename.
+        SCP a file from the remote host to the local host with a filename.
 
-        Description of argument(s):
-        remote_file            Full path filename on the remote host
+        This method copies a file from the remote host to the local host using
+        the SCP protocol. The method takes the remote_file and local_file as
+        arguments, which represent the full paths of the files on the remote
+        and local hosts, respectively.
 
-        local_file             Full path filename on the local host
-                               local filename = date-time_remote filename
 
+        Parameters:
+            remote_file (str): The full path filename on the remote host.
+            local_file (str):  The full path filename on the local host.
+
+        Returns:
+            bool: The method return True on success and False in failure.
         """
-
         try:
             self.scpclient.get(remote_file, local_file, recursive=True)
         except (SCPException, SocketTimeout, PipeTimeout, SSHException) as e:
