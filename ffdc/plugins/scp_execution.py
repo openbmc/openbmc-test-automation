@@ -21,14 +21,25 @@ from ssh_utility import SSHRemoteclient  # NOQA
 
 def scp_remote_file(hostname, username, password, filename, local_dir_path):
     r"""
-    Description of argument(s):
+    Copy a file from a remote host to the local host using SCP.
 
-    hostname        Name/IP of the remote (targeting) host
-    username        User on the remote host with access to files
-    password        Password for user on remote host
-    filename        Filename with full path on remote host
-                    Filename can contain wild cards for multiple files
-    local_dir_path  Location to store file on local host
+    This function copies a file from a remote host to the local host using the
+    SCP protocol. The function takes the remote host details (hostname,
+    username, password), the filename with its full path on the remote host,
+    and the local directory path as arguments.
+
+    The function uses wildcards to support copying multiple files if needed.
+
+    Parameters:
+        hostname (str):       Name or IP address of the remote host.
+        username (str):       User on the remote host with access to files.
+        password (str):       Password for the user on the remote host.
+        filename (str):       Filename with full path on the remote host.
+                              Can contain wildcards for multiple files.
+        local_dir_path (str): Location to store the file on the local host.
+
+    Returns:
+        None
     """
     ssh_remoteclient = SSHRemoteclient(hostname, username, password)
 

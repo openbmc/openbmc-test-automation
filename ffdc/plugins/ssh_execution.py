@@ -23,15 +23,33 @@ def ssh_execute_cmd(
     hostname, username, password, port_ssh, command, timeout=60, type=None
 ):
     r"""
-    Description of argument(s):
+    Execute a command on the remote host using SSH and return the output.
 
-    hostname        Name/IP of the remote (targeting) host
-    username        User on the remote host with access to FFCD files
-    password        Password for user on remote host
-    port_ssh        SSH port value. By default 22.
-    command         Command to run on remote host
-    timeout         Time, in second, to wait for command completion
-    type            Data type return as list or others.
+    This function executes a provided command on the remote host using SSH.
+    The function takes the remote host details (hostname, username, password,
+    and SSH port) and the command to be executed as arguments.
+
+    The function also accepts an optional timeout parameter, which specifies
+    the time in seconds to wait for the command to complete.
+
+    The function returns the output of the executed command as a string or
+    list
+
+    Parameters:
+        hostname (str):          Name or IP address of the remote host.
+        username (str):          User on the remote host.
+        password (str):          Password for the user on the remote host.
+        port_ssh (int):          SSH port value. By default, 22.
+        command (str):           The command to be executed on the remote host.
+        timeout (int, optional): The time in seconds to wait for the command
+                                 to complete. Defaults to 60 seconds.
+        type (str, optional):    The data type to return. If set to list,
+                                 the function returns a list of lines from the
+                                 command output. Defaults to None.
+
+    Returns:
+        str or list: The output of the executed command as a string or a list
+                     of lines, depending on the type parameter.
     """
     ssh_remoteclient = SSHRemoteclient(hostname, username, password, port_ssh)
 
