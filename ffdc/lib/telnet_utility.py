@@ -17,14 +17,32 @@ class TelnetRemoteclient:
         self, hostname, username, password, port=23, read_timeout=None
     ):
         r"""
-        Description of argument(s):
+        Initialize the TelnetRemoteClient object with the provided remote host
+        details.
 
-        hostname        Name/IP of the remote (targeting) host
-        username        User on the remote host with access to FFCD files
-        password        Password for user on remote host
-        read_timeout    New read timeout value to override default one
+        This method initializes a TelnetRemoteClient object with the given
+        attributes, which represent the details of the remote (targeting) host.
+
+        The attributes include the hostname, username, password, and Telnet
+        port.
+
+        The method also accepts an optional read_timeout parameter, which
+        specifies a new read timeout value to override the default one.
+
+        Parameters:
+            hostname (str):               Name or IP address of the remote
+                                          host.
+            username (str):               User on the remote host with access
+                                          to files.
+            password (str):               Password for the user on the remote
+                                          host.
+            port (int, optional):         Telnet port value. Defaults to 23.
+            read_timeout (int, optional): New read timeout value to override
+                                          the default one. Defaults to None.
+
+        Returns:
+            None
         """
-
         self.hostname = hostname
         self.username = username
         self.password = password
@@ -33,6 +51,21 @@ class TelnetRemoteclient:
         self.read_timeout = read_timeout
 
     def tn_remoteclient_login(self):
+        r"""
+        Establish a Telnet connection to the remote host and log in.
+
+        This method establishes a Telnet connection to the remote host using
+        the provided hostname, username, and password. If the connection and
+        login are successful, the method returns True. Otherwise, it returns
+        False.
+
+        Parameters:
+            None
+
+        Returns:
+            bool: True if the Telnet connection and login are successful,
+                  False otherwise.
+        """
         is_telnet = True
         try:
             self.tnclient = telnetlib.Telnet(
@@ -79,9 +112,24 @@ class TelnetRemoteclient:
         return is_telnet
 
     def __del__(self):
+        r"""
+        Disconnect from the remote host when the object is deleted.
+
+        This method disconnects from the remote host when the
+        TelnetRemoteClient object is deleted.
+        """
         self.tn_remoteclient_disconnect()
 
     def tn_remoteclient_disconnect(self):
+        r"""
+        Disconnect from the remote host using the Telnet client.
+
+        This method disconnects from the remote host using the Telnet client
+        established during the FFDC collection process.
+
+        The method attempts to close the Telnet connection. If the Telnet
+        client does not exist, the method ignores the exception.
+        """
         try:
             self.tnclient.close()
         except Exception:
@@ -90,14 +138,25 @@ class TelnetRemoteclient:
 
     def execute_command(self, cmd, i_timeout=120):
         r"""
-        Executes commands on the remote host
+        Executes a command on the remote host using Telnet and returns the
+        output.
 
-        Description of argument(s):
-        cmd             Command to run on remote host
-        i_timeout       Timeout for command output
-                        default is 120 seconds
+        This method executes a provided command on the remote host using
+        Telnet. The method takes the cmd argument, which is expected to be a
+        valid command to execute, and an optional i_timeout parameter, which
+        specifies the timeout for the command output.
+
+        The method returns the output of the executed command as a string.
+
+        Parameters:
+            cmd (str):                 The command to be executed on the
+                                       remote host.
+            i_timeout (int, optional): The timeout for the command output.
+                                       Defaults to 120 seconds.
+
+        Returns:
+            str: The output of the executed command as a string.
         """
-
         # Wait time for command execution before reading the output.
         # Use user input wait time for command execution if one exists.
         # Else use the default 120 sec,

@@ -1,15 +1,29 @@
+#!/usr/bin/env python3
+
 import subprocess
 
 
 def execute_cmd(parms_string, quiet=False):
     r"""
-    Run CLI standard tool or scripts.
+    Execute a CLI standard tool or script with the provided command string.
 
-    Description of variable:
-    parms_string         Command to execute from the current SHELL.
-    quiet                do not print tool error message if True
+    This function executes a provided command string using the current SHELL.
+    The function takes the parms_string as an argument, which is expected
+    to be a valid command to execute.
+
+    The function also accepts an optional quiet parameter, which, if set to
+    True, suppresses the output of the command.
+
+    The function returns the output of the executed command as a string.
+
+    Parameters:
+        parms_string (str):     The command to execute from the current SHELL.
+        quiet (bool, optional): If True, suppresses the output of the command.
+                                Defaults to False.
+
+    Returns:
+        str: The output of the executed command as a string.
     """
-
     result = subprocess.run(
         [parms_string],
         stdout=subprocess.PIPE,

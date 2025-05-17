@@ -20,13 +20,27 @@ from telnet_utility import TelnetRemoteclient  # NOQA
 
 def telnet_execute_cmd(hostname, username, password, command, timeout=60):
     r"""
-    Description of argument(s):
+    Execute a command on the remote host using Telnet and return the output.
 
-    hostname        Name/IP of the remote (targeting) host
-    username        User on the remote host with access to FFCD files
-    password        Password for user on remote host
-    command         Command to run on remote host
-    timeout         Time, in second, to wait for command completion
+    This function executes a provided command on the remote host using Telnet.
+    The function takes the remote host details (hostname, username, password)
+    and the command to be executed as arguments.
+
+    The function also accepts an optional timeout parameter, which specifies
+    the time in seconds to wait for the command to complete.
+
+    The function returns the output of the executed command as a string.
+
+    Parameters:
+        hostname (str):          Name or IP address of the remote host.
+        username (str):          User on the remote host with access to files.
+        password (str):          Password for the user on the remote host.
+        command (str):           The command to be executed on the remote host.
+        timeout (int, optional): The time in seconds to wait for the command
+                                 to complete. Defaults to 60 seconds.
+
+    Returns:
+        str: The output of the executed command as a string.
     """
     telnet_remoteclient = TelnetRemoteclient(hostname, username, password)
     result = ""

@@ -22,11 +22,28 @@ pending_enumeration = set()
 
 def execute_redfish_cmd(parms, json_type="json"):
     r"""
-    Run CLI standard redfish tool.
+    Execute a Redfish command and return the output in the specified JSON
+    format.
 
-    Description of variable:
-    parms_string         Command to execute from the current SHELL.
-    quiet                do not print tool error message if True
+    This function executes a provided Redfish command using the redfishtool
+    and returns the output in the specified JSON format. The function takes
+    the parms argument, which is expected to be a qualified string containing
+    the redfishtool command line URI and required parameters.
+
+    The function also accepts an optional json_type parameter, which specifies
+    the desired JSON format for the output (either "json" or "yaml").
+
+    The function returns the output of the executed command as a string in the
+    specified JSON format.
+
+    Parameters:
+        parms (str):               A qualified Redfish command line string.
+        json_type (str, optional): The desired JSON format for the output.
+                                   Defaults to "json".
+
+    Returns:
+        str: The output of the executed command as a string in the specified
+             JSON format.
     """
     resp = subprocess.run(
         [parms],
@@ -51,12 +68,29 @@ def enumerate_request(hostname, username, password, url, return_json="json"):
     r"""
     Perform a GET enumerate request and return available resource paths.
 
-    Description of argument(s):
-    url               URI resource absolute path (e.g.
-                      "/redfish/v1/SessionService/Sessions").
-    return_json       Indicates whether the result should be
-                      returned as a json string or as a
-                      dictionary.
+    This function performs a GET enumerate request on the specified URI
+    resource and returns the available resource paths.
+
+    The function takes the remote host details (hostname, username, password)
+    and the URI resource absolute path as arguments. The function also accepts
+    an optional return_json parameter, which specifies whether the result
+    should be returned as a JSON string or as a dictionary.
+
+    The function returns the available resource paths as a list of strings.
+
+    Parameters:
+        hostname (str):              Name or IP address of the remote host.
+        username (str):              User on the remote host with access to
+                                     files.
+        password (str):              Password for the user on the remote host.
+        url (str):                   URI resource absolute path e.g.
+                                     /redfish/v1/SessionService/Sessions
+        return_json (str, optional): Indicates whether the result should be
+                                     returned as a JSON string or as a
+                                     dictionary. Defaults to "json".
+
+    Returns:
+        list: A list of available resource paths as strings.
     """
     parms = (
         "redfishtool -u "
@@ -114,11 +148,26 @@ def enumerate_request(hostname, username, password, url, return_json="json"):
 
 def walk_nested_dict(data, url=""):
     r"""
-    Parse through the nested dictionary and get the resource id paths.
+    Parse through the nested dictionary and extract resource ID paths.
 
-    Description of argument(s):
-    data    Nested dictionary data from response message.
-    url     Resource for which the response is obtained in data.
+    This function traverses a nested dictionary and extracts resource ID paths.
+    The function takes the data argument, which is expected to be a nested
+    dictionary containing resource information.
+
+    The function also accepts an optional url argument, which specifies the
+    resource for which the response is obtained in the data dictionary.
+
+    The function returns a list of resource ID paths as strings.
+
+    Parameters:
+        data (dict):         A nested dictionary containing resource
+                             information.
+        url (str, optional): The resource for which the response is obtained
+                             in the data dictionary. Defaults to an empty
+                             string.
+
+    Returns:
+        list: A list of resource ID paths as strings.
     """
     url = url.rstrip("/")
 
@@ -148,13 +197,27 @@ def walk_nested_dict(data, url=""):
 
 def get_key_value_nested_dict(data, key):
     r"""
-    Parse through the nested dictionary and get the searched key value.
+    Parse through the nested dictionary and retrieve the value associated with
+    the searched key.
 
-    Description of argument(s):
-    data    Nested dictionary data from response message.
-    key     Search dictionary key element.
+    This function traverses a nested dictionary and retrieves the value
+    associated with the searched key. The function takes the data argument,
+    which is expected to be a nested dictionary containing resource
+    information.
+
+    The function also accepts a key argument, which specifies the key to
+    search for in the nested dictionary.
+
+    The function returns the value associated with the searched key as a
+    string.
+
+    Parameters:
+        data (dict): A nested dictionary containing resource information.
+        key (str):   The key to search for in the nested dictionary.
+
+    Returns:
+        str: The value associated with the searched key as a string.
     """
-
     for k, v in data.items():
         if isinstance(v, dict):
             get_key_value_nested_dict(v, key)
