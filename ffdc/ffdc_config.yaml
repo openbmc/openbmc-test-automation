@@ -147,7 +147,8 @@ OPENBMC:
               ${hostname}:${port_https} -S Always raw GET
               /redfish/v1/Systems/system/LogServices/EventLog/Entries
             - plugin:
-                  - plugin_name: plugin.redfish.enumerate_request
+                  - plugin_name: plugins.redfish
+                  - plugin_function: enumerate_request
                   - plugin_args:
                         - ${hostname}:${port_https}
                         - ${username}
