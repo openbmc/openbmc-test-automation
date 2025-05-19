@@ -4,6 +4,7 @@ r"""
 See class prolog below for details.
 """
 
+import importlib
 import json
 import logging
 import os
@@ -30,51 +31,22 @@ from ssh_utility import SSHRemoteclient  # NOQA
 from telnet_utility import TelnetRemoteclient  # NOQA
 
 r"""
-User define plugins python functions.
-
-It will imports files from directory plugins
-
-plugins
-├── file1.py
-└── file2.py
-
-Example how to define in YAML:
- - plugin:
-   - plugin_name: plugin.foo_func.foo_func_yaml
-     - plugin_args:
-       - arg1
-       - arg2
-"""
-plugin_dir = os.path.join(os.path.dirname(__file__), "plugins")
-sys.path.append(plugin_dir)
-
-for module in os.listdir(plugin_dir):
-    if module == "__init__.py" or not module.endswith(".py"):
-        continue
-
-    plugin_module = f"plugins.{module[:-3]}"
-    try:
-        plugin = __import__(plugin_module, globals(), locals(), [], 0)
-    except Exception as e:
-        print(f"PLUGIN: Exception: {e}")
-        print(f"PLUGIN: Module import failed: {module}")
-        continue
-
-r"""
 This is for plugin functions returning data or responses to the caller
 in YAML plugin setup.
 
 Example:
 
     - plugin:
-      - plugin_name: version = plugin.ssh_execution.ssh_execute_cmd
+      - plugin_name: plugin.ssh_execution
+      - plugin_function: version = ssh_execute_cmd
       - plugin_args:
         - ${hostname}
         - ${username}
         - ${password}
         - "cat /etc/os-release | grep VERSION_ID | awk -F'=' '{print $2}'"
      - plugin:
-        - plugin_name: plugin.print_vars.print_vars
+        - plugin_name: plugin.print_vars
+        - plugin_function: print_vars
         - plugin_args:
           - version
 
@@ -82,37 +54,90 @@ where first plugin "version" var is used by another plugin in the YAML
 block or plugin
 
 """
+# Global variables for storing plugin return values, plugin return variables,
+# and log storage path.
 global global_log_store_path
 global global_plugin_dict
 global global_plugin_list
+global global_plugin_type_list
+global global_plugin_error_dict
 
-# Hold the plugin return values in dict and plugin return vars in list.
-# Dict is to reference and update vars processing in parser where as
-# list is for current vars from the plugin block which needs processing.
+# Hold the plugin return values in a dictionary and plugin return variables in
+# a list. The dictionary is used for referencing and updating variables during
+# parsing in the parser, while the list is used for storing current variables
+# from the plugin block that need processing.
 global_plugin_dict = {}
 global_plugin_list = []
 
-# Hold the plugin return named declared if function returned values are
-# list,dict.
-# Refer this name list to look up the plugin dict for eval() args function
-# Example ['version']
+# Hold the plugin return named variables if the function returned values are
+# lists or dictionaries. This list is used to reference the plugin dictionary
+# for python function execute arguments.
+# Example: ['version']
 global_plugin_type_list = []
 
 # Path where logs are to be stored or written.
 global_log_store_path = ""
 
 # Plugin error state defaults.
-plugin_error_dict = {
+global_plugin_error_dict = {
     "exit_on_error": False,
     "continue_on_error": False,
 }
 
 
+def execute_python_function(module_name, function_name, *args, **kwargs):
+    r"""
+    Execute a Python function from a module dynamically.
+
+    This function dynamically imports a module and executes a specified
+    function from that module with the provided arguments. The function takes
+    the module name, function name, and arguments as input. The function
+    returns the result of the executed function.
+
+    If an ImportError or AttributeError occurs, the function prints an error
+    message and returns None.
+
+    Parameters:
+        module_name (str):   The name of the module containing the function.
+        function_name (str): The name of the function to execute.
+        *args:               Positional arguments to pass to the function.
+        **kwargs:            Keyword arguments to pass to the function.
+
+    Returns:
+        Any: The result of the executed function or None if an error occurs.
+    """
+    try:
+        # Dynamically import the module.
+        module = importlib.import_module(module_name)
+
+        # Get the function from the module.
+        func = getattr(module, function_name)
+
+        # Call the function with the provided arguments.
+        result = func(*args, **kwargs)
+
+    except (ImportError, AttributeError) as e:
+        print(f"\tERROR: execute_python_function: {e}")
+        # Set the plugin error state.
+        global_plugin_error_dict["exit_on_error"] = True
+        print("\treturn: PLUGIN_EVAL_ERROR")
+        return "PLUGIN_EVAL_ERROR"
+
+    return result
+
+
 class ffdc_collector:
     r"""
-    Execute commands from configuration file to collect log files.
-    Fetch and store generated files at the specified location.
+    Execute commands from a configuration file to collect log files and store
+    the generated files at the specified location.
 
+    This class is designed to execute commands specified in a configuration
+    YAML file to collect log files from a remote host.
+
+    The class establishes connections using SSH, Telnet, or other protocols
+    based on the configuration. It fetches and stores the generated files at
+    the specified location. The class provides methods for initializing the
+    collector, executing commands, and handling errors.
     """
 
     def __init__(
@@ -215,7 +240,7 @@ class ffdc_collector:
                 sys.exit(-1)
 
             self.logger.info("\n\tENV: User define input YAML variables")
-            self.env_dict = self.load_env()
+            self.load_env()
         else:
             sys.exit(-1)
 
@@ -652,12 +677,12 @@ class ffdc_collector:
                 if "plugin" in each_cmd:
                     # If the error is set and plugin explicitly
                     # requested to skip execution on error..
-                    if plugin_error_dict[
+                    if global_plugin_error_dict[
                         "exit_on_error"
                     ] and self.plugin_error_check(each_cmd["plugin"]):
                         self.logger.info(
                             "\n\t[PLUGIN-ERROR] exit_on_error: %s"
-                            % plugin_error_dict["exit_on_error"]
+                            % global_plugin_error_dict["exit_on_error"]
                         )
                         self.logger.info(
                             "\t[PLUGIN-SKIP] %s" % each_cmd["plugin"][0]
@@ -1307,20 +1332,20 @@ class ffdc_collector:
         self.env attribute for later use.
         """
 
-        os.environ["hostname"] = self.hostname
-        os.environ["username"] = self.username
-        os.environ["password"] = self.password
-        os.environ["port_ssh"] = self.port_ssh
-        os.environ["port_https"] = self.port_https
-        os.environ["port_ipmi"] = self.port_ipmi
+        tmp_env_vars = {
+            "hostname": self.hostname,
+            "username": self.username,
+            "password": self.password,
+            "port_ssh": self.port_ssh,
+            "port_https": self.port_https,
+            "port_ipmi": self.port_ipmi,
+        }
 
-        # Append default Env.
-        self.env_dict["hostname"] = self.hostname
-        self.env_dict["username"] = self.username
-        self.env_dict["password"] = self.password
-        self.env_dict["port_ssh"] = self.port_ssh
-        self.env_dict["port_https"] = self.port_https
-        self.env_dict["port_ipmi"] = self.port_ipmi
+        # Updatae default Env and Dict var for both so that it can be
+        # verified when referencing it throughout the code.
+        for key, value in tmp_env_vars.items():
+            os.environ[key] = value
+            self.env_dict[key] = value
 
         try:
             tmp_env_dict = {}
@@ -1362,48 +1387,6 @@ class ffdc_collector:
                 mask_dict[k] = re.sub(password_regex, "********", v)
 
         self.logger.info(json.dumps(mask_dict, indent=8, sort_keys=False))
-
-    def execute_python_eval(self, eval_string):
-        r"""
-        Execute a qualified Python function string using the eval() function.
-
-        This method executes a provided Python function string using the
-        eval() function.
-
-        The method takes the eval_string as an argument, which is expected to
-        be a valid Python function call.
-
-        The method returns the result of the executed function.
-
-        Example:
-                eval(plugin.foo_func.foo_func(10))
-
-        Parameters:
-            eval_string (str): A valid Python function call string.
-
-        Returns:
-            str: The result of the executed function and on failure return
-                 PLUGIN_EVAL_ERROR.
-        """
-        try:
-            self.logger.info("\tExecuting plugin func()")
-            self.logger.debug("\tCall func: %s" % eval_string)
-            result = eval(eval_string)
-            self.logger.info("\treturn: %s" % str(result))
-        except (
-            ValueError,
-            SyntaxError,
-            NameError,
-            AttributeError,
-            TypeError,
-        ) as e:
-            self.logger.error("\tERROR: execute_python_eval: %s" % e)
-            # Set the plugin error state.
-            plugin_error_dict["exit_on_error"] = True
-            self.logger.info("\treturn: PLUGIN_EVAL_ERROR")
-            return "PLUGIN_EVAL_ERROR"
-
-        return result
 
     def execute_plugin_block(self, plugin_cmd_list):
         r"""
@@ -1451,15 +1434,21 @@ class ffdc_collector:
         """
         try:
             idx = self.key_index_list_dict("plugin_name", plugin_cmd_list)
+            # Get plugin module name
             plugin_name = plugin_cmd_list[idx]["plugin_name"]
+
+            # Get plugin function name
+            idx = self.key_index_list_dict("plugin_function", plugin_cmd_list)
+            plugin_function = plugin_cmd_list[idx]["plugin_function"]
+
             # Equal separator means plugin function returns result.
-            if " = " in plugin_name:
+            if " = " in plugin_function:
                 # Ex. ['result', 'plugin.foo_func.my_func']
-                plugin_name_args = plugin_name.split(" = ")
+                plugin_function_args = plugin_function.split(" = ")
                 # plugin func return data.
-                for arg in plugin_name_args:
-                    if arg == plugin_name_args[-1]:
-                        plugin_name = arg
+                for arg in plugin_function_args:
+                    if arg == plugin_function_args[-1]:
+                        plugin_function = arg
                     else:
                         plugin_resp = arg.split(",")
                         # ['result1','result2']
@@ -1478,8 +1467,14 @@ class ffdc_collector:
                 else:
                     plugin_args = self.yaml_args_populate([])
 
-            # Pack the args list to string parameters for plugin function.
-            parm_args_str = self.yaml_args_string(plugin_args)
+            # Replace keys in the string with their corresponding
+            # values from the dictionary
+            for key, value in global_plugin_dict.items():
+                # Iterate through the list and check if each element is a
+                # string
+                for index, element in enumerate(plugin_args):
+                    if isinstance(element, str):
+                        plugin_args[index] = element.replace(key, value)
 
             """
             Example of plugin_func:
@@ -1490,22 +1485,38 @@ class ffdc_collector:
                          "/redfish/v1/",
                          "json")
             """
-            if parm_args_str:
-                plugin_func = f"{plugin_name}({parm_args_str})"
-            else:
-                plugin_func = f"{plugin_name}()"
+            # For logging purpose to mask password.
+            # List should be string element to join else gives TypeError
+            args_string = ""
+            args_string = self.print_plugin_args_string(plugin_args)
 
-            # Execute plugin function.
-            if global_plugin_dict:
-                resp = self.execute_python_eval(plugin_func)
+            # If user wants to debug plugins.
+            self.logger.debug(
+                f"\tDebug Plugin function: \n\t\t{plugin_name}."
+                f"{plugin_function}{args_string}"
+            )
+
+            # For generic logging plugin info.
+            self.logger.info(
+                f"\tPlugin function: \n\t\t{plugin_name}."
+                f"{plugin_function}()"
+            )
+
+            # Execute the plugins function with args.
+            try:
+                resp = execute_python_function(
+                    plugin_name, plugin_function, *plugin_args
+                )
+                self.logger.info(f"\tPlugin response = {resp} ")
                 # Update plugin vars dict if there is any.
                 if resp != "PLUGIN_EVAL_ERROR":
                     self.response_args_data(resp)
-            else:
-                resp = self.execute_python_eval(plugin_func)
+            except UnboundLocalError:
+                raise "UnboundLocalError"
+
         except Exception as e:
             # Set the plugin error state.
-            plugin_error_dict["exit_on_error"] = True
+            global_plugin_error_dict["exit_on_error"] = True
             self.logger.error("\tERROR: execute_plugin_block: %s" % e)
             pass
 
@@ -1531,14 +1542,45 @@ class ffdc_collector:
                             "\tERROR: Plugin expects return data: %s"
                             % plugin_expects
                         )
-                        plugin_error_dict["exit_on_error"] = True
+                        global_plugin_error_dict["exit_on_error"] = True
                 elif not resp:
                     self.logger.error(
                         "\tERROR: Plugin func failed to return data"
                     )
-                    plugin_error_dict["exit_on_error"] = True
+                    global_plugin_error_dict["exit_on_error"] = True
 
         return resp
+
+    def print_plugin_args_string(self, plugin_args):
+        r"""
+        Generate a string representation of plugin arguments, replacing the
+        password if necessary.
+
+        This method generates a string representation of the provided plugin
+        arguments, joining them with commas. If the password is present in the
+        arguments, it is replaced with "********".
+        The method returns the generated string. If an exception occurs during
+        the process, the method logs a debug log and returns "(None)".
+
+        Parameters:
+            plugin_args (list): A list of plugin arguments.
+
+        Returns:
+            str: The generated string representation of the plugin arguments.
+        """
+        try:
+            plugin_args_str = "(" + ", ".join(map(str, plugin_args)) + ")"
+            if self.password in plugin_args_str:
+                args_string = plugin_args_str.replace(
+                    self.password, "********"
+                )
+            else:
+                args_string = plugin_args_str
+        except Exception as e:
+            self.logger.debug("\tWARN:Print args string : %s" % e)
+            return "(None)"
+
+        return args_string
 
     def response_args_data(self, plugin_resp):
         r"""
@@ -1590,46 +1632,6 @@ class ffdc_collector:
         # Done updating plugin dict irrespective of pass or failed,
         # clear all the list element for next plugin block execute.
         global_plugin_list.clear()
-
-    def yaml_args_string(self, plugin_args):
-        r"""
-        Pack the arguments into a string representation.
-
-        This method processes the plugin_arg argument, which is expected to
-        contain a list of arguments. The method iterates through the list,
-        converts each argument to a string, and concatenates them into a
-        single string. Special handling is applied for integer, float, and
-        predefined plugin variable types.
-
-        Ecample:
-        From
-        ['xx.xx.xx.xx:443', 'root', '********', '/redfish/v1/', 'json']
-        to
-        "xx.xx.xx.xx:443","root","********","/redfish/v1/","json"
-
-        Parameters:
-            plugin_args (list):   A list of arguments to be packed into
-                                  a string.
-
-        Returns:
-            str:   A string representation of the arguments.
-        """
-        args_str = ""
-
-        for i, arg in enumerate(plugin_args):
-            if arg:
-                if isinstance(arg, (int, float)):
-                    args_str += str(arg)
-                elif arg in global_plugin_type_list:
-                    args_str += str(global_plugin_dict[arg])
-                else:
-                    args_str += f'"{arg.strip("\r\n\t")}"'
-
-                # Skip last list element.
-                if i != len(plugin_args) - 1:
-                    args_str += ","
-
-        return args_str
 
     def yaml_args_populate(self, yaml_arg_list):
         r"""
@@ -1744,7 +1746,7 @@ class ffdc_collector:
                     if isinstance(plugin_var_value, (list, dict)):
                         """
                         List data type or dict can't be replaced, use
-                        directly in eval function call.
+                        directly in plugin function call.
                         """
                         global_plugin_type_list.append(var)
                     else:
@@ -1768,7 +1770,8 @@ class ffdc_collector:
         This method checks if any dictionary in the plugin_dict list contains
         a "plugin_error" key. If such a dictionary is found, it retrieves the
         value associated with the "plugin_error" key and returns the
-        corresponding error message from the plugin_error_dict attribute.
+        corresponding error message from the global_plugin_error_dict
+        attribute.
 
         Parameters:
             plugin_dict (list of dict): A list of dictionaries containing
@@ -1782,7 +1785,7 @@ class ffdc_collector:
             for d in plugin_dict:
                 if "plugin_error" in d:
                     value = d["plugin_error"]
-                    return self.plugin_error_dict.get(value, None)
+                    return global_plugin_error_dict.get(value, None)
         return None
 
     def key_index_list_dict(self, key, list_dict):

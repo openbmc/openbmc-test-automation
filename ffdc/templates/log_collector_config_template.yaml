@@ -34,7 +34,8 @@ MY_BLOCK:
     SHELL_LOGS:
         COMMANDS:
             - plugin:
-                  - plugin_name: plugin.ssh_execution.ssh_execute_cmd
+                  - plugin_name: plugins.ssh_execution
+                  - plugin_function: ssh_execute_cmd
                   - plugin_args:
                         - ${hostname}
                         - ${username}

@@ -19,7 +19,9 @@ for root, dirs, files in os.walk(full_path):
 from ssh_utility import SSHRemoteclient  # NOQA
 
 
-def scp_remote_file(hostname, username, password, filename, local_dir_path):
+def scp_remote_file(
+    hostname, username, password, port_ssh, filename, local_dir_path
+):
     r"""
     Copy a file from a remote host to the local host using SCP.
 
@@ -34,6 +36,7 @@ def scp_remote_file(hostname, username, password, filename, local_dir_path):
         hostname (str):       Name or IP address of the remote host.
         username (str):       User on the remote host with access to files.
         password (str):       Password for the user on the remote host.
+        port_ssh (int):       SSH/SCP port value. By default, 22.
         filename (str):       Filename with full path on the remote host.
                               Can contain wildcards for multiple files.
         local_dir_path (str): Location to store the file on the local host.
@@ -41,7 +44,7 @@ def scp_remote_file(hostname, username, password, filename, local_dir_path):
     Returns:
         None
     """
-    ssh_remoteclient = SSHRemoteclient(hostname, username, password)
+    ssh_remoteclient = SSHRemoteclient(hostname, username, password, port_ssh)
 
     if ssh_remoteclient.ssh_remoteclient_login():
         # Obtain scp connection.
