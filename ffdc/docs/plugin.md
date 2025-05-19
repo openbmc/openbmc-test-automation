@@ -92,7 +92,8 @@ Plugin function without return statement.
 
 ```
     - plugin:
-        - plugin_name: plugin.foo_func.print_vars
+        - plugin_name: plugins.foo_func
+        - plugin_function: print_vars
         - plugin_args:
             - "Hello plugin"
 ```
@@ -101,7 +102,8 @@ Plugin function with return statement.
 
 ```
     - plugin:
-        - plugin_name: return_value = plugin.foo_func.return_vars
+        - plugin_name: plugins.foo_func
+        - plugin_function: return_value = func_return_vars
         - plugin_args:
 ```
 
@@ -113,7 +115,8 @@ Example:
 
 ```
     - plugin:
-        - plugin_name: plugin.foo_func.print_vars
+        - plugin_name: plugins.foo_func
+        - plugin_function: print_vars
         - plugin_args:
             - return_value
 ```
@@ -121,7 +124,7 @@ Example:
 To accept multiple return values by using coma "," separated statement
 
 ```
-     - plugin_name:  return_value1,return_value2 = plugin.foo_func.print_vars
+     - plugin_function:  return_value1,return_value2 = print_vars
 ```
 
 Accessing a class method:
@@ -130,14 +133,16 @@ The rule remains same as other functions, however for a class object plugin
 syntax
 
 ```
-        - plugin_name: plugin.<file_name>.<class_object>.<class_method>
+        - plugin_name: plugins.<file_name>.<class_object>
+        - plugin_function: <class_method>
 ```
 
 Example: (from the class example previously mentioned)
 
 ```
     - plugin:
-        - plugin_name: plugin.plugin_class.plugin_class.plugin_print_msg
+        - plugin_name: plugins.plugin_class.plugin_class
+        - plugin_function: plugin_print_msg
         - plugin_args:
             - self
             - "Hello Plugin call"
@@ -191,7 +196,8 @@ Example:
 
 ```
     - plugin:
-        - plugin_name: plugin.foo_func.print_vars
+        - plugin_name: plugins.foo_func
+        - plugin_function: print_vars
         - plugin_args:
             - return_value
         - plugin_error: exit_on_error
@@ -215,7 +221,8 @@ Example:
 ```
     - plugin:
     - plugin:
-      - plugin_name: plugin.ssh_execution.ssh_execute_cmd
+      - plugin_name: plugin.ssh_execution
+      - plugin_function: ssh_execute_cmd
       - plugin_args:
         - ${hostname}
         - ${username}
