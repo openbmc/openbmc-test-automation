@@ -82,7 +82,8 @@ OPENBMC:
     REDFISH_LOGS:
         COMMANDS
             - plugin:
-              - plugin_name: plugin.redfish.enumerate_request
+              - plugin_name: plugin.redfish
+              - plugin_function: enumerate_request
               - plugin_args:
                 - ${hostname}
                 - ${username}
