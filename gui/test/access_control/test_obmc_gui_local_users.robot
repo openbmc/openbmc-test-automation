@@ -108,9 +108,12 @@ Add User Details
    # privilege  User privilege.
    # account_status  Enable or disable user.
 
-   Run Keyword If  '${account_status}' == 'Enabled'
-   ...  Click Element  ${xpath_enable_user}
-   ...  ELSE  Click Element  ${xpath_disable_user}
+   IF  '${account_status}' == 'Enabled'
+     Click Element  ${xpath_enable_user}
+   ELSE  
+     Click Element  ${xpath_disable_user}
+   END
+
    Input Text  ${xpath_input_user}  ${username}
    Input Password  ${xpath_input_password}  ${password}
    Input Password  ${xpath_confirm_password}  ${password}
@@ -135,10 +138,12 @@ Delete User
    # username   Name of the user to be created.
 
    ${result}=  Run Keyword And Return Status  Page Should Contain  ${username}
-   Run Keyword If  '${result}' == '${True}'
-   ...  Run Keywords  Click Element  //*[text()="${username}"]//following::td[3]//button[@aria-label="Delete"]
-   ...  AND  Click Element  ${xpath_remove_button}
-   ...  ELSE  Log  User does not exist
+   IF  '${result}' == '${True}'
+      Click Element  //*[text()="${username}"]//following::td[3]//button[@aria-label="Delete"]
+      Click Element  ${xpath_remove_button}
+   ELSE  
+      Log  User does not exist
+   END
 
 Test Login
    [Documentation]  Try to login to Openbmc.
@@ -153,9 +158,11 @@ Test Login
     Switch Browser  2
     ${status}=  Run Keyword And Return Status  Login OpenBMC GUI  ${username}  ${password}
     Should Be Equal  ${status}  ${expected_result}  Login expectation was not met
-    Run Keyword If  '${status}' == '${True}'
-    ...  LogOut OpenBMC GUI
-    ...  ELSE  Page Should Contain  Invalid username or password
+    IF  '${status}' == '${True}'
+       LogOut OpenBMC GUI
+    ELSE 
+       Page Should Contain  Invalid username or password
+    END
     Close Browser
     Switch Browser  1
 

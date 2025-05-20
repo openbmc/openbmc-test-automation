@@ -131,10 +131,12 @@ Generate Certificate File Data
     # Description of Arguments(s):
     # cert_type      Certificate type (e.g. "Client" or  "CA").
 
-    ${cert_file_path}=  Run Keyword If  '${cert_type}' == 'Client' or 'Server'
-    ...    Generate Certificate File Via Openssl  Valid Certificate Valid Privatekey
-    ...  ELSE IF  '${cert_type}' == 'CA'
-    ...    Generate Certificate File Via Openssl  Valid Certificate
+    IF  '${cert_type}' == 'Client' or '${cert_type}' == 'Server'
+      ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate Valid Privatekey
+    ELSE IF  '${cert_type}' == 'CA'
+      ${cert_file_path}=  Generate Certificate File Via Openssl  Valid Certificate
+    END
+
     ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
     ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
 
