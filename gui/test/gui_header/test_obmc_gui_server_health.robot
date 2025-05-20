@@ -140,8 +140,9 @@ Select All Error Logs And Mark As Resolved
     Page Should Contain Element  ${xpath_number_of_events}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Click Element  ${xpath_select_all_events}
-    Run Keyword If  ${number_of_events} > 0
-    ...  Click Element  ${xpath_mark_as_resolved}
+    IF  ${number_of_events} > 0
+       Click Element  ${xpath_mark_as_resolved}
+    END
     Element Should Be Disabled  ${xpath_mark_as_resolved}
 
 
@@ -157,9 +158,9 @@ Select All Error Logs And Click Export
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Click Element  ${xpath_select_all_events}
     Page Should Contain Element  ${xpath_events_export}
-    Run Keyword If  ${number_of_events} > 0
-    ...  Click Element  ${xpath_events_export}
-
+    IF  ${number_of_events} > 0
+      Click Element  ${xpath_events_export}
+    END
 
 Select All Error Logs And Delete
     [Documentation]  Select all error logs and delete them.
@@ -171,9 +172,10 @@ Select All Error Logs And Delete
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
     Page Should Contain Element  ${xpath_number_of_events}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
-    Run Keyword If  ${number_of_events} > 0
-    ...  Common Event Log Click Element  ${xpath_individual_event_delete}
-    ...  ${xpath_yes_button}  ${xpath_select_all_events}
+    IF  ${number_of_events} > 0
+       Common Event Log Click Element  ${xpath_individual_event_delete}
+       ${xpath_yes_button}  ${xpath_select_all_events}
+    END
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Should Be Equal  ${number_of_events}  0
 
@@ -188,9 +190,10 @@ Select Single Error Log And Delete
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
     Page Should Contain Element  ${xpath_number_of_events}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
-    Run Keyword If  ${number_of_events} > 0
-    ...  Common Event Log Click Element  ${xpath_individual_event_delete}
-    ...  ${xpath_yes_button}
+    IF  ${number_of_events} > 0
+       Common Event Log Click Element  ${xpath_individual_event_delete}
+       ${xpath_yes_button}
+    END
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Should Be Equal  ${number_of_events}  0
     ...  msg=Failed to delete single error log entry.
@@ -207,9 +210,10 @@ Select Multiple Error Logs And Delete
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
     Page Should Contain Element  ${xpath_number_of_events}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
-    Run Keyword If  ${number_of_events} > 0
-    ...  Double Event Log Click Element  ${xpath_individual_event_delete}
-    ...  ${xpath_yes_button}
+    IF  ${number_of_events} > 0
+       Double Event Log Click Element  ${xpath_individual_event_delete}
+       ${xpath_yes_button}
+    END
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Should Be Equal  ${number_of_events}  0
     ...  msg=Failed to delete multiple error log entries.
@@ -225,8 +229,9 @@ Select Single Error Log And Mark As Resolved
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
     Page Should Contain Element  ${xpath_number_of_events}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
-    Run Keyword If  ${number_of_events} > 0
-    ...  Common Event Log Click Element  ${xpath_individual_event_resolved}
+    IF  ${number_of_events} > 0
+       Common Event Log Click Element  ${xpath_individual_event_resolved}
+    END
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Should Be Equal  ${number_of_events}  1
     ...  msg=Failed to mark single error log entry as resolved.
@@ -243,8 +248,9 @@ Select Multiple Error Logs And Mark As Resolved
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
     Page Should Contain Element  ${xpath_number_of_events}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
-    Run Keyword If  ${number_of_events} > 0
-    ...  Double Event Log Click Element  ${xpath_individual_event_resolved}
+    IF  ${number_of_events} > 0
+       Double Event Log Click Element  ${xpath_individual_event_resolved}
+    END
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Should Be Equal  ${number_of_events}  2
     ...  msg=Failed to mark multiple error log entries as resolved.
@@ -260,8 +266,9 @@ Select Single Error Log And Export
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
     Page Should Contain Element  ${xpath_number_of_events}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
-    Run Keyword If  ${number_of_events} > 0
-    ...  Common Event Log Click Element  ${xpath_individual_event_export}
+    IF  ${number_of_events} > 0
+       Common Event Log Click Element  ${xpath_individual_event_export}
+    END
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Should Be Equal  ${number_of_events}  1
     ...  msg=Failed to export single error log entry.
@@ -278,8 +285,9 @@ Select Multiple Error Log And Export
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
     Page Should Contain Element  ${xpath_number_of_events}
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
-    Run Keyword If  ${number_of_events} > 0
-    ...  Double Event Log Click Element  ${xpath_individual_event_export}
+    IF  ${number_of_events} > 0
+       Double Event Log Click Element  ${xpath_individual_event_export}
+    END
     ${number_of_events}=  Get Text  ${xpath_number_of_events}
     Should Be Equal  ${number_of_events}  2
     ...  msg=Failed to export multiple error log entries.
@@ -324,8 +332,9 @@ Common Event Log Click Element
     Page Should Contain Element  ${action_element}
     Click Element  ${action_element}
     Wait Until Page Does Not Contain Element  ${xpath_refresh_circle}
-    Run Keyword If  "${action_click_confirmation}" != "${None}"
-    ...  Click Element  ${action_click_confirmation}
+    IF  "${action_click_confirmation}" != "${None}"
+       Click Element  ${action_click_confirmation}
+    END
     Click Element  ${xpath_select_refresh_button}
     Run Key  Sleep \ 50s
 
@@ -356,7 +365,7 @@ Test Setup Execution
    [Documentation]  Do test case setup tasks.
 
    ${status}=  Run Keyword And Return Status  Logging Test Binary Exist
-   Run Keyword If  ${status} == ${False}  Install Tarball
+   IF  ${status} == ${False}  Install Tarball
    Delete Error Logs And Verify
 
    Navigate To Event Log Page
