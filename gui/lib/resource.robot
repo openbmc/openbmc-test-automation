@@ -44,15 +44,16 @@ Launch OpenBMC GUI Browser
     # By default uses headless mode, otherwise, the GUI browser.
 
     ${op_system}=  Get Operating System
-    Run Keyword If  '${op_system}' == 'windows'
-    ...     Launch Header Browser
-    ...  ELSE IF  '${op_system}' == 'Darwin'
-            # Mac OS is currently having some issues with firefox, so using
-            # chrome.
-    ...     Launch Header Browser  chrome
-    ...  ELSE
-            # Linux OS.
-    ...     Launch Headless Browser
+    IF  '${op_system}' == 'windows'
+       Launch Header Browser
+    ELSE IF  '${op_system}' == 'Darwin'
+       # Mac OS is currently having some issues with Firefox, so using Chrome.
+       Launch Header Browser  chrome
+    ELSE
+       # Linux OS.
+       Launch Headless Browser
+    END
+
 
 Get Operating System
     [Documentation]  Identify platform/OS.
@@ -60,11 +61,13 @@ Get Operating System
     ${curdir_lower_case}=  Convert To Lowercase  ${CURDIR}
     ${windows_platform}=  Run Keyword And Return Status
     ...  Should Contain  ${curdir_lower_case}  c:\
-    ${op_system}=  Run Keyword If  '${windows_platform}' == 'True'
-    ...     Set Variable  windows
-    ...   ELSE
-    ...     Run  uname
+    IF  '${windows_platform}' == 'True'
+       ${op_system}=  Set Variable  windows
+    ELSE
+       ${op_system}=  Run  uname
+    END
     RETURN  ${op_system}
+
 
 Launch Header Browser
     [Documentation]  Open the browser with the URL and
@@ -136,13 +139,18 @@ Test Setup Execution
     ${obmc_standby_state}=  Run Keyword And Return Status
     ...  Should Contain  ${obmc_current_state}  ${obmc_standby_state}
 
-    Run Keyword If  '${obmc_standby_state}' == 'True'
-    ...  Reboot OpenBMC
-    Run Keyword If  '${obmc_test_setup_state}' == '${obmc_PowerRunning_state}'
-    ...  Run Keywords  Power On OpenBMC  AND
-    ...  Wait Until Keyword Succeeds  10 min  60 sec  Is Host Running
-    Run Keyword If  '${obmc_test_setup_state}' == '${obmc_PowerOff_state}'
-    ...  Run Keywords  Redfish.Login  AND  Redfish Power Off  AND  Redfish.Logout
+    IF  '${obmc_standby_state}' == 'True'
+        Reboot OpenBMC
+    END
+    IF  '${obmc_test_setup_state}' == '${obmc_PowerRunning_state}'
+        Run Keywords  Power On OpenBMC  AND
+        Wait Until Keyword Succeeds  10 min  60 sec  Is Host Running
+    END
+    IF  '${obmc_test_setup_state}' == '${obmc_PowerOff_state}'
+       Redfish.Login
+       Redfish Power Off
+       Redfish.Logout
+    END
 
 
 Power On OpenBMC
@@ -223,10 +231,11 @@ Open Browser With URL
     #          (e.g. gc for google chrome, ff for firefox).
     # mode     Browser opening mode(e.g. headless, header).
 
-    ${browser_ID}=  Run Keyword If  '${mode}' == 'headless'
-    ...  Launch Headless Browser  ${URL}  ${browser}
-    ...  ELSE  Open Browser  ${URL}  ${browser}
-
+    IF  '${mode}' == 'headless'
+       ${browser_ID}=  Launch Headless Browser  ${URL}  ${browser}
+    ELSE
+       ${browser_ID}=  Open Browser  ${URL}  ${browser}
+    END
     RETURN  ${browser_ID}
 
 
@@ -277,11 +286,13 @@ Expected Initial Test State
     # Description of argument(s):
     # expectedState    Test initial host state.
 
-    Run Keyword If  '${expectedState}' == 'Running'
-    ...  REST Power On  stack_mode=skip  quiet=1
+    IF  '${expectedState}' == 'Running'
+      REST Power On  stack_mode=skip  quiet=1
+    END
 
-    Run Keyword If  '${expectedState}' == 'Off'
-    ...  REST Power Off  stack_mode=skip  quiet=1
+    IF  '${expectedState}' == 'Off'
+       REST Power Off  stack_mode=skip  quiet=1
+    END
 
 Launch Browser And Login OpenBMC GUI
     [Documentation]  Launch browser and log into openbmc GUI.
