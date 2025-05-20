@@ -44,7 +44,7 @@ Redfish Verify Set Invalid Optional Value For BIOS Enumeration Attribute Type
     ${enum_attr}=  Evaluate  random.choice(${attr_handles})  modules=random
 
     Redfish.Patch  ${BIOS_ATTR_SETTINGS_URI}  body={"Attributes":{"${enum_attr}": '0'}}
-    ...  valid_status_codes=[${HTTP_INTERNAL_SERVER_ERROR},${HTTP_FORBIDDEN}]
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
 
 Redfish Verify Set Out Of Range Integer Value For BIOS Integer Attribute Type
@@ -58,9 +58,9 @@ Redfish Verify Set Out Of Range Integer Value For BIOS Integer Attribute Type
     ${count}=  Evaluate  ${attr_val_data['${int_attr}']["UpperBound"]} + 5
 
     Redfish.Patch  ${BIOS_ATTR_SETTINGS_URI}  body={"Attributes":{"${int_attr}": ${count}}}
-    ...  valid_status_codes=[${HTTP_INTERNAL_SERVER_ERROR},${HTTP_BAD_REQUEST}]
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
-
+*** Comments ***
 Redfish Verify Set Out Of Range String Value For BIOS String Attribute Type
 
     [Documentation]  Verify set out of range string value for BIOS string attribute type
