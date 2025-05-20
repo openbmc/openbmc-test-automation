@@ -123,8 +123,9 @@ Verify LDAP Service Disable
     ${status}=  Run Keyword And Return Status
     ...  Checkbox Should Be Selected  ${xpath_enable_ldap_checkbox}
 
-    Run Keyword If  ${status} == ${True}
-    ...  Click Element At Coordinates  ${xpath_enable_ldap_checkbox}  0  0
+    IF  '${status}' == '${True}'
+       Click Element At Coordinates  ${xpath_enable_ldap_checkbox}  0  0
+    END
 
     Checkbox Should Not Be Selected  ${xpath_enable_ldap_checkbox}
     Click Element  ${xpath_ldap_save_settings}
@@ -236,13 +237,16 @@ Create LDAP Configuration
     Click Element At Coordinates  ${xpath_enable_ldap_checkbox}  0  0
     ${radio_buttons}=  Get WebElements  ${xpath_service_radio_button}
 
-    Run Keyword If  '${ldap_service_type}' == 'LDAP'
-    ...  Click Element At Coordinates  ${radio_buttons}[${0}]  0  0
-    ...  ELSE  Click Element At Coordinates  ${radio_buttons}[${1}]  0  0
+    IF  '${ldap_service_type}' == 'LDAP'
+       Click Element At Coordinates  ${radio_buttons}[${0}]  0  0
+    ELSE IF  '${ldap_service_type}' != 'LDAP'
+       Click Element At Coordinates  ${radio_buttons}[${1}]  0  0
+    END
 
     Wait Until Page Contains Element  ${xpath_ldap_url}
-    Run Keyword If  '${ldap_mode}' == 'secure'
-    ...   Click Element At Coordinates  ${xpath_secure_ldap_checkbox}  0  0
+    IF  '${ldap_mode}' == 'secure'
+       Click Element At Coordinates  ${xpath_secure_ldap_checkbox}  0  0
+    END
 
     Input Text  ${xpath_ldap_url}  ${ldap_server_uri}
     Input Text  ${xpath_ldap_bind_dn}  ${ldap_bind_dn}
@@ -250,10 +254,11 @@ Create LDAP Configuration
     Input Text  ${xpath_ldap_base_dn}  ${ldap_base_dn}
     Click Element  ${xpath_ldap_save_settings}
 
-    Run Keyword If  '${ldap_service_type}'=='LDAP'
-    ...  Wait Until Page Contains  Successfully saved Open LDAP settings
-    ...  ELSE
-    ...  Wait Until Page Contains  Successfully saved Active Directory settings
+    IF  '${ldap_service_type}' == 'LDAP'
+       Wait Until Page Contains  Successfully saved Open LDAP settings
+    ELSE
+       Wait Until Page Contains  Successfully saved Active Directory settings
+    END
 
     Click Element  ${xpath_refresh_button}
     Wait Until Page Contains Element  ${xpath_ldap_heading}
@@ -269,10 +274,11 @@ Get LDAP Configuration
     ${radio_buttons}=  Get WebElements  ${xpath_service_radio_button}
 
     ${status}=  Run Keyword And Return Status
-    ...  Run Keyword If  '${ldap_type}'=='LDAP'
-    ...  Checkbox Should Be Selected  ${radio_buttons}[${0}]
-    ...  ELSE
-    ...  Checkbox Should Be Selected  ${radio_buttons}[${1}]
+    IF  '${ldap_type}' == 'LDAP'
+       Checkbox Should Be Selected  ${radio_buttons}[${0}]
+    ELSE
+       Checkbox Should Be Selected  ${radio_buttons}[${1}]
+    END
     Should Be Equal  ${status}  ${True}
 
 
@@ -323,8 +329,9 @@ Disable LDAP Configuration
     ${status}=  Run Keyword And Return Status
     ...  Checkbox Should Be Selected  ${xpath_enable_ldap_checkbox}
 
-    Run Keyword If  ${status} == ${True}
-    ...  Click Element At Coordinates  ${xpath_enable_ldap_checkbox}  0  0
+    IF  '${status}' == '${True}'
+      Click Element At Coordinates  ${xpath_enable_ldap_checkbox}  0  0
+    END
 
     Checkbox Should Not Be Selected  ${xpath_enable_ldap_checkbox}
     Click Element  ${xpath_ldap_save_settings}

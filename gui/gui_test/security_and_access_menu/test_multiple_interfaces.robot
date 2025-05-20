@@ -75,10 +75,11 @@ Load Certificates On BMC Via GUI
     # file_path          Certificate file path (e.g. "/home/folder/file.pem").
 
     ${path}  ${ext}=  Split Extension  ${file_path}
-    Run Keyword If  '${certificate_type}' == 'CA' and '${delete_cert}' == '${True}'
-    ...  Delete All CA Certificate Via Redfish
-    ...  ELSE IF  '${certificate_type}' == 'Client' and '${delete_cert}' == '${True}'
-    ...  Delete Certificate Via BMC CLI  ${certificate_type}
+    IF  '${certificate_type}' == 'CA' and '${delete_cert}' == '${True}'
+       Delete All CA Certificate Via Redfish
+    ELSE IF  '${certificate_type}' == 'Client' and '${delete_cert}' == '${True}'
+       Delete Certificate Via BMC CLI  ${certificate_type}
+    END
 
     Set Test Variable  ${OPENBMC_GUI_URL}  https://${OPENBMC_HOST_ETH1}:${HTTPS_PORT}
     Launch Browser And Login GUI
@@ -87,20 +88,25 @@ Load Certificates On BMC Via GUI
     Click Element  ${xpath_add_new_certificate}
 
     Wait Until Page Contains Element  ${xpath_certificate_type}  timeout=20s
-    Run Keyword If  '${certificate_type}' == 'CA'
-    ...  Select From List By Label  ${xpath_certificate_type}  CA Certificate
-    ...  ELSE IF  '${certificate_type}' == 'Client'
-    ...  Select From List By Label  ${xpath_certificate_type}  LDAP Certificate
+    IF  '${certificate_type}' == 'CA'
+       Select From List By Label  ${xpath_certificate_type}  CA Certificate
+    ELSE IF  '${certificate_type}' == 'Client'
+       Select From List By Label  ${xpath_certificate_type}  LDAP Certificate
+    END
 
     Choose File  ${xpath_upload_file}  ${file_path}
     Click Element  ${xpath_load_certificate}
 
-    Run Keyword If  '${ext}' !='pem'   Wait Until Page Contains  Error adding certificate.
+    IF  '${ext}' !='pem'
+       Wait Until Page Contains  Error adding certificate.
+    END
 
-    Run Keyword If  '${certificate_type}' == 'CA'
-    ...  Wait Until Page Contains  Successfully added CA Certificate.
-    ...  ELSE IF  '${certificate_type}' == 'Client'
-    ...  Wait Until Page Contains  Successfully added LDAP Certificate.
+    IF  '${certificate_type}' == 'CA'
+       Wait Until Page Contains  Successfully added CA Certificate.
+    ELSE IF  '${certificate_type}' == 'Client'
+       Wait Until Page Contains  Successfully added LDAP Certificate.
+    END
+
     Click Element  ${xpath_close_poup}
 
 

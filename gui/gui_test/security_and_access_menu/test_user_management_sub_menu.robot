@@ -301,8 +301,9 @@ Create User And Verify
     Wait Until Page Contains Element  ${xpath_add_user_heading}
 
     # Select disabled radio button if user needs to be disabled
-    Run Keyword If  ${enabled} == ${False}
-    ...  Click Element At Coordinates  ${xpath_account_status_disabled_button}  0  0
+    IF  ${enabled} == ${False}
+       Click Element At Coordinates  ${xpath_account_status_disabled_button}  0  0
+    END
 
     # Input username, password and privilege.
     Input Text  ${xpath_username_input_button}  ${user_name}
@@ -334,9 +335,11 @@ Create User And Verify
 
         # Check enable/disable status for user.
         ${status}=  Run Keyword And Return Status  Redfish.Login  ${user_name}  ${test_user_password}
-        Run Keyword If  ${enabled} == ${False}
-        ...  Should Be Equal  ${status}  ${False}
-        ...  ELSE  Should Be Equal  ${status}  ${True}
+        IF  ${enabled} == ${False}
+           Should Be Equal  ${status}  ${False}
+        ELSE
+           Should Be Equal  ${status}  ${True}
+        END
         Redfish.Logout
 
     ELSE IF   '${expected_status}' == 'Failure'

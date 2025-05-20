@@ -391,10 +391,11 @@ Close Add SNMP Alerts Destination Window
     # Description of argument(s):
     # expected_error  Expected error on SNMP alerts page.
 
-    Run Keyword If  '${expected_error}' == '${invalid_port_error}'
-    ...  Click Element  ${xpath_cancel_button}
-    ...  ELSE IF  '${expected_error}' == '${invalid_ip_error}'
-    ...  Click Element  ${xpath_cancel_button}
+    IF  '${expected_error}' == '${invalid_port_error}'
+       Click Element  ${xpath_cancel_button}
+    ELSE IF  '${expected_error}' == '${invalid_ip_error}'
+       Click Element  ${xpath_cancel_button}
+    END
 
 
 Set DNS Server IP
