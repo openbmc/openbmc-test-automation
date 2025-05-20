@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81557c85_ab1c0d45",
+        "filename": "gui/gui_test/security_and_access_menu/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-05-20T07:37:20Z",
+      "side": 1,
+      "message": "remove space",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 4
+      },
+      "revId": "115acb559bc5184d4cc3b0905d93fa2e65981082",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56541e96_c4d4b3c9",
+        "filename": "gui/gui_test/security_and_access_menu/test_multiple_interfaces.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-05-20T07:37:20Z",
+      "side": 1,
+      "message": "space remove",
+      "range": {
+        "startLine": 100,
+        "startChar": 24,
+        "endLine": 100,
+        "endChar": 27
+      },
+      "revId": "115acb559bc5184d4cc3b0905d93fa2e65981082",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25fe7c8d_6412d60a",
+        "filename": "gui/gui_test/security_and_access_menu/test_policies_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-05-20T07:37:20Z",
+      "side": 1,
+      "message": "remove #",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 74
+      },
+      "revId": "115acb559bc5184d4cc3b0905d93fa2e65981082",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2956ac9b_2fe2f76d",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-05-20T07:37:20Z",
+      "side": 1,
+      "message": "remove extra space",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 10
+      },
+      "revId": "115acb559bc5184d4cc3b0905d93fa2e65981082",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cf20cf8_a9de9d10",
+        "filename": "gui/test/access_control/test_obmc_gui_local_users.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-05-20T07:37:20Z",
+      "side": 1,
+      "message": "remove extra space",
+      "range": {
+        "startLine": 113,
+        "startChar": 7,
+        "endLine": 113,
+        "endChar": 9
+      },
+      "revId": "115acb559bc5184d4cc3b0905d93fa2e65981082",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "863390eb_2a492e6a",
+        "filename": "gui/test/access_control/test_obmc_gui_local_users.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-05-20T07:37:20Z",
+      "side": 1,
+      "message": "remove extra space",
+      "range": {
+        "startLine": 144,
+        "startChar": 7,
+        "endLine": 144,
+        "endChar": 9
+      },
+      "revId": "115acb559bc5184d4cc3b0905d93fa2e65981082",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6a59042_08d205d5",
+        "filename": "gui/test/access_control/test_obmc_gui_local_users.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-05-20T07:37:20Z",
+      "side": 1,
+      "message": "remove extra space",
+      "revId": "115acb559bc5184d4cc3b0905d93fa2e65981082",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
