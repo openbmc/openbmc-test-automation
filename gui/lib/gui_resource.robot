@@ -35,10 +35,11 @@ Open Browser With URL
     #          (e.g. gc for google chrome, ff for firefox).
     # mode     Browser opening mode(e.g. headless, header).
 
-    ${browser_ID}=  Run Keyword If  '${mode}' == 'headless'
-    ...  Launch Headless Browser  ${URL}  ${browser}
-    ...  ELSE  Open Browser  ${URL}  ${browser}
-
+    IF  '${mode}' == 'headless'
+       ${browser_ID}=  Launch Headless Browser  ${URL}  ${browser}
+    ELSE
+       ${browser_ID}=  Open Browser  ${URL}  ${browser}
+    END
     RETURN  ${browser_ID}
 
 
@@ -207,9 +208,11 @@ Add DNS Servers And Verify
     ${cli_name_servers}=  CLI Get Nameservers
     ${cmd_status}=  Run Keyword And Return Status
     ...  List Should Contain Sub List  ${cli_name_servers}  ${dns_server}
-    Run Keyword If  '${expected_status}' == '${HTTP_OK}'
-    ...  Should Be True  ${cmd_status} == ${True}
-    ...  ELSE  Should Not Be True  ${cmd_status}
+    IF  '${expected_status}' == '${HTTP_OK}'
+       Should Be True  ${cmd_status} == ${True}
+    ELSE
+       Should Not Be True  ${cmd_status}
+    END
 
 
 Navigate To Server Power Page

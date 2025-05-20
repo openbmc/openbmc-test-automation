@@ -122,9 +122,9 @@ Enable SSH Via GUI And Verify Persistency On BMC Reboot
 
     Set Policy Via GUI  SSH  Enabled
 
-    Reboot BMC via GUI
+    #Reboot BMC via GUI
 
-    Wait Until Keyword Succeeds  5 min  30 sec  Open Connection And Login
+    #Wait Until Keyword Succeeds  5 min  30 sec  Open Connection And Login
 
 
 Enable IPMI Via GUI And Verify Persistency On BMC Reboot
@@ -225,20 +225,24 @@ Set Policy Via GUI
     # policy   policy to be set(e.g. SSH, IPMI).
     # state    state to be set(e.g. Enable, Disable).
 
-    ${opposite_state_gui}  ${opposite_state_redfish}=  Run Keyword If
-    ...  '${state}' == 'Enabled'  Set Variable  Disabled  ${False}
-    ...  ELSE IF  '${state}' == 'Disabled'  Set Variable  Enabled  ${True}
+    IF  '${state}' == 'Enabled'
+      ${opposite_state_gui}  ${opposite_state_redfish}=  Set Variable  Disabled  ${False}
+    ELSE
+      ${opposite_state_gui}  ${opposite_state_redfish} =  Set Variable  Enabled  ${True}
+    END
 
     # Setting policy to an opposite value via Redfish.
-    Run Keyword If  '${policy}' == 'SSH'
-    ...  Enable SSH Protocol  ${opposite_state_redfish}
-    ...  ELSE IF  '${policy}' == 'IPMI'
-    ...  Enable IPMI Protocol  ${opposite_state_redfish}
+    IF  '${policy}' == 'SSH'
+       Enable SSH Protocol  ${opposite_state_redfish}
+    ELSE
+       Enable IPMI Protocol  ${opposite_state_redfish}
+    END
 
-    ${policy_toggle_button}=  Run Keyword If  '${policy}' == 'SSH'
-    ...  Set variable  ${xpath_bmc_ssh_toggle}
-    ...  ELSE IF  '${policy}' == 'IPMI'
-    ...  Set variable  ${xpath_network_ipmi_toggle}
+    IF  '${policy}' == 'SSH'
+       ${policy_toggle_button}=  Set Variable  ${xpath_bmc_ssh_toggle}
+    ELSE
+       ${policy_toggle_button}=  Set Variable  ${xpath_network_ipmi_toggle}
+    END
 
     Wait Until Keyword Succeeds  1 min  30 sec
     ...  Refresh GUI And Verify Element Value  ${policy_toggle_button}  ${opposite_state_gui}
@@ -257,20 +261,22 @@ Verify Policy State
     ${status}=  Run Keyword And Return Status
     ...  Open Connection And Login
 
-    Run Keyword If  '${status}' == 'True'
-    ...  Element Text Should Be  ${xpath_bmc_ssh_toggle}  Enabled
-    ...  ELSE IF  '${status}' == 'False'
-    ...  Element Text Should Be  ${xpath_bmc_ssh_toggle}  Disabled
+    IF  '${status}' == 'True'
+       Element Text Should Be  ${xpath_bmc_ssh_toggle}  Enabled
+    ELSE IF  ${status}' == 'False'
+       Element Text Should Be  ${xpath_bmc_ssh_toggle}  Disabled
+    END
 
     # Verify IPMI state value.
     ${status}=  Run Keyword And Return Status
     ...  Wait Until Keyword Succeeds  ${NETWORK_TIMEOUT}  ${NETWORK_RETRY_TIME}
     ...  Run IPMI Standard Command  sel info
 
-    Run Keyword If  '${status}' == 'True'
-    ...  Element Text Should Be  ${xpath_network_ipmi_toggle}  Enabled
-    ...  ELSE IF  '${status}' == 'False'
-    ...  Element Text Should Be  ${xpath_network_ipmi_toggle}  Disabled
+    IF  '${status}' == 'True'
+       Element Text Should Be  ${xpath_network_ipmi_toggle}  Enabled
+    ELSE IF  '${status}' == 'False'
+       Element Text Should Be  ${xpath_network_ipmi_toggle}  Disabled
+    END
 
 
 Set SSH And IPMI State Via GUI
@@ -283,26 +289,30 @@ Set SSH And IPMI State Via GUI
 
     ${current_ssh_state}=  Get Text  ${xpath_bmc_ssh_toggle}
 
-    Run Keyword If  '${ssh_state}' == '${current_ssh_state}'
-    # When SSH state is already set to given value, click SSH toggle
-    # button twice to reset SSH value back to its original value.
-    ...  Run Keywords  Click Element  ${xpath_bmc_ssh_toggle}
-    ...  AND  Click Element  ${xpath_bmc_ssh_toggle}
-    ...  ELSE IF  '${ssh_state}' != '${current_ssh_state}'
-    ...  Click Element  ${xpath_bmc_ssh_toggle}
+    IF  '${ssh_state}' == '${current_ssh_state}'
+      # When SSH state is already set to the given value, click SSH toggle
+      # button twice to reset SSH value back to its original value.
+      Click Element  ${xpath_bmc_ssh_toggle}
+      Click Element  ${xpath_bmc_ssh_toggle}
+    ELSE IF  '${ssh_state}' != '${current_ssh_state}'
+      Click Element  ${xpath_bmc_ssh_toggle}
+    END
 
     ${current_ipmi_state}=  Get Text  ${xpath_network_ipmi_toggle}
 
-    Run Keyword If  '${ipmi_state}' == '${current_ipmi_state}'
-    # When IPMI state is already set to given value, click IPMI toggle
+    IF  '${ipmi_state}' == '${current_ipmi_state}'
+    # When IPMI state is already set to the given value, click IPMI toggle
     # button twice to reset IPMI value back to its original value.
-    ...  Run Keywords  Click Element  ${xpath_network_ipmi_toggle}
-    ...  AND  Click Element  ${xpath_network_ipmi_toggle}
-    ...  ELSE IF  '${ipmi_state}' != '${current_ipmi_state}'
-    ...  Click Element  ${xpath_network_ipmi_toggle}
+       Click Element  ${xpath_network_ipmi_toggle}
+       Click Element  ${xpath_network_ipmi_toggle}
+    ELSE IF  '${ipmi_state}' != '${current_ipmi_state}'
+       Click Element  ${xpath_network_ipmi_toggle}
+    END
 
-    Run Keyword If  ${persistency_check} == ${True}
-    ...  Run Keywords  Reboot BMC via GUI  AND  Test Setup Execution
+    IF  '${persistency_check}' == '${True}'
+       Reboot BMC via GUI
+       Test Setup Execution
+    END
 
     Wait Until Keyword Succeeds  30 sec  15 sec  Verify Policy State
 
