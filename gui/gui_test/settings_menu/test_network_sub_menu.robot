@@ -327,14 +327,14 @@ Add Static IP Address And Verify
     Input Text  ${xpath_input_gateway}  ${gateway_address}
 
     Click Element  ${xpath_add_button}
-    Run Keyword If  '${expected_status}' == 'Success'
-    ...  Run Keywords  Wait Until Page Contains  ${ip_address}  timeout=40sec
-    ...  AND  Validate Network Config On BMC
-
-    ...  ELSE IF  '${expected_status}' == 'Invalid format'
-    ...  Run Keywords  Page Should Contain  Invalid format  AND
-    ...  Click Button  ${xpath_cancel_button}  AND
-    ...  Wait Until Page Does Not Contain Element  ${xpath_cancel_button}
+    IF  '${expected_status}' == 'Success'
+        Wait Until Page Contains  ${ip_address}  timeout=40sec
+        Validate Network Config On BMC
+    ELSE
+        Page Should Contain  Invalid format
+        Click Button  ${xpath_cancel_button}
+        Wait Until Page Does Not Contain Element  ${xpath_cancel_button}
+    END
 
 
 Configure And Verify Network Settings Via GUI
