@@ -808,7 +808,8 @@ Test Teardown Execution
     ${curr_mode}=  Get Immediate Child Parameter From VMI Network Interface  DHCPEnabled
     IF  ${curr_mode} == ${True}
         Set VMI IPv4 Origin  ${False}
-    ELSE  '${vmi_network_conf["IPv4_Address"]}' != '${default}'
+    END
+    IF  '${vmi_network_conf["IPv4_Address"]}' != '${default}'
          Set Static IPv4 Address To VMI And Verify  ${vmi_network_conf["IPv4_Address"]}
          ...  ${vmi_network_conf["IPv4_Gateway"]}  ${vmi_network_conf["IPv4_SubnetMask"]}
     END
