@@ -809,6 +809,10 @@ class ffdc_collector:
         """
         try:
             list_of_commands = ffdc_actions_for_target_type["COMMANDS"]
+            # Update any global reserved variable name with value in dict.
+            list_of_commands = self.update_vars_with_env_values(
+                global_plugin_dict, list_of_commands
+            )
         except KeyError:
             list_of_commands = []
         return list_of_commands
@@ -1473,31 +1477,9 @@ class ffdc_collector:
                 else:
                     plugin_args = self.yaml_args_populate([])
 
-            # Replace keys in the string with their corresponding
-            # values from the dictionary.
-            for key, value in global_plugin_dict.items():
-                # Iterate through the list and check if each element matched
-                # exact or in the string. If matches update the plugin element
-                # in the list.
-                for index, element in enumerate(plugin_args):
-                    try:
-                        if isinstance(element, str):
-                            # If the key is not in the list element sting,
-                            # then continue for the next element in the list.
-                            if str(key) not in str(element):
-                                continue
-                            if isinstance(value, str):
-                                plugin_args[index] = element.replace(
-                                    key, value
-                                )
-                            else:
-                                plugin_args[index] = global_plugin_dict[
-                                    element
-                                ]
-                            # break
-                    except KeyError as e:
-                        print(f"Exception {e}")
-                        pass
+            plugin_args = self.update_vars_with_env_values(
+                global_plugin_dict, plugin_args
+            )
 
             """
             Example of plugin_func:
@@ -1568,6 +1550,52 @@ class ffdc_collector:
                     global_plugin_error_dict["exit_on_error"] = True
 
         return resp
+
+    def update_vars_with_env_values(self, ref_dict, args_list):
+        r"""
+        Update list elements with environment or gloable variable values.
+
+        This method updates the list arguments in the provided list with the
+        corresponding values from the reference dictionary.
+
+        The method iterates through the dictionary and checks if each of the
+        key matches an element in the list. If a match is found, the method
+        replaces the key with its corresponding value in the list element. If
+        the value is a string, the method replaces the key in the list element.
+        If the value is not a string, the method assigns the value to the list
+        element.
+        The method handles exceptions and continues processing the remaining
+        elements in the list.
+
+        Parameters:
+            ref_dict (dict):  A dictionary containing the environment or
+                              global variable values.
+            args_list (list): A list of arguments to update.
+
+        Returns:
+            list: The update list with global variables values.
+        """
+        # Replace keys in the string with their corresponding
+        # values from the dictionary.
+        for key, value in ref_dict.items():
+            # Iterate through the list and check if each element matched
+            # exact or in the string. If matches update the plugin element
+            # in the list.
+            for index, element in enumerate(args_list):
+                try:
+                    if isinstance(element, str):
+                        # If the key is not in the list element string,
+                        # then continue for the next element in the list.
+                        if str(key) not in str(element):
+                            continue
+                        if isinstance(value, str):
+                            args_list[index] = element.replace(key, value)
+                        else:
+                            args_list[index] = ref_dict[element]
+                except KeyError as e:
+                    print(f"Exception {e}")
+                    pass
+        return args_list
 
     def print_plugin_args_string(self, plugin_args):
         r"""
