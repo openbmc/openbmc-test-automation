@@ -335,6 +335,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8ffeeda_fd3bc30c",
+        "filename": "gui/lib/resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-05-22T07:12:51Z",
+      "side": 1,
+      "message": "tested, this code working fine.",
+      "parentUuid": "0a0e5950_a3d4e609",
+      "revId": "115acb559bc5184d4cc3b0905d93fa2e65981082",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a07f2ca0_d5497b5e",
@@ -348,6 +366,30 @@
       "writtenOn": "2025-05-21T04:57:55Z",
       "side": 1,
       "message": "This wont work .. op_system is in IF ELSE scope",
+      "range": {
+        "startLine": 64,
+        "startChar": 1,
+        "endLine": 68,
+        "endChar": 7
+      },
+      "revId": "115acb559bc5184d4cc3b0905d93fa2e65981082",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4448611_9f4a1a26",
+        "filename": "gui/lib/resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-05-22T07:12:51Z",
+      "side": 1,
+      "message": "tested, this code working fine.",
+      "parentUuid": "a07f2ca0_d5497b5e",
       "range": {
         "startLine": 64,
         "startChar": 1,
