@@ -315,6 +315,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "362e17ab_9c505f73",
+        "filename": "gui/lib/resource.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-05-22T04:22:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "766d7cfb_4c36cc8d",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 0
+      },
+      "revId": "115acb559bc5184d4cc3b0905d93fa2e65981082",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8cf20cf8_a9de9d10",
