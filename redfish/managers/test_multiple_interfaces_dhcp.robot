@@ -75,6 +75,22 @@ Set Network Property via Redfish And Verify
     ${enable_multiple_properties}
     ${disable_multiple_properties}
 
+Set Network Property for DHCPv6 via Redfish And Verify
+   [Documentation]  Set network property for DHCPv6 via Redfish and verify.
+   [Tags]  Set_Network_Property_For_DHCPv6_via_Redfish_And_Verify
+   [Teardown]  Restore Configuration
+   [Template]  Apply DHCPv6 Config And Verify
+
+    # property
+    ${dns_enable_dict}
+    ${dns_disable_dict}
+    ${domain_name_enable_dict}
+    ${domain_name_disable_dict}
+    ${ntp_enable_dict}
+    ${ntp_disable_dict}
+    ${enable_multiple_properties}
+    ${disable_multiple_properties}
+
 Enable DHCP On Eth1 And Check No Impact On Eth0
     [Documentation]  Enable DHCP On Eth1 And Check No Impact On Eth0.
     [Tags]  Enable_DHCP_On_Eth1_And_Check_No_Impact_On_Eth0
@@ -178,6 +194,21 @@ Apply DHCP Config
     ...  /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
     Verify Ethernet Config Property  ${property}  ${resp.dict["DHCPv4"]}
 
+Apply DHCPv6 Config And Verify
+    [Documentation]  Apply DHCPv6 config and verify.
+    [Arguments]  ${property}
+
+    # Description of Argument(s):
+    # property  DHCPv6 property values.
+
+    ${active_channel_config}=  Get Active Channel Config
+    Redfish.Patch
+    ...  /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}/
+    ...  body={"DHCPv6":${property}}  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    ${resp}=  Redfish.Get
+    ...  /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Verify Ethernet Config Property  ${property}  ${resp.dict["DHCPv6"]}
 
 Verify Ethernet Config Property
     [Documentation]  verify ethernet config properties.
