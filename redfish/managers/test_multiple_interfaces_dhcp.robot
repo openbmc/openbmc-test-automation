@@ -62,8 +62,22 @@ Enable DHCP On Eth1 And Verify System Is Accessible By Eth0
 Set Network Property via Redfish And Verify
    [Documentation]  Set network property via Redfish and verify.
    [Tags]  Set_Network_Property_via_Redfish_And_Verify
-   [Teardown]  Restore Configuration
    [Template]  Apply DHCP Config
+
+    # property
+    ${dns_enable_dict}
+    ${dns_disable_dict}
+    ${domain_name_enable_dict}
+    ${domain_name_disable_dict}
+    ${ntp_enable_dict}
+    ${ntp_disable_dict}
+    ${enable_multiple_properties}
+    ${disable_multiple_properties}
+
+Set Network Property For DHCPv6 via Redfish And Verify
+   [Documentation]  Set network property for DHCPv6 via Redfish and verify.
+   [Tags]  Set_Network_Property_For_DHCPv6_via_Redfish_And_Verify
+   [Template]  Apply DHCPv6 Config And Verify
 
     # property
     ${dns_enable_dict}
@@ -169,15 +183,24 @@ Apply DHCP Config
     # Description of Argument(s):
     # property  DHCP property values.
 
-    ${active_channel_config}=  Get Active Channel Config
-    Redfish.Patch
-    ...  /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}/
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     ...  body={"DHCPv4":${property}}  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
-    ${resp}=  Redfish.Get
-    ...  /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     Verify Ethernet Config Property  ${property}  ${resp.dict["DHCPv4"]}
 
+Apply DHCPv6 Config And Verify
+    [Documentation]  Apply DHCPv6 config and verify.
+    [Arguments]  ${property}
+
+    # Description of Argument(s):
+    # property  DHCPv6 property values.
+
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body={"DHCPv6":${property}}  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+
+    Verify Ethernet Config Property  ${property}  ${resp.dict["DHCPv6"]}
 
 Verify Ethernet Config Property
     [Documentation]  verify ethernet config properties.
@@ -220,8 +243,6 @@ Get Network Configuration Using Channel Number
     # Description of argument(s):
     # channel_number   Ethernet channel number, 1 is for eth0 and 2 is for eth1 (e.g. "1").
 
-    ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
 
     @{network_configurations}=  Get From Dictionary  ${resp.dict}  IPv4StaticAddresses
@@ -232,6 +253,9 @@ Suite Setup Execution
 
     Ping Host  ${OPENBMC_HOST}
     Redfish.Login
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
     # Get the configuration of eth1
     ${network_configurations}=  Get Network Configuration Using Channel Number  ${2}
