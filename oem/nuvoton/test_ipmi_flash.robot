@@ -181,7 +181,7 @@ Update BIOS Firmware
     Run Keyword  Wait For Host To Ping  ${OS_HOST}  3 mins
 
     scp.Open connection  ${OS_HOST}  username=${OS_USERNAME}
-    ...  password=${OS_PASSWORD}
+    ...  password=${OS_PASSWORD}  port=${OS_SSH_PORT}
     scp.Put File  ${image_file_path}  ${HOST_WORK_DIR}/${image_file_path}
 
     ${cmd}=  Catenate  tar -xf ${HOST_WORK_DIR}/${image_file_path} -C ${HOST_WORK_DIR}
@@ -218,7 +218,7 @@ Update BMC Firmware
     Run Keyword  Wait For Host To Ping  ${OS_HOST}  3 mins
 
     scp.Open connection  ${OS_HOST}  username=${OS_USERNAME}
-    ...  password=${OS_PASSWORD}
+    ...  password=${OS_PASSWORD}  port=${OS_SSH_PORT}
     scp.Put File  ${image_file_path}  ${HOST_WORK_DIR}/${image_file_path}
 
     ${cmd}=  Catenate  tar -xf ${HOST_WORK_DIR}/${image_file_path} -C ${HOST_WORK_DIR}

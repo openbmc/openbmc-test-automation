@@ -98,6 +98,7 @@ ${OPENBMC_CONSOLE_CLIENT}   ${EMPTY}
 ${OS_HOST}          ${EMPTY}
 ${OS_USERNAME}      ${EMPTY}
 ${OS_PASSWORD}      ${EMPTY}
+${OS_SSH_PORT}      22
 ${OS_WAIT_TIMEOUT}  ${15*60}
 
 # Networking related parameters

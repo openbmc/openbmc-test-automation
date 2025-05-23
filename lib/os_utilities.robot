@@ -47,7 +47,7 @@ Login To OS
     # alias_name   Default OS SSH session connection alias name.
 
     Ping Host  ${os_host}
-    SSHLibrary.Open Connection  ${os_host}  alias=${alias_name}
+    SSHLibrary.Open Connection  ${os_host}  alias=${alias_name}  port=${OS_SSH_PORT}
     SSHLibrary.Login  ${os_username}  ${os_password}
 
 

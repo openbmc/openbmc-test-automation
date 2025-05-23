@@ -310,15 +310,15 @@ Copy ipmitool
     ${installed}=  Get Regexp Matches  ${response}  ipmitool
     Run Keyword If  ${installed} == ['ipmitool']
     ...  Run Keywords  Set Suite Variable  ${IPMITOOL_PATH}  ${response}
-    ...  AND  SSHLibrary.Open Connection     ${OPENBMC_HOST}
+    ...  AND  SSHLibrary.Open Connection     ${OPENBMC_HOST}  port=${SSH_PORT}
     ...  AND  SSHLibrary.Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}
     ...  AND  Return From Keyword
 
     OperatingSystem.File Should Exist  tools/ipmitool  msg=${ipmitool_error}
     Import Library      SCPLibrary      AS       scp
-    scp.Open connection     ${OPENBMC_HOST}     username=${OPENBMC_USERNAME}      password=${OPENBMC_PASSWORD}
+    scp.Open connection     ${OPENBMC_HOST}     username=${OPENBMC_USERNAME}      password=${OPENBMC_PASSWORD}  port=${SSH_PORT}
     scp.Put File    tools/ipmitool   /tmp
-    SSHLibrary.Open Connection     ${OPENBMC_HOST}
+    SSHLibrary.Open Connection     ${OPENBMC_HOST}  port=${SSH_PORT}
     SSHLibrary.Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}
     Execute Command     chmod +x ${IPMITOOL_PATH}
 

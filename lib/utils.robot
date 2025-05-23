@@ -140,7 +140,7 @@ Login To OS Host
 
     Redfish Power On  stack_mode=skip  quiet=1
 
-    SSHLibrary.Open Connection  ${os_host}
+    SSHLibrary.Open Connection  ${os_host}  port=${OS_SSH_PORT}
     ${resp}=  SSHLibrary.Login  ${os_username}  ${os_password}
     RETURN  ${resp}
 

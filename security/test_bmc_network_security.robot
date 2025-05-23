@@ -100,7 +100,7 @@ Send Network Packets Continuously To SSH Port
 
     # Check if SSH interface is functional.
 
-    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}  port=${SSH_PORT}
     Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
 
 

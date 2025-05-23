@@ -312,7 +312,7 @@ Verify User Account Unlock
     ...  Redfish.Login  test_user  abc123
 
     # Ensure SSH Login with locked account gets failed
-    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}  port=${SSH_PORT}
     Run Keyword And Expect Error  Authentication failed*
     ...  SSHLibrary.Login  test_user  TestPwd123
 
@@ -331,7 +331,7 @@ Verify User Account Unlock
     Redfish.Login  test_user  TestPwd123
 
     # Try SSH login with the unlocked account
-    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}  port=${SSH_PORT}
     SSHLibrary.Login  test_user  TestPwd123
 
 
@@ -518,7 +518,7 @@ Verify SSH Login Access With Admin User
     Redfish Create User  new_admin  TestPwd1  Administrator  ${True}
 
     # Attempt SSH login with admin user.
-    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}  port=${SSH_PORT}
     ${status}=  Run Keyword And Return Status  SSHLibrary.Login  new_admin  TestPwd1
 
     # By default ssh_status is True, user can change the status via CLI
