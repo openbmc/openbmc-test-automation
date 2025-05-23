@@ -95,7 +95,7 @@ Suite Setup Execution
     END
 
     scp.Open connection  ${OPENBMC_HOST}  username=${OPENBMC_USERNAME}
-    ...  password=${OPENBMC_PASSWORD}
+    ...  password=${OPENBMC_PASSWORD}  port=${SSH_PORT}
     Put File To BMC  ${readid_svf}
     IF  ${program_cpld} == 1
         Put File To BMC  ${readusercode_svf}

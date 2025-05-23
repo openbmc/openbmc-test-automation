@@ -83,11 +83,11 @@ Verify User Cannot Login After 5 Non-Logged In Sessions
     ...  SSHLibrary.Close All Connections  AND  FFDC On Test Case Fail
 
     FOR  ${iter}  IN RANGE  ${0}  ${MAX_UNAUTH_PER_IP}
-       SSHLibrary.Open Connection  ${OPENBMC_HOST}
-       Start Process  ssh ${OPENBMC_USERNAME}@${OPENBMC_HOST}  shell=True
+       SSHLibrary.Open Connection  ${OPENBMC_HOST}  port=${SSH_PORT}
+       Start Process  ssh -p ${SSH_PORT} ${OPENBMC_USERNAME}@${OPENBMC_HOST}  shell=True
     END
 
-    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}  port=${SSH_PORT}
     ${status}=   Run Keyword And Return Status  SSHLibrary.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
 
     Should Be Equal  ${status}  ${False}
@@ -136,7 +136,7 @@ Make Large Number Of Wrong SSH Login Attempts And Check Stability
     [Setup]  Set Account Lockout Threshold
     [Teardown]  FFDC On Test Case Fail
 
-    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}  port=${SSH_PORT}
     @{ssh_status_list}=  Create List
     FOR  ${iter}  IN RANGE  ${1}  ${loop_iteration} + 1
       Log To Console  ${iter}th iteration
@@ -377,7 +377,7 @@ Confirm Ability to Connect Then Close All Connections
     ...  If login succeeds, close all SSH connections to BMC to prepare for test.
 
     SSHLibrary.Close All Connections
-    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}  port=${SSH_PORT}
     ${status}=   Run Keyword And Return Status
     ...  SSHLibrary.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
     Skip If  ${status} == ${False}  msg= SSH Login failed: test will be skipped

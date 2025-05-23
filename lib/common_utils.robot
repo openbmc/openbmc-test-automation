@@ -860,7 +860,7 @@ Copy Address Translation Utils To HOST OS
     ...  msg=${probe_cpu_tool_path} doesn't exist.
 
     scp.Open connection  ${OS_HOST}  username=${OS_USERNAME}
-    ...  password=${OS_PASSWORD}
+    ...  password=${OS_PASSWORD}  port=${OS_SSH_PORT}
     scp.Put File  ${probe_cpu_tool_path}  ${target_file_path}
     scp.Put File  ${scom_addrs_tool_path}  ${target_file_path}
 
