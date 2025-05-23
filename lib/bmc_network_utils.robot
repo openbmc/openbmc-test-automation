@@ -27,8 +27,9 @@ Check And Reset MAC
     Open Connection And Log In
     ${bmc_mac_addr}  ${stderr}  ${rc}=  BMC Execute Command
     ...  cat /sys/class/net/${ethernet_interface}/address
-    Run Keyword If  '${mac_address.lower()}' != '${bmc_mac_addr.lower()}'
-    ...  Set MAC Address
+    IF  '${mac_address.lower()}' != '${bmc_mac_addr.lower()}'
+        Set MAC Address
+    END
 
 
 Set MAC Address
@@ -206,7 +207,9 @@ Delete IP And Object
 
      FOR  ${ip_uri}  IN  @{ip_uri_list}
        ${ip_addr1}=  Read Attribute  ${ip_uri}  Address
-       Run Keyword If  '${ip_addr}' == '${ip_addr1}'  Exit For Loop
+       IF  '${ip_addr}' == '${ip_addr1}'
+          Exit For Loop
+       END
      END
 
     # If the given IP address is not configured, return.
@@ -308,10 +311,11 @@ Truncate MAC Address
         Return From Keyword If  ${invalid_mac_byte}  ${user_mac_addr}
         ${mac_int} =    Convert To Integer      ${user_mac_list}[${mac_byte}]   16
         ${user_mac_len} =  Get Length  ${user_mac_list}
-        ${user_mac_byte}=  Run Keyword IF
-        ...  ${mac_int} >= ${256}  Truncate MAC Bits  ${user_mac_list}[${mac_byte}]
-        ...  ELSE  Set Variable  ${user_mac_list}[${mac_byte}]
-
+        IF  ${mac_int} >= ${256}
+            ${user_mac_byte}=  Truncate MAC Bits  ${user_mac_list}[${mac_byte}]
+        ELSE
+            ${user_mac_byte}=   Set Variable  ${user_mac_list}[${mac_byte}]
+        END
         Append To List  ${user_new_mac_list}  ${user_mac_byte}
         ${mac_byte} =    Set Variable    ${mac_byte + 1}
         Exit For Loop If  '${mac_byte}' == '${user_mac_len}'
@@ -381,11 +385,11 @@ Verify Gateway On BMC
 
     # If gateway IP is empty or 0.0.0.0 it will not have route entry.
 
-    Run Keyword If  '${gateway_ip}' == '0.0.0.0'
-    ...      Pass Execution  Gateway IP is "0.0.0.0".
-    ...  ELSE
-    ...      Should Contain  ${route_info}  ${gateway_ip}
-    ...      msg=Gateway IP address not matching.
+    IF  '${gateway_ip}' == '0.0.0.0'
+        Pass Execution  Gateway IP is "0.0.0.0".
+    ELSE
+        Should Contain  ${route_info}  ${gateway_ip}  msg=Gateway IP address not matching.
+   END
 
 
 Get BMC DNS Info
@@ -416,7 +420,8 @@ CLI Get Nameservers
     RETURN  ${nameservers}
 
 CLI Get and Verify Name Servers
-    [Documentation]    Get and Verify the nameserver IPs from /etc/resolv.conf and compare with redfish nameserver.
+    [Documentation]    Get and Verify the nameserver IPs from /etc/resolv.conf
+    ...  and compare with redfish nameserver.
     [Arguments]     ${static_name_servers}
     ...  ${valid_status_codes}=${HTTP_OK}
 
@@ -427,9 +432,11 @@ CLI Get and Verify Name Servers
     ${cmd_status}=  Run Keyword And Return Status
     ...  List Should Contain Sub List  ${cli_nameservers}  ${static_name_servers}
 
-    Run Keyword If  '${valid_status_codes}' == '${HTTP_OK}'
-    ...  Should Be True  ${cmd_status}
-    ...  ELSE  Should Not Be True  ${cmd_status}
+    IF  '${valid_status_codes}' == '${HTTP_OK}'
+        Should Be True  ${cmd_status}
+    ELSE
+         Should Not Be True  ${cmd_status}
+    END
 
 Get Network Configuration
     [Documentation]  Get network configuration.
@@ -500,9 +507,8 @@ Add IP Address
       Append To List  ${patch_list}  ${empty_dict}
     END
 
-    ${valid_status_codes}=  Run Keyword If  '${valid_status_codes}' == '${HTTP_OK}'
-    ...  Set Variable   ${HTTP_OK},${HTTP_NO_CONTENT}
-    ...  ELSE  Set Variable  ${valid_status_codes}
+    ${valid_status_codes}=  Set Variable If  '${valid_status_codes}' == '${HTTP_OK}'
+    ...   ${HTTP_OK},${HTTP_NO_CONTENT}   ${valid_status_codes}
 
     # We need not check for existence of IP on BMC while adding.
     Append To List  ${patch_list}  ${ip_data}
@@ -599,12 +605,11 @@ Create VLAN
     ${status}=  Run Keyword And Return Status
     ...  Valid Value  resp.status_code  ["${HTTP_OK}"]
 
-    Run Keyword If  '${expected_result}' == 'error'
-    ...      Should Be Equal  ${status}  ${False}
-    ...      msg=Configuration of an invalid VLAN ID Failed.
-    ...  ELSE
-    ...      Should Be Equal  ${status}  ${True}
-    ...      msg=Configuration of a valid VLAN ID Failed.
+    IF  '${expected_result}' == 'error'
+        Should Be Equal  ${status}  ${False}  msg=Configuration of an invalid VLAN ID Failed.
+    ELSE
+         Should Be Equal  ${status}  ${True}  msg=Configuration of a valid VLAN ID Failed.
+    END
 
     Sleep  ${NETWORK_TIMEOUT}s
 
@@ -643,12 +648,11 @@ Configure Network Settings On VLAN
     ${status}=  Run Keyword And Return Status
     ...  Verify IP On BMC  ${ip_addr}
 
-    Run Keyword If  '${expected_result}' == 'error'
-    ...      Should Be Equal  ${status}  ${False}
-    ...      msg=Configuration of invalid IP Failed.
-    ...  ELSE
-    ...      Should Be Equal  ${status}  ${True}
-    ...      msg=Configuration of valid IP Failed.
+    IF  '${expected_result}' == 'error'
+       Should Be Equal  ${status}  ${False}  msg=Configuration of invalid IP Failed.
+    ELSE
+       Should Be Equal  ${status}  ${True}  msg=Configuration of valid IP Failed.
+    END
 
 
 Get BMC Default Gateway
@@ -708,8 +712,9 @@ Get Valid Channel Number
     &{valid_channel_number_interface_name}=  Create Dictionary
 
     FOR  ${key}  ${values}  IN  &{valid_channel_number_interface_names}
-      Run Keyword If  '${values['is_valid']}' == 'True'
-      ...  Set To Dictionary  ${valid_channel_number_interface_name}  ${key}  ${values}
+      IF  '${values['is_valid']}' == 'True'
+          Set To Dictionary  ${valid_channel_number_interface_name}  ${key}  ${values}
+      END
     END
 
     RETURN  ${valid_channel_number_interface_name}
@@ -722,8 +727,9 @@ Get Invalid Channel Number List
     @{invalid_channel_number_list}=  Create List
 
     FOR  ${channel_number}  ${values}  IN  &{available_channels}
-       Run Keyword If  '${values['channel_info']['medium_type']}' == 'reserved'
-       ...  Append To List  ${invalid_channel_number_list}  ${channel_number}
+       IF  '${values['channel_info']['medium_type']}' == 'reserved'
+           Append To List  ${invalid_channel_number_list}  ${channel_number}
+       END
     END
 
     RETURN  ${invalid_channel_number_list}
@@ -741,8 +747,9 @@ Get Channel Number For Valid Ethernet Interface
     FOR  ${channel_number}  ${values}  IN  &{valid_channel_number_interface_name}
       ${usb_interface_status}=  Run Keyword And Return Status  Should Not Contain  ${values['name']}  usb
       Continue For Loop IF  ${usb_interface_status} == False
-      Run Keyword If  '${values['channel_info']['medium_type']}' == 'lan-802.3'
-      ...  Append To List  ${channel_number_list}  ${channel_number}
+      IF  '${values['channel_info']['medium_type']}' == 'lan-802.3'
+          Append To List  ${channel_number_list}  ${channel_number}
+      END
     END
 
     RETURN  ${channel_number_list}
@@ -757,8 +764,9 @@ Get Current Channel Name List
     # ${channel_config_json} - output of /usr/share/ipmi-providers/channel_config.json file.
 
     FOR  ${channel_number}  ${values}  IN  &{channel_config_json}
-        Run Keyword If  '${values['name']}' == 'SELF'
-        ...  Run Keyword  Append To List  ${channel_list}  ${channel_number}
+        IF  '${values['name']}' == 'SELF'
+            Append To List  ${channel_list}  ${channel_number}
+        END
     END
 
     RETURN  ${channel_list}
@@ -803,9 +811,11 @@ Update IP Address
     # Find the position of IP address to be modified.
     @{network_configurations}=  Get Network Configuration
     FOR  ${network_configuration}  IN  @{network_configurations}
-      Run Keyword If  '${network_configuration['Address']}' == '${ip}'
-      ...  Append To List  ${patch_list}  ${ip_data}
-      ...  ELSE  Append To List  ${patch_list}  ${empty_dict}
+      IF  '${network_configuration['Address']}' == '${ip}'
+          Append To List  ${patch_list}  ${ip_data}
+      ELSE
+          Append To List  ${patch_list}  ${empty_dict}
+      END
     END
 
     # Modify the IP address only if given IP is found
