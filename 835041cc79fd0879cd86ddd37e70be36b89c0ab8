@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fb17fac_03630762",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-05-26T06:38:41Z",
+      "side": 1,
+      "message": "${active_channel_config}\u003d  Get Active Channel Config\n    ${ethernet_interface}\u003d  Set Variable. ${active_channel_config[\u0027${channel_number}\u0027][\u0027name\u0027]}\n    Redfish.Patch ${REDFISH_NW_ETH_IFACE}${ethernet_interface}\n    ${resp}\u003d  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}",
+      "range": {
+        "startLine": 205,
+        "startChar": 2,
+        "endLine": 206,
+        "endChar": 117
+      },
+      "revId": "835041cc79fd0879cd86ddd37e70be36b89c0ab8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
