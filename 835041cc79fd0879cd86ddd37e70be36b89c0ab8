@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad3a2088_3f1f6234",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-05-26T12:55:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fb17fac_03630762",
+      "range": {
+        "startLine": 205,
+        "startChar": 2,
+        "endLine": 206,
+        "endChar": 117
+      },
+      "revId": "835041cc79fd0879cd86ddd37e70be36b89c0ab8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44c18bd6_7c9b0def",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-05-26T09:59:19Z",
       "side": 1,
       "message": "Better to declare the variable for ${active_channel_config[\u0027${CHANNEL_NUMBER}\u0027][\u0027name\u0027]} so that it can be reused.",
+      "range": {
+        "startLine": 209,
+        "startChar": 4,
+        "endLine": 210,
+        "endChar": 116
+      },
+      "revId": "835041cc79fd0879cd86ddd37e70be36b89c0ab8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9deba0db_e15fc91d",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-05-26T12:55:10Z",
+      "side": 1,
+      "message": "Keeping the same to maintain consistency.",
+      "parentUuid": "44c18bd6_7c9b0def",
       "range": {
         "startLine": 209,
         "startChar": 4,
