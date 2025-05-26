@@ -16,6 +16,24 @@
       "message": "Apply DHVPv6 Config And Verify\n\nand change the doc accordingly",
       "revId": "6b599b76f68dee9dbb8881d61f1e8fa7c77e26e9",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37fc389f_342b8e75",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-05-26T02:32:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29af71f1_1ff65975",
+      "revId": "6b599b76f68dee9dbb8881d61f1e8fa7c77e26e9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
