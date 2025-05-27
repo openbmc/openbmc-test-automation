@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eedf7281_afa23247",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-05-27T14:38:57Z",
+      "side": 1,
+      "message": " --- redfish/managers/test_multiple_interfaces_dhcp.robot:\nSet Network Property for DHCPv6 via Redfish And Verify\nSet_Network_Property_For_DHCPv6_via_Redfish_And_Verify\n\n\nFix the tag and test case mismatch",
+      "revId": "eea01e31b10e10314093f1845f33aa016427b98b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
