@@ -93,6 +93,30 @@
       },
       "revId": "835041cc79fd0879cd86ddd37e70be36b89c0ab8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cc4f2d1_64a96043",
+        "filename": "redfish/managers/test_multiple_interfaces_dhcp.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-05-27T14:37:05Z",
+      "side": 1,
+      "message": "We can do this ahead.. i see already few in this suite\n\nopenbmc-test-automation$ cat redfish/managers/test_multiple_interfaces_dhcp.robot | grep active_channel_config\n    ${active_channel_config}\u003d  Get Active Channel Config\n    ...  /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/${active_channel_config[\u0027${CHANNEL_NUMBER}\u0027][\u0027name\u0027]}/\n    ...  /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/${active_channel_config[\u0027${CHANNEL_NUMBER}\u0027][\u0027name\u0027]}\n    ${active_channel_config}\u003d  Get Active Channel Config\n    ${ethernet_interface}\u003d  Set Variable  ${active_channel_config[\u0027${channel_number}\u0027][\u0027name\u0027]}\n\nall you need to do is replace the var above",
+      "parentUuid": "9deba0db_e15fc91d",
+      "range": {
+        "startLine": 209,
+        "startChar": 4,
+        "endLine": 210,
+        "endChar": 116
+      },
+      "revId": "835041cc79fd0879cd86ddd37e70be36b89c0ab8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
