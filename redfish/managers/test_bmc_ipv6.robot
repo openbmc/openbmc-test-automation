@@ -122,6 +122,7 @@ Enable DHCPv6 Property On BMC And Verify
 
     Set And Verify DHCPv6 Property  Enabled
 
+Disable
 
 Configure Invalid Static IPv6 And Verify
     [Documentation]  Configure invalid static IPv6 and verify.
