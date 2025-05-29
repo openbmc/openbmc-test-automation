@@ -122,6 +122,11 @@ Enable DHCPv6 Property On BMC And Verify
 
     Set And Verify DHCPv6 Property  Enabled
 
+Disable DHCPv6 Property On BMC And Verify
+    [Documentation]  Disable DHCPv6 property on BMC and verify.
+    [Tags]  Disable_DHCPv6_Property_On_BMC_And_Verify
+
+    Set And Verify DHCPv6 Property  Disabled
 
 Configure Invalid Static IPv6 And Verify
     [Documentation]  Configure invalid static IPv6 and verify.
