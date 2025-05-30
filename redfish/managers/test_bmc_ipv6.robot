@@ -495,7 +495,7 @@ Modify IPv6 Address
 
 Set SLAACv6 Configuration State And Verify
     [Documentation]  Set SLAACv6 configuration state and verify.
-    [Arguments]  ${slaac_state}  ${valid_status_codes}=${HTTP_OK}
+    [Arguments]  ${slaac_state}  ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
 
     # Description of argument(s):
     # slaac_state         SLAACv6 state('True' or 'False').
@@ -506,7 +506,7 @@ Set SLAACv6 Configuration State And Verify
 
     ${data}=  Set Variable If  ${slaac_state} == ${False}  ${DISABLE_SLAAC}  ${ENABLE_SLAAC}
     ${resp}=  Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
-    ...  body=${data}  valid_status_codes=[${valid_status_codes}]
+    ...  body=${data}  valid_status_codes=${valid_status_codes}
 
     # Verify SLAACv6 is set correctly.
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
