@@ -36,6 +36,9 @@ ${test_vmi_ipv6gateway}   2001:db8:1111:2222::1
 ${ipv4_hexword_addr}      10.5.5.6:1A:1B:1C:1D:1E:1F
 ${multicast_ipv6addr}     FF00
 ${loopback_ipv6addr}      ::1
+${compressed_ipv4}        ::10.6.6.5
+${shortform_stand_ipv4}   0:0:0:0:0:0:10.5.5.6
+${standard_ipv4rep}       0000:0000:0000:0000:0000:0000:10.5.5.6
 
 
 *** Test Cases ***
@@ -776,6 +779,18 @@ Enable VMI DHCPv6 When DHCPv4 Is Enabled And Verify
     Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
 
 
+Assign Valid Static IPv6 Address And Verify
+    [Documentation]  Configure valid static IPv6 address to VMI and verify that address
+    ...  get assigned.
+    [Tags]  Assign_Valid_Static_IPv6_Address_And_Verify
+    [Template]  Set VMI Valid Static IPv6 Address And Verify
+
+    # valid_vmi_ipv6addr     valid_prefix_length
+    ${compressed_ipv4}       64
+    ${shortform_stand_ipv4}  64
+    ${standard_ipv4rep}      64
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -975,3 +990,25 @@ Delete VMI IPv6 Static Default Gateway Address
     ${data}=  Set Variable  {"IPv6StaticDefaultGateways": [${Null}]}
     Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
     ...  body=${data}  valid_status_codes=[${valid_status_codes}]
+
+
+Set VMI Valid Static IPv6 Address And Verify
+    [Documentation]  Set valid static VMI IPv6 address and check whether IPv6 origin is set to static
+    ...  and Static IPv6 address is assigned.
+    [Arguments]  ${valid_vmi_ipv6addr}  ${valid_prefix_length}  ${valid_status_codes}=${HTTP_ACCEPTED}
+    ...  ${interface}=${ethernet_interface}
+
+    # Description of argument(s):
+    # valid_vmi_ipv6addr           VMI IPv6 address to be added.
+    # valid_prefix_length          Prefix length for the VMI IPv6 to be added.
+    # valid_status_codes           Expected status code for PATCH request.
+    # interface                    VMI interface (eg. eth0 or eth1).
+
+    Set Static VMI IPv6 Address  ${valid_vmi_ipv6addr}  ${valid_prefix_length}
+    ...  ${valid_status_codes}
+
+    ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+
+    @{vmi_ipv6_address}=  Get From Dictionary  ${resp.dict}  IPv6Addresses
+    ${vmi_ipv6_addr}=  Get From List  ${vmi_ipv6_address}  0
+    Should Be Equal  ${vmi_ipv6_addr["Address"]}  ${valid_vmi_ipv6addr}
