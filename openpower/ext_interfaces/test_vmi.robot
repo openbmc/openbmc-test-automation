@@ -36,6 +36,9 @@ ${test_vmi_ipv6gateway}   2001:db8:1111:2222::1
 ${ipv4_hexword_addr}      10.5.5.6:1A:1B:1C:1D:1E:1F
 ${multicast_ipv6addr}     FF00
 ${loopback_ipv6addr}      ::1
+${compressed_ipv4}        ::10.6.6.5
+${shortform_stand_ipv4}   0:0:0:0:0:0:10.5.5.6
+${standard_ipv4rep}       0000:0000:0000:0000:0000:0000:10.5.5.6
 
 
 *** Test Cases ***
@@ -774,6 +777,18 @@ Enable VMI DHCPv6 When DHCPv4 Is Enabled And Verify
 
     # Check there is no impact on IPv4 settings, IPv4 address origin should be DHCP.
     Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
+
+
+Assign Valid Static IPv6 Address And Verify
+    [Documentation]  Configure valid static IPv6 address to VMI and verify that address
+    ...  get assigned.
+    [Tags]  Assign_Valid_Static_IPv6_Address_And_Verify
+    [Template]  Set VMI Valid Static IPv6 Address And Verify
+
+    # valid_vmi_ipv6addr     valid_prefix_length
+    ${compressed_ipv4}       64
+    ${shortform_stand_ipv4}  64
+    ${standard_ipv4rep}      64
 
 
 *** Keywords ***
