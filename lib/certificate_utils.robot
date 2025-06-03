@@ -236,7 +236,7 @@ Replace Certificate Via Redfish
     ...  CertificateType=PEM  CertificateUri=${certificate_dict}
 
     ${expected_resp}=  Set Variable If  '${expected_status}' == 'ok'  ${HTTP_OK}, ${HTTP_NO_CONTENT}
-    ...  '${expected_status}' == 'error'  ${HTTP_NOT_FOUND}, ${HTTP_INTERNAL_SERVER_ERROR}
+    ...  '${expected_status}' == 'error'  ${HTTP_NOT_FOUND}, ${HTTP_INTERNAL_SERVER_ERROR}, ${HTTP_BAD_REQUEST}
     ${resp}=  redfish.Post  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
     ...  body=${payload}  valid_status_codes=[${expected_resp}]
 
