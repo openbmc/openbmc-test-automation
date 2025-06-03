@@ -16,6 +16,24 @@
       "message": "what is this ip?",
       "revId": "b74daf9ace88b04c84b1892075a9588443b292fd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c2e0c60_9b15fe45",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-06-03T04:47:04Z",
+      "side": 1,
+      "message": "short form of standard IPv4 representation",
+      "parentUuid": "afb867c4_bf0d36be",
+      "revId": "b74daf9ace88b04c84b1892075a9588443b292fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
