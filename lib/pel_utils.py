@@ -298,9 +298,16 @@ def filter_unexpected_srcs(expected_srcs=None):
     expected_srcs       List of expected SRCs. E.g. ["BBXXYYYY", "AAXXYYYY"].
     """
 
-    srcs_found = fetch_all_src()
+    temp_srcs_found = fetch_all_src()
+
     if not expected_srcs:
         expected_srcs = []
+    srcs_found = list()
+    #Remove any extra character and space after src id
+    for item in temp_srcs_found:
+        var = item.split( )
+        srcs_found.append(var[0])
+    print(srcs_found)
     print(expected_srcs)
     return list(set(srcs_found) - set(expected_srcs))
 
