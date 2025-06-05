@@ -303,9 +303,9 @@ def filter_unexpected_srcs(expected_srcs=None):
     if not expected_srcs:
         expected_srcs = []
     srcs_found = list()
-    #Remove any extra character and space after src id
+    # Remove any extra space after SRC ID
     for item in temp_srcs_found:
-        var = item.split( )
+        var = item.split()
         srcs_found.append(var[0])
     print(srcs_found)
     print(expected_srcs)
