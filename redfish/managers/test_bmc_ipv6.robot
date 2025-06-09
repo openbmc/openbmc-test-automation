@@ -22,6 +22,8 @@ ${test_ipv6_addr1}          2001:db8:3333:4444:5555:6666:7777:9999
 
 # Valid prefix length is a integer ranges from 1 to 128.
 ${test_prefix_length}       64
+${ipv6_gw_addr}             2002:903:15F:32:9:3:32:1
+${prefix_length_def}        None
 
 *** Test Cases ***
 
@@ -136,6 +138,26 @@ Configure Invalid Static IPv6 And Verify
     #invalid_ipv6         prefix length           valid_status_code
     ${ipv4_hexword_addr}  ${test_prefix_length}   ${HTTP_BAD_REQUEST}
 
+Configure Static Default Gateway And Verify
+    [Documentation]  Configure static default gateway and verify.
+    [Tags]  Configure_Static_Default_Gateway_And_Verify
+
+    # Prefix Length is passed as None.
+    IF   '${prefix_length_def}' == 'None'
+        ${ipv6address}=  Create Dictionary  Address=${ipv6_gw_addr}
+    ELSE
+        ${ipv6address}=  Create Dictionary  Address=${ipv6_gw_addr}  Prefix Length=${prefix_length_def}
+    END
+    ${patch_list}=  Create List  ${ipv6address}
+    ${data}=  Create Dictionary  IPv6StaticDefaultGateways=${patch_list}
+
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body=${data}  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
+
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ${ipv6_staticdef_gateway}=  Get From Dictionary  ${resp.dict}  IPv6StaticDefaultGateways
+
+    Should Be Equal  ${ipv6_staticdef_gateway[0]['Address']}    ${ipv6_gw_addr}
 
 *** Keywords ***
 
