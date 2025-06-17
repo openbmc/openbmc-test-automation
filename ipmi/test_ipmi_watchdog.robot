@@ -273,10 +273,12 @@ Validate Watchdog Timer Actions And SEL Events
     IF  '${sel_event}' == 'Hard reset' or '${sel_event}' == 'Power cycle'
         # If timer expire action is 'Hard Reset' then the host/chassis immediately powering on after
         # timer expires. So, verify host is rebooting by expecting that host is unpingable.
-        Run Keyword If  '${sel_event}' == 'Power cycle'
-        ...  Wait Until Keyword Succeeds  1 min  10 sec  Verify Host Power State  ['off']
-        ...  ELSE
-        ...  Wait Until Keyword Succeeds  20 sec  5 sec  Is Host Unpingable  ${OS_HOST}
+        IF  '${sel_event}' == 'Power cycle'
+            Wait Until Keyword Succeeds  1 min  10 sec  Verify Host Power State  ['off']
+        ELSE
+            Wait Until Keyword Succeeds  20 sec  5 sec  Is Host Unpingable  ${OS_HOST}
+        END
+
         Wait Until Keyword Succeeds  5 min  30 sec  Verify Host Power State  ['on']
         Wait Until Keyword Succeeds  7 min  30 sec  OS Execute Command  uptime
     ELSE

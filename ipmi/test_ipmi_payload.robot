@@ -49,7 +49,7 @@ Test Activate Payload
     [Tags]  Test_Activate_Payload
 
     ${payload_status}=  Get Payload Activation Status
-    Run Keyword If  '${payload_status}' == '01'  Deactivate Payload
+    IF  '${payload_status}' == '01'  Deactivate Payload
 
     Activate Payload
 
@@ -62,7 +62,7 @@ Test Deactivate Payload
     [Tags]  Test_Deactivate_Payload
 
     ${payload_status}=  Get Payload Activation Status
-    Run Keyword If  '${payload_status}' == '00'  Activate Payload
+    IF  '${payload_status}' == '00'  Activate Payload
 
     Deactivate Payload
 
@@ -362,13 +362,15 @@ Verify Standard Payload
     ${get_user_access_payload}=  Get User Access Payload For Given Channel  ${user_id}
     @{get_user_access_cmd_resp_list}=  Split String  ${get_user_access_payload}
 
-    Run Keyword If  '${standard_payload}' == 'Disabled'
-    ...  Should Be Equal  ${get_user_access_cmd_resp_list}[0]  00
-    ...  ELSE
-    ...  Should Be Equal  ${get_user_access_cmd_resp_list}[0]  02
+    IF  '${standard_payload}' == 'Disabled'
+        Should Be Equal  ${get_user_access_cmd_resp_list}[0]  00
+    ELSE
+        Should Be Equal  ${get_user_access_cmd_resp_list}[0]  02
+    END
 
-    Run Keyword If  '${standard_payload}' == 'Disabled'
-    ...  Verify Sol Activate Disabled  ${user_name}
+    IF  '${standard_payload}' == 'Disabled'
+        Verify Sol Activate Disabled  ${user_name}
+    END
 
 
 Verify Sol Activate Disabled

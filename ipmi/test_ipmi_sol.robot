@@ -144,16 +144,17 @@ Verify SOL During Boot
     ${status}=  Run Keyword And Return Status  Wait Until Keyword Succeeds  10 mins  15 secs
     ...  Check IPMI SOL Output Content  ${SOL_BIOS_OUTPUT}
 
-    Run Keyword If  '${status}' == 'False'
-    ...  Run Keywords  IPMI Power Off  AND  FAIL  msg=BIOS not loaded.
+    IF  '${status}' == 'False'
+        IPMI Power Off
+        FAIL  msg=BIOS not loaded.
+    END
 
     # SOL_LOGIN_OUTPUT - SOL output login prompt
     # Once host reboot completes, SOL console may take maximum of 15 minutes to get the login prompt.
     ${status}=  Run Keyword And Return Status  Wait Until Keyword Succeeds  15 mins  15 secs
     ...  Check IPMI SOL Output Content  ${SOL_LOGIN_OUTPUT}
 
-    Run Keyword If  '${status}' == 'False'
-    ...  IPMI Power Off
+    IF  '${status}' == 'False'  IPMI Power Off
 
 
 Verify Deactivate Non Existing SOL
@@ -361,16 +362,17 @@ Verify SOL Setting
     ${status}=  Run Keyword And Return Status  Wait Until Keyword Succeeds  10 mins  15 secs
     ...  Check IPMI SOL Output Content  ${SOL_BIOS_OUTPUT}
 
-    Run Keyword If  '${status}' == 'False'
-    ...  Run Keywords  IPMI Power Off  AND  FAIL  msg=BIOS not loaded.
+    IF  '${status}' == 'False'
+        IPMI Power Off
+        FAIL  msg=BIOS not loaded.
+    END
 
     # SOL_LOGIN_OUTPUT - SOL output login prompt
     # Once host reboot completes, SOL console may take maximum of 15 minutes to get the login prompt.
     ${status}=  Run Keyword And Return Status  Wait Until Keyword Succeeds  15 mins  15 secs
     ...  Check IPMI SOL Output Content  ${SOL_LOGIN_OUTPUT}
 
-    Run Keyword If  '${status}' == 'False'
-    ...  IPMI Power Off
+    IF  '${status}' == 'False'  IPMI Power Off
 
 
 Get SOL Setting

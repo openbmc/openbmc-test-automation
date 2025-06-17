@@ -83,7 +83,7 @@ Compare IPMI And Redfish FRU Component
     ${key_map}=  Get Dictionary Items   ${ipmi_redfish_fru_field_map}
 
     FOR    ${key}    ${value}    IN    @{key_map}
-      Exit For Loop IF    "${value}" == "${EMPTY}"
+      IF  "${value}" == "${EMPTY}"  BREAK
       FOR  ${ipmi_fru_component}  IN  ${ipmi_fru_component_obj}
         FOR  ${redfish_fru_component}  IN  ${redfish_fru_component_obj}
             IF  '${ipmi_fru_component['product_name']}' == '${redfish_fru_component['Name']}'

@@ -391,12 +391,13 @@ Set Present Bit Via IPMI and Verify Using Redfish
     ${sensor_name}=  Set Variable  ${sensor_list[0]}
     ${sensor_id}=  Get Sensor Id For Sensor  ${sensor_name}
 
-     Run Keyword If  '${status}' == 'Absent'
-     ...  Run IPMI Command
-     ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x00 0x00 0x80 0x00 0x00 0x20 0x00
-     ...  ELSE IF  '${status}' == 'Enabled'
-     ...  Run IPMI Command
-     ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x80 0x00 0x00 0x00 0x00 0x20 0x00
+     IF  '${status}' == 'Absent'
+         Run IPMI Command
+         ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x00 0x00 0x80 0x00 0x00 0x20 0x00
+     ELSE IF  '${status}' == 'Enabled'
+         Run IPMI Command
+         ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x80 0x00 0x00 0x00 0x00 0x20 0x00
+     END
 
      # Redfish cpu components have "-" instead of "_" (e.g.: dcm0-cpu0).
      ${cpu_name}=  Replace String  ${sensor_name}  _  -

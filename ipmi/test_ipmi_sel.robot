@@ -478,7 +478,7 @@ Install Tarball For Error Creation
     [Documentation]  Install tarball for error log creation.
 
     ${status}=  Run Keyword And Return Status  Logging Test Binary Exist
-    Run Keyword If  ${status} == ${False}  Install Tarball
+    IF  ${status} == ${False}  Install Tarball
 
 
 Test Setup Execution

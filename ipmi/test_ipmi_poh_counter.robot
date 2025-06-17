@@ -156,8 +156,7 @@ Suite Setup Execution
 
     # If Host state is 'On' then the condition will not be executed.
     # Host may take approx 5 - 6 minutes to complete power ON process.
-    Run Keyword If  '${current_host_state}' == 'Off'
-    ...  IPMI Power On
+    IF  '${current_host_state}' == 'Off'   IPMI Power On
 
 
 Suite Teardown Execution
