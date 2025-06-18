@@ -791,6 +791,34 @@ Assign Valid Static IPv6 Address And Verify
     ${standard_ipv4rep}      64
 
 
+Enable VMI DHCPv6 When IPv4 Origin Is Static And Verify
+    [Documentation]  Enable VMI DHCPv6 when IPv4 origin is static and verify
+    ...  IPv4 settings are intact and verify IPv6 address origin is set to DHCP.
+    [Tags]  Enable_VMI_DHCPv6_When_IPv4_Origin_Is_Static_And_Verify
+    [Setup]  Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
+
+    # Enable DHCPv6 property.
+    Set VMI DHCPv6 Property  Enabled
+
+    # Check IPv6 origin is set to DHCP.
+    Verify VMI IPv6 Address  DHCPv6
+
+    # Check there is no impact on IPv4 settings, IPv4 address origin should be static.
+    Verify VMI Network Interface Details  ${test_ipv4}  Static  ${test_gateway}  ${test_netmask}
+
+
+Configures Static IPv6 When DHCPv4 Is Enabled And Verify
+    [Documentation]  Configure static IPv6 address when DHCPv4 is enabled and verify DHCPv4
+    ...  settings are intact and verify IPv6 origin is set to static and static IPv6 address is assigned.
+    [Tags]  Configures_Static_IPv6_When_DHCPv4_Is_Enabled_And_Verify
+    [Setup]  Set VMI IPv4 Origin  ${True}
+
+    Set VMI Valid Static IPv6 Address And Verify  ${test_vmi_ipv6addr}  ${prefix_length}
+
+    # Check there is no impact on IPv4 settings, IPv4 address origin should be DHCP.
+    Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -1007,8 +1035,5 @@ Set VMI Valid Static IPv6 Address And Verify
     Set Static VMI IPv6 Address  ${valid_vmi_ipv6addr}  ${valid_prefix_length}
     ...  ${valid_status_codes}
 
-    ${resp}=  Redfish.Get  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
-
-    @{vmi_ipv6_address}=  Get From Dictionary  ${resp.dict}  IPv6Addresses
-    ${vmi_ipv6_addr}=  Get From List  ${vmi_ipv6_address}  0
-    Should Be Equal  ${vmi_ipv6_addr["Address"]}  ${valid_vmi_ipv6addr}
+    ${vmi_ipv6}=  Verify VMI IPv6 Address  Static
+    Should Be Equal  ${vmi_ipv6["Address"]}  ${valid_vmi_ipv6addr}
