@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea6ade57_4b80212e",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-06-19T09:28:59Z",
+      "side": 1,
+      "message": "user The template for both valid and invalid\n[Template]  Configure IPv6 Static Default Gateway On BMC\n\n#static_def_gw             prefix length              valid_status_code\n${ipv6_gw_addr}             ${prefix_length_def}        ${HTTP_OK}\n${ipv6_invalid_static_def}  ${prefix_length_def}       ${HTTP_BAD_REQUEST}",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 75
+      },
+      "revId": "8521c689bfc58de0d72e99faa7dea1da8b1e1d96",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
