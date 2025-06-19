@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "737f96d6_1371cb44",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-06-19T08:37:39Z",
+      "side": 1,
+      "message": "IPv6",
+      "revId": "f4940d1e6c3d34ded56500a0e45159b014063b5a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06d458e1_e25c34de",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-06-19T08:37:39Z",
+      "side": 1,
+      "message": "IPv6",
+      "revId": "f4940d1e6c3d34ded56500a0e45159b014063b5a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfee2d86_0d5203cf",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-06-19T08:37:39Z",
+      "side": 1,
+      "message": "comment?",
+      "revId": "f4940d1e6c3d34ded56500a0e45159b014063b5a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3230898_559ec65f",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-06-19T08:37:39Z",
+      "side": 1,
+      "message": "IPv6",
+      "revId": "f4940d1e6c3d34ded56500a0e45159b014063b5a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
