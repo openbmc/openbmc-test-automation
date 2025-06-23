@@ -374,3 +374,24 @@ def fetch_all_pel_ids_based_on_error_message(
             "Failed to fetch PEL ID for required SRC : " + str(exception)
         ) from exception
     return err_pel_ids
+
+
+def check_if_pel_transmitted_to_host(pel_id):
+    r"""
+    Return True if PEL is transmitted to Host else False.
+
+    Description of arguments:
+    pel_id       PEL ID. E.g. 0x50000021.
+    """
+
+    try:
+        pel_data = peltool("-i " + pel_id)
+        print(pel_data)
+        host_state = pel_data["User Header"]["Host Transmission"]
+        if host_state != "Acked":
+            return False
+    except Exception as exception:
+        raise PeltoolException(
+            "Failed to parse PEL data : " + str(exception)
+        ) from exception
+    return True
