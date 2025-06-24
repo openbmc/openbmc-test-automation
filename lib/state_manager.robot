@@ -25,7 +25,7 @@ Initiate Host Boot
     ...  ${HOST_STATE_URI}  RequestedHostTransition   data=${args}
 
     # Does caller want to wait for status?
-    Run Keyword If  '${wait}' == '${0}'  Return From Keyword
+    IF  '${wait}' == '${0}'  Return From Keyword
 
     Wait Until Keyword Succeeds
     ...  10 min  10 sec  Is Host Running
@@ -45,11 +45,11 @@ Initiate Host PowerOff
     ...  ${HOST_STATE_URI}  RequestedHostTransition   data=${args}
 
     # Does caller want to wait for status?
-    Run Keyword If  '${wait}' == '${0}'  Return From Keyword
+    IF  '${wait}' == '${0}'  Return From Keyword
 
     ${status}=  Run Keyword And Return Status  Wait For PowerOff
 
-    Run Keyword if  '${status}' == '${False}'  Hard Power Off
+    IF  '${status}' == '${False}'  Hard Power Off
 
 
 Wait For PowerOff
@@ -71,7 +71,7 @@ Hard Power Off
     ...  ${CHASSIS_STATE_URI}  RequestedPowerTransition  data=${args}
 
     # Does caller want to wait for status?
-    Run Keyword If  '${wait}' == '${0}'  Return From Keyword
+    IF  '${wait}' == '${0}'  Return From Keyword
 
     Wait Until Keyword Succeeds
     ...  1 min  10 sec  Run Keywords  Is Chassis Off  AND  Is Host Off
@@ -89,7 +89,7 @@ Initiate Host Reboot
     ...  ${HOST_STATE_URI}  RequestedHostTransition  data=${args}
 
     # Does caller want to wait for host booted status?
-    Run Keyword If  '${wait}' == '${0}'  Return From Keyword
+    IF  '${wait}' == '${0}'  Return From Keyword
 
     Is Host Rebooted
 
@@ -179,9 +179,10 @@ Recover Quiesced Host
     [Documentation]  Recover host from quisced state.
 
     ${resp}=  Run Keyword And Return Status  Is Host Quiesced
-    Run Keyword If  '${resp}' == 'True'
-    ...  Run Keywords  Initiate Host PowerOff  AND
-    ...  Log  HOST is recovered from quiesced state
+    IF  '${resp}' == 'True'
+        Initiate Host PowerOff
+        Log  HOST is recovered from quiesced state
+    END
 
 
 Get Host State
@@ -231,10 +232,11 @@ Put BMC State
     # expected_state - expected BMC state
 
     ${bmc_state}=  Get BMC State
-    Run Keyword If  '${bmc_state}' == '${expected_state}'
-    ...    Log  BMC is already in ${expected_state} state
-    ...  ELSE
-    ...    OBMC Reboot (off)
+    IF  '${bmc_state}' == '${expected_state}'
+        Log  BMC is already in ${expected_state} state
+    ELSE
+        OBMC Reboot (off)
+    END
 
 Initiate BMC Reboot
     [Documentation]  Initiate BMC reboot.
@@ -249,10 +251,10 @@ Initiate BMC Reboot
     ...  ${BMC_STATE_URI}  RequestedBMCTransition  data=${args}
 
     # Does caller want to wait for status?
-    Run Keyword If  '${wait}' == '${0}'  Return From Keyword
+    IF  '${wait}' == '${0}'  Return From Keyword
 
     ${session_active}=  Check If BMC Reboot Is Initiated
-    Run Keyword If  '${session_active}' == '${True}'
+    IF  '${session_active}' == '${True}'
     ...  Fail  msg=BMC Reboot didn't occur.
 
     Check If BMC is Up
@@ -282,13 +284,13 @@ Wait for BMC state
     [Documentation]  Wait until given BMC state is reached.
     [Arguments]  ${state}
     # state - BMC state to wait for
-    Run Keyword If  '${state}' == '${BMC_READY_STATE}'
-    ...    Wait Until Keyword Succeeds
-    ...    10 min  10 sec  Is BMC Ready
-    ...  ELSE IF  '${state}' == '${BMC_NOT_READY_STATE}'
-    ...    Wait Until Keyword Succeeds
-    ...    10 min  10 sec  Is BMC Not Ready
-    ...  ELSE  Fail  msg=Invalid BMC state
+    IF  '${state}' == '${BMC_READY_STATE}'
+        Wait Until Keyword Succeeds  10 min  10 sec  Is BMC Ready
+    ELSE IF  '${state}' == '${BMC_NOT_READY_STATE}'
+        Wait Until Keyword Succeeds   10 min  10 sec  Is BMC Not Ready
+    ELSE
+        Fail  msg=Invalid BMC state
+    END
 
 
 Set State Interface Version
@@ -296,18 +298,20 @@ Set State Interface Version
     ${resp}=  Openbmc Get Request  ${CHASSIS_STATE_URI}
     ${status}=  Run Keyword And Return Status
     ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    Run Keyword If  '${status}' == '${True}'
-    ...  Set Global Variable  ${OBMC_STATES_VERSION}  ${1}
-    ...  ELSE
-    ...  Set Global Variable  ${OBMC_STATES_VERSION}  ${0}
+    IF  '${status}' == '${True}'
+        Set Global Variable  ${OBMC_STATES_VERSION}  ${1}
+    ELSE
+        Set Global Variable  ${OBMC_STATES_VERSION}  ${0}
+    END
 
 
 Power Off Request
     [Documentation]  Select appropriate poweroff keyword.
-    Run Keyword If  '${OBMC_STATES_VERSION}' == '${0}'
-    ...  Initiate Power Off
-    ...  ELSE
-    ...  Initiate Host PowerOff
+    IF  '${OBMC_STATES_VERSION}' == '${0}'
+        Initiate Power Off
+    ELSE
+        Initiate Host PowerOff
+    END
 
 
 Wait For BMC Ready

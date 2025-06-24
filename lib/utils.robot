@@ -48,13 +48,11 @@ Verify Ping and REST Authentication
     [Documentation]  Verify ping and rest authentication.
     ${l_ping}=   Run Keyword And Return Status
     ...    Ping Host  ${OPENBMC_HOST}
-    Run Keyword If  '${l_ping}' == '${False}'
-    ...    Fail   msg=Ping Failed
+    IF  '${l_ping}' == '${False}'  Fail   msg=Ping Failed
 
     ${l_rest}=   Run Keyword And Return Status
     ...    Initialize OpenBMC
-    Run Keyword If  '${l_rest}' == '${False}'
-    ...    Fail   msg=REST Authentication Failed
+    IF  '${l_rest}' == '${False}'  Fail   msg=REST Authentication Failed
 
     # Just to make sure the SSH is working for SCP
     Open Connection And Log In
@@ -66,10 +64,10 @@ Verify Ping SSH And Redfish Authentication
     [Documentation]  Verify ping, SSH and redfish authentication.
 
     ${l_ping}=   Run Keyword And Return Status  Ping Host  ${OPENBMC_HOST}
-    Run Keyword If  '${l_ping}' == '${False}'  Fail   msg=Ping Failed
+    IF  '${l_ping}' == '${False}'  Fail   msg=Ping Failed
 
     ${l_rest}=   Run Keyword And Return Status   Redfish.Login
-    Run Keyword If  '${l_rest}' == '${False}'  Fail   msg=REST Authentication Failed
+    IF  '${l_rest}' == '${False}'  Fail   msg=REST Authentication Failed
 
     # Just to make sure the SSH is working.
     Open Connection And Log In
@@ -115,8 +113,9 @@ Trigger Host Watchdog Error
     ...  data=xyz.openbmc_project.State.Watchdog.Action.PowerCycle
     ${status}  ${result}=  Run Keyword And Ignore Error
     ...  Read Attribute  ${HOST_WATCHDOG_URI}  ExpireAction
-    Run Keyword If  '${status}' == 'PASS'
-    ...  Write Attribute  ${HOST_WATCHDOG_URI}  ExpireAction  data=${data}
+    IF  '${status}' == 'PASS'
+        Write Attribute  ${HOST_WATCHDOG_URI}  ExpireAction  data=${data}
+    END
 
     ${int_milliseconds}=  Convert To Integer  ${milliseconds}
     ${data}=  Create Dictionary  data=${int_milliseconds}
@@ -245,16 +244,16 @@ Set Boot Progress Method
     # the only recourse users will have is that they may specify
     # -v boot_prog_method:Old to force old behavior on such builds.
 
-    Run Keyword If  '${boot_prog_method}' != '${EMPTY}'  Return From Keyword
+    IF  '${boot_prog_method}' != '${EMPTY}'  Return From Keyword
 
     ${new_status}  ${new_value}=  Run Keyword And Ignore Error
     ...  New Get Boot Progress
     # If the new style read fails, the method must necessarily be "Old".
-    Run Keyword If  '${new_status}' == 'PASS'
-    ...  Run Keywords
-    ...  Set Global Variable  ${boot_prog_method}  New  AND
-    ...  Rqpvars  boot_prog_method  AND
-    ...  Return From Keyword
+    IF  '${new_status}' == 'PASS'
+        Set Global Variable  ${boot_prog_method}  New
+        Rqpvars  boot_prog_method
+        Return From Keyword
+    END
 
     # Default method is "Old".
     Set Global Variable  ${boot_prog_method}  Old
@@ -277,7 +276,7 @@ Initiate Power On
     should be equal as strings      ${resp.status_code}     ${HTTP_OK}
 
     # Does caller want to wait for power on status?
-    Run Keyword If  '${wait}' == '${0}'  Return From Keyword
+    IF  '${wait}' == '${0}'  Return From Keyword
     Wait Until Keyword Succeeds  3 min  10 sec  Is Power On
 
 
@@ -368,8 +367,7 @@ Trigger Warm Reset
     ...  ${OPENBMC_BASE_URI}control/bmc0/action/warmReset  data=${data}
     Should Be Equal As Strings      ${resp.status_code}     ${HTTP_OK}
     ${session_active}=   Check If warmReset is Initiated
-    Run Keyword If   '${session_active}' == '${True}'
-    ...    Fail   msg=warm reset didn't occur
+    IF  '${session_active}' == '${True}'  Fail   msg=warm reset didn't occur
 
     Sleep   ${SYSTEM_SHUTDOWN_TIME}min
     Check If BMC Is Up
@@ -690,10 +688,11 @@ Set Auto Reboot Setting
     ...                    1=RetryAttempts
     ...                    0=Disabled
 
-    Run Keyword If  ${REDFISH_SUPPORT_TRANS_STATE} == ${1}
-    ...    Redfish Set Auto Reboot  ${rest_redfish_dict["${value}"]}
-    ...  ELSE
-    ...    Set Auto Reboot  ${value}
+    IF  ${REDFISH_SUPPORT_TRANS_STATE} == ${1}
+        Redfish Set Auto Reboot  ${rest_redfish_dict["${value}"]}
+    ELSE
+        Set Auto Reboot  ${value}
+    END
 
 Set Auto Reboot
     [Documentation]  Set the given auto reboot setting.
@@ -843,8 +842,9 @@ Redfish Set Boot Default
     ${data}=  Create Dictionary  BootSourceOverrideEnabled=${override_enabled}
     ...  BootSourceOverrideTarget=${override_target}
 
-    Run Keyword If  '${PLATFORM_ARCH_TYPE}' == 'x86'
-    ...  Set To Dictionary  ${data}  BootSourceOverrideMode  ${override_mode}
+    IF  '${PLATFORM_ARCH_TYPE}' == 'x86'
+        Set To Dictionary  ${data}  BootSourceOverrideMode  ${override_mode}
+    END
 
     ${payload}=  Create Dictionary  Boot=${data}
 
@@ -854,8 +854,9 @@ Redfish Set Boot Default
     ${resp}=  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}  Boot
     Should Be Equal As Strings  ${resp["BootSourceOverrideEnabled"]}  ${override_enabled}
     Should Be Equal As Strings  ${resp["BootSourceOverrideTarget"]}  ${override_target}
-    Run Keyword If  '${PLATFORM_ARCH_TYPE}' == 'x86'
-    ...  Should Be Equal As Strings  ${resp["BootSourceOverrideMode"]}  ${override_mode}
+    IF  '${PLATFORM_ARCH_TYPE}' == 'x86'
+        Should Be Equal As Strings  ${resp["BootSourceOverrideMode"]}  ${override_mode}
+    END
 
 
 # Redfish state keywords.
@@ -969,8 +970,9 @@ Is BMC Standby
     ...  host=Disabled
     ...  boot_progress=None
 
-    Run Keyword If  '${PLATFORM_ARCH_TYPE}' == 'x86'
-    ...  Set To Dictionary  ${standby_states}  boot_progress=NA
+    IF  '${PLATFORM_ARCH_TYPE}' == 'x86'
+        Set To Dictionary  ${standby_states}  boot_progress=NA
+    END
 
     Wait Until Keyword Succeeds  3 min  10 sec  Redfish Get States
 
