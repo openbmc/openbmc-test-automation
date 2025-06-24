@@ -198,8 +198,9 @@ Add DNS Servers And Verify
     Click Button  ${xpath_add_dns_ip_address_button}
     Input Text  ${xpath_input_static_dns}  ${dns_server}
     Click Button  ${xpath_add_button}
-    Run keyword if  '${expected_status}' != 'Valid format'
-    ...  Run keywords  Page Should Contain  ${expected_status}  AND  Return From Keyword
+    IF  '${expected_status}' != 'Valid format'
+        Page Should Contain  ${expected_status}  AND  Return From Keyword
+    END
 
     Wait Until Page Contains Element  ${xpath_add_dns_ip_address_button}  timeout=10sec
     Wait Until Page Contains  ${dns_server}  timeout=40sec

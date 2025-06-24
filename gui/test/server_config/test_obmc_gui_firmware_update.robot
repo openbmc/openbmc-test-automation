@@ -8,7 +8,7 @@ Resource        ../../../lib/logging_utils.robot
 Suite Setup     Launch Browser And Login OpenBMC GUI
 Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
-Test Teardown   Run Keyword If Test Failed  Re-Launch GUI on Failure
+Test Teardown   Re-Launch GUI on Failure
 
 *** Variables ***
 ${xpath_select_server_config}   //*[@id="nav__top-level"]/li[4]/button
@@ -99,6 +99,8 @@ Check No Error Log Exist
 
 Re-Launch GUI on Failure
     [Documentation]  On failure of test case, close and re-launch GUI.
+
+    Return From Keyword If  '${TEST_STATUS}' != 'FAIL'
 
     Logout And Close Browser
     Launch Browser And Login OpenBMC GUI
