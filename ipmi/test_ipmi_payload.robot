@@ -75,8 +75,7 @@ Test Get Payload Instance Info
     [Tags]  Test_Get_Payload_Instance_Info
 
     ${payload_status}=  Get Payload Activation Status
-    Run keyword If  '${payload_status}' == '01'
-    ...  Deactivate Payload
+    IF  '${payload_status}' == '01'  Deactivate Payload
 
     # First four bytes should be 00 if given instance is not activated.
     ${resp}=  Run IPMI Command
