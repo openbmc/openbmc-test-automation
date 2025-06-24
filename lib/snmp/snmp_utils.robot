@@ -34,13 +34,13 @@ Configure SNMP Manager On BMC
     ${resp}=  OpenBMC Post Request
     ...  ${SNMP_MANAGER_URI}action/Client  data=${data}
 
-    Run Keyword If  '${expected_result}' == 'error'
-    ...      Should Be Equal As Strings
-    ...      ${resp.status_code}  ${HTTP_BAD_REQUEST}
-    ...      msg=Allowing the configuration of an invalid SNMP.
-    ...  ELSE
-    ...      Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ...      msg=Not allowing the configuration of a valid SNMP.
+    IF  '${expected_result}' == 'error'
+        Should Be Equal As Strings  ${resp.status_code}  ${HTTP_BAD_REQUEST}
+        ...  msg=Allowing the configuration of an invalid SNMP.
+    ELSE
+        Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+        ...  msg=Not allowing the configuration of a valid SNMP.
+    END
 
 
 Get List Of SNMP Manager And Port Configured On BMC
@@ -95,9 +95,9 @@ Get SNMP Manager Object
     ${snmp_objs}=  Read Properties  ${SNMP_MANAGER_URI}enumerate
     FOR  ${snmp_obj}  IN   @{snmp_objs}
         ${obj}=  Set Variable  ${snmp_objs['${snmp_obj}']}
-        Run Keyword If
-        ...  '${obj['Address']}' == '${ip}' and '${obj['Port']}' == '${port}'
-        ...    Return From Keyword  ${snmp_obj}
+        IF  '${obj['Address']}' == '${ip}' and '${obj['Port']}' == '${port}'
+            Return From Keyword  ${snmp_obj}
+        END
     END
 
     Return From Keyword  ${EMPTY}
