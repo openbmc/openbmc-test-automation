@@ -175,10 +175,11 @@ Delete SNMP Manager Via Redfish
 
       # Delete the SNMP manager if the requested IP & ports are found
       # and mark is_snmp_found to true.
-      Run Keyword If  'snmp://${snmp_ip_port}' == '${snmp_mgr}'
-      ...  Run Keywords  Set Local Variable  ${is_snmp_found}  ${True}
-      ...  AND  Redfish.Delete  ${snmp_mgr_uri}
-      ...  AND  Exit For Loop
+      IF  'snmp://${snmp_ip_port}' == '${snmp_mgr}'
+          Set Local Variable  ${is_snmp_found}  ${True}
+          Redfish.Delete  ${snmp_mgr_uri}
+          Exit For Loop
+      END
     END
 
     Pass Execution If  ${is_snmp_found} == ${False}

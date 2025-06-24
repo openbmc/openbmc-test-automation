@@ -270,8 +270,9 @@ Get DCMI Sensor Reading
         ${sensor_value}=  Set Variable  ${sensor[1].split()[0].strip()}
         ${contains}=  Evaluate  """disabled""" in "${sensor_value}"
 
-        Run Keyword IF  "${contains}" != """True"""
-        ...  Set To Dictionary  ${sensor_value_dict}  ${sensor_key}  ${sensor_value}
+        IF  "${contains}" != """True"""
+            Set To Dictionary  ${sensor_value_dict}  ${sensor_key}  ${sensor_value}
+        END
     END
 
     RETURN  ${sensor_value_dict}
@@ -310,8 +311,9 @@ Get Temperature Reading From Redfish
         ${is_device_name_present}=  Evaluate  "DeviceName" in @{keys}
         IF  ${is_device_name_present}
             ${contains}=  Evaluate  "${member_id}" in """${data}[DeviceName]"""
-            Run Keyword IF  "${contains}" == "True"
-            ...  Set To Dictionary  ${redfish_value_dict}  ${data}[DeviceName]  ${reading}
+            IF  "${contains}" == "True"
+                Set To Dictionary  ${redfish_value_dict}  ${data}[DeviceName]  ${reading}
+            END
         ELSE
             ${data_source_id}=  Evaluate  ("${data}[DataSourceUri]").split('temperature_')
             # Example format:
@@ -469,8 +471,9 @@ Verify Power Supply Sensor Threshold
 
     @{redfish_readings}=  Redfish.Get Attribute  /redfish/v1/Chassis/${CHASSIS_ID}/Power  Voltages
     FOR  ${data}  IN  @{redfish_readings}
-        Run keyword if  '${data}[MemberId]' == 'ps0_input_voltage'
-        ...  Should Be Equal As Numbers  ${data['${redfish_threshold_id}']}  ${ipmi_threshold_reading}
+        IF  '${data}[MemberId]' == 'ps0_input_voltage'
+            Should Be Equal As Numbers  ${data['${redfish_threshold_id}']}  ${ipmi_threshold_reading}
+        END
     END
 
 
@@ -503,8 +506,9 @@ Get Available Sensors
 
         # Adding sensors to the list whose presence is detected.
         ${contains}=  Evaluate  "Presence detected" in "${line}" or "ok" in "${line}"
-        Run Keyword IF  "${contains}" == "True"
-        ...  Append To List  ${sensor_list}  ${sensor_name}
+        IF  "${contains}" == "True"
+            Append To List  ${sensor_list}  ${sensor_name}
+        END
     END
 
     # Example of output for ${sensor_list}
