@@ -10,14 +10,12 @@
   ```
 
 - This git repository has some redfish wrapper modules:
-
   - [redfish_plus.py](../lib/redfish_plus.py)
   - [bmc_redfish.py](../lib/bmc_redfish.py)
   - [bmc_redfish_utils.py](../lib/bmc_redfish_utils.py)
   - Redfish wrapper module features:
 
     For all Redfish REST requests (get, head, post, put, patch, delete):
-
     - Support for python-like strings for all arguments which allows callers to
       easily specify complex arguments such as lists or dictionaries.
 
@@ -69,7 +67,6 @@
     https://${OPENBMC_HOST},
     ${OPENBMC_USERNAME}, ${OPENBMC_PASSWORD}.
   - Many utility functions are available. Examples:;
-
     - get_properties
     - get_attributes
     - get_session_info

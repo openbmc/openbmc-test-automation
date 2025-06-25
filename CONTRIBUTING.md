@@ -26,7 +26,6 @@ work-in-progress, feel free to propose changes.
   question is the least bit complex, please write it in Python.
 
   See the following for support on writing most keywords in python.
-
   - [Quit Writing Ugly Robot Code](https://esalagea.wordpress.com/2014/11/24/robot-framework-quit-writing-ugly-robot-code-just-write-proper-python/)
   - [Robot Dos and Don'ts](https://www.slideshare.net/pekkaklarck/robot-framework-dos-and-donts)
 
@@ -39,7 +38,6 @@ work-in-progress, feel free to propose changes.
   two spaces. There may be some exceptions to this rule.
 
   Exceptions to two-space delimiter rule:
-
   - When you wish to line up resource, library or variable values:
     ```
     Library         Lib1
@@ -80,7 +78,6 @@ work-in-progress, feel free to propose changes.
 - When you define or call a Robot keyword, Robot pays no attention to spaces,
   underscores or case. However, our team will observe the following conventions
   in both our definitions and our calls:
-
   - Separate words with single spaces.
   - Capitalize the first character of each word.
   - Capitalize all characters in any word that is an acronym (e.g. JSON, BMC,
@@ -114,7 +111,6 @@ work-in-progress, feel free to propose changes.
   ```
 
 - Documentation strings:
-
   - Each documentation string should be phrased as an **English command**.
     Punctuate it correctly with the first word capitalized and a period at the
     end.
@@ -164,7 +160,6 @@ work-in-progress, feel free to propose changes.
     ```
 
 - Tags:
-
   - Create a tag for every test suite with a tag name that represents the suite
     name as follows:
 
@@ -186,7 +181,6 @@ work-in-progress, feel free to propose changes.
     ```
 
 - Description of argument(s):
-
   - As shown in the following example, if your keyword has any arguments,
     include a "**Description of argument(s)**" section. This effectively serves
     as the help text for anyone wanting to use or understand your keyword.
@@ -210,7 +204,6 @@ work-in-progress, feel free to propose changes.
     ```
 
     Additional rules for example text in descriptions:
-
     - Put parentheses around your examples. Leave one space prior to the left
       parenthesis.
     - Use "e.g." (which effectively means "for example") to set introduce your
@@ -241,7 +234,6 @@ work-in-progress, feel free to propose changes.
   ```
 
 - General variable naming conventions:
-
   - Variable names should be lower case with few exceptions (listed here):
     - Environment variables should be all upper case.
     - Variables intended to be set by Robot -v parameters may be all upper case.
@@ -322,7 +314,6 @@ work-in-progress, feel free to propose changes.
 
   For certain very commonly used kinds of variables, please observe these
   conventions in order to achieve consistency throughout the code.
-
   - hosts
 
     When a variable is intended to contain **either** an IP address **or** a
@@ -378,9 +369,7 @@ work-in-progress, feel free to propose changes.
     ```
 
   - Files and directories:
-
     - Files:
-
       - If your variable is to contain only the file's name, use a suffix of
         \_file_name.
 
@@ -414,7 +403,6 @@ work-in-progress, feel free to propose changes.
         rare case), use a suffix \_abs_file_path.
 
     - Directories:
-
       - Directory variables should follow the same conventions as file
         variables.
 
@@ -460,14 +448,12 @@ work-in-progress, feel free to propose changes.
   - Setup/Teardown keywords
 
     Use standardized names for setup and teardown keywords:
-
     - Suite Setup Execution
     - Suite Teardown Execution
     - Test Setup Execution
     - Test Teardown Execution
 
 - Traditional comments (i.e. using the hashtag style comments)
-
   - Please leave one space following the hashtag.
 
     ```
@@ -477,14 +463,12 @@ work-in-progress, feel free to propose changes.
     ```
 
   - Please use proper English punctuation:
-
     - Capitalize the first word in the sentence or phrase.
     - End sentences (or stand-alone phrases) with a period.
 
   - Do not keep commented-out code in your program. Instead, remove it entirely.
 
 - Robot Template Test Cases
-
   - Follow this format for Robot template test cases:
 
     Note: Documentation, Tags and Template lines are all required and should be
@@ -566,7 +550,6 @@ work-in-progress, feel free to propose changes.
   for anyone wanting to use or understand your function. Include real data
   examples wherever possible and applicable.
 - Function definitions:
-
   - Put each function parameter on its own line:
 
     ```
@@ -577,7 +560,6 @@ work-in-progress, feel free to propose changes.
 
 - Do not keep commented-out code in your program. Instead, remove it entirely.
 - When you define a python function, observe the following conventions:
-
   - Separate words with single underscores.
   - Use lower-case letters.
 
@@ -601,7 +583,6 @@ work-in-progress, feel free to propose changes.
   ```
 
 - Documentation strings:
-
   - Each documentation string should be phrased as an **English command**.
     Punctuate it correctly with the first word capitalized and a period at the
     end.
@@ -656,7 +637,6 @@ work-in-progress, feel free to propose changes.
     ```
 
 - General variable naming conventions:
-
   - Variable names should be lower case with few exceptions (listed here):
     - Environment variables should be all upper case.
   - Words within a variable name should be separated by underscores:
@@ -679,7 +659,6 @@ work-in-progress, feel free to propose changes.
 
   For certain very commonly used kinds of variables, please observe these
   conventions in order to achieve consistency throughout the code.
-
   - hosts
 
     When a variable is intended to contain **either** an IP address **or** a
@@ -735,9 +714,7 @@ work-in-progress, feel free to propose changes.
     ```
 
 - Files and directories:
-
   - Files:
-
     - If your variable is to contain only the file's name, use a suffix of
       \_file_name.
 
@@ -771,7 +748,6 @@ work-in-progress, feel free to propose changes.
       rare case), use a suffix \_abs_file_path.
 
   - Directories:
-
     - Directory variables should follow the same conventions as file variables.
 
     - If your variable is to contain only the directory's name, use a suffix of
@@ -814,7 +790,6 @@ work-in-progress, feel free to propose changes.
       ```
 
 - Traditional comments (i.e. using the hashtag style comments)
-
   - Please leave one space following the hashtag.
 
     ```
@@ -824,7 +799,6 @@ work-in-progress, feel free to propose changes.
     ```
 
   - Please use proper English punction:
-
     - Capitalize the first word in the sentence or phrase.
     - End sentences (or stand-alone phrases) with a period.
 
@@ -849,7 +823,6 @@ all follow a similar structure.
 See [python_pgm_template](templates/python_pgm_template) as an example.
 
 - Features:
-
   - Help text and arg parsing started for you.
   - Support for "stock" parameters like "quiet", "debug", "test_mode".
   - "exit_function" pre-defined.

@@ -25,7 +25,6 @@ Refer to
 Pre-requisite: A Power Linux system is required.
 
 - Obtain the SEL (System Error Log) parser tools:
-
   - Go to https://openpower.xyz/job/openpower/job/openpower-op-build/
   - Click the link for the BMC system of interest (e.g. witherspoon)
   - Click the "host_fw_debug.tar" link in order to download the tar file.
@@ -34,7 +33,6 @@ Pre-requisite: A Power Linux system is required.
   ```
   $ tar -xvf host_fw_debug.tar
   ```
-
   - Rename the untarred files with:
 
   ```
@@ -44,7 +42,6 @@ Pre-requisite: A Power Linux system is required.
   The files of interest are: eSEL.pl hbotStringFile hbicore.syms
 
 - The error log binary parser is also required:
-
   - Go to https://sourceforge.net/projects/linux-diag/files/ppc64-diag/
   - Download the latest release version of the source tar zipped.
   - Extract the tarball and compile. Refer to README in the source.
