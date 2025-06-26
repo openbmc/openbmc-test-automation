@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25c9088c_d6a89e1f",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-06-26T07:31:59Z",
+      "side": 1,
+      "message": "can you make something like this\ntest_ipv6_with_multi_short_notations",
+      "revId": "096107cccf0a896025e0368c0a93709e0cd92015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
