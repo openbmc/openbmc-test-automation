@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a6215e7e_f8c11790",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001924
+      },
+      "writtenOn": "2025-06-26T10:18:58Z",
+      "side": 1,
+      "message": "test_ipv6_with_multi_short_notations\nAbove variable name is too long. Instead changed to below variable name.\nipv6_multi_short_notation",
+      "parentUuid": "25c9088c_d6a89e1f",
+      "revId": "096107cccf0a896025e0368c0a93709e0cd92015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4373bff2_b2b78cce",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 2
