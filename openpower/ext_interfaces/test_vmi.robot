@@ -18,27 +18,29 @@ Test Tags         Vmi
 @{ReadOnly}       readonly_user           TestPwd123
 &{USERS}          Administrator=${ADMIN}  ReadOnly=${ReadOnly}
 
-${test_ipv4}              10.6.6.6
-${test_gateway}           10.6.6.1
-${test_netmask}           255.255.252.0
+${test_ipv4}                    10.6.6.6
+${test_gateway}                 10.6.6.1
+${test_netmask}                 255.255.252.0
 
-&{DHCP_ENABLED}           DHCPEnabled=${${True}}
-&{DHCP_DISABLED}          DHCPEnabled=${${False}}
+&{DHCP_ENABLED}                 DHCPEnabled=${${True}}
+&{DHCP_DISABLED}                DHCPEnabled=${${False}}
 
-&{ENABLE_DHCP}            DHCPv4=&{DHCP_ENABLED}
-&{DISABLE_DHCP}           DHCPv4=&{DHCP_DISABLED}
+&{ENABLE_DHCP}                  DHCPv4=&{DHCP_ENABLED}
+&{DISABLE_DHCP}                 DHCPv4=&{DHCP_DISABLED}
 
-${default}                0.0.0.0
-${default_ipv6addr}       ::
-${prefix_length}          ${64}
-${test_vmi_ipv6addr}      2001:db8:1111:2222:10:5:5:6
-${test_vmi_ipv6gateway}   2001:db8:1111:2222::1
-${ipv4_hexword_addr}      10.5.5.6:1A:1B:1C:1D:1E:1F
-${multicast_ipv6addr}     FF00
-${loopback_ipv6addr}      ::1
-${compressed_ipv4}        ::10.6.6.5
-${shortform_stand_ipv4}   0:0:0:0:0:0:10.5.5.6
-${standard_ipv4rep}       0000:0000:0000:0000:0000:0000:10.5.5.6
+${default}                      0.0.0.0
+${default_ipv6addr}             ::
+${prefix_length}                ${64}
+${test_vmi_ipv6addr}            2001:db8:1111:2222:10:5:5:6
+${test_vmi_ipv6gateway}         2001:db8:1111:2222::1
+${ipv4_hexword_addr}            10.5.5.6:1A:1B:1C:1D:1E:1F
+${multicast_ipv6addr}           FF00
+${loopback_ipv6addr}            ::1
+${compressed_ipv4}              ::10.6.6.5
+${shortform_stand_ipv4}         0:0:0:0:0:0:10.5.5.6
+${standard_ipv4rep}             0000:0000:0000:0000:0000:0000:10.5.5.6
+${ipv4_mapped_ipv6aadr}         00::FFFF:10.5.5.6
+${compressed_1hextet_ipv6aadr}  2001:DB8::1234:8:800:200c:417A
 
 
 *** Test Cases ***
@@ -785,10 +787,12 @@ Assign Valid Static IPv6 Address And Verify
     [Tags]  Assign_Valid_Static_IPv6_Address_And_Verify
     [Template]  Set VMI Valid Static IPv6 Address And Verify
 
-    # valid_vmi_ipv6addr     valid_prefix_length
-    ${compressed_ipv4}       64
-    ${shortform_stand_ipv4}  64
-    ${standard_ipv4rep}      64
+    # valid_vmi_ipv6addr                valid_prefix_length
+    ${compressed_ipv4}                  64
+    ${shortform_stand_ipv4}             64
+    ${standard_ipv4rep}                 64
+    ${ipv4_mapped_ipv6aadr}             64
+    ${compressed_1hextet_ipv6aadr}      64
 
 
 Enable VMI DHCPv6 When IPv4 Origin Is Static And Verify
