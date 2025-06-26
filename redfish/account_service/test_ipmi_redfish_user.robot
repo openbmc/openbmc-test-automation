@@ -18,11 +18,12 @@ ${valid_password2}      0penBmc2
 ${admin_level_priv}     4
 ${operator_level_priv}  3
 ${readonly_level_priv}  2
+${non_ipmi_user_count}  0
 ${ipmi_max_num_users}   ${15}
 ${max_num_users}        ${15}
 ${empty_name_pattern}   ^User Name\\s.*\\s:\\s$
 
-** Test Cases **
+*** Test Cases ***
 
 Create Admin Redfish User And Verify Login Via IPMI
     [Documentation]  Create user using redfish and verify via IPMI.
@@ -213,23 +214,23 @@ Delete User Via IPMI And Verify Using Redfish
     ...  Redfish.Login  ${username}  ${valid_password}
 
 
-Verify Failure To Exceed Max Number Of Users
-    [Documentation]  Verify failure attempting to exceed the max number of user accounts.
-    [Tags]  Verify_Failure_To_Exceed_Max_Number_Of_Users
+Verify Failure To Exceed Max Number Of Non IPMI Users
+    [Documentation]  Verify failure attempting to exceed the max number of
+    ...  non IPMI user accounts.
+    [Tags]  Verify_Failure_To_Exceed_Max_Number_Of_Non_IPMI_Users
     [Teardown]  Run Keywords  Test Teardown Execution
     ...         AND  Delete Users Via Redfish  ${username_list}
 
-    # Get existing user count.
-    ${resp}=  Redfish.Get  /redfish/v1/AccountService/Accounts/
-    ${current_user_count}=  Get From Dictionary  ${resp.dict}  Members@odata.count
+    # Get existing non IPMI user count.
+    ${existing_user_count}=  Get Count Of Non IPMI Users
 
     ${payload}=  Create Dictionary  Password=${valid_password}
     ...  RoleId=Administrator  Enabled=${True}
 
     @{username_list}=  Create List
 
-    # Create users to reach maximum users count (i.e. 15 users).
-    FOR  ${INDEX}  IN RANGE  ${current_user_count}  ${max_num_users}
+    # Create users to reach maximum non IPMI users count (i.e. 15 users).
+    FOR  ${INDEX}  IN RANGE  ${existing_user_count}  ${max_num_users}
       ${random_username}=  Generate Random String  8  [LETTERS]
       Set To Dictionary  ${payload}  UserName  ${random_username}
       Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
@@ -237,7 +238,7 @@ Verify Failure To Exceed Max Number Of Users
       Append To List  ${username_list}  /redfish/v1/AccountService/Accounts/${random_username}
     END
 
-    # Verify error while creating 16th user.
+    # Verify error while creating 16th non IPMI user.
     ${random_username}=  Generate Random String  8  [LETTERS]
     Set To Dictionary  ${payload}  UserName  ${random_username}
     Redfish.Post  ${REDFISH_ACCOUNTS_URI}  body=&{payload}
@@ -330,7 +331,6 @@ Find Free User Id
         ${access}=  Run IPMI Standard Command  channel getaccess ${CHANNEL_NUMBER} ${random_userid}
 
         ${name_line}=  Get Lines Containing String  ${access}  User Name
-        Log To Console  For ID ${random_userid}: ${name_line}
         ${is_empty}=  Run Keyword And Return Status
         ...  Should Match Regexp  ${name_line}  ${empty_name_pattern}
 
@@ -338,3 +338,30 @@ Find Free User Id
     END
     IF  '${jj}' == '299'  Fail  msg=A free user ID could not be found.
     RETURN  ${random_userid}
+
+
+Get All User Account Names
+    [Documentation]  Get all user account names in list format.
+
+    @{username_list}=  Create List
+    ${resp}=  Redfish.Get  /redfish/v1/AccountService/Accounts/
+    ${current_users}=  Get From Dictionary  ${resp.dict}  Members
+    FOR  ${user}  IN  @{current_users}
+        ${output}=  Split String  ${user["@odata.id"]}  /redfish/v1/AccountService/Accounts/
+        Append To List  ${username_list}  ${output[1]}
+    END
+    RETURN  ${username_list}
+
+
+Get Count Of Non IPMI Users
+    [Documentation]  Get the count of non IPMI users.
+
+    ${username_list}=  Get All User Account Names
+    FOR  ${user}  IN  @{username_list}
+        ${resp}=  Redfish.Get  /redfish/v1/AccountService/Accounts/${user}
+        @{account_type}=  Get From Dictionary  ${resp.dict}  AccountTypes
+        IF  "IPMI" not in ${account_type}
+            ${non_ipmi_user_count}=  Evaluate  ${non_ipmi_user_count} + 1
+         END
+    END
+    RETURN  ${non_ipmi_user_count}
