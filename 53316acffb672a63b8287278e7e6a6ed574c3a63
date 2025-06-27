@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "186987c6_075dc0a7",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-06-27T08:02:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "567ab718_41335e0f",
+      "range": {
+        "startLine": 232,
+        "startChar": 36,
+        "endLine": 232,
+        "endChar": 41
+      },
+      "revId": "53316acffb672a63b8287278e7e6a6ed574c3a63",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b0be07a_81f583ba",
@@ -41,6 +65,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fa22b6c_b4a9eda1",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-06-27T08:02:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b0be07a_81f583ba",
+      "revId": "53316acffb672a63b8287278e7e6a6ed574c3a63",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f347035f_ef1d2979",
@@ -54,6 +96,24 @@
       "writtenOn": "2025-06-27T07:57:15Z",
       "side": 1,
       "message": "Need to remove 353 line",
+      "revId": "53316acffb672a63b8287278e7e6a6ed574c3a63",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2df361b3_397c0975",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-06-27T08:02:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f347035f_ef1d2979",
       "revId": "53316acffb672a63b8287278e7e6a6ed574c3a63",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
