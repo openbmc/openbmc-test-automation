@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "567ab718_41335e0f",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2025-06-27T07:57:15Z",
+      "side": 1,
+      "message": "maximum users-\u003emaximum Non IPMI Users",
+      "range": {
+        "startLine": 232,
+        "startChar": 36,
+        "endLine": 232,
+        "endChar": 41
+      },
+      "revId": "53316acffb672a63b8287278e7e6a6ed574c3a63",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b0be07a_81f583ba",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2025-06-27T07:57:15Z",
+      "side": 1,
+      "message": "I think no need of logging to console",
+      "revId": "53316acffb672a63b8287278e7e6a6ed574c3a63",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f347035f_ef1d2979",
+        "filename": "redfish/account_service/test_ipmi_redfish_user.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2025-06-27T07:57:15Z",
+      "side": 1,
+      "message": "Need to remove 353 line",
+      "revId": "53316acffb672a63b8287278e7e6a6ed574c3a63",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
