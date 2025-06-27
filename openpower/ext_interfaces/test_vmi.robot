@@ -823,6 +823,19 @@ Configures Static IPv6 When DHCPv4 Is Enabled And Verify
     Verify VMI Network Interface Details  ${default}  DHCP  ${default}  ${default}
 
 
+Configure Static IPv6 When IPv4 Origin Is Static And Verify
+    [Documentation]  Configure static IPv6 address when IPv4 address origin is static and verify IPv4
+    ...  settings are intact and verify IPv6 origin is set to static and static IPv6 address is assigned.
+    [Tags]  Configure_Static_IPv6_When_IPv4_Origin_Is_Static_And_Verify
+    [Setup]  Set Static IPv4 Address To VMI And Verify  ${test_ipv4}  ${test_gateway}  ${test_netmask}
+    [Teardown]  Run keywords  Delete VMI IPv4 Address  AND  Test Teardown Execution
+
+    Set VMI Valid Static IPv6 Address And Verify  ${test_vmi_ipv6addr}  ${prefix_length}
+
+    # Check there is no impact on IPv4 settings, IPv4 address origin should be Static.
+    Verify VMI Network Interface Details  ${test_ipv4}  Static  ${test_gateway}  ${test_netmask}
+
+
 *** Keywords ***
 
 Suite Setup Execution
