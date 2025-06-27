@@ -132,6 +132,7 @@ Redfish Delete Session
     # SessionResp  : Response of creating an redfish login session
 
     Redfish.Delete  /redfish/v1/SessionService/Sessions/${session_info["SessionIDs"]}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
 
 
 Redfish Delete List Of Session
@@ -156,6 +157,7 @@ Redfish Delete List Of Session
 
     FOR  ${session_record}  IN  @{session_info_list}
       Redfish.Delete  /redfish/v1/SessionService/Sessions/${session_record["SessionIDs"]}
+      ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
     END
 
 
@@ -179,6 +181,7 @@ Delete All Redfish Sessions
 
     FOR  ${session}  IN  @{resp_list}
         Run Keyword And Ignore Error  Redfish.Delete  ${session}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
     END
 
 
