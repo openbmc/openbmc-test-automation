@@ -33,6 +33,7 @@ Pre-requisite: A Power Linux system is required.
   ```
   $ tar -xvf host_fw_debug.tar
   ```
+
   - Rename the untarred files with:
 
   ```
