@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "decf8ac4_9f0c67fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000235
+      },
+      "writtenOn": "2025-06-30T22:13:05Z",
+      "side": 1,
+      "message": "I am not familiar with this Robot test case, but this looks correct.  OpenBMC user management allows up to 15 IPMI user accounts, and up to 15 non-IPMI users.\nReference for 15 IPMI users: https://github.com/openbmc/docs/blob/master/architecture/user-management.md#recommended-implementation with implementation here: https://github.com/openbmc/phosphor-user-manager/blob/9ca8692dedc633c6d2857f0a8dda8a3437ed50f9/user_mgr.hpp#L44",
+      "revId": "40f6f9ac36bdbd37a25e4fc71e2700fa8c4a0171",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
