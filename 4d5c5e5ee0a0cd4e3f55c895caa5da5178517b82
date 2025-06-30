@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "048137fb_778f9a50",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-06-30T05:41:57Z",
+      "side": 1,
+      "message": "if \u0027${valid_status_codes}\u0027 !\u003d \u0027${HTTP_OK},${HTTP_NO_CONTENT}\u0027 then do you need this part Should Be Equal  ${ipv6_staticdef_gateway[0][\u0027Address\u0027]}    ${ipv6_gw_addr}\nThe above will be applicable when ${valid_status_codes}\u0027 \u003d\u003d \u0027${HTTP_OK},${HTTP_NO_CONTENT}\u0027\nand also as you are using the same template for verifying both valid \u0026 invlaid, it is beeter to use condition here as well.",
+      "revId": "4d5c5e5ee0a0cd4e3f55c895caa5da5178517b82",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
