@@ -15,7 +15,6 @@ Test Teardown    Test Teardown Execution
 
 ${account_lockout_duration}   ${30}
 ${account_lockout_threshold}  ${3}
-
 ${ssh_status}                 ${True}
 
 ** Test Cases **
@@ -278,8 +277,11 @@ Verify User Account Locked
     Run Keyword And Expect Error  *InvalidCredentialsError*
     ...  Redfish.Login  admin_user  TestPwd123
 
-    # Wait for lockout duration to expire and then verify that login works.
-    Sleep  ${account_lockout_duration}s
+    # Wait for lockout duration to expire and adding 5 sec delay to the account lock timeout
+    # ... then verify that login works.
+    ${total_wait_duartion}=  Evaluate  ${account_lockout_duration} + 5
+    Sleep  ${total_wait_duartion}s
+    
     Redfish.Login  admin_user  TestPwd123
 
     Redfish.Logout
