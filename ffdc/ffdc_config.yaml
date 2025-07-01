@@ -11,47 +11,46 @@
 #       and is listed in FILES to be collected.
 #
 
-# Commands and Files to collect for a given OpenBMC system.
-OPENBMC:
+# Commands and Files to collect for a given remote system.
+BMC:
     # Commands and File to take snapshot of linux based system.
-    # Filename is <OS>_general.txt, where <OS> is in [OPENBMC, RHEL, UBUNTU]
+    # Filename is <OS>_general.txt, where <OS> is in [BMC, RHEL, UBUNTU]
     GENERAL:
         COMMANDS:
             - "rm -rf /tmp/*BMC_* /tmp/PEL_* /tmp/pldm* /tmp/PLDM* /tmp/GUARD*
               /tmp/fan_* /tmp/DEVTREE /tmp/bmcweb_*"
             - 'echo "++++++++++ cat /etc/os-release ++++++++++" >>
-              /tmp/OPENBMC_general.txt'
-            - "cat /etc/os-release >> /tmp/OPENBMC_general.txt"
+              /tmp/BMC_general.txt'
+            - "cat /etc/os-release >> /tmp/BMC_general.txt"
             - 'echo -e "\n++++++++++ cat /etc/timestamp ++++++++++" >>
-              /tmp/OPENBMC_general.txt'
-            - "cat /etc/timestamp >> /tmp/OPENBMC_general.txt"
+              /tmp/BMC_general.txt'
+            - "cat /etc/timestamp >> /tmp/BMC_general.txt"
             - 'echo -e "\n++++++++++ uname -a ++++++++++" >>
-              /tmp/OPENBMC_general.txt'
-            - "uname -a >> /tmp/OPENBMC_general.txt"
+              /tmp/BMC_general.txt'
+            - "uname -a >> /tmp/BMC_general.txt"
             - 'echo -e "\n++++++++++ cat /etc/timestamp ++++++++++" >>
-              /tmp/OPENBMC_general.txt'
-            - "cat /etc/timestamp >> /tmp/OPENBMC_general.txt"
+              /tmp/BMC_general.txt'
+            - "cat /etc/timestamp >> /tmp/BMC_general.txt"
             - 'echo -e "\n++++++++++ uptime;cat /proc/uptime ++++++++++" >>
-              /tmp/OPENBMC_general.txt'
-            - "uptime >> /tmp/OPENBMC_general.txt"
-            - "cat /proc/uptime >> /tmp/OPENBMC_general.txt"
-            - 'echo -e "\n++++++++++ df -hT ++++++++++" >>
-              /tmp/OPENBMC_general.txt'
-            - "df -hT >> /tmp/OPENBMC_general.txt"
+              /tmp/BMC_general.txt'
+            - "uptime >> /tmp/BMC_general.txt"
+            - "cat /proc/uptime >> /tmp/BMC_general.txt"
+            - 'echo -e "\n++++++++++ df -hT ++++++++++" >> /tmp/BMC_general.txt'
+            - "df -hT >> /tmp/BMC_general.txt"
             - 'echo -e "\n++++++++++ date;/sbin/hwclock --show ++++++++++" >>
-              /tmp/OPENBMC_general.txt'
-            - "date >> /tmp/OPENBMC_general.txt"
-            - "/sbin/hwclock --show >> /tmp/OPENBMC_general.txt"
-            - "/usr/bin/timedatectl >> /tmp/OPENBMC_general.txt"
+              /tmp/BMC_general.txt'
+            - "date >> /tmp/BMC_general.txt"
+            - "/sbin/hwclock --show >> /tmp/BMC_general.txt"
+            - "/usr/bin/timedatectl >> /tmp/BMC_general.txt"
             - 'echo -e "\n++++++++++ /usr/bin/obmcutil state ++++++++++" >>
-              /tmp/OPENBMC_general.txt'
-            - "/usr/bin/obmcutil state >> /tmp/OPENBMC_general.txt"
+              /tmp/BMC_general.txt'
+            - "/usr/bin/obmcutil state >> /tmp/BMC_general.txt"
         FILES:
-            - "/tmp/OPENBMC_general.txt"
+            - "/tmp/BMC_general.txt"
         PROTOCOL:
             - "SSH"
 
-    OPENBMC_LOGS:
+    BMC_LOGS:
         COMMANDS:
             - "cat /sys/class/watchdog/watchdog1/bootstatus
               >/tmp/BMC_flash_side.txt"
@@ -129,7 +128,7 @@ OPENBMC:
         PROTOCOL:
             - "SCP"
 
-    # URLs and Files for OPENBMC redfish
+    # URLs and Files for BMC redfish
     # URLs and Files are one-to-one corresponding.
     # File contains the data returned from 'redfishtool GET URL'
     REDFISH_LOGS:
