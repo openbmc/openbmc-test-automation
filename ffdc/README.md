@@ -16,7 +16,7 @@ Options:
   -c, --config TEXT     YAML Configuration file for log collection.  [default:
                         <local path>/openbmc-test-automation/ffdc/ffdc_config.yaml]
   -l, --location TEXT   Location to save logs  [default: /tmp]
-  -t, --type TEXT       OS type of the remote (targeting) host. OPENBMC, RHEL,
+  -t, --type TEXT       OS type of the remote (targeting) host. BMC, RHEL,
                         UBUNTU, SLES, AIX
   -rp, --protocol TEXT  Select protocol to communicate with remote host.
                         [default: ALL]

@@ -76,7 +76,7 @@ def ffdc_robot_script_cli(**kwargs):
         dict_of_parms = {}
         # When method is invoked with no parm,
         # use robot variables
-        # OPENBMC_HOST, OPENBMC_USERNAME, OPENBMC_PASSWORD, OPENBMC (type)
+        # OPENBMC_HOST, OPENBMC_USERNAME, OPENBMC_PASSWORD, BMC (type)
         dict_of_parms["OPENBMC_HOST"] = robotBuildIn().get_variable_value(
             "${OPENBMC_HOST}", default=None
         )
@@ -95,7 +95,7 @@ def ffdc_robot_script_cli(**kwargs):
         dict_of_parms["IPMI_PORT"] = robotBuildIn().get_variable_value(
             "${IPMI_PORT}", default=623
         )
-        dict_of_parms["REMOTE_TYPE"] = "OPENBMC"
+        dict_of_parms["REMOTE_TYPE"] = "BMC"
 
         run_ffdc_collector(dict_of_parms)
 
@@ -104,7 +104,7 @@ def ffdc_robot_script_cli(**kwargs):
             # When method is invoked with user defined dictionary,
             # dictionary keys has the following format
             # xx_HOST; xx_USERNAME, xx_PASSWORD, xx_TYPE
-            # where xx is one of OPENBMC, OS, or os_type LINUX/UBUNTU/AIX
+            # where xx is one of BMC, OS, or os_type LINUX/UBUNTU/AIX
             run_ffdc_collector(**kwargs)
 
 
@@ -218,7 +218,7 @@ def run_ffdc_collector(dict_of_parm):
 
         # If original ffdc request is for BMC,
         #  attempt to also collect ffdc for HOST_OS if possible.
-        if remote_type.upper() == "OPENBMC":
+        if remote_type.upper() == "BMC":
             os_host = robotBuildIn().get_variable_value(
                 "${OS_HOST}", default=None
             )

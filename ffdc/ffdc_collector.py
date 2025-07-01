@@ -325,10 +325,10 @@ class ffdc_collector:
         Setting logger with __name__ will add the trace
         Example:
 
-            INFO:ffdc_collector:    System Type: OPENBMC
+            INFO:ffdc_collector:    System Type: BMC
 
         Currently, set to empty purposely to log as
-            System Type: OPENBMC
+            System Type: BMC
 
         Parameters:
             log_level_attr (str):   The log level for the logger
@@ -1183,7 +1183,7 @@ class ffdc_collector:
         Returns:
             str: IPMI LAN service executed output.
         """
-        if self.target_type == "OPENBMC":
+        if self.target_type == "BMC":
             ipmi_parm = (
                 "ipmitool -I lanplus -C 17  -U "
                 + self.username
