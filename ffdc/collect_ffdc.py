@@ -53,7 +53,7 @@ from ffdc_collector import ffdc_collector  # NOQA
     "-t",
     "--type",
     help=(
-        "OS type of the remote (targeting) host. OPENBMC, RHEL, UBUNTU,"
+        "OS type of the remote (targeting) host. BMC, RHEL, UBUNTU,"
         " SLES, AIX"
     ),
 )

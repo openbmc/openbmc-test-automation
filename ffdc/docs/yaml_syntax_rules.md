@@ -39,8 +39,8 @@ Example)
 Generic syntax usage:
 
 ```
-OPENBMC:
-    OPENBMC_LOGS:
+BMC:
+    BMC_LOGS:
         COMMANDS:
             - 'peltool -l >/tmp/PEL_logs_list.json'
         FILES:
@@ -78,7 +78,7 @@ OPENBMC:
 Example of using plugin in YAML (Refer plugin documentation)
 
 ```
-OPENBMC:
+BMC:
     REDFISH_LOGS:
         COMMANDS
             - plugin:
