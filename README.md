@@ -323,7 +323,6 @@ packages which will help to invoke tests through tox (Note that tox version
   "https://linux.die.net/man/1/ldapsearch". Microsoft ADS: refer to
   https://searchwindowsserver.techtarget.com/definition/Microsoft-Active-Directory-Domain-Services-AD-DS
 
-  Note: Currently, LDAP test automation for Redfish API is in progress. The
   format to invoke LDAP test is as follows:
 
   ```
