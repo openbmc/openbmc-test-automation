@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "102f38ab_fd9f0142",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-02T06:30:19Z",
+      "side": 1,
+      "message": "Abandoning as \nPushing a new patch https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/81581",
+      "revId": "155442963ae1d3210e8289132ffa2156a71fadd1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
