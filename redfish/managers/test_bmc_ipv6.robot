@@ -16,14 +16,15 @@ Suite Setup    Suite Setup Execution
 Test Tags     BMC_IPv6
 
 *** Variables ***
-${test_ipv6_addr}           2001:db8:3333:4444:5555:6666:7777:8888
-${test_ipv6_invalid_addr}   2001:db8:3333:4444:5555:6666:7777:JJKK
-${test_ipv6_addr1}          2001:db8:3333:4444:5555:6666:7777:9999
+${test_ipv6_addr}            2001:db8:3333:4444:5555:6666:7777:8888
+${test_ipv6_invalid_addr}    2001:db8:3333:4444:5555:6666:7777:JJKK
+${test_ipv6_addr1}           2001:db8:3333:4444:5555:6666:7777:9999
 
 # Valid prefix length is a integer ranges from 1 to 128.
-${test_prefix_length}       64
-${ipv6_gw_addr}             2002:903:15F:32:9:3:32:1
-${prefix_length_def}        None
+${test_prefix_length}        64
+${ipv6_gw_addr}              2002:903:15F:32:9:3:32:1
+${prefix_length_def}         None
+${invalid_staticv6_gateway}  9.41.164.1
 
 *** Test Cases ***
 
@@ -138,26 +139,19 @@ Configure Invalid Static IPv6 And Verify
     #invalid_ipv6         prefix length           valid_status_code
     ${ipv4_hexword_addr}  ${test_prefix_length}   ${HTTP_BAD_REQUEST}
 
-Configure Static Default Gateway And Verify
-    [Documentation]  Configure static default gateway and verify.
-    [Tags]  Configure_Static_Default_Gateway_And_Verify
 
-    # Prefix Length is passed as None.
-    IF   '${prefix_length_def}' == 'None'
-        ${ipv6address}=  Create Dictionary  Address=${ipv6_gw_addr}
-    ELSE
-        ${ipv6address}=  Create Dictionary  Address=${ipv6_gw_addr}  Prefix Length=${prefix_length_def}
-    END
-    ${patch_list}=  Create List  ${ipv6address}
-    ${data}=  Create Dictionary  IPv6StaticDefaultGateways=${patch_list}
+Configure IPv6 Static Default Gateway And Verify
+    [Documentation]  Configure IPv6 static default gateway and verify.
+    [Tags]  Configure_IPv6_Static_Default_Gateway_And_Verify
+    [Template]  Configure IPv6 Static Default Gateway On BMC
 
-    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
-    ...  body=${data}  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
+    # Valid Scenarios
+    # static_def_gw              prefix length           valid_status_code
+    ${ipv6_gw_addr}             ${prefix_length_def}    ${HTTP_OK}
 
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
-    ${ipv6_staticdef_gateway}=  Get From Dictionary  ${resp.dict}  IPv6StaticDefaultGateways
-
-    Should Be Equal  ${ipv6_staticdef_gateway[0]['Address']}    ${ipv6_gw_addr}
+    # Invalid Scenarios
+    # invalid_static_def_gw      prefix length           valid_status_code
+    ${invalid_staticv6_gateway}  ${test_prefix_length}   ${HTTP_BAD_REQUEST}
 
 *** Keywords ***
 
@@ -563,3 +557,60 @@ Set And Verify DHCPv6 Property
 
     Should Be Equal  '${dhcpv6_verify['OperatingMode']}'  '${dhcpv6_operating_mode}'
 
+
+Configure IPv6 Static Default Gateway On BMC
+    [Documentation]  Configure IPv6 static default gateway on BMC.
+    [Arguments]  ${ipv6_gw_addr}  ${prefix_length_def}  ${valid_status_codes}=${HTTP_OK}
+
+    # Description of argument(s):
+    # ipv6_gw_addr          IPv6 Static Default Gateway address to be configured.
+    # prefix_len_def        Prefix length value (Range 1 to 128).
+    # valid_status_codes    Expected return code from patch operation
+    #                       (e.g. "200", "204".)
+
+    # Prefix Length is passed as None.
+    IF   '${prefix_length_def}' == 'None'
+        ${ipv6_gw}=  Create Dictionary  Address=${ipv6_gw_addr}
+    ELSE
+        ${ipv6_gw}=  Create Dictionary  Address=${ipv6_gw_addr}  Prefix Length=${prefix_length_def}
+    END
+
+    ${ipv6_static_defgw}=  Get IPv6 Static Default Gateway
+
+    ${num_entries}=  Get Length  ${ipv6_static_defgw}
+
+    ${patch_list}=  Create List
+    ${empty_dict}=  Create Dictionary
+
+    FOR  ${INDEX}  IN RANGE  0  ${num_entries}
+      Append To List  ${patch_list}  ${empty_dict}
+    END
+
+    ${valid_status_codes}=  Set Variable If  '${valid_status_codes}' == '${HTTP_OK}'
+    ...  ${HTTP_OK},${HTTP_NO_CONTENT}
+    ...  ${valid_status_codes}
+
+    ${patch_list}=  Create List  ${ipv6_gw}
+    ${data}=  Create Dictionary  IPv6StaticDefaultGateways=${patch_list}
+
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body=${data}  valid_status_codes=[${valid_status_codes}]
+
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ${ipv6_staticdef_gateway}=  Get From Dictionary  ${resp.dict}  IPv6StaticDefaultGateways
+
+    IF  '${valid_status_codes}' != '${HTTP_OK},${HTTP_NO_CONTENT}'
+        Should Not Be Equal  ${ipv6_staticdef_gateway[0]['Address']}    ${ipv6_gw_addr}
+    ELSE
+        Should Be Equal  ${ipv6_staticdef_gateway[0]['Address']}    ${ipv6_gw_addr}
+    END
+
+
+Get IPv6 Static Default Gateway
+    [Documentation]  Get IPv6 static default gateway.
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    @{ipv6_static_defgw_configurations}=  Get From Dictionary  ${resp.dict}  IPv6StaticDefaultGateways
+    RETURN  @{ipv6_static_defgw_configurations}
