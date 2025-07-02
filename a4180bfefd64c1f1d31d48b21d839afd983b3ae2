@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a53e7386_6d6c8745",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-02T13:07:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8a03ad3_56c09e49",
+      "revId": "a4180bfefd64c1f1d31d48b21d839afd983b3ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67d7daba_8a439778",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-07-02T10:00:58Z",
       "side": 1,
       "message": "same as above",
+      "revId": "a4180bfefd64c1f1d31d48b21d839afd983b3ae2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29182704_1c701fd3",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-02T13:07:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67d7daba_8a439778",
       "revId": "a4180bfefd64c1f1d31d48b21d839afd983b3ae2",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
