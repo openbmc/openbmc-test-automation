@@ -53,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49cf3187_c63b3c86",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-04T11:30:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b7aba2a_ad865887",
+      "revId": "29deda71b9bfdb8df50fba598e1859a8bc515fde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85ad7e5e_c8b30263",
@@ -76,6 +94,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a2d542d_742b0e08",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-04T11:30:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85ad7e5e_c8b30263",
+      "range": {
+        "startLine": 576,
+        "startChar": 6,
+        "endLine": 576,
+        "endChar": 23
+      },
+      "revId": "29deda71b9bfdb8df50fba598e1859a8bc515fde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea41a5ec_e09d9178",
@@ -89,6 +131,30 @@
       "writtenOn": "2025-07-04T10:25:08Z",
       "side": 1,
       "message": "Remove this check and add ${HTTP_OK},${HTTP_NO_CONTENT} as the default in line 561. If the caller wants to override it then that is upto the caller",
+      "range": {
+        "startLine": 587,
+        "startChar": 4,
+        "endLine": 589,
+        "endChar": 30
+      },
+      "revId": "29deda71b9bfdb8df50fba598e1859a8bc515fde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f80dcf7_599c6c13",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-04T11:30:45Z",
+      "side": 1,
+      "message": "Keeping as is as 204 no content check needs to be present. Similar check is done in all the other cases too.",
+      "parentUuid": "ea41a5ec_e09d9178",
       "range": {
         "startLine": 587,
         "startChar": 4,
@@ -153,6 +219,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "4fec1e0e_9a18c144",
+      "revId": "29deda71b9bfdb8df50fba598e1859a8bc515fde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "884d04dd_5c29c4c7",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-04T11:30:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e77909b6_dd05d2d2",
+      "range": {
+        "startLine": 591,
+        "startChar": 2,
+        "endLine": 597,
+        "endChar": 71
+      },
       "revId": "29deda71b9bfdb8df50fba598e1859a8bc515fde",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
