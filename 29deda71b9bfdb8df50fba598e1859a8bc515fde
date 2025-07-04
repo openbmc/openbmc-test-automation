@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fec1e0e_9a18c144",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-07-04T05:53:52Z",
+      "side": 1,
+      "message": "this and line 611 are same?\nCan be reused?",
+      "revId": "29deda71b9bfdb8df50fba598e1859a8bc515fde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bde1db04_745bb5af",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-07-04T05:53:52Z",
+      "side": 1,
+      "message": "Will it be always 1st in the list?\nIf not, list should contain..\n\nIPv6static defaultgatways is a list.. do this keyword handle if multiple gateways are sent from user?",
+      "revId": "29deda71b9bfdb8df50fba598e1859a8bc515fde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
