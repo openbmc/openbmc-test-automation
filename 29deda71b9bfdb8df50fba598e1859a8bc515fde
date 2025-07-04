@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a245a35d_785d7fa4",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-04T11:06:52Z",
+      "side": 1,
+      "message": "Keeping as is as I am using the same keyword for valid and invalid use cases.",
+      "parentUuid": "42877210_fcdfae5e",
+      "revId": "29deda71b9bfdb8df50fba598e1859a8bc515fde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8b7aba2a_ad865887",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 3
@@ -121,6 +139,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d407e4ae_846dc288",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-04T11:06:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4fec1e0e_9a18c144",
+      "revId": "29deda71b9bfdb8df50fba598e1859a8bc515fde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bde1db04_745bb5af",
@@ -134,6 +170,24 @@
       "writtenOn": "2025-07-04T05:53:52Z",
       "side": 1,
       "message": "Will it be always 1st in the list?\nIf not, list should contain..\n\nIPv6static defaultgatways is a list.. do this keyword handle if multiple gateways are sent from user?",
+      "revId": "29deda71b9bfdb8df50fba598e1859a8bc515fde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6264614a_dae1fe01",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-04T11:06:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bde1db04_745bb5af",
       "revId": "29deda71b9bfdb8df50fba598e1859a8bc515fde",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
