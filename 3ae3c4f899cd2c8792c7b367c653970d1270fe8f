@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc965e65_a190ef1d",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-07-07T06:13:36Z",
+      "side": 1,
+      "message": "The way you check this will change if valid_status_codes is changed to a list.",
+      "revId": "3ae3c4f899cd2c8792c7b367c653970d1270fe8f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

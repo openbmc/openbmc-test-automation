@@ -71,6 +71,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ee7c86d_7d41dd48",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-07-07T06:13:36Z",
+      "side": 1,
+      "message": "Fix it in line #560 too",
+      "parentUuid": "49cf3187_c63b3c86",
+      "revId": "29deda71b9bfdb8df50fba598e1859a8bc515fde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85ad7e5e_c8b30263",
@@ -155,6 +173,30 @@
       "side": 1,
       "message": "Keeping as is as 204 no content check needs to be present. Similar check is done in all the other cases too.",
       "parentUuid": "ea41a5ec_e09d9178",
+      "range": {
+        "startLine": 587,
+        "startChar": 4,
+        "endLine": 589,
+        "endChar": 30
+      },
+      "revId": "29deda71b9bfdb8df50fba598e1859a8bc515fde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6138724f_6f831bb6",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-07-07T06:13:36Z",
+      "side": 1,
+      "message": "I didnt understand this. My question is why we cant add HTTP_NO_CONTENT as the default along with HTTP_OK in 561.\nAlso valid_status_codes should be a list not a string as coded here.",
+      "parentUuid": "7f80dcf7_599c6c13",
       "range": {
         "startLine": 587,
         "startChar": 4,
