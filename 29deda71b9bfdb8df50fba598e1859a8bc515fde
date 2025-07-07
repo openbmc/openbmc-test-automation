@@ -209,6 +209,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2fd854b_534f12ab",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-07T14:03:49Z",
+      "side": 1,
+      "message": "As discussed leaving as is.",
+      "parentUuid": "6138724f_6f831bb6",
+      "range": {
+        "startLine": 587,
+        "startChar": 4,
+        "endLine": 589,
+        "endChar": 30
+      },
+      "revId": "29deda71b9bfdb8df50fba598e1859a8bc515fde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4fec1e0e_9a18c144",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 3
