@@ -233,6 +233,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13c06588_054cbadb",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-07-08T06:07:37Z",
+      "side": 1,
+      "message": "Changing it to the other way as I suggested would make it logically correct but add more complexity to the code. This code is coded in the same pattern throughout. So suggested to leave it as is.",
+      "parentUuid": "b2fd854b_534f12ab",
+      "range": {
+        "startLine": 587,
+        "startChar": 4,
+        "endLine": 589,
+        "endChar": 30
+      },
+      "revId": "29deda71b9bfdb8df50fba598e1859a8bc515fde",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4fec1e0e_9a18c144",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 3
