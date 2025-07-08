@@ -836,6 +836,20 @@ Configure Static IPv6 When IPv4 Origin Is Static And Verify
     Verify VMI Network Interface Details  ${test_ipv4}  Static  ${test_gateway}  ${test_netmask}
 
 
+Enable VMI DHCPv6 Property And Check Persistency On BMC Reboot
+    [Documentation]  Enable VMI DHCPv6 property and verify its persistency on
+    ...  BMC reboot.
+    [Tags]  Enable_VMI_DHCPv6_Property_And_Check_Persistency_On_BMC_Reboot
+
+    Set VMI DHCPv6 Property  Enabled
+
+    # Reboot BMC and verify persistency.
+    OBMC Reboot (off)
+
+    # Verify IPv6 address origin is set to DHCP.
+    Verify VMI IPv6 Address  DHCPv6
+
+
 *** Keywords ***
 
 Suite Setup Execution
