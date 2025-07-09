@@ -125,11 +125,13 @@ Enable DHCPv6 Property On BMC And Verify
 
     Set And Verify DHCPv6 Property  Enabled
 
+
 Disable DHCPv6 Property On BMC And Verify
     [Documentation]  Disable DHCPv6 property on BMC and verify.
     [Tags]  Disable_DHCPv6_Property_On_BMC_And_Verify
 
     Set And Verify DHCPv6 Property  Disabled
+
 
 Configure Invalid Static IPv6 And Verify
     [Documentation]  Configure invalid static IPv6 and verify.
@@ -143,11 +145,19 @@ Configure Invalid Static IPv6 And Verify
 Configure IPv6 Static Default Gateway And Verify
     [Documentation]  Configure IPv6 static default gateway and verify.
     [Tags]  Configure_IPv6_Static_Default_Gateway_And_Verify
-    [Template]  Configure IPv6 Static Default Gateway On BMC
+    [Template]  Configure or Modify IPv6 Static Default Gateway On BMC
 
     # static_def_gw              prefix length           valid_status_code
     ${ipv6_gw_addr}              ${prefix_length_def}    ${HTTP_OK}
     ${invalid_staticv6_gateway}  ${test_prefix_length}   ${HTTP_BAD_REQUEST}
+
+
+Modify Static Default Gateway And Verify
+    [Documentation]  Modify static default gateway and verify.
+    [Tags]  Modify_Static_Default_Gateway_And_Verify
+    [Setup]  Configure or Modify IPv6 Static Default Gateway On BMC  ${ipv6_gw_addr}  ${prefix_length_def}
+
+    Configure or Modify IPv6 Static Default Gateway On BMC  ${test_ipv6_addr1}  ${prefix_length_def}  ${HTTP_OK}  ${ipv6_gw_addr}
 
 
 *** Keywords ***
@@ -555,61 +565,6 @@ Set And Verify DHCPv6 Property
     Should Be Equal  '${dhcpv6_verify['OperatingMode']}'  '${dhcpv6_operating_mode}'
 
 
-Configure IPv6 Static Default Gateway On BMC
-    [Documentation]  Configure IPv6 static default gateway on BMC.
-    [Arguments]  ${ipv6_gw_addr}  ${prefix_length_def}
-    ...  ${valid_status_codes}=${HTTP_OK}
-
-    # Description of argument(s):
-    # ipv6_gw_addr          IPv6 Static Default Gateway address to be configured.
-    # prefix_len_def        Prefix length value (Range 1 to 128).
-    # valid_status_codes    Expected return code from patch operation
-    #                       (e.g. "200", "204".)
-
-    # Prefix Length is passed as None.
-    IF   '${prefix_length_def}' == '${None}'
-        ${ipv6_gw}=  Create Dictionary  Address=${ipv6_gw_addr}
-    ELSE
-        ${ipv6_gw}=  Create Dictionary  Address=${ipv6_gw_addr}  Prefix Length=${prefix_length_def}
-    END
-
-    ${ipv6_static_def_gw}=  Get IPv6 Static Default Gateway
-
-    ${num_entries}=  Get Length  ${ipv6_static_def_gw}
-
-    ${patch_list}=  Create List
-    ${empty_dict}=  Create Dictionary
-
-    FOR  ${INDEX}  IN RANGE  0  ${num_entries}
-      Append To List  ${patch_list}  ${empty_dict}
-    END
-
-    ${valid_status_codes}=  Set Variable If  '${valid_status_codes}' == '${HTTP_OK}'
-    ...  ${HTTP_OK},${HTTP_NO_CONTENT}
-    ...  ${valid_status_codes}
-
-    Append To List  ${patch_list}  ${ipv6_gw}
-    ${data}=  Create Dictionary  IPv6StaticDefaultGateways=${patch_list}
-
-    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
-    ...  body=${data}  valid_status_codes=[${valid_status_codes}]
-
-    # Verify the added static default gateway is present in Redfish Get Output.
-    ${ipv6_staticdef_gateway}=  Get IPv6 Static Default Gateway
-
-    ${ipv6_static_def_gw_list}=  Create List
-    FOR  ${ipv6_staticdef_gateway}  IN  @{ipv6_staticdef_gateway}
-        ${value}=    Get From Dictionary    ${ipv6_staticdef_gateway}    Address
-        Append To List  ${ipv6_static_def_gw_list}  ${value}
-    END
-
-    IF  '${valid_status_codes}' != '${HTTP_OK},${HTTP_NO_CONTENT}'
-        Should Not Contain  ${ipv6_static_def_gw_list}  ${ipv6_gw_addr}
-    ELSE
-        Should Contain  ${ipv6_static_def_gw_list}  ${ipv6_gw_addr}
-    END
-
-
 Get IPv6 Static Default Gateway
     [Documentation]  Get IPv6 static default gateway.
 
@@ -618,3 +573,72 @@ Get IPv6 Static Default Gateway
 
     @{ipv6_static_defgw_configurations}=  Get From Dictionary  ${resp.dict}  IPv6StaticDefaultGateways
     RETURN  @{ipv6_static_defgw_configurations}
+
+
+Configure or Modify IPv6 Static Default Gateway On BMC
+    [Documentation]  Configure or modify IPv6 static default gateway on BMC.
+    [Arguments]  ${ipv6_gw_addr}  ${prefix_length_def}
+    ...  ${valid_status_codes}=${HTTP_OK}  ${old_static_def_gw}='${None}'
+
+    # Description of argument(s):
+    # ipv6_gw_addr          IPv6 Static Default Gateway address to be configured.
+    # prefix_len_def        Prefix length value (Range 1 to 128).
+    # valid_status_codes    Expected return code from patch operation (e.g. "200", "204".)
+    # old_static_def_gw     Old static default gateway address to be replaced.
+
+    # Prefix Length is passed as None.
+    IF  '${prefix_length_def}' == '${None}'
+        ${ipv6_gw}=  Create Dictionary  Address=${ipv6_gw_addr}
+    ELSE
+        ${ipv6_gw}=  Create Dictionary  Address=${ipv6_gw_addr}  Prefix Length=${prefix_length_def}
+    END
+
+    ${ipv6_static_def_gw_config}=  Get IPv6 Static Default Gateway
+
+    ${num_entries}=  Get Length  ${ipv6_static_def_gw_config}
+
+    ${patch_list}=  Create List
+    ${empty_dict}=  Create Dictionary
+    ${modify}=  Set Variable  ${False}
+
+    FOR  ${ipv6_static_def_gw}  IN  @{ipv6_static_def_gw_config}
+        ${old_static_gw_exists}=  Run Keyword And Return Status  Should Not Be Equal  ${old_static_def_gw}  ${None}
+        ${old_static_def_gw_equals}=  Run Keyword And Return Status  Should Be Equal  ${ipv6_static_def_gw['Address']}  ${old_static_def_gw}
+        IF  ${old_static_gw_exists} and ${old_static_def_gw_equals}
+            Append To List  ${patch_list}  ${ipv6_gw}
+            ${modify}=  Set Variable  ${True}
+        ELSE
+            Append To List  ${patch_list}  ${empty_dict}
+        END
+    END
+
+    ${valid_status_codes}=  Set Variable If  '${valid_status_codes}' == '${HTTP_OK}'
+    ...  ${HTTP_OK},${HTTP_NO_CONTENT}
+    ...  ${valid_status_codes}
+
+    IF  ${modify} == ${False}
+        Append To List  ${patch_list}  ${ipv6_gw}
+    END
+
+    ${data}=  Create Dictionary  IPv6StaticDefaultGateways=${patch_list}
+
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body=${data}  valid_status_codes=[${valid_status_codes}]
+
+    # Verify the added static default gateway is present in Redfish Get Output.
+    ${ipv6_staticdef_gw_config}=  Get IPv6 Static Default Gateway
+
+    ${ipv6_static_def_gw_list}=  Create List
+    FOR  ${ipv6_staticdef_gateway}  IN  @{ipv6_staticdef_gw_config}
+        ${value}=    Get From Dictionary    ${ipv6_staticdef_gateway}    Address
+        Append To List  ${ipv6_static_def_gw_list}  ${value}
+    END
+
+    IF  '${valid_status_codes}' != '${HTTP_OK},${HTTP_NO_CONTENT}'
+        Should Not Contain  ${ipv6_static_def_gw_list}  ${ipv6_gw_addr}
+    ELSE
+        Should Contain  ${ipv6_static_def_gw_list}  ${ipv6_gw_addr}
+        IF  ${modify} == ${True}
+            Should Not Contain  ${ipv6_static_def_gw_list}  ${old_static_def_gw}
+        END
+    END
