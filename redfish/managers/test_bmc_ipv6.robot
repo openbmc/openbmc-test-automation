@@ -125,11 +125,13 @@ Enable DHCPv6 Property On BMC And Verify
 
     Set And Verify DHCPv6 Property  Enabled
 
+
 Disable DHCPv6 Property On BMC And Verify
     [Documentation]  Disable DHCPv6 property on BMC and verify.
     [Tags]  Disable_DHCPv6_Property_On_BMC_And_Verify
 
     Set And Verify DHCPv6 Property  Disabled
+
 
 Configure Invalid Static IPv6 And Verify
     [Documentation]  Configure invalid static IPv6 and verify.
@@ -148,6 +150,15 @@ Configure IPv6 Static Default Gateway And Verify
     # static_def_gw              prefix length           valid_status_code
     ${ipv6_gw_addr}              ${prefix_length_def}    ${HTTP_OK}
     ${invalid_staticv6_gateway}  ${test_prefix_length}   ${HTTP_BAD_REQUEST}
+
+
+Modify Static Default Gateway And Verify
+    [Documentation]  Modify static default gateway and verify.
+    [Tags]  Modify_Static_Default_Gateway_And_Verify
+
+    Configure IPv6 Static Default Gateway On BMC  ${ipv6_gw_addr}  ${prefix_length_def}
+
+    Modify Static Default Gateway  ${ipv6_gw_addr}  ${test_ipv6_addr1}  ${prefix_length_def}
 
 
 *** Keywords ***
@@ -618,3 +629,57 @@ Get IPv6 Static Default Gateway
 
     @{ipv6_static_defgw_configurations}=  Get From Dictionary  ${resp.dict}  IPv6StaticDefaultGateways
     RETURN  @{ipv6_static_defgw_configurations}
+
+
+Modify Static Default Gateway
+    [Documentation]  Modify and verify IPv6 address of BMC.
+    [Arguments]  ${ipv6_gw_addr}  ${new_static_def_gw}  ${prefix_length}
+    ...  ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED}]
+
+    # Description of argument(s):
+    # ipv6_gw_addr          IPv6 static default gateway address to be replaced (e.g. "2001:AABB:CCDD::AAFF").
+    # new_static_def_gw     New static default gateway address to be configured.
+    # prefix length         Prefix length value (Range 1 to 128).
+    # valid_status_codes    Expected return code from patch operation
+    #                       (e.g. "200", "204").
+
+    ${empty_dict}=  Create Dictionary
+    ${patch_list}=  Create List
+    # Prefix Length is passed as None.
+    IF   '${prefix_length_def}' == '${None}'
+        ${modified_ipv6_gw_addripv6_data}=  Create Dictionary  Address=${new_static_def_gw}
+    ELSE
+        ${modified_ipv6_gw_addripv6_data}=  Create Dictionary  Address=${new_static_def_gw}  Prefix Length=${prefix_length_def}
+    END
+
+    @{ipv6_static_def_gw_list}=  Get IPv6 Static Default Gateway
+
+    FOR  ${ipv6_static_def_gw}  IN  @{ipv6_static_def_gw_list}
+      IF  '${ipv6_static_def_gw['Address']}' == '${ipv6_gw_addr}'
+          Append To List  ${patch_list}  ${modified_ipv6_gw_addripv6_data}
+      ELSE
+          Append To List  ${patch_list}  ${empty_dict}
+      END
+    END
+
+    # Modify the IPv6 address only if given IPv6 static default gateway is found.
+    ${ip_static_def_gw_found}=  Run Keyword And Return Status  List Should Contain Value
+    ...  ${patch_list}  ${modified_ipv6_gw_addripv6_data}  msg=${ipv6_gw_addr} does not exist on BMC
+    Pass Execution If  ${ip_static_def_gw_found} == ${False}  ${ipv6_gw_addr} does not exist on BMC
+
+    ${data}=  Create Dictionary  IPv6StaticDefaultGateways=${patch_list}
+
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body=&{data}  valid_status_codes=${valid_status_codes}
+
+    ${ipv6_staticdef_gateway}=  Get IPv6 Static Default Gateway
+
+    ${ipv6_static_def_gw_list}=  Create List
+    FOR  ${ipv6_staticdef_gateway}  IN  @{ipv6_staticdef_gateway}
+        ${value}=    Get From Dictionary    ${ipv6_staticdef_gateway}    Address
+        Append To List  ${ipv6_static_def_gw_list}  ${value}
+    END
+
+    Should Contain  ${ipv6_static_def_gw_list}  ${new_static_def_gw}
+    # Verify if old static default gateway address is erased.
+    Should Not Contain  ${ipv6_static_def_gw_list}  ${ipv6_gw_addr}
