@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe43ab89_371defb7",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-07-10T10:48:57Z",
+      "side": 1,
+      "message": "move it to test setup",
+      "revId": "12a140fc5c69c4a40d858d06a00c100a9f018534",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d58d0258_820bcfe9",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-07-10T10:48:57Z",
+      "side": 1,
+      "message": "there is lot of redundant code is there beween this keyword \u0026 `Configure IPv6 Static Default Gateway On BMC` See if you can resuse the code \u0026 make it compact.",
+      "revId": "12a140fc5c69c4a40d858d06a00c100a9f018534",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
