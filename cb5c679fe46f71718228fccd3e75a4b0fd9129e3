@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b64476c_1c34431b",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-10T09:58:29Z",
+      "side": 1,
+      "message": "This keyword is used for deleting the ipv6 address and not the static default gateway.\nThis is a part of the plan, in the next commit will write a keyword to delete the static default gateway.",
+      "parentUuid": "4820edc1_6c0d4019",
+      "revId": "cb5c679fe46f71718228fccd3e75a4b0fd9129e3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4e70b98f_0c138559",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 2
@@ -31,6 +49,30 @@
       "writtenOn": "2025-07-10T09:13:04Z",
       "side": 1,
       "message": "not required",
+      "range": {
+        "startLine": 159,
+        "startChar": 89,
+        "endLine": 159,
+        "endChar": 98
+      },
+      "revId": "cb5c679fe46f71718228fccd3e75a4b0fd9129e3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b44161d_dc992c0a",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-10T09:58:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e70b98f_0c138559",
       "range": {
         "startLine": 159,
         "startChar": 89,
