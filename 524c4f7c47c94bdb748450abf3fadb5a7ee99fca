@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0881959_90d186c7",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-14T14:02:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57c89450_1ccc7259",
+      "revId": "524c4f7c47c94bdb748450abf3fadb5a7ee99fca",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d30bcd9c_87e6e05a",
@@ -54,6 +72,54 @@
       "writtenOn": "2025-07-14T13:31:27Z",
       "side": 1,
       "message": "Pls give meaningful name",
+      "range": {
+        "startLine": 605,
+        "startChar": 10,
+        "endLine": 605,
+        "endChar": 36
+      },
+      "revId": "524c4f7c47c94bdb748450abf3fadb5a7ee99fca",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "777a98fb_245e1f26",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-14T14:02:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d30bcd9c_87e6e05a",
+      "range": {
+        "startLine": 605,
+        "startChar": 71,
+        "endLine": 605,
+        "endChar": 75
+      },
+      "revId": "524c4f7c47c94bdb748450abf3fadb5a7ee99fca",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b41b48d_466e5bfe",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-14T14:02:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8632528_a29f37ff",
       "range": {
         "startLine": 605,
         "startChar": 10,
