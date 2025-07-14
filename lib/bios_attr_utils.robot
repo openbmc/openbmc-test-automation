@@ -46,7 +46,7 @@ Set BIOS Attribute Value And Verify
         Redfish.Patch  ${BIOS_ATTR_SETTINGS_URI}  body={"Attributes":{"${attr_handle}": ${value}}}
         ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
-        Run Keyword If  '${verify}' == '${True}'  Verify BIOS Attribute  ${attr_handle}  ${attr_val}
+        IF  '${verify}' == '${True}'  Verify BIOS Attribute  ${attr_handle}  ${attr_val}
     END
 
 
