@@ -24,14 +24,13 @@ Collect VPD And Hardware Status
     ${system_properties}=  Redfish_Utils.Get Properties  ${SYSTEM_BASE_URI}
     ${system_memory_info}=  Redfish_Utils.Enumerate Request  ${SYSTEM_BASE_URI}/Memory
     ${system_processors_info}=  Redfish_Utils.Enumerate Request  ${SYSTEM_BASE_URI}/Processors
-
-    # Python module:  get_endpoint_path_list(resource_path, end_point_prefix)
-    ${thermal_uri}=  redfish_utils.Get Endpoint Path List  ${REDFISH_CHASSIS_URI}  Thermal
-    ${system_fans_info}=  Redfish_Utils.Get Attribute  ${thermal_uri[0]}  Fans
+    ${system_fans_info}=  Redfish_Utils.Enumerate Request
+    ...  ${REDFISH_CHASSIS_URI}/Chassis/ThermalSubsystem/Fans
 
     ${collected_values}=  gen_robot_print.Sprint Vars
     ...  system_properties  system_memory_info  system_processors_info  system_fans_info
     Log To Console  ${\n}${collected_values}${\n}
+
 
 Run VPD Tool
     [Documentation]  Run vpd-tool -i.
