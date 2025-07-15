@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd8ce70c_6bf893c8",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-07-15T07:45:51Z",
+      "side": 1,
+      "message": "As discussed can you Pls break Modify \u0026 configure 2 sperate keywords.\nPls call configure gw in modify gw function.",
+      "revId": "f70f0b8dcbabd4bd5f84ec7edf81b951aa3ba595",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
