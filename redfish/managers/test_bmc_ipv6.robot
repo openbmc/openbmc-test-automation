@@ -160,6 +160,14 @@ Modify Static Default Gateway And Verify
     Modify IPv6 Static Default Gateway On BMC  ${test_ipv6_addr1}  ${prefix_length_def}  ${HTTP_OK}  ${ipv6_gw_addr}
 
 
+Delete IPv6 Static Default Gateway And Verify
+    [Documentation]  Delete IPv6 static default gateway and verify.
+    [Tags]  Delete_IPv6_Static_Default_Gateway_And_Verify
+    [Setup]  Configure IPv6 Static Default Gateway On BMC  ${ipv6_gw_addr}  ${prefix_length_def}
+
+    Delete IPv6 Static Default Gateway  ${ipv6_gw_addr}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -680,3 +688,42 @@ Modify Static Default Gateway
     # Verify if old static default gateway address is erased.
     Should Not Contain  ${ipv6_static_def_gw_list}  ${ipv6_gw_addr}
 
+Delete IPv6 Static Default Gateway
+    [Documentation]  Delete IPv6 static default gateway on BMC.
+    [Arguments]  ${ipv6_gw_addr}
+    ...          ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
+
+    # Description of argument(s):
+    # ipv6_gw_addr          IPv6 Static Default Gateway address to be deleted.
+    # valid_status_codes    Expected return code from patch operation
+    #                     (e.g. "200").
+
+    ${patch_list}=  Create List
+
+    @{ipv6_static_defgw_configurations}=  Get IPv6 Static Default Gateway
+    FOR  ${ipv6_static_def_gateway}  IN  ${ipv6_static_defgw_configurations}
+        IF  '${ipv6_staticdef_gateway[0]['Address']}' == '${ipv6_gw_addr}'
+            Append To List  ${patch_list}  ${null}
+        ELSE
+            Append To List  ${patch_list}  ${empty_dict}
+        END
+    END
+
+    ${defgw_found}=  Run Keyword And Return Status  List Should Contain Value
+    ...  ${patch_list}  ${null}  msg=${ipv6_gw_addr} does not exist on BMC
+    Pass Execution If  ${defgw_found} == ${False}  ${ipv6_addr} does not exist on BMC
+
+    # Run patch command only if given IP is found on BMC
+    ${data}=  Create Dictionary  IPv6StaticDefaultGateways=${patch_list}
+
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+    ...  valid_status_codes=${valid_status_codes}
+
+    ${data}=  Create Dictionary  IPv6StaticDefaultGateways=${patch_list}
+
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ${ipv6_staticdef_gateway}=  Get From Dictionary  ${resp.dict}  IPv6StaticDefaultGateways
+
+    @{ipv6_static_defgw_configurations}=  Get IPv6 Static Default Gateway
+    Should Not Contain Match  ${ipv6_static_defgw_configurations}  ${ipv6_gw_addr}
+    ...  msg=IPv6 Static default gateway does not exist.
