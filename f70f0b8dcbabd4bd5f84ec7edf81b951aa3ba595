@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57ad1a0c_9e56d7b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-16T03:53:51Z",
+      "side": 1,
+      "message": "Reverting back the changes and keeping 2 separate functions for modify and configure.",
+      "revId": "f70f0b8dcbabd4bd5f84ec7edf81b951aa3ba595",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd8ce70c_6bf893c8",
