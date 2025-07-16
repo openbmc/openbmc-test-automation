@@ -160,6 +160,14 @@ Modify Static Default Gateway And Verify
     Modify IPv6 Static Default Gateway On BMC  ${test_ipv6_addr1}  ${prefix_length_def}  ${HTTP_OK}  ${ipv6_gw_addr}
 
 
+Delete IPv6 Static Default Gateway And Verify
+    [Documentation]  Delete IPv6 static default gateway and verify.
+    [Tags]  Delete_IPv6_Static_Default_Gateway_And_Verify
+    [Setup]  Configure IPv6 Static Default Gateway On BMC  ${ipv6_gw_addr}  ${prefix_length_def}
+
+    Delete IPv6 Static Default Gateway  ${ipv6_gw_addr}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -574,6 +582,7 @@ Get IPv6 Static Default Gateway
     @{ipv6_static_defgw_configurations}=  Get From Dictionary  ${resp.dict}  IPv6StaticDefaultGateways
     RETURN  @{ipv6_static_defgw_configurations}
 
+
 Configure IPv6 Static Default Gateway On BMC
     [Documentation]  Configure IPv6 static default gateway on BMC.
     [Arguments]  ${ipv6_gw_addr}  ${prefix_length_def}
@@ -627,6 +636,7 @@ Configure IPv6 Static Default Gateway On BMC
         Should Contain  ${ipv6_static_def_gw_list}  ${ipv6_gw_addr}
     END
 
+
 Modify Static Default Gateway
     [Documentation]  Modify and verify IPv6 address of BMC.
     [Arguments]  ${ipv6_gw_addr}  ${new_static_def_gw}  ${prefix_length}
@@ -672,7 +682,7 @@ Modify Static Default Gateway
 
     ${ipv6_static_def_gw_list}=  Create List
     FOR  ${ipv6_staticdef_gateway}  IN  @{ipv6_staticdef_gateway}
-        ${value}=    Get From Dictionary    ${ipv6_staticdef_gateway}    Address
+        ${value}=  Get From Dictionary  ${ipv6_staticdef_gateway}  Address
         Append To List  ${ipv6_static_def_gw_list}  ${value}
     END
 
@@ -680,3 +690,48 @@ Modify Static Default Gateway
     # Verify if old static default gateway address is erased.
     Should Not Contain  ${ipv6_static_def_gw_list}  ${ipv6_gw_addr}
 
+
+Delete IPv6 Static Default Gateway
+    [Documentation]  Delete IPv6 static default gateway on BMC.
+    [Arguments]  ${ipv6_gw_addr}
+    ...          ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
+
+    # Description of argument(s):
+    # ipv6_gw_addr          IPv6 Static Default Gateway address to be deleted.
+    # valid_status_codes    Expected return code from patch operation
+    #                       (e.g. "200").
+
+    ${patch_list}=  Create List
+    ${empty_dict}=  Create Dictionary
+
+    ${ipv6_static_def_gw_list}=  Create List
+    @{ipv6_static_defgw_configurations}=  Get IPv6 Static Default Gateway
+
+    FOR  ${ipv6_staticdef_gateway}  IN  @{ipv6_static_defgw_configurations}
+        ${value}=  Get From Dictionary  ${ipv6_staticdef_gateway}  Address
+        Append To List  ${ipv6_static_def_gw_list}  ${value}
+    END
+
+    ${defgw_found}=  Run Keyword And Return Status  List Should Contain Value
+    ...  ${ipv6_static_def_gw_list}  ${ipv6_gw_addr}  msg=${ipv6_gw_addr} does not exist on BMC
+    Skip If  ${defgw_found} == ${False}  ${ipv6_gw_addr} does not exist on BMC
+
+    FOR  ${ipv6_static_def_gw}  IN  @{ipv6_static_defgw_configurations}
+        IF  '${ipv6_static_def_gw['Address']}' == '${ipv6_gw_addr}'
+            Append To List  ${patch_list}  ${null}
+        ELSE
+            Append To List  ${patch_list}  ${empty_dict}
+      END
+    END
+
+    # Run patch command only if given IP is found on BMC.
+    ${data}=  Create Dictionary  IPv6StaticDefaultGateways=${patch_list}
+
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+    ...  valid_status_codes=${valid_status_codes}
+
+    ${data}=  Create Dictionary  IPv6StaticDefaultGateways=${patch_list}
+
+    @{ipv6_static_defgw_configurations}=  Get IPv6 Static Default Gateway
+    Should Not Contain Match  ${ipv6_static_defgw_configurations}  ${ipv6_gw_addr}
+    ...  msg=IPv6 Static default gateway does not exist.
