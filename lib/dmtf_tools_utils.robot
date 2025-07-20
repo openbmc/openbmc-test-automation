@@ -18,6 +18,7 @@ Download DMTF Tool
     # Description of arguments:
     # rsv_dir_path    Directory path for rsv tool (e.g. "Redfish-Service-Validator").
     # rsv_github_url  Github URL link(e.g "https://github.com/DMTF/Redfish-Service-Validator").
+    # branch_name     Name of the branch.
 
     ${cmd_buf}  Catenate  rm -rf ${rsv_dir_path} ;
     ...  git clone --branch ${branch_name} ${rsv_github_url} ${rsv_dir_path}
@@ -42,6 +43,9 @@ Redfish Service Validator Result
     [Documentation]  Check tool output for errors.
     [Arguments]      ${tool_output}
 
+    # Description of arguments:
+    # tool_output    DMTF tool output.
+
     # Example:
     # Validation has failed: 9 problems found
     # Service could not be started: RetriesExhaustedError()
@@ -52,6 +56,9 @@ Redfish Service Validator Result
 Redfish JsonSchema ResponseValidator Result
     [Documentation]  Check tool output for errors.
     [Arguments]      ${tool_output}
+
+    # Description of arguments:
+    # tool_output    DMTF tool output.
 
     # Example:
     # 0 errors

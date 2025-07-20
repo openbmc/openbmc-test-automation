@@ -87,6 +87,8 @@ Set BMC Date And Verify
 Set NTP state
     [Documentation]  Set NTP service inactive.
     [Arguments]  ${state}
+    # Description of argument(s):
+    # state      NTP protocol state (True/False).
 
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'ProtocolEnabled': ${state}}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]

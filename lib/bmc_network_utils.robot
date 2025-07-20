@@ -351,7 +351,10 @@ Configure Hostname
     [Arguments]  ${hostname}  ${status_code}=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Description of argument(s):
-    # hostname  A hostname value which is to be configured on BMC.
+    # hostname      A hostname value which is to be configured on BMC.
+    # status_codes  Expected return code from patch operation
+    #               (e.g. "200").  See prolog of rest_request
+    #               method in redfish_plus.py for details.
 
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
@@ -426,7 +429,10 @@ CLI Get and Verify Name Servers
     ...  ${valid_status_codes}=${HTTP_OK}
 
     # Description of Argument(s):
-    # static_name_servers:   Address for static name server
+    # static_name_servers    Address for static name server
+    # valid_status_codes     Expected return code from patch operation
+    #                        (e.g. "200").  See prolog of rest_request
+    #                        method in redfish_plus.py for details.
 
     ${cli_nameservers}=  CLI Get Nameservers
     ${cmd_status}=  Run Keyword And Return Status
@@ -594,8 +600,8 @@ Create VLAN
     [Arguments]  ${id}  ${interface}=eth0  ${expected_result}=valid
 
     # Description of argument(s):
-    # id  The VLAN ID (e.g. '53').
-    # interface  The physical interface for the VLAN(e.g. 'eth0').
+    # id               The VLAN ID (e.g. '53').
+    # interface        The physical interface for the VLAN(e.g. 'eth0').
     # expected_result  Expected status of VLAN configuration.
 
     @{data_vlan_id}=  Create List  ${interface}  ${id}
@@ -706,8 +712,8 @@ Get Valid Channel Number
     [Documentation]  Get Valid Channel Number.
     [Arguments]  ${valid_channel_number_interface_names}
 
-    #Description of argument(s):
-    #valid_channel_number_interface_names   Contains channel names in dict.
+    # Description of argument(s):
+    # valid_channel_number_interface_names   Contains channel names in dict.
 
     &{valid_channel_number_interface_name}=  Create Dictionary
 
@@ -775,6 +781,9 @@ Get Current Channel Name List
 Get Active Ethernet Channel List
     [Documentation]  Get Available channels from channel_config.json file and return as list.
     [Arguments]  ${current_channel}=${0}
+
+    # Description of Arguments
+    # ${current_channel}        Current channel number.
 
     ${valid_channel_number_interface_names}=  Get Channel Number For All Interface
 
@@ -904,6 +913,9 @@ Configure Static Name Servers
     # Description of the argument(s):
     # static_name_servers  A list of static name server IPs to be
     #                      configured on the BMC.
+    # valid_status_codes  Expected return code from patch operation
+    #                     (e.g. "200").  See prolog of rest_request
+    #                     method in redfish_plus.py for details.
 
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}

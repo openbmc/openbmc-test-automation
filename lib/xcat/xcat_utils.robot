@@ -44,9 +44,9 @@ Get List Of BMC Nodes
     [Arguments]  ${node_cfg_file_path}=${NODE_CFG_FILE_PATH}
 
     # Get the list of BMC nodes to be added.
-    # This keyword expects file having list of BMC nodes
-    # as an input.
-    # File should have IP addresses of BMC nodes.
+    # node_cfg_file_path    This keyword expects file having list of BMC nodes
+    #                       as an input.
+    #                       File should have IP addresses of BMC nodes.
 
     OperatingSystem.File Should Exist  ${node_cfg_file_path}  msg=cfg file missing.
     File Should Not Be Empty  ${node_cfg_file_path}  msg=Empty config file.
@@ -54,17 +54,21 @@ Get List Of BMC Nodes
     ${bmc_list}=  OperatingSystem.Get File  ${node_cfg_file_path}
     RETURN  ${bmc_list}
 
+
 Add Nodes To XCAT
     [Documentation]  Add nodes to XCAT configuration.
     [Arguments]  ${node}  ${username}=${OPENBMC_USERNAME}
     ...          ${password}=${OPENBMC_PASSWORD}
 
     # Description of the argument(s):
-    # node  Name of the node to be added.
+    # node         Name of the node to be added.
+    # username     User name to login.
+    # password     Password to login.
 
     ${cmd_buf}=  Catenate  ${XCAT_DIR_PATH}/mkdef ${node} bmc=${node}
     ...  bmcusername=${username} bmcpassword=${password} mgt=openbmc groups=all
     Execute Command  ${cmd_buf}
+
 
 Validate Added Node
     [Documentation]  Validate added node.
