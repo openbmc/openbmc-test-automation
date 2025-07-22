@@ -64,11 +64,11 @@ Verify IPv6 Default Gateway On BMC
 
     # If gateway IP is empty it will not have route entry.
 
-    Run Keyword If  '${gateway_ip}' == '0:0:0:0:0:0:0:0'
-    ...      Pass Execution  Gateway IP is not configured.
-    ...  ELSE
-    ...      Should Contain  ${route_info}  ${gateway_ip}
-    ...      msg=Gateway IP address not matching
+    IF  '${gateway_ip}' == '0:0:0:0:0:0:0:0'
+        Pass Execution  Gateway IP is not configured.
+    ELSE
+        Should Contain  ${route_info}  ${gateway_ip}  msg=Gateway IP address not matching
+    END
 
 
 Get BMC IPv6 Route Info
