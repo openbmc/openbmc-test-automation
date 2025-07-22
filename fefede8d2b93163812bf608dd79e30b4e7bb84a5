@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "711b39d5_04e50843",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-22T12:27:13Z",
+      "side": 1,
+      "message": "We cannot use break because the patch_list should have the same number of elements as the ipv6_static_defgw_configurations.",
+      "parentUuid": "c53e17fa_e515bba0",
+      "range": {
+        "startLine": 705,
+        "startChar": 1,
+        "endLine": 712,
+        "endChar": 1
+      },
+      "revId": "fefede8d2b93163812bf608dd79e30b4e7bb84a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b04808e5_2c454929",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2025-07-21T12:27:04Z",
       "side": 1,
       "message": "This will show the test case as passed which is a misnomer as we didnt attempt the test at all. Please use Skip if -- It should show that the test is skipped in the report.",
+      "range": {
+        "startLine": 715,
+        "startChar": 2,
+        "endLine": 715,
+        "endChar": 85
+      },
+      "revId": "fefede8d2b93163812bf608dd79e30b4e7bb84a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06049dbe_92227f72",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-22T12:27:13Z",
+      "side": 1,
+      "message": "When IP is not found all other keywords are considering it as PASS and using Pass Execution If hence following the same.\nKeywords for reference:\nModify IPv6 Address, Delete IPv6 Address",
+      "parentUuid": "b04808e5_2c454929",
       "range": {
         "startLine": 715,
         "startChar": 2,
