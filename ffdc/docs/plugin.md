@@ -220,7 +220,6 @@ Example:
 
 ```
     - plugin:
-    - plugin:
       - plugin_name: plugin.ssh_execution
       - plugin_function: ssh_execute_cmd
       - plugin_args:
