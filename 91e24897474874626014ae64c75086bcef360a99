@@ -69,6 +69,47 @@
       "parentUuid": "b0577a54_05117fb7",
       "revId": "91e24897474874626014ae64c75086bcef360a99",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0c7cbb0_35f27a9e",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-07-23T10:59:54Z",
+      "side": 1,
+      "message": "Though it is found throughout for someone looking at the test a comment would make it easy to understand",
+      "parentUuid": "2b45d199_e306627e",
+      "revId": "91e24897474874626014ae64c75086bcef360a99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fa43d8f_66d42dd8",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-07-23T10:59:54Z",
+      "side": 1,
+      "message": "Take the decision before building the patch_list. Build the list only if you are going to use it in the test.",
+      "range": {
+        "startLine": 717,
+        "startChar": 4,
+        "endLine": 717,
+        "endChar": 21
+      },
+      "revId": "91e24897474874626014ae64c75086bcef360a99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

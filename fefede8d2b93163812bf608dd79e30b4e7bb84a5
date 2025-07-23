@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "89ea4184_90750767",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-07-23T10:59:54Z",
+      "side": 1,
+      "message": "How will a person know whether the delete operation was successfully performed when they see the test as passed? PASS should indicate that test was able to delete the gateway and verify it. If we didnt even found a valid case to do it then it should say we skipped.",
+      "parentUuid": "e704dc21_4eb741e0",
+      "range": {
+        "startLine": 715,
+        "startChar": 2,
+        "endLine": 715,
+        "endChar": 85
+      },
+      "revId": "fefede8d2b93163812bf608dd79e30b4e7bb84a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff55a833_2f4ca368",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 3
