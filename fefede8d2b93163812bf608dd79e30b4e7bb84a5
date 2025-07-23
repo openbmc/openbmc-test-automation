@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e704dc21_4eb741e0",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-23T08:45:21Z",
+      "side": 1,
+      "message": "Yes, that is the intended behaviour, when there is no default gateway found we are passing the test case.\nWhen the default gateway is found in the addresses then it deletes it else it simply passes the test case with a message that the ipv6 gateway does not exist on the BMC.",
+      "parentUuid": "3e34595f_a7b4456e",
+      "range": {
+        "startLine": 715,
+        "startChar": 2,
+        "endLine": 715,
+        "endChar": 85
+      },
+      "revId": "fefede8d2b93163812bf608dd79e30b4e7bb84a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff55a833_2f4ca368",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 3

@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b436e6a_2c9044a9",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-23T08:45:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5e11cd4_53a0af73",
+      "revId": "91e24897474874626014ae64c75086bcef360a99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0577a54_05117fb7",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-07-23T07:36:06Z",
       "side": 1,
       "message": "Pls add a comment about what you are trying to do here. How null vs empty dict matters",
+      "revId": "91e24897474874626014ae64c75086bcef360a99",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b45d199_e306627e",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-23T08:45:21Z",
+      "side": 1,
+      "message": "Not required as the same logic is used throughout the code to configure, modify, delete the IPv6 addresses, IPv6 static default gateways.\nAs explained if the address list is [a,b,c,d]\nTo delete c and retain the others the patch list needs to be [{},{},${null},{}]",
+      "parentUuid": "b0577a54_05117fb7",
       "revId": "91e24897474874626014ae64c75086bcef360a99",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
