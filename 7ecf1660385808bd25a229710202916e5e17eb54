@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8c1c09d_924c18b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-07-23T05:44:12Z",
+      "side": 1,
+      "message": "IPv6",
+      "revId": "7ecf1660385808bd25a229710202916e5e17eb54",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
