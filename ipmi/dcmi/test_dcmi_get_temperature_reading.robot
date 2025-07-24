@@ -25,6 +25,7 @@ ${client_config_file_path}      ${EXEC_DIR}/${config_file_name}
 &{dcmi_sensor_uri}
 
 *** Test Cases ***
+
 Verify Get Temperature Reading Command For Inlet Temperature Sensor
     [Documentation]  Verify IPMI Get Temperature Reading command for inlet temperature sensor.
     [Tags]  Verify_Get_Temperature_Reading_Command_For_Inlet_Temperature_Sensor
@@ -125,8 +126,9 @@ Check Reading Value In D-Bus
     [Arguments]  ${key}  ${instance}  ${dcmi_reading_value}
 
     # Description of argument(s):
-    # key               Entity ID description i.e inlet, cpu, baseboard.
-    # instance          instance number 1, 2, ..
+    # key                 Entity ID description i.e inlet, cpu, baseboard.
+    # instance            instance number 1, 2, ..
+    # dcmi_reading_value  DCMI reading value.
 
     ${dbus_uris}=  Get From Dictionary  ${dcmi_sensor_uri}  ${key}
     ${dbus_uri}=  Get From Dictionary  ${dbus_uris}  ${instance}

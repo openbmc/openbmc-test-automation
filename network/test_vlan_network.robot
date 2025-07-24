@@ -344,8 +344,9 @@ Get VLAN URI For IP
     [Arguments]  ${vlan_id}  ${vlan_ip}  ${expected_result}=valid
 
     # Description of argument(s):
-    # vlan_id  The VLAN ID (e.g. '53').
-    # vlan_ip  The VLAN IP (e.g. 'x.x.x.x').
+    # vlan_id          The VLAN ID (e.g. '53').
+    # vlan_ip          The VLAN IP (e.g. 'x.x.x.x').
+    # expected_result  Expected status to check existence of VLAN IP URI. (e.g. 'valid')
 
     ${vlan_records}=  Read Properties
     ...  ${NETWORK_MANAGER}eth0_${vlan_id}${/}enumerate  quiet=1
@@ -371,7 +372,7 @@ Verify Existence Of VLAN
     [Arguments]  ${id}  ${interface}=eth0  ${expected_result}=valid
 
     # Description of argument(s):
-    # id  The VLAN ID (e.g. id:'53').
+    # id               The VLAN ID (e.g. id:'53').
     # interface        Physical Interface on which the VLAN is defined.
     # expected_result  Expected status to check existence or non-existence of VLAN.
 
