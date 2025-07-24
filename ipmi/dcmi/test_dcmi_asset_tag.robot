@@ -18,6 +18,7 @@ Test Tags       DCMI_Asset_Tag
 Set Asset Tag With Valid String Length
     [Documentation]  Set asset tag with valid string length and verify.
     [Tags]  Set_Asset_Tag_With_Valid_String_Length
+
     # Allowed MAX characters length for asset tag name is 63.
     ${random_string}=  Generate Random String  63
     Run Keyword  Run IPMI Standard Command  dcmi set_asset_tag ${random_string}
@@ -29,6 +30,7 @@ Set Asset Tag With Valid String Length
 Set Asset Tag With Invalid String Length
     [Documentation]  Verify error while setting invalid asset tag via IPMI.
     [Tags]  Set_Asset_Tag_With_Invalid_String_Length
+
     # Any string more than 63 character is invalid for asset tag.
     ${random_string}=  Generate Random String  64
 
@@ -128,6 +130,9 @@ Validate Asset Tag Via Raw Command
 Get Response Length In Hex
     [Documentation]  Get response length in hex.
     [Arguments]  ${resp_length}
+
+    # Description of argument(s):
+    # resp_length   Response data info.
 
     ${length}=  Convert To Hex  ${resp_length}
     ${length_1}=  Get Length  ${length}

@@ -87,7 +87,8 @@ Redfish Update Firmware
     [Arguments]  ${apply_time}  ${image_file_path}
 
     # Description of argument(s):
-    # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
+    # policy            ApplyTime allowed values (e.g. "OnReset", "Immediate").
+    # image_file_path   Path to the image tarball.
 
     Redfish.Login
 
@@ -111,5 +112,8 @@ Redfish Update Firmware
 Get Image Id By Image Info
     [Documentation]  Get image ID from image_info.
     [Arguments]  ${image_info}
+
+    # Description of argument(s):
+    # image_info  Image info.
 
     RETURN  ${image_info["image_id"]}

@@ -116,6 +116,9 @@ Update Policy Setting
     [Documentation]   Update the given restore policy
     [Arguments]   ${policy}
 
+    # Description of argument(s):
+    # policy      Restore policy.
+
     ${valueDict}=     create dictionary  data=${policy}
     Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
     ${currentPolicy}=  Read Attribute     ${HOST_SETTING}   power_policy
@@ -144,6 +147,9 @@ Check For Current Boot Application Failures
     [Documentation]  Parse the journal log and check for failures.
     [Arguments]  ${error_regex}=${ERROR_REGEX}
 
+    # Description of argument(s):
+    # error_regex    Regex error pattern to be checked in the journal log.
+
     ${error_regex}=  Escape Bash Quotes  ${error_regex}
     ${journal_log}  ${stderr}  ${rc}=  BMC Execute Command
     ...  journalctl -b --no-pager | egrep '${error_regex}'  ignore_err=1
@@ -153,6 +159,7 @@ Check For Current Boot Application Failures
 
 Validate Parameters
     [Documentation]  Validate PDU parameters.
+
     Should Not Be Empty   ${PDU_IP}
     Should Not Be Empty   ${PDU_TYPE}
     Should Not Be Empty   ${PDU_SLOT_NO}
