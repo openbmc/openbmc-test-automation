@@ -169,6 +169,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "347319bb_007685ad",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-24T04:03:37Z",
+      "side": 1,
+      "message": "Changing to Skip If",
+      "parentUuid": "89ea4184_90750767",
+      "range": {
+        "startLine": 715,
+        "startChar": 2,
+        "endLine": 715,
+        "endChar": 85
+      },
+      "revId": "fefede8d2b93163812bf608dd79e30b4e7bb84a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff55a833_2f4ca368",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 3
