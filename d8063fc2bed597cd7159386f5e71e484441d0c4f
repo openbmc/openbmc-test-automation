@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "828fe2c0_5cbb42b8",
+        "filename": "lib/dump_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2025-07-25T05:36:14Z",
+      "side": 1,
+      "message": "Remove extra space at the end of line 484.",
+      "revId": "d8063fc2bed597cd7159386f5e71e484441d0c4f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
