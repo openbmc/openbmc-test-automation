@@ -23,18 +23,19 @@ Create User Initiated Dump
     #                      detected when creating the dump.
 
     ${resp}=  OpenBMC Get Request  ${REST_DUMP_URI}
-    Run Keyword If  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
+    IF  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
     ...  Set Global Variable  ${REST_DUMP_URI}  /xyz/openbmc_project/dump/
+    END
 
     ${data}=  Create Dictionary  data=@{EMPTY}
     ${resp}=  OpenBMC Post Request
     ...  ${REST_DUMP_URI}action/CreateDump  data=${data}  quiet=${1}
 
-    Run Keyword If  '${check_out_of_space}' == '${False}'
+    IF  '${check_out_of_space}' == '${False}'
     ...      Run Keyword And Return  Get The Dump Id  ${resp}
     ...  ELSE
     ...      Run Keyword And Return  Check For Too Many Dumps  ${resp}
-
+    END
 
 Get The Dump Id
     [Documentation]  Wait for the dump to be created. Return the
@@ -53,8 +54,9 @@ Get The Dump Id
 
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
-    Run Keyword If  ${resp.json()["data"]} == ${None}
+    IF  ${resp.json()["data"]} == ${None}
     ...  Fail  Dump id returned null.
+    END
 
     ${dump_id}=  Set Variable  ${json["data"]}
 
@@ -81,8 +83,9 @@ Check For Too Many Dumps
     #       }
 
     # If dump was created normally, return the dump_id number.
-    Run Keyword If  '${resp.status_code}' == '${HTTP_OK}'
+    IF  '${resp.status_code}' == '${HTTP_OK}'
     ...  Run Keyword And Return  Get The Dump Id  ${resp}
+    END
 
     ${exception}=  Set Variable  ${resp.json()["message"]}
     ${at_capacity}=  Set Variable  Dump not captured due to a cap
@@ -90,8 +93,9 @@ Check For Too Many Dumps
     Printn
     Rprint Vars   exception  too_many_dumps
     # If there are too many dumps, return ${EMPTY}, otherwise Fail.
-    ${status}=  Run Keyword If  ${too_many_dumps}  Set Variable  ${EMPTY}
+    ${status}=  IF  ${too_many_dumps}  Set Variable  ${EMPTY}
     ...  ELSE  Fail  msg=${exception}.
+    END
 
     RETURN  ${status}
 
@@ -112,8 +116,9 @@ Check Dump Existence
     #          object(e.g. 1, 3, 5).
 
     ${resp}=  OpenBMC Get Request  ${REST_DUMP_URI}
-    Run Keyword If  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
+    IF  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
     ...  Set Global Variable  ${DUMP_ENTRY_URI}  /xyz/openbmc_project/dump/entry/
+    END
 
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}${dump_id}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
@@ -127,8 +132,9 @@ Delete BMC Dump
     # dump_id  An integer value that identifies a particular dump (e.g. 1, 3).
 
     ${resp}=  OpenBMC Get Request  ${REST_DUMP_URI}
-    Run Keyword If  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
+    IF  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
     ...  Set Global Variable  ${DUMP_ENTRY_URI}  /xyz/openbmc_project/dump/entry/
+    END
 
     ${args}=  Set Variable   {"data": []}
     ${resp}=  OpenBMC Post Request
@@ -140,8 +146,9 @@ Delete All Dumps
     [Documentation]  Delete all dumps.
 
     ${resp}=  OpenBMC Get Request  ${REST_DUMP_URI}
-    Run Keyword If  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
+    IF  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
     ...  Set Global Variable  ${DUMP_ENTRY_URI}  /xyz/openbmc_project/dump/entry/
+    END
 
     # Check if dump entries exist, if not return.
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}list  quiet=${1}
@@ -216,8 +223,9 @@ Delete All BMC Dump
     [Documentation]  Delete all BMC dump entries using "DeleteAll" interface.
 
     ${resp}=  OpenBMC Get Request  ${REST_DUMP_URI}
-    Run Keyword If  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
+    IF  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
     ...  Set Global Variable  ${REST_DUMP_URI}  /xyz/openbmc_project/dump/
+    END
 
     ${args}=  Set Variable   {"data": []}
     ${resp}=  Openbmc Post Request  ${REST_DUMP_URI}action/DeleteAll  data=${args}
@@ -227,8 +235,9 @@ Dump Should Not Exist
     [Documentation]  Verify that BMC dumps do not exist.
 
     ${resp}=  OpenBMC Get Request  ${REST_DUMP_URI}
-    Run Keyword If  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
+    IF  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
     ...  Set Global Variable  ${DUMP_ENTRY_URI}  /xyz/openbmc_project/dump/entry/
+    END
 
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}list  quiet=${1}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_NOT_FOUND}
@@ -254,8 +263,9 @@ Get Dump Entries
     [Documentation]  Return dump entries list.
 
     ${resp}=  OpenBMC Get Request  ${REST_DUMP_URI}
-    Run Keyword If  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
+    IF  '${resp.status_code}' == '${HTTP_NOT_FOUND}'
     ...  Set Global Variable  ${DUMP_ENTRY_URI}  /xyz/openbmc_project/dump/entry/
+    END
 
     ${dump_entries}=  Get URL List  ${DUMP_ENTRY_URI}
     RETURN  ${dump_entries}
@@ -311,7 +321,7 @@ Create User Initiated BMC Dump Via Redfish
     # "TaskState": "Running",
     # "TaskStatus": "OK"
 
-    Run Keyword If  ${skip_dump_completion} != 0  Return From Keyword  ${resp.dict['Id']}
+    IF  ${skip_dump_completion} != 0  Return From Keyword  ${resp.dict['Id']}
     Wait Until Keyword Succeeds  5 min  15 sec  Check Task Completion  ${resp.dict['Id']}
     ${task_id}=  Set Variable  ${resp.dict['Id']}
 
@@ -394,7 +404,7 @@ Get Dump ID
 
     ${task_dict}=  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
     ${key}  ${value}=  Set Variable  ${task_dict["Payload"]["HttpHeaders"][-1].split(":")}
-    Run Keyword If  '${key}' != 'Location'  Fail
+    IF  '${key}' != 'Location'  Fail
     RETURN  ${value.strip('/').split('/')[-1]}
 
 Get Task Status
@@ -468,10 +478,10 @@ Wait For Task Completion
         ${current_task_state}=  Set Variable  ${resp["TaskState"]}
         Rprint Vars  current_task_state
 
-        Run Keyword If  ${check_state} == ${TRUE}  Should Be True
+        IF  ${check_state} == ${TRUE}  Should Be True
         ...  '${resp["TaskState"]}' in ${allowed_task_state}
         ...  msg=Verify task state is valid
-
+        END 
         Exit For Loop If
         ...  '${resp["TaskState"]}' in ${expected_status}
 
