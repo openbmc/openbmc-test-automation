@@ -8,6 +8,7 @@ Resource       ../../lib/bmc_ipv6_utils.robot
 Resource       ../../lib/external_intf/vmi_utils.robot
 Library        ../../lib/bmc_network_utils.py
 Library        Collections
+Library        Process
 
 Test Setup     Test Setup Execution
 Test Teardown  Test Teardown Execution
@@ -25,6 +26,7 @@ ${test_prefix_length}        64
 ${ipv6_gw_addr}              2002:903:15F:32:9:3:32:1
 ${prefix_length_def}         None
 ${invalid_staticv6_gateway}  9.41.164.1
+${linklocal_addr_format}     fe80::[0-9a-f:]+$
 
 *** Test Cases ***
 
@@ -84,7 +86,6 @@ Delete IPv6 Address And Verify
     Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
 
     Delete IPv6 Address  ${test_ipv6_addr}
-
 
 
 Modify IPv6 Address And Verify
@@ -166,6 +167,16 @@ Delete IPv6 Static Default Gateway And Verify
     [Setup]  Configure IPv6 Static Default Gateway On BMC  ${ipv6_gw_addr}  ${prefix_length_def}
 
     Delete IPv6 Static Default Gateway  ${ipv6_gw_addr}
+
+
+Verify Coexistence Of Linklocalv6 And Static IPv6
+    [Documentation]  Verify linklocalv6 And static IPv6 both exist and check their connectivity.
+    [Tags]  Verify_Coexistence_Of_Linklocalv6_And_Static_IPv6
+    [Setup]  Configure IPv6 Address On BMC  ${IP_ADDR_TEST}  ${test_prefix_length}
+    [Teardown]  Delete IPv6 Address  ${IP_ADDR_TEST}
+
+    Verify Coexistence Of Linklocalv6 And Static IPv6
+    Check Static IPv6 is Pinging  ${IP_ADDR_TEST}  ${TEST_SYSTEM}  ${SYSTEM_USERNAME}  ${SYSTEM_PASSWORD}
 
 
 *** Keywords ***
@@ -735,3 +746,46 @@ Delete IPv6 Static Default Gateway
     @{ipv6_static_defgw_configurations}=  Get IPv6 Static Default Gateway
     Should Not Contain Match  ${ipv6_static_defgw_configurations}  ${ipv6_gw_addr}
     ...  msg=IPv6 Static default gateway does not exist.
+
+
+Verify Coexistence Of Linklocalv6 And Static IPv6
+    [Documentation]  Verify both linklocalv6 and static IPv6 exist.
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    # Verify the address origin contains static and linklocal.
+    @{ipv6_addresses}=  Get From Dictionary  ${resp.dict}  IPv6Addresses
+    ${ipv6_linklocal_addr}=  Set Variable  ${None}
+    ${ipv6_static_addr}=  Set Variable  ${None}
+    ${ipv6_addressorigin_list}=  Create List
+
+    FOR  ${ipv6_address}  IN  @{ipv6_addresses}
+        ${ipv6_addressorigin}=  Get From Dictionary  ${ipv6_address}  AddressOrigin
+        IF  '${ipv6_addressorigin}' == 'LinkLocal'
+            Set Test Variable  ${ipv6_linklocal_addr}  ${ipv6_address['Address']}
+        END
+        Append To List  ${ipv6_addressorigin_list}  ${ipv6_addressorigin}
+    END
+
+    Should Match Regexp  ${ipv6_linklocal_addr}        ${linklocal_addr_format}
+    Should Contain       ${ipv6_addressorigin_list}    LinkLocal
+    Should Contain       ${ipv6_addressorigin_list}    Static
+
+
+Check Static IPv6 is Pinging
+    [Documentation]  Check static IPv6 is pinging and reachable.
+    [Arguments]  ${ipv6_address}=${IP_ADDR_TEST}  ${test_system}=${TEST_SYSTEM}  ${system_username}=${SYSTEM_USERNAME}  ${system_password}=${SYSTEM_PASSWORD}
+
+    # Description of argument(s):
+    # ipv6_address     IPv6 Address to add.
+    # test_system      System to which the BMC has network connection.
+    # system_username  Username to login to the system connected.
+    # system_password  Password to login to the system connected.
+
+    ${cmd}=  Set Variable
+    ...  sshpass -p ${SYSTEM_PASSWORD} ssh -o StrictHostKeyChecking=no ${SYSTEM_USERNAME}@${TEST_SYSTEM} ping6 -W 1 -c 2 ${ipv6_address}
+    ${result}=  Run Process  ${cmd}  shell=True
+
+    Should Be Equal As Integers  ${result.rc}  0  msg=Command failed with rc=${result.rc}.
+    Should Not Contain  ${result.stdout}  0 received   msg=System is not reachable.
