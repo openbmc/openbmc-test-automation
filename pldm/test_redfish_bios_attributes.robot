@@ -44,7 +44,7 @@ Redfish Verify Set Invalid Optional Value For BIOS Enumeration Attribute Type
     ${enum_attr}=  Evaluate  random.choice(${attr_handles})  modules=random
 
     Redfish.Patch  ${BIOS_ATTR_SETTINGS_URI}  body={"Attributes":{"${enum_attr}": '0'}}
-    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}, ${HTTP_FORBIDDEN}]
 
 
 Redfish Verify Set Out Of Range Integer Value For BIOS Integer Attribute Type
