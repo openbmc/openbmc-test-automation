@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ea74d34_42cdaa53",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-07-29T14:32:35Z",
+      "side": 1,
+      "message": "The test tile and keywords are same? can u please differentiate it",
+      "revId": "1b06939a07ee026ee978642785fa0b81e554f6fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62d39bd8_2ef18475",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-07-29T14:32:35Z",
+      "side": 1,
+      "message": "please dont put the same format as title in the doc",
+      "revId": "1b06939a07ee026ee978642785fa0b81e554f6fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79c183e0_93eb6ac4",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-07-29T14:32:35Z",
+      "side": 1,
+      "message": "add some comments for readability",
+      "revId": "1b06939a07ee026ee978642785fa0b81e554f6fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a44d720_f1ecca5f",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-07-29T14:32:35Z",
+      "side": 1,
+      "message": "Check If Static IPv6 is Pinging\n\nplease changes documentation as well",
+      "range": {
+        "startLine": 774,
+        "startChar": 0,
+        "endLine": 774,
+        "endChar": 28
+      },
+      "revId": "1b06939a07ee026ee978642785fa0b81e554f6fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5874af2_f019ce02",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-07-29T14:32:35Z",
+      "side": 1,
+      "message": "missing description of args for other arguments",
+      "revId": "1b06939a07ee026ee978642785fa0b81e554f6fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b559c10_11e4b48c",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-07-29T14:32:35Z",
+      "side": 1,
+      "message": "looks like exceeding 110 charachter limit",
+      "range": {
+        "startLine": 781,
+        "startChar": 0,
+        "endLine": 781,
+        "endChar": 85
+      },
+      "revId": "1b06939a07ee026ee978642785fa0b81e554f6fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d63d2076_a02e2f63",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-07-29T14:32:35Z",
+      "side": 1,
+      "message": "result is unused",
+      "revId": "1b06939a07ee026ee978642785fa0b81e554f6fc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
