@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1ea6ab8_642a501f",
+        "filename": "oem/ieisystem/test_sensor_monitoring.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-07-29T16:58:24Z",
+      "side": 1,
+      "message": "Check For Required Parameters For Sensor Monitoring",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 41
+      },
+      "revId": "7b2a0e4b3162e7e7eb79d3cbca2e5068e8a305bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e9df0d6_e6a042e8",
+        "filename": "oem/ieisystem/test_sensor_monitoring.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-07-29T16:58:24Z",
+      "side": 1,
+      "message": "How is ELSE part handled? if not SSH or telnet\u003e",
+      "revId": "7b2a0e4b3162e7e7eb79d3cbca2e5068e8a305bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a7ce54b_e5496fa6",
+        "filename": "oem/ieisystem/test_sensor_monitoring.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-07-29T16:58:24Z",
+      "side": 1,
+      "message": "nit: Commonality .. remove one line space.. follow same as you defined in the other places of Arguments",
+      "revId": "7b2a0e4b3162e7e7eb79d3cbca2e5068e8a305bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ced905bc_03c2aa8e",
+        "filename": "oem/ieisystem/test_sensor_monitoring.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-07-29T16:58:24Z",
+      "side": 1,
+      "message": "Nit: Remove additional space",
+      "revId": "7b2a0e4b3162e7e7eb79d3cbca2e5068e8a305bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bb7ab56_e0af99c4",
+        "filename": "oem/ieisystem/test_sensor_monitoring.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-07-29T16:58:24Z",
+      "side": 1,
+      "message": "nit : Redfish or redfish.. Have common notation",
+      "range": {
+        "startLine": 186,
+        "startChar": 68,
+        "endLine": 186,
+        "endChar": 75
+      },
+      "revId": "7b2a0e4b3162e7e7eb79d3cbca2e5068e8a305bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c68b2c4_95c931a5",
+        "filename": "oem/ieisystem/test_sensor_monitoring.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-07-29T16:58:24Z",
+      "side": 1,
+      "message": "Nit: Check If Expected Sensors Are Present",
+      "revId": "7b2a0e4b3162e7e7eb79d3cbca2e5068e8a305bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
