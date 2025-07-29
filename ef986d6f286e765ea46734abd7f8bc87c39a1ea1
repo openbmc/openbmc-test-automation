@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4fa1823d_fa71197e",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-29T07:26:41Z",
+      "side": 1,
+      "message": "I think separate keywords for Static/ Linklocal is better for more clarity.",
+      "parentUuid": "ee61edec_c83bca55",
+      "revId": "ef986d6f286e765ea46734abd7f8bc87c39a1ea1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9f553d79_efee259c",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 6
@@ -31,6 +49,24 @@
       "writtenOn": "2025-07-29T06:56:28Z",
       "side": 1,
       "message": "test_system, system_username, system_password",
+      "revId": "ef986d6f286e765ea46734abd7f8bc87c39a1ea1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7ebec3e_36da30c6",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-07-29T07:26:41Z",
+      "side": 1,
+      "message": "Keeping the same.\nThis is not the system which we are testing on/ system_username/ system_password\nHere we are passing the GSA credentials to login to the DHCP server to which the system is connected.\nThe names System_name and system_password might be misleading as the host\u0027s name/username/password.",
+      "parentUuid": "9f553d79_efee259c",
       "revId": "ef986d6f286e765ea46734abd7f8bc87c39a1ea1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
