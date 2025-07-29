@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "607d9efb_f21c8478",
+        "filename": "oem/ieisystem/test_sensor_monitoring.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-07-29T09:25:28Z",
+      "side": 1,
+      "message": "Add Test Tags\n\n```\nTest Tag       Test_Sensor_Monitoring\n```",
+      "revId": "916736ee00807b08b788e772216e47d6265a00a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4efd1339_56906a2f",
+        "filename": "oem/ieisystem/test_sensor_monitoring.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-07-29T09:25:28Z",
+      "side": 1,
+      "message": "one line space after [Documentation]",
+      "revId": "916736ee00807b08b788e772216e47d6265a00a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab3d6e7e_68515042",
+        "filename": "oem/ieisystem/test_sensor_monitoring.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-07-29T09:25:28Z",
+      "side": 1,
+      "message": "missing [Documentation]",
+      "revId": "916736ee00807b08b788e772216e47d6265a00a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4df15622_c30d843d",
+        "filename": "oem/ieisystem/test_sensor_monitoring.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-07-29T09:25:28Z",
+      "side": 1,
+      "message": "missing [Documentation]",
+      "revId": "916736ee00807b08b788e772216e47d6265a00a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
