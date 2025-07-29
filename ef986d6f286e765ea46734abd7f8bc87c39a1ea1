@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee61edec_c83bca55",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-07-29T06:56:28Z",
+      "side": 1,
+      "message": "Just make it \"Check IPv6 is Pinging\" or \"Check If IPv6 Address reachable\"",
+      "revId": "ef986d6f286e765ea46734abd7f8bc87c39a1ea1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f553d79_efee259c",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-07-29T06:56:28Z",
+      "side": 1,
+      "message": "test_system, system_username, system_password",
+      "revId": "ef986d6f286e765ea46734abd7f8bc87c39a1ea1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
