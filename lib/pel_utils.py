@@ -395,3 +395,23 @@ def check_if_pel_transmitted_to_host(pel_id):
             "Failed to parse PEL data : " + str(exception)
         ) from exception
     return True
+
+
+def check_if_pel_transmitted_to_phyp(pel_id):
+    r"""
+    Return True if PEL is transmitted to PHYP else False.
+    Description of arguments:
+    pel_id       PEL ID. E.g. 0x50000021.
+    """
+
+    try:
+        pel_data = peltool("-i " + pel_id)
+        print(pel_data)
+        host_state = pel_data["User Header"]["Host Transmission"]
+        if host_state != "Sent":
+            return False
+    except Exception as exception:
+        raise PeltoolException(
+            "Failed to parse PEL data : " + str(exception)
+        ) from exception
+    return True
