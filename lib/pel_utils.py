@@ -376,19 +376,21 @@ def fetch_all_pel_ids_based_on_error_message(
     return err_pel_ids
 
 
-def check_if_pel_transmitted_to_host(pel_id):
+def check_if_pel_transmitted_to_host(pel_id, expected_host_state="Acked"):
     r"""
     Return True if PEL is transmitted to Host else False.
 
     Description of arguments:
-    pel_id       PEL ID. E.g. 0x50000021.
+    pel_id                 PEL ID. E.g. 0x50000021.
+    expected_host_state    Expected host transmission state. 
+                           By default expected host state is "Acked".
     """
 
     try:
         pel_data = peltool("-i " + pel_id)
         print(pel_data)
         host_state = pel_data["User Header"]["Host Transmission"]
-        if host_state != "Acked":
+        if host_state != expected_host_state:
             return False
     except Exception as exception:
         raise PeltoolException(
