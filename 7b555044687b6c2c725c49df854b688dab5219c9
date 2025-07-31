@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f696b22a_c577f144",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-07-31T07:27:52Z",
+      "side": 1,
+      "message": "Verify Coexistence Of Linklocalv6 And Static IPv6\n\nKeep this is as it is and in Tags too",
+      "revId": "7b555044687b6c2c725c49df854b688dab5219c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9ba86dd_7eb987c9",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 12
+      },
+      "lineNbr": 751,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-07-31T07:27:52Z",
+      "side": 1,
+      "message": "Check Coexistence Of Linklocalv6 And Static IPv6",
+      "range": {
+        "startLine": 750,
+        "startChar": 0,
+        "endLine": 751,
+        "endChar": 49
+      },
+      "revId": "7b555044687b6c2c725c49df854b688dab5219c9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
