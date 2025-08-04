@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    Test Redfish user account.
+Documentation    Test suite for verifying Redfish admin, readonly operation user accounts.
 
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
@@ -17,7 +17,7 @@ ${account_lockout_duration}   ${30}
 ${account_lockout_threshold}  ${3}
 ${ssh_status}                 ${True}
 
-** Test Cases **
+*** Test Cases ***
 
 Verify AccountService Available
     [Documentation]  Verify Redfish account service is available.
@@ -71,7 +71,6 @@ Verify Redfish Readonly User Persistence After Reboot
     # Verify users after reboot.
     Redfish Verify User  readonly_user  TestPwd123  ReadOnly        ${True}
 
-
 Redfish Create and Verify Admin User
     [Documentation]  Create a Redfish user with administrator role and verify.
     [Tags]  Redfish_Create_and_Verify_Admin_User
@@ -99,8 +98,10 @@ Redfish Create and Verify Readonly User
     readonly_user  TestPwd123  ReadOnly        ${True}
 
 
+
 Verify Redfish Admin User With Wrong Password
-    [Documentation]  Verify Redfish admin user with wrong password.
+    [Documentation]  Verify Redfish create admin user with valid password and make sure
+    ...  admin user failed to login with wrong password.
     [Tags]  Verify_Redfish_Admin_User_With_Wrong_Password
     [Template]  Verify Redfish User with Wrong Password
 
@@ -109,7 +110,8 @@ Verify Redfish Admin User With Wrong Password
 
 
 Verify Redfish Operator User with Wrong Password
-    [Documentation]  Verify Redfish operator user with wrong password.
+    [Documentation]  Verify Redfish create operator user with valid password and make sure
+    ... operator user failed to login with  wrong password.
     [Tags]  Verify_Redfish_Operator_User_with_Wrong_Password
     [Template]  Verify Redfish User with Wrong Password
 
@@ -118,7 +120,8 @@ Verify Redfish Operator User with Wrong Password
 
 
 Verify Redfish Readonly User With Wrong Password
-    [Documentation]  Verify Redfish readonly user with wrong password.
+    [Documentation]  Verify Redfish create readonly user with valid password and make sure
+    ...  readonly user ailed to login with  wrong password.
     [Tags]  Verify_Redfish_Readonly_User_With_Wrong_Password
     [Template]  Verify Redfish User with Wrong Password
 
@@ -540,6 +543,41 @@ Verify Configure BasicAuth Enable And Disable
     BasicAuth
     XToken
 
+
+Redfish Create and Verify Admin User With Invalid Password Format
+    [Documentation]  Create a admin user with invalid password format and verify.
+    [Template]  Create User With Unsupported Password Format And Verify
+    [Tags]  Redfish_Create_and_Verify_Admin_User_With_Invalid_Password_Format
+
+    #username      role_id        password
+    admin_sri      Administrator  snellens
+    admin_sri      Administrator  10000001
+    admin_sri      Administrator  12345678
+    admin_sri      Administrator  abcdefgh
+    admin_sri      Administrator  abf12345
+    admin_sri      Administrator  helloworld
+    admin_sri      Administrator  HELLOWORLD
+    admin_sri      Administrator  &$%**!*@
+    admin_sri      Administrator  Dictation
+
+
+Redfish Create and Verify Readonly User With Invalid Password Format
+    [Documentation]  Create a admin user with invalid password format and verify.
+    [Template]  Create User With Unsupported Password Format And Verify
+    [Tags]  Redfish_Create_and_Verify_Readonly_User_With_Invalid_Password_Format
+
+    #username      role_id        password
+    admin_sri      ReadOnly       snellens
+    admin_sri      ReadOnly       10000001
+    admin_sri      ReadOnly       12345678
+    admin_sri      ReadOnly       abcdefgh
+    admin_sri      ReadOnly       abf12345
+    admin_sri      ReadOnly       helloworld
+    admin_sri      ReadOnly       HELLOWORLD
+    admin_sri      ReadOnly       &$%**!*@
+    admin_sri      ReadOnly       Dictation
+
+
 *** Keywords ***
 
 Test Teardown Execution
@@ -669,7 +707,7 @@ Redfish Create And Verify User
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
 
 Verify Redfish User with Wrong Password
-    [Documentation]  Verify Redfish User with Wrong Password.
+    [Documentation]  Verify Redfish User failed to login with Wrong Password.
     [Arguments]   ${username}  ${password}  ${role_id}  ${enabled}  ${wrong_password}
 
     # Description of argument(s):
@@ -878,3 +916,30 @@ Check BasicAuth Works Fine
 
     #  Check the response of curl command is 200/401
     Should Contain  ${out}  ${status_code}
+
+
+Create User With Unsupported Password Format And Verify
+   [Documentation]  Create admin or readonly user with unsupported password format
+   ...  and verify.
+   [Arguments]   ${username}  ${role_id}  ${password}
+
+   # Description of argument(s):
+   # username            The username to be created.
+   # role_id             The role ID of the user to be created
+   #                     (e.g. "Administrator", "ReadOnly").
+   # password            The password to be assigned.
+   #                     Unsupported password format are sequential charachters,
+   #                     sequential digits, palindrome digits, palindrome charachters,
+   #                     only uppercase letters, only lowercase letters, only digits,
+   #                     only charachters, not a dictionary word.
+
+
+   # Make sure the user account in question does not already exist.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+   # Create specified user with invalid password format.
+   ${payload}=  Create Dictionary
+   ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${True}
+   Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+   ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
