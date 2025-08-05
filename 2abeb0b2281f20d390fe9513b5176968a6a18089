@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc435188_cfa44544",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2025-08-05T07:21:49Z",
+      "side": 1,
+      "message": "I think need to remove a extra line",
+      "revId": "2abeb0b2281f20d390fe9513b5176968a6a18089",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
