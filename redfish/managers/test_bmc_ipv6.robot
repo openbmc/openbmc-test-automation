@@ -124,14 +124,25 @@ Enable DHCPv6 Property On BMC And Verify
     [Documentation]  Enable DHCPv6 property on BMC and verify.
     [Tags]  Enable_DHCPv6_Property_On_BMC_And_Verify
 
-    Set And Verify DHCPv6 Property  Enabled
+    Set DHCPv6 Property     Enabled
+    Verify DHCPv6 Property  Enabled
 
 
 Disable DHCPv6 Property On BMC And Verify
     [Documentation]  Disable DHCPv6 property on BMC and verify.
     [Tags]  Disable_DHCPv6_Property_On_BMC_And_Verify
 
-    Set And Verify DHCPv6 Property  Disabled
+    Set DHCPv6 Property     Disabled
+    Verify DHCPv6 Property  Disabled
+
+
+Verify Persistency Of DHCPv6 On Reboot
+    [Documentation]  Verify persistency of DHCPv6 property on reboot.
+    [Tags]  Verify_Persistency_Of_DHCPv6_On_Reboot
+
+    Set DHCPv6 Property        Enabled
+    Redfish OBMC Reboot (off)  stack_mode=skip
+    Verify DHCPv6 Property     Enabled
 
 
 Configure Invalid Static IPv6 And Verify
@@ -572,7 +583,7 @@ Set SLAACv6 Configuration State And Verify
     END
 
 
-Set And Verify DHCPv6 Property
+Set DHCPv6 Property
     [Documentation]  Set DHCPv6 attribute and verify.
     [Arguments]  ${dhcpv6_operating_mode}=${Disabled}
 
@@ -585,6 +596,14 @@ Set And Verify DHCPv6 Property
 
     Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     ...  body=${data}  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
+
+
+Verify DHCPv6 Property
+    [Documentation]  Verify DHCPv6 settings is enabled or disabled.
+    [Arguments]  ${dhcpv6_operating_mode}
+
+    # Description of Argument(s):
+    # dhcpv6_operating_mode  Enable/ Disable DHCPv6.
 
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     ${dhcpv6_verify}=  Get From Dictionary  ${resp.dict}  DHCPv6
