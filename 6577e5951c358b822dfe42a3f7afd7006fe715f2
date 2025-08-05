@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce4334a7_95022a74",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2025-08-05T08:42:00Z",
+      "side": 1,
+      "message": "ailed-\u003efailed",
+      "revId": "6577e5951c358b822dfe42a3f7afd7006fe715f2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31b4f52f_0e92c0aa",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2025-08-05T08:42:00Z",
+      "side": 1,
+      "message": "admin user -\u003ereadonly user",
+      "revId": "6577e5951c358b822dfe42a3f7afd7006fe715f2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
