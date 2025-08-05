@@ -577,6 +577,17 @@ Redfish Create and Verify Readonly User With Invalid Password Format
     readonly_user   ReadOnly       Dictation
 
 
+Verify Admin And Readonly User Password Is Not Same As Username
+    [Documentation]  Verify that admin and readonly user creation is failed if
+    ...  password is same as username.
+    [Template]  Create User With Unsupported Password Format And Verify
+    [Tags]      Verify_Admin_And_Readonly_User_Password_Is_Not_Same_As_Username
+
+    #username        role_id             password
+    AdminUser1       Administrator       AdminUser1
+    ReadOnlyUser1    ReadOnly            ReadOnlyUser1
+
+
 *** Keywords ***
 
 Test Teardown Execution
@@ -930,8 +941,8 @@ Create User With Unsupported Password Format And Verify
    #                     Unsupported password format are sequential characters,
    #                     sequential digits, palindrome digits, palindrome characters,
    #                     only uppercase letters, only lowercase letters, only digits,
-   #                     only characters, not a dictionary word.
-
+   #                     only characters, not a dictionary word, username and password
+   #                     should not be same.
 
    # Make sure the user account in question does not already exist.
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
