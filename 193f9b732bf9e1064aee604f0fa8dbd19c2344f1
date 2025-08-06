@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "69d972ed_d690fcef",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-08-06T09:03:01Z",
+      "side": 1,
+      "message": "FE80\nhost part EUI64",
+      "revId": "193f9b732bf9e1064aee604f0fa8dbd19c2344f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27569243_90036b29",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 4
@@ -20,6 +37,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8d55576c_0bbe64e7",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-08-06T09:03:01Z",
+      "side": 1,
+      "message": "network part FE80 \u0026 host part EUI64",
+      "revId": "193f9b732bf9e1064aee604f0fa8dbd19c2344f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "670129c1_fc2ce2a8",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-08-06T09:03:01Z",
+      "side": 1,
+      "message": "FE80",
+      "revId": "193f9b732bf9e1064aee604f0fa8dbd19c2344f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9564bf83_3ac9f064",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 4
@@ -31,6 +82,23 @@
       "writtenOn": "2025-08-06T09:00:09Z",
       "side": 1,
       "message": "comment?",
+      "revId": "193f9b732bf9e1064aee604f0fa8dbd19c2344f1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "155a76e5_173ae6ef",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-08-06T09:03:01Z",
+      "side": 1,
+      "message": "FE80",
       "revId": "193f9b732bf9e1064aee604f0fa8dbd19c2344f1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
