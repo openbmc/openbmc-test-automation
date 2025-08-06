@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a2d9ab3_61253fad",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1001924
+      },
+      "writtenOn": "2025-08-06T08:35:01Z",
+      "side": 1,
+      "message": "Keeping the same for now.",
+      "parentUuid": "be8c4da9_d7646689",
+      "revId": "1ef114a10efab867921580d7c0c157a05fb3a090",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aeb4ea10_828425dc",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2025-08-05T09:46:23Z",
       "side": 1,
       "message": "Set DHCPv6 Property And Verify  Enabled  ${True}",
+      "revId": "1ef114a10efab867921580d7c0c157a05fb3a090",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17591577_8ed96e24",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1001924
+      },
+      "writtenOn": "2025-08-06T08:35:01Z",
+      "side": 1,
+      "message": "Keeping the same for now.",
+      "parentUuid": "aeb4ea10_828425dc",
       "revId": "1ef114a10efab867921580d7c0c157a05fb3a090",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "31c084a8_34d83dec",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1001924
+      },
+      "writtenOn": "2025-08-06T08:35:01Z",
+      "side": 1,
+      "message": "Keeping the same for now. Better to have separate keywords as the user will not know reboot is included in this keyword.",
+      "parentUuid": "a7eed254_e801163e",
+      "revId": "1ef114a10efab867921580d7c0c157a05fb3a090",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8db52cba_f424b0d7",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 1
@@ -82,6 +136,24 @@
       "writtenOn": "2025-08-05T09:46:23Z",
       "side": 1,
       "message": "comment?",
+      "revId": "1ef114a10efab867921580d7c0c157a05fb3a090",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "283fa6eb_e25d3ecb",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1001924
+      },
+      "writtenOn": "2025-08-06T08:35:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8db52cba_f424b0d7",
       "revId": "1ef114a10efab867921580d7c0c157a05fb3a090",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -99,6 +171,24 @@
       "writtenOn": "2025-08-05T09:46:23Z",
       "side": 1,
       "message": "remove extra space",
+      "revId": "1ef114a10efab867921580d7c0c157a05fb3a090",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5264661_6961f1a1",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1001924
+      },
+      "writtenOn": "2025-08-06T08:35:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30145364_4e321f62",
       "revId": "1ef114a10efab867921580d7c0c157a05fb3a090",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
