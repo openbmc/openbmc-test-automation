@@ -178,6 +178,13 @@ Verify Coexistence Of Linklocalv6 And Static IPv6 On BMC
     Check Coexistence Of Linklocalv6 And Static IPv6
 
 
+Verify Linklocal Address Has Host Part Fe80 And Network Part As EUI64
+    [Documentation]  Verify linklocal address has host part as fe80 and network part as EUI64.
+    [Tags]  Verify_Linklocal_Address_Has_Host_Part_Fe80_And_Network_Part_As_EUI64
+
+    Linklocal Address Has Host Part Fe80 And Network Part as EUI64
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -770,3 +777,35 @@ Check Coexistence Of Linklocalv6 And Static IPv6
     Should Match Regexp  ${ipv6_linklocal_addr}        ${linklocal_addr_format}
     Should Contain       ${ipv6_addressorigin_list}    LinkLocal
     Should Contain       ${ipv6_addressorigin_list}    Static
+
+
+Linklocal Address Has Host Part Fe80 And Network Part as EUI64
+    [Documentation]  Linklocal address has host part fe80 and network part as EUI64.
+
+    # Fetch the linklocal address.
+    ${active_channel_config}=  Get Active Channel Config
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    @{ipv6_addresses}=  Get From Dictionary  ${resp.dict}  IPv6Addresses
+    ${ipv6_linklocal_addr}=  Set Variable  ${None}
+    ${ipv6_addressorigin_list}=  Create List
+    FOR  ${ipv6_address}  IN  @{ipv6_addresses}
+        ${ipv6_addressorigin}=  Get From Dictionary  ${ipv6_address}  AddressOrigin
+        IF  '${ipv6_addressorigin}' == 'LinkLocal'
+            Set Test Variable  ${ipv6_linklocal_addr}  ${ipv6_address['Address']}
+        END
+    END
+
+    # Follow EUI64 from MAC.
+    ${system_mac}=  Get BMC MAC Address
+    ${split_octets}=  Split String  ${system_mac}  :
+    ${first_octet}=  Evaluate  int('${split_octets[0]}', 16)
+    ${flipped_hex}=  Evaluate  format(${first_octet} ^ 2, '02x')
+    ${grp1}=  Evaluate  re.sub(r'^0+', '', '${flipped_hex}${split_octets[1]}')  modules=re
+    ${grp2}=  Evaluate  re.sub(r'^0+', '', '${split_octets[2]}ff')  modules=re
+    ${grp3}=  Evaluate  re.sub(r'^0+', '', '${split_octets[4]}${split_octets[5]}')  modules=re
+    ${eui64}=  Set Variable  fe80::${grp1}:${grp2}:fe${split_octets[3]}:${grp3}
+
+    # Verify the linklocal obtained is the same as on the machine.
+    Should Be Equal  ${eui64}  ${ipv6_linklocal_addr}
+
