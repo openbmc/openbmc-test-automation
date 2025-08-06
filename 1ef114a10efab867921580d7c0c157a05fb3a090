@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df50bd00_788b2f3f",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-08-06T09:05:26Z",
+      "side": 1,
+      "message": "yes you can keep the keyword separately, but you can write above keyword adding persistency check.so this will reduce number of lines",
+      "parentUuid": "31c084a8_34d83dec",
+      "revId": "1ef114a10efab867921580d7c0c157a05fb3a090",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8db52cba_f424b0d7",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 1
