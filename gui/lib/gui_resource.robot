@@ -222,7 +222,7 @@ Navigate To Server Power Page
     [Documentation]  Navigate To Server Power Page.
 
     Click Element  ${xpath_power_page}
-    Wait Until Element Is Not Visible  ${xpath_progress_bar}  timeout=30
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=30
 
 
 Power Off Server
@@ -235,6 +235,7 @@ Power Off Server
       Click Element  ${xpath_power_shutdown}
       Click Button  ${xpath_confirm}
       Wait Until Element Is Visible  ${xpath_power_poweron}  timeout=60
+      Click Element  ${xpath_close_information_message}
     ELSE
       Log To console    Server is already powered Off.
     END
@@ -249,6 +250,7 @@ Power On Server
     IF  (${present})
       Click Element  ${xpath_power_power_on}
       Wait Until Element Is Visible  ${xpath_power_shutdown}  timeout=60
+      Click Element  ${xpath_close_information_message}
     ELSE
       Log To console    Server is already powered On.
     END
@@ -270,14 +272,6 @@ Reboot Server
     END
 
 
-Verify Success Message On BMC GUI Page
-    [Documentation]  Perform actions on the GUI and verify that a success message is displayed.
-
-    Wait Until Element Is Visible   ${xpath_success_message}  timeout=30
-    Page Should Contain Element   ${xpath_success_message}
-    Wait Until Element Is Not Visible   ${xpath_success_message}  timeout=30
-
-
 Verify Error And Unauthorized Message On GUI
     [Documentation]   Perform operations on GUI with Readonly user and
     ...               verify Error and Unauthorized messages.
@@ -286,7 +280,7 @@ Verify Error And Unauthorized Message On GUI
     Page Should Contain  Error
     Page Should Contain  Unauthorized
     Click Element  ${xpath_error_popup}
-    Click Element  ${xpath_Unauthorized_popup}
+    Click Element  ${xpath_unauthorized_popup}
 
 
 Create Readonly User And Login To GUI
@@ -310,6 +304,7 @@ Delete Readonly User And Logout Current GUI Session
     Logout GUI
     Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
 
+    Close Browser
+
     # Login BMC GUI with default user.
     Launch Browser And Login GUI
-

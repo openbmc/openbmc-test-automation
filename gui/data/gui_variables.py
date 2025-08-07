@@ -129,6 +129,7 @@ class gui_variables:
     xpath_save_settings_button = "//button[contains(text(),'Save')]"
     xpath_confirm_button = "//button[contains(text(),'Confirm')]"
     xpath_cancel_button = "//button[contains(text(),'Cancel')]"
+    xpath_close_information_message = "//button[contains(text(),'×')]"
     xpath_add_button = "//button[normalize-space(text())='Add']"
     xpath_page_loading_progress_bar = (
         "//*[@aria-label='Page loading progress bar']"
