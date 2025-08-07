@@ -430,40 +430,14 @@ Verify ReadOnly User Privilege
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}readonly_user
 
 
-Verify Minimum Password Length For Redfish User
-    [Documentation]  Verify minimum password length for new and existing user.
-    [Tags]  Verify_Minimum_Password_Length_For_Redfish_User
+Verify Minimum Password Length For Redfish Admin And Readonly User
+    [Documentation]  Verify minimum password length for new and existing admin or
+    ...  readonly user.
+    [Template]  Verify Minimum Password Length For Redfish User
 
-    ${user_name}=  Set Variable  testUser
-
-    # Make sure the user account in question does not already exist.
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/${user_name}
-    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
-
-    # Try to create a user with invalid length password.
-    ${payload}=  Create Dictionary
-    ...  UserName=${user_name}  Password=UserPwd  RoleId=Administrator  Enabled=${True}
-    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
-    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
-
-    # Create specified user with valid length password.
-    Set To Dictionary  ${payload}  Password  UserPwd1
-    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
-    ...  valid_status_codes=[${HTTP_CREATED}]
-
-    # Try to change to an invalid password.
-    Redfish.Patch  /redfish/v1/AccountService/Accounts/${user_name}  body={'Password': 'UserPwd'}
-    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
-
-    # Change to a valid password.
-    Redfish.Patch  /redfish/v1/AccountService/Accounts/${user_name}  body={'Password': 'UserPwd1'}
-
-    # Verify login.
-    Redfish.Logout
-    Redfish.Login  ${user_name}  UserPwd1
-    Redfish.Logout
-    Redfish.Login
-    Redfish.Delete  /redfish/v1/AccountService/Accounts/${user_name}
+    #username        role_id
+    admin_user       Administrator
+    readonly_user    ReadOnly
 
 
 Verify Standard User Roles Defined By Redfish
@@ -953,3 +927,42 @@ Create User With Unsupported Password Format And Verify
    ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${True}
    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+
+Verify Minimum Password Length For Redfish User
+    [Documentation]  Verify minimum password length for new and existing admin or
+    ...  readonly user.
+    [Arguments]  ${user_name}  ${role_id}
+
+    # Description of argument(s):
+    # user_name           The username to be created.
+    # role_id             The role ID of the user to be created.
+
+    # Make sure the user account in question does not already exist.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${user_name}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    # Try to create a user with invalid length password.
+    ${payload}=  Create Dictionary
+    ...  UserName=${user_name}  Password=UserPwd  RoleId=${role_id}  Enabled=${True}
+    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+    # Create specified user with valid length password.
+    Set To Dictionary  ${payload}  Password  UserPwd1
+    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+    # Try to change to an invalid password.
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/${user_name}  body={'Password': 'UserPwd'}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+    # Change to a valid password.
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/${user_name}  body={'Password': 'UserPwd1'}
+
+    # Verify login.
+    Redfish.Logout
+    Redfish.Login  ${user_name}  UserPwd1
+    Redfish.Logout
+    Redfish.Login
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${user_name}
