@@ -167,10 +167,11 @@ Initiate OS Host Reboot
     # os_username  The username to be used to sign in to the OS.
     # os_password  The password to be used to sign in to the OS.
 
-    ${cmd_buf}=  Run Keyword If  '${os_username}' == 'root'
-    ...      Set Variable  reboot
-    ...  ELSE
-    ...      Set Variable  echo ${os_password} | sudo -S reboot
+    ${cmd_buf}=  IF  '${os_username}' == 'root'
+        Set Variable  reboot
+    ELSE
+        Set Variable  echo ${os_password} | sudo -S reboot
+    END
 
     ${output}  ${stderr}  ${rc}=  OS Execute Command
     ...  ${cmd_buf}  fork=${1}
@@ -187,14 +188,15 @@ Initiate OS Host Power Off
     # os_password  The password to be used to sign in to the OS.
     # hard         Indicates whether to do a hard vs. soft power off.
 
-    ${time_string}=  Run Keyword If  ${hard}  Set Variable  ${SPACE}now
-    ...  ELSE  Set Variable  ${EMPTY}
+    ${time_string}=  IF  ${hard}  Set Variable  ${SPACE}now
+        ELSE  Set Variable  ${EMPTY}
+    END
 
-    ${cmd_buf}=  Run Keyword If  '${os_username}' == 'root'
-    ...      Set Variable  shutdown${time_string}
-    ...  ELSE
-    ...      Set Variable  echo ${os_password} | sudo -S shutdown${time_string}
-
+    ${cmd_buf}=  IF  '${os_username}' == 'root'
+        Set Variable  shutdown${time_string}
+    ELSE
+        Set Variable  echo ${os_password} | sudo -S shutdown${time_string}
+    END
     ${output}  ${stderr}  ${rc}=  OS Execute Command
     ...  ${cmd_buf}  fork=${1}
 
@@ -301,10 +303,11 @@ Get Boot Progress
     #         the console.
 
     Set Boot Progress Method
-    ${state}=  Run Keyword If  '${boot_prog_method}' == 'New'
-    ...      New Get Boot Progress  quiet=${quiet}
-    ...  ELSE
-    ...      Old Get Boot Progress  quiet=${quiet}
+    ${state}=  IF  '${boot_prog_method}' == 'New'
+        New Get Boot Progress  quiet=${quiet}
+    ELSE
+        Old Get Boot Progress  quiet=${quiet}
+    END
 
     RETURN  ${state}
 
