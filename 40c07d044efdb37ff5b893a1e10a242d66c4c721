@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdbcd814_07978666",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-08-07T08:46:15Z",
+      "side": 1,
+      "message": "FE80 ?",
+      "range": {
+        "startLine": 182,
+        "startChar": 66,
+        "endLine": 182,
+        "endChar": 70
+      },
+      "revId": "40c07d044efdb37ff5b893a1e10a242d66c4c721",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77bf64b5_54862b1d",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-08-07T08:46:15Z",
+      "side": 1,
+      "message": "Check If Linklocal Address Has Network Part FE80 And Host Part EUI64",
+      "revId": "40c07d044efdb37ff5b893a1e10a242d66c4c721",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2914dbb0_597c2dfd",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-08-07T08:46:15Z",
+      "side": 1,
+      "message": "FE80 ?",
+      "range": {
+        "startLine": 785,
+        "startChar": 56,
+        "endLine": 785,
+        "endChar": 60
+      },
+      "revId": "40c07d044efdb37ff5b893a1e10a242d66c4c721",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7dc3df2_d7afeb68",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-08-07T08:46:15Z",
+      "side": 1,
+      "message": "please give example format",
+      "revId": "40c07d044efdb37ff5b893a1e10a242d66c4c721",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
