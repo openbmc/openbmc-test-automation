@@ -185,6 +185,15 @@ Verify IPv6 Linklocal Address Is In Corrrect Format
     Check If Linklocal Address Is In Correct Format
 
 
+Verify BMC Gets SLAAC Address On Enabling SLAAC
+    [Documentation]  On enabling SLAAC verify SLAAC address comes up.
+    [Tags]  Verify_BMC_Gets_SLAAC_Address_On_Enabling_SLAAC
+
+    Set SLAACv6 Configuration State And Verify  ${True}
+    Sleep  ${NETWORK_TIMEOUT}
+    Check BMC Gets SLAACv6 Address  ${True}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -214,7 +223,7 @@ Test Setup Execution
 Test Teardown Execution
     [Documentation]  Test teardown execution.
 
-    FFDC On Test Case Fail
+    #FFDC On Test Case Fail
     Redfish.Logout
 
 
@@ -810,3 +819,21 @@ Check If Linklocal Address Is In Correct Format
     # Verify the linklocal obtained is the same as on the machine.
     Should Be Equal  ${linklocal}  ${ipv6_linklocal_addr}
 
+
+Check BMC Gets SLAACv6 Address
+    [Documentation]  Check BMC gets slaacv6 address.
+    [Arguments]  ${slaac_state}
+
+    # Description of the argument(s):
+    # slaac_state   Set Autoconfig to True/ False.
+
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    @{ipv6_addresses}=  Get From Dictionary  ${resp.dict}  IPv6Addresses
+    ${ipv6_address}=  Get From List  ${ipv6_addresses}  0
+    Should Not Be Empty  ${ipv6_address["Address"]}
+    IF  '${slaac_state}'=='${True}'
+        Should Be Equal As Strings  ${ipv6_address["AddressOrigin"]}  SLAAC
+    ELSE
+        Should Be Equal As Strings  ${ipv6_address["AddressOrigin"]}  LinkLocal
+    END
