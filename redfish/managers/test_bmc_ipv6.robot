@@ -196,6 +196,16 @@ Verify IPv6 Linklocal Address Is In Corrrect Format
     Check If Linklocal Address Is In Correct Format
 
 
+Verify BMC Gets SLAAC Address On Enabling SLAAC
+    [Documentation]  On enabling SLAAC verify SLAAC address comes up.
+    [Tags]  Verify_BMC_Gets_SLAAC_Address_On_Enabling_SLAAC
+    [Setup]  Set SLAACv6 Configuration State And Verify  ${False}
+
+    Set SLAACv6 Configuration State And Verify  ${True}
+    Sleep  ${NETWORK_TIMEOUT}
+    Check BMC Gets SLAACv6 Address
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -778,23 +788,10 @@ Delete IPv6 Static Default Gateway
 Check Coexistence Of Linklocalv6 And Static IPv6
     [Documentation]  Verify both linklocalv6 and static IPv6 exist.
 
-    ${active_channel_config}=  Get Active Channel Config
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${CHANNEL_NUMBER}']['name']}
-
     # Verify the address origin contains static and linklocal.
-    @{ipv6_addresses}=  Get From Dictionary  ${resp.dict}  IPv6Addresses
-    ${ipv6_linklocal_addr}=  Set Variable  ${None}
-    ${ipv6_static_addr}=  Set Variable  ${None}
-    ${ipv6_addressorigin_list}=  Create List
+    @{ipv6_addressorigin_list}  ${ipv6_linklocal_addr}=  Get Address Origin List And Address For Type  LinkLocal
 
-    FOR  ${ipv6_address}  IN  @{ipv6_addresses}
-        ${ipv6_addressorigin}=  Get From Dictionary  ${ipv6_address}  AddressOrigin
-        IF  '${ipv6_addressorigin}' == 'LinkLocal'
-            Set Test Variable  ${ipv6_linklocal_addr}  ${ipv6_address['Address']}
-        END
-        Append To List  ${ipv6_addressorigin_list}  ${ipv6_addressorigin}
-    END
-
+    Should Not Be Empty  ${ipv6_linklocal_addr}  msg=LinkLocal address is not present.
     Should Match Regexp  ${ipv6_linklocal_addr}        ${linklocal_addr_format}
     Should Contain       ${ipv6_addressorigin_list}    LinkLocal
     Should Contain       ${ipv6_addressorigin_list}    Static
@@ -804,17 +801,9 @@ Check If Linklocal Address Is In Correct Format
     [Documentation]  Linklocal address has network part fe80 and host part EUI64.
 
     # Fetch the linklocal address.
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${CHANNEL_NUMBER}']['name']}
-
-    @{ipv6_addresses}=  Get From Dictionary  ${resp.dict}  IPv6Addresses
-    ${ipv6_linklocal_addr}=  Set Variable  ${None}
-    ${ipv6_addressorigin_list}=  Create List
-    FOR  ${ipv6_address}  IN  @{ipv6_addresses}
-        ${ipv6_addressorigin}=  Get From Dictionary  ${ipv6_address}  AddressOrigin
-        IF  '${ipv6_addressorigin}' == 'LinkLocal'
-            Set Test Variable  ${ipv6_linklocal_addr}  ${ipv6_address['Address']}
-        END
-    END
+    @{ipv6_addressorigin_list}  ${ipv6_linklocal_addr}=  Get Address Origin List And Address For Type  LinkLocal
+    Should Contain  ${ipv6_addressorigin_list}  LinkLocal
+    Should Not Be Empty  ${ipv6_linklocal_addr}  msg=LinkLocal address is not present.
 
     # Follow EUI64 from MAC.
     ${system_mac}=  Get BMC MAC Address
@@ -828,4 +817,35 @@ Check If Linklocal Address Is In Correct Format
 
     # Verify the linklocal obtained is the same as on the machine.
     Should Be Equal  ${linklocal}  ${ipv6_linklocal_addr}
+
+
+Check BMC Gets SLAACv6 Address
+    [Documentation]  Check BMC gets slaacv6 address.
+
+    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr}=  Get Address Origin List And Address For Type  SLAAC
+
+    Should Contain  ${ipv6_addressorigin_list}  SLAAC
+    Should Not Be Empty  ${ipv6_slaac_addr}  msg=SLAACv6 address is not present.
+
+Get Address Origin List And Address For Type
+    [Documentation]  Get address origin list and address for type.
+    [Arguments]  ${ipv6_address_type}
+
+    # Description of the argument(s):
+    # ipv6_address_type  Type of IPv6 address to be checked.
+
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    @{ipv6_addresses}=  Get From Dictionary  ${resp.dict}  IPv6Addresses
+
+    ${ipv6_addressorigin_list}=  Create List
+    ${ipv6_slaac_addr}=  Set Variable  ${None}
+    FOR  ${ipv6_address}  IN  @{ipv6_addresses}
+        ${ipv6_addressorigin}=  Get From Dictionary  ${ipv6_address}  AddressOrigin
+        Append To List  ${ipv6_addressorigin_list}  ${ipv6_addressorigin}
+        IF  '${ipv6_addressorigin}' == '${ipv6_address_type}'
+            Set Test Variable  ${ipv6_type_addr}  ${ipv6_address['Address']}
+        END
+    END
+    RETURN  @{ipv6_addressorigin_list}  ${ipv6_type_addr}
+
 
