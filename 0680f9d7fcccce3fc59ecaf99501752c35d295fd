@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "523888db_4445b750",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-08-11T16:09:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6127b618_65a1b69a",
+      "revId": "0680f9d7fcccce3fc59ecaf99501752c35d295fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2aa2d11a_a38cb836",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-08-11T15:08:56Z",
       "side": 1,
       "message": "ending comment with \u0027.\u0027",
+      "revId": "0680f9d7fcccce3fc59ecaf99501752c35d295fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0af012da_c529c5c0",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-08-11T16:09:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2aa2d11a_a38cb836",
       "revId": "0680f9d7fcccce3fc59ecaf99501752c35d295fd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
