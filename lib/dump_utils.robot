@@ -506,3 +506,20 @@ Verify Dump Status In BMC
 
     ${dump_status}=  Get Dump Status In BMC  ${dump_uri}
     Should Be Equal  ${dump_status}  ${expected_dump_status}
+
+
+Get Dump Log Entries Status
+    [Documentation]  Get dump log information and return True or False based on following cases.
+    ...              If no dump log found then return False.
+    ...              If dump log found then return True.
+
+    ${dump_entries}=  Get Redfish BMC Dump Log Entries
+
+    IF  ${dump_entries['Members@odata.count']} >= 1
+        ${dump_exists}=  Set Variable  True
+    ELSE
+        ${dump_exists}=  Set Variable  False
+    END
+
+    RETURN  ${dump_exists}  ${dump_entries}
+
