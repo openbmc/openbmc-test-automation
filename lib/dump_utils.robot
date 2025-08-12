@@ -506,3 +506,4 @@ Verify Dump Status In BMC
 
     ${dump_status}=  Get Dump Status In BMC  ${dump_uri}
     Should Be Equal  ${dump_status}  ${expected_dump_status}
+

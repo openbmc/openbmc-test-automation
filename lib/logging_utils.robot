@@ -379,3 +379,23 @@ Set Resolve Flag For Event Log
 
     Redfish.Patch  ${EVENT_LOG_URI}Entries/${bmc_event_id}  body={'Resolved':${resolved_flag}}
     ...  valid_status_codes=[${valid_status_code}]
+
+
+Get Redfish Event Log Entries
+    [Documentation]  Get the BMC event log entries.
+
+    # URI : /redfish/v1/Systems/system/LogServices/EventLog/Entries
+
+    # Sample event log data
+
+    # '@odata.id': '/redfish/v1/Systems/system/LogServices/EventLog/Entries',
+    # '@odata.type': '#LogEntryCollection.LogEntryCollection',
+    # 'Description': 'Collection of System Event Log Entries',
+    # 'Members': [],
+    #  'Members@odata.count': 0,
+    #  'Name': 'System Event Log Entries'
+
+    ${resp}=  Redfish.Get  ${EVENT_LOG_URI}Entries
+
+    RETURN  ${resp.dict}
+
