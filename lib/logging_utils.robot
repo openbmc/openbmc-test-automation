@@ -379,3 +379,47 @@ Set Resolve Flag For Event Log
 
     Redfish.Patch  ${EVENT_LOG_URI}Entries/${bmc_event_id}  body={'Resolved':${resolved_flag}}
     ...  valid_status_codes=[${valid_status_code}]
+
+
+Get Redfish Event Log Entries
+    [Documentation]  Get the BMC event log entries.
+
+    # URI : /redfish/v1/Systems/system/LogServices/EventLog/Entries
+
+    # Sample event log data
+
+    # '@odata.id': '/redfish/v1/Systems/system/LogServices/EventLog/Entries',
+    # '@odata.type': '#LogEntryCollection.LogEntryCollection',
+    # 'Description': 'Collection of System Event Log Entries',
+    # 'Members': [],
+    #  'Members@odata.count': 0,
+    #  'Name': 'System Event Log Entries'
+
+    # Sample event member
+
+    # "@odata.id": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/1446",
+    #  "@odata.type": "#LogEntry.v1_9_0.LogEntry",
+    #  "AdditionalDataURI": "/redfish/v1/Systems/system/LogServices/EventLog/Entries/1446/attachment",
+    #  "Created": "2022-02-04T13:28:04+00:00",
+    #  "EntryType": "Event",
+    #  "EventId": "B700697A 00000072 00010002 2A201101 00000000 00000000 21010012 00000000 00000000",
+    #  "Id": "1446",
+    #  "Message": "B700697A event in subsystem: I/O Bridge",
+    #  "Modified": "2022-02-04T13:28:04+00:00",
+    #  "Name": "System Event Log Entry",
+    #  "Oem": {
+    #    "OpenBMC": {
+    #      "@odata.type": "#OemLogEntry.v1_0_0.LogEntry",
+    #      "ManagementSystemAck": false
+    #    }
+    #  },
+    #  "Resolution": "1. Priority: Medium, PN: NEXTLVL\n",
+    #  "Resolved": false,
+    #  "ServiceProviderNotified": true,
+    #  "Severity": "Critical"
+
+
+    ${resp}=  Redfish.Get  ${EVENT_LOG_URI}Entries
+
+    RETURN  ${resp.dict}
+
