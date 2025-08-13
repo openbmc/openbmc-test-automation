@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2dae9421_d527a5a0",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-08-13T06:09:54Z",
+      "side": 1,
+      "message": "Keeping the same as there already a test case with the same name where SLAAC property is enabled.",
+      "parentUuid": "2a748397_78bf28f1",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 47
+      },
+      "revId": "64da2be05fd86137ed5f4981cf21b546038c2d6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1e0fbd0_d18ccfcf",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2025-08-12T09:10:06Z",
       "side": 1,
       "message": "${network_timeout}",
+      "range": {
+        "startLine": 193,
+        "startChar": 13,
+        "endLine": 193,
+        "endChar": 15
+      },
+      "revId": "64da2be05fd86137ed5f4981cf21b546038c2d6f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cffb0f5_6f2ebd37",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-08-13T06:09:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1e0fbd0_d18ccfcf",
       "range": {
         "startLine": 193,
         "startChar": 13,
