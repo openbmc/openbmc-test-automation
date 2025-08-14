@@ -16,6 +16,23 @@
       "message": "Please confirm if the test passed",
       "revId": "09b427926b93b882c242ce3d0f9c2c5891b93ff5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55215c67_785977cb",
+        "filename": "lib/utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1002579
+      },
+      "writtenOn": "2025-08-14T07:15:34Z",
+      "side": 1,
+      "message": "Please update with below syntax,\n\"\"\"\nIF  \u0027${os_username}\u0027 \u003d\u003d \u0027root\u0027\n    ${cmd_buf}\u003d  Set Variable  reboot\nELSE\n    ${cmd_buf}\u003d  Set Variable  echo ${os_password} | sudo -S reboot\nEND\n\"\"\"\nApplicable for all in the same file scope.",
+      "revId": "09b427926b93b882c242ce3d0f9c2c5891b93ff5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
