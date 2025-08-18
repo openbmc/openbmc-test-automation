@@ -59,6 +59,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f89c5c0c_e8faba4b",
+        "filename": "gui/gui_test/gui_header/test_profile_settings_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-08-18T13:57:00Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "e43aeb03_84555077",
+      "range": {
+        "startLine": 84,
+        "startChar": 32,
+        "endLine": 84,
+        "endChar": 39
+      },
+      "revId": "ce9f677f6cbefa92ec1cd1bbbd73baad974de826",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7231a49a_85f056a7",
@@ -72,6 +96,24 @@
       "writtenOn": "2025-08-18T13:43:16Z",
       "side": 1,
       "message": "one line space after 90\n\nIn documentation use only format for Readonly or readonly",
+      "revId": "ce9f677f6cbefa92ec1cd1bbbd73baad974de826",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98c3d4f9_01f1dcef",
+        "filename": "gui/gui_test/gui_header/test_profile_settings_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-08-18T13:57:00Z",
+      "side": 1,
+      "message": "used Readonly_user",
+      "parentUuid": "7231a49a_85f056a7",
       "revId": "ce9f677f6cbefa92ec1cd1bbbd73baad974de826",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -99,6 +141,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "443c3d4f_e43b2a1b",
+        "filename": "gui/gui_test/gui_header/test_profile_settings_sub_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-08-18T13:57:00Z",
+      "side": 1,
+      "message": "will make readonly_user",
+      "parentUuid": "66272ebc_56e6a932",
+      "range": {
+        "startLine": 92,
+        "startChar": 50,
+        "endLine": 92,
+        "endChar": 63
+      },
+      "revId": "ce9f677f6cbefa92ec1cd1bbbd73baad974de826",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acdcb24e_fd52696f",
@@ -112,6 +178,30 @@
       "writtenOn": "2025-08-18T13:43:16Z",
       "side": 1,
       "message": "readonly_gui_user",
+      "range": {
+        "startLine": 331,
+        "startChar": 25,
+        "endLine": 331,
+        "endChar": 38
+      },
+      "revId": "ce9f677f6cbefa92ec1cd1bbbd73baad974de826",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "967c8b46_1a254dd2",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-08-18T13:57:00Z",
+      "side": 1,
+      "message": "readonly_user",
+      "parentUuid": "acdcb24e_fd52696f",
       "range": {
         "startLine": 331,
         "startChar": 25,
