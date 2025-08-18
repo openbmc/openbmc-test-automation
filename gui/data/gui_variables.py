@@ -104,7 +104,6 @@ class gui_variables:
     xpath_power_sub_menu = "//*[@data-test-id='nav-item-power']"
     xpath_power_link = "//a[@href='#/resource-management/power']"
     xpath_power_heading = "//h1[contains(text(), 'Power')]"
-    xpath_success_message = "//*[contains(text(),'Success')]"
 
     # Profile settings
     xpath_default_UTC = "//*[@data-test-id='profileSettings-radio-defaultUTC']"
@@ -139,3 +138,13 @@ class gui_variables:
     xpath_reboot_bmc_heading = "//h1[text()='Reboot BMC']"
     xpath_reboot_bmc_button = "//button[contains(text(),'Reboot BMC')]"
     xpath_confirm_bmc_reboot = "//*[@class='btn btn-primary']"
+
+
+    # Pop up variables
+    xpath_success_message = "//*[contains(text(),'Success')]"
+    xpath_error_popup = (
+        "//*[contains(text(),'Error')]/following-sibling::button"
+    )
+    xpath_Unauthorized_popup = (
+        "//*[contains(text(),'Unauthorized')]/following-sibling::button"
+    )
