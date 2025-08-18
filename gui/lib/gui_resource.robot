@@ -149,8 +149,8 @@ Refresh GUI
     [Documentation]  Refresh GUI via refresh button in header.
 
     Click Element  ${xpath_refresh_button}
-    # Added delay for page to load fully after refresh.
-    Sleep  5s
+    # Waiting for  page to load fully after refresh.
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=120s
 
 
 Refresh GUI And Verify Element Value
@@ -266,3 +266,14 @@ Reboot Server
     ELSE
       Log To console    Server is already powered Off, can't reboot.
     END
+
+
+Verify Error And Unauthorized Message On GUI
+    [Documentation]   Perform operations on GUI with Readonly user and 
+    ...               verify Error and Unauthorized messages.
+
+    Wait Until Element Is Visible  ${xpath_error_popup} 
+    Page Should Contain  Error 
+    Page Should Contain  Unauthorized
+    Click Element  ${xpath_error_popup}
+    Click Element  ${xpath_Unauthorized_popup}
