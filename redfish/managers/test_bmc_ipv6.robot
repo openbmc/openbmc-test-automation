@@ -124,25 +124,23 @@ Enable DHCPv6 Property On BMC And Verify
     [Documentation]  Enable DHCPv6 property on BMC and verify.
     [Tags]  Enable_DHCPv6_Property_On_BMC_And_Verify
 
-    Set DHCPv6 Property     Enabled
-    Verify DHCPv6 Property  Enabled
+    Set And Verify DHCPv6 Property  Enabled
 
 
 Disable DHCPv6 Property On BMC And Verify
     [Documentation]  Disable DHCPv6 property on BMC and verify.
     [Tags]  Disable_DHCPv6_Property_On_BMC_And_Verify
 
-    Set DHCPv6 Property     Disabled
-    Verify DHCPv6 Property  Disabled
+    Set And Verify DHCPv6 Property  Disabled
 
 
 Verify Persistency Of DHCPv6 On Reboot
     [Documentation]  Verify persistency of DHCPv6 property on reboot.
     [Tags]  Verify_Persistency_Of_DHCPv6_On_Reboot
 
-    Set DHCPv6 Property        Enabled
-    Redfish OBMC Reboot (off)  stack_mode=skip
-    Verify DHCPv6 Property     Enabled
+    Set And Verify DHCPv6 Property  Enabled
+    Redfish OBMC Reboot (off)       stack_mode=skip
+    Verify DHCPv6 Property          Enabled
 
 
 Configure Invalid Static IPv6 And Verify
@@ -204,6 +202,18 @@ Verify BMC Gets SLAAC Address On Enabling SLAAC
     Set SLAACv6 Configuration State And Verify  ${True}
     Sleep  ${NETWORK_TIMEOUT}
     Check BMC Gets SLAACv6 Address
+
+
+Enable And Verify DHCPv6 Property On Eth1 When DHCPv6 Property Enabled On Eth0
+    [Documentation]  Verify DHCPv6 on eth1 when DHCPv6 property is enabled on eth0.
+    [Tags]  Enable_And_Verify_DHCPv6_Property_On_Eth1_When_DHCPv6_Property_Enabled_On_Eth0
+    [Setup]  Run Keywords  Get The Initial DHCPv6 Setting  ${1}  dhcpv6_channel_1
+    ...  AND  Get The Initial DHCPv6 Setting  ${2}  dhcpv6_channel_2
+    [Teardown]  Run Keywords  Set And Verify DHCPv6 Property  ${dhcpv6_channel_1}  ${1}
+    ...  AND  Set And Verify DHCPv6 Property  ${dhcpv6_channel_2}  ${2}
+    
+    Set And Verify DHCPv6 Property  Enabled  ${1}
+    Set And Verify DHCPv6 Property  Enabled  ${2}
 
 
 *** Keywords ***
@@ -592,16 +602,27 @@ Set SLAACv6 Configuration State And Verify
         Fail  msg=SLAACv6 not set properly.
     END
 
-
-Set DHCPv6 Property
-    [Documentation]  Set DHCPv6 attribute and verify.
-    [Arguments]  ${dhcpv6_operating_mode}=${Disabled}
+Set And Verify DHCPv6 Property
+    [Documentation]  Set DHCPv6 property and verify.
+    [Arguments]  ${dhcpv6_operating_mode}=${Disabled}  ${channel_number}=${CHANNEL_NUMBER}
 
     # Description of argument(s):
     # dhcpv6_operating_mode    Enabled if user wants to enable DHCPv6('Enabled' or 'Disabled').
+    # channel_number           Channel number 1 or 2.
+
+    Set DHCPv6 Property  ${dhcpv6_operating_mode}  ${channel_number}
+    Verify DHCPv6 Property  ${dhcpv6_operating_mode}  ${channel_number}
+
+
+Set DHCPv6 Property
+    [Documentation]  Set DHCPv6 attribute is enables or disabled.
+    [Arguments]  ${dhcpv6_operating_mode}=${Disabled}  ${channel_number}=${CHANNEL_NUMBER}
+
+    # Description of argument(s):
+    # dhcpv6_operating_mode    Enabled if user wants to enable DHCPv6('Enabled' or 'Disabled').
+    # channel_number           Channel number 1 or 2.
 
     ${data}=  Set Variable If  '${dhcpv6_operating_mode}' == 'Disabled'  ${DISABLE_DHCPv6}  ${ENABLE_DHCPv6}
-    ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
     Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
@@ -610,10 +631,13 @@ Set DHCPv6 Property
 
 Verify DHCPv6 Property
     [Documentation]  Verify DHCPv6 settings is enabled or disabled.
-    [Arguments]  ${dhcpv6_operating_mode}
+    [Arguments]  ${dhcpv6_operating_mode}  ${channel_number}=${CHANNEL_NUMBER}
 
     # Description of Argument(s):
     # dhcpv6_operating_mode  Enable/ Disable DHCPv6.
+    # channel_number         Channel number 1 or 2.
+
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     ${dhcpv6_verify}=  Get From Dictionary  ${resp.dict}  DHCPv6
@@ -827,6 +851,21 @@ Check BMC Gets SLAACv6 Address
     Should Contain  ${ipv6_addressorigin_list}  SLAAC
     Should Not Be Empty  ${ipv6_slaac_addr}  msg=SLAACv6 address is not present.
 
+
+Get The Initial DHCPv6 Setting
+    [Documentation]  Get The Initial DHCPv6 Setting.
+    [Arguments]  ${channel_number}  ${initial_dhcpv6_before}
+
+    # Description of the argument(s):
+    # channel_number         Channel number 1 or 2.
+    # initial_dhcpv6_before  Variable to store initial DHCPv6 setting.
+
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ${initial_dhcpv6_iface}=  Get From Dictionary  ${resp.dict}  DHCPv6
+    Set Test Variable  ${${initial_dhcpv6_before}}  ${initial_dhcpv6_iface['OperatingMode']}
+
+
 Get Address Origin List And Address For Type
     [Documentation]  Get address origin list and address for type.
     [Arguments]  ${ipv6_address_type}
@@ -847,5 +886,3 @@ Get Address Origin List And Address For Type
         END
     END
     RETURN  @{ipv6_addressorigin_list}  ${ipv6_type_addr}
-
-
