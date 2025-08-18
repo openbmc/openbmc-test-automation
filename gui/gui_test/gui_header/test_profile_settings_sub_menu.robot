@@ -3,6 +3,8 @@
 Documentation   Test OpenBMC GUI "Profile settings" menu.
 
 Resource        ../../lib/gui_resource.robot
+Resource        ../../../lib/bmc_redfish_utils.robot
+Variables       ../../data/gui_p10_variables.py
 
 Suite Setup     Launch Browser And Login GUI
 Suite Teardown  Close Browser
@@ -17,6 +19,7 @@ ${xpath_confirm_password}              //*[@data-test-id='profileSettings-input-
 ${xpath_logged_usename}                //*[@data-test-id='appHeader-container-user']
 ${xpath_default_UTC}                   //*[@data-test-id='profileSettings-radio-defaultUTC']
 ${xpath_profile_settings_save_button}  //*[@data-test-id='profileSettings-button-saveSettings']
+${xpath_browser_offset}                //*[@data-test-id='profileSettings-radio-browserOffset']
 
 *** Test Cases ***
 
@@ -75,6 +78,32 @@ Verify Default UTC Timezone Display
 
     ${cli_hour_and_min}=  Convert Date  ${cli_date_time}  result_format=%H:%M
     Page Should Contain  ${cli_hour_and_min}
+
+
+Verify Profile Setting Menu With Readonly User
+    [Documentation]  Verify All Buttons,sections and radio buttons with
+    ...              Readonly user in Profile setting menu.
+    [Tags]  Verify_Profile_Setting_Menu_With_Readonly_User
+    [Setup]  Login GUI With Readonly User And Perform Operations
+    [Teardown]  Run Keywords  Logout GUI  AND  Login GUI  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+
+    # This Test setup will do Navigate to Profile setting page.
+    Test Setup Execution
+
+    # Now input  username and password value and submit.
+    Input Text  ${xpath_new_password}  ${OPENBMC_PASSWORD}
+    Input Text  ${xpath_confirm_password}  ${OPENBMC_PASSWORD}
+
+    Click Element At Coordinates    ${xpath_default_UTC}    0    0
+    Click Element  ${xpath_profile_settings_save_button}
+
+    # Readonly user have access to change self password,
+    # So expecting success messages on this page.
+    Verify Success Message On BMC GUI Page
+
+    Click Element At Coordinates  ${xpath_browser_offset}  0   0
+    Click Element  ${xpath_profile_settings_save_button}
+    Verify Success Message On BMC GUI Page
 
 
 *** Keywords ***
