@@ -105,6 +105,7 @@ Login GUI
     Wait Until Element Is Not Visible
     ...  ${xpath_page_loading_progress_bar}  timeout=120s
 
+
 Launch Browser And Login GUI With Given User
     [Documentation]  Launch browser and login eBMC with specified user
     ...  credentials through GUI.
@@ -116,6 +117,7 @@ Launch Browser And Login GUI With Given User
 
     Open Browser With URL  ${OPENBMC_GUI_URL}
     LOGIN GUI  ${user_name}  ${user_password}
+
 
 Logout GUI
     [Documentation]  Logout of OpenBMC GUI.
@@ -149,8 +151,8 @@ Refresh GUI
     [Documentation]  Refresh GUI via refresh button in header.
 
     Click Element  ${xpath_refresh_button}
-    # Added delay for page to load fully after refresh.
-    Sleep  5s
+    # Waiting for  page to load fully after refresh.
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=120s
 
 
 Refresh GUI And Verify Element Value
@@ -266,3 +268,48 @@ Reboot Server
     ELSE
       Log To console    Server is already powered Off, can't reboot.
     END
+
+
+Verify Success Message On BMC GUI Page
+    [Documentation]  Perform actions on the GUI and verify that a success message is displayed.
+
+    Wait Until Element Is Visible   ${xpath_success_message}  timeout=30
+    Page Should Contain Element   ${xpath_success_message}
+    Wait Until Element Is Not Visible   ${xpath_success_message}  timeout=30
+
+
+Verify Error And Unauthorized Message On GUI
+    [Documentation]   Perform operations on GUI with Readonly user and
+    ...               verify Error and Unauthorized messages.
+
+    Wait Until Element Is Visible  ${xpath_error_popup}
+    Page Should Contain  Error
+    Page Should Contain  Unauthorized
+    Click Element  ${xpath_error_popup}
+    Click Element  ${xpath_Unauthorized_popup}
+
+
+Create Readonly User And Login To GUI
+    [Documentation]   Logout current GUI sessions and Created Readonly_user via Redfish
+    ...               and Login BMC GUI with Readonly user
+
+    # Logout current GUI session.
+    Logout GUI
+
+    # Created readonly_user via redfish and login BMC GUI with readonly user to perfrom test.
+    Redfish.Login
+    Redfish Create User  readonly_user  ${OPENBMC_PASSWORD}  ReadOnly  ${True}
+    Login GUI  readonly_user  ${OPENBMC_PASSWORD}
+
+
+Delete Readonly User And Logout Current GUI Session
+    [Documentation]  Logout current GUI session and delete Readonly user,
+    ...              Perform Login GUI with default user and password.
+
+    # Delete Read-only user and Logout current GUI session.
+    Logout GUI
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
+
+    # Login BMC GUI with default user.
+    Launch Browser And Login GUI
+
