@@ -206,6 +206,16 @@ Verify BMC Gets SLAAC Address On Enabling SLAAC
     Check BMC Gets SLAACv6 Address
 
 
+Verify DHCP Can Be Enabled On One Interface When Enabled On Another
+    [Documentation]  Verify DHCP can be enabled on one interface when enabled on another.
+    [Tags]  Verify_DHCP_Can_Be_Enabled_On_One_Interface_When_Enabled_On_Another
+
+    Set DHCPv6 Property     Enabled  ${1}
+    Set DHCPv6 Property     Enabled  ${2}
+    Verify DHCPv6 Property  Enabled  ${1}
+    Verify DHCPv6 Property  Enabled  ${2}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -595,13 +605,13 @@ Set SLAACv6 Configuration State And Verify
 
 Set DHCPv6 Property
     [Documentation]  Set DHCPv6 attribute and verify.
-    [Arguments]  ${dhcpv6_operating_mode}=${Disabled}
+    [Arguments]  ${dhcpv6_operating_mode}=${Disabled}  ${channel_number}=${CHANNEL_NUMBER}
 
     # Description of argument(s):
     # dhcpv6_operating_mode    Enabled if user wants to enable DHCPv6('Enabled' or 'Disabled').
+    # channel_number           Channel number 1 or 2.
 
     ${data}=  Set Variable If  '${dhcpv6_operating_mode}' == 'Disabled'  ${DISABLE_DHCPv6}  ${ENABLE_DHCPv6}
-    ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
     Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
@@ -610,10 +620,13 @@ Set DHCPv6 Property
 
 Verify DHCPv6 Property
     [Documentation]  Verify DHCPv6 settings is enabled or disabled.
-    [Arguments]  ${dhcpv6_operating_mode}
+    [Arguments]  ${dhcpv6_operating_mode}  ${channel_number}=${CHANNEL_NUMBER}
 
     # Description of Argument(s):
     # dhcpv6_operating_mode  Enable/ Disable DHCPv6.
+    # channel_number         Channel number 1 or 2.
+
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     ${dhcpv6_verify}=  Get From Dictionary  ${resp.dict}  DHCPv6
@@ -847,5 +860,3 @@ Get Address Origin List And Address For Type
         END
     END
     RETURN  @{ipv6_addressorigin_list}  ${ipv6_type_addr}
-
-
