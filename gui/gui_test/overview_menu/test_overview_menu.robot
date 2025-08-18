@@ -25,7 +25,7 @@ ${xpath_power_information_view_more_button}      (//*[text()="View more"])[4]
 ${xpath_event_logs_view_more_button}             (//*[text()="View more"])[5]
 ${xpath_inventory_and_leds_view_more_button}     (//*[text()="View more"])[6]
 ${xpath_launch_host_console}                     //*[@data-test-id='overviewQuickLinks-button-solConsole']
-${xpath_led_button}                              //*[@data-test-id='overviewInventory-checkbox-identifyLed']
+${xpath_led_button}                              //*[@for="identifyLedSwitch"]
 ${xpath_dumps_view_more_button}                  (//*[text()="View more"])[7]
 ${xpath_critical_logs_count}                     //dt[contains(text(),'Critical')]/following-sibling::dd[1]
 ${xpath_warning_logs_count}                      //dt[contains(text(),'Warning')]/following-sibling::dd[1]
@@ -175,7 +175,7 @@ Verify Server LED Turn Off
     Refresh GUI
 
     # Turn OFF the LED via GUI.
-    Click Element At Coordinates  ${xpath_led_button}  0  0
+    Click Element  ${xpath_led_button}
 
     # Cross check that server LED off state via Redfish.
     Verify Identify LED State Via Redfish  Off
@@ -322,6 +322,29 @@ Verify Text Under Dumps Section
     [Tags]  Verify_Text_Under_Dumps_Section
 
     Page Should Contain  Total
+
+
+Verify Server LED Turn Off And On With Readonly User
+    [Documentation]  Turn off and on server LED via GUI with Readonly user.
+    [Tags]  Verify_Server_LED_Turn_Off_And_On_With_Readonly_User
+
+    Redfish Create User  readonly_user  ${OPENBMC_PASSWORD}  ReadOnly  ${True}
+    Launch Browser And Login GUI With Given User  readonly_user  ${OPENBMC_PASSWORD}
+    Sleep  10s
+    Test Setup Execution
+
+    # Turn On the server LED via Redfish and refresh GUI.
+    Set IndicatorLED State  Lit
+    Refresh GUI
+    # Turn OFF the LED via GUI.
+    Click Element  ${xpath_led_button}
+    Verify Error And Unauthorized Message On GUI
+
+    # Turn ON the LED via GUI.
+    Set IndicatorLED State   Off
+    Refresh GUI
+    Click Element  ${xpath_led_button}
+    Verify Error And Unauthorized Message On GUI
 
 
 *** Keywords ***
