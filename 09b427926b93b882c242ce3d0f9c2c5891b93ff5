@@ -18,6 +18,23 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba0eac00_bdc45b9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-08-19T09:57:19Z",
+      "side": 1,
+      "message": "Pls correct the syntax of IF ELSE as",
+      "revId": "09b427926b93b882c242ce3d0f9c2c5891b93ff5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55215c67_785977cb",
@@ -31,6 +48,52 @@
       "writtenOn": "2025-08-14T07:15:34Z",
       "side": 1,
       "message": "Please update with below syntax,\n\"\"\"\nIF  \u0027${os_username}\u0027 \u003d\u003d \u0027root\u0027\n    ${cmd_buf}\u003d  Set Variable  reboot\nELSE\n    ${cmd_buf}\u003d  Set Variable  echo ${os_password} | sudo -S reboot\nEND\n\"\"\"\nApplicable for all in the same file scope.",
+      "revId": "09b427926b93b882c242ce3d0f9c2c5891b93ff5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a64e19b4_c394aa82",
+        "filename": "lib/utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-08-19T09:57:19Z",
+      "side": 1,
+      "message": "Pls use \u0027Set Variable If\u0027 keyword wherever IF and \u0027set variable\u0027 are used\nRef: https://robotframework.org/robotframework/latest/libraries/BuiltIn.html#Set%20Variable%20If",
+      "range": {
+        "startLine": 195,
+        "startChar": 1,
+        "endLine": 199,
+        "endChar": 7
+      },
+      "revId": "09b427926b93b882c242ce3d0f9c2c5891b93ff5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9365b269_54d89055",
+        "filename": "lib/utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-08-19T09:57:19Z",
+      "side": 1,
+      "message": "Pls make the syntax change here to assign ${state} inside the IF condition and not outside like before.",
+      "range": {
+        "startLine": 306,
+        "startChar": 1,
+        "endLine": 311,
+        "endChar": 1
+      },
       "revId": "09b427926b93b882c242ce3d0f9c2c5891b93ff5",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
