@@ -52,6 +52,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "154d2730_01c980ce",
+        "filename": "lib/utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2025-08-19T18:16:31Z",
+      "side": 1,
+      "message": "Updated the code.\nI have used \u0027Set Variable If\u0027 in this case as per the below comment from Anusha.",
+      "parentUuid": "55215c67_785977cb",
+      "revId": "09b427926b93b882c242ce3d0f9c2c5891b93ff5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a64e19b4_c394aa82",
@@ -75,6 +93,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00c95aac_afdfceaf",
+        "filename": "lib/utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2025-08-19T18:16:31Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "a64e19b4_c394aa82",
+      "range": {
+        "startLine": 195,
+        "startChar": 1,
+        "endLine": 199,
+        "endChar": 7
+      },
+      "revId": "09b427926b93b882c242ce3d0f9c2c5891b93ff5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9365b269_54d89055",
@@ -88,6 +130,30 @@
       "writtenOn": "2025-08-19T09:57:19Z",
       "side": 1,
       "message": "Pls make the syntax change here to assign ${state} inside the IF condition and not outside like before.",
+      "range": {
+        "startLine": 306,
+        "startChar": 1,
+        "endLine": 311,
+        "endChar": 1
+      },
+      "revId": "09b427926b93b882c242ce3d0f9c2c5891b93ff5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42ab5362_ed84e6c3",
+        "filename": "lib/utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2025-08-19T18:16:31Z",
+      "side": 1,
+      "message": "Updated.",
+      "parentUuid": "9365b269_54d89055",
       "range": {
         "startLine": 306,
         "startChar": 1,
