@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd0845aa_c297165e",
+        "filename": "gui/gui_test/gui_header/test_profile_settings_sub_menu.robot",
+        "patchSetId": 29
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-08-19T09:48:29Z",
+      "side": 1,
+      "message": "These should be part of test setup.\n\nThe flow should be create new user, log out, login as Readonly user - all part of test setup.\n\nThen in test teardown - need to logout and then login as the default user.",
+      "range": {
+        "startLine": 88,
+        "startChar": 4,
+        "endLine": 98,
+        "endChar": 62
+      },
+      "revId": "6b2085a2f5f8b862f1e7208372f4198903957da9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "368fa0e6_a8c96534",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 29
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-08-19T09:48:29Z",
+      "side": 1,
+      "message": "Same comment as before",
+      "range": {
+        "startLine": 331,
+        "startChar": 4,
+        "endLine": 334,
+        "endChar": 24
+      },
+      "revId": "6b2085a2f5f8b862f1e7208372f4198903957da9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
