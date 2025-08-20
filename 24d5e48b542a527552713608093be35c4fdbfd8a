@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71813c40_0169c883",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-08-20T15:07:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93f18ec1_0cddb97a",
+      "revId": "24d5e48b542a527552713608093be35c4fdbfd8a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8fccf0f_937dd574",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da4cb097_7398dcd9",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-08-20T15:07:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8fccf0f_937dd574",
+      "revId": "24d5e48b542a527552713608093be35c4fdbfd8a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb4e0483_4e18cdd1",
@@ -48,6 +84,24 @@
       "writtenOn": "2025-08-20T05:55:00Z",
       "side": 1,
       "message": "from where CHANNEL_NUMBER is coming?",
+      "revId": "24d5e48b542a527552713608093be35c4fdbfd8a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d69f643_97de79c5",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-08-20T15:07:19Z",
+      "side": 1,
+      "message": "We are passing the variable while running.",
+      "parentUuid": "bb4e0483_4e18cdd1",
       "revId": "24d5e48b542a527552713608093be35c4fdbfd8a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
