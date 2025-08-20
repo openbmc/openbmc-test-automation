@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a3e0f35_7909c79f",
+        "filename": "lib/utils.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2025-08-20T10:39:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "966aab4a_9efc342d",
+      "revId": "22c660396ebca90a64212bc6f8fb59a57c4e2405",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "672f258e_de06feea",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-08-20T03:07:55Z",
       "side": 1,
       "message": "We dont required to assign variable here with ${EMPTY}.",
+      "revId": "22c660396ebca90a64212bc6f8fb59a57c4e2405",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "949b8aef_26fa6a7d",
+        "filename": "lib/utils.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2025-08-20T10:39:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "672f258e_de06feea",
       "revId": "22c660396ebca90a64212bc6f8fb59a57c4e2405",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
