@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93f18ec1_0cddb97a",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-08-20T05:55:00Z",
+      "side": 1,
+      "message": "eth0 setting to come in setup??",
+      "revId": "24d5e48b542a527552713608093be35c4fdbfd8a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8fccf0f_937dd574",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-08-20T05:55:00Z",
+      "side": 1,
+      "message": "name something like this:\ninitial_dhcpv6_iface1\ninitial_dhcpv6_on_interface1",
+      "revId": "24d5e48b542a527552713608093be35c4fdbfd8a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb4e0483_4e18cdd1",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-08-20T05:55:00Z",
+      "side": 1,
+      "message": "from where CHANNEL_NUMBER is coming?",
+      "revId": "24d5e48b542a527552713608093be35c4fdbfd8a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
