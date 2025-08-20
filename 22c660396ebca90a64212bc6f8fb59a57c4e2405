@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "966aab4a_9efc342d",
+        "filename": "lib/utils.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-08-20T07:19:48Z",
+      "side": 1,
+      "message": "Change in all places\nSet Variable If  \u003ccondition\u003e  \u003ctrue_condition\u003e  \u003cfalse_condition\u003e\nRemove ELSE",
+      "revId": "22c660396ebca90a64212bc6f8fb59a57c4e2405",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "672f258e_de06feea",
         "filename": "lib/utils.robot",
         "patchSetId": 6
