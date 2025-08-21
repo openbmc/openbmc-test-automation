@@ -9,7 +9,6 @@ Resource       ../../lib/external_intf/vmi_utils.robot
 Library        ../../lib/bmc_network_utils.py
 Library        Collections
 Library        Process
-
 Test Setup     Test Setup Execution
 Test Teardown  Test Teardown Execution
 Suite Setup    Suite Setup Execution
@@ -113,11 +112,11 @@ Verify Persistency Of IPv6 After BMC Reboot
     Verify IPv6 On BMC  ${test_ipv6_addr}
 
 
-Enable SLAACv6 On BMC And Verify
-    [Documentation]  Enable SLAACv6 on BMC and verify.
-    [Tags]  Enable_SLAACv6_On_BMC_And_Verify
+Enable SLAAC On BMC And Verify
+    [Documentation]  Enable SLAAC on BMC and verify.
+    [Tags]  Enable_SLAAC_On_BMC_And_Verify
 
-    Set SLAACv6 Configuration State And Verify  ${True}
+    Set SLAAC Configuration State And Verify  ${True}
 
 
 Enable DHCPv6 Property On BMC And Verify
@@ -197,11 +196,11 @@ Verify IPv6 Linklocal Address Is In Corrrect Format
 Verify BMC Gets SLAAC Address On Enabling SLAAC
     [Documentation]  On enabling SLAAC verify SLAAC address comes up.
     [Tags]  Verify_BMC_Gets_SLAAC_Address_On_Enabling_SLAAC
-    [Setup]  Set SLAACv6 Configuration State And Verify  ${False}
+    [Setup]  Set SLAAC Configuration State And Verify  ${False}
 
-    Set SLAACv6 Configuration State And Verify  ${True}
+    Set SLAAC Configuration State And Verify  ${True}
     Sleep  ${NETWORK_TIMEOUT}
-    Check BMC Gets SLAACv6 Address
+    Check BMC Gets SLAAC Address
 
 
 Enable And Verify DHCPv6 Property On Eth1 When DHCPv6 Property Enabled On Eth0
@@ -216,6 +215,45 @@ Enable And Verify DHCPv6 Property On Eth1 When DHCPv6 Property Enabled On Eth0
     Set And Verify DHCPv6 Property  Enabled  ${2}
 
 
+Enable And Verify SLAAC Property On Eth1 When SLAAC Property Enabled On Eth0
+    [Documentation]  Enable and verify SLAAC property on Eth1 when SLAAC property enabled on Eth0.
+    [Tags]  Enable_And_Verify_SLAAC_Property_On_Eth1_When_SLAAC_Property_Enabled_On_Eth0
+    [Setup]  Run Keywords  Get The Initial SLAAC Setting  ${1}  slaac_channel_1
+    ...  AND  Get The Initial SLAAC Setting  ${2}  slaac_channel_2
+    [Teardown]  Run Keywords  Set SLAAC Configuration State And Verify  ${slaac_channel_1}  [${HTTP_OK}]  ${1}
+    ...  AND  Set SLAAC Configuration State And Verify  ${slaac_channel_2}  [${HTTP_OK}]  ${2}
+
+    Set SLAAC Configuration State And Verify   ${True}  [${HTTP_OK}]  ${1}
+    Set SLAAC Configuration State And Verify   ${True}  [${HTTP_OK}]  ${2}
+
+    # Verify that it will not impact the IPv4 configuration.
+    Sleep  ${NETWORK_TIMEOUT}
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+    # SLAAC address must be present.
+    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr}=  Get Address Origin List And Address For Type  SLAAC
+
+    Should Contain  ${ipv6_addressorigin_list}  SLAAC
+    Should Not Be Empty  ${ipv6_slaac_addr}  msg=SLAAC address is not present
+
+    # Linklocal must be present.
+    @{ipv6_addressorigin_list}  ${ipv6_linklocal_addr}=  Get Address Origin List And Address For Type  LinkLocal
+    Should Contain  ${ipv6_addressorigin_list}  LinkLocal
+    Should Not Be Empty  ${ipv6_linklocal_addr}  msg=LinkLocal address is not present.
+
+    # IPv4 and IPv6 addresses must remain intact.
+    ${ipv4_addressorigin_list}  ${ipv4_addr_list}=  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses
+    ${ipv6_addressorigin_list}  ${ipv6_addr_list}=  Get Address Origin List And IPv4 or IPv6 Address  IPv6Addresses
+
+    ${ipv6_is_subset}=  Evaluate  set(${initial_ipv6_addr_list}).issubset(set(${ipv6_addr_list}))
+    Should Be True  ${ipv6_is_subset}
+
+    Should Contain  ${ipv4_addressorigin_list}  Static
+    Should Not Be Empty  ${ipv4_addr_list}  msg=Staticv4 address is not present.
+    Should be Equal  ${initial_ipv4_addressorigin_list}  ${ipv4_addressorigin_list}
+    Should be Equal  ${initial_ipv4_addr_list}  ${ipv4_addr_list}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -227,6 +265,14 @@ Suite Setup Execution
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
     Set Suite variable  ${ethernet_interface}
+
+    ${initial_ipv4_addressorigin_list}  ${initial_ipv4_addr_list}=  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses
+    ${initial_ipv6_addressorigin_list}  ${initial_ipv6_addr_list}=  Get Address Origin List And IPv4 or IPv6 Address  IPv6Addresses
+
+    Set Suite Variable  ${initial_ipv4_addressorigin_list}
+    Set Suite Variable  ${initial_ipv4_addr_list}
+    Set Suite Variable  ${initial_ipv4_addressorigin_list}
+    Set Suite Variable   ${initial_ipv6_addr_list}
 
 
 Test Setup Execution
@@ -579,13 +625,14 @@ Modify IPv6 Address
     Validate IPv6 Network Config On BMC
 
 
-Set SLAACv6 Configuration State And Verify
-    [Documentation]  Set SLAACv6 configuration state and verify.
-    [Arguments]  ${slaac_state}  ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
+Set SLAAC Configuration State And Verify
+    [Documentation]  Set SLAAC configuration state and verify.
+    [Arguments]  ${slaac_state}  ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]  ${channel_number}=${CHANNEL_NUMBER}
 
     # Description of argument(s):
-    # slaac_state         SLAACv6 state('True' or 'False').
+    # slaac_state         SLAAC state('True' or 'False').
     # valid_status_code   Expected valid status codes.
+    # channel_number      Channel number 1 or 2.
 
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
@@ -594,12 +641,12 @@ Set SLAACv6 Configuration State And Verify
     ${resp}=  Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     ...  body=${data}  valid_status_codes=${valid_status_codes}
 
-    # Verify SLAACv6 is set correctly.
+    # Verify SLAAC is set correctly.
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     ${slaac_verify}=  Get From Dictionary  ${resp.dict}  StatelessAddressAutoConfig
 
     IF  '${slaac_verify['IPv6AutoConfigEnabled']}' != '${slaac_state}'
-        Fail  msg=SLAACv6 not set properly.
+        Fail  msg=SLAAC not set properly.
     END
 
 Set And Verify DHCPv6 Property
@@ -843,27 +890,41 @@ Check If Linklocal Address Is In Correct Format
     Should Be Equal  ${linklocal}  ${ipv6_linklocal_addr}
 
 
-Check BMC Gets SLAACv6 Address
-    [Documentation]  Check BMC gets slaacv6 address.
+Check BMC Gets SLAAC Address
+    [Documentation]  Check BMC gets slaac address.
 
     @{ipv6_addressorigin_list}  ${ipv6_slaac_addr}=  Get Address Origin List And Address For Type  SLAAC
 
     Should Contain  ${ipv6_addressorigin_list}  SLAAC
-    Should Not Be Empty  ${ipv6_slaac_addr}  msg=SLAACv6 address is not present.
+    Should Not Be Empty  ${ipv6_slaac_addr}  msg=SLAAC address is not present.
 
 
 Get The Initial DHCPv6 Setting
     [Documentation]  Get the initial DHCPv6 setting and store in a variable.
-    [Arguments]  ${channel_number}  ${initial_dhcpv6_before}
+    [Arguments]  ${channel_number}  ${initial_dhcpv6}
 
     # Description of the argument(s):
-    # channel_number         Channel number 1 or 2.
-    # initial_dhcpv6_before  Variable to store initial DHCPv6 setting.
+    # channel_number    Channel number 1 or 2.
+    # initial_dhcpv6    Variable to store initial DHCPv6 setting.
 
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     ${initial_dhcpv6_iface}=  Get From Dictionary  ${resp.dict}  DHCPv6
-    Set Test Variable  ${${initial_dhcpv6_before}}  ${initial_dhcpv6_iface['OperatingMode']}
+    Set Test Variable  ${${initial_dhcpv6}}  ${initial_dhcpv6_iface['OperatingMode']}
+
+
+Get The Initial SLAAC Setting
+    [Documentation]  Get the initial SLAAC setting and store in a variable.
+    [Arguments]  ${channel_number}  ${initial_slaac}
+
+    # Description of the argument(s):
+    # channel_number     Channel number 1 or 2.
+    # initial_slaac    Variable to store initial SLAAC setting.
+
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ${initial_slaac_iface}=  Get From Dictionary  ${resp.dict}  StatelessAddressAutoConfig
+    Set Test Variable  ${${initial_slaac}}  ${initial_slaac_iface['IPv6AutoConfigEnabled']}
 
 
 Get Address Origin List And Address For Type
@@ -886,3 +947,23 @@ Get Address Origin List And Address For Type
         END
     END
     RETURN  @{ipv6_addressorigin_list}  ${ipv6_type_addr}
+
+
+Get Address Origin List And IPv4 or IPv6 Address
+    [Documentation]  Get address origin list and address for type.
+    [Arguments]  ${ip_address_type}
+
+    # Description of the argument(s):
+    # ipv4_address_type  Type of IPv4 or IPv6 address to be checked.
+
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    @{ip_addresses}=  Get From Dictionary  ${resp.dict}  ${ip_address_type}
+
+    ${ip_addressorigin_list}=  Create List
+    ${ip_addr_list}=  Create List
+    FOR  ${ip_address}  IN  @{ip_addresses}
+        ${ip_addressorigin}=  Get From Dictionary  ${ip_address}  AddressOrigin
+        Append To List  ${ip_addressorigin_list}  ${ip_addressorigin}
+        Append To List  ${ip_addr_list}  ${ip_address['Address']}
+    END
+    RETURN  ${ip_addressorigin_list}  ${ip_addr_list}
