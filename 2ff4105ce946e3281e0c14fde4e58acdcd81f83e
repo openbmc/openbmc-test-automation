@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "184278da_c0d31c7a",
+        "filename": "gui/gui_test/gui_header/test_profile_settings_sub_menu.robot",
+        "patchSetId": 47
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-08-21T14:13:34Z",
+      "side": 1,
+      "message": "Not needed to delete Readonly user?",
+      "range": {
+        "startLine": 88,
+        "startChar": 16,
+        "endLine": 88,
+        "endChar": 44
+      },
+      "revId": "2ff4105ce946e3281e0c14fde4e58acdcd81f83e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd3833a0_3ccee952",
+        "filename": "gui/gui_test/gui_header/test_profile_settings_sub_menu.robot",
+        "patchSetId": 47
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-08-21T14:13:34Z",
+      "side": 1,
+      "message": "Call this in [Setup] only as this is still a test setup :)",
+      "range": {
+        "startLine": 91,
+        "startChar": 4,
+        "endLine": 91,
+        "endChar": 24
+      },
+      "revId": "2ff4105ce946e3281e0c14fde4e58acdcd81f83e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6ffee2f_94cb6a65",
+        "filename": "gui/gui_test/overview_menu/test_overview_menu.robot",
+        "patchSetId": 47
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-08-21T14:13:34Z",
+      "side": 1,
+      "message": "Test Setup Execution is missing in this test.. No longer needed?",
+      "range": {
+        "startLine": 330,
+        "startChar": 4,
+        "endLine": 330,
+        "endChar": 64
+      },
+      "revId": "2ff4105ce946e3281e0c14fde4e58acdcd81f83e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ef54f0e_3ecd1923",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 47
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-08-21T14:13:34Z",
+      "side": 1,
+      "message": "Pls rename to \u0027Create Readonly user and login to GUI\u0027",
+      "range": {
+        "startLine": 292,
+        "startChar": 0,
+        "endLine": 292,
+        "endChar": 51
+      },
+      "revId": "2ff4105ce946e3281e0c14fde4e58acdcd81f83e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
