@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fedf6d3b_e7516051",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-08-22T14:08:54Z",
+      "side": 1,
+      "message": "what I meant was all existing IPv4 settings should not be altered either in value \u0026 modes \u0026 number of IP addresses etc.",
+      "revId": "0d044536447d177df5707de7e6deef55654a67c8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
