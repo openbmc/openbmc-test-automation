@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4305b8db_242d3f7d",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-09-03T07:39:09Z",
+      "side": 1,
+      "message": "save it in suite varibale as one time activity:",
+      "revId": "da375e1cd45a4054ac3c50398836017b74b49b9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}

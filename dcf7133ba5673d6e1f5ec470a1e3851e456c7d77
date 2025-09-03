@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caf71ff4_46ae7c00",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-09-03T07:39:09Z",
+      "side": 1,
+      "message": "As discussed, Pls refine \u0026 add it in test setup",
+      "revId": "dcf7133ba5673d6e1f5ec470a1e3851e456c7d77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
