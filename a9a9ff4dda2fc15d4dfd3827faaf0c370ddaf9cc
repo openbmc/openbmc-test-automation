@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b4a0b9e_f312cd66",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-09-03T17:28:57Z",
+      "side": 1,
+      "message": "remove these 2 lines",
+      "revId": "a9a9ff4dda2fc15d4dfd3827faaf0c370ddaf9cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
