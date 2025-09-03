@@ -16,6 +16,24 @@
       "message": "As discussed, Pls refine \u0026 add it in test setup",
       "revId": "dcf7133ba5673d6e1f5ec470a1e3851e456c7d77",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e9a438c_82a3633e",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-09-03T11:00:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "caf71ff4_46ae7c00",
+      "revId": "dcf7133ba5673d6e1f5ec470a1e3851e456c7d77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
