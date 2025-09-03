@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d2adb38_819aa128",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-09-03T14:15:02Z",
+      "side": 1,
+      "message": "Test case should highlight key things like\nPre-condition: Should come in setup or suite setup level\nTest you are doing should come in test case body\nPost testing, verify that existing things are intact: This keyword should be called for all tests",
+      "revId": "b33669207b02896f5d49f6bbb12d057edd7c0f5f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b1e4b799_46ebb8d3",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 9
