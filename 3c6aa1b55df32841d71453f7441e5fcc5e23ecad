@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d25c2630_ef938863",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-09-04T04:10:09Z",
+      "side": 1,
+      "message": "// Put comment here what it does",
+      "revId": "3c6aa1b55df32841d71453f7441e5fcc5e23ecad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "774d7f73_5116e4b8",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-09-04T04:10:09Z",
+      "side": 1,
+      "message": "Fix alignment",
+      "range": {
+        "startLine": 245,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 50
+      },
+      "revId": "3c6aa1b55df32841d71453f7441e5fcc5e23ecad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a01e3c38_b6118c00",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-09-04T04:10:09Z",
+      "side": 1,
+      "message": "Please fix this",
+      "range": {
+        "startLine": 871,
+        "startChar": 0,
+        "endLine": 873,
+        "endChar": 0
+      },
+      "revId": "3c6aa1b55df32841d71453f7441e5fcc5e23ecad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "549a9880_2f8dcc59",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-09-04T04:10:09Z",
+      "side": 1,
+      "message": "Change it to interface",
+      "range": {
+        "startLine": 876,
+        "startChar": 60,
+        "endLine": 876,
+        "endChar": 68
+      },
+      "revId": "3c6aa1b55df32841d71453f7441e5fcc5e23ecad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5644169_b19d9624",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-09-04T04:10:09Z",
+      "side": 1,
+      "message": "Get The Initial DHCPv6 Setting On Each Interface  ${1}\n\nGet The Initial DHCPv6 Setting On Each Interface  ${2}",
+      "range": {
+        "startLine": 895,
+        "startChar": 4,
+        "endLine": 896,
+        "endChar": 68
+      },
+      "revId": "3c6aa1b55df32841d71453f7441e5fcc5e23ecad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab036fae_2bec2f24",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-09-04T04:10:09Z",
+      "side": 1,
+      "message": "Same here remove run keywords",
+      "range": {
+        "startLine": 902,
+        "startChar": 0,
+        "endLine": 903,
+        "endChar": 68
+      },
+      "revId": "3c6aa1b55df32841d71453f7441e5fcc5e23ecad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8926cdc2_5db57a98",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-09-04T04:10:09Z",
+      "side": 1,
+      "message": "Channel number 1 (eth0)  or 2 (eth1)",
+      "range": {
+        "startLine": 911,
+        "startChar": 25,
+        "endLine": 911,
+        "endChar": 46
+      },
+      "revId": "3c6aa1b55df32841d71453f7441e5fcc5e23ecad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
