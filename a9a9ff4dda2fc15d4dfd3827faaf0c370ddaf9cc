@@ -16,6 +16,24 @@
       "message": "remove these 2 lines",
       "revId": "a9a9ff4dda2fc15d4dfd3827faaf0c370ddaf9cc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62c7aedf_f847c5ed",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-09-04T03:53:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b4a0b9e_f312cd66",
+      "revId": "a9a9ff4dda2fc15d4dfd3827faaf0c370ddaf9cc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
