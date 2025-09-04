@@ -4,5 +4,5 @@ pyasn1==0.6.1
 pyasn1_modules==0.4.1
 requests==2.32.4
 sseclient-py==1.8.0
-urllib3==1.26.20
+urllib3>=2.5.0
 
