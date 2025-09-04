@@ -222,7 +222,7 @@ Navigate To Server Power Page
     [Documentation]  Navigate To Server Power Page.
 
     Click Element  ${xpath_power_page}
-    Wait Until Element Is Not Visible  ${xpath_progress_bar}  timeout=30
+    Wait Until Element Is Not Visible  {xpath_page_loading_progress_bar}  timeout=30
 
 
 Power Off Server
@@ -235,6 +235,7 @@ Power Off Server
       Click Element  ${xpath_power_shutdown}
       Click Button  ${xpath_confirm}
       Wait Until Element Is Visible  ${xpath_power_poweron}  timeout=60
+      Click Element  ${xpath_close_information_message}
     ELSE
       Log To console    Server is already powered Off.
     END
@@ -249,6 +250,7 @@ Power On Server
     IF  (${present})
       Click Element  ${xpath_power_power_on}
       Wait Until Element Is Visible  ${xpath_power_shutdown}  timeout=60
+      Click Element  ${xpath_close_information_message}
     ELSE
       Log To console    Server is already powered On.
     END
@@ -286,7 +288,7 @@ Verify Error And Unauthorized Message On GUI
     Page Should Contain  Error
     Page Should Contain  Unauthorized
     Click Element  ${xpath_error_popup}
-    Click Element  ${xpath_Unauthorized_popup}
+    Click Element  ${xpath_unauthorized_popup}
 
 
 Create Readonly User And Login To GUI
@@ -309,7 +311,8 @@ Delete Readonly User And Logout Current GUI Session
     # Delete Read-only user and Logout current GUI session.
     Logout GUI
     Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
+ 
+    Close Browser
 
     # Login BMC GUI with default user.
     Launch Browser And Login GUI
-
