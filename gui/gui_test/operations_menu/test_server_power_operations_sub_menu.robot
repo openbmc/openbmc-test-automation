@@ -5,8 +5,9 @@ Documentation  Test OpenBMC GUI "Server power operations" sub-menu of "Operation
 Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/state_manager.robot
 
-Test Setup      Run Keywords  Launch Browser And Login GUI  AND  Navigate to Server Power Operation Page
-Test Teardown   Close Browser
+Suite Setup     Launch Browser And Login GUI
+Suite Teardown  Close Browser
+Test Setup      Navigate to Server Power Operation Page
 
 Test Tags      Server_Power_Operations_Sub_Menu
 
@@ -151,6 +152,49 @@ Verify Host Orderly Reboot
     Wait Until Keyword Succeeds  10 min  15 sec  Element Should Contain  ${xpath_current_power_state}  On
 
 
+Verify Server Power Operations Page With Readonly User When Host On State
+    [Documentation]  Verify Server Power Operations page with readonly user when Host On state.
+    [Tags]  Verify_Server_Power_Operations_Page_With_Readonly_User_When_Host_On_State
+    [Setup]  Run Keywords  Power On Server  AND  Create Readonly User And Login To GUI
+    ...      AND  Navigate to Server Power Operation Page
+    [Teardown]  Delete Readonly User And Logout Current GUI Session
+
+    # Perform Reboot operation.
+    Perform Server Operations With Readonly User  ${EMPTY}  ${xpath_reboot_button}
+
+    # Perform Shutdown Orderly operation.
+    Perform Server Operations With Readonly User  ${xpath_shutdown_orderly_radio}  ${xpath_shutdown_button}
+
+    # Perform Shutdown Immediate operation.
+    Perform Server Operations With Readonly User  ${xpath_shutdown_immediate_radio}  ${xpath_shutdown_button}
+
+
+Verify Server Power Operations Page With Readonly User When Host Off State
+    [Documentation]  Verify Server Power Operations page with readonly user when Host Off state.
+    [Tags]  Verify_Server_Power_Operations_Page_With_Readonly_User_When_Host_Off_State
+    [Setup]  Run Keywords  Power Off Server  AND  Create Readonly User And Login To GUI
+    ...      AND  Navigate to Server Power Operation Page
+    [Teardown]  Delete Readonly User And Logout Current GUI Session
+
+    Refresh GUI
+    Page Should Contain Element  ${xpath_poweron_button}
+    Click Element  ${xpath_poweron_button}
+    Wait Until Page Contains Element  ${xpath_unauthorized_popup}  timeout=10
+    Page Should Contain   Unauthorized
+    Click Element  ${xpath_unauthorized_popup}
+
+
+Verify Save Button With Readonly User
+    [Documentation]  Verify Save button On Server Power Operation page with readonly user.
+    [Tags]  Verify_Save_Button_With_Readonly_User
+    [Setup]  Run Keywords  Create Readonly User And Login To GUI
+    ...      AND  Navigate to Server Power Operation Page
+    [Teardown]  Delete Readonly User And Logout Current GUI Session
+
+    Click Element  ${xpath_save_button}
+    Verify Error And Unauthorized Message On GUI
+
+
 *** Keywords ***
 
 Navigate to Server Power Operation Page
@@ -166,3 +210,27 @@ Is Server Status Off
 
     Refresh GUI
     Element Should Contain  ${xpath_current_power_state}  Off
+
+
+Perform Server Operations With Readonly User
+    [Documentation]  Perform Reboot, Orderly and Immediate shutdown with readonly user
+    ...             and verify Unauthorized message on BMC GUI Page
+    [Arguments]  ${orderly_immediate_operation}  ${operations}
+
+    # Description of argument(s):
+    # orderly_immediate_operation    Eg: Perform shutdown_orderly and shutdown_immediate Operations.
+    # operations                     Eg: reboot and shutdown buttons to Perform Operations.
+    #
+
+    IF  $orderly_immediate_operation != ''
+       Click Element At Coordinates  ${orderly_immediate_operation}  0  0
+    END
+
+    Click Element  ${Operations}
+    Wait Until Page Contains Element  ${xpath_confirm_button}  timeout=10
+    Sleep  5s
+    Click Element At Coordinates  ${xpath_confirm_button}  0  0
+    Wait Until Page Contains Element  ${xpath_unauthorized_popup}  timeout=10
+    Page Should Contain  Unauthorized
+    Click Element  ${xpath_unauthorized_popup}
+    Refresh GUI
