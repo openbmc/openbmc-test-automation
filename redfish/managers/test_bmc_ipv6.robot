@@ -10,9 +10,10 @@ Library        ../../lib/bmc_network_utils.py
 Library        Collections
 Library        Process
 
-Test Setup     Test Setup Execution
-Test Teardown  Test Teardown Execution
-Suite Setup    Suite Setup Execution
+Test Setup      Test Setup Execution
+Test Teardown   Test Teardown Execution
+Suite Setup     Suite Setup Execution
+Suite Teardown  Redfish.Logout
 
 Test Tags     BMC_IPv6
 
@@ -181,8 +182,8 @@ Delete IPv6 Static Default Gateway And Verify
 Verify Coexistence Of Linklocalv6 And Static IPv6 On BMC
     [Documentation]  Verify linklocalv6 And static IPv6 both exist.
     [Tags]  Verify_Coexistence_Of_Linklocalv6_And_Static_IPv6_On_BMC
-    [Setup]  Configure IPv6 Address On BMC  ${IP_ADDR_TEST}  ${test_prefix_length}
-    [Teardown]  Delete IPv6 Address  ${IP_ADDR_TEST}
+    [Setup]  Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
+    [Teardown]  Delete IPv6 Address  ${test_ipv6_addr}
 
     Check Coexistence Of Linklocalv6 And Static IPv6
 
@@ -221,6 +222,7 @@ Enable And Verify DHCPv6 Property On Eth1 When DHCPv6 Property Enabled On Eth0
 Suite Setup Execution
     [Documentation]  Do suite setup execution.
 
+    Redfish.Login
     ${active_channel_config}=  Get Active Channel Config
     Set Suite Variable  ${active_channel_config}
 
@@ -231,8 +233,6 @@ Suite Setup Execution
 
 Test Setup Execution
     [Documentation]  Test setup execution.
-
-    Redfish.Login
 
     @{ipv6_network_configurations}=  Get IPv6 Network Configuration
     Set Test Variable  @{ipv6_network_configurations}
@@ -246,7 +246,6 @@ Test Teardown Execution
     [Documentation]  Test teardown execution.
 
     FFDC On Test Case Fail
-    Redfish.Logout
 
 
 Get IPv6 Network Configuration
@@ -709,7 +708,7 @@ Configure IPv6 Static Default Gateway On BMC
     END
 
 
-Modify Static Default Gateway
+Modify IPv6 Static Default Gateway On BMC
     [Documentation]  Modify and verify IPv6 address of BMC.
     [Arguments]  ${ipv6_gw_addr}  ${new_static_def_gw}  ${prefix_length}
     ...  ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED}]
