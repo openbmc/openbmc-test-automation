@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "3b2b2d28_b1abe69b",
         "filename": "/COMMIT_MSG",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "Commit can be one line like \n\"Disable FFDC collection\"\n\nAnd then next line can be \n\"resolves openbmc/openbmc-test-automation#1707\"",
       "revId": "b5c07f005a590cef1d5cc7b0a6fc204092d5a613",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "18727311_ecac1a29",
         "filename": "/COMMIT_MSG",
@@ -32,10 +33,10 @@
       "message": "Yep. \nSummary then blank line then 1 or more lines of detail. \n\nWhy you are making the change is also important, see https://chris.beams.io/posts/git-commit/",
       "parentUuid": "3b2b2d28_b1abe69b",
       "revId": "b5c07f005a590cef1d5cc7b0a6fc204092d5a613",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "ddc3a015_180281e0",
         "filename": "lib/openbmc_ffdc.robot",
@@ -49,10 +50,10 @@
       "side": 1,
       "message": "Won\u0027t this variable meet your needs?  If OVERRIDE_FFDC_ON_TEST_CASE_FAIL is set to 1, then no FFDC is collected.",
       "revId": "b5c07f005a590cef1d5cc7b0a6fc204092d5a613",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "1b841c20_8558d8b1",
         "filename": "lib/openbmc_ffdc.robot",
@@ -67,10 +68,10 @@
       "message": "I see, Didnt see that.. Good one. Shiva, could you pls test and then we close it accordingly.",
       "parentUuid": "ddc3a015_180281e0",
       "revId": "b5c07f005a590cef1d5cc7b0a6fc204092d5a613",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "e680a8fd_a9a951eb",
         "filename": "lib/openbmc_ffdc.robot",
@@ -90,10 +91,10 @@
         "endChar": 48
       },
       "revId": "b5c07f005a590cef1d5cc7b0a6fc204092d5a613",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "40d713f0_6cb2ec11",
         "filename": "lib/openbmc_ffdc.robot",
@@ -113,8 +114,8 @@
         "endChar": 51
       },
       "revId": "b5c07f005a590cef1d5cc7b0a6fc204092d5a613",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
-  ]
+  ],
+  "submitRequirementResults": []
 }
