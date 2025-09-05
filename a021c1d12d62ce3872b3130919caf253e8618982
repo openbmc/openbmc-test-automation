@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": true,
       "key": {
         "uuid": "6ae631bc_c29d64dc",
         "filename": "docs/release_testing.md",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "I think this should go in the README.",
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "aa93ebce_a109a33f",
         "filename": "docs/release_testing.md",
@@ -37,10 +38,10 @@
         "endChar": 35
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "cc7d402f_7d678cab",
         "filename": "docs/release_testing.md",
@@ -60,10 +61,10 @@
         "endChar": 26
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "6a7f48d4_58da20b3",
         "filename": "docs/release_testing.md",
@@ -83,10 +84,10 @@
         "endChar": 70
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "6666200c_7913b98f",
         "filename": "docs/release_testing.md",
@@ -100,10 +101,10 @@
       "side": 1,
       "message": "Maybe README too?",
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "28b81a43_cc62b0fd",
         "filename": "docs/release_testing.md",
@@ -123,10 +124,10 @@
         "endChar": 37
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "b622d05d_80b9a7ad",
         "filename": "docs/release_testing.md",
@@ -146,10 +147,10 @@
         "endChar": 65
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "0f7b1383_10f2bc7c",
         "filename": "docs/release_testing.md",
@@ -163,10 +164,10 @@
       "side": 1,
       "message": "I really think this should go in the README, e.g. https://github.com/openbmc/openbmc-test-automation#installation-setup-guide",
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "2cc685ef_9ffadc43",
         "filename": "docs/release_testing.md",
@@ -186,10 +187,10 @@
         "endChar": 10
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "1c8b922f_feb4c0ae",
         "filename": "docs/release_testing.md",
@@ -209,10 +210,10 @@
         "endChar": 20
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "0ab1b000_4cbfa563",
         "filename": "docs/release_testing.md",
@@ -232,10 +233,10 @@
         "endChar": 34
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "625f064e_56ca55a9",
         "filename": "docs/release_testing.md",
@@ -255,10 +256,10 @@
         "endChar": 24
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "d16eb1da_e2c8bc9b",
         "filename": "docs/release_testing.md",
@@ -278,10 +279,10 @@
         "endChar": 46
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "3c8306dc_af35685e",
         "filename": "docs/release_testing.md",
@@ -301,10 +302,10 @@
         "endChar": 11
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "66500590_780d61f9",
         "filename": "docs/release_testing.md",
@@ -324,10 +325,10 @@
         "endChar": 9
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "6c27ab4b_72068528",
         "filename": "docs/release_testing.md",
@@ -347,10 +348,10 @@
         "endChar": 20
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "d464e4f5_89e27261",
         "filename": "docs/release_testing.md",
@@ -370,10 +371,10 @@
         "endChar": 46
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "59ba9d6e_8cd30d0e",
         "filename": "docs/release_testing.md",
@@ -387,10 +388,10 @@
       "side": 1,
       "message": "I really don\u0027t think we have a 2nd list of features to maintain, I think this should go in the README, e.g. https://github.com/openbmc/openbmc-test-automation#features-of-openbmc-test-automation",
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "071f042f_bb25d83a",
         "filename": "docs/release_testing.md",
@@ -410,10 +411,10 @@
         "endChar": 40
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "e3653670_a7dd2876",
         "filename": "docs/release_testing.md",
@@ -433,10 +434,10 @@
         "endChar": 13
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "33cf7fa6_41f49ea0",
         "filename": "docs/release_testing.md",
@@ -456,10 +457,10 @@
         "endChar": 23
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "2ad50e2f_465e5923",
         "filename": "docs/release_testing.md",
@@ -479,10 +480,10 @@
         "endChar": 78
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "a8593f0b_d23b2794",
         "filename": "docs/release_testing.md",
@@ -502,10 +503,10 @@
         "endChar": 11
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "babcb0f3_e154f5c9",
         "filename": "docs/release_testing.md",
@@ -525,10 +526,10 @@
         "endChar": 9
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "34b40235_f0b37547",
         "filename": "docs/release_testing.md",
@@ -548,10 +549,10 @@
         "endChar": 38
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "090f80de_e7d9110b",
         "filename": "docs/release_testing.md",
@@ -571,10 +572,10 @@
         "endChar": 26
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "a5048ab2_9b1a4ce8",
         "filename": "docs/release_testing.md",
@@ -594,10 +595,10 @@
         "endChar": 29
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "74a0ad4b_fa8000b7",
         "filename": "docs/release_testing.md",
@@ -617,10 +618,10 @@
         "endChar": 28
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "1b2c3323_0d07d48f",
         "filename": "docs/release_testing.md",
@@ -640,10 +641,10 @@
         "endChar": 63
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "468c4fb0_2dcf1e90",
         "filename": "docs/release_testing.md",
@@ -663,10 +664,10 @@
         "endChar": 56
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "0feea7c0_3a938241",
         "filename": "docs/release_testing.md",
@@ -686,10 +687,10 @@
         "endChar": 52
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "35ceac9c_5436d862",
         "filename": "docs/release_testing.md",
@@ -703,10 +704,10 @@
       "side": 1,
       "message": "Can u add a new line",
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "2c2c3394_47af0deb",
         "filename": "docs/release_testing.md",
@@ -720,10 +721,10 @@
       "side": 1,
       "message": "Add Current 2.7 too like above as well ?",
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "0c8d3c1c_6bbda17b",
         "filename": "docs/release_testing.md",
@@ -743,10 +744,10 @@
         "endChar": 31
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "4471674b_27763282",
         "filename": "docs/release_testing.md",
@@ -760,10 +761,10 @@
       "side": 1,
       "message": "Some of these are already listed on line 28, why both lists?",
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": true
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "dbf9337f_d0ebc176",
         "filename": "docs/release_testing.md",
@@ -783,10 +784,10 @@
         "endChar": 13
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "7bfe34db_761318c5",
         "filename": "docs/release_testing.md",
@@ -806,10 +807,10 @@
         "endChar": 61
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "82d79b54_60fd0d1e",
         "filename": "docs/release_testing.md",
@@ -829,10 +830,10 @@
         "endChar": 11
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "f5427de7_02ade481",
         "filename": "docs/release_testing.md",
@@ -852,10 +853,10 @@
         "endChar": 20
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "fd6f5bc6_2e086520",
         "filename": "docs/release_testing.md",
@@ -869,10 +870,10 @@
       "side": 1,
       "message": "- SNMP Server\n- Remote Logging Server",
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "56e62c08_47116f8d",
         "filename": "docs/release_testing.md",
@@ -892,10 +893,10 @@
         "endChar": 37
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "e6f411d8_62c9fb37",
         "filename": "docs/release_testing.md",
@@ -915,10 +916,10 @@
         "endChar": 9
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "8abca6ae_20ebcdbf",
         "filename": "docs/release_testing.md",
@@ -938,10 +939,10 @@
         "endChar": 13
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "8ef0249c_8a836c17",
         "filename": "docs/release_testing.md",
@@ -961,10 +962,10 @@
         "endChar": 11
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "29a7477a_363121a6",
         "filename": "docs/release_testing.md",
@@ -984,8 +985,8 @@
         "endChar": 107
       },
       "revId": "a021c1d12d62ce3872b3130919caf253e8618982",
-      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4",
-      "unresolved": false
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
-  ]
+  ],
+  "submitRequirementResults": []
 }
