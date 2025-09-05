@@ -186,6 +186,24 @@
       "message": "remove space",
       "revId": "e556b121616426c0bd3849ce5bae207b48e04e15",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d22d765e_d6624bae",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-09-05T10:24:53Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "494521cb_2ded0d21",
+      "revId": "e556b121616426c0bd3849ce5bae207b48e04e15",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
