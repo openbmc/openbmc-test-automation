@@ -19,7 +19,6 @@ Suite Teardown  Suite Teardown Execution
 
 Test Tags      Power_Restore
 
-*** Variables ***
 
 *** Test Cases ***
 

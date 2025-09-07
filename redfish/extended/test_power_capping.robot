@@ -18,7 +18,7 @@ Resource          ../../lib/os_utilities.robot
 Suite Setup      Suite Setup Execution
 Test Teardown    Test Teardown Execution
 
-
+Test Tags        Power_Capping
 
 *** Variables ****
 

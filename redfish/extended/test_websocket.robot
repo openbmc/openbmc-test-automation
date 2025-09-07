@@ -23,6 +23,7 @@ Suite Setup          Suite Setup Execution
 Suite Teardown       Suite Teardown Execution
 Test Teardown        Test Teardown Execution
 
+Test Tags            Test_Websocket
 
 *** Variables ***
 

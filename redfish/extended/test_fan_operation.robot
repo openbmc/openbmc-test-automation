@@ -17,6 +17,7 @@ Resource        ../../lib/dump_utils.robot
 Suite Setup     Suite Setup Execution
 Test Teardown   Test Teardown Execution
 
+Test Tags       Fan_Operations
 
 *** Test Cases ***
 
