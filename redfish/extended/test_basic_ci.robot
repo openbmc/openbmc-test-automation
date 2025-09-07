@@ -12,6 +12,8 @@ Resource            ../../lib/bmc_redfish_resource.robot
 Test Setup          Test Setup Execution
 Test Teardown       FFDC On Test Case Fail
 
+Test Tags           Basic_CI
+
 *** Variables ***
 
 # Error strings to check from journald.

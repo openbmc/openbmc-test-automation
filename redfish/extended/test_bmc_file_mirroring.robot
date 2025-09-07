@@ -9,6 +9,8 @@ Library        ../../lib/bmc_ssh_utils.py
 
 Test Teardown  Test Teardown Execution
 
+Test Tags      BMC_File_Mirroring
+
 *** Test Cases ***
 
 Test BMC Alt Side Mirroring

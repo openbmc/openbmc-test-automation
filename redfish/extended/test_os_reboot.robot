@@ -9,6 +9,8 @@ Suite Setup     Run Key  Start SOL Console Logging
 Test Setup      Redfish.Login
 Test Teardown   Test Teardown Execution
 
+Test Tags       OS_Reboot
+
 *** Variables ***
 
 # User defined boot test iteration.

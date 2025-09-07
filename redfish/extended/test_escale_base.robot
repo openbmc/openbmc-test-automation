@@ -16,6 +16,7 @@ Library           ../../lib/logging_utils.py
 Suite Setup      Suite Setup Execution
 Test Teardown    Test Teardown Execution
 
+Test Tags        Escale_Base
 
 *** Variables ****
 
