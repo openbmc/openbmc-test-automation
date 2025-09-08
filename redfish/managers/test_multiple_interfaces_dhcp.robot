@@ -207,20 +207,20 @@ Verify Ethernet Config Property
     [Arguments]  ${property}  ${response_data}
 
     # Description of argument(s):
-    # ${property}       DHCP Properties in dictionary.
-    # Example:
-    # property         value
-    # DHCPEnabled      :False
-    # UseDomainName    :True
-    # UseNTPServers    :True
-    # UseDNSServers    :True
-    # ${response_data}  DHCP Response data in dictionary.
-    # Example:
-    # property         value
-    # DHCPEnabled      :False
-    # UseDomainName    :True
-    # UseNTPServers    :True
-    # UseDNSServers    :True
+    # property         DHCP Properties in dictionary.
+    #   Example:
+    #   property         value
+    #   DHCPEnabled      :False
+    #   UseDomainName    :True
+    #   UseNTPServers    :True
+    #   UseDNSServers    :True
+    # response_data    DHCP Response data in dictionary.
+    #   Example:
+    #   property         value
+    #   DHCPEnabled      :False
+    #   UseDomainName    :True
+    #   UseNTPServers    :True
+    #   UseDNSServers    :True
 
    ${key_map}=  Get Dictionary Items  ${property}
    FOR  ${key}  ${value}  IN  @{key_map}

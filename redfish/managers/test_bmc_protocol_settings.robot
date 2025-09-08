@@ -247,8 +247,9 @@ Set SSH And IPMI Protocol
     [Arguments]  ${ssh_state}  ${ipmi_state}  ${persistency_check}=${False}
 
     # Description of argument(s):
-    # ssh_state     State of SSH to be set (e.g. True, False).
-    # ipmi_state    State of IPMI to be set (e.g. True, False).
+    # ssh_state          State of SSH to be set (e.g. True, False).
+    # ipmi_state         State of IPMI to be set (e.g. True, False).
+    # persistency_check  Persistency check (e.g. True, False).
 
     ${ssh_protocol_state}=  Create Dictionary  ProtocolEnabled=${ssh_state}
     ${ipmi_protocol_state}=  Create Dictionary  ProtocolEnabled=${ipmi_state}

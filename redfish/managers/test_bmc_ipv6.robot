@@ -441,6 +441,7 @@ Configure IPv6 Address On BMC
 Validate IPv6 Network Config On BMC
     [Documentation]  Check that IPv6 network info obtained via redfish matches info
     ...              obtained via CLI.
+
     @{ipv6_network_configurations}=  Get IPv6 Network Configuration
     ${ipv6_data}=  Get BMC IPv6 Info
     FOR  ${ipv6_network_configuration}  IN  @{ipv6_network_configurations}
@@ -609,7 +610,8 @@ Modify IPv6 Address
 
 Set SLAAC Configuration State And Verify
     [Documentation]  Set SLAAC configuration state and verify.
-    [Arguments]  ${slaac_state}  ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]  ${channel_number}=${CHANNEL_NUMBER}
+    [Arguments]  ${slaac_state}  ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
+    ...  ${channel_number}=${CHANNEL_NUMBER}
 
     # Description of argument(s):
     # slaac_state         SLAAC state('True' or 'False').
@@ -688,6 +690,7 @@ Configure IPv6 Static Default Gateway On BMC
     [Documentation]  Configure IPv6 static default gateway on BMC.
     [Arguments]  ${ipv6_gw_addr}  ${prefix_length_def}
     ...  ${valid_status_codes}=${HTTP_OK}
+
     # Description of argument(s):
     # ipv6_gw_addr          IPv6 Static Default Gateway address to be configured.
     # prefix_len_def        Prefix length value (Range 1 to 128).
@@ -746,7 +749,7 @@ Modify IPv6 Static Default Gateway On BMC
     # Description of argument(s):
     # ipv6_gw_addr          IPv6 static default gateway address to be replaced (e.g. "2001:AABB:CCDD::AAFF").
     # new_static_def_gw     New static default gateway address to be configured.
-    # prefix length         Prefix length value (Range 1 to 128).
+    # prefix_length         Prefix length value (Range 1 to 128).
     # valid_status_codes    Expected return code from patch operation
     #                       (e.g. "200", "204").
 
@@ -951,7 +954,7 @@ Get Address Origin List And IPv4 or IPv6 Address
     [Arguments]  ${ip_address_type}
 
     # Description of the argument(s):
-    # ipv4_address_type  Type of IPv4 or IPv6 address to be checked.
+    # ip_address_type  Type of IPv4 or IPv6 address to be checked.
 
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${CHANNEL_NUMBER}']['name']}
     @{ip_addresses}=  Get From Dictionary  ${resp.dict}  ${ip_address_type}
