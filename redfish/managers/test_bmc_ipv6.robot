@@ -230,6 +230,14 @@ Enable And Verify SLAAC Property On Eth1 When SLAAC Property Enabled On Eth0
     Verify All The Addresses Are Intact
 
 
+Verify Autoconfig Is Present On Ethernet Interface
+    [Documentation]  Verify autoconfig is present on ethernet interface.
+    [Tags]  Verify_Autoconfig_Is_Present_On_Ethernet_Interface
+
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    Should Contain  ${resp.dict}  StatelessAddressAutoConfig
+
+
 *** Keywords ***
 
 Suite Setup Execution
