@@ -238,6 +238,19 @@ Verify Autoconfig Is Present On Ethernet Interface
     Should Contain  ${resp.dict}  StatelessAddressAutoConfig
 
 
+Verify Interface ID Of SLAAC And LinkLocal Addresses Are Same
+    [Documentation]  Validate interface id of SLAAC and link-local addresses are same.
+    [Tags]  Verify_Interface_ID_Of_SLAAC_And_LinkLocal_Addresses_Are_Same
+
+    @{ipv6_addressorigin_list}  ${ipv6_linklocal_addr}=  Get Address Origin List And Address For Type  LinkLocal
+    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr}=  Get Address Origin List And Address For Type  SLAAC
+
+    ${linklocal_interface_id}=  Get Interface ID Of IPv6  ${ipv6_linklocal_addr}
+    ${slaac_interface_id}=  Get Interface ID Of IPv6  ${ipv6_slaac_addr}
+
+    Should Be Equal    ${linklocal_interface_id}    ${slaac_interface_id}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -986,3 +999,45 @@ Verify All The Addresses Are Intact
 
     Should be Equal  ${initial_ipv4_addressorigin_list}  ${ipv4_addressorigin_list}
     Should be Equal  ${initial_ipv4_addr_list}  ${ipv4_addr_list}
+
+
+Get Interface ID Of IPv6
+    [Documentation]  Get interface id of IPv6 address.
+    [Arguments]    ${ipv6_address}
+
+    # Description of the argument(s):
+    # ${ipv6_address}  IPv6 Address to extract the last 4 hextets.
+
+    # Last 64 bits of SLAAC and Linklocal must be the same.
+    # Sample IPv6 network configurations.
+    #"IPv6AddressPolicyTable": [],
+    #  "IPv6Addresses": [
+    #    {
+    #      "Address": "fe80::xxxx:xxxx:xxxx:xxxx",
+    #      "AddressOrigin": "LinkLocal",
+    #      "AddressState": null,
+    #      "PrefixLength": xx
+    #    }
+    #  ],
+    #    {
+    #      "Address": "2002:xxxx:xxxx:xxxx:xxxx",
+    #      "AddressOrigin": "SLAAC",
+    #      "PrefixLength": 64
+    #    }
+    #  ],
+
+    ${split_ip_address}=  Split String  ${ipv6_address}  :
+    ${missing_ip}=  Evaluate  8 - len(${split_ip_address}) + 1
+    ${expanded_ip}=  Create List
+
+    FOR  ${hextet}  IN  @{split_ip_address}
+       IF  '${hextet}' == ''
+           FOR  ${i}  IN RANGE  ${missing_ip}
+               Append To List  ${expanded_ip}  0000
+           END
+       ELSE
+           Append To List  ${expanded_ip}  ${hextet}
+       END
+    END
+    ${interface_id}=  Evaluate  ':'.join(${expanded_ip}[-4:])
+    RETURN  ${interface_id}
