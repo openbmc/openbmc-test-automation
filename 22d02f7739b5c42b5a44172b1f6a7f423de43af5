@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "767f24f7_9c624dd5",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-09-08T08:25:05Z",
+      "side": 1,
+      "message": "Verify Autoconfig Is Present On Ethernet Interface\n [Documentation]  Verify autoconfig is present on the ethernet interface.\n[Tags] Verify_Autoconfig_Is_Present_On_Ethernet_Interface",
+      "revId": "22d02f7739b5c42b5a44172b1f6a7f423de43af5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
