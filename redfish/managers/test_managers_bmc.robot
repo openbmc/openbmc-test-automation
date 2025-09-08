@@ -212,6 +212,9 @@ Set NTP state
     [Documentation]  Set NTP service inactive.
     [Arguments]  ${state}
 
+    # Description of argument(s):
+    # state         NTP protocol enabled state (e.g. True, False).
+
     Redfish.Login
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'ProtocolEnabled': ${state}}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
