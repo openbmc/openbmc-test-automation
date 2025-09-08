@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c42a7c2e_fec0e318",
+        "filename": "gui/gui_test/operations_menu/test_server_power_operations_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-09-08T05:45:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ee8a2cc_1a5b66bc",
+      "range": {
+        "startLine": 156,
+        "startChar": 76,
+        "endLine": 156,
+        "endChar": 95
+      },
+      "revId": "ef3893e6a8e4d6c8cd69c8062897935540013a08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eda8b6b9_187f8a24",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0716702a_4953cf6b",
+        "filename": "gui/gui_test/operations_menu/test_server_power_operations_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-09-08T05:45:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eda8b6b9_187f8a24",
+      "range": {
+        "startLine": 173,
+        "startChar": 76,
+        "endLine": 173,
+        "endChar": 96
+      },
+      "revId": "ef3893e6a8e4d6c8cd69c8062897935540013a08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1631e0b2_7e71be09",
@@ -60,6 +108,30 @@
       "writtenOn": "2025-09-08T05:39:57Z",
       "side": 1,
       "message": "Operations -\u003e operations\n\nplease change in desc of args and test body as well",
+      "range": {
+        "startLine": 218,
+        "startChar": 51,
+        "endLine": 218,
+        "endChar": 61
+      },
+      "revId": "ef3893e6a8e4d6c8cd69c8062897935540013a08",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9df15ce3_d9096d57",
+        "filename": "gui/gui_test/operations_menu/test_server_power_operations_sub_menu.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-09-08T05:45:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1631e0b2_7e71be09",
       "range": {
         "startLine": 218,
         "startChar": 51,
