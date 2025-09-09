@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95dfba55_dd85ed3b",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1004,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-09-09T06:12:21Z",
+      "side": 1,
+      "message": "What do u mean by Host part ?\n\ncan u elaborate with dummy example and document it.",
+      "range": {
+        "startLine": 1004,
+        "startChar": 0,
+        "endLine": 1004,
+        "endChar": 21
+      },
+      "revId": "a88c7dd209f01b838e5d0128db3057cc4d043cd2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
