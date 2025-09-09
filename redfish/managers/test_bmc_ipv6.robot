@@ -238,6 +238,23 @@ Verify Autoconfig Is Present On Ethernet Interface
     Should Contain  ${resp.dict}  StatelessAddressAutoConfig
 
 
+Verify Persistency Of Link Local IPv6 On BMC Reboot
+    [Documentation]  Verify persistency of link local on bmc reboot.
+    [Tags]  Verify_Persistency_Of_Link_Local_IPv6_On_BMC_Reboot
+
+    # Capturing the linklocal before reboot
+    @{ipv6_addressorigin_list}  ${linklocal_addr_before_reboot}=  Get Address Origin List And Address For Type  LinkLocal
+
+    # Rebooting the system
+    Redfish OBMC Reboot (off)  stack_mode=skip
+
+    @{ipv6_addressorigin_list}  ${linklocal_addr_after_reboot}=  Get Address Origin List And Address For Type  LinkLocal
+
+    # Verifying the linklocal must be the same before and after reboot
+    Should Be Equal    ${linklocal_addr_before_reboot}    ${linklocal_addr_after_reboot}
+    ...    msg=IPv6 Linklocal address has changed after reboot.
+
+
 *** Keywords ***
 
 Suite Setup Execution
