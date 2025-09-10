@@ -16,10 +16,12 @@ Suite Setup    Suite Setup Execution
 Test Tags     BMC_IPv6
 
 *** Variables ***
-${test_ipv6_addr}            2001:db8:3333:4444:5555:6666:7777:8888
-${test_ipv6_invalid_addr}    2001:db8:3333:4444:5555:6666:7777:JJKK
-${test_ipv6_addr1}           2001:db8:3333:4444:5555:6666:7777:9999
-
+${test_ipv6_addr}                2001:db8:3333:4444:5555:6666:7777:8888
+${test_ipv6_invalid_addr}        2001:db8:3333:4444:5555:6666:7777:JJKK
+${test_ipv6_addr1}               2001:db8:3333:4444:5555:6666:7777:9999
+${invalid_hexadec_ipv6}          x:x:x:x:x:x:10.5.5.6
+${ipv6_multi_short}              2001::33::111
+ 
 # Valid prefix length is a integer ranges from 1 to 128.
 ${test_prefix_length}        64
 ${ipv6_gw_addr}              2002:903:15F:32:9:3:32:1
@@ -123,22 +125,32 @@ Enable DHCPv6 Property On BMC And Verify
     [Documentation]  Enable DHCPv6 property on BMC and verify.
     [Tags]  Enable_DHCPv6_Property_On_BMC_And_Verify
 
-    Set And Verify DHCPv6 Property  Enabled
+    Set DHCPv6 Property  Enabled
+    Verify DHCPv6 Setting  Enabled
+
 
 Disable DHCPv6 Property On BMC And Verify
     [Documentation]  Disable DHCPv6 property on BMC and verify.
     [Tags]  Disable_DHCPv6_Property_On_BMC_And_Verify
 
-    Set And Verify DHCPv6 Property  Disabled
+    Set DHCPv6 Property  Disabled
+    Verify DHCPv6 Setting  Disabled
+
+Check Persistency on Enabling DHCPv6 Property
+    
+    Set DHCPv6 Property  Disabled
+    Redfish OBMC Reboot (off)  stack_mode=skip
+    Verify DHCPv6 Setting  Disabled
 
 Configure Invalid Static IPv6 And Verify
     [Documentation]  Configure invalid static IPv6 and verify.
     [Tags]  Configure_Invalid_Static_IPv6_And_Verify
     [Template]  Configure IPv6 Address On BMC
 
-    #invalid_ipv6         prefix length           valid_status_code
-    ${ipv4_hexword_addr}  ${test_prefix_length}   ${HTTP_BAD_REQUEST}
-
+    #invalid_ipv6            prefix length           valid_status_code
+    ${ipv4_hexword_addr}     ${test_prefix_length}   ${HTTP_BAD_REQUEST}
+    ${invalid_hexadec_ipv6}  ${test_prefix_length}   ${HTTP_BAD_REQUEST}
+    ${ipv6_multi_short}      ${test_prefix_length}   ${HTTP_BAD_REQUEST}
 
 Configure IPv6 Static Default Gateway And Verify
     [Documentation]  Configure IPv6 static default gateway and verify.
@@ -177,7 +189,7 @@ Test Setup Execution
 Test Teardown Execution
     [Documentation]  Test teardown execution.
 
-    FFDC On Test Case Fail
+    #FFDC On Test Case Fail
     Redfish.Logout
 
 
@@ -535,7 +547,7 @@ Set SLAACv6 Configuration State And Verify
     END
 
 
-Set And Verify DHCPv6 Property
+Set DHCPv6 Property
     [Documentation]  Set DHCPv6 attribute and verify.
     [Arguments]  ${dhcpv6_operating_mode}=${Disabled}
 
@@ -549,6 +561,11 @@ Set And Verify DHCPv6 Property
     Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     ...  body=${data}  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
 
+
+Verify DHCPv6 Setting
+    [Documentation]  Verify DHCPv6 setting.
+    [Arguments]  ${dhcpv6_operating_mode}
+ 
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     ${dhcpv6_verify}=  Get From Dictionary  ${resp.dict}  DHCPv6
 
