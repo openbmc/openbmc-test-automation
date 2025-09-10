@@ -16,18 +16,27 @@ ${xpath_network_heading}                 //h1[text()="Network"]
 ${xpath_interface_settings}              //h2[text()="Interface settings"]
 ${xpath_network_settings}                //h2[text()="Network settings"]
 ${xpath_static_ipv4}                     //h2[text()="IPv4"]
+${xpath_static_ipv6}                     //h2[text()="IPv6"]
+${xpath_static_ipv6_default_gateway}     //h2[text()="IPv6 static default gateways"]
 ${xpath_domain_name_toggle}              //*[@data-test-id="networkSettings-switch-useDomainName"]
 ${xpath_ntp_servers_toggle}              //*[@data-test-id="networkSettings-switch-useNtp"]
 ${xpath_add_static_ipv4_address_button}  //button[contains(text(),"Add static IPv4 address")]
+${xpath_add_static_ipv6_address_button}  //button[contains(text(),"Add static IPv6 address")]
 ${xpath_hostname}                        //*[@title="Edit hostname"]
 ${xpath_hostname_input}                  //*[@id="hostname"]
 ${xpath_input_ip_address}                //*[@id="ipAddress"]
 ${xpath_input_gateway}                   //*[@id="gateway"]
 ${xpath_input_subnetmask}                //*[@id="subnetMask"]
+${xpath_input_ipv6address}               //*[@id="ipAddress"]
+${xpath_input_prefix_length}             //*[@id="prefixLength"]
+${xpath_input_addressorigin}             //*[@id="Address Origin"]
 ${xpath_cancel_button}                   //button[contains(text(),'Cancel')]
 ${xpath_delete_dns_server}               //*[@title="Delete DNS address"]
 ${xpath_save_button}                     //button[contains(text(),'Save')]
 ${xpath_dhcp_toggle_switch}              //*[@id='dhcpSwitch']
+${xpath_dhcpv6_toggle_switch}            //*[@id='dhcpIpv6Switch']
+${xpath_slaac_toggle_switch}             //*[@id='ipv6AutoConfigSwitch']
+${xpath_lldp_toggle_switch}              //*[@id='useLLDPSwitch']
 ${xpath_ntp_switch_button}               //*[@id="useNtpSwitch"]/following-sibling::label
 ${xpath_dns_switch_button}               //*[@id="useDnsSwitch"]/following-sibling::label
 ${xpath_domainname_switch_button}        //*[@id="useDomainNameSwitch"]/following-sibling::label
@@ -40,6 +49,8 @@ ${xpath_eth1_interface}                  //*[text()="eth1"]
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
 ${test_ipv4_addr_1}                      10.7.7.8
+${test_ipv6_addr}                        2001:db8:3333:4444:5555:6666:7777:8888
+${test_prefix_length}                    64
 ${out_of_range_ip}                       10.7.7.256
 ${string_ip}                             aa.bb.cc.dd
 ${negative_ip}                           10.-7.-7.-7
@@ -61,7 +72,6 @@ Verify Navigation To Network Page
 
     Page Should Contain Element  ${xpath_network_heading}
 
-
 Verify Existence Of All Sections In Network Page
     [Documentation]  Login to GUI and navigate to the settings sub-menu network page
     ...  and confirm the page contains sections that should be accessible.
@@ -70,6 +80,8 @@ Verify Existence Of All Sections In Network Page
     Wait Until Page Contains Element  ${xpath_network_settings}  timeout=1min
     Page Should Contain Element  ${xpath_interface_settings}
     Page Should Contain Element  ${xpath_static_ipv4}
+    Page Should Contain Element  ${xpath_static_ipv6}
+    Page Should Contain Element  ${xpath_static_ipv6_default_gateway}
     Page Should Contain Element  ${xpath_static_dns}
 
 
@@ -79,20 +91,22 @@ Verify Existence Of All Buttons In Network Page
     [Tags]  Verify_Existence_Of_All_Buttons_In_Network_Page
 
     Page Should Contain Button  ${xpath_add_static_ipv4_address_button}
+    Page Should Contain Button  ${xpath_add_static_ipv6_address_button}
     Page Should Contain Button  ${xpath_add_dns_ip_address_button}
     Page Should Contain Button  ${xpath_domain_name_toggle}
     Page Should Contain Button  ${xpath_dns_servers_toggle}
     Page Should Contain Button  ${xpath_ntp_servers_toggle}
     Page Should Contain Button  ${xpath_dhcp_toggle_switch}
+    Page Should Contain Button  ${xpath_dhcpv6_toggle_switch}
+    Page Should Contain Button  ${xpath_slaac_toggle_switch}
+    Page Should Contain Button  ${xpath_lldp_toggle_switch}
 
 
 Verify Existence Of All Fields In Hostname
     [Documentation]  Login to GUI and navigate to the settings sub-menu network page
     ...  and confirm hostname contains all the fields.
     [Tags]  Verify_Existence_Of_All_Fields_In_Hostname
-    [Teardown]  Run Keywords  Click Button  ${xpath_cancel_button}  AND
-    ...  Wait Until Keyword Succeeds  10 sec  5 sec
-    ...  Refresh GUI And Verify Element Value  ${xpath_network_heading}  Network
+    [Teardown]  Cancel And Verify Network Heading
 
     Click Element  ${xpath_hostname}
     Wait Until Page Contains  Edit hostname  timeout=1min
@@ -105,9 +119,7 @@ Verify Existence Of All Fields In Static IP Address
     [Documentation]  Login to GUI and navigate to the settings sub-menu network page
     ...  and confirm section static IPv4 contains all the fields.
     [Tags]  Verify_Existence_Of_All_Fields_In_Static_IP_Address
-    [Teardown]  Run Keywords  Click Button  ${xpath_cancel_button}  AND
-    ...  Wait Until Keyword Succeeds  10 sec  5 sec
-    ...  Refresh GUI And Verify Element Value  ${xpath_network_heading}  Network
+    [Teardown]  Cancel And Verify Network Heading
 
     Wait Until Keyword Succeeds  30 sec  10 sec  Click Element  ${xpath_add_static_ipv4_address_button}
     Wait Until Page Contains  Add static IPv4 address  timeout=15s
@@ -118,13 +130,25 @@ Verify Existence Of All Fields In Static IP Address
     Page Should Contain Button  ${xpath_add_button}
 
 
+Verify Existence Of All Fields In Static IPv6 Address
+    [Documentation]  Login to GUI and navigate to the settings sub-menu network page
+    ...  and confirm section static IPv6 contains all the fields.
+    [Tags]  Verify_Existence_Of_All_Fields_In_Static_IPv6_Address
+    [Teardown]  Cancel And Verify Network Heading
+
+    Wait Until Keyword Succeeds  30 sec  10 sec  Click Element  ${xpath_add_static_ipv6_address_button}
+    Wait Until Page Contains  Add static IPv6 address  timeout=15s
+    Page Should Contain Textfield  ${xpath_input_ipv6_address}
+    Page Should Contain Textfield  ${xpath_input_prefix_length}
+    Page Should Contain Button  ${xpath_cancel_button}
+    Page Should Contain Button  ${xpath_add_button}
+
+
 Verify Existence Of All Fields In Static DNS
     [Documentation]  Login to GUI and navigate to the settings sub-menu network page
     ...  and confirm section static DNS contains all the fields.
     [Tags]  Verify_Existence_Of_All_Fields_In_Static_DNS
-    [Teardown]  Run Keywords  Click Button  ${xpath_cancel_button}  AND
-    ...  Wait Until Keyword Succeeds  10 sec  5 sec
-    ...  Refresh GUI And Verify Element Value  ${xpath_network_heading}  Network
+    [Teardown]  Cancel And Verify Network Heading
 
     Wait Until Keyword Succeeds  30 sec  10 sec  Click Element  ${xpath_add_dns_ip_address_button}
     Wait Until Page Contains  Add IP address  timeout=11s
@@ -147,8 +171,6 @@ Configure And Verify DNS Server Via GUI
 Configure Static IPv4 Netmask Via GUI And Verify
     [Documentation]  Login to GUI Network page, configure static IPv4 netmask and verify.
     [Tags]  Configure_Static_IPv4_Netmask_Via_GUI_And_Verify
-    [Setup]  Redfish.Login
-    [Teardown]  Redfish.Logout
     [Template]  Add Static IP Address And Verify
 
     # ip_addresses      subnet_masks             gateway          expected_status
@@ -162,16 +184,12 @@ Configure Static IPv4 Netmask Via GUI And Verify
 Configure And Verify Static IP Address
     [Documentation]  Login to GUI Network page, configure static ip address and verify.
     [Tags]  Configure_And_Verify_Static_IP_Address
-    [Setup]  Redfish.Login
-    [Teardown]  Redfish.Logout
 
     Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success
 
 
 Configure And Verify Multiple Static IP Address
     [Documentation]  Login to GUI Network page, configure multiple static IP address and verify.
-    [Setup]  Redfish.Login
-    [Teardown]  Redfish.Logout
     [Tags]  Configure_And_Verify_Multiple_Static_IP_Address
 
     Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success
@@ -181,8 +199,6 @@ Configure And Verify Multiple Static IP Address
 Configure And Verify Invalid Static IP Address
     [Documentation]  Login to GUI Network page, configure invalid static IP address and verify.
     [Tags]  Configure_And_Verify_Invalid_Static_IP_Address
-    [Setup]  Redfish.Login
-    [Teardown]  Redfish.Logout
     [Template]  Add Static IP Address And Verify
 
     # ip                 subnet_mask          gateway             status
@@ -194,11 +210,16 @@ Configure And Verify Invalid Static IP Address
     ${spl_char_ip}       ${test_subnet_mask}  ${default_gateway}  Invalid format
 
 
+Configure And Verify Static IPv6 Address
+    [Documentation]  Configure and verify static IPv6 address.
+    [Tags]  Configure_And_Verify_Static_IPv6_Address
+
+    Add Static IPv6 Address And Verify  ${test_ipv6_addr}  ${test_prefix_length}  Success
+
+
 Modify DHCP Properties By Toggling And Verify
     [Documentation]  Modify DHCP properties by toggling and verify.
     [Tags]  Modify_DHCP_Properties_By_Toggling_And_Verify
-    [Setup]  Redfish.Login
-    [Teardown]  Redfish.Logout
     [Template]  Toggle DHCPv4 property And Verify
 
     # property                 xpath_property
@@ -211,8 +232,6 @@ Modify DHCP Properties By Toggling And Verify
 Delete IPv4 Address Via GUI And Verify
    [Documentation]  Delete IPv4 Address via GUI and verify.
    [Tags]  Delete_IPv4_Address_Via_GUI_And_Verify
-   [Setup]  Redfish.Login
-   [Teardown]  Redfish.Logout
 
    Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success
    Delete IPv4 Address And Verify  ${test_ipv4_addr}
@@ -221,8 +240,6 @@ Delete IPv4 Address Via GUI And Verify
 Verify MAC Address Is Displayed
    [Documentation]  Verify MAC address is displayed.
    [Tags]  Verify_MAC_Address_Is_Displayed
-   [Setup]  Redfish.Login
-   [Teardown]  Redfish.Logout
 
    ${network_details}=  Get Network Interface Details  ${CHANNEL_NUMBER}
 
@@ -233,8 +250,6 @@ Verify MAC Address Is Displayed
 Verify MAC Address On Eth1 Interface
     [Documentation]  Verify MAC address on eth1 interface.
     [Tags]  Verify_MAC_Address_On_Eth1_Interface
-    [Setup]  Redfish.Login
-    [Teardown]  Redfish.Logout
 
     Click Element  ${xpath_eth1_interface}
 
@@ -289,6 +304,8 @@ Configure the Hostname Back And Verify
     ...  ${xpath_hostname}  ${xpath_hostname_input}  ${hostname}
     ${bmc_hostname_after}=  Get BMC Hostname
     Should Be Equal As Strings  ${bmc_hostname_after}  ${hostname}
+    Close Browser
+
 
 Delete DNS Servers And Verify
     [Documentation]  Login to GUI Network page,delete static name servers
@@ -316,7 +333,7 @@ Add Static IP Address And Verify
     # ip_address          IP address to be added (e.g. 10.7.7.7).
     # subnet_mask         Subnet mask for the IP to be added (e.g. 255.255.0.0).
     # gateway_address     Gateway address for the IP to be added (e.g. 10.7.7.1).
-    # expected_status     Expected status while adding static ipv4 address
+    # expected_status     Expected status while adding static IPv4 address
     # ....                (e.g. Invalid format / Field required).
 
     Wait Until Element Is Enabled  ${xpath_add_static_ipv4_address_button}  timeout=60sec
@@ -334,6 +351,31 @@ Add Static IP Address And Verify
         Page Should Contain  Invalid format
         Click Button  ${xpath_cancel_button}
         Wait Until Page Does Not Contain Element  ${xpath_cancel_button}
+    END
+
+
+Add Static IPv6 Address And Verify
+    [Documentation]  Add static IPv6 address and prefix length and verify.
+    [Arguments]  ${ipv6_address}  ${prefix_length}  ${expected_status}=error
+
+    # Description of argument(s):
+    # ipv6_address        IPv6 address to be added.
+    # prefix_length       Prefix length of the IPv6 to be added.
+    # expected_status     Expected status while adding static IPv6 address
+
+    Wait Until Element Is Enabled  ${xpath_add_static_ipv6_address_button}  timeout=60sec
+    Click Element  ${xpath_add_static_ipv6_address_button}
+
+    Input Text  ${xpath_input_ip_address}  ${ipv6_address}
+    Input Text  ${xpath_input_prefix_length}  ${prefix_length}
+
+    Click Element  ${xpath_add_button}
+    IF  '${expected_status}' == 'Success'
+        Wait Until Page Contains  ${ipv6_address}  timeout=40sec
+        Validate Network Config On BMC
+    ELSE
+        Page Should Contain  Invalid format
+        Cancel And Verify Network Heading
     END
 
 
@@ -442,3 +484,11 @@ Get Network Interface Details
    ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
    ${resp}=  redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
    RETURN  ${resp.dict}
+
+
+Cancel And Verify Network Heading
+    [Documentation]  Cancel and verify network heading.
+
+    Click Button  ${xpath_cancel_button}
+    Wait Until Keyword Succeeds  10 sec  5 sec
+    ...  Refresh GUI And Verify Element Value  ${xpath_network_heading}  Network
