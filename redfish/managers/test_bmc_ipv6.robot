@@ -21,7 +21,8 @@ Test Tags     BMC_IPv6
 ${test_ipv6_addr}            2001:db8:3333:4444:5555:6666:7777:8888
 ${test_ipv6_invalid_addr}    2001:db8:3333:4444:5555:6666:7777:JJKK
 ${test_ipv6_addr1}           2001:db8:3333:4444:5555:6666:7777:9999
-
+${invalid_hexadec_ipv6}      x:x:x:x:x:x:10.5.5.6
+${ipv6_multi_short}          2001::33::111
 # Valid prefix length is a integer ranges from 1 to 128.
 ${test_prefix_length}        64
 ${ipv6_gw_addr}              2002:903:15F:32:9:3:32:1
@@ -149,8 +150,11 @@ Configure Invalid Static IPv6 And Verify
     [Tags]  Configure_Invalid_Static_IPv6_And_Verify
     [Template]  Configure IPv6 Address On BMC
 
-    #invalid_ipv6         prefix length           valid_status_code
-    ${ipv4_hexword_addr}  ${test_prefix_length}   ${HTTP_BAD_REQUEST}
+    #invalid_ipv6            prefix length           valid_status_code
+    ${ipv4_hexword_addr}     ${test_prefix_length}   ${HTTP_BAD_REQUEST}
+    ${invalid_hexadec_ipv6}  ${test_prefix_length}   ${HTTP_BAD_REQUEST}
+    ${ipv6_multi_short}      ${test_prefix_length}   ${HTTP_BAD_REQUEST}
+
 
 
 Configure IPv6 Static Default Gateway And Verify
