@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "378db8d1_34360669",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-09-10T16:15:17Z",
+      "side": 1,
+      "message": "I see this portion is used multiple places.. can u write a common keyword and just call for teardpwn ?",
+      "revId": "5e06af4518d7c6ab5006eb7fae45ae418174fefb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
