@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "623b57d5_08759de3",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-09-10T07:46:03Z",
+      "side": 1,
+      "message": "bmc -\u003e BMC",
+      "range": {
+        "startLine": 242,
+        "startChar": 57,
+        "endLine": 242,
+        "endChar": 60
+      },
+      "revId": "f50956f050aaf0b50cc51f8230657eabfcf36e32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52291eb1_784b5d7d",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-09-10T07:46:03Z",
+      "side": 1,
+      "message": "exceeding 110 character limit",
+      "range": {
+        "startLine": 246,
+        "startChar": 2,
+        "endLine": 246,
+        "endChar": 83
+      },
+      "revId": "f50956f050aaf0b50cc51f8230657eabfcf36e32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0e44a34_0b86fa71",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-09-10T07:46:03Z",
+      "side": 1,
+      "message": "exceeding 110 character limit",
+      "range": {
+        "startLine": 251,
+        "startChar": 2,
+        "endLine": 251,
+        "endChar": 83
+      },
+      "revId": "f50956f050aaf0b50cc51f8230657eabfcf36e32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
