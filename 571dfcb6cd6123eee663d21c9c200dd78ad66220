@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2675ed9f_0b10ac69",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-09-10T08:43:25Z",
+      "side": 1,
+      "message": "remove extra space",
+      "revId": "571dfcb6cd6123eee663d21c9c200dd78ad66220",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7520fb7_d32dbc43",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-09-10T08:43:25Z",
+      "side": 1,
+      "message": "remove extra space",
+      "revId": "571dfcb6cd6123eee663d21c9c200dd78ad66220",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
