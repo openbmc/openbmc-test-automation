@@ -16,18 +16,27 @@ ${xpath_network_heading}                 //h1[text()="Network"]
 ${xpath_interface_settings}              //h2[text()="Interface settings"]
 ${xpath_network_settings}                //h2[text()="Network settings"]
 ${xpath_static_ipv4}                     //h2[text()="IPv4"]
+${xpath_static_ipv6}                     //h2[text()="IPv6"]
+${xpath_static_ipv6_default_gateway}     //h2[text()="IPv6 static default gateways"]
 ${xpath_domain_name_toggle}              //*[@data-test-id="networkSettings-switch-useDomainName"]
 ${xpath_ntp_servers_toggle}              //*[@data-test-id="networkSettings-switch-useNtp"]
 ${xpath_add_static_ipv4_address_button}  //button[contains(text(),"Add static IPv4 address")]
+${xpath_add_static_ipv6_address_button}  //button[contains(text(),"Add static IPv6 address")]
 ${xpath_hostname}                        //*[@title="Edit hostname"]
 ${xpath_hostname_input}                  //*[@id="hostname"]
 ${xpath_input_ip_address}                //*[@id="ipAddress"]
 ${xpath_input_gateway}                   //*[@id="gateway"]
 ${xpath_input_subnetmask}                //*[@id="subnetMask"]
+${xpath_input_ipv6address}               //*[@id="ipAddress"]
+${xpath_input_prefix_length}             //*[@id="prefixLength"]
+${xpath_input_addressorigin}             //*[@id="Address Origin"]
 ${xpath_cancel_button}                   //button[contains(text(),'Cancel')]
 ${xpath_delete_dns_server}               //*[@title="Delete DNS address"]
 ${xpath_save_button}                     //button[contains(text(),'Save')]
 ${xpath_dhcp_toggle_switch}              //*[@id='dhcpSwitch']
+${xpath_dhcpv6_toggle_switch}            //*[@id='dhcpIpv6Switch']
+${xpath_slaac_toggle_switch}             //*[@id='ipv6AutoConfigSwitch']
+${xpath_lldp_toggle_switch}              //*[@id='useLLDPSwitch']
 ${xpath_ntp_switch_button}               //*[@id="useNtpSwitch"]/following-sibling::label
 ${xpath_dns_switch_button}               //*[@id="useDnsSwitch"]/following-sibling::label
 ${xpath_domainname_switch_button}        //*[@id="useDomainNameSwitch"]/following-sibling::label
@@ -40,6 +49,8 @@ ${xpath_eth1_interface}                  //*[text()="eth1"]
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
 ${test_ipv4_addr_1}                      10.7.7.8
+${test_ipv6_addr}                        2001:db8:3333:4444:5555:6666:7777:8888
+${test_prefix_length}                    64
 ${out_of_range_ip}                       10.7.7.256
 ${string_ip}                             aa.bb.cc.dd
 ${negative_ip}                           10.-7.-7.-7
@@ -70,6 +81,8 @@ Verify Existence Of All Sections In Network Page
     Wait Until Page Contains Element  ${xpath_network_settings}  timeout=1min
     Page Should Contain Element  ${xpath_interface_settings}
     Page Should Contain Element  ${xpath_static_ipv4}
+    Page Should Contain Element  ${xpath_static_ipv6}
+    Page Should Contain Element  ${xpath_static_ipv6_default_gateway}
     Page Should Contain Element  ${xpath_static_dns}
 
 
@@ -79,11 +92,15 @@ Verify Existence Of All Buttons In Network Page
     [Tags]  Verify_Existence_Of_All_Buttons_In_Network_Page
 
     Page Should Contain Button  ${xpath_add_static_ipv4_address_button}
+    Page Should Contain Button  ${xpath_add_static_ipv6_address_button}
     Page Should Contain Button  ${xpath_add_dns_ip_address_button}
     Page Should Contain Button  ${xpath_domain_name_toggle}
     Page Should Contain Button  ${xpath_dns_servers_toggle}
     Page Should Contain Button  ${xpath_ntp_servers_toggle}
     Page Should Contain Button  ${xpath_dhcp_toggle_switch}
+    Page Should Contain Button  ${xpath_dhcpv6_toggle_switch}
+    Page Should Contain Button  ${xpath_slaac_toggle_switch}
+    Page Should Contain Button  ${xpath_lldp_toggle_switch}
 
 
 Verify Existence Of All Fields In Hostname
@@ -114,6 +131,22 @@ Verify Existence Of All Fields In Static IP Address
     Page Should Contain Textfield  ${xpath_input_ip_address}
     Page Should Contain Textfield  ${xpath_input_gateway}
     Page Should Contain Textfield  ${xpath_input_subnetmask}
+    Page Should Contain Button  ${xpath_cancel_button}
+    Page Should Contain Button  ${xpath_add_button}
+
+
+Verify Existence Of All Fields In Static IPv6 Address
+    [Documentation]  Login to GUI and navigate to the settings sub-menu network page
+    ...  and confirm section static IPv6 contains all the fields.
+    [Tags]  Verify_Existence_Of_All_Fields_In_Static_IPv6_Address
+    [Teardown]  Run Keywords  Click Button  ${xpath_cancel_button}  AND
+    ...  Wait Until Keyword Succeeds  10 sec  5 sec
+    ...  Refresh GUI And Verify Element Value  ${xpath_network_heading}  Network
+
+    Wait Until Keyword Succeeds  30 sec  10 sec  Click Element  ${xpath_add_static_ipv6_address_button}
+    Wait Until Page Contains  Add static IPv6 address  timeout=15s
+    Page Should Contain Textfield  ${xpath_input_ipv6_address}
+    Page Should Contain Textfield  ${xpath_input_prefix_length}
     Page Should Contain Button  ${xpath_cancel_button}
     Page Should Contain Button  ${xpath_add_button}
 
@@ -192,6 +225,13 @@ Configure And Verify Invalid Static IP Address
     ${negative_ip}       ${test_subnet_mask}  ${default_gateway}  Invalid format
     ${hex_ip}            ${test_subnet_mask}  ${default_gateway}  Invalid format
     ${spl_char_ip}       ${test_subnet_mask}  ${default_gateway}  Invalid format
+
+
+Configure And Verify Static IPv6 Address
+    [Documentation]  Configure and verify static IPv6 address.
+    [Tags]  Configure_And_Verify_Static_IPv6_Address
+
+    Add Static IPv6 Address And Verify  ${test_ipv6_addr}  ${test_prefix_length}  Success
 
 
 Modify DHCP Properties By Toggling And Verify
@@ -329,6 +369,33 @@ Add Static IP Address And Verify
     Click Element  ${xpath_add_button}
     IF  '${expected_status}' == 'Success'
         Wait Until Page Contains  ${ip_address}  timeout=40sec
+        Validate Network Config On BMC
+    ELSE
+        Page Should Contain  Invalid format
+        Click Button  ${xpath_cancel_button}
+        Wait Until Page Does Not Contain Element  ${xpath_cancel_button}
+    END
+
+
+Add Static IPv6 Address And Verify
+    [Documentation]  Add static IPv6 address and prefix length and verify.
+    [Arguments]  ${ipv6_address}  ${prefix_length}  ${expected_status}=error
+
+    # Description of argument(s):
+    # ipv6_address   IPv6 address to be added.
+    # prefix_length  Prefix length of the IP to be added.
+    # expected_status     Expected status while adding static ipv4 address
+    # ....                (e.g. Invalid format / Field required).
+
+    Wait Until Element Is Enabled  ${xpath_add_static_ipv6_address_button}  timeout=60sec
+    Click Element  ${xpath_add_static_ipv6_address_button}
+
+    Input Text  ${xpath_input_ip_address}  ${ipv6_address}
+    Input Text  ${xpath_input_prefix_length}  ${prefix_length}
+
+    Click Element  ${xpath_add_button}
+    IF  '${expected_status}' == 'Success'
+        Wait Until Page Contains  ${ipv6_address}  timeout=40sec
         Validate Network Config On BMC
     ELSE
         Page Should Contain  Invalid format
