@@ -16,6 +16,24 @@
       "message": "end period\nsame for below comment line as well",
       "revId": "f10af9a7210c1678c2a9d9feb096a84bb25d8688",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9affb4c6_590f7ef9",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-09-10T06:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2cb39687_63f1ec1d",
+      "revId": "f10af9a7210c1678c2a9d9feb096a84bb25d8688",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
