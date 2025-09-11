@@ -16,6 +16,24 @@
       "message": "I see this portion is used multiple places.. can u write a common keyword and just call for teardpwn ?",
       "revId": "5e06af4518d7c6ab5006eb7fae45ae418174fefb",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc9ecfcf_a68d0e88",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-09-11T04:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "378db8d1_34360669",
+      "revId": "5e06af4518d7c6ab5006eb7fae45ae418174fefb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
