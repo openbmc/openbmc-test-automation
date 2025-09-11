@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c40c8a40_c6766efd",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-09-11T10:22:31Z",
+      "side": 1,
+      "message": "Here in the test case we are checking if cancel button is present or not.\nIn the teardown we are clicking on the cancel button and checking Network comes up in the homepage.",
+      "parentUuid": "b3cfabe8_54145f53",
+      "revId": "f18383915d19a2aa1ff5e418fb24507b700a2f65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42a4080c_b8ddcdb8",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2025-09-11T09:15:06Z",
       "side": 1,
       "message": "Instead of 397 \u0026 398 you can use this keyword right\n\"Cancel And Verify Network Heading\"",
+      "revId": "f18383915d19a2aa1ff5e418fb24507b700a2f65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7055a3e_6506815a",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-09-11T10:22:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42a4080c_b8ddcdb8",
       "revId": "f18383915d19a2aa1ff5e418fb24507b700a2f65",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
