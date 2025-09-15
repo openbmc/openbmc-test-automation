@@ -274,6 +274,17 @@ Verify Persistency Of Link Local IPv6 On BMC Reboot
     ...    msg=IPv6 Linklocal address has changed after reboot.
 
 
+Add Multiple IPv6 Address And Verify
+    [Documentation]  Add multiple ipv6 address and verify.
+    [Tags]  Add_Multiple_IPv6_Address_And_Verify
+    [Teardown]  Run Keywords
+    ...  Delete IPv6 Address  ${test_ipv6_addr}  AND  Delete IPv6 Address  ${test_ipv6_addr1}
+    ...  AND  Test Teardown Execution
+
+    Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
+    Configure IPv6 Address On BMC  ${test_ipv6_addr1}  ${test_prefix_length}
+
+
 *** Keywords ***
 
 Suite Setup Execution
