@@ -22,6 +22,7 @@ ${xpath_domain_name_toggle}              //*[@data-test-id="networkSettings-swit
 ${xpath_ntp_servers_toggle}              //*[@data-test-id="networkSettings-switch-useNtp"]
 ${xpath_add_static_ipv4_address_button}  //button[contains(text(),"Add static IPv4 address")]
 ${xpath_add_static_ipv6_address_button}  //button[contains(text(),"Add static IPv6 address")]
+${xpath_add_static_def_gateway_button}   //button[contains(text(),"Add IPv6 static default gateway address")]
 ${xpath_hostname}                        //*[@title="Edit hostname"]
 ${xpath_hostname_input}                  //*[@id="hostname"]
 ${xpath_input_ip_address}                //*[@id="ipAddress"]
@@ -50,6 +51,8 @@ ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
 ${test_ipv4_addr_1}                      10.7.7.8
 ${test_ipv6_addr}                        2001:db8:3333:4444:5555:6666:7777:8888
+${test_ipv6_addr_1}                      2001:db8:3333:4444:5555:6666:7777:8889
+${ipv4_hexword_addr}                     10.5.5.6:1A:1B:1C:1D:1E:1F
 ${test_prefix_length}                    64
 ${out_of_range_ip}                       10.7.7.256
 ${string_ip}                             aa.bb.cc.dd
@@ -144,6 +147,22 @@ Verify Existence Of All Fields In Static IPv6 Address
     Page Should Contain Button  ${xpath_add_button}
 
 
+Verify Existence Of All Fields In IPv6 Static Default Gateway
+    [Documentation]  Login to GUI and navigate to the settings sub-menu network page
+    ...  and confirm section IPv6 static default gateway contains all the fields.
+    [Tags]  Verify_Existence_Of_All_Fields_In_IPv6_Static_Default_Gateway
+    [Teardown]  Run Keywords  Click Button  ${xpath_cancel_button}  AND
+    ...  Wait Until Keyword Succeeds  10 sec  5 sec
+    ...  Refresh GUI And Verify Element Value  ${xpath_network_heading}  Network
+
+    Wait Until Keyword Succeeds  30 sec  10 sec  Click Element  ${xpath_add_static_def_gateway_button}
+    Wait Until Page Contains  Add IPv6 static default gateway address  timeout=11s
+    #Page Should Contain Textfield  ${xpath_input_static_default_gateway}
+    Page Should Contain Textfield  ${xpath_input_ip_address}
+    Page Should Contain Button  ${xpath_cancel_button}
+    Page Should Contain Button  ${xpath_add_button}
+
+
 Verify Existence Of All Fields In Static DNS
     [Documentation]  Login to GUI and navigate to the settings sub-menu network page
     ...  and confirm section static DNS contains all the fields.
@@ -215,6 +234,29 @@ Configure And Verify Static IPv6 Address
     [Tags]  Configure_And_Verify_Static_IPv6_Address
 
     Add Static IPv6 Address And Verify  ${test_ipv6_addr}  ${test_prefix_length}  Success
+
+
+Configure And Verify Multiple Static IPv6 Address
+    [Documentation]  Login to GUI Network page, configure multiple static IPv6 address and verify.
+    [Tags]  Configure_And_Verify_Multiple_Static_IPv6_Address
+
+    Add Static IPv6 Address And Verify  ${test_ipv6_addr}    ${test_prefix_length}  Success
+    Add Static IPv6 Address And Verify  ${test_ipv6_addr_1}  ${test_prefix_length}  Success
+
+
+Configure And Verify Invalid Static IPv6 Address
+    [Documentation]  Login to GUI Network page, configure invalid static IPv6 address and verify.
+    [Tags]  Configure_And_Verify_Invalid_Static_IPv6_Address
+    [Template]  Add Static IPv6 Address And Verify
+
+    # ipv6                  prefix_length      status
+    ${ipv4_hexword_addr}    64                 Invalid format
+
+Configure And Verify Static Default Gateway
+    [Documentation]  Login to GUI Network page, configure invalid static IPv6 default gateway and verify.
+    [Tags]  Configure_And_Verify_Static_Default_Gateway
+
+    Add Static Default Gateway And Verify  ${test_ipv6_addr}  Success
 
 
 Modify DHCP Properties By Toggling And Verify
@@ -361,7 +403,7 @@ Add Static IPv6 Address And Verify
     # Description of argument(s):
     # ipv6_address        IPv6 address to be added.
     # prefix_length       Prefix length of the IPv6 to be added.
-    # expected_status     Expected status while adding static IPv6 address
+    # expected_status     Expected status while adding static IPv6 address.
 
     Wait Until Element Is Enabled  ${xpath_add_static_ipv6_address_button}  timeout=60sec
     Click Element  ${xpath_add_static_ipv6_address_button}
@@ -372,6 +414,29 @@ Add Static IPv6 Address And Verify
     Click Element  ${xpath_add_button}
     IF  '${expected_status}' == 'Success'
         Wait Until Page Contains  ${ipv6_address}  timeout=40sec
+        Validate Network Config On BMC
+    ELSE
+        Page Should Contain  Invalid format
+        Cancel And Verify Network Heading
+    END
+
+
+Add Static Default Gateway And Verify
+    [Documentation]  Add static default gateway and verify.
+    [Arguments]  ${ipv6_static_def_gw}  ${expected_status}=error
+
+    # Description of argument(s):
+    # ${ipv6_static_def_gw}  IPv6 static default gatway.
+    # expected_status        Expected status while adding static IPv6 default gateway.
+
+    Wait Until Element Is Enabled  ${xpath_add_static_def_gateway_button}  timeout=60sec
+    Click Element  ${xpath_add_static_def_gateway_button}
+
+    Input Text  ${xpath_input_ip_address}  ${ipv6_static_def_gw}
+
+    Click Element  ${xpath_add_button}
+    IF  '${expected_status}' == 'Success'
+        Wait Until Page Contains  ${ipv6_static_def_gw}  timeout=40sec
         Validate Network Config On BMC
     ELSE
         Page Should Contain  Invalid format
