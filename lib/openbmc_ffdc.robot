@@ -33,7 +33,9 @@ Resource           openbmc_ffdc_methods.robot
 Resource           openbmc_ffdc_utils.robot
 Resource           dump_utils.robot
 Library            openbmc_ffdc.py
-Library            ffdc_cli_robot_script.py
+# TODO:
+# telnetlib is remove in Python3.13 version.
+#Library            ffdc_cli_robot_script.py
 
 *** Keywords ***
 
@@ -64,5 +66,7 @@ Launch FFDC
     ...              FFDC_DEFAULT:0  use new ffdc collector.
 
     Run Keyword If  ${FFDC_DEFAULT} == ${1}  FFDC    # Keyword from openbmc_ffdc.py
-    ...    ELSE  ffdc_robot_script_cli               # Keyword from ffdc_cli_robot_script.py
+
+    # TODO:  Python 3.13 compatibility changes needed
+    # ...    ELSE  ffdc_robot_script_cli               # Keyword from ffdc_cli_robot_script.py
 
