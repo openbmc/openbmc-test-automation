@@ -113,11 +113,15 @@ def customize_doc_string(doc_string):
         ),
         None,
     )
-    # Replace the "var_value" line with our "var_name" line.
-    doc_string[start_ix] = (
-        "    var_name                        "
-        + "The name of the variable to be validated."
-    )
+    # If we don't find the var_value in the string, return as it is.
+    try:
+        # Replace the "var_value" line with our "var_name" line.
+        doc_string[start_ix] = (
+            "    var_name                        "
+            + "The name of the variable to be validated."
+        )
+    except TypeError:
+        pass
 
     return "\n".join(doc_string)
 
