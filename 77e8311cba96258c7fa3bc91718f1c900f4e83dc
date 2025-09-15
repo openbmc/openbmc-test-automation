@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14b34ab2_4a6ccc8d",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-09-15T12:40:29Z",
+      "side": 1,
+      "message": "You need to send in single request??",
+      "revId": "77e8311cba96258c7fa3bc91718f1c900f4e83dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
