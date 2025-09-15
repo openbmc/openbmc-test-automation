@@ -274,6 +274,16 @@ Verify Persistency Of Link Local IPv6 On BMC Reboot
     ...    msg=IPv6 Linklocal address has changed after reboot.
 
 
+Add Multiple IPv6 Address And Verify
+    [Documentation]  Add multiple IPv6 address and verify.
+    [Tags]  Add_Multiple_IPv6_Address_And_Verify
+    [Teardown]  Run Keywords
+    ...  Delete IPv6 Address  ${test_ipv6_addr}  AND  Delete IPv6 Address  ${test_ipv6_addr1}
+    ...  AND  Test Teardown Execution
+
+    Configure Multiple IPv6 Address on BMC  ${test_prefix_length}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -465,6 +475,61 @@ Configure IPv6 Address On BMC
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
     Verify IPv6 And PrefixLength  ${ipv6_addr}  ${prefix_len}
+
+    # Verify if existing static IPv6 addresses still exist.
+    FOR  ${ipv6_network_configuration}  IN  @{ipv6_network_configurations}
+      Verify IPv6 On BMC  ${ipv6_network_configuration['Address']}
+    END
+
+    Validate IPv6 Network Config On BMC
+
+
+Configure Multiple IPv6 Address on BMC
+    [Documentation]  Add multiple IPv6 address on BMC.
+    [Arguments]  ${prefix_len}
+    ...          ${valid_status_codes}=[${HTTP_OK},${HTTP_NO_CONTENT}]
+
+    # Description of argument(s):
+    # prefix_len          Prefix length for the IPv6 to be added
+    #                     (e.g. "64").
+    # valid_status_codes  Expected return code from patch operation
+    #                     (e.g. "200").
+
+    ${ipv6_list}=  Create List  ${test_ipv6_addr}  ${test_ipv6_addr1}
+    ${prefix_length}=  Convert To Integer  ${prefix_len}
+    ${empty_dict}=  Create Dictionary
+    ${patch_list}=  Create List
+
+    # Get existing static IPv6 configurations on BMC.
+    ${ipv6_network_configurations}=  Get IPv6 Network Configuration
+    ${num_entries}=  Get Length  ${ipv6_network_configurations}
+
+    FOR  ${INDEX}  IN RANGE  0  ${num_entries}
+      Append To List  ${patch_list}  ${empty_dict}
+    END
+
+    # We need not check for existence of IPv6 on BMC while adding.
+    FOR  ${ipv6_addr}  IN  @{ipv6_list}
+      ${ipv6_data}=  Create Dictionary  Address=${ipv6_addr}  PrefixLength=${prefix_length}
+      Append To List  ${patch_list}  ${ipv6_data}
+    END
+    ${data}=  Create Dictionary  IPv6StaticAddresses=${patch_list}
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+    ...  valid_status_codes=${valid_status_codes}
+
+    RETURN  IF  ${valid_status_codes} not in [${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Note: Network restart takes around 15-18s after patch request processing.
+    Sleep  ${NETWORK_TIMEOUT}s
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+    FOR  ${ipv6_addr}  IN  @{ipv6_list}
+      Verify IPv6 And PrefixLength  ${ipv6_addr}  ${prefix_len}
+    END
 
     # Verify if existing static IPv6 addresses still exist.
     FOR  ${ipv6_network_configuration}  IN  @{ipv6_network_configurations}
