@@ -4,8 +4,8 @@ Documentation   Test OpenBMC GUI header.
 
 Resource        ../../lib/gui_resource.robot
 
-Test Setup      Launch Browser And Login GUI
-Suite Teardown  Close Browser
+Suite Setup      Launch Browser And Login GUI
+Suite Teardown   Close Browser
 
 Test Tags      GUI_Header
 
@@ -49,7 +49,7 @@ Verify GUI Logout
     Click Element  ${xpath_logout_button}
     Wait Until Page Contains Element  ${xpath_login_button}  timeout=15s
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
-
+    Close Browser
 
 Verify System Serial And Model Number In GUI Header Page
     [Documentation]  Verify system serial and model number in GUI header page.

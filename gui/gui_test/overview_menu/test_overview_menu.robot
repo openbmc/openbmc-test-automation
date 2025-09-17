@@ -194,8 +194,8 @@ Verify BMC Time In Overview Page
 Verify BMC Information At Host Power Off State
     [Documentation]  Verify that BMC information is displayed at host power off state.
     [Tags]  Verify_BMC_Information_At_Host_Power_Off_State
+    [Setup]  Run Keywords  Power On Server  AND  Test Setup Execution
 
-    Redfish Power Off  stack_mode=skip
     ${firmware_version}=  Redfish Get BMC Version
     Page Should Contain  ${firmware_version}
 
@@ -329,12 +329,15 @@ Verify Server LED Turn Off And On With Readonly User
     [Tags]  Verify_Server_LED_Turn_Off_And_On_With_Readonly_User
     [Setup]  Create Readonly User And Login To GUI
     [Teardown]  Delete Readonly User And Logout Current GUI Session
+
     # Turn On the server LED via Redfish and refresh GUI.
     Set IndicatorLED State  Lit
     Refresh GUI
+
     # Turn OFF the LED via GUI.
     Click Element  ${xpath_led_button}
     Verify Error And Unauthorized Message On GUI
+
     # Turn ON the LED via GUI.
     Set IndicatorLED State   Off
     Refresh GUI
