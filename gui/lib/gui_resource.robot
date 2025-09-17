@@ -15,6 +15,7 @@ ${xpath_power_shutdown}      //*[@data-test-id='serverPowerOperations-button-shu
 ${xpath_power_power_on}      //*[@data-test-id='serverPowerOperations-button-powerOn']
 ${xpath_power_reboot}        //*[@data-test-id='serverPowerOperations-button-reboot']
 ${xpath_confirm}             //button[contains(text(),'Confirm')]
+${xpath_current_power_state}               //*[@data-test-id='powerServerOps-text-hostStatus']
 
 # Default GUI browser and mode is set to "Firefox" and "headless"
 # respectively here.
@@ -104,6 +105,7 @@ Login GUI
     Wait Until Page Contains  Overview  timeout=60s
     Wait Until Element Is Not Visible
     ...  ${xpath_page_loading_progress_bar}  timeout=120s
+    Wait Until Page Contains  Operations  timeout=60s
 
 
 Launch Browser And Login GUI With Given User
@@ -164,8 +166,7 @@ Refresh GUI And Verify Element Value
     # expected_value  Expected value of for the given element.
 
     # Refresh GUI.
-
-    Click Element  ${xpath_refresh_button}
+    Refresh GUI
 
     # Check element value and verify that it contains expected value.
     ${element_value}=  Get Text  ${element}
@@ -222,12 +223,11 @@ Navigate To Server Power Page
     [Documentation]  Navigate To Server Power Page.
 
     Click Element  ${xpath_power_page}
-    Wait Until Element Is Not Visible  {xpath_page_loading_progress_bar}  timeout=30
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=60s
 
 
 Power Off Server
     [Documentation]  Powering off server.
-
     Navigate To Server Power Page
     ${present}=    Run Keyword And Return Status
     ...  Element Should Be Visible    ${xpath_power_shutdown}
@@ -243,13 +243,17 @@ Power Off Server
 
 Power On Server
     [Documentation]  Powering on server.
-
+    
     Navigate To Server Power Page
     ${present}=    Run Keyword And Return Status
     ...  Element Should Be Visible    ${xpath_power_power_on}
+    Capture Page Screenshot
     IF  (${present})
+      Capture Page Screenshot
       Click Element  ${xpath_power_power_on}
+      Capture Page Screenshot
       Wait Until Element Is Visible  ${xpath_power_shutdown}  timeout=60
+      Capture Page Screenshot
       Click Element  ${xpath_close_information_message}
     ELSE
       Log To console    Server is already powered On.
