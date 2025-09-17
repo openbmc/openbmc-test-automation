@@ -74,6 +74,38 @@ Verify BMC Reboot Operation
     Wait Until Element Is Visible  ${xpath_reboot_bmc_button}  timeout=10
 
 
+Verify Reboot BMC Page With Readonly User When Host On State
+    [Documentation]  Verify Reboot BMC page with readonly user when Host On state.
+    [Tags]  Verify_Reboot_BMC_Page_With_Readonly_User_When_Host_On_State
+    [Setup]  Run Keywords  Power On Server  AND  Create Readonly User And Login To GUI
+    ...      AND  Test Setup Execution
+    [Teardown]  Delete Readonly User And Logout Current GUI Session
+
+    # Click on Rebbot BMC button.
+    Click Element  ${xpath_reboot_bmc_button}
+
+    # Delay added for confirm button to appear.
+    Sleep  5s
+    Click Element At Coordinates  ${xpath_confirm_button}  0  0
+    Verify Error And Unauthorized Message On GUI
+
+
+Verify Reboot BMC Page With Readonly User When Host Off State
+    [Documentation]  Verify Reboot BMC page with readonly user when Host Off state.
+    [Tags]  Verify_Reboot_BMC_Page_With_Readonly_User_When_Host_Off_State
+    [Setup]  Run Keywords  Power Off Server  AND  Create Readonly User And Login To GUI
+    ...      AND  Test Setup Execution
+    [Teardown]  Delete Readonly User And Logout Current GUI Session
+
+    # Click on Rebbot BMC button.
+    Click Element  ${xpath_reboot_bmc_button}
+
+    # Delay added for confirm button to appear.
+    Sleep  5s
+    Click Element At Coordinates  ${xpath_confirm_button}  0  0
+    Verify Error And Unauthorized Message On GUI
+
+
 *** Keywords ***
 
 Test Setup Execution
@@ -82,4 +114,4 @@ Test Setup Execution
     Click Element  ${xpath_operations_menu}
     Click Element  ${xpath_reboot_bmc_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  reboot-bmc
-    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=60
