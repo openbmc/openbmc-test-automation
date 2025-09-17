@@ -164,8 +164,7 @@ Refresh GUI And Verify Element Value
     # expected_value  Expected value of for the given element.
 
     # Refresh GUI.
-
-    Click Element  ${xpath_refresh_button}
+    Refresh GUI
 
     # Check element value and verify that it contains expected value.
     ${element_value}=  Get Text  ${element}
@@ -222,12 +221,11 @@ Navigate To Server Power Page
     [Documentation]  Navigate To Server Power Page.
 
     Click Element  ${xpath_power_page}
-    Wait Until Element Is Not Visible  {xpath_page_loading_progress_bar}  timeout=30
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=30s
 
 
 Power Off Server
     [Documentation]  Powering off server.
-
     Navigate To Server Power Page
     ${present}=    Run Keyword And Return Status
     ...  Element Should Be Visible    ${xpath_power_shutdown}
