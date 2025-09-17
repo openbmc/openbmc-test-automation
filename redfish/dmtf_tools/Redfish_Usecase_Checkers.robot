@@ -11,6 +11,8 @@ Library                   ../../lib/state.py
 Test Setup                Test Setup Execution
 Test Teardown             Test Teardown Execution
 
+Test Tags                 Redfish_Usecase_Checkers
+
 *** Variables ***
 
 ${DEFAULT_PYTHON}         python3

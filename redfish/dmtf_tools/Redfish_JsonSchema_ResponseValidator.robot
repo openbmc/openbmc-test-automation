@@ -6,6 +6,8 @@ Library           OperatingSystem
 Resource          ../../lib/dmtf_tools_utils.robot
 Resource          ../../lib/bmc_redfish_resource.robot
 
+Test Tags         Redfish_JsonSchema_ResponseValidator
+
 *** Variables ***
 
 ${DEFAULT_PYTHON}  python3

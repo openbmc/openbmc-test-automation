@@ -7,6 +7,8 @@ Documentation      Test BMC Redfish conformance using
 
 Resource           ../../lib/dmtf_tools_utils.robot
 
+Test Tags          Redfish_Interop_Validator
+
 *** Variables ***
 
 ${DEFAULT_PYTHON}  python3
