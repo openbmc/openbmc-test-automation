@@ -8,6 +8,8 @@ Resource                  ../../lib/dmtf_tools_utils.robot
 
 Test Setup                Test Setup Execution
 
+Test Tags                 Redfish_Protocol_Validator
+
 *** Variables ***
 
 ${DEFAULT_PYTHON}         python3
