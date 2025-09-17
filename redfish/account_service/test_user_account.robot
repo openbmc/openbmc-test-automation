@@ -11,6 +11,8 @@ Library          SSHLibrary
 Test Setup       Redfish.Login
 Test Teardown    Test Teardown Execution
 
+Test Tags        User_Account
+
 *** Variables ***
 
 ${account_lockout_duration}   ${30}

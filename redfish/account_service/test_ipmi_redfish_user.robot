@@ -10,6 +10,7 @@ Library          ../lib/ipmi_utils.py
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
+Test Teardown    IPMI_Redfish_User
 
 *** Variables ***
 
@@ -325,6 +326,7 @@ Test Teardown Execution
 
 Find Free User Id
     [Documentation]  Find a userid that is not being used.
+
     FOR    ${jj}    IN RANGE    300
         # IPMI maximum users count (i.e. 15 users).
         ${random_userid}=  Evaluate  random.randint(1, ${ipmi_max_num_users})  modules=random

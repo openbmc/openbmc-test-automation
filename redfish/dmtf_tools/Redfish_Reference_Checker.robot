@@ -8,6 +8,8 @@ Resource                  ../../lib/openbmc_ffdc.robot
 
 Test Setup                Test Setup Execution
 
+Test Tags                 Redfish_Reference_Checker
+
 *** Variables ***
 
 ${DEFAULT_PYTHON}         python3

@@ -8,6 +8,8 @@ Resource           ../../lib/dmtf_tools_utils.robot
 Resource           ../../lib/bmc_redfish_resource.robot
 Resource           ../../lib/bmc_redfish_utils.robot
 
+Test Tags          Redfish_Service_Validator
+
 *** Variables ***
 
 ${DEFAULT_PYTHON}  python3

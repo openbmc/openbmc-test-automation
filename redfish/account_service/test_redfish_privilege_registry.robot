@@ -11,6 +11,8 @@ Suite Setup      Create And Verify Various Privilege Users
 Suite Teardown   Delete Created Redfish Users Except Default Admin
 Test Teardown    Redfish.Logout
 
+Test Tags        Redfish_Privilege_Registry
+
 *** Variables ***
 
 ${test_user}           testuser
@@ -26,7 +28,7 @@ ${post_user}           postuser
 ${post_password}       postpassword
 ${account_service}     ${2}
 
-** Test Cases **
+*** Test Cases ***
 
 Verify Redfish Privilege Registry Properties
     [Documentation]  Verify the Redfish Privilege Registry properties.
