@@ -85,11 +85,13 @@ Verify Profile Setting Menu With Readonly User
     [Tags]  Verify_Profile_Setting_Menu_With_Readonly_User
     [Setup]  Run Keywords  Create Readonly User And Login To GUI  AND  Test Setup Execution
     [Teardown]  Delete Readonly User And Logout Current GUI Session
+
     # input username and password value and submit.
     Input Text  ${xpath_new_password}  ${OPENBMC_PASSWORD}
     Input Text  ${xpath_confirm_password}  ${OPENBMC_PASSWORD}
     Click Element At Coordinates    ${xpath_default_UTC}    0    0
     Click Element  ${xpath_profile_settings_save_button}
+
     # Readonly user have access to change self password,
     # So expecting success messages on this page.
     Verify Success Message On BMC GUI Page

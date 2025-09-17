@@ -329,12 +329,15 @@ Verify Server LED Turn Off And On With Readonly User
     [Tags]  Verify_Server_LED_Turn_Off_And_On_With_Readonly_User
     [Setup]  Create Readonly User And Login To GUI
     [Teardown]  Delete Readonly User And Logout Current GUI Session
+
     # Turn On the server LED via Redfish and refresh GUI.
     Set IndicatorLED State  Lit
     Refresh GUI
+
     # Turn OFF the LED via GUI.
     Click Element  ${xpath_led_button}
     Verify Error And Unauthorized Message On GUI
+
     # Turn ON the LED via GUI.
     Set IndicatorLED State   Off
     Refresh GUI
