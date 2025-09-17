@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15d617f4_d0097877",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-09-17T15:46:04Z",
+      "side": 1,
+      "message": "Remove comments",
+      "revId": "45764bbab159d72d77c038da3906089306181790",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb56b2ee_4dc66ff8",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-09-17T15:46:04Z",
+      "side": 1,
+      "message": "Use Template approach here as well",
+      "revId": "45764bbab159d72d77c038da3906089306181790",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd4a27c8_d42adf3a",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-09-17T15:46:04Z",
+      "side": 1,
+      "message": "Use template approach here as well",
+      "revId": "45764bbab159d72d77c038da3906089306181790",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78dd2fde_6054c104",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-09-17T15:46:04Z",
+      "side": 1,
+      "message": "Looks like this keyword is specific to IPv6 . So can we say\n\nAdd IPv6 Static Default Gateway And Verify",
+      "revId": "45764bbab159d72d77c038da3906089306181790",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52e5fa3e_2df712c8",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-09-17T15:46:04Z",
+      "side": 1,
+      "message": "${ipv6_static_def_gw} -\u003e ipv6_static_def_gw",
+      "revId": "45764bbab159d72d77c038da3906089306181790",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb339ce9_f00593d7",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-09-17T15:46:04Z",
+      "side": 1,
+      "message": "# expected_status    Expected status (Success or Fail)\n \n something like that?",
+      "range": {
+        "startLine": 430,
+        "startChar": 4,
+        "endLine": 430,
+        "endChar": 86
+      },
+      "revId": "45764bbab159d72d77c038da3906089306181790",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
