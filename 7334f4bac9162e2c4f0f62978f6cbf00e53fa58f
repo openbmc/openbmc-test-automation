@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e90cd341_0532748f",
+        "filename": "lib/pel_utils.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-09-18T08:07:20Z",
+      "side": 1,
+      "message": "Can u please follow this approach and extend this logic for informational PELs as well ?\n\n        pel_cmd \u003d \" -lr\"\n        if include_hidden_pels:\n            pel_cmd \u003d pel_cmd + \" -h\"\n        if include_informational_pels:\n            pel_cmd \u003d pel_cmd + \" -f\"\n        pel_data \u003d peltool(pel_cmd)",
+      "range": {
+        "startLine": 338,
+        "startChar": 0,
+        "endLine": 342,
+        "endChar": 33
+      },
+      "revId": "7334f4bac9162e2c4f0f62978f6cbf00e53fa58f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
