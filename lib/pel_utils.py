@@ -326,15 +326,28 @@ def get_bmc_event_log_id_for_pel(pel_id):
     return bmc_id_for_pel
 
 
-def get_latest_pels(number_of_pels=1):
+def get_latest_pels(
+    number_of_pels=1,
+    include_hidden_pels=False,
+    include_informational_pels=False,
+):
     r"""
     Return latest PEL IDs.
 
     Description of arguments:
-    number_of_pels       Number of PELS to be returned.
+    number_of_pels               Number of PELS to be returned.
+    include_hidden_pels          True/False  (default: False).
+                                 Set True to get hidden PELs else False.
+    include_informational_pels   True/False (default: False).
+                                 Set True to get informational PELs else False.
     """
 
-    pel_data = peltool("-lr")
+    pel_cmd = " -lr"
+    if include_hidden_pels:
+        pel_cmd = pel_cmd + " -h"
+    if include_informational_pels:
+        pel_cmd = pel_cmd + " -f"
+    pel_data = peltool(pel_cmd)
     pel_ids = list(pel_data.keys())
     return pel_ids[:number_of_pels]
 
