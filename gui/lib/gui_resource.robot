@@ -292,13 +292,14 @@ Verify Error And Unauthorized Message On GUI
 
 
 Create Readonly User And Login To GUI
-    [Documentation]   Logout current GUI sessions and Created Readonly_user via Redfish
-    ...               and Login BMC GUI with Readonly user
+    [Documentation]   Logout current GUI sessions and Created Readonly_user
+    ...               via Redfish and Login BMC GUI with Readonly user
 
     # Logout current GUI session.
     Logout GUI
 
-    # Created readonly_user via redfish and login BMC GUI with readonly user to perfrom test.
+    # Created readonly_user via redfish and login BMC GUI with readonly
+    # user to perform test.
     Redfish.Login
     Redfish Create User  readonly_user  ${OPENBMC_PASSWORD}  ReadOnly  ${True}
     Login GUI  readonly_user  ${OPENBMC_PASSWORD}

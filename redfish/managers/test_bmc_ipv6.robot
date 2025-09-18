@@ -192,8 +192,9 @@ Verify Coexistence Of Linklocalv6 And Static IPv6 On BMC
     Check Coexistence Of Linklocalv6 And Static IPv6
 
 
-Verify IPv6 Linklocal Address Is In Corrrect Format
-    [Documentation]  Verify linklocal address has network part as fe80 and host part as EUI64.
+Verify IPv6 Linklocal Address Is In Correct Format
+    [Documentation]  Verify linklocal address has network part as fe80 and
+    ...              host part as EUI64.
     [Tags]  Verify_IPv6_Linklocal_Address_Is_In_Correct_Format
 
     Check If Linklocal Address Is In Correct Format
