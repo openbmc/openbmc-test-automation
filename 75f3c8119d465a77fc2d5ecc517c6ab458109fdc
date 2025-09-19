@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd313c66_98c3b176",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-09-19T08:54:54Z",
+      "side": 1,
+      "message": "We need to re-populate it to get latest list of IPv6 configurations",
+      "range": {
+        "startLine": 538,
+        "startChar": 43,
+        "endLine": 538,
+        "endChar": 74
+      },
+      "revId": "75f3c8119d465a77fc2d5ecc517c6ab458109fdc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
