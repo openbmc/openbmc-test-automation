@@ -22,6 +22,30 @@
       },
       "revId": "7e6d7d5c05a9b5373b0c832632d312543130ee8e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afd0633c_9e7c6c5e",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-09-19T08:42:14Z",
+      "side": 1,
+      "message": "It not just alignment but also typo fix.. so it has both in this change",
+      "parentUuid": "97e74e69_7d02f708",
+      "range": {
+        "startLine": 197,
+        "startChar": 8,
+        "endLine": 197,
+        "endChar": 21
+      },
+      "revId": "7e6d7d5c05a9b5373b0c832632d312543130ee8e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
