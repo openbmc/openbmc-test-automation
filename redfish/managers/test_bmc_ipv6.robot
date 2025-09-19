@@ -6,6 +6,7 @@ Resource       ../../lib/bmc_redfish_resource.robot
 Resource       ../../lib/openbmc_ffdc.robot
 Resource       ../../lib/bmc_ipv6_utils.robot
 Resource       ../../lib/external_intf/vmi_utils.robot
+Resource       ../../lib/bmc_network_utils.robot
 Library        ../../lib/bmc_network_utils.py
 Library        Collections
 Library        Process
@@ -29,6 +30,7 @@ ${ipv6_gw_addr}              2002:903:15F:32:9:3:32:1
 ${prefix_length_def}         None
 ${invalid_staticv6_gateway}  9.41.164.1
 ${linklocal_addr_format}     fe80::[0-9a-f:]+$
+${new_mac_addr}              AA:E2:84:14:28:79
 
 *** Test Cases ***
 
@@ -272,6 +274,25 @@ Verify Persistency Of Link Local IPv6 On BMC Reboot
     # Verifying the linklocal must be the same before and after reboot.
     Should Be Equal    ${linklocal_addr_before_reboot}    ${linklocal_addr_after_reboot}
     ...    msg=IPv6 Linklocal address has changed after reboot.
+
+
+Modify MAC and Verify BMC Reinitializing Linklocal
+    [Documentation]  Modify MAC and verify BMC reinitializing linklocal.
+    [Tags]  Modify_MAC_and_Verify_BMC_Reinitializing_Linklocal
+    [Teardown]  Configure MAC Settings  ${original_address}
+
+    ${original_address}=  Get BMC MAC Address
+    @{ipv6_addressorigin_list}  ${ipv6_before_linklocal_addr}=  Get Address Origin List And Address For Type  LinkLocal
+
+    # Modify MAC Address Of Ethernet Interface.
+    Configure MAC Settings  ${new_mac_addr}
+    Sleep  30s
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+    @{ipv6_addressorigin_list}  ${ipv6_linklocal_after_addr}=  Get Address Origin List And Address For Type  LinkLocal
+
+    # Verify whether the linklocal has changed and is in the the correct format.
+    Check If Linklocal Address Is In Correct Format
+    Should Not Be Equal    ${ipv6_before_linklocal_addr}    ${ipv6_linklocal_after_addr}
 
 
 *** Keywords ***
@@ -1067,3 +1088,5 @@ Get Interface ID Of IPv6
     END
     ${interface_id}=  Evaluate  ':'.join(${expanded_ip}[-4:])
     RETURN  ${interface_id}
+
+
