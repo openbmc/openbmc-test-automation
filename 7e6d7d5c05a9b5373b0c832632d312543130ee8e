@@ -46,6 +46,30 @@
       },
       "revId": "7e6d7d5c05a9b5373b0c832632d312543130ee8e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72c71582_1506ae73",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-09-19T08:49:22Z",
+      "side": 1,
+      "message": "Agree.. my sentence is incorrect. I mean two space after triple dots are enough\n\n```\n...  host part as EUI64.\n```",
+      "parentUuid": "afd0633c_9e7c6c5e",
+      "range": {
+        "startLine": 197,
+        "startChar": 8,
+        "endLine": 197,
+        "endChar": 21
+      },
+      "revId": "7e6d7d5c05a9b5373b0c832632d312543130ee8e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
