@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "643204ea_6f123a96",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-09-19T16:37:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cae09eb4_bc309e63",
+      "range": {
+        "startLine": 489,
+        "startChar": 54,
+        "endLine": 489,
+        "endChar": 64
+      },
+      "revId": "75f3c8119d465a77fc2d5ecc517c6ab458109fdc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b22a0dcd_5520b2d8",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-09-19T09:06:01Z",
       "side": 1,
       "message": "accept directly from the input variable.",
+      "range": {
+        "startLine": 510,
+        "startChar": 1,
+        "endLine": 512,
+        "endChar": 30
+      },
+      "revId": "75f3c8119d465a77fc2d5ecc517c6ab458109fdc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4b5e88c_52b3c9d4",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-09-19T16:37:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b22a0dcd_5520b2d8",
       "range": {
         "startLine": 510,
         "startChar": 1,
@@ -64,6 +112,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9adf4d09_7f82d556",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-09-19T16:37:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e04ab4f_0e774a5a",
+      "revId": "75f3c8119d465a77fc2d5ecc517c6ab458109fdc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd313c66_98c3b176",
@@ -77,6 +143,30 @@
       "writtenOn": "2025-09-19T08:54:54Z",
       "side": 1,
       "message": "We need to re-populate it to get latest list of IPv6 configurations",
+      "range": {
+        "startLine": 538,
+        "startChar": 43,
+        "endLine": 538,
+        "endChar": 74
+      },
+      "revId": "75f3c8119d465a77fc2d5ecc517c6ab458109fdc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d67925d9_1d5b6555",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-09-19T16:37:02Z",
+      "side": 1,
+      "message": "In line number 533 verifying for new address added and in line 502 getting existing ipv6 configuration.",
+      "parentUuid": "fd313c66_98c3b176",
       "range": {
         "startLine": 538,
         "startChar": 43,
