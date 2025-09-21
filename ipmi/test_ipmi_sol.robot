@@ -328,7 +328,7 @@ Verify SOL Setting
     # Retry interval setting is set in multiples of 10.
     # Reference IPMI specification v2.0
 
-    ${expected_value}=  Run Keyword If
+    ${expected_value}=  Set Variable If
     ...  '${setting_name}' == 'character-accumulate-level'  Evaluate  ${value}*5
     ...  ELSE IF  '${setting_name}' == 'retry-interval'  Evaluate  ${value}*10
     ...  ELSE  Set Variable  ${value}

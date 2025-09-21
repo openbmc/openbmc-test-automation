@@ -1,8 +1,10 @@
 *** Settings ***
 Documentation  This module contains keywords for list manipulation.
+
 Library  Collections
 
 *** Keywords ***
+
 Smart Combine Lists
     [Documentation]  Combine all valid list arguments and return the result.
     [Arguments]  @{lists}
@@ -16,8 +18,10 @@ Smart Combine Lists
 
     FOR  ${arg}  IN  @{lists}
       ${type_arg}=  Evaluate  str(type($lists[${index}])).split("'")[1]
-      Run Keyword If  '${type_arg}' != 'list'  Run Keywords  Remove From List  ${lists}  ${index}  AND
-      ...  Continue For Loop
+      IF  '${type_arg}' != 'list'
+           Remove From List  ${lists}  ${index}
+           Continue For Loop
+      END
       ${index}=  Evaluate  ${index}+1
     END
 
@@ -31,6 +35,7 @@ Intersect Lists
     ...  values common to both lists with no duplicates.
     [Arguments]  ${list1}  ${list2}
 
+    # Description of argument(s):
     # list1      The first list to intersect.
     # list2      The second list to intersect.
 
@@ -46,7 +51,7 @@ Intersect Lists
 
     FOR  ${element}  IN  @{larger_list}
       ${rc}=  Run Keyword and Return Status  List Should Contain Value  ${smaller_list}  ${element}
-      Run Keyword If  '${rc}' == 'True'  Append to List  ${intersected_list}  ${element}
+      IF  '${rc}' == 'True'  Append to List  ${intersected_list}  ${element}
     END
 
     @{intersected_list}=  Remove Duplicates  ${intersected_list}
@@ -67,8 +72,7 @@ Subtract Lists
     FOR  ${item}  IN  @{list1}
         ${status}=  Run Keyword And Return Status
         ...  Should Contain  ${list2}  ${item}
-        Run Keyword If  '${status}' == '${False}'
-        ...  Append To List  ${diff_list}  ${item}
+       IF  '${status}' == '${False}'  Append To List  ${diff_list}  ${item}
     END
 
     RETURN  ${diff_list}

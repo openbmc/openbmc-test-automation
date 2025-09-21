@@ -196,7 +196,7 @@ Verify Cipher ID and Supported Algorithm For Channel
     ${resp}=  Strip String  ${resp}
 
     # channel 14 represents current channel in which we send request.
-    ${channel_num}=  Run Keyword If  '${channel_num}' == '14'
+    ${channel_num}=  Set Variable If  '${channel_num}' == '14'
     ...  Convert To Hex  ${CHANNEL_NUMBER}  length=2
     ...  ELSE
     ...  Convert To Hex  ${channel_num}  length=2
@@ -225,7 +225,7 @@ Verify Cipher Suite Command for Invalid Request Data
    # Description of argument(s):
    # byte_length   extra or less.
 
-   ${req_cmd}=  Run Keyword If  '${byte_length}' == 'less'
+   ${req_cmd}=  Set Variable If  '${byte_length}' == 'less'
    ...  Catenate  ${IPMI_RAW_CMD['Cipher Suite']['get'][0]} ${CHANNEL_NUMBER} 00
    ...  ELSE
    ...  Catenate  ${IPMI_RAW_CMD['Cipher Suite']['get'][0]} ${CHANNEL_NUMBER} 00 00 01
