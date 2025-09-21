@@ -4,11 +4,13 @@ Documentation       BMC collect VPD and hardware status.
 # Test Parameters:
 # OPENBMC_HOST      The BMC host name or IP address.
 
-Resource            ../lib/bmc_redfish_resource.robot
-Resource            ../lib/openbmc_ffdc.robot
+Resource            ../../lib/bmc_redfish_resource.robot
+Resource            ../../lib/openbmc_ffdc.robot
 
 Suite Setup         Suite Setup Execution
 Test Setup          Printn
+
+Test Tags           Check_VPD_And_HW_Status
 
 *** Variables ***
 ${QUIET}  ${1}
