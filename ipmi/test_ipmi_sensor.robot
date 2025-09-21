@@ -211,7 +211,7 @@ Get Temperature Reading And Verify In Redfish
     # sensor_id     Sensor id used to get reading in IPMI or DCMI.
     # member_id     Member id of sensor data in Redfish.
 
-    ${ipmi_value}=  Run Keyword If  '${command_type}' == 'IPMI'  Get IPMI Sensor Reading  ${sensor_id}
+    ${ipmi_value}=  Set Variable If  '${command_type}' == 'IPMI'  Get IPMI Sensor Reading  ${sensor_id}
     ...  ELSE  Get DCMI Sensor Reading  ${sensor_id}
 
     ${redfish_value}=  Get Temperature Reading From Redfish  ${member_id}

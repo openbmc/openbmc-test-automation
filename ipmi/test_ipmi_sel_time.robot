@@ -568,7 +568,7 @@ Identify SEL Time
     ...  ${modifying_date_status} == True  ${time.split("+")[-1]}
     ...  ${modifying_date_status} == False  ${time.split("-")[-1]}
 
-    ${datetime} =  Run Keyword IF  ${modifying_date_status} == True
+    ${datetime} =  Set Variable IF  ${modifying_date_status} == True
     ...    Add Time To Date
     ...    ${current_date}  ${date_time}  result_format=%m/%d/%Y %H:%M:%S  date_format=%m/%d/%Y %H:%M:%S
     ...  ELSE IF  ${modifying_date_status} == False
