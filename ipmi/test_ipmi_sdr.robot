@@ -241,7 +241,7 @@ Get Reservation ID
     ${reservation_id}=  Run IPMI Command
     ...  ${IPMI_RAW_CMD['SDR']['Reserve SDR Repository'][0]}
 
-    ${reservation_id}=  Run Keyword If  ${add_prefix}
+    ${reservation_id}=  Set Variable If  ${add_prefix}
     ...  Add Prefix To String  ${reservation_id}  0x
     ...  ELSE IF  ${convert_lsb_to_msb}
     ...  Convert LSB To MSB  ${reservation_id}
