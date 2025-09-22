@@ -34,6 +34,8 @@ Verify Existence Of All Sections In Firmware Page
     Page Should Contain  Access key expiration
 
 
+***  Power Off Test Cases  ***
+
 Verify Existence Of All Buttons In Firmware Page At Host Power Off
     [Documentation]  Verify existence of all buttons in firmware page at host power off.
     [Tags]  Verify_Existence_Of_All_Buttons_In_Firmware_Page_At_Host_Power_Off
@@ -56,6 +58,8 @@ Verify Existence Of All Sub Sections Under BMC And Server Section At Poweroff St
     Page Should Contain  Permanent
     Element Should Be Visible  ${xpath_switch_to_running}
 
+
+***  Power On Test Cases  ***
 
 Verify Existence Of All Sub Sections Under BMC And Server Section At Power On State
     [Documentation]  Verify existence of all sub sections under BMC and server section at power on state.

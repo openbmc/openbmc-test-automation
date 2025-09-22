@@ -36,6 +36,40 @@ Verify Navigation To Server Power Operations Page
     Page Should Contain Element  ${xpath_server_power_heading}
 
 
+Verify Existence Of All Sections In Server Power Operations Page
+    [Documentation]  Verify existence of all sections in Server Power Operations page.
+    [Tags]  Verify_Existence_Of_All_Sections_In_Server_Power_Operations_Page
+
+    # Added a delay for the page to load boot settings section.
+    Wait Until Page Contains  Server power operations  timeout=5
+    Page Should Contain  Current status
+    Page Should Contain  Operations
+    Page Should Contain  Settings
+
+
+Verify Existence Of All Input Boxes In Host Os Boot Settings
+    [Documentation]  Verify existence of all input boxes in host os boot settings.
+    [Tags]  Verify_Existence_Of_All_Input_Boxes_In_Host_Os_Boot_Settings
+
+    # Added a delay for the page to load boot settings section.
+    Wait Until Page Contains  Boot settings  timeout=5
+    Page Should Contain Element  ${xpath_enable_onetime_boot_checkbox}
+    Page Should Contain Element  ${xpath_boot_option_select}
+
+
+Verify Save Button With Readonly User
+    [Documentation]  Verify Save button On Server Power Operation page with readonly user.
+    [Tags]  Verify_Save_Button_With_Readonly_User
+    [Setup]  Run Keywords  Create Readonly User And Login To GUI
+    ...      AND  Navigate to Server Power Operation Page
+    [Teardown]  Delete Readonly User And Logout Current GUI Session
+
+    Click Element  ${xpath_save_button}
+    Verify Error And Unauthorized Message On GUI
+
+
+***  Power On Test Cases  ***
+
 Verify Immediate Shutdown
     [Documentation]  Verify shutdown after clicking immediate shutdown button.
     [Tags]  Verify_Immediate_Shutdown
@@ -62,36 +96,6 @@ Verify Orderly Shutdown
     Wait Until Keyword Succeeds  10 min  15 sec  Element Should Contain  ${xpath_current_power_state}  Off
 
 
-Verify Existence Of All Sections In Server Power Operations Page
-    [Documentation]  Verify existence of all sections in Server Power Operations page.
-    [Tags]  Verify_Existence_Of_All_Sections_In_Server_Power_Operations_Page
-
-    # Added a delay for the page to load boot settings section.
-    Wait Until Page Contains  Server power operations  timeout=5
-    Page Should Contain  Current status
-    Page Should Contain  Operations
-    Page Should Contain  Settings
-
-
-Verify Existence Of All Input Boxes In Host Os Boot Settings
-    [Documentation]  Verify existence of all input boxes in host os boot settings.
-    [Tags]  Verify_Existence_Of_All_Input_Boxes_In_Host_Os_Boot_Settings
-
-    # Added a delay for the page to load boot settings section.
-    Wait Until Page Contains  Boot settings  timeout=5
-    Page Should Contain Element  ${xpath_enable_onetime_boot_checkbox}
-    Page Should Contain Element  ${xpath_boot_option_select}
-
-
-Verify System State At Power Off
-    [Documentation]  Verify state of the system in power off state.
-    [Tags]  Verify_System_State_At_Power_Off
-
-    Redfish Power Off  stack_mode=skip
-    Page Should Contain Element  ${xpath_current_power_state}
-    Element Should Contain   ${xpath_current_power_state}  Off
-
-
 Verify System State At Power On
     [Documentation]  Verify state of the system in power on state.
     [Tags]  Verify_System_State_At_Power_On
@@ -99,15 +103,6 @@ Verify System State At Power On
     ...  AND  Navigate to Server Power Operation Page
 
     Wait Until Keyword Succeeds  15 sec  5 sec   Element Should Contain   ${xpath_current_power_state}  On
-
-
-Verify PowerOn Button Should Present At Power Off
-    [Documentation]  Verify existence of poweron button at power off.
-    [Tags]  Verify_PowerOn_Button_Should_Present_At_Power_Off
-
-    Redfish Power Off  stack_mode=skip
-    # TODO: Implement power off using GUI later.
-    Page Should Contain Element  ${xpath_poweron_button}
 
 
 Verify Shutdown And Reboot Buttons Presence At Power On
@@ -119,7 +114,6 @@ Verify Shutdown And Reboot Buttons Presence At Power On
     # TODO: Implement power on using GUI later.
     Page Should Contain Element  ${xpath_shutdown_button}
     Page Should Contain Element  ${xpath_reboot_button}
-
 
 Verify Host Immediate Reboot
     [Documentation]  Verify host reboot after triggering immediate reboot.
@@ -169,6 +163,26 @@ Verify Server Power Operations Page With Readonly User When Host On State
     Perform Server Operations With Readonly User  ${xpath_shutdown_immediate_radio}  ${xpath_shutdown_button}
 
 
+***  Power Off Test Cases  ***
+
+Verify System State At Power Off
+    [Documentation]  Verify state of the system in power off state.
+    [Tags]  Verify_System_State_At_Power_Off
+
+    Redfish Power Off  stack_mode=skip
+    Page Should Contain Element  ${xpath_current_power_state}
+    Element Should Contain   ${xpath_current_power_state}  Off
+
+
+Verify PowerOn Button Should Present At Power Off
+    [Documentation]  Verify existence of poweron button at power off.
+    [Tags]  Verify_PowerOn_Button_Should_Present_At_Power_Off
+
+    Redfish Power Off  stack_mode=skip
+    # TODO: Implement power off using GUI later.
+    Page Should Contain Element  ${xpath_poweron_button}
+    
+
 Verify Server Power Operations Page With Readonly User When Host Off State
     [Documentation]  Verify Server Power Operations page with readonly user when Host Off state.
     [Tags]  Verify_Server_Power_Operations_Page_With_Readonly_User_When_Host_Off_State
@@ -182,17 +196,6 @@ Verify Server Power Operations Page With Readonly User When Host Off State
     Wait Until Page Contains Element  ${xpath_unauthorized_popup}  timeout=10
     Page Should Contain   Unauthorized
     Click Element  ${xpath_unauthorized_popup}
-
-
-Verify Save Button With Readonly User
-    [Documentation]  Verify Save button On Server Power Operation page with readonly user.
-    [Tags]  Verify_Save_Button_With_Readonly_User
-    [Setup]  Run Keywords  Create Readonly User And Login To GUI
-    ...      AND  Navigate to Server Power Operation Page
-    [Teardown]  Delete Readonly User And Logout Current GUI Session
-
-    Click Element  ${xpath_save_button}
-    Verify Error And Unauthorized Message On GUI
 
 
 *** Keywords ***
