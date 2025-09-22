@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e79ad54d_d6553d6f",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 964,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-09-22T15:04:38Z",
+      "side": 1,
+      "message": "This keyword is used in multiple places and needs to be tested thoroughly, keeping the same for now.\nWill take it up as another commit if required.",
+      "parentUuid": "bbf1ce94_96ee84c1",
+      "revId": "f699669d013ee016e9be11f4837831819ff919e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03463f7d_f6a44bda",
         "filename": "lib/bmc_network_utils.robot",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2025-09-19T08:23:35Z",
       "side": 1,
       "message": "There is already a keyword .. you need to rename the new appropriately - Validate MAC Configuration Via FW_Env \n\n```\n\nValidate MAC On FW_Env\n    [Documentation]  Validate MAC on FW_Env.\n    \n    [Arguments]  ${mac_addr}\n    # Description of argument(s):\n    # mac_addr  MAC address of the BMC.\n    ${fw_env_addr}\u003d  Get FW_Env MAC Address\n    ${mac_new_addr}\u003d  Truncate MAC Address  ${fw_env_addr}  ${mac_addr}\n    ${status}\u003d  Compare MAC Address  ${fw_env_addr}  ${mac_new_addr}\n    Should Be True  ${status}\n    ...  msg\u003dMAC address ${fw_env_addr} does not match ${mac_new_addr}.\n \n ```\n \n Add one more line in the above keyword return ${status}\n \n I suggest to place to keyword - \u0027Verify MAC Address Via FW_Env\u0027 -- after \u0027Validate MAC On FW_Env\u0027",
+      "revId": "f699669d013ee016e9be11f4837831819ff919e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a98251c1_986e8646",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-09-22T15:04:38Z",
+      "side": 1,
+      "message": "This keyword is used in multiple places and needs to be tested thoroughly, keeping the same for now.\nWill take it up as another commit if required.",
+      "parentUuid": "03463f7d_f6a44bda",
       "revId": "f699669d013ee016e9be11f4837831819ff919e0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
