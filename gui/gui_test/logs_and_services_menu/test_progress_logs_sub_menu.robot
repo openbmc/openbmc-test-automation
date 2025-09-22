@@ -51,7 +51,7 @@ Verify Existence Of All Fields In Progress Logs Page
     [Tags]  Verify_Existence_Of_All_Fields_In_Progress_Logs_Page
     [Template]  Page Should Contain
 
-    # Expected parameters
+    # Expected parameters.
     Created
     Time stamp offset
     Boot count

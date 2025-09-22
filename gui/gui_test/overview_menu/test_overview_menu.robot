@@ -191,15 +191,6 @@ Verify BMC Time In Overview Page
     Page Should Contain  ${converted_date}
 
 
-Verify BMC Information At Host Power Off State
-    [Documentation]  Verify that BMC information is displayed at host power off state.
-    [Tags]  Verify_BMC_Information_At_Host_Power_Off_State
-    [Setup]  Run Keywords  Power On Server  AND  Test Setup Execution
-
-    ${firmware_version}=  Redfish Get BMC Version
-    Page Should Contain  ${firmware_version}
-
-
 Verify View More Button For Dumps
     [Documentation]  Verify view more button for dumps button in overview page.
     [Tags]  Verify_View_More_Button_For_Dumps
@@ -345,6 +336,17 @@ Verify Server LED Turn Off And On With Readonly User
     Verify Error And Unauthorized Message On GUI
 
 
+***  Power Off Test Cases  ***
+
+    Verify BMC Information At Host Power Off State
+    [Documentation]  Verify that BMC information is displayed at host power off state.
+    [Tags]  Verify_BMC_Information_At_Host_Power_Off_State
+    [Setup]  Run Keywords  Power On Server  AND  Test Setup Execution
+
+    ${firmware_version}=  Redfish Get BMC Version
+    Page Should Contain  ${firmware_version}
+
+
 *** Keywords ***
 
 Test Setup Execution
@@ -358,16 +360,17 @@ Test Setup Execution
 Verify Identify LED State Via Redfish
     [Documentation]  Verify that Redfish identify LED system with given state.
     [Arguments]  ${expected_state}
+
     # Description of argument(s):
     # expected_state    Expected value of Identify LED.
 
     ${led_state}=  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}  IndicatorLED
     Should Be True  '${led_state}' == '${expected_state}'
 
-
 Set IndicatorLED State
     [Documentation]  Perform redfish PATCH operation.
     [Arguments]  ${led_state}  ${expect_resp_code}=[200, 204]
+
     # Description of argument(s):
     # led_state            IndicatorLED state to "off", "Lit" etc.
     # expect_resp_code     Expected HTTPS response code. Default [200, 204]
