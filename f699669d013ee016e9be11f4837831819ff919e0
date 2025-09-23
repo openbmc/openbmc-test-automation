@@ -69,6 +69,23 @@
       "parentUuid": "03463f7d_f6a44bda",
       "revId": "f699669d013ee016e9be11f4837831819ff919e0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "390209dc_ddfeccb6",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-09-23T14:53:59Z",
+      "side": 1,
+      "message": "Pls check if new linklocal is computed based on eu64 format",
+      "revId": "f699669d013ee016e9be11f4837831819ff919e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
