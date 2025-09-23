@@ -68,7 +68,7 @@ Verify Save Button With Readonly User
     Verify Error And Unauthorized Message On GUI
 
 
-***  Power On Test Cases  ***
+###  Power On Test Cases  ###
 
 Verify Immediate Shutdown
     [Documentation]  Verify shutdown after clicking immediate shutdown button.
@@ -163,7 +163,7 @@ Verify Server Power Operations Page With Readonly User When Host On State
     Perform Server Operations With Readonly User  ${xpath_shutdown_immediate_radio}  ${xpath_shutdown_button}
 
 
-***  Power Off Test Cases  ***
+###  Power Off Test Cases  ###
 
 Verify System State At Power Off
     [Documentation]  Verify state of the system in power off state.
