@@ -73,7 +73,7 @@ Verify BMC Reboot Operation
     Wait Until Element Is Visible  ${xpath_reboot_bmc_button}  timeout=10
 
 
-***  Power On Test Cases  ***
+###  Power On Test Cases  ###
 
 Verify Reboot BMC Page With Readonly User When Host On State
     [Documentation]  Verify Reboot BMC page with readonly user when Host On state.
@@ -91,7 +91,7 @@ Verify Reboot BMC Page With Readonly User When Host On State
     Verify Error And Unauthorized Message On GUI
 
 
-***  Power Off Test Cases  ***
+###  Power Off Test Cases  ###
 
 Verify Reboot BMC Page With Readonly User When Host Off State
     [Documentation]  Verify Reboot BMC page with readonly user when Host Off state.

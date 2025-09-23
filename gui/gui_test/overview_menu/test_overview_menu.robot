@@ -336,7 +336,7 @@ Verify Server LED Turn Off And On With Readonly User
     Verify Error And Unauthorized Message On GUI
 
 
-***  Power Off Test Cases  ***
+###  Power Off Test Cases  ###
 
     Verify BMC Information At Host Power Off State
     [Documentation]  Verify that BMC information is displayed at host power off state.
