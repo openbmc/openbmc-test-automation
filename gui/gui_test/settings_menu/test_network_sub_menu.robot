@@ -46,6 +46,7 @@ ${xpath_delete_ipv4_addres}              //*[text()='${test_ipv4_addr}']/followi
 ...                                      //*[@title="Delete IPv4 address"]
 ${xpath_delete_button}                   //*[text()="Delete"]
 ${xpath_eth1_interface}                  //*[text()="eth1"]
+${xpath_linklocalv6}                     //*[text()="LinkLocal"]
 
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
@@ -232,14 +233,14 @@ Configure And Verify Multiple Static IPv6 Address
     [Documentation]  Login to GUI Network page, configure multiple static IPv6 address and verify.
     [Tags]  Configure_And_Verify_Multiple_Static_IPv6_Address
 
-    Add Static IPv6 Address And Verify  ${test_ipv6_addr}    ${test_prefix_length}  Success
-    Add Static IPv6 Address And Verify  ${test_ipv6_addr_1}  ${test_prefix_length}  Success
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}    ${test_prefix_length}  Success
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_1}  ${test_prefix_length}  Success
 
 
 Configure And Verify Static IPv6 Address
     [Documentation]  Login to GUI Network page, configure static IPv6 address and verify.
     [Tags]  Configure_And_Verify_Static_IPv6_Address
-    [Template]  Add Static IPv6 Address And Verify
+    [Template]  Add Static IPv6 Address And Verify Via GUI
 
     # ipv6                  prefix_length          status
     ${test_ipv6_addr}       ${test_prefix_length}  Success
@@ -253,6 +254,22 @@ Configure And Verify Static Default Gateway
 
     # ipv6 static default gateway  status
     ${test_ipv6_addr}              Success
+
+
+Verify Coexistence of Staticv6 and Linklocal
+    [Documentation]  Verify coexistence of staticv6 and linklocal.
+    [Tags]  Verify_Coexistence_of_Staticv6_and_Linklocal
+
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}  ${test_prefix_length}  Success
+    Page Should Contain Element  ${xpath_linklocalv6}
+    Page Should Contain  ${test_ipv6_addr}
+
+
+Verify IPv6 Static Default Gateway Should Not Contain Prefix Length
+    [Documentation]  Verify IPv6 Static Default Gateway Should Not Contain Prefix Length.
+    [Tags]  Verify_IPv6_Static_Default_Gateway_Should_Not_Contain_Prefix_Length
+
+    IPv6 Static Default Gateway Should Not Contain Prefix Length  ${test_ipv6_addr}
 
 
 Modify DHCP Properties By Toggling And Verify
@@ -392,7 +409,7 @@ Add Static IP Address And Verify
     END
 
 
-Add Static IPv6 Address And Verify
+Add Static IPv6 Address And Verify Via GUI
     [Documentation]  Add static IPv6 address and prefix length and verify.
     [Arguments]  ${ipv6_address}  ${prefix_length}  ${expected_status}=error
 
@@ -440,6 +457,23 @@ Add IPv6 Static Default Gateway And Verify
     END
     ${redfish_ipv6_staticdef_gw}=  Get Static Default Gateway Property Via Redfish
     Should Be Equal  ${ipv6_static_def_gw}  ${redfish_ipv6_staticdef_gw}
+
+
+IPv6 Static Default Gateway Should Not Contain Prefix Length
+    [Documentation]  Add IPv6 static default gateway and verify.
+    [Arguments]  ${ipv6_static_def_gw}  ${expected_status}=error
+
+    # Description of argument(s):
+    # ipv6_static_def_gw  IPv6 static default gatway.
+    # expected_status     Expected status (Success or Fail).
+
+    Wait Until Element Is Enabled  ${xpath_add_static_def_gateway_button}  timeout=60sec
+    Click Element  ${xpath_add_static_def_gateway_button}
+
+    Should Contain  ${xpath_input_ip_address}
+    Should Not Contain  ${xpath_input_prefix_length}
+
+    Click Element  ${xpath_cancel_button}
 
 
 Get Static Default Gateway Property Via Redfish
