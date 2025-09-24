@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09bb75ad_0b1335ce",
+        "filename": "lib/list_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001957
+      },
+      "writtenOn": "2025-09-24T06:17:20Z",
+      "side": 1,
+      "message": "Need one more space before IF",
+      "range": {
+        "startLine": 75,
+        "startChar": 13,
+        "endLine": 75,
+        "endChar": 14
+      },
+      "revId": "6c9807b941bd83d2c854f75702e34cb77928a37f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
