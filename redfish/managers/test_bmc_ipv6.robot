@@ -306,6 +306,16 @@ Add Multiple IPv6 Address And Verify
     Configure Multiple IPv6 Address on BMC  ${test_prefix_length}
 
 
+Verify Coexistence Of Link Local And DHCPv6 On BMC
+    [Documentation]  Verify link local And dhcpv6 both exist.
+    [Tags]  Verify_Coexistence_Of_Link_Local_And_DHCPv6_On_BMC
+    [Setup]  Set DHCPv6 Property  Enabled  ${2}
+
+    Sleep  ${NETWORK_TIMEOUT}s
+
+    Check Coexistence Of Link Local And DHCPv6
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -983,6 +993,18 @@ Check Coexistence Of Linklocalv6 And Static IPv6
 
     Should Match Regexp  ${ipv6_linklocal_addr}        ${linklocal_addr_format}
     Should Contain       ${ipv6_addressorigin_list}    Static
+
+
+Check Coexistence Of Link Local And DHCPv6
+    [Documentation]  Verify both link local and dhcpv6 exist.
+
+    # Verify the address origin contains dhcp and link local.
+    @{ipv6_address_origin_list}  ${ipv6_link_local_addr}=
+    ...    Get Address Origin List And Address For Type  LinkLocal
+
+    Get Address Origin List And Address For Type  DHCPv6
+
+    Should Match Regexp    ${ipv6_link_local_addr}    ${linklocal_addr_format}
 
 
 Check If Linklocal Address Is In Correct Format
