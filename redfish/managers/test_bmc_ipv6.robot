@@ -306,6 +306,16 @@ Add Multiple IPv6 Address And Verify
     Configure Multiple IPv6 Address on BMC  ${test_prefix_length}
 
 
+Verify Coexistence Of Linklocalv6 And SLAAC On BMC
+    [Documentation]  Verify linklocalv6 And slaac both exist.
+    [Tags]  Verify_Coexistence_Of_Linklocalv6_And_SLAAC_On_BMC
+    [Setup]  Set SLAAC Configuration State And Verify  ${True}
+
+    Sleep  ${NETWORK_TIMEOUT}s
+
+    Check Coexistence Of Linklocalv6 And SLAAC
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -983,6 +993,24 @@ Check Coexistence Of Linklocalv6 And Static IPv6
 
     Should Match Regexp  ${ipv6_linklocal_addr}        ${linklocal_addr_format}
     Should Contain       ${ipv6_addressorigin_list}    Static
+
+
+Check Coexistence Of Linklocalv6 And SLAAC
+    [Documentation]  Verify both linklocalv6 and slaac exist.
+
+    # Verify the address origin contains slaac and linklocal.
+    @{ipv6_addressorigin_list}  ${ipv6_linklocal_addr}=
+    ...    Get Address Origin List And Address For Type  LinkLocal
+
+    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr}=
+    ...    Get Address Origin List And Address For Type  SLAAC
+
+    Should Contain       ${ipv6_address_origin_list}    LinkLocal
+    Should Match Regexp  ${ipv6_linklocal_addr}        ${linklocal_addr_format}
+    Should Not Be Empty  ${ipv6_linklocal_addr}  msg=linklocal address is not present
+
+    Should Contain       ${ipv6_address_origin_list}    SLAAC
+    Should Not Be Empty  ${ipv6_slaac_addr}  msg=dhcpv6 address is not present
 
 
 Check If Linklocal Address Is In Correct Format
