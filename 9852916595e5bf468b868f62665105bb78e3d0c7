@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bf5111a_7899db1f",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-09-24T10:43:38Z",
+      "side": 1,
+      "message": "Please mention linklocal address or IPv6 linklocal address locator, as per my knowledge Linklocal is present in both IPv4 \u0026 IPv6..as you are checking only LinkLocal text it is not clear whether you are checking IPv6 or IPv4 linklocal address.",
+      "revId": "9852916595e5bf468b868f62665105bb78e3d0c7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
