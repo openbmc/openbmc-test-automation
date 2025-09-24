@@ -318,6 +318,16 @@ Verify Coexistence Of Static IPv6 And SLAAC On BMC
     Check Coexistence Of Static IPv6 And SLAAC
 
 
+Verify Coexistence Of Link Local And SLAAC On BMC
+    [Documentation]  Verify link local And SLAAC both coexist.
+    [Tags]  Verify_Coexistence_Of_Link_Local_And_SLAAC_On_BMC
+    [Setup]  Set SLAAC Configuration State And Verify  ${True}
+
+    Sleep  ${NETWORK_TIMEOUT}s
+
+    Check Coexistence Of Link Local And SLAAC
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -1004,8 +1014,18 @@ Check Coexistence Of Static IPv6 And SLAAC
     @{ipv6_addressorigin_list}  ${ipv6_static_addr}=
     ...    Get Address Origin List And Address For Type  Static
 
+
+Check Coexistence Of Link Local And SLAAC
+    [Documentation]  Verify both link local and SLAAC coexist.
+
+    # Verify the address origin contains SLAAC and link local.
+    @{ipv6_addressorigin_list}  ${ipv6_link_local_addr}=
+    ...    Get Address Origin List And Address For Type  LinkLocal
+
     @{ipv6_addressorigin_list}  ${ipv6_slaac_addr}=
     ...    Get Address Origin List And Address For Type  SLAAC
+
+    Should Match Regexp    ${ipv6_link_local_addr}    ${linklocal_addr_format}
 
 
 Check If Linklocal Address Is In Correct Format
