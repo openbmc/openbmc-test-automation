@@ -46,6 +46,7 @@ ${xpath_delete_ipv4_addres}              //*[text()='${test_ipv4_addr}']/followi
 ...                                      //*[@title="Delete IPv4 address"]
 ${xpath_delete_button}                   //*[text()="Delete"]
 ${xpath_eth1_interface}                  //*[text()="eth1"]
+${xpath_linklocalv6}                     //*[text()="LinkLocal"]
 
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
@@ -232,14 +233,14 @@ Configure And Verify Multiple Static IPv6 Address
     [Documentation]  Login to GUI Network page, configure multiple static IPv6 address and verify.
     [Tags]  Configure_And_Verify_Multiple_Static_IPv6_Address
 
-    Add Static IPv6 Address And Verify  ${test_ipv6_addr}    ${test_prefix_length}  Success
-    Add Static IPv6 Address And Verify  ${test_ipv6_addr_1}  ${test_prefix_length}  Success
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}    ${test_prefix_length}  Success
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_1}  ${test_prefix_length}  Success
 
 
 Configure And Verify Static IPv6 Address
     [Documentation]  Login to GUI Network page, configure static IPv6 address and verify.
     [Tags]  Configure_And_Verify_Static_IPv6_Address
-    [Template]  Add Static IPv6 Address And Verify
+    [Template]  Add Static IPv6 Address And Verify Via GUI
 
     # ipv6                  prefix_length          status
     ${test_ipv6_addr}       ${test_prefix_length}  Success
@@ -253,6 +254,15 @@ Configure And Verify Static Default Gateway
 
     # ipv6 static default gateway  status
     ${test_ipv6_addr}              Success
+
+
+Verify Coexistence of Staticv6 and Linklocal
+    [Documentation]  Verify coexistence of staticv6 and linklocal.
+    [Tags]  Verify_Coexistence_of_Staticv6_and_Linklocal
+
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}  ${test_prefix_length}  Success
+    Page Should Contain Element  ${xpath_linklocalv6}
+    Page Should Contain  ${test_ipv6_addr}
 
 
 Modify DHCP Properties By Toggling And Verify
@@ -392,7 +402,7 @@ Add Static IP Address And Verify
     END
 
 
-Add Static IPv6 Address And Verify
+Add Static IPv6 Address And Verify Via GUI
     [Documentation]  Add static IPv6 address and prefix length and verify.
     [Arguments]  ${ipv6_address}  ${prefix_length}  ${expected_status}=error
 
