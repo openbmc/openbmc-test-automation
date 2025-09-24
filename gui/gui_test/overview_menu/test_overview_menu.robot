@@ -338,7 +338,7 @@ Verify Server LED Turn Off And On With Readonly User
 
 ###  Power Off Test Cases  ###
 
-    Verify BMC Information At Host Power Off State
+Verify BMC Information At Host Power Off State
     [Documentation]  Verify that BMC information is displayed at host power off state.
     [Tags]  Verify_BMC_Information_At_Host_Power_Off_State
     [Setup]  Run Keywords  Power On Server  AND  Test Setup Execution
