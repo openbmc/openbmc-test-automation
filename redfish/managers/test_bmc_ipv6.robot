@@ -1059,30 +1059,6 @@ Get The Initial SLAAC Setting On Each Interface
     END
 
 
-Get Address Origin List And Address For Type
-    [Documentation]  Get address origin list and address for type.
-    [Arguments]  ${ipv6_address_type}
-
-    # Description of the argument(s):
-    # ipv6_address_type  Type of IPv6 address to be checked.
-
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${CHANNEL_NUMBER}']['name']}
-    @{ipv6_addresses}=  Get From Dictionary  ${resp.dict}  IPv6Addresses
-
-    ${ipv6_addressorigin_list}=  Create List
-    ${ipv6_slaac_addr}=  Set Variable  ${None}
-    FOR  ${ipv6_address}  IN  @{ipv6_addresses}
-        ${ipv6_addressorigin}=  Get From Dictionary  ${ipv6_address}  AddressOrigin
-        Append To List  ${ipv6_addressorigin_list}  ${ipv6_addressorigin}
-        IF  '${ipv6_addressorigin}' == '${ipv6_address_type}'
-            Set Test Variable  ${ipv6_type_addr}  ${ipv6_address['Address']}
-        END
-    END
-    Should Contain  ${ipv6_addressorigin_list}  ${ipv6_address_type}
-    Should Not Be Empty  ${ipv6_type_addr}  msg=${ipv6_address_type} address is not present
-    RETURN  @{ipv6_addressorigin_list}  ${ipv6_type_addr}
-
-
 Get Address Origin List And IPv4 or IPv6 Address
     [Documentation]  Get address origin list and address for type.
     [Arguments]  ${ip_address_type}
