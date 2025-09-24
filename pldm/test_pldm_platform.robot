@@ -8,6 +8,7 @@ Resource          ../lib/openbmc_ffdc.robot
 Resource          ../lib/bmc_redfish_resource.robot
 Resource          ../lib/boot_utils.robot
 
+Suite Setup       Redfish.Login
 Test Setup        Printn
 Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Pldmtool Platform Suite Cleanup
@@ -15,6 +16,7 @@ Suite Teardown    Pldmtool Platform Suite Cleanup
 Test Tags         Pldm_Platform
 
 *** Test Cases ***
+
 Verify GetPDR
     [Documentation]  Verify GetPDR (Platform Descpritor Record) response message.
     [Tags]  Verify_GetPDR
@@ -27,6 +29,21 @@ Verify GetPDR
        IF  ${next_record_handle} == 0  BREAK
        ${record_handle}=  Set Variable  ${next_record_handle}
     END
+
+
+Verify GetStateSensorReadings
+    [Documentation]  Verify get state sensor readings response message.
+    [Tags]  Verify_GetStateSensorReadings
+
+    # Poweron the system.
+    Redfish Power On  stack_mode=skip  quiet=1
+
+    ${pldm_output}=  Pldmtool  platform GetStateSensorReadings -i 1 -r 0
+    Rprint Vars  pldm_output
+    Should Be Equal As Integers  ${pldm_output["compositeSensorCount"]}  ${1}
+    Should Be Equal As Strings  ${pldm_output["sensorOpState[0]"]}  Sensor Enabled
+    Should Be Equal As Strings  ${pldm_output["eventState[0]"]}  Sensor Normal
+
 
 Verify SetStateEffecterStates
     [Documentation]  Verify set state effecter states response message.
@@ -123,5 +140,4 @@ Verify SetStateEffecterStates For Effecter States
 Pldmtool Platform Suite Cleanup
     [Documentation]    Reset BMC at suite cleanup.
 
-    Redfish.Login
     Redfish OBMC Reboot (off)
