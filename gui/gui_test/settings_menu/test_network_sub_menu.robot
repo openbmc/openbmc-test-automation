@@ -53,6 +53,8 @@ ${test_ipv4_addr_1}                      10.7.7.8
 ${test_ipv6_addr}                        2001:db8:3333:4444:5555:6666:7777:8888
 ${test_ipv6_addr_1}                      2001:db8:3333:4444:5555:6666:7777:8889
 ${ipv4_hexword_addr}                     10.5.5.6:1A:1B:1C:1D:1E:1F
+${invalid_hexadec_ipv6}                  x:x:x:x:x:x:10.5.5.6
+${ipv6_multi_short}                      2001::33::111
 ${test_prefix_length}                    64
 ${out_of_range_ip}                       10.7.7.256
 ${string_ip}                             aa.bb.cc.dd
@@ -244,6 +246,8 @@ Configure And Verify Static IPv6 Address
     # ipv6                  prefix_length          status
     ${test_ipv6_addr}       ${test_prefix_length}  Success
     ${ipv4_hexword_addr}    ${test_prefix_length}  Invalid format
+    ${invalid_hexadec_ipv6} ${test_prefix_length}  Invalid format
+    ${ipv6_multi_short}     ${test_prefix_length}  Invalid format
 
 
 Configure And Verify Static Default Gateway
