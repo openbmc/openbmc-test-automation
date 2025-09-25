@@ -422,7 +422,7 @@ Add IPv6 Static Default Gateway And Verify
     [Arguments]  ${ipv6_static_def_gw}  ${expected_status}=error
 
     # Description of argument(s):
-    # ipv6_static_def_gw  IPv6 static default gatway.
+    # ipv6_static_def_gw  IPv6 static default gateway.
     # expected_status     Expected status (Success or Fail).
 
     Wait Until Element Is Enabled  ${xpath_add_static_def_gateway_button}  timeout=60sec
