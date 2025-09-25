@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24c3e8ae_94ee6915",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2025-09-25T15:15:57Z",
+      "side": 1,
+      "message": "Verify linklocalv6 And SLAAC both exist on BMC.",
+      "range": {
+        "startLine": 310,
+        "startChar": 21,
+        "endLine": 310,
+        "endChar": 61
+      },
+      "revId": "b719d42e20deca0e48b42b0604b6daa748e7600a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4505b84b_2ec2edcf",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2025-09-25T15:15:57Z",
+      "side": 1,
+      "message": "Verify both linklocalv6 and SLAAC exist.",
+      "range": {
+        "startLine": 999,
+        "startChar": 22,
+        "endLine": 999,
+        "endChar": 61
+      },
+      "revId": "b719d42e20deca0e48b42b0604b6daa748e7600a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91217d2d_1d3fd822",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2025-09-25T15:15:57Z",
+      "side": 1,
+      "message": "Verify the address origin contains SLAAC and linklocalv6.",
+      "range": {
+        "startLine": 1001,
+        "startChar": 4,
+        "endLine": 1001,
+        "endChar": 61
+      },
+      "revId": "b719d42e20deca0e48b42b0604b6daa748e7600a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
