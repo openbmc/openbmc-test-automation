@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6df0a2a_a6ee0839",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 1010,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-09-25T07:06:58Z",
+      "side": 1,
+      "message": "Remove \nShould Contain       ${ipv6_address_origin_list}    LinkLocal\nShould Not Be Empty  ${ipv6_linklocal_addr}  msg\u003dlinklocal address is not present\nThis check is taken care in the keyword\nGet Address Origin List And Address For Type",
+      "range": {
+        "startLine": 1010,
+        "startChar": 4,
+        "endLine": 1010,
+        "endChar": 85
+      },
+      "revId": "48cea9ef3239a669f7400b8e5f432d6c62ead5f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0925f497_23df0735",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-09-25T07:06:58Z",
+      "side": 1,
+      "message": "Remove here as well.",
+      "range": {
+        "startLine": 1012,
+        "startChar": 4,
+        "endLine": 1013,
+        "endChar": 78
+      },
+      "revId": "48cea9ef3239a669f7400b8e5f432d6c62ead5f6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
