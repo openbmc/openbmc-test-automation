@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9acf1b2f_132a2c81",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 1014,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-09-25T07:08:24Z",
+      "side": 1,
+      "message": "Remove as this check is taken care in the keyword\nGet Address Origin List And Address For Type",
+      "range": {
+        "startLine": 1010,
+        "startChar": 4,
+        "endLine": 1014,
+        "endChar": 78
+      },
+      "revId": "d2b8bbbdf0a64eceb6eaa25c8b48e37abb0cea13",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
