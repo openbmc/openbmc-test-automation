@@ -70,6 +70,24 @@
       "parentUuid": "14b59869_5e7ce553",
       "revId": "9852916595e5bf468b868f62665105bb78e3d0c7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d55ad5d_bd8e0cc1",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-09-25T04:23:36Z",
+      "side": 1,
+      "message": "checks for the exact match of LinkLocal and not IPv4Linklocal.",
+      "parentUuid": "1cee4144_0ed58610",
+      "revId": "9852916595e5bf468b868f62665105bb78e3d0c7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
