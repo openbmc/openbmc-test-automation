@@ -16,6 +16,24 @@
       "message": "I dont see your name in CLA \nhttps://drive.google.com/drive/folders/186PvxjcnDPQMC9tS6CmpFMRRcg_3Qmnh\n\nand also in the CI approved list.. \n\nwill ONLY merged after those are in place. Thanks",
       "revId": "da550bd8bbc73bc2f77d059adfd3f2687f09185d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eacc29f3_db6984d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-09-25T04:55:22Z",
+      "side": 1,
+      "message": "Now i have been added to the CCLA and Gerrit Group.",
+      "parentUuid": "60d7583c_37acd36f",
+      "revId": "da550bd8bbc73bc2f77d059adfd3f2687f09185d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
