@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b014153d_ab67d656",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2025-09-25T15:11:29Z",
+      "side": 1,
+      "message": "Verify static IPv6 And SLAAC both exist on BMC.",
+      "revId": "8495e06187b0b8549330d25545c08b9efa17dfc7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3917e399_d17c1e55",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2025-09-25T15:11:29Z",
+      "side": 1,
+      "message": "Verify both static IPv6 and SLAAC exist.",
+      "range": {
+        "startLine": 1001,
+        "startChar": 21,
+        "endLine": 1001,
+        "endChar": 61
+      },
+      "revId": "8495e06187b0b8549330d25545c08b9efa17dfc7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
