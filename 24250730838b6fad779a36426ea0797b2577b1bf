@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8818b785_4995e436",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-09-25T05:45:44Z",
+      "side": 1,
+      "message": "can u add lines to check linklocal address?",
+      "revId": "24250730838b6fad779a36426ea0797b2577b1bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7520c1fe_b33e55f2",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-09-25T05:45:44Z",
+      "side": 1,
+      "message": "can you share the link or spec which says it should not have prefix?",
+      "revId": "24250730838b6fad779a36426ea0797b2577b1bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
