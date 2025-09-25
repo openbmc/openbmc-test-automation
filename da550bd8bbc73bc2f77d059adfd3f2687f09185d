@@ -34,6 +34,23 @@
       "parentUuid": "60d7583c_37acd36f",
       "revId": "da550bd8bbc73bc2f77d059adfd3f2687f09185d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4042e24_3e277a03",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-09-25T07:00:08Z",
+      "side": 1,
+      "message": "something like this would be more meaningful.\naddress_with_multi_shortnotation",
+      "revId": "da550bd8bbc73bc2f77d059adfd3f2687f09185d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
