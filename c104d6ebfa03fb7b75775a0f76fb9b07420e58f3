@@ -16,6 +16,24 @@
       "message": "add code to verify coexistence of both types of IP",
       "revId": "c104d6ebfa03fb7b75775a0f76fb9b07420e58f3",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d7f958e_67a1fe62",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-09-26T08:35:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d39a7f97_3bbd9e61",
+      "revId": "c104d6ebfa03fb7b75775a0f76fb9b07420e58f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
