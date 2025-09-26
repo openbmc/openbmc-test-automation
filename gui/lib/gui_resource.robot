@@ -314,3 +314,35 @@ Delete Readonly User And Logout Current GUI Session
 
     # Login BMC GUI with default user.
     Launch Browser And Login GUI
+
+
+Wait And Click Element
+    [Documentation]  Wait until element is visible then click the element.
+    [Arguments]  ${locator}  ${wait_timeout}=10s
+
+    # Description of argument(s):
+    # locator        xpath of the element.
+    # wait_timeout   timeout for the locator to visible.
+
+    Wait Until Element Is Visible    ${locator}    timeout=${wait_timeout}
+    Click Element    ${locator}
+
+
+Navigate To Required Sub Menu
+    [Documentation]  Navigate to required sub menu from main menu.
+    [Arguments]  ${xpath_main_menu}  ${xpath_sub_menu}  ${sub_menu_text}
+
+    # Description of argument(s):
+    # xpath_main_menu    Locator of main menu.
+    # xpath_sub_menu     Locator of sub menu.
+    # sub_menu_text      Text of sub menu.
+
+    ${present}=    Run Keyword And Return Status
+    ...  Element Should Be Visible    ${xpath_sub_menu}
+
+    IF  not ${present}
+        Wait And Click Element  ${xpath_main_menu}
+    END
+    Wait And Click Element  ${xpath_sub_menu}  wait_timeout=60s
+    Location Should Contain  ${sub_menu_text}
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=1min
