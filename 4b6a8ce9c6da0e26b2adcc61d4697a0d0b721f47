@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aced99a3_03b9e550",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 1000358
+      },
+      "writtenOn": "2025-09-26T06:42:47Z",
+      "side": 1,
+      "message": "I see a similar function added in the other commit. Why is it not possible to use one function with 2 args that takes in LinkLocal and DHCPv6 as their input and reuse?",
+      "range": {
+        "startLine": 998,
+        "startChar": 0,
+        "endLine": 999,
+        "endChar": 62
+      },
+      "revId": "4b6a8ce9c6da0e26b2adcc61d4697a0d0b721f47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bf37a13b_bac2325e",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 4
