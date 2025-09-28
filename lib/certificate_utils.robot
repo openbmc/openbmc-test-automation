@@ -34,10 +34,11 @@ Install Certificate File On BMC
     ${resp}=  POST On Session  openbmc  ${uri}  &{kwargs}  expected_status=any
     ${cert_id}=  Set Variable If  '${resp.status_code}' == '${HTTP_OK}'  ${resp.json()["Id"]}  -1
 
-    Run Keyword If  '${status}' == 'ok'
-    ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    ...  ELSE IF  '${status}' == 'error'
-    ...  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_INTERNAL_SERVER_ERROR}
+    IF  '${status}' == 'ok'
+        Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+    ELSE IF  '${status}' == 'error'
+        Should Be Equal As Strings  ${resp.status_code}  ${HTTP_INTERNAL_SERVER_ERROR}
+    END
 
     Delete All Sessions
 
@@ -66,7 +67,7 @@ Get Certificate File Content From BMC
     # Description of argument(s):
     # cert_type      Certificate type (e.g. "Client" or "CA").
 
-    ${certificate}  ${stderr}  ${rc}=  Run Keyword If  '${cert_type}' == 'Client'
+    ${certificate}  ${stderr}  ${rc}=  Set Variable If  '${cert_type}' == 'Client'
     ...    BMC Execute Command  cat /etc/nslcd/certs/cert.pem
 
     RETURN  ${certificate}
@@ -105,7 +106,7 @@ Generate Certificate File Via Openssl
     ${private_key_content}=  Fetch From Right  ${result}  -----BEGIN PRIVATE KEY-----
 
     ${cert_data}=
-    ...  Run Keyword if  '${cert_format}' == 'Valid Certificate Valid Privatekey'
+    ...  Set Variable If  '${cert_format}' == 'Valid Certificate Valid Privatekey'
     ...  OperatingSystem.Get File  ${EXECDIR}${/}${cert_dir_name}${/}cert.pem
     ...  ELSE IF  '${cert_format}' == 'Empty Certificate Valid Privatekey'
     ...  Remove String  ${file_content}  ${cert_content}
@@ -180,7 +181,7 @@ Delete Certificate Via BMC CLI
     # cert_type           Certificate type (e.g. "Client" or "CA").
 
     ${certificate_file_path}  ${certificate_service}  ${certificate_uri}=
-    ...  Run Keyword If  '${cert_type}' == 'Client'
+    ...  Set Variable If  '${cert_type}' == 'Client'
     ...    Set Variable  /etc/nslcd/certs/cert.pem  phosphor-certificate-manager@nslcd.service
     ...    ${REDFISH_LDAP_CERTIFICATE_URI}
     ...  ELSE IF  '${cert_type}' == 'CA'
@@ -210,7 +211,7 @@ Replace Certificate Via Redfish
     #                     request (i.e. "ok" or "error").
 
     # Install certificate before replacing client or CA certificate.
-    ${cert_id}=  Run Keyword If  '${cert_type}' == 'Client'
+    ${cert_id}=  Set Variable If  '${cert_type}' == 'Client'
     ...    Install And Verify Certificate Via Redfish  ${cert_type}  Valid Certificate Valid Privatekey  ok
     ...  ELSE IF  '${cert_type}' == 'CA'
     ...    Install And Verify Certificate Via Redfish  ${cert_type}  Valid Certificate  ok
@@ -220,11 +221,11 @@ Replace Certificate Via Redfish
     ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
     ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
 
-    Run Keyword If  '${cert_format}' == 'Expired Certificate'
-    ...    Modify BMC Date  future
-    ...  ELSE IF  '${cert_format}' == 'Not Yet Valid Certificate'
-    ...    Modify BMC Date  old
-
+    IF  '${cert_format}' == 'Expired Certificate'
+        Modify BMC Date  future
+    ELSE IF  '${cert_format}' == 'Not Yet Valid Certificate'
+        Modify BMC Date  old
+    END
 
     ${certificate_uri}=  Set Variable If
     ...  '${cert_type}' == 'Server'  ${REDFISH_HTTPS_CERTIFICATE_URI}/1
@@ -243,11 +244,11 @@ Replace Certificate Via Redfish
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
     ${bmc_cert_content}=  redfish_utils.Get Attribute  ${certificate_uri}  CertificateString
 
-    Run Keyword If  '${expected_status}' == 'ok'
-    ...    Should Contain  ${cert_file_content}  ${bmc_cert_content}
-    ...  ELSE
-    ...    Should Not Contain  ${cert_file_content}  ${bmc_cert_content}
-
+    IF  '${expected_status}' == 'ok'
+        Should Contain  ${cert_file_content}  ${bmc_cert_content}
+    ELSE
+        Should Not Contain  ${cert_file_content}  ${bmc_cert_content}
+    END
 
 Install And Verify Certificate Via Redfish
     [Documentation]  Install and verify certificate using Redfish.
@@ -261,10 +262,11 @@ Install And Verify Certificate Via Redfish
     #                     request (i.e. "ok" or "error").
     # delete_cert         Certificate will be deleted before installing if this True.
 
-    Run Keyword If  '${cert_type}' == 'CA' and '${delete_cert}' == '${True}'
-    ...  Delete All CA Certificate Via Redfish
-    ...  ELSE IF  '${cert_type}' == 'Client' and '${delete_cert}' == '${True}'
-    ...  Delete Certificate Via BMC CLI  ${cert_type}
+    IF  '${cert_type}' == 'CA' and '${delete_cert}' == '${True}'
+        Delete All CA Certificate Via Redfish
+    ELSE IF  '${cert_type}' == 'Client' and '${delete_cert}' == '${True}'
+        Delete Certificate Via BMC CLI  ${cert_type}
+    END
 
     ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}
     ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
@@ -274,8 +276,11 @@ Install And Verify Certificate Via Redfish
     ...  '${cert_type}' == 'Client'  ${REDFISH_LDAP_CERTIFICATE_URI}
     ...  '${cert_type}' == 'CA'  ${REDFISH_CA_CERTIFICATE_URI}
 
-    Run Keyword If  '${cert_format}' == 'Expired Certificate'  Modify BMC Date  future
-    ...  ELSE IF  '${cert_format}' == 'Not Yet Valid Certificate'  Modify BMC Date  old
+    IF  '${cert_format}' == 'Expired Certificate'
+        Modify BMC Date  future
+    ELSE IF  '${cert_format}' == 'Not Yet Valid Certificate'
+        Modify BMC Date  old
+    END
 
     ${cert_id}=  Install Certificate File On BMC  ${certificate_uri}  ${expected_status}  data=${file_data}
     Logging  Installed certificate id: ${cert_id}
@@ -286,10 +291,10 @@ Install And Verify Certificate Via Redfish
     Sleep  ${wait_time}s
 
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
-    ${bmc_cert_content}=  Run Keyword If  '${expected_status}' == 'ok'  redfish_utils.Get Attribute
+    ${bmc_cert_content}=  Set Variable If  '${expected_status}' == 'ok'  redfish_utils.Get Attribute
     ...  ${certificate_uri}/${cert_id}  CertificateString
 
-    Run Keyword If  '${expected_status}' == 'ok'  Should Contain  ${cert_file_content}  ${bmc_cert_content}
+    IF  '${expected_status}' == 'ok'  Should Contain  ${cert_file_content}  ${bmc_cert_content}
     RETURN  ${cert_id}
 
 
@@ -305,7 +310,7 @@ Modify BMC Date
 
     Redfish Power Off  stack_mode=skip
     ${current_date_time}=  Get Current Date
-    ${new_time}=  Run Keyword If  '${date_set_type}' == 'current'  Set Variable  ${current_date_time}
+    ${new_time}=  Set Variable If  '${date_set_type}' == 'current'  ${current_date_time}
     ...  ELSE IF  '${date_set_type}' == 'future'
     ...  Add Time To Date  ${current_date_time}  375 days
     ...  ELSE IF  '${date_set_type}' == 'old'
