@@ -13,6 +13,8 @@ Library         ../lib/ipmi_utils.py
 
 Test Teardown   FFDC On Test Case Fail
 
+Test Tags       Test_Inband_BMC_Auth_Reset
+
 *** Test Cases ***
 
 Test Inband IPMI Auth Reset

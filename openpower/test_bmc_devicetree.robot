@@ -9,6 +9,8 @@ Library             String
 Test Setup          Open Connection And Log In
 Test Teardown       Run Keywords  Close All Connections  AND FFDC On Test Case Fail
 
+Test Tags           Test_BMC_Devicetree
+
 *** Variables ***
 ${devicetree_base}  /sys/firmware/devicetree/base/
 

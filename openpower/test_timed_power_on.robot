@@ -15,6 +15,7 @@ Suite Teardown  Redfish.Logout
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 
+Test Tags       Test_Timed_Power_On
 
 *** Variables ****
 
