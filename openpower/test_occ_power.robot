@@ -11,6 +11,8 @@ Resource        ../lib/utils.robot
 Suite Setup     Suite Setup Execution
 Test Teardown   Test Teardown Execution
 
+Test Tags       Test_OCC_Power
+
 *** Test Cases ***
 
 Verify OCC Object Count
