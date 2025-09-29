@@ -48,7 +48,7 @@ ${xpath_delete_ipv4_addres}              //*[text()='${test_ipv4_addr}']/followi
 ${xpath_delete_button}                   //*[text()="Delete"]
 ${xpath_eth1_interface}                  //*[text()="eth1"]
 ${xpath_linklocalv6}                     //*[text()="LinkLocal"]
-
+${xpath_eth0_ipv6_autoconfig_button}     (//*[@id="ipv6AutoConfigSwitch"]/following-sibling::label)[1]
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
 ${test_ipv4_addr_1}                      10.7.7.8
@@ -56,7 +56,7 @@ ${test_ipv6_addr}                        2001:db8:3333:4444:5555:6666:7777:8888
 ${test_ipv6_addr_1}                      2001:db8:3333:4444:5555:6666:7777:8889
 ${ipv4_hexword_addr}                     10.5.5.6:1A:1B:1C:1D:1E:1F
 ${invalid_hexadec_ipv6}                  x:x:x:x:x:x:10.5.5.6
-${address_with_multi_shortnotation}      2001::33::111
+${ipv6_multi_short}                      2001::33::111
 ${test_prefix_length}                    64
 ${out_of_range_ip}                       10.7.7.256
 ${string_ip}                             aa.bb.cc.dd
@@ -245,11 +245,11 @@ Configure And Verify Static IPv6 Address
     [Tags]  Configure_And_Verify_Static_IPv6_Address
     [Template]  Add Static IPv6 Address And Verify Via GUI
 
-    # ipv6                               prefix_length          status
-    ${test_ipv6_addr}                    ${test_prefix_length}  Success
-    ${ipv4_hexword_addr}                 ${test_prefix_length}  Invalid format
-    ${invalid_hexadec_ipv6}              ${test_prefix_length}  Invalid format
-    ${address_with_multi_shortnotation}  ${test_prefix_length}  Invalid format
+    # ipv6                  prefix_length          status
+    ${test_ipv6_addr}       ${test_prefix_length}  Success
+    ${ipv4_hexword_addr}    ${test_prefix_length}  Invalid format
+    ${invalid_hexadec_ipv6} ${test_prefix_length}  Invalid format
+    ${ipv6_multi_short}     ${test_prefix_length}  Invalid format
 
 
 Configure And Verify Static Default Gateway
@@ -327,6 +327,26 @@ Configure Hostname Via GUI And Verify
 
     ${bmc_hostname}=  Get BMC Hostname
     Should Be Equal As Strings  ${bmc_hostname}  ${test_hostname}
+
+
+Enable Eth0 IPv6 AutoConfig and Verify SLAAC
+    [Documentation]  Enable SLAAC on eth0 via GUI & check it is set to enable state.
+    [Tags]  Enable_Eth0_IPv6_AutoConfig_and_Verify_SLAAC
+
+    Set IPv6 AutoConfig State  Enabled  ${xpath_eth0_ipv6_autoconfig_button}
+    @{ipv6_address_origin_list}  ${ipv6_slaac_addr}=
+    ...    Get Address Origin List And Address For Type  SLAAC
+    Page Should Contain  ${ipv6_slaac_addr}
+    Wait Until Page Contains   SLAAC   timeout=30sec
+
+
+Disable Eth0 IPv6 AutoConfig and Verify SLAAC
+    [Documentation]  Disable SLAAC on eth0 via GUI & check it is set to disable state.
+    [Tags]  Disable_Eth0_IPv6_AutoConfig_and_Verify_SLAAC
+
+    Set IPv6 AutoConfig State  Disabled  ${xpath_eth0_ipv6_autoconfig_button}
+    Wait Until Page Does Not Contain    SLAAC   timeout=30sec
+
 
 
 *** Keywords ***
@@ -583,3 +603,31 @@ Cancel And Verify Network Heading
     Click Button  ${xpath_cancel_button}
     Wait Until Keyword Succeeds  10 sec  5 sec
     ...  Refresh GUI And Verify Element Value  ${xpath_network_heading}  Network
+
+
+Set IPv6 AutoConfig State
+    [Arguments]    ${desired_autoconfig_state}  ${xpath_ipv6_autoconfig_button}
+
+    # Description of argument(s):
+    # desired_autoconfig_state      IPv6 autoconfig Toggle state(eg: Enabled or Disabled).
+    # xpath_ipv6_autoconfig_button  xpath of eth0 or eth1 ipv6 autoconfig button.
+
+    ${current_autoconfig_state}=    Get Text    ${xpath_ipv6_autoconfig_button}
+
+    IF    '${desired_autoconfig_state}' == '${current_autoconfig_state}'
+        # Already in desired state, reset by toggling twice
+        Click Element  ${xpath_ipv6_autoconfig_button}
+        Wait Until Element Is Not Visible
+        ...  ${xpath_page_loading_progress_bar}  timeout=120s
+        Click Element  ${xpath_ipv6_autoconfig_button}
+        Wait Until Element Is Not Visible
+        ...  ${xpath_page_loading_progress_bar}  timeout=120s
+        Element Text Should Be  ${xpath_ipv6_autoconfig_button}
+        ...  ${desired_autoconfig_state}  timeout=60s
+    ELSE IF    '${desired_autoconfig_state}' != '${current_autoconfig_state}'
+        Click Element  ${xpath_ipv6_autoconfig_button}
+        Wait Until Element Is Not Visible
+        ...  ${xpath_page_loading_progress_bar}  timeout=120s
+        Element Text Should Be  ${xpath_ipv6_autoconfig_button}
+        ...  ${desired_autoconfig_state}  timeout=60s
+    END
