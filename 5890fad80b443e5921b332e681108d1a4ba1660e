@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f2bc175_b9092a5e",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-09-29T16:49:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f6b0949_5bb6e878",
+      "revId": "5890fad80b443e5921b332e681108d1a4ba1660e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "297ecc70_a9480cba",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-09-29T12:33:27Z",
       "side": 1,
       "message": "you can remove these 2 xpath, not required",
+      "revId": "5890fad80b443e5921b332e681108d1a4ba1660e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3d8216a_9fc27281",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-09-29T16:49:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "297ecc70_a9480cba",
       "revId": "5890fad80b443e5921b332e681108d1a4ba1660e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dafbc02_1188d894",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-09-29T16:49:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5c7e48d_a8787f45",
+      "revId": "5890fad80b443e5921b332e681108d1a4ba1660e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adc26265_e6ee1293",
@@ -69,6 +123,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90c7880a_047a6504",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-09-29T16:49:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adc26265_e6ee1293",
+      "revId": "5890fad80b443e5921b332e681108d1a4ba1660e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "553481d0_70afbc88",
@@ -82,6 +154,24 @@
       "writtenOn": "2025-09-29T12:33:27Z",
       "side": 1,
       "message": "Please specify which toggel you are referring to\n\nSet IPv6Autoconfig State For Eth0",
+      "revId": "5890fad80b443e5921b332e681108d1a4ba1660e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e640f4f4_a64126ef",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-09-29T16:49:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "553481d0_70afbc88",
       "revId": "5890fad80b443e5921b332e681108d1a4ba1660e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
