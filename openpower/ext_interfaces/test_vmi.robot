@@ -618,6 +618,8 @@ Disable VMI DHCPv6 Property And Check Persistency On BMC Reboot
 
     # Reboot BMC and verify persistency.
     OBMC Reboot (off)
+    Redfish Power On
+    Wait For Host Boot Progress To Reach Required State
 
     # Verify IPv6 address origin is set to Static and DHCPv6 address is erased.
     ${vmi_ipv6addr}=  Verify VMI IPv6 Address  Static
@@ -845,6 +847,8 @@ Enable VMI DHCPv6 Property And Check Persistency On BMC Reboot
 
     # Reboot BMC and verify persistency.
     OBMC Reboot (off)
+    Redfish Power On
+    Wait For Host Boot Progress To Reach Required State
 
     # Verify IPv6 address origin is set to DHCP.
     Verify VMI IPv6 Address  DHCPv6
@@ -1035,6 +1039,7 @@ Set VMI Invalid Static IPv6 Address And Verify
     @{vmi_ipv6_address}=  Get From Dictionary  ${resp.dict}  IPv6Addresses
     ${vmi_ipv6_addr}=  Get From List  ${vmi_ipv6_address}  0
     Should Not Be Equal  ${vmi_ipv6_addr["Address"]}  ${invalid_vmi_ipv6addr}
+    Sleep  ${NETWORK_TIMEOUT}
 
 
 Delete VMI IPv6 Static Default Gateway Address
