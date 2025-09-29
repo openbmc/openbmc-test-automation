@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb544e5a_8f3400fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-09-29T12:33:58Z",
+      "side": 1,
+      "message": "it is checking coexistence, Pls use coexist in test c",
+      "revId": "702d7bd6c5e64f972fc721fb624ff8111aa691c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f1b420a_8d3ac418",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-09-29T12:33:58Z",
+      "side": 1,
+      "message": "coexist",
+      "revId": "702d7bd6c5e64f972fc721fb624ff8111aa691c6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
