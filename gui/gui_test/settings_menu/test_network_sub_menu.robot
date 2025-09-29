@@ -46,7 +46,9 @@ ${xpath_delete_ipv4_addres}              //*[text()='${test_ipv4_addr}']/followi
 ...                                      //*[@title="Delete IPv4 address"]
 ${xpath_delete_button}                   //*[text()="Delete"]
 ${xpath_eth1_interface}                  //*[text()="eth1"]
-
+${xpath_eth0_ipv6_autoconfig_button}     (//label[@for='ipv6AutoConfigSwitch'])[1]
+${xpath_eth0_autoconfig_enable_state}    (//span[contains(text(),'Enabled')])[5]
+${xpath_eth0_autoconfig_disable_state}   (//span[contains(text(),'Disabled')])[2]
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
 ${test_ipv4_addr_1}                      10.7.7.8
@@ -54,7 +56,7 @@ ${test_ipv6_addr}                        2001:db8:3333:4444:5555:6666:7777:8888
 ${test_ipv6_addr_1}                      2001:db8:3333:4444:5555:6666:7777:8889
 ${ipv4_hexword_addr}                     10.5.5.6:1A:1B:1C:1D:1E:1F
 ${invalid_hexadec_ipv6}                  x:x:x:x:x:x:10.5.5.6
-${address_with_multi_shortnotation}      2001::33::111
+${ipv6_multi_short}                      2001::33::111
 ${test_prefix_length}                    64
 ${out_of_range_ip}                       10.7.7.256
 ${string_ip}                             aa.bb.cc.dd
@@ -243,12 +245,12 @@ Configure And Verify Static IPv6 Address
     [Tags]  Configure_And_Verify_Static_IPv6_Address
     [Template]  Add Static IPv6 Address And Verify
 
-    # ipv6                               prefix_length          status
-    ${test_ipv6_addr}                    ${test_prefix_length}  Success
-    ${ipv4_hexword_addr}                 ${test_prefix_length}  Invalid format
-    ${invalid_hexadec_ipv6}              ${test_prefix_length}  Invalid format
-    ${address_with_multi_shortnotation}  ${test_prefix_length}  Invalid format
-
+    # ipv6                  prefix_length          status
+    ${test_ipv6_addr}       ${test_prefix_length}  Success
+    ${ipv4_hexword_addr}    ${test_prefix_length}  Invalid format
+    ${invalid_hexadec_ipv6} ${test_prefix_length}  Invalid format
+    ${ipv6_multi_short}     ${test_prefix_length}  Invalid format
+    
 
 Configure And Verify Static Default Gateway
     [Documentation]  Login to GUI Network page, configure invalid static IPv6 default gateway and verify.
@@ -314,6 +316,23 @@ Configure Hostname Via GUI And Verify
     ${bmc_hostname}=  Get BMC Hostname
     Should Be Equal As Strings  ${bmc_hostname}  ${test_hostname}
 
+
+Enable Eth0 IPv6 AutoConfig and Verify SLAAC
+    [Documentation]  Login to GUI Network page, Toggle IPv6 Autoconfig Enable or Disable.
+    [Tags]  Enable_Eth0_IPv6_AutoConfig_and_Verify_SLAAC
+
+    Set Toggle State For Eth0  Enable
+    Wait Until Page Contains   SLAAC   timeout=30sec
+
+
+Disable Eth0 IPv6 AutoConfig and Verify SLAAC
+    [Documentation]  Login to GUI Network page, Toggle IPv6 Autoconfig Enable or Disable.
+    [Tags]  Disable_Eth0_IPv6_AutoConfig_and_Verify_SLAAC
+
+    Set Toggle State For Eth0  Disable
+    Wait Until Page Does Not Contain    SLAAC   timeout=30sec
+ 
+    
 
 *** Keywords ***
 
@@ -569,3 +588,30 @@ Cancel And Verify Network Heading
     Click Button  ${xpath_cancel_button}
     Wait Until Keyword Succeeds  10 sec  5 sec
     ...  Refresh GUI And Verify Element Value  ${xpath_network_heading}  Network
+
+
+Set Toggle State For Eth0
+    [Documentation]  Toggle eth0 IPv6 autoconfig.
+    [Arguments]    ${Desired_State}
+
+    # Description of argument(s):
+    # Desired_State   eth0 IPv6 autoconfig Toggle state(eg: Enable or Disable).
+
+    ${enabled}=    Set Variable    ${xpath_eth0_autoconfig_enable_state}
+    ${disabled}=   Set Variable    ${xpath_eth0_autoconfig_disable_state}
+
+    ${is_enabled}=    Run Keyword And Return Status    Element Should Be Visible    ${enabled}    timeout=15s
+
+    IF    '${Desired_State}' == 'Enable' and not ${is_enabled}
+        Click Element    ${xpath_eth0_ipv6_autoconfig_button} 
+        Wait Until Element Is Visible    ${enabled}    timeout=30s
+    ELSE IF    '${Desired_State}' == 'Enable' and ${is_enabled}
+        Comment    Toggle already in Enabled state
+    ELSE IF    '${Desired_State}' == 'Disable' and ${is_enabled}
+        Click Element    ${xpath_eth0_ipv6_autoconfig_button}
+        Wait Until Element Is Visible    ${disabled}    timeout=30s
+    ELSE IF    '${Desired_State}' == 'Disable' and not ${is_enabled}
+        Comment    Toggle already in Disabled state
+    ELSE
+        Fail    Invalid Desired_State argument: ${Desired_State}. Use Enable or Disable
+    END
