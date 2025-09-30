@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dcfc27a_1c965e7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-09-30T03:10:51Z",
+      "side": 1,
+      "message": "I see you are now in CI approved list and also in CLA.. Merging code.. Thank you of the contribution",
+      "revId": "29c348e2fce026299e0173a290e262e28fd8582a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
