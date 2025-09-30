@@ -64,6 +64,54 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04ee683c_12ac182f",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-09-30T05:18:39Z",
+      "side": 1,
+      "message": "Same as below",
+      "parentUuid": "9b696f38_6f3d4a9c",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 37
+      },
+      "revId": "2c832a387395c985b839fad1d8707fac15b4980c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deb9d7bc_696987b9",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-09-30T05:18:39Z",
+      "side": 1,
+      "message": "Anvesh, this xpath is specifically written for eth0 so i have used the index.\nThe xpath which you suggested will refer to both the interfaces.I believe it would be better if we keep it as it is, so that we can pass arguments in testcase for eth0 and eth1",
+      "parentUuid": "e8677557_5a1157ab",
+      "range": {
+        "startLine": 51,
+        "startChar": 41,
+        "endLine": 51,
+        "endChar": 102
+      },
+      "revId": "2c832a387395c985b839fad1d8707fac15b4980c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf176be1_d7a647c3",
@@ -77,6 +125,30 @@
       "writtenOn": "2025-09-30T05:01:41Z",
       "side": 1,
       "message": "[Documentation]  Enable SLAAC and check it is set to the Enable state.",
+      "range": {
+        "startLine": 333,
+        "startChar": 3,
+        "endLine": 333,
+        "endChar": 97
+      },
+      "revId": "2c832a387395c985b839fad1d8707fac15b4980c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb1a8a2a_be1dee2c",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-09-30T05:18:39Z",
+      "side": 1,
+      "message": "I have tried and written in the user understandable way.Just specifying the gui network page.",
+      "parentUuid": "cf176be1_d7a647c3",
       "range": {
         "startLine": 333,
         "startChar": 3,
@@ -127,6 +199,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e3e4568_f3ed3fd9",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-09-30T05:18:39Z",
+      "side": 1,
+      "message": "Same as above",
+      "parentUuid": "0df51013_cb15bfee",
+      "range": {
+        "startLine": 341,
+        "startChar": 20,
+        "endLine": 341,
+        "endChar": 97
+      },
+      "revId": "2c832a387395c985b839fad1d8707fac15b4980c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95c9e917_656f8ab9",
@@ -161,6 +257,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b28512a5_af7493e0",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-09-30T05:18:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42b2cb7a_95264e24",
+      "revId": "2c832a387395c985b839fad1d8707fac15b4980c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a02480c_8bf191f1",
@@ -174,6 +288,30 @@
       "writtenOn": "2025-09-30T04:59:39Z",
       "side": 1,
       "message": "after enabling or disabling page will do load automatically somtimes\nuse Wait Until Element Is Not Visible\n        ...  ${xpath_page_loading_progress_bar}  timeout\u003d120s\nAfter you can verify Element Text Should Be",
+      "range": {
+        "startLine": 623,
+        "startChar": 8,
+        "endLine": 623,
+        "endChar": 97
+      },
+      "revId": "2c832a387395c985b839fad1d8707fac15b4980c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ae731a3_ac676ba1",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-09-30T05:18:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a02480c_8bf191f1",
       "range": {
         "startLine": 623,
         "startChar": 8,
