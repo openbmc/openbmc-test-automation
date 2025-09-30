@@ -161,6 +161,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "496c6347_c8f3ef39",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-09-30T05:22:04Z",
+      "side": 1,
+      "message": "inside testcase your are not logged in , so please remove Login to GUI network page,",
+      "parentUuid": "fb1a8a2a_be1dee2c",
+      "range": {
+        "startLine": 333,
+        "startChar": 3,
+        "endLine": 333,
+        "endChar": 97
+      },
+      "revId": "2c832a387395c985b839fad1d8707fac15b4980c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a3d3d048_095c2a37",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 5
@@ -213,6 +237,30 @@
       "side": 1,
       "message": "Same as above",
       "parentUuid": "0df51013_cb15bfee",
+      "range": {
+        "startLine": 341,
+        "startChar": 20,
+        "endLine": 341,
+        "endChar": 97
+      },
+      "revId": "2c832a387395c985b839fad1d8707fac15b4980c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0eba2dbc_269fc160",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-09-30T05:22:04Z",
+      "side": 1,
+      "message": "testcase doing disable , you were updated enable and please change to disable",
+      "parentUuid": "6e3e4568_f3ed3fd9",
       "range": {
         "startLine": 341,
         "startChar": 20,
