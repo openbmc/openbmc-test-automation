@@ -185,6 +185,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f585c7e0_b79bc235",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-09-30T05:26:35Z",
+      "side": 1,
+      "message": "Using the suite name, easy to understand that this suite belongs to the GUI network page, and the suite setup doing one time GUI login.\nIf test case doing GUI login, then you can mention Login to GUI network page",
+      "parentUuid": "496c6347_c8f3ef39",
+      "range": {
+        "startLine": 333,
+        "startChar": 3,
+        "endLine": 333,
+        "endChar": 97
+      },
+      "revId": "2c832a387395c985b839fad1d8707fac15b4980c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a3d3d048_095c2a37",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 5
@@ -360,6 +384,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "4a02480c_8bf191f1",
+      "range": {
+        "startLine": 623,
+        "startChar": 8,
+        "endLine": 623,
+        "endChar": 97
+      },
+      "revId": "2c832a387395c985b839fad1d8707fac15b4980c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c43be1a8_77457d93",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-09-30T05:26:35Z",
+      "side": 1,
+      "message": "There is no Wait Until Element Is Not Visible, can you re-check",
+      "parentUuid": "0ae731a3_ac676ba1",
       "range": {
         "startLine": 623,
         "startChar": 8,
