@@ -66,6 +66,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf176be1_d7a647c3",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-09-30T05:01:41Z",
+      "side": 1,
+      "message": "[Documentation]  Enable SLAAC and check it is set to the Enable state.",
+      "range": {
+        "startLine": 333,
+        "startChar": 3,
+        "endLine": 333,
+        "endChar": 97
+      },
+      "revId": "2c832a387395c985b839fad1d8707fac15b4980c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a3d3d048_095c2a37",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 5
@@ -77,6 +100,29 @@
       "writtenOn": "2025-09-30T04:34:38Z",
       "side": 1,
       "message": "Check if possible to verify the SLAAC address, something like this.\n\n@{ipv6_addressorigin_list}  ${ipv6_slaac_addr}\u003d  Get Address Origin List And Address For Type  SLAAC\n\nPage Should Contain  ${ipv6_slaac_addr}",
+      "revId": "2c832a387395c985b839fad1d8707fac15b4980c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0df51013_cb15bfee",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-09-30T05:01:41Z",
+      "side": 1,
+      "message": "[Documentation] Disable SLAAC and check it is set to the Disable state.",
+      "range": {
+        "startLine": 341,
+        "startChar": 20,
+        "endLine": 341,
+        "endChar": 97
+      },
       "revId": "2c832a387395c985b839fad1d8707fac15b4980c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
