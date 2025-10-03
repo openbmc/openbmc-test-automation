@@ -12,6 +12,7 @@ Library         ../lib/os_utilities.robot
 Test Teardown   FFDC On Test Case Fail
 Suite Teardown  Redfish.Logout
 
+Test Tags       Test_NMI_Interface
 
 *** Test Cases ***
 

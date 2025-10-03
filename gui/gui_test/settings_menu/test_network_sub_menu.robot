@@ -49,6 +49,7 @@ ${xpath_delete_button}                   //*[text()="Delete"]
 ${xpath_eth1_interface}                  //*[text()="eth1"]
 ${xpath_linklocalv6}                     //*[text()="LinkLocal"]
 ${xpath_eth0_ipv6_autoconfig_button}     (//*[@id="ipv6AutoConfigSwitch"]/following-sibling::label)[1]
+${xpath_eth1_ipv6_autoconfig_button}     (//*[@id="ipv6AutoConfigSwitch"]/following-sibling::label)[2]
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
 ${test_ipv4_addr_1}                      10.7.7.8
@@ -345,6 +346,28 @@ Disable AutoConfig On Eth0 And Verify
     [Tags]  Disable_AutoConfig_On_Eth0_And_Verify
 
     Set IPv6 AutoConfig State  Disabled  ${xpath_eth0_ipv6_autoconfig_button}
+    Page Should Not Contain    SLAAC
+
+
+Enable AutoConfig On Eth1 And Verify
+    [Documentation]  Enable SLAAC on eth1 via GUI & check it is set to enable state.
+    [Tags]  Enable_AutoConfig_On_Eth1_And_Verify
+
+    Click Element  ${xpath_eth1_interface}
+    Set IPv6 AutoConfig State  Enabled  ${xpath_eth1_ipv6_autoconfig_button}
+    Set Suite Variable  ${CHANNEL_NUMBER}  2
+    @{ipv6_address_origin_list}  ${ipv6_slaac_addr}=
+    ...    Get Address Origin List And Address For Type  SLAAC
+    Page Should Contain  ${ipv6_slaac_addr}
+    Page Should Contain   SLAAC
+
+
+Disable AutoConfig On Eth1 And Verify
+    [Documentation]  Disable SLAAC on eth1 via GUI & check it is set to disable state.
+    [Tags]  Disable_AutoConfig_On_Eth1_And_Verify
+
+    Click Element  ${xpath_eth1_interface}
+    Set IPv6 AutoConfig State  Disabled  ${xpath_eth1_ipv6_autoconfig_button}
     Page Should Not Contain    SLAAC
 
 

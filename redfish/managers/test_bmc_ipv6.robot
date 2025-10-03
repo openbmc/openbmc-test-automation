@@ -306,6 +306,38 @@ Add Multiple IPv6 Address And Verify
     Configure Multiple IPv6 Address on BMC  ${test_prefix_length}
 
 
+Verify Coexistence Of Static IPv6 And SLAAC On BMC
+    [Documentation]  Verify static IPv6 And SLAAC both coexist.
+    [Tags]  Verify_Coexistence_Of_Static_IPv6_And_SLAAC_On_BMC
+    [Setup]  Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
+             Set SLAAC Configuration State And Verify  ${True}
+    [Teardown]  Delete IPv6 Address  ${test_ipv6_addr}
+
+    Sleep  ${NETWORK_TIMEOUT}s
+
+    Check Coexistence Of Static IPv6 And SLAAC
+
+
+Verify Coexistence Of Link Local And DHCPv6 On BMC
+    [Documentation]  Verify link local And dhcpv6 both coexist.
+    [Tags]  Verify_Coexistence_Of_Link_Local_And_DHCPv6_On_BMC
+    [Setup]  Set DHCPv6 Property  Enabled  ${2}
+
+    Sleep  ${NETWORK_TIMEOUT}s
+
+    Check Coexistence Of Link Local And DHCPv6
+
+
+Verify Coexistence Of Link Local And SLAAC On BMC
+    [Documentation]  Verify link local And SLAAC both coexist.
+    [Tags]  Verify_Coexistence_Of_Link_Local_And_SLAAC_On_BMC
+    [Setup]  Set SLAAC Configuration State And Verify  ${True}
+
+    Sleep  ${NETWORK_TIMEOUT}s
+
+    Check Coexistence Of Link Local And SLAAC
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -983,6 +1015,43 @@ Check Coexistence Of Linklocalv6 And Static IPv6
 
     Should Match Regexp  ${ipv6_linklocal_addr}        ${linklocal_addr_format}
     Should Contain       ${ipv6_addressorigin_list}    Static
+
+
+Check Coexistence Of Static IPv6 And SLAAC
+    [Documentation]  Verify both static IPv6 and SLAAC coexist.
+
+    # Verify the address origin contains static and slaac.
+    @{ipv6_addressorigin_list}  ${ipv6_static_addr}=
+    ...    Get Address Origin List And Address For Type  Static
+
+    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr}=
+    ...    Get Address Origin List And Address For Type  SLAAC
+
+
+Check Coexistence Of Link Local And SLAAC
+    [Documentation]  Verify both link local and SLAAC coexist.
+
+    # Verify the address origin contains SLAAC and link local.
+    @{ipv6_addressorigin_list}  ${ipv6_link_local_addr}=
+    ...    Get Address Origin List And Address For Type  LinkLocal
+
+    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr}=
+    ...    Get Address Origin List And Address For Type  SLAAC
+
+    Should Match Regexp    ${ipv6_link_local_addr}    ${linklocal_addr_format}
+
+
+Check Coexistence Of Link Local And DHCPv6
+    [Documentation]  Verify both link local and dhcpv6 coexist.
+
+    # Verify the address origin contains dhcpv6 and link local.
+    @{ipv6_address_origin_list}  ${ipv6_link_local_addr}=
+    ...    Get Address Origin List And Address For Type  LinkLocal
+
+    @{ipv6_address_origin_list}  ${ipv6_dhcpv6_addr}=
+    ...    Get Address Origin List And Address For Type  DHCPv6
+
+    Should Match Regexp    ${ipv6_link_local_addr}    ${linklocal_addr_format}
 
 
 Check If Linklocal Address Is In Correct Format
