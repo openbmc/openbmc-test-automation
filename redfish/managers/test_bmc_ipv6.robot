@@ -338,6 +338,23 @@ Verify Coexistence Of Link Local And SLAAC On BMC
     Check Coexistence Of Link Local And SLAAC
 
 
+Verify Coexistence Of Link Local Static IPv6 DHCPv6 And SLAAC On BMC
+    [Documentation]  Verify coexistence of link local static ipv6 dhcpv6 and SLAAC on BMC.
+    [Tags]  Verify_Coexistence_Of_Link_Local_Static_IPv6_DHCPv6_And_SLAAC_On_BMC
+    [Setup]  Run Keywords  Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
+    ...      AND  Get The Initial DHCPv6 Setting On Each Interface  ${1}
+    ...      AND  Set DHCPv6 Property  Enabled  ${2}
+    ...      AND  Get The Initial SLAAC Setting On Each Interface  ${1}
+    ...      AND  Set SLAAC Configuration State And Verify  ${True}
+    [Teardown]  Run Keywords  Delete IPv6 Address  ${test_ipv6_addr}
+    ...         AND  Set And Verify DHCPv6 Property  ${dhcpv6_channel_1}  ${1}
+    ...         AND  Set SLAAC Configuration State And Verify  ${slaac_channel_1}  [${HTTP_OK}]  ${1}
+
+    Sleep  ${NETWORK_TIMEOUT}s
+
+    Check Coexistence Of Link Local Static IPv6 DHCPv6 And SLAAC On BMC
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -1210,3 +1227,10 @@ Get Interface ID Of IPv6
     END
     ${interface_id}=  Evaluate  ':'.join(${expanded_ip}[-4:])
     RETURN  ${interface_id}
+
+
+Check Coexistence Of Link Local Static IPv6 DHCPv6 And SLAAC On BMC
+    [Documentation]  Verify link local static ipv6 dhcpv6 and SLAAC coexist.
+
+    # Verify the address origin contains link local, static ipv6, dhcpv6 and SLAAC.
+    ${result}=  Verify The Coexistance Of The Address Type  LinkLocal  Static  DHCPv6  SLAAC
