@@ -113,3 +113,18 @@ Get Address Origin List And Address For Type
     Should Contain  ${ipv6_addressorigin_list}  ${ipv6_address_type}
     Should Not Be Empty  ${ipv6_type_addr}  msg=${ipv6_address_type} address is not present
     RETURN  @{ipv6_addressorigin_list}  ${ipv6_type_addr}
+
+
+Verify The Coexistence Of The Address Type
+    [Documentation]  Verify the coexistence of the address type.
+    [Arguments]  @{ipv6_address_types}
+
+    # Description of the argument(s):
+    # ipv6_address_types  Types of IPv6 address to be checked.
+
+    FOR  ${ipv6_address_type}  IN  @{ipv6_address_types}
+        @{ipv6_address_origin_list}  ${ipv6_type_addr}=
+        ...  Get Address Origin List And Address For Type  ${ipv6_address_type}
+        Should Contain    ${ipv6_address_origin_list}  ${ipv6_address_type}
+        Should Not Be Empty    ${ipv6_type_addr}  msg=${ipv6_address_type} address is not present
+    END
