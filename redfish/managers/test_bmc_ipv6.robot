@@ -338,6 +338,23 @@ Verify Coexistence Of Link Local And SLAAC On BMC
     Check Coexistence Of Link Local And SLAAC
 
 
+Verify Coexistence Of All IPv6 Type Addresses On BMC
+    [Documentation]  Verify coexistence of link local, static, DHCPv6 and SLAAC ipv6 addresses.
+    [Tags]  Verify_Coexistence_Of_All_IPv6_Type_Addresses_On_BMC
+    [Setup]  Run Keywords  Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
+    ...      AND  Get The Initial DHCPv6 Setting On Each Interface  ${1}
+    ...      AND  Set And Verify DHCPv6 Property  Enabled
+    ...      AND  Get The Initial SLAAC Setting On Each Interface  ${1}
+    ...      AND  Set SLAAC Configuration State And Verify  ${True}
+    [Teardown]  Run Keywords  Delete IPv6 Address  ${test_ipv6_addr}
+    ...         AND  Set And Verify DHCPv6 Property  ${dhcpv6_channel_1}  ${1}
+    ...         AND  Set SLAAC Configuration State And Verify  ${slaac_channel_1}  [${HTTP_OK}]  ${1}
+
+    Sleep  ${NETWORK_TIMEOUT}s
+
+    # Verify link local, static, DHCPv6 and SLAAC ipv6 addresses coexist.
+    Verify The Coexistence Of The Address Type  LinkLocal  Static  DHCPv6  SLAAC
+
 *** Keywords ***
 
 Suite Setup Execution
