@@ -31,7 +31,8 @@ def get_running_system_ip():
     ip_list = list()
     stdout = subprocess.check_output(["hostname", "--all-fqdns"], shell=True)
     host_fqdns = stdout.decode("utf-8").strip()
-    ip_address = socket.gethostbyname(str(host_fqdns))
+    addr_infos = sorted(socket.getaddrinfo(host_fqdns, 443, proto=socket.IPPROTO_TCP), key=lambda x: x[0])
+    ip_address = addr_infos[0][4][0]
     ip_list.append(ip_address)
 
     return ip_list
