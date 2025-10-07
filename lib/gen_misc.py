@@ -451,7 +451,12 @@ def get_host_name_ip(host=None, short_name=0):
     host = dft(host, socket.gethostname())
     host_name = socket.getfqdn(host)
     try:
-        host_ip = socket.gethostbyname(host)
+        # Prefer IPv4
+        addr_infos = sorted(
+            socket.getaddrinfo(host, 443, proto=socket.IPPROTO_TCP),
+            key=lambda x: x[0],
+        )
+        host_ip = addr_infos[0][4][0]
     except socket.gaierror as my_gaierror:
         message = (
             "Unable to obtain the host name for the following host:"
