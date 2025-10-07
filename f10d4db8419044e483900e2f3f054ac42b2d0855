@@ -45,6 +45,29 @@
       },
       "revId": "f10d4db8419044e483900e2f3f054ac42b2d0855",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a10ee63c_d9ccfc07",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-07T17:14:01Z",
+      "side": 1,
+      "message": "Set And Verify DHCPv6 Property  Enabled",
+      "range": {
+        "startLine": 346,
+        "startChar": 18,
+        "endLine": 346,
+        "endChar": 52
+      },
+      "revId": "f10d4db8419044e483900e2f3f054ac42b2d0855",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
