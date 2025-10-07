@@ -16,6 +16,24 @@
       "message": "Verify Coexistence of All IPv6 Type Addresses.\nIn the documentation you can mention conexistence of link local, static, DHCPv6 \u0026 SLAAC IPv6 addresses.",
       "revId": "f715fcee7f18c3bc606fe0f56e059270a11a27a8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "883ae7f0_3bb9cdcf",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-07T06:56:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b19ad9eb_cb8ac5ba",
+      "revId": "f715fcee7f18c3bc606fe0f56e059270a11a27a8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
