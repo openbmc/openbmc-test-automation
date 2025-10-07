@@ -16,6 +16,23 @@
       "message": "Noticed that you are noe in CLA approved list \nhttps://drive.google.com/drive/folders/12CXCpXKHZSRzm0S8G2Td9YNkSabX1JY5\n\nPlease inform AMI CLA Manager\n\nPravinash Jeyapaul \u003cpravinashj@ami.com\u003e; - CLA Manager \n\nto add your name in this CLA. post that we can merge this code.. Thanks",
       "revId": "06ac0019c64f9ba24306d2fe841f2a64a8477906",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd905692_365e00d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002673
+      },
+      "writtenOn": "2025-10-07T13:27:04Z",
+      "side": 1,
+      "message": "Thanks! I’ll check the CLA status and update once resolved.",
+      "revId": "06ac0019c64f9ba24306d2fe841f2a64a8477906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
