@@ -31,7 +31,7 @@ def get_running_system_ip():
     ip_list = list()
     stdout = subprocess.check_output(["hostname", "--all-fqdns"], shell=True)
     host_fqdns = stdout.decode("utf-8").strip()
-    ip_address = socket.gethostbyname(str(host_fqdns))
+    ip_address = gm.get_first_host_addr(host_fqdns)
     ip_list.append(ip_address)
 
     return ip_list

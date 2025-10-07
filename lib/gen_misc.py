@@ -448,10 +448,11 @@ def get_host_name_ip(host=None, short_name=0):
                                     and short_host.
     """
 
-    host = dft(host, socket.gethostname())
+    if not host:
+        host = socket.gethostname()
     host_name = socket.getfqdn(host)
     try:
-        host_ip = socket.gethostbyname(host)
+        host_ip = get_first_host_addr(host)
     except socket.gaierror as my_gaierror:
         message = (
             "Unable to obtain the host name for the following host:"
@@ -466,6 +467,22 @@ def get_host_name_ip(host=None, short_name=0):
         return host_name, host_ip, host_short_name
     else:
         return host_name, host_ip
+
+
+def get_first_host_addr(host):
+    # Prefer IPv4
+    addr_infos = sorted(
+        socket.getaddrinfo(host, 443, proto=socket.IPPROTO_TCP),
+        key=lambda x: x[0],
+    )
+    # socket.getaddrinfo returns a list of 5-tuples with the
+    # following structure:
+    # (family, type, proto, canonname, sockaddr)
+    # sockaddr structure is (ip, port)
+    # See: https://docs.python.org/3/library/socket.html#socket.getaddrinfo
+    # Take the first tuple for the first IP,
+    # then its 4th element - sockaddr and IP from it
+    return addr_infos[0][4][0]
 
 
 def pid_active(pid):
