@@ -51,6 +51,41 @@
       "parentUuid": "dd905692_365e00d7",
       "revId": "06ac0019c64f9ba24306d2fe841f2a64a8477906",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2324a94d_b316fde6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001886
+      },
+      "writtenOn": "2025-10-08T03:15:27Z",
+      "side": 1,
+      "message": "The code changes are okay. CLA approved list is updated.",
+      "revId": "06ac0019c64f9ba24306d2fe841f2a64a8477906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b39ad158_1fe3f83d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001886
+      },
+      "writtenOn": "2025-10-08T03:15:27Z",
+      "side": 1,
+      "message": "CLA approved list is updated. Kindly check.",
+      "parentUuid": "8c88bafb_1b057223",
+      "revId": "06ac0019c64f9ba24306d2fe841f2a64a8477906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
