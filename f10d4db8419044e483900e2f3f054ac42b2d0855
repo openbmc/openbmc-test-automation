@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "809a1c3d_557f3526",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-08T05:38:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de79f161_822eeaae",
+      "range": {
+        "startLine": 140,
+        "startChar": 4,
+        "endLine": 141,
+        "endChar": 91
+      },
+      "revId": "f10d4db8419044e483900e2f3f054ac42b2d0855",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5da33ed_7954abe1",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71c454ad_3a265d42",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-08T05:38:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5da33ed_7954abe1",
+      "range": {
+        "startLine": 144,
+        "startChar": 4,
+        "endLine": 144,
+        "endChar": 16
+      },
+      "revId": "f10d4db8419044e483900e2f3f054ac42b2d0855",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a10ee63c_d9ccfc07",
@@ -60,6 +108,30 @@
       "writtenOn": "2025-10-07T17:14:01Z",
       "side": 1,
       "message": "Set And Verify DHCPv6 Property  Enabled",
+      "range": {
+        "startLine": 346,
+        "startChar": 18,
+        "endLine": 346,
+        "endChar": 52
+      },
+      "revId": "f10d4db8419044e483900e2f3f054ac42b2d0855",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74dafea0_72b2e725",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-08T05:38:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a10ee63c_d9ccfc07",
       "range": {
         "startLine": 346,
         "startChar": 18,
