@@ -226,32 +226,54 @@ Navigate To Server Power Page
 
 Power Off Server
     [Documentation]  Powering off server.
-    Navigate To Server Power Page
-    ${present}=    Run Keyword And Return Status
-    ...  Element Should Be Visible    ${xpath_power_shutdown}
-    IF  ${present}
-      Click Element  ${xpath_power_shutdown}
-      Click Button  ${xpath_confirm}
-      Wait Until Element Is Visible  ${xpath_power_poweron}  timeout=60
-      Click Element  ${xpath_close_information_message}
+
+    ${boot_state}  ${host_state}=  Redfish Get Boot Progress
+    IF  '${boot_state}' == 'None'
+        Log To Console    Server is already powered Off.
     ELSE
-      Log To console    Server is already powered Off.
+        Navigate To Server Power Page
+        Click Element  ${xpath_power_shutdown}
+        Click Button  ${xpath_confirm}
+        Wait Until Element Is Visible  ${xpath_power_poweron}  timeout=60
+        Verify Information Message Via GUI
+        Wait Until Keyword Succeeds  5m  45s  Check Boot Progress State Via Redfish  None
     END
 
 
 Power On Server
     [Documentation]  Powering on server.
 
-    Navigate To Server Power Page
-    ${present}=    Run Keyword And Return Status
-    ...  Element Should Be Visible    ${xpath_power_power_on}
-    IF  (${present})
-      Click Element  ${xpath_power_power_on}
-      Wait Until Element Is Visible  ${xpath_power_shutdown}  timeout=60
-      Click Element  ${xpath_close_information_message}
+    ${boot_state}  ${host_state}=  Redfish Get Boot Progress
+    IF  '${boot_state}' == 'OSRunning'
+        Log To Console    Server is already powered On.
     ELSE
-      Log To console    Server is already powered On.
+        Set BIOS Attribute    pvm_stop_at_standby    Disabled
+        Navigate To Server Power Page
+        Click Element  ${xpath_power_power_on}
+        Wait Until Element Is Visible  ${xpath_power_shutdown}  timeout=60
+        Verify Information Message Via GUI
+        Wait Until Keyword Succeeds  10m  45s  Check Boot Progress State Via Redfish  OSRunning
     END
+
+
+Check Boot Progress State Via Redfish
+    [Documentation]   Checking Boot progress state via redfish.
+    [Arguments]   ${expected_state}
+
+    # Description of argument(s):
+    # expected_state      Expected Boot states are "OSRunning" and "None".
+
+    ${boot_state}  ${host_state}=  Redfish Get Boot Progress
+    Log To Console  Current boot state: ${boot_state}, host state: ${host_state}
+    Should Be Equal As Strings  ${boot_state}  ${expected_state}
+
+
+Verify Information Message Via GUI
+    [Documentation]  Verify Information message via GUI page
+
+    Wait Until Element Is Visible  ${xpath_close_information_message}  timeout=5
+    Page Should Contain  Reload the browser page to get the updated content.
+    Click Element  ${xpath_close_information_message}
 
 
 Reboot Server
