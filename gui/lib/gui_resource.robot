@@ -9,12 +9,12 @@ Variables      ../data/gui_variables.py
 
 
 *** Variables ***
-${OPENBMC_GUI_URL}              https://${OPENBMC_HOST}:${HTTPS_PORT}
-${xpath_power_page}          //*[@data-test-id='appHeader-container-power']
-${xpath_power_shutdown}      //*[@data-test-id='serverPowerOperations-button-shutDown']
-${xpath_power_power_on}      //*[@data-test-id='serverPowerOperations-button-powerOn']
-${xpath_power_reboot}        //*[@data-test-id='serverPowerOperations-button-reboot']
-${xpath_confirm}             //button[contains(text(),'Confirm')]
+${OPENBMC_GUI_URL}            https://${OPENBMC_HOST}:${HTTPS_PORT}
+${xpath_power_page}           //*[@data-test-id='appHeader-container-power']
+${xpath_power_shutdown}       //*[@data-test-id='serverPowerOperations-button-shutDown']
+${xpath_power_power_on}       //*[@data-test-id='serverPowerOperations-button-powerOn']
+${xpath_power_reboot}         //*[@data-test-id='serverPowerOperations-button-reboot']
+${xpath_confirm}              //button[contains(text(),'Confirm')]
 
 # Default GUI browser and mode is set to "Firefox" and "headless"
 # respectively here.
@@ -101,7 +101,7 @@ Login GUI
     Input Password  ${xpath_login_password_input}  ${password}
     Wait Until Element Is Enabled  ${xpath_login_button}
     Click Element  ${xpath_login_button}
-    Wait Until Page Contains  Overview  timeout=60s
+    Wait Until Page Contains  Operations  timeout=60s
     Wait Until Element Is Not Visible
     ...  ${xpath_page_loading_progress_bar}  timeout=120s
 
@@ -226,32 +226,59 @@ Navigate To Server Power Page
 
 Power Off Server
     [Documentation]  Powering off server.
-    Navigate To Server Power Page
-    ${present}=    Run Keyword And Return Status
-    ...  Element Should Be Visible    ${xpath_power_shutdown}
-    IF  ${present}
-      Click Element  ${xpath_power_shutdown}
-      Click Button  ${xpath_confirm}
-      Wait Until Element Is Visible  ${xpath_power_poweron}  timeout=60
-      Click Element  ${xpath_close_information_message}
+
+    ${boot_state}  ${host_state}=  Redfish Get Boot Progress
+    IF  '${host_state}' == 'Disabled'
+        Log To Console    Server is already powered Off.
     ELSE
-      Log To console    Server is already powered Off.
+        Navigate To Server Power Page
+        Wait And Click Element  ${xpath_power_shutdown}
+        Click Button  ${xpath_confirm}
+        Wait Until Element Is Visible  ${xpath_power_poweron}  timeout=60
+        Verify And Close Information Message Via GUI
+        Wait Until Keyword Succeeds  5m  30s  Check Boot Progress State Via Redfish  None  Disabled
     END
 
 
 Power On Server
     [Documentation]  Powering on server.
 
-    Navigate To Server Power Page
-    ${present}=    Run Keyword And Return Status
-    ...  Element Should Be Visible    ${xpath_power_power_on}
-    IF  (${present})
-      Click Element  ${xpath_power_power_on}
-      Wait Until Element Is Visible  ${xpath_power_shutdown}  timeout=60
-      Click Element  ${xpath_close_information_message}
+    ${boot_state}  ${host_state}=  Redfish Get Boot Progress
+    IF  '${boot_state}' == 'OSRunning'
+        Log To Console    Server is already powered On.
     ELSE
-      Log To console    Server is already powered On.
+        Set BIOS Attribute    pvm_stop_at_standby    Disabled
+        Navigate To Server Power Page
+        Wait And Click Element  ${xpath_power_power_on}
+        Wait Until Element Is Visible  ${xpath_power_shutdown}  timeout=60s
+        Verify And Close Information Message Via GUI
+        Wait Until Keyword Succeeds  10m  45s  Check Boot Progress State Via Redfish  OSRunning  Enabled
     END
+
+
+Check Boot Progress State Via Redfish
+    [Documentation]   Checking boot progress state via redfish.
+    [Arguments]  ${expected_boot_state}  ${expected_host_state}
+
+    # Description of argument(s):
+    # expected_boot_state      Expected Boot states are "OSRunning" and "None".
+    # expected_host_state      Expected Host states are "Enabled" and "Disabled"
+
+    ${boot_state}  ${host_state}=  Redfish Get Boot Progress
+    Log To Console  Current boot state: ${boot_state}, host state: ${host_state}
+
+    Should Be Equal As Strings  ${boot_state}  ${expected_boot_state}
+    ...  msg=Boot state mismatch: expected '${expected_boot_state}', got '${boot_state}'
+    Should Be Equal As Strings  ${host_state}  ${expected_host_state}
+    ...  msg=Host state mismatch: expected '${expected_host_state}', got '${host_state}'
+
+
+Verify And Close Information Message Via GUI
+    [Documentation]  Verify and close Information message via GUI page.
+
+    Wait Until Element Is Visible  ${xpath_close_information_message}  timeout=5s
+    Page Should Contain Element  ${xpath_information_message}
+    Click Element  ${xpath_close_information_message}
 
 
 Reboot Server
