@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79eac2dc_f022bf41",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-10-08T14:18:29Z",
+      "side": 1,
+      "message": "do we need it?",
+      "revId": "21ba4795df7baacec80bc89f4df4ad402c60db64",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4cb8315_57f27f23",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 1246,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-10-08T14:18:29Z",
+      "side": 1,
+      "message": "Can we simpify, I think just one call is good enought to determine whether slaac is enabled or not:\n     @{ipv6_addressorigin_list}  ${ipv6_slaac_addr}\u003d\n     ...  Get Address Origin List And Address For Type  SLAAC  ${1}\n      IF  \"${slaac_value_1}\" \u003d\u003d \"${True}\". Should Contain  ${ipv6_addressorigin_list}  SLAAC. ELSE Should Not Contain  ${ipv6_addressorigin_list}  SLAAC",
+      "revId": "21ba4795df7baacec80bc89f4df4ad402c60db64",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
