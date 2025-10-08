@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41f1f93e_186b612b",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-10-08T12:59:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76663ec3_081c64ed",
+      "revId": "65ffdeae1964e06733392c39d9217431d0874d3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47352ae9_d86cbf41",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-10-08T12:57:50Z",
       "side": 1,
       "message": "Space is inconsistent after Arguments.",
+      "revId": "65ffdeae1964e06733392c39d9217431d0874d3f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8ef1129_31d97504",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-10-08T12:59:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47352ae9_d86cbf41",
       "revId": "65ffdeae1964e06733392c39d9217431d0874d3f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
