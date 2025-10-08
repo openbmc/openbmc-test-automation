@@ -223,18 +223,19 @@ Enable And Verify DHCPv6 Property On Eth1 When DHCPv6 Property Enabled On Eth0
     Set And Verify DHCPv6 Property  Enabled  ${2}
 
 
-Enable And Verify SLAAC Property On Eth1 When SLAAC Property Enabled On Eth0
-    [Documentation]  Enable and verify SLAAC property on Eth1 when SLAAC property enabled on Eth0.
-    [Tags]  Enable_And_Verify_SLAAC_Property_On_Eth1_When_SLAAC_Property_Enabled_On_Eth0
+Verify Enable And Disable SLAAC On Both Interfaces
+    [Documentation]  Verify enable and disable SLAAC on both the interfaces.
+    [Tags]  Verify_Enable_And_Disable_SLAAC_On_Both_Interfaces
     [Setup]  Get The Initial SLAAC Settings
+    [Template]  Set And Verify SLAAC Property On Both Interfaces
     [Teardown]  Run Keywords  Set SLAAC Configuration State And Verify  ${slaac_channel_1}  [${HTTP_OK}]  ${1}
     ...  AND  Set SLAAC Configuration State And Verify  ${slaac_channel_2}  [${HTTP_OK}]  ${2}
 
-    Set SLAAC Configuration State And Verify   ${True}  [${HTTP_OK}]  ${1}
-    Set SLAAC Configuration State And Verify   ${True}  [${HTTP_OK}]  ${2}
-
-    # Check all the addresses and address origins remain intact.
-    Verify All The Addresses Are Intact
+    # slaac_eth0       slaac_eth1
+    ${True}            ${True}
+    ${True}            ${False}
+    ${False}           ${True}
+    ${False}           ${False}
 
 
 Verify Autoconfig Is Present On Ethernet Interface
@@ -369,6 +370,7 @@ Suite Setup Execution
 
     Set Suite variable  ${ethernet_interface}
 
+    # Get initial IPv4 and IPv6 addresses and address origins for eth0.
     ${initial_ipv4_addressorigin_list}  ${initial_ipv4_addr_list}=  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses
     ${initial_ipv6_addressorigin_list}  ${initial_ipv6_addr_list}=  Get Address Origin List And IPv4 or IPv6 Address  IPv6Addresses
 
@@ -376,6 +378,16 @@ Suite Setup Execution
     Set Suite Variable   ${initial_ipv4_addr_list}
     Set Suite Variable   ${initial_ipv6_addressorigin_list}
     Set Suite Variable   ${initial_ipv6_addr_list}
+
+    # Get initial IPv4 and IPv6 addresses and address origins for eth1.
+    ${eth1_initial_ipv4_addressorigin_list}  ${eth1_initial_ipv4_addr_list}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses  ${2}
+    ${eth1_initial_ipv6_addressorigin_list}  ${eth1_initial_ipv6_addr_list}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv6Addresses  ${2}
+    Set Suite Variable   ${eth1_initial_ipv4_addressorigin_list}
+    Set Suite Variable   ${eth1_initial_ipv4_addr_list}
+    Set Suite Variable   ${eth1_initial_ipv6_addressorigin_list}
+    Set Suite Variable   ${eth1_initial_ipv6_addr_list}
 
 
 Test Setup Execution
@@ -1125,7 +1137,7 @@ Get The Initial DHCPv6 Settings
 Get The Initial SLAAC Settings
     [Documentation]  Get the initial SLAAC settings of both the interfaces.
 
-    Get The Initial SLAAC Setting On Each Interface  ${1}
+    Get The Initial SLAAC Setting On Each Interface   ${1}
     Get The Initial SLAAC Setting On Each Interface   ${2}
 
 
@@ -1148,12 +1160,13 @@ Get The Initial SLAAC Setting On Each Interface
 
 Get Address Origin List And IPv4 or IPv6 Address
     [Documentation]  Get address origin list and address for type.
-    [Arguments]  ${ip_address_type}
+    [Arguments]  ${ip_address_type}  ${channel_number}=${CHANNEL_NUMBER}
 
     # Description of the argument(s):
     # ip_address_type  Type of IPv4 or IPv6 address to be checked.
+    # channel_number   Channel number 1(eth0) or 2(eth1).
 
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${channel_number}']['name']}
     @{ip_addresses}=  Get From Dictionary  ${resp.dict}  ${ip_address_type}
 
     ${ip_addressorigin_list}=  Create List
@@ -1168,21 +1181,26 @@ Get Address Origin List And IPv4 or IPv6 Address
 
 Verify All The Addresses Are Intact
     [Documentation]  Verify all the addresses and address origins remain intact.
+    [Arguments]    ${channel_number}=${CHANNEL_NUMBER}
+    ...  ${initial_ipv4_addressorigin_list}=${initial_ipv4_addressorigin_list}
+    ...  ${initial_ipv4_addr_list}=${initial_ipv4_addr_list}
+
+    # Description of argument(s):
+    # channel_number                   Channel number 1(eth0) or 2(eth1).
+    # initial_ipv4_addressorigin_list  Initial IPv4 address origin list.
+    # initial_ipv4_addr_list           Initial IPv4 address list.
 
     # Verify that it will not impact the IPv4 configuration.
     Sleep  ${NETWORK_TIMEOUT}
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
-    # IPv6 address must be present.
-    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr}=  Get Address Origin List And Address For Type  SLAAC
-    @{ipv6_addressorigin_list}  ${ipv6_linklocal_addr}=  Get Address Origin List And Address For Type  LinkLocal
+    # IPv6 Linklocal address must be present.
+    @{ipv6_addressorigin_list}  ${ipv6_linklocal_addr}=
+    ...  Get Address Origin List And Address For Type  LinkLocal  ${channel_number}
 
-    # IPv4 and IPv6 addresses must remain intact.
-    ${ipv4_addressorigin_list}  ${ipv4_addr_list}=  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses
-    ${ipv6_addressorigin_list}  ${ipv6_addr_list}=  Get Address Origin List And IPv4 or IPv6 Address  IPv6Addresses
-
-    ${ipv6_is_subset}=  Evaluate  set(${initial_ipv6_addr_list}).issubset(set(${ipv6_addr_list}))
-    Should Be True  ${ipv6_is_subset}
+    # IPv4 addresses must remain intact.
+    ${ipv4_addressorigin_list}  ${ipv4_addr_list}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses  ${channel_number}
 
     Should be Equal  ${initial_ipv4_addressorigin_list}  ${ipv4_addressorigin_list}
     Should be Equal  ${initial_ipv4_addr_list}  ${ipv4_addr_list}
@@ -1228,3 +1246,40 @@ Get Interface ID Of IPv6
     END
     ${interface_id}=  Evaluate  ':'.join(${expanded_ip}[-4:])
     RETURN  ${interface_id}
+
+
+Set And Verify SLAAC Property On Both Interfaces
+    [Documentation]  Set and verify SLAAC property on both interfaces.
+    [Arguments]  ${slaac_value_1}  ${slaac_value_2}
+
+    # Description of the argument(s):
+    # slaac_value_1  SLAAC value for channel 1.
+    # slaac_value_2  SLAAC value for channel 2.
+
+    Set SLAAC Configuration State And Verify  ${slaac_value_1}  [${HTTP_OK}]  ${1}
+    Set SLAAC Configuration State And Verify  ${slaac_value_2}  [${HTTP_OK}]  ${2}
+
+    Sleep  30s
+
+    # Check SLAAC Settings for eth0.
+    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv6Addresses  ${1}
+    IF  "${slaac_value_1}" == "${True}"
+         Should Not Be Empty  ${ipv6_slaac_addr}  SLAAC
+    ELSE
+        Should Not Contain  ${ipv6_addressorigin_list}  SLAAC
+    END
+
+    # Check SLAAC Settings for eth1.
+    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv6Addresses  ${2}
+    IF  "${slaac_value_2}" == "${True}"
+         Should Not Be Empty  ${ipv6_slaac_addr}  SLAAC
+    ELSE
+        Should Not Contain  ${ipv6_addressorigin_list}  SLAAC
+    END
+
+    Verify All The Addresses Are Intact  ${1}
+    Verify All The Addresses Are Intact  ${2}
+    ...    ${eth1_initial_ipv4_addressorigin_list}  ${eth1_initial_ipv4_addr_list}
+
