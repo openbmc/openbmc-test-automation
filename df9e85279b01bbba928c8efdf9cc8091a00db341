@@ -16,6 +16,24 @@
       "message": "why to create multiple keywords?\nuse the keyword directly\n\n```\nVerify The Coexistence Of The Address Type  LinkLocal  Static  DHCPv6  SLAAC\n\n```",
       "revId": "df9e85279b01bbba928c8efdf9cc8091a00db341",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ab94e04_52252c90",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 13
+      },
+      "lineNbr": 1232,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-08T09:05:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a7daf00_1711160f",
+      "revId": "df9e85279b01bbba928c8efdf9cc8091a00db341",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
