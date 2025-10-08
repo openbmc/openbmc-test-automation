@@ -125,6 +125,11 @@ class gui_variables:
         "//*[@data-test-id='profileSettings-input-confirmPassword']"
     )
 
+    # Reboot sub menu
+    xpath_reboot_bmc_heading = "//h1[text()='Reboot BMC']"
+    xpath_reboot_bmc_button = "//button[contains(text(),'Reboot BMC')]"
+    xpath_confirm_bmc_reboot = "//*[@class='btn btn-primary']"
+
     # Common variables
     xpath_save_settings_button = "//button[contains(text(),'Save')]"
     xpath_confirm_button = "//button[contains(text(),'Confirm')]"
@@ -143,8 +148,7 @@ class gui_variables:
     xpath_unauthorized_popup = (
         "//*[contains(text(),'Unauthorized')]/following-sibling::button"
     )
+    xpath_information_message = (
+        "//*[contains(text(),'Reload the browser page to get the updated content.')]"
+    )
 
-    # Reboot sub menu
-    xpath_reboot_bmc_heading = "//h1[text()='Reboot BMC']"
-    xpath_reboot_bmc_button = "//button[contains(text(),'Reboot BMC')]"
-    xpath_confirm_bmc_reboot = "//*[@class='btn btn-primary']"
