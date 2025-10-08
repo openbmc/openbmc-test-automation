@@ -91,14 +91,15 @@ Get BMC IPv6 Route Info
 
 Get Address Origin List And Address For Type
     [Documentation]  Get address origin list and address for type.
-    [Arguments]  ${ipv6_address_type}
+    [Arguments]  ${ipv6_address_type}  ${channel_number}=${CHANNEL_NUMBER}
 
     # Description of the argument(s):
     # ipv6_address_type  Type of IPv6 address to be checked.
+    # channel_number      Channel number 1(eth0) or 2(eth1).
 
     ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${channel_number}']['name']}
     @{ipv6_addresses}=  Get From Dictionary  ${resp.dict}  IPv6Addresses
 
     ${ipv6_addressorigin_list}=  Create List
