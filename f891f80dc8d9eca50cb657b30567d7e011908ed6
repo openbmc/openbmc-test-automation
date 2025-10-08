@@ -16,6 +16,24 @@
       "message": "DHCPv6 and SLAAC",
       "revId": "f891f80dc8d9eca50cb657b30567d7e011908ed6",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ef46a79_c82cedb8",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-08T06:07:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8f3782c_d5225bf2",
+      "revId": "f891f80dc8d9eca50cb657b30567d7e011908ed6",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
