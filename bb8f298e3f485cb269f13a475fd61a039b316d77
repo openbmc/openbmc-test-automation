@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "489b011b_d1e809e5",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-09T11:11:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f1ed67e_c288e14e",
+      "revId": "bb8f298e3f485cb269f13a475fd61a039b316d77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "410990c8_64e84de5",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-10-08T15:05:23Z",
       "side": 1,
       "message": "do we need it? where is it used?",
+      "revId": "bb8f298e3f485cb269f13a475fd61a039b316d77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cac2256f_2478a1a6",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 15
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-09T11:11:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "410990c8_64e84de5",
       "revId": "bb8f298e3f485cb269f13a475fd61a039b316d77",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
