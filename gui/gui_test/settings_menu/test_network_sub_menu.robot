@@ -47,8 +47,9 @@ ${xpath_delete_ipv4_addres}              //*[text()='${test_ipv4_addr}']/followi
 ...                                      //*[@title="Delete IPv4 address"]
 ${xpath_delete_button}                   //*[text()="Delete"]
 ${xpath_eth1_interface}                  //*[text()="eth1"]
+${xpath_refresh}                         //button[@id='app-header-refresh']
 ${xpath_linklocalv6}                     //*[text()="LinkLocal"]
-${xpath_eth0_ipv6_autoconfig_button}     (//*[@id="ipv6AutoConfigSwitch"]/following-sibling::label)[1]
+${xpath_eth0_ipv6_autoconfig_button}     (//*[@id="ipv6AutoConfigSwitch"]/following-sibling::label)[${1}]
 ${xpath_eth1_ipv6_autoconfig_button}     (//*[@id="ipv6AutoConfigSwitch"]/following-sibling::label)[2]
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
@@ -337,7 +338,9 @@ Enable AutoConfig On Eth0 And Verify
     Set IPv6 AutoConfig State  Enabled  ${xpath_eth0_ipv6_autoconfig_button}
     @{ipv6_address_origin_list}  ${ipv6_slaac_addr}=
     ...    Get Address Origin List And Address For Type  SLAAC
+    Wait Until Page Contains  ${ipv6_slaac_addr}
     Page Should Contain  ${ipv6_slaac_addr}
+    Wait Until Page Contains  SLAAC
     Page Should Contain   SLAAC
 
 
@@ -346,6 +349,7 @@ Disable AutoConfig On Eth0 And Verify
     [Tags]  Disable_AutoConfig_On_Eth0_And_Verify
 
     Set IPv6 AutoConfig State  Disabled  ${xpath_eth0_ipv6_autoconfig_button}
+    Wait Until Page Does Not Contain    SLAAC
     Page Should Not Contain    SLAAC
 
 
@@ -358,7 +362,9 @@ Enable AutoConfig On Eth1 And Verify
     Set Suite Variable  ${CHANNEL_NUMBER}  2
     @{ipv6_address_origin_list}  ${ipv6_slaac_addr}=
     ...    Get Address Origin List And Address For Type  SLAAC
+    Wait Until Page Contains  ${ipv6_slaac_addr}
     Page Should Contain  ${ipv6_slaac_addr}
+    Wait Until Page Contains  SLAAC
     Page Should Contain   SLAAC
 
 
@@ -367,7 +373,92 @@ Disable AutoConfig On Eth1 And Verify
     [Tags]  Disable_AutoConfig_On_Eth1_And_Verify
 
     Click Element  ${xpath_eth1_interface}
+    Set IPv6 AutoConfig State  Disabled  ${xpath_eth1_ipv6_autoconfig_button} 
+    Wait Until Page Does Not Contain    SLAAC
+    Page Should Not Contain    SLAAC
+
+
+Enable And Verify SLAAC Property On Eth0, Enable It On Eth1 And Verify Eth0
+    [Documentation]  Enable and verify SLAAC property on eth0,
+    ...  enable it on eth1 and verify eth1 and no impact on eth0.
+    [Tags]  Enable_And_Verify_SLAAC_Property_On_Eth0_Enable_It_On_Eth1_And_Verify_Eth0
+
+    Set IPv6 AutoConfig State  Enabled  ${xpath_eth0_ipv6_autoconfig_button}
+    Click Element  ${xpath_eth1_interface}
+    Set IPv6 AutoConfig State  Enabled  ${xpath_eth1_ipv6_autoconfig_button}
+    Click Element  ${xpath_refresh}
+    Sleep  ${NETWORK_TIMEOUT}
+
+    # Verify SLAAC on eth0
+    @{ipv6_address_origin_list}  ${ipv6_slaac_addr}=
+    ...    Get Address Origin List And Address For Type  SLAAC
+    Wait Until Page Contains  ${ipv6_slaac_addr}
+    Page Should Contain  ${ipv6_slaac_addr}
+    Wait Until Page Contains  SLAAC
+    Page Should Contain   SLAAC
+
+
+Enable And Verify SLAAC Property On Eth0 And Eth1, Disable It On Eth0 And Verify Eth1
+    [Documentation]  Enable and verify SLAAC property on eth0 and eth1,
+    ...  disable it on eth0 and verify eth1 is not impacted.
+    [Tags]  Enable_And_Verify_SLAAC_Property_On_Eth0_And_Eth1_Disable_It_On_Eth0_And_Verify_Eth1
+
+    Set IPv6 AutoConfig State  Enabled  ${xpath_eth0_ipv6_autoconfig_button}
+    Click Element  ${xpath_eth1_interface}
+    Set IPv6 AutoConfig State  Enabled  ${xpath_eth1_ipv6_autoconfig_button}
+    Click Element  ${xpath_refresh}
+    Sleep  ${NETWORK_TIMEOUT}
+    Set IPv6 AutoConfig State  Disabled  ${xpath_eth0_ipv6_autoconfig_button}
+    Click Element  ${xpath_eth1_interface}
+
+    # Verify SLAAC on eth1 after disabling eth0
+    Set Suite Variable  ${CHANNEL_NUMBER}  2
+    @{ipv6_address_origin_list}  ${ipv6_slaac_addr}=
+    ...    Get Address Origin List And Address For Type  SLAAC
+    Wait Until Page Contains  ${ipv6_slaac_addr}
+    Page Should Contain  ${ipv6_slaac_addr}
+    Wait Until Page Contains  SLAAC
+    Page Should Contain   SLAAC
+
+
+Enable And Verify SLAAC Property On Eth0 And Eth1, Disable It On Eth1 And Verify Eth0
+    [Documentation]  Enable and verify SLAAC property on eth0 and eth1,
+    ...  disable it on eth1 and verify eth0 is not impacted.   
+    [Tags]  Enable_And_Verify_SLAAC_Property_On_Eth0_And_Eth1_Disable_It_On_Eth1_And_Verify_Eth0
+
+    Set IPv6 AutoConfig State  Enabled  ${xpath_eth0_ipv6_autoconfig_button}
+    Click Element  ${xpath_eth1_interface}
+    Set IPv6 AutoConfig State  Enabled  ${xpath_eth1_ipv6_autoconfig_button}
     Set IPv6 AutoConfig State  Disabled  ${xpath_eth1_ipv6_autoconfig_button}
+    Click Element  ${xpath_refresh}
+    Sleep  ${NETWORK_TIMEOUT}
+
+    # Verify SLAAC on eth0 after disabling eth1
+    @{ipv6_address_origin_list}  ${ipv6_slaac_addr}=
+    ...    Get Address Origin List And Address For Type  SLAAC
+    Wait Until Page Contains  ${ipv6_slaac_addr}
+    Page Should Contain  ${ipv6_slaac_addr}
+    Wait Until Page Contains  SLAAC
+    Page Should Contain   SLAAC
+
+
+Enable And Verify SLAAC Property On Eth0 And Eth1, Disable It On Both Eth0,Eth1 And Verify
+    [Documentation]  Enable and verify SLAAC property on eth0 and eth1,
+    ...  disable it on eth0,eth1 and verify.   
+    [Tags]  Enable_And_Verify_SLAAC_Property_On_Eth0_And_Eth1_Disable_It_On_Both_Eth0_Eth1_And_Verify
+    
+    Set IPv6 AutoConfig State  Enabled  ${xpath_eth0_ipv6_autoconfig_button}
+    Click Element  ${xpath_eth1_interface}
+    Set IPv6 AutoConfig State  Enabled  ${xpath_eth1_ipv6_autoconfig_button}
+
+    # Verify SLAAC is disconfigured on both eth0 and eth1 after disabling 
+    Set IPv6 AutoConfig State  Disabled  ${xpath_eth1_ipv6_autoconfig_button}
+    Wait Until Page Does Not Contain    SLAAC
+    Page Should Not Contain    SLAAC
+    Click Element  ${xpath_refresh}
+    Sleep  ${NETWORK_TIMEOUT}
+    Set IPv6 AutoConfig State  Disabled  ${xpath_eth0_ipv6_autoconfig_button}
+    Wait Until Page Does Not Contain    SLAAC
     Page Should Not Contain    SLAAC
 
 
@@ -639,18 +730,23 @@ Set IPv6 AutoConfig State
 
     IF    '${desired_autoconfig_state}' == '${current_autoconfig_state}'
         # Already in desired state, reset by toggling twice
+        Wait Until Element Is Enabled  ${xpath_ipv6_autoconfig_button}  timeout=60s
         Click Element  ${xpath_ipv6_autoconfig_button}
         Wait Until Element Is Not Visible
         ...  ${xpath_page_loading_progress_bar}  timeout=120s
+        Wait Until Element Is Enabled  ${xpath_ipv6_autoconfig_button}  timeout=60s
         Click Element  ${xpath_ipv6_autoconfig_button}
         Wait Until Element Is Not Visible
         ...  ${xpath_page_loading_progress_bar}  timeout=120s
-        Element Text Should Be  ${xpath_ipv6_autoconfig_button}
-        ...  ${desired_autoconfig_state}  timeout=60s
+        Wait Until Keyword Succeeds  2 min  30 sec
+        ...  Element Text Should Be  ${xpath_ipv6_autoconfig_button}
+        ...  ${desired_autoconfig_state}
     ELSE IF    '${desired_autoconfig_state}' != '${current_autoconfig_state}'
+        Wait Until Element Is Enabled  ${xpath_ipv6_autoconfig_button}  timeout=60s
         Click Element  ${xpath_ipv6_autoconfig_button}
         Wait Until Element Is Not Visible
         ...  ${xpath_page_loading_progress_bar}  timeout=120s
-        Element Text Should Be  ${xpath_ipv6_autoconfig_button}
-        ...  ${desired_autoconfig_state}  timeout=60s
+        Wait Until Keyword Succeeds  2 min  30 sec
+        ...  Element Text Should Be  ${xpath_ipv6_autoconfig_button}
+        ...  ${desired_autoconfig_state}
     END
