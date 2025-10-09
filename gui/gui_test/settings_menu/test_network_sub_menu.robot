@@ -427,6 +427,21 @@ Enable SLAAC On Both Interfaces, Disable It On Both And Verify
     Wait Until Page Does Not Contain    SLAAC
 
 
+Configure IPv6 Address ETH0, Verify Persistency Of Static IPv6 On BMC Reboot
+    [Documentation]  Add Static IPv6 Address And Verify Persistency Of Static IPv6 On BMC Reboot.
+    [Tags]  Configure_IPv6_Address_eth0_Verify_Persistency_Of_Static_IPv6_On_BMC_Reboot
+
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}    ${test_prefix_length}  Success
+    Verify Persistency Of IPv6 On BMC Reboot  eth0  Static
+
+Verify Persistency Of LinkLocal IPv6 On BMC Reboot For Both Interfaces
+    [Documentation]  Verify Persistency Of LinkLocal IPv6 On BMC Reboot For Both Interfaces.
+    [Tags]  Verify_Persistency_Of_LinkLocal_IPv6_On_BMC_Reboot_For_Both_Interfaces
+
+    Verify Persistency Of IPv6 On BMC Reboot  eth0  LinkLocal
+    Verify Persistency Of IPv6 On BMC Reboot  eth1  LinkLocal
+
+
 
 *** Keywords ***
 
@@ -731,3 +746,42 @@ Verify SLAAC Address On Autoconfig Enable
     ...    Get Address Origin List And Address For Type  SLAAC
     Wait Until Page Contains  ${ipv6_slaac_addr}
     Wait Until Page Contains  SLAAC
+
+
+Verify Persistency Of IPv6 On BMC Reboot
+    [Documentation]  Verify IPv6 persistency on BMC reboot for the specified interface.
+    [Arguments]  ${interface}  ${ipv6_type}
+
+    # Description of argument(s):
+    # ${interface}  eth0 or eth1
+    # ${ipv6_type}  slaac/linklocal/static
+
+    IF  '${interface}' == 'eth0'
+        # Capture IPv6 addresses before reboot.
+        @{ipv6_address_origin_list}  ${addr_before_reboot}=
+        ...  Get Address Origin List And Address For Type  ${ipv6_type}
+
+        Reboot BMC via GUI
+
+        # Capture IPv6 addresses after reboot.
+        @{ipv6_address_origin_list}  ${addr_after_reboot}=
+        ...  Get Address Origin List And Address For Type  ${ipv6_type}
+
+        # Verify IPv6 addresses are the same before and after reboot.
+        Should Be Equal    ${addr_before_reboot}    ${addr_after_reboot}
+    ELSE IF  '${interface}' == 'eth1'
+        # Capture IPv6 addresses before reboot.
+        Set Suite Variable  ${CHANNEL_NUMBER}  2
+        @{ipv6_address_origin_list}  ${addr_before_reboot}=
+        ...  Get Address Origin List And Address For Type  ${ipv6_type}
+
+        Reboot BMC via GUI
+
+        # Capture IPv6 addresses after reboot.
+        Set Suite Variable  ${CHANNEL_NUMBER}  2
+        @{ipv6_address_origin_list}  ${addr_after_reboot}=
+        ...  Get Address Origin List And Address For Type  ${ipv6_type}
+
+        # Verify IPv6 addresses are the same before and after reboot.
+        Should Be Equal    ${addr_before_reboot}    ${addr_after_reboot}
+    END
