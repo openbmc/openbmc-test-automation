@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20b995ce_f3713b81",
+        "filename": "lib/gen_misc.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-10-09T18:06:25Z",
+      "side": 1,
+      "message": "0-4-0 is kind of a magic sequence here.  Is there something better we can do to make this understandable?",
+      "range": {
+        "startLine": 459,
+        "startChar": 28,
+        "endLine": 459,
+        "endChar": 37
+      },
+      "revId": "f871d85c817129768fd403206fca99d2a7f6756a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81adcb96_47578c3a",
+        "filename": "lib/gen_misc.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2025-10-09T18:06:25Z",
+      "side": 1,
+      "message": "should we put this blob into a separate function that can be used by the other file also?",
+      "range": {
+        "startLine": 454,
+        "startChar": 0,
+        "endLine": 459,
+        "endChar": 37
+      },
+      "revId": "f871d85c817129768fd403206fca99d2a7f6756a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
