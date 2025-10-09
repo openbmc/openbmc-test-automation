@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d24b6aa0_9b688bf4",
+        "filename": "lib/gen_misc.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-10-09T19:33:07Z",
+      "side": 1,
+      "message": "There was a bug earlier returning 0.0.0.0 by default for the local host. Now, with the above change, suggest + your changes, it would return 127.0.0.1. \n\nPlease change the above line suggested and give a quick run from your end.. \n\nI ran on local setup, and it looks good. Thanks",
+      "parentUuid": "d03ea961_5556cf79",
+      "revId": "f871d85c817129768fd403206fca99d2a7f6756a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20b995ce_f3713b81",
         "filename": "lib/gen_misc.py",
         "patchSetId": 2
