@@ -337,8 +337,8 @@ Enable AutoConfig On Eth0 And Verify
     Set IPv6 AutoConfig State  Enabled  ${xpath_eth0_ipv6_autoconfig_button}
     @{ipv6_address_origin_list}  ${ipv6_slaac_addr}=
     ...    Get Address Origin List And Address For Type  SLAAC
-    Page Should Contain  ${ipv6_slaac_addr}
-    Page Should Contain   SLAAC
+    Wait Until Page Contains  ${ipv6_slaac_addr}
+    Wait Until Page Contains  SLAAC
 
 
 Disable AutoConfig On Eth0 And Verify
@@ -346,7 +346,7 @@ Disable AutoConfig On Eth0 And Verify
     [Tags]  Disable_AutoConfig_On_Eth0_And_Verify
 
     Set IPv6 AutoConfig State  Disabled  ${xpath_eth0_ipv6_autoconfig_button}
-    Page Should Not Contain    SLAAC
+    Wait Until Page Does Not Contain    SLAAC
 
 
 Enable AutoConfig On Eth1 And Verify
@@ -358,8 +358,8 @@ Enable AutoConfig On Eth1 And Verify
     Set Suite Variable  ${CHANNEL_NUMBER}  2
     @{ipv6_address_origin_list}  ${ipv6_slaac_addr}=
     ...    Get Address Origin List And Address For Type  SLAAC
-    Page Should Contain  ${ipv6_slaac_addr}
-    Page Should Contain   SLAAC
+    Wait Until Page Contains  ${ipv6_slaac_addr}
+    Wait Until Page Contains  SLAAC
 
 
 Disable AutoConfig On Eth1 And Verify
@@ -368,7 +368,78 @@ Disable AutoConfig On Eth1 And Verify
 
     Click Element  ${xpath_eth1_interface}
     Set IPv6 AutoConfig State  Disabled  ${xpath_eth1_ipv6_autoconfig_button}
-    Page Should Not Contain    SLAAC
+    Wait Until Page Does Not Contain    SLAAC
+
+
+Enable SLAAC On Both Interfaces And Verify Eth0
+    [Documentation]  Enable SLAAC on eth0, then on eth1, verify eth0 is not impacted.
+    [Tags]  Enable_SLAAC_On_Both_Interfaces_And_Verify_Eth0
+
+    Set SLAAC Property On Eth0 And Eth1  Enabled
+    Click Element  ${xpath_refresh_button}
+    Wait Until Element Is Not Visible
+    ...  ${xpath_page_loading_progress_bar}  timeout=120s
+
+    # Verify SLAAC on eth0
+    @{ipv6_address_origin_list}  ${ipv6_slaac_addr}=
+    ...    Get Address Origin List And Address For Type  SLAAC
+    Wait Until Page Contains  ${ipv6_slaac_addr}
+    Wait Until Page Contains  SLAAC
+
+
+Enable SLAAC On Both Interfaces, Disable It On Eth0 And Verify Eth1
+    [Documentation]  Enable and verify SLAAC property on eth0 and eth1,
+    ...  disable it on eth0 and verify eth1 is not impacted.
+    [Tags]  Enable_SLAAC_On_Both_Interfaces_Disable_It_On_Eth0_And_Verify_Eth1
+
+    Set SLAAC Property On Eth0 And Eth1  Enabled
+    Click Element  ${xpath_refresh_button}
+    Wait Until Element Is Not Visible
+    ...  ${xpath_page_loading_progress_bar}  timeout=120s
+    Set IPv6 AutoConfig State  Disabled  ${xpath_eth0_ipv6_autoconfig_button}
+    Click Element  ${xpath_eth1_interface}
+
+    # Verify SLAAC on eth1 after disabling eth0
+    Set Suite Variable  ${CHANNEL_NUMBER}  2
+    @{ipv6_address_origin_list}  ${ipv6_slaac_addr}=
+    ...    Get Address Origin List And Address For Type  SLAAC
+    Wait Until Page Contains  ${ipv6_slaac_addr}
+    Wait Until Page Contains  SLAAC
+
+
+Enable SLAAC On Both Interfaces, Disable It On Eth1 And Verify Eth0
+    [Documentation]  Enable and verify SLAAC property on eth0 and eth1,
+    ...  disable it on eth1 and verify eth0 is not impacted.
+    [Tags]  Enable_SLAAC_On_Both_Interfaces_Disable_It_On_Eth1_And_Verify_Eth0
+
+    Set SLAAC Property On Eth0 And Eth1  Enabled
+    Set IPv6 AutoConfig State  Disabled  ${xpath_eth1_ipv6_autoconfig_button}
+    Click Element  ${xpath_refresh_button}
+    Wait Until Element Is Not Visible
+    ...  ${xpath_page_loading_progress_bar}  timeout=120s
+
+    # Verify SLAAC on eth0 after disabling eth1
+    @{ipv6_address_origin_list}  ${ipv6_slaac_addr}=
+    ...    Get Address Origin List And Address For Type  SLAAC
+    Wait Until Page Contains  ${ipv6_slaac_addr}
+    Wait Until Page Contains  SLAAC
+
+
+Enable SLAAC On Both Interfaces, Disable It On Both And Verify
+    [Documentation]  Enable and verify SLAAC property on eth0 and eth1,
+    ...  disable it on eth0,eth1 and verify.
+    [Tags]  Enable_SLAAC_On_Both_Interfaces_Disable_It_On_Both_And_Verify
+
+    Set SLAAC Property On Eth0 And Eth1  Enabled
+
+    # Verify SLAAC is disconfigured on both eth0 and eth1 after disabling
+    Set IPv6 AutoConfig State  Disabled  ${xpath_eth1_ipv6_autoconfig_button}
+    Wait Until Page Does Not Contain    SLAAC
+    Click Element  ${xpath_refresh_button}
+    Wait Until Element Is Not Visible
+    ...  ${xpath_page_loading_progress_bar}  timeout=120s
+    Set IPv6 AutoConfig State  Disabled  ${xpath_eth0_ipv6_autoconfig_button}
+    Wait Until Page Does Not Contain    SLAAC
 
 
 
@@ -639,18 +710,31 @@ Set IPv6 AutoConfig State
 
     IF    '${desired_autoconfig_state}' == '${current_autoconfig_state}'
         # Already in desired state, reset by toggling twice
+        Wait Until Element Is Enabled  ${xpath_ipv6_autoconfig_button}  timeout=60s
         Click Element  ${xpath_ipv6_autoconfig_button}
         Wait Until Element Is Not Visible
         ...  ${xpath_page_loading_progress_bar}  timeout=120s
+        Wait Until Element Is Enabled  ${xpath_ipv6_autoconfig_button}  timeout=60s
         Click Element  ${xpath_ipv6_autoconfig_button}
         Wait Until Element Is Not Visible
         ...  ${xpath_page_loading_progress_bar}  timeout=120s
-        Element Text Should Be  ${xpath_ipv6_autoconfig_button}
-        ...  ${desired_autoconfig_state}  timeout=60s
     ELSE IF    '${desired_autoconfig_state}' != '${current_autoconfig_state}'
+        Wait Until Element Is Enabled  ${xpath_ipv6_autoconfig_button}  timeout=60s
         Click Element  ${xpath_ipv6_autoconfig_button}
         Wait Until Element Is Not Visible
         ...  ${xpath_page_loading_progress_bar}  timeout=120s
-        Element Text Should Be  ${xpath_ipv6_autoconfig_button}
-        ...  ${desired_autoconfig_state}  timeout=60s
     END
+    Wait Until Keyword Succeeds  2 min  30 sec
+    ...  Element Text Should Be  ${xpath_ipv6_autoconfig_button}
+    ...  ${desired_autoconfig_state}
+
+Set SLAAC Property On Eth0 And Eth1
+    [Documentation]  Enable or Disable and verify slaac on both interfaces.
+    [Arguments]  ${State}=Enabled
+
+    # Description of argument(s):
+    # ${State}  Enabled or Disabled on both interfaces
+
+    Set IPv6 AutoConfig State  ${State}  ${xpath_eth0_ipv6_autoconfig_button}
+    Click Element  ${xpath_eth1_interface}
+    Set IPv6 AutoConfig State  ${State}  ${xpath_eth1_ipv6_autoconfig_button}
