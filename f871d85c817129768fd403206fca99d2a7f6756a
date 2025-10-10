@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "24c01e17_6a95d1e4",
+        "filename": "lib/gen_misc.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2025-10-10T08:41:15Z",
+      "side": 1,
+      "message": "@gkeishin@gmail.com thank you for checking into this.\n\nI checked into this. Sometimes, the function receives an empty string (\"\") as the host. dft() uses default only if the argument (host in this case) is NULL, so for \"\" it returns \"\".\nThe old code returned 0.0.0.0 for \"\":\n```\n\u003e\u003e\u003e socket.gethostbyname(\u0027\u0027)\n\u00270.0.0.0\u0027\n```\n\nThe new one throws an exeption:\n```\n\u003e\u003e\u003e socket.getaddrinfo(\u0027\u0027, 443, proto\u003dsocket.IPPROTO_TCP)\nTraceback (most recent call last):\n  File \"\u003cstdin\u003e\", line 1, in \u003cmodule\u003e\n  File \"/usr/local/fbcode/platform010/lib/python3.12/socket.py\", line 978, in getaddrinfo\n    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsocket.gaierror: [Errno -2] Name or service not known\n```\n\nOn the other hand, using `host \u003d socket.gethostname()` will break code that passes host to the function.\n\nSo, what I\u0027m going to do is to change this to:\n```\nif not host:\n    host \u003d socket.gethostname()\n```\n\nthis will cover both cases - NULL and \"\".",
+      "parentUuid": "d24b6aa0_9b688bf4",
+      "revId": "f871d85c817129768fd403206fca99d2a7f6756a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20b995ce_f3713b81",
         "filename": "lib/gen_misc.py",
         "patchSetId": 2
@@ -140,6 +158,54 @@
       "range": {
         "startLine": 459,
         "startChar": 28,
+        "endLine": 459,
+        "endChar": 37
+      },
+      "revId": "f871d85c817129768fd403206fca99d2a7f6756a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a766aa0_64bade92",
+        "filename": "lib/gen_misc.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2025-10-10T08:41:15Z",
+      "side": 1,
+      "message": "It is. I will put a comment with example of output, so reader will understand the numbers.",
+      "parentUuid": "2c98fed7_ac74e7f9",
+      "range": {
+        "startLine": 459,
+        "startChar": 28,
+        "endLine": 459,
+        "endChar": 37
+      },
+      "revId": "f871d85c817129768fd403206fca99d2a7f6756a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2d4fc93_35e220ae",
+        "filename": "lib/gen_misc.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2025-10-10T08:41:15Z",
+      "side": 1,
+      "message": "It\u0027s a one liner, so I don\u0027t see a lot of value, though I will move this to make it reusable.",
+      "parentUuid": "ca7dc198_11535b95",
+      "range": {
+        "startLine": 454,
+        "startChar": 0,
         "endLine": 459,
         "endChar": 37
       },
