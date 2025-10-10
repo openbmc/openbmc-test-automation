@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2953e471_64c3f19d",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-10T07:32:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1dae866_735a98f5",
+      "revId": "f607537e85f4050a864ef869983943c6ef9ec0bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b031172_05aaa38b",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-10-10T06:22:03Z",
       "side": 1,
       "message": "same as above comment",
+      "revId": "f607537e85f4050a864ef869983943c6ef9ec0bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ab0e96c_db806a85",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-10T07:32:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b031172_05aaa38b",
       "revId": "f607537e85f4050a864ef869983943c6ef9ec0bd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed65a077_572b3b34",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-10T07:32:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54a7c5f3_3069a107",
+      "revId": "f607537e85f4050a864ef869983943c6ef9ec0bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "095f71c5_d9730bff",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-10-10T06:22:03Z",
       "side": 1,
       "message": "As this is GUI code instead of Sleep use Wait Until Keyword",
+      "revId": "f607537e85f4050a864ef869983943c6ef9ec0bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "275b5538_a7f813f3",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-10T07:32:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "095f71c5_d9730bff",
       "revId": "f607537e85f4050a864ef869983943c6ef9ec0bd",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -86,6 +158,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e68d4a7_d2ff12da",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-10T07:32:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "798803c1_4200a4f7",
+      "revId": "f607537e85f4050a864ef869983943c6ef9ec0bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b132fdc_055b11bb",
@@ -103,6 +193,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9df4444_2ea0d321",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-10T07:32:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b132fdc_055b11bb",
+      "revId": "f607537e85f4050a864ef869983943c6ef9ec0bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c18ceed8_69c80d09",
@@ -116,6 +224,30 @@
       "writtenOn": "2025-10-10T06:21:52Z",
       "side": 1,
       "message": "you can consider passing another argument so it can be for future test cases as well\n${state}  Enabled/ Disabled\n\nSet IPv6 AutoConfig State  ${state}  ${xpath_eth0_ipv6_autoconfig_button}\nClick Element  ${xpath_eth1_interface}\nSet IPv6 AutoConfig State  ${state}  ${xpath_eth1_ipv6_autoconfig_button}",
+      "range": {
+        "startLine": 746,
+        "startChar": 5,
+        "endLine": 746,
+        "endChar": 56
+      },
+      "revId": "f607537e85f4050a864ef869983943c6ef9ec0bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13f394f3_e4dd0079",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-10T07:32:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c18ceed8_69c80d09",
       "range": {
         "startLine": 746,
         "startChar": 5,
