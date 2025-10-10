@@ -3,6 +3,91 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1dae866_735a98f5",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-10T06:22:03Z",
+      "side": 1,
+      "message": "If you are using \"Wait Until Page Contains  ${ipv6_slaac_addr}\" then why you need this \"Page Should Contain  ${ipv6_slaac_addr}\"",
+      "revId": "f607537e85f4050a864ef869983943c6ef9ec0bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b031172_05aaa38b",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-10T06:22:03Z",
+      "side": 1,
+      "message": "same as above comment",
+      "revId": "f607537e85f4050a864ef869983943c6ef9ec0bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54a7c5f3_3069a107",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-10T06:22:03Z",
+      "side": 1,
+      "message": "As this is GUI code instead of Sleep use Wait Until Keyword",
+      "revId": "f607537e85f4050a864ef869983943c6ef9ec0bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "095f71c5_d9730bff",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-10T06:22:03Z",
+      "side": 1,
+      "message": "As this is GUI code instead of Sleep use Wait Until Keyword",
+      "revId": "f607537e85f4050a864ef869983943c6ef9ec0bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "798803c1_4200a4f7",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-10T06:22:03Z",
+      "side": 1,
+      "message": "Is it required to check 2 times?",
+      "revId": "f607537e85f4050a864ef869983943c6ef9ec0bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c18ceed8_69c80d09",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 4
