@@ -88,6 +88,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b132fdc_055b11bb",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-10T06:25:53Z",
+      "side": 1,
+      "message": "Bring these lines outside the loop as this verification is same for both disable \u0026 enable.\n\nWait Until Keyword Succeeds  2 min  30 sec\n        ...  Element Text Should Be  ${xpath_ipv6_autoconfig_button}\n        ...  ${desired_autoconfig_state}",
+      "revId": "f607537e85f4050a864ef869983943c6ef9ec0bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c18ceed8_69c80d09",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 4
