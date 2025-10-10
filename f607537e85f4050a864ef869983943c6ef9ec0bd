@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c18ceed8_69c80d09",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-10T06:21:52Z",
+      "side": 1,
+      "message": "you can consider passing another argument so it can be for future test cases as well\n${state}  Enabled/ Disabled\n\nSet IPv6 AutoConfig State  ${state}  ${xpath_eth0_ipv6_autoconfig_button}\nClick Element  ${xpath_eth1_interface}\nSet IPv6 AutoConfig State  ${state}  ${xpath_eth1_ipv6_autoconfig_button}",
+      "range": {
+        "startLine": 746,
+        "startChar": 5,
+        "endLine": 746,
+        "endChar": 56
+      },
+      "revId": "f607537e85f4050a864ef869983943c6ef9ec0bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
