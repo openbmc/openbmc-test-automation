@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a51bf60_a605bfb8",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1249,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-10-10T04:55:54Z",
+      "side": 1,
+      "message": "already have info from ;line 1246.\nget details outside if body only once then useit",
+      "revId": "72e2227149aa43135832efc9c884b52faa710ffe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
