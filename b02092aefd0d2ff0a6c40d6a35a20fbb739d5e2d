@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9940b4cf_cea6b9bd",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-10T09:35:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f0910aa_5d5d7872",
+      "revId": "b02092aefd0d2ff0a6c40d6a35a20fbb739d5e2d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "904c54eb_b8081be0",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "524935ab_5ad89f5c",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-10T09:35:47Z",
+      "side": 1,
+      "message": "Iam trying to verify Ipv6 and SLAAC text aswell on the page.",
+      "parentUuid": "904c54eb_b8081be0",
+      "revId": "b02092aefd0d2ff0a6c40d6a35a20fbb739d5e2d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf6d3613_7b05f8ac",
@@ -48,6 +84,24 @@
       "writtenOn": "2025-10-10T08:40:37Z",
       "side": 1,
       "message": "Suggestion : Set SLAAC Property On Eth0 And Eth1",
+      "revId": "b02092aefd0d2ff0a6c40d6a35a20fbb739d5e2d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6f38795_625557df",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-10T09:35:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf6d3613_7b05f8ac",
       "revId": "b02092aefd0d2ff0a6c40d6a35a20fbb739d5e2d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
