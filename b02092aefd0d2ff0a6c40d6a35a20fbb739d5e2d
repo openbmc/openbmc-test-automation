@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7f0910aa_5d5d7872",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-10T08:45:15Z",
+      "side": 1,
+      "message": "suggestion try to use same xpath which is already available in /gui/data\n/gui_variables.py\nxpath_refresh_button \u003d \"//*[@data-test-id\u003d\u0027appHeader-button-refresh\u0027]\"",
+      "revId": "b02092aefd0d2ff0a6c40d6a35a20fbb739d5e2d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "904c54eb_b8081be0",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 5
