@@ -392,6 +392,34 @@ Configure IPv6 With Leading Zeros And Verify
     ...    ${ipv6_leading_zero}  ${test_prefix_length}  ${ipv6_eliminate_zero}
 
 
+Verify Link Local Address Be Always There On BMC
+    [Documentation]  Verify link local address be always there on BMC.
+    [Tags]   Verify_Link_Local_Address_Be_Always_There_On_BMC
+
+    # Verify link local.
+    @{ipv6_address_origin_list}  ${ipv6_link_local_addr}=
+    ...    Get Address Origin List And Address For Type  LinkLocal
+
+    Should Match Regexp  ${ipv6_link_local_addr}  ${linklocal_addr_format}
+
+    # Rebooting BMC.
+    Redfish OBMC Reboot (off)  stack_mode=skip
+
+    Redfish Power Off  stack_mode=skip
+    Redfish Power On
+
+    # Modify MAC address of ethernet interface.
+    Configure MAC Settings  ${new_mac_addr}
+    Sleep  30s
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+    # Verify link local.
+    @{ipv6_address_origin_list}  ${ipv6_link_local_addr}=
+    ...    Get Address Origin List And Address For Type  LinkLocal
+
+    Should Match Regexp  ${ipv6_link_local_addr}  ${linklocal_addr_format}
+
+
 *** Keywords ***
 
 Suite Setup Execution
