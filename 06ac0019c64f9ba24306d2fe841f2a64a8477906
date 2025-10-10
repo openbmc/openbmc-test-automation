@@ -138,6 +138,24 @@
       "message": "Someone from AMI should be able add you to their approved Gerrit list so CI runs automatically",
       "revId": "06ac0019c64f9ba24306d2fe841f2a64a8477906",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07f97752_dc4089b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2025-10-10T14:10:38Z",
+      "side": 1,
+      "message": "It is a group in Gerrit most likely called ami/ci-authorized, controlled by a group most likely called ami/ci-authorized-owners. I don\u0027t have permission to see who is in either of those groups but folks at AMI should control it.",
+      "parentUuid": "8274ba82_96d071eb",
+      "revId": "06ac0019c64f9ba24306d2fe841f2a64a8477906",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
