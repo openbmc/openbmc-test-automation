@@ -338,6 +338,15 @@ Verify Coexistence Of Link Local And SLAAC On BMC
     Check Coexistence Of Link Local And SLAAC
 
 
+Verify Link Local Address Be Always There On BMC
+    [Documentation]  Verify link local address be always there on BMC.
+    [Tags]  Verify_Link_Local_Address_Be_Always_There_On_BMC
+
+    @{ipv6_address_origin_list}  ${ipv6_link_local_addr}=  Get Address Origin List And Address For Type  LinkLocal
+
+    Should Match Regexp  ${ipv6_link_local_addr}        ${linklocal_addr_format}
+
+
 *** Keywords ***
 
 Suite Setup Execution
