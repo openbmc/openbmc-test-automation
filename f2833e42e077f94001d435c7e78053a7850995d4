@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc138b54_5ff96c33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2025-10-10T04:31:44Z",
+      "side": 1,
+      "message": "Few comments, please help to address.",
+      "revId": "f2833e42e077f94001d435c7e78053a7850995d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54a618ac_fb066f2f",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2025-10-10T04:31:44Z",
+      "side": 1,
+      "message": "Args missing for ${expected_boot_state} and ${expected_host_state}.",
+      "revId": "f2833e42e077f94001d435c7e78053a7850995d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b72816e9_9d12348d",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2025-10-10T04:31:44Z",
+      "side": 1,
+      "message": "See if we can refractor the keyword name.\nSuggestion: Verify And Close Information Message Via GUI",
+      "revId": "f2833e42e077f94001d435c7e78053a7850995d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfc668a2_87ebb5bf",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2025-10-10T04:31:44Z",
+      "side": 1,
+      "message": "Can we store this text \"Reload the browser page to get the updated content.\" under common file along with variable.",
+      "revId": "f2833e42e077f94001d435c7e78053a7850995d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b570f053_31b5688d",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2025-10-10T04:31:44Z",
+      "side": 1,
+      "message": "Can we use Wait And Click Element here.",
+      "revId": "f2833e42e077f94001d435c7e78053a7850995d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
