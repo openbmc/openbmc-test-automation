@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4ed6b3c_abe8f4de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2025-10-10T11:20:16Z",
+      "side": 1,
+      "message": "Some cosmetics changes. Please help address.",
+      "revId": "d69c97e85e1ad3386b7805d27b9174db6d88ce53",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "482a538c_06052bce",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 16
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2025-10-10T11:20:16Z",
+      "side": 1,
+      "message": "timeout\u003d60 \u003d\u003d\u003e timeout\u003d60s",
+      "revId": "d69c97e85e1ad3386b7805d27b9174db6d88ce53",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c81d4b5_382d23a3",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 16
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2025-10-10T11:20:16Z",
+      "side": 1,
+      "message": "[Documentation]   Checking Boot progress state via redfish. \u003d\u003d\u003e [Documentation]   Checking boot progress state via redfish.",
+      "revId": "d69c97e85e1ad3386b7805d27b9174db6d88ce53",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "201a0c13_823d9722",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 16
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2025-10-10T11:20:16Z",
+      "side": 1,
+      "message": "Please remove extra #",
+      "revId": "d69c97e85e1ad3386b7805d27b9174db6d88ce53",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d35b8e2_0ad53a88",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 16
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2025-10-10T11:20:16Z",
+      "side": 1,
+      "message": "[Documentation]  Verify and Close Information message via GUI page \u003d\u003d \u003e Verify and close Information message via GUI page.",
+      "revId": "d69c97e85e1ad3386b7805d27b9174db6d88ce53",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cf0bd1b_896a9181",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 16
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2025-10-10T11:20:16Z",
+      "side": 1,
+      "message": "timeout\u003d5 \u003d\u003d\u003e timeout\u003d5s",
+      "revId": "d69c97e85e1ad3386b7805d27b9174db6d88ce53",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
