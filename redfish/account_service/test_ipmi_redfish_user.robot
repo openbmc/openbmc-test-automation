@@ -5,12 +5,12 @@ Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/ipmi_client.robot
-Library          ../lib/ipmi_utils.py
+Library          ../../lib/ipmi_utils.py
 
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
-Test Teardown    IPMI_Redfish_User
+Test Tags    IPMI_Redfish_User
 
 *** Variables ***
 
