@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8616f557_3415ea2f",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-10-10T05:14:00Z",
+      "side": 1,
+      "message": "above line 341 is already taking care of it?",
+      "revId": "b41e87e95641584cdc7448a667852d3a5ddd2c55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cba15ea8_c792775b",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 2
@@ -20,6 +37,40 @@
         "endLine": 352,
         "endChar": 35
       },
+      "revId": "b41e87e95641584cdc7448a667852d3a5ddd2c55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9335701e_3acfaff2",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-10-10T05:14:00Z",
+      "side": 1,
+      "message": "Enable SLAAC On Both Interfaces And Verify",
+      "revId": "b41e87e95641584cdc7448a667852d3a5ddd2c55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b96c2422_703ce568",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-10-10T05:14:00Z",
+      "side": 1,
+      "message": "Enable SLAAC on eth0, then on eth1, verify eth0 settigs are unaffected.",
       "revId": "b41e87e95641584cdc7448a667852d3a5ddd2c55",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
