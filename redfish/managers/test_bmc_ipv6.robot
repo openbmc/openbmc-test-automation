@@ -504,6 +504,51 @@ Disable And Verify AutoConfig On Both Interfaces When AutoConfig Enabled
     ${False}           ${False}
 
 
+Verify Link Local Address Be Always There On BMC
+    [Documentation]  Verify link local address be always there on BMC.
+    [Tags]   Verify_Link_Local_Address_Be_Always_There_On_BMC
+
+    # Verify link local.
+    @{ipv6_address_origin_list}  ${ipv6_link_local_addr}=
+    ...    Get Address Origin List And Address For Type  LinkLocal
+
+    Should Match Regexp  ${ipv6_link_local_addr}  ${linklocal_addr_format}
+
+    Redfish Power Off  stack_mode=skip
+    Redfish Power On
+
+    # Verify link local address is unique on both eth0 and eth1.
+    @{ipv6_address_origin_list}  ${ipv6_link_local_addr1}=
+    ...    Get Address Origin List And Address For Type  LinkLocal  ${1}
+
+    Should Match Regexp  ${ipv6_link_local_addr1}  ${linklocal_addr_format}
+
+    ${ipv6_network_configurations}=  Get IPv6 Network Configuration  ${1}
+
+    FOR  ${ipv6_addr}  IN  @{ipv6_network_configurations}
+        IF  '${ipv6_addr["Address"]}' == '${ipv6_link_local_addr1}'
+            Fail  Link Local Address Is Not Unique!
+        END
+    END
+
+    @{ipv6_address_origin_list}  ${ipv6_link_local_addr2}=
+    ...    Get Address Origin List And Address For Type  LinkLocal  ${2}
+
+    Should Match Regexp  ${ipv6_link_local_addr2}  ${linklocal_addr_format}
+
+    ${ipv6_network_configurations}=  Get IPv6 Network Configuration  ${2}
+
+    FOR  ${ipv6_addr}  IN  @{ipv6_network_configurations}
+        IF  '${ipv6_addr["Address"]}' == '${ipv6_link_local_addr2}'
+            Fail  Link Local Address Is Not Unique!
+        END
+    END
+
+    IF  '${ipv6_link_local_addr1}' == '${ipv6_link_local_addr2}'
+        Fail  Link Local Address Is Not Unique!
+    END
+
+
 *** Keywords ***
 
 Suite Setup Execution
