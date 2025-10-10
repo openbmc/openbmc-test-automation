@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "904c54eb_b8081be0",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-10T08:40:37Z",
+      "side": 1,
+      "message": "as already informed please verify only once \u0026 take a look in entire suite where ever you added this",
+      "revId": "b02092aefd0d2ff0a6c40d6a35a20fbb739d5e2d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf6d3613_7b05f8ac",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-10T08:40:37Z",
+      "side": 1,
+      "message": "Suggestion : Set SLAAC Property On Eth0 And Eth1",
+      "revId": "b02092aefd0d2ff0a6c40d6a35a20fbb739d5e2d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
