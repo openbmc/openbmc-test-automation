@@ -357,6 +357,30 @@ Verify Coexistence Of All IPv6 Type Addresses On BMC
     Verify The Coexistence Of The Address Type  LinkLocal  Static  DHCPv6  SLAAC
 
 
+Verify Link Local Address Be Always There On BMC
+    [Documentation]  Verify link local address be always there on BMC.
+    [Tags]  Verify_Link_Local_Address_Be_Always_There_On_BMC
+    [Setup]  Run Keywords  Get The Initial SLAAC Setting On Each Interface  ${1}
+    ...      AND  Set SLAAC Configuration State And Verify  ${False}
+    [Teardown]  Run Keywords  Set SLAAC Configuration State And Verify  ${slaac_channel_1}  [${HTTP_OK}]  ${1}
+
+    @{ipv6_address_origin_list}  ${ipv6_link_local_addr}=
+    ...    Get Address Origin List And Address For Type  LinkLocal
+
+    Should Match Regexp  ${ipv6_link_local_addr}        ${linklocal_addr_format}
+
+    Set SLAAC Configuration State And Verify  ${True}
+
+   # Rebooting BMC.
+    Redfish OBMC Reboot (off)  stack_mode=skip
+
+    #Verify link local after BMC reboot.
+    @{ipv6_address_origin_list}  ${ipv6_link_local_addr}=
+    ...    Get Address Origin List And Address For Type  LinkLocal
+
+    Should Match Regexp  ${ipv6_link_local_addr}        ${linklocal_addr_format}
+
+
 *** Keywords ***
 
 Suite Setup Execution
