@@ -51,6 +51,24 @@
       "message": "is this required here as you are verifying this as part of \"Verify All The Addresses Are Intact\"",
       "revId": "72e2227149aa43135832efc9c884b52faa710ffe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e0e0a73_0bfa2af9",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1259,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-10T13:06:57Z",
+      "side": 1,
+      "message": "The keyword Verify All The Addresses Are Intact checks all the IPs present before and after are present.",
+      "parentUuid": "d4255dfa_0f7db05d",
+      "revId": "72e2227149aa43135832efc9c884b52faa710ffe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
