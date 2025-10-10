@@ -34,6 +34,23 @@
       "parentUuid": "0a51bf60_a605bfb8",
       "revId": "72e2227149aa43135832efc9c884b52faa710ffe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4255dfa_0f7db05d",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1259,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-10T07:15:21Z",
+      "side": 1,
+      "message": "is this required here as you are verifying this as part of \"Verify All The Addresses Are Intact\"",
+      "revId": "72e2227149aa43135832efc9c884b52faa710ffe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
