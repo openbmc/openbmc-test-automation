@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "375b4f6f_e1f29a80",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-10-10T10:26:27Z",
+      "side": 1,
+      "message": "done updated \n    # Description of argument(s):\n    # expected_boot_state      Expected Boot states are \"OSRunning\" and \"None\".\n    # expected_host_state      Expected Host states are \"Enabled\" and \"Disabled\"",
+      "parentUuid": "54a618ac_fb066f2f",
+      "revId": "f2833e42e077f94001d435c7e78053a7850995d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b72816e9_9d12348d",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-10-10T04:31:44Z",
       "side": 1,
       "message": "See if we can refractor the keyword name.\nSuggestion: Verify And Close Information Message Via GUI",
+      "revId": "f2833e42e077f94001d435c7e78053a7850995d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af09cc46_78e56846",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-10-10T10:26:27Z",
+      "side": 1,
+      "message": "agree \nVerify And Close Information Message Via GUI\n    [Documentation]  Verify and Close Information message via GUI page",
+      "parentUuid": "b72816e9_9d12348d",
       "revId": "f2833e42e077f94001d435c7e78053a7850995d4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -69,6 +105,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96a3b780_bbd67da4",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-10-10T10:26:27Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "dfc668a2_87ebb5bf",
+      "revId": "f2833e42e077f94001d435c7e78053a7850995d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b570f053_31b5688d",
@@ -82,6 +136,24 @@
       "writtenOn": "2025-10-10T04:31:44Z",
       "side": 1,
       "message": "Can we use Wait And Click Element here.",
+      "revId": "f2833e42e077f94001d435c7e78053a7850995d4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "130d3a7b_32273f38",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-10-10T10:26:27Z",
+      "side": 1,
+      "message": "That won\u0027t work here.\nThe Wait And Click Element keyword performs two steps — it waits for a specific element to become visible and then performs the click operation.\nHowever, if you look at line 278, I’m doing an additional validation — making sure a specific text appears before clicking on the element.",
+      "parentUuid": "b570f053_31b5688d",
       "revId": "f2833e42e077f94001d435c7e78053a7850995d4",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
