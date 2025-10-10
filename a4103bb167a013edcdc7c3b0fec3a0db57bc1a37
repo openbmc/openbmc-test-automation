@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d31538d8_32735ad2",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-10T09:53:26Z",
+      "side": 1,
+      "message": "As you are using these lines of codes in below TCs as well, better if you write one keyword \u0026 call this.\n@{ipv6_address_origin_list}  ${ipv6_slaac_addr}\u003d\n    ...    Get Address Origin List And Address For Type  SLAAC\n    Wait Until Page Contains  ${ipv6_slaac_addr}\n    Wait Until Page Contains  SLAAC",
+      "revId": "a4103bb167a013edcdc7c3b0fec3a0db57bc1a37",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa923b88_93dfa9ec",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-10T09:53:26Z",
+      "side": 1,
+      "message": "same as above comment",
+      "revId": "a4103bb167a013edcdc7c3b0fec3a0db57bc1a37",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
