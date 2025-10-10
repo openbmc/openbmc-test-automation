@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cba15ea8_c792775b",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-10T04:50:20Z",
+      "side": 1,
+      "message": "Wait Until Page Does Not Contains??",
+      "range": {
+        "startLine": 352,
+        "startChar": 4,
+        "endLine": 352,
+        "endChar": 35
+      },
+      "revId": "b41e87e95641584cdc7448a667852d3a5ddd2c55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42d4a6ab_c241ed6b",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-10T04:50:20Z",
+      "side": 1,
+      "message": "include in setup\nand same in other test cases too",
+      "range": {
+        "startLine": 406,
+        "startChar": 4,
+        "endLine": 409,
+        "endChar": 35
+      },
+      "revId": "b41e87e95641584cdc7448a667852d3a5ddd2c55",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
