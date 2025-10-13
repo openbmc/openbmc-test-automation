@@ -379,6 +379,22 @@ Configure Link Local IPv6 Address And Verify
     Should Be Equal As Integers  ${count}  2
 
 
+Verify Coexistence Of IPv6 Addresses Type Combination On BMC
+    [Documentation]  Verify coexistence of IPv6 addresses type combination on BMC.
+    [Tags]  Verify_Coexistence_Of_IPv6_Addresses_Type_Combination_On_BMC
+    [Setup]  Run Keywords  Get The Initial DHCPv6 Setting On Each Interface  ${1}
+    ...      AND  Get The Initial SLAAC Setting On Each Interface  ${1}
+    [Teardown]  Run Keywords  Set And Verify DHCPv6 Property  ${dhcpv6_channel_1}  ${1}
+    ...         AND  Set SLAAC Configuration State And Verify  ${slaac_channel_1}  [${HTTP_OK}]  ${1}
+    [Template]  Verify IPv6 Addresses Coexist
+
+    #type1  type2.
+    Static  DHCPv6
+    DHCPv6  SLAAC
+    SLAAC   Static
+    Static  Static
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -1334,3 +1350,41 @@ Set And Verify DHCPv6 Property On Both Interfaces
     Verify All The Addresses Are Intact  ${1}
     Verify All The Addresses Are Intact  ${2}
     ...    ${eth1_initial_ipv4_addressorigin_list}  ${eth1_initial_ipv4_addr_list}
+
+
+Verify IPv6 Addresses Coexist
+    [Documentation]  Verify IPv6 address type coexist.
+    [Arguments]   ${IPv6_address_type1}  ${IPv6_address_type2}
+
+    # Description of the argument(s):
+    # IPv6_address_type1  IPv6 address type.
+    # IPv6_address_type2  IPv6 address type.
+
+    IF  '${IPv6_address_type1}' == 'Static' and '${IPv6_address_type2}' == 'DHCPv6'
+        Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
+        Set And Verify DHCPv6 Property  Enabled
+    ELSE IF  '${IPv6_address_type1}' == 'DHCPv6' and '${IPv6_address_type2}' == 'SLAAC'
+        Set And Verify DHCPv6 Property  Enabled
+        Set SLAAC Configuration State And Verify  ${True}
+    ELSE IF  '${IPv6_address_type1}' == 'SLAAC' and '${IPv6_address_type2}' == 'Static'
+        Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
+        Set SLAAC Configuration State And Verify  ${True}
+    ELSE IF  '${IPv6_address_type1}' == 'Static' and '${IPv6_address_type2}' == 'Static'
+        Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
+        Configure IPv6 Address On BMC  ${test_ipv6_addr1}  ${test_prefix_length}
+    END
+
+    Sleep  ${NETWORK_TIMEOUT}s
+
+    #Verify coexistence.
+    Verify The Coexistence Of The Address Type  ${IPv6_address_type1}  ${IPv6_address_type2}
+
+    IF  '${IPv6_address_type1}' == 'Static' or '${IPv6_address_type2}' == 'Static'
+        Delete IPv6 Address  ${test_ipv6_addr}
+    END
+    IF  '${IPv6_address_type1}' == 'Static' and '${IPv6_address_type2}' == 'Static'
+        Delete IPv6 Address  ${test_ipv6_addr1}
+    END
+
+    Set And Verify DHCPv6 Property  Disabled
+    Set SLAAC Configuration State And Verify  ${False}
