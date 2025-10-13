@@ -54,11 +54,12 @@ work-in-progress, feel free to propose changes.
     ```
   - When you wish to indent if/else or loop bodies for visual effect:
     ```
-    Run Keyword If  '${this}' == '${that}'
-    ...    Log  Bla, bla...
-    ...  ELSE
-    ...    Run Keywords  Key1  parms
-    ...    AND  Key2  parms
+    IF  '${this}' == '${that}'
+         Log  Bla, bla...
+    ELSE
+         Run Keywords  Key1  parms
+         ...    AND  Key2  parms
+    END
     ```
 
 - Use single spaces to make conditions more readable:
@@ -66,13 +67,13 @@ work-in-progress, feel free to propose changes.
   Correct example:
 
   ```
-  Run Keyword If  '${var1}' == '${0}'  My Keyword
+  IF  '${var1}' == '${0}'  My Keyword
   ```
 
   Incorrect example:
 
   ```
-  Run Keyword If  '${var1}'=='${0}'  My Keyword
+  IF  '${var1}'=='${0}'  My Keyword
   ```
 
 - When you define or call a Robot keyword, Robot pays no attention to spaces,
