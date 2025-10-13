@@ -356,6 +356,32 @@ Verify Coexistence Of All IPv6 Type Addresses On BMC
     Verify The Coexistence Of The Address Type  LinkLocal  Static  DHCPv6  SLAAC
 
 
+Verify Coexistence Of All IPv6 Type Addresses Combination On BMC
+    [Documentation]  Verify coexistence of all ipv6 type addresses combination on BMC.
+    [Tags]  Verify_Coexistence_Of_All_IPv6_Type_Addresses_Combination_On_BMC
+    [Setup]  Run Keywords  Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
+    ...      AND  Get The Initial DHCPv6 Setting On Each Interface  ${1}
+    ...      AND  Set And Verify DHCPv6 Property  Enabled
+    ...      AND  Get The Initial SLAAC Setting On Each Interface  ${1}
+    ...      AND  Set SLAAC Configuration State And Verify  ${True}
+    [Teardown]  Run Keywords  Delete IPv6 Address  ${test_ipv6_addr}
+    ...         AND  Set And Verify DHCPv6 Property  ${dhcpv6_channel_1}  ${1}
+    ...         AND  Set SLAAC Configuration State And Verify  ${slaac_channel_1}  [${HTTP_OK}]  ${1}
+
+    Sleep  ${NETWORK_TIMEOUT}s
+
+    @{address_types}=  Create List  LinkLocal  Static  DHCPv6  SLAAC
+
+    #Verify coexistence of all ipv6 type addresses combination on BMC.
+    FOR  ${type1}  IN  @{address_types}
+        FOR  ${type2}  IN  @{address_types}
+            IF  '${type1}' != '${type2}'
+                Verify The Coexistence Of The Address Type  ${type1}  ${type2}
+            END
+        END
+    END
+
+
 *** Keywords ***
 
 Suite Setup Execution
