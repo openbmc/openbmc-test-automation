@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7913c3d9_816c2637",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-10-13T04:41:59Z",
+      "side": 1,
+      "message": "Gunnar.. couldnt understand what is this CI failure about.. I tried fixing the commit messages but still not passing",
+      "revId": "3e9a30b215696290e20f6992587f9dd03d0d4c9f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
