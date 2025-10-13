@@ -63,9 +63,11 @@ Flood Patch Without Auth Token And Check Stability Of BMC
         ...  valid_status_codes=[${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
 
         # Every 100th iteration, check BMC allows patch with auth token.
-        ${status}=  Run Keyword If  ${iter} % 100 == 0  Run Keyword And Return Status
-        ...  Login And Configure Hostname  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
-        Run Keyword If  ${status} == False  Append To List  ${fail_list}  ${iter}
+        IF  ${iter} % 100 == 0
+            ${status}=  Run Keyword And Return Status
+            ...  Login And Configure Hostname  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+            IF  ${status} == False  Append To List  ${fail_list}  ${iter}
+        END
     END
     ${verify_count}=  Evaluate  ${iterations}/100
     ${fail_count}=  Get Length  ${fail_list}
@@ -119,9 +121,10 @@ Flood Post Without Auth Token And Check Stability Of BMC
         ...  valid_status_codes=[${HTTP_UNAUTHORIZED}, ${HTTP_FORBIDDEN}]
 
         # Every 100th iteration, check BMC allows post with auth token.
-        ${status}=  Run Keyword If  ${iter} % 100 == 0  Run Keyword And Return Status
-        ...  Login And Create User
-        Run Keyword If  ${status} == False  Append To List  ${fail_list}  ${iter}
+        IF  ${iter} % 100 == 0
+            ${status}=   Run Keyword And Return Status  Login And Create User
+        END
+        IF  ${status} == False  Append To List  ${fail_list}  ${iter}
     END
     ${verify_count}=  Evaluate  ${iterations}/100
     ${fail_count}=  Get Length  ${fail_list}
@@ -147,7 +150,7 @@ Make Large Number Of Wrong SSH Login Attempts And Check Stability
       # Every 100th iteration Login with correct credentials
       ${status}=   Run keyword If  ${iter} % ${100} == ${0}  Run Keyword And Return Status
       ...  Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
-      Run Keyword If  ${status} == ${False}  Append To List  ${ssh_status_list}  ${status}
+      IF  ${status} == ${False}  Append To List  ${ssh_status_list}  ${status}
       SSHLibrary.Close Connection
     END
 
@@ -175,15 +178,17 @@ Test Stability On Large Number Of Wrong Login Attempts To GUI
         Run Keyword And Ignore Error  Login to GUI With Incorrect Credentials
 
         # Every 100th iteration, check BMC GUI is responsive.
-        ${status}=  Run Keyword If  ${iter} % 100 == 0  Run Keyword And Return Status
-        ...  Open Browser  ${bmc_url}
+        IF  ${iter} % 100 == 0
+            ${status}=  Run Keyword And Return Status  Open Browser  ${bmc_url}
+        END
         Append To List  ${status_list}  ${status}
-        Run Keyword If  '${status}' == 'True'
-        ...  Run Keywords  Close Browser  AND  Switch Browser  browser1
+        IF  '${status}' == 'True'
+            Run Keywords  Close Browser  AND  Switch Browser  browser1
+        END
     END
 
     ${fail_count}=  Count Values In List  ${status_list}  False
-    Run Keyword If  ${fail_count} > ${0}  FAIL  Could not open BMC GUI ${fail_count} times
+    IF  ${fail_count} > ${0}  FAIL  Could not open BMC GUI ${fail_count} times
 
 
 Test BMC GUI Stability On Continuous Refresh Of GUI Home Page
@@ -209,13 +214,15 @@ Test BMC GUI Stability On Continuous Refresh Of GUI Home Page
         # Every 100th iteration, check BMC GUI is responsive.
         ${status}=  Run Keyword And Return Status
         ...  Run Keywords  Launch Browser And Login GUI  AND  Logout GUI
-        Run Keyword If  '${status}' == 'False'  Append To List  ${failed_list}  ${iter}
-        ...  ELSE IF  '${status}' == 'True'
-        ...  Run Keywords  Close Browser  AND  Switch Browser  browser1
+        IF  '${status}' == 'False'
+            Append To List  ${failed_list}  ${iter}
+        ELSE
+            Run Keywords  Close Browser  AND  Switch Browser  browser1
+        END
     END
     Log   ${failed_list}
     ${fail_count}=  Get Length  ${failed_list}
-    Run Keyword If  ${fail_count} > ${0}  FAIL  Could not open BMC GUI ${fail_count} times
+    IF  ${fail_count} > ${0}  FAIL  Could not open BMC GUI ${fail_count} times
 
 
 Test BMCweb Stability On Continuous Redfish Login Attempts With Invalid Credentials
@@ -253,11 +260,11 @@ Test Bmcweb Stability On Continuous Redfish Delete Operation Request Without Ses
         # Every 100th iteration, check delete operation with valid session token.
         ${status}=  Run Keyword And Return Status
         ...  Login And Delete User
-        Run Keyword If  '${status}' == 'False'  Append To List  ${failed_iter_list}  ${iter}
+        IF  '${status}' == 'False'  Append To List  ${failed_iter_list}  ${iter}
     END
     Log  ${failed_iter_list}
     ${fail_count}=  Get Length  ${failed_iter_list}
-    Run Keyword If  ${fail_count} > ${0}  FAIL  Could not do Redfish delete operation ${fail_count} times
+    IF  ${fail_count} > ${0}  FAIL  Could not do Redfish delete operation ${fail_count} times
 
 
 Verify Flood Put Method Without Auth Token
@@ -272,11 +279,10 @@ Verify Flood Put Method Without Auth Token
         Run Keyword And Ignore Error
         ...  Redfish.Put  ${LED_LAMP_TEST_ASSERTED_URI}attr/Asserted  body={"data":1}
         # Every 100th iteration, check BMC allows put with auth token.
-        ${status}=  Run Keyword If  ${iter} % 100 == 0
-        ...    Run Keyword And Return Status
-        ...    Login And Upload Partition File To BMC
-        Run Keyword If  ${status} == ${False}
-        ...  Append To List  ${status_list}  ${status}
+        IF  ${iter} % 100 == 0
+            ${status}=  Run Keyword And Return Status  Login And Upload Partition File To BMC
+        END
+        IF  ${status} == ${False}  Append To List  ${status_list}  ${status}
     END
 
     # Note the count for every 100 iterations.
@@ -364,12 +370,12 @@ Invalid Credentials Redfish Login Attempts
         # Every 100th iteration, check Redfish is responsive.
         ${status}=  Run Keyword And Return Status
         ...  Redfish.Login  ${login_username}   ${login_password}
-        Run Keyword If  '${status}' == 'False'  Append To List  ${failed_iter_list}  ${iter}
+        IF  '${status}' == 'False'  Append To List  ${failed_iter_list}  ${iter}
         Redfish.Logout
     END
     Log  ${failed_iter_list}
     ${fail_count}=  Get Length  ${failed_iter_list}
-    Run Keyword If  ${fail_count} > ${0}  FAIL  Could not Login to Redfish ${fail_count} times
+    IF  ${fail_count} > ${0}  FAIL  Could not Login to Redfish ${fail_count} times
 
 
 Confirm Ability to Connect Then Close All Connections
@@ -405,7 +411,7 @@ Delete Local Partition File
     [Documentation]  Delete local partition file.
 
     ${file_exist}=  Run Keyword And Return Status  OperatingSystem.File Should Exist  100-file
-    Run Keyword If  'True' == '${file_exist}'  Remove File  100-file
+    IF  'True' == '${file_exist}'  Remove File  100-file
 
 
 Create Partition File
