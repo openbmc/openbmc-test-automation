@@ -16,6 +16,23 @@
       "message": "Gunnar.. couldnt understand what is this CI failure about.. I tried fixing the commit messages but still not passing",
       "revId": "3e9a30b215696290e20f6992587f9dd03d0d4c9f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5a6b7ae_9a560913",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002673
+      },
+      "writtenOn": "2025-10-13T07:45:57Z",
+      "side": 1,
+      "message": "Hi, I\u0027m still new to the OpenBMC contribution process, so please kindly bear with me.\nI noticed the CI failed with UC3 Signed-off-by user has too few words.\n\nI suspect it\u0027s because my current Signed-off-by uses IanLaiAMI, which doesn\u0027t follow the expected \"Firstname Lastname\" format described in bad_signedoffby.py.\n\nI believe updating it to Ian Lai \u003cIanLai@ami.com\u003e should resolve the issue.\n\nJust to confirm — is it okay if I directly edit the commit message on this Gerrit page to fix it? Will that trigger a new patchset and re-run CI?",
+      "revId": "3e9a30b215696290e20f6992587f9dd03d0d4c9f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
