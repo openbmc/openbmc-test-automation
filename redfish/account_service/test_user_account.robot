@@ -112,7 +112,7 @@ Verify Redfish Admin User Login With Wrong Password
 
 Verify Redfish Operator User Login With Wrong Password
     [Documentation]  Verify Redfish create operator user with valid password and make sure
-    ... operator user failed to login with wrong password.
+    ...  operator user failed to login with wrong password.
     [Tags]  Verify_Redfish_Operator_User_Login_With_Wrong_Password
     [Template]  Verify Redfish User Login With Wrong Password
 

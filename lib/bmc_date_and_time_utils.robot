@@ -1,13 +1,13 @@
 *** Settings ***
 Documentation  This module provides general keywords for date time and ntp.
 
-Resource                     ../../lib/resource.robot
-Resource                     ../../lib/bmc_redfish_resource.robot
-Resource                     ../../lib/common_utils.robot
-Resource                     ../../lib/openbmc_ffdc.robot
-Resource                     ../../lib/utils.robot
-Resource                     ../../lib/rest_client.robot
-Library                      ../../lib/gen_robot_valid.py
+Resource                     ../lib/resource.robot
+Resource                     ../lib/bmc_redfish_resource.robot
+Resource                     ../lib/common_utils.robot
+Resource                     ../lib/openbmc_ffdc.robot
+Resource                     ../lib/utils.robot
+Resource                     ../lib/rest_client.robot
+Library                      ../lib/gen_robot_valid.py
 
 *** Variables ***
 
