@@ -69,6 +69,24 @@
       "parentUuid": "d4255dfa_0f7db05d",
       "revId": "72e2227149aa43135832efc9c884b52faa710ffe",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ace748b_5550d60a",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1259,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-14T06:44:00Z",
+      "side": 1,
+      "message": "As of now checking only the IPv4 settings and IPv6 Linklocal are not disturbed\nOther IPv6 settings are checked as a part of the test case for each test case we are writing.",
+      "parentUuid": "2e0e0a73_0bfa2af9",
+      "revId": "72e2227149aa43135832efc9c884b52faa710ffe",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }

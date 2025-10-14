@@ -16,6 +16,24 @@
       "message": "Since initial values are taken before executing test cases \u0026 these tests are doing enable/disable on multiple v6 types, in most likely cases value won\u0027t be same. Expectation is old values to remain intact \u0026 new values as per new settings to be there on each interface.",
       "revId": "e6299cf7fc0d659645e115508355d19e045b12fa",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91fbbeae_606e308c",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 1187,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-14T06:44:00Z",
+      "side": 1,
+      "message": "Checking only IPv4 addresses are intact\nRemoving\n${ipv6_addressorigin_list}  ${ipv6_addr_list}\u003d  Get Address Origin List And IPv4 or IPv6 Address  IPv6Addresses  ${channel_number}\nas its not used here\n\nIPv6 Linklocal verification is also done as a part of this keyword\n\nIPv6 verification part is all others is going to be taken care as a part of each test case as per need\nIn this case, SLAAC verification is done in the setup of the present test case.\nSet And Verify SLAAC Property On Both Interfaces",
+      "parentUuid": "be5ecad7_aed500e0",
+      "revId": "e6299cf7fc0d659645e115508355d19e045b12fa",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
