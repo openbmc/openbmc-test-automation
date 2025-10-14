@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bd66a4b_cc27e23d",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-14T07:47:36Z",
+      "side": 1,
+      "message": "Give a better test case name, something like\nAdd Valid IPv6 Address Via GUI And Check Persistency",
+      "range": {
+        "startLine": 430,
+        "startChar": 0,
+        "endLine": 431,
+        "endChar": 62
+      },
+      "revId": "63cbe13aecb20d9995c76153ab36ad8c76426bb7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d49629b6_3101ce19",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-14T07:47:36Z",
+      "side": 1,
+      "message": "Give 2 spaces",
+      "range": {
+        "startLine": 434,
+        "startChar": 65,
+        "endLine": 434,
+        "endChar": 69
+      },
+      "revId": "63cbe13aecb20d9995c76153ab36ad8c76426bb7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ff3851f_ae9046c0",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-14T07:47:36Z",
+      "side": 1,
+      "message": "Give the default as eth0\n${ipv6_type}  ${interface}\u003d${ethernet_interface}",
+      "range": {
+        "startLine": 753,
+        "startChar": 4,
+        "endLine": 753,
+        "endChar": 43
+      },
+      "revId": "63cbe13aecb20d9995c76153ab36ad8c76426bb7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18043eea_93d49a28",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-14T07:47:36Z",
+      "side": 1,
+      "message": "ipv6_address_type  Type of IPv6 address to be checked.",
+      "range": {
+        "startLine": 757,
+        "startChar": 4,
+        "endLine": 757,
+        "endChar": 42
+      },
+      "revId": "63cbe13aecb20d9995c76153ab36ad8c76426bb7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
