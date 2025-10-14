@@ -31,6 +31,8 @@ ${prefix_length_def}         None
 ${invalid_staticv6_gateway}  9.41.164.1
 ${linklocal_addr_format}     fe80::[0-9a-f:]+$
 ${new_mac_addr}              AA:E2:84:14:28:79
+${ipv6_leading_zero}         2001:0022:0033::0111
+${ipv6_eliminate_zero}       2001:22:33::111
 
 *** Test Cases ***
 
@@ -357,6 +359,17 @@ Verify Coexistence Of All IPv6 Type Addresses On BMC
     Verify The Coexistence Of The Address Type  LinkLocal  Static  DHCPv6  SLAAC
 
 
+Configure IPv6 With Leading Zeros And Verify
+    [Documentation]  Configure IPv6 with leading zeros & verify address is configured by eliminating 0s in multiple hextets.
+    [Tags]  Configure_IPv6_with_Leading_Zeros_And_Verify
+    [Teardown]  Run Keywords
+    ...  Delete IPv6 Address  ${ipv6_eliminate_zero}  AND  Test Teardown Execution
+
+    #Verify 2001:0022:0033::0111 configured as 2001:22:33::111.
+    Configure IPv6 Address On BMC
+    ...    ${ipv6_leading_zero}  ${test_prefix_length}  ${ipv6_eliminate_zero}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -514,10 +527,12 @@ Verify IPv6 And PrefixLength
 
 Configure IPv6 Address On BMC
     [Documentation]  Add IPv6 Address on BMC.
-    [Arguments]  ${ipv6_addr}  ${prefix_len}  ${valid_status_codes}=${HTTP_OK}
+    [Arguments]  ${ipv6_addr1}  ${prefix_len}  ${ipv6_addr2}=${None}
+    ...          ${valid_status_codes}=[${HTTP_OK},${HTTP_NO_CONTENT}]
 
     # Description of argument(s):
-    # ipv6_addr           IPv6 address to be added (e.g. "2001:EEEE:2222::2022").
+    # ipv6_addr1          IPv6 address to be added (e.g. "2001:0022:0033::0111").
+    # ipv6_addr2          IPv6 address to be Verified (e.g. "2001:22:33::111").
     # prefix_len          Prefix length for the IPv6 to be added
     #                     (e.g. "64").
     # valid_status_codes  Expected return code from patch operation
@@ -525,7 +540,7 @@ Configure IPv6 Address On BMC
 
     ${prefix_length}=  Convert To Integer  ${prefix_len}
     ${empty_dict}=  Create Dictionary
-    ${ipv6_data}=  Create Dictionary  Address=${ipv6_addr}
+    ${ipv6_data}=  Create Dictionary  Address=${ipv6_addr1}
     ...  PrefixLength=${prefix_length}
 
     ${patch_list}=  Create List
@@ -538,10 +553,6 @@ Configure IPv6 Address On BMC
       Append To List  ${patch_list}  ${empty_dict}
     END
 
-    ${valid_status_codes}=  Set Variable If  '${valid_status_codes}' == '${HTTP_OK}'
-    ...  ${HTTP_OK},${HTTP_NO_CONTENT}
-    ...  ${valid_status_codes}
-
     # We need not check for existence of IPv6 on BMC while adding.
     Append To List  ${patch_list}  ${ipv6_data}
     ${data}=  Create Dictionary  IPv6StaticAddresses=${patch_list}
@@ -550,21 +561,29 @@ Configure IPv6 Address On BMC
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
     Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
-    ...  valid_status_codes=[${valid_status_codes}]
+    ...  valid_status_codes=${valid_status_codes}
 
-    Return From Keyword If  '${valid_status_codes}' != '${HTTP_OK},${HTTP_NO_CONTENT}'
+    IF  ${valid_status_codes} != [${HTTP_OK}, ${HTTP_NO_CONTENT}]
+        Fail  msg=Static address not added correctly
+    END
 
     # Note: Network restart takes around 15-18s after patch request processing.
     Sleep  ${NETWORK_TIMEOUT}s
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
-    Verify IPv6 And PrefixLength  ${ipv6_addr}  ${prefix_len}
+    #Verify ip address on CLI.
+    IF  '${ipv6_addr2}' != '${None}'
+        Verify IPv6 And PrefixLength  ${ipv6_addr2}  ${prefix_len}
+    ELSE
+        Verify IPv6 And PrefixLength  ${ipv6_addr1}  ${prefix_len}
+    END
 
     # Verify if existing static IPv6 addresses still exist.
     FOR  ${ipv6_network_configuration}  IN  @{ipv6_network_configurations}
       Verify IPv6 On BMC  ${ipv6_network_configuration['Address']}
     END
 
+    #Verify redfish and CLI data matches.
     Validate IPv6 Network Config On BMC
 
 
@@ -1282,4 +1301,3 @@ Set And Verify SLAAC Property On Both Interfaces
     Verify All The Addresses Are Intact  ${1}
     Verify All The Addresses Are Intact  ${2}
     ...    ${eth1_initial_ipv4_addressorigin_list}  ${eth1_initial_ipv4_addr_list}
-
