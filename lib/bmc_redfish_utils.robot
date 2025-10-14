@@ -92,7 +92,7 @@ Redfish BMC Reset Operation
     ${target}=  Wait Until Keyword Succeeds  1 min  20 sec
     ...  redfish_utils.Get Target Actions  /redfish/v1/Managers/${MANAGER_ID}/  Manager.Reset
     ${payload}=  Create Dictionary  ResetType=${reset_type}
-    Redfish.Post  ${target}  body=&{payload}
+    Redfish.Post  ${target}  body=&{payload}  valid_status_codes=[${HTTP_OK}, ${HTTP_CREATED}]
 
 
 Reset BIOS Via Redfish
