@@ -183,7 +183,7 @@ Verify PowerOn Button Should Present At Power Off
     Page Should Contain Element  ${xpath_poweron_button}
 
 
-    Verify Server Power Operations Page With Readonly User When Host Off State
+Verify Server Power Operations Page With Readonly User When Host Off State
     [Documentation]  Verify Server Power Operations page with readonly user when Host Off state.
     [Tags]  Verify_Server_Power_Operations_Page_With_Readonly_User_When_Host_Off_State
     [Setup]  Run Keywords  Power Off Server  AND  Create Readonly User And Login To GUI

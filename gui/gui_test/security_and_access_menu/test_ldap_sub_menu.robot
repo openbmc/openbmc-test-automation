@@ -274,11 +274,10 @@ Get LDAP Configuration
     ${radio_buttons}=  Get WebElements  ${xpath_service_radio_button}
 
     ${status}=  Run Keyword And Return Status
-    IF  '${ldap_type}' == 'LDAP'
-       Checkbox Should Be Selected  ${radio_buttons}[${0}]
-    ELSE
-       Checkbox Should Be Selected  ${radio_buttons}[${1}]
-    END
+    ...  Run Keyword If  '${ldap_type}'=='LDAP'
+    ...      Checkbox Should Be Selected  ${radio_buttons}[${0}]
+    ...  ELSE
+    ...      Checkbox Should Be Selected  ${radio_buttons}[${1}]
     Should Be Equal  ${status}  ${True}
 
 
