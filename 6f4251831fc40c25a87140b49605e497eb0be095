@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bc85e95_f5f1bc70",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-14T10:55:15Z",
+      "side": 1,
+      "message": "Channel number 1(eth0) or 2(eth1).",
+      "range": {
+        "startLine": 756,
+        "startChar": 4,
+        "endLine": 756,
+        "endChar": 31
+      },
+      "revId": "6f4251831fc40c25a87140b49605e497eb0be095",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aaa7f53_cb17579d",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-14T10:55:15Z",
+      "side": 1,
+      "message": "ipv6_type\nchannel_number",
+      "range": {
+        "startLine": 757,
+        "startChar": 4,
+        "endLine": 757,
+        "endChar": 42
+      },
+      "revId": "6f4251831fc40c25a87140b49605e497eb0be095",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
