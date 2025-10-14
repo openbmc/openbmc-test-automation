@@ -200,7 +200,8 @@ Add DNS Servers And Verify
     Input Text  ${xpath_input_static_dns}  ${dns_server}
     Click Button  ${xpath_add_button}
     IF  '${expected_status}' != 'Valid format'
-        Page Should Contain  ${expected_status}  AND  Return From Keyword
+        Page Should Contain  ${expected_status}
+        Return From Keyword
     END
 
     Wait Until Page Contains Element  ${xpath_add_dns_ip_address_button}  timeout=10sec

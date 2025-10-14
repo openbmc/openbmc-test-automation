@@ -5,7 +5,7 @@ Documentation   Test OpenBMC GUI "SNMP Alerts" sub-menu of "Settings".
 Resource        ../../../lib/snmp/redfish_snmp_utils.robot
 Resource        ../../../lib/snmp/resource.robot
 Resource        ../../lib/gui_resource.robot
-Resource        ../../lib/bmc_network_utils.robot
+Resource        ../../../lib/bmc_network_utils.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Run Keywords  Redfish.Logout  AND  Close Browser
