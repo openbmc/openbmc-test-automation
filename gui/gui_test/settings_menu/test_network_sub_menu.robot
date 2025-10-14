@@ -378,7 +378,7 @@ Enable SLAAC On Both Interfaces And Verify Eth0
     Verify SLAAC Address On Autoconfig Enable
 
 
-Enable SLAAC On Both Interfaces, Disable It On Eth0 And Verify Eth1
+Enable SLAAC On Both Interfaces Disable It On Eth0 And Verify Eth1
     [Documentation]  Enable and verify SLAAC property on eth0 and eth1,
     ...  disable it on eth0 and verify eth1 is not impacted.
     [Tags]  Enable_SLAAC_On_Both_Interfaces_Disable_It_On_Eth0_And_Verify_Eth1
@@ -395,7 +395,7 @@ Enable SLAAC On Both Interfaces, Disable It On Eth0 And Verify Eth1
     Verify SLAAC Address On Autoconfig Enable
 
 
-Enable SLAAC On Both Interfaces, Disable It On Eth1 And Verify Eth0
+Enable SLAAC On Both Interfaces Disable It On Eth1 And Verify Eth0
     [Documentation]  Enable and verify SLAAC property on eth0 and eth1,
     ...  disable it on eth1 and verify eth0 is not impacted.
     [Tags]  Enable_SLAAC_On_Both_Interfaces_Disable_It_On_Eth1_And_Verify_Eth0
@@ -410,7 +410,7 @@ Enable SLAAC On Both Interfaces, Disable It On Eth1 And Verify Eth0
     Verify SLAAC Address On Autoconfig Enable
 
 
-Enable SLAAC On Both Interfaces, Disable It On Both And Verify
+Enable SLAAC On Both Interfaces Disable It On Both And Verify
     [Documentation]  Enable and verify SLAAC property on eth0 and eth1,
     ...  disable it on eth0,eth1 and verify.
     [Tags]  Enable_SLAAC_On_Both_Interfaces_Disable_It_On_Both_And_Verify
