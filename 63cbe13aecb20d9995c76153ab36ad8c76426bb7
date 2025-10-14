@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f509560_789106a7",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-14T09:58:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bd66a4b_cc27e23d",
+      "range": {
+        "startLine": 430,
+        "startChar": 0,
+        "endLine": 431,
+        "endChar": 62
+      },
+      "revId": "63cbe13aecb20d9995c76153ab36ad8c76426bb7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d49629b6_3101ce19",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-10-14T07:47:36Z",
       "side": 1,
       "message": "Give 2 spaces",
+      "range": {
+        "startLine": 434,
+        "startChar": 65,
+        "endLine": 434,
+        "endChar": 69
+      },
+      "revId": "63cbe13aecb20d9995c76153ab36ad8c76426bb7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2014a642_1e586ab2",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-14T09:58:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d49629b6_3101ce19",
       "range": {
         "startLine": 434,
         "startChar": 65,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0451dfc6_1130922a",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-14T09:58:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ff3851f_ae9046c0",
+      "range": {
+        "startLine": 753,
+        "startChar": 4,
+        "endLine": 753,
+        "endChar": 43
+      },
+      "revId": "63cbe13aecb20d9995c76153ab36ad8c76426bb7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18043eea_93d49a28",
@@ -83,6 +155,30 @@
       "writtenOn": "2025-10-14T07:47:36Z",
       "side": 1,
       "message": "ipv6_address_type  Type of IPv6 address to be checked.",
+      "range": {
+        "startLine": 757,
+        "startChar": 4,
+        "endLine": 757,
+        "endChar": 42
+      },
+      "revId": "63cbe13aecb20d9995c76153ab36ad8c76426bb7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f012a542_7bb8a9f7",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-14T09:58:07Z",
+      "side": 1,
+      "message": "ipv6_type_address variable have already been used in the repo..so i chose ipv6_type",
+      "parentUuid": "18043eea_93d49a28",
       "range": {
         "startLine": 757,
         "startChar": 4,
