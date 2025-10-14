@@ -31,6 +31,8 @@ ${prefix_length_def}         None
 ${invalid_staticv6_gateway}  9.41.164.1
 ${linklocal_addr_format}     fe80::[0-9a-f:]+$
 ${new_mac_addr}              AA:E2:84:14:28:79
+${ipv6_leading_zero}         2001:0022:0033::0111
+${ipv6_eliminate_zero}       2001:22:33::111
 
 *** Test Cases ***
 
@@ -354,6 +356,17 @@ Verify Coexistence Of All IPv6 Type Addresses On BMC
 
     # Verify link local, static, DHCPv6 and SLAAC ipv6 addresses coexist.
     Verify The Coexistence Of The Address Type  LinkLocal  Static  DHCPv6  SLAAC
+
+
+Configure IPv6 Address By Eliminating Leading 0s In Multiple Hextets
+    [Documentation]  Verify ipv6 address configured by eliminating leading 0s in multiple hextets.
+    [Tags]  Configure_IPv6_Address_By_Eliminating_Leading_0s_In_Multiple_Hextets
+    [Teardown]  Run Keywords
+    ...  Delete IPv6 Address  ${ipv6_eliminate_zero}  AND  Test Teardown Execution
+
+    #Verify 2001:0022:0033::0111 configured as 2001:22:33::111
+    Configure And Verify IPv6 Address On BMC
+    ...    ${ipv6_leading_zero}  ${ipv6_eliminate_zero}  ${test_prefix_length}
 
 
 *** Keywords ***
@@ -1228,3 +1241,61 @@ Get Interface ID Of IPv6
     END
     ${interface_id}=  Evaluate  ':'.join(${expanded_ip}[-4:])
     RETURN  ${interface_id}
+
+
+Configure And Verify IPv6 Address On BMC
+    [Documentation]  Configure and verify IPv6 address on BMC.
+    [Arguments]  ${ipv6_addr1}  ${ipv6_addr2}  ${prefix_len}
+    ...          ${valid_status_codes}=[${HTTP_OK},${HTTP_NO_CONTENT}]
+
+    # Description of argument(s):
+    # ipv6_addr1          IPv6 address to be added (e.g. "2001:0022:0033::0111").
+    # ipv6_addr2          IPv6 address to be Verified (e.g. "2001:22:33::111").
+    # prefix_len          Prefix length for the IPv6 to be added
+    #                     (e.g. "64").
+    # valid_status_codes  Expected return code from patch operation
+    #                     (e.g. "200").
+
+    ${prefix_length}=  Convert To Integer  ${prefix_len}
+    ${empty_dict}=  Create Dictionary
+    ${ipv6_data}=  Create Dictionary  Address=${ipv6_addr1}
+    ...  PrefixLength=${prefix_length}
+
+    ${patch_list}=  Create List
+
+    # Get existing static IPv6 configurations on BMC.
+    ${ipv6_network_configurations}=  Get IPv6 Network Configuration
+    ${num_entries}=  Get Length  ${ipv6_network_configurations}
+
+    FOR  ${INDEX}  IN RANGE  0  ${num_entries}
+      Append To List  ${patch_list}  ${empty_dict}
+    END
+
+    # We need not check for existence of IPv6 on BMC while adding.
+    Append To List  ${patch_list}  ${ipv6_data}
+    ${data}=  Create Dictionary  IPv6StaticAddresses=${patch_list}
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+    ...  valid_status_codes=${valid_status_codes}
+
+    IF  ${valid_status_codes} != [${HTTP_OK}, ${HTTP_NO_CONTENT}]
+        Fail  msg=Static address not added correctly
+    END
+
+    # Note: Network restart takes around 15-18s after patch request processing.
+    Sleep  ${NETWORK_TIMEOUT}s
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+    #Verify ip address on CLI.
+    Verify IPv6 And PrefixLength  ${ipv6_addr2}  ${prefix_len}
+
+    # Verify if existing static IPv6 addresses still exist.
+    FOR  ${ipv6_network_configuration}  IN  @{ipv6_network_configurations}
+      Verify IPv6 On BMC  ${ipv6_network_configuration['Address']}
+    END
+
+    #Verify redfish and CLI data matches.
+    Validate IPv6 Network Config On BMC
