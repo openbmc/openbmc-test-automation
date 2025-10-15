@@ -31,6 +31,8 @@ ${prefix_length_def}         None
 ${invalid_staticv6_gateway}  9.41.164.1
 ${linklocal_addr_format}     fe80::[0-9a-f:]+$
 ${new_mac_addr}              AA:E2:84:14:28:79
+${link_local_addr}           fe80::
+${link_local_prefix_len}     10
 
 *** Test Cases ***
 
@@ -336,6 +338,15 @@ Verify Coexistence Of Link Local And SLAAC On BMC
     Sleep  ${NETWORK_TIMEOUT}s
 
     Check Coexistence Of Link Local And SLAAC
+
+
+Configure Link Local IPv6 Address And Verify
+    [Documentation]  Configure link local IPv6 address and verify.
+    [Tags]  Configure_Link_Local_IPv6_Address_And_Verify
+    [Template]  Configure IPv6 Address On BMC
+
+    # Link local IPv6 address     Prefix length
+    ${link_local_addr}            ${link_local_prefix_len}
 
 
 *** Keywords ***
