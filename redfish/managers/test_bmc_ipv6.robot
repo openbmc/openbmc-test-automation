@@ -29,8 +29,10 @@ ${test_prefix_length}        64
 ${ipv6_gw_addr}              2002:903:15F:32:9:3:32:1
 ${prefix_length_def}         None
 ${invalid_staticv6_gateway}  9.41.164.1
-${linklocal_addr_format}     fe80::[0-9a-f:]+$
 ${new_mac_addr}              AA:E2:84:14:28:79
+${linklocal_addr_format}     fe80::[0-9a-f:]+$
+${link_local_addr}           fe80::
+${link_local_prefix_len}     10
 
 *** Test Cases ***
 
@@ -355,6 +357,21 @@ Verify Coexistence Of All IPv6 Type Addresses On BMC
 
     # Verify link local, static, DHCPv6 and SLAAC ipv6 addresses coexist.
     Verify The Coexistence Of The Address Type  LinkLocal  Static  DHCPv6  SLAAC
+
+
+Configure Link Local IPv6 Address And Verify
+    [Documentation]  Configure link local IPv6 address and verify.
+    [Tags]  Configure_Link_Local_IPv6_Address_And_Verify
+
+    Configure IPv6 Address On BMC  ${link_local_addr}  ${link_local_prefix_len}
+
+    # Verify the address origin contains link local.
+    @{ipv6_address_origin_list}  ${ipv6_link_local_addr}=
+    ...    Get Address Origin List And Address For Type  LinkLocal
+
+    ${count}=  Evaluate  ${ipv6_address_origin_list}.count("LinkLocal")
+
+    Should Be Equal As Integers  ${count}  2
 
 
 *** Keywords ***
