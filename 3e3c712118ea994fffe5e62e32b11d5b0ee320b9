@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e611c850_5a2d7c14",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1302,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-15T03:45:40Z",
+      "side": 1,
+      "message": "Try to combine the code into the same existing keyword\nConfigure IPv6 Address On BMC\ngive the argument as ${ipv6_addr2\u003d${None}} \n\n\u003d\u003d\u003dVerification part\nIF  ${ipv6_addr2} !\u003d ${None}\n        Verify IPv6 And PrefixLength  ${ipv6_addr2}  ${prefix_len}\nEND",
+      "range": {
+        "startLine": 1302,
+        "startChar": 16,
+        "endLine": 1302,
+        "endChar": 60
+      },
+      "revId": "3e3c712118ea994fffe5e62e32b11d5b0ee320b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
