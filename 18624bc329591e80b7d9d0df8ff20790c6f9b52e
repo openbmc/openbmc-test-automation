@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "844a01f5_2349f230",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-15T10:30:05Z",
+      "side": 1,
+      "message": "Minor comments please address",
+      "revId": "18624bc329591e80b7d9d0df8ff20790c6f9b52e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f3ab97d_a917292f",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-15T10:30:05Z",
+      "side": 1,
+      "message": "Add static IPv6 address and verify persistency of static IPv6 on BMC reboot.\n\nNote: Dont follow test tile convention in the documentation",
+      "range": {
+        "startLine": 431,
+        "startChar": 20,
+        "endLine": 431,
+        "endChar": 97
+      },
+      "revId": "18624bc329591e80b7d9d0df8ff20790c6f9b52e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c00748a_15a0aa94",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-15T10:30:05Z",
+      "side": 1,
+      "message": "Note: Dont follow test tile convention in the documentation\n\nVerify persistency of linkLocal IPv6 on BMC reboot for both Interfaces.",
+      "revId": "18624bc329591e80b7d9d0df8ff20790c6f9b52e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
