@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bc5fd1e_c69c0cf3",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-15T13:09:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "949297da_018436d2",
+      "revId": "71449cc16352425a02dee8b5e6594d381d502e62",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19e82e54_aaf88f96",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-10-15T10:51:06Z",
       "side": 1,
       "message": "channel_number Ethernet channel number, 1 is for eth0 and 2 is for\n                      eth1.",
+      "revId": "71449cc16352425a02dee8b5e6594d381d502e62",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4219430d_f05c3dcf",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-15T13:09:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19e82e54_aaf88f96",
       "revId": "71449cc16352425a02dee8b5e6594d381d502e62",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
