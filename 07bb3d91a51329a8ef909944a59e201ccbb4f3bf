@@ -16,6 +16,24 @@
       "message": "please organize linklocal variables.. that way it helps to understand the existing ones",
       "revId": "07bb3d91a51329a8ef909944a59e201ccbb4f3bf",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64252bd1_71292ff1",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-16T07:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "766e940c_14f31875",
+      "revId": "07bb3d91a51329a8ef909944a59e201ccbb4f3bf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
