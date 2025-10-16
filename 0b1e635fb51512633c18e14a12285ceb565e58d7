@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f9f2e1b3_b8534177",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-16T17:10:24Z",
+      "side": 1,
+      "message": "Enable_And_Verify_DHCPv6_Property_On_Eth1_When_DHCPv6_Property_Enabled_On_Eth0\nthis test case has been removed as it is already covered here.",
+      "parentUuid": "e44bc342_2ce0e351",
+      "revId": "0b1e635fb51512633c18e14a12285ceb565e58d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c6f98c33_c095f2fd",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2025-10-16T15:21:37Z",
       "side": 1,
       "message": "as line 1299 \u0026 1300 is taking care of verification part then why you need to add additional verification part? (1304 - 1320)",
+      "revId": "0b1e635fb51512633c18e14a12285ceb565e58d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07bcdb17_4f9f6aa0",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-16T17:10:24Z",
+      "side": 1,
+      "message": "Set And Verify DHCPv6 Property this keyword only checks if the DHCPv6 is enabled/ disabled and doesn\u0027t have the check for checking if the IPv6 addresses list has the DHCPv6 address coming up or not, hence keeping the same.",
+      "parentUuid": "c6f98c33_c095f2fd",
       "revId": "0b1e635fb51512633c18e14a12285ceb565e58d7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
