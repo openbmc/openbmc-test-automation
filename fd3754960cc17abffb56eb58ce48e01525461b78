@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9daf7e02_b52828a1",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-16T15:00:48Z",
+      "side": 1,
+      "message": "is that the way tescase need to be tested?\nIf yes, then why are you giving tescase name as configure ipv6 address by eliminating leading 0s? \nPlease check \u0026 update it accordingly",
+      "parentUuid": "90fd4325_4a0fe9de",
+      "revId": "fd3754960cc17abffb56eb58ce48e01525461b78",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f31eb79b_2e0f87fa",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 6
