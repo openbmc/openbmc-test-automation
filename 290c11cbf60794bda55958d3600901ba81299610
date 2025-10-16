@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36b2518a_7bd9abd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-10-16T15:31:15Z",
+      "side": 1,
+      "message": "can u pls remove duplicate code",
+      "revId": "290c11cbf60794bda55958d3600901ba81299610",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cad9d94_7b2ec059",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-10-16T15:31:15Z",
+      "side": 1,
+      "message": "You can make one keyword like below by adding few more parameters like below:\nModify IP Address And Verify\n   [Documentation]  Modify IPv4 or IPv6 address and verify.\n   [Arguments]  ${ip_addr}  ${test_ip}  ${xpath_edit}  ${xpath_input}\n\n   # Description of argument(s):\n   # ip_addr      IP address to be modified.\n   # ${xpath_edit}  ${xpath_input} explain arguements\n\n   Wait Until Page Contains  ${ip_addr}\n   Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout\u003d120s\n   Wait Until Element Is Enabled  ${xpath_edit}\n   Click Element  ${xpath_edit}\n   Input Text  ${xpath_input}  ${test_ip}\n   Click Element  ${xpath_add_button}\n   Wait Until Page Contains Element   ${xpath_success_message}\n   Sleep  ${NETWORK_TIMEOUT}s\n\n   # Verify IP on BMC via Redfish.\n   ${edit_status}\u003d  Run Keyword And Return Status  Verify IP On BMC  ${test_ipv4_addr_1}\n   Should Be Equal  ${edit_status}  ${True}\n   \n   \n  Or else, in the beginning check type of ip address.. based on whether it is v6 or v4.. change xpaths and appropriate keyword to verify.",
+      "revId": "290c11cbf60794bda55958d3600901ba81299610",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
