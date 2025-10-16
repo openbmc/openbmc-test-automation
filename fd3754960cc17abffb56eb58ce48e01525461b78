@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90fd4325_4a0fe9de",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-16T12:02:12Z",
+      "side": 1,
+      "message": "It takes ${ipv6_leading_zero}-\u003e2001:0022:0033::0111 as one argument and configures it.\nAnd takes another argument ${ipv6_eliminate_zero}-\u003e2001:22:33::111 and verify if it is getting configured as 2001:22:33::111 when we configure 2001:0022:0033::0111.",
+      "parentUuid": "6640fada_8959c269",
+      "revId": "fd3754960cc17abffb56eb58ce48e01525461b78",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f31eb79b_2e0f87fa",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 6
