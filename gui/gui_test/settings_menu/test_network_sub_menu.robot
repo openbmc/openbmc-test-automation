@@ -45,6 +45,10 @@ ${xpath_domainname_switch_button}        //*[@id="useDomainNameSwitch"]/followin
 ${xpath_success_popup}                   //*[contains(text(),'Success')]/following-sibling::button
 ${xpath_delete_ipv4_addres}              //*[text()='${test_ipv4_addr}']/following::td[4]
 ...                                      //*[@title="Delete IPv4 address"]
+${xpath_edit_ipv4_addres}                //*[text()='${test_ipv4_addr}']/following::td[4]
+...                                      //*[@title="Edit static IPv4 address"]
+${xpath_edit_ipv6_addres}                //*[text()='${test_ipv6_addr}']/following::td[3]
+...                                      //*[@title="Edit static IPv6 address"]
 ${xpath_delete_button}                   //*[text()="Delete"]
 ${xpath_eth1_interface}                  //*[text()="eth1"]
 ${xpath_linklocalv6}                     //*[text()="LinkLocal"]
@@ -292,6 +296,22 @@ Delete IPv4 Address Via GUI And Verify
 
    Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success
    Delete IPv4 Address And Verify  ${test_ipv4_addr}
+
+
+Modify IPv4 Address Via GUI And Verify
+    [Documentation]  Edit IPv4 address via GUI and verify.
+    [Tags]  Modify_IPv4_Address_Via_GUI_And_Verify
+ 
+    Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success
+    Modify IPv4 Address And Verify  ${test_ipv4_addr}
+ 
+ 
+Modify IPv6 Address Via GUI And Verify
+    [Documentation]  Edit IPv6 address via GUI and verify.
+    [Tags]  Modify_IPv6_Address_Via_GUI_And_Verify
+ 
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}  ${test_prefix_length}  Success
+    Modify IPv6 Address And Verify  ${test_ipv6_addr}
 
 
 Verify MAC Address Is Displayed
@@ -676,6 +696,52 @@ Delete IPv4 Address And Verify
    Should Be Equal  ${delete_status}  ${False}
 
    Wait Until Page Does Not Contain  ${ip_addr}
+
+
+Modify IPv4 Address And Verify
+   [Documentation]  Modify IPv4 address and verify.
+   [Arguments]  ${ip_addr}
+ 
+   # Description of argument(s):
+   # ip_addr      IP address to be modified.
+ 
+   Wait Until Page Contains  ${ip_addr}
+   Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=120s
+   Wait Until Element Is Enabled  ${xpath_edit_ipv4_addres}
+   Click Element  ${xpath_edit_ipv4_addres}
+   Input Text  ${xpath_input_ip_address}  ${test_ipv4_addr_1}
+   Click Element  ${xpath_add_button}
+   Wait Until Page Contains Element   ${xpath_success_message}
+   Sleep  ${NETWORK_TIMEOUT}s
+ 
+   # Verify IP on BMC via Redfish.
+   ${edit_status}=  Run Keyword And Return Status  Verify IP On BMC  ${test_ipv4_addr_1}
+   Should Be Equal  ${edit_status}  ${True}
+ 
+   Wait Until Page Contains  ${test_ipv4_addr_1}
+ 
+ 
+Modify IPv6 Address And Verify
+   [Documentation]  Modify IPv6 address and verify.
+   [Arguments]  ${ip_addr}
+ 
+   # Description of argument(s):
+   # ip_addr      IP address to be modified.
+ 
+   Wait Until Page Contains  ${ip_addr}
+   Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=120s
+   Wait Until Element Is Enabled  ${xpath_edit_ipv6_addres}
+   Click Element  ${xpath_edit_ipv6_addres}
+   Input Text  ${xpath_input_ip_address}  ${test_ipv6_addr_1}
+   Click Element  ${xpath_add_button}
+   Wait Until Page Contains Element   ${xpath_success_message}
+   Sleep  ${NETWORK_TIMEOUT}s
+ 
+   # Verify IP on BMC via Redfish.
+   ${edit_status}=  Run Keyword And Return Status  Verify IPv6 On BMC  ${test_ipv6_addr_1}
+   Should Be Equal  ${edit_status}  ${True}
+ 
+   Wait Until Page Contains  ${test_ipv6_addr_1}
 
 
 Get Network Interface Details
