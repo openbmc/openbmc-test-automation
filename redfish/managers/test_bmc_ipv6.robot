@@ -212,17 +212,6 @@ Verify BMC Gets SLAAC Address On Enabling SLAAC
     Check BMC Gets SLAAC Address
 
 
-Enable And Verify DHCPv6 Property On Eth1 When DHCPv6 Property Enabled On Eth0
-    [Documentation]  Verify DHCPv6 on eth1 when DHCPv6 property is enabled on eth0.
-    [Tags]  Enable_And_Verify_DHCPv6_Property_On_Eth1_When_DHCPv6_Property_Enabled_On_Eth0
-    [Setup]  Get The Initial DHCPv6 Settings
-    [Teardown]  Run Keywords  Set And Verify DHCPv6 Property  ${dhcpv6_channel_1}  ${1}
-    ...  AND  Set And Verify DHCPv6 Property  ${dhcpv6_channel_2}  ${2}
-
-    Set And Verify DHCPv6 Property  Enabled  ${1}
-    Set And Verify DHCPv6 Property  Enabled  ${2}
-
-
 Verify Enable And Disable SLAAC On Both Interfaces
     [Documentation]  Verify enable and disable SLAAC on both the interfaces.
     [Tags]  Verify_Enable_And_Disable_SLAAC_On_Both_Interfaces
@@ -236,6 +225,20 @@ Verify Enable And Disable SLAAC On Both Interfaces
     ${True}            ${False}
     ${False}           ${True}
     ${False}           ${False}
+
+
+Verify Enable And Disable DHCPv6 On Both Interfaces
+    [Documentation]  Verify enable and disable DHCPv6 on both the interfaces.
+    [Tags]  Verify_Enable_And_Disable_DHCPv6_On_Both_Interfaces
+    [Setup]  Run Keywords  Set And Verify DHCPv6 Property  Enabled  ${1}
+    ...  AND  Set And Verify DHCPv6 Property  Enabled  ${2}
+    [Template]  Set And Verify DHCPv6 Property On Both Interfaces
+
+    # DHCPv6_eth0      DHCPv6_eth1
+    Enabled            Enabled
+    Enabled            Disabled
+    Disabled           Enabled
+    Disabled           Disabled
 
 
 Verify Autoconfig Is Present On Ethernet Interface
@@ -1283,3 +1286,38 @@ Set And Verify SLAAC Property On Both Interfaces
     Verify All The Addresses Are Intact  ${2}
     ...    ${eth1_initial_ipv4_addressorigin_list}  ${eth1_initial_ipv4_addr_list}
 
+
+Set And Verify DHCPv6 Property On Both Interfaces
+    [Documentation]  Set and verify DHCPv6 property on both interfaces.
+    [Arguments]  ${dhcpv6_value_1}  ${dhcpv6_value_2}
+
+    # Description of the argument(s):
+    # dhcpv6_value_1  DHCPv6 value for channel 1.
+    # dhcpv6_value_2  DHCPv6 value for channel 2.
+
+    Set And Verify DHCPv6 Property  ${dhcpv6_value_1}  ${1}
+    Set And Verify DHCPv6 Property  ${dhcpv6_value_2}  ${2}
+
+    Sleep  30s
+
+    # Check DHCPv6 Settings for eth0.
+    @{ipv6_addressorigin_list}  ${ipv6_dhcpv6_addr}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv6Addresses  ${1}
+    IF  "${dhcpv6_value_1}" == "${Enabled}"
+        Should Not Be Empty  ${ipv6_dhcpv6_addr}  DHCPv6
+    ELSE
+        Should Not Contain  ${ipv6_addressorigin_list}  DHCPv6
+    END
+
+    # Check DHCPv6 Settings for eth1.
+    @{ipv6_addressorigin_list}  ${ipv6_dhcpv6_addr}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv6Addresses  ${2}
+    IF  "${dhcpv6_value_2}" == "Enabled"
+        Should Not Be Empty  ${ipv6_dhcpv6_addr}  DHCPv6
+    ELSE
+        Should Not Contain  ${ipv6_addressorigin_list}  DHCPv6
+    END
+
+    Verify All The Addresses Are Intact  ${1}
+    Verify All The Addresses Are Intact  ${2}
+    ...    ${eth1_initial_ipv4_addressorigin_list}  ${eth1_initial_ipv4_addr_list}
