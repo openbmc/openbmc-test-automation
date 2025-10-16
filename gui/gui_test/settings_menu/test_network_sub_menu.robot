@@ -45,6 +45,10 @@ ${xpath_domainname_switch_button}        //*[@id="useDomainNameSwitch"]/followin
 ${xpath_success_popup}                   //*[contains(text(),'Success')]/following-sibling::button
 ${xpath_delete_ipv4_addres}              //*[text()='${test_ipv4_addr}']/following::td[4]
 ...                                      //*[@title="Delete IPv4 address"]
+${xpath_edit_ipv4_addres}                //*[text()='${test_ipv4_addr}']/following::td[4]
+...                                      //*[@title="Edit static IPv4 address"]
+${xpath_edit_ipv6_addres}                //*[text()='${test_ipv6_addr}']/following::td[3]
+...                                      //*[@title="Edit static IPv6 address"]
 ${xpath_delete_button}                   //*[text()="Delete"]
 ${xpath_eth1_interface}                  //*[text()="eth1"]
 ${xpath_linklocalv6}                     //*[text()="LinkLocal"]
@@ -292,6 +296,24 @@ Delete IPv4 Address Via GUI And Verify
 
    Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success
    Delete IPv4 Address And Verify  ${test_ipv4_addr}
+
+
+Modify IPv4 Address Via GUI And Verify
+    [Documentation]  Edit IPv4 address via GUI and verify.
+    [Tags]  Modify_IPv4_Address_Via_GUI_And_Verify
+    [Setup]  Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}
+    ...  ${default_gateway}  Success
+
+    Modify IP Address And Verify  ipv4  ${test_ipv4_addr}  ${test_ipv4_addr_1}
+
+
+Modify IPv6 Address Via GUI And Verify
+    [Documentation]  Edit IPv6 address via GUI and verify.
+    [Tags]  Modify_IPv6_Address_Via_GUI_And_Verify
+    [Setup]  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}
+    ...  ${test_prefix_length}  Success
+
+    Modify IP Address And Verify  ipv6  ${test_ipv6_addr}  ${test_ipv6_addr_1}
 
 
 Verify MAC Address Is Displayed
@@ -676,6 +698,40 @@ Delete IPv4 Address And Verify
    Should Be Equal  ${delete_status}  ${False}
 
    Wait Until Page Does Not Contain  ${ip_addr}
+
+
+Modify IP Address And Verify
+    [Documentation]  Modify IPv4 or IPv6 address via GUI.
+    [Arguments]  ${ip_version}  ${old_ip}  ${new_ip}
+
+    # Description of argument(s):
+    # ip_version   Either 'ipv4' or 'ipv6'.
+    # old_ip       The existing IP address visible on GUI(ipv4 or ipv6).
+    # new_ip       The new IP address to update(ipv4 or ipv6).
+
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=120s
+
+    # Edit button based on version.
+    ${edit_button}=  Set Variable If  '${ip_version}' == 'ipv4'
+    ...  ${xpath_edit_ipv4_addres}  ${xpath_edit_ipv6_addres}
+    Wait Until Element Is Enabled  ${edit_button}
+    Click Element  ${edit_button}
+
+    # Add new IP and save.
+    Input Text  ${xpath_input_ip_address}  ${new_ip}
+    Click Element  ${xpath_add_button}
+
+    Wait Until Page Contains Element  ${xpath_success_message}
+    Sleep  ${NETWORK_TIMEOUT}s
+
+    # Verify IP on BMC via Redfish.
+    ${edit_status}=  Run Keyword If  '${ip_version}' == 'ipv4'
+    ...  Run Keyword And Return Status  Verify IP On BMC  ${new_ip}
+    ...  ELSE
+    ...  Run Keyword And Return Status  Verify IPv6 On BMC  ${new_ip}
+
+    Should Be Equal  ${edit_status}  ${True}
+    Wait Until Page Contains  ${new_ip}
 
 
 Get Network Interface Details
