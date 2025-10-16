@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a93fdeeb_bca8ec8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-10-16T15:50:22Z",
+      "side": 1,
+      "message": "Can you give reference from where this test case is derived from.. may be RFC-\u003ePage-\u003eParagraph",
+      "revId": "5c0171bbe126494413eb9471cbc5d7909e10ce1f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
