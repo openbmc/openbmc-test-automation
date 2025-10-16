@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e44bc342_2ce0e351",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-16T15:21:37Z",
+      "side": 1,
+      "message": "you can remove this as it is already written in the same suite.\nEnable_And_Verify_DHCPv6_Property_On_Eth1_When_DHCPv6_Property_Enabled_On_Eth0",
+      "revId": "0b1e635fb51512633c18e14a12285ceb565e58d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6f98c33_c095f2fd",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-16T15:21:37Z",
+      "side": 1,
+      "message": "as line 1299 \u0026 1300 is taking care of verification part then why you need to add additional verification part? (1304 - 1320)",
+      "revId": "0b1e635fb51512633c18e14a12285ceb565e58d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
