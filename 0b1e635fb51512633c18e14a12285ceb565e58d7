@@ -105,6 +105,24 @@
       "parentUuid": "281785c7_511e8f5e",
       "revId": "0b1e635fb51512633c18e14a12285ceb565e58d7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32a66df8_1011f8f1",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-17T09:19:41Z",
+      "side": 1,
+      "message": "Keeping the same for now as this keyword is used in multiple places and on changing needs a lot of testing.",
+      "parentUuid": "6133d50c_ead7a60d",
+      "revId": "0b1e635fb51512633c18e14a12285ceb565e58d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
