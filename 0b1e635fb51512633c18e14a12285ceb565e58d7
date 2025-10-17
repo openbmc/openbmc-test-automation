@@ -69,6 +69,24 @@
       "parentUuid": "c6f98c33_c095f2fd",
       "revId": "0b1e635fb51512633c18e14a12285ceb565e58d7",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "281785c7_511e8f5e",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-17T04:45:28Z",
+      "side": 1,
+      "message": "${resp}\u003d  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}\n    ${dhcpv6_verify}\u003d  Get From Dictionary  ${resp.dict}  DHCPv6\n\n    Should Be Equal  \u0027${dhcpv6_verify[\u0027OperatingMode\u0027]}\u0027  \u0027${dhcpv6_operating_mode}\u0027\n  in the above however you are fetching DHCPv6 address field right so in the same \n  \"Verify DHCPv6 Property\" keyword you can add below verification part just by passing channel_number, so that it will be useful for other TCs as well.....It\u0027s a suggestion",
+      "parentUuid": "07bcdb17_4f9f6aa0",
+      "revId": "0b1e635fb51512633c18e14a12285ceb565e58d7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
