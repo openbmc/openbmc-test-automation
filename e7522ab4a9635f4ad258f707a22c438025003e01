@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e3b0845_7365fbe2",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-17T05:02:27Z",
+      "side": 1,
+      "message": "Please add this as part of setup",
+      "revId": "e7522ab4a9635f4ad258f707a22c438025003e01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7d5759b_b60967d2",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-17T05:02:27Z",
+      "side": 1,
+      "message": "same as above comment",
+      "revId": "e7522ab4a9635f4ad258f707a22c438025003e01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0347fc2b_f2f031a9",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-17T05:02:27Z",
+      "side": 1,
+      "message": "either for IPv4 or IPv6 right that also you can mention here",
+      "revId": "e7522ab4a9635f4ad258f707a22c438025003e01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a1b74d5_61b4a926",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-17T05:02:27Z",
+      "side": 1,
+      "message": "same as above comment",
+      "revId": "e7522ab4a9635f4ad258f707a22c438025003e01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "665f7619_c73a3cec",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-17T05:02:27Z",
+      "side": 1,
+      "message": "#710 \u0026 711 is not need as below keywords are already taking care of it.\n\nAdd Static IP Address And Verify\nAdd Static IPv6 Address And Verify Via GUI",
+      "revId": "e7522ab4a9635f4ad258f707a22c438025003e01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "378e09cb_3f2c4efc",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-17T05:02:27Z",
+      "side": 1,
+      "message": "end period",
+      "revId": "e7522ab4a9635f4ad258f707a22c438025003e01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66712ded_76b25df7",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-17T05:02:27Z",
+      "side": 1,
+      "message": "end period , same for all the doc",
+      "revId": "e7522ab4a9635f4ad258f707a22c438025003e01",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
