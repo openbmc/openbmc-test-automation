@@ -16,6 +16,23 @@
       "message": "Can you give reference from where this test case is derived from.. may be RFC-\u003ePage-\u003eParagraph",
       "revId": "5c0171bbe126494413eb9471cbc5d7909e10ce1f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecfe5c5d_8868f153",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-17T07:41:24Z",
+      "side": 1,
+      "message": "Referring to:\nRFC 4291: IPv6 Addressing Architecture\nPage 17, Section 2.8 (“A Node’s Required Addresses”)\nAny additional Unicast and Anycast addresses that have been configured for the node’s interfaces (manually or automatically).",
+      "revId": "5c0171bbe126494413eb9471cbc5d7909e10ce1f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
