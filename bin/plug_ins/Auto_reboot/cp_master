@@ -83,6 +83,10 @@ def main():
         os.environ.get("REDFISH_SUPPORT_TRANS_STATE", 0)
     ) or int(os.environ.get("AUTOBOOT_REDFISH_SUPPORT_TRANS_STATE", 0))
 
+    CHASSIS_ID = os.environ.get("CHASSIS_ID", "chassis")
+    MANAGER_ID = os.environ.get("MANAGER_ID", "bmc")
+    SYSTEM_ID = os.environ.get("SYSTEM_ID", "system")
+
     enable_auto_reboot = 1 - AUTO_REBOOT_DISABLE
     print_var(enable_auto_reboot)
     keyword_string = "Set Auto Reboot Setting  ${%i}" % enable_auto_reboot
@@ -96,6 +100,9 @@ def main():
         OPENBMC_PASSWORD,
         IPMI_USERNAME,
         IPMI_PASSWORD,
+        CHASSIS_ID,
+        MANAGER_ID,
+        SYSTEM_ID,
         REDFISH_SUPPORT_TRANS_STATE,
         keyword_string,
         lib_file_path,
