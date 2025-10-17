@@ -68,7 +68,7 @@
         },
         "end": {
             "redfish": "^1$",
-            "chassis": "^Off$",
+            "chassis": "^On|Off$",
             "boot_progress": "^None$",
             "host": "^Disabled$",
             "os_ping": "^0$",
