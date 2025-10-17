@@ -67,6 +67,24 @@
       "message": "```\n${count}\u003d    Evaluate    ${ipv6_address_origin_list}.count(\"LinkLocal\")\n```\n\nplease follow standard spacing format that is two spaces\n\n```\n${count}\u003d  Evaluate  ${ipv6_address_origin_list}.count(\"LinkLocal\")\n```",
       "revId": "5c0171bbe126494413eb9471cbc5d7909e10ce1f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab7bd57c_8ddf2a78",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-17T09:26:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90f8799d_78ffdbd8",
+      "revId": "5c0171bbe126494413eb9471cbc5d7909e10ce1f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
