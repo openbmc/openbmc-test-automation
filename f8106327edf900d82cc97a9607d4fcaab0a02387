@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e11b492b_97e421b3",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-17T11:12:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef9a6693_fce15bc6",
+      "range": {
+        "startLine": 341,
+        "startChar": 0,
+        "endLine": 341,
+        "endChar": 52
+      },
+      "revId": "f8106327edf900d82cc97a9607d4fcaab0a02387",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39c01b1b_2360499b",
@@ -55,6 +79,24 @@
       "side": 1,
       "message": "This verifies coexistence of different ipv6 address type combination for test cases like:\nVerify co-existance of static v6 and DHCPv4v6, both should work\nVerify co-existance of DHCPv4v6 and SLAAC, both should work",
       "parentUuid": "39c01b1b_2360499b",
+      "revId": "f8106327edf900d82cc97a9607d4fcaab0a02387",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f9fb416_3fe69c32",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-17T11:12:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a35590a_a4fad084",
       "revId": "f8106327edf900d82cc97a9607d4fcaab0a02387",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
