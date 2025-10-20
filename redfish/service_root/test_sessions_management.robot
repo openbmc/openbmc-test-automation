@@ -10,6 +10,7 @@ Suite Teardown   Suite Teardown Execution
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
 
+Test Tags        Redfish_Service_Root_Sessions_Management
 
 *** Variables ***
 

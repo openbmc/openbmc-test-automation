@@ -10,6 +10,7 @@ Test Teardown                FFDC On Test Case Fail
 Suite Setup                  Suite Setup Execution
 Suite Teardown               Suite Teardown Execution
 
+Test Tags                    Redfish_Managers_BMC_Network_Protocol
 
 *** Variables ***
 

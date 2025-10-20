@@ -10,6 +10,7 @@ Suite Teardown   Run Keywords  Set Redfish Delete Session Flag  ${1}  AND  Redfi
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
 
+Test Tags        Redfish_Service_Root_Sessions_Connection
 
 *** Variables ***
 

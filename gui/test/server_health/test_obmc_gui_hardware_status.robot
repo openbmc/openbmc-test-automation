@@ -8,6 +8,8 @@ Suite Setup     Launch Browser And Login OpenBMC GUI
 Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
 
+Test Tags       OBMC_GUI_Hardware_Status
+
 *** Variables ***
 
 ${xpath_select_server_health}  //*[@id="nav__top-level"]/li[2]/button

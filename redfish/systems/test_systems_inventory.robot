@@ -11,6 +11,8 @@ Suite Teardown      Suite Teardown Execution
 Test Setup          Printn
 Test Teardown       Test Teardown Execution
 
+Test Tags           Redfish_Systems_Inventory
+
 *** Variables ***
 
 # The passing criteria.  Must have at least this many.

@@ -8,6 +8,8 @@ Suite Setup     Launch Browser And Login OpenBMC GUI
 Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
 
+Test Tags       OBMC_GUI_Sensors
+
 *** Variables ***
 ${xpath_select_server_health}   //*[@id="nav__top-level"]/li[2]/button
 ${xpath_select_sensors}         //a[@href='#/server-health/sensors-overview']

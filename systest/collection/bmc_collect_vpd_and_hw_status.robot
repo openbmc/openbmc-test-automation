@@ -11,6 +11,8 @@ Suite Setup         Suite Setup Execution
 Suite Teardown      Suite Teardown Execution
 Test Setup          Printn
 
+Test Tags           Systest_Collection_BMC_Collect_VPD_And_HW_Status
+
 *** Variables ***
 ${QUIET}  ${1}
 ${rest_collected_values}  Rest collection excluded

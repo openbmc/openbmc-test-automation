@@ -8,6 +8,8 @@ Resource         ../../lib/open_power_utils.robot
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
+Test Tags        Redfish_Systems_Power_Operations
+
 *** Variables ***
 
 # Extended code to check OCC state, power metric and others.

@@ -25,6 +25,8 @@ Test Setup      Run Keywords  Redfish.Login  AND  Redfish1.Login
 Test Teardown   Run Keywords  FFDC On Test Case Fail  AND  Redfish.Logout  AND  Redfish1.Logout
 Suite Teardown  Run Keywords  Redfish1.Logout  AND  Redfish.Logout
 
+Test Tags       Redfish_Managers_Multiple_Interfaces
+
 *** Variables ***
 
 ${cmd_prefix}  ipmitool -I lanplus -C 17 -p 623 -U ${IPMI_USERNAME} -P ${IPMI_PASSWORD}

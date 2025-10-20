@@ -9,6 +9,8 @@ Library          ../../lib/gen_robot_print.py
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
+Test Tags        Redfish_Systems_Sensor_Monitoring
+
 *** Variables ***
 
 @{INVALID_SENSORS}

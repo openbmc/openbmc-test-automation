@@ -14,6 +14,7 @@ Suite Teardown      Suite Teardown Execution
 Test Setup          Redfish Purge Event Log
 Test Teardown       Test Teardown Execution
 
+Test Tags           Redfish_Systems_Thermal_Ambient_Temperatures
 
 *** Test Cases ***
 

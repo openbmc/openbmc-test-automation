@@ -3,6 +3,7 @@ Documentation  Do random repeated boots based on the state of the BMC machine.
 
 Resource  obmc_boot_test_resource.robot
 
+Test Tags  Obmc_Boot
 
 *** Test Cases ***
 
