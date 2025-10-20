@@ -55,7 +55,7 @@ Redfish Fail Unsigned Code Update
 
 REST Failure When Field Mode Set To Disable
     [Documentation]  Verify error while disabling field mode from enabled mode.
-    [Tags]  REST_Failure_When_Field_Mode_Set_To_Disable
+    [Tags]  REST_Failure_When_Field_Mode_Set_To_Disable  rest
 
     ${args}=  Create Dictionary  data=${0}
     ${resp}=  OpenBMC Post Request  ${SOFTWARE_VERSION_URI}attr/FieldModeEnabled  data=${args}
