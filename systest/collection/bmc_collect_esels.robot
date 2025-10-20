@@ -11,6 +11,8 @@ Suite Setup         Suite Setup Execution
 Suite Teardown      Suite Teardown Execution
 Test Setup          Printn
 
+Test Tags           BMC_Collect_Esels
+
 *** Variables ***
 ${QUIET}                       ${1}
 ${error_logs_flagged_rest}     Rest error log collection excluded

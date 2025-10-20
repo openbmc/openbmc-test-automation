@@ -10,6 +10,7 @@ Suite Teardown   Suite Teardown Execution
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
 
+Test Tags        Sessions_Management
 
 *** Variables ***
 

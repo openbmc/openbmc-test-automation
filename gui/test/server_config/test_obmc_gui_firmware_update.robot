@@ -10,6 +10,8 @@ Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
 Test Teardown   Re-Launch GUI on Failure
 
+Test Tags       OBMC_GUI_Firmware_Update
+
 *** Variables ***
 ${xpath_select_server_config}   //*[@id="nav__top-level"]/li[4]/button
 ${xpath_select_firmware}        //a[@href='#/configuration/firmware']

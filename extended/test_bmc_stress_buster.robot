@@ -10,6 +10,8 @@ Resource       ../lib/openbmc_ffdc.robot
 
 Test Teardown  FFDC On Test Case Fail
 
+Test Tags      BMC_Stress_Buster
+
 ***Variables***
 
 # Caller can specify a value for the following using -v parms

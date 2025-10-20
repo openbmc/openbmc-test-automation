@@ -9,6 +9,7 @@ Resource        ../../lib/resource.robot
 Suite Setup     Launch Browser And Login OpenBMC GUI
 Suite Teardown  Close Browser
 
+Test Tags       OBMC_GUI_IP_Refresh_Check
 
 *** Variables ***
 ${xpath_bmc_ip}                 //*[contains(@class, "header__server-ip")]

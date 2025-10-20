@@ -14,6 +14,8 @@ Suite Setup         Suite Setup Execution
 Test Setup          Open Connection And Log In
 Test Teardown       Test Teardown Execution
 
+Test Tags           BMC_Dump
+
 *** Test Cases ***
 
 Verify Dump After Host Watchdog Error Injection
