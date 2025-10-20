@@ -31,7 +31,7 @@ ${iteration}     ${0}
 
 REST Upload Stability Test
     [Documentation]  Execute upload stress testing.
-    [Tags]  REST_Upload_Stability_Test
+    [Tags]  REST_Upload_Stability_Test  rest
 
     Repeat Keyword  ${LOOPS} times  Upload Test Image File To BMC
 
