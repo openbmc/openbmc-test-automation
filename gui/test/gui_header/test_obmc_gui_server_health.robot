@@ -15,6 +15,8 @@ Library         ../../../lib/gen_robot_keyword.py
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 
+Test Tags       OBMC_GUI_Server_Health
+
 *** Variables ***
 
 ${xpath_delete_remote_server}  //*[@class="remote-logging-server"]//button[2]

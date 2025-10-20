@@ -11,6 +11,8 @@ Suite Teardown      Suite Teardown Execution
 Test Setup          Printn
 Test Teardown       Test Teardown Execution
 
+Test Tags           Powersubsystem_Settings
+
 *** Variables ***
 
 # Power Mode Settings

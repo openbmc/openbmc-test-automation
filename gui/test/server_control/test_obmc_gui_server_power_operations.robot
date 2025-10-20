@@ -7,6 +7,7 @@ Resource        ../../lib/resource.robot
 
 Test Teardown   Close Browser
 
+Test Tags       OBMC_GUI_Server_Power_Operations
 
 *** Variables ***
 

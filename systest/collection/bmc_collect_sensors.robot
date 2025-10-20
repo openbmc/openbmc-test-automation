@@ -13,6 +13,8 @@ Suite Setup         Suite Setup Execution
 Suite Teardown      Suite Teardown Execution
 Test Setup          Printn
 
+Test Tags           BMC_Collect_Sensors
+
 *** Variables ***
 ${QUIET}                     ${1}
 ${sensors_values_rest}       Rest sensors collection excluded

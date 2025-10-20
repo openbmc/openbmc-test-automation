@@ -14,6 +14,8 @@ Library         ../lib/bmc_ssh_utils.py
 Test Teardown   Test Teardown Execution
 Suite Setup     Suite Setup Execution
 
+Test Tags       BMC_Reset_Loop
+
 *** Variables ***
 ${LOOP_COUNT}          ${50}
 ${CHECK_FOR_ERRORS}    ${1}

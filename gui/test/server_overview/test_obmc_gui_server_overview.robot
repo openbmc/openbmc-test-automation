@@ -7,6 +7,8 @@ Resource         ../lib/bmc_network_utils.robot
 Test Setup       Test Setup Execution  ${OBMC_PowerOff_state}
 Test Teardown    Test Teardown Execution
 
+Test Tags        OBMC_GUI_Server_Overview
+
 *** Variables ***
 ${xpath_select_overview_1}         //*[@href="#/overview/server"]
 ${string_content}                  witherspoon

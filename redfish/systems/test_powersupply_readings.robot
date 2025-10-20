@@ -11,6 +11,7 @@ Suite Teardown      Suite Teardown Execution
 Test Setup          Printn
 Test Teardown       Test Teardown Execution
 
+Test Tags           Powersupply_Readings
 
 *** Test Cases ***
 

@@ -24,6 +24,7 @@ Library           ../lib/gen_misc.py
 # Force the test to timedout to prevent test hanging.
 Test Timeout      10 minutes
 
+Test Tags         Standby_BMC
 
 *** Variables ***
 ${HOST_SETTING}      /org/openbmc/settings/host0

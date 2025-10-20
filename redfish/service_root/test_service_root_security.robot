@@ -7,6 +7,8 @@ Resource         ../../lib/openbmc_ffdc.robot
 Test Teardown    FFDC On Test Case Fail
 Test Setup       Printn
 
+Test Tags        Service_Root_Secuirity
+
 *** Variables ***
 
 ${LOGIN_SESSION_COUNT}   ${50}
