@@ -7,6 +7,8 @@ Resource          ../lib/resource.robot
 Resource          ../lib/openbmc_ffdc.robot
 Test Teardown     FFDC On Test Case Fail
 
+Test Tags         Test_SSL
+
 *** Test Cases ***
 
 Test SSL Connection

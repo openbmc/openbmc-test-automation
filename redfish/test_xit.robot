@@ -7,6 +7,8 @@ Resource        ../lib/openbmc_ffdc.robot
 
 Test Teardown   Test Teardown Execution
 
+Test Tags        Test_XIT
+
 *** Variables ***
 
 # Error strings to check from journald.

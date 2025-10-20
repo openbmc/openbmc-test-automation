@@ -8,6 +8,7 @@ Suite Setup     Launch Browser And Login OpenBMC GUI
 Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
 
+Test Tags       OBMC_GUI_SOL_Console
 
 *** Variables ***
 

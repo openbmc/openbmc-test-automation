@@ -9,6 +9,8 @@ Suite Setup     Launch Browser And Login OpenBMC GUI
 Suite Teardown  Close Browser
 Test Setup      Test Setup Execution
 
+Test Tags       OBMC_GUI_Network_Settings
+
 *** Variables ***
 
 ${xpath_select_server_configuration}  //*[@id="nav__top-level"]/li[4]/button

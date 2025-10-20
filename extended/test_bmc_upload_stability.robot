@@ -18,6 +18,7 @@ Resource           ../lib/openbmc_ffdc.robot
 
 Test Teardown   FFDC On Test Case Fail
 
+Test Tags       BMC_Upload_Stability
 
 *** Variables ****
 
