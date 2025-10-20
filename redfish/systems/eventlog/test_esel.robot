@@ -48,7 +48,7 @@ Verify eSEL Entries Using Redfish
 Verify eSEL Description And EntryID Using REST
     [Documentation]  Create eSEL log and verify "Description" and "EntryID"
     ...  are not empty via REST.
-    [Tags]  Verify_eSEL_Description_And_EntryID_Using_REST
+    [Tags]  Verify_eSEL_Description_And_EntryID_Using_REST  rest
 
     # {
     # "AdditionalData": [
