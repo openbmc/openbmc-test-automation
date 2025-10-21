@@ -16,6 +16,24 @@
       "message": "IPv6\nSuggestion : Configure IPv6 with leading zeros \u0026 verify address is configured by elimination 0s in multiple hextets",
       "revId": "23b2ee22bd826c1044f8a3da81587b13a207a1d1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4a6fc83_7ccf1f2d",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-21T07:28:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c580d49e_584dd2c6",
+      "revId": "23b2ee22bd826c1044f8a3da81587b13a207a1d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
