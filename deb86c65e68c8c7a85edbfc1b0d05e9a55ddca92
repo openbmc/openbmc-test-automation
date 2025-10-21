@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b468bb19_cfb81d89",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-21T15:21:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5b247da_f4cd6152",
+      "revId": "deb86c65e68c8c7a85edbfc1b0d05e9a55ddca92",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5721366b_99610e3a",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "943f9d7c_98e81ce4",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1303,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-21T15:21:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5721366b_99610e3a",
+      "revId": "deb86c65e68c8c7a85edbfc1b0d05e9a55ddca92",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d46cc32_d7a9db26",
@@ -48,6 +84,24 @@
       "writtenOn": "2025-10-21T05:33:10Z",
       "side": 1,
       "message": "why you want to delete address here?",
+      "revId": "deb86c65e68c8c7a85edbfc1b0d05e9a55ddca92",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72137502_0620654d",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1323,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-21T15:21:40Z",
+      "side": 1,
+      "message": "For test case clean up. Every time keeping only 2 address type set or enabled.",
+      "parentUuid": "1d46cc32_d7a9db26",
       "revId": "deb86c65e68c8c7a85edbfc1b0d05e9a55ddca92",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
