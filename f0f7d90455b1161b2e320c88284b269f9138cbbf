@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f129e4c_5374b252",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-10-21T04:56:07Z",
+      "side": 1,
+      "message": "Thank you for doing this. A general comment\n\nCreate a suite Tag name from the test file name\nExample:\n    Suite:  test_boot_progress_code.robot\n\n    Test Tags    Boot_Progress_Code\n\nReference: https://github.com/openbmc/openbmc-test-automation/blob/master/CONTRIBUTING.md\n\nPlease follow the same for all the file changes for Test Tags",
+      "revId": "f0f7d90455b1161b2e320c88284b269f9138cbbf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
