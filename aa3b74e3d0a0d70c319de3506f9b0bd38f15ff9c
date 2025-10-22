@@ -57,6 +57,24 @@
       "parentUuid": "41780374_c9d1aafd",
       "revId": "aa3b74e3d0a0d70c319de3506f9b0bd38f15ff9c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "935308ed_c5dd2ebd",
+        "filename": "security/test_ssl.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-22T08:14:18Z",
+      "side": 1,
+      "message": "thats right. But SSL looks more like an abbreviation thats why suggested as Test_SSL",
+      "parentUuid": "69370f72_f165d823",
+      "revId": "aa3b74e3d0a0d70c319de3506f9b0bd38f15ff9c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
