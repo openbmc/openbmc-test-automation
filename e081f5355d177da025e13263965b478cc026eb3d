@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e4a5cd3_c150bf5c",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2025-10-22T10:03:16Z",
+      "side": 1,
+      "message": "You probably missed this if, please change it as well.",
+      "revId": "e081f5355d177da025e13263965b478cc026eb3d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3c38a027_a92cf030",
         "filename": "security/test_bmc_connections.robot",
         "patchSetId": 2
@@ -14,6 +31,24 @@
       "writtenOn": "2025-10-22T09:36:34Z",
       "side": 1,
       "message": "can u put this code IF inside the above IF statement after line 283\n\nlike\n        IF  ${iter} % 100 \u003d\u003d 0\n            ${status}\u003d  Run Keyword And Return Status  Login And Upload Partition File To BMC\n            IF  ${status} \u003d\u003d ${False}  Append To List  ${status_list}  ${status}\n        END",
+      "revId": "e081f5355d177da025e13263965b478cc026eb3d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87d2e97a_1dabf4c1",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2025-10-22T10:03:16Z",
+      "side": 1,
+      "message": "This is also applicable to a few cases above.",
+      "parentUuid": "3c38a027_a92cf030",
       "revId": "e081f5355d177da025e13263965b478cc026eb3d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
