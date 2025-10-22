@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b017873b_42ab94b0",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-22T13:17:49Z",
+      "side": 1,
+      "message": "Please arrange setup and teardown as an example shown below.. This way it looks much neat and helps to understand the flow\n\n```\n[Teardown]  Run Keywords\n...  Delete IPv6 Address  ${test_ipv6_addr}  ${1}\n...  AND  Delete IPv6 Address  ${test_ipv6_addr1}  ${2}\n...  AND  Test Teardown Execution\n```",
+      "range": {
+        "startLine": 385,
+        "startChar": 0,
+        "endLine": 388,
+        "endChar": 101
+      },
+      "revId": "cfe593e414b90b2ed564a3feaa6e9f425f9d63c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03fd85c9_074fab10",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 1363,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-22T13:17:49Z",
+      "side": 1,
+      "message": "variables always start with lower case\n\nIPv6_address_type1 -\u003e ipv6_address_type1\n\nI actually meant to give options.. i dint comment on the variable name\n\nIPv6 address type (DHCPv6, SLAAC, Static).",
+      "range": {
+        "startLine": 1363,
+        "startChar": 11,
+        "endLine": 1363,
+        "endChar": 29
+      },
+      "revId": "cfe593e414b90b2ed564a3feaa6e9f425f9d63c0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
