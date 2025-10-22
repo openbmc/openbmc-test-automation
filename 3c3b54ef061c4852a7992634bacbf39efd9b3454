@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61838e4a_eb2e0536",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-22T11:19:28Z",
+      "side": 1,
+      "message": "This keyword deals with deletion of IPv4 and IPv6 Addresses.",
+      "parentUuid": "8b00136f_ca2d85f7",
+      "range": {
+        "startLine": 712,
+        "startChar": 4,
+        "endLine": 712,
+        "endChar": 43
+      },
+      "revId": "3c3b54ef061c4852a7992634bacbf39efd9b3454",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82838ded_4a6cf826",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bff4500d_49179233",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-22T11:19:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82838ded_4a6cf826",
+      "range": {
+        "startLine": 842,
+        "startChar": 0,
+        "endLine": 842,
+        "endChar": 30
+      },
+      "revId": "3c3b54ef061c4852a7992634bacbf39efd9b3454",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0602d524_0615cb76",
@@ -60,6 +108,30 @@
       "writtenOn": "2025-10-22T10:00:20Z",
       "side": 1,
       "message": "add documentation",
+      "range": {
+        "startLine": 897,
+        "startChar": 0,
+        "endLine": 897,
+        "endChar": 28
+      },
+      "revId": "3c3b54ef061c4852a7992634bacbf39efd9b3454",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c728fc51_7d9068d5",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-22T11:19:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0602d524_0615cb76",
       "range": {
         "startLine": 897,
         "startChar": 0,
