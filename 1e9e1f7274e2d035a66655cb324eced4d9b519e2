@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d6cd435_dd4ddad1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-22T10:37:34Z",
+      "side": 1,
+      "message": "Created sample test script and made sure there is no code break for the impacted keywords\n\n```\n*** Settings ***\nResource         ../lib/resource.robot\nResource         ../lib/bmc_redfish_resource.robot\nResource         ../lib/common_utils.robot\nSuite Setup      Redfish.Login\nSuite Teardown   Redfish.Logout\n\n*** Test Cases ***\nTest Directive Fix\n\n    Check OS\n    Set BMC Reset Reference Time\n\n    Start SOL Console Logging   ${EXECDIR}/esol.log\n    Stop SOL Console Logging\n\n    Check For Core Dumps\n    ${boot_count}\u003d   Get BMC Boot Count\n    Log To Console  ${boot_count}\n\n    Check For Regex In Journald   bmc\n```",
+      "revId": "1e9e1f7274e2d035a66655cb324eced4d9b519e2",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
