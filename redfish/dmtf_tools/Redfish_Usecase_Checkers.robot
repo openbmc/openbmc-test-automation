@@ -20,13 +20,13 @@ ${DEFAULT_PYTHON}         python3
 ${rsv_github_url}         https://github.com/DMTF/Redfish-Usecase-Checkers.git
 ${rsv_dir_path}           Redfish-Usecase-Checkers
 
-${command_account}        ${DEFAULT_PYTHON} ${rsv_dir_path}${/}account_management/account_management.py
-...                       -r ${OPENBMC_HOST} -u ${OPENBMC_USERNAME}
-...                       -p ${OPENBMC_PASSWORD} -S Always -d ${EXECDIR}${/}account-logs${/}
+${command_account}        ${DEFAULT_PYTHON} ${rsv_dir_path}${/}rf_use_case_checkers.py
+...                       -r https://${OPENBMC_HOST} -u ${OPENBMC_USERNAME}
+...                       -p ${OPENBMC_PASSWORD} --test-list AccountManagement
 
-${command_power_control}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}power_control/power_control.py
-...                       -r ${OPENBMC_HOST} -u ${OPENBMC_USERNAME}
-...                       -p ${OPENBMC_PASSWORD} -S Always -d ${EXECDIR}${/}power-logs${/}
+${command_power_control}  ${DEFAULT_PYTHON} ${rsv_dir_path}${/}rf_use_case_checkers.py
+...                       -r https://${OPENBMC_HOST} -u ${OPENBMC_USERNAME}
+...                       -p ${OPENBMC_PASSWORD} --test-list PowerControl
 
 ${power_on_timeout}       15 mins
 ${power_off_timeout}      15 mins
@@ -39,28 +39,10 @@ Test BMC Redfish Account Management
     [Documentation]  Check Account Management with a Redfish interface.
     [Tags]  Test_BMC_Redfish_Account_Management
 
-    ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${command_account}  check_error=1
+    ${rc}  ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${command_account}  check_error=1
 
-    ${output}=  Shell Cmd  cat ${EXECDIR}${/}account-logs${/}results.json
-    Log  ${output}
-
-    ${json}=  OperatingSystem.Get File    ${EXECDIR}${/}account-logs${/}results.json
-
-    ${object}=  Evaluate  json.loads('''${json}''')  json
-
-    ${result_list}=  Set Variable  ${object["TestResults"]}
-
-    @{failed_tc_list}=    Create List
-
-    FOR  ${result}  IN  @{result_list}
-       ${rc}=  Evaluate  'ErrorMessages'=='${result}'
-       ${num}=  Set Variable If  ${rc} == False  ${result_list["${result}"]["fail"]}
-       IF  ${num} != None and ${num} > 0
-           Append To List  ${failed_tc_list}   ${result}
-       END
-    END
-
-    Should Be Empty  ${failed_tc_list}  Failed test cases are ${failed_tc_list}
+    Should Be Equal        ${rc}  ${0}
+    Should Match Regexp    ${output}  Summary - PASS: \\d+, WARN: \\d+, FAIL: 0, NOT TESTED: \\d+
 
 
 Test BMC Redfish Power Control Usecase
@@ -89,38 +71,9 @@ Test Teardown Execution
 DMTF Power
     [Documentation]  Power the BMC machine on via DMTF tools.
 
-    ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${command_power_control}  check_error=1
+    ${rc}  ${output}=  Run DMTF Tool  ${rsv_dir_path}  ${command_power_control}  check_error=1
+    Log  ${rc}
     Log  ${output}
 
-    ${json}=  OperatingSystem.Get File    ${EXECDIR}${/}power-logs${/}results.json
-
-    ${object}=  Evaluate  json.loads('''${json}''')  json
-
-    ${result_list}=  Set Variable  ${object["TestResults"]}
-    Log To Console  result: ${result_list}
-
-    @{failed_tc_list}=    Create List
-    @{error_messages}=    Create List
-
-    FOR  ${result}  IN  @{result_list}
-       ${rc}=  Evaluate  'ErrorMessages'=='${result}'
-
-       ${num}=  Set Variable If  ${rc} == False
-       ...  ${result_list["${result}"]["fail"]}
-
-       IF  ${num} != None and ${num} > 0
-           Append To List  ${failed_tc_list}   ${result}
-       END
-
-       IF  ${rc} == True
-           Append To List  ${error_messages}  ${result_list["ErrorMessages"]}
-       END
-    END
-
-    Log Many            ErrorMessages:   @{error_messages}
-    Log To Console      ErrorMessages:
-    FOR   ${msg}  IN  @{error_messages}
-       Log To Console   ${msg}
-    END
-
-    Should Be Empty  ${error_messages}   DMTF Power keyword failed.
+    Should Be Equal        ${rc}  ${0}
+    Should Match Regexp    ${output}    Summary - PASS: \\d+, WARN: \\d+, FAIL: 0, NOT TESTED: \\d+
