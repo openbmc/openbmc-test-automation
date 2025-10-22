@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b00136f_ca2d85f7",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-22T10:00:20Z",
+      "side": 1,
+      "message": "use ${ipv6_address_type}  Type of IPv6 address to be checked.\nchange to\n${ipv6_address_type}",
+      "range": {
+        "startLine": 712,
+        "startChar": 4,
+        "endLine": 712,
+        "endChar": 43
+      },
+      "revId": "3c3b54ef061c4852a7992634bacbf39efd9b3454",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82838ded_4a6cf826",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-22T10:00:20Z",
+      "side": 1,
+      "message": "Add documentation",
+      "range": {
+        "startLine": 842,
+        "startChar": 0,
+        "endLine": 842,
+        "endChar": 30
+      },
+      "revId": "3c3b54ef061c4852a7992634bacbf39efd9b3454",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0602d524_0615cb76",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-22T10:00:20Z",
+      "side": 1,
+      "message": "add documentation",
+      "range": {
+        "startLine": 897,
+        "startChar": 0,
+        "endLine": 897,
+        "endChar": 28
+      },
+      "revId": "3c3b54ef061c4852a7992634bacbf39efd9b3454",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
