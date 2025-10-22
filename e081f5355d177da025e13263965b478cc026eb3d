@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a04d1a9_d3fafe43",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-22T11:29:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e4a5cd3_c150bf5c",
+      "revId": "e081f5355d177da025e13263965b478cc026eb3d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c38a027_a92cf030",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "This is also applicable to a few cases above.",
       "parentUuid": "3c38a027_a92cf030",
+      "revId": "e081f5355d177da025e13263965b478cc026eb3d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1026d04f_d94b263f",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-22T11:29:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87d2e97a_1dabf4c1",
       "revId": "e081f5355d177da025e13263965b478cc026eb3d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
