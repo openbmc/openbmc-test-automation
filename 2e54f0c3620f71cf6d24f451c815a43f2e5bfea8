@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0883f11c_4573a45a",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-22T11:45:15Z",
+      "side": 1,
+      "message": "ipv6 to IPv6",
+      "range": {
+        "startLine": 383,
+        "startChar": 43,
+        "endLine": 383,
+        "endChar": 47
+      },
+      "revId": "2e54f0c3620f71cf6d24f451c815a43f2e5bfea8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86f0dc67_6a7cef54",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-22T11:45:15Z",
+      "side": 1,
+      "message": "Change as mentioned below\n\n```\n    #type1   type2.\n    Static   DHCPv6\n    DHCPv6   SLAAC\n    SLAAC    Static\n    Static   Static\n    \n````",
+      "range": {
+        "startLine": 390,
+        "startChar": 0,
+        "endLine": 396,
+        "endChar": 0
+      },
+      "revId": "2e54f0c3620f71cf6d24f451c815a43f2e5bfea8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2744297d_9e4a8ad2",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 1361,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-22T11:45:15Z",
+      "side": 1,
+      "message": "provide the valid argument format for type1 and type2",
+      "range": {
+        "startLine": 1359,
+        "startChar": 1,
+        "endLine": 1361,
+        "endChar": 31
+      },
+      "revId": "2e54f0c3620f71cf6d24f451c815a43f2e5bfea8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
