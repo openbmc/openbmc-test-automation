@@ -16,6 +16,24 @@
       "message": "CI Failure\n\ncodespell-dictionary - misspelling count \u003e\u003e /tmp/tmp.gyhmMnZ8qE:4: re-used \u003d\u003d\u003e reused\n1\ngeneric-dictionary - misspelling count \u003e\u003e /tmp/tmp.gyhmMnZ8qE:4: re-used \u003d\u003d\u003e reused\n1\n    commit_spelling - FAILED\n\nin commit message",
       "revId": "85f02859c3c22221b88c0c91bf4930b4a854ce9a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdbc2819_94f5e977",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2025-10-22T21:54:12Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "f9cbdd80_72bdc481",
+      "revId": "85f02859c3c22221b88c0c91bf4930b4a854ce9a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
