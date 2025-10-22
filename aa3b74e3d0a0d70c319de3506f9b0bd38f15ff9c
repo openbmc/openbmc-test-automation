@@ -39,6 +39,24 @@
       "message": "Test_SSL",
       "revId": "aa3b74e3d0a0d70c319de3506f9b0bd38f15ff9c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69370f72_f165d823",
+        "filename": "security/test_ssl.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2025-10-22T07:36:13Z",
+      "side": 1,
+      "message": "@sridevra@in.ibm.com As @gkeishin@gmail.com suggested, I followed this example from https://github.com/openbmc/openbmc-test-automation/blob/master/CONTRIBUTING.md\n```\nCreate a suite Tag name from the test file name\nExample:\n    Suite:  test_boot_progress_code.robot\n\n    Test Tags    Boot_Progress_Code\n```\n\nI did that here - for test_ssl suite the tag is SSL. Is there a reason why you suggest to use Test_SSL instead the schema suggested in the CONTRIBUTING.md?",
+      "parentUuid": "41780374_c9d1aafd",
+      "revId": "aa3b74e3d0a0d70c319de3506f9b0bd38f15ff9c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
