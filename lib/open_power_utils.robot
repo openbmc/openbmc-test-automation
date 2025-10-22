@@ -45,7 +45,9 @@ Get OCC Active State
     ...  print_out=1  print_err=1  ignore_err=1
 
     # The command returns format  'b true'
-    Return From Keyword If  '${cmd_output.split(' ')[-1]}' == 'true'  ${1}
+    IF  '${cmd_output.split(' ')[-1]}' == 'true'
+        RETURN  ${1}
+    END
 
     RETURN  ${0}
 
@@ -76,7 +78,11 @@ Read Object Attribute
 
     ${resp}=  OpenBMC Get Request
     ...  ${object_base_uri_path}/attr/${attribute_name}  quiet=${1}
-    Return From Keyword If  ${resp.status_code} != ${HTTP_OK}
+
+    IF  ${resp.status_code} != ${HTTP_OK}
+        RETURN
+    END
+
     RETURN  ${resp.json()["data"]}
 
 
@@ -88,7 +94,10 @@ Get Functional Processor Count
     FOR  ${endpoint_path}  IN  @{cpu_list}
        # {'Health': 'OK', 'State': 'Enabled'} get only matching status good.
        ${cpu_status}=  Redfish.Get Attribute  ${endpoint_path}  Status
-       Continue For Loop If  '${cpu_status['Health']}' != 'OK' or '${cpu_status['State']}' != 'Enabled'
+
+       IF  '${cpu_status['Health']}' != 'OK' or '${cpu_status['State']}' != 'Enabled'
+           CONTINUE
+       END
        ${functional_cpu_count} =  Evaluate   ${functional_cpu_count} + 1
     END
 
@@ -109,7 +118,7 @@ Get Active OCC State Count
        ...  print_out=1  print_err=1  ignore_err=1
 
        # The command returns format  'b true'
-       Continue For Loop If   '${cmd_output.split(' ')[-1]}' != 'true'
+       IF   '${cmd_output.split(' ')[-1]}' != 'true'  CONTINUE
        ${active_occ_count} =  Evaluate   ${active_occ_count} + 1
     END
 
@@ -130,7 +139,7 @@ Match OCC And CPU State Count
        ...  print_out=1  print_err=1  ignore_err=1
 
        # The command returns format  'b true'
-       Continue For Loop If   '${cmd_output.split(' ')[-1]}' != 'true'
+       IF   '${cmd_output.split(' ')[-1]}' != 'true'  CONTINUE
        ${active_occ_count} =  Evaluate   ${active_occ_count} + 1
     END
 
@@ -155,7 +164,7 @@ Verify OCC State
     FOR  ${endpoint_path}  IN  @{cpu_list}
        # {'Health': 'OK', 'State': 'Enabled'} get only matching status good.
        ${cpu_status}=  Redfish.Get Attribute  ${endpoint_path}  Status
-       Continue For Loop If  '${cpu_status['Health']}' != 'OK' or '${cpu_status['State']}' != 'Enabled'
+       IF  '${cpu_status['Health']}' != 'OK' or '${cpu_status['State']}' != 'Enabled'  CONTINUE
        Log To Console  ${cpu_status}
        ${num}=  Set Variable  ${endpoint_path[-1]}
        ${occ_active}=  Get OCC Active State  ${num}
@@ -231,8 +240,8 @@ Get Sensors Aggregation URL List
     ${power_supply_max_list}=  Create List
 
     FOR  ${entry}  IN  @{resp.json()["data"]}
-        Run Keyword If  'average' in '${entry}'  Append To List  ${power_supply_avg_list}  ${entry}
-        Run Keyword If  'maximum' in '${entry}'  Append To List  ${power_supply_max_list}  ${entry}
+        IF  'average' in '${entry}'  Append To List  ${power_supply_avg_list}  ${entry}
+        IF  'maximum' in '${entry}'  Append To List  ${power_supply_max_list}  ${entry}
     END
 
     RETURN  ${power_supply_avg_list}  ${power_supply_max_list}
@@ -360,7 +369,7 @@ Get Populated Sensors Dbus List
            ${cmd_output}  ${stderr}  ${rc} =  BMC Execute Command  ${cmd}
            ...  print_out=0  print_err=0  ignore_err=1
            # Skip failed to get property command on Dbus object.
-           Run Keyword If  ${rc} == 0   Append To List  ${valid_dbus_list}  ${val}
+           IF  ${rc} == 0   Append To List  ${valid_dbus_list}  ${val}
         END
     END
 
@@ -388,7 +397,7 @@ Verify Runtime Sensors Dbus List
     ${status}=  Run Keyword And Return Status
     ...  Dictionary Should Contain Value   ${json_sensor_data}  ${runtime_sensor_list}
 
-    Run Keyword If  ${status} == ${False}  Log And Fail  ${json_sensor_data}
+    IF  ${status} == ${False}  Log And Fail  ${json_sensor_data}
 
     Log To Console  Runtime Dbus sensor list matches.
 
@@ -410,7 +419,8 @@ Dump Fan Control JSON
 
     ${output}  ${stderr}  ${rc} =  BMC Execute Command  test -f /usr/bin/fanctl
     ...  print_err=1  ignore_err=1
-    Return From Keyword If   ${rc} == 1  fanctl application doesn't exist.
+
+    IF   ${rc} == 1  RETURN  fanctl application doesn't exist.
 
     # This command will force a fan_control_dump.json file in temp path and
     # takes few seconds to complete..
