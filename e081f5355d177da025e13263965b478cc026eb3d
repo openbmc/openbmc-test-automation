@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c38a027_a92cf030",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-10-22T09:36:34Z",
+      "side": 1,
+      "message": "can u put this code IF inside the above IF statement after line 283\n\nlike\n        IF  ${iter} % 100 \u003d\u003d 0\n            ${status}\u003d  Run Keyword And Return Status  Login And Upload Partition File To BMC\n            IF  ${status} \u003d\u003d ${False}  Append To List  ${status_list}  ${status}\n        END",
+      "revId": "e081f5355d177da025e13263965b478cc026eb3d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
