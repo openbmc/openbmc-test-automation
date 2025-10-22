@@ -16,6 +16,24 @@
       "message": "Give a quick test.. the status inside the IF, so based on the locality of the variable scope the status might be some random value if not initialized.",
       "revId": "946ed88cbe05589df2e5a38ff791026fd8fd0c1e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ef41c26_df43fa7a",
+        "filename": "security/test_bmc_connections.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-22T08:53:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df463abe_9034f7c3",
+      "revId": "946ed88cbe05589df2e5a38ff791026fd8fd0c1e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
