@@ -85,6 +85,30 @@ Configure IPv6 Address And Verify
     ${test_ipv6_addr}  ${test_prefix_length}
 
 
+Configure IPv6 Address On BMC And Verify On Both Interfaces
+    [Documentation]  Configure IPv6 address on both interfaces and verify.
+    [Tags]  Configure_IPv6_Address_On_BMC_And_Verify_On_Both_Interfaces
+    [Teardown]  Run Keywords
+    ...  Delete IPv6 Address  ${test_ipv6_addr}  ${1}
+    ...  AND  Delete IPv6 Address  ${test_ipv6_addr1}  ${2}
+    ...  AND  Test Teardown Execution
+
+    Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}  ${1}
+    Configure IPv6 Address On BMC  ${test_ipv6_addr1}  ${test_prefix_length}  ${2}
+
+    Verify All The Addresses Are Intact  ${1}
+    Verify All The Addresses Are Intact  ${2}
+    ...    ${eth1_initial_ipv4_addressorigin_list}  ${eth1_initial_ipv4_addr_list}
+
+    # Verify Static IPv6 on eth0
+    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr}=
+    ...  Get Address Origin List And Address For Type  Static  ${1}
+
+    # Verify Static IPv6 on eth1
+    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr}=
+    ...  Get Address Origin List And Address For Type  Static  ${2}
+
+
 Delete IPv6 Address And Verify
     [Documentation]  Delete IPv6 address and verify.
     [Tags]  Delete_IPv6_Address_And_Verify
@@ -431,6 +455,11 @@ Test Teardown Execution
 
 Get IPv6 Network Configuration
     [Documentation]  Get Ipv6 network configuration.
+    [Arguments]  ${channel_number}=${CHANNEL_NUMBER}
+
+    # Description of argument(s):
+    # channel_number  Channel number (1 - eth0 and 2 - eth1).
+
     # Sample output:
     # {
     #  "@odata.id": "/redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/eth0",
@@ -508,7 +537,7 @@ Get IPv6 Network Configuration
 
 
     ${active_channel_config}=  Get Active Channel Config
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${channel_number}']['name']}
 
     @{ipv6_network_configurations}=  Get From Dictionary  ${resp.dict}  IPv6StaticAddresses
     RETURN  @{ipv6_network_configurations}
@@ -533,17 +562,18 @@ Verify IPv6 And PrefixLength
     Should Contain  ${ip_data}  ${ipv6_with_prefix}
     ...  msg=IPv6 and prefix length pair does not exist.
 
-
 Configure IPv6 Address On BMC
     [Documentation]  Add IPv6 Address on BMC.
-    [Arguments]  ${ipv6_addr}  ${prefix_len}  ${valid_status_codes}=${HTTP_OK}
+    [Arguments]  ${ipv6_addr}  ${prefix_len}  ${channel_number}=${CHANNEL_NUMBER}  ${valid_status_codes}=${HTTP_OK}
 
     # Description of argument(s):
     # ipv6_addr           IPv6 address to be added (e.g. "2001:EEEE:2222::2022").
     # prefix_len          Prefix length for the IPv6 to be added
     #                     (e.g. "64").
+    # channel_number      Channel number (1 - eth0 and 2 - eth1).
     # valid_status_codes  Expected return code from patch operation
     #                     (e.g. "200").
+
 
     ${prefix_length}=  Convert To Integer  ${prefix_len}
     ${empty_dict}=  Create Dictionary
@@ -553,7 +583,7 @@ Configure IPv6 Address On BMC
     ${patch_list}=  Create List
 
     # Get existing static IPv6 configurations on BMC.
-    ${ipv6_network_configurations}=  Get IPv6 Network Configuration
+    ${ipv6_network_configurations}=  Get IPv6 Network Configuration  ${channel_number}
     ${num_entries}=  Get Length  ${ipv6_network_configurations}
 
     FOR  ${INDEX}  IN RANGE  0  ${num_entries}
@@ -569,7 +599,7 @@ Configure IPv6 Address On BMC
     ${data}=  Create Dictionary  IPv6StaticAddresses=${patch_list}
 
     ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
 
     Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
     ...  valid_status_codes=[${valid_status_codes}]
@@ -671,10 +701,12 @@ Validate IPv6 Network Config On BMC
 Delete IPv6 Address
     [Documentation]  Delete IPv6 address of BMC.
     [Arguments]  ${ipv6_addr}
-    ...          ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
+    ...    ${channel_number}=${CHANNEL_NUMBER}
+    ...    ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
 
     # Description of argument(s):
     # ipv6_addr           IPv6 address to be deleted (e.g. "2001:1234:1234:1234::1234").
+    # channel_number     Channel number (1 - eth0 and 2 - eth1).
     # valid_status_codes  Expected return code from patch operation
     #                     (e.g. "200").  See prolog of rest_request
     #                     method in redfish_plus.py for details.
@@ -682,7 +714,7 @@ Delete IPv6 Address
     ${empty_dict}=  Create Dictionary
     ${patch_list}=  Create List
 
-    @{ipv6_network_configurations}=  Get IPv6 Network Configuration
+    @{ipv6_network_configurations}=  Get IPv6 Network Configuration  ${channel_number}
     FOR  ${ipv6_network_configuration}  IN  @{ipv6_network_configurations}
         IF  '${ipv6_network_configuration['Address']}' == '${ipv6_addr}'
             Append To List  ${patch_list}  ${null}
@@ -699,7 +731,7 @@ Delete IPv6 Address
     ${data}=  Create Dictionary  IPv6StaticAddresses=${patch_list}
 
     ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
 
     Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
     ...  valid_status_codes=${valid_status_codes}
