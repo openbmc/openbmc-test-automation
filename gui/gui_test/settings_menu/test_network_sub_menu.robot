@@ -45,6 +45,8 @@ ${xpath_domainname_switch_button}        //*[@id="useDomainNameSwitch"]/followin
 ${xpath_success_popup}                   //*[contains(text(),'Success')]/following-sibling::button
 ${xpath_delete_ipv4_addres}              //*[text()='${test_ipv4_addr}']/following::td[4]
 ...                                      //*[@title="Delete IPv4 address"]
+${xpath_delete_ipv6_addres}              //*[text()='${test_ipv6_addr}']/following::td[3]
+...                                      //*[@title="Delete IPv6 address"]
 ${xpath_edit_ipv4_addres}                //*[text()='${test_ipv4_addr}']/following::td[4]
 ...                                      //*[@title="Edit static IPv4 address"]
 ${xpath_edit_ipv6_addres}                //*[text()='${test_ipv6_addr}']/following::td[3]
@@ -54,6 +56,8 @@ ${xpath_eth1_interface}                  //*[text()="eth1"]
 ${xpath_linklocalv6}                     //*[text()="LinkLocal"]
 ${xpath_eth0_ipv6_autoconfig_button}     (//*[@id="ipv6AutoConfigSwitch"]/following-sibling::label)[1]
 ${xpath_eth1_ipv6_autoconfig_button}     (//*[@id="ipv6AutoConfigSwitch"]/following-sibling::label)[2]
+${xpath_eth0_dhcpv6_button}              (//*[@id="dhcpIpv6Switch"]/following-sibling::label)[1]
+${xpath_eth1_dhcpv6_button}              (//*[@id="dhcpIpv6Switch"]/following-sibling::label)[2]
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
 ${test_ipv4_addr_1}                      10.7.7.8
@@ -293,9 +297,19 @@ Modify DHCP Properties By Toggling And Verify
 Delete IPv4 Address Via GUI And Verify
    [Documentation]  Delete IPv4 Address via GUI and verify.
    [Tags]  Delete_IPv4_Address_Via_GUI_And_Verify
+   [Setup]  Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}
+   ...  ${default_gateway}  Success
 
-   Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}  ${default_gateway}  Success
-   Delete IPv4 Address And Verify  ${test_ipv4_addr}
+   Delete IP Address And Verify  ipv4  ${test_ipv4_addr}
+
+
+Delete IPv6 Address Via GUI And Verify
+   [Documentation]  Delete IPv6 Address via GUI and verify.
+   [Tags]  Delete_IPv6_Address_Via_GUI_And_Verify
+   [Setup]  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}
+   ...  ${test_prefix_length}  Success
+
+   Delete IP Address And Verify  ipv6  ${test_ipv6_addr}
 
 
 Modify IPv4 Address Via GUI And Verify
@@ -463,6 +477,18 @@ Verify Persistency Of LinkLocal IPv6 On BMC Reboot For Both Interfaces
 
     Verify Persistency Of IPv6 On BMC Reboot  LinkLocal  1
     Verify Persistency Of IPv6 On BMC Reboot  LinkLocal  2
+
+
+Verify DHCPv6 Enable And Disable On Both Interfaces Via GUI
+    [Documentation]  Verify DHCPv6 toggle on both interfaces via GUI
+    [Tags]  Verify_DHCPv6_Enable_And_Disable_On_Both_Interfaces_Via_GUI
+    [Template]  Set And Verify DHCPv6 States
+    
+    # etho_state  eth1_state
+      Disabled    Enabled
+      Disabled    Disabled
+      Enabled     Disabled
+      Enabled     Enabled
 
 
 *** Keywords ***
@@ -678,26 +704,33 @@ Verify Popup Message And Close Popup
     Click Element  ${popup_msg}
 
 
-Delete IPv4 Address And Verify
-   [Documentation]  Delete IPv4 address and verify.
-   [Arguments]  ${ip_addr}
+Delete IP Address And Verify
+    [Documentation]  Delete IPv4 or IPv6 address and verify deletion via GUI and BMC.
+    [Arguments]  ${ip_version}  ${ip_addr}
 
-   # Description of argument(s):
-   # ip_addr      IP address to be deleted.
+    # Description of argument(s):
+    # ip_version   Either 'ipv4' or 'ipv6'.
+    # ip_addr      IP address to be deleted.
 
-   Wait Until Page Contains  ${ip_addr}
-   Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=120s
-   Wait Until Element Is Enabled  ${xpath_delete_ipv4_addres}
-   Click Element  ${xpath_delete_ipv4_addres}
-   Click Element  ${xpath_delete_button}
-   Wait Until Page Contains Element   ${xpath_success_message}
-   Sleep  ${NETWORK_TIMEOUT}s
+    ${delete_xpath}=  Set Variable If  '${ip_version}' == 'ipv4'
+    ...  ${xpath_delete_ipv4_addres}  ${xpath_delete_ipv6_addres}
 
-   # Verify IP on BMC via Redfish.
-   ${delete_status}=  Run Keyword And Return Status  Verify IP On BMC  ${ip_addr}
-   Should Be Equal  ${delete_status}  ${False}
+    Wait Until Element Is Not Visible    ${xpath_page_loading_progress_bar}    timeout=120s
+    Wait Until Element Is Enabled    ${delete_xpath}
 
-   Wait Until Page Does Not Contain  ${ip_addr}
+    Click Element    ${delete_xpath}
+    Click Element    ${xpath_delete_button}
+    Wait Until Page Contains Element    ${xpath_success_message}
+    Sleep    ${NETWORK_TIMEOUT}s
+
+    # Verify IP on BMC.
+    ${delete_status}=  Run Keyword If  '${ip_version}' == 'ipv4'
+    ...  Run Keyword And Return Status  Verify IP On BMC  ${ip_addr}
+    ...  ELSE
+    ...  Run Keyword And Return Status  Verify IPv6 On BMC  ${ip_addr}
+
+    Should Be Equal    ${delete_status}  ${False}
+    Wait Until Page Does Not Contain    ${ip_addr}
 
 
 Modify IP Address And Verify
@@ -724,7 +757,7 @@ Modify IP Address And Verify
     Wait Until Page Contains Element  ${xpath_success_message}
     Sleep  ${NETWORK_TIMEOUT}s
 
-    # Verify IP on BMC via Redfish.
+    # Verify IP on BMC.
     ${edit_status}=  Run Keyword If  '${ip_version}' == 'ipv4'
     ...  Run Keyword And Return Status  Verify IP On BMC  ${new_ip}
     ...  ELSE
@@ -784,6 +817,7 @@ Set IPv6 AutoConfig State
     ...  Element Text Should Be  ${xpath_ipv6_autoconfig_button}
     ...  ${desired_autoconfig_state}
 
+
 Set SLAAC Property On Eth0 And Eth1
     [Documentation]  Enable or Disable and verify slaac on both interfaces.
     [Arguments]  ${State}=Enabled
@@ -795,6 +829,7 @@ Set SLAAC Property On Eth0 And Eth1
     Click Element  ${xpath_eth1_interface}
     Set IPv6 AutoConfig State  ${State}  ${xpath_eth1_ipv6_autoconfig_button}
 
+
 Verify SLAAC Address On Autoconfig Enable
     [Documentation]  Verify SLAAC IPv6 on autoconfig enable.
 
@@ -802,6 +837,70 @@ Verify SLAAC Address On Autoconfig Enable
     ...    Get Address Origin List And Address For Type  SLAAC
     Wait Until Page Contains  ${ipv6_slaac_addr}
     Wait Until Page Contains  SLAAC
+
+
+Toggle DHCPv6 State And Verify
+    [Arguments]    ${desired_dhcpv6_state}    ${channel_number}
+
+    # Description of argument(s):
+    # desired_dhcpv6_state  DHCPv6 Toggle state (Enabled or Disabled).
+    # channel_number        Channel number: 1 for eth0, 2 for eth1.
+
+    IF    '${channel_number}' == '1'
+        ${xpath_dhcpv6_button}=  Set Variable    ${xpath_eth0_dhcpv6_button}
+    ELSE IF    '${channel_number}' == '2'
+        ${xpath_dhcpv6_button}=  Set Variable    ${xpath_eth1_dhcpv6_button}
+        Click Element    ${xpath_eth1_interface}
+        Set Suite Variable    ${CHANNEL_NUMBER}    2
+    END
+
+    ${current_dhcpv6_state}=    Get Text    ${xpath_dhcpv6_button}
+
+    IF    '${desired_dhcpv6_state}' == '${current_dhcpv6_state}'
+        # Already in desired state, reset by toggling twice.
+        Wait Until Element Is Enabled    ${xpath_dhcpv6_button}    timeout=60s
+        Click Element    ${xpath_dhcpv6_button}
+        Wait Until Element Is Not Visible
+        ...    ${xpath_page_loading_progress_bar}    timeout=120s
+        Wait Until Element Is Enabled    ${xpath_dhcpv6_button}    timeout=60s
+        Click Element    ${xpath_dhcpv6_button}
+        Wait Until Element Is Not Visible
+        ...    ${xpath_page_loading_progress_bar}    timeout=120s
+    ELSE
+        Wait Until Element Is Enabled    ${xpath_dhcpv6_button}    timeout=60s
+        Click Element    ${xpath_dhcpv6_button}
+        Wait Until Element Is Not Visible
+        ...    ${xpath_page_loading_progress_bar}    timeout=120s
+    END
+
+    Wait Until Keyword Succeeds    2 min    30 sec
+    ...    Element Text Should Be    ${xpath_dhcpv6_button}    ${desired_dhcpv6_state}
+
+    # Verify based on final state.
+    IF    '${desired_dhcpv6_state}' == 'Enabled'
+        Verify DHCPv6 Address On Enable
+    ELSE IF    '${desired_dhcpv6_state}' == 'Disabled'
+        Wait Until Page Does Not Contain    DHCPv6    timeout=60s
+    END
+    Click Element  ${xpath_refresh_button}
+
+
+Verify DHCPv6 Address On Enable
+    [Documentation]  Verify DHCPv6 on enable.
+
+    @{ipv6_address_origin_list}  ${ipv6_dhcpv6_addr}=
+    ...    Get Address Origin List And Address For Type  DHCPv6
+    Wait Until Page Contains  ${ipv6_dhcpv6_addr}
+    Wait Until Page Contains  DHCPv6
+
+
+Set And Verify DHCPv6 States
+    [Arguments]    ${eth0_state}    ${eth1_state}
+
+    # Channel 1: eth0.
+    Toggle DHCPv6 State And Verify    ${eth0_state}    1
+    # Channel 2: eth1.
+    Toggle DHCPv6 State And Verify    ${eth1_state}    2
 
 
 Verify Persistency Of IPv6 On BMC Reboot
