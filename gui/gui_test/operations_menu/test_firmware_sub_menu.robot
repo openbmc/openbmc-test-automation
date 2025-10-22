@@ -40,7 +40,8 @@ Verify Existence Of All Buttons In Firmware Page At Host Power Off
     [Documentation]  Verify existence of all buttons in firmware page at host power off.
     [Tags]  Verify_Existence_Of_All_Buttons_In_Firmware_Page_At_Host_Power_Off
 
-    Redfish Power Off  stack_mode=skip
+    Power Off Server
+    Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
 
     Page Should Contain Element  ${xpath_add_file_button}
     Page Should Contain Element  ${xpath_start_update_button}
@@ -50,7 +51,8 @@ Verify Existence Of All Sub Sections Under BMC And Server Section At Poweroff St
     [Documentation]  Verify existence of all sub sections under BMC and server section at poweroff state.
     [Tags]  Verify_Existence_Of_All_Sub_Sections_Under_BMC_And_Server_Section_At_Poweroff_State
 
-    Redfish Power Off  stack_mode=skip  quiet=1
+    Power Off Server
+    Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
 
     Page Should Contain  Running image
     Page Should Contain  Backup image
@@ -65,7 +67,8 @@ Verify Existence Of All Sub Sections Under BMC And Server Section At Power On St
     [Documentation]  Verify existence of all sub sections under BMC and server section at power on state.
     [Tags]  Verify_Existence_Of_All_Sub_Sections_Under_BMC_And_Server_Section_At_Power_On_State
 
-    Redfish Power On  stack_mode=skip  quiet=1
+    Power On Server
+    Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
 
     Page Should Contain  Running image
     Page Should Contain  Backup image
@@ -78,7 +81,8 @@ Verify Existence Of All Buttons In Firmware Page At Host Power On
     [Documentation]  Verify existence of all buttons in firmware page at host power on.
     [Tags]  Verify_Existence_Of_All_Buttons_In_Firmware_Page_At_Host_Power_On
 
-    Redfish Power On  stack_mode=skip
+    Power On Server
+    Navigate To Required Sub Menu  ${xpath_operations_menu}  ${xpath_firmware_update_sub_menu}  firmware
 
     Element Should Be Disabled  ${xpath_add_file_button}
     Element Should Be Disabled  ${xpath_start_update_button}
