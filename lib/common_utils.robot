@@ -170,7 +170,7 @@ Check OS
     ...  ${os_password}
     ${err_msg1}=  Sprint Error  ${msg}
     ${err_msg}=  Catenate  SEPARATOR=  \n  ${err_msg1}
-    Run Keyword If  '${status}' == 'FAIL'  Fail  msg=${err_msg}
+    IF  '${status}' == 'FAIL'  Fail  msg=${err_msg}
     ${output}  ${stderr}  ${rc}=  Execute Command  uptime  return_stderr=True
     ...        return_rc=True
 
@@ -250,12 +250,13 @@ Get Boot Progress To OS Starting State
     ...  Starting OS'.
 
     ${boot_progress}=  Get Boot Progress
-    Run Keyword If  '${boot_progress}' == 'OSStart'
-    ...  Log  Host is already in OS starting state
-    ...  ELSE
-    ...  Run Keywords  Initiate Host PowerOff  AND  Initiate Host Boot
-    ...  AND  Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
-
+    Log To Console   ${boot_progress}
+    IF  '${boot_progress}' == 'OSStart'
+        Log  Host is already in OS starting state
+    ELSE
+        Initiate Host PowerOff  AND  Initiate Host Boot
+        Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
+    END
 
 Check If warmReset is Initiated
     [Documentation]  Ping would be still alive, so try SSH to connect
@@ -349,20 +350,25 @@ Stop SOL Console Logging
     ${os_con_pid}=  Get SOL Console Pid
 
     ${cmd_buf}=  Catenate  kill -9 ${os_con_pid}
-    Run Keyword If  '${os_con_pid}' != '${EMPTY}'  Dprint Issuing  ${cmd_buf}
-    ${rc}  ${output}=  Run Keyword If  '${os_con_pid}' != '${EMPTY}'
-    ...  Run And Return Rc And Output  ${cmd_buf}
-    Run Keyword If  '${os_con_pid}' != '${EMPTY}'  Rdpvars  rc  output
+    IF  '${os_con_pid}' != '${EMPTY}'  Dprint Issuing  ${cmd_buf}
 
-    Run Keyword If  '${targ_file_path}' != '${EMPTY}'
-    ...  Run Keyword And Ignore Error
-    ...  Copy File  ${log_file_path}  ${targ_file_path}
+    IF  '${os_con_pid}' != '${EMPTY}'
+        ${rc}  ${output}=  Run And Return Rc And Output  ${cmd_buf}
+    END
+
+    IF  '${os_con_pid}' != '${EMPTY}'  Rdpvars  rc  output
+
+    IF  '${targ_file_path}' != '${EMPTY}'
+        Run Keyword And Ignore Error
+        ...  Copy File  ${log_file_path}  ${targ_file_path}
+    END
 
     ${output}=  Set Variable  ${EMPTY}
     ${loc_quiet}=  Evaluate  ${debug}^1
-    ${rc}  ${output}=  Run Keyword If  '${return_data}' == '${1}'
-    ...  Cmd Fnc  cat ${log_file_path} 2>/dev/null  quiet=${loc_quiet}
-    ...  print_output=${0}  show_err=${0}
+    IF  '${return_data}' == '${1}'
+       ${rc}  ${output}=  Cmd Fnc  cat ${log_file_path} 2>/dev/null  quiet=${loc_quiet}
+       ...  print_output=${0}  show_err=${0}
+    END
 
     RETURN  ${output}
 
@@ -646,13 +652,12 @@ Set BMC Reset Reference Time
     ...              boot count.
 
     ${cur_btime}=  Get BMC Boot Time
-    Run Keyword If  ${BOOT_TIME} == ${0} and ${BOOT_COUNT} == ${0}
-    ...  Set Global Variable  ${BOOT_TIME}  ${cur_btime}
-    ...  ELSE IF  ${cur_btime} > ${BOOT_TIME}
-    ...  Run Keywords  Set Global Variable  ${BOOT_TIME}  ${cur_btime}
-    ...  AND
-    ...  Set Global Variable  ${BOOT_COUNT}  ${BOOT_COUNT + 1}
-
+    IF  ${BOOT_TIME} == ${0} and ${BOOT_COUNT} == ${0}
+        Set Global Variable  ${BOOT_TIME}  ${cur_btime}
+    ELSE IF  ${cur_btime} > ${BOOT_TIME}
+        Set Global Variable  ${BOOT_TIME}  ${cur_btime}
+        Set Global Variable  ${BOOT_COUNT}  ${BOOT_COUNT + 1}
+    END
 
 Get BMC Boot Time
     [Documentation]  Returns boot time from /proc/stat.
@@ -675,6 +680,7 @@ Enable Core Dump On BMC
 
 Get Number Of BMC Core Dump Files
     [Documentation]  Returns number of core dump files on BMC.
+
     Open Connection And Log In
     ${num_of_core_dump}=  Execute Command
     ...  ls /tmp/core* 2>/dev/null | wc -l
@@ -683,15 +689,17 @@ Get Number Of BMC Core Dump Files
 
 Set Core Dump File Size Unlimited
     [Documentation]  Set core dump file size to unlimited.
+
     BMC Execute Command  ulimit -c unlimited
 
 
 Check For Core Dumps
     [Documentation]  Check for any core dumps exist.
-    ${output}=  Get Number Of BMC Core Dump Files
-    Run Keyword If  ${output} > 0
-    ...  Log  **Warning** BMC core dump files exist  level=WARN
 
+    ${output}=  Get Number Of BMC Core Dump Files
+    IF  ${output} > 0
+        Log  **Warning** BMC core dump files exist  level=WARN
+    END
 
 Configure Initial Settings
     [Documentation]  Restore old IP and route.
@@ -751,10 +759,10 @@ Get BMC Boot Count
 
     # Set global variable BOOT_TIME to current boot time if current boot time
     # is changed. Also increase value of global variable BOOT_COUNT by 1.
-    Run Keyword If  ${cur_btime} > ${BOOT_TIME}
-    ...  Run Keywords  Set Global Variable  ${BOOT_TIME}  ${cur_btime}
-    ...  AND
-    ...  Set Global Variable  ${BOOT_COUNT}  ${BOOT_COUNT + 1}
+    IF  ${cur_btime} > ${BOOT_TIME}
+        Set Global Variable  ${BOOT_TIME}  ${cur_btime}
+        Set Global Variable  ${BOOT_COUNT}  ${BOOT_COUNT + 1}
+    END
 
     RETURN  ${BOOT_COUNT}
 
@@ -926,18 +934,18 @@ Check For Regex In Journald
     # filter_string    String to be stripped out.
 
 
-    ${cmd} =  Run Keyword If   '${filter_string}' == '${EMPTY}'
+    ${cmd} =  Set Variable If   '${filter_string}' == '${EMPTY}'
     ...      Catenate  journalctl --no-pager ${boot} | egrep '${regex}'
     ...   ELSE
     ...      Catenate  journalctl --no-pager ${boot} | egrep '${regex}' |  sed '/${filter_string}/d'
 
     ${journal_log}  ${stderr}  ${rc}=  BMC Execute Command   ${cmd}  ignore_err=1
 
-    Run Keyword If  ${error_check} == ${0}
-    ...    Should Be Empty  ${journal_log}
-    ...  ELSE
-    ...    Should Not Be Empty  ${journal_log}
-
+    IF  ${error_check} == ${0}
+        Should Be Empty  ${journal_log}
+    ELSE
+        Should Not Be Empty  ${journal_log}
+    END
 
 Get Service Attribute
     [Documentation]  Get service attribute policy output.
