@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe260408_ebd17f14",
+        "filename": "redfish/test_xit.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-22T07:00:41Z",
+      "side": 1,
+      "message": "Test_XIT",
+      "range": {
+        "startLine": 10,
+        "startChar": 17,
+        "endLine": 10,
+        "endChar": 20
+      },
+      "revId": "aa3b74e3d0a0d70c319de3506f9b0bd38f15ff9c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41780374_c9d1aafd",
+        "filename": "security/test_ssl.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-22T07:00:41Z",
+      "side": 1,
+      "message": "Test_SSL",
+      "revId": "aa3b74e3d0a0d70c319de3506f9b0bd38f15ff9c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
