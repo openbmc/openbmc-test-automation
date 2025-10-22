@@ -245,15 +245,20 @@ Power On Server
     [Documentation]  Powering on server.
 
     ${boot_state}  ${host_state}=  Redfish Get Boot Progress
+    Log To Console  Current boot state: ${boot_state}
+
     IF  '${boot_state}' == 'OSRunning'
-        Log To Console    Server is already powered On.
+        Log To Console    Server is already powered on.
     ELSE
-        Set BIOS Attribute    pvm_stop_at_standby    Disabled
         Navigate To Server Power Page
+        IF  '${boot_state}' != 'None'
+            Power Off Server
+        END
+        Set BIOS Attribute  pvm_stop_at_standby  Disabled
         Wait And Click Element  ${xpath_power_power_on}
         Wait Until Element Is Visible  ${xpath_power_shutdown}  timeout=60s
         Verify And Close Information Message Via GUI
-        Wait Until Keyword Succeeds  10m  45s  Check Boot Progress State Via Redfish  OSRunning  Enabled
+        Wait Until Keyword Succeeds  15m  45s  Check Boot Progress State Via Redfish  OSRunning  Enabled
     END
 
 
