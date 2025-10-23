@@ -16,6 +16,24 @@
       "message": "Add testcases related to delete IPv6 dnd DHCPv6 via GUI",
       "revId": "23a4d85377a8f5f4fe39fc0861cd1116ff636c19",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce3d19e2_549f034c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-23T07:01:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d1659e5_0b71e804",
+      "revId": "23a4d85377a8f5f4fe39fc0861cd1116ff636c19",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
