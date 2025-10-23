@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e1f61f67_81ba1b79",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-23T07:06:56Z",
+      "side": 1,
+      "message": "changing to ipv6_static_addr",
+      "parentUuid": "c66426b1_e4171f48",
+      "range": {
+        "startLine": 104,
+        "startChar": 4,
+        "endLine": 104,
+        "endChar": 51
+      },
+      "revId": "e28f831124b6b2102c32c0a61328f7526a0671ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "87b5bc54_cc898e4b",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 2
@@ -37,6 +61,24 @@
       "writtenOn": "2025-10-23T06:34:50Z",
       "side": 1,
       "message": "what is verified under get keyword `Get Address Origin List And Address For Type\u0027",
+      "revId": "e28f831124b6b2102c32c0a61328f7526a0671ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7b70741_4584ab9e",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-23T07:06:56Z",
+      "side": 1,
+      "message": "Get Address Origin List And Address For Type\n\nThis keyword has a check to verify the address is present and if the list has static present in it.\n\nShould Contain  ${ipv6_addressorigin_list}  ${ipv6_address_type}\nShould Not Be Empty  ${ipv6_type_addr}  msg\u003d${ipv6_address_type} address is not present",
+      "parentUuid": "87b5bc54_cc898e4b",
       "revId": "e28f831124b6b2102c32c0a61328f7526a0671ee",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
