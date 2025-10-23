@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e83b42d_97d4dc34",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-23T08:22:48Z",
+      "side": 1,
+      "message": "why you want use this again here as you are already calling in suitesetup, please remove it",
+      "revId": "d69db02c42ddc9cdc6a7470a1586d9e2e141a121",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88f6dd78_cffd68b3",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 864,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-23T08:22:48Z",
+      "side": 1,
+      "message": "again same question why you want to wait here",
+      "revId": "d69db02c42ddc9cdc6a7470a1586d9e2e141a121",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3a6d65a_84644853",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-23T08:22:48Z",
+      "side": 1,
+      "message": "same as above, please remove",
+      "revId": "d69db02c42ddc9cdc6a7470a1586d9e2e141a121",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c82f266_cdcc237b",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-10-23T08:22:48Z",
+      "side": 1,
+      "message": "this will work only when it has DHCP setup right? so please add comment..\nbecause if dhcp setup is not available then this will fail",
+      "revId": "d69db02c42ddc9cdc6a7470a1586d9e2e141a121",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
