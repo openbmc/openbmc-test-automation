@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec7c96aa_c17a1d8a",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-23T05:03:21Z",
+      "side": 1,
+      "message": "Template calls the same keyword for each row below.\nWhich is impacting the functionality of delete. Instead of Deleting its again adding the IP.",
+      "parentUuid": "5c9b2bfd_49388663",
+      "revId": "940583dad33e964a487f6887b39e5460764b65ae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3817898_740f4025",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-10-22T16:20:44Z",
       "side": 1,
       "message": "use [Template]",
+      "revId": "940583dad33e964a487f6887b39e5460764b65ae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc77c107_c9de31b0",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-23T05:03:21Z",
+      "side": 1,
+      "message": "Template calls the same keyword for each row below.\nWhich is impacting the functionality of delete. Instead of Deleting its again adding the IP.",
+      "parentUuid": "a3817898_740f4025",
       "revId": "940583dad33e964a487f6887b39e5460764b65ae",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b737f56_f5d65bf4",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-23T05:03:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1f833ca_6d172859",
+      "revId": "940583dad33e964a487f6887b39e5460764b65ae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db269ede_fef7d027",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-10-22T14:38:00Z",
       "side": 1,
       "message": "\u0027etho_state \u0027 -\u003e \u0027eth0_state\u0027",
+      "revId": "940583dad33e964a487f6887b39e5460764b65ae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5243466c_abb87d4c",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-23T05:03:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db269ede_fef7d027",
       "revId": "940583dad33e964a487f6887b39e5460764b65ae",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -92,6 +164,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7b177c1_4988c6aa",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-23T05:03:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d7c9e4b_ac845e41",
+      "range": {
+        "startLine": 727,
+        "startChar": 22,
+        "endLine": 727,
+        "endChar": 37
+      },
+      "revId": "940583dad33e964a487f6887b39e5460764b65ae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d69edbc_f438b041",
@@ -105,6 +201,24 @@
       "writtenOn": "2025-10-22T16:20:44Z",
       "side": 1,
       "message": "Missing description of args",
+      "revId": "940583dad33e964a487f6887b39e5460764b65ae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1fa846a_e905f301",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-23T05:03:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d69edbc_f438b041",
       "revId": "940583dad33e964a487f6887b39e5460764b65ae",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
