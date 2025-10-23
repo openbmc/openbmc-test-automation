@@ -50,6 +50,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21ce749d_cd7e2a14",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-23T08:38:57Z",
+      "side": 1,
+      "message": "Verify IP on BMC is deleted.",
+      "range": {
+        "startLine": 726,
+        "startChar": 4,
+        "endLine": 726,
+        "endChar": 23
+      },
+      "revId": "3c3b54ef061c4852a7992634bacbf39efd9b3454",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82838ded_4a6cf826",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 2

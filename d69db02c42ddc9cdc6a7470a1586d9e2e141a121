@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b84eb583_e5ac1794",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-23T08:38:57Z",
+      "side": 1,
+      "message": "${ipv6_address_type} Type of IPv4 or IPv6 address to be checked.",
+      "range": {
+        "startLine": 713,
+        "startChar": 6,
+        "endLine": 713,
+        "endChar": 16
+      },
+      "revId": "d69db02c42ddc9cdc6a7470a1586d9e2e141a121",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e83b42d_97d4dc34",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 6
@@ -14,6 +37,29 @@
       "writtenOn": "2025-10-23T08:22:48Z",
       "side": 1,
       "message": "why you want use this again here as you are already calling in suitesetup, please remove it",
+      "revId": "d69db02c42ddc9cdc6a7470a1586d9e2e141a121",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa3fe45b_d0fd60a4",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-23T08:38:57Z",
+      "side": 1,
+      "message": "change to state",
+      "range": {
+        "startLine": 825,
+        "startChar": 19,
+        "endLine": 825,
+        "endChar": 24
+      },
       "revId": "d69db02c42ddc9cdc6a7470a1586d9e2e141a121",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
