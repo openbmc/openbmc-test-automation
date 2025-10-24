@@ -49,6 +49,7 @@ Verify Error After Exceeding Maximum Report Creation
     ${resp}=  Redfish.Get Properties  /redfish/v1/TelemetryService
     FOR  ${i}  IN RANGE  ${resp["MaxReports"]}
         Create Basic Telemetry Report   total power  Periodic  LogToMetricReportsCollection
+        ...  delete_report=False
     END
 
     # Attempt another report creation and it should fail.
@@ -104,6 +105,7 @@ Add To Telemetry definition Record
     # value     Equivalent regex expression of telemetry definition.
     #           Example:  Ambient.*Temp
 
+    Set To Dictionary  ${english_actual_teleDef}  ${key}=Not found
     FOR  ${item}  IN  @{metric_definitions_list}
       ${regex_matching_output}=  Get Regexp Matches  ${item}  ${value}
       IF  ${regex_matching_output} != []
@@ -123,7 +125,7 @@ Test Teardown Execution
 Create Basic Telemetry Report
     [Documentation]  Create a basic telemetry report with single metric.
     [Arguments]  ${metric_definition_name}  ${metric_definition_type}
-    ...  ${report_action}  ${append_limit}=10  ${expected_result}=success
+    ...  ${report_action}  ${append_limit}=10  ${expected_result}=success  ${delete_report}=True
 
     # Description of argument(s):
     # metric_definition_name    Name of metric definition like Ambient_0_Temp.
@@ -131,8 +133,11 @@ Create Basic Telemetry Report
     # report_action             Telemetry report action.
     # append_limit              Append limit of the metric data in the report.
     # expected_result           Expected result of report creation - success or fail.
+    # delete_report             Flag to decide if telemetry report needs to be deleted after creation.
 
     ${metric_definition_name}=  Set Variable  ${english_actual_teleDef}[${metric_definition_name}]
+    Skip If  '${metric_definition_name}' == 'Not found'  Metric definition is not found.
+
     ${resp}=  Redfish.Get Properties
     ...  /redfish/v1/TelemetryService/MetricDefinitions/${metric_definition_name}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
@@ -189,6 +194,10 @@ Create Basic Telemetry Report
         Should Be True  '${resp_report.dict["ReportActions"][0]}' == '${report_action}'
         Should Be True
         ...  '${resp_report.dict["Metrics"]}[0][MetricProperties][0]' == '${resp["MetricProperties"][0]}'
+    END
+
+    IF  ${delete_report} == ${True}
+       Delete All Telemetry Reports
     END
 
 
