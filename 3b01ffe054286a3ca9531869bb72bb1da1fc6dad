@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e35bd6b_9cb5ec7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-24T12:27:45Z",
+      "side": 1,
+      "message": "Please fix CI failure as well",
+      "revId": "3b01ffe054286a3ca9531869bb72bb1da1fc6dad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73bddf68_80e2270e",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-24T12:27:45Z",
+      "side": 1,
+      "message": "add description of args for this new arg",
+      "range": {
+        "startLine": 127,
+        "startChar": 77,
+        "endLine": 127,
+        "endChar": 90
+      },
+      "revId": "3b01ffe054286a3ca9531869bb72bb1da1fc6dad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb6a70eb_23b7828b",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-24T12:27:45Z",
+      "side": 1,
+      "message": "remove additional space",
+      "revId": "3b01ffe054286a3ca9531869bb72bb1da1fc6dad",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
