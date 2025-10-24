@@ -34,7 +34,11 @@ ${linklocal_addr_format}     fe80::[0-9a-f:]+$
 ${link_local_addr}           fe80::
 ${link_local_prefix_len}     10
 ${ipv6_leading_zero}         2001:0022:0033::0111
+${ipv6_firsthextet_zero}    2001:0022:1133::1111
 ${ipv6_eliminate_zero}       2001:22:33::111
+${ipv6_eliminate_zero1}      2001:22:1133::1111
+${ipv6_contigeous_zero}      2001:0022:0000:0000:1:2:3:8
+${ipv6_zero_compression}     2001:22::1:2:3:8
 
 *** Test Cases ***
 
@@ -381,15 +385,20 @@ Configure Link Local IPv6 Address And Verify
     Should Be Equal As Integers  ${count}  2
 
 
-Configure IPv6 With Leading Zeros And Verify
-    [Documentation]  Configure IPv6 with leading zeros & verify address is configured by eliminating 0s in multiple hextets.
-    [Tags]  Configure_IPv6_with_Leading_Zeros_And_Verify
+Configure Valid IPv6 Address And Verify
+    [Documentation]  Configure valid IPv6 address and verify it is getting added as expected format.
+    [Tags]  Configure_Valid_IPv6_Address_And_Verify
     [Teardown]  Run Keywords
-    ...  Delete IPv6 Address  ${ipv6_eliminate_zero}  AND  Test Teardown Execution
+    ...  Delete IPv6 Address  ${ipv6_zero_compression}
+    ...    AND  Delete IPv6 Address  ${ipv6_eliminate_zero}
+    ...    AND  Delete IPv6 Address  ${ipv6_eliminate_zero1}
+    ...    AND  Test Teardown Execution
+    [Template]  Configure IPv6 Address On BMC
 
-    #Verify 2001:0022:0033::0111 configured as 2001:22:33::111.
-    Configure IPv6 Address On BMC
-    ...    ${ipv6_leading_zero}  ${test_prefix_length}  ${ipv6_eliminate_zero}
+    # IPv6 address            prefix length          IPv6 address verified.
+    ${ipv6_contigeous_zero}   ${test_prefix_length}  ${ipv6_zero_compression}
+    ${ipv6_firsthextet_zero}  ${test_prefix_length}  ${ipv6_eliminate_zero1}
+    ${ipv6_leading_zero}      ${test_prefix_length}  ${ipv6_eliminate_zero}
 
 
 *** Keywords ***
