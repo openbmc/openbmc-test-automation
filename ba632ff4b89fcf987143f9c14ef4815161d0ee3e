@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1669b2db_85052937",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-24T09:36:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d88466ee_f61ef52b",
+      "revId": "ba632ff4b89fcf987143f9c14ef4815161d0ee3e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61fc79c7_867c7fee",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "Configure valid IPv6 address and verify it is getting added as expected format.",
       "parentUuid": "61fc79c7_867c7fee",
+      "revId": "ba632ff4b89fcf987143f9c14ef4815161d0ee3e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f211e101_b1405b6d",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-10-24T09:36:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "860c594e_463927ef",
       "revId": "ba632ff4b89fcf987143f9c14ef4815161d0ee3e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
