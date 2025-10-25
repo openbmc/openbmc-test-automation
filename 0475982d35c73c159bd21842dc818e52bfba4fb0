@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cca8a985_431e8b51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2025-10-25T14:21:02Z",
+      "side": 1,
+      "message": "It seems this test duplicates combination of \"Verify Persistency Of Link Local IPv6 On BMC Reboot\" and \"Modify MAC and Verify BMC Reinitializing Linklocal\". What case is it supposed to catch those 2 do not?",
+      "revId": "0475982d35c73c159bd21842dc818e52bfba4fb0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
