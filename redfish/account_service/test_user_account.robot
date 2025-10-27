@@ -579,6 +579,26 @@ Verify AccountService Unsupported Methods
     Redfish.Delete  /redfish/v1/AccountService
     ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
+Verify AccountService Roles Unsupported Methods
+    [Documentation]  Verify Unsupported methods of AccountService/Roles
+    [Tags]  Verify_AccountService_Roles_Unsupported_Methods
+
+    # Put operation on Account Services Roles
+    Redfish.Put  /redfish/v1/AccountService/Roles
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Post operation on Account Services Roles
+    Redfish.Post  /redfish/v1/AccountService/Roles
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Delete operation on Account Services Roles
+    Redfish.Delete  /redfish/v1/AccountService/Roles
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Patch operation on Account Services Roles
+    Redfish.Patch  /redfish/v1/AccountService/Roles
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
 
 *** Keywords ***
 
