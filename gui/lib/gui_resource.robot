@@ -379,3 +379,23 @@ Navigate To Required Sub Menu
     Wait And Click Element  ${xpath_sub_menu}  wait_timeout=60s
     Location Should Contain  ${sub_menu_text}
     Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=1min
+
+
+Power On Server And Boots System To PHYP Standby State
+    [Documentation]  Powering on server and boots till PHYP standby state only.
+
+    Navigate To Server Power Page
+    ${present}=    Run Keyword And Return Status
+    ...  Element Should Be Visible  ${xpath_continue_to_os_running}
+    IF  ${present}
+       Log To Console  System already at PHYP Standby state.
+    ELSE
+       Power Off Server
+       Set BIOS Attribute    pvm_stop_at_standby    Enabled
+       Wait And Click Element  ${xpath_power_power_on}
+       Wait Until Element Is Visible  ${xpath_power_shutdown}  timeout=120s
+       Verify And Close Information Message Via GUI
+       Wait Until Keyword Succeeds  10m  45s  Check Boot Progress State Via Redfish  SystemHardwareInitializationComplete  Enabled
+       Refresh GUI
+       Element Should Be Visible  ${xpath_continue_to_os_running}
+    END
