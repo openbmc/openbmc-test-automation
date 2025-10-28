@@ -43,14 +43,20 @@ ${xpath_ntp_switch_button}               //*[@id="useNtpSwitch"]/following-sibli
 ${xpath_dns_switch_button}               //*[@id="useDnsSwitch"]/following-sibling::label
 ${xpath_domainname_switch_button}        //*[@id="useDomainNameSwitch"]/following-sibling::label
 ${xpath_success_popup}                   //*[contains(text(),'Success')]/following-sibling::button
-${xpath_delete_ipv4_addres}              //*[text()='${test_ipv4_addr}']/following::td[4]
+${xpath_delete_ipv4_addres}              //*[text()='${test_ipv4_addr_2}']/following::td[4]
 ...                                      //*[@title="Delete IPv4 address"]
-${xpath_delete_ipv6_addres}              //*[text()='${test_ipv6_addr}']/following::td[3]
+${xpath_delete_ipv6_addres}              //*[text()='${test_ipv6_addr_2}']/following::td[3]
 ...                                      //*[@title="Delete IPv6 address"]
 ${xpath_edit_ipv4_addres}                //*[text()='${test_ipv4_addr}']/following::td[4]
 ...                                      //*[@title="Edit static IPv4 address"]
 ${xpath_edit_ipv6_addres}                //*[text()='${test_ipv6_addr}']/following::td[3]
 ...                                      //*[@title="Edit static IPv6 address"]
+${xpath_delete_ipv6_def_gateway_addr}    //*[text()='${test_ipv6_addr}']/following::td[1]
+...                                      //*[@title="Delete IPv6 static default gateway address"]
+${xpath_edit_ipv6_def_gateway_addr}      //*[text()='${test_ipv6_addr}']/following::td[1]
+...                                      //*[@title="Edit IPv6 static default gateway address"]
+${xpath_edit_ipv6_def_gateway_addr_1}      //*[text()='${test_ipv6_addr_1}']/following::td[1]
+...                                      //*[@title="Edit IPv6 static default gateway address"]
 ${xpath_delete_button}                   //*[text()="Delete"]
 ${xpath_eth1_interface}                  //*[text()="eth1"]
 ${xpath_linklocalv6}                     //*[text()="LinkLocal"]
@@ -61,8 +67,10 @@ ${xpath_eth1_dhcpv6_button}              (//*[@id="dhcpIpv6Switch"]/following-si
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
 ${test_ipv4_addr_1}                      10.7.7.8
+${test_ipv4_addr_2}                      10.7.6.5
 ${test_ipv6_addr}                        2001:db8:3333:4444:5555:6666:7777:8888
 ${test_ipv6_addr_1}                      2001:db8:3333:4444:5555:6666:7777:8889
+${test_ipv6_addr_2}                      2001:db8:3333:4444:5555:6666:7777:8890
 ${ipv4_hexword_addr}                     10.5.5.6:1A:1B:1C:1D:1E:1F
 ${invalid_hexadec_ipv6}                  x:x:x:x:x:x:10.5.5.6
 ${ipv6_multi_short}                      2001::33::111
@@ -73,7 +81,7 @@ ${negative_ip}                           10.-7.-7.-7
 ${less_octet_ip}                         10.3.36
 ${hex_ip}                                0xa.0xb.0xc.0xd
 ${spl_char_ip}                           @@@.%%.44.11
-${test_subnet_mask}                      255.255.0.0
+${test_subnet_mask}                      255.255.255.0
 ${alpha_netmask}                         ff.ff.ff.ff
 ${out_of_range_netmask}                  255.256.255.0
 ${more_byte_netmask}                     255.255.255.0.0
@@ -297,19 +305,19 @@ Modify DHCP Properties By Toggling And Verify
 Delete IPv4 Address Via GUI And Verify
    [Documentation]  Delete IPv4 Address via GUI and verify.
    [Tags]  Delete_IPv4_Address_Via_GUI_And_Verify
-   [Setup]  Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}
+   [Setup]  Add Static IP Address And Verify  ${test_ipv4_addr_2}  ${test_subnet_mask}
    ...  ${default_gateway}  Success
 
-   Delete IP Address And Verify  ipv4  ${test_ipv4_addr}
+   Delete IP Address And Verify  ipv4  ${test_ipv4_addr_2}
 
 
 Delete IPv6 Address Via GUI And Verify
    [Documentation]  Delete IPv6 Address via GUI and verify.
    [Tags]  Delete_IPv6_Address_Via_GUI_And_Verify
-   [Setup]  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}
+   [Setup]  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}
    ...  ${test_prefix_length}  Success
 
-   Delete IP Address And Verify  ipv6  ${test_ipv6_addr}
+   Delete IP Address And Verify  ipv6  ${test_ipv6_addr_2}
 
 
 Modify IPv4 Address Via GUI And Verify
@@ -490,6 +498,22 @@ Verify DHCPv6 Enable And Disable On Both Interfaces Via GUI
     Disabled        Disabled
     Enabled         Disabled
     Enabled         Enabled
+
+
+Delete Default IPv6 Static Gateway Address And Verify
+    [Documentation]  Delete default IPv6 static gateway address and verify.
+    [Tags]  Delete_Default_IPv6_Static_Gateway_Address_And_Verify
+    [Setup]  Add IPv6 Static Default Gateway And Verify  ${test_ipv6_addr}  Success
+
+    Delete Default IPv6 Gateway And Verify  ${test_ipv6_addr}
+
+
+Modify Default IPv6 Static Gateway Address And Verify
+    [Documentation]  Modify default IPv6 static gateway address and verify.
+    [Tags]  Modify_Default_IPv6_Static_Gateway_Address_And_Verify
+    [Setup]  Add IPv6 Static Default Gateway And Verify  ${test_ipv6_addr}  Success
+
+    Modify Default IPv6 Gateway And Verify  ${test_ipv6_addr}  ${test_ipv6_addr1}
 
 
 *** Keywords ***
@@ -767,6 +791,55 @@ Modify IP Address And Verify
 
     Should Be Equal  ${edit_status}  ${True}
     Wait Until Page Contains  ${new_ip}
+
+
+Delete Default IPv6 Gateway And Verify
+   [Documentation]  Delete default IPv6 gateway and verify.
+   [Arguments]  ${ip_addr}
+
+   # Description of argument(s):
+   # ip_addr      IP address to be deleted.
+
+   Wait Until Page Contains  ${ip_addr}
+   Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=120s
+   Wait Until Element Is Enabled  ${xpath_delete_ipv6_def_gateway_addr}
+   Click Element  ${xpath_delete_ipv6_def_gateway_addr}
+   Click Element  ${xpath_delete_button}
+   Wait Until Page Contains Element   ${xpath_success_message}
+   Sleep  ${NETWORK_TIMEOUT}s
+
+   # Verify delete IP via redfish.
+   ${deleted_ip}=  Set Variable  ${ip_addr}
+   ${gateway_list}=  Get Static Default Gateway Property Via Redfish
+   Should Not Contain  ${gateway_list}  ${deleted_ip}
+
+   Wait Until Page Does Not Contain Element  ${xpath_delete_ipv6_def_gateway_addr}
+
+
+Modify Default IPv6 Gateway And Verify
+    [Documentation]  Modify Default IPv6 Gateway And Verify.
+    [Arguments]  ${old_static_def_gw}  ${new_static_def_gw}
+
+    # Description of argument(s):
+    # old_static_def_gw       The existing IPv6 address visible on GUI.
+    # new_static_def_gw       The new IPv6 address to update.
+
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=120s
+    Wait Until Element Is Enabled  ${xpath_edit_ipv6_def_gateway_addr}
+    Click Element  ${xpath_edit_ipv6_def_gateway_addr}
+
+    # Add new IP and save.
+    Input Text  ${xpath_input_ip_address}  ${new_static_def_gw}
+    Click Element  ${xpath_add_button}
+
+    Wait Until Page Contains Element  ${xpath_success_message}
+    Sleep  ${NETWORK_TIMEOUT}s
+
+    # Verify IP via redfish.
+    ${new_static_def_gw_redfish}=  Get Static Default Gateway Property Via Redfish
+    Should Be Equal  ${new_static_def_gw}  ${new_static_def_gw_redfish}
+
+    Wait Until Page Contains Element  ${xpath_edit_ipv6_def_gateway_addr_1}
 
 
 Get Network Interface Details
