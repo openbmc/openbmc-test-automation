@@ -500,20 +500,20 @@ Verify DHCPv6 Enable And Disable On Both Interfaces Via GUI
     Enabled         Enabled
 
 
-Delete Default IPv6 Static Gateway Address And Verify
-    [Documentation]  Delete default IPv6 static gateway address and verify.
-    [Tags]  Delete_Default_IPv6_Static_Gateway_Address_And_Verify
-    [Setup]  Add IPv6 Static Default Gateway And Verify  ${test_ipv6_addr}  Success
-
-    Delete Default IPv6 Gateway And Verify  ${test_ipv6_addr}
-
-
 Modify Default IPv6 Static Gateway Address And Verify
     [Documentation]  Modify default IPv6 static gateway address and verify.
     [Tags]  Modify_Default_IPv6_Static_Gateway_Address_And_Verify
     [Setup]  Add IPv6 Static Default Gateway And Verify  ${test_ipv6_addr}  Success
 
     Modify Default IPv6 Gateway And Verify  ${test_ipv6_addr}  ${test_ipv6_addr1}
+
+
+Delete Default IPv6 Static Gateway Address And Verify
+    [Documentation]  Delete default IPv6 static gateway address and verify.
+    [Tags]  Delete_Default_IPv6_Static_Gateway_Address_And_Verify
+    [Setup]  Add IPv6 Static Default Gateway And Verify  ${test_ipv6_addr}  Success
+
+    Delete Default IPv6 Gateway And Verify  ${test_ipv6_addr}
 
 
 *** Keywords ***
@@ -547,7 +547,6 @@ Configure the Hostname Back And Verify
     ...  ${xpath_hostname}  ${xpath_hostname_input}  ${hostname}
     ${bmc_hostname_after}=  Get BMC Hostname
     Should Be Equal As Strings  ${bmc_hostname_after}  ${hostname}
-    Close Browser
 
 
 Delete DNS Servers And Verify
