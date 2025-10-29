@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "578a33f8_ccf6972b",
+        "filename": "gui/gui_test/settings_menu/test_factory_reset_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1001861
+      },
+      "writtenOn": "2025-10-29T06:24:57Z",
+      "side": 1,
+      "message": "\u0027factory-rese\u0027 -\u003e \u0027factory-reset\u0027",
+      "revId": "aac5b57bda3f866a7cad69816c387c78b00725a1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f57b201_6a7acee9",
         "filename": "gui/gui_test/settings_menu/test_factory_reset_sub_menu.robot",
         "patchSetId": 3
