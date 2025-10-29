@@ -35,6 +35,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dddbd2d_203c3852",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-29T07:03:19Z",
+      "side": 1,
+      "message": "As discussed Sleep is needed there.",
+      "parentUuid": "9ce54dca_77ca5362",
+      "revId": "d5972321653c94394c60afe892f9211df8ba70df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a2be65d_eb0a2ace",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-10-29T05:24:53Z",
       "side": 1,
       "message": "Verify delete IP via redfish",
+      "revId": "d5972321653c94394c60afe892f9211df8ba70df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca12590b_4cf5fbc3",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-29T07:03:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a2be65d_eb0a2ace",
       "revId": "d5972321653c94394c60afe892f9211df8ba70df",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -75,6 +111,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23e0b6a1_9251c7ce",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-29T07:03:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a9c7444_67ab84d7",
+      "range": {
+        "startLine": 822,
+        "startChar": 6,
+        "endLine": 822,
+        "endChar": 12
+      },
+      "revId": "d5972321653c94394c60afe892f9211df8ba70df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ef4a9d5_bd546152",
@@ -92,6 +152,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5636062e_b7d46a5a",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 834,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-29T07:03:19Z",
+      "side": 1,
+      "message": "As discussed Sleep is needed there.",
+      "parentUuid": "6ef4a9d5_bd546152",
+      "revId": "d5972321653c94394c60afe892f9211df8ba70df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f46cb3d_c4ba934b",
@@ -105,6 +183,30 @@
       "writtenOn": "2025-10-29T06:00:03Z",
       "side": 1,
       "message": "instead of checking the status as true\ncheck if it contains the new value\n\n${redfish_ipv6_staticdef_gw}\u003d  Get Static Default Gateway Property Via Redfish\nShould Be Equal  ${new_ip}  ${redfish_ipv6_staticdef_gw}\n\nFor false case its ok - you can check the status",
+      "range": {
+        "startLine": 837,
+        "startChar": 4,
+        "endLine": 838,
+        "endChar": 44
+      },
+      "revId": "d5972321653c94394c60afe892f9211df8ba70df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a6f88f4_5e850c9a",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-10-29T07:03:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f46cb3d_c4ba934b",
       "range": {
         "startLine": 837,
         "startChar": 4,
