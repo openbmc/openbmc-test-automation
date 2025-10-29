@@ -198,6 +198,24 @@ Verify Persistency Of DHCPv6 On BMC Reboot On Eth1
     ...    ${eth1_initial_ipv4_addressorigin_list}  ${eth1_initial_ipv4_addr_list}
 
 
+Verify Persistency Of SLAAC On BMC Reboot On Eth0
+    [Documentation]  Verify persistency of SLAAC property on reboot on eth0.
+    [Tags]  Verify_Persistency_Of_SLAAC_On_BMC_Reboot_On_Eth0
+
+    Set SLAAC Configuration State And Verify  ${True}  [${HTTP_OK}]  ${1}  ${False}
+    Redfish OBMC Reboot (off)      stack_mode=skip
+    Verify SLAAC Property          ${True}
+
+
+Verify Persistency Of SLAAC On BMC Reboot On Eth1
+    [Documentation]  Verify persistency of SLAAC property on reboot on eth1.
+    [Tags]  Verify_Persistency_Of_SLAAC_On_BMC_Reboot_On_Eth1
+
+    Set SLAAC Configuration State And Verify  ${True}  [${HTTP_OK}]  ${2}  ${False}
+    Redfish OBMC Reboot (off)      stack_mode=skip
+    Verify SLAAC Property          ${True}  ${2}
+
+
 Configure Invalid Static IPv6 And Verify
     [Documentation]  Configure invalid static IPv6 and verify.
     [Tags]  Configure_Invalid_Static_IPv6_And_Verify
@@ -207,7 +225,6 @@ Configure Invalid Static IPv6 And Verify
     ${ipv4_hexword_addr}     ${test_prefix_length}   ${HTTP_BAD_REQUEST}
     ${invalid_hexadec_ipv6}  ${test_prefix_length}   ${HTTP_BAD_REQUEST}
     ${ipv6_multi_short}      ${test_prefix_length}   ${HTTP_BAD_REQUEST}
-
 
 
 Configure IPv6 Static Default Gateway And Verify
@@ -924,14 +941,15 @@ Modify IPv6 Address
 
 
 Set SLAAC Configuration State And Verify
-    [Documentation]  Set SLAAC configuration state and verify.
+    [Documentation]  Set SLAAC configuration state.
     [Arguments]  ${slaac_state}  ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
-    ...  ${channel_number}=${CHANNEL_NUMBER}
+    ...  ${channel_number}=${CHANNEL_NUMBER}  ${is_slaac_verify_state}=${True}
 
     # Description of argument(s):
-    # slaac_state         SLAAC state('True' or 'False').
-    # valid_status_code   Expected valid status codes.
-    # channel_number      Channel number 1(eth0) or 2(eth1).
+    # slaac_state             SLAAC state('True' or 'False').
+    # valid_status_code       Expected valid status codes.
+    # channel_number          Channel number 1(eth0) or 2(eth1).
+    # is_slaac_verify_state   Flag to check verification is required.
 
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
@@ -939,6 +957,18 @@ Set SLAAC Configuration State And Verify
     ${data}=  Set Variable If  ${slaac_state} == ${False}  ${DISABLE_SLAAC}  ${ENABLE_SLAAC}
     ${resp}=  Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     ...  body=${data}  valid_status_codes=${valid_status_codes}
+    IF  ${is_slaac_verify_state}
+        Verify SLAAC Property  ${slaac_state}  ${channel_number}
+    END
+
+
+Verify SLAAC Property
+    [Documentation]  Verify SLAAC property.
+    [Arguments]  ${slaac_state}  ${channel_number}=${CHANNEL_NUMBER}
+
+    # Description of argument(s):
+    # slaac_state     SLAAC state('True' or 'False').
+    # channel_number  Channel number 1(eth0) or 2(eth1).
 
     # Verify SLAAC is set correctly.
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
@@ -947,6 +977,7 @@ Set SLAAC Configuration State And Verify
     IF  '${slaac_verify['IPv6AutoConfigEnabled']}' != '${slaac_state}'
         Fail  msg=SLAAC not set properly.
     END
+
 
 Set And Verify DHCPv6 Property
     [Documentation]  Set DHCPv6 property and verify.
