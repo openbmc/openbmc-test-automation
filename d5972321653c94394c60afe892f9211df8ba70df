@@ -54,6 +54,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a9c7444_67ab84d7",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-29T06:00:03Z",
+      "side": 1,
+      "message": "change to old_static_def_gw and new_static_gw",
+      "range": {
+        "startLine": 822,
+        "startChar": 6,
+        "endLine": 822,
+        "endChar": 12
+      },
+      "revId": "d5972321653c94394c60afe892f9211df8ba70df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6ef4a9d5_bd546152",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 3
@@ -65,6 +88,29 @@
       "writtenOn": "2025-10-29T05:24:53Z",
       "side": 1,
       "message": "same as above comment",
+      "revId": "d5972321653c94394c60afe892f9211df8ba70df",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f46cb3d_c4ba934b",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-29T06:00:03Z",
+      "side": 1,
+      "message": "instead of checking the status as true\ncheck if it contains the new value\n\n${redfish_ipv6_staticdef_gw}\u003d  Get Static Default Gateway Property Via Redfish\nShould Be Equal  ${new_ip}  ${redfish_ipv6_staticdef_gw}\n\nFor false case its ok - you can check the status",
+      "range": {
+        "startLine": 837,
+        "startChar": 4,
+        "endLine": 838,
+        "endChar": 44
+      },
       "revId": "d5972321653c94394c60afe892f9211df8ba70df",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
