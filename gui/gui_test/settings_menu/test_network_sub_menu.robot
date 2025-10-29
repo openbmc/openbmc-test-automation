@@ -547,7 +547,6 @@ Configure the Hostname Back And Verify
     ...  ${xpath_hostname}  ${xpath_hostname_input}  ${hostname}
     ${bmc_hostname_after}=  Get BMC Hostname
     Should Be Equal As Strings  ${bmc_hostname_after}  ${hostname}
-    Close Browser
 
 
 Delete DNS Servers And Verify
