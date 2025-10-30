@@ -51,7 +51,7 @@ ${xpath_edit_ipv4_addres}                //*[text()='${test_ipv4_addr}']/followi
 ...                                      //*[@title="Edit static IPv4 address"]
 ${xpath_edit_ipv6_addres}                //*[text()='${test_ipv6_addr}']/following::td[3]
 ...                                      //*[@title="Edit static IPv6 address"]
-${xpath_delete_ipv6_def_gateway_addr}    //*[text()='${test_ipv6_addr}']/following::td[1]
+${xpath_delete_ipv6_def_gateway_addr}    //*[text()='${test_ipv6_addr_1}']/following::td[1]
 ...                                      //*[@title="Delete IPv6 static default gateway address"]
 ${xpath_edit_ipv6_def_gateway_addr}      //*[text()='${test_ipv6_addr}']/following::td[1]
 ...                                      //*[@title="Edit IPv6 static default gateway address"]
@@ -74,6 +74,8 @@ ${test_ipv6_addr_2}                      2001:db8:3333:4444:5555:6666:7777:8890
 ${ipv4_hexword_addr}                     10.5.5.6:1A:1B:1C:1D:1E:1F
 ${invalid_hexadec_ipv6}                  x:x:x:x:x:x:10.5.5.6
 ${ipv6_multi_short}                      2001::33::111
+${ipv6_with_leadingzeroes_addr}          2001:0022:0033::0111
+${ipv6_without_leadingzeroes_addr}       2001:22:33::111
 ${test_prefix_length}                    64
 ${out_of_range_ip}                       10.7.7.256
 ${string_ip}                             aa.bb.cc.dd
@@ -262,11 +264,12 @@ Configure And Verify Static IPv6 Address
     [Tags]  Configure_And_Verify_Static_IPv6_Address
     [Template]  Add Static IPv6 Address And Verify Via GUI
 
-    # ipv6                  prefix_length          status
-    ${test_ipv6_addr}       ${test_prefix_length}  Success
-    ${ipv4_hexword_addr}    ${test_prefix_length}  Invalid format
-    ${invalid_hexadec_ipv6} ${test_prefix_length}  Invalid format
-    ${ipv6_multi_short}     ${test_prefix_length}  Invalid format
+    # ipv6                           prefix_length          status           expected_ipv6
+    ${ipv6_with_leadingzeroes_addr}  ${test_prefix_length}  Success          ${ipv6_without_leadingzeroes_addr}
+    ${test_ipv6_addr}                ${test_prefix_length}  Success
+    ${ipv4_hexword_addr}             ${test_prefix_length}  Invalid format
+    ${invalid_hexadec_ipv6}          ${test_prefix_length}  Invalid format
+    ${ipv6_multi_short}              ${test_prefix_length}  Invalid format
 
 
 Configure And Verify Static Default Gateway
@@ -487,6 +490,15 @@ Verify Persistency Of LinkLocal IPv6 On BMC Reboot For Both Interfaces
     Verify Persistency Of IPv6 On BMC Reboot  LinkLocal  2
 
 
+Verify Persistency Of SLAAC On BMC Reboot For Both Interfaces
+    [Documentation]  Verify persistency of slaac on BMC reboot for both interfaces.
+    [Tags]  Verify_Persistency_Of_SLAAC_On_BMC_Reboot_For_Both_Interfaces
+    [Setup]  Set SLAAC Property On Eth0 And Eth1  Enabled
+
+    Verify Persistency Of IPv6 On BMC Reboot  SLAAC  1
+    Verify Persistency Of IPv6 On BMC Reboot  SLAAC  2
+
+
 Verify DHCPv6 Enable And Disable On Both Interfaces Via GUI
     [Documentation]  Verify DHCPv6 toggle on both interfaces via GUI.
     [Tags]  Verify_DHCPv6_Enable_And_Disable_On_Both_Interfaces_Via_GUI
@@ -503,17 +515,18 @@ Verify DHCPv6 Enable And Disable On Both Interfaces Via GUI
 Delete Default IPv6 Static Gateway Address And Verify
     [Documentation]  Delete default IPv6 static gateway address and verify.
     [Tags]  Delete_Default_IPv6_Static_Gateway_Address_And_Verify
-    [Setup]  Add IPv6 Static Default Gateway And Verify  ${test_ipv6_addr}  Success
+    [Setup]  Add IPv6 Static Default Gateway And Verify  ${test_ipv6_addr_1}  Success
 
-    Delete Default IPv6 Gateway And Verify  ${test_ipv6_addr}
+    Delete Default IPv6 Gateway And Verify  ${test_ipv6_addr_1}
 
 
 Modify Default IPv6 Static Gateway Address And Verify
     [Documentation]  Modify default IPv6 static gateway address and verify.
     [Tags]  Modify_Default_IPv6_Static_Gateway_Address_And_Verify
     [Setup]  Add IPv6 Static Default Gateway And Verify  ${test_ipv6_addr}  Success
+    [Teardown]  Delete Default IPv6 Gateway And Verify  ${test_ipv6_addr_1}
 
-    Modify Default IPv6 Gateway And Verify  ${test_ipv6_addr}  ${test_ipv6_addr1}
+    Modify Default IPv6 Gateway And Verify  ${test_ipv6_addr}  ${test_ipv6_addr_1}
 
 
 *** Keywords ***
@@ -598,12 +611,13 @@ Add Static IP Address And Verify
 
 Add Static IPv6 Address And Verify Via GUI
     [Documentation]  Add static IPv6 address and prefix length and verify.
-    [Arguments]  ${ipv6_address}  ${prefix_length}  ${expected_status}=error
+    [Arguments]  ${ipv6_address}  ${prefix_length}  ${expected_status}=error  ${expected_ipv6}=None
 
     # Description of argument(s):
     # ipv6_address        IPv6 address to be added.
     # prefix_length       Prefix length of the IPv6 to be added.
     # expected_status     Expected status while adding static IPv6 address.
+    # expected_ipv6       Expected IPv6 which gets added with truncated zeroes.
 
     Wait Until Element Is Enabled  ${xpath_add_static_ipv6_address_button}  timeout=60sec
     Click Element  ${xpath_add_static_ipv6_address_button}
@@ -613,7 +627,11 @@ Add Static IPv6 Address And Verify Via GUI
 
     Click Element  ${xpath_add_button}
     IF  '${expected_status}' == 'Success'
-        Wait Until Page Contains  ${ipv6_address}  timeout=40sec
+        IF  '${expected_ipv6}' == 'None'
+            Wait Until Page Contains  ${ipv6_address}  timeout=40sec
+        ELSE
+            Wait Until Page Contains  ${expected_ipv6}  timeout=40sec
+        END
         Validate Network Config On BMC
     ELSE
         Page Should Contain  Invalid format
@@ -808,9 +826,8 @@ Delete Default IPv6 Gateway And Verify
    Sleep  ${NETWORK_TIMEOUT}s
 
    # Verify delete IP via redfish.
-   ${deleted_ip}=  Set Variable  ${ip_addr}
-   ${gateway_list}=  Get Static Default Gateway Property Via Redfish
-   Should Not Contain  ${gateway_list}  ${deleted_ip}
+   ${delete_status}=  Run Keyword And Return Status  Get Static Default Gateway Property Via Redfish
+   Should Be Equal  ${delete_status}  ${False}
 
    Wait Until Page Does Not Contain Element  ${xpath_delete_ipv6_def_gateway_addr}
 
