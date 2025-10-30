@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d852c5a9_cbe97398",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-30T13:26:12Z",
+      "side": 1,
+      "message": "Align",
+      "range": {
+        "startLine": 827,
+        "startChar": 0,
+        "endLine": 827,
+        "endChar": 31
+      },
+      "revId": "67b4a61cfa1b88c6516961f8d916319bb21a4839",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0bf27d2_9a61a0be",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-30T13:26:12Z",
+      "side": 1,
+      "message": "This Keyword is extracting only the very first static default gateway.\nPlease change the keyword to get the whole list of Static default gateways or in the setup delete all the existing static default gateways",
+      "range": {
+        "startLine": 831,
+        "startChar": 8,
+        "endLine": 831,
+        "endChar": 72
+      },
+      "revId": "67b4a61cfa1b88c6516961f8d916319bb21a4839",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
