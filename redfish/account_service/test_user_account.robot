@@ -508,6 +508,24 @@ Verify SSH Login Access With Admin User
     Redfish.Login
     Redfish.Delete  /redfish/v1/AccountService/Accounts/new_admin
 
+Verify SSH Login Is Revoked For Deleted User
+    [Documentation]  Verify SSH login access is revoked for deleted User.
+    [Tags]    Verify_SSH_Login_Is_Revoked_For_Deleted_User
+
+    #Create an admin user and verify SSH login.
+    Create Admin User And Verify SSH Login
+
+    #Login with root user.
+    Redfish.Login
+
+    # Delete the admin user.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/new_admin
+    ...  valid_status_codes=[${HTTP_OK}]
+
+    # Attempt SSH login with Deleted user.
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    Run Keyword And Expect Error  Authentication failed*
+    ...  SSHLibrary.Login  new_admin  TestPwd1
 
 Verify Configure BasicAuth Enable And Disable
     [Documentation]  Verify configure basicauth enable and disable
@@ -599,6 +617,37 @@ Verify AccountService Roles Unsupported Methods
     Redfish.Patch  /redfish/v1/AccountService/Roles
     ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
+Verify AccountService Roles Instance With Unsupported Methods
+    [Documentation]  Verify Instance Roles for AccountService and Unsupported Methods
+    [Tags]    Verify_AccountService_Roles_Instance_With_Unsupported_Methods
+
+    # GET Administrator Role Instance
+    Redfish.Get    /redfish/v1/AccountService/Roles/Administrator
+    ...    valid_status_codes=[${HTTP_OK}]
+
+    # GET Operator Role Instance
+    Redfish.Get    /redfish/v1/AccountService/Roles/Operator
+    ...    valid_status_codes=[${HTTP_OK}]
+
+    # GET ReadOnly RoleInstance
+    Redfish.Get    /redfish/v1/AccountService/Roles/ReadOnly
+    ...    valid_status_codes=[${HTTP_OK}]
+
+    # Post operation on Account Service Roles Instance
+    Redfish.Post    /redfish/v1/AccountService/Roles/Administrator
+    ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Put operation on Account Service Roles Instance
+    Redfish.Put    /redfish/v1/AccountService/Roles/Administrator
+    ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Patch operation on Account Service Roles Instance
+    Redfish.Patch    /redfish/v1/AccountService/Roles/Administrator
+    ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    #Delete operation on Account Service Roles Instance
+    Redfish.Delete    /redfish/v1/AccountService/Roles/Administrator
+    ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
 *** Keywords ***
 
@@ -1004,3 +1053,20 @@ Verify Minimum Password Length For Redfish User
     Redfish.Logout
     Redfish.Login
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${user_name}
+
+Create Admin User And Verify SSH Login
+    [Documentation]  Create admin user and verify SSH login & logout.
+
+    # Create an admin User.
+    Redfish Create User  new_admin  TestPwd1  Administrator  ${True}
+
+    # Attempt SSH login with admin user.
+    SSHLibrary.Open Connection  ${OPENBMC_HOST}
+    ${status}=  Run Keyword And Return Status  SSHLibrary.Login  new_admin  TestPwd1
+
+    # By default ssh_status is True, user can change the status via CLI
+    # -v ssh_status:False
+    Should Be Equal As Strings  "${status}"  "${ssh_status}"
+
+    # Close SSH connection for admin user.
+    SSHLibrary.Close Connection
