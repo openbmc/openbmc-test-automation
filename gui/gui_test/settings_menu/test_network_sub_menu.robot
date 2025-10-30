@@ -45,8 +45,8 @@ ${xpath_domainname_switch_button}        //*[@id="useDomainNameSwitch"]/followin
 ${xpath_success_popup}                   //*[contains(text(),'Success')]/following-sibling::button
 ${xpath_delete_ipv4_addres}              //*[text()='${test_ipv4_addr_2}']/following::td[4]
 ...                                      //*[@title="Delete IPv4 address"]
-${xpath_delete_ipv6_addres}              //*[text()='${test_ipv6_addr_2}']/following::td[3]
-...                                      //*[@title="Delete IPv6 address"]
+${xpath_delete_ipv6_addres}              //*[text()='${test_ipv6_addr_2}' or text()='${ipv6_without_leadingzeroes_addr}']
+...                                      /following::td[3]//*[@title="Delete IPv6 address"]
 ${xpath_edit_ipv4_addres}                //*[text()='${test_ipv4_addr}']/following::td[4]
 ...                                      //*[@title="Edit static IPv4 address"]
 ${xpath_edit_ipv6_addres}                //*[text()='${test_ipv6_addr}']/following::td[3]
@@ -74,6 +74,8 @@ ${test_ipv6_addr_2}                      2001:db8:3333:4444:5555:6666:7777:8890
 ${ipv4_hexword_addr}                     10.5.5.6:1A:1B:1C:1D:1E:1F
 ${invalid_hexadec_ipv6}                  x:x:x:x:x:x:10.5.5.6
 ${ipv6_multi_short}                      2001::33::111
+${ipv6_with_leadingzeroes_addr}          2001:0022:0033::0111
+${ipv6_without_leadingzeroes_addr}       2001:22:33::111
 ${test_prefix_length}                    64
 ${out_of_range_ip}                       10.7.7.256
 ${string_ip}                             aa.bb.cc.dd
@@ -267,6 +269,16 @@ Configure And Verify Static IPv6 Address
     ${ipv4_hexword_addr}    ${test_prefix_length}  Invalid format
     ${invalid_hexadec_ipv6} ${test_prefix_length}  Invalid format
     ${ipv6_multi_short}     ${test_prefix_length}  Invalid format
+
+
+Configure And Verify Multiple Hextets IPv6 Address Truncates Leading Zeroes On Save
+    [Documentation]  Configure and verify multiple hextets IPv6 address truncates leading zeroes on save.
+    [Tags]  Configure_And_Verify_Multiple_Hextets_IPv6_Address_Truncates_Leading_Zeroes_On_Save
+    [Setup]  Add Static IPv6 Address And Verify Via GUI  ${ipv6_with_leadingzeroes_addr}
+    ...  ${test_prefix_length}  Success  ${ipv6_without_leadingzeroes_addr}
+    [Teardown]  Delete IP Address And Verify  ipv6  ${ipv6_without_leadingzeroes_addr}
+
+    Page Should Contain  ${ipv6_without_leadingzeroes_addr}
 
 
 Configure And Verify Static Default Gateway
@@ -487,6 +499,15 @@ Verify Persistency Of LinkLocal IPv6 On BMC Reboot For Both Interfaces
     Verify Persistency Of IPv6 On BMC Reboot  LinkLocal  2
 
 
+Verify Persistency Of SLAAC On BMC Reboot For Both Interfaces
+    [Documentation]  Verify persistency of slaac on BMC reboot for both interfaces.
+    [Tags]  Verify_Persistency_Of_slaac_On_BMC_Reboot_For_Both_Interfaces
+    [Setup]  Set SLAAC Property On Eth0 And Eth1  Enabled
+
+    Verify Persistency Of IPv6 On BMC Reboot  SLAAC  1
+    Verify Persistency Of IPv6 On BMC Reboot  SLAAC  2
+
+
 Verify DHCPv6 Enable And Disable On Both Interfaces Via GUI
     [Documentation]  Verify DHCPv6 toggle on both interfaces via GUI.
     [Tags]  Verify_DHCPv6_Enable_And_Disable_On_Both_Interfaces_Via_GUI
@@ -598,7 +619,7 @@ Add Static IP Address And Verify
 
 Add Static IPv6 Address And Verify Via GUI
     [Documentation]  Add static IPv6 address and prefix length and verify.
-    [Arguments]  ${ipv6_address}  ${prefix_length}  ${expected_status}=error
+    [Arguments]  ${ipv6_address}  ${prefix_length}  ${expected_status}=error  ${expected_ipv6}=None
 
     # Description of argument(s):
     # ipv6_address        IPv6 address to be added.
@@ -613,7 +634,11 @@ Add Static IPv6 Address And Verify Via GUI
 
     Click Element  ${xpath_add_button}
     IF  '${expected_status}' == 'Success'
-        Wait Until Page Contains  ${ipv6_address}  timeout=40sec
+        IF  '${expected_ipv6}' == 'None'
+            Wait Until Page Contains  ${ipv6_address}  timeout=40sec
+        ELSE
+            Wait Until Page Contains  ${expected_ipv6}  timeout=40sec
+        END
         Validate Network Config On BMC
     ELSE
         Page Should Contain  Invalid format
@@ -807,12 +832,14 @@ Delete Default IPv6 Gateway And Verify
    Wait Until Page Contains Element   ${xpath_success_message}
    Sleep  ${NETWORK_TIMEOUT}s
 
-   # Verify delete IP via redfish.
-   ${deleted_ip}=  Set Variable  ${ip_addr}
-   ${gateway_list}=  Get Static Default Gateway Property Via Redfish
-   Should Not Contain  ${gateway_list}  ${deleted_ip}
-
-   Wait Until Page Does Not Contain Element  ${xpath_delete_ipv6_def_gateway_addr}
+# Verify delete IP via redfish.
+   ${delete_status}=  Run Keyword And Return Status  Get Static Default Gateway Property Via Redfish
+    IF  '${delete_status}' == 'True'
+        ${deleted_ip}=  Set Variable  ${ip_addr}
+        ${gateway_list}=  Get Static Default Gateway Property Via Redfish
+        Should Not Contain  ${gateway_list}  ${deleted_ip}
+    END
+    Wait Until Page Does Not Contain Element  ${xpath_delete_ipv6_def_gateway_addr}
 
 
 Modify Default IPv6 Gateway And Verify
