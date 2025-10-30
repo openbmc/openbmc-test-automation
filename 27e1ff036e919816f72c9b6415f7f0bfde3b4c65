@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e2fd90a_c680244a",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-30T11:34:52Z",
+      "side": 1,
+      "message": "Verify SSH Login Is Revoked For Deleted User\n\n-- we follow \u0027Upper Camel Case\u0027 for all the test case titles\n\nI was thinking we should move this case after  - \u0027Verify SSH Login Access With Admin User\u0027 so that it looks like a sequence",
+      "revId": "27e1ff036e919816f72c9b6415f7f0bfde3b4c65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21b81bba_cbbebf14",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-30T11:34:52Z",
+      "side": 1,
+      "message": "Verify SSH Login Access is Revoked for Deleted User ---\u003e Verify SSH login access is revoked for deleted User.",
+      "revId": "27e1ff036e919816f72c9b6415f7f0bfde3b4c65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bbdde00_8aa73bef",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-30T11:34:52Z",
+      "side": 1,
+      "message": "this looks similar to 497 to 507\n\n--\u003e\u003e create common keyword as and replace common lines with the below keyword in both testcases?\n\n```\nCreate Admin User And Verify SSH Login\n\n# Create an admin User.\n    Redfish Create User  new_admin  TestPwd1  Administrator  ${True}\n\n    # Attempt SSH login with admin user.\n    SSHLibrary.Open Connection  ${OPENBMC_HOST}\n    ${status}\u003d  Run Keyword And Return Status  SSHLibrary.Login  new_admin  TestPwd1\n\n    # By default ssh_status is True, user can change the status via CLI\n    # -v ssh_status:False\n    Should Be Equal As Strings  \"${status}\"  \"${ssh_status}\"\n\n    # Close SSH connection for admin user.\n    SSHLibrary.Close Connection \n\n```",
+      "range": {
+        "startLine": 639,
+        "startChar": 3,
+        "endLine": 652,
+        "endChar": 0
+      },
+      "revId": "27e1ff036e919816f72c9b6415f7f0bfde3b4c65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f69ac96_f1f96f6d",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-10-30T11:34:52Z",
+      "side": 1,
+      "message": "why is this login required??",
+      "range": {
+        "startLine": 652,
+        "startChar": 0,
+        "endLine": 655,
+        "endChar": 0
+      },
+      "revId": "27e1ff036e919816f72c9b6415f7f0bfde3b4c65",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
