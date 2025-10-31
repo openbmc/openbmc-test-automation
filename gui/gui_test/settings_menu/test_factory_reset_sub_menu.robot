@@ -56,7 +56,7 @@ Verify Existence Of All Radio Buttons In Factory Reset Page
      Page Should Contain Element  ${xpath_reset_bmc_server_radio_button}
 
 
-Verify Reset Server Settings Only Option With Readonly User When Host Off state
+Verify Reset Server Settings Only Option With Readonly User When Host Off State
      [Documentation]  Verify reset server settings only option
      ...              with readonly user when host at off state.
      [Tags]  Verify_Reset_Server_Settings_Only_Option_With_Readonly_User_When_Host_Off_State
@@ -92,7 +92,7 @@ Verify Reset Server Settings Only Option Followed By Cancel Operation With Reado
      Page Should Not Contain  ${xpath_cancel_button}
 
 
-Verify Reset BMC And Server Settings Option With Readonly User When Host Off state
+Verify Reset BMC And Server Settings Option With Readonly User When Host Off State
      [Documentation]  Verify reset bmc and server settings option
      ...              with readonly user when host at off state.
      [Tags]  Verify_Reset_BMC_And_Server_Settings_Option_With_Readonly_User_When_Host_Off_State
@@ -114,7 +114,7 @@ Verify Reset BMC And Server Settings Option With Readonly User When Host Off sta
 Verify Reset BMC And Server Settings Option Followed By Cancel Operation With Readonly User
      [Documentation]  Verify reset bmc and server settings option followed by
      ...              cancel operation with readonly user when host at poweroff state
-     [Tags]  Verify_Reset_BMC_And_Server_Setting_Option_Followed_By_Cancel_Operation_With_Readonly_User
+     [Tags]  Verify_Reset_BMC_And_Server_Settings_Option_Followed_By_Cancel_Operation_With_Readonly_User
      [Setup]  Run Keywords  Power Off Server  AND  Create Readonly User And Login To GUI
      [Teardown]  Delete Readonly User And Logout Current GUI Session
 
