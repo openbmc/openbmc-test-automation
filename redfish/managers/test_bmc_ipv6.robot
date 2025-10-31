@@ -493,6 +493,17 @@ Verify Eth0 Static IPv4 Functions Properly In The Presence Of DHCPv6
     ...    ${eth1_initial_ipv4_addressorigin_list}  ${eth1_initial_ipv4_addr_list}
 
 
+Disable And Verify AutoConfig On Both Interfaces When AutoConfig Enabled
+    [Documentation]  Enable and then disable both eth0 & eth1 with auto-config and
+    ...    check both interfaces gets disabled with SLAAC.
+    [Tags]  Disable_And_Verify_AutoConfig_On_Both_Interfaces_When_AutoConfig_Enabled
+    [Setup]  Set And Verify SLAAC Property On Both Interfaces  ${True}  ${True}
+    [Template]  Set And Verify SLAAC Property On Both Interfaces
+
+    # slaac_eth0       slaac_eth1.
+    ${False}           ${False}
+
+
 *** Keywords ***
 
 Suite Setup Execution
