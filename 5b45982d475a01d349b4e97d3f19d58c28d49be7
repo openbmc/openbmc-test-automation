@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7dac520_f602906a",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-31T06:19:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb50547b_2c940747",
+      "revId": "5b45982d475a01d349b4e97d3f19d58c28d49be7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1365a09f_35b3747d",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce5af8ea_3620f744",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-31T06:19:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1365a09f_35b3747d",
+      "revId": "5b45982d475a01d349b4e97d3f19d58c28d49be7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1b51f13_90783e62",
@@ -48,6 +84,30 @@
       "writtenOn": "2025-10-30T11:18:40Z",
       "side": 1,
       "message": "this is not required.. just create a flag combined \u0027Set SLAAC Configuration State And Verify\u0027 and \u0027Set SLAAC Configuration State\u0027 \u003d\u003d\u003d\u003e\u003e\u003e Set SLAAC Configuration State And Verify\u0027\n\nis_slacc_verify_state as True/False\n\n```\nIF ${is_slacc_verify_state}\n    Verify SLAAC Property  ${slaac_state}  ${channel_number}\nEND\n```",
+      "range": {
+        "startLine": 928,
+        "startChar": 0,
+        "endLine": 929,
+        "endChar": 1
+      },
+      "revId": "5b45982d475a01d349b4e97d3f19d58c28d49be7",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68ddb2de_a9db7f97",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-31T06:19:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1b51f13_90783e62",
       "range": {
         "startLine": 928,
         "startChar": 0,
