@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "334a31f0_5da7d58f",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-31T06:31:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24081b43_2779589c",
+      "revId": "1f27dc627b912a57014fb5d0fd04737da61bccce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04aa1da8_ab5e7dc5",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-10-31T06:24:58Z",
       "side": 1,
       "message": "as you are calling this keyword \"Verify SLAAC Property\" in \"Set SLAAC Configuration State And Verify\", then why you are calling it here again?",
+      "revId": "1f27dc627b912a57014fb5d0fd04737da61bccce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6afe386_e5526b6c",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-31T06:31:31Z",
+      "side": 1,
+      "message": "after reboot checking the value has not changed.",
+      "parentUuid": "04aa1da8_ab5e7dc5",
       "revId": "1f27dc627b912a57014fb5d0fd04737da61bccce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f7bcb18_75017c40",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-31T06:31:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e196d2a3_d546e357",
+      "revId": "1f27dc627b912a57014fb5d0fd04737da61bccce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "beddfa42_a36b3d54",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-10-31T06:24:58Z",
       "side": 1,
       "message": "same as above comment #192",
+      "revId": "1f27dc627b912a57014fb5d0fd04737da61bccce",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00164292_20fff4b3",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-31T06:31:31Z",
+      "side": 1,
+      "message": "after reboot checking the value has not changed.",
+      "parentUuid": "beddfa42_a36b3d54",
       "revId": "1f27dc627b912a57014fb5d0fd04737da61bccce",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
