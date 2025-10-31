@@ -447,6 +447,21 @@ Verify Coexistence Of IPv6 Addresses Type Combination On BMC
     Static  Static
 
 
+Verify Persistency Of DHCPv6 On Reboot On Eth1
+    [Documentation]  Verify persistency of DHCPv6 property and
+    ...    all existing n/w configurations on BMC reboot on eth1.
+    [Tags]  Verify_Persistency_Of_DHCPv6_On_Reboot_On_Eth1
+    [Setup]  Set And Verify DHCPv6 Property  Enabled  ${2}
+
+    Redfish OBMC Reboot (off)  stack_mode=skip
+
+    Verify DHCPv6 Property  Enabled  ${2}
+
+    Verify All The Addresses Are Intact  ${1}
+    Verify All The Addresses Are Intact  ${2}
+    ...    ${eth1_initial_ipv4_addressorigin_list}  ${eth1_initial_ipv4_addr_list}
+
+
 *** Keywords ***
 
 Suite Setup Execution
