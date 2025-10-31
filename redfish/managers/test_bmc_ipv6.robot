@@ -447,6 +447,17 @@ Verify Coexistence Of IPv6 Addresses Type Combination On BMC
     Static  Static
 
 
+Enable Then Disable AutoConfig On Eth0 Eth1 And Verify SLAAC Is Disabled
+    [Documentation]  Enable and then disable both eth0 & eth1 with auto-config and
+    ...    check both interfaces gets disabled with SLAAC.
+    [Tags]  Enable_Then_Disable_AutoConfig_On_Eth0_Eth1_And_Verify_SLAAC_Is_Disabled
+    [Setup]  Set And Verify SLAAC Property On Both Interfaces  ${True}  ${True}
+    [Template]  Set And Verify SLAAC Property On Both Interfaces
+
+    # slaac_eth0       slaac_eth1.
+    ${False}           ${False}
+
+
 *** Keywords ***
 
 Suite Setup Execution
