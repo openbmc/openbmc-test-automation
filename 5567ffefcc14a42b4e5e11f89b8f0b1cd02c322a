@@ -53,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3cb7c0b_37ba1827",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-31T08:09:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca680f4a_82888c90",
+      "revId": "5567ffefcc14a42b4e5e11f89b8f0b1cd02c322a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c42cc79f_236e43fe",
@@ -66,6 +84,24 @@
       "writtenOn": "2025-10-31T08:02:15Z",
       "side": 1,
       "message": "Add \u0027is_slaac_verify_state\u0027 into the Description as weel",
+      "revId": "5567ffefcc14a42b4e5e11f89b8f0b1cd02c322a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d618963_cc9e942b",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-10-31T08:09:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c42cc79f_236e43fe",
       "revId": "5567ffefcc14a42b4e5e11f89b8f0b1cd02c322a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
