@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d6dba0b_2b8b07e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2025-11-01T14:06:05Z",
+      "side": 1,
+      "message": "Unfortunately, a new commit ID has been created with all the mentioned changes: https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/84779. Hence, this PR will be abandoned in favor of the new one.\n\nAll review comments have been addressed in the new PR, except for adding this keyword to another test case (Verify SSH Login Access With Admin User). A separate PR will be raised to fix that.\n\nKindly review the newly created PR.",
+      "revId": "41b2c9ee69678f54e319dd81cebb197e8781d818",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
