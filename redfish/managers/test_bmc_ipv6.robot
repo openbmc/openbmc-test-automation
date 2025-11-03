@@ -447,6 +447,20 @@ Verify Coexistence Of IPv6 Addresses Type Combination On BMC
     Static  Static
 
 
+Verify Eth0 Static IPv4 Functions Properly In The Presence Of DHCPv6
+    [Documentation]  Verify eth0 static IPv4 functions properly in the presence of DHCPv6.
+    [Tags]  Verify_Eth0_Static_IPv4_Functions_Properly_In_The_Presence_Of_DHCPv6
+    [Setup]  Set And Verify DHCPv6 Property  Enabled
+
+    # Verify that on enabling DHCPv6 other configurations are not impacted.
+    Sleep  ${NETWORK_TIMEOUT}
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+    Verify All The Addresses Are Intact  ${1}
+    Verify All The Addresses Are Intact  ${2}
+    ...    ${eth1_initial_ipv4_addressorigin_list}  ${eth1_initial_ipv4_addr_list}
+
+
 *** Keywords ***
 
 Suite Setup Execution
