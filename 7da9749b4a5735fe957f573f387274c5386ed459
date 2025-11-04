@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df7318e3_e229b078",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-11-04T14:55:58Z",
+      "side": 1,
+      "message": "Last supported for legacy REST  https://github.com/openbmc/openbmc-test-automation/releases/tag/v4.0-stable\n\nwe will be removing those test ahead.. so lets not add anything specific REST tags.. Thanks",
+      "revId": "7da9749b4a5735fe957f573f387274c5386ed459",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
