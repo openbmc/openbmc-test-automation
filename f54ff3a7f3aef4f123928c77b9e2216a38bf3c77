@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01028803_0804fa42",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-11-04T05:12:22Z",
+      "side": 1,
+      "message": "IPv4",
+      "revId": "f54ff3a7f3aef4f123928c77b9e2216a38bf3c77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34251c97_5d95267a",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-11-04T05:12:22Z",
+      "side": 1,
+      "message": "IPv4",
+      "revId": "f54ff3a7f3aef4f123928c77b9e2216a38bf3c77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "163d2958_4354b89e",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-11-04T05:12:22Z",
+      "side": 1,
+      "message": "please be clear with documentation ...like what will not impact IPv4 configuration",
+      "revId": "f54ff3a7f3aef4f123928c77b9e2216a38bf3c77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdf40f5a_d80ae724",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-11-04T05:12:22Z",
+      "side": 1,
+      "message": "why you need this here?",
+      "revId": "f54ff3a7f3aef4f123928c77b9e2216a38bf3c77",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
