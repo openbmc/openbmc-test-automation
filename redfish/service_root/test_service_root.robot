@@ -129,6 +129,25 @@ Verify Redfish Unresponsive URL paths
     Redfish.Logout
     Valid Length  dead_resources  max_length=0
 
+Verify Service Root Unsupported Methods
+    [Documentation]  Verify Unsupported methods of service root
+    [Tags]  Verify_Service_Root_Unsupported_Methods
+
+    # Put operation on Service Root
+    Redfish.Put  /redfish/v1
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Post operation on Service Root
+    Redfish.Post  /redfish/v1/
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Delete operation on Service Root
+    Redfish.Delete  /redfish/v1
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Patch operation on Service Root
+    Redfish.Patch  /redfish/v1
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
 *** Keywords ***
 
