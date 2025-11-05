@@ -71,10 +71,8 @@ Verify Front And Rear LED State
     ${front_fault}=  Get System LED State  front_fault
     ${rear_fault}=  Get System LED State  rear_fault
 
-    Run Keyword If
-    ...  '${front_fault}' != '${state}' or '${rear_fault}' != '${state}'
+    IF  '${front_fault}' != '${state}' or '${rear_fault}' != '${state}'
     ...  Fail  msg=Expecting both enclosure LEDs to be ${state}.
-
 
 Set Fan State
     [Documentation]  Set the fan state, either functional or non-functional.
@@ -111,8 +109,8 @@ Get Target Speed Of Fans
     FOR  ${path}  IN  @{paths}
         ${response}=  OpenBMC Get Request  ${path}
         ${target_speed}=  Set Variable  ${response.json()["data"]["Target"]}
-        ${max_target}=  Run Keyword If  ${target_speed} > ${max_target}
-        ...  Set Variable  ${target_speed}  ELSE  Set Variable  ${max_target}
+        ${max_target}=  Set Variable If  ${target_speed} > ${max_target}
+        ...  ${target_speed}  ${max_target}
     END
     RETURN  ${max_target}
 
@@ -153,10 +151,8 @@ Get Fan Target And Speed
 
     ${target_speed}  ${clockwise_speed}  ${counterclockwise_speed}=
     ...  Get Target And Blade Speeds  ${fan_name}
-    ${blade_speed}=  Run Keyword If
-    ...  ${clockwise_speed} > ${counterclockwise_speed}
-    ...  Set Variable  ${clockwise_speed}  ELSE
-    ...  Set Variable  ${counterclockwise_speed}
+    ${blade_speed}=  Set Variable If  ${clockwise_speed} > ${counterclockwise_speed}
+    ...  ${clockwise_speed}  ${counterclockwise_speed} 
     RETURN  ${target_speed}  ${blade_speed}
 
 
@@ -192,14 +188,12 @@ Verify Minimum Number Of Fans With Cooling Type
 
     # If water cooled must have at least min_fans_water fans, otherwise
     # issue Fatal Error and terminate testing.
-    Run Keyword If  ${water_cooled} == 1 and ${num_fans} < ${min_fans_water}
-    ...  Fatal Error
-    ...  msg=Water cooled but less than ${min_fans_water} fans present.
+    IF  ${water_cooled} == 1 and ${num_fans} < ${min_fans_water}
+    ...  Fatal Error  msg=Water cooled but less than ${min_fans_water} fans present.
 
     # If air cooled must have at least min_fans_air fans.
-    Run Keyword If  ${water_cooled} == 0 and ${num_fans} < ${min_fans_air}
-    ...  Fatal Error
-    ...  msg=Air cooled but less than ${min_fans_air} fans present.
+    IF  ${water_cooled} == 0 and ${num_fans} < ${min_fans_air}
+    ...  Fatal Error  msg=Air cooled but less than ${min_fans_air} fans present.
 
 
 Verify Fan Monitors With State
@@ -218,13 +212,12 @@ Verify Fan Monitors With State
     Rpvars  power_state  num_fan_daemons
 
     # Fail if system is On and there are no fan monitors.
-    Run Keyword If  '${power_state}' == 'On' and ${num_fan_daemons} == 0
+    IF  '${power_state}' == 'On' and ${num_fan_daemons} == 0
     ...  Fail  msg=No phosphor-fan monitors found at power on.
 
     # Fail if system is Off and the fan monitors are present.
-    Run Keyword If  '${power_state}' == 'Off' and ${num_fan_daemons} != 0
+    IF  '${power_state}' == 'Off' and ${num_fan_daemons} != 0
     ...  Fail  msg=Phosphor-fan monitors found at power off.
-
 
 Get Fan Count And Names
     [Documentation]  Return the number of fans and the fan names.
@@ -275,8 +268,7 @@ Verify Fan Speed
         # Calculate upper and lower speed limits.
         ${max_limit}=  Evaluate   ${target_speed}+${tolerance_value}
         ${min_limit}=  Evaluate   ${target_speed}-${tolerance_value}
-        Run Keyword If
-        ...  ${fan_speed} < ${min_limit} or ${fan_speed} > ${max_limit}
+        IF  ${fan_speed} < ${min_limit} or ${fan_speed} > ${max_limit}
         ...  Fail  msg=${fan_name} speed of ${fan_speed} is out of range.
     END
 
@@ -317,8 +309,7 @@ Verify Direct Fan Control
         ${target_speed}  ${cw_speed}  ${ccw_speed}=
         ...  Get Target And Blade Speeds  ${fan_name}
         Rpvars  fan_name  target_speed  cw_speed  ccw_speed
-        Run Keyword If
-        ...  ${cw_speed} < ${min_speed} or ${ccw_speed} < ${min_speed}
+        IF  ${cw_speed} < ${min_speed} or ${ccw_speed} < ${min_speed}
         ...  Fail  msg=${fan_name} failed manual speed test.
     END
 
@@ -345,7 +336,7 @@ Verify Direct Fan Control
     # Count the number of speeds > ${min_speed}.
     ${count}=  Set Variable  ${0}
     FOR  ${speed}  IN  @{speeds}
-        ${count}=  Run Keyword If  ${speed} > ${min_speed}
+        ${count}=  Set Variable If  ${speed} > ${min_speed}
         ...  Evaluate  ${count}+1  ELSE  Set Variable  ${count}
         # Because each fan has two rotating fan blades, the count should be
         # equual to 2*${number_of_fans}.  On water-cooled systems some
@@ -357,8 +348,7 @@ Verify Direct Fan Control
     # Re-enable the fan daemon
     Set Fan Daemon State  restart
 
-    Run Keyword If  ${fail_test} > ${0}  Fail
-    ...  msg=hwmon did not properly report fan speeds.
+    IF  ${fail_test} > ${0}  Fail  msg=hwmon did not properly report fan speeds.
 
     # Wait for the daemon to take control and gracefully set fan speeds
     # back to normal.
@@ -391,9 +381,7 @@ Verify Fan Speed Increase
     # If initial speed is not already at maximum, set expect_increase.
     # This flag is used later to determine if speed checking is
     # to be done or not.
-    ${expect_increase}=  Run Keyword If
-    ...  ${initial_speed} < ${max_speed}
-    ...  Set Variable  1  ELSE  Set Variable  0
+    ${expect_increase}=  Set Variable If  ${initial_speed} < ${max_speed}  1  0 
 
     Set Fan State  ${test_fan_name}  ${fan_nonfunctional}
 
@@ -402,7 +390,7 @@ Verify Fan Speed Increase
     # A heavily loaded system may have powered-off.
     ${host_state}=  Get Host State
     Rpvars  host_state
-    Run Keyword If  'Running' != '${host_state}'  Pass Execution
+    IF  'Running' != '${host_state}'  Pass Execution
     ...  msg=System shutdown so skipping remainder of test.
 
     ${new_fan_speed}=  Get Target Speed Of Fans
@@ -410,10 +398,9 @@ Verify Fan Speed Increase
 
     # Fail if current fan speed did not increase past the initial
     # speed, but do this check only if not at maximum speed to begin with.
-    Run Keyword If
-    ...  ${expect_increase} == 1 and ${new_fan_speed} < ${initial_speed}
-    ...  Fail  msg=Remaining fans did not increase speed with loss of one fan.
 
+    IF  ${expect_increase} == 1 and ${new_fan_speed} < ${initial_speed}
+    ...  Fail  msg=Remaining fans did not increase speed with loss of one fan.
 
 
 Verify System Shutdown Due To Fans
