@@ -213,16 +213,18 @@ Verify Interface Stability
     # Description of argument(s):
     # port  Network port.
 
-    Run Keyword If  ${port} == ${REDFISH_INTERFACE}
-    ...  Redfish.Login
-    ...  ELSE IF  ${port} == ${SSH_PORT}
-    ...  Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
-    ...  ELSE IF  ${port} == ${IPMI_PORT}
-    ...  Run External IPMI Standard Command  lan print
-    ...  ELSE IF  ${port} == ${HOST_SOL_PORT}
-    ...  Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  port=${HOST_SOL_PORT}
-    ...  ELSE
-    ...  Redfish.Login
+    IF  ${port} == ${REDFISH_INTERFACE}
+        Redfish.Login
+    ELSE IF  ${port} == ${SSH_PORT}
+        Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
+    ELSE IF  ${port} == ${IPMI_PORT}
+        Run External IPMI Standard Command  lan print
+    ELSE IF  ${port} == ${HOST_SOL_PORT}
+        Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  port=${HOST_SOL_PORT}
+    ELSE
+        Redfish.Login
+    END
+
 
 Establish TCP Connections And Get Connection Failures
     [Documentation]  Establish TCP connections and return nping connection responses.

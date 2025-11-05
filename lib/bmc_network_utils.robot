@@ -551,9 +551,11 @@ Delete IP Address
 
     @{network_configurations}=  Get Network Configuration
     FOR  ${network_configuration}  IN  @{network_configurations}
-      Run Keyword If  '${network_configuration['Address']}' == '${ip}'
-      ...  Append To List  ${patch_list}  ${null}
-      ...  ELSE  Append To List  ${patch_list}  ${empty_dict}
+        IF  '${network_configuration['Address']}' == '${ip}'
+            Append To List  ${patch_list}  ${null}
+        ELSE
+            Append To List  ${patch_list}  ${empty_dict}
+        END
     END
 
     ${ip_found}=  Run Keyword And Return Status  List Should Contain Value

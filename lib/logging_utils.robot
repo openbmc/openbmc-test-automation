@@ -185,15 +185,15 @@ Create Test PEL Log
     #    }
     # }
 
-    Run Keyword If  '${pel_type}' == 'Internal Failure'
-    ...   BMC Execute Command  ${CMD_INTERNAL_FAILURE}
-    ...  ELSE IF  '${pel_type}' == 'FRU Callout'
-    ...   BMC Execute Command  ${CMD_FRU_CALLOUT}
-    ...  ELSE IF  '${pel_type}' == 'Procedure And Symbolic FRU Callout'
-    ...   BMC Execute Command  ${CMD_PROCEDURAL_SYMBOLIC_FRU_CALLOUT}
-    ...  ELSE IF  '${pel_type}' == 'Unrecoverable Error'
-    ...   BMC Execute Command  ${CMD_UNRECOVERABLE_ERROR}
-
+    IF  '${pel_type}' == 'Internal Failure'
+        BMC Execute Command  ${CMD_INTERNAL_FAILURE}
+    ELSE IF  '${pel_type}' == 'FRU Callout'
+        BMC Execute Command  ${CMD_FRU_CALLOUT}
+    ELSE IF  '${pel_type}' == 'Procedure And Symbolic FRU Callout'
+        BMC Execute Command  ${CMD_PROCEDURAL_SYMBOLIC_FRU_CALLOUT}
+    ELSE IF  '${pel_type}' == 'Unrecoverable Error'
+        BMC Execute Command  ${CMD_UNRECOVERABLE_ERROR}
+    END
 
 Create Test Error Log
     [Documentation]  Generate test error log.
