@@ -162,6 +162,49 @@ Check GPU States When Power Off
     Redfish Power Off
     GPU State Check
 
+Verify Systems Collection With Unsupported Methods
+    [Documentation]  Verify Systems collection with Unsupported methods
+    [Tags]  Verify_Systems_Collection_With_Unsupported_Methods
+
+    # Get operation on Systems Collection
+    Redfish.Get    /redfish/v1/Systems
+    ...    valid_status_codes=[${HTTP_OK}]
+
+    # Put operation on Systems Collection
+    Redfish.Put  /redfish/v1/Systems
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Post operation on Systems Collection
+    Redfish.Post  /redfish/v1/Systems
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Delete operation on Systems Collection
+    Redfish.Delete  /redfish/v1/Systems
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Patch operation on Systems Collection
+    Redfish.Patch  /redfish/v1/Systems
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+Verify Systems Instance Collection With Unsupported Methods
+    [Documentation]  Verify Systems Instance collection with Unsupported methods
+    [Tags]  Verify_Systems_Instance_Collection_With_Unsupported_Methods
+
+    # Get operation on Systems Instance Collection
+    Redfish.Get    /redfish/v1/Systems/system
+    ...    valid_status_codes=[${HTTP_OK}]
+
+    # Put operation on Systems Instance Collection
+    Redfish.Put  /redfish/v1/Systems/system
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Post operation on Systems Instance Collection
+    Redfish.Post  /redfish/v1/Systems/system
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Delete operation on Systems Instance Collection
+    Redfish.Delete  /redfish/v1/Systems/system
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
 *** Keywords ***
 
