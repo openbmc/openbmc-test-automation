@@ -16,6 +16,24 @@
       "message": "The code looks good but I dont see your name listed on OpenBMC CLA approved list under AMI\n\nhttps://drive.google.com/drive/folders/12CXCpXKHZSRzm0S8G2Td9YNkSabX1JY5\n\ncan u ping or talk to AMI CLA manager to get your name added\n\nPravinash Jeyapaul \u003cpravinashj@ami.com\u003e; - CLA Manager\nDavid King davidk@ami.com – CLA Manager\n\nOnce your access is added, we can go ahead to merge the code.. Thanks",
       "revId": "353a696183264147660708937f679eb36d49fd74",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bf66474_d578a081",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001886
+      },
+      "writtenOn": "2025-11-05T06:20:13Z",
+      "side": 1,
+      "message": "@nandakumarb@ami.com, You name is available in the document.\n\nNandakumar B, nandakumarb@ami.com\n\nCan you use the same name in `Signed-off-by`",
+      "parentUuid": "111fd924_5f88d88d",
+      "revId": "353a696183264147660708937f679eb36d49fd74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
