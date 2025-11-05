@@ -499,6 +499,16 @@ Verify Persistency Of SLAAC On BMC Reboot For Both Interfaces
     Verify Persistency Of IPv6 On BMC Reboot  SLAAC  2
 
 
+Verify Persistency Of DHCPv6 On BMC Reboot For Both Interfaces
+    [Documentation]  Verify persistency of DHCPv6 on BMC reboot for both interfaces
+    ...  DHCPv6 setup should be in place for this testcase to pass.
+    [Tags]  Verify_Persistency_Of_DHCPv6_On_BMC_Reboot_For_Both_Interfaces
+    [Setup]  Set And Verify DHCPv6 States  Enabled  Enabled
+
+    Verify Persistency Of IPv6 On BMC Reboot  DHCPv6  1
+    Verify Persistency Of IPv6 On BMC Reboot  DHCPv6  2
+
+
 Verify DHCPv6 Enable And Disable On Both Interfaces Via GUI
     [Documentation]  Verify DHCPv6 toggle on both interfaces via GUI.
     [Tags]  Verify_DHCPv6_Enable_And_Disable_On_Both_Interfaces_Via_GUI
