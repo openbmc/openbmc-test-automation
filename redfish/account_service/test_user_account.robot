@@ -494,16 +494,8 @@ Verify SSH Login Access With Admin User
     ...              in the community sphere..
     [Tags]  Verify_SSH_Login_Access_With_Admin_User
 
-    # Create an admin User.
-    Redfish Create User  new_admin  TestPwd1  Administrator  ${True}
-
-    # Attempt SSH login with admin user.
-    SSHLibrary.Open Connection  ${OPENBMC_HOST}
-    ${status}=  Run Keyword And Return Status  SSHLibrary.Login  new_admin  TestPwd1
-
-    # By default ssh_status is True, user can change the status via CLI
-    # -v ssh_status:False
-    Should Be Equal As Strings  "${status}"  "${ssh_status}"
+    #Create an admin user and verify SSH login.
+    Create Admin User And Verify SSH Login
 
     Redfish.Login
     Redfish.Delete  /redfish/v1/AccountService/Accounts/new_admin
