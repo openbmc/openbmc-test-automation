@@ -34,6 +34,24 @@
       "parentUuid": "111fd924_5f88d88d",
       "revId": "353a696183264147660708937f679eb36d49fd74",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3320f99f_59802b3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2025-11-05T06:59:32Z",
+      "side": 1,
+      "message": "Hi @hariharanr@ami.com and @gkeishin@gmail.com, have updated the signed-off details.",
+      "parentUuid": "6bf66474_d578a081",
+      "revId": "353a696183264147660708937f679eb36d49fd74",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
