@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47ee4b2d_cc77bb6c",
+        "filename": "lib/fan_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-11-06T06:10:41Z",
+      "side": 1,
+      "message": "IF  \u0027${front_fault}\u0027 !\u003d \u0027${state}\u0027 or \u0027${rear_fault}\u0027 !\u003d \u0027${state}\u0027\n        Fail  msg\u003dExpecting both enclosure LEDs to be ${state}.\n    END",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 63
+      },
+      "revId": "ac894cd6b44d32ac68b93a366874a6b141dad7a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15af1cb5_3368fce4",
+        "filename": "lib/fan_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-11-06T06:10:41Z",
+      "side": 1,
+      "message": "IF  ${water_cooled} \u003d\u003d 1 and ${num_fans} \u003c ${min_fans_water}\n        Fatal Error  msg\u003dWater cooled but less than ${min_fans_water} fans present.\n    END",
+      "revId": "ac894cd6b44d32ac68b93a366874a6b141dad7a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e90b2fa_f2b48493",
+        "filename": "lib/fan_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-11-06T06:10:41Z",
+      "side": 1,
+      "message": "IF  ${water_cooled} \u003d\u003d 0 and ${num_fans} \u003c ${min_fans_air}\n      Fatal Error  msg\u003dAir cooled but less than ${min_fans_air} fans present.\n  END",
+      "revId": "ac894cd6b44d32ac68b93a366874a6b141dad7a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17029251_34d1320f",
+        "filename": "lib/fan_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-11-06T06:10:41Z",
+      "side": 1,
+      "message": "IF  ${fan_speed} \u003c ${min_limit} or ${fan_speed} \u003e ${max_limit}\n            Fail  msg\u003d${fan_name} speed of ${fan_speed} is out of range.\n        END",
+      "revId": "ac894cd6b44d32ac68b93a366874a6b141dad7a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "889a0236_ec20bcdb",
+        "filename": "lib/fan_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-11-06T06:10:41Z",
+      "side": 1,
+      "message": "IF  ${expect_increase} \u003d\u003d 1 and ${new_fan_speed} \u003c ${initial_speed}\n        Fail  msg\u003dRemaining fans did not increase speed with loss of one fan.\n    END",
+      "revId": "ac894cd6b44d32ac68b93a366874a6b141dad7a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
