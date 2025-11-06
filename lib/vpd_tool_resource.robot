@@ -1,9 +1,9 @@
 *** Settings ***
 Documentation   Utility file for system Vital Product Data (VPD) using vpdtool.
 
-Library         ../../lib/vpd_utils.py
-Variables       ../../data/vpd_variables.py
-Resource        ../../lib/boot_utils.robot
+Library         vpd_utils.py
+Variables       ../data/vpd_variables.py
+Resource        boot_utils.robot
 
 
 *** Variables ***
