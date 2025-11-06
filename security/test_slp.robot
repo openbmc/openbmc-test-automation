@@ -23,6 +23,7 @@ ${SLP_SERVICES}       ${EMPTY}
 Verify SLP Service Types
     [Documentation]  Find services supported by system.
     [Tags]  Verify_SLP_Service_Types
+
     Verify Service Types
 
 Verify Service Agents For Service Types
@@ -40,6 +41,7 @@ Verify Service Agents For Service Types
 
 Suite Setup Execution
     [Documentation]  Get SLP services.
+
     ${output}=  Run  which slptool
     Should Not Be Empty  ${output}
     ...  msg=slptool not installed.
@@ -78,8 +80,12 @@ Verify Service Types
 Verify Service Agents
     [Documentation]  Verifies the output of srvs.
     [Arguments]      ${output}  ${service_agent}
-    # Example of output
-    # <service:service_name:tcp//xxx.xxx.xxx.xxx,2200>
+
+    # Description of argument(s):
+    # output         SLP service output.
+    #                Example of output
+    #                <service:service_name:tcp//xxx.xxx.xxx.xxx,2200>
+    # service_agent  Service agent ('findsrvs').
 
     Run Keywords  Should Contain  ${output}  ${service_agent}  AND
     ...  Should Contain  ${output}  ${OPENBMC_HOST},

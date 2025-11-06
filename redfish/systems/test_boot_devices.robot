@@ -314,12 +314,11 @@ Verify Boot Source Override with Enabled Mode As Once After Host Reboot
     [Arguments]      ${override_target}  ${override_mode}=UEFI  ${is_bios_setup}=False
 
     # Description of argument(s):
-    # override_enabled    Boot source override enable type.
-    #                     ('Once', 'Continuous', 'Disabled').
     # override_target     Boot source override target.
     #                     ('Pxe', 'Cd', 'Hdd', 'Diags', 'BiosSetup', 'None').
     # override_mode       Boot source override mode (relevant only for x86 arch).
     #                     ('Legacy', 'UEFI').
+    # is_bios_setup       Is BIOS setup required (True, False).
 
     # Example:
     # "Boot": {
@@ -379,12 +378,11 @@ Verify Boot Source Override with Enabled Mode As Continuous After Host Reboot
     [Arguments]      ${override_target}  ${override_mode}=UEFI  ${is_bios_setup}=False
 
     # Description of argument(s):
-    # override_enabled    Boot source override enable type.
-    #                     ('Once', 'Continuous', 'Disabled').
     # override_target     Boot source override target.
     #                     ('Pxe', 'Cd', 'Hdd', 'Diags', 'BiosSetup', 'None').
     # override_mode       Boot source override mode (relevant only for x86 arch).
     #                     ('Legacy', 'UEFI').
+    # is_bios_setup       Is BIOS setup required (True, False).
 
     # Example:
     # "Boot": {
