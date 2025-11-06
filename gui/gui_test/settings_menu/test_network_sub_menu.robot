@@ -81,6 +81,10 @@ ${invalid_hexadec_ipv6}                  x:x:x:x:x:x:10.5.5.6
 ${ipv6_multi_short}                      2001::33::111
 ${ipv6_with_leadingzeroes_addr}          2001:0022:0033::0111
 ${ipv6_without_leadingzeroes_addr}       2001:22:33::111
+${ipv6_onehextet_zero}                   2001:0022:1133::1111
+${ipv6_eliminate_onehextet_zero}         2001:22:1133::1111
+${link_local_addr}                       fe80::
+${link_local_prefix_len}                 10
 ${test_prefix_length}                    64
 ${out_of_range_ip}                       10.7.7.256
 ${string_ip}                             aa.bb.cc.dd
@@ -271,6 +275,7 @@ Configure And Verify Static IPv6 Address
 
     # ipv6                           prefix_length          status           expected_ipv6
     ${ipv6_with_leadingzeroes_addr}  ${test_prefix_length}  Success          ${ipv6_without_leadingzeroes_addr}
+    ${ipv6_onehextet_zero}           ${test_prefix_length}  Success          ${ipv6_eliminate_onehextet_zero}
     ${test_ipv6_addr}                ${test_prefix_length}  Success
     ${ipv4_hexword_addr}             ${test_prefix_length}  Invalid format
     ${invalid_hexadec_ipv6}          ${test_prefix_length}  Invalid format
@@ -560,6 +565,35 @@ Verify Edit And Delete Button Is Disabled For Dynamic IPv6 Addresses
     DHCPv6              ${2}
     SLAAC               ${2}
     LinkLocal           ${2}
+
+
+Configure Link Local IPv6 Address Via GUI And Verify
+    [Documentation]  Configure link local IPv6 address via GUI and verify.
+    [Tags]  Configure_Link_Local_IPv6_Address_Via_GUI_And_Verify
+
+    Add Static IPv6 Address And Verify Via GUI  ${link_local_addr}  ${link_local_prefix_len}  Success
+
+    # Verify the address origin contains link local.
+    Sleep  ${NETWORK_TIMEOUT}
+    @{ipv6_address_origin_list}  ${ipv6_link_local_addr}=
+    ...    Get Address Origin List And Address For Type  LinkLocal
+
+    Should Contain  ${ipv6_link_local_addr}  ${link_local_addr}
+    ${count}=  Evaluate  ${ipv6_address_origin_list}.count("LinkLocal")
+
+    Should Be Equal As Integers  ${count}  2
+
+
+Configure Static IPv6 On Eth0 And DHCPv6 On Eth1 And Verify
+    [Documentation]  Configure static IPv6 on eth0 and DHCPv6 on eth1 and verify.
+    [Tags]  Configure_Static_IPv6_On_Eth0_And_DHCPv6_On_Eth1_And_Verify
+
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}  ${test_prefix_length}  Success
+    Sleep  ${NETWORK_TIMEOUT}
+    Toggle DHCPv6 State And Verify  Enabled  2
+
+    # Verify network connectivity by pinging the IPv4 address.
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
 
 *** Keywords ***
