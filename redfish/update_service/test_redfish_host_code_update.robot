@@ -76,7 +76,7 @@ Redfish Update Firmware
     [Arguments]  ${apply_time}
 
     # Description of argument(s):
-    # policy     ApplyTime allowed values (e.g. "OnReset", "Immediate").
+    # apply_time     ApplyTime allowed values (e.g. "OnReset", "Immediate").
 
     Redfish.Login
     ${post_code_update_actions}=  Get Post Boot Action
@@ -97,8 +97,8 @@ Redfish Firmware Update And Do BMC Reboot
 
     Set ApplyTime  policy="Immediate"
 
-     # URI : /redfish/v1/UpdateService
-     # "HttpPushUri": "/redfish/v1/UpdateService/update",
+    # URI : /redfish/v1/UpdateService
+    # "HttpPushUri": "/redfish/v1/UpdateService/update",
 
     ${redfish_update_uri}=  Get Redfish Update Service URI
     Redfish Upload Image  ${redfish_update_uri}  ${IMAGE_FILE_PATH}

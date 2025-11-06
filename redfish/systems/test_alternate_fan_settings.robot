@@ -123,6 +123,10 @@ Set and Verify Thermal Mode After Boot
     [Documentation]  Verify the thermal mode remains set at runtime.
     [Arguments]  ${pre_req_state}  ${thermal_mode}
 
+    # Description of Arguments(s):
+    # pre_req_state      Set the state of the host to Standby or Runtime (e.g. "Running")
+    # thermal_mode       Read the supported thermal mode (e.g. "CUSTOM")
+
     Set and Verify Thermal Mode Switches  ${pre_req_state}  ${thermal_mode}
 
     Run Key U  Redfish Power On \ stack_mode=normal \ quiet=1

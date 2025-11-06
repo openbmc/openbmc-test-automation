@@ -246,6 +246,9 @@ Set And Verify LED Location Indicator Active
     [Documentation]  Set And Verify LED Location Indicator State.
     [Arguments]  ${set_value}
 
+    # Description of argument(s):
+    # set_value      Location indicator active value (True, False).
+
     ${payload}=  Create Dictionary    LocationIndicatorActive=${set_value}
     Redfish.Patch      /redfish/v1/Systems/${SYSTEM_ID}    body=&{payload}
     ...  valid_status_codes=[${HTTP_NO_CONTENT}]
@@ -258,6 +261,9 @@ Set And Verify LED Location Indicator Active
 Set Initial Value
     [Documentation]  setting back Initial value.
     [Arguments]  ${value}
+
+    # Description of argument(s):
+    # value      Location indicator active value (True, False).
 
     ${payload}=  Create Dictionary    LocationIndicatorActive=${value}
     Redfish.Patch      /redfish/v1/Systems/${SYSTEM_ID}    body=&{payload}
