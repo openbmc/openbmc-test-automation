@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a8c5826_2e1057d1",
+        "filename": "lib/fan_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-06T06:16:30Z",
+      "side": 1,
+      "message": "Not required to use IF and END it works.. I tested the sample code\n\n```\nTest\n    IF  ${a_count} \u003d\u003d 128 and ${b_count} \u003d\u003d 256\n    ...  Fail  msg\u003dFailed\n\n    IF  ${a_count} \u003d\u003d 128 and ${b_count} \u003d\u003d 256\n    ...  Pass Execution  msg\u003dPassed\n\n    IF  ${a_count} \u003d\u003d 128 and ${b_count} \u003d\u003d 256  Pass Execution\n    ...  msg\u003dPassed\n\n    ${count}\u003d  Set Variable If  ${a_count} \u003d\u003d 128\n    ...  Hello  Bye\n\n    Log To Console  ${count}\n```",
+      "parentUuid": "47ee4b2d_cc77bb6c",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 63
+      },
+      "revId": "ac894cd6b44d32ac68b93a366874a6b141dad7a4",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15af1cb5_3368fce4",
         "filename": "lib/fan_utils.robot",
         "patchSetId": 2
