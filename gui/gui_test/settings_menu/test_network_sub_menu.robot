@@ -57,8 +57,13 @@ ${xpath_edit_ipv6_def_gateway_addr}      //*[text()='${test_ipv6_addr}']/followi
 ...                                      //*[@title="Edit IPv6 static default gateway address"]
 ${xpath_edit_ipv6_def_gateway_addr_1}      //*[text()='${test_ipv6_addr_1}']/following::td[1]
 ...                                      //*[@title="Edit IPv6 static default gateway address"]
+${xpath_ipv6_addr_edit_button}           //*[text()='{}']/following::td[3]
+...                                      //*[@title="Edit static IPv6 address"]
+${xpath_ipv6_addr_delete_button}         //*[text()='{}']/following::td[3]
+...                                      //*[@title="Delete IPv6 address"]
 ${xpath_delete_button}                   //*[text()="Delete"]
 ${xpath_eth1_interface}                  //*[text()="eth1"]
+${xpath_eth0_interface}                  //*[text()="eth0"]
 ${xpath_linklocalv6}                     //*[text()="LinkLocal"]
 ${xpath_eth0_ipv6_autoconfig_button}     (//*[@id="ipv6AutoConfigSwitch"]/following-sibling::label)[1]
 ${xpath_eth1_ipv6_autoconfig_button}     (//*[@id="ipv6AutoConfigSwitch"]/following-sibling::label)[2]
@@ -527,6 +532,23 @@ Modify Default IPv6 Static Gateway Address And Verify
     [Teardown]  Delete Default IPv6 Gateway And Verify  ${test_ipv6_addr_1}
 
     Modify Default IPv6 Gateway And Verify  ${test_ipv6_addr}  ${test_ipv6_addr_1}
+
+
+Verify Edit And Delete Button Is Disabled For Dynamic IPv6 Addresses
+    [Documentation]  Verify edit and delete button is disabled in
+    ...    link local, SLAAC and DHCPv6 configuration.
+    [Tags]  Verify_Edit_And_Delete_Button_Is_Disabled_For_Dynamic_IPv6_Addresses
+    [Setup]  Run Keywords
+    ...  Toggle DHCPv6 State And Verify  Enabled  ${2}
+    ...  AND  Set SLAAC Property On Eth0 And Eth1  Enabled
+    [Template]  Verify Edit And Delete Button Is Disabled
+
+    # Address type      Channel number.
+    DHCPv6              ${2}
+    SLAAC               ${1}
+    LinkLocal           ${1}
+    SLAAC               ${2}
+    LinkLocal           ${2}
 
 
 *** Keywords ***
@@ -1040,3 +1062,34 @@ Verify Persistency Of IPv6 On BMC Reboot
     END
     Wait Until Page Contains  ${addr_after_reboot}
     Wait Until Page Contains  ${ipv6_type}
+
+
+Verify Edit And Delete Button Is Disabled
+    [Documentation]  Verify edit and delete button is disabled in configuration.
+    [Arguments]  ${ipv6_type}  ${channel_number}=${None}
+
+    # Description of argument(s):
+    # ipv6_type       Type of IPv6 address(e.g:slaac/dhcpv6/linklocal).
+    # channel_number  Ethernet channel number, 1(eth0) or 2(eth1).
+
+    @{ipv6_address_origin_list}  ${ipv6_addr}=
+    ...    Get Address Origin List And Address For Type  ${ipv6_type}  ${channel_number}
+
+    # Verify edit button is disabled.
+    ${edit_addr}=  Replace String
+    ...  ${xpath_ipv6_addr_edit_button}  {}  ${ipv6_addr}
+
+    IF    '${channel_number}' == '1'
+        Click Element  ${xpath_eth0_interface}
+    ELSE IF    '${channel_number}' == '2'
+        Click Element  ${xpath_eth1_interface}
+    END
+
+    ${edit_button_status}=  Get Element Attribute  ${edit_addr}  disabled
+    Should Be Equal  ${edit_button_status}  true
+
+    # Verify delete button is disabled.
+    ${delete_addr}=  Replace String
+    ...  ${xpath_ipv6_addr_delete_button}  {}  ${ipv6_addr}
+    ${delete_button_status}=  Get Element Attribute  ${delete_addr}  disabled
+    Should Be Equal  ${delete_button_status}  true
