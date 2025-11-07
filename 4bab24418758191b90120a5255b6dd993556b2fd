@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97cff77f_8111ba95",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-11-07T05:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40e02c10_62751561",
+      "range": {
+        "startLine": 537,
+        "startChar": 38,
+        "endLine": 537,
+        "endChar": 41
+      },
+      "revId": "4bab24418758191b90120a5255b6dd993556b2fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8690f7a3_43e06000",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-11-07T03:52:48Z",
       "side": 1,
       "message": "have consistency in representing the doc. lowercase and uppercases mismatch\n\ndhcpv6 -\u003e DHCPv6\nipv6 -\u003e IPv6, ipv4-\u003e IPv4",
+      "range": {
+        "startLine": 555,
+        "startChar": 1,
+        "endLine": 555,
+        "endChar": 100
+      },
+      "revId": "4bab24418758191b90120a5255b6dd993556b2fd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c491419_1c3dde95",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-11-07T05:21:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8690f7a3_43e06000",
       "range": {
         "startLine": 555,
         "startChar": 1,
