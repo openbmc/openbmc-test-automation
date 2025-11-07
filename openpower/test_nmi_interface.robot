@@ -6,8 +6,8 @@ Resource        ../lib/boot_utils.robot
 Resource        ../lib/openbmc_ffdc.robot
 Resource        ../lib/secureboot/secureboot.robot
 Resource        ../lib/state_manager.robot
+Resource         ../lib/os_utilities.robot
 Library         ../lib/bmc_ssh_utils.py
-Library         ../lib/os_utilities.robot
 
 Test Teardown   FFDC On Test Case Fail
 Suite Teardown  Redfish.Logout
