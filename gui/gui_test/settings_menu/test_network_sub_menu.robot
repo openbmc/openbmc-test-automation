@@ -57,6 +57,10 @@ ${xpath_edit_ipv6_def_gateway_addr}      //*[text()='${test_ipv6_addr}']/followi
 ...                                      //*[@title="Edit IPv6 static default gateway address"]
 ${xpath_edit_ipv6_def_gateway_addr_1}      //*[text()='${test_ipv6_addr_1}']/following::td[1]
 ...                                      //*[@title="Edit IPv6 static default gateway address"]
+${xpath_ipv6_addr_edit_button}           //*[text()='{}']/following::td[3]
+...                                      //*[@title="Edit static IPv6 address"]
+${xpath_ipv6_addr_delete_button}         //*[text()='{}']/following::td[3]
+...                                      //*[@title="Delete IPv6 address"]
 ${xpath_delete_button}                   //*[text()="Delete"]
 ${xpath_eth1_interface}                  //*[text()="eth1"]
 ${xpath_linklocalv6}                     //*[text()="LinkLocal"]
@@ -527,6 +531,50 @@ Modify Default IPv6 Static Gateway Address And Verify
     [Teardown]  Delete Default IPv6 Gateway And Verify  ${test_ipv6_addr_1}
 
     Modify Default IPv6 Gateway And Verify  ${test_ipv6_addr}  ${test_ipv6_addr_1}
+
+
+Verify Edit And Delete Button Is Disabled In Link Local Configuration
+    [Documentation]  Verify edit and delete button is disabled in link local configuration.
+    [Tags]  Verify_Edit_And_Delete_Button_Is_Disabled_In_Link_Local_Configuration
+
+    @{ipv6_addressorigin_list}  ${ipv6_link_local_addr}=
+    ...    Get Address Origin List And Address For Type  LinkLocal
+
+    # Verify edit button is disabled for link local address.
+    ${edit_link_local_addr}=  Replace String
+    ...  ${xpath_ipv6_addr_edit_button}  {}  ${ipv6_link_local_addr}
+    ${edit_button_status}=  Get Element Attribute  ${edit_link_local_addr}  disabled
+    Should Be Equal  ${edit_button_status}  true
+
+    # Verify delete button is disabled for link local address.
+    ${delete_link_local_addr}=  Replace String
+    ...  ${xpath_ipv6_addr_delete_button}  {}  ${ipv6_link_local_addr}
+    ${delete_button_status}=  Get Element Attribute  ${delete_link_local_addr}  disabled
+    Should Be Equal  ${delete_button_status}  true
+
+
+Verify Edit And Delete Button Is Disabled In DHCPv6 Configuration On Eth1
+    [Documentation]  Verify edit and delete button is disabled in DHCPv6 configuration on eth1.
+    [Tags]  Verify_Edit_And_Delete_Button_Is_Disabled_In_DHCPv6_Configuration_On_Eth1
+    [Setup]  Toggle DHCPv6 State And Verify  Enabled  2
+
+    @{ipv6_address_origin_list}  ${ipv6_dhcpv6_addr}=
+    ...    Get Address Origin List And Address For Type  DHCPv6  ${2}
+
+    # Verify edit button is disabled for DHCPv6 address.
+    ${edit_dhcpv6_addr}=  Replace String
+    ...  ${xpath_ipv6_addr_edit_button}  {}  ${ipv6_dhcpv6_addr}
+
+    Click Element  ${xpath_eth1_interface}
+
+    ${edit_button_status}=  Get Element Attribute  ${edit_dhcpv6_addr}  disabled
+    Should Be Equal  ${edit_button_status}  true
+
+    # Verify delete button is disabled for DHCPv6 address.
+    ${delete_dhcpv6_addr}=  Replace String
+    ...  ${xpath_ipv6_addr_delete_button}  {}  ${ipv6_dhcpv6_addr}
+    ${delete_button_status}=  Get Element Attribute  ${delete_dhcpv6_addr}  disabled
+    Should Be Equal  ${delete_button_status}  true
 
 
 *** Keywords ***
