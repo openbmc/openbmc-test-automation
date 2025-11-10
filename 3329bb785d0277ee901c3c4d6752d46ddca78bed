@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abd326a6_2da54bc1",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-11-10T09:50:27Z",
+      "side": 1,
+      "message": "as below comment",
+      "revId": "3329bb785d0277ee901c3c4d6752d46ddca78bed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0e6e55f_3581ad85",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-11-10T09:50:27Z",
+      "side": 1,
+      "message": "I think this is not needed here, as Toggle DHCPv6 State And Verify is already taking care of waiting time.",
+      "revId": "3329bb785d0277ee901c3c4d6752d46ddca78bed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c40be90_0362d531",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-11-10T09:50:27Z",
+      "side": 1,
+      "message": "as you are testing via GUI it looks good if you verify it with GUI as well",
+      "revId": "3329bb785d0277ee901c3c4d6752d46ddca78bed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
