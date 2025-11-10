@@ -263,7 +263,7 @@ Setup To Power Off And Navigate
    [Documentation]  Power off system if not powered off and go to date and
    ...  time page.
 
-   Redfish Power off  stack_mode=skip
+   Power Off Server
    Navigate To Date and Time Page
 
 Navigate To Date and Time Page
