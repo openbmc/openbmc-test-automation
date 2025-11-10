@@ -134,8 +134,9 @@ Verify User Account And Properties Saved Through Reboots
     # Create an User account.
     Create User And Verify  my_admin_user  Administrator  ${True}
 
-    # Reboot BMC.
-    Redfish OBMC Reboot (off)  stack_mode=normal
+    # Reboot BMC and Navigate to usermanagement page.
+    Reboot Server
+    Navigate To Required Sub Menu  ${xpath_secuity_and_accesss_menu}  ${xpath_user_management_sub_menu}  user-management
 
     Click Element  ${xpath_refresh_button}
     Wait Until Page Contains  my_admin_user  timeout=15
