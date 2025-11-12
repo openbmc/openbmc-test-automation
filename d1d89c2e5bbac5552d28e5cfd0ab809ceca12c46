@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f971a0a7_da24a74a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-12T06:48:46Z",
+      "side": 1,
+      "message": "Please put valid commit message\n\nAdd below section as well\n\nChanges:\n\nTested:",
+      "revId": "d1d89c2e5bbac5552d28e5cfd0ab809ceca12c46",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
