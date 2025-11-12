@@ -86,6 +86,7 @@ def main():
     CHASSIS_ID = os.environ.get("CHASSIS_ID", "chassis")
     MANAGER_ID = os.environ.get("MANAGER_ID", "bmc")
     SYSTEM_ID = os.environ.get("SYSTEM_ID", "system")
+    OVERRIDE_FFDC_ON_TEST_CASE_FAIL = os.environ.get("OVERRIDE_FFDC_ON_TEST_CASE_FAIL", "0")
 
     enable_auto_reboot = 1 - AUTO_REBOOT_DISABLE
     print_var(enable_auto_reboot)
