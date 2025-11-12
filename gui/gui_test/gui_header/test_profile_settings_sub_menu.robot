@@ -6,7 +6,7 @@ Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/bmc_redfish_utils.robot
 
 Suite Setup     Launch Browser And Login GUI
-Suite Teardown  Close Browser
+Suite Teardown  Close All Browsers
 Test Setup      Test Setup Execution
 
 Test Tags      Profile_Settings_Sub_Menu
@@ -25,13 +25,16 @@ ${xpath_browser_offset}                //*[@data-test-id='profileSettings-radio-
 Verify Navigation To Profile Settings Page
     [Documentation]  Verify navigation to profile settings page.
     [Tags]  Verify_Navigation_To_Profile_Settings_Page
+    [Teardown]  Logout GUI
 
-    Page Should Contain  Profile settings
+   Page Should Contain  Profile settings
 
 
 Verify Existence Of All Sections In Profile Settings Page
     [Documentation]  Verify existence of all sections in profile settings page.
     [Tags]  Verify_Existence_Of_All_Sections_In_Profile_Settings_Page
+    [Setup]  Run Keywords  Login GUI  admin  ${OPENBMC_PASSWORD}  AND  Test Setup Execution
+    [Teardown]  Logout GUI
 
     Page Should Contain  Profile information
     Page Should Contain  Change password
@@ -41,6 +44,8 @@ Verify Existence Of All Sections In Profile Settings Page
 Verify Existence Of All Buttons And Input Boxes In Profile Settings Page
     [Documentation]  Verify existence of all buttons and input boxes in profile settings page.
     [Tags]  Verify_Existence_Of_All_Buttons_And_Input_Boxes_In_Profile_Settings_Page
+    [Setup]  Run Keywords  Login GUI  admin  ${OPENBMC_PASSWORD}  AND  Test Setup Execution
+    [Teardown]  Logout GUI
 
     # Input Boxes in profile settings page.
     Page Should Contain Element  ${xpath_new_password}
@@ -53,6 +58,7 @@ Verify Existence Of All Buttons And Input Boxes In Profile Settings Page
 Verify Logged In Username
     [Documentation]  Verify logged in username in profile settings page.
     [Tags]  Verify_Logged_In_Username
+    [Setup]  Launch Browser And Login GUI
 
     Wait Until Page Contains Element  ${xpath_logged_usename}
     ${gui_logged_username}=  Get Text  ${xpath_logged_usename}
