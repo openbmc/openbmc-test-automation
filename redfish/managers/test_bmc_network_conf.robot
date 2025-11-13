@@ -653,7 +653,7 @@ Configure Static IP Without Using Gateway And Verify
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
     Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
-    ...  body=&{payload}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+    ...  body=&{payload}  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
 
 Test Network Response On Specified Host State
