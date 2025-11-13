@@ -504,6 +504,16 @@ Disable And Verify AutoConfig On Both Interfaces When AutoConfig Enabled
     ${False}           ${False}
 
 
+Get DHCPv6 Address And Verify Connectivity
+    [Documentation]  Get DHCPv6 address and verify connectivity.
+    [Tags]  Get_DHCPv6_Address_And_Verify_Connectivity
+
+    @{ipv6_addressorigin_list}  ${ipv6_dhcpv6_addr}=
+    ...  Get Address Origin List And Address For Type  DHCPv6
+    Check Ping6 Status And Verify  ${ipv6_dhcpv6_addr}
+    Connect To System Via SSH
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -1526,3 +1536,38 @@ Verify IPv6 Addresses Coexist
 
     Set And Verify DHCPv6 Property  Disabled
     Set SLAAC Configuration State And Verify  ${False}
+
+
+Wait For IPv6 Host To Ping
+    [Documentation]  Wait For IPv6 Host to Ping
+    [Tags]  Wait_For_IPv6_Host_To_Ping
+    [Arguments]  ${host}  ${timeout}=${OPENBMC_REBOOT_TIMEOUT}min
+    ...          ${interval}=5 sec
+
+    # Description of argument(s):
+    # host        The host name or IP of the host to ping.
+    # timeout     Maximum time to wait for the host to respond to ping.
+    # interval    Time to wait between ping attempts.
+
+    Wait Until Keyword Succeeds  ${timeout}  ${interval}
+    ...  SSHLibrary.Execute Command  ping6 -c 3 ${host}
+
+
+Check Ping6 Status And Verify
+    [Documentation]  Check ping6 status and verify.
+    [Arguments]  ${OPENBMC_HOST_IPv6}
+
+    # Description of argument(s):
+    # OPENBMC_HOST_IPv6   IPv6 address to Connectivity.
+
+    Open Connection And Log In  ${SERVER_NAME}  ${SERVER_PASSWORD}  host=${SERVER_IPv6}
+    Wait For IPv6 Host To Ping  ${OPENBMC_HOST_IPv6}  30 secs
+
+
+Connect To System Via SSH
+    [Documentation]  Connect to system via SSH.
+
+    Open Connection And Log In  ${SERVER_NAME}  ${SERVER_PASSWORD}
+    ...  host=${SERVER_IPv6}  alias=IPv6Conn
+    SSHLibrary.Open Connection  ${OPENBMC_HOST_IPv6}
+    SSHLibrary.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  jumphost_index_or_alias=IPv6Conn
