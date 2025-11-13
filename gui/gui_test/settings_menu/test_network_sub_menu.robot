@@ -43,6 +43,8 @@ ${xpath_ntp_switch_button}               //*[@id="useNtpSwitch"]/following-sibli
 ${xpath_dns_switch_button}               //*[@id="useDnsSwitch"]/following-sibling::label
 ${xpath_domainname_switch_button}        //*[@id="useDomainNameSwitch"]/following-sibling::label
 ${xpath_success_popup}                   //*[contains(text(),'Success')]/following-sibling::button
+${ipv4_elements}                         //h2[contains(., "IPv4")]/following::table[1]/tbody/tr/td[1]
+${ipv6_elements}                         //h2[contains(., "IPv6")]/following::table[1]/tbody/tr/td[1]
 ${xpath_delete_ipv4_addres}              //*[text()='${test_ipv4_addr_2}']/following::td[4]
 ...                                      //*[@title="Delete IPv4 address"]
 ${xpath_delete_ipv6_addres}              //*[text()='${test_ipv6_addr_2}']/following::td[3]
@@ -55,9 +57,10 @@ ${xpath_delete_ipv6_def_gateway_addr}    //*[text()='${test_ipv6_addr_1}']/follo
 ...                                      //*[@title="Delete IPv6 static default gateway address"]
 ${xpath_edit_ipv6_def_gateway_addr}      //*[text()='${test_ipv6_addr}']/following::td[1]
 ...                                      //*[@title="Edit IPv6 static default gateway address"]
-${xpath_edit_ipv6_def_gateway_addr_1}      //*[text()='${test_ipv6_addr_1}']/following::td[1]
+${xpath_edit_ipv6_def_gateway_addr_1}    //*[text()='${test_ipv6_addr_1}']/following::td[1]
 ...                                      //*[@title="Edit IPv6 static default gateway address"]
 ${xpath_delete_button}                   //*[text()="Delete"]
+${xpath_eth0_interface}                  //*[text()="eth0"]
 ${xpath_eth1_interface}                  //*[text()="eth1"]
 ${xpath_linklocalv6}                     //*[text()="LinkLocal"]
 ${xpath_eth0_ipv6_autoconfig_button}     (//*[@id="ipv6AutoConfigSwitch"]/following-sibling::label)[1]
@@ -537,6 +540,19 @@ Modify Default IPv6 Static Gateway Address And Verify
     [Teardown]  Delete Default IPv6 Gateway And Verify  ${test_ipv6_addr_1}
 
     Modify Default IPv6 Gateway And Verify  ${test_ipv6_addr}  ${test_ipv6_addr_1}
+
+
+Verify Enable Or Disable DHCPv6 Does Not Impact IPv4 Settings
+    [Documentation]  Verify enable or disable DHCPv6 and it does not have impact on IPv4 settings
+    ...  Note: Enable testcase need DHCPv6 setup.
+    [Tags]  Verify_Enable_Or_Disable_DHCPv6_Does_Not_Impact_IPv4_Settings
+    [Template]  Enable Or Disable DHCPv6 And It Does Not Have Impact On IPv4 Settings
+    
+    # ip_version   channel_number  desired_status
+    ipv4           1               Disabled
+    ipv4           1               Enabled
+    ipv4           2               Disabled
+    ipv4           2               Enabled
 
 
 *** Keywords ***
@@ -1050,3 +1066,62 @@ Verify Persistency Of IPv6 On BMC Reboot
     END
     Wait Until Page Contains  ${addr_after_reboot}
     Wait Until Page Contains  ${ipv6_type}
+
+
+Collect All IP Addresses On Both Interfaces
+    [Documentation]  Collecting all the IP addresses on both interfaces.
+    [Arguments]  ${ip_version}  ${channel_number}
+
+    # Description of argument(s):
+    # ip_version   Either 'ipv4' or 'ipv6'.
+    # channel_number  Ethernet channel number, 1(eth0) or 2(eth1).
+
+    IF  '${channel_number}' == '1'
+      Wait Until Element Is Enabled  ${xpath_eth1_interface}  timeout=60s
+      Click Element  ${xpath_eth0_interface}
+    ELSE
+      Wait Until Element Is Enabled  ${xpath_eth1_interface}  timeout=60s
+      Click Element  ${xpath_eth1_interface}
+    END
+
+    IF  '${ip_version}' == 'ipv4'
+      Wait Until Element Is Enabled  ${xpath_add_static_ipv4_address_button}  timeout=30s
+      ${ip_elements}=  Get WebElements  ${ipv4_elements}
+    ELSE IF  '${ip_version}' == 'ipv6'
+      Wait Until Element Is Enabled  ${xpath_add_static_ipv6_address_button}  timeout=30s
+      ${ip_elements}=  Get WebElements  ${ipv6_elements}
+    ELSE
+      Fail  Invalid IP version provided. Use 'ipv4' or 'ipv6'.
+    END
+
+    ${ip_list}=  Create List
+    FOR  ${elem}  IN  @{ip_elements}
+      ${ip}=  Get Text  ${elem}
+      ${ip}=  Strip String  ${ip}
+      IF  '${ip}' != '' and '${ip}' != 'No items available'
+        Append To List  ${ip_list}  ${ip}
+      END
+    END
+    RETURN  ${ip_list}
+
+
+Enable Or Disable DHCPv6 And It Does Not Have Impact On IPv4 Settings
+    [Documentation]  Enable or Disable DHCPv6 and it does not have impact on IPv4 settings.
+    [Arguments]  ${ip_version}  ${channel_number}  ${desired_dhcpv6_state}
+
+    # Description of argument(s):
+    # ip_version   Either 'ipv4' or 'ipv6'.
+    # channel_number  Ethernet channel number, 1(eth0) or 2(eth1).
+    # desired_dhcpv6_state  DHCPv6 Toggle state (Enabled or Disabled).
+
+    # Capture IPv4 addresses before disabling DHCPv6.
+    ${ipv4_before}=  Collect All IP Addresses On Both Interfaces  ${ip_version}  ${channel_number}
+
+    Toggle DHCPv6 State And Verify  ${desired_dhcpv6_state}  ${channel_number}
+    Sleep  ${NETWORK_TIMEOUT}
+    Reload Page
+    Wait Until Element Is Enabled  ${xpath_static_ipv4}  timeout=30s
+
+    # Capture IPv4 addresses after disabling DHCPv6.
+    ${ipv4_after}=  Collect All IP Addresses On Both Interfaces  ${ip_version}  ${channel_number}
+    Lists Should Be Equal  ${ipv4_before}  ${ipv4_after}  ignore_order=True
