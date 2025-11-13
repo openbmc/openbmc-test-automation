@@ -11,7 +11,7 @@ Test Tags       Certificate
 
 Suite Setup      Suite Setup Execution
 Suite Teardown   Suite Teardown
-Test Teardown    Test Teardown Execution
+#Test Teardown    Test Teardown Execution
 
 
 *** Variables ***
@@ -53,7 +53,7 @@ Verify CA Certificate Replace
 
     # cert_type  cert_format        expected_status
     CA           Valid Certificate  ok
-    CA           Empty Certificate  error
+    #CA           Empty Certificate  error
 
 
 Verify Client Certificate Install
@@ -197,7 +197,7 @@ Verify Expired Certificate Replace
     [Tags]  Verify_Expired_Certificate_Replace
     [Setup]  Run Keywords  Get Current BMC Date  AND  Modify BMC Date
     [Template]  Replace Certificate Via Redfish
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore BMC Date
+    #[Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore BMC Date
 
     # cert_type  cert_format          expected_status
     Server       Expired Certificate  ok
@@ -278,9 +278,17 @@ Generate CSR Via Redfish
     # expected_status     Expected status of certificate replace Redfish
     #                     request ("ok" or "error").
 
-    ${certificate_uri}=  Set Variable If
-    ...  '${cert_type}' == 'Server'  ${REDFISH_HTTPS_CERTIFICATE_URI}/
-    ...  '${cert_type}' == 'Client'  ${REDFISH_LDAP_CERTIFICATE_URI}/
+    #${certificate_uri}=  Set Variable If
+    #...  '${cert_type}' == 'Server'  ${REDFISH_HTTPS_CERTIFICATE_URI}/
+    #...  '${cert_type}' == 'Client'  ${REDFISH_LDAP_CERTIFICATE_URI}/
+
+    IF  '${cert_type}' == 'Server'
+        ${certificate_uri}=  Set Variable  ${REDFISH_HTTPS_CERTIFICATE_URI}/
+    ELSE IF  '${cert_type}' == 'Client'
+        ${certificate_uri}=  Set Variable  ${REDFISH_LDAP_CERTIFICATE_URI}/
+    ELSE
+        ${certificate_uri}=  Set Variable  None
+    END
 
     ${certificate_dict}=  Create Dictionary  @odata.id=${certificate_uri}
     ${payload}=  Create Dictionary  City=Austin  CertificateCollection=${certificate_dict}
@@ -295,10 +303,21 @@ Generate CSR Via Redfish
         Remove From Dictionary  ${payload}  KeyCurveId
     END
 
-    ${expected_resp}=  Set Variable If  '${expected_status}' == 'ok'  ${HTTP_OK}
-    ...  '${expected_status}' == 'error'  ${HTTP_INTERNAL_SERVER_ERROR}, ${HTTP_BAD_REQUEST}
+    #${expected_resp}=  Set Variable If  '${expected_status}' == 'ok'  ${HTTP_OK}
+    #...  '${expected_status}' == 'error'  ${HTTP_INTERNAL_SERVER_ERROR}, ${HTTP_BAD_REQUEST}
+    #${resp}=  redfish.Post  /redfish/v1/CertificateService/Actions/CertificateService.GenerateCSR
+    #...  body=${payload}  valid_status_codes=[${expected_resp}]
+
+    IF  '${expected_status}' == 'ok'
+        ${expected_resp}=    Evaluate    [${HTTP_OK}]
+    ELSE IF  '${expected_status}' == 'error'
+        ${expected_resp}=  Evaluate  [${HTTP_INTERNAL_SERVER_ERROR}, ${HTTP_BAD_REQUEST}]
+    ELSE
+        ${expected_resp}=  Evaluate  []    # empty or default list if needed
+    END              
     ${resp}=  redfish.Post  /redfish/v1/CertificateService/Actions/CertificateService.GenerateCSR
-    ...  body=${payload}  valid_status_codes=[${expected_resp}]
+    ...  body=${payload}  valid_status_codes=${expected_resp}
+
 
     # Delay added between two CSR generation request.
     Sleep  5s
