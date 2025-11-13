@@ -32,7 +32,11 @@ Install Certificate File On BMC
     Set To Dictionary  ${kwargs}  headers  ${headers}
 
     ${resp}=  POST On Session  openbmc  ${uri}  &{kwargs}  expected_status=any
-    ${cert_id}=  Set Variable If  '${resp.status_code}' == '${HTTP_OK}'  ${resp.json()["Id"]}  -1
+    IF  '${resp.status_code}' == '${HTTP_OK}'
+       ${cert_id}=  Set Variable  ${resp.json()["Id"]}
+    ELSE
+       ${cert_id}=  Set Variable  -1
+    END
 
     IF  '${status}' == 'ok'
         Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
@@ -66,9 +70,9 @@ Get Certificate File Content From BMC
 
     # Description of argument(s):
     # cert_type      Certificate type (e.g. "Client" or "CA").
-
-    ${certificate}  ${stderr}  ${rc}=  Set Variable If  '${cert_type}' == 'Client'
-    ...    BMC Execute Command  cat /etc/nslcd/certs/cert.pem
+    IF  '${cert_type}' == 'Client'
+        ${certificate}    ${stderr}    ${rc}=    BMC Execute Command    cat /etc/nslcd/certs/cert.pem
+    END
 
     RETURN  ${certificate}
 
@@ -105,24 +109,23 @@ Generate Certificate File Via Openssl
     ${result}=  Fetch From Left  ${file_content}  -----END PRIVATE KEY-----
     ${private_key_content}=  Fetch From Right  ${result}  -----BEGIN PRIVATE KEY-----
 
-    ${cert_data}=
-    ...  Set Variable If  '${cert_format}' == 'Valid Certificate Valid Privatekey'
-    ...  OperatingSystem.Get File  ${EXECDIR}${/}${cert_dir_name}${/}cert.pem
-    ...  ELSE IF  '${cert_format}' == 'Empty Certificate Valid Privatekey'
-    ...  Remove String  ${file_content}  ${cert_content}
-    ...  ELSE IF  '${cert_format}' == 'Valid Certificate Empty Privatekey'
-    ...  Remove String  ${file_content}  ${private_key_content}
-    ...  ELSE IF  '${cert_format}' == 'Empty Certificate Empty Privatekey'
-    ...  Remove String  ${file_content}  ${cert_content}  ${private_key_content}
-    ...  ELSE IF  '${cert_format}' == 'Expired Certificate' or '${cert_format}' == 'Not Yet Valid Certificate'
-    ...  OperatingSystem.Get File  ${EXECDIR}${/}${cert_dir_name}${/}cert.pem
-    ...  ELSE IF  '${cert_format}' == 'Valid Certificate'
-    ...  Remove String  ${file_content}  ${private_key_content}
-    ...  -----BEGIN PRIVATE KEY-----  -----END PRIVATE KEY-----
-    ...  ELSE IF  '${cert_format}' == 'Empty Certificate'
-    ...  Remove String  ${file_content}  ${cert_content}
-    ...  ${private_key_content}  -----BEGIN PRIVATE KEY-----
-    ...  -----END PRIVATE KEY-----
+    IF  '${cert_format}' == 'Valid Certificate Valid Privatekey'
+       ${cert_data}=  OperatingSystem.Get File  ${EXECDIR}${/}${cert_dir_name}${/}cert.pem
+    ELSE IF    '${cert_format}' == 'Empty Certificate Valid Privatekey'
+       ${cert_data}=    Remove String    ${file_content}    ${cert_content}
+    ELSE IF    '${cert_format}' == 'Valid Certificate Empty Privatekey'
+       ${cert_data}=    Remove String    ${file_content}    ${private_key_content}
+    ELSE IF    '${cert_format}' == 'Empty Certificate Empty Privatekey'
+       ${cert_data}=    Remove String    ${file_content}    ${cert_content}    ${private_key_content}
+    ELSE IF    '${cert_format}' == 'Expired Certificate' or '${cert_format}' == 'Not Yet Valid Certificate'
+       ${cert_data}=    OperatingSystem.Get File    ${EXECDIR}${/}${cert_dir_name}${/}cert.pem
+    ELSE IF    '${cert_format}' == 'Valid Certificate'
+       ${cert_data}=    Remove String    ${file_content}    ${private_key_content}    -----BEGIN PRIVATE KEY-----    -----END PRIVATE KEY-----
+    ELSE IF    '${cert_format}' == 'Empty Certificate'
+       ${cert_data}=    Remove String    ${file_content}    ${cert_content}    ${private_key_content}    -----BEGIN PRIVATE KEY-----    -----END PRIVATE KEY-----
+    ELSE
+       ${cert_data}=    Set Variable    None
+    END
 
     ${random_name}=  Generate Random String  8
     ${cert_name}=  Catenate  SEPARATOR=  ${random_name}  .pem
@@ -179,14 +182,19 @@ Delete Certificate Via BMC CLI
 
     # Description of argument(s):
     # cert_type           Certificate type (e.g. "Client" or "CA").
-
-    ${certificate_file_path}  ${certificate_service}  ${certificate_uri}=
-    ...  Set Variable If  '${cert_type}' == 'Client'
-    ...    Set Variable  /etc/nslcd/certs/cert.pem  phosphor-certificate-manager@nslcd.service
-    ...    ${REDFISH_LDAP_CERTIFICATE_URI}
-    ...  ELSE IF  '${cert_type}' == 'CA'
-    ...    Set Variable  ${ROOT_CA_FILE_PATH}  phosphor-certificate-manager@authority.service
-    ...    ${REDFISH_CA_CERTIFICATE_URI}
+    IF  '${cert_type}' == 'Client'
+       ${certificate_file_path}=  Set Variable  /etc/nslcd/certs/cert.pem
+       ${certificate_service}=  Set Variable  phosphor-certificate-manager@nslcd.service
+       ${certificate_uri}=  Set Variable  ${REDFISH_LDAP_CERTIFICATE_URI}
+    ELSE IF  '${cert_type}' == 'CA'
+       ${certificate_file_path}=  Set Variable  ${ROOT_CA_FILE_PATH}
+       ${certificate_service}=  Set Variable  phosphor-certificate-manager@authority.service
+       ${certificate_uri}=  Set Variable  ${REDFISH_CA_CERTIFICATE_URI}
+    ELSE
+       ${certificate_file_path}=  Set Variable  None
+       ${certificate_service}=  Set Variable  None
+       ${certificate_uri}=  Set Variable  None
+    END
 
     ${file_status}  ${stderr}  ${rc}=  BMC Execute Command
     ...  [ -f ${certificate_file_path} ] && echo "Found" || echo "Not Found"
@@ -210,11 +218,13 @@ Replace Certificate Via Redfish
     # expected_status     Expected status of certificate replace Redfish
     #                     request (i.e. "ok" or "error").
 
-    # Install certificate before replacing client or CA certificate.
-    ${cert_id}=  Set Variable If  '${cert_type}' == 'Client'
-    ...    Install And Verify Certificate Via Redfish  ${cert_type}  Valid Certificate Valid Privatekey  ok
-    ...  ELSE IF  '${cert_type}' == 'CA'
-    ...    Install And Verify Certificate Via Redfish  ${cert_type}  Valid Certificate  ok
+    IF  '${cert_type}' == 'Client'
+        ${cert_id}=  Install And Verify Certificate Via Redfish  ${cert_type}  Valid Certificate Valid Privatekey  ok
+    ELSE IF  '${cert_type}' == 'CA'
+        ${cert_id}=  Install And Verify Certificate Via Redfish  ${cert_type}  Valid Certificate  ok
+    ELSE
+        ${cert_id}=  Set Variable  None
+    END
 
     ${cert_file_path}=  Generate Certificate File Via Openssl  ${cert_format}
 
@@ -227,19 +237,33 @@ Replace Certificate Via Redfish
         Modify BMC Date  old
     END
 
-    ${certificate_uri}=  Set Variable If
-    ...  '${cert_type}' == 'Server'  ${REDFISH_HTTPS_CERTIFICATE_URI}/1
-    ...  '${cert_type}' == 'Client'  ${REDFISH_LDAP_CERTIFICATE_URI}/1
-    ...  '${cert_type}' == 'CA'  ${REDFISH_CA_CERTIFICATE_URI}/${cert_id}
+    IF  '${cert_type}' == 'Server'
+        ${certificate_uri}=  Set Variable  ${REDFISH_HTTPS_CERTIFICATE_URI}/1
+    ELSE IF  '${cert_type}' == 'Client'
+        ${certificate_uri}=  Set Variable  ${REDFISH_LDAP_CERTIFICATE_URI}/1
+    ELSE IF    '${cert_type}' == 'CA'
+        ${certificate_uri}=  Set Variable  ${REDFISH_CA_CERTIFICATE_URI}/${cert_id}
+    ELSE
+        ${certificate_uri}=  Set Variable  None
+    END
 
     ${certificate_dict}=  Create Dictionary  @odata.id=${certificate_uri}
     ${payload}=  Create Dictionary  CertificateString=${file_data}
     ...  CertificateType=PEM  CertificateUri=${certificate_dict}
 
-    ${expected_resp}=  Set Variable If  '${expected_status}' == 'ok'  ${HTTP_OK}, ${HTTP_NO_CONTENT}
-    ...  '${expected_status}' == 'error'  ${HTTP_NOT_FOUND}, ${HTTP_INTERNAL_SERVER_ERROR}, ${HTTP_BAD_REQUEST}
-    ${resp}=  redfish.Post  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
-    ...  body=${payload}  valid_status_codes=[${expected_resp}]
+    # Define expected status codes
+    IF  '${expected_status}' == 'ok'
+       ${expected_resp}=    Evaluate    [${HTTP_OK}, ${HTTP_NO_CONTENT}]    # list of integers
+    ELSE IF  '${expected_status}' == 'error'
+       ${expected_resp}=    Evaluate    [${HTTP_INTERNAL_SERVER_ERROR}, ${HTTP_BAD_REQUEST}]
+    ELSE
+       ${expected_resp}=    Evaluate    [200]    # default if needed
+    END
+
+    #  POST request
+    ${resp}=    Redfish.Post    /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
+    ...    body=${payload}
+    ...    valid_status_codes=${expected_resp}
 
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
     ${bmc_cert_content}=  redfish_utils.Get Attribute  ${certificate_uri}  CertificateString
@@ -249,6 +273,7 @@ Replace Certificate Via Redfish
     ELSE
         Should Not Contain  ${cert_file_content}  ${bmc_cert_content}
     END
+
 
 Install And Verify Certificate Via Redfish
     [Documentation]  Install and verify certificate using Redfish.
@@ -272,9 +297,13 @@ Install And Verify Certificate Via Redfish
     ${bytes}=  OperatingSystem.Get Binary File  ${cert_file_path}
     ${file_data}=  Decode Bytes To String  ${bytes}  UTF-8
 
-    ${certificate_uri}=  Set Variable If
-    ...  '${cert_type}' == 'Client'  ${REDFISH_LDAP_CERTIFICATE_URI}
-    ...  '${cert_type}' == 'CA'  ${REDFISH_CA_CERTIFICATE_URI}
+    IF  '${cert_type}' == 'Client'
+        ${certificate_uri}=  Set Variable  ${REDFISH_LDAP_CERTIFICATE_URI}
+    ELSE IF  '${cert_type}' == 'CA'
+        ${certificate_uri}=  Set Variable  ${REDFISH_CA_CERTIFICATE_URI}
+    ELSE
+        ${certificate_uri}=  Set Variable  None
+    END
 
     IF  '${cert_format}' == 'Expired Certificate'
         Modify BMC Date  future
@@ -291,8 +320,11 @@ Install And Verify Certificate Via Redfish
     Sleep  ${wait_time}s
 
     ${cert_file_content}=  OperatingSystem.Get File  ${cert_file_path}
-    ${bmc_cert_content}=  Set Variable If  '${expected_status}' == 'ok'  redfish_utils.Get Attribute
-    ...  ${certificate_uri}/${cert_id}  CertificateString
+    IF  '${expected_status}' == 'ok'
+       ${bmc_cert_content}=  redfish_utils.Get Attribute  ${certificate_uri}/${cert_id}  CertificateString
+    ELSE
+       ${bmc_cert_content}=  Set Variable  None
+    END
 
     IF  '${expected_status}' == 'ok'  Should Contain  ${cert_file_content}  ${bmc_cert_content}
     RETURN  ${cert_id}
@@ -310,16 +342,20 @@ Modify BMC Date
 
     Redfish Power Off  stack_mode=skip
     ${current_date_time}=  Get Current Date
-    ${new_time}=  Set Variable If  '${date_set_type}' == 'current'  ${current_date_time}
-    ...  ELSE IF  '${date_set_type}' == 'future'
-    ...  Add Time To Date  ${current_date_time}  375 days
-    ...  ELSE IF  '${date_set_type}' == 'old'
-    ...  Subtract Time From Date  ${current_date_time}  375 days
 
-    # Enable manual mode.
-    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
-    ...  body={'NTP':{'ProtocolEnabled': ${False}}}
-    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    IF  '${date_set_type}' == 'current'
+       ${new_time}=  Set Variable  ${current_date_time}
+    ELSE IF  '${date_set_type}' == 'future'
+       ${new_time}=  Add Time To Date  ${current_date_time}  375 days
+    ELSE IF    '${date_set_type}' == 'old'
+       ${new_time}=  Subtract Time From Date  ${current_date_time}  375 days
+    ELSE
+       ${new_time}=  Set Variable  ${current_date_time}
+    END
+
+    ${ntp_dict}=    Create Dictionary    ProtocolEnabled=${False}
+    ${body}=        Create Dictionary    NTP=${ntp_dict}
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}    body=${body}    valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Change date format to 2024-03-07T07:58:50+00:00 from 2024-03-07 07:58:50.000.
     ${new_time_format}=  Convert Date  ${new_time}  result_format=%Y-%m-%dT%H:%M:%S+00:00
