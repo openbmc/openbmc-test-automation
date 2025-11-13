@@ -27,7 +27,7 @@ Verify Server Certificate Replace
     [Tags]  Verify_Server_Certificate_Replace
     [Template]  Replace Certificate Via Redfish
 
-    # cert_type  cert_format                         expected_status
+    # cert_type  cert_format                         expected_status.
     Server       Valid Certificate Valid Privatekey  ok
     Server       Empty Certificate Valid Privatekey  error
     Server       Valid Certificate Empty Privatekey  error
@@ -39,7 +39,7 @@ Verify Client Certificate Replace
     [Tags]  Verify_Client_Certificate_Replace
     [Template]  Replace Certificate Via Redfish
 
-    # cert_type  cert_format                         expected_status
+    # cert_type  cert_format                         expected_status.
     Client       Valid Certificate Valid Privatekey  ok
     Client       Empty Certificate Valid Privatekey  error
     Client       Valid Certificate Empty Privatekey  error
@@ -51,7 +51,7 @@ Verify CA Certificate Replace
     [Tags]  Verify_CA_Certificate_Replace
     [Template]  Replace Certificate Via Redfish
 
-    # cert_type  cert_format        expected_status
+    # cert_type  cert_format        expected_status.
     CA           Valid Certificate  ok
     CA           Empty Certificate  error
 
@@ -61,7 +61,7 @@ Verify Client Certificate Install
     [Tags]  Verify_Client_Certificate_Install
     [Template]  Install And Verify Certificate Via Redfish
 
-    # cert_type  cert_format                         expected_status
+    # cert_type  cert_format                         expected_status.
     Client       Valid Certificate Valid Privatekey  ok
     Client       Empty Certificate Valid Privatekey  error
     Client       Valid Certificate Empty Privatekey  error
@@ -73,7 +73,7 @@ Verify CA Certificate Install
     [Tags]  Verify_CA_Certificate_Install
     [Template]  Install And Verify Certificate Via Redfish
 
-    # cert_type  cert_format        expected_status
+    # cert_type  cert_format        expected_status.
     CA           Valid Certificate  ok
     CA           Empty Certificate  error
 
@@ -140,11 +140,11 @@ Verify CSR Generation For Server Certificate
     [Tags]  Verify_CSR_Generation_For_Server_Certificate
     [Template]  Generate CSR Via Redfish
 
-    # csr_type  key_pair_algorithm  key_bit_length  key_curv_id  expected_status
-    Server      RSA                 ${keybit_length}         ${EMPTY}     ok
-    Server      EC                  ${EMPTY}                 prime256v1   ok
-    Server      EC                  ${EMPTY}                 secp521r1    ok
-    Server      EC                  ${EMPTY}                 secp384r1    ok
+    # csr_type  key_pair_algorithm   key_bit_length      key_curv_id   expected_status.
+    Server      RSA                  ${keybit_length}    ${EMPTY}      ok
+    Server      EC                   ${EMPTY}            prime256v1    ok
+    Server      EC                   ${EMPTY}            secp521r1     ok
+    Server      EC                   ${EMPTY}            secp384r1     ok
 
 
 Verify CSR Generation For Client Certificate
@@ -152,11 +152,11 @@ Verify CSR Generation For Client Certificate
     [Tags]  Verify_CSR_Generation_For_Client_Certificate
     [Template]  Generate CSR Via Redfish
 
-    # csr_type  key_pair_algorithm  key_bit_length  key_curv_id  expected_status
-    Client      RSA                 ${keybit_length}         ${EMPTY}     ok
-    Client      EC                  ${EMPTY}                 prime256v1   ok
-    Client      EC                  ${EMPTY}                 secp521r1    ok
-    Client      EC                  ${EMPTY}                 secp384r1    ok
+    # csr_type  key_pair_algorithm   key_bit_length        key_curv_id   expected_status.
+    Client      RSA                  ${keybit_length}      ${EMPTY}      ok
+    Client      EC                   ${EMPTY}              prime256v1    ok
+    Client      EC                   ${EMPTY}              secp521r1     ok
+    Client      EC                   ${EMPTY}              secp384r1     ok
 
 
 Verify CSR Generation For Server Certificate With Invalid Value
@@ -164,10 +164,10 @@ Verify CSR Generation For Server Certificate With Invalid Value
     [Tags]  Verify_CSR_Generation_For_Server_Certificate_With_Invalid_Value
     [Template]  Generate CSR Via Redfish
 
-    # csr_type  key_pair_algorithm  key_bit_length    key_curv_id       expected_status
-    Server      ${invalid_value}    ${keybit_length}           prime256v1        error
-    Server      RAS                 ${invalid_value}           ${EMPTY}          error
-    Server      EC                  ${EMPTY}                   ${invalid_value}  error
+    # csr_type  key_pair_algorithm  key_bit_length       key_curv_id        expected_status.
+    Server      ${invalid_value}    ${keybit_length}     prime256v1         error
+    Server      RAS                 ${invalid_value}     ${EMPTY}           error
+    Server      EC                  ${EMPTY}             ${invalid_value}   error
 
 
 Verify CSR Generation For Client Certificate With Invalid Value
@@ -175,9 +175,10 @@ Verify CSR Generation For Client Certificate With Invalid Value
     [Tags]  Verify_CSR_Generation_For_Client_Certificate_With_Invalid_Value
     [Template]  Generate CSR Via Redfish
 
-    Client      ${invalid_value}    ${keybit_length}           prime256v1        error
-    Client      RSA                 ${invalid_value}           ${EMPTY}          error
-    Client      EC                  ${EMPTY}                   ${invalid_value}  error
+    # csr_type  key_pair_algorithm  key_bit_length       key_curv_id         expected_status.
+    Client      ${invalid_value}    ${keybit_length}     prime256v1          error
+    Client      RSA                 ${invalid_value}     ${EMPTY}            error
+    Client      EC                  ${EMPTY}             ${invalid_value}    error
 
 
 Verify Expired Certificate Install
@@ -187,9 +188,9 @@ Verify Expired Certificate Install
     [Template]  Install And Verify Certificate Via Redfish
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore BMC Date
 
-    # cert_type  cert_format          expected_status
-    Client       Expired Certificate  ok
-    CA           Expired Certificate  ok
+    # cert_type  cert_format           expected_status.
+    Client       Expired Certificate   ok
+    CA           Expired Certificate   ok
 
 
 Verify Expired Certificate Replace
@@ -197,10 +198,10 @@ Verify Expired Certificate Replace
     [Tags]  Verify_Expired_Certificate_Replace
     [Setup]  Run Keywords  Get Current BMC Date  AND  Modify BMC Date
     [Template]  Replace Certificate Via Redfish
-    [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore BMC Date
+    #[Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore BMC Date
 
-    # cert_type  cert_format          expected_status
-    Server       Expired Certificate  ok
+    # cert_type  cert_format           expected_status.
+    Server       Expired Certificate   ok
 
 
 Verify Not Yet Valid Certificate Install
@@ -210,9 +211,9 @@ Verify Not Yet Valid Certificate Install
     [Template]  Install And Verify Certificate Via Redfish
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore BMC Date
 
-    # cert_type  cert_format                expected_status
-    Client       Not Yet Valid Certificate  ok
-    CA           Not Yet Valid Certificate  ok
+    # cert_type  cert_format                 expected_status.
+    Client       Not Yet Valid Certificate   ok
+    CA           Not Yet Valid Certificate   ok
 
 
 Verify Not Yet Valid Certificate Replace
@@ -222,10 +223,10 @@ Verify Not Yet Valid Certificate Replace
     [Template]  Replace Certificate Via Redfish
     [Teardown]  Run Keywords  FFDC On Test Case Fail  AND  Restore BMC Date
 
-    # cert_type  cert_format                expected_status
-    Server       Not Yet Valid Certificate  ok
-    Client       Not Yet Valid Certificate  ok
-    CA           Not Yet Valid Certificate  ok
+    # cert_type  cert_format                 expected_status.
+    Server       Not Yet Valid Certificate   ok
+    Client       Not Yet Valid Certificate   ok
+    CA           Not Yet Valid Certificate   ok
 
 
 Verify Certificates Location Via Redfish
@@ -259,6 +260,7 @@ Get Current BMC Date
     ${cli_date_time}=  CLI Get BMC DateTime
     Set Test Variable  ${cli_date_time}
 
+
 Restore BMC Date
     [Documentation]  Restore BMC date to its prior value.
 
@@ -277,10 +279,13 @@ Generate CSR Via Redfish
     # key_curv_id         CSR key curv id ("prime256v1" or "secp521r1" or "secp384r1").
     # expected_status     Expected status of certificate replace Redfish
     #                     request ("ok" or "error").
-
-    ${certificate_uri}=  Set Variable If
-    ...  '${cert_type}' == 'Server'  ${REDFISH_HTTPS_CERTIFICATE_URI}/
-    ...  '${cert_type}' == 'Client'  ${REDFISH_LDAP_CERTIFICATE_URI}/
+    IF  '${cert_type}' == 'Server'
+        ${certificate_uri}=  Set Variable  ${REDFISH_HTTPS_CERTIFICATE_URI}/
+    ELSE IF  '${cert_type}' == 'Client'
+        ${certificate_uri}=  Set Variable  ${REDFISH_LDAP_CERTIFICATE_URI}/
+    ELSE
+        ${certificate_uri}=  Set Variable  None
+    END
 
     ${certificate_dict}=  Create Dictionary  @odata.id=${certificate_uri}
     ${payload}=  Create Dictionary  City=Austin  CertificateCollection=${certificate_dict}
@@ -295,10 +300,16 @@ Generate CSR Via Redfish
         Remove From Dictionary  ${payload}  KeyCurveId
     END
 
-    ${expected_resp}=  Set Variable If  '${expected_status}' == 'ok'  ${HTTP_OK}
-    ...  '${expected_status}' == 'error'  ${HTTP_INTERNAL_SERVER_ERROR}, ${HTTP_BAD_REQUEST}
+    IF  '${expected_status}' == 'ok'
+        ${expected_resp}=    Evaluate    [${HTTP_OK}]
+    ELSE IF  '${expected_status}' == 'error'
+        ${expected_resp}=  Evaluate  [${HTTP_INTERNAL_SERVER_ERROR}, ${HTTP_BAD_REQUEST}]
+    ELSE
+        ${expected_resp}=  Evaluate  []    # empty or default list if needed
+    END
+
     ${resp}=  redfish.Post  /redfish/v1/CertificateService/Actions/CertificateService.GenerateCSR
-    ...  body=${payload}  valid_status_codes=[${expected_resp}]
+    ...  body=${payload}  valid_status_codes=${expected_resp}
 
     # Delay added between two CSR generation request.
     Sleep  5s
@@ -316,6 +327,7 @@ Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
     FFDC On Test Case Fail
+
 
 Suite Teardown
     [Documentation]  Do suite teardown tasks.
