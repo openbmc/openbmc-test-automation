@@ -20,6 +20,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d672beb_3e813a7c",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 1542,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-11-14T08:49:22Z",
+      "side": 1,
+      "message": "Wait for IPv6 host to ping.",
+      "revId": "1948e3cf573a93414f9c7e4563b04161c29deebc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60417cec_69148a2b",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 1543,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-11-14T08:49:22Z",
+      "side": 1,
+      "message": "Do we need Tag for keyword?",
+      "revId": "1948e3cf573a93414f9c7e4563b04161c29deebc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7752209_9bc18a22",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 3
