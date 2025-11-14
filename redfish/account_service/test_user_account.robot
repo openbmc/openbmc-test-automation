@@ -255,6 +255,7 @@ Verify Modifying Operator User Attributes
     # Update operator_user password using Redfish.
     ${payload}=  Create Dictionary  Password=NewTestPwd123
     Redfish.Patch  /redfish/v1/AccountService/Accounts/operator_user  body=&{payload}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Verify users after updating
     Redfish Verify User  operator_user  NewTestPwd123  Operator        ${True}
@@ -309,6 +310,7 @@ Verify User Account Unlock
     ...  AccountLockoutThreshold=${account_lockout_threshold}
     ...  AccountLockoutDuration=${account_lockout_duration}
     Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}  body=${payload}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
 
     Redfish.Logout
 
@@ -331,6 +333,7 @@ Verify User Account Unlock
     # Manually unlock the account before lockout threshold expires
     Redfish.Login
     Redfish.Patch  ${REDFISH_ACCOUNTS_URI}test_user  body=${payload}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
     Redfish.Logout
 
     # Try redfish login with the recently unlocked account
@@ -354,6 +357,7 @@ Verify Admin User Privilege
 
     # Change password of 'readonly' user with admin user.
     Redfish.Patch  /redfish/v1/AccountService/Accounts/readonly_user  body={'Password': 'NewTestPwd123'}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Verify modified user.
     Redfish Verify User  readonly_user  NewTestPwd123  ReadOnly  ${True}
@@ -379,6 +383,7 @@ Verify Operator User Role Change Using Admin Privilege User
 
     # Modify Role ID of Operator user.
     Redfish.Patch  /redfish/v1/AccountService/Accounts/operator_user  body={'RoleId': 'Administrator'}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
 
     # Verify modified user.
     Redfish Verify User  operator_user  TestPwd123  Administrator  ${True}
@@ -1038,6 +1043,7 @@ Verify Minimum Password Length For Redfish User
 
     # Change to a valid password.
     Redfish.Patch  /redfish/v1/AccountService/Accounts/${user_name}  body={'Password': 'UserPwd1'}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Verify login.
     Redfish.Logout
