@@ -16,16 +16,16 @@ Test Tags        Redfish_Privilege_Registry
 *** Variables ***
 
 ${test_user}           testuser
-${test_password}       testpassword
+${test_password}       testpassword123
 ${admin_user}          testadmin
-${admin_password}      adminpassword
+${admin_password}      adminpassword123
 ${operator_user}       testoperator
-${operator_password}   operatorpassword
+${operator_password}   operatorpassword123
 ${readonly_user}       testreadonly
-${readonly_password}   readonlypassword
+${readonly_password}   readonlypassword123
 ${patched_user}        patchuser
 ${post_user}           postuser
-${post_password}       postpassword
+${post_password}       postpassword123
 ${account_service}     ${2}
 
 *** Test Cases ***
