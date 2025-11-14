@@ -35,6 +35,11 @@ Verify Redfish Admin User Persistence After Reboot
     [Setup]  Run Keywords  Redfish.Login  AND
     ...  Redfish Create User  admin_user  TestPwd123  Administrator  ${True}
     [Teardown]  Run Keywords  Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
+<<<<<<< PATCH SET (ed1337 Close SSH connections before deleting user)
+    ...  AND  Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
+    ...  AND  Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
+=======
+>>>>>>> BASE      (56a34f Expect HTTP 204 for PATCH user accounts)
     ...  AND  Test Teardown Execution
 
     # Reboot BMC.
@@ -299,10 +304,10 @@ Verify User Account Locked
 Verify User Account Unlock
     [Documentation]  Verify manually unlocking the account before lockout time
     [Tags]  Verify_User_Account_Unlock
-    [Teardown]  Run Keywords  Redfish.Logout
+    [Teardown]  Run Keywords  SSHLibrary.Close All Connections
+    ...  AND  Redfish.Logout
     ...  AND  Redfish.Login
     ...  AND  Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
-    ...  AND  SSHLibrary.Close All Connections
 
     Redfish Create User  test_user  TestPwd123  Administrator  ${True}
 
