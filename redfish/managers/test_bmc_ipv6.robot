@@ -504,6 +504,33 @@ Disable And Verify AutoConfig On Both Interfaces When AutoConfig Enabled
     ${False}           ${False}
 
 
+Verify Eth1 DHCPv4 Functions Properly In The Presence Of Static IPv6
+    [Documentation]  Verify eth1 dhcpv4 functions properly in the presence of Static IPv6.
+    [Tags]  Verify_Eth1_DHCPv4_Functions_Properly_In_The_Presence_Of_Static_IPv6
+    [Setup]  Run Keywords
+    ...  Set DHCPEnabled To Enable Or Disable  True  eth1
+    ...  AND  Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}  ${None}  ${2}
+
+    # Verify presence of static IPv6 address and origin.
+    @{ipv6_address_origin_list}  ${static_ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  Static  ${2}
+    Should Contain  ${ipv6_address_origin_list}  Static
+    Should Not Be Empty  ${static_ipv6_addr}  msg=${test_ipv6_addr} address is not present
+
+    # Verify eth1 DHCPv4 is enabled.
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status  ${2}
+    Should Be Equal  ${DHCPEnabled}  ${True}
+
+    # Verify presence of DHCPv4 address origin.
+    @{ipv4_addressorigin_list}  ${ipv4_addr_list}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses  ${2}
+    ${ipv4_addressorigin_list}=  Evaluate  sum(${ipv4_addressorigin_list}, [])
+    Should Contain  ${ipv4_addressorigin_list}  DHCP
+
+    # Verify static is not present in address origin when DHPCv4 enabled.
+    List Should Not Contain Value  ${ipv4_addressorigin_list}  Static
+
+
 *** Keywords ***
 
 Suite Setup Execution

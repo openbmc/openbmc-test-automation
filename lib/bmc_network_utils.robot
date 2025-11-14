@@ -993,3 +993,20 @@ Verify MAC Address Via FW_Env
         Should Be Equal  ${status}  ${True}
         ...  msg=Not allowing the configuration of a valid MAC.
     END
+
+
+Set DHCPEnabled To Enable Or Disable
+    [Documentation]  Enable or Disable DHCP on the interface.
+    [Arguments]  ${dhcp_enabled}=${False}  ${interface}=${ethernet_interface}
+    ...          ${valid_status_code}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
+
+    # Description of argument(s):
+    # dhcp_enabled        False for disabling DHCP and True for Enabling DHCP.
+    # interface           eth0 or eth1. Default is eth1.
+    # valid_status_code   Expected valid status code from Patch request.
+    #                     Default is HTTP_OK.
+
+    ${data}=  Set Variable If  ${dhcp_enabled} == ${False}  ${DISABLE_DHCP}  ${ENABLE_DHCP}
+    ${resp}=  Redfish.Patch
+    ...  /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/${interface}
+    ...  body=${data}  valid_status_codes=${valid_status_code}
