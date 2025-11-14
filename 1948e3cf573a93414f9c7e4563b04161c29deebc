@@ -35,6 +35,42 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e911e1bd_a9b399a5",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 1542,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-11-14T09:27:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ed39ac3_0627c005",
+      "revId": "1948e3cf573a93414f9c7e4563b04161c29deebc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe8ee13b_48d058b8",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 1542,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-11-14T09:27:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d672beb_3e813a7c",
+      "revId": "1948e3cf573a93414f9c7e4563b04161c29deebc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60417cec_69148a2b",
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b79e5a4a_82dd54ce",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 1543,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-11-14T09:27:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60417cec_69148a2b",
+      "revId": "1948e3cf573a93414f9c7e4563b04161c29deebc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7752209_9bc18a22",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-11-14T08:41:26Z",
       "side": 1,
       "message": "can we combined \u0027Wait For IPv6 Host To Ping\u0027 and \u0027Check Ping6 Status And Verify\u0027",
+      "revId": "1948e3cf573a93414f9c7e4563b04161c29deebc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18f91a11_0a915c06",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 1556,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-11-14T09:27:41Z",
+      "side": 1,
+      "message": "Keeping this as is as in a couple of scenarios we need to test only the ping alone.",
+      "parentUuid": "a7752209_9bc18a22",
       "revId": "1948e3cf573a93414f9c7e4563b04161c29deebc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
