@@ -39,8 +39,8 @@ Verify Redfish Users Persistence After Reboot
     ...  AND  Redfish Create User  operator_user  TestPwd123  Operator  ${True}
     ...  AND  Redfish Create User  readonly_user  TestPwd123  ReadOnly  ${True}
     [Teardown]  Run Keywords  Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
-    ...  AND  Run Keywords  Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
-    ...  AND  Run Keywords  Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
+    ...  AND  Redfish.Delete  /redfish/v1/AccountService/Accounts/operator_user
+    ...  AND  Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
     ...  AND  Test Teardown Execution
 
     # Reboot BMC.
@@ -278,10 +278,10 @@ Verify User Account Locked
 Verify User Account Unlock
     [Documentation]  Verify manually unlocking the account before lockout time
     [Tags]  Verify_User_Account_Unlock
-    [Teardown]  Run Keywords  Redfish.Logout
+    [Teardown]  Run Keywords  SSHLibrary.Close All Connections
+    ...  AND  Redfish.Logout
     ...  AND  Redfish.Login
     ...  AND  Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
-    ...  AND  SSHLibrary.Close All Connections
 
     Redfish Create User  test_user  TestPwd123  Administrator  ${True}
 
