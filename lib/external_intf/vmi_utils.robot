@@ -146,7 +146,7 @@ Get VMI Network Interface Details
     ${ip_exists}=  Set Variable If  ${ip_resp["IPv4Addresses"]} == @{empty}  ${False}  ${True}
     ${static_exists}=  Set Variable If  ${ip_resp["IPv4StaticAddresses"]} == @{empty}  ${False}  ${True}
 
-    ${vmi_ip}=  Set Variable If   ${ip_exists} == ${True}
+    ${vmi_ip}=  IF  ${ip_exists} == ${True}
     ...  Create Dictionary  DHCPv4=${${ip_resp["DHCPv4"]["DHCPEnabled"]}}  Id=${ip_resp["Id"]}
     ...  Description=${ip_resp["Description"]}  IPv4_Address=${ip_resp["IPv4Addresses"][0]["Address"]}
     ...  IPv4_AddressOrigin=${ip_resp["IPv4Addresses"][0]["AddressOrigin"]}  Name=${ip_resp["Name"]}
