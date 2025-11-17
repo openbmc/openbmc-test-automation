@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7132c9ec_4c5534eb",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-11-17T10:42:09Z",
+      "side": 1,
+      "message": "is comment required here?",
+      "revId": "6a73b63c49a09690f4745a1420deb45b3e8c880a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26035d1c_1ceaa3c3",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-11-17T10:42:09Z",
+      "side": 1,
+      "message": "?",
+      "revId": "6a73b63c49a09690f4745a1420deb45b3e8c880a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4063e05_3d0945df",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1548,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-11-17T10:42:09Z",
+      "side": 1,
+      "message": "if static IPv4 is up \u0026 you are giving hostname then it will not go via IPv6, so please modify description.",
+      "revId": "6a73b63c49a09690f4745a1420deb45b3e8c880a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0c659ae4_21ace0aa",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 4
