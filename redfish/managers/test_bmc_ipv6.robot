@@ -1347,27 +1347,6 @@ Get The Initial SLAAC Setting On Each Interface
     END
 
 
-Get Address Origin List And IPv4 or IPv6 Address
-    [Documentation]  Get address origin list and address for type.
-    [Arguments]  ${ip_address_type}  ${channel_number}=${CHANNEL_NUMBER}
-
-    # Description of the argument(s):
-    # ip_address_type  Type of IPv4 or IPv6 address to be checked.
-    # channel_number   Channel number 1(eth0) or 2(eth1).
-
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${active_channel_config['${channel_number}']['name']}
-    @{ip_addresses}=  Get From Dictionary  ${resp.dict}  ${ip_address_type}
-
-    ${ip_addressorigin_list}=  Create List
-    ${ip_addr_list}=  Create List
-    FOR  ${ip_address}  IN  @{ip_addresses}
-        ${ip_addressorigin}=  Get From Dictionary  ${ip_address}  AddressOrigin
-        Append To List  ${ip_addressorigin_list}  ${ip_addressorigin}
-        Append To List  ${ip_addr_list}  ${ip_address['Address']}
-    END
-    RETURN  ${ip_addressorigin_list}  ${ip_addr_list}
-
-
 Verify All The Addresses Are Intact
     [Documentation]  Verify all the addresses and address origins remain intact.
     [Arguments]    ${channel_number}=${CHANNEL_NUMBER}
