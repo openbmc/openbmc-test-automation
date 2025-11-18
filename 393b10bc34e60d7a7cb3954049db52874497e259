@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59d341d3_580a84b4",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-11-18T10:08:17Z",
+      "side": 1,
+      "message": "Before enabling/disabling capture on eth1 details, and after the test is complete, restore the eth1 details.",
+      "revId": "393b10bc34e60d7a7cb3954049db52874497e259",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
