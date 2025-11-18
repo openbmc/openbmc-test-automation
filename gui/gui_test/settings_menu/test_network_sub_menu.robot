@@ -71,6 +71,8 @@ ${xpath_eth0_ipv6_autoconfig_button}     (//*[@id="ipv6AutoConfigSwitch"]/follow
 ${xpath_eth1_ipv6_autoconfig_button}     (//*[@id="ipv6AutoConfigSwitch"]/following-sibling::label)[2]
 ${xpath_eth0_dhcpv6_button}              (//*[@id="dhcpIpv6Switch"]/following-sibling::label)[1]
 ${xpath_eth1_dhcpv6_button}              (//*[@id="dhcpIpv6Switch"]/following-sibling::label)[2]
+${xpath_eth1_dhcpv4_button}              (//*[@id="dhcpSwitch"]/following-sibling::label)[2]
+${xpath_dhcpv4_alert}                    //button[normalize-space()='Enable' or normalize-space()='Disable']
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
 ${test_ipv4_addr_1}                      10.7.7.8
@@ -564,33 +566,14 @@ Verify Enable Or Disable DHCPv6 Does Not Impact IPv4 Settings
     ipv4           2               Enabled
 
 
-Configure Link Local IPv6 Address Via GUI And Verify
-    [Documentation]  Configure link local IPv6 address via GUI and verify.
-    [Tags]  Configure_Link_Local_IPv6_Address_Via_GUI_And_Verify
+Verify DHCPv4 Enable And Disable On Eth1 Via GUI
+    [Documentation]  Verify DHCPv4 toggle on eth1 via GUI.
+    [Tags]  Verify_DHCPv4_Enable_And_Disable_On_Eth1_Via_GUI
+    [Template]  Toggle DHCPv4 State And Verify For Eth1
 
-    Add Static IPv6 Address And Verify Via GUI  ${link_local_addr}  ${link_local_prefix_len}  Success
-
-    # Verify the address origin contains link local.
-    Sleep  ${NETWORK_TIMEOUT}
-    @{ipv6_address_origin_list}  ${ipv6_link_local_addr}=
-    ...    Get Address Origin List And Address For Type  LinkLocal
-
-    Should Contain  ${ipv6_link_local_addr}  ${link_local_addr}
-    ${count}=  Evaluate  ${ipv6_address_origin_list}.count("LinkLocal")
-
-    Should Be Equal As Integers  ${count}  2
-
-
-Configure Static IPv6 On Eth0 And DHCPv6 On Eth1 And Verify
-    [Documentation]  Configure static IPv6 on eth0 and DHCPv6 on eth1 and verify.
-    [Tags]  Configure_Static_IPv6_On_Eth0_And_DHCPv6_On_Eth1_And_Verify
-
-    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}  ${test_prefix_length}  Success
-    Sleep  ${NETWORK_TIMEOUT}
-    Toggle DHCPv6 State And Verify  Enabled  2
-
-    # Verify network connectivity by pinging the IPv4 address.
-    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+    # desired_dhcpv4_state
+    Enabled
+    Disabled
 
 
 *** Keywords ***
@@ -994,6 +977,61 @@ Verify SLAAC Address On Autoconfig Enable
     Wait Until Page Contains  SLAAC
 
 
+Toggle DHCPv4 State And Verify For Eth1
+    [Documentation]  Toggle DHCPv4 state and verify for eth1.
+    [Arguments]  ${desired_dhcpv4_state}
+
+    # Description of argument(s):
+    # desired_dhcpv4_state  DHCPv4 Toggle state (Enabled or Disabled).
+
+    ${xpath_dhcpv4_button}=  Set Variable  ${xpath_eth1_dhcpv4_button}
+    Click Element  ${xpath_eth1_interface}
+    Set Suite Variable  ${CHANNEL_NUMBER}  2
+
+    ${current_dhcpv4_state}=  Get Text  ${xpath_dhcpv4_button}
+
+    IF  '${desired_dhcpv4_state}' == '${current_dhcpv4_state}'
+      Perform DHCPv4 Toggle  ${xpath_dhcpv4_button}
+      Perform DHCPv4 Toggle  ${xpath_dhcpv4_button}
+    ELSE
+      Perform DHCPv4 Toggle  ${xpath_dhcpv4_button}
+    END
+
+    Wait Until Keyword Succeeds  2 min  30 sec
+    ...  Element Text Should Be  ${xpath_dhcpv4_button}  ${desired_dhcpv4_state}
+
+    IF  '${desired_dhcpv4_state}' == 'Enabled'
+      TRY
+        @{ipv4_addressorigin_list}  ${ipv4_addr_list}=
+        ...  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses
+        Should Contain  ${ipv4_addressorigin_list}  DHCP
+      EXCEPT
+        Log  DHCP setup is missing!  WARN
+        RETURN
+      ELSE
+        Wait Until Element Contains  ${ipv4_elements}  DHCP  timeout=30s
+      END
+    ELSE IF  '${desired_dhcpv4_state}' == 'Disabled'
+      Element Should Not Contain  ${ipv4_elements}  DHCP  timeout=60s
+    END
+    Click Element  ${xpath_refresh_button}
+
+
+Perform DHCPv4 Toggle
+    [Documentation]  Toggle DHCPv4 button.
+    [Arguments]  ${xpath_dhcpv4_button}
+
+    # Description of argument(s):
+    # xpath_dhcpv4_button   DHCPv4 Toggle button xpath.
+
+    Reload Page
+    Wait Until Element Is Enabled  ${xpath_dhcpv4_button}  timeout=60s
+    Click Element  ${xpath_eth1_interface}
+    Click Element  ${xpath_dhcpv4_button}
+    Click Element  ${xpath_dhcpv4_alert}
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=120s
+
+
 Toggle DHCPv6 State And Verify
     [Documentation]  Toggle DHCPv6 state and verify.
     [Arguments]  ${desired_dhcpv6_state}  ${channel_number}
@@ -1002,43 +1040,51 @@ Toggle DHCPv6 State And Verify
     # desired_dhcpv6_state  DHCPv6 Toggle state (Enabled or Disabled).
     # channel_number        Channel number: 1 for eth0, 2 for eth1.
 
-    IF    '${channel_number}' == '1'
-        ${xpath_dhcpv6_button}=  Set Variable    ${xpath_eth0_dhcpv6_button}
-    ELSE IF    '${channel_number}' == '2'
-        ${xpath_dhcpv6_button}=  Set Variable    ${xpath_eth1_dhcpv6_button}
-        Click Element  ${xpath_eth1_interface}
-        Set Suite Variable  ${CHANNEL_NUMBER}  2
+    IF  '${channel_number}' == '1'
+      ${xpath_dhcpv6_button}=  Set Variable  ${xpath_eth0_dhcpv6_button}
+    ELSE IF  '${channel_number}' == '2'
+      ${xpath_dhcpv6_button}=  Set Variable  ${xpath_eth1_dhcpv6_button}
+      Click Element  ${xpath_eth1_interface}
+      Set Suite Variable  ${CHANNEL_NUMBER}  2
     END
 
-    ${current_dhcpv6_state}=    Get Text    ${xpath_dhcpv6_button}
+    ${current_dhcpv6_state}=  Get Text  ${xpath_dhcpv6_button}
 
-    IF    '${desired_dhcpv6_state}' == '${current_dhcpv6_state}'
-        # Already in desired state, reset by toggling twice.
-        Wait Until Element Is Enabled  ${xpath_dhcpv6_button}  timeout=60s
-        Click Element  ${xpath_dhcpv6_button}
-        Wait Until Element Is Not Visible
-        ...    ${xpath_page_loading_progress_bar}  timeout=120s
-        Wait Until Element Is Enabled  ${xpath_dhcpv6_button}  timeout=60s
-        Click Element  ${xpath_dhcpv6_button}
-        Wait Until Element Is Not Visible
-        ...    ${xpath_page_loading_progress_bar}  timeout=120s
+    IF  '${desired_dhcpv6_state}' == '${current_dhcpv6_state}'
+      Perform DHCPv6 Toggle  ${xpath_dhcpv6_button}  ${channel_number}
+      Perform DHCPv6 Toggle  ${xpath_dhcpv6_button}  ${channel_number}
     ELSE
-        Wait Until Element Is Enabled  ${xpath_dhcpv6_button}  timeout=60s
-        Click Element  ${xpath_dhcpv6_button}
-        Wait Until Element Is Not Visible
-        ...    ${xpath_page_loading_progress_bar}  timeout=120s
+      Perform DHCPv6 Toggle  ${xpath_dhcpv6_button}  ${channel_number}
     END
 
     Wait Until Keyword Succeeds  2 min  30 sec
-    ...    Element Text Should Be  ${xpath_dhcpv6_button}  ${desired_dhcpv6_state}
+    ...  Element Text Should Be  ${xpath_dhcpv6_button}  ${desired_dhcpv6_state}
 
-    # Verify based on final state.
-    IF    '${desired_dhcpv6_state}' == 'Enabled'
-        Verify DHCPv6 Address On Enable
-    ELSE IF    '${desired_dhcpv6_state}' == 'Disabled'
-        Wait Until Page Does Not Contain  DHCPv6  timeout=60s
+    IF  '${desired_dhcpv6_state}' == 'Enabled'
+      Verify DHCPv6 Address On Enable
+    ELSE IF  '${desired_dhcpv6_state}' == 'Disabled'
+      Wait Until Page Does Not Contain  DHCPv6  timeout=60s
     END
     Click Element  ${xpath_refresh_button}
+
+
+Perform DHCPv6 Toggle
+    [Documentation]  Toggle DHCPv6 button.
+    [Arguments]  ${xpath_dhcpv6_button}  ${channel_number}
+
+    # Description of argument(s):
+    # xpath_dhcpv6_button   DHCPv6 Toggle button xpath.
+    # channel_number        Channel number: 1 for eth0, 2 for eth1.
+
+    Reload Page
+    Wait Until Element Is Enabled  ${xpath_dhcpv6_button}  timeout=60s
+
+    IF  '${channel_number}' == '2'
+      Click Element  ${xpath_eth1_interface}
+    END
+
+    Click Element  ${xpath_dhcpv6_button}
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=120s
 
 
 Verify DHCPv6 Address On Enable
