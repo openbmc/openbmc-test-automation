@@ -504,12 +504,14 @@ Disable And Verify AutoConfig On Both Interfaces When AutoConfig Enabled
     ${False}           ${False}
 
 
-Verify Eth1 DHCPv4 Functions Properly In The Presence Of Static IPv6
-    [Documentation]  Verify eth1 dhcpv4 functions properly in the presence of Static IPv6.
-    [Tags]  Verify_Eth1_DHCPv4_Functions_Properly_In_The_Presence_Of_Static_IPv6
+Verify Eth1 DHCPv4 Functionality In The Presence Of Static IPv6
+    [Documentation]  Verify eth1 dhcpv4 functionality in the presence of Static IPv6
+    ...    and verify link local IPv6 and SLAAC.
+    [Tags]  Verify_Eth1_DHCPv4_Functionality_In_The_Presence_Of_Static_IPv6
     [Setup]  Run Keywords
     ...  Set DHCPEnabled To Enable Or Disable  True  eth1
     ...  AND  Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}  ${None}  ${2}
+    ...  AND  Set SLAAC Configuration State And Verify  ${True}  [${HTTP_OK}]  ${2}
 
     # Verify presence of static IPv6 address and origin.
     @{ipv6_address_origin_list}  ${static_ipv6_addr}=
@@ -517,18 +519,37 @@ Verify Eth1 DHCPv4 Functions Properly In The Presence Of Static IPv6
     Should Contain  ${ipv6_address_origin_list}  Static
     Should Not Be Empty  ${static_ipv6_addr}  msg=${test_ipv6_addr} address is not present
 
-    # Verify eth1 DHCPv4 is enabled.
-    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status  ${2}
-    Should Be Equal  ${DHCPEnabled}  ${True}
+    # Verify presence of link local IPv6 address and origin.
+    @{ipv6_address_origin_list}  ${link_local_ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  LinkLocal  ${2}
+    Should Contain  ${ipv6_address_origin_list}  LinkLocal
+    Should Match Regexp  ${link_local_ipv6_addr}  ${linklocal_addr_format}
+    Should Not Be Empty  ${link_local_ipv6_addr}  msg=link local IPv6 address is not present
 
-    # Verify presence of DHCPv4 address origin.
-    @{ipv4_addressorigin_list}  ${ipv4_addr_list}=
-    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses  ${2}
-    ${ipv4_addressorigin_list}=  Evaluate  sum(${ipv4_addressorigin_list}, [])
-    Should Contain  ${ipv4_addressorigin_list}  DHCP
+    # Verify presence of SLAAC address and origin.
+    Sleep  ${NETWORK_TIMEOUT}s
+    @{ipv6_address_origin_list}  ${slaac_addr}=
+    ...  Get Address Origin List And Address For Type  SLAAC  ${2}
+    Should Contain  ${ipv6_address_origin_list}  SLAAC
+    Should Not Be Empty  ${slaac_addr}  msg=SLAAC address is not present
 
-    # Verify static is not present in address origin when DHPCv4 enabled.
-    List Should Not Contain Value  ${ipv4_addressorigin_list}  Static
+    Verify DHCPv4 Functionality
+
+
+Verify Eth1 DHCPv4 Functionality In The Presence Of DHCPv6
+    [Documentation]  Verify eth1 dhcpv4 functionality in the presence of dhcpv6.
+    [Tags]  Verify_Eth1_DHCPv4_Functionality_In_The_Presence_Of_DHCPv6
+    [Setup]  Run Keywords
+    ...  Set DHCPEnabled To Enable Or Disable  True  eth1
+    ...  AND  Set And Verify DHCPv6 Property  Enabled  ${2}
+
+    # Verify presence of DHCPv6 address and origin.
+    @{ipv6_address_origin_list}  ${dhcpv6_addr}=
+    ...  Get Address Origin List And Address For Type  DHCPv6  ${2}
+    Should Contain  ${ipv6_address_origin_list}  DHCPv6
+    Should Not Be Empty  ${dhcpv6_addr}  msg=dhcpv6 address is not present
+
+    Verify DHCPv4 Functionality
 
 
 *** Keywords ***
@@ -1553,3 +1574,20 @@ Verify IPv6 Addresses Coexist
 
     Set And Verify DHCPv6 Property  Disabled
     Set SLAAC Configuration State And Verify  ${False}
+
+
+Verify DHCPv4 Functionality
+    [Documentation]  Verify DHCPv4 functions are present as expected.
+
+    # Verify eth1 DHCPv4 is enabled.
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status  ${2}
+    Should Be Equal  ${DHCPEnabled}  ${True}
+
+    # Verify presence of DHCPv4 address origin.
+    @{ipv4_addressorigin_list}  ${ipv4_addr_list}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses  ${2}
+    ${ipv4_addressorigin_list}=  Evaluate  sum(${ipv4_addressorigin_list}, [])
+    Should Contain  ${ipv4_addressorigin_list}  DHCP
+
+    # Verify static is not present in address origin when DHPCv4 enabled.
+    List Should Not Contain Value  ${ipv4_addressorigin_list}  Static
