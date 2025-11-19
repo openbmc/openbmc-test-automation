@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e86ac83c_8d171690",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-11-19T03:34:10Z",
+      "side": 1,
+      "message": "Please add a comment here\nDHCP setup must be present on eth1.",
+      "revId": "393b10bc34e60d7a7cb3954049db52874497e259",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59d341d3_580a84b4",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 4
