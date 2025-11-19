@@ -267,8 +267,8 @@ Verify VMI IPv6 Address
 
 Set VMI DHCPv6 Property
     [Documentation]  Set VMI DHCPv6 attribute.
-    [Arguments]  ${dhcpv6_operatingmode}=${Disabled}  ${valid_status_code}=${HTTP_ACCEPTED}
-    ...  ${interface}=${ethernet_interface}
+    [Arguments]  ${dhcpv6_operatingmode}=${Disabled}
+    ...  ${interface}=${ethernet_interface}  ${valid_status_code}=${HTTP_ACCEPTED}
 
     # Description of argument(s):
     # dhcpv6_operatingmode    Enabled if user wants to enable DHCPv6.
