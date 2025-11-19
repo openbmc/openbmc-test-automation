@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15043582_8bff895f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-11-19T03:45:17Z",
+      "side": 1,
+      "message": "Can u rebase this.. looks like I tried and it has dependencies and conlfict and it went into work in progress state",
+      "revId": "fbcbaf4d826c90680ec41213468e6b5fbfd34b47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
