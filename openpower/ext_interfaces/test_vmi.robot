@@ -854,6 +854,24 @@ Enable VMI DHCPv6 Property And Check Persistency On BMC Reboot
     Verify VMI IPv6 Address  DHCPv6
 
 
+Enable VMI DHCPv6 On Eth0 While Eth1 Has DHCPv6 And Verify
+    [Documentation]  Enable DHCPv6 on eth0 when eth1 has DHCPv6 and verify that on
+    ...  on enabling dhcpv6 on eth0 will not impact dhcpv6 settings on eth1.
+    [Tags]  Enable_VMI_DHCPv6_On_Eth0_While_Eth1_Has_DHCPv6_And_Verify
+    [Setup]  Set VMI DHCPv6 Property  Enabled  eth1
+
+    Enable VMI DHCPv6 On One Interface When Other Interface Has DHCPv6 And Verify
+
+
+Enable VMI DHCPv6 On Eth1 While Eth0 Has DHCPv6 And Verify
+    [Documentation]  Enable DHCPv6 on eth1 when eth0 has DHCPv6 and verify that on
+    ...  on enabling dhcpv6 on eth1 will not impact dhcpv6 settings on eth0.
+    [Tags]  Enable_VMI_DHCPv6_On_Eth1_While_Eth0_Has_DHCPv6_And_Verify
+    [Setup]  Set VMI DHCPv6 Property  Enabled
+
+    Enable VMI DHCPv6 On One Interface When Other Interface Has DHCPv6 And Verify  eth1
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -1073,3 +1091,32 @@ Set VMI Valid Static IPv6 Address And Verify
 
     ${vmi_ipv6}=  Verify VMI IPv6 Address  Static
     Should Be Equal  ${vmi_ipv6["Address"]}  ${valid_vmi_ipv6addr}
+
+
+Enable VMI DHCPv6 On One Interface When Other Interface Has DHCPv6 And Verify
+    [Documentation]  Check enabling DHCPv6 on one interfcae will not impact the other
+    ...  interface which is already configured with DHCPv6.
+    [Arguments]  ${interface}=${ethernet_interface}
+
+    # Description of argument(s):
+    # interface     VMI interface on which DHCPv6 should be enabled (eg. eth0 or eth1).
+
+    IF  '${interface}' == 'eth0'
+        Set VMI DHCPv6 Property  Enabled
+
+        # Verify eth0 VMI IPv6 address origin is set to DHCP.
+        Verify VMI IPv6 Address  DHCPv6
+
+        # Check eth1 VMI IPv6 origin is still DHCP.
+        Verify VMI IPv6 Address  DHCPv6  eth1
+
+    ELSE IF  '${interface}' == 'eth1'
+        Set VMI DHCPv6 Property  Enabled  eth1
+
+        # Verify eth1 VMI IPv6 address origin is set to DHCP.
+        Verify VMI IPv6 Address  DHCPv6  eth1
+
+        # Check eth0 VMI IPv6 origin is still DHCP.
+        Verify VMI IPv6 Address  DHCPv6
+
+    END
