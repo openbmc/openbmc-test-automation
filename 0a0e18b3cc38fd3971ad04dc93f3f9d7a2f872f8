@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5ef08e3_f7e53686",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-20T06:28:45Z",
+      "side": 1,
+      "message": "Functions Properly ??\n\nIt doesnt convey any meaning\n\nVerify Eth1 DHCPv4 Functionality In The Presence Of DHCPv6\n\nplease change in Docs and Tags as well",
+      "revId": "0a0e18b3cc38fd3971ad04dc93f3f9d7a2f872f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "590b2be6_9f8628ef",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-20T06:28:45Z",
+      "side": 1,
+      "message": "Verify DHCPv4 functions are present as expected.",
+      "revId": "0a0e18b3cc38fd3971ad04dc93f3f9d7a2f872f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
