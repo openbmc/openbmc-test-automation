@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6856d778_b5167eca",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1579,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-11-20T07:21:53Z",
+      "side": 1,
+      "message": "Is this keyword for both eth0 \u0026 eth1 or only eth1?",
+      "revId": "967e69cb564b8c34368c8e3e765910ba4442dec0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7664158_34c5890e",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1582,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-11-20T07:21:53Z",
+      "side": 1,
+      "message": "if it is only for eth1 , then please change the keyword name",
+      "revId": "967e69cb564b8c34368c8e3e765910ba4442dec0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
