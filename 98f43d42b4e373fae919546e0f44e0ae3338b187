@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c62bc78b_e7bfcc35",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-20T06:09:32Z",
+      "side": 1,
+      "message": "DHCPv6",
+      "range": {
+        "startLine": 859,
+        "startChar": 52,
+        "endLine": 859,
+        "endChar": 58
+      },
+      "revId": "98f43d42b4e373fae919546e0f44e0ae3338b187",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c56e516e_a1b8fd48",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 1097,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-20T06:09:32Z",
+      "side": 1,
+      "message": "Interface",
+      "range": {
+        "startLine": 1097,
+        "startChar": 50,
+        "endLine": 1097,
+        "endChar": 59
+      },
+      "revId": "98f43d42b4e373fae919546e0f44e0ae3338b187",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82d3ed1f_f1d1fe82",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 1102,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-20T06:09:32Z",
+      "side": 1,
+      "message": "Simply\n\nSupported VMI interfaces (e.g. eth0, eth1)",
+      "range": {
+        "startLine": 1102,
+        "startChar": 20,
+        "endLine": 1102,
+        "endChar": 67
+      },
+      "revId": "98f43d42b4e373fae919546e0f44e0ae3338b187",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
