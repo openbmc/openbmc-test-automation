@@ -89,6 +89,7 @@ Verify LDAP Configurations Editable
 Verify Create LDAP Configuration
     [Documentation]  Verify created LDAP configuration.
     [Tags]  Verify_Create_LDAP_Configuration
+    [Setup]  Redfish.Login
     [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
 
     Create LDAP Configuration
