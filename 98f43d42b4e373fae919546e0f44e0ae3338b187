@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1745aa55_06ed6c53",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-11-20T06:21:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c62bc78b_e7bfcc35",
+      "range": {
+        "startLine": 859,
+        "startChar": 52,
+        "endLine": 859,
+        "endChar": 58
+      },
+      "revId": "98f43d42b4e373fae919546e0f44e0ae3338b187",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c56e516e_a1b8fd48",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dd6d1f64_5e4baf20",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 1097,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-11-20T06:21:08Z",
+      "side": 1,
+      "message": "it can be interface only, as it doesn\u0027t have any abbreviation",
+      "parentUuid": "c56e516e_a1b8fd48",
+      "range": {
+        "startLine": 1097,
+        "startChar": 50,
+        "endLine": 1097,
+        "endChar": 59
+      },
+      "revId": "98f43d42b4e373fae919546e0f44e0ae3338b187",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82d3ed1f_f1d1fe82",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
         "patchSetId": 5
@@ -60,6 +108,30 @@
       "writtenOn": "2025-11-20T06:09:32Z",
       "side": 1,
       "message": "Simply\n\nSupported VMI interfaces (e.g. eth0, eth1)",
+      "range": {
+        "startLine": 1102,
+        "startChar": 20,
+        "endLine": 1102,
+        "endChar": 67
+      },
+      "revId": "98f43d42b4e373fae919546e0f44e0ae3338b187",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d777991a_07afb4d4",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 1102,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-11-20T06:21:08Z",
+      "side": 1,
+      "message": "here will keep the same as it clearly says that on which interface DHCPv6 should be enabled",
+      "parentUuid": "82d3ed1f_f1d1fe82",
       "range": {
         "startLine": 1102,
         "startChar": 20,
