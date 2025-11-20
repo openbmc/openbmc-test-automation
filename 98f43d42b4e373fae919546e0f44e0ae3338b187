@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a0aabad7_d1f20765",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 1097,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-20T06:31:20Z",
+      "side": 1,
+      "message": "Spelling mistake",
+      "parentUuid": "dd6d1f64_5e4baf20",
+      "range": {
+        "startLine": 1097,
+        "startChar": 50,
+        "endLine": 1097,
+        "endChar": 59
+      },
+      "revId": "98f43d42b4e373fae919546e0f44e0ae3338b187",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82d3ed1f_f1d1fe82",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
         "patchSetId": 5
