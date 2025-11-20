@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "326216d8_44397133",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-11-20T06:56:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5ef08e3_f7e53686",
+      "revId": "0a0e18b3cc38fd3971ad04dc93f3f9d7a2f872f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "590b2be6_9f8628ef",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-11-20T06:28:45Z",
       "side": 1,
       "message": "Verify DHCPv4 functions are present as expected.",
+      "revId": "0a0e18b3cc38fd3971ad04dc93f3f9d7a2f872f8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32a29b8d_9832ee8f",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-11-20T06:56:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "590b2be6_9f8628ef",
       "revId": "0a0e18b3cc38fd3971ad04dc93f3f9d7a2f872f8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
