@@ -50,6 +50,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "61ad9a27_6e75a8f4",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1001861
+      },
+      "writtenOn": "2025-11-20T06:42:24Z",
+      "side": 1,
+      "message": "\u0027on enabling\u0027 -\u003e \u0027enabling\u0027",
+      "revId": "98f43d42b4e373fae919546e0f44e0ae3338b187",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f74202b9_cb88c99c",
+        "filename": "openpower/ext_interfaces/test_vmi.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 1001861
+      },
+      "writtenOn": "2025-11-20T06:42:24Z",
+      "side": 1,
+      "message": "here as well",
+      "revId": "98f43d42b4e373fae919546e0f44e0ae3338b187",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c56e516e_a1b8fd48",
         "filename": "openpower/ext_interfaces/test_vmi.robot",
         "patchSetId": 5
