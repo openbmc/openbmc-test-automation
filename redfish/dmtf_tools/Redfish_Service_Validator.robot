@@ -87,3 +87,21 @@ Delete User Created
     Redfish.Login
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
     Redfish.Logout
+
+Run Service Validator For Specific URI Via DMTF Tool
+    [Documentation]  Run Service Validator For Single Uri.
+    [Arguments]  ${URI}
+
+    # Description of argument(s):
+
+    # URI  URI for which service validator needs to be run.
+
+    Download Dmtf Tool  ${rsv_dir_path}  ${rsv_github_url}  ${branch_name}
+
+    ${command_string}=  Catenate  ${cmd_str_master} --payload  Single ${URI}
+
+    ${rc}  ${output}=  Run Dmtf Tool  ${rsv_dir_path}  ${command_string}  check_error=1
+    ${status}=  Run Keyword And Return Status  Redfish Service Validator Result  ${output}
+    IF  ${status} == ${False}
+      Fail  Redfish-Service-Validator detected errors.
+    END
