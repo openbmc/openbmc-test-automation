@@ -16,6 +16,7 @@ Test Tags      Network_Sub_Menu
 ${xpath_network_heading}                 //h1[text()="Network"]
 ${xpath_interface_settings}              //h2[text()="Interface settings"]
 ${xpath_network_settings}                //h2[text()="Network settings"]
+${xpath_network_button}                  //a[normalize-space()='Network'][1]
 ${xpath_static_ipv4}                     //h2[text()="IPv4"]
 ${xpath_static_ipv6}                     //h2[text()="IPv6"]
 ${xpath_static_ipv6_default_gateway}     //h2[text()="IPv6 static default gateways"]
@@ -582,6 +583,43 @@ Verify Coexistence Of IPv6 Addresses Via GUI
     2                  LinkLocal     DHCP           Static
     1                  LinkLocal     SLAAC          DHCP
     2                  SLAAC         DHCP           LinkLocal
+
+
+Verify Independent SLAAC Configuration On Separate DHCPv6 Enabled Interfaces
+    [Documentation]  Verify when both interfaces are connected to DHCPv6, enabling/disabling
+    ...    SLAAC on one interface will not impact exsiting settings.
+    [Tags]  Verify_Independent_SLAAC_Configuration_On_Separate_DHCPv6_Enabled_Interfaces
+    [Setup]  Set And Verify DHCPv6 States  Enabled  Disabled
+    [Template]  Enable Or Disable SLAAC And Verify Impact On Existing Settings
+
+    # ip_version   channel_number  desired_status
+    ipv4           1               Disabled
+    ipv4           1               Enabled
+    ipv4           2               Disabled
+    ipv4           2               Enabled
+
+
+Configure DHCPv6 On Eth0 And Verify Existing Network Configurations On BMC Reboot
+   [Documentation]  Configure DHCPv6 on eth0 and verify existing network configurations
+    ...    on BMC reboot.
+    [Tags]  Configure_DHCPv6_On_Eth0_And_Verify_Existing_Network_Configurations_On_BMC_Reboot
+    [Setup]  Set And Verify DHCPv6 States  Enabled  Disabled
+
+    # Capture IPv4 addresses before BMC reboot.
+    ${ipv4_before}=  Collect All IP Addresses On Both Interfaces  ipv4  1
+
+    # Capture IPv6 addresses before BMC reboot.
+    ${ipv6_before}=  Collect All IP Addresses On Both Interfaces  ipv6  1
+
+    Reboot BMC via GUI
+    Click Element  ${xpath_network_button}
+
+    # Capture IPv4 addresses after BMC reboot.
+    ${ipv4_after}=  Collect All IP Addresses On Both Interfaces  ipv4  1
+    Lists Should Be Equal  ${ipv4_before}  ${ipv4_after}  ignore_order=True
+
+    ${ipv6_after}=  Collect All IP Addresses On Both Interfaces  ipv6  1
+    Lists Should Be Equal  ${ipv6_before}  ${ipv6_after}  ignore_order=True
 
 
 *** Keywords ***
@@ -1335,3 +1373,35 @@ Coexistence Of IPv6 Addresses
     FOR  ${type}  IN  @{ipv6_types}
       Should Contain  ${origin_list}  ${type}
     END
+
+
+Enable Or Disable SLAAC And Verify Impact On Existing Settings
+    [Documentation]  Enable or disable slaac and verify impact on existing settings.
+    [Arguments]  ${ip_version}  ${channel_number}  ${desired_slaac_state}
+
+    # Description of argument(s):
+    # ip_version            Either 'ipv4' or 'ipv6'.
+    # channel_number        Ethernet channel number, 1(eth0) or 2(eth1).
+    # desired_slaac_state   Set autoconfig state (Enabled or Disabled).
+
+    # Capture existing settings on both interfaces before changing slaac state.
+    ${ip_addresses_before_eth0}=  Collect All IP Addresses On Both Interfaces  ${ip_version}  1
+    ${ip_addresses_before_eth1}=  Collect All IP Addresses On Both Interfaces  ${ip_version}  2
+
+    IF  '${channel_number}' == '1'
+        Click Element  ${xpath_eth0_interface}
+        Set IPv6 AutoConfig State  ${desired_slaac_state}  ${channel_number}
+    ELSE
+        Click Element  ${xpath_eth1_interface}
+        Set IPv6 AutoConfig State  ${desired_slaac_state}  ${channel_number}
+    END
+
+    Sleep  ${NETWORK_TIMEOUT}
+
+    # Capture settings on both interfaces after changing slaac state.
+    ${ip_addresses_after_eth0}=  Collect All IP Addresses On Both Interfaces  ${ip_version}  1
+    ${ip_addresses_after_eth1}=  Collect All IP Addresses On Both Interfaces  ${ip_version}  2
+
+    # Verify existing  network settings remains intact after slaac state change.
+    Lists Should Be Equal  ${ip_addresses_before_eth0}  ${ip_addresses_after_eth0}  ignore_order=True
+    Lists Should Be Equal  ${ip_addresses_before_eth1}  ${ip_addresses_after_eth1}  ignore_order=True
