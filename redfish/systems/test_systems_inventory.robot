@@ -206,8 +206,58 @@ Verify Systems Instance Collection With Unsupported Methods
     Redfish.Delete  /redfish/v1/Systems/system
     ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
+Verify And Modify Systems Instance Collection Properties
+    [Documentation]    Verify And Modify Systems Instance Collection Properties
+    [Tags]    Verify_And_Modify_Systems_Instance_Collection_Properties
+    [Template]  Modify Systems Instance Collection Properties
+
+    #Action_type                    #Parameter
+    AutomaticRetryConfig            Disabled
+    AutomaticRetryConfig            RetryAttempts
+    BootSourceOverrideTarget        Pxe
+    BootSourceOverrideTarget        Hdd
+    BootSourceOverrideTarget        Cd
+    BootSourceOverrideTarget        Usb
+    BootSourceOverrideTarget        BiosSetup
+    BootSourceOverrideTarget        Diags
+    BootSourceOverrideTarget        None
+    BootSourceOverrideMode          Legacy
+    BootSourceOverrideMode          UEFI
+
+
 *** Keywords ***
 
+Modify Systems Instance Collection Properties
+    [Documentation]    Modify Systems Instance Collection Properties
+    [Arguments]    ${action_type}    ${parameter}
+    # Description of argument(s):
+    # action_type     The action_type to modify the systems Instance Properties.
+    # parameter       The parameter value to set for the specified action_type.
+
+    # Get original action_type from Systems Instance Properties
+    ${resp}=    Redfish.Get Properties    /redfish/v1/Systems/system
+    ...    valid_status_codes=[${HTTP_OK}]
+    ${default_action_type}=    Set Variable    ${resp["Boot"]["${action_type}"]}
+
+    # Set new action_type in Systems Instance Properties
+    ${payload}=    Catenate    { "Boot":{"${action_type}":"${parameter}"}}
+    Redfish.Patch    /redfish/v1/Systems/system    body=${payload}
+    ...    valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Verify Modified action_type in Systems Instance Properties
+    ${resp}=    Redfish.Get Properties    /redfish/v1/Systems/system
+    ...    valid_status_codes=[${HTTP_OK}]
+    Should Be Equal As Strings    ${resp["Boot"]["${action_type}"]}    ${parameter}
+
+    # Restore default action_type in Systems Instance Properties
+    ${payload}=    Catenate    { "Boot":{"${action_type}":"${default_action_type}"}}
+    Redfish.Patch    /redfish/v1/Systems/system    body=${payload}
+    ...    valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Verify Restored action_type in Systems Instance Properties
+    ${resp}=    Redfish.Get Properties    /redfish/v1/Systems/system
+    ...    valid_status_codes=[${HTTP_OK}]
+    Should Be Equal As Strings    ${resp["Boot"]["${action_type}"]}    ${default_action_type}
 
 Get CPU TotalCores
     [Documentation]  Return the TotalCores of a CPU.
