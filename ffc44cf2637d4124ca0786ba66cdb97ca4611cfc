@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ae443e7_3e93ca61",
+        "filename": "redfish/dmtf_tools/Redfish_Service_Validator.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-21T09:59:14Z",
+      "side": 1,
+      "message": "Run Service Validator For Specific URI Via DMTF Tool",
+      "revId": "ffc44cf2637d4124ca0786ba66cdb97ca4611cfc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62ebfc34_efe5dc1d",
+        "filename": "redfish/dmtf_tools/Redfish_Service_Validator.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-21T09:59:14Z",
+      "side": 1,
+      "message": "Dont copy paste keyword tile in doc.. use normal sentence",
+      "revId": "ffc44cf2637d4124ca0786ba66cdb97ca4611cfc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52e4f944_ee9d27b3",
+        "filename": "redfish/dmtf_tools/Redfish_Service_Validator.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-21T09:59:14Z",
+      "side": 1,
+      "message": "add please check few example for this in same file\n\n```# Description of argument(s):\n\n```",
+      "revId": "ffc44cf2637d4124ca0786ba66cdb97ca4611cfc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bcdd486_157216f9",
+        "filename": "redfish/dmtf_tools/Redfish_Service_Validator.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-21T09:59:14Z",
+      "side": 1,
+      "message": "where are we passing values for these variables\n ${rsv_dir_path_json}    ${rsv_github_url_json}    ${branch_name}",
+      "revId": "ffc44cf2637d4124ca0786ba66cdb97ca4611cfc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dc7d60a_bab29965",
+        "filename": "redfish/dmtf_tools/Redfish_Service_Validator.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-21T09:59:14Z",
+      "side": 1,
+      "message": "please use two spaces instead of four spaces",
+      "revId": "ffc44cf2637d4124ca0786ba66cdb97ca4611cfc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1017912e_06d79fd0",
+        "filename": "redfish/dmtf_tools/Redfish_Service_Validator.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-21T09:59:14Z",
+      "side": 1,
+      "message": "use inline IF condition. Run Keyword If is depreciated in latest robot standard",
+      "revId": "ffc44cf2637d4124ca0786ba66cdb97ca4611cfc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
