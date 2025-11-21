@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2a39f85_f23b800e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-11-21T06:23:58Z",
+      "side": 1,
+      "message": "Return status gives True or False, when we are checking SHould be True then delete status should be False.",
+      "revId": "e8377ff46ae18ada13c9f4c8a85b252ea3f56345",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
