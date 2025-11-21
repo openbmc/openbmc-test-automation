@@ -877,9 +877,9 @@ Delete IPv6 Address
     # IPv6 address that is deleted should not be there on BMC.
     ${delete_status}=  Run Keyword And Return Status  Verify IPv6 On BMC  ${ipv6_addr}
     IF  '${valid_status_codes}' == '[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]'
-        Should Be True  '${delete_status}' == '${False}'
-    ELSE
         Should Be True  '${delete_status}' == '${True}'
+    ELSE
+        Should Be True  '${delete_status}' == '${False}'
     END
 
     Validate IPv6 Network Config On BMC
