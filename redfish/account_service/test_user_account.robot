@@ -646,6 +646,32 @@ Verify AccountService Roles Instance With Unsupported Methods
     Redfish.Delete    /redfish/v1/AccountService/Roles/Administrator
     ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
+Verify Account Lockout with Invalid Configuration
+    [Documentation]  Verify Account Lockout configuration with invalid values.
+    [Tags]  Verify_Account_Lockout_With_Invalid_Configuration
+
+    @{invalid_values_list}=  Create List  -1  abc  3.5  ${EMPTY}
+
+    FOR  ${invalid_value}  IN  @{invalid_values_list}
+        ${payload}=  Create Dictionary  AccountLockoutThreshold=${invalid_value}
+        Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}  body=${payload}
+        ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+        ${payload}=  Create Dictionary  AccountLockoutDuration=${invalid_value}
+        Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}  body=${payload}
+        ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+        ${payload}=  Create Dictionary  AccountLockoutThreshold=${account_lockout_threshold}
+        ...  AccountLockoutDuration=${invalid_value}
+        Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}  body=${payload}
+        ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+        ${payload}=  Create Dictionary  AccountLockoutThreshold=${invalid_value}
+        ...  AccountLockoutDuration=${account_lockout_duration}
+        Redfish.Patch  ${REDFISH_ACCOUNTS_SERVICE_URI}  body=${payload}
+        ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+    END
+
 *** Keywords ***
 
 Test Teardown Execution
