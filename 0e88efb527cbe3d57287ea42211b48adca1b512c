@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03bc758e_255f2173",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-11-21T05:47:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3013e245_6a5525ae",
+      "revId": "0e88efb527cbe3d57287ea42211b48adca1b512c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "085525a7_51849bb1",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76aa3924_8aa1151b",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 992,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-11-21T05:47:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "085525a7_51849bb1",
+      "revId": "0e88efb527cbe3d57287ea42211b48adca1b512c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00de7ad5_acc27a5f",
@@ -48,6 +84,24 @@
       "writtenOn": "2025-11-19T13:39:52Z",
       "side": 1,
       "message": "based on interface modify code to handle toggle on respective interface",
+      "revId": "0e88efb527cbe3d57287ea42211b48adca1b512c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bbde177_707052db",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-11-21T05:47:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00de7ad5_acc27a5f",
       "revId": "0e88efb527cbe3d57287ea42211b48adca1b512c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
