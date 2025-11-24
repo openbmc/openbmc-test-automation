@@ -102,7 +102,7 @@ Verify SessionService Defaults
     ${session_service}=  Redfish.Get Properties  /redfish/v1/SessionService
     Rprint Vars  session_service
 
-    Valid Value  session_service['@odata.id']  ['/redfish/v1/SessionService/']
+    Valid Value  session_service['@odata.id']  ['/redfish/v1/SessionService/', '/redfish/v1/SessionService']
     Valid Value  session_service['Description']  ['Session Service']
     Valid Value  session_service['Id']  ['SessionService']
     Valid Value  session_service['Name']  ['Session Service']
@@ -119,7 +119,7 @@ Verify Sessions Defaults
     Rprint Vars  sessions
     ${sessions_count}=  Get length  ${sessions['Members']}
 
-    Valid Value  sessions['@odata.id']  ['/redfish/v1/SessionService/Sessions/']
+    Valid Value  sessions['@odata.id']  ['/redfish/v1/SessionService/Sessions/', '/redfish/v1/SessionService/Sessions']
     Valid Value  sessions['Description']  ['Session Collection']
     Valid Value  sessions['Name']  ['Session Collection']
     Valid Value  sessions['Members@odata.count']  [${sessions_count}]
