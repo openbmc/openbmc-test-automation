@@ -60,7 +60,7 @@ Suite Setup Execution
     [Documentation]  Do test case setup tasks.
 
     Set Log Level  DEBUG
-    REST Power On  stack_mode=skip
+    Redfish Power On  stack_mode=skip
 
 
 Suite Teardown Execution
