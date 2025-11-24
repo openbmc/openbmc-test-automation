@@ -38,7 +38,7 @@ ${initial_vlan_config}          @{EMPTY}
 
 Add VLAN Via REST And Verify
     [Documentation]  Add VLAN via REST and verify it via REST and IPMI.
-    [Tags]  Add_VLAN_Via_REST_And_Verify
+    [Tags]  Add_VLAN_Via_REST_And_Verify  rest
     [Setup]  Test Setup Execution
     [Teardown]  Delete VLANs  [${vlan_id}]
 
@@ -51,14 +51,14 @@ Add VLAN Via REST And Verify
 
 Add Invalid VLAN Via REST And Verify
     [Documentation]  Add Invalid VLAN via REST and verify.
-    [Tags]  Add_Invalid_VLAN_Via_REST_And_Verify
+    [Tags]  Add_Invalid_VLAN_Via_REST_And_Verify  rest
 
     Create VLAN  ${invalid_vlan_id}  expected_result=error
 
 
 Delete VLAN Via REST
     [Documentation]  Delete VLAN via REST and verify it via REST and IPMI.
-    [Tags]  Delete_VLAN_Via_REST
+    [Tags]  Delete_VLAN_Via_REST  rest
     [Setup]  Run Keywords  Test Setup Execution  AND  Create VLAN  ${vlan_id}
 
     Verify Existence Of VLAN  ${vlan_id}
@@ -71,7 +71,7 @@ Delete VLAN Via REST
 
 Configure Network Settings On VLAN Via REST
     [Documentation]  Configure IP on VLAN and verify it via REST and IPMI.
-    [Tags]  Configure_Network_Settings_On_VLAN_Via_REST
+    [Tags]  Configure_Network_Settings_On_VLAN_Via_REST  rest
     [Setup]  Run Keywords  Test Setup Execution  AND  Create VLAN  ${vlan_id}
     [Teardown]  Delete VLANs  [${vlan_id}]
 
@@ -84,7 +84,7 @@ Configure Network Settings On VLAN Via REST
 
 Delete IP On VLAN Via REST
     [Documentation]  Delete IP on VLAN and verify it via REST and IPMI.
-    [Tags]  Delete_IP_On_VLAN_Via_REST
+    [Tags]  Delete_IP_On_VLAN_Via_REST  rest
     [Setup]  Run Keywords  Test Setup Execution  AND  Create VLAN  ${vlan_id}
     [Teardown]  Delete VLANs  [${vlan_id}]
 
@@ -103,7 +103,7 @@ Delete IP On VLAN Via REST
 
 Delete VLAN When IP Is Configured Via REST
     [Documentation]  Delete IP on VLAN and verify using IPMI.
-    [Tags]  Delete_VLAN_When_IP_Is_Configured_Via_REST
+    [Tags]  Delete_VLAN_When_IP_Is_Configured_Via_REST  rest
     [Setup]  Run Keywords  Test Setup Execution  AND  Create VLAN  ${vlan_id}
     [Teardown]  Delete VLANs  [${vlan_id}]
 
@@ -142,7 +142,7 @@ Configure VLAN And Check Persistency On Reboot
 
 Add Multiple VLANs Via REST And Verify
     [Documentation]  Add multiple VLANs via REST and verify them via CLI.
-    [Tags]  Add_Multiple_VLANs_Via_REST_And_Verify
+    [Tags]  Add_Multiple_VLANs_Via_REST_And_Verify  rest
     [Setup]  Test Setup Execution
     [Teardown]  Delete VLANs  ${vlan_ids}
 
@@ -174,7 +174,7 @@ Delete Multiple IPs On VLAN And Verify
 
 Delete Multiple VLANs Via REST
     [Documentation]  Delete multiple VLANs via REST and verify each via REST and IPMI.
-    [Tags]  Delete_Multiple_VLANs_Via_REST
+    [Tags]  Delete_Multiple_VLANs_Via_REST  rest
     [Setup]  Test Setup Execution
 
     FOR  ${vlan_id}  IN   @{vlan_ids}
@@ -188,7 +188,7 @@ Delete Multiple VLANs Via REST
 
 Configure Multiple IPs On VLAN Via REST
     [Documentation]  Configure Multiple IPs on VLAN and verify each via REST.
-    [Tags]  Configure_Multiple_IPs_On_VLAN_Via_REST
+    [Tags]  Configure_Multiple_IPs_On_VLAN_Via_REST  rest
     [Setup]  Run Keywords  Test Setup Execution  AND  Create VLAN  ${vlan_id}
     [Teardown]  Delete VLANs  [${vlan_id}]
 
