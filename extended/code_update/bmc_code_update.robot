@@ -72,7 +72,7 @@ Prepare Persistent Data
 
 REST BMC Code Update
     [Documentation]  Do a BMC code update by uploading image on BMC via REST.
-    [Tags]  REST_BMC_Code_Update
+    [Tags]  REST_BMC_Code_Update  rest
     [Teardown]  REST BMC Code Update Teardown
 
     Run Keyword And Ignore Error  List Installed Images  BMC
