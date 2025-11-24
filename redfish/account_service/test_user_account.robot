@@ -299,10 +299,10 @@ Verify User Account Locked
 Verify User Account Unlock
     [Documentation]  Verify manually unlocking the account before lockout time
     [Tags]  Verify_User_Account_Unlock
-    [Teardown]  Run Keywords  Redfish.Logout
+    [Teardown]  Run Keywords  SSHLibrary.Close All Connections
+    ...  AND  Redfish.Logout
     ...  AND  Redfish.Login
     ...  AND  Redfish.Delete  /redfish/v1/AccountService/Accounts/test_user
-    ...  AND  SSHLibrary.Close All Connections
 
     Redfish Create User  test_user  TestPwd123  Administrator  ${True}
 
