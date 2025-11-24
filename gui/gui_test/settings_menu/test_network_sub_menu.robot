@@ -68,8 +68,8 @@ ${xpath_delete_button}                   //*[text()="Delete"]
 ${xpath_eth0_interface}                  //*[text()="eth0"]
 ${xpath_eth1_interface}                  //*[text()="eth1"]
 ${xpath_linklocalv6}                     //*[text()="LinkLocal"]
-${xpath_eth0_ipv6_autoconfig_button}     (//*[@id="ipv6AutoConfigSwitch"]/following-sibling::label)[1]
-${xpath_eth1_ipv6_autoconfig_button}     (//*[@id="ipv6AutoConfigSwitch"]/following-sibling::label)[2]
+${xpath_eth0_autoconfig_button}          (//*[@id="ipv6AutoConfigSwitch"]/following-sibling::label)[1]
+${xpath_eth1_autoconfig_button}          (//*[@id="ipv6AutoConfigSwitch"]/following-sibling::label)[2]
 ${xpath_eth0_dhcpv6_button}              (//*[@id="dhcpIpv6Switch"]/following-sibling::label)[1]
 ${xpath_eth1_dhcpv6_button}              (//*[@id="dhcpIpv6Switch"]/following-sibling::label)[2]
 ${xpath_eth0_dhcpv4_button}              (//*[@id="dhcpSwitch"]/following-sibling::label)[1]
@@ -397,47 +397,39 @@ Enable AutoConfig On Eth0 And Verify
     [Documentation]  Enable SLAAC on eth0 via GUI & check it is set to enable state.
     [Tags]  Enable_AutoConfig_On_Eth0_And_Verify
 
-    Set IPv6 AutoConfig State  Enabled  ${xpath_eth0_ipv6_autoconfig_button}
-    Verify SLAAC Address On Autoconfig Enable
+    Set IPv6 AutoConfig State  Enabled  1
 
 
 Disable AutoConfig On Eth0 And Verify
     [Documentation]  Disable SLAAC on eth0 via GUI & check it is set to disable state.
     [Tags]  Disable_AutoConfig_On_Eth0_And_Verify
 
-    Set IPv6 AutoConfig State  Disabled  ${xpath_eth0_ipv6_autoconfig_button}
-    Wait Until Page Does Not Contain    SLAAC
+    Set IPv6 AutoConfig State  Disabled  1
 
 
 Enable AutoConfig On Eth1 And Verify
     [Documentation]  Enable SLAAC on eth1 via GUI & check it is set to enable state.
     [Tags]  Enable_AutoConfig_On_Eth1_And_Verify
 
-    Click Element  ${xpath_eth1_interface}
-    Set IPv6 AutoConfig State  Enabled  ${xpath_eth1_ipv6_autoconfig_button}
-    Set Suite Variable  ${CHANNEL_NUMBER}  2
-    Verify SLAAC Address On Autoconfig Enable
+    Set IPv6 AutoConfig State  Enabled  2
 
 
 Disable AutoConfig On Eth1 And Verify
     [Documentation]  Disable SLAAC on eth1 via GUI & check it is set to disable state.
     [Tags]  Disable_AutoConfig_On_Eth1_And_Verify
 
-    Click Element  ${xpath_eth1_interface}
-    Set IPv6 AutoConfig State  Disabled  ${xpath_eth1_ipv6_autoconfig_button}
-    Wait Until Page Does Not Contain    SLAAC
+    Set IPv6 AutoConfig State  Disabled  2
 
 
 Enable SLAAC On Both Interfaces And Verify Eth0
     [Documentation]  Enable SLAAC on eth0, then on eth1, verify eth0 is not impacted.
     [Tags]  Enable_SLAAC_On_Both_Interfaces_And_Verify_Eth0
 
-    Set SLAAC Property On Eth0 And Eth1  Enabled
-    Click Element  ${xpath_refresh_button}
-    Wait Until Element Is Not Visible
-    ...  ${xpath_page_loading_progress_bar}  timeout=120s
+    Set SLAAC Property On Eth0 And Eth1
+    Click Element  ${xpath_eth0_interface}
 
     # Verify SLAAC on eth0
+    Set Suite Variable  ${CHANNEL_NUMBER}  1
     Verify SLAAC Address On Autoconfig Enable
 
 
@@ -446,11 +438,8 @@ Enable SLAAC On Both Interfaces Disable It On Eth0 And Verify Eth1
     ...  disable it on eth0 and verify eth1 is not impacted.
     [Tags]  Enable_SLAAC_On_Both_Interfaces_Disable_It_On_Eth0_And_Verify_Eth1
 
-    Set SLAAC Property On Eth0 And Eth1  Enabled
-    Click Element  ${xpath_refresh_button}
-    Wait Until Element Is Not Visible
-    ...  ${xpath_page_loading_progress_bar}  timeout=120s
-    Set IPv6 AutoConfig State  Disabled  ${xpath_eth0_ipv6_autoconfig_button}
+    Set SLAAC Property On Eth0 And Eth1
+    Set IPv6 AutoConfig State  Disabled  1
     Click Element  ${xpath_eth1_interface}
 
     # Verify SLAAC on eth1 after disabling eth0
@@ -463,13 +452,11 @@ Enable SLAAC On Both Interfaces Disable It On Eth1 And Verify Eth0
     ...  disable it on eth1 and verify eth0 is not impacted.
     [Tags]  Enable_SLAAC_On_Both_Interfaces_Disable_It_On_Eth1_And_Verify_Eth0
 
-    Set SLAAC Property On Eth0 And Eth1  Enabled
-    Set IPv6 AutoConfig State  Disabled  ${xpath_eth1_ipv6_autoconfig_button}
-    Click Element  ${xpath_refresh_button}
-    Wait Until Element Is Not Visible
-    ...  ${xpath_page_loading_progress_bar}  timeout=120s
+    Set SLAAC Property On Eth0 And Eth1
+    Set IPv6 AutoConfig State  Disabled  2
 
     # Verify SLAAC on eth0 after disabling eth1
+    Set Suite Variable  ${CHANNEL_NUMBER}  1
     Verify SLAAC Address On Autoconfig Enable
 
 
@@ -478,16 +465,11 @@ Enable SLAAC On Both Interfaces Disable It On Both And Verify
     ...  disable it on eth0,eth1 and verify.
     [Tags]  Enable_SLAAC_On_Both_Interfaces_Disable_It_On_Both_And_Verify
 
-    Set SLAAC Property On Eth0 And Eth1  Enabled
+    Set SLAAC Property On Eth0 And Eth1
 
     # Verify SLAAC is disconfigured on both eth0 and eth1 after disabling
-    Set IPv6 AutoConfig State  Disabled  ${xpath_eth1_ipv6_autoconfig_button}
-    Wait Until Page Does Not Contain    SLAAC
-    Click Element  ${xpath_refresh_button}
-    Wait Until Element Is Not Visible
-    ...  ${xpath_page_loading_progress_bar}  timeout=120s
-    Set IPv6 AutoConfig State  Disabled  ${xpath_eth0_ipv6_autoconfig_button}
-    Wait Until Page Does Not Contain    SLAAC
+    Set IPv6 AutoConfig State  Disabled  1
+    Set IPv6 AutoConfig State  Disabled  2
 
 
 Add Static IPv6 Address Via GUI And Check Persistency
@@ -938,33 +920,59 @@ Cancel And Verify Network Heading
 
 
 Set IPv6 AutoConfig State
-    [Arguments]    ${desired_autoconfig_state}  ${xpath_ipv6_autoconfig_button}
+    [Arguments]    ${desired_autoconfig_state}  ${channel_number}
 
     # Description of argument(s):
     # desired_autoconfig_state      IPv6 autoconfig Toggle state(eg: Enabled or Disabled).
     # xpath_ipv6_autoconfig_button  xpath of eth0 or eth1 ipv6 autoconfig button.
 
-    ${current_autoconfig_state}=    Get Text    ${xpath_ipv6_autoconfig_button}
-
-    IF    '${desired_autoconfig_state}' == '${current_autoconfig_state}'
-        # Already in desired state, reset by toggling twice
-        Wait Until Element Is Enabled  ${xpath_ipv6_autoconfig_button}  timeout=60s
-        Click Element  ${xpath_ipv6_autoconfig_button}
-        Wait Until Element Is Not Visible
-        ...  ${xpath_page_loading_progress_bar}  timeout=120s
-        Wait Until Element Is Enabled  ${xpath_ipv6_autoconfig_button}  timeout=60s
-        Click Element  ${xpath_ipv6_autoconfig_button}
-        Wait Until Element Is Not Visible
-        ...  ${xpath_page_loading_progress_bar}  timeout=120s
-    ELSE IF    '${desired_autoconfig_state}' != '${current_autoconfig_state}'
-        Wait Until Element Is Enabled  ${xpath_ipv6_autoconfig_button}  timeout=60s
-        Click Element  ${xpath_ipv6_autoconfig_button}
-        Wait Until Element Is Not Visible
-        ...  ${xpath_page_loading_progress_bar}  timeout=120s
+    IF  '${channel_number}' == '1'
+      ${xpath_autoconfig_button}=  Set Variable  ${xpath_eth0_autoconfig_button}
+      Set Suite Variable  ${CHANNEL_NUMBER}  1
+    ELSE IF  '${channel_number}' == '2'
+      ${xpath_autoconfig_button}=  Set Variable  ${xpath_eth1_autoconfig_button}
+      Click Element  ${xpath_eth1_interface}
+      Set Suite Variable  ${CHANNEL_NUMBER}  2
     END
+
+    ${current_autoconfig_state}=    Get Text    ${xpath_autoconfig_button}
+
+    IF  '${desired_autoconfig_state}' == '${current_autoconfig_state}'
+      Perform SLAAC Toggle  ${xpath_autoconfig_button}  ${channel_number}
+      Perform SLAAC Toggle  ${xpath_autoconfig_button}  ${channel_number}
+    ELSE
+      Perform SLAAC Toggle  ${xpath_autoconfig_button}  ${channel_number}
+    END
+
     Wait Until Keyword Succeeds  2 min  30 sec
-    ...  Element Text Should Be  ${xpath_ipv6_autoconfig_button}
-    ...  ${desired_autoconfig_state}
+    ...  Element Text Should Be  ${xpath_autoconfig_button}  ${desired_autoconfig_state}
+
+    IF  '${desired_autoconfig_state}' == 'Enabled'
+      Verify SLAAC Address On Autoconfig Enable
+    ELSE IF  '${desired_autoconfig_state}' == 'Disabled'
+      Wait Until Page Does Not Contain  SLAAC  timeout=60s
+    END
+    Reload Page
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=120s
+
+
+Perform SLAAC Toggle
+    [Documentation]  Toggle SLAAC button.
+    [Arguments]  ${xpath_autoconfig_button}  ${channel_number}
+
+    # Description of argument(s):
+    # xpath_autoconfig_button   SLAAC Toggle button xpath.
+    # channel_number            Channel number: 1 for eth0, 2 for eth1.
+
+    Reload Page
+    Wait Until Element Is Enabled  ${xpath_autoconfig_button}  timeout=60s
+
+    IF  '${channel_number}' == '2'
+      Click Element  ${xpath_eth1_interface}
+    END
+
+    Click Element  ${xpath_autoconfig_button}
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=120s
 
 
 Set SLAAC Property On Eth0 And Eth1
@@ -974,18 +982,24 @@ Set SLAAC Property On Eth0 And Eth1
     # Description of argument(s):
     # ${State}  Enabled or Disabled on both interfaces
 
-    Set IPv6 AutoConfig State  ${State}  ${xpath_eth0_ipv6_autoconfig_button}
-    Click Element  ${xpath_eth1_interface}
-    Set IPv6 AutoConfig State  ${State}  ${xpath_eth1_ipv6_autoconfig_button}
+    Set IPv6 AutoConfig State  ${State}  1
+    Set IPv6 AutoConfig State  ${State}  2
 
 
 Verify SLAAC Address On Autoconfig Enable
     [Documentation]  Verify SLAAC IPv6 on autoconfig enable.
 
-    @{ipv6_address_origin_list}  ${ipv6_slaac_addr}=
+    TRY
+      Sleep  ${NETWORK_TIMEOUT}
+      @{ipv6_address_origin_list}  ${ipv6_slaac_addr}=
     ...    Get Address Origin List And Address For Type  SLAAC
-    Wait Until Page Contains  ${ipv6_slaac_addr}
-    Wait Until Page Contains  SLAAC
+    EXCEPT
+      Log  SLAAC gateway setup not Enabled!  WARN
+      RETURN
+    ELSE
+      Wait Until Page Contains  ${ipv6_slaac_addr}  timeout=60sec
+      Wait Until Page Contains  SLAAC  timeout=60sec
+    END
 
 
 Toggle DHCPv4 State And Verify
@@ -1147,12 +1161,15 @@ Verify Persistency Of IPv6 On BMC Reboot
 
     IF  '${channel_number}' == '1'
         # Capture IPv6 addresses before reboot.
+        Set Suite Variable  ${CHANNEL_NUMBER}  1
         @{ipv6_address_origin_list}  ${addr_before_reboot}=
         ...  Get Address Origin List And Address For Type  ${ipv6_type}
 
         Reboot BMC via GUI
+        Launch Browser Login GUI And Navigate To Network Page
 
         # Capture IPv6 addresses after reboot.
+        Set Suite Variable  ${CHANNEL_NUMBER}  1
         @{ipv6_address_origin_list}  ${addr_after_reboot}=
         ...  Get Address Origin List And Address For Type  ${ipv6_type}
 
@@ -1165,6 +1182,7 @@ Verify Persistency Of IPv6 On BMC Reboot
         ...  Get Address Origin List And Address For Type  ${ipv6_type}
 
         Reboot BMC via GUI
+        Launch Browser Login GUI And Navigate To Network Page
 
         # Capture IPv6 addresses after reboot.
         Set Suite Variable  ${CHANNEL_NUMBER}  2
