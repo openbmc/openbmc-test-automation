@@ -49,7 +49,7 @@ REST Host Code Update
     # 1. Do code update.
     # 2. Do post update the following:
     #    - Collect FFDC if error log exist and delete error logs.
-    [Tags]  REST_Host_Code_Update
+    [Tags]  REST_Host_Code_Update  rest
     [Setup]  Code Update Setup
 
     Run Keyword And Ignore Error  List Installed Images  Host
@@ -106,7 +106,7 @@ Test Boot With No VPD Cache
 
 REST Host Code Update While OS Is Running
     [Documentation]  Do a PNOR code update while the host is running.
-    [Tags]  REST_Host_Code_Update_While_OS_Is_Running
+    [Tags]  REST_Host_Code_Update_While_OS_Is_Running  rest
     [Teardown]  Run Keywords  REST Power Off  stack_mode=skip
     ...         AND  Code Update Test Teardown
 

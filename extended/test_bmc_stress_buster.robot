@@ -24,7 +24,7 @@ ${IPMI_BUSTER_MAX}    ${5}
 
 Stress BMC REST Server
     [Documentation]  Execute maximum allowed REST operation.
-    [Tags]  Stress_BMC_REST_Server
+    [Tags]  Stress_BMC_REST_Server  rest
 
     Log To Console  REST call request burst ${REST_BUSTER_MAX}
     ${dict}=  Execute Process

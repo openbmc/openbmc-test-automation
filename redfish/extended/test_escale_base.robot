@@ -51,7 +51,7 @@ Escale Base Test Active Monitoring
 
 Escale Power Setting Via REST And Verify
     [Documentation]  Set power via REST and check using IPMI.
-    [Tags]  Escale_Power_Setting_Via_REST_And_Verify
+    [Tags]  Escale_Power_Setting_Via_REST_And_Verify  rest
 
     # A convenient power level bewtwwn maximum and minimum.
     ${test_power}=  Set Variable  1700
@@ -83,7 +83,7 @@ Escale Power Setting Via IPMI And Verify
 
 Escale Activation Test Via REST
     [Documentation]  Activate power monitoring via REST then check via IPMI.
-    [Tags]  Escale_Activation_Test_Via_REST
+    [Tags]  Escale_Activation_Test_Via_REST  rest
 
     Activate DCMI Power Via REST
     # Confirm activation state using IPMI.
@@ -92,7 +92,7 @@ Escale Activation Test Via REST
 
 Escale Deactivation Test Via REST
     [Documentation]  Deactivate power monitoring via REST and check via IPMI.
-    [Tags]  Escale_Deactivation_Test_Via_REST
+    [Tags]  Escale_Deactivation_Test_Via_REST  rest
 
     Deactivate DCMI Power Via REST
     # Confirm activation state using IPMI.
