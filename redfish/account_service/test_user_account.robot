@@ -29,12 +29,15 @@ Verify AccountService Available
     Should Be Equal As Strings  ${resp}  ${True}
 
 
-Verify Redfish Admin User Persistence After Reboot
+Verify Redfish Admin and ReadOnly Users Persistence After Reboot
     [Documentation]  Verify Redfish admin user persistence after reboot.
     [Tags]  Verify_Redfish_Admin_User_Persistence_After_Reboot
+    ...    Verify_Redfish_Readonly_User_Persistence_After_Reboot
     [Setup]  Run Keywords  Redfish.Login  AND
     ...  Redfish Create User  admin_user  TestPwd123  Administrator  ${True}
+    ...  AND  Redfish Create User  readonly_user  TestPwd123  ReadOnly  ${True}
     [Teardown]  Run Keywords  Redfish.Delete  /redfish/v1/AccountService/Accounts/admin_user
+    ...  AND  Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
     ...  AND  Test Teardown Execution
 
     # Reboot BMC.
@@ -42,6 +45,7 @@ Verify Redfish Admin User Persistence After Reboot
 
     # Verify users after reboot.
     Redfish Verify User  admin_user     TestPwd123  Administrator   ${True}
+    Redfish Verify User  readonly_user  TestPwd123  ReadOnly        ${True}
 
 
 Verify Redfish Operator User Persistence After Reboot
@@ -56,22 +60,8 @@ Verify Redfish Operator User Persistence After Reboot
     Redfish OBMC Reboot (off)  stack_mode=normal
 
     # Verify users after reboot.
-    Redfish Verify User  operator_user  TestPwd123  Operator        ${True}
+     Redfish Verify User  operator_user  TestPwd123  Operator        ${True}
 
-
-Verify Redfish Readonly User Persistence After Reboot
-    [Documentation]  Verify Redfish readonly user persistence after reboot.
-    [Tags]  Verify_Redfish_Readonly_User_Persistence_After_Reboot
-    [Setup]  Run Keywords  Redfish.Login  AND
-    ...  Redfish Create User  readonly_user  TestPwd123  ReadOnly  ${True}
-    [Teardown]  Run Keywords  Redfish.Delete  /redfish/v1/AccountService/Accounts/readonly_user
-    ...  AND  Test Teardown Execution
-
-    # Reboot BMC.
-    Redfish OBMC Reboot (off)  stack_mode=normal
-
-    # Verify users after reboot.
-    Redfish Verify User  readonly_user  TestPwd123  ReadOnly        ${True}
 
 Redfish Create and Verify Admin User
     [Documentation]  Create a Redfish user with administrator role and verify.
