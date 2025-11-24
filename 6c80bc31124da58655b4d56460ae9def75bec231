@@ -33,6 +33,24 @@
       "message": "1. Looks like this invalid lockout configuration not the account..\n\nRedfish.Patch --\u003e\u003e this defaults take valid account\n\nIf my understanding is right.. please change the title and Tags as \n\n```\nVerify Account Lockout with Invalid Configuration\n\n[Tags]  Verify_Account_Lockout_With_Invalid_Configuration\n\n```\n\n2. Documentation - please use normal english sentence dont copy the test title as it is",
       "revId": "6c80bc31124da58655b4d56460ae9def75bec231",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eff8e29_960ad6a4",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1002294
+      },
+      "writtenOn": "2025-11-24T12:55:07Z",
+      "side": 1,
+      "message": "@sridevra@in.ibm.com Script modified based on feedback.",
+      "parentUuid": "db973dbf_7944aee5",
+      "revId": "6c80bc31124da58655b4d56460ae9def75bec231",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
