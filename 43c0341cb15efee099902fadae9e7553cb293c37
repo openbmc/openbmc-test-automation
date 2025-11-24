@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dcdf0d0_e11a2418",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-24T14:02:48Z",
+      "side": 1,
+      "message": "cosmetic correction",
+      "revId": "43c0341cb15efee099902fadae9e7553cb293c37",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89b03f63_7d51a755",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-24T14:02:48Z",
+      "side": 1,
+      "message": "Verify Account Lockout configuration with invalid values.\n\nUse normal sentence, end with period.",
+      "revId": "43c0341cb15efee099902fadae9e7553cb293c37",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
