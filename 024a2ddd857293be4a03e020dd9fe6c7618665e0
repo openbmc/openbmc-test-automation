@@ -16,6 +16,23 @@
       "message": "Sridevi all good now ?",
       "revId": "024a2ddd857293be4a03e020dd9fe6c7618665e0",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72116d10_29075500",
+        "filename": "redfish/account_service/test_user_account.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-25T09:44:05Z",
+      "side": 1,
+      "message": "In over BMC environment operator user is disabled\n\nSo, by default all the users are created..\n\nThe valid tests will fail as it could create or delete operator user",
+      "revId": "024a2ddd857293be4a03e020dd9fe6c7618665e0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
