@@ -16,6 +16,24 @@
       "message": "please add a comment that DHCPv4 setup must be present on eth1.",
       "revId": "a070f0fa8826ebc0474a6e7d0deb8248ce22d0d1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fbc3832_4600aaf7",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-11-25T06:09:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c76a3cfe_45bb9e14",
+      "revId": "a070f0fa8826ebc0474a6e7d0deb8248ce22d0d1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
