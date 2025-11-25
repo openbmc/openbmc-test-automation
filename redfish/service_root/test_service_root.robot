@@ -149,6 +149,21 @@ Verify Service Root Unsupported Methods
     Redfish.Patch  /redfish/v1
     ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
+Verify Redfish Major Version
+    [Documentation]  Verify Redfish Major Version
+    [Tags]  Verify_Redfish_Major_Version
+
+    # Get operation on redfish
+    ${Service_root_response}    Redfish.Get Properties    /redfish
+    ...    valid_status_codes=[${HTTP_OK}]
+    Should be Equal    ${Service_root_response['v1']}    /redfish/v1/
+
+    # Get operation via curl command
+    ${cmd}=    Catenate    curl -k -u ${OPENBMC_USERNAME}:${OPENBMC_PASSWORD} -X GET https://${OPENBMC_HOST}/redfish
+    ${rc}    ${out}=    Run and Return Rc and Output    ${cmd}
+    Should Contain    '${rc}'    0
+    Should Contain    ${out}    /redfish/v1
+
 *** Keywords ***
 
 GET And Verify Redfish Response
