@@ -186,6 +186,44 @@ Redfish BMC Manager GracefulRestart When Host Booted
     Wait Until Keyword Succeeds  10 min  30 sec  Verify OCC State
 
 
+Verify Redfish BMC Manager Unsupported Methods
+    [Documentation]  Verify Unsupported methods of redfish BMC manager.
+    [Tags]  Verify_Redfish_BMC_Manager_Unsupported_Methods
+
+    # Put operation on BMC Manager
+    Redfish.Put  /redfish/v1/Managers/${MANAGER_ID}
+    ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Post operation on BMC Manager
+    Redfish.Post  /redfish/v1/Managers/${MANAGER_ID}
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Delete operation on BMC Manager
+    Redfish.Delete  /redfish/v1/Managers/${MANAGER_ID}
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+
+Verify Redfish BMC Manager ResetActionInfo Unsupported Methods
+    [Documentation]  Verify Unsupported methods of redfish BMC manager reset action info.
+    [Tags]  Verify_Redfish_BMC_Manager_ResetActionInfo_Unsupported_Methods
+
+    # Put operation on BMC Manager ResetActionInfo
+    Redfish.Put  /redfish/v1/Managers/${MANAGER_ID}/ResetActionInfo
+    ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Patch operation on BMC Manager ResetActionInfo
+    Redfish.Patch  /redfish/v1/Managers/${MANAGER_ID}/ResetActionInfo
+    ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Post operation on BMC Manager ResetActionInfo
+    Redfish.Post  /redfish/v1/Managers/${MANAGER_ID}/ResetActionInfo
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Delete operation on BMC Manager ResetActionInfo
+    Redfish.Delete  /redfish/v1/Managers/${MANAGER_ID}/ResetActionInfo
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+
 *** Keywords ***
 
 Test Setup Execution
