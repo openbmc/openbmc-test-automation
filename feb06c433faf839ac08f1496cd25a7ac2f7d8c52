@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3b63bfb_fb5a7ab1",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-11-25T17:28:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec4aa25_21ca5411",
+      "range": {
+        "startLine": 602,
+        "startChar": 40,
+        "endLine": 602,
+        "endChar": 44
+      },
+      "revId": "feb06c433faf839ac08f1496cd25a7ac2f7d8c52",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "582e6ba2_86327ce5",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-11-25T15:15:19Z",
       "side": 1,
       "message": "change tag name\nConfigure_DHCPv6_On_Eth0_And_Verify_Existing_Network_Configurations_On_BMC_Reboot",
+      "range": {
+        "startLine": 604,
+        "startChar": 12,
+        "endLine": 604,
+        "endChar": 93
+      },
+      "revId": "feb06c433faf839ac08f1496cd25a7ac2f7d8c52",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7305193_2e461141",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-11-25T17:28:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "582e6ba2_86327ce5",
       "range": {
         "startLine": 604,
         "startChar": 12,
