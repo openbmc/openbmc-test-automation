@@ -16,6 +16,24 @@
       "message": "Give default value ${channel_number}\u003d${CHANNEL_NUMBER}\nNo need to pass 1 in the keyword\nOnly for channel 2 you can pass.\nSet IPv6 AutoConfig State Enabled/Disabled 2",
       "revId": "0303336f9c5b69cbdd56ee289a8add647753322b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "986dc591_23247966",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-11-25T05:47:38Z",
+      "side": 1,
+      "message": "Keeping it same because i followed the same through out and looks good for readability aswell. Thanks",
+      "parentUuid": "388ec255_76be168e",
+      "revId": "0303336f9c5b69cbdd56ee289a8add647753322b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
