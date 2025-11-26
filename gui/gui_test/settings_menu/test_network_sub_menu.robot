@@ -23,7 +23,8 @@ ${xpath_domain_name_toggle}              //*[@data-test-id="networkSettings-swit
 ${xpath_ntp_servers_toggle}              //*[@data-test-id="networkSettings-switch-useNtp"]
 ${xpath_add_static_ipv4_addr_btn_eth0}   (//button[contains(text(),"Add static IPv4 address")])[1]
 ${xpath_add_static_ipv4_addr_btn_eth1}   (//button[contains(text(),"Add static IPv4 address")])[2]
-${xpath_add_static_ipv6_address_button}  //button[contains(text(),"Add static IPv6 address")]
+${xpath_add_static_ipv6_addr_btn_eth0}   (//button[contains(text(),"Add static IPv6 address")])[1]
+${xpath_add_static_ipv6_addr_btn_eth1}   (//button[contains(text(),"Add static IPv6 address")])[2]
 ${xpath_add_static_def_gateway_button}   //button[contains(text(),"Add IPv6 static default gateway address")]
 ${xpath_hostname}                        //*[@title="Edit hostname"]
 ${xpath_hostname_input}                  //*[@id="hostname"]
@@ -46,6 +47,7 @@ ${xpath_domainname_switch_button}        //*[@id="useDomainNameSwitch"]/followin
 ${xpath_success_popup}                   //*[contains(text(),'Success')]/following-sibling::button
 ${ipv4_elements}                         //h2[contains(., "IPv4")]/following::table[1]/tbody/tr/td[1]
 ${ipv6_elements}                         //h2[contains(., "IPv6")]/following::table[1]/tbody/tr/td[1]
+${ipv6_addr_origin_elements}             //h2[contains(text(),'IPv6')]//following::table[1]//td[@aria-colindex='3']
 ${xpath_delete_ipv4_addres}              //*[text()='${test_ipv4_addr_2}']/following::td[4]
 ...                                      //*[@title="Delete IPv4 address"]
 ${xpath_delete_ipv6_addres}              //*[text()='${test_ipv6_addr_2}']/following::td[3]
@@ -132,7 +134,7 @@ Verify Existence Of All Buttons In Network Page
     [Tags]  Verify_Existence_Of_All_Buttons_In_Network_Page
 
     Page Should Contain Button  ${xpath_add_static_ipv4_addr_btn_eth0}
-    Page Should Contain Button  ${xpath_add_static_ipv6_address_button}
+    Page Should Contain Button  ${xpath_add_static_ipv6_addr_btn_eth0}
     Page Should Contain Button  ${xpath_add_dns_ip_address_button}
     Page Should Contain Button  ${xpath_domain_name_toggle}
     Page Should Contain Button  ${xpath_dns_servers_toggle}
@@ -177,7 +179,7 @@ Verify Existence Of All Fields In Static IPv6 Address
     [Tags]  Verify_Existence_Of_All_Fields_In_Static_IPv6_Address
     [Teardown]  Cancel And Verify Network Heading
 
-    Wait Until Keyword Succeeds  30 sec  10 sec  Click Element  ${xpath_add_static_ipv6_address_button}
+    Wait Until Keyword Succeeds  30 sec  10 sec  Click Element  ${xpath_add_static_ipv6_addr_btn_eth0}
     Wait Until Page Contains  Add static IPv6 address  timeout=15s
     Page Should Contain Textfield  ${xpath_input_ipv6_address}
     Page Should Contain Textfield  ${xpath_input_prefix_length}
@@ -561,6 +563,27 @@ Verify DHCPv4 Enable And Disable On Eth1 Via GUI
     Disabled
 
 
+Verify Coexistence Of IPv6 Addresses Via GUI
+    [Documentation]  verify coexistence of IPv6 addresses on both interfaces, DHCPv6 and SLAAC setup must be present.
+    [Tags]  Verify_Coexistence_Of_IPv6_Addresses_Via_GUI
+    [Setup]  Run Keywords  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}  ${test_prefix_length}  Success
+    ...  AND  Set And Verify DHCPv6 States  Enabled  Enabled
+    ...  AND  Set SLAAC Property On Eth0 And Eth1
+    ...  AND  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}  ${test_prefix_length}  Success  None  2
+    [Template]  Coexistence Of IPv6 Addresses
+
+
+    # Channel_number   ipv6_type1    ipv6_type2     ipv6_type3
+    1                  Static        LinkLocal      SLAAC
+    2                  LinkLocal     SLAAC          Static
+    1                  Static        DHCP           SLAAC
+    2                  SLAAC         DHCP           Static
+    1                  Static        LinkLocal      DHCP
+    2                  LinkLocal     DHCP           Static
+    1                  LinkLocal     SLAAC          DHCP
+    2                  SLAAC         DHCP           LinkLocal
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -624,7 +647,7 @@ Add Static IP Address And Verify
     # gateway_address     Gateway address for the IP to be added (e.g. 10.7.7.1).
     # expected_status     Expected status while adding static IPv4 address
     # ....                (e.g. Invalid format / Field required).
-    # channel_number        Channel number: 1 for eth0, 2 for eth1.
+    # CHANNEL_NUMBER      Channel number: 1 for eth0, 2 for eth1.
 
     Wait Until Element Is Enabled  ${xpath_add_static_ipv4_addr_btn_eth0}  timeout=60sec
     IF  '${CHANNEL_NUMBER}' == '1'
@@ -651,16 +674,22 @@ Add Static IP Address And Verify
 
 Add Static IPv6 Address And Verify Via GUI
     [Documentation]  Add static IPv6 address and prefix length and verify.
-    [Arguments]  ${ipv6_address}  ${prefix_length}  ${expected_status}=error  ${expected_ipv6}=None
+    [Arguments]  ${ipv6_address}  ${prefix_length}  ${expected_status}=error  ${expected_ipv6}=None  ${CHANNEL_NUMBER}=1
 
     # Description of argument(s):
     # ipv6_address        IPv6 address to be added.
     # prefix_length       Prefix length of the IPv6 to be added.
     # expected_status     Expected status while adding static IPv6 address.
     # expected_ipv6       Expected IPv6 which gets added with truncated zeroes.
+    # CHANNEL_NUMBER      Channel number: 1 for eth0, 2 for eth1.
 
-    Wait Until Element Is Enabled  ${xpath_add_static_ipv6_address_button}  timeout=60sec
-    Click Element  ${xpath_add_static_ipv6_address_button}
+    Wait Until Element Is Enabled  ${xpath_add_static_ipv6_addr_btn_eth0}  timeout=60sec
+    IF  '${CHANNEL_NUMBER}' == '1'
+      Click Element  ${xpath_add_static_ipv6_addr_btn_eth0}
+    ELSE
+      Click Element  ${xpath_eth1_interface}
+      Click Element  ${xpath_add_static_ipv6_addr_btn_eth1}
+    END
 
     Input Text  ${xpath_input_ip_address}  ${ipv6_address}
     Input Text  ${xpath_input_prefix_length}  ${prefix_length}
@@ -1044,7 +1073,8 @@ Toggle DHCPv4 State And Verify
     ELSE IF  '${desired_dhcpv4_state}' == 'Disabled'
       Element Should Not Contain  ${ipv4_elements}  DHCP  timeout=60s
     END
-    Click Element  ${xpath_refresh_button}
+    Reload Page
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=120s
 
 
 Perform DHCPv4 Toggle
@@ -1100,7 +1130,8 @@ Toggle DHCPv6 State And Verify
     ELSE IF  '${desired_dhcpv6_state}' == 'Disabled'
       Wait Until Page Does Not Contain  DHCPv6  timeout=60s
     END
-    Click Element  ${xpath_refresh_button}
+    Reload Page
+    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=120s
 
 
 Perform DHCPv6 Toggle
@@ -1217,7 +1248,7 @@ Collect All IP Addresses On Both Interfaces
       Wait Until Element Is Enabled  ${xpath_add_static_ipv4_addr_btn_eth0}  timeout=30s
       ${ip_elements}=  Get WebElements  ${ipv4_elements}
     ELSE IF  '${ip_version}' == 'ipv6'
-      Wait Until Element Is Enabled  ${xpath_add_static_ipv6_address_button}  timeout=30s
+      Wait Until Element Is Enabled  ${xpath_add_static_ipv6_addr_btn_eth0}  timeout=30s
       ${ip_elements}=  Get WebElements  ${ipv6_elements}
     ELSE
       Fail  Invalid IP version provided. Use 'ipv4' or 'ipv6'.
@@ -1272,4 +1303,35 @@ Assign Static IP Address on Eth1
     Sleep  ${NETWORK_TIMEOUT}
     FOR  ${ip}  IN  @{ipv4_eth1}
       Add Static IP Address And Verify  ${ip['Address']}  ${ip['SubnetMask']}  ${ip['Gateway']}  Success  2
+    END
+
+
+Coexistence Of IPv6 Addresses
+    [Documentation]  Checking coexistence of IPv6 addresses on both interfaces.
+    [Arguments]  ${channel_number}  @{ipv6_types}
+    
+    # Description of argument(s):
+    # channel_number   Ethernet channel number, 1(eth0) or 2(eth1).
+    # ipv6_types       Type of IPv6 address(slaac/linklocal/dhcp/static).
+
+    IF  '${channel_number}' == '1'
+      Wait Until Element Is Enabled  ${xpath_eth1_interface}  timeout=60s
+      Click Element  ${xpath_eth0_interface}
+    ELSE
+      Wait Until Element Is Enabled  ${xpath_eth1_interface}  timeout=60s
+      Click Element  ${xpath_eth1_interface}
+    END
+
+    ${all_origin}=  Get WebElements  ${ipv6_addr_origin_elements}
+    ${origin_list}=  Create List
+    FOR  ${elem}  IN  @{all_origin}
+      ${origin}=  Get Text  ${elem}
+      ${origin}=  Strip String  ${origin}
+      IF  '${origin}' != '' and '${origin}' != 'No items available'
+        Append To List  ${origin_list}  ${origin}
+      END
+    END
+
+    FOR  ${type}  IN  @{ipv6_types}
+      Should Contain  ${origin_list}  ${type}
     END
