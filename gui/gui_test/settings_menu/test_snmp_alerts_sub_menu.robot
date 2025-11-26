@@ -439,6 +439,7 @@ Generate Error Log On BMC And Verify Trap On Non Default Port
     # Description of argument(s):
     # event_log_cmd       Event logs to be created.
     # trap_msg            Expected trap on SNMP.
+    # persistency_check   Presistency check (Valid Values: True, False).
 
     Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
 
