@@ -222,10 +222,11 @@ Create LDAP Configuration
 
     # Description of argument(s):
     # ldap_server_uri        LDAP server uri (e.g. ldap://XX.XX.XX.XX).
-    # ldap_type              The LDAP type ("ActiveDirectory" or "LDAP").
+    # ldap_service_type      The LDAP type ("ActiveDirectory" or "LDAP").
     # ldap_bind_dn           The LDAP bind distinguished name.
     # ldap_bind_dn_password  The LDAP bind distinguished name password.
     # ldap_base_dn           The LDAP base distinguished name.
+    # ldap_mode              The LDAP modes (Valid Values: "secure", "nonsecure").
 
     # Clearing existing LDAP configuration by disabling it.
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService

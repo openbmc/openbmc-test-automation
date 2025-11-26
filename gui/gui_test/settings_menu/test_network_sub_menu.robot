@@ -1003,7 +1003,7 @@ Set SLAAC Property On Eth0 And Eth1
     [Arguments]  ${State}=Enabled
 
     # Description of argument(s):
-    # ${State}  Enabled or Disabled on both interfaces
+    # State  Enabled or Disabled on both interfaces.
 
     Set IPv6 AutoConfig State  ${State}  1
     Set IPv6 AutoConfig State  ${State}  2
