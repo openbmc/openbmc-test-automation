@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1432f3bd_51623de9",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-26T15:47:55Z",
+      "side": 1,
+      "message": "looks something is missing in the sentence",
+      "range": {
+        "startLine": 567,
+        "startChar": 21,
+        "endLine": 567,
+        "endChar": 98
+      },
+      "revId": "10947a4833c5e7441fa292bdc3b7bcdc62eef986",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62421653_c46b74e0",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-26T15:47:55Z",
+      "side": 1,
+      "message": "suggestion: for good appearance please align with AND",
+      "range": {
+        "startLine": 569,
+        "startChar": 4,
+        "endLine": 571,
+        "endChar": 111
+      },
+      "revId": "10947a4833c5e7441fa292bdc3b7bcdc62eef986",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd12262f_e059034d",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-26T15:47:55Z",
+      "side": 1,
+      "message": "CHANNEL_NUMBER is usual referred for environment variable what is ur preference?\n\nAt 683 - channel_number is getting used",
+      "range": {
+        "startLine": 676,
+        "startChar": 103,
+        "endLine": 676,
+        "endChar": 117
+      },
+      "revId": "10947a4833c5e7441fa292bdc3b7bcdc62eef986",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feb61b1f_a3e5da0a",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 1311,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-26T15:47:55Z",
+      "side": 1,
+      "message": "add this line \n```\n# Description of argument(s):\n```",
+      "revId": "10947a4833c5e7441fa292bdc3b7bcdc62eef986",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
