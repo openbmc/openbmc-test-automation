@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a32cce37_60e83733",
+        "filename": "redfish/dmtf_tools/Redfish_Service_Validator.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002249
+      },
+      "writtenOn": "2025-11-26T17:10:12Z",
+      "side": 1,
+      "message": "Changed to URI",
+      "parentUuid": "b975c908_613d8a8b",
+      "range": {
+        "startLine": 91,
+        "startChar": 35,
+        "endLine": 91,
+        "endChar": 38
+      },
+      "revId": "3b1dfba500cd72b63f29b12f6e0cca4393f4b655",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66022a16_7680c158",
@@ -41,6 +65,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf853372_c8a77a82",
+        "filename": "redfish/dmtf_tools/Redfish_Service_Validator.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002249
+      },
+      "writtenOn": "2025-11-26T17:10:12Z",
+      "side": 1,
+      "message": "Ended the Doc with period",
+      "parentUuid": "66022a16_7680c158",
+      "revId": "3b1dfba500cd72b63f29b12f6e0cca4393f4b655",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "349e18e0_2d1cfc30",
@@ -54,6 +96,24 @@
       "writtenOn": "2025-11-26T15:59:13Z",
       "side": 1,
       "message": "${URI} --\u003e URI\n \n In the args no mention of the variable format.\n \n please check same file for reference",
+      "revId": "3b1dfba500cd72b63f29b12f6e0cca4393f4b655",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af66de97_e9e4eb4b",
+        "filename": "redfish/dmtf_tools/Redfish_Service_Validator.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002249
+      },
+      "writtenOn": "2025-11-26T17:10:12Z",
+      "side": 1,
+      "message": "mentioned the variable in proper format.",
+      "parentUuid": "349e18e0_2d1cfc30",
       "revId": "3b1dfba500cd72b63f29b12f6e0cca4393f4b655",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
