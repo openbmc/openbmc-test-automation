@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e16f867_c102f4b3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-26T16:07:47Z",
+      "side": 1,
+      "message": "Create test suite for IPv6 DHCP verification\n\nsomething like is required for a new test suite creation",
+      "revId": "4d0e26f8d0ea0dc9bead296151ca21cbff9926dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1691935_b1913aea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-26T16:07:47Z",
+      "side": 1,
+      "message": "Could have mentioned some info here",
+      "revId": "4d0e26f8d0ea0dc9bead296151ca21cbff9926dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "506bd16a_fc39900a",
         "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
         "patchSetId": 11
