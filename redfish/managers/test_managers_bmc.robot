@@ -185,6 +185,25 @@ Redfish BMC Manager GracefulRestart When Host Booted
     # TODO: Replace OCC state check with redfish property when available.
     Wait Until Keyword Succeeds  10 min  30 sec  Verify OCC State
 
+Verify Managers Collection Unsupported Methods
+    [Documentation]  Verify Managers Collection with Unsupported methods.
+    [Tags]  Verify_Manager_Collection_Unsupported_Methods
+
+    # Put operation on Managers Collection
+    Redfish.Put  /redfish/v1/Managers
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Post operation on Managers Collection
+    Redfish.Post  /redfish/v1/Managers
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Delete operation on Managers Collection
+    Redfish.Delete  /redfish/v1/Managers
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Patch operation on Managers Collection
+    Redfish.Patch  /redfish/v1/Managers
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
 *** Keywords ***
 
