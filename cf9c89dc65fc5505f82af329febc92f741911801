@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81eea9c8_28ebf612",
+        "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-11-26T06:40:31Z",
+      "side": 1,
+      "message": "what is it \u0026 how it is different from server_ipv6?\ndo we need it?",
+      "revId": "cf9c89dc65fc5505f82af329febc92f741911801",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1298a944_3f377f32",
+        "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-11-26T06:40:31Z",
+      "side": 1,
+      "message": "Check IPv6 connectivity or IPv6 connectivity via IPv6",
+      "range": {
+        "startLine": 35,
+        "startChar": 8,
+        "endLine": 35,
+        "endChar": 39
+      },
+      "revId": "cf9c89dc65fc5505f82af329febc92f741911801",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d559c6f_0dca0d4f",
+        "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-11-26T06:40:31Z",
+      "side": 1,
+      "message": "If ELSE is not required here.\nEnforce.",
+      "revId": "cf9c89dc65fc5505f82af329febc92f741911801",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b94cf039_1713a458",
+        "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-11-26T06:40:31Z",
+      "side": 1,
+      "message": "only for one line this keyword is not required, you can club it before calling or after calling.",
+      "revId": "cf9c89dc65fc5505f82af329febc92f741911801",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d17818a_9b69016c",
+        "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-11-26T06:40:31Z",
+      "side": 1,
+      "message": "Ping Host Over IPv6",
+      "revId": "cf9c89dc65fc5505f82af329febc92f741911801",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaed552c_4d333a98",
+        "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-11-26T06:40:31Z",
+      "side": 1,
+      "message": "Check connectivity over IPv6",
+      "revId": "cf9c89dc65fc5505f82af329febc92f741911801",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85c3bc03_c7e7a6d5",
+        "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2025-11-26T06:40:31Z",
+      "side": 1,
+      "message": "Make it something like:\nSSH Via/Over IPv6",
+      "revId": "cf9c89dc65fc5505f82af329febc92f741911801",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
