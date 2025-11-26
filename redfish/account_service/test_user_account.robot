@@ -646,7 +646,7 @@ Verify AccountService Roles Instance With Unsupported Methods
     Redfish.Delete    /redfish/v1/AccountService/Roles/Administrator
     ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
-Verify Account Lockout with Invalid Configuration
+Verify Account Lockout With Invalid Configuration
     [Documentation]  Verify Account Lockout configuration with invalid values.
     [Tags]  Verify_Account_Lockout_With_Invalid_Configuration
 
