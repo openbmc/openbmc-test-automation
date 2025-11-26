@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32931473_f45d637a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2025-11-26T21:33:24Z",
+      "side": 1,
+      "message": "Thanks for this commit! \nTry to use your full name here. \nFrom https://github.com/openbmc/docs/blob/master/CONTRIBUTING.md#formatting-commit-messages\n\n\n\"All commit messages must include a \"Signed-off-by\" line, which indicates that you the contributor have agreed to the Developer Certificate of Origin (see below). This line must include the full name you commonly use, often a given name and a family name or surname. (ok: Sam Samuelsson, Robert A. Heinlein; not ok: xXthorXx, Sam, RAH)\"\n\nPlease fix your git-config and `git commit --amend --reset-author`. Thanks!",
+      "revId": "10947a4833c5e7441fa292bdc3b7bcdc62eef986",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1432f3bd_51623de9",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 3
