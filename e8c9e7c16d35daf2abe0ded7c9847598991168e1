@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4e52866_3c181dbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-26T16:13:04Z",
+      "side": 1,
+      "message": "Looks neat, just one cosmetic comment",
+      "revId": "e8c9e7c16d35daf2abe0ded7c9847598991168e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69ec27d4_366fb087",
+        "filename": "redfish/systems/test_systems_inventory.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-26T16:13:04Z",
+      "side": 1,
+      "message": "one line space before beginning of the keyword",
+      "revId": "e8c9e7c16d35daf2abe0ded7c9847598991168e1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
