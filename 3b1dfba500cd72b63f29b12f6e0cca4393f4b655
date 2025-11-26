@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b975c908_613d8a8b",
+        "filename": "redfish/dmtf_tools/Redfish_Service_Validator.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-26T15:59:13Z",
+      "side": 1,
+      "message": "Uri -\u003e URI \n\nall the abbreviation should be in caps",
+      "range": {
+        "startLine": 91,
+        "startChar": 35,
+        "endLine": 91,
+        "endChar": 38
+      },
+      "revId": "3b1dfba500cd72b63f29b12f6e0cca4393f4b655",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66022a16_7680c158",
+        "filename": "redfish/dmtf_tools/Redfish_Service_Validator.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-26T15:59:13Z",
+      "side": 1,
+      "message": "Uri -\u003e URI\nEnd the doc with period",
+      "revId": "3b1dfba500cd72b63f29b12f6e0cca4393f4b655",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "349e18e0_2d1cfc30",
+        "filename": "redfish/dmtf_tools/Redfish_Service_Validator.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-11-26T15:59:13Z",
+      "side": 1,
+      "message": "${URI} --\u003e URI\n \n In the args no mention of the variable format.\n \n please check same file for reference",
+      "revId": "3b1dfba500cd72b63f29b12f6e0cca4393f4b655",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
