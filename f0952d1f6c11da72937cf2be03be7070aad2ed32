@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d55972d_ed88785b",
+        "filename": "redfish/service_root/test_service_root.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-11-26T06:37:41Z",
+      "side": 1,
+      "message": "Couple of question\n\n1. Where is the Major version check here ?\n2. Why the curl command is used ?",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 43
+      },
+      "revId": "f0952d1f6c11da72937cf2be03be7070aad2ed32",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
