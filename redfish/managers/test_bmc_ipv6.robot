@@ -554,6 +554,19 @@ Verify Eth1 DHCPv4 Functionality In The Presence Of DHCPv6
     Verify DHCPv4 Functionality On Eth1
 
 
+Verify Static IPv4 Functionality In Presence Of Static IPv6
+    [Documentation]  Verify static IPv4 functionality in presence of static IPv6.
+    [Tags]  Verify_Static_IPv4_Functionality_In_Presence_Of_Static_IPv6
+    [Setup]  Run Keywords
+    ...  Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}  ${None}  ${1}
+    ...  AND  Configure IPv6 Address On BMC  ${test_ipv6_addr1}  ${test_prefix_length}  ${None}  ${2}
+    [Template]  Verify Static IPv4 Functionality
+
+    # Channel_number
+    ${1}
+    ${2}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -1572,3 +1585,25 @@ Verify DHCPv4 Functionality On Eth1
 
     # Verify static is not present in address origin when DHPCv4 enabled.
     List Should Not Contain Value  ${ipv4_addressorigin_list}  Static
+
+
+Verify Static IPv4 Functionality
+    [Documentation]  Verify static IPv4 functionality.
+    [Arguments]    ${channel_number}=${CHANNEL_NUMBER}
+
+    # Description of argument(s):
+    # channel_number             Channel number 1(eth0) or 2(eth1).
+
+    # Verify presence of Static IPv4 address origin.
+    @{ipv4_addressorigin_list}  ${ipv4_addr_list}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses  ${channel_number}
+    ${ipv4_addressorigin_list}=  Combine Lists  @{ipv4_addressorigin_list}
+    Should Contain  ${ipv4_addressorigin_list}  Static
+
+    # Verify dhcpv4 is not present in address origin when static IPv4 enabled.
+    List Should Not Contain Value  ${ipv4_addressorigin_list}  DHCP
+
+    # Verify Static IPv4 address is pingable.
+    FOR  ${ip}  IN  @{ipv4_addr_list}
+        Wait For Host To Ping  ${ip}  ${NETWORK_TIMEOUT}
+    END
