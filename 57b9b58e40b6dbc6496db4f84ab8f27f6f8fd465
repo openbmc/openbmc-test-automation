@@ -104,6 +104,24 @@
       "parentUuid": "31cbe8d7_a4fa55bb",
       "revId": "57b9b58e40b6dbc6496db4f84ab8f27f6f8fd465",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63c548e6_e1305953",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 1591,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-11-27T09:00:31Z",
+      "side": 1,
+      "message": "Using Combine Lists Keyword to flatten the list",
+      "parentUuid": "76df2027_099e71e1",
+      "revId": "57b9b58e40b6dbc6496db4f84ab8f27f6f8fd465",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
