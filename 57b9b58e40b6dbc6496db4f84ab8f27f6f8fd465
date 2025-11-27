@@ -86,6 +86,24 @@
       "message": "what is the purpose of this line?",
       "revId": "57b9b58e40b6dbc6496db4f84ab8f27f6f8fd465",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76df2027_099e71e1",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 8
+      },
+      "lineNbr": 1591,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-11-27T06:56:14Z",
+      "side": 1,
+      "message": "I think you are using this to flatten the list , i dont think it is necessary.\neven if you need it better method is using robot\u0027s built in keyword Flatten List",
+      "parentUuid": "31cbe8d7_a4fa55bb",
+      "revId": "57b9b58e40b6dbc6496db4f84ab8f27f6f8fd465",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
