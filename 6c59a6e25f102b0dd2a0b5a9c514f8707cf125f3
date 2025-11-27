@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1b276f5c_2a125daf",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-11-27T09:58:55Z",
+      "side": 1,
+      "message": "In GUI it shows DHCP for v4 and v6. In the documentation i have mentioned DHCPv6",
+      "parentUuid": "3017b175_51ef6b40",
+      "revId": "6c59a6e25f102b0dd2a0b5a9c514f8707cf125f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c95496f_b7e30c38",
         "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
         "patchSetId": 4
@@ -31,6 +49,30 @@
       "writtenOn": "2025-11-27T09:31:22Z",
       "side": 1,
       "message": "Remove space.",
+      "range": {
+        "startLine": 1312,
+        "startChar": 0,
+        "endLine": 1312,
+        "endChar": 4
+      },
+      "revId": "6c59a6e25f102b0dd2a0b5a9c514f8707cf125f3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d53c4f42_c6b365f8",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1312,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-11-27T09:58:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c95496f_b7e30c38",
       "range": {
         "startLine": 1312,
         "startChar": 0,
