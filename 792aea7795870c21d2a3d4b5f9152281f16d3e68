@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91d3d7d0_630d54e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1002294
+      },
+      "writtenOn": "2025-11-27T06:52:57Z",
+      "side": 1,
+      "message": "@gunnar@gmills.xyz Updated the full name as suggested.",
+      "parentUuid": "e59d605a_96bd31c6",
+      "revId": "792aea7795870c21d2a3d4b5f9152281f16d3e68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f52bfdfd_0460a26a",
@@ -41,6 +59,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fea7086_442c9813",
+        "filename": "redfish/managers/test_managers_bmc.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1002294
+      },
+      "writtenOn": "2025-11-27T06:52:57Z",
+      "side": 1,
+      "message": "Updated the script as per review comment @sridevra@in.ibm.com",
+      "parentUuid": "f52bfdfd_0460a26a",
+      "range": {
+        "startLine": 190,
+        "startChar": 59,
+        "endLine": 190,
+        "endChar": 62
+      },
+      "revId": "792aea7795870c21d2a3d4b5f9152281f16d3e68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ff08bca_bd629882",
@@ -54,6 +96,30 @@
       "writtenOn": "2025-11-26T16:10:17Z",
       "side": 1,
       "message": "nit: bmc -\u003e BMC",
+      "range": {
+        "startLine": 207,
+        "startChar": 59,
+        "endLine": 207,
+        "endChar": 62
+      },
+      "revId": "792aea7795870c21d2a3d4b5f9152281f16d3e68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53bf69f8_9a4bfc02",
+        "filename": "redfish/managers/test_managers_bmc.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1002294
+      },
+      "writtenOn": "2025-11-27T06:52:57Z",
+      "side": 1,
+      "message": "Updated the script as per review comment",
+      "parentUuid": "1ff08bca_bd629882",
       "range": {
         "startLine": 207,
         "startChar": 59,
