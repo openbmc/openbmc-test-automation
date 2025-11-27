@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bae48e13_0b246901",
+        "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-11-27T05:14:48Z",
+      "side": 1,
+      "message": "This is SERVER_USERNAME and SERVER_IPv6 is the host it is connected to\nWill change it to SERVER_USERNAME for more clarity",
+      "parentUuid": "81eea9c8_28ebf612",
+      "revId": "cf9c89dc65fc5505f82af329febc92f741911801",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1298a944_3f377f32",
         "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
         "patchSetId": 10
@@ -60,6 +78,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc109ec6_4e3f0d05",
+        "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-11-27T05:14:48Z",
+      "side": 1,
+      "message": "ELSE is required as we are not connecting to the server if the connectivity is present.",
+      "parentUuid": "8d559c6f_0dca0d4f",
+      "revId": "cf9c89dc65fc5505f82af329febc92f741911801",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b94cf039_1713a458",
         "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
         "patchSetId": 10
@@ -71,6 +107,24 @@
       "writtenOn": "2025-11-26T06:40:31Z",
       "side": 1,
       "message": "only for one line this keyword is not required, you can club it before calling or after calling.",
+      "revId": "cf9c89dc65fc5505f82af329febc92f741911801",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c952322_d35a9b97",
+        "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-11-27T05:14:48Z",
+      "side": 1,
+      "message": "Keeping the same as this can be used only in the case it needs to wait.",
+      "parentUuid": "b94cf039_1713a458",
       "revId": "cf9c89dc65fc5505f82af329febc92f741911801",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -92,6 +146,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77997211_8cd8fb93",
+        "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-11-27T05:14:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d17818a_9b69016c",
+      "revId": "cf9c89dc65fc5505f82af329febc92f741911801",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aaed552c_4d333a98",
@@ -109,6 +181,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d34e3f6_47d01960",
+        "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-11-27T05:14:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aaed552c_4d333a98",
+      "revId": "cf9c89dc65fc5505f82af329febc92f741911801",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85c3bc03_c7e7a6d5",
@@ -122,6 +212,24 @@
       "writtenOn": "2025-11-26T06:40:31Z",
       "side": 1,
       "message": "Make it something like:\nSSH Via/Over IPv6",
+      "revId": "cf9c89dc65fc5505f82af329febc92f741911801",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0812a610_b11db54e",
+        "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-11-27T05:14:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85c3bc03_c7e7a6d5",
       "revId": "cf9c89dc65fc5505f82af329febc92f741911801",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }

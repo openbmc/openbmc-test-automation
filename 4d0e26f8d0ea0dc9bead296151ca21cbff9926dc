@@ -58,6 +58,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28f20ca5_f1d08d57",
+        "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-11-27T05:14:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "506bd16a_fc39900a",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 2
+      },
+      "revId": "4d0e26f8d0ea0dc9bead296151ca21cbff9926dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d6aef1e_21740679",
@@ -71,6 +95,24 @@
       "writtenOn": "2025-11-26T16:06:21Z",
       "side": 1,
       "message": "Can u make sure in the setup the environment variables are provided for this suite?",
+      "revId": "4d0e26f8d0ea0dc9bead296151ca21cbff9926dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec755e33_90b38d2d",
+        "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-11-27T05:14:48Z",
+      "side": 1,
+      "message": "Defining the variables as empty in the variables section of the code.",
+      "parentUuid": "6d6aef1e_21740679",
       "revId": "4d0e26f8d0ea0dc9bead296151ca21cbff9926dc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -98,6 +140,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4234eff5_f703ee24",
+        "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-11-27T05:14:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51f2a3c3_0cb625e5",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 72,
+        "endChar": 0
+      },
+      "revId": "4d0e26f8d0ea0dc9bead296151ca21cbff9926dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9fcbd9b8_bc5c7846",
@@ -111,6 +177,24 @@
       "writtenOn": "2025-11-26T16:06:21Z",
       "side": 1,
       "message": "Do use Test in keyword title,\n\nUse Verify, Check, Validate. ... etc",
+      "revId": "4d0e26f8d0ea0dc9bead296151ca21cbff9926dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5726df52_f6d1c319",
+        "filename": "redfish/managers/test_bmc_dhcp_ipv6.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-11-27T05:14:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fcbd9b8_bc5c7846",
       "revId": "4d0e26f8d0ea0dc9bead296151ca21cbff9926dc",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
