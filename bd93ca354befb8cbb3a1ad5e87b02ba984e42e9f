@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9ac7f896_666d14f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002249
+      },
+      "writtenOn": "2025-11-27T06:12:59Z",
+      "side": 1,
+      "message": "@gunnar@gmills.xyz Added my full name in \"Signed-off-by\".",
+      "parentUuid": "99ff949d_18056cc2",
+      "range": {
+        "startLine": 17,
+        "startChar": 15,
+        "endLine": 17,
+        "endChar": 24
+      },
+      "revId": "bd93ca354befb8cbb3a1ad5e87b02ba984e42e9f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ce12bfba_c517445c",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
