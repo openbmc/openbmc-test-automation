@@ -563,9 +563,9 @@ Verify DHCPv4 Enable And Disable On Eth1 Via GUI
     Disabled
 
 
-Verify Coexistence Of IPv6 Addresses Via GUI
-    [Documentation]  verify coexistence of IPv6 addresses on both interfaces, DHCPv6 and SLAAC setup must be present.
-    [Tags]  Verify_Coexistence_Of_IPv6_Addresses_Via_GUI
+Verify Coexistence Of IPv6 All Types Via GUI
+    [Documentation]  verify coexistence of IPv6 all types on both interfaces, DHCPv6 and SLAAC setup must be present.
+    [Tags]  Verify_Coexistence_Of_IPv6_All_Types_Via_GUI
     [Setup]  Run Keywords  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}  ${test_prefix_length}  Success
     ...  AND  Set And Verify DHCPv6 States  Enabled  Enabled
     ...  AND  Set SLAAC Property On Eth0 And Eth1
@@ -573,15 +573,9 @@ Verify Coexistence Of IPv6 Addresses Via GUI
     [Template]  Coexistence Of IPv6 Addresses
 
 
-    # Channel_number   ipv6_type1    ipv6_type2     ipv6_type3
-    1                  Static        LinkLocal      SLAAC
-    2                  LinkLocal     SLAAC          Static
-    1                  Static        DHCP           SLAAC
-    2                  SLAAC         DHCP           Static
-    1                  Static        LinkLocal      DHCP
-    2                  LinkLocal     DHCP           Static
-    1                  LinkLocal     SLAAC          DHCP
-    2                  SLAAC         DHCP           LinkLocal
+    # Channel_number   ipv6_type1    ipv6_type2     ipv6_type3    ipv6_type4
+    1                  Static        LinkLocal      SLAAC         DHCP
+    2                  LinkLocal     SLAAC          Static        DHCP
 
 
 *** Keywords ***
