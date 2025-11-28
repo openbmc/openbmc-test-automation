@@ -187,7 +187,7 @@ Redfish BMC Manager GracefulRestart When Host Booted
 
 Verify Managers Collection Unsupported Methods
     [Documentation]  Verify Managers Collection with Unsupported methods.
-    [Tags]  Verify_Manager_Collection_Unsupported_Methods
+    [Tags]  Verify_Managers_Collection_Unsupported_Methods
 
     # Put operation on Managers Collection
     Redfish.Put  /redfish/v1/Managers
