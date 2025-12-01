@@ -75,7 +75,7 @@ Verify Telemetry Service Unsupported Methods
 
 Verify Telemetry Service MetricReports Unsupported Methods
     [Documentation]  Verify Telemetry Service MetricReports with Unsupported methods.
-    [Tags]  Verify_Telemetry_Service_Metric_Reports_Unsupported_Methods
+    [Tags]  Verify_Telemetry_Service_MetricReports_Unsupported_Methods
 
     Verify Supported And Unsupported Methods    uri=/redfish/v1/TelemetryService/MetricReports
 

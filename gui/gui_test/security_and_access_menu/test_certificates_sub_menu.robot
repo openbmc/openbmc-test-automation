@@ -100,7 +100,7 @@ Verify Informational Message Under Add Certificate
 
 Verify Delete Button Should Be Disabled For HTTPS And LDAP Certificates
     [Documentation]  Verify delete buttons should be disabled for HTTPS and LDAP certificates.
-    [Tags]  Verify_Delete_Buttons_Should_Be_Disabled_For_HTTPS_And_LDAP_Certificates
+    [Tags]  Verify_Delete_Button_Should_Be_Disabled_For_HTTPS_And_LDAP_Certificates
     [Setup]  Install CA Certificate
 
     Element Should Be Disabled  ${xpath_delete_ldap_certificate}
@@ -164,7 +164,7 @@ Verify Success Message After Deleting CA Certificate
 
 Verify Cancel Button While Deleting The CA Certificate
     [Documentation]  Verify Cancel button while deleting the CA certificate
-    [Tags]  Verify_Cancel_Button_While_Deleting_CA_Certificate
+    [Tags]  Verify_Cancel_Button_While_Deleting_The_CA_Certificate
     [Setup]  Install CA Certificate
 
      Click Element  ${xpath_delete_ca_certificate}
