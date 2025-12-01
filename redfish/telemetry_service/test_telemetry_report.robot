@@ -67,8 +67,46 @@ Verify Basic Telemetry Report Creation For PCIE
      Create Basic Telemetry Report
      ...  pcie temperature  OnRequest  LogToMetricReportsCollection
 
+Verify Telemetry Service Unsupported Methods
+    [Documentation]  Verify Telemetry Service with Unsupported methods.
+    [Tags]  Verify_Telemetry_Service_Unsupported_Methods
+
+    Verify Supported And Unsupported Methods    uri=/redfish/v1/TelemetryService
+
+Verify Telemetry Service MetricReports Unsupported Methods
+    [Documentation]  Verify Telemetry Service MetricReports with Unsupported methods.
+    [Tags]  Verify_Telemetry_Service_Metric_Reports_Unsupported_Methods
+
+    Verify Supported And Unsupported Methods    uri=/redfish/v1/TelemetryService/MetricReports
+
 
 *** Keywords ***
+
+Verify Supported And Unsupported Methods
+    [Documentation]  Verify Supported And Unsupported Methods for given URI.
+    [Arguments]   ${uri}
+    # Description of argument(s):
+    # uri                 The URI to be tested.
+
+    # GET operation on Telemetry Service
+    Redfish.Get    ${uri}
+    ...    valid_status_codes=[${HTTP_OK}]
+
+    # Put operation on Telemetry Service
+    Redfish.Put  ${uri}
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Post operation on Telemetry Service
+    Redfish.Post  ${uri}
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Delete operation on Telemetry Service
+    Redfish.Delete  ${uri}
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Patch operation on Telemetry Service
+    Redfish.Patch  ${uri}
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
 Suite Setup Execution
     [Documentation]  Do test case setup tasks.
