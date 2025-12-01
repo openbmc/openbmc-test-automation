@@ -29,10 +29,9 @@ Verify AccountService Available
     Should Be Equal As Strings  ${resp}  ${True}
 
 
-Verify Redfish Admin and ReadOnly Users Persistence After Reboot
+Verify Redfish Admin And ReadOnly Users Persistence After Reboot
     [Documentation]  Verify Redfish admin user persistence after reboot.
-    [Tags]  Verify_Redfish_Admin_User_Persistence_After_Reboot
-    ...    Verify_Redfish_Readonly_User_Persistence_After_Reboot
+    [Tags]  Verify_Redfish_Admin_And_ReadOnly_Users_Persistence_After_Reboot
     [Setup]  Run Keywords  Redfish.Login  AND
     ...  Redfish Create User  admin_user  TestPwd123  Administrator  ${True}
     ...  AND  Redfish Create User  readonly_user  TestPwd123  ReadOnly  ${True}
