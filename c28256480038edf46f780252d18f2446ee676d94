@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93dab915_70e6c485",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 16
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-12-01T07:45:09Z",
+      "side": 1,
+      "message": "why this one is needed",
+      "revId": "c28256480038edf46f780252d18f2446ee676d94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c6dbf28_324bb2eb",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 16
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-12-01T07:45:09Z",
+      "side": 1,
+      "message": "remove this not needed.. imported already in the robot file",
+      "revId": "c28256480038edf46f780252d18f2446ee676d94",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
