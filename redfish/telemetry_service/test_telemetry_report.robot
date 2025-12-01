@@ -67,6 +67,54 @@ Verify Basic Telemetry Report Creation For PCIE
      Create Basic Telemetry Report
      ...  pcie temperature  OnRequest  LogToMetricReportsCollection
 
+Verify Telemetry Service Unsupported Methods
+    [Documentation]  Verify Telemetry Service with Unsupported methods.
+    [Tags]  Verify_Telemetry_Service_Unsupported_Methods
+
+    # GET operation on Telemetry Service
+    Redfish.Get    /redfish/v1/TelemetryService
+    ...    valid_status_codes=[${HTTP_OK}]
+
+    # Put operation on Telemetry Service
+    Redfish.Put  /redfish/v1/TelemetryService
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Post operation on Telemetry Service
+    Redfish.Post  /redfish/v1/TelemetryService
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Delete operation on Telemetry Service
+    Redfish.Delete  /redfish/v1/TelemetryService
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Patch operation on Telemetry Service
+    Redfish.Patch  /redfish/v1/TelemetryService
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+Verify Telemetry Service MetricReports Unsupported Methods
+    [Documentation]  Verify Telemetry Service MetricReports with Unsupported methods.
+    [Tags]  Verify_Telemetry_Service_Metric_Reports_Unsupported_Methods
+
+    # GET operation on Telemetry Service MetricReports
+    Redfish.Get    /redfish/v1/TelemetryService/MetricReports
+    ...    valid_status_codes=[${HTTP_OK}]
+
+    # Put operation on Telemetry Service MetricReports
+    Redfish.Put  /redfish/v1/TelemetryService/MetricReports
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Post operation on Telemetry Service MetricReports
+    Redfish.Post  /redfish/v1/TelemetryService/MetricReports
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Delete operation on Telemetry Service MetricReports
+    Redfish.Delete  /redfish/v1/TelemetryService/MetricReports
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Patch operation on Telemetry Service MetricReports
+    Redfish.Patch  /redfish/v1/TelemetryService/MetricReports
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
 
 *** Keywords ***
 
