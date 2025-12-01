@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b295398a_f8b4a232",
+        "filename": "redfish/telemetry_service/test_telemetry_report.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-12-01T06:03:08Z",
+      "side": 1,
+      "message": "As the both test case are performing the same test operation.\nI suggest to create a keyword that accepts the URI as input argument",
+      "revId": "da58f8a85331230606deda1a76b1b0d4b095698f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
