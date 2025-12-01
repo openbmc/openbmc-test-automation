@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01439dde_afa87554",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-12-01T10:08:45Z",
+      "side": 1,
+      "message": "Add changes and tested section as well.",
+      "revId": "277fb3e68210beaa5f125308d806e3fb37c2be67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b57dc34_1c1be459",
+        "filename": "gui/gui_test/security_and_access_menu/test_certificates_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-12-01T10:08:45Z",
+      "side": 1,
+      "message": "HTTPS sane with doc n tags",
+      "range": {
+        "startLine": 101,
+        "startChar": 44,
+        "endLine": 101,
+        "endChar": 49
+      },
+      "revId": "277fb3e68210beaa5f125308d806e3fb37c2be67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7751d320_829310b8",
+        "filename": "gui/gui_test/security_and_access_menu/test_certificates_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-12-01T10:08:45Z",
+      "side": 1,
+      "message": "move to Teardown",
+      "revId": "277fb3e68210beaa5f125308d806e3fb37c2be67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0901a3e6_5d14f563",
+        "filename": "gui/gui_test/security_and_access_menu/test_certificates_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-12-01T10:08:45Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 168,
+        "startChar": 36,
+        "endLine": 168,
+        "endChar": 39
+      },
+      "revId": "277fb3e68210beaa5f125308d806e3fb37c2be67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c2d8d53_85914e52",
+        "filename": "gui/gui_test/security_and_access_menu/test_certificates_sub_menu.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-12-01T10:08:45Z",
+      "side": 1,
+      "message": "end with period.",
+      "revId": "277fb3e68210beaa5f125308d806e3fb37c2be67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3224bb6_bdd91de1",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-12-01T10:08:45Z",
+      "side": 1,
+      "message": "end with period.",
+      "revId": "277fb3e68210beaa5f125308d806e3fb37c2be67",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
