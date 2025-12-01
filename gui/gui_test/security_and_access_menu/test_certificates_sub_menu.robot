@@ -6,7 +6,7 @@ Resource        ../../lib/gui_resource.robot
 Resource        ../../../lib/certificate_utils.robot
 
 Suite Setup     Suite Setup Execution
-Suite Teardown  Close Browser
+Suite Teardown  Close All Browsers
 Test Setup      Test Setup Execution
 
 Test Tags      Certificates_Sub_Menu
@@ -18,6 +18,7 @@ ${xpath_add_certificate_button}    //button[contains(text(),"Add new certificate
 ${xpath_generate_csr_button}       //*[@data-test-id='certificates-button-generateCsr']
 ${xpath_generate_csr_heading}      //h5[contains(text(), "Generate a Certificate Signing Request")]
 ${xpath_select_certificate_type}   //*[@data-test-id='modalGenerateCsr-select-certificateType']
+${xpath_key_pair_algoritham}       //*[@data-test-id='modalGenerateCsr-select-keyPairAlgorithm']
 ${xpath_select_country}            //*[@data-test-id='modalGenerateCsr-select-country']
 ${xpath_input_state}               //*[@data-test-id='modalGenerateCsr-input-state']
 ${xpath_input_city}                //*[@data-test-id='modalGenerateCsr-input-city']
@@ -29,6 +30,12 @@ ${xpath_input_email_address}       //*[@data-test-id='modalGenerateCsr-input-ema
 ${xpath_generate_csr_submit}       //*[@data-test-id='modalGenerateCsr-button-ok']
 ${xpath_csr_cancel_button}         //button[contains(text(),"Cancel")]
 ${xpath_select_algorithm_button}   //*[@data-test-id='modalGenerateCsr-select-keyPairAlgorithm']
+${xpath_delete_ca_certificate}     (//*[@title="Delete certificate"])[2]
+${xpath_delete_ldap_certificate}   (//*[@title="Delete certificate"])[3]
+${xpath_delete_https_certificate}  (//*[@title="Delete certificate"])[4]
+${xpath_delete_button}             //button[contains(text(),"Delete")]
+${xpath_cancel_button}             //button[contains(text(),"Cancel")]
+
 
 *** Test Cases ***
 
@@ -55,6 +62,8 @@ Verify Existence Of Add Certificate Button
     [Tags]  Verify_Existence_Of_Add_Certificate_Button
 
     Page Should Contain Element  ${xpath_add_certificate_button}
+    Page Should Contain Element  ${xpath_generate_csr_button}
+
 
 Verify Generate CSR Certificate Button
     [Documentation]  Verify existence of all the fields of CSR generation.
@@ -64,6 +73,7 @@ Verify Generate CSR Certificate Button
     Page Should Contain Element  ${xpath_generate_csr_button}
     Click Element  ${xpath_generate_csr_button}
     Wait Until Page Contains Element  ${xpath_generate_csr_heading}
+    
     Page Should Contain Element  ${xpath_select_certificate_type}
     Page Should Contain Element  ${xpath_select_country}
     Page Should Contain Element  ${xpath_input_state}
@@ -74,6 +84,27 @@ Verify Generate CSR Certificate Button
     Page Should Contain Element  ${xpath_input_email_address}
     Page Should Contain Element  ${xpath_select_algorithm_button}
     Page Should Contain Element  ${xpath_generate_csr_submit}
+    Page Should Contain Element  ${xpath_key_pair_algoritham}
+
+
+Verify Informational Message Under Add Certificate
+    [Documentation]  Verify informational message under add certificate tab.
+    [Tags]  Verify_Informational_Message_Under_Add_Certificate
+
+    Click Element  ${xpath_add_certificate_button}
+    Wait Until Page Contains Element  ${xpath_cancel_button}
+    Page Should Contain  BMC shell and Resource dump ACF certificates will not be listed in the table.
+    ...                  System has to be powered on to upload Resource dump ACF certificate.
+    Click Element  ${xpath_cancel_button}
+
+
+Verify Delete Button Should Be Disabled For Https And LDAP Certificates
+    [Documentation]  Verify delete buttons should be disabled for Https and LDAP certificates.
+    [Tags]  Verify_Delete_Buttons_Should_Be_Disabled_For_Https_And_LDAP_Certificates
+    [Setup]  Install CA Certificate
+
+    Element Should Be Disabled  ${xpath_delete_ldap_certificate}
+    Element Should Be Disabled  ${xpath_delete_https_certificate}
 
 
 Verify Installed CA Certificate
@@ -121,6 +152,41 @@ Verify Installed LDAP Certificate
     Wait Until Page Contains  LDAP Certificate  timeout=10
 
 
+Verify Success Message After Deleting CA Certificate
+    [Documentation]  Delete CA certificate and verify success message on BMC GUI page.
+    [Tags]  Verify_Success_Message_After_Deleting_CA_Certificate
+
+    Install CA Certificate
+
+    Click Element  ${xpath_delete_ca_certificate}
+    Click Element  ${xpath_delete_button}
+    Verify Success Message On BMC GUI Page
+
+    Install CA Certificate
+
+
+Verify Cancel Button While Deleting The CA Certificate
+    [Documentation]  Verify Cancel button while deleting the CA certificate
+    [Tags]  Verify_Cancel_Button_While_Deleting_CA_Certificate
+
+     Install CA Certificate
+
+     Click Element  ${xpath_delete_ca_certificate}
+     Click Element  ${xpath_cancel_button}
+     Page Should Not Contain Element  Click Element  ${xpath_cancel_button}
+
+
+Verify Certificate Page With Readonly User
+    [Documentation]  Verify Certificate page with readonly user.
+    [Tags]  Verify_Certificate_Page_With_Readonly_User
+    [Setup]  Run Keywords  Logout GUI  AND  Create Readonly User And Login To GUI
+    ...      AND  Navigate To Required Sub Menu  ${xpath_secuity_and_accesss_menu}
+    ...      ${xpath_certificates_sub_menu}  certificates
+    [Teardown]  Delete Readonly User And Logout Current GUI Session
+
+    Page Should Contain  No items available
+
+
 *** Keywords ***
 
 Generate Certificate File Data
@@ -157,3 +223,19 @@ Suite Setup Execution
 
     Launch Browser And Login GUI
     Create Directory  certificate_dir
+
+
+Install CA Certificate
+    [Documentation]  Install CA certificate via redfish
+
+    Redfish.Login
+    Delete All CA Certificate Via Redfish
+    
+    # Install CA certificate via Redfish.
+    ${file_data}=  Generate Certificate File Data  CA
+    Install And Verify Certificate Via Redfish  CA  Valid Certificate  ok
+
+    # Refresh GUI and verify CA certificate availability in GUI.
+    Refresh GUI
+    Wait Until Page Contains  CA Certificate  timeout=10
+
