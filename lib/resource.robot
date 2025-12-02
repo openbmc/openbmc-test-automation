@@ -185,21 +185,3 @@ ${CLIENT_PASSWORD}         ${EMPTY}
 
 # Task Service related variables.
 ${TASK_JSON_FILE_PATH}   data/task_state.json
-
-
-*** Keywords ***
-
-Get Inventory Schema
-    [Documentation]  Get inventory schema.
-    [Arguments]    ${machine}
-    RETURN    &{INVENTORY}[${machine}]
-
-Get Inventory Items Schema
-    [Documentation]  Get inventory items schema.
-    [Arguments]    ${machine}
-    RETURN    &{INVENTORY_ITEMS}[${machine}]
-
-Get Sensor Schema
-    [Documentation]  Get sensors schema.
-    [Arguments]    ${machine}
-    RETURN    &{SENSORS}[${machine}]
