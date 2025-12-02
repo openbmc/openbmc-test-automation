@@ -79,6 +79,22 @@ Verify Telemetry Service MetricReports Unsupported Methods
 
     Verify Supported And Unsupported Methods    uri=/redfish/v1/TelemetryService/MetricReports
 
+Verify Telemetry Service Defaults
+    [Documentation]  Verify Telemetry Service Defaults.
+    [Tags]  Verify_Telemetry_Service_Defaults
+
+    # Get Telemetry Service Default properties
+    ${telemetryservice}=    Redfish.Get Properties    /redfish/v1/TelemetryService
+    ...    valid_status_codes=[${HTTP_OK}]
+
+    # Validate Telemetry Service properties
+    Valid Value  telemetryservice['@odata.id']  ['/redfish/v1/TelemetryService']
+    Valid Value  telemetryservice['Name']  ['Telemetry Service']
+    Valid Value  telemetryservice['MetricReportDefinitions']['@odata.id']  ['/redfish/v1/TelemetryService/MetricReportDefinitions']
+    Valid Value  telemetryservice['MetricReports']['@odata.id']  ['/redfish/v1/TelemetryService/MetricReports']
+    Valid Value  telemetryservice['Status']['State']  ['Enabled']
+    Valid Value  telemetryservice['Triggers']['@odata.id']  ['/redfish/v1/TelemetryService/Triggers']
+
 
 *** Keywords ***
 
