@@ -581,7 +581,7 @@ Verify Coexistence Of IPv6 All Types Via GUI
 
 Verify Independent SLAAC Configuration On Separate DHCPv6 Enabled Interfaces
     [Documentation]  Verify when both interfaces are connected to DHCPv6, enabling/disabling
-    ...    SLAAC on one interface will not impact exsiting settings.
+    ...    SLAAC on one interface will not impact existing settings.
     [Tags]  Verify_Independent_SLAAC_Configuration_On_Separate_DHCPv6_Enabled_Interfaces
     [Setup]  Set And Verify DHCPv6 States  Enabled  Disabled
     [Template]  Enable Or Disable SLAAC And Verify Impact On Existing Settings
