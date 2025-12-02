@@ -565,7 +565,8 @@ Verify DHCPv4 Enable And Disable On Eth1 Via GUI
 
 
 Verify Coexistence Of IPv6 All Types Via GUI
-    [Documentation]  verify coexistence of IPv6 all types on both interfaces, DHCPv6 and SLAAC setup must be present.
+    [Documentation]  Verify coexistence of IPv6 all types on both interfaces
+    ...  Note: DHCPv6 and SLAAC setup must be present.
     [Tags]  Verify_Coexistence_Of_IPv6_All_Types_Via_GUI
     [Setup]  Run Keywords  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}  ${test_prefix_length}  Success
     ...  AND  Set And Verify DHCPv6 States  Enabled  Enabled
@@ -575,8 +576,8 @@ Verify Coexistence Of IPv6 All Types Via GUI
 
 
     # Channel_number   ipv6_type1    ipv6_type2     ipv6_type3    ipv6_type4
-    1                  Static        LinkLocal      SLAAC         DHCP
-    2                  LinkLocal     SLAAC          Static        DHCP
+    1                  Static        LinkLocal      SLAAC         DHCPv6
+    2                  LinkLocal     SLAAC          Static        DHCPv6
 
 
 Verify Independent SLAAC Configuration On Separate DHCPv6 Enabled Interfaces
@@ -591,6 +592,54 @@ Verify Independent SLAAC Configuration On Separate DHCPv6 Enabled Interfaces
     ipv4           1               Enabled
     ipv4           2               Disabled
     ipv4           2               Enabled
+
+
+Verify Coexistence Of LinkLocal DHCPv6 Staticv6 And SLAACv6 On Both Interfaces
+    [Documentation]  Verify coexistence of LinkLocal,DHCPv6,Staticv6 and SLAACv6 on both interfaces
+    ...  Note: DHCPv6 and SLAAC setup must be present.
+    [Tags]  Verify_Coexistence_Of_LinkLocal_DHCPv6_Staticv6_And_SLAACv6_On_Both_Interfaces
+    [Setup]  Run Keywords  Set And Verify DHCPv6 States  Enabled  Enabled
+    ...  AND  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}  ${test_prefix_length}  Success
+    ...  AND  Set SLAAC Property On Eth0 And Eth1
+    ...  AND  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}  ${test_prefix_length}  Success  None  2
+    [Template]  Coexistence Of IPv6 Addresses
+    [Teardown]  Run Keywords  Click Element  ${xpath_refresh_button}
+    ...  AND  Delete IP Address And Verify  ipv6  ${test_ipv6_addr_2}
+
+
+    # Channel_number   ipv6_type1  ipv6_type2   ipv6_type3   ipv6_type4
+    1                  LinkLocal   DHCPv6       Static       SLAAC
+    2                  LinkLocal   DHCPv6       Static       SLAAC
+
+
+Verify Coexistence Of LinkLocal DHCPv6 And SLAACv6 On Both Interfaces
+    [Documentation]  Verify coexistence of LinkLocal,DHCPv6 and SLAACv6 on both interfaces
+    ...  Note: DHCPv6 and SLAAC setup must be present.
+    [Tags]  Verify_Coexistence_Of_LinkLocal_DHCPv6_And_SLAACv6_On_Both_Interfaces
+    [Setup]  Run Keywords  Set And Verify DHCPv6 States  Enabled  Enabled  AND  Set SLAAC Property On Eth0 And Eth1
+    [Template]  Coexistence Of IPv6 Addresses
+
+
+    # Channel_number   ipv6_type1   ipv6_type2   ipv6_type3
+    1                  LinkLocal    DHCPv6         SLAAC
+    2                  LinkLocal    DHCPv6         SLAAC
+
+
+Verify Coexistence Of DHCPv6 Staticv6 And LinkLocal On Both Interfaces
+    [Documentation]  Verify coexistence of DHCPv6, Staticv6 and LinkLocalv6 on both interfaces
+    ...  Note: DHCPv6 setup must be present.
+    [Tags]  Verify_Coexistence_Of_DHCPv6_Staticv6_And_LinkLocal_On_Both_Interfaces
+    [Setup]  Run Keywords  Set And Verify DHCPv6 States  Enabled  Enabled
+    ...  AND  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}  ${test_prefix_length}  Success
+    ...  AND  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}  ${test_prefix_length}  Success  None  2
+    [Template]  Coexistence Of IPv6 Addresses
+    [Teardown]  Run Keywords  Click Element  ${xpath_refresh_button}
+    ...  AND  Delete IP Address And Verify  ipv6  ${test_ipv6_addr_2}
+
+
+    # Channel_number   ipv6_type1   ipv6_type2   ipv6_type3
+    1                  DHCPv6         Static       LinkLocal
+    2                  DHCPv6         Static       LinkLocal
 
 
 Configure DHCPv6 On Eth0 And Verify Existing Network Configurations On BMC Reboot
@@ -717,6 +766,7 @@ Add Static IPv6 Address And Verify Via GUI
 
     Wait Until Element Is Enabled  ${xpath_add_static_ipv6_addr_btn_eth0}  timeout=60sec
     IF  '${CHANNEL_NUMBER}' == '1'
+      Click Element  ${xpath_eth0_interface}
       Click Element  ${xpath_add_static_ipv6_addr_btn_eth0}
     ELSE
       Click Element  ${xpath_eth1_interface}
@@ -989,6 +1039,7 @@ Set IPv6 AutoConfig State
 
     IF  '${channel_number}' == '1'
       ${xpath_autoconfig_button}=  Set Variable  ${xpath_eth0_autoconfig_button}
+      Click Element  ${xpath_eth0_interface}
       Set Suite Variable  ${CHANNEL_NUMBER}  1
     ELSE IF  '${channel_number}' == '2'
       ${xpath_autoconfig_button}=  Set Variable  ${xpath_eth1_autoconfig_button}
@@ -1073,6 +1124,8 @@ Toggle DHCPv4 State And Verify
 
     IF  '${channel_number}' == '1'
       ${xpath_dhcpv4_button}=  Set Variable  ${xpath_eth0_dhcpv4_button}
+      Click Element  ${xpath_eth0_interface}
+      Set Suite Variable  ${CHANNEL_NUMBER}  1
     ELSE IF  '${channel_number}' == '2'
       ${xpath_dhcpv4_button}=  Set Variable  ${xpath_eth1_dhcpv4_button}
       Click Element  ${xpath_eth1_interface}
@@ -1139,6 +1192,8 @@ Toggle DHCPv6 State And Verify
 
     IF  '${channel_number}' == '1'
       ${xpath_dhcpv6_button}=  Set Variable  ${xpath_eth0_dhcpv6_button}
+      Click Element  ${xpath_eth0_interface}
+      Set Suite Variable  ${CHANNEL_NUMBER}  1
     ELSE IF  '${channel_number}' == '2'
       ${xpath_dhcpv6_button}=  Set Variable  ${xpath_eth1_dhcpv6_button}
       Click Element  ${xpath_eth1_interface}
