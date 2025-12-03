@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2ffbde7_fb6684aa",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-03T15:47:10Z",
+      "side": 1,
+      "message": "Include teardown to\nDelete the added Static IPv6 address and set back the original values of SLAAC",
+      "range": {
+        "startLine": 601,
+        "startChar": 4,
+        "endLine": 604,
+        "endChar": 116
+      },
+      "revId": "8dcd25728e513703a691c03f490ccd97b234babb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af87d394_cd20e530",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-03T15:47:10Z",
+      "side": 1,
+      "message": "Include teardown here as well to set the original values.",
+      "range": {
+        "startLine": 617,
+        "startChar": 4,
+        "endLine": 617,
+        "endChar": 115
+      },
+      "revId": "8dcd25728e513703a691c03f490ccd97b234babb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fca21521_2b1a360e",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-03T15:47:10Z",
+      "side": 1,
+      "message": "Include teardown here as well to delete the static IPv6 addresses and set back the original values.",
+      "range": {
+        "startLine": 630,
+        "startChar": 4,
+        "endLine": 632,
+        "endChar": 116
+      },
+      "revId": "8dcd25728e513703a691c03f490ccd97b234babb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
