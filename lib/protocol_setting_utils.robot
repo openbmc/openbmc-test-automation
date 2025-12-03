@@ -115,6 +115,23 @@ Enable IPMI Protocol
     Sleep  ${NETWORK_TIMEOUT}s
 
 
+Enable NTP Protocol
+    [Documentation]  Enable or disable NTP protocol.
+    [Arguments]  ${enable_value}=${True}
+
+    # Description of argument(s}:
+    # enable_value  Enable or disable NTP, e.g. (true, false).
+
+    ${ntp_state}=  Create Dictionary  ProtocolEnabled=${enable_value}
+    ${data}=  Create Dictionary  NTP=${ntp_state}
+
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
+    ...  valid_status_codes=[${HTTP_NO_CONTENT}]
+
+    # Wait for timeout for new values to take effect.
+    Sleep  ${NETWORK_TIMEOUT}s
+
+
 Verify IPMI Works
     [Documentation]  Run IPMI command and return status.
     [Arguments]  ${sub_cmd}  ${host}=${OPENBMC_HOST}
@@ -137,4 +154,16 @@ Verify IPMI Protocol State
 
     ${resp}=  Redfish.Get  ${REDFISH_NW_PROTOCOL_URI}
     Should Be Equal As Strings  ${resp.dict['IPMI']['ProtocolEnabled']}  ${state}
+    ...  msg=Protocol states are not matching.
+
+
+Verify NTP Protocol State
+    [Documentation]  verify NTP protocol state.
+    [Arguments]  ${state}=${True}
+
+    # Description of argument(s}:
+    # state  Enable or disable NTP, e.g. (true, false)
+
+    ${resp}=  Redfish.Get  ${REDFISH_NW_PROTOCOL_URI}
+    Should Be Equal As Strings  ${resp.dict['NTP']['ProtocolEnabled']}  ${state}
     ...  msg=Protocol states are not matching.
