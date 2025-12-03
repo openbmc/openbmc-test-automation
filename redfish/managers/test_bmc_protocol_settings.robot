@@ -164,6 +164,27 @@ Disable IPMI Protocol And Verify
     ...  msg=IPMI commands are working after disabling IPMI.
 
 
+Enable NTP Protocol And Verify
+    [Documentation]  Enable NTP protocol and verify.
+    [Tags]  Enable_NTP_Protocol_And_Verify
+
+    Enable NTP Protocol  ${True}
+
+    # Check if NTP is really enabled via Redfish.
+    Verify NTP Protocol State  ${True}
+
+
+Disable NTP Protocol And Verify
+    [Documentation]  Disable NTP protocol and verify.
+    [Tags]  Disable_NTP_Protocol_And_Verify
+
+    # Disable NTP interface.
+    Enable NTP Protocol  ${False}
+
+    # Check if NTP is really disabled via Redfish.
+    Verify NTP Protocol State  ${False}
+
+
 Enable IPMI Protocol And Check Persistency On BMC Reboot
     [Documentation]  Set the IPMI protocol attribute to True, reset BMC, and verify
     ...              that the setting persists.
@@ -204,7 +225,7 @@ Disable IPMI Protocol And Check Persistency On BMC Reboot
 Configure SSH And IPMI Settings And Verify
     [Documentation]  Set the SSH and IPMI protocol attribute to True/False, and verify.
     [Tags]  Configure_SSH_And_IPMI_Settings_And_Verify
-    [Template]  Set SSH And IPMI Protocol
+    [Template]  Set SSH IPMI And NTP Protocol
     [Teardown]  Run Keywords  FFDC On Test Case Fail
     ...  AND  Enable SSH Protocol  ${True}
 
@@ -219,7 +240,7 @@ Configure SSH And IPMI Settings And Verify Persistency On BMC Reboot
     [Documentation]  Set the SSH and IPMI protocol attribute to True/False, and verify
     ...  it's persistency after BMC reboot.
     [Tags]  Configure_SSH_And_IPMI_Settings_And_Verify_Persistency_On_BMC_Reboot
-    [Template]  Set SSH And IPMI Protocol
+    [Template]  Set SSH IPMI And NTP Protocol
     [Teardown]  Run Keywords  FFDC On Test Case Fail
     ...  AND  Enable SSH Protocol  ${True}
 
@@ -228,6 +249,21 @@ Configure SSH And IPMI Settings And Verify Persistency On BMC Reboot
     ${True}      ${True}     ${True}
     ${False}     ${True}     ${True}
     ${False}     ${False}    ${True}
+
+
+Configure NTP SSH And IPMI Settings And Verify
+    [Documentation]  Set NTP, SSH and IPMI protocol attribute to True/False, and verify.
+    [Tags]  Configure_NTP_And_SSH_And_IPMI_Settings_And_Verify
+    [Template]  Set SSH IPMI And NTP Protocol
+    [Teardown]  Run Keywords  FFDC On Test Case Fail
+    ...  AND  Enable SSH Protocol  ${True}
+
+    #ssh_state   ipmi_state   persistency_check   ntp_state
+    ${True}      ${False}     ${False}            ${False}
+    ${False}     ${True}      ${False}            ${False}
+    ${False}     ${True}      ${False}            ${True}
+    ${False}     ${False}     ${False}            ${False}
+    ${True}      ${True}      ${False}            ${True}
 
 
 *** Keywords ***
@@ -242,18 +278,25 @@ Suite Setup Execution
     Sleep  ${NETWORK_TIMEOUT}s
 
 
-Set SSH And IPMI Protocol
-    [Documentation]  Set SSH and IPMI protocol state.
-    [Arguments]  ${ssh_state}  ${ipmi_state}  ${persistency_check}=${False}
+Set SSH IPMI And NTP Protocol
+    [Documentation]  Set SSH, IPMI and NTP protocol state.
+    [Arguments]  ${ssh_state}  ${ipmi_state}  ${persistency_check}=${False}  ${ntp_state}=''
 
     # Description of argument(s):
     # ssh_state          State of SSH to be set (e.g. True, False).
     # ipmi_state         State of IPMI to be set (e.g. True, False).
+    # ntp_state          State of NTP to be set (e.g. True, False).
     # persistency_check  Persistency check (e.g. True, False).
 
     ${ssh_protocol_state}=  Create Dictionary  ProtocolEnabled=${ssh_state}
     ${ipmi_protocol_state}=  Create Dictionary  ProtocolEnabled=${ipmi_state}
-    ${data}=  Create Dictionary  SSH=${ssh_protocol_state}  IPMI=${ipmi_protocol_state}
+
+    IF  ${ntp_state} != ''
+        ${ntp_protocol_state}=  Create Dictionary  ProtocolEnabled=${ntp_state}
+        ${data}=  Create Dictionary  SSH=${ssh_protocol_state}  IPMI=${ipmi_protocol_state}  NTP=${ntp_protocol_state}
+    ELSE
+        ${data}=  Create Dictionary  SSH=${ssh_protocol_state}  IPMI=${ipmi_protocol_state}
+    END
 
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
     ...  valid_status_codes=[${HTTP_NO_CONTENT}]
@@ -264,16 +307,18 @@ Set SSH And IPMI Protocol
     IF  ${persistency_check} == ${True}
         Redfish OBMC Reboot (off)  stack_mode=skip
     END
-    Verify Protocol State  ${ssh_state}  ${ipmi_state}
+
+    Verify Protocol State  ${ssh_state}  ${ipmi_state}  ${ntp_state}
 
 
 Verify Protocol State
-    [Documentation]  Verify SSH and IPMI protocol state.
-    [Arguments]  ${ssh_state}  ${ipmi_state}
+    [Documentation]  Verify SSH, IPMI and NTP protocol state.
+    [Arguments]  ${ssh_state}  ${ipmi_state}  ${ntp_state}=''
 
     # Description of argument(s):
     # ssh_state     State of SSH to be verified (e.g. True, False).
     # ipmi_state    State of IPMI to be verified (e.g. True, False).
+    # ntp_state     State of NTP to be verified (e.g. True, False).
 
     # Verify SSH state value.
     ${status}=  Run Keyword And Return Status
@@ -284,6 +329,12 @@ Verify Protocol State
     # Verify IPMI state value.
     ${status}=  Run Keyword And Return Status
     ...  Verify IPMI Works  lan print
-
     Should Be Equal As Strings  ${status}  ${ipmi_state}
     ...  msg=IPMI states are not matching.
+
+    # Verify NTP state value via Redfish.
+    IF  ${ntp_state} != ''
+        ${resp}=  Redfish.Get  ${REDFISH_NW_PROTOCOL_URI}
+        Should Be Equal As Strings  ${resp.dict['NTP']['ProtocolEnabled']}  ${ntp_state}
+        ...  msg=NTP protocol states are not matching.
+    END
