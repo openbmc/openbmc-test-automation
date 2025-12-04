@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f90562cf_e605ee85",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-12-04T07:45:01Z",
+      "side": 1,
+      "message": "Test Teardown Execution\n\nput those under this keywords as before",
+      "revId": "6b43af6f0deb4fbede3013cfcc5f8a11e9340052",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2924d34a_c13ca6d6",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-12-04T07:45:01Z",
+      "side": 1,
+      "message": "Set SSH Protocol Using IPv6 Session And Verify",
+      "revId": "6b43af6f0deb4fbede3013cfcc5f8a11e9340052",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4984fbaa_82477082",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-12-04T07:45:01Z",
+      "side": 1,
+      "message": "Connect BMC Using IPv6 Address",
+      "revId": "6b43af6f0deb4fbede3013cfcc5f8a11e9340052",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
