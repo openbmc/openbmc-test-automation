@@ -151,3 +151,21 @@ Get Address Origin List And IPv4 or IPv6 Address
         Append To List  ${ip_addr_list}  ${ip_address['Address']}
     END
     RETURN  ${ip_addressorigin_list}  ${ip_addr_list}
+
+
+Get IPv6 Address And Verify Connectivity
+    [Documentation]  Get IPv6 address and verify connectivity.
+    [Arguments]  ${ipv6_adress_type}  ${channel_number}
+
+    # Description of argument(s):
+    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+    # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_adress_type}  ${channel_number}
+    IF  '${SERVER_USERNAME}' != '${EMPTY}'
+        Check IPv6 Connectivity  ${ipv6_addr}
+    ELSE
+        Wait For IPv6 Host To Ping  ${ipv6_addr}
+    END
+    Verify SSH Connection Via IPv6  ${ipv6_addr}
