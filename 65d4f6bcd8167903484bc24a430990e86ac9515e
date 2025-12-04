@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c6aaacf_83788b48",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-04T08:40:46Z",
+      "side": 1,
+      "message": "Delete both the IPs",
+      "range": {
+        "startLine": 607,
+        "startChar": 4,
+        "endLine": 607,
+        "endChar": 69
+      },
+      "revId": "65d4f6bcd8167903484bc24a430990e86ac9515e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb34c7bd_f133fc32",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-04T08:40:46Z",
+      "side": 1,
+      "message": "Please donot add the same IP on both the interfaces.",
+      "range": {
+        "startLine": 634,
+        "startChar": 14,
+        "endLine": 634,
+        "endChar": 118
+      },
+      "revId": "65d4f6bcd8167903484bc24a430990e86ac9515e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6970061_dacdcf25",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-04T08:40:46Z",
+      "side": 1,
+      "message": "Only eth0 is deleted\nPlease delete the IP on the other interface as well.",
+      "range": {
+        "startLine": 637,
+        "startChar": 14,
+        "endLine": 637,
+        "endChar": 42
+      },
+      "revId": "65d4f6bcd8167903484bc24a430990e86ac9515e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
