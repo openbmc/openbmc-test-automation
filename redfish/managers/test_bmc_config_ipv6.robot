@@ -29,18 +29,17 @@ ${SERVER_IPv6}          ${EMPTY}
 
 *** Test Cases ***
 
-Get SLAAC Address And Verify Connectivity
-    [Documentation]  Fetch the SLAAC address and verify ping and SSH connection.
-    [Tags]  Get_SLAAC_Address_And_Verify_Connectivity
+Get SLAAC And Static IPv6 Address And Verify Connectivity
+    [Documentation]  Fetch the SLAAC and Static IPv6 address
+    ...    and verify ping and SSH connection.
+    [Tags]  Get_SLAAC_And_Static_IPv6_Address_And_Verify_Connectivity
+    [Template]  Get IPv6 Address And Verify Connectivity
 
-    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr}=
-    ...  Get Address Origin List And Address For Type  SLAAC
-    IF  '${SERVER_USERNAME}' != '${EMPTY}'
-        Check IPv6 Connectivity  ${ipv6_slaac_addr}
-    ELSE
-        Wait For IPv6 Host To Ping  ${ipv6_slaac_addr}
-    END
-    Verify SSH Connection Via IPv6  ${ipv6_slaac_addr}
+    # Address_type  channel_number
+    SLAAC           ${1}
+    Static          ${1}
+    SLAAC           ${2}
+    Static          ${2}
 
 
 *** Keywords ***
@@ -112,3 +111,20 @@ Verify SSH Connection Via IPv6
         SSHLibrary.Login  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  jumphost_index_or_alias=IPv6Conn
     END
 
+
+Get IPv6 Address And Verify Connectivity
+    [Documentation]  Get IPv6 address and verify connectivity.
+    [Arguments]  ${ipv6_adress_type}  ${channel_number}
+
+    # Description of argument(s):
+    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+    # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_adress_type}  ${channel_number}
+    IF  '${SERVER_USERNAME}' != '${EMPTY}'
+        Check IPv6 Connectivity  ${ipv6_addr}
+    ELSE
+        Wait For IPv6 Host To Ping  ${ipv6_addr}
+    END
+    Verify SSH Connection Via IPv6  ${ipv6_addr}
