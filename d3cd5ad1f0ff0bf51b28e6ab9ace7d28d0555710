@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "253b50ff_df8b1130",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-12-04T07:46:40Z",
+      "side": 1,
+      "message": "Sridevi/ Manash,  \n\nplease take a look.. Thanks",
+      "revId": "d3cd5ad1f0ff0bf51b28e6ab9ace7d28d0555710",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
