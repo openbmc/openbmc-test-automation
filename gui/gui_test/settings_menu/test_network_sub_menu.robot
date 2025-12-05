@@ -902,10 +902,11 @@ Modify IP Address And Verify
     Sleep  ${NETWORK_TIMEOUT}s
 
     # Verify IP on BMC.
-    ${edit_status}=  Set Variable If  '${ip_version}' == 'ipv4'
-    ...  Run Keyword And Return Status  Verify IP On BMC  ${new_ip}
-    ...  ELSE
-    ...  Run Keyword And Return Status  Verify IPv6 On BMC  ${new_ip}
+    IF  '${ip_version}' == 'ipv4'
+      ${edit_status}=  Run Keyword And Return Status  Verify IP On BMC  ${new_ip}
+    ELSE
+      ${edit_status}=  Run Keyword And Return Status  Verify IPv6 On BMC  ${new_ip}
+    END
 
     Should Be Equal  ${edit_status}  ${True}
     Wait Until Page Contains  ${new_ip}
