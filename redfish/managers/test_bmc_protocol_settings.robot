@@ -253,7 +253,7 @@ Configure SSH And IPMI Settings And Verify Persistency On BMC Reboot
 
 Configure NTP SSH And IPMI Settings And Verify
     [Documentation]  Set NTP, SSH and IPMI protocol attribute to True/False, and verify.
-    [Tags]  Configure_NTP_And_SSH_And_IPMI_Settings_And_Verify
+    [Tags]  Configure_NTP_SSH_And_IPMI_Settings_And_Verify
     [Template]  Set SSH IPMI And NTP Protocol
     [Teardown]  Run Keywords  FFDC On Test Case Fail
     ...  AND  Enable SSH Protocol  ${True}
