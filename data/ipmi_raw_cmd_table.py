@@ -249,6 +249,10 @@ IPMI_RAW_CMD = {
         "get": [
             # raw command
             "0x00 0x01"
+        ],
+        "get_invalid_length": [
+            # raw command, invalid data length extra byte
+            "0x00 0x01 0x00"
         ]
     },
     "SEL_Info": {
