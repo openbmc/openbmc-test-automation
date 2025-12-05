@@ -80,6 +80,40 @@ Disable SSH Protocol Via IPv6 And Verify
     ...  msg=SSH Login and commands are working after disabling SSH.
 
 
+Verify BMC IPv4 And IPv6 Addresses Accessible Via SSH
+    [Documentation]  Verify BMC IPv4 and IPv6 addresses accessible via SSH.
+    [Tags]  Verify_BMC_IPv4_And_IPv6_Addresses_Accessible_Via_SSH
+
+    Open Connection And Log In  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}  host=${OPENBMC_HOST}
+    Verify SSH Connection Via IPv6
+
+
+Verify IPv4 And Ipv6 Access Concurrently Via Redfish
+    [Documentation]  Verify both interfaces access conurrently via redfish.
+    [Tags]  Verify_IPv4_And_IPv6_Access_Concurrently_Via_Redfish
+
+    ${dict}=  Execute Process Multi Keyword  ${2}
+    ...  Redfish.patch ${REDFISH_NW_ETH_IFACE}eth0 body={'DHCPv4':{'UseDNSServers':${True}}}
+    ...  RedfishIPv6.patch ${REDFISH_NW_ETH_IFACE}eth0 body={'DHCPv4':{'UseDNSServers':${True}}}
+    Dictionary Should Not Contain Value  ${dict}  False
+    ...  msg=One or more operations has failed.
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}eth0
+    ${resp1}=  Redfish1.Get  ${REDFISH_NW_ETH_IFACE}eth0
+    Should Be Equal  ${resp.dict["DHCPv4"]['UseDNSServers']}  ${True}
+    Should Be Equal  ${resp1.dict["DHCPv4"]['UseDNSServers']}  ${True}
+
+
+Configure Static IPv4 From SLAAC Address
+    [Documentation]  Configure Static IPv4 From SLAAC Address.
+    [Tags]  Configure_Static_IPv4_From_SLAAC_Address
+
+    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr}=
+    ...  Get Address Origin List And Address For Type  SLAAC  ${2}
+    Connect BMC Using IPv6 Address  ${ipv6_slaac_addr}
+    RedfishIPv6.Login
+    Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}  Version=IPv6
+
+
 *** Keywords ***
 
 Suite Setup Execution
