@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "339477a0_c6af1581",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-05T07:17:21Z",
+      "side": 1,
+      "message": "include this keyword in redfish/managers/test_bmc_config_ipv6.robot as in DHCPv6 bucket this approach will not be used.",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 40
+      },
+      "revId": "d263972ece80cf452acdcbdcb5d0081aa85a01ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
