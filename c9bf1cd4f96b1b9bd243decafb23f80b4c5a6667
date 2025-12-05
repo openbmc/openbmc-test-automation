@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e998d993_a2d215fd",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-12-05T11:07:30Z",
+      "side": 1,
+      "message": "note not need here. \nu can mention in the line number 577",
+      "revId": "c9bf1cd4f96b1b9bd243decafb23f80b4c5a6667",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7746da20_a167e383",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-12-05T11:07:30Z",
+      "side": 1,
+      "message": "Can you please align the documentation lines properly ? \n\nlike \n\n[Documentation]  Verify coexistence of LinkLocal,DHCPv6,Staticv6 and SLAACv6 \n                 on both interface and HCPv6 and SLAAC setup must be present.",
+      "revId": "c9bf1cd4f96b1b9bd243decafb23f80b4c5a6667",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
