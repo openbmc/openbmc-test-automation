@@ -22,6 +22,30 @@
       },
       "revId": "d263972ece80cf452acdcbdcb5d0081aa85a01ee",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9905ab91_e0ed8602",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-12-06T07:22:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "339477a0_c6af1581",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 40
+      },
+      "revId": "d263972ece80cf452acdcbdcb5d0081aa85a01ee",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
