@@ -50,6 +50,29 @@
       "message": "IPv6",
       "revId": "a37749a9b72c017cf7c3ab5698b4dda6d12f24ed",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5d7d35a_227829af",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-12-08T06:12:11Z",
+      "side": 1,
+      "message": "Configure IPv4?",
+      "range": {
+        "startLine": 114,
+        "startChar": 14,
+        "endLine": 114,
+        "endChar": 19
+      },
+      "revId": "a37749a9b72c017cf7c3ab5698b4dda6d12f24ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
