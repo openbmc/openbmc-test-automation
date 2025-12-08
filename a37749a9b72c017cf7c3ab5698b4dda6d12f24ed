@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3136bdeb_2cfac38c",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-12-08T06:04:49Z",
+      "side": 1,
+      "message": "${placeholder_dict} instead of ${empty_dict}",
+      "revId": "a37749a9b72c017cf7c3ab5698b4dda6d12f24ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7c919ab_903802e9",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-12-08T06:04:49Z",
+      "side": 1,
+      "message": "Check for existence of IPv6 on BMC while adding.",
+      "revId": "a37749a9b72c017cf7c3ab5698b4dda6d12f24ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12e44bfe_8489b0f9",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-12-08T06:04:49Z",
+      "side": 1,
+      "message": "IPv6",
+      "revId": "a37749a9b72c017cf7c3ab5698b4dda6d12f24ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
