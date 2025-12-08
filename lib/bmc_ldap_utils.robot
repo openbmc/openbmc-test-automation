@@ -87,3 +87,22 @@ Create LDAP Configuration
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
     Sleep  15s
+
+
+Update LDAP Configuration with LDAP User Role And Group
+    [Documentation]  Update LDAP configuration update with LDAP user Role and group.
+    [Arguments]   ${ldap_type}  ${group_privilege}  ${group_name}
+
+    # Description of argument(s):
+    # ldap_type        The LDAP type ("ActiveDirectory" or "LDAP").
+    # group_privilege  The group privilege ("Administrator", "Operator", "User" or "Callback").
+    # group_name       The group name of user.
+
+    ${local_role_remote_group}=  Create Dictionary  LocalRole=${group_privilege}  RemoteGroup=${group_name}
+    ${remote_role_mapping}=  Create List  ${local_role_remote_group}
+    ${ldap_data}=  Create Dictionary  RemoteRoleMapping=${remote_role_mapping}
+    ${payload}=  Create Dictionary  ${ldap_type}=${ldap_data}
+    Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=&{payload}
+    ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
+    # Provide adequate time for LDAP daemon to restart after the update.
+    Sleep  15s
