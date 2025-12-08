@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "24521c6c_38299ed7",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-08T07:47:48Z",
+      "side": 1,
+      "message": "empty_dict here the list is just getting appended so, keeping the same.",
+      "parentUuid": "3136bdeb_2cfac38c",
+      "revId": "a37749a9b72c017cf7c3ab5698b4dda6d12f24ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7c919ab_903802e9",
         "filename": "lib/bmc_ipv6_utils.robot",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2025-12-08T06:04:49Z",
       "side": 1,
       "message": "Check for existence of IPv6 on BMC while adding.",
+      "revId": "a37749a9b72c017cf7c3ab5698b4dda6d12f24ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8993d4c1_2752da28",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-08T07:47:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7c919ab_903802e9",
       "revId": "a37749a9b72c017cf7c3ab5698b4dda6d12f24ed",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fd5e568_a06105a9",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-08T07:47:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12e44bfe_8489b0f9",
+      "revId": "a37749a9b72c017cf7c3ab5698b4dda6d12f24ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5d7d35a_227829af",
@@ -65,6 +119,30 @@
       "writtenOn": "2025-12-08T06:12:11Z",
       "side": 1,
       "message": "Configure IPv4?",
+      "range": {
+        "startLine": 114,
+        "startChar": 14,
+        "endLine": 114,
+        "endChar": 19
+      },
+      "revId": "a37749a9b72c017cf7c3ab5698b4dda6d12f24ed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17512fca_dcb0d766",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-08T07:47:48Z",
+      "side": 1,
+      "message": "changed the test case name as Configure Static IPv6 From SLAAC Address",
+      "parentUuid": "a5d7d35a_227829af",
       "range": {
         "startLine": 114,
         "startChar": 14,
