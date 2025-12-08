@@ -157,6 +157,26 @@ Verify Get Chassis Status With Invalid Data Length
 
     Verify Invalid IPMI Command  ${IPMI_RAW_CMD['Chassis_status']['get_invalid_length'][0]}  0xc7
 
+Verify Chassis Control With Invalid Data Length
+    [Documentation]  Verify Chassis Control With Invalid Data Length
+    [Tags]  Verify_Chassis_Control_With_Invalid_Data_Length
+    [Teardown]  FFDC On Test Case Fail
+    [Template]  Verify Invalid IPMI Command
+
+    # Invalid data length                                                Expected error code
+    ${IPMI_RAW_CMD['Chassis Control']['power_down'][1]}                  0xc7
+    ${IPMI_RAW_CMD['Chassis Control']['power_down'][2]}                  0xc7
+    ${IPMI_RAW_CMD['Chassis Control']['power_up'][1]}                    0xc7
+    ${IPMI_RAW_CMD['Chassis Control']['power_up'][2]}                    0xc7
+    ${IPMI_RAW_CMD['Chassis Control']['power_cycle'][1]}                 0xc7
+    ${IPMI_RAW_CMD['Chassis Control']['power_cycle'][2]}                 0xc7
+    ${IPMI_RAW_CMD['Chassis Control']['hard_reset'][1]}                  0xc7
+    ${IPMI_RAW_CMD['Chassis Control']['hard_reset'][2]}                  0xc7
+    ${IPMI_RAW_CMD['Chassis Control']['pulse_diagnostic_interrupt'][1]}  0xc7
+    ${IPMI_RAW_CMD['Chassis Control']['pulse_diagnostic_interrupt'][2]}  0xc7
+    ${IPMI_RAW_CMD['Chassis Control']['initiate_soft_shutdown'][1]}      0xc7
+    ${IPMI_RAW_CMD['Chassis Control']['initiate_soft_shutdown'][2]}      0xc7
+
 *** Keywords ***
 
 Set Chassis Power Policy Via IPMI And Verify

@@ -618,4 +618,54 @@ IPMI_RAW_CMD = {
             "0x00 0x00 0x01",
         ]
     },
+    "Chassis Control": {
+        "power_down": [
+            # raw command
+            "0x00 0x02 0x00",
+            # invalid data length less byte
+            "0x00 0x02",
+            # invalid data length extra byte
+            "0x00 0x02 0x00 0x00",
+        ],
+        "power_up": [
+            # raw command
+            "0x00 0x02 0x01",
+            # invalid data length less byte
+            "0x00 0x02",
+            # invalid data length extra byte
+            "0x00 0x01 0x01 0x00",
+        ],
+        "power_cycle": [
+            # raw command
+            "0x00 0x02 0x02",
+            # invalid data length less byte
+            "0x00 0x02",
+            # invalid data length extra byte
+            "0x00 0x01 0x02 0x00",
+        ],
+        "hard_reset": [
+            # raw command
+            "0x00 0x02 0x03",
+            # invalid data length less byte
+            "0x00 0x02",
+            # invalid data length extra byte
+            "0x00 0x01 0x03 0x00",
+        ],
+        "pulse_diagnostic_interrupt": [
+            # raw command
+            "0x00 0x02 0x04",
+            # invalid data length less byte
+            "0x00 0x02",
+            # invalid data length extra byte
+            "0x00 0x01 0x04 0x00",
+        ],
+        "initiate_soft_shutdown": [
+            # raw command
+            "0x00 0x02 0x05",
+            # invalid data length less byte
+            "0x00 0x02",
+            # invalid data length extra byte
+            "0x00 0x01 0x05 0x00",
+        ],
+    },
 }
