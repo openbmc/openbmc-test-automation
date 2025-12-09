@@ -242,8 +242,11 @@ IPMI_RAW_CMD = {
     "SDR_Info": {
         "get": [
             # raw command
-            "0x04 0x20 1"
-        ]
+            "0x04 0x20 1",
+            # invalid data length extra byte
+            "0x04 0x20 0x01 0x00",
+            "0x04 0x20 0x00 0x00",
+        ],
     },
     "Chassis_status": {
         "get": [
