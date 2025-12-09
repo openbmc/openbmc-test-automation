@@ -731,6 +731,46 @@ Verify Coexistence Of LinkLocalv4 Staticv6 SLAACv6 And DHCPv6 On Both Interfaces
     2                  LinkLocalv4    Staticv6      SLAACv6    DHCPv6
 
 
+Verify Eth1 DHCPv4 Functionality In The Presence Of DHCPv6 Via GUI
+    [Documentation]  Verify eth1 DHCPv4 functionality in the presence of DHCPv6 via GUI.
+    ...    Run on setup with DHCPv4 available on eth1.
+    [Tags]  Verify_Eth1_DHCPv4_Functionality_In_The_Presence_Of_DHCPv6_Via_GUI
+    [Setup]  Run Keywords  Set And Verify DHCPv6 States  Disabled  Enabled
+    ...  AND  Toggle DHCPv4 State And Verify  Enabled  2
+
+    # Verify presence of DHCPv6 address and origin.
+    Sleep  ${NETWORK_TIMEOUT}s
+    @{ipv6_address_origin_list}  ${dhcpv6_addr}=
+    ...  Get Address Origin List And Address For Type  DHCPv6  2
+    Should Contain  ${ipv6_address_origin_list}  DHCPv6
+    Should Not Be Empty  ${dhcpv6_addr}  msg=DHCPv6 address is not present.
+
+    # Verify DHCPv6 button status in GUI.
+    ${dhcpv6_status}=  Get Text  ${xpath_eth1_dhcpv6_button}
+    Should Be Equal  ${dhcpv6_status}  Enabled
+
+    Verify Functionality Of IPv4 Address  DHCP  2
+
+
+Verify Eth0 Static IPv4 Functionality In The Presence Of DHCPv6 Via GUI
+    [Documentation]  Verify eth0 static IPv4 functionality in the presence of DHCPv6 via GUI.
+    [Tags]  Verify_Eth0_Static_IPv4_Functionality_In_The_Presence_Of_DHCPv6_Via_GUI
+    [Setup]  Set And Verify DHCPv6 States  Enabled  Disabled
+
+    # Verify presence of DHCPv6 address and origin.
+    Sleep  ${NETWORK_TIMEOUT}s
+    @{ipv6_address_origin_list}  ${dhcpv6_addr}=
+    ...  Get Address Origin List And Address For Type  DHCPv6  1
+    Should Contain  ${ipv6_address_origin_list}  DHCPv6
+    Should Not Be Empty  ${dhcpv6_addr}  msg=DHCPv6 address is not present.
+
+    # Verify DHCPv6 button status in GUI.
+    ${dhcpv6_status}=  Get Text  ${xpath_eth0_dhcpv6_button}
+    Should Be Equal  ${dhcpv6_status}  Enabled
+
+    Verify Functionality Of IPv4 Address  Static  1
+
+
 *** Keywords ***
 
 Suite Setup Execution
