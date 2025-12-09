@@ -345,3 +345,40 @@ Validate IPv6 Network Config On BMC
       Should Contain Match  ${ipv6_data}  ${ipv6_network_configuration['Address']}/*
       ...  msg=IPv6 address does not exist.
     END
+
+
+Verify Functionality Of IPv4 Address
+    [Documentation]  Verify the functionality of IPv4 address.
+    [Arguments]  ${ipv4_adress_type}  ${channel_number}
+
+    # Description of argument(s):
+    # ipv4_adress_type   Type of IPv4 address(dhcp/static).
+    # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+
+    # Verify presence of IPv4 address origin.
+    @{ipv4_addressorigin_list}  ${ipv4_addr_list}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses  ${channel_number}
+    ${ipv4_addressorigin_list}=  Combine Lists  @{ipv4_addressorigin_list}
+    Should Contain  ${ipv4_addressorigin_list}  ${ipv4_adress_type}
+
+    IF  '${ipv4_adress_type}' == 'Static'
+        IF  '${channel_number}' == '${1}'
+            Click Element  ${xpath_eth0_interface}
+            ${dhcp_status}=  Get Text  ${xpath_eth0_dhcpv4_button}
+            Should Be Equal  ${dhcp_status}  Disabled
+        ELSE IF  '${channel_number}' == '${2}'
+            Click Element  ${xpath_eth1_interface}
+            ${dhcp_status}=  Get Text  ${xpath_eth1_dhcpv4_button}
+            Should Be Equal  ${dhcp_status}  Disabled
+        END
+        List Should Not Contain Value  ${ipv4_addressorigin_list}  DHCP
+    ELSE IF  '${ipv4_adress_type}' == 'DHCP'
+        IF  '${channel_number}' == '${1}'
+            ${dhcp_status}=  Get Text  ${xpath_eth0_dhcpv4_button}
+            Should Be Equal  ${dhcp_status}  Enabled
+        ELSE IF  '${channel_number}' == '${2}'
+            ${dhcp_status}=  Get Text  ${xpath_eth1_dhcpv4_button}
+            Should Be Equal  ${dhcp_status}  Enabled
+        END
+        List Should Not Contain Value  ${ipv4_addressorigin_list}  Static
+    END
