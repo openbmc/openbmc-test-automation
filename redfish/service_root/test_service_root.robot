@@ -4,7 +4,6 @@ Documentation    Test Redfish to verify responses for SessionService and Hyperme
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/openbmc_ffdc.robot
 
-
 Test Teardown    FFDC On Test Case Fail
 Test Setup       Printn
 
@@ -36,7 +35,7 @@ GET Redfish SessionService Without Login
     [Tags]  GET_Redfish_SessionService_Without_Login
     [Setup]  Redfish.Logout
 
-    ${resp}=  Redfish.Get  /redfish/v1/SessionService
+    Redfish.Get  /redfish/v1/SessionService
     ...  valid_status_codes=[${HTTP_UNAUTHORIZED}]
 
 
@@ -62,10 +61,10 @@ Redfish Login Using Invalid Token
     Create Session  openbmc  ${AUTH_URI}
 
     # Example: "X-Auth-Token: 3la1JUf1vY4yN2dNOwun"
-    ${headers}=  Create Dictionary  Content-Type=application/json
+    VAR  ${headers} =  Content-Type=application/json
     ...  X-Auth-Token=deadbeef
 
-    ${resp}=  GET On Session
+    ${resp} =  GET On Session
     ...  openbmc  /redfish/v1/SessionService/Sessions  headers=${headers}
     ...  expected_status=${HTTP_UNAUTHORIZED}
 
@@ -87,19 +86,19 @@ Delete Redfish Session Using Valid Login
     [Tags]  Delete_Redfish_Session_Using_Valid_Login
 
     Redfish.Login
-    ${session_info}=  Get Redfish Session Info
+    ${session_info} =  Get Redfish Session Info
 
     Redfish.Login
 
     # Example o/p:
     # [{'@odata.id': '/redfish/v1/SessionService/Sessions/bOol3WlCI8'},
     #  {'@odata.id': '/redfish/v1/SessionService/Sessions/Yu3xFqjZr1'}]
-    ${resp_list}=  Redfish_Utils.List Request
+    ${resp_list} =  Redfish_Utils.List Request
     ...  /redfish/v1/SessionService/Sessions
 
     Redfish.Delete  ${session_info["location"]}
 
-    ${resp}=  Redfish_Utils.List Request  /redfish/v1/SessionService/Sessions
+    ${resp} =  Redfish_Utils.List Request  /redfish/v1/SessionService/Sessions
     List Should Not Contain Value  ${resp}  ${session_info["location"]}
 
 
@@ -108,15 +107,15 @@ Redfish Login Via SessionService
     [Tags]   Redfish_Login_Via_SessionService
 
     Create Session  openbmc  https://${OPENBMC_HOST}:${HTTPS_PORT}
-    ${headers}=  Create Dictionary  Content-Type=application/json
-    ${data}=  Set Variable  {"UserName":"${OPENBMC_USERNAME}", "Password":"${OPENBMC_PASSWORD}"}
+    VAR  ${headers} =  Content-Type=application/json
+    VAR  ${data} =  {"UserName":"${OPENBMC_USERNAME}", "Password":"${OPENBMC_PASSWORD}"}
 
-    ${resp}=  POST On Session  openbmc  /redfish/v1/SessionService/Sessions  data=${data}  headers=${headers}
+    ${resp} =  POST On Session  openbmc  /redfish/v1/SessionService/Sessions  data=${data}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_CREATED}
 
-    ${headers}=  Create Dictionary   Content-Type=application/json
+    VAR  ${headers} =  Content-Type=application/json
     ...  X-Auth-Token=${resp.headers["X-Auth-Token"]}
-    ${resp}=  DELETE On Session  openbmc  ${REDFISH_SESSION}${/}${resp.json()["Id"]}  headers=${headers}
+    ${resp} =  DELETE On Session  openbmc  ${REDFISH_SESSION}${/}${resp.json()["Id"]}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
 
@@ -125,9 +124,10 @@ Verify Redfish Unresponsive URL paths
     [Tags]   Verify_Redfish_Unresponsive_URL_paths
 
     Redfish.Login
-    ${resource_list}  ${dead_resources}=  Enumerate Request  /redfish/v1  include_dead_resources=True
+    ${resource_list}  ${dead_resources} =  Enumerate Request  /redfish/v1  include_dead_resources=True
     Redfish.Logout
     Valid Length  dead_resources  max_length=0
+
 
 Verify Service Root Unsupported Methods
     [Documentation]  Verify Unsupported methods of service root
@@ -160,5 +160,5 @@ GET And Verify Redfish Response
     #                               status codes (e.g. 200).
     # resource_path                 Redfish resource URL path.
 
-    ${resp}=  Redfish.Get  ${resource_path}
+    Redfish.Get  ${resource_path}
     ...  valid_status_codes=[${valid_status_codes}]
