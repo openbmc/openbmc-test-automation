@@ -199,6 +199,14 @@ Test Sensor Threshold Via IPMI
     Lower Non-Critical         LowerThresholdNonCritical
     Lower Critical             LowerThresholdCritical
 
+Verify Get SDR Info With Invalid Data Length
+    [Documentation]  Verify Get SDR Info With Invalid Data Length
+    [Tags]  Verify_Get_SDR_Info_With_Invalid_Data_Length
+    [Template]  Verify Invalid IPMI Command
+
+    # Invalid data length                  Expected error code
+    ${IPMI_RAW_CMD['SDR_Info']['get'][1]}  0xc7
+    ${IPMI_RAW_CMD['SDR_Info']['get'][2]}  0xc7
 
 *** Keywords ***
 
