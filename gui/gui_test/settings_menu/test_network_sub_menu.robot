@@ -48,6 +48,8 @@ ${xpath_domainname_switch_button}        //*[@id="useDomainNameSwitch"]/followin
 ${xpath_success_popup}                   //*[contains(text(),'Success')]/following-sibling::button
 ${ipv4_elements}                         //h2[contains(., "IPv4")]/following::table[1]/tbody/tr/td[1]
 ${ipv6_elements}                         //h2[contains(., "IPv6")]/following::table[1]/tbody/tr/td[1]
+${ipv4_addr_origin_elements}             //h2[contains(text(),'IPv4')]//following::table[1]
+...                                      //td[@aria-colindex='4']
 ${ipv6_addr_origin_elements}             //h2[contains(text(),'IPv6')]//following::table[1]
 ...                                      //td[@aria-colindex='3']
 ${xpath_delete_ipv4_addres}              //*[text()='${test_ipv4_addr_2}']/following::td[4]
@@ -567,19 +569,19 @@ Verify DHCPv4 Enable And Disable On Eth1 Via GUI
 
 Verify Coexistence Of IPv6 All Types Via GUI
     [Documentation]  Verify coexistence of IPv6 all types on both interfaces.
-    [Tags]  Verify_Coexistence_Of_IPv6_All_Types_Via_GUI
+    [Tags]   Verify_Coexistence_Of_IPv6_All_Types_Via_GUI
     [Setup]  Run Keywords  Add Static IPv6 Address And Verify Via GUI
     ...      ${test_ipv6_addr}  ${test_prefix_length}  Success
     ...      AND  Set And Verify DHCPv6 States  Enabled  Enabled
     ...      AND  Set SLAAC Property On Eth0 And Eth1
     ...      AND  Add Static IPv6 Address And Verify Via GUI
     ...      ${test_ipv6_addr}  ${test_prefix_length}  Success  None  2
-    [Template]  Coexistence Of IPv6 Addresses
+    [Template]  Coexistence Of IP Addresses
 
     # Note: DHCPv6 and SLAAC setup must be present.
-    # Channel_number   ipv6_type1    ipv6_type2     ipv6_type3    ipv6_type4
-    1                  Static        LinkLocal      SLAAC         DHCPv6
-    2                  LinkLocal     SLAAC          Static        DHCPv6
+    # Channel_number   ipv6_type1      ipv6_type2       ipv6_type3      ipv6_type4
+    1                  Staticv6        LinkLocalv6      SLAACv6         DHCPv6
+    2                  LinkLocalv6     SLAACv6          Staticv6        DHCPv6
 
 
 Verify Independent SLAAC Configuration On Separate DHCPv6 Enabled Interfaces
@@ -596,54 +598,54 @@ Verify Independent SLAAC Configuration On Separate DHCPv6 Enabled Interfaces
     ipv4           2               Enabled
 
 
-Verify Coexistence Of LinkLocal DHCPv6 Staticv6 And SLAACv6 On Both Interfaces
-    [Documentation]  Verify coexistence of LinkLocal,DHCPv6,Staticv6 and SLAACv6 on both interfaces.
-    [Tags]  Verify_Coexistence_Of_LinkLocal_DHCPv6_Staticv6_And_SLAACv6_On_Both_Interfaces
+Verify Coexistence Of LinkLocalv6 DHCPv6 Staticv6 And SLAACv6 On Both Interfaces
+    [Documentation]  Verify coexistence of LinkLocalv6,DHCPv6,Staticv6 and SLAACv6 on both interfaces.
+    [Tags]   Verify_Coexistence_Of_LinkLocalv6_DHCPv6_Staticv6_And_SLAACv6_On_Both_Interfaces
     [Setup]  Run Keywords  Set And Verify DHCPv6 States  Enabled  Enabled
     ...      AND  Add Static IPv6 Address And Verify Via GUI
     ...      ${test_ipv6_addr_2}  ${test_prefix_length}  Success
     ...      AND  Set SLAAC Property On Eth0 And Eth1
     ...      AND  Add Static IPv6 Address And Verify Via GUI
     ...      ${test_ipv6_addr}  ${test_prefix_length}  Success  None  2
-    [Template]  Coexistence Of IPv6 Addresses
+    [Template]  Coexistence Of IP Addresses
     [Teardown]  Run Keywords  Click Element  ${xpath_refresh_button}
     ...         AND  Delete IP Address And Verify  ipv6  ${test_ipv6_addr_2}
 
     # Note: DHCPv6 and SLAAC setup must be present.
-    # Channel_number   ipv6_type1  ipv6_type2   ipv6_type3   ipv6_type4
-    1                  LinkLocal   DHCPv6       Static       SLAAC
-    2                  LinkLocal   DHCPv6       Static       SLAAC
+    # Channel_number   ipv6_type1    ipv6_type2   ipv6_type3     ipv6_type4
+    1                  LinkLocalv6   DHCPv6       Staticv6       SLAACv6
+    2                  LinkLocalv6   DHCPv6       Staticv6       SLAACv6
 
 
-Verify Coexistence Of LinkLocal DHCPv6 And SLAACv6 On Both Interfaces
-    [Documentation]  Verify coexistence of LinkLocal,DHCPv6 and SLAACv6 on both interfaces.
-    [Tags]  Verify_Coexistence_Of_LinkLocal_DHCPv6_And_SLAACv6_On_Both_Interfaces
+Verify Coexistence Of LinkLocalv6 DHCPv6 And SLAACv6 On Both Interfaces
+    [Documentation]  Verify coexistence of LinkLocalv6,DHCPv6 and SLAACv6 on both interfaces.
+    [Tags]   Verify_Coexistence_Of_LinkLocalv6_DHCPv6_And_SLAACv6_On_Both_Interfaces
     [Setup]  Run Keywords  Set And Verify DHCPv6 States  Enabled  Enabled
     ...      AND  Set SLAAC Property On Eth0 And Eth1
-    [Template]  Coexistence Of IPv6 Addresses
+    [Template]  Coexistence Of IP Addresses
 
     # Note: DHCPv6 and SLAAC setup must be present.
-    # Channel_number   ipv6_type1   ipv6_type2   ipv6_type3
-    1                  LinkLocal    DHCPv6       SLAAC
-    2                  LinkLocal    DHCPv6       SLAAC
+    # Channel_number   ipv6_type1     ipv6_type2   ipv6_type3
+    1                  LinkLocalv6    DHCPv6       SLAACv6
+    2                  LinkLocalv6    DHCPv6       SLAACv6
 
 
-Verify Coexistence Of DHCPv6 Staticv6 And LinkLocal On Both Interfaces
+Verify Coexistence Of DHCPv6 Staticv6 And LinkLocalv6 On Both Interfaces
     [Documentation]  Verify coexistence of DHCPv6, Staticv6 and LinkLocalv6 on both interfaces.
-    [Tags]  Verify_Coexistence_Of_DHCPv6_Staticv6_And_LinkLocal_On_Both_Interfaces
+    [Tags]   Verify_Coexistence_Of_DHCPv6_Staticv6_And_LinkLocalv6_On_Both_Interfaces
     [Setup]  Run Keywords  Set And Verify DHCPv6 States  Enabled  Enabled
     ...      AND  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}
     ...      ${test_prefix_length}  Success
     ...      AND  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}
     ...      ${test_prefix_length}  Success  None  2
-    [Template]  Coexistence Of IPv6 Addresses
+    [Template]  Coexistence Of IP Addresses
     [Teardown]  Run Keywords  Click Element  ${xpath_refresh_button}
     ...         AND  Delete IP Address And Verify  ipv6  ${test_ipv6_addr_2}
 
     # Note: DHCPv6 setup must be present.
-    # Channel_number   ipv6_type1   ipv6_type2   ipv6_type3
-    1                  DHCPv6       Static       LinkLocal
-    2                  DHCPv6       Static       LinkLocal
+    # Channel_number   ipv6_type1   ipv6_type2     ipv6_type3
+    1                  DHCPv6       Staticv6       LinkLocalv6
+    2                  DHCPv6       Staticv6       LinkLocalv6
 
 
 Configure DHCPv6 On Eth0 And Verify Existing Network Configurations On BMC Reboot
@@ -669,6 +671,78 @@ Configure DHCPv6 On Eth0 And Verify Existing Network Configurations On BMC Reboo
     Lists Should Be Equal  ${ipv6_before}  ${ipv6_after}  ignore_order=True
 
 
+Verify Coexistence Of Staticv4 SLAACv6 And LinkLocalv6 On Both Interfaces
+    [Documentation]  Verify coexistence of Staticv4 SLAACv6 and LinkLocalv6 on both interfaces.
+    [Tags]   Verify_Coexistence_Of_Staticv4_SLAACv6_And_LinkLocalv6_On_Both_Interfaces
+    [Setup]  Run Keywords  Add Static IP Address And Verify  ${test_ipv4_addr}
+    ...      ${test_subnet_mask}  ${default_gateway}  Success
+    ...      AND  Add Static IP Address And Verify  ${test_ipv4_addr_1}
+    ...      ${test_subnet_mask}  ${default_gateway_2}  Success  2
+    ...      AND  Set SLAAC Property On Eth0 And Eth1
+    [Template]  Coexistence Of IP Addresses
+
+    # Channel_number   ip_type1       ip_type2
+    1                  Staticv4       SLAACv6
+    2                  Staticv4       SLAACv6
+    1                  Staticv4       LinkLocalv6
+    2                  Staticv4       LinkLocalv6
+
+
+Verify Coexistence Of Staticv4 Staticv6 And SLAACv6 On Both Interfaces
+    [Documentation]  Verify coexistence of Staticv4 Staticv6 and SLAACv6 on both interfaces.
+    [Tags]   Verify_Coexistence_Of_Staticv4_Staticv6_And_SLAACv6_On_Both_Interfaces
+    [Setup]  Run Keywords  Add Static IP Address And Verify  ${test_ipv4_addr}
+    ...      ${test_subnet_mask}  ${default_gateway}  Success
+    ...      AND  Add Static IP Address And Verify  ${test_ipv4_addr_1}
+    ...      ${test_subnet_mask}  ${default_gateway_2}  Success  2
+    ...      AND  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}
+    ...      ${test_prefix_length}  Success
+    ...      AND  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}
+    ...      ${test_prefix_length}  Success  None  2
+    ...      AND  Set SLAAC Property On Eth0 And Eth1
+    [Template]  Coexistence Of IP Addresses
+
+    # Channel_number   ip_type1       ip_type2      ip_type3
+    1                  Staticv4       Staticv6
+    2                  Staticv4       Staticv6
+    1                  Staticv4       Staticv6       SLAACv6
+
+
+Verify Coexistence Of Staticv4 Staticv6 And DHCPv6 On Both Interfaces
+    [Documentation]  Verify coexistence of Staticv4 Staticv6 and DHCPv6 on both interfaces.
+    [Tags]   Verify_Coexistence_Of_Staticv4_Staticv6_And_DHCPv6_On_Both_Interfaces
+    [Setup]  Run Keywords  Add Static IP Address And Verify  ${test_ipv4_addr}
+    ...      ${test_subnet_mask}  ${default_gateway}  Success
+    ...      AND  Add Static IP Address And Verify  ${test_ipv4_addr_1}
+    ...      ${test_subnet_mask}  ${default_gateway_2}  Success  2
+    ...      AND  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}
+    ...      ${test_prefix_length}  Success
+    ...      AND  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}
+    ...      ${test_prefix_length}  Success  None  2
+    ...      AND  Set And Verify DHCPv6 States  Enabled  Enabled
+    [Template]  Coexistence Of IP Addresses
+
+    # Channel_number   ip_type1       ip_type2      ip_type3
+    1                  Staticv4       Staticv6      DHCPv6
+    2                  Staticv4       Staticv6      DHCPv6
+
+
+Verify Coexistence Of LinkLocalv4 Staticv6 SLAACv6 And DHCPv6 On Both Interfaces
+    [Documentation]  Verify coexistence of LinkLocalv4 Staticv6 SLAACv6 and DHCPv6 on both interfaces.
+    [Tags]  Verify_Coexistence_Of_LinkLocalv4_Staticv6_SLAACv6_And_DHCPv6_On_Both_Interfaces
+    [Setup]  Run Keywords  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}
+    ...      ${test_prefix_length}  Success
+    ...      AND  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}
+    ...      ${test_prefix_length}  Success  None  2
+    ...      AND  Set SLAAC Property On Eth0 And Eth1
+    ...      AND  Set And Verify DHCPv6 States  Enabled  Enabled
+    [Template]  Coexistence Of IP Addresses
+
+    # Channel_number   ip_type1       ip_type2      ip_type3   ip_type4
+    1                  LinkLocalv4    Staticv6      SLAACv6    DHCPv6
+    2                  LinkLocalv4    Staticv6      SLAACv6    DHCPv6
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -682,6 +756,8 @@ Suite Setup Execution
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
     ${default_gateway}=  Get BMC Default Gateway
     Set Suite Variable  ${default_gateway}
+    ${default_gateway_2}=  Get BMC Default Gateway  2
+    Set Suite Variable  ${default_gateway_2}
     ${ipv4_eth1}=  Get IPv4 Values From Eth1
     Set Suite Variable  ${ipv4_eth1}
 
@@ -737,6 +813,7 @@ Add Static IP Address And Verify
 
     Wait Until Element Is Enabled  ${xpath_add_static_ipv4_addr_btn_eth0}  timeout=60sec
     IF  '${CHANNEL_NUMBER}' == '1'
+      Click Element  ${xpath_eth0_interface}
       Click Element  ${xpath_add_static_ipv4_addr_btn_eth0}
     ELSE
       Click Element  ${xpath_eth1_interface}
@@ -1401,35 +1478,70 @@ Assign Static IP Address on Eth1
     END
 
 
-Coexistence Of IPv6 Addresses
-    [Documentation]  Checking coexistence of IPv6 addresses on both interfaces.
-    [Arguments]  ${channel_number}  @{ipv6_types}
+Coexistence Of IP Addresses
+    [Documentation]  Checking coexistence of IP addresses on both interfaces.
+    [Arguments]  ${channel_number}  @{address_types}
 
     # Description of argument(s):
     # channel_number   Ethernet channel number, 1(eth0) or 2(eth1).
-    # ipv6_types       Type of IPv6 address(slaac/linklocal/dhcp/static).
+    # address_types    Type of IPv4/IPv6 address(slaac/linklocal/dhcp/static).
 
     IF  '${channel_number}' == '1'
-      Wait Until Element Is Enabled  ${xpath_eth1_interface}  timeout=60s
+      Wait Until Element Is Enabled  ${xpath_eth0_interface}  timeout=60s
       Click Element  ${xpath_eth0_interface}
     ELSE
       Wait Until Element Is Enabled  ${xpath_eth1_interface}  timeout=60s
       Click Element  ${xpath_eth1_interface}
     END
 
-    ${all_origin}=  Get WebElements  ${ipv6_addr_origin_elements}
-    ${origin_list}=  Create List
-    FOR  ${elem}  IN  @{all_origin}
-      ${origin}=  Get Text  ${elem}
-      ${origin}=  Strip String  ${origin}
-      IF  '${origin}' != '' and '${origin}' != 'No items available'
-        Append To List  ${origin_list}  ${origin}
-      END
+    # Get IPv4 origins
+    ${ipv4_elems}=  Get WebElements  ${ipv4_addr_origin_elements}
+    ${ipv4_list}=  Get IP Origins  @{ipv4_elems}
+
+    # Get IPv6 origins
+    ${ipv6_elems}=  Get WebElements  ${ipv6_addr_origin_elements}
+    ${ipv6_list}=  Get IP Origins  @{ipv6_elems}
+
+    # Validate all expected types
+    FOR  ${type}  IN  @{address_types}
+      Validate Expected IPv4 And IPv6 Origin  ${type}  ${ipv4_list}  ${ipv6_list}
     END
 
-    FOR  ${type}  IN  @{ipv6_types}
-      Should Contain  ${origin_list}  ${type}
+
+Get IP Origins
+    [Arguments]  @{elements}
+
+    # Description of argument(s):
+    # elements   List of IPv4 or IPv6 origins.
+
+    ${list}=  Create List
+    FOR  ${e}  IN  @{elements}
+      ${t}=  Strip String  ${e.text}
+      IF  '${t}' != '' and '${t}' != 'No items available'
+        Append To List  ${list}  ${t}
+      END
     END
+    RETURN  ${list}
+
+
+Validate Expected IPv4 And IPv6 Origin
+    [Arguments]  ${type}  ${ipv4_list}  ${ipv6_list}
+
+    # Description of argument(s):
+    # type       Type of IP address(IPv4/IPv6).
+    # ipv4_list  List of IPv4 origins.
+    # ipv6_list  List of IPv6 origins.
+
+    ${origin}=  Replace String  ${type}    v4  ${EMPTY}
+    ${origin}=  Replace String  ${origin}  v6  ${EMPTY}
+
+    IF  $type.endswith('v4')
+      ${target_list}=  Set Variable  ${ipv4_list}
+    ELSE
+      ${target_list}=  Set Variable  ${ipv6_list}
+    END
+
+    Should Contain  ${target_list}  ${origin}
 
 
 Enable Or Disable SLAAC And Verify Impact On Existing Settings
