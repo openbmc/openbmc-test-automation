@@ -426,6 +426,16 @@ Verify ReadOnly User Privilege
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}readonly_user
 
 
+Verify History Password for Redfish Admin And Readonly User
+    [Documentation]  Verify prevously used password can be set
+    [Tags]  Verify_History_Password_Redfish_Admin_And_Readonly_User
+    [Template]  Verify History Password for Redfish User
+
+    #username        role_id
+    admin_user       Administrator
+    readonly_user    ReadOnly
+
+
 Verify Minimum Password Length For Redfish Admin And Readonly User
     [Documentation]  Verify minimum password length for new and existing admin or
     ...  readonly user.
@@ -1027,6 +1037,40 @@ Create User With Unsupported Password Format And Verify
    ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${True}
    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+
+Verify History Password for Redfish User
+    [Documentation]  Verify that previous password can be used
+    [Arguments]  ${user_name}  ${role_id}
+
+    # Description of argument(s):
+    # user_name           The username to be created.
+    # role_id             The role ID of the user to be created.
+
+    # Make sure the user account in question does not already exist.
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${user_name}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
+
+    # Create specified user with valid password.
+    ${payload}=  Create Dictionary
+    ...  UserName=${user_name}  Password=HistUserPwd1  RoleId=${role_id}  Enabled=${True}
+    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+    # Change password
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/${user_name}  body={'Password': 'HistUserPwd2'}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Try to change password to previous one
+    Redfish.Patch  /redfish/v1/AccountService/Accounts/${user_name}  body={'Password': 'HistUserPwd1'}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Verify login.
+    Redfish.Logout
+    Redfish.Login  ${user_name}  HistUserPwd1
+    Redfish.Logout
+    Redfish.Login
+    Redfish.Delete  /redfish/v1/AccountService/Accounts/${user_name}
 
 
 Verify Minimum Password Length For Redfish User
