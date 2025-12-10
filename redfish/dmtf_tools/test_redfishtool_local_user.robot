@@ -161,7 +161,7 @@ Redfishtool Access Resource
     #                authentication error, etc. )
 
     ${user_cmd_args}=  Set Variable
-    ...  redfishtool raw -r ${OPENBMC_HOST} -u ${login_user} -p ${login_pasword} -S Always
+    ...  redfishtool raw -r ${OPENBMC_HOST}:${HTTPS_PORT} -u ${login_user} -p ${login_pasword} -S Always
     Redfishtool Get  ${uri}  ${user_cmd_args}  ${expected_error}
 
 
@@ -179,7 +179,7 @@ Redfishtool Create User
     #                authentication error, etc. )
 
     ${user_cmd_args}=  Set Variable
-    ...  redfishtool raw -r ${OPENBMC_HOST} -u ${login_user} -p ${login_pasword} -S Always
+    ...  redfishtool raw -r ${OPENBMC_HOST}:${HTTPS_PORT} -u ${login_user} -p ${login_pasword} -S Always
     ${data}=  Set Variable
     ...  '{"UserName":${user_name},"Password":${password},"RoleId":${roleId},"Enabled":${enable}}'
     IF  ${login_user} == ""
@@ -203,7 +203,7 @@ Redfishtool Update User Role
     #                authentication error, etc. )
 
     ${user_cmd_args}=  Set Variable
-    ...  redfishtool raw -r ${OPENBMC_HOST} -u ${login_user} -p ${login_pasword} -S Always
+    ...  redfishtool raw -r ${OPENBMC_HOST}:${HTTPS_PORT} -u ${login_user} -p ${login_pasword} -S Always
     IF  ${login_user} == ""
         Redfishtool Patch  '{"RoleId":${newRole}}'
         ...  /redfish/v1/AccountService/Accounts/${user_name}  ${root_cmd_args}  ${expected_error}
