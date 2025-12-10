@@ -665,13 +665,17 @@ Configure Network Settings On VLAN
 
 Get BMC Default Gateway
     [Documentation]  Get system default gateway.
+    [Arguments]  ${channel_number}=${CHANNEL_NUMBER}
+
+    # Description of argument(s):
+    # channel_number        Channel number: 1 for eth0, 2 for eth1.
 
     ${route_info}=  Get BMC Route Info
 
     ${lines}=  Get Lines Containing String  ${route_info}  default via
 
     ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
 
     # Extract the corresponding default gateway for eth0 and eth1
     ${default_gw_line}=  Get Lines Containing String  ${lines}  ${ethernet_interface}
