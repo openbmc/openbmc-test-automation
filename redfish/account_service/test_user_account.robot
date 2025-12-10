@@ -439,6 +439,7 @@ Verify History Password for Redfish Admin And Readonly User
 Verify Minimum Password Length For Redfish Admin And Readonly User
     [Documentation]  Verify minimum password length for new and existing admin or
     ...  readonly user.
+    [Tags]  Verify_Minimum_Password_Length_Admin_And_Readonly_User
     [Template]  Verify Minimum Password Length For Redfish User
 
     #username        role_id
