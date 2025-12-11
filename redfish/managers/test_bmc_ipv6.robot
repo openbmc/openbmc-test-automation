@@ -219,10 +219,10 @@ Configure Invalid Static IPv6 And Verify
     [Tags]  Configure_Invalid_Static_IPv6_And_Verify
     [Template]  Configure IPv6 Address On BMC
 
-    #invalid_ipv6            prefix length           valid_status_code
-    ${ipv4_hexword_addr}     ${test_prefix_length}   ${HTTP_BAD_REQUEST}
-    ${invalid_hexadec_ipv6}  ${test_prefix_length}   ${HTTP_BAD_REQUEST}
-    ${ipv6_multi_short}      ${test_prefix_length}   ${HTTP_BAD_REQUEST}
+    #invalid_ipv6            prefix length           valid_status_codes
+    ${ipv4_hexword_addr}     ${test_prefix_length}   valid_status_codes=${HTTP_BAD_REQUEST}
+    ${invalid_hexadec_ipv6}  ${test_prefix_length}   valid_status_codes=${HTTP_BAD_REQUEST}
+    ${ipv6_multi_short}      ${test_prefix_length}   valid_status_codes=${HTTP_BAD_REQUEST}
 
 
 Configure IPv6 Static Default Gateway And Verify
