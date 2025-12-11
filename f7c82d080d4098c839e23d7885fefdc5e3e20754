@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45603bd4_e22e2873",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-12-11T11:22:47Z",
+      "side": 1,
+      "message": "lines are repeating in above testcase, keep it in the keyword and use",
+      "range": {
+        "startLine": 714,
+        "startChar": 27,
+        "endLine": 721,
+        "endChar": 52
+      },
+      "revId": "f7c82d080d4098c839e23d7885fefdc5e3e20754",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19e20b40_4ed2f540",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-12-11T11:22:47Z",
+      "side": 1,
+      "message": "channel_number",
+      "range": {
+        "startLine": 668,
+        "startChar": 19,
+        "endLine": 668,
+        "endChar": 33
+      },
+      "revId": "f7c82d080d4098c839e23d7885fefdc5e3e20754",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b6aac38_7b554816",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-12-11T11:22:47Z",
+      "side": 1,
+      "message": "channel_number",
+      "range": {
+        "startLine": 678,
+        "startChar": 69,
+        "endLine": 678,
+        "endChar": 83
+      },
+      "revId": "f7c82d080d4098c839e23d7885fefdc5e3e20754",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
