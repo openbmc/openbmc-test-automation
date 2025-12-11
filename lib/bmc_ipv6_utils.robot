@@ -202,7 +202,7 @@ Configure IPv6 Address On BMC
     END
 
     IF  ${valid_status_codes} != [${HTTP_OK}, ${HTTP_NO_CONTENT}]
-        Fail  msg=Static address not added correctly
+        Return From Keyword
     END
 
     # Note: Network restart takes around 15-18s after patch request processing.
