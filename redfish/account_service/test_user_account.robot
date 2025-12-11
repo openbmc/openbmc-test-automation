@@ -426,9 +426,9 @@ Verify ReadOnly User Privilege
     Redfish.Delete  ${REDFISH_ACCOUNTS_URI}readonly_user
 
 
-Verify History Password for Redfish Admin And Readonly User
-    [Documentation]  Verify prevously used password can be set
-    [Tags]  Verify_History_Password_Redfish_Admin_And_Readonly_User
+Verify History Password For Redfish Admin And Readonly User
+    [Documentation]  Verify previously used password can be set
+    [Tags]  Verify_History_Password_For_Redfish_Admin_And_Readonly_User
     [Template]  Verify History Password for Redfish User
 
     #username        role_id
@@ -439,7 +439,7 @@ Verify History Password for Redfish Admin And Readonly User
 Verify Minimum Password Length For Redfish Admin And Readonly User
     [Documentation]  Verify minimum password length for new and existing admin or
     ...  readonly user.
-    [Tags]  Verify_Minimum_Password_Length_Admin_And_Readonly_User
+    [Tags]  Verify_Minimum_Password_Length_For_Redfish_Admin_And_Readonly_User
     [Template]  Verify Minimum Password Length For Redfish User
 
     #username        role_id
