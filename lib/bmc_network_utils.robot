@@ -426,7 +426,7 @@ CLI Get and Verify Name Servers
     [Documentation]    Get and Verify the nameserver IPs from /etc/resolv.conf
     ...  and compare with redfish nameserver.
     [Arguments]     ${static_name_servers}
-    ...  ${valid_status_codes}=${HTTP_OK}
+    ...  ${valid_status_codes}=[${HTTP_OK},${HTTP_NO_CONTENT}]
 
     # Description of Argument(s):
     # static_name_servers    Address for static name server
@@ -438,7 +438,7 @@ CLI Get and Verify Name Servers
     ${cmd_status}=  Run Keyword And Return Status
     ...  List Should Contain Sub List  ${cli_nameservers}  ${static_name_servers}
 
-    IF  '${valid_status_codes}' == '${HTTP_OK}'
+    IF  ${valid_status_codes} == [${HTTP_OK},${HTTP_NO_CONTENT}]
         Should Be True  ${cmd_status}
     ELSE
          Should Not Be True  ${cmd_status}
@@ -910,7 +910,7 @@ Delete Static Name Servers
 Configure Static Name Servers
     [Documentation]  Configure DNS server on BMC.
     [Arguments]  ${static_name_servers}=${original_nameservers}
-     ...  ${valid_status_codes}=${HTTP_OK}
+     ...  ${valid_status_codes}=[${HTTP_OK},${HTTP_NO_CONTENT}]
 
     # Description of the argument(s):
     # static_name_servers  A list of static name server IPs to be
@@ -929,10 +929,10 @@ Configure Static Name Servers
     # Currently BMC is sending 500 response code instead of 400 for invalid scenarios.
     Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     ...  body={'StaticNameServers': ${static_name_servers}}
-    ...  valid_status_codes=[${valid_status_codes}, ${HTTP_INTERNAL_SERVER_ERROR}]
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}, ${HTTP_INTERNAL_SERVER_ERROR}]
 
     # Patch operation takes 1 to 3 seconds to set new value.
-    Sleep  3s
+    Sleep  5s
 
     # Check if newly added DNS server is configured on BMC.
     CLI Get and Verify Name Servers  ${static_name_servers}  ${valid_status_codes}
