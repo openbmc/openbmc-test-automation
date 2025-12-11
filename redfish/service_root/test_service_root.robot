@@ -61,7 +61,7 @@ Redfish Login Using Invalid Token
     Create Session  openbmc  ${AUTH_URI}
 
     # Example: "X-Auth-Token: 3la1JUf1vY4yN2dNOwun"
-    VAR  ${headers} =  Content-Type=application/json
+    VAR  &{headers} =  Content-Type=application/json
     ...  X-Auth-Token=deadbeef
 
     ${resp} =  GET On Session
@@ -107,13 +107,13 @@ Redfish Login Via SessionService
     [Tags]   Redfish_Login_Via_SessionService
 
     Create Session  openbmc  https://${OPENBMC_HOST}:${HTTPS_PORT}
-    VAR  ${headers} =  Content-Type=application/json
+    VAR  &{headers} =  Content-Type=application/json
     VAR  ${data} =  {"UserName":"${OPENBMC_USERNAME}", "Password":"${OPENBMC_PASSWORD}"}
 
     ${resp} =  POST On Session  openbmc  /redfish/v1/SessionService/Sessions  data=${data}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_CREATED}
 
-    VAR  ${headers} =  Content-Type=application/json
+    VAR  &{headers} =  Content-Type=application/json
     ...  X-Auth-Token=${resp.headers["X-Auth-Token"]}
     ${resp} =  DELETE On Session  openbmc  ${REDFISH_SESSION}${/}${resp.json()["Id"]}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
