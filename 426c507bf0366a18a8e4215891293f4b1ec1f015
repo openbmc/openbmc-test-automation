@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bdb22c8_b65ea483",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-12T07:59:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7fb556b_b31c8e91",
+      "revId": "426c507bf0366a18a8e4215891293f4b1ec1f015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a76680d_6c41de8d",
@@ -31,6 +49,54 @@
       "writtenOn": "2025-12-12T06:48:53Z",
       "side": 1,
       "message": "Disable DHCP On Eth1 From SLAAC IPv6 And Verify",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 36
+      },
+      "revId": "426c507bf0366a18a8e4215891293f4b1ec1f015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "436d4fb2_38525615",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-12T07:59:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a76680d_6c41de8d",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 36
+      },
+      "revId": "426c507bf0366a18a8e4215891293f4b1ec1f015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbd5cf0b_10fd2752",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-12T07:59:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a76680d_6c41de8d",
       "range": {
         "startLine": 116,
         "startChar": 0,
