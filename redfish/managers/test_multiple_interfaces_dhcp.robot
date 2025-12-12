@@ -16,10 +16,6 @@ Test Tags       Multiple_Interfaces_DHCP
 
 *** Variables ***
 
-&{DHCP_ENABLED}           DHCPEnabled=${True}
-&{DHCP_DISABLED}          DHCPEnabled=${False}
-&{ENABLE_DHCP}            DHCPv4=${DHCP_ENABLED}
-&{DISABLE_DHCP}           DHCPv4=${DHCP_DISABLED}
 ${ethernet_interface}     eth1
 
 &{dns_enable_dict}                 UseDNSServers=${True}
