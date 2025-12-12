@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a76680d_6c41de8d",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2025-12-12T06:48:53Z",
+      "side": 1,
+      "message": "Disable DHCP On Eth1 From SLAAC IPv6 And Verify",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 36
+      },
+      "revId": "426c507bf0366a18a8e4215891293f4b1ec1f015",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
