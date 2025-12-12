@@ -16,6 +16,24 @@
       "message": "Please run  \n\n--argumentfile   test_lists/HW_CI     redfish/   ipmi\n\nHW CI test bucket for sanity runs. Thanks",
       "revId": "d33c30714330059d8ef4ee46efa114f7171a57af",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f88143fd_f4f89e5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2025-12-12T09:57:43Z",
+      "side": 1,
+      "message": "yes, I tested with ```--argumentfile test_lists/HW_CI redfish/ ipmi ``` I have not seen any code failures.",
+      "parentUuid": "bf08d7e8_965e73d2",
+      "revId": "d33c30714330059d8ef4ee46efa114f7171a57af",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
