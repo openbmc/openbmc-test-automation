@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8f206ff_a16deded",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-12-12T07:57:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4964651_f1a75c39",
+      "range": {
+        "startLine": 357,
+        "startChar": 25,
+        "endLine": 357,
+        "endChar": 31
+      },
+      "revId": "9dcddcc869bc81ae054dea5b1ba1e18dce9ce6b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa941272_56fb63bd",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-12-12T06:55:33Z",
       "side": 1,
       "message": "give 4 spaces and maintain the same throughout.",
+      "range": {
+        "startLine": 364,
+        "startChar": 4,
+        "endLine": 364,
+        "endChar": 6
+      },
+      "revId": "9dcddcc869bc81ae054dea5b1ba1e18dce9ce6b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c97a3adc_9fd69271",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-12-12T07:57:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa941272_56fb63bd",
       "range": {
         "startLine": 364,
         "startChar": 4,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe393383_568a17da",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-12-12T07:57:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01f32566_1efde0ec",
+      "range": {
+        "startLine": 366,
+        "startChar": 23,
+        "endLine": 366,
+        "endChar": 27
+      },
+      "revId": "9dcddcc869bc81ae054dea5b1ba1e18dce9ce6b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58929e47_116c89a0",
@@ -83,6 +155,30 @@
       "writtenOn": "2025-12-12T06:55:33Z",
       "side": 1,
       "message": "Static",
+      "range": {
+        "startLine": 382,
+        "startChar": 65,
+        "endLine": 382,
+        "endChar": 70
+      },
+      "revId": "9dcddcc869bc81ae054dea5b1ba1e18dce9ce6b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "429b009e_b9fb4bc6",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-12-12T07:57:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58929e47_116c89a0",
       "range": {
         "startLine": 382,
         "startChar": 65,
