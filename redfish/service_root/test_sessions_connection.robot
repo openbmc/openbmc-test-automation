@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation    Test Redfish session and its connection stability.
 
 Resource         ../../lib/bmc_redfish_utils.robot
@@ -14,42 +13,40 @@ Test Tags        Sessions_Connection
 
 *** Variables ***
 
-${duration}                 6h
-${interval}                 30s
-${reboot_interval}          30m
-
+${DURATION}                 6h
+${INTERVAL}                 30s
+${REBOOT_INTERVAL}          30m
 
 *** Test Cases ***
 
 Create Session And Check Connection Stability
     [Documentation]  Send heartbeat on session continuously and verify connection stability.
     [Tags]  Create_Session_And_Check_Connection_Stability
-    [Setup]  Redfish.logout
+    [Setup]  Redfish.Logout
 
     # Clear old session and start new session.
     Redfish.Login
 
-    Repeat Keyword  ${duration}  Send Heartbeat
+    Repeat Keyword  ${DURATION}  Send Heartbeat
 
 
 Create Session And Check Connection Stability On Reboot
     [Documentation]  Create Session And Check Connection Stability On Reboot
     [Tags]  Create_Session_And_Check_Connection_Stability_On_Reboot
-    [Setup]  Redfish.logout
+    [Setup]  Redfish.Logout
 
     # Clear old session and start new session.
     Redfish.Login
 
-    Repeat Keyword  ${duration}  Check Connection On Reboot
-
+    Repeat Keyword  ${DURATION}  Check Connection On Reboot
 
 *** Keywords ***
 
 Send Heartbeat
     [Documentation]  Send heartbeat to BMC.
 
-    ${hostname}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
-    Sleep  ${interval}
+    Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+    Sleep  ${INTERVAL}
 
 
 Check Connection On Reboot
@@ -59,4 +56,4 @@ Check Connection On Reboot
     Redfish OBMC Reboot (Off)
 
     # Verify session is still active and no issues on connection after reboot.
-    Repeat Keyword  ${reboot_interval}  Send Heartbeat
+    Repeat Keyword  ${REBOOT_INTERVAL}  Send Heartbeat
