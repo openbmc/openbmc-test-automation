@@ -113,6 +113,14 @@ Configure Static IPv6 From SLAAC Address
     Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}  Version=IPv6
 
 
+Disable DHCP On Eth1 From SLAAC IPv6
+    [Documentation]  Disable DHCP On Eth1 From SLAAC IPv6
+    [Tags]  Disable_DHCP_On_Eth1_From_SLAAC_IPv6
+    [Template]  Disable Or Enable DHCP On Eth1 From IPv6 Address
+
+    SLAAC  ${2}  False
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -235,3 +243,18 @@ Get IPv6 Address And Verify Connectivity
         Wait For IPv6 Host To Ping  ${ipv6_addr}
     END
     Verify SSH Connection Via IPv6  ${ipv6_addr}
+
+Disable Or Enable DHCP On Eth1 From IPv6 Address
+    [Documentation]  Disable Or Enable DHCP On Eth1 From IPv6 Address
+    [Arguments]  ${ipv6_adress_type}  ${channel_number}  ${DHCP_state}
+
+    # Description of argument(s):
+    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+    # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+    # DHCP_state  Enable or Disable DHCP
+
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_adress_type}  ${channel_number}
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+    Set DHCPEnabled To Enable Or Disable  ${DHCP_state}  eth1  Version=IPv6
