@@ -9,7 +9,10 @@ Library                 ../lib/bmc_network_utils.py
 *** Variables ***
 # MAC input from user.
 ${MAC_ADDRESS}          ${EMPTY}
-
+&{DHCP_ENABLED}           DHCPEnabled=${True}
+&{DHCP_DISABLED}          DHCPEnabled=${False}
+&{DISABLE_DHCP}           DHCPv4=${DHCP_DISABLED}
+&{ENABLE_DHCP}            DHCPv4=${DHCP_ENABLED}
 
 *** Keywords ***
 
@@ -999,6 +1002,7 @@ Set DHCPEnabled To Enable Or Disable
     [Documentation]  Enable or Disable DHCP on the interface.
     [Arguments]  ${dhcp_enabled}=${False}  ${interface}=${ethernet_interface}
     ...          ${valid_status_code}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
+    ...          ${Version}=IPv4
 
     # Description of argument(s):
     # dhcp_enabled        False for disabling DHCP and True for Enabling DHCP.
@@ -1007,6 +1011,12 @@ Set DHCPEnabled To Enable Or Disable
     #                     Default is HTTP_OK.
 
     ${data}=  Set Variable If  ${dhcp_enabled} == ${False}  ${DISABLE_DHCP}  ${ENABLE_DHCP}
-    ${resp}=  Redfish.Patch
-    ...  /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/${interface}
-    ...  body=${data}  valid_status_codes=${valid_status_code}
+    IF  '${Version}' == 'IPv4'
+        ${resp}=  Redfish.Patch
+        ...  /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/${interface}
+        ...  body=${data}  valid_status_codes=${valid_status_code}
+    ELSE
+       ${resp}=  RedfishIPv6.Patch
+        ...  /redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/${interface}
+        ...  body=${data}  valid_status_codes=${valid_status_code}
+    END
