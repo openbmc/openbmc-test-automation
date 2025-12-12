@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a10cfa4a_1bc0acde",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-12-12T09:02:52Z",
+      "side": 1,
+      "message": "In GUI we are following channel number 1 or 2. Please check if you can replace ${2} with 2.If yes change it everywhere in your code.",
+      "revId": "bdbb601b39e818e2ef103079dacc515e2fda968d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3f879de_f69bda78",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-12-12T09:02:52Z",
+      "side": 1,
+      "message": "2 spaces before Get Text",
+      "revId": "bdbb601b39e818e2ef103079dacc515e2fda968d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61c48ecf_591e12e2",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-12-12T09:02:52Z",
+      "side": 1,
+      "message": "2 spaces before Get Text",
+      "revId": "bdbb601b39e818e2ef103079dacc515e2fda968d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8da9805d_21ae9b79",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-12-12T09:02:52Z",
+      "side": 1,
+      "message": "Same as above ${1} ---\u003e 1",
+      "revId": "bdbb601b39e818e2ef103079dacc515e2fda968d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
