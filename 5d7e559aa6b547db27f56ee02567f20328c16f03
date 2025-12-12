@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5c19fd3_c5c01021",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 739,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-12-12T11:25:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71487cc8_89704315",
+      "revId": "5d7e559aa6b547db27f56ee02567f20328c16f03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75fa2aa1_2cd8b516",
@@ -35,6 +53,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f2f4578_0ad72702",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 752,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-12-12T11:25:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75fa2aa1_2cd8b516",
+      "revId": "5d7e559aa6b547db27f56ee02567f20328c16f03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08183bef_ab25763a",
@@ -48,6 +84,24 @@
       "writtenOn": "2025-12-12T11:12:52Z",
       "side": 1,
       "message": "same as above",
+      "revId": "5d7e559aa6b547db27f56ee02567f20328c16f03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96f967a9_5f36f6b3",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2025-12-12T11:25:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08183bef_ab25763a",
       "revId": "5d7e559aa6b547db27f56ee02567f20328c16f03",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
