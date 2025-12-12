@@ -45,10 +45,11 @@ OpenBMC Get Request
     ${base_uri}=    Catenate    SEPARATOR=    ${DBUS_PREFIX}    ${uri}
     ${headers}=  Create Dictionary  X-Auth-Token=${XAUTH_TOKEN}  Accept=application/json
     Set To Dictionary  ${kwargs}  headers  ${headers}
-    Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Get
-    ...  base_uri=${base_uri}  args=&{kwargs}
+    IF  '${quiet}' == '${0}'
+        Log Request  method=Get  base_uri=${base_uri}  args=&{kwargs}
+    END
     ${resp}=  GET On Session  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}  expected_status=any
-    Run Keyword If  '${quiet}' == '${0}'  Log Response  ${resp}
+    IF  '${quiet}' == '${0}'  Log Response  ${resp}
     Delete All Sessions
     RETURN    ${resp}
 
@@ -72,10 +73,11 @@ OpenBMC Post Request
     ${headers}=  Create Dictionary   Content-Type=application/json
     ...  X-Auth-Token=${XAUTH_TOKEN}
     Set To Dictionary  ${kwargs}  headers  ${headers}
-    Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post
-    ...  base_uri=${base_uri}  args=&{kwargs}
+    IF  '${quiet}' == '${0}'
+        Log Request  method=Post  base_uri=${base_uri}  args=&{kwargs}
+    END
     ${ret}=  POST On Session  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
-    Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
+    IF  '${quiet}' == '${0}'  Log Response  ${ret}
     Delete All Sessions
     RETURN    ${ret}
 
@@ -121,10 +123,11 @@ OpenBMC Delete Request
     ${headers}=  Create Dictionary   Content-Type=application/json
     ...  X-Auth-Token=${XAUTH_TOKEN}
     Set To Dictionary   ${kwargs}  headers   ${headers}
-    Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Delete
-    ...  base_uri=${base_uri}  args=&{kwargs}
+    IF  '${quiet}' == '${0}'
+        Log Request  method=Delete  base_uri=${base_uri}  args=&{kwargs}
+    END
     ${ret}=  DELETE On Session  openbmc  ${base_uri}  &{kwargs}  timeout=${timeout}
-    Run Keyword If  '${quiet}' == '${0}'  Log Response    ${ret}
+    IF  '${quiet}' == '${0}'  Log Response    ${ret}
     Delete All Sessions
     RETURN    ${ret}
 
@@ -268,8 +271,9 @@ Read Attribute
     ${resp}=  OpenBMC Get Request  ${uri}attr/${attr}  timeout=${timeout}
     ...  quiet=${quiet}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-    Run Keyword If  '${expected_value}' != '${EMPTY}'
-    ...  Should Be Equal As Strings  ${expected_value}  ${resp.json()["data"]}
+    IF  '${expected_value}' != '${EMPTY}'
+        Should Be Equal As Strings  ${expected_value}  ${resp.json()["data"]}
+    END
     RETURN    ${resp.json()["data"]}
 
 
@@ -368,17 +372,17 @@ Upload Image To BMC
     # If /redfish/v1/SessionService/Sessions POST fails, fallback to
     # REST /login method.
     ${passed}=  Run Keyword And Return Status   Redfish Login
-    Run Keyword If  ${passed} != True   Initialize OpenBMC  ${timeout}  quiet=${quiet}
+    IF  ${passed} != True   Initialize OpenBMC  ${timeout}  quiet=${quiet}
     ${session_object}=  Set Variable If  ${passed}  redfish  openbmc
 
     ${base_uri}=  Catenate  SEPARATOR=  ${DBUS_PREFIX}  ${uri}
     ${headers}=  Create Dictionary  Content-Type=application/octet-stream
     ...  X-Auth-Token=${XAUTH_TOKEN}  Accept=application/json
     Set To Dictionary  ${kwargs}  headers  ${headers}
-    Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post
+    IF  '${quiet}' == '${0}'  Log Request  method=Post
     ...  base_uri=${base_uri}  args=&{kwargs}
     ${ret}=  POST On Session  ${session_object}  ${base_uri}  &{kwargs}  timeout=${timeout}
-    Run Keyword If  '${quiet}' == '${0}'  Log Response  ${ret}
+    IF  '${quiet}' == '${0}'  Log Response  ${ret}
     Valid Value  ret.status_code  ${valid_status_codes}
     Delete All Sessions
 
@@ -431,9 +435,11 @@ Redfish Get Request
     ${base_uri}=  Catenate  SEPARATOR=  ${DBUS_PREFIX}  ${uri}
     ${headers}=  Create Dictionary  Content-Type=application/json  X-Auth-Token=${XAUTH_TOKEN}
     Set To Dictionary   ${kwargs}  headers  ${headers}
-    Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post  base_uri=${base_uri}  args=&{kwargs}
+    IF  '${quiet}' == '${0}'
+        Log Request  method=Post  base_uri=${base_uri}  args=&{kwargs}
+    END
     ${resp}=  GET On Session  redfish  ${base_uri}  &{kwargs}  timeout=${timeout}
-    Run Keyword If  '${quiet}' == '${0}'  Log Response  ${resp}
+    IF  '${quiet}' == '${0}'  Log Response  ${resp}
 
     RETURN  ${resp}
 
@@ -455,8 +461,10 @@ Redfish Post Request
     ${base_uri}=  Catenate  SEPARATOR=  ${DBUS_PREFIX}  ${uri}
     ${headers}=  Create Dictionary  Content-Type=application/json  X-Auth-Token=${XAUTH_TOKEN}
     Set To Dictionary   ${kwargs}  headers  ${headers}
-    Run Keyword If  '${quiet}' == '${0}'  Log Request  method=Post  base_uri=${base_uri}  args=&{kwargs}
+    IF  '${quiet}' == '${0}'
+        Log Request  method=Post  base_uri=${base_uri}  args=&{kwargs}
+    END
     ${resp}=  POST On Session  redfish  ${base_uri}  &{kwargs}  timeout=${timeout}  expected_status=any
-    Run Keyword If  '${quiet}' == '${0}'  Log Response  ${resp}
+    IF  '${quiet}' == '${0}'  Log Response  ${resp}
 
     RETURN  ${resp}
