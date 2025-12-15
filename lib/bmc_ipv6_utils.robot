@@ -372,6 +372,7 @@ Verify Functionality Of IPv4 Address
             Should Be Equal  ${dhcp_status}  Disabled
         END
         List Should Not Contain Value  ${ipv4_addressorigin_list}  DHCP
+        Element Should Contain  ${ipv4_addr_origin_elements}  Static
     ELSE IF  '${ipv4_adress_type}' == 'DHCP'
         IF  '${channel_number}' == '${1}'
             ${dhcp_status}=  Get Text  ${xpath_eth0_dhcpv4_button}
@@ -381,4 +382,5 @@ Verify Functionality Of IPv4 Address
             Should Be Equal  ${dhcp_status}  Enabled
         END
         List Should Not Contain Value  ${ipv4_addressorigin_list}  Static
+        Element Should Contain  ${ipv4_addr_origin_elements}  DHCP
     END
