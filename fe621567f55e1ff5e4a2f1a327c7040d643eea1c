@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9c1269d_d2507da6",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-15T15:56:04Z",
+      "side": 1,
+      "message": "Rearrange all the Success and expected outputs first followed by the invalid format ones.",
+      "range": {
+        "startLine": 297,
+        "startChar": 4,
+        "endLine": 297,
+        "endChar": 99
+      },
+      "revId": "fe621567f55e1ff5e4a2f1a327c7040d643eea1c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd6fc470_c0f287ef",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-15T15:56:04Z",
+      "side": 1,
+      "message": "Can a GUI check be added here as well?\nElement Should Contain DHCP?",
+      "range": {
+        "startLine": 384,
+        "startChar": 8,
+        "endLine": 384,
+        "endChar": 73
+      },
+      "revId": "fe621567f55e1ff5e4a2f1a327c7040d643eea1c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
