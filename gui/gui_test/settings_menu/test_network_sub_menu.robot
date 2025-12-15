@@ -88,6 +88,8 @@ ${test_ipv4_addr_2}                      10.7.6.5
 ${test_ipv6_addr}                        2001:db8:3333:4444:5555:6666:7777:8888
 ${test_ipv6_addr_1}                      2001:db8:3333:4444:5555:6666:7777:8889
 ${test_ipv6_addr_2}                      2001:db8:3333:4444:5555:6666:7777:8890
+${ipv6_multi_block}                      2001:0022:0000:0000:1:2:3:8
+${ipv6_multi_block_addr}                 2001:22::1:2:3:8
 ${ipv4_hexword_addr}                     10.5.5.6:1A:1B:1C:1D:1E:1F
 ${invalid_hexadec_ipv6}                  x:x:x:x:x:x:10.5.5.6
 ${ipv6_multi_short}                      2001::33::111
@@ -292,6 +294,7 @@ Configure And Verify Static IPv6 Address
     ${ipv4_hexword_addr}             ${test_prefix_length}  Invalid format
     ${invalid_hexadec_ipv6}          ${test_prefix_length}  Invalid format
     ${ipv6_multi_short}              ${test_prefix_length}  Invalid format
+    ${ipv6_multi_block}              ${test_prefix_length}  Success         ${ipv6_multi_block_addr}
 
 
 Configure And Verify Static Default Gateway
@@ -767,6 +770,21 @@ Verify Eth0 Static IPv4 Functionality In The Presence Of DHCPv6 Via GUI
     # Verify DHCPv6 button status in GUI.
     ${dhcpv6_status}=  Get Text  ${xpath_eth0_dhcpv6_button}
     Should Be Equal  ${dhcpv6_status}  Enabled
+
+    Verify Functionality Of IPv4 Address  Static  1
+
+
+Verify Eth0 Static IPv4 Functionality In The Presence Of Staticv6 Via GUI
+    [Documentation]  Verify eth0 static IPv4 functionality in the presence of Staticv6 via GUI.
+    [Tags]   Verify_Eth0_Static_IPv4_Functionality_In_The_Presence_Of_Staticv6_Via_GUI
+    [Setup]  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}
+    ...      ${test_prefix_length}  Success
+
+    # Verify Presence of Staticv6 address and origin.
+    @{ipv6_address_origin_list}  ${staticv6_addr}=
+    ...  Get Address Origin List And Address For Type  Static  1
+    Should Contain  ${ipv6_address_origin_list}  Static
+    Should Not Be Empty  ${staticv6_addr}  msg=Staticv6 address is not present.
 
     Verify Functionality Of IPv4 Address  Static  1
 
