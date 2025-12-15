@@ -422,10 +422,12 @@ Verify Channel Auth Command For Invalid Data Length
    #               e.g. high - add extra byte to request data like "0x06 0x38 0x01 0x04 0x01".
    #               low - reduce bytes in actual request data like "0x06 0x38".
 
-   ${req_cmd}=  Set Variable If  '${byte_length}' == 'low'
-   ...  Catenate  ${IPMI_RAW_CMD['Get Channel Auth Cap']['get'][0]}  ${CHANNEL_NUMBER}
-   ...  ELSE
-   ...  Catenate  ${IPMI_RAW_CMD['Get Channel Auth Cap']['get'][0]}  ${CHANNEL_NUMBER} 0x04 0x01
+   IF  '${byte_length}' == 'low'
+        ${req_cmd}=  Catenate  ${IPMI_RAW_CMD['Get Channel Auth Cap']['get'][0]}  ${CHANNEL_NUMBER}
+   ELSE
+        ${req_cmd}=  Catenate  ${IPMI_RAW_CMD['Get Channel Auth Cap']['get'][0]}
+        ...  ${CHANNEL_NUMBER} 0x04 0x01A
+   END
 
    Verify Invalid IPMI Command  ${req_cmd}  0xc7
 

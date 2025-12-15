@@ -40,13 +40,16 @@ Run IPMI Command
     #                               -C=3, -I=lanplus, etc.).  Currently, only
     #                               used for external IPMI commands.
 
-    ${resp}=  Run Keyword If  '${IPMI_COMMAND}' == 'External'
-    ...    Run External IPMI Raw Command  ${command}  ${fail_on_err}  &{options}
-    ...  ELSE IF  '${IPMI_COMMAND}' == 'Inband'
-    ...    Run Inband IPMI Raw Command  ${command}
-    ...  ELSE IF  '${IPMI_COMMAND}' == 'Dbus'
-    ...    Run Dbus IPMI RAW Command  ${command}
-    ...  ELSE  Fail  msg=Invalid IPMI Command type provided: ${IPMI_COMMAND}
+    IF  '${IPMI_COMMAND}' == 'External'
+        ${resp}=  Run External IPMI Raw Command  ${command}  ${fail_on_err}  &{options}
+    ELSE IF  '${IPMI_COMMAND}' == 'Inband'
+        ${resp}=  Run Inband IPMI Raw Command  ${command}
+    ELSE IF  '${IPMI_COMMAND}' == 'Dbus'
+        ${resp}=  Run Dbus IPMI RAW Command  ${command}
+    ELSE
+        Fail  msg=Invalid IPMI Command type provided: ${IPMI_COMMAND}
+    END
+
     RETURN  ${resp}
 
 
@@ -64,13 +67,16 @@ Run IPMI Standard Command
     #                               -C=3, -I=lanplus, etc.).  Currently, only
     #                               used for external IPMI commands.
 
-    ${resp}=  Run Keyword If  '${IPMI_COMMAND}' == 'External'
-    ...    Run External IPMI Standard Command  ${command}  ${fail_on_err}  ${expected_rc}  &{options}
-    ...  ELSE IF  '${IPMI_COMMAND}' == 'Inband'
-    ...    Run Inband IPMI Standard Command  ${command}  ${fail_on_err}
-    ...  ELSE IF  '${IPMI_COMMAND}' == 'Dbus'
-    ...    Run Dbus IPMI Standard Command  ${command}
-    ...  ELSE  Fail  msg=Invalid IPMI Command type provided : ${IPMI_COMMAND}
+    IF  '${IPMI_COMMAND}' == 'External'
+        ${resp}=  Run External IPMI Standard Command  ${command}  ${fail_on_err}  ${expected_rc}  &{options}
+    ELSE IF  '${IPMI_COMMAND}' == 'Inband'
+       ${resp}=  Run Inband IPMI Standard Command  ${command}  ${fail_on_err}
+    ELSE IF  '${IPMI_COMMAND}' == 'Dbus'
+       ${resp}=  Run Dbus IPMI Standard Command  ${command}
+    ELSE
+        Fail  msg=Invalid IPMI Command type provided : ${IPMI_COMMAND}
+    END
+
     RETURN  ${resp}
 
 
@@ -133,8 +139,10 @@ Run Inband IPMI Standard Command
     # os_password                   The OS host passwrd.
     # login_host                    Indicates that this keyword should login to host OS.
 
-    Run Keyword If  ${login_host} == ${1}
-    ...  Login To OS Host  ${os_host}  ${os_username}  ${os_password}
+    IF  ${login_host} == ${1}
+        Login To OS Host  ${os_host}  ${os_username}  ${os_password}
+    END
+
     Check If IPMI Tool Exist
 
     ${ipmi_cmd}=  Catenate  ${IPMI_INBAND_CMD}  ${command}
@@ -219,9 +227,11 @@ Deactivate SOL Via IPMI
     ${ipmi_cmd}=  Create IPMI Ext Command String  sol deactivate
     Qprint Issuing  ${ipmi_cmd}
     ${rc}  ${output}=  Run and Return RC and Output  ${ipmi_cmd}
-    Run Keyword If  ${rc} > 0  Run Keywords
-    ...  Run Keyword And Ignore Error  Terminate Process  sol_proc
-    ...  AND  Return From Keyword  ${output}
+
+    IF  ${rc} > 0
+        Run Keyword And Ignore Error  Terminate Process  sol_proc
+        Return From Keyword  ${output}
+    END
 
     ${output}=  OperatingSystem.Get File  ${file_path}  encoding_errors=ignore
 
@@ -273,7 +283,8 @@ Byte Conversion
     #   array population.
     #   Equivalent dbus-send argument for smaller IPMI raw command:
     #   byte:0x00 byte:0x06 byte:0x00 byte:0x36
-    Run Keyword if   ${argLength} == 9     Return from Keyword    ${valueinBytesWithoutArray}
+
+    IF   ${argLength} == 9     Return from Keyword    ${valueinBytesWithoutArray}
     RETURN    ${valueinBytesWithArray}
 
 
@@ -308,11 +319,13 @@ Copy ipmitool
     ${response}  ${stderr}  ${rc}=  BMC Execute Command
     ...  which ipmitool  ignore_err=${1}
     ${installed}=  Get Regexp Matches  ${response}  ipmitool
-    Run Keyword If  ${installed} == ['ipmitool']
-    ...  Run Keywords  Set Suite Variable  ${IPMITOOL_PATH}  ${response}
-    ...  AND  SSHLibrary.Open Connection     ${OPENBMC_HOST}
-    ...  AND  SSHLibrary.Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}
-    ...  AND  Return From Keyword
+
+    IF  ${installed} == ['ipmitool']
+        Set Suite Variable  ${IPMITOOL_PATH}  ${response}
+        SSHLibrary.Open Connection     ${OPENBMC_HOST}
+        SSHLibrary.Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}
+        Return From Keyword
+    END
 
     OperatingSystem.File Should Exist  tools/ipmitool  msg=${ipmitool_error}
     Import Library      SCPLibrary      AS       scp
@@ -334,7 +347,7 @@ Initiate Host Boot Via External IPMI
     ${output}=  Run External IPMI Standard Command  chassis power on
     Should Not Contain  ${output}  Error
 
-    Run Keyword If  '${wait}' == '${0}'  Return From Keyword
+    IF  '${wait}' == '${0}'  Return From Keyword
     Wait Until Keyword Succeeds  10 min  10 sec  Is Host Running
 
 
@@ -349,7 +362,7 @@ Initiate Host PowerOff Via External IPMI
     ${output}=  Run External IPMI Standard Command  chassis power off
     Should Not Contain  ${output}  Error
 
-    Run Keyword If  '${wait}' == '${0}'  Return From Keyword
+    IF  '${wait}' == '${0}'  Return From Keyword
     Wait Until Keyword Succeeds  3 min  10 sec  Is Host Off
 
 
