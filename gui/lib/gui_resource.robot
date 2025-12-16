@@ -235,8 +235,9 @@ Power Off Server
         Navigate To Server Power Page
         Wait And Click Element  ${xpath_power_shutdown}
         Click Button  ${xpath_confirm}
-        Wait Until Element Is Visible  ${xpath_power_poweron}  timeout=60
+        #Wait Until Element Is Visible  ${xpath_power_poweron}  timeout=60
         Verify And Close Information Message Via GUI
+        Reload Page And Check Power Status  ${xpath_power_poweron}
         Wait Until Keyword Succeeds  5m  30s  Check Boot Progress State Via Redfish  None  Disabled
     END
 
@@ -244,6 +245,7 @@ Power Off Server
 Power On Server
     [Documentation]  Powering on server.
 
+    Redfish.Login
     ${boot_state}  ${host_state}=  Redfish Get Boot Progress
     Log To Console  Current boot state: ${boot_state}
 
@@ -256,10 +258,21 @@ Power On Server
         END
         Set BIOS Attribute  pvm_stop_at_standby  Disabled
         Wait And Click Element  ${xpath_power_power_on}
-        Wait Until Element Is Visible  ${xpath_power_shutdown}  timeout=60s
         Verify And Close Information Message Via GUI
+        Reload Page And Check Power Status  ${xpath_power_shutdown}
         Wait Until Keyword Succeeds  15m  45s  Check Boot Progress State Via Redfish  OSRunning  Enabled
     END
+
+
+Reload Page And Check Power Status
+    [Documentation]    Reloads the current page and waits until the Power Shutdown or 
+    ...                Power On element becomes visible based on argument passed.
+    [Arguments]  ${xpath_power_on_or_shutdown}
+
+    Wait Until Keyword Succeeds    15m    45s
+    ...   Run Keywords
+    ...      Refresh GUI
+    ...      AND    Page Should Contain Element    ${xpath_power_on_or_shutdown}
 
 
 Check Boot Progress State Via Redfish
