@@ -493,7 +493,7 @@ Get Network Configuration
 Add IP Address
     [Documentation]  Add IP Address To BMC.
     [Arguments]  ${ip}  ${subnet_mask}  ${gateway}
-    ...  ${valid_status_codes}=${HTTP_OK}
+    ...  ${valid_status_codes}=${HTTP_OK}  ${version}=IPv4
 
     # Description of argument(s):
     # ip                  IP address to be added (e.g. "10.7.7.7").
@@ -526,8 +526,13 @@ Add IP Address
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
-    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
-    ...  valid_status_codes=[${valid_status_codes}]
+    IF  '${version}' == 'IPv4'
+        Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+        ...  valid_status_codes=[${valid_status_codes}]
+    ELSE
+        RedfishIPv6.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+        ...  valid_status_codes=[${valid_status_codes}]
+    END
 
     Return From Keyword If  '${valid_status_codes}' != '${HTTP_OK},${HTTP_NO_CONTENT}'
 
@@ -542,6 +547,7 @@ Add IP Address
 Delete IP Address
     [Documentation]  Delete IP Address Of BMC.
     [Arguments]  ${ip}  ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
+    ...  ${version}=IPv4
 
     # Description of argument(s):
     # ip                  IP address to be deleted (e.g. "10.7.7.7").
@@ -571,8 +577,13 @@ Delete IP Address
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
-    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
-    ...  valid_status_codes=${valid_status_codes}
+    IF  '${Version}' == 'IPv4'
+        Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+        ...  valid_status_codes=${valid_status_codes}
+    ELSE
+        RedfishIPv6.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+        ...  valid_status_codes=${valid_status_codes}
+    END
 
     # Note: Network restart takes around 15-18s after patch request processing
     Sleep  ${NETWORK_TIMEOUT}s
