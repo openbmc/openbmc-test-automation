@@ -7,7 +7,8 @@ Library                 ../lib/utils.py
 Library                 ../lib/bmc_network_utils.py
 
 *** Variables ***
-${test_ipv6_addr}           2001:db8:3333:4444:5555:6666:7777:9999
+${test_ipv6_addr}           2001:db8:3333:4444:5555:6666:7777:8888
+${test_ipv6_addr1}          2001:db8:3333:4444:5555:6666:7777:9999
 ${test_prefix_length}       64
 
 *** Keywords ***
@@ -222,6 +223,64 @@ Configure IPv6 Address On BMC
     END
 
     #Verify redfish and CLI data matches.
+    Validate IPv6 Network Config On BMC
+
+
+Delete IPv6 Address
+    [Documentation]  Delete IPv6 address of BMC.
+    [Arguments]  ${ipv6_addr}
+    ...    ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
+    ...    ${channel_number}=${CHANNEL_NUMBER}  ${Version}=IPv4
+
+    # Description of argument(s):
+    # ipv6_addr           IPv6 address to be deleted (e.g. "2001:1234:1234:1234::1234").
+    # channel_number     Channel number (1 - eth0 and 2 - eth1).
+    # valid_status_codes  Expected return code from patch operation
+    #                     (e.g. "200").  See prolog of rest_request
+    #                     method in redfish_plus.py for details.
+
+    ${empty_dict}=  Create Dictionary
+    ${patch_list}=  Create List
+
+    @{ipv6_network_configurations}=  Get IPv6 Network Configuration  ${channel_number}
+    FOR  ${ipv6_network_configuration}  IN  @{ipv6_network_configurations}
+        IF  '${ipv6_network_configuration['Address']}' == '${ipv6_addr}'
+            Append To List  ${patch_list}  ${null}
+        ELSE
+            Append To List  ${patch_list}  ${empty_dict}
+        END
+    END
+
+    ${ip_found}=  Run Keyword And Return Status  List Should Contain Value
+    ...  ${patch_list}  ${null}  msg=${ipv6_addr} does not exist on BMC
+    Pass Execution If  ${ip_found} == ${False}  ${ipv6_addr} does not exist on BMC
+
+    # Run patch command only if given IP is found on BMC
+    ${data}=  Create Dictionary  IPv6StaticAddresses=${patch_list}
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
+
+    IF  '${Version}' == 'IPv4'
+        Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+        ...  valid_status_codes=${valid_status_codes}
+    ELSE
+        Redfish IPv6.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+        ...  valid_status_codes=${valid_status_codes}
+    END
+
+    # Note: Network restart takes around 15-18s after patch request processing
+    Sleep  ${NETWORK_TIMEOUT}s
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+    # IPv6 address that is deleted should not be there on BMC.
+    ${delete_status}=  Run Keyword And Return Status  Verify IPv6 On BMC  ${ipv6_addr}
+    IF  '${valid_status_codes}' == '[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]'
+        Should Be True  '${delete_status}' == '${False}'
+    ELSE
+        Should Be True  '${delete_status}' == '${True}'
+    END
+
     Validate IPv6 Network Config On BMC
 
 
