@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c82a71c_4db9c13a",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-12-16T15:37:56Z",
+      "side": 1,
+      "message": "Please elaborate the documentation, don\u0027t keep it same as test case name.",
+      "revId": "86fea92c1fbcde4a0c4cf51e9305ff9fbb0eda16",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38a976e6_48d9fe0f",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-12-16T15:37:56Z",
+      "side": 1,
+      "message": "Please change the test case name \nex : Configure Static IPv6 Address From Different IPv6 Assigning Methods",
+      "revId": "86fea92c1fbcde4a0c4cf51e9305ff9fbb0eda16",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1594005_12d2acb8",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-12-16T15:37:56Z",
+      "side": 1,
+      "message": "change the document as well",
+      "revId": "86fea92c1fbcde4a0c4cf51e9305ff9fbb0eda16",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ad65278_6fe38e54",
         "filename": "redfish/managers/test_bmc_config_ipv6.robot",
         "patchSetId": 2
