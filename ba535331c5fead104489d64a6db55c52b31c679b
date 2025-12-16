@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e9493b2_5ecffd7c",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-16T12:16:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a08145af_e8e0b7bb",
+      "range": {
+        "startLine": 496,
+        "startChar": 45,
+        "endLine": 496,
+        "endChar": 52
+      },
+      "revId": "ba535331c5fead104489d64a6db55c52b31c679b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45a6d3ce_9168bf6c",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36e665a6_0db12c4e",
+        "filename": "lib/bmc_network_utils.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 550,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-16T12:16:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45a6d3ce_9168bf6c",
+      "range": {
+        "startLine": 550,
+        "startChar": 11,
+        "endLine": 550,
+        "endChar": 18
+      },
+      "revId": "ba535331c5fead104489d64a6db55c52b31c679b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e71470e4_c1c55465",
@@ -60,6 +108,30 @@
       "writtenOn": "2025-12-16T10:14:20Z",
       "side": 1,
       "message": "Configure IPv4 address from SLAAC IPv6 and verify.",
+      "range": {
+        "startLine": 126,
+        "startChar": 20,
+        "endLine": 126,
+        "endChar": 70
+      },
+      "revId": "ba535331c5fead104489d64a6db55c52b31c679b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64648a2a_ac4b1964",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-16T12:16:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e71470e4_c1c55465",
       "range": {
         "startLine": 126,
         "startChar": 20,
