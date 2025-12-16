@@ -16,6 +16,23 @@
       "message": "Break this line into 2.\n...  channel_number\u003d${2}  Version\u003dIPv6",
       "revId": "86fea92c1fbcde4a0c4cf51e9305ff9fbb0eda16",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc3352dd_26acb010",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-12-16T13:53:53Z",
+      "side": 1,
+      "message": "In line no.261 we have eth1 and here channel_numner\u003d${2}, maintain the consistency",
+      "revId": "86fea92c1fbcde4a0c4cf51e9305ff9fbb0eda16",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
