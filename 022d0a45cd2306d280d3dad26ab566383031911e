@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf329bda_d4c5f6cc",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-12-16T15:31:28Z",
+      "side": 1,
+      "message": "please elaborate documentation, don\u0027t keep the same as test case name",
+      "revId": "022d0a45cd2306d280d3dad26ab566383031911e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8acaa181_56976428",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-12-16T15:31:28Z",
+      "side": 1,
+      "message": "if it is for eth1 then please change the test case name",
+      "revId": "022d0a45cd2306d280d3dad26ab566383031911e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37536941_7351ac24",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-12-16T15:31:28Z",
+      "side": 1,
+      "message": "instead of version \u003dIPv6, you can directly use IPv6 right?",
+      "revId": "022d0a45cd2306d280d3dad26ab566383031911e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
