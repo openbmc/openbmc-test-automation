@@ -102,15 +102,16 @@ Verify IPv4 And IPv6 Access Concurrently Via Redfish
     Should Be Equal  ${resp1.dict["DHCPv4"]['UseDNSServers']}  ${True}
 
 
-Configure Static IPv6 From SLAAC Address
-    [Documentation]  Configure Static IPv6 From SLAAC Address.
-    [Tags]  Configure_Static_IPv6_From_SLAAC_Address
+Configure Static IPv6 From SLAAC And Static IPv6 Address
+    [Documentation]  Configure static IPv6 from SLAAC and static IPv6 address.
+    [Tags]  Configure_Static_IPv6_From_SLAAC_And_Static_IPv6_Address
+    [Template]  Configure Static IPv6 From IPv6 Address
 
-    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr}=
-    ...  Get Address Origin List And Address For Type  SLAAC  ${2}
-    Connect BMC Using IPv6 Address  ${ipv6_slaac_addr}
-    RedfishIPv6.Login
-    Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}  Version=IPv6
+    # Address_type  channel_number
+    SLAAC           ${1}
+    Static          ${1}
+    SLAAC           ${2}
+    Static          ${2}
 
 
 Disable DHCP On Eth1 From SLAAC IPv6 And Verify
@@ -258,3 +259,19 @@ Disable Or Enable DHCP On Eth1 From IPv6 Address
     Connect BMC Using IPv6 Address  ${ipv6_addr}
     RedfishIPv6.Login
     Set DHCPEnabled To Enable Or Disable  ${DHCP_state}  eth1  Version=IPv6
+
+
+Configure Static IPv6 From IPv6 Address
+    [Documentation]  Configure static IPv6 from IPv6 address.
+    [Arguments]  ${ipv6_adress_type}  ${channel_number}
+
+    # Description of argument(s):
+    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+    # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_adress_type}  ${channel_number}
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+    Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}  Version=IPv6
+    Configure IPv6 Address On BMC  ${test_ipv6_addr1}  ${test_prefix_length}  channel_number=${2}  Version=IPv6
