@@ -26,7 +26,8 @@ Test Tags     BMC_IPv6_Config
 ${SERVER_USERNAME}      ${EMPTY}
 ${SERVER_PASSWORD}      ${EMPTY}
 ${SERVER_IPv6}          ${EMPTY}
-
+${test_ipv4_addr}       10.7.7.7
+${test_subnet_mask}     255.255.255.0
 
 *** Test Cases ***
 
@@ -119,6 +120,15 @@ Disable DHCP On Eth1 From SLAAC IPv6 And Verify
     [Template]  Disable Or Enable DHCP On Eth1 From IPv6 Address
 
     SLAAC  ${2}  False
+
+
+Configure IPv4 Address From IPv6 Address And Verify
+    [Documentation]  Configure IPv4 address from IPv6 address and verify configuration.
+    [Tags]  Configure_IPv4_Address_From_IPv6_Address_And_Verify
+    [Template]  Configure IPv4 Address From IPv6 And Verify
+    [Teardown]  Delete IP Address  ${test_ipv4_addr}  version=IPv6
+
+    SLAAC  ${1}  ${test_ipv4_addr}
 
 
 *** Keywords ***
@@ -258,3 +268,21 @@ Disable Or Enable DHCP On Eth1 From IPv6 Address
     Connect BMC Using IPv6 Address  ${ipv6_addr}
     RedfishIPv6.Login
     Set DHCPEnabled To Enable Or Disable  ${DHCP_state}  eth1  Version=IPv6
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+
+Configure IPv4 Address From IPv6 And Verify
+    [Documentation]  Configure IPv4 address from IPv6 and verify.
+    [Arguments]   ${ipv6_adress_type}  ${channel_number}  ${test_ipv4_addr}
+
+    # Description of argument(s):
+    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+    # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+    # test_ipv4_addr     IPv4 address to add.
+
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_adress_type}  ${channel_number}
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+    ${test_gateway}=  Get BMC Default Gateway
+    Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}  version=IPv6
