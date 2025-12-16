@@ -1,4 +1,4 @@
-***Settings***
+*** Settings ***
 Documentation   Generic REST/SSH/IPMI stress buster program.
 
 Library        ../lib/jobs_processing.py
@@ -12,7 +12,7 @@ Test Teardown  FFDC On Test Case Fail
 
 Test Tags      BMC_Stress_Buster
 
-***Variables***
+*** Variables ***
 
 # Caller can specify a value for the following using -v parms
 # Currently REST/SSH/IPMI session allowed.
@@ -20,7 +20,7 @@ ${REST_BUSTER_MAX}    ${16}
 ${SSH_BUSTER_MAX}     ${16}
 ${IPMI_BUSTER_MAX}    ${5}
 
-***Test Cases***
+*** Test Cases ***
 
 Stress BMC REST Server
     [Documentation]  Execute maximum allowed REST operation.
@@ -53,7 +53,7 @@ Stress BMC IPMI Server
     Dictionary Should Not Contain Value  ${dict}  False
     ...  msg=One or more IPMI operations has failed.
 
-***Keywords***
+*** Keywords ***
 
 REST Enumerate Request On BMC
     [Documentation]  Execute REST GET operation.

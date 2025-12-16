@@ -1,4 +1,4 @@
-***Settings***
+*** Settings ***
 Documentation      Keywords for system related tools installation.
 ...                For HTX refer to https://github.com/open-power/HTX
 
@@ -6,7 +6,7 @@ Documentation      Keywords for system related tools installation.
 Resource     ../lib/boot_utils.robot
 Resource     ../lib/os_utilities.robot
 
-***Keywords***
+*** Keywords ***
 
 Prep OS For HTX Installation
     [Documentation]  Prepare OS for HTX tool installation.

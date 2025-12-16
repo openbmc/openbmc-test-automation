@@ -14,7 +14,7 @@ Test Teardown    Test Teardown Execution
 
 Test Tags       Event_Service
 
-***Variables***
+*** Variables ***
 
 # override this default using -v REMOTE_SERVER_IP:<IP> from CLI
 ${REMOTE_SERVER_IP}    10.7.7.7
