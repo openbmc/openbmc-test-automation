@@ -311,6 +311,7 @@ Verify Text Under Inventory And LEDs Section
 Verify Text Under Dumps Section
     [Documentation]  Verify text under Dumps section in overview page.
     [Tags]  Verify_Text_Under_Dumps_Section
+    [Teardown]  Logout GUI
 
     Page Should Contain  Total
 
