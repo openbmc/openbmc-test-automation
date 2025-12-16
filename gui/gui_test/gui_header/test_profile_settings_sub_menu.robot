@@ -68,6 +68,7 @@ Verify Logged In Username
 Verify Default UTC Timezone Display
     [Documentation]  Set default UTC timezone via GUI and verify timezone value in overview page.
     [Tags]  Verify_Default_UTC_Timezone_Display
+    [Teardown]  Logout GUI
 
     Click Element At Coordinates    ${xpath_default_UTC}    0    0
     Click Element  ${xpath_profile_settings_save_button}
