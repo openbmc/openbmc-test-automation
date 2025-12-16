@@ -51,7 +51,7 @@ Load Certificates Via Eth1 IP Address And Verify
     ${bmc_url_1}  CA                ${CA_FILE_PATH}
 
 
-*** keywords ***
+*** Keywords ***
 
 Suite Setup Execution
     [Documentation]  Do suite setup task.

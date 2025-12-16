@@ -147,7 +147,7 @@ Verify Verbose Flag For Incorrect PLDM Raw Command
     Should Contain  ${pldm_output}  ${PLDM_RAW_CMD_INVALID_OUTPUT}
 
 
-*** keywords ***
+*** Keywords ***
 
 Verify GetPLDMCommands For PLDM Type
     [Documentation]  Verify GetPLDMCommands for given input pldm type with expected pldm cmds.
