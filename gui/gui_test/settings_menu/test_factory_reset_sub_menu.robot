@@ -60,7 +60,8 @@ Verify Reset Server Settings Only Option With Readonly User When Host Off State
      [Documentation]  Verify reset server settings only option
      ...              with readonly user when host at off state.
      [Tags]  Verify_Reset_Server_Settings_Only_Option_With_Readonly_User_When_Host_Off_State
-     [Setup]  Run Keywords  Power Off Server  AND  Create Readonly User And Login To GUI
+     [Setup]  Run Keywords  Power Off Server  AND  Logout GUI
+     ...      AND  Create Readonly User And Login To GUI
      [Teardown]  Delete Readonly User And Logout Current GUI Session
 
      # Navigate to factory reset page.
@@ -79,7 +80,8 @@ Verify Reset Server Settings Only Option Followed By Cancel Operation With Reado
      [Documentation]  Verify reset server seyttings only option followed by
      ...              cancel operation with readonly user when host at poweroff state
      [Tags]  Verify_Reset_Server_Settings_Only_Option_Followed_By_Cancel_Operation_With_Readonly_User
-     [Setup]  Run Keywords  Power Off Server  AND  Create Readonly User And Login To GUI
+     [Setup]  Run Keywords  Power Off Server  AND  Logout GUI
+     ...      AND  Create Readonly User And Login To GUI
      [Teardown]  Delete Readonly User And Logout Current GUI Session
 
      # Navigate to factory reset page.
@@ -96,7 +98,8 @@ Verify Reset BMC And Server Settings Option With Readonly User When Host Off Sta
      [Documentation]  Verify reset bmc and server settings option
      ...              with readonly user when host at off state.
      [Tags]  Verify_Reset_BMC_And_Server_Settings_Option_With_Readonly_User_When_Host_Off_State
-     [Setup]  Run Keywords  Power Off Server  AND  Create Readonly User And Login To GUI
+     [Setup]  Run Keywords  Power Off Server  AND  Logout GUI
+     ...      AND  Create Readonly User And Login To GUI
      [Teardown]  Delete Readonly User And Logout Current GUI Session
 
      # Navigate to factory reset page.
@@ -115,7 +118,8 @@ Verify Reset BMC And Server Settings Option Followed By Cancel Operation With Re
      [Documentation]  Verify reset bmc and server settings option followed by
      ...              cancel operation with readonly user when host at poweroff state
      [Tags]  Verify_Reset_BMC_And_Server_Settings_Option_Followed_By_Cancel_Operation_With_Readonly_User
-     [Setup]  Run Keywords  Power Off Server  AND  Create Readonly User And Login To GUI
+     [Setup]  Run Keywords  Power Off Server  AND  Logout GUI
+     ...      AND  Create Readonly User And Login To GUI
      [Teardown]  Delete Readonly User And Logout Current GUI Session
 
      # Navigate to factory reset page.
