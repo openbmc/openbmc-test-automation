@@ -78,8 +78,8 @@ Verify BMC Reboot Operation
 Verify Reboot BMC Page With Readonly User When Host On State
     [Documentation]  Verify Reboot BMC page with readonly user when Host On state.
     [Tags]  Verify_Reboot_BMC_Page_With_Readonly_User_When_Host_On_State
-    [Setup]  Run Keywords  Power On Server  AND  Create Readonly User And Login To GUI
-    ...      AND  Test Setup Execution
+    [Setup]  Run Keywords  Power On Server  AND  Logout GUI  AND
+    ...      Create Readonly User And Login To GUI  AND  Test Setup Execution
     [Teardown]  Delete Readonly User And Logout Current GUI Session
 
     # Click on Rebbot BMC button.
@@ -96,8 +96,8 @@ Verify Reboot BMC Page With Readonly User When Host On State
 Verify Reboot BMC Page With Readonly User When Host Off State
     [Documentation]  Verify Reboot BMC page with readonly user when Host Off state.
     [Tags]  Verify_Reboot_BMC_Page_With_Readonly_User_When_Host_Off_State
-    [Setup]   Run Keywords  Power Off Server  AND  Create Readonly User And Login To GUI
-    ...      AND  Test Setup Execution
+    [Setup]   Run Keywords  Power Off Server  AND  Logout GUI  AND
+    ...       Create Readonly User And Login To GUI  AND  Test Setup Execution
     [Teardown]  Delete Readonly User And Logout Current GUI Session
 
     # Click on Rebbot BMC button.
