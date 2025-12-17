@@ -45,6 +45,29 @@
       },
       "revId": "5edf250640b6e9fdea0749950dbde7ddf3176e6a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bab4790_48a797ec",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 1628,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2025-12-17T07:14:59Z",
+      "side": 1,
+      "message": "Please delete the IPs in the teardown.",
+      "range": {
+        "startLine": 1628,
+        "startChar": 0,
+        "endLine": 1628,
+        "endChar": 42
+      },
+      "revId": "5edf250640b6e9fdea0749950dbde7ddf3176e6a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
