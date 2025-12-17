@@ -16,6 +16,24 @@
       "message": "if default is 2 then no need to pass it here right? or else add channel number in #761 also",
       "revId": "e2946d0972ca96e5dadb4c8e3580e5b32b7b5fea",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "193abf33_64581db2",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-12-17T09:49:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "575cf8a3_d632c6e7",
+      "revId": "e2946d0972ca96e5dadb4c8e3580e5b32b7b5fea",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
