@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c07397ff_0d57d754",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-12-17T05:33:56Z",
+      "side": 1,
+      "message": "if you are using it as template then please add it in documenattion as well, as per the testcase name you have not mentioned any interfaces but inside you are testing only for eth1 so",
+      "parentUuid": "3193bc34_edcc007f",
+      "revId": "022d0a45cd2306d280d3dad26ab566383031911e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "37536941_7351ac24",
         "filename": "redfish/managers/test_bmc_config_ipv6.robot",
         "patchSetId": 2
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Keeping the same as the arguments are\n${ip}  ${subnet_mask}  ${gateway}\n    ...  ${valid_status_codes}\u003d${HTTP_OK}  version\u003dIPv4\nand im not passing status codes.",
       "parentUuid": "37536941_7351ac24",
+      "revId": "022d0a45cd2306d280d3dad26ab566383031911e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04a1a819_46529eb2",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2025-12-17T05:33:56Z",
+      "side": 1,
+      "message": "agree",
+      "parentUuid": "78e70e1c_4452e716",
       "revId": "022d0a45cd2306d280d3dad26ab566383031911e",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
