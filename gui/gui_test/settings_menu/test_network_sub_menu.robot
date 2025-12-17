@@ -734,6 +734,38 @@ Verify Coexistence Of LinkLocalv4 Staticv6 SLAACv6 And DHCPv6 On Both Interfaces
     2                  LinkLocalv4    Staticv6      SLAACv6    DHCPv6
 
 
+Verify Coexistence Of Multiple IPs On Both Interfaces
+    [Documentation]  Verify coexistence of staticv4,staticv6,dhcpv6,slaacv6,dhcpv4,
+    ...  linklocalv4 on both interfaces.
+    [Tags]   Verify_Coexistence_Of_Multiple_IPs_On_Both_Interfaces
+    [Setup]  Run Keywords  Configure IPv4 And IPv6 On Both Interfaces
+    ...      AND  Set And Verify DHCPv6 States  Enabled  Enabled
+    ...      AND  Set SLAAC Property On Eth0 And Eth1
+    ...      AND  Toggle DHCPv4 State And Verify  Enabled  2
+    [Template]  Coexistence Of IP Addresses
+    [Teardown]  Add Static IP Address And Verify  ${test_ipv4_addr_1}
+    ...         ${test_subnet_mask}  ${default_gateway_2}  Success  2
+
+    # Note: DHCPv6 DHCPv4 and SLAACv6 setup must be present.
+    # Channel_number   ip_type1       ip_type2      ip_type3   ip_type4
+    1                  Staticv4       Staticv6      DHCPv6     SLAACv4
+    2                  DHCPv4         Staticv6      DHCPv6     SLAACv6
+    1                  LinkLocalv4    Staticv6      DHCPv6     SLAACv4
+
+
+Verify Coexistence Of DHCPv4 LinkLocalv6 On Eth1
+    [Documentation]  Verify coexistence of DHCPv4 and Linklocalv6 on eth1 via GUI.
+    [Tags]   Verify_Coexistence_Of_DHCPv4_LinkLocalv6_On_Eth1
+    [Setup]  Toggle DHCPv4 State And Verify  Enabled
+    [Template]  Coexistence Of IP Addresses
+    [Teardown]  Add Static IP Address And Verify  ${test_ipv4_addr_1}
+    ...         ${test_subnet_mask}  ${default_gateway_2}  Success  2
+
+    # Note: DHCPv4 setup must be present.
+    # Channel_number   ip_type1       ip_type2
+    2                  DHCPv4         LinkLocalv6
+
+
 Verify Eth1 DHCPv4 Functionality In The Presence Of DHCPv6 Via GUI
     [Documentation]  Verify eth1 DHCPv4 functionality in the presence of DHCPv6 via GUI.
     ...    Run on setup with DHCPv4 available on eth1.
@@ -1597,13 +1629,13 @@ Configure IPv4 And IPv6 On Both Interfaces
     [Documentation]  Add IPv4 and IPv6 on both interfaces.
 
     Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}
-    ...  AND  ${default_gateway}  Success
+    ...  ${default_gateway}  Success
     Add Static IP Address And Verify  ${test_ipv4_addr_1}  ${test_subnet_mask}
-    ...  AND  ${default_gateway_2}  Success  2
+    ...  ${default_gateway_2}  Success  2
     Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}
-    ...  AND  ${test_prefix_length}  Success
+    ...  ${test_prefix_length}  Success
     Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}
-    ...  AND  ${test_prefix_length}  Success  None  2
+    ...  ${test_prefix_length}  Success  None  2
 
 
 Enable Or Disable SLAAC And Verify Impact On Existing Settings
