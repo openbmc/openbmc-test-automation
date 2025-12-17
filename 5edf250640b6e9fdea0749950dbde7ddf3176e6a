@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a02f41fb_a9a08339",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 747,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-12-17T07:44:58Z",
+      "side": 1,
+      "message": "Keeping the same so that it is applicable for all the scenarios.",
+      "parentUuid": "fc04f92e_66411c6d",
+      "range": {
+        "startLine": 746,
+        "startChar": 4,
+        "endLine": 747,
+        "endChar": 69
+      },
+      "revId": "5edf250640b6e9fdea0749950dbde7ddf3176e6a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1eaffef_6780d951",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "285b4788_936811a7",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-12-17T07:44:58Z",
+      "side": 1,
+      "message": "Same as above",
+      "parentUuid": "a1eaffef_6780d951",
+      "range": {
+        "startLine": 761,
+        "startChar": 4,
+        "endLine": 761,
+        "endChar": 69
+      },
+      "revId": "5edf250640b6e9fdea0749950dbde7ddf3176e6a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bab4790_48a797ec",
@@ -60,6 +108,30 @@
       "writtenOn": "2025-12-17T07:14:59Z",
       "side": 1,
       "message": "Please delete the IPs in the teardown.",
+      "range": {
+        "startLine": 1628,
+        "startChar": 0,
+        "endLine": 1628,
+        "endChar": 42
+      },
+      "revId": "5edf250640b6e9fdea0749950dbde7ddf3176e6a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adbfb2a7_58d86bd4",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 1628,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2025-12-17T07:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bab4790_48a797ec",
       "range": {
         "startLine": 1628,
         "startChar": 0,
