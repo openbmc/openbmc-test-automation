@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e74f25e8_8c2c8f90",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2025-12-18T11:55:33Z",
+      "side": 1,
+      "message": "Verify DHCP Toggle on Eth1 Using IPv6",
+      "revId": "123b971cb53fd98f9c688ad5b6db60806e3286b9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
