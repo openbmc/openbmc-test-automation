@@ -115,12 +115,21 @@ Configure Static IPv6 From SLAAC And Static IPv6 Address
     Static          ${2}
 
 
-Disable DHCP On Eth1 From SLAAC IPv6 And Verify
-    [Documentation]  Disable DHCP on eth1 from SLAAC IPv6 and verify.
-    [Tags]  Disable_DHCP_On_Eth1_From_SLAAC_IPv6_And_Verify
+Ensure Proper DHCP Disable And Enable On Eth1 Via IPv6
+    [Documentation]  Disable and Enable DHCP on Eth1 by logging in
+    ...    from SLAAC and static IPv6 address from both interfaces and verify.
+    [Tags]  Ensure_Proper_DHCP_Disable_And_Enable_On_Eth1_Via_IPv6
     [Template]  Disable Or Enable DHCP On Eth1 From IPv6 Address
 
-    SLAAC  ${2}  False
+    # Address_type  channel_number  DHCP_state.
+    SLAAC           ${1}            False
+    SLAAC           ${2}            False
+    Static          ${1}            False
+    Static          ${2}            False
+    SLAAC           ${1}            True
+    SLAAC           ${2}            True
+    Static          ${1}            True
+    Static          ${2}            True
 
 
 Configure IPv4 Address From IPv6 Address And Verify
@@ -269,6 +278,12 @@ Disable Or Enable DHCP On Eth1 From IPv6 Address
     Connect BMC Using IPv6 Address  ${ipv6_addr}
     RedfishIPv6.Login
     Set DHCPEnabled To Enable Or Disable  ${DHCP_state}  eth1  Version=IPv6
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status  ${2}
+    IF  '${DHCP_state}' == 'True'
+        Should Be Equal  ${DHCPEnabled}  ${True}
+    ELSE
+        Should Be Equal  ${DHCPEnabled}  ${False}
+    END
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
 
