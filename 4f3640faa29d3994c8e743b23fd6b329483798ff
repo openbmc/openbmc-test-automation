@@ -16,6 +16,24 @@
       "message": "Alignment of spaces. Please correct here",
       "revId": "4f3640faa29d3994c8e743b23fd6b329483798ff",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47965477_44ec66a4",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 25
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1001281
+      },
+      "writtenOn": "2025-12-18T04:54:15Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "8b6c8327_d37ba187",
+      "revId": "4f3640faa29d3994c8e743b23fd6b329483798ff",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
