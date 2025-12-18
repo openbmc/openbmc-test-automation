@@ -2,19 +2,19 @@
 Documentation  Network interface IPv6 configuration connected to DHCP server
                ...   and verification tests.
 
-Resource       ../../lib/bmc_redfish_resource.robot
-Resource       ../../lib/openbmc_ffdc.robot
-Resource       ../../lib/bmc_ipv6_utils.robot
-Resource       ../../lib/bmc_network_utils.robot
-Resource       ../../lib/protocol_setting_utils.robot
+Resource        ../../lib/bmc_redfish_resource.robot
+Resource        ../../lib/openbmc_ffdc.robot
+Resource        ../../lib/bmc_ipv6_utils.robot
+Resource        ../../lib/bmc_network_utils.robot
+Resource        ../../lib/protocol_setting_utils.robot
 
-Library        Collections
-Library        Process
-Library        OperatingSystem
+Library         Collections
+Library         OperatingSystem
+Library         Process
 Suite Setup     Suite Setup Execution
 Test Teardown   Test Teardown Execution
 
-Test Tags     BMC_IPv6_Config
+Test Tags       BMC_IPv6_Config
 
 *** Variables ***
 # Remote DHCP test bed server. Leave variables EMPTY if server is configured local
@@ -291,7 +291,7 @@ Configure IPv4 Address From IPv6 And Verify
 
 Configure Static IPv6 Address From Different IPv6 Assigning Methods
     [Documentation]  Configure static IPv6 on both interfaces by logging
-    ...    in from differnet IPv6 address.
+    ...    in from different IPv6 address.
     [Arguments]  ${ipv6_adress_type}  ${channel_number}
     [Teardown]  Run Keywords
     ...    Delete IPv6 Address  ${test_ipv6_addr}  ${1}  Version=IPv6
