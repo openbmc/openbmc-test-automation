@@ -20,7 +20,7 @@ Test Tags       IPMI_Chassis
 ${IPMI_POWEROFF_WAIT_TIMEOUT}      3
 ${busctl_settings}                 xyz.openbmc_project.Settings
 ${chassis_capabilities_dbus_URL}   /xyz/openbmc_project/Control/ChassisCapabilities
-
+&{BYTE_DESCRIPTION}                set_complete=0    set_in_progress=1
 
 *** Test Cases ***
 
@@ -177,7 +177,61 @@ Verify Chassis Control With Invalid Data Length
     ${IPMI_RAW_CMD['Chassis Control']['initiate_soft_shutdown'][1]}      0xc7
     ${IPMI_RAW_CMD['Chassis Control']['initiate_soft_shutdown'][2]}      0xc7
 
+Verify Chassis System Boot Option To Set In Progress Status
+    [Documentation]    Verify Chassis System Boot Option To Set In Progress Status.
+    [Tags]    Verify_Chassis_System_Boot_Option_To_Set_In_Progress_Status
+    [Setup]    Get Default Chassis System Boot Options
+    [Teardown]    Set Chassis System Boot Options
+
+    FOR  ${status}  ${progress}  IN  &{BYTE_DESCRIPTION}
+        ${data_hex}=  Convert To Hex  ${progress}  length=2
+
+        # Set Chassis System Boot Options for set_complete and set_in_progress
+        Set Chassis System Boot Options  set_argument= 0x${data_hex}
+
+        # Check Chassis System Boot Option
+        Check Chassis System Boot Option  expect= 01 00 ${data_hex}
+    END
+
+
 *** Keywords ***
+
+Get Default Chassis System Boot Options
+    [Documentation]    Get Default Chassis System Boot Options Value.
+    [Arguments]    ${default}=True
+
+    # Description of argument(s):
+    # default   To get the default chassis system boot option value(e.g. "True", "False").
+
+     ${resp}=  Run IPMI Command
+     ...  ${IPMI_RAW_CMD['system_boot_options']['Get_Boot_Options'][0]}
+
+    IF  ${default}
+        Set Suite Variable  ${DEFAULT_SET_IN_PROGRESS}  ${resp}
+    ELSE
+        RETURN  ${resp}
+    END
+
+Set Chassis System Boot Options
+    [Documentation]    Set Chassis System Boot Options.
+    [Arguments]    ${set_argument}=${DEFAULT_SET_IN_PROGRESS}[1]
+
+    # Description of argument(s):
+    # set_argument    Default chassis system boot option value.
+
+    ${ipmi_cmd}=  Catenate  ${IPMI_RAW_CMD['system_boot_options']['Set_Boot_Options'][0]}  ${set_argument}
+    Run IPMI Command  ${ipmi_cmd}
+
+Check Chassis System Boot Option
+    [Documentation]    Check Chassis System Boot Option Values.
+    [Arguments]    ${expect}
+
+    # Description of argument(s):
+    # expect    expected value.
+
+    ${resp}=  Run IPMI Command
+     ...  ${IPMI_RAW_CMD['system_boot_options']['Get_Boot_Options'][0]}
+    Should Be Equal As Strings  ${resp}  ${expect}
 
 Set Chassis Power Policy Via IPMI And Verify
     [Documentation]  Set chasiss power policy via IPMI and verify.
