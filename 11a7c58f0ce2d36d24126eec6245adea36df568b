@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d25bb7f0_052fcf26",
+        "filename": "redfish/managers/test_bmc_logservices.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-06T11:09:16Z",
+      "side": 1,
+      "message": "Test_BMC_LogService\n\nkeep the test tags matching with the test file name",
+      "revId": "11a7c58f0ce2d36d24126eec6245adea36df568b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7cc7e01_133faedc",
+        "filename": "redfish/managers/test_bmc_logservices.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-06T11:09:16Z",
+      "side": 1,
+      "message": "Add this section when planned to use.. else prefer to remove it",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 17
+      },
+      "revId": "11a7c58f0ce2d36d24126eec6245adea36df568b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a167fc21_e63bcbdb",
+        "filename": "redfish/managers/test_bmc_logservices.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-06T11:09:16Z",
+      "side": 1,
+      "message": "end doc with period. Same comments for all the test cases doc",
+      "revId": "11a7c58f0ce2d36d24126eec6245adea36df568b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
