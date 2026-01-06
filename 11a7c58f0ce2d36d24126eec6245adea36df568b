@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c3f8021_5cde0ccb",
+        "filename": "redfish/managers/test_bmc_logservices.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-01-06T11:54:44Z",
+      "side": 1,
+      "message": "updated as per the given comment.",
+      "parentUuid": "d25bb7f0_052fcf26",
+      "revId": "11a7c58f0ce2d36d24126eec6245adea36df568b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7cc7e01_133faedc",
@@ -41,6 +59,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68e0f316_d7f3523f",
+        "filename": "redfish/managers/test_bmc_logservices.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-01-06T11:54:44Z",
+      "side": 1,
+      "message": "updated as per the given comment.",
+      "parentUuid": "f7cc7e01_133faedc",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 17
+      },
+      "revId": "11a7c58f0ce2d36d24126eec6245adea36df568b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a167fc21_e63bcbdb",
@@ -54,6 +96,24 @@
       "writtenOn": "2026-01-06T11:09:16Z",
       "side": 1,
       "message": "end doc with period. Same comments for all the test cases doc",
+      "revId": "11a7c58f0ce2d36d24126eec6245adea36df568b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "659be9f6_3b3fa26d",
+        "filename": "redfish/managers/test_bmc_logservices.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-01-06T11:54:44Z",
+      "side": 1,
+      "message": "updated as per the given comment.",
+      "parentUuid": "a167fc21_e63bcbdb",
       "revId": "11a7c58f0ce2d36d24126eec6245adea36df568b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
