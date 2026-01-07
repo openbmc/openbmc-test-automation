@@ -820,10 +820,12 @@ Get Active Ethernet Channel List
 
     RETURN  ${channel_number_list}
 
+
 Update IP Address
     [Documentation]  Update and verify IP address of BMC.
     [Arguments]  ${ip}  ${new_ip}  ${netmask}  ${gw_ip}
     ...  ${valid_status_codes}=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    ...  ${version}=IPv4
 
     # Description of argument(s):
     # ip                  IP address to be replaced (e.g. "10.7.7.7").
@@ -833,6 +835,7 @@ Update IP Address
     # valid_status_codes  Expected return code from patch operation
     #                     (e.g. "200").  See prolog of rest_request
     #                     method in redfish_plus.py for details.
+    # version             IPv4 or IPv6 version.
 
     ${empty_dict}=  Create Dictionary
     ${patch_list}=  Create List
@@ -859,8 +862,13 @@ Update IP Address
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
-    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
-    ...  body=&{data}  valid_status_codes=${valid_status_codes}
+    IF  '${version}' == 'IPv4'
+        Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+        ...  body=&{data}  valid_status_codes=${valid_status_codes}
+    ELSE
+        RedfishIPv6.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+        ...  body=&{data}  valid_status_codes=${valid_status_codes}
+    END
 
     # Note: Network restart takes around 15-18s after patch request processing.
     Sleep  ${NETWORK_TIMEOUT}s

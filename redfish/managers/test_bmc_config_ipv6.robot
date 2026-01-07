@@ -27,6 +27,7 @@ ${SERVER_USERNAME}      ${EMPTY}
 ${SERVER_PASSWORD}      ${EMPTY}
 ${SERVER_IPv6}          ${EMPTY}
 ${test_ipv4_addr}       10.7.7.7
+${test_ipv4_addr1}      10.7.7.8
 ${test_subnet_mask}     255.255.255.0
 
 *** Test Cases ***
@@ -139,6 +140,17 @@ Configure IPv4 Address From IPv6 Address And Verify
     [Teardown]  Delete IP Address  ${test_ipv4_addr}  version=IPv6
 
     SLAAC  ${1}  ${test_ipv4_addr}
+
+
+Modify IPv4 Address From IPv6 Address And Verify
+    [Documentation]  Modify IPv4 Address From IPv6 Address And Verify.
+    [Tags]  Modify_IPv4_Address_From_IPv6_Address_And_Verify
+    [Template]  Modify IPv4 Address From IPv6 Address
+
+    Static  ${1}  ${test_ipv4_addr}
+    Static  ${2}  ${test_ipv4_addr}
+    SLAAC   ${1}  ${test_ipv4_addr}
+    SLAAC   ${2}  ${test_ipv4_addr}
 
 
 *** Keywords ***
@@ -324,3 +336,18 @@ Configure Static IPv6 Address From Different IPv6 Assigning Methods
     Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}  Version=IPv6
     Configure IPv6 Address On BMC  ${test_ipv6_addr1}  ${test_prefix_length}
     ...    channel_number=${2}  Version=IPv6
+
+
+Modify IPv4 Address From IPv6 Address
+    [Documentation]  Modify IPv4 address from IPv6 address.
+    [Arguments]  ${ipv6_adress_type}  ${channel_number}  ${test_ipv4_addr}
+    [Teardown]  Delete IP Address  ${test_ipv4_addr1}  version=IPv6
+
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_adress_type}  ${channel_number}
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+    ${test_gateway}=  Get BMC Default Gateway
+    Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}  version=IPv6
+    Update IP Address  ${test_ipv4_addr}  ${test_ipv4_addr1}  ${test_subnet_mask}  ${test_gateway}  version=IPv6
+
