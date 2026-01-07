@@ -97,6 +97,8 @@ ${ipv6_with_leadingzeroes_addr}          2001:0022:0033::0111
 ${ipv6_without_leadingzeroes_addr}       2001:22:33::111
 ${ipv6_onehextet_zero}                   2001:0022:1133::1111
 ${ipv6_eliminate_onehextet_zero}         2001:22:1133::1111
+${compressed_ipv4}                       ::10.5.5.6
+${compressed_ipv6}                       ::a05:506
 ${link_local_addr}                       fe80::
 ${link_local_prefix_len}                 10
 ${test_prefix_length}                    64
@@ -291,6 +293,7 @@ Configure And Verify Static IPv6 Address
     ${ipv6_with_leadingzeroes_addr}  ${test_prefix_length}  Success        ${ipv6_without_leadingzeroes_addr}
     ${ipv6_onehextet_zero}           ${test_prefix_length}  Success        ${ipv6_eliminate_onehextet_zero}
     ${ipv6_multi_block}              ${test_prefix_length}  Success        ${ipv6_multi_block_addr}
+    ${compressed_ipv4}               ${test_prefix_length}  Success        ${compressed_ipv6}
     ${test_ipv6_addr}                ${test_prefix_length}  Success
     ${ipv4_hexword_addr}             ${test_prefix_length}  Invalid format
     ${invalid_hexadec_ipv6}          ${test_prefix_length}  Invalid format
@@ -822,6 +825,22 @@ Verify Eth0 Static IPv4 Functionality In The Presence Of Staticv6 Via GUI
     Should Not Be Empty  ${staticv6_addr}  msg=Staticv6 address is not present.
 
     Verify Functionality Of IPv4 Address  Static  1
+
+
+Verify Eth1 Static IPv4 Functionality In The Presence Of Staticv6 Via GUI
+    [Documentation]  Verify eth1 static IPv4 functionality in the presence of Staticv6 via GUI.
+    [Tags]   Verify_Eth1_Static_IPv4_Functionality_In_The_Presence_Of_Staticv6_Via_GUI
+    [Setup]  Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}
+    ...      ${test_prefix_length}  Success  None  2
+    [Teardown]  Run Keyword And Ignore Error  Delete IP Address And Verify  ipv6  ${test_ipv6_addr_2}
+
+    # Verify Presence of Staticv6 address and origin.
+    @{ipv6_address_origin_list}  ${staticv6_addr}=
+    ...  Get Address Origin List And Address For Type  Static  2
+    Should Contain  ${ipv6_address_origin_list}  Static
+    Should Not Be Empty  ${staticv6_addr}  msg=Staticv6 address is not present.
+
+    Verify Functionality Of IPv4 Address  Static  2
 
 
 *** Keywords ***
