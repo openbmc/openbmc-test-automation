@@ -824,6 +824,35 @@ Verify Eth0 Static IPv4 Functionality In The Presence Of Staticv6 Via GUI
     Verify Functionality Of IPv4 Address  Static  1
 
 
+Enable SLAAC And Verify IPv4 Configuration Is Intact
+    [Documentation]  Enable SLAAC and verify there is no change in IPv4 configuration.
+    [Tags]  Enable_SLAAC_And_Verify_IPv4_Configuration_Is_Intact
+
+    # Enabling SLAAC on Eth1
+    Set IPv6 AutoConfig State  Enabled  2
+
+    ${ipv4_after}=  Get IPv4 Values From Eth1
+    Should Be Equal  ${ipv4_eth1}  ${ipv4_after}
+
+
+Set Eth0 To Static, Eth1 To DHCPv4 And Configure Staticv6 On Eth0 And DHCPv6 On Eth1
+    [Documentation]  Configure eth0 static and eth1 DHCPv4, Verify staticv6 on eth0 and DHCPv6 on eth1.
+    [Tags]  Set_Eth0_To_Static_Eth1_To_DHCPv4_And_Configure_Staticv6_On_Eth0_And_DHCPv6_On_Eth1
+    [Setup]  Toggle DHCPv4 State And Verify  Enabled  2
+
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}  ${test_prefix_length}  Success
+    Toggle DHCPv6 State And Verify  Enabled  2
+
+
+Set Eth0 And Eth1 To Staticv4, Configure Staticv6 And DHCPv6 On Eth1
+    [Documentation]  Configure eth0 and eth1 to staticv4, verify staticv6 and DHCPv6 on eth1.
+    [Tags]  Set_Eth0_And_Eth1_To_Staticv4_Configure_Staticv6_And_DHCPv6_On_Eth1
+
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}
+    ...  ${test_prefix_length}  Success  None  2
+    Toggle DHCPv6 State And Verify  Enabled  2
+
+
 *** Keywords ***
 
 Suite Setup Execution
