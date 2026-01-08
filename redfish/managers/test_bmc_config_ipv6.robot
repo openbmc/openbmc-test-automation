@@ -27,6 +27,7 @@ ${SERVER_USERNAME}      ${EMPTY}
 ${SERVER_PASSWORD}      ${EMPTY}
 ${SERVER_IPv6}          ${EMPTY}
 ${test_ipv4_addr}       10.7.7.7
+${test_ipv4_addr1}      10.7.7.8
 ${test_subnet_mask}     255.255.255.0
 
 *** Test Cases ***
@@ -138,8 +139,23 @@ Configure IPv4 Address From IPv6 Address And Verify
     [Template]  Configure IPv4 Address From IPv6 And Verify
     [Teardown]  Delete IP Address  ${test_ipv4_addr}  version=IPv6
 
-    SLAAC  ${1}  ${test_ipv4_addr}
+    SLAAC      ${1}  ${test_ipv4_addr}
+    SLAAC      ${2}  ${test_ipv4_addr}
+    Static     ${1}  ${test_ipv4_addr}
+    Static     ${2}  ${test_ipv4_addr}
 
+
+Delete Static IPv4 On Eth0 Via IPv6 And Verify
+    [Documentation]  Delete static IPv4 address by logging in
+    ...    from SLAAC and static IPv6 address on eth0 and verify.
+    [Tags]  Delete_Static_IPv4_On_Eth0_Via_IPv6_And_Verify
+    [Setup]    Run Keywords
+    ...  Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+    ...  AND  Add IP Address  ${test_ipv4_addr1}  ${test_subnet_mask}  ${test_gateway}
+    [Template]  Delete IPv4 Address From IPv6 And Verify
+
+    Static     ${1}  ${test_ipv4_addr}
+    SLAAC      ${1}  ${test_ipv4_addr1}
 
 *** Keywords ***
 
@@ -151,6 +167,8 @@ Suite Setup Execution
     Set Suite Variable  ${active_channel_config}
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
     Set Suite variable  ${ethernet_interface}
+    ${test_gateway}=  Get BMC Default Gateway
+    Set Suite Variable  ${test_gateway}
 
 
 Test Teardown Execution
@@ -324,3 +342,23 @@ Configure Static IPv6 Address From Different IPv6 Assigning Methods
     Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}  Version=IPv6
     Configure IPv6 Address On BMC  ${test_ipv6_addr1}  ${test_prefix_length}
     ...    channel_number=${2}  Version=IPv6
+
+
+Delete IPv4 Address From IPv6 And Verify
+    [Documentation]  Delete IPv4 address from IPv6 and verify.
+    [Arguments]   ${ipv6_adress_type}  ${channel_number}  ${test_ipv4_addr}
+
+    # Description of argument(s):
+    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+    # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+    # test_ipv4_addr     IPv4 address to add.
+
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_adress_type}  ${channel_number}
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+    IF  '${ipv6_adress_type}' == 'Static'
+        Delete IP Address  ${test_ipv4_addr}  version=IPv6
+    ELSE
+        Delete IP Address  ${test_ipv4_addr1}  version=IPv6
+    END
