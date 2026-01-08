@@ -22,6 +22,30 @@
       },
       "revId": "d85795776896fb5ae77f61f0425036e773c0141a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1a16885_35473327",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-01-08T06:01:31Z",
+      "side": 1,
+      "message": "Keeping the same as we need to login from IPv6 first.",
+      "parentUuid": "13fd89c2_0af6ecbf",
+      "range": {
+        "startLine": 351,
+        "startChar": 4,
+        "endLine": 351,
+        "endChar": 8
+      },
+      "revId": "d85795776896fb5ae77f61f0425036e773c0141a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
