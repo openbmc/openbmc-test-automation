@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ec8feae_f5e0f458",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-09T11:44:50Z",
+      "side": 1,
+      "message": "are we not logging out ?",
+      "range": {
+        "startLine": 359,
+        "startChar": 4,
+        "endLine": 359,
+        "endChar": 15
+      },
+      "revId": "33077e0e24dcf87765296f87d59c5250753be93a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
