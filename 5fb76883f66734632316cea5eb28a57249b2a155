@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4089dcb_b8ce6b18",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-01-09T06:02:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de628b0d_40fef27d",
+      "range": {
+        "startLine": 12,
+        "startChar": 4,
+        "endLine": 12,
+        "endChar": 52
+      },
+      "revId": "5fb76883f66734632316cea5eb28a57249b2a155",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3761035_e5caf68c",
@@ -37,6 +61,24 @@
       "writtenOn": "2026-01-09T05:43:24Z",
       "side": 1,
       "message": "Typo in ipv6_address_type..... change wherever it is used.",
+      "revId": "5fb76883f66734632316cea5eb28a57249b2a155",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "255839c8_b069725c",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-01-09T06:02:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3761035_e5caf68c",
       "revId": "5fb76883f66734632316cea5eb28a57249b2a155",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
