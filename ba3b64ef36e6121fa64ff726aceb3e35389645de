@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dcbe5de_72c539a5",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-01-09T04:16:03Z",
+      "side": 1,
+      "message": "Verify IPv4 Configuration Remains Intact When SLAAC Is Enabled",
+      "range": {
+        "startLine": 827,
+        "startChar": 0,
+        "endLine": 827,
+        "endChar": 52
+      },
+      "revId": "ba3b64ef36e6121fa64ff726aceb3e35389645de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3327d5e1_fff03ec0",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-01-09T04:16:03Z",
+      "side": 1,
+      "message": "Avoid commas in the test case name.\nLook for a more meaningful test case name something like\nConfigure Staticv6 On Eth0 And DHCPv6 On Eth1 with eth0 in static and eth1 in DHCPv4",
+      "range": {
+        "startLine": 838,
+        "startChar": 0,
+        "endLine": 838,
+        "endChar": 84
+      },
+      "revId": "ba3b64ef36e6121fa64ff726aceb3e35389645de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "158e3d54_07bf570f",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-01-09T04:16:03Z",
+      "side": 1,
+      "message": "change the test case name",
+      "range": {
+        "startLine": 847,
+        "startChar": 0,
+        "endLine": 847,
+        "endChar": 68
+      },
+      "revId": "ba3b64ef36e6121fa64ff726aceb3e35389645de",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
