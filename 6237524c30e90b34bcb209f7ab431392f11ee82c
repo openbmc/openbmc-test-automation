@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31ea70d2_f02ff4d9",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-09T11:34:16Z",
+      "side": 1,
+      "message": "Nit: align the values",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 2
+      },
+      "revId": "6237524c30e90b34bcb209f7ab431392f11ee82c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7684f69e_66478a6b",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-09T11:34:16Z",
+      "side": 1,
+      "message": "end the documentation with period in this commit",
+      "revId": "6237524c30e90b34bcb209f7ab431392f11ee82c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9db87e65_c120e5b4",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-09T11:34:16Z",
+      "side": 1,
+      "message": "add description of args",
+      "revId": "6237524c30e90b34bcb209f7ab431392f11ee82c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f99f48b_ddcddc84",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-09T11:34:16Z",
+      "side": 1,
+      "message": "use two space instead of four spaces",
+      "range": {
+        "startLine": 206,
+        "startChar": 2,
+        "endLine": 211,
+        "endChar": 0
+      },
+      "revId": "6237524c30e90b34bcb209f7ab431392f11ee82c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37d3b036_b94f738f",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-09T11:34:16Z",
+      "side": 1,
+      "message": "add description of args",
+      "revId": "6237524c30e90b34bcb209f7ab431392f11ee82c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89e08c49_b95f51a3",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-09T11:34:16Z",
+      "side": 1,
+      "message": "unused",
+      "range": {
+        "startLine": 217,
+        "startChar": 4,
+        "endLine": 217,
+        "endChar": 11
+      },
+      "revId": "6237524c30e90b34bcb209f7ab431392f11ee82c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24174411_1cbd8cf7",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-09T11:34:16Z",
+      "side": 1,
+      "message": "add description of args",
+      "revId": "6237524c30e90b34bcb209f7ab431392f11ee82c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
