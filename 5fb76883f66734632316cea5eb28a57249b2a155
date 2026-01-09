@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de628b0d_40fef27d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-01-09T04:54:18Z",
+      "side": 1,
+      "message": "Delete Static IPv4 On Eth0 Using IPv6 And Verify",
+      "range": {
+        "startLine": 12,
+        "startChar": 4,
+        "endLine": 12,
+        "endChar": 52
+      },
+      "revId": "5fb76883f66734632316cea5eb28a57249b2a155",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
