@@ -46,6 +46,30 @@
       },
       "revId": "33077e0e24dcf87765296f87d59c5250753be93a",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e1df1b0_bc2fc5e1",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-01-09T13:12:42Z",
+      "side": 1,
+      "message": "Yes we are logging out in Test Teardown Execution, RedfishIPv6.Logout( Line: 179)",
+      "parentUuid": "d55d995d_44e87d5b",
+      "range": {
+        "startLine": 359,
+        "startChar": 4,
+        "endLine": 359,
+        "endChar": 15
+      },
+      "revId": "33077e0e24dcf87765296f87d59c5250753be93a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
