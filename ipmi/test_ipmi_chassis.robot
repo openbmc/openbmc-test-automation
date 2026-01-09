@@ -211,6 +211,47 @@ Verify Set Power Policy With Invalid Data Length
     ${IPMI_RAW_CMD['chssis_power_policy']['Set'][0]}  0xc7
     ${IPMI_RAW_CMD['chssis_power_policy']['Set'][1]}  0xc7
 
+Verify BMC Boot Flag Valid Bit Clearing Via IPMI
+    [Documentation]    Verify BMC Boot Flag Valid Bit Clearing Via IPMI.
+    [Tags]    Verify_BMC_Boot_Flag_Valid_Bit_Clearing_Via_IPMI
+    [Setup]    Get Default BMC Boot Flag Valid Bit Clearing Via IPMI
+    [Teardown]    Set BMC Boot Flag Valid Bit Clearing Via IPMI
+
+    FOR    ${status}    IN RANGE    1    32    1
+        ${data_hex}=    Convert To Hex    ${status}    length=2
+        ${data_hex}=    Convert To Lower Case    ${data_hex}
+
+        # Set Chassis System Boot Options BMC Boot Flag Valid Bit Clearing To Selector
+        Set BMC Boot Flag Valid Bit Clearing Via IPMI   flag_valid_bit= 0x${data_hex}
+
+        # Check Chassis System Boot Options BMC Boot Flag Valid Bit Clearing
+        ${resp}=  Run IPMI Command
+        ...  ${IPMI_RAW_CMD['system_boot_options']['Get_Boot_Flag_Valid_Bit_Clearing'][0]}
+
+        ${resp}=  Strip String  ${resp}
+        ${expected_output}=  Catenate  01 03  ${data_hex}
+        Should Be Equal As Strings    ${resp}    ${expected_output}
+    END
+
+Verify BMC Boot Flag With Invalid Data Length
+    [Documentation]  Verify BMC Boot Flag With Invalid Data Length.
+    [Tags]  Verify_BMC_Boot_Flag_With_Invalid_Data_Length
+    [Template]  Verify Invalid IPMI Command
+
+    # Invalid data                                                 Expected error code
+    ${IPMI_RAW_CMD['system_boot_options']['Get_Boot_Flag'][1]}     0xc7
+    ${IPMI_RAW_CMD['system_boot_options']['Set_Boot_Flag'][1]}     0xc7
+
+Verify Chassis System Boot Option With Invalid Data Length
+    [Documentation]    Verify Chassis System Boot Option With Invalid Data Length.
+    [Tags]  Verify_Chassis_System_Boot_Option_With_Invalid_Data_Length
+    [Template]  Verify Invalid IPMI Command
+
+    # Invalid data                                                    Expected error code
+    ${IPMI_RAW_CMD['system_boot_options']['Get_Boot_Options'][1]}     0xc7
+    ${IPMI_RAW_CMD['system_boot_options']['Set_Boot_Options'][1]}     0xc7
+
+
 *** Keywords ***
 
 Get Default Chassis System Boot Options
@@ -336,3 +377,29 @@ Test Teardown Execution
     # Chassis Power ON if status is off
     IF  '${status.strip()}' != 'on'  Redfish Power On
     FFDC On Test Case Fail
+
+Get Default BMC Boot Flag Valid Bit Clearing Via IPMI
+    [Documentation]    Get Default BMC Boot Flag Valid Bit Clearing Via IPMI.
+    [Arguments]    ${default}=True
+
+    # Description of argument(s):
+    # default   To get the default bmc boot flag valid bit clearing value(e.g. "True", "False").
+
+    ${resp}=  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['system_boot_options']['Get_Boot_Flag'][0]}
+
+    IF  ${default}
+        Set Suite Variable  ${DEFAULT_SET_IN_PROGRESS}  ${resp}
+    ELSE
+        RETURN  ${resp}
+    END
+
+Set BMC Boot Flag Valid Bit Clearing Via IPMI
+    [Documentation]    Set BMC Boot Flag Valid Bit Clearing Via IPMI.
+    [Arguments]    ${flag_valid_bit}=${DEFAULT_SET_IN_PROGRESS}[1]
+
+    # Description of argument(s):
+    # flag_valid_bit   To send the default bmc boot flag valid bit clearing value.
+
+    ${ipmi_cmd}=  Catenate  ${IPMI_RAW_CMD['system_boot_options']['Set_Boot_Flag'][0]}  ${flag_valid_bit}
+    Run IPMI Command  ${ipmi_cmd}
