@@ -16,6 +16,29 @@
       "message": "fixed as per the comment.",
       "revId": "1ba5783d0827c0d3078d6f98acf2032b9b896d68",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "354d73a2_8e51d2fe",
+        "filename": "redfish/managers/test_bmc_logservices.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-12T10:14:29Z",
+      "side": 1,
+      "message": "thinking how to minimize the URI \n\nREDFISH_BASE_URI \u003d \"/redfish/v1/\"\n\ncan we define this in ./data/variables.py",
+      "range": {
+        "startLine": 18,
+        "startChar": 48,
+        "endLine": 18,
+        "endChar": 53
+      },
+      "revId": "1ba5783d0827c0d3078d6f98acf2032b9b896d68",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
