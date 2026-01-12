@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa37ee56_b2183fb3",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-01-12T06:32:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31ea70d2_f02ff4d9",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 2
+      },
+      "revId": "6237524c30e90b34bcb209f7ab431392f11ee82c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7684f69e_66478a6b",
@@ -41,6 +65,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "871e6d58_6b1c3f64",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-01-12T06:32:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7684f69e_66478a6b",
+      "revId": "6237524c30e90b34bcb209f7ab431392f11ee82c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9db87e65_c120e5b4",
@@ -54,6 +96,24 @@
       "writtenOn": "2026-01-09T11:34:16Z",
       "side": 1,
       "message": "add description of args",
+      "revId": "6237524c30e90b34bcb209f7ab431392f11ee82c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31120664_f5fe604c",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-01-12T06:32:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9db87e65_c120e5b4",
       "revId": "6237524c30e90b34bcb209f7ab431392f11ee82c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -81,6 +141,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83939ef9_de27527e",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-01-12T06:32:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f99f48b_ddcddc84",
+      "range": {
+        "startLine": 206,
+        "startChar": 2,
+        "endLine": 211,
+        "endChar": 0
+      },
+      "revId": "6237524c30e90b34bcb209f7ab431392f11ee82c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37d3b036_b94f738f",
@@ -94,6 +178,24 @@
       "writtenOn": "2026-01-09T11:34:16Z",
       "side": 1,
       "message": "add description of args",
+      "revId": "6237524c30e90b34bcb209f7ab431392f11ee82c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "829d5f25_c7df8391",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-01-12T06:32:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37d3b036_b94f738f",
       "revId": "6237524c30e90b34bcb209f7ab431392f11ee82c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -121,6 +223,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5df41a19_af94f70f",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-01-12T06:32:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89e08c49_b95f51a3",
+      "range": {
+        "startLine": 217,
+        "startChar": 4,
+        "endLine": 217,
+        "endChar": 11
+      },
+      "revId": "6237524c30e90b34bcb209f7ab431392f11ee82c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24174411_1cbd8cf7",
@@ -134,6 +260,24 @@
       "writtenOn": "2026-01-09T11:34:16Z",
       "side": 1,
       "message": "add description of args",
+      "revId": "6237524c30e90b34bcb209f7ab431392f11ee82c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a376ace_f3c22bb0",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-01-12T06:32:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24174411_1cbd8cf7",
       "revId": "6237524c30e90b34bcb209f7ab431392f11ee82c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
