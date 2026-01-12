@@ -927,7 +927,9 @@ Smart Power Off
     ${status}  ${ret_values}=  Run Key U  ${cmd_buf}  ignore=${1}
     ...  quiet=${loc_quiet}
 
-    Run Keyword If  '${status}' == 'PASS'  Return From Keyword
+    IF  '${status}' == 'PASS'
+        Return From Keyword
+    END
 
     ${cmd_buf}=  Catenate  REST Hard Power Off \ stack_mode=skip
     ...  \ \ quiet=${loc_quiet}

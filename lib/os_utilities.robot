@@ -89,7 +89,7 @@ Is HTX Running
 
     # Example usage:
     #  ${status}=  Is HTX Running
-    #  Run Keyword If  '${status}' == 'True'  Shutdown HTX Exerciser
+    #  IF  '${status}' == 'True'  Shutdown HTX Exerciser
 
     ${status}  ${stderr}  ${rc}=  OS Execute Command
     ...  htxcmdline -getstats  ignore_err=1
@@ -466,8 +466,9 @@ Count GPUs From BMC
       ${present}=  Read Attribute  ${gpu_uri}  Present
       ${state}=  Read Attribute  ${gpu_uri}  Functional
       Rpvars  gpu_uri  present  state
-      ${num_bmc_gpus}=  Run Keyword If  ${present} and ${state}
-      ...  Evaluate  ${num_bmc_gpus}+${1}
+      IF  ${present} and ${state}
+          ${num_bmc_gpus}=  Evaluate  ${num_bmc_gpus}+${1}
+      END
     END
     RETURN  ${num_bmc_gpus}
 
@@ -588,15 +589,18 @@ Retrieve HW Info And Write
     # class               Device class to retrieve with lshw.
     # json_tmp_file_path  Path of file to write to.
     # last                Is this the last element in the parent JSON?
+
     Write New JSON List  ${json_tmp_file_path}  ${class}
     ${output}=  Retrieve Hardware Info  ${class}
     ${output}=  Clean Up String  ${output}
-    Run Keyword if  ${output.__class__ is not type(None)}
-    ...  Append To File  ${json_tmp_file_path}  ${output}
-    Close New JSON List  ${json_tmp_file_path}
-    Run Keyword if  '${last}' == 'false'
-    ...  Append to File  ${json_tmp_file_path}  ,
+    IF  ${output.__class__ is not type(None)}
+        Append To File  ${json_tmp_file_path}  ${output}
+    END
 
+    Close New JSON List  ${json_tmp_file_path}
+    IF  '${last}' == 'false'
+        Append to File  ${json_tmp_file_path}  ,
+    END
 
 Retrieve HW Info And Write List
     [Documentation]  Does a Retrieve/Write with a list of classes and
@@ -611,14 +615,16 @@ Retrieve HW Info And Write List
     Write New JSON List  ${json_tmp_file_path}  ${json_field_name}
     FOR  ${class}  IN  @{list}
       ${tail}  Get From List  ${list}  -1
-      Run Keyword if  '${tail}' == '${class}'
-      ...  Retrieve HW Info And Write  ${class}  ${json_tmp_file_path}  true
-      ...  ELSE  Retrieve HW Info And Write  ${class}  ${json_tmp_file_path}
+      IF  '${tail}' == '${class}'
+          Retrieve HW Info And Write  ${class}  ${json_tmp_file_path}  true
+      ELSE
+          Retrieve HW Info And Write  ${class}  ${json_tmp_file_path}
+      END
     END
     Close New JSON List  ${json_tmp_file_path}
-    Run Keyword if  '${last}' == 'false'
-    ...  Append to File  ${json_tmp_file_path}  ,
-
+    IF  '${last}' == 'false'
+       Append to File  ${json_tmp_file_path}  ,
+    END
 
 Retrieve Hardware Info
     [Documentation]  Retrieves the lshw output of the device class as JSON.
