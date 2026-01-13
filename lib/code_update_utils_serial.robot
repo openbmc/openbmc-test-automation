@@ -25,7 +25,7 @@ Reset Network Interface During Code Update
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
     Should Be Equal As Strings  ${software_state}[Activation]  ${ACTIVE}
 
-    Run Keyword If  '${reboot}'  OBMC Reboot (off)  stack_mode=normal
+    IF  '${reboot}'  OBMC Reboot (off)  stack_mode=normal
 
 
 Reset Network Interface
