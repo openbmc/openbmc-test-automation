@@ -121,6 +121,23 @@ Verify NTP Server Is Not Populated In NetworkSuppliedServers
     Should Not Contain  ${network_protocol["NTP"]["NetworkSuppliedServers"]}  ${ntp_server_1}
     ...  msg=Static NTP server is coming up in NetworkSuppliedServers.
 
+Verify NTP Server Configuration With NTP Servers And Protocol Enabled
+    [Documentation]  Verify NTP server configuration with configured NTP servers and enabled protocol.
+    [Tags]  Verify_NTP_Server_Configuration_With_NTP_Servers_And_Protocol_Enabled
+    [Teardown]  Restore NTP Mode
+
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
+    ...  body={'NTP': {'ProtocolEnabled': ${True}, 'NTPServers': ['${ntp_server_1}']}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Verify the NTP server is populated in NTPServers.
+    ${ntp_conf}=  Redfish.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
+    Should Contain  ${ntp_conf['NTP']['NTPServers']}  ${ntp_server_1}
+    ...  msg=NTP server value ${ntp_server_1} not stored.
+
+    # Verify the ProtocolEnabled in NTPServers.
+    Valid Value  ntp_conf['NTP']['ProtocolEnabled']  valid_values=[True]
+
 *** Keywords ***
 
 Suite Setup Execution
