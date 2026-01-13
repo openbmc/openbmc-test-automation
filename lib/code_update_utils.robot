@@ -234,13 +234,10 @@ Upload And Activate Image
     ${software_state}=  Read Properties  ${SOFTWARE_VERSION_URI}${version_id}
     ${activation}=  Set Variable  ${software_state}[Activation]
 
-    Run Keyword If
-    ...  '${skip_if_active}' == 'true' and '${activation}' == '${ACTIVE}'
-    ...  Run Keywords
-    ...      Set Host Software Property  ${SOFTWARE_VERSION_URI}${version_id}
-    ...      Priority  ${0}
-    ...    AND
-    ...      Return From Keyword
+    IF  '${skip_if_active}' == 'true' and '${activation}' == '${ACTIVE}'
+        Set Host Software Property  ${SOFTWARE_VERSION_URI}${version_id}  Priority  ${0}
+        Return From Keyword
+    END
 
     Should Be Equal As Strings  ${software_state}[Activation]  ${READY}
 
@@ -379,7 +376,7 @@ Check Error And Collect FFDC
     [Documentation]  Collect FFDC if error log exists.
 
     ${status}=  Run Keyword And Return Status  Error Logs Should Not Exist
-    Run Keyword If  '${status}' == 'False'  FFDC
+    IF  '${status}' == 'False'  FFDC
     Delete Error Logs
 
 
@@ -483,9 +480,11 @@ List Installed Images
     ${installed_images}=  Get Software Objects
     ...  ${SOFTWARE_PURPOSE}.${image_type}
 
-    Run Keyword If  ${installed_images} != []
-    ...  Get List of Images  ${installed_images}
-    ...  ELSE  Log  No ${image_type} images are present.
+    IF  ${installed_images} != []
+        Get List of Images  ${installed_images}
+    ELSE
+        Log  No ${image_type} images are present.
+    END
 
 Get List of Images
     [Documentation]  Get List of Images
