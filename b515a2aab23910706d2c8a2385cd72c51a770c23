@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97e47191_92df2957",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-01-14T08:57:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6582e7ac_d3bcfe48",
+      "range": {
+        "startLine": 371,
+        "startChar": 4,
+        "endLine": 372,
+        "endChar": 69
+      },
+      "revId": "b515a2aab23910706d2c8a2385cd72c51a770c23",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4d10d9d_20937d4d",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-01-14T07:53:59Z",
       "side": 1,
       "message": "Wait For IPv6 Host To Ping  ${ipv6_addr}\ntimeout is passed in the keyword",
+      "range": {
+        "startLine": 383,
+        "startChar": 8,
+        "endLine": 383,
+        "endChar": 57
+      },
+      "revId": "b515a2aab23910706d2c8a2385cd72c51a770c23",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e0ad9ef_6915134c",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-01-14T08:57:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4d10d9d_20937d4d",
       "range": {
         "startLine": 383,
         "startChar": 8,
@@ -77,6 +125,30 @@
       "writtenOn": "2026-01-14T07:53:59Z",
       "side": 1,
       "message": "Wait For IPv6 Host To Ping ${ipv6_addr}\ntimeout is passed in the keyword",
+      "range": {
+        "startLine": 388,
+        "startChar": 8,
+        "endLine": 388,
+        "endChar": 57
+      },
+      "revId": "b515a2aab23910706d2c8a2385cd72c51a770c23",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1e39f6c_502dfebd",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-01-14T08:57:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "828358c9_d06c6af4",
       "range": {
         "startLine": 388,
         "startChar": 8,
