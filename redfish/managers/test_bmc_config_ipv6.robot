@@ -166,6 +166,16 @@ Modify IPv4 Address From IPv6 Address And Verify
     SLAAC   ${2}  ${test_ipv4_addr}
 
 
+Verify IPv6 Addresses Can Be Configured And IPs Are Reachable
+    [Documentation]  Verify IPv6 addresses are configured properly from different
+    ...    IPv6 modes and IPs are reachable.
+    [Tags]  Verify_IPv6_Addresses_Can_Be_Configured_And_IPs_Are_Reachable
+    [Template]  Configure IPv6 Address In Different IPv6 Modes And Verify Ping
+
+    # Address_type  channel_number
+    SLAAC           ${1}
+    Static          ${1}
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -382,3 +392,28 @@ Modify IPv6 Address From IPv6 Address
     Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}  Version=IPv6
     Modify IPv6 Address  ${test_ipv6_addr}  ${test_ipv6_addr1}  ${test_prefix_length}  version=IPv6
 
+
+Configure IPv6 Address In Different IPv6 Modes And Verify Ping
+    [Documentation]  Configure slaac/static IPv6 addresses in different IPv6 modes
+    ...    and verify ping
+    [Arguments]  ${ipv6_address_type}  ${channel_number}
+
+    # Description of argument(s):
+    # ipv6_address_type   Type of IPv6 address(slaac/static).
+    # channel_number      Ethernet channel number, 1(eth0) or 2(eth1).
+
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+    IF  '${ipv6_address_type}' == 'Static'
+        Set SLAAC Configuration State And Verify  ${True}
+        @{ipv6_addressorigin_list}  ${ipv6_addr}=
+        ...  Get Address Origin List And Address For Type  SLAAC  ${channel_number}
+    ELSE
+        @{ipv6_addressorigin_list}  ${ipv6_addr}=
+        ...  Get Address Origin List And Address For Type  Static  ${channel_number}
+        Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}  Version=IPv6
+    END
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+    Wait For IPv6 Host To Ping  ${ipv6_addr}
