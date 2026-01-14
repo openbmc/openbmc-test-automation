@@ -28,6 +28,8 @@ ${SERVER_PASSWORD}      ${EMPTY}
 ${SERVER_IPv6}          ${EMPTY}
 ${test_ipv4_addr}       10.7.7.7
 ${test_ipv4_addr1}      10.7.7.8
+${test_ipv6_addr}       2001:db8:1:1:250:56ff:fe8a:668
+${test_ipv6_addr1}      2001:db8:1:1:250:56ff:fe8a:669
 ${test_subnet_mask}     255.255.255.0
 
 *** Test Cases ***
@@ -140,6 +142,17 @@ Configure IPv4 Address From IPv6 Address And Verify
     [Teardown]  Delete IP Address  ${test_ipv4_addr}  version=IPv6
 
     SLAAC  ${1}  ${test_ipv4_addr}
+
+
+Modify IPv6 Address From IPv6 Address And Verify
+    [Documentation]  Modify IPv6 Address From IPv6 Address And Verify.
+    [Tags]  Modify_IPv6_Address_From_IPv6_Address_And_Verify
+    [Template]  Modify IPv6 Address From IPv6 Address
+
+    Static  ${1}  ${test_ipv4_addr}
+    Static  ${2}  ${test_ipv4_addr}
+    SLAAC   ${1}  ${test_ipv6_addr}
+    SLAAC   ${2}  ${test_ipv4_addr}
 
 
 Modify IPv4 Address From IPv6 Address And Verify
@@ -350,4 +363,22 @@ Modify IPv4 Address From IPv6 Address
     ${test_gateway}=  Get BMC Default Gateway
     Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}  version=IPv6
     Update IP Address  ${test_ipv4_addr}  ${test_ipv4_addr1}  ${test_subnet_mask}  ${test_gateway}  version=IPv6
+
+
+Modify IPv6 Address From IPv6 Address
+    [Documentation]  Modify IPv6 address from IPv6 address.
+    [Arguments]  ${ipv6_adress_type}  ${channel_number}  ${test_ipv6_addr}
+    [Teardown]  Delete IPv6 Address  ${test_ipv6_addr1}  Version=IPv6
+
+    # Description of argument(s):
+    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+    # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+    # test_ipv6_addr     IPv4 address parameter (not used in IPv6 modification).
+
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_adress_type}  ${channel_number}
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+    Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}  Version=IPv6
+    Modify IPv6 Address  ${test_ipv6_addr}  ${test_ipv6_addr1}  ${test_prefix_length}  version=IPv6
 
