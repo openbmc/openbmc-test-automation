@@ -96,6 +96,11 @@ Login GUI
     # password  The password to be used for login.
 
     Go To  ${OPENBMC_GUI_URL}
+    #check if page has username input box , if not logout .
+    ${exists}=    Run Keyword And Return Status    Page Should Contain Element    ${xpath_login_username_input}
+    IF    not ${exists}
+        Logout GUI
+    END
     Wait Until Element Is Enabled  ${xpath_login_username_input}
     Input Text  ${xpath_login_username_input}  ${username}
     Input Password  ${xpath_login_password_input}  ${password}
