@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96fb8cab_98ce74e8",
+        "filename": "redfish/managers/test_bmc_network_protocol.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-01-16T07:01:27Z",
+      "side": 1,
+      "message": "Line is exceeding 80 characters",
+      "range": {
+        "startLine": 125,
+        "startChar": 4,
+        "endLine": 125,
+        "endChar": 101
+      },
+      "revId": "7e3a5f3670d8dd99bfc54d8f41c414500f086683",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
