@@ -443,3 +443,25 @@ Verify Functionality Of IPv4 Address
         List Should Not Contain Value  ${ipv4_addressorigin_list}  Static
         List Should Contain Value  ${ipv4_addressorigin_list}  DHCP
     END
+
+
+Verify Static IPv4 Functionality
+    [Documentation]  Verify static IPv4 functionality.
+    [Arguments]    ${channel_number}=${CHANNEL_NUMBER}
+
+    # Description of argument(s):
+    # channel_number             Channel number 1(eth0) or 2(eth1).
+
+    # Verify presence of Static IPv4 address origin.
+    @{ipv4_addressorigin_list}  ${ipv4_addr_list}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses  ${channel_number}
+    ${ipv4_addressorigin_list}=  Combine Lists  @{ipv4_addressorigin_list}
+    Should Contain  ${ipv4_addressorigin_list}  Static
+
+    # Verify dhcpv4 is not present in address origin when static IPv4 enabled.
+    List Should Not Contain Value  ${ipv4_addressorigin_list}  DHCP
+
+    # Verify Static IPv4 address is pingable.
+    FOR  ${ip}  IN  @{ipv4_addr_list}
+        Wait For Host To Ping  ${ip}  ${NETWORK_TIMEOUT}
+    END
