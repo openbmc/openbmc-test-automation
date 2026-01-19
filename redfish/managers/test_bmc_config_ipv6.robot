@@ -153,6 +153,22 @@ Modify IPv4 Address From IPv6 Address And Verify
     SLAAC   ${2}  ${test_ipv4_addr}
 
 
+Verify Static IPv4 Functionality In Presence Of Static IPv6
+    [Documentation]  Verify static IPv4 functions properly in presence of static IPv6
+    ...    by logging in from static/slaac IPv6 address.
+    [Tags]  Verify_Static_IPv4_Functionality_In_Presence_Of_Static_IPv6
+    [Setup]  Run Keywords
+    ...  Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
+    ...  AND  Configure IPv6 Address On BMC  ${test_ipv6_addr1}  ${test_prefix_length}  ${None}  ${2}
+    [Template]  Verify Static IPv4 Functionality In Presence Of IPv6 Address
+
+    # Address_type  channel_number
+    SLAAC           ${1}
+    Static          ${1}
+    SLAAC           ${2}
+    Static          ${2}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -168,7 +184,7 @@ Suite Setup Execution
 Test Teardown Execution
     [Documentation]  Test teardown execution.
 
-    FFDC On Test Case Fail
+#    FFDC On Test Case Fail
     Redfish.Logout
     RedfishIPv6.Logout
 
@@ -351,3 +367,18 @@ Modify IPv4 Address From IPv6 Address
     Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}  version=IPv6
     Update IP Address  ${test_ipv4_addr}  ${test_ipv4_addr1}  ${test_subnet_mask}  ${test_gateway}  version=IPv6
 
+
+Verify Static IPv4 Functionality In Presence Of IPv6 Address
+    [Documentation]  Verify static IPv4 functionality on both interfaces in
+    ...    presence of IPv6 address by logging in from slaac/static IPv6 address
+    [Arguments]  ${ipv6_address_type}  ${channel_number}
+
+    # Description of argument(s):
+    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+    # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+    Verify Static IPv4 Functionality  ${channel_number}
