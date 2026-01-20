@@ -11,12 +11,12 @@ Test Tags      Sensors_Sub_Menu
 *** Variables ***
 
 ${xpath_sensor_heading}      //h1[text()="Sensors"]
-${xpath_sensors_filter}      //button[contains(text(),'Filter')]
+${xpath_sensors_filter}      //button[contains(normalize-space(.),'Filter')]
 ${xpath_sensors_search}      //input[contains(@class,"search-input")]
 ${xpath_filter_ok}           //*[@data-test-id='tableFilter-checkbox-OK']
 ${xpath_filter_warning}      //*[@data-test-id='tableFilter-checkbox-Warning']
 ${xpath_filter_critical}     //*[@data-test-id='tableFilter-checkbox-Critical']
-${xpath_filter_clear_all}    //*[@data-test-id='tableFilter-button-clearAll']
+${xpath_filter_clear_all}    //button[contains(normalize-space(.),'Clear all')]
 ${xpath_selected_severity}   //*[@class="d-inline-block mb-0"]
 ${xpath_clear_search_input}  //*[@title="Clear search input"]
 
@@ -94,14 +94,17 @@ Verify Clear All Button In Sensor Page
     Click Element At Coordinates  ${xpath_filter_warning}  0  0
     Click Element At Coordinates  ${xpath_filter_critical}  0  0
     Element Should Be Visible  ${xpath_selected_severity}
+    ${text}=    Get Text    ${xpath_selected_severity}
+    Should Not Be Empty    ${text}
 
     # De-select all severity using clear all button in filter.
     Click Element At Coordinates  ${xpath_filter_clear_all}  0  0
     Click Element  ${xpath_sensors_filter}
-
-    Element Should Not Be Visible  ${xpath_selected_severity}
-
-
+    
+    ${text}=    Get text    ${xpath_selected_severity}
+    Should Be Empty    ${text}
+    
+    
 Verify Filter By Severity Button OK
     [Documentation]  Select severity button OK from filter and verify.
     [Tags]  Verify_Filter_By_Severity_Button_OK

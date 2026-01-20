@@ -14,8 +14,8 @@ Test Tags      Reboot_BMC_Sub_Menu
 *** Variables ***
 
 ${xpath_reboot_bmc_heading}      //h1[text()="Reboot BMC"]
-${xpath_reboot_bmc_button}       //button[contains(text(),'Reboot BMC')]
-${xpath_reboot_cancel_button}    //button[contains(text(),'Cancel')]
+${xpath_reboot_bmc_button}       //button[contains(normalize-space(.),'Reboot BMC')]
+${xpath_reboot_cancel_button}    //button[contains(normalize-space(.),'Cancel')]
 
 
 *** Test Cases ***
