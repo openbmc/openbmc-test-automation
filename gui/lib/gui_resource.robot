@@ -14,7 +14,7 @@ ${xpath_power_page}           //*[@data-test-id='appHeader-container-power']
 ${xpath_power_shutdown}       //*[@data-test-id='serverPowerOperations-button-shutDown']
 ${xpath_power_power_on}       //*[@data-test-id='serverPowerOperations-button-powerOn']
 ${xpath_power_reboot}         //*[@data-test-id='serverPowerOperations-button-reboot']
-${xpath_confirm}              //button[contains(text(),'Confirm')]
+${xpath_confirm}              //button[contains(normalize-space(.),'Confirm')]
 
 # Default GUI browser and mode is set to "Firefox" and "headless"
 # respectively here.
@@ -96,6 +96,12 @@ Login GUI
     # password  The password to be used for login.
 
     Go To  ${OPENBMC_GUI_URL}
+    #check if page has username input box , if not logout .
+    ${exists}=    Run Keyword And Return Status    Page Should Contain Element
+    ...    ${xpath_login_username_input}
+    IF    not ${exists}
+      Logout GUI
+    END
     Wait Until Element Is Enabled  ${xpath_login_username_input}
     Input Text  ${xpath_login_username_input}  ${username}
     Input Password  ${xpath_login_password_input}  ${password}
@@ -294,7 +300,7 @@ Check Boot Progress State Via Redfish
 Verify And Close Information Message Via GUI
     [Documentation]  Verify and close Information message via GUI page.
 
-    Wait Until Element Is Visible  ${xpath_close_information_message}  timeout=5s
+    Wait Until Element Is Visible  ${xpath_close_information_message}  timeout=10s
     Page Should Contain Element  ${xpath_information_message}
     Click Element  ${xpath_close_information_message}
 
