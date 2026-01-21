@@ -16,6 +16,23 @@
       "message": "Fix it as discussed",
       "revId": "938bf2420376067cb81ae79e0754e6a30b1a391d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83478fe4_997c180b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-01-21T17:18:22Z",
+      "side": 1,
+      "message": "Please close this commit since u have another for the same https://gerrit.openbmc.org/c/openbmc/openbmc-test-automation/+/86832",
+      "revId": "938bf2420376067cb81ae79e0754e6a30b1a391d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
