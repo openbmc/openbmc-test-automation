@@ -545,7 +545,7 @@ def re_order_kwargs(stack_frame_ix, **kwargs):
     new_kwargs = collections.OrderedDict()
 
     # Get position number of first keyword on the calling line of code.
-    (args, varargs, keywords, locals) = inspect.getargvalues(
+    args, varargs, keywords, locals = inspect.getargvalues(
         inspect.stack()[stack_frame_ix][0]
     )
     first_kwarg_pos = 1 + len(args)
