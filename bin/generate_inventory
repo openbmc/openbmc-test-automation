@@ -3,6 +3,7 @@ r"""
 Generate an inventory variable file containing a list of properties
 fields from the YAML phosphor-dbus-interfaces repository.
 """
+
 import json
 import os
 import sys

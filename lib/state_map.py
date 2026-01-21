@@ -6,6 +6,7 @@ State Manager module:
    - Defines Valid states of the system
 
 """
+
 import os
 import re
 import sys

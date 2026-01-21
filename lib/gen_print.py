@@ -1375,9 +1375,7 @@ def sprint_func_line(stack_frame, style=None, max_width=160):
         func_and_args = " ".join(sys.argv)
     else:
         # Get the program arguments.
-        (args, varargs, keywords, locals) = inspect.getargvalues(
-            stack_frame[0]
-        )
+        args, varargs, keywords, locals = inspect.getargvalues(stack_frame[0])
 
         args_list = []
         for arg_name in filter(None, args + [varargs, keywords]):

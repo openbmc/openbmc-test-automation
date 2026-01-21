@@ -4,6 +4,7 @@ This is an extended user library to support Robot Selenium code.
 The class contains functions which the robot framework will use
 and import as a user-defined keyword.
 """
+
 import json
 import ssl
 
