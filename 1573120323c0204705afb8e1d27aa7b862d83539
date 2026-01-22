@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91e36d92_2af5d164",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-22T16:22:44Z",
+      "side": 1,
+      "message": "Minor comments",
+      "revId": "1573120323c0204705afb8e1d27aa7b862d83539",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cfcbe57_475cbec3",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-22T16:22:44Z",
+      "side": 1,
+      "message": "nit: re-order",
+      "range": {
+        "startLine": 365,
+        "startChar": 1,
+        "endLine": 367,
+        "endChar": 0
+      },
+      "revId": "1573120323c0204705afb8e1d27aa7b862d83539",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "893e3d98_22930299",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-22T16:22:44Z",
+      "side": 1,
+      "message": "typo\n\nPrivilege",
+      "range": {
+        "startLine": 368,
+        "startChar": 42,
+        "endLine": 368,
+        "endChar": 51
+      },
+      "revId": "1573120323c0204705afb8e1d27aa7b862d83539",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
