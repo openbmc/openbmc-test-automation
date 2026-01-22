@@ -166,6 +166,14 @@ Modify IPv4 Address From IPv6 Address And Verify
     SLAAC   ${2}  ${test_ipv4_addr}
 
 
+Verify Redfish Operations Are Working From IPv6
+    [Documentation]  Verify redfish operations GET/POST/PATCH are working.
+    [Tags]  Verify_Redfish_Operations_Are_Working_For_IPv6
+    [Template]  Verify Redfish Operations Are Working
+
+    SLAAC  ${1}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -181,7 +189,7 @@ Suite Setup Execution
 Test Teardown Execution
     [Documentation]  Test teardown execution.
 
-    FFDC On Test Case Fail
+    #FFDC On Test Case Fail
     Redfish.Logout
     RedfishIPv6.Logout
 
@@ -382,3 +390,34 @@ Modify IPv6 Address From IPv6 Address
     Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}  Version=IPv6
     Modify IPv6 Address  ${test_ipv6_addr}  ${test_ipv6_addr1}  ${test_prefix_length}  version=IPv6
 
+
+Verify Redfish Operations Are Working
+    [Documentation]  Verify redfish operations are working for IPv6 adddresses.
+    [Arguments]  ${ipv6_adress_type}  ${channel_number}
+
+    # Description of argument(s):
+    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+    # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+
+    # Verify Redfish GET operation is working.
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_adress_type}  ${channel_number}
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+    ${resp}=  RedfishIPv6.Get  ${REDFISH_NW_ETH_IFACE}eth0
+    Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
+    RedfishIPv6.Logout
+
+    # Verify Redfish Patch operation is working.
+    RedfishIPv6.Login
+    ${resp}=  RedfishIPv6.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body={'StaticNameServers': 10.5.5.5}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    RedfishIPv6.Logout
+
+    # Verify Redfish Post operation is working.
+    RedfishIPv6.Login
+    ${snmp_mgr_data}=  Create Dictionary  Destination=snmp://${SNMP_MGR_IP}:${SNMP_DEFAULT_PORT}
+    ...  SubscriptionType=SNMPTrap  Protocol=SNMPv2c
+    RedfishIPv6.Post  /redfish/v1/EventService/Subscriptions  body=&{snmp_mgr_data}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT},${HTTP_CREATED}]
