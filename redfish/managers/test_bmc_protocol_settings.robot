@@ -16,6 +16,10 @@ Test Tags      BMC_Protocol_Settings
 ${cmd_prefix}            ipmitool -I lanplus -C 17 -p 623 -U ${IPMI_USERNAME} -P ${IPMI_PASSWORD}
 ${SETTING_WAIT_TIMEOUT}  30s
 
+@{ADMIN}                 admin_user              ${OPENBMC_PASSWORD}
+@{ReadOnly}              readonly_user           ${OPENBMC_PASSWORD}
+&{USERS}                 Administrator=${ADMIN}  ReadOnly=${ReadOnly}
+
 
 *** Test Cases ***
 
@@ -266,6 +270,19 @@ Configure NTP SSH And IPMI Settings And Verify
     ${True}      ${True}      ${False}            ${True}
 
 
+Verify Port 22 SSH Access Restricted For Admin And ReadOnly Users
+    [Documentation]  Try to establish SSH connection to port 22 with admin and
+    ...  readonly user and verify.
+    [Tags]  Verify_Port_22_SSH_Access_Restricted_For_Admin_And_ReadOnly_Users
+    [Setup]  Enable SSH Protocol  ${True}
+    [Template]  Check SSH Login Via Different Users
+    [Teardown]  Delete BMC Users Via Redfish  users=${USERS}
+
+    # username      port
+    admin_user      22
+    readonly_user   22
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -337,4 +354,30 @@ Verify Protocol State
         ${resp}=  Redfish.Get  ${REDFISH_NW_PROTOCOL_URI}
         Should Be Equal As Strings  ${resp.dict['NTP']['ProtocolEnabled']}  ${ntp_state}
         ...  msg=NTP protocol states are not matching.
+    END
+
+
+Check SSH Login Via Different Users
+    [Documentation]  Check if SSH connection works via different users.
+    [Arguments]  ${username}  ${port}  ${host}=${OPENBMC_HOST}
+
+    # Description of argument(s}:
+    # username     Username to be used to check login. (e.g. admin or read_only)
+    # port         Network port used for SSH login (e.g. 22 or 2200)
+    # host         OPENBMC_HOST, OPENBMC_HOST_1, Use eth0 as the default interface
+
+    # Create users with admin & read only privilege.
+    Create Users With Different Roles  users=${USERS}  force=${True}
+
+    # Check if we can open SSH connection and login.
+    SSHLibrary.Open Connection  ${host}
+    ${status}=   Run Keyword And Return Status  SSHLibrary.Login  ${username}  ${OPENBMC_PASSWORD}
+    ...  ${port}
+
+    IF  '${username}' == 'admin_user' or '${username}' == 'readonly_user'
+        Should Be Equal  ${status}  ${False}
+        ...  msg=Connection is not allowed to port 22 via admin or readonly user.
+    ELSE
+        Should Be Equal  ${status}  ${True}
+        ...  msg=Connection is allowed & able to login.
     END
