@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d71066e3_aac41e90",
+        "filename": "redfish/managers/test_bmc_network_protocol.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-01-22T05:12:39Z",
+      "side": 1,
+      "message": "Avoid having the test case name and documentation same. Punctuate it correctly with the first word capitalized and a period at the end.",
+      "range": {
+        "startLine": 125,
+        "startChar": 21,
+        "endLine": 125,
+        "endChar": 70
+      },
+      "revId": "774703d04ef0a58c4fc000ef580e513ab772c0b3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
