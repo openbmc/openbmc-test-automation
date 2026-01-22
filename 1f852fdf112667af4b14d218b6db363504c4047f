@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8dda345_7031ea77",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-01-22T10:25:15Z",
+      "side": 1,
+      "message": "give space\n#\u003cspace\u003eusername",
+      "revId": "1f852fdf112667af4b14d218b6db363504c4047f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5ab74a5_ccf612f9",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-01-22T10:25:15Z",
+      "side": 1,
+      "message": "you can replace 375 to 381 with\nShould Be Equal  ${status}  ${should_succeed}\n...  msg\u003dSSH login status for ${username} was ${status}, expected ${should_succeed}\n\n\nThis way you can include more scenarios with this same keyword.\n\nyou can change the test case like:\nVerify SSH To Port 22 Is Not Allowed Via Admin And ReadOnly User Role\n    [Documentation]  Try to establish SSH connection to port 22 with admin and\n    ...  readonly user and verify.\n    [Tags]  Verify_SSH_To_Port_22_Is_Not_Allowed_Via_Admin_And_ReadOnly_User_Role\n    [Setup]  Enable SSH Protocol  ${True}\n    [Template]  Check SSH Login To Port 22 Via Different Users\n    [Teardown]  Delete BMC Users Via Redfish  users\u003d${USERS}\n    \n    # username        should_succeed\n    admin_user        ${False}\n    readonly_user     ${False}\n    service           ${True}",
+      "range": {
+        "startLine": 375,
+        "startChar": 4,
+        "endLine": 381,
+        "endChar": 7
+      },
+      "revId": "1f852fdf112667af4b14d218b6db363504c4047f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
