@@ -16,6 +16,74 @@
       "message": "Looks neat",
       "revId": "ad41eeea777d885b65ce6cf9483e345d4ca53892",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93682617_171dc7b4",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2026-01-22T06:20:20Z",
+      "side": 1,
+      "message": "Please use normalize-space() instead text() as its strip leading and trailing.",
+      "revId": "ad41eeea777d885b65ce6cf9483e345d4ca53892",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f1d1554_b15dc6fb",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2026-01-22T06:20:20Z",
+      "side": 1,
+      "message": "Please use normalize-space() instead text() as its strip leading and trailing.",
+      "revId": "ad41eeea777d885b65ce6cf9483e345d4ca53892",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a273ed10_88518333",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2026-01-22T06:20:20Z",
+      "side": 1,
+      "message": "Please see if we have any id xpaths here.",
+      "revId": "ad41eeea777d885b65ce6cf9483e345d4ca53892",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7c4715f_a09619d0",
+        "filename": "gui/gui_test/operations_menu/test_kvm_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002684
+      },
+      "writtenOn": "2026-01-22T06:20:20Z",
+      "side": 1,
+      "message": "Please use existence keyword: Navigate To Required Sub Menu",
+      "revId": "ad41eeea777d885b65ce6cf9483e345d4ca53892",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
