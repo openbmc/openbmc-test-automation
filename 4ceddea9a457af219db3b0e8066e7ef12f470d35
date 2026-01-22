@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1632e4e3_50a179e2",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-01-22T10:49:57Z",
+      "side": 1,
+      "message": "via IPv6",
+      "revId": "4ceddea9a457af219db3b0e8066e7ef12f470d35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f10b2cad_534a41af",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-01-22T10:49:57Z",
+      "side": 1,
+      "message": "can you please make keyword name as what you mentioned in documentation",
+      "revId": "4ceddea9a457af219db3b0e8066e7ef12f470d35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4262992_a980c0f6",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-01-22T10:49:57Z",
+      "side": 1,
+      "message": "why you need to pass \"    RedfishIPv6.Login\" multiple times in same keyword.",
+      "revId": "4ceddea9a457af219db3b0e8066e7ef12f470d35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76ea9dea_51c9db31",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-01-22T10:49:57Z",
+      "side": 1,
+      "message": "same as above comment\nInstead of calling it multiple times it would be better to call it in Testcase setup - suggestion",
+      "revId": "4ceddea9a457af219db3b0e8066e7ef12f470d35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
