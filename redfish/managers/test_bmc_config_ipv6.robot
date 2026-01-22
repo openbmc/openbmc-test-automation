@@ -7,6 +7,7 @@ Resource        ../../lib/openbmc_ffdc.robot
 Resource        ../../lib/bmc_ipv6_utils.robot
 Resource        ../../lib/bmc_network_utils.robot
 Resource        ../../lib/protocol_setting_utils.robot
+Resource        ../../lib/snmp/redfish_snmp_utils.robot
 
 Library         Collections
 Library         OperatingSystem
@@ -175,6 +176,18 @@ Verify IPv6 Addresses Can Be Configured And IPs Are Reachable
     # Address_type  channel_number
     SLAAC           ${1}
     Static          ${1}
+
+
+Verify Redfish Operations Are Working Via IPv6
+    [Documentation]  Verify redfish operations GET/POST/PATCH are working.
+    [Tags]  Verify_Redfish_Operations_Are_Working_Via_IPv6
+    [Template]  Verify Redfish Operations Are Working
+
+    Static  ${1}
+    Static  ${2}
+    SLAAC   ${1}
+    SLAAC   ${2}
+
 
 *** Keywords ***
 
@@ -417,3 +430,34 @@ Configure IPv6 Address In Different IPv6 Modes And Verify Ping
     END
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
     Wait For IPv6 Host To Ping  ${ipv6_addr}
+
+
+Verify Redfish Operations Are Working
+    [Documentation]  Verify redfish operations are working for IPv6 adddresses.
+    [Arguments]  ${ipv6_adress_type}  ${channel_number}
+
+    # Description of argument(s):
+    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+    # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_adress_type}  ${channel_number}
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+
+    # Verify Redfish GET operation is working.
+    ${resp}=  RedfishIPv6.Get  ${REDFISH_NW_ETH_IFACE}eth0
+    Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
+
+    # Verify Redfish Patch operation is working.
+    ${resp}=  RedfishIPv6.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body={'StaticNameServers': 10.5.5.5}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Verify Redfish Post operation is working.
+    ${snmp_mgr_data}=  Create Dictionary  Destination=snmp://${SNMP_MGR_IP}:${SNMP_DEFAULT_PORT}
+    ...  SubscriptionType=SNMPTrap  Protocol=SNMPv2c
+    RedfishIPv6.Post  /redfish/v1/EventService/Subscriptions  body=&{snmp_mgr_data}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT},${HTTP_CREATED}]
+
+    Delete SNMP Manager Via Redfish  ${SNMP_MGR_IP}  ${SNMP_DEFAULT_PORT}
