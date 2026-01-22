@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a75b121_73add572",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-01-22T11:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1632e4e3_50a179e2",
+      "revId": "4ceddea9a457af219db3b0e8066e7ef12f470d35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f10b2cad_534a41af",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-01-22T10:49:57Z",
       "side": 1,
       "message": "can you please make keyword name as what you mentioned in documentation",
+      "revId": "4ceddea9a457af219db3b0e8066e7ef12f470d35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da07982c_6a40743c",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-01-22T11:31:30Z",
+      "side": 1,
+      "message": "Keeping as is as the test case name and the keyword\u0027s name must be different.",
+      "parentUuid": "f10b2cad_534a41af",
       "revId": "4ceddea9a457af219db3b0e8066e7ef12f470d35",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7b6a063_b98b042e",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-01-22T11:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4262992_a980c0f6",
+      "revId": "4ceddea9a457af219db3b0e8066e7ef12f470d35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76ea9dea_51c9db31",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-01-22T10:49:57Z",
       "side": 1,
       "message": "same as above comment\nInstead of calling it multiple times it would be better to call it in Testcase setup - suggestion",
+      "revId": "4ceddea9a457af219db3b0e8066e7ef12f470d35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa209301_8135f8ec",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-01-22T11:31:30Z",
+      "side": 1,
+      "message": "Needs to get the IPv6 address hence not including in the setup.",
+      "parentUuid": "76ea9dea_51c9db31",
       "revId": "4ceddea9a457af219db3b0e8066e7ef12f470d35",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
