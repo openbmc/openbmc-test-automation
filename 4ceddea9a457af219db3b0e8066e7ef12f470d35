@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f3b11eae_bfc985f4",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-22T16:30:20Z",
+      "side": 1,
+      "message": "Validate Redfish Operations For IPV6 Address\n\nTruly, the keyword name is not appropriate.",
+      "parentUuid": "da07982c_6a40743c",
+      "revId": "4ceddea9a457af219db3b0e8066e7ef12f470d35",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a4262992_a980c0f6",
         "filename": "redfish/managers/test_bmc_config_ipv6.robot",
         "patchSetId": 3
