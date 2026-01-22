@@ -48,6 +48,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80a2e014_bf023f69",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-01-22T06:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "958b30e4_de94d752",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 4
+      },
+      "revId": "541f293c4ce1580edffa9ad1bb787ef73eafdc8e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78a1bc01_6689e9e5",
@@ -95,6 +119,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c621512_a5e49b47",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-01-22T06:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a31ded5_2d143b34",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 4
+      },
+      "revId": "541f293c4ce1580edffa9ad1bb787ef73eafdc8e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d79c8f5_4d5990f2",
@@ -132,6 +180,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "5d79c8f5_4d5990f2",
+      "range": {
+        "startLine": 100,
+        "startChar": 78,
+        "endLine": 100,
+        "endChar": 82
+      },
+      "revId": "541f293c4ce1580edffa9ad1bb787ef73eafdc8e",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9421845d_b103095d",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-01-22T06:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "986182de_444abe91",
       "range": {
         "startLine": 100,
         "startChar": 78,
