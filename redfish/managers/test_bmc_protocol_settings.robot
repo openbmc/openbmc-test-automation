@@ -16,6 +16,10 @@ Test Tags      BMC_Protocol_Settings
 ${cmd_prefix}            ipmitool -I lanplus -C 17 -p 623 -U ${IPMI_USERNAME} -P ${IPMI_PASSWORD}
 ${SETTING_WAIT_TIMEOUT}  30s
 
+@{ADMIN}                 admin_user              ${OPENBMC_PASSWORD}
+@{ReadOnly}              readonly_user           ${OPENBMC_PASSWORD}
+&{USERS}                 Administrator=${ADMIN}  ReadOnly=${ReadOnly}
+
 
 *** Test Cases ***
 
@@ -266,6 +270,19 @@ Configure NTP SSH And IPMI Settings And Verify
     ${True}      ${True}      ${False}            ${True}
 
 
+Verify SSH To Port 22 Is Not Allowed Via Admin And ReadOnly User Role
+    [Documentation]  Try to establish SSH connection to port 22 with admin and
+    ...  readonly user and verify.
+    [Tags]  Verify_SSH_To_Port_22_Is_Not_Allowed_Via_Admin_And_ReadOnly_User_Role
+    [Setup]  Enable SSH Protocol  ${True}
+    [Template]  Check SSH Login To Port 22 Via Different Users
+    [Teardown]  Delete BMC Users Via Redfish  users=${USERS}
+
+    #username
+    admin_user
+    readonly_user
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -337,4 +354,28 @@ Verify Protocol State
         ${resp}=  Redfish.Get  ${REDFISH_NW_PROTOCOL_URI}
         Should Be Equal As Strings  ${resp.dict['NTP']['ProtocolEnabled']}  ${ntp_state}
         ...  msg=NTP protocol states are not matching.
+    END
+
+
+Check SSH Login To Port 22 Via Different Users
+    [Documentation]  Check if SSH connection to port 22 works via different users.
+    [Arguments]  ${username}  ${host}=${OPENBMC_HOST}
+
+    # Description of argument(s}:
+    # host         OPENBMC_HOST, OPENBMC_HOST_1, Use eth0 as the default interface.
+    # username     Username to be used to check login. (e.g. admin or read_only)
+
+    # Create users with admin & read only previlige.
+    Create Users With Different Roles  users=${USERS}  force=${True}
+
+    # Check if we can open SSH connection and login.
+    SSHLibrary.Open Connection  ${host}
+    ${status}=   Run Keyword And Return Status  SSHLibrary.Login  ${username}  ${OPENBMC_PASSWORD}
+
+    IF  '${username}' == 'service'
+        Should Be Equal  ${status}  ${True}
+        ...  msg=Connection is allowed & able to login via service user.
+    ELSE
+        Should Be Equal  ${status}  ${False}
+        ...  msg=Connection is not allowed to port 22 via admin or readonly user.
     END
