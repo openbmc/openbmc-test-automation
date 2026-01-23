@@ -176,6 +176,23 @@ Verify IPv6 Addresses Can Be Configured And IPs Are Reachable
     SLAAC           ${1}
     Static          ${1}
 
+
+Verify Static IPv4 Functionality In Presence Of Static IPv6
+    [Documentation]  Verify static IPv4 functions properly in presence of static IPv6
+    ...    by logging in from static/slaac IPv6 address.
+    [Tags]  Verify_Static_IPv4_Functionality_In_Presence_Of_Static_IPv6
+    [Setup]  Run Keywords
+    ...  Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
+    ...  AND  Configure IPv6 Address On BMC  ${test_ipv6_addr1}  ${test_prefix_length}  ${None}  ${2}
+    [Template]  Verify Static IPv4 Functionality In Presence Of IPv6 Address
+
+    # Address_type  channel_number
+    Static          ${1}
+    Static          ${2}
+    SLAAC           ${1}
+    SLAAC           ${2}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -417,3 +434,19 @@ Configure IPv6 Address In Different IPv6 Modes And Verify Ping
     END
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
     Wait For IPv6 Host To Ping  ${ipv6_addr}
+
+
+Verify Static IPv4 Functionality In Presence Of IPv6 Address
+    [Documentation]  Verify static IPv4 functionality on both interfaces in
+    ...    presence of IPv6 address by logging in from slaac/static IPv6 address
+    [Arguments]  ${ipv6_address_type}  ${channel_number}
+
+    # Description of argument(s):
+    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+    # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+    Verify Static IPv4 Functionality  ${channel_number}
