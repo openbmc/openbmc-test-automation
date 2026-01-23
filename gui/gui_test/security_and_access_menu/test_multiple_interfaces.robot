@@ -73,6 +73,7 @@ Load Certificates On BMC Via GUI
     # certificate_type   Certificate type.
     #                    (e.g. "LDAP Certificate" or "CA Certificate").
     # file_path          Certificate file path (e.g. "/home/folder/file.pem").
+    # delete_cert        Delete certificate (Valid Values: True or False).
 
     ${path}  ${ext}=  Split Extension  ${file_path}
     IF  '${certificate_type}' == 'CA' and '${delete_cert}' == '${True}'

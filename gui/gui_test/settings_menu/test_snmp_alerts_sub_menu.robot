@@ -316,7 +316,7 @@ Configure SNMP Manager On BMC With Invalid Setting Via GUI And Verify
     # snmp_manager_ip     SNMP manager IP address.
     # snmp_manager_port   SNMP manager port.
     # expected_error      Expected error optionally provided in testcase
-    # ....                (e.g. Invalid format / Value must be between 0 – 65535).
+    #                     (e.g. Invalid format / Value must be between 0 – 65535).
 
     Configure SNMP Manager Via GUI  ${snmp_manager_ip}  ${snmp_manager_port}
     Wait Until Page Contains   ${expected_error}  timeout=60sec
@@ -439,6 +439,8 @@ Generate Error Log On BMC And Verify Trap On Non Default Port
     # Description of argument(s):
     # event_log_cmd       Event logs to be created.
     # trap_msg            Expected trap on SNMP.
+    # persistency_check   Check whether reboot is required or not
+    #                     (Valid Values: True or False). 
 
     Configure SNMP Manager Via GUI  ${SNMP_MGR1_IP}  ${NON_DEFAULT_PORT1}
 
