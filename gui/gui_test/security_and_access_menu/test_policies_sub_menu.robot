@@ -284,8 +284,10 @@ Set SSH And IPMI State Via GUI
     [Arguments]  ${ssh_state}  ${ipmi_state}  ${persistency_check}=${False}
 
     # Description of argument(s):
-    # ssh_state     State of SSH to be set (e.g. Enabled, Disabled).
-    # ipmi_state    State of IPMI to be set (e.g. Enabled, Disabled).
+    # ssh_state           State of SSH to be set (e.g. Enabled, Disabled).
+    # ipmi_state          State of IPMI to be set (e.g. Enabled, Disabled).
+    # persistency_check   Check whether reboot is required or not
+    #                     (Valid Values: True or False).
 
     ${current_ssh_state}=  Get Text  ${xpath_bmc_ssh_toggle}
 
