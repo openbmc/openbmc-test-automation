@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0efe413c_c3e50d96",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2026-01-23T08:02:04Z",
+      "side": 1,
+      "message": "remove 22",
+      "revId": "8e7fa058cb9774029ac16c7b2a07ee1947eb62b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f229ab53_556b062a",
+        "filename": "redfish/managers/test_bmc_protocol_settings.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2026-01-23T08:02:04Z",
+      "side": 1,
+      "message": "make this keyword generic where in it handles all ssh logins",
+      "revId": "8e7fa058cb9774029ac16c7b2a07ee1947eb62b8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
