@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25605581_d185b541",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-23T06:07:33Z",
+      "side": 1,
+      "message": "some how ur interpreter is taking four spaces..\nplease use two spaces",
+      "revId": "7c74979904463a0d8a8b906d21de42eb9d43f4a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97155905_8453560a",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-23T06:07:33Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 4
+      },
+      "revId": "7c74979904463a0d8a8b906d21de42eb9d43f4a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9afdb5c7_ddb3c292",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-23T06:07:33Z",
+      "side": 1,
+      "message": "please use two spaces",
+      "range": {
+        "startLine": 99,
+        "startChar": 4,
+        "endLine": 104,
+        "endChar": 7
+      },
+      "revId": "7c74979904463a0d8a8b906d21de42eb9d43f4a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
