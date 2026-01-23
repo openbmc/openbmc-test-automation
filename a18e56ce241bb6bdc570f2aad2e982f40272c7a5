@@ -41,6 +41,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27e33d23_66d51799",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-01-23T12:05:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51ac54e1_5431e8a7",
+      "range": {
+        "startLine": 182,
+        "startChar": 4,
+        "endLine": 182,
+        "endChar": 5
+      },
+      "revId": "a18e56ce241bb6bdc570f2aad2e982f40272c7a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18a34d2e_7d9f0c15",
@@ -54,6 +78,30 @@
       "writtenOn": "2026-01-22T16:30:20Z",
       "side": 1,
       "message": "Get",
+      "range": {
+        "startLine": 448,
+        "startChar": 21,
+        "endLine": 448,
+        "endChar": 24
+      },
+      "revId": "a18e56ce241bb6bdc570f2aad2e982f40272c7a5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44866ef8_312549c9",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-01-23T12:05:13Z",
+      "side": 1,
+      "message": "Keeping as is for the Redfish operation GET",
+      "parentUuid": "18a34d2e_7d9f0c15",
       "range": {
         "startLine": 448,
         "startChar": 21,
