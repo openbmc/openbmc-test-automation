@@ -631,7 +631,13 @@ IPMI_RAW_CMD = {
             # raw command, invalid data length
             "0x00 0x00",
             "0x00 0x00 0x01",
-        ]
+        ],
+        "Set": [
+            # invalid data length less byte
+            "0x00 0x05 0x01 0x10 0x20 0x30",
+            # invalid data length extra byte
+            "0x00 0x05 0x01 0x10 0x20 0x30 0x40 0x50 0x60",
+        ],
     },
     "Chassis Control": {
         "power_down": [
