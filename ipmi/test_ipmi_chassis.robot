@@ -150,6 +150,16 @@ Verify Get Chassis Capabilities With Invalid Data Length
 
     Verify Invalid IPMI Command  ${IPMI_RAW_CMD['Chassis Capabilities']['Get'][1]}  0xc7
 
+Verify Chassis Capabilities With Invalid Data Length
+    [Documentation]  Verify Set Chassis Capabilities With Invalid Data Length
+    [Tags]  Verify_Chassis_Capabilities_With_Invalid_Data_Length
+    [Teardown]  FFDC On Test Case Fail
+    [Template]  Verify Invalid IPMI Command
+
+    # Invalid data length                              Expected error code
+    ${IPMI_RAW_CMD['Chassis Capabilities']['Set'][0]}  0xc7
+    ${IPMI_RAW_CMD['Chassis Capabilities']['Set'][1]}  0xc7
+
 Verify Get Chassis Status With Invalid Data Length
     [Documentation]  Verify Get Chassis Status With Invalid Data Length
     [Tags]  Verify_Get_Chassis_Status_With_Invalid_Data_Length
