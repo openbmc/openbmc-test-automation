@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1261a08_8604a23c",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-01-28T14:51:45Z",
+      "side": 1,
+      "message": "not required, it is already handled in \u0027Test Teardown Execution\u0027\n\n```\nTest Teardown    Test Teardown Execution\n```",
+      "revId": "fcb6178040d565896c153bb8cb3ee93ea67ff4eb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
