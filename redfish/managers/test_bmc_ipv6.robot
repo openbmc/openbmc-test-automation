@@ -37,6 +37,8 @@ ${ipv6_eliminate_zero}       2001:22:33::111
 ${ipv6_eliminate_zero1}      2001:22:1133::1111
 ${ipv6_contigeous_zero}      2001:0022:0000:0000:1:2:3:8
 ${ipv6_zero_compression}     2001:22::1:2:3:8
+${test_ipv4_addr}            10.7.7.7
+${test_subnet_mask}          255.255.255.0
 
 *** Test Cases ***
 
@@ -565,6 +567,17 @@ Verify Static IPv4 Functionality In Presence Of Static IPv6
     ${2}
 
 
+Verify Enable SLAAC On Eth0 While Eth0 In Static And Eth1 In DHCPv4
+    [Documentation]  Set eth0 to static & eth1 to DHCPv4, enable slaac and verify.
+    [Tags]  Verify_Enable_SLAAC_On_Eth0_While_Eth0_In_Static_And_Eth1_In_DHCPv4
+    [Setup]  Run Keywords
+    ...  Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+    ...  AND  Set DHCPEnabled To Enable Or Disable  True  eth1
+
+    Set SLAAC Configuration State And Verify  ${True}
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -596,6 +609,8 @@ Suite Setup Execution
     Set Suite Variable   ${eth1_initial_ipv4_addr_list}
     Set Suite Variable   ${eth1_initial_ipv6_addressorigin_list}
     Set Suite Variable   ${eth1_initial_ipv6_addr_list}
+    ${test_gateway}=     Get BMC Default Gateway
+    Set Suite variable   ${test_gateway}
 
 
 Test Setup Execution
@@ -786,45 +801,6 @@ Modify IPv6 Address
     Should Be Equal  ${cmd_status}  ${False}  msg=Old IPv6 address is not deleted.
 
     Validate IPv6 Network Config On BMC
-
-
-Set SLAAC Configuration State And Verify
-    [Documentation]  Set SLAAC configuration state.
-    [Arguments]  ${slaac_state}  ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
-    ...  ${channel_number}=${CHANNEL_NUMBER}  ${is_slaac_verify_state}=${True}
-
-    # Description of argument(s):
-    # slaac_state             SLAAC state('True' or 'False').
-    # valid_status_code       Expected valid status codes.
-    # channel_number          Channel number 1(eth0) or 2(eth1).
-    # is_slaac_verify_state   Flag to check verification is required.
-
-    ${active_channel_config}=  Get Active Channel Config
-    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
-
-    ${data}=  Set Variable If  ${slaac_state} == ${False}  ${DISABLE_SLAAC}  ${ENABLE_SLAAC}
-    ${resp}=  Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
-    ...  body=${data}  valid_status_codes=${valid_status_codes}
-    IF  ${is_slaac_verify_state}
-        Verify SLAAC Property  ${slaac_state}  ${channel_number}
-    END
-
-
-Verify SLAAC Property
-    [Documentation]  Verify SLAAC property.
-    [Arguments]  ${slaac_state}  ${channel_number}=${CHANNEL_NUMBER}
-
-    # Description of argument(s):
-    # slaac_state     SLAAC state('True' or 'False').
-    # channel_number  Channel number 1(eth0) or 2(eth1).
-
-    # Verify SLAAC is set correctly.
-    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
-    ${slaac_verify}=  Get From Dictionary  ${resp.dict}  StatelessAddressAutoConfig
-
-    IF  '${slaac_verify['IPv6AutoConfigEnabled']}' != '${slaac_state}'
-        Fail  msg=SLAAC not set properly.
-    END
 
 
 Set And Verify DHCPv6 Property

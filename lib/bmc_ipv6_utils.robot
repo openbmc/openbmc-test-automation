@@ -443,3 +443,42 @@ Verify Functionality Of IPv4 Address
         List Should Not Contain Value  ${ipv4_addressorigin_list}  Static
         List Should Contain Value  ${ipv4_addressorigin_list}  DHCP
     END
+
+
+Set SLAAC Configuration State And Verify
+    [Documentation]  Set SLAAC configuration state.
+    [Arguments]  ${slaac_state}  ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
+    ...  ${channel_number}=${CHANNEL_NUMBER}  ${is_slaac_verify_state}=${True}
+
+    # Description of argument(s):
+    # slaac_state             SLAAC state('True' or 'False').
+    # valid_status_code       Expected valid status codes.
+    # channel_number          Channel number 1(eth0) or 2(eth1).
+    # is_slaac_verify_state   Flag to check verification is required.
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    ${data}=  Set Variable If  ${slaac_state} == ${False}  ${DISABLE_SLAAC}  ${ENABLE_SLAAC}
+    ${resp}=  Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body=${data}  valid_status_codes=${valid_status_codes}
+    IF  ${is_slaac_verify_state}
+        Verify SLAAC Property  ${slaac_state}  ${channel_number}
+    END
+
+
+Verify SLAAC Property
+    [Documentation]  Verify SLAAC property.
+    [Arguments]  ${slaac_state}  ${channel_number}=${CHANNEL_NUMBER}
+
+    # Description of argument(s):
+    # slaac_state     SLAAC state('True' or 'False').
+    # channel_number  Channel number 1(eth0) or 2(eth1).
+
+    # Verify SLAAC is set correctly.
+    ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ${slaac_verify}=  Get From Dictionary  ${resp.dict}  StatelessAddressAutoConfig
+
+    IF  '${slaac_verify['IPv6AutoConfigEnabled']}' != '${slaac_state}'
+        Fail  msg=SLAAC not set properly.
+    END
