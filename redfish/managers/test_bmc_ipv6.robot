@@ -37,6 +37,8 @@ ${ipv6_eliminate_zero}       2001:22:33::111
 ${ipv6_eliminate_zero1}      2001:22:1133::1111
 ${ipv6_contigeous_zero}      2001:0022:0000:0000:1:2:3:8
 ${ipv6_zero_compression}     2001:22::1:2:3:8
+${test_ipv4_addr}            10.7.7.7
+${test_subnet_mask}          255.255.255.0
 
 *** Test Cases ***
 
@@ -565,6 +567,17 @@ Verify Static IPv4 Functionality In Presence Of Static IPv6
     ${2}
 
 
+Verify Enable SLAAC On Eth0 While Eth0 In Static And Eth1 In DHCPv4
+    [Documentation]  Set eth0 to static & eth1 to DHCPv4, enable slaac and verify.
+    [Tags]  Verify_Enable_SLAAC_On_Eth0_While_Eth0_In_Static_And_Eth1_In_DHCPv4
+    [Setup]  Run Keywords
+    ...  Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+    ...  AND  Set DHCPEnabled To Enable Or Disable  True  eth1
+
+    Set SLAAC Configuration State And Verify  ${True}
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -596,6 +609,8 @@ Suite Setup Execution
     Set Suite Variable   ${eth1_initial_ipv4_addr_list}
     Set Suite Variable   ${eth1_initial_ipv6_addressorigin_list}
     Set Suite Variable   ${eth1_initial_ipv6_addr_list}
+    ${test_gateway}=     Get BMC Default Gateway
+    Set Suite variable   ${test_gateway}
 
 
 Test Setup Execution
@@ -677,6 +692,113 @@ Configure Multiple IPv6 Address on BMC
     FOR  ${ipv6_network_configuration}  IN  @{ipv6_network_configurations}
       Should Contain Match  ${ipv6_list}  ${ipv6_network_configuration['Address']}
     END
+
+    Validate IPv6 Network Config On BMC
+
+
+Modify IPv6 Address
+    [Documentation]  Modify and verify IPv6 address of BMC.
+    [Arguments]  ${ipv6}  ${new_ipv6}  ${prefix_len}
+    ...  ${valid_status_codes}=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Description of argument(s):
+    # ipv6                  IPv6 address to be replaced (e.g. "2001:AABB:CCDD::AAFF").
+    # new_ipv6              New IPv6 address to be configured.
+    # prefix_len            Prefix length value (Range 1 to 128).
+    # valid_status_codes    Expected return code from patch operation
+    #                       (e.g. "200", "201").
+
+    ${empty_dict}=  Create Dictionary
+    ${patch_list}=  Create List
+    ${prefix_length}=  Convert To Integer  ${prefix_len}
+    ${ipv6_data}=  Create Dictionary
+    ...  Address=${new_ipv6}  PrefixLength=${prefix_length}
+
+    # Sample IPv6 network configurations:
+    #  "IPv6AddressPolicyTable": [],
+    #  "IPv6Addresses": [
+    #    {
+    #      "Address": "X002:db8:0:2::XX0",
+    #      "AddressOrigin": "DHCPv6",
+    #      "PrefixLength": 128
+    #    },
+    #    {
+    #      "Address": “X002:db8:0:2:a94:XXff:fe82:XXXX",
+    #      "AddressOrigin": "SLAAC",
+    #      "PrefixLength": 64
+    #    },
+    #    {
+    #      "Address": “Y002:db8:0:2:a94:efff:fe82:5000",
+    #      "AddressOrigin": "Static",
+    #      "PrefixLength": 56
+    #    },
+    #    {
+    #      "Address": “Z002:db8:0:2:a94:efff:fe82:5000",
+    #      "AddressOrigin": "Static",
+    #      "PrefixLength": 56
+    #    },
+    #    {
+    #      "Address": “Xe80::a94:efff:YYYY:XXXX",
+    #      "AddressOrigin": "LinkLocal",
+    #      "PrefixLength": 64
+    #    },
+    #    {
+    #     "Address": “X002:db8:1:2:eff:233:fee:546",
+    #      "AddressOrigin": "Static",
+    #      "PrefixLength": 56
+    #    }
+    #  ],
+    #  "IPv6DefaultGateway": “XXXX::ab2e:80fe:87df:XXXX”,
+    #  "IPv6StaticAddresses": [
+    #    {
+    #      "Address": “X002:db8:0:2:a94:efff:fe82:5000",
+    #      "PrefixLength": 56
+    #    },
+    #    {
+    #      "Address": “Y002:db8:0:2:a94:efff:fe82:5000",
+    #      "PrefixLength": 56
+    #    },
+    #    {
+    #      "Address": “Z002:db8:1:2:eff:233:fee:546",
+    #      "PrefixLength": 56
+    #    }
+    #  ],
+    #  "IPv6StaticDefaultGateways": [],
+
+    # Find the position of IPv6 address to be modified.
+    @{ipv6_network_configurations}=  Get IPv6 Network Configuration
+    FOR  ${ipv6_network_configuration}  IN  @{ipv6_network_configurations}
+      IF  '${ipv6_network_configuration['Address']}' == '${ipv6}'
+          Append To List  ${patch_list}  ${ipv6_data}
+      ELSE
+          Append To List  ${patch_list}  ${empty_dict}
+      END
+    END
+
+    # Modify the IPv6 address only if given IPv6 is found
+    ${ip_found}=  Run Keyword And Return Status  List Should Contain Value
+    ...  ${patch_list}  ${ipv6_data}  msg=${ipv6} does not exist on BMC
+    Pass Execution If  ${ip_found} == ${False}  ${ipv6} does not exist on BMC
+
+    ${data}=  Create Dictionary  IPv6StaticAddresses=${patch_list}
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
+    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body=&{data}  valid_status_codes=${valid_status_codes}
+
+    # Note: Network restart takes around 15-18s after patch request processing.
+    Sleep  ${NETWORK_TIMEOUT}s
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+    # Verify if new IPv6 address is configured on BMC.
+    Verify IPv6 On BMC  ${new_ipv6}
+
+    # Verify if old IPv6 address is erased.
+    ${cmd_status}=  Run Keyword And Return Status
+    ...  Verify IPv6 On BMC  ${ipv6}
+    Should Be Equal  ${cmd_status}  ${False}  msg=Old IPv6 address is not deleted.
 
     Validate IPv6 Network Config On BMC
 
