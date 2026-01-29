@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33219c82_8a5f904b",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-01-29T10:20:08Z",
+      "side": 1,
+      "message": "Please see if test_ipv4_addr and test_subnet_mask can be placed in the utils and can be used.",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 16
+      },
+      "revId": "69a56a0514176d3de9428241b81f3637720bb7d9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
