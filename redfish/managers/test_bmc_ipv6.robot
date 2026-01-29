@@ -37,6 +37,8 @@ ${ipv6_eliminate_zero}       2001:22:33::111
 ${ipv6_eliminate_zero1}      2001:22:1133::1111
 ${ipv6_contigeous_zero}      2001:0022:0000:0000:1:2:3:8
 ${ipv6_zero_compression}     2001:22::1:2:3:8
+${test_ipv4_addr}            10.7.7.7
+${test_subnet_mask}          255.255.255.0
 
 *** Test Cases ***
 
@@ -565,6 +567,17 @@ Verify Static IPv4 Functionality In Presence Of Static IPv6
     ${2}
 
 
+Verify Enable SLAAC On Eth0 While Eth0 In Static And Eth1 In DHCPv4
+    [Documentation]  Set eth0 to static & eth1 to DHCPv4, enable slaac and verify.
+    [Tags]  Verify_Enable_SLAAC_On_Eth0_While_Eth0_In_Static_And_Eth1_In_DHCPv4
+    [Setup]  Run Keywords
+    ...  Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+    ...  AND  Set DHCPEnabled To Enable Or Disable  True  eth1
+
+    Set SLAAC Configuration State And Verify  ${True}
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -596,6 +609,8 @@ Suite Setup Execution
     Set Suite Variable   ${eth1_initial_ipv4_addr_list}
     Set Suite Variable   ${eth1_initial_ipv6_addressorigin_list}
     Set Suite Variable   ${eth1_initial_ipv6_addr_list}
+    ${test_gateway}=     Get BMC Default Gateway
+    Set Suite variable   ${test_gateway}
 
 
 Test Setup Execution
