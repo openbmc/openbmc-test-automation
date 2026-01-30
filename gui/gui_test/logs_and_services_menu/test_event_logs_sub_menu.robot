@@ -13,7 +13,7 @@ Test Tags      Event_Logs_Sub_Menu
 
 *** Variables ***
 ${xpath_event_logs_heading}       //h1[text()="Event logs"]
-${xpath_filter_event}             //button[contains(text(),"Filter")]
+${xpath_filter_event}             //button[contains(normalize-space(.),"Filter")]
 ${xpath_event_severity_ok}        //*[@data-test-id="tableFilter-checkbox-OK"]
 ${xpath_event_severity_warning}   //*[@data-test-id="tableFilter-checkbox-Warning"]
 ${xpath_event_severity_critical}  //*[@data-test-id="tableFilter-checkbox-Critical"]
@@ -31,7 +31,7 @@ ${xpath_event_action_download}    //button[text()[normalize-space()='Download']]
 ${xpath_success_message}          //*[contains(text(),"Success")]
 ${xpath_resolved_button}          //button[contains(text(),"Resolve")]
 ${xpath_unresolved_button}        //button[contains(text(),"Unresolve")]
-${xpath_filter_clearall_button}   //button[contains(text(),"Clear all")]
+${xpath_filter_clearall_button}   //button[contains(normalize-space(.),"Clear all")]
 ${xpath_clear_search}             //button[@title="Clear search input"]
 ${xpath_event_log_resolve}        //*[@name="switch"]
 ${xpath_event_logs_resolve}       //button[contains(text(),'Resolve')]
