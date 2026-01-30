@@ -26,7 +26,8 @@ Verify Navigation To Inventory And LEDs Page
 Verify Components On Inventory And LEDs Page
     [Documentation]  Verify whether required components are displayed under inventory and LEDs page.
     [Tags]  Verify_Components_On_Inventory_And_LEDs_Page
-    [Template]  Page Should Contain
+    [Setup]    Wait Until Page Contains Element    //a[normalize-space(.)='Fabric Adapters']
+    [Template]  Component Should Be Visible
 
     # Check all the hardware component are available.
 
@@ -53,3 +54,13 @@ Suite Setup Execution
     Click Element  ${xpath_inventory_and_leds_sub_menu}
     Wait Until Keyword Succeeds  30 sec  5 sec  Location Should Contain  inventory
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=30
+
+Component Should Be Visible
+    [Documentation]    To find the elements in the page.
+    [Arguments]    ${component}
+
+    # Description of Argument(s):
+    # component  A string value that holds the hardware component name . 
+    #            Checks if the component is present 
+
+    Page Should Contain Element    xpath=//*[contains(normalize-space(text()), '${component}')]
