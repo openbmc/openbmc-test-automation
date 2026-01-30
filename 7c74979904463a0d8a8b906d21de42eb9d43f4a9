@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d0a1139_5c140bae",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-01-30T07:03:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25605581_d185b541",
+      "revId": "7c74979904463a0d8a8b906d21de42eb9d43f4a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97155905_8453560a",
@@ -41,6 +59,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7b63604_4b98b2a2",
+        "filename": "gui/gui_test/hardware_status_menu/test_sensors_sub_menu.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-01-30T07:03:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97155905_8453560a",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 4
+      },
+      "revId": "7c74979904463a0d8a8b906d21de42eb9d43f4a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9afdb5c7_ddb3c292",
@@ -54,6 +96,30 @@
       "writtenOn": "2026-01-23T06:07:33Z",
       "side": 1,
       "message": "please use two spaces",
+      "range": {
+        "startLine": 99,
+        "startChar": 4,
+        "endLine": 104,
+        "endChar": 7
+      },
+      "revId": "7c74979904463a0d8a8b906d21de42eb9d43f4a9",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48d23f86_6dd3a4e5",
+        "filename": "gui/lib/gui_resource.robot",
+        "patchSetId": 10
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-01-30T07:03:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9afdb5c7_ddb3c292",
       "range": {
         "startLine": 99,
         "startChar": 4,

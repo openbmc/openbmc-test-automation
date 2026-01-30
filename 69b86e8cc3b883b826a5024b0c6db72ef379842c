@@ -18,6 +18,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7faf3d3f_84fd8a7f",
+        "filename": "gui/gui_test/hardware_status_menu/test_inventory_and_leds_sub_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-01-30T07:03:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ac52686_e43fa576",
+      "revId": "69b86e8cc3b883b826a5024b0c6db72ef379842c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab4ef9f1_3dc00bcf",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-01-23T06:07:33Z",
       "side": 1,
       "message": "Missing documentation",
+      "revId": "69b86e8cc3b883b826a5024b0c6db72ef379842c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e6035ef_c28670ac",
+        "filename": "gui/gui_test/hardware_status_menu/test_inventory_and_leds_sub_menu.robot",
+        "patchSetId": 11
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-01-30T07:03:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab4ef9f1_3dc00bcf",
       "revId": "69b86e8cc3b883b826a5024b0c6db72ef379842c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
