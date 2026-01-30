@@ -132,20 +132,20 @@ class gui_variables:
 
     # Common variables
     xpath_save_settings_button = "//button[contains(text(),'Save')]"
-    xpath_confirm_button = "//button[contains(text(),'Confirm')]"
+    xpath_confirm_button = "//button[contains(normalize-space(.),'Confirm')]"
     xpath_cancel_button = "//button[contains(text(),'Cancel')]"
     xpath_add_button = "//button[normalize-space(text())='Add']"
-    xpath_close_information_message = "//button[contains(text(),'×')]"
+    xpath_close_information_message = "//button[@class='btn-close']"
     xpath_page_loading_progress_bar = (
-        "//*[@aria-label='Page loading progress bar']"
+        "//div[@aria-label='Loading Progress']"
     )
 
     # Pop up variables
     xpath_success_message = "//*[contains(text(),'Success')]"
     xpath_error_popup = (
-        "//*[contains(text(),'Error')]/following-sibling::button"
+        "//*[contains(normalize-space(.),'Error')]/following-sibling::button"
     )
     xpath_unauthorized_popup = (
-        "//*[contains(text(),'Unauthorized')]/following-sibling::button"
+        "//*[contains(normalize-space(.),'Unauthorized')]/following-sibling::button"
     )
     xpath_information_message = "//*[contains(text(),'Reload the browser page to get the updated content.')]"
