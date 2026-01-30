@@ -12,7 +12,7 @@ Test Tags      Host_Console_Sub_Menu
 
 *** Variables ***
 
-${xpath_open_in_new_tab_button}  //button[contains(text(),'Open in new tab')]
+${xpath_open_in_new_tab_button}  //button[contains(normalize-space(.),'Open in new tab')]
 
 
 *** Test Cases ***
