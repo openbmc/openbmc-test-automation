@@ -15,9 +15,10 @@ ${xpath_factory_reset_heading}           //h1[text()="Factory reset"]
 ${xpath_reset_button}                    //button[@data-test-id='factoryReset-button-submit']
 ${xpath_reset_server_radio_button}       //*[@data-test-id='factoryReset-radio-resetBios']
 ${xpath_reset_bmc_server_radio_button}   //*[@data-test-id='factoryReset-radio-resetToDefaults']
-${xpath_cancel_button}                   //button[@data-test-id='factoryReset-button-cancel']
-${xpath_reset_server_settings}           //button[@data-test-id='factoryReset-button-confirm']
-
+${xpath_cancel_button}                   //button[normalize-space()='Cancel']
+${xpath_reset_server_settings}           //button[normalize-space()='Reset server settings']
+#${xpath_reset_server_and_bmc_settings} to confirm reset server and bmc factory reset.
+${xpath_reset_bmc_andserver_settings}    //button[normalize-space()='Reset BMC and server settings']
 
 *** Test Cases ***
 
@@ -74,6 +75,8 @@ Verify Reset Server Settings Only Option With Readonly User When Host Off State
      Sleep  10
      # Verify error and unautorized messages on GUI.
      Verify Error And Unauthorized Message On GUI
+     # Add sleep to error and unauthorized message to close.
+     Sleep  10
 
 
 Verify Reset Server Settings Only Option Followed By Cancel Operation With Readonly User
@@ -108,10 +111,11 @@ Verify Reset BMC And Server Settings Option With Readonly User When Host Off Sta
      # Perform reset server setting option with readonly user.
      Click Element At Coordinates  ${xpath_reset_bmc_server_radio_button}  0  0
      Wait And Click Element  ${xpath_reset_button}
-     Click Element  ${xpath_reset_server_settings}
+     Click Element  ${xpath_reset_bmc_and_server_settings}
 
      # Verify error and unautorized messages on GUI.
      Verify Error And Unauthorized Message On GUI
+     Sleep  10
 
 
 Verify Reset BMC And Server Settings Option Followed By Cancel Operation With Readonly User

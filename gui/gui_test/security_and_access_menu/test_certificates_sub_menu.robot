@@ -14,9 +14,9 @@ Test Tags      Certificates_Sub_Menu
 *** Variables ***
 
 ${xpath_certificate_heading}       //h1[text()="Certificates"]
-${xpath_add_certificate_button}    //button[contains(text(),"Add new certificate")]
+${xpath_add_certificate_button}    //button[contains(normalize-space(.),"Add new certificate")]
 ${xpath_generate_csr_button}       //*[@data-test-id='certificates-button-generateCsr']
-${xpath_generate_csr_heading}      //h5[contains(text(), "Generate a Certificate Signing Request")]
+${xpath_generate_csr_heading}      //h5[contains(normalize-space(.), "Generate a Certificate Signing Request")]
 ${xpath_select_certificate_type}   //*[@data-test-id='modalGenerateCsr-select-certificateType']
 ${xpath_key_pair_algoritham}       //*[@data-test-id='modalGenerateCsr-select-keyPairAlgorithm']
 ${xpath_select_country}            //*[@data-test-id='modalGenerateCsr-select-country']
@@ -27,15 +27,20 @@ ${xpath_input_company_unit}        //*[@data-test-id='modalGenerateCsr-input-com
 ${xpath_input_common_name}         //*[@data-test-id='modalGenerateCsr-input-commonName']
 ${xpath_input_contact_person}      //*[@data-test-id='modalGenerateCsr-input-contactPerson']
 ${xpath_input_email_address}       //*[@data-test-id='modalGenerateCsr-input-emailAddress']
-${xpath_generate_csr_submit}       //*[@data-test-id='modalGenerateCsr-button-ok']
-${xpath_csr_cancel_button}         //button[contains(text(),"Cancel")]
+${xpath_generate_csr_submit}       //button[contains(normalize-space(.),"Generate CSR")]
+${xpath_csr_cancel_button}         //button[contains(normalize-space(.),"Cancel")]
 ${xpath_select_algorithm_button}   //*[@data-test-id='modalGenerateCsr-select-keyPairAlgorithm']
 ${xpath_delete_ca_certificate}     (//*[@title="Delete certificate"])[2]
 ${xpath_delete_ldap_certificate}   (//*[@title="Delete certificate"])[3]
 ${xpath_delete_https_certificate}  (//*[@title="Delete certificate"])[4]
-${xpath_delete_button}             //button[contains(text(),"Delete")]
-${xpath_cancel_button}             //button[contains(text(),"Cancel")]
-
+${xpath_delete_button}             //button[contains(normalize-space(.),"Delete")]
+${xpath_cancel_button}             //button[contains(normalize-space(.),"Cancel")]
+#${xpath_confirm_delete_button}  to confirm the deletion of ceriticate.
+${xpath_confirm_delete_button}   //button[@class='btn btn-md btn-primary' and contains(normalize-space(.), 'Delete')]
+#${xpath_cancel_delete_button} to cancel the deletion of ceriticate.
+${xpath_cancel_delete_button}    //div[@id='__BVID__162719___BV_modal__']//button[@type='button'][normalize-space()='Cancel']
+#${xpath_close_generate_csr"} to close the Generate CSR page if its open , before opening any other sub menus
+${xpath_close_generate_csr}       ////button[@class="btn-close"]
 
 *** Test Cases ***
 
@@ -86,7 +91,6 @@ Verify Generate CSR Certificate Button
     Page Should Contain Element  ${xpath_generate_csr_submit}
     Page Should Contain Element  ${xpath_key_pair_algoritham}
 
-
 Verify Informational Message Under Add Certificate
     [Documentation]  Verify informational message under add certificate tab.
     [Tags]  Verify_Informational_Message_Under_Add_Certificate
@@ -110,7 +114,9 @@ Verify Delete Button Should Be Disabled For HTTPS And LDAP Certificates
 Verify Installed CA Certificate
     [Documentation]  Install CA certificate and verify the same via GUI.
     [Tags]  Verify_Installed_CA_Certificate
-    [Setup]  Delete All CA Certificate Via Redfish
+    #Added Test Setup Execution in Setup to navigate to Certificates page.
+    [Setup]    Run Keywords  Delete All CA Certificate Via Redfish  AND
+    ...  Test Setup Execution
 
     # Install CA certificate via Redfish.
     ${file_data}=  Generate Certificate File Data  CA
@@ -158,7 +164,8 @@ Verify Success Message After Deleting CA Certificate
     [Teardown]  Install CA Certificate
 
     Click Element  ${xpath_delete_ca_certificate}
-    Click Element  ${xpath_delete_button}
+    Sleep  15s
+    Click Element  ${xpath_confirm_delete_button}
     Verify Success Message On BMC GUI Page
 
 
@@ -168,8 +175,8 @@ Verify Cancel Button While Deleting The CA Certificate
     [Setup]  Install CA Certificate
 
      Click Element  ${xpath_delete_ca_certificate}
-     Click Element  ${xpath_cancel_button}
-     Page Should Not Contain Element  Click Element  ${xpath_cancel_button}
+     Click Element  ${xpath_cancel_delete_button}
+     Page Should Not Contain Element  Click Element  ${xpath_cancel_delete_button}
 
 
 Verify Certificate Page With Readonly User
@@ -207,7 +214,10 @@ Generate Certificate File Data
 
 Test Setup Execution
     [Documentation]  Do test case setup tasks.
-
+    #Check if Generate CSR is open, if open close it.
+    ${generate_csr_open}=    Run Keyword And Return Status    Element Should Be Visible
+    ...    ${xpath_close_generate_csr}
+    Run Keyword If    ${generate_csr_open}    Click Element    ${xpath_close_generate_csr}
     Click Element  ${xpath_secuity_and_accesss_menu}
     Click Element  ${xpath_certificates_sub_menu}
     Wait Until Keyword Succeeds  30 sec  10 sec  Location Should Contain  certificates
@@ -233,5 +243,7 @@ Install CA Certificate
 
     # Refresh GUI and verify CA certificate availability in GUI.
     Refresh GUI
+    Click Element    ${xpath_secuity_and_accesss_menu}
+    Click Element    ${xpath_certificates_sub_menu}
     Wait Until Page Contains  CA Certificate  timeout=10
 

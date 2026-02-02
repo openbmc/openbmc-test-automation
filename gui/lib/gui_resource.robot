@@ -129,6 +129,8 @@ Logout GUI
     [Documentation]  Logout of OpenBMC GUI.
 
     Click Element  ${xpath_root_button_menu}
+    #Adding delay for logout button to appear.
+    Sleep  15s
     Click Element  ${xpath_logout_button}
     Wait Until Page Contains Element  ${xpath_login_button}
 
@@ -336,6 +338,8 @@ Verify Error And Unauthorized Message On GUI
     Wait Until Element Is Visible  ${xpath_error_popup}
     Page Should Contain  Error
     Page Should Contain  Unauthorized
+    #Adding delay for error unauthorized messages to appear.
+    Sleep  10
     Click Element  ${xpath_error_popup}
     Click Element  ${xpath_unauthorized_popup}
 
