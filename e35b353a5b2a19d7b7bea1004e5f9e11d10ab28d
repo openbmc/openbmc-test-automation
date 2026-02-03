@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3d97edc5_3d4437d0",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-02-03T09:22:37Z",
+      "side": 1,
+      "message": "Since this is new xpath , just added the description of the Xpath as comment line",
+      "parentUuid": "675e6fbe_c31bf9be",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 85
+      },
+      "revId": "e35b353a5b2a19d7b7bea1004e5f9e11d10ab28d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "edceaf30_e40aff74",
         "filename": "gui/gui_test/security_and_access_menu/test_certificates_sub_menu.robot",
         "patchSetId": 1
@@ -43,6 +67,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e57564ce_0bfc0284",
+        "filename": "gui/gui_test/security_and_access_menu/test_certificates_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-02-03T09:22:37Z",
+      "side": 1,
+      "message": "It is description of xpath , not xpath itself",
+      "parentUuid": "edceaf30_e40aff74",
+      "revId": "e35b353a5b2a19d7b7bea1004e5f9e11d10ab28d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "786c5a36_15bf4805",
         "filename": "gui/gui_test/settings_menu/test_factory_reset_sub_menu.robot",
         "patchSetId": 1
@@ -54,6 +96,24 @@
       "writtenOn": "2026-02-03T04:25:30Z",
       "side": 1,
       "message": "commented xpath.. please check on this",
+      "revId": "e35b353a5b2a19d7b7bea1004e5f9e11d10ab28d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37f14ab8_945f3042",
+        "filename": "gui/gui_test/settings_menu/test_factory_reset_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1002804
+      },
+      "writtenOn": "2026-02-03T09:22:37Z",
+      "side": 1,
+      "message": "It is description of xpath , not xpath itself",
+      "parentUuid": "786c5a36_15bf4805",
       "revId": "e35b353a5b2a19d7b7bea1004e5f9e11d10ab28d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
