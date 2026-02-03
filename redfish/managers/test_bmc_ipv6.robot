@@ -576,6 +576,18 @@ Verify Enable SLAAC On Eth0 While Eth0 In Static And Eth1 In DHCPv4
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
 
+Configure Static IPv4 On Both Interfaces And Verify Configuring Static IPv6
+    [Documentation]  Configure static IPv4 address on both eth0 and eth1 and then configure
+    ...    static IPv6 address on eth0/eth1 and verify all addresses are reachable.
+    [Tags]  Configure_Static_IPv4_On_Both_Interfaces_And_Verify_Configuring_Static_IPv6
+    [Setup]  Add Static IPv4 Address On Both Eth0 And Eth1
+    [Template]  Configure Static IPv6 And Verify IP Reachability
+
+    # channel_number
+    ${1}
+    ${2}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -1212,3 +1224,32 @@ Verify DHCPv4 Functionality On Eth1
 
     # Verify static is not present in address origin when DHPCv4 enabled.
     List Should Not Contain Value  ${ipv4_addressorigin_list}  Static
+
+
+Add Static IPv4 Address On Both Eth0 And Eth1
+    [Documentation]  Add static IPv4 address on both eth0 and eth1 interface.
+
+    Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_gateway}
+    Set Test Variable  ${CHANNEL_NUMBER}  ${SECONDARY_CHANNEL_NUMBER}
+    Add IP Address  ${test_ipv4_addr1}  ${test_subnet_mask}  ${test_gateway}
+
+
+Configure Static IPv6 And Verify IP Reachability
+    [Documentation]  Configure static IPv6 address on eth0/eth1 and verify IPs
+    ...  are reachable.
+    [Arguments]  ${channel_number}
+
+    # Description of argument(s):
+    # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+
+    # Select IPv6 address based on channel.
+    ${ipv6_addr}=  Set Variable If
+    ...  '${channel_number}' == '${1}'  ${test_ipv6_addr}
+    ...  ${test_ipv6_addr1}
+
+    Configure IPv6 Address On BMC  ${ipv6_addr}  ${test_prefix_length}
+    ...  ${None}  ${channel_number}
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  Static  ${channel_number}
+    Wait For Host To Ping  ${ipv6_addr}
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
