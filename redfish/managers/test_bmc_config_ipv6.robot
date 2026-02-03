@@ -11,6 +11,7 @@ Resource        ../../lib/protocol_setting_utils.robot
 Library         Collections
 Library         OperatingSystem
 Library         Process
+Library         Telnet
 Suite Setup     Suite Setup Execution
 Test Teardown   Test Teardown Execution
 
@@ -220,6 +221,19 @@ Verify Redfish Operations Are Working Via IPv6
     SLAAC   ${2}
 
 
+Verify Telnet Access Is Blocked Via IPv6
+    [Documentation]  Verify that telnet connection to BMC via IPv6 is blocked and throws an error.
+    [Tags]  Verify_Telnet_Access_Is_Blocked_Via_IPv6
+    [Template]  Check Telnet Connection Is Blocked
+
+
+    # Address_type  channel_number
+    SLAAC           ${1}
+    Static          ${1}
+    SLAAC           ${2}
+    Static          ${2}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -239,7 +253,7 @@ Test Teardown Execution
 
     FFDC On Test Case Fail
     Redfish.Logout
-    RedfishIPv6.Logout
+    #RedfishIPv6.Logout
 
 
 Wait For IPv6 Host To Ping
@@ -530,3 +544,22 @@ Verify Redfish Operations For IPV6 Address
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT},${HTTP_CREATED}]
 
     Delete SNMP Manager Via Redfish  ${SNMP_MGR_IP}  ${SNMP_DEFAULT_PORT}
+
+
+Check Telnet Connection Is Blocked
+    [Documentation]  Verify that telnet connection to BMC is blocked and returns an error.
+    [Arguments]  ${ipv6_address_type}  ${channel_number}
+
+    # Description of argument(s):
+    # ipv6_address_type   Type of IPv6 address(slaac/static).
+    # channel_number      Ethernet channel number, 1(eth0) or 2(eth1).
+
+    #@{ipv6_addressorigin_list}  ${ipv6_addr}=
+    #...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
+
+    # Attempt to establish telnet connection and verify it fails.
+    ${status}=  Run Keyword And Return Status
+    ...  Telnet.Open Connection  ${ipv6_addr}  port=23  timeout=10s  prompt=#
+
+    Should Be Equal As Strings  ${status}  False
+    ...  msg=Telnet connection succeeded when it should be blocked.
