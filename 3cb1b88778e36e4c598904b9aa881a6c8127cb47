@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a500ba2c_627e0ab8",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-03T11:59:03Z",
+      "side": 1,
+      "message": "can be clubbed into a single test case for both enable/disable scenarios.\nAlso, for uniformity make it\n\nStatic  ${1}\nStatic  ${2}\nSLAAC   ${1}\nSLAAC   ${2}",
+      "range": {
+        "startLine": 229,
+        "startChar": 4,
+        "endLine": 235,
+        "endChar": 0
+      },
+      "revId": "3cb1b88778e36e4c598904b9aa881a6c8127cb47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8bf416a_2689e46a",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-03T11:59:03Z",
+      "side": 1,
+      "message": "End the comments with a period.",
+      "range": {
+        "startLine": 578,
+        "startChar": 4,
+        "endLine": 578,
+        "endChar": 28
+      },
+      "revId": "3cb1b88778e36e4c598904b9aa881a6c8127cb47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3d23fb3_01fa9035",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-03T11:59:03Z",
+      "side": 1,
+      "message": "End with a period.\nExplicitly you can mention for more clarity.\nIPMI should work for IPv4 address as well as IPv6 address.",
+      "range": {
+        "startLine": 585,
+        "startChar": 6,
+        "endLine": 585,
+        "endChar": 24
+      },
+      "revId": "3cb1b88778e36e4c598904b9aa881a6c8127cb47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cc809ad_a3f2de16",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-03T11:59:03Z",
+      "side": 1,
+      "message": "End with a period.\nExplicitly you can mention for more clarity.\nIPMI should not work for IPv4 address as well as IPv6 address.",
+      "range": {
+        "startLine": 589,
+        "startChar": 6,
+        "endLine": 589,
+        "endChar": 28
+      },
+      "revId": "3cb1b88778e36e4c598904b9aa881a6c8127cb47",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
