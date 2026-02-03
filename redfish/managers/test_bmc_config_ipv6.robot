@@ -253,7 +253,7 @@ Test Teardown Execution
 
     FFDC On Test Case Fail
     Redfish.Logout
-    #RedfishIPv6.Logout
+    Run Keyword And Ignore Error  RedfishIPv6.Logout
 
 
 Wait For IPv6 Host To Ping
@@ -554,8 +554,8 @@ Check Telnet Connection Is Blocked
     # ipv6_address_type   Type of IPv6 address(slaac/static).
     # channel_number      Ethernet channel number, 1(eth0) or 2(eth1).
 
-    #@{ipv6_addressorigin_list}  ${ipv6_addr}=
-    #...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
 
     # Attempt to establish telnet connection and verify it fails.
     ${status}=  Run Keyword And Return Status
