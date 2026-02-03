@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9744d24a_fa31a742",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-02-03T17:56:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40f4eec5_858c9fbf",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 38
+      },
+      "revId": "4d02c9359d10bb07625c915d97a5f48b6ea5b94c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9cca771_3b6394c1",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-01-09T11:41:51Z",
       "side": 1,
       "message": "can we simplify this input as we exceeding 110 character limit",
+      "range": {
+        "startLine": 209,
+        "startChar": 1,
+        "endLine": 212,
+        "endChar": 0
+      },
+      "revId": "4d02c9359d10bb07625c915d97a5f48b6ea5b94c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1afc3f1_74713a93",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-02-03T17:56:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9cca771_3b6394c1",
       "range": {
         "startLine": 209,
         "startChar": 1,
@@ -70,6 +118,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20d0b5aa_467a2a56",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-02-03T17:56:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b28187e_3d9248df",
+      "range": {
+        "startLine": 217,
+        "startChar": 3,
+        "endLine": 217,
+        "endChar": 38
+      },
+      "revId": "4d02c9359d10bb07625c915d97a5f48b6ea5b94c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e29498b_4eab7388",
@@ -83,6 +155,30 @@
       "writtenOn": "2026-01-09T11:41:51Z",
       "side": 1,
       "message": "can we simplify this input as we exceeding 110 character limit",
+      "range": {
+        "startLine": 219,
+        "startChar": 3,
+        "endLine": 222,
+        "endChar": 0
+      },
+      "revId": "4d02c9359d10bb07625c915d97a5f48b6ea5b94c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2844c22d_0542de86",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-02-03T17:56:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e29498b_4eab7388",
       "range": {
         "startLine": 219,
         "startChar": 3,
@@ -110,6 +206,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "283dde48_df452632",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-02-03T17:56:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff1d274c_a2eff3bb",
+      "revId": "4d02c9359d10bb07625c915d97a5f48b6ea5b94c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f32bec9_4a4a7b61",
@@ -123,6 +237,30 @@
       "writtenOn": "2026-01-09T11:41:51Z",
       "side": 1,
       "message": "use two spaces instead of four spaces",
+      "range": {
+        "startLine": 320,
+        "startChar": 4,
+        "endLine": 324,
+        "endChar": 7
+      },
+      "revId": "4d02c9359d10bb07625c915d97a5f48b6ea5b94c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35554e77_1d438c4e",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-02-03T17:56:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f32bec9_4a4a7b61",
       "range": {
         "startLine": 320,
         "startChar": 4,
@@ -150,6 +288,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7e0b9b7_ce16e6d9",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-02-03T17:56:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6381799_4bfc4dab",
+      "revId": "4d02c9359d10bb07625c915d97a5f48b6ea5b94c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f99a2b84_0c304a08",
@@ -163,6 +319,30 @@
       "writtenOn": "2026-01-09T11:41:51Z",
       "side": 1,
       "message": "unused",
+      "range": {
+        "startLine": 331,
+        "startChar": 4,
+        "endLine": 331,
+        "endChar": 11
+      },
+      "revId": "4d02c9359d10bb07625c915d97a5f48b6ea5b94c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fd06b47_48e8bd00",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-02-03T17:56:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f99a2b84_0c304a08",
       "range": {
         "startLine": 331,
         "startChar": 4,
