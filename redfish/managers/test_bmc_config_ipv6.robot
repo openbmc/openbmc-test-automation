@@ -26,11 +26,8 @@ Test Tags       BMC_IPv6_Config
 ${SERVER_USERNAME}      ${EMPTY}
 ${SERVER_PASSWORD}      ${EMPTY}
 ${SERVER_IPv6}          ${EMPTY}
-${test_ipv4_addr}       10.7.7.7
-${test_ipv4_addr1}      10.7.7.8
 ${test_ipv6_addr}       2001:db8:1:1:250:56ff:fe8a:668
 ${test_ipv6_addr1}      2001:db8:1:1:250:56ff:fe8a:669
-${test_subnet_mask}     255.255.255.0
 
 *** Test Cases ***
 
