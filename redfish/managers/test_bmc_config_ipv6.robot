@@ -209,6 +209,32 @@ Delete Static IPv4 On Eth0 Using IPv6 And Verify
     SLAAC      ${1}  ${test_ipv4_addr1}
 
 
+Enable IPMI And Verify IPMI Works For IPv4 And IPv6
+    [Documentation]  Enable IPMI and verify IPMI works for IPv4 and IPv6
+    ...  Note: IPMI should be enabled.
+    [Tags]  Enable_IPMI_And_Verify_IPMI_Works_For_IPv4_And_IPv6
+    [Template]  IPMI Enable Or Disable And Verify
+
+    #ipv6_type   channel_number  enable
+    SLAAC        ${1}            ${True}
+    Static       ${1}            ${True}
+    SLAAC        ${2}            ${True}
+    Static       ${2}            ${True}
+
+
+Disable IPMI And Verify IPMI Does Not Work For IPv4 And IPv6
+    [Documentation]  Disable IPMI and verify IPMI dont Work for IPv4 and IPv6
+    [Tags]  Disable_IPMI_And_Verify_IPMI_Does_Not_Work_For_IPv4_And_IPv6
+    [Template]  IPMI Enable Or Disable And Verify
+    [Teardown]  Enable IPMI Protocol  ${True}
+
+    #ipv6_type   channel_number  disable
+    SLAAC        ${1}            ${False}
+    Static       ${1}            ${False}
+    SLAAC        ${2}            ${False}
+    Static       ${2}            ${False}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -488,3 +514,53 @@ Delete IPv4 Address From IPv6 And Verify
     ELSE
         Delete IP Address  ${test_ipv4_addr1}  version=IPv6
     END
+
+
+IPMI Enable Or Disable And Verify
+    [Documentation]  Enable or Disable IPMI and verify.
+    [Arguments]  ${ipv6_address_type}  ${channel_number}  ${enable_value}
+
+    # Description of argument(s):
+    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+    # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+    # enable_value       Enable or disable IPMI, e.g. (true, false).
+
+    # Get IPv6 address
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type
+    ...  ${ipv6_address_type}  ${channel_number}
+
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+
+    # Enable or Disable IPMI
+    Enable IPMI Protocol  ${enable_value}
+
+    # Verify protocol state via Redfish
+    Verify IPMI Protocol State  ${enable_value}
+
+    IF  '${enable_value}' == '${True}'
+      # IPMI should work
+      Verify IPMI Works  lan print
+      Verify IPMI Works  lan print  ${ipv6_addr}
+    ELSE
+      # IPMI should NOT work
+      Verify IPMI Does Not Work  ${ipv6_addr}
+    END
+
+
+Verify IPMI Does Not Work
+    [Documentation]  Verifying IPMI does not work when disabled.
+    [Arguments]  ${ipv6_addr}
+
+    # Description of argument(s):
+    # ipv6_addr   IPv6 address(slaac/static).
+
+    ${status_v4}=  Run Keyword And Return Status
+    ...  Verify IPMI Works  lan print
+    
+    ${status_v6}=  Run Keyword And Return Status
+    ...  Verify IPMI Works  lan print  ${ipv6_addr}
+
+    Should Be Equal As Strings  ${status_v4}  False
+    Should Be Equal As Strings  ${status_v6}  False
