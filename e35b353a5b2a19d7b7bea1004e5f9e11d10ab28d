@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "675e6fbe_c31bf9be",
+        "filename": "gui/gui_test/operations_menu/test_firmware_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-02-03T04:25:30Z",
+      "side": 1,
+      "message": "do we need to keep this?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 85
+      },
+      "revId": "e35b353a5b2a19d7b7bea1004e5f9e11d10ab28d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edceaf30_e40aff74",
+        "filename": "gui/gui_test/security_and_access_menu/test_certificates_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-02-03T04:25:30Z",
+      "side": 1,
+      "message": "commented xpath are needed?",
+      "revId": "e35b353a5b2a19d7b7bea1004e5f9e11d10ab28d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "786c5a36_15bf4805",
+        "filename": "gui/gui_test/settings_menu/test_factory_reset_sub_menu.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-02-03T04:25:30Z",
+      "side": 1,
+      "message": "commented xpath.. please check on this",
+      "revId": "e35b353a5b2a19d7b7bea1004e5f9e11d10ab28d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
