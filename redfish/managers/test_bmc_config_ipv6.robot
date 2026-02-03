@@ -234,6 +234,31 @@ Verify Telnet Access Is Blocked Via IPv6
     Static          ${2}
 
 
+Enable IPMI And Verify IPMI Works For IPv4 And IPv6
+    [Documentation]  Enable IPMI and verify IPMI works for IPv4 and IPv6.
+    [Tags]  Enable_IPMI_And_Verify_IPMI_Works_For_IPv4_And_IPv6
+    [Template]  IPMI Enable Or Disable And Verify
+
+    #ipv6_type   channel_number  enable
+    Static       ${1}            ${True}
+    Static       ${2}            ${True}
+    SLAAC        ${1}            ${True}
+    SLAAC        ${2}            ${True}
+
+
+Disable IPMI And Verify IPMI Does Not Work For IPv4 And IPv6
+    [Documentation]  Disable IPMI and verify IPMI dont Work for IPv4 and IPv6
+    [Tags]  Disable_IPMI_And_Verify_IPMI_Does_Not_Work_For_IPv4_And_IPv6
+    [Template]  IPMI Enable Or Disable And Verify
+    [Teardown]  Enable IPMI Protocol  ${True}
+
+    #ipv6_type   channel_number  disable
+    Static       ${1}            ${False}
+    Static       ${2}            ${False}
+    SLAAC        ${1}            ${False}
+    SLAAC        ${2}            ${False}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -344,14 +369,14 @@ Connect BMC Using IPv6 Address
 
 Get IPv6 Address And Verify Connectivity
     [Documentation]  Get IPv6 address and verify connectivity.
-    [Arguments]  ${ipv6_adress_type}  ${channel_number}
+    [Arguments]  ${ipv6_address_type}  ${channel_number}
 
     # Description of argument(s):
-    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+    # ipv6_address_type   Type of IPv6 address(slaac/static).
     # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
 
     @{ipv6_addressorigin_list}  ${ipv6_addr}=
-    ...  Get Address Origin List And Address For Type  ${ipv6_adress_type}  ${channel_number}
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
     IF  '${SERVER_USERNAME}' != '${EMPTY}'
         Check IPv6 Connectivity  ${ipv6_addr}
     ELSE
@@ -361,15 +386,15 @@ Get IPv6 Address And Verify Connectivity
 
 Disable Or Enable DHCP On Eth1 From IPv6 Address
     [Documentation]  Disable Or Enable DHCP On Eth1 From IPv6 Address
-    [Arguments]  ${ipv6_adress_type}  ${channel_number}  ${DHCP_state}
+    [Arguments]  ${ipv6_address_type}  ${channel_number}  ${DHCP_state}
 
     # Description of argument(s):
-    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+    # ipv6_address_type   Type of IPv6 address(slaac/static).
     # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
     # DHCP_state  Enable or Disable DHCP
 
     @{ipv6_addressorigin_list}  ${ipv6_addr}=
-    ...  Get Address Origin List And Address For Type  ${ipv6_adress_type}  ${channel_number}
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
     Connect BMC Using IPv6 Address  ${ipv6_addr}
     RedfishIPv6.Login
     Set DHCPEnabled To Enable Or Disable  ${DHCP_state}  eth1  Version=IPv6
@@ -384,15 +409,15 @@ Disable Or Enable DHCP On Eth1 From IPv6 Address
 
 Configure IPv4 Address From IPv6 And Verify
     [Documentation]  Configure IPv4 address from IPv6 and verify.
-    [Arguments]   ${ipv6_adress_type}  ${channel_number}  ${test_ipv4_addr}
+    [Arguments]   ${ipv6_address_type}  ${channel_number}  ${test_ipv4_addr}
 
     # Description of argument(s):
-    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+    # ipv6_address_type   Type of IPv6 address(slaac/static).
     # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
     # test_ipv4_addr     IPv4 address to add.
 
     @{ipv6_addressorigin_list}  ${ipv6_addr}=
-    ...  Get Address Origin List And Address For Type  ${ipv6_adress_type}  ${channel_number}
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
     Connect BMC Using IPv6 Address  ${ipv6_addr}
     RedfishIPv6.Login
     ${test_gateway}=  Get BMC Default Gateway
@@ -402,18 +427,18 @@ Configure IPv4 Address From IPv6 And Verify
 Configure Static IPv6 Address From Different IPv6 Assigning Methods
     [Documentation]  Configure static IPv6 on both interfaces by logging
     ...    in from different IPv6 address.
-    [Arguments]  ${ipv6_adress_type}  ${channel_number}
+    [Arguments]  ${ipv6_address_type}  ${channel_number}
     [Teardown]  Run Keywords
     ...    Delete IPv6 Address  ${test_ipv6_addr}  ${1}  Version=IPv6
     ...    AND  Delete IPv6 Address  ${test_ipv6_addr1}  ${2}  Version=IPv6
     ...    AND  Test Teardown Execution
 
     # Description of argument(s):
-    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+    # ipv6_address_type   Type of IPv6 address(slaac/static).
     # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
 
     @{ipv6_addressorigin_list}  ${ipv6_addr}=
-    ...  Get Address Origin List And Address For Type  ${ipv6_adress_type}  ${channel_number}
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
     Connect BMC Using IPv6 Address  ${ipv6_addr}
     RedfishIPv6.Login
     Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}  Version=IPv6
@@ -423,11 +448,11 @@ Configure Static IPv6 Address From Different IPv6 Assigning Methods
 
 Modify IPv4 Address From IPv6 Address
     [Documentation]  Modify IPv4 address from IPv6 address.
-    [Arguments]  ${ipv6_adress_type}  ${channel_number}  ${test_ipv4_addr}
+    [Arguments]  ${ipv6_address_type}  ${channel_number}  ${test_ipv4_addr}
     [Teardown]  Delete IP Address  ${test_ipv4_addr1}  version=IPv6
 
     @{ipv6_addressorigin_list}  ${ipv6_addr}=
-    ...  Get Address Origin List And Address For Type  ${ipv6_adress_type}  ${channel_number}
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
     Connect BMC Using IPv6 Address  ${ipv6_addr}
     RedfishIPv6.Login
     ${test_gateway}=  Get BMC Default Gateway
@@ -437,16 +462,16 @@ Modify IPv4 Address From IPv6 Address
 
 Modify IPv6 Address From IPv6 Address
     [Documentation]  Modify IPv6 address from IPv6 address.
-    [Arguments]  ${ipv6_adress_type}  ${channel_number}  ${test_ipv6_addr}
+    [Arguments]  ${ipv6_address_type}  ${channel_number}  ${test_ipv6_addr}
     [Teardown]  Delete IPv6 Address  ${test_ipv6_addr1}  Version=IPv6
 
     # Description of argument(s):
-    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+    # ipv6_address_type   Type of IPv6 address(slaac/static).
     # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
     # test_ipv6_addr     IPv4 address parameter (not used in IPv6 modification).
 
     @{ipv6_addressorigin_list}  ${ipv6_addr}=
-    ...  Get Address Origin List And Address For Type  ${ipv6_adress_type}  ${channel_number}
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
     Connect BMC Using IPv6 Address  ${ipv6_addr}
     RedfishIPv6.Login
     Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}  Version=IPv6
@@ -485,7 +510,7 @@ Verify Static IPv4 Functionality In Presence Of IPv6 Address
     [Arguments]  ${ipv6_address_type}  ${channel_number}
 
     # Description of argument(s):
-    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+    # ipv6_address_type   Type of IPv6 address(slaac/static).
     # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
 
     @{ipv6_addressorigin_list}  ${ipv6_addr}=
@@ -520,7 +545,7 @@ Verify Redfish Operations For IPV6 Address
     [Arguments]  ${ipv6_address_type}  ${channel_number}
 
     # Description of argument(s):
-    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+    # ipv6_address_type   Type of IPv6 address(slaac/static).
     # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
 
     @{ipv6_addressorigin_list}  ${ipv6_addr}=
@@ -563,3 +588,53 @@ Check Telnet Connection Is Blocked
 
     Should Be Equal As Strings  ${status}  False
     ...  msg=Telnet connection succeeded when it should be blocked.
+
+
+IPMI Enable Or Disable And Verify
+    [Documentation]  Enable or Disable IPMI and verify.
+    [Arguments]  ${ipv6_address_type}  ${channel_number}  ${enable_value}
+
+    # Description of argument(s):
+    # ipv6_address_type   Type of IPv6 address(slaac/static).
+    # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+    # enable_value       Enable or disable IPMI, e.g. (true, false).
+
+    # Get IPv6 address.
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type
+    ...  ${ipv6_address_type}  ${channel_number}
+
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+
+    # Enable or Disable IPMI.
+    Enable IPMI Protocol  ${enable_value}
+
+    # Verify protocol state via Redfish.
+    Verify IPMI Protocol State  ${enable_value}
+
+    IF  '${enable_value}' == '${True}'
+      # IPMI should work for IPv4 address as well as IPv6 address.
+      Verify IPMI Works  lan print
+      Verify IPMI Works  lan print  ${ipv6_addr}
+    ELSE
+      # IPMI should NOT work for IPv4 address as well as IPv6 address.
+      Verify IPMI Does Not Work  ${ipv6_addr}
+    END
+
+
+Verify IPMI Does Not Work
+    [Documentation]  Verifying IPMI does not work when disabled.
+    [Arguments]  ${ipv6_addr}
+
+    # Description of argument(s):
+    # ipv6_addr   IPv6 address(slaac/static).
+
+    ${status_v4}=  Run Keyword And Return Status
+    ...  Verify IPMI Works  lan print
+
+    ${status_v6}=  Run Keyword And Return Status
+    ...  Verify IPMI Works  lan print  ${ipv6_addr}
+
+    Should Be Equal As Strings  ${status_v4}  False
+    Should Be Equal As Strings  ${status_v6}  False
