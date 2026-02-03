@@ -209,15 +209,30 @@ Delete Static IPv4 On Eth0 Using IPv6 And Verify
     SLAAC      ${1}  ${test_ipv4_addr1}
 
 
-Verify Redfish Operations Are Working Via IPv6
-    [Documentation]  Verify GET/POST/PATCH redfish operations for IPv6.
-    [Tags]  Verify_Redfish_Operations_Are_Working_Via_IPv6
-    [Template]  Verify Redfish Operations For IPV6 Address
+Enable IPMI And Verify IPMI Works For IPv4 And IPv6
+    [Documentation]  Enable IPMI and verify IPMI works for IPv4 and IPv6
+    ...  Note: IPMI should be enabled.
+    [Tags]  Enable_IPMI_And_Verify_IPMI_Works_For_IPv4_And_IPv6
+    [Template]  IPMI Enable Or Disable And Verify
 
-    Static  ${1}
-    Static  ${2}
-    SLAAC   ${1}
-    SLAAC   ${2}
+    #ipv6_type   channel_number  enable
+    SLAAC        ${1}            ${True}
+    Static       ${1}            ${True}
+    SLAAC        ${2}            ${True}
+    Static       ${2}            ${True}
+
+
+Disable IPMI And Verify IPMI Does Not Work For IPv4 And IPv6
+    [Documentation]  Disable IPMI and verify IPMI dont Work for IPv4 and IPv6
+    [Tags]  Disable_IPMI_And_Verify_IPMI_Does_Not_Work_For_IPv4_And_IPv6
+    [Template]  IPMI Enable Or Disable And Verify
+    [Teardown]  Enable IPMI Protocol  ${True}
+
+    #ipv6_type   channel_number  disable
+    SLAAC        ${1}            ${False}
+    Static       ${1}            ${False}
+    SLAAC        ${2}            ${False}
+    Static       ${2}            ${False}
 
 
 *** Keywords ***
@@ -501,32 +516,51 @@ Delete IPv4 Address From IPv6 And Verify
     END
 
 
-Verify Redfish Operations For IPV6 Address
-    [Documentation]  Verify redfish operations are working for IPv6 addresses.
-    [Arguments]  ${ipv6_address_type}  ${channel_number}
+IPMI Enable Or Disable And Verify
+    [Documentation]  Enable or Disable IPMI and verify.
+    [Arguments]  ${ipv6_address_type}  ${channel_number}  ${enable_value}
 
     # Description of argument(s):
     # ipv6_adress_type   Type of IPv6 address(slaac/static).
     # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+    # enable_value       Enable or disable IPMI, e.g. (true, false).
 
+    # Get IPv6 address
     @{ipv6_addressorigin_list}  ${ipv6_addr}=
-    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
+    ...  Get Address Origin List And Address For Type
+    ...  ${ipv6_address_type}  ${channel_number}
+
     Connect BMC Using IPv6 Address  ${ipv6_addr}
     RedfishIPv6.Login
 
-    # Verify Redfish GET operation is working.
-    ${resp}=  RedfishIPv6.Get  ${REDFISH_NW_ETH_IFACE}eth0
-    Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
+    # Enable or Disable IPMI
+    Enable IPMI Protocol  ${enable_value}
 
-    # Verify Redfish Patch operation is working.
-    ${resp}=  RedfishIPv6.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
-    ...  body={'StaticNameServers': 10.5.5.5}
-    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    # Verify protocol state via Redfish
+    Verify IPMI Protocol State  ${enable_value}
 
-    # Verify Redfish Post operation is working.
-    ${snmp_mgr_data}=  Create Dictionary  Destination=snmp://${SNMP_MGR_IP}:${SNMP_DEFAULT_PORT}
-    ...  SubscriptionType=SNMPTrap  Protocol=SNMPv2c
-    RedfishIPv6.Post  /redfish/v1/EventService/Subscriptions  body=&{snmp_mgr_data}
-    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT},${HTTP_CREATED}]
+    IF  '${enable_value}' == '${True}'
+      # IPMI should work
+      Verify IPMI Works  lan print
+      Verify IPMI Works  lan print  ${ipv6_addr}
+    ELSE
+      # IPMI should NOT work
+      Verify IPMI Does Not Work  ${ipv6_addr}
+    END
 
-    Delete SNMP Manager Via Redfish  ${SNMP_MGR_IP}  ${SNMP_DEFAULT_PORT}
+
+Verify IPMI Does Not Work
+    [Documentation]  Verifying IPMI does not work when disabled.
+    [Arguments]  ${ipv6_addr}
+
+    # Description of argument(s):
+    # ipv6_addr   IPv6 address(slaac/static).
+
+    ${status_v4}=  Run Keyword And Return Status
+    ...  Verify IPMI Works  lan print
+
+    ${status_v6}=  Run Keyword And Return Status
+    ...  Verify IPMI Works  lan print  ${ipv6_addr}
+
+    Should Be Equal As Strings  ${status_v4}  False
+    Should Be Equal As Strings  ${status_v6}  False
