@@ -234,6 +234,19 @@ Verify Telnet Access Is Blocked Via IPv6
     Static          ${2}
 
 
+Verify Eth1 DHCPv4 Functionality In Presence Of Static IPv6
+    [Documentation]  Verify eth1 DHCPv4 functions properly in presence of static IPv6
+    ...    by logging in from static/slaac IPv6 address.
+    [Tags]  Verify_Eth1_DHCPv4_Functionality_In_Presence_Of_Static_IPv6
+    [Setup]  Configure IPv6 Address On BMC  ${test_ipv6_addr1}  ${test_prefix_length}
+    ...    ${None}  ${2}
+    [Template]  Verify Eth1 DHCPv4 Functionality In Presence Of IPv6 Address
+
+    # Address_type  channel_number
+    Static          ${2}
+    SLAAC           ${2}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -563,3 +576,18 @@ Check Telnet Connection Is Blocked
 
     Should Be Equal As Strings  ${status}  False
     ...  msg=Telnet connection succeeded when it should be blocked.
+
+
+Verify Eth1 DHCPv4 Functionality In Presence Of IPv6 Address
+    [Documentation]  Verify eth1 DHCPv4 functionality in presence of IPv6 address by logging in
+    ...    from slaac/static IPv6 address
+    [Arguments]  ${ipv6_address_type}  ${channel_number}
+
+    # Description of argument(s):
+    # ipv6_adress_type   Type of IPv6 address(slaac/static).
+
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+    Verify DHCPv4 Functionality On Eth1
