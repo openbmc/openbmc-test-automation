@@ -623,3 +623,20 @@ Verify Static IPv4 Functionality
     FOR  ${ip}  IN  @{ipv4_addr_list}
         Wait For Host To Ping  ${ip}  ${NETWORK_TIMEOUT}
     END
+
+
+Verify DHCPv4 Functionality On Eth1
+    [Documentation]  Verify DHCPv4 functions are present as expected on eth1.
+
+    # Verify eth1 DHCPv4 is enabled.
+    ${DHCPEnabled}=  Get IPv4 DHCP Enabled Status  ${2}
+    Should Be Equal  ${DHCPEnabled}  ${True}
+
+    # Verify presence of DHCPv4 address origin.
+    @{ipv4_addressorigin_list}  ${ipv4_addr_list}=
+    ...  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses  ${2}
+    ${ipv4_addressorigin_list}=  Combine Lists  @{ipv4_addressorigin_list}
+    Should Contain  ${ipv4_addressorigin_list}  DHCP
+
+    # Verify static is not present in address origin when DHPCv4 enabled.
+    List Should Not Contain Value  ${ipv4_addressorigin_list}  Static
