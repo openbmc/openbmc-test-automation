@@ -5,6 +5,8 @@ Resource            ../lib/ipmi_client.robot
 Resource            ../lib/openbmc_ffdc.robot
 Resource            ../lib/bmc_network_utils.robot
 Library             ../lib/ipmi_utils.py
+Variables           ../data/ipmi_raw_cmd_table.py
+
 Test Setup          Printn
 
 Suite Setup         Suite Setup Execution
@@ -515,6 +517,16 @@ Modify IPMI User
 
     # Verify that user is able to run administrator level IPMI command.
     Verify IPMI Command  ${new_username}  ${valid_password}  Administrator  ${CHANNEL_NUMBER}
+
+
+Verify Set Username With Invalid Data Length
+    [Documentation]  Verify Set Bmc Username With Invalid Data Length.
+    [Tags]  Verify_Set_Username_With_Invalid_Data_Length
+    [Template]  Verify Invalid IPMI Command
+
+    # Invalid data length                   Expected error code
+    ${IPMI_RAW_CMD['user_name']['Set'][0]}  0xc7
+    ${IPMI_RAW_CMD['user_name']['Set'][1]}  0xc7
 
 
 *** Keywords ***
