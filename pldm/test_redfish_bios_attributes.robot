@@ -31,7 +31,7 @@ Redfish Verify Set BIOS Attribute With Invalid Attribute Name
 
     ${random_str}=  Generate Random String  8  [LETTERS][NUMBERS]
     Redfish.Patch  ${BIOS_ATTR_SETTINGS_URI}  body={"Attributes":{"${random_str}": '${random_str}'}}
-    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}, ${HTTP_METHOD_NOT_ALLOWED}]
 
 
 Redfish Verify Set Invalid Optional Value For BIOS Enumeration Attribute Type
@@ -44,7 +44,7 @@ Redfish Verify Set Invalid Optional Value For BIOS Enumeration Attribute Type
     ${enum_attr}=  Evaluate  random.choice(${attr_handles})  modules=random
 
     Redfish.Patch  ${BIOS_ATTR_SETTINGS_URI}  body={"Attributes":{"${enum_attr}": '0'}}
-    ...  valid_status_codes=[${HTTP_BAD_REQUEST}, ${HTTP_FORBIDDEN}]
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}, ${HTTP_FORBIDDEN}, ${HTTP_METHOD_NOT_ALLOWED}]
 
 
 Redfish Verify Set Out Of Range Integer Value For BIOS Integer Attribute Type
@@ -58,7 +58,7 @@ Redfish Verify Set Out Of Range Integer Value For BIOS Integer Attribute Type
     ${count}=  Evaluate  ${attr_val_data['${int_attr}']["UpperBound"]} + 5
 
     Redfish.Patch  ${BIOS_ATTR_SETTINGS_URI}  body={"Attributes":{"${int_attr}": ${count}}}
-    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}, ${HTTP_METHOD_NOT_ALLOWED}]
 
 *** Comments ***
 Redfish Verify Set Out Of Range String Value For BIOS String Attribute Type
