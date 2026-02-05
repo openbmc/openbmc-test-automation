@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation       Test telemetry functionality of OpenBMC.
 
 Resource            ../../lib/bmc_redfish_resource.robot
@@ -73,11 +72,13 @@ Verify Telemetry Service Unsupported Methods
 
     Verify Supported And Unsupported Methods    uri=/redfish/v1/TelemetryService
 
+
 Verify Telemetry Service MetricReports Unsupported Methods
     [Documentation]  Verify Telemetry Service MetricReports with Unsupported methods.
     [Tags]  Verify_Telemetry_Service_MetricReports_Unsupported_Methods
 
     Verify Supported And Unsupported Methods    uri=/redfish/v1/TelemetryService/MetricReports
+
 
 Verify Telemetry Service Defaults
     [Documentation]  Verify Telemetry Service Defaults.
@@ -146,11 +147,11 @@ Suite Setup Execution
 
     # Find and collect actual telemetry definitions.
     FOR    ${key}  IN  @{user_tele_def.keys()}
-      Add To Telemetry definition Record   ${key}   ${user_tele_def['${key}']}
+      Add To Telemetry Definition Record   ${key}   ${user_tele_def['${key}']}
     END
 
 
-Add To Telemetry definition Record
+Add To Telemetry Definition Record
     [Documentation]  Find actual telemetry definitions available and store.
     ...              Definitions are stored in a dictionary as key and value
     ...              as described in argument documentation.
@@ -182,7 +183,8 @@ Test Teardown Execution
 Create Basic Telemetry Report
     [Documentation]  Create a basic telemetry report with single metric.
     [Arguments]  ${metric_definition_name}  ${metric_definition_type}
-    ...  ${report_action}  ${append_limit}=10  ${expected_result}=success  ${delete_report}=True
+    ...          ${report_action}  ${append_limit}=10
+    ...          ${expected_result}=success  ${delete_report}=True
 
     # Description of argument(s):
     # metric_definition_name    Name of metric definition like Ambient_0_Temp.
@@ -233,30 +235,29 @@ Create Basic Telemetry Report
     ...  "Schedule": {"RecurrenceInterval": "PT5.000S"}}
 
     ${body}=  Replace String  ${body}  '  "
-    ${dict}  Evaluate  json.loads('''${body}''')  json
+    ${dict}=  Evaluate  json.loads('''${body}''')  json
 
     ${status_code_expected}=  Set Variable If
     ...  '${expected_result}' == 'success'  [${HTTP_CREATED}]
     ...  '${expected_result}' == 'fail'  [${HTTP_BAD_REQUEST}]
 
     Redfish.Post  ${metric_definition_base_uri}  body=&{dict}
-     ...  valid_status_codes=${status_code_expected}
+    ...  valid_status_codes=${status_code_expected}
 
     IF  '${expected_result}' == 'success'
         # Verify definition of report has attributes provided at the time of creation.
         ${resp_report}=  Redfish.Get  ${metric_definition_base_uri}/${report_name}
         ...  valid_status_codes=[${HTTP_OK}]
         Should Be True  '${resp_report.dict["MetricReportDefinitionType"]}' == '${metric_definition_type}'
-        Should Be True  '${resp_report.dict["AppendLimit"]}' == '${AppendLimit}'
+        Should Be True  '${resp_report.dict["AppendLimit"]}' == '${append_limit}'
         Should Be True  '${resp_report.dict["ReportActions"][0]}' == '${report_action}'
         Should Be True
         ...  '${resp_report.dict["Metrics"]}[0][MetricProperties][0]' == '${resp["MetricProperties"][0]}'
     END
 
     IF  ${delete_report} == ${True}
-       Delete All Telemetry Reports
+        Delete All Telemetry Reports
     END
-
 
 Delete All Telemetry Reports
     [Documentation]  Delete all existing telemetry reports.
