@@ -56,7 +56,7 @@ Verify Task Service Attributes
     Dictionaries Should Be Equal  ${resp["Status"]}  ${valid_status}
 
     # Get current time from BMC console.
-    ${cur_time}=  Get Current Date from BMC
+    ${cur_time}=  Get Current Date From BMC
 
     # Remove offset from task service time.
     ${bmc_time}=  Get Regexp Matches  ${resp["DateTime"]}
@@ -123,7 +123,7 @@ Test Generated Task Instance Validity And Task State
     ...  valid_status_codes=[${HTTP_ACCEPTED}]
 
     # Get current time from BMC console before generating task.
-    ${cur_time}=  Get Current Date from BMC
+    ${cur_time}=  Get Current Date From BMC
 
     # Verify task start time is within 10s of current time.
     ${resp}=  Redfish.Get Properties  /redfish/v1/TaskService/Tasks/${task_id}
@@ -190,7 +190,7 @@ Verify Task Persistency Post BMC Reboot
 Suite Setup Execution
     [Documentation]  Do suite setup operation.
 
-    Redfish.login
+    Redfish.Login
     Load Task Service Properties Data
 
 
@@ -217,7 +217,7 @@ Generate Task Instance
         Fail  Task type "${task_type}" is unknown.
     END
 
-    Return From Keyword  ${task_id}  ${resp}
+    RETURN  ${task_id}  ${resp}
 
 
 Verify Generate Task Instance Completion
@@ -257,7 +257,7 @@ Load Task Service Properties Data
     ...  ${properties["TaskService"]["Status"]}
 
 
-Get Current Date from BMC
+Get Current Date From BMC
     [Documentation]  Runs the date command from BMC and returns current date and time.
 
     # Get Current Date from BMC
@@ -266,7 +266,7 @@ Get Current Date from BMC
     # Split the string and remove first and 2nd last value from
     # the list and join to form %d %b %H:%M:%S %Y date format.
 
-   ${date}=  Split String  ${date}
+    ${date}=  Split String  ${date}
 
     Remove From List  ${date}  0
     Remove From List  ${date}  -2

@@ -8,7 +8,6 @@ Test Teardown    Test Teardown Execution
 
 Test Tags        Test_BMC_LogService
 
-
 *** Test Cases ***
 
 Verify LogService Unsupported Methods
