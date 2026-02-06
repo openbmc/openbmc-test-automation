@@ -276,9 +276,8 @@ Verify LDAP BindDN Password Update And LDAP Login
     ...  verify that LDAP login works.
     [Tags]  Verify_LDAP_BindDN_Password_Update_And_LDAP_Login
 
-
     ${body}=  Catenate  {'${LDAP_TYPE}': { 'Authentication':
-    ...   {'AuthenticationType':'UsernameAndPassword', 'Password':
+    ...  {'AuthenticationType':'UsernameAndPassword', 'Password':
     ...  '${LDAP_BIND_DN_PASSWORD}'}}}
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
@@ -721,7 +720,7 @@ Get LDAP Privilege
 
     ${ldap_config}=  Get LDAP Configuration  ${LDAP_TYPE}
     ${num_list_entries}=  Get Length  ${ldap_config["RemoteRoleMapping"]}
-    IF  ${num_list_entries} == ${0}  @{EMPTY}  RETURN
+    IF  ${num_list_entries} == ${0}  RETURN  @{EMPTY}
 
     RETURN  ${ldap_config["RemoteRoleMapping"][0]["LocalRole"]}
 
