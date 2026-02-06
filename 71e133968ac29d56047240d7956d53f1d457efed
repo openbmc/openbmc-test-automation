@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22d7e019_d847333d",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-02-06T06:21:50Z",
+      "side": 1,
+      "message": "Enable IPMI via IPv6 Address And Verify IPMI Works For IPv4 And IPv6",
+      "revId": "71e133968ac29d56047240d7956d53f1d457efed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd15128f_5d8c07fc",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-02-06T06:21:50Z",
+      "side": 1,
+      "message": "\"IPMI Enable Or Disable And Verify\" as per this keyword you are performing enable/ disable ipmi via IPv6, then can you please modify the TC name accordingly",
+      "revId": "71e133968ac29d56047240d7956d53f1d457efed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33117739_ddb255ac",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-02-06T06:21:50Z",
+      "side": 1,
+      "message": "same as above coment",
+      "revId": "71e133968ac29d56047240d7956d53f1d457efed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0a0ee76_eae15b03",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-02-06T06:21:50Z",
+      "side": 1,
+      "message": "Enable or Disable IPMI via IPv6 and verify that it works for both IPv4 and IPv6",
+      "revId": "71e133968ac29d56047240d7956d53f1d457efed",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
