@@ -16,6 +16,24 @@
       "message": "both testcase and template looks same, please change it\n\nEnable Or Disable IPMI Via IPv6 And Verify It Works For Both IP Versions",
       "revId": "57a35bf04576dec6be288eb8ae431313db85e401",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbd8c3a6_94049cf4",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-02-06T07:02:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5ef4791_c8736e0f",
+      "revId": "57a35bf04576dec6be288eb8ae431313db85e401",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
