@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cb362347_c5daaaea",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-02-06T07:07:10Z",
+      "side": 1,
+      "message": "Verify Static IPv6 When Static IPv4 Is Configured On Both Interfaces",
+      "parentUuid": "77a97b28_698152ca",
+      "revId": "3874b6b6582d961920b6df342c308c797780e58c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce338792_78c0ac58",
         "filename": "redfish/managers/test_bmc_ipv6.robot",
         "patchSetId": 7
@@ -48,6 +66,24 @@
       "writtenOn": "2026-02-06T06:35:17Z",
       "side": 1,
       "message": "eth0 and eth1",
+      "revId": "3874b6b6582d961920b6df342c308c797780e58c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c45924e3_deabcc11",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 1238,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-02-06T07:07:10Z",
+      "side": 1,
+      "message": "you can keep it same eth0/eth1 as you are not configuring on both at a time",
+      "parentUuid": "dc9a135f_1b69be27",
       "revId": "3874b6b6582d961920b6df342c308c797780e58c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
