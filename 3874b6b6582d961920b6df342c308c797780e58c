@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77a97b28_698152ca",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-02-06T06:35:17Z",
+      "side": 1,
+      "message": "Suggestion : Verify Static IPv6 On Both Interfaces With Static IPv4 Configured",
+      "revId": "3874b6b6582d961920b6df342c308c797780e58c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce338792_78c0ac58",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-02-06T06:35:17Z",
+      "side": 1,
+      "message": "as you are adding configuring static IPv4 in setup you can modify the TC name as suggested above",
+      "revId": "3874b6b6582d961920b6df342c308c797780e58c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc9a135f_1b69be27",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 1238,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-02-06T06:35:17Z",
+      "side": 1,
+      "message": "eth0 and eth1",
+      "revId": "3874b6b6582d961920b6df342c308c797780e58c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
