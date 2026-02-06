@@ -364,6 +364,6 @@ Get User Count Of Not IPMI Account Type
         @{account_type}=  Get From Dictionary  ${resp.dict}  AccountTypes
         IF  "IPMI" not in ${account_type}
             ${user_count}=  Evaluate  ${user_count} + 1
-         END
+        END
     END
     RETURN  ${user_count}

@@ -25,7 +25,7 @@ Verify AccountService Available
     [Documentation]  Verify Redfish account service is available.
     [Tags]  Verify_AccountService_Available
 
-    ${resp} =  Redfish_utils.Get Attribute  /redfish/v1/AccountService  ServiceEnabled
+    ${resp}=  Redfish_utils.Get Attribute  /redfish/v1/AccountService  ServiceEnabled
     Should Be Equal As Strings  ${resp}  ${True}
 
 
@@ -67,7 +67,7 @@ Redfish Create and Verify Admin User
     [Tags]  Redfish_Create_and_Verify_Admin_User
     [Template]  Redfish Create And Verify User
 
-    #username      password    role_id         enabled
+    # username      password    role_id         enabled
     admin_user     TestPwd123  Administrator   ${True}
 
 
@@ -76,7 +76,7 @@ Redfish Create and Verify Operator User
     [Tags]  Redfish_Create_and_Verify_Operator_User
     [Template]  Redfish Create And Verify User
 
-    #username      password    role_id         enabled
+    # username      password    role_id         enabled
     operator_user  TestPwd123  Operator        ${True}
 
 
@@ -85,7 +85,7 @@ Redfish Create and Verify Readonly User
     [Tags]  Redfish_Create_and_Verify_Readonly_User
     [Template]  Redfish Create And Verify User
 
-    #username      password    role_id         enabled
+    # username      password    role_id         enabled
     readonly_user  TestPwd123  ReadOnly        ${True}
 
 
@@ -95,7 +95,7 @@ Verify Redfish Admin User Login With Wrong Password
     [Tags]  Verify_Redfish_Admin_User_Login_With_Wrong_Password
     [Template]  Verify Redfish User Login With Wrong Password
 
-    #username      password    role_id         enabled  wrong_password
+    # username      password    role_id         enabled  wrong_password
     admin_user     TestPwd123  Administrator   ${True}  alskjhfwurh
 
 
@@ -105,7 +105,7 @@ Verify Redfish Operator User Login With Wrong Password
     [Tags]  Verify_Redfish_Operator_User_Login_With_Wrong_Password
     [Template]  Verify Redfish User Login With Wrong Password
 
-    #username      password    role_id         enabled  wrong_password
+    # username      password    role_id         enabled  wrong_password
     operator_user  TestPwd123  Operator        ${True}  12j8a8uakjhdaosiruf024
 
 
@@ -115,34 +115,34 @@ Verify Redfish Readonly User Login With Wrong Password
     [Tags]  Verify_Redfish_Readonly_User_Login_With_Wrong_Password
     [Template]  Verify Redfish User Login With Wrong Password
 
-    #username      password    role_id         enabled  wrong_password
+    # username      password    role_id         enabled  wrong_password
     readonly_user  TestPwd123  ReadOnly        ${True}  12
 
 
 Verify Login with Deleted Redfish Admin User
     [Documentation]  Verify login with deleted Redfish admin user.
     [Tags]  Verify_Login_with_Deleted_Redfish_Admin_User
-    [Template]  Verify Login with Deleted Redfish User
+    [Template]  Verify Login With Deleted Redfish User
 
-    #username     password    role_id         enabled
+    # username     password    role_id         enabled
     admin_user     TestPwd123  Administrator   ${True}
 
 
 Verify Login with Deleted Redfish Operator User
     [Documentation]  Verify login with deleted Redfish operator user.
     [Tags]  Verify_Login_with_Deleted_Redfish_Operator_User
-    [Template]  Verify Login with Deleted Redfish User
+    [Template]  Verify Login With Deleted Redfish User
 
-    #username     password    role_id         enabled
+    # username     password    role_id         enabled
     operator_user  TestPwd123  Operator        ${True}
 
 
 Verify Login with Deleted Redfish Readonly User
     [Documentation]  Verify login with deleted Redfish readonly user.
     [Tags]  Verify_Login_with_Deleted_Redfish_Readonly_User
-    [Template]  Verify Login with Deleted Redfish User
+    [Template]  Verify Login With Deleted Redfish User
 
-    #username     password    role_id         enabled
+    # username     password    role_id         enabled
     readonly_user  TestPwd123  ReadOnly        ${True}
 
 
@@ -151,7 +151,7 @@ Verify Admin User Creation Without Enabling It
     [Tags]  Verify_Admin_User_Creation_Without_Enabling_It
     [Template]  Verify Create User Without Enabling
 
-    #username      password    role_id         enabled
+    # username      password    role_id         enabled
     admin_user     TestPwd123  Administrator   ${False}
 
 
@@ -160,7 +160,7 @@ Verify Operator User Creation Without Enabling It
     [Tags]  Verify_Operator_User_Creation_Without_Enabling_It
     [Template]  Verify Create User Without Enabling
 
-    #username      password    role_id         enabled
+    # username      password    role_id         enabled
     operator_user  TestPwd123  Operator        ${False}
 
 
@@ -169,7 +169,7 @@ Verify Readonly User Creation Without Enabling It
     [Tags]  Verify_Readonly_User_Creation_Without_Enabling_It
     [Template]  Verify Create User Without Enabling
 
-    #username      password    role_id         enabled
+    # username      password    role_id         enabled
     readonly_user  TestPwd123  ReadOnly        ${False}
 
 
@@ -186,6 +186,7 @@ Verify User Creation With Invalid Role Id
     ...  UserName=test_user  Password=TestPwd123  RoleId=wrongroleid  Enabled=${True}
     Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
     ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
 
 Verify Error Upon Creating Same Users With Different Privileges
     [Documentation]  Verify error upon creating same users with different privileges.
@@ -539,7 +540,7 @@ Redfish Create and Verify Admin User With Invalid Password Format
     [Template]  Create User With Unsupported Password Format And Verify
     [Tags]  Redfish_Create_and_Verify_Admin_User_With_Invalid_Password_Format
 
-    #username       role_id        password
+    # username       role_id        password
     admin_user      Administrator  snellens
     admin_user      Administrator  10000001
     admin_user      Administrator  12345678
@@ -556,7 +557,7 @@ Redfish Create and Verify Readonly User With Invalid Password Format
     [Template]  Create User With Unsupported Password Format And Verify
     [Tags]  Redfish_Create_and_Verify_Readonly_User_With_Invalid_Password_Format
 
-    #username       role_id        password
+    # username       role_id        password
     readonly_user   ReadOnly       snellens
     readonly_user   ReadOnly       10000001
     readonly_user   ReadOnly       12345678
@@ -574,7 +575,7 @@ Verify Admin And Readonly User Password Is Not Same As Username
     [Template]  Create User With Unsupported Password Format And Verify
     [Tags]      Verify_Admin_And_Readonly_User_Password_Is_Not_Same_As_Username
 
-    #username        role_id             password
+    # username        role_id             password
     AdminUser1       Administrator       AdminUser1
     ReadOnlyUser1    ReadOnly            ReadOnlyUser1
 
@@ -781,15 +782,15 @@ Redfish Create And Verify User
 
     # Example:
     #{
-    #"@odata.context": "/redfish/v1/$metadata#ManagerAccount.ManagerAccount",
-    #"@odata.id": "/redfish/v1/AccountService/Accounts/test1",
-    #"@odata.type": "#ManagerAccount.v1_0_3.ManagerAccount",
-    #"Description": "User Account",
-    #"Enabled": true,
-    #"Id": "test1",
-    #"Links": {
-    #  "Role": {
-    #    "@odata.id": "/redfish/v1/AccountService/Roles/Administrator"
+    #  "@odata.context": "/redfish/v1/$metadata#ManagerAccount.ManagerAccount",
+    #  "@odata.id": "/redfish/v1/AccountService/Accounts/test1",
+    #  "@odata.type": "#ManagerAccount.v1_0_3.ManagerAccount",
+    #  "Description": "User Account",
+    #  "Enabled": true,
+    #  "Id": "test1",
+    #  "Links": {
+    #    "Role": {
+    #      "@odata.id": "/redfish/v1/AccountService/Roles/Administrator"
     #  }
     #},
 
@@ -799,6 +800,7 @@ Redfish Create And Verify User
 
     # Delete Specified User
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
+
 
 Verify Redfish User Login With Wrong Password
     [Documentation]  Verify Redfish User failed to login with wrong password.
@@ -827,7 +829,7 @@ Verify Redfish User Login With Wrong Password
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
 
 
-Verify Login with Deleted Redfish User
+Verify Login With Deleted Redfish User
     [Documentation]  Verify Login with Deleted Redfish User.
     [Arguments]   ${username}  ${password}  ${role_id}  ${enabled}
 
@@ -878,6 +880,7 @@ Verify Create User Without Enabling
     # Delete newly created user.
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${username}
 
+
 Template For Configure Auth Methods
     [Documentation]  Template to configure auth methods.
     [Arguments]  ${auth_method}
@@ -907,6 +910,7 @@ Template For Configure Auth Methods
     ELSE
         Check XToken Works Fine  ${HTTP_UNAUTHORIZED}
     END
+
 
 Configure AuthMethods
     [Documentation]  Enable/disable authmethod types.
@@ -984,6 +988,7 @@ Get AuthMethods Default Values
     ${authmethods}=  Set Variable  ${resp['OpenBMC']['AuthMethods']}
     ${initial_value}=  Get From Dictionary  ${authmethods}  ${authmethod}
     Set Test Variable  ${initial_value}
+
 
 Check XToken Works Fine
     [Documentation]  Verify Xtoken works fine.
@@ -1111,6 +1116,7 @@ Verify Minimum Password Length For Redfish User
     Redfish.Logout
     Redfish.Login
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${user_name}
+
 
 Create Admin User And Verify SSH Login
     [Documentation]  Create admin user and verify SSH login & logout.

@@ -37,7 +37,7 @@ Verify Redfish Privilege Registry Properties
     Redfish.Login
 
     # Get the complete Privilege Registry URL
-    ${url}=   Get Redfish Privilege Registry json URL
+    ${url}=   Get Redfish Privilege Registry Json URL
     ${resp}=   Redfish.Get  ${url}
     Should Be Equal As Strings  ${resp.status}  ${HTTP_OK}
 
@@ -105,7 +105,7 @@ Verify Redfish Privilege Registry Mappings Properties For Account Service
     # | ReadOnly      | Login, ConfigureSelf.
 
     # Get the complete Privilege Registry URL.
-    ${url}=   Get Redfish Privilege Registry json URL
+    ${url}=   Get Redfish Privilege Registry Json URL
     ${resp}=   Redfish.Get  ${url}
 
     # Get mappings properties for Entity: Account Service.
@@ -136,7 +136,7 @@ Verify Admin User Privileges Via Redfish
     ...  valid_status_codes=[${HTTP_CREATED}]
 
     ${data}=  Create Dictionary  UserName=${patched_user}
-    Redfish.patch  ${REDFISH_ACCOUNTS_URI}${test_user}  body=&{data}
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_user}  body=&{data}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     ${patched_user_name}=   Redfish.Get Attribute  ${REDFISH_ACCOUNTS_URI}${patched_user}  UserName
@@ -154,7 +154,7 @@ Verify Operator User Privileges Via Redfish
     ...  valid_status_codes=[${HTTP_FORBIDDEN}]
 
     ${data}=  Create Dictionary  UserName=${patched_user}
-    Redfish.patch  ${REDFISH_ACCOUNTS_URI}${test_user}  body=&{data}
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_user}  body=&{data}
     ...  valid_status_codes=[${HTTP_FORBIDDEN}]
 
     Redfish.Get   ${REDFISH_ACCOUNTS_URI}${patched_user}
@@ -175,7 +175,7 @@ Verify ReadOnly User Privileges Via Redfish
     ...  valid_status_codes=[${HTTP_FORBIDDEN}]
 
     ${data}=  Create Dictionary  UserName=${patched_user}
-    Redfish.patch  ${REDFISH_ACCOUNTS_URI}${test_user}  body=&{data}
+    Redfish.Patch  ${REDFISH_ACCOUNTS_URI}${test_user}  body=&{data}
     ...  valid_status_codes=[${HTTP_FORBIDDEN}]
 
     Redfish.Get  ${REDFISH_ACCOUNTS_URI}${patched_user}
