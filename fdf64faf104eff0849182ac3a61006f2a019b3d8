@@ -16,6 +16,24 @@
       "message": "missing channel_number description",
       "revId": "fdf64faf104eff0849182ac3a61006f2a019b3d8",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68f952ce_0175be34",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-02-06T11:30:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26c5e57f_3dab5e41",
+      "revId": "fdf64faf104eff0849182ac3a61006f2a019b3d8",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
