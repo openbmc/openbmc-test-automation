@@ -202,6 +202,14 @@ Verify Chassis System Boot Option To Set In Progress Status
         Check Chassis System Boot Option  expect= 01 00 ${data_hex}
     END
 
+Verify Set Power Policy With Invalid Data Length
+    [Documentation]  Verify Set Chassis Power Policy With Invalid Data Length.
+    [Tags]  Verify_Set_Power_Policy_With_Invalid_Data_Length
+    [Template]  Verify Invalid IPMI Command
+
+    # Invalid data length                             Expected error code
+    ${IPMI_RAW_CMD['chssis_power_policy']['Set'][0]}  0xc7
+    ${IPMI_RAW_CMD['chssis_power_policy']['Set'][1]}  0xc7
 
 *** Keywords ***
 
