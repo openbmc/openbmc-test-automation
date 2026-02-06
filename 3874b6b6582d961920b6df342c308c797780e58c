@@ -36,6 +36,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f61e2d0a_54e2b8ef",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-02-06T07:31:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb362347_c5daaaea",
+      "revId": "3874b6b6582d961920b6df342c308c797780e58c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce338792_78c0ac58",
@@ -49,6 +67,24 @@
       "writtenOn": "2026-02-06T06:35:17Z",
       "side": 1,
       "message": "as you are adding configuring static IPv4 in setup you can modify the TC name as suggested above",
+      "revId": "3874b6b6582d961920b6df342c308c797780e58c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5356d3d0_52f4e580",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-02-06T07:31:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce338792_78c0ac58",
       "revId": "3874b6b6582d961920b6df342c308c797780e58c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -84,6 +120,24 @@
       "side": 1,
       "message": "you can keep it same eth0/eth1 as you are not configuring on both at a time",
       "parentUuid": "dc9a135f_1b69be27",
+      "revId": "3874b6b6582d961920b6df342c308c797780e58c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b91570a_6ef8c6aa",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 1238,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-02-06T07:31:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c45924e3_deabcc11",
       "revId": "3874b6b6582d961920b6df342c308c797780e58c",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
