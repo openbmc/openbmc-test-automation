@@ -16,6 +16,23 @@
       "message": "Fix merge conflict",
       "revId": "7e1725880b3893520c692f9a8f8e0e6b69ceb38d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "894344f8_18b3dd8c",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-02-06T05:29:56Z",
+      "side": 1,
+      "message": "as testcase name says enable then why you need to add note here again",
+      "revId": "7e1725880b3893520c692f9a8f8e0e6b69ceb38d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
