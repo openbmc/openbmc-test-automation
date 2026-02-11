@@ -8,11 +8,14 @@ Library                 ../lib/utils.py
 Library                 ../lib/bmc_network_utils.py
 
 *** Variables ***
-${test_ipv6_addr}           2001:db8:3333:4444:5555:6666:7777:8888
-${test_ipv6_addr1}          2001:db8:3333:4444:5555:6666:7777:9999
-${test_prefix_length}       64
+${test_ipv6_addr}            2001:db8:3333:4444:5555:6666:7777:8888
+${test_ipv6_addr1}           2001:db8:3333:4444:5555:6666:7777:9999
+${test_prefix_length}        64
 ${test_ipv4_addr}            10.7.7.7
 ${test_subnet_mask}          255.255.255.0
+${ipv6_multi_short}          2001::33::111
+${invalid_hexadec_ipv6}      x:x:x:x:x:x:10.5.5.6
+${ipv4_hex_word_addr}        10.5.5.6:1A:1B:1C:1D:1E:1F
 
 *** Keywords ***
 
