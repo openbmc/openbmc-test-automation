@@ -259,6 +259,27 @@ Disable IPMI Via IPv6 Address And Verify IPMI Does Not Work For IPv4 And IPv6
     SLAAC        ${2}            ${False}
 
 
+Configure Invalid Static IPv6 From IPv6 And Verify
+    [Documentation]  Configure invalid static IPv6 by logging in from static/slaac IPv6
+    ...    address on both interfaces.
+    [Tags]  Configure_Invalid_Static_IPv6_From_IPv6_And_Verify
+    [Template]  Configure Invalid Static IPv6 From IPv6 Address And Verify
+
+    # ipv6_address_type  channel_number  invalid_ipv6               prefix_length
+    Static               ${1}            ${ipv4_hex_word_addr}      ${test_prefix_length}
+    Static               ${1}            ${invalid_hexadec_ipv6}    ${test_prefix_length}
+    Static               ${1}            ${ipv6_multi_short}        ${test_prefix_length}
+    Static               ${2}            ${ipv4_hex_word_addr}      ${test_prefix_length}
+    Static               ${2}            ${invalid_hexadec_ipv6}    ${test_prefix_length}
+    Static               ${2}            ${ipv6_multi_short}        ${test_prefix_length}
+    SLAAC                ${1}            ${ipv4_hex_word_addr}      ${test_prefix_length}
+    SLAAC                ${1}            ${invalid_hexadec_ipv6}    ${test_prefix_length}
+    SLAAC                ${1}            ${ipv6_multi_short}        ${test_prefix_length}
+    SLAAC                ${2}            ${ipv4_hex_word_addr}      ${test_prefix_length}
+    SLAAC                ${2}            ${invalid_hexadec_ipv6}    ${test_prefix_length}
+    SLAAC                ${2}            ${ipv6_multi_short}        ${test_prefix_length}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -638,3 +659,22 @@ Verify IPMI Does Not Work
 
     Should Be Equal As Strings  ${status_v4}  False
     Should Be Equal As Strings  ${status_v6}  False
+
+
+Configure Invalid Static IPv6 From IPv6 Address And Verify
+    [Documentation]  Configure invalid static IPv6 address on eth0/eth1 from
+    ...    slaac/static IPv6 address and verify it fails.
+    [Arguments]  ${ipv6_address_type}  ${channel_number}  ${invalid_ipv6}  ${prefix_length}
+
+    # Description of argument(s):
+    # ipv6_address_type   Type of IPv6 address(slaac/static).
+    # channel_number      Ethernet channel number, 1(eth0) or 2(eth1).
+    # invalid_ipv6        Invalid IPv6 address to configure.
+    # prefix_length       Prefix length for the IPv6 address.
+
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+    Configure IPv6 Address On BMC  ${invalid_ipv6}  ${prefix_length}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]  Version=IPv6
