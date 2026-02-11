@@ -84,7 +84,7 @@ Set BMC Date And Verify
     Should Be True  '${time_diff}'<='3'
 
 
-Set NTP state
+Set NTP State
     [Documentation]  Set NTP service inactive.
     [Arguments]  ${state}
     # Description of argument(s):
@@ -105,9 +105,9 @@ Restore NTP Status
     [Documentation]  Restore NTP Status.
 
     IF  '${original_ntp["ProtocolEnabled"]}' == 'True'
-        Set NTP state  ${TRUE}
+        Set NTP State  ${TRUE}
     ELSE
-        Set NTP state  ${FALSE}
+        Set NTP State  ${FALSE}
     END
 
 
@@ -145,7 +145,7 @@ Verify System Time Sync Status
 Enable NTP And Add NTP Address
     [Documentation]  Enable NTP Protocol and Add NTP Address.
 
-    Set NTP state  ${TRUE}
+    Set NTP State  ${TRUE}
 
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'NTPServers': ${NTP_SERVER_ADDRESSES}}}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
