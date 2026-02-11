@@ -361,4 +361,10 @@ def execute_ssh_command(
 
     if open_connection_args["alias"] == "device_connection":
         return stdout
+
+    # Close only the connection that was just used, instead of tearing
+    # down every open connection (SSHLibrary's built-in close_connection()
+    # operates on the currently active/switched-to connection only).
+    sshlib.close_connection()
+
     return stdout, stderr, rc
