@@ -1,6 +1,6 @@
 *** Settings ***
-
 Documentation    Module to test IPMI Get BIOS POST Code Command.
+
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/boot_utils.robot
 Library          ../lib/ipmi_utils.py
@@ -9,7 +9,7 @@ Variables        ../data/ipmi_raw_cmd_table.py
 Suite Setup      IPMI Power On
 Suite Teardown   IPMI Power On  stack_mode=skip  quiet=1
 
-Test Tags       Get_BIOS_Post_Code
+Test Tags        Get_BIOS_Post_Code
 
 *** Test Cases ***
 
@@ -43,6 +43,7 @@ Test Get BIOS POST Code via IPMI Raw Command With Host Powered Off
 
     ${resp}=  Run IPMI Standard Command  raw ${IPMI_RAW_CMD['BIOS_POST_Code']['Get'][0]}  fail_on_err=0
     Should Contain  ${resp}  ${IPMI_RAW_CMD['BIOS_POST_Code']['Get'][3]}
+
 
 *** Keywords ***
 Verify POST Code Response Length

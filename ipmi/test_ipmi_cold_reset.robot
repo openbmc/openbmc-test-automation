@@ -29,7 +29,7 @@ Variables           ../data/ipmi_raw_cmd_table.py
 
 Test Teardown       FFDC On Test Case Fail
 
-Test Tags          IPMI_Cold_Reset
+Test Tags           IPMI_Cold_Reset
 
 *** Variables ***
 
@@ -61,7 +61,7 @@ Cold Reset With Invalid Data Request Via IPMI
     [Tags]  Cold_Reset_With_Invalid_Data_Request_Via_IPMI
 
     # Verify cold reset with invalid length of the request data and expect error.
-    ${resp}=  Run Keyword and Expect Error  *Request data length invalid*
+    ${resp}=  Run Keyword And Expect Error  *Request data length invalid*
     ...  Run IPMI Command  ${IPMI_RAW_CMD['Cold Reset']['reset'][0]} 0x00
 
 
@@ -85,8 +85,8 @@ Verify Cold Reset Impact On Sensor Threshold Via IPMI
     ${new_settable_threshold_value}=  Modify Default Sensor Threshold Value  ${old_threshold_value}
 
     # Set/Get sensor threshold for given sensor and compare with initial reading.
-    ${new_threshold_value}=  Set And Get Sensor Threshold For given Sensor  ${sensor_name}  ${random_threshold_key}
-    ...  ${new_settable_threshold_value}
+    ${new_threshold_value}=  Set And Get Sensor Threshold For Given Sensor
+    ...  ${sensor_name}  ${random_threshold_key}  ${new_settable_threshold_value}
 
     Should Not Be Equal  ${new_threshold_value}  ${old_threshold_value}
 
@@ -102,7 +102,8 @@ Verify Cold Reset Impact On Sensor Threshold Via IPMI
     ...  Run IPMI Standard Command  sensor | grep -i "${sensor_name}"
 
     # Get sensor threshold readings after BMC restarts.
-    ${threshold_value_after_reset}=  Getting Sensor Threshold Value Based On Threshold Key  ${random_threshold_key}  ${sensor_name}
+    ${threshold_value_after_reset}=  Getting Sensor Threshold Value Based On Threshold Key
+    ...  ${random_threshold_key}  ${sensor_name}
 
     # Compare with initial sensor threshold values.
     Should Be Equal  ${threshold_value_after_reset}  ${old_threshold_value}
@@ -142,7 +143,8 @@ Get The Sensor Name And Threshold
     ${sensor_count}=  Get Length  ${tmp_list}
 
     FOR  ${RANGE}  IN RANGE  0  ${sensor_count}
-      ${random_sensor}  ${sensor_threshold}=  Selecting Random Sensor Name And Threshold Value  ${tmp_list}  ${sensor_list}
+      ${random_sensor}  ${sensor_threshold}=  Selecting Random Sensor Name And Threshold Value
+      ...  ${tmp_list}  ${sensor_list}
       ${threshold_dict_count}=  Get Length  ${sensor_threshold}
       IF  '${threshold_dict_count}' != '0'  BREAK
       Remove Values From List  ${tmp_list}  ${random_sensor}
@@ -219,16 +221,18 @@ Modify Default Sensor Threshold Value
 
     RETURN  ${new_threshold}
 
-Set And Get Sensor Threshold For given Sensor
+Set And Get Sensor Threshold For Given Sensor
     [Documentation]  Set/Get Sensor Threshold for given sensor Via IPMI.
     [Arguments]  ${sensor_name}  ${random_threshold_key}  ${new_settable_threshold_value}
 
     # Set New Threshold Value To The Randomly Selected Sensor.
-    Run IPMI Standard Command  sensor thresh "${sensor_name}" ${random_threshold_key} ${new_settable_threshold_value}
+    Run IPMI Standard Command
+    ...  sensor thresh "${sensor_name}" ${random_threshold_key} ${new_settable_threshold_value}
 
     Sleep  10s
 
-    ${sensor_new_threshold_value}=  Getting Sensor Threshold Value Based On Threshold Key  ${random_threshold_key}  ${sensor_name}
+    ${sensor_new_threshold_value}=  Getting Sensor Threshold Value Based On Threshold Key
+    ...  ${random_threshold_key}  ${sensor_name}
 
     RETURN  ${sensor_new_threshold_value}
 
