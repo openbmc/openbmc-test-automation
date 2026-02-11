@@ -14,7 +14,7 @@ Suite Setup      IPMI Cipher Suite Setup
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
 
-Test Tags       IPMI_Cipher
+Test Tags        IPMI_Cipher
 
 *** Variables ***
 ${cipher_suite}      standard
@@ -83,7 +83,7 @@ Verify Cipher Suite And Supported Algorithms Via IPMI Raw Command
     [Documentation]  Verify cipher ID and Supported Algorithms for all Available
     ...  Channels.
     [Tags]  Verify_Cipher_Suite_And_Supported_Algorithms_Via_IPMI_Raw_Command
-    [Template]  Verify Cipher ID and Supported Algorithm For Channel
+    [Template]  Verify Cipher ID And Supported Algorithm For Channel
 
     FOR  ${channel}  IN  @{active_channel_list}
         FOR  ${name}  ${type}  IN  &{payload_type}
@@ -109,7 +109,7 @@ Verify Get Cipher Suite Command For Invalid Channels
 Verify Get Cipher Suite Raw Command With Invalid Data Length
     [Documentation]  Verify Get Cipher Suite Raw Command With One Extra and Less Byte.
     [Tags]  Verify_Get_Cipher_Suite_Raw_Command_With_Invalid_Data_Length
-    [Template]  Verify Cipher Suite Command for Invalid Request Data
+    [Template]  Verify Cipher Suite Command For Invalid Request Data
 
     # Byte
     less
@@ -150,7 +150,7 @@ Verify Standard Cipher Suite For Channel
     List Should Contain Value  ${supported_algorithms}  ${data_list}[4]
     List Should Contain Value  ${supported_algorithms}  ${data_list}[5]
 
-Verify Algorithm by Cipher Suite For Channel
+Verify Algorithm By Cipher Suite For Channel
     [Documentation]  Spilt the given response data, store it in a list.
     [Arguments]  ${response_data}  ${channel_number}
 
@@ -179,7 +179,7 @@ Verify Supported Algorithm For Channel
 
     Should Be Equal  ${expected_data}  ${response_data}
 
-Verify Cipher ID and Supported Algorithm For Channel
+Verify Cipher ID And Supported Algorithm For Channel
     [Documentation]  Verify Cipher ID and Supported Algorithm on given channel.
     [Arguments]  ${channel_num}  ${payload_type}  ${index_value}
 
@@ -202,7 +202,7 @@ Verify Cipher ID and Supported Algorithm For Channel
     ...  Convert To Hex  ${channel_num}  length=2
 
     IF  '${index_value}' == '0x80'
-        Verify Algorithm by Cipher Suite For Channel  ${resp}  ${channel_num}
+        Verify Algorithm By Cipher Suite For Channel  ${resp}  ${channel_num}
     ELSE
         Verify Supported Algorithm For Channel  ${resp}  ${channel_num}
     END
@@ -218,7 +218,7 @@ Verify Cipher Suite For Invalid Channel
 
    Verify Invalid IPMI Command  ${cmd}  0xcc
 
-Verify Cipher Suite Command for Invalid Request Data
+Verify Cipher Suite Command For Invalid Request Data
    [Documentation]  Verify Cipher Suite Command with Invalid data Length.
    [Arguments]  ${byte_length}
 

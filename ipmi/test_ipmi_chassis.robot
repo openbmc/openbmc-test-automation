@@ -1,6 +1,6 @@
 *** Settings ***
-
 Documentation    Module to test IPMI chassis functionality.
+
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
 Resource         ../lib/boot_utils.robot
@@ -12,7 +12,7 @@ Suite Setup      Redfish.Login
 Suite Teardown   Redfish.Logout
 Test Teardown    Test Teardown Execution
 
-Test Tags       IPMI_Chassis
+Test Tags        IPMI_Chassis
 
 *** Variables ***
 
@@ -40,7 +40,7 @@ IPMI Chassis Status Off
     [Tags]  IPMI_Chassis_Status_Off
 
     Redfish Power Off  stack_mode=skip  quiet=1
-     ${resp}=  Run External IPMI Standard Command  chassis status
+    ${resp}=  Run External IPMI Standard Command  chassis status
     ${power_status}=  Get Lines Containing String  ${resp}  System Power
     Should Contain  ${power_status}  off
 
