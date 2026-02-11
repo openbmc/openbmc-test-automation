@@ -361,4 +361,9 @@ def execute_ssh_command(
 
     if open_connection_args["alias"] == "device_connection":
         return stdout
+
+    # Get rid of all the existing connections
+    # to make sure there is no stale connections
+    sshlib.close_all_connections()
+
     return stdout, stderr, rc
