@@ -7,6 +7,8 @@ Resource        ../../lib/openbmc_ffdc.robot
 Resource        ../../lib/bmc_ipv6_utils.robot
 Resource        ../../lib/bmc_network_utils.robot
 Resource        ../../lib/protocol_setting_utils.robot
+Resource        ../../lib/snmp/redfish_snmp_utils.robot
+Resource        ../../lib/snmp/resource.robot
 
 Library         Collections
 Library         OperatingSystem
@@ -267,6 +269,16 @@ Verify Eth1 DHCPv4 Functionality From IPv6 In Presence Of Static IPv6
     # Address_type  channel_number
     Static          ${2}
     SLAAC           ${2}
+
+Configure SNMP IPv4 Via IPv6 And Verify
+    [Documentation]  Configure SNMP with IPv4 address via IPv6 and verify it works.
+    [Tags]  Configure_SNMP_IPv4_Via_IPv6_And_Verify
+    [Template]  Configure SNMP Manager Via IPv6 And Verify
+
+    # Address_type  channel_number
+    Static          ${1}
+    Static          ${2}
+    SLAAC           ${1}
 
 
 *** Keywords ***
@@ -664,3 +676,37 @@ Verify Eth1 DHCPv4 Functionality In Presence Of IPv6 Address
     Connect BMC Using IPv6 Address  ${ipv6_addr}
     RedfishIPv6.Login
     Verify DHCPv4 Functionality On Eth1
+
+
+Configure SNMP Manager Via IPv6 And Verify
+    [Documentation]  Configure SNMP manager with IPv4 address on BMC via IPv6 and verify it works.
+    [Arguments]  ${ipv6_address_type}  ${channel_number}
+    [Teardown]  Run Keywords
+    ...  Delete SNMP Manager Via Redfish  ${SNMP_MGR_IP}  ${SNMP_DEFAULT_PORT}
+    ...  AND  Test Teardown Execution
+
+    # Description of argument(s):
+    # ipv6_address_type   Type of IPv6 address(slaac/static).
+    # channel_number      Ethernet channel number, 1(eth0) or 2(eth1).
+
+    # Get IPv6 address for the specified type and channel.
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
+
+    # Connect to BMC using IPv6 address and configure SNMP manager with IPv4 address via IPv6 session.
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+
+    Configure SNMP Manager Via Redfish  ${SNMP_MGR_IP}  ${SNMP_DEFAULT_PORT}  ${HTTP_CREATED}
+
+    # Verify SNMP manager is configured on BMC.
+    Verify SNMP Manager Configured On BMC  ${SNMP_MGR_IP}  ${SNMP_DEFAULT_PORT}
+
+    # Verify SNMP functionality by generating an error and checking trap.
+    Start SNMP Manager
+    Generate Error On BMC And Verify Trap  ${CMD_INTERNAL_FAILURE}
+    ...  ${SNMP_TRAP_BMC_INTERNAL_FAILURE}
+
+    # Stop SNMP manager process.
+    SSHLibrary.Switch Connection  snmp_server
+    SSHLibrary.Execute Command  sudo killall snmptrapd
