@@ -23,7 +23,7 @@ ${ntp_server_2}              2.2.3.3
 Verify NTP Server Set
     [Documentation]  Patch NTP servers and verify NTP servers is set.
     [Tags]  Verify_NTP_Server_Set
-    [Setup]  Set NTP state  ${True}
+    [Setup]  Set NTP State  ${True}
 
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
     ...  body={'NTP':{'NTPServers': ['${ntp_server_1}', '${ntp_server_2}']}}
@@ -48,7 +48,7 @@ Verify NTP Server Value Not Duplicated
 Verify NTP Server Setting Persist After BMC Reboot
     [Documentation]  Verify NTP server setting persist after BMC reboot.
     [Tags]  Verify_NTP_Server_Setting_Persist_After_BMC_Reboot
-    [Setup]  Set NTP state  ${True}
+    [Setup]  Set NTP State  ${True}
 
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
     ...  body={'NTP':{'NTPServers': ['${ntp_server_1}', '${ntp_server_2}']}}
@@ -104,7 +104,7 @@ Verify NTP Server Is Not Populated In NetworkSuppliedServers
     [Documentation]  Patch NTP server and verify NTP servers is not populated
     ...  in NetworkSuppliedServers.
     [Tags]  Verify_NTP_Server_Is_Not_Populated_In_NetworkSuppliedServers
-    [Setup]  Set NTP state  ${True}
+    [Setup]  Set NTP State  ${True}
 
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
     ...  body={'NTP':{'NTPServers': ['${ntp_server_1}']}}
@@ -124,7 +124,7 @@ Verify NTP Server Is Not Populated In NetworkSuppliedServers
 Verify NTP Server Configuration With NTP Servers And Protocol Enabled
     [Documentation]  Verify NTP server configuration with configured
     ...    NTP servers and enabled protocol.
-    [Tags]  Verify_Configure_NTP_Servers_And_Protocol_Enabled
+    [Tags]  Verify_NTP_Server_Configuration_With_NTP_Servers_And_Protocol_Enabled
     [Teardown]  Restore NTP Mode
 
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
