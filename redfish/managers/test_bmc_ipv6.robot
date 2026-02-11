@@ -21,8 +21,6 @@ Test Tags     BMC_IPv6
 *** Variables ***
 ${test_ipv6_invalid_addr}    2001:db8:3333:4444:5555:6666:7777:JJKK
 ${test_ipv6_addr1}           2001:db8:3333:4444:5555:6666:7777:9999
-${invalid_hexadec_ipv6}      x:x:x:x:x:x:10.5.5.6
-${ipv6_multi_short}          2001::33::111
 # Valid prefix length is a integer ranges from 1 to 128.
 ${ipv6_gw_addr}              2002:903:15F:32:9:3:32:1
 ${prefix_length_def}         None
