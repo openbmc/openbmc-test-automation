@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "002affad_bcc92953",
+        "filename": "lib/protocol_setting_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2026-02-12T06:28:23Z",
+      "side": 1,
+      "message": "it has to be role based not name based??",
+      "revId": "453b75066d6dc207a158d832b096c540ad83e21a",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fcc2f053_f761ab5f",
         "filename": "lib/protocol_setting_utils.robot",
         "patchSetId": 2
