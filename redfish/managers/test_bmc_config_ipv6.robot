@@ -7,6 +7,8 @@ Resource        ../../lib/openbmc_ffdc.robot
 Resource        ../../lib/bmc_ipv6_utils.robot
 Resource        ../../lib/bmc_network_utils.robot
 Resource        ../../lib/protocol_setting_utils.robot
+Resource        ../../lib/snmp/redfish_snmp_utils.robot
+Resource        ../../lib/snmp/resource.robot
 
 Library         Collections
 Library         OperatingSystem
@@ -565,7 +567,7 @@ Verify Redfish Operations For IPV6 Address
     RedfishIPv6.Post  /redfish/v1/EventService/Subscriptions  body=&{snmp_mgr_data}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT},${HTTP_CREATED}]
 
-    Delete SNMP Manager Via Redfish  ${SNMP_MGR_IP}  ${SNMP_DEFAULT_PORT}
+    Delete SNMP Manager Via Redfish  ${SNMP_MGR_IP}  ${SNMP_DEFAULT_PORT}  Version=IPv6
 
 
 Check Telnet Connection Is Blocked
