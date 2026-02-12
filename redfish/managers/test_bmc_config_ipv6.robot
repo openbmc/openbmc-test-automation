@@ -271,6 +271,34 @@ Verify Eth1 DHCPv4 Functionality From IPv6 In Presence Of Static IPv6
     SLAAC           ${2}
 
 
+Verify SSH Access Restricted For Admin And ReadOnly Users Via SLAAC IPv6
+    [Documentation]  Try to establish SSH connection via IPv6 to port 22 with admin and
+    ...  readonly user and verify.
+    [Tags]  Verify_SSH_Access_Restricted_For_Admin_And_ReadOnly_Users_Via_SLAAC_IPv6
+    [Setup]  Run Keywords  Set SLAAC Configuration State And Verify  ${True}  [${HTTP_OK}]  ${1}
+    ...      AND  Set SLAAC Configuration State And Verify  ${True}  [${HTTP_OK}]  ${2}
+    [Template]  SSH To Non Service And Admin User Via IPv6
+
+    #ipv6_type   channel_number  username       role              port
+    SLAAC        ${1}            admin_user     Administrator     22
+    SLAAC        ${2}            admin_user     Administrator     22
+    SLAAC        ${1}            readonly_user  ReadOnly          22
+    SLAAC        ${2}            readonly_user  ReadOnly          22
+
+
+Verify SSH Access Restricted For Admin And ReadOnly Users Via Static IPv6
+    [Documentation]  Try to establish SSH connection via IPv6 to port 22 with admin and
+    ...  readonly user and verify.
+    [Tags]  Verify_SSH_Access_Restricted_For_Admin_And_ReadOnly_Users_Via_Static_IPv6
+    [Template]  SSH To Non Service And Admin User Via IPv6
+
+    #ipv6_type   channel_number  username       role              port
+    Static       ${1}            admin_user     Administrator     22
+    Static       ${2}            admin_user     Administrator     22
+    Static       ${1}            readonly_user  ReadOnly          22
+    Static       ${2}            readonly_user  ReadOnly          22
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -666,3 +694,26 @@ Verify Eth1 DHCPv4 Functionality In Presence Of IPv6 Address
     Connect BMC Using IPv6 Address  ${ipv6_addr}
     RedfishIPv6.Login
     Verify DHCPv4 Functionality On Eth1
+
+
+SSH To Non Service And Admin User Via IPv6
+    [Documentation]  Check if SSH connection works via different users via IPv6.
+    [Arguments]  ${ipv6_address_type}  ${channel_number}  ${username}  ${role}  ${port}
+
+    # Description of argument(s):
+    # ipv6_address_type   Type of IPv6 address(slaac/static).
+    # channel_number      Ethernet channel number, 1(eth0) or 2(eth1).
+    # username            Username to be used to check login. (e.g. admin or read_only).
+    # role                role assigned to the user(e.g. Administrator or ReadOnly or Root).
+    # port                Network port used for SSH login (e.g. 22 or 2200).
+
+    # Get IPv6 address.
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type
+    ...  ${ipv6_address_type}  ${channel_number}
+
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+
+    Enable SSH Protocol  ${True}
+    Check SSH Login Based On Role  ${username}  ${role}  ${port}  ${ipv6_addr}
