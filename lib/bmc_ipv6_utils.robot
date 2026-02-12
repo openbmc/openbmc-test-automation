@@ -594,7 +594,11 @@ Verify SLAAC Property
     # slaac_state     SLAAC state('True' or 'False').
     # channel_number  Channel number 1(eth0) or 2(eth1).
 
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+
     # Verify SLAAC is set correctly.
+    Sleep  ${NETWORK_TIMEOUT}s
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     ${slaac_verify}=  Get From Dictionary  ${resp.dict}  StatelessAddressAutoConfig
 

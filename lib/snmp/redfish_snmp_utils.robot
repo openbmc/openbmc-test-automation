@@ -144,11 +144,12 @@ Get SNMP Child URIs
 
 Delete SNMP Manager Via Redfish
     [Documentation]  Delete SNMP manager.
-    [Arguments]  ${snmp_mgr_ip}  ${snmp_port}
+    [Arguments]  ${snmp_mgr_ip}  ${snmp_port}  ${version}=IPv4
 
     # Description of argument(s):
     # snmp_mgr_ip  SNMP manager IP.
     # snmp_port    Network port where SNMP manager is listening.
+    # version      Specifies the IP protocol version to use (IPv4 or IPv6).
 
     ${is_snmp_found}=  Set Variable  ${False}
     ${snmp_ip_port}=  Catenate  ${snmp_mgr_ip}:${snmp_port}
@@ -177,7 +178,11 @@ Delete SNMP Manager Via Redfish
       # and mark is_snmp_found to true.
       IF  'snmp://${snmp_ip_port}' == '${snmp_mgr}'
           Set Local Variable  ${is_snmp_found}  ${True}
-          Redfish.Delete  ${snmp_mgr_uri}
+          IF  '${version}' == 'IPv4'
+              Redfish.Delete  ${snmp_mgr_uri}
+          ELSE
+              Redfish IPv6.Delete  ${snmp_mgr_uri}
+          END
           Exit For Loop
       END
     END
