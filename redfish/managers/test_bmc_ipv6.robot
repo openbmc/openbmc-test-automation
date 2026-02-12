@@ -576,6 +576,24 @@ Verify Enable SLAAC On Eth0 While Eth0 In Static And Eth1 In DHCPv4
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
 
+Enable SLAAC On Eth1 While Eth0 Is Configured With SLAAC And Verify Ping
+    [Documentation]  Enable SLAAC on eth1 while eth0 is configured with SLAAC and
+    ...    verify both IPs are reachable.
+    [Tags]  Enable_SLAAC_On_Eth1_While_Eth0_Is_Configured_With_SLAAC_And_Verify_Ping
+    [Setup]  Set SLAAC Configuration State And Verify  ${True}  [${HTTP_NO_CONTENT}]  ${2}
+
+    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr_1}=
+    ...    Get Address Origin List And Address For Type  SLAAC  ${1}
+    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr_2}=
+    ...    Get Address Origin List And Address For Type  SLAAC  ${2}
+
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+    # Verify SLAAC address is reachable on both interface.
+    Wait For Host To Ping  ${ipv6_slaac_addr_1}
+    Wait For Host To Ping  ${ipv6_slaac_addr_2}
+
+
 *** Keywords ***
 
 Suite Setup Execution
