@@ -588,6 +588,27 @@ Verify Static IPv6 When Static IPv4 Is Configured On Both Interfaces
     ${2}
 
 
+Enable SLAAC On Eth1 While Eth0 Is Configured With SLAAC And Verify Ping
+    [Documentation]  Enable SLAAC on eth1 while eth0 is configured with SLAAC and
+    ...    verify all are reachable.
+    [Tags]  Enable_SLAAC_On_Eth1_While_Eth0_Is_Configured_With_SLAAC_And_Verify_Ping
+    [Setup]  Set SLAAC Configuration State And Verify  ${True}  [${HTTP_NO_CONTENT}]  ${1}
+
+    # Enable SLAAC on eth1 while eth0 is configured with SLAAC.
+    Set SLAAC Configuration State And Verify  ${True}  [${HTTP_NO_CONTENT}]  ${2}
+
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr_1}=
+    ...    Get Address Origin List And Address For Type  SLAAC  ${1}
+    @{ipv6_addressorigin_list}  ${ipv6_slaac_addr_2}=
+    ...    Get Address Origin List And Address For Type  SLAAC  ${2}
+
+    # Verify SLAAC address is reachable on both interface.
+    Wait For Host To Ping  ${ipv6_slaac_addr_1}
+    Wait For Host To Ping  ${ipv6_slaac_addr_2}
+
+
 *** Keywords ***
 
 Suite Setup Execution
