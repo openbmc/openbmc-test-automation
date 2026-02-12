@@ -355,29 +355,3 @@ Verify Protocol State
         Should Be Equal As Strings  ${resp.dict['NTP']['ProtocolEnabled']}  ${ntp_state}
         ...  msg=NTP protocol states are not matching.
     END
-
-
-Check SSH Login Via Different Users
-    [Documentation]  Check if SSH connection works via different users.
-    [Arguments]  ${username}  ${port}  ${host}=${OPENBMC_HOST}
-
-    # Description of argument(s}:
-    # username     Username to be used to check login. (e.g. admin or read_only)
-    # port         Network port used for SSH login (e.g. 22 or 2200)
-    # host         OPENBMC_HOST, OPENBMC_HOST_1, Use eth0 as the default interface
-
-    # Create users with admin & read only privilege.
-    Create Users With Different Roles  users=${USERS}  force=${True}
-
-    # Check if we can open SSH connection and login.
-    SSHLibrary.Open Connection  ${host}
-    ${status}=   Run Keyword And Return Status  SSHLibrary.Login  ${username}  ${OPENBMC_PASSWORD}
-    ...  ${port}
-
-    IF  '${username}' == 'admin_user' or '${username}' == 'readonly_user'
-        Should Be Equal  ${status}  ${False}
-        ...  msg=Connection is not allowed to port 22 via admin or readonly user.
-    ELSE
-        Should Be Equal  ${status}  ${True}
-        ...  msg=Connection is allowed & able to login.
-    END
