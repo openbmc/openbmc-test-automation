@@ -262,7 +262,11 @@ IPMI_RAW_CMD = {
         "get": [
             # raw command
             "0x0a 0x40"
-        ]
+        ],
+        "get_invalid_length": [
+            # raw command, invalid data length extra byte
+            "0x0a 0x40 0x00"
+        ],
     },
     "Watchdog": {
         # Command action type
