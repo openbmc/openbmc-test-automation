@@ -167,3 +167,27 @@ Verify NTP Protocol State
     ${resp}=  Redfish.Get  ${REDFISH_NW_PROTOCOL_URI}
     Should Be Equal As Strings  ${resp.dict['NTP']['ProtocolEnabled']}  ${state}
     ...  msg=Protocol states are not matching.
+
+
+Check SSH Login Based On Role
+    [Documentation]  Check if SSH connection works via different roles.
+    [Arguments]  ${username}  ${role}  ${port}  ${host}=${OPENBMC_HOST}
+
+    # Description of argument(s):
+    # username         Username to be used to check login. (e.g. admin or read_only).
+    # role             role assigned to the user(e.g. Administrator or ReadOnly or Root).
+    # port             Network port used for SSH login (e.g. 22 or 2200).
+    # host             OPENBMC_HOST, OPENBMC_HOST_1, Use eth0 as the default interface.
+
+    SSHLibrary.Open Connection  ${host}
+    ${status}=  Run Keyword And Return Status
+    ...  SSHLibrary.Login  ${username}  ${OPENBMC_PASSWORD}
+    ...  port=${port}
+
+    IF  '${role}' == 'Root'
+      # Connection is allowed & able to login.
+      Should Be Equal  ${status}  ${True}
+    ELSE
+      # Connection is not allowed for non-root users.
+      Should Be Equal  ${status}  ${False}
+    END
