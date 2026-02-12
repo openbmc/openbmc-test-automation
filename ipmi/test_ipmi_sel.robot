@@ -388,6 +388,14 @@ Verify IPMI SEL Event Entries
     # So comparing the IPMI SEL count with this additional single entry.
     Should Be Equal As Strings  ${sel_entries_count}  ${count + 1}
 
+Verify Get Sel Info With Invalid Data Length
+    [Documentation]  Verify Get Sel Info With One Extra Byte.
+    [Tags]  Verify_Get_Sel_Info_With_Invalid_Data_Length
+    [Template]  Verify Invalid IPMI Command
+
+    # Invalid data length                                 Expected error code
+    ${IPMI_RAW_CMD['SEL_Info']['get_invalid_length'][0]}  0xc7
+
 
 *** Keywords ***
 
