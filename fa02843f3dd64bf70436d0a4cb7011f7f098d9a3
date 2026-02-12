@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2ea3b9d_d40d4b58",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-12T15:33:54Z",
+      "side": 1,
+      "message": "${version}",
+      "range": {
+        "startLine": 147,
+        "startChar": 47,
+        "endLine": 147,
+        "endChar": 56
+      },
+      "revId": "fa02843f3dd64bf70436d0a4cb7011f7f098d9a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1c94d00_022269d9",
+        "filename": "lib/snmp/redfish_snmp_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-12T15:33:54Z",
+      "side": 1,
+      "message": "${version}",
+      "range": {
+        "startLine": 180,
+        "startChar": 15,
+        "endLine": 180,
+        "endChar": 25
+      },
+      "revId": "fa02843f3dd64bf70436d0a4cb7011f7f098d9a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b6c46af_baad3daa",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-12T15:33:54Z",
+      "side": 1,
+      "message": "version",
+      "range": {
+        "startLine": 570,
+        "startChar": 75,
+        "endLine": 570,
+        "endChar": 82
+      },
+      "revId": "fa02843f3dd64bf70436d0a4cb7011f7f098d9a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24f71e66_8143f1bf",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-12T15:33:54Z",
+      "side": 1,
+      "message": "all are reachable.",
+      "range": {
+        "startLine": 593,
+        "startChar": 18,
+        "endLine": 593,
+        "endChar": 41
+      },
+      "revId": "fa02843f3dd64bf70436d0a4cb7011f7f098d9a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43ce6948_0b026711",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-12T15:33:54Z",
+      "side": 1,
+      "message": "in setup include enabling SLAAC on eth0",
+      "range": {
+        "startLine": 595,
+        "startChar": 4,
+        "endLine": 595,
+        "endChar": 90
+      },
+      "revId": "fa02843f3dd64bf70436d0a4cb7011f7f098d9a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "689b2d3d_c2fe7e9d",
+        "filename": "redfish/managers/test_bmc_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-12T15:33:54Z",
+      "side": 1,
+      "message": "Include Set SLAAC Configuration State And Verify  ${True}  [${HTTP_NO_CONTENT}]  ${2} here",
+      "revId": "fa02843f3dd64bf70436d0a4cb7011f7f098d9a3",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
