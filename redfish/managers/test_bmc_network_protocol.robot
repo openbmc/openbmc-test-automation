@@ -139,6 +139,23 @@ Verify NTP Server Configuration With NTP Servers And Protocol Enabled
     # Verify the ProtocolEnabled in NTPServers.
     Valid Value  ntp_conf['NTP']['ProtocolEnabled']  valid_values=[True]
 
+Verify Redfish Network Protocol Unsupported Methods
+    [Documentation]  Verify Network Protocol Unsupported Methods.
+    [Tags]  Verify_Redfish_Network_Protocol_Unsupported_Methods
+
+    # Put operation on Network Protocol
+    Redfish.Put  ${REDFISH_NW_PROTOCOL_URI}
+    ...    valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Post operation on Network Protocol
+    Redfish.Post  ${REDFISH_NW_PROTOCOL_URI}
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Delete operation on Network Protocol
+    Redfish.Delete  ${REDFISH_NW_PROTOCOL_URI}
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+
 *** Keywords ***
 
 Suite Setup Execution
