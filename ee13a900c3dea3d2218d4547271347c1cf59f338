@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9583752_f9cf1aa3",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-13T12:07:14Z",
+      "side": 1,
+      "message": "please remove this here\nif you include this it will not take the CHANNEL_NUMBER \nit will take the active channel it is running on.",
+      "range": {
+        "startLine": 597,
+        "startChar": 4,
+        "endLine": 598,
+        "endChar": 95
+      },
+      "revId": "ee13a900c3dea3d2218d4547271347c1cf59f338",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
