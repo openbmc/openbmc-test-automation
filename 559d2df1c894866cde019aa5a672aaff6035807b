@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7250846e_5fbb53eb",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-02-13T11:02:50Z",
+      "side": 1,
+      "message": "SNMP server?",
+      "revId": "559d2df1c894866cde019aa5a672aaff6035807b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed261e22_4674d0cf",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-02-13T11:02:50Z",
+      "side": 1,
+      "message": "(IPv4)?",
+      "revId": "559d2df1c894866cde019aa5a672aaff6035807b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72d65ea4_784bcdee",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-02-13T11:02:50Z",
+      "side": 1,
+      "message": "you can write it something like below\nConfigure SNMP manager with IPv4 address on BMC via IPv6 and verify it works.",
+      "revId": "559d2df1c894866cde019aa5a672aaff6035807b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d34dc542_608a18a8",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-02-13T11:02:50Z",
+      "side": 1,
+      "message": "    # Configure SNMP manager with IPv4 address via IPv6 session.",
+      "revId": "559d2df1c894866cde019aa5a672aaff6035807b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1babf2f1_84e34cce",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-02-13T11:02:50Z",
+      "side": 1,
+      "message": "you can remove here, because here you are just adding snmp manager.",
+      "revId": "559d2df1c894866cde019aa5a672aaff6035807b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
