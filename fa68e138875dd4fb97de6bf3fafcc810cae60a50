@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "26d61109_81eab075",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000020
+      },
+      "writtenOn": "2026-02-13T20:22:19Z",
+      "side": 1,
+      "message": "Set to \"Abhijith Naik\" if you can. Thanks!",
+      "parentUuid": "9c2a40ff_d9c87a9c",
+      "revId": "fa68e138875dd4fb97de6bf3fafcc810cae60a50",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41c4e383_93518a36",
         "filename": "redfish/managers/test_bmc_config_ipv6.robot",
         "patchSetId": 7
