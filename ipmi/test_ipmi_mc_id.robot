@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation    Module to test IPMI management controller ID functionality.
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
@@ -7,12 +6,11 @@ Variables        ../data/ipmi_raw_cmd_table.py
 
 Test Teardown    FFDC On Test Case Fail
 
-Test Tags       IPMI_MC_ID
+Test Tags        IPMI_MC_ID
 
 *** Variables ***
 
 ${new_mc_id}=  HOST
-
 
 *** Test Cases ***
 

@@ -12,11 +12,11 @@ Resource               ../lib/boot_utils.robot
 Library                ../lib/ipmi_utils.py
 Variables              ../data/ipmi_raw_cmd_table.py
 
-Suite setup            Suite Setup Execution
+Suite Setup            Suite Setup Execution
 Suite Teardown         Redfish.Logout
 Test Teardown          FFDC On Test Case Fail
 
-Test Tags             IPMI_Inband_SDR
+Test Tags              IPMI_Inband_SDR
 
 *** Test Cases ***
 
@@ -53,8 +53,8 @@ Verify Get SDR For Maximum Record Via IPMI
           # Next record ID in response data.
           ${record_next}=  Evaluate  ${record} + 1
           ${record_next}=  Convert To Hex  ${record_next}  length=4  lowercase=yes
-          ${record_next_msb}    Set Variable    ${record_next}[0:2]
-          ${record_next_lsb}    Set Variable    ${record_next}[2:4]
+          ${record_next_msb}=  Set Variable    ${record_next}[0:2]
+          ${record_next_lsb}=  Set Variable    ${record_next}[2:4]
           Should Be Equal  ${get_SDR[0]}  ${record_next_lsb}
           Should Be Equal  ${get_SDR[1]}  ${record_next_msb}
         ELSE
@@ -79,7 +79,7 @@ Verify Sensor And SDR Count In Get Device SDR Info Via Inband IPMI
     [Tags]  Verify_Sensor_And_SDR_Count_In_Get_Device_SDR_Info_Via_Inband_IPMI
 
     # Get Sensor count and SDR elist all count from IPMI LAN interface.
-    ${sensor_count_lan1}  ${SDR_count_lan1}=  Get Count for Sensor And SDR Elist All
+    ${sensor_count_lan1}  ${SDR_count_lan1}=  Get Count For Sensor And SDR Elist All
 
     # Get Sensor Count From Get Device SDR Info command.
     ${sensor_count1}=  Get Sensor Count From SDR Info
@@ -100,7 +100,7 @@ Verify Sensor And SDR Count In Get Device SDR Info Via Inband IPMI
     IPMI Power Cycle
 
     # Get Sensor count and SDR elist all count from IPMI lanplus interface.
-    ${sensor_count_lan2}  ${SDR_count_lan2}=  Get Count for Sensor And SDR Elist All
+    ${sensor_count_lan2}  ${SDR_count_lan2}=  Get Count For Sensor And SDR Elist All
 
     # Get Sensor Count From Get Device SDR Info command.
     ${sensor_count2}=  Get Sensor Count From SDR Info
@@ -139,14 +139,14 @@ Verify Get Device SDR Info For Invalid Data Request
     [Tags]  Verify_Get_Device_SDR_Info_For_Invalid_Data_Request
 
     # Sensor Count Via Device SDR Info with extra bytes.
-    ${resp}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Get_Info'][3]}*
+    ${resp}=  Run Keyword And Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Get_Info'][3]}*
     ...  Run Inband IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get_Info'][0]} 0x00
     # Proper error code should be returned.
     Should Contain  ${resp}  ${IPMI_RAW_CMD['Device_SDR']['Get_Info'][2]}
 
     # SDR Count Via Device SDR Info with extra bytes.
-    ${resp}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Get_Info'][3]}*
+    ${resp}=  Run Keyword And Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Get_Info'][3]}*
     ...  Run Inband IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get_Info'][1]} 0x00
     # Proper error code should be returned.
@@ -158,14 +158,14 @@ Verify Device SDR Info Via IPMI Lanplus
     [Tags]  Verify_Device_SDR_Info_Via_IPMI_Lanplus
 
     # Sensor Count Via Device SDR Info via lanplus.
-    ${resp}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Get_Info'][5]}*
+    ${resp}=  Run Keyword And Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Get_Info'][5]}*
     ...  Run External IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get_Info'][0]}
     # Proper error code should be returned.
     Should Contain  ${resp}  ${IPMI_RAW_CMD['Device_SDR']['Get_Info'][4]}
 
     # SDR Count Via Device SDR Info via lanplus.
-    ${resp}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Get_Info'][5]}*
+    ${resp}=  Run Keyword And Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Get_Info'][5]}*
     ...  Run External IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get_Info'][1]}
     # Proper error code should be returned.
@@ -190,7 +190,7 @@ Verify Reserve Device SDR Repository For Invalid Data Request
     [Tags]  Verify_Reserve_Device_SDR_Repository_For_Invalid_Data_Request
 
     # Reserve Device SDR Repository with extra request bytes.
-    ${resp}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Reserve_Repository'][2]}*
+    ${resp}=  Run Keyword And Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Reserve_Repository'][2]}*
     ...  Run Inband IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Reserve_Repository'][0]} 0x00
     # Proper error code should be returned.
@@ -202,7 +202,7 @@ Verify Reserve Device SDR Repository Info Via IPMI Lanplus
     [Tags]  Verify_Reserve_Device_SDR_Repository_Info_Via_IPMI_Lanplus
 
     # Reserve Device SDR Repository via lanplus.
-    ${resp}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Reserve_Repository'][4]}*
+    ${resp}=  Run Keyword And Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Reserve_Repository'][4]}*
     ...  Run External IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Reserve_Repository'][0]}
     # Proper error code should be returned.
@@ -246,7 +246,7 @@ Verify Reserve Device SDR Repository For Partial Record After BMC Reboot
 
     # Check whether the response for Get device SDR command is obtained with the given Reservation ID.
     # Reserve IDs are volatile so once bmc is rebooted, new Reserve ID should be generated.
-    ${resp2}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Reserve_Repository'][5]}*
+    ${resp2}=  Run Keyword And Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Reserve_Repository'][5]}*
     ...  Run Inband IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x${reserve_id[0]} 0x${reserve_id[1]} 0x00 0x00 0x01 0x0f
 
@@ -265,7 +265,7 @@ Verify Reserve Device SDR Repository Invalid Reservation ID For Partial Record
 
     # Check whether response for Gner device SDR command is obtained with Reservation ID 1.
     # Once Reservation ID is overwritten, old Reservation ID will be invalid.
-    ${resp1}=   Run Keyword and Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Reserve_Repository'][5]}*
+    ${resp1}=   Run Keyword And Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Reserve_Repository'][5]}*
     ...  Run Inband IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x${reserve_id[0]} 0x${reserve_id[1]} 0x00 0x00 0x01 0x0f
 
@@ -281,8 +281,8 @@ Verify Get Device SDR For Maximum Record Via IPMI
     FOR  ${record}  IN RANGE  0  ${record_count}
         # Convert number to hexadecimal record ID.
         ${recordhex}=  Convert To Hex  ${record}  length=4  lowercase=yes
-        ${first_digit}    Set Variable    ${recordhex}[0:2]
-        ${second_digit}    Set Variable    ${recordhex}[2:4]
+        ${first_digit}=  Set Variable    ${recordhex}[0:2]
+        ${second_digit}=  Set Variable    ${recordhex}[2:4]
 
         # Get Device SDR command.
         ${resp}=  Run Inband IPMI Standard Command
@@ -303,8 +303,8 @@ Verify Get Device SDR For Maximum Record Via IPMI
           # Next record ID in response data.
           ${record_next}=  Evaluate  ${record} + 1
           ${record_next}=  Convert To Hex  ${record_next}  length=4  lowercase=yes
-          ${record_next_msb}    Set Variable    ${record_next}[0:2]
-          ${record_next_lsb}    Set Variable    ${record_next}[2:4]
+          ${record_next_msb}=  Set Variable    ${record_next}[0:2]
+          ${record_next_lsb}=  Set Variable    ${record_next}[2:4]
           Should Be Equal  ${get_dev_SDR[0]}  ${record_next_lsb}
           Should Be Equal  ${get_dev_SDR[1]}  ${record_next_msb}
 
@@ -330,7 +330,7 @@ Verify Get Device SDR For Invalid Data Request Via IPMI
     [Tags]  Verify_Get_Device_SDR_For_Invalid_Data_Request_Via_IPMI
 
     # Get SDR command with extra bytes.
-    ${resp}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Get'][3]}*
+    ${resp}=  Run Keyword And Expect Error  *${IPMI_RAW_CMD['Device_SDR']['Get'][3]}*
     ...  Run Inband IPMI Standard Command
     ...  raw ${IPMI_RAW_CMD['Device_SDR']['Get'][0]} 0x00 0x00 ${IPMI_RAW_CMD['Device_SDR']['Get'][1]} 0x00
     # Proper error code should be returned.
@@ -389,7 +389,7 @@ Get Device SDR Info For SDR Data
 
 
 Get Sensor Count From SDR Info
-   [Documentation]  Get Sensor Count from Get Device SDR Info data.
+    [Documentation]  Get Sensor Count from Get Device SDR Info data.
 
     # Get Device SDR Info Via inband IPMI for Sensor count.
     ${sensor_data}=  Get Device SDR Info For Sensor Data
@@ -403,7 +403,7 @@ Get Sensor Count From SDR Info
 
 
 Get SDR Count From SDR Info
-   [Documentation]  Get SDR Count from Get Device SDR Info data.
+    [Documentation]  Get SDR Count from Get Device SDR Info data.
 
     # Get Device SDR Info Via inband IPMI for SDR count.
     ${SDR_data}=  Get Device SDR Info For SDR Data
@@ -443,7 +443,7 @@ Get Device SDR Timestamp
     RETURN  ${timestamp}
 
 
-Get Count for Sensor And SDR Elist All
+Get Count For Sensor And SDR Elist All
     [Documentation]  Get Sensor and SDR elist all count via IPMI lanplus.
 
     # Get Sensor list via IPMI lanplus.

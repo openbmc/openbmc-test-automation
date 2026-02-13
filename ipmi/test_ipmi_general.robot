@@ -1,6 +1,6 @@
 *** Settings ***
-
 Documentation    Module to test IPMI asset tag functionality.
+
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
 Resource         ../lib/bmc_network_utils.robot
@@ -13,7 +13,7 @@ Library          ../lib/ipmi_utils.py
 Suite Setup      IPMI General Test Suite Setup
 Test Teardown    FFDC On Test Case Fail
 
-Test Tags       IPMI_General
+Test Tags        IPMI_General
 
 *** Test Cases ***
 

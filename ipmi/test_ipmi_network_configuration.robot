@@ -1,6 +1,6 @@
 *** Settings ***
-
 Documentation          Module to test IPMI network functionality.
+
 Resource               ../lib/ipmi_client.robot
 Resource               ../lib/openbmc_ffdc.robot
 Resource               ../lib/bmc_network_utils.robot
@@ -16,7 +16,7 @@ Suite Teardown         Redfish.Logout
 Test Setup             Printn
 Test Teardown          Test Teardown Execution
 
-Test Tags             IPMI_Network_Configuration
+Test Tags              IPMI_Network_Configuration
 
 *** Variables ***
 
