@@ -21,7 +21,7 @@ Library             ../lib/ipmi_utils.py
 Library             ../lib/var_funcs.py
 Variables           ../data/ipmi_raw_cmd_table.py
 
-Test Tags          IPMI_Device_ID
+Test Tags           IPMI_Device_ID
 
 *** Test Cases ***
 
@@ -40,7 +40,7 @@ Verify Get Device ID With Invalid Data Request
     [Tags]  Verify_Get_Device_ID_With_Invalid_Data_Request
 
     # Run IPMI Get Device ID command with invalid request data byte.
-    ${resp}=  Run Keyword and Expect Error  *Request data length invalid*
+    ${resp}=  Run Keyword And Expect Error  *Request data length invalid*
     ...  Run IPMI Command  ${IPMI_RAW_CMD['Device ID']['Get'][0]} 0x00
     # Verify error code in 'rsp='.
     Should Contain  ${resp}  ${IPMI_RAW_CMD['Device ID']['Get'][2]}

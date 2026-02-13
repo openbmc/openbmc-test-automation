@@ -5,7 +5,7 @@ Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
 Library          ../lib/ipmi_utils.py
 
-Test Tags       IPMI_Disable
+Test Tags        IPMI_Disable
 
 *** Test Cases ***
 
@@ -17,7 +17,7 @@ Verify Disabling And Enabling IPMI Via Host
 
     # Disable IPMI and verify
     Run Inband IPMI Standard Command  lan set ${CHANNEL_NUMBER} access off
-    Run Keyword and Expect Error  *Unable to establish IPMI*
+    Run Keyword And Expect Error  *Unable to establish IPMI*
     ...  Run External IPMI Standard Command  lan print ${CHANNEL_NUMBER}
 
     # Enable IPMI and verify
@@ -36,10 +36,10 @@ Verify Disabling IPMI Via OOB IPMI
     ...  AND  Run Inband IPMI Standard Command  lan set ${CHANNEL_NUMBER} access on
 
     # Disable IPMI via OOB IPMI and verify
-    ${resp}=  Run Keyword and Ignore Error
+    ${resp}=  Run Keyword And Ignore Error
     ...  Run External IPMI Standard Command  lan set ${CHANNEL_NUMBER} access off
     Should Contain any  ${resp}  ${EMPTY}  Set Channel Access for channel ${CHANNEL_NUMBER} was successful.
-    Run Keyword and Expect Error  *Unable to establish IPMI*
+    Run Keyword And Expect Error  *Unable to establish IPMI*
     ...  Run External IPMI Standard Command  lan print ${CHANNEL_NUMBER}
 
     # Enable IPMI via Host and verify
@@ -62,6 +62,6 @@ Verify IPMI Disable Persistency After BMC Reboot
     OBMC Reboot (run)
 
     # Verify that IPMI remains disabled after reboot.
-    Run Keyword and Expect Error  *Unable to establish IPMI*
+    Run Keyword And Expect Error  *Unable to establish IPMI*
     ...  Run External IPMI Standard Command  lan print ${CHANNEL_NUMBER}
 

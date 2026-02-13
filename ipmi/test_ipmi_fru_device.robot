@@ -6,11 +6,11 @@ Resource               ../lib/bmc_dbus.robot
 Variables              ../data/ipmi_raw_cmd_table.py
 Library                ../lib/ipmi_utils.py
 
-Test Tags             IPMI_FRU_Device
+Test Tags              IPMI_FRU_Device
 
 *** Variables ***
 
-${FRU_NAME}       dimm01 dimm02 cpu0 cpu1  motherboard
+${FRU_NAME}                  dimm01 dimm02 cpu0 cpu1  motherboard
 ${BUSCTL_FRU}                xyz.openbmc_project.FruDevice
 ${FRU_DBUS_URL}              /xyz/openbmc_project/FruDevice
 ${fru_device_id}             0x00
@@ -54,7 +54,7 @@ Verify Fru Device Configuration
     Get DBUS Dictionary For FRU Devices  ${dbus_fru_uri_list}  ${ipmi_fru}
 
     # Compare dbus dictionary each field, with IPMI FRU device fields for each FRU device.
-    Compare IPMI FRU with DBUS  ${ipmi_fru}
+    Compare IPMI FRU With DBUS  ${ipmi_fru}
 
 
 Verify Get FRU Inventory Area Info
@@ -272,7 +272,7 @@ Create Dictionary For DBUS URI
     END
 
 
-Compare IPMI FRU with DBUS
+Compare IPMI FRU With DBUS
     [Documentation]  Compare the IPMI FRU dictionary values with DBUS dictionary values,
     ...  if the serial number is present in both FRU and dbus dictionaries.
     [Arguments]  ${ipmi_fru}

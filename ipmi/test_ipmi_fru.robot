@@ -10,7 +10,7 @@ Suite Setup            Suite Setup Execution
 Suite Teardown         Suite Teardown Execution
 Test Teardown          Test Teardown Execution
 
-Test Tags             IPMI_FRU
+Test Tags              IPMI_FRU
 
 *** Variables ***
 
@@ -34,12 +34,12 @@ Test FRU Info Of Power Supplies
         ${redfish_power_supply_reading}=  Redfish.Get Properties  ${power_supply}
         Append To List  ${redfish_power_dict}  ${redfish_power_supply_reading}
     END
-    Verify IPMI and Redfish subcomponents  ${redfish_power_dict}
+    Verify IPMI And Redfish Subcomponents  ${redfish_power_dict}
     ...  ${ipmi_fru_component_info}
 
 *** Keywords ***
 
-Verify IPMI and Redfish subcomponents
+Verify IPMI And Redfish Subcomponents
     [Documentation]  Get IPMI And Redfish subcomponents of FRU and verify.
     [Arguments]  ${redfish_fru_info}  ${ipmi_fru_info}
 
