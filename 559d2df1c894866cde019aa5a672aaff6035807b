@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ecaadc4c_cc9283c0",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-16T03:45:39Z",
+      "side": 1,
+      "message": "changing to SNMP",
+      "parentUuid": "7250846e_5fbb53eb",
+      "revId": "559d2df1c894866cde019aa5a672aaff6035807b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ed261e22_4674d0cf",
         "filename": "redfish/managers/test_bmc_config_ipv6.robot",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2026-02-13T11:02:50Z",
       "side": 1,
       "message": "(IPv4)?",
+      "revId": "559d2df1c894866cde019aa5a672aaff6035807b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4228dea3_1c4e231d",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-16T03:45:39Z",
+      "side": 1,
+      "message": "there is another test case for hostname/ FQDN\njust to make it more specific.",
+      "parentUuid": "ed261e22_4674d0cf",
       "revId": "559d2df1c894866cde019aa5a672aaff6035807b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
@@ -52,6 +88,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39ebaa53_7bb518b4",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-16T03:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72d65ea4_784bcdee",
+      "revId": "559d2df1c894866cde019aa5a672aaff6035807b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d34dc542_608a18a8",
@@ -69,6 +123,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a9cc0de_79a7fbdf",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-16T03:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d34dc542_608a18a8",
+      "revId": "559d2df1c894866cde019aa5a672aaff6035807b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1babf2f1_84e34cce",
@@ -82,6 +154,24 @@
       "writtenOn": "2026-02-13T11:02:50Z",
       "side": 1,
       "message": "you can remove here, because here you are just adding snmp manager.",
+      "revId": "559d2df1c894866cde019aa5a672aaff6035807b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bc01e2d_aa59d0db",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-16T03:45:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1babf2f1_84e34cce",
       "revId": "559d2df1c894866cde019aa5a672aaff6035807b",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
