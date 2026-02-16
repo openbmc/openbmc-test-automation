@@ -16,6 +16,23 @@
       "message": "Always best if your Gerrit Name matches your CCLA / Signed-Off name. Thanks!",
       "revId": "84a99e7bfb9708b73c8b35252246f47fed289a03",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "030de0ac_b1c5a2cb",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2026-02-16T13:02:05Z",
+      "side": 1,
+      "message": "if setup has no dhcpv6 or slaac ip, it\u0027ll fail here without testing.",
+      "revId": "84a99e7bfb9708b73c8b35252246f47fed289a03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
