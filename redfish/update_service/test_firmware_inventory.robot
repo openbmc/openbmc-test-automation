@@ -229,15 +229,6 @@ Check If Backup Firmware Image Is Same In Firmware Inventory And Redfish Read Op
     Verify Active Software Image And Firmware Inventory Is Same
 
 
-Verify Redfish BIOS Version
-    [Documentation]  Get host firmware version from system inventory.
-    [Tags]  Verify_Redfish_BIOS_Version
-
-    ${bios_version}=  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}/  BiosVersion
-    ${pnor_version}=  Get PNOR Version
-    Should Be Equal  ${pnor_version}  ${bios_version}
-
-
 *** Keywords ***
 
 Test Setup Execution

@@ -9,6 +9,7 @@ Resource                ../lib/utils.robot
 Resource                ../lib/connection_client.robot
 Resource                ../lib/openbmc_ffdc.robot
 Resource                ../lib/state_manager.robot
+Resource                ../lib/openpower_utils.robot
 
 Test Teardown           Test Teardown Execution
 

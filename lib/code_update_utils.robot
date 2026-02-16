@@ -10,6 +10,7 @@ Variables       ../data/variables.py
 Resource        boot_utils.robot
 Resource        rest_client.robot
 Resource        openbmc_ffdc.robot
+Resource        openpower_utils.robot
 
 *** Variables ***
 ${ignore_err}    ${0}
