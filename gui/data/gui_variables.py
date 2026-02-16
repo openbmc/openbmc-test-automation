@@ -131,7 +131,9 @@ class gui_variables:
     xpath_confirm_bmc_reboot = "//*[@class='btn btn-primary']"
 
     # Common variables
-    xpath_save_settings_button = "//button[contains(text(),'Save')]"
+    xpath_save_settings_button = (
+         "//button[contains(normalize-space(.),'Save')]"
+     )
     xpath_confirm_button = "//button[contains(normalize-space(.),'Confirm')]"
     xpath_cancel_button = "//button[contains(text(),'Cancel')]"
     xpath_add_button = "//button[normalize-space(text())='Add']"
