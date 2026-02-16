@@ -29,13 +29,13 @@ ${xpath_event_status_resolved}    //*[@data-test-id="tableFilter-checkbox-Resolv
 ${xpath_event_status_unresolved}  //*[@data-test-id="tableFilter-checkbox-Unresolved"]
 ${xpath_event_action_download}    //button[text()[normalize-space()='Download']]
 ${xpath_success_message}          //*[contains(text(),"Success")]
-${xpath_resolved_button}          //button[contains(text(),"Resolve")]
-${xpath_unresolved_button}        //button[contains(text(),"Unresolve")]
+${xpath_resolved_button}          //button[contains(normalize-space(.),"Resolve")]
+${xpath_unresolved_button}        //button[contains(normalize-space(.),"Unresolve")]
 ${xpath_filter_clearall_button}   //button[contains(normalize-space(.),"Clear all")]
 ${xpath_clear_search}             //button[@title="Clear search input"]
 ${xpath_event_log_resolve}        //*[@name="switch"]
-${xpath_event_logs_resolve}       //button[contains(text(),'Resolve')]
-${xpath_event_log_data}           //td[contains(text(),'Critical')]/following-sibling::td[3]
+${xpath_event_logs_resolve}       //button[contains(normalize-space(.),'Resolve')]
+${xpath_event_log_data}           //td[contains(normalize-space(.)),'Critical']/following-sibling::td[3]
 
 *** Test Cases ***
 
