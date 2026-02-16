@@ -10,6 +10,5 @@ Suite Setup      Get System Environment
 Get System Environment
     [Documentation]  System environment details.
 
-    Run Keyword And Ignore Error  Get BMC PNOR Version
     # Run Keyword  Check BMC Performance
     Run Keyword And Ignore Error  Check BMC Performance
