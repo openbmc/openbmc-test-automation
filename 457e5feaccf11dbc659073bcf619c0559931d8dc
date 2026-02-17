@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff2db05f_bc631d49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-02-17T06:13:50Z",
+      "side": 1,
+      "message": "Reopening the commit cleanup and updating the assigned reviewers based on their OpenBMC test and review contributions from the past six months.",
+      "revId": "457e5feaccf11dbc659073bcf619c0559931d8dc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
