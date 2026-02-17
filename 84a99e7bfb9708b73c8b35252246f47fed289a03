@@ -69,6 +69,24 @@
       "parentUuid": "030de0ac_b1c5a2cb",
       "revId": "84a99e7bfb9708b73c8b35252246f47fed289a03",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a83a01da_1da11056",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2026-02-17T06:45:40Z",
+      "side": 1,
+      "message": "even if slaac connectiin is there and slaac is not enabled, then also this test case will fail without actually testing the test.\nCheck if it has connection \u0026 enabled during test setup, if it is not there fail the test at suite level not at test case level.",
+      "parentUuid": "7ec1a237_febbc7e6",
+      "revId": "84a99e7bfb9708b73c8b35252246f47fed289a03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
