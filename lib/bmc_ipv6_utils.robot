@@ -235,15 +235,16 @@ Configure IPv6 Address On BMC
 Delete IPv6 Address
     [Documentation]  Delete IPv6 address of BMC.
     [Arguments]  ${ipv6_addr}
-    ...    ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
-    ...    ${channel_number}=${CHANNEL_NUMBER}  ${Version}=IPv4
+    ...  ${channel_number}=${CHANNEL_NUMBER}
+    ...  ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]  ${Version}=IPv4
 
     # Description of argument(s):
     # ipv6_addr           IPv6 address to be deleted (e.g. "2001:1234:1234:1234::1234").
-    # channel_number     Channel number (1 - eth0 and 2 - eth1).
+    # channel_number      Channel number (1 - eth0 and 2 - eth1).
     # valid_status_codes  Expected return code from patch operation
     #                     (e.g. "200").  See prolog of rest_request
     #                     method in redfish_plus.py for details.
+    # Version             Specifies the IP protocol version to use (IPv4 or IPv6).
 
     ${empty_dict}=  Create Dictionary
     ${patch_list}=  Create List
