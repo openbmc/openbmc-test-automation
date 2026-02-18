@@ -233,8 +233,8 @@ Configure IPv6 Address On BMC
 Delete IPv6 Address
     [Documentation]  Delete IPv6 address of BMC.
     [Arguments]  ${ipv6_addr}
-    ...    ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
-    ...    ${channel_number}=${CHANNEL_NUMBER}  ${Version}=IPv4
+    ...  ${channel_number}=${CHANNEL_NUMBER}
+    ...  ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]  ${Version}=IPv4
 
     # Description of argument(s):
     # ipv6_addr           IPv6 address to be deleted (e.g. "2001:1234:1234:1234::1234").
