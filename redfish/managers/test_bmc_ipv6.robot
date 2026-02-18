@@ -32,7 +32,7 @@ ${linklocal_addr_format}     fe80::[0-9a-f:]+$
 ${link_local_addr}           fe80::
 ${link_local_prefix_len}     10
 ${ipv6_leading_zero}         2001:0022:0033::0111
-${ipv6_firsthextet_zero}    2001:0022:1133::1111
+${ipv6_firsthextet_zero}     2001:0022:1133::1111
 ${ipv6_eliminate_zero}       2001:22:33::111
 ${ipv6_eliminate_zero1}      2001:22:1133::1111
 ${ipv6_contigeous_zero}      2001:0022:0000:0000:1:2:3:8
@@ -220,9 +220,9 @@ Configure Invalid Static IPv6 And Verify
     [Template]  Configure IPv6 Address On BMC
 
     #invalid_ipv6            prefix length           valid_status_codes
-    ${ipv4_hexword_addr}     ${test_prefix_length}   valid_status_codes=${HTTP_BAD_REQUEST}
-    ${invalid_hexadec_ipv6}  ${test_prefix_length}   valid_status_codes=${HTTP_BAD_REQUEST}
-    ${ipv6_multi_short}      ${test_prefix_length}   valid_status_codes=${HTTP_BAD_REQUEST}
+    ${ipv4_hexword_addr}     ${test_prefix_length}   valid_status_codes=[${HTTP_BAD_REQUEST}]
+    ${invalid_hexadec_ipv6}  ${test_prefix_length}   valid_status_codes=[${HTTP_BAD_REQUEST}]
+    ${ipv6_multi_short}      ${test_prefix_length}   valid_status_codes=[${HTTP_BAD_REQUEST}]
 
 
 Configure IPv6 Static Default Gateway And Verify
@@ -602,8 +602,10 @@ Suite Setup Execution
     Set Suite variable  ${ethernet_interface}
 
     # Get initial IPv4 and IPv6 addresses and address origins for eth0.
-    ${initial_ipv4_addressorigin_list}  ${initial_ipv4_addr_list}=  Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses
-    ${initial_ipv6_addressorigin_list}  ${initial_ipv6_addr_list}=  Get Address Origin List And IPv4 or IPv6 Address  IPv6Addresses
+    ${initial_ipv4_addressorigin_list}  ${initial_ipv4_addr_list}=
+    ...    Get Address Origin List And IPv4 or IPv6 Address  IPv4Addresses  ${1}
+    ${initial_ipv6_addressorigin_list}  ${initial_ipv6_addr_list}=
+    ...    Get Address Origin List And IPv4 or IPv6 Address  IPv6Addresses  ${1}
 
     Set Suite Variable   ${initial_ipv4_addressorigin_list}
     Set Suite Variable   ${initial_ipv4_addr_list}
