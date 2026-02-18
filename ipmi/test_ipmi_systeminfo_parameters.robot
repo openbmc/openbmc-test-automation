@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation       Module to test IPMI System Info Parameters functionality.
 ...                 Following parameters are verified in the script,
 ...                 1. Set In Progress - param 0,
@@ -9,17 +8,17 @@ Documentation       Module to test IPMI System Info Parameters functionality.
 ...                 5. OS Name - param 4,
 ...                 6. Present OS Version Number - param 5.
 
-Resource            ../lib/ipmi_client.robot
-Resource            ../lib/openbmc_ffdc.robot
 Library             Collections
 Library             String
+Resource            ../lib/ipmi_client.robot
+Resource            ../lib/openbmc_ffdc.robot
 Library             ../lib/ipmi_utils.py
 Variables           ../data/ipmi_raw_cmd_table.py
 
 Suite Setup         Suite Setup Execution
 Test Teardown       Run Keywords  Restore Default Configuration  AND  FFDC On Test Case Fail
 
-Test Tags          IPMI_SystemInfo_Parameters
+Test Tags           IPMI_SystemInfo_Parameters
 
 *** Variables ***
 
@@ -95,7 +94,7 @@ Verify Get System Info Set In Progress With Invalid Data Length
 
     # Check if the Get System Info Parameter for param 0 - set in progress throws
     # error for invalid data length.
-    Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Get'][1]}*
+    Run Keyword And Expect Error  *${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Get'][1]}*
     ...  Run IPMI Command
     ...  ${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Get'][0]} 0x00
 
@@ -107,7 +106,7 @@ Verify Set System Info Set In Progress With Invalid Data Length
 
     # Check if the Set System Info Parameter for param 0 - set in progress throws
     # error for invalid data length.
-    Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Set'][1]}*
+    Run Keyword And Expect Error  *${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Set'][1]}*
     ...  Run IPMI Command
     ...  ${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Set'][0]} 0x00 0x00
 
@@ -118,7 +117,7 @@ Verify Set System Info Set In Progress With Invalid State
     [Tags]  Verify_Set_System_Info_Set_In_Progress_With_Invalid_State
 
     # Check if the Set System Info Parameter for param 0 - set in progress throws error for invalid State.
-    Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Set'][2]}*
+    Run Keyword And Expect Error  *${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Set'][2]}*
     ...  Run IPMI Command
     ...  ${IPMI_RAW_CMD['System_Info']['param0_Set_In_Progress']['Set'][0]} 0x04
 
@@ -153,7 +152,7 @@ Verify Get System Info System Firmware Version With Invalid Data Length
 
     # Check if the Get System Info Parameter for param 1 - System Firmware Version throws
     # error for invalid data length.
-    Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param1_System_Firmware_Version']['Get'][1]}*
+    Run Keyword And Expect Error  *${IPMI_RAW_CMD['System_Info']['param1_System_Firmware_Version']['Get'][1]}*
     ...  Run IPMI Command
     ...  ${IPMI_RAW_CMD['System_Info']['param1_System_Firmware_Version']['Get'][0]} 0x00
 
@@ -175,7 +174,7 @@ Verify Set System Info System Firmware Version With Invalid Data Length
     # The request data bytes will be 15 bytes, in which 14 bytes are only expected.
     # Check if the Set System Info Parameter for param 1 - System Firmware Version throws
     # error for invalid request data.
-    Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param1_System_Firmware_Version']['Set'][1]}*
+    Run Keyword And Expect Error  *${IPMI_RAW_CMD['System_Info']['param1_System_Firmware_Version']['Set'][1]}*
     ...  Run IPMI Command
     ...  ${IPMI_RAW_CMD['System_Info']['param1_System_Firmware_Version']['Set'][0]} ${firmware_version}
 
@@ -212,7 +211,7 @@ Verify Get System Info System Name With Invalid Data Length
 
     # Check if the Get System Info Parameter for param 2 - System Name throws error
     # for invalid request data length.
-    Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param2_System_Name']['Get'][1]}*
+    Run Keyword And Expect Error  *${IPMI_RAW_CMD['System_Info']['param2_System_Name']['Get'][1]}*
     ...  Run IPMI Command
     ...  ${IPMI_RAW_CMD['System_Info']['param2_System_Name']['Get'][0]} 0x00
 
@@ -234,7 +233,7 @@ Verify Set System Info System Name With Invalid Data Length
     # The request data bytes will be 15 bytes, in which 14 bytes are only expected.
 
     # Check if the Set System Info Parameter for param 2 - System Name throws error for invalid request data.
-    Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param2_System_Name']['Set'][1]}*
+    Run Keyword And Expect Error  *${IPMI_RAW_CMD['System_Info']['param2_System_Name']['Set'][1]}*
     ...  Run IPMI Command
     ...  ${IPMI_RAW_CMD['System_Info']['param2_System_Name']['Set'][0]} ${system_name}
 
@@ -265,7 +264,7 @@ Verify Get System Info Primary OS Name With Invalid Data Length
 
     # Check if the Get System Info Parameter for param 3 - Primary OS Name throws
     # error for invalid request data.
-    Run Keyword and Expect Error
+    Run Keyword And Expect Error
     ...  *${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Get'][1]}*
     ...  Run IPMI Command
     ...  ${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Get'][0]} 0x00
@@ -287,7 +286,7 @@ Verify Set System Info Primary OS Name With Invalid Data Length
 
     # Check if the Set System Info Parameter for param 3 - Primary OS Name throws error
     # for invalid data request.
-    Run Keyword and Expect Error
+    Run Keyword And Expect Error
     ...  *${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Set'][1]}*
     ...  Run IPMI Command
     ...  ${IPMI_RAW_CMD['System_Info']['param3_Primary_Operating_System_Name']['Set'][0]} ${os_name}
@@ -345,7 +344,7 @@ Verify Get System Info OS Name With Invalid Data Length
     [Tags]  Verify_Get_System_Info_OS_Name_With_Invalid_Data_Length
 
     # Check if the Get System Info Parameter for param 4 - OS Name throws error for invalid request data.
-    Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Get'][1]}*
+    Run Keyword And Expect Error  *${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Get'][1]}*
     ...  Run IPMI Command
     ...  ${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Get'][0]} 0x00
 
@@ -365,7 +364,7 @@ Verify Set System Info OS Name With Invalid Data Length
     ${os_name}  ${name_hex_data}=  Identify Request Data  ${invalid_os_version}
 
     # Check if the Set System Info Parameter for param 4 - OS Name throws error for invalid request data.
-    Run Keyword and Expect Error  *${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Set'][1]}*
+    Run Keyword And Expect Error  *${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Set'][1]}*
     ...  Run IPMI Command
     ...  ${IPMI_RAW_CMD['System_Info']['param4_Operating_System_Name']['Set'][0]} ${os_name}
 
@@ -397,7 +396,7 @@ Verify Get System Info Present OS Version Number With Invalid Data Length
 
     # Check if the Get System Info Parameter for param 5 - Present OS Version Number throws
     # error for invalid request data.
-    Run Keyword and Expect Error
+    Run Keyword And Expect Error
     ...  *${IPMI_RAW_CMD['System_Info']['param5_Present_OS_Version_number']['Get'][1]}*
     ...  Run IPMI Command
     ...  ${IPMI_RAW_CMD['System_Info']['param5_Present_OS_Version_number']['Get'][0]} 0x00
@@ -419,7 +418,7 @@ Verify Set System Info Present OS Version Number With Invalid Data Length
 
     # Check if the Set System Info Parameter for param 5 - Present OS Version Number throws
     # error for invalid request data.
-    Run Keyword and Expect Error
+    Run Keyword And Expect Error
     ...  *${IPMI_RAW_CMD['System_Info']['param5_Present_OS_Version_number']['Set'][1]}*
     ...  Run IPMI Command
     ...  ${IPMI_RAW_CMD['System_Info']['param5_Present_OS_Version_number']['Set'][0]} ${os_name}

@@ -1,15 +1,15 @@
 *** Settings ***
-
 Documentation    Module to test out of band IPMI watchdog functionality.
+
+Library          Collections
+Library          String
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
 Resource         ../lib/boot_utils.robot
 Library          ../lib/ipmi_utils.py
-Library          String
-Library          Collections
 Variables        ../data/ipmi_raw_cmd_table.py
 
-Test Tags       IPMI_Watchdog
+Test Tags        IPMI_Watchdog
 
 *** Variables ***
 
@@ -134,10 +134,10 @@ Verify Reset Timer
     # Start_timer_value is bits 6 - 7; set to 0x64 0x00 (100 ms decimal).
     # Reverse bits 6 - 7 due to BMC being little endian; new value is 0x00 0x64.
     # Convert hex value 0x00 0x64 to integer; start_timer_integer = 100.
-    ${value}=   Get Slice From List  ${start_timer_value}   6
-    Reverse List   ${value}
-    ${start_timer_string}=  Evaluate   "".join(${value})
-    ${start_timer_integer} =  Convert To Integer 	${start_timer_string}  16
+    ${value}=  Get Slice From List  ${start_timer_value}  6
+    Reverse List  ${value}
+    ${start_timer_string}=  Evaluate  "".join(${value})
+    ${start_timer_integer}=  Convert To Integer  ${start_timer_string}  16
 
     # Delay.
     Sleep   ${TIMER_DELAY}
@@ -172,7 +172,7 @@ Verify Failure For Pre-Timeout Interval Greater Than Initial Count
     [Tags]  Verify_Failure_For_Pre-Timeout_Interval_Greater_Than_Initial_Count
 
     # Expected to fail: pre-timeout interval (4000) > initial count (1000).
-    Run Keyword and Expect Error  *Invalid data field*
+    Run Keyword And Expect Error  *Invalid data field*
     ...  Run IPMI Command  ${IPMI_RAW_CMD['Watchdog']['Set'][78]}
 
 Verify Invalid Request Data Length
@@ -190,7 +190,7 @@ Verify Invalid Reset Timer Request Data
     [Tags]  Verify_Invalid_Reset_Timer_Request_Data
 
     # Reset Watchdog Timer with one extra byte.
-    Run Keyword and Expect Error  *Request data length*
+    Run Keyword And Expect Error  *Request data length*
     ...  Run IPMI Command  ${IPMI_RAW_CMD['Watchdog']['Reset'][3]}
 
     # Reset BMC.
@@ -199,7 +199,7 @@ Verify Invalid Reset Timer Request Data
     ...  Is BMC Operational
 
     # Reset Watchdog Timer without initialized watchdog.
-    Run Keyword and Expect Error  *Unknown*
+    Run Keyword And Expect Error  *Unknown*
     ...  Run IPMI Command  ${IPMI_RAW_CMD['Watchdog']['Reset'][6]}
 
 *** Keywords ***
@@ -323,7 +323,7 @@ Watchdog Invalid Request Data Length
     # Description of argument(s):
     # watchdog_command     The raw watchdog IPMI command request bytes.
 
-    Run Keyword and Expect Error  *Request data length*
+    Run Keyword And Expect Error  *Request data length*
     ...  Run IPMI Command  ${watchdog_command}
 
 Validate Watchdog Pre-timeout

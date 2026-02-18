@@ -11,13 +11,12 @@ Test Setup        Redfish.Login
 Test Teardown     Run Keywords  FFDC On Test Case Fail  AND
 ...  Redfish.Logout
 
-Test Tags        IPMI_Sensor
+Test Tags         IPMI_Sensor
 
 *** Variables ***
 
 ${allowed_temp_diff}    ${2}
 ${allowed_power_diff}   ${10}
-
 
 *** Test Cases ***
 Verify IPMI Temperature Readings using Redfish
@@ -155,7 +154,7 @@ Test Power Reading Via IPMI Raw Command
 Verify CPU Present
     [Documentation]  Verify the IPMI sensor for CPU present using Redfish.
     [Tags]  Verify_CPU_Present
-    [Template]  Set Present Bit Via IPMI and Verify Using Redfish
+    [Template]  Set Present Bit Via IPMI And Verify Using Redfish
 
     # component  state
     cpu          Enabled
@@ -164,7 +163,7 @@ Verify CPU Present
 Verify CPU Not Present
     [Documentation]  Verify the IPMI sensor for CPU not present using Redfish.
     [Tags]  Verify_CPU_Not_Present
-    [Template]  Set Present Bit Via IPMI and Verify Using Redfish
+    [Template]  Set Present Bit Via IPMI And Verify Using Redfish
 
     # component  state
     cpu          Absent
@@ -173,7 +172,7 @@ Verify CPU Not Present
 Verify GPU Present
     [Documentation]  Verify the IPMI sensor for GPU present using Redfish.
     [Tags]  Verify_GPU_Present
-    [Template]  Set Present Bit Via IPMI and Verify Using Redfish
+    [Template]  Set Present Bit Via IPMI And Verify Using Redfish
 
     # sensor_id  component
     0xC5         gv100card0
@@ -182,7 +181,7 @@ Verify GPU Present
 Verify GPU Not Present
     [Documentation]  Verify the IPMI sensor for GPU not present using Redfish.
     [Tags]  Verify_GPU_Not_Present
-    [Template]  Set Present Bit Via IPMI and Verify Using Redfish
+    [Template]  Set Present Bit Via IPMI And Verify Using Redfish
 
     # sensor_id  component
     0xC5         gv100card0
@@ -389,7 +388,7 @@ Verify Power Reading Via Raw Command
     ...  msg=Power reading above allowed threshold ${allowed_power_diff}.
 
 
-Set Present Bit Via IPMI and Verify Using Redfish
+Set Present Bit Via IPMI And Verify Using Redfish
     [Documentation]  Set present bit of sensor via IPMI and verify using Redfish.
     [Arguments]  ${component}  ${status}
 
@@ -401,30 +400,30 @@ Set Present Bit Via IPMI and Verify Using Redfish
     ${sensor_name}=  Set Variable  ${sensor_list[0]}
     ${sensor_id}=  Get Sensor Id For Sensor  ${sensor_name}
 
-     IF  '${status}' == 'Absent'
-         Run IPMI Command
-         ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x00 0x00 0x80 0x00 0x00 0x20 0x00
-     ELSE IF  '${status}' == 'Enabled'
-         Run IPMI Command
-         ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x80 0x00 0x00 0x00 0x00 0x20 0x00
-     END
+    IF  '${status}' == 'Absent'
+        Run IPMI Command
+        ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x00 0x00 0x80 0x00 0x00 0x20 0x00
+    ELSE IF  '${status}' == 'Enabled'
+        Run IPMI Command
+        ...  0x04 0x30 ${sensor_id} 0xa9 0x00 0x80 0x00 0x00 0x00 0x00 0x20 0x00
+    END
 
-     # Redfish cpu components have "-" instead of "_" (e.g.: dcm0-cpu0).
-     ${cpu_name}=  Replace String  ${sensor_name}  _  -
-     ${sensor_properties}=  Redfish.Get Properties  /redfish/v1/Systems/${SYSTEM_ID}/Processors/${cpu_name}
+    # Redfish cpu components have "-" instead of "_" (e.g.: dcm0-cpu0).
+    ${cpu_name}=  Replace String  ${sensor_name}  _  -
+    ${sensor_properties}=  Redfish.Get Properties  /redfish/v1/Systems/${SYSTEM_ID}/Processors/${cpu_name}
 
-     #  Example of CPU state via Redfish
+    # Example of CPU state via Redfish
 
-     # "ProcessorType": "CPU",
-     # "SerialNumber": "YA1936422499",
-     # "Socket": "",
-     # "SparePartNumber": "F210110",
-     # "Status": {
-     # "Health": "OK",
-     # "State": "Absent"
-     # }
+    # "ProcessorType": "CPU",
+    # "SerialNumber": "YA1936422499",
+    # "Socket": "",
+    # "SparePartNumber": "F210110",
+    # "Status": {
+    #   "Health": "OK",
+    #   "State": "Absent"
+    # }
 
-     Should Be True  '${sensor_properties['Status']['State']}' == '${status}'
+    Should Be True  '${sensor_properties['Status']['State']}' == '${status}'
 
 
 Verify Power Supply Sensor Threshold
@@ -436,7 +435,7 @@ Verify Power Supply Sensor Threshold
     # redfish_threshold_id    The sensor threshold component of Redfish sensor.
 
 
-    #  Example of ipmi sensor output
+    # Example of ipmi sensor output
     # Locating sensor record...
     # Sensor ID              : ps0_input_voltag (0xf7)
     # Entity ID             : 10.19
@@ -460,7 +459,7 @@ Verify Power Supply Sensor Threshold
     ${ipmi_threshold_reading}=  Set Variable If  '${ipmi_threshold_reading}' == 'na'
     ...  ${0}  ${ipmi_threshold_reading}
 
-    #  Example of redfish sensor output
+    # Example of redfish sensor output
     # "@odata.id": "/redfish/v1/Chassis/chassis/Power#/Voltages/0",
     # "@odata.type": "#Power.v1_0_0.Voltage",
     # "LowerThresholdCritical": 180.0,
@@ -471,8 +470,8 @@ Verify Power Supply Sensor Threshold
     # "Name": "ps0 input voltage",
     # "ReadingVolts": 209.5,
     # "Status": {
-    # "Health": "OK",
-    # "State": "Enabled"
+    #   "Health": "OK",
+    #   "State": "Enabled"
     # },
     # "UpperThresholdCritical": 300.0,
     # "UpperThresholdNonCritical": 290.0

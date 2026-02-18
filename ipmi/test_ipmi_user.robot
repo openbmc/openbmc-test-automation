@@ -12,7 +12,7 @@ Test Setup          Printn
 Suite Setup         Suite Setup Execution
 Test Teardown       Test Teardown Execution
 
-Test Tags          IPMI_User
+Test Tags           IPMI_User
 
 *** Variables ***
 
