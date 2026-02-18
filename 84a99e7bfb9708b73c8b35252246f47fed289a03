@@ -87,6 +87,24 @@
       "parentUuid": "7ec1a237_febbc7e6",
       "revId": "84a99e7bfb9708b73c8b35252246f47fed289a03",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6071dbf0_fb3e5cf1",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-02-18T13:03:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a83a01da_1da11056",
+      "revId": "84a99e7bfb9708b73c8b35252246f47fed289a03",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
