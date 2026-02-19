@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e8284a6_1239d005",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-19T04:40:19Z",
+      "side": 1,
+      "message": "change to version",
+      "range": {
+        "startLine": 237,
+        "startChar": 81,
+        "endLine": 237,
+        "endChar": 96
+      },
+      "revId": "493a598523a146846a134deb7ab82bb1ec47ca9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e621b854_e2c2e31f",
+        "filename": "lib/bmc_ipv6_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-19T04:40:19Z",
+      "side": 1,
+      "message": "add version in the argument description",
+      "range": {
+        "startLine": 244,
+        "startChar": 1,
+        "endLine": 244,
+        "endChar": 64
+      },
+      "revId": "493a598523a146846a134deb7ab82bb1ec47ca9b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
