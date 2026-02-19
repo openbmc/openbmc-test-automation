@@ -1,19 +1,17 @@
 *** Settings ***
-
 Documentation    Module to test IPMI SEL functionality.
+
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
 Resource         ../lib/logging_utils.robot
-
 Library          ../lib/ipmi_utils.py
 Library          ../lib/logging_utils.py
-
 Variables        ../data/ipmi_raw_cmd_table.py
 
 Test Setup       Test Setup Execution
 Test Teardown    FFDC On Test Case Fail
 
-Test Tags       IPMI_SEL
+Test Tags        IPMI_SEL
 
 *** Variables ***
 
@@ -234,7 +232,7 @@ Verify Clear SEL With Invalid Reservation ID
     ...  0x${reserve_id[1]} ${IPMI_RAW_CMD['SEL_entry']['Clear_SEL'][1]}
 
     # Clear SEL command.
-    ${clear_resp}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['SEL_entry']['Clear_SEL'][4]}*
+    ${clear_resp}=  Run Keyword And Expect Error  *${IPMI_RAW_CMD['SEL_entry']['Clear_SEL'][4]}*
     ...  Run IPMI Command  ${cmd}
     Should Contain  ${clear_resp}  ${IPMI_RAW_CMD['SEL_entry']['Clear_SEL'][5]}
 
@@ -287,7 +285,7 @@ Verify Clear SEL After Cold Reset
     ...  0x${reserve_id[1]} ${IPMI_RAW_CMD['SEL_entry']['Clear_SEL'][1]}
 
     # Clear SEL command.
-    ${clear_resp}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['SEL_entry']['Clear_SEL'][5]}*
+    ${clear_resp}=  Run Keyword And Expect Error  *${IPMI_RAW_CMD['SEL_entry']['Clear_SEL'][5]}*
     ...  Run IPMI Command  ${cmd}
 
     Should Contain  ${clear_resp}  ${IPMI_RAW_CMD['SEL_entry']['Clear_SEL'][4]}
@@ -349,7 +347,7 @@ Verify IPMI SEL Delete
     # Example of SEL List:
     # 4 | 04/21/2017 | 10:51:16 | System Event #0x01 | Undetermined system hardware failure | Asserted
 
-    ${sel_entry}=  Fetch from Left  ${sel_list}  |
+    ${sel_entry}=  Fetch From Left  ${sel_list}  |
     ${sel_entry}=  Evaluate  $sel_entry.replace(' ','')
     ${sel_entry}=  Convert To Integer  0x${sel_entry}
 
@@ -475,7 +473,7 @@ Get BMC Time In Epoch
     [Documentation]  Get the current time from BMC and returns epoch time.
 
     # Get the bmc native bmc date command response.
-    ${date}=  Get Current Date from BMC
+    ${date}=  Get Current Date From BMC
 
     ${epoch_date}=  Convert Date  ${date}  epoch  exclude_millis=yes  date_format=%m/%d/%Y %H:%M:%S
 

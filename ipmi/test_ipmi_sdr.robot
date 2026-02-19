@@ -10,11 +10,11 @@ Library                ../lib/ipmi_utils.py
 Library                ../lib/utilities.py
 Variables              ../data/ipmi_raw_cmd_table.py
 
-Suite setup             Suite Setup Execution
+Suite Setup             Suite Setup Execution
 Suite Teardown          Redfish.Logout
 Test Teardown           Test Teardown Execution
 
-Test Tags              IPMI_SDR
+Test Tags               IPMI_SDR
 
 *** Test Cases ***
 

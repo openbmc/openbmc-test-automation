@@ -25,18 +25,17 @@ Documentation       This suite tests IPMI POH Counter Support in OpenBMC.
 ...                 time / Power operation.
 
 
+Library             Collections
 Resource            ../lib/ipmi_client.robot
 Resource            ../lib/openbmc_ffdc.robot
-Library             Collections
 Library             ../lib/ipmi_utils.py
 Variables           ../data/ipmi_raw_cmd_table.py
 
 Suite Setup         Suite Setup Execution
 Suite Teardown      Suite Teardown Execution
-
 Test Teardown       FFDC On Test Case Fail
 
-Test Tags          IPMI_Poh_Counter
+Test Tags           IPMI_Poh_Counter
 
 *** Variables ***
 
@@ -58,7 +57,7 @@ Verify Get POH Counter With Invalid Data Request Via IPMI
     [Tags]  Verify_Get_POH_Counter_With_Invalid_Data_Request_Via_IPMI
 
     # verify get POH counter command with invalid data request Via IPMI.
-    ${resp}=  Run Keyword and Expect Error  *Request data length invalid*
+    ${resp}=  Run Keyword And Expect Error  *Request data length invalid*
     ...  Run External IPMI Raw Command  ${IPMI_RAW_CMD['Get']['POH_Counter'][0]} 0x00
 
 

@@ -10,7 +10,7 @@ Library             ../lib/ipmi_utils.py
 Suite Setup         IPMI Payload Setup Execution
 Test Teardown       FFDC On Test Case Fail
 
-Test Tags          IPMI_Payload
+Test Tags           IPMI_Payload
 
 *** Variables ***
 
@@ -27,7 +27,6 @@ ${session_setup_payload_resp}    3f 00
                            ...  RAKP_msg_2=0x13
                            ...  RAKP_msg_3=0x14
                            ...  RAKP_msg_4=0x15
-
 
 *** Test Cases ***
 
@@ -119,7 +118,7 @@ Verify Set User Access Payload For Operator Privileged User
     ${payload_raw_cmd}=  Catenate  ${IPMI_RAW_CMD['Payload']['Set_User_Access_Payload'][0]}
     ...  ${CHANNEL_NUMBER} 0x${user_id} 0x02 0x00 0x00 0x00
 
-    Run Keyword and Expect Error  *Unable to establish IPMI*
+    Run Keyword And Expect Error  *Unable to establish IPMI*
     ...  Run External IPMI Raw Command  ${payload_raw_cmd}  U=${userid}  P=${new_user_passwd}  L=Operator
 
 
@@ -159,7 +158,7 @@ Verify Get User Access Payload For User Access privilege
     ${raw_command}=  Catenate  ${IPMI_RAW_CMD['Payload']['Get_User_Access_Payload'][0]}
     ...  ${CHANNEL_NUMBER} ${user_id}
 
-    Run Keyword and Expect Error  *Unable to establish IPMI*
+    Run Keyword And Expect Error  *Unable to establish IPMI*
     ...  Run External IPMI Raw Command  ${raw_command}  U=${userid}  P=${new_user_passwd}  L=User
 
 
@@ -187,7 +186,7 @@ Verify Get User Access Payload For Invalid Channel Number
 
 Verify Get Channel Payload Version
     [Documentation]  Verify payload version for all supported payload type in
-                ...  all active channels.
+    ...  all active channels.
     [Tags]  Verify_Get_Channel_Payload_Version
     [Template]  Verify Payload Version
 
@@ -226,7 +225,7 @@ Verify Get Channel Payload Support For Invalid Channel
     FOR  ${channel}  IN  @{inactive_channel_list}
        # Input channel.      Invalid channel intimation.
        ${channel}            ${1}
-   END
+    END
 
 
 *** Keywords ***
@@ -493,13 +492,13 @@ Verify Payload Version For Invalid Channel
     #                    standard_payload_types and session_setup_payload_types which we use
     #                    in this keyword are defined in variable section.
 
-     ${channel_number}=  Convert To Hex  ${channel_number}  prefix=0x
-     FOR  ${payload_type_name}  ${payload_type_number}  IN  &{payload_type_dict}
-        ${get_cmd}=  Catenate  ${IPMI_RAW_CMD['Payload']['Get_Channel_Payload_Version'][0]}
-        ...  ${channel_number} ${payload_type_number}
+    ${channel_number}=  Convert To Hex  ${channel_number}  prefix=0x
+    FOR  ${payload_type_name}  ${payload_type_number}  IN  &{payload_type_dict}
+      ${get_cmd}=  Catenate  ${IPMI_RAW_CMD['Payload']['Get_Channel_Payload_Version'][0]}
+      ...  ${channel_number} ${payload_type_number}
 
-        Verify Invalid IPMI Command  ${get_cmd}  0xcc
-     END
+      Verify Invalid IPMI Command  ${get_cmd}  0xcc
+    END
 
 
 Verify Payload Version
