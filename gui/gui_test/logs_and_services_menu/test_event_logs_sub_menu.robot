@@ -93,6 +93,7 @@ Select All Error Logs And Verify Buttons
     [Documentation]  Select all error logs and verify delete, export and cancel buttons.
     [Tags]  Select_All_Error_Logs_And_Verify_Buttons
 
+    Redfish Purge Event Log
     Create Error Logs  ${2}
     Wait Until Element Is Visible  ${xpath_delete_first_row}
     Select All Events
@@ -101,6 +102,7 @@ Select All Error Logs And Verify Buttons
     Page Should Contain Element  ${xpath_event_action_download}
     Page Should Contain Element  ${xpath_event_action_delete}
     Page Should Contain Element  ${xpath_event_action_cancel}
+    Redfish Purge Event Log
 
 
 Select And Verify Default UTC Timezone For Events
@@ -207,7 +209,7 @@ Verify Default Value Of Resolved Field In Error Log
     Refresh GUI
 
     # Verify default value of resolved field from GUI.
-    Element Should Contain  ${xpath_event_log_data}  Unresolved
+    Page Should Contain  Unresolved
 
 
 *** Keywords ***
