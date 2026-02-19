@@ -128,9 +128,9 @@ Launch Browser And Login GUI With Given User
 Logout GUI
     [Documentation]  Logout of OpenBMC GUI.
 
-    Click Element  ${xpath_root_button_menu}
     #Adding delay for logout button to appear.
     Sleep  15s
+    Click Element  ${xpath_root_button_menu}
     Click Element  ${xpath_logout_button}
     Wait Until Page Contains Element  ${xpath_login_button}
 

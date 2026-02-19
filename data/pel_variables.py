@@ -14,7 +14,7 @@ PEL_DETAILS = {
 }
 
 ERROR_LOG_CREATE_BASE_CMD = (
-    "busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging    "
+    "sudo -i busctl call xyz.openbmc_project.Logging /xyz/openbmc_project/logging    "
     " xyz.openbmc_project.Logging.Create Create ssa{ss} "
 )
 
