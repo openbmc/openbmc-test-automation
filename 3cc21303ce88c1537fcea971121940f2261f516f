@@ -16,6 +16,29 @@
       "message": "Sridevi can u take a look at this",
       "revId": "3cc21303ce88c1537fcea971121940f2261f516f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf9b4bd7_675331e0",
+        "filename": "redfish/managers/test_bmc_logservices.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-02-19T12:15:13Z",
+      "side": 1,
+      "message": "Use IF block\n\n```\nIF\nEND\n```",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 0
+      },
+      "revId": "3cc21303ce88c1537fcea971121940f2261f516f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
