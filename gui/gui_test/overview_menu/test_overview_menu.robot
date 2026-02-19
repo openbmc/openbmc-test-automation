@@ -104,6 +104,7 @@ Verify Edit Network Setting Button
 Verify Event Under Critical Event Logs Section
     [Documentation]  Verify event under critical event logs section in case of any event.
     [Tags]  Verify_Event_Under_Critical_Event_Logs_Section
+    [Setup]  Redfish Purge Event Log
     [Teardown]  Redfish Purge Event Log
 
     Redfish Purge Event Log
@@ -156,14 +157,15 @@ Verify Server LED Turn On
     [Tags]  Verify_Server_LED_Turn_On
 
     # Turn Off the server LED via Redfish and refresh GUI.
-    Set IndicatorLED State  Off
+    #Set IndicatorLED State  Off
+    Set IndicatorLED State  True
     Refresh GUI
 
     # Turn ON the LED via GUI.
     Click Element  ${xpath_led_button}
 
     # Cross check that server LED ON state via Redfish.
-    Verify Identify LED State Via Redfish  Lit
+    Verify Identify LED State Via Redfish  True
 
 
 Verify Server LED Turn Off
@@ -171,14 +173,14 @@ Verify Server LED Turn Off
     [Tags]  Verify_Server_LED_Turn_Off
 
     # Turn On the server LED via Redfish and refresh GUI.
-    Set IndicatorLED State  Lit
+    Set IndicatorLED State  true
     Refresh GUI
 
     # Turn OFF the LED via GUI.
     Click Element  ${xpath_led_button}
 
     # Cross check that server LED off state via Redfish.
-    Verify Identify LED State Via Redfish  Off
+    Verify Identify LED State Via Redfish  False
 
 
 Verify BMC Time In Overview Page
@@ -331,7 +333,7 @@ Verify Server LED Turn Off And On With Readonly User
     Verify Error And Unauthorized Message On GUI
 
     # Turn ON the LED via GUI.
-    Set IndicatorLED State   Off
+    Set IndicatorLED State   false
     Refresh GUI
     Click Element  ${xpath_led_button}
     Verify Error And Unauthorized Message On GUI
@@ -365,7 +367,7 @@ Verify Identify LED State Via Redfish
     # Description of argument(s):
     # expected_state    Expected value of Identify LED.
 
-    ${led_state}=  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}  IndicatorLED
+    ${led_state}=  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}  LocationIndicatorActive
     Should Be True  '${led_state}' == '${expected_state}'
 
 Set IndicatorLED State
@@ -377,6 +379,6 @@ Set IndicatorLED State
     # expect_resp_code     Expected HTTPS response code. Default [200, 204]
 
 
-    Redfish.Patch  /redfish/v1/Systems/${SYSTEM_ID}  body={"IndicatorLED": "${led_state}"}
+    Redfish.Patch  /redfish/v1/Systems/${SYSTEM_ID}  body={"LocationIndicatorActive": ${led_state}}
     ...  valid_status_codes=${expect_resp_code}
 
