@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6596340_531b8e00",
+        "filename": "redfish/managers/test_bmc_logservices.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1001956
+      },
+      "writtenOn": "2026-02-19T15:02:14Z",
+      "side": 1,
+      "message": "Add period at the end of the comments.",
+      "revId": "3cc21303ce88c1537fcea971121940f2261f516f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cf9b4bd7_675331e0",
         "filename": "redfish/managers/test_bmc_logservices.robot",
         "patchSetId": 2
@@ -60,6 +77,23 @@
         "endLine": 122,
         "endChar": 13
       },
+      "revId": "3cc21303ce88c1537fcea971121940f2261f516f",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "919cc4ee_6433ead1",
+        "filename": "redfish/managers/test_bmc_logservices.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1001956
+      },
+      "writtenOn": "2026-02-19T15:02:14Z",
+      "side": 1,
+      "message": "collection -\u003e Collection",
       "revId": "3cc21303ce88c1537fcea971121940f2261f516f",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
