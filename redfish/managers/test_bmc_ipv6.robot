@@ -609,6 +609,19 @@ Enable SLAAC On Eth1 While Eth0 Is Configured With SLAAC And Verify Ping
     Wait For Host To Ping  ${ipv6_slaac_addr_2}
 
 
+Delete Multiple Static IPv6 Address And Verify
+    [Documentation]  Delete multiple static IPv6 address in single Redfish patch command
+    ...    and verify.
+    [Tags]  Delete_Multiple_Static_IPv6_Address_And_Verify
+    [Setup]    Run Keywords
+    ...    Configure IPv6 Address On BMC  ${test_ipv6_addr}  ${test_prefix_length}
+    ...    ${None}  ${CHANNEL_NUMBER}
+    ...    AND  Configure IPv6 Address On BMC  ${test_ipv6_addr1}  ${test_prefix_length}
+    ...    ${None}  ${CHANNEL_NUMBER}
+
+    Delete Multiple Static IPv6 Address On BMC  ${test_ipv6_addr}  ${test_ipv6_addr1}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -1261,3 +1274,63 @@ Configure Static IPv6 And Verify IP Reachability
     # Verify IPv4 and IPv6 reachability.
     Wait For Host To Ping  ${ipv6_addr}
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+
+Delete Multiple Static IPv6 Address On BMC
+    [Documentation]  Delete multiple static IPv6 address on BMC in single Redfish patch
+    ...    command and verify.
+    [Arguments]  ${ipv6_addr1}  ${ipv6_addr2}  ${channel_number}=${CHANNEL_NUMBER}
+    ...  ${valid_status_codes}=[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]
+
+    # Description of argument(s):
+    # ipv6_addr1          IPv6 address one to be deleted (e.g. "2001:1234:1234:1234::1234").
+    # ipv6_addr2          IPv6 address two to be deleted (e.g. "2001:1234:1234:1234::1234").
+    # channel_number      Channel number (1 - eth0 and 2 - eth1).
+    # valid_status_codes  Expected return code from patch operation
+    #                     (e.g. "200").  See prolog of rest_request
+    #                     method in redfish_plus.py for details.
+
+    ${ipv6_addr_list}=  Create List  ${ipv6_addr1}  ${ipv6_addr2}
+    ${empty_dict}=  Create Dictionary
+    ${patch_list}=  Create List
+
+    @{ipv6_network_configurations}=  Get IPv6 Network Configuration  ${channel_number}
+    FOR  ${ipv6_network_configuration}  IN  @{ipv6_network_configurations}
+        ${latest_ip}=  Set Variable  ${ipv6_network_configuration['Address']}
+        ${ip_match}=  Run Keyword And Return Status
+        ...    List Should Contain Value  ${ipv6_addr_list}  ${latest_ip}
+        IF  ${ip_match}
+            Append To List  ${patch_list}  ${null}
+        ELSE
+            Append To List  ${patch_list}  ${empty_dict}
+        END
+    END
+
+    ${ip_found}=  Run Keyword And Return Status  List Should Contain Value
+    ...  ${patch_list}  ${null}  msg=${ipv6_addr_list} does not exist on BMC
+    Pass Execution If  ${ip_found} == ${False}  ${ipv6_addr_list} does not exist on BMC
+
+    # Run patch command only if given IP is found on BMC.
+    ${data}=  Create Dictionary  IPv6StaticAddresses=${patch_list}
+
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
+
+    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+    ...    valid_status_codes=${valid_status_codes}
+
+    # Note: Network restart takes around 15-18s after patch request processing.
+    Sleep  ${NETWORK_TIMEOUT}s
+    Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
+
+    # IPv6 address that is deleted should not be there on BMC.
+    FOR  ${ipv6_addr}  IN  @{ipv6_addr_list}
+        ${delete_status}=  Run Keyword And Return Status  Verify IPv6 On BMC  ${ipv6_addr}
+        IF  '${valid_status_codes}' == '[${HTTP_OK},${HTTP_ACCEPTED},${HTTP_NO_CONTENT}]'
+            Should Be True  '${delete_status}' == '${False}'
+        ELSE
+            Should Be True  '${delete_status}' == '${True}'
+        END
+    END
+
+    Validate IPv6 Network Config On BMC
