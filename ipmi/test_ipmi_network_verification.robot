@@ -1,6 +1,6 @@
 *** Settings ***
-
 Documentation          Module to test IPMI network functionality.
+
 Resource               ../lib/ipmi_client.robot
 Resource               ../lib/openbmc_ffdc.robot
 Resource               ../lib/bmc_network_utils.robot
@@ -14,7 +14,7 @@ Suite Setup            Redfish.Login
 Test Setup             Printn
 Test Teardown          FFDC On Test Case Fail
 
-Test Tags             IPMI_Network_Verification
+Test Tags              IPMI_Network_Verification
 
 *** Variables ***
 
@@ -140,9 +140,9 @@ Verify Cipher Suite Entry Count
 
     # Convert minor cipher suite entry count from BCD format to integer. i.e. 01 to 1.
     ${cipher_suite_entry_count[1]}=  Convert To Integer  ${cipher_suite_entry_count[1]}
-    ${cnt}=  Get length  ${valid_ciphers}
+    ${cnt}=  Get Length  ${valid_ciphers}
 
-    Should be Equal  ${cipher_suite_entry_count[1]}  ${cnt}
+    Should Be Equal  ${cipher_suite_entry_count[1]}  ${cnt}
 
 
 Verify Authentication Type Support
@@ -184,7 +184,7 @@ Verify Set In Progress
     ${set_in_progress_value}=  Set Variable  ${ipmi_output[1]}
 
     # 01b = set in progress.
-    Should be Equal  ${set_in_progress_value}  01
+    Should Be Equal  ${set_in_progress_value}  01
 
     # set back to default.
     Run IPMI Command  ${IPMI_RAW_CMD['LAN_Config_Params']['Set'][0]} ${CHANNEL_NUMBER} 0x00 0x00
@@ -198,7 +198,7 @@ Verify Set In Progress
     ${set_in_progress_value}=  Set Variable  ${ipmi_output[1]}
 
     # 00b = set complete.
-    Should be Equal  ${set_in_progress_value}  00
+    Should Be Equal  ${set_in_progress_value}  00
 
 
 Verify Invalid Set MAC Address Via IPMI
@@ -236,7 +236,7 @@ Verify Get And Set MAC Address Via IPMI
     ${ipmi_output_split}=  Split String  ${ipmi_output}
     ${get_mac}=   Evaluate  ":".join(${ipmi_output_split[1:]})
 
-    Should be Equal  ${get_mac}  ${set_mac_address}
+    Should Be Equal  ${get_mac}  ${set_mac_address}
 
 
 Verify Cipher Suite Privilege
@@ -249,16 +249,16 @@ Verify Cipher Suite Privilege
     ...  ${IPMI_RAW_CMD['LAN_Config_Params']['Get'][0]} ${CHANNEL_NUMBER} 0x18 0x00 0x00
     ${cipher_suite_privilege}=  Split String  ${ipmi_output}
 
-    Should be Equal  '${${cipher_suite_privilege}[0]}'  '11'
+    Should Be Equal  '${${cipher_suite_privilege}[0]}'  '11'
     # 00b = reserved.
     Should Contain Any  '${cipher_suite_privilege[1]}'  '00'  '0'
 
-    ${cipher_suite_privilege_length}=  Get length  ${cipher_suite_privilege}
-    Should be Equal  '${cipher_suite_privilege_length}'  '10'
+    ${cipher_suite_privilege_length}=  Get Length  ${cipher_suite_privilege}
+    Should Be Equal  '${cipher_suite_privilege_length}'  '10'
 
     #44b = Maximum privilege for cipher suite.
     FOR  ${channel_number}  IN RANGE  2  ${cipher_suite_privilege_length}
-      Should be Equal  '${cipher_suite_privilege[${channel_number}]}'  '44'
+      Should Be Equal  '${cipher_suite_privilege[${channel_number}]}'  '44'
     END
 
 
@@ -279,7 +279,7 @@ Verify IP Address Source Set To Address Loaded By BIOS
     [Tags]  Verify_IP_Address_Source_Set_To_Address_Loaded_By_BIOS
 
     # Set IP address source to address loaded by BIOS or system software.
-    ${ipmi_output}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['LAN_Config_Params']['Set'][3]}*
+    ${ipmi_output}=  Run Keyword And Expect Error  *${IPMI_RAW_CMD['LAN_Config_Params']['Set'][3]}*
     ...  Run Inband IPMI Raw Command
     ...  ${IPMI_RAW_CMD['LAN_Config_Params']['Set'][0]} 0x0${CHANNEL_NUMBER} 0x04 0x03
 
@@ -290,7 +290,7 @@ Verify IP Address Source Set To Address Obtained By BMC
     [Tags]  Verify_IP_Address_Source_Set_To_Address_Obtained_By_BMC
 
     # Set IP address source to address obtained by BMC running other address assignment protocol
-    ${ipmi_output}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['LAN_Config_Params']['Set'][3]}*
+    ${ipmi_output}=  Run Keyword And Expect Error  *${IPMI_RAW_CMD['LAN_Config_Params']['Set'][3]}*
     ...  Run Inband IPMI Raw Command
     ...  ${IPMI_RAW_CMD['LAN_Config_Params']['Set'][0]} 0x0${CHANNEL_NUMBER} 0x04 0x04
 
@@ -300,7 +300,7 @@ Verify IP Address Source Set To Unspecified Address Source
     [Tags]  Verify_IP_Address_Source_Set_To_Unspecified_Address_Source
 
     # Set IP address source to unspecified address source.
-    ${ipmi_output}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['LAN_Config_Params']['Set'][3]}*
+    ${ipmi_output}=  Run Keyword And Expect Error  *${IPMI_RAW_CMD['LAN_Config_Params']['Set'][3]}*
     ...  Run Inband IPMI Raw Command
     ...  ${IPMI_RAW_CMD['LAN_Config_Params']['Set'][0]} 0x0${CHANNEL_NUMBER} 0x04 0x00
 
@@ -356,7 +356,7 @@ Verify MAC Address
 Fetch The Default Mac Address
     [Documentation]  Fetch The Default MAC Address.
 
-     # Get Default MAC Address.
+    # Get Default MAC Address.
     ${ipmi_get_default_mac}=  Run Inband IPMI Raw Command
     ...  ${IPMI_RAW_CMD['LAN_Config_Params']['Get'][0]} ${CHANNEL_NUMBER} 0x05 0x00 0x00
     Set Test Variable  ${ipmi_get_default_mac}
@@ -383,4 +383,4 @@ Set Default Mac And Verify
     ...  ${IPMI_RAW_CMD['LAN_Config_Params']['Get'][0]} ${CHANNEL_NUMBER} 0x05 0x00 0x00
 
     ${ipmi_out}=  Split String  ${ipmi_get_mac}
-    Should be Equal  ${default_mac}  ${ipmi_out}
+    Should Be Equal  ${default_mac}  ${ipmi_out}

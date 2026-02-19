@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation    Module to test IPMI SEL Time functionality.
 ...              Pre-requisite Condition : Client Machine and BMC should be in
 ...              Same TimeZone (example : UST)
@@ -26,18 +25,18 @@ Documentation    Module to test IPMI SEL Time functionality.
 ...              Gets BMC Current Time and subtracts 1 day and compare against BMC native command (date),
 ...              Add SEL Entry for all the above scenarios and compare against BMC native command (date).
 
+Library          Collections
+Library          DateTime
+Library          String
 Resource         ../lib/ipmi_client.robot
 Resource         ../lib/openbmc_ffdc.robot
-Library          DateTime
-Library          Collections
-Library          String
 Library          ../lib/ipmi_utils.py
 Variables        ../data/ipmi_raw_cmd_table.py
 
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
-Test Tags       IPMI_SEL_Time
+Test Tags        IPMI_SEL_Time
 
 *** Variables ***
 
@@ -72,7 +71,7 @@ Verify Set SEL Time On NTP Mode
     ${sel_date}=  Get Specific Sel Date  5
 
     # Gives Hexa decimal raw command data request with the prefix of 0x.
-    ${sel_date_raw}=  Converting Date to HexaDecimal  ${sel_date}
+    ${sel_date_raw}=  Converting Date To HexaDecimal  ${sel_date}
 
     ${Set_sel_time}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][2]}*
     ...  Run IPMI Command  ${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][0]} ${sel_date_raw}
@@ -87,7 +86,7 @@ Verify SEL Set Time For Specific Time
     ${sel_date}=  Get Specific Sel Date  5
 
     # Gives Hexa decimal raw command data request with the prefix of 0x.
-    ${sel_date_raw}=  Converting Date to HexaDecimal  ${sel_date}
+    ${sel_date_raw}=  Converting Date To HexaDecimal  ${sel_date}
 
     # Set SEL Entry command.
     Set SEL Time Entry Via Raw Command  ${sel_date_raw}
@@ -102,7 +101,7 @@ Verify SEL Set Time For Specific Time
     ...  msg=Set SEL Time Not Working
 
     # Get BMC time (native) and compare with set sel time given.
-    ${bmc_time}=  Get Current Date from BMC
+    ${bmc_time}=  Get Current Date From BMC
 
     ${difference}=  Get Time Difference  ${bmc_time}  ${sel_date}
     Should Be True  0<=${difference}<=6
@@ -126,7 +125,7 @@ Verify Set SEL Time With Future Date And Time
     Should Be True  0<=${difference}<=2
 
     # Difference of time between BMC Date and Get SEL Time.
-    ${bmc_time}=  Get Current Date from BMC
+    ${bmc_time}=  Get Current Date From BMC
     ${difference}=  Get Time Difference  ${bmc_time}  ${get_sel_time}
     Should Be True  0<=${difference}<=2
 
@@ -150,7 +149,7 @@ Verify Set SEL Time With Past Date And Time
         ${difference}=  Get Time Difference  ${get_sel_time}  ${set_sel_time}
         Should Be True  0<=${difference}<=2
         # Difference of time between BMC Date and Get SEL Time.
-        ${bmc_time}=  Get Current Date from BMC
+        ${bmc_time}=  Get Current Date From BMC
         ${difference}=  Get Time Difference  ${bmc_time}  ${get_sel_time}
         Should Be True  0<=${difference}<=2
     ELSE
@@ -163,10 +162,10 @@ Verify SEL Set Time For Invalid Data Request
     [Tags]  Verify_SEL_Set_Time_For_Invalid_Data_Request
 
     # Gets BMC current date via date command.
-    ${current_date}=  Get Current Date from BMC
+    ${current_date}=  Get Current Date From BMC
 
     # Gives hexa decimal Raw command data request with the prefix of 0x.
-    ${sel_date_raw}=  Converting Date to HexaDecimal  ${current_date}
+    ${sel_date_raw}=  Converting Date To HexaDecimal  ${current_date}
 
     # Set Invalid SEL Time with one extra request byte.
     ${Set_seltime_invalid}=  Run Keyword and Expect Error  *${IPMI_RAW_CMD['SEL_entry']['Set_SEL_Time'][4]}*
@@ -179,10 +178,10 @@ Verify SEL Set Time For Incomplete Data Request
     [Tags]  Verify_SEL_Set_Time_For_Incomplete_Data_Request
 
     # Gets BMC current date via date command.
-    ${current_date}=  Get Current Date from BMC
+    ${current_date}=  Get Current Date From BMC
 
     # Gives hexa decimal raw command data request with the prefix of 0x.
-    ${sel_date_raw}=  Converting Date to HexaDecimal  ${current_date}
+    ${sel_date_raw}=  Converting Date To HexaDecimal  ${current_date}
 
     # For data request less than expected byes, remove last byte.
     ${sel_date_raw}=  Split String  ${sel_date_raw}
@@ -206,7 +205,7 @@ Verify SEL Time In SEL Entry
     ${sel_date}=  Get Specific Sel Date  5
 
     # Gives hexa decimal raw command data request with the prefix of 0x.
-    ${sel_date_raw}=  Converting Date to HexaDecimal  ${sel_date}
+    ${sel_date_raw}=  Converting Date To HexaDecimal  ${sel_date}
 
     # Set SEL Entry Command.
     Set SEL Time Entry Via Raw Command  ${sel_date_raw}
@@ -221,7 +220,7 @@ Verify SEL Time In SEL Entry
     ...  msg=Set SEL Time Not Working
 
     # Get BMC time (native) and compare with set sel time given.
-    ${bmc_time}=  Get Current Date from BMC
+    ${bmc_time}=  Get Current Date From BMC
 
     ${difference}=  Get Time Difference  ${bmc_time}  ${sel_date}
     Should Be True  0<=${difference}<=6
@@ -273,7 +272,7 @@ Verify SEL Time In SEL Entry For Future Date and Time
     Should Be True  0<=${difference}<=2
 
     # Difference of time between BMC Date and Get SEL Time.
-    ${bmc_time}=  Get Current Date from BMC
+    ${bmc_time}=  Get Current Date From BMC
     ${difference}=  Get Time Difference  ${bmc_time}  ${get_sel_time}
     Should Be True  0<=${difference}<=2
 
@@ -325,7 +324,7 @@ Verify SEL Time In SEL Entry For Past Date And Time
         ${difference}=  Get Time Difference  ${get_sel_time}  ${set_sel_time}
         Should Be True  0<=${difference}<=2
         # Difference of time between BMC Date and Get SEL Time.
-        ${bmc_time}=  Get Current Date from BMC
+        ${bmc_time}=  Get Current Date From BMC
         ${difference}=  Get Time Difference  ${bmc_time}  ${get_sel_time}
         Should Be True  0<=${difference}<=2
 
@@ -428,7 +427,7 @@ Change Time Sync Mode Via Redfish
     ${data}=  Create Dictionary  NTP=${mode}
 
     # Patches the obtained body to the given url.
-    Redfish.patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
     ...   valid_status_codes=[${HTTP_NO_CONTENT}]
 
     Sleep  ${NETWORK_RESTART_TIME}
@@ -501,7 +500,7 @@ Get Specific Sel Date
     # Description of argument(s):
     # ${year}             Can be any number of years (say 5 year).
 
-    ${current_date}=  Get Current Date from BMC
+    ${current_date}=  Get Current Date From BMC
 
     # Converting given years to days by multiplying with 365days and adding the days to current date.
     ${days}=  Evaluate  365*${year}+1
@@ -511,7 +510,7 @@ Get Specific Sel Date
     RETURN   ${date}
 
 
-Converting Date to HexaDecimal
+Converting Date To HexaDecimal
     [Documentation]  Converting the date into hexa decimal values.
     [Arguments]  ${date}
 
@@ -560,7 +559,7 @@ Identify SEL Time
     # time             Can be any number of hours or minutes in format %H:%M:%S.
 
     # Gets BMC current date via date command.
-    ${current_date}=  Get Current Date from BMC
+    ${current_date}=  Get Current Date From BMC
 
     ${modifying_date_status}=  Run Keyword And Return Status  Should Contain  ${time}  +
 
@@ -568,14 +567,14 @@ Identify SEL Time
     ...  ${modifying_date_status} == True  ${time.split("+")[-1]}
     ...  ${modifying_date_status} == False  ${time.split("-")[-1]}
 
-    ${datetime} =  Set Variable If  ${modifying_date_status} == True
+    ${datetime}=  Set Variable If  ${modifying_date_status} == True
     ...    Add Time To Date
     ...    ${current_date}  ${date_time}  result_format=%m/%d/%Y %H:%M:%S  date_format=%m/%d/%Y %H:%M:%S
     ...  ELSE IF  ${modifying_date_status} == False
     ...    Subtract Time From Date
     ...    ${current_date}  ${date_time}  result_format=%m/%d/%Y %H:%M:%S  date_format=%m/%d/%Y %H:%M:%S
 
-    #Set SEL Time.
+    # Set SEL Time.
     ${quoted_date}=  Fetch Date  ${datetime}
 
     RETURN  ${quoted_date}  ${datetime}
