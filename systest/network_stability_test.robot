@@ -5,10 +5,10 @@ Documentation    Module to test network stability.
 Resource         ../lib/os_utilities.robot
 Library          ../lib/os_utils_keywords.py
 
-Test Setup      Test Setup Execution
-Test Teardown   Test Teardown Execution
+Test Setup       Test Setup Execution
+Test Teardown    Test Teardown Execution
 
-Test Tags      Network_Stability
+Test Tags        Network_Stability
 
 *** Variables ****
 
@@ -61,6 +61,7 @@ Execute Network Test
 
 Start Network Test
     [Documentation]  Start network stress test.
+
     BMC Network Payload
     Check HTX Run Status
 
