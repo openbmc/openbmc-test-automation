@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "700579c5_d2ee1d9c",
+        "filename": "lib/protocol_setting_utils.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000053
+      },
+      "writtenOn": "2026-02-20T05:20:12Z",
+      "side": 1,
+      "message": "add it in If condition: OR (role\u003dadmin and port\u003d2200)",
+      "revId": "778d27888197c0d45a7ce43f968e73cc2f0505cf",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
