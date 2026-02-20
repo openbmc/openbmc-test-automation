@@ -579,6 +579,20 @@ IPMI_RAW_CMD = {
             "0x00 0x08 0x03 0x00 0x00",
             "Request data length invalid",
         ],
+        "Set_Chassis_Boot_Flag": [
+            # raw command, expected output(s), comment
+            "0x00 0x08 0x05 0x60 0x00 0x00 0x00",
+            "0x00 0x08 0x05",
+            "0x00 0x08 0x05 0x60",
+            "0x00 0x00 0x00",
+            "0x00 0x00 0x00 0x00",
+            "Request data length invalid",
+        ],
+        "Get_Chassis_Boot_Flag": [
+            # raw command, expected output(s), comment
+            "0x00 0x09 0x05 0x00 0x00",
+            "Request data length invalid",
+        ],
     },
     "Get Channel Auth Cap": {
         "get": [
