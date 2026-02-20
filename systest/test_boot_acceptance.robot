@@ -1,4 +1,5 @@
 *** Settings ***
+
 Documentation  Make a general hardware stress in a partition with all the
 ...  resources available.
 
@@ -49,7 +50,7 @@ Suite Setup     Suite Setup Execution
 Suite Teardown  Collect HTX Log Files
 Test Teardown   FFDC On Test Case Fail
 
-Test Tags      Boot_Acceptance
+Test Tags       Boot_Acceptance
 
 *** Variables ***
 
@@ -84,6 +85,7 @@ Test Acceptance Boot
     Shutdown HTX Exerciser
 
 *** Keywords ***
+
 Suite Setup Execution
     [Documentation]  Do setup tasks.
 
