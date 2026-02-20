@@ -1,6 +1,6 @@
 *** Settings ***
-
 Documentation    Module to test PLDM base commands.
+
 Library          ../lib/pldm_utils.py
 Variables        ../data/pldm_variables.py
 Resource         ../lib/openbmc_ffdc.robot
@@ -8,7 +8,7 @@ Resource         ../lib/openbmc_ffdc.robot
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
 
-Test Tags       Pldm_Base
+Test Tags        Pldm_Base
 
 *** Test Cases ***
 

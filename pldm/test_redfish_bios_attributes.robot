@@ -14,13 +14,12 @@ Test Teardown    FFDC On Test Case Fail
 Suite Setup      Redfish BIOS Suite Setup
 Suite Teardown   Run Keyword And Ignore Error  Redfish BIOS Suite Cleanup
 
-Test Tags       Redfish_Bios_Attributes
+Test Tags        Redfish_Bios_Attributes
 
 *** Variables ***
 
 ${BIOS_ORIGINAL_DATA}       ${EMPTY}
 ${ATTR_TABLE_DATA}          ${EMPTY}
-
 
 *** Test Cases ***
 

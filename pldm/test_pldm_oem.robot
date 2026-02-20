@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation    Module to test PLDM oem commands.
 
 Library          ../lib/pldm_utils.py
@@ -9,7 +8,7 @@ Resource         ../lib/openbmc_ffdc.robot
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
 
-Test Tags       Pldm_OEM
+Test Tags        Pldm_OEM
 
 *** Test Cases ***
 

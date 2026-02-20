@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation    Module to test PLDM BIOS commands.
 
 Library          Collections
@@ -13,7 +12,7 @@ Test Teardown    FFDC On Test Case Fail
 Suite Setup      PLDM BIOS Suite Setup
 Suite Teardown   Run Keyword And Ignore Error  PLDM BIOS Suite Cleanup
 
-Test Tags       Pldm_Bios
+Test Tags        Pldm_Bios
 
 *** Test Cases ***
 
@@ -30,7 +29,7 @@ Verify GetDateTime
     @{date_time}=  Split String  ${pldm_output['Response']}  ${SPACE}
     @{time}=  Split String  ${date_time}[1]  :
 
-    ${bmc_date}=  Get Current Date from BMC
+    ${bmc_date}=  Get Current Date From BMC
     # Date format example: 2022-10-12 16:31:17
     Log To Console  BMC Date: ${bmc_date}
     # Example : ['2022-10-12', '16:31:17']
@@ -142,10 +141,10 @@ Set Time To Manual Mode
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
 
-Get Current Date from BMC
+Get Current Date From BMC
     [Documentation]  Runs the date command from BMC and returns current date and time.
 
-    # Get Current Date from BMC.
+    # Get Current Date From BMC.
     ${date}  ${stderr}  ${rc}=  BMC Execute Command   date
 
     # Split the string and remove first and 2nd last value from the list and

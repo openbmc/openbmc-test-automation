@@ -9,6 +9,7 @@ Library          ../../lib/utils.py
 
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
+
 Test Tags        Test_Sensor_Monitoring
 
 *** Variables ***
@@ -17,7 +18,7 @@ Test Tags        Test_Sensor_Monitoring
 ${OPENBMC_CONN_METHOD}  ssh
 ${IPMI_COMMAND}         Inband
 
-** Test Cases **
+*** Test Cases ***
 
 Verify Sensor Monitoring
     [Documentation]  Verify the redfish sensor monitoring according to the BMC
@@ -31,14 +32,14 @@ Verify Sensor Monitoring
     ${resp}=  Redfish.Get  /redfish/v1/Chassis/${CHASSIS_ID}
     ...  valid_status_codes=[${HTTP_OK}]
 
-   Should Be Equal As Strings  ${resp.dict['Oem']['Public']['DiscreteSensors']['@odata.id']}
-   ...  /redfish/v1/Chassis/${CHASSIS_ID}/DiscreteSensors
-   Should Be Equal As Strings  ${resp.dict['Oem']['Public']['ThresholdSensors']['@odata.id']}
-   ...  /redfish/v1/Chassis/${CHASSIS_ID}/ThresholdSensors
-   Should Be Equal As Strings  ${resp.dict['Thermal']['@odata.id']}
-   ...  /redfish/v1/Chassis/${CHASSIS_ID}/Thermal
-   Should Be Equal As Strings  ${resp.dict['Power']['@odata.id']}
-   ...  /redfish/v1/Chassis/${CHASSIS_ID}/Power
+    Should Be Equal As Strings  ${resp.dict['Oem']['Public']['DiscreteSensors']['@odata.id']}
+    ...  /redfish/v1/Chassis/${CHASSIS_ID}/DiscreteSensors
+    Should Be Equal As Strings  ${resp.dict['Oem']['Public']['ThresholdSensors']['@odata.id']}
+    ...  /redfish/v1/Chassis/${CHASSIS_ID}/ThresholdSensors
+    Should Be Equal As Strings  ${resp.dict['Thermal']['@odata.id']}
+    ...  /redfish/v1/Chassis/${CHASSIS_ID}/Thermal
+    Should Be Equal As Strings  ${resp.dict['Power']['@odata.id']}
+    ...  /redfish/v1/Chassis/${CHASSIS_ID}/Power
 
     # Check sensors in /redfish/v1/Chassis/{ChassisId}/Power
     ${resp}=  Redfish.Get  /redfish/v1/Chassis/${CHASSIS_ID}/Power
@@ -173,9 +174,9 @@ Check Sensor Status And Reading Via Sensor Name
     ...  Append To List  ${INVALID_SENSORS}  ${sensor_name}
 
     ${condition_str}=  Catenate
-        ...  '${resp.dict['Status']['Health']}' != 'OK'
-        ...  or '${resp.dict['Status']['State']}' != 'Enabled'
-        ...  or ${resp.dict['Reading']} == ${null}
+    ...  '${resp.dict['Status']['Health']}' != 'OK'
+    ...  or '${resp.dict['Status']['State']}' != 'Enabled'
+    ...  or ${resp.dict['Reading']} == ${null}
 
     IF  ${condition_str}
         Append To List  ${INVALID_SENSORS}  ${sensor_name}
@@ -199,9 +200,9 @@ Check Sensor Status And Reading Via Sensor Info
         ...  or '${sensor_info['Status']['State']}' != 'Enabled'
         ...  or ${sensor_info['${reading_unit}']} == ${null}
 
-         IF  ${condition_str}
-             Append To List  ${INVALID_SENSORS}  ${sensor_info['Name']}
-         END
+        IF  ${condition_str}
+            Append To List  ${INVALID_SENSORS}  ${sensor_info['Name']}
+        END
     END
 
 
@@ -227,7 +228,7 @@ Check If Expected Sensors Are Present
     #           "Fan0",
     #           ...
     #       }...
-    #}
+    # }
 
     ${curr_sensor_name_list}=  Get Sensors Name List From Redfish
     ...  ${sensor_info_list}

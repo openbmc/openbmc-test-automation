@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation    Module to test PLDM platform commands.
 
 Library           ../lib/pldm_utils.py

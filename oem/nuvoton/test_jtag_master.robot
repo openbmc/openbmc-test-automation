@@ -4,7 +4,7 @@ Documentation    Module to test npcm750 JTAG Master.
 Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/connection_client.robot
 
-Test Tags       JTAG_Master
+Test Tags        JTAG_Master
 
 Suite Setup      Suite Setup Execution
 
@@ -62,7 +62,7 @@ Suite Setup Execution
 
     ${status}=  Run Keyword And Return Status  Variable Should Exist
     ...  ${TEST_PROGRAM_CPLD}
-    ${value}=  Set Variable if  ${status} == ${TRUE}  ${TEST_PROGRAM_CPLD}  0
+    ${value}=  Set Variable If  ${status} == ${TRUE}  ${TEST_PROGRAM_CPLD}  0
     Set Global Variable  ${program_cpld}  ${value}
 
     ${code_base_dir_path}=  Get Code Base Dir Path
@@ -94,7 +94,7 @@ Suite Setup Execution
         Get File From SFTP Server  ${cpld_firmware2}
     END
 
-    scp.Open connection  ${OPENBMC_HOST}  username=${OPENBMC_USERNAME}
+    scp.Open Connection  ${OPENBMC_HOST}  username=${OPENBMC_USERNAME}
     ...  password=${OPENBMC_PASSWORD}
     Put File To BMC  ${readid_svf}
     IF  ${program_cpld} == 1
