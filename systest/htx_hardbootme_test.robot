@@ -51,7 +51,7 @@ Suite Setup     Run Keyword And Ignore Error  Start SOL Console Logging
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 
-Test Tags      HTX_Hardbootme
+Test Tags       HTX_Hardbootme
 
 *** Variables ****
 
@@ -112,6 +112,7 @@ Hard Bootme Test
 
 Run HTX Exerciser
     [Documentation]  Run HTX exerciser.
+
     # Test Flow:
     # - Power on.
     # - Establish SSH connection session.
@@ -174,6 +175,7 @@ Run HTX Exerciser
 Do Inventory And Compare
     [Documentation]  Do inventory and compare.
     [Arguments]  ${inventory_file_path}  ${PREV_INV_FILE_PATH}
+
     # Description of argument(s):
     # inventory_file_path  The file to receive the inventory snapshot.
     # PREV_INV_FILE_PATH   The previous inventory to compare with.
@@ -189,6 +191,7 @@ Do Inventory And Compare
 Compare Json Inventory Files
     [Documentation]  Compare JSON inventory files.
     [Arguments]  ${file1}  ${file2}
+
     # Description of argument(s):
     # file1   A file that has an inventory snapshot in JSON format.
     # file2   A file that has an inventory snapshot, to compare with file1.
@@ -204,6 +207,7 @@ Compare Json Inventory Files
 Report Inventory Mismatch
     [Documentation]  Report inventory mismatch.
     [Arguments]  ${diff_rc}  ${json_diff_file_path}
+
     # Description of argument(s):
     # diff_rc              The failing return code from the difference check.
     # json_diff_file_path  The file that has the latest inventory snapshot.
@@ -220,6 +224,7 @@ Report Inventory Mismatch
 
 Loop HTX Health Check
     [Documentation]  Run until HTX exerciser fails.
+
     Repeat Keyword  ${HTX_DURATION}
     ...  Run Keywords  Check HTX Run Status
     ...  AND  Check For Error Logs  ${ESEL_IGNORE_LIST}

@@ -1,4 +1,5 @@
 *** Settings ***
+
 Documentation    Stress the system GPUs using the HTX exerciser.
 
 # Test Parameters:
@@ -24,7 +25,7 @@ Suite Setup      Run Keyword  Start SOL Console Logging
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
-Test Tags       GPU_Stress
+Test Tags        GPU_Stress
 
 *** Variables ****
 

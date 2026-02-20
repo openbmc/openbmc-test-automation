@@ -11,7 +11,7 @@ Resource          ../lib/esel_utils.robot
 Suite Setup       Suite Setup Execution
 Test Teardown     Post Test Case Execution
 
-Test Tags        BMC_Poll_Errors
+Test Tags         BMC_Poll_Errors
 
 *** Variables ***
 
@@ -28,7 +28,6 @@ ${POLL_INTERVAL}  10 second
 
 Poll BMC For Errors
     [Documentation]  Poll BMC for errors.
-    ...  exist.
     [Tags]  Poll_BMC_For_Errors
 
     Redfish.Login
@@ -64,7 +63,7 @@ Suite Setup Execution
 
 Post Test Case Execution
     [Documentation]  Do the post test teardown.
-    ...  1. Capture FFDC on test failure.
+    ...  Capture FFDC on test failure.
 
     FFDC On Test Case Fail
     Redfish.Logout

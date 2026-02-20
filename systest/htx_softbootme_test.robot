@@ -22,7 +22,7 @@ Suite Setup     Run Keyword And Ignore Error  Start SOL Console Logging
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 
-Test Tags      HTX_Softbootme
+Test Tags       HTX_Softbootme
 
 *** Variables ****
 
@@ -49,6 +49,7 @@ Soft Bootme Test
 
 Run HTX Soft Bootme Exerciser
     [Documentation]  Run HTX Soft Bootme Exerciser.
+
     # Test Flow:
     # - Power on.
     # - Create HTX mdt profile.
