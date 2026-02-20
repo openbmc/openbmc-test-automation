@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation    Module to test PLDM FRU (Field Replaceable Unit) commands.
 
 Library          ../lib/pldm_utils.py
@@ -9,7 +8,7 @@ Resource         ../lib/openbmc_ffdc.robot
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
 
-Test Tags       Pldm_FRU
+Test Tags        Pldm_FRU
 
 *** Test Cases ***
 
@@ -41,7 +40,7 @@ Verify GetFruRecordTable
 
     ${pldm_output}=  Pldmtool  fru GetFruRecordTable
     Should Not Be Empty  ${pldm_output}
-    #TODO: Verify the fru table content.
+    # TODO: Verify the fru table content.
 
 Verify GetFRURecordByOption
     [Documentation]  Verify GetFRURecordByOption response message for

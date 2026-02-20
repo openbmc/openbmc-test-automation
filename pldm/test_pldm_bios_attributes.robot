@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation    Module to test PLDM BIOS attribute types.
 
 Library          Collections
@@ -13,13 +12,12 @@ Test Teardown    FFDC On Test Case Fail
 Suite Setup      PLDM BIOS Attribute Suite Setup
 Suite Teardown   PLDM BIOS Attribute Suite Cleanup
 
-Test Tags       Pldm_Bios_Attributes
+Test Tags        Pldm_Bios_Attributes
 
 *** Variables ***
 
 ${bios_original_data}       ${EMPTY}
 ${attr_table_data}          ${EMPTY}
-
 
 *** Test Cases ***
 
