@@ -49,7 +49,7 @@ Suite Setup     Suite Setup Execution
 Suite Teardown  Collect HTX Log Files
 Test Teardown   FFDC On Test Case Fail
 
-Test Tags      Boot_Acceptance
+Test Tags       Boot_Acceptance
 
 *** Variables ***
 

@@ -51,7 +51,7 @@ Suite Setup     Run Keyword And Ignore Error  Start SOL Console Logging
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 
-Test Tags      HTX_Hardbootme
+Test Tags       HTX_Hardbootme
 
 *** Variables ****
 
@@ -220,6 +220,7 @@ Report Inventory Mismatch
 
 Loop HTX Health Check
     [Documentation]  Run until HTX exerciser fails.
+
     Repeat Keyword  ${HTX_DURATION}
     ...  Run Keywords  Check HTX Run Status
     ...  AND  Check For Error Logs  ${ESEL_IGNORE_LIST}
