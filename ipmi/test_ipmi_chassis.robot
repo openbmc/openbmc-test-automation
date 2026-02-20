@@ -6,6 +6,7 @@ Resource         ../lib/openbmc_ffdc.robot
 Resource         ../lib/boot_utils.robot
 Resource         ../lib/bmc_dbus.robot
 Library          ../lib/ipmi_utils.py
+Library          Collections
 Variables        ../data/ipmi_raw_cmd_table.py
 
 Suite Setup      Redfish.Login
@@ -21,6 +22,14 @@ ${IPMI_POWEROFF_WAIT_TIMEOUT}      3
 ${busctl_settings}                 xyz.openbmc_project.Settings
 ${chassis_capabilities_dbus_URL}   /xyz/openbmc_project/Control/ChassisCapabilities
 &{BYTE_DESCRIPTION}                set_complete=0    set_in_progress=1
+${DEFAULT_Chassis_Boot_Flag}       ${EMPTY}
+
+# valid selector values (0 - None, 4- pxe, 8- harddisk,
+# 20- CD/DVD, 60 - removable media (usb)).
+@{Valid_Selector_Values}           0  4  8  20  24  60
+
+# Boot flags data for single time boot and persistent boot.
+@{System_Boot_Flags_Data}         160  224
 
 *** Test Cases ***
 
@@ -251,6 +260,42 @@ Verify Chassis System Boot Option With Invalid Data Length
     ${IPMI_RAW_CMD['system_boot_options']['Get_Boot_Options'][1]}     0xc7
     ${IPMI_RAW_CMD['system_boot_options']['Set_Boot_Options'][1]}     0xc7
 
+Verify Chassis System Boot Options Boot Flags Via IPMI
+    [Documentation]    Verify Chassis System Boot Options Boot Flags Via IPMI.
+    [Tags]    Verify_Chassis_System_Boot_Options_Boot_Flags_Via_IPMI
+    [Setup]    Get Default Chassis System Boot Options Boot Flags Via IPMI
+    [Teardown]    Set Default Chassis System Boot Options Boot Flags Via IPMI
+
+    FOR  ${value}  IN  @{System_Boot_Flags_Data}
+
+        # Set system boot flags data for system boot flags values.
+        ${data_hex}=    Convert To Hex    ${value}    length=2    lowercase=${True}
+        Set Chassis System Boot Flags Data Via Ipmi    data=0x${data_hex}
+
+        # Check chassis system boot options bmc boot Flag Data.
+        ${resp}=  Run IPMI Command
+        ...  ${IPMI_RAW_CMD['system_boot_options']['Get_Chassis_Boot_Flag'][0]}
+
+        ${resp}=  Strip String  ${resp}
+        ${expected_output}=  Catenate  01 05 ${data_hex} 00 00 00 00
+        Should Be Equal As Strings    ${resp}    ${expected_output}
+    END
+
+    FOR  ${value}  IN  @{Valid_Selector_Values}
+
+        # Set system boot flags data for valid selector values.
+        ${data_hex}=    Convert To Hex    ${value}    length=2    lowercase=${True}
+        Set Chassis System Boot Flags Data For Valid Selector Via Ipmi    data=0x${data_hex}
+
+        # Check chassis system boot options bmc boot flag data.
+        ${resp}=  Run IPMI Command
+        ...  ${IPMI_RAW_CMD['system_boot_options']['Get_Chassis_Boot_Flag'][0]}
+
+        ${resp}=  Strip String  ${resp}
+        ${expected_output}=  Catenate  01 05 60 ${data_hex} 00 00 00
+        Should Be Equal As Strings    ${resp}    ${expected_output}
+
+    END
 
 *** Keywords ***
 
@@ -402,4 +447,63 @@ Set BMC Boot Flag Valid Bit Clearing Via IPMI
     # flag_valid_bit   To set the default bmc boot flag valid bit clearing value.
 
     ${ipmi_cmd}=  Catenate  ${IPMI_RAW_CMD['system_boot_options']['Set_Boot_Flag'][0]}  ${flag_valid_bit}
+    Run IPMI Command  ${ipmi_cmd}
+
+Get Default Chassis System Boot Options Boot Flags Via IPMI
+    [Documentation]    Get Default Chassis System Boot Options Boot Flags Via IPMI.
+    [Arguments]    ${default}=True
+
+    # Description of argument(s):
+    # default   To get the default chassis system boot options boot flags value(e.g. "True", "False").
+
+    ${resp}=  Run IPMI Command
+    ...  ${IPMI_RAW_CMD['system_boot_options']['Get_Chassis_Boot_Flag'][0]}
+
+    IF  ${default}
+        @{boot_flag_parts}=  Split String  ${resp}
+        ${boot_flag_parts}=  Get Slice From List  ${boot_flag_parts}  2
+        ${boot_flag_count}=  Get Length  ${boot_flag_parts}
+        FOR  ${index}  IN RANGE  ${boot_flag_count}
+            ${prefixed}=  Catenate  SEPARATOR=  0x${boot_flag_parts[${index}]}
+            Set List Value  ${boot_flag_parts}  ${index}  ${prefixed}
+        END
+        ${boot_flag_data}=  Catenate  @{boot_flag_parts}
+        Set Suite Variable  ${DEFAULT_Chassis_Boot_Flag}  ${boot_flag_data}
+    ELSE
+        RETURN  ${resp}
+    END
+
+Set Default Chassis System Boot Options Boot Flags Via IPMI
+    [Documentation]    Set Default Chassis System Boot Options Boot Flags Via IPMI.
+    [Arguments]    ${flag_valid_bit}=${DEFAULT_Chassis_Boot_Flag}
+
+    # Description of argument(s):
+    # flag_valid_bit   To set the default chassis system boot options boot flags value.
+
+    ${ipmi_cmd}=  Catenate  ${IPMI_RAW_CMD['system_boot_options']['Set_Chassis_Boot_Flag'][1]}
+    ...      ${flag_valid_bit}
+    Run IPMI Command  ${ipmi_cmd}
+
+Set Chassis System Boot Flags Data Via IPMI
+    [Documentation]    Set Chassis System Boot Flags Data 1 Via IPMI.
+    [Arguments]    ${data}
+
+    # Description of argument(s):
+    # data    To set the chassis system boot options boot flags data value.
+
+    ${ipmi_cmd}=  Catenate  ${IPMI_RAW_CMD['system_boot_options']['Set_Chassis_Boot_Flag'][1]}
+    ...      ${data}  ${IPMI_RAW_CMD['system_boot_options']['Set_Chassis_Boot_Flag'][4]}
+
+    Run IPMI Command  ${ipmi_cmd}
+
+Set Chassis System Boot Flags Data For Valid Selector Via IPMI
+    [Documentation]    Set Chassis System Boot Flags Data For Valid Selector Via IPMI.
+    [Arguments]    ${data}
+
+    # Description of argument(s):
+    # data    To set the chassis system boot options boot flags data value for valid selector.
+
+    ${ipmi_cmd}=  Catenate  ${IPMI_RAW_CMD['system_boot_options']['Set_Chassis_Boot_Flag'][2]}
+    ...      ${data}  ${IPMI_RAW_CMD['system_boot_options']['Set_Chassis_Boot_Flag'][3]}
+
     Run IPMI Command  ${ipmi_cmd}
