@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation  Verify that the OS network interfaces are configured and
 ...  stable.
 
@@ -12,12 +11,11 @@ Documentation  Verify that the OS network interfaces are configured and
 
 Resource         ../lib/os_utils_install.robot
 
-Test Tags       Host_Network_Interfaces
+Test Tags        Host_Network_Interfaces
 
 *** Variables ***
 
 ${FAIL_ON_LINK_DOWN}  1
-
 
 *** Test Cases ***
 Verify Network Interfaces

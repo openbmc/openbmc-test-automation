@@ -1,14 +1,14 @@
 *** Settings ***
 Documentation  Network stack stress tests using "nping" tool.
 
-Resource  ../lib/resource.robot
+Resource     ../lib/resource.robot
 
-Library  OperatingSystem
-Library  String
+Library      OperatingSystem
+Library      String
 
 Suite Setup  Suite Setup Execution
 
-Test Tags  Network_Nping
+Test Tags    Network_Nping
 
 *** Variables ***
 
@@ -51,8 +51,8 @@ Send Network Packets
     # by default it sends 100 TCP packets at 5 packets/second.
 
     ${cmd_buff}=  Set Variable If  '${packet_type}' == 'icmp'
-     ...  echo ${CLIENT_PASSWORD} | sudo -S nping --delay ${delay} ${host} -c ${count} --${packet_type}
-     ...  echo ${CLIENT_PASSWORD} | sudo -S nping --delay ${delay} ${host} -c ${count} -p ${port} --${packet_type}
+    ...  echo ${CLIENT_PASSWORD} | sudo -S nping --delay ${delay} ${host} -c ${count} --${packet_type}
+    ...  echo ${CLIENT_PASSWORD} | sudo -S nping --delay ${delay} ${host} -c ${count} -p ${port} --${packet_type}
 
     ${rc}  ${output}=  Run And Return RC And Output  ${cmd_buff}
     Should Be Equal As Integers  ${rc}  0  msg=Command execution failed.

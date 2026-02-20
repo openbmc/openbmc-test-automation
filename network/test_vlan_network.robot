@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation           Test setting VLAN and its configuration.
 
-
+Library                         Collections
 Resource                        ../lib/rest_client.robot
 Resource                        ../lib/ipmi_client.robot
 Resource                        ../lib/utils.robot
@@ -13,11 +13,10 @@ Library                         ../lib/utilities.py
 Library                         ../lib/ipmi_utils.py
 Library                         ../lib/var_funcs.py
 Library                         ../lib/func_args.py
-Library                         Collections
 
 Suite Teardown                  Suite Teardown Execution
 
-Test Tags                      VLAN_Network
+Test Tags                       VLAN_Network
 
 *** Variables ***
 
@@ -232,7 +231,7 @@ Test Setup Execution
 
     Printn
     ${lan_config}=  Get LAN Print Dict
-    Return From Keyword If  '${lan_config['802.1q VLAN ID']}' == 'Disabled'
+    IF  '${lan_config['802.1q VLAN ID']}' == 'Disabled'  RETURN
 
     # Get all VLAN ID on interface eth0.
     ${vlan_ids}=  Get VLAN IDs
@@ -287,7 +286,7 @@ Suite Teardown Execution
     [Documentation]  Restore VLAN configuration.
 
     ${length}=  Get Length  ${initial_vlan_config}
-    Return From Keyword If  ${length} == ${0}
+    IF  ${length} == ${0}  RETURN
 
     ${previous_id}=  Set Variable  ${EMPTY}
     FOR  ${index}  IN RANGE  0  ${length}  3
@@ -362,7 +361,7 @@ Get VLAN URI For IP
     END
 
     ${uris}=  Get Dictionary Keys  ${vlan_record}
-    Return From Keyword If  @{uris} == @{EMPTY}
+    IF  @{uris} == @{EMPTY}  RETURN
 
     RETURN  ${uris[${0}]}
 

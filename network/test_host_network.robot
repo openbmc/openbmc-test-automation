@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation       Test setting network address of host OS.
 
 Resource            ../lib/rest_client.robot
@@ -11,12 +10,12 @@ Library             ../lib/utilities.py
 Test Setup          Open Connection And Log In
 Test Teardown       Test Teardown Execution
 
-Test Tags          Host_Network
+Test Tags           Host_Network
 
 *** Variables ***
 ${SET_ADDR_PREFIX}  0x00 0x08 0x61 0x80 0x21 0x70 0x62 0x21 0x00 0x01 0x06 0x04
-${STATIC}           0x00 0x01                       #equivalent address type 1
-${DHCP}             0x00 0x00                       #equivalent address type 0
+${STATIC}           0x00 0x01                       # equivalent address type 1
+${DHCP}             0x00 0x00                       # equivalent address type 0
 ${CLEAR_ADDR}       0x00 0x08 0x61 0x80 0x00 0x00 0x00 0x00
 
 
@@ -41,7 +40,7 @@ Set Static Host Network Address Via IPMI
     ...  ${SET_ADDR_PREFIX}${SPACE}${mac_address_hex}${SPACE}${STATIC}${SPACE}
     ...  ${ip_address_hex}${SPACE}${prefix_hex}${SPACE}${gateway_hex}
 
-    Run IPMI command  ${ipmi_raw_cmd}
+    Run IPMI Command  ${ipmi_raw_cmd}
 
     ${data}=  Read Properties  ${NETWORK_MANAGER}host0/intf/addr
     Should Contain  ${data["Origin"]}  Static
@@ -63,7 +62,7 @@ Set DHCP Host Address Via IPMI
 
     ${ipmi_raw_cmd}=  Catenate  SEPARATOR=
     ...  ${SET_ADDR_PREFIX}${SPACE}${mac_address_hex}${SPACE}${DHCP}
-    Run IPMI command  ${ipmi_raw_cmd}
+    Run IPMI Command  ${ipmi_raw_cmd}
 
     ${origin}=  Read Attribute  ${NETWORK_MANAGER}host0/intf/addr  Origin
     ${new_mac_address}=
@@ -78,5 +77,5 @@ Test Teardown Execution
     [Documentation]  Do the post test teardown.
 
     FFDC On Test Case Fail
-    Run IPMI command  ${CLEAR_ADDR}
+    Run IPMI Command  ${CLEAR_ADDR}
     Close All Connections

@@ -5,9 +5,10 @@ Documentation  Network diagnostic tool report and logs to console
 Library       OperatingSystem
 Library       ../lib/utilities.py
 Resource      ../lib/utils.robot
+
 Test Setup    Check If Tool Exist
 
-Test Tags    Network_Diagnostic_Report
+Test Tags     Network_Diagnostic_Report
 
 *** Test Cases ***
 
