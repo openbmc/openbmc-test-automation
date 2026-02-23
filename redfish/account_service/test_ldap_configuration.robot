@@ -11,7 +11,7 @@ Resource         ../../lib/bmc_ldap_utils.robot
 Suite Setup      Suite Setup Execution
 Suite Teardown   LDAP Suite Teardown Execution
 Test Teardown    Run Keywords  Redfish.Login  AND  FFDC On Test Case Fail
-Test Tags       Ldap_Configuration
+Test Tags        Ldap_Configuration
 
 *** Variables ***
 ${old_ldap_privilege}   Administrator
@@ -247,7 +247,6 @@ Verify LDAP BaseDN Update And LDAP Login
     [Documentation]  Update LDAP BaseDN of LDAP configuration and verify
     ...  that LDAP login works.
     [Tags]  Verify_LDAP_BaseDN_Update_And_LDAP_Login
-
 
     ${body}=  Catenate  {'${LDAP_TYPE}': { 'LDAPService': {'SearchSettings':
     ...   {'BaseDistinguishedNames': ['${LDAP_BASE_DN}']}}}}
@@ -591,6 +590,9 @@ Disable Other LDAP
     [Documentation]  Disable other LDAP configuration.
     [Arguments]  ${service_state}=${False}
 
+    # Description of argument(s):
+    # service_state    Service state (True or False). 
+
     # First disable other LDAP.
     ${inverse_ldap_type}=  Set Variable If  '${LDAP_TYPE}' == 'LDAP'  ActiveDirectory  LDAP
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
@@ -604,7 +606,8 @@ Config LDAP URL
     [Arguments]  ${ldap_server_uri}=${LDAP_SERVER_URI}  ${expected_status}=${TRUE}
 
     # Description of argument(s):
-    # ldap_server_uri LDAP server uri (e.g. "ldap://XX.XX.XX.XX/").
+    # ldap_server_uri    LDAP server uri (e.g. "ldap://XX.XX.XX.XX/").
+    # expected_status    Expected state (True or False).
 
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService
     ...  body={'${ldap_type}': {'ServiceAddresses': ['${ldap_server_uri}']}}
@@ -780,7 +783,8 @@ Update LDAP User Role And Host Poweroff
 
 Update LDAP User Role And Host Poweron
     [Documentation]  Update LDAP user role and do host poweron.
-    [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}  ${valid_status_code}=[${HTTP_OK,${HTTP_NO_CONTENT}]
+    [Arguments]  ${ldap_type}  ${group_privilege}  ${group_name}
+    ...  ${valid_status_code}=[${HTTP_OK,${HTTP_NO_CONTENT}]
     [Teardown]  Run Keywords  Redfish.Logout  AND  Redfish.Login
 
     # Description of argument(s):
