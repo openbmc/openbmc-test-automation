@@ -887,9 +887,9 @@ Template For Configure Auth Methods
     [Teardown]  Configure AuthMethods  ${auth_method}=${initial_value}
 
     # Description of Argument(s):
-    # authmethods   The authmethod setting which needs to be
+    # auth_method   The authmethod setting which needs to be
     #               set in account service URI.
-    # valid values  BasicAuth, XToken.
+    #               valid values  BasicAuth, XToken.
 
     Get AuthMethods Default Values  ${auth_method}
 
@@ -1018,30 +1018,30 @@ Check BasicAuth Works Fine
 
 
 Create User With Unsupported Password Format And Verify
-   [Documentation]  Create admin or readonly user with unsupported password format
-   ...  and verify.
-   [Arguments]   ${username}  ${role_id}  ${password}
+    [Documentation]  Create admin or readonly user with unsupported password format
+    ...  and verify.
+    [Arguments]   ${username}  ${role_id}  ${password}
 
-   # Description of argument(s):
-   # username            The username to be created.
-   # role_id             The role ID of the user to be created
-   #                     (e.g. "Administrator", "ReadOnly").
-   # password            The password to be assigned.
-   #                     Unsupported password format are sequential characters,
-   #                     sequential digits, palindrome digits, palindrome characters,
-   #                     only uppercase letters, only lowercase letters, only digits,
-   #                     only characters, not a dictionary word, username and password
-   #                     should not be same.
+    # Description of argument(s):
+    # username            The username to be created.
+    # role_id             The role ID of the user to be created
+    #                     (e.g. "Administrator", "ReadOnly").
+    # password            The password to be assigned.
+    #                     Unsupported password format are sequential characters,
+    #                     sequential digits, palindrome digits, palindrome characters,
+    #                     only uppercase letters, only lowercase letters, only digits,
+    #                     only characters, not a dictionary word, username and password
+    #                     should not be same.
 
-   # Make sure the user account in question does not already exist.
+    # Make sure the user account in question does not already exist.
     Redfish.Delete  /redfish/v1/AccountService/Accounts/${userName}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NOT_FOUND}]
 
-   # Create specified user with invalid password format.
-   ${payload}=  Create Dictionary
-   ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${True}
-   Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
-   ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+    # Create specified user with invalid password format.
+    ${payload}=  Create Dictionary
+    ...  UserName=${username}  Password=${password}  RoleId=${role_id}  Enabled=${True}
+    Redfish.Post  /redfish/v1/AccountService/Accounts/  body=&{payload}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
 
 
 Verify History Password for Redfish User
