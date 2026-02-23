@@ -1,9 +1,9 @@
 *** Settings ***
-
 Documentation    Module to test dcmi get capabilities functionality.
+
 Resource         ../../lib/ipmi_client.robot
 
-Test Tags       DCMI_Get_Capabilities
+Test Tags        DCMI_Get_Capabilities
 
 *** Variables ***
 

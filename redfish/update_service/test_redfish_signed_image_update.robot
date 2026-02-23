@@ -144,4 +144,3 @@ Redfish Unsigned Firmware Update
     ...    match_state='Disabled', 'Updating', 'Disabled'  image_id=${image_id}
     Delete Software Object
     ...  /xyz/openbmc_project/software/${image_id}
-

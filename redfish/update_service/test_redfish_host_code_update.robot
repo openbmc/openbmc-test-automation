@@ -27,7 +27,7 @@ Suite Teardown           Redfish.Logout
 Test Setup               Printn
 Test Teardown            FFDC On Test Case Fail
 
-Test Tags               Redfish_Host_Code_Update
+Test Tags                Redfish_Host_Code_Update
 
 *** Test Cases ***
 
@@ -80,7 +80,7 @@ Redfish Update Firmware
 
     Redfish.Login
     ${post_code_update_actions}=  Get Post Boot Action
-    Set ApplyTime  policy=${apply_Time}
+    Set ApplyTime  policy=${apply_time}
 
     # URI : /redfish/v1/UpdateService
     # "HttpPushUri": "/redfish/v1/UpdateService/update",

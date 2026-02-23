@@ -11,7 +11,7 @@ Suite Teardown   Redfish.Logout
 Test Setup       Printn
 Test Teardown    FFDC On Test Case Fail
 
-Test Tags    Firmware_Property
+Test Tags        Firmware_Property
 
 *** Test Cases ***
 

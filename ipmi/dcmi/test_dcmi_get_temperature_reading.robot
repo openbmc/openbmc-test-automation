@@ -1,6 +1,6 @@
 *** Settings ***
-
 Documentation    Module to test dcmi get temperature reading functionality.
+
 Resource         ../../lib/ipmi_client.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/bmc_network_utils.robot
@@ -13,9 +13,9 @@ Library          ../../lib/ipmi_utils.py
 Library          ../../lib/utilities.py
 Library          JSONLibrary
 
-Suite Setup  Suite Setup Execution
+Suite Setup      Suite Setup Execution
 
-Test Tags       DCMI_Get_Temperature_Reading
+Test Tags        DCMI_Get_Temperature_Reading
 
 *** Variables ***
 
