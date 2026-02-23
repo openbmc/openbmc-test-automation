@@ -11,7 +11,8 @@ Resource         ../../lib/bmc_ldap_utils.robot
 Suite Setup      Suite Setup Execution
 Suite Teardown   LDAP Suite Teardown Execution
 Test Teardown    Run Keywords  Redfish.Login  AND  FFDC On Test Case Fail
-Test Tags       Ldap_Configuration
+
+Test Tags        Ldap_Configuration
 
 *** Variables ***
 ${old_ldap_privilege}   Administrator

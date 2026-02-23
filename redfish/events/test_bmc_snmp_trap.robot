@@ -4,18 +4,18 @@ Documentation  This testing requires special setup where SNMP trapd is
 ...            configuration refer http://www.net-snmp.org/.
 
 
-Resource      ../../lib/snmp/resource.robot
-Resource      ../../lib/snmp/redfish_snmp_utils.robot
-Resource      ../../lib/bmc_redfish_resource.robot
-Resource      ../../lib/openbmc_ffdc.robot
-Resource      ../../lib/logging_utils.robot
+Resource          ../../lib/snmp/resource.robot
+Resource          ../../lib/snmp/redfish_snmp_utils.robot
+Resource          ../../lib/bmc_redfish_resource.robot
+Resource          ../../lib/openbmc_ffdc.robot
+Resource          ../../lib/logging_utils.robot
 
 
 Test Teardown     FFDC On Test Case Fail
 Suite Setup       Suite Setup Execution
 Suite Teardown    Suite Teardown Execution
 
-Test Tags        BMC_SNMP_Trap
+Test Tags         BMC_SNMP_Trap
 
 *** Test Cases ***
 

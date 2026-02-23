@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation    Test Redfish SessionService.
 
 Resource         ../../lib/bmc_redfish_utils.robot
@@ -74,7 +73,7 @@ Set Session Timeout And Verify Session After Timeout
     [Template]  Set Session Timeout And Verify Session Deleted After Timeout
     [Teardown]  Set Session Timeout And Verify   ${Default_Timeout_Value}  ${HTTP_OK}
 
-    #timeout Value
+    # timeout Value
     ${30}
     ${300}
 
@@ -117,7 +116,7 @@ Verify Sessions Defaults
 
     ${sessions}=  Redfish.Get Properties  /redfish/v1/SessionService/Sessions
     Rprint Vars  sessions
-    ${sessions_count}=  Get length  ${sessions['Members']}
+    ${sessions_count}=  Get Length  ${sessions['Members']}
 
     Valid Value  sessions['@odata.id']  ['/redfish/v1/SessionService/Sessions/', '/redfish/v1/SessionService/Sessions']
     Valid Value  sessions['Description']  ['Session Collection']

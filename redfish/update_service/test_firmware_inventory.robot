@@ -10,7 +10,7 @@ Library          ../../lib/gen_robot_valid.py
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
-Test Tags     Firmware_Inventory
+Test Tags        Firmware_Inventory
 
 *** Test Cases ***
 
@@ -69,12 +69,12 @@ Redfish Software Inventory Status Check
 
     FOR  ${entry}  IN RANGE  0  ${resp.dict["Members@odata.count"]}
       ${resp_resource}=  Redfish.Get  ${resp.dict["Members"][${entry}]["@odata.id"]}
-    # Example:
-    # "Status": {
-    #     "Health": "OK",
-    #     "HealthRollup": "OK",
-    #     "State": "Enabled"
-    # },
+      # Example:
+      # "Status": {
+      #   "Health": "OK",
+      #   "HealthRollup": "OK",
+      #   "State": "Enabled"
+      # },
       Should Be Equal As Strings  ${resp_resource.dict["Status"]["Health"]}  OK
       Should Be Equal As Strings  ${resp_resource.dict["Status"]["HealthRollup"]}  OK
       Should Be Equal As Strings  ${resp_resource.dict["Status"]["State"]}  Enabled
@@ -101,9 +101,9 @@ Verify BMC Version Matches With FirmwareInventory
     ${actual_count}=  Evaluate  ${resp.dict["Members@odata.count"]}-1
     FOR  ${entry}  IN RANGE  0  ${resp.dict["Members@odata.count"]}
       ${resp_resource}=  Redfish.Get  ${resp.dict["Members"][${entry}]["@odata.id"]}
-    # 3rd comparison of BMC version and verify FirmwareInventory bmc version.
-    # Example:
-    # "Version": 2.7.0-dev-19-g9b44ea7
+      # 3rd comparison of BMC version and verify FirmwareInventory bmc version.
+      # Example:
+      # "Version": 2.7.0-dev-19-g9b44ea7
       IF  '${resp_resource.dict["Version"]}' == '${manager_bmc_version.strip('"')}'  BREAK
       IF  '${entry}' == '${actual_count}'  Fail  BMC version not there in Firmware Inventory
     END

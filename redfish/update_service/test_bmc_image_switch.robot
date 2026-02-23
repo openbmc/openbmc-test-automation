@@ -1,17 +1,17 @@
 *** Settings ***
-Documentation            Redfish test to switch image sides and boot.
+Documentation     Redfish test to switch image sides and boot.
 
-Resource                 ../../lib/resource.robot
-Resource                 ../../lib/bmc_redfish_resource.robot
-Resource                 ../../lib/openbmc_ffdc.robot
-Resource                 ../../lib/redfish_code_update_utils.robot
-Library                  ../../lib/tftp_update_utils.py
+Resource          ../../lib/resource.robot
+Resource          ../../lib/bmc_redfish_resource.robot
+Resource          ../../lib/openbmc_ffdc.robot
+Resource          ../../lib/redfish_code_update_utils.robot
+Library           ../../lib/tftp_update_utils.py
 
-Suite Setup              Suite Setup Execution
-Suite Teardown           Run Keyword And Ignore Error  Redfish.Logout
-Test Teardown            FFDC On Test Case Fail
+Suite Setup       Suite Setup Execution
+Suite Teardown    Run Keyword And Ignore Error  Redfish.Logout
+Test Teardown     FFDC On Test Case Fail
 
-Test Tags               Bmc_Image_Switch
+Test Tags         Bmc_Image_Switch
 
 *** Variables ***
 

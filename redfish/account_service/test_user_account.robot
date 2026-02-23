@@ -949,9 +949,9 @@ Configure AuthMethods
 
         #  Check the response of curl command is 200 or 204
         ${check_no_content}=
-        ...  Run Keyword and Return Status  Should Contain  ${out}  204
+        ...  Run Keyword And Return Status  Should Contain  ${out}  204
         ${check_ok}=
-        ...  Run Keyword and Return Status  Should Contain  ${out}  200
+        ...  Run Keyword And Return Status  Should Contain  ${out}  200
         Pass Execution If  ${check_no_content}==${TRUE}
         ...  OR  ${check_ok}==${TRUE}
     END
