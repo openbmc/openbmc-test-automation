@@ -36,6 +36,7 @@ ${SNMP_TRAP_BMC_CALLOUT_ERROR}  xyz.openbmc_project.Common.Error.Timeout
 ${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}  xyz.openbmc_project.Common.Error.TestError2
 
 *** Test Cases ***
+
 Configure SNMP Manager On BMC And Verify
     [Documentation]  Configure SNMP Manager On BMC And Verify.
     [Tags]  Configure_SNMP_Manager_On_BMC_And_Verify
