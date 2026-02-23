@@ -1,6 +1,6 @@
 *** Settings ***
-
 Documentation    Module to test dcmi asset tag functionality.
+
 Resource         ../../lib/ipmi_client.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Library          ../../lib/gen_robot_valid.py
@@ -11,7 +11,7 @@ Suite Setup      Redfish.Login
 Suite Teardown   Redfish.Logout
 Test Teardown    FFDC On Test Case Fail
 
-Test Tags       DCMI_Asset_Tag
+Test Tags        DCMI_Asset_Tag
 
 *** Test Cases ***
 

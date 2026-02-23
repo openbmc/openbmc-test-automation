@@ -7,7 +7,7 @@ Resource        ../lib/openbmc_ffdc.robot
 
 Test Teardown   Test Teardown Execution
 
-Test Tags        Test_XIT
+Test Tags       Test_XIT
 
 *** Variables ***
 
