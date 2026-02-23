@@ -31,7 +31,7 @@ Suite Teardown           Redfish.Logout
 Test Setup               Printn
 Test Teardown            FFDC On Test Case Fail
 
-Test Tags               Redfish_Bmc_Code_Update
+Test Tags                Redfish_Bmc_Code_Update
 
 *** Variables ***
 
@@ -215,7 +215,7 @@ Suite Setup Execution
 Code Update Interrupted Operation Teardown
     [Documentation]  Code update interrupted operation teardown.
 
-    ${task_inv_dict}=  Get Task State from File
+    ${task_inv_dict}=  Get Task State From File
 
     ${redfish_update_uri}=  Get Redfish Update Service URI
 
@@ -256,7 +256,7 @@ Redfish Multiple Upload Image And Check Progress State
     # ALTERNATE_IMAGE_FILE_PATH  The path to alternate BMC image file.
 
 
-    ${task_inv_dict}=  Get Task State from File
+    ${task_inv_dict}=  Get Task State From File
 
     ${post_code_update_actions}=  Get Post Boot Action
 
@@ -408,7 +408,7 @@ Verify Redfish Code Update With Different Interrupted Operation
 
     Set ApplyTime  policy=OnReset
 
-    ${task_inv_dict}=  Get Task State from File
+    ${task_inv_dict}=  Get Task State From File
 
     ${file_bin_data}=  OperatingSystem.Get Binary File  ${image_file_path}
 
@@ -466,4 +466,3 @@ Verify Redfish Code Update With Different Interrupted Operation
     END
 
     Verify Get ApplyTime  OnReset
-

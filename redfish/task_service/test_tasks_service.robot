@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation       Test task service and tasks URI functionality of OpenBMC.
 
 Library             OperatingSystem
@@ -13,7 +12,7 @@ Suite Setup         Suite Setup Execution
 Suite Teardown      Suite Teardown Execution
 Test Teardown       FFDC On Test Case Fail
 
-Test Tags          Tasks_Service
+Test Tags           Tasks_Service
 
 *** Variables ***
 ${TIME_REGEXP_PATTERN}   (.+)[\\-|\\+]\\d\\d\\:\\d\\d

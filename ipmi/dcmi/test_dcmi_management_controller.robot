@@ -1,5 +1,6 @@
 *** Settings ***
 Documentation    Module to test dcmi management controller functionality.
+
 Resource         ../../lib/ipmi_client.robot
 Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/bmc_network_utils.robot
@@ -13,7 +14,7 @@ Library          ../../lib/utilities.py
 Library          ../../lib/utils.py
 Library          JSONLibrary
 
-Test Tags       DCMI_Management_Controller
+Test Tags        DCMI_Management_Controller
 
 *** Variables ***
 
