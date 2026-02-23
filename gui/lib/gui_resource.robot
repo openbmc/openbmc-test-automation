@@ -52,7 +52,7 @@ Launch Header Browser
     # browser_type  Type of browser (e.g. "firefox", "chrome", etc.).
 
     ${BROWSER_ID}=  Open Browser  ${OPENBMC_GUI_URL}  ${browser_type}
-    Maximize Browser Window
+    Set Window Size  1920  2500
     Set Global Variable  ${BROWSER_ID}
 
 
@@ -68,7 +68,7 @@ Launch Headless Browser
 
     Start Virtual Display
     ${browser_ID}=  Open Browser  ${URL}    ${browser}
-    Set Window Size  1920  1080
+    Set Window Size  1920  2500
 
     RETURN  ${browser_ID}
 

@@ -81,7 +81,7 @@ class gui_variables:
         "//*[@data-test-id='networkSettings-switch-useDns']"
     )
     xpath_add_dns_ip_address_button = (
-        "//button[contains(text(),'Add IP address')]"
+        "//button[normalize-space()='Add IP address']"
     )
     xpath_input_static_dns = "//*[@id='staticDns']"
 
@@ -136,7 +136,7 @@ class gui_variables:
     )
     xpath_confirm_button = "//button[contains(normalize-space(.),'Confirm')]"
     xpath_cancel_button = "//button[contains(text(),'Cancel')]"
-    xpath_add_button = "//button[normalize-space(text())='Add']"
+    xpath_add_button = "//div[@class='modal fade show']//button[@type='button'][normalize-space()='Add']"
     xpath_close_information_message = "//button[@class='btn-close']"
     xpath_page_loading_progress_bar = "//div[@aria-label='Loading Progress']"
 
