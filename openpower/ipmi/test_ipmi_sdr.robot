@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation  Test IPMI sensor IDs.
+Documentation          Test IPMI sensor IDs.
 
 Resource               ../../lib/rest_client.robot
 Resource               ../../lib/ipmi_client.robot
@@ -11,7 +11,7 @@ Suite setup             Suite Setup Execution
 Suite Teardown          Redfish.Logout
 Test Teardown           Test Teardown Execution
 
-Test Tags              Ipmi_Sdr
+Test Tags               Ipmi_Sdr
 
 
 *** Test Cases ***
@@ -39,6 +39,10 @@ Get Component URIs
     ...  and return as a list.
     [Arguments]  ${component_name}  ${uri_list}=${SYSTEM_URI}
 
+    # Description of argument(s):
+    # component_name    Component name (e.g. "core", "dimm", etc.).
+    # uri_list          URI list.
+
     # A sample result returned for the "core" component:
     # /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0/core0
     # /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0/core1
@@ -46,10 +50,6 @@ Get Component URIs
     # /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0/core11
     # /xyz/openbmc_project/inventory/system/chassis/motherboard/cpu0/core12
     # (etc.)
-
-    # Description of argument(s):
-    # component_name    Component name (e.g. "core", "dimm", etc.).
-    # uri_list          URI list.
 
     ${component_uris}=  Get Matches  ${uri_list}
     ...  regexp=^.*[0-9a-z_].${component_name}\[_0-9a-z]*$

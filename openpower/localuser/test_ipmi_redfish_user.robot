@@ -10,7 +10,7 @@ Library          ../../lib/ipmi_utils.py
 Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 
-Test Tags       IPMI_Redfish_User
+Test Tags        IPMI_Redfish_User
 
 *** Variables ***
 
@@ -237,7 +237,7 @@ Test Teardown Execution
 
 
 Find And Return Free User Id
-    [Documentation]  Find and return userid that is not being used.
+    [Documentation]  Find and return user ID that is not being used.
 
     FOR    ${index}    IN RANGE    300
         # IPMI maximum users count (i.e. 15 users).
