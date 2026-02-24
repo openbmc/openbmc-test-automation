@@ -1,4 +1,6 @@
 *** Settings ***
+Documentation   IPv6 network resource file containing keywords.
+
 Resource                ../lib/utils.robot
 Resource                ../lib/connection_client.robot
 Resource                ../lib/boot_utils.robot
@@ -201,15 +203,15 @@ Configure IPv6 Address On BMC
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
 
     IF  '${Version}' == 'IPv4'
-        Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+        Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
         ...  valid_status_codes=${valid_status_codes}
     ELSE
-        Redfish IPv6.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+        RedfishIPv6.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
         ...  valid_status_codes=${valid_status_codes}
     END
 
     IF  ${valid_status_codes} != [${HTTP_OK}, ${HTTP_NO_CONTENT}]
-        Return From Keyword
+        RETURN
     END
 
     # Note: Network restart takes around 15-18s after patch request processing.
@@ -228,7 +230,7 @@ Configure IPv6 Address On BMC
       Verify IPv6 On BMC  ${ipv6_network_configuration['Address']}
     END
 
-    #Verify redfish and CLI data matches.
+    # Verify redfish and CLI data matches.
     Validate IPv6 Network Config On BMC
 
 
@@ -269,10 +271,10 @@ Delete IPv6 Address
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${channel_number}']['name']}
 
     IF  '${Version}' == 'IPv4'
-        Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+        Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
         ...  valid_status_codes=${valid_status_codes}
     ELSE
-        Redfish IPv6.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+        RedfishIPv6.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
         ...  valid_status_codes=${valid_status_codes}
     END
 
@@ -544,15 +546,15 @@ Modify IPv6 Address
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
     IF  '${version}' == 'IPv4'
-        Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+        Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
         ...  body=&{data}  valid_status_codes=${valid_status_codes}
     ELSE
-        RedfishIPv6.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+        RedfishIPv6.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
         ...  body=&{data}  valid_status_codes=${valid_status_codes}
     END
 
     # Note: Network restart takes around 15-18s after patch request processing.
-    #Sleep  ${NETWORK_TIMEOUT}s
+    # Sleep  ${NETWORK_TIMEOUT}s
     Sleep  30s
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
