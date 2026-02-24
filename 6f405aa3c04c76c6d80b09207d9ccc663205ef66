@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a78ac48_1d524245",
+        "filename": "lib/bmc_date_and_time_utils.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-24T17:19:19Z",
+      "side": 1,
+      "message": "RedfishIPv6",
+      "range": {
+        "startLine": 180,
+        "startChar": 8,
+        "endLine": 180,
+        "endChar": 20
+      },
+      "revId": "6f405aa3c04c76c6d80b09207d9ccc663205ef66",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2210365_13404f1a",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-24T17:19:19Z",
+      "side": 1,
+      "message": "Configure NTP Server Configuration Via IPv6 Address And Verify",
+      "range": {
+        "startLine": 337,
+        "startChar": 0,
+        "endLine": 337,
+        "endChar": 41
+      },
+      "revId": "6f405aa3c04c76c6d80b09207d9ccc663205ef66",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "810c54c3_46f4bd9b",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-24T17:19:19Z",
+      "side": 1,
+      "message": "Run Keywords\n...  Restore NTP Mode  AND\n...  Redfish IPv6.Patch  ${REDFISH_NW_PROTOCOL_URI}  body\u003d{\u0027NTP\u0027:{\u0027NTPServers\u0027: [\u0027${EMPTY}\u0027]}}  valid_status_codes\u003d[${HTTP_OK}, ${HTTP_NO_CONTENT}]",
+      "range": {
+        "startLine": 344,
+        "startChar": 3,
+        "endLine": 344,
+        "endChar": 71
+      },
+      "revId": "6f405aa3c04c76c6d80b09207d9ccc663205ef66",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5028bdf_c953ab95",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-24T17:19:19Z",
+      "side": 1,
+      "message": "This is specific to this test case alone\nPlease include it in the test case teardown.",
+      "range": {
+        "startLine": 371,
+        "startChar": 4,
+        "endLine": 372,
+        "endChar": 60
+      },
+      "revId": "6f405aa3c04c76c6d80b09207d9ccc663205ef66",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c2961ae_9f130e1e",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-02-24T17:19:19Z",
+      "side": 1,
+      "message": "Configure NTP Server Configuration Via IPv6 Address",
+      "range": {
+        "startLine": 828,
+        "startChar": 0,
+        "endLine": 828,
+        "endChar": 49
+      },
+      "revId": "6f405aa3c04c76c6d80b09207d9ccc663205ef66",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
