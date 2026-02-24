@@ -12,9 +12,11 @@ Test Teardown       Run Keywords  Close All Connections  AND FFDC On Test Case F
 Test Tags           Test_BMC_Devicetree
 
 *** Variables ***
+
 ${devicetree_base}  /sys/firmware/devicetree/base/
 
 *** Test Cases ***
+
 Check BMC Model Property Is Set
    [Documentation]  Verify if the BMC Model is populated in the device tree.
    [Tags]  Check_BMC_Model_Property_Is_Set
@@ -169,7 +171,9 @@ Check BMC LED Compatible Property Is Set
 Template Check Property
     [Documentation]  Check for the existence of a property in the device tree.
     [Arguments]  ${property}
-    #property: Value of Property
+
+    # Description of argument(s):
+    # property      Value of Property
 
     ${devicetree_path}=  Catenate  SEPARATOR=
     ...  ${devicetree_base}  ${property}

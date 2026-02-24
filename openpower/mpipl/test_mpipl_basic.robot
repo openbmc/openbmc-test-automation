@@ -2,7 +2,7 @@
 Documentation    Test MPIPL (Memory preserving IPL).
 
 #------------------------------------------------------------------
-# This boot path will generated a BMC dump followed by system dump.
+# This boot path will generate a BMC dump followed by system dump.
 #------------------------------------------------------------------
 
 Resource         ../../lib/resource.robot
@@ -16,7 +16,7 @@ Test Setup       Test Setup Execution
 Test Teardown    Test Teardown Execution
 Suite Teardown   Suite Teardown Execution
 
-Test Tags       MPIPL_Basic
+Test Tags        MPIPL_Basic
 
 *** Variables ***
 
@@ -25,11 +25,11 @@ Test Tags       MPIPL_Basic
 ${MPIPL_LOOP_COUNT}     ${1}
 
 
-** Test Cases **
+*** Test Cases ***
 
 Trigger User Tool Initiated MPIPL
     [Documentation]  Trigger And Verify user tool initiated dump using
-    ...              obmc-host-crash target.
+    ...  obmc-host-crash target.
     [Tags]  Trigger_User_Tool_Initiated_MPIPL
 
     FOR  ${count}  IN RANGE  0  ${MPIPL_LOOP_COUNT}

@@ -6,7 +6,7 @@ Resource        ../lib/boot_utils.robot
 Resource        ../lib/openbmc_ffdc.robot
 Resource        ../lib/secureboot/secureboot.robot
 Resource        ../lib/state_manager.robot
-Resource         ../lib/os_utilities.robot
+Resource        ../lib/os_utilities.robot
 Library         ../lib/bmc_ssh_utils.py
 
 Test Teardown   FFDC On Test Case Fail
