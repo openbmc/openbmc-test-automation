@@ -10,6 +10,8 @@ Resource        ../../lib/protocol_setting_utils.robot
 Resource        ../../lib/snmp/redfish_snmp_utils.robot
 Resource        ../../lib/snmp/resource.robot
 Resource        ../../lib/external_intf/vmi_utils.robot
+Resource        ../../lib/bmc_date_and_time_utils.robot
+
 
 Library         Collections
 Library         OperatingSystem
@@ -304,6 +306,21 @@ Configure Invalid Static IPv6 From IPv6 And Verify
     SLAAC                ${2}            ${ipv6_multi_short}        ${test_prefix_length}
 
 
+Verify NTP Server Configuration From IPv6
+    [Documentation]  Verify NTP server configuration by logging in from static/slaac IPv6
+    ...    address on both interfaces.
+    [Tags]  Verify_NTP_Server_Configuration_From_IPv6
+    [Template]  Verify NTP Server Configuration With IPv6 Address
+    [Setup]  Get NTP Initial Status
+    [Teardown]  Run Keywords
+    ...    Restore NTP Mode  version=IPv6  AND  Test Teardown Execution
+
+    # Address_type  channel_number
+    SLAAC           ${1}
+    Static          ${1}
+    SLAAC           ${2}
+    Static          ${2}
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -322,6 +339,8 @@ Test Teardown Execution
     [Documentation]  Test teardown execution.
 
     FFDC On Test Case Fail
+    Redfish IPv6.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'NTPServers': ['${EMPTY}']}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
     Redfish.Logout
     Run Keyword And Ignore Error  RedfishIPv6.Logout
 
@@ -752,3 +771,30 @@ Configure Invalid Static IPv6 From IPv6 Address And Verify
     RedfishIPv6.Login
     Configure IPv6 Address On BMC  ${invalid_ipv6}  ${prefix_length}
     ...  valid_status_codes=[${HTTP_BAD_REQUEST}]  Version=IPv6
+
+
+Verify NTP Server Configuration With IPv6 Address
+    [Documentation]  Verify NTP server configuration on eth0/eth1 from slaac/static
+    ...    IPv6 address.
+    [Arguments]  ${ipv6_address_type}  ${channel_number}
+
+    # Description of argument(s):
+    # ipv6_address_type   Type of IPv6 address(slaac/static).
+    # channel_number      Ethernet channel number, 1(eth0) or 2(eth1).
+
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+
+    Redfish IPv6.Patch  ${REDFISH_NW_PROTOCOL_URI}
+    ...  body={'NTP': {'ProtocolEnabled': ${True}, 'NTPServers': ['${ntp_server_1}']}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Verify the NTP server IPv4 address is populated.
+    ${ntp_conf}=  Redfish IPv6.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
+    Should Contain  ${ntp_conf['NTP']['NTPServers']}  ${ntp_server_1}
+    ...  msg=NTP server value ${ntp_server_1} not stored.
+
+    # Verify the NTP server protocol is enabled in NTP server configuration.
+    Valid Value  ntp_conf['NTP']['ProtocolEnabled']  valid_values=[True]
