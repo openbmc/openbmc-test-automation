@@ -146,7 +146,7 @@ Verify LDAP User With Admin Privilege
     [Tags]  Verify_LDAP_User_With_Admin_Privilege
     [Teardown]  Run Keywords  Redfish.Login  AND  Delete LDAP Role Group  ${GROUP_NAME}
 
-    Update LDAP Configuration with LDAP User Role And Group  ${GROUP_NAME}  ${GROUP_PRIVILEGE}
+    Update LDAP Configuration With LDAP User Role And Group  ${GROUP_NAME}  ${GROUP_PRIVILEGE}
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Redfish OBMC Reboot (off)
     Redfish.Logout
@@ -367,7 +367,7 @@ Update LDAP User Role And Read Network Configuration Via GUI
     # valid_status_code  The expected valid status code.
 
 
-    Update LDAP Configuration with LDAP User Role And Group  ${group_name}  ${user_role}
+    Update LDAP Configuration With LDAP User Role And Group  ${group_name}  ${user_role}
     Logout GUI
     Login GUI  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}

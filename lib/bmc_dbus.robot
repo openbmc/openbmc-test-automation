@@ -1,9 +1,9 @@
 *** Settings ***
 Documentation      Implemented keywords to execute DBUS related commands on BMC.
 
-Resource           resource.robot
-Library            OperatingSystem
 Library            Collections
+Library            OperatingSystem
+Resource           resource.robot
 
 *** Variables ***
 

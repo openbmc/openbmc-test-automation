@@ -11,7 +11,6 @@ Library          tftp_update_utils.py
 *** Variables ***
 ${OS_RUNNING_TIMEOUT}            30
 
-
 *** Keywords ***
 
 Set BIOS Attribute Value And Verify
@@ -35,9 +34,9 @@ Set BIOS Attribute Value And Verify
         ELSE
             ${value}=  Set Variable  ${attr_val}
         END
-   ELSE
-       ${value}=  Set Variable  ${attr_val}
-   END
+    ELSE
+        ${value}=  Set Variable  ${attr_val}
+    END
 
     # BIOS attribute with _current are ReadOnly can not be updated.
     IF  'current' in '${attr_handle}'
