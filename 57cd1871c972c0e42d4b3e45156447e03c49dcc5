@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc38dee0_f95bbe58",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1002557
+      },
+      "writtenOn": "2026-02-24T13:52:31Z",
+      "side": 1,
+      "message": "\"Boot Boot\" repeated word",
+      "range": {
+        "startLine": 488,
+        "startChar": 41,
+        "endLine": 488,
+        "endChar": 51
+      },
+      "revId": "57cd1871c972c0e42d4b3e45156447e03c49dcc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cab58f02_a797c8a7",
         "filename": "ipmi/test_ipmi_chassis.robot",
         "patchSetId": 2
