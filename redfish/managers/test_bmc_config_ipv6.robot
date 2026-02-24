@@ -10,6 +10,7 @@ Resource        ../../lib/protocol_setting_utils.robot
 Resource        ../../lib/snmp/redfish_snmp_utils.robot
 Resource        ../../lib/snmp/resource.robot
 Resource        ../../lib/external_intf/vmi_utils.robot
+Resource        ../../lib/bmc_date_and_time_utils.robot
 
 Library         Collections
 Library         OperatingSystem
@@ -330,6 +331,24 @@ Verify SSH Access Restricted For Admin And ReadOnly Users Via Static IPv6
     Static       ${2}            admin_user     Administrator     22
     Static       ${1}            readonly_user  ReadOnly          22
     Static       ${2}            readonly_user  ReadOnly          22
+
+
+Verify NTP Server Configuration From IPv6
+    [Documentation]  Verify NTP server configuration by logging in from static/slaac IPv6
+    ...    address on both interfaces.
+    [Tags]  Verify_NTP_Server_Configuration_From_IPv6
+    [Template]  Verify NTP Server Configuration With IPv6 Address
+    [Setup]  Get NTP Initial Status
+    [Teardown]  Run Keywords
+    ...  Restore NTP Mode  version=IPv6  AND
+    ...  RedfishIPv6.Patch  ${REDFISH_NW_PROTOCOL_URI}  body={'NTP':{'NTPServers': ['${EMPTY}']}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Address_type  channel_number
+    SLAAC           ${1}
+    Static          ${1}
+    SLAAC           ${2}
+    Static          ${2}
 
 
 *** Keywords ***
@@ -803,3 +822,30 @@ SSH To Non Service And Admin User Via IPv6
 
     Enable SSH Protocol  ${True}
     Check SSH Login Based On Role  ${username}  ${role}  ${port}  ${ipv6_addr}
+
+
+Verify NTP Server Configuration With IPv6 Address
+    [Documentation]  Verify NTP server configuration on eth0/eth1 from slaac/static
+    ...    IPv6 address.
+    [Arguments]  ${ipv6_address_type}  ${channel_number}
+
+    # Description of argument(s):
+    # ipv6_address_type   Type of IPv6 address(slaac/static).
+    # channel_number      Ethernet channel number, 1(eth0) or 2(eth1).
+
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+
+    RedfishIPv6.Patch  ${REDFISH_NW_PROTOCOL_URI}
+    ...  body={'NTP': {'ProtocolEnabled': ${True}, 'NTPServers': ['${ntp_server_1}']}}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Verify the NTP server IPv4 address is populated.
+    ${ntp_conf}=  RedfishIPv6.Get Properties  ${REDFISH_NW_PROTOCOL_URI}
+    Should Contain  ${ntp_conf['NTP']['NTPServers']}  ${ntp_server_1}
+    ...  msg=NTP server value ${ntp_server_1} not stored.
+
+    # Verify the NTP server protocol is enabled in NTP server configuration.
+    Valid Value  ntp_conf['NTP']['ProtocolEnabled']  valid_values=[True]
