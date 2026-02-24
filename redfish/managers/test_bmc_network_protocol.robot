@@ -14,8 +14,6 @@ Test Tags                    BMC_Network_Protocol
 
 *** Variables ***
 
-${ntp_server_1}              9.9.9.9
-${ntp_server_2}              2.2.3.3
 &{original_ntp}              &{EMPTY}
 
 *** Test Cases ***
