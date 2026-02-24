@@ -51,7 +51,7 @@ Get LDAP Privilege And Group Name Via Redfish
 
     ${ldap_config}=  Get LDAP Configuration Using Redfish  ${LDAP_TYPE}
     ${num_list_entries}=  Get Length  ${ldap_config["RemoteRoleMapping"]}
-    Return From Keyword If  ${num_list_entries} == ${0}  @{EMPTY}
+    IF  ${num_list_entries} == ${0}  RETURN  @{EMPTY}
     ${ldap_group_names}=  Create List
     FOR  ${i}  IN RANGE  ${num_list_entries}
       Append To List  ${ldap_group_names}  ${ldap_config["RemoteRoleMapping"][${i}]["RemoteGroup"]}
@@ -77,19 +77,19 @@ Create LDAP Configuration
     ...  {'ServiceEnabled': ${True},
     ...   'ServiceAddresses': ['${ldap_server_uri}'],
     ...   'Authentication':
-    ...       {'AuthenticationType': 'UsernameAndPassword',
-    ...        'Username':'${ldap_bind_dn}',
-    ...        'Password': '${ldap_bind_dn_password}'},
+    ...     {'AuthenticationType': 'UsernameAndPassword',
+    ...      'Username':'${ldap_bind_dn}',
+    ...      'Password': '${ldap_bind_dn_password}'},
     ...   'LDAPService':
-    ...       {'SearchSettings':
-    ...           {'BaseDistinguishedNames': ['${ldap_base_dn}']}}}}
+    ...     {'SearchSettings':
+    ...       {'BaseDistinguishedNames': ['${ldap_base_dn}']}}}}
 
     Redfish.Patch  ${REDFISH_BASE_URI}AccountService  body=${body}
     ...  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
     Sleep  15s
 
 
-Update LDAP Configuration with LDAP User Role And Group
+Update LDAP Configuration With LDAP User Role And Group
     [Documentation]  Update LDAP configuration update with LDAP user Role and group.
     [Arguments]   ${ldap_type}  ${group_privilege}  ${group_name}
 

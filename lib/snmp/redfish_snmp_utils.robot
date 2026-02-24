@@ -181,7 +181,7 @@ Delete SNMP Manager Via Redfish
           IF  '${version}' == 'IPv4'
               Redfish.Delete  ${snmp_mgr_uri}
           ELSE
-              Redfish IPv6.Delete  ${snmp_mgr_uri}
+              RedfishIPv6.Delete  ${snmp_mgr_uri}
           END
           Exit For Loop
       END

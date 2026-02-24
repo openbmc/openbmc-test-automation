@@ -1,16 +1,18 @@
 *** Settings ***
-Resource                ../lib/utils.robot
-Resource                ../lib/connection_client.robot
-Resource                ../lib/boot_utils.robot
+Documentation      BMC clean up resource file containing keywords.
+
+Resource           ../lib/utils.robot
+Resource           ../lib/connection_client.robot
+Resource           ../lib/boot_utils.robot
 
 *** Variables ***
+
 # User defined path to do the cleanup.
 ${CLEANUP_DIR_PATH}  ${EMPTY}
 # List that holds space separated filepaths to skip from cleanup.
 ${SKIP_LIST}  ${EMPTY}
 
 *** Keywords ***
-
 
 Cleanup Dir
     [Documentation]  Remove leftover files in cleanup directory path.

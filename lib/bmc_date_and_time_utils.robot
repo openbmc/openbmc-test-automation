@@ -15,7 +15,6 @@ ${year_without_ntp}          1970
 
 *** Keywords ***
 
-
 Redfish Get DateTime
     [Documentation]  Returns BMC Datetime value from Redfish.
 
@@ -73,7 +72,7 @@ Set BMC Date And Verify
     IF  '${host_state}' == 'on'
         Redfish Power On  stack_mode=skip
     ELSE
-        Redfish Power off  stack_mode=skip
+        Redfish Power Off  stack_mode=skip
     END
 
     ${current_date}=  Get Current Date  time_zone=UTC
@@ -163,7 +162,8 @@ Check Date And Time Was Changed
 Restore NTP Mode
     [Documentation]  Restore the original NTP mode.
 
-    Return From Keyword If  &{original_ntp} == &{EMPTY}
+    IF  &{original_ntp} == &{EMPTY}  RETURN
+
     Print Timen  Restore NTP Mode.
     Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
     ...  body={'NTP':{'ProtocolEnabled': ${original_ntp["ProtocolEnabled"]}}}
