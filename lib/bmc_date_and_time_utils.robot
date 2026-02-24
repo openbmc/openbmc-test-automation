@@ -12,6 +12,8 @@ Library                      ../lib/gen_robot_valid.py
 *** Variables ***
 
 ${year_without_ntp}          1970
+${ntp_server_1}              9.9.9.9
+${ntp_server_2}              2.2.3.3
 
 *** Keywords ***
 
@@ -161,10 +163,21 @@ Check Date And Time Was Changed
 
 Restore NTP Mode
     [Documentation]  Restore the original NTP mode.
+    [Arguments]  ${version}=IPv4
+
+    # Description of argument(s):
+    # version      Specifies the IP protocol version to use (IPv4 or IPv6).
 
     IF  &{original_ntp} == &{EMPTY}  RETURN
 
     Print Timen  Restore NTP Mode.
-    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
-    ...  body={'NTP':{'ProtocolEnabled': ${original_ntp["ProtocolEnabled"]}}}
-    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    IF  '${version}' == 'IPv4'
+        Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
+        ...  body={'NTP':{'ProtocolEnabled': ${original_ntp["ProtocolEnabled"]}}}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    ELSE
+        RedfishIPv6.Patch  ${REDFISH_NW_PROTOCOL_URI}
+        ...  body={'NTP':{'ProtocolEnabled': ${original_ntp["ProtocolEnabled"]}}}
+        ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+    END
