@@ -10,7 +10,7 @@ Resource         ../../lib/external_intf/vmi_utils.robot
 Suite Setup       Suite Setup Execution
 Suite Teardown    Run Keyword And Ignore Error  Suite Teardown Execution
 
-Test Tags        Vmi_Multiple_Interfaces
+Test Tags         Vmi_Multiple_Interfaces
 
 *** Variables ***
 
@@ -127,7 +127,7 @@ Get Original Vmi Details
 
 Suite Teardown Execution
     [Documentation]  Do suite teardown execution task
-    ...  Set original vmi details and verify.
+    ...  Set original VMI details and verify.
 
     FOR  ${interface}  IN   @{interface_list}
         IF  ${vmi_network_conf_${interface}} != ${None}
@@ -140,4 +140,3 @@ Suite Teardown Execution
     END
 
     Redfish.Logout
-

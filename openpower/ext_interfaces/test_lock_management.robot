@@ -691,7 +691,7 @@ Form Data To Release Lock
     [Arguments]  ${trans_id_list}
 
     # Description of argument(s):
-    # trans_id_list
+    # trans_id_list     Transaction ID list.
 
     @{tran_ids}=  Create List
 
@@ -982,7 +982,7 @@ Verify Release Lock When Session Deleted
     [Arguments]  ${client_id}  ${lock_type}
 
     # Description of argument(s):
-    # client_ids    This client id can contain string value
+    # client_id     This client id can contain string value
     #               (e.g. 12345, "HMCID").
     # lock_type     Read lock or Write lock.
 

@@ -13,7 +13,7 @@ Suite Setup       Suite Setup Execution
 Test Teardown     FFDC On Test Case Fail
 Suite Teardown    Run Keyword And Ignore Error  Suite Teardown Execution
 
-Test Tags        Vmicert_Management
+Test Tags         Vmicert_Management
 
 
 *** Variables ***
@@ -573,9 +573,9 @@ Get Root Certificate And Send Corrupted CSR Requests From Admin And Operator Con
 *** Keywords ***
 
 Generate CSR String
-    [Documentation]  Generate a csr string.
+    [Documentation]  Generate a CSR string.
 
-    # Note: Generates and returns csr string.
+    # Note: Generates and returns CSR string.
     ${csr_gen_time} =  Get Current Date Time
     ${CSR_FILE}=  Catenate  SEPARATOR=_  ${csr_gen_time}  csr_server.csr
     ${CSR_KEY}=   Catenate  SEPARATOR=_  ${csr_gen_time}  csr_server.key
@@ -602,6 +602,7 @@ Send CSR To VMI And Get Signed
     # force_create           Create a new REST session if True.
     # username               Username to create a REST session.
     # password               Password to create a REST session.
+    # read_timeout           Session read timeout.
 
     IF  "${XAUTH_TOKEN}" != "${EMPTY}" or ${force_create} == ${True}
          Initialize OpenBMC  rest_username=${username}  rest_password=${password}
@@ -704,6 +705,7 @@ Get Certificate Signed By VMI
     # valid_csr          Uses valid CSR string in the REST request if True.
     #                    This is not applicable for root certificate.
     # valid_status_code  Expected status code from REST request.
+    # read_timeout       Session read timeout.
 
     Set Test Variable  ${CSR}  CSR
     Set Test Variable  ${CORRUPTED_CSR}  CORRUPTED_CSR
