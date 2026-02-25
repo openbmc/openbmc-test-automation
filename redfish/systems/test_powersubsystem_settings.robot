@@ -55,7 +55,7 @@ Verify Allowable Power Mode Settings
 Verify Allowable Power Mode Settings Switch At Runtime
     [Documentation]  Check the allowable power modes are set successfully at runtime.
     [Tags]  Verify_Allowable_Power_Mode_Settings_Switch_At_Runtime
-    [Template]  Set and Verify Power Mode Switches
+    [Template]  Set And Verify Power Mode Switches
 
     # power_mode_type
     Static
@@ -126,7 +126,7 @@ Get Total Number Of PowerSupplies
     RETURN  ${total_num_powersupplies}
 
 
-Set and Verify Power Mode Switches
+Set And Verify Power Mode Switches
     [Documentation]  Verify the power mode switches successfully at standby or runtime.
     [Arguments]  ${power_mode}
 
@@ -135,7 +135,7 @@ Set and Verify Power Mode Switches
 
     Redfish.Login
 
-    Redfish.patch  ${SYSTEM_BASE_URI}
+    Redfish.Patch  ${SYSTEM_BASE_URI}
     ...  body={"PowerMode":"${power_mode}"}  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
     ${current_power_mode}=  Redfish.Get Attribute  ${SYSTEM_BASE_URI}  PowerMode
     Should Be Equal As Strings  ${power_mode}  ${current_power_mode}

@@ -1,19 +1,19 @@
 *** Settings ***
 Documentation  Network interface configuration and verification
-               ...  tests.
+...            tests.
 
+Library        Collections
 Resource       ../../lib/bmc_redfish_resource.robot
 Resource       ../../lib/bmc_network_utils.robot
 Resource       ../../lib/openbmc_ffdc.robot
 Library        ../../lib/bmc_network_utils.py
-Library        Collections
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Suite Teardown Execution
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 
-Test Tags     Bmc_Network_Conf
+Test Tags       Bmc_Network_Conf
 
 *** Variables ***
 ${test_hostname}           openbmc
@@ -216,7 +216,7 @@ Add Fourth Octet Threshold IP And Verify
     [Teardown]  Run Keywords
     ...  Delete IP Address  10.7.7.254  AND  Test Teardown Execution
 
-     Add IP Address  10.7.7.254  ${test_subnet_mask}  ${test_gateway}
+    Add IP Address  10.7.7.254  ${test_subnet_mask}  ${test_gateway}
 
 Add Fourth Octet Lowest IP And Verify
     [Documentation]  Add fourth octet lowest IP and verify.
@@ -407,7 +407,7 @@ Get DNS Server And Verify
     [Documentation]  Get DNS server via Redfish and verify.
     [Tags]  Get_DNS_Server_And_Verify
 
-    Verify CLI and Redfish Nameservers
+    Verify CLI And Redfish Nameservers
 
 Configure DNS Server And Verify
     [Documentation]  Configure DNS server and verify.
@@ -417,7 +417,7 @@ Configure DNS Server And Verify
     ...  Configure Static Name Servers  AND  Test Teardown Execution
 
     Configure Static Name Servers  ${static_name_servers}
-    Verify CLI and Redfish Nameservers
+    Verify CLI And Redfish Nameservers
 
 Delete DNS Server And Verify
     [Documentation]  Delete DNS server and verify.
@@ -427,7 +427,7 @@ Delete DNS Server And Verify
     ...  Configure Static Name Servers  AND  Test Teardown Execution
 
     Delete Static Name Servers
-    Verify CLI and Redfish Nameservers
+    Verify CLI And Redfish Nameservers
 
 Configure DNS Server And Check Persistency
     [Documentation]  Configure DNS server and check persistency on reboot.
@@ -440,7 +440,7 @@ Configure DNS Server And Check Persistency
     # Reboot BMC and verify persistency.
     Redfish OBMC Reboot (off)  stack_mode=skip
     Redfish.Login
-    Verify CLI and Redfish Nameservers
+    Verify CLI And Redfish Nameservers
 
 Configure Loopback IP For Gateway
     [Documentation]  Configure loopback IP for gateway and expect an error.
@@ -549,7 +549,7 @@ Config Multiple DNS Servers And Verify
 
      @{list_name_servers}=  Create List  10.5.5.10  10.20.5.10  10.5.6.7
      Configure Static Name Servers  ${list_name_servers}
-     Verify CLI and Redfish Nameservers
+     Verify CLI And Redfish Nameservers
 
 
 Configure And Verify Multiple Static IPv4 Addresses
@@ -587,9 +587,9 @@ Configure And Verify Multiple IPv4 Addresses
     ...  Delete IP Address  ${test_ipv4_addr}  AND  Delete IP Address  ${test_ipv4_addr2}
     ...  AND  Test Teardown Execution
 
-    ${ip1}=  Create dictionary  Address=${test_ipv4_addr}
+    ${ip1}=  Create Dictionary  Address=${test_ipv4_addr}
     ...  SubnetMask=255.255.0.0  Gateway=${test_gateway}
-    ${ip2}=  Create dictionary  Address=${test_ipv4_addr2}
+    ${ip2}=  Create Dictionary  Address=${test_ipv4_addr2}
     ...  SubnetMask=255.255.252.0  Gateway=${test_gateway}
 
     ${empty_dict}=  Create Dictionary
@@ -606,7 +606,7 @@ Configure And Verify Multiple IPv4 Addresses
     ${payload}=  Create Dictionary  IPv4StaticAddresses=${patch_list}
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
-    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{payload}
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{payload}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Note: Network restart takes around 15-18s after patch request processing.
@@ -629,14 +629,14 @@ Config Multiple DNS Servers And Check Persistency
     # Reboot BMC and verify persistency.
     Redfish OBMC Reboot (off)  stack_mode=skip
     Redfish.Login
-    Verify CLI and Redfish Nameservers
+    Verify CLI And Redfish Nameservers
 
 
 Configure Static IP Without Using Gateway And Verify
     [Documentation]  Configure static IP without using gateway and verify error.
     [Tags]  Configure_Static_IP_Without_Using_Gateway_And_Verify
 
-    ${ip}=  Create dictionary  Address=${test_ipv4_addr}
+    ${ip}=  Create Dictionary  Address=${test_ipv4_addr}
     ...  SubnetMask=${test_subnet_mask}
     ${empty_dict}=  Create Dictionary
     ${patch_list}=  Create List
@@ -652,7 +652,7 @@ Configure Static IP Without Using Gateway And Verify
     ${payload}=  Create Dictionary  IPv4StaticAddresses=${patch_list}
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
-    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     ...  body=&{payload}  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
 
@@ -725,7 +725,7 @@ Clear IP Settings On Fail
 
     Test Teardown Execution
 
-Verify CLI and Redfish Nameservers
+Verify CLI And Redfish Nameservers
     [Documentation]  Verify that nameservers obtained via Redfish do not
     ...  match those found in /etc/resolv.conf.
 
@@ -852,7 +852,7 @@ Enable IPv4 DHCP Settings
     ${DHCPv4}=  Create Dictionary  DHCPEnabled=${status}
 
     ${payload}=  Create Dictionary  DHCPv4=${DHCPv4}
-    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
     ...  body=&{payload}  valid_status_codes=[${HTTP_NO_CONTENT}, ${HTTP_OK}]
 
     Sleep  ${NETWORK_TIMEOUT}s
