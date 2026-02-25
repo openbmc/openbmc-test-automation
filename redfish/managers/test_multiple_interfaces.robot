@@ -2,6 +2,7 @@
 Documentation   Test BMC multiple network interface functionalities.
 ...             Run on setup with both eth0 and eth1 in static mode.
 
+Library         OperatingSystem
 Resource        ../../lib/resource.robot
 Resource        ../../lib/common_utils.robot
 Resource        ../../lib/connection_client.robot
@@ -13,7 +14,6 @@ Resource        ../../lib/snmp/redfish_snmp_utils.robot
 Resource        ../../lib/certificate_utils.robot
 Resource         ../../lib/protocol_setting_utils.robot
 Library         ../../lib/jobs_processing.py
-Library         OperatingSystem
 
 # User input BMC IP for the eth1.
 # Use can input as  -v OPENBMC_HOST_ETH1:xx.xxx.xx from command line.
@@ -53,7 +53,7 @@ Verify Redfish Works On Both Interfaces
 
     ${hostname}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
     ${data}=  Create Dictionary  HostName=openbmc
-    Redfish1.patch  ${REDFISH_NW_ETH_IFACE}eth1  body=&{data}
+    Redfish1.Patch  ${REDFISH_NW_ETH_IFACE}eth1  body=&{data}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     Validate Hostname On BMC  openbmc
@@ -124,8 +124,8 @@ Verify Both Interfaces Access Concurrently Via Redfish
     [Tags]  Verify_Both_Interfaces_Access_Concurrently_Via_Redfish
 
     ${dict}=  Execute Process Multi Keyword  ${2}
-    ...  Redfish.patch ${REDFISH_NW_ETH_IFACE}eth0 body={'DHCPv4':{'UseDNSServers':${True}}}
-    ...  Redfish1.patch ${REDFISH_NW_ETH_IFACE}eth1 body={'DHCPv4':{'UseDNSServers':${True}}}
+    ...  Redfish.Patch ${REDFISH_NW_ETH_IFACE}eth0 body={'DHCPv4':{'UseDNSServers':${True}}}
+    ...  Redfish1.Patch ${REDFISH_NW_ETH_IFACE}eth1 body={'DHCPv4':{'UseDNSServers':${True}}}
 
     Dictionary Should Not Contain Value  ${dict}  False
     ...  msg=One or more operations has failed.
@@ -260,7 +260,7 @@ Set BMC Ethernet Interfaces State
 
     ${data}=  Create Dictionary  InterfaceEnabled=${enabled}
 
-    Redfish1.patch  ${REDFISH_NW_ETH_IFACE}${interface}  body=&{data}
+    Redfish1.Patch  ${REDFISH_NW_ETH_IFACE}${interface}  body=&{data}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     Sleep  ${NETWORK_TIMEOUT}s
@@ -348,7 +348,7 @@ Set SSH Value Via Eth1
     ${data}=  Create Dictionary  SSH=${ssh_state}
 
     Redfish1.Login
-    Redfish1.patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
+    Redfish1.Patch  ${REDFISH_NW_PROTOCOL_URI}  body=&{data}
     ...  valid_status_codes=[${HTTP_NO_CONTENT}]
 
     # Wait for timeout for new values to take effect.

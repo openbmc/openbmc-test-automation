@@ -1,6 +1,9 @@
 *** Settings ***
 Documentation  Network interface IPv6 configuration and verification
-               ...  tests.
+...            tests.
+
+Library        Collections
+Library        Process
 
 Resource       ../../lib/bmc_redfish_resource.robot
 Resource       ../../lib/openbmc_ffdc.robot
@@ -8,15 +11,13 @@ Resource       ../../lib/bmc_ipv6_utils.robot
 Resource       ../../lib/external_intf/vmi_utils.robot
 Resource       ../../lib/bmc_network_utils.robot
 Library        ../../lib/bmc_network_utils.py
-Library        Collections
-Library        Process
 
 Test Setup      Test Setup Execution
 Test Teardown   Test Teardown Execution
 Suite Setup     Suite Setup Execution
 Suite Teardown  Redfish.Logout
 
-Test Tags     BMC_IPv6
+Test Tags       BMC_IPv6
 
 *** Variables ***
 ${test_ipv6_invalid_addr}    2001:db8:3333:4444:5555:6666:7777:JJKK
@@ -373,7 +374,7 @@ Add Multiple IPv6 Address And Verify
     ...  Delete IPv6 Address  ${test_ipv6_addr}  AND  Delete IPv6 Address  ${test_ipv6_addr1}
     ...  AND  Test Teardown Execution
 
-    Configure Multiple IPv6 Address on BMC  ${test_prefix_length}
+    Configure Multiple IPv6 Address On BMC  ${test_prefix_length}
 
 
 Verify Coexistence Of Static IPv6 And SLAAC On BMC
@@ -618,7 +619,7 @@ Suite Setup Execution
 
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
-    Set Suite variable  ${ethernet_interface}
+    Set Suite Variable  ${ethernet_interface}
 
     # Get initial IPv4 and IPv6 addresses and address origins for eth0.
     ${initial_ipv4_addressorigin_list}  ${initial_ipv4_addr_list}=
@@ -641,7 +642,7 @@ Suite Setup Execution
     Set Suite Variable   ${eth1_initial_ipv6_addressorigin_list}
     Set Suite Variable   ${eth1_initial_ipv6_addr_list}
     ${test_gateway}=     Get BMC Default Gateway
-    Set Suite variable   ${test_gateway}
+    Set Suite Variable   ${test_gateway}
 
 
 Test Setup Execution
@@ -661,7 +662,7 @@ Test Teardown Execution
     FFDC On Test Case Fail
 
 
-Configure Multiple IPv6 Address on BMC
+Configure Multiple IPv6 Address On BMC
     [Documentation]  Add multiple IPv6 address on BMC.
     [Arguments]  ${prefix_len}
     ...          ${valid_status_codes}=[${HTTP_OK},${HTTP_NO_CONTENT}]
@@ -695,7 +696,7 @@ Configure Multiple IPv6 Address on BMC
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
-    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
     ...  valid_status_codes=${valid_status_codes}
 
     IF  ${valid_status_codes} != [${HTTP_OK}, ${HTTP_NO_CONTENT}]
