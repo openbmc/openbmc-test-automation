@@ -13,6 +13,7 @@ from robot.libraries.BuiltIn import BuiltIn
 
 def bmc_execute_command(
     cmd_buf,
+    openbmc_host=None,
     print_out=0,
     print_err=0,
     ignore_err=0,
@@ -46,8 +47,14 @@ def bmc_execute_command(
     """
 
     # Get global BMC variable values.
-    openbmc_host = BuiltIn().get_variable_value("${OPENBMC_HOST}", default="")
     ssh_port = BuiltIn().get_variable_value("${SSH_PORT}", default="22")
+
+    # Get global open BMC host if user defined openbmc_host is not provided.
+    if not openbmc_host:
+        openbmc_host = BuiltIn().get_variable_value(
+            "${OPENBMC_HOST}", default=""
+        )
+
     openbmc_username = BuiltIn().get_variable_value(
         "${OPENBMC_USERNAME}", default=""
     )
