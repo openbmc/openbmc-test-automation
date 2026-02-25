@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54700c6d_f43b4936",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-02-25T18:01:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7eb18ca9_d659c7a8",
+      "range": {
+        "startLine": 487,
+        "startChar": 39,
+        "endLine": 487,
+        "endChar": 43
+      },
+      "revId": "57cd1871c972c0e42d4b3e45156447e03c49dcc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc38dee0_f95bbe58",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "015e3239_28b08028",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-02-25T18:01:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc38dee0_f95bbe58",
+      "range": {
+        "startLine": 488,
+        "startChar": 41,
+        "endLine": 488,
+        "endChar": 51
+      },
+      "revId": "57cd1871c972c0e42d4b3e45156447e03c49dcc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cab58f02_a797c8a7",
@@ -60,6 +108,30 @@
       "writtenOn": "2026-02-24T09:53:54Z",
       "side": 1,
       "message": "IPMI\n\nmake change in doc as well",
+      "range": {
+        "startLine": 499,
+        "startChar": 58,
+        "endLine": 499,
+        "endChar": 62
+      },
+      "revId": "57cd1871c972c0e42d4b3e45156447e03c49dcc5",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea4a7731_e2d5f929",
+        "filename": "ipmi/test_ipmi_chassis.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-02-25T18:01:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cab58f02_a797c8a7",
       "range": {
         "startLine": 499,
         "startChar": 58,
