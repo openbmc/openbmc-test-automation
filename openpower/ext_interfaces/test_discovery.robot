@@ -19,6 +19,8 @@ Suite Teardown       Redfish.Logout
 Test Setup           Printn
 Test Teardown        FFDC On Test Case Fail
 
+Test Tags            Test_Discovery
+
 *** Test Cases ***
 
 Discover BMC With Different Service Type
@@ -199,7 +201,9 @@ Discover BMC Pre And Post Firmware Update
     [Arguments]  ${service_type1}  ${service_type2}  ${status}
 
     # Description of argument(s):
-    # service_type     BMC service type e.g.
+    # service_type1    BMC service type e.g.
+    #                  (REST Service = _obmc_rest._tcp, Redfish Service = _obmc_redfish._tcp).
+    # service_type2    BMC service type e.g.
     #                  (REST Service = _obmc_rest._tcp, Redfish Service = _obmc_redfish._tcp).
     # status           True or False
 
