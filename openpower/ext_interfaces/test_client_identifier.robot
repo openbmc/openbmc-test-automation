@@ -17,7 +17,7 @@ Suite Teardown    Run Keyword And Ignore Error  Delete All Redfish Sessions
 Test Setup        Printn
 Test Teardown     FFDC On Test Case Fail
 
-Test Tags        Client_Identifier
+Test Tags         Client_Identifier
 
 *** Test Cases ***
 
@@ -145,6 +145,8 @@ Create A Non Admin Session With ClientID
     # Description of argument(s):
     # client_id    This client id can contain string value
     #              (e.g. 12345, "EXTERNAL-CLIENT").
+    # username     Provide user name.
+    # password     Provide password.
 
     @{session_list}=  Create List
     &{tmp_dict}=  Create Dictionary
