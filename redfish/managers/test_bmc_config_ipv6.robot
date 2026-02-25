@@ -1,6 +1,6 @@
 *** Settings ***
-Documentation  Network interface IPv6 configuration connected to DHCP server
-               ...   and verification tests.
+Documentation   Network interface IPv6 configuration connected to DHCP server
+...             and verification tests.
 
 Resource        ../../lib/bmc_redfish_resource.robot
 Resource        ../../lib/openbmc_ffdc.robot
@@ -15,6 +15,7 @@ Library         Collections
 Library         OperatingSystem
 Library         Process
 Library         Telnet
+
 Suite Setup     Suite Setup Execution
 Test Teardown   Test Teardown Execution
 
@@ -97,8 +98,8 @@ Verify IPv4 And IPv6 Access Concurrently Via Redfish
     [Tags]  Verify_IPv4_And_IPv6_Access_Concurrently_Via_Redfish
 
     ${dict}=  Execute Process Multi Keyword  ${2}
-    ...  Redfish.patch ${REDFISH_NW_ETH_IFACE}eth0 body={'DHCPv4':{'UseDNSServers':${True}}}
-    ...  RedfishIPv6.patch ${REDFISH_NW_ETH_IFACE}eth0 body={'DHCPv4':{'UseDNSServers':${True}}}
+    ...  Redfish.Patch ${REDFISH_NW_ETH_IFACE}eth0 body={'DHCPv4':{'UseDNSServers':${True}}}
+    ...  RedfishIPv6.Patch ${REDFISH_NW_ETH_IFACE}eth0 body={'DHCPv4':{'UseDNSServers':${True}}}
     Dictionary Should Not Contain Value  ${dict}  False
     ...  msg=One or more operations has failed.
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}eth0
@@ -142,10 +143,11 @@ Configure IPv4 Address From IPv6 Address And Verify
     [Template]  Configure IPv4 Address From IPv6 And Verify
     [Teardown]  Delete IP Address  ${test_ipv4_addr}  version=IPv6
 
-    SLAAC      ${1}  ${test_ipv4_addr}
-    SLAAC      ${2}  ${test_ipv4_addr}
-    Static     ${1}  ${test_ipv4_addr}
-    Static     ${2}  ${test_ipv4_addr}
+    # Address_type  channel_number   test_ipv4_addr
+    SLAAC           ${1}             ${test_ipv4_addr}
+    SLAAC           ${2}             ${test_ipv4_addr}
+    Static          ${1}             ${test_ipv4_addr}
+    Static          ${2}             ${test_ipv4_addr}
 
 
 Modify IPv6 Address From IPv6 Address And Verify
@@ -153,10 +155,11 @@ Modify IPv6 Address From IPv6 Address And Verify
     [Tags]  Modify_IPv6_Address_From_IPv6_Address_And_Verify
     [Template]  Modify IPv6 Address From IPv6 Address
 
-    Static  ${1}  ${test_ipv4_addr}
-    Static  ${2}  ${test_ipv4_addr}
-    SLAAC   ${1}  ${test_ipv6_addr}
-    SLAAC   ${2}  ${test_ipv4_addr}
+    # Address_type  channel_number   test_ipv4_addr
+    Static          ${1}             ${test_ipv4_addr}
+    Static          ${2}             ${test_ipv4_addr}
+    SLAAC           ${1}             ${test_ipv6_addr}
+    SLAAC           ${2}             ${test_ipv4_addr}
 
 
 Modify IPv4 Address From IPv6 Address And Verify
@@ -164,10 +167,11 @@ Modify IPv4 Address From IPv6 Address And Verify
     [Tags]  Modify_IPv4_Address_From_IPv6_Address_And_Verify
     [Template]  Modify IPv4 Address From IPv6 Address
 
-    Static  ${1}  ${test_ipv4_addr}
-    Static  ${2}  ${test_ipv4_addr}
-    SLAAC   ${1}  ${test_ipv4_addr}
-    SLAAC   ${2}  ${test_ipv4_addr}
+    # Address_type  channel_number   test_ipv4_addr
+    Static          ${1}             ${test_ipv4_addr}
+    Static          ${2}             ${test_ipv4_addr}
+    SLAAC           ${1}             ${test_ipv4_addr}
+    SLAAC           ${2}             ${test_ipv4_addr}
 
 
 Verify IPv6 Addresses Can Be Configured And IPs Are Reachable
@@ -206,8 +210,9 @@ Delete Static IPv4 On Eth0 Using IPv6 And Verify
     ...  AND  Add IP Address  ${test_ipv4_addr1}  ${test_subnet_mask}  ${test_gateway}
     [Template]  Delete IPv4 Address From IPv6 And Verify
 
-    Static     ${1}  ${test_ipv4_addr}
-    SLAAC      ${1}  ${test_ipv4_addr1}
+    # Address_type  channel_number   test_ipv4_addr
+    Static          ${1}             ${test_ipv4_addr}
+    SLAAC           ${1}             ${test_ipv4_addr1}
 
 
 Verify Redfish Operations Are Working Via IPv6
@@ -215,10 +220,11 @@ Verify Redfish Operations Are Working Via IPv6
     [Tags]  Verify_Redfish_Operations_Are_Working_Via_IPv6
     [Template]  Verify Redfish Operations For IPV6 Address
 
-    Static  ${1}
-    Static  ${2}
-    SLAAC   ${1}
-    SLAAC   ${2}
+    # Address_type  channel_number
+    Static          ${1}
+    Static          ${2}
+    SLAAC           ${1}
+    SLAAC           ${2}
 
 
 Verify Telnet Access Is Blocked Via IPv6
@@ -239,7 +245,7 @@ Enable IPMI Via IPv6 Address And Verify IPMI Works For IPv4 And IPv6
     [Tags]  Enable_IPMI_Via_IPv6_Address_And_Verify_IPMI_Works_For_IPv4_And_IPv6
     [Template]  Enable Or Disable IPMI Via IPv6 And Verify It Works For Both IP Versions
 
-    #ipv6_type   channel_number  enable
+    # ipv6_type   channel_number  enable
     Static       ${1}            ${True}
     Static       ${2}            ${True}
     SLAAC        ${1}            ${True}
@@ -252,7 +258,7 @@ Disable IPMI Via IPv6 Address And Verify IPMI Does Not Work For IPv4 And IPv6
     [Template]  Enable Or Disable IPMI Via IPv6 And Verify It Works For Both IP Versions
     [Teardown]  Enable IPMI Protocol  ${True}
 
-    #ipv6_type   channel_number  disable
+    # ipv6_type   channel_number  disable
     Static       ${1}            ${False}
     Static       ${2}            ${False}
     SLAAC        ${1}            ${False}
@@ -312,7 +318,7 @@ Verify SSH Access Restricted For Admin And ReadOnly Users Via SLAAC IPv6
     ...      AND  Set SLAAC Configuration State And Verify  ${True}  [${HTTP_OK}]  ${2}
     [Template]  SSH To Non Service And Admin User Via IPv6
 
-    #ipv6_type   channel_number  username       role              port
+    # ipv6_type   channel_number  username       role              port
     SLAAC        ${1}            admin_user     Administrator     22
     SLAAC        ${2}            admin_user     Administrator     22
     SLAAC        ${1}            readonly_user  ReadOnly          22
@@ -325,7 +331,7 @@ Verify SSH Access Restricted For Admin And ReadOnly Users Via Static IPv6
     [Tags]  Verify_SSH_Access_Restricted_For_Admin_And_ReadOnly_Users_Via_Static_IPv6
     [Template]  SSH To Non Service And Admin User Via IPv6
 
-    #ipv6_type   channel_number  username       role              port
+    # ipv6_type   channel_number  username       role              port
     Static       ${1}            admin_user     Administrator     22
     Static       ${2}            admin_user     Administrator     22
     Static       ${1}            readonly_user  ReadOnly          22
@@ -373,7 +379,7 @@ Ping Host Over IPv6
     # host           IPv6 address of the host to ping.
     # expected_rc    Expected return code of ping command.
     Should Not Be Empty    ${host}   msg=No host provided.
-    ${rc}   ${output}=     Run and return RC and Output    ping6 -c 4 ${host}
+    ${rc}   ${output}=     Run And Return RC And Output    ping6 -c 4 ${host}
     Log     RC: ${rc}\nOutput:\n${output}
     Should Be Equal     ${rc}   ${expected_rc}
 
