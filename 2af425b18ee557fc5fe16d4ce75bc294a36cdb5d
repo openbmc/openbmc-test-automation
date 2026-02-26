@@ -33,6 +33,24 @@
       "message": "As this keyword includes verification part then please mention Verify in keyword name as well",
       "revId": "2af425b18ee557fc5fe16d4ce75bc294a36cdb5d",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdaf90e6_d6a201e8",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 7
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-02-26T14:29:42Z",
+      "side": 1,
+      "message": "something like this \"Configure_And_Verify_NTP_Over_IPv6\"",
+      "parentUuid": "4719b03b_171bf664",
+      "revId": "2af425b18ee557fc5fe16d4ce75bc294a36cdb5d",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
