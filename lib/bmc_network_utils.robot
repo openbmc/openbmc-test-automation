@@ -1,4 +1,6 @@
 *** Settings ***
+Documentation           Network utility resource file keywords.
+
 Resource                ../lib/utils.robot
 Resource                ../lib/connection_client.robot
 Resource                ../lib/boot_utils.robot
@@ -7,6 +9,7 @@ Library                 ../lib/utils.py
 Library                 ../lib/bmc_network_utils.py
 
 *** Variables ***
+
 # MAC input from user.
 ${MAC_ADDRESS}          ${EMPTY}
 &{DHCP_ENABLED}         DHCPEnabled=${True}
@@ -154,8 +157,8 @@ Get BMC Hostname
 
     RETURN  ${output}
 
-Get FW_Env MAC Address
-    [Documentation]  Get FW_Env MAC address.
+Get FW Env MAC Address
+    [Documentation]  Get FW Env MAC address.
 
     # Sample output of "fw_printenv | grep ethaddr"
     # ethaddr=xx:xx:xx:xx:xx:xx:xx
@@ -261,7 +264,7 @@ Get First Non Pingable IP From Subnet
       ${new_ip}=  Catenate  ${network_part}.${octet4}
       ${status}=  Run Keyword And Return Status  Ping Host  ${new_ip}
       # If IP is non-pingable, return it.
-      Return From Keyword If  '${status}' == 'False'  ${new_ip}
+      IF  '${status}' == 'False'  RETURN  ${new_ip}
     END
 
     Fail  msg=No non-pingable IP could be found in subnet ${network_part}.
@@ -281,14 +284,14 @@ Validate MAC On BMC
     Should Be True  ${status}
     ...  msg=MAC address ${system_mac} does not match ${mac_new_addr}.
 
-Validate MAC On FW_Env
-    [Documentation]  Validate MAC on FW_Env.
+Validate MAC On FW Env
+    [Documentation]  Validate MAC on FW Env.
     [Arguments]  ${mac_addr}
 
     # Description of argument(s):
     # mac_addr  MAC address of the BMC.
 
-    ${fw_env_addr}=  Get FW_Env MAC Address
+    ${fw_env_addr}=  Get FW Env MAC Address
     ${mac_new_addr}=  Truncate MAC Address  ${fw_env_addr}  ${mac_addr}
 
     ${status}=  Compare MAC Address  ${fw_env_addr}  ${mac_new_addr}
@@ -306,22 +309,22 @@ Truncate MAC Address
     ${mac_byte}=  Set Variable  ${0}
     @{user_mac_list}=  Split String  ${user_mac_addr}  :
     @{sys_mac_list}=  Split String  ${sys_mac_addr}  :
-    ${user_new_mac_list}  Create List
+    ${user_new_mac_list}=  Create List
 
     # Truncate extra bytes and bits from MAC address
     FOR  ${mac_item}  IN  @{sys_mac_list}
-        ${invalid_mac_byte} =  Get Regexp Matches  ${user_mac_list}[${mac_byte}]  [^A-Za-z0-9]+
-        Return From Keyword If  ${invalid_mac_byte}  ${user_mac_addr}
-        ${mac_int} =    Convert To Integer      ${user_mac_list}[${mac_byte}]   16
-        ${user_mac_len} =  Get Length  ${user_mac_list}
+        ${invalid_mac_byte}=  Get Regexp Matches  ${user_mac_list}[${mac_byte}]  [^A-Za-z0-9]+
+        IF  ${invalid_mac_byte}  ${user_mac_addr}  RETURN
+        ${mac_int}=  Convert To Integer      ${user_mac_list}[${mac_byte}]   16
+        ${user_mac_len}=  Get Length  ${user_mac_list}
         IF  ${mac_int} >= ${256}
             ${user_mac_byte}=  Truncate MAC Bits  ${user_mac_list}[${mac_byte}]
         ELSE
             ${user_mac_byte}=   Set Variable  ${user_mac_list}[${mac_byte}]
         END
         Append To List  ${user_new_mac_list}  ${user_mac_byte}
-        ${mac_byte} =    Set Variable    ${mac_byte + 1}
-        Exit For Loop If  '${mac_byte}' == '${user_mac_len}'
+        ${mac_byte}=    Set Variable    ${mac_byte + 1}
+        IF  '${mac_byte}' == '${user_mac_len}'  BREAK
 
     END
     ${user_new_mac_string}=   Evaluate  ":".join(${user_new_mac_list})
@@ -363,7 +366,7 @@ Configure Hostname
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
     ${data}=  Create Dictionary  HostName=${hostname}
-    Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
     ...  valid_status_codes=${status_code}
 
 
@@ -425,7 +428,7 @@ CLI Get Nameservers
 
     RETURN  ${nameservers}
 
-CLI Get and Verify Name Servers
+CLI Get And Verify Name Servers
     [Documentation]    Get and Verify the nameserver IPs from /etc/resolv.conf
     ...  and compare with redfish nameserver.
     [Arguments]     ${static_name_servers}
@@ -450,7 +453,7 @@ CLI Get and Verify Name Servers
 Get Network Configuration
     [Documentation]  Get network configuration.
     # Sample output:
-    #{
+    # {
     #  "@odata.context": "/redfish/v1/$metadata#EthernetInterface.EthernetInterface",
     #  "@odata.id": "/redfish/v1/Managers/${MANAGER_ID}/EthernetInterfaces/eth0",
     #  "@odata.type": "#EthernetInterface.v1_2_0.EthernetInterface",
@@ -528,14 +531,14 @@ Add IP Address
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
     IF  '${version}' == 'IPv4'
-        Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+        Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
         ...  valid_status_codes=[${valid_status_codes}]
     ELSE
-        RedfishIPv6.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+        RedfishIPv6.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
         ...  valid_status_codes=[${valid_status_codes}]
     END
 
-    Return From Keyword If  '${valid_status_codes}' != '${HTTP_OK},${HTTP_NO_CONTENT}'
+    IF  '${valid_status_codes}' != '${HTTP_OK},${HTTP_NO_CONTENT}'  RETURN
 
     # Note: Network restart takes around 15-18s after patch request processing.
     Sleep  ${NETWORK_TIMEOUT}s
@@ -580,10 +583,10 @@ Delete IP Address
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
     IF  '${Version}' == 'IPv4'
-        Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+        Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
         ...  valid_status_codes=${valid_status_codes}
     ELSE
-        RedfishIPv6.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
+        RedfishIPv6.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  body=&{data}
         ...  valid_status_codes=${valid_status_codes}
     END
 
@@ -632,7 +635,7 @@ Create VLAN
     IF  '${expected_result}' == 'error'
         Should Be Equal  ${status}  ${False}  msg=Configuration of an invalid VLAN ID Failed.
     ELSE
-         Should Be Equal  ${status}  ${True}  msg=Configuration of a valid VLAN ID Failed.
+        Should Be Equal  ${status}  ${True}  msg=Configuration of a valid VLAN ID Failed.
     END
 
     Sleep  ${NETWORK_TIMEOUT}s
@@ -774,7 +777,7 @@ Get Channel Number For Valid Ethernet Interface
 
     FOR  ${channel_number}  ${values}  IN  &{valid_channel_number_interface_name}
       ${usb_interface_status}=  Run Keyword And Return Status  Should Not Contain  ${values['name']}  usb
-      Continue For Loop IF  ${usb_interface_status} == False
+      IF  ${usb_interface_status} == False  CONTINUE
       IF  '${values['channel_info']['medium_type']}' == 'lan-802.3'
           Append To List  ${channel_number_list}  ${channel_number}
       END
@@ -814,7 +817,8 @@ Get Active Ethernet Channel List
     ${channel_number_list}=  Get Channel Number For Valid Ethernet Interface
     ...  ${valid_channel_number_interface_name}
 
-    Return From Keyword If  ${current_channel} == 0  ${channel_number_list}
+    IF  ${current_channel} == 0  RETURN  ${channel_number_list}
+
     ${channel_number_list}=  Get Current Channel Name List
     ...  ${channel_number_list}  ${valid_channel_number_interface_names}
 
@@ -863,10 +867,10 @@ Update IP Address
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
     IF  '${version}' == 'IPv4'
-        Redfish.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+        Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
         ...  body=&{data}  valid_status_codes=${valid_status_codes}
     ELSE
-        RedfishIPv6.patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+        RedfishIPv6.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
         ...  body=&{data}  valid_status_codes=${valid_status_codes}
     END
 
@@ -887,7 +891,8 @@ Get IPv4 DHCP Enabled Status
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
     ${resp}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  DHCPv4
-    Return From Keyword  ${resp['DHCPEnabled']}
+
+    RETURN  ${resp['DHCPEnabled']}
 
 Get DHCP IP Info
     [Documentation]  Return DHCP IP address, gateway and subnetmask from redfish URI.
@@ -896,11 +901,11 @@ Get DHCP IP Info
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
     ${resp_list}=  Redfish.Get Attribute  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}  IPv4Addresses
     FOR  ${resp}  IN  @{resp_list}
-        Continue For Loop If  '${resp['AddressOrigin']}' != 'DHCP'
+        IF  '${resp['AddressOrigin']}' != 'DHCP'  CONTINUE
         ${ip_addr}=  Set Variable  ${resp['Address']}
         ${gateway}=  Set Variable  ${resp['Gateway']}
         ${subnetmask}=  Set Variable  ${resp['SubnetMask']}
-        Return From Keyword  ${ip_addr}  ${gateway}  ${subnetmask}
+        RETURN  ${ip_addr}  ${gateway}  ${subnetmask}
     END
 
 
@@ -938,7 +943,7 @@ Delete Static Name Servers
 Configure Static Name Servers
     [Documentation]  Configure DNS server on BMC.
     [Arguments]  ${static_name_servers}=${original_nameservers}
-     ...  ${valid_status_codes}=${HTTP_OK},${HTTP_NO_CONTENT}
+    ...  ${valid_status_codes}=${HTTP_OK},${HTTP_NO_CONTENT}
 
     # Description of the argument(s):
     # static_name_servers  A list of static name server IPs to be
@@ -950,7 +955,7 @@ Configure Static Name Servers
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
-    ${type} =  Evaluate  type($static_name_servers).__name__
+    ${type}=  Evaluate  type($static_name_servers).__name__
     ${static_name_servers}=  Set Variable If  '${type}'=='str'
     ...  '${static_name_servers}'  ${static_name_servers}
 
@@ -963,7 +968,7 @@ Configure Static Name Servers
     Sleep  5s
 
     # Check if newly added DNS server is configured on BMC.
-    CLI Get and Verify Name Servers  ${static_name_servers}  ${valid_status_codes}
+    CLI Get And Verify Name Servers  ${static_name_servers}  ${valid_status_codes}
 
 Configure MAC Settings
     [Documentation]  Configure MAC settings via Redfish.
@@ -1012,7 +1017,7 @@ Verify MAC Address Via FW_Env
     # valid_status_code   Expected response code, default is ${HTTP_OK}.
 
     ${status}=  Run Keyword And Return Status
-    ...  Validate MAC On FW_Env  ${mac_address}
+    ...  Validate MAC On FW Env  ${mac_address}
 
     IF  ${valid_status_code} == ${HTTP_BAD_REQUEST}
         Should Be Equal  ${status}  ${False}

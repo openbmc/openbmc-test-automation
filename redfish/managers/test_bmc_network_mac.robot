@@ -137,7 +137,7 @@ Test Teardown Execution
 
     # Verify whether new MAC is configured on BMC and FW_Env.
     Validate MAC On BMC  ${initial_mac_address}
-    Validate MAC On Fw_Env  ${initial_mac_address}
+    Validate MAC On FW Env  ${initial_mac_address}
 
     FFDC On Test Case Fail
     Redfish.Logout
