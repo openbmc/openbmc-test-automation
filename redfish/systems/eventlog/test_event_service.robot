@@ -17,7 +17,10 @@ Test Tags       Event_Service
 *** Variables ***
 
 # override this default using -v REMOTE_SERVER_IP:<IP> from CLI
-${REMOTE_SERVER_IP}    10.7.7.7
+${REMOTE_SERVER_IP}             10.7.7.7
+@{RegistryPrefixes_list}        Base  OpenBMC  TaskEvent
+@{ResourceTypes_list}           Task
+${Maximum_subscription_count}   20
 
 ** Test Cases **
 
@@ -25,21 +28,7 @@ Verify Add Subscribe Server For Event Notification
     [Documentation]  Subscribe a remote server and verify if added successful.
     [Tags]  Verify_Add_Subscribe_Server_For_Event_Notification
 
-    ${subscription_list}=  Redfish_Utils.Get Member List
-    ...  /redfish/v1/EventService/Subscriptions
-
-    Should Be Empty  ${subscription_list}
-
-    ${RegistryPrefixes_list}=  Create List  Base  OpenBMC  TaskEvent
-    ${ResourceTypes_list}=  Create List  Task
-
-    ${payload}=  Create Dictionary
-    ...  Context=Test_Context  Destination=https://${REMOTE_SERVER_IP}:${HTTPS_PORT}/
-    ...  EventFormatType=Event  Protocol=Redfish  SubscriptionType=RedfishEvent
-    ...  RegistryPrefixes=${RegistryPrefixes_list}  ResourceTypes=${ResourceTypes_list}
-
-    Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
-    ...  valid_status_codes=[${HTTP_CREATED}]
+    Check And Create Subscription
 
     ${subscription_list}=  Redfish_Utils.Get Member List
     ...  /redfish/v1/EventService/Subscriptions
@@ -47,6 +36,52 @@ Verify Add Subscribe Server For Event Notification
     ${resp}=  redfish.Get  ${subscription_list[0]}
 
     Dictionary Should Contain Sub Dictionary   ${resp.dict}  ${payload}
+
+Verify Maximum Subscriptions For Event Notification
+    [Documentation]  Verify maximum subscriptions for event notification.
+    [Tags]    Verify_Maximum_Subscriptions_For_Event_Notification
+
+    Check And Create Subscription
+
+    # create maximum subscriptions.
+    FOR  ${i}  IN RANGE  1  20
+        Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
+        ...  valid_status_codes=[${HTTP_CREATED}]
+    END
+
+    ${subscription_list}=  Redfish_Utils.Get Member List
+    ...  /redfish/v1/EventService/Subscriptions
+
+    # verify the subscription count is 20.
+    ${subscription_list_count}=  Get Length  ${subscription_list}
+    Should Be Equal As Integers   ${subscription_list_count}  ${Maximum_subscription_count}
+
+    # create one more subscription which exceeds the maximum subscription count.
+    Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
+    ...   valid_status_codes=[${HTTP_SERVICE_UNAVAILABLE}]
+
+    # Delete a specific subscription to free up space for a new one.
+    Delete Specific Subscription
+
+    # create a new subscription again which should be successful now.
+    Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
+        ...  valid_status_codes=[${HTTP_CREATED}]
+
+Verify Event Service Collection Unsupported Methods
+    [Documentation]  Verify event service collection with unsupported methods.
+    [Tags]  Verify_Event_Service_Collection_Unsupported_Methods
+
+    # Put operation on event service collection.
+    Redfish.Put  /redfish/v1/EventService
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Post operation on event service collection.
+    Redfish.Post  /redfish/v1/EventService
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Delete operation on event service collection.
+    Redfish.Delete  /redfish/v1/EventService
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
 
 *** Keywords ***
@@ -102,3 +137,29 @@ Delete All Subscriptions
       Redfish.Delete  ${url}
     END
 
+Delete Specific Subscription
+    [Documentation]    Delete specific subscription.
+
+    ${subscription_instance}=    Redfish.Get Members List  /redfish/v1/EventService/Subscriptions
+    Redfish.Delete    ${subscription_instance}[0]
+    ...    valid_status_codes=[${${HTTP_OK}}, ${HTTP_NO_CONTENT}]
+
+Check And Create Subscription
+    [Documentation]  Check and create subscription.
+
+    # check the subscription member list.
+    ${subscription_list}=  Redfish_Utils.Get Member List
+    ...  /redfish/v1/EventService/Subscriptions
+    Should Be Empty  ${subscription_list}
+
+    # Create a subscription payload.
+    ${subscription_payload}=  Create Dictionary
+    ...  Context=Test_Context  Destination=https://${REMOTE_SERVER_IP}:${HTTPS_PORT}/
+    ...  EventFormatType=Event  Protocol=Redfish  SubscriptionType=RedfishEvent
+    ...  RegistryPrefixes=${RegistryPrefixes_list}  ResourceTypes=${ResourceTypes_list}
+
+    # Post a subscription and verify the response.
+    Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{subscription_payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+    Set Test Variable  ${payload}  ${subscription_payload}
