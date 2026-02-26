@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72e4c84c_d8eb7bee",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-02-26T14:48:24Z",
+      "side": 1,
+      "message": "Please don\u0027t use div @class directly in the xpath because it will not be stable if modal class changes, so please use contains, it will handle the changes.",
+      "revId": "4469d23242cdaaa522de3e67cd3d3a901e0acd16",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97d3eef6_a54bc6bb",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1001632
+      },
+      "writtenOn": "2026-02-26T14:48:24Z",
+      "side": 1,
+      "message": "same as above comment",
+      "revId": "4469d23242cdaaa522de3e67cd3d3a901e0acd16",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
