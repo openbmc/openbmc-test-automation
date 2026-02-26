@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19db0f4a_92f27d24",
+        "filename": "lib/bmc_date_and_time_utils.robot",
+        "patchSetId": 6
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-02-26T05:16:15Z",
+      "side": 1,
+      "message": "I see some redundancy in the IF ELSE Block, can you try something as below\n\n  ${patch}\u003d  Set Variable If \u0027${version}\u0027 \u003d\u003d \u0027IPv4\u0027\n  ...    Redfish.Patch\n  ...    RedfishIPv6.Patch\n\n  ${patch}  ${REDFISH_NW_PROTOCOL_URI}\n  ...    body\u003d{\u0027NTP\u0027: {\u0027ProtocolEnabled\u0027: ${original_ntp[\"ProtocolEnabled\"]}}}\n  ...    valid_status_codes\u003d[${HTTP_OK}, ${HTTP_NO_CONTENT}]",
+      "revId": "5ace7427d008e12448b1b12c2a40fba1e82e3ef0",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
