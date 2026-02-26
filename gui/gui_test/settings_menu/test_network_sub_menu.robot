@@ -37,15 +37,15 @@ ${xpath_input_prefix_length}             //*[@id="prefixLength"]
 ${xpath_input_addressorigin}             //*[@id="Address Origin"]
 ${xpath_cancel_button}                   //div[@class='modal fade show']//button[@type='button'][normalize-space()='Cancel']
 ${xpath_delete_dns_server}               //*[@title="Delete DNS address"]
-${xpath_save_button}                     //button[contains(text(),'Save')]
+${xpath_save_button}                     //button[@type='button'][normalize-space()='Save']
 ${xpath_dhcp_toggle_switch}              //*[@data-test-id='networkSettings-switch-dhcpEnabled']
 ${xpath_dhcpv6_toggle_switch}            (//dt[normalize-space()='DHCP']/following-sibling::dd[1]//input[@class='form-check-input'])[2]
 ${xpath_slaac_toggle_switch}             (//dt[normalize-space()='IPv6 auto config']/following-sibling::dd[1]//input[@class='form-check-input'])[1]
 ${xpath_lldp_toggle_switch}              (//*[@data-test-id='networkSettings-switch-useNtp'])[2]
-${xpath_ntp_switch_button}               //*[@id="useNtpSwitch"]/following-sibling::label
-${xpath_dns_switch_button}               //*[@id="useDnsSwitch"]/following-sibling::label
-${xpath_domainname_switch_button}        //*[@id="useDomainNameSwitch"]/following-sibling::label
-${xpath_success_popup}                   //*[contains(text(),'Success')]/following-sibling::button
+${xpath_ntp_switch_button}               //dt[normalize-space()='Use NTP servers']/following-sibling::dd[1]
+${xpath_dns_switch_button}               //dt[normalize-space()='Use DNS servers']/following-sibling::dd[1]
+${xpath_domainname_switch_button}        //dt[normalize-space()='Use domain name']/following-sibling::dd[1]
+${xpath_success_popup}                   //div[@role='alert'][contains(.,'Successfully')]
 ${ipv4_elements}                         //h2[contains(., "IPv4")]/following::table[1]/tbody/tr/td[1]
 ${ipv6_elements}                         //h2[contains(., "IPv6")]/following::table[1]/tbody/tr/td[1]
 ${ipv4_addr_origin_elements}             //h2[contains(text(),'IPv4')]//following::table[1]
@@ -1083,6 +1083,7 @@ Toggle DHCPv4 Property And Verify
 
     Click Element At Coordinates   ${xpath_property}  0  0
     Verify Popup Message And Close Popup  ${xpath_success_popup}
+    Reload Page
 
 
 Get DHCP Property Via Redfish
@@ -1092,6 +1093,7 @@ Get DHCP Property Via Redfish
     # Description of argument(s):
     # ${property}       DHCP Property name.
 
+    Sleep  ${NETWORK_TIMEOUT}
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
@@ -1137,7 +1139,7 @@ Delete IP Address And Verify
     END
 
     Should Be Equal  ${delete_status}  ${False}
-    Wait Until Page Does Not Contain  ${ip_addr}
+    Wait Until Page Does Not Contain Element  ${delete_xpath}
 
 
 Modify IP Address And Verify
