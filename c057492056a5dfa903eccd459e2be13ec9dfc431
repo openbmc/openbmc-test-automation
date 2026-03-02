@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59116444_f8cbc322",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2026-03-02T04:40:37Z",
+      "side": 1,
+      "message": "create --\u003e Create",
+      "revId": "c057492056a5dfa903eccd459e2be13ec9dfc431",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbcd8655_c086cc11",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2026-03-02T04:40:37Z",
+      "side": 1,
+      "message": "verify --\u003e Verify",
+      "revId": "c057492056a5dfa903eccd459e2be13ec9dfc431",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e854e6dc_3f65ccb5",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2026-03-02T04:40:37Z",
+      "side": 1,
+      "message": "create --\u003e Create",
+      "revId": "c057492056a5dfa903eccd459e2be13ec9dfc431",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61cd060d_665809ed",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1001667
+      },
+      "writtenOn": "2026-03-02T04:40:37Z",
+      "side": 1,
+      "message": "check --\u003e Check\n\nFirst letter in comments state should be capital.",
+      "revId": "c057492056a5dfa903eccd459e2be13ec9dfc431",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
