@@ -96,7 +96,7 @@ Generate Certificate File Via Openssl
     ...  ${SPACE}-keyout ${cert_dir_name}/cert.pem -out ${cert_dir_name}/cert.pem
     ...  ${SPACE}-subj "/O=XYZ Corporation /CN=www.xyz.com"
 
-    ${rc}  ${output}=  Run And Return RC and Output  ${openssl_cmd}
+    ${rc}  ${output}=  Run And Return RC And Output  ${openssl_cmd}
     Should Be Equal  ${rc}  ${0}  msg=${output}
     OperatingSystem.File Should Exist
     ...  ${EXECDIR}${/}${cert_dir_name}${/}cert.pem
@@ -150,7 +150,7 @@ Get Certificate Content From File
 Check If Openssl Tool Exist
     [Documentation]  Check if openssl tool installed or not.
 
-    ${rc}  ${output}=  Run And Return RC and Output  which openssl
+    ${rc}  ${output}=  Run And Return RC And Output  which openssl
     Should Not Be Empty  ${output}  msg=Openssl tool not installed.
 
 
@@ -199,7 +199,7 @@ Delete Certificate Via BMC CLI
     ${file_status}  ${stderr}  ${rc}=  BMC Execute Command
     ...  [ -f ${certificate_file_path} ] && echo "Found" || echo "Not Found"
 
-    Return From Keyword If  "${file_status}" != "Found"
+    IF  "${file_status}" != "Found"  RETURN
     BMC Execute Command  rm ${certificate_file_path}
     BMC Execute Command  systemctl restart ${certificate_service}
     BMC Execute Command  systemctl daemon-reload
@@ -364,5 +364,3 @@ Modify BMC Date
     Wait Until Keyword Succeeds  30 sec  10 sec
     ...  Redfish.Patch  ${REDFISH_BASE_URI}Managers/${MANAGER_ID}  body={'DateTime': '${new_time_format}'}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
-
-    

@@ -1,9 +1,9 @@
 *** Settings ***
 Documentation   BMC and PNOR update utilities keywords.
 
-Library         code_update_utils.py
 Library         OperatingSystem
 Library         String
+Library         code_update_utils.py
 Library         utilities.py
 Library         gen_robot_valid.py
 Variables       ../data/variables.py
@@ -13,6 +13,7 @@ Resource        openbmc_ffdc.robot
 Resource        openpower_utils.robot
 
 *** Variables ***
+
 ${ignore_err}    ${0}
 
 # Time in minutes.
@@ -42,7 +43,7 @@ Get Software Objects
 
     FOR  ${index}  IN  @{sw_list}
       ${attr_purpose}=  Read Software Attribute  ${index}  Purpose
-      Continue For Loop If  '${attr_purpose}' != '${version_type}'
+      IF  '${attr_purpose}' != '${version_type}'  CONTINUE
       Append To List  ${host_list}  ${index}
     END
 
@@ -60,7 +61,7 @@ Read Software Attribute
 
     ${resp}=  OpenBMC Get Request  ${software_object}/attr/${attribute_name}
     ...  quiet=${1}
-    Return From Keyword If  ${resp.status_code} != ${HTTP_OK}
+    IF  ${resp.status_code} != ${HTTP_OK}  RETURN
     RETURN  ${resp.json()["data"]}
 
 
@@ -237,7 +238,7 @@ Upload And Activate Image
 
     IF  '${skip_if_active}' == 'true' and '${activation}' == '${ACTIVE}'
         Set Host Software Property  ${SOFTWARE_VERSION_URI}${version_id}  Priority  ${0}
-        Return From Keyword
+        RETURN
     END
 
     Should Be Equal As Strings  ${software_state}[Activation]  ${READY}
@@ -251,7 +252,7 @@ Upload And Activate Image
     ...  ${REQUESTED_ACTIVE}
 
     # Does caller want to wait for activation to complete?
-    Return From Keyword If  '${wait}' == '${0}'  ${version_id}
+    IF  '${wait}' == '${0}'  RETURN  ${version_id}
 
     # Verify code update was successful and Activation state is Active.
     Wait For Activation State Change  ${version_id}  ${ACTIVATING}
@@ -482,13 +483,13 @@ List Installed Images
     ...  ${SOFTWARE_PURPOSE}.${image_type}
 
     IF  ${installed_images} != []
-        Get List of Images  ${installed_images}
+        Get List Of Images  ${installed_images}
     ELSE
         Log  No ${image_type} images are present.
     END
 
-Get List of Images
-    [Documentation]  Get List of Images
+Get List Of Images
+    [Documentation]  Get List of Images.
     [Arguments]  ${installed_images}
 
     FOR  ${uri}  IN  @{installed_images}
@@ -529,7 +530,7 @@ Get Latest Image ID
     #            1b714fb7
     ${image_id}=  Get Latest File  /tmp/images/
 
-    Return From Keyword If  '${image_id}' != '${EMPTY}'  ${image_id}
+    IF  '${image_id}' != '${EMPTY}'  RETURN  ${image_id}
 
     ${image_id}=   Get Image Id   Updating
     RETURN  ${image_id}
@@ -563,14 +564,14 @@ Get All Task
 
     ${task_list}=  Redfish.Get Members List  /redfish/v1/TaskService/Tasks
     ${num_records}=  Get Length  ${task_list}
-    Return From Keyword If  ${num_records} == ${0}  ${EMPTY
+    IF  ${num_records} == ${0}  RETURN  ${EMPTY
 
     ${task_dict}=  Get Task Objects  ${task_list}
 
     ${task_inventory}=  Check Task Attribute  ${target_uri}  ${match_status}  ${match_state}  ${task_dict}
 
     ${num_records}=  Get Length  ${task_inventory}
-    Return From Keyword If  ${num_records} == ${0}  ${EMPTY}
+    IF  ${num_records} == ${0}  RETURN  ${EMPTY}
 
     RETURN  ${task_inventory}
 
@@ -614,15 +615,15 @@ Check Task Attribute
     #                 any of the states named in this argument, this keyword passes.
     # task_dict       Task inventory.
 
-    Return From Keyword If  ${target_uri} == '' or ${target_uri} == None  ${task_dict}
-    Return From Keyword If  ${match_state} == '' or ${match_state} == None  ${task_dict}
+    IF  ${target_uri} == '' or ${target_uri} == None  RETURN  ${task_dict}
+    IF  ${match_state} == '' or ${match_state} == None  RETURN  ${task_dict}
 
     FOR  ${task_ins}  IN  @{task_dict.items()}
       &{tmp_dict}=  Create Dictionary
       Set To Dictionary  ${tmp_dict}  ${task_ins[0]}  ${task_ins[1]}
-      Return From Keyword If
-      ...  ${target_uri} == '${task_ins[1]['TargetUri']}' and ${match_state} == '${task_ins[1]['TaskState']}'
-      ...  ${tmp_dict}
+      IF  ${target_uri} == '${task_ins[1]['TargetUri']}' and ${match_state} == '${task_ins[1]['TaskState']}'
+        RETURN  ${tmp_dict}
+      END
     END
 
     RETURN  ${EMPTY}
@@ -667,8 +668,9 @@ Get Image Id
 
     FOR  ${sw_member}  IN  @{sw_member_list}
       ${status}=  Redfish.Get Attribute  ${sw_member}  Status
-      Return From Keyword If  '${status['State']}' == '${match_state}'
-      ...  ${sw_member.split('/')[-1]}
+      IF  '${status['State']}' == '${match_state}'
+         RETURN  ${sw_member.split('/')[-1]}
+      END
     END
 
     RETURN  None
@@ -774,7 +776,7 @@ Redfish Update Firmware
     Rprint Vars  state
     Set ApplyTime  policy=${apply_Time}
 
-    ${task_inv_dict}=  Get Task State from File
+    ${task_inv_dict}=  Get Task State From File
 
     ${file_bin_data}=  OperatingSystem.Get Binary File  ${image_file_path}
 
@@ -803,4 +805,3 @@ Redfish Update Firmware
     Redfish.Login
     Redfish Verify BMC Version  ${IMAGE_FILE_PATH}
     Verify Get ApplyTime  ${apply_time}
-
