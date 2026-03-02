@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d330dc9_457002f8",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000423
+      },
+      "writtenOn": "2026-03-02T04:47:55Z",
+      "side": 1,
+      "message": "```\n[Tags]  Verify_Maximum_Subscriptions_For_Event_Notification\n```",
+      "revId": "c057492056a5dfa903eccd459e2be13ec9dfc431",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59116444_f8cbc322",
         "filename": "redfish/systems/eventlog/test_event_service.robot",
         "patchSetId": 2
