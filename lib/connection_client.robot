@@ -2,9 +2,9 @@
 Documentation     This module is for SSH connection override to QEMU
 ...               based openbmc systems.
 
-Library           SSHLibrary   timeout=30 seconds
-Library           OperatingSystem
 Library           Collections
+Library           OperatingSystem
+Library           SSHLibrary   timeout=30 seconds
 
 *** Variables ***
 
@@ -29,17 +29,17 @@ Open Connection And Log In
     #                   host             ${OPENBMC_HOST}
 
     # If no host was provided, add ${OPENBMC_HOST} to the dictionary
-    ${has_host}=  Run Keyword and Return Status
+    ${has_host}=  Run Keyword And Return Status
     ...           Dictionary Should Contain Key  ${connection_args}  host
     Run Keyword If  ${has_host} == ${FALSE}
     ...             Set To Dictionary  ${connection_args}  host=${OPENBMC_HOST}
 
     Run Keyword If
     ...   '${SSH_PORT}' != '${EMPTY}' and '${HTTPS_PORT}' != '${EMPTY}'
-    ...   User input SSH and HTTPs Ports
+    ...   User input SSH And HTTPs Ports
 
     # Check to see if a port to connect to was provided.
-    ${has_port}=  Run Keyword and Return Status
+    ${has_port}=  Run Keyword And Return Status
     ...           Dictionary Should Contain Key  ${connection_args}  port
 
     # If the ${SSH_PORT} is set and no port was provided, add the defined port
@@ -62,7 +62,7 @@ Open Connection for SCP
     ...  username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}
 
 
-User input SSH and HTTPs Ports
+User input SSH And HTTPs Ports
     [Documentation]   Update the global SSH and HTTPs port variable for QEMU
     ${port_num}=    Convert To Integer    ${SSH_PORT}
     ${SSH_PORT}=    Replace Variables     ${port_num}
@@ -85,9 +85,9 @@ Validate Or Open Connection
     ...  msg=Need to provide a host or an alias.  values=False
 
     # Search the dictionary to see if it includes the host and alias.
-    ${host_exists}=  Run Keyword and Return Status
+    ${host_exists}=  Run Keyword And Return Status
     ...              Dictionary Should Contain Key  ${connection_args}  host
-    ${alias_exists}=  Run Keyword and Return Status
+    ${alias_exists}=  Run Keyword And Return Status
     ...               Dictionary Should Contain Key  ${connection_args}  alias
 
     # Add the alias and host back into the dictionary of connection arguments,
@@ -117,19 +117,19 @@ Validate Or Open Connection
         ...    ${given_alias} and ${given_host} and ${alias_match} and ${host_match}
         ...    Run Keywords
         ...      Switch Connection  ${alias}  AND
-        ...      Log to Console  Found connection. Switched to ${alias} ${host}  AND
+        ...      Log To Console  Found connection. Switched to ${alias} ${host}  AND
         ...      Return From Keyword If  ${alias_match} and ${host_match}
         ...    ELSE  Run Keyword If
         ...      ${given_alias} and ${no_host} and ${alias_match}
         ...      Run Keywords
         ...        Switch Connection  ${alias}  AND
-        ...        Log to Console  Found connection. Switched to: ${alias}  AND
+        ...        Log To Console  Found connection. Switched to: ${alias}  AND
         ...        Return From Keyword If  ${alias_match}
         ...    ELSE  Run Keyword If
         ...       ${given_host} and ${no_alias} and ${host_match}
         ...       Run Keywords
         ...         Switch Connection  ${connection.index}  AND
-        ...         Log to Console  Found Connection. Switched to: ${host}  AND
+        ...         Log To Console  Found Connection. Switched to: ${host}  AND
         ...         Return From Keyword If  ${host_match}
     END
     # If no connections are found, open a connection with the provided args.
@@ -140,5 +140,5 @@ Validate Or Open Connection
 Clear System Entry From Knownhosts
     [Documentation]   Delete OPENBMC_HOST entry from known_hosts file.
     ${cmd}=  Set Variable  sed '/${OPENBMC_HOST}/d' -i ~/.ssh/known_hosts
-    ${rc}  ${output}=  Run and Return RC and Output  ${cmd}
+    ${rc}  ${output}=  Run And Return RC And Output  ${cmd}
 

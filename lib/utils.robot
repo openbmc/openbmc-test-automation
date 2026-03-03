@@ -363,7 +363,7 @@ Trigger Warm Reset
     ${resp}=  Openbmc Post Request
     ...  ${OPENBMC_BASE_URI}control/bmc0/action/warmReset  data=${data}
     Should Be Equal As Strings      ${resp.status_code}     ${HTTP_OK}
-    ${session_active}=   Check If warmReset is Initiated
+    ${session_active}=   Check If warmReset Is Initiated
     IF  '${session_active}' == '${True}'  Fail   msg=warm reset didn't occur
 
     Sleep   ${SYSTEM_SHUTDOWN_TIME}min

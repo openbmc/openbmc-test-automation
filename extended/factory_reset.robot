@@ -53,7 +53,7 @@ Validate Setup
 
     # Check whether serial console IP is reachable and responding
     # to telnet command.
-    Open Telnet Connection to BMC Serial Console
+    Open Telnet Connection To BMC Serial Console
 
 Erase All Settings
     [Documentation]  Factory reset the system.

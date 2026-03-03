@@ -56,7 +56,7 @@ Prepare BMC For Update
 Update PNOR Image
     [Documentation]  Copy the PNOR image to the BMC /tmp dir and flash it.
 
-    Run Key  Copy PNOR to BMC
+    Run Key  Copy PNOR To BMC
     ${pnor_path}  ${pnor_basename}=  Split Path  ${PNOR_IMAGE_PATH}
     Run Key  Flash PNOR \ /tmp/${pnor_basename}
     Run Key  Wait Until Keyword Succeeds \ 15 min \ 10 sec \ Is PNOR Flash Done

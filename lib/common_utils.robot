@@ -1,14 +1,13 @@
 *** Settings ***
-
 Documentation  Utilities for Robot keywords that do not use REST.
 
-Resource                ../lib/resource.robot
-Resource                ../lib/connection_client.robot
-Resource                ../lib/boot_utils.robot
-Library                 String
 Library                 DateTime
 Library                 Process
 Library                 OperatingSystem
+Library                 String
+Resource                ../lib/resource.robot
+Resource                ../lib/connection_client.robot
+Resource                ../lib/boot_utils.robot
 Library                 gen_print.py
 Library                 gen_robot_print.py
 Library                 gen_cmd.py
@@ -24,15 +23,15 @@ Library                 SCPLibrary  AS  scp
 # Assign default value to QUIET for programs which may not define it.
 ${QUIET}  ${0}
 
-${bmc_mem_free_cmd}=   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f4
-${bmc_mem_total_cmd}=   free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f2
-${bmc_cpu_usage_cmd}=   top -n 1  | grep CPU: | cut -c 7-9
-${HOST_SETTING}    ${SETTINGS_URI}host0
+${bmc_mem_free_cmd}     free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f4
+${bmc_mem_total_cmd}    free | tr -s ' ' | sed '/^Mem/!d' | cut -d" " -f2
+${bmc_cpu_usage_cmd}    top -n 1  | grep CPU: | cut -c 7-9
+${HOST_SETTING}         ${SETTINGS_URI}host0
 
 # /run/initramfs/ro associate filesystem  should be 100% full always
-${bmc_file_system_usage_cmd}=  df -h | cut -c 52-54 | grep 100 | wc -l
-${total_pnor_ro_file_system_cmd}=  df -h | grep /media/pnor-ro | wc -l
-${total_bmc_ro_file_system_cmd}=  df -h | grep /media/rofs | wc -l
+${bmc_file_system_usage_cmd}      df -h | cut -c 52-54 | grep 100 | wc -l
+${total_pnor_ro_file_system_cmd}  df -h | grep /media/pnor-ro | wc -l
+${total_bmc_ro_file_system_cmd}   df -h | grep /media/rofs | wc -l
 
 ${BOOT_TIME}     ${0}
 ${BOOT_COUNT}    ${0}
@@ -121,9 +120,9 @@ Ping Host
     # expected_rc    Expected return code of ping command.
 
     Should Not Be Empty    ${host}   msg=No host provided
-    ${rc}   ${output}=     Run and return RC and Output    ping -c 4 ${host}
+    ${rc}   ${output}=     Run And Return RC And Output    ping -c 4 ${host}
     Log     RC: ${rc}\nOutput:\n${output}
-    Should be equal     ${rc}   ${expected_rc}
+    Should Be Equal     ${rc}   ${expected_rc}
 
 
 Check OS
@@ -145,9 +144,9 @@ Check OS
     Log To Console  ${print_string}  no_newline=True
 
     # Attempt to ping the OS. Store the return code to check later.
-    ${ping_rc}=  Run Keyword and Return Status  Ping Host  ${os_host}
+    ${ping_rc}=  Run Keyword And Return Status  Ping Host  ${os_host}
 
-    SSHLibrary.Open connection  ${os_host}
+    SSHLibrary.Open Connection  ${os_host}
 
     ${status}  ${msg}=  Run Keyword And Ignore Error  SSHLibrary.Login  ${os_username}
     ...  ${os_password}
@@ -176,7 +175,7 @@ Check OS
     Should Be Equal As Strings  ${ping_rc}  ${TRUE}  msg=${err_msg}
 
 
-Wait for OS
+Wait For OS
     [Documentation]  Waits for the host OS to come up via calls to "Check OS".
     [Arguments]  ${os_host}=${OS_HOST}  ${os_username}=${OS_USERNAME}
     ...          ${os_password}=${OS_PASSWORD}  ${timeout}=${OS_WAIT_TIMEOUT}
@@ -208,7 +207,7 @@ Wait for OS
     Qprint Timen  The operating system is now communicating.
 
 
-Copy PNOR to BMC
+Copy PNOR To BMC
     [Documentation]  Copy the PNOR image to the BMC.
     Import Library      SCPLibrary      AS       scp
     Open Connection for SCP
@@ -241,7 +240,7 @@ Get Boot Progress To OS Starting State
         Wait Until Keyword Succeeds  10 min  10 sec  Is OS Starting
     END
 
-Check If warmReset is Initiated
+Check If warmReset Is Initiated
     [Documentation]  Ping would be still alive, so try SSH to connect
     ...              if fails the ports are down indicating reboot
     ...              is in progress
@@ -249,9 +248,9 @@ Check If warmReset is Initiated
     # Warm reset adds 3 seconds delay before forcing reboot
     # To minimize race conditions, we wait for 7 seconds
     Sleep  7s
-    ${alive}=   Run Keyword and Return Status
+    ${alive}=   Run Keyword And Return Status
     ...    Open Connection And Log In
-    Return From Keyword If   '${alive}' == '${False}'    ${False}
+    IF  '${alive}' == '${False}'  RETURN  ${False}
     RETURN    ${True}
 
 
@@ -299,8 +298,8 @@ Get SOL Console Pid
     # If rc is not zero it just means that there is no OS Console process
     # running.
 
-    Return From Keyword If  '${os_con_pid}' != '${EMPTY}'  ${os_con_pid}
-    Return From Keyword If  '${expect_running}' == '${0}'  ${os_con_pid}
+    IF  '${os_con_pid}' != '${EMPTY}'  RETURN  ${os_con_pid}
+    IF  '${expect_running}' == '${0}'  RETURN  ${os_con_pid}
 
     Cmd Fnc  cat ${log_file_path} ; echo ; ${ps_cmd}  quiet=${0}
     ...  print_output=${1}  show_err=${1}
@@ -437,8 +436,7 @@ Stop Journal Log
     ...  ps | grep journalctl | grep -v grep
     ...  return_stdout=False  return_rc=True
 
-    Return From Keyword If   '${rc}' == '${1}'
-    ...   No journal log process running
+    IF  '${rc}' == '${1}'  RETURN  No journal log process running
 
     ${output}  ${stderr}=
     ...  Execute Command   killall journalctl
@@ -507,7 +505,7 @@ BMC CPU Performance Check
     ...  ${bmc_cpu_usage_cmd}
     ${bmc_cpu_percentage}=  Fetch From Left  ${bmc_cpu_usage_output}  %
     Rprint Vars  bmc_cpu_percentage
-    Should be true  ${bmc_cpu_percentage} < 90
+    Should Be True  ${bmc_cpu_percentage} < 90
 
 
 BMC Mem Performance Check
@@ -528,7 +526,7 @@ BMC Mem Performance Check
     ${bmc_mem_percentage}=  Evaluate
     ...   ${bmc_mem_percentage}/${bmc_mem_total_output}
     Rprint Vars  bmc_mem_percentage
-    Should be true  ${bmc_mem_percentage} > 10
+    Should Be True  ${bmc_mem_percentage} > 10
 
 
 BMC File System Usage Check
@@ -572,7 +570,7 @@ Check BMC File System Performance
     [Documentation]  Check for file system usage for 4 times
 
     FOR  ${var}  IN RANGE  1  4
-        BMC File System Usage check
+        BMC File System Usage Check
     END
 
 Get URL List
@@ -700,7 +698,7 @@ Configure Initial Settings
 
     # Open telnet connection and ignore the error, in case telnet session is
     # already opened by the program calling this keyword.
-    Run Keyword And Ignore Error  Open Telnet Connection to BMC Serial Console
+    Run Keyword And Ignore Error  Open Telnet Connection To BMC Serial Console
     Telnet.write  ifconfig eth0 ${host} netmask ${mask}
     Telnet.write  route add default gw ${gw_ip}
 
@@ -817,7 +815,7 @@ Copy Address Translation Utils To HOST OS
     OperatingSystem.File Should Exist  ${probe_cpu_tool_path}
     ...  msg=${probe_cpu_tool_path} doesn't exist.
 
-    scp.Open connection  ${OS_HOST}  username=${OS_USERNAME}
+    scp.Open Connection  ${OS_HOST}  username=${OS_USERNAME}
     ...  password=${OS_PASSWORD}
     scp.Put File  ${probe_cpu_tool_path}  ${target_file_path}
     scp.Put File  ${scom_addrs_tool_path}  ${target_file_path}
@@ -884,10 +882,10 @@ Check For Regex In Journald
     # filter_string    String to be stripped out.
 
 
-    ${cmd} =  Set Variable If   '${filter_string}' == '${EMPTY}'
-    ...      Catenate  journalctl --no-pager ${boot} | egrep '${regex}'
-    ...   ELSE
-    ...      Catenate  journalctl --no-pager ${boot} | egrep '${regex}' |  sed '/${filter_string}/d'
+    ${cmd}=  Set Variable If   '${filter_string}' == '${EMPTY}'
+    ...    Catenate  journalctl --no-pager ${boot} | egrep '${regex}'
+    ...  ELSE
+    ...    Catenate  journalctl --no-pager ${boot} | egrep '${regex}' |  sed '/${filter_string}/d'
 
     ${journal_log}  ${stderr}  ${rc}=  BMC Execute Command   ${cmd}  ignore_err=1
 
@@ -921,9 +919,9 @@ Verify Watchdog Enabled
 Is BMC Unpingable
     [Documentation]  Check if BMC is unpingable.
 
-    ${RC}  ${output}=  Run and return RC and Output  ping -c 4 ${OPENBMC_HOST}
+    ${RC}  ${output}=  Run And Return RC And Output  ping -c 4 ${OPENBMC_HOST}
     Log  RC: ${RC}\nOutput:\n${output}
-    Should be equal  ${RC}  ${1}
+    Should Be Equal  ${RC}  ${1}
 
 
 Is Host Unpingable
@@ -933,9 +931,9 @@ Is Host Unpingable
     # Description of argument(s):
     # ip           HostOS IP address (e.g. "10.7.7.7").
 
-    ${RC}  ${output}=  Run and return RC and Output  ping -c 4 ${ip}
+    ${RC}  ${output}=  Run And Return RC And Output  ping -c 4 ${ip}
     Log  RC: ${RC}\nOutput:\n${output}
-    Should be equal  ${RC}  ${1}
+    Should Be Equal  ${RC}  ${1}
 
 
 Redfish BMC Match States
