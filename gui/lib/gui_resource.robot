@@ -96,7 +96,7 @@ Login GUI
     # password  The password to be used for login.
 
     Go To  ${OPENBMC_GUI_URL}
-    #check if page has username input box , if not logout .
+    # Check if page has username input box, if not logout.
     ${exists}=  Run Keyword And Return Status  Page Should Contain Element
     ...    ${xpath_login_username_input}
     IF  not ${exists}
@@ -128,7 +128,7 @@ Launch Browser And Login GUI With Given User
 Logout GUI
     [Documentation]  Logout of OpenBMC GUI.
 
-    #Adding delay for logout button to appear.
+    # Adding delay for logout button to appear.
     Sleep  15s
     Click Element  ${xpath_root_button_menu}
     Click Element  ${xpath_logout_button}
@@ -209,7 +209,7 @@ Add DNS Servers And Verify
     Click Button  ${xpath_add_button}
     IF  '${expected_status}' != 'Valid format'
         Page Should Contain  ${expected_status}
-        Return From Keyword
+        RETURN
     END
 
     Wait Until Page Contains Element  ${xpath_add_dns_ip_address_button}  timeout=10sec
@@ -272,7 +272,7 @@ Power On Server
 
 
 Reload Page And Check Power Status
-    [Documentation]    Reloads the current page and waits until the Power Shutdown or 
+    [Documentation]    Reloads the current page and waits until the Power Shutdown or
     ...                Power On element becomes visible based on argument passed.
     [Arguments]  ${xpath_power_on_or_shutdown}
 
@@ -319,7 +319,7 @@ Reboot Server
       Click Button  ${xpath_confirm}
       Wait Until Element Is Visible  ${xpath_power_reboot}  timeout=60
     ELSE
-      Log To console    Server is already powered Off, can't reboot.
+      Log To Console  Server is already powered Off, can't reboot.
     END
 
 
@@ -338,7 +338,7 @@ Verify Error And Unauthorized Message On GUI
     Wait Until Element Is Visible  ${xpath_error_popup}
     Page Should Contain  Error
     Page Should Contain  Unauthorized
-    #Adding delay for error unauthorized messages to appear.
+    # Adding delay for error unauthorized messages to appear.
     Sleep  10
     Click Element  ${xpath_error_popup}
     Click Element  ${xpath_unauthorized_popup}
