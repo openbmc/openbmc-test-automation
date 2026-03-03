@@ -2,15 +2,15 @@
 Documentation  This is a resource file of OpenBMC ASMI It contains the
 ...            user-defined keywords which are available to all gui modules
 
-Library      String
 Library      Collections
 Library      DateTime
-Library      XvfbRobot
 Library      OperatingSystem
+Library      Process
+Library      String
+Library      XvfbRobot
 Library      SeleniumLibrary
 Library      AngularJSLibrary
 Library      SSHLibrary  30 Seconds
-Library      Process
 Library      supporting_libs.py
 Library      ../../lib/gen_print.py
 Library      ../../lib/gen_robot_print.py
@@ -23,6 +23,7 @@ Resource     ../../lib/state_manager.robot
 Variables    ../data/resource_variables.py
 
 *** Variables ***
+
 ${OPENBMC_GUI_URL}              https://${OPENBMC_HOST}:${HTTPS_PORT}
 
 ${obmc_PowerOff_state}       Off
