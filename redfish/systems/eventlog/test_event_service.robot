@@ -84,6 +84,59 @@ Verify Event Service Collection Unsupported Methods
     ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
 
+Verify Invalid Subscriptions Details For Event Notification
+    [Documentation]  Verify invalid subscriptions details for event notification.
+    [Tags]  Verify_Invalid_Subscriptions_Details_For_Event_Notification
+
+    # Create invalid subscription for eventformattype value.
+    Create Invalid Subscription  EventFormatType=None
+
+    Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+    # Create invalid subscription for protocol value.
+    Create Invalid Subscription  Protocol=REDFISH
+
+    Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+    # Create invalid subscription for destination value.
+    Create Invalid Subscription  Destination=${EMPTY}
+
+    Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+Verify And Modify Subscriptions Details For Event Notification
+    [Documentation]  Verify and modify subscriptions details for event notification.
+    [Tags]  Verify_And_Modify_Subscriptions_Details_For_Event_Notification
+
+    ${subscription_list}=  Redfish_Utils.Get Member List
+    ...  /redfish/v1/EventService/Subscriptions
+    Should Be Empty  ${subscription_list}
+
+    # Create a new subscription.
+    ${payload}=    Create Dictionary    Context=Test_Context    Destination=https://${REMOTE_SERVER_IP}:${HTTPS_PORT}/
+    ...    Protocol=Redfish    EventFormatType=Event    ResourceTypes=${ResourceTypes_list}    RegistryPrefixes=${RegistryPrefixes_list}
+    ...    DeliveryRetryPolicy=SuspendRetries
+
+    Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+    # Get the subscription list and check the default deliveryretrypolicy is SuspendRetries.
+    ${instance}=    Redfish.Get Members List    ${REDFISH_BASE_URI}EventService/Subscriptions
+    ${resp}=    Redfish.Get Properties    ${instance}[0]    valid_status_codes=[${HTTP_OK}]
+    ${default_policy}=    Get From Dictionary    ${resp}    DeliveryRetryPolicy
+    Should Be Equal    ${default_policy}    SuspendRetries
+
+    # Patch operation to update deliveryretrypolicy.
+    ${payload}=    Create Dictionary    DeliveryRetryPolicy=TerminateAfterRetries
+    Redfish.Patch    ${instance}[0]    body=${payload}    valid_status_codes=[${HTTP_OK}]
+
+    # Check subscriptions deliveryretrypolicy changed.
+    ${resp}=    Redfish.Get Properties    ${instance}[0]    valid_status_codes=[${HTTP_OK}]
+    ${after_policy}=    Get From Dictionary    ${resp}    DeliveryRetryPolicy
+    Should Be Equal    ${after_policy}    TerminateAfterRetries
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -163,3 +216,23 @@ Check And Create Subscription
     ...  valid_status_codes=[${HTTP_CREATED}]
 
     Set Test Variable  ${payload}  ${subscription_payload}
+
+Create Invalid Subscription
+     [Documentation]  Create invalid subscription for event notification.
+     [Arguments]  ${Context}=Test_Context  ${Destination}=https://${REMOTE_SERVER_IP}:${HTTPS_PORT}/
+     ...    ${EventFormatType}=Event  ${Protocol}=Redfish  ${RegistryPrefixes}=${RegistryPrefixes_list}
+     ...    ${ResourceTypes}=${ResourceTypes_list}
+
+     # Description of argument(s):
+     # Context           The context of the subscription.
+     # Destination       The destination URL for the subscription (e.g. https://XX.XX.XX.XX:443/).
+     # EventFormatType   The format type of the event (e.g. Event).
+     # Protocol          The protocol used for the subscription (e.g. Redfish).
+     # RegistryPrefixes  The registry prefixes for the subscription (e.g. ["Base", "Event"]).
+     # ResourceTypes     The resource types for the subscription (e.g. ["ComputerSystem", "Chassis"]).
+
+     ${payload}=    Create Dictionary    Context=${Context}    Destination=${Destination}
+     ...    EventFormatType=${EventFormatType}    Protocol=${Protocol}    RegistryPrefixes=${RegistryPrefixes}
+     ...    ResourceTypes=${ResourceTypes}
+
+     Set Test Variable    ${payload}
