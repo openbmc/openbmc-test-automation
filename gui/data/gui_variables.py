@@ -127,8 +127,8 @@ class gui_variables:
 
     # Reboot sub menu
     xpath_reboot_bmc_heading = "//h1[text()='Reboot BMC']"
-    xpath_reboot_bmc_button = "//button[contains(text(),'Reboot BMC')]"
-    xpath_confirm_bmc_reboot = "//*[@class='btn btn-primary']"
+    xpath_reboot_bmc_button = "//*[@data-test-id='rebootBmc-button-reboot']"
+    xpath_confirm_bmc_reboot = "//*[@class='btn btn-md btn-primary']"
 
     # Common variables
     xpath_save_settings_button = (

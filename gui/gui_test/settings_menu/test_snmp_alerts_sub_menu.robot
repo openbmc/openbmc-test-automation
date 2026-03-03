@@ -17,12 +17,12 @@ Test Tags      SNMP_Alerts_Sub_Menu
 ${xpath_snmp_alerts_sub_menu}                     //*[@data-test-id='nav-item-snmp-alerts']
 ${xpath_snmp_alerts_heading}                      //h1[text()="SNMP alerts"]
 ${xpath_select_all_snmp}                          //*[@data-test-id='snmpAlerts-checkbox-selectAll']
-${xpath_add_destination}                          //button[contains(text(),'Add destination')]
-${xpath_snmp_alert_destination_heading}           //h5[contains(text(),'Add SNMP alert destination')]
+${xpath_add_destination}                          //*[text()=" Add destination"]
+${xpath_snmp_alert_destination_heading}           //h5[text()='Add SNMP alert destination']
 ${xpath_ip_address_input_button}                  //*[@data-test-id='snmpAlerts-input-ipAddress']
 ${xpath_port_optional_input_button}               //*[@data-test-id='snmpAlerts-input-port']
-${xpath_snmp_add_destination_button}              //*[@data-test-id='snmpAlerts-button-ok']
-${xpath_cancel_button}                            //button[contains(text(),'Cancel')]
+${xpath_snmp_add_destination_button}              //*[text()="Add destination"]
+${xpath_cancel_button}                            //*[text()='Cancel']
 ${xpath_delete_button}                            //*[@data-test-id='snmpAlerts-button-deleteRow-undefined']
 ${xpath_delete_destination}                       //button[contains(text(),'Delete destination')]
 
@@ -173,6 +173,8 @@ Configure Multiple SNMP Managers On BMC Via GUI And Verify Persistency On BMC Re
 
     # Reboot BMC and check persistency SNMP manager.
     Reboot BMC via GUI
+    Reload Page
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=60
 
     Navigate To SNMP Alerts Page
 
@@ -285,12 +287,14 @@ Configure SNMP Manager Via GUI
     # snmp_ip  SNMP manager IP address.
     # port     SNMP manager port.
 
+    Wait Until Page Contains Element  ${xpath_add_destination}
     Click Element  ${xpath_add_destination}
     Wait Until Page Contains Element  ${xpath_snmp_alert_destination_heading}
     Input Text  ${xpath_ip_address_input_button}  ${snmp_ip}
     Wait Until Keyword Succeeds  30 sec  5 sec  Get Value  ${xpath_ip_address_input_button}
     Input Text  ${xpath_port_optional_input_button}  ${port}
     Click Element  ${xpath_snmp_add_destination_button}
+    Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=60
 
 
 Delete All SNMP Managers Via GUI
