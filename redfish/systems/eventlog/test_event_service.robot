@@ -49,6 +49,63 @@ Verify Add Subscribe Server For Event Notification
     Dictionary Should Contain Sub Dictionary   ${resp.dict}  ${payload}
 
 
+Verify Invalid Subscriptions Details For Event Notification
+    [Documentation]  Verify invalid subscriptions details for event notification.
+    [Tags]  Verify_Invalid_Subscriptions_Details_For_Event_Notification
+
+    # Post subscriptions with invalid format type value.
+    ${payload}=    Create Dictionary    Context=Test_Context    Destination=https://${REMOTE_SERVER_IP}:${HTTPS_PORT}/
+    ...    Protocol=Redfish    EventFormatType=None    ResourceTypes=${ResourceTypes_list}
+    ...    RegistryPrefixes=${RegistryPrefixes_list}    DeliveryRetryPolicy=SuspendRetries
+
+    Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+    # Post subscriptions with invalid protocol value.
+    ${payload}=    Create Dictionary    Context=Test_Context    Destination=http_://${REMOTE_SERVER_IP}:${HTTPS_PORT}/
+    ...    EventFormatType=metricReport    Protocol=REDFISH    RegistryPrefixes=Syncagent    ResourceTypes=systems
+
+    Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+    # Post subscriptions with empty destination.
+    ${payload}=    Create Dictionary    Context=Test_Context    Destination=""    EventFormatType=event    Protocol=redfish
+    ...    RegistryPrefixes=eventLog    ResourceTypes=eventService
+
+    Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+Verify And Modify Subscriptions Details For Event Notification
+    [Documentation]  Verify and modify subscriptions details for event notification.
+    [Tags]  Verify_And_Modify_Subscriptions_Details_For_Event_Notification
+
+    ${subscription_list}=  Redfish_Utils.Get Member List
+    ...  /redfish/v1/EventService/Subscriptions
+    Should Be Empty  ${subscription_list}
+
+    # Create a new subscription.
+    ${payload}=    Create Dictionary    Context=Test_Context    Destination=https://${REMOTE_SERVER_IP}:${HTTPS_PORT}/
+    ...    Protocol=Redfish    EventFormatType=Event    ResourceTypes=${ResourceTypes_list}    RegistryPrefixes=${RegistryPrefixes_list}
+    ...    DeliveryRetryPolicy=SuspendRetries
+
+    Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+    # Get the subscription list and check the default deliveryretrypolicy is SuspendRetries.
+    ${instance}=    Redfish.Get Members List    ${REDFISH_BASE_URI}EventService/Subscriptions
+    ${resp}=    Redfish.Get Properties    ${instance}[0]    valid_status_codes=[${HTTP_OK}]
+    ${default_policy}=    Get From Dictionary    ${resp}    DeliveryRetryPolicy
+    Should Be Equal    ${default_policy}    SuspendRetries
+
+    # Patch operation to update deliveryretrypolicy.
+    ${payload}=    Create Dictionary    DeliveryRetryPolicy=TerminateAfterRetries
+    Redfish.Patch    ${instance}[0]    body=${payload}    valid_status_codes=[${HTTP_OK}]
+
+    # Check subscriptions deliveryretrypolicy changed.
+    ${resp}=    Redfish.Get Properties    ${instance}[0]    valid_status_codes=[${HTTP_OK}]
+    ${after_policy}=    Get From Dictionary    ${resp}    DeliveryRetryPolicy
+    Should Be Equal    ${after_policy}    TerminateAfterRetries
+
 *** Keywords ***
 
 Suite Setup Execution
