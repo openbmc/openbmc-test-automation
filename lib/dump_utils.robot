@@ -4,8 +4,6 @@ Documentation  This module provides general keywords for dump.
 Library         bmc_ssh_utils.py
 Variables       ../data/variables.py
 
-*** Variables ***
-
 *** Keywords ***
 
 Create User Initiated Dump
@@ -151,7 +149,7 @@ Delete All Dumps
 
     # Check if dump entries exist, if not return.
     ${resp}=  OpenBMC Get Request  ${DUMP_ENTRY_URI}list  quiet=${1}
-    Return From Keyword If  ${resp.status_code} == ${HTTP_NOT_FOUND}
+    IF  ${resp.status_code} == ${HTTP_NOT_FOUND}  RETURN
 
     # Get the list of dump entries and delete them all.
     ${dump_entries}=  Get URL List  ${DUMP_ENTRY_URI}
@@ -176,7 +174,7 @@ Redfish Delete All BMC Dumps
 
     # Check if dump entries exist, if not return.
     ${resp}=  Redfish.Get  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Entries
-    Return From Keyword If  ${resp.dict["Members@odata.count"]} == ${0}
+    IF  ${resp.dict["Members@odata.count"]} == ${0}  RETURN
 
     Redfish.Post  /redfish/v1/Managers/${MANAGER_ID}/LogServices/Dump/Actions/LogService.ClearLog
 
@@ -320,7 +318,7 @@ Create User Initiated BMC Dump Via Redfish
     # "TaskState": "Running",
     # "TaskStatus": "OK"
 
-    IF  ${skip_dump_completion} != 0  Return From Keyword  ${resp.dict['Id']}
+    IF  ${skip_dump_completion} != 0  RETURN  ${resp.dict['Id']}
     Wait Until Keyword Succeeds  5 min  15 sec  Check Task Completion  ${resp.dict['Id']}
     ${task_id}=  Set Variable  ${resp.dict['Id']}
 
@@ -357,8 +355,8 @@ Get Dump Size
     [Arguments]  ${dump_uri}
 
     # Description of argument(s):
-    # dump_uri        Dump URI
-    #                 (Eg. 	/xyz/openbmc_project/dump/bmc/entry/1).
+    # dump_uri     Dump URI
+    #              (Eg. /xyz/openbmc_project/dump/bmc/entry/1).
 
     # Example of Dump entry.
     # "data": {
@@ -448,7 +446,7 @@ Create BMC User Dump
 
     ${ip_resp}=  Evaluate  json.loads(r'''${resp.text}''')  json
 
-    Return From Keyword  ${ip_resp["Id"]}  ${resp}
+    RETURN  ${ip_resp["Id"]}  ${resp}
 
 
 Wait For Task Completion
@@ -478,11 +476,11 @@ Wait For Task Completion
         Rprint Vars  current_task_state
 
         IF  ${check_state} == ${TRUE}
-	    Should Be True  '${resp["TaskState"]}' in ${allowed_task_state}
-        ...  msg=Verify task state is valid
+          Should Be True  '${resp["TaskState"]}' in ${allowed_task_state}
+          ...  msg=Verify task state is valid
         END
-        Exit For Loop If
-        ...  '${resp["TaskState"]}' in ${expected_status}
+
+        IF  '${resp["TaskState"]}' in ${expected_status}  BREAK
 
         Sleep  5s
     END

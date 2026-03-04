@@ -20,7 +20,7 @@ Download DMTF Tool
     # rsv_github_url  Github URL link(e.g "https://github.com/DMTF/Redfish-Service-Validator").
     # branch_name     Name of the branch.
 
-    ${cmd_buf}  Catenate  rm -rf ${rsv_dir_path} ;
+    ${cmd_buf}=  Catenate  rm -rf ${rsv_dir_path} ;
     ...  git clone --branch ${branch_name} ${rsv_github_url} ${rsv_dir_path}
     ${rc}  ${output}=  Shell Cmd  ${cmd_buf}
 

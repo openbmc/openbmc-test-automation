@@ -1,13 +1,11 @@
 *** Settings ***
-
-
 Documentation   Utilities for Redfishtool testing.
 
-Resource        resource.robot
-Resource        bmc_redfish_resource.robot
+Library         Collections
 Library         OperatingSystem
 Library         String
-Library         Collections
+Resource        resource.robot
+Resource        bmc_redfish_resource.robot
 
 
 *** Keywords ***
@@ -24,8 +22,8 @@ Redfishtool Get
 
     ${cmd}=  Catenate  ${cmd_args} GET ${uri}
     Log  ${cmd}
-    ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd}
-    IF  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
+    ${rc}  ${cmd_output}=  Run And Return RC And Output  ${cmd}
+    IF  ${rc} != 0  Is HTTP Error Expected  ${cmd_output}  ${expected_error}
 
     RETURN  ${cmd_output}
 
@@ -43,8 +41,8 @@ Redfishtool Patch
 
     ${cmd}=  Catenate  ${cmd_args} PATCH ${uri} --data=${payload}
     Log  ${cmd}
-    ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd}
-    IF  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
+    ${rc}  ${cmd_output}=  Run And Return RC And Output  ${cmd}
+    IF  ${rc} != 0  Is HTTP Error Expected  ${cmd_output}  ${expected_error}
 
     RETURN  ${cmd_output}
 
@@ -63,8 +61,8 @@ Redfishtool Post
 
     ${cmd}=  Catenate  ${cmd_args} POST ${uri} --data=${payload}
     Log  ${cmd}
-    ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd}
-    IF  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
+    ${rc}  ${cmd_output}=  Run And Return RC And Output  ${cmd}
+    IF  ${rc} != 0  Is HTTP Error Expected  ${cmd_output}  ${expected_error}
 
     RETURN  ${cmd_output}
 
@@ -81,13 +79,13 @@ Redfishtool Delete
 
     ${cmd}=  Catenate  ${cmd_args} DELETE ${uri}
     Log  ${cmd}
-    ${rc}  ${cmd_output}=  Run and Return RC and Output  ${cmd}
-    IF  ${rc} != 0  Is HTTP error Expected  ${cmd_output}  ${expected_error}
+    ${rc}  ${cmd_output}=  Run And Return RC And Output  ${cmd}
+    IF  ${rc} != 0  Is HTTP Error Expected  ${cmd_output}  ${expected_error}
 
     RETURN  ${cmd_output}
 
 
-Is HTTP error Expected
+Is HTTP Error Expected
     [Documentation]  Check if the HTTP error is expected.
     [Arguments]  ${cmd_output}  ${error_expected}
 
@@ -97,16 +95,16 @@ Is HTTP error Expected
 
     ${cmd_rsp}=  Get Regexp Matches  ${cmd_output}  200|204
     ${cmd_rsp_status}=  Run Keyword And Return Status  Should Not Be Empty  ${cmd_rsp}
-    Return From Keyword IF  ${cmd_rsp_status} == True
+    IF  ${cmd_rsp_status} == True  RETURN
     ${matches}=  Get Regexp Matches  ${error_expected}  200|204
     ${rsp_status}=  Run Keyword And Return Status  Should Be Empty  ${matches}
     IF  ${rsp_status} == False
     ...  Fail  msg=${cmd_output}
-    @{words} =  Split String  ${error_expected}  ,
+    @{words}=  Split String  ${error_expected}  ,
     @{errorString}=  Split String  ${cmd_output}  ${SPACE}
     FOR  ${error}  IN  @{words}
       ${status}=  Run Keyword And Return Status  Should Contain Any  ${errorString}  ${error}
-      Return From Keyword If  ${status} == True
+      IF  ${status} == True  RETURN
     END
     ${rsp_code}=  Set Variable If  ${status} == False  Get Regexp Matches  ${cmd_output}  [0-9][0-9][0-9]
     ${rsp_code_status}=  Run Keyword And Return Status  Should Not Be Empty  ${rsp_code}
@@ -116,4 +114,3 @@ Is HTTP error Expected
     ELSE
         Fail  msg=${cmd_output}
     END
-
