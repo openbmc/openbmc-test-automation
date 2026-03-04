@@ -60,6 +60,7 @@ ${xpath_edit_ipv4_addres}                //*[text()='${test_ipv4_addr}']/followi
 ...                                      //*[@title="Edit static IPv4 address"]
 ${xpath_edit_ipv6_addres}                //*[text()='${test_ipv6_addr}']/following::td[3]
 ...                                      //*[@title="Edit static IPv6 address"]
+${xpath_ipv6_static_def_gateway_table}   //h2[normalize-space()='IPv6 static default gateways']/following::table[1]
 ${xpath_delete_ipv6_def_gateway_addr}    //*[text()='${test_ipv6_addr_1}']/following::td[1]
 ...                                      //*[@title="Delete IPv6 static default gateway address"]
 ${xpath_edit_ipv6_def_gateway_addr}      //*[text()='${test_ipv6_addr}']/following::td[1]
@@ -871,6 +872,45 @@ Configure Staticv6 And DHCPv6 On Eth1 With Eth0 And Eth1 In Staticv4
     Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}
     ...  ${test_prefix_length}  Success  None  2
     Toggle DHCPv6 State And Verify  Enabled  2
+
+
+Configure Staticv6 On Eth0 And Verify IPv4 Configuration Remains Intact
+    [Documentation]  Verify IPv4 static configuration remains unchanged after configuring static IPv6 on Eth0.
+    [Tags]  Configure_Staticv6_On_Eth0_And_Verify_IPv4_Configuration_Remains_Intact
+    [Teardown]  Run Keyword And Ignore Error
+    ...         Delete IP Address And Verify  ipv6  ${test_ipv6_addr_2}
+
+    ${ipv4_before}=  Collect All IP Addresses On Both Interfaces  ipv4  1
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}  ${test_prefix_length}  Success
+
+    ${ipv4_after}=  Collect All IP Addresses On Both Interfaces  ipv4  1
+    Should Be Equal  ${ipv4_before}  ${ipv4_after}
+
+
+Configure Staticv6 On Eth1 And Verify IPv4 Configuration Remains Intact
+    [Documentation]  Verify IPv4 static configuration remains unchanged after configuring static IPv6 on Eth1.
+    [Tags]  Configure_Staticv6_On_Eth1_And_Verify_IPv4_Configuration_Remains_Intact
+    [Teardown]  Run Keyword And Ignore Error
+    ...         Delete IP Address And Verify  ipv6  ${test_ipv6_addr_2}
+
+    ${ipv4_before}=  Collect All IP Addresses On Both Interfaces  ipv4  2
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}
+    ...      ${test_prefix_length}  Success  None  2
+
+    ${ipv4_after}=  Collect All IP Addresses On Both Interfaces  ipv4  2
+    Should Be Equal  ${ipv4_before}  ${ipv4_after}
+
+
+Verify Prefix Length Field Is Not Present In Static Default Gateway Section On Both Interfaces
+    [Documentation]  Verify prefix length field is not displayed in static default gateway address section.
+    [Tags]  Verify_Prefix_Length_Field_Is_Not_Present_In_Static_Default_Gateway_Section_On_Both_Interfaces
+
+    # Verify on Eth0.
+    Element Should Not Contain  ${xpath_ipv6_static_def_gateway_table}  Prefix Length
+
+    # Switch to Eth1 and verify.
+    Click Element  ${xpath_eth1_interface}
+    Element Should Not Contain  ${xpath_ipv6_static_def_gateway_table}  Prefix Length
 
 
 *** Keywords ***
