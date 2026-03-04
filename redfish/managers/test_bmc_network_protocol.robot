@@ -156,6 +156,16 @@ Verify Redfish Network Protocol Unsupported Methods
     ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
 
+Verify NetworkSuppliedServers Configuration Cannot Be Modified
+    [Documentation]  Verify NetworkSuppliedServers configuration modification is not allowed.
+    [Tags]  Verify_NetworkSuppliedServers_Configuration_Cannot_Be_Modified
+
+    # NetworkSuppliedServers modification should fail as it has read-only DHCP NTP server list.
+    Redfish.Patch  ${REDFISH_NW_PROTOCOL_URI}
+    ...  body={'NTP':{'NetworkSuppliedServers': ['${ntp_server_1}']}}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}, ${HTTP_METHOD_NOT_ALLOWED}]
+
+
 *** Keywords ***
 
 Suite Setup Execution
