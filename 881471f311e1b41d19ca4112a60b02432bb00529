@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb8f6b82_754cc7ab",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-03-04T16:40:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41c86b92_6595431d",
+      "range": {
+        "startLine": 677,
+        "startChar": 3,
+        "endLine": 677,
+        "endChar": 61
+      },
+      "revId": "881471f311e1b41d19ca4112a60b02432bb00529",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5c086e7_994738bf",
@@ -47,6 +71,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a883b813_137ae2b9",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 681,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-03-04T16:40:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5c086e7_994738bf",
+      "range": {
+        "startLine": 681,
+        "startChar": 4,
+        "endLine": 681,
+        "endChar": 85
+      },
+      "revId": "881471f311e1b41d19ca4112a60b02432bb00529",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf1dea65_e7a914c2",
@@ -60,6 +108,30 @@
       "writtenOn": "2026-03-04T08:41:46Z",
       "side": 1,
       "message": "1.First fetch the value of ${REDFISH_NW_PROTOCOL_URI} using redfish get\n2.patch with ntp_server_1\n3.Get ${REDFISH_NW_PROTOCOL_URI} and verify ntp_server_1 is not added",
+      "range": {
+        "startLine": 163,
+        "startChar": 1,
+        "endLine": 163,
+        "endChar": 95
+      },
+      "revId": "881471f311e1b41d19ca4112a60b02432bb00529",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5331096_5047dfd1",
+        "filename": "redfish/managers/test_bmc_network_protocol.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-03-04T16:40:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf1dea65_e7a914c2",
       "range": {
         "startLine": 163,
         "startChar": 1,
