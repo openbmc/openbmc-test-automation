@@ -18,6 +18,7 @@ Test Tags       Bmc_Network_Conf
 *** Variables ***
 ${test_hostname}           openbmc
 ${test_ipv4_addr}          10.7.7.7
+${test_ipv4_gateway}       10.7.7.1
 ${test_ipv4_invalid_addr}  0.0.1.a
 ${test_subnet_mask}        255.255.0.0
 ${broadcast_ip}            10.7.7.255
@@ -664,6 +665,19 @@ Test Network Response On Specified Host State
     # host_state
     on
     off
+
+
+Verify Adding Static IPv4 With New Gateway Fails
+    [Documentation]  Verify adding new static IPv4 address with new gateway fails.
+    [Tags]  Verify_Adding_Static_IPv4_With_New_Gateway_Fails
+
+    # Verify default gateway is present.
+    ${old_gateway}=  Get BMC Default Gateway
+    Should Not Be Empty  ${old_gateway}
+
+    # Add new IPv4 address with new gateway and verify it fails.
+    Add IP Address  ${test_ipv4_addr}  ${test_subnet_mask}  ${test_ipv4_gateway}
+    ...  valid_status_codes=${HTTP_BAD_REQUEST}
 
 
 *** Keywords ***
