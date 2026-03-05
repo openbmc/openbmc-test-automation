@@ -61,8 +61,7 @@ REST Enumerate Request On BMC
     # Create REST session.
     Create Session  openbmc  ${AUTH_URI}
     ${headers}=  Create Dictionary  Content-Type=application/json
-    @{credentials}=  Create List  ${rest_username}  ${rest_password}
-    ${data}=  Create Dictionary  data=@{credentials}
+    ${data}=  Create Dictionary  username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}
     ${resp}=  POST On Session  openbmc  /login  json=${data}  headers=${headers}
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
