@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7fca8b8_960ee9e7",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 5
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1000073
+      },
+      "writtenOn": "2026-03-05T04:32:02Z",
+      "side": 1,
+      "message": "Not required to mention\nThis suite runs as per the CHANNEL_NUMBER selected\nif CHANNEL_NUMBER 1 is selected it runs on eth0\nif CHANNEL_NUMBER 2 is selected it runs on eth1\n\nChange to\nVerify Adding Static IPv4 With New Gateway Fails\nChange the Tag name as well",
+      "range": {
+        "startLine": 670,
+        "startChar": 50,
+        "endLine": 670,
+        "endChar": 54
+      },
+      "revId": "a654ec61d8a250871b24aaa88eec000b0fd75d09",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
