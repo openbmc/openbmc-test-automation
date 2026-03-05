@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation    Resource file for event notification subscription.
 
 *** Keywords ***
@@ -8,7 +7,7 @@ Delete All Event Subscriptions
     [Documentation]  Delete all event subscriptions.
 
     ${subscriptions}=  Redfish.Get Attribute  /redfish/v1/EventService/Subscriptions  Members
-    Return From Keyword If  ${subscriptions} is None
+    IF  ${subscriptions} is None  RETURN
     FOR  ${subscription}  IN  @{subscriptions}
         Redfish.Delete  ${subscription['@odata.id']}
     END

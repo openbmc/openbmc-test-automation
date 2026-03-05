@@ -1,19 +1,20 @@
 *** Settings ***
 Documentation    Management console utilities keywords.
 
+Library          Collections
 Resource         ../../lib/bmc_redfish_utils.robot
 Resource         ../../lib/common_utils.robot
 Library          ../../lib/gen_robot_valid.py
-Library          Collections
 Library          ../../lib/bmc_ssh_utils.py
 Library          SSHLibrary
 
 *** Variables ***
+
 &{daemon_command}  start=systemctl start avahi-daemon
-                  ...  stop=systemctl stop avahi-daemon
-                  ...  status=systemctl status avahi-daemon -l
+...  stop=systemctl stop avahi-daemon
+...  status=systemctl status avahi-daemon -l
 &{daemon_message}  start=Active: active (running)
-                  ...  stop=Active: inactive (dead)
+...  stop=Active: inactive (dead)
 
 *** Keywords ***
 
@@ -127,4 +128,3 @@ Get Lock Resource Information
     Rprint Vars  resource_lock_json
 
     RETURN  ${resource_lock_json}
-
