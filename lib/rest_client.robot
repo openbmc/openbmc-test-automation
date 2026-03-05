@@ -201,7 +201,7 @@ Post Login Request
     Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}  max_retries=3
 
     ${headers}=  Create Dictionary  Content-Type=application/json
-    @{credentials}=  Create List  ${rest_username}  ${rest_password}
+    $@{credentials}=  Create List  ${rest_username}  ${rest_password}
     ${data}=  Create Dictionary   data=@{credentials}
     ${status}  ${resp}=  Run Keyword And Ignore Error  POST On Session  openbmc
     ...  /login  json=${data}  headers=${headers}
