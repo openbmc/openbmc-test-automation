@@ -128,7 +128,6 @@ Verify Invalid Data For Enable And Disable Event Service Methods
         Redfish.Patch  /redfish/v1/EventService  body=${payload}  valid_status_codes=[${HTTP_BAD_REQUEST}]
     END
 
-
 Verify Invalid Subscriptions Details For Event Notification
     [Documentation]  Verify invalid subscriptions details for event notification.
     [Tags]  Verify_Invalid_Subscriptions_Details_For_Event_Notification
@@ -163,6 +162,28 @@ Verify And Modify Subscriptions Details For Event Notification
     ${resp}=  Redfish.Get Properties  ${instance}[0]  valid_status_codes=[${HTTP_OK}]
     ${after_policy}=  Get From Dictionary  ${resp}  DeliveryRetryPolicy
     Should Be Equal  ${after_policy}  TerminateAfterRetries
+
+Verify Invalid Modify Subscriptions Details For Event Notification
+    [Documentation]  Verify invalid modify subscriptions details for event notification.
+    [Tags]  Verify_Invalid_Modify_Subscriptions_Details_For_Event_Notification
+
+    Check And Create Subscription
+
+    # Get the subscription list.
+    ${instance}=  Redfish.Get Members List  ${REDFISH_BASE_URI}EventService/Subscriptions
+
+    # Patch operation with empty body.
+    ${payload}=  Create Dictionary
+    Redfish.Patch  ${instance}[0]  body=${payload}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+    # Patch operation with empty destination.
+    ${payload}=  Create Dictionary  Destination=""
+    Redfish.Patch  ${instance}[0]  body=&{payload}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+    # Patch operation with empty resource types and registry prefixes.
+    ${payload}=  Create Dictionary  resource_types=[]  registry_prefixes=[]
+    Redfish.Patch  ${instance}[0]  body=&{payload}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
 
 *** Keywords ***
 
