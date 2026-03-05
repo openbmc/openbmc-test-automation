@@ -113,6 +113,28 @@ Verify Event Service Enable And Disable Methods
         Should Be Equal  ${after_policy}  ${state}
     END
 
+Verify Invalid Modify Subscriptions Details For Event Notification
+    [Documentation]  Verify invalid modify subscriptions details for event notification.
+    [Tags]  Verify_Invalid_Modify_Subscriptions_Details_For_Event_Notification
+
+    Check And Create Subscription
+
+    # Get the subscription list.
+    ${instance}=  Redfish.Get Members List  ${REDFISH_BASE_URI}EventService/Subscriptions
+
+    # Patch operation with empty body.
+    ${payload}=  Create Dictionary
+    Redfish.Patch  ${instance}[0]  body=${payload}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+    # Patch operation with empty Destination.
+    ${payload}=  Create Dictionary  Destination=""
+    Redfish.Patch  ${instance}[0]  body=&{payload}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+    # Patch operation with empty resource types and registry prefixes.
+    ${payload}=  Create Dictionary  resource_types=[]  registry_prefixes=[]
+    Redfish.Patch  ${instance}[0]  body=&{payload}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+
 *** Keywords ***
 
 Fetch Default Event Service State
