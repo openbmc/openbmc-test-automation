@@ -83,6 +83,53 @@ Verify Event Service Collection Unsupported Methods
     Redfish.Delete  /redfish/v1/EventService
     ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
+Verify None Properties Subscriptions Details For Event Notification
+    [Documentation]  Verify none properties subscriptions details for event notification.
+    [Tags]  Verify_None_Properties_Subscriptions_Details_For_Event_Notification
+
+    # Post subscriptions for null destination value and empty resource types & registry prefixes.
+    ${payload}=    Create Dictionary    context=Event Subscription    destination=null
+    ...    resource_types=[]    registry_prefixes=[]    protocol=Redfish
+
+    Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+    # Post subscriptions for null protocol value and empty resource types & registry prefixes.
+    ${payload}=    Create Dictionary    Context=Test_Context    Destination=https://${REMOTE_SERVER_IP}:${HTTPS_PORT}/
+    ...    resource_types=[]    registry_prefixes=[]    protocol=null
+
+    Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+    # Post subscriptions for destination & protocol with null value.
+    # And empty value for resource types & registry prefixes.
+    ${payload}=    Create Dictionary    context=Event Subscription    destination=null
+    ...    resource_types=[]    registry_prefixes=[]    protocol=null
+
+    Redfish.Post  /redfish/v1/EventService/Subscriptions  body=&{payload}
+    ...  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+Verify Invalid Modify Subscriptions Details For Event Notification
+    [Documentation]  Verify invalid modify subscriptions details for event notification.
+    [Tags]  Verify_Invalid_Modify_Subscriptions_Details_For_Event_Notification
+
+    Check And Create Subscription
+
+     # Get the subscription list.
+    ${instance}=    Redfish.Get Members List    ${REDFISH_BASE_URI}EventService/Subscriptions
+
+    # Patch operation with empty body.
+    ${payload}=  Create Dictionary
+    Redfish.Patch    ${instance}[0]    body=${payload}    valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+    # Patch operation with empty Destination.
+    ${payload}=    Create Dictionary   Destination=""
+    Redfish.Patch  ${instance}[0]    body=&{payload}    valid_status_codes=[${HTTP_BAD_REQUEST}]
+
+    # Patch operation with empty resource types and registry prefixes.
+    ${payload}=    Create Dictionary   resource_types=[]  registry_prefixes=[]
+    Redfish.Patch  ${instance}[0]    body=&{payload}    valid_status_codes=[${HTTP_BAD_REQUEST}]
+
 
 *** Keywords ***
 
