@@ -23,9 +23,8 @@ Test Inband IPMI Auth Reset
 
     Create Session  openbmc  ${AUTH_URI}  max_retries=1
     ${headers}=  Create Dictionary  Content-Type=application/json
-    @{credentials}=  Create List  ${OPENBMC_USERNAME}  ${OPENBMC_PASSWORD}
-    ${data}=  create dictionary   data=@{credentials}
-    ${resp}=  POST On Session  openbmc  /login  data=${data}  headers=${headers}
+    ${data}=  Create Dictionary  username=${OPENBMC_USERNAME}  password=${OPENBMC_PASSWORD}
+    ${resp}=  POST On Session  openbmc  /login  json=${data}  headers=${headers}
     ...  expected_status=any
     Should Be Equal As Strings  ${resp.status_code}  ${HTTP_UNAUTHORIZED}
 
