@@ -17,7 +17,6 @@ ${RAW_SUFFIX}       0x00 0x00 0x00 0x00 0x00 0x01 0x00 0x00
 ${RAW_SEL_COMMIT}   raw 0x0a 0x44 0x00 0x00 0x02 0x00 0x00 0x00 0x00 0x20
 ...  0x00 0x04 0x12 0xA6 0x6f 0x02 0x00 0x01
 
-
 *** Keywords ***
 
 Create eSEL
@@ -83,7 +82,7 @@ Check For Error Logs
     ${error_logs}=  Get Error Logs
 
     ${num_error_logs}=  Get Length  ${error_logs}
-    Return From Keyword If  ${num_error_logs} == ${0}
+    IF  ${num_error_logs} == ${0}  RETURN
 
     # Get a list of the severities of the error logs.
     ${error_log_severities}=  Nested Get  Severity  ${error_logs}

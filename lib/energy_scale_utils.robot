@@ -128,7 +128,7 @@ Set DCMI Power Limit Via REST
     ${int_power_limit}=  Convert To Integer  ${power_limit}
     ${data}=  Create Dictionary  data=${int_power_limit}
     Write Attribute   ${CONTROL_HOST_URI}power_cap  PowerCap  data=${data}
-    Return From Keyword If  ${verify} == ${False}
+    IF  ${verify} == ${False}  RETURN
     ${power}=  Read Attribute  ${CONTROL_HOST_URI}power_cap  PowerCap
     Should Be True  ${power} == ${power_limit}
     ...  msg=Failed setting power limit to ${power_limit} watts via REST.
@@ -144,7 +144,7 @@ Activate DCMI Power Via REST
     ${data}=  Create Dictionary  data=${True}
     Write Attribute   ${CONTROL_HOST_URI}power_cap  PowerCapEnable
     ...  data=${data}
-    Return From Keyword If  ${verify} == ${False}
+    IF  ${verify} == ${False}  RETURN
     ${setting}=  Get DCMI Power Activation Via REST
     Should Be True  ${setting} == ${1}
     ...  msg=Failed to activate power limiting via REST.
@@ -160,7 +160,7 @@ Deactivate DCMI Power Via REST
     ${data}=  Create Dictionary  data=${False}
     Write Attribute   ${CONTROL_HOST_URI}power_cap  PowerCapEnable
     ...  data=${data}
-    Return From Keyword If  ${verify} == ${False}
+    IF  ${verify} == ${False}  RETURN
     ${setting}=  Get DCMI Power Activation Via REST
     Should Be True  ${setting} == ${0}
     ...  msg=Failed to deactivate power limiting via REST.

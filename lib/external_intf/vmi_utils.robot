@@ -55,7 +55,7 @@ Set Static IPv4 Address To VMI And Verify
     # Wait few seconds for new configuration to get populated on runtime.
     Sleep  ${wait_time}
 
-    Return From Keyword If  ${valid_status_code} != ${HTTP_ACCEPTED}
+    IF  ${valid_status_code} != ${HTTP_ACCEPTED}  RETURN
     ${host_power_state}  ${host_state}=   Redfish Get Host State
     IF  '${host_power_state}' == 'On' and '${host_state}' == 'Enabled'
         Verify VMI Network Interface Details  ${ip}  Static  ${gateway}  ${netmask}  ${interface}
@@ -97,7 +97,7 @@ Delete VMI IPv4 Address
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
     ...  body=${data}  valid_status_codes=[${valid_status_code}]
 
-    Return From Keyword If  ${valid_status_code} != ${HTTP_ACCEPTED}
+    IF  ${valid_status_code} != ${HTTP_ACCEPTED}  RETURN
 
     # Wait few seconds for configuration to get effective.
     Sleep  ${wait_time}
@@ -121,7 +121,7 @@ Set VMI IPv4 Origin
     ...  body=${data}  valid_status_codes=[${valid_status_code}]
 
     Sleep  ${wait_time}
-    Return From Keyword If  ${valid_status_code} != ${HTTP_ACCEPTED}
+    IF  ${valid_status_code} != ${HTTP_ACCEPTED}  RETURN
     ${resp}=  Redfish.Get
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
     Should Be Equal  ${resp.dict["DHCPv4"]["DHCPEnabled"]}  ${dhcp_enabled}
@@ -183,7 +183,7 @@ Get VMI Interfaces
         Append To List  ${interface_list}  ${interface_value}
     END
 
-   RETURN  @{interface_list}
+    RETURN  @{interface_list}
 
 
 Verify VMI EthernetInterfaces
@@ -242,7 +242,7 @@ Set VMI SLAACv6 Origin
     ...  body=${data}  valid_status_codes=[${valid_status_code}]
 
     Sleep  ${wait_time}
-    Return From Keyword If  ${valid_status_code} != ${HTTP_ACCEPTED}
+    IF  ${valid_status_code} != ${HTTP_ACCEPTED}  RETURN
     ${resp}=  Redfish.Get
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
     Should Be Equal  ${resp.dict["StatelessAddressAutoConfig"]["IPv6AutoConfigEnabled"]}  ${slaac_enabled}
@@ -282,7 +282,7 @@ Set VMI DHCPv6 Property
     ...  body=${data}  valid_status_codes=[${valid_status_code}]
 
     Sleep  ${wait_time}
-    Return From Keyword If  ${valid_status_code} != ${HTTP_ACCEPTED}
+    IF  ${valid_status_code} != ${HTTP_ACCEPTED}  RETURN
     ${resp}=  Redfish.Get
     ...  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
     Should Be Equal  ${resp.dict["DHCPv6"]["OperatingMode"]}  ${dhcpv6_operatingmode}
@@ -312,7 +312,7 @@ Set Static VMI IPv6 Address
     ${active_channel_config}=  Get Active Channel Config
     ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
 
-    Redfish.patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+    Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
     ...  body=&{data}  valid_status_codes=[${valid_status_codes}]
 
     Sleep  5s
@@ -330,7 +330,7 @@ Set VMI IPv6 Static Default Gateway
     ${patch_list}=  Create List  ${vmi_staticipv6_gateway}
     ${data}=  Create Dictionary  IPv6StaticDefaultGateways=${patch_list}
 
-    Redfish.patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
+    Redfish.Patch  /redfish/v1/Systems/hypervisor/EthernetInterfaces/${interface}
     ...  body=&{data}  valid_status_codes=[${valid_status_codes}]
 
 
