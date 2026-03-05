@@ -119,7 +119,7 @@ def login(openbmc_host, openbmc_username, openbmc_password):
     response = session.post(
         "https://" + openbmc_host + "/login",
         headers=http_header,
-        json={"data": [openbmc_username, openbmc_password]},
+        json={"username": openbmc_username, "password": openbmc_password},
         verify=False,
         timeout=30,
     )

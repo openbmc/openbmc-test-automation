@@ -48,7 +48,7 @@ class event_notification:  # NOQA
         response = session.post(
             "https://" + self.__host + "/login",
             headers=http_header,
-            json={"data": [self.__user, self.__password]},
+            json={"username": self.__user, "password": self.__password},
             verify=False,
             timeout=30,
         )
