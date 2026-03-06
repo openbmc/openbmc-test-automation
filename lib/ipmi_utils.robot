@@ -1,5 +1,4 @@
 *** Settings ***
-
 Documentation          Keywords for KCS and Lanplus interface command.
 
 Resource               ../lib/ipmi_client.robot
@@ -7,7 +6,6 @@ Resource               ../lib/state_manager.robot
 Resource               ../lib/common_utils.robot
 Variables              ../data/ipmi_raw_cmd_table.py
 Library                ../lib/ipmi_utils.py
-
 
 *** Keywords ***
 
