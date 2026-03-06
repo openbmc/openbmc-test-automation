@@ -46,6 +46,7 @@ ${xpath_ntp_switch_button}               //dt[normalize-space()='Use NTP servers
 ${xpath_dns_switch_button}               //dt[normalize-space()='Use DNS servers']/following-sibling::dd[1]
 ${xpath_domainname_switch_button}        //dt[normalize-space()='Use domain name']/following-sibling::dd[1]
 ${xpath_success_popup}                   //div[@role='alert'][contains(.,'Successfully')]
+${xpath_failure_popup}                   //div[@role='alert'][contains(.,'Error')]
 ${ipv4_elements}                         //h2[contains(., "IPv4")]/following::table[1]/tbody/tr/td[1]
 ${ipv6_elements}                         //h2[contains(., "IPv6")]/following::table[1]/tbody/tr/td[1]
 ${ipv4_addr_origin_elements}             //h2[contains(text(),'IPv4')]//following::table[1]
@@ -81,8 +82,10 @@ ${xpath_eth1_dhcpv6_button}              (//dt[normalize-space()='DHCP']/followi
 ${xpath_eth0_dhcpv4_button}              (//dt[normalize-space()='DHCP']/following-sibling::dd[1]//label[@class='form-check-label'])[1]
 ${xpath_eth1_dhcpv4_button}              (//dt[normalize-space()='DHCP']/following-sibling::dd[1]//label[@class='form-check-label'])[3]
 ${xpath_dhcpv4_alert}                    //button[normalize-space()='Enable' or normalize-space()='Disable']
+${xpath_eth0_ipv4_default_gateway}       //h2[contains(text(),'IPv4')]//following::table[1]//tr[last()]/td[2]
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
+${test_ipv4_gateway}                     10.7.7.1
 ${test_ipv4_addr_1}                      10.7.7.8
 ${test_ipv4_addr_2}                      10.7.6.5
 ${test_ipv6_addr}                        2001:db8:3333:4444:5555:6666:7777:8888
@@ -873,6 +876,25 @@ Configure Staticv6 And DHCPv6 On Eth1 With Eth0 And Eth1 In Staticv4
     Toggle DHCPv6 State And Verify  Enabled  2
 
 
+Verify Adding Static IPv4 With New Gateway From GUI Throws Error
+    [Documentation]  Verify adding new static IPv4 address with new gateway from
+    ...  GUI throws error.
+    [Tags]  Verify_Adding_Static_IPv4_With_New_Gateway_From_GUI_Throws_Error
+
+    # Verify default gateway is present before adding new gateway.
+    ${default_gateway_before}=  Get Text  ${xpath_eth0_ipv4_default_gateway}
+    Should Not Be Empty  ${default_gateway_before}
+
+    # Add new IPv4 address with new gateway and verify it throws error.
+    Add Static IP Address And Verify  ${test_ipv4_addr}  ${test_subnet_mask}
+    ...  ${test_ipv4_gateway}  expected_status=error
+
+    # Verify default gateway is intact after trying to add new gateway.
+    ${default_gateway_after}=  Get Text  ${xpath_eth0_ipv4_default_gateway}
+    Should Not Be Empty  ${default_gateway_after}
+    Should Be Equal  ${default_gateway_before}  ${default_gateway_after}
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -958,10 +980,12 @@ Add Static IP Address And Verify
     IF  '${expected_status}' == 'Success'
         Wait Until Page Contains  ${ip_address}  timeout=40sec
         Validate Network Config On BMC
-    ELSE
+    ELSE IF  '${expected_status}' == 'Invalid format'
         Page Should Contain  Invalid format
         Click Button  ${xpath_cancel_button}
         Wait Until Page Does Not Contain Element  ${xpath_cancel_button}
+    ELSE
+        Verify Popup Message And Close Popup  ${xpath_failure_popup}
     END
 
 
