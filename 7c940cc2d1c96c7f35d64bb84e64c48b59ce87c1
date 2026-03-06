@@ -16,6 +16,23 @@
       "message": "Fails on op910 firmware\nKeyword \u0027Post Login Request\u0027 failed after retrying for 40 seconds. The last error was: HTTPError: 400 Client Error: Bad Request for url: https://w50/login: FAIL !\u003d PASS",
       "revId": "7c940cc2d1c96c7f35d64bb84e64c48b59ce87c1",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e11c8c0_0346b08a",
+        "filename": "lib/rest_client.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-03-06T18:44:44Z",
+      "side": 1,
+      "message": "This is to support older legacy REST login.. This will fail and its reported failing.. \n\nThis is for community who still relies on old REST format and this path is different from redfish.. So we would like to keep this same. \n\nPlease revert this file changes here.. Thanks \n\nThe newer redfish login are already in this format.. example keyword in this resource file\n\nRedfish Login",
+      "revId": "7c940cc2d1c96c7f35d64bb84e64c48b59ce87c1",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
