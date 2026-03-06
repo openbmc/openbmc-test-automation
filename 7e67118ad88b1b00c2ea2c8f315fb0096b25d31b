@@ -24,6 +24,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8ab2ddb_d33ef407",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-03-06T11:52:26Z",
+      "side": 1,
+      "message": "That is not needed as it will identify the xpaths of eth0 and eth1 in next TC",
+      "parentUuid": "87e75174_4b74541f",
+      "range": {
+        "startLine": 895,
+        "startChar": 4,
+        "endLine": 895,
+        "endChar": 42
+      },
+      "revId": "7e67118ad88b1b00c2ea2c8f315fb0096b25d31b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb30dd0a_f4a85096",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-03-06T11:39:41Z",
       "side": 1,
       "message": "change to channel",
+      "range": {
+        "startLine": 1754,
+        "startChar": 6,
+        "endLine": 1754,
+        "endChar": 20
+      },
+      "revId": "7e67118ad88b1b00c2ea2c8f315fb0096b25d31b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b25d45ab_ec05a654",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 1754,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-03-06T11:52:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb30dd0a_f4a85096",
       "range": {
         "startLine": 1754,
         "startChar": 6,
