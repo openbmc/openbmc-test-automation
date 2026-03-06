@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f18aed5_6748966a",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 894,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-03-06T10:33:45Z",
+      "side": 1,
+      "message": "this line is not required here...line 895 will handle this",
+      "revId": "772a7aa72a1a63288eb519cfb1a3759764252c5c",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
