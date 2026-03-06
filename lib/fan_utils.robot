@@ -15,7 +15,6 @@ ${fan_nonfunctional}   ${0}
 # Criteria for a fan at maximum speed.
 ${max_speed}=  ${10400}
 
-
 *** Keywords ***
 
 Is Water Cooled
@@ -42,7 +41,7 @@ Get Fan Names
         ${fan_present}=  Get Variable Value  ${fan_properties['Present']}  0
         ${fan_functional}=  Get Variable Value
         ...  ${fan_properties['Functional']}  0
-        Continue For Loop If  ${fan_present} == 0 or ${fan_functional} == 0
+        IF  ${fan_present} == 0 or ${fan_functional} == 0  CONTINUE
         ${remaining_uri}  ${fan_name}=  Split Path  ${fan_uri}
         Append To List  ${fan_names}  ${fan_name}
     END
@@ -223,7 +222,7 @@ Get Fan Count And Names
     [Documentation]  Return the number of fans and the fan names.
 
     # The @{fan_names} list holds the names of the fans in the system.
-    @{fan_names}  Create List
+    @{fan_names}=  Create List
     ${fan_names}=  Get Fan Names  ${fan_names}
 
     ${number_of_fans}=  Get Length  ${fan_names}

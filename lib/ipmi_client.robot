@@ -2,6 +2,7 @@
 Documentation   This module is for IPMI client for copying ipmitool to
 ...             openbmc box and execute ipmitool IPMI standard
 ...             command. IPMI raw command will use dbus-send command
+
 Resource        ../lib/resource.robot
 Resource        ../lib/connection_client.robot
 Resource        ../lib/utils.robot
@@ -13,18 +14,19 @@ Library         ipmi_client.py
 Library         ../lib/bmc_ssh_utils.py
 
 *** Variables ***
-${dbusHostIpmicmd1}=   dbus-send --system  ${OPENBMC_BASE_URI}HostIpmi/1
-${dbusHostIpmiCmdReceivedMsg}=   ${OPENBMC_BASE_DBUS}.HostIpmi.ReceivedMessage
-${netfnByte}=          ${EMPTY}
-${cmdByte}=            ${EMPTY}
-${arrayByte}=          array:byte:
-${IPMI_USER_OPTIONS}   ${EMPTY}
-${IPMI_INBAND_CMD}=    ipmitool -C ${IPMI_CIPHER_LEVEL} -N ${IPMI_TIMEOUT} -p ${IPMI_PORT}
-${HOST}=               -H
-${RAW}=                raw
-${IPMITOOL_PATH}       /tmp/ipmitool
-${expected_max_ids}    15
-${empty_name_pattern}  ^User Name\\s.*\\s:\\s$
+
+${dbusHostIpmicmd1}             dbus-send --system  ${OPENBMC_BASE_URI}HostIpmi/1
+${dbusHostIpmiCmdReceivedMsg}   ${OPENBMC_BASE_DBUS}.HostIpmi.ReceivedMessage
+${netfnByte}                    ${EMPTY}
+${cmdByte}                      ${EMPTY}
+${arrayByte}                    array:byte:
+${IPMI_USER_OPTIONS}            ${EMPTY}
+${IPMI_INBAND_CMD}              ipmitool -C ${IPMI_CIPHER_LEVEL} -N ${IPMI_TIMEOUT} -p ${IPMI_PORT}
+${HOST}                         -H
+${RAW}                          raw
+${IPMITOOL_PATH}                /tmp/ipmitool
+${expected_max_ids}             15
+${empty_name_pattern}           ^User Name\\s.*\\s:\\s$
 
 *** Keywords ***
 
@@ -120,7 +122,7 @@ Run Inband IPMI Raw Command
     ${ipmi_cmd}=  Catenate  ${IPMI_INBAND_CMD}  ${RAW}  ${command}
     Qprint Issuing  ${ipmi_cmd}
     ${stdout}  ${stderr}=  Execute Command  ${ipmi_cmd}  return_stderr=True
-    Return From Keyword If  ${fail_on_err} == ${0}  ${stderr}
+    IF  ${fail_on_err} == ${0}  RETURN  ${stderr}
     Should Be Empty  ${stderr}  msg=${stdout}
     RETURN  ${stdout}
 
@@ -148,7 +150,7 @@ Run Inband IPMI Standard Command
     ${ipmi_cmd}=  Catenate  ${IPMI_INBAND_CMD}  ${command}
     Qprint Issuing  ${ipmi_cmd}
     ${stdout}  ${stderr}=  Execute Command  ${ipmi_cmd}  return_stderr=True
-    Return From Keyword If  ${fail_on_err} == ${0}  ${stderr}
+    IF  ${fail_on_err} == ${0}  RETURN  ${stderr}
     Should Be Empty  ${stderr}  msg=${stdout}
     RETURN  ${stdout}
 
@@ -173,7 +175,7 @@ Run External IPMI Standard Command
     ${ipmi_cmd}=  Create IPMI Ext Command String  ${command_string}  &{options}
     Qprint Issuing  ${ipmi_cmd}
     ${rc}  ${output}=  Run And Return RC and Output  ${ipmi_cmd}
-    Return From Keyword If  ${fail_on_err} == ${0}  ${output}
+    IF  ${fail_on_err} == ${0}  RETURN  ${output}
     Should Be Equal  ${rc}  ${expected_rc}  msg=${output}
     RETURN  ${output}
 
@@ -230,7 +232,7 @@ Deactivate SOL Via IPMI
 
     IF  ${rc} > 0
         Run Keyword And Ignore Error  Terminate Process  sol_proc
-        Return From Keyword  ${output}
+        RETURN  ${output}
     END
 
     ${output}=  OperatingSystem.Get File  ${file_path}  encoding_errors=ignore
@@ -324,7 +326,7 @@ Copy ipmitool
         Set Suite Variable  ${IPMITOOL_PATH}  ${response}
         SSHLibrary.Open Connection     ${OPENBMC_HOST}
         SSHLibrary.Login   ${OPENBMC_USERNAME}    ${OPENBMC_PASSWORD}
-        Return From Keyword
+        RETURN
     END
 
     OperatingSystem.File Should Exist  tools/ipmitool  msg=${ipmitool_error}
@@ -347,7 +349,7 @@ Initiate Host Boot Via External IPMI
     ${output}=  Run External IPMI Standard Command  chassis power on
     Should Not Contain  ${output}  Error
 
-    IF  '${wait}' == '${0}'  Return From Keyword
+    IF  '${wait}' == '${0}'  RETURN
     Wait Until Keyword Succeeds  10 min  10 sec  Is Host Running
 
 
@@ -362,7 +364,7 @@ Initiate Host PowerOff Via External IPMI
     ${output}=  Run External IPMI Standard Command  chassis power off
     Should Not Contain  ${output}  Error
 
-    IF  '${wait}' == '${0}'  Return From Keyword
+    IF  '${wait}' == '${0}'  RETURN
     Wait Until Keyword Succeeds  3 min  10 sec  Is Host Off
 
 
@@ -464,7 +466,7 @@ Find Free User Id
         ${is_empty}=  Run Keyword And Return Status
         ...  Should Match Regexp  ${name_line}  ${empty_name_pattern}
 
-        Exit For Loop If  ${is_empty} == ${True}
+        IF  ${is_empty} == ${True}  BREAK
     END
     RETURN  ${random_userid}
 
@@ -477,7 +479,7 @@ Check Enabled User Count
     ${enabled_user_count}=
     ...  Get Lines Containing String  ${resp}  Enabled User Count
 
-    Should not contain  ${enabled_user_count}  ${expected_max_ids}
+    Should Not Contain  ${enabled_user_count}  ${expected_max_ids}
     ...  msg=IPMI has reached maximum user count
 
 
@@ -586,7 +588,7 @@ Fetch One Threshold Sensor From Sensor List
     # Omit the discrete sensor and create an threshold sensor name list
     FOR  ${sensor}  IN  @{sensor_list}
       ${discrete_sensor_status}=  Run Keyword And Return Status  Should Contain  ${sensor}  discrete
-      Continue For Loop If  '${discrete_sensor_status}' == 'True'
+      IF  '${discrete_sensor_status}' == 'True'  CONTINUE
       ${sensor_details}=  Split String  ${sensor}  |
       ${get_sensor_name}=  Get From List  ${sensor_details}  0
       ${sensor_name}=  Set Variable  ${get_sensor_name.strip()}
@@ -634,7 +636,7 @@ Get Bytes From SDR Sensor
     RETURN  ${sensor_hex}
 
 
-Get Current Date from BMC
+Get Current Date From BMC
     [Documentation]  Runs the date command from BMC and returns current date and time
     [Arguments]  ${date_format}=%m/%d/%Y %H:%M:%S
 

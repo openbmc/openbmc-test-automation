@@ -1,3 +1,5 @@
+*** Settings ***
+Documentation   HTX resource variables.
 
 *** Variables ***
 
@@ -20,4 +22,3 @@ ${HTX_MDT_PROFILE}   mdt.bu
 #        3 - every hour
 #        4 - every midnight
 ${BOOTME_PERIOD}    1
-

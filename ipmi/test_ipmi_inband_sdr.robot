@@ -125,7 +125,7 @@ Verify Timestamp In Get Device SDR Info Via Inband IPMI
     ${SDR_timestamp}=  Get Device SDR Timestamp
 
     # Get current date from BMC Native Date command and convert to epoch.
-    ${bmc_date}=  Get Current Date from BMC
+    ${bmc_date}=  Get Current Date From BMC
     ${epoch_bmc}=  Convert Date  ${bmc_date}  epoch  exclude_millis=yes  date_format=%m/%d/%Y %H:%M:%S
 
     # Compare time difference between bmc time and Get Device SDR Info timestamp.
