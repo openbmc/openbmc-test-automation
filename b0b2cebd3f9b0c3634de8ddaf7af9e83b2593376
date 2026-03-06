@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f8f2c7d_4cdb21a8",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 9
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2026-03-06T13:42:44Z",
+      "side": 1,
+      "message": "This test case causes the system to go down; please avoid writing gateway test cases.\n@spotthur@in.ibm.com @prkatti1@in.ibm.com please review",
+      "range": {
+        "startLine": 670,
+        "startChar": 0,
+        "endLine": 680,
+        "endChar": 47
+      },
+      "revId": "b0b2cebd3f9b0c3634de8ddaf7af9e83b2593376",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
