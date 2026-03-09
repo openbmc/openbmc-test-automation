@@ -132,7 +132,7 @@ OpenBMC Delete Request
     RETURN    ${ret}
 
 Initialize OpenBMC
-    [Documentation]  Do a REST login connection within specified time.
+    [Documentation]  Establish auth token and session alias for OpenBMC operations.
     [Arguments]  ${timeout}=20  ${quiet}=${1}
     ...  ${rest_username}=${OPENBMC_USERNAME}
     ...  ${rest_password}=${OPENBMC_PASSWORD}
@@ -143,16 +143,29 @@ Initialize OpenBMC
     # rest_username  The REST username.
     # rest_password  The REST password.
 
-    ${bmcweb_status}=  Run Keyword And Return Status  BMC Web Login Request
-    ...  ${timeout}  ${rest_username}  ${rest_password}
+    # Always ensure 'openbmc' alias exists (some callers assume it).
+    Create Session  openbmc  ${AUTH_URI}  timeout=${timeout}
 
-    Return From Keyword If  ${bmcweb_status} == ${True}
+    # Legacy BMC web /login -> uses 'openbmc' session
+    ${bmcweb_status}=  Run Keyword And Return Status
+    ...  BMC Web Login Request  ${timeout}  ${rest_username}  ${rest_password}
+    IF  ${bmcweb_status} == ${True}
+        Set Global Variable  ${SESSION_OBJECT}  openbmc
+        RETURN
+    END
 
-    # This will retry at 20 second interval.
+    # Redfish SessionService -> uses 'redfish' session
+    ${redfish_status}=  Run Keyword And Return Status
+    ...  Redfish Login  ${timeout}  ${rest_username}  ${rest_password}
+    IF  ${redfish_status} == ${True}
+        Set Global Variable  ${SESSION_OBJECT}  redfish
+        RETURN
+    END
+
+    # Legacy REST /login -> uses 'openbmc' session
     Wait Until Keyword Succeeds  40 sec  20 sec
-    ...  Post Login Request  ${timeout}  ${quiet}
-    ...  ${rest_username}  ${rest_password}
-
+    ...  Post Login Request  ${timeout}  ${quiet}  ${rest_username}  ${rest_password}
+    Set Global Variable  ${SESSION_OBJECT}  openbmc
 
 BMC Web Login Request
     [Documentation]  Do BMC web-based login.
