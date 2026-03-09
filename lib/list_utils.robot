@@ -20,7 +20,7 @@ Smart Combine Lists
       ${type_arg}=  Evaluate  str(type($lists[${index}])).split("'")[1]
       IF  '${type_arg}' != 'list'
            Remove From List  ${lists}  ${index}
-           Continue For Loop
+           CONTINUE
       END
       ${index}=  Evaluate  ${index}+1
     END
@@ -42,7 +42,7 @@ Intersect Lists
     ${length1}=  Get Length  ${list1}
     ${length2}=  Get Length  ${list2}
 
-    @{intersected_list}  Create List
+    @{intersected_list}=  Create List
 
     @{larger_list}=  Set Variable If  ${length1} >= ${length2}  ${list1}
     ...                               ${length1} < ${length2}  ${list2}
@@ -50,8 +50,8 @@ Intersect Lists
     ...                                ${length1} < ${length2}  ${list1}
 
     FOR  ${element}  IN  @{larger_list}
-      ${rc}=  Run Keyword and Return Status  List Should Contain Value  ${smaller_list}  ${element}
-      IF  '${rc}' == 'True'  Append to List  ${intersected_list}  ${element}
+      ${rc}=  Run Keyword And Return Status  List Should Contain Value  ${smaller_list}  ${element}
+      IF  '${rc}' == 'True'  Append To List  ${intersected_list}  ${element}
     END
 
     @{intersected_list}=  Remove Duplicates  ${intersected_list}

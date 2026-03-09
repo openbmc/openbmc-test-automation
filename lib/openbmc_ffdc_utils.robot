@@ -1,8 +1,8 @@
 *** Settings ***
 Documentation      Utility keywords for FFDC
 
-Library            String
 Library            DateTime
+Library            String
 Library            openbmc_ffdc_list.py
 Resource           resource.robot
 Resource           connection_client.robot
@@ -29,9 +29,9 @@ Get Test Dir and Name
     ...                and is populated dynamically by the robot framework
     ...                during execution
     ${suite_name}=     Get strip string   ${SUITE_NAME}
-    ${suite_name}=     Catenate  SEPARATOR=    ${FFDC_TIME}_   ${suite_name}
+    ${suite_name}=     Catenate  SEPARATOR=${EMPTY}   ${FFDC_TIME}_   ${suite_name}
     ${test_name}=      Get strip string   ${TEST_NAME}
-    ${test_name}=   Catenate  SEPARATOR=  ${FFDC_TIME}_   ${test_name}
+    ${test_name}=   Catenate  SEPARATOR=${EMPTY}  ${FFDC_TIME}_   ${test_name}
     RETURN  ${suite_name}   ${test_name}
 
 
@@ -50,7 +50,7 @@ Create FFDC Report File
 
 Write Data To File
     [Documentation]     Write data to the ffdc report document
-    [Arguments]         ${data}=      ${filepath}=${FFDC_FILE_PATH}
+    [Arguments]         ${data}=${EMPTY}  ${filepath}=${FFDC_FILE_PATH}
     Append To File      ${filepath}   ${data}
 
 
@@ -73,7 +73,7 @@ Header Message
 
 
     ${ffdc_file_list}=  Create List  ${FFDC_FILE_PATH}
-    Return From Keyword If  '${TEST_MODE}'  ${ffdc_file_list}
+    IF  '${TEST_MODE}'  RETURN  ${ffdc_file_list}
 
     ${TEST_NAME}=  Get Variable Value  ${TEST_NAME}
     ${TEST_MESSAGE}=  Get Variable Value  ${TEST_MESSAGE}
@@ -103,7 +103,7 @@ Header Message
     RETURN  ${ffdc_file_list}
 
 
-Write Cmd Output to FFDC File
+Write Cmd Output To FFDC File
     [Documentation]      Write cmd output data to the report document
     [Arguments]          ${name_str}   ${cmd}
 
@@ -136,5 +136,5 @@ Error Logs Should Exist
     [Documentation]  Verify that error logs exist.
 
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}list  quiet=${1}
-    Run Keyword If  ${resp.status_code} != ${HTTP_OK}  Fail
+    IF  ${resp.status_code} != ${HTTP_OK}  Fail
     ...  msg=Expected BMC error log(s) are not present.

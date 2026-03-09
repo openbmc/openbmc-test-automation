@@ -7,6 +7,7 @@ Resource       ../lib/connection_client.robot
 Library        utilities.py
 
 *** Variables ***
+
 ${functional_cpu_count}       ${0}
 ${active_occ_count}           ${0}
 ${OCC_WAIT_TIMEOUT}           8 min
@@ -41,7 +42,7 @@ Get OCC Active State
     ${cmd}=  Catenate  busctl get-property org.open_power.OCC.Control
     ...   /org/open_power/control/occ${value} org.open_power.OCC.Status OccActive
 
-    ${cmd_output}  ${stderr}  ${rc} =  BMC Execute Command  ${cmd}
+    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
     ...  print_out=1  print_err=1  ignore_err=1
 
     # The command returns format  'b true'
@@ -98,7 +99,7 @@ Get Functional Processor Count
        IF  '${cpu_status['Health']}' != 'OK' or '${cpu_status['State']}' != 'Enabled'
            CONTINUE
        END
-       ${functional_cpu_count} =  Evaluate   ${functional_cpu_count} + 1
+       ${functional_cpu_count}=  Evaluate   ${functional_cpu_count} + 1
     END
 
     RETURN  ${functional_cpu_count}
@@ -114,12 +115,12 @@ Get Active OCC State Count
        ${cmd}=  Catenate  busctl get-property org.open_power.OCC.Control
        ...   /org/open_power/control/occ${num} org.open_power.OCC.Status OccActive
 
-       ${cmd_output}  ${stderr}  ${rc} =  BMC Execute Command  ${cmd}
+       ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
        ...  print_out=1  print_err=1  ignore_err=1
 
        # The command returns format  'b true'
        IF   '${cmd_output.split(' ')[-1]}' != 'true'  CONTINUE
-       ${active_occ_count} =  Evaluate   ${active_occ_count} + 1
+       ${active_occ_count}=  Evaluate   ${active_occ_count} + 1
     END
 
     RETURN  ${active_occ_count}
@@ -135,12 +136,12 @@ Match OCC And CPU State Count
        ${cmd}=  Catenate  busctl get-property org.open_power.OCC.Control
        ...   /org/open_power/control/occ${num} org.open_power.OCC.Status OccActive
 
-       ${cmd_output}  ${stderr}  ${rc} =  BMC Execute Command  ${cmd}
+       ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
        ...  print_out=1  print_err=1  ignore_err=1
 
        # The command returns format  'b true'
        IF   '${cmd_output.split(' ')[-1]}' != 'true'  CONTINUE
-       ${active_occ_count} =  Evaluate   ${active_occ_count} + 1
+       ${active_occ_count}=  Evaluate   ${active_occ_count} + 1
     END
 
     Log To Console  OCC Active count: ${active_occ_count}
@@ -293,7 +294,7 @@ Trigger OCC Reset
     ...  /org/open_power/control/occ${occ_target} org.open_power.OCC.PassThrough
     ...  Send ai 8 64 0 5 20 82 83 84 0
 
-    ${cmd_output}  ${stderr}  ${rc} =  BMC Execute Command  ${cmd}  print_out=1  print_err=1
+    ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}  print_out=1  print_err=1
 
     Log To Console  OCC wait check for disabled state.
     Wait Until Keyword Succeeds  30 sec  5 sec  Verify OCC Target State  ${occ_target}
@@ -334,7 +335,7 @@ Get Sensors Dbus Tree List
     ${sensors_dbus_tree_dict}=  Create Dictionary
     FOR  ${dbus_obj}  IN  @{dbus_obj_var}
         ${cmd}=  Catenate  busctl tree ${dbus_obj} --list | grep /sensors/
-        ${cmd_output}  ${stderr}  ${rc} =  BMC Execute Command  ${cmd}
+        ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
         ...  print_out=0  print_err=0  ignore_err=1
         Set To Dictionary  ${sensors_dbus_tree_dict}  ${dbus_obj}  ${cmd_output.splitlines()}
     END
@@ -366,7 +367,7 @@ Get Populated Sensors Dbus List
         FOR  ${val}  IN  @{sensor_dict["${key}"]}
            ${cmd}=  Catenate
            ...  busctl get-property ${key} ${val} xyz.openbmc_project.Sensor.Value Value
-           ${cmd_output}  ${stderr}  ${rc} =  BMC Execute Command  ${cmd}
+           ${cmd_output}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
            ...  print_out=0  print_err=0  ignore_err=1
            # Skip failed to get property command on Dbus object.
            IF  ${rc} == 0   Append To List  ${valid_dbus_list}  ${val}
@@ -417,7 +418,7 @@ Dump Fan Control JSON
     [Documentation]  Execute fan control on BMC to dump config with 'fanctl dump',
     ...              which makes it write a /tmp/fan_control_dump.json file.
 
-    ${output}  ${stderr}  ${rc} =  BMC Execute Command  test -f /usr/bin/fanctl
+    ${output}  ${stderr}  ${rc}=  BMC Execute Command  test -f /usr/bin/fanctl
     ...  print_err=1  ignore_err=1
 
     IF   ${rc} == 1  RETURN  fanctl application doesn't exist.
@@ -434,7 +435,7 @@ Get Fan JSON Data
     # Check for the generated file and return the file data as JSON and fails if
     # it doesn't find file generated.
     ${cmd}=  Catenate  test -f /tmp/fan_control_dump.json; cat /tmp/fan_control_dump.json
-    ${json_string}  ${stderr}  ${rc} =  BMC Execute Command  ${cmd}
+    ${json_string}  ${stderr}  ${rc}=  BMC Execute Command  ${cmd}
     ...  print_out=1  print_err=1  ignore_err=1
 
     Should Be True  ${rc} == 0  msg=No Fan control config JSON file is generated.
@@ -462,7 +463,7 @@ Get Fan Attribute Value
     ...   Should Be Equal  ${fan_dict["msg"]}  ${fan_json_msg}
     IF  ${status}
         Log To Console  Skipping attribute ${key_value} check.
-        Return From Keyword  ${empty_dicts}
+        RETURN  ${empty_dicts}
     END
 
     # Python module:  get_value_from_nested_dict(key,dict)
