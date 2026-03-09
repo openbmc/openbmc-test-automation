@@ -2,16 +2,16 @@
 Documentation      Methods to execute commands on BMC and collect
 ...                data to a list of FFDC files
 
+Library                Collections
+Library                OperatingSystem
+Library                String
+Library                SSHLibrary
 Resource               openbmc_ffdc_utils.robot
 Resource               rest_client.robot
 Resource               utils.robot
 Resource               list_utils.robot
 Resource               logging_utils.robot
 Resource               bmc_redfish_resource.robot
-Library                SSHLibrary
-Library                OperatingSystem
-Library                Collections
-Library                String
 Library                gen_print.py
 Library                gen_cmd.py
 Library                gen_robot_keyword.py
@@ -20,7 +20,7 @@ Library                logging_utils.py
 
 *** Variables ***
 
-${FFDC_CMD_TIMEOUT}    240
+${FFDC_CMD_TIMEOUT}        240
 ${FFDC_BMC_FILES_CLEANUP}  rm -rf /tmp/BMC_* /tmp/PEL_* /tmp/PLDM_*
 ...                        /tmp/OCC_* /tmp/fan_* /tmp/GUARD_* /tmp/DEVTREE
 
@@ -85,11 +85,11 @@ Method Call Keyword List
     # If function list is empty assign default (i.e. a list of all allowable
     # values).  In either case, convert ffdc_function_list from a string to
     # a list.
-    @{ffdc_function_list}=
-    ...  Run Keyword If  '${ffdc_function_list}' == '${EMPTY}'
-    ...    Get FFDC Method Desc  ${index}
-    ...  ELSE
-    ...    Split String  ${ffdc_function_list}  separator=:
+    IF  '${ffdc_function_list}' == '${EMPTY}'
+        @{ffdc_function_list}=  Get FFDC Method Desc  ${index}
+    ELSE
+        @{ffdc_function_list}=  Split String  ${ffdc_function_list}  separator=:
+    END
 
     @{ffdc_file_list}=  Create List
     FOR  ${method}  IN  @{method_list}
@@ -120,8 +120,7 @@ Execute Keyword Method
     @{ffdc_file_list}=  Create List
 
     ${index}=  Get Index From List  ${ffdc_function_list}  ${description}
-    Run Keyword If  '${index}' == '${-1}'  Return from Keyword
-    ...  ${ffdc_file_list}
+    IF  '${index}' == '${-1}'  RETURN  ${ffdc_file_list}
 
     ${status}  ${ffdc_file_list}=  Run Key  ${keyword_name}  ignore=1
     RETURN  ${ffdc_file_list}
@@ -159,17 +158,17 @@ Iterate BMC Command List Pairs
     Set Suite Variable   ${ENTRY_INDEX}   ${key_index}
 
     FOR  ${cmd}  IN  @{cmd_list}
-      Execute Command and Write FFDC    ${cmd[0]}  ${cmd[1]}
+      Execute Command And Write FFDC    ${cmd[0]}  ${cmd[1]}
     END
 
-Execute Command and Write FFDC
+Execute Command And Write FFDC
     [Documentation]  Run a command on the BMC or OS, write the output to the
     ...              specified file and return a list of generated files.
     [Arguments]  ${key_index}  ${cmd}  ${logpath}=${FFDC_FILE_PATH}
     ...          ${target}=BMC
 
-    Run Keyword If  '${logpath}' == '${FFDC_FILE_PATH}'
-    ...    Write Cmd Output to FFDC File  ${key_index}  ${cmd}
+    IF  '${logpath}' == '${FFDC_FILE_PATH}'
+    ...    Write Cmd Output To FFDC File  ${key_index}  ${cmd}
 
     @{ffdc_file_list}=  Create List  ${log_path}
 
@@ -177,17 +176,19 @@ Execute Command and Write FFDC
     ...  \ time_out=${FFDC_CMD_TIMEOUT}
     ${status}  ${ret_values}=  Run Key  ${cmd_buf}  ignore=${1}
     # If the command times out, status will be 'FAIL'.
-    Return From Keyword If  '${status}' == 'FAIL'  ${ffdc_file_list}
+    IF  '${status}' == 'FAIL'  RETURN  ${ffdc_file_list}
 
     ${stdout}=  Set Variable  ${ret_values}[0]
     ${stderr}=  Set Variable  ${ret_values}[1]
 
     # Write stdout on success and stderr/stdout to the file on failure.
-    Run Keyword If  $stderr == '${EMPTY}'
-    ...    Write Data To File  ${stdout}${\n}  ${logpath}
-    ...  ELSE  Write Data To File
-    ...    ERROR output:${\n}${stderr}${\n}Output:${\n}${stdout}${\n}
-    ...    ${logpath}
+    IF  $stderr == '${EMPTY}'
+      Write Data To File  ${stdout}${\n}  ${logpath}
+    ELSE
+      Write Data To File
+      ...    ERROR output:${\n}${stderr}${\n}Output:${\n}${stdout}${\n}
+      ...    ${logpath}
+    END
 
     RETURN  ${ffdc_file_list}
 
@@ -211,7 +212,7 @@ BMC FFDC Files
     @{ffdc_file_list}=  Create List
 
     FOR  ${index}  IN  @{entries}
-      ${ffdc_file_sub_list}=  Create File and Write Data  ${index}
+      ${ffdc_file_sub_list}=  Create File And Write Data  ${index}
       ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}  ${ffdc_file_sub_list}
     END
 
@@ -221,7 +222,7 @@ BMC FFDC Files
     RETURN  ${ffdc_file_list}
 
 
-Create File and Write Data
+Create File And Write Data
     [Documentation]  Run commands from FFDC_BMC_FILE to create FFDC files and
     ...              return a list of generated files.
     [Arguments]  ${key_index}
@@ -233,8 +234,8 @@ Create File and Write Data
     @{cmd_list}=  Get FFDC BMC File  ${key_index}
 
     FOR  ${cmd}  IN  @{cmd_list}
-      ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
-      ${ffdc_file_sub_list}=  Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}  ${logpath}
+      ${logpath}=  Catenate  SEPARATOR=${EMPTY}  ${LOG_PREFIX}  ${cmd[0]}
+      ${ffdc_file_sub_list}=  Execute Command And Write FFDC  ${cmd[0]}  ${cmd[1]}  ${logpath}
       Run Key U  scp.Get File \ /tmp/${cmd[0]} \ ${LOG_PREFIX}${cmd[0]}  ignore=1
       ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}  ${ffdc_file_sub_list}
     END
@@ -256,19 +257,18 @@ Log Test Case Status
     ...  ${EMPTY}
     ${FFDC_DIR_PATH}=  Get Variable Value  ${FFDC_DIR_PATH}  ${EMPTY}
 
-    Run Keyword If  '${FFDC_DIR_PATH}' == '${EMPTY}'  Set FFDC Defaults
+    IF  '${FFDC_DIR_PATH}' == '${EMPTY}'  Set FFDC Defaults
 
-    Run Keyword If  '${FFDC_DIR_PATH_STYLE}' == '${1}'  Run Keywords
+    IF  '${FFDC_DIR_PATH_STYLE}' == '${1}'  Run Keywords
     ...  Set Global Variable  ${FFDC_LOG_PATH}  ${FFDC_DIR_PATH}  AND
     ...  Set Global Variable  ${TEST_HISTORY}  ${FFDC_DIR_PATH}test_history.txt
 
     Create Directory   ${FFDC_LOG_PATH}
 
-    ${exist}=   Run Keyword and Return Status
+    ${exist}=   Run Keyword And Return Status
     ...   OperatingSystem.File Should Exist   ${TEST_HISTORY}
 
-    Run Keyword If  '${exist}' == '${False}'
-    ...   Create File  ${TEST_HISTORY}
+    IF  '${exist}' == '${False}'  Create File  ${TEST_HISTORY}
 
     Rpvars  TEST_HISTORY
 
@@ -293,10 +293,10 @@ Log FFDC Get Requests
     @{cmd_list}=  Get FFDC Get Request  ${key_index}
 
     FOR  ${cmd}  IN  @{cmd_list}
-      ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
+      ${logpath}=  Catenate  SEPARATOR=${EMPTY}  ${LOG_PREFIX}  ${cmd[0]}
       ${resp}=  OpenBMC Get Request  ${cmd[1]}  quiet=${1}  timeout=${30}
-      ${status}=  Run Keyword and Return Status  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
-      Run Keyword If  '${status}' == '${False}'  Continue For Loop
+      ${status}=  Run Keyword And Return Status  Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
+      IF  '${status}' == '${False}'  CONTINUE
       Write Data To File  ${\n}${resp.json()}${\n}  ${logpath}
       Append To List  ${ffdc_file_list}  ${logpath}
     END
@@ -319,7 +319,7 @@ Log FFDC Get Redfish Requests
     @{cmd_list}=  Get FFDC Get Redfish Request  ${key_index}
 
     FOR  ${cmd}  IN  @{cmd_list}
-      ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
+      ${logpath}=  Catenate  SEPARATOR=${EMPTY}  ${LOG_PREFIX}  ${cmd[0]}
       ${resp}=  Redfish.Get  ${cmd[1]}
       Write Data To File  ${\n}${resp}${\n}  ${logpath}
       Append To List  ${ffdc_file_list}  ${logpath}
@@ -366,7 +366,7 @@ BMC FFDC Get Redfish Requests
     RETURN  ${ffdc_file_list}
 
 
-Log OS All distros FFDC
+Log OS All Distros FFDC
     [Documentation]  Run commands from FFDC_OS_ALL_DISTROS_FILE to create FFDC
     ...              files and return a list of generated files.
     [Arguments]  ${key_index}
@@ -379,8 +379,8 @@ Log OS All distros FFDC
     @{cmd_list}=  Get FFDC OS All Distros Call  ${key_index}
 
     FOR  ${cmd}  IN  @{cmd_list}
-      ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
-      ${ffdc_file_sub_list}=  Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}  ${logpath}  target=OS
+      ${logpath}=  Catenate  SEPARATOR=${EMPTY}  ${LOG_PREFIX}  ${cmd[0]}
+      ${ffdc_file_sub_list}=  Execute Command And Write FFDC  ${cmd[0]}  ${cmd[1]}  ${logpath}  target=OS
       # scp it to the LOG_PREFIX ffdc directory.
       Run Key U  scp.Get File \ /tmp/${cmd[0]} \ ${LOG_PREFIX}${cmd[0]}  ignore=1
       ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}  ${ffdc_file_sub_list}
@@ -405,8 +405,8 @@ Log OS SPECIFIC DISTRO FFDC
     @{cmd_list}=  Get FFDC OS Distro Call  ${key_index}  ${linux_distro}
 
     FOR  ${cmd}  IN  @{cmd_list}
-      ${logpath}=  Catenate  SEPARATOR=  ${LOG_PREFIX}  ${cmd[0]}
-      ${ffdc_file_sub_list}=  Execute Command and Write FFDC  ${cmd[0]}  ${cmd[1]}  ${logpath}  target=OS
+      ${logpath}=  Catenate  SEPARATOR=${EMPTY}  ${LOG_PREFIX}  ${cmd[0]}
+      ${ffdc_file_sub_list}=  Execute Command And Write FFDC  ${cmd[0]}  ${cmd[1]}  ${logpath}  target=OS
       Run Key U  scp.Get File \ /tmp/${cmd[0]} \ ${LOG_PREFIX}${cmd[0]}  ignore=1
       ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}  ${ffdc_file_sub_list}
     END
@@ -417,7 +417,7 @@ Log OS SPECIFIC DISTRO FFDC
     # Example:  sosreport_file_path="/tmp/sosreport-myhost-FFDC-2019-08-20-pbuaqtk.tar.xz".
 
     # Return if there is no sosreport file.
-    Return From Keyword If  ${rc} != ${0}  ${ffdc_file_list}
+    IF  ${rc} != ${0}  RETURN  ${ffdc_file_list}
 
     ${sosreport_dir_path}  ${sosreport_file_name}=  Split Path  ${sosreport_file_path}
     # Example:  sosreport_dir_path="/tmp",
@@ -446,19 +446,20 @@ OS FFDC Files
 
     @{ffdc_file_list}=  Create List
 
-    Run Keyword If  '${OS_HOST}' == '${EMPTY}'  Run Keywords
-    ...  Print Timen  No OS Host provided so no OS FFDC will be done.  AND
-    ...  Return From Keyword  ${ffdc_file_list}
+    IF  '${OS_HOST}' == '${EMPTY}'
+        Print Timen  No OS Host provided so no OS FFDC will be done.
+        RETURN  ${ffdc_file_list}
+    END
 
     ${match_state}=  Create Dictionary  os_ping=^1$  os_login=^1$
     ...  os_run_cmd=^1$
-    ${status}  ${ret_values}=  Run Keyword and Ignore Error  Check State
+    ${status}  ${ret_values}=  Run Keyword And Ignore Error  Check State
     ...  ${match_state}  quiet=0
 
-    Run Keyword If  '${status}' == 'FAIL'  Run Keywords
-    ...  Print Timen  The OS is not communicating so no OS FFDC will be done.\n
-    ...  AND
-    ...  Return From Keyword  ${ffdc_file_list}
+    IF  '${status}' == 'FAIL'
+      Print Timen  The OS is not communicating so no OS FFDC will be done.\n
+      RETURN  ${ffdc_file_list}
+    END
 
     ${stdout}=  OS Distro Type
 
@@ -472,13 +473,12 @@ OS FFDC Files
     @{entries}=  Get FFDC OS All Distros Index
 
     FOR  ${index}  IN  @{entries}
-      ${ffdc_file_sub_list}=  Log OS All distros FFDC  ${index}
+      ${ffdc_file_sub_list}=  Log OS All Distros FFDC  ${index}
       ${ffdc_file_list}=  Smart Combine Lists  ${ffdc_file_list}  ${ffdc_file_sub_list}
     END
 
-    Return From Keyword If
-    ...  '${linux_distro}' == '${EMPTY}' or '${linux_distro}' == 'None'
-    ...  ${ffdc_file_list}
+    IF  '${linux_distro}' == '${EMPTY}' or '${linux_distro}' == 'None'
+    ...  RETURN  ${ffdc_file_list}
 
     @{entries}=  Get ffdc os distro index  ${linux_distro}
 
@@ -515,7 +515,7 @@ System Inventory Files
       Append To List  ${ffdc_file_list}  ${ffdc_dir_path}${file_name}
     END
 
-    Run Keyword and Ignore Error  Remove Files  ${globex}
+    Run Keyword And Ignore Error  Remove Files  ${globex}
 
     RETURN  ${ffdc_file_list}
 
@@ -529,10 +529,10 @@ SCP Coredump Files
     # Check if core dump exist in the /tmp
     ${core_files}  ${stderr}  ${rc}=  BMC Execute Command  ls /tmp/core_*
     ...  ignore_err=${1}
-    Run Keyword If  '${rc}' != '${0}'  Return From Keyword  ${ffdc_file_list}
+    IF  '${rc}' != '${0}'  RETURN  ${ffdc_file_list}
 
     # Core dumps if configured to dump on /tmp via /proc/sys/kernel/core_pattern
-    Run Keyword and Ignore Error
+    Run Keyword And Ignore Error
     ...  BMC Execute Command  chown ${OPENBMC_USERNAME}:${OPENBMC_USERNAME} /tmp/core_*
 
     @{core_list}=  Split String  ${core_files}
@@ -541,8 +541,8 @@ SCP Coredump Files
 
     FOR  ${index}  IN  @{core_list}
       ${ffdc_file_path}=  Catenate  ${LOG_PREFIX}${index.lstrip("/tmp/")}
-      ${status}=  Run Keyword and Return Status  scp.Get File  ${index}  ${ffdc_file_path}
-      Run Keyword If  '${status}' == '${False}'  Continue For Loop
+      ${status}=  Run Keyword And Return Status  scp.Get File  ${index}  ${ffdc_file_path}
+      IF  '${status}' == '${False}'  CONTINUE
       Append To List  ${ffdc_file_list}  ${ffdc_file_path}
 
       # Remove the file from remote to avoid re-copying on next FFDC call
@@ -584,7 +584,7 @@ Enumerate Redfish Resources
     # Login is needed to fetch Redfish information.
     # If login fails, return from keyword.
     ${status}=  Run Keyword And Return Status  Redfish.Login
-    Return From Keyword If   ${status} == ${False}
+    IF  ${status} == ${False}  RETURN
 
     # Get the Redfish resources and properties.
     ${json_data}=  redfish_utils.Enumerate Request  ${enum_uri}
@@ -606,7 +606,7 @@ Enumerate Redfish Resources
     # }
 
     @{ffdc_file_list}=  Create List
-    ${logpath}=  Catenate  SEPARATOR=  ${log_prefix_path}  ${file_enum_name}
+    ${logpath}=  Catenate  SEPARATOR=${EMPTY}  ${log_prefix_path}  ${file_enum_name}
     Create File  ${logpath}
     Write Data To File  "${\n}${json_data}${\n}"  ${logpath}
 
@@ -624,18 +624,18 @@ Enumerate Redfish OEM Resources
     # log_prefix_path    The location specifying where to create FFDC file(s).
 
     # No-op by default if input is not supplied from command line.
-    Return From Keyword If   "${OEM_REDFISH_PATH}" == "${EMPTY}"
+    IF  "${OEM_REDFISH_PATH}" == "${EMPTY}"  RETURN
 
     # Login is needed to fetch Redfish information.
     # If login fails, return from keyword.
     ${status}=  Run Keyword And Return Status  Redfish.Login
-    Return From Keyword If   ${status} == ${False}
+    IF  ${status} == ${False}  RETURN
 
     # Get the Redfish resources and properties.
     ${json_data}=  redfish_utils.Enumerate Request  ${OEM_REDFISH_PATH}
 
     @{ffdc_file_list}=  Create List
-    ${logpath}=  Catenate  SEPARATOR=  ${log_prefix_path}
+    ${logpath}=  Catenate  SEPARATOR=${EMPTY}  ${log_prefix_path}
     ...  redfish_oem_resource_properties.txt
     Create File  ${logpath}
     Write Data To File  "${\n}${json_data}${\n}"  ${logpath}
@@ -668,9 +668,9 @@ Collect eSEL Log
     ${esels}=  Get Esels
     ${num_esels}=  Evaluate  len(${esels})
     Rprint Vars  num_esels
-    Return From Keyword If  ${num_esels} == ${0}  ${ffdc_file_list}
+    IF  ${num_esels} == ${0}  RETURN  ${ffdc_file_list}
 
-    ${logpath}=  Catenate  SEPARATOR=  ${log_prefix_path}  esel
+    ${logpath}=  Catenate  SEPARATOR=${EMPTY}  ${log_prefix_path}  esel
     Create File  ${logpath}
 
     FOR  ${esel}  IN  @{esels}
@@ -680,7 +680,7 @@ Collect eSEL Log
     Append To List  ${ffdc_file_list}  ${logpath}
 
     ${rc}  ${output}=  Shell Cmd  which eSEL.pl  show_err=0
-    Return From Keyword If  ${rc} != ${0}  ${ffdc_file_list}
+    IF  ${rc} != ${0}  RETURN  ${ffdc_file_list}
 
     Convert eSEL To Elog Format  ${logpath}
     Append To List  ${ffdc_file_list}  ${logpath}.txt
@@ -708,12 +708,12 @@ Convert eSEL To Elog Format
 
 
 OS Distro Type
-   [Documentation]  Determine the host partition distro type
+    [Documentation]  Determine the host partition distro type
 
     ${stdout}  ${stderr}  ${rc}=  OS Execute Command
     ...  . /etc/os-release; echo $ID  ignore_err=${1}
 
-    Return From Keyword If  ${rc} == ${0}  ${stdout}
+    IF  ${rc} == ${0}  RETURN  ${stdout}
 
     # If linux distro doesn't have os-release, check for uname.
     ${stdout}  ${stderr}  ${rc}=  OS Execute Command  uname  ignore_err=${0}
@@ -722,11 +722,11 @@ OS Distro Type
 
 
 Get OS Distro Release Info
-   [Documentation]  Get the host partition release info.
+    [Documentation]  Get the host partition release info.
     ${stdout}  ${stderr}  ${rc}=  OS Execute Command
     ...  cat /etc/os-release  ignore_err=${1}
 
-    Return From Keyword If  ${rc} == ${0}  ${stdout}
+    IF  ${rc} == ${0}  RETURN  ${stdout}
 
     # If linux distro doesn't have os-release, check for uname.
     ${stdout}  ${stderr}  ${rc}=  OS Execute Command  uname  ignore_err=${0}
