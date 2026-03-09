@@ -132,7 +132,7 @@ OpenBMC Delete Request
     RETURN    ${ret}
 
 Initialize OpenBMC
-    [Documentation]  Do a REST login connection within specified time.
+    [Documentation]  Establish auth token for OpenBMC operations.
     [Arguments]  ${timeout}=20  ${quiet}=${1}
     ...  ${rest_username}=${OPENBMC_USERNAME}
     ...  ${rest_password}=${OPENBMC_PASSWORD}
@@ -143,12 +143,17 @@ Initialize OpenBMC
     # rest_username  The REST username.
     # rest_password  The REST password.
 
-    ${bmcweb_status}=  Run Keyword And Return Status  BMC Web Login Request
-    ...  ${timeout}  ${rest_username}  ${rest_password}
+    # Redfish SessionService login
+    ${redfish_status}=  Run Keyword And Return Status
+    ...  Redfish Login  ${timeout}  ${rest_username}  ${rest_password}
+    Return From Keyword If  ${redfish_status} == ${True}
 
+    # BMC web login
+    ${bmcweb_status}=  Run Keyword And Return Status
+    ...  BMC Web Login Request  ${timeout}  ${rest_username}  ${rest_password}
     Return From Keyword If  ${bmcweb_status} == ${True}
 
-    # This will retry at 20 second interval.
+    # legacy REST /login
     Wait Until Keyword Succeeds  40 sec  20 sec
     ...  Post Login Request  ${timeout}  ${quiet}
     ...  ${rest_username}  ${rest_password}
