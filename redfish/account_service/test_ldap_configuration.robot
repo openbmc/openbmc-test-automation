@@ -151,7 +151,7 @@ Verify LDAP User With Admin Privilege Able To Do BMC Reboot
     [Tags]  Verify_LDAP_User_With_Admin_Privilege_Able_To_Do_BMC_Reboot
 
 
-    Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
     ...  ${GROUP_PRIVILEGE}  ${GROUP_NAME}
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     # With LDAP user and with right privilege trying to do BMC reboot.
@@ -166,7 +166,7 @@ Verify LDAP User With Operator Privilege Able To Do Host Poweroff
     [Tags]  Verify_LDAP_User_With_Operator_Privilege_Able_To_Do_Host_Poweroff
     [Teardown]  Restore LDAP Privilege
 
-    Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
     ...  Operator  ${GROUP_NAME}
 
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
@@ -190,7 +190,7 @@ Verify AccountLockout Attributes Set To Zero By LDAP User
     Rprint Vars  old_account_service
 
     # Create LDAP user and create session using LDAP user.
-    Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
     ...  Administrator  ${GROUP_NAME}
 
     # Clear existing Redfish sessions.
@@ -403,10 +403,10 @@ Verify Group Name And Group Privilege Able To Modify
     [Documentation]  Verify that LDAP group name and group privilege able to
     ...  modify.
     [Tags]  Verify_Group_Name_And_Group_Privilege_Able_To_Modify
-    [Setup]  Update LDAP Configuration With LDAP User Role And Group
+    [Setup]  Update LDAP Configuration with LDAP User Role And Group
     ...  ${LDAP_TYPE}  Operator  ${GROUP_NAME}
 
-    Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
     ...  Administrator  ${GROUP_NAME}
 
 
@@ -578,7 +578,7 @@ Update LDAP Config And Verify Set Host Name
     #                               operation (e.g. "200") used to update
     #                               HostName.  See prolog of rest_request
     #                               method in redfish_plus.py for details.
-    Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
     ...  ${group_privilege}  ${group_name}
 
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
@@ -680,7 +680,7 @@ Set Read Privilege And Check Firmware Inventory
     # Description of argument(s):
     # read_privilege  The read privilege role (e.g. "User" / "Callback").
 
-    Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
     ...  ${read_privilege}  ${GROUP_NAME}
 
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
@@ -699,7 +699,7 @@ Set Read Privilege And Check Poweron
     # Description of argument(s):
     # read_privilege  The read privilege role (e.g. "User" / "Callback").
 
-    Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
     ...  ${read_privilege}  ${GROUP_NAME}
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
     Redfish.Post  ${REDFISH_POWER_URI}
@@ -735,7 +735,7 @@ Restore LDAP Privilege
     Redfish.Login
     IF  '${old_ldap_privilege}' == '${EMPTY}' or '${old_ldap_privilege}' == '[]'  RETURN
     # Log back in to restore the original privilege.
-    Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+    Update LDAP Configuration with LDAP User Role And Group  ${LDAP_TYPE}
     ...  ${old_ldap_privilege}  ${GROUP_NAME}
 
     Sleep  18s
@@ -770,7 +770,7 @@ Update LDAP User Role And Host Poweroff
     # check Host state and do the power on/off if needed.
     Verify Host Power Status  On
 
-    Update LDAP Configuration With LDAP User Role And Group  ${ldap_type}
+    Update LDAP Configuration with LDAP User Role And Group  ${ldap_type}
     ...  ${group_privilege}  ${group_name}
 
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
@@ -797,7 +797,7 @@ Update LDAP User Role And Host Poweron
     # check Host state and do the power on/off if needed.
     Verify Host Power Status  Off
 
-    Update LDAP Configuration With LDAP User Role And Group  ${ldap_type}
+    Update LDAP Configuration with LDAP User Role And Group  ${ldap_type}
     ...  ${group_privilege}  ${group_name}
 
     Redfish.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
@@ -820,7 +820,7 @@ Update LDAP User Role And Configure IP Address
     # group_name         The group name of user.
     # valid_status_code  The expected valid status code.
 
-    Update LDAP Configuration With LDAP User Role And Group  ${ldap_type}
+    Update LDAP Configuration with LDAP User Role And Group  ${ldap_type}
     ...  ${group_privilege}  ${group_name}
 
     Redfish.Logout
@@ -848,7 +848,7 @@ Update LDAP User Role And Delete IP Address
     # Configure IP address before deleting via LDAP user roles.
     Add IP Address  ${test_ip}  ${test_mask}  ${test_gateway}
 
-    Update LDAP Configuration With LDAP User Role And Group  ${ldap_type}
+    Update LDAP Configuration with LDAP User Role And Group  ${ldap_type}
     ...  ${group_privilege}  ${group_name}
 
     Redfish.Logout
@@ -869,7 +869,7 @@ Update LDAP User Role And Read Network Configuration
     # group_name         The group name of user.
     # valid_status_code  The expected valid status code.
 
-    Update LDAP Configuration With LDAP User Role And Group  ${ldap_type}
+    Update LDAP Configuration with LDAP User Role And Group  ${ldap_type}
     ...  ${group_privilege}  ${group_name}
 
     Redfish.Logout
