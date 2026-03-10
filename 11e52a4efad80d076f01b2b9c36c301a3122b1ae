@@ -16,6 +16,24 @@
       "message": "1. You build payload everytime and everytime. Arguments order is not the same, so it\u0027s hard to read what\u0027s changed.\n\n2. There are multiple changes, for example here, the payload differs from the one above:\n1. https vs http_\n2. None vs metricReport\n3. Redfish vs REDFISH\n\nwhen the test fails, it\u0027s absolutely not clear which of these made it to fail.\n\nWhat I propose to do is to restructure this completely - the \"Check And Create Subscription\" keyword creates a Dict for a valid subscription. This can be moved to a separate keyword which would create and return a payload dictionary for a valid subscription. Then, a new template can be created, that accepts 2 args - payload key, and value, so it gets a valid payload from the new keyword, mutate the provided key with provided value and check if the status code is HTTP_BAD_REQUEST. The test just calls the template multiple times, providing one key/value pair at a time that makes the Event Destination incorrect from BMC perspective.\n\nThis way, the test will look readable, it will test one case (field or value) at a time, and re-use exiting code.",
       "revId": "11e52a4efad80d076f01b2b9c36c301a3122b1ae",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35e07346_ec085e78",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-03-10T07:13:38Z",
+      "side": 1,
+      "message": "Thanks Igor Kanyuka. I Have created a separate keyword for the Invalid payload.",
+      "parentUuid": "f1a00307_ecc5bb9e",
+      "revId": "11e52a4efad80d076f01b2b9c36c301a3122b1ae",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
