@@ -21,6 +21,7 @@ ${REMOTE_SERVER_IP}             10.7.7.7
 @{RegistryPrefixes_list}        Base  OpenBMC  TaskEvent
 @{ResourceTypes_list}           Task
 ${Maximum_subscription_count}   20
+@{Service_state}                ${False}  ${True}
 
 ** Test Cases **
 
@@ -83,8 +84,37 @@ Verify Event Service Collection Unsupported Methods
     Redfish.Delete  /redfish/v1/EventService
     ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
+Verify Event Service Enable And Disable Methods
+    [Documentation]  Verify event service enable and disable methods.
+    [Tags]  Verify_Event_Service_Enable_And_Disable_Methods
+    [Setup]  Default Event Service State
+    [Teardown]  Set Default Event Service State
+
+    FOR  ${state}  IN  @{Service_state}
+        # Patch operation to update service enabled state.
+        ${payload}=    Create Dictionary    ServiceEnabled=${state}
+        Redfish.Patch    /redfish/v1/EventService    body=${payload}    valid_status_codes=[${HTTP_OK}]
+
+        # Check service enabled state changed.
+        ${resp}=    Redfish.Get Properties    /redfish/v1/EventService    valid_status_codes=[${HTTP_OK}]
+        ${after_policy}=    Get From Dictionary    ${resp}    ServiceEnabled
+        Should Be Equal    ${after_policy}    ${state}
+    END
 
 *** Keywords ***
+
+Default Event Service State
+    [Documentation]  Get the default state of the event service.
+
+    ${resp}=    Redfish.Get Properties    /redfish/v1/EventService    valid_status_codes=[${HTTP_OK}]
+    ${default_state}=    Get From Dictionary    ${resp}    ServiceEnabled
+    Set Test Variable    ${default_state}
+
+Set Default Event Service State
+    [Documentation]  Set the event service to its default state.
+
+    ${payload}=    Create Dictionary    ServiceEnabled=${default_state}
+    Redfish.Patch    /redfish/v1/EventService    body=${payload}    valid_status_codes=[${HTTP_OK}]
 
 Suite Setup Execution
     [Documentation]  Do the suite setup.
