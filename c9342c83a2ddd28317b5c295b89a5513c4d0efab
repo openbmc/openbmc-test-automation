@@ -16,6 +16,74 @@
       "message": "updated the script.",
       "revId": "c9342c83a2ddd28317b5c295b89a5513c4d0efab",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7194fb0_1c2fc315",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2026-03-10T11:04:13Z",
+      "side": 1,
+      "message": "Much better!",
+      "revId": "c9342c83a2ddd28317b5c295b89a5513c4d0efab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6620212a_0f73aa1a",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2026-03-10T11:04:13Z",
+      "side": 1,
+      "message": "With small modifications of the created keyword, you will be able to use the new Keyword to create valid subscription and not duplicate code.",
+      "revId": "c9342c83a2ddd28317b5c295b89a5513c4d0efab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f96c954_c8d66fbc",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2026-03-10T11:04:13Z",
+      "side": 1,
+      "message": "Rename this to something like `Try Subscription Creation`, this way along with accepting expected status codes you will be able to use this keyword to create valid subscriptions and attempt to create invalid both.",
+      "revId": "c9342c83a2ddd28317b5c295b89a5513c4d0efab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9476628b_a7c97242",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1002230
+      },
+      "writtenOn": "2026-03-10T11:04:13Z",
+      "side": 1,
+      "message": "It can also accept `${valid_status_codes}\u003d[${HTTP_BAD_REQUEST}]`, so you will be able to create the subscription here in the block:\n```\nRedfish.Post  /redfish/v1/EventService/Subscriptions  body\u003d\u0026{payload}\n    ...  valid_status_codes\u003d${valid_status_codes}\n```\n\nAnd don\u0027t call Redfish.Post all the times in the test itself.",
+      "revId": "c9342c83a2ddd28317b5c295b89a5513c4d0efab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
