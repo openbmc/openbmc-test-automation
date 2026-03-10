@@ -11,6 +11,7 @@ Resource        ../../lib/snmp/redfish_snmp_utils.robot
 Resource        ../../lib/snmp/resource.robot
 Resource        ../../lib/external_intf/vmi_utils.robot
 Resource        ../../lib/bmc_date_and_time_utils.robot
+Resource        ../../lib/bmc_ldap_utils.robot
 
 Library         Collections
 Library         OperatingSystem
@@ -100,7 +101,7 @@ Verify IPv4 And IPv6 Access Concurrently Via Redfish
 
     ${dict}=  Execute Process Multi Keyword  ${2}
     ...  Redfish.Patch ${REDFISH_NW_ETH_IFACE}eth0 body={'DHCPv4':{'UseDNSServers':${True}}}
-    ...  RedfishIPv6.Patch ${REDFISH_NW_ETH_IFACE}eth0 body={'DHCPv4':{'UseDNSServers':${True}}}
+    ...  RedfishIPv6.Patch  ${REDFISH_NW_ETH_IFACE}eth0 body={'DHCPv4':{'UseDNSServers':${True}}}
     Dictionary Should Not Contain Value  ${dict}  False
     ...  msg=One or more operations has failed.
     ${resp}=  Redfish.Get  ${REDFISH_NW_ETH_IFACE}eth0
@@ -352,6 +353,19 @@ Configure NTP Server Configuration Via IPv6 Address And Verify
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
 
     # Address_type  channel_number
+    SLAAC           ${1}
+    Static          ${1}
+    SLAAC           ${2}
+    Static          ${2}
+
+
+Configure LDAP Via IPv6 And Verify Login
+    [Documentation]  Configure LDAP via IPv6 for static and SLAAC addresses on eth0 and eth1,
+    ...  then verify LDAP user login.
+    [Tags]  Configure_LDAP_Via_IPv6_And_Verify_Login
+    [Template]  Configure LDAP Using IPv6 Address And Verify Login
+
+    # address_type  channel_number
     SLAAC           ${1}
     Static          ${1}
     SLAAC           ${2}
@@ -856,3 +870,49 @@ Configure And Verify NTP Over IPv6
 
     # Verify the NTP server protocol is enabled in NTP server configuration.
     Valid Value  ntp_conf['NTP']['ProtocolEnabled']  valid_values=[True]
+
+
+Configure LDAP Using IPv6 Address And Verify Login
+    [Documentation]  Configure LDAP using IPv6 address and verify LDAP user login.
+    [Arguments]  ${ipv6_address_type}  ${channel_number}
+
+    # Description of argument(s):
+    # ipv6_address_type  Type of IPv6 address (SLAAC/Static).
+    # channel_number     Ethernet channel number, 1(eth0) or 2(eth1).
+
+    # Get the IPv6 address for the specified type and channel.
+    @{ipv6_addressorigin_list}  ${ipv6_addr}=
+    ...  Get Address Origin List And Address For Type  ${ipv6_address_type}  ${channel_number}
+    Connect BMC Using IPv6 Address  ${ipv6_addr}
+    RedfishIPv6.Login
+
+    # Configure LDAP server using IPv6 connection.
+    Create LDAP Configuration  version=IPv6
+
+    # Configure LDAP user role and group via IPv6.
+    Update LDAP Configuration With LDAP User Role And Group  ${LDAP_TYPE}
+    ...  ${GROUP_PRIVILEGE}  ${GROUP_NAME}  version=IPv6
+    RedfishIPv6.Logout
+
+    # Verify LDAP user can login via IPv6.
+    ${status}=  Run Keyword And Return Status
+    ...  RedfishIPv6.Login  ${LDAP_USER}  ${LDAP_USER_PASSWORD}
+    Should Be Equal As Strings  ${status}  True
+    ...  msg=LDAP user login failed via IPv6 ${ipv6_address_type} address on channel ${channel_number}.
+
+    # Verify LDAP user session is active by accessing AccountService.
+    ${resp}=  RedfishIPv6.Get  ${REDFISH_BASE_URI}AccountService
+    Should Be True  ${resp.status} == 200
+    ...  msg=Failed to access AccountService with LDAP user via IPv6.
+
+    # Verify LDAP configuration is present.
+    ${ldap_config}=  RedfishIPv6.Get Attribute  ${REDFISH_BASE_URI}AccountService
+    ...  ${LDAP_TYPE}  default=${EMPTY}
+    Should Not Be Empty  ${ldap_config}
+    ...  msg=LDAP configuration not found after LDAP user login test.
+
+    # Verify LDAP service is enabled.
+    Should Be True  ${ldap_config['ServiceEnabled']} == ${True}
+    ...  msg=LDAP service not enabled after configuration via IPv6.
+    RedfishIPv6.Logout
+    Verify SSH Connection Via IPv6  ${ipv6_addr}
