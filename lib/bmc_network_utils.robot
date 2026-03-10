@@ -314,7 +314,7 @@ Truncate MAC Address
     # Truncate extra bytes and bits from MAC address
     FOR  ${mac_item}  IN  @{sys_mac_list}
         ${invalid_mac_byte}=  Get Regexp Matches  ${user_mac_list}[${mac_byte}]  [^A-Za-z0-9]+
-        IF  ${invalid_mac_byte}  ${user_mac_addr}  RETURN
+        IF  ${invalid_mac_byte}  RETURN  ${user_mac_addr}
         ${mac_int}=  Convert To Integer      ${user_mac_list}[${mac_byte}]   16
         ${user_mac_len}=  Get Length  ${user_mac_list}
         IF  ${mac_int} >= ${256}
