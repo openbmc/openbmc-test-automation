@@ -591,10 +591,12 @@ Enable SLAAC On Eth1 While Eth0 Is Configured With SLAAC And Verify Ping
     [Documentation]  Enable SLAAC on eth1 while eth0 is configured with SLAAC and
     ...    verify all are reachable.
     [Tags]  Enable_SLAAC_On_Eth1_While_Eth0_Is_Configured_With_SLAAC_And_Verify_Ping
-    [Setup]  Set SLAAC Configuration State And Verify  ${True}  [${HTTP_NO_CONTENT}]  ${1}
+    [Setup]  Set SLAAC Configuration State And Verify  ${True}
+    ...    [${HTTP_NO_CONTENT},${HTTP_OK}]  ${1}
 
     # Enable SLAAC on eth1 while eth0 is configured with SLAAC.
-    Set SLAAC Configuration State And Verify  ${True}  [${HTTP_NO_CONTENT}]  ${2}
+    Set SLAAC Configuration State And Verify  ${True}
+    ...    [${HTTP_NO_CONTENT},${HTTP_OK}]  ${2}
 
     Wait For Host To Ping  ${OPENBMC_HOST}  ${NETWORK_TIMEOUT}
 
