@@ -6,6 +6,7 @@ Library         SSHLibrary
 Resource        ../../lib/pdu/pdu.robot
 
 *** Keywords ***
+
 Login To Schneider PDU Via SSH
     [Documentation]  Open PDU connection and login via SSH.
 
@@ -13,7 +14,7 @@ Login To Schneider PDU Via SSH
     SSHLibrary.Open Connection  ${PDU_IP}  prompt=apc>
     ${connection_status}=  Run Keyword And Return Status
     ...  SSHLibrary.Login  ${PDU_USERNAME}  ${PDU_PASSWORD}
-    Return From Keyword  ${connection_status}
+    RETURN  ${connection_status}
 
 
 Login To Schneider PDU Via Telnet

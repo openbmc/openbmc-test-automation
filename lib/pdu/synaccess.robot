@@ -1,11 +1,12 @@
 *** Settings ***
-Documentation           Synaccess Protocol Distribution Unit (PDU) library
+Documentation   Synaccess Protocol Distribution Unit (PDU) library
 
 Resource        ../../lib/pdu/pdu.robot
 Library         RequestsLibrary
 
 *** Keywords ***
-Connect and Login
+
+Connect And Login
     [Documentation]  Open PDU connection and login.
     Validate Prereq
     SSHLibrary.Open Connection  ${PDU_IP}
@@ -14,7 +15,7 @@ Connect and Login
 
 Power Cycle
     [Documentation]  Perform PDU power cycle.
-    Connect and Login
+    Connect And Login
     ${resp}=  GET On Session  pdu  /cmd.cgi?$A4 ${PDU_SLOT_NO}
 
     ${error_message}=  Catenate  Power cycle of slot ${PDU_SLOT_NO} failed.

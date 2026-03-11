@@ -1,6 +1,5 @@
 *** Settings ***
-
-Documentation  Protocol settings utilities keywords.
+Documentation    Protocol settings utilities keywords.
 
 Resource         ../lib/resource.robot
 Resource         ../lib/utils.robot
