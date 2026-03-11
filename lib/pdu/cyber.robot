@@ -13,7 +13,7 @@ Login To Cyber PDU Via SSH
     SSHLibrary.Open Connection  ${PDU_IP}
     ${connection_status}=  Run Keyword And Return Status
     ...  SSHLibrary.Login  ${PDU_USERNAME}  ${PDU_PASSWORD}
-    Return From Keyword  ${connection_status}
+    RETURN  ${connection_status}
 
 
 Login To Cyber PDU Via Telnet
@@ -46,7 +46,7 @@ Power Cycle
         Set Test Variable  ${lib_name}  SSHLibrary
     END
 
-    #Sample output from cyber PDU console
+    # Sample output from cyber PDU console
 
     # CyberPower System                        ePDU Firmware Version    2.210
     # (c) Copyright 2010 All Rights Reserved   PDU30SWHVT16FNET
@@ -98,7 +98,7 @@ Power Cycle
     #     <ESC>- Back, <ENTER>- Select&Reflash
     # > 1
 
-        # +------- Command Information: Step 1 ---------------------------------------+
+    # +------- Command Information: Step 1 ---------------------------------------+
 
     #     Step1. Input a Single outlet or outlet list with outlet index #.
     #     Note. Separate by symbol ','.
@@ -173,8 +173,8 @@ Power Cycle
         Run Keyword  ${lib_name}.Write Bare  ${esc}
         ${cmd_out}=  Run Keyword  ${lib_name}.Read
         ${check}=  Run Keyword And Return Status  Should Contain  ${cmd_out}  4- Logout
-        Continue For Loop If  ${check}==${FALSE}
-        Run Keyword If  ${check}==${TRUE}  Run Keywords
+        IF  ${check}==${FALSE}  CONTINUE
+        IF  ${check}==${TRUE}  Run Keywords
         ...  Run Keyword  ${lib_name}.Write  4  AND
         ...  Run Keyword  ${lib_name}.Read  AND
         ...  ${lib_name}.Close All Connections  AND
