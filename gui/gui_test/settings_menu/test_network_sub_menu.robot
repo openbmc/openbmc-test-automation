@@ -82,6 +82,7 @@ ${xpath_eth1_dhcpv6_button}              (//dt[normalize-space()='DHCP']/followi
 ${xpath_eth0_dhcpv4_button}              (//dt[normalize-space()='DHCP']/following-sibling::dd[1]//label[@class='form-check-label'])[1]
 ${xpath_eth1_dhcpv4_button}              (//dt[normalize-space()='DHCP']/following-sibling::dd[1]//label[@class='form-check-label'])[3]
 ${xpath_dhcpv4_alert}                    //button[normalize-space()='Enable' or normalize-space()='Disable']
+${xpath_overlay}                         //div[contains(@style, 'opacity')]
 ${dns_server}                            10.10.10.10
 ${test_ipv4_addr}                        10.7.7.7
 ${test_ipv4_addr_1}                      10.7.7.8
@@ -896,6 +897,30 @@ Verify Prefix Length Field Is Not Present In Static Default Gateway Section On B
     Element Should Not Contain  ${xpath_ipv6_static_def_gateway_table}  Prefix Length
 
 
+Verify Configuring Static IPv4 And IPv6 On Both Interfaces
+    [Documentation]  Configure and verify static ipv4 & ipv6 on eth0 & eth1.
+    [Tags]  Verify_Configuring_Static_IPv4_And_IPv6_On_Both_Interfaces
+
+    Configure IPv4 And IPv6 On Both Interfaces
+
+
+Verify Configuring Static IPv6 On Both Interfaces
+    [Documentation]  Configure and verify static ipv6 on eth0 & eth1.
+    [Tags]  Verify_Configuring_Static_IPv6_On_Both_Interfaces
+
+    Configure Static IPv6 On Both Interfaces
+
+
+Configure Eth0 In Static Eth1 In DHCPv4 And Verify Adding Static IPv6 On Both Interfaces
+    [Documentation]  Setup Eth0 in static and Eth1 in DHCPv4 and verify adding IPv6 on Eth0 & Eth1.
+    [Tags]  Configure_Eth0_In_Static_Eth1_In_DHCPv4_And_Verify_Adding_Static_IPv6_On_Both_Interfaces
+    [Setup]  Run Keywords  Add Static IP Address And Verify  ${test_ipv4_addr}
+    ...      ${test_subnet_mask}  ${default_gateway}  Success
+    ...      AND  Toggle DHCPv4 State And Verify  Enabled  2
+
+    Configure Static IPv6 On Both Interfaces
+
+
 *** Keywords ***
 
 Suite Setup Execution
@@ -965,6 +990,7 @@ Add Static IP Address And Verify
     # CHANNEL_NUMBER      Channel number: 1 for eth0, 2 for eth1.
 
     Wait Until Element Is Enabled  ${xpath_add_static_ipv4_addr_btn_eth0}  timeout=60sec
+    Wait Until Element Is Not Visible  ${xpath_overlay}
     IF  '${CHANNEL_NUMBER}' == '1'
       Click Element  ${xpath_eth0_interface}
       Click Element  ${xpath_add_static_ipv4_addr_btn_eth0}
@@ -1002,6 +1028,7 @@ Add Static IPv6 Address And Verify Via GUI
 
     Wait Until Element Is Enabled  ${xpath_add_static_ipv6_addr_btn_eth0}  timeout=60sec
     IF  '${CHANNEL_NUMBER}' == '1'
+      Wait Until Element Is Not Visible  ${xpath_overlay}
       Click Element  ${xpath_eth0_interface}
       Click Element  ${xpath_add_static_ipv6_addr_btn_eth0}
     ELSE
@@ -1708,6 +1735,15 @@ Configure IPv4 And IPv6 On Both Interfaces
     ...  ${default_gateway}  Success
     Add Static IP Address And Verify  ${test_ipv4_addr_1}  ${test_subnet_mask}
     ...  ${default_gateway_2}  Success  2
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}
+    ...  ${test_prefix_length}  Success
+    Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}
+    ...  ${test_prefix_length}  Success  None  2
+
+
+Configure Static IPv6 On Both Interfaces
+    [Documentation]  Add static IPv6 on both interfaces.
+
     Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr_2}
     ...  ${test_prefix_length}  Success
     Add Static IPv6 Address And Verify Via GUI  ${test_ipv6_addr}
