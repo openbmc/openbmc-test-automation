@@ -330,6 +330,15 @@ Configure Lowest Netmask And Verify
 
      Add IP Address  ${test_ipv4_addr}  ${lowest_netmask}  ${test_gateway}
 
+Configure Empty Netmask
+    [Documentation]  Configure static IPv4 address without netmask and expect
+    ...    an error.
+    [Tags]  Configure_Empty_Netmask
+    [Template]  Add IP Address
+
+    # ip               subnet_mask   gateway          valid_status_codes
+    ${test_ipv4_addr}  ${EMPTY}      ${test_gateway}  ${HTTP_BAD_REQUEST}
+
 Configure Network ID
     [Documentation]  Verify error while configuring network ID.
     [Tags]  Configure_Network_ID
