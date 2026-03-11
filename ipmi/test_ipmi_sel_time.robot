@@ -399,6 +399,14 @@ Verify Multiple Set SEL Time With Multiple Add SEL Entry
 
     END
 
+Verify Get Sel Time With Invalid Data Length
+    [Documentation]  Verify get sel time with one extra byte.
+    [Tags]  Verify_Get_Sel_Time_With_Invalid_Data_Length
+    [Template]  Verify Invalid IPMI Command
+
+    # Invalid data length                            Expected error code
+    ${IPMI_RAW_CMD['SEL_entry']['Get_SEL_Time'][1]}  0xc7
+
 
 *** Keywords ***
 
