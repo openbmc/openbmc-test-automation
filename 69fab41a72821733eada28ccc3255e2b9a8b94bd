@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78730013_7d10ba85",
+        "filename": "ipmi/test_ipmi_sel_time.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-03-11T09:54:59Z",
+      "side": 1,
+      "message": "Expect the first word, remaining all should be small letters.",
+      "range": {
+        "startLine": 403,
+        "startChar": 27,
+        "endLine": 403,
+        "endChar": 28
+      },
+      "revId": "69fab41a72821733eada28ccc3255e2b9a8b94bd",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
