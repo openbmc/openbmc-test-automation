@@ -665,6 +665,22 @@ Test Network Response On Specified Host State
     on
     off
 
+Verify Add Static IPv4 Address Without Subnet Returns Error
+    [Documentation]  Verify add static IPv4 address without subnet and expect
+    ...    an error.
+    [Tags]  Verify_Add_Static_IPv4_Address_Without_Subnet
+
+    # Configure static IPv4 address without subnet.
+    ${ip_data}=  Create Dictionary  Address=${test_ipv4_addr}  Gateway=${gateway}
+    ${ipv4_static}=  Create List  ${ip_data}
+    ${payload}=  Create Dictionary  IPv4StaticAddresses=${ipv4_static}
+
+    # Verify the request returns http bad request.
+    ${active_channel_config}=  Get Active Channel Config
+    ${ethernet_interface}=  Set Variable  ${active_channel_config['${CHANNEL_NUMBER}']['name']}
+    Redfish.Patch  ${REDFISH_NW_ETH_IFACE}${ethernet_interface}
+    ...  body=&{payload}  valid_status_codes=[${HTTP_BAD_REQUEST}]
+
 
 *** Keywords ***
 
