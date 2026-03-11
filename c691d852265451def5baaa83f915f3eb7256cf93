@@ -68,6 +68,23 @@
       "parentUuid": "70cdb5ff_e1eacb20",
       "revId": "c691d852265451def5baaa83f915f3eb7256cf93",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9248e38_2800dbd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000068
+      },
+      "writtenOn": "2026-03-11T23:01:58Z",
+      "side": 1,
+      "message": "@vvlprabha@gmail.com\n#(CDT) 2026/03/11 12:50:32.450873 -    2.634408 - Issuing: Set Auto Reboot Setting  ${0}\nURI:https://wscapdvt01bmc:/xyz/openbmc_project/control/host0/auto_reboot/attr/AutoReboot, method:Put, args:{\u0027data\u0027: {\u0027data\u0027: 0}}\n\n#(CDT) 2026/03/11 12:50:33.141908 -    0.691035 - Finished running robot.\n\nrobot_runtime:                                    3.356174\n\n| FAIL |\nNon-existing index or alias \u0027openbmc\u0027.",
+      "revId": "c691d852265451def5baaa83f915f3eb7256cf93",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
