@@ -75,6 +75,8 @@ IPMI_RAW_CMD = {
         "Get_SEL_Time": [
             # raw command
             "0x0a 0x48",
+            # raw command, invalid data length extra byte
+            "0x0a 0x48 0x01",
         ],
         "Set_SEL_Time": [
             # raw command, expected output(s)
