@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34355589_79eb6e9c",
+        "filename": "gui/gui_test/settings_menu/test_network_sub_menu.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-03-12T05:57:24Z",
+      "side": 1,
+      "message": "eth0 eth1",
+      "range": {
+        "startLine": 936,
+        "startChar": 27,
+        "endLine": 936,
+        "endChar": 99
+      },
+      "revId": "da76910dd719e5e8d5aef141da21e3ef7095ef0b",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
