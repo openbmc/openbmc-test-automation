@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37711bab_f3e2fef5",
+        "filename": "lib/bmc_ldap_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-03-12T07:12:20Z",
+      "side": 1,
+      "message": "Can we make it like Below:\n\n${patch}\u003d  Set Variable If  \u0027${version}\u0027 \u003d\u003d \u0027IPv4\u0027\n...  Redfish.Patch\n...  RedfishIPv6.Patch\n\nRun Keyword  ${patch}  ${REDFISH_BASE_URI}AccountService  body\u003d${body}\n...  valid_status_codes\u003d[${HTTP_OK},${HTTP_NO_CONTENT}]",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 7
+      },
+      "revId": "d8d22f686688c31b0e98372e1e72ffcdcc6e2041",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0550606_5203e4d0",
         "filename": "lib/bmc_ldap_utils.robot",
         "patchSetId": 2
@@ -19,6 +42,29 @@
         "startChar": 0,
         "endLine": 112,
         "endChar": 1
+      },
+      "revId": "d8d22f686688c31b0e98372e1e72ffcdcc6e2041",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc86f690_c01a0202",
+        "filename": "lib/bmc_ldap_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-03-12T07:12:20Z",
+      "side": 1,
+      "message": "Can we make it like Below:\n\n${patch}\u003d  Set Variable If  \u0027${version}\u0027 \u003d\u003d \u0027IPv4\u0027\n...  Redfish.Patch\n...  RedfishIPv6.Patch\n\nRun Keyword  ${patch}  ${REDFISH_BASE_URI}AccountService  body\u003d\u0026{payload}\n...  valid_status_codes\u003d[${HTTP_OK},${HTTP_NO_CONTENT}]",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 7
       },
       "revId": "d8d22f686688c31b0e98372e1e72ffcdcc6e2041",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
