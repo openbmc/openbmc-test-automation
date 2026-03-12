@@ -138,6 +138,24 @@
       "message": "# Authenticate to OpenBMC/Redfish in a backward‑compatible way:\n    # 1) Try *Legacy Redfish* `/login` and, on success,\n    #    initialize session object \"openbmc\".\n    # 2) If that fails, try *Redfish SessionService*\n    #    `/redfish/v1/SessionService/Sessions`\n    #    and, on success, initialize session object \"redfish\".\n    # 3) Else, try *Legacy REST* `/login` and, on success,\n    #    initialize session object \"openbmc\".\n\n    # Legacy BMC web /login\n    ${bmcweb_status}\u003d  Run Keyword And Return Status\n    ...  BMC Web Login Request  ${timeout}  ${rest_username}  ${rest_password}\n    IF  ${bmcweb_status} \u003d\u003d ${True}  RETURN\n\n    # Redfish SessionService login\n    ${redfish_status}\u003d  Run Keyword And Return Status\n    ...  Redfish Login  ${timeout}  ${rest_username}  ${rest_password}\n    IF  ${redfish_status} \u003d\u003d ${True}  RETURN",
       "revId": "c691d852265451def5baaa83f915f3eb7256cf93",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8685afc6_becc96ab",
+        "filename": "lib/rest_client.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-03-12T04:07:29Z",
+      "side": 1,
+      "message": "It doesn’t change the preference that you are adding. The intention is simply to ensure that systems with different combinations of legacy and newer authentication implementations have a fair chance to detect and initialize the correct session type.\n\nLegacy REST and older Redfish‑legacy implementations that use /login initialize the session object named \"openbmc\", whereas the Redfish SessionService initializes the session object named \"redfish\".\nPrabha, please make the above changes.\n\nThis behavior exists due to historical evolution of the authentication flow. We have not yet fully removed the older implementation, but it is being deprecated gradually as we move toward standard Redfish SessionService.\nPlease take care of this update.",
+      "parentUuid": "dac8dffe_1ac4ae39",
+      "revId": "c691d852265451def5baaa83f915f3eb7256cf93",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
