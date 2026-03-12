@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0550606_5203e4d0",
+        "filename": "lib/bmc_ldap_utils.robot",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002635
+      },
+      "writtenOn": "2026-03-12T05:53:40Z",
+      "side": 1,
+      "message": "remove space",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 1
+      },
+      "revId": "d8d22f686688c31b0e98372e1e72ffcdcc6e2041",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
