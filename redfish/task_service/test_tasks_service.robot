@@ -183,6 +183,26 @@ Verify Task Persistency Post BMC Reboot
 
     Should Be Equal As Integers  ${initial_task_count}  ${current_task_count}
 
+Verify Task Service Unsupported Methods
+    [Documentation]  Verify Task service with unsupported methods.
+    [Tags]  Verify_Task_Service_Unsupported_Methods
+
+    # Verify Put operation on Task Service is not supported.
+    Redfish.Put  /redfish/v1/TaskService
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Verify Post operation on Task Service is not supported.
+    Redfish.Post  /redfish/v1/TaskService
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Verify Patch operation on Task Service is not supported.
+    Redfish.Patch  /redfish/v1/TaskService
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
+    # Verify Delete operation on Task Service is not supported.
+    Redfish.Delete  /redfish/v1/TaskService
+    ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
+
 
 *** Keywords ***
 
