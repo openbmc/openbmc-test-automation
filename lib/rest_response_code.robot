@@ -1,3 +1,6 @@
+*** Settings ***
+Documentation   All REST response HTTPS codes variables.
+
 *** Variables ***
 # Response codes
 ${HTTP_CONTINUE}                         100
