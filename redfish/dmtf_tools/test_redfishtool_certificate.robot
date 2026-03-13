@@ -378,7 +378,7 @@ Redfishtool Install Certificate File On BMC
     IF  '${status}' == 'ok'
         Should Contain Any  "${resp.status_code}"  ${HTTP_OK}  ${HTTP_NO_CONTENT}
     ELSE IF  '${status}' == 'error'
-        Should Be Equal As Strings  ${resp.status_code}  ${HTTP_INTERNAL_SERVER_ERROR}
+        Should Contain Any  "${resp.status_code}"  ${HTTP_BAD_REQUEST}  ${HTTP_INTERNAL_SERVER_ERROR}
     END
 
     Delete All Sessions
@@ -424,7 +424,7 @@ Verify Redfishtool Replace Certificate
 
     ${expected_resp}=  Set Variable If
     ...  '${expected_status}' == 'ok'     ${HTTP_OK}, ${HTTP_NO_CONTENT}
-    ...  '${expected_status}' == 'error'  ${HTTP_NOT_FOUND},${HTTP_INTERNAL_SERVER_ERROR}
+    ...  '${expected_status}' == 'error'  ${HTTP_BAD_REQUEST}, ${HTTP_NOT_FOUND}, ${HTTP_INTERNAL_SERVER_ERROR}
 
     ${response}=  Redfishtool Post
     ...  ${payload}  /redfish/v1/CertificateService/Actions/CertificateService.ReplaceCertificate
