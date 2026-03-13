@@ -106,7 +106,7 @@ Is HTTP Error Expected
       ${status}=  Run Keyword And Return Status  Should Contain Any  ${errorString}  ${error}
       IF  ${status} == True  RETURN
     END
-    ${rsp_code}=  Set Variable If  ${status} == False  Get Regexp Matches  ${cmd_output}  [0-9][0-9][0-9]
+    ${rsp_code}=  Get Regexp Matches  ${cmd_output}  [0-9][0-9][0-9]
     ${rsp_code_status}=  Run Keyword And Return Status  Should Not Be Empty  ${rsp_code}
 
     IF  ${rsp_code_status} == True
