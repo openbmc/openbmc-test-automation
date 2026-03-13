@@ -18,25 +18,25 @@ Get Software Functional State
 
     ${resp}=  Redfish.Get  /redfish/v1/UpdateService/FirmwareInventory/${image_id}
     ...  valid_status_codes=[${HTTP_OK}, ${HTTP_INTERNAL_SERVER_ERROR}]
-    ${image_info}  Set Variable  ${resp.dict}
+    ${image_info}=  Set Variable  ${resp.dict}
 
-    ${sw_functional}=  Run Keyword If
-    ...   '${image_info["Description"]}' == 'BMC image' or '${image_info["Description"]}' == 'BMC update'
-    ...    Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  FirmwareVersion
-    ...  ELSE
-    ...    Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}  BiosVersion
+    IF  '${image_info["Description"]}' == 'BMC image' or '${image_info["Description"]}' == 'BMC update'
+      ${sw_functional}=  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  FirmwareVersion
+    ELSE
+      ${sw_functional}=  Redfish.Get Attribute  /redfish/v1/Systems/${SYSTEM_ID}  BiosVersion
+    END
 
     ${functional}=  Run Keyword And Return Status
     ...   Should Be Equal  ${sw_functional}  ${image_info["Version"]}
 
     # If they are not same, return from here.
-    Return From Keyword If  '${functional}' == 'False'  ${functional}
+    IF  '${functional}' == 'False'  RETURN  ${functional}
 
     # WHen the functional and backup firmware versions are same, this ensure, we rightly set the
     # test inventory dictionary for the firmware functional status.
-    Run Keyword If
-    ...   '${image_info["Description"]}' == 'BMC image' or '${image_info["Description"]}' == 'BMC update'
-    ...   Run Keyword And Return  Find Active Software Image  ${image_id}
+    IF  '${image_info["Description"]}' == 'BMC image' or '${image_info["Description"]}' == 'BMC update'
+      Run Keyword And Return  Find Active Software Image  ${image_id}
+    END
 
     RETURN  ${functional}
 
@@ -99,7 +99,7 @@ Get Software Inventory State
         &{tmp_dict}=  Create Dictionary
 
         ${resp}=  Redfish.Get  ${uri_path}  valid_status_codes=[${HTTP_OK}, ${HTTP_INTERNAL_SERVER_ERROR}]
-        ${image_info}  Set Variable  ${resp.dict}
+        ${image_info}=  Set Variable  ${resp.dict}
 
         Set To Dictionary  ${tmp_dict}  image_type  ${image_info["Description"]}
         Set To Dictionary  ${tmp_dict}  image_id  ${uri_path.split("/")[-1]}
@@ -137,7 +137,7 @@ Get Software Inventory State By Version
     ${software_inventory}=  Get Dictionary Values  ${software_inventory}
     ${num_records}=  Get Length  ${software_inventory}
 
-    Return From Keyword If  ${num_records} == ${0}  ${EMPTY}
+    IF  ${num_records} == ${0}  RETURN  ${EMPTY}
 
     # Return the first list entry.
     RETURN  ${software_inventory}[0]
@@ -177,7 +177,7 @@ Get Non Functional Firmware
 
     ${num_records}=  Get Length  ${resp}
     Set Global Variable  ${num_records}
-    Return From Keyword If  ${num_records} == ${0}  ${EMPTY}
+    IF  ${num_records} == ${0}  RETURN  ${EMPTY}
 
     ${list_inv_dict}=  Get Dictionary Values  ${resp}
 
@@ -195,8 +195,9 @@ Get Non Functional Firmware List
     ${list_inv}=  Create List
 
     FOR  ${key}  IN  @{sw_inv.keys()}
-      Run Keyword If  '${sw_inv['${key}']['functional']}' == '${functional_state}'
-      ...  Append To List  ${list_inv}  ${sw_inv['${key}']}
+      IF  '${sw_inv['${key}']['functional']}' == '${functional_state}'
+        Append To List  ${list_inv}  ${sw_inv['${key}']}
+      END
     END
 
     RETURN  ${list_inv}
@@ -227,14 +228,15 @@ Redfish Upload Image And Check Progress State
     ${image_id}=  Get Latest Image ID
     Rprint Vars  image_id
 
-    # We have noticed firmware inventory state Enabled quickly as soon the image
-    # is uploaded via redfish.
+    # We have noticed firmware inventory state Enabled quickly
+    # as soon the image is uploaded via redfish.
     Wait Until Keyword Succeeds  2 min  05 sec
-    ...  Check Image Update Progress State  match_state='Disabled', 'Updating', 'Enabled'  image_id=${image_id}
+    ...  Check Image Update Progress State
+    ...  match_state='Disabled', 'Updating', 'Enabled'  image_id=${image_id}
 
     Wait Until Keyword Succeeds  8 min  10 sec
     ...  Check Image Update Progress State
-    ...    match_state='Enabled'  image_id=${image_id}
+    ...  match_state='Enabled'  image_id=${image_id}
 
 
 Get Host Power State
@@ -416,4 +418,3 @@ Verify Task Progress State
 
     Should Be Equal As Strings  ${task_state['TaskState']}  ${task_payload['TaskState']}
     Should Be Equal As Strings  ${task_state['TaskStatus']}  ${task_payload['TaskStatus']}
-
