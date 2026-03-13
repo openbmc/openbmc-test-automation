@@ -33,6 +33,7 @@ ${xpath_asset_tag}                               //dt[contains(text(),'Asset tag
 ${xpath_operating_mode}                          //dt[contains(text(),'Operating mode')]/following-sibling::dd[1]
 ${xpath_machine_model}                           //dt[contains(text(),'Model')]/following-sibling::dd[1]
 ${xpath_serial_number}                           //dt[contains(text(),'Serial number')]/following-sibling::dd[1]
+${xpath_hostname}                                //dt[contains(text(),'Hostname')]/following-sibling::dd[1]
 
 *** Test Cases ***
 
@@ -348,6 +349,18 @@ Verify BMC Information At Host Power Off State
 
     ${firmware_version}=  Redfish Get BMC Version
     Page Should Contain  ${firmware_version}
+
+
+Verify Overview Hostname Matches Redfish Hostname
+    [Documentation]    Verify GUI Overview hostname matches Redfish hostname.
+    [Tags]  Verify_Overview_Hostname_Matches_Redfish_Hostname
+
+    # Get GUI Overview hostname and Redfish hostname.
+    ${overview_hostname}=  Get Text  ${xpath_hostname}
+    ${redfish_hostname}=  Redfish.Get Attribute  ${REDFISH_NW_PROTOCOL_URI}  HostName
+
+    # Verify GUI Overview hostname matches Redfish hostname.
+    Should Be Equal  ${overview_hostname}  ${redfish_hostname}
 
 
 *** Keywords ***
