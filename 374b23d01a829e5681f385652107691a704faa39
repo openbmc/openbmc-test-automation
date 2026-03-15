@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d17d2349_63c0e19c",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-03-15T15:40:53Z",
+      "side": 1,
+      "message": "Fetch Default Event Service State\n\nRename keyword for better understanding",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 27
+      },
+      "revId": "374b23d01a829e5681f385652107691a704faa39",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
