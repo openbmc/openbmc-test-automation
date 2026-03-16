@@ -96,11 +96,11 @@ Get SNMP Manager Object
     FOR  ${snmp_obj}  IN   @{snmp_objs}
         ${obj}=  Set Variable  ${snmp_objs['${snmp_obj}']}
         IF  '${obj['Address']}' == '${ip}' and '${obj['Port']}' == '${port}'
-            Return From Keyword  ${snmp_obj}
+            RETURN  ${snmp_obj}
         END
     END
 
-    Return From Keyword  ${EMPTY}
+    RETURN  ${EMPTY}
 
 
 Delete SNMP Manager And Object

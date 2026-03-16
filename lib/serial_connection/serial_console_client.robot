@@ -1,10 +1,10 @@
 *** Settings ***
 Documentation     Module for capturing BMC serial output
 
-Library           Telnet  newline=LF
-Library           OperatingSystem
 Library           Collections
+Library           OperatingSystem
 Library           String
+Library           Telnet  newline=LF
 
 
 *** Keywords ***

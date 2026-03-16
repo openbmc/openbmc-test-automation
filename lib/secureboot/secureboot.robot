@@ -1,5 +1,6 @@
 *** Settings ***
 Documentation       Utility for getting/reading Secure Boot related settings.
+
 Resource            ../../lib/open_power_utils.robot
 Resource            ../../lib/utils.robot
 Resource            ../../lib/state_manager.robot

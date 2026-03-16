@@ -1,4 +1,6 @@
 *** Settings ***
+Documentation     State manager keywords.
+
 Resource          ../lib/utils.robot
 Variables         ../data/variables.py
 
@@ -25,7 +27,7 @@ Initiate Host Boot
     ...  ${HOST_STATE_URI}  RequestedHostTransition   data=${args}
 
     # Does caller want to wait for status?
-    IF  '${wait}' == '${0}'  Return From Keyword
+    IF  '${wait}' == '${0}'  RETURN
 
     Wait Until Keyword Succeeds
     ...  10 min  10 sec  Is Host Running
@@ -45,7 +47,7 @@ Initiate Host PowerOff
     ...  ${HOST_STATE_URI}  RequestedHostTransition   data=${args}
 
     # Does caller want to wait for status?
-    IF  '${wait}' == '${0}'  Return From Keyword
+    IF  '${wait}' == '${0}'  RETURN
 
     ${status}=  Run Keyword And Return Status  Wait For PowerOff
 
@@ -71,7 +73,7 @@ Hard Power Off
     ...  ${CHASSIS_STATE_URI}  RequestedPowerTransition  data=${args}
 
     # Does caller want to wait for status?
-    IF  '${wait}' == '${0}'  Return From Keyword
+    IF  '${wait}' == '${0}'  RETURN
 
     Wait Until Keyword Succeeds
     ...  1 min  10 sec  Run Keywords  Is Chassis Off  AND  Is Host Off
@@ -89,7 +91,7 @@ Initiate Host Reboot
     ...  ${HOST_STATE_URI}  RequestedHostTransition  data=${args}
 
     # Does caller want to wait for host booted status?
-    IF  '${wait}' == '${0}'  Return From Keyword
+    IF  '${wait}' == '${0}'  RETURN
 
     Is Host Rebooted
 
@@ -251,13 +253,13 @@ Initiate BMC Reboot
     ...  ${BMC_STATE_URI}  RequestedBMCTransition  data=${args}
 
     # Does caller want to wait for status?
-    IF  '${wait}' == '${0}'  Return From Keyword
+    IF  '${wait}' == '${0}'  RETURN
 
     ${session_active}=  Check If BMC Reboot Is Initiated
     IF  '${session_active}' == '${True}'
     ...  Fail  msg=BMC Reboot didn't occur.
 
-    Check If BMC is Up
+    Check If BMC Is Up
 
 Check If BMC Reboot Is Initiated
     [Documentation]  Checks whether BMC Reboot is initiated by checking
@@ -265,9 +267,9 @@ Check If BMC Reboot Is Initiated
     # Reboot adds 3 seconds delay before forcing reboot
     # To minimize race conditions, we wait for 7 seconds
     Sleep  7s
-    ${alive}=   Run Keyword and Return Status
+    ${alive}=   Run Keyword And Return Status
     ...    Open Connection And Log In
-    Return From Keyword If   '${alive}' == '${False}'    ${False}
+    IF  '${alive}' == '${False}'  RETURN  ${False}
     RETURN    ${True}
 
 Is BMC Ready
@@ -280,7 +282,7 @@ Is BMC Not Ready
     ${bmc_state}=  Get BMC State
     Should Be Equal  ${BMC_NOT_READY_STATE}  ${bmc_state}
 
-Wait for BMC state
+Wait For BMC State
     [Documentation]  Wait until given BMC state is reached.
     [Arguments]  ${state}
     # state - BMC state to wait for

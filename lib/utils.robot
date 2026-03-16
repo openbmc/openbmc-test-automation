@@ -75,7 +75,7 @@ Verify Ping SSH And Redfish Authentication
     Should Be Empty     ${stderr}
 
 
-Check If BMC is Up
+Check If BMC Is Up
     [Documentation]  Wait for Host to be online. Checks every X seconds
     ...              interval for Y minutes and fails if timed out.
     ...              Default MAX timedout is 10 min, interval 10 seconds.
