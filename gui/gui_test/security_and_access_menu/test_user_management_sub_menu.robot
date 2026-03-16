@@ -28,7 +28,7 @@ ${xpath_password_confirm_button}         //*[@data-test-id='userManagement-input
 ${xpath_cancel_button}                   //*[@data-test-id='userManagement-button-cancel']
 ${xpath_submit_button}                   //*[@data-test-id='userManagement-button-submit']
 ${xpath_delete_button}                   //button[text()='Delete user']
-${xpath_add_user_heading}                //h5[contains(text(),'Add user')]
+${xpath_add_user_heading}                //h5[contains(normalize-space(),'Add user')]
 ${xpath_policy_settings_header}          //*[text()="Account policy settings"]
 ${xpath_auto_unlock}                     //*[@data-test-id='userManagement-radio-automaticUnlock']
 ${xpath_manual_unlock}                   //*[@data-test-id='userManagement-radio-manualUnlock']
@@ -283,6 +283,30 @@ Test Modifying User Password Of Existing User Via GUI
     # Verify changes via Redfish.
     ${status}=  Run Keyword And Return Status  Redfish.Login  ${username}  ${new_password}
     Should Be Equal  ${status}  ${True}
+
+Verify Creating User Without Privileges Via GUI
+    [Documentation]  Verify creating user without setting user privileges
+    ...    via GUI.
+    [Tags]  Verify_Creating_User_Without_Privileges_Via_GUI
+    [Teardown]  Click Element  ${xpath_cancel_button}
+
+    # Get random username.
+    ${username}=  Generate Random String  8  [LETTERS]
+
+    # Click the add user button.
+    Click Element  ${xpath_add_user}
+    Wait Until Page Contains Element  ${xpath_add_user_heading}
+
+    # Set user name and password.
+    Input Text  ${xpath_username_input_button}  ${user_name}
+    Input Text  ${xpath_password_input_button}  ${test_user_password}
+    Input Text  ${xpath_password_confirm_button}  ${test_user_password}
+
+    # Submit changes.
+    Click Element  ${xpath_submit_button}
+
+    # Expect get the field required messages.
+    Page Should Contain  Field required
 
 
 *** Keywords ***
