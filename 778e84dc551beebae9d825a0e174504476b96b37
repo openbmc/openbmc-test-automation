@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e6280f8_3ffa903a",
+        "filename": "redfish/managers/test_bmc_config_ipv6.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1001921
+      },
+      "writtenOn": "2026-03-16T07:07:42Z",
+      "side": 1,
+      "message": "remove #",
+      "range": {
+        "startLine": 392,
+        "startChar": 5,
+        "endLine": 392,
+        "endChar": 9
+      },
+      "revId": "778e84dc551beebae9d825a0e174504476b96b37",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
