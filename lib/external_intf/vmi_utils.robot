@@ -56,7 +56,7 @@ Set Static IPv4 Address To VMI And Verify
     Sleep  ${wait_time}
 
     IF  ${valid_status_code} != ${HTTP_ACCEPTED}  RETURN
-    ${host_power_state}  ${host_state}=   Redfish Get Host State
+    ${host_power_state}  ${host_state}=   Redfish Get Chassis State
     IF  '${host_power_state}' == 'On' and '${host_state}' == 'Enabled'
         Verify VMI Network Interface Details  ${ip}  Static  ${gateway}  ${netmask}  ${interface}
     END
