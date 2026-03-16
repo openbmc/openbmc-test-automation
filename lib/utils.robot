@@ -8,6 +8,7 @@ Resource                ../lib/connection_client.robot
 Resource                ../lib/boot_utils.robot
 Resource                ../lib/common_utils.robot
 Resource                ../lib/bmc_redfish_utils.robot
+Resource                multi_chassis_power.robot
 Library                 String
 Library                 DateTime
 Library                 Process
@@ -886,24 +887,6 @@ Redfish Verify BMC State
     ...  Redfish.Get Attribute  /redfish/v1/Managers/${MANAGER_ID}  Status
 
     Should Be Equal As Strings  ${match_state}  ${Status['State']}
-
-
-Redfish Get Host State
-    [Documentation]  Return host power and health state.
-
-    # Refer: http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/Status
-
-    # Example:
-    # "PowerState": "Off",
-    # "Status": {
-    #    "Health": "OK",
-    #    "HealthRollup": "OK",
-    #    "State": "StandbyOffline"
-    # },
-
-    ${chassis}=  Wait Until Keyword Succeeds  1 min  20 sec
-    ...  Redfish.Get Properties  /redfish/v1/Chassis/${CHASSIS_ID}
-    RETURN  ${chassis["PowerState"]}  ${chassis["Status"]["State"]}
 
 
 Redfish Get Boot Progress
