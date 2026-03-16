@@ -18,7 +18,7 @@ Library                 ../lib/ipmi_utils.py
 
 Suite Setup             Suite Setup Execution
 
-Test Tags              BMC_Network_Security
+Test Tags               BMC_Network_Security
 
 *** Variables ***
 
@@ -233,9 +233,9 @@ Establish TCP Connections And Get Connection Failures
 
     # Description of argument(s):
     # target_host  The host name or IP address of the target system.
+    # num          Number of connections to be sent.
     # packet_type  The type of packets to be sent ("tcp", "udp", "icmp").
     # http_port    Network port.
-    # num          Number of connections to be sent.
 
     # This keyword expects host, port, type and number of connections to be sent
     # and rate at which connectionss to be sent, should be given in command line.

@@ -1,5 +1,6 @@
 *** Settings ***
 Documentation   Find services and service agents on the system.
+
 Library         OperatingSystem
 Library         Collections
 Library         String
@@ -9,12 +10,13 @@ Resource        ../lib/utils.robot
 # Get the SLP services available, make it suite global.
 Suite Setup     Suite Setup Execution
 
-Test Tags  SLP_Service_Test
+Test Tags       SLP_Service_Test
 
 *** Variables ***
-${service_types}    findsrvtypes
-${service_agents}   findsrvs
-${service_path}     /etc/slp/services
+
+${service_types}      findsrvtypes
+${service_agents}     findsrvs
+${service_path}       /etc/slp/services
 # SLP_SERVICES  Services listed by slptool, by default Empty.
 ${SLP_SERVICES}       ${EMPTY}
 
@@ -51,6 +53,8 @@ Suite Setup Execution
 Run SLP Command
     [Documentation]  Run SLPTool command and return output.
     [Arguments]      ${cmd}  ${param}=${EMPTY}
+
+    # Description of argument(s):
     # cmd    The SLP command to be run.
     # param  The SLP command parameters.
 
@@ -90,4 +94,3 @@ Verify Service Agents
     Run Keywords  Should Contain  ${output}  ${service_agent}  AND
     ...  Should Contain  ${output}  ${OPENBMC_HOST},
     ...  msg=Expected process info missing.
-

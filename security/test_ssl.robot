@@ -1,10 +1,11 @@
 *** Settings ***
-Documentation     This testsuite is for testing SSL connection to OpenBMC.
-Suite Teardown    Delete All Sessions
+Documentation     This test suite is for testing SSL connection to OpenBMC.
 
 Resource          ../lib/rest_client.robot
 Resource          ../lib/resource.robot
 Resource          ../lib/openbmc_ffdc.robot
+
+Suite Teardown    Delete All Sessions
 Test Teardown     FFDC On Test Case Fail
 
 Test Tags         Test_SSL
@@ -15,6 +16,7 @@ Test SSL Connection
     [Documentation]  This testcase is for testing the SSL connection to the
     ...  OpenBMC machine.
     [Tags]  Test_SSL_Connection
+
     Initialize OpenBMC
 
 Test Non SSL Connection To Port 80
