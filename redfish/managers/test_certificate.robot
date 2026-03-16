@@ -7,20 +7,20 @@ Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/certificate_utils.robot
 Library          String
 
-Test Tags       Certificate
 
 Suite Setup      Suite Setup Execution
 Suite Teardown   Suite Teardown
 Test Teardown    Test Teardown Execution
 
+Test Tags        Certificate
 
 *** Variables ***
 
-${invalid_value}  abc
+${invalid_value}      abc
 ${ROOT_CA_FILE_PATH}  /etc/ssl/certs/authority/*
-${keybit_length}  ${2048}
+${keybit_length}      ${2048}
 
-** Test Cases **
+*** Test Cases ***
 
 Verify Server Certificate Replace
     [Documentation]  Verify server certificate replace.

@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation   Test BMC DHCP multiple network interface functionalities.
-                ...  Run on setup eth0 in static and eth1 in DHCP.
+...             Run on setup eth0 in static and eth1 in DHCP.
 
 Resource        ../../lib/resource.robot
 Resource        ../../lib/common_utils.robot
@@ -16,7 +16,7 @@ Test Tags       Multiple_Interfaces_DHCP
 
 *** Variables ***
 
-${ethernet_interface}     eth1
+${ethernet_interface}              eth1
 
 &{dns_enable_dict}                 UseDNSServers=${True}
 &{dns_disable_dict}                UseDNSServers=${False}
