@@ -1,14 +1,15 @@
 *** Settings ***
-Documentation    Test BMC manager time functionality.
-Resource                     ../../lib/openbmc_ffdc.robot
-Resource                     ../../lib/bmc_date_and_time_utils.robot
+Documentation        Test BMC manager time functionality.
 
-Test Setup                   Printn
-Test Teardown                Test Teardown Execution
-Suite Setup                  Suite Setup Execution
-Suite Teardown               Suite Teardown Execution
+Resource             ../../lib/openbmc_ffdc.robot
+Resource             ../../lib/bmc_date_and_time_utils.robot
 
-Test Tags                   Managers_BMC_Time
+Test Setup           Printn
+Test Teardown        Test Teardown Execution
+Suite Setup          Suite Setup Execution
+Suite Teardown       Suite Teardown Execution
+
+Test Tags            Managers_BMC_Time
 
 *** Variables ***
 
@@ -104,7 +105,6 @@ Verify Immediate Consumption Of BMC Date
 
 
 *** Keywords ***
-
 
 Test Teardown Execution
     [Documentation]  Do the post test teardown.

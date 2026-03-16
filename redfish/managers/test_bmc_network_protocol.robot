@@ -1,6 +1,5 @@
 *** Settings ***
-Documentation                NTP configuration and verification
-                             ...  tests.
+Documentation                NTP configuration and verification test suite.
 
 Resource                     ../../lib/openbmc_ffdc.robot
 Resource                     ../../lib/bmc_date_and_time_utils.robot

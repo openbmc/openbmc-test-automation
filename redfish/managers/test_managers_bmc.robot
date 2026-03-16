@@ -1,5 +1,6 @@
 *** Settings ***
 Documentation    Test BMC Manager functionality.
+
 Resource         ../../lib/resource.robot
 Resource         ../../lib/bmc_redfish_resource.robot
 Resource         ../../lib/common_utils.robot
@@ -7,6 +8,7 @@ Resource         ../../lib/openbmc_ffdc.robot
 Resource         ../../lib/boot_utils.robot
 Resource         ../../lib/open_power_utils.robot
 Resource         ../../lib/bmc_network_utils.robot
+
 Library          ../../lib/gen_robot_valid.py
 
 Test Setup       Test Setup Execution
