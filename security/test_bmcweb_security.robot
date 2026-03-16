@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    Test bmc web vulnerability.
+Documentation    Test BMC web vulnerability.
 
 Resource         ../lib/resource.robot
 Resource         ../lib/bmc_redfish_resource.robot
@@ -8,7 +8,7 @@ Resource         ../lib/openbmc_ffdc.robot
 Test Setup       Test Setup Execution
 Test Teardown    FFDC On Test Case Fail
 
-Test Tags       BMCweb_Security
+Test Tags        BMCweb_Security
 
 *** Variables ***
 
