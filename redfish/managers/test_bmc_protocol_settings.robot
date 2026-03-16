@@ -1,15 +1,15 @@
 *** Settings ***
 Documentation  Test BMC manager protocol enable/disable functionality.
 
-Resource   ../../lib/bmc_redfish_resource.robot
-Resource   ../../lib/openbmc_ffdc.robot
-Resource   ../../lib/protocol_setting_utils.robot
+Resource       ../../lib/bmc_redfish_resource.robot
+Resource       ../../lib/openbmc_ffdc.robot
+Resource       ../../lib/protocol_setting_utils.robot
 
 Suite Setup     Suite Setup Execution
 Suite Teardown  Run Keywords  Enable IPMI Protocol  ${initial_ipmi_state}  AND  Redfish.Logout
 Test Teardown   FFDC On Test Case Fail
 
-Test Tags      BMC_Protocol_Settings
+Test Tags       BMC_Protocol_Settings
 
 *** Variables ***
 
@@ -297,8 +297,8 @@ Set SSH IPMI And NTP Protocol
     # Description of argument(s):
     # ssh_state          State of SSH to be set (e.g. True, False).
     # ipmi_state         State of IPMI to be set (e.g. True, False).
-    # ntp_state          State of NTP to be set (e.g. True, False).
     # persistency_check  Persistency check (e.g. True, False).
+    # ntp_state          State of NTP to be set (e.g. True, False).
 
     ${ssh_protocol_state}=  Create Dictionary  ProtocolEnabled=${ssh_state}
     ${ipmi_protocol_state}=  Create Dictionary  ProtocolEnabled=${ipmi_state}

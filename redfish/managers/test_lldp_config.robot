@@ -1,16 +1,16 @@
 *** Settings ***
-Documentation  LLDP(Link Layer Discovery Protocol) Test Suite for configuration
-               ...  and verification tests.
+Documentation       LLDP(Link Layer Discovery Protocol) test suite for
+...                 configuration and verification tests.
 
-Resource        ../../lib/bmc_redfish_resource.robot
-Resource        ../../lib/bmc_network_utils.robot
-Resource        ../../lib/openbmc_ffdc.robot
+Resource            ../../lib/bmc_redfish_resource.robot
+Resource            ../../lib/bmc_network_utils.robot
+Resource            ../../lib/openbmc_ffdc.robot
 
-Suite Setup               Suite Setup Execution
-Suite Teardown            Redfish.Logout
-Test Teardown             FFDC On Test Case Fail
+Suite Setup         Suite Setup Execution
+Suite Teardown      Redfish.Logout
+Test Teardown       FFDC On Test Case Fail
 
-Test Tags     LLDP_config
+Test Tags           LLDP_config
 
 *** Test Cases ***
 
