@@ -52,6 +52,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f697bcbe_37a72d23",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-03-16T07:28:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6620212a_0f73aa1a",
+      "revId": "c9342c83a2ddd28317b5c295b89a5513c4d0efab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f96c954_c8d66fbc",
@@ -69,6 +87,24 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9690685e_fc6ac3be",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-03-16T07:28:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f96c954_c8d66fbc",
+      "revId": "c9342c83a2ddd28317b5c295b89a5513c4d0efab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9476628b_a7c97242",
@@ -82,6 +118,24 @@
       "writtenOn": "2026-03-10T11:04:13Z",
       "side": 1,
       "message": "It can also accept `${valid_status_codes}\u003d[${HTTP_BAD_REQUEST}]`, so you will be able to create the subscription here in the block:\n```\nRedfish.Post  /redfish/v1/EventService/Subscriptions  body\u003d\u0026{payload}\n    ...  valid_status_codes\u003d${valid_status_codes}\n```\n\nAnd don\u0027t call Redfish.Post all the times in the test itself.",
+      "revId": "c9342c83a2ddd28317b5c295b89a5513c4d0efab",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e29f3e0_3c3a6de9",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 3
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-03-16T07:28:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9476628b_a7c97242",
       "revId": "c9342c83a2ddd28317b5c295b89a5513c4d0efab",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
