@@ -11,6 +11,7 @@ Resource                ../lib/connection_client.robot
 Resource                ../lib/boot_utils.robot
 Resource                ../lib/common_utils.robot
 Resource                ../lib/bmc_redfish_utils.robot
+Resource                ../lib/multi_chassis_power.resource
 Library                 gen_print.py
 Library                 gen_misc.py
 Library                 gen_robot_print.py
@@ -887,24 +888,6 @@ Redfish Verify BMC State
     Should Be Equal As Strings  ${match_state}  ${Status['State']}
 
 
-Redfish Get Host State
-    [Documentation]  Return host power and health state.
-
-    # Refer: http://redfish.dmtf.org/schemas/v1/Resource.json#/definitions/Status
-
-    # Example:
-    # "PowerState": "Off",
-    # "Status": {
-    #    "Health": "OK",
-    #    "HealthRollup": "OK",
-    #    "State": "StandbyOffline"
-    # },
-
-    ${chassis}=  Wait Until Keyword Succeeds  1 min  20 sec
-    ...  Redfish.Get Properties  /redfish/v1/Chassis/${CHASSIS_ID}
-    RETURN  ${chassis["PowerState"]}  ${chassis["Status"]["State"]}
-
-
 Redfish Get Boot Progress
     [Documentation]  Return boot progress state.
 
@@ -932,7 +915,7 @@ Redfish Get States
     Redfish.Login
 
     ${bmc_state}=  Redfish Get BMC State
-    ${chassis_state}  ${chassis_status}=  Redfish Get Host State
+    ${chassis_state}  ${chassis_status}=  Redfish Get Chassis State
     ${boot_progress}  ${host_state}=  Redfish Get Boot Progress
 
     ${states}=  Create Dictionary
@@ -1165,7 +1148,7 @@ Verify Host Power State
     # Description of argument(s):
     # expected_power_state   State of Host e.g. Off or On.
 
-    ${power_state}  ${health_status}=  Redfish Get Host State
+    ${power_state}  ${health_status}=  Redfish Get Chassis State
     Should Be Equal  ${power_state}  ${expected_power_state}
 
 
