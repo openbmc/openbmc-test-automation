@@ -1,11 +1,10 @@
+*** Settings ***
 Documentation  Utility for SNMP configurations via Redfish.
 
-*** Settings ***
-
-Resource                ../../lib/utils.robot
-Resource                ../../lib/connection_client.robot
-Library                 ../../lib/gen_misc.py
-Library                 ../../lib/utils.py
+Resource             ../../lib/utils.robot
+Resource             ../../lib/connection_client.robot
+Library              ../../lib/gen_misc.py
+Library              ../../lib/utils.py
 
 *** Variables ***
 
@@ -30,7 +29,6 @@ ${SNMP_TRAP_BMC_INTERNAL_FAILURE}  xyz.openbmc_project.Common.Error.InternalFail
 ${SNMP_TRAP_BMC_CALLOUT_ERROR}  xyz.openbmc_project.Common.Error.Timeout
 ...  CALLOUT_INVENTORY_PATH=/xyz/openbmc_project/inventory/system/chassis/motherboard TIMEOUT_IN_MSEC=5
 ${SNMP_TRAP_BMC_INFORMATIONAL_ERROR}  xyz.openbmc_project.Common.Error.TestError2
-
 
 *** Keywords ***
 
@@ -183,7 +181,7 @@ Delete SNMP Manager Via Redfish
           ELSE
               RedfishIPv6.Delete  ${snmp_mgr_uri}
           END
-          Exit For Loop
+          BREAK
       END
     END
 
@@ -265,7 +263,7 @@ Start SNMP Manager
 
     # The execution of the SNMP_TRAPD_CMD is necessary to cause SNMP to begin
     # listening to SNMP messages.
-    SSHLibrary.write  ${SNMP_TRAPD_CMD} &
+    SSHLibrary.Write  ${SNMP_TRAPD_CMD} &
 
 
 Create Error On BMC And Verify Trap On Non Default Port
@@ -323,7 +321,7 @@ Start SNMP Manager On Specific Port
 
     # The execution of the SNMP_TRAPD_CMD is necessary to cause SNMP to begin
     # listening to SNMP messages.
-    SSHLibrary.write  ${SNMP_TRAPD_CMD} ${ip_and_port} &
+    SSHLibrary.Write  ${SNMP_TRAPD_CMD} ${ip_and_port} &
 
 
 Generate Error On BMC And Verify Trap
@@ -362,4 +360,3 @@ Generate Error On BMC And Verify Trap
     Verify SNMP Trap  ${snmp_trap}  ${expected_error}
 
     RETURN  ${snmp_trap}
-

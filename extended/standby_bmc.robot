@@ -141,7 +141,7 @@ Powercycle System Via PDU
 
     Validate Parameters
     PDU Power Cycle
-    Check If BMC is Up   5 min    10 sec
+    Check If BMC Is Up   5 min    10 sec
 
 
 Check For Current Boot Application Failures
