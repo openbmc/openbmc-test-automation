@@ -107,7 +107,7 @@ BMC Online Test
     [Documentation]   BMC ping, SSH, REST connection Test
 
     ${l_status}=   Run Keyword and Return Status
-    ...   Verify Ping and REST Authentication
+    ...   Verify Ping And REST Authentication
     IF  '${l_status}' == '${False}'
         Fail  msg=System not in ideal state to continue [ERROR]
     END
