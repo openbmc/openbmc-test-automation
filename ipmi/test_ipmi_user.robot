@@ -529,6 +529,16 @@ Verify Set Username With Invalid Data Length
     ${IPMI_RAW_CMD['user_name']['Set'][1]}  0xc7
 
 
+Verify Get Username With Invalid Data Length
+    [Documentation]  Verify get Bmc username with Invalid data length.
+    [Tags]  Verify_Get_Username_With_Invalid_Data_Length
+    [Template]  Verify Invalid IPMI Command
+
+    # Invalid data length                   Expected error code
+    ${IPMI_RAW_CMD['user_name']['Get'][0]}  0xc7
+    ${IPMI_RAW_CMD['user_name']['Get'][1]}  0xc7
+
+
 *** Keywords ***
 
 Restore Default Password For IPMI Root User
