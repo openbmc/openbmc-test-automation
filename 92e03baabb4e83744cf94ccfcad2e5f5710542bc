@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebea35c6_4e4b5a25",
+        "filename": "redfish/managers/test_bmc_network_conf.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1002674
+      },
+      "writtenOn": "2026-03-17T12:54:13Z",
+      "side": 1,
+      "message": "please remove this line",
+      "revId": "92e03baabb4e83744cf94ccfcad2e5f5710542bc",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
