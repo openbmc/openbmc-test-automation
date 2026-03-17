@@ -13,7 +13,7 @@ Resource                ../lib/openpower_utils.robot
 
 Test Teardown           Test Teardown Execution
 
-Test Tags  BIOS_Code_Update
+Test Tags               BIOS_Code_Update
 
 *** Variables ***
 
@@ -86,6 +86,7 @@ Test Teardown Execution
 
 Validate Parameters
     [Documentation]   Validate parameter and file existence.
+
     Should Not Be Empty
     ...   ${PNOR_IMAGE_PATH}  msg=PNOR image path not set
 

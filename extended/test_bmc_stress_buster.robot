@@ -74,9 +74,11 @@ REST Enumerate Request On BMC
 
 SSH Connect And Execute Command
     [Documentation]  Execute SSH command execution operation.
+
     BMC Execute Command  df -h
 
 
 IPMI Check Status
     [Documentation]  Execute IPMI command execution operation.
+
     Run IPMI Standard Command  chassis status

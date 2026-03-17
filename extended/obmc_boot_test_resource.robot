@@ -2,13 +2,16 @@
 Documentation  This file is resourced by obmc_boot_test.py to set initial
 ...            variable values, etc.
 
-Resource  ../lib/openbmc_ffdc.robot
-Library   ../lib/state.py
+Resource   ../lib/openbmc_ffdc.robot
 
-Library   ../lib/obmc_boot_test.py
-Library   Collections
+Library    ../lib/state.py
+Library    ../lib/obmc_boot_test.py
+Library    Collections
+
+Test Tags  Obmc_Boot_Test
 
 *** Variables ***
+
 # Initialize program parameters variables.
 # Create parm_list containing all of our program parameters.  This is used by
 # 'Rqprint Pgm Header'
@@ -84,10 +87,15 @@ ${test_really_running}      ${1}
 
 
 *** Keywords ***
+
 OBMC Boot Test
     [Documentation]  Run the OBMC boot test.
     [Teardown]  OBMC Boot Test Teardown
     [Arguments]  ${pos_arg1}=${EMPTY}  &{arguments}
+
+    # Description of argument(s):
+    # pos_arg1      Arguments for running OBMC boot.
+    # arguments     Dictionary arguments for running OBMC boot.
 
     Run Keyword And Ignore Error  Redfish.Login
 
