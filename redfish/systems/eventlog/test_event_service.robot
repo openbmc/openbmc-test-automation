@@ -83,6 +83,18 @@ Verify Event Service Collection Unsupported Methods
     Redfish.Delete  /redfish/v1/EventService
     ...  valid_status_codes=[${HTTP_METHOD_NOT_ALLOWED}]
 
+Verify Subscriptions Defaults
+    [Documentation]  Verify Subscriptions default property values.
+    [Tags]  Verify_Subscriptions_Defaults
+
+    ${subscriptions}=  Redfish.Get Properties  /redfish/v1/EventService/Subscriptions
+    Rprint Vars  subscriptions
+    ${subscriptions_count}=  Get Length  ${subscriptions['Members']}
+
+    Valid Value  subscriptions['@odata.id']  ['/redfish/v1/EventService/Subscriptions/', '/redfish/v1/EventService/Subscriptions']
+    Valid Value  subscriptions['Name']  ['Event Destination Collections']
+    Valid Value  subscriptions['Members@odata.count']  [${subscriptions_count}]
+
 
 *** Keywords ***
 
