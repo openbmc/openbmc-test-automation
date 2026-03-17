@@ -93,7 +93,7 @@ FFDC_BMC_FILE = {
             " /tmp/BMC_pldm_flight_recorder.txt 2>&1;"
         ),
         "OCC_state.txt": (
-            'echo "OCC state check";for i in {0..3};'
+            'echo "OCC state check";for i in {0..7};'
             + " do (echo /org/open_power/control/occ$i;"
             + " busctl get-property org.open_power.OCC.Control"
             " /org/open_power/control/occ$i"
