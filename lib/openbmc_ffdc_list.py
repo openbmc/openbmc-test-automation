@@ -93,12 +93,16 @@ FFDC_BMC_FILE = {
             " /tmp/BMC_pldm_flight_recorder.txt 2>&1;"
         ),
         "OCC_state.txt": (
-            'echo "OCC state check";for i in {0..3};'
+            'echo "OCC state check";for i in {0..7};'
             + " do (echo /org/open_power/control/occ$i;"
             + " busctl get-property org.open_power.OCC.Control"
             " /org/open_power/control/occ$i"
             + " org.open_power.OCC.Status OccActive) done > /tmp/OCC_state.txt"
             " 2>&1"
+        ),
+        "OCC_powerModeData.txt": (
+            "cat /var/lib/openpower-occ-control/powerModeData >"
+            " /tmp/OCC_powerModeData.txt 2>&1"
         ),
         "GUARD_list.txt": "guard -l > /tmp/GUARD_list.txt 2>&1",
         "fan_control_dump.json": "fanctl dump; sleep 5",
