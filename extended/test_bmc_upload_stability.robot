@@ -15,19 +15,16 @@ Library            OperatingSystem
 Resource           ../lib/utils.robot
 Resource           ../lib/openbmc_ffdc.robot
 
+Test Teardown      FFDC On Test Case Fail
 
-Test Teardown   FFDC On Test Case Fail
-
-Test Tags       BMC_Upload_Stability
+Test Tags          BMC_Upload_Stability
 
 *** Variables ****
 
 ${LOOPS}         ${1}
 ${iteration}     ${0}
 
-
 *** Test Cases ***
-
 
 REST Upload Stability Test
     [Documentation]  Execute upload stress testing.
@@ -37,7 +34,6 @@ REST Upload Stability Test
 
 
 *** Keywords ***
-
 
 Upload Test Image File To BMC
     [Documentation]  Upload a file to BMC via REST.  The uploaded file
