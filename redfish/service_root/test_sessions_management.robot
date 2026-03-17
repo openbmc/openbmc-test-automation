@@ -205,6 +205,31 @@ Verify Session Persistency After BMC Reboot
 
     List Should Contain Value  ${sessions}  ${payload}
 
+Verify Retrieving Deleted Session
+    [Documentation]  Verify retrieving the deleted session returns an error.
+    [Tags]  Verify_Retrieving_Deleted_Session
+
+    # Create a new user session.
+    ${resp}=  Redfish.Post  /redfish/v1/SessionService/Sessions
+    ...  body={'UserName':'${OPENBMC_USERNAME}', 'Password': '${OPENBMC_PASSWORD}'}
+    ...  valid_status_codes=[${HTTP_CREATED}]
+
+    # Extract the session ID.
+    ${session_id}=  Set Variable  ${resp.dict['@odata.id'].split('/')[-1]}
+
+    # Get the session instance.
+    Redfish.Get  /redfish/v1/SessionService/Sessions/${session_id}
+    ...  valid_status_codes=[${HTTP_OK}]
+
+    # Delete the created session.
+    Redfish.Delete  /redfish/v1/SessionService/Sessions/${session_id}
+    ...  valid_status_codes=[${HTTP_OK}, ${HTTP_NO_CONTENT}]
+
+    # Retrieving the deleted session should return an error.
+    Redfish.Get  /redfish/v1/SessionService/Sessions/${session_id}
+    ...  valid_status_codes=[${HTTP_NOT_FOUND}]
+
+
 *** Keywords ***
 
 Create Session And Verify Response Code
