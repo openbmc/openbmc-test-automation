@@ -1,17 +1,16 @@
 *** Settings ***
-
 Documentation  Utilities for Robot keywords that use REST.
 
+Library                 DateTime
+Library                 OperatingSystem
+Library                 Process
+Library                 String
 Resource                ../lib/resource.robot
 Resource                ../lib/rest_client.robot
 Resource                ../lib/connection_client.robot
 Resource                ../lib/boot_utils.robot
 Resource                ../lib/common_utils.robot
 Resource                ../lib/bmc_redfish_utils.robot
-Library                 String
-Library                 DateTime
-Library                 Process
-Library                 OperatingSystem
 Library                 gen_print.py
 Library                 gen_misc.py
 Library                 gen_robot_print.py
@@ -44,7 +43,7 @@ ${REDFISH_SYS_STATE_WAIT_TIMEOUT}    120 Seconds
 *** Keywords ***
 
 
-Verify Ping and REST Authentication
+Verify Ping And REST Authentication
     [Documentation]  Verify ping and rest authentication.
     ${l_ping}=   Run Keyword And Return Status
     ...    Ping Host  ${OPENBMC_HOST}
@@ -91,7 +90,7 @@ Check If BMC Is Up
     #               (e.g. "5 seconds").
 
     Wait Until Keyword Succeeds
-    ...   ${max_timeout}  ${interval}   Verify Ping and REST Authentication
+    ...   ${max_timeout}  ${interval}   Verify Ping And REST Authentication
 
 
 Flush REST Sessions
@@ -240,7 +239,7 @@ Set Boot Progress Method
     # the only recourse users will have is that they may specify
     # -v boot_prog_method:Old to force old behavior on such builds.
 
-    IF  '${boot_prog_method}' != '${EMPTY}'  Return From Keyword
+    IF  '${boot_prog_method}' != '${EMPTY}'  RETURN
 
     ${new_status}  ${new_value}=  Run Keyword And Ignore Error
     ...  New Get Boot Progress
@@ -248,7 +247,7 @@ Set Boot Progress Method
     IF  '${new_status}' == 'PASS'
         Set Global Variable  ${boot_prog_method}  New
         Rqpvars  boot_prog_method
-        Return From Keyword
+        RETURN
     END
 
     # Default method is "Old".
@@ -269,10 +268,10 @@ Initiate Power On
     ${args}=     Create Dictionary    data=@{arglist}
     ${resp}=  Call Method  ${OPENBMC_BASE_URI}control/chassis0/  powerOn
     ...  data=${args}
-    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
+    Should Be Equal As Strings      ${resp.status_code}     ${HTTP_OK}
 
     # Does caller want to wait for power on status?
-    IF  '${wait}' == '${0}'  Return From Keyword
+    IF  '${wait}' == '${0}'  RETURN
     Wait Until Keyword Succeeds  3 min  10 sec  Is Power On
 
 
@@ -284,7 +283,7 @@ Initiate Power Off
     ${args}=     Create Dictionary    data=@{arglist}
     ${resp}=  Call Method  ${OPENBMC_BASE_URI}control/chassis0/  powerOff
     ...  data=${args}
-    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
+    Should Be Equal As Strings      ${resp.status_code}     ${HTTP_OK}
     Wait Until Keyword Succeeds  1 min  10 sec  Is Power Off
 
 
@@ -358,8 +357,8 @@ Redfish Get Auto Reboot
 Trigger Warm Reset
     [Documentation]  Initiate a warm reset.
 
-    log to console    "Triggering warm reset"
-    ${data}=   create dictionary   data=@{EMPTY}
+    Log To Console    "Triggering warm reset"
+    ${data}=   Create Dictionary   data=@{EMPTY}
     ${resp}=  Openbmc Post Request
     ...  ${OPENBMC_BASE_URI}control/bmc0/action/warmReset  data=${data}
     Should Be Equal As Strings      ${resp.status_code}     ${HTTP_OK}
@@ -383,7 +382,7 @@ Get Power State
 
     ${resp}=  Call Method  ${OPENBMC_BASE_URI}control/chassis0/  getPowerState
     ...        data=${args}  quiet=${quiet}
-    Should be equal as strings  ${resp.status_code}  ${HTTP_OK}
+    Should Be Equal As Strings  ${resp.status_code}  ${HTTP_OK}
 
     RETURN  ${resp.json()["data"]}
 
@@ -410,7 +409,7 @@ Flash PNOR
     ${args}=     Create Dictionary    data=@{arglist}
     ${resp}=  Call Method  /org/openbmc/control/flash/bios/  update
     ...  data=${args}
-    should be equal as strings      ${resp.status_code}     ${HTTP_OK}
+    Should Be Equal As Strings      ${resp.status_code}     ${HTTP_OK}
     Wait Until Keyword Succeeds    2 min   10 sec    Is PNOR Flashing
 
 
@@ -432,7 +431,7 @@ Is PNOR Flash Done
     [Documentation]  Get BIOS 'Flash Done' status.  This indicates that the
     ...              PNOR flashing has completed.
     ${status}=    Get Flash BIOS Status
-    should be equal as strings     ${status}     Flash Done
+    Should Be Equal As Strings     ${status}     Flash Done
 
 
 Create OS Console File Path
@@ -517,7 +516,7 @@ Delete Error Logs
 
     # Check if error logs entries exist, if not return.
     ${resp}=  OpenBMC Get Request  ${BMC_LOGGING_ENTRY}list  quiet=${1}
-    Return From Keyword If  ${resp.status_code} == ${HTTP_NOT_FOUND}
+    IF  ${resp.status_code} == ${HTTP_NOT_FOUND}  RETURN
 
     # Get the list of error logs entries and delete them all.
     ${elog_entries}=  Get URL List  ${BMC_LOGGING_ENTRY}
@@ -642,7 +641,7 @@ Old Set Power Policy
     # Description of argument(s):
     # policy    Power restore policy (e.g. "ALWAYS_POWER_OFF").
 
-    ${valueDict}=     create dictionary  data=${policy}
+    ${valueDict}=     Create Dictionary  data=${policy}
     Write Attribute    ${HOST_SETTING}    power_policy   data=${valueDict}
 
 
@@ -739,13 +738,13 @@ Set Control Boot Mode
 Is Power On
     [Documentation]  Verify that the BMC chassis state is on.
     ${state}=  Get Power State
-    Should be equal  ${state}  ${1}
+    Should Be Equal  ${state}  ${1}
 
 
 Is Power Off
     [Documentation]  Verify that the BMC chassis state is off.
     ${state}=  Get Power State
-    Should be equal  ${state}  ${0}
+    Should Be Equal  ${state}  ${0}
 
 
 CLI Get BMC DateTime
@@ -917,8 +916,9 @@ Redfish Get Boot Progress
     ${boot_progress}=  Wait Until Keyword Succeeds  1 min  20 sec
     ...  Redfish.Get Properties  /redfish/v1/Systems/${SYSTEM_ID}/
 
-    Return From Keyword If  "${PLATFORM_ARCH_TYPE}" == "x86"
-    ...  NA  ${boot_progress["Status"]["State"]}
+    IF  "${PLATFORM_ARCH_TYPE}" == "x86"
+      RETURN  NA  ${boot_progress["Status"]["State"]}
+    END
 
     RETURN  ${boot_progress["BootProgress"]["LastState"]}  ${boot_progress["Status"]["State"]}
 
@@ -943,7 +943,7 @@ Redfish Get States
 
     # Disable loggoing state to prevent huge log.html record when boot
     # test is run in loops.
-    #Log  ${states}
+    # Log  ${states}
 
     RETURN  ${states}
 
@@ -1115,7 +1115,7 @@ Is BMC Operational
     # In some of bmc stack, network services will gets loaded before redfish/ipmi services gets loaded.
     # Hence, 3mins sleep time is added to allow other service gets loaded.
     Sleep  180s
-    Redfish.login
+    Redfish.Login
     ${bmc_status}=  Redfish Get BMC State
     Should Be Equal  ${bmc_status}  Enabled
 

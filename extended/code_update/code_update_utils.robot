@@ -126,7 +126,7 @@ System Readiness Test
     ...              system.
 
     ${l_status}=  Run Keyword and Return Status
-    ...  Verify Ping and REST Authentication
+    ...  Verify Ping And REST Authentication
     IF  '${l_status}' == '${False}'
         Fail  msg=System not in ideal state to use [ERROR]
     END
