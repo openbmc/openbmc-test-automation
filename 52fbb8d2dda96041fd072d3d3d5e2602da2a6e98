@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2a7c68a_43ff4fbd",
+        "filename": "lib/multi_chassis_power.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-03-17T14:46:51Z",
+      "side": 1,
+      "message": "rename \n\nlib/multi_chassis_power.robot as lib/multi_chassis_power.resourec",
+      "revId": "52fbb8d2dda96041fd072d3d3d5e2602da2a6e98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c506db22_b8089cf0",
+        "filename": "lib/multi_chassis_power.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000027
+      },
+      "writtenOn": "2026-03-17T14:46:51Z",
+      "side": 1,
+      "message": "please add description of args of the keywords containing arguments in this file",
+      "revId": "52fbb8d2dda96041fd072d3d3d5e2602da2a6e98",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
