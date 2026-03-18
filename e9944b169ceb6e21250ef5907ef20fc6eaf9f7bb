@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7442d85d_6c3e0dd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-03-18T13:39:32Z",
+      "side": 1,
+      "message": "The commit message doesnt explain why this change is needed..",
+      "revId": "e9944b169ceb6e21250ef5907ef20fc6eaf9f7bb",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    }
+  ]
+}
