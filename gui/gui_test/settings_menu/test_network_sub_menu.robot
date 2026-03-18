@@ -62,7 +62,7 @@ ${xpath_edit_ipv4_addres}                //*[text()='${test_ipv4_addr}']/followi
 ${xpath_edit_ipv6_addres}                //*[text()='${test_ipv6_addr}']/following::td[3]
 ...                                      //*[@title="Edit static IPv6 address"]
 ${xpath_ipv6_static_def_gateway_table}   //h2[normalize-space()='IPv6 static default gateways']/following::table[1]
-${xpath_delete_ipv6_def_gateway_addr}    //*[text()='${test_ipv6_addr_1}']/following::td[1]
+${xpath_delete_ipv6_def_gateway_addr}    //*[text()='${test_ipv6_addr}']/following::td[1]
 ...                                      //*[@title="Delete IPv6 static default gateway address"]
 ${xpath_edit_ipv6_def_gateway_addr}      //*[text()='${test_ipv6_addr}']/following::td[1]
 ...                                      //*[@title="Edit IPv6 static default gateway address"]
@@ -72,7 +72,7 @@ ${xpath_ipv6_addr_edit_button}           //*[text()='{}']/following::td[3]
 ...                                      //*[@title="Edit static IPv6 address"]
 ${xpath_ipv6_addr_delete_button}         //*[text()='{}']/following::td[3]
 ...                                      //*[@title="Delete IPv6 address"]
-${xpath_delete_button}                   //*[text()="Delete"]
+${xpath_delete_button}                   //div[contains(@class,'modal')]//button[text()='Delete']
 ${xpath_eth0_interface}                  //*[text()="eth0"]
 ${xpath_eth1_interface}                  //*[text()="eth1"]
 ${xpath_linklocalv6}                     //*[text()="LinkLocal"]
@@ -113,11 +113,13 @@ ${negative_ip}                           10.-7.-7.-7
 ${less_octet_ip}                         10.3.36
 ${hex_ip}                                0xa.0xb.0xc.0xd
 ${spl_char_ip}                           @@@.%%.44.11
+${threshold_netmask}                     255.255.255.255
 ${test_subnet_mask}                      255.255.255.0
 ${alpha_netmask}                         ff.ff.ff.ff
 ${out_of_range_netmask}                  255.256.255.0
 ${more_byte_netmask}                     255.255.255.0.0
 ${lowest_netmask}                        128.0.0.0
+${incomplete_df_gw}                      10.3.3
 ${test_hostname}                         openbmc
 
 *** Test Cases ***
@@ -244,12 +246,13 @@ Configure Static IPv4 Netmask Via GUI And Verify
     [Tags]  Configure_Static_IPv4_Netmask_Via_GUI_And_Verify
     [Template]  Add Static IP Address And Verify
 
-    # ip_addresses      subnet_masks             gateway          expected_status
+    # ip_addresses      subnet_masks             gateway             expected_status
     ${test_ipv4_addr}   ${lowest_netmask}        ${default_gateway}  Success
+    ${test_ipv4_addr}   ${test_subnet_mask}      ${default_gateway}  Success
+    ${test_ipv4_addr}   ${threshold_netmask}     ${default_gateway}  Success
     ${test_ipv4_addr}   ${more_byte_netmask}     ${default_gateway}  Invalid format
     ${test_ipv4_addr}   ${alpha_netmask}         ${default_gateway}  Invalid format
     ${test_ipv4_addr}   ${out_of_range_netmask}  ${default_gateway}  Invalid format
-    ${test_ipv4_addr}   ${test_subnet_mask}      ${default_gateway}  Success
 
 
 Configure And Verify Static IP Address
@@ -272,13 +275,14 @@ Configure And Verify Invalid Static IP Address
     [Tags]  Configure_And_Verify_Invalid_Static_IP_Address
     [Template]  Add Static IP Address And Verify
 
-    # ip                 subnet_mask          gateway             status
-    ${out_of_range_ip}   ${test_subnet_mask}  ${default_gateway}  Invalid format
-    ${less_octet_ip}     ${test_subnet_mask}  ${default_gateway}  Invalid format
-    ${string_ip}         ${test_subnet_mask}  ${default_gateway}  Invalid format
-    ${negative_ip}       ${test_subnet_mask}  ${default_gateway}  Invalid format
-    ${hex_ip}            ${test_subnet_mask}  ${default_gateway}  Invalid format
-    ${spl_char_ip}       ${test_subnet_mask}  ${default_gateway}  Invalid format
+    # ip                 subnet_mask          gateway               status
+    ${out_of_range_ip}   ${test_subnet_mask}  ${default_gateway}    Invalid format
+    ${less_octet_ip}     ${test_subnet_mask}  ${default_gateway}    Invalid format
+    ${string_ip}         ${test_subnet_mask}  ${default_gateway}    Invalid format
+    ${negative_ip}       ${test_subnet_mask}  ${default_gateway}    Invalid format
+    ${hex_ip}            ${test_subnet_mask}  ${default_gateway}    Invalid format
+    ${spl_char_ip}       ${test_subnet_mask}  ${default_gateway}    Invalid format
+    ${test_ipv4_addr}    ${test_subnet_mask}  ${incomplete_df_gw}   Invalid format
 
 
 Configure And Verify Multiple Static IPv6 Address
@@ -540,9 +544,9 @@ Verify DHCPv6 Enable And Disable On Both Interfaces Via GUI
 Delete Default IPv6 Static Gateway Address And Verify
     [Documentation]  Delete default IPv6 static gateway address and verify.
     [Tags]  Delete_Default_IPv6_Static_Gateway_Address_And_Verify
-    [Setup]  Add IPv6 Static Default Gateway And Verify  ${test_ipv6_addr_1}  Success
+    [Setup]  Add IPv6 Static Default Gateway And Verify  ${test_ipv6_addr}  Success
 
-    Delete Default IPv6 Gateway And Verify  ${test_ipv6_addr_1}
+    Delete Default IPv6 Gateway And Verify  ${test_ipv6_addr}
 
 
 Modify Default IPv6 Static Gateway Address And Verify
@@ -1072,7 +1076,8 @@ Add Static IPv6 Address And Verify Via GUI
         Validate Network Config On BMC
     ELSE
         Page Should Contain  Invalid format
-        Cancel And Verify Network Heading
+        Click Button  ${xpath_cancel_button}
+        Wait Until Page Does Not Contain Element  ${xpath_cancel_button}
     END
 
 
@@ -1084,6 +1089,8 @@ Add IPv6 Static Default Gateway And Verify
     # ipv6_static_def_gw  IPv6 static default gateway.
     # expected_status     Expected status (Success or Fail).
 
+    Wait Until Element Is Not Visible  ${xpath_overlay}  timeout=30sec
+    Click Element  ${xpath_eth0_interface}
     Wait Until Element Is Enabled  ${xpath_add_static_def_gateway_button}  timeout=60sec
     Click Element  ${xpath_add_static_def_gateway_button}
 
@@ -1097,6 +1104,7 @@ Add IPv6 Static Default Gateway And Verify
         Page Should Contain  Invalid format
         Cancel And Verify Network Heading
     END
+    Sleep  ${NETWORK_TIMEOUT}s
     ${redfish_ipv6_staticdef_gw}=  Get Static Default Gateway Property Via Redfish
     Should Be Equal  ${ipv6_static_def_gw}  ${redfish_ipv6_staticdef_gw}
 
@@ -1196,11 +1204,12 @@ Delete IP Address And Verify
     ${delete_xpath}=  Set Variable If  '${ip_version}' == 'ipv4'
     ...  ${xpath_delete_ipv4_addres}  ${xpath_delete_ipv6_addres}
 
-    Wait Until Element Is Not Visible  ${xpath_page_loading_progress_bar}  timeout=120s
+    Refresh GUI
     Wait Until Element Is Enabled  ${delete_xpath}
 
     Click Element  ${delete_xpath}
-    Click Element  ${xpath_delete_button}
+    Wait Until Keyword Succeeds  5x  1s
+    ...  Click Element  ${xpath_delete_button}
     Wait Until Page Contains Element  ${xpath_success_message}
     Sleep  ${NETWORK_TIMEOUT}s
 
@@ -1251,25 +1260,26 @@ Modify IP Address And Verify
 
 
 Delete Default IPv6 Gateway And Verify
-   [Documentation]  Delete default IPv6 gateway and verify.
-   [Arguments]  ${ip_addr}
+    [Documentation]  Delete default IPv6 gateway and verify.
+    [Arguments]  ${ip_addr}
 
-   # Description of argument(s):
-   # ip_addr      IP address to be deleted.
+    # Description of argument(s):
+    # ip_addr      IP address to be deleted.
 
-   Wait Until Page Contains  ${ip_addr}
-   Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=120s
-   Wait Until Element Is Enabled  ${xpath_delete_ipv6_def_gateway_addr}
-   Click Element  ${xpath_delete_ipv6_def_gateway_addr}
-   Click Element  ${xpath_delete_button}
-   Wait Until Page Contains Element   ${xpath_success_message}
-   Sleep  ${NETWORK_TIMEOUT}s
+    Refresh GUI
+    Wait Until Page Contains  ${ip_addr}
+    Wait Until Element Is Enabled  ${xpath_delete_ipv6_def_gateway_addr}
+    Click Element  ${xpath_delete_ipv6_def_gateway_addr}
+    Wait Until Keyword Succeeds  5x  1s
+    ...  Click Element  ${xpath_delete_button}
+    Wait Until Page Contains Element   ${xpath_success_message}
+    Sleep  ${NETWORK_TIMEOUT}s
 
-   # Verify delete IP via redfish.
-   ${delete_status}=  Run Keyword And Return Status  Get Static Default Gateway Property Via Redfish
-   Should Be Equal  ${delete_status}  ${False}
+    # Verify delete IP via redfish.
+    ${delete_status}=  Run Keyword And Return Status  Get Static Default Gateway Property Via Redfish
+    Should Be Equal  ${delete_status}  ${False}
 
-   Wait Until Page Does Not Contain Element  ${xpath_delete_ipv6_def_gateway_addr}
+    Wait Until Page Does Not Contain Element  ${xpath_delete_ipv6_def_gateway_addr}
 
 
 Modify Default IPv6 Gateway And Verify
