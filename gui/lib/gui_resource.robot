@@ -158,7 +158,7 @@ Set Timezone In Profile Settings Page
 Refresh GUI
     [Documentation]  Refresh GUI via refresh button in header.
 
-    Click Element  ${xpath_refresh_button}
+    Reload Page
     # Waiting for  page to load fully after refresh.
     Wait Until Element Is Not Visible   ${xpath_page_loading_progress_bar}  timeout=120s
 
