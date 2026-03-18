@@ -16,6 +16,24 @@
       "message": "I feel this shouldn\u0027t be \"Get Host State\", isn\u0027t it getting the chassis Power State? \"Get Chassis State\" ?",
       "revId": "72eb5aa90f235fa34f6c802db937a7908d605637",
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b53f2dc_e09a4ce7",
+        "filename": "lib/multi_chassis_power.resource",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000018
+      },
+      "writtenOn": "2026-03-18T03:52:03Z",
+      "side": 1,
+      "message": "Done updated.",
+      "parentUuid": "3ad21bce_ae1f3d61",
+      "revId": "72eb5aa90f235fa34f6c802db937a7908d605637",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     }
   ]
 }
