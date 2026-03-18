@@ -87,8 +87,7 @@ Create LDAP Configuration
 
     ${patch}=  Set Variable If  '${version}' == 'IPv4'  Redfish.Patch  RedfishIPv6.Patch
 
-    Run Keyword  ${patch}  ${REDFISH_BASE_URI}AccountService  body=${body}
-    ... valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
+    Run Keyword  ${patch}  ${REDFISH_BASE_URI}AccountService  body=${body}  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
 
     Sleep  15s
 
@@ -110,8 +109,7 @@ Update LDAP Configuration With LDAP User Role And Group
 
     ${patch}=  Set Variable If  '${version}' == 'IPv4'  Redfish.Patch  RedfishIPv6.Patch
 
-    Run Keyword  ${patch}  ${REDFISH_BASE_URI}AccountService  body=&{payload}
-    ... valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
+    Run Keyword  ${patch}  ${REDFISH_BASE_URI}AccountService  body=&{payload}  valid_status_codes=[${HTTP_OK},${HTTP_NO_CONTENT}]
 
     # Provide adequate time for LDAP daemon to restart after the update.
     Sleep  15s
