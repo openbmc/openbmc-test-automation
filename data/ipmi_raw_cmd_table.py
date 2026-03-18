@@ -646,7 +646,7 @@ IPMI_RAW_CMD = {
         "Inventory_Area_Info": [
             # raw command, expected output(s), comment
             "0x0a 0x10",
-            "Invalid data field in request",
+            "Request sensor, data, or record not found",
             "Request data length invalid",
         ],
         "Read": [
