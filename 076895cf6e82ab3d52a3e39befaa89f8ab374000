@@ -58,6 +58,30 @@
       "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f64f233_fe36a422",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-03-18T06:15:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4078387_e14bcbb1",
+      "range": {
+        "startLine": 110,
+        "startChar": 16,
+        "endLine": 110,
+        "endChar": 20
+      },
+      "revId": "076895cf6e82ab3d52a3e39befaa89f8ab374000",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27d23075_be46c0bb",
@@ -71,6 +95,30 @@
       "writtenOn": "2026-03-17T13:20:20Z",
       "side": 1,
       "message": "```\n\n     # Description of argument(s):\n     # Context                The context of the subscription.\n     # Destination            The destination URL for the subscription (e.g. https://XX.XX.XX.XX:443/).\n     # EventFormatType        The format type of the event (e.g. Event).\n     # Protocol               The protocol used for the subscription (e.g. Redfish).\n     # SubscriptionType       The type of the subscription (e.g. RedfishEvent).\n     # RegistryPrefixes       The registry prefixes for the subscription (e.g. [\"Base\", \"Event\"]).\n     # ResourceTypes          The resource types for the subscription (e.g. [\"ComputerSystem\", \"Chassis\"]).\n     # DeliveryRetryPolicy    The delivery retry policy for the subscription (e.g. SuspendRetries).\n     # Valid_status_codes     The valid status codes for the subscription (e.g. [201, 400]).\n\n\n```",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 201,
+        "endChar": 89
+      },
+      "revId": "076895cf6e82ab3d52a3e39befaa89f8ab374000",
+      "serverId": "adbd0a64-1f21-4d83-b585-671fe73cb6e4"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac852ffa_87062b2f",
+        "filename": "redfish/systems/eventlog/test_event_service.robot",
+        "patchSetId": 4
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1002663
+      },
+      "writtenOn": "2026-03-18T06:15:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27d23075_be46c0bb",
       "range": {
         "startLine": 192,
         "startChar": 0,
